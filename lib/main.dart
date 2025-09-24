@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 import 'package:signature/signature.dart';
+import 'dart:ui' as ui;
+import 'dart:typed_data';
+import 'dart:async';
 import 'package:uuid/uuid.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:http/http.dart' as http;
@@ -3590,19 +3593,23 @@ break;
 Map<String, dynamic> currentChains = Map.from(gameData['chains']);
 Map<String, dynamic> newChains = {};
 
-        for (int i = 0; i < numPlayers; i++) {
-          String currentPlayerId = playerOrder[i];
-          String previousPlayerId = playerOrder[(i - 1 + numPlayers) % numPlayers];
+for (int i = 0; i < numPlayers; i++) {
+  String currentPlayerId = playerOrder[i];
+  String previousPlayerId = playerOrder[(i - 1 + numPlayers) % numPlayers];
 
-          if (gribouillisMode == 'Complement') {
-            // In Complement mode, each player should continue the original starter's sheet.
-            // That means we rotate the chains forward (like Normal), passing the original chain
-            // to the next player rather than keeping everyone's own chain.
-            newChains[currentPlayerId] = currentChains[previousPlayerId];
-          } else {
-            newChains[currentPlayerId] = currentChains[previousPlayerId];
-          }
-        }
+  if (griboullisMode == 'Complement') {
+    // Merge player's latest contribution into the passed chain to accumulate on a single sheet
+    List<dynamic> prevChain = List<dynamic>.from(currentChains[previousPlayerId] ?? []);
+    List<dynamic> currChain = List<dynamic>.from(currentChains[currentPlayerId] ?? []);
+    List<dynamic> merged = List<dynamic>.from(prevChain);
+    if (currChain.isNotEmpty) {
+      merged.add(currChain.last);
+    }
+    newChains[currentPlayerId] = merged;
+  } else {
+    newChains[currentPlayerId] = currentChains[previousPlayerId];
+  }
+}
 
 updates.addAll({
 'chains': newChains,
@@ -5263,6 +5270,7 @@ String _liarVoteMode = 'simultaneous';
 int _drawTime = 60;
 int _writeTime = 30;
 String _gribouillisMode = 'Normal';
+int _animationTotalTurns = 1;
 
 List<String> _petitBacCategories = List.from(
 GameData.petitBacDefaultCategories);
@@ -5335,9 +5343,12 @@ liarVoteMode: _selectedGame == 'Le Menteur'
 
 drawTime: _selectedGame == 'Gribouillis & Phrases' ? _drawTime : null,
 writeTime: _selectedGame == 'Gribouillis & Phrases' ? _writeTime : null,
-gribouillisMode: _selectedGame == 'Gribouillis & Phrases'
-? _gribouillisMode
-    : null,
+    gribouillisMode: _selectedGame == 'Gribouillis & Phrases'
+        ? _gribouillisMode
+        : null,
+    gribouillisTurns: _selectedGame == 'Gribouillis & Phrases' && _griboullisMode == 'Animation'
+        ? _animationTotalTurns
+        : null,
 
 petitBacCategories: _selectedGame == 'Petit Bac'
 ? _petitBacCategories
@@ -5477,6 +5488,25 @@ onChanged: (val) => setState(() => _gribouillisMode = val!),
 decoration: InputDecoration(labelText: "Choisir le mode"),
 ),
 SizedBox(height: 20),
+if (_gribouillisMode == 'Animation') ...[
+  Text("Nombre total d'images (tours)", style: Theme
+      .of(context)
+      .textTheme
+      .bodyMedium),
+  SegmentedButton<int>(
+    segments: const <ButtonSegment<int>>[
+      ButtonSegment<int>(value: 1, label: Text('1')),
+      ButtonSegment<int>(value: 2, label: Text('2')),
+      ButtonSegment<int>(value: 3, label: Text('3')),
+      ButtonSegment<int>(value: 4, label: Text('4')),
+      ButtonSegment<int>(value: 5, label: Text('5')),
+    ],
+    selected: <int>{_animationTotalTurns},
+    onSelectionChanged: (newSelection) =>
+        setState(() => _animationTotalTurns = newSelection.first),
+  ),
+  SizedBox(height: 10),
+],
 Text("Temps pour dessiner (secondes)", style: Theme
     .of(context)
     .textTheme
@@ -6072,10 +6102,10 @@ final TextEditingController _timesUpWordController = TextEditingController();
 
 final TextEditingController _pictionaryGuessController = TextEditingController();
 final SignatureController _pictionaryDrawingController = SignatureController(
-penStrokeWidth: 5,
-penColor: Colors.black,
-exportBackgroundColor: Colors.white,
-);
+    penStrokeWidth: 5,
+    penColor: Colors.black,
+    exportBackgroundColor: Colors.white,
+  );
 int _pictionaryStrokeCount = 0;
 
 final TextEditingController _justOneClueController = TextEditingController();
@@ -8425,22 +8455,36 @@ itemCount: ownerChain.length,
 itemBuilder: (context, idx) {
 final item = ownerChain[idx];
 bool isDrawing = item['type'] == 'drawing';
-return Card(
+        return Card(
 margin: EdgeInsets.symmetric(vertical: 5),
 child: Padding(
 padding: const EdgeInsets.all(12.0),
-child: isDrawing
-? Column(
-children: [
-Text("Dessin de ...", style: Theme.of(context).textTheme.bodyMedium),
-SizedBox(height: 8),
-Image.memory(base64Decode(item['content'])),
-],
-)
-    : Text(
-'✍️ ${item['content']}',
-style: TextStyle(fontSize: 16),
-),
+            child: isDrawing
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Dessin de ${players[item['authorId']]?['name'] ?? 'Inconnu'}",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      SizedBox(height: 8),
+                      Image.memory(base64Decode(item['content'])),
+                    ],
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Phrase par ${players[item['authorId']]?['name'] ?? 'Inconnu'}",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        '✍️ ${item['content']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
 ),
 );
 },
@@ -10617,15 +10661,16 @@ _DrawingScreenState createState() => _DrawingScreenState();
 class _DrawingScreenState extends State<DrawingScreen> {
 late SignatureController _controller;
 int _currentStrokeCount = 0;
+  int _secondsRemaining = 0;
 
 @override
 void initState() {
 super.initState();
-_controller = widget.initialController ?? SignatureController(
-penStrokeWidth: 5,
-penColor: Colors.black,
-exportBackgroundColor: Colors.white,
-);
+    _controller = widget.initialController ?? SignatureController(
+      penStrokeWidth: 5,
+      penColor: Colors.black,
+      exportBackgroundColor: Colors.white,
+    );
 
 _controller.addListener(_updateStrokeCount);
 }
@@ -10670,6 +10715,15 @@ automaticallyImplyLeading: false,
 body: Column(
 crossAxisAlignment: CrossAxisAlignment.stretch,
 children: [
+          if (_secondsRemaining > 0)
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: Text(
+                "Temps restant: $_secondsRemaining s",
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
 Padding(
 padding: const EdgeInsets.all(16.0),
 child: Text(
@@ -10692,10 +10746,10 @@ color: Colors.white,
 child: Stack(
 children: [
 
-if (widget.backgroundDrawingData != null)
+            if (widget.backgroundDrawingData != null)
 Positioned.fill(
 child: Opacity(
-opacity: 0.4,
+                  opacity: 0.25,
 child: Image.memory(
 base64Decode(widget.backgroundDrawingData!),
 fit: BoxFit.contain,
