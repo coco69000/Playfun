@@ -53,6 +53,7 @@ class DefaultFirebaseOptions {
     authDomain: 'playfun-6b6a8.firebaseapp.com',
     storageBucket: 'playfun-6b6a8.firebasestorage.app',
     measurementId: 'G-RSBL2X97HH',
+    databaseURL: 'https://playfun-6b6a8-default-rtdb.firebaseio.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -61,6 +62,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '743981537467',
     projectId: 'playfun-6b6a8',
     storageBucket: 'playfun-6b6a8.firebasestorage.app',
+    databaseURL: 'https://playfun-6b6a8-default-rtdb.firebaseio.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -70,5 +72,6 @@ class DefaultFirebaseOptions {
     projectId: 'playfun-6b6a8',
     storageBucket: 'playfun-6b6a8.firebasestorage.app',
     iosBundleId: 'com.parrel.playfun',
+    databaseURL: 'https://playfun-6b6a8-default-rtdb.firebaseio.com',
   );
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,12 +28,22 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>playfun</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- 
+    IMPORTATION DEPUIS CDN :
+    Garantit que le SDK d'Agora et son wrapper Iris sont pleinement chargés 
+    et disponibles globalement dans le navigateur avant le lancement de Flutter.
+  -->
+  <script src="https://download.agora.io/sdk/web/AgoraRTC_N-4.20.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iris-web-rtc@latest/iris-web-rtc.js"></script>
 </head>
+
 <body>
   <script src="flutter_bootstrap.js" async></script>
 </body>
+
 </html>

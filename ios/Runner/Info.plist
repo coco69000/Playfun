@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Playfun a besoin d'accéder à votre galerie pour les jeux avec photos.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Playfun peut enregistrer des images liées aux jeux si vous le demandez.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Playfun peut utiliser la caméra pour les jeux photo si vous choisissez cette option.</string>
 </dict>
 </plist>

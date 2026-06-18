@@ -1,0 +1,71 @@
+Widget _buildJudgeVotingUI(BuildContext context, Map<String, dynamic> gameData, bool isTarget) {
+    final answers = (gameData['answers'] as Map<String, dynamic>?) ?? {};
+    final players = (gameData['players'] as Map<String, dynamic>?) ?? {};
+    final question = gameData['currentQuestion'] ?? "Question...";
+    final judgeName = players[gameData['currentTargetPlayerId']]?['name'] ?? 'le juge';
+
+    return Column(
+      children: [
+        // La Question
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(20),
+          margin: EdgeInsets.only(bottom: 20),
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [Colors.deepPurple, Colors.purple]),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [BoxShadow(color: Colors.purple.withOpacity(0.4), blurRadius: 10, offset: Offset(0, 5))]
+          ),
+          child: Column(
+            children: [
+              Text("QUESTION", style: TextStyle(color: Colors.white54, letterSpacing: 2, fontSize: 12)),
+              SizedBox(height: 10),
+              Text(question, textAlign: TextAlign.center, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, color: Colors.white)),
+            ],
+          ),
+        ),
+
+        Text(isTarget ? "👑 Choisis ta réponse préférée :" : "⏳ En attente du choix de $judgeName...", style: Theme.of(context).textTheme.titleMedium),
+        SizedBox(height: 15),
+
+        Expanded(
+          child: ListView.builder(
+              itemCount: answers.length,
+              itemBuilder: (context, index) {
+                final entry = answers.entries.elementAt(index);
+                return GestureDetector(
+                  onTap: isTarget && !_isActionPending ? () {
+                    setState(() => _isActionPending = true);
+                    _firebaseService.selectWinningAnswer(widget.gameCode, entry.key)
+                        .whenComplete(() { if(mounted) setState(() => _isActionPending = false); });
+                  } : null,
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 200),
+                    margin: EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: isTarget ? Colors.deepPurple : Colors.transparent, width: isTarget ? 2 : 0),
+                        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))]
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Text(
+                              entry.value,
+                              style: TextStyle(fontSize: 18, color: Colors.black87, fontStyle: FontStyle.italic),
+                            )
+                        ),
+                        if (isTarget)
+                          Icon(Icons.touch_app, color: Colors.deepPurple)
+                      ],
+                    ),
+                  ),
+                );
+              }
+          ),
+        ),
+      ],
+    );
+  }
