@@ -1,0 +1,404 @@
+class WhoIsMostLikelyLocalScreen extends StatefulWidget {
+  final List<String> players;
+  const WhoIsMostLikelyLocalScreen({Key? key, required this.players})
+    : super(key: key);
+
+  @override
+  _WhoIsMostLikelyLocalScreenState createState() =>
+      _WhoIsMostLikelyLocalScreenState();
+}
+
+class _WhoIsMostLikelyLocalScreenState
+    extends State<WhoIsMostLikelyLocalScreen> {
+  String _difficulty = 'soft';
+  String _currentQuestion = "";
+  LocalWhoIsPhase _phase = LocalWhoIsPhase.question;
+  
+  int _currentVoterIndex = 0;
+  Map<String, String> _votes = {}; // Voter -> VotedFor
+  
+  final TextEditingController _aiController = TextEditingController();
+  bool _isAiLoading = false;
+  List<String> _aiQuestions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getNewQuestion();
+  }
+
+  @override
+  void dispose() {
+    _aiController.dispose();
+    super.dispose();
+  }
+
+  void _getNewQuestion() {
+    if (_aiQuestions.isNotEmpty) {
+      _currentQuestion = _aiQuestions[Random().nextInt(_aiQuestions.length)];
+    } else {
+      final questions = GameData.localWhoIsMostLikely[_difficulty]!;
+      _currentQuestion = questions[Random().nextInt(questions.length)];
+    }
+    setState(() {
+      _phase = LocalWhoIsPhase.question;
+      _votes.clear();
+      _currentVoterIndex = 0;
+    });
+  }
+
+  void _startVoting() {
+    setState(() {
+      _phase = LocalWhoIsPhase.voting;
+      _currentVoterIndex = 0;
+      _votes.clear();
+    });
+  }
+
+  void _recordVote(String votedFor) {
+    final voter = widget.players[_currentVoterIndex];
+    setState(() {
+      _votes[voter] = votedFor;
+      if (_currentVoterIndex < widget.players.length - 1) {
+        _currentVoterIndex++;
+      } else {
+        _phase = LocalWhoIsPhase.results;
+      }
+    });
+  }
+
+  Map<String, int> _calculateTally() {
+    Map<String, int> tally = {for (var p in widget.players) p: 0};
+    for (var votedFor in _votes.values) {
+      tally[votedFor] = (tally[votedFor] ?? 0) + 1;
+    }
+    return tally;
+  }
+
+  List<String> _getWinners(Map<String, int> tally) {
+    int maxVotes = 0;
+    tally.forEach((_, votes) {
+      if (votes > maxVotes) maxVotes = votes;
+    });
+    
+    if (maxVotes == 0) return [];
+    
+    return tally.entries
+        .where((e) => e.value == maxVotes)
+        .map((e) => e.key)
+        .toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Qui Pourrait le Plus ?"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => showGameRules(context, 'Qui Pourrait le Plus ?'),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: _buildContent(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContent() {
+    switch (_phase) {
+      case LocalWhoIsPhase.question:
+        return _buildQuestionStep();
+      case LocalWhoIsPhase.voting:
+        return _buildVotingStep();
+      case LocalWhoIsPhase.results:
+        return _buildResultsStep();
+    }
+  }
+
+  Widget _buildQuestionStep() {
+    return Column(
+      key: const ValueKey('question_step'),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SegmentedButton<String>(
+          segments: const [
+            ButtonSegment(value: 'soft', label: Text('Soft')),
+            ButtonSegment(value: 'hard', label: Text('Hard')),
+            ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
+          ],
+          selected: {_difficulty},
+          onSelectionChanged: (s) => setState(() {
+            _difficulty = s.first;
+            _getNewQuestion();
+          }),
+        ),
+        const SizedBox(height: 20),
+        Expanded(
+          child: Card(
+            color: Colors.deepPurple[950]?.withOpacity(0.4),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Qui dans le groupe...",
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    "...pourrait le plus $_currentQuestion",
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Consumer<PlayerState>(
+          builder: (ctx, ps, _) {
+            if (!ps.isPremium) return const SizedBox.shrink();
+            return Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.amberAccent),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Icon(Icons.auto_awesome, color: Colors.amberAccent, size: 16),
+                      SizedBox(width: 6),
+                      Text(
+                        "IA Premium",
+                        style: TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold, fontSize: 13),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _aiController,
+                          decoration: InputDecoration(
+                            labelText: "Thème pour les questions",
+                            hintText: "ex: sport, vacances, école...",
+                            border: const OutlineInputBorder(),
+                            isDense: true,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: _isAiLoading
+                            ? null
+                            : () async {
+                                if (_aiController.text.trim().isNotEmpty) {
+                                  setState(() => _isAiLoading = true);
+                                  try {
+                                    _aiQuestions = await FirebaseService.generateAiWords(
+                                      instructions: _aiController.text.trim(),
+                                      count: 30,
+                                      gameType: 'Qui Pourrait le Plus ?',
+                                    );
+                                    _getNewQuestion();
+                                  } catch (e) {
+                                    print('AI error: $e');
+                                  } finally {
+                                    if (mounted) setState(() => _isAiLoading = false);
+                                  }
+                                }
+                              },
+                        style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12)),
+                        child: _isAiLoading
+                            ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                            : const Icon(Icons.send),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        ElevatedButton(
+          onPressed: _startVoting,
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple, padding: const EdgeInsets.all(16)),
+          child: const Text("Lancer les votes !"),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVotingStep() {
+    final voter = widget.players[_currentVoterIndex];
+    return Column(
+      key: ValueKey('voting_step_$_currentVoterIndex'),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Card(
+          color: Colors.grey[900],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text(
+                  "Situation :",
+                  style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                ),
+                Text(
+                  "Qui pourrait le plus $_currentQuestion",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          "Passez l'appareil à :",
+          style: Theme.of(context).textTheme.bodyMedium,
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          voter,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Colors.deepPurpleAccent,
+                fontWeight: FontWeight.bold,
+              ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          "Votez secrètement pour le joueur de votre choix :",
+          style: TextStyle(color: Colors.white70),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Expanded(
+          child: ListView.builder(
+            itemCount: widget.players.length,
+            itemBuilder: (context, index) {
+              final target = widget.players[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 4),
+                child: ListTile(
+                  title: Text(target, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  leading: CircleAvatar(child: Text(target[0].toUpperCase())),
+                  trailing: const Icon(Icons.touch_app, color: Colors.deepPurpleAccent),
+                  onTap: () => _recordVote(target),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildResultsStep() {
+    final tally = _calculateTally();
+    final winners = _getWinners(tally);
+    
+    return Column(
+      key: const ValueKey('results_step'),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Card(
+          color: Colors.deepPurple[900]?.withOpacity(0.5),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const Text("SITUATION :", style: TextStyle(color: Colors.white54, fontSize: 12)),
+                const SizedBox(height: 4),
+                Text(
+                  "Qui pourrait le plus $_currentQuestion",
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          winners.length > 1 ? "Égalité !" : "Désigné par le groupe :",
+          style: Theme.of(context).textTheme.titleLarge,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 8,
+          children: winners.map((w) => Chip(
+            avatar: CircleAvatar(child: Text(w[0])),
+            label: Text(w, style: const TextStyle(fontWeight: FontWeight.bold)),
+            backgroundColor: Colors.amber,
+            labelStyle: const TextStyle(color: Colors.black),
+          )).toList(),
+        ),
+        const SizedBox(height: 16),
+        const Text("Détail des votes :", style: TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        Expanded(
+          child: ListView.builder(
+            itemCount: widget.players.length,
+            itemBuilder: (context, index) {
+              final player = widget.players[index];
+              final votesReceived = tally[player] ?? 0;
+              final votersList = _votes.entries
+                  .where((e) => e.value == player)
+                  .map((e) => e.key)
+                  .toList();
+
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 4),
+                child: ListTile(
+                  leading: CircleAvatar(child: Text(player[0])),
+                  title: Text(player, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: votersList.isNotEmpty 
+                      ? Text("Voté par : ${votersList.join(', ')}", style: const TextStyle(fontSize: 12))
+                      : const Text("Aucun vote", style: TextStyle(fontSize: 12, color: Colors.grey)),
+                  trailing: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: votesReceived > 0 ? Colors.deepPurple : Colors.grey[800],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      "$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}",
+                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 12),
+        ElevatedButton(
+          onPressed: _getNewQuestion,
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.all(16)),
+          child: const Text("Situation suivante"),
+        ),
+      ],
+    );
+  }
+}

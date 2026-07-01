@@ -1,4 +1,4 @@
-﻿import 'game_data_words.dart';
+import 'game_data_words.dart';
 import 'monde.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'; // Ajoutez cet import
 import 'main_screens.dart'; // Ajout de main_screens.dart pour accÃƒÂ©der ÃƒÂ  allAppGames
@@ -284,7 +284,7 @@ Gribouillis est un jeu de dessin inspirÃƒÂ© du "tÃƒÂ©lÃƒÂ©phone arab
 -   **Dessin** : Chaque joueur reÃƒÂ§oit les thÃƒÂ¨mes de **tous les autres joueurs** et doit les dessiner.
 -   **But** : IdÃƒÂ©al pour briser la glace, dÃƒÂ©couvrir les goÃƒÂ»ts des autres et lancer la crÃƒÂ©ativitÃƒÂ© de maniÃƒÂ¨re collaborative et lÃƒÂ©gÃƒÂ¨re.
 """,
-    'ZÃƒÂ©ro PointÃƒÂ©': """
+    'Zéro Pointé': """
 Ã°Å¸Å½Â¯ Objectif
 
 Avoir le moins de points possible ÃƒÂ  la fin de la partie.
@@ -392,15 +392,15 @@ Le gagnant final est celui qui prend tous les jetons.
         "Une situation est prÃƒÂ©sentÃƒÂ©e. Tous les joueurs votent pour la personne la plus susceptible de faire cette chose. Le joueur qui reÃƒÂ§oit le plus de votes gagne un point (un honneur douteux !).",
     'Le Menteur':
         "Mode Classique: Une question est posÃƒÂ©e. Un joueur est secrÃƒÂ¨tement dÃƒÂ©signÃƒÂ© 'menteur' et doit inventer une rÃƒÂ©ponse. Les autres disent la vÃƒÂ©ritÃƒÂ©. Votez pour dÃƒÂ©masquer le menteur.\n\nMode SimplifiÃƒÂ©: Chacun raconte une anecdote (vraie ou false) en rÃƒÂ©ponse ÃƒÂ  un thÃƒÂ¨me, puis dÃƒÂ©clare secrÃƒÂ¨tement sa vÃƒÂ©racitÃƒÂ©. Ensuite, tout le monde vote 'Vrai' ou 'Faux' pour chaque histoire. Vous gagnez des points en devinant correctement et en trompant les autres.",
-    'InfiltrÃƒÂ© & Mr. White':
+    'Infiltré & Mr. White':
         "La plupart des joueurs (Civils) recevront un mot. Un 'InfiltrÃƒÂ©' reÃƒÂ§oit un mot similaire. Et un 'Mr. White' ne reÃƒÂ§oit AUCUN mot. Chacun donne un mot-indice en **30 secondes**. Le but est de dÃƒÂ©masquer les imposteurs par un vote. Si un Civil est ÃƒÂ©liminÃƒÂ©, les imposteurs gagnent.",
     'Synonyme ou Banni':
         "Un mot est affichÃƒÂ©. Chaque joueur doit secrÃƒÂ¨tement soumettre un synonyme. Toutes les rÃƒÂ©ponses sont rÃƒÂ©vÃƒÂ©lÃƒÂ©es, puis les joueurs votent pour 'bannir' la proposition la moins pertinente. Le joueur banni perd la manche.",
-    'Le Jeu des CatÃƒÂ©gories':
+    'Le Jeu des Catégories':
         "Plusieurs catÃƒÂ©gories sont sÃƒÂ©lectionnÃƒÂ©es (3 minimum). Une catÃƒÂ©gorie s'affiche (ex: Marque de voiture). Chacun son tour, chaque joueur doit ÃƒÂ©crire un mot valide (ex: Volvo, CitroÃƒÂ«n) avant la fin de son chrono. Si un joueur ne rÃƒÂ©pond pas ÃƒÂ  temps, il gagne 1 point. C'est celui qui a le moins de points qui gagne.",
-    'Action ou VÃƒÂ©ritÃƒÂ©':
+    'Action ou Vérité':
         "Un joueur est dÃƒÂ©signÃƒÂ© par la roue. Il choisit entre 'Action' et 'VÃƒÂ©ritÃƒÂ©'. Un dÃƒÂ©fi correspondant lui est alors prÃƒÂ©sentÃƒÂ©.",
-    'Jeu de la PiÃƒÂ¨ce':
+    'Jeu de la Pièce':
         "Une question secrÃƒÂ¨te est affichÃƒÂ©e. Le joueur dÃƒÂ©signÃƒÂ© choisit 'Pile' ou 'Face'. Si son choix est incorrect, il doit rÃƒÂ©vÃƒÂ©ler la question et y rÃƒÂ©pondre honnÃƒÂªtement.",
     'Le Dilemme':
         "Le joueur dÃƒÂ©signÃƒÂ© doit rÃƒÂ©pondre ÃƒÂ  un dilemme cornÃƒÂ©lien. Il n'y a pas de bonne ou de mauvaise rÃƒÂ©ponse, juste des choix difficiles !",
@@ -410,13 +410,13 @@ Le gagnant final est celui qui prend tous les jetons.
         "Faire deviner un maximum de cartes en 3 manches (description libre, un mot, mime), avec de moins en moins dÃ¢â‚¬â„¢indices. L'ÃƒÂ©quipe avec le plus de points gagne. En mode local, le tÃƒÂ©lÃƒÂ©phone passe de joueur en joueur pour les devinettes. En multijoueur, le jeu gÃƒÂ¨re les rÃƒÂ´les, les tours et le chronomÃƒÂ¨tre.",
     'On se passe un objet rapidement':
         "Passez le tÃƒÂ©lÃƒÂ©phone de main en main le plus vite possible. Quand la musique ou le chrono s'arrÃƒÂªte, la personne qui a le tÃƒÂ©lÃƒÂ©phone doit rÃƒÂ©pondre ÃƒÂ  une question drÃƒÂ´le ou piquante. IdÃƒÂ©al pour briser la glace !",
-    'Devine TÃƒÂªte':
+    'Devine Tête':
         "Un joueur tient le tÃƒÂ©lÃƒÂ©phone sur son front. Les autres dÃƒÂ©crivent le mot affichÃƒÂ©. Inclinez le tÃƒÂ©lÃƒÂ©phone vers le bas pour 'devinÃƒÂ©', vers le haut pour 'passer'.",
     'Petit Bac':
         "Trouvez des mots correspondant ÃƒÂ  des catÃƒÂ©gories donnÃƒÂ©es, commenÃƒÂ§ant par une lettre spÃƒÂ©cifique. Marquez des points pour les rÃƒÂ©ponses uniques et correctes.",
-    'PrÃƒÂ©sident': """
+    'Président': """
 **But du jeu**
-Le but est dÃ¢â‚¬â„¢ÃƒÂªtre le premier ÃƒÂ  se dÃƒÂ©barrasser de toutes ses cartes pour devenir PrÃƒÂ©sident. Le dernier joueur avec des cartes en main devient le Trou du cul.
+Le but est dÃ¢â‚¬â„¢ÃƒÂªtre le premier ÃƒÂ  se dÃƒÂ©barrasser de toutes ses cartes pour devenir Président. Le dernier joueur avec des cartes en main devient le Trou du cul.
 
 **MatÃƒÂ©riel et Joueurs**
 -   **Cartes** : Un jeu de 52 cartes.
@@ -447,18 +447,18 @@ Le **2** est la carte la plus forte et peut battre n'importe quelle autre carte 
 **Fin de la Manche et RÃƒÂ´les**
 -   DÃƒÂ¨s qu'un joueur n'a plus de cartes, il a terminÃƒÂ©. La partie continue jusqu'ÃƒÂ  ce qu'il ne reste plus qu'un seul joueur.
 -   L'ordre de fin dÃƒÂ©termine les rÃƒÂ´les pour la prochaine manche :
-    -   **1er** : PrÃƒÂ©sident
-    -   **2ÃƒÂ¨me** : Vice-PrÃƒÂ©sident
+    -   **1er** : Président
+    -   **2ÃƒÂ¨me** : Vice-Président
     -   **Dernier** : Trou du cul
     -   **Avant-dernier** : Vice-Trou du cul
     -   **Les autres** (s'il y en a) : Neutres
 
 **Manche Suivante : L'ÃƒÂ©change des cartes !**
 Avant de commencer la nouvelle manche, les joueurs ÃƒÂ©changent des cartes :
--   Le **Trou du cul** donne ses **deux meilleures cartes** au **PrÃƒÂ©sident**.
--   Le **PrÃƒÂ©sident** lui donne en retour les **deux cartes de son choix** (gÃƒÂ©nÃƒÂ©ralement ses plus mauvaises).
--   S'il y a 4 joueurs ou plus, le **Vice-Trou du cul** donne sa **meilleure carte** au **Vice-PrÃƒÂ©sident**.
--   Le **Vice-PrÃƒÂ©sident** lui donne en retour la **carte de son choix**.
+-   Le **Trou du cul** donne ses **deux meilleures cartes** au **Président**.
+-   Le **Président** lui donne en retour les **deux cartes de son choix** (gÃƒÂ©nÃƒÂ©ralement ses plus mauvaises).
+-   S'il y a 4 joueurs ou plus, le **Vice-Trou du cul** donne sa **meilleure carte** au **Vice-Président**.
+-   Le **Vice-Président** lui donne en retour la **carte de son choix**.
 
 **RÃƒÂ¨gles SpÃƒÂ©ciales**
 -   Ã¢â€ºâ€ **Interdiction de finir par un 2** : Un joueur n'a pas le droit de se dÃƒÂ©barrasser de sa derniÃƒÂ¨re carte si c'est un 2. Ce coup est considÃƒÂ©rÃƒÂ© comme invalide.
@@ -518,7 +518,7 @@ Faire deviner un maximum de mots mystÃƒÂ¨res ÃƒÂ  votre coÃƒÂ©quipie
 -   Mot mystÃƒÂ¨re: "Chat". Indices invalides: "chaton", "fÃƒÂ©lin", "miaou", "minou".
 -   Indices identiques: Si 2 joueurs ÃƒÂ©crivent "animal" pour "Chat", "animal" est ÃƒÂ©liminÃƒÂ©.
 """,
-    'Le Roi des MÃƒÂ¨mes':
+    'Le Roi des Mèmes':
         "Chaque joueur reÃƒÂ§oit le mÃƒÂªme mÃƒÂ¨me. Il doit ajouter la description la plus drÃƒÂ´le. Ensuite, toutes les descriptions sont rÃƒÂ©vÃƒÂ©lÃƒÂ©es aux autres joueurs qui votent pour la plus drÃƒÂ´le. L'auteur de la description qui reÃƒÂ§oit le plus de votes gagne un point.",
 
     'Loup-Garou': """
@@ -966,7 +966,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
       'default':
           [], // Pas de donnÃƒÂ©es prÃƒÂ©-remplies, le jeu est gÃƒÂ©nÃƒÂ©rÃƒÂ© par les joueurs.
     },
-    'ZÃƒÂ©ro PointÃƒÂ©': {'default': []},
+    'Zéro Pointé': {'default': []},
     'Poker': {'default': []},
     'Dominoes': {'default': []},
     'Big Two': {'default': []},
@@ -1032,7 +1032,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
         "Raconte une anecdote sur une fois oÃƒÂ¹ tu as trahi la confiance de quelqu'un.",
       ],
     },
-    'InfiltrÃƒÂ© & Mr. White': {
+    'Infiltré & Mr. White': {
       'soft': [
         "Pomme:Poire",
         "Chien:Chat",
@@ -1078,7 +1078,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
         "Nostalgie",
       ],
     },
-    'Le Jeu des CatÃƒÂ©gories': {
+    'Le Jeu des Catégories': {
       // C'ÃƒÂ©tait 'La Patate Chaude' avant
       'soft': [],
       'hard': [],
@@ -1192,7 +1192,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
         "Sport",
       ],
     },
-    'PrÃƒÂ©sident': {'soft': [], 'hard': [], 'hardcore': []},
+    'Président': {'soft': [], 'hard': [], 'hardcore': []},
     'Pictionary': {
       'soft': [
         "Pomme",
@@ -1299,7 +1299,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
         "Sarcasme",
       ],
     },
-    'Le Roi des MÃƒÂ¨mes': {'default': []},
+    'Le Roi des Mèmes': {'default': []},
 
     'Loup-Garou': {'default': []},
     'Dobble': {'default': []},
@@ -1309,6 +1309,10 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
       'default':
           [], // Pas de donnÃƒÂ©es prÃƒÂ©-remplies, tout vient des joueurs.
     },
+
+    'Devine Tête': {'soft': [], 'hard': [], 'hardcore': []},
+    'Taboo': {'soft': [], 'hard': [], 'hardcore': []},
+    'Belote': {'default': []},
   };
 
   static const List<Map<String, dynamic>> allLoupGarouRoles = [
@@ -1785,7 +1789,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     ],
   };
 
-  // Mots par niveau de difficultÃƒÂ© pour Devine TÃƒÂªte
+  // Mots par niveau de difficultÃƒÂ© pour Devine Tête
   static const Map<String, List<String>> guessTheWordWordsByDifficulty = {
     'soft': [
       "Chien",
@@ -2157,76 +2161,76 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
   };
 
   static final List<String> dobbleSymbols = [
-    'Ã°Å¸Ëœâ‚¬',
-    'Ã°Å¸Ëœâ€š',
-    'Ã°Å¸ËœÂ',
-    'Ã°Å¸Â¤â€',
-    'Ã°Å¸ËœÅ½',
-    'Ã°Å¸ËœÂ¢',
-    'Ã°Å¸ËœÂ¡',
-    'Ã°Å¸ËœÂ±',
-    'Ã°Å¸â€˜Â»',
-    'Ã°Å¸â€˜Â½',
-    'Ã°Å¸â€˜Â¾',
-    'Ã°Å¸Â¤â€“',
-    'Ã°Å¸Å½Æ’',
-    'Ã°Å¸ËœÂº',
-    'Ã°Å¸ÂÂµ',
-    'Ã°Å¸ÂÂ¶',
-    'Ã°Å¸Â¦Å ',
-    'Ã°Å¸ÂÂ¼',
-    'Ã°Å¸ÂÂ¨',
-    'Ã°Å¸Â¦Â',
-    'Ã°Å¸ÂÂ®',
-    'Ã°Å¸ÂÂ·',
-    'Ã°Å¸ÂÂ¸',
-    'Ã°Å¸Ââ„¢',
-    'Ã°Å¸Â¦â€ž',
-    'Ã°Å¸ÂÅ¾',
-    'Ã°Å¸ÂÂ¢',
-    'Ã°Å¸Â¦â‚¬',
-    'Ã°Å¸ÂÂ³',
-    'Ã°Å¸ÂÂ¬',
-    'Ã°Å¸Å’Â',
-    'Ã°Å¸Å’Å¾',
-    'Ã¢Â­Â',
-    'Ã°Å¸â€Â¥',
-    'Ã°Å¸â€™Â§',
-    'Ã¢Å¡Â¡',
-    'Ã¢Ââ€žÃ¯Â¸Â',
-    'Ã¢â€ºâ€ž',
-    'Ã°Å¸Ââ‚¬',
-    'Ã°Å¸Ââ€ž',
-    'Ã°Å¸Å’Âµ',
-    'Ã°Å¸Å’Â´',
-    'Ã°Å¸Å’Â¸',
-    'Ã°Å¸Å’Â¹',
-    'Ã°Å¸Å’Â»',
-    'Ã°Å¸ÂÅ½',
-    'Ã°Å¸Ââ€œ',
-    'Ã°Å¸Ââ€™',
-    'Ã°Å¸Ââ€°',
-    'Ã°Å¸ÂÂ',
-    'Ã°Å¸Ââ€¢',
-    'Ã°Å¸Ââ€',
-    'Ã°Å¸ÂÅ¸',
-    'Ã°Å¸ÂÂ¿',
-    'Ã°Å¸Å½â€š',
-    'Ã°Å¸ÂÂ­',
-    'Ã°Å¸â€™Å½',
-    'Ã°Å¸â€™Â¡',
-    'Ã°Å¸Å½Âµ',
-    'Ã¢Å“ÂÃ¯Â¸Â',
-    'Ã°Å¸â€œÅ¾',
-    'Ã°Å¸â€â€',
-    'Ã¢Å¡Â½',
-    'Ã°Å¸Å¡â€”',
-    'Ã°Å¸â€œÅ¡',
-    'Ã°Å¸ÂÂ ',
-    'Ã°Å¸â€â€˜',
-    'Ã¢ÂÂ°',
-    'Ã°Å¸Å’Ë†',
-    'Ã°Å¸Å’Å ',
+    '😀',
+    '😂',
+    '😍',
+    '🤖',
+    '😎',
+    '😢',
+    '😡',
+    '😱',
+    '👻',
+    '👽',
+    '👾',
+    '🤖',
+    '🎃',
+    '😺',
+    '🐵',
+    '🐶',
+    '🦊',
+    '🐱',
+    '🐭',
+    '🐹',
+    '🐰',
+    '🐻',
+    '🐼',
+    '🐨',
+    '🐯',
+    '🦁',
+    '🐮',
+    '🐷',
+    '🐸',
+    '🐙',
+    '🌍',
+    '🌞',
+    '⭐',
+    '🔥',
+    '💧',
+    '⚡',
+    '❄️',
+    '⛄',
+    '🏀',
+    '🏈',
+    '🌴',
+    '🌵',
+    '🌺',
+    '🌻',
+    '🌼',
+    '🍎',
+    '🍓',
+    '🍒',
+    '🍉',
+    '🍕',
+    '🍔',
+    '🌭',
+    '🍟',
+    '🍿',
+    '🍩',
+    '🎂',
+    '💎',
+    '💡',
+    '🎵',
+    '✏️',
+    '📞',
+    '🔓',
+    '⚽',
+    '🚗',
+    '📚',
+    '🏠',
+    '🔑',
+    '⏳',
+    '🌈',
+    '🌊',
   ];
 
   static const List<String> unoColors = ['red', 'yellow', 'green', 'blue'];
@@ -2492,9 +2496,19 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
   };
 
   // Helper pour obtenir les coordonnÃ©es d'une piÃ¨ce aprÃ¨s rotation
-  static List<List<int>> getRotatedPiece(int pieceId, int rotation) {
+  static List<List<int>> getRotatedPiece(
+    int pieceId,
+    int rotation, {
+    bool flipped = false,
+  }) {
     List<List<int>> piece =
         blokusPieces[pieceId]!.map((p) => List<int>.from(p)).toList();
+
+    if (flipped) {
+      int maxC = piece.map((p) => p[1]).reduce((a, b) => a > b ? a : b);
+      piece = piece.map((p) => [p[0], maxC - p[1]]).toList();
+    }
+
     for (int i = 0; i < rotation % 4; i++) {
       int maxR = piece.map((p) => p[0]).reduce((a, b) => a > b ? a : b);
       piece = piece.map((p) => [p[1], maxR - p[0]]).toList();
@@ -4371,8 +4385,8 @@ class FirebaseService {
       String playerName =
           gameData['players'][timedOutPlayerId]?['name'] ?? 'Joueur';
 
-      // 2. Logique spÃƒÂ©cifique pour InfiltrÃƒÂ© & Mr. White
-      if (gameData['gameType'] == 'InfiltrÃƒÂ© & Mr. White' &&
+      // 2. Logique spÃƒÂ©cifique pour Infiltré & Mr. White
+      if (gameData['gameType'] == 'Infiltré & Mr. White' &&
           gameData['currentPhase'] == 'clue_giving') {
         // Soumettre l'indice automatique
         Map<String, dynamic> updates = {
@@ -4487,7 +4501,7 @@ class FirebaseService {
     // MODIFICATION : Prise en charge du comptage pour InfiltrÃƒÂ©
     if (updatedGameData['roundState'] == 'voting') {
       await _tallyVotes(gameRef, updatedGameData);
-    } else if (updatedGameData['gameType'] == 'InfiltrÃƒÂ© & Mr. White' &&
+    } else if (updatedGameData['gameType'] == 'Infiltré & Mr. White' &&
         updatedGameData['currentPhase'] == 'voting') {
       // Force la rÃƒÂ©solution du vote avec les votes actuels
       var votes = Map<String, dynamic>.from(updatedGameData['votes'] ?? {});
@@ -4566,7 +4580,7 @@ class FirebaseService {
       case 'Skull':
         await nextSkullRound(gameCode);
         break;
-      case 'PrÃƒÂ©sident':
+      case 'Président':
         await nextPresidentRound(gameCode);
         break;
 
@@ -7501,7 +7515,7 @@ class FirebaseService {
         'bigTwoPassedPlayers': [],
         'bigTwoFinishedPlayers': [],
       },
-      if (gameType == 'ZÃƒÂ©ro PointÃƒÂ©') ...{
+      if (gameType == 'Zéro Pointé') ...{
         'targetScore': zeroPointeTargetScore ?? 100,
         'playerGrids': {},
         'deck': [],
@@ -7575,7 +7589,7 @@ class FirebaseService {
         'petitBacSubmittedPlayers': {},
         'petitBacRoundEnded': false,
       },
-      if (gameType == 'PrÃƒÂ©sident') ...{
+      if (gameType == 'Président') ...{
         'playerHands': {},
         'playerRanks': {},
         'currentPlayerIndex': 0,
@@ -7623,7 +7637,7 @@ class FirebaseService {
         'justOneRevealIndex': 0,
         'justOneAllowInvalidClues': justOneAllowInvalidClues,
       },
-      if (gameType == 'Le Roi des MÃƒÂ¨mes') ...{'memeUrl': null},
+      if (gameType == 'Le Roi des Mèmes') ...{'memeUrl': null},
       if (gameType == 'Loup-Garou') ...{
         'phase': 'lobby',
         'subPhase': '',
@@ -7820,7 +7834,7 @@ class FirebaseService {
         'bigTwoPassedPlayers': [],
         'bigTwoFinishedPlayers': [],
       },
-      if (gameType == 'ZÃƒÂ©ro PointÃƒÂ©') ...{
+      if (gameType == 'Zéro Pointé') ...{
         'targetScore': zeroPointeTargetScore ?? 100,
         'playerGrids': {},
         'deck': [],
@@ -7872,7 +7886,7 @@ class FirebaseService {
         'clueCount': 0,
         'guessesLeft': 0,
       },
-      if (gameType == 'InfiltrÃƒÂ© & Mr. White') ...{
+      if (gameType == 'Infiltré & Mr. White') ...{
         'playerData': {},
         'playerOrder': [],
         'eliminatedOrder': [],
@@ -7916,7 +7930,7 @@ class FirebaseService {
         'petitBacSubmittedPlayers': {},
         'petitBacRoundEnded': false,
       },
-      if (gameType == 'PrÃƒÂ©sident') ...{
+      if (gameType == 'Président') ...{
         'playerHands': {},
         'playerRanks': {},
         'currentPlayerIndex': 0,
@@ -7964,7 +7978,7 @@ class FirebaseService {
         'justOneRevealIndex': 0,
         'justOneAllowInvalidClues': justOneAllowInvalidClues,
       },
-      if (gameType == 'Le Roi des MÃƒÂ¨mes') ...{'memeUrl': null},
+      if (gameType == 'Le Roi des Mèmes') ...{'memeUrl': null},
       if (gameType == 'Loup-Garou') ...{
         'phase': 'lobby',
         'subPhase': '',
@@ -7982,7 +7996,7 @@ class FirebaseService {
         'deadChatMessages': [],
         'loverChatMessages': {},
       },
-      if (gameType == 'Le Jeu des CatÃƒÂ©gories') ...{
+      if (gameType == 'Le Jeu des Catégories') ...{
         'selectedCategories':
             selectedCategoriesList, // Liste des catÃƒÂ©gories choisies
         'currentCategory': null,
@@ -8108,7 +8122,7 @@ class FirebaseService {
     final difficulty = gameData['difficulty'] ?? 'soft';
 
     final wordPairs =
-        GameData.multiplayerGameData['InfiltrÃƒÂ© & Mr. White']![difficulty]!;
+        GameData.multiplayerGameData['Infiltré & Mr. White']![difficulty]!;
     final pair = wordPairs[Random().nextInt(wordPairs.length)].split(':');
     final wordCivil = pair[0];
     final wordUndercover = pair[1];
@@ -10431,7 +10445,7 @@ class FirebaseService {
     String difficulty = gameData['difficulty'];
     Map<String, dynamic> players = gameData['players'];
 
-    if (gameType == 'Devine TÃƒÂªte') {
+    if (gameType == 'Devine Tête') {
       await _startDevineTeteRound(gameRef, gameData);
       return;
     }
@@ -10504,7 +10518,7 @@ class FirebaseService {
       return;
     }
 
-    if (gameType == 'InfiltrÃƒÂ© & Mr. White') {
+    if (gameType == 'Infiltré & Mr. White') {
       await _startUndercoverGame(
         gameRef,
         gameData,
@@ -10542,7 +10556,7 @@ class FirebaseService {
       return;
     }
 
-    if (gameType == 'ZÃƒÂ©ro PointÃƒÂ©') {
+    if (gameType == 'Zéro Pointé') {
       await _startZeroPointeRound(gameRef, gameData);
       return;
     }
@@ -10605,7 +10619,7 @@ class FirebaseService {
       return await _startGameLoupGarou(gameRef, players, playerIds);
     }
 
-    if (gameType == 'Le Jeu des CatÃƒÂ©gories') {
+    if (gameType == 'Le Jeu des Catégories') {
       List<String> availableCategories = List<String>.from(
         gameData['selectedCategories'] ?? GameData.categoriesGameList,
       );
@@ -10786,7 +10800,7 @@ class FirebaseService {
         ...initialTurnUpdates, // AJOUTÃƒâ€°
       });
       return;
-    } else if (gameType == 'PrÃƒÂ©sident') {
+    } else if (gameType == 'Président') {
       List<String> suits = ['C', 'D', 'H', 'S'];
       List<String> ranks = [
         '3',
@@ -12319,10 +12333,10 @@ class FirebaseService {
     Map<String, String> ranks = {};
 
     if (finalRanking.isNotEmpty) {
-      if (finalRanking.length >= 1) ranks[finalRanking[0]] = "PrÃƒÂ©sident";
+      if (finalRanking.length >= 1) ranks[finalRanking[0]] = "Président";
       if (finalRanking.length >= 2) ranks[finalRanking.last] = "Trou du cul";
       if (finalRanking.length >= 4) {
-        ranks[finalRanking[1]] = "Vice-PrÃƒÂ©sident";
+        ranks[finalRanking[1]] = "Vice-Président";
         ranks[finalRanking[finalRanking.length - 2]] = "Vice-Trou du cul";
       }
       for (int i = 0; i < finalRanking.length; i++) {
@@ -12393,7 +12407,7 @@ class FirebaseService {
       String? presidentId =
           ranks.entries
               .firstWhere(
-                (e) => e.value == "PrÃƒÂ©sident",
+                (e) => e.value == "Président",
                 orElse: () => MapEntry("", ""),
               )
               .key;
@@ -12428,7 +12442,7 @@ class FirebaseService {
         String? vicePId =
             ranks.entries
                 .firstWhere(
-                  (e) => e.value == "Vice-PrÃƒÂ©sident",
+                  (e) => e.value == "Vice-Président",
                   orElse: () => MapEntry("", ""),
                 )
                 .key;
@@ -12978,7 +12992,7 @@ class FirebaseService {
     String gameType = gameData['gameType'] ?? '';
 
     // Check game-end condition for Categories
-    if (gameType == 'Le Jeu des CatÃƒÂ©gories') {
+    if (gameType == 'Le Jeu des Catégories') {
       int currentRound = gameData['currentRound'] ?? 0;
       List<String> categories = List<String>.from(
         gameData['selectedCategories'] ?? [],
@@ -13558,7 +13572,7 @@ class FirebaseService {
       } else {
         liarId = playerOrder[random.nextInt(playerOrder.length)];
       }
-    } else if (gameType == 'InfiltrÃƒÂ© & Mr. White') {
+    } else if (gameType == 'Infiltré & Mr. White') {
       if (playerOrder.length >= 3) {
         List<String> wordPairs =
             _aiWordPool ?? GameData.multiplayerGameData[gameType]![difficulty]!;
@@ -13594,7 +13608,7 @@ class FirebaseService {
       question = "Trouvez le meilleur synonyme pour le mot : $word";
       roundData = word;
       roundState = 'answering';
-    } else if (gameType == 'Le Roi des MÃƒÂ¨mes') {
+    } else if (gameType == 'Le Roi des Mèmes') {
       memeUrl = await _fetchRandomMemeUrl();
       question = "Ajoute la description la plus drÃƒÂ´le ÃƒÂ  ce mÃƒÂ¨me !";
       roundState = 'answering';
@@ -14426,9 +14440,9 @@ class FirebaseService {
           ]);
         }
       } else if ([
-            'InfiltrÃƒÂ© & Mr. White',
+            'Infiltré & Mr. White',
             'La Patate Chaude',
-            'Le Roi des MÃƒÂ¨mes',
+            'Le Roi des Mèmes',
           ].contains(gameType) ||
           gameType == 'Le Menteur') {
         if (answersCount == playersCount) {
@@ -14686,7 +14700,7 @@ class FirebaseService {
           }
         });
         updates['voteResults'] = votes;
-      } else if (gameType == 'Le Roi des MÃƒÂ¨mes') {
+      } else if (gameType == 'Le Roi des Mèmes') {
         Map<String, int> voteCounts = {};
         votes.forEach((voter, votedFor) {
           voteCounts[votedFor] = (voteCounts[votedFor] ?? 0) + 1;
@@ -14746,7 +14760,7 @@ class FirebaseService {
               fooledCount,
             );
           }
-        } else if (gameType == 'InfiltrÃƒÂ© & Mr. White') {
+        } else if (gameType == 'Infiltré & Mr. White') {
           final undercoverId = gameData['undercoverId'];
           final mrWhiteId = gameData['mrWhiteId'];
 
@@ -14913,7 +14927,7 @@ class FirebaseService {
       'totalScores': totalScores, // Garder les scores totaux
       'revealedInitialCardsCount': revealedCardsCount,
       'gameLog': [
-        "La partie de ZÃƒÂ©ro PointÃƒÂ© commence ! Chaque joueur doit rÃƒÂ©vÃƒÂ©ler 2 cartes.",
+        "La partie de Zéro Pointé commence ! Chaque joueur doit rÃƒÂ©vÃƒÂ©ler 2 cartes.",
       ],
       'turnStartTime': FieldValue.serverTimestamp(),
     });
@@ -16040,10 +16054,10 @@ void showGameRules(BuildContext context, String gameType) {
           GameData.gameRules[gameType] ??
           "Aucune rÃƒÂ¨gle trouvÃƒÂ©e pour ce jeu.";
       if (gameType == 'Undercover Local' ||
-          gameType == 'InfiltrÃ© & Mr. White' ||
-          gameType == 'InfiltrÃƒÂ© & Mr. White') {
-        gameTitle = 'InfiltrÃ© & Mr. White';
-        rules = GameData.gameRules['InfiltrÃƒÂ© & Mr. White']!;
+          gameType == 'Infiltré & Mr. White' ||
+          gameType == 'Infiltré & Mr. White') {
+        gameTitle = 'Infiltré & Mr. White';
+        rules = GameData.gameRules['Infiltré & Mr. White']!;
       }
 
       return AlertDialog(
@@ -16241,7 +16255,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     'Codenames',
     "Time's Up",
     'Synonyme ou Banni',
-    'InfiltrÃ© & Mr. White',
+    'Infiltré & Mr. White',
     'Le Menteur',
     'Qui Pourrait le Plus ?',
     'Le Juge',
@@ -16459,14 +16473,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         [
               'Gribouillis',
               'Petit Bac',
-              'PrÃ©sident',
+              'Président',
               'Skull',
               'Le Roi des MÃ¨mes',
               'Loup-Garou',
               'Dobble',
               'La Patate Chaude',
               'Uno',
-              'ZÃ©ro PointÃ©',
+              'Zéro Pointé',
               'Poker',
               'Photo Roulette',
               'Belote',
@@ -16618,14 +16632,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                   [
                         'Gribouillis',
                         'Petit Bac',
-                        'PrÃ©sident',
+                        'Président',
                         'Skull',
                         'Le Roi des MÃ¨mes',
                         'Loup-Garou',
                         'Dobble',
                         'La Patate Chaude',
                         'Uno',
-                        'ZÃ©ro PointÃ©',
+                        'Zéro Pointé',
                         'Poker',
                         'Photo Roulette',
                         'Belote',
@@ -16647,7 +16661,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               petitBacTime:
                   _selectedGame == 'Petit Bac' ? _turnTimerSeconds : null,
               presidentRevolution:
-                  _selectedGame == 'PrÃ©sident' ? _presidentRevolution : false,
+                  _selectedGame == 'Président' ? _presidentRevolution : false,
               pictionaryOnly30Strokes:
                   _selectedGame == 'Pictionary'
                       ? _pictionaryOnly30Strokes
@@ -16671,7 +16685,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               dominoesTargetScore:
                   _selectedGame == 'Dominoes' ? _dominoesTargetScore : null,
               zeroPointeTargetScore:
-                  _selectedGame == 'ZÃ©ro PointÃ©'
+                  _selectedGame == 'Zéro Pointé'
                       ? _zeroPointeTargetScore
                       : null,
               pokerStartChips:
@@ -16901,14 +16915,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (![
                       'Gribouillis',
                       'Petit Bac',
-                      'PrÃ©sident',
+                      'Président',
                       'Skull',
                       'Le Roi des MÃ¨mes',
                       'Loup-Garou',
                       'Dobble',
                       'La Patate Chaude',
                       'Uno',
-                      'ZÃ©ro PointÃ©',
+                      'Zéro Pointé',
                       'Poker',
                       'Mille Bornes',
                       'Belote',
@@ -16986,7 +17000,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ],
                     ],
 
-                    if (_selectedGame == 'ZÃ©ro PointÃ©') ...[
+                    if (_selectedGame == 'Zéro Pointé') ...[
                       SizedBox(height: 20),
                       Text(
                         "Score Cible",
@@ -17166,7 +17180,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                     ],
 
-                    if (_selectedGame == 'PrÃ©sident') ...[
+                    if (_selectedGame == 'Président') ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
                         title: Text("Variante RÃ©volution"),
@@ -17603,7 +17617,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                     ],
-                    if (_selectedGame == 'InfiltrÃ© & Mr. White') ...[
+                    if (_selectedGame == 'Infiltré & Mr. White') ...[
                       SizedBox(height: 20),
                       Text(
                         "RÃ´les de Base",
@@ -17611,7 +17625,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       Card(
                         child: ListTile(
-                          title: Text("Nombre d'InfiltrÃ©s"),
+                          title: Text("Nombre d'Infiltrés"),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -18180,14 +18194,12 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
   void initState() {
     super.initState();
     _livekitService = Provider.of<LivekitService>(context, listen: false);
-    // On ne se connecte PAS ici, on attend de savoir si le jeu requiert vidÃ©o/audio
   }
 
   Future<void> _connectToLivekit(bool videoEnabled, bool audioEnabled) async {
     if (_livekitInitialized) return;
     _livekitInitialized = true;
     try {
-      print("[GameLobby] Connexion Ã  LiveKit demandÃ©e...");
       await _livekitService.initialize();
       await _livekitService.joinChannel(
         widget.gameCode,
@@ -18196,14 +18208,8 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
         audioEnabled: audioEnabled,
       );
     } catch (e) {
-      print("Erreur init Livekit in lobby: $e");
+      print("Erreur init Livekit au salon : $e");
     }
-  }
-
-  @override
-  void dispose() {
-    // Ne pas quitter le channel ici, car l'ÃƒÂ©cran de jeu va l'utiliser.
-    super.dispose();
   }
 
   @override
@@ -18212,58 +18218,44 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
     final String currentPlayerId = widget.playerId;
 
     return Scaffold(
-      appBar: AppBar(title: Text("Salon d'attente")),
+      appBar: AppBar(title: const Text("Salon Privé")),
       body: StreamBuilder<DocumentSnapshot>(
         stream: _firebaseService.getGameStream(gameCode),
         builder: (context, snapshot) {
-          if (!snapshot.hasData)
-            return Center(child: CircularProgressIndicator());
-          if (snapshot.hasError)
-            return Center(child: Text("Erreur de connexion ÃƒÂ  la partie."));
+          if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+          if (snapshot.hasError) return const Center(child: Text("Erreur de connexion au salon."));
           if (!snapshot.data!.exists) {
-            Future.microtask(
-              () => Navigator.of(context).popUntil((route) => route.isFirst),
-            );
-            return Center(child: Text("La partie n'existe plus."));
+            Future.microtask(() => Navigator.of(context).popUntil((route) => route.isFirst));
+            return const Center(child: Text("La partie n'existe plus."));
           }
 
           var gameData = snapshot.data!.data() as Map<String, dynamic>;
           var players = (gameData['players'] as Map<String, dynamic>?) ?? {};
 
-          // Connexion au flux vidÃ©o et audio dÃ¨s le salon de jeu si activÃ© pour cette partie
           if (!_livekitInitialized &&
-              (gameData['videoEnabled'] == true ||
-                  gameData['audioEnabled'] == true)) {
+              (gameData['videoEnabled'] == true || gameData['audioEnabled'] == true)) {
             _connectToLivekit(
               gameData['videoEnabled'] == true,
               gameData['audioEnabled'] == true,
             );
           }
 
-          print(
-            "[DEBUG GameLobby] DonnÃƒÂ©es reÃƒÂ§ues par le Stream. Joueurs: $players",
-          );
-
           String gameType = gameData['gameType'] ?? '';
 
           if (gameData['gameState'] == 'playing') {
-            Future.microtask(
-              () => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (_) => MultiplayerGameScreen(
-                        gameCode: gameCode,
-                        playerId: currentPlayerId,
-                      ),
+            Future.microtask(() => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => MultiplayerGameScreen(
+                  gameCode: gameCode,
+                  playerId: currentPlayerId,
                 ),
-              ), // MODIFIÃƒâ€° ICI
-            );
-            return Center(child: Text("DÃƒÂ©marrage de la partie..."));
+              ),
+            ));
+            return const Center(child: Text("La partie commence..."));
           }
 
           bool isHost = gameData['hostId'] == currentPlayerId;
-
           bool isTeamGame = ['Codenames', 'Time\'s Up'].contains(gameType);
           Map<int, List<String>> teams = {};
           if (gameData['teams'] != null) {
@@ -18273,77 +18265,41 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
           }
 
           bool canStart = true;
-          String playerRequirementMessage = "";
+          String requirementMessage = "";
 
           if (isTeamGame) {
-            final int totalAssignedPlayers = teams.values.fold(
-              0,
-              (sum, team) => sum + team.length,
-            );
+            final int totalAssignedPlayers = teams.values.fold(0, (sum, team) => sum + team.length);
             if (players.length < 4) {
               canStart = false;
-              playerRequirementMessage = "Il faut au moins 4 joueurs.";
+              requirementMessage = "Il faut au moins 4 joueurs.";
             } else if (teams.length < 2) {
               canStart = false;
-              playerRequirementMessage =
-                  "Veuillez crÃƒÂ©er au moins 2 ÃƒÂ©quipes.";
+              requirementMessage = "Veuillez créer au moins 2 équipes.";
             } else if (totalAssignedPlayers != players.length) {
               canStart = false;
-              playerRequirementMessage =
-                  "Tous les joueurs doivent ÃƒÂªtre dans une ÃƒÂ©quipe.";
+              requirementMessage = "Tous les joueurs doivent être assignés à une équipe.";
             } else if (teams.values.any((team) => team.length < 2)) {
               canStart = false;
-              playerRequirementMessage =
-                  "Chaque ÃƒÂ©quipe doit avoir au moins 2 joueurs.";
+              requirementMessage = "Chaque équipe doit posséder au moins 2 joueurs.";
             }
           } else {
             switch (gameType) {
               case 'Zombie!':
                 if (players.length != 4) {
                   canStart = false;
-                  playerRequirementMessage =
-                      "Zombie! requiert exactement 4 joueurs.";
+                  requirementMessage = "Ce jeu requiert exactement 4 joueurs.";
                 }
                 break;
               case 'Synonyme ou Banni':
                 if (players.length < 3) {
                   canStart = false;
-                  playerRequirementMessage =
-                      "Au moins 3 joueurs sont requis pour Synonyme ou Banni.";
-                }
-                break;
-              case 'Gribouillis':
-              case 'Poker':
-              case 'ZÃƒÂ©ro PointÃƒÂ©':
-                if (players.length < 2) {
-                  canStart = false;
-                  playerRequirementMessage =
-                      "Au moins 2 joueurs sont requis pour ce mode.";
-                }
-                break;
-              case 'Loup-Garou':
-                Map<String, int> roleSettings = Map<String, int>.from(
-                  gameData['roleSettings'] ?? {},
-                );
-                int totalRolesCount = roleSettings.values.fold(
-                  0,
-                  (sum, count) => sum + count,
-                );
-
-                if (totalRolesCount < 5) {
-                  canStart = false;
-                  playerRequirementMessage =
-                      "Au moins 5 rÃƒÂ´les doivent ÃƒÂªtre sÃƒÂ©lectionnÃƒÂ©s par l'hÃƒÂ´te.";
-                } else if (players.length != totalRolesCount) {
-                  canStart = false;
-                  playerRequirementMessage =
-                      "${players.length} joueurs connectÃƒÂ©s pour ${totalRolesCount} rÃƒÂ´les. Le nombre doit correspondre.";
+                  requirementMessage = "Au moins 3 joueurs requis.";
                 }
                 break;
               default:
                 if (players.length < 2) {
                   canStart = false;
-                  playerRequirementMessage = "Au moins 2 joueurs sont requis.";
+                  requirementMessage = "Au moins 2 joueurs requis.";
                 }
                 break;
             }
@@ -18356,33 +18312,39 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Card(
+                    color: Colors.deepPurple[950]?.withOpacity(0.3),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: const BorderSide(color: Colors.deepPurpleAccent, width: 1),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: [
-                          Text(
-                            "CODE DE LA PARTIE",
-                            style: Theme.of(context).textTheme.bodyMedium,
+                          const Text(
+                            "PARTAGEZ CE CODE AVEC VOS AMIS",
+                            style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SelectableText(
                                 gameCode,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(fontSize: 40, letterSpacing: 6),
+                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                  fontSize: 36,
+                                  letterSpacing: 4,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.amberAccent,
+                                ),
                               ),
+                              const SizedBox(width: 12),
                               IconButton(
-                                icon: Icon(Icons.copy),
+                                icon: const Icon(Icons.copy, color: Colors.amberAccent),
                                 onPressed: () {
-                                  Clipboard.setData(
-                                    ClipboardData(text: gameCode),
-                                  );
+                                  Clipboard.setData(ClipboardData(text: gameCode));
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("Code copiÃƒÂ© !")),
+                                    const SnackBar(content: Text("Code de salon copié !")),
                                   );
                                 },
                               ),
@@ -18392,92 +18354,70 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
-                  if (gameType == 'Petit Bac') ...[
-                    Text(
-                      "CatÃƒÂ©gories choisies par l'hÃƒÂ´te :",
-                      style: Theme.of(context).textTheme.titleLarge,
+                  const SizedBox(height: 20),
+                  Card(
+                    child: ListTile(
+                      leading: const Icon(Icons.games, color: Colors.cyanAccent),
+                      title: Text("Jeu : $gameType", style: const TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text("Difficulté : ${gameData['difficulty'] ?? 'Standard'}"),
                     ),
-                    SizedBox(height: 10),
-                    Wrap(
-                      spacing: 8.0,
-                      runSpacing: 4.0,
-                      alignment: WrapAlignment.center,
-                      children:
-                          List<String>.from(
-                                gameData['petitBacCategories'] ??
-                                    GameData.petitBacDefaultCategories,
-                              )
-                              .map(
-                                (category) => Chip(
-                                  label: Text(category),
-                                  backgroundColor: Colors.deepPurple[900],
-                                ),
-                              )
-                              .toList(),
-                    ),
-                    SizedBox(height: 20),
-                  ],
+                  ),
+                  const SizedBox(height: 20),
                   Text(
-                    "Joueurs connectÃƒÂ©s (${players.length})",
+                    "Joueurs présents (${players.length})",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  SizedBox(height: 10),
-                  ListView(
+                  const SizedBox(height: 10),
+                  ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    children:
-                        players.entries.map((entry) {
-                          var player = entry.value;
-                          bool isPlayerHost = entry.key == gameData['hostId'];
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: players.length,
+                    itemBuilder: (context, idx) {
+                      String pId = players.keys.elementAt(idx);
+                      var pData = players[pId];
+                      bool isPlayerHost = pId == gameData['hostId'];
 
-                          Color? teamColor;
-                          int? teamIndex;
-                          for (var teamEntry in teams.entries) {
-                            if (teamEntry.value.contains(entry.key)) {
-                              teamIndex = teamEntry.key;
-                              break;
-                            }
-                          }
+                      Color? teamColor;
+                      int? teamIndex;
+                      for (var teamEntry in teams.entries) {
+                        if (teamEntry.value.contains(pId)) {
+                          teamIndex = teamEntry.key;
+                          break;
+                        }
+                      }
 
-                          if (teamIndex != null) {
-                            const List<Color> teamColors = [
-                              Colors.redAccent,
-                              Colors.blueAccent,
-                              Colors.greenAccent,
-                              Colors.orangeAccent,
-                              Colors.purpleAccent,
-                              Colors.cyanAccent,
-                            ];
-                            teamColor = teamColors[teamIndex %
-                                    teamColors.length]
-                                .withOpacity(0.3);
-                          }
+                      if (teamIndex != null) {
+                        const List<Color> teamColors = [
+                          Colors.redAccent,
+                          Colors.blueAccent,
+                          Colors.greenAccent,
+                          Colors.orangeAccent,
+                        ];
+                        teamColor = teamColors[teamIndex % teamColors.length].withOpacity(0.15);
+                      }
 
-                          return Card(
-                            color: teamColor,
-                            child: ListTile(
-                              leading: Icon(
-                                isPlayerHost
-                                    ? Icons.verified_user
-                                    : Icons.person,
-                              ),
-                              title: Text(
-                                player['name'] ?? 'Nom inconnu',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              trailing: Text("${player['score'] ?? 0} pts"),
-                            ),
-                          );
-                        }).toList(),
+                      return Card(
+                        color: teamColor,
+                        child: ListTile(
+                          leading: Icon(
+                            isPlayerHost ? Icons.admin_panel_settings : Icons.person,
+                            color: isPlayerHost ? Colors.amber : Colors.white70,
+                          ),
+                          title: Text(pData['name'] ?? 'Joueur', style: const TextStyle(fontWeight: FontWeight.bold)),
+                          trailing: const Chip(
+                            label: Text("Prêt"),
+                            backgroundColor: Colors.green,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                  SizedBox(height: 20),
-                  if (isHost)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: OutlinedButton.icon(
-                        icon: Icon(Icons.person_add),
-                        label: Text("Inviter des amis"),
+                  const SizedBox(height: 24),
+                  if (isHost) ...[
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.person_add),
+                      label: const Text("Inviter mes Amis"),
+
                         onPressed: () {
                           // Ouvre le bottom sheet pour inviter
                           showModalBottomSheet(
@@ -18555,7 +18495,8 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                           );
                         },
                       ),
-                    ),
+                  ],
+
                   if (isHost && isTeamGame)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
@@ -18598,7 +18539,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Text(
-                        playerRequirementMessage,
+                        requirementMessage,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.amber),
                       ),
@@ -18689,14 +18630,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   _zeroPointeAction; // Valeurs possibles: 'take_discard', 'use_drawn', 'discard_drawn', null
   // DANS _MultiplayerGameScreenState
 
-  // --- BATAILLE NAVALE ---
-  String? _selectedBattleshipShip;
-  bool _isBattleshipHorizontal = true;
-  int? _battleshipPreviewIndex;
-
   // --- BLOKUS ---
   int? _selectedBlokusPieceId;
   int _blokusRotation = 0;
+  bool _blokusFlipped = false; // NOUVEAU
+  Offset? _blokusPreviewPosition;
+  bool _blokusCanPlace = false;
+  int? _blokusStartRow;
+  int? _blokusStartCol;
+  final GlobalKey _canvasKey = GlobalKey();
+
+  // --- BATAILLE NAVALE ---
+  String? _pendingShipType;
+  int? _pendingShipRow;
+  int? _pendingShipCol;
+  bool _pendingShipHorizontal = true;
+
+  // AJOUTS POUR LE SURVOL DU BATEAU :
+  String? _hoveredShipType;
+  int? _hoveredRow;
+  int? _hoveredCol;
 
   // ... autres variables existantes ...
 
@@ -19040,7 +18993,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         currentPhase == 'turn_result' ||
         roundState == 'round_end') {
       turnDuration = resultTimerDuration;
-      if (gameType == 'InfiltrÃƒÂ© & Mr. White') {
+      if (gameType == 'Infiltré & Mr. White') {
         timeoutAction =
             () => _firebaseService.processEliminationsAndCheckWin(
               widget.gameCode,
@@ -19059,7 +19012,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     // 3. Cas SpÃƒÂ©cifique : Synonyme ou Banni (Phase de rÃƒÂ©ponse)
     else if ((roundState == 'answering' || roundState == 'playing') &&
         (gameType == 'Le Juge' ||
-            gameType == 'Le Roi des MÃƒÂ¨mes' ||
+            gameType == 'Le Roi des Mèmes' ||
             gameType == 'Synonyme ou Banni')) {
       turnDuration = turnTimerDuration;
       timeoutAction =
@@ -19074,7 +19027,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               () =>
                   _firebaseService.handlePhotoRouletteTimeout(widget.gameCode);
           break;
-        case 'Devine TÃƒÂªte':
+        case 'Devine Tête':
           if (roundState == 'playing_turn') {
             turnDuration = Duration(seconds: 60);
             timeoutAction =
@@ -19108,7 +19061,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 () => _firebaseService.handleTurnTimeout(widget.gameCode);
           }
           break;
-        case 'ZÃƒÂ©ro PointÃƒÂ©':
+        case 'Zéro Pointé':
           timeoutAction =
               () => _firebaseService.handleZeroPointeTimeout(widget.gameCode);
           break;
@@ -19146,7 +19099,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           timeoutAction =
               () => _firebaseService.handleTurnTimeout(widget.gameCode);
           break;
-        case 'InfiltrÃƒÂ© & Mr. White':
+        case 'Infiltré & Mr. White':
           if (currentPhase == 'clue_giving') {
             turnDuration = Duration(
               seconds: (gameData['turnTimerSeconds'] as int?) ?? 30,
@@ -20465,7 +20418,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               currentRoundState,
             );
           } else if (gameType == 'La Patate Chaude' ||
-              gameType == 'Le Jeu des CatÃƒÂ©gories') {
+              gameType == 'Le Jeu des Catégories') {
             _firebaseService.handleHotPotatoTimeout(gameCode);
           }
         }
@@ -20722,7 +20675,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   );
                 }
 
-                bool isDevineTete = gameData['gameType'] == 'Devine TÃƒÂªte';
+                bool isDevineTete = gameData['gameType'] == 'Devine Tête';
                 bool isDevineTeteGuesser =
                     isDevineTete &&
                     gameData['currentGuesserId'] == widget.playerId;
@@ -21062,9 +21015,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     // Liste des jeux oÃƒÂ¹ voir la main adverse est pertinent
     bool canViewHands = [
-      'PrÃƒÂ©sident',
+      'Président',
       'Uno',
-      'ZÃƒÂ©ro PointÃƒÂ©',
+      'Zéro Pointé',
       'Poker',
     ].contains(gameType);
 
@@ -21074,8 +21027,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           (a, b) => (b.value['score'] ?? 0).compareTo(a.value['score'] ?? 0),
         );
 
-    // Pour ZÃƒÂ©ro PointÃƒÂ©, on trie par score total croissant (le plus bas gagne)
-    if (gameType == 'ZÃƒÂ©ro PointÃƒÂ©') {
+    // Pour Zéro Pointé, on trie par score total croissant (le plus bas gagne)
+    if (gameType == 'Zéro Pointé') {
       sortedPlayers.sort((a, b) {
         int scoreA = (gameData['totalScores']?[a.key] ?? 0);
         int scoreB = (gameData['totalScores']?[b.key] ?? 0);
@@ -21109,11 +21062,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         (gameData['unoPlayerHands']?[pId] as List?)?.length ??
                         0;
                     extraInfo = " ($count Ã°Å¸Å½Â´)";
-                  } else if (gameType == 'PrÃƒÂ©sident') {
+                  } else if (gameType == 'Président') {
                     int count =
                         (gameData['playerHands']?[pId] as List?)?.length ?? 0;
                     extraInfo = " ($count Ã°Å¸Å½Â´)";
-                  } else if (gameType == 'ZÃƒÂ©ro PointÃƒÂ©') {
+                  } else if (gameType == 'Zéro Pointé') {
                     int totalScore = (gameData['totalScores']?[pId] ?? 0);
                     pScore = totalScore;
                     extraInfo = "";
@@ -21224,7 +21177,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     switch (gameType) {
-      case 'PrÃƒÂ©sident':
+      case 'Président':
         final hand = List<String>.from(
           gameData['playerHands']?[opponentId] ?? [],
         );
@@ -21277,7 +21230,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           children: hand.map((_) => buildFaceDownCard()).toList(),
         );
 
-      case 'ZÃƒÂ©ro PointÃƒÂ©':
+      case 'Zéro Pointé':
         return buildZeroPointeOpponentGrid();
 
       default:
@@ -23317,11 +23270,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return _buildYamsUI(context, gameData, playerId);
       case 'Devine TÃªte':
         return _buildDevineTeteMultiUI(context, gameData, playerId);
-      case 'InfiltrÃ© & Mr. White':
+      case 'Infiltré & Mr. White':
         return _buildUndercoverGameUI(context, gameData, playerId);
       case 'Photo Roulette':
         return _buildPhotoRouletteUI(context, gameData, playerId);
-      case 'ZÃ©ro PointÃ©':
+      case 'Zéro Pointé':
         return _buildZeroPointeUI(context, gameData, playerId);
       case 'Gribouillis':
         return _buildGribouillisUI(context, gameData, playerId);
@@ -23339,7 +23292,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return _buildTimesUpUI(context, gameData, playerId);
       case 'Petit Bac':
         return _buildPetitBacUI(context, gameData, playerId);
-      case 'PrÃ©sident':
+      case 'Président':
         return _buildPresidentUI(context, gameData, playerId);
       case 'Skull':
         return _buildSkullUI(context, gameData, playerId);
@@ -23348,7 +23301,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'Just One':
         return _buildJustOneUI(context, gameData, playerId);
       case 'La Patate Chaude':
-      case 'Le Jeu des CatÃ©gories':
+      case 'Le Jeu des Catégories':
         return _buildHotPotatoUI(context, gameData, playerId);
       case 'Loup-Garou':
         return _buildLoupGarouUI(context, gameData, playerId);
@@ -23358,7 +23311,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'Synonyme ou Banni':
       case 'Le Juge':
       case 'Le Menteur':
-      case 'Le Roi des MÃªmes':
+      case 'Le Roi des Mêmes':
         return _getWidgetForRoundState(context, gameData, playerId);
       default:
         return Center(child: Text("Jeu non implÃ©mentÃ© : $rawGameType"));
@@ -24240,23 +24193,30 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final myGrid = List<int>.from(myData['myGrid'] ?? List.filled(100, 0));
     final bool isReady = myData['isReady'] ?? false;
     final bool allShipsPlaced =
-        shipsPlaced.length == GameData.batailleNavaleShips.length;
+        shipsPlaced.length == GameData.batailleNavaleShips.length &&
+        _pendingShipType == null;
 
-    // RÃ©cupÃ©rer les bateaux non placÃ©s
     List<String> unplacedShips =
         GameData.batailleNavaleShips.keys
-            .where((ship) => !shipsPlaced.containsKey(ship))
+            .where(
+              (ship) =>
+                  !shipsPlaced.containsKey(ship) && ship != _pendingShipType,
+            )
             .toList();
 
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(8),
-          color: Colors.black45,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Calcul de la taille de la grille et des cellules pour tout l'écran
+        double estimatedGridHeight = constraints.maxHeight * 0.55;
+        double boardSize = min(constraints.maxWidth, estimatedGridHeight);
+        double cellSize = boardSize / 10;
+
+        return Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8),
+              color: Colors.black45,
+              child: Text(
                 "Placez votre flotte !",
                 style: TextStyle(
                   color: Colors.cyanAccent,
@@ -24264,51 +24224,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   fontSize: 18,
                 ),
               ),
-              Row(
-                children: [
-                  Text(
-                    "Orientation : ",
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      _isBattleshipHorizontal
-                          ? Icons.swap_horiz
-                          : Icons.swap_vert,
-                      color: Colors.amber,
-                    ),
-                    onPressed:
-                        isReady
-                            ? null
-                            : () => setState(
-                              () =>
-                                  _isBattleshipHorizontal =
-                                      !_isBattleshipHorizontal,
-                            ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+            ),
 
-        // GRILLE DRAG & DROP
-        Expanded(
-          flex: 5,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              double boardSize = min(
-                constraints.maxWidth,
-                constraints.maxHeight,
-              );
-              double cellSize = boardSize / 10;
-              return Center(
+            // GRILLE
+            Expanded(
+              flex: 5,
+              child: Center(
                 child: SizedBox(
                   width: boardSize,
                   height: boardSize,
                   child: Stack(
                     children: [
-                      // Le fond de la grille (l'eau)
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.blue[900],
@@ -24325,79 +24251,92 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               ),
                           itemCount: 100,
                           itemBuilder: (ctx, idx) {
+                            int r = idx ~/ 10;
+                            int c = idx % 10;
+
                             return DragTarget<String>(
                               builder: (context, candidateData, rejectedData) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.white24,
-                                      width: 0.5,
+                                return GestureDetector(
+                                  onTap: () {
+                                    if (!isReady && _pendingShipType != null) {
+                                      setState(() {
+                                        _pendingShipRow = r;
+                                        _pendingShipCol = c;
+                                      });
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.white24,
+                                        width: 0.5,
+                                      ),
+                                      color:
+                                          candidateData.isNotEmpty
+                                              ? Colors.white.withOpacity(0.1)
+                                              : Colors.transparent,
                                     ),
-                                    color:
-                                        candidateData.isNotEmpty
-                                            ? Colors.white.withOpacity(0.3)
-                                            : Colors.transparent,
                                   ),
                                 );
                               },
+                              onWillAccept: (shipType) {
+                                if (isReady) return false;
+                                setState(() {
+                                  _hoveredShipType = shipType;
+                                  _hoveredRow = r;
+                                  _hoveredCol = c;
+                                });
+                                return true;
+                              },
+                              onLeave: (shipType) {
+                                setState(() {
+                                  if (_hoveredRow == r && _hoveredCol == c) {
+                                    _hoveredShipType = null;
+                                    _hoveredRow = null;
+                                    _hoveredCol = null;
+                                  }
+                                });
+                              },
                               onAccept: (shipType) {
                                 if (isReady) return;
-                                _firebaseService
-                                    .placeShipBatailleNavale(
-                                      widget.gameCode,
-                                      playerId,
-                                      shipType,
-                                      idx,
-                                      _isBattleshipHorizontal,
-                                    )
-                                    .catchError((e) {
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(
-                                          content: Text("Placement invalide"),
-                                        ),
-                                      );
-                                    });
+                                setState(() {
+                                  _pendingShipType = shipType;
+                                  _pendingShipRow = r;
+                                  _pendingShipCol = c;
+                                  _hoveredShipType = null;
+                                  _hoveredRow = null;
+                                  _hoveredCol = null;
+                                });
                               },
                             );
                           },
                         ),
                       ),
 
-                      // Les bateaux dÃ©jÃ  placÃ©s
+                      // Bateaux déjà placés sur la grille (Rendus Draggables)
                       ...shipsPlaced.entries.map((entry) {
                         String shipType = entry.key;
                         Map<String, dynamic> placedData =
                             Map<String, dynamic>.from(entry.value);
-                        int startIndex = placedData['startIndex'];
                         bool isHoriz = placedData['isHorizontal'];
                         var shipInfo = GameData.batailleNavaleShips[shipType]!;
+                        int startRow = placedData['startIndex'] ~/ 10;
+                        int startCol = placedData['startIndex'] % 10;
 
-                        int startRow = startIndex ~/ 10;
-                        int startCol = startIndex % 10;
-                        int widthCols =
-                            isHoriz ? shipInfo['length'] : shipInfo['width'];
-                        int heightRows =
-                            isHoriz ? shipInfo['width'] : shipInfo['length'];
+                        double width =
+                            (isHoriz ? shipInfo['length'] : shipInfo['width']) *
+                            cellSize;
+                        double height =
+                            (isHoriz ? shipInfo['width'] : shipInfo['length']) *
+                            cellSize;
 
-                        return Positioned(
-                          left: startCol * cellSize,
-                          top: startRow * cellSize,
-                          width: widthCols * cellSize,
-                          height: heightRows * cellSize,
-                          child: GestureDetector(
-                            onTap:
-                                isReady
-                                    ? null
-                                    : () => _firebaseService
-                                        .removeShipBatailleNavale(
-                                          widget.gameCode,
-                                          playerId,
-                                          shipType,
-                                        ),
+                        // Widget de retour visuel qui suit le doigt
+                        Widget feedbackWidget = Opacity(
+                          opacity: 0.8,
+                          child: SizedBox(
+                            width: width,
+                            height: height,
                             child: RotatedBox(
-                              // L'image originale est verticale (ex: 606x2400). On tourne si c'est horizontal.
                               quarterTurns: isHoriz ? 3 : 0,
                               child: Image.asset(
                                 'assets/images/${shipInfo['image']}',
@@ -24406,118 +24345,383 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                           ),
                         );
-                      }).toList(),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
 
-        // QUAI (Bateaux restants)
-        Expanded(
-          flex: 2,
-          child: Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
-            child:
-                unplacedShips.isEmpty
-                    ? Center(
-                      child: Text(
-                        "Flotte dÃ©ployÃ©e !",
-                        style: TextStyle(
-                          color: Colors.greenAccent,
-                          fontSize: 18,
-                        ),
-                      ),
-                    )
-                    : ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: unplacedShips.length,
-                      itemBuilder: (context, index) {
-                        String shipType = unplacedShips[index];
-                        var shipInfo = GameData.batailleNavaleShips[shipType]!;
-
-                        // Miniature pour le dock
-                        Widget shipWidget = RotatedBox(
-                          quarterTurns: _isBattleshipHorizontal ? 3 : 0,
-                          child: Image.asset(
-                            'assets/images/${shipInfo['image']}',
-                          ),
-                        );
-
-                        return Draggable<String>(
-                          data: shipType,
-                          feedback: Transform.scale(
-                            scale: 1.2,
-                            child: Opacity(opacity: 0.8, child: shipWidget),
-                          ),
-                          childWhenDragging: Opacity(
-                            opacity: 0.3,
-                            child: shipWidget,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: _isBattleshipHorizontal ? 40 : 80,
-                                  width: _isBattleshipHorizontal ? 80 : 40,
-                                  child: shipWidget,
+                        return Positioned(
+                          left: startCol * cellSize,
+                          top: startRow * cellSize,
+                          width: width,
+                          height: height,
+                          child: Draggable<String>(
+                            data: shipType,
+                            feedback: feedbackWidget,
+                            childWhenDragging:
+                                SizedBox.shrink(), // Cache le bateau à son ancienne position pendant le drag
+                            onDragStarted: () {
+                              _firebaseService.removeShipBatailleNavale(
+                                widget.gameCode,
+                                playerId,
+                                shipType,
+                              );
+                              setState(() {
+                                _pendingShipType = shipType;
+                                _pendingShipHorizontal = isHoriz;
+                                _pendingShipRow = startRow;
+                                _pendingShipCol = startCol;
+                              });
+                            },
+                            child: GestureDetector(
+                              onTap:
+                                  isReady
+                                      ? null
+                                      : () {
+                                        _firebaseService
+                                            .removeShipBatailleNavale(
+                                              widget.gameCode,
+                                              playerId,
+                                              shipType,
+                                            );
+                                        setState(() {
+                                          _pendingShipType = shipType;
+                                          _pendingShipRow = startRow;
+                                          _pendingShipCol = startCol;
+                                          _pendingShipHorizontal = isHoriz;
+                                        });
+                                      },
+                              child: RotatedBox(
+                                quarterTurns: isHoriz ? 3 : 0,
+                                child: Image.asset(
+                                  'assets/images/${shipInfo['image']}',
+                                  fit: BoxFit.fill,
                                 ),
-                                SizedBox(height: 5),
-                                Text(shipType, style: TextStyle(fontSize: 10)),
-                              ],
+                              ),
                             ),
                           ),
                         );
-                      },
-                    ),
-          ),
-        ),
+                      }).toList(),
 
-        // BOUTONS D'ACTION
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton.icon(
-                icon: Icon(Icons.casino),
-                label: Text("AlÃ©atoire"),
-                onPressed:
-                    isReady
-                        ? null
-                        : () => _firebaseService.randomizeShipsBatailleNavale(
-                          widget.gameCode,
-                          playerId,
+                      // Prévisualisation lors du survol (Translucide, même échelle que le bateau posé)
+                      if (_hoveredShipType != null &&
+                          _hoveredRow != null &&
+                          _hoveredCol != null)
+                        Builder(
+                          builder: (ctx) {
+                            var shipInfo =
+                                GameData
+                                    .batailleNavaleShips[_hoveredShipType!]!;
+                            bool isHoriz = _pendingShipHorizontal;
+                            int widthCols =
+                                isHoriz
+                                    ? shipInfo['length']
+                                    : shipInfo['width'];
+                            int heightRows =
+                                isHoriz
+                                    ? shipInfo['width']
+                                    : shipInfo['length'];
+                            return Positioned(
+                              left: _hoveredCol! * cellSize,
+                              top: _hoveredRow! * cellSize,
+                              width: widthCols * cellSize,
+                              height: heightRows * cellSize,
+                              child: IgnorePointer(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.cyanAccent,
+                                      width: 3,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.cyanAccent.withOpacity(
+                                          0.5,
+                                        ),
+                                        blurRadius: 10,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Opacity(
+                                    opacity: 0.5,
+                                    child: RotatedBox(
+                                      quarterTurns: isHoriz ? 3 : 0,
+                                      child: Image.asset(
+                                        'assets/images/${shipInfo['image']}',
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+
+                      // Bateau sélectionné prêt à être validé (Contour vert)
+                      if (_pendingShipType != null &&
+                          _pendingShipRow != null &&
+                          _pendingShipCol != null)
+                        Builder(
+                          builder: (ctx) {
+                            var shipInfo =
+                                GameData
+                                    .batailleNavaleShips[_pendingShipType!]!;
+                            int widthCols =
+                                _pendingShipHorizontal
+                                    ? shipInfo['length']
+                                    : shipInfo['width'];
+                            int heightRows =
+                                _pendingShipHorizontal
+                                    ? shipInfo['width']
+                                    : shipInfo['length'];
+                            return Positioned(
+                              left: _pendingShipCol! * cellSize,
+                              top: _pendingShipRow! * cellSize,
+                              width: widthCols * cellSize,
+                              height: heightRows * cellSize,
+                              child: IgnorePointer(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.greenAccent,
+                                      width: 3,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.greenAccent,
+                                        blurRadius: 10,
+                                      ),
+                                    ],
+                                  ),
+                                  child: RotatedBox(
+                                    quarterTurns:
+                                        _pendingShipHorizontal ? 3 : 0,
+                                    child: Image.asset(
+                                      'assets/images/${shipInfo['image']}',
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            // QUAI (Bateaux restants)
+            Expanded(
+              flex: 2,
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
+                child:
+                    unplacedShips.isEmpty && _pendingShipType == null
+                        ? Center(
+                          child: Text(
+                            "Flotte déployée !",
+                            style: TextStyle(
+                              color: Colors.greenAccent,
+                              fontSize: 18,
+                            ),
+                          ),
+                        )
+                        : ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: unplacedShips.length,
+                          itemBuilder: (context, index) {
+                            String shipType = unplacedShips[index];
+                            var shipInfo =
+                                GameData.batailleNavaleShips[shipType]!;
+                            Widget shipWidget = RotatedBox(
+                              quarterTurns: 3,
+                              child: Image.asset(
+                                'assets/images/${shipInfo['image']}',
+                              ),
+                            );
+
+                            bool isHoriz = _pendingShipHorizontal;
+                            double dragWidth =
+                                (isHoriz
+                                    ? shipInfo['length']
+                                    : shipInfo['width']) *
+                                cellSize;
+                            double dragHeight =
+                                (isHoriz
+                                    ? shipInfo['width']
+                                    : shipInfo['length']) *
+                                cellSize;
+
+                            return Draggable<String>(
+                              data: shipType,
+                              feedback: Opacity(
+                                opacity: 0.8,
+                                child: SizedBox(
+                                  width: dragWidth,
+                                  height: dragHeight,
+                                  child: RotatedBox(
+                                    quarterTurns: isHoriz ? 3 : 0,
+                                    child: Image.asset(
+                                      'assets/images/${shipInfo['image']}',
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              childWhenDragging: Opacity(
+                                opacity: 0.3,
+                                child: SizedBox(
+                                  width: 80,
+                                  height: 40,
+                                  child: shipWidget,
+                                ),
+                              ),
+                              onDragStarted: () {
+                                setState(() => _pendingShipHorizontal = true);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 40,
+                                      width: 80,
+                                      child: shipWidget,
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      shipType,
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         ),
               ),
-              ElevatedButton.icon(
-                icon: Icon(isReady ? Icons.check : Icons.play_arrow),
-                label: Text(isReady ? "PrÃªt !" : "PRÃŠT"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      isReady
-                          ? Colors.green
-                          : (allShipsPlaced ? Colors.deepPurple : Colors.grey),
-                ),
-                onPressed:
-                    (!allShipsPlaced || isReady)
-                        ? null
-                        : () {
-                          _firebaseService.setPlayerReadyBatailleNavale(
-                            widget.gameCode,
-                            playerId,
-                          );
-                        },
+            ),
+
+            // BOUTONS D'ACTION
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  if (_pendingShipType != null) ...[
+                    ElevatedButton.icon(
+                      icon: Icon(Icons.rotate_right),
+                      label: Text("Tourner"),
+                      onPressed:
+                          () => setState(
+                            () =>
+                                _pendingShipHorizontal =
+                                    !_pendingShipHorizontal,
+                          ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                      ),
+                    ),
+                    ElevatedButton.icon(
+                      icon:
+                          _isActionPending
+                              ? SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                              : Icon(Icons.check),
+                      label: Text("Valider"),
+                      onPressed:
+                          _isActionPending
+                              ? null
+                              : () {
+                                setState(() => _isActionPending = true);
+                                int idx =
+                                    (_pendingShipRow! * 10) + _pendingShipCol!;
+                                _firebaseService
+                                    .placeShipBatailleNavale(
+                                      widget.gameCode,
+                                      playerId,
+                                      _pendingShipType!,
+                                      idx,
+                                      _pendingShipHorizontal,
+                                    )
+                                    .then((_) {
+                                      if (mounted) {
+                                        setState(() {
+                                          _pendingShipType = null;
+                                          _isActionPending = false;
+                                        });
+                                      }
+                                    })
+                                    .catchError((e) {
+                                      if (mounted) {
+                                        setState(
+                                          () => _isActionPending = false,
+                                        );
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              "Placement invalide (chevauchement ou hors grille) !",
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    });
+                              },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                      ),
+                    ),
+                  ] else ...[
+                    ElevatedButton.icon(
+                      icon: Icon(Icons.casino),
+                      label: Text("Aléatoire"),
+                      onPressed:
+                          isReady
+                              ? null
+                              : () =>
+                                  _firebaseService.randomizeShipsBatailleNavale(
+                                    widget.gameCode,
+                                    playerId,
+                                  ),
+                    ),
+                    ElevatedButton.icon(
+                      icon: Icon(isReady ? Icons.check : Icons.play_arrow),
+                      label: Text(isReady ? "Prêt !" : "PRÊT"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            isReady
+                                ? Colors.green
+                                : (allShipsPlaced
+                                    ? Colors.deepPurple
+                                    : Colors.grey),
+                      ),
+                      onPressed:
+                          (!allShipsPlaced || isReady)
+                              ? null
+                              : () =>
+                                  _firebaseService.setPlayerReadyBatailleNavale(
+                                    widget.gameCode,
+                                    playerId,
+                                  ),
+                    ),
+                  ],
+                ],
               ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -26277,173 +26481,157 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     int cardsLeftInDeck,
     int myScore,
   ) {
-    // On enveloppe tout le contenu dans un Stack pour pouvoir afficher l'ÃƒÂ©cran de pÃƒÂ©nalitÃƒÂ© par-dessus
     return Stack(
       children: [
-        // --- LE JEU NORMAL ---
         Column(
           children: [
-            // ZONE DU HAUT : PIOCHE & OBJECTIF
+            // SCORES ADVERSAIRES
+            Container(
+              height: 40,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children:
+                    players.entries
+                        .where((e) => e.key != playerId)
+                        .map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4.0,
+                            ),
+                            child: Chip(
+                              backgroundColor: Colors.black.withOpacity(0.45),
+                              label: Text(
+                                "${e.value['name']}: ${e.value['score'] ?? 0} 🃏",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+              ),
+            ),
+
+            // PIOCHE & CARTE CENTRALE COTE A COTE
             Expanded(
               flex: 4,
-              child: Stack(
-                alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // A. LA PIOCHE (DÃƒÂ©calÃƒÂ©e ÃƒÂ  gauche)
-                  Positioned(
-                    left: 20,
+                  // A. LA PIOCHE
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        height: 70,
+                        width: 70,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            if (cardsLeftInDeck > 2)
+                              Positioned(
+                                top: 0,
+                                child: CircleAvatar(
+                                  radius: 32,
+                                  backgroundColor: Colors.grey[800],
+                                ),
+                              ),
+                            if (cardsLeftInDeck > 1)
+                              Positioned(
+                                top: 4,
+                                child: CircleAvatar(
+                                  radius: 32,
+                                  backgroundColor: Colors.grey[700],
+                                ),
+                              ),
+                            Positioned(
+                              top: 8,
+                              child: Container(
+                                width: 62,
+                                height: 62,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.deepPurple,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black45,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                  border: Border.all(
+                                    color: Colors.white24,
+                                    width: 2,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "$cardsLeftInDeck",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "cartes",
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 8,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        "PIOCHE",
+                        style: TextStyle(
+                          color: Colors.white38,
+                          fontSize: 10,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // B. LA CARTE CENTRALE
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
-                          height: 70,
-                          width: 70,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              if (cardsLeftInDeck > 2)
-                                Positioned(
-                                  top: 0,
-                                  child: CircleAvatar(
-                                    radius: 32,
-                                    backgroundColor: Colors.grey[800],
-                                  ),
-                                ),
-                              if (cardsLeftInDeck > 1)
-                                Positioned(
-                                  top: 4,
-                                  child: CircleAvatar(
-                                    radius: 32,
-                                    backgroundColor: Colors.grey[700],
-                                  ),
-                                ),
-                              Positioned(
-                                top: 8,
-                                child: Container(
-                                  width: 62,
-                                  height: 62,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.deepPurple,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black45,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 3),
-                                      ),
-                                    ],
-                                    border: Border.all(
-                                      color: Colors.white24,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "$cardsLeftInDeck",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      Text(
-                                        "cartes",
-                                        style: TextStyle(
-                                          color: Colors.white70,
-                                          fontSize: 8,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        _buildDobbleCardWidget(
+                          centerCard,
+                          (s) {},
+                          isLarge: true,
+                          isInteractable: false,
                         ),
-                        SizedBox(height: 4),
+                        SizedBox(height: 8),
                         Text(
-                          "PIOCHE",
+                          "OBJECTIF",
                           style: TextStyle(
-                            color: Colors.white38,
-                            fontSize: 10,
-                            letterSpacing: 1.2,
+                            color: Colors.white70,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2,
                           ),
                         ),
                       ],
                     ),
                   ),
+                ],
+              ),
+            ),
 
-                  // B. LA CARTE CENTRALE (Objectif)
-                  Center(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Carte non-interactive
-                          _buildDobbleCardWidget(
-                            centerCard,
-                            (s) {},
-                            isLarge: true,
-                            isInteractable: false,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            "OBJECTIF",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  // C. SCORES DES ADVERSAIRES (positionnÃƒÂ©s ÃƒÂ  droite)
-                  Positioned(
-                    right: 8,
-                    top: 0,
-                    bottom: 0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children:
-                          players.entries
-                              .where((e) => e.key != playerId)
-                              .map(
-                                (e) => Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 2.0,
-                                  ),
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 3,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.45),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Text(
-                                      "${e.value['name']}: ${e.value['score'] ?? 0} Ã°Å¸Æ’Â",
-                                      style: TextStyle(
-                                        color: Colors.white70,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                    ),
-                  ),
-                ], // end Stack children
-              ), // end Stack
-            ), // end Expanded flex:4
-            // ZONE DU BAS : JOUEUR
+            // MAIN DU JOUEUR
             Expanded(
               flex: 5,
               child: Container(
@@ -26459,7 +26647,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Info
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -26479,14 +26666,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                       ],
                     ),
-
-                    // Carte du joueur
                     Expanded(
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
-                          // Si bloquÃƒÂ©, on dÃƒÂ©sactive l'interactivitÃƒÂ© visuellement
                           child: Opacity(
                             opacity: _isDobbleBlocked ? 0.3 : 1.0,
                             child: _buildDobbleCardWidget(
@@ -26499,8 +26683,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                       ),
                     ),
-
-                    // Score
                     Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 20,
@@ -26510,12 +26692,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.greenAccent.withOpacity(0.4),
-                            blurRadius: 10,
-                          ),
-                        ],
                       ),
                       child: Text(
                         "Mes Cartes : $myScore",
@@ -26532,12 +26708,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           ],
         ),
-
-        // --- OVERLAY DE PÃƒâ€°NALITÃƒâ€° (S'affiche si bloquÃƒÂ©) ---
         if (_isDobbleBlocked)
           Positioned.fill(
             child: Container(
-              color: Colors.black.withOpacity(0.7), // Fond sombre transparent
+              color: Colors.black.withOpacity(0.7),
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -26545,7 +26719,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     Icon(Icons.lock_clock, size: 80, color: Colors.redAccent),
                     SizedBox(height: 20),
                     Text(
-                      "BLOQUÃƒâ€° !",
+                      "BLOQUÉ !",
                       style: TextStyle(
                         color: Colors.redAccent,
                         fontSize: 40,
@@ -27122,7 +27296,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Widget? secretInfoWidget;
 
     // 2. Si c'est le jeu des mÃƒÂ¨mes, on prÃƒÂ©pare l'image
-    if (gameType == 'Le Roi des MÃƒÂ¨mes' && memeUrl != null) {
+    if (gameType == 'Le Roi des Mèmes' && memeUrl != null) {
       secretInfoWidget = Container(
         constraints: BoxConstraints(maxHeight: 300), // Limiter la hauteur
         margin: EdgeInsets.only(bottom: 10),
@@ -27699,7 +27873,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     final bool voteOnPlayers =
         (gameType == 'Qui Pourrait le Plus ?' ||
-            gameType == 'InfiltrÃƒÂ© & Mr. White' ||
+            gameType == 'Infiltré & Mr. White' ||
             gameType == 'Le Menteur');
 
     String mainTitle = gameData['currentQuestion'] ?? "Votez !";
@@ -27751,7 +27925,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           : () {
                             setState(() => _isActionPending = true);
                             Function submitFunc =
-                                (gameType == 'InfiltrÃƒÂ© & Mr. White')
+                                (gameType == 'Infiltré & Mr. White')
                                     ? _firebaseService.submitUndercoverVote
                                     : _firebaseService.submitVote;
 
@@ -28346,7 +28520,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         }
         break;
 
-      case 'InfiltrÃƒÂ© & Mr. White':
+      case 'Infiltré & Mr. White':
         final undercoverId = gameData['undercoverId'];
         final mrWhiteId = gameData['mrWhiteId'];
         final undercoverName = players[undercoverId]?['name'] ?? 'Inconnu';
@@ -28415,7 +28589,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         }
         break;
 
-      case 'Le Jeu des CatÃƒÂ©gories':
+      case 'Le Jeu des Catégories':
       case 'La Patate Chaude':
         final loserId = gameData['roundWinnerId'];
         if (loserId != null) {
@@ -28571,7 +28745,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         }
         break;
 
-      case 'Le Roi des MÃƒÂ¨mes':
+      case 'Le Roi des Mèmes':
         final winnerId = gameData['roundWinnerId'];
         if (winnerId != null) {
           final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
@@ -28689,7 +28863,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 setState(() => _isActionPending = false);
                             });
                       } else if (gameType == 'La Patate Chaude' ||
-                          gameType == 'Le Jeu des CatÃƒÂ©gories') {
+                          gameType == 'Le Jeu des Catégories') {
                         _firebaseService
                             .nextHotPotatoRound(widget.gameCode)
                             .whenComplete(() {
@@ -32476,7 +32650,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             : 1.0;
 
     final String gameType = gameData['gameType'] ?? '';
-    final bool isCategories = gameType == 'Le Jeu des CatÃƒÂ©gories';
+    final bool isCategories = gameType == 'Le Jeu des Catégories';
     final int currentRound = gameData['currentRound'] ?? 1;
 
     return Column(
@@ -32737,7 +32911,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         gameData['gameEndReason'] ?? "La patate a explosÃƒÂ© !";
     final isHost = gameData['hostId'] == playerId;
     final String gameType = gameData['gameType'] ?? '';
-    final bool isCategories = gameType == 'Le Jeu des CatÃƒÂ©gories';
+    final bool isCategories = gameType == 'Le Jeu des Catégories';
 
     if (_isHotPotatoMusicPlaying) {
       _hotPotatoPlayer?.stop();
@@ -36597,13 +36771,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
-  // Variables d'Ã©tat additionnelles pour Blokus
-  Offset? _blokusPreviewPosition; // Position de preview sur la grille
-  bool _blokusCanPlace = false;
-  int? _blokusStartRow;
-  int? _blokusStartCol;
-
   // NOUVELLE UI BLOKUS COMPLÃˆTE
+  // NOUVELLE UI BLOKUS COMPLÈTE
   Widget _buildBlokusUI(
     BuildContext context,
     Map<String, dynamic> gameData,
@@ -36619,7 +36788,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         playerOrder.isNotEmpty
             ? playerOrder[gameData['blokusCurrentPlayerIndex'] ?? 0]
             : '';
-    final isMyTurn = currentPlayerId == playerId;
+    final bool isMyTurn = currentPlayerId == playerId;
     final players = gameData['players'] as Map<String, dynamic>;
     final passedPlayers = List<String>.from(
       gameData['blokusPassedPlayers'] ?? [],
@@ -36627,7 +36796,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final isFirstPiece =
         !(gameData['blokusFirstPiecePlaced']?[playerId] ?? false);
 
-    // VÃ©rification fin de partie
     if (gameData['gameState'] == 'gameOver') {
       final scores = Map<String, int>.from(gameData['blokusScores'] ?? {});
       final sortedScores =
@@ -36642,7 +36810,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Icon(Icons.emoji_events, size: 60, color: Colors.amber),
                 SizedBox(height: 20),
                 Text(
-                  "Partie TerminÃ©e !",
+                  "Partie Terminée !",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(height: 20),
@@ -36682,321 +36850,471 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       }
     }
 
-    // CORRECTION : Grille officielle 20x20
     final double gridSize = 20;
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Calcul dynamique pour que le plateau remplisse la largeur
         final double boardPixelSize = constraints.maxWidth - 16;
         final double cellSize = boardPixelSize / gridSize;
 
-        return Column(
-          children: [
-            // Header avec info du tour
-            Container(
-              padding: EdgeInsets.all(12),
-              color:
-                  isMyTurn
-                      ? getColor(myColor).withOpacity(0.2)
-                      : Colors.transparent,
-              child: Column(
-                children: [
-                  Text(
-                    isMyTurn
-                        ? "C'est votre tour !"
-                        : "Au tour de ${players[currentPlayerId]?['name'] ?? '...'}",
-                    style: TextStyle(
-                      color: isMyTurn ? getColor(myColor) : Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+        // Le DragTarget englobe désormais TOUT l'écran (Column) au lieu de juste le plateau.
+        // Cela permet au doigt de descendre plus bas que le plateau sans que la pièce ne se bloque.
+        return DragTarget<int>(
+          onWillAcceptWithDetails: (details) => isMyTurn,
+          onAcceptWithDetails: (details) {
+            setState(() {
+              _selectedBlokusPieceId = details.data;
+              _checkBlokusPlacement(board, myColor, isFirstPiece);
+            });
+          },
+          onMove: (details) {
+            final RenderBox? renderBox =
+                _canvasKey.currentContext?.findRenderObject() as RenderBox?;
+            if (renderBox != null) {
+              // Convertit la position globale du doigt en position locale sur le plateau
+              final localOffset = renderBox.globalToLocal(details.offset);
+              final col = (localOffset.dx / cellSize).floor();
+              // - (cellSize * 2) décale exactement la pièce de 2 cases au-dessus du doigt
+              final row =
+                  ((localOffset.dy - (cellSize * 2)) / cellSize).floor();
+
+              if (_blokusStartRow != row || _blokusStartCol != col) {
+                setState(() {
+                  _selectedBlokusPieceId = details.data;
+                  _blokusStartRow = row;
+                  _blokusStartCol = col;
+                  _checkBlokusPlacement(board, myColor, isFirstPiece);
+                });
+              }
+            }
+          },
+          builder: (context, candidateData, rejectedData) {
+            return Column(
+              children: [
+                // --- EN-TÊTE AVEC LES ACTIONS DU TOUR ---
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color:
+                        isMyTurn
+                            ? getColor(myColor).withOpacity(0.15)
+                            : Colors.transparent,
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  if (isFirstPiece && isMyTurn)
-                    Text(
-                      "Placez votre premiÃ¨re piÃ¨ce dans votre coin !",
-                      style: TextStyle(
-                        color: Colors.amberAccent,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                ],
-              ),
-            ),
-
-            // GRILLE 20x20 INTERACTIVE
-            Expanded(
-              flex: 3,
-              child: Container(
-                margin: EdgeInsets.all(8),
-                width: boardPixelSize,
-                height: boardPixelSize,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white24, width: 2),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: GestureDetector(
-                  onPanDown:
-                      isMyTurn
-                          ? (details) {
-                            final col =
-                                (details.localPosition.dx / cellSize).floor();
-                            final row =
-                                (details.localPosition.dy / cellSize).floor();
-                            if (row >= 0 &&
-                                row < gridSize &&
-                                col >= 0 &&
-                                col < gridSize) {
-                              setState(() {
-                                _blokusStartRow = row;
-                                _blokusStartCol = col;
-                                _checkBlokusPlacement(
-                                  board,
-                                  myColor,
-                                  isFirstPiece,
-                                );
-                              });
-                            }
-                          }
-                          : null,
-                  onPanUpdate:
-                      isMyTurn
-                          ? (details) {
-                            final col =
-                                (details.localPosition.dx / cellSize).floor();
-                            final row =
-                                (details.localPosition.dy / cellSize).floor();
-                            if (row >= 0 &&
-                                row < gridSize &&
-                                col >= 0 &&
-                                col < gridSize) {
-                              setState(() {
-                                _blokusStartRow = row;
-                                _blokusStartCol = col;
-                                _checkBlokusPlacement(
-                                  board,
-                                  myColor,
-                                  isFirstPiece,
-                                );
-                              });
-                            }
-                          }
-                          : null,
-                  child: CustomPaint(
-                    size: Size(boardPixelSize, boardPixelSize),
-                    painter: _BlokusBoardPainter(
-                      board: board,
-                      gridSize: gridSize,
-                      cellSize: cellSize,
-                      previewPiece:
-                          _selectedBlokusPieceId != null &&
-                                  _blokusStartRow != null &&
-                                  _blokusStartCol != null
-                              ? GameData.getRotatedPiece(
-                                _selectedBlokusPieceId!,
-                                _blokusRotation,
-                              )
-                              : null,
-                      previewRow: _blokusStartRow,
-                      previewCol: _blokusStartCol,
-                      previewColor: getColor(myColor),
-                      canPlace: _blokusCanPlace,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // CONTRÃ”LES : Rotation + Valider
-            if (isMyTurn && _selectedBlokusPieceId != null)
-              Container(
-                padding: EdgeInsets.all(12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // Bouton Rotation
-                    ElevatedButton.icon(
-                      icon: Icon(Icons.rotate_right, size: 24),
-                      label: Text("Tourner"),
-                      onPressed: () {
-                        setState(() {
-                          _blokusRotation = (_blokusRotation + 1) % 4;
-                          _checkBlokusPlacement(board, myColor, isFirstPiece);
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 12,
-                        ),
-                      ),
-                    ),
-
-                    // Bouton Valider (activÃ© uniquement si placement valide)
-                    ElevatedButton.icon(
-                      icon: Icon(Icons.check_circle, size: 24),
-                      label: Text("Valider"),
-                      onPressed:
-                          _blokusCanPlace &&
-                                  _blokusStartRow != null &&
-                                  _blokusStartCol != null
-                              ? () async {
-                                try {
-                                  await _firebaseService.placeBlokusPiece(
-                                    widget.gameCode,
-                                    playerId,
-                                    _selectedBlokusPieceId!,
-                                    _blokusStartRow!,
-                                    _blokusStartCol!,
-                                    _blokusRotation,
-                                  );
-                                  setState(() {
-                                    _selectedBlokusPieceId = null;
-                                    _blokusRotation = 0;
-                                    _blokusStartRow = null;
-                                    _blokusStartCol = null;
-                                    _blokusCanPlace = false;
-                                  });
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        e.toString().replaceAll(
-                                          'Exception: ',
-                                          '',
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                              }
-                              : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            _blokusCanPlace ? Colors.green : Colors.grey,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 12,
-                        ),
-                      ),
-                    ),
-
-                    // Bouton Annuler
-                    ElevatedButton.icon(
-                      icon: Icon(Icons.cancel, size: 24),
-                      label: Text("Annuler"),
-                      onPressed: () {
-                        setState(() {
-                          _selectedBlokusPieceId = null;
-                          _blokusRotation = 0;
-                          _blokusStartRow = null;
-                          _blokusStartCol = null;
-                          _blokusCanPlace = false;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-            // MAIN DU JOUEUR (piÃ¨ces disponibles)
-            Container(
-              height: 120,
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    "Vos piÃ¨ces (${myHand.length})",
-                    style: TextStyle(color: Colors.white70, fontSize: 12),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: myHand.length,
-                      itemBuilder: (context, index) {
-                        int pieceId = myHand[index];
-                        bool isSelected = _selectedBlokusPieceId == pieceId;
-                        return GestureDetector(
-                          onTap:
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
                               isMyTurn
-                                  ? () {
-                                    setState(() {
-                                      if (isSelected) {
+                                  ? "C'est votre tour !"
+                                  : "Au tour de ${players[currentPlayerId]?['name'] ?? '...'}",
+                              style: TextStyle(
+                                color:
+                                    isMyTurn ? getColor(myColor) : Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            if (isFirstPiece && isMyTurn)
+                              Text(
+                                "Placez dans votre coin !",
+                                style: TextStyle(
+                                  color: Colors.amberAccent,
+                                  fontSize: 11,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+
+                      // Actions de la pièce sélectionnée
+                      if (isMyTurn && _selectedBlokusPieceId != null) ...[
+                        IconButton(
+                          icon: Icon(
+                            Icons.rotate_right,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          tooltip: "Tourner",
+                          constraints: BoxConstraints(),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          onPressed:
+                              () => setState(() {
+                                _blokusRotation = (_blokusRotation + 1) % 4;
+                                _checkBlokusPlacement(
+                                  board,
+                                  myColor,
+                                  isFirstPiece,
+                                );
+                              }),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.flip, color: Colors.tealAccent),
+                          tooltip: "Retourner",
+                          constraints: BoxConstraints(),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          onPressed:
+                              () => setState(() {
+                                _blokusFlipped = !_blokusFlipped;
+                                _checkBlokusPlacement(
+                                  board,
+                                  myColor,
+                                  isFirstPiece,
+                                );
+                              }),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.check_circle,
+                            color:
+                                _blokusCanPlace
+                                    ? Colors.greenAccent
+                                    : Colors.grey,
+                          ),
+                          tooltip: "Valider le placement",
+                          constraints: BoxConstraints(),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          onPressed:
+                              _blokusCanPlace &&
+                                      _blokusStartRow != null &&
+                                      _blokusStartCol != null
+                                  ? () async {
+                                    try {
+                                      await _firebaseService.placeBlokusPiece(
+                                        widget.gameCode,
+                                        playerId,
+                                        _selectedBlokusPieceId!,
+                                        _blokusStartRow!,
+                                        _blokusStartCol!,
+                                        _blokusRotation,
+                                      );
+                                      setState(() {
                                         _selectedBlokusPieceId = null;
                                         _blokusRotation = 0;
+                                        _blokusFlipped = false;
+                                        _blokusStartRow = null;
+                                        _blokusStartCol = null;
                                         _blokusCanPlace = false;
-                                      } else {
-                                        _selectedBlokusPieceId = pieceId;
-                                        _blokusRotation = 0;
+                                      });
+                                    } catch (e) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            e.toString().replaceAll(
+                                              'Exception: ',
+                                              '',
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                  : null,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.cancel, color: Colors.redAccent),
+                          tooltip: "Annuler",
+                          constraints: BoxConstraints(),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          onPressed:
+                              () => setState(() {
+                                _selectedBlokusPieceId = null;
+                                _blokusStartRow = null;
+                                _blokusStartCol = null;
+                                _blokusCanPlace = false;
+                              }),
+                        ),
+                      ],
+
+                      if (isMyTurn && _selectedBlokusPieceId == null)
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red[900],
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            minimumSize: Size(0, 36),
+                          ),
+                          onPressed:
+                              () => _firebaseService.passBlokusTurn(
+                                widget.gameCode,
+                                playerId,
+                              ),
+                          child: Text("Passer", style: TextStyle(fontSize: 12)),
+                        ),
+                    ],
+                  ),
+                ),
+
+                // --- DEUXIÈME ZONE : LE PLATEAU DE JEU ---
+                Expanded(
+                  child: Center(
+                    child: Container(
+                      width: boardPixelSize,
+                      height: boardPixelSize,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white24, width: 2),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: GestureDetector(
+                        // Ajout de onPanStart et onPanUpdate pour une manipulation fluide au toucher (sans glisser depuis le rack)
+                        onPanStart:
+                            isMyTurn
+                                ? (details) {
+                                  if (_selectedBlokusPieceId != null) {
+                                    final col =
+                                        (details.localPosition.dx / cellSize)
+                                            .floor();
+                                    final row =
+                                        ((details.localPosition.dy -
+                                                    (cellSize * 2)) /
+                                                cellSize)
+                                            .floor();
+                                    setState(() {
+                                      _blokusStartRow = row;
+                                      _blokusStartCol = col;
+                                      _checkBlokusPlacement(
+                                        board,
+                                        myColor,
+                                        isFirstPiece,
+                                      );
+                                    });
+                                  }
+                                }
+                                : null,
+                        onPanUpdate:
+                            isMyTurn
+                                ? (details) {
+                                  if (_selectedBlokusPieceId != null) {
+                                    final col =
+                                        (details.localPosition.dx / cellSize)
+                                            .floor();
+                                    final row =
+                                        ((details.localPosition.dy -
+                                                    (cellSize * 2)) /
+                                                cellSize)
+                                            .floor();
+                                    if (_blokusStartRow != row ||
+                                        _blokusStartCol != col) {
+                                      setState(() {
+                                        _blokusStartRow = row;
+                                        _blokusStartCol = col;
                                         _checkBlokusPlacement(
                                           board,
                                           myColor,
                                           isFirstPiece,
                                         );
-                                      }
+                                      });
+                                    }
+                                  }
+                                }
+                                : null,
+                        onTapDown:
+                            isMyTurn
+                                ? (details) {
+                                  if (_selectedBlokusPieceId != null) {
+                                    final col =
+                                        (details.localPosition.dx / cellSize)
+                                            .floor();
+                                    final row =
+                                        ((details.localPosition.dy -
+                                                    (cellSize * 2)) /
+                                                cellSize)
+                                            .floor();
+                                    setState(() {
+                                      _blokusStartRow = row;
+                                      _blokusStartCol = col;
+                                      _checkBlokusPlacement(
+                                        board,
+                                        myColor,
+                                        isFirstPiece,
+                                      );
                                     });
                                   }
-                                  : null,
-                          child: Container(
-                            width: 90,
-                            height: 90,
-                            margin: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color:
-                                  isSelected
-                                      ? Colors.deepPurple
-                                      : Colors.grey[800],
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color:
-                                    isSelected ? Colors.amber : Colors.white24,
-                                width: isSelected ? 3 : 1,
-                              ),
-                            ),
-                            child: CustomPaint(
-                              painter: _BlokusPiecePainter(
-                                pieceId,
-                                _blokusRotation,
-                                getColor(myColor),
-                              ),
-                            ),
+                                }
+                                : null,
+                        child: CustomPaint(
+                          key: _canvasKey,
+                          size: Size(boardPixelSize, boardPixelSize),
+                          painter: _BlokusBoardPainter(
+                            board: board,
+                            gridSize: gridSize,
+                            cellSize: cellSize,
+                            previewPiece:
+                                _selectedBlokusPieceId != null &&
+                                        _blokusStartRow != null &&
+                                        _blokusStartCol != null
+                                    ? GameData.getRotatedPiece(
+                                      _selectedBlokusPieceId!,
+                                      _blokusRotation,
+                                      flipped: _blokusFlipped,
+                                    )
+                                    : null,
+                            previewRow: _blokusStartRow,
+                            previewCol: _blokusStartCol,
+                            previewColor: getColor(myColor),
+                            canPlace: _blokusCanPlace,
                           ),
-                        );
-                      },
+                        ),
+                      ),
                     ),
                   ),
-                ],
-              ),
-            ),
-
-            // Bouton Passer
-            if (isMyTurn)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextButton.icon(
-                  icon: Icon(Icons.skip_next),
-                  label: Text("Passer mon tour"),
-                  onPressed:
-                      () => _firebaseService.passBlokusTurn(
-                        widget.gameCode,
-                        playerId,
-                      ),
                 ),
-              ),
-          ],
+
+                // --- TROISIÈME ZONE : RACK DE PIÈCES ---
+                Container(
+                  height: 140,
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withOpacity(0.6),
+                        Colors.grey[900]!.withOpacity(0.85),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                    border: Border.all(color: Colors.white10, width: 1.5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black54,
+                        blurRadius: 10,
+                        offset: Offset(0, -4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 6.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Vos pièces",
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: myHand.length,
+                          itemBuilder: (context, index) {
+                            int pieceId = myHand[index];
+                            bool isSelected = _selectedBlokusPieceId == pieceId;
+
+                            Widget pieceWidget = Container(
+                              width: 85,
+                              height: 85,
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color:
+                                    isSelected
+                                        ? getColor(myColor).withOpacity(0.25)
+                                        : Colors.white.withOpacity(0.04),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color:
+                                      isSelected
+                                          ? getColor(myColor)
+                                          : Colors.white12,
+                                  width: isSelected ? 2.5 : 1.0,
+                                ),
+                                boxShadow:
+                                    isSelected
+                                        ? [
+                                          BoxShadow(
+                                            color: getColor(
+                                              myColor,
+                                            ).withOpacity(0.3),
+                                            blurRadius: 8,
+                                            spreadRadius: 1,
+                                          ),
+                                        ]
+                                        : [],
+                              ),
+                              child: CustomPaint(
+                                painter: _BlokusPiecePainter(
+                                  pieceId,
+                                  isSelected ? _blokusRotation : 0,
+                                  getColor(myColor),
+                                  flipped: isSelected ? _blokusFlipped : false,
+                                ),
+                              ),
+                            );
+
+                            return GestureDetector(
+                              onTap:
+                                  isMyTurn
+                                      ? () {
+                                        setState(() {
+                                          if (isSelected) {
+                                            _selectedBlokusPieceId = null;
+                                          } else {
+                                            _selectedBlokusPieceId = pieceId;
+                                            _blokusRotation = 0;
+                                            _blokusFlipped = false;
+                                            _checkBlokusPlacement(
+                                              board,
+                                              myColor,
+                                              isFirstPiece,
+                                            );
+                                          }
+                                        });
+                                      }
+                                      : null,
+                              child: Draggable<int>(
+                                data: pieceId,
+                                maxSimultaneousDrags: isMyTurn ? 1 : 0,
+                                affinity:
+                                    Axis.vertical, // Résout le conflit avec le défilement horizontal du ListView
+                                onDragStarted: () {
+                                  setState(() {
+                                    _selectedBlokusPieceId = pieceId;
+                                    _blokusRotation = 0;
+                                    _blokusFlipped = false;
+                                  });
+                                },
+                                feedback:
+                                    const SizedBox.shrink(), // Plus de grosse image en mode fantôme bloquant la vue
+                                childWhenDragging: Opacity(
+                                  opacity: 0.25,
+                                  child: pieceWidget,
+                                ),
+                                child: pieceWidget,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
         );
       },
     );
@@ -37014,17 +37332,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       setState(() => _blokusCanPlace = false);
       return;
     }
-
     final rotatedPiece = GameData.getRotatedPiece(
       _selectedBlokusPieceId!,
       _blokusRotation,
+      flipped: _blokusFlipped,
     );
     final absoluteCoords =
         rotatedPiece
             .map((p) => [p[0] + _blokusStartRow!, p[1] + _blokusStartCol!])
             .toList();
 
-    // 1. VÃ©rifier les limites (CORRECTION: 20x20)
     for (var c in absoluteCoords) {
       if (c[0] < 0 || c[0] >= 20 || c[1] < 0 || c[1] >= 20) {
         setState(() => _blokusCanPlace = false);
@@ -37035,8 +37352,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return;
       }
     }
-
-    // 2. RÃ¨gle des cÃ´tÃ©s (orthogonal)
     for (var c in absoluteCoords) {
       List<List<int>> neighbors = [
         [c[0] - 1, c[1]],
@@ -37051,8 +37366,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         }
       }
     }
-
-    // 3. RÃ¨gle des coins (diagonal) & premier coup
     bool touchesCorner = false;
     for (var c in absoluteCoords) {
       List<List<int>> diags = [
@@ -37071,12 +37384,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     if (isFirstPiece) {
-      // CORRECTION : Les coins sur du 20x20 et Bleu opposÃ© Ã  Rouge
       String cornerTarget =
           myColor == 'blue'
               ? "0_0"
               : myColor == 'red'
-              ? "19_19" // Diagonale opposÃ©e !
+              ? "19_19"
               : myColor == 'green'
               ? "0_19"
               : "19_0";
@@ -37250,12 +37562,18 @@ class _BlokusPiecePainter extends CustomPainter {
   final int pieceId;
   final int rotation;
   final Color color;
+  final bool flipped; // NOUVEAU
 
-  _BlokusPiecePainter(this.pieceId, this.rotation, this.color);
+  _BlokusPiecePainter(
+    this.pieceId,
+    this.rotation,
+    this.color, {
+    this.flipped = false,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final piece = GameData.getRotatedPiece(pieceId, rotation);
+    final piece = GameData.getRotatedPiece(pieceId, rotation, flipped: flipped);
     if (piece.isEmpty) return;
 
     int maxR = piece.map((p) => p[0]).reduce((a, b) => a > b ? a : b);
@@ -37706,8 +38024,8 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
       case 'Qui Pourrait le Plus ?':
         screen = WhoIsMostLikelyLocalScreen(players: _players);
         break;
-      case 'InfiltrÃ© & Mr. White':
-      case 'InfiltrÃƒÂ© & Mr. White':
+      case 'Infiltré & Mr. White':
+      case 'Infiltré & Mr. White':
       case 'Undercover Local':
         screen = UndercoverLocalGameScreen(players: _players);
         break;
@@ -37717,10 +38035,10 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
       case 'Synonyme ou Banni':
         screen = SynonymOrBannedLocalScreen(players: _players);
         break;
-      case 'Action ou VÃƒÂ©ritÃƒÂ©':
+      case 'Action ou Vérité':
         screen = OfflineTruthOrDareScreen(players: _players);
         break;
-      case 'Jeu de la PiÃƒÂ¨ce':
+      case 'Jeu de la Pièce':
         screen = OfflineGameScreen(gameType: 'coin_flip', players: _players);
         break;
       case 'Le Dilemme':
@@ -37729,7 +38047,7 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
       case 'On se passe un objet rapidement':
         screen = PassTheObjectGameScreen(players: _players);
         break;
-      case 'Devine TÃƒÂªte':
+      case 'Devine Tête':
         screen = GuessTheWordLocalScreen(players: _players);
         break;
       case 'Dobble':
@@ -37961,7 +38279,7 @@ class OfflineMenuScreen extends StatelessWidget {
           ),
           _buildGameCard(
             context,
-            "InfiltrÃ© & Mr. White",
+            "Infiltré & Mr. White",
             "DÃƒÂ©masquez l'InfiltrÃƒÂ© et Mr. White !",
             Icons.visibility_off,
             UndercoverLocalGameScreen(players: players),
@@ -37985,7 +38303,7 @@ class OfflineMenuScreen extends StatelessWidget {
           ),
           _buildGameCard(
             context,
-            "Action ou VÃƒÂ©ritÃƒÂ©",
+            "Action ou Vérité",
             "Le classique, mais c'est vous qui choisissez !",
             Icons.sync_problem,
             OfflineTruthOrDareScreen(players: players),
@@ -37993,7 +38311,7 @@ class OfflineMenuScreen extends StatelessWidget {
           ),
           _buildGameCard(
             context,
-            "Jeu de la PiÃƒÂ¨ce",
+            "Jeu de la Pièce",
             "RÃƒÂ©pondez ÃƒÂ  la question... si vous perdez !",
             Icons.monetization_on,
             OfflineGameScreen(gameType: 'coin_flip', players: players),
@@ -38033,7 +38351,7 @@ class OfflineMenuScreen extends StatelessWidget {
           ),
           _buildGameCard(
             context,
-            "Devine TÃƒÂªte",
+            "Devine Tête",
             "Devinez le mot avec l'aide des autres !",
             Icons.headset_mic,
             GuessTheWordLocalScreen(players: players),
@@ -38196,11 +38514,11 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Action ou VÃƒÂ©ritÃƒÂ©"),
+        title: Text("Action ou Vérité"),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
-            onPressed: () => showGameRules(context, 'Action ou VÃƒÂ©ritÃƒÂ©'),
+            onPressed: () => showGameRules(context, 'Action ou Vérité'),
           ),
         ],
       ),
@@ -38373,7 +38691,11 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   String _coinFlipResult = "";
   int _currentPlayerIndex = -1;
   bool _isSpinning = false;
-  Map<String, String> _dilemmaVotes = {};
+  
+  // NOUVEAUX PARAMÈTRES POUR LE DILEMME LOCAL
+  bool _useWheelForDilemma = true;
+  Map<String, String> _dilemmaVotes = {}; // PlayerID -> "A" ou "B"
+  int _dilemmaVoterIndex = 0; // Index du joueur en train de voter (si sans roue)
   String? _activeDilemmaVoterId;
   String _dilemmaOptionA = "";
   String _dilemmaOptionB = "";
@@ -38387,7 +38709,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   void _setTitle() {
     switch (widget.gameType) {
       case 'coin_flip':
-        _title = "Jeu de la PiÃƒÂ¨ce";
+        _title = "Jeu de la Pièce";
         break;
       case 'dilemma':
         _title = "Le Dilemme";
@@ -38409,24 +38731,22 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   String _processContent(String content) {
     if (content.contains('{player}')) {
       List<String> otherPlayers = List.from(widget.players);
-      if (_currentPlayerIndex >= 0 &&
-          _currentPlayerIndex < otherPlayers.length) {
+      if (_currentPlayerIndex >= 0 && _currentPlayerIndex < otherPlayers.length) {
         otherPlayers.removeAt(_currentPlayerIndex);
       }
       if (otherPlayers.isNotEmpty) {
-        String randomPlayer =
-            otherPlayers[Random().nextInt(otherPlayers.length)];
+        String randomPlayer = otherPlayers[Random().nextInt(otherPlayers.length)];
         return content.replaceAll('{player}', randomPlayer);
       } else {
-        return content.replaceAll('{player}', 'toi-mÃƒÂªme');
+        return content.replaceAll('{player}', 'toi-mê-me');
       }
     }
     return content;
   }
 
   List<String> _splitDilemmaOptions(String content) {
-    final normalized = content.trim().replaceFirst(RegExp(r'[Ã˜Å¸?]+$'), '');
-    final match = RegExp(r'\sou\s').firstMatch(normalized);
+    final normalized = content.trim().replaceFirst(RegExp(r'[?]+$'), '');
+    final match = RegExp(r'\sou\s', caseSensitive: false).firstMatch(normalized);
 
     if (match == null) {
       return [normalized, 'Je passe'];
@@ -38443,30 +38763,31 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   }
 
   String _currentDilemmaWinner() {
-    final optionACount =
-        _dilemmaVotes.values.where((vote) => vote == 'A').length;
-    final optionBCount =
-        _dilemmaVotes.values.where((vote) => vote == 'B').length;
+    final optionACount = _dilemmaVotes.values.where((vote) => vote == 'A').length;
+    final optionBCount = _dilemmaVotes.values.where((vote) => vote == 'B').length;
 
-    if (optionACount == 0 && optionBCount == 0) {
-      return '';
-    }
-
-    if (optionACount > optionBCount) {
-      return 'A';
-    }
-
-    if (optionBCount > optionACount) {
-      return 'B';
-    }
-
+    if (optionACount == 0 && optionBCount == 0) return '';
+    if (optionACount > optionBCount) return 'A';
+    if (optionBCount > optionACount) return 'B';
     return 'TIE';
   }
 
   void _submitDilemmaVote(String playerId, String option) {
     setState(() {
-      _activeDilemmaVoterId = playerId;
       _dilemmaVotes[playerId] = option;
+      if (!_useWheelForDilemma) {
+        // Mode séquentiel : passe au joueur suivant
+        if (_dilemmaVoterIndex < widget.players.length - 1) {
+          _dilemmaVoterIndex++;
+          _activeDilemmaVoterId = widget.players[_dilemmaVoterIndex];
+        } else {
+          // Tous les joueurs ont voté
+          _activeDilemmaVoterId = null; 
+        }
+      } else {
+        // Mode Roue (1 seul votant) : l'action se fige après son vote
+        _activeDilemmaVoterId = null;
+      }
     });
   }
 
@@ -38476,9 +38797,8 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
     required String optionText,
     required Color color,
   }) {
-    final voteCount =
-        _dilemmaVotes.values.where((vote) => vote == optionKey).length;
-    final totalVotes = widget.players.isEmpty ? 1 : widget.players.length;
+    final voteCount = _dilemmaVotes.values.where((vote) => vote == optionKey).length;
+    final totalVotes = _dilemmaVotes.isEmpty ? 1 : _dilemmaVotes.length;
     final progress = (voteCount / totalVotes).clamp(0.0, 1.0);
     final winner = _currentDilemmaWinner();
     final isWinning = winner == optionKey;
@@ -38486,16 +38806,14 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
 
     return Expanded(
       child: GestureDetector(
-        onTap:
-            _activeDilemmaVoterId == null
-                ? null
-                : () => _submitDilemmaVote(_activeDilemmaVoterId!, optionKey),
+        onTap: _activeDilemmaVoterId == null
+            ? null
+            : () => _submitDilemmaVote(_activeVoterOrCurrent(), optionKey),
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 250),
-          padding: EdgeInsets.all(16),
+          duration: const Duration(milliseconds: 250),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color:
-                isWinning ? color.withOpacity(0.28) : color.withOpacity(0.16),
+            color: isWinning ? color.withOpacity(0.28) : color.withOpacity(0.16),
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
               color: isWinning ? color : Colors.white12,
@@ -38511,9 +38829,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
-              SizedBox(height: 14),
+              const SizedBox(height: 14),
               ClipRRect(
                 borderRadius: BorderRadius.circular(999),
                 child: LinearProgressIndicator(
@@ -38523,19 +38842,16 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                   valueColor: AlwaysStoppedAnimation<Color>(color),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 '$voteCount vote${voteCount > 1 ? 's' : ''}',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
               ),
               if (isWinning && voteCount > 0)
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    isTied ? 'Ãƒâ€°galitÃƒÂ©' : 'En tÃƒÂªte',
+                    isTied ? 'Égalité' : 'Majoritaire',
                     style: TextStyle(color: color, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -38546,16 +38862,44 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
     );
   }
 
+  String _getInstructionText() {
+    if (_useWheelForDilemma) {
+      final voterName = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : '...';
+      return _activeDilemmaVoterId == null 
+          ? "Choix enregistré !" 
+          : "Dilemme pour $voterName : fait ton choix !";
+    } else {
+      return _activeDilemmaVoterId == null 
+          ? "Tous les votes sont enregistrés !" 
+          : "C'est au tour de $_activeDilemmaVoterId de voter !";
+    }
+  }
+
+  String _getCurrentVoterName() {
+    return _useWheelForDilemma 
+        ? (_currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "Joueur")
+        : (_activeDilemmaVoterId ?? "Fin");
+  }
+
+  String _restoreLiarVoterIdentity() {
+    return _activeDilemmaVoterId ?? '';
+  }
+
+  String _activeVoterOrCurrent() {
+    return _useWheelForDilemma ? _getCurrentVoterName() : (_activeDilemmaVoterId ?? "");
+  }
+
   Widget _buildDilemmaVoteUI(BuildContext context) {
     final winner = _currentDilemmaWinner();
-    final voteCount = _dilemmaVotes.length;
-    final allVotesCast =
-        widget.players.isNotEmpty && voteCount >= widget.players.length;
+    final totalExpected = widget.players.length;
+    final allVotesCast = _useWheelForDilemma 
+        ? _dilemmaVotes.isNotEmpty 
+        : _dilemmaVotes.length >= totalExpected;
 
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
-          padding: EdgeInsets.only(bottom: 16),
+          padding: const EdgeInsets.only(bottom: 16),
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: constraints.maxHeight),
             child: Column(
@@ -38564,73 +38908,53 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                 Card(
                   elevation: 6,
                   color: Colors.blueGrey[900],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        Text(
-                          'DILEMME',
-                          style: TextStyle(
-                            color: Colors.white54,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        const Text(
+                          'LE DILEMME',
+                          style: TextStyle(color: Colors.amberAccent, letterSpacing: 2, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 12),
                         Text(
                           _currentContent,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 20),
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
-                  _activeDilemmaVoterId == null
-                      ? 'Choisissez un joueur pour voter'
-                      : 'Votant actif: $_activeDilemmaVoterId',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleMedium?.copyWith(color: Colors.white70),
+                  _getInstructionText(),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  alignment: WrapAlignment.center,
-                  children:
-                      widget.players.map((player) {
-                        final isActive = player == _activeDilemmaVoterId;
-                        final vote = _dilemmaVotes[player];
-                        return ChoiceChip(
-                          selected: isActive,
-                          label: Text(
-                            vote == null
-                                ? player
-                                : '$player Ã¢â‚¬Â¢ ${vote == 'A' ? 'A' : 'B'}',
-                          ),
-                          onSelected: (_) {
-                            setState(() {
-                              _activeDilemmaVoterId = player;
-                            });
-                          },
-                          selectedColor: Colors.deepPurple,
-                          backgroundColor: Colors.white10,
-                          labelStyle: TextStyle(
-                            color: Colors.white,
-                            fontWeight:
-                                isActive ? FontWeight.bold : FontWeight.normal,
-                          ),
-                        );
-                      }).toList(),
-                ),
-                SizedBox(height: 20),
+                const SizedBox(height: 12),
+                if (!_useWheelForDilemma && _activeDilemmaVoterId != null)
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    alignment: WrapAlignment.center,
+                    children: widget.players.map((player) {
+                      final hasVoted = _dilemmaVotes.containsKey(player);
+                      final isActive = player == _activeDilemmaVoterId;
+                      return Chip(
+                        label: Text(player),
+                        backgroundColor: isActive 
+                            ? Colors.deepPurple 
+                            : (hasVoted ? Colors.green[800] : Colors.white10),
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     _buildDilemmaOptionCard(
@@ -38639,77 +38963,40 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                       optionText: _dilemmaOptionA,
                       color: Colors.deepPurpleAccent,
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     _buildDilemmaOptionCard(
                       context: context,
                       optionKey: 'B',
                       optionText: _dilemmaOptionB,
-                      color: Colors.tealAccent,
+                      color: Colors.teal,
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Card(
-                  color: Colors.black26,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'RÃƒÂ©sultat en direct',
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'A: ${_dilemmaVotes.values.where((vote) => vote == 'A').length}  |  B: ${_dilemmaVotes.values.where((vote) => vote == 'B').length}',
-                          style: TextStyle(color: Colors.white70, fontSize: 16),
-                        ),
-                        if (allVotesCast) ...[
-                          SizedBox(height: 8),
-                          Text(
-                            winner == 'TIE'
-                                ? 'Ãƒâ€°galitÃƒÂ© parfaite.'
-                                : 'Option ${winner == 'A' ? 'A' : 'B'} en tÃƒÂªte.',
-                            style: TextStyle(
-                              color:
-                                  winner == 'TIE'
-                                      ? Colors.amberAccent
-                                      : Colors.greenAccent,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
+                const SizedBox(height: 20),
                 if (allVotesCast)
-                  ElevatedButton(
-                    onPressed:
-                        () => setState(() {
-                          _isSpinning = true;
-                          _currentContent = "";
-                          _currentPlayerIndex = -1;
-                          _dilemmaVotes = {};
-                          _activeDilemmaVoterId = null;
-                          _dilemmaOptionA = "";
-                          _dilemmaOptionB = "";
-                        }),
-                    child: Text('Tour suivant'),
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.arrow_forward),
+                    label: const Text('Dilemme Suivant'),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
+                    onPressed: () => setState(() {
+                      _isSpinning = false;
+                      _currentContent = "";
+                      _currentPlayerIndex = -1;
+                      _dilemmaVotes.clear();
+                      _activeDilemmaVoterId = null;
+                      _dilemmaOptionA = "";
+                      _dilemmaOptionB = "";
+                    }),
+                  )
+                else if (_useWheelForDilemma)
+                  const Text(
+                    'Le joueur désigné doit faire son choix.',
+                    style: TextStyle(color: Colors.white38, fontStyle: FontStyle.italic),
                   )
                 else
                   Text(
-                    'Chaque vote se met ÃƒÂ  jour instantanÃƒÂ©ment.',
-                    style: TextStyle(
-                      color: Colors.white38,
-                      fontStyle: FontStyle.italic,
-                    ),
-                    textAlign: TextAlign.center,
+                    'En attente du vote de : $_activeDilemmaVoterId (${_dilemmaVotes.length} / $totalExpected)',
+                    style: const TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
                   ),
               ],
             ),
@@ -38734,9 +39021,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
         break;
     }
 
-    nextContent = _processContent(
-      contentList[random.nextInt(contentList.length)],
-    );
+    nextContent = _processContent(contentList[random.nextInt(contentList.length)]);
 
     setState(() {
       _currentContent = nextContent;
@@ -38744,9 +39029,14 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
         final dilemmaOptions = _splitDilemmaOptions(nextContent);
         _dilemmaOptionA = dilemmaOptions[0];
         _dilemmaOptionB = dilemmaOptions[1];
-        _dilemmaVotes = {};
-        _activeDilemmaVoterId =
-            widget.players.isNotEmpty ? widget.players.first : null;
+        _dilemmaVotes.clear();
+        
+        if (_useWheelForDilemma) {
+          _activeDilemmaVoterId = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : null;
+        } else {
+          _dilemmaVoterIndex = 0;
+          _activeDilemmaVoterId = widget.players.isNotEmpty ? widget.players.first : null;
+        }
       }
     });
   }
@@ -38759,16 +39049,24 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
     });
   }
 
+  void _startNextDilemmaRoundDirectly() {
+    setState(() {
+      _isSpinning = false;
+      _generateNewContent();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final currentPlayer =
-        _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
+    final currentPlayer = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
+    final isDilemma = widget.gameType == 'dilemma';
+
     return Scaffold(
       appBar: AppBar(
         title: Text(_title),
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: const Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, _title),
           ),
         ],
@@ -38777,6 +39075,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            // FILTRE DIFFICULTE
             SegmentedButton<String>(
               segments: const [
                 ButtonSegment(value: 'soft', label: Text('Soft')),
@@ -38793,77 +39092,106 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                 });
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 12),
+            
+            // CONFIGURATION ROUE / SANS ROUE POUR LE DILEMME (Affiché uniquement lors de la phase de préparation)
+            if (isDilemma && _currentContent.isEmpty && !_isSpinning) ...[
+              Card(
+                color: Colors.grey[900],
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Text(
+                        "Mode de sélection du Dilemme",
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white70),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 10),
+                      SegmentedButton<bool>(
+                        segments: const [
+                          ButtonSegment(
+                            value: true, 
+                            label: Text('Avec Roue'),
+                            icon: Icon(Icons.blur_circular),
+                          ),
+                          ButtonSegment(
+                            value: false, 
+                            label: Text('Sans Roue (Tous)'),
+                            icon: Icon(Icons.people),
+                          ),
+                        ],
+                        selected: {_useWheelForDilemma},
+                        onSelectionChanged: (val) => setState(() {
+                          _useWheelForDilemma = val.first;
+                        }),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
+
             Expanded(
               child: Center(
                 child: AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
-                  transitionBuilder:
-                      (child, animation) =>
-                          ScaleTransition(scale: animation, child: child),
-                  child:
-                      widget.gameType == 'dilemma' && _currentContent.isNotEmpty
-                          ? _buildDilemmaVoteUI(context)
-                          : _isSpinning
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
+                  child: isDilemma && _currentContent.isNotEmpty
+                      ? _buildDilemmaVoteUI(context)
+                      : _isSpinning
                           ? SpinTheWheelWidget(
-                            key: ValueKey('wheel_spin'),
-                            players: widget.players,
-                            onSpinEnd: _onWheelStopped,
-                          )
+                              key: const ValueKey('wheel_spin'),
+                              players: widget.players,
+                              onSpinEnd: _onWheelStopped,
+                            )
                           : (_currentContent.isEmpty
                               ? Text(
-                                "Appuyez sur 'Lancer la roue' pour commencer !",
-                                style: Theme.of(context).textTheme.headlineSmall
-                                    ?.copyWith(color: Colors.white70),
-                                textAlign: TextAlign.center,
-                              )
+                                  "Appuyez sur 'Lancer le tour' pour commencer !",
+                                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white70),
+                                  textAlign: TextAlign.center,
+                                )
                               : Card(
-                                key: ValueKey<String>(_currentContent),
-                                elevation: 4,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(24.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "C'est au tour de",
-                                        style:
-                                            Theme.of(
-                                              context,
-                                            ).textTheme.bodyMedium,
-                                      ),
-                                      Text(
-                                        currentPlayer,
-                                        style: Theme.of(
-                                          context,
-                                        ).textTheme.headlineMedium?.copyWith(
-                                          color: Colors.deepPurpleAccent,
+                                  key: ValueKey<String>(_currentContent),
+                                  elevation: 4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(24.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "C'est au tour de",
+                                          style: Theme.of(context).textTheme.bodyMedium,
                                         ),
-                                      ),
-                                      SizedBox(height: 20),
-                                      Text(
-                                        _currentContent,
-                                        textAlign: TextAlign.center,
-                                        style:
-                                            Theme.of(
-                                              context,
-                                            ).textTheme.headlineSmall,
-                                      ),
-                                      if (widget.gameType == 'coin_flip' &&
-                                          _showCoinFlipResult)
-                                        _buildCoinFlipResult(),
-                                    ],
+                                        Text(
+                                          currentPlayer,
+                                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                            color: Colors.deepPurpleAccent,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Text(
+                                          _currentContent,
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context).textTheme.headlineSmall,
+                                        ),
+                                        if (widget.gameType == 'coin_flip' && _showCoinFlipResult)
+                                          _buildCoinFlipResult(),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              )),
+                                )),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildGameControls(),
-            SizedBox(height: 10),
-            if (widget.gameType != 'dilemma') _buildPlayerChips(),
+            const SizedBox(height: 10),
+            if (!isDilemma || _currentContent.isEmpty || _isSpinning) _buildPlayerChips(),
           ],
         ),
       ),
@@ -38879,7 +39207,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
         final isCurrent = index == _currentPlayerIndex && !_isSpinning;
         return Chip(
           label: Text(widget.players[index]),
-          backgroundColor: isCurrent ? Colors.deepPurple : Color(0xFF333333),
+          backgroundColor: isCurrent ? Colors.deepPurple : const Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
@@ -38896,14 +39224,14 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
       child: Column(
         children: [
           Text(
-            "Tu as choisi $_coinFlipChoice. La piÃƒÂ¨ce est tombÃƒÂ©e sur... $_coinFlipResult !",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            "Tu as choisi $_coinFlipChoice. La pièce est tombée sur... $_coinFlipResult !",
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             lost
-                ? "PERDU ! RÃƒÂ©vÃƒÂ¨le la question et ta rÃƒÂ©ponse !"
-                : "GAGNÃƒâ€° ! Ton secret est en sÃƒÂ©curitÃƒÂ©.",
+                ? "PERDU ! Révèle la question et réponds-y !"
+                : "GAGNÉ ! Ton secret est préservé.",
             style: TextStyle(
               fontSize: 18,
               color: lost ? Colors.redAccent : Colors.greenAccent,
@@ -38917,28 +39245,32 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   }
 
   Widget _buildGameControls() {
-    if (_isSpinning) return SizedBox(height: 50);
+    if (_isSpinning) return const SizedBox(height: 50);
 
     if (widget.gameType == 'dilemma' && _currentContent.isNotEmpty) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
 
     if (_currentContent.isEmpty) {
       return ElevatedButton(
-        onPressed: () => setState(() => _isSpinning = true),
-        child: Text("Lancer la roue"),
+        onPressed: () {
+          if (widget.gameType == 'dilemma' && !_useWheelForDilemma) {
+            _startNextDilemmaRoundDirectly();
+          } else {
+            setState(() => _isSpinning = true);
+          }
+        },
+        child: Text(widget.gameType == 'dilemma' && !_useWheelForDilemma ? "Lancer le Dilemme" : "Lancer la roue"),
       );
     }
 
-    if (widget.gameType == 'coin_flip' && _showCoinFlipResult ||
-        widget.gameType == 'dilemma') {
+    if (widget.gameType == 'coin_flip' && _showCoinFlipResult) {
       return ElevatedButton(
-        onPressed:
-            () => setState(() {
-              _isSpinning = true;
-              _currentContent = "";
-            }),
-        child: Text("Tour Suivant"),
+        onPressed: () => setState(() {
+          _isSpinning = true;
+          _currentContent = "";
+        }),
+        child: const Text("Tour Suivant"),
       );
     }
 
@@ -38951,21 +39283,22 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
               _coinFlipChoice = "Pile";
               _flipCoin();
             },
-            child: Text("Je choisis PILE"),
+            child: const Text("Je choisis PILE"),
           ),
           ElevatedButton(
             onPressed: () {
               _coinFlipChoice = "Face";
               _flipCoin();
             },
-            child: Text("Je choisis FACE"),
+            child: const Text("Je choisis FACE"),
           ),
         ],
       );
     }
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 }
+
 
 class SpinTheWheelWidget extends StatefulWidget {
   final List<String> players;
@@ -39279,11 +39612,11 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("InfiltrÃ© & Mr. White"),
+        title: Text("Infiltré & Mr. White"),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
-            onPressed: () => showGameRules(context, 'InfiltrÃ© & Mr. White'),
+            onPressed: () => showGameRules(context, 'Infiltré & Mr. White'),
           ),
         ],
       ),
@@ -39418,7 +39751,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                                   await FirebaseService.generateAiWords(
                                     instructions: _aiController.text.trim(),
                                     count: 30,
-                                    gameType: 'InfiltrÃƒÂ© & Mr. White',
+                                    gameType: 'Infiltré & Mr. White',
                                   );
                               _aiWordPairs = words;
                             } catch (e) {
@@ -40313,10 +40646,13 @@ class _SynonymOrBannedLocalScreenState
   }
 }
 
+enum LocalWhoIsPhase { question, voting, results }
+
 class WhoIsMostLikelyLocalScreen extends StatefulWidget {
   final List<String> players;
   const WhoIsMostLikelyLocalScreen({Key? key, required this.players})
     : super(key: key);
+
   @override
   _WhoIsMostLikelyLocalScreenState createState() =>
       _WhoIsMostLikelyLocalScreenState();
@@ -40326,30 +40662,14 @@ class _WhoIsMostLikelyLocalScreenState
     extends State<WhoIsMostLikelyLocalScreen> {
   String _difficulty = 'soft';
   String _currentQuestion = "";
+  LocalWhoIsPhase _phase = LocalWhoIsPhase.question;
+  
+  int _currentVoterIndex = 0;
+  Map<String, String> _votes = {}; // Voter -> VotedFor
+  
   final TextEditingController _aiController = TextEditingController();
   bool _isAiLoading = false;
   List<String> _aiQuestions = [];
-
-  void _getNewQuestion() {
-    if (_aiQuestions.isNotEmpty) {
-      setState(
-        () =>
-            _currentQuestion =
-                _aiQuestions[Random().nextInt(_aiQuestions.length)],
-      );
-      return;
-    }
-    final questions = GameData.localWhoIsMostLikely[_difficulty]!;
-    setState(() {
-      _currentQuestion = questions[Random().nextInt(questions.length)];
-    });
-  }
-
-  @override
-  void dispose() {
-    _aiController.dispose();
-    super.dispose();
-  }
 
   @override
   void initState() {
@@ -40358,175 +40678,381 @@ class _WhoIsMostLikelyLocalScreenState
   }
 
   @override
+  void dispose() {
+    _aiController.dispose();
+    super.dispose();
+  }
+
+  void _getNewQuestion() {
+    if (_aiQuestions.isNotEmpty) {
+      _currentQuestion = _aiQuestions[Random().nextInt(_aiQuestions.length)];
+    } else {
+      final questions = GameData.localWhoIsMostLikely[_difficulty]!;
+      _currentQuestion = questions[Random().nextInt(questions.length)];
+    }
+    setState(() {
+      _phase = LocalWhoIsPhase.question;
+      _votes.clear();
+      _currentVoterIndex = 0;
+    });
+  }
+
+  void _startVoting() {
+    setState(() {
+      _phase = LocalWhoIsPhase.voting;
+      _currentVoterIndex = 0;
+      _votes.clear();
+    });
+  }
+
+  void _recordVote(String votedFor) {
+    final voter = widget.players[_currentVoterIndex];
+    setState(() {
+      _votes[voter] = votedFor;
+      if (_currentVoterIndex < widget.players.length - 1) {
+        _currentVoterIndex++;
+      } else {
+        _phase = LocalWhoIsPhase.results;
+      }
+    });
+  }
+
+  Map<String, int> _calculateTally() {
+    Map<String, int> tally = {for (var p in widget.players) p: 0};
+    for (var votedFor in _votes.values) {
+      tally[votedFor] = (tally[votedFor] ?? 0) + 1;
+    }
+    return tally;
+  }
+
+  List<String> _getWinners(Map<String, int> tally) {
+    int maxVotes = 0;
+    tally.forEach((_, votes) {
+      if (votes > maxVotes) maxVotes = votes;
+    });
+    
+    if (maxVotes == 0) return [];
+    
+    return tally.entries
+        .where((e) => e.value == maxVotes)
+        .map((e) => e.key)
+        .toList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Qui Pourrait le Plus ?"),
+        title: const Text("Qui Pourrait le Plus ?"),
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: const Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Qui Pourrait le Plus ?'),
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SegmentedButton<String>(
-              segments: const [
-                ButtonSegment(value: 'soft', label: Text('Soft')),
-                ButtonSegment(value: 'hard', label: Text('Hard')),
-
-                ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
-              ],
-              selected: {_difficulty},
-              onSelectionChanged:
-                  (s) => setState(() {
-                    _difficulty = s.first;
-                    _getNewQuestion();
-                  }),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Qui dans le groupe...",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        "...pourrait le plus ${_currentQuestion}",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "Pointez du doigt et votez ÃƒÂ  voix haute !",
-              style: Theme.of(context).textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            Consumer<PlayerState>(
-              builder: (ctx, ps, _) {
-                if (!ps.isPremium) return SizedBox.shrink();
-                return Container(
-                  margin: EdgeInsets.only(bottom: 8),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.amberAccent),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.auto_awesome,
-                            color: Colors.amberAccent,
-                            size: 16,
-                          ),
-                          SizedBox(width: 6),
-                          Text(
-                            "IA Premium",
-                            style: TextStyle(
-                              color: Colors.amberAccent,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 6),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: _aiController,
-                              decoration: InputDecoration(
-                                labelText: "ThÃƒÂ¨me pour les questions",
-                                hintText: "ex: sport, ÃƒÂ©cole, famille...",
-                                border: OutlineInputBorder(),
-                                isDense: true,
-                              ),
-                              maxLines: 1,
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed:
-                                _isAiLoading
-                                    ? null
-                                    : () async {
-                                      if (_aiController.text
-                                          .trim()
-                                          .isNotEmpty) {
-                                        setState(() => _isAiLoading = true);
-                                        try {
-                                          _aiQuestions =
-                                              await FirebaseService.generateAiWords(
-                                                instructions:
-                                                    _aiController.text.trim(),
-                                                count: 30,
-                                                gameType:
-                                                    'Qui Pourrait le Plus ?',
-                                              );
-                                          _getNewQuestion();
-                                        } catch (e) {
-                                          print('AI error: $e');
-                                        } finally {
-                                          if (mounted)
-                                            setState(
-                                              () => _isAiLoading = false,
-                                            );
-                                        }
-                                      }
-                                    },
-                            child:
-                                _isAiLoading
-                                    ? SizedBox(
-                                      width: 14,
-                                      height: 14,
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
-                                        strokeWidth: 2,
-                                      ),
-                                    )
-                                    : Icon(Icons.send),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _getNewQuestion,
-              child: Text("Prochaine Question"),
-            ),
-          ],
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: _buildContent(),
         ),
       ),
     );
   }
+
+  Widget _buildContent() {
+    switch (_phase) {
+      case LocalWhoIsPhase.question:
+        return _buildQuestionStep();
+      case LocalWhoIsPhase.voting:
+        return _buildVotingStep();
+      case LocalWhoIsPhase.results:
+        return _buildResultsStep();
+    }
+  }
+
+  Widget _buildQuestionStep() {
+    return Column(
+      key: const ValueKey('question_step'),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SegmentedButton<String>(
+          segments: const [
+            ButtonSegment(value: 'soft', label: Text('Soft')),
+            ButtonSegment(value: 'hard', label: Text('Hard')),
+            ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
+          ],
+          selected: {_difficulty},
+          onSelectionChanged: (s) => setState(() {
+            _difficulty = s.first;
+            _getNewQuestion();
+          }),
+        ),
+        const SizedBox(height: 20),
+        Expanded(
+          child: Card(
+            color: Colors.deepPurple[950]?.withOpacity(0.4),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Qui dans le groupe...",
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    "...pourrait le plus $_currentQuestion",
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Consumer<PlayerState>(
+          builder: (ctx, ps, _) {
+            if (!ps.isPremium) return const SizedBox.shrink();
+            return Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.amberAccent),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Icon(Icons.auto_awesome, color: Colors.amberAccent, size: 16),
+                      SizedBox(width: 6),
+                      Text(
+                        "IA Premium",
+                        style: TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold, fontSize: 13),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _aiController,
+                          decoration: InputDecoration(
+                            labelText: "Thème pour les questions",
+                            hintText: "ex: sport, vacances, école...",
+                            border: const OutlineInputBorder(),
+                            isDense: true,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: _isAiLoading
+                            ? null
+                            : () async {
+                                if (_aiController.text.trim().isNotEmpty) {
+                                  setState(() => _isAiLoading = true);
+                                  try {
+                                    _aiQuestions = await FirebaseService.generateAiWords(
+                                      instructions: _aiController.text.trim(),
+                                      count: 30,
+                                      gameType: 'Qui Pourrait le Plus ?',
+                                    );
+                                    _getNewQuestion();
+                                  } catch (e) {
+                                    print('AI error: $e');
+                                  } finally {
+                                    if (mounted) setState(() => _isAiLoading = false);
+                                  }
+                                }
+                              },
+                        style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12)),
+                        child: _isAiLoading
+                            ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                            : const Icon(Icons.send),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        ElevatedButton(
+          onPressed: _startVoting,
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple, padding: const EdgeInsets.all(16)),
+          child: const Text("Lancer les votes !"),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVotingStep() {
+    final voter = widget.players[_currentVoterIndex];
+    return Column(
+      key: ValueKey('voting_step_$_currentVoterIndex'),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Card(
+          color: Colors.grey[900],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Text(
+                  "Situation :",
+                  style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                ),
+                Text(
+                  "Qui pourrait le plus $_currentQuestion",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          "Passez l'appareil à :",
+          style: Theme.of(context).textTheme.bodyMedium,
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          voter,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Colors.deepPurpleAccent,
+                fontWeight: FontWeight.bold,
+              ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          "Votez secrètement pour le joueur de votre choix :",
+          style: TextStyle(color: Colors.white70),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Expanded(
+          child: ListView.builder(
+            itemCount: widget.players.length,
+            itemBuilder: (context, index) {
+              final target = widget.players[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 4),
+                child: ListTile(
+                  title: Text(target, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  leading: CircleAvatar(child: Text(target[0].toUpperCase())),
+                  trailing: const Icon(Icons.touch_app, color: Colors.deepPurpleAccent),
+                  onTap: () => _recordVote(target),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildResultsStep() {
+    final tally = _calculateTally();
+    final winners = _getWinners(tally);
+    
+    return Column(
+      key: const ValueKey('results_step'),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Card(
+          color: Colors.deepPurple[900]?.withOpacity(0.5),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const Text("SITUATION :", style: TextStyle(color: Colors.white54, fontSize: 12)),
+                const SizedBox(height: 4),
+                Text(
+                  "Qui pourrait le plus $_currentQuestion",
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          winners.length > 1 ? "Égalité !" : "Désigné par le groupe :",
+          style: Theme.of(context).textTheme.titleLarge,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 8,
+          children: winners.map((w) => Chip(
+            avatar: CircleAvatar(child: Text(w[0])),
+            label: Text(w, style: const TextStyle(fontWeight: FontWeight.bold)),
+            backgroundColor: Colors.amber,
+            labelStyle: const TextStyle(color: Colors.black),
+          )).toList(),
+        ),
+        const SizedBox(height: 16),
+        const Text("Détail des votes :", style: TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        Expanded(
+          child: ListView.builder(
+            itemCount: widget.players.length,
+            itemBuilder: (context, index) {
+              final player = widget.players[index];
+              final votesReceived = tally[player] ?? 0;
+              final votersList = _votes.entries
+                  .where((e) => e.value == player)
+                  .map((e) => e.key)
+                  .toList();
+
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 4),
+                child: ListTile(
+                  leading: CircleAvatar(child: Text(player[0])),
+                  title: Text(player, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: votersList.isNotEmpty 
+                      ? Text("Voté par : ${votersList.join(', ')}", style: const TextStyle(fontSize: 12))
+                      : const Text("Aucun vote", style: TextStyle(fontSize: 12, color: Colors.grey)),
+                  trailing: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: votesReceived > 0 ? Colors.deepPurple : Colors.grey[800],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      "$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}",
+                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 12),
+        ElevatedButton(
+          onPressed: _getNewQuestion,
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.all(16)),
+          child: const Text("Situation suivante"),
+        ),
+      ],
+    );
+  }
 }
+
 
 enum CodenamesLocalGameState {
   setup,
@@ -42637,11 +43163,11 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Devine TÃƒÂªte"),
+        title: Text("Devine Tête"),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
-            onPressed: () => showGameRules(context, 'Devine TÃƒÂªte'),
+            onPressed: () => showGameRules(context, 'Devine Tête'),
           ),
         ],
       ),
@@ -42683,7 +43209,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen> {
               Icon(Icons.headset_mic, size: 80, color: Colors.deepPurpleAccent),
               SizedBox(height: 10),
               Text(
-                "Devine TÃƒÂªte",
+                "Devine Tête",
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -42834,7 +43360,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen> {
                                   await FirebaseService.generateAiWords(
                                     instructions: _aiController.text.trim(),
                                     count: 60,
-                                    gameType: 'Devine TÃƒÂªte',
+                                    gameType: 'Devine Tête',
                                   );
                             } catch (e) {
                               print('AI error: $e');

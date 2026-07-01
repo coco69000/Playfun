@@ -1,0 +1,616 @@
+class _OfflineGameScreenState extends State<OfflineGameScreen> {
+  String _difficulty = 'soft';
+  String _currentContent = "";
+  String _title = "";
+  bool _showCoinFlipResult = false;
+  String _coinFlipChoice = "";
+  String _coinFlipResult = "";
+  int _currentPlayerIndex = -1;
+  bool _isSpinning = false;
+  
+  // NOUVEAUX PARAMÈTRES POUR LE DILEMME LOCAL
+  bool _useWheelForDilemma = true;
+  Map<String, String> _dilemmaVotes = {}; // PlayerID -> "A" ou "B"
+  int _dilemmaVoterIndex = 0; // Index du joueur en train de voter (si sans roue)
+  String? _activeDilemmaVoterId;
+  String _dilemmaOptionA = "";
+  String _dilemmaOptionB = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _setTitle();
+  }
+
+  void _setTitle() {
+    switch (widget.gameType) {
+      case 'coin_flip':
+        _title = "Jeu de la Pièce";
+        break;
+      case 'dilemma':
+        _title = "Le Dilemme";
+        break;
+    }
+  }
+
+  void _onWheelStopped(int selectedIndex) {
+    setState(() {
+      _currentPlayerIndex = selectedIndex;
+      _isSpinning = false;
+      _generateNewContent();
+      if (widget.gameType == 'dilemma' && widget.players.isNotEmpty) {
+        _activeDilemmaVoterId = widget.players[selectedIndex];
+      }
+    });
+  }
+
+  String _processContent(String content) {
+    if (content.contains('{player}')) {
+      List<String> otherPlayers = List.from(widget.players);
+      if (_currentPlayerIndex >= 0 && _currentPlayerIndex < otherPlayers.length) {
+        otherPlayers.removeAt(_currentPlayerIndex);
+      }
+      if (otherPlayers.isNotEmpty) {
+        String randomPlayer = otherPlayers[Random().nextInt(otherPlayers.length)];
+        return content.replaceAll('{player}', randomPlayer);
+      } else {
+        return content.replaceAll('{player}', 'toi-mê-me');
+      }
+    }
+    return content;
+  }
+
+  List<String> _splitDilemmaOptions(String content) {
+    final normalized = content.trim().replaceFirst(RegExp(r'[?]+$'), '');
+    final match = RegExp(r'\sou\s', caseSensitive: false).firstMatch(normalized);
+
+    if (match == null) {
+      return [normalized, 'Je passe'];
+    }
+
+    final first = normalized.substring(0, match.start).trim();
+    final second = normalized.substring(match.end).trim();
+
+    if (first.isEmpty || second.isEmpty) {
+      return [normalized, 'Je passe'];
+    }
+
+    return [first, second];
+  }
+
+  String _currentDilemmaWinner() {
+    final optionACount = _dilemmaVotes.values.where((vote) => vote == 'A').length;
+    final optionBCount = _dilemmaVotes.values.where((vote) => vote == 'B').length;
+
+    if (optionACount == 0 && optionBCount == 0) return '';
+    if (optionACount > optionBCount) return 'A';
+    if (optionBCount > optionACount) return 'B';
+    return 'TIE';
+  }
+
+  void _submitDilemmaVote(String playerId, String option) {
+    setState(() {
+      _dilemmaVotes[playerId] = option;
+      if (!_useWheelForDilemma) {
+        // Mode séquentiel : passe au joueur suivant
+        if (_dilemmaVoterIndex < widget.players.length - 1) {
+          _dilemmaVoterIndex++;
+          _activeDilemmaVoterId = widget.players[_dilemmaVoterIndex];
+        } else {
+          // Tous les joueurs ont voté
+          _activeDilemmaVoterId = null; 
+        }
+      } else {
+        // Mode Roue (1 seul votant) : l'action se fige après son vote
+        _activeDilemmaVoterId = null;
+      }
+    });
+  }
+
+  Widget _buildDilemmaOptionCard({
+    required BuildContext context,
+    required String optionKey,
+    required String optionText,
+    required Color color,
+  }) {
+    final voteCount = _dilemmaVotes.values.where((vote) => vote == optionKey).length;
+    final totalVotes = _dilemmaVotes.isEmpty ? 1 : _dilemmaVotes.length;
+    final progress = (voteCount / totalVotes).clamp(0.0, 1.0);
+    final winner = _currentDilemmaWinner();
+    final isWinning = winner == optionKey;
+    final isTied = winner == 'TIE';
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: _activeDilemmaVoterId == null
+            ? null
+            : () => _submitDilemmaVote(_activeVoterOrCurrent(), optionKey),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: isWinning ? color.withOpacity(0.28) : color.withOpacity(0.16),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: isWinning ? color : Colors.white12,
+              width: isWinning ? 2.5 : 1.0,
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                optionText,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 14),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(999),
+                child: LinearProgressIndicator(
+                  minHeight: 10,
+                  value: progress,
+                  backgroundColor: Colors.white10,
+                  valueColor: AlwaysStoppedAnimation<Color>(color),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                '$voteCount vote${voteCount > 1 ? 's' : ''}',
+                style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
+              ),
+              if (isWinning && voteCount > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    isTied ? 'Égalité' : 'Majoritaire',
+                    style: TextStyle(color: color, fontWeight: FontWeight.bold),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  String _getInstructionText() {
+    if (_useWheelForDilemma) {
+      final voterName = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : '...';
+      return _activeDilemmaVoterId == null 
+          ? "Choix enregistré !" 
+          : "Dilemme pour $voterName : fait ton choix !";
+    } else {
+      return _activeDilemmaVoterId == null 
+          ? "Tous les votes sont enregistrés !" 
+          : "C'est au tour de $_activeDilemmaVoterId de voter !";
+    }
+  }
+
+  String _getCurrentVoterName() {
+    return _useWheelForDilemma 
+        ? (_currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "Joueur")
+        : (_activeDilemmaVoterId ?? "Fin");
+  }
+
+  String _restoreLiarVoterIdentity() {
+    return _activeDilemmaVoterId ?? '';
+  }
+
+  String _activeVoterOrCurrent() {
+    return _useWheelForDilemma ? _getCurrentVoterName() : (_activeDilemmaVoterId ?? "");
+  }
+
+  Widget _buildDilemmaVoteUI(BuildContext context) {
+    final winner = _currentDilemmaWinner();
+    final totalExpected = widget.players.length;
+    final allVotesCast = _useWheelForDilemma 
+        ? _dilemmaVotes.isNotEmpty 
+        : _dilemmaVotes.length >= totalExpected;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  elevation: 6,
+                  color: Colors.blueGrey[900],
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'LE DILEMME',
+                          style: TextStyle(color: Colors.amberAccent, letterSpacing: 2, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          _currentContent,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _getInstructionText(),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
+                if (!_useWheelForDilemma && _activeDilemmaVoterId != null)
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    alignment: WrapAlignment.center,
+                    children: widget.players.map((player) {
+                      final hasVoted = _dilemmaVotes.containsKey(player);
+                      final isActive = player == _activeDilemmaVoterId;
+                      return Chip(
+                        label: Text(player),
+                        backgroundColor: isActive 
+                            ? Colors.deepPurple 
+                            : (hasVoted ? Colors.green[800] : Colors.white10),
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    _buildDilemmaOptionCard(
+                      context: context,
+                      optionKey: 'A',
+                      optionText: _dilemmaOptionA,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    const SizedBox(width: 12),
+                    _buildDilemmaOptionCard(
+                      context: context,
+                      optionKey: 'B',
+                      optionText: _dilemmaOptionB,
+                      color: Colors.teal,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                if (allVotesCast)
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.arrow_forward),
+                    label: const Text('Dilemme Suivant'),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
+                    onPressed: () => setState(() {
+                      _isSpinning = false;
+                      _currentContent = "";
+                      _currentPlayerIndex = -1;
+                      _dilemmaVotes.clear();
+                      _activeDilemmaVoterId = null;
+                      _dilemmaOptionA = "";
+                      _dilemmaOptionB = "";
+                    }),
+                  )
+                else if (_useWheelForDilemma)
+                  const Text(
+                    'Le joueur désigné doit faire son choix.',
+                    style: TextStyle(color: Colors.white38, fontStyle: FontStyle.italic),
+                  )
+                else
+                  Text(
+                    'En attente du vote de : $_activeDilemmaVoterId (${_dilemmaVotes.length} / $totalExpected)',
+                    style: const TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _generateNewContent() {
+    List<String> contentList = [];
+    Random random = Random();
+    String nextContent = "";
+
+    switch (widget.gameType) {
+      case 'coin_flip':
+        contentList = GameData.offlineCoinFlipQuestions[_difficulty]!;
+        _showCoinFlipResult = false;
+        break;
+      case 'dilemma':
+        contentList = GameData.offlineDilemmas[_difficulty]!;
+        break;
+    }
+
+    nextContent = _processContent(contentList[random.nextInt(contentList.length)]);
+
+    setState(() {
+      _currentContent = nextContent;
+      if (widget.gameType == 'dilemma') {
+        final dilemmaOptions = _splitDilemmaOptions(nextContent);
+        _dilemmaOptionA = dilemmaOptions[0];
+        _dilemmaOptionB = dilemmaOptions[1];
+        _dilemmaVotes.clear();
+        
+        if (_useWheelForDilemma) {
+          _activeDilemmaVoterId = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : null;
+        } else {
+          _dilemmaVoterIndex = 0;
+          _activeDilemmaVoterId = widget.players.isNotEmpty ? widget.players.first : null;
+        }
+      }
+    });
+  }
+
+  void _flipCoin() {
+    Random random = Random();
+    setState(() {
+      _coinFlipResult = random.nextBool() ? "Pile" : "Face";
+      _showCoinFlipResult = true;
+    });
+  }
+
+  void _startNextDilemmaRoundDirectly() {
+    setState(() {
+      _isSpinning = false;
+      _generateNewContent();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final currentPlayer = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
+    final isDilemma = widget.gameType == 'dilemma';
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_title),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => showGameRules(context, _title),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            // FILTRE DIFFICULTE
+            SegmentedButton<String>(
+              segments: const [
+                ButtonSegment(value: 'soft', label: Text('Soft')),
+                ButtonSegment(value: 'hard', label: Text('Hard')),
+                ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
+              ],
+              selected: {_difficulty},
+              onSelectionChanged: (newSelection) {
+                setState(() {
+                  _difficulty = newSelection.first;
+                  if (!_isSpinning && _currentContent.isNotEmpty) {
+                    _generateNewContent();
+                  }
+                });
+              },
+            ),
+            const SizedBox(height: 12),
+            
+            // CONFIGURATION ROUE / SANS ROUE POUR LE DILEMME (Affiché uniquement lors de la phase de préparation)
+            if (isDilemma && _currentContent.isEmpty && !_isSpinning) ...[
+              Card(
+                color: Colors.grey[900],
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Text(
+                        "Mode de sélection du Dilemme",
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white70),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 10),
+                      SegmentedButton<bool>(
+                        segments: const [
+                          ButtonSegment(
+                            value: true, 
+                            label: Text('Avec Roue'),
+                            icon: Icon(Icons.blur_circular),
+                          ),
+                          ButtonSegment(
+                            value: false, 
+                            label: Text('Sans Roue (Tous)'),
+                            icon: Icon(Icons.people),
+                          ),
+                        ],
+                        selected: {_useWheelForDilemma},
+                        onSelectionChanged: (val) => setState(() {
+                          _useWheelForDilemma = val.first;
+                        }),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
+
+            Expanded(
+              child: Center(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
+                  child: isDilemma && _currentContent.isNotEmpty
+                      ? _buildDilemmaVoteUI(context)
+                      : _isSpinning
+                          ? SpinTheWheelWidget(
+                              key: const ValueKey('wheel_spin'),
+                              players: widget.players,
+                              onSpinEnd: _onWheelStopped,
+                            )
+                          : (_currentContent.isEmpty
+                              ? Text(
+                                  "Appuyez sur 'Lancer le tour' pour commencer !",
+                                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white70),
+                                  textAlign: TextAlign.center,
+                                )
+                              : Card(
+                                  key: ValueKey<String>(_currentContent),
+                                  elevation: 4,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(24.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "C'est au tour de",
+                                          style: Theme.of(context).textTheme.bodyMedium,
+                                        ),
+                                        Text(
+                                          currentPlayer,
+                                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                            color: Colors.deepPurpleAccent,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Text(
+                                          _currentContent,
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context).textTheme.headlineSmall,
+                                        ),
+                                        if (widget.gameType == 'coin_flip' && _showCoinFlipResult)
+                                          _buildCoinFlipResult(),
+                                      ],
+                                    ),
+                                  ),
+                                )),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            _buildGameControls(),
+            const SizedBox(height: 10),
+            if (!isDilemma || _currentContent.isEmpty || _isSpinning) _buildPlayerChips(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPlayerChips() {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 4,
+      alignment: WrapAlignment.center,
+      children: List.generate(widget.players.length, (index) {
+        final isCurrent = index == _currentPlayerIndex && !_isSpinning;
+        return Chip(
+          label: Text(widget.players[index]),
+          backgroundColor: isCurrent ? Colors.deepPurple : const Color(0xFF333333),
+          labelStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
+          ),
+        );
+      }),
+    );
+  }
+
+  Widget _buildCoinFlipResult() {
+    bool lost = _coinFlipChoice != _coinFlipResult;
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Column(
+        children: [
+          Text(
+            "Tu as choisi $_coinFlipChoice. La pièce est tombée sur... $_coinFlipResult !",
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            lost
+                ? "PERDU ! Révèle la question et réponds-y !"
+                : "GAGNÉ ! Ton secret est préservé.",
+            style: TextStyle(
+              fontSize: 18,
+              color: lost ? Colors.redAccent : Colors.greenAccent,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGameControls() {
+    if (_isSpinning) return const SizedBox(height: 50);
+
+    if (widget.gameType == 'dilemma' && _currentContent.isNotEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    if (_currentContent.isEmpty) {
+      return ElevatedButton(
+        onPressed: () {
+          if (widget.gameType == 'dilemma' && !_useWheelForDilemma) {
+            _startNextDilemmaRoundDirectly();
+          } else {
+            setState(() => _isSpinning = true);
+          }
+        },
+        child: Text(widget.gameType == 'dilemma' && !_useWheelForDilemma ? "Lancer le Dilemme" : "Lancer la roue"),
+      );
+    }
+
+    if (widget.gameType == 'coin_flip' && _showCoinFlipResult) {
+      return ElevatedButton(
+        onPressed: () => setState(() {
+          _isSpinning = true;
+          _currentContent = "";
+        }),
+        child: const Text("Tour Suivant"),
+      );
+    }
+
+    if (widget.gameType == 'coin_flip') {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              _coinFlipChoice = "Pile";
+              _flipCoin();
+            },
+            child: const Text("Je choisis PILE"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _coinFlipChoice = "Face";
+              _flipCoin();
+            },
+            child: const Text("Je choisis FACE"),
+          ),
+        ],
+      );
+    }
+    return const SizedBox.shrink();
+  }
+}

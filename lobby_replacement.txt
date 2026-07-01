@@ -1,0 +1,240 @@
+class GameLobbyScreen extends StatefulWidget {
+  final String gameCode;
+  final String playerId;
+  const GameLobbyScreen({required this.gameCode, required this.playerId});
+  @override
+  _GameLobbyScreenState createState() => _GameLobbyScreenState();
+}
+
+class _GameLobbyScreenState extends State<GameLobbyScreen> {
+  final FirebaseService _firebaseService = FirebaseService();
+  late LivekitService _livekitService;
+  bool _livekitInitialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _livekitService = Provider.of<LivekitService>(context, listen: false);
+  }
+
+  Future<void> _connectToLivekit(bool videoEnabled, bool audioEnabled) async {
+    if (_livekitInitialized) return;
+    _livekitInitialized = true;
+    try {
+      await _livekitService.initialize();
+      await _livekitService.joinChannel(
+        widget.gameCode,
+        identity: widget.playerId,
+        videoEnabled: videoEnabled,
+        audioEnabled: audioEnabled,
+      );
+    } catch (e) {
+      print("Erreur init Livekit au salon : $e");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final String gameCode = widget.gameCode;
+    final String currentPlayerId = widget.playerId;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Salon Privé")),
+      body: StreamBuilder<DocumentSnapshot>(
+        stream: _firebaseService.getGameStream(gameCode),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+          if (snapshot.hasError) return const Center(child: Text("Erreur de connexion au salon."));
+          if (!snapshot.data!.exists) {
+            Future.microtask(() => Navigator.of(context).popUntil((route) => route.isFirst));
+            return const Center(child: Text("La partie n'existe plus."));
+          }
+
+          var gameData = snapshot.data!.data() as Map<String, dynamic>;
+          var players = (gameData['players'] as Map<String, dynamic>?) ?? {};
+
+          if (!_livekitInitialized &&
+              (gameData['videoEnabled'] == true || gameData['audioEnabled'] == true)) {
+            _connectToLivekit(
+              gameData['videoEnabled'] == true,
+              gameData['audioEnabled'] == true,
+            );
+          }
+
+          String gameType = gameData['gameType'] ?? '';
+
+          if (gameData['gameState'] == 'playing') {
+            Future.microtask(() => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => MultiplayerGameScreen(
+                  gameCode: gameCode,
+                  playerId: currentPlayerId,
+                ),
+              ),
+            ));
+            return const Center(child: Text("La partie commence..."));
+          }
+
+          bool isHost = gameData['hostId'] == currentPlayerId;
+          bool isTeamGame = ['Codenames', 'Time\'s Up'].contains(gameType);
+          Map<int, List<String>> teams = {};
+          if (gameData['teams'] != null) {
+            (gameData['teams'] as Map<String, dynamic>).forEach((key, value) {
+              teams[int.parse(key)] = List<String>.from(value);
+            });
+          }
+
+          bool canStart = true;
+          String requirementMessage = "";
+
+          if (isTeamGame) {
+            final int totalAssignedPlayers = teams.values.fold(0, (sum, team) => sum + team.length);
+            if (players.length < 4) {
+              canStart = false;
+              requirementMessage = "Il faut au moins 4 joueurs.";
+            } else if (teams.length < 2) {
+              canStart = false;
+              requirementMessage = "Veuillez créer au moins 2 équipes.";
+            } else if (totalAssignedPlayers != players.length) {
+              canStart = false;
+              requirementMessage = "Tous les joueurs doivent être assignés à une équipe.";
+            } else if (teams.values.any((team) => team.length < 2)) {
+              canStart = false;
+              requirementMessage = "Chaque équipe doit posséder au moins 2 joueurs.";
+            }
+          } else {
+            switch (gameType) {
+              case 'Zombie!':
+                if (players.length != 4) {
+                  canStart = false;
+                  requirementMessage = "Ce jeu requiert exactement 4 joueurs.";
+                }
+                break;
+              case 'Synonyme ou Banni':
+                if (players.length < 3) {
+                  canStart = false;
+                  requirementMessage = "Au moins 3 joueurs requis.";
+                }
+                break;
+              default:
+                if (players.length < 2) {
+                  canStart = false;
+                  requirementMessage = "Au moins 2 joueurs requis.";
+                }
+                break;
+            }
+          }
+
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Card(
+                    color: Colors.deepPurple[950]?.withOpacity(0.3),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: const BorderSide(color: Colors.deepPurpleAccent, width: 1),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+                          const Text(
+                            "PARTAGEZ CE CODE AVEC VOS AMIS",
+                            style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SelectableText(
+                                gameCode,
+                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                  fontSize: 36,
+                                  letterSpacing: 4,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.amberAccent,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              IconButton(
+                                icon: const Icon(Icons.copy, color: Colors.amberAccent),
+                                onPressed: () {
+                                  Clipboard.setData(ClipboardData(text: gameCode));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text("Code de salon copié !")),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Card(
+                    child: ListTile(
+                      leading: const Icon(Icons.games, color: Colors.cyanAccent),
+                      title: Text("Jeu : $gameType", style: const TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text("Difficulté : ${gameData['difficulty'] ?? 'Standard'}"),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Joueurs présents (${players.length})",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 10),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: players.length,
+                    itemBuilder: (context, idx) {
+                      String pId = players.keys.elementAt(idx);
+                      var pData = players[pId];
+                      bool isPlayerHost = pId == gameData['hostId'];
+
+                      Color? teamColor;
+                      int? teamIndex;
+                      for (var teamEntry in teams.entries) {
+                        if (teamEntry.value.contains(pId)) {
+                          teamIndex = teamEntry.key;
+                          break;
+                        }
+                      }
+
+                      if (teamIndex != null) {
+                        const List<Color> teamColors = [
+                          Colors.redAccent,
+                          Colors.blueAccent,
+                          Colors.greenAccent,
+                          Colors.orangeAccent,
+                        ];
+                        teamColor = teamColors[teamIndex % teamColors.length].withOpacity(0.15);
+                      }
+
+                      return Card(
+                        color: teamColor,
+                        child: ListTile(
+                          leading: Icon(
+                            isPlayerHost ? Icons.admin_panel_settings : Icons.person,
+                            color: isPlayerHost ? Colors.amber : Colors.white70,
+                          ),
+                          title: Text(pData['name'] ?? 'Joueur', style: const TextStyle(fontWeight: FontWeight.bold)),
+                          trailing: const Chip(
+                            label: Text("Prêt"),
+                            backgroundColor: Colors.green,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  if (isHost) ...[
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.person_add),
+                      label: const Text("Inviter mes Amis"),
