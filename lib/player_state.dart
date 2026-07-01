@@ -1,17 +1,14 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// Service simulé pour les achats. Dans une vraie application,
-// tu utiliserais le package in_app_purchase.
 class PremiumService {
   Future<bool> purchasePremium() async {
-    // Simule une transaction réussie
     print("Simulation d'un achat premium réussi.");
     return true;
   }
 
   Future<bool> restorePurchase() async {
-    // Simule une restauration réussie si l'utilisateur a déjà acheté
     print("Simulation d'une restauration d'achat premium réussie.");
     return true;
   }
@@ -21,171 +18,274 @@ class PlayerState extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final PremiumService _premiumService = PremiumService();
 
-  // --- Propriétés du joueur ---
-  String? _userId; // Remplace _persistentId
+  String? _userId;
+  String? _userName;
   int _coins = 0;
   bool _isPremium = false;
   bool _isDataLoaded = false;
   int _multiplayerGamesPlayedToday = 0;
-  int _videoGamesPlayedToday = 0; // Nouvel attribut
+  int _videoGamesPlayedToday = 0;
   DateTime? _lastDailyCoinGrant;
   DateTime? _lastMultiplayerReset;
-  DateTime? _lastVideoGamesReset; // Nouvel attribut
+  DateTime? _lastVideoGamesReset;
   Set<String> _unlockedParametersToday = {};
 
-  // --- Getters publics ---
+  int _level = 1;
+  int _xp = 0;
+  Map<String, dynamic> _gameStats = {};
+
+  // --- SYSTÈME D'AMIS ET INVITATIONS ---
+  List<String> _friends = [];
+  List<Map<String, dynamic>> _friendRequests = []; // {uid, name}
+  List<Map<String, dynamic>> _gameInvites = []; // {gameCode, hostName}
+  Map<String, String> _friendNamesCache = {}; // Cache pour afficher les noms
+  StreamSubscription<DocumentSnapshot>? _userSubscription;
+
   int get coins => _coins;
   bool get isPremium => _isPremium;
-  String? get userId => _userId; // Remplace persistentId
-  int get multiplayerGamesLeft => isPremium ? 999 : (20 - _multiplayerGamesPlayedToday);
-  int get videoGamesLeftToday => isPremium ? 999 : (2 - _videoGamesPlayedToday);
+  String? get userId => _userId;
+  String? get userName => _userName;
+  int get multiplayerGamesLeft =>
+      isPremium ? 999 : (20 - _multiplayerGamesPlayedToday);
+  int get videoGamesLeftToday => isPremium ? 999 : (4 - _videoGamesPlayedToday);
+  int get level => _level;
+  int get xp => _xp;
+  Map<String, dynamic> get gameStats => _gameStats;
 
-  // --- NOUVELLE MÉTHODE : Charge les données depuis Firestore ---
-  // THIS METHOD IS LIKELY MISSING OR RENAMED IN YOUR CURRENT FILE
-  Future<void> loadUserData(String userId) async {
-    // Si les données sont déjà chargées avec succès pour cet utilisateur, on ne recharge pas
-    if (_isDataLoaded && _userId == userId) {
-      print("Données utilisateur déjà chargées pour $userId.");
-      return;
-    }
+  List<String> get friends => _friends;
+  List<Map<String, dynamic>> get friendRequests => _friendRequests;
+  List<Map<String, dynamic>> get gameInvites => _gameInvites;
+  Map<String, String> get friendNamesCache => _friendNamesCache;
 
-    _userId = userId;
-    DocumentSnapshot userDoc = await _db.collection('users').doc(userId).get();
-
-    if (!userDoc.exists) {
-      print("Le document pour l'utilisateur $userId n'existe pas. Cela est géré à l'inscription.");
-      // Normalement géré à l'inscription, mais en cas de problème :
-      _coins = 50;
-      _isPremium = false;
-      _multiplayerGamesPlayedToday = 0;
-      _videoGamesPlayedToday = 0;
-      await _saveState(); // Crée le document
-    } else {
-      var data = userDoc.data() as Map<String, dynamic>;
-      _coins = data['coins'] ?? 20;
-      _isPremium = data['isPremium'] ?? false;
-
-      // Charge les limites quotidiennes depuis Firestore
-      _loadDailyLimits(data);
-    }
-
-    _isDataLoaded = true;
-    _userId = userId; // Réaffirme l'ID après les awaits (protection contre la course critique avec resetState)
-    grantDailyCoinsAndResetLimits();
-
-    print("PlayerState chargé pour l'utilisateur: ID=$_userId, Coins=$_coins, Premium=$_isPremium");
-    notifyListeners();
+  int get xpForNextLevel {
+    int extra = (_level ~/ 10) * 100;
+    return 1000 + extra;
   }
 
-  // --- NOUVELLE MÉTHODE : Réinitialise l'état lors de la déconnexion ---
+  Future<void> loadUserData(String userId) async {
+    if (_isDataLoaded && _userId == userId) return;
+
+    _userId = userId;
+
+    // Annule l'ancienne écoute si elle existe
+    _userSubscription?.cancel();
+
+    // On écoute le document en temps réel
+    _userSubscription = _db.collection('users').doc(userId).snapshots().listen((
+      userDoc,
+    ) async {
+      if (!userDoc.exists) {
+        // Initialisation du nouveau joueur
+        _coins = 50;
+        _isPremium = false;
+        _level = 1;
+        _xp = 0;
+        await _saveState();
+      } else {
+        var data = userDoc.data() as Map<String, dynamic>;
+        _userName = data['name'] ?? 'Joueur';
+        _coins = data['coins'] ?? 20;
+        _isPremium = data['isPremium'] ?? false;
+        _level = data['level'] ?? 1;
+        _xp = data['xp'] ?? 0;
+        _gameStats = data['gameStats'] ?? {};
+
+        _friends = List<String>.from(data['friends'] ?? []);
+        _friendRequests = List<Map<String, dynamic>>.from(
+          data['friendRequests'] ?? [],
+        );
+        _gameInvites = List<Map<String, dynamic>>.from(
+          data['gameInvites'] ?? [],
+        );
+
+        _loadDailyLimits(data);
+        await _fetchFriendNames();
+      }
+
+      _isDataLoaded = true;
+      grantDailyCoinsAndResetLimits();
+      notifyListeners();
+    });
+  }
+
   void resetState() {
+    _userSubscription?.cancel();
     _userId = null;
+    _userName = null;
     _coins = 0;
     _isPremium = false;
     _isDataLoaded = false;
     _multiplayerGamesPlayedToday = 0;
     _videoGamesPlayedToday = 0;
-    _lastDailyCoinGrant = null;
-    _lastMultiplayerReset = null;
-    _lastVideoGamesReset = null;
-    _unlockedParametersToday.clear();
-    print("PlayerState a été réinitialisé.");
+    _level = 1;
+    _xp = 0;
+    _gameStats = {};
+    _friends = [];
+    _friendRequests = [];
+    _gameInvites = [];
+    _friendNamesCache = {};
     notifyListeners();
   }
 
   void _loadDailyLimits(Map<String, dynamic> data) {
-    // Charge les dates depuis les Timestamps de Firestore
-    final lastCoinTimestamp = data['lastDailyCoinGrant'] as Timestamp?;
-    if (lastCoinTimestamp != null) {
-      _lastDailyCoinGrant = lastCoinTimestamp.toDate();
-    }
-    final lastResetTimestamp = data['lastMultiplayerReset'] as Timestamp?;
-    if (lastResetTimestamp != null) {
-      _lastMultiplayerReset = lastResetTimestamp.toDate();
-    }
-    final lastVideoResetTimestamp = data['lastVideoGamesReset'] as Timestamp?;
-    if (lastVideoResetTimestamp != null) {
-      _lastVideoGamesReset = lastVideoResetTimestamp.toDate();
-    }
-    // Charge le compteur de parties
+    _lastDailyCoinGrant = (data['lastDailyCoinGrant'] as Timestamp?)?.toDate();
+    _lastMultiplayerReset =
+        (data['lastMultiplayerReset'] as Timestamp?)?.toDate();
+    _lastVideoGamesReset =
+        (data['lastVideoGamesReset'] as Timestamp?)?.toDate();
     _multiplayerGamesPlayedToday = data['multiplayerGamesPlayedToday'] ?? 0;
     _videoGamesPlayedToday = data['videoGamesPlayedToday'] ?? 0;
   }
 
-  // --- Logique quotidienne ---
+  // --- NOUVELLE FONCTION POUR MODIFIER SON PSEUDO ---
+  Future<void> updateUserName(String newName) async {
+    if (_userId == null || newName.trim().isEmpty) return;
+    await _db.collection('users').doc(_userId!).update({
+      'name': newName.trim(),
+    });
+    _userName = newName.trim();
+    notifyListeners();
+  }
+
   void grantDailyCoinsAndResetLimits() {
     if (_userId == null) return;
-
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     bool needsSave = false;
 
-    // Bonus de pièces quotidien
     if (_lastDailyCoinGrant == null || _lastDailyCoinGrant!.isBefore(today)) {
       if (!_isPremium) {
         _coins += 10;
         _lastDailyCoinGrant = today;
         needsSave = true;
-        print("10 pièces quotidiennes ajoutées.");
       }
     }
-
-    // Réinitialisation du compteur de parties multijoueur
-    if (_lastMultiplayerReset == null || _lastMultiplayerReset!.isBefore(today)) {
+    if (_lastMultiplayerReset == null ||
+        _lastMultiplayerReset!.isBefore(today)) {
       _multiplayerGamesPlayedToday = 0;
       _lastMultiplayerReset = today;
-      _unlockedParametersToday.clear(); // Oublie les paramètres débloqués la veille
+      _unlockedParametersToday.clear();
       needsSave = true;
-      print("Compteur de parties multijoueur réinitialisé.");
     }
-
-    // Réinitialisation du compteur de parties vidéo
     if (_lastVideoGamesReset == null || _lastVideoGamesReset!.isBefore(today)) {
       _videoGamesPlayedToday = 0;
       _lastVideoGamesReset = today;
       needsSave = true;
-      print("Compteur de parties vidéo réinitialisé.");
     }
+    if (needsSave) _saveState();
+  }
 
-    if (needsSave) {
-      _saveState();
+  // --- LOGIQUE DES AMIS ---
+
+  Future<void> _fetchFriendNames() async {
+    for (String friendId in _friends) {
+      if (!_friendNamesCache.containsKey(friendId)) {
+        var doc = await _db.collection('users').doc(friendId).get();
+        if (doc.exists) {
+          _friendNamesCache[friendId] = doc.data()?['name'] ?? 'Inconnu';
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<List<Map<String, dynamic>>> searchUsers(String query) async {
+    if (query.trim().isEmpty) return [];
+    var snap =
+        await _db
+            .collection('users')
+            .where('name', isGreaterThanOrEqualTo: query)
+            .where('name', isLessThanOrEqualTo: query + '\uf8ff')
+            .limit(10)
+            .get();
+
+    return snap.docs
+        .map((doc) => {'uid': doc.id, 'name': doc.data()['name'] ?? 'Joueur'})
+        .toList();
+  }
+
+  Future<void> sendFriendRequest(String targetUid, String targetName) async {
+    if (_userId == null || targetUid == _userId || _friends.contains(targetUid))
+      return;
+
+    await _db.collection('users').doc(targetUid).update({
+      'friendRequests': FieldValue.arrayUnion([
+        {'uid': _userId, 'name': _userName ?? 'Joueur'},
+      ]),
+    });
+  }
+
+  Future<void> respondToFriendRequest(
+    String senderUid,
+    String senderName,
+    bool accept,
+  ) async {
+    if (_userId == null) return;
+
+    // Retirer la requête
+    await _db.collection('users').doc(_userId).update({
+      'friendRequests': FieldValue.arrayRemove([
+        {'uid': senderUid, 'name': senderName},
+      ]),
+    });
+
+    if (accept) {
+      // Ajouter à la liste des deux
+      await _db.collection('users').doc(_userId).update({
+        'friends': FieldValue.arrayUnion([senderUid]),
+      });
+      await _db.collection('users').doc(senderUid).update({
+        'friends': FieldValue.arrayUnion([_userId]),
+      });
     }
   }
 
-  // --- Gestion des Pièces ---
-  Future<bool> spendCoins(int amount, {String? parameterId}) async {
-    // Check local premium flag first — before any userId/network dependency
-    if (_isPremium) {
-      if (parameterId != null) unlockParameter(parameterId);
-      return true; // Les VIP ne dépensent pas de pièces
-    }
+  Future<void> removeFriend(String friendUid) async {
+    if (_userId == null) return;
+    await _db.collection('users').doc(_userId).update({
+      'friends': FieldValue.arrayRemove([friendUid]),
+    });
+    await _db.collection('users').doc(friendUid).update({
+      'friends': FieldValue.arrayRemove([_userId]),
+    });
+    _friendNamesCache.remove(friendUid);
+    notifyListeners();
+  }
 
+  // --- LOGIQUE DES INVITATIONS AUX JEUX ---
+
+  Future<void> sendGameInvite(String friendUid, String gameCode) async {
+    if (_userId == null) return;
+    await _db.collection('users').doc(friendUid).update({
+      'gameInvites': FieldValue.arrayUnion([
+        {'gameCode': gameCode, 'hostName': _userName ?? 'Votre ami'},
+      ]),
+    });
+  }
+
+  Future<void> clearGameInvite(String gameCode, String hostName) async {
+    if (_userId == null) return;
+    await _db.collection('users').doc(_userId).update({
+      'gameInvites': FieldValue.arrayRemove([
+        {'gameCode': gameCode, 'hostName': hostName},
+      ]),
+    });
+  }
+
+  // ----------------------------------------
+
+  Future<bool> spendCoins(int amount, {String? parameterId}) async {
+    if (_isPremium) return true;
     if (_userId == null) return false;
 
-    // Re-check premium status from Firestore to avoid stale local cache
-    if (_userId != null) {
-      DocumentSnapshot userDoc = await _db.collection('users').doc(_userId!).get();
-      if (userDoc.exists) {
-        var data = userDoc.data() as Map<String, dynamic>;
-        _isPremium = data['isPremium'] ?? false;
-        _coins = data['coins'] ?? _coins;
-      }
-    }
-
-    if (_isPremium) {
-      if (parameterId != null) unlockParameter(parameterId);
-      return true; // Les VIP ne dépensent pas de pièces
-    }
     if (_coins >= amount) {
       _coins -= amount;
-      if (parameterId != null) unlockParameter(parameterId);
       await _saveState();
       return true;
     }
-    return false; // Pas assez de pièces
+    return false;
   }
 
-  // --- Gestion des Limites ---
   Future<bool> canPlayMultiplayer() async {
     if (_isPremium) return true;
     return _multiplayerGamesPlayedToday < 20;
@@ -193,36 +293,36 @@ class PlayerState extends ChangeNotifier {
 
   Future<bool> canPlayVideoGame() async {
     if (_isPremium) return true;
-    return _videoGamesPlayedToday < 2; // 2 parties gratuites par jour
+    return _videoGamesPlayedToday < 4;
   }
 
   Future<void> recordMultiplayerGame() async {
-    if (_userId == null) return;
-    if (!_isPremium) {
-      _multiplayerGamesPlayedToday++;
-      await _saveState();
-    }
+    if (_userId == null || _isPremium) return;
+    _multiplayerGamesPlayedToday++;
+    await _saveState();
   }
 
   Future<void> recordVideoGamePlayed() async {
+    if (_userId == null || _isPremium) return;
+    _videoGamesPlayedToday++;
+    await _saveState();
+  }
+
+  Future<void> addXpAndStats(int xpGained, String gameName, bool isWin) async {
     if (_userId == null) return;
-    if (!_isPremium) {
-      _videoGamesPlayedToday++;
-      await _saveState();
+    _xp += xpGained;
+    while (_xp >= xpForNextLevel) {
+      _xp -= xpForNextLevel;
+      _level++;
     }
+    if (_gameStats[gameName] == null) {
+      _gameStats[gameName] = {'played': 0, 'won': 0};
+    }
+    _gameStats[gameName]['played']++;
+    if (isWin) _gameStats[gameName]['won']++;
+    await _saveState();
   }
 
-  // --- Gestion des Paramètres ---
-  bool isParameterUnlocked(String parameterId) {
-    if (_isPremium) return true;
-    return _unlockedParametersToday.contains(parameterId);
-  }
-
-  void unlockParameter(String parameterId) {
-    _unlockedParametersToday.add(parameterId);
-  }
-
-  // --- Gestion du Premium ---
   Future<void> purchasePremium() async {
     if (_userId == null) return;
     bool success = await _premiumService.purchasePremium();
@@ -243,25 +343,32 @@ class PlayerState extends ChangeNotifier {
     }
   }
 
-  // --- Sauvegarde sur Firestore ---
   Future<void> _saveState() async {
-    if (_userId == null) {
-      print("Attention: _saveState appelé sans utilisateur connecté.");
-      return;
-    }
-
+    if (_userId == null) return;
     Map<String, dynamic> userData = {
       'coins': _coins,
       'isPremium': _isPremium,
       'multiplayerGamesPlayedToday': _multiplayerGamesPlayedToday,
       'videoGamesPlayedToday': _videoGamesPlayedToday,
-      'lastDailyCoinGrant': _lastDailyCoinGrant != null ? Timestamp.fromDate(_lastDailyCoinGrant!) : null,
-      'lastMultiplayerReset': _lastMultiplayerReset != null ? Timestamp.fromDate(_lastMultiplayerReset!) : null,
-      'lastVideoGamesReset': _lastVideoGamesReset != null ? Timestamp.fromDate(_lastVideoGamesReset!) : null,
+      'level': _level,
+      'xp': _xp,
+      'gameStats': _gameStats,
     };
+    if (_lastDailyCoinGrant != null)
+      userData['lastDailyCoinGrant'] = Timestamp.fromDate(_lastDailyCoinGrant!);
+    if (_lastMultiplayerReset != null)
+      userData['lastMultiplayerReset'] = Timestamp.fromDate(
+        _lastMultiplayerReset!,
+      );
+    if (_lastVideoGamesReset != null)
+      userData['lastVideoGamesReset'] = Timestamp.fromDate(
+        _lastVideoGamesReset!,
+      );
 
-    // set avec merge:true va créer le document s'il n'existe pas, ou le mettre à jour
-    await _db.collection('users').doc(_userId!).set(userData, SetOptions(merge: true));
+    await _db
+        .collection('users')
+        .doc(_userId!)
+        .set(userData, SetOptions(merge: true));
     notifyListeners();
   }
 }

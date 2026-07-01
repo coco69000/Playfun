@@ -1,12 +1,11 @@
 const functions = require("firebase-functions");
-const { RtcTokenBuilder, RtcRole } = require("agora-token");
+const { AccessToken } = require("livekit-server-sdk");
 
-// Paramètres (nouvelle méthode recommandée)
-const appId = functions.params.defineString("AGORA_APP_ID");
-const appCertificate = functions.params.defineString("AGORA_APP_CERTIFICATE");
+// Paramètres
+const livekitApiKey = functions.params.defineString("LIVEKIT_API_KEY");
+const livekitApiSecret = functions.params.defineString("LIVEKIT_API_SECRET");
 
-exports.generateAgoraToken = functions.https.onRequest(async (req, res) => {
-
+exports.generateLivekitToken = functions.https.onRequest(async (req, res) => {
   // CORS
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -16,39 +15,30 @@ exports.generateAgoraToken = functions.https.onRequest(async (req, res) => {
     return res.status(204).send("");
   }
 
-  const { channelName, uid = 0 } = req.body;
+  const { roomName, participantIdentity } = req.body;
 
-  console.log("🔍 Requête reçue → channel:", channelName, "uid:", uid);
+  console.log("🔍 Requête reçue → room:", roomName, "identity:", participantIdentity);
 
-  if (!channelName) {
-    return res.status(400).json({ error: { message: "channelName est obligatoire" } });
+  if (!roomName || !participantIdentity) {
+    return res.status(400).json({ error: { message: "roomName et participantIdentity sont obligatoires" } });
   }
 
-  console.log("🔑 Utilisation des params - AppID défini:", !!appId.value(), "Certificat défini:", !!appCertificate.value());
-
-  if (!appId.value() || !appCertificate.value()) {
-    console.error("❌ Paramètres Agora non configurés");
+  if (!livekitApiKey.value() || !livekitApiSecret.value()) {
+    console.error("❌ Paramètres Livekit non configurés");
     return res.status(500).json({ error: { message: "Configuration serveur manquante" } });
   }
 
   try {
-    const expirationTimeInSeconds = 3600;
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-    const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds;
+    const at = new AccessToken(livekitApiKey.value(), livekitApiSecret.value(), {
+      identity: participantIdentity,
+    });
 
-    const token = RtcTokenBuilder.buildTokenWithUid(
-      appId.value(),
-      appCertificate.value(),
-      channelName,
-      Number(uid),
-      RtcRole.PUBLISHER,
-      privilegeExpiredTs
-    );
+    at.addGrant({ roomJoin: true, room: roomName });
+    const token = await at.toJwt();
 
-    console.log("✅ Token généré avec succès pour channel:", channelName);
+    console.log("✅ Token généré avec succès pour room:", roomName);
     return res.status(200).json({
-      token: token,
-      expiresIn: expirationTimeInSeconds
+      token: token
     });
 
   } catch (error) {

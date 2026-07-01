@@ -1,29 +1,44 @@
+import 'dart:ui';
 // monde.dart
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'amis.dart'; // On réutilise les écrans de jeu du mode "amis"
-import 'package:random_string/random_string.dart'; // CORRECTION : Import manquant ajouté
+import 'amis.dart'; // On rÃ©utilise les Ã©crans de jeu du mode "amis"
+import 'player_state.dart';
+import 'package:random_string/random_string.dart'; // CORRECTION : Import manquant ajoutÃ©
 
-// Liste des jeux pour le mode "Monde" (inchangée)
+// Liste des jeux pour le mode "Monde" (inchangÃ©e)
 const List<Map<String, dynamic>> worldGames = [
-  {'name': 'Gribouillis', 'icon': Icons.draw},
-  {'name': 'Zéro Pointé', 'icon': Icons.exposure_zero},
-  {'name': 'Poker', 'icon': Icons.monetization_on},
-  {'name': 'Infiltré & Mr. White', 'icon': Icons.visibility_off},
-  {'name': 'La Patate Chaude', 'icon': Icons.whatshot},
-  {'name': 'Petit Bac', 'icon': Icons.school},
-  {'name': 'Président', 'icon': Icons.king_bed},
-  {'name': 'Skull', 'icon': Icons.style},
-  {'name': 'Pictionary', 'icon': Icons.palette},
-  {'name': 'Just One', 'icon': Icons.lightbulb},
-  {'name': 'Loup-Garou', 'icon': Icons.nightlight_round},
-  {'name': 'Dobble', 'icon': Icons.remove_red_eye},
-  {'name': 'Uno', 'icon': Icons.style},
+  {'name': 'Blokus', 'icon': Icons.grid_on, 'image': 'blokus.webp'},
+  {'name': 'Yams', 'icon': Icons.casino, 'image': 'yams.webp'},
+  {'name': 'Dominoes', 'icon': Icons.grid_3x3, 'image': null},
+  {'name': 'Gribouillis', 'icon': Icons.draw, 'image': 'gribouillis.webp'},
+  {'name': 'ZÃ©ro PointÃ©', 'icon': Icons.exposure_zero, 'image': null},
+  {'name': 'Poker', 'icon': Icons.monetization_on, 'image': 'poker.webp'},
+  {'name': 'InfiltrÃ© & Mr. White', 'icon': Icons.visibility_off, 'image': 'Undercover.webp'},
+  {'name': 'La Patate Chaude', 'icon': Icons.whatshot, 'image': null},
+  {'name': 'Petit Bac', 'icon': Icons.school, 'image': 'petitbac.webp'},
+  {'name': 'PrÃ©sident', 'icon': Icons.king_bed, 'image': 'president.webp'},
+  {'name': 'Skull', 'icon': Icons.style, 'image': 'skull.webp'},
+  {'name': 'Pictionary', 'icon': Icons.palette, 'image': 'pictionary.webp'},
+  {'name': 'Just One', 'icon': Icons.lightbulb, 'image': 'justone.webp'},
+  {'name': 'Loup-Garou', 'icon': Icons.nightlight_round, 'image': 'loupgarou.webp'},
+  {'name': 'Dobble', 'icon': Icons.remove_red_eye, 'image': 'dobble.webp'},
+  {'name': 'Uno', 'icon': Icons.style, 'image': 'uno.webp'},
+  {'name': 'Taboo', 'icon': Icons.block_flipped, 'image': null},
+  {'name': 'Bataille Navale', 'icon': Icons.anchor, 'image': 'bataillenaval.webp'},
+  {'name': 'Mille Bornes', 'icon': Icons.directions_car, 'image': 'millebornes.webp'},
+  {'name': 'Rami', 'icon': Icons.style, 'image': 'rami.webp'},
+  {'name': 'Belote', 'icon': Icons.style, 'image': null},
+  {'name': 'Petits Chevaux', 'icon': Icons.pets, 'image': 'petitchevaux.webp'},
+  {'name': 'Cadavre Exquis', 'icon': Icons.edit, 'image': 'cadavreexquis.webp'},
+  {'name': 'Zombie!', 'icon': Icons.coronavirus, 'image': null},
+  {'name': 'Big Two', 'icon': Icons.layers, 'image': 'bigtwo.webp'},
+  {'name': 'Jeu de Dames', 'icon': Icons.grid_on, 'image': 'dames.webp'},
 ];
 
-// WorldGameScreen (inchangé)
+// WorldGameScreen (inchangÃ©)
 class WorldGameScreen extends StatefulWidget {
   @override
   _WorldGameScreenState createState() => _WorldGameScreenState();
@@ -35,7 +50,7 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Fond dégradé sombre et moderne
+      // Fond dÃ©gradÃ© sombre et moderne
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -72,7 +87,7 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    childAspectRatio: 1.1,
+                    childAspectRatio: 0.8, // <--- Modifié de 1.1 à 0.8 (Rectangulaire)
                   ),
                   itemCount: worldGames.length,
                   itemBuilder: (context, index) {
@@ -87,67 +102,79 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
     );
   }
 
-  // Nouvelle méthode pour une carte plus jolie
+  // Nouvelle mÃ©thode pour une carte plus jolie
   Widget _buildGameCard(Map<String, dynamic> game) {
+    final String? imageName = game['image'];
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Colors.white.withOpacity(0.15), Colors.white.withOpacity(0.05)],
-        ),
+        color: Colors.deepPurple[900]?.withOpacity(0.4),
+        image: imageName != null
+            ? DecorationImage(
+                image: AssetImage('assets/images/$imageName'),
+                fit: BoxFit.cover,
+              )
+            : null,
         border: Border.all(color: Colors.white.withOpacity(0.2)),
         boxShadow: [
           BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(0, 4)),
         ],
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: () {
-            if (_nameController.text.trim().isEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Veuillez d'abord entrer un pseudo !")),
-              );
-              return;
-            }
-            final String playerId = Provider.of<String>(context, listen: false);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => CreateGameScreen(
-                  playerName: _nameController.text.trim(),
-                  isWorldMode: true,
-                  initialGame: game['name'],
-                  playerId: playerId,
-                ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          // Flou lÃ©ger
+          filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
+          child: Material(
+            color: Colors.black.withOpacity(0.45), // Assombrissement pour le texte
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () {
+                if (_nameController.text.trim().isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Veuillez d'abord entrer un pseudo !")),
+                  );
+                  return;
+                }
+                final String playerId = Provider.of<String>(context, listen: false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CreateGameScreen(
+                      playerName: _nameController.text.trim(),
+                      isWorldMode: true,
+                      initialGame: game['name'],
+                      playerId: playerId,
+                    ),
+                  ),
+                );
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurpleAccent.withOpacity(0.3),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(game['icon'], size: imageName != null ? 28 : 40, color: Colors.cyanAccent),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    game['name'],
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        shadows: [Shadow(color: Colors.black, blurRadius: 4)]
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-            );
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurpleAccent.withOpacity(0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(game['icon'], size: 40, color: Colors.cyanAccent),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                game['name'],
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -155,13 +182,14 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
   }
 }
 
-// SearchingForPlayersScreen (constructeur inchangé)
+// SearchingForPlayersScreen (constructeur inchangÃ©)
 class SearchingForPlayersScreen extends StatefulWidget {
   final String playerName;
   final String gameName;
   final int playerCount;
   final String scope;
   final bool videoEnabled;
+  final bool audioEnabled;
   final String videoPreference;
   final String difficulty;
   final bool dobbleSymbolsPerCard;
@@ -186,19 +214,25 @@ class SearchingForPlayersScreen extends StatefulWidget {
   final int? photoRouletteRounds;
   final int? photoRoulettePhotosPerPlayer;
   final String? photoRouletteMediaType;
-  final String playerId; // <--- AJOUTER CECI
+  final String playerId;
+  final bool isRanked; // <--- NOUVEAU: Ranked flag
   final String? aiInstructions;
   final List<String>? aiWords;
+  final int? timesUpTotalRounds;
+  final String? dominoesMode;
+  final int? dominoesTargetScore;
 
 
   const SearchingForPlayersScreen({
     Key? key,
-    required this.playerId, // <--- AJOUTER CECI
+    required this.playerId,
+    this.isRanked = false, // <--- NOUVEAU
     required this.playerName,
     required this.gameName,
     required this.playerCount,
     required this.scope,
     this.videoEnabled = false,
+    this.audioEnabled = false,
     this.videoPreference = 'any',
     required this.difficulty,
     this.dobbleSymbolsPerCard = false,
@@ -225,6 +259,9 @@ class SearchingForPlayersScreen extends StatefulWidget {
     this.photoRouletteMediaType,
     this.aiInstructions,
     this.aiWords,
+    this.timesUpTotalRounds,
+    this.dominoesMode,
+    this.dominoesTargetScore,
   }) : super(key: key);
 
   @override
@@ -234,7 +271,7 @@ class SearchingForPlayersScreen extends StatefulWidget {
 class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animController; // Ajoutez cette variable
 
-  String _statusMessage = "Préparation de la recherche...";
+  String _statusMessage = "PrÃ©paration de la recherche...";
   Timer? _searchTimer;
   Timer? _redirectTimer;
   String _currentScope = '';
@@ -293,13 +330,20 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
       // PHASE 1 : RECHERCHE PRIORITAIRE DANS LES PARTIES EN COURS (REFILLING)
       // -----------------------------------------------------------------------
       // On cherche d'abord s'il existe une partie active qui a perdu un joueur
-      // et qui cherche un remplaçant avec les mêmes paramètres.
+      // et qui cherche un remplaÃ§ant avec les mÃªmes paramÃ¨tres.
 
       Query refillingQuery = _db.collection('games')
           .where('gameState', isEqualTo: 'refilling')
           .where('gameType', isEqualTo: widget.gameName)
-          .where('scope',
-          isEqualTo: _currentScope); // On respecte le scope (pays/monde)
+          .where('scope', isEqualTo: _currentScope);
+
+      // Si c'est une partie classée, on cherche des joueurs de niveau proche (+/- 2 niveaux)
+      if (widget.isRanked) {
+        int myLevel = Provider.of<PlayerState>(context, listen: false).level;
+        refillingQuery = refillingQuery
+            .where('hostLevel', isGreaterThanOrEqualTo: myLevel - 2)
+            .where('hostLevel', isLessThanOrEqualTo: myLevel + 2);
+      }
           
       if (widget.videoPreference == 'with') {
         refillingQuery = refillingQuery.where('videoEnabled', isEqualTo: true);
@@ -307,41 +351,42 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
         refillingQuery = refillingQuery.where('videoEnabled', isEqualTo: false);
       }
 
-      // Filtres de difficulté (sauf pour les jeux sans difficulté)
+      // Filtres de difficultÃ© (sauf pour les jeux sans difficultÃ©)
       if (![
+        'Blokus',
         'Gribouillis',
         'Petit Bac',
-        'Président',
-        'Le Roi des Mèmes',
+        'PrÃ©sident',
+        'Le Roi des MÃ¨mes',
         'Loup-Garou',
         'Dobble',
         'La Patate Chaude',
         'Uno',
-        'Zéro Pointé',
+        'ZÃ©ro PointÃ©',
         'Poker',
         'Photo Roulette'
       ].contains(widget.gameName)) {
         refillingQuery =
             refillingQuery.where('difficulty', isEqualTo: widget.difficulty);
       } else {
-        // Pour certains jeux comme Zéro Pointé/Poker stockés avec 'N/A', on peut filtrer ou non selon votre structure.
-        // Si votre CreateGame met 'difficulty' à 'N/A' pour ces jeux, gardez la ligne ci-dessous :
+        // Pour certains jeux comme ZÃ©ro PointÃ©/Poker stockÃ©s avec 'N/A', on peut filtrer ou non selon votre structure.
+        // Si votre CreateGame met 'difficulty' Ã  'N/A' pour ces jeux, gardez la ligne ci-dessous :
         refillingQuery =
             refillingQuery.where('difficulty', isEqualTo: widget.difficulty);
       }
 
-      // Application des filtres spécifiques au jeu (Copie de la logique de filtre)
+      // Application des filtres spÃ©cifiques au jeu (Copie de la logique de filtre)
       switch (widget.gameName) {
         case 'Gribouillis':
           refillingQuery = refillingQuery.where(
               'gribouillisMode', isEqualTo: widget.gribouillisMode);
-          if (widget.gribouillisMode == 'Complément') {
+          if (widget.gribouillisMode == 'ComplÃ©ment') {
             refillingQuery = refillingQuery.where(
                 'gribouillisSettings.ajouter1',
                 isEqualTo: widget.gribouillisAjouter1);
           }
           break;
-        case 'Zéro Pointé':
+        case 'ZÃ©ro PointÃ©':
           refillingQuery = refillingQuery.where(
               'targetScore', isEqualTo: widget.zeroPointeTargetScore);
           break;
@@ -366,7 +411,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           refillingQuery = refillingQuery.where(
               'petitBacRoundTime', isEqualTo: widget.petitBacTime);
           break;
-        case 'Président':
+        case 'PrÃ©sident':
           refillingQuery = refillingQuery.where(
               'revolutionParam', isEqualTo: widget.presidentRevolution);
           break;
@@ -379,14 +424,14 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
               isEqualTo: widget.justOneAllowInvalidClues);
           break;
         case 'Loup-Garou':
-        // Note: Le hash des rôles n'est pas toujours stocké dans 'games' de la même façon que 'matchmaking'.
+        // Note: Le hash des rÃ´les n'est pas toujours stockÃ© dans 'games' de la mÃªme faÃ§on que 'matchmaking'.
         // Si vous stockez 'roleSettings', il est difficile de filtrer parfaitement ici sans hash.
-        // On suppose ici que l'utilisateur veut n'importe quelle partie LG ou que vous avez ajouté loupGarouRolesHash dans 'games'.
-        // Si vous l'avez ajouté dans createGame :
+        // On suppose ici que l'utilisateur veut n'importe quelle partie LG ou que vous avez ajoutÃ© loupGarouRolesHash dans 'games'.
+        // Si vous l'avez ajoutÃ© dans createGame :
           if (widget.selectedLoupGarouRoles != null) {
             final rolesHash = _generateLoupGarouRolesHash(
                 widget.selectedLoupGarouRoles!);
-            // Assurez-vous d'ajouter ce champ lors de la création de la partie dans FirebaseService
+            // Assurez-vous d'ajouter ce champ lors de la crÃ©ation de la partie dans FirebaseService
             // refillingQuery = refillingQuery.where('loupGarouRolesHash', isEqualTo: rolesHash);
           }
           break;
@@ -409,14 +454,14 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           break;
       }
 
-      // Exécuter la requête Refilling
+      // ExÃ©cuter la requÃªte Refilling
       final refillingSnap = await refillingQuery.limit(1).get();
 
       if (refillingSnap.docs.isNotEmpty) {
         final gameDoc = refillingSnap.docs.first;
         final gameData = gameDoc.data() as Map<String, dynamic>;
 
-        // Vérification de sécurité : est-ce qu'il y a vraiment de la place ?
+        // VÃ©rification de sÃ©curitÃ© : est-ce qu'il y a vraiment de la place ?
         final playersMap = gameData['players'] as Map<String, dynamic>? ?? {};
         final int currentCount = playersMap.length;
         final int targetCount = gameData['playerCount'] ?? widget.playerCount;
@@ -428,7 +473,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
 
           if (joined) {
             if (!_isDisposed) {
-              // Redirection immédiate vers le jeu
+              // Redirection immÃ©diate vers le jeu
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (_) =>
@@ -436,7 +481,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
                         gameCode: gameDoc.id, playerId: playerId)),
               );
             }
-            return; // Succès, on arrête tout ici
+            return; // SuccÃ¨s, on arrÃªte tout ici
           }
         }
       }
@@ -444,8 +489,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
       // -----------------------------------------------------------------------
       // PHASE 2 : RECHERCHE STANDARD (FILE D'ATTENTE MATCHMAKING)
       // -----------------------------------------------------------------------
-      // Si aucune partie en attente de remplissage n'a été trouvée, on passe
-      // à la logique classique de création/rejoint de salle d'attente.
+      // Si aucune partie en attente de remplissage n'a Ã©tÃ© trouvÃ©e, on passe
+      // Ã  la logique classique de crÃ©ation/rejoint de salle d'attente.
 
       Query query = _db
           .collection('matchmaking')
@@ -453,6 +498,13 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           .where('targetPlayerCount', isEqualTo: widget.playerCount)
           .where('scope', isEqualTo: _currentScope)
           .where('status', isEqualTo: 'waiting');
+
+      if (widget.isRanked) {
+        int myLevel = Provider.of<PlayerState>(context, listen: false).level;
+        query = query
+            .where('level', isGreaterThanOrEqualTo: myLevel - 2)
+            .where('level', isLessThanOrEqualTo: myLevel + 2);
+      }
 
       if (widget.videoPreference == 'with') {
         query = query.where('videoEnabled', isEqualTo: true);
@@ -462,17 +514,17 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
 
       query = query.where('difficulty', isEqualTo: widget.difficulty);
 
-      // Application des filtres (Exactement les mêmes que ci-dessus, mais sur la collection matchmaking)
+      // Application des filtres (Exactement les mÃªmes que ci-dessus, mais sur la collection matchmaking)
       switch (widget.gameName) {
         case 'Gribouillis':
           query =
               query.where('gribouillisMode', isEqualTo: widget.gribouillisMode);
-          if (widget.gribouillisMode == 'Complément') {
+          if (widget.gribouillisMode == 'ComplÃ©ment') {
             query = query.where(
                 'gribouillisAjouter1', isEqualTo: widget.gribouillisAjouter1);
           }
           break;
-        case 'Zéro Pointé':
+        case 'ZÃ©ro PointÃ©':
           query = query.where(
               'zeroPointeTargetScore', isEqualTo: widget.zeroPointeTargetScore);
           break;
@@ -495,7 +547,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
         case 'Petit Bac':
           query = query.where('petitBacTime', isEqualTo: widget.petitBacTime);
           break;
-        case 'Président':
+        case 'PrÃ©sident':
           query = query.where(
               'presidentRevolution', isEqualTo: widget.presidentRevolution);
           break;
@@ -541,7 +593,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
       }).toList();
 
       if (validDocs.isNotEmpty) {
-        // Salle trouvée avec d'autres joueurs -> Rejoindre
+        // Salle trouvÃ©e avec d'autres joueurs -> Rejoindre
         final roomDoc = validDocs.first;
         final roomRef = roomDoc.reference;
 
@@ -558,7 +610,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
             'playerNames.$playerId': widget.playerName,
           });
           final List players = List.from(roomData['players'] ?? []);
-          // Si on est le dernier joueur nécessaire, on marque comme full
+          // Si on est le dernier joueur nÃ©cessaire, on marque comme full
           if (players.length + 1 == widget.playerCount) {
             transaction.update(roomRef, {'status': 'full'});
           }
@@ -569,7 +621,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           _listenToMatchmakingRoom();
         }
       } else {
-        // Aucune salle avec d'autres joueurs -> Créer une nouvelle salle
+        // Aucune salle avec d'autres joueurs -> CrÃ©er une nouvelle salle
         final newRoomRef = _db.collection('matchmaking').doc();
 
         String? loupGarouRolesHash;
@@ -590,8 +642,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           'gameCode': null,
           'difficulty': widget.difficulty,
           'videoEnabled': widget.videoEnabled,
+          'audioEnabled': widget.audioEnabled,
 
-          // Paramètres spécifiques
+          // ParamÃ¨tres spÃ©cifiques
           'gribouillisMode': widget.gribouillisMode,
           'gribouillisAjouter1': widget.gribouillisAjouter1,
           'zeroPointeTargetScore': widget.zeroPointeTargetScore,
@@ -621,7 +674,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
       if (!_isDisposed) {
         setState(() {
           _statusMessage =
-          "Erreur de connexion au matchmaking. Veuillez réessayer.";
+          "Erreur de connexion au matchmaking. Veuillez rÃ©essayer.";
         });
         print("Erreur _findAndJoinGame: $e");
       }
@@ -648,7 +701,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
             }
           }
         });
-        print("Joueur retiré de la file d'attente: $_matchmakingRoomId");
+        print("Joueur retirÃ© de la file d'attente: $_matchmakingRoomId");
       } catch (e) {
         print("Erreur en quittant la file d'attente : $e");
       }
@@ -663,15 +716,15 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
         .doc(_matchmakingRoomId!)
         .snapshots()
         .listen(_onMatchmakingUpdate, onError: (error) {
-      print("Erreur d'écoute de la salle: $error");
+      print("Erreur d'Ã©coute de la salle: $error");
       if (!_isDisposed) {
-        setState(() => _statusMessage = "Erreur de connexion à la salle.");
+        setState(() => _statusMessage = "Erreur de connexion Ã  la salle.");
       }
     });
   }
 
   Future<void> _onMatchmakingUpdate(DocumentSnapshot snapshot) async {
-    if (!snapshot.exists || _isDisposed) return; // <--- CORRIGÉ
+    if (!snapshot.exists || _isDisposed) return; // <--- CORRIGÃ‰
 
     final data = snapshot.data() as Map<String, dynamic>;
     final List players = data['players'] ?? [];
@@ -703,33 +756,34 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
 
     if (data['status'] == 'full') {
       final playerId = widget.playerId; // <--- CORRECTION ICI
-      // CORRECTION : C'est le premier joueur (l'hôte "logique") qui doit créer la partie,
-      // pas le dernier. Cela garantit la cohérence.
+      // CORRECTION : C'est le premier joueur (l'hÃ´te "logique") qui doit crÃ©er la partie,
+      // pas le dernier. Cela garantit la cohÃ©rence.
       if (players.first == playerId) {
         try {
-          // CORRECTION : On ne peut pas appeler `createGame` car il ne connaît qu'un seul joueur.
-          // On doit créer le document de jeu manuellement ici avec la liste complète des joueurs.
+          // CORRECTION : On ne peut pas appeler `createGame` car il ne connaÃ®t qu'un seul joueur.
+          // On doit crÃ©er le document de jeu manuellement ici avec la liste complÃ¨te des joueurs.
 
           final gameCode = randomNumeric(6);
           final gameRef = _db.collection('games').doc(gameCode);
 
-          // Préparer la map des joueurs pour la nouvelle partie
+          // PrÃ©parer la map des joueurs pour la nouvelle partie
           Map<String, dynamic> gamePlayers = {};
           (data['playerNames'] as Map<String, dynamic>).forEach((pId, pName) {
             gamePlayers[pId] = {'name': pName, 'score': 0};
           });
 
-          // Créer le jeu en une seule fois
+          // CrÃ©er le jeu en une seule fois
           await _firebaseService.createGameWithAllPlayers(
             gameCode: gameCode,
             hostId: playerId,
             allPlayers: gamePlayers,
-            // Passer la map complète des joueurs
+            // Passer la map complÃ¨te des joueurs
             gameType: widget.gameName,
             difficulty: widget.difficulty,
             playerCount: widget.playerCount,
             scope: _currentScope,
             videoEnabled: widget.videoEnabled,
+            audioEnabled: widget.audioEnabled,
             dobbleSymbolsPerCard: widget.dobbleSymbolsPerCard,
             isSimplifiedLiar: widget.isSimplifiedLiar,
             liarVoteMode: widget.liarVoteMode,
@@ -754,20 +808,21 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
             photoRouletteMediaType: widget.photoRouletteMediaType,
             aiInstructions: widget.aiInstructions,
             aiWords: widget.aiWords,
+            timesUpTotalRounds: widget.timesUpTotalRounds,
           );
 
-          // Mettre à jour la salle de matchmaking avec le code du jeu pour rediriger les autres
+          // Mettre Ã  jour la salle de matchmaking avec le code du jeu pour rediriger les autres
           await snapshot.reference.update({'gameCode': gameCode});
 
-          // Démarrer la logique du jeu (distribution des cartes, etc.)
+          // DÃ©marrer la logique du jeu (distribution des cartes, etc.)
           await _firebaseService.startGame(gameCode);
         } catch (e) {
-          print("Erreur à la création de la partie: $e");
+          print("Erreur Ã  la crÃ©ation de la partie: $e");
           try {
             await snapshot.reference.delete();
           } catch (deleteError) {
             print(
-                "Impossible de supprimer la salle de matchmaking après erreur: $deleteError");
+                "Impossible de supprimer la salle de matchmaking aprÃ¨s erreur: $deleteError");
           }
         }
       }
@@ -778,7 +833,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
         setState(() {
           if (otherPlayers.isNotEmpty) {
             _statusMessage =
-            "Salle trouvée ! ${players.length} / ${widget.playerCount} joueurs.";
+            "Salle trouvÃ©e ! ${players.length} / ${widget.playerCount} joueurs.";
           } else {
             _statusMessage = "En attente d'autres joueurs...";
           }
@@ -793,7 +848,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
 
     if (_currentScope == 'pays') {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Recherche étendue au monde entier."),
+        SnackBar(content: Text("Recherche Ã©tendue au monde entier."),
             duration: Duration(seconds: 3)),
       );
       _leaveMatchmakingQueue().then((_) {
@@ -817,7 +872,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
     _searchTimer?.cancel();
     _redirectTimer?.cancel();
     setState(() {
-      _statusMessage = "Recherche de joueurs avec les mêmes options...";
+      _statusMessage = "Recherche de joueurs avec les mÃªmes options...";
     });
     _findAndJoinGame();
     _searchTimer = Timer(Duration(seconds: 30), _handle30SecondTimeout);
@@ -837,15 +892,20 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
     _searchTimer?.cancel();
 
     try {
-      final query = _db
+      Query query = _db
           .collection('matchmaking')
           .where('status', isEqualTo: 'waiting')
           .where('gameName', isEqualTo: widget.gameName)
-          .where('targetPlayerCount', isEqualTo: widget.playerCount)
-          .orderBy('createdAt', descending: false)
-          .limit(1);
+          .where('targetPlayerCount', isEqualTo: widget.playerCount);
 
-      final querySnapshot = await query.get();
+      if (widget.isRanked) {
+        int myLevel = Provider.of<PlayerState>(context, listen: false).level;
+        query = query
+            .where('level', isGreaterThanOrEqualTo: myLevel - 2)
+            .where('level', isLessThanOrEqualTo: myLevel + 2);
+      }
+
+      final querySnapshot = await query.orderBy('createdAt', descending: false).limit(1).get();
 
       // Filter out rooms where this player is the only member
       final validRooms = querySnapshot.docs.where((doc) {
@@ -888,7 +948,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
   void _showFailureAndPop() {
     if (_isDisposed) return;
     setState(() {
-      _statusMessage = "Aucun joueur trouvé... Nouvelle recherche dans 10s.";
+      _statusMessage = "Aucun joueur trouvÃ©... Nouvelle recherche dans 10s.";
     });
     // Instead of popping, restart the search after a delay
     Future.delayed(const Duration(seconds: 10), () {
@@ -940,7 +1000,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
                     ),
                   ),
                 ),
-                // Icône centrale
+                // IcÃ´ne centrale
                 Container(
                   width: 80,
                   height: 80,

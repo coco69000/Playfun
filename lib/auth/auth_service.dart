@@ -23,7 +23,7 @@ class AuthService {
   }
 
   // S'inscrire avec email et mot de passe
-  Future<User?> registerWithEmail(String email, String password) async {
+  Future<User?> registerWithEmail(String email, String password, String name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: email.trim(),
@@ -31,12 +31,11 @@ class AuthService {
       );
       User? user = result.user;
       if (user != null) {
-        // Crée un nouveau document pour l'utilisateur avec son UID
-        // C'est ici que les données initiales sont définies
         await _firestore.collection('users').doc(user.uid).set({
           'uid': user.uid,
           'email': email,
-          'coins': 50, // Pièces de départ pour un nouvel utilisateur
+          'name': name.trim().isEmpty ? 'Joueur' : name.trim(), // Enregistre le nom ici
+          'coins': 50,
           'isPremium': false,
           'multiplayerGamesPlayedToday': 0,
           'lastDailyCoinGrant': null,

@@ -13,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String _email = '';
   String _password = '';
+  String _name = ''; // NOUVEAU
   String _error = '';
   bool _isLogin = true;
   bool _isLoading = false;
@@ -47,6 +48,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 40.0),
+                
+                if (!_isLogin) ...[
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Pseudo'),
+                    validator: (val) => val!.trim().isEmpty ? 'Entrez un pseudo' : null,
+                    onChanged: (val) => setState(() => _name = val),
+                  ),
+                  SizedBox(height: 20.0),
+                ],
+
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Email'),
                   keyboardType: TextInputType.emailAddress,
@@ -74,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         });
                         dynamic result = _isLogin
                             ? await authService.signInWithEmail(_email, _password)
-                            : await authService.registerWithEmail(_email, _password);
+                            : await authService.registerWithEmail(_email, _password, _name);
 
                         if (result == null && mounted) {
                           setState(() {

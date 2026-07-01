@@ -50,6 +50,8 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Playfun peut enregistrer des images liées aux jeux si vous le demandez.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Playfun peut utiliser la caméra pour les jeux photo si vous choisissez cette option.</string>
+	<string>$(PRODUCT_NAME) uses your camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses your microphone</string>
 </dict>
 </plist>

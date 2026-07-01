@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:livekit_client/livekit_client.dart';
 import 'package:provider/provider.dart';
-import 'agora_service.dart';
+import 'livekit_service.dart';
 
 class GameVideoOverlay extends StatefulWidget {
-  final Map<String, dynamic> players; // Map des joueurs (playerId -> data)
-  final Map<String, int> playerAgoraUids; // Mapping playerId -> agoraUid
+  final Map<String, dynamic> players;
+  final Map<String, String> playerLivekitIdentities; // Changed from UIDs to identities
   final String currentPlayerId;
   final String gameCode;
-  final bool isTimeUpMime; // Mode Mime de Time's Up
-  final String? timeUpActiveTeam; // 'red' ou 'blue'
-  final String? activePlayerId; // Joueur qui a la parole
-  
+  final bool isTimeUpMime;
+  final String? timeUpActiveTeam;
+  final String? activePlayerId;
+  final bool isFocusMode;
+
   const GameVideoOverlay({
     Key? key,
     required this.players,
-    required this.playerAgoraUids,
+    required this.playerLivekitIdentities,
     required this.currentPlayerId,
     required this.gameCode,
     this.isTimeUpMime = false,
     this.timeUpActiveTeam,
     this.activePlayerId,
+    this.isFocusMode = false,
   }) : super(key: key);
 
   @override
@@ -28,216 +30,297 @@ class GameVideoOverlay extends StatefulWidget {
 }
 
 class _GameVideoOverlayState extends State<GameVideoOverlay> {
-  late final PageController _pageController;
-  int _currentPage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(viewportFraction: 1.0);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
+  String? _maximizedIdentity;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AgoraService>(
-      builder: (context, agora, _) {
-        if (!agora.localUserJoined) return SizedBox.shrink();
+    return Consumer<LivekitService>(
+      builder: (context, livekit, _) {
+        if (!livekit.localUserJoined) return SizedBox.shrink();
 
-        // Hauteur adaptée : plus grand pour le mode Mime
-        double overlayHeight = widget.isTimeUpMime 
-            ? MediaQuery.of(context).size.height * 0.35 
-            : MediaQuery.of(context).size.height * 0.18;
+        bool isAudioOnly = widget.players['audioEnabled'] == true && widget.players['videoEnabled'] != true;
 
-        // Liste de tous les UIDs (local + remote)
-        List<int> allUids = [agora.localUid, ...agora.remoteUsers.keys];
-        int totalPages = (allUids.length / 4).ceil(); // 4 caméras par page
+        if (_maximizedIdentity != null) {
+          return _buildMaximizedView(livekit, _maximizedIdentity!);
+        }
 
-        return Container(
-          height: overlayHeight,
+        List<String> myTeamIds = [];
+        List<String> opponentTeamIds = [];
+
+        if (widget.players['redTeam'] != null && widget.players['blueTeam'] != null) {
+          List<String> redTeam = List<String>.from(widget.players['redTeam'] ?? []);
+          List<String> blueTeam = List<String>.from(widget.players['blueTeam'] ?? []);
+          bool amIRed = redTeam.contains(widget.currentPlayerId);
+          myTeamIds = amIRed ? redTeam : blueTeam;
+          opponentTeamIds = amIRed ? blueTeam : redTeam;
+        } else {
+          myTeamIds = [widget.currentPlayerId];
+          opponentTeamIds = widget.players.keys.where((k) => k != widget.currentPlayerId && widget.players[k] is Map).toList();
+        }
+
+        List<String> myTeamIdentities = myTeamIds.where((id) => widget.playerLivekitIdentities.containsKey(id)).map((id) => widget.playerLivekitIdentities[id]!).toList();
+        List<String> opponentIdentities = opponentTeamIds.where((id) => widget.playerLivekitIdentities.containsKey(id)).map((id) => widget.playerLivekitIdentities[id]!).toList();
+
+        if (!myTeamIdentities.contains(livekit.localIdentity)) {
+          myTeamIdentities.insert(0, livekit.localIdentity);
+        }
+
+        int speakingCount = 0;
+        if (!livekit.isLocalMuted && myTeamIdentities.contains(livekit.localIdentity)) speakingCount++;
+        for (var identity in livekit.remoteUsers.keys) {
+          if (livekit.remoteUsers[identity]?.isSpeaking ?? false) speakingCount++;
+        }
+
+        double overlayHeight = isAudioOnly ? 80 : (speakingCount > 2 ? 200 : 140);
+
+        Widget overlayContent = Container(
           width: double.infinity,
           color: Colors.black.withOpacity(0.85),
-          child: Stack(
+          child: Column(
             children: [
-              // Liste des caméras
-              PageView.builder(
-                controller: _pageController,
-                onPageChanged: (page) => setState(() => _currentPage = page),
-                itemCount: totalPages,
-                itemBuilder: (context, pageIndex) {
-                  return Row(
-                    children: allUids.skip(pageIndex * 4).take(4).map((uid) {
-                      return Expanded(
-                        child: _buildVideoTile(context, agora, uid),
-                      );
-                    }).toList(),
-                  );
-                },
-              ),
-              // Flèches de navigation
-              if (totalPages > 1) ...[
-                Positioned(
-                  left: 0, top: 0, bottom: 0,
-                  child: IconButton(
-                    icon: Icon(Icons.chevron_left, color: Colors.white, size: 30),
-                    onPressed: _currentPage > 0 
-                        ? () => _pageController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut)
-                        : null,
-                  ),
-                ),
-                Positioned(
-                  right: 0, top: 0, bottom: 0,
-                  child: IconButton(
-                    icon: Icon(Icons.chevron_right, color: Colors.white, size: 30),
-                    onPressed: _currentPage < totalPages - 1
-                        ? () => _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut)
-                        : null,
-                  ),
-                ),
-              ],
-              // Boutons de contrôle locaux
-              Positioned(
-                bottom: 4, left: 0, right: 0,
+              Expanded(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                      icon: Icon(agora.isLocalMuted ? Icons.mic_off : Icons.mic, 
-                        color: agora.isLocalMuted ? Colors.red : Colors.white),
-                      onPressed: agora.toggleLocalAudio,
-                      iconSize: 20,
-                    ),
-                    IconButton(
-                      icon: Icon(agora.isLocalVideoOff ? Icons.videocam_off : Icons.videocam, 
-                        color: agora.isLocalVideoOff ? Colors.red : Colors.white),
-                      onPressed: agora.toggleLocalVideo,
-                      iconSize: 20,
-                    ),
+                    Expanded(child: _buildTeamView(livekit, myTeamIdentities, Colors.blueAccent, "Mon Équipe", isAudioOnly)),
+                    if (opponentIdentities.isNotEmpty)
+                      Expanded(child: _buildTeamView(livekit, opponentIdentities, Colors.redAccent, "Adversaires", isAudioOnly)),
                   ],
                 ),
               ),
+              _buildLocalControls(livekit, isAudioOnly),
             ],
           ),
         );
+
+        if (widget.isFocusMode) {
+          return overlayContent;
+        } else {
+          return SizedBox(
+            height: overlayHeight,
+            child: overlayContent,
+          );
+        }
       },
     );
   }
 
-  Widget _buildVideoTile(BuildContext context, AgoraService agora, int uid) {
-    bool isLocal = uid == agora.localUid;
+  Widget _buildTeamView(LivekitService livekit, List<String> identities, Color color, String title, bool isAudioOnly) {
+    if (identities.isEmpty) return SizedBox.shrink();
+    int totalPages = (identities.length / 4).ceil();
+    PageController controller = PageController();
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(title, style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold)),
+        Expanded(
+          child: Stack(
+            children: [
+              PageView.builder(
+                controller: controller,
+                itemCount: totalPages,
+                itemBuilder: (ctx, page) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: identities.skip(page * 4).take(4).map((identity) {
+                      return Expanded(child: _buildTile(livekit, identity, color, isAudioOnly));
+                    }).toList(),
+                  );
+                },
+              ),
+              if (totalPages > 1) ...[
+                Positioned(left: 0, top: 0, bottom: 0, child: IconButton(icon: Icon(Icons.chevron_left, color: Colors.white), onPressed: () => controller.previousPage(duration: Duration(milliseconds: 300), curve: Curves.ease))),
+                Positioned(right: 0, top: 0, bottom: 0, child: IconButton(icon: Icon(Icons.chevron_right, color: Colors.white), onPressed: () => controller.nextPage(duration: Duration(milliseconds: 300), curve: Curves.ease))),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTile(LivekitService livekit, String identity, Color teamColor, bool isAudioOnly) {
+    bool isLocal = identity == livekit.localIdentity;
     String playerName = 'Joueur';
-    String? playerId;
     
-    // Trouver le playerId correspondant à cet UID
     if (isLocal) {
-      playerId = widget.currentPlayerId;
       playerName = widget.players[widget.currentPlayerId]?['name'] ?? 'Moi';
     } else {
-      // Chercher dans la map inversée
-      playerId = widget.playerAgoraUids.entries.firstWhere(
-        (e) => e.value == uid,
-        orElse: () => MapEntry('', 0),
-      ).key;
-      playerName = widget.players[playerId]?['name'] ?? agora.remoteUsers[uid]?.name ?? 'Joueur';
+      String? pId = widget.playerLivekitIdentities.entries.firstWhere((e) => e.value == identity, orElse: () => MapEntry('', '')).key;
+      playerName = widget.players[pId]?['name'] ?? livekit.remoteUsers[identity]?.name ?? 'Joueur';
     }
 
-    bool isSpeaking = isLocal ? !agora.isLocalMuted : (agora.remoteUsers[uid]?.isSpeaking ?? false);
-    bool isVideoOff = isLocal ? agora.isLocalVideoOff : (agora.remoteUsers[uid]?.isVideoOff ?? false);
-    
-    // Bordure colorée pour Time's Up
-    Color borderColor = Colors.white24;
-    double borderWidth = 1.0;
-    
-    if (widget.activePlayerId != null && playerId == widget.activePlayerId) {
-      borderColor = Colors.amberAccent;
-      borderWidth = 3.0;
-    } else if (widget.timeUpActiveTeam != null && playerId != null) {
-      // Colorer selon l'équipe
-      List<String> redTeam = List<String>.from(widget.players['redTeam'] ?? []);
-      List<String> blueTeam = List<String>.from(widget.players['blueTeam'] ?? []);
-      if (widget.timeUpActiveTeam == 'red' && redTeam.contains(playerId)) {
-        borderColor = Colors.redAccent;
-        borderWidth = 2.0;
-      } else if (widget.timeUpActiveTeam == 'blue' && blueTeam.contains(playerId)) {
-        borderColor = Colors.blueAccent;
-        borderWidth = 2.0;
+    bool isSpeaking = isLocal ? !livekit.isLocalMuted : (livekit.remoteUsers[identity]?.isSpeaking ?? false);
+    bool isVideoOff = isLocal ? livekit.isLocalVideoOff : (livekit.remoteUsers[identity]?.isVideoOff ?? false);
+
+    if (isAudioOnly) {
+      return _buildAudioTile(playerName, isSpeaking, teamColor, identity, livekit);
+    }
+
+    // Get Video Track
+    VideoTrack? videoTrack;
+    if (isLocal) {
+      final localParticipant = livekit.room!.localParticipant;
+      if (localParticipant != null) {
+        for (var pub in localParticipant.trackPublications.values) {
+          if (pub.kind == TrackType.VIDEO && pub.track is VideoTrack) {
+            videoTrack = pub.track as VideoTrack;
+            break;
+          }
+        }
+      }
+    } else {
+      final participant = livekit.room!.remoteParticipants[identity];
+      if (participant != null) {
+        for (var pub in participant.trackPublications.values) {
+          if (pub.kind == TrackType.VIDEO && pub.subscribed && pub.track is VideoTrack) {
+            videoTrack = pub!.track as VideoTrack;
+            break;
+          }
+        }
       }
     }
-    
-    if (isSpeaking) {
-      borderColor = Colors.greenAccent;
-      borderWidth = 3.0;
+
+    return GestureDetector(
+      onTap: () => setState(() => _maximizedIdentity = identity),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+        margin: EdgeInsets.all(4),
+        width: isSpeaking ? 120 : 90,
+        height: isSpeaking ? 120 : 90,
+        decoration: BoxDecoration(
+          border: Border.all(color: isSpeaking ? Colors.greenAccent : teamColor, width: isSpeaking ? 3 : 2),
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: isSpeaking ? [BoxShadow(color: Colors.greenAccent.withOpacity(0.4), blurRadius: 10)] : [],
+        ),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: (isVideoOff || videoTrack == null)
+                  ? Container(color: Colors.grey[900], child: Center(child: Icon(Icons.person, color: Colors.white54, size: 30)))
+                  : VideoTrackRenderer(videoTrack),
+            ),
+            Positioned(bottom: 0, left: 0, right: 0, child: _buildNameTag(playerName)),
+            if (!isLocal) Positioned(top: 4, right: 4, child: _buildRemoteMuteButton(livekit, identity)),
+            if (isSpeaking) Positioned(top: 4, left: 4, child: Icon(Icons.graphic_eq, color: Colors.greenAccent, size: 16)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAudioTile(String playerName, bool isSpeaking, Color teamColor, String identity, LivekitService livekit) {
+    bool isLocal = identity == livekit.localIdentity;
+    return GestureDetector(
+      onTap: () => setState(() => _maximizedIdentity = identity),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.grey[900],
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: isSpeaking ? Colors.greenAccent : teamColor, width: isSpeaking ? 3 : 1),
+          boxShadow: isSpeaking ? [BoxShadow(color: Colors.greenAccent.withOpacity(0.5), blurRadius: 10)] : [],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.mic, color: isSpeaking ? Colors.greenAccent : Colors.white54, size: 16),
+            SizedBox(width: 6),
+            Text(playerName, style: TextStyle(color: Colors.white, fontWeight: isSpeaking ? FontWeight.bold : FontWeight.normal)),
+            if (isSpeaking) ...[SizedBox(width: 6), Icon(Icons.graphic_eq, color: Colors.greenAccent, size: 16)],
+            if (!isLocal) ...[
+              SizedBox(width: 8),
+              GestureDetector(
+                onTap: () => livekit.toggleRemoteAudio(identity),
+                child: Icon(livekit.isRemoteMuted(identity) ? Icons.volume_off : Icons.volume_up, color: livekit.isRemoteMuted(identity) ? Colors.red : Colors.white54, size: 16),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNameTag(String name) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      color: Colors.black54,
+      child: Text(name, style: TextStyle(color: Colors.white, fontSize: 10), textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis),
+    );
+  }
+
+  Widget _buildRemoteMuteButton(LivekitService livekit, String identity) {
+    bool isMuted = livekit.isRemoteMuted(identity);
+    return GestureDetector(
+      onTap: () => livekit.toggleRemoteAudio(identity),
+      child: Container(
+        padding: EdgeInsets.all(4),
+        decoration: BoxDecoration(color: Colors.black54, shape: BoxShape.circle),
+        child: Icon(isMuted ? Icons.volume_off : Icons.volume_up, color: isMuted ? Colors.red : Colors.white, size: 14),
+      ),
+    );
+  }
+
+  Widget _buildLocalControls(LivekitService livekit, bool isAudioOnly) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(icon: Icon(livekit.isLocalMuted ? Icons.mic_off : Icons.mic, color: livekit.isLocalMuted ? Colors.red : Colors.white), onPressed: livekit.toggleLocalAudio, iconSize: 20),
+          if (!isAudioOnly)
+            IconButton(icon: Icon(livekit.isLocalVideoOff ? Icons.videocam_off : Icons.videocam, color: livekit.isLocalVideoOff ? Colors.red : Colors.white), onPressed: livekit.toggleLocalVideo, iconSize: 20),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMaximizedView(LivekitService livekit, String identity) {
+    bool isLocal = identity == livekit.localIdentity;
+    String playerName = isLocal ? (widget.players[widget.currentPlayerId]?['name'] ?? 'Moi') : (widget.players[widget.playerLivekitIdentities.entries.firstWhere((e) => e.value == identity, orElse: () => MapEntry('', '')).key]?['name'] ?? 'Joueur');
+
+    VideoTrack? videoTrack;
+    if (isLocal) {
+      final localParticipant = livekit.room!.localParticipant;
+      if (localParticipant != null) {
+        for (var pub in localParticipant.trackPublications.values) {
+          if (pub.kind == TrackType.VIDEO && pub.track is VideoTrack) {
+            videoTrack = pub.track as VideoTrack;
+            break;
+          }
+        }
+      }
+    } else {
+      final participant = livekit.room!.remoteParticipants[identity];
+      if (participant != null) {
+        for (var pub in participant.trackPublications.values) {
+          if (pub.kind == TrackType.VIDEO && pub.subscribed && pub.track is VideoTrack) {
+            videoTrack = pub!.track as VideoTrack;
+            break;
+          }
+        }
+      }
     }
 
-    return Container(
-      margin: EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: borderColor, width: borderWidth),
-      ),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: isVideoOff
-                ? Container(
-                    color: Colors.grey[900],
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Center(child: Icon(Icons.person, color: Colors.white54, size: 40)),
-                  )
-                : SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: isLocal
-                        ? AgoraVideoView(
-                            controller: VideoViewController(
-                              rtcEngine: agora.engine!,
-                              canvas: VideoCanvas(uid: 0, renderMode: RenderModeType.renderModeHidden),
-                            ),
-                          )
-                        : AgoraVideoView(
-                            controller: VideoViewController.remote(
-                              rtcEngine: agora.engine!,
-                              canvas: VideoCanvas(uid: uid, renderMode: RenderModeType.renderModeHidden),
-                              connection: RtcConnection(channelId: widget.gameCode),
-                            ),
-                          ),
-                  ),
-          ),
-          // Nom du joueur
-          Positioned(
-            bottom: 0, left: 0, right: 0,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-              color: Colors.black54,
-              child: Text(
-                playerName,
-                style: TextStyle(color: Colors.white, fontSize: 10),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
+    return GestureDetector(
+      onTap: () => setState(() => _maximizedIdentity = null),
+      child: Container(
+        color: Colors.black,
+        child: Stack(
+          children: [
+            Center(
+              child: videoTrack != null
+                  ? VideoTrackRenderer(videoTrack)
+                  : Container(color: Colors.grey[900], child: Icon(Icons.person, color: Colors.white54, size: 50)),
             ),
-          ),
-          // Indicateur de voix
-          if (isSpeaking)
-            Positioned(
-              top: 4, right: 4,
-              child: Icon(Icons.graphic_eq, color: Colors.greenAccent, size: 16),
-            ),
-          // Indicateur mute
-          if (isLocal ? agora.isLocalMuted : (agora.remoteUsers[uid]?.isMuted ?? false))
-            Positioned(
-              top: 4, left: 4,
-              child: Icon(Icons.mic_off, color: Colors.red, size: 14),
-            ),
-        ],
+            Positioned(top: 50, left: 20, child: Text(playerName, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold))),
+            Positioned(top: 50, right: 20, child: IconButton(icon: Icon(Icons.close, color: Colors.white, size: 30), onPressed: () => setState(() => _maximizedIdentity = null))),
+          ],
+        ),
       ),
     );
   }

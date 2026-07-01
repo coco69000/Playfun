@@ -2,8 +2,7 @@
 // Fichier centralisé contenant tous les mots et catégories de tous les jeux
 // locaux et multijoueur, organisés par difficulté (soft / hard / hardcore).
 
-class GameWords {
-  // ─────────────────────────────────────────────────────────────────────────────
+class GameWords {  // ─────────────────────────────────────────────────────────────────────────────
   // DEVINE TÊTE – mots bruts par difficulté
   // ─────────────────────────────────────────────────────────────────────────────
   static const Map<String, List<String>> devineTeteByDifficulty = {
@@ -747,4 +746,36 @@ class GameWords {
     "Bois un verre d'eau à l'envers.",
     "Décris ta journée en 3 sons bizarres.",
   ];
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // TABOO – mots par difficulté
+  // ─────────────────────────────────────────────────────────────────────────────
+  static const Map<String, Map<String, List<String>>> tabooWordsData = {
+    'soft': {
+      "Paris": ["France", "Capitale", "Tour Eiffel", "Lumière", "Seine"],
+      "Football": ["Ballon", "Sport", "But", "Équipe", "Jouer"],
+      "Plage": ["Sable", "Mer", "Vacances", "Serviette", "Soleil"],
+      "École": ["Apprendre", "Professeur", "Élève", "Cours", "Tableau"],
+      "Pizza": ["Italie", "Fromage", "Tomate", "Pâte", "Four"],
+      "Avion": ["Vol", "Ciel", "Aéroport", "Aile", "Voyage"],
+      "Anniversaire": ["Fête", "Gâteau", "Bougie", "Cadeau", "Âge"],
+    },
+    'hard': {
+      "Cinéma": ["Film", "Écran", "Salle", "Popcorn", "Acteur"],
+      "Hôpital": ["Malade", "Médecin", "Lit", "Urgence", "Blanc"],
+      "Téléphone": ["Appeler", "Écran", "Portable", "Numéro", "SMS"],
+      "Piscine": ["Eau", "Nager", "Bassin", "Chlore", "Été"],
+      "Musique": ["Son", "Chanter", "Instrument", "Note", "Écouter"],
+      "Vacances": ["Voyage", "Repos", "Valise", "Été", "Partir"],
+      "Restaurant": ["Manger", "Table", "Menu", "Serveur", "Addition"],
+      "Sport": ["Compétition", "Muscle", "Jouer", "Stade", "Gagner"],
+    },
+    'hardcore': {
+      "Hiver": ["Froid", "Neige", "Glace", "Manteau", "Noël"],
+      "Animal": ["Bête", "Nature", "Sauvage", "Manger", "Vivre"],
+      "Voiture": ["Roue", "Moteur", "Route", "Conduire", "Essence"],
+      "Livre": ["Lire", "Page", "Histoire", "Auteur", "Chapitre"],
+      "Rêve": ["Dormir", "Nuit", "Sommeil", "Imaginer", "Cauchemar"],
+    }
+  };
 }

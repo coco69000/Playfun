@@ -50,7 +50,7 @@ dependencies:
   supabase: ^2.9.2
   photo_manager: ^3.1.2
   firebase_database: ^12.2.0
-  agora_rtc_engine: ^6.5.4
+  livekit_client: ^2.8.0
   permission_handler: ^11.3.1
 
 dev_dependencies:
@@ -74,6 +74,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
