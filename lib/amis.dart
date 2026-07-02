@@ -1,4 +1,4 @@
-import 'game_data_words.dart';
+﻿import 'game_data_words.dart';
 import 'monde.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'; // Ajoutez cet import
 import 'main_screens.dart'; // Ajout de main_screens.dart pour accÃƒÂ©der ÃƒÂ  allAppGames
@@ -4439,7 +4439,10 @@ class FirebaseService {
         }, SetOptions(merge: true));
   }
 
-  Future<void> removePlayerFromGame(String gameCode, String playerIdToRemove) async {
+  Future<void> removePlayerFromGame(
+    String gameCode,
+    String playerIdToRemove,
+  ) async {
     for (int attempt = 0; attempt < 5; attempt++) {
       try {
         await _db.runTransaction((transaction) async {
@@ -4452,9 +4455,10 @@ class FirebaseService {
           var playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
           var teams = Map<String, dynamic>.from(gameData['teams'] ?? {});
 
-          if (!players.containsKey(playerIdToRemove)) return; 
+          if (!players.containsKey(playerIdToRemove)) return;
 
-          String removedPlayerName = players[playerIdToRemove]?['name'] ?? 'Un joueur';
+          String removedPlayerName =
+              players[playerIdToRemove]?['name'] ?? 'Un joueur';
           players.remove(playerIdToRemove);
           playerOrder.remove(playerIdToRemove);
           teams.forEach((key, playerList) {
@@ -4472,27 +4476,34 @@ class FirebaseService {
           // Si moins de 2 joueurs, on arrête tout
           if (players.length < 2 && gameData['gameState'] == 'playing') {
             updates['gameState'] = 'gameOver';
-            updates['gameEndReason'] = "Partie arrêtée : un joueur a quitté et il n'y a plus assez de joueurs actifs. Retour à l'accueil.";
+            updates['gameEndReason'] =
+                "Partie arrêtée : un joueur a quitté et il n'y a plus assez de joueurs actifs. Retour à l'accueil.";
           } else {
             // Sinon on passe le rôle d'hôte si besoin
-            if (gameData['hostId'] == playerIdToRemove && playerOrder.isNotEmpty) {
-              updates['hostId'] = playerOrder[0]; 
-              newLogs.add("${players[playerOrder[0]]?['name']} est le nouvel hôte.");
+            if (gameData['hostId'] == playerIdToRemove &&
+                playerOrder.isNotEmpty) {
+              updates['hostId'] = playerOrder[0];
+              newLogs.add(
+                "${players[playerOrder[0]]?['name']} est le nouvel hôte.",
+              );
             }
 
-            int oldPlayerIndex = List<String>.from(gameData['playerOrder'] ?? []).indexOf(playerIdToRemove);
+            int oldPlayerIndex = List<String>.from(
+              gameData['playerOrder'] ?? [],
+            ).indexOf(playerIdToRemove);
             int currentPlayerIndex = gameData['currentPlayerIndex'] ?? 0;
-            if (oldPlayerIndex == currentPlayerIndex && playerOrder.isNotEmpty) {
+            if (oldPlayerIndex == currentPlayerIndex &&
+                playerOrder.isNotEmpty) {
               int nextIndex = oldPlayerIndex % playerOrder.length;
               updates['currentPlayerIndex'] = nextIndex;
-              updates['turnStartTime'] = FieldValue.serverTimestamp(); 
+              updates['turnStartTime'] = FieldValue.serverTimestamp();
             }
           }
 
           updates['gameLog'] = FieldValue.arrayUnion(newLogs);
           transaction.update(gameRef, updates);
         });
-        return; 
+        return;
       } catch (e) {
         if (attempt >= 4) rethrow;
         await Future.delayed(Duration(milliseconds: 150 * (attempt + 1)));
@@ -4506,9 +4517,13 @@ class FirebaseService {
     Map<String, dynamic> gameData,
     String timedOutPlayerId,
   ) async {
-    var inactiveCounts = Map<String, int>.from(gameData['inactiveTurnCounts'] ?? {});
+    var inactiveCounts = Map<String, int>.from(
+      gameData['inactiveTurnCounts'] ?? {},
+    );
     int newInactiveCount = (inactiveCounts[timedOutPlayerId] ?? 0) + 1;
-    transaction.update(gameRef, {'inactiveTurnCounts.$timedOutPlayerId': newInactiveCount});
+    transaction.update(gameRef, {
+      'inactiveTurnCounts.$timedOutPlayerId': newInactiveCount,
+    });
 
     if (newInactiveCount >= 2) {
       var players = Map<String, dynamic>.from(gameData['players']);
@@ -4520,34 +4535,41 @@ class FirebaseService {
       Map<String, dynamic> updates = {
         'players': players,
         'playerOrder': playerOrder,
-        'gameLog': FieldValue.arrayUnion(["$playerName a été expulsé pour inactivité."]),
+        'gameLog': FieldValue.arrayUnion([
+          "$playerName a été expulsé pour inactivité.",
+        ]),
       };
 
       if (gameData['gameType'] == 'Uno') {
-        var unoOrder = List<String>.from(gameData['unoPlayerOrder'] ?? [])..remove(timedOutPlayerId);
+        var unoOrder = List<String>.from(gameData['unoPlayerOrder'] ?? [])
+          ..remove(timedOutPlayerId);
         updates['unoPlayerOrder'] = unoOrder;
       }
 
       // Si l'inactivité fait tomber le jeu à moins de 2 joueurs, on arrête
       if (players.length < 2 && gameData['gameState'] == 'playing') {
         updates['gameState'] = 'gameOver';
-        updates['gameEndReason'] = "Partie arrêtée : un joueur a été inactif, il n'y a plus assez de joueurs. Retour à l'accueil.";
+        updates['gameEndReason'] =
+            "Partie arrêtée : un joueur a été inactif, il n'y a plus assez de joueurs. Retour à l'accueil.";
       } else {
         if (gameData['hostId'] == timedOutPlayerId && playerOrder.isNotEmpty) {
-           updates['hostId'] = playerOrder[0];
+          updates['hostId'] = playerOrder[0];
         }
         if (playerOrder.isNotEmpty) {
-          int oldIndex = (gameData['playerOrder'] as List).indexOf(timedOutPlayerId);
+          int oldIndex = (gameData['playerOrder'] as List).indexOf(
+            timedOutPlayerId,
+          );
           updates['currentPlayerIndex'] = oldIndex % playerOrder.length;
         }
       }
-      
+
       updates['turnStartTime'] = FieldValue.serverTimestamp();
       transaction.update(gameRef, updates);
-      return true; 
+      return true;
     }
-    return false; 
-  }\n
+    return false;
+  }
+
   Future<void> handleTurnTimeout(String gameCode) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -19410,149 +19432,228 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final roundState = gameData['roundState'];
     final currentPhase = gameData['currentPhase'];
 
-    if (['Petit Bac', 'Pictionary', 'La Patate Chaude', 'Le Jeu des Catégories', 'Photo Roulette'].contains(gameType)) {
+    if ([
+      'Petit Bac',
+      'Pictionary',
+      'La Patate Chaude',
+      'Le Jeu des Catégories',
+      'Photo Roulette',
+    ].contains(gameType)) {
       return;
     }
 
-    if (roundState == 'result' || currentPhase == 'turn_result' || roundState == 'round_end' || roundState == 'round_over') {
+    if (roundState == 'result' ||
+        currentPhase == 'turn_result' ||
+        roundState == 'round_end' ||
+        roundState == 'round_over') {
       turnDuration = resultTimerDuration;
       if (gameType == 'Infiltré & Mr. White') {
-        timeoutAction = () => _firebaseService.processEliminationsAndCheckWin(widget.gameCode);
+        timeoutAction =
+            () => _firebaseService.processEliminationsAndCheckWin(
+              widget.gameCode,
+            );
       } else {
-        timeoutAction = () => _firebaseService.handleHostActionTimeout(widget.gameCode);
+        timeoutAction =
+            () => _firebaseService.handleHostActionTimeout(widget.gameCode);
       }
-    } else if (roundState == 'voting' || currentPhase == 'voting' || roundState == 'reveal_and_vote') {
+    } else if (roundState == 'voting' ||
+        currentPhase == 'voting' ||
+        roundState == 'reveal_and_vote') {
       turnDuration = turnTimerDuration;
-      timeoutAction = () => _firebaseService.handleVotingTimeout(widget.gameCode);
+      timeoutAction =
+          () => _firebaseService.handleVotingTimeout(widget.gameCode);
     } else if (roundState == 'answering' || roundState == 'declaring_truth') {
       turnDuration = turnTimerDuration;
-      timeoutAction = () => _firebaseService.handleSimultaneousInputTimeout(widget.gameCode);
+      timeoutAction =
+          () =>
+              _firebaseService.handleSimultaneousInputTimeout(widget.gameCode);
     } else {
       turnDuration = turnTimerDuration;
       switch (gameType) {
         case 'Devine Tête':
           if (roundState == 'playing_turn') {
             turnDuration = Duration(seconds: 60);
-            timeoutAction = () => _firebaseService.handleDevineTeteTimeout(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.handleDevineTeteTimeout(widget.gameCode);
           } else if (roundState == 'turn_result') {
             turnDuration = resultTimerDuration;
-            timeoutAction = () => _firebaseService.nextDevineTeteTurn(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.nextDevineTeteTurn(widget.gameCode);
           }
           break;
         case 'Zombie!':
-          timeoutAction = () => _firebaseService.handleZombieTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleZombieTimeout(widget.gameCode);
           break;
         case 'Big Two':
-          timeoutAction = () => _firebaseService.handleBigTwoTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleBigTwoTimeout(widget.gameCode);
           break;
         case 'Uno':
-          timeoutAction = () => _firebaseService.handleUnoTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleUnoTimeout(widget.gameCode);
           break;
         case 'Yams':
-          timeoutAction = () => _firebaseService.handleYamsTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleYamsTimeout(widget.gameCode);
           break;
         case 'Bataille Navale':
-          timeoutAction = () => _firebaseService.handleBatailleNavaleTimeout(widget.gameCode);
+          timeoutAction =
+              () =>
+                  _firebaseService.handleBatailleNavaleTimeout(widget.gameCode);
           break;
         case 'Zéro Pointé':
-          timeoutAction = () => _firebaseService.handleZeroPointeTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleZeroPointeTimeout(widget.gameCode);
           break;
         case 'Poker':
-          timeoutAction = () => _firebaseService.handlePokerTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handlePokerTimeout(widget.gameCode);
           break;
         case 'Rami':
-          timeoutAction = () => _firebaseService.handleRamiTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleRamiTimeout(widget.gameCode);
           break;
         case 'Belote':
-          timeoutAction = () => _firebaseService.handleBeloteTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleBeloteTimeout(widget.gameCode);
           break;
         case 'Loup-Garou':
           if (gameData['phase'] == 'nuit') {
-            timeoutAction = () => _firebaseService.startNextNightPhase(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.startNextNightPhase(widget.gameCode);
           } else if (gameData['phase'] == 'jour_discussion') {
-            timeoutAction = () => _firebaseService.startDayVotePhase(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.startDayVotePhase(widget.gameCode);
           } else if (gameData['phase'] == 'jour_vote') {
-            timeoutAction = () => _firebaseService.processDayVote(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.processDayVote(widget.gameCode);
           }
           break;
         case 'Infiltré & Mr. White':
           if (currentPhase == 'clue_giving') {
-            turnDuration = Duration(seconds: (gameData['turnTimerSeconds'] as int?) ?? 30);
-            timeoutAction = () => _firebaseService.handleTurnTimeout(widget.gameCode);
+            turnDuration = Duration(
+              seconds: (gameData['turnTimerSeconds'] as int?) ?? 30,
+            );
+            timeoutAction =
+                () => _firebaseService.handleTurnTimeout(widget.gameCode);
           } else if (currentPhase == 'discussion') {
-            timeoutAction = () => _firebaseService.startUndercoverVoting(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.startUndercoverVoting(widget.gameCode);
           } else if (currentPhase == 'tie_breaker') {
             timeoutAction = () {
-              final String? goddessId = gameData['specialRoles']?['justiceGoddess'];
-              final List<String> tiedPlayers = List<String>.from(gameData['tiedPlayers'] ?? []);
+              final String? goddessId =
+                  gameData['specialRoles']?['justiceGoddess'];
+              final List<String> tiedPlayers = List<String>.from(
+                gameData['tiedPlayers'] ?? [],
+              );
               if (tiedPlayers.isNotEmpty && goddessId != null) {
-                _firebaseService.undercoverGoddessDecision(widget.gameCode, tiedPlayers.first);
+                _firebaseService.undercoverGoddessDecision(
+                  widget.gameCode,
+                  tiedPlayers.first,
+                );
               }
             };
           } else if (currentPhase == 'avenger_revenge') {
             timeoutAction = () {
               String? avengerId;
               gameData['playerData'].forEach((pId, data) {
-                if ((data['specialAbilities'] as List?)?.contains('Vengeuse') ?? false) avengerId = pId;
+                if ((data['specialAbilities'] as List?)?.contains('Vengeuse') ??
+                    false)
+                  avengerId = pId;
               });
               if (avengerId != null) {
-                List<String> activePlayers = (gameData['playerData'] as Map).entries
-                    .where((e) => e.value['status'] == 'active')
-                    .map((e) => e.key as String).toList();
+                List<String> activePlayers =
+                    (gameData['playerData'] as Map).entries
+                        .where((e) => e.value['status'] == 'active')
+                        .map((e) => e.key as String)
+                        .toList();
                 if (activePlayers.isNotEmpty) {
-                  _firebaseService.undercoverAvengerDecision(widget.gameCode, avengerId!, activePlayers.first);
+                  _firebaseService.undercoverAvengerDecision(
+                    widget.gameCode,
+                    avengerId!,
+                    activePlayers.first,
+                  );
                 }
               }
             };
           }
           break;
         case 'Just One':
-          if (['guesser_chooses_word', 'clue_giving', 'reveal_clues'].contains(roundState)) {
-            timeoutAction = () => _firebaseService.handleJustOneTimeout(widget.gameCode);
+          if ([
+            'guesser_chooses_word',
+            'clue_giving',
+            'reveal_clues',
+          ].contains(roundState)) {
+            timeoutAction =
+                () => _firebaseService.handleJustOneTimeout(widget.gameCode);
           }
           break;
         case 'Skull':
           if (roundState == 'placing' || roundState == 'bidding') {
-            timeoutAction = () => _firebaseService.handleSkullTimeout(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.handleSkullTimeout(widget.gameCode);
           }
           break;
         case 'Taboo':
-          timeoutAction = () => _firebaseService.handleTabooTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleTabooTimeout(widget.gameCode);
           break;
         case 'Mille Bornes':
-          timeoutAction = () => _firebaseService.handleMilleBornesTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleMilleBornesTimeout(widget.gameCode);
           break;
         case 'Président':
           if (gameData['gameState'] == 'card_exchange') {
-            timeoutAction = () => _firebaseService.startNextPresidentRoundAfterExchange(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.startNextPresidentRoundAfterExchange(
+                  widget.gameCode,
+                );
           } else {
-            timeoutAction = () => _firebaseService.handlePresidentTimeout(widget.gameCode);
+            timeoutAction =
+                () => _firebaseService.handlePresidentTimeout(widget.gameCode);
           }
           break;
         case 'Blokus':
-          timeoutAction = () => _firebaseService.handleBlokusTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleBlokusTimeout(widget.gameCode);
           break;
         case 'Jeu de Dames':
-          timeoutAction = () => _firebaseService.handleCheckersTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleCheckersTimeout(widget.gameCode);
           break;
         case 'Codenames':
-          timeoutAction = () => _firebaseService.handleCodenamesTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleCodenamesTimeout(widget.gameCode);
           break;
         case 'Time\'s Up':
-          timeoutAction = () => _firebaseService.handleTimesUpTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleTimesUpTimeout(widget.gameCode);
           break;
         case 'Gribouillis':
-          timeoutAction = () => _firebaseService.handleGribouillisTimeout(widget.gameCode);
+          timeoutAction =
+              () => _firebaseService.handleGribouillisTimeout(widget.gameCode);
           break;
         case 'Cadavre Exquis':
-          timeoutAction = () => _firebaseService.handleCadavreExquisTimeout(widget.gameCode);
+          timeoutAction =
+              () =>
+                  _firebaseService.handleCadavreExquisTimeout(widget.gameCode);
           break;
         case 'Petits Chevaux':
-          timeoutAction = () => _firebaseService.handlePetitsChevauxTimeout(widget.gameCode);
+          timeoutAction =
+              () =>
+                  _firebaseService.handlePetitsChevauxTimeout(widget.gameCode);
           break;
         default:
-          if (!['Le Juge', 'Qui Pourrait le Plus ?', 'Le Menteur', 'Le Roi des Mèmes', 'Synonyme ou Banni'].contains(gameType)) {
-            timeoutAction = () => _firebaseService.handleTurnTimeout(widget.gameCode);
+          if (![
+            'Le Juge',
+            'Qui Pourrait le Plus ?',
+            'Le Menteur',
+            'Le Roi des Mèmes',
+            'Synonyme ou Banni',
+          ].contains(gameType)) {
+            timeoutAction =
+                () => _firebaseService.handleTurnTimeout(widget.gameCode);
           }
           break;
       }
@@ -19560,28 +19661,31 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     if (timeoutAction == null) return;
 
-    final timeRemaining = turnDuration - DateTime.now().difference(turnStartTime);
+    final timeRemaining =
+        turnDuration - DateTime.now().difference(turnStartTime);
 
     _playerTurnTimer = Timer(
       timeRemaining.isNegative ? Duration.zero : timeRemaining,
       () {
-        // Peu importe qui déclenche le timer (hôte ou client), on exécute l'action de mise à jour 
+        // Peu importe qui déclenche le timer (hôte ou client), on exécute l'action de mise à jour
         // L'action Firebase gérera elle-même les conflits de requêtes simultanées grâce à ses transactions.
         _firebaseService.getGameStream(widget.gameCode).first.then((snapshot) {
           if (!snapshot.exists) return;
           final latestGameData = snapshot.data() as Map<String, dynamic>;
           final latestTimestamp = latestGameData['turnStartTime'] as Timestamp?;
-          
-          if (latestTimestamp?.millisecondsSinceEpoch == turnStartTimeStamp.millisecondsSinceEpoch) {
-             // Petit délai aléatoire pour éviter que 10 personnes écrivent en base au même dixième de seconde
+
+          if (latestTimestamp?.millisecondsSinceEpoch ==
+              turnStartTimeStamp.millisecondsSinceEpoch) {
+            // Petit délai aléatoire pour éviter que 10 personnes écrivent en base au même dixième de seconde
             Future.delayed(Duration(milliseconds: Random().nextInt(500)), () {
-               timeoutAction?.call();
+              timeoutAction?.call();
             });
           }
         });
       },
     );
-  }\n
+  }
+
   Widget _buildUndercoverGameUI(
     BuildContext context,
     Map<String, dynamic> gameData,
