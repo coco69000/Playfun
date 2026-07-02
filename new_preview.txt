@@ -1,0 +1,41 @@
+﻿    // Preview de la pièce
+    if (previewPiece != null && previewRow != null && previewCol != null) {
+      
+      // --- CORRECTION 4 : La pièce garde TOUJOURS la couleur du joueur (avec opacité) ---
+      final previewPaint = Paint()
+        ..color = previewColor.withOpacity(0.6); // Toujours la bonne couleur
+
+      for (var p in previewPiece!) {
+        final row = p[0] + previewRow!;
+        final col = p[1] + previewCol!;
+        if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
+          final rect = Rect.fromLTWH(
+            col * cellSize,
+            row * cellSize,
+            cellSize,
+            cellSize,
+          );
+          canvas.drawRect(rect.inflate(-1), previewPaint);
+        }
+      }
+
+      // --- CORRECTION 5 : Seule la BORDURE devient rouge si le placement est invalide ---
+      final borderPaint = Paint()
+        ..color = canPlace ? Colors.greenAccent : Colors.redAccent
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2;
+
+      for (var p in previewPiece!) {
+        final row = p[0] + previewRow!;
+        final col = p[1] + previewCol!;
+        if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
+          final rect = Rect.fromLTWH(
+            col * cellSize,
+            row * cellSize,
+            cellSize,
+            cellSize,
+          );
+          canvas.drawRect(rect, borderPaint);
+        }
+      }
+    }

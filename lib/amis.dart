@@ -4167,49 +4167,265 @@ class FirebaseService {
     });
   }
 
-  Future<void> handleSynonymeInputTimeout(String gameCode) async {
+  Future<void> handleSimultaneousInputTimeout(String gameCode) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
       if (!gameSnap.exists || gameSnap.data() == null) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      if (gameData['gameState'] != 'playing' ||
-          gameData['roundState'] != 'answering')
-        return;
+      if (gameData['gameState'] != 'playing') return;
+
+      final String roundState = gameData['roundState'];
+      if (roundState != 'answering' && roundState != 'declaring_truth') return;
 
       final players = Map<String, dynamic>.from(gameData['players']);
-      final answers = Map<String, dynamic>.from(gameData['answers'] ?? {});
-
       bool updatesMade = false;
 
-      // Pour chaque joueur, s'il n'a pas rÃƒÂ©pondu, on met la phrase par dÃƒÂ©faut
-      for (var pId in players.keys) {
-        if (!answers.containsKey(pId)) {
-          answers[pId] = "Ce joueur est inactif";
-          updatesMade = true;
+      if (roundState == 'answering') {
+        final answers = Map<String, dynamic>.from(gameData['answers'] ?? {});
+        final gameType = gameData['gameType'];
 
-          // Optionnel : marquer le joueur comme inactif (strike)
-          await _incrementInactiveCountAndCheckExpulsion(
-            transaction,
-            gameRef,
-            gameData,
-            pId,
-          );
+        String? judgeId;
+        if (gameType == 'Le Juge') judgeId = gameData['currentTargetPlayerId'];
+
+        for (var pId in players.keys) {
+          if (pId == judgeId) continue;
+          if (!answers.containsKey(pId)) {
+            answers[pId] = "Temps écoulé";
+            updatesMade = true;
+            await _incrementInactiveCountAndCheckExpulsion(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+            );
+          }
+        }
+
+        if (updatesMade ||
+            answers.length >=
+                (judgeId != null ? players.length - 1 : players.length)) {
+          String nextState = 'voting';
+          if (gameType == 'Le Menteur' &&
+              gameData['isSimplifiedLiar'] == true) {
+            nextState = 'declaring_truth';
+          }
+          transaction.update(gameRef, {
+            'answers': answers,
+            'roundState': nextState,
+            'turnStartTime': FieldValue.serverTimestamp(),
+            'gameLog': FieldValue.arrayUnion([
+              "Le temps est écoulé, on avance !",
+            ]),
+          });
+        }
+      } else if (roundState == 'declaring_truth') {
+        final storyTruths = Map<String, dynamic>.from(
+          gameData['storyTruths'] ?? {},
+        );
+        for (var pId in players.keys) {
+          if (!storyTruths.containsKey(pId)) {
+            storyTruths[pId] = Random().nextBool();
+            updatesMade = true;
+            await _incrementInactiveCountAndCheckExpulsion(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+            );
+          }
+        }
+        if (updatesMade || storyTruths.length == players.length) {
+          String voteMode = gameData['liarVoteMode'] ?? 'simultaneous';
+          transaction.update(gameRef, {
+            'storyTruths': storyTruths,
+            'roundState':
+                (voteMode == 'turn_by_turn') ? 'reveal_and_vote' : 'voting',
+            'turnStartTime': FieldValue.serverTimestamp(),
+            'gameLog': FieldValue.arrayUnion([
+              "Le temps est écoulé pour déclarer la vérité !",
+            ]),
+          });
         }
       }
-
-      if (updatesMade || answers.length == players.length) {
-        transaction.update(gameRef, {
-          'answers': answers,
-          'roundState': 'voting', // Passage automatique au vote
-          'turnStartTime': FieldValue.serverTimestamp(), // Timer pour le vote
-          'gameLog': FieldValue.arrayUnion([
-            "Le temps est ÃƒÂ©coulÃƒÂ©, vote forcÃƒÂ©.",
-          ]),
-        });
-      }
     });
+  }
+
+  Future<void> handleBatailleNavaleTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+
+    if (gameData['roundState'] == 'placement') {
+      final players = Map<String, dynamic>.from(gameData['players']);
+      for (var pId in players.keys) {
+        final pData = gameData['playerData']?[pId];
+        if (pData == null || pData['isReady'] != true) {
+          await randomizeShipsBatailleNavale(gameCode, pId);
+          await setPlayerReadyBatailleNavale(gameCode, pId);
+        }
+      }
+    } else if (gameData['roundState'] == 'playing') {
+      final currentPlayerId = gameData['currentPlayerId'];
+      if (currentPlayerId != null) {
+        final playerData = Map<String, dynamic>.from(gameData['playerData']);
+        final shooterData = Map<String, dynamic>.from(
+          playerData[currentPlayerId],
+        );
+        final enemyGrid = List<String>.from(shooterData['enemyGrid']);
+        List<int> validTargets = [];
+        for (int i = 0; i < 100; i++) {
+          if (enemyGrid[i] == 'unknown') validTargets.add(i);
+        }
+        if (validTargets.isNotEmpty) {
+          int target = validTargets[Random().nextInt(validTargets.length)];
+          await shootBatailleNavale(gameCode, currentPlayerId, target);
+        }
+      }
+    }
+  }
+
+  Future<void> handlePresidentTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+    final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
+    final currentIndex = gameData['currentPlayerIndex'] ?? 0;
+    if (currentIndex < playerOrder.length) {
+      await passPresidentTurn(gameCode, playerOrder[currentIndex]);
+    }
+  }
+
+  Future<void> handleBlokusTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+    final playerOrder = List<String>.from(gameData['blokusPlayerOrder']);
+    final currentIndex = gameData['blokusCurrentPlayerIndex'];
+    if (currentIndex < playerOrder.length) {
+      await passBlokusTurn(gameCode, playerOrder[currentIndex]);
+    }
+  }
+
+  Future<void> handleCheckersTimeout(String gameCode) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      DocumentSnapshot gameSnap = await transaction.get(gameRef);
+      if (!gameSnap.exists) return;
+      var gameData = gameSnap.data() as Map<String, dynamic>;
+
+      if (gameData['gameState'] != 'playing') return;
+
+      List<String> playerOrder = List<String>.from(
+        gameData['checkersPlayerOrder'],
+      );
+      int currentIndex = gameData['checkersCurrentPlayerIndex'];
+      String currentColor = gameData['checkersCurrentColor'];
+
+      String nextColor = currentColor == 'red' ? 'black' : 'red';
+      int nextIndex = (currentIndex + 1) % playerOrder.length;
+
+      transaction.update(gameRef, {
+        'checkersCurrentColor': nextColor,
+        'checkersCurrentPlayerIndex': nextIndex,
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'gameLog': FieldValue.arrayUnion(["Temps écoulé, tour passé !"]),
+      });
+    });
+  }
+
+  Future<void> handleCodenamesTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    final gameData = gameSnap.data() as Map<String, dynamic>;
+
+    if (gameData['roundState'] == 'clue_giving') {
+      await submitCodenamesClue(gameCode, "Temps_Écoulé", 1);
+    } else if (gameData['roundState'] == 'guessing') {
+      await passCodenamesTurn(gameCode);
+    }
+  }
+
+  Future<void> handleTimesUpTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    final gameData = gameSnap.data() as Map<String, dynamic>;
+
+    if (gameData['roundState'] == 'collecting_words') {
+      final players = Map<String, dynamic>.from(gameData['players']);
+      final submitted = Map<String, dynamic>.from(
+        gameData['timesUpSubmittedPlayers'] ?? {},
+      );
+      for (var pId in players.keys) {
+        if (!submitted.containsKey(pId)) {
+          await submitTimesUpWords(gameCode, pId, [
+            "Mot1",
+            "Mot2",
+            "Mot3",
+            "Mot4",
+            "Mot5",
+          ]);
+        }
+      }
+    } else if (gameData['roundState'].toString().startsWith('playing_round_')) {
+      await startTimesUpRoundTurn(gameCode);
+    }
+  }
+
+  Future<void> handleGribouillisTimeout(String gameCode) async {
+    final gameSnap = await _db.collection('games').doc(gameCode).get();
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+    final players = Map<String, dynamic>.from(gameData['players']);
+    final submitted = List<String>.from(gameData['submittedPlayers'] ?? []);
+    final roundState = gameData['roundState'];
+
+    if (roundState == 'results' || gameData['gameState'] == 'gameOver') return;
+
+    for (var pId in players.keys) {
+      if (!submitted.contains(pId)) {
+        if (roundState == 'initial_writing' || roundState == 'guessing') {
+          await submitGribouillisStep(gameCode, pId, 'text', "Temps écoulé");
+        } else {
+          await submitGribouillisStep(gameCode, pId, 'drawing', "");
+        }
+      }
+    }
+  }
+
+  Future<void> handleCadavreExquisTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+    final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
+    final currentIndex = gameData['currentPlayerIndex'] ?? 0;
+    if (currentIndex < playerOrder.length) {
+      await submitCadavreExquisStep(gameCode, playerOrder[currentIndex], "...");
+    }
+  }
+
+  Future<void> handlePetitsChevauxTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+
+    final playerOrder = List<String>.from(gameData['petitsChevauxPlayerOrder']);
+    final currentIndex = gameData['petitsChevauxCurrentIndex'];
+    if (currentIndex >= playerOrder.length) return;
+    String currentPlayerId = playerOrder[currentIndex];
+
+    if (gameData['petitsChevauxHasRolled'] == true) {
+      await passTurnPetitsChevaux(gameCode, currentPlayerId);
+    } else {
+      await rollDicePetitsChevaux(gameCode, currentPlayerId);
+    }
   }
 
   Future<void> updatePlayerHeartbeat(String gameCode, String playerId) async {
@@ -4223,10 +4439,7 @@ class FirebaseService {
         }, SetOptions(merge: true));
   }
 
-  Future<void> removePlayerFromGame(
-    String gameCode,
-    String playerIdToRemove,
-  ) async {
+  Future<void> removePlayerFromGame(String gameCode, String playerIdToRemove) async {
     for (int attempt = 0; attempt < 5; attempt++) {
       try {
         await _db.runTransaction((transaction) async {
@@ -4239,65 +4452,47 @@ class FirebaseService {
           var playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
           var teams = Map<String, dynamic>.from(gameData['teams'] ?? {});
 
-          if (!players.containsKey(playerIdToRemove))
-            return; // Le joueur n'est dÃƒÂ©jÃƒÂ  plus lÃƒ
+          if (!players.containsKey(playerIdToRemove)) return; 
 
-          String removedPlayerName =
-              players[playerIdToRemove]?['name'] ?? 'Un joueur';
+          String removedPlayerName = players[playerIdToRemove]?['name'] ?? 'Un joueur';
           players.remove(playerIdToRemove);
-
           playerOrder.remove(playerIdToRemove);
           teams.forEach((key, playerList) {
             (playerList as List).remove(playerIdToRemove);
           });
 
-          List<String> newLogs = ["$removedPlayerName a quittÃƒÂ© la partie."];
-
+          List<String> newLogs = ["$removedPlayerName a quitté la partie."];
           Map<String, dynamic> updates = {
             'players': players,
             'playerOrder': playerOrder,
             'teams': teams,
-            'inactiveTurnCounts.$playerIdToRemove':
-                FieldValue.delete(), // Nettoyer son compteur d'inactivitÃƒÂ©
+            'inactiveTurnCounts.$playerIdToRemove': FieldValue.delete(),
           };
 
-          if (gameData['hostId'] == playerIdToRemove &&
-              playerOrder.isNotEmpty) {
-            updates['hostId'] =
-                playerOrder[0]; // Le prochain joueur dans la liste devient l'hÃƒÂ´te
-            newLogs.add(
-              "${players[playerOrder[0]]?['name']} est le nouvel hÃƒÂ´te.",
-            );
-          }
-
-          int oldPlayerIndex = List<String>.from(
-            gameData['playerOrder'] ?? [],
-          ).indexOf(playerIdToRemove);
-          int currentPlayerIndex = gameData['currentPlayerIndex'] ?? 0;
-
-          if (oldPlayerIndex == currentPlayerIndex && playerOrder.isNotEmpty) {
-            int nextIndex =
-                oldPlayerIndex %
-                playerOrder
-                    .length; // L'index reste le mÃƒÂªme dans la nouvelle liste plus courte
-            updates['currentPlayerIndex'] = nextIndex;
-            updates['turnStartTime'] =
-                FieldValue.serverTimestamp(); // RedÃƒÂ©marre le minuteur pour le nouveau joueur
-          }
-
+          // Si moins de 2 joueurs, on arrête tout
           if (players.length < 2 && gameData['gameState'] == 'playing') {
-            updates['gameState'] = 'lobby';
-            updates['roundState'] = 'waitingForStart';
-            newLogs.add(
-              "Pas assez de joueurs pour continuer. Retour au salon.",
-            );
+            updates['gameState'] = 'gameOver';
+            updates['gameEndReason'] = "Partie arrêtée : un joueur a quitté et il n'y a plus assez de joueurs actifs. Retour à l'accueil.";
+          } else {
+            // Sinon on passe le rôle d'hôte si besoin
+            if (gameData['hostId'] == playerIdToRemove && playerOrder.isNotEmpty) {
+              updates['hostId'] = playerOrder[0]; 
+              newLogs.add("${players[playerOrder[0]]?['name']} est le nouvel hôte.");
+            }
+
+            int oldPlayerIndex = List<String>.from(gameData['playerOrder'] ?? []).indexOf(playerIdToRemove);
+            int currentPlayerIndex = gameData['currentPlayerIndex'] ?? 0;
+            if (oldPlayerIndex == currentPlayerIndex && playerOrder.isNotEmpty) {
+              int nextIndex = oldPlayerIndex % playerOrder.length;
+              updates['currentPlayerIndex'] = nextIndex;
+              updates['turnStartTime'] = FieldValue.serverTimestamp(); 
+            }
           }
 
           updates['gameLog'] = FieldValue.arrayUnion(newLogs);
-
           transaction.update(gameRef, updates);
         });
-        return; // SuccÃƒÂ¨s
+        return; 
       } catch (e) {
         if (attempt >= 4) rethrow;
         await Future.delayed(Duration(milliseconds: 150 * (attempt + 1)));
@@ -4311,13 +4506,9 @@ class FirebaseService {
     Map<String, dynamic> gameData,
     String timedOutPlayerId,
   ) async {
-    var inactiveCounts = Map<String, int>.from(
-      gameData['inactiveTurnCounts'] ?? {},
-    );
+    var inactiveCounts = Map<String, int>.from(gameData['inactiveTurnCounts'] ?? {});
     int newInactiveCount = (inactiveCounts[timedOutPlayerId] ?? 0) + 1;
-    transaction.update(gameRef, {
-      'inactiveTurnCounts.$timedOutPlayerId': newInactiveCount,
-    });
+    transaction.update(gameRef, {'inactiveTurnCounts.$timedOutPlayerId': newInactiveCount});
 
     if (newInactiveCount >= 2) {
       var players = Map<String, dynamic>.from(gameData['players']);
@@ -4329,31 +4520,34 @@ class FirebaseService {
       Map<String, dynamic> updates = {
         'players': players,
         'playerOrder': playerOrder,
-        'gameLog': FieldValue.arrayUnion([
-          "$playerName a ÃƒÂ©tÃƒÂ© expulsÃƒÂ© pour inactivitÃƒÂ©.",
-        ]),
+        'gameLog': FieldValue.arrayUnion(["$playerName a été expulsé pour inactivité."]),
       };
 
       if (gameData['gameType'] == 'Uno') {
-        var unoOrder = List<String>.from(gameData['unoPlayerOrder'] ?? [])
-          ..remove(timedOutPlayerId);
+        var unoOrder = List<String>.from(gameData['unoPlayerOrder'] ?? [])..remove(timedOutPlayerId);
         updates['unoPlayerOrder'] = unoOrder;
       }
 
-      if (playerOrder.isNotEmpty) {
-        int oldIndex = (gameData['playerOrder'] as List).indexOf(
-          timedOutPlayerId,
-        );
-        updates['currentPlayerIndex'] = oldIndex % playerOrder.length;
+      // Si l'inactivité fait tomber le jeu à moins de 2 joueurs, on arrête
+      if (players.length < 2 && gameData['gameState'] == 'playing') {
+        updates['gameState'] = 'gameOver';
+        updates['gameEndReason'] = "Partie arrêtée : un joueur a été inactif, il n'y a plus assez de joueurs. Retour à l'accueil.";
+      } else {
+        if (gameData['hostId'] == timedOutPlayerId && playerOrder.isNotEmpty) {
+           updates['hostId'] = playerOrder[0];
+        }
+        if (playerOrder.isNotEmpty) {
+          int oldIndex = (gameData['playerOrder'] as List).indexOf(timedOutPlayerId);
+          updates['currentPlayerIndex'] = oldIndex % playerOrder.length;
+        }
       }
+      
       updates['turnStartTime'] = FieldValue.serverTimestamp();
-
       transaction.update(gameRef, updates);
-      return true; // Joueur expulsÃƒÂ©
+      return true; 
     }
-    return false; // Joueur non expulsÃƒÂ©
-  }
-
+    return false; 
+  }\n
   Future<void> handleTurnTimeout(String gameCode) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -7403,6 +7597,7 @@ class FirebaseService {
     bool isPremiumLobby = false, // NOUVEAU PARAMÃƒË†TRE
     bool videoEnabled = false, // NOUVEAU PARAMÃƒË†TRE
     bool audioEnabled = false, // NOUVEAU PARAMÃƒË†TRE
+    bool devineTeteUseTeams = false,
     List<String>? aiWords, // Pre-generated AI words
     String? cadavreVariant,
     String? cadavrePassingMode,
@@ -7411,6 +7606,7 @@ class FirebaseService {
     bool dobbleSymbolsPerCard = false,
     bool isSimplifiedLiar = false,
     String liarVoteMode = 'simultaneous',
+    String quiPourraitVoteMode = 'grouper',
     List<String>? petitBacCategories,
     int? petitBacTime,
     bool presidentRevolution = false,
@@ -7447,6 +7643,7 @@ class FirebaseService {
       'hostId': hostId,
       'players': allPlayers,
       'gameType': gameType,
+      if (gameType == 'Devine Tête') 'devineTeteUseTeams': devineTeteUseTeams,
       'difficulty': difficulty,
       'gameState': 'lobby',
       'isPremiumLobby': isPremiumLobby, // NOUVEAU CHAMP
@@ -7550,6 +7747,9 @@ class FirebaseService {
       if (gameType == 'Le Menteur') ...{
         'isSimplifiedLiar': isSimplifiedLiar,
         'liarVoteMode': liarVoteMode,
+      },
+      if (gameType == 'Qui Pourrait le Plus ?') ...{
+        'quiPourraitVoteMode': quiPourraitVoteMode,
       },
       if (gameType == 'Codenames') ...{
         'codenamesWords': [],
@@ -7709,6 +7909,7 @@ class FirebaseService {
     bool isPremiumLobby = false, // NOUVEAU PARAMÃƒË†TRE
     bool videoEnabled = false, // NOUVEAU PARAMÃƒË†TRE
     bool audioEnabled = false, // NOUVEAU PARAMÃƒË†TRE
+    bool devineTeteUseTeams = false,
     String?
     aiInstructions, // AI instructions for premium users (soft mode only)
     List<String>? aiWords, // Pre-generated AI words
@@ -7723,6 +7924,7 @@ class FirebaseService {
     bool dobbleSymbolsPerCard = false,
     bool isSimplifiedLiar = false,
     String liarVoteMode = 'simultaneous',
+    String quiPourraitVoteMode = 'grouper',
     List<String>? petitBacCategories,
     int? petitBacTime,
     bool presidentRevolution = false,
@@ -7772,6 +7974,7 @@ class FirebaseService {
       'enableFloatingChat': enableFloatingChat ?? false, // <--- NOUVEAU
 
       'gameType': gameType,
+      if (gameType == 'Devine Tête') 'devineTeteUseTeams': devineTeteUseTeams,
       'difficulty': difficulty,
       'gameState': 'lobby',
       'players': {
@@ -7870,6 +8073,9 @@ class FirebaseService {
       if (gameType == 'Le Menteur') ...{
         'isSimplifiedLiar': isSimplifiedLiar,
         'liarVoteMode': liarVoteMode,
+      },
+      if (gameType == 'Qui Pourrait le Plus ?') ...{
+        'quiPourraitVoteMode': quiPourraitVoteMode,
       },
       if (gameType == 'Codenames') ...{
         'codenamesWords': [],
@@ -10322,8 +10528,8 @@ class FirebaseService {
     final players = Map<String, dynamic>.from(gameData['players']);
     final playerIds = players.keys.toList()..shuffle();
     final difficulty = gameData['difficulty'] ?? 'soft';
+    final bool useTeams = gameData['devineTeteUseTeams'] == true;
 
-    // RÃ©cupÃ©rer les mots
     List<String> words = [];
     if (gameData['aiWords'] != null &&
         (gameData['aiWords'] as List).isNotEmpty) {
@@ -10336,18 +10542,44 @@ class FirebaseService {
     }
     words.shuffle();
 
-    await gameRef.update({
+    Map<String, dynamic> updates = {
       'gameState': 'playing',
       'roundState': 'playing_turn',
       'devineTeteWords': words,
-      'currentGuesserId': playerIds[0],
-      'currentPlayerIndex': 0,
       'currentWord': words.removeAt(0),
       'guessedCount': 0,
-      'turnTimerSeconds': 60, // 60 secondes pour deviner un max de mots
+      'turnTimerSeconds': 60,
       'turnStartTime': FieldValue.serverTimestamp(),
-      'videoEnabled': true, // On s'assure que la vidÃ©o est active
-    });
+      'videoEnabled': true,
+    };
+
+    if (useTeams) {
+      Map<String, dynamic> teams;
+      if (gameData['teams'] != null && gameData['teams'].isNotEmpty) {
+        teams = gameData['teams'];
+      } else if (gameData['teamA'] != null && gameData['teamB'] != null) {
+        teams = {'teamA': gameData['teamA'], 'teamB': gameData['teamB']};
+      } else {
+        int mid = playerIds.length ~/ 2;
+        teams = {
+          'teamA': playerIds.sublist(0, mid),
+          'teamB': playerIds.sublist(mid),
+        };
+      }
+      updates['teams'] = teams;
+      updates['teamScores'] = {'teamA': 0, 'teamB': 0};
+      updates['activeTeam'] = 'teamA';
+      updates['teamATurnIndex'] = 1; // 0 est le premier devineur
+      updates['teamBTurnIndex'] = 0;
+      String firstGuesser = teams['teamA'][0];
+      updates['currentGuesserId'] = firstGuesser;
+      updates['currentPlayerIndex'] = playerIds.indexOf(firstGuesser);
+    } else {
+      updates['currentGuesserId'] = playerIds[0];
+      updates['currentPlayerIndex'] = 0;
+    }
+
+    await gameRef.update(updates);
   }
 
   Future<void> actionDevineTete(
@@ -10373,13 +10605,16 @@ class FirebaseService {
       if (guessed) {
         updates['players.$playerId.score'] = FieldValue.increment(1);
         updates['guessedCount'] = guessedCount + 1;
+        if (gameData['devineTeteUseTeams'] == true) {
+          String activeTeam = gameData['activeTeam'] ?? 'teamA';
+          updates['teamScores.$activeTeam'] = FieldValue.increment(1);
+        }
       }
 
       if (words.isNotEmpty) {
         updates['currentWord'] = words.removeAt(0);
         updates['devineTeteWords'] = words;
       } else {
-        // Plus de mots ! On met fin au tour prÃ©maturÃ©ment
         updates['roundState'] = 'turn_result';
         updates['turnStartTime'] = FieldValue.serverTimestamp();
       }
@@ -10402,36 +10637,74 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      List<String> playerOrder = List<String>.from(
-        gameData['playerOrder'] ?? [],
-      );
-      int currentIndex = gameData['currentPlayerIndex'] ?? 0;
-      int nextIndex = currentIndex + 1;
-
-      if (nextIndex >= playerOrder.length) {
-        // Fin de la partie, tout le monde est passÃ© (ou on peut faire plusieurs rounds)
-        transaction.update(gameRef, {
-          'gameState': 'gameOver',
-          'gameEndReason': 'Tout le monde est passÃ© !',
-        });
-      } else {
-        List<String> words = List<String>.from(
-          gameData['devineTeteWords'] ?? [],
-        );
-        if (words.isEmpty) {
-          words = List<String>.from(GameWords.devineTeteByDifficulty['soft']!)
-            ..shuffle();
-        }
-        transaction.update(gameRef, {
-          'roundState': 'playing_turn',
-          'currentPlayerIndex': nextIndex,
-          'currentGuesserId': playerOrder[nextIndex],
-          'currentWord': words.removeAt(0),
-          'devineTeteWords': words,
-          'guessedCount': 0,
-          'turnStartTime': FieldValue.serverTimestamp(),
-        });
+      List<String> words = List<String>.from(gameData['devineTeteWords'] ?? []);
+      if (words.isEmpty) {
+        words = List<String>.from(GameWords.devineTeteByDifficulty['soft']!)
+          ..shuffle();
       }
+
+      final bool useTeams = gameData['devineTeteUseTeams'] == true;
+      Map<String, dynamic> updates = {
+        'roundState': 'playing_turn',
+        'currentWord': words.removeAt(0),
+        'devineTeteWords': words,
+        'guessedCount': 0,
+        'turnStartTime': FieldValue.serverTimestamp(),
+      };
+
+      if (useTeams) {
+        Map<String, dynamic> teams = gameData['teams'] ?? {};
+        List<String> teamA = List<String>.from(teams['teamA'] ?? []);
+        List<String> teamB = List<String>.from(teams['teamB'] ?? []);
+
+        int tAIdx = gameData['teamATurnIndex'] ?? 0;
+        int tBIdx = gameData['teamBTurnIndex'] ?? 0;
+        String nextTeam = gameData['activeTeam'] == 'teamA' ? 'teamB' : 'teamA';
+
+        // Si l'équipe adverse a fini, on reste sur la même
+        if (nextTeam == 'teamA' && tAIdx >= teamA.length) nextTeam = 'teamB';
+        if (nextTeam == 'teamB' && tBIdx >= teamB.length) nextTeam = 'teamA';
+
+        if (tAIdx >= teamA.length && tBIdx >= teamB.length) {
+          transaction.update(gameRef, {
+            'gameState': 'gameOver',
+            'gameEndReason': 'Chaque joueur a deviné une fois !',
+          });
+          return;
+        }
+
+        String nextGuesser;
+        if (nextTeam == 'teamA') {
+          nextGuesser = teamA[tAIdx];
+          tAIdx++;
+        } else {
+          nextGuesser = teamB[tBIdx];
+          tBIdx++;
+        }
+
+        updates['activeTeam'] = nextTeam;
+        updates['currentGuesserId'] = nextGuesser;
+        updates['teamATurnIndex'] = tAIdx;
+        updates['teamBTurnIndex'] = tBIdx;
+      } else {
+        List<String> playerOrder = List<String>.from(
+          gameData['playerOrder'] ?? [],
+        );
+        int currentIndex = gameData['currentPlayerIndex'] ?? 0;
+        int nextIndex = currentIndex + 1;
+
+        if (nextIndex >= playerOrder.length) {
+          transaction.update(gameRef, {
+            'gameState': 'gameOver',
+            'gameEndReason': 'Tout le monde est passé !',
+          });
+          return;
+        }
+        updates['currentPlayerIndex'] = nextIndex;
+        updates['currentGuesserId'] = playerOrder[nextIndex];
+      }
+
+      transaction.update(gameRef, updates);
     });
   }
 
@@ -14523,6 +14796,11 @@ class FirebaseService {
         requiredVotes = 1;
       }
 
+      if (gameType == 'Qui Pourrait le Plus ?' &&
+          gameData['quiPourraitVoteMode'] == 'grouper') {
+        requiredVotes = 1;
+      }
+
       if (votes.length >= requiredVotes) {
         final updates = <String, dynamic>{
           'votes': votes,
@@ -16285,12 +16563,15 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   bool _audioEnabled = false;
   String _videoPreference = 'any';
   bool _enableFloatingChat = true;
+  bool _devineTeteUseTeams = false;
+  bool _enablePublicSearch = false; // <--- NOUVELLE VARIABLE
 
   bool _hotPotatoUseGlobalTimer = false;
   String _photoRouletteMediaType = 'Photos';
   bool _dobbleSymbolsPerCard = true;
   bool _isSimplifiedLiar = false;
   String _liarVoteMode = 'simultaneous';
+  String _quiPourraitVoteMode = 'grouper';
   List<String> _petitBacCategories = List.from(
     GameData.petitBacDefaultCategories,
   );
@@ -16354,6 +16635,23 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   }
 
   final Map<String, int> _gameCosts = {'Loup-Garou': 3, 'Gribouillis': 2};
+
+  bool _gameHasDifficulty(String gameName) {
+    const gamesWithDifficulty = {
+      'Qui Pourrait le Plus ?',
+      'Synonyme ou Banni',
+      'Codenames',
+      'Time\'s Up',
+      'Devine Tête',
+      'Infiltré & Mr. White',
+      'Pictionary',
+      'Just One',
+      'Le Juge',
+      'Le Menteur',
+      'Taboo',
+    };
+    return gamesWithDifficulty.contains(gameName);
+  }
 
   void _createGameForFriends() async {
     final playerState = Provider.of<PlayerState>(context, listen: false);
@@ -16429,6 +16727,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           presidentRevolution: _presidentRevolution,
           zeroPointeTargetScore: _zeroPointeTargetScore,
           gribouillisMode: _gribouillisMode,
+          devineTeteUseTeams: _devineTeteUseTeams,
         );
 
         await FirebaseFirestore.instance
@@ -16470,25 +16769,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         widget.playerName,
         widget.playerId,
         _selectedGame,
-        [
-              'Gribouillis',
-              'Petit Bac',
-              'Président',
-              'Skull',
-              'Le Roi des MÃ¨mes',
-              'Loup-Garou',
-              'Dobble',
-              'La Patate Chaude',
-              'Uno',
-              'Zéro Pointé',
-              'Poker',
-              'Photo Roulette',
-              'Belote',
-              'Zombie!',
-              'Dominoes',
-            ].contains(_selectedGame)
-            ? 'N/A'
-            : _selectedDifficulty,
+        _gameHasDifficulty(_selectedGame) ? _selectedDifficulty : 'N/A',
         dobbleSymbolsPerCard: _dobbleSymbolsPerCard,
         isSimplifiedLiar: _isSimplifiedLiar,
         liarVoteMode: _liarVoteMode,
@@ -16502,6 +16783,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         selectedCategoriesList: _selectedGameCategories,
         justOneAllowInvalidClues: _justOneAllowInvalidClues,
         selectedLoupGarouRoles: _selectedLoupGarouRoles,
+        devineTeteUseTeams: _devineTeteUseTeams,
         unoStartingCards: _unoStartingCards,
         unoStackDraws: _unoStackDraws,
         timesUpTotalRounds: _timesUpTotalRounds,
@@ -16628,26 +16910,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               audioEnabled: _audioEnabled,
               videoPreference: _videoEnabled ? 'with' : _videoPreference,
               isRanked: isRanked,
+              devineTeteUseTeams:
+                  _selectedGame == 'Devine Tête' ? _devineTeteUseTeams : false,
               difficulty:
-                  [
-                        'Gribouillis',
-                        'Petit Bac',
-                        'Président',
-                        'Skull',
-                        'Le Roi des MÃ¨mes',
-                        'Loup-Garou',
-                        'Dobble',
-                        'La Patate Chaude',
-                        'Uno',
-                        'Zéro Pointé',
-                        'Poker',
-                        'Photo Roulette',
-                        'Belote',
-                        'Zombie!',
-                        'Dominoes',
-                      ].contains(_selectedGame)
-                      ? 'N/A'
-                      : _selectedDifficulty,
+                  _gameHasDifficulty(_selectedGame)
+                      ? _selectedDifficulty
+                      : 'N/A',
               dobbleSymbolsPerCard:
                   _selectedGame == 'Dobble' ? _dobbleSymbolsPerCard : false,
               isSimplifiedLiar:
@@ -16656,6 +16924,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                   _selectedGame == 'Le Menteur'
                       ? _liarVoteMode
                       : 'simultaneous',
+              quiPourraitVoteMode:
+                  _selectedGame == 'Qui Pourrait le Plus ?'
+                      ? _quiPourraitVoteMode
+                      : 'grouper',
               petitBacCategories:
                   _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
               petitBacTime:
@@ -16728,6 +17000,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   }
 
   void _showLaunchOptions(bool canLocal, bool canMonde) {
+    // Vérifie si la communication est activée pour griser le mode Local
+    final bool isCommunicationEnabled = _videoEnabled || _audioEnabled;
+    // Vérifie si la recherche publique est activée pour griser Local et Privé
+    final bool isPublicSearchEnabled = _enablePublicSearch;
+    final bool isDevineTete = _selectedGame.contains('Devine T');
+    final bool blockOnlineForDevineTete = isDevineTete && !_videoEnabled;
+
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.grey[900],
@@ -16751,22 +17030,52 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                 ElevatedButton.icon(
                   icon: Icon(Icons.phone_android),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor:
+                        isPublicSearchEnabled || isCommunicationEnabled
+                            ? Colors.grey
+                            : Colors.green,
                     minimumSize: Size(double.infinity, 50),
                   ),
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (_) => LocalPlayerSetupScreen(
-                              targetGame: _selectedGame,
-                            ),
-                      ),
-                    );
-                  },
-                  label: Text("Jouer en Local (Sur cet appareil)"),
+                  onPressed:
+                      isPublicSearchEnabled
+                          ? () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Désactivez la 'Recherche Publique' pour pouvoir jouer en Local.",
+                                ),
+                              ),
+                            );
+                          }
+                          : isCommunicationEnabled
+                          ? () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Désactivez la Vidéo ou l'Audio pour pouvoir jouer en Local.",
+                                ),
+                              ),
+                            );
+                          }
+                          : () {
+                            Navigator.pop(ctx);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (_) => LocalPlayerSetupScreen(
+                                      targetGame: _selectedGame,
+                                    ),
+                              ),
+                            );
+                          },
+                  label: Text(
+                    isPublicSearchEnabled
+                        ? "Local indisponible (Recherche active)"
+                        : isCommunicationEnabled
+                        ? "Local indisponible (Vidéo/Audio actif)"
+                        : "Jouer en Local (Sur cet appareil)",
+                  ),
                 ),
                 SizedBox(height: 12),
               ],
@@ -16774,14 +17083,36 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               ElevatedButton.icon(
                 icon: Icon(Icons.lock),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor:
+                      (isPublicSearchEnabled || blockOnlineForDevineTete)
+                          ? Colors.grey
+                          : Colors.deepPurple,
                   minimumSize: Size(double.infinity, 50),
                 ),
-                onPressed: () {
-                  Navigator.pop(ctx);
-                  _createGameForFriends();
-                },
-                label: Text("CrÃ©er une partie privÃ©e (Avec code)"),
+                onPressed:
+                    (isPublicSearchEnabled || blockOnlineForDevineTete)
+                        ? () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                blockOnlineForDevineTete
+                                    ? "La vidéo est obligatoire pour jouer à Devine Tête en ligne."
+                                    : "Désactivez la 'Recherche Publique' pour créer une partie privée.",
+                              ),
+                            ),
+                          );
+                        }
+                        : () {
+                          Navigator.pop(ctx);
+                          _createGameForFriends();
+                        },
+                label: Text(
+                  isPublicSearchEnabled
+                      ? "Privé indisponible (Recherche active)"
+                      : blockOnlineForDevineTete
+                      ? "Privé indisponible (Vidéo requise)"
+                      : "Créer une partie privée (Avec code)",
+                ),
               ),
               SizedBox(height: 12),
 
@@ -16790,33 +17121,75 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                 ElevatedButton.icon(
                   icon: Icon(Icons.public),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor:
+                        _enablePublicSearch ? Colors.blue : Colors.grey[800],
                     minimumSize: Size(double.infinity, 50),
                   ),
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    _startMatchmaking(isRanked: false);
-                  },
-                  label: Text("Recherche rapide (Monde)"),
+                  onPressed:
+                      _enablePublicSearch
+                          ? () {
+                            Navigator.pop(ctx);
+                            _startMatchmaking(isRanked: false);
+                          }
+                          : () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  blockOnlineForDevineTete
+                                      ? "La vidéo est obligatoire pour jouer à Devine Tête en ligne."
+                                      : "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer avec le monde.",
+                                ),
+                              ),
+                            );
+                          },
+                  label: Text(
+                    _enablePublicSearch
+                        ? "Recherche rapide (Monde)"
+                        : blockOnlineForDevineTete
+                        ? "Recherche rapide (Vidéo requise)"
+                        : "Recherche Monde (Désactivée)",
+                  ),
                 ),
                 SizedBox(height: 12),
                 ElevatedButton.icon(
                   icon: Icon(Icons.star, color: Colors.white),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange[800],
+                    backgroundColor:
+                        _enablePublicSearch
+                            ? Colors.orange[800]
+                            : Colors.grey[800],
                     minimumSize: Size(double.infinity, 50),
                   ),
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    _startMatchmaking(isRanked: true);
-                  },
-                  label: Text("Partie ClassÃ©e (Ranked)"),
+                  onPressed:
+                      _enablePublicSearch
+                          ? () {
+                            Navigator.pop(ctx);
+                            _startMatchmaking(isRanked: true);
+                          }
+                          : () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  blockOnlineForDevineTete
+                                      ? "La vidéo est obligatoire pour jouer à Devine Tête en Classé."
+                                      : "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer en Classé.",
+                                ),
+                              ),
+                            );
+                          },
+                  label: Text(
+                    _enablePublicSearch
+                        ? "Partie Classée (Ranked)"
+                        : blockOnlineForDevineTete
+                        ? "Partie Classée (Vidéo requise)"
+                        : "Partie Classée (Désactivée)",
+                  ),
                 ),
               ],
 
               if (!canMonde && widget.isWorldMode) ...[
                 Text(
-                  "Ce jeu requiert de connaÃ®tre les autres joueurs et n'est pas disponible en matchmaking public.",
+                  "Ce jeu requiert de connaître les autres joueurs et n'est pas disponible en matchmaking public.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.redAccent,
@@ -16856,7 +17229,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     );
     final modes = gameDataInfo['modes'] as List<String>;
     final bool canLocal = modes.contains('local');
-    bool forceVideo = _selectedGame == 'Devine TÃªte';
+    bool isDevineTete = _selectedGame.contains('Devine T');
+    bool forceVideo = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -16876,21 +17250,6 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      'Nombre de joueurs : ${_playerCount.toInt()}',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Slider(
-                      value: _playerCount,
-                      min: 2,
-                      max: 20,
-                      divisions: 18,
-                      label: _playerCount.toInt().toString(),
-                      onChanged:
-                          (value) => setState(() => _playerCount = value),
-                    ),
-                    Divider(height: 30, thickness: 1, color: Colors.white24),
-
                     DropdownButtonFormField<String>(
                       value: _selectedGame,
                       items:
@@ -16912,23 +17271,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     ),
                     SizedBox(height: 20),
 
-                    if (![
-                      'Gribouillis',
-                      'Petit Bac',
-                      'Président',
-                      'Skull',
-                      'Le Roi des MÃ¨mes',
-                      'Loup-Garou',
-                      'Dobble',
-                      'La Patate Chaude',
-                      'Uno',
-                      'Zéro Pointé',
-                      'Poker',
-                      'Mille Bornes',
-                      'Belote',
-                      'Zombie!',
-                      'Dominoes',
-                    ].contains(_selectedGame)) ...[
+                    if (_gameHasDifficulty(_selectedGame)) ...[
                       Text(
                         "DifficultÃ©",
                         style: Theme.of(context).textTheme.bodyMedium,
@@ -17452,6 +17795,20 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                     ],
 
+                    if (_selectedGame == 'Devine Tête') ...[
+                      SizedBox(height: 20),
+                      SwitchListTile.adaptive(
+                        title: Text("Jouer par équipes (Mode 2v2+)"),
+                        subtitle: Text(
+                          "Un joueur devine, son équipe l'aide, l'équipe adverse vérifie.",
+                        ),
+                        value: _devineTeteUseTeams,
+                        onChanged:
+                            (val) => setState(() => _devineTeteUseTeams = val),
+                        secondary: Icon(Icons.people),
+                      ),
+                    ],
+
                     if (_selectedGame == 'Petits Chevaux') ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
@@ -17849,169 +18206,227 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                     ],
 
-                    Divider(height: 30, thickness: 1, color: Colors.white24),
+                    // --- COMMUNICATION ET RECHERCHE PUBLIQUE ---
+                    if (modes.contains('multi') || modes.contains('monde')) ...[
+                      Divider(height: 30, thickness: 1, color: Colors.white24),
+                      Text(
+                        "Communication (En ligne)",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      SizedBox(height: 10),
+                      Consumer<PlayerState>(
+                        builder: (context, playerState, _) {
+                          bool canEnableVideo =
+                              playerState.isPremium ||
+                              playerState.videoGamesLeftToday > 0;
 
-                    Text(
-                      "Communication (En ligne)",
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    SizedBox(height: 10),
-                    Consumer<PlayerState>(
-                      builder: (context, playerState, _) {
-                        bool canEnableVideo =
-                            playerState.isPremium ||
-                            playerState.videoGamesLeftToday > 0;
-
-                        if (forceVideo && canEnableVideo && !_videoEnabled) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            setState(() {
-                              _videoEnabled = true;
-                              _audioEnabled = false;
+                          if (forceVideo && canEnableVideo && !_videoEnabled) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              setState(() {
+                                _videoEnabled = true;
+                                _audioEnabled = false;
+                              });
                             });
-                          });
-                        }
+                          }
 
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            SwitchListTile.adaptive(
-                              title: Text(
-                                "Activer la VidÃ©o ${forceVideo ? '(Obligatoire)' : ''}",
-                              ),
-                              subtitle: Text(
-                                forceVideo
-                                    ? "CamÃ©ra indispensable pour ce jeu."
-                                    : (canEnableVideo
-                                        ? "Micro + CamÃ©ra"
-                                        : "RÃ©servÃ© VIP ou limite atteinte"),
-                              ),
-                              value: forceVideo ? true : _videoEnabled,
-                              onChanged:
-                                  (canEnableVideo && !forceVideo)
-                                      ? (val) {
-                                        setState(() {
-                                          _videoEnabled = val;
-                                          if (val) _audioEnabled = false;
-                                        });
-                                      }
-                                      : null,
-                              secondary: Icon(
-                                canEnableVideo || forceVideo
-                                    ? Icons.videocam
-                                    : Icons.lock,
-                              ),
-                              contentPadding: EdgeInsets.zero,
-                            ),
-                            SwitchListTile.adaptive(
-                              title: Text("Voix uniquement (Audio)"),
-                              subtitle: Text("Active le micro sans la camÃ©ra"),
-                              value: forceVideo ? false : _audioEnabled,
-                              onChanged:
-                                  (canEnableVideo && !forceVideo)
-                                      ? (val) {
-                                        setState(() {
-                                          _audioEnabled = val;
-                                          if (val) _videoEnabled = false;
-                                        });
-                                      }
-                                      : null,
-                              secondary: Icon(
-                                canEnableVideo ? Icons.mic : Icons.lock,
-                              ),
-                              contentPadding: EdgeInsets.zero,
-                            ),
-
-                            Divider(color: Colors.white24, height: 30),
-
-                            Text(
-                              "ParamÃ¨tres de Recherche Publique",
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            SizedBox(height: 10),
-                            SegmentedButton<String>(
-                              segments: const [
-                                ButtonSegment(
-                                  value: 'pays',
-                                  label: Text('Mon Pays'),
-                                  icon: Icon(Icons.flag),
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SwitchListTile.adaptive(
+                                title: Text(
+                                  "Activer la Vidéo ${forceVideo ? '(Obligatoire)' : ''}",
                                 ),
-                                ButtonSegment(
-                                  value: 'monde',
-                                  label: Text('Le Monde'),
-                                  icon: Icon(Icons.public),
+                                subtitle: Text(
+                                  forceVideo
+                                      ? "Caméra indispensable pour ce jeu."
+                                      : (canEnableVideo
+                                          ? "Micro + Caméra (Désactive le mode Local)"
+                                          : "Réservé VIP ou limite atteinte"),
                                 ),
+                                value: forceVideo ? true : _videoEnabled,
+                                onChanged:
+                                    (canEnableVideo && !forceVideo)
+                                        ? (val) {
+                                          setState(() {
+                                            _videoEnabled = val;
+                                            if (val) {
+                                              _audioEnabled = false;
+                                            } else if (isDevineTete) {
+                                              _enablePublicSearch = false;
+                                            }
+                                          });
+                                        }
+                                        : null,
+                                secondary: Icon(
+                                  canEnableVideo || forceVideo
+                                      ? Icons.videocam
+                                      : Icons.lock,
+                                ),
+                                contentPadding: EdgeInsets.zero,
+                              ),
+                              if (!isDevineTete)
+                                SwitchListTile.adaptive(
+                                  title: Text("Voix uniquement (Audio)"),
+                                  subtitle: Text(
+                                    "Active le micro sans la caméra (Désactive le mode Local)",
+                                  ),
+                                  value: forceVideo ? false : _audioEnabled,
+                                  onChanged:
+                                      (canEnableVideo && !forceVideo)
+                                          ? (val) {
+                                            setState(() {
+                                              _audioEnabled = val;
+                                              if (val) _videoEnabled = false;
+                                            });
+                                          }
+                                          : null,
+                                  secondary: Icon(
+                                    canEnableVideo ? Icons.mic : Icons.lock,
+                                  ),
+                                  contentPadding: EdgeInsets.zero,
+                                ),
+
+                              // On n'affiche la recherche publique QUE si le jeu est dispo dans "monde"
+                              if (modes.contains('monde') &&
+                                  !(isDevineTete && !_videoEnabled)) ...[
+                                Divider(color: Colors.white24, height: 30),
+
+                                Text(
+                                  "Paramètres de Recherche Publique",
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                                SwitchListTile.adaptive(
+                                  title: Text(
+                                    "Autoriser la Recherche Rapide & Classée",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.amber,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    "Active les boutons de recherche mondiale pour jouer avec des inconnus.",
+                                  ),
+                                  value: _enablePublicSearch,
+                                  onChanged:
+                                      (val) => setState(
+                                        () => _enablePublicSearch = val,
+                                      ),
+                                  contentPadding: EdgeInsets.zero,
+                                ),
+
+                                if (_enablePublicSearch) ...[
+                                  SizedBox(height: 10),
+
+                                  // --- NOUVEAU PLACEMENT DU SLIDER JOUEURS ---
+                                  Text(
+                                    "Nombre de joueurs recherchés : ${_playerCount.toInt()}",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  Slider(
+                                    value: _playerCount,
+                                    min: 2,
+                                    max: 20,
+                                    divisions: 18,
+                                    label: _playerCount.toInt().toString(),
+                                    onChanged:
+                                        (val) =>
+                                            setState(() => _playerCount = val),
+                                  ),
+                                  SizedBox(height: 10),
+
+                                  // -------------------------------------------
+                                  SegmentedButton<String>(
+                                    segments: const [
+                                      ButtonSegment(
+                                        value: 'pays',
+                                        label: Text('Mon Pays'),
+                                        icon: Icon(Icons.flag),
+                                      ),
+                                      ButtonSegment(
+                                        value: 'monde',
+                                        label: Text('Le Monde'),
+                                        icon: Icon(Icons.public),
+                                      ),
+                                    ],
+                                    selected: {_scope},
+                                    onSelectionChanged: (newSelection) {
+                                      setState(
+                                        () => _scope = newSelection.first,
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(height: 10),
+                                  SegmentedButton<String>(
+                                    segments: const [
+                                      ButtonSegment(
+                                        value: 'any',
+                                        label: Text('Peu importe'),
+                                      ),
+                                      ButtonSegment(
+                                        value: 'with',
+                                        label: Text('Avec Vidéo'),
+                                      ),
+                                      ButtonSegment(
+                                        value: 'without',
+                                        label: Text('Sans Vidéo'),
+                                      ),
+                                    ],
+                                    selected: {_videoPreference},
+                                    onSelectionChanged: (newSelection) {
+                                      setState(
+                                        () =>
+                                            _videoPreference =
+                                                newSelection.first,
+                                      );
+                                    },
+                                  ),
+                                ],
                               ],
-                              selected: {_scope},
-                              onSelectionChanged: (newSelection) {
-                                setState(() => _scope = newSelection.first);
-                              },
-                            ),
-                            SizedBox(height: 10),
-                            SegmentedButton<String>(
-                              segments: const [
-                                ButtonSegment(
-                                  value: 'any',
-                                  label: Text('Peu importe'),
-                                ),
-                                ButtonSegment(
-                                  value: 'with',
-                                  label: Text('Avec VidÃ©o'),
-                                ),
-                                ButtonSegment(
-                                  value: 'without',
-                                  label: Text('Sans VidÃ©o'),
-                                ),
-                              ],
-                              selected: {_videoPreference},
-                              onSelectionChanged: (newSelection) {
-                                setState(
-                                  () => _videoPreference = newSelection.first,
-                                );
-                              },
-                            ),
-                            SizedBox(height: 20),
+                              SizedBox(height: 20),
 
-                            ElevatedButton.icon(
-                              icon: Icon(
-                                Icons.rocket_launch,
-                                color: Colors.white,
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.deepPurple,
-                                minimumSize: Size(double.infinity, 60),
-                              ),
-                              onPressed: () {
-                                if (!canProceed) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(validationMessage)),
-                                  );
-                                  return;
-                                }
+                              ElevatedButton.icon(
+                                icon: Icon(
+                                  Icons.rocket_launch,
+                                  color: Colors.white,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.deepPurple,
+                                  minimumSize: Size(double.infinity, 60),
+                                ),
+                                onPressed: () {
+                                  if (!canProceed) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(validationMessage),
+                                      ),
+                                    );
+                                    return;
+                                  }
 
-                                // MODIFICATION ICI : Si on est dans un salon, on lance directement !
-                                if (widget.loungeId != null) {
-                                  _createGameForFriends();
-                                } else {
-                                  // Sinon, on affiche le menu normal (Local/PrivÃ©/Monde)
-                                  _showLaunchOptions(
-                                    canLocal,
-                                    modes.contains('monde'),
-                                  );
-                                }
-                              },
-                              label: Text(
-                                "LANCER LE JEU",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                  if (widget.loungeId != null) {
+                                    _createGameForFriends();
+                                  } else {
+                                    _showLaunchOptions(
+                                      canLocal,
+                                      modes.contains('monde'),
+                                    );
+                                  }
+                                },
+                                label: Text(
+                                  "LANCER LE JEU",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 20),
-                          ],
-                        );
-                      },
-                    ),
+                              SizedBox(height: 20),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -18222,10 +18637,14 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
       body: StreamBuilder<DocumentSnapshot>(
         stream: _firebaseService.getGameStream(gameCode),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
-          if (snapshot.hasError) return const Center(child: Text("Erreur de connexion au salon."));
+          if (!snapshot.hasData)
+            return const Center(child: CircularProgressIndicator());
+          if (snapshot.hasError)
+            return const Center(child: Text("Erreur de connexion au salon."));
           if (!snapshot.data!.exists) {
-            Future.microtask(() => Navigator.of(context).popUntil((route) => route.isFirst));
+            Future.microtask(
+              () => Navigator.of(context).popUntil((route) => route.isFirst),
+            );
             return const Center(child: Text("La partie n'existe plus."));
           }
 
@@ -18233,7 +18652,8 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
           var players = (gameData['players'] as Map<String, dynamic>?) ?? {};
 
           if (!_livekitInitialized &&
-              (gameData['videoEnabled'] == true || gameData['audioEnabled'] == true)) {
+              (gameData['videoEnabled'] == true ||
+                  gameData['audioEnabled'] == true)) {
             _connectToLivekit(
               gameData['videoEnabled'] == true,
               gameData['audioEnabled'] == true,
@@ -18243,15 +18663,18 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
           String gameType = gameData['gameType'] ?? '';
 
           if (gameData['gameState'] == 'playing') {
-            Future.microtask(() => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (_) => MultiplayerGameScreen(
-                  gameCode: gameCode,
-                  playerId: currentPlayerId,
+            Future.microtask(
+              () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (_) => MultiplayerGameScreen(
+                        gameCode: gameCode,
+                        playerId: currentPlayerId,
+                      ),
                 ),
               ),
-            ));
+            );
             return const Center(child: Text("La partie commence..."));
           }
 
@@ -18268,7 +18691,10 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
           String requirementMessage = "";
 
           if (isTeamGame) {
-            final int totalAssignedPlayers = teams.values.fold(0, (sum, team) => sum + team.length);
+            final int totalAssignedPlayers = teams.values.fold(
+              0,
+              (sum, team) => sum + team.length,
+            );
             if (players.length < 4) {
               canStart = false;
               requirementMessage = "Il faut au moins 4 joueurs.";
@@ -18277,10 +18703,12 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
               requirementMessage = "Veuillez créer au moins 2 équipes.";
             } else if (totalAssignedPlayers != players.length) {
               canStart = false;
-              requirementMessage = "Tous les joueurs doivent être assignés à une équipe.";
+              requirementMessage =
+                  "Tous les joueurs doivent être assignés à une équipe.";
             } else if (teams.values.any((team) => team.length < 2)) {
               canStart = false;
-              requirementMessage = "Chaque équipe doit posséder au moins 2 joueurs.";
+              requirementMessage =
+                  "Chaque équipe doit posséder au moins 2 joueurs.";
             }
           } else {
             switch (gameType) {
@@ -18315,7 +18743,10 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                     color: Colors.deepPurple[950]?.withOpacity(0.3),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
-                      side: const BorderSide(color: Colors.deepPurpleAccent, width: 1),
+                      side: const BorderSide(
+                        color: Colors.deepPurpleAccent,
+                        width: 1,
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -18323,7 +18754,12 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                         children: [
                           const Text(
                             "PARTAGEZ CE CODE AVEC VOS AMIS",
-                            style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1),
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                            ),
                           ),
                           const SizedBox(height: 10),
                           Row(
@@ -18331,7 +18767,9 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                             children: [
                               SelectableText(
                                 gameCode,
-                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineMedium?.copyWith(
                                   fontSize: 36,
                                   letterSpacing: 4,
                                   fontWeight: FontWeight.bold,
@@ -18340,11 +18778,18 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                               ),
                               const SizedBox(width: 12),
                               IconButton(
-                                icon: const Icon(Icons.copy, color: Colors.amberAccent),
+                                icon: const Icon(
+                                  Icons.copy,
+                                  color: Colors.amberAccent,
+                                ),
                                 onPressed: () {
-                                  Clipboard.setData(ClipboardData(text: gameCode));
+                                  Clipboard.setData(
+                                    ClipboardData(text: gameCode),
+                                  );
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Code de salon copié !")),
+                                    const SnackBar(
+                                      content: Text("Code de salon copié !"),
+                                    ),
                                   );
                                 },
                               ),
@@ -18357,9 +18802,17 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                   const SizedBox(height: 20),
                   Card(
                     child: ListTile(
-                      leading: const Icon(Icons.games, color: Colors.cyanAccent),
-                      title: Text("Jeu : $gameType", style: const TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: Text("Difficulté : ${gameData['difficulty'] ?? 'Standard'}"),
+                      leading: const Icon(
+                        Icons.games,
+                        color: Colors.cyanAccent,
+                      ),
+                      title: Text(
+                        "Jeu : $gameType",
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                        "Difficulté : ${gameData['difficulty'] ?? 'Standard'}",
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -18393,17 +18846,23 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                           Colors.greenAccent,
                           Colors.orangeAccent,
                         ];
-                        teamColor = teamColors[teamIndex % teamColors.length].withOpacity(0.15);
+                        teamColor = teamColors[teamIndex % teamColors.length]
+                            .withOpacity(0.15);
                       }
 
                       return Card(
                         color: teamColor,
                         child: ListTile(
                           leading: Icon(
-                            isPlayerHost ? Icons.admin_panel_settings : Icons.person,
+                            isPlayerHost
+                                ? Icons.admin_panel_settings
+                                : Icons.person,
                             color: isPlayerHost ? Colors.amber : Colors.white70,
                           ),
-                          title: Text(pData['name'] ?? 'Joueur', style: const TextStyle(fontWeight: FontWeight.bold)),
+                          title: Text(
+                            pData['name'] ?? 'Joueur',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           trailing: const Chip(
                             label: Text("Prêt"),
                             backgroundColor: Colors.green,
@@ -18418,83 +18877,81 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                       icon: const Icon(Icons.person_add),
                       label: const Text("Inviter mes Amis"),
 
-                        onPressed: () {
-                          // Ouvre le bottom sheet pour inviter
-                          showModalBottomSheet(
-                            context: context,
-                            backgroundColor: Colors.grey[900],
-                            builder: (ctx) {
-                              final ps = Provider.of<PlayerState>(
-                                context,
-                                listen: false,
+                      onPressed: () {
+                        // Ouvre le bottom sheet pour inviter
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.grey[900],
+                          builder: (ctx) {
+                            final ps = Provider.of<PlayerState>(
+                              context,
+                              listen: false,
+                            );
+                            final myFriends = ps.friends;
+                            if (myFriends.isEmpty) {
+                              return Container(
+                                height: 200,
+                                child: Center(
+                                  child: Text(
+                                    "Vous n'avez pas encore d'amis !",
+                                  ),
+                                ),
                               );
-                              final myFriends = ps.friends;
-                              if (myFriends.isEmpty) {
-                                return Container(
-                                  height: 200,
-                                  child: Center(
-                                    child: Text(
-                                      "Vous n'avez pas encore d'amis !",
-                                    ),
+                            }
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    "Inviter au salon",
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
-                                );
-                              }
-                              return Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Text(
-                                      "Inviter au salon",
-                                      style:
-                                          Theme.of(
-                                            context,
-                                          ).textTheme.titleLarge,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: ListView.builder(
-                                      itemCount: myFriends.length,
-                                      itemBuilder: (context, i) {
-                                        String fId = myFriends[i];
-                                        String fName =
-                                            ps.friendNamesCache[fId] ?? 'Ami';
-                                        return ListTile(
-                                          leading: CircleAvatar(
-                                            child: Text(fName[0]),
+                                ),
+                                Expanded(
+                                  child: ListView.builder(
+                                    itemCount: myFriends.length,
+                                    itemBuilder: (context, i) {
+                                      String fId = myFriends[i];
+                                      String fName =
+                                          ps.friendNamesCache[fId] ?? 'Ami';
+                                      return ListTile(
+                                        leading: CircleAvatar(
+                                          child: Text(fName[0]),
+                                        ),
+                                        title: Text(fName),
+                                        trailing: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.green,
                                           ),
-                                          title: Text(fName),
-                                          trailing: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.green,
-                                            ),
-                                            child: Text("Inviter"),
-                                            onPressed: () {
-                                              ps.sendGameInvite(
-                                                fId,
-                                                widget.gameCode,
-                                              );
-                                              ScaffoldMessenger.of(
-                                                context,
-                                              ).showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    "Invitation envoyÃ©e Ã  $fName !",
-                                                  ),
+                                          child: Text("Inviter"),
+                                          onPressed: () {
+                                            ps.sendGameInvite(
+                                              fId,
+                                              widget.gameCode,
+                                            );
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  "Invitation envoyÃ©e Ã  $fName !",
                                                 ),
-                                              );
-                                              Navigator.pop(ctx);
-                                            },
-                                          ),
-                                        );
-                                      },
-                                    ),
+                                              ),
+                                            );
+                                            Navigator.pop(ctx);
+                                          },
+                                        ),
+                                      );
+                                    },
                                   ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ],
 
                   if (isHost && isTeamGame)
@@ -18757,7 +19214,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     });
 
     WidgetsBinding.instance.addObserver(this);
-    _pictionaryDrawingController.addListener(_onPictionaryDrawingChanged);
     _startHeartbeat();
     _startStalePlayerCheck();
   }
@@ -18835,24 +19291,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     });
   }
 
-  void _onPictionaryDrawingChanged() {
-    _pictionaryDebounceTimer?.cancel();
-    _pictionaryDebounceTimer = Timer(
-      const Duration(milliseconds: 300),
-      () async {
-        if (!mounted || _pictionaryDrawingController.isEmpty) return;
-        final pngBytes = await _pictionaryDrawingController.toPngBytes();
-        if (pngBytes != null && mounted) {
-          _firebaseService.updatePictionaryDrawing(
-            widget.gameCode,
-            base64Encode(pngBytes),
-            _pictionaryStrokeCount,
-          );
-        }
-      },
-    );
-  }
-
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
@@ -18860,7 +19298,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     _pauseRemovalTimer?.cancel();
     _stalePlayerCheckTimer?.cancel();
     _pictionaryDebounceTimer?.cancel();
-    _pictionaryDrawingController.removeListener(_onPictionaryDrawingChanged);
     _timerSubscription?.cancel();
     _playerTurnTimer?.cancel();
     _postGameTimer?.cancel();
@@ -18950,20 +19387,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   void _startPlayerTurnTimer(Map<String, dynamic> gameData) {
     _playerTurnTimer?.cancel();
 
-    // --- DÃƒâ€°BUT MODIFICATION ---
-    // VÃƒÂ©rifier si le timer est activÃƒÂ© dans la config de la partie
     bool useTimer = gameData['useTimer'] ?? true;
+    if (!useTimer) return;
 
-    // Si le timer est dÃƒÂ©sactivÃƒÂ©, on arrÃƒÂªte tout ici (sauf si c'est une logique critique interne)
-    // Note : Certains jeux comme 'La Patate Chaude' dÃƒÂ©pendent intrinsÃƒÂ¨quement du temps,
-    // vous pouvez ajouter des exceptions ici si nÃƒÂ©cessaire.
-    if (!useTimer) {
-      return;
-    }
-    // --- FIN MODIFICATION ---
-
-    if (gameData['hostId'] != widget.playerId ||
-        gameData['gameState'] != 'playing') {
+    if (gameData['gameState'] != 'playing') {
       return;
     }
 
@@ -18971,196 +19398,190 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     if (turnStartTimeStamp == null) return;
 
     final turnStartTime = turnStartTimeStamp.toDate();
-    const defaultTurnDuration = Duration(seconds: 30);
-    const hostActionDuration = Duration(seconds: 15);
     final int turnSecs = (gameData['turnTimerSeconds'] as num?)?.toInt() ?? 30;
     final int resultSecs =
         (gameData['resultTimerSeconds'] as num?)?.toInt() ?? 15;
     final Duration turnTimerDuration = Duration(seconds: turnSecs);
+    Duration turnDuration = turnTimerDuration;
     final Duration resultTimerDuration = Duration(seconds: resultSecs);
-
-    Duration turnDuration;
     Function()? timeoutAction;
 
     final gameType = gameData['gameType'];
     final roundState = gameData['roundState'];
     final currentPhase = gameData['currentPhase'];
 
-    // --- LOGIQUE DE DÃƒâ€°TECTION DU TIMEOUT ---
+    if (['Petit Bac', 'Pictionary', 'La Patate Chaude', 'Le Jeu des Catégories', 'Photo Roulette'].contains(gameType)) {
+      return;
+    }
 
-    // 1. Phases de RÃƒÂ©sultat
-    if (roundState == 'result' ||
-        currentPhase == 'turn_result' ||
-        roundState == 'round_end') {
+    if (roundState == 'result' || currentPhase == 'turn_result' || roundState == 'round_end' || roundState == 'round_over') {
       turnDuration = resultTimerDuration;
       if (gameType == 'Infiltré & Mr. White') {
-        timeoutAction =
-            () => _firebaseService.processEliminationsAndCheckWin(
-              widget.gameCode,
-            );
+        timeoutAction = () => _firebaseService.processEliminationsAndCheckWin(widget.gameCode);
       } else {
-        timeoutAction =
-            () => _firebaseService.handleHostActionTimeout(widget.gameCode);
+        timeoutAction = () => _firebaseService.handleHostActionTimeout(widget.gameCode);
       }
-    }
-    // 2. Phases de Vote (Vote classique ou vote InfiltrÃƒÂ©)
-    else if (roundState == 'voting' || currentPhase == 'voting') {
+    } else if (roundState == 'voting' || currentPhase == 'voting' || roundState == 'reveal_and_vote') {
       turnDuration = turnTimerDuration;
-      timeoutAction =
-          () => _firebaseService.handleVotingTimeout(widget.gameCode);
-    }
-    // 3. Cas SpÃƒÂ©cifique : Synonyme ou Banni (Phase de rÃƒÂ©ponse)
-    else if ((roundState == 'answering' || roundState == 'playing') &&
-        (gameType == 'Le Juge' ||
-            gameType == 'Le Roi des Mèmes' ||
-            gameType == 'Synonyme ou Banni')) {
+      timeoutAction = () => _firebaseService.handleVotingTimeout(widget.gameCode);
+    } else if (roundState == 'answering' || roundState == 'declaring_truth') {
       turnDuration = turnTimerDuration;
-      timeoutAction =
-          () => _firebaseService.handleSynonymeInputTimeout(widget.gameCode);
-    }
-    // 4. Autres Phases de Jeu (Tour par tour)
-    else {
+      timeoutAction = () => _firebaseService.handleSimultaneousInputTimeout(widget.gameCode);
+    } else {
       turnDuration = turnTimerDuration;
       switch (gameType) {
-        case 'Photo Roulette':
-          timeoutAction =
-              () =>
-                  _firebaseService.handlePhotoRouletteTimeout(widget.gameCode);
-          break;
         case 'Devine Tête':
           if (roundState == 'playing_turn') {
             turnDuration = Duration(seconds: 60);
-            timeoutAction =
-                () => _firebaseService.handleDevineTeteTimeout(widget.gameCode);
+            timeoutAction = () => _firebaseService.handleDevineTeteTimeout(widget.gameCode);
           } else if (roundState == 'turn_result') {
             turnDuration = resultTimerDuration;
-            timeoutAction =
-                () => _firebaseService.nextDevineTeteTurn(widget.gameCode);
+            timeoutAction = () => _firebaseService.nextDevineTeteTurn(widget.gameCode);
           }
           break;
         case 'Zombie!':
-          timeoutAction =
-              () => _firebaseService.handleZombieTimeout(widget.gameCode);
+          timeoutAction = () => _firebaseService.handleZombieTimeout(widget.gameCode);
           break;
         case 'Big Two':
-          timeoutAction =
-              () => _firebaseService.handleBigTwoTimeout(widget.gameCode);
+          timeoutAction = () => _firebaseService.handleBigTwoTimeout(widget.gameCode);
           break;
         case 'Uno':
-          timeoutAction =
-              () => _firebaseService.handleUnoTimeout(widget.gameCode);
+          timeoutAction = () => _firebaseService.handleUnoTimeout(widget.gameCode);
           break;
-
         case 'Yams':
-          timeoutAction =
-              () => _firebaseService.handleYamsTimeout(widget.gameCode);
+          timeoutAction = () => _firebaseService.handleYamsTimeout(widget.gameCode);
           break;
         case 'Bataille Navale':
-          if (gameData['roundState'] == 'playing') {
-            timeoutAction =
-                () => _firebaseService.handleTurnTimeout(widget.gameCode);
-          }
+          timeoutAction = () => _firebaseService.handleBatailleNavaleTimeout(widget.gameCode);
           break;
         case 'Zéro Pointé':
-          timeoutAction =
-              () => _firebaseService.handleZeroPointeTimeout(widget.gameCode);
+          timeoutAction = () => _firebaseService.handleZeroPointeTimeout(widget.gameCode);
           break;
         case 'Poker':
-          timeoutAction =
-              () => _firebaseService.handlePokerTimeout(widget.gameCode);
+          timeoutAction = () => _firebaseService.handlePokerTimeout(widget.gameCode);
           break;
         case 'Rami':
-          timeoutAction =
-              () => _firebaseService.handleRamiTimeout(widget.gameCode);
+          timeoutAction = () => _firebaseService.handleRamiTimeout(widget.gameCode);
           break;
         case 'Belote':
-          timeoutAction =
-              () => _firebaseService.handleBeloteTimeout(widget.gameCode);
-          break;
-        case 'Gribouillis':
-          // Gribouillis is simultaneous - no individual turn timeout needed
-          // The timer is for the step duration; no action on timeout
-          timeoutAction = null;
+          timeoutAction = () => _firebaseService.handleBeloteTimeout(widget.gameCode);
           break;
         case 'Loup-Garou':
-          // Ajout des actions de timeout pour dÃƒÂ©bloquer le jeu si le temps est ÃƒÂ©coulÃƒÂ©
           if (gameData['phase'] == 'nuit') {
-            timeoutAction =
-                () => _firebaseService.startNextNightPhase(widget.gameCode);
+            timeoutAction = () => _firebaseService.startNextNightPhase(widget.gameCode);
           } else if (gameData['phase'] == 'jour_discussion') {
-            timeoutAction =
-                () => _firebaseService.startDayVotePhase(widget.gameCode);
+            timeoutAction = () => _firebaseService.startDayVotePhase(widget.gameCode);
           } else if (gameData['phase'] == 'jour_vote') {
-            timeoutAction =
-                () => _firebaseService.processDayVote(widget.gameCode);
+            timeoutAction = () => _firebaseService.processDayVote(widget.gameCode);
           }
-          break;
-        case 'Le Menteur':
-          timeoutAction =
-              () => _firebaseService.handleTurnTimeout(widget.gameCode);
           break;
         case 'Infiltré & Mr. White':
           if (currentPhase == 'clue_giving') {
-            turnDuration = Duration(
-              seconds: (gameData['turnTimerSeconds'] as int?) ?? 30,
-            );
-            timeoutAction =
-                () => _firebaseService.handleTurnTimeout(widget.gameCode);
+            turnDuration = Duration(seconds: (gameData['turnTimerSeconds'] as int?) ?? 30);
+            timeoutAction = () => _firebaseService.handleTurnTimeout(widget.gameCode);
+          } else if (currentPhase == 'discussion') {
+            timeoutAction = () => _firebaseService.startUndercoverVoting(widget.gameCode);
+          } else if (currentPhase == 'tie_breaker') {
+            timeoutAction = () {
+              final String? goddessId = gameData['specialRoles']?['justiceGoddess'];
+              final List<String> tiedPlayers = List<String>.from(gameData['tiedPlayers'] ?? []);
+              if (tiedPlayers.isNotEmpty && goddessId != null) {
+                _firebaseService.undercoverGoddessDecision(widget.gameCode, tiedPlayers.first);
+              }
+            };
+          } else if (currentPhase == 'avenger_revenge') {
+            timeoutAction = () {
+              String? avengerId;
+              gameData['playerData'].forEach((pId, data) {
+                if ((data['specialAbilities'] as List?)?.contains('Vengeuse') ?? false) avengerId = pId;
+              });
+              if (avengerId != null) {
+                List<String> activePlayers = (gameData['playerData'] as Map).entries
+                    .where((e) => e.value['status'] == 'active')
+                    .map((e) => e.key as String).toList();
+                if (activePlayers.isNotEmpty) {
+                  _firebaseService.undercoverAvengerDecision(widget.gameCode, avengerId!, activePlayers.first);
+                }
+              }
+            };
           }
           break;
         case 'Just One':
-          // On gÃƒÂ¨re le timeout pour TOUTES les phases actives de Just One
-          if ([
-            'guesser_chooses_word',
-            'clue_giving',
-            'reveal_clues',
-          ].contains(roundState)) {
-            timeoutAction =
-                () => _firebaseService.handleJustOneTimeout(widget.gameCode);
+          if (['guesser_chooses_word', 'clue_giving', 'reveal_clues'].contains(roundState)) {
+            timeoutAction = () => _firebaseService.handleJustOneTimeout(widget.gameCode);
           }
           break;
         case 'Skull':
           if (roundState == 'placing' || roundState == 'bidding') {
-            timeoutAction =
-                () => _firebaseService.handleSkullTimeout(widget.gameCode);
+            timeoutAction = () => _firebaseService.handleSkullTimeout(widget.gameCode);
           }
           break;
         case 'Taboo':
-          timeoutAction =
-              () => _firebaseService.handleTabooTimeout(widget.gameCode);
+          timeoutAction = () => _firebaseService.handleTabooTimeout(widget.gameCode);
           break;
-        // FIN DE L'AJOUT
-
+        case 'Mille Bornes':
+          timeoutAction = () => _firebaseService.handleMilleBornesTimeout(widget.gameCode);
+          break;
+        case 'Président':
+          if (gameData['gameState'] == 'card_exchange') {
+            timeoutAction = () => _firebaseService.startNextPresidentRoundAfterExchange(widget.gameCode);
+          } else {
+            timeoutAction = () => _firebaseService.handlePresidentTimeout(widget.gameCode);
+          }
+          break;
+        case 'Blokus':
+          timeoutAction = () => _firebaseService.handleBlokusTimeout(widget.gameCode);
+          break;
+        case 'Jeu de Dames':
+          timeoutAction = () => _firebaseService.handleCheckersTimeout(widget.gameCode);
+          break;
+        case 'Codenames':
+          timeoutAction = () => _firebaseService.handleCodenamesTimeout(widget.gameCode);
+          break;
+        case 'Time\'s Up':
+          timeoutAction = () => _firebaseService.handleTimesUpTimeout(widget.gameCode);
+          break;
+        case 'Gribouillis':
+          timeoutAction = () => _firebaseService.handleGribouillisTimeout(widget.gameCode);
+          break;
+        case 'Cadavre Exquis':
+          timeoutAction = () => _firebaseService.handleCadavreExquisTimeout(widget.gameCode);
+          break;
+        case 'Petits Chevaux':
+          timeoutAction = () => _firebaseService.handlePetitsChevauxTimeout(widget.gameCode);
+          break;
         default:
-          timeoutAction =
-              () => _firebaseService.handleTurnTimeout(widget.gameCode);
+          if (!['Le Juge', 'Qui Pourrait le Plus ?', 'Le Menteur', 'Le Roi des Mèmes', 'Synonyme ou Banni'].contains(gameType)) {
+            timeoutAction = () => _firebaseService.handleTurnTimeout(widget.gameCode);
+          }
           break;
       }
     }
 
     if (timeoutAction == null) return;
 
-    final timeRemaining =
-        turnDuration - DateTime.now().difference(turnStartTime);
+    final timeRemaining = turnDuration - DateTime.now().difference(turnStartTime);
 
     _playerTurnTimer = Timer(
       timeRemaining.isNegative ? Duration.zero : timeRemaining,
       () {
+        // Peu importe qui déclenche le timer (hôte ou client), on exécute l'action de mise à jour 
+        // L'action Firebase gérera elle-même les conflits de requêtes simultanées grâce à ses transactions.
         _firebaseService.getGameStream(widget.gameCode).first.then((snapshot) {
           if (!snapshot.exists) return;
           final latestGameData = snapshot.data() as Map<String, dynamic>;
           final latestTimestamp = latestGameData['turnStartTime'] as Timestamp?;
-
-          // SÃƒÂ©curitÃƒÂ© : on n'exÃƒÂ©cute l'action que si le tour n'a pas dÃƒÂ©jÃƒÂ  changÃƒÂ©
-          if (latestTimestamp?.millisecondsSinceEpoch ==
-              turnStartTimeStamp.millisecondsSinceEpoch) {
-            timeoutAction?.call();
+          
+          if (latestTimestamp?.millisecondsSinceEpoch == turnStartTimeStamp.millisecondsSinceEpoch) {
+             // Petit délai aléatoire pour éviter que 10 personnes écrivent en base au même dixième de seconde
+            Future.delayed(Duration(milliseconds: Random().nextInt(500)), () {
+               timeoutAction?.call();
+            });
           }
         });
       },
     );
-  }
-
+  }\n
   Widget _buildUndercoverGameUI(
     BuildContext context,
     Map<String, dynamic> gameData,
@@ -20644,7 +21065,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 String? timeUpActiveTeam;
                 String? activePlayerId;
 
-                if (gameData['gameType'] == "Time's Up") {
+                String? activeTeamForVideo;
+                String? activePlayerForVideo;
+
+                if (gameData['gameType'] == "Devine Tête" &&
+                    gameData['devineTeteUseTeams'] == true) {
+                  activeTeamForVideo = gameData['activeTeam'];
+                  activePlayerForVideo = gameData['currentGuesserId'];
+                } else if (gameData['gameType'] == "Time's Up") {
                   int currentRoundNumber = gameData['currentRoundNumber'] ?? 1;
                   isTimeUpMime = currentRoundNumber == 3; // Mode Mime
 
@@ -20663,6 +21091,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     timeUpActiveTeam = 'blue';
                   }
                   activePlayerId = currentGuesserId;
+
+                  activeTeamForVideo = timeUpActiveTeam;
+                  activePlayerForVideo = activePlayerId;
                 }
 
                 // Connexion LiveKit si vidÃ©o ou audio activÃ© dans les options de la partie
@@ -20703,6 +21134,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               widget.gameCode,
                               playerId,
                               players[playerId]?['name'] ?? 'Joueur',
+                              gameData,
                             ),
                           )
                           : null,
@@ -20728,8 +21160,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               currentPlayerId: widget.playerId,
                               gameCode: widget.gameCode,
                               isTimeUpMime: isTimeUpMime,
-                              timeUpActiveTeam: timeUpActiveTeam,
-                              activePlayerId: activePlayerId,
+                              timeUpActiveTeam: activeTeamForVideo,
+                              activePlayerId: activePlayerForVideo,
                             ),
 
                       // LE JEU EN BAS
@@ -20859,6 +21291,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     String gameCode,
     String playerId,
     String playerName,
+    Map<String, dynamic> gameData,
   ) {
     return Container(
       color: Colors.grey[900],
@@ -20869,7 +21302,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: TextField(
               controller: _chatController,
               decoration: InputDecoration(
-                hintText: "Envoyer un message...",
+                hintText: "Envoyer un message ou proposer un mot...",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -20880,12 +21313,27 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               onSubmitted: (text) {
                 if (text.trim().isNotEmpty) {
-                  _firebaseService.sendChatMessage(
-                    gameCode,
-                    playerId,
-                    text.trim(),
-                    'global',
-                  );
+                  bool isPictionaryGuessing =
+                      gameData['gameType'] == 'Pictionary' &&
+                      (gameData['roundState'] == 'drawing' ||
+                          gameData['roundState'] == 'guessing_drawing') &&
+                      gameData['currentDrawingPlayerId'] != playerId;
+
+                  if (isPictionaryGuessing) {
+                    _firebaseService.submitPictionaryGuess(
+                      gameCode,
+                      playerId,
+                      playerName,
+                      text.trim(),
+                    );
+                  } else {
+                    _firebaseService.sendChatMessage(
+                      gameCode,
+                      playerId,
+                      text.trim(),
+                      'global',
+                    );
+                  }
                   _chatController.clear();
                 }
               },
@@ -20896,12 +21344,27 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             onPressed: () {
               final text = _chatController.text.trim();
               if (text.isNotEmpty) {
-                _firebaseService.sendChatMessage(
-                  gameCode,
-                  playerId,
-                  text,
-                  'global',
-                );
+                bool isPictionaryGuessing =
+                    gameData['gameType'] == 'Pictionary' &&
+                    (gameData['roundState'] == 'drawing' ||
+                        gameData['roundState'] == 'guessing_drawing') &&
+                    gameData['currentDrawingPlayerId'] != playerId;
+
+                if (isPictionaryGuessing) {
+                  _firebaseService.submitPictionaryGuess(
+                    gameCode,
+                    playerId,
+                    playerName,
+                    text.trim(),
+                  );
+                } else {
+                  _firebaseService.sendChatMessage(
+                    gameCode,
+                    playerId,
+                    text.trim(),
+                    'global',
+                  );
+                }
                 _chatController.clear();
               }
             },
@@ -20925,15 +21388,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'playing_turn', 'player_turn', 'voting', 'result', 'round_end',
       'pre-flop', 'flop', 'turn', 'river', 'hand_over',
       'clue_giving', 'turn_result',
-      'answering', // Synonyme ou Banni
+      'answering',
       'guesser_chooses_word',
       'reveal_clues',
-      // Gribouillis
       'initial_writing', 'drawing', 'guessing',
-      // Loup-Garou
       'nuit', 'jour_discussion', 'jour_vote',
-      // Photo Roulette
       'showing_photo',
+      'placing', 'bidding', // <-- AJOUT POUR SKULL
     ];
 
     bool shouldShow =
@@ -23268,7 +23729,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return _buildBeloteUI(context, gameData, playerId);
       case 'Yams':
         return _buildYamsUI(context, gameData, playerId);
-      case 'Devine TÃªte':
+      case 'Devine Tête':
         return _buildDevineTeteMultiUI(context, gameData, playerId);
       case 'Infiltré & Mr. White':
         return _buildUndercoverGameUI(context, gameData, playerId);
@@ -23334,8 +23795,58 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final String guesserName =
         players[currentGuesserId]?['name'] ?? 'Un joueur';
 
+    final bool useTeams = gameData['devineTeteUseTeams'] == true;
+    final String activeTeam = gameData['activeTeam'] ?? 'teamA';
+    final Map<String, dynamic> teamScores =
+        gameData['teamScores'] ?? {'teamA': 0, 'teamB': 0};
+
+    bool isMyTeamTurn = false;
+    if (useTeams) {
+      List<String> teamList = List<String>.from(
+        gameData['teams']?[activeTeam] ?? [],
+      );
+      isMyTeamTurn = teamList.contains(playerId);
+    }
+
     if (gameData['gameState'] == 'gameOver') {
-      return _buildResultUI(context, gameData, playerId);
+      return Center(
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Partie Terminée !",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                SizedBox(height: 10),
+                if (useTeams) ...[
+                  Text("Scores Finaux :", style: TextStyle(fontSize: 20)),
+                  Text(
+                    "Équipe A: ${teamScores['teamA']}",
+                    style: TextStyle(color: Colors.redAccent, fontSize: 18),
+                  ),
+                  Text(
+                    "Équipe B: ${teamScores['teamB']}",
+                    style: TextStyle(color: Colors.blueAccent, fontSize: 18),
+                  ),
+                ] else ...[
+                  Text("Bien joué à tous !"),
+                ],
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed:
+                      () => Navigator.of(
+                        context,
+                      ).popUntil((route) => route.isFirst),
+                  child: Text("Retour"),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
     }
 
     if (roundState == 'turn_result') {
@@ -23350,12 +23861,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Icon(Icons.timer_off, size: 60, color: Colors.amberAccent),
                 SizedBox(height: 20),
                 Text(
-                  "Temps ÃƒÂ©coulÃƒÂ© !",
+                  "Temps écoulé !",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "$guesserName a devinÃƒÂ© $guessedCount mot(s) !",
+                  "$guesserName a deviné $guessedCount mot(s) !",
                   style: TextStyle(fontSize: 22, color: Colors.greenAccent),
                 ),
                 SizedBox(height: 20),
@@ -23376,7 +23887,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     child: Text("Joueur suivant"),
                   )
                 else
-                  Text("En attente de l'hÃƒÂ´te..."),
+                  Text("En attente de l'hôte..."),
               ],
             ),
           ),
@@ -23387,29 +23898,54 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        if (useTeams)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  "Équipe A: ${teamScores['teamA']}",
+                  style: TextStyle(
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  "Équipe B: ${teamScores['teamB']}",
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
         if (isMyTurn) ...[
-          // VUE DU GUESSER
           Text(
-            "C'est ÃƒÂ  TOI de deviner !",
+            "C'est à TOI de deviner !",
             style: TextStyle(
               color: Colors.greenAccent,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           Text(
-            "Regarde tes amis ÃƒÂ  l'ÃƒÂ©cran, ils essaient de te faire deviner le mot !",
-            style: TextStyle(color: Colors.white70, fontSize: 16),
+            useTeams
+                ? "Ton équipe t'aide. L'équipe adverse surveille."
+                : "Regarde tes amis à l'écran, ils t'aident !",
+            style: TextStyle(color: Colors.white70, fontSize: 14),
             textAlign: TextAlign.center,
           ),
-          Spacer(),
-          Icon(Icons.psychology_alt, size: 100, color: Colors.white24),
           Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              FloatingActionButton.large(
+              FloatingActionButton.extended(
                 heroTag: "pass_dt",
                 backgroundColor: Colors.orange,
                 onPressed:
@@ -23428,9 +23964,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   setState(() => _isActionPending = false);
                               });
                         },
-                child: Icon(Icons.skip_next, size: 40, color: Colors.white),
+                icon: Icon(Icons.skip_next, size: 30, color: Colors.white),
+                label: Text("Passer"),
               ),
-              FloatingActionButton.large(
+              FloatingActionButton.extended(
                 heroTag: "guess_dt",
                 backgroundColor: Colors.green,
                 onPressed:
@@ -23445,42 +23982,32 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   setState(() => _isActionPending = false);
                               });
                         },
-                child: Icon(Icons.check, size: 50, color: Colors.white),
+                icon: Icon(Icons.check, size: 30, color: Colors.white),
+                label: Text("Trouvé !"),
               ),
             ],
           ),
           SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                "Passer",
-                style: TextStyle(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "TrouvÃƒÂ© !",
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
         ] else ...[
-          // VUE DES CLUE GIVERS
           Text(
-            "Faites deviner ce mot ÃƒÂ  $guesserName :",
-            style: TextStyle(color: Colors.amberAccent, fontSize: 20),
+            useTeams && !isMyTeamTurn
+                ? "L'équipe adverse joue. \nVérifiez qu'ils ne trichent pas !"
+                : "Faites deviner ce mot à $guesserName :",
+            style: TextStyle(
+              color:
+                  (useTeams && !isMyTeamTurn)
+                      ? Colors.redAccent
+                      : Colors.amberAccent,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color:
+                  (useTeams && !isMyTeamTurn) ? Colors.grey[300] : Colors.white,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -23494,31 +24021,34 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               currentWord,
               style: TextStyle(
                 color: Colors.deepPurple[900],
-                fontSize: 40,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 10),
           Text(
-            "Utilisez votre camÃƒÂ©ra et votre micro !",
+            useTeams && !isMyTeamTurn
+                ? "Ils ne doivent utiliser aucun mot de la même famille."
+                : "Utilisez votre caméra et votre micro !",
             style: TextStyle(
               color: Colors.white70,
-              fontSize: 16,
+              fontSize: 14,
               fontStyle: FontStyle.italic,
             ),
+            textAlign: TextAlign.center,
           ),
           Spacer(),
           Text(
-            "Mots trouvÃƒÂ©s : $guessedCount",
+            "Mots trouvés : $guessedCount",
             style: TextStyle(
               color: Colors.greenAccent,
-              fontSize: 22,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
         ],
       ],
     );
@@ -31206,7 +31736,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
       return Card(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31313,25 +31843,29 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                 ),
                 SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children:
-                      playerOrder.map((pId) {
-                        final bool active = players[pId]?['isOut'] != true;
-                        final int handCount =
-                            players[pId]?['cardsInHand'] ??
-                            (List.from(skullHands[pId] ?? [])).length;
-                        return Chip(
-                          label: Text(
-                            '${players[pId]?['name'] ?? 'Joueur'}${active ? '' : ' (ÃƒÂ©liminÃƒÂ©)'} : $handCount',
-                          ),
-                          backgroundColor:
-                              pId == currentPlayerId
-                                  ? Colors.deepPurple
-                                  : Colors.white12,
-                        );
-                      }).toList(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children:
+                        playerOrder.map((pId) {
+                          final bool active = players[pId]?['isOut'] != true;
+                          final int handCount =
+                              players[pId]?['cardsInHand'] ??
+                              (List.from(skullHands[pId] ?? [])).length;
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Chip(
+                              label: Text(
+                                '${players[pId]?['name'] ?? 'Joueur'}${active ? '' : ' (mort)'} : $handCount',
+                              ),
+                              backgroundColor:
+                                  pId == currentPlayerId
+                                      ? Colors.deepPurple
+                                      : Colors.white12,
+                            ),
+                          );
+                        }).toList(),
+                  ),
                 ),
                 SizedBox(height: 12),
                 ...playerOrder.map(buildPlayerMat),
@@ -31652,68 +32186,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     return Column(
       children: [
-        // EN-TÃƒÅ TE AVEC INFO
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                if (isCollective) ...[
-                  Text(
-                    "Mode Collectif",
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(color: Colors.white54),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Chip(
-                        label: Text(
-                          "Carte ${collectiveCardIndex + 1}/$collectiveTotal",
-                        ),
-                        backgroundColor: Colors.deepPurple,
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        visualDensity: VisualDensity.compact,
-                      ),
-                      SizedBox(width: 8),
-                      Chip(
-                        label: Text("Ã¢Å“â€¦ $collectiveGuessed devinÃƒÂ©s"),
-                        backgroundColor: Colors.green[800],
-                        labelStyle: TextStyle(color: Colors.white),
-                        visualDensity: VisualDensity.compact,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 4),
-                ],
-                if (amIDrawingPlayer) ...[
-                  Text(
-                    "Ãƒâ‚¬ TOI DE DESSINER !",
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleLarge?.copyWith(color: Colors.greenAccent),
-                  ),
-                  Text(
-                    '"${currentPictionaryWord ?? "..."}"',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ] else ...[
-                  Text(
-                    "$drawerName est en train de dessiner...",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ],
-                SizedBox(height: 8),
-                _buildSyncTimer(startTime, roundDuration),
-              ],
+        // EN-TÊTE AVEC INFO (Simplifié)
+        if (amIDrawingPlayer)
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 4),
+            child: Text(
+              'Mot à dessiner : ${currentPictionaryWord ?? "..."}',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.amberAccent,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
-        ),
-        SizedBox(height: 10),
+        SizedBox(height: 6),
 
         // ZONE DE DESSIN (TABLEAU BLANC)
         Expanded(
@@ -32046,60 +32533,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   },
                 ),
               ),
-
-              if (!amIDrawingPlayer)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: _pictionaryGuessController,
-                          decoration: InputDecoration(
-                            labelText: "Propose une rÃƒÂ©ponse...",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            filled: true,
-                            fillColor: Colors.grey[800],
-                          ),
-                          onSubmitted: (value) {
-                            final guess = value.trim();
-                            if (guess.isNotEmpty) {
-                              _firebaseService.submitPictionaryGuess(
-                                widget.gameCode,
-                                playerId,
-                                players[playerId]?['name'] ?? 'Anonyme',
-                                guess,
-                              );
-                              setState(() {
-                                _pictionaryGuessController.clear();
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      IconButton(
-                        icon: Icon(Icons.send, color: Colors.deepPurpleAccent),
-                        onPressed: () {
-                          final guess = _pictionaryGuessController.text.trim();
-                          if (guess.isNotEmpty) {
-                            _firebaseService.submitPictionaryGuess(
-                              widget.gameCode,
-                              playerId,
-                              players[playerId]?['name'] ?? 'Anonyme',
-                              guess,
-                            );
-                            setState(() {
-                              _pictionaryGuessController.clear();
-                            });
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
             ],
           ),
         ),
@@ -36796,6 +37229,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final isFirstPiece =
         !(gameData['blokusFirstPiecePlaced']?[playerId] ?? false);
 
+    // --- CORRECTION 1 : NETTOYAGE SI FIN DU CHRONO OU TOUR PASSÉ ---
+    if (!isMyTurn && _selectedBlokusPieceId != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            _selectedBlokusPieceId = null;
+            _blokusStartRow = null;
+            _blokusStartCol = null;
+            _blokusCanPlace = false;
+          });
+        }
+      });
+    }
+
     if (gameData['gameState'] == 'gameOver') {
       final scores = Map<String, int>.from(gameData['blokusScores'] ?? {});
       final sortedScores =
@@ -36857,8 +37304,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         final double boardPixelSize = constraints.maxWidth - 16;
         final double cellSize = boardPixelSize / gridSize;
 
-        // Le DragTarget englobe désormais TOUT l'écran (Column) au lieu de juste le plateau.
-        // Cela permet au doigt de descendre plus bas que le plateau sans que la pièce ne se bloque.
+        // --- CORRECTION 2 : FONCTION UNIFIÉE DE DÉPLACEMENT ---
+        void _updatePiecePosition(Offset localOffset) {
+          if (_selectedBlokusPieceId != null) {
+            final col = (localOffset.dx / cellSize).floor();
+            // On positionne TOUJOURS la pièce 3 cases au-dessus du doigt
+            final row = ((localOffset.dy / cellSize) - 3).floor();
+            if (_blokusStartRow != row || _blokusStartCol != col) {
+              setState(() {
+                _blokusStartRow = row;
+                _blokusStartCol = col;
+                _checkBlokusPlacement(board, myColor, isFirstPiece);
+              });
+            }
+          }
+        }
+
         return DragTarget<int>(
           onWillAcceptWithDetails: (details) => isMyTurn,
           onAcceptWithDetails: (details) {
@@ -36871,27 +37332,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             final RenderBox? renderBox =
                 _canvasKey.currentContext?.findRenderObject() as RenderBox?;
             if (renderBox != null) {
-              // Convertit la position globale du doigt en position locale sur le plateau
               final localOffset = renderBox.globalToLocal(details.offset);
-              final col = (localOffset.dx / cellSize).floor();
-              // - (cellSize * 2) décale exactement la pièce de 2 cases au-dessus du doigt
-              final row =
-                  ((localOffset.dy - (cellSize * 2)) / cellSize).floor();
-
-              if (_blokusStartRow != row || _blokusStartCol != col) {
-                setState(() {
-                  _selectedBlokusPieceId = details.data;
-                  _blokusStartRow = row;
-                  _blokusStartCol = col;
-                  _checkBlokusPlacement(board, myColor, isFirstPiece);
-                });
-              }
+              _updatePiecePosition(localOffset);
             }
           },
           builder: (context, candidateData, rejectedData) {
             return Column(
               children: [
-                // --- EN-TÊTE AVEC LES ACTIONS DU TOUR ---
+                // --- EN-TÊTE ---
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
@@ -36933,7 +37381,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                       ),
 
-                      // Actions de la pièce sélectionnée
                       if (isMyTurn && _selectedBlokusPieceId != null) ...[
                         IconButton(
                           icon: Icon(
@@ -37043,18 +37490,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                             minimumSize: Size(0, 36),
                           ),
-                          onPressed:
-                              () => _firebaseService.passBlokusTurn(
-                                widget.gameCode,
-                                playerId,
-                              ),
+                          onPressed: () {
+                            _firebaseService.passBlokusTurn(
+                              widget.gameCode,
+                              playerId,
+                            );
+                            // --- CORRECTION 3 : Retirer la pièce sélectionnée en passant ---
+                            setState(() {
+                              _selectedBlokusPieceId = null;
+                              _blokusStartRow = null;
+                              _blokusStartCol = null;
+                              _blokusCanPlace = false;
+                            });
+                          },
                           child: Text("Passer", style: TextStyle(fontSize: 12)),
                         ),
                     ],
                   ),
                 ),
 
-                // --- DEUXIÈME ZONE : LE PLATEAU DE JEU ---
+                // --- PLATEAU DE JEU ---
                 Expanded(
                   child: Center(
                     child: Container(
@@ -37065,81 +37520,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: GestureDetector(
-                        // Ajout de onPanStart et onPanUpdate pour une manipulation fluide au toucher (sans glisser depuis le rack)
                         onPanStart:
                             isMyTurn
-                                ? (details) {
-                                  if (_selectedBlokusPieceId != null) {
-                                    final col =
-                                        (details.localPosition.dx / cellSize)
-                                            .floor();
-                                    final row =
-                                        ((details.localPosition.dy -
-                                                    (cellSize * 2)) /
-                                                cellSize)
-                                            .floor();
-                                    setState(() {
-                                      _blokusStartRow = row;
-                                      _blokusStartCol = col;
-                                      _checkBlokusPlacement(
-                                        board,
-                                        myColor,
-                                        isFirstPiece,
-                                      );
-                                    });
-                                  }
-                                }
+                                ? (details) =>
+                                    _updatePiecePosition(details.localPosition)
                                 : null,
                         onPanUpdate:
                             isMyTurn
-                                ? (details) {
-                                  if (_selectedBlokusPieceId != null) {
-                                    final col =
-                                        (details.localPosition.dx / cellSize)
-                                            .floor();
-                                    final row =
-                                        ((details.localPosition.dy -
-                                                    (cellSize * 2)) /
-                                                cellSize)
-                                            .floor();
-                                    if (_blokusStartRow != row ||
-                                        _blokusStartCol != col) {
-                                      setState(() {
-                                        _blokusStartRow = row;
-                                        _blokusStartCol = col;
-                                        _checkBlokusPlacement(
-                                          board,
-                                          myColor,
-                                          isFirstPiece,
-                                        );
-                                      });
-                                    }
-                                  }
-                                }
+                                ? (details) =>
+                                    _updatePiecePosition(details.localPosition)
                                 : null,
                         onTapDown:
                             isMyTurn
-                                ? (details) {
-                                  if (_selectedBlokusPieceId != null) {
-                                    final col =
-                                        (details.localPosition.dx / cellSize)
-                                            .floor();
-                                    final row =
-                                        ((details.localPosition.dy -
-                                                    (cellSize * 2)) /
-                                                cellSize)
-                                            .floor();
-                                    setState(() {
-                                      _blokusStartRow = row;
-                                      _blokusStartCol = col;
-                                      _checkBlokusPlacement(
-                                        board,
-                                        myColor,
-                                        isFirstPiece,
-                                      );
-                                    });
-                                  }
-                                }
+                                ? (details) =>
+                                    _updatePiecePosition(details.localPosition)
                                 : null,
                         child: CustomPaint(
                           key: _canvasKey,
@@ -37169,7 +37563,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                 ),
 
-                // --- TROISIÈME ZONE : RACK DE PIÈCES ---
+                // --- RACK DE PIÈCES ---
                 Container(
                   height: 140,
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -37288,8 +37682,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               child: Draggable<int>(
                                 data: pieceId,
                                 maxSimultaneousDrags: isMyTurn ? 1 : 0,
-                                affinity:
-                                    Axis.vertical, // Résout le conflit avec le défilement horizontal du ListView
+                                affinity: Axis.vertical,
                                 onDragStarted: () {
                                   setState(() {
                                     _selectedBlokusPieceId = pieceId;
@@ -37297,8 +37690,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     _blokusFlipped = false;
                                   });
                                 },
-                                feedback:
-                                    const SizedBox.shrink(), // Plus de grosse image en mode fantôme bloquant la vue
+                                feedback: const SizedBox.shrink(),
                                 childWhenDragging: Opacity(
                                   opacity: 0.25,
                                   child: pieceWidget,
@@ -37507,14 +37899,14 @@ class _BlokusBoardPainter extends CustomPainter {
     drawStartCorner(19, 0, Colors.yellow);
     // ---------------------------------------------------------
 
-    // Preview de la piÃ¨ce
+    // Preview de la pièce
     if (previewPiece != null && previewRow != null && previewCol != null) {
+      // --- CORRECTION 4 : La pièce garde TOUJOURS la couleur du joueur (avec opacité) ---
       final previewPaint =
           Paint()
-            ..color =
-                canPlace
-                    ? previewColor.withOpacity(0.6)
-                    : Colors.red.withOpacity(0.6);
+            ..color = previewColor.withOpacity(
+              0.6,
+            ); // Toujours la bonne couleur
 
       for (var p in previewPiece!) {
         final row = p[0] + previewRow!;
@@ -37530,7 +37922,7 @@ class _BlokusBoardPainter extends CustomPainter {
         }
       }
 
-      // Bordure de la preview
+      // --- CORRECTION 5 : Seule la BORDURE devient rouge si le placement est invalide ---
       final borderPaint =
           Paint()
             ..color = canPlace ? Colors.greenAccent : Colors.redAccent
@@ -38691,19 +39083,25 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   String _coinFlipResult = "";
   int _currentPlayerIndex = -1;
   bool _isSpinning = false;
-  
-  // NOUVEAUX PARAMÈTRES POUR LE DILEMME LOCAL
+
+  // PARAMÈTRES POUR LE DILEMME LOCAL
   bool _useWheelForDilemma = true;
   Map<String, String> _dilemmaVotes = {}; // PlayerID -> "A" ou "B"
-  int _dilemmaVoterIndex = 0; // Index du joueur en train de voter (si sans roue)
+  int _dilemmaVoterIndex = 0;
   String? _activeDilemmaVoterId;
   String _dilemmaOptionA = "";
   String _dilemmaOptionB = "";
+
+  // --- SYSTÈME DE SCORES ---
+  Map<String, int> _globalScores = {};
 
   @override
   void initState() {
     super.initState();
     _setTitle();
+    for (var p in widget.players) {
+      _globalScores[p] = 0;
+    }
   }
 
   void _setTitle() {
@@ -38715,6 +39113,87 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
         _title = "Le Dilemme";
         break;
     }
+  }
+
+  void _showScoreDialog(String selectedPlayer) {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (context, setStateDialog) {
+            return AlertDialog(
+              title: const Text(
+                "Gérer les Scores",
+                textAlign: TextAlign.center,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children:
+                    widget.players.map((p) {
+                      bool isSelected = p == selectedPlayer;
+                      return ListTile(
+                        title: Text(
+                          p,
+                          style: TextStyle(
+                            fontWeight:
+                                isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                            color: isSelected ? Colors.amber : Colors.white,
+                          ),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.remove_circle_outline,
+                                color: Colors.redAccent,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _globalScores[p] =
+                                      (_globalScores[p] ?? 0) - 1;
+                                });
+                                setStateDialog(() {});
+                              },
+                            ),
+                            Text(
+                              "${_globalScores[p]}",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.add_circle_outline,
+                                color: Colors.greenAccent,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _globalScores[p] =
+                                      (_globalScores[p] ?? 0) + 1;
+                                });
+                                setStateDialog(() {});
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx),
+                  child: const Text("Fermer"),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   void _onWheelStopped(int selectedIndex) {
@@ -38731,11 +39210,13 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   String _processContent(String content) {
     if (content.contains('{player}')) {
       List<String> otherPlayers = List.from(widget.players);
-      if (_currentPlayerIndex >= 0 && _currentPlayerIndex < otherPlayers.length) {
+      if (_currentPlayerIndex >= 0 &&
+          _currentPlayerIndex < otherPlayers.length) {
         otherPlayers.removeAt(_currentPlayerIndex);
       }
       if (otherPlayers.isNotEmpty) {
-        String randomPlayer = otherPlayers[Random().nextInt(otherPlayers.length)];
+        String randomPlayer =
+            otherPlayers[Random().nextInt(otherPlayers.length)];
         return content.replaceAll('{player}', randomPlayer);
       } else {
         return content.replaceAll('{player}', 'toi-mê-me');
@@ -38746,7 +39227,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
 
   List<String> _splitDilemmaOptions(String content) {
     final normalized = content.trim().replaceFirst(RegExp(r'[?]+$'), '');
-    final match = RegExp(r'\sou\s', caseSensitive: false).firstMatch(normalized);
+    final match = RegExp(
+      r'\sou\s',
+      caseSensitive: false,
+    ).firstMatch(normalized);
 
     if (match == null) {
       return [normalized, 'Je passe'];
@@ -38763,8 +39247,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   }
 
   String _currentDilemmaWinner() {
-    final optionACount = _dilemmaVotes.values.where((vote) => vote == 'A').length;
-    final optionBCount = _dilemmaVotes.values.where((vote) => vote == 'B').length;
+    final optionACount =
+        _dilemmaVotes.values.where((vote) => vote == 'A').length;
+    final optionBCount =
+        _dilemmaVotes.values.where((vote) => vote == 'B').length;
 
     if (optionACount == 0 && optionBCount == 0) return '';
     if (optionACount > optionBCount) return 'A';
@@ -38776,16 +39262,13 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
     setState(() {
       _dilemmaVotes[playerId] = option;
       if (!_useWheelForDilemma) {
-        // Mode séquentiel : passe au joueur suivant
         if (_dilemmaVoterIndex < widget.players.length - 1) {
           _dilemmaVoterIndex++;
           _activeDilemmaVoterId = widget.players[_dilemmaVoterIndex];
         } else {
-          // Tous les joueurs ont voté
-          _activeDilemmaVoterId = null; 
+          _activeDilemmaVoterId = null;
         }
       } else {
-        // Mode Roue (1 seul votant) : l'action se fige après son vote
         _activeDilemmaVoterId = null;
       }
     });
@@ -38797,7 +39280,8 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
     required String optionText,
     required Color color,
   }) {
-    final voteCount = _dilemmaVotes.values.where((vote) => vote == optionKey).length;
+    final voteCount =
+        _dilemmaVotes.values.where((vote) => vote == optionKey).length;
     final totalVotes = _dilemmaVotes.isEmpty ? 1 : _dilemmaVotes.length;
     final progress = (voteCount / totalVotes).clamp(0.0, 1.0);
     final winner = _currentDilemmaWinner();
@@ -38806,14 +39290,16 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
 
     return Expanded(
       child: GestureDetector(
-        onTap: _activeDilemmaVoterId == null
-            ? null
-            : () => _submitDilemmaVote(_activeVoterOrCurrent(), optionKey),
+        onTap:
+            _activeDilemmaVoterId == null
+                ? null
+                : () => _submitDilemmaVote(_activeVoterOrCurrent(), optionKey),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isWinning ? color.withOpacity(0.28) : color.withOpacity(0.16),
+            color:
+                isWinning ? color.withOpacity(0.28) : color.withOpacity(0.16),
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
               color: isWinning ? color : Colors.white12,
@@ -38845,7 +39331,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
               const SizedBox(height: 10),
               Text(
                 '$voteCount vote${voteCount > 1 ? 's' : ''}',
-                style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               if (isWinning && voteCount > 0)
                 Padding(
@@ -38864,37 +39353,39 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
 
   String _getInstructionText() {
     if (_useWheelForDilemma) {
-      final voterName = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : '...';
-      return _activeDilemmaVoterId == null 
-          ? "Choix enregistré !" 
+      final voterName =
+          _currentPlayerIndex != -1
+              ? widget.players[_currentPlayerIndex]
+              : '...';
+      return _activeDilemmaVoterId == null
+          ? "Choix enregistré !"
           : "Dilemme pour $voterName : fait ton choix !";
     } else {
-      return _activeDilemmaVoterId == null 
-          ? "Tous les votes sont enregistrés !" 
+      return _activeDilemmaVoterId == null
+          ? "Tous les votes sont enregistrés !"
           : "C'est au tour de $_activeDilemmaVoterId de voter !";
     }
   }
 
   String _getCurrentVoterName() {
-    return _useWheelForDilemma 
-        ? (_currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "Joueur")
+    return _useWheelForDilemma
+        ? (_currentPlayerIndex != -1
+            ? widget.players[_currentPlayerIndex]
+            : "Joueur")
         : (_activeDilemmaVoterId ?? "Fin");
   }
 
-  String _restoreLiarVoterIdentity() {
-    return _activeDilemmaVoterId ?? '';
-  }
-
   String _activeVoterOrCurrent() {
-    return _useWheelForDilemma ? _getCurrentVoterName() : (_activeDilemmaVoterId ?? "");
+    return _useWheelForDilemma
+        ? _getCurrentVoterName()
+        : (_activeDilemmaVoterId ?? "");
   }
 
   Widget _buildDilemmaVoteUI(BuildContext context) {
-    final winner = _currentDilemmaWinner();
-    final totalExpected = widget.players.length;
-    final allVotesCast = _useWheelForDilemma 
-        ? _dilemmaVotes.isNotEmpty 
-        : _dilemmaVotes.length >= totalExpected;
+    final allVotesCast =
+        _useWheelForDilemma
+            ? _dilemmaVotes.isNotEmpty
+            : _dilemmaVotes.length >= widget.players.length;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -38908,20 +39399,28 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                 Card(
                   elevation: 6,
                   color: Colors.blueGrey[900],
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
                         const Text(
                           'LE DILEMME',
-                          style: TextStyle(color: Colors.amberAccent, letterSpacing: 2, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: Colors.amberAccent,
+                            letterSpacing: 2,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 12),
                         Text(
                           _currentContent,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 20),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.headlineSmall?.copyWith(fontSize: 20),
                         ),
                       ],
                     ),
@@ -38930,7 +39429,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                 const SizedBox(height: 16),
                 Text(
                   _getInstructionText(),
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
@@ -38939,20 +39441,27 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                     spacing: 8,
                     runSpacing: 8,
                     alignment: WrapAlignment.center,
-                    children: widget.players.map((player) {
-                      final hasVoted = _dilemmaVotes.containsKey(player);
-                      final isActive = player == _activeDilemmaVoterId;
-                      return Chip(
-                        label: Text(player),
-                        backgroundColor: isActive 
-                            ? Colors.deepPurple 
-                            : (hasVoted ? Colors.green[800] : Colors.white10),
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                        ),
-                      );
-                    }).toList(),
+                    children:
+                        widget.players.map((player) {
+                          final hasVoted = _dilemmaVotes.containsKey(player);
+                          final isActive = player == _activeDilemmaVoterId;
+                          return Chip(
+                            label: Text(player),
+                            backgroundColor:
+                                isActive
+                                    ? Colors.deepPurple
+                                    : (hasVoted
+                                        ? Colors.green[800]
+                                        : Colors.white10),
+                            labelStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight:
+                                  isActive
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                            ),
+                          );
+                        }).toList(),
                   ),
                 const SizedBox(height: 20),
                 Row(
@@ -38977,26 +39486,39 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                   ElevatedButton.icon(
                     icon: const Icon(Icons.arrow_forward),
                     label: const Text('Dilemme Suivant'),
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
-                    onPressed: () => setState(() {
-                      _isSpinning = false;
-                      _currentContent = "";
-                      _currentPlayerIndex = -1;
-                      _dilemmaVotes.clear();
-                      _activeDilemmaVoterId = null;
-                      _dilemmaOptionA = "";
-                      _dilemmaOptionB = "";
-                    }),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                    ),
+                    onPressed:
+                        () => setState(() {
+                          _isSpinning = false;
+                          _currentContent = "";
+                          _currentPlayerIndex = -1;
+                          _dilemmaVotes.clear();
+                          _activeDilemmaVoterId = null;
+                          _dilemmaOptionA = "";
+                          _dilemmaOptionB = "";
+                        }),
                   )
                 else if (_useWheelForDilemma)
                   const Text(
                     'Le joueur désigné doit faire son choix.',
-                    style: TextStyle(color: Colors.white38, fontStyle: FontStyle.italic),
+                    style: TextStyle(
+                      color: Colors.white38,
+                      fontStyle: FontStyle.italic,
+                    ),
                   )
                 else
                   Text(
-                    'En attente du vote de : $_activeDilemmaVoterId (${_dilemmaVotes.length} / $totalExpected)',
-                    style: const TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
+                    'En attente du vote de : $_activeDilemmaVoterId (${_dilemmaVotes.length} / ${widget.players.length})',
+                    style: const TextStyle(
+                      color: Colors.white54,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
               ],
             ),
@@ -39021,7 +39543,9 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
         break;
     }
 
-    nextContent = _processContent(contentList[random.nextInt(contentList.length)]);
+    nextContent = _processContent(
+      contentList[random.nextInt(contentList.length)],
+    );
 
     setState(() {
       _currentContent = nextContent;
@@ -39030,12 +39554,16 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
         _dilemmaOptionA = dilemmaOptions[0];
         _dilemmaOptionB = dilemmaOptions[1];
         _dilemmaVotes.clear();
-        
+
         if (_useWheelForDilemma) {
-          _activeDilemmaVoterId = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : null;
+          _activeDilemmaVoterId =
+              _currentPlayerIndex != -1
+                  ? widget.players[_currentPlayerIndex]
+                  : null;
         } else {
           _dilemmaVoterIndex = 0;
-          _activeDilemmaVoterId = widget.players.isNotEmpty ? widget.players.first : null;
+          _activeDilemmaVoterId =
+              widget.players.isNotEmpty ? widget.players.first : null;
         }
       }
     });
@@ -39058,7 +39586,8 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentPlayer = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
+    final currentPlayer =
+        _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
     final isDilemma = widget.gameType == 'dilemma';
 
     return Scaffold(
@@ -39093,40 +39622,48 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
               },
             ),
             const SizedBox(height: 12),
-            
-            // CONFIGURATION ROUE / SANS ROUE POUR LE DILEMME (Affiché uniquement lors de la phase de préparation)
+
             if (isDilemma && _currentContent.isEmpty && !_isSpinning) ...[
               Card(
                 color: Colors.grey[900],
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 16.0,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Text(
                         "Mode de sélection du Dilemme",
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white70),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white70,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 10),
                       SegmentedButton<bool>(
                         segments: const [
                           ButtonSegment(
-                            value: true, 
+                            value: true,
                             label: Text('Avec Roue'),
                             icon: Icon(Icons.blur_circular),
                           ),
                           ButtonSegment(
-                            value: false, 
+                            value: false,
                             label: Text('Sans Roue (Tous)'),
                             icon: Icon(Icons.people),
                           ),
                         ],
                         selected: {_useWheelForDilemma},
-                        onSelectionChanged: (val) => setState(() {
-                          _useWheelForDilemma = val.first;
-                        }),
+                        onSelectionChanged:
+                            (val) => setState(() {
+                              _useWheelForDilemma = val.first;
+                            }),
                       ),
                     ],
                   ),
@@ -39139,59 +39676,73 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
               child: Center(
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 500),
-                  transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
-                  child: isDilemma && _currentContent.isNotEmpty
-                      ? _buildDilemmaVoteUI(context)
-                      : _isSpinning
+                  transitionBuilder:
+                      (child, animation) =>
+                          ScaleTransition(scale: animation, child: child),
+                  child:
+                      isDilemma && _currentContent.isNotEmpty
+                          ? _buildDilemmaVoteUI(context)
+                          : _isSpinning
                           ? SpinTheWheelWidget(
-                              key: const ValueKey('wheel_spin'),
-                              players: widget.players,
-                              onSpinEnd: _onWheelStopped,
-                            )
+                            key: const ValueKey('wheel_spin'),
+                            players: widget.players,
+                            onSpinEnd: _onWheelStopped,
+                          )
                           : (_currentContent.isEmpty
                               ? Text(
-                                  "Appuyez sur 'Lancer le tour' pour commencer !",
-                                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white70),
-                                  textAlign: TextAlign.center,
-                                )
+                                "Appuyez sur 'Lancer le tour' pour commencer !",
+                                style: Theme.of(context).textTheme.headlineSmall
+                                    ?.copyWith(color: Colors.white70),
+                                textAlign: TextAlign.center,
+                              )
                               : Card(
-                                  key: ValueKey<String>(_currentContent),
-                                  elevation: 4,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(24.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "C'est au tour de",
-                                          style: Theme.of(context).textTheme.bodyMedium,
+                                key: ValueKey<String>(_currentContent),
+                                elevation: 4,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(24.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "C'est au tour de",
+                                        style:
+                                            Theme.of(
+                                              context,
+                                            ).textTheme.bodyMedium,
+                                      ),
+                                      Text(
+                                        currentPlayer,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.headlineMedium?.copyWith(
+                                          color: Colors.deepPurpleAccent,
                                         ),
-                                        Text(
-                                          currentPlayer,
-                                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                            color: Colors.deepPurpleAccent,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 20),
-                                        Text(
-                                          _currentContent,
-                                          textAlign: TextAlign.center,
-                                          style: Theme.of(context).textTheme.headlineSmall,
-                                        ),
-                                        if (widget.gameType == 'coin_flip' && _showCoinFlipResult)
-                                          _buildCoinFlipResult(),
-                                      ],
-                                    ),
+                                      ),
+                                      const SizedBox(height: 20),
+                                      Text(
+                                        _currentContent,
+                                        textAlign: TextAlign.center,
+                                        style:
+                                            Theme.of(
+                                              context,
+                                            ).textTheme.headlineSmall,
+                                      ),
+                                      if (widget.gameType == 'coin_flip' &&
+                                          _showCoinFlipResult)
+                                        _buildCoinFlipResult(),
+                                    ],
                                   ),
-                                )),
+                                ),
+                              )),
                 ),
               ),
             ),
             const SizedBox(height: 10),
             _buildGameControls(),
             const SizedBox(height: 10),
-            if (!isDilemma || _currentContent.isEmpty || _isSpinning) _buildPlayerChips(),
+            if (!isDilemma || _currentContent.isEmpty || _isSpinning)
+              _buildPlayerChips(),
           ],
         ),
       ),
@@ -39204,14 +39755,24 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
       runSpacing: 4,
       alignment: WrapAlignment.center,
       children: List.generate(widget.players.length, (index) {
+        final pName = widget.players[index];
         final isCurrent = index == _currentPlayerIndex && !_isSpinning;
-        return Chip(
-          label: Text(widget.players[index]),
-          backgroundColor: isCurrent ? Colors.deepPurple : const Color(0xFF333333),
+        return ActionChip(
+          avatar: CircleAvatar(
+            backgroundColor: Colors.white24,
+            child: Text(
+              pName[0],
+              style: const TextStyle(fontSize: 10, color: Colors.white),
+            ),
+          ),
+          label: Text("$pName : ${_globalScores[pName]} pts"),
+          backgroundColor:
+              isCurrent ? Colors.deepPurple : const Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
           ),
+          onPressed: () => _showScoreDialog(pName),
         );
       }),
     );
@@ -39260,16 +39821,21 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
             setState(() => _isSpinning = true);
           }
         },
-        child: Text(widget.gameType == 'dilemma' && !_useWheelForDilemma ? "Lancer le Dilemme" : "Lancer la roue"),
+        child: Text(
+          widget.gameType == 'dilemma' && !_useWheelForDilemma
+              ? "Lancer le Dilemme"
+              : "Lancer la roue",
+        ),
       );
     }
 
     if (widget.gameType == 'coin_flip' && _showCoinFlipResult) {
       return ElevatedButton(
-        onPressed: () => setState(() {
-          _isSpinning = true;
-          _currentContent = "";
-        }),
+        onPressed:
+            () => setState(() {
+              _isSpinning = true;
+              _currentContent = "";
+            }),
         child: const Text("Tour Suivant"),
       );
     }
@@ -39298,7 +39864,6 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
     return const SizedBox.shrink();
   }
 }
-
 
 class SpinTheWheelWidget extends StatefulWidget {
   final List<String> players;
@@ -40661,12 +41226,17 @@ class WhoIsMostLikelyLocalScreen extends StatefulWidget {
 class _WhoIsMostLikelyLocalScreenState
     extends State<WhoIsMostLikelyLocalScreen> {
   String _difficulty = 'soft';
+  String _votingMode =
+      'grouper'; // "grouper" (Ensemble) ou "chacun" (Tour par tour)
   String _currentQuestion = "";
   LocalWhoIsPhase _phase = LocalWhoIsPhase.question;
-  
+
   int _currentVoterIndex = 0;
   Map<String, String> _votes = {}; // Voter -> VotedFor
-  
+
+  // --- SYSTÈME DE SCORES ---
+  Map<String, int> _globalScores = {};
+
   final TextEditingController _aiController = TextEditingController();
   bool _isAiLoading = false;
   List<String> _aiQuestions = [];
@@ -40674,6 +41244,10 @@ class _WhoIsMostLikelyLocalScreenState
   @override
   void initState() {
     super.initState();
+    // Initialiser les scores à 0
+    for (var p in widget.players) {
+      _globalScores[p] = 0;
+    }
     _getNewQuestion();
   }
 
@@ -40713,6 +41287,7 @@ class _WhoIsMostLikelyLocalScreenState
         _currentVoterIndex++;
       } else {
         _phase = LocalWhoIsPhase.results;
+        _awardPoints(); // Attribuer les points aux gagnants
       }
     });
   }
@@ -40730,13 +41305,100 @@ class _WhoIsMostLikelyLocalScreenState
     tally.forEach((_, votes) {
       if (votes > maxVotes) maxVotes = votes;
     });
-    
     if (maxVotes == 0) return [];
-    
     return tally.entries
         .where((e) => e.value == maxVotes)
         .map((e) => e.key)
         .toList();
+  }
+
+  void _awardPoints() {
+    final tally = _calculateTally();
+    final winners = _getWinners(tally);
+    for (var w in winners) {
+      _globalScores[w] = (_globalScores[w] ?? 0) + 1;
+    }
+  }
+
+  void _showScoreDialog(String selectedPlayer) {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (context, setStateDialog) {
+            return AlertDialog(
+              title: const Text(
+                "Tableau des Scores",
+                textAlign: TextAlign.center,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children:
+                    widget.players.map((p) {
+                      bool isSelected = p == selectedPlayer;
+                      return ListTile(
+                        title: Text(
+                          p,
+                          style: TextStyle(
+                            fontWeight:
+                                isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                            color: isSelected ? Colors.amber : Colors.white,
+                          ),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.remove_circle_outline,
+                                color: Colors.redAccent,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _globalScores[p] =
+                                      (_globalScores[p] ?? 0) - 1;
+                                });
+                                setStateDialog(() {});
+                              },
+                            ),
+                            Text(
+                              "${_globalScores[p]}",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.add_circle_outline,
+                                color: Colors.greenAccent,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _globalScores[p] =
+                                      (_globalScores[p] ?? 0) + 1;
+                                });
+                                setStateDialog(() {});
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx),
+                  child: const Text("Fermer"),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -40753,11 +41415,94 @@ class _WhoIsMostLikelyLocalScreenState
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: _buildContent(),
+        child: Column(
+          children: [
+            if (_phase != LocalWhoIsPhase.results) ...[
+              // FILTRE DIFFICULTE
+              SegmentedButton<String>(
+                segments: const [
+                  ButtonSegment(value: 'soft', label: Text('Soft')),
+                  ButtonSegment(value: 'hard', label: Text('Hard')),
+                  ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
+                ],
+                selected: {_difficulty},
+                onSelectionChanged:
+                    (s) => setState(() {
+                      _difficulty = s.first;
+                      _getNewQuestion();
+                    }),
+              ),
+              const SizedBox(height: 12),
+              // NOUVEAU: CHOIX DU MODE DE VOTE PENDANT LE JEU
+              SegmentedButton<String>(
+                segments: const [
+                  ButtonSegment(
+                    value: 'grouper',
+                    label: Text('Groupe (Ensemble)'),
+                    icon: Icon(Icons.groups),
+                  ),
+                  ButtonSegment(
+                    value: 'chacun',
+                    label: Text('Tour par tour'),
+                    icon: Icon(Icons.person),
+                  ),
+                ],
+                selected: {_votingMode},
+                onSelectionChanged:
+                    (s) => setState(() {
+                      _votingMode = s.first;
+                      if (_phase == LocalWhoIsPhase.voting) {
+                        // Réinitialisation en douceur pour appliquer le changement immédiatement
+                        _currentVoterIndex = 0;
+                        _votes.clear();
+                      }
+                    }),
+              ),
+              const SizedBox(height: 16),
+            ],
+            Expanded(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: _buildContent(),
+              ),
+            ),
+            const SizedBox(height: 10),
+            _buildPlayerChips(), // Affichage permanent des scores en bas
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildPlayerChips() {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 4,
+      alignment: WrapAlignment.center,
+      children: List.generate(widget.players.length, (index) {
+        final pName = widget.players[index];
+        final isCurrentVoter =
+            _phase == LocalWhoIsPhase.voting &&
+            _votingMode == 'chacun' &&
+            index == _currentVoterIndex;
+        return ActionChip(
+          avatar: CircleAvatar(
+            backgroundColor: Colors.white24,
+            child: Text(
+              pName[0],
+              style: const TextStyle(fontSize: 10, color: Colors.white),
+            ),
+          ),
+          label: Text("$pName : ${_globalScores[pName]} pts"),
+          backgroundColor:
+              isCurrentVoter ? Colors.deepPurple : const Color(0xFF333333),
+          labelStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: isCurrentVoter ? FontWeight.bold : FontWeight.normal,
+          ),
+          onPressed: () => _showScoreDialog(pName),
+        );
+      }),
     );
   }
 
@@ -40777,23 +41522,12 @@ class _WhoIsMostLikelyLocalScreenState
       key: const ValueKey('question_step'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SegmentedButton<String>(
-          segments: const [
-            ButtonSegment(value: 'soft', label: Text('Soft')),
-            ButtonSegment(value: 'hard', label: Text('Hard')),
-            ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
-          ],
-          selected: {_difficulty},
-          onSelectionChanged: (s) => setState(() {
-            _difficulty = s.first;
-            _getNewQuestion();
-          }),
-        ),
-        const SizedBox(height: 20),
         Expanded(
           child: Card(
             color: Colors.deepPurple[950]?.withOpacity(0.4),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -40806,7 +41540,9 @@ class _WhoIsMostLikelyLocalScreenState
                   const SizedBox(height: 12),
                   Text(
                     "...pourrait le plus $_currentQuestion",
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -40815,80 +41551,12 @@ class _WhoIsMostLikelyLocalScreenState
           ),
         ),
         const SizedBox(height: 16),
-        Consumer<PlayerState>(
-          builder: (ctx, ps, _) {
-            if (!ps.isPremium) return const SizedBox.shrink();
-            return Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.amberAccent),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
-                    children: [
-                      Icon(Icons.auto_awesome, color: Colors.amberAccent, size: 16),
-                      SizedBox(width: 6),
-                      Text(
-                        "IA Premium",
-                        style: TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold, fontSize: 13),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: _aiController,
-                          decoration: InputDecoration(
-                            labelText: "Thème pour les questions",
-                            hintText: "ex: sport, vacances, école...",
-                            border: const OutlineInputBorder(),
-                            isDense: true,
-                          ),
-                          maxLines: 1,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      ElevatedButton(
-                        onPressed: _isAiLoading
-                            ? null
-                            : () async {
-                                if (_aiController.text.trim().isNotEmpty) {
-                                  setState(() => _isAiLoading = true);
-                                  try {
-                                    _aiQuestions = await FirebaseService.generateAiWords(
-                                      instructions: _aiController.text.trim(),
-                                      count: 30,
-                                      gameType: 'Qui Pourrait le Plus ?',
-                                    );
-                                    _getNewQuestion();
-                                  } catch (e) {
-                                    print('AI error: $e');
-                                  } finally {
-                                    if (mounted) setState(() => _isAiLoading = false);
-                                  }
-                                }
-                              },
-                        style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12)),
-                        child: _isAiLoading
-                            ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                            : const Icon(Icons.send),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
         ElevatedButton(
           onPressed: _startVoting,
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple, padding: const EdgeInsets.all(16)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurple,
+            padding: const EdgeInsets.all(16),
+          ),
           child: const Text("Lancer les votes !"),
         ),
       ],
@@ -40896,6 +41564,86 @@ class _WhoIsMostLikelyLocalScreenState
   }
 
   Widget _buildVotingStep() {
+    if (_votingMode == 'grouper') {
+      return Column(
+        key: const ValueKey('voting_step_grouped'),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Card(
+            color: Colors.grey[900],
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text(
+                    "Situation :",
+                    style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                  ),
+                  Text(
+                    "Qui pourrait le plus $_currentQuestion",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            "Votez tous ensemble !",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.amberAccent,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            "Désignez la personne choisie par le groupe :",
+            style: TextStyle(color: Colors.white70),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              itemCount: widget.players.length,
+              itemBuilder: (context, index) {
+                final target = widget.players[index];
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: 4),
+                  child: ListTile(
+                    title: Text(
+                      target,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    leading: CircleAvatar(child: Text(target[0].toUpperCase())),
+                    trailing: const Icon(
+                      Icons.check_circle_outline,
+                      color: Colors.greenAccent,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _votes.clear();
+                        for (var player in widget.players) {
+                          _votes[player] = target;
+                        }
+                        _phase = LocalWhoIsPhase.results;
+                        _awardPoints();
+                      });
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      );
+    }
+
     final voter = widget.players[_currentVoterIndex];
     return Column(
       key: ValueKey('voting_step_$_currentVoterIndex'),
@@ -40913,7 +41661,10 @@ class _WhoIsMostLikelyLocalScreenState
                 ),
                 Text(
                   "Qui pourrait le plus $_currentQuestion",
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -40929,9 +41680,9 @@ class _WhoIsMostLikelyLocalScreenState
         Text(
           voter,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.deepPurpleAccent,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.deepPurpleAccent,
+            fontWeight: FontWeight.bold,
+          ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
@@ -40949,9 +41700,15 @@ class _WhoIsMostLikelyLocalScreenState
               return Card(
                 margin: const EdgeInsets.symmetric(vertical: 4),
                 child: ListTile(
-                  title: Text(target, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(
+                    target,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   leading: CircleAvatar(child: Text(target[0].toUpperCase())),
-                  trailing: const Icon(Icons.touch_app, color: Colors.deepPurpleAccent),
+                  trailing: const Icon(
+                    Icons.touch_app,
+                    color: Colors.deepPurpleAccent,
+                  ),
                   onTap: () => _recordVote(target),
                 ),
               );
@@ -40965,7 +41722,7 @@ class _WhoIsMostLikelyLocalScreenState
   Widget _buildResultsStep() {
     final tally = _calculateTally();
     final winners = _getWinners(tally);
-    
+
     return Column(
       key: const ValueKey('results_step'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40976,11 +41733,17 @@ class _WhoIsMostLikelyLocalScreenState
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                const Text("SITUATION :", style: TextStyle(color: Colors.white54, fontSize: 12)),
+                const Text(
+                  "SITUATION :",
+                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                ),
                 const SizedBox(height: 4),
                 Text(
                   "Qui pourrait le plus $_currentQuestion",
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -40989,7 +41752,9 @@ class _WhoIsMostLikelyLocalScreenState
         ),
         const SizedBox(height: 16),
         Text(
-          winners.length > 1 ? "Égalité !" : "Désigné par le groupe :",
+          winners.length > 1
+              ? "Égalité ! (+1 pt chacun)"
+              : "Désigné par le groupe (+1 pt) :",
           style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
@@ -40997,62 +41762,112 @@ class _WhoIsMostLikelyLocalScreenState
         Wrap(
           alignment: WrapAlignment.center,
           spacing: 8,
-          children: winners.map((w) => Chip(
-            avatar: CircleAvatar(child: Text(w[0])),
-            label: Text(w, style: const TextStyle(fontWeight: FontWeight.bold)),
-            backgroundColor: Colors.amber,
-            labelStyle: const TextStyle(color: Colors.black),
-          )).toList(),
+          children:
+              winners
+                  .map(
+                    (w) => Chip(
+                      avatar: CircleAvatar(child: Text(w[0])),
+                      label: Text(
+                        w,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      backgroundColor: Colors.amber,
+                      labelStyle: const TextStyle(color: Colors.black),
+                    ),
+                  )
+                  .toList(),
         ),
         const SizedBox(height: 16),
-        const Text("Détail des votes :", style: TextStyle(fontWeight: FontWeight.bold)),
-        const SizedBox(height: 8),
-        Expanded(
-          child: ListView.builder(
-            itemCount: widget.players.length,
-            itemBuilder: (context, index) {
-              final player = widget.players[index];
-              final votesReceived = tally[player] ?? 0;
-              final votersList = _votes.entries
-                  .where((e) => e.value == player)
-                  .map((e) => e.key)
-                  .toList();
+        if (_votingMode == 'chacun') ...[
+          const Text(
+            "Détail des votes :",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: ListView.builder(
+              itemCount: widget.players.length,
+              itemBuilder: (context, index) {
+                final player = widget.players[index];
+                final votesReceived = tally[player] ?? 0;
+                final votersList =
+                    _votes.entries
+                        .where((e) => e.value == player)
+                        .map((e) => e.key)
+                        .toList();
 
-              return Card(
-                margin: const EdgeInsets.symmetric(vertical: 4),
-                child: ListTile(
-                  leading: CircleAvatar(child: Text(player[0])),
-                  title: Text(player, style: const TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: votersList.isNotEmpty 
-                      ? Text("Voté par : ${votersList.join(', ')}", style: const TextStyle(fontSize: 12))
-                      : const Text("Aucun vote", style: TextStyle(fontSize: 12, color: Colors.grey)),
-                  trailing: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: votesReceived > 0 ? Colors.deepPurple : Colors.grey[800],
-                      borderRadius: BorderRadius.circular(12),
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: 2),
+                  child: ListTile(
+                    leading: CircleAvatar(child: Text(player[0])),
+                    title: Text(
+                      player,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    child: Text(
-                      "$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}",
-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    subtitle:
+                        votersList.isNotEmpty
+                            ? Text(
+                              "Voté par : ${votersList.join(', ')}",
+                              style: const TextStyle(fontSize: 12),
+                            )
+                            : const Text(
+                              "Aucun vote",
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
+                    trailing: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color:
+                            votesReceived > 0
+                                ? Colors.deepPurple
+                                : Colors.grey[800],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        "$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
+        ] else ...[
+          const Spacer(),
+          Center(
+            child: Text(
+              "Décision unanime du groupe pour ${winners.join(', ')} !",
+              style: const TextStyle(
+                fontStyle: FontStyle.italic,
+                color: Colors.white70,
+              ),
+            ),
+          ),
+          const Spacer(),
+        ],
         const SizedBox(height: 12),
         ElevatedButton(
           onPressed: _getNewQuestion,
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.all(16)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            padding: const EdgeInsets.all(16),
+          ),
           child: const Text("Situation suivante"),
         ),
       ],
     );
   }
 }
-
 
 enum CodenamesLocalGameState {
   setup,
@@ -42424,14 +43239,6 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
             padding: const EdgeInsets.all(24.0),
             child: Column(
               children: [
-                Text(
-                  "Temps : $_timeRemaining s",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color:
-                        _timeRemaining < 10 ? Colors.redAccent : Colors.white,
-                  ),
-                ),
-                SizedBox(height: 20),
                 Text(
                   currentWord,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(

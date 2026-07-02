@@ -254,15 +254,15 @@ class GameSelectionScreen extends StatefulWidget {
 
 class _GameSelectionScreenState extends State<GameSelectionScreen> {
   String _searchQuery = "";
+  final Set<String> _selectedFilters = {}; // Stocke les filtres sélectionnés
   final TextEditingController _joinCodeController = TextEditingController();
   final FirebaseService _firebaseService = FirebaseService();
-  bool _imagesCached = false; // Flag pour ne le faire qu'une seule fois
+  bool _imagesCached = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!_imagesCached) {
-      // Cache toutes les images des jeux pour éviter les latences de chargement
       for (var game in allAppGames) {
         if (game['image'] != null) {
           precacheImage(AssetImage('assets/images/${game['image']}'), context);
@@ -270,6 +270,36 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
       }
       _imagesCached = true;
     }
+  }
+
+  // Fonctions utilitaires de catégorisation des jeux
+  bool _isBoardGame(String name) {
+    const boardGames = {
+      'Blokus',
+      'Bataille Navale',
+      'Petits Chevaux',
+      'Jeu de Dames',
+    };
+    return boardGames.contains(name);
+  }
+
+  bool _isCardGame(String name) {
+    const cardGames = {
+      'Uno',
+      'Poker',
+      'Rami',
+      'Belote',
+      'Big Two',
+      'Zéro Pointé',
+      'Mille Bornes',
+      'Skull',
+      'Zombie!',
+    };
+    return cardGames.contains(name);
+  }
+
+  bool _isPartyGame(String name) {
+    return !_isBoardGame(name) && !_isCardGame(name);
   }
 
   void _joinGameByCode() async {
@@ -288,7 +318,6 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
       return;
     }
 
-    // Simplification de la logique de rejoint
     bool success = await _firebaseService.joinGame(
       code,
       playerState.userName ?? 'Joueur',
@@ -312,19 +341,90 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
     }
   }
 
+  // Génère la barre de filtres horizontaux
+  Widget _buildFilterChips() {
+    final filters = [
+      {'id': 'local', 'label': 'Local', 'icon': Icons.phone_android},
+      {'id': 'multi', 'label': 'Amis', 'icon': Icons.people},
+      {'id': 'monde', 'label': 'Monde', 'icon': Icons.public},
+      {'id': 'board', 'label': 'Plateau', 'icon': Icons.grid_on},
+      {'id': 'card', 'label': 'Cartes', 'icon': Icons.style},
+      {'id': 'party', 'label': 'Ambiance', 'icon': Icons.mood},
+    ];
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Row(
+        children: filters.map((filter) {
+          final id = filter['id'] as String;
+          final isSelected = _selectedFilters.contains(id);
+          return Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: FilterChip(
+              avatar: Icon(
+                filter['icon'] as IconData,
+                size: 16,
+                color: isSelected ? Colors.black : Colors.deepPurpleAccent,
+              ),
+              label: Text(filter['label'] as String),
+              selected: isSelected,
+              onSelected: (selected) {
+                setState(() {
+                  if (selected) {
+                    _selectedFilters.add(id);
+                  } else {
+                    _selectedFilters.remove(id);
+                  }
+                });
+              },
+              selectedColor: Colors.deepPurpleAccent,
+              checkmarkColor: Colors.black,
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> filteredGames =
-        allAppGames.where((game) {
-          return game['name'].toLowerCase().contains(
-            _searchQuery.toLowerCase(),
-          );
-        }).toList();
+    // Filtrage combiné : Recherche textuelle + Filtres multiples
+    List<Map<String, dynamic>> filteredGames = allAppGames.where((game) {
+      // 1. Recherche par texte
+      final matchesSearch = game['name'].toLowerCase().contains(_searchQuery.toLowerCase());
+      if (!matchesSearch) return false;
+
+      // 2. Recherche par jetons/filtres
+      if (_selectedFilters.isEmpty) return true;
+
+      final selectedModes = _selectedFilters.intersection({'local', 'multi', 'monde'});
+      final selectedGenres = _selectedFilters.intersection({'board', 'card', 'party'});
+
+      final modesList = List<String>.from(game['modes'] ?? []);
+
+      bool matchesMode = true;
+      if (selectedModes.isNotEmpty) {
+        matchesMode = selectedModes.any((mode) => modesList.contains(mode));
+      }
+
+      bool matchesGenre = true;
+      if (selectedGenres.isNotEmpty) {
+        matchesGenre = selectedGenres.any((genre) {
+          if (genre == 'board') return _isBoardGame(game['name']);
+          if (genre == 'card') return _isCardGame(game['name']);
+          if (genre == 'party') return _isPartyGame(game['name']);
+          return false;
+        });
+      }
+
+      return matchesMode && matchesGenre;
+    }).toList();
 
     return SafeArea(
       child: Column(
         children: [
-          // NOUVEAU: Espace pour rejoindre via code directement
+          // Espace pour rejoindre via code directement
           Card(
             margin: EdgeInsets.all(16),
             color: Colors.deepPurple[900]?.withOpacity(0.5),
@@ -370,6 +470,10 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
               onChanged: (val) => setState(() => _searchQuery = val),
             ),
           ),
+          
+          // Insertion de la barre de filtres sous le champ de recherche
+          _buildFilterChips(),
+
           SizedBox(height: 10),
           Expanded(
             child: GridView.builder(
@@ -378,14 +482,13 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                childAspectRatio:
-                    0.8, // <--- 0.8 rend les cases bien rectangulaires (verticales)
+                childAspectRatio: 0.8,
               ),
               itemCount: filteredGames.length,
               itemBuilder: (context, index) {
                 final game = filteredGames[index];
                 final modes = game['modes'] as List<String>;
-                final String? imageName = game['image']; // L'image ajoutée
+                final String? imageName = game['image'];
 
                 return GestureDetector(
                   onTap: () => _openGameSetup(game['name'], modes),
@@ -393,7 +496,6 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                     decoration: BoxDecoration(
                       color: Colors.deepPurple[900]?.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(15),
-                      // Fond avec l'image s'il y en a une
                       image:
                           imageName != null
                               ? DecorationImage(
@@ -412,10 +514,8 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: BackdropFilter(
-                        // Filtre de floutage très léger
                         filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
                         child: Container(
-                          // Filtre noir semi-transparent pour bien voir le texte par-dessus l'image
                           color: Colors.black.withOpacity(0.45),
                           padding: const EdgeInsets.all(12.0),
                           child: Column(
@@ -423,10 +523,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                             children: [
                               Icon(
                                 game['icon'],
-                                size:
-                                    imageName != null
-                                        ? 30
-                                        : 45, // Un peu plus petit si y'a l'image en fond
+                                size: imageName != null ? 30 : 45,
                                 color: Colors.cyanAccent,
                               ),
                               SizedBox(height: 8),

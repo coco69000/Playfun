@@ -5,7 +5,7 @@ import 'livekit_service.dart';
 
 class GameVideoOverlay extends StatefulWidget {
   final Map<String, dynamic> players;
-  final Map<String, String> playerLivekitIdentities; // Changed from UIDs to identities
+  final Map<String, String> playerLivekitIdentities;
   final String currentPlayerId;
   final String gameCode;
   final bool isTimeUpMime;
@@ -31,6 +31,13 @@ class GameVideoOverlay extends StatefulWidget {
 
 class _GameVideoOverlayState extends State<GameVideoOverlay> {
   String? _maximizedIdentity;
+  final PageController _pageController = PageController();
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,34 +51,67 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
           return _buildMaximizedView(livekit, _maximizedIdentity!);
         }
 
-        List<String> myTeamIds = [];
-        List<String> opponentTeamIds = [];
+        // Récupérer et centraliser TOUS les joueurs dans une seule liste
+        List<String> allIdentities = [];
 
-        if (widget.players['redTeam'] != null && widget.players['blueTeam'] != null) {
-          List<String> redTeam = List<String>.from(widget.players['redTeam'] ?? []);
-          List<String> blueTeam = List<String>.from(widget.players['blueTeam'] ?? []);
-          bool amIRed = redTeam.contains(widget.currentPlayerId);
-          myTeamIds = amIRed ? redTeam : blueTeam;
-          opponentTeamIds = amIRed ? blueTeam : redTeam;
-        } else {
-          myTeamIds = [widget.currentPlayerId];
-          opponentTeamIds = widget.players.keys.where((k) => k != widget.currentPlayerId && widget.players[k] is Map).toList();
+        // 1. D'abord ajouter ceux de l'équipe active
+        if (widget.timeUpActiveTeam != null) {
+          // On parcourt les joueurs pour voir qui est dans cette équipe
+          widget.players.forEach((pId, pData) {
+            if (pData is Map) {
+              bool inActiveTeam = false;
+              if (widget.players['gameType'] == "Time's Up") {
+                 List<String> teamList = List<String>.from(widget.players[widget.timeUpActiveTeam! + 'Team'] ?? []);
+                 inActiveTeam = teamList.contains(pId);
+              } else if (widget.players['gameType'] == "Devine Tête" && widget.players['devineTeteUseTeams'] == true) {
+                 List<String> teamList = List<String>.from(widget.players['teams']?[widget.timeUpActiveTeam] ?? []);
+                 inActiveTeam = teamList.contains(pId);
+              }
+              
+              if (inActiveTeam) {
+                 String id = pId == widget.currentPlayerId ? livekit.localIdentity : (widget.playerLivekitIdentities[pId] ?? '');
+                 if (id.isNotEmpty && !allIdentities.contains(id)) {
+                    allIdentities.add(id);
+                 }
+              }
+            }
+          });
+        }
+        
+        // 2. S'assurer que le joueur actif est bien en premier s'il y en a un
+        if (widget.activePlayerId != null) {
+            String activeId = widget.activePlayerId == widget.currentPlayerId 
+                ? livekit.localIdentity 
+                : (widget.playerLivekitIdentities[widget.activePlayerId] ?? '');
+            
+            if (activeId.isNotEmpty) {
+                allIdentities.remove(activeId);
+                allIdentities.insert(0, activeId);
+            }
         }
 
-        List<String> myTeamIdentities = myTeamIds.where((id) => widget.playerLivekitIdentities.containsKey(id)).map((id) => widget.playerLivekitIdentities[id]!).toList();
-        List<String> opponentIdentities = opponentTeamIds.where((id) => widget.playerLivekitIdentities.containsKey(id)).map((id) => widget.playerLivekitIdentities[id]!).toList();
-
-        if (!myTeamIdentities.contains(livekit.localIdentity)) {
-          myTeamIdentities.insert(0, livekit.localIdentity);
+        // 3. Ajouter les autres
+        if (!allIdentities.contains(livekit.localIdentity)) {
+            allIdentities.add(livekit.localIdentity);
         }
 
-        int speakingCount = 0;
-        if (!livekit.isLocalMuted && myTeamIdentities.contains(livekit.localIdentity)) speakingCount++;
-        for (var identity in livekit.remoteUsers.keys) {
-          if (livekit.remoteUsers[identity]?.isSpeaking ?? false) speakingCount++;
+        for (var pId in widget.players.keys) {
+           if (pId != widget.currentPlayerId && widget.players[pId] is Map) {
+               var identity = widget.playerLivekitIdentities[pId];
+               if (identity != null && !allIdentities.contains(identity)) {
+                   allIdentities.add(identity);
+               }
+           }
+        }
+        for (var id in livekit.remoteUsers.keys) {
+           if (!allIdentities.contains(id)) allIdentities.add(id);
         }
 
-        double overlayHeight = isAudioOnly ? 80 : (speakingCount > 2 ? 200 : 140);
+        int itemsPerPage = 6;
+        int totalPages = (allIdentities.length / itemsPerPage).ceil();
+        if (totalPages == 0) totalPages = 1;
+
+        double overlayHeight = isAudioOnly ? 80 : (widget.isFocusMode ? double.infinity : 120);
 
         Widget overlayContent = Container(
           width: double.infinity,
@@ -79,11 +119,75 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
           child: Column(
             children: [
               Expanded(
-                child: Row(
+                child: Stack(
                   children: [
-                    Expanded(child: _buildTeamView(livekit, myTeamIdentities, Colors.blueAccent, "Mon Équipe", isAudioOnly)),
-                    if (opponentIdentities.isNotEmpty)
-                      Expanded(child: _buildTeamView(livekit, opponentIdentities, Colors.redAccent, "Adversaires", isAudioOnly)),
+                    PageView.builder(
+                      controller: _pageController,
+                      itemCount: totalPages,
+                      itemBuilder: (ctx, pageIndex) {
+                        var pageIdentities = allIdentities.skip(pageIndex * itemsPerPage).take(itemsPerPage).toList();
+                        
+                        int count = pageIdentities.length;
+                        int crossAxisCount = 2; 
+                        double aspectRatio = 1.0;
+
+                        if (!widget.isFocusMode) {
+                           if (count == 1) { crossAxisCount = 1; aspectRatio = 2.0; }
+                           else if (count == 2) { crossAxisCount = 2; aspectRatio = 1.0; }
+                           else if (count == 3) { crossAxisCount = 3; aspectRatio = 0.7; }
+                           else if (count == 4) { crossAxisCount = 2; aspectRatio = 1.8; }
+                           else { crossAxisCount = 3; aspectRatio = 1.2; } // (5 ou 6)
+                        } else {
+                           if (count == 1) { crossAxisCount = 1; aspectRatio = 0.7; }
+                           else if (count == 2) { crossAxisCount = 2; aspectRatio = 0.6; }
+                           else if (count == 3) { crossAxisCount = 2; aspectRatio = 0.8; }
+                           else if (count == 4) { crossAxisCount = 2; aspectRatio = 0.9; }
+                           else { crossAxisCount = 3; aspectRatio = 0.8; }
+                        }
+
+                        if (isAudioOnly) {
+                            return Wrap(
+                                alignment: WrapAlignment.center,
+                                children: pageIdentities.map((id) => _buildAudioTile(livekit, id)).toList(),
+                            );
+                        }
+
+                        return GridView.builder(
+                          padding: EdgeInsets.all(4),
+                          physics: NeverScrollableScrollPhysics(),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            childAspectRatio: aspectRatio,
+                            crossAxisSpacing: 4,
+                            mainAxisSpacing: 4,
+                          ),
+                          itemCount: count,
+                          itemBuilder: (ctx, idx) {
+                            return _buildTile(livekit, pageIdentities[idx], Colors.blueAccent);
+                          },
+                        );
+                      },
+                    ),
+                    if (totalPages > 1) ...[
+                      Positioned(
+                        left: 0, top: 0, bottom: 0,
+                        child: Center(
+                            child: IconButton(
+                                icon: Icon(Icons.chevron_left, color: Colors.white, shadows: [Shadow(blurRadius: 2, color: Colors.black)]), 
+                                onPressed: () => _pageController.previousPage(duration: Duration(milliseconds: 300), curve: Curves.ease)
+                            )
+                        )
+                      ),
+                      Positioned(
+                        right: 0, top: 0, bottom: 0,
+                        child: Center(
+                            child: IconButton(
+                                icon: Icon(Icons.chevron_right, color: Colors.white, shadows: [Shadow(blurRadius: 2, color: Colors.black)]), 
+                                onPressed: () => _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.ease)
+                            )
+                        )
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -104,42 +208,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
     );
   }
 
-  Widget _buildTeamView(LivekitService livekit, List<String> identities, Color color, String title, bool isAudioOnly) {
-    if (identities.isEmpty) return SizedBox.shrink();
-    int totalPages = (identities.length / 4).ceil();
-    PageController controller = PageController();
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(title, style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold)),
-        Expanded(
-          child: Stack(
-            children: [
-              PageView.builder(
-                controller: controller,
-                itemCount: totalPages,
-                itemBuilder: (ctx, page) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: identities.skip(page * 4).take(4).map((identity) {
-                      return Expanded(child: _buildTile(livekit, identity, color, isAudioOnly));
-                    }).toList(),
-                  );
-                },
-              ),
-              if (totalPages > 1) ...[
-                Positioned(left: 0, top: 0, bottom: 0, child: IconButton(icon: Icon(Icons.chevron_left, color: Colors.white), onPressed: () => controller.previousPage(duration: Duration(milliseconds: 300), curve: Curves.ease))),
-                Positioned(right: 0, top: 0, bottom: 0, child: IconButton(icon: Icon(Icons.chevron_right, color: Colors.white), onPressed: () => controller.nextPage(duration: Duration(milliseconds: 300), curve: Curves.ease))),
-              ],
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTile(LivekitService livekit, String identity, Color teamColor, bool isAudioOnly) {
+  Widget _buildTile(LivekitService livekit, String identity, Color teamColor) {
     bool isLocal = identity == livekit.localIdentity;
     String playerName = 'Joueur';
     
@@ -153,11 +222,6 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
     bool isSpeaking = isLocal ? !livekit.isLocalMuted : (livekit.remoteUsers[identity]?.isSpeaking ?? false);
     bool isVideoOff = isLocal ? livekit.isLocalVideoOff : (livekit.remoteUsers[identity]?.isVideoOff ?? false);
 
-    if (isAudioOnly) {
-      return _buildAudioTile(playerName, isSpeaking, teamColor, identity, livekit);
-    }
-
-    // Get Video Track
     VideoTrack? videoTrack;
     if (isLocal) {
       final localParticipant = livekit.room!.localParticipant;
@@ -181,26 +245,73 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
       }
     }
 
+        // Logique visuelle de mise en avant
+        bool isDimmed = false;
+        Color borderColor = isSpeaking ? Colors.greenAccent : Colors.white24;
+        
+        if (widget.timeUpActiveTeam != null) {
+            bool inActiveTeam = false;
+            String? mappedPlayerId = isLocal 
+                ? widget.currentPlayerId 
+                : widget.playerLivekitIdentities.entries.firstWhere((e) => e.value == identity, orElse: () => MapEntry('', '')).key;
+                
+            if (mappedPlayerId.isNotEmpty) {
+              if (widget.players['gameType'] == "Time's Up") {
+                 List<String> teamList = List<String>.from(widget.players[widget.timeUpActiveTeam! + 'Team'] ?? []);
+                 inActiveTeam = teamList.contains(mappedPlayerId);
+              } else if (widget.players['gameType'] == "Devine Tête" && widget.players['devineTeteUseTeams'] == true) {
+                 List<String> teamList = List<String>.from(widget.players['teams']?[widget.timeUpActiveTeam] ?? []);
+                 inActiveTeam = teamList.contains(mappedPlayerId);
+              }
+            }
+            
+            if (!inActiveTeam) {
+                isDimmed = true;
+                borderColor = Colors.grey.withOpacity(0.3);
+            } else {
+                borderColor = widget.timeUpActiveTeam == 'red' || widget.timeUpActiveTeam == 'teamA' 
+                    ? Colors.redAccent 
+                    : Colors.blueAccent;
+                if (isSpeaking) borderColor = Colors.greenAccent;
+            }
+        }
+        
+        if (widget.activePlayerId != null) {
+             String activeId = widget.activePlayerId == widget.currentPlayerId 
+                ? livekit.localIdentity 
+                : (widget.playerLivekitIdentities[widget.activePlayerId] ?? '');
+             
+             if (identity == activeId) {
+                 borderColor = Colors.amberAccent;
+                 if (isSpeaking) borderColor = Colors.greenAccent;
+                 isDimmed = false;
+             }
+        }
+
     return GestureDetector(
       onTap: () => setState(() => _maximizedIdentity = identity),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
         curve: Curves.easeOut,
-        margin: EdgeInsets.all(4),
-        width: isSpeaking ? 120 : 90,
-        height: isSpeaking ? 120 : 90,
         decoration: BoxDecoration(
-          border: Border.all(color: isSpeaking ? Colors.greenAccent : teamColor, width: isSpeaking ? 3 : 2),
+          border: Border.all(color: borderColor, width: isSpeaking || borderColor == Colors.amberAccent ? 3 : 1),
           borderRadius: BorderRadius.circular(8),
           boxShadow: isSpeaking ? [BoxShadow(color: Colors.greenAccent.withOpacity(0.4), blurRadius: 10)] : [],
         ),
         child: Stack(
+          fit: StackFit.expand,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6),
-              child: (isVideoOff || videoTrack == null)
-                  ? Container(color: Colors.grey[900], child: Center(child: Icon(Icons.person, color: Colors.white54, size: 30)))
-                  : VideoTrackRenderer(videoTrack),
+              child: ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(isDimmed ? 0.6 : 0.0), 
+                    BlendMode.darken
+                ),
+                child: (isVideoOff || videoTrack == null)
+                    ? Container(color: Colors.grey[900], child: Center(child: Icon(Icons.person, color: Colors.white54, size: 30)))
+                    : VideoTrackRenderer(videoTrack),
+              )
             ),
             Positioned(bottom: 0, left: 0, right: 0, child: _buildNameTag(playerName)),
             if (!isLocal) Positioned(top: 4, right: 4, child: _buildRemoteMuteButton(livekit, identity)),
@@ -211,8 +322,11 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
     );
   }
 
-  Widget _buildAudioTile(String playerName, bool isSpeaking, Color teamColor, String identity, LivekitService livekit) {
+  Widget _buildAudioTile(LivekitService livekit, String identity) {
     bool isLocal = identity == livekit.localIdentity;
+    String playerName = isLocal ? (widget.players[widget.currentPlayerId]?['name'] ?? 'Moi') : (widget.players[widget.playerLivekitIdentities.entries.firstWhere((e) => e.value == identity, orElse: () => MapEntry('', '')).key]?['name'] ?? 'Joueur');
+    bool isSpeaking = isLocal ? !livekit.isLocalMuted : (livekit.remoteUsers[identity]?.isSpeaking ?? false);
+
     return GestureDetector(
       onTap: () => setState(() => _maximizedIdentity = identity),
       child: AnimatedContainer(
@@ -222,7 +336,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
         decoration: BoxDecoration(
           color: Colors.grey[900],
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: isSpeaking ? Colors.greenAccent : teamColor, width: isSpeaking ? 3 : 1),
+          border: Border.all(color: isSpeaking ? Colors.greenAccent : Colors.white24, width: isSpeaking ? 3 : 1),
           boxShadow: isSpeaking ? [BoxShadow(color: Colors.greenAccent.withOpacity(0.5), blurRadius: 10)] : [],
         ),
         child: Row(

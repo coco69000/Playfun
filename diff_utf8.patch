@@ -1,0 +1,2568 @@
+diff --git a/lib/amis.dart b/lib/amis.dart
+index 35c106f..5c930a9 100644
+--- a/lib/amis.dart
++++ b/lib/amis.dart
+@@ -7411,6 +7411,7 @@ class FirebaseService {
+     bool dobbleSymbolsPerCard = false,
+     bool isSimplifiedLiar = false,
+     String liarVoteMode = 'simultaneous',
++    String quiPourraitVoteMode = 'grouper',
+     List<String>? petitBacCategories,
+     int? petitBacTime,
+     bool presidentRevolution = false,
+@@ -7551,6 +7552,9 @@ class FirebaseService {
+         'isSimplifiedLiar': isSimplifiedLiar,
+         'liarVoteMode': liarVoteMode,
+       },
++      if (gameType == 'Qui Pourrait le Plus ?') ...{
++        'quiPourraitVoteMode': quiPourraitVoteMode,
++      },
+       if (gameType == 'Codenames') ...{
+         'codenamesWords': [],
+         'codenamesKeyCard': [],
+@@ -7723,6 +7727,7 @@ class FirebaseService {
+     bool dobbleSymbolsPerCard = false,
+     bool isSimplifiedLiar = false,
+     String liarVoteMode = 'simultaneous',
++    String quiPourraitVoteMode = 'grouper',
+     List<String>? petitBacCategories,
+     int? petitBacTime,
+     bool presidentRevolution = false,
+@@ -7871,6 +7876,9 @@ class FirebaseService {
+         'isSimplifiedLiar': isSimplifiedLiar,
+         'liarVoteMode': liarVoteMode,
+       },
++      if (gameType == 'Qui Pourrait le Plus ?') ...{
++        'quiPourraitVoteMode': quiPourraitVoteMode,
++      },
+       if (gameType == 'Codenames') ...{
+         'codenamesWords': [],
+         'codenamesKeyCard': [],
+@@ -14523,6 +14531,10 @@ class FirebaseService {
+         requiredVotes = 1;
+       }
+ 
++      if (gameType == 'Qui Pourrait le Plus ?' && gameData['quiPourraitVoteMode'] == 'grouper') {
++        requiredVotes = 1;
++      }
++
+       if (votes.length >= requiredVotes) {
+         final updates = <String, dynamic>{
+           'votes': votes,
+@@ -16285,12 +16297,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+   bool _audioEnabled = false;
+   String _videoPreference = 'any';
+   bool _enableFloatingChat = true;
++  bool _enablePublicSearch = false; // <--- NOUVELLE VARIABLE
+ 
+   bool _hotPotatoUseGlobalTimer = false;
+   String _photoRouletteMediaType = 'Photos';
+   bool _dobbleSymbolsPerCard = true;
+   bool _isSimplifiedLiar = false;
+   String _liarVoteMode = 'simultaneous';
++  String _quiPourraitVoteMode = 'grouper';
+   List<String> _petitBacCategories = List.from(
+     GameData.petitBacDefaultCategories,
+   );
+@@ -16416,188 +16430,189 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+           widget.playerId: {'name': widget.playerName, 'score': 0},
+         };
+ 
+-        await _firebaseService.createGameWithAllPlayers(
+-          gameCode: gameCode,
+-          hostId: widget.playerId,
+-          allPlayers: hostOnly,
+-          gameType: _selectedGame,
+-          difficulty: _selectedDifficulty,
+-          playerCount: widget.loungePlayers!.length,
+-          dobbleSymbolsPerCard: _dobbleSymbolsPerCard,
+-          isSimplifiedLiar: _isSimplifiedLiar,
+-          liarVoteMode: _liarVoteMode,
+-          presidentRevolution: _presidentRevolution,
+-          zeroPointeTargetScore: _zeroPointeTargetScore,
+-          gribouillisMode: _gribouillisMode,
+-        );
+-
+-        await FirebaseFirestore.instance
+-            .collection('games')
+-            .doc(gameCode)
+-            .update({'loungeId': widget.loungeId});
+-
+-        await FirebaseFirestore.instance
+-            .collection('lounges')
+-            .doc(widget.loungeId)
+-            .update({
+-              'pendingGame': {
+-                'gameCode': gameCode,
+-                'gameName': _selectedGame,
+-                'hostId': widget.playerId,
+-                'status': 'waiting',
+-                'joinedPlayers': [widget.playerId],
+-              },
+-            });
++       void _showLaunchOptions(bool canLocal, bool canMonde) {
++    // Vérifie si la communication est activée pour griser le mode Local
++    final bool isCommunicationEnabled = _videoEnabled || _audioEnabled;
++    // Vérifie si la recherche publique est activée pour griser Local et Privé
++    final bool isPublicSearchEnabled = _enablePublicSearch;
+ 
+-        await _firebaseService.sendLoungeMessage(
+-          widget.loungeId!,
+-          widget.playerId,
+-          widget.playerName,
+-          "J'ai lancÃ© une partie de $_selectedGame !",
+-          type: 'game_invite',
+-          extraData: {
+-            'gameCode': gameCode,
+-            'gameName': _selectedGame,
+-            'hostId': widget.playerId,
+-          },
+-        );
+-
+-        if (mounted) Navigator.pop(context);
+-        return;
+-      }
+-
+-      String gameCode = await _firebaseService.createGame(
+-        widget.playerName,
+-        widget.playerId,
+-        _selectedGame,
+-        [
+-              'Gribouillis',
+-              'Petit Bac',
+-              'Président',
+-              'Skull',
+-              'Le Roi des MÃ¨mes',
+-              'Loup-Garou',
+-              'Dobble',
+-              'La Patate Chaude',
+-              'Uno',
+-              'Zéro Pointé',
+-              'Poker',
+-              'Photo Roulette',
+-              'Belote',
+-              'Zombie!',
+-              'Dominoes',
+-            ].contains(_selectedGame)
+-            ? 'N/A'
+-            : _selectedDifficulty,
+-        dobbleSymbolsPerCard: _dobbleSymbolsPerCard,
+-        isSimplifiedLiar: _isSimplifiedLiar,
+-        liarVoteMode: _liarVoteMode,
+-        cadavreVariant: _cadavreVariant,
+-        cadavrePassingMode: _cadavrePassingMode,
+-        petitBacCategories: _petitBacCategories,
+-        petitBacTime: _turnTimerSeconds,
+-        presidentRevolution: _presidentRevolution,
+-        pictionaryOnly30Strokes: _pictionaryOnly30Strokes,
+-        pictionaryUseTeams: _pictionaryUseTeams,
+-        selectedCategoriesList: _selectedGameCategories,
+-        justOneAllowInvalidClues: _justOneAllowInvalidClues,
+-        selectedLoupGarouRoles: _selectedLoupGarouRoles,
+-        unoStartingCards: _unoStartingCards,
+-        unoStackDraws: _unoStackDraws,
+-        timesUpTotalRounds: _timesUpTotalRounds,
+-        dominoesMode: _dominoesMode,
+-        dominoesTargetScore: _dominoesTargetScore,
+-        zeroPointeTargetScore: _zeroPointeTargetScore,
+-        pokerStartChips: _pokerStartChips,
+-        pokerSmallBlind: _pokerSmallBlind,
+-        pokerBigBlind: _pokerBigBlind,
+-        gribouillisMode: _gribouillisMode,
+-        gribouillisAjouter1: _gribouillisAjouter1,
+-        photoRouletteRounds: _photoRouletteRounds,
+-        photoRoulettePhotosPerPlayer: _photoRoulettePhotosPerPlayer,
+-        photoRouletteMediaType: _photoRouletteMediaType,
+-        isPremiumLobby: playerState.isPremium,
+-        videoEnabled: _videoEnabled,
+-        audioEnabled: _audioEnabled,
+-        aiInstructions:
+-            (playerState.isPremium &&
+-                    _selectedDifficulty == 'soft' &&
+-                    _aiSupportedGames.contains(_selectedGame))
+-                ? (_aiInstructionsController.text.trim().isNotEmpty
+-                    ? _aiInstructionsController.text.trim()
+-                    : null)
+-                : null,
+-        aiWords: preGeneratedAiWords,
+-        undercoverRoleSettings: _undercoverRoleSettings,
+-        infiltreCount: _infiltreCount,
+-        mrWhiteCount: _mrWhiteCount,
+-        turnTimerSeconds: _turnTimerSeconds,
+-        resultTimerSeconds: _resultTimerSeconds,
+-        petitsChevauxTeamMode: _petitsChevauxTeamMode,
+-        enableFloatingChat:
+-            _enableFloatingChat && _selectedGame != 'Loup-Garou',
+-      );
+-
+-      if (!mounted) return;
+-
+-      Navigator.pushReplacement(
+-        context,
+-        MaterialPageRoute(
+-          builder:
+-              (_) => GameLobbyScreen(
+-                gameCode: gameCode,
+-                playerId: widget.playerId,
++    showModalBottomSheet(
++      context: context,
++      backgroundColor: Colors.grey[900],
++      shape: RoundedRectangleBorder(
++        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
++      ),
++      builder: (ctx) {
++        return Padding(
++          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
++          child: Column(
++            mainAxisSize: MainAxisSize.min,
++            crossAxisAlignment: CrossAxisAlignment.stretch,
++            children: [
++              Text(
++                "Comment voulez-vous jouer ?",
++                style: Theme.of(context).textTheme.headlineSmall,
++                textAlign: TextAlign.center,
+               ),
+-        ),
+-      );
+-    } catch (e) {
+-      if (mounted) {
+-        ScaffoldMessenger.of(context).showSnackBar(
+-          SnackBar(
+-            content: Text("Erreur lors de la crÃ©ation de la partie: $e"),
+-          ),
+-        );
+-      }
+-    } finally {
+-      if (mounted) setState(() => _isLoading = false);
+-    }
+-  }
++              SizedBox(height: 24),
++              if (canLocal) ...[
++                ElevatedButton.icon(
++                  icon: Icon(Icons.phone_android),
++                  style: ElevatedButton.styleFrom(
++                    backgroundColor:
++                        isPublicSearchEnabled || isCommunicationEnabled ? Colors.grey : Colors.green,
++                    minimumSize: Size(double.infinity, 50),
++                  ),
++                  onPressed:
++                      isPublicSearchEnabled
++                          ? () {
++                              ScaffoldMessenger.of(context).showSnackBar(
++                                SnackBar(
++                                  content: Text(
++                                    "Désactivez la 'Recherche Publique' pour pouvoir jouer en Local.",
++                                  ),
++                                ),
++                              );
++                            }
++                          : isCommunicationEnabled
++                              ? () {
++                                ScaffoldMessenger.of(context).showSnackBar(
++                                  SnackBar(
++                                    content: Text(
++                                      "Désactivez la Vidéo ou l'Audio pour pouvoir jouer en Local.",
++                                    ),
++                                  ),
++                                );
++                              }
++                              : () {
++                                Navigator.pop(ctx);
++                                Navigator.push(
++                                  context,
++                                  MaterialPageRoute(
++                                    builder:
++                                        (_) => LocalPlayerSetupScreen(
++                                          targetGame: _selectedGame,
++                                        ),
++                                  ),
++                                );
++                              },
++                  label: Text(
++                    isPublicSearchEnabled
++                        ? "Local indisponible (Recherche active)"
++                        : isCommunicationEnabled
++                            ? "Local indisponible (Vidéo/Audio actif)"
++                            : "Jouer en Local (Sur cet appareil)",
++                  ),
++                ),
++                SizedBox(height: 12),
++              ],
+ 
+-  void _startMatchmaking({required bool isRanked}) async {
+-    final playerState = Provider.of<PlayerState>(context, listen: false);
++              ElevatedButton.icon(
++                icon: Icon(Icons.lock),
++                style: ElevatedButton.styleFrom(
++                  backgroundColor: isPublicSearchEnabled ? Colors.grey : Colors.deepPurple,
++                  minimumSize: Size(double.infinity, 50),
++                ),
++                onPressed: isPublicSearchEnabled
++                    ? () {
++                        ScaffoldMessenger.of(context).showSnackBar(
++                          SnackBar(
++                            content: Text(
++                              "Désactivez la 'Recherche Publique' pour créer une partie privée.",
++                            ),
++                          ),
++                        );
++                      }
++                    : () {
++                        Navigator.pop(ctx);
++                        _createGameForFriends();
++                      },
++                label: Text(
++                  isPublicSearchEnabled 
++                      ? "Privé indisponible (Recherche active)" 
++                      : "Créer une partie privée (Avec code)"
++                ),
++              ),
++              SizedBox(height: 12),
+ 
+-    List<String>? preGeneratedAiWords;
+-    if (playerState.isPremium &&
+-        _selectedDifficulty == 'soft' &&
+-        _aiSupportedGames.contains(_selectedGame) &&
+-        _aiInstructionsController.text.trim().isNotEmpty) {
+-      setState(() => _isAiLoading = true);
+-      try {
+-        preGeneratedAiWords = await FirebaseService.generateAiWords(
+-          instructions: _aiInstructionsController.text.trim(),
+-          count: 40,
+-          gameType: _selectedGame,
+-        );
+-      } catch (e) {
+-        print("Erreur gÃ©nÃ©ration IA: $e");
+-      } finally {
+-        if (mounted) setState(() => _isAiLoading = false);
+-      }
+-    }
++              // N'affiche le Matchmaking public que si le jeu le permet (canMonde)
++              if (canMonde) ...[
++                ElevatedButton.icon(
++                  icon: Icon(Icons.public),
++                  style: ElevatedButton.styleFrom(
++                    backgroundColor:
++                        _enablePublicSearch ? Colors.blue : Colors.grey[800],
++                    minimumSize: Size(double.infinity, 50),
++                  ),
++                  onPressed:
++                      _enablePublicSearch
++                          ? () {
++                            Navigator.pop(ctx);
++                            _startMatchmaking(isRanked: false);
++                          }
++                          : () {
++                            ScaffoldMessenger.of(context).showSnackBar(
++                              SnackBar(
++                                content: Text(
++                                  "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer avec le monde.",
++                                ),
++                              ),
++                            );
++                          },
++                  label: Text(
++                    _enablePublicSearch
++                        ? "Recherche rapide (Monde)"
++                        : "Recherche Monde (Désactivée)",
++                  ),
++                ),
++                SizedBox(height: 12),
++                ElevatedButton.icon(
++                  icon: Icon(Icons.star, color: Colors.white),
++                  style: ElevatedButton.styleFrom(
++                    backgroundColor:
++                        _enablePublicSearch
++                            ? Colors.orange[800]
++                            : Colors.grey[800],
++                    minimumSize: Size(double.infinity, 50),
++                  ),
++                  onPressed:
++                      _enablePublicSearch
++                          ? () {
++                            Navigator.pop(ctx);
++                            _startMatchmaking(isRanked: true);
++                          }
++                          : () {
++                            ScaffoldMessenger.of(context).showSnackBar(
++                              SnackBar(
++                                content: Text(
++                                  "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer en Classé.",
++                                ),
++                              ),
++                            );
++                          },
++                  label: Text(
++                    _enablePublicSearch
++                        ? "Partie Classée (Ranked)"
++                        : "Partie Classée (Désactivée)",
++                  ),
++                ),
++              ],
+ 
+-    if (!await playerState.canPlayMultiplayer()) {
+-      ScaffoldMessenger.of(context).showSnackBar(
+-        SnackBar(
+-          content: Text(
+-            "Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.",
++              if (!canMonde && widget.isWorldMode) ...[
++                Text(
++                  "Ce jeu requiert de connaître les autres joueurs et n'est pas disponible en matchmaking public.",
++                  textAlign: TextAlign.center,
++                  style: TextStyle(
++                    color: Colors.redAccent,
++                    fontStyle: FontStyle.italic,
++                  ),
++                ),
++              ],
++            ],
+           ),
+-        ),
+-      );
+-      return;
+-    }
+-
+-    int cost = 1;
+-    bool success = await playerState.spendCoins(cost);
++        );
++      },
++    }e.spendCoins(cost);
+     if (!success) {
+       ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(
+@@ -16656,6 +16671,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+                   _selectedGame == 'Le Menteur'
+                       ? _liarVoteMode
+                       : 'simultaneous',
++              quiPourraitVoteMode:
++                  _selectedGame == 'Qui Pourrait le Plus ?'
++                      ? _quiPourraitVoteMode
++                      : 'grouper',
+               petitBacCategories:
+                   _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
+               petitBacTime:
+@@ -16728,6 +16747,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+   }
+ 
+   void _showLaunchOptions(bool canLocal, bool canMonde) {
++    // Vérifie si la communication est activée pour griser le mode Local
++    final bool isCommunicationEnabled = _videoEnabled || _audioEnabled;
++
+     showModalBottomSheet(
+       context: context,
+       backgroundColor: Colors.grey[900],
+@@ -16751,22 +16773,38 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+                 ElevatedButton.icon(
+                   icon: Icon(Icons.phone_android),
+                   style: ElevatedButton.styleFrom(
+-                    backgroundColor: Colors.green,
++                    backgroundColor:
++                        isCommunicationEnabled ? Colors.grey : Colors.green,
+                     minimumSize: Size(double.infinity, 50),
+                   ),
+-                  onPressed: () {
+-                    Navigator.pop(ctx);
+-                    Navigator.push(
+-                      context,
+-                      MaterialPageRoute(
+-                        builder:
+-                            (_) => LocalPlayerSetupScreen(
+-                              targetGame: _selectedGame,
+-                            ),
+-                      ),
+-                    );
+-                  },
+-                  label: Text("Jouer en Local (Sur cet appareil)"),
++                  onPressed:
++                      isCommunicationEnabled
++                          ? () {
++                            ScaffoldMessenger.of(context).showSnackBar(
++                              SnackBar(
++                                content: Text(
++                                  "Désactivez la Vidéo ou l'Audio pour pouvoir jouer en Local.",
++                                ),
++                              ),
++                            );
++                          }
++                          : () {
++                            Navigator.pop(ctx);
++                            Navigator.push(
++                              context,
++                              MaterialPageRoute(
++                                builder:
++                                    (_) => LocalPlayerSetupScreen(
++                                      targetGame: _selectedGame,
++                                    ),
++                              ),
++                            );
++                          },
++                  label: Text(
++                    isCommunicationEnabled
++                        ? "Local indisponible (Vidéo/Audio actif)"
++                        : "Jouer en Local (Sur cet appareil)",
++                  ),
+                 ),
+                 SizedBox(height: 12),
+               ],
+@@ -16781,7 +16819,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+                   Navigator.pop(ctx);
+                   _createGameForFriends();
+                 },
+-                label: Text("CrÃ©er une partie privÃ©e (Avec code)"),
++                label: Text("Créer une partie privée (Avec code)"),
+               ),
+               SizedBox(height: 12),
+ 
+@@ -16790,33 +16828,67 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+                 ElevatedButton.icon(
+                   icon: Icon(Icons.public),
+                   style: ElevatedButton.styleFrom(
+-                    backgroundColor: Colors.blue,
++                    backgroundColor:
++                        _enablePublicSearch ? Colors.blue : Colors.grey[800],
+                     minimumSize: Size(double.infinity, 50),
+                   ),
+-                  onPressed: () {
+-                    Navigator.pop(ctx);
+-                    _startMatchmaking(isRanked: false);
+-                  },
+-                  label: Text("Recherche rapide (Monde)"),
++                  onPressed:
++                      _enablePublicSearch
++                          ? () {
++                            Navigator.pop(ctx);
++                            _startMatchmaking(isRanked: false);
++                          }
++                          : () {
++                            ScaffoldMessenger.of(context).showSnackBar(
++                              SnackBar(
++                                content: Text(
++                                  "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer avec le monde.",
++                                ),
++                              ),
++                            );
++                          },
++                  label: Text(
++                    _enablePublicSearch
++                        ? "Recherche rapide (Monde)"
++                        : "Recherche Monde (Désactivée)",
++                  ),
+                 ),
+                 SizedBox(height: 12),
+                 ElevatedButton.icon(
+                   icon: Icon(Icons.star, color: Colors.white),
+                   style: ElevatedButton.styleFrom(
+-                    backgroundColor: Colors.orange[800],
++                    backgroundColor:
++                        _enablePublicSearch
++                            ? Colors.orange[800]
++                            : Colors.grey[800],
+                     minimumSize: Size(double.infinity, 50),
+                   ),
+-                  onPressed: () {
+-                    Navigator.pop(ctx);
+-                    _startMatchmaking(isRanked: true);
+-                  },
+-                  label: Text("Partie ClassÃ©e (Ranked)"),
++                  onPressed:
++                      _enablePublicSearch
++                          ? () {
++                            Navigator.pop(ctx);
++                            _startMatchmaking(isRanked: true);
++                          }
++                          : () {
++                            ScaffoldMessenger.of(context).showSnackBar(
++                              SnackBar(
++                                content: Text(
++                                  "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer en Classé.",
++                                ),
++                              ),
++                            );
++                          },
++                  label: Text(
++                    _enablePublicSearch
++                        ? "Partie Classée (Ranked)"
++                        : "Partie Classée (Désactivée)",
++                  ),
+                 ),
+               ],
+ 
+               if (!canMonde && widget.isWorldMode) ...[
+                 Text(
+-                  "Ce jeu requiert de connaÃ®tre les autres joueurs et n'est pas disponible en matchmaking public.",
++                  "Ce jeu requiert de connaître les autres joueurs et n'est pas disponible en matchmaking public.",
+                   textAlign: TextAlign.center,
+                   style: TextStyle(
+                     color: Colors.redAccent,
+@@ -16876,20 +16948,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+                 child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.stretch,
+                   children: [
+-                    Text(
+-                      'Nombre de joueurs : ${_playerCount.toInt()}',
+-                      style: Theme.of(context).textTheme.titleLarge,
+-                    ),
+-                    Slider(
+-                      value: _playerCount,
+-                      min: 2,
+-                      max: 20,
+-                      divisions: 18,
+-                      label: _playerCount.toInt().toString(),
+-                      onChanged:
+-                          (value) => setState(() => _playerCount = value),
+-                    ),
+-                    Divider(height: 30, thickness: 1, color: Colors.white24),
++
+ 
+                     DropdownButtonFormField<String>(
+                       value: _selectedGame,
+@@ -17113,6 +17172,31 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+                       ],
+                     ],
+ 
++                    if (_selectedGame == 'Qui Pourrait le Plus ?') ...[
++                      SizedBox(height: 20),
++                      Text(
++                        "Mode de vote",
++                        style: Theme.of(context).textTheme.bodyMedium,
++                      ),
++                      SegmentedButton<String>(
++                        segments: const [
++                          ButtonSegment(
++                            value: 'grouper',
++                            label: Text('Groupé'),
++                          ),
++                          ButtonSegment(
++                            value: 'chacun',
++                            label: Text('Tour par tour'),
++                          ),
++                        ],
++                        selected: {_quiPourraitVoteMode},
++                        onSelectionChanged:
++                            (newSelection) => setState(
++                              () => _quiPourraitVoteMode = newSelection.first,
++                            ),
++                      ),
++                    ],
++
+                     if (_selectedGame == 'Petit Bac') ...[
+                       SizedBox(height: 20),
+                       Text(
+@@ -17849,169 +17933,218 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
+                       ),
+                     ],
+ 
+-                    Divider(height: 30, thickness: 1, color: Colors.white24),
+-
+-                    Text(
+-                      "Communication (En ligne)",
+-                      style: Theme.of(context).textTheme.titleLarge,
+-                    ),
+-                    SizedBox(height: 10),
+-                    Consumer<PlayerState>(
+-                      builder: (context, playerState, _) {
+-                        bool canEnableVideo =
+-                            playerState.isPremium ||
+-                            playerState.videoGamesLeftToday > 0;
+-
+-                        if (forceVideo && canEnableVideo && !_videoEnabled) {
+-                          WidgetsBinding.instance.addPostFrameCallback((_) {
+-                            setState(() {
+-                              _videoEnabled = true;
+-                              _audioEnabled = false;
++                    // --- COMMUNICATION ET RECHERCHE PUBLIQUE ---
++                    if (modes.contains('multi') || modes.contains('monde')) ...[
++                      Divider(height: 30, thickness: 1, color: Colors.white24),
++                      Text(
++                        "Communication (En ligne)",
++                        style: Theme.of(context).textTheme.titleLarge,
++                      ),
++                      SizedBox(height: 10),
++                      Consumer<PlayerState>(
++                        builder: (context, playerState, _) {
++                          bool canEnableVideo =
++                              playerState.isPremium ||
++                              playerState.videoGamesLeftToday > 0;
++
++                          if (forceVideo && canEnableVideo && !_videoEnabled) {
++                            WidgetsBinding.instance.addPostFrameCallback((_) {
++                              setState(() {
++                                _videoEnabled = true;
++                                _audioEnabled = false;
++                              });
+                             });
+-                          });
+-                        }
++                          }
+ 
+-                        return Column(
+-                          crossAxisAlignment: CrossAxisAlignment.stretch,
+-                          children: [
+-                            SwitchListTile.adaptive(
+-                              title: Text(
+-                                "Activer la VidÃ©o ${forceVideo ? '(Obligatoire)' : ''}",
+-                              ),
+-                              subtitle: Text(
+-                                forceVideo
+-                                    ? "CamÃ©ra indispensable pour ce jeu."
+-                                    : (canEnableVideo
+-                                        ? "Micro + CamÃ©ra"
+-                                        : "RÃ©servÃ© VIP ou limite atteinte"),
+-                              ),
+-                              value: forceVideo ? true : _videoEnabled,
+-                              onChanged:
+-                                  (canEnableVideo && !forceVideo)
+-                                      ? (val) {
+-                                        setState(() {
+-                                          _videoEnabled = val;
+-                                          if (val) _audioEnabled = false;
+-                                        });
+-                                      }
+-                                      : null,
+-                              secondary: Icon(
+-                                canEnableVideo || forceVideo
+-                                    ? Icons.videocam
+-                                    : Icons.lock,
++                          return Column(
++                            crossAxisAlignment: CrossAxisAlignment.stretch,
++                            children: [
++                              SwitchListTile.adaptive(
++                                title: Text(
++                                  "Activer la Vidéo ${forceVideo ? '(Obligatoire)' : ''}",
++                                ),
++                                subtitle: Text(
++                                  forceVideo
++                                      ? "Caméra indispensable pour ce jeu."
++                                      : (canEnableVideo
++                                          ? "Micro + Caméra (Désactive le mode Local)"
++                                          : "Réservé VIP ou limite atteinte"),
++                                ),
++                                value: forceVideo ? true : _videoEnabled,
++                                onChanged:
++                                    (canEnableVideo && !forceVideo)
++                                        ? (val) {
++                                          setState(() {
++                                            _videoEnabled = val;
++                                            if (val) _audioEnabled = false;
++                                          });
++                                        }
++                                        : null,
++                                secondary: Icon(
++                                  canEnableVideo || forceVideo
++                                      ? Icons.videocam
++                                      : Icons.lock,
++                                ),
++                                contentPadding: EdgeInsets.zero,
+                               ),
+-                              contentPadding: EdgeInsets.zero,
+-                            ),
+-                            SwitchListTile.adaptive(
+-                              title: Text("Voix uniquement (Audio)"),
+-                              subtitle: Text("Active le micro sans la camÃ©ra"),
+-                              value: forceVideo ? false : _audioEnabled,
+-                              onChanged:
+-                                  (canEnableVideo && !forceVideo)
+-                                      ? (val) {
+-                                        setState(() {
+-                                          _audioEnabled = val;
+-                                          if (val) _videoEnabled = false;
+-                                        });
+-                                      }
+-                                      : null,
+-                              secondary: Icon(
+-                                canEnableVideo ? Icons.mic : Icons.lock,
++                              SwitchListTile.adaptive(
++                                title: Text("Voix uniquement (Audio)"),
++                                subtitle: Text(
++                                  "Active le micro sans la caméra (Désactive le mode Local)",
++                                ),
++                                value: forceVideo ? false : _audioEnabled,
++                                onChanged:
++                                    (canEnableVideo && !forceVideo)
++                                        ? (val) {
++                                          setState(() {
++                                            _audioEnabled = val;
++                                            if (val) _videoEnabled = false;
++                                          });
++                                        }
++                                        : null,
++                                secondary: Icon(
++                                  canEnableVideo ? Icons.mic : Icons.lock,
++                                ),
++                                contentPadding: EdgeInsets.zero,
+                               ),
+-                              contentPadding: EdgeInsets.zero,
+-                            ),
+ 
+-                            Divider(color: Colors.white24, height: 30),
++                              // On n'affiche la recherche publique QUE si le jeu est dispo dans "monde"
++                              if (modes.contains('monde')) ...[
++                                Divider(color: Colors.white24, height: 30),
+ 
+-                            Text(
+-                              "ParamÃ¨tres de Recherche Publique",
+-                              style: Theme.of(context).textTheme.titleLarge,
+-                            ),
+-                            SizedBox(height: 10),
+-                            SegmentedButton<String>(
+-                              segments: const [
+-                                ButtonSegment(
+-                                  value: 'pays',
+-                                  label: Text('Mon Pays'),
+-                                  icon: Icon(Icons.flag),
++                                Text(
++                                  "Paramètres de Recherche Publique",
++                                  style: Theme.of(context).textTheme.titleLarge,
+                                 ),
+-                                ButtonSegment(
+-                                  value: 'monde',
+-                                  label: Text('Le Monde'),
+-                                  icon: Icon(Icons.public),
++                                SwitchListTile.adaptive(
++                                  title: Text(
++                                    "Autoriser la Recherche Rapide & Classée",
++                                    style: TextStyle(
++                                      fontWeight: FontWeight.bold,
++                                      color: Colors.amber,
++                                    ),
++                                  ),
++                                  subtitle: Text(
++                                    "Active les boutons de recherche mondiale pour jouer avec des inconnus.",
++                                  ),
++                                  value: _enablePublicSearch,
++                                  onChanged:
++                                      (val) => setState(
++                                        () => _enablePublicSearch = val,
++                                      ),
++                                  contentPadding: EdgeInsets.zero,
+                                 ),
++
++                                if (_enablePublicSearch) ...[
++                                  SizedBox(height: 10),
++                                  
++                                  // --- NOUVEAU PLACEMENT DU SLIDER JOUEURS ---
++                                  Text(
++                                    "Nombre de joueurs recherchés : ${_playerCount.toInt()}",
++                                    style: Theme.of(context).textTheme.bodyMedium,
++                                  ),
++                                  Slider(
++                                    value: _playerCount,
++                                    min: 2,
++                                    max: 20,
++                                    divisions: 18,
++                                    label: _playerCount.toInt().toString(),
++                                    onChanged: (val) => setState(() => _playerCount = val),
++                                  ),
++                                  SizedBox(height: 10),
++                                  // -------------------------------------------
++
++                                  SegmentedButton<String>(
++                                    segments: const [
++                                      ButtonSegment(
++                                        value: 'pays',
++                                        label: Text('Mon Pays'),
++                                        icon: Icon(Icons.flag),
++                                      ),
++                                      ButtonSegment(
++                                        value: 'monde',
++                                        label: Text('Le Monde'),
++                                        icon: Icon(Icons.public),
++                                      ),
++                                    ],
++                                    selected: {_scope},
++                                    onSelectionChanged: (newSelection) {
++                                      setState(
++                                        () => _scope = newSelection.first,
++                                      );
++                                    },
++                                  ),
++                                  SizedBox(height: 10),
++                                  SegmentedButton<String>(
++                                    segments: const [
++                                      ButtonSegment(
++                                        value: 'any',
++                                        label: Text('Peu importe'),
++                                      ),
++                                      ButtonSegment(
++                                        value: 'with',
++                                        label: Text('Avec Vidéo'),
++                                      ),
++                                      ButtonSegment(
++                                        value: 'without',
++                                        label: Text('Sans Vidéo'),
++                                      ),
++                                    ],
++                                    selected: {_videoPreference},
++                                    onSelectionChanged: (newSelection) {
++                                      setState(
++                                        () =>
++                                            _videoPreference =
++                                                newSelection.first,
++                                      );
++                                    },
++                                  ),
++                                ],
+                               ],
+-                              selected: {_scope},
+-                              onSelectionChanged: (newSelection) {
+-                                setState(() => _scope = newSelection.first);
+-                              },
+-                            ),
+-                            SizedBox(height: 10),
+-                            SegmentedButton<String>(
+-                              segments: const [
+-                                ButtonSegment(
+-                                  value: 'any',
+-                                  label: Text('Peu importe'),
+-                                ),
+-                                ButtonSegment(
+-                                  value: 'with',
+-                                  label: Text('Avec VidÃ©o'),
++                              SizedBox(height: 20),
++
++                              ElevatedButton.icon(
++                                icon: Icon(
++                                  Icons.rocket_launch,
++                                  color: Colors.white,
+                                 ),
+-                                ButtonSegment(
+-                                  value: 'without',
+-                                  label: Text('Sans VidÃ©o'),
++                                style: ElevatedButton.styleFrom(
++                                  backgroundColor: Colors.deepPurple,
++                                  minimumSize: Size(double.infinity, 60),
+                                 ),
+-                              ],
+-                              selected: {_videoPreference},
+-                              onSelectionChanged: (newSelection) {
+-                                setState(
+-                                  () => _videoPreference = newSelection.first,
+-                                );
+-                              },
+-                            ),
+-                            SizedBox(height: 20),
+-
+-                            ElevatedButton.icon(
+-                              icon: Icon(
+-                                Icons.rocket_launch,
+-                                color: Colors.white,
+-                              ),
+-                              style: ElevatedButton.styleFrom(
+-                                backgroundColor: Colors.deepPurple,
+-                                minimumSize: Size(double.infinity, 60),
+-                              ),
+-                              onPressed: () {
+-                                if (!canProceed) {
+-                                  ScaffoldMessenger.of(context).showSnackBar(
+-                                    SnackBar(content: Text(validationMessage)),
+-                                  );
+-                                  return;
+-                                }
++                                onPressed: () {
++                                  if (!canProceed) {
++                                    ScaffoldMessenger.of(context).showSnackBar(
++                                      SnackBar(
++                                        content: Text(validationMessage),
++                                      ),
++                                    );
++                                    return;
++                                  }
+ 
+-                                // MODIFICATION ICI : Si on est dans un salon, on lance directement !
+-                                if (widget.loungeId != null) {
+-                                  _createGameForFriends();
+-                                } else {
+-                                  // Sinon, on affiche le menu normal (Local/PrivÃ©/Monde)
+-                                  _showLaunchOptions(
+-                                    canLocal,
+-                                    modes.contains('monde'),
+-                                  );
+-                                }
+-                              },
+-                              label: Text(
+-                                "LANCER LE JEU",
+-                                style: TextStyle(
+-                                  fontSize: 18,
+-                                  fontWeight: FontWeight.bold,
++                                  if (widget.loungeId != null) {
++                                    _createGameForFriends();
++                                  } else {
++                                    _showLaunchOptions(
++                                      canLocal,
++                                      modes.contains('monde'),
++                                    );
++                                  }
++                                },
++                                label: Text(
++                                  "LANCER LE JEU",
++                                  style: TextStyle(
++                                    fontSize: 18,
++                                    fontWeight: FontWeight.bold,
++                                  ),
+                                 ),
+                               ),
+-                            ),
+-                            SizedBox(height: 20),
+-                          ],
+-                        );
+-                      },
+-                    ),
++                              SizedBox(height: 20),
++                            ],
++                          );
++                        },
++                      ),
++                    ],
+                   ],
+                 ),
+               ),
+@@ -18222,10 +18355,14 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+       body: StreamBuilder<DocumentSnapshot>(
+         stream: _firebaseService.getGameStream(gameCode),
+         builder: (context, snapshot) {
+-          if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+-          if (snapshot.hasError) return const Center(child: Text("Erreur de connexion au salon."));
++          if (!snapshot.hasData)
++            return const Center(child: CircularProgressIndicator());
++          if (snapshot.hasError)
++            return const Center(child: Text("Erreur de connexion au salon."));
+           if (!snapshot.data!.exists) {
+-            Future.microtask(() => Navigator.of(context).popUntil((route) => route.isFirst));
++            Future.microtask(
++              () => Navigator.of(context).popUntil((route) => route.isFirst),
++            );
+             return const Center(child: Text("La partie n'existe plus."));
+           }
+ 
+@@ -18233,7 +18370,8 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+           var players = (gameData['players'] as Map<String, dynamic>?) ?? {};
+ 
+           if (!_livekitInitialized &&
+-              (gameData['videoEnabled'] == true || gameData['audioEnabled'] == true)) {
++              (gameData['videoEnabled'] == true ||
++                  gameData['audioEnabled'] == true)) {
+             _connectToLivekit(
+               gameData['videoEnabled'] == true,
+               gameData['audioEnabled'] == true,
+@@ -18243,15 +18381,18 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+           String gameType = gameData['gameType'] ?? '';
+ 
+           if (gameData['gameState'] == 'playing') {
+-            Future.microtask(() => Navigator.pushReplacement(
+-              context,
+-              MaterialPageRoute(
+-                builder: (_) => MultiplayerGameScreen(
+-                  gameCode: gameCode,
+-                  playerId: currentPlayerId,
++            Future.microtask(
++              () => Navigator.pushReplacement(
++                context,
++                MaterialPageRoute(
++                  builder:
++                      (_) => MultiplayerGameScreen(
++                        gameCode: gameCode,
++                        playerId: currentPlayerId,
++                      ),
+                 ),
+               ),
+-            ));
++            );
+             return const Center(child: Text("La partie commence..."));
+           }
+ 
+@@ -18268,7 +18409,10 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+           String requirementMessage = "";
+ 
+           if (isTeamGame) {
+-            final int totalAssignedPlayers = teams.values.fold(0, (sum, team) => sum + team.length);
++            final int totalAssignedPlayers = teams.values.fold(
++              0,
++              (sum, team) => sum + team.length,
++            );
+             if (players.length < 4) {
+               canStart = false;
+               requirementMessage = "Il faut au moins 4 joueurs.";
+@@ -18277,10 +18421,12 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+               requirementMessage = "Veuillez créer au moins 2 équipes.";
+             } else if (totalAssignedPlayers != players.length) {
+               canStart = false;
+-              requirementMessage = "Tous les joueurs doivent être assignés à une équipe.";
++              requirementMessage =
++                  "Tous les joueurs doivent être assignés à une équipe.";
+             } else if (teams.values.any((team) => team.length < 2)) {
+               canStart = false;
+-              requirementMessage = "Chaque équipe doit posséder au moins 2 joueurs.";
++              requirementMessage =
++                  "Chaque équipe doit posséder au moins 2 joueurs.";
+             }
+           } else {
+             switch (gameType) {
+@@ -18315,7 +18461,10 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+                     color: Colors.deepPurple[950]?.withOpacity(0.3),
+                     shape: RoundedRectangleBorder(
+                       borderRadius: BorderRadius.circular(16),
+-                      side: const BorderSide(color: Colors.deepPurpleAccent, width: 1),
++                      side: const BorderSide(
++                        color: Colors.deepPurpleAccent,
++                        width: 1,
++                      ),
+                     ),
+                     child: Padding(
+                       padding: const EdgeInsets.all(16.0),
+@@ -18323,7 +18472,12 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+                         children: [
+                           const Text(
+                             "PARTAGEZ CE CODE AVEC VOS AMIS",
+-                            style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1),
++                            style: TextStyle(
++                              color: Colors.white70,
++                              fontSize: 12,
++                              fontWeight: FontWeight.bold,
++                              letterSpacing: 1,
++                            ),
+                           ),
+                           const SizedBox(height: 10),
+                           Row(
+@@ -18331,7 +18485,9 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+                             children: [
+                               SelectableText(
+                                 gameCode,
+-                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
++                                style: Theme.of(
++                                  context,
++                                ).textTheme.headlineMedium?.copyWith(
+                                   fontSize: 36,
+                                   letterSpacing: 4,
+                                   fontWeight: FontWeight.bold,
+@@ -18340,11 +18496,18 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+                               ),
+                               const SizedBox(width: 12),
+                               IconButton(
+-                                icon: const Icon(Icons.copy, color: Colors.amberAccent),
++                                icon: const Icon(
++                                  Icons.copy,
++                                  color: Colors.amberAccent,
++                                ),
+                                 onPressed: () {
+-                                  Clipboard.setData(ClipboardData(text: gameCode));
++                                  Clipboard.setData(
++                                    ClipboardData(text: gameCode),
++                                  );
+                                   ScaffoldMessenger.of(context).showSnackBar(
+-                                    const SnackBar(content: Text("Code de salon copié !")),
++                                    const SnackBar(
++                                      content: Text("Code de salon copié !"),
++                                    ),
+                                   );
+                                 },
+                               ),
+@@ -18357,9 +18520,17 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+                   const SizedBox(height: 20),
+                   Card(
+                     child: ListTile(
+-                      leading: const Icon(Icons.games, color: Colors.cyanAccent),
+-                      title: Text("Jeu : $gameType", style: const TextStyle(fontWeight: FontWeight.bold)),
+-                      subtitle: Text("Difficulté : ${gameData['difficulty'] ?? 'Standard'}"),
++                      leading: const Icon(
++                        Icons.games,
++                        color: Colors.cyanAccent,
++                      ),
++                      title: Text(
++                        "Jeu : $gameType",
++                        style: const TextStyle(fontWeight: FontWeight.bold),
++                      ),
++                      subtitle: Text(
++                        "Difficulté : ${gameData['difficulty'] ?? 'Standard'}",
++                      ),
+                     ),
+                   ),
+                   const SizedBox(height: 20),
+@@ -18393,17 +18564,23 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+                           Colors.greenAccent,
+                           Colors.orangeAccent,
+                         ];
+-                        teamColor = teamColors[teamIndex % teamColors.length].withOpacity(0.15);
++                        teamColor = teamColors[teamIndex % teamColors.length]
++                            .withOpacity(0.15);
+                       }
+ 
+                       return Card(
+                         color: teamColor,
+                         child: ListTile(
+                           leading: Icon(
+-                            isPlayerHost ? Icons.admin_panel_settings : Icons.person,
++                            isPlayerHost
++                                ? Icons.admin_panel_settings
++                                : Icons.person,
+                             color: isPlayerHost ? Colors.amber : Colors.white70,
+                           ),
+-                          title: Text(pData['name'] ?? 'Joueur', style: const TextStyle(fontWeight: FontWeight.bold)),
++                          title: Text(
++                            pData['name'] ?? 'Joueur',
++                            style: const TextStyle(fontWeight: FontWeight.bold),
++                          ),
+                           trailing: const Chip(
+                             label: Text("Prêt"),
+                             backgroundColor: Colors.green,
+@@ -18418,83 +18595,81 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
+                       icon: const Icon(Icons.person_add),
+                       label: const Text("Inviter mes Amis"),
+ 
+-                        onPressed: () {
+-                          // Ouvre le bottom sheet pour inviter
+-                          showModalBottomSheet(
+-                            context: context,
+-                            backgroundColor: Colors.grey[900],
+-                            builder: (ctx) {
+-                              final ps = Provider.of<PlayerState>(
+-                                context,
+-                                listen: false,
+-                              );
+-                              final myFriends = ps.friends;
+-                              if (myFriends.isEmpty) {
+-                                return Container(
+-                                  height: 200,
+-                                  child: Center(
+-                                    child: Text(
+-                                      "Vous n'avez pas encore d'amis !",
+-                                    ),
++                      onPressed: () {
++                        // Ouvre le bottom sheet pour inviter
++                        showModalBottomSheet(
++                          context: context,
++                          backgroundColor: Colors.grey[900],
++                          builder: (ctx) {
++                            final ps = Provider.of<PlayerState>(
++                              context,
++                              listen: false,
++                            );
++                            final myFriends = ps.friends;
++                            if (myFriends.isEmpty) {
++                              return Container(
++                                height: 200,
++                                child: Center(
++                                  child: Text(
++                                    "Vous n'avez pas encore d'amis !",
+                                   ),
+-                                );
+-                              }
+-                              return Column(
+-                                children: [
+-                                  Padding(
+-                                    padding: const EdgeInsets.all(16.0),
+-                                    child: Text(
+-                                      "Inviter au salon",
+-                                      style:
+-                                          Theme.of(
+-                                            context,
+-                                          ).textTheme.titleLarge,
+-                                    ),
++                                ),
++                              );
++                            }
++                            return Column(
++                              children: [
++                                Padding(
++                                  padding: const EdgeInsets.all(16.0),
++                                  child: Text(
++                                    "Inviter au salon",
++                                    style:
++                                        Theme.of(context).textTheme.titleLarge,
+                                   ),
+-                                  Expanded(
+-                                    child: ListView.builder(
+-                                      itemCount: myFriends.length,
+-                                      itemBuilder: (context, i) {
+-                                        String fId = myFriends[i];
+-                                        String fName =
+-                                            ps.friendNamesCache[fId] ?? 'Ami';
+-                                        return ListTile(
+-                                          leading: CircleAvatar(
+-                                            child: Text(fName[0]),
++                                ),
++                                Expanded(
++                                  child: ListView.builder(
++                                    itemCount: myFriends.length,
++                                    itemBuilder: (context, i) {
++                                      String fId = myFriends[i];
++                                      String fName =
++                                          ps.friendNamesCache[fId] ?? 'Ami';
++                                      return ListTile(
++                                        leading: CircleAvatar(
++                                          child: Text(fName[0]),
++                                        ),
++                                        title: Text(fName),
++                                        trailing: ElevatedButton(
++                                          style: ElevatedButton.styleFrom(
++                                            backgroundColor: Colors.green,
+                                           ),
+-                                          title: Text(fName),
+-                                          trailing: ElevatedButton(
+-                                            style: ElevatedButton.styleFrom(
+-                                              backgroundColor: Colors.green,
+-                                            ),
+-                                            child: Text("Inviter"),
+-                                            onPressed: () {
+-                                              ps.sendGameInvite(
+-                                                fId,
+-                                                widget.gameCode,
+-                                              );
+-                                              ScaffoldMessenger.of(
+-                                                context,
+-                                              ).showSnackBar(
+-                                                SnackBar(
+-                                                  content: Text(
+-                                                    "Invitation envoyÃ©e Ã  $fName !",
+-                                                  ),
++                                          child: Text("Inviter"),
++                                          onPressed: () {
++                                            ps.sendGameInvite(
++                                              fId,
++                                              widget.gameCode,
++                                            );
++                                            ScaffoldMessenger.of(
++                                              context,
++                                            ).showSnackBar(
++                                              SnackBar(
++                                                content: Text(
++                                                  "Invitation envoyÃ©e Ã  $fName !",
+                                                 ),
+-                                              );
+-                                              Navigator.pop(ctx);
+-                                            },
+-                                          ),
+-                                        );
+-                                      },
+-                                    ),
++                                              ),
++                                            );
++                                            Navigator.pop(ctx);
++                                          },
++                                        ),
++                                      );
++                                    },
+                                   ),
+-                                ],
+-                              );
+-                            },
+-                          );
+-                        },
+-                      ),
++                                ),
++                              ],
++                            );
++                          },
++                        );
++                      },
++                    ),
+                   ],
+ 
+                   if (isHost && isTeamGame)
+@@ -38691,19 +38866,25 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+   String _coinFlipResult = "";
+   int _currentPlayerIndex = -1;
+   bool _isSpinning = false;
+-  
+-  // NOUVEAUX PARAMÈTRES POUR LE DILEMME LOCAL
++
++  // PARAMÈTRES POUR LE DILEMME LOCAL
+   bool _useWheelForDilemma = true;
+   Map<String, String> _dilemmaVotes = {}; // PlayerID -> "A" ou "B"
+-  int _dilemmaVoterIndex = 0; // Index du joueur en train de voter (si sans roue)
++  int _dilemmaVoterIndex = 0;
+   String? _activeDilemmaVoterId;
+   String _dilemmaOptionA = "";
+   String _dilemmaOptionB = "";
+ 
++  // --- SYSTÈME DE SCORES ---
++  Map<String, int> _globalScores = {};
++
+   @override
+   void initState() {
+     super.initState();
+     _setTitle();
++    for (var p in widget.players) {
++      _globalScores[p] = 0;
++    }
+   }
+ 
+   void _setTitle() {
+@@ -38717,6 +38898,87 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+     }
+   }
+ 
++  void _showScoreDialog(String selectedPlayer) {
++    showDialog(
++      context: context,
++      builder: (ctx) {
++        return StatefulBuilder(
++          builder: (context, setStateDialog) {
++            return AlertDialog(
++              title: const Text(
++                "Gérer les Scores",
++                textAlign: TextAlign.center,
++              ),
++              content: Column(
++                mainAxisSize: MainAxisSize.min,
++                children:
++                    widget.players.map((p) {
++                      bool isSelected = p == selectedPlayer;
++                      return ListTile(
++                        title: Text(
++                          p,
++                          style: TextStyle(
++                            fontWeight:
++                                isSelected
++                                    ? FontWeight.bold
++                                    : FontWeight.normal,
++                            color: isSelected ? Colors.amber : Colors.white,
++                          ),
++                        ),
++                        trailing: Row(
++                          mainAxisSize: MainAxisSize.min,
++                          children: [
++                            IconButton(
++                              icon: const Icon(
++                                Icons.remove_circle_outline,
++                                color: Colors.redAccent,
++                              ),
++                              onPressed: () {
++                                setState(() {
++                                  _globalScores[p] =
++                                      (_globalScores[p] ?? 0) - 1;
++                                });
++                                setStateDialog(() {});
++                              },
++                            ),
++                            Text(
++                              "${_globalScores[p]}",
++                              style: const TextStyle(
++                                fontSize: 18,
++                                fontWeight: FontWeight.bold,
++                              ),
++                            ),
++                            IconButton(
++                              icon: const Icon(
++                                Icons.add_circle_outline,
++                                color: Colors.greenAccent,
++                              ),
++                              onPressed: () {
++                                setState(() {
++                                  _globalScores[p] =
++                                      (_globalScores[p] ?? 0) + 1;
++                                });
++                                setStateDialog(() {});
++                              },
++                            ),
++                          ],
++                        ),
++                      );
++                    }).toList(),
++              ),
++              actions: [
++                TextButton(
++                  onPressed: () => Navigator.pop(ctx),
++                  child: const Text("Fermer"),
++                ),
++              ],
++            );
++          },
++        );
++      },
++    );
++  }
++
+   void _onWheelStopped(int selectedIndex) {
+     setState(() {
+       _currentPlayerIndex = selectedIndex;
+@@ -38731,11 +38993,13 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+   String _processContent(String content) {
+     if (content.contains('{player}')) {
+       List<String> otherPlayers = List.from(widget.players);
+-      if (_currentPlayerIndex >= 0 && _currentPlayerIndex < otherPlayers.length) {
++      if (_currentPlayerIndex >= 0 &&
++          _currentPlayerIndex < otherPlayers.length) {
+         otherPlayers.removeAt(_currentPlayerIndex);
+       }
+       if (otherPlayers.isNotEmpty) {
+-        String randomPlayer = otherPlayers[Random().nextInt(otherPlayers.length)];
++        String randomPlayer =
++            otherPlayers[Random().nextInt(otherPlayers.length)];
+         return content.replaceAll('{player}', randomPlayer);
+       } else {
+         return content.replaceAll('{player}', 'toi-mê-me');
+@@ -38746,7 +39010,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+ 
+   List<String> _splitDilemmaOptions(String content) {
+     final normalized = content.trim().replaceFirst(RegExp(r'[?]+$'), '');
+-    final match = RegExp(r'\sou\s', caseSensitive: false).firstMatch(normalized);
++    final match = RegExp(
++      r'\sou\s',
++      caseSensitive: false,
++    ).firstMatch(normalized);
+ 
+     if (match == null) {
+       return [normalized, 'Je passe'];
+@@ -38763,8 +39030,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+   }
+ 
+   String _currentDilemmaWinner() {
+-    final optionACount = _dilemmaVotes.values.where((vote) => vote == 'A').length;
+-    final optionBCount = _dilemmaVotes.values.where((vote) => vote == 'B').length;
++    final optionACount =
++        _dilemmaVotes.values.where((vote) => vote == 'A').length;
++    final optionBCount =
++        _dilemmaVotes.values.where((vote) => vote == 'B').length;
+ 
+     if (optionACount == 0 && optionBCount == 0) return '';
+     if (optionACount > optionBCount) return 'A';
+@@ -38776,16 +39045,13 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+     setState(() {
+       _dilemmaVotes[playerId] = option;
+       if (!_useWheelForDilemma) {
+-        // Mode séquentiel : passe au joueur suivant
+         if (_dilemmaVoterIndex < widget.players.length - 1) {
+           _dilemmaVoterIndex++;
+           _activeDilemmaVoterId = widget.players[_dilemmaVoterIndex];
+         } else {
+-          // Tous les joueurs ont voté
+-          _activeDilemmaVoterId = null; 
++          _activeDilemmaVoterId = null;
+         }
+       } else {
+-        // Mode Roue (1 seul votant) : l'action se fige après son vote
+         _activeDilemmaVoterId = null;
+       }
+     });
+@@ -38797,7 +39063,8 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+     required String optionText,
+     required Color color,
+   }) {
+-    final voteCount = _dilemmaVotes.values.where((vote) => vote == optionKey).length;
++    final voteCount =
++        _dilemmaVotes.values.where((vote) => vote == optionKey).length;
+     final totalVotes = _dilemmaVotes.isEmpty ? 1 : _dilemmaVotes.length;
+     final progress = (voteCount / totalVotes).clamp(0.0, 1.0);
+     final winner = _currentDilemmaWinner();
+@@ -38806,14 +39073,16 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+ 
+     return Expanded(
+       child: GestureDetector(
+-        onTap: _activeDilemmaVoterId == null
+-            ? null
+-            : () => _submitDilemmaVote(_activeVoterOrCurrent(), optionKey),
++        onTap:
++            _activeDilemmaVoterId == null
++                ? null
++                : () => _submitDilemmaVote(_activeVoterOrCurrent(), optionKey),
+         child: AnimatedContainer(
+           duration: const Duration(milliseconds: 250),
+           padding: const EdgeInsets.all(16),
+           decoration: BoxDecoration(
+-            color: isWinning ? color.withOpacity(0.28) : color.withOpacity(0.16),
++            color:
++                isWinning ? color.withOpacity(0.28) : color.withOpacity(0.16),
+             borderRadius: BorderRadius.circular(18),
+             border: Border.all(
+               color: isWinning ? color : Colors.white12,
+@@ -38845,7 +39114,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+               const SizedBox(height: 10),
+               Text(
+                 '$voteCount vote${voteCount > 1 ? 's' : ''}',
+-                style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
++                style: const TextStyle(
++                  color: Colors.white70,
++                  fontWeight: FontWeight.w600,
++                ),
+               ),
+               if (isWinning && voteCount > 0)
+                 Padding(
+@@ -38864,37 +39136,39 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+ 
+   String _getInstructionText() {
+     if (_useWheelForDilemma) {
+-      final voterName = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : '...';
+-      return _activeDilemmaVoterId == null 
+-          ? "Choix enregistré !" 
++      final voterName =
++          _currentPlayerIndex != -1
++              ? widget.players[_currentPlayerIndex]
++              : '...';
++      return _activeDilemmaVoterId == null
++          ? "Choix enregistré !"
+           : "Dilemme pour $voterName : fait ton choix !";
+     } else {
+-      return _activeDilemmaVoterId == null 
+-          ? "Tous les votes sont enregistrés !" 
++      return _activeDilemmaVoterId == null
++          ? "Tous les votes sont enregistrés !"
+           : "C'est au tour de $_activeDilemmaVoterId de voter !";
+     }
+   }
+ 
+   String _getCurrentVoterName() {
+-    return _useWheelForDilemma 
+-        ? (_currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "Joueur")
++    return _useWheelForDilemma
++        ? (_currentPlayerIndex != -1
++            ? widget.players[_currentPlayerIndex]
++            : "Joueur")
+         : (_activeDilemmaVoterId ?? "Fin");
+   }
+ 
+-  String _restoreLiarVoterIdentity() {
+-    return _activeDilemmaVoterId ?? '';
+-  }
+-
+   String _activeVoterOrCurrent() {
+-    return _useWheelForDilemma ? _getCurrentVoterName() : (_activeDilemmaVoterId ?? "");
++    return _useWheelForDilemma
++        ? _getCurrentVoterName()
++        : (_activeDilemmaVoterId ?? "");
+   }
+ 
+   Widget _buildDilemmaVoteUI(BuildContext context) {
+-    final winner = _currentDilemmaWinner();
+-    final totalExpected = widget.players.length;
+-    final allVotesCast = _useWheelForDilemma 
+-        ? _dilemmaVotes.isNotEmpty 
+-        : _dilemmaVotes.length >= totalExpected;
++    final allVotesCast =
++        _useWheelForDilemma
++            ? _dilemmaVotes.isNotEmpty
++            : _dilemmaVotes.length >= widget.players.length;
+ 
+     return LayoutBuilder(
+       builder: (context, constraints) {
+@@ -38908,20 +39182,28 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+                 Card(
+                   elevation: 6,
+                   color: Colors.blueGrey[900],
+-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
++                  shape: RoundedRectangleBorder(
++                    borderRadius: BorderRadius.circular(20),
++                  ),
+                   child: Padding(
+                     padding: const EdgeInsets.all(20.0),
+                     child: Column(
+                       children: [
+                         const Text(
+                           'LE DILEMME',
+-                          style: TextStyle(color: Colors.amberAccent, letterSpacing: 2, fontWeight: FontWeight.bold),
++                          style: TextStyle(
++                            color: Colors.amberAccent,
++                            letterSpacing: 2,
++                            fontWeight: FontWeight.bold,
++                          ),
+                         ),
+                         const SizedBox(height: 12),
+                         Text(
+                           _currentContent,
+                           textAlign: TextAlign.center,
+-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 20),
++                          style: Theme.of(
++                            context,
++                          ).textTheme.headlineSmall?.copyWith(fontSize: 20),
+                         ),
+                       ],
+                     ),
+@@ -38930,7 +39212,10 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+                 const SizedBox(height: 16),
+                 Text(
+                   _getInstructionText(),
+-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
++                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
++                    color: Colors.white,
++                    fontWeight: FontWeight.bold,
++                  ),
+                   textAlign: TextAlign.center,
+                 ),
+                 const SizedBox(height: 12),
+@@ -38939,20 +39224,27 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+                     spacing: 8,
+                     runSpacing: 8,
+                     alignment: WrapAlignment.center,
+-                    children: widget.players.map((player) {
+-                      final hasVoted = _dilemmaVotes.containsKey(player);
+-                      final isActive = player == _activeDilemmaVoterId;
+-                      return Chip(
+-                        label: Text(player),
+-                        backgroundColor: isActive 
+-                            ? Colors.deepPurple 
+-                            : (hasVoted ? Colors.green[800] : Colors.white10),
+-                        labelStyle: TextStyle(
+-                          color: Colors.white,
+-                          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+-                        ),
+-                      );
+-                    }).toList(),
++                    children:
++                        widget.players.map((player) {
++                          final hasVoted = _dilemmaVotes.containsKey(player);
++                          final isActive = player == _activeDilemmaVoterId;
++                          return Chip(
++                            label: Text(player),
++                            backgroundColor:
++                                isActive
++                                    ? Colors.deepPurple
++                                    : (hasVoted
++                                        ? Colors.green[800]
++                                        : Colors.white10),
++                            labelStyle: TextStyle(
++                              color: Colors.white,
++                              fontWeight:
++                                  isActive
++                                      ? FontWeight.bold
++                                      : FontWeight.normal,
++                            ),
++                          );
++                        }).toList(),
+                   ),
+                 const SizedBox(height: 20),
+                 Row(
+@@ -38977,26 +39269,39 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+                   ElevatedButton.icon(
+                     icon: const Icon(Icons.arrow_forward),
+                     label: const Text('Dilemme Suivant'),
+-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
+-                    onPressed: () => setState(() {
+-                      _isSpinning = false;
+-                      _currentContent = "";
+-                      _currentPlayerIndex = -1;
+-                      _dilemmaVotes.clear();
+-                      _activeDilemmaVoterId = null;
+-                      _dilemmaOptionA = "";
+-                      _dilemmaOptionB = "";
+-                    }),
++                    style: ElevatedButton.styleFrom(
++                      backgroundColor: Colors.green,
++                      padding: const EdgeInsets.symmetric(
++                        horizontal: 24,
++                        vertical: 12,
++                      ),
++                    ),
++                    onPressed:
++                        () => setState(() {
++                          _isSpinning = false;
++                          _currentContent = "";
++                          _currentPlayerIndex = -1;
++                          _dilemmaVotes.clear();
++                          _activeDilemmaVoterId = null;
++                          _dilemmaOptionA = "";
++                          _dilemmaOptionB = "";
++                        }),
+                   )
+                 else if (_useWheelForDilemma)
+                   const Text(
+                     'Le joueur désigné doit faire son choix.',
+-                    style: TextStyle(color: Colors.white38, fontStyle: FontStyle.italic),
++                    style: TextStyle(
++                      color: Colors.white38,
++                      fontStyle: FontStyle.italic,
++                    ),
+                   )
+                 else
+                   Text(
+-                    'En attente du vote de : $_activeDilemmaVoterId (${_dilemmaVotes.length} / $totalExpected)',
+-                    style: const TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
++                    'En attente du vote de : $_activeDilemmaVoterId (${_dilemmaVotes.length} / ${widget.players.length})',
++                    style: const TextStyle(
++                      color: Colors.white54,
++                      fontStyle: FontStyle.italic,
++                    ),
+                   ),
+               ],
+             ),
+@@ -39021,7 +39326,9 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+         break;
+     }
+ 
+-    nextContent = _processContent(contentList[random.nextInt(contentList.length)]);
++    nextContent = _processContent(
++      contentList[random.nextInt(contentList.length)],
++    );
+ 
+     setState(() {
+       _currentContent = nextContent;
+@@ -39030,12 +39337,16 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+         _dilemmaOptionA = dilemmaOptions[0];
+         _dilemmaOptionB = dilemmaOptions[1];
+         _dilemmaVotes.clear();
+-        
++
+         if (_useWheelForDilemma) {
+-          _activeDilemmaVoterId = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : null;
++          _activeDilemmaVoterId =
++              _currentPlayerIndex != -1
++                  ? widget.players[_currentPlayerIndex]
++                  : null;
+         } else {
+           _dilemmaVoterIndex = 0;
+-          _activeDilemmaVoterId = widget.players.isNotEmpty ? widget.players.first : null;
++          _activeDilemmaVoterId =
++              widget.players.isNotEmpty ? widget.players.first : null;
+         }
+       }
+     });
+@@ -39058,7 +39369,8 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+ 
+   @override
+   Widget build(BuildContext context) {
+-    final currentPlayer = _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
++    final currentPlayer =
++        _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
+     final isDilemma = widget.gameType == 'dilemma';
+ 
+     return Scaffold(
+@@ -39093,40 +39405,48 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+               },
+             ),
+             const SizedBox(height: 12),
+-            
+-            // CONFIGURATION ROUE / SANS ROUE POUR LE DILEMME (Affiché uniquement lors de la phase de préparation)
++
+             if (isDilemma && _currentContent.isEmpty && !_isSpinning) ...[
+               Card(
+                 color: Colors.grey[900],
+-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
++                shape: RoundedRectangleBorder(
++                  borderRadius: BorderRadius.circular(15),
++                ),
+                 child: Padding(
+-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
++                  padding: const EdgeInsets.symmetric(
++                    vertical: 8.0,
++                    horizontal: 16.0,
++                  ),
+                   child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                     children: [
+                       const Text(
+                         "Mode de sélection du Dilemme",
+-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white70),
++                        style: TextStyle(
++                          fontWeight: FontWeight.bold,
++                          color: Colors.white70,
++                        ),
+                         textAlign: TextAlign.center,
+                       ),
+                       const SizedBox(height: 10),
+                       SegmentedButton<bool>(
+                         segments: const [
+                           ButtonSegment(
+-                            value: true, 
++                            value: true,
+                             label: Text('Avec Roue'),
+                             icon: Icon(Icons.blur_circular),
+                           ),
+                           ButtonSegment(
+-                            value: false, 
++                            value: false,
+                             label: Text('Sans Roue (Tous)'),
+                             icon: Icon(Icons.people),
+                           ),
+                         ],
+                         selected: {_useWheelForDilemma},
+-                        onSelectionChanged: (val) => setState(() {
+-                          _useWheelForDilemma = val.first;
+-                        }),
++                        onSelectionChanged:
++                            (val) => setState(() {
++                              _useWheelForDilemma = val.first;
++                            }),
+                       ),
+                     ],
+                   ),
+@@ -39139,59 +39459,73 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+               child: Center(
+                 child: AnimatedSwitcher(
+                   duration: const Duration(milliseconds: 500),
+-                  transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
+-                  child: isDilemma && _currentContent.isNotEmpty
+-                      ? _buildDilemmaVoteUI(context)
+-                      : _isSpinning
++                  transitionBuilder:
++                      (child, animation) =>
++                          ScaleTransition(scale: animation, child: child),
++                  child:
++                      isDilemma && _currentContent.isNotEmpty
++                          ? _buildDilemmaVoteUI(context)
++                          : _isSpinning
+                           ? SpinTheWheelWidget(
+-                              key: const ValueKey('wheel_spin'),
+-                              players: widget.players,
+-                              onSpinEnd: _onWheelStopped,
+-                            )
++                            key: const ValueKey('wheel_spin'),
++                            players: widget.players,
++                            onSpinEnd: _onWheelStopped,
++                          )
+                           : (_currentContent.isEmpty
+                               ? Text(
+-                                  "Appuyez sur 'Lancer le tour' pour commencer !",
+-                                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white70),
+-                                  textAlign: TextAlign.center,
+-                                )
++                                "Appuyez sur 'Lancer le tour' pour commencer !",
++                                style: Theme.of(context).textTheme.headlineSmall
++                                    ?.copyWith(color: Colors.white70),
++                                textAlign: TextAlign.center,
++                              )
+                               : Card(
+-                                  key: ValueKey<String>(_currentContent),
+-                                  elevation: 4,
+-                                  child: Padding(
+-                                    padding: const EdgeInsets.all(24.0),
+-                                    child: Column(
+-                                      mainAxisSize: MainAxisSize.min,
+-                                      mainAxisAlignment: MainAxisAlignment.center,
+-                                      children: [
+-                                        Text(
+-                                          "C'est au tour de",
+-                                          style: Theme.of(context).textTheme.bodyMedium,
+-                                        ),
+-                                        Text(
+-                                          currentPlayer,
+-                                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+-                                            color: Colors.deepPurpleAccent,
+-                                          ),
+-                                        ),
+-                                        const SizedBox(height: 20),
+-                                        Text(
+-                                          _currentContent,
+-                                          textAlign: TextAlign.center,
+-                                          style: Theme.of(context).textTheme.headlineSmall,
++                                key: ValueKey<String>(_currentContent),
++                                elevation: 4,
++                                child: Padding(
++                                  padding: const EdgeInsets.all(24.0),
++                                  child: Column(
++                                    mainAxisSize: MainAxisSize.min,
++                                    mainAxisAlignment: MainAxisAlignment.center,
++                                    children: [
++                                      Text(
++                                        "C'est au tour de",
++                                        style:
++                                            Theme.of(
++                                              context,
++                                            ).textTheme.bodyMedium,
++                                      ),
++                                      Text(
++                                        currentPlayer,
++                                        style: Theme.of(
++                                          context,
++                                        ).textTheme.headlineMedium?.copyWith(
++                                          color: Colors.deepPurpleAccent,
+                                         ),
+-                                        if (widget.gameType == 'coin_flip' && _showCoinFlipResult)
+-                                          _buildCoinFlipResult(),
+-                                      ],
+-                                    ),
++                                      ),
++                                      const SizedBox(height: 20),
++                                      Text(
++                                        _currentContent,
++                                        textAlign: TextAlign.center,
++                                        style:
++                                            Theme.of(
++                                              context,
++                                            ).textTheme.headlineSmall,
++                                      ),
++                                      if (widget.gameType == 'coin_flip' &&
++                                          _showCoinFlipResult)
++                                        _buildCoinFlipResult(),
++                                    ],
+                                   ),
+-                                )),
++                                ),
++                              )),
+                 ),
+               ),
+             ),
+             const SizedBox(height: 10),
+             _buildGameControls(),
+             const SizedBox(height: 10),
+-            if (!isDilemma || _currentContent.isEmpty || _isSpinning) _buildPlayerChips(),
++            if (!isDilemma || _currentContent.isEmpty || _isSpinning)
++              _buildPlayerChips(),
+           ],
+         ),
+       ),
+@@ -39204,14 +39538,24 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+       runSpacing: 4,
+       alignment: WrapAlignment.center,
+       children: List.generate(widget.players.length, (index) {
++        final pName = widget.players[index];
+         final isCurrent = index == _currentPlayerIndex && !_isSpinning;
+-        return Chip(
+-          label: Text(widget.players[index]),
+-          backgroundColor: isCurrent ? Colors.deepPurple : const Color(0xFF333333),
++        return ActionChip(
++          avatar: CircleAvatar(
++            backgroundColor: Colors.white24,
++            child: Text(
++              pName[0],
++              style: const TextStyle(fontSize: 10, color: Colors.white),
++            ),
++          ),
++          label: Text("$pName : ${_globalScores[pName]} pts"),
++          backgroundColor:
++              isCurrent ? Colors.deepPurple : const Color(0xFF333333),
+           labelStyle: TextStyle(
+             color: Colors.white,
+             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
+           ),
++          onPressed: () => _showScoreDialog(pName),
+         );
+       }),
+     );
+@@ -39260,16 +39604,21 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+             setState(() => _isSpinning = true);
+           }
+         },
+-        child: Text(widget.gameType == 'dilemma' && !_useWheelForDilemma ? "Lancer le Dilemme" : "Lancer la roue"),
++        child: Text(
++          widget.gameType == 'dilemma' && !_useWheelForDilemma
++              ? "Lancer le Dilemme"
++              : "Lancer la roue",
++        ),
+       );
+     }
+ 
+     if (widget.gameType == 'coin_flip' && _showCoinFlipResult) {
+       return ElevatedButton(
+-        onPressed: () => setState(() {
+-          _isSpinning = true;
+-          _currentContent = "";
+-        }),
++        onPressed:
++            () => setState(() {
++              _isSpinning = true;
++              _currentContent = "";
++            }),
+         child: const Text("Tour Suivant"),
+       );
+     }
+@@ -39299,7 +39648,6 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
+   }
+ }
+ 
+-
+ class SpinTheWheelWidget extends StatefulWidget {
+   final List<String> players;
+   final Function(int) onSpinEnd;
+@@ -40663,10 +41011,13 @@ class _WhoIsMostLikelyLocalScreenState
+   String _difficulty = 'soft';
+   String _currentQuestion = "";
+   LocalWhoIsPhase _phase = LocalWhoIsPhase.question;
+-  
++
+   int _currentVoterIndex = 0;
+   Map<String, String> _votes = {}; // Voter -> VotedFor
+-  
++
++  // --- SYSTÈME DE SCORES ---
++  Map<String, int> _globalScores = {};
++
+   final TextEditingController _aiController = TextEditingController();
+   bool _isAiLoading = false;
+   List<String> _aiQuestions = [];
+@@ -40674,6 +41025,10 @@ class _WhoIsMostLikelyLocalScreenState
+   @override
+   void initState() {
+     super.initState();
++    // Initialiser les scores à 0
++    for (var p in widget.players) {
++      _globalScores[p] = 0;
++    }
+     _getNewQuestion();
+   }
+ 
+@@ -40713,6 +41068,7 @@ class _WhoIsMostLikelyLocalScreenState
+         _currentVoterIndex++;
+       } else {
+         _phase = LocalWhoIsPhase.results;
++        _awardPoints(); // Attribuer les points aux gagnants
+       }
+     });
+   }
+@@ -40730,15 +41086,102 @@ class _WhoIsMostLikelyLocalScreenState
+     tally.forEach((_, votes) {
+       if (votes > maxVotes) maxVotes = votes;
+     });
+-    
+     if (maxVotes == 0) return [];
+-    
+     return tally.entries
+         .where((e) => e.value == maxVotes)
+         .map((e) => e.key)
+         .toList();
+   }
+ 
++  void _awardPoints() {
++    final tally = _calculateTally();
++    final winners = _getWinners(tally);
++    for (var w in winners) {
++      _globalScores[w] = (_globalScores[w] ?? 0) + 1;
++    }
++  }
++
++  void _showScoreDialog(String selectedPlayer) {
++    showDialog(
++      context: context,
++      builder: (ctx) {
++        return StatefulBuilder(
++          builder: (context, setStateDialog) {
++            return AlertDialog(
++              title: const Text(
++                "Tableau des Scores",
++                textAlign: TextAlign.center,
++              ),
++              content: Column(
++                mainAxisSize: MainAxisSize.min,
++                children:
++                    widget.players.map((p) {
++                      bool isSelected = p == selectedPlayer;
++                      return ListTile(
++                        title: Text(
++                          p,
++                          style: TextStyle(
++                            fontWeight:
++                                isSelected
++                                    ? FontWeight.bold
++                                    : FontWeight.normal,
++                            color: isSelected ? Colors.amber : Colors.white,
++                          ),
++                        ),
++                        trailing: Row(
++                          mainAxisSize: MainAxisSize.min,
++                          children: [
++                            IconButton(
++                              icon: const Icon(
++                                Icons.remove_circle_outline,
++                                color: Colors.redAccent,
++                              ),
++                              onPressed: () {
++                                setState(() {
++                                  _globalScores[p] =
++                                      (_globalScores[p] ?? 0) - 1;
++                                });
++                                setStateDialog(() {});
++                              },
++                            ),
++                            Text(
++                              "${_globalScores[p]}",
++                              style: const TextStyle(
++                                fontSize: 18,
++                                fontWeight: FontWeight.bold,
++                              ),
++                            ),
++                            IconButton(
++                              icon: const Icon(
++                                Icons.add_circle_outline,
++                                color: Colors.greenAccent,
++                              ),
++                              onPressed: () {
++                                setState(() {
++                                  _globalScores[p] =
++                                      (_globalScores[p] ?? 0) + 1;
++                                });
++                                setStateDialog(() {});
++                              },
++                            ),
++                          ],
++                        ),
++                      );
++                    }).toList(),
++              ),
++              actions: [
++                TextButton(
++                  onPressed: () => Navigator.pop(ctx),
++                  child: const Text("Fermer"),
++                ),
++              ],
++            );
++          },
++        );
++      },
++    );
++  }
++
+   @override
+   Widget build(BuildContext context) {
+     return Scaffold(
+@@ -40753,14 +41196,52 @@ class _WhoIsMostLikelyLocalScreenState
+       ),
+       body: Padding(
+         padding: const EdgeInsets.all(16.0),
+-        child: AnimatedSwitcher(
+-          duration: const Duration(milliseconds: 300),
+-          child: _buildContent(),
++        child: Column(
++          children: [
++            Expanded(
++              child: AnimatedSwitcher(
++                duration: const Duration(milliseconds: 300),
++                child: _buildContent(),
++              ),
++            ),
++            const SizedBox(height: 10),
++            _buildPlayerChips(), // Affichage permanent des scores en bas
++          ],
+         ),
+       ),
+     );
+   }
+ 
++  Widget _buildPlayerChips() {
++    return Wrap(
++      spacing: 8,
++      runSpacing: 4,
++      alignment: WrapAlignment.center,
++      children: List.generate(widget.players.length, (index) {
++        final pName = widget.players[index];
++        final isCurrentVoter =
++            _phase == LocalWhoIsPhase.voting && index == _currentVoterIndex;
++        return ActionChip(
++          avatar: CircleAvatar(
++            backgroundColor: Colors.white24,
++            child: Text(
++              pName[0],
++              style: const TextStyle(fontSize: 10, color: Colors.white),
++            ),
++          ),
++          label: Text("$pName : ${_globalScores[pName]} pts"),
++          backgroundColor:
++              isCurrentVoter ? Colors.deepPurple : const Color(0xFF333333),
++          labelStyle: TextStyle(
++            color: Colors.white,
++            fontWeight: isCurrentVoter ? FontWeight.bold : FontWeight.normal,
++          ),
++          onPressed: () => _showScoreDialog(pName),
++        );
++      }),
++    );
++  }
++
+   Widget _buildContent() {
+     switch (_phase) {
+       case LocalWhoIsPhase.question:
+@@ -40784,16 +41265,19 @@ class _WhoIsMostLikelyLocalScreenState
+             ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
+           ],
+           selected: {_difficulty},
+-          onSelectionChanged: (s) => setState(() {
+-            _difficulty = s.first;
+-            _getNewQuestion();
+-          }),
++          onSelectionChanged:
++              (s) => setState(() {
++                _difficulty = s.first;
++                _getNewQuestion();
++              }),
+         ),
+         const SizedBox(height: 20),
+         Expanded(
+           child: Card(
+             color: Colors.deepPurple[950]?.withOpacity(0.4),
+-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
++            shape: RoundedRectangleBorder(
++              borderRadius: BorderRadius.circular(20),
++            ),
+             child: Padding(
+               padding: const EdgeInsets.all(24.0),
+               child: Column(
+@@ -40806,7 +41290,9 @@ class _WhoIsMostLikelyLocalScreenState
+                   const SizedBox(height: 12),
+                   Text(
+                     "...pourrait le plus $_currentQuestion",
+-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
++                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
++                      fontWeight: FontWeight.bold,
++                    ),
+                     textAlign: TextAlign.center,
+                   ),
+                 ],
+@@ -40815,80 +41301,12 @@ class _WhoIsMostLikelyLocalScreenState
+           ),
+         ),
+         const SizedBox(height: 16),
+-        Consumer<PlayerState>(
+-          builder: (ctx, ps, _) {
+-            if (!ps.isPremium) return const SizedBox.shrink();
+-            return Container(
+-              margin: const EdgeInsets.only(bottom: 8),
+-              decoration: BoxDecoration(
+-                border: Border.all(color: Colors.amberAccent),
+-                borderRadius: BorderRadius.circular(12),
+-              ),
+-              padding: const EdgeInsets.all(10),
+-              child: Column(
+-                crossAxisAlignment: CrossAxisAlignment.start,
+-                children: [
+-                  const Row(
+-                    children: [
+-                      Icon(Icons.auto_awesome, color: Colors.amberAccent, size: 16),
+-                      SizedBox(width: 6),
+-                      Text(
+-                        "IA Premium",
+-                        style: TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold, fontSize: 13),
+-                      ),
+-                    ],
+-                  ),
+-                  const SizedBox(height: 6),
+-                  Row(
+-                    children: [
+-                      Expanded(
+-                        child: TextField(
+-                          controller: _aiController,
+-                          decoration: InputDecoration(
+-                            labelText: "Thème pour les questions",
+-                            hintText: "ex: sport, vacances, école...",
+-                            border: const OutlineInputBorder(),
+-                            isDense: true,
+-                          ),
+-                          maxLines: 1,
+-                        ),
+-                      ),
+-                      const SizedBox(width: 8),
+-                      ElevatedButton(
+-                        onPressed: _isAiLoading
+-                            ? null
+-                            : () async {
+-                                if (_aiController.text.trim().isNotEmpty) {
+-                                  setState(() => _isAiLoading = true);
+-                                  try {
+-                                    _aiQuestions = await FirebaseService.generateAiWords(
+-                                      instructions: _aiController.text.trim(),
+-                                      count: 30,
+-                                      gameType: 'Qui Pourrait le Plus ?',
+-                                    );
+-                                    _getNewQuestion();
+-                                  } catch (e) {
+-                                    print('AI error: $e');
+-                                  } finally {
+-                                    if (mounted) setState(() => _isAiLoading = false);
+-                                  }
+-                                }
+-                              },
+-                        style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 12)),
+-                        child: _isAiLoading
+-                            ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+-                            : const Icon(Icons.send),
+-                      ),
+-                    ],
+-                  ),
+-                ],
+-              ),
+-            );
+-          },
+-        ),
+         ElevatedButton(
+           onPressed: _startVoting,
+-          style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple, padding: const EdgeInsets.all(16)),
++          style: ElevatedButton.styleFrom(
++            backgroundColor: Colors.deepPurple,
++            padding: const EdgeInsets.all(16),
++          ),
+           child: const Text("Lancer les votes !"),
+         ),
+       ],
+@@ -40913,7 +41331,10 @@ class _WhoIsMostLikelyLocalScreenState
+                 ),
+                 Text(
+                   "Qui pourrait le plus $_currentQuestion",
+-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
++                  style: const TextStyle(
++                    fontWeight: FontWeight.bold,
++                    fontSize: 16,
++                  ),
+                   textAlign: TextAlign.center,
+                 ),
+               ],
+@@ -40929,9 +41350,9 @@ class _WhoIsMostLikelyLocalScreenState
+         Text(
+           voter,
+           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+-                color: Colors.deepPurpleAccent,
+-                fontWeight: FontWeight.bold,
+-              ),
++            color: Colors.deepPurpleAccent,
++            fontWeight: FontWeight.bold,
++          ),
+           textAlign: TextAlign.center,
+         ),
+         const SizedBox(height: 8),
+@@ -40949,9 +41370,15 @@ class _WhoIsMostLikelyLocalScreenState
+               return Card(
+                 margin: const EdgeInsets.symmetric(vertical: 4),
+                 child: ListTile(
+-                  title: Text(target, style: const TextStyle(fontWeight: FontWeight.bold)),
++                  title: Text(
++                    target,
++                    style: const TextStyle(fontWeight: FontWeight.bold),
++                  ),
+                   leading: CircleAvatar(child: Text(target[0].toUpperCase())),
+-                  trailing: const Icon(Icons.touch_app, color: Colors.deepPurpleAccent),
++                  trailing: const Icon(
++                    Icons.touch_app,
++                    color: Colors.deepPurpleAccent,
++                  ),
+                   onTap: () => _recordVote(target),
+                 ),
+               );
+@@ -40965,7 +41392,7 @@ class _WhoIsMostLikelyLocalScreenState
+   Widget _buildResultsStep() {
+     final tally = _calculateTally();
+     final winners = _getWinners(tally);
+-    
++
+     return Column(
+       key: const ValueKey('results_step'),
+       crossAxisAlignment: CrossAxisAlignment.stretch,
+@@ -40976,11 +41403,17 @@ class _WhoIsMostLikelyLocalScreenState
+             padding: const EdgeInsets.all(16.0),
+             child: Column(
+               children: [
+-                const Text("SITUATION :", style: TextStyle(color: Colors.white54, fontSize: 12)),
++                const Text(
++                  "SITUATION :",
++                  style: TextStyle(color: Colors.white54, fontSize: 12),
++                ),
+                 const SizedBox(height: 4),
+                 Text(
+                   "Qui pourrait le plus $_currentQuestion",
+-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
++                  style: const TextStyle(
++                    fontSize: 16,
++                    fontWeight: FontWeight.bold,
++                  ),
+                   textAlign: TextAlign.center,
+                 ),
+               ],
+@@ -40989,7 +41422,9 @@ class _WhoIsMostLikelyLocalScreenState
+         ),
+         const SizedBox(height: 16),
+         Text(
+-          winners.length > 1 ? "Égalité !" : "Désigné par le groupe :",
++          winners.length > 1
++              ? "Égalité ! (+1 pt chacun)"
++              : "Désigné par le groupe (+1 pt) :",
+           style: Theme.of(context).textTheme.titleLarge,
+           textAlign: TextAlign.center,
+         ),
+@@ -40997,15 +41432,26 @@ class _WhoIsMostLikelyLocalScreenState
+         Wrap(
+           alignment: WrapAlignment.center,
+           spacing: 8,
+-          children: winners.map((w) => Chip(
+-            avatar: CircleAvatar(child: Text(w[0])),
+-            label: Text(w, style: const TextStyle(fontWeight: FontWeight.bold)),
+-            backgroundColor: Colors.amber,
+-            labelStyle: const TextStyle(color: Colors.black),
+-          )).toList(),
++          children:
++              winners
++                  .map(
++                    (w) => Chip(
++                      avatar: CircleAvatar(child: Text(w[0])),
++                      label: Text(
++                        w,
++                        style: const TextStyle(fontWeight: FontWeight.bold),
++                      ),
++                      backgroundColor: Colors.amber,
++                      labelStyle: const TextStyle(color: Colors.black),
++                    ),
++                  )
++                  .toList(),
+         ),
+         const SizedBox(height: 16),
+-        const Text("Détail des votes :", style: TextStyle(fontWeight: FontWeight.bold)),
++        const Text(
++          "Détail des votes :",
++          style: TextStyle(fontWeight: FontWeight.bold),
++        ),
+         const SizedBox(height: 8),
+         Expanded(
+           child: ListView.builder(
+@@ -41013,28 +41459,48 @@ class _WhoIsMostLikelyLocalScreenState
+             itemBuilder: (context, index) {
+               final player = widget.players[index];
+               final votesReceived = tally[player] ?? 0;
+-              final votersList = _votes.entries
+-                  .where((e) => e.value == player)
+-                  .map((e) => e.key)
+-                  .toList();
++              final votersList =
++                  _votes.entries
++                      .where((e) => e.value == player)
++                      .map((e) => e.key)
++                      .toList();
+ 
+               return Card(
+-                margin: const EdgeInsets.symmetric(vertical: 4),
++                margin: const EdgeInsets.symmetric(vertical: 2),
+                 child: ListTile(
+                   leading: CircleAvatar(child: Text(player[0])),
+-                  title: Text(player, style: const TextStyle(fontWeight: FontWeight.bold)),
+-                  subtitle: votersList.isNotEmpty 
+-                      ? Text("Voté par : ${votersList.join(', ')}", style: const TextStyle(fontSize: 12))
+-                      : const Text("Aucun vote", style: TextStyle(fontSize: 12, color: Colors.grey)),
++                  title: Text(
++                    player,
++                    style: const TextStyle(fontWeight: FontWeight.bold),
++                  ),
++                  subtitle:
++                      votersList.isNotEmpty
++                          ? Text(
++                            "Voté par : ${votersList.join(', ')}",
++                            style: const TextStyle(fontSize: 12),
++                          )
++                          : const Text(
++                            "Aucun vote",
++                            style: TextStyle(fontSize: 12, color: Colors.grey),
++                          ),
+                   trailing: Container(
+-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
++                    padding: const EdgeInsets.symmetric(
++                      horizontal: 12,
++                      vertical: 6,
++                    ),
+                     decoration: BoxDecoration(
+-                      color: votesReceived > 0 ? Colors.deepPurple : Colors.grey[800],
++                      color:
++                          votesReceived > 0
++                              ? Colors.deepPurple
++                              : Colors.grey[800],
+                       borderRadius: BorderRadius.circular(12),
+                     ),
+                     child: Text(
+                       "$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}",
+-                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
++                      style: const TextStyle(
++                        color: Colors.white,
++                        fontWeight: FontWeight.bold,
++                      ),
+                     ),
+                   ),
+                 ),
+@@ -41045,7 +41511,10 @@ class _WhoIsMostLikelyLocalScreenState
+         const SizedBox(height: 12),
+         ElevatedButton(
+           onPressed: _getNewQuestion,
+-          style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.all(16)),
++          style: ElevatedButton.styleFrom(
++            backgroundColor: Colors.green,
++            padding: const EdgeInsets.all(16),
++          ),
+           child: const Text("Situation suivante"),
+         ),
+       ],
+@@ -41053,7 +41522,6 @@ class _WhoIsMostLikelyLocalScreenState
+   }
+ }
+ 
+-
+ enum CodenamesLocalGameState {
+   setup,
+   passPhoneToMasterSpy,

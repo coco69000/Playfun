@@ -16,19 +16,35 @@ const List<Map<String, dynamic>> worldGames = [
   {'name': 'Gribouillis', 'icon': Icons.draw, 'image': 'gribouillis.webp'},
   {'name': 'Zéro Pointé', 'icon': Icons.exposure_zero, 'image': null},
   {'name': 'Poker', 'icon': Icons.monetization_on, 'image': 'poker.webp'},
-  {'name': 'Infiltré & Mr. White', 'icon': Icons.visibility_off, 'image': 'Undercover.webp'},
+  {
+    'name': 'Infiltré & Mr. White',
+    'icon': Icons.visibility_off,
+    'image': 'Undercover.webp',
+  },
   {'name': 'La Patate Chaude', 'icon': Icons.whatshot, 'image': null},
   {'name': 'Petit Bac', 'icon': Icons.school, 'image': 'petitbac.webp'},
   {'name': 'Président', 'icon': Icons.king_bed, 'image': 'president.webp'},
   {'name': 'Skull', 'icon': Icons.style, 'image': 'skull.webp'},
   {'name': 'Pictionary', 'icon': Icons.palette, 'image': 'pictionary.webp'},
   {'name': 'Just One', 'icon': Icons.lightbulb, 'image': 'justone.webp'},
-  {'name': 'Loup-Garou', 'icon': Icons.nightlight_round, 'image': 'loupgarou.webp'},
+  {
+    'name': 'Loup-Garou',
+    'icon': Icons.nightlight_round,
+    'image': 'loupgarou.webp',
+  },
   {'name': 'Dobble', 'icon': Icons.remove_red_eye, 'image': 'dobble.webp'},
   {'name': 'Uno', 'icon': Icons.style, 'image': 'uno.webp'},
   {'name': 'Taboo', 'icon': Icons.block_flipped, 'image': null},
-  {'name': 'Bataille Navale', 'icon': Icons.anchor, 'image': 'bataillenaval.webp'},
-  {'name': 'Mille Bornes', 'icon': Icons.directions_car, 'image': 'millebornes.webp'},
+  {
+    'name': 'Bataille Navale',
+    'icon': Icons.anchor,
+    'image': 'bataillenaval.webp',
+  },
+  {
+    'name': 'Mille Bornes',
+    'icon': Icons.directions_car,
+    'image': 'millebornes.webp',
+  },
   {'name': 'Rami', 'icon': Icons.style, 'image': 'rami.webp'},
   {'name': 'Belote', 'icon': Icons.style, 'image': null},
   {'name': 'Petits Chevaux', 'icon': Icons.pets, 'image': 'petitchevaux.webp'},
@@ -56,7 +72,10 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFF2E003E), Color(0xFF000000)], // Violet sombre vers Noir
+            colors: [
+              Color(0xFF2E003E),
+              Color(0xFF000000),
+            ], // Violet sombre vers Noir
           ),
         ),
         child: SafeArea(
@@ -70,7 +89,10 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                   decoration: InputDecoration(
                     labelText: "Votre pseudo",
                     labelStyle: const TextStyle(color: Colors.white70),
-                    prefixIcon: const Icon(Icons.person, color: Colors.cyanAccent),
+                    prefixIcon: const Icon(
+                      Icons.person,
+                      color: Colors.cyanAccent,
+                    ),
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.1), // Effet verre
                     border: OutlineInputBorder(
@@ -87,7 +109,8 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    childAspectRatio: 0.8, // <--- Modifié de 1.1 à 0.8 (Rectangulaire)
+                    childAspectRatio:
+                        0.8, // <--- Modifié de 1.1 à 0.8 (Rectangulaire)
                   ),
                   itemCount: worldGames.length,
                   itemBuilder: (context, index) {
@@ -110,15 +133,20 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.deepPurple[900]?.withOpacity(0.4),
-        image: imageName != null
-            ? DecorationImage(
-                image: AssetImage('assets/images/$imageName'),
-                fit: BoxFit.cover,
-              )
-            : null,
+        image:
+            imageName != null
+                ? DecorationImage(
+                  image: AssetImage('assets/images/$imageName'),
+                  fit: BoxFit.cover,
+                )
+                : null,
         border: Border.all(color: Colors.white.withOpacity(0.2)),
         boxShadow: [
-          BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(0, 4)),
+          BoxShadow(
+            color: Colors.black45,
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
         ],
       ),
       child: ClipRRect(
@@ -127,26 +155,34 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
           // Flou lÃ©ger
           filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
           child: Material(
-            color: Colors.black.withOpacity(0.45), // Assombrissement pour le texte
+            color: Colors.black.withOpacity(
+              0.45,
+            ), // Assombrissement pour le texte
             child: InkWell(
               borderRadius: BorderRadius.circular(20),
               onTap: () {
                 if (_nameController.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Veuillez d'abord entrer un pseudo !")),
+                    const SnackBar(
+                      content: Text("Veuillez d'abord entrer un pseudo !"),
+                    ),
                   );
                   return;
                 }
-                final String playerId = Provider.of<String>(context, listen: false);
+                final String playerId = Provider.of<String>(
+                  context,
+                  listen: false,
+                );
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => CreateGameScreen(
-                      playerName: _nameController.text.trim(),
-                      isWorldMode: true,
-                      initialGame: game['name'],
-                      playerId: playerId,
-                    ),
+                    builder:
+                        (_) => CreateGameScreen(
+                          playerName: _nameController.text.trim(),
+                          isWorldMode: true,
+                          initialGame: game['name'],
+                          playerId: playerId,
+                        ),
                   ),
                 );
               },
@@ -159,16 +195,20 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                       color: Colors.deepPurpleAccent.withOpacity(0.3),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(game['icon'], size: imageName != null ? 28 : 40, color: Colors.cyanAccent),
+                    child: Icon(
+                      game['icon'],
+                      size: imageName != null ? 28 : 40,
+                      color: Colors.cyanAccent,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Text(
                     game['name'],
                     style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        shadows: [Shadow(color: Colors.black, blurRadius: 4)]
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      shadows: [Shadow(color: Colors.black, blurRadius: 4)],
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -195,12 +235,14 @@ class SearchingForPlayersScreen extends StatefulWidget {
   final bool dobbleSymbolsPerCard;
   final bool isSimplifiedLiar;
   final String liarVoteMode;
+  final String quiPourraitVoteMode; // <--- AJOUT
   final List<String>? petitBacCategories;
   final int? petitBacTime;
   final bool presidentRevolution;
   final bool pictionaryOnly30Strokes;
   final bool? pictionaryUseTeams;
   final bool justOneAllowInvalidClues;
+  final bool devineTeteUseTeams;
   final Map<String, int>? selectedLoupGarouRoles;
   final int? unoStartingCards;
   final bool? unoStackDraws;
@@ -215,18 +257,17 @@ class SearchingForPlayersScreen extends StatefulWidget {
   final int? photoRoulettePhotosPerPlayer;
   final String? photoRouletteMediaType;
   final String playerId;
-  final bool isRanked; // <--- NOUVEAU: Ranked flag
+  final bool isRanked;
   final String? aiInstructions;
   final List<String>? aiWords;
   final int? timesUpTotalRounds;
   final String? dominoesMode;
   final int? dominoesTargetScore;
 
-
   const SearchingForPlayersScreen({
     Key? key,
     required this.playerId,
-    this.isRanked = false, // <--- NOUVEAU
+    this.isRanked = false,
     required this.playerName,
     required this.gameName,
     required this.playerCount,
@@ -238,12 +279,14 @@ class SearchingForPlayersScreen extends StatefulWidget {
     this.dobbleSymbolsPerCard = false,
     this.isSimplifiedLiar = false,
     this.liarVoteMode = 'simultaneous',
+    this.quiPourraitVoteMode = 'grouper', // <--- AJOUT
     this.petitBacCategories,
     this.petitBacTime,
     this.presidentRevolution = false,
     this.pictionaryOnly30Strokes = false,
     this.pictionaryUseTeams,
     this.justOneAllowInvalidClues = false,
+    this.devineTeteUseTeams = false,
     this.selectedLoupGarouRoles,
     this.unoStartingCards,
     this.unoStackDraws,
@@ -265,10 +308,12 @@ class SearchingForPlayersScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SearchingForPlayersScreenState createState() => _SearchingForPlayersScreenState();
+  _SearchingForPlayersScreenState createState() =>
+      _SearchingForPlayersScreenState();
 }
 
-class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> with SingleTickerProviderStateMixin {
+class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animController; // Ajoutez cette variable
 
   String _statusMessage = "PrÃ©paration de la recherche...";
@@ -292,12 +337,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
     _animController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
-    )
-      ..repeat();
+    )..repeat();
 
     _startSearch();
   }
-
 
   @override
   void dispose() {
@@ -315,8 +358,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
   String _generateLoupGarouRolesHash(Map<String, int> roles) {
     final activeRoles = roles.entries.where((entry) => entry.value > 0);
     if (activeRoles.isEmpty) return "";
-    final roleStrings = activeRoles.map((entry) => '${entry.key}:${entry
-        .value}').toList();
+    final roleStrings =
+        activeRoles.map((entry) => '${entry.key}:${entry.value}').toList();
     roleStrings.sort();
     return roleStrings.join(',');
   }
@@ -332,7 +375,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
       // On cherche d'abord s'il existe une partie active qui a perdu un joueur
       // et qui cherche un remplaÃ§ant avec les mÃªmes paramÃ¨tres.
 
-      Query refillingQuery = _db.collection('games')
+      Query refillingQuery = _db
+          .collection('games')
           .where('gameState', isEqualTo: 'refilling')
           .where('gameType', isEqualTo: widget.gameName)
           .where('scope', isEqualTo: _currentScope);
@@ -344,64 +388,59 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
             .where('hostLevel', isGreaterThanOrEqualTo: myLevel - 2)
             .where('hostLevel', isLessThanOrEqualTo: myLevel + 2);
       }
-          
+
       if (widget.videoPreference == 'with') {
         refillingQuery = refillingQuery.where('videoEnabled', isEqualTo: true);
       } else if (widget.videoPreference == 'without') {
         refillingQuery = refillingQuery.where('videoEnabled', isEqualTo: false);
       }
 
-      // Filtres de difficultÃ© (sauf pour les jeux sans difficultÃ©)
-      if (![
-        'Blokus',
-        'Gribouillis',
-        'Petit Bac',
-        'PrÃ©sident',
-        'Le Roi des MÃ¨mes',
-        'Loup-Garou',
-        'Dobble',
-        'La Patate Chaude',
-        'Uno',
-        'ZÃ©ro PointÃ©',
-        'Poker',
-        'Photo Roulette'
-      ].contains(widget.gameName)) {
-        refillingQuery =
-            refillingQuery.where('difficulty', isEqualTo: widget.difficulty);
-      } else {
-        // Pour certains jeux comme ZÃ©ro PointÃ©/Poker stockÃ©s avec 'N/A', on peut filtrer ou non selon votre structure.
-        // Si votre CreateGame met 'difficulty' Ã  'N/A' pour ces jeux, gardez la ligne ci-dessous :
-        refillingQuery =
-            refillingQuery.where('difficulty', isEqualTo: widget.difficulty);
-      }
+      // Filtres de difficulté
+      refillingQuery = refillingQuery.where(
+        'difficulty',
+        isEqualTo: widget.difficulty,
+      );
 
       // Application des filtres spÃ©cifiques au jeu (Copie de la logique de filtre)
       switch (widget.gameName) {
         case 'Gribouillis':
           refillingQuery = refillingQuery.where(
-              'gribouillisMode', isEqualTo: widget.gribouillisMode);
+            'gribouillisMode',
+            isEqualTo: widget.gribouillisMode,
+          );
           if (widget.gribouillisMode == 'ComplÃ©ment') {
             refillingQuery = refillingQuery.where(
-                'gribouillisSettings.ajouter1',
-                isEqualTo: widget.gribouillisAjouter1);
+              'gribouillisSettings.ajouter1',
+              isEqualTo: widget.gribouillisAjouter1,
+            );
           }
           break;
         case 'ZÃ©ro PointÃ©':
           refillingQuery = refillingQuery.where(
-              'targetScore', isEqualTo: widget.zeroPointeTargetScore);
+            'targetScore',
+            isEqualTo: widget.zeroPointeTargetScore,
+          );
           break;
         case 'Poker':
           refillingQuery = refillingQuery.where(
-              'startChips', isEqualTo: widget.pokerStartChips);
+            'startChips',
+            isEqualTo: widget.pokerStartChips,
+          );
           refillingQuery = refillingQuery.where(
-              'smallBlind', isEqualTo: widget.pokerSmallBlind);
+            'smallBlind',
+            isEqualTo: widget.pokerSmallBlind,
+          );
           break;
         case 'Le Menteur':
           refillingQuery = refillingQuery.where(
-              'isSimplifiedLiar', isEqualTo: widget.isSimplifiedLiar);
+            'isSimplifiedLiar',
+            isEqualTo: widget.isSimplifiedLiar,
+          );
           if (widget.isSimplifiedLiar) {
             refillingQuery = refillingQuery.where(
-                'liarVoteMode', isEqualTo: widget.liarVoteMode);
+              'liarVoteMode',
+              isEqualTo: widget.liarVoteMode,
+            );
           }
           break;
         case 'La Patate Chaude':
@@ -409,48 +448,69 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           break;
         case 'Petit Bac':
           refillingQuery = refillingQuery.where(
-              'petitBacRoundTime', isEqualTo: widget.petitBacTime);
+            'petitBacRoundTime',
+            isEqualTo: widget.petitBacTime,
+          );
           break;
         case 'PrÃ©sident':
           refillingQuery = refillingQuery.where(
-              'revolutionParam', isEqualTo: widget.presidentRevolution);
+            'revolutionParam',
+            isEqualTo: widget.presidentRevolution,
+          );
           break;
         case 'Pictionary':
-          refillingQuery = refillingQuery.where('pictionaryOnly30Strokes',
-              isEqualTo: widget.pictionaryOnly30Strokes);
+          refillingQuery = refillingQuery.where(
+            'pictionaryOnly30Strokes',
+            isEqualTo: widget.pictionaryOnly30Strokes,
+          );
           break;
         case 'Just One':
-          refillingQuery = refillingQuery.where('justOneAllowInvalidClues',
-              isEqualTo: widget.justOneAllowInvalidClues);
+          refillingQuery = refillingQuery.where(
+            'justOneAllowInvalidClues',
+            isEqualTo: widget.justOneAllowInvalidClues,
+          );
           break;
         case 'Loup-Garou':
-        // Note: Le hash des rÃ´les n'est pas toujours stockÃ© dans 'games' de la mÃªme faÃ§on que 'matchmaking'.
-        // Si vous stockez 'roleSettings', il est difficile de filtrer parfaitement ici sans hash.
-        // On suppose ici que l'utilisateur veut n'importe quelle partie LG ou que vous avez ajoutÃ© loupGarouRolesHash dans 'games'.
-        // Si vous l'avez ajoutÃ© dans createGame :
+          // Note: Le hash des rÃ´les n'est pas toujours stockÃ© dans 'games' de la mÃªme faÃ§on que 'matchmaking'.
+          // Si vous stockez 'roleSettings', il est difficile de filtrer parfaitement ici sans hash.
+          // On suppose ici que l'utilisateur veut n'importe quelle partie LG ou que vous avez ajoutÃ© loupGarouRolesHash dans 'games'.
+          // Si vous l'avez ajoutÃ© dans createGame :
           if (widget.selectedLoupGarouRoles != null) {
             final rolesHash = _generateLoupGarouRolesHash(
-                widget.selectedLoupGarouRoles!);
+              widget.selectedLoupGarouRoles!,
+            );
             // Assurez-vous d'ajouter ce champ lors de la crÃ©ation de la partie dans FirebaseService
             // refillingQuery = refillingQuery.where('loupGarouRolesHash', isEqualTo: rolesHash);
           }
           break;
         case 'Dobble':
-          refillingQuery = refillingQuery.where('dobbleSymbolsPerCard',
-              isEqualTo: widget.dobbleSymbolsPerCard ? 8 : 6);
+          refillingQuery = refillingQuery.where(
+            'dobbleSymbolsPerCard',
+            isEqualTo: widget.dobbleSymbolsPerCard ? 8 : 6,
+          );
           break;
         case 'Uno':
           refillingQuery = refillingQuery.where(
-              'unoStartingCards', isEqualTo: widget.unoStartingCards);
+            'unoStartingCards',
+            isEqualTo: widget.unoStartingCards,
+          );
           refillingQuery = refillingQuery.where(
-              'unoStackDraws', isEqualTo: widget.unoStackDraws);
+            'unoStackDraws',
+            isEqualTo: widget.unoStackDraws,
+          );
           break;
         case 'Photo Roulette':
-          refillingQuery = refillingQuery.where('photoRouletteSettings.rounds',
-              isEqualTo: widget.photoRouletteRounds);
           refillingQuery = refillingQuery.where(
-              'photoRouletteSettings.mediaType',
-              isEqualTo: widget.photoRouletteMediaType);
+            'photoRouletteSettings.rounds',
+            isEqualTo: widget.photoRouletteRounds,
+          );
+          refillingQuery = refillingQuery.where(
+            'photoRouletteSettings.mediaType',
+            isEqualTo: widget.photoRouletteMediaType,
+          );
+          break;
+        case 'Devine Tête':
+          refillingQuery = refillingQuery.where('devineTeteUseTeams', isEqualTo: widget.devineTeteUseTeams);
           break;
       }
 
@@ -469,16 +529,23 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
         if (currentCount < targetCount) {
           // Tenter de rejoindre
           bool joined = await _firebaseService.joinRefillingGame(
-              gameDoc.id, widget.playerName, playerId);
+            gameDoc.id,
+            widget.playerName,
+            playerId,
+          );
 
           if (joined) {
             if (!_isDisposed) {
               // Redirection immÃ©diate vers le jeu
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (_) =>
-                    MultiplayerGameScreen(
-                        gameCode: gameDoc.id, playerId: playerId)),
+                MaterialPageRoute(
+                  builder:
+                      (_) => MultiplayerGameScreen(
+                        gameCode: gameDoc.id,
+                        playerId: playerId,
+                      ),
+                ),
               );
             }
             return; // SuccÃ¨s, on arrÃªte tout ici
@@ -517,26 +584,38 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
       // Application des filtres (Exactement les mÃªmes que ci-dessus, mais sur la collection matchmaking)
       switch (widget.gameName) {
         case 'Gribouillis':
-          query =
-              query.where('gribouillisMode', isEqualTo: widget.gribouillisMode);
+          query = query.where(
+            'gribouillisMode',
+            isEqualTo: widget.gribouillisMode,
+          );
           if (widget.gribouillisMode == 'ComplÃ©ment') {
             query = query.where(
-                'gribouillisAjouter1', isEqualTo: widget.gribouillisAjouter1);
+              'gribouillisAjouter1',
+              isEqualTo: widget.gribouillisAjouter1,
+            );
           }
           break;
         case 'ZÃ©ro PointÃ©':
           query = query.where(
-              'zeroPointeTargetScore', isEqualTo: widget.zeroPointeTargetScore);
+            'zeroPointeTargetScore',
+            isEqualTo: widget.zeroPointeTargetScore,
+          );
           break;
         case 'Poker':
-          query =
-              query.where('pokerStartChips', isEqualTo: widget.pokerStartChips);
-          query =
-              query.where('pokerSmallBlind', isEqualTo: widget.pokerSmallBlind);
+          query = query.where(
+            'pokerStartChips',
+            isEqualTo: widget.pokerStartChips,
+          );
+          query = query.where(
+            'pokerSmallBlind',
+            isEqualTo: widget.pokerSmallBlind,
+          );
           break;
         case 'Le Menteur':
           query = query.where(
-              'isSimplifiedLiar', isEqualTo: widget.isSimplifiedLiar);
+            'isSimplifiedLiar',
+            isEqualTo: widget.isSimplifiedLiar,
+          );
           if (widget.isSimplifiedLiar) {
             query = query.where('liarVoteMode', isEqualTo: widget.liarVoteMode);
           }
@@ -549,48 +628,67 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           break;
         case 'PrÃ©sident':
           query = query.where(
-              'presidentRevolution', isEqualTo: widget.presidentRevolution);
+            'presidentRevolution',
+            isEqualTo: widget.presidentRevolution,
+          );
           break;
         case 'Pictionary':
-          query = query.where('pictionaryOnly30Strokes',
-              isEqualTo: widget.pictionaryOnly30Strokes);
+          query = query.where(
+            'pictionaryOnly30Strokes',
+            isEqualTo: widget.pictionaryOnly30Strokes,
+          );
           break;
         case 'Just One':
-          query = query.where('justOneAllowInvalidClues',
-              isEqualTo: widget.justOneAllowInvalidClues);
+          query = query.where(
+            'justOneAllowInvalidClues',
+            isEqualTo: widget.justOneAllowInvalidClues,
+          );
           break;
         case 'Loup-Garou':
           if (widget.selectedLoupGarouRoles != null) {
             final rolesHash = _generateLoupGarouRolesHash(
-                widget.selectedLoupGarouRoles!);
+              widget.selectedLoupGarouRoles!,
+            );
             query = query.where('loupGarouRolesHash', isEqualTo: rolesHash);
           }
           break;
         case 'Dobble':
           query = query.where(
-              'dobbleSymbolsPerCard', isEqualTo: widget.dobbleSymbolsPerCard);
+            'dobbleSymbolsPerCard',
+            isEqualTo: widget.dobbleSymbolsPerCard,
+          );
           break;
         case 'Uno':
           query = query.where(
-              'unoStartingCards', isEqualTo: widget.unoStartingCards);
+            'unoStartingCards',
+            isEqualTo: widget.unoStartingCards,
+          );
           query = query.where('unoStackDraws', isEqualTo: widget.unoStackDraws);
           break;
         case 'Photo Roulette':
           query = query.where(
-              'photoRouletteRounds', isEqualTo: widget.photoRouletteRounds);
-          query = query.where('photoRouletteMediaType',
-              isEqualTo: widget.photoRouletteMediaType);
+            'photoRouletteRounds',
+            isEqualTo: widget.photoRouletteRounds,
+          );
+          query = query.where(
+            'photoRouletteMediaType',
+            isEqualTo: widget.photoRouletteMediaType,
+          );
+          break;
+        case 'Devine Tête':
+          query = query.where('devineTeteUseTeams', isEqualTo: widget.devineTeteUseTeams);
           break;
       }
 
       final querySnapshot = await query.get();
 
       // Filter out rooms that only contain the current player (self-created rooms)
-      final validDocs = querySnapshot.docs.where((doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        final List roomPlayers = List.from(data['players'] ?? []);
-        return !(roomPlayers.length == 1 && roomPlayers.contains(playerId));
-      }).toList();
+      final validDocs =
+          querySnapshot.docs.where((doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            final List roomPlayers = List.from(data['players'] ?? []);
+            return !(roomPlayers.length == 1 && roomPlayers.contains(playerId));
+          }).toList();
 
       if (validDocs.isNotEmpty) {
         // Salle trouvÃ©e avec d'autres joueurs -> Rejoindre
@@ -601,7 +699,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           final freshSnap = await transaction.get(roomRef);
           final roomData = freshSnap.data() as Map<String, dynamic>?;
 
-          if (!freshSnap.exists || roomData == null ||
+          if (!freshSnap.exists ||
+              roomData == null ||
               roomData['status'] != 'waiting') {
             return;
           }
@@ -627,8 +726,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
         String? loupGarouRolesHash;
         if (widget.gameName == 'Loup-Garou' &&
             widget.selectedLoupGarouRoles != null) {
-          loupGarouRolesHash =
-              _generateLoupGarouRolesHash(widget.selectedLoupGarouRoles!);
+          loupGarouRolesHash = _generateLoupGarouRolesHash(
+            widget.selectedLoupGarouRoles!,
+          );
         }
 
         await newRoomRef.set({
@@ -663,6 +763,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
           'photoRouletteRounds': widget.photoRouletteRounds,
           'photoRoulettePhotosPerPlayer': widget.photoRoulettePhotosPerPlayer,
           'photoRouletteMediaType': widget.photoRouletteMediaType,
+          'devineTeteUseTeams': widget.devineTeteUseTeams,
         });
 
         if (!_isDisposed) {
@@ -674,7 +775,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
       if (!_isDisposed) {
         setState(() {
           _statusMessage =
-          "Erreur de connexion au matchmaking. Veuillez rÃ©essayer.";
+              "Erreur de connexion au matchmaking. Veuillez rÃ©essayer.";
         });
         print("Erreur _findAndJoinGame: $e");
       }
@@ -715,12 +816,17 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
         .collection('matchmaking')
         .doc(_matchmakingRoomId!)
         .snapshots()
-        .listen(_onMatchmakingUpdate, onError: (error) {
-      print("Erreur d'Ã©coute de la salle: $error");
-      if (!_isDisposed) {
-        setState(() => _statusMessage = "Erreur de connexion Ã  la salle.");
-      }
-    });
+        .listen(
+          _onMatchmakingUpdate,
+          onError: (error) {
+            print("Erreur d'Ã©coute de la salle: $error");
+            if (!_isDisposed) {
+              setState(
+                () => _statusMessage = "Erreur de connexion Ã  la salle.",
+              );
+            }
+          },
+        );
   }
 
   Future<void> _onMatchmakingUpdate(DocumentSnapshot snapshot) async {
@@ -740,11 +846,11 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (_) =>
-                      MultiplayerGameScreen(
-                          gameCode: data['gameCode'],
-                          playerId: widget.playerId // <--- CORRECTION ICI
-                      )
+                builder:
+                    (_) => MultiplayerGameScreen(
+                      gameCode: data['gameCode'],
+                      playerId: widget.playerId, // <--- CORRECTION ICI
+                    ),
               ),
             );
           }
@@ -752,7 +858,6 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
       }
       return;
     }
-
 
     if (data['status'] == 'full') {
       final playerId = widget.playerId; // <--- CORRECTION ICI
@@ -822,18 +927,20 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
             await snapshot.reference.delete();
           } catch (deleteError) {
             print(
-                "Impossible de supprimer la salle de matchmaking aprÃ¨s erreur: $deleteError");
+              "Impossible de supprimer la salle de matchmaking aprÃ¨s erreur: $deleteError",
+            );
           }
         }
       }
     } else {
       if (!_isDisposed) {
         // Only show "room found" if there are OTHER players (not just the current player alone)
-        final otherPlayers = players.where((p) => p != widget.playerId).toList();
+        final otherPlayers =
+            players.where((p) => p != widget.playerId).toList();
         setState(() {
           if (otherPlayers.isNotEmpty) {
             _statusMessage =
-            "Salle trouvÃ©e ! ${players.length} / ${widget.playerCount} joueurs.";
+                "Salle trouvÃ©e ! ${players.length} / ${widget.playerCount} joueurs.";
           } else {
             _statusMessage = "En attente d'autres joueurs...";
           }
@@ -848,8 +955,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
 
     if (_currentScope == 'pays') {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Recherche Ã©tendue au monde entier."),
-            duration: Duration(seconds: 3)),
+        SnackBar(
+          content: Text("Recherche Ã©tendue au monde entier."),
+          duration: Duration(seconds: 3),
+        ),
       );
       _leaveMatchmakingQueue().then((_) {
         if (!_isDisposed) {
@@ -883,8 +992,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
     final playerId = widget.playerId; // <--- ET ICI
 
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Redirection vers une salle presque pleine..."),
-            duration: Duration(seconds: 3))
+      SnackBar(
+        content: Text("Redirection vers une salle presque pleine..."),
+        duration: Duration(seconds: 3),
+      ),
     );
 
     await _leaveMatchmakingQueue();
@@ -905,15 +1016,18 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
             .where('level', isLessThanOrEqualTo: myLevel + 2);
       }
 
-      final querySnapshot = await query.orderBy('createdAt', descending: false).limit(1).get();
+      final querySnapshot =
+          await query.orderBy('createdAt', descending: false).limit(1).get();
 
       // Filter out rooms where this player is the only member
-      final validRooms = querySnapshot.docs.where((doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        final List roomPlayers = List.from(data['players'] ?? []);
-        return roomPlayers.isNotEmpty &&
-            !(roomPlayers.length == 1 && roomPlayers.contains(widget.playerId));
-      }).toList();
+      final validRooms =
+          querySnapshot.docs.where((doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            final List roomPlayers = List.from(data['players'] ?? []);
+            return roomPlayers.isNotEmpty &&
+                !(roomPlayers.length == 1 &&
+                    roomPlayers.contains(widget.playerId));
+          }).toList();
 
       if (validRooms.isNotEmpty && !_isDisposed) {
         final fallbackRoom = validRooms.first;
@@ -987,15 +1101,21 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
                 FadeTransition(
                   opacity: Tween(begin: 0.5, end: 0.0).animate(_animController),
                   child: ScaleTransition(
-                    scale: Tween(begin: 1.0, end: 2.5).animate(CurvedAnimation(
-                        parent: _animController, curve: Curves.easeOut)),
+                    scale: Tween(begin: 1.0, end: 2.5).animate(
+                      CurvedAnimation(
+                        parent: _animController,
+                        curve: Curves.easeOut,
+                      ),
+                    ),
                     child: Container(
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                            color: Colors.deepPurpleAccent, width: 2),
+                          color: Colors.deepPurpleAccent,
+                          width: 2,
+                        ),
                       ),
                     ),
                   ),
@@ -1008,21 +1128,28 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen> w
                     color: Colors.deepPurpleAccent,
                     shape: BoxShape.circle,
                     boxShadow: [
-                      BoxShadow(color: Colors.deepPurpleAccent.withOpacity(0.5),
-                          blurRadius: 20)
+                      BoxShadow(
+                        color: Colors.deepPurpleAccent.withOpacity(0.5),
+                        blurRadius: 20,
+                      ),
                     ],
                   ),
                   child: const Icon(
-                      Icons.search, size: 40, color: Colors.white),
+                    Icons.search,
+                    size: 40,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 50),
             Text(
               "Recherche de joueurs...",
-              style: TextStyle(color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 20),
             Padding(

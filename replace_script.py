@@ -1,77 +1,65 @@
-import re
 import sys
 
-def replace_in_file(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
+file_path = r"c:\Users\coren\AndroidStudioProjects\playfun\lib\amis.dart"
+new_class_path = r"c:\Users\coren\AndroidStudioProjects\playfun\new_class.dart"
 
-    # 1. Replace WhoIsMostLikelyLocalScreen
-    match = re.search(r'class WhoIsMostLikelyLocalScreen extends StatefulWidget \{.*?\n\}\n\nclass _WhoIsMostLikelyLocalScreenState\s+extends State<WhoIsMostLikelyLocalScreen> \{.*?\n\}\n', content, flags=re.DOTALL)
-    if not match:
-        print("Could not find WhoIsMostLikelyLocalScreen")
-        return False
-    
-    with open('who_is_replacement.txt', 'r', encoding='utf-8') as f:
-        who_rep = f.read()
-    
-    content = content.replace(match.group(0), who_rep + "\n")
+with open(file_path, "r", encoding="utf-8") as f:
+    lines = f.readlines()
 
-    # 2. Replace _OfflineGameScreenState
-    match2 = re.search(r'class _OfflineGameScreenState extends State<OfflineGameScreen> \{.*?  Widget _buildGameControls\(\) \{.*?\n  \}\n\}\n', content, flags=re.DOTALL)
-    if not match2:
-        print("Could not find _OfflineGameScreenState")
-        return False
-        
-    with open('offline_replacement.txt', 'r', encoding='utf-8') as f:
-        offline_rep = f.read()
-        
-    content = content.replace(match2.group(0), offline_rep + "\n")
-    
-    # 3. Replace GameLobbyScreen up to the truncated part
-    match3 = re.search(r'class GameLobbyScreen extends StatefulWidget \{.*?                  if \(isHost\)\n                    Padding\(\n                      padding: const EdgeInsets.only\(bottom: 8.0\),\n                      child: OutlinedButton.icon\(\n                        icon: Icon\(Icons.person_add\),\n                        label: Text\("Inviter des amis"\),', content, flags=re.DOTALL)
-    if not match3:
-        print("Could not find GameLobbyScreen start")
-        return False
-        
-    with open('lobby_replacement.txt', 'r', encoding='utf-8') as f:
-        lobby_rep = f.read()
-        
-    content = content.replace(match3.group(0), lobby_rep)
+# Locate the first block
+start_idx_block1 = -1
+for i in range(len(lines)):
+    if "if (_selectedGame == 'Qui Pourrait le Plus ?') ...[" in lines[i]:
+        start_idx_block1 = i
+        break
 
-    # 4. We also need to fix the rest of the GameLobbyScreen to close the if (isHost) ...[ that was opened in the new code.
-    # The original had:
-    #                 ),
-    #               if (isHost && isTeamGame)
-    #                 Padding( ... )
-    #               if (isHost)
-    #                 ElevatedButton( ... )
-    #               else
-    #                 Text( ... )
-    #               if (isHost && !canStart)
-    #                 Padding( ... )
-    #             ],
-    #           ),
-    #         ),
-    #       );
-    #     },
-    #   ),
-    # );
+if start_idx_block1 != -1:
+    # The indentation of the if block is 20 spaces. We want to find "                    ],"
+    end_idx_block1 = -1
+    for i in range(start_idx_block1, len(lines)):
+        if lines[i].startswith("                    ],"):
+            end_idx_block1 = i + 1
+            break
     
-    # Let's replace the if (isHost && isTeamGame) to just be part of the UI, wait the new code has if (isHost) ...[ so we need to close the ] after the invite button.
-    # The invite button ends at                       ), (for the ElevatedButton.icon).
-    # We can do this by finding the showModalBottomSheet block end and inserting ],
-    match4 = re.search(r'Navigator\.pop\(ctx\);\n\s+\},\n\s+\),\n\s+\);\n\s+\},\n\s+\),\n\s+\),\n\s+\],\n\s+\);\n\s+\},\n\s+\);\n\s+\},\n\s+\),\n\s+\),', content)
-    if match4:
-        print("Found end of invite button")
-        rep4 = match4.group(0)[:-1] + ",\n                  ],\n"
-        content = content.replace(match4.group(0), rep4)
+    if end_idx_block1 != -1:
+        del lines[start_idx_block1:end_idx_block1]
+        print(f"Deleted first block from {start_idx_block1} to {end_idx_block1}")
     else:
-        print("Could not find end of invite button")
+        print("Could not find end of block 1")
+        sys.exit(1)
+else:
+    print("Could not find start of block 1")
+    sys.exit(1)
 
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(content)
-    print("Success")
-    return True
+# Locate the second block
+start_idx_block2 = -1
+for i in range(len(lines)):
+    if "class _WhoIsMostLikelyLocalScreenState" in lines[i]:
+        start_idx_block2 = i
+        break
 
-if __name__ == '__main__':
-    replace_in_file('lib/amis.dart')
+if start_idx_block2 != -1:
+    end_idx_block2 = -1
+    for i in range(start_idx_block2, len(lines)):
+        if "enum CodenamesLocalGameState" in lines[i]:
+            # The class ends 2 lines before this
+            end_idx_block2 = i - 2
+            break
+            
+    if end_idx_block2 != -1:
+        with open(new_class_path, "r", encoding="utf-8") as f:
+            new_class_content = f.read()
+        
+        lines = lines[:start_idx_block2] + [new_class_content + "\n"] + lines[end_idx_block2:]
+        print(f"Replaced second block from {start_idx_block2} to {end_idx_block2}")
+    else:
+        print("Could not find end of block 2")
+        sys.exit(1)
+else:
+    print("Could not find start of block 2")
+    sys.exit(1)
+
+with open(file_path, "w", encoding="utf-8") as f:
+    f.writelines(lines)
+
+print("Script completed successfully.")
