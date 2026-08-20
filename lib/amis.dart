@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart' hide Transaction;
 import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
@@ -4037,7 +4038,13 @@ class FirebaseService {
       if (players.length >= targetCount) return false; // DÃƒÂ©jÃƒÂ  plein
 
       // Ajouter le joueur
-      players[playerId] = {'name': playerName, 'score': 0};
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      players[playerId] = {
+        'name': playerName,
+        'score': 0,
+        'authUid': currentUser?.uid,
+        'livekitIdentity': playerId,
+      };
 
       Map<String, dynamic> updates = {
         'players': players,
@@ -7682,9 +7689,31 @@ class FirebaseService {
     int? dominoesTargetScore,
     bool? petitsChevauxTeamMode,
   }) async {
+    final String? currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    Map<String, dynamic> enrichedPlayers = {};
+    allPlayers.forEach((pId, pData) {
+      if (pData is Map) {
+        Map<String, dynamic> pMap = Map<String, dynamic>.from(pData);
+        pMap['livekitIdentity'] = pMap['livekitIdentity'] ?? pId;
+        if (!pMap.containsKey('authUid') || pMap['authUid'] == null) {
+          if (currentAuthUid != null && currentAuthUid.isNotEmpty) {
+            pMap['authUid'] = currentAuthUid;
+          }
+        }
+        enrichedPlayers[pId] = pMap;
+      } else {
+        enrichedPlayers[pId] = {
+          'name': pData.toString(),
+          'score': 0,
+          'livekitIdentity': pId,
+          if (currentAuthUid != null && currentAuthUid.isNotEmpty) 'authUid': currentAuthUid,
+        };
+      }
+    });
+
     await _db.collection('games').doc(gameCode).set({
       'hostId': hostId,
-      'players': allPlayers,
+      'players': enrichedPlayers,
       'gameType': gameType,
       if (gameType == 'Blanc Manger Coco') ...{'bmcTargetScore': 10},
       if (gameType == 'Devine Tête') 'devineTeteUseTeams': devineTeteUseTeams,
@@ -8027,7 +8056,12 @@ class FirebaseService {
       'difficulty': difficulty,
       'gameState': 'lobby',
       'players': {
-        playerId: {'name': playerName, 'score': 0},
+        playerId: {
+          'name': playerName,
+          'score': 0,
+          'authUid': FirebaseAuth.instance.currentUser?.uid,
+          'livekitIdentity': playerId,
+        },
       },
       'createdAt': FieldValue.serverTimestamp(),
       'currentRound': 0,
@@ -8331,7 +8365,13 @@ class FirebaseService {
 
             print("[DEBUG joinGame] JOUEURS ACTUELS (AVANT AJOUT): $players");
 
-            players[playerId] = {'name': playerName, 'score': 0};
+            User? currentUser = FirebaseAuth.instance.currentUser;
+            players[playerId] = {
+              'name': playerName,
+              'score': 0,
+              'authUid': currentUser?.uid,
+              'livekitIdentity': playerId,
+            };
 
             print(
               "[DEBUG joinGame] JOUEURS MIS Ãƒâ‚¬ JOUR (APRÃƒË†S AJOUT): $players",
@@ -19541,12 +19581,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     _livekitService.addListener(() {
       if (_livekitService.localUserJoined &&
           _livekitService.localIdentity.isNotEmpty) {
+        final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
         FirebaseFirestore.instance
             .collection('games')
             .doc(widget.gameCode)
             .update({
               'players.${widget.playerId}.livekitIdentity':
                   _livekitService.localIdentity,
+              if (currentAuthUid != null && currentAuthUid.isNotEmpty)
+                'players.${widget.playerId}.authUid': currentAuthUid,
             });
       }
     });
@@ -28694,15 +28737,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           child: Wrap(
             alignment: WrapAlignment.center,
             spacing: 12,
-            children: players.entries.map((e) {
-              return Text(
-                "${e.value['name']}: ${scores[e.key] ?? 0}",
-                style: TextStyle(
-                  color: e.key == judgeId ? Colors.amber : Colors.white70,
-                  fontWeight: e.key == judgeId ? FontWeight.bold : FontWeight.normal,
-                ),
-              );
-            }).toList(),
+            children:
+                players.entries.map((e) {
+                  return Text(
+                    "${e.value['name']}: ${scores[e.key] ?? 0}",
+                    style: TextStyle(
+                      color: e.key == judgeId ? Colors.amber : Colors.white70,
+                      fontWeight:
+                          e.key == judgeId
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                    ),
+                  );
+                }).toList(),
           ),
         ),
         SizedBox(height: 12),
@@ -28820,14 +28867,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
 
     List<MapEntry<String, String>> shuffledAnswers =
-        playedCards.entries.map((e) => MapEntry<String, String>(e.key, e.value.toString())).toList()..shuffle();
+        playedCards.entries
+            .map((e) => MapEntry<String, String>(e.key, e.value.toString()))
+            .toList()
+          ..shuffle();
 
     return Column(
       children: [
         Text(
-          isJudge
-              ? "Choisissez la meilleure réponse !"
-              : "Le Juge choisit...",
+          isJudge ? "Choisissez la meilleure réponse !" : "Le Juge choisit...",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 16),
@@ -28849,26 +28897,28 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       fontSize: 16,
                     ),
                   ),
-                  subtitle: !isJudge
-                      ? Text(
-                          "En attente du choix du juge...",
-                          style: TextStyle(color: Colors.grey, fontSize: 11),
-                        )
-                      : null,
-                  trailing: isJudge
-                      ? ElevatedButton(
-                          onPressed: () {
-                            _firebaseService.judgeBMCWinner(
-                              widget.gameCode,
-                              entry.key,
-                            );
-                          },
-                          child: Text("Choisir"),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                          ),
-                        )
-                      : null,
+                  subtitle:
+                      !isJudge
+                          ? Text(
+                            "En attente du choix du juge...",
+                            style: TextStyle(color: Colors.grey, fontSize: 11),
+                          )
+                          : null,
+                  trailing:
+                      isJudge
+                          ? ElevatedButton(
+                            onPressed: () {
+                              _firebaseService.judgeBMCWinner(
+                                widget.gameCode,
+                                entry.key,
+                              );
+                            },
+                            child: Text("Choisir"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                            ),
+                          )
+                          : null,
                 ),
               );
             },

@@ -49,6 +49,15 @@ class AuthService {
     }
   }
 
+  // S'assurer d'avoir un utilisateur connecté (anonyme si pas déjà connecté)
+  Future<User> ensureSignedIn() async {
+    if (_auth.currentUser != null) {
+      return _auth.currentUser!;
+    }
+    final credential = await _auth.signInAnonymously();
+    return credential.user!;
+  }
+
   // Se déconnecter
   Future<void> signOut() async {
     await _auth.signOut();

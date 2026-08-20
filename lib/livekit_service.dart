@@ -1,7 +1,8 @@
 import 'package:livekit_client/livekit_client.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 
 class LivekitUserInfo {
@@ -162,9 +163,6 @@ class LivekitService extends ChangeNotifier {
   }) async {
     if (!_isInitialized) await initialize();
 
-    _localIdentity =
-        identity ?? 'user_${DateTime.now().millisecondsSinceEpoch}';
-
     // Configure l'état initial des périphériques locaux
     _isLocalVideoOff = !videoEnabled;
     _isLocalMuted = !audioEnabled;
@@ -177,37 +175,43 @@ class LivekitService extends ChangeNotifier {
       return;
     }
 
-    print("[LivekitService] Demande de token pour room: $roomName");
     try {
-      final response = await http.post(
-        Uri.parse(
-          'https://us-central1-playfun-6b6a8.cloudfunctions.net/generateLivekitToken',
-        ),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'roomName': roomName,
-          'participantIdentity': _localIdentity,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        final token = data['token'];
-        print("[LivekitService] Token reçu, connexion au room...");
-
-        await leaveChannel();
-        await _room!.connect(livekitUrl, token);
-
-        // Publication des flux d'après l'état configuré
-        await _room!.localParticipant?.setCameraEnabled(!_isLocalVideoOff);
-        await _room!.localParticipant?.setMicrophoneEnabled(!_isLocalMuted);
-        _localUserJoined = true;
-        notifyListeners();
-      } else {
-        print("Erreur lors de la récupération du token: ${response.body}");
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        final credential = await FirebaseAuth.instance.signInAnonymously();
+        user = credential.user;
       }
+      if (user == null) {
+        throw Exception("Impossible d'authentifier l'utilisateur.");
+      }
+
+      print("[LivekitService] Demande sécurisée de token pour room: $roomName");
+
+      final callable = FirebaseFunctions.instanceFor(
+        region: "us-central1",
+      ).httpsCallable("generateLivekitToken");
+
+      final result = await callable.call({
+        "roomName": roomName,
+      });
+
+      final data = Map<String, dynamic>.from(result.data as Map);
+      final token = data["token"] as String;
+      final serverIdentity = data["identity"] as String? ?? identity ?? user.uid;
+      _localIdentity = serverIdentity;
+
+      print("[LivekitService] Token reçu, connexion au room...");
+
+      await leaveChannel();
+      await _room!.connect(livekitUrl, token);
+
+      // Publication des flux d'après l'état configuré
+      await _room!.localParticipant?.setCameraEnabled(!_isLocalVideoOff);
+      await _room!.localParticipant?.setMicrophoneEnabled(!_isLocalMuted);
+      _localUserJoined = true;
+      notifyListeners();
     } catch (e) {
-      print("Erreur joinChannel: $e");
+      print("Erreur joinChannel sécurisé: $e");
     }
   }
 
