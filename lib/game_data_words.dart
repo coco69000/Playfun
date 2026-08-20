@@ -778,4 +778,55 @@ class GameWords {  // ───────────────────�
       "Rêve": ["Dormir", "Nuit", "Sommeil", "Imaginer", "Cauchemar"],
     }
   };
+
+  // ═══════════════════════════════════════════════════════════
+  // BLANC MANGER COCO (jeu unique, ex-"Phrases Choc" fusionné)
+  // ═══════════════════════════════════════════════════════════
+  static const Map<String, Map<String, List<String>>> bmcData = {
+    'Blanc Manger Coco': {
+      'soft': [
+        "Pourquoi est-ce que je ne peux pas dormir ?",
+        "Qu'est-ce qui rend la vie plus intéressante ?",
+        "Le nouveau parfum de glace s'appelle :",
+        "Mon super-pouvoir inutile c'est :",
+        "La pire excuse pour arriver en retard :",
+        "Pour me détendre, je :",
+        "Le titre de mon autobiographie serait :",
+        "Avec _____, la vie est plus belle.",
+        "Le secret du bonheur, c'est _____.",
+        "Pour Noël, je demande _____.",
+      ],
+      'hard': [
+        "La pire excuse pour arriver en retard :",
+        "Ce qui me fait immédiatement perdre mes moyens :",
+        "Mon médecin m'a interdit de consommer :",
+        "La chose la plus bizarre dans mon frigo :",
+        "Pour draguer, j'utilise toujours :",
+        "Mon patron m'a viré à cause de :",
+      ],
+      'hardcore': [
+        "Mon plus grand fantasme inavouable c'est :",
+        "La chose la plus illégale que j'ai faite :",
+        "Ce soir, on va tester le triolisme avec :",
+        "J'ai caché _____ sous mon lit.",
+        "Mon pire souvenir de vacances implique :",
+      ],
+      'reponses': [
+        "Un clown triste.", "La pauvreté.", "Mon ex.",
+        "Une odeur de brûlé.", "Les impôts.",
+        "Un accident de voiture.", "Ma belle-mère.",
+        "Internet lent.", "Morgan Freeman.",
+        "Des larmes de clown.", "Être enceinte.",
+        "Un micro-pénis.", "Une chaussette trouée.",
+        "Manger seul au restaurant.", "Un chien qui aboie.",
+        "La politique.", "Une rupture amoureuse.",
+        "Justin Bieber.", "Péter dans un ascenseur.",
+        "Un nain de jardin.", "Une perruque rousse.",
+        "Le président.", "Une maladie honteuse.",
+        "Un vibromasseur.", "Une secte.",
+        "Du fromage qui pue.", "Un doigt d'honneur.",
+        "La belle-famille.",
+      ],
+    },
+  };
 }

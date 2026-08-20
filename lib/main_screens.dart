@@ -242,6 +242,12 @@ final List<Map<String, dynamic>> allAppGames = [
     'image': null,
     'modes': ['multi', 'monde'],
   },
+  {
+    'name': 'Blanc Manger Coco',
+    'icon': Icons.style,
+    'image': null,
+    'modes': ['multi', 'monde'],
+  },
 ];
 
 class GameSelectionScreen extends StatefulWidget {

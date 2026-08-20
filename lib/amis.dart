@@ -1,4 +1,4 @@
-﻿import 'game_data_words.dart';
+import 'game_data_words.dart';
 import 'monde.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'; // Ajoutez cet import
 import 'main_screens.dart'; // Ajout de main_screens.dart pour accÃƒÂ©der ÃƒÂ  allAppGames
@@ -216,6 +216,25 @@ class GameData {
     "Marques de vÃƒÂªtements",
   ];
   static const Map<String, String> gameRules = {
+    'Blanc Manger Coco': """
+**But du jeu**
+Être le joueur avec le plus de points en fin de partie.
+
+**Déroulement**
+1. Chaque joueur reçoit **7 cartes-réponse** en main.
+2. Un joueur est désigné **Juge** (le rôle tourne à chaque manche).
+3. Le Juge lit la **carte-question** à voix haute.
+4. Tous les **autres joueurs** choisissent secrètement **1 carte-réponse** de leur main et la soumettent.
+5. Le Juge lit toutes les réponses et désigne **la plus drôle**.
+6. Le gagnant de la manche marque **1 point**.
+7. Chaque joueur **pioche** une nouvelle carte pour revenir à 7.
+8. Le rôle de Juge passe au joueur suivant.
+
+**Règles importantes**
+- Le Juge **ne joue pas** de carte pendant son tour.
+- Les réponses sont **anonymes** : le Juge ne sait pas qui a écrit quoi.
+- On ne peut jouer qu'**une seule carte** par manche.
+""",
     'Zombie!': """
 **Objectif**
 Prenez des cartes pour crÃ©er des paires assorties. Ã‰vitez d'Ãªtre le joueur qui tient la carte Zombie Ã  la fin du jeu.
@@ -971,6 +990,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     'Dominoes': {'default': []},
     'Big Two': {'default': []},
     'Jeu de Dames': {'default': []},
+    'Blanc Manger Coco': {'default': []},
 
     'Le Juge': {
       'soft': [
@@ -7629,6 +7649,7 @@ class FirebaseService {
     bool isSimplifiedLiar = false,
     String liarVoteMode = 'simultaneous',
     String quiPourraitVoteMode = 'grouper',
+    List<String>? selectedCategoriesList,
     List<String>? petitBacCategories,
     int? petitBacTime,
     bool presidentRevolution = false,
@@ -7665,6 +7686,7 @@ class FirebaseService {
       'hostId': hostId,
       'players': allPlayers,
       'gameType': gameType,
+      if (gameType == 'Blanc Manger Coco') ...{'bmcTargetScore': 10},
       if (gameType == 'Devine Tête') 'devineTeteUseTeams': devineTeteUseTeams,
       'difficulty': difficulty,
       'gameState': 'lobby',
@@ -7877,13 +7899,7 @@ class FirebaseService {
         'deadChatMessages': [],
         'loverChatMessages': {},
       },
-      if (gameType == 'La Patate Chaude') ...{
-        'hotPotatoCategory': null,
-        'hotPotatoCurrentPlayerId': null,
-        'hotPotatoSecondsLeft': 0,
-        'hotPotatoUsedAnswers': [],
-        'hotPotatoRoundStartedAt': null,
-      },
+
       if (gameType == 'Photo Roulette') ...{
         'roundState': 'photo_selection',
         'photoRouletteSettings': {
@@ -7895,6 +7911,16 @@ class FirebaseService {
         'readyPlayers': {},
         'playedPhotos': [],
         'currentPhoto': null,
+      },
+      if (gameType == 'La Patate Chaude') ...{
+        'selectedCategories': selectedCategoriesList,
+        'hotPotatoCategory': null,
+        'hotPotatoUseGlobalTimer': hotPotatoUseGlobalTimer ?? false,
+        'hotPotatoGlobalDuration': hotPotatoGlobalDuration ?? 60,
+        'hotPotatoCurrentPlayerId': null,
+        'hotPotatoSecondsLeft': 0,
+        'hotPotatoUsedAnswers': [],
+        'hotPotatoRoundStartedAt': null,
       },
       if (gameType == 'Uno') ...{
         'unoDeck': [],
@@ -7996,6 +8022,7 @@ class FirebaseService {
       'enableFloatingChat': enableFloatingChat ?? false, // <--- NOUVEAU
 
       'gameType': gameType,
+      if (gameType == 'Blanc Manger Coco') ...{'bmcTargetScore': 10},
       if (gameType == 'Devine Tête') 'devineTeteUseTeams': devineTeteUseTeams,
       'difficulty': difficulty,
       'gameState': 'lobby',
@@ -8224,10 +8251,13 @@ class FirebaseService {
         'deadChatMessages': [],
         'loverChatMessages': {},
       },
-      if (gameType == 'Le Jeu des Catégories') ...{
+      if (gameType == 'Le Jeu des Catégories' ||
+          gameType == 'La Patate Chaude') ...{
         'selectedCategories':
             selectedCategoriesList, // Liste des catÃƒÂ©gories choisies
         'currentCategory': null,
+        'hotPotatoUseGlobalTimer': hotPotatoUseGlobalTimer ?? false,
+        'hotPotatoGlobalDuration': hotPotatoGlobalDuration ?? 60,
         'hotPotatoCurrentPlayerId': null,
         'hotPotatoSecondsLeft': 0,
         'hotPotatoUsedAnswers': [],
@@ -10730,6 +10760,206 @@ class FirebaseService {
     });
   }
 
+  Future<void> _startBlancMangerCocoRound(
+    DocumentReference gameRef,
+    Map<String, dynamic> gameData,
+  ) async {
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final playerIds = players.keys.toList()..shuffle();
+    final difficulty = gameData['difficulty'] ?? 'soft';
+
+    // Toujours utiliser 'Blanc Manger Coco' comme clé
+    final bmcData = GameWords.bmcData['Blanc Manger Coco']!;
+
+    List<String> questions = List<String>.from(
+      bmcData[difficulty] ?? bmcData['soft'] ?? [],
+    );
+    if (questions.isEmpty && bmcData.containsKey('soft')) {
+      questions = List<String>.from(bmcData['soft'] ?? []);
+    }
+
+    // CORRECTION : créer une copie du deck de réponses
+    List<String> answerDeck = List<String>.from(bmcData['reponses'] ?? []);
+    answerDeck.shuffle();
+
+    Map<String, List<String>> hands = {};
+    int cardIndex = 0;
+    for (String pId in playerIds) {
+      hands[pId] = [];
+      for (int i = 0; i < 7; i++) {
+        if (cardIndex < answerDeck.length) {
+          hands[pId]!.add(answerDeck[cardIndex]);
+          cardIndex++;
+        } else {
+          // CORRECTION : reshuffle et prendre une carte différente
+          answerDeck.shuffle();
+          cardIndex = 0;
+          if (answerDeck.isNotEmpty) {
+            hands[pId]!.add(answerDeck[cardIndex]);
+            cardIndex++;
+          }
+        }
+      }
+    }
+
+    String currentQuestion = questions[Random().nextInt(questions.length)];
+    if (currentQuestion.contains('{player}')) {
+      String targetId = playerIds[Random().nextInt(playerIds.length)];
+      String targetName = players[targetId]?['name'] ?? 'Quelqu\'un';
+      currentQuestion = currentQuestion.replaceAll('{player}', targetName);
+    }
+
+    final String firstJudgeId = playerIds.first;
+    final int targetScore = gameData['bmcTargetScore'] ?? 10;
+
+    await gameRef.update({
+      'gameState': 'playing',
+      'roundState': 'judging_selection',
+      'bmcHands': hands,
+      'bmcDeck': answerDeck.sublist(min(cardIndex, answerDeck.length)),
+      'bmcQuestion': currentQuestion,
+      'bmcJudgeId': firstJudgeId,
+      'bmcPlayedCards': {},
+      'bmcScores': {for (var p in playerIds) p: 0},
+      'bmcPlayerOrder': playerIds,
+      'bmcTargetScore': targetScore,
+      'turnStartTime': FieldValue.serverTimestamp(),
+      'inactiveTurnCounts': {for (var p in playerIds) p: 0},
+    });
+  }
+
+  Future<void> playBMCCard(
+    String gameCode,
+    String playerId,
+    String cardText,
+  ) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      DocumentSnapshot snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      var data = snap.data() as Map<String, dynamic>;
+
+      if (data['roundState'] != 'judging_selection') return;
+      if (data['bmcJudgeId'] == playerId) return;
+
+      Map<String, dynamic> rawHands = data['bmcHands'] ?? {};
+      Map<String, List<String>> hands = {};
+      rawHands.forEach((k, v) {
+        hands[k] = List<String>.from(v ?? []);
+      });
+
+      List<String> myHand = hands[playerId] ?? [];
+      if (!myHand.contains(cardText)) return;
+
+      myHand.remove(cardText);
+      hands[playerId] = myHand;
+
+      Map<String, dynamic> played = Map.from(data['bmcPlayedCards'] ?? {});
+      played[playerId] = cardText;
+
+      Map<String, dynamic> updates = {
+        'bmcHands': hands,
+        'bmcPlayedCards': played,
+      };
+
+      int playersCount = (data['players'] as Map).length;
+      if (played.length >= playersCount - 1) {
+        updates['roundState'] = 'judge_voting';
+      }
+
+      transaction.update(gameRef, updates);
+    });
+  }
+
+  Future<void> judgeBMCWinner(String gameCode, String winnerPlayerId) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      DocumentSnapshot snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      var data = snap.data() as Map<String, dynamic>;
+      if (data['roundState'] != 'judge_voting') return;
+
+      String currentJudge = data['bmcJudgeId'] ?? '';
+      List<String> playerOrder = List<String>.from(
+        data['bmcPlayerOrder'] ?? (data['players'] as Map).keys.toList(),
+      );
+
+      Map<String, dynamic> rawScores = data['bmcScores'] ?? {};
+      Map<String, int> scores = {};
+      rawScores.forEach((k, v) {
+        scores[k] = (v as num).toInt();
+      });
+      scores[winnerPlayerId] = (scores[winnerPlayerId] ?? 0) + 1;
+
+      // CORRECTION : Vérifier la fin de partie
+      int targetScore = data['bmcTargetScore'] ?? 10;
+      if (scores[winnerPlayerId]! >= targetScore) {
+        transaction.update(gameRef, {
+          'bmcScores': scores,
+          'gameState': 'gameOver',
+          'gameWinner': winnerPlayerId,
+          'gameEndReason':
+              '${data['players']?[winnerPlayerId]?['name'] ?? 'Quelqu\'un'} a atteint $targetScore points !',
+        });
+        return;
+      }
+
+      // Juge suivant
+      int judgeIndex = playerOrder.indexOf(currentJudge);
+      int nextJudgeIndex = (judgeIndex + 1) % playerOrder.length;
+      String nextJudgeId = playerOrder[nextJudgeIndex];
+
+      // Nouvelle question
+      final difficulty = data['difficulty'] ?? 'soft';
+      final bmcData = GameWords.bmcData['Blanc Manger Coco']!;
+      List<String> questions = List<String>.from(
+        bmcData[difficulty] ?? bmcData['soft'] ?? [],
+      );
+      String nextQuestion = questions[Random().nextInt(questions.length)];
+      if (nextQuestion.contains('{player}')) {
+        String targetId = playerOrder[Random().nextInt(playerOrder.length)];
+        String targetName = data['players']?[targetId]?['name'] ?? 'Quelqu\'un';
+        nextQuestion = nextQuestion.replaceAll('{player}', targetName);
+      }
+
+      // CORRECTION : Pioche correcte
+      Map<String, dynamic> rawHands = data['bmcHands'] ?? {};
+      Map<String, List<String>> hands = {};
+      rawHands.forEach((k, v) {
+        hands[k] = List<String>.from(v ?? []);
+      });
+      List<String> deck = List<String>.from(data['bmcDeck'] ?? []);
+      List<String> fallbackAnswers = List<String>.from(
+        bmcData['reponses'] ?? [],
+      );
+
+      for (String pId in playerOrder) {
+        hands[pId] ??= [];
+        while (hands[pId]!.length < 7) {
+          if (deck.isEmpty) {
+            deck = List.from(fallbackAnswers)..shuffle();
+            if (deck.isEmpty) break;
+          }
+          hands[pId]!.add(deck.removeAt(0));
+        }
+      }
+
+      String winnerName =
+          data['players']?[winnerPlayerId]?['name'] ?? 'Quelqu\'un';
+      transaction.update(gameRef, {
+        'bmcScores': scores,
+        'bmcJudgeId': nextJudgeId,
+        'bmcQuestion': nextQuestion,
+        'bmcPlayedCards': {},
+        'bmcDeck': deck,
+        'bmcHands': hands,
+        'roundState': 'judging_selection',
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'gameLog': FieldValue.arrayUnion(["$winnerName a gagné le tour !"]),
+      });
+    });
+  }
+
   Future<void> startGame(String gameCode) async {
     DocumentReference gameRef = _db.collection('games').doc(gameCode);
     DocumentSnapshot gameSnap = await gameRef.get();
@@ -10739,6 +10969,11 @@ class FirebaseService {
     String gameType = gameData['gameType'];
     String difficulty = gameData['difficulty'];
     Map<String, dynamic> players = gameData['players'];
+
+    if (gameType == 'Blanc Manger Coco') {
+      await _startBlancMangerCocoRound(gameRef, gameData);
+      return;
+    }
 
     if (gameType == 'Devine Tête') {
       await _startDevineTeteRound(gameRef, gameData);
@@ -10914,7 +11149,7 @@ class FirebaseService {
       return await _startGameLoupGarou(gameRef, players, playerIds);
     }
 
-    if (gameType == 'Le Jeu des Catégories') {
+    if (gameType == 'Le Jeu des Catégories' || gameType == 'La Patate Chaude') {
       List<String> availableCategories = List<String>.from(
         gameData['selectedCategories'] ?? GameData.categoriesGameList,
       );
@@ -10922,6 +11157,10 @@ class FirebaseService {
           availableCategories[Random().nextInt(availableCategories.length)];
 
       int turnDuration = gameData['turnTimerSeconds'] ?? 30;
+      if (gameType == 'La Patate Chaude' &&
+          gameData['hotPotatoUseGlobalTimer'] == true) {
+        turnDuration = gameData['hotPotatoGlobalDuration'] ?? 60;
+      }
 
       // Initialisation du premier tour
       await gameRef.update({
@@ -11818,9 +12057,12 @@ class FirebaseService {
   ) async {
     int playerCount = playerIds.length;
     final gameData = (await gameRef.get()).data() as Map<String, dynamic>?;
-    Map<String, int> roleSettings = Map<String, int>.from(
-      gameData?['roleSettings'] ?? {},
-    );
+
+    // CORRECTION : Parsing sécurisé pour Flutter Web
+    Map<String, int> roleSettings = {};
+    (gameData?['roleSettings'] as Map<dynamic, dynamic>? ?? {}).forEach((k, v) {
+      roleSettings[k.toString()] = (v as num).toInt();
+    });
 
     List<String> assignedRoles = [];
     roleSettings.forEach((roleName, count) {
@@ -13237,16 +13479,25 @@ class FirebaseService {
       int currentPlayerIndex = playerOrder.indexOf(playerId);
       String nextPlayerId =
           playerOrder[(currentPlayerIndex + 1) % playerOrder.length];
-      int newTurnDuration = gameData['turnTimerSeconds'] ?? 30;
+      int newTurnDuration =
+          gameData['hotPotatoUseGlobalTimer'] == true
+              ? (gameData['hotPotatoSecondsLeft'] ?? 60)
+              : (gameData['turnTimerSeconds'] ?? 30);
 
       Map<String, dynamic> updates = {
         'hotPotatoUsedAnswers': FieldValue.arrayUnion([
           answer.trim().toLowerCase(),
         ]),
         'hotPotatoCurrentPlayerId': nextPlayerId,
-        'hotPotatoSecondsLeft': newTurnDuration,
-        'hotPotatoRoundStartedAt': FieldValue.serverTimestamp(),
       };
+
+      if (gameData['hotPotatoUseGlobalTimer'] != true) {
+        updates['hotPotatoSecondsLeft'] = newTurnDuration;
+        updates['hotPotatoRoundStartedAt'] = FieldValue.serverTimestamp();
+        updates['turnStartTime'] = FieldValue.serverTimestamp();
+      } else {
+        updates['turnStartTime'] = FieldValue.serverTimestamp();
+      }
 
       transaction.update(gameRef, updates);
     });
@@ -13327,7 +13578,10 @@ class FirebaseService {
           availableCategories[Random().nextInt(availableCategories.length)];
     }
 
-    int duration = gameData['turnTimerSeconds'] ?? 30;
+    int duration =
+        gameData['hotPotatoUseGlobalTimer'] == true
+            ? (gameData['hotPotatoGlobalDuration'] ?? 60)
+            : (gameData['turnTimerSeconds'] ?? 30);
 
     // Pick a different player from the previous one if possible
     String? previousPlayerId = gameData['hotPotatoCurrentPlayerId'];
@@ -13818,24 +14072,7 @@ class FirebaseService {
             ? _rawAiWords.map((e) => e.toString()).toList()
             : null;
 
-    if (gameType == 'La Patate Chaude') {
-      List<String> questions =
-          GameData.multiplayerGameData[gameType]![difficulty]!;
-      question = questions[random.nextInt(questions.length)];
-      roundState = 'playing';
-      int turnDuration = gameData['turnTimerSeconds'] ?? 30;
-      await gameRef.update({
-        'hotPotatoCategory': question,
-        'hotPotatoCurrentPlayerId':
-            playerOrder[random.nextInt(
-              playerOrder.length,
-            )], // Patate chaude commence au hasard
-        'hotPotatoSecondsLeft': turnDuration,
-        'hotPotatoUsedAnswers': [],
-        'hotPotatoRoundStartedAt': FieldValue.serverTimestamp(),
-        'turnStartTime': FieldValue.serverTimestamp(),
-      });
-    } else if (gameType == 'Le Juge') {
+    if (gameType == 'Le Juge') {
       List<String> questions =
           _aiWordPool ?? GameData.multiplayerGameData[gameType]![difficulty]!;
       question = questions[random.nextInt(questions.length)];
@@ -16614,6 +16851,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   int _pokerBigBlind = 20;
   String _gribouillisMode = 'Normal';
   bool _gribouillisAjouter1 = false;
+  int _hotPotatoGlobalDuration =
+      60; // NOUVEAU: Chrono global pour La Patate Chaude
   int _photoRouletteRounds = 15;
   int _photoRoulettePhotosPerPlayer = 20;
   Map<String, bool> _undercoverRoleSettings = {
@@ -16671,6 +16910,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       'Le Juge',
       'Le Menteur',
       'Taboo',
+      'Blanc Manger Coco',
     };
     return gamesWithDifficulty.contains(gameName);
   }
@@ -16750,6 +16990,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           zeroPointeTargetScore: _zeroPointeTargetScore,
           gribouillisMode: _gribouillisMode,
           devineTeteUseTeams: _devineTeteUseTeams,
+          hotPotatoUseGlobalTimer: _hotPotatoUseGlobalTimer,
+          hotPotatoGlobalDuration: _hotPotatoGlobalDuration,
+          selectedCategoriesList: _selectedGameCategories,
         );
 
         await FirebaseFirestore.instance
@@ -16815,6 +17058,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         pokerStartChips: _pokerStartChips,
         pokerSmallBlind: _pokerSmallBlind,
         pokerBigBlind: _pokerBigBlind,
+        hotPotatoUseGlobalTimer: _hotPotatoUseGlobalTimer,
+        hotPotatoGlobalDuration: _hotPotatoGlobalDuration,
         gribouillisMode: _gribouillisMode,
         gribouillisAjouter1: _gribouillisAjouter1,
         photoRouletteRounds: _photoRouletteRounds,
@@ -16839,7 +17084,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         resultTimerSeconds: _resultTimerSeconds,
         petitsChevauxTeamMode: _petitsChevauxTeamMode,
         enableFloatingChat:
-            _enableFloatingChat && _selectedGame != 'Loup-Garou',
+            _enableFloatingChat &&
+            !['Loup-Garou', 'InfiltrÃ© & Mr. White'].contains(_selectedGame),
       );
 
       if (!mounted) return;
@@ -16990,6 +17236,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               hotPotatoUseGlobalTimer:
                   _selectedGame == 'La Patate Chaude'
                       ? _hotPotatoUseGlobalTimer
+                      : null,
+              hotPotatoGlobalDuration:
+                  _selectedGame == 'La Patate Chaude'
+                      ? _hotPotatoGlobalDuration
                       : null,
               gribouillisMode:
                   _selectedGame == 'Gribouillis' ? _gribouillisMode : null,
@@ -17747,7 +17997,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       }).toList(),
                     ],
 
-                    if (_selectedGame == 'Le Jeu des CatÃ©gories') ...[
+                    if (_selectedGame == 'Le Jeu des CatÃ©gories' ||
+                        _selectedGame == 'La Patate Chaude') ...[
                       SizedBox(height: 20),
                       Text(
                         "ParamÃ¨tres du Jeu",
@@ -17787,6 +18038,38 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               );
                             }).toList(),
                       ),
+                      if (_selectedGame == 'La Patate Chaude') ...[
+                        SizedBox(height: 20),
+                        SwitchListTile.adaptive(
+                          title: Text("Chrono global (Bombe)"),
+                          subtitle: Text(
+                            "Le temps ne se rÃ©initialise pas Ã  chaque joueur. La patate explose Ã  la fin !",
+                          ),
+                          value: _hotPotatoUseGlobalTimer,
+                          onChanged:
+                              (val) => setState(
+                                () => _hotPotatoUseGlobalTimer = val,
+                              ),
+                          secondary: Icon(Icons.timer),
+                        ),
+                        if (_hotPotatoUseGlobalTimer) ...[
+                          Text(
+                            "DurÃ©e de la bombe : $_hotPotatoGlobalDuration s",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          Slider(
+                            value: _hotPotatoGlobalDuration.toDouble(),
+                            min: 15,
+                            max: 120,
+                            divisions: 21,
+                            label: "$_hotPotatoGlobalDuration s",
+                            onChanged:
+                                (v) => setState(
+                                  () => _hotPotatoGlobalDuration = v.round(),
+                                ),
+                          ),
+                        ],
+                      ],
                     ],
 
                     if (_selectedGame == "Time's Up") ...[
@@ -18664,9 +18947,11 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
           if (snapshot.hasError)
             return const Center(child: Text("Erreur de connexion au salon."));
           if (!snapshot.data!.exists) {
-            Future.microtask(
-              () => Navigator.of(context).popUntil((route) => route.isFirst),
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              }
+            });
             return const Center(child: Text("La partie n'existe plus."));
           }
 
@@ -18685,18 +18970,20 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
           String gameType = gameData['gameType'] ?? '';
 
           if (gameData['gameState'] == 'playing') {
-            Future.microtask(
-              () => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (_) => MultiplayerGameScreen(
-                        gameCode: gameCode,
-                        playerId: currentPlayerId,
-                      ),
-                ),
-              ),
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (_) => MultiplayerGameScreen(
+                          gameCode: gameCode,
+                          playerId: currentPlayerId,
+                        ),
+                  ),
+                );
+              }
+            });
             return const Center(child: Text("La partie commence..."));
           }
 
@@ -18734,6 +19021,22 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
             }
           } else {
             switch (gameType) {
+              case 'Loup-Garou':
+                int selectedRolesCount = 0;
+                if (gameData['roleSettings'] != null) {
+                  (gameData['roleSettings'] as Map).values.forEach((v) {
+                    selectedRolesCount += (v as num).toInt();
+                  });
+                }
+                if (players.length < 5) {
+                  canStart = false;
+                  requirementMessage = "Au moins 5 joueurs requis.";
+                } else if (selectedRolesCount != players.length) {
+                  canStart = false;
+                  requirementMessage =
+                      "Rôles ($selectedRolesCount) ≠ Joueurs (${players.length}).";
+                }
+                break;
               case 'Zombie!':
                 if (players.length != 4) {
                   canStart = false;
@@ -19001,7 +19304,22 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                     ElevatedButton(
                       onPressed:
                           canStart
-                              ? () => _firebaseService.startGame(gameCode)
+                              ? () {
+                                _firebaseService.startGame(gameCode).catchError(
+                                  (e) {
+                                    if (mounted) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text("Erreur: $e"),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                );
+                              }
                               : null,
                       child: Text("DÃƒÂ©marrer la partie"),
                     )
@@ -19107,6 +19425,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   Timer? _playerTurnTimer;
   String?
   _zeroPointeAction; // Valeurs possibles: 'take_discard', 'use_drawn', 'discard_drawn', null
+  // --- Variables Loup Garou (Refonte UX) ---
+  String _lgLastSubPhase = '';
+  String _lgLastPhase = '';
+  bool _showLgTransition = false;
+  String _lgTransitionText = '';
+  List<String> _lgLocalSelection = [];
+  String _lgActionMode = 'normal';
   // DANS _MultiplayerGameScreenState
 
   // --- BLOKUS ---
@@ -21010,7 +21335,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             );
           }
           if (!snapshot.data!.exists) {
-            Future.microtask(() => _exitGame());
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) _exitGame();
+            });
             return Scaffold(
               body: Center(
                 child: Text(
@@ -21391,6 +21718,453 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
+  Widget _buildBlancMangerCocoUI(
+    BuildContext context,
+    Map<String, dynamic> gameData,
+    String playerId,
+  ) {
+    final String roundState = gameData['roundState'] ?? 'judging_selection';
+    final Map<String, dynamic> players = Map<String, dynamic>.from(
+      gameData['players'] ?? {},
+    );
+    final String judgeId = gameData['bmcJudgeId'] ?? '';
+    final String judgeName = players[judgeId]?['name'] ?? 'Inconnu';
+    final bool amIJudge = (playerId == judgeId);
+    final String question = gameData['bmcQuestion'] ?? '...';
+    final Map<String, dynamic> playedCards = Map<String, dynamic>.from(
+      gameData['bmcPlayedCards'] ?? {},
+    );
+    final Map<String, dynamic> rawHands = Map<String, dynamic>.from(
+      gameData['bmcHands'] ?? {},
+    );
+    final List<String> myHand = List<String>.from(rawHands[playerId] ?? []);
+    final Map<String, dynamic> scores = Map<String, dynamic>.from(
+      gameData['bmcScores'] ?? {},
+    );
+    final int targetScore = gameData['bmcTargetScore'] ?? 10;
+    final bool isGameOver = gameData['gameState'] == 'gameOver';
+
+    if (isGameOver) {
+      final winnerId = gameData['gameWinner'];
+      final winnerName = players[winnerId]?['name'] ?? 'Inconnu';
+      return Center(
+        child: Card(
+          elevation: 10,
+          color: Colors.deepPurple[900],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.emoji_events, size: 64, color: Colors.amberAccent),
+                SizedBox(height: 16),
+                Text(
+                  "Partie Terminée !",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "$winnerName a gagné la partie !",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.amberAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  "Scores finaux :",
+                  style: TextStyle(color: Colors.white70, fontSize: 16),
+                ),
+                SizedBox(height: 8),
+                ...scores.entries.map((e) {
+                  final pName = players[e.key]?['name'] ?? 'Inconnu';
+                  return Text(
+                    "$pName : ${e.value} / $targetScore pts",
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  );
+                }),
+                SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () => _exitGame(),
+                  child: Text("Retour au Salon"),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color:
+                amIJudge
+                    ? Colors.amber[900]!.withOpacity(0.4)
+                    : Colors.deepPurple[900]!.withOpacity(0.4),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: amIJudge ? Colors.amberAccent : Colors.deepPurpleAccent,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    amIJudge ? Icons.gavel : Icons.style,
+                    color: amIJudge ? Colors.amberAccent : Colors.cyanAccent,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    amIJudge
+                        ? "Vous êtes le Juge !"
+                        : "Juge ce tour : $judgeName",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                "Objectif: $targetScore pts",
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 12),
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.grey[900],
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.white24, width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black54,
+                blurRadius: 8,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "BLANC MANGER COCO",
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white38,
+                  letterSpacing: 1.5,
+                ),
+              ),
+              SizedBox(height: 12),
+              Text(
+                question,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  height: 1.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 16),
+        Expanded(
+          child:
+              roundState == 'judging_selection'
+                  ? _buildBMCSelectionPhase(
+                    context,
+                    playedCards,
+                    players,
+                    judgeId,
+                    myHand,
+                    amIJudge,
+                    playerId,
+                  )
+                  : _buildBMCVotingPhase(
+                    context,
+                    playedCards,
+                    players,
+                    judgeId,
+                    amIJudge,
+                    playerId,
+                  ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBMCSelectionPhase(
+    BuildContext context,
+    Map<String, dynamic> playedCards,
+    Map<String, dynamic> players,
+    String judgeId,
+    List<String> myHand,
+    bool amIJudge,
+    String playerId,
+  ) {
+    int nonJudgeCount = players.length - 1;
+    int playedCount = playedCards.length;
+    bool hasPlayed = playedCards.containsKey(playerId);
+
+    if (amIJudge) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.hourglass_top, size: 48, color: Colors.amberAccent),
+          SizedBox(height: 16),
+          Text(
+            "En attente des cartes des joueurs...",
+            style: TextStyle(fontSize: 18, color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8),
+          Text(
+            "$playedCount / $nonJudgeCount joueurs ont répondu",
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white70,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      );
+    }
+
+    if (hasPlayed) {
+      String myPlayedCard = playedCards[playerId] ?? '';
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.check_circle_outline, size: 48, color: Colors.greenAccent),
+          SizedBox(height: 12),
+          Text(
+            "Carte envoyée !",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.greenAccent,
+            ),
+          ),
+          SizedBox(height: 8),
+          Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              myPlayedCard,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(height: 16),
+          Text(
+            "En attente des autres joueurs ($playedCount / $nonJudgeCount)...",
+            style: TextStyle(color: Colors.white54),
+          ),
+        ],
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Choisissez votre meilleure réponse :",
+          style: TextStyle(color: Colors.white70, fontSize: 14),
+        ),
+        SizedBox(height: 8),
+        Expanded(
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: myHand.length,
+            itemBuilder: (context, index) {
+              String cardText = myHand[index];
+              return GestureDetector(
+                onTap:
+                    _isActionPending
+                        ? null
+                        : () {
+                          setState(() => _isActionPending = true);
+                          _firebaseService
+                              .playBMCCard(widget.gameCode, playerId, cardText)
+                              .whenComplete(() {
+                                if (mounted)
+                                  setState(() => _isActionPending = false);
+                              });
+                        },
+                child: Container(
+                  width: 140,
+                  margin: EdgeInsets.only(right: 12, bottom: 8),
+                  padding: EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: Colors.grey[300]!, width: 2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: 6,
+                        offset: Offset(2, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        cardText,
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          height: 1.2,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Icon(
+                          Icons.touch_app,
+                          color: Colors.deepPurple,
+                          size: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBMCVotingPhase(
+    BuildContext context,
+    Map<String, dynamic> playedCards,
+    Map<String, dynamic> players,
+    String judgeId,
+    bool amIJudge,
+    String playerId,
+  ) {
+    List<MapEntry<String, dynamic>> entries = playedCards.entries.toList();
+
+    return Column(
+      children: [
+        Text(
+          amIJudge
+              ? "Cliquez sur la carte gagnante !"
+              : "Le Juge est en train de choisir...",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: amIJudge ? Colors.amberAccent : Colors.white70,
+          ),
+        ),
+        SizedBox(height: 12),
+        Expanded(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemCount: entries.length,
+            itemBuilder: (context, index) {
+              final entry = entries[index];
+              final winnerPlayerId = entry.key;
+              final cardText = entry.value.toString();
+
+              return GestureDetector(
+                onTap:
+                    (amIJudge && !_isActionPending)
+                        ? () {
+                          setState(() => _isActionPending = true);
+                          _firebaseService
+                              .judgeBMCWinner(widget.gameCode, winnerPlayerId)
+                              .whenComplete(() {
+                                if (mounted)
+                                  setState(() => _isActionPending = false);
+                              });
+                        }
+                        : null,
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: amIJudge ? Colors.amber : Colors.transparent,
+                      width: amIJudge ? 2 : 0,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 6,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          cardText,
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          overflow: TextOverflow.fade,
+                        ),
+                      ),
+                      if (amIJudge)
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Icon(
+                            Icons.star,
+                            color: Colors.amber[800],
+                            size: 24,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildPersistentChatInput(
     String gameCode,
     String playerId,
@@ -21578,12 +22352,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   ) {
     String gameType = gameData['gameType'] ?? '';
 
-    // Liste des jeux oÃƒÂ¹ voir la main adverse est pertinent
+    // Liste des jeux où voir la main adverse est pertinent
     bool canViewHands = [
       'Président',
       'Uno',
       'Zéro Pointé',
       'Poker',
+      'Big Two', // Ajouté ici !
     ].contains(gameType);
 
     // Trie les joueurs par score
@@ -21620,21 +22395,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   bool isMe = pId == widget.playerId;
                   bool isSelected = _viewedOpponentId == pId;
 
-                  // Info supplÃƒÂ©mentaire (ex: nombre de cartes)
-                  String extraInfo = "";
-                  if (gameType == 'Uno') {
-                    int count =
-                        (gameData['unoPlayerHands']?[pId] as List?)?.length ??
-                        0;
-                    extraInfo = " ($count Ã°Å¸Å½Â´)";
-                  } else if (gameType == 'Président') {
-                    int count =
-                        (gameData['playerHands']?[pId] as List?)?.length ?? 0;
-                    extraInfo = " ($count Ã°Å¸Å½Â´)";
-                  } else if (gameType == 'Zéro Pointé') {
-                    int totalScore = (gameData['totalScores']?[pId] ?? 0);
-                    pScore = totalScore;
-                    extraInfo = "";
+                  // Gestion particulière du score pour Zéro Pointé
+                  if (gameType == 'Zéro Pointé') {
+                    pScore = (gameData['totalScores']?[pId] ?? 0);
                   }
 
                   return ActionChip(
@@ -21646,7 +22409,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
-                    label: Text("$pName: $pScore$extraInfo"),
+                    label: Text(
+                      "$pName: $pScore",
+                    ), // Finis les symboles buggés !
                     backgroundColor:
                         isSelected ? Colors.deepPurple.withOpacity(0.5) : null,
                     side:
@@ -21685,13 +22450,54 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Widget buildFaceDownCard() => Container(
       width: 40,
       height: 60,
-      margin: EdgeInsets.symmetric(horizontal: 2),
       decoration: BoxDecoration(
         color: Colors.indigo,
         borderRadius: BorderRadius.circular(4),
         border: Border.all(color: Colors.white24),
+        boxShadow: [
+          BoxShadow(color: Colors.black45, offset: Offset(1, 1), blurRadius: 2),
+        ],
       ),
     );
+
+    // Fonction Helper pour afficher en éventail
+    Widget buildFannedCards(int count, {List<String>? visibleCards}) {
+      if (count == 0)
+        return Text(
+          "N'a plus de cartes",
+          style: TextStyle(color: Colors.white70),
+        );
+      return SizedBox(
+        height: 65,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              ...List.generate(count, (index) {
+                Widget cardWidget;
+                if (visibleCards != null && index < visibleCards.length) {
+                  cardWidget = _buildCard(
+                    card: visibleCards[index],
+                    isSelected: false,
+                    scale: 0.6,
+                  );
+                } else {
+                  cardWidget = buildFaceDownCard();
+                }
+
+                return Align(
+                  widthFactor:
+                      0.4, // C'EST CECI QUI CRÉE L'EFFET DE SUPERPOSITION
+                  alignment: Alignment.centerLeft,
+                  child: cardWidget,
+                );
+              }),
+              SizedBox(width: 30), // Marge pour ne pas couper la dernière carte
+            ],
+          ),
+        ),
+      );
+    }
 
     Widget buildZeroPointeOpponentGrid() {
       final gridData = List<Map<String, dynamic>>.from(
@@ -21715,7 +22521,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           itemBuilder: (context, index) {
             final card = gridData[index];
             if (card['value'] == -100) {
-              // Colonne ÃƒÂ©liminÃƒÂ©e : afficher une case vide transparente
               return Container(
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.2),
@@ -21746,53 +22551,67 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         final hand = List<String>.from(
           gameData['playerHands']?[opponentId] ?? [],
         );
-        if (hand.isEmpty)
-          return Text(
-            "N'a plus de cartes",
-            style: TextStyle(color: Colors.white70),
-          );
-        return Wrap(
-          spacing: 4,
-          children: hand.map((_) => buildFaceDownCard()).toList(),
+        return Column(
+          children: [
+            Text(
+              "${hand.length} cartes restantes",
+              style: TextStyle(color: Colors.white70),
+            ),
+            SizedBox(height: 10),
+            buildFannedCards(hand.length),
+          ],
+        );
+
+      case 'Big Two':
+        int count =
+            (gameData['bigTwoPlayerHands']?[opponentId] as List?)?.length ?? 0;
+        return Column(
+          children: [
+            Text(
+              "$count cartes restantes",
+              style: TextStyle(color: Colors.white70),
+            ),
+            SizedBox(height: 10),
+            buildFannedCards(count),
+          ],
         );
 
       case 'Uno':
-        final hand = List<String>.from(
+        final handUno = List<String>.from(
           gameData['unoPlayerHands']?[opponentId] ?? [],
         );
-        if (hand.isEmpty)
-          return Text(
-            "N'a plus de cartes",
-            style: TextStyle(color: Colors.white70),
-          );
-        return Wrap(
-          spacing: 4,
-          children: hand.map((_) => buildFaceDownCard()).toList(),
+        return Column(
+          children: [
+            Text(
+              "${handUno.length} cartes restantes",
+              style: TextStyle(color: Colors.white70),
+            ),
+            SizedBox(height: 10),
+            buildFannedCards(handUno.length),
+          ],
         );
 
       case 'Poker':
-        final hand = List<String>.from(
-          gameData['playerData']?[opponentId]?['hand'] ?? [],
-        );
-        final status = gameData['playerData']?[opponentId]?['status'];
-        if (gameData['phase'] == 'showdown' || status == 'all-in') {
-          return Wrap(
-            spacing: -15,
-            children:
-                hand
-                    .map(
-                      (card) => _buildCard(
-                        card: card,
-                        isSelected: false,
-                        onTap: null,
-                      ),
-                    )
-                    .toList(),
-          );
-        }
-        return Wrap(
-          spacing: 4,
-          children: hand.map((_) => buildFaceDownCard()).toList(),
+        final pData = gameData['playerData']?[opponentId] ?? {};
+        final chips = pData['chips'] ?? 0;
+        final bet = pData['currentBet'] ?? 0;
+        final status = pData['status'] ?? 'out';
+        final hand = List<String>.from(pData['hand'] ?? []);
+        return Column(
+          children: [
+            Text(
+              "Jetons: $chips \$ | Mise: $bet \$",
+              style: TextStyle(
+                color: Colors.amberAccent,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text("Statut: $status", style: TextStyle(color: Colors.white70)),
+            SizedBox(height: 10),
+            (gameData['phase'] == 'showdown' || status == 'all-in')
+                ? buildFannedCards(hand.length, visibleCards: hand)
+                : buildFannedCards(hand.length),
+          ],
         );
 
       case 'Zéro Pointé':
@@ -23265,30 +24084,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     return Column(
       children: [
-        Container(
-          padding: EdgeInsets.all(8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:
-                playerOrder.where((p) => p != playerId).map((pId) {
-                  int count = (hands[pId] as List?)?.length ?? 0;
-                  bool isCurrent = pId == currentPlayerId;
-                  bool isFinished = finishedPlayers.contains(pId);
-                  return Column(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: isCurrent ? Colors.green : Colors.grey,
-                        child: Text(players[pId]?['name']?[0] ?? '?'),
-                      ),
-                      Text(
-                        isFinished ? "GagnÃ© !" : "$count cartes",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
-                  );
-                }).toList(),
-          ),
-        ),
+        // Liste des adversaires retirée pour simplifier l'interface
         Expanded(
           flex: 2,
           child: Container(
@@ -23689,6 +24485,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                         );
                                       })
                                       .catchError((e) {
+                                        if (!mounted) return;
                                         ScaffoldMessenger.of(
                                           context,
                                         ).showSnackBar(
@@ -23872,6 +24669,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return _buildLoupGarouUI(context, gameData, playerId);
       case 'Dominoes':
         return _buildDominoesUI(context, gameData, playerId);
+      case 'Blanc Manger Coco':
       case 'Qui Pourrait le Plus ?':
       case 'Synonyme ou Banni':
       case 'Le Juge':
@@ -25834,69 +26632,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       ),
       child: Column(
         children: [
-          // 1. ADVERSAIRES (Haut)
-          Container(
-            height: 100,
-            padding: EdgeInsets.only(top: 10),
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children:
-                  playerOrder.where((p) => p != playerId).map((pId) {
-                    final pData = playerData[pId] ?? {};
-                    bool isActive = pId == playerOrder[currentPlayerIndex];
-                    bool folded = pData['status'] == 'folded';
-
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundColor:
-                                isActive ? Colors.amber : Colors.black38,
-                            child: CircleAvatar(
-                              radius: 22,
-                              backgroundColor:
-                                  folded ? Colors.grey : Colors.blueGrey,
-                              child: Text(
-                                pData['name']?[0] ?? '?',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.black54,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
-                              "${pData['chips']}\$",
-                              style: TextStyle(
-                                color: Colors.amberAccent,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                          if (pData['currentBet'] > 0)
-                            Text(
-                              "Mise: ${pData['currentBet']}",
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: Colors.white70,
-                              ),
-                            ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-            ),
-          ),
-
+          // 1. ADVERSAIRES (Haut) - infos déplacées dans le ActionChip
           Spacer(),
 
           // 2. TABLE CENTRALE (Pot + Cartes)
@@ -27808,6 +28544,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     switch (roundState) {
+      case 'judging_selection':
+        return _buildBMCPlayingUI(context, gameData, playerId);
+
+      case 'judge_voting':
+        return _buildBMCJudgeVotingUI(context, gameData, playerId);
+
       case 'playing':
         if (gameType == 'La Patate Chaude') {
           return _buildHotPotatoUI(context, gameData, playerId);
@@ -27917,6 +28659,223 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           0,
         );
     }
+  }
+
+  Widget _buildBMCPlayingUI(
+    BuildContext context,
+    Map<String, dynamic> gameData,
+    String playerId,
+  ) {
+    final String question = gameData['bmcQuestion'] ?? '...';
+    final String judgeId = gameData['bmcJudgeId'] ?? '';
+    final bool isJudge = playerId == judgeId;
+    final Map<String, dynamic> hands = Map<String, dynamic>.from(
+      gameData['bmcHands'] ?? {},
+    );
+    final List<String> myHand = List<String>.from(hands[playerId] ?? []);
+    final Map<String, dynamic> playedCards = Map<String, dynamic>.from(
+      gameData['bmcPlayedCards'] ?? {},
+    );
+    final Map<String, dynamic> players = Map<String, dynamic>.from(
+      gameData['players'] ?? {},
+    );
+    final Map<String, dynamic> scores = Map<String, dynamic>.from(
+      gameData['bmcScores'] ?? {},
+    );
+    final bool hasPlayed = playedCards.containsKey(playerId);
+    final int totalPlayers = players.length;
+
+    return Column(
+      children: [
+        // Scores
+        Container(
+          padding: EdgeInsets.all(8),
+          color: Colors.black38,
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 12,
+            children: players.entries.map((e) {
+              return Text(
+                "${e.value['name']}: ${scores[e.key] ?? 0}",
+                style: TextStyle(
+                  color: e.key == judgeId ? Colors.amber : Colors.white70,
+                  fontWeight: e.key == judgeId ? FontWeight.bold : FontWeight.normal,
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        SizedBox(height: 12),
+
+        // Question
+        Card(
+          color: Colors.deepPurple[900],
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Text(
+                  "QUESTION",
+                  style: TextStyle(color: Colors.white54, letterSpacing: 2),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  question,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 12),
+
+        if (isJudge) ...[
+          Expanded(
+            child: Center(
+              child: _buildWaitingWidget(
+                "Vous êtes le Juge. Attendez les réponses...",
+                players,
+                playedCards.length,
+                totalPlayers - 1,
+              ),
+            ),
+          ),
+        ] else if (hasPlayed) ...[
+          Expanded(
+            child: Center(
+              child: _buildWaitingWidget(
+                "Carte jouée ! Attente des autres...",
+                players,
+                playedCards.length,
+                totalPlayers - 1,
+              ),
+            ),
+          ),
+        ] else ...[
+          Text(
+            "Choisissez une carte à jouer :",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          SizedBox(height: 8),
+          Expanded(
+            child: GridView.builder(
+              padding: EdgeInsets.all(12),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1.2,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
+              itemCount: myHand.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    _firebaseService.playBMCCard(
+                      widget.gameCode,
+                      playerId,
+                      myHand[index],
+                    );
+                  },
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 4,
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          myHand[index],
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildBMCJudgeVotingUI(
+    BuildContext context,
+    Map<String, dynamic> gameData,
+    String playerId,
+  ) {
+    final String judgeId = gameData['bmcJudgeId'] ?? '';
+    final bool isJudge = playerId == judgeId;
+    final Map<String, dynamic> playedCards = Map<String, dynamic>.from(
+      gameData['bmcPlayedCards'] ?? {},
+    );
+    final Map<String, dynamic> players = Map<String, dynamic>.from(
+      gameData['players'] ?? {},
+    );
+
+    List<MapEntry<String, String>> shuffledAnswers =
+        playedCards.entries.map((e) => MapEntry<String, String>(e.key, e.value.toString())).toList()..shuffle();
+
+    return Column(
+      children: [
+        Text(
+          isJudge
+              ? "Choisissez la meilleure réponse !"
+              : "Le Juge choisit...",
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        SizedBox(height: 16),
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.all(16),
+            itemCount: shuffledAnswers.length,
+            itemBuilder: (context, index) {
+              var entry = shuffledAnswers[index];
+              return Card(
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(vertical: 6),
+                child: ListTile(
+                  title: Text(
+                    entry.value,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  subtitle: !isJudge
+                      ? Text(
+                          "En attente du choix du juge...",
+                          style: TextStyle(color: Colors.grey, fontSize: 11),
+                        )
+                      : null,
+                  trailing: isJudge
+                      ? ElevatedButton(
+                          onPressed: () {
+                            _firebaseService.judgeBMCWinner(
+                              widget.gameCode,
+                              entry.key,
+                            );
+                          },
+                          child: Text("Choisir"),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                          ),
+                        )
+                      : null,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildAnsweringUI(
@@ -31296,41 +32255,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
         SizedBox(height: 10),
 
-        // 2. Adversaires (Chips)
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:
-                playerOrder.map((pId) {
-                  if (pId == playerId) return SizedBox.shrink(); // Pas moi
-                  bool isCurrent = pId == currentPlayerId;
-                  bool isFinished = finishedPlayers.contains(pId);
-                  int cardCount = (hands[pId] as List?)?.length ?? 0;
-
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Chip(
-                      avatar: CircleAvatar(
-                        backgroundColor: isCurrent ? Colors.green : Colors.grey,
-                        child: Text(
-                          "$cardCount",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      label: Text(players[pId]?['name'] ?? '...'),
-                      backgroundColor:
-                          isFinished
-                              ? Colors.grey[800]
-                              : (isCurrent
-                                  ? Colors.green[900]
-                                  : Colors.black45),
-                    ),
-                  );
-                }).toList(),
-          ),
-        ),
-
+        // 2. Adversaires (Chips) - retirés pour simplifier l'interface
         Spacer(),
 
         // 3. TABLE CENTRALE
@@ -33541,6 +34466,28 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
+  String _getLgTransitionLogs(
+    String phase,
+    String subPhase,
+    List<dynamic> logs,
+  ) {
+    if (logs.isEmpty) return "";
+    if (phase == 'nuit' && subPhase == 'initial') {
+      return "La nuit tombe sur le village...\n\nFermez les yeux.";
+    } else if (phase == 'jour_discussion' && subPhase.isEmpty) {
+      List<String> morningLogs = [];
+      for (int i = logs.length - 1; i >= 0; i--) {
+        String log = logs[i].toString();
+        morningLogs.insert(0, log);
+        if (log.contains("Le soleil se lÃ¨ve")) break;
+      }
+      return morningLogs.join("\n\n");
+    } else if (phase == 'jour_vote') {
+      return "Le moment est venu...\n\nLe village doit voter.";
+    }
+    return "";
+  }
+
   Widget _buildLoupGarouUI(
     BuildContext context,
     Map<String, dynamic> gameData,
@@ -33564,8 +34511,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final String? captainId = gameData['captainId'];
     final List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
     final int nightNumber = gameData['nightNumber'] ?? 0;
-    final bool dictatorTookPowerAtNight =
-        gameData['dictatorTookPowerAtNight'] ?? false;
 
     final myData = playerData[playerId] ?? {};
     final myRole = myData['role'] ?? 'Inconnu';
@@ -33574,992 +34519,749 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final bool amILoup =
         GameData.roleCamps[myRole] == 'loups' ||
         myData['infectionStatus'] == 'infecte';
+    final bool isHost = gameData['hostId'] == playerId;
 
-    Widget? actionWidget;
-    String mainMessage = "";
-
-    Map<String, List<String>> votesReceived = {};
-    dayVotes.forEach((voterId, targetId) {
-      final voterName = playerData[voterId]?['name'] ?? 'Inconnu';
-      if (!votesReceived.containsKey(targetId)) {
-        votesReceived[targetId] = [];
-      }
-      votesReceived[targetId]!.add(voterName);
-    });
-
-    Map<String, int> loupVoteTallies = {};
-    if (nightActions['votes'] != null) {
-      (nightActions['votes'] as Map<String, dynamic>).values.forEach((
-        targetId,
-      ) {
-        loupVoteTallies[targetId] = (loupVoteTallies[targetId] ?? 0) + 1;
+    // --- Gestion des transitions d'histoire ---
+    if (_lgLastSubPhase != subPhase || _lgLastPhase != phase) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            _lgLastSubPhase = subPhase;
+            _lgLastPhase = phase;
+            _lgLocalSelection.clear();
+            _lgActionMode = 'normal';
+            _lgTransitionText = _getLgTransitionLogs(phase, subPhase, gameLog);
+            if (_lgTransitionText.isNotEmpty) {
+              _showLgTransition = true;
+              Timer(const Duration(seconds: 4), () {
+                if (mounted) setState(() => _showLgTransition = false);
+              });
+            }
+          });
+        }
       });
+    }
+
+    String promptText = "En attente...";
+    Widget? actionWidget; // Boutons additionnels (Valider, Empoisonner, etc)
+
+    // Calcul des votes reÃ§us
+    Map<String, List<String>> votesReceived = {};
+    if (phase == 'jour_vote') {
+      dayVotes.forEach((voterId, targetId) {
+        final voterName = playerData[voterId]?['name'] ?? 'Inconnu';
+        votesReceived.putIfAbsent(targetId, () => []).add(voterName);
+      });
+    } else if (phase == 'nuit' && subPhase == 'loups_turn') {
+      if (nightActions['votes'] != null) {
+        (nightActions['votes'] as Map<String, dynamic>).forEach((
+          voterId,
+          targetId,
+        ) {
+          final voterName = playerData[voterId]?['name'] ?? 'Un Loup';
+          votesReceived.putIfAbsent(targetId, () => []).add(voterName);
+        });
+      }
     }
 
     List<String> contaminatedPlayers = List<String>.from(
       gameData['ratMaladeContaminated'] ?? [],
     );
 
-    switch (phase) {
-      case 'nuit':
-        mainMessage = "La nuit tombe... Le village s'endort.";
+    // Fonction de vÃ©rification de ciblÃ©
+    bool canSelectTarget(String targetId) {
+      if (targetId == playerId &&
+          !(subPhase == 'garde_turn' || subPhase == 'cupidon_turn'))
+        return false; // Ne peut pas se cibler sauf cas spÃ©ciaux
+      if (playerData[targetId]?['status'] != 'vivant')
+        return false; // Doit Ãªtre vivant
+
+      if (phase == 'nuit') {
         switch (subPhase) {
           case 'cupidon_turn':
-            mainMessage =
-                "Seul Cupidon est ÃƒÂ©veillÃƒÂ©. Il doit dÃƒÂ©signer deux amoureux.";
-            if (lovers.length >= 2) {
-              actionWidget = Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.favorite, color: Colors.pink, size: 32),
-                    SizedBox(height: 8),
-                    Text(
-                      "Cupidon a dÃƒÂ©signÃƒÂ© les amoureux !",
-                      style: TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                    Text(
-                      "Passage ÃƒÂ  la phase suivante...",
-                      style: TextStyle(color: Colors.white54, fontSize: 12),
-                    ),
-                  ],
-                ),
-              );
-            } else if (myRole == 'Cupidon' && myStatus == 'vivant') {
-              actionWidget = _buildCupidonSelection(
-                playerData,
-                playerOrder,
-                playerId,
-                lovers,
-              );
-            } else {
-              actionWidget = Center(
-                child: Text(
-                  "En attente de Cupidon...",
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-              );
-            }
+            return myRole == 'Cupidon' &&
+                myStatus == 'vivant' &&
+                lovers.isEmpty &&
+                !lovers.contains(targetId);
+          case 'heritier_turn':
+            return myRole == 'HÃ©ritier' &&
+                myStatus == 'vivant' &&
+                myData['testateurId'] == null;
+          case 'garde_turn':
+            return myRole == 'Garde' &&
+                myStatus == 'vivant' &&
+                nightActions['gardeActed'] != true &&
+                myData['lastProtectedId'] != targetId;
+          case 'voyante_turn':
+            return myRole == 'Voyante' &&
+                myStatus == 'vivant' &&
+                nightActions['voyanteActed'] != true;
+          case 'rat_malade_turn':
+            return myRole == 'Rat Malade' &&
+                myStatus == 'vivant' &&
+                !contaminatedPlayers.contains(targetId);
+          case 'loups_turn':
+            bool targetIsLoup =
+                GameData.roleCamps[playerData[targetId]?['role']] == 'loups' ||
+                playerData[targetId]?['infectionStatus'] == 'infecte';
+            if (amILoup && myStatus == 'vivant') return !targetIsLoup;
+            if (myRole == 'Petite Fille' && myStatus == 'vivant' && !amILoup)
+              return true; // La petite fille espionne
+            return false;
+          case 'loup_blanc_turn':
+            return myRole == 'Loup Blanc' &&
+                myStatus == 'vivant' &&
+                nightNumber % 2 != 0 &&
+                nightActions['loupBlancActed'] != true;
+          case 'sorciere_turn':
+            return myRole == 'SorciÃ¨re' &&
+                myStatus == 'vivant' &&
+                _lgActionMode == 'poison' &&
+                myData['potions']?['poison'] == true;
+          case 'pyromancien_turn':
+            return myRole == 'Pyromancien' &&
+                myStatus == 'vivant' &&
+                _lgActionMode == 'placer_tonneau';
+        }
+      } else if (phase == 'jour_discussion') {
+        if (subPhase == 'captain_designate')
+          return gameData['activePlayerId'] == playerId;
+        if (subPhase == 'chasseur_revenge')
+          return gameData['activePlayerId'] == playerId;
+        if (subPhase == 'fossoyeur_reveal')
+          return gameData['activePlayerId'] == playerId;
+        if (subPhase == 'dictateur_coup')
+          return gameData['activePlayerId'] == playerId;
+      } else if (phase == 'jour_vote') {
+        return myStatus == 'vivant' && !dayVotes.containsKey(playerId);
+      }
+      return false;
+    }
+
+    // Gestion de l'action selon la phase
+    void handleTargetSelection(String targetId) async {
+      if (_isActionPending) return;
+
+      if (phase == 'nuit') {
+        switch (subPhase) {
+          case 'cupidon_turn':
+          case 'rat_malade_turn':
+            setState(() {
+              if (_lgLocalSelection.contains(targetId)) {
+                _lgLocalSelection.remove(targetId);
+              } else {
+                if (subPhase == 'cupidon_turn' && _lgLocalSelection.length < 2)
+                  _lgLocalSelection.add(targetId);
+                if (subPhase == 'rat_malade_turn' &&
+                    _lgLocalSelection.length < 2)
+                  _lgLocalSelection.add(targetId);
+              }
+            });
             break;
           case 'heritier_turn':
-            mainMessage =
-                "L'HÃƒÂ©ritier se rÃƒÂ©veille et choisit son testateur.";
-            if (myRole == 'HÃƒÂ©ritier' &&
-                myStatus == 'vivant' &&
-                myData['testateurId'] == null) {
-              actionWidget = _buildLoupGarouActionGrid(
-                title:
-                    "Choisissez votre testateur (qui vous lÃƒÂ¨guera son rÃƒÂ´le si vous mourrez) :",
-                players: playerData,
-                playerOrder: playerOrder,
-                canSelectPlayerId:
-                    (targetId) =>
-                        targetId != playerId &&
-                        playerData[targetId]?['status'] == 'vivant',
-                onPlayerSelected: (targetId) async {
-                  setState(() => _isActionPending = true);
-                  await _firebaseService
-                      .heritierChooseTestateur(
-                        widget.gameCode,
-                        playerId,
-                        targetId,
-                      )
-                      .whenComplete(() {
-                        if (mounted) setState(() => _isActionPending = false);
-                      });
-                },
-                buttonText: "DÃƒÂ©signer",
-                isActionPending: _isActionPending,
-              );
-            } else {
-              actionWidget = Center(
-                child: Text(
-                  "En attente de l'HÃƒÂ©ritier...",
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-              );
-            }
+            setState(() => _isActionPending = true);
+            await _firebaseService.heritierChooseTestateur(
+              widget.gameCode,
+              playerId,
+              targetId,
+            );
+            setState(() => _isActionPending = false);
             break;
           case 'garde_turn':
-            mainMessage = "Le Garde protÃƒÂ¨ge quelqu'un cette nuit.";
-            if (myRole == 'Garde' && myStatus == 'vivant') {
-              if (nightActions['gardeActed'] == true) {
-                actionWidget = Center(
-                  child: Text(
-                    "Vous protÃƒÂ©gez quelqu'un cette nuit. En attente...",
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: Colors.white70,
-                    ),
-                  ),
-                );
-              } else {
-                final String? lastProtected = myData['lastProtectedId'];
-                actionWidget = _buildLoupGarouActionGrid(
-                  title:
-                      "Qui protÃƒÂ©gez-vous cette nuit ? (Pas le mÃƒÂªme qu'hier)",
-                  players: playerData,
-                  playerOrder: playerOrder,
-                  canSelectPlayerId:
-                      (targetId) =>
-                          targetId != lastProtected &&
-                          playerData[targetId]?['status'] == 'vivant',
-                  onPlayerSelected: (targetId) async {
-                    setState(() => _isActionPending = true);
-                    await _firebaseService
-                        .gardeProtect(widget.gameCode, playerId, targetId)
-                        .whenComplete(() {
-                          if (mounted) setState(() => _isActionPending = false);
-                        });
-                  },
-                  buttonText: "ProtÃƒÂ©ger",
-                  isActionPending: _isActionPending,
-                );
-              }
-            } else {
-              actionWidget = Center(
-                child: Text(
-                  "En attente du Garde...",
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-              );
-            }
+            setState(() => _isActionPending = true);
+            await _firebaseService.gardeProtect(
+              widget.gameCode,
+              playerId,
+              targetId,
+            );
+            setState(() => _isActionPending = false);
             break;
           case 'voyante_turn':
-            mainMessage = "La Voyante se rÃƒÂ©veille...";
-            if (myRole == 'Voyante' && myStatus == 'vivant') {
-              if (nightActions['voyanteActed'] == true) {
-                actionWidget = Center(
-                  child: Text(
-                    "Vous avez dÃƒÂ©jÃƒÂ  observÃƒÂ© ce joueur. En attente...",
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: Colors.white70,
-                    ),
-                  ),
-                );
-              } else {
-                actionWidget = _buildLoupGarouActionGrid(
-                  title: "Sondez l'ÃƒÂ¢me d'un joueur...",
-                  players: playerData,
-                  playerOrder: playerOrder,
-                  canSelectPlayerId:
-                      (targetId) =>
-                          targetId != playerId &&
-                          playerData[targetId]?['status'] == 'vivant',
-                  onPlayerSelected: (targetId) async {
-                    setState(() => _isActionPending = true);
-                    try {
-                      await _firebaseService.voyanteSee(
-                        widget.gameCode,
-                        targetId,
-                      );
-                    } catch (e) {
-                      if (mounted)
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("Erreur. RÃƒÂ©essayez."),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                    } finally {
-                      if (mounted) setState(() => _isActionPending = false);
-                    }
-                  },
-                  buttonText: "Sonder",
-                  isActionPending: _isActionPending,
-                );
-              }
-            } else {
-              actionWidget = Center(
-                child: Text(
-                  "En attente de la Voyante...",
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-              );
-            }
-            break;
-          case 'rat_malade_turn':
-            mainMessage =
-                "Le Rat Malade se rÃƒÂ©veille et propage la maladie !";
-            if (myRole == 'Rat Malade' && myStatus == 'vivant') {
-              actionWidget = _buildRatMaladeAction(
-                playerData,
-                playerOrder,
-                playerId,
-                contaminatedPlayers,
-              );
-            }
+            setState(() => _isActionPending = true);
+            await _firebaseService.voyanteSee(widget.gameCode, targetId);
+            setState(() => _isActionPending = false);
             break;
           case 'loups_turn':
-            mainMessage =
-                "Les Loups-Garous se rÃƒÂ©veillent et choisissent leur proie !";
-            if (amILoup && myStatus == 'vivant') {
-              actionWidget = _buildLoupGarouActionGrid(
-                title: "Choisissez qui dÃƒÂ©vorer cette nuit...",
-                players: playerData,
-                playerOrder: playerOrder,
-                canSelectPlayerId:
-                    (targetId) =>
-                        (GameData.roleCamps[playerData[targetId]?['role']] !=
-                                'loups' &&
-                            playerData[targetId]?['infectionStatus'] !=
-                                'infecte') &&
-                        playerData[targetId]?['status'] == 'vivant',
-                onPlayerSelected: (targetId) async {
-                  setState(() => _isActionPending = true);
-                  try {
-                    await _firebaseService.loupGarouVote(
-                      widget.gameCode,
-                      playerId,
-                      targetId,
-                    );
-                  } catch (e) {
-                    if (mounted)
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Erreur lors du vote. RÃƒÂ©essayez."),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                  } finally {
-                    if (mounted) setState(() => _isActionPending = false);
-                  }
-                },
-                buttonText: "Voter",
-                highlightedIds:
-                    playerData.entries
-                        .where(
-                          (e) =>
-                              GameData.roleCamps[e.value['role']] == 'loups' ||
-                              e.value['infectionStatus'] == 'infecte',
-                        )
-                        .map((e) => e.key)
-                        .toList(),
-                voteTallies: loupVoteTallies,
-                isActionPending: _isActionPending,
-              );
-            }
-            if (myRole == 'Petite Fille' && myStatus == 'vivant' && !amILoup) {
-              actionWidget = _buildLoupGarouActionGrid(
-                title: "Tentez d'espionner quelqu'un...",
-                players: playerData,
-                playerOrder: playerOrder,
-                canSelectPlayerId:
-                    (targetId) =>
-                        targetId != playerId &&
-                        playerData[targetId]?['status'] == 'vivant',
-                onPlayerSelected: (targetId) async {
-                  setState(() => _isActionPending = true);
-                  try {
-                    await _firebaseService.petiteFilleSpy(
-                      widget.gameCode,
-                      playerId,
-                      targetId,
-                    );
-                  } catch (e) {
-                    if (mounted)
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Erreur. RÃƒÂ©essayez."),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                  } finally {
-                    if (mounted) setState(() => _isActionPending = false);
-                  }
-                },
-                buttonText: "Espionner",
-                isActionPending: _isActionPending,
-              );
-            }
-            break;
-          case 'loup_noir_action':
-            mainMessage = "Le Loup Noir peut transformer la victime des loups.";
-            String? loupNoirId =
-                playerData.entries
-                    .firstWhere(
-                      (e) =>
-                          e.value['role'] == 'Loup Noir' &&
-                          e.value['status'] == 'vivant',
-                      orElse: () => MapEntry('', {}),
-                    )
-                    .key;
-            bool infectionAlreadyUsed =
-                playerData[loupNoirId]?['infectionUsed'] ?? true;
-            String? loupTargetId = nightActions['loupTarget'];
-            if (loupNoirId == playerId &&
-                myStatus == 'vivant' &&
-                loupTargetId != null &&
-                !infectionAlreadyUsed) {
-              actionWidget = _buildLoupNoirAction(
-                playerData,
-                loupTargetId,
+            setState(() => _isActionPending = true);
+            if (amILoup)
+              await _firebaseService.loupGarouVote(
+                widget.gameCode,
                 playerId,
+                targetId,
               );
-            } else {
-              actionWidget = Center(
-                child: Text(
-                  "En attente du Loup Noir...",
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
+            if (myRole == 'Petite Fille')
+              await _firebaseService.petiteFilleSpy(
+                widget.gameCode,
+                playerId,
+                targetId,
               );
-            }
+            setState(() => _isActionPending = false);
             break;
           case 'loup_blanc_turn':
-            mainMessage = "Le Loup Blanc se rÃƒÂ©veille et choisit sa proie.";
-            if (myRole == 'Loup Blanc' &&
-                myStatus == 'vivant' &&
-                (nightNumber % 2 != 0)) {
-              if (nightActions['loupBlancActed'] == true) {
-                actionWidget = Center(
-                  child: Text(
-                    "Vous avez agi. En attente de la suite...",
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: Colors.white70,
-                    ),
-                  ),
-                );
-              } else {
-                actionWidget = _buildLoupGarouActionGrid(
-                  title:
-                      "Choisissez qui dÃƒÂ©vorer (son pouvoir ignore les protections) :",
-                  players: playerData,
-                  playerOrder: playerOrder,
-                  canSelectPlayerId:
-                      (targetId) =>
-                          targetId != playerId &&
-                          playerData[targetId]?['status'] == 'vivant',
-                  onPlayerSelected: (targetId) async {
-                    setState(() => _isActionPending = true);
-                    try {
-                      await _firebaseService.loupBlancDevour(
-                        widget.gameCode,
-                        playerId,
-                        targetId,
-                      );
-                    } catch (e) {
-                      if (mounted)
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("Erreur. RÃƒÂ©essayez."),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                    } finally {
-                      if (mounted) setState(() => _isActionPending = false);
-                    }
-                  },
-                  buttonText: "DÃƒÂ©vourer",
-                  isActionPending: _isActionPending,
-                );
-              }
-            } else {
-              actionWidget = Center(
-                child: Text(
-                  "En attente du Loup Blanc...",
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-              );
-            }
+            setState(() => _isActionPending = true);
+            await _firebaseService.loupBlancDevour(
+              widget.gameCode,
+              playerId,
+              targetId,
+            );
+            setState(() => _isActionPending = false);
             break;
           case 'sorciere_turn':
-            mainMessage = "La SorciÃƒÂ¨re se rÃƒÂ©veille...";
-            if (myRole == 'SorciÃƒÂ¨re' && myStatus == 'vivant') {
-              if (nightActions['sorciereActed'] == true) {
-                actionWidget = Center(
-                  child: Text(
-                    "Vous avez agi. En attente de la suite...",
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: Colors.white70,
-                    ),
-                  ),
-                );
-              } else {
-                final victimeId = nightActions['loupTarget'];
-                final victimeName =
-                    playerData[victimeId]?['name'] ?? 'personne';
-                final potions = myData['potions'] ?? {};
-                actionWidget = _buildSorciereActions(
-                  context,
-                  playerData,
-                  playerOrder,
-                  victimeId,
-                  victimeName,
-                  potions,
-                  playerId,
-                );
-              }
-            } else {
-              actionWidget = Center(
-                child: Text(
-                  "En attente de la SorciÃƒÂ¨re...",
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
+            if (_lgActionMode == 'poison') {
+              setState(() => _isActionPending = true);
+              await _firebaseService.sorciereUsePotion(
+                widget.gameCode,
+                'poison',
+                targetId,
               );
+              setState(() {
+                _isActionPending = false;
+                _lgActionMode = 'normal';
+              });
             }
             break;
           case 'pyromancien_turn':
-            mainMessage = "Le Pyromancien agit avec son feu grÃƒÂ©geois.";
-            if (myRole == 'Pyromancien' && myStatus == 'vivant') {
-              actionWidget = _buildPyromancienActions(
-                playerData,
-                playerOrder,
+            if (_lgActionMode == 'placer_tonneau') {
+              setState(() => _isActionPending = true);
+              await _firebaseService.pyromancienAct(
+                widget.gameCode,
                 playerId,
-                Map<String, int>.from(gameData['pyromancienBarrels'] ?? {}),
+                'place',
+                targetId,
               );
-            } else {
-              actionWidget = Center(
-                child: Text(
-                  "En attente du Pyromancien...",
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-              );
+              setState(() {
+                _isActionPending = false;
+                _lgActionMode = 'normal';
+              });
             }
             break;
         }
-        break;
-
-      case 'jour_discussion':
-        mainMessage = "Le village se rÃƒÂ©veille et dÃƒÂ©bat...";
-
-        if (subPhase == 'captain_designate') {
-          mainMessage =
-              "Le Capitaine dÃƒÂ©funt doit dÃƒÂ©signer son successeur !";
-          if (gameData['activePlayerId'] == playerId) {
-            actionWidget = _buildLoupGarouActionGrid(
-              title: "DÃƒÂ©signez le nouveau Capitaine",
-              players: playerData,
-              playerOrder: playerOrder,
-              canSelectPlayerId:
-                  (targetId) =>
-                      targetId != playerId &&
-                      playerData[targetId]?['status'] == 'vivant',
-              onPlayerSelected: (targetId) async {
-                setState(() => _isActionPending = true);
-                await _firebaseService
-                    .captainDesignate(widget.gameCode, playerId, targetId)
-                    .whenComplete(() {
-                      if (mounted) setState(() => _isActionPending = false);
-                    });
-              },
-              buttonText: "DÃƒÂ©signer",
-              isActionPending: _isActionPending,
-            );
-          } else {
-            actionWidget = Center(
-              child: Text(
-                "En attente que le Capitaine dÃƒÂ©signe son successeur...",
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            );
-          }
-        } else if (subPhase == 'chasseur_revenge') {
-          mainMessage = "Le Chasseur doit choisir sa cible !";
-          if (gameData['activePlayerId'] == playerId) {
-            actionWidget = _buildLoupGarouActionGrid(
-              title: "Qui emportez-vous dans la tombe ?",
-              players: playerData,
-              playerOrder: playerOrder,
-              canSelectPlayerId:
-                  (targetId) =>
-                      targetId != playerId &&
-                      playerData[targetId]?['status'] == 'vivant',
-              onPlayerSelected: (targetId) async {
-                setState(() => _isActionPending = true);
-                await _firebaseService
-                    .chasseurShoot(widget.gameCode, playerId, targetId)
-                    .whenComplete(() {
-                      if (mounted) setState(() => _isActionPending = false);
-                    });
-              },
-              buttonText: "TIRER !",
-              isActionPending: _isActionPending,
-            );
-          }
-        } else if (subPhase == 'fossoyeur_reveal') {
-          mainMessage = "Le Fossoyeur va rÃƒÂ©vÃƒÂ©ler des rÃƒÂ´les !";
-          if (gameData['activePlayerId'] == playerId) {
-            actionWidget = _buildLoupGarouActionGrid(
-              title:
-                  "Choisissez un joueur ÃƒÂ  rÃƒÂ©vÃƒÂ©ler (un joueur du camp opposÃƒÂ© sera aussi rÃƒÂ©vÃƒÂ©lÃƒÂ©) :",
-              players: playerData,
-              playerOrder: playerOrder,
-              canSelectPlayerId:
-                  (targetId) =>
-                      targetId != playerId &&
-                      playerData[targetId]?['status'] == 'vivant',
-              onPlayerSelected: (targetId) async {
-                setState(() => _isActionPending = true);
-                await _firebaseService
-                    .fossoyeurReveal(widget.gameCode, playerId, targetId)
-                    .whenComplete(() {
-                      if (mounted) setState(() => _isActionPending = false);
-                    });
-              },
-              buttonText: "RÃƒÂ©vÃƒÂ©ler",
-              isActionPending: _isActionPending,
-            );
-          } else {
-            actionWidget = Center(
-              child: Text(
-                "En attente du Fossoyeur...",
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            );
-          }
-        } else if (subPhase == 'dictateur_coup') {
-          mainMessage = "Le Dictateur s'empare du vote du village !";
-          if (gameData['activePlayerId'] == playerId) {
-            actionWidget = _buildLoupGarouActionGrid(
-              title:
-                  "Qui voulez-vous exÃƒÂ©cuter ? (Si c'est un Loup/Solitaire, vous devenez Maire. Sinon, vous mourez.)",
-              players: playerData,
-              playerOrder: playerOrder,
-              canSelectPlayerId:
-                  (targetId) =>
-                      targetId != playerId &&
-                      playerData[targetId]?['status'] == 'vivant',
-              onPlayerSelected: (targetId) async {
-                setState(() => _isActionPending = true);
-                await _firebaseService
-                    .dictateurCoup(widget.gameCode, playerId, targetId)
-                    .whenComplete(() {
-                      if (mounted) setState(() => _isActionPending = false);
-                    });
-              },
-              buttonText: "EXÃƒâ€°CUTER",
-              isActionPending: _isActionPending,
-            );
-          } else {
-            actionWidget = Center(
-              child: Text(
-                "En attente du Dictateur...",
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            );
-          }
-        } else {
-          final isHost = gameData['hostId'] == playerId;
-          final bool amIDictateur =
-              myRole == 'Dictateur' &&
-              myStatus == 'vivant' &&
-              !(myData['powerUsed'] ?? false) &&
-              !(gameData['dictatorUsed'] ?? false);
-          actionWidget = Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (isHost)
-                  ElevatedButton(
-                    onPressed:
-                        _isActionPending
-                            ? null
-                            : () async {
-                              setState(() => _isActionPending = true);
-                              await _firebaseService
-                                  .startDayVotePhase(widget.gameCode)
-                                  .whenComplete(() {
-                                    if (mounted)
-                                      setState(() => _isActionPending = false);
-                                  });
-                            },
-                    child:
-                        _isActionPending
-                            ? SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
-                            )
-                            : Text("Lancer la phase de vote"),
-                  )
-                else
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "En attente de l'hÃƒÂ´te pour lancer le vote...",
-                      style: TextStyle(fontStyle: FontStyle.italic),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                if (amIDictateur) ...[
-                  SizedBox(height: 12),
-                  ElevatedButton.icon(
-                    icon: Icon(Icons.gavel),
-                    label: Text("Coup d'Ãƒâ€°tat !"),
-                    onPressed:
-                        _isActionPending
-                            ? null
-                            : () async {
-                              setState(() => _isActionPending = true);
-                              await _firebaseService
-                                  .triggerDictateurCoup(
-                                    widget.gameCode,
-                                    playerId,
-                                  )
-                                  .whenComplete(() {
-                                    if (mounted)
-                                      setState(() => _isActionPending = false);
-                                  });
-                            },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple[800],
-                    ),
-                  ),
-                ],
-              ],
-            ),
+      } else if (phase == 'jour_discussion') {
+        setState(() => _isActionPending = true);
+        if (subPhase == 'captain_designate')
+          await _firebaseService.captainDesignate(
+            widget.gameCode,
+            playerId,
+            targetId,
           );
-        }
-        break;
-
-      case 'jour_vote':
-        mainMessage = "Le moment est venu de voter ! Qui est un Loup-Garou ?";
-        final int totalVivants =
-            playerData.entries
-                .where((e) => e.value['status'] == 'vivant')
-                .length;
-        final int totalVotes = dayVotes.length;
-        if (myStatus == 'vivant' && !dayVotes.containsKey(playerId)) {
-          actionWidget = _buildLoupGarouActionGrid(
-            title:
-                "Votez pour ÃƒÂ©liminer un joueur ($totalVotes/$totalVivants)",
-            players: playerData,
-            playerOrder: playerOrder,
-            canSelectPlayerId:
-                (targetId) =>
-                    targetId != playerId &&
-                    playerData[targetId]?['status'] == 'vivant',
-            onPlayerSelected: (targetId) async {
-              setState(() => _isActionPending = true);
-              await _firebaseService
-                  .submitDayVote(widget.gameCode, playerId, targetId)
-                  .whenComplete(() {
-                    if (mounted) setState(() => _isActionPending = false);
-                  });
-            },
-            buttonText: "Voter",
-            isActionPending: _isActionPending,
+        if (subPhase == 'chasseur_revenge')
+          await _firebaseService.chasseurShoot(
+            widget.gameCode,
+            playerId,
+            targetId,
           );
-        } else {
-          final isHost = gameData['hostId'] == playerId;
-          actionWidget = Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Votes : $totalVotes / $totalVivants",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
-                if (dayVotes.containsKey(playerId))
-                  Text(
-                    "Vous avez votÃƒÂ©. En attente des autres joueurs...",
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: Colors.white70,
-                    ),
-                  ),
-                if (myStatus == 'mort')
-                  Text(
-                    "Vous ÃƒÂªtes mort. En attente du vote...",
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: Colors.grey,
-                    ),
-                  ),
-                if (isHost) ...[
-                  SizedBox(height: 12),
-                  ElevatedButton(
-                    onPressed:
-                        _isActionPending
-                            ? null
-                            : () async {
-                              setState(() => _isActionPending = true);
-                              await _firebaseService
-                                  .processDayVote(widget.gameCode)
-                                  .whenComplete(() {
-                                    if (mounted)
-                                      setState(() => _isActionPending = false);
-                                  });
-                            },
-                    child:
-                        _isActionPending
-                            ? SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
-                            )
-                            : Text("Forcer la fin du vote"),
-                  ),
-                ],
-              ],
-            ),
+        if (subPhase == 'fossoyeur_reveal')
+          await _firebaseService.fossoyeurReveal(
+            widget.gameCode,
+            playerId,
+            targetId,
           );
-        }
-        break;
-      case 'gameOver':
-        mainMessage = "La partie est terminÃƒÂ©e !";
-        actionWidget = Column(
-          children: [
-            Text(
-              gameLog.last,
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _exitGame(),
-              child: Text("Retour ÃƒÂ  l'accueil"),
-            ),
-            if (gameData['hostId'] == playerId)
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ElevatedButton(
-                  onPressed:
-                      _isActionPending
-                          ? null
-                          : () async {
-                            setState(() => _isActionPending = true);
-                            await _firebaseService
-                                .resetLoupGarouGame(widget.gameCode)
-                                .whenComplete(() {
-                                  if (mounted)
-                                    setState(() => _isActionPending = false);
-                                });
-                          },
-                  child:
-                      _isActionPending
-                          ? SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 2,
-                            ),
-                          )
-                          : Text("Rejouer !"),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                  ),
-                ),
-              ),
-          ],
+        if (subPhase == 'dictateur_coup')
+          await _firebaseService.dictateurCoup(
+            widget.gameCode,
+            playerId,
+            targetId,
+          );
+        setState(() => _isActionPending = false);
+      } else if (phase == 'jour_vote') {
+        setState(() => _isActionPending = true);
+        await _firebaseService.submitDayVote(
+          widget.gameCode,
+          playerId,
+          targetId,
         );
-        break;
+        setState(() => _isActionPending = false);
+      }
+    }
+
+    // --- SETUP DES MESSAGES ET BOUTONS SPÃ‰CIAUX ---
+    if (phase == 'nuit') {
+      promptText = "Le village s'endort...";
+      switch (subPhase) {
+        case 'cupidon_turn':
+          promptText =
+              lovers.isEmpty
+                  ? "SÃ©lectionnez DEUX amoureux."
+                  : "Amoureux dÃ©signÃ©s !";
+          if (myRole == 'Cupidon' && myStatus == 'vivant' && lovers.isEmpty) {
+            actionWidget = ElevatedButton(
+              onPressed:
+                  _lgLocalSelection.length == 2 && !_isActionPending
+                      ? () async {
+                        setState(() => _isActionPending = true);
+                        for (String tgt in _lgLocalSelection) {
+                          await _firebaseService.selectCupidonLover(
+                            widget.gameCode,
+                            tgt,
+                          );
+                        }
+                        setState(() {
+                          _isActionPending = false;
+                          _lgLocalSelection.clear();
+                        });
+                      }
+                      : null,
+              child: Text("Valider les Amoureux"),
+            );
+          }
+          break;
+        case 'heritier_turn':
+          promptText = "L'HÃ©ritier choisit son testateur.";
+          if (myRole == 'HÃ©ritier' &&
+              myStatus == 'vivant' &&
+              myData['testateurId'] == null)
+            promptText = "Touchez le joueur dont vous voulez hÃ©riter.";
+          break;
+        case 'garde_turn':
+          promptText = "Le Garde choisit qui protÃ©ger.";
+          if (myRole == 'Garde' &&
+              myStatus == 'vivant' &&
+              nightActions['gardeActed'] != true)
+            promptText = "Touchez le joueur Ã  protÃ©ger cette nuit.";
+          break;
+        case 'voyante_turn':
+          promptText = "La Voyante sonde une Ã¢me.";
+          if (myRole == 'Voyante' &&
+              myStatus == 'vivant' &&
+              nightActions['voyanteActed'] != true)
+            promptText = "Touchez un joueur pour connaÃ®tre son rÃ´le.";
+          break;
+        case 'rat_malade_turn':
+          promptText = "Le Rat Malade propage la maladie...";
+          if (myRole == 'Rat Malade' && myStatus == 'vivant') {
+            promptText = "SÃ©lectionnez jusqu'Ã  2 joueurs Ã  contaminer.";
+            actionWidget = ElevatedButton(
+              onPressed:
+                  _lgLocalSelection.isNotEmpty && !_isActionPending
+                      ? () async {
+                        setState(() => _isActionPending = true);
+                        await _firebaseService.ratMaladeContaminate(
+                          widget.gameCode,
+                          playerId,
+                          _lgLocalSelection,
+                        );
+                        setState(() {
+                          _isActionPending = false;
+                          _lgLocalSelection.clear();
+                        });
+                      }
+                      : null,
+              child: Text("Contaminer"),
+            );
+          }
+          break;
+        case 'loups_turn':
+          promptText = "Les Loups se rÃ©veillent et dÃ©vorent.";
+          if (amILoup && myStatus == 'vivant')
+            promptText = "Touchez votre victime...";
+          if (myRole == 'Petite Fille' && myStatus == 'vivant' && !amILoup)
+            promptText = "Touchez quelqu'un pour espionner...";
+          break;
+        case 'loup_noir_action':
+          promptText = "Le Loup Noir observe la victime...";
+          String? loupNoirId =
+              playerData.entries
+                  .firstWhere(
+                    (e) =>
+                        e.value['role'] == 'Loup Noir' &&
+                        e.value['status'] == 'vivant',
+                    orElse: () => MapEntry('', {}),
+                  )
+                  .key;
+          if (loupNoirId == playerId &&
+              myStatus == 'vivant' &&
+              !(myData['infectionUsed'] ?? true) &&
+              nightActions['loupTarget'] != null) {
+            String targetName =
+                playerData[nightActions['loupTarget']]?['name'] ?? 'la victime';
+            promptText = "Victime : $targetName.";
+            actionWidget = Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                  ),
+                  onPressed:
+                      () => _firebaseService.loupNoirInfect(
+                        widget.gameCode,
+                        playerId,
+                        true,
+                      ),
+                  child: Text("Infecter"),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  onPressed:
+                      () => _firebaseService.loupNoirInfect(
+                        widget.gameCode,
+                        playerId,
+                        false,
+                      ),
+                  child: Text("Laisser mourir"),
+                ),
+              ],
+            );
+          }
+          break;
+        case 'loup_blanc_turn':
+          promptText = "Le Loup Blanc peut dÃ©vorer un joueur.";
+          if (myRole == 'Loup Blanc' &&
+              myStatus == 'vivant' &&
+              nightNumber % 2 != 0 &&
+              nightActions['loupBlancActed'] != true) {
+            promptText = "Touchez votre victime.";
+          }
+          break;
+        case 'sorciere_turn':
+          promptText = "La SorciÃ¨re se rÃ©veille...";
+          if (myRole == 'SorciÃ¨re' &&
+              myStatus == 'vivant' &&
+              nightActions['sorciereActed'] != true) {
+            final victimeId = nightActions['loupTarget'];
+            final victimeName = playerData[victimeId]?['name'] ?? 'personne';
+            promptText = "Victime des loups : $victimeName";
+            if (_lgActionMode == 'poison')
+              promptText = "Touchez le joueur Ã  empoisonner.";
+
+            actionWidget = Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (myData['potions']?['guerison'] == true && victimeId != null)
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                    ),
+                    onPressed:
+                        () => _firebaseService.sorciereUsePotion(
+                          widget.gameCode,
+                          'guerison',
+                          victimeId,
+                        ),
+                    child: Text("GuÃ©rir"),
+                  ),
+                SizedBox(width: 10),
+                if (myData['potions']?['poison'] == true)
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          _lgActionMode == 'poison'
+                              ? Colors.purpleAccent
+                              : Colors.purple,
+                    ),
+                    onPressed:
+                        () => setState(
+                          () =>
+                              _lgActionMode =
+                                  _lgActionMode == 'poison'
+                                      ? 'normal'
+                                      : 'poison',
+                        ),
+                    child: Text("Empoisonner"),
+                  ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed:
+                      () => _firebaseService.sorciereUsePotion(
+                        widget.gameCode,
+                        'rien',
+                        null,
+                      ),
+                  child: Text("Rien"),
+                ),
+              ],
+            );
+          }
+          break;
+        case 'pyromancien_turn':
+          promptText = "Le Pyromancien manie le feu...";
+          if (myRole == 'Pyromancien' && myStatus == 'vivant') {
+            if (_lgActionMode == 'placer_tonneau')
+              promptText = "Touchez le joueur chez qui placer le tonneau.";
+            actionWidget = Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        _lgActionMode == 'placer_tonneau'
+                            ? Colors.orangeAccent
+                            : Colors.orange,
+                  ),
+                  onPressed:
+                      () => setState(
+                        () =>
+                            _lgActionMode =
+                                _lgActionMode == 'placer_tonneau'
+                                    ? 'normal'
+                                    : 'placer_tonneau',
+                      ),
+                  child: Text("Placer"),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  onPressed:
+                      () => _firebaseService.pyromancienAct(
+                        widget.gameCode,
+                        playerId,
+                        'detonate',
+                        null,
+                      ),
+                  child: Text("DÃ©toner"),
+                ),
+              ],
+            );
+          }
+          break;
+      }
+    } else if (phase == 'jour_discussion') {
+      promptText = "Le village dÃ©bat...";
+      if (subPhase == 'captain_designate') {
+        promptText = "Le Capitaine dÃ©signe son successeur.";
+        if (gameData['activePlayerId'] == playerId)
+          promptText = "Touchez votre successeur.";
+      } else if (subPhase == 'chasseur_revenge') {
+        promptText = "Le Chasseur se venge.";
+        if (gameData['activePlayerId'] == playerId)
+          promptText = "Touchez la cible Ã  abattre.";
+      } else if (subPhase == 'fossoyeur_reveal') {
+        promptText = "Le Fossoyeur rÃ©vÃ¨le une tombe.";
+        if (gameData['activePlayerId'] == playerId)
+          promptText = "Touchez le joueur Ã  rÃ©vÃ©ler.";
+      } else if (subPhase == 'dictateur_coup') {
+        promptText = "Le Dictateur s'empare du pouvoir.";
+        if (gameData['activePlayerId'] == playerId)
+          promptText = "Touchez le joueur Ã  exÃ©cuter.";
+      } else {
+        if (myRole == 'Dictateur' &&
+            myStatus == 'vivant' &&
+            !(myData['powerUsed'] ?? false) &&
+            !(gameData['dictatorUsed'] ?? false)) {
+          actionWidget = ElevatedButton.icon(
+            icon: Icon(Icons.gavel),
+            label: Text("Coup d'Ã‰tat"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.purple[800],
+            ),
+            onPressed:
+                () => _firebaseService.triggerDictateurCoup(
+                  widget.gameCode,
+                  playerId,
+                ),
+          );
+        }
+        if (isHost) {
+          actionWidget = ElevatedButton(
+            onPressed:
+                () => _firebaseService.startDayVotePhase(widget.gameCode),
+            child: Text("Lancer la phase de vote"),
+          );
+        }
+      }
+    } else if (phase == 'jour_vote') {
+      promptText = "Il est temps de voter.";
+      if (myStatus == 'vivant' && !dayVotes.containsKey(playerId)) {
+        promptText = "Touchez le joueur Ã  Ã©liminer.";
+      } else if (isHost) {
+        actionWidget = ElevatedButton(
+          onPressed: () => _firebaseService.processDayVote(widget.gameCode),
+          child: Text("Forcer la fin du vote"),
+        );
+      }
+    } else if (phase == 'gameOver') {
+      promptText = "Partie TerminÃ©e !";
+      actionWidget = Column(
+        children: [
+          Text(
+            gameLog.last,
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () => _exitGame(),
+            child: Text("Retour Ã  l'accueil"),
+          ),
+          if (isHost)
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              onPressed:
+                  () => _firebaseService.resetLoupGarouGame(widget.gameCode),
+              child: Text("Rejouer !"),
+            ),
+        ],
+      );
     }
 
     final bool canSeeLovers = lovers.contains(playerId) || myRole == 'Cupidon';
-    return Column(
+
+    return Stack(
       children: [
-        // Barre d'info en haut
-        ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: 90),
-          child: Card(
-            margin: EdgeInsets.all(4),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (myPrivateInfo != null)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 4.0),
-                        child: Text(
-                          myPrivateInfo,
-                          style: TextStyle(
-                            color: Colors.lightBlueAccent,
-                            fontStyle: FontStyle.italic,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    Text(
-                      mainMessage,
-                      style: Theme.of(context).textTheme.titleMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 2),
-                    Chip(
-                      label: Text(
-                        "Votre rÃƒÂ´le : $myRole",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      backgroundColor:
-                          amILoup
-                              ? Colors.red[800]
-                              : (GameData.roleCamps[myRole] == 'solitaire'
-                                  ? Colors.orange[800]
-                                  : Colors.blue[800]),
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      visualDensity: VisualDensity.compact,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        // Cercle des joueurs
-        Expanded(
-          flex: 3,
+        // 1. Fond et Cercle des Joueurs
+        Positioned.fill(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              final double availableRadius =
-                  min(constraints.maxWidth / 2.0, constraints.maxHeight / 2.0) *
-                  0.88;
-              final double outerRadius = availableRadius;
-              final double circleRadius = outerRadius * 0.62;
+              // Ajustement du cercle pour laisser de la place au tchat
+              final double centerX = constraints.maxWidth / 2;
+              final double centerY =
+                  constraints.maxHeight * 0.45; // LÃ©gÃ¨rement plus haut
+              final double radius =
+                  min(constraints.maxWidth, constraints.maxHeight) * 0.38;
               const double avatarHalfSize = 30.0;
 
               return Stack(
-                alignment: Alignment.center,
-                children: [
-                  Positioned.fill(
-                    child: Center(
-                      child: Container(
-                        width: circleRadius * 2,
-                        height: circleRadius * 2,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white24,
-                            width: 2,
-                            style: BorderStyle.solid,
-                          ),
+                children:
+                    playerOrder.map((pId) {
+                      final int index = playerOrder.indexOf(pId);
+                      final double angle =
+                          (2 * pi * index) / playerOrder.length - (pi / 2);
+                      final pData = playerData[pId] ?? {};
+                      final x = radius * cos(angle);
+                      final y = radius * sin(angle);
+
+                      bool isSelectable = canSelectTarget(pId);
+                      bool isSelected = _lgLocalSelection.contains(pId);
+
+                      return Positioned(
+                        left: centerX + x - avatarHalfSize,
+                        top: centerY + y - avatarHalfSize,
+                        child: _buildPlayerAvatar(
+                          pData,
+                          pId,
+                          pId == playerId,
+                          votesReceived[pId],
+                          captainId,
+                          lovers,
+                          amILoup,
+                          nightNumber,
+                          currentRoundState: phase,
+                          contaminatedPlayers: contaminatedPlayers,
+                          canSeeLovers: canSeeLovers,
+                          isSelectable: isSelectable,
+                          isSelected: isSelected,
+                          onTap: () => handleTargetSelection(pId),
                         ),
-                      ),
-                    ),
-                  ),
-                  ...playerOrder.map((pId) {
-                    final int index = playerOrder.indexOf(pId);
-                    final double angle =
-                        (2 * pi * index) / playerOrder.length - (pi / 2);
-                    final pData = playerData[pId] ?? {};
-                    final x = outerRadius * cos(angle);
-                    final y = outerRadius * sin(angle);
-                    return Positioned(
-                      left: (constraints.maxWidth / 2) + x - avatarHalfSize,
-                      top: (constraints.maxHeight / 2) + y - avatarHalfSize,
-                      child: _buildPlayerAvatar(
-                        pData,
-                        pId,
-                        pId == playerId,
-                        votesReceived[pId],
-                        captainId,
-                        lovers,
-                        amILoup,
-                        nightNumber,
-                        currentRoundState: phase,
-                        contaminatedPlayers: contaminatedPlayers,
-                        canSeeLovers: canSeeLovers,
-                      ),
-                    );
-                  }),
-                ],
+                      );
+                    }).toList(),
               );
             },
           ),
         ),
-        // Zone d'action
-        Expanded(
-          flex: 2,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: Colors.deepPurpleAccent.withOpacity(0.3),
-                  width: 1,
+
+        // 2. Barre d'Infos SupÃ©rieure
+        Positioned(
+          top: 10,
+          left: 10,
+          right: 10,
+          child: Card(
+            color: Colors.black.withOpacity(0.6),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 16.0,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (myPrivateInfo != null)
+                    Text(
+                      myPrivateInfo,
+                      style: TextStyle(
+                        color: Colors.lightBlueAccent,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  Text(
+                    "RÃ´le : $myRole",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amberAccent,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    promptText,
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+
+        // 3. Actions / Boutons au Centre
+        if (actionWidget != null)
+          Positioned(
+            top: 120,
+            left: 20,
+            right: 20,
+            child: Center(
+              child: Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.white24),
+                ),
+                child: actionWidget,
+              ),
+            ),
+          ),
+
+        // 4. Tchat en bas Ã  gauche faÃ§on "Live"
+        Positioned(
+          bottom: 10,
+          left: 10,
+          width:
+              MediaQuery.of(context).size.width *
+              0.75, // Prend 75% de la largeur
+          height:
+              MediaQuery.of(context).size.height * 0.35, // 35% de la hauteur
+          child: _buildChatInterface(gameData, playerId, isLiveStyle: true),
+        ),
+
+        // 5. Overlay Narratif de Transition
+        if (_showLgTransition)
+          Positioned.fill(
+            child: AnimatedOpacity(
+              opacity: _showLgTransition ? 1.0 : 0.0,
+              duration: Duration(milliseconds: 500),
+              child: Container(
+                color: Colors.black.withOpacity(0.9),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Text(
+                      _lgTransitionText,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 26,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        height: 1.4,
+                        shadows: [
+                          Shadow(color: Colors.redAccent, blurRadius: 10),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-            child:
-                _isActionPending
-                    ? Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            "Action en cours...",
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ],
-                      ),
-                    )
-                    : SingleChildScrollView(
-                      padding: EdgeInsets.all(8),
-                      child:
-                          actionWidget ??
-                          (myStatus == 'vivant'
-                              ? Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(16),
-                                  child: Text(
-                                    "Attendez que les autres joueurs agissent...",
-                                    style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      color: Colors.white70,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              )
-                              : Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(16),
-                                  child: Text(
-                                    "Vous ÃƒÂªtes mort. Vous ne pouvez plus agir.",
-                                    style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      color: Colors.grey,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              )),
-                    ),
           ),
-        ),
-        // Ã°Å¸Å¸Â¢ NOUVEAU : CHAT EN BAS (BULLE COMPACTE)
-        Container(
-          height: 220, // Hauteur fixe pour garder de la place pour le jeu
-          decoration: BoxDecoration(
-            color: Colors.grey[900],
-            border: Border(
-              top: BorderSide(
-                color: Colors.deepPurpleAccent.withOpacity(0.5),
-                width: 1,
-              ),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 5,
-                offset: Offset(0, -2),
-              ),
-            ],
-          ),
-          child: _buildChatInterface(gameData, playerId),
-        ),
       ],
     );
   }
 
+  // --- MISE Ã€ JOUR DE L'AVATAR POUR LE RENDRE INTERACTIF ---
   Widget _buildPlayerAvatar(
     Map<String, dynamic> pData,
     String pId,
@@ -34572,6 +35274,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     required String currentRoundState,
     required List<String> contaminatedPlayers,
     bool canSeeLovers = true,
+    bool isSelectable = false,
+    bool isSelected = false,
+    VoidCallback? onTap,
   }) {
     bool isDead = pData['status'] == 'mort';
     String roleToShow =
@@ -34590,67 +35295,85 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         (GameData.roleCamps[pData['role']] == 'loups' || isInfectedLoup)) {
       avatarBgColor = Colors.red[900]!;
     }
-
     if (isContaminated && contaminatedPlayers.contains(widget.playerId)) {
-      // ------------------
       avatarBgColor = Colors.lightGreen[900]!;
     }
 
-    return Column(
+    Widget avatarContent = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Stack(
           alignment: Alignment.center,
           children: [
-            CircleAvatar(
-              radius: 30,
-              backgroundColor: avatarBgColor,
-              child: Padding(
-                padding: EdgeInsets.all(4),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    pData['name'] ?? '?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+            AnimatedContainer(
+              duration: Duration(milliseconds: 200),
+              padding: EdgeInsets.all(isSelectable ? 3 : 0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color:
+                      isSelected
+                          ? Colors.green
+                          : (isSelectable
+                              ? Colors.greenAccent
+                              : Colors.transparent),
+                  width: isSelectable ? 3 : 0,
+                ),
+                boxShadow:
+                    isSelectable
+                        ? [
+                          BoxShadow(
+                            color: Colors.greenAccent.withOpacity(0.6),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                          ),
+                        ]
+                        : [],
+              ),
+              child: CircleAvatar(
+                radius: 25, // Un peu plus petit pour la lisibilitÃ©
+                backgroundColor: avatarBgColor,
+                child: Padding(
+                  padding: EdgeInsets.all(2),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      pData['name'] ?? '?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
                   ),
                 ),
               ),
             ),
-
             if (pId == captainId)
               Positioned(
-                top: 0,
-                right: 0,
-                child: Icon(Icons.king_bed, color: Colors.yellow, size: 20),
+                top: -5,
+                right: -5,
+                child: Icon(Icons.king_bed, color: Colors.yellow, size: 18),
               ),
-
             if (isLover && canSeeLovers)
               Positioned(
-                bottom: 0,
-                right: 0,
-                child: Icon(Icons.favorite, color: Colors.pink, size: 20),
+                bottom: -5,
+                right: -5,
+                child: Icon(Icons.favorite, color: Colors.pink, size: 18),
               ),
-
             if (isInfectedLoup)
               Positioned(
-                top: 0,
-                left: 0,
-                child: Icon(Icons.bug_report, color: Colors.purple, size: 20),
+                top: -5,
+                left: -5,
+                child: Icon(Icons.bug_report, color: Colors.purple, size: 18),
               ),
-
             if (isContaminated)
               Positioned(
-                bottom: 0,
-                left: 0,
+                bottom: -5,
+                left: -5,
                 child: Icon(
                   Icons.sick,
                   color: Colors.lightGreenAccent,
-                  size: 20,
+                  size: 18,
                 ),
               ),
           ],
@@ -34658,769 +35381,35 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         if (isDead)
           Text(
             roleToShow,
-            style: TextStyle(color: Colors.grey[600], fontSize: 10),
-          ),
-
-        if (voters != null && voters.isNotEmpty)
-          Column(
-            children: [
-              Text(
-                "VotÃƒÂ© par :",
-                style: TextStyle(color: Colors.white70, fontSize: 10),
-              ),
-              ...voters.map(
-                (voterName) => Text(
-                  voterName,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 10,
-                  ),
-                ),
-              ),
-            ],
-          ),
-      ],
-    );
-  }
-
-  Widget _buildRatMaladeAction(
-    Map<String, dynamic> players,
-    List<String> playerOrder,
-    String ratMaladeId,
-    List<String> contaminatedPlayers,
-  ) {
-    List<String> _selectedContaminationTargets = [];
-
-    // Joueurs vivants autres que le Rat Malade non encore contaminÃƒÂ©s
-    List<String> alreadyContaminableAlivePlayers =
-        playerOrder
-            .where(
-              (pId) =>
-                  pId != ratMaladeId && players[pId]?['status'] == 'vivant',
-            )
-            .toList();
-    bool allAlreadyContaminated =
-        alreadyContaminableAlivePlayers.isEmpty ||
-        alreadyContaminableAlivePlayers.every(
-          (pId) => contaminatedPlayers.contains(pId),
-        );
-
-    // Si tous les autres joueurs vivants sont dÃƒÂ©jÃƒÂ  contaminÃƒÂ©s Ã¢â€ â€™ victoire imminente
-    if (allAlreadyContaminated) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.biotech, color: Colors.greenAccent, size: 60),
-          SizedBox(height: 16),
-          Text(
-            "Ã°Å¸Å½â€° Tous les joueurs sont contaminÃƒÂ©s !",
             style: TextStyle(
-              color: Colors.greenAccent,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+              color: Colors.grey[500],
+              fontSize: 9,
+              backgroundColor: Colors.black54,
             ),
-            textAlign: TextAlign.center,
           ),
-          SizedBox(height: 8),
-          Text(
-            "La victoire du Rat Malade est assurÃƒÂ©e !",
-            style: TextStyle(color: Colors.white70),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 24),
-          ElevatedButton(
-            onPressed:
-                _isActionPending
-                    ? null
-                    : () async {
-                      setState(() => _isActionPending = true);
-                      await _firebaseService
-                          .startNextNightPhase(widget.gameCode)
-                          .whenComplete(() {
-                            if (mounted)
-                              setState(() => _isActionPending = false);
-                          });
-                    },
-            child:
-                _isActionPending
-                    ? SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 2,
-                      ),
-                    )
-                    : Text("Passer"),
-          ),
-        ],
-      );
-    }
-
-    return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
-        List<String> selectablePlayers =
-            playerOrder
-                .where(
-                  (pId) =>
-                      pId != ratMaladeId &&
-                      players[pId]?['status'] == 'vivant' &&
-                      !contaminatedPlayers.contains(pId) &&
-                      !_selectedContaminationTargets.contains(pId),
-                )
-                .toList();
-
-        // Nombre max de cibles (2 ou moins si moins de joueurs disponibles)
-        int maxTargets =
-            selectablePlayers.length + _selectedContaminationTargets.length < 2
-                ? selectablePlayers.length +
-                    _selectedContaminationTargets.length
-                : 2;
-
-        return Column(
-          children: [
-            Text(
-              maxTargets < 2
-                  ? "Choisissez UN joueur ÃƒÂ  contaminer :"
-                  : "Choisissez jusqu'ÃƒÂ  DEUX joueurs ÃƒÂ  contaminer :",
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 2.0,
-              ),
-              itemCount: selectablePlayers.length,
-              itemBuilder: (context, index) {
-                final pId = selectablePlayers[index];
-                final pName = players[pId]?['name'] ?? 'Inconnu';
-                bool isSelected = _selectedContaminationTargets.contains(pId);
-                return Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: ElevatedButton(
-                    onPressed:
-                        _selectedContaminationTargets.length >= maxTargets &&
-                                !isSelected
-                            ? null
-                            : () {
-                              setState(() {
-                                if (isSelected) {
-                                  _selectedContaminationTargets.remove(pId);
-                                } else {
-                                  _selectedContaminationTargets.add(pId);
-                                }
-                              });
-                            },
-                    child: Text(pName, textAlign: TextAlign.center),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          isSelected
-                              ? Colors.lightGreen[800]
-                              : Colors.lightGreen.withOpacity(0.6),
-                      side:
-                          isSelected
-                              ? BorderSide(color: Colors.white, width: 2)
-                              : BorderSide.none,
-                    ),
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 10),
-            if (_selectedContaminationTargets.isNotEmpty)
-              Text(
-                "Cibles : ${_selectedContaminationTargets.map((id) => players[id]['name']).join(', ')}",
-                style: TextStyle(color: Colors.white70),
-              ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed:
-                  _selectedContaminationTargets.isNotEmpty && !_isActionPending
-                      ? () async {
-                        setState(() => _isActionPending = true);
-                        await _firebaseService
-                            .ratMaladeContaminate(
-                              widget.gameCode,
-                              ratMaladeId,
-                              _selectedContaminationTargets,
-                            )
-                            .whenComplete(() {
-                              if (mounted)
-                                setState(() => _isActionPending = false);
-                            });
-                      }
-                      : null,
-              child:
-                  _isActionPending
-                      ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                      : Text("Contaminer"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildLoupNoirAction(
-    Map<String, dynamic> playerData,
-    String loupTargetId,
-    String loupNoirId,
-  ) {
-    final String targetName = playerData[loupTargetId]?['name'] ?? 'la victime';
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "La cible des loups est $targetName.",
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        SizedBox(height: 20),
-        Text(
-          "Voulez-vous l'infecter au lieu de la tuer ?",
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              onPressed:
-                  _isActionPending
-                      ? null
-                      : () async {
-                        setState(() => _isActionPending = true);
-                        await _firebaseService
-                            .loupNoirInfect(widget.gameCode, loupNoirId, true)
-                            .whenComplete(() {
-                              if (mounted)
-                                setState(() => _isActionPending = false);
-                            });
-                      },
-              child:
-                  _isActionPending
-                      ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                      : Text("Infecter $targetName"),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.purple),
-            ),
-            ElevatedButton(
-              onPressed:
-                  _isActionPending
-                      ? null
-                      : () async {
-                        setState(() => _isActionPending = true);
-                        await _firebaseService
-                            .loupNoirInfect(widget.gameCode, loupNoirId, false)
-                            .whenComplete(() {
-                              if (mounted)
-                                setState(() => _isActionPending = false);
-                            });
-                      },
-              child:
-                  _isActionPending
-                      ? SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                      : Text("Non, juste tuer"),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPyromancienActions(
-    Map<String, dynamic> players,
-    List<String> playerOrder,
-    String pyromancienId,
-    Map<String, int> pyromancienBarrels,
-  ) {
-    final List<String> _selectedTarget = [];
-
-    return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
-        List<String> livingPlayers =
-            playerOrder
-                .where((pId) => players[pId]?['status'] == 'vivant')
-                .toList();
-
-        return Column(
-          children: [
-            Text(
-              "Que voulez-vous faire ?",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        if (voters != null && voters.isNotEmpty)
+          Container(
+            color: Colors.black54,
+            padding: EdgeInsets.symmetric(horizontal: 2),
+            child: Column(
               children: [
-                ElevatedButton.icon(
-                  icon: Icon(Icons.science),
-                  label: Text("Placer un tonneau"),
-                  onPressed:
-                      _isActionPending
-                          ? null
-                          : () {
-                            showDialog(
-                              context: context,
-                              builder:
-                                  (dContext) => AlertDialog(
-                                    title: Text("Placer un tonneau chez qui ?"),
-                                    content: Container(
-                                      width: double.maxFinite,
-                                      child: _buildLoupGarouActionGrid(
-                                        title: "",
-                                        players: players,
-                                        playerOrder: livingPlayers,
-                                        canSelectPlayerId: (pId) => true,
-                                        onPlayerSelected: (targetId) async {
-                                          setState(
-                                            () => _isActionPending = true,
-                                          );
-                                          await _firebaseService
-                                              .pyromancienAct(
-                                                widget.gameCode,
-                                                pyromancienId,
-                                                'place',
-                                                targetId,
-                                              )
-                                              .whenComplete(() {
-                                                if (mounted)
-                                                  setState(
-                                                    () =>
-                                                        _isActionPending =
-                                                            false,
-                                                  );
-                                              });
-                                          Navigator.of(dContext).pop();
-                                        },
-                                        buttonText: "Placer",
-                                        isActionPending: _isActionPending,
-                                      ),
-                                    ),
-                                  ),
-                            );
-                          },
-                ),
-
-                ElevatedButton.icon(
-                  icon: Icon(Icons.local_fire_department),
-                  label: Text("DÃƒÂ©toner !"),
-                  onPressed:
-                      _isActionPending
-                          ? null
-                          : () async {
-                            setState(() => _isActionPending = true);
-                            await _firebaseService
-                                .pyromancienAct(
-                                  widget.gameCode,
-                                  pyromancienId,
-                                  'detonate',
-                                  null,
-                                )
-                                .whenComplete(() {
-                                  if (mounted)
-                                    setState(() => _isActionPending = false);
-                                });
-                          },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                Text(
+                  "${voters.length} Vote(s)",
+                  style: TextStyle(
+                    color: Colors.amber,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
-
-            Text(
-              "Tonneaux placÃƒÂ©s :",
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            ListView(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              children:
-                  pyromancienBarrels.entries.map((entry) {
-                    String targetName =
-                        players[entry.key]?['name'] ?? 'Inconnu';
-                    return Text("$targetName : ${entry.value} tonneau(x)");
-                  }).toList(),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildLoupGarouActionGrid({
-    required String title,
-    required Map<String, dynamic> players,
-    required List<String> playerOrder,
-    required bool Function(String) canSelectPlayerId,
-    required Function(String) onPlayerSelected,
-    required String buttonText,
-    List<String>? highlightedIds,
-    Map<String, int>? voteTallies,
-    required bool isActionPending,
-  }) {
-    List<String> selectablePlayers =
-        playerOrder.where(canSelectPlayerId).toList();
-
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          decoration: BoxDecoration(
-            color: Colors.black54,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.redAccent.withOpacity(0.5)),
           ),
-          child: Text(
-            title,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(height: 10),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.all(10),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // 3 colonnes pour de plus gros avatars
-            childAspectRatio: 0.8,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          ),
-          itemCount: selectablePlayers.length,
-          itemBuilder: (context, index) {
-            final pId = selectablePlayers[index];
-            final pName = players[pId]?['name'] ?? 'Inconnu';
-            final votesOnThisPlayer = voteTallies?[pId] ?? 0;
-            final bool isHighlighted = highlightedIds?.contains(pId) ?? false;
-
-            return GestureDetector(
-              onTap: isActionPending ? null : () => onPlayerSelected(pId),
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: 300),
-                decoration: BoxDecoration(
-                  color: isHighlighted ? Colors.red[900] : Colors.grey[900],
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: isHighlighted ? Colors.redAccent : Colors.grey[700]!,
-                    width: isHighlighted ? 3 : 1,
-                  ),
-                  boxShadow:
-                      isHighlighted
-                          ? [
-                            BoxShadow(
-                              color: Colors.redAccent.withOpacity(0.6),
-                              blurRadius: 10,
-                            ),
-                          ]
-                          : [],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Stack(
-                      alignment: Alignment.topRight,
-                      children: [
-                        CircleAvatar(
-                          radius: 25,
-                          backgroundColor: Colors.grey[800],
-                          child: Text(
-                            pName[0],
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                        ),
-                        if (votesOnThisPlayer > 0)
-                          Container(
-                            padding: EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Text(
-                              '$votesOnThisPlayer',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      pName,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                    if (isHighlighted)
-                      Text(
-                        "CIBLÃƒâ€°",
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
       ],
     );
-  }
 
-  Widget _buildSorciereActions(
-    BuildContext context,
-    Map<String, dynamic> players,
-    List<String> playerOrder,
-    String? victimeId,
-    String victimeName,
-    Map<String, dynamic> potions,
-    String myId,
-  ) {
-    bool canSave = potions['guerison'] == true && victimeId != null;
-    bool canKill = potions['poison'] == true;
-
-    return Column(
-      children: [
-        Text(
-          "Les Loups ont attaquÃƒÂ© : $victimeName",
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton.icon(
-              icon:
-                  _isActionPending
-                      ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                      : Icon(Icons.healing),
-              label: Text("GuÃƒÂ©rir"),
-              onPressed:
-                  canSave && !_isActionPending
-                      ? () async {
-                        setState(() => _isActionPending = true);
-                        await _firebaseService
-                            .sorciereUsePotion(
-                              widget.gameCode,
-                              'guerison',
-                              victimeId,
-                            )
-                            .whenComplete(() {
-                              if (mounted)
-                                setState(() => _isActionPending = false);
-                            });
-                      }
-                      : null,
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-            ),
-            ElevatedButton.icon(
-              icon:
-                  _isActionPending
-                      ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                      : Icon(Icons.dangerous),
-              label: Text("Empoisonner"),
-              onPressed:
-                  canKill && !_isActionPending
-                      ? () {
-                        showDialog(
-                          context: context,
-                          builder:
-                              (dContext) => AlertDialog(
-                                title: Text("Empoisonner un joueur"),
-                                content: Container(
-                                  width: double.maxFinite,
-                                  child: _buildLoupGarouActionGrid(
-                                    title: "",
-                                    players: players,
-                                    playerOrder: playerOrder,
-                                    canSelectPlayerId:
-                                        (pId) =>
-                                            pId != myId &&
-                                            players[pId]?['status'] == 'vivant',
-                                    onPlayerSelected: (targetId) async {
-                                      setState(() => _isActionPending = true);
-                                      await _firebaseService
-                                          .sorciereUsePotion(
-                                            widget.gameCode,
-                                            'poison',
-                                            targetId,
-                                          )
-                                          .whenComplete(() {
-                                            if (mounted)
-                                              setState(
-                                                () => _isActionPending = false,
-                                              );
-                                          });
-                                      Navigator.of(dContext).pop();
-                                    },
-                                    buttonText: "Tuer",
-                                    isActionPending: _isActionPending,
-                                  ),
-                                ),
-                              ),
-                        );
-                      }
-                      : null,
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.purple),
-            ),
-          ],
-        ),
-        SizedBox(height: 10),
-        ElevatedButton(
-          onPressed:
-              _isActionPending
-                  ? null
-                  : () async {
-                    setState(() => _isActionPending = true);
-                    await _firebaseService
-                        .sorciereUsePotion(widget.gameCode, 'rien', null)
-                        .whenComplete(() {
-                          if (mounted) setState(() => _isActionPending = false);
-                        });
-                  },
-          child:
-              _isActionPending
-                  ? SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 2,
-                    ),
-                  )
-                  : Text("Ne rien faire"),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCupidonSelection(
-    Map<String, dynamic> players,
-    List<String> playerOrder,
-    String cupidonId,
-    List<String> currentLovers,
-  ) {
-    List<String> selectablePlayers =
-        playerOrder
-            .where(
-              (pId) =>
-                  players[pId]?['status'] == 'vivant' &&
-                  !currentLovers.contains(pId),
-            )
-            .toList();
-
-    return Column(
-      children: [
-        Text(
-          "Choisissez DEUX joueurs qui tomberont amoureux :",
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: 10),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 2.0,
-          ),
-          itemCount: selectablePlayers.length,
-          itemBuilder: (context, index) {
-            final pId = selectablePlayers[index];
-            final pName = players[pId]?['name'] ?? 'Inconnu';
-            bool isAlreadySelected = currentLovers.contains(pId);
-            return Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: ElevatedButton(
-                onPressed:
-                    isAlreadySelected ||
-                            currentLovers.length >= 2 ||
-                            _isActionPending
-                        ? null
-                        : () async {
-                          setState(() => _isActionPending = true);
-                          await _firebaseService
-                              .selectCupidonLover(widget.gameCode, pId)
-                              .whenComplete(() {
-                                if (mounted)
-                                  setState(() => _isActionPending = false);
-                              });
-                        },
-                child:
-                    _isActionPending
-                        ? SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
-                        )
-                        : Text(pName, textAlign: TextAlign.center),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      isAlreadySelected
-                          ? Colors.pink[800]
-                          : Colors.pink.withOpacity(0.8),
-                  side:
-                      isAlreadySelected
-                          ? BorderSide(color: Colors.white, width: 2)
-                          : BorderSide.none,
-                ),
-              ),
-            );
-          },
-        ),
-        SizedBox(height: 10),
-        Text(
-          "Amoureux choisis : ${currentLovers.map((id) => players[id]['name']).join(' et ')}",
-          style: TextStyle(color: Colors.white70),
-        ),
-      ],
+    return GestureDetector(
+      onTap: isSelectable ? onTap : null,
+      child: avatarContent,
     );
   }
 
@@ -35456,7 +35445,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
-  Widget _buildChatInterface(Map<String, dynamic> gameData, String playerId) {
+  Widget _buildChatInterface(
+    Map<String, dynamic> gameData,
+    String playerId, {
+    bool isLiveStyle = false,
+  }) {
     final Map<String, dynamic> playerData = Map<String, dynamic>.from(
       gameData['playerData'] ?? {},
     );
@@ -35468,7 +35461,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         myData['infectionStatus'] == 'infecte';
     final bool amIDead = myStatus == 'mort';
     final bool amILover = (gameData['lovers'] ?? []).contains(playerId);
-    final bool amINecromancer = myRole == 'NÃƒÂ©cromancien';
+    final bool amINecromancer = myRole == 'NÃ©cromancien';
     final List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
     List<dynamic> currentChatMessages;
     bool canSendMessage = false;
@@ -35507,17 +35500,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Boutons de Filtre
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FilterChip(
-                label: Text("Global"),
+                label: Text("Global", style: TextStyle(fontSize: 10)),
                 selected: _selectedChatType == 'global',
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 visualDensity: VisualDensity.compact,
+                backgroundColor: isLiveStyle ? Colors.black45 : null,
                 onSelected: (bool selected) {
                   if (selected) setState(() => _selectedChatType = 'global');
                 },
@@ -35530,10 +35525,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       (GameData.roleCamps[myRole] == 'loups' ||
                           myData['infectionStatus'] == 'infecte')))
                 FilterChip(
-                  label: Text("Loups"),
+                  label: Text("Loups", style: TextStyle(fontSize: 10)),
                   selected: _selectedChatType == 'wolf',
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   visualDensity: VisualDensity.compact,
+                  backgroundColor:
+                      isLiveStyle ? Colors.red[900]?.withOpacity(0.5) : null,
                   onSelected: (bool selected) {
                     if (selected) setState(() => _selectedChatType = 'wolf');
                   },
@@ -35542,10 +35539,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
               if (amIDead || amINecromancer)
                 FilterChip(
-                  label: Text("Morts"),
+                  label: Text("Morts", style: TextStyle(fontSize: 10)),
                   selected: _selectedChatType == 'dead',
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   visualDensity: VisualDensity.compact,
+                  backgroundColor:
+                      isLiveStyle ? Colors.grey[800]?.withOpacity(0.5) : null,
                   onSelected: (bool selected) {
                     if (selected) setState(() => _selectedChatType = 'dead');
                   },
@@ -35554,10 +35553,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
               if (amILover && lovers.length == 2)
                 FilterChip(
-                  label: Text("Amoureux"),
+                  label: Text("Amoureux", style: TextStyle(fontSize: 10)),
                   selected: _selectedChatType == 'lover',
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   visualDensity: VisualDensity.compact,
+                  backgroundColor:
+                      isLiveStyle ? Colors.pink[800]?.withOpacity(0.5) : null,
                   onSelected: (bool selected) {
                     if (selected) setState(() => _selectedChatType = 'lover');
                   },
@@ -35565,113 +35566,159 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ],
           ),
         ),
+
+        // Liste des messages (Fond transparent en mode Live)
         Expanded(
-          child: ListView.builder(
-            reverse: true,
-            itemCount: currentChatMessages.length,
-            itemBuilder: (context, index) {
-              final messageData =
-                  currentChatMessages[currentChatMessages.length - 1 - index];
-              final senderId = messageData['senderId'];
-              final senderName = messageData['senderName'];
-              final message = messageData['message'];
+          child: Container(
+            color: isLiveStyle ? Colors.transparent : Colors.grey[900],
+            child: ListView.builder(
+              reverse: true,
+              itemCount: currentChatMessages.length,
+              itemBuilder: (context, index) {
+                final messageData =
+                    currentChatMessages[currentChatMessages.length - 1 - index];
+                final senderId = messageData['senderId'];
+                final senderName = messageData['senderName'];
+                final message = messageData['message'];
 
-              final isMine = senderId == playerId;
-              Color messageBgColor =
-                  isMine ? Colors.deepPurple[700]! : Colors.grey[800]!;
+                final isMine = senderId == playerId;
 
-              if (_selectedChatType == 'wolf') {
-                messageBgColor = Colors.red[900]!.withOpacity(0.5);
-              } else if (_selectedChatType == 'dead') {
-                messageBgColor = Colors.grey[700]!.withOpacity(0.5);
-              }
+                if (isLiveStyle) {
+                  // Style Live Stream (Texte brut avec ombres)
+                  Color nameColor =
+                      isMine ? Colors.amberAccent : Colors.lightBlueAccent;
+                  if (_selectedChatType == 'wolf') nameColor = Colors.redAccent;
+                  if (_selectedChatType == 'dead') nameColor = Colors.grey;
 
-              return Align(
-                alignment:
-                    isMine ? Alignment.centerRight : Alignment.centerLeft,
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 4.0,
-                    horizontal: 8.0,
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: messageBgColor,
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment:
-                        isMine
-                            ? CrossAxisAlignment.end
-                            : CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        isMine ? "Vous" : senderName,
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2.0),
+                    child: RichText(
+                      text: TextSpan(
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70,
-                          fontSize: 12,
+                          fontSize: 13,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black,
+                              blurRadius: 4,
+                              offset: Offset(1, 1),
+                            ),
+                          ],
                         ),
+                        children: [
+                          TextSpan(
+                            text: "${isMine ? 'Vous' : senderName}: ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: nameColor,
+                            ),
+                          ),
+                          TextSpan(
+                            text: message,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
                       ),
-                      Text(
-                        message,
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  );
+                } else {
+                  // Style Chat Classique (Bulles)
+                  Color messageBgColor =
+                      isMine ? Colors.deepPurple[700]! : Colors.grey[800]!;
+                  if (_selectedChatType == 'wolf')
+                    messageBgColor = Colors.red[900]!.withOpacity(0.5);
+                  else if (_selectedChatType == 'dead')
+                    messageBgColor = Colors.grey[700]!.withOpacity(0.5);
+
+                  return Align(
+                    alignment:
+                        isMine ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 4.0,
+                        horizontal: 8.0,
                       ),
-                    ],
-                  ),
-                ),
-              );
-            },
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: messageBgColor,
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment:
+                            isMine
+                                ? CrossAxisAlignment.end
+                                : CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            isMine ? "Vous" : senderName,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white70,
+                              fontSize: 10,
+                            ),
+                          ),
+                          Text(
+                            message,
+                            style: TextStyle(color: Colors.white, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
           ),
         ),
+
+        // Barre d'entrÃ©e
         if (canSendMessage)
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            padding: const EdgeInsets.only(top: 4.0),
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: _chatController,
-                    decoration: InputDecoration(
-                      hintText: "Ãƒâ€°crire un message...",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    height: 35,
+                    child: TextField(
+                      controller: _chatController,
+                      style: TextStyle(fontSize: 12),
+                      decoration: InputDecoration(
+                        hintText: "Message...",
+                        hintStyle: TextStyle(
+                          color: Colors.white54,
+                          fontSize: 12,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor:
+                            isLiveStyle ? Colors.black54 : Colors.grey[800],
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 0,
+                        ),
                       ),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      isDense: true,
-                    ),
-                    onSubmitted: (text) {
-                      if (text.trim().isNotEmpty) {
-                        _firebaseService.sendChatMessage(
-                          widget.gameCode,
-                          playerId,
-                          text.trim(),
-                          _selectedChatType,
-                        );
-
-                        if (myRole == 'Loup Bavard' &&
-                            myData['currentBavardWord'] != null &&
-                            text.toLowerCase().contains(
-                              myData['currentBavardWord'].toLowerCase(),
-                            )) {
-                          _firebaseService._db
-                              .collection('games')
-                              .doc(widget.gameCode)
-                              .update({
-                                'playerData.$playerId.hasSaidBavardWord': true,
-                              });
+                      onSubmitted: (text) {
+                        if (text.trim().isNotEmpty) {
+                          _firebaseService.sendChatMessage(
+                            widget.gameCode,
+                            playerId,
+                            text.trim(),
+                            _selectedChatType,
+                          );
+                          _chatController.clear();
                         }
-                        _chatController.clear();
-                      }
-                    },
+                      },
+                    ),
                   ),
                 ),
-                SizedBox(width: 8),
+                SizedBox(width: 4),
                 IconButton(
-                  icon: Icon(Icons.send, color: Colors.deepPurpleAccent),
+                  icon: Icon(Icons.send, color: Colors.amberAccent, size: 20),
+                  padding: EdgeInsets.zero,
+                  constraints: BoxConstraints(),
                   onPressed: () {
                     if (_chatController.text.trim().isNotEmpty) {
                       _firebaseService.sendChatMessage(
@@ -35680,36 +35727,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         _chatController.text.trim(),
                         _selectedChatType,
                       );
-
-                      if (myRole == 'Loup Bavard' &&
-                          myData['currentBavardWord'] != null &&
-                          _chatController.text.toLowerCase().contains(
-                            myData['currentBavardWord'].toLowerCase(),
-                          )) {
-                        _firebaseService._db
-                            .collection('games')
-                            .doc(widget.gameCode)
-                            .update({
-                              'playerData.$playerId.hasSaidBavardWord': true,
-                            });
-                      }
                       _chatController.clear();
                     }
                   },
                 ),
               ],
-            ),
-          )
-        else
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Vous ne pouvez pas ÃƒÂ©crire dans ce chat.",
-              style: TextStyle(
-                color: Colors.redAccent,
-                fontStyle: FontStyle.italic,
-              ),
-              textAlign: TextAlign.center,
             ),
           ),
       ],
@@ -36006,11 +36028,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               tile,
                               end,
                             )
-                            .catchError(
-                              (e) => ScaffoldMessenger.of(context).showSnackBar(
+                            .catchError((e) {
+                              if (!mounted) return;
+                              ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(e.toString())),
-                              ),
-                            );
+                              );
+                            });
                       },
                       child: Text(
                         "Sur le $end",
@@ -36033,11 +36056,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
       _firebaseService
           .playDominoesTile(widget.gameCode, playerId, tile, matchEnd!)
-          .catchError(
-            (e) => ScaffoldMessenger.of(
+          .catchError((e) {
+            if (!mounted) return;
+            ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(e.toString()))),
-          );
+            ).showSnackBar(SnackBar(content: Text(e.toString())));
+          });
     }
 
     // â”€â”€ Build â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

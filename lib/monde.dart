@@ -251,6 +251,7 @@ class SearchingForPlayersScreen extends StatefulWidget {
   final int? pokerSmallBlind;
   final int? pokerBigBlind;
   final bool? hotPotatoUseGlobalTimer;
+  final int? hotPotatoGlobalDuration;
   final String? gribouillisMode;
   final bool? gribouillisAjouter1;
   final int? photoRouletteRounds;
@@ -295,6 +296,7 @@ class SearchingForPlayersScreen extends StatefulWidget {
     this.pokerSmallBlind,
     this.pokerBigBlind,
     this.hotPotatoUseGlobalTimer,
+    this.hotPotatoGlobalDuration,
     this.gribouillisMode,
     this.gribouillisAjouter1,
     this.photoRouletteRounds,
@@ -906,6 +908,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             pokerSmallBlind: widget.pokerSmallBlind,
             pokerBigBlind: widget.pokerBigBlind,
             hotPotatoUseGlobalTimer: widget.hotPotatoUseGlobalTimer,
+            hotPotatoGlobalDuration: widget.hotPotatoGlobalDuration,
             gribouillisMode: widget.gribouillisMode,
             gribouillisAjouter1: widget.gribouillisAjouter1,
             photoRouletteRounds: widget.photoRouletteRounds,
