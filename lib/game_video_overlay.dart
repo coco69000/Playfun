@@ -310,7 +310,10 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                 ),
                 child: (isVideoOff || videoTrack == null)
                     ? Container(color: Colors.grey[900], child: Center(child: Icon(Icons.person, color: Colors.white54, size: 30)))
-                    : VideoTrackRenderer(videoTrack),
+                    : VideoTrackRenderer(
+                        videoTrack,
+                        key: ValueKey(videoTrack.sid ?? videoTrack.hashCode),
+                      ),
               )
             ),
             Positioned(bottom: 0, left: 0, right: 0, child: _buildNameTag(playerName)),
@@ -428,7 +431,10 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
           children: [
             Center(
               child: videoTrack != null
-                  ? VideoTrackRenderer(videoTrack)
+                  ? VideoTrackRenderer(
+                      videoTrack,
+                      key: ValueKey(videoTrack.sid ?? videoTrack.hashCode),
+                    )
                   : Container(color: Colors.grey[900], child: Icon(Icons.person, color: Colors.white54, size: 50)),
             ),
             Positioned(top: 50, left: 20, child: Text(playerName, style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold))),

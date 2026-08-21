@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 class PremiumService {
   Future<bool> purchasePremium() async {
@@ -75,16 +76,28 @@ class PlayerState extends ChangeNotifier {
       userDoc,
     ) async {
       if (!userDoc.exists) {
-        // Initialisation du nouveau joueur
+        // Initialisation du nouveau joueur (se conformer strictement aux règles Firestore)
         _coins = 50;
         _isPremium = false;
         _level = 1;
         _xp = 0;
-        await _saveState();
+        await _db.collection('users').doc(userId).set({
+          'coins': 50,
+          'isPremium': false,
+          'level': 1,
+          'xp': 0,
+          'name': 'Joueur',
+          'gameStats': {},
+          'friends': [],
+          'friendRequests': [],
+          'gameInvites': [],
+          'multiplayerGamesPlayedToday': 0,
+          'videoGamesPlayedToday': 0,
+        });
       } else {
         var data = userDoc.data() as Map<String, dynamic>;
         _userName = data['name'] ?? 'Joueur';
-        _coins = data['coins'] ?? 20;
+        _coins = data['coins'] ?? 50;
         _isPremium = data['isPremium'] ?? false;
         _level = data['level'] ?? 1;
         _xp = data['xp'] ?? 0;
@@ -149,30 +162,19 @@ class PlayerState extends ChangeNotifier {
 
   void grantDailyCoinsAndResetLimits() {
     if (_userId == null) return;
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    bool needsSave = false;
-
-    if (_lastDailyCoinGrant == null || _lastDailyCoinGrant!.isBefore(today)) {
-      if (!_isPremium) {
-        _coins += 10;
-        _lastDailyCoinGrant = today;
-        needsSave = true;
-      }
+    try {
+      FirebaseFunctions.instance
+          .httpsCallable('claimDailyBonus')
+          .call()
+          .then((res) {
+            print("Bonus quotidien validé par le serveur : ${res.data}");
+          })
+          .catchError((e) {
+            // Prise en charge silencieuse si le bonus a déjà été récupéré
+          });
+    } catch (e) {
+      print("Erreur appel claimDailyBonus : $e");
     }
-    if (_lastMultiplayerReset == null ||
-        _lastMultiplayerReset!.isBefore(today)) {
-      _multiplayerGamesPlayedToday = 0;
-      _lastMultiplayerReset = today;
-      _unlockedParametersToday.clear();
-      needsSave = true;
-    }
-    if (_lastVideoGamesReset == null || _lastVideoGamesReset!.isBefore(today)) {
-      _videoGamesPlayedToday = 0;
-      _lastVideoGamesReset = today;
-      needsSave = true;
-    }
-    if (needsSave) _saveState();
   }
 
   // --- LOGIQUE DES AMIS ---
@@ -278,12 +280,21 @@ class PlayerState extends ChangeNotifier {
     if (_isPremium) return true;
     if (_userId == null) return false;
 
-    if (_coins >= amount) {
-      _coins -= amount;
-      await _saveState();
-      return true;
+    try {
+      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+        'spendCoins',
+      );
+      final result = await callable.call({'amount': amount});
+      if (result.data != null && result.data['success'] == true) {
+        _coins = (result.data['remainingCoins'] as num).toInt();
+        notifyListeners();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      debugPrint("Erreur lors de la dépense sécurisée : $e");
+      return false;
     }
-    return false;
   }
 
   Future<bool> canPlayMultiplayer() async {
@@ -308,51 +319,41 @@ class PlayerState extends ChangeNotifier {
     await _saveState();
   }
 
-  Future<void> addXpAndStats(int xpGained, String gameName, bool isWin) async {
+  Future<void> claimGameReward(String gameCode) async {
     if (_userId == null) return;
-    _xp += xpGained;
-    while (_xp >= xpForNextLevel) {
-      _xp -= xpForNextLevel;
-      _level++;
+    try {
+      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+        'claimGameReward',
+      );
+      final result = await callable.call({'gameCode': gameCode});
+      if (result.data != null) {
+        debugPrint("Récompense validée : ${result.data}");
+      }
+    } catch (e) {
+      debugPrint("Erreur lors de la réclamation de récompense : $e");
     }
-    if (_gameStats[gameName] == null) {
-      _gameStats[gameName] = {'played': 0, 'won': 0};
-    }
-    _gameStats[gameName]['played']++;
-    if (isWin) _gameStats[gameName]['won']++;
-    await _saveState();
+  }
+
+  Future<void> addXpAndStats(int xpGained, String gameName, bool isWin) async {
+    // Les récompenses XP et pièces sont désormais attribuées de façon sécurisée par la Cloud Function `claimGameReward`.
+    // Les changements de niveau, pièces et XP sont automatiquement reçus via le snapshot listener `users/{userId}`.
   }
 
   Future<void> purchasePremium() async {
     if (_userId == null) return;
-    bool success = await _premiumService.purchasePremium();
-    if (success) {
-      _isPremium = true;
-      _coins = 9999;
-      await _saveState();
-    }
+    await _premiumService.purchasePremium();
   }
 
   Future<void> restorePurchases() async {
     if (_userId == null) return;
-    bool success = await _premiumService.restorePurchase();
-    if (success && !_isPremium) {
-      _isPremium = true;
-      _coins = 9999;
-      await _saveState();
-    }
+    await _premiumService.restorePurchase();
   }
 
   Future<void> _saveState() async {
     if (_userId == null) return;
     Map<String, dynamic> userData = {
-      'coins': _coins,
-      'isPremium': _isPremium,
       'multiplayerGamesPlayedToday': _multiplayerGamesPlayedToday,
       'videoGamesPlayedToday': _videoGamesPlayedToday,
-      'level': _level,
-      'xp': _xp,
-      'gameStats': _gameStats,
     };
     if (_lastDailyCoinGrant != null)
       userData['lastDailyCoinGrant'] = Timestamp.fromDate(_lastDailyCoinGrant!);

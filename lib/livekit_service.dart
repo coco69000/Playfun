@@ -261,6 +261,12 @@ class LivekitService extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> muteMicrophone() async {
+    _isLocalMuted = true;
+    await _room?.localParticipant?.setMicrophoneEnabled(false);
+    notifyListeners();
+  }
+
   void updateUserName(String identity, String name) {
     if (_remoteUsers.containsKey(identity)) {
       _remoteUsers[identity]!.name = name;

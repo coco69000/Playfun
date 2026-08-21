@@ -862,29 +862,22 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     }
 
     if (data['status'] == 'full') {
-      final playerId = widget.playerId; // <--- CORRECTION ICI
-      // CORRECTION : C'est le premier joueur (l'hÃ´te "logique") qui doit crÃ©er la partie,
-      // pas le dernier. Cela garantit la cohÃ©rence.
-      if (players.first == playerId) {
+      final playerId = widget.playerId;
+      final String firstPlayer = players.first;
+      final String? secondPlayer = players.length > 1 ? players[1] : null;
+
+      Future<void> launchGame(DocumentSnapshot roomSnap, Map<String, dynamic> roomData, String creatorId) async {
         try {
-          // CORRECTION : On ne peut pas appeler `createGame` car il ne connaÃ®t qu'un seul joueur.
-          // On doit crÃ©er le document de jeu manuellement ici avec la liste complÃ¨te des joueurs.
-
           final gameCode = randomNumeric(6);
-          final gameRef = _db.collection('games').doc(gameCode);
-
-          // PrÃ©parer la map des joueurs pour la nouvelle partie
           Map<String, dynamic> gamePlayers = {};
-          (data['playerNames'] as Map<String, dynamic>).forEach((pId, pName) {
+          (roomData['playerNames'] as Map<String, dynamic>).forEach((pId, pName) {
             gamePlayers[pId] = {'name': pName, 'score': 0};
           });
 
-          // CrÃ©er le jeu en une seule fois
           await _firebaseService.createGameWithAllPlayers(
             gameCode: gameCode,
-            hostId: playerId,
+            hostId: creatorId,
             allPlayers: gamePlayers,
-            // Passer la map complÃ¨te des joueurs
             gameType: widget.gameName,
             difficulty: widget.difficulty,
             playerCount: widget.playerCount,
@@ -919,21 +912,29 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             timesUpTotalRounds: widget.timesUpTotalRounds,
           );
 
-          // Mettre Ã  jour la salle de matchmaking avec le code du jeu pour rediriger les autres
-          await snapshot.reference.update({'gameCode': gameCode});
-
-          // DÃ©marrer la logique du jeu (distribution des cartes, etc.)
+          await roomSnap.reference.update({'gameCode': gameCode});
           await _firebaseService.startGame(gameCode);
         } catch (e) {
-          print("Erreur Ã  la crÃ©ation de la partie: $e");
+          print("Erreur à la création de la partie: $e");
           try {
-            await snapshot.reference.delete();
+            await roomSnap.reference.delete();
           } catch (deleteError) {
-            print(
-              "Impossible de supprimer la salle de matchmaking aprÃ¨s erreur: $deleteError",
-            );
+            print("Impossible de supprimer la salle de matchmaking après erreur: $deleteError");
           }
         }
+      }
+
+      if (firstPlayer == playerId) {
+        launchGame(snapshot, data, playerId);
+      } else if (secondPlayer == playerId) {
+        // Secours : Si l'hôte principal n'a pas créé la partie après 4 secondes, le 2ème prend le relais
+        Future.delayed(const Duration(seconds: 4), () async {
+          final freshSnap = await snapshot.reference.get();
+          if (freshSnap.exists && (freshSnap.data() as Map<String, dynamic>?)?['gameCode'] == null) {
+            print("[Matchmaking] Hôte principal inactif, basculement vers l'hôte secondaire.");
+            launchGame(freshSnap, freshSnap.data() as Map<String, dynamic>, playerId);
+          }
+        });
       }
     } else {
       if (!_isDisposed) {
