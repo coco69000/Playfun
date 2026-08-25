@@ -8,6 +8,20 @@ class AuthService {
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
+  // Vérifier en temps réel si un pseudo est disponible
+  Future<bool> isUsernameAvailable(String username) async {
+    final clean = username.trim().toLowerCase();
+    if (clean.length < 3) return false;
+
+    final snap = await _firestore
+        .collection('users')
+        .where('nameLower', isEqualTo: clean)
+        .limit(1)
+        .get();
+
+    return snap.docs.isEmpty;
+  }
+
   // Se connecter avec email et mot de passe
   Future<User?> signInWithEmail(String email, String password) async {
     try {
@@ -22,34 +36,56 @@ class AuthService {
     }
   }
 
-  // S'inscrire avec email et mot de passe
+  // S'inscrire avec email, mot de passe et pseudo unique
   Future<User?> registerWithEmail(String email, String password, String name) async {
     try {
+      final cleanName = name.trim();
+      final cleanLower = cleanName.toLowerCase();
+
+      // Vérification côté serveur avant création
+      final available = await isUsernameAvailable(cleanName);
+      if (!available) {
+        throw FirebaseAuthException(
+          code: 'username-already-in-use',
+          message: 'Ce pseudo est déjà pris.',
+        );
+      }
+
       UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: email.trim(),
         password: password.trim(),
       );
       User? user = result.user;
+
       if (user != null) {
         await _firestore.collection('users').doc(user.uid).set({
           'uid': user.uid,
-          'email': email,
-          'name': name.trim().isEmpty ? 'Joueur' : name.trim(), // Enregistre le nom ici
+          'email': email.trim(),
+          'name': cleanName.isEmpty ? 'Joueur' : cleanName,
+          'nameLower': cleanLower, // Indispensable pour la recherche insensible à la casse
           'coins': 50,
           'isPremium': false,
+          'level': 1,
+          'xp': 0,
+          'gameStats': {},
+          'unlockedBadges': {},
+          'badgeProgress': {},
+          'friends': [],
+          'friendRequests': [],
+          'gameInvites': [],
+          'loungeInvites': [],
           'multiplayerGamesPlayedToday': 0,
-          'lastDailyCoinGrant': null,
-          'lastMultiplayerReset': null,
+          'videoGamesPlayedToday': 0,
+          'createdAt': FieldValue.serverTimestamp(),
         });
       }
       return user;
     } on FirebaseAuthException catch (e) {
       print("Erreur d'inscription: ${e.message}");
-      return null;
+      rethrow;
     }
   }
 
-  // S'assurer d'avoir un utilisateur connecté (anonyme si pas déjà connecté)
   Future<User> ensureSignedIn() async {
     if (_auth.currentUser != null) {
       return _auth.currentUser!;
@@ -58,7 +94,6 @@ class AuthService {
     return credential.user!;
   }
 
-  // Se déconnecter
   Future<void> signOut() async {
     await _auth.signOut();
   }

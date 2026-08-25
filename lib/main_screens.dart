@@ -2,10 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'monde.dart';
 import 'amis.dart';
 import 'player_state.dart';
+import 'theme/app_colors.dart';
+import 'widgets/empty_state_view.dart';
+import 'widgets/game_card_feedback.dart';
 
 final List<Map<String, dynamic>> allAppGames = [
   {
@@ -362,33 +363,34 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
-        children: filters.map((filter) {
-          final id = filter['id'] as String;
-          final isSelected = _selectedFilters.contains(id);
-          return Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: FilterChip(
-              avatar: Icon(
-                filter['icon'] as IconData,
-                size: 16,
-                color: isSelected ? Colors.black : Colors.deepPurpleAccent,
-              ),
-              label: Text(filter['label'] as String),
-              selected: isSelected,
-              onSelected: (selected) {
-                setState(() {
-                  if (selected) {
-                    _selectedFilters.add(id);
-                  } else {
-                    _selectedFilters.remove(id);
-                  }
-                });
-              },
-              selectedColor: Colors.deepPurpleAccent,
-              checkmarkColor: Colors.black,
-            ),
-          );
-        }).toList(),
+        children:
+            filters.map((filter) {
+              final id = filter['id'] as String;
+              final isSelected = _selectedFilters.contains(id);
+              return Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: FilterChip(
+                  avatar: Icon(
+                    filter['icon'] as IconData,
+                    size: 16,
+                    color: isSelected ? Colors.black : Colors.deepPurpleAccent,
+                  ),
+                  label: Text(filter['label'] as String),
+                  selected: isSelected,
+                  onSelected: (selected) {
+                    setState(() {
+                      if (selected) {
+                        _selectedFilters.add(id);
+                      } else {
+                        _selectedFilters.remove(id);
+                      }
+                    });
+                  },
+                  selectedColor: Colors.deepPurpleAccent,
+                  checkmarkColor: Colors.black,
+                ),
+              );
+            }).toList(),
       ),
     );
   }
@@ -396,36 +398,47 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     // Filtrage combiné : Recherche textuelle + Filtres multiples
-    List<Map<String, dynamic>> filteredGames = allAppGames.where((game) {
-      // 1. Recherche par texte
-      final matchesSearch = game['name'].toLowerCase().contains(_searchQuery.toLowerCase());
-      if (!matchesSearch) return false;
+    List<Map<String, dynamic>> filteredGames =
+        allAppGames.where((game) {
+          // 1. Recherche par texte
+          final matchesSearch = game['name'].toLowerCase().contains(
+            _searchQuery.toLowerCase(),
+          );
+          if (!matchesSearch) return false;
 
-      // 2. Recherche par jetons/filtres
-      if (_selectedFilters.isEmpty) return true;
+          // 2. Recherche par jetons/filtres
+          if (_selectedFilters.isEmpty) return true;
 
-      final selectedModes = _selectedFilters.intersection({'local', 'multi', 'monde'});
-      final selectedGenres = _selectedFilters.intersection({'board', 'card', 'party'});
+          final selectedModes = _selectedFilters.intersection({
+            'local',
+            'multi',
+            'monde',
+          });
+          final selectedGenres = _selectedFilters.intersection({
+            'board',
+            'card',
+            'party',
+          });
 
-      final modesList = List<String>.from(game['modes'] ?? []);
+          final modesList = List<String>.from(game['modes'] ?? []);
 
-      bool matchesMode = true;
-      if (selectedModes.isNotEmpty) {
-        matchesMode = selectedModes.any((mode) => modesList.contains(mode));
-      }
+          bool matchesMode = true;
+          if (selectedModes.isNotEmpty) {
+            matchesMode = selectedModes.any((mode) => modesList.contains(mode));
+          }
 
-      bool matchesGenre = true;
-      if (selectedGenres.isNotEmpty) {
-        matchesGenre = selectedGenres.any((genre) {
-          if (genre == 'board') return _isBoardGame(game['name']);
-          if (genre == 'card') return _isCardGame(game['name']);
-          if (genre == 'party') return _isPartyGame(game['name']);
-          return false;
-        });
-      }
+          bool matchesGenre = true;
+          if (selectedGenres.isNotEmpty) {
+            matchesGenre = selectedGenres.any((genre) {
+              if (genre == 'board') return _isBoardGame(game['name']);
+              if (genre == 'card') return _isCardGame(game['name']);
+              if (genre == 'party') return _isPartyGame(game['name']);
+              return false;
+            });
+          }
 
-      return matchesMode && matchesGenre;
-    }).toList();
+          return matchesMode && matchesGenre;
+        }).toList();
 
     return SafeArea(
       child: Column(
@@ -476,178 +489,257 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
               onChanged: (val) => setState(() => _searchQuery = val),
             ),
           ),
-          
+
           // Insertion de la barre de filtres sous le champ de recherche
           _buildFilterChips(),
 
           SizedBox(height: 10),
           Expanded(
-            child: GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 0.8,
-              ),
-              itemCount: filteredGames.length,
-              itemBuilder: (context, index) {
-                final game = filteredGames[index];
-                final modes = game['modes'] as List<String>;
-                final String? imageName = game['image'];
+            child:
+                filteredGames.isEmpty
+                    ? EmptyStateView(
+                      icon: Icons.search_off_rounded,
+                      title: "Aucun jeu trouvé",
+                      subtitle:
+                          "Essaie d'ajuster tes filtres ou d'effectuer une autre recherche.",
+                      actionLabel: "Réinitialiser les filtres",
+                      actionIcon: Icons.refresh,
+                      onActionPressed: () {
+                        setState(() {
+                          _searchQuery = '';
+                          _selectedFilters.clear();
+                        });
+                      },
+                    )
+                    : GridView.builder(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 14,
+                            mainAxisSpacing: 14,
+                            childAspectRatio: 0.82,
+                          ),
+                      itemCount: filteredGames.length,
+                      itemBuilder: (context, index) {
+                        final game = filteredGames[index];
+                        final modes = List<String>.from(game['modes'] ?? []);
+                        final String? imageName = game['image'];
+                        final bool isPopular = game['isPopular'] == true;
+                        final bool isNew = game['isNew'] == true;
 
-                return GestureDetector(
-                  onTap: () => _openGameSetup(game['name'], modes),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple[900]?.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(15),
-                      image:
-                          imageName != null
-                              ? DecorationImage(
-                                image: AssetImage('assets/images/$imageName'),
-                                fit: BoxFit.cover,
-                              )
-                              : null,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black45,
-                          blurRadius: 8,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
-                        child: Container(
-                          color: Colors.black.withOpacity(0.45),
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                game['icon'],
-                                size: imageName != null ? 30 : 45,
-                                color: Colors.cyanAccent,
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                game['name'],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  shadows: [
-                                    Shadow(color: Colors.black, blurRadius: 4),
-                                  ],
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Spacer(),
-                              Wrap(
-                                alignment: WrapAlignment.center,
-                                spacing: 4,
-                                runSpacing: 4,
+                        return InteractiveGameCard(
+                          margin: EdgeInsets.zero,
+                          onTap: () => _openGameSetup(game['name'], modes),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.surface,
+                              borderRadius: BorderRadius.circular(16),
+                              image:
+                                  imageName != null
+                                      ? DecorationImage(
+                                        image: AssetImage(
+                                          'assets/images/$imageName',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      )
+                                      : null,
+                              gradient:
+                                  imageName == null
+                                      ? const LinearGradient(
+                                        colors: [
+                                          Color(0xFF2E1A47),
+                                          Color(0xFF1B1429),
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      )
+                                      : null,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Stack(
                                 children: [
-                                  if (modes.contains('local'))
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 6,
-                                        vertical: 4,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.green[800],
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
+                                  BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                      sigmaX: 1.5,
+                                      sigmaY: 1.5,
+                                    ),
+                                    child: Container(
+                                      color: Colors.black.withOpacity(0.48),
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
+                                          const Spacer(),
                                           Icon(
-                                            Icons.phone_android,
-                                            size: 10,
-                                            color: Colors.white,
+                                            game['icon'] as IconData,
+                                            size: imageName != null ? 32 : 44,
+                                            color: AppColors.accent,
                                           ),
-                                          SizedBox(width: 4),
+                                          const SizedBox(height: 8),
                                           Text(
-                                            "Local",
-                                            style: TextStyle(
-                                              fontSize: 10,
+                                            game['name'] as String,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
                                               color: Colors.white,
+                                              shadows: [
+                                                Shadow(
+                                                  color: Colors.black,
+                                                  blurRadius: 6,
+                                                ),
+                                              ],
                                             ),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const Spacer(),
+                                          Wrap(
+                                            alignment: WrapAlignment.center,
+                                            spacing: 4,
+                                            runSpacing: 4,
+                                            children: [
+                                              if (modes.contains('local'))
+                                                _buildModeBadge(
+                                                  label: "Local",
+                                                  icon: Icons.phone_android,
+                                                  color: Colors.green.shade800,
+                                                ),
+                                              if (modes.contains('multi'))
+                                                _buildModeBadge(
+                                                  label: "Amis",
+                                                  icon: Icons.people,
+                                                  color: Colors.blue.shade800,
+                                                ),
+                                              if (modes.contains('monde'))
+                                                _buildModeBadge(
+                                                  label: "Monde",
+                                                  icon: Icons.public,
+                                                  color: Colors.purple.shade800,
+                                                ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                  if (modes.contains('multi'))
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 6,
-                                        vertical: 4,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue[800],
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(
-                                            Icons.people,
-                                            size: 10,
-                                            color: Colors.white,
+                                  ),
+
+                                  // Top Right Badges (POPUlAIRE / NOUVEAU)
+                                  if (isPopular)
+                                    Positioned(
+                                      top: 8,
+                                      right: 8,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 7,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFFFF8F00),
+                                              Color(0xFFFF5722),
+                                            ],
                                           ),
-                                          SizedBox(width: 4),
-                                          Text(
-                                            "Amis",
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Colors.black45,
+                                              blurRadius: 4,
+                                              offset: Offset(0, 2),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  if (modes.contains('monde'))
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 6,
-                                        vertical: 4,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.purple[800],
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(
-                                            Icons.public,
-                                            size: 10,
+                                          ],
+                                        ),
+                                        child: const Text(
+                                          "🔥 POPULAIRE",
+                                          style: TextStyle(
                                             color: Colors.white,
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          SizedBox(width: 4),
-                                          Text(
-                                            "Monde",
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  else if (isNew)
+                                    Positioned(
+                                      top: 8,
+                                      right: 8,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 7,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFF00C853),
+                                              Color(0xFF009688),
+                                            ],
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Colors.black45,
+                                              blurRadius: 4,
+                                              offset: Offset(0, 2),
                                             ),
+                                          ],
+                                        ),
+                                        child: const Text(
+                                          "✨ NOUVEAU",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                 ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
-                  ),
-                );
-              },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildModeBadge({
+    required String label,
+    required IconData icon,
+    required Color color,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.85),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 10, color: Colors.white),
+          const SizedBox(width: 3),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 10,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
@@ -901,11 +993,11 @@ class _FriendsScreenState extends State<FriendsScreen> {
           Expanded(
             child:
                 friends.isEmpty
-                    ? Center(
-                      child: Text(
-                        "Cherchez des joueurs pour les ajouter en ami !",
-                        style: TextStyle(color: Colors.white54),
-                      ),
+                    ? const EmptyStateView(
+                      icon: Icons.person_add_alt_1_rounded,
+                      title: "Pas encore d'amis",
+                      subtitle:
+                          "Recherche tes potes par leur pseudo ci-dessus pour les inviter en un clic !",
                     )
                     : ListView.builder(
                       itemCount: friends.length,
@@ -916,17 +1008,21 @@ class _FriendsScreenState extends State<FriendsScreen> {
                             'Chargement...';
                         return ListTile(
                           leading: CircleAvatar(
-                            child: Text(friendName[0]),
-                            backgroundColor: Colors.deepPurple,
+                            child: Text(
+                              friendName.isNotEmpty
+                                  ? friendName[0].toUpperCase()
+                                  : "?",
+                            ),
+                            backgroundColor: AppColors.primary,
                           ),
                           title: Text(
                             friendName,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           trailing: IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.person_remove,
-                              color: Colors.white24,
+                              color: Colors.white30,
                             ),
                             onPressed: () {
                               playerState.removeFriend(friendId);
@@ -956,27 +1052,30 @@ class StatsEtoileScreen extends StatelessWidget {
             padding: const EdgeInsets.all(24.0),
             child: Column(
               children: [
-                Icon(Icons.star, size: 80, color: Colors.amber),
+                const Icon(Icons.star, size: 80, color: Colors.amber),
                 Text(
                   "Niveau ${playerState.level}",
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 LinearProgressIndicator(
                   value: playerState.xp / playerState.xpForNextLevel,
                   backgroundColor: Colors.grey[800],
                   color: Colors.amber,
                   minHeight: 10,
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text("${playerState.xp} / ${playerState.xpForNextLevel} XP"),
               ],
             ),
           ),
-          Divider(color: Colors.white24),
+          const Divider(color: Colors.white24),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(
+            child: const Text(
               "Statistiques par jeu",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
@@ -984,8 +1083,11 @@ class StatsEtoileScreen extends StatelessWidget {
           Expanded(
             child:
                 stats.isEmpty
-                    ? Center(
-                      child: Text("Jouez des parties pour voir vos stats !"),
+                    ? const EmptyStateView(
+                      icon: Icons.insights_rounded,
+                      title: "Aucune statistique",
+                      subtitle:
+                          "Joue à des parties en ligne ou locales pour enregistrer tes victoires et exploits !",
                     )
                     : ListView.builder(
                       itemCount: stats.keys.length,

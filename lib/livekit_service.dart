@@ -156,18 +156,17 @@ class LivekitService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> joinChannel(String roomName, {
+  Future<void> joinChannel(
+    String roomName, {
     String? identity,
     bool videoEnabled = false,
     bool audioEnabled = false,
   }) async {
     if (!_isInitialized) await initialize();
 
-    // Configure l'état initial des périphériques locaux
     _isLocalVideoOff = !videoEnabled;
     _isLocalMuted = !audioEnabled;
 
-    // Si déjà connecté à la même session, on adapte simplement l'activation
     if (_room?.connectionState == ConnectionState.connected) {
       await _room!.localParticipant?.setCameraEnabled(videoEnabled);
       await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);
@@ -185,33 +184,28 @@ class LivekitService extends ChangeNotifier {
         throw Exception("Impossible d'authentifier l'utilisateur.");
       }
 
-      print("[LivekitService] Demande sécurisée de token pour room: $roomName");
-
       final callable = FirebaseFunctions.instanceFor(
         region: "us-central1",
       ).httpsCallable("generateLivekitToken");
 
-      final result = await callable.call({
-        "roomName": roomName,
-      });
+      final result = await callable.call({"roomName": roomName});
 
       final data = Map<String, dynamic>.from(result.data as Map);
       final token = data["token"] as String;
-      final serverIdentity = data["identity"] as String? ?? identity ?? user.uid;
+      final serverIdentity =
+          data["identity"] as String? ?? identity ?? user.uid;
       _localIdentity = serverIdentity;
-
-      print("[LivekitService] Token reçu, connexion au room...");
 
       await leaveChannel();
       await _room!.connect(livekitUrl, token);
 
-      // Publication des flux d'après l'état configuré
-      await _room!.localParticipant?.setCameraEnabled(!_isLocalVideoOff);
-      await _room!.localParticipant?.setMicrophoneEnabled(!_isLocalMuted);
+      await _room!.localParticipant?.setCameraEnabled(videoEnabled);
+      await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);
+
       _localUserJoined = true;
       notifyListeners();
     } catch (e) {
-      print("Erreur joinChannel sécurisé: $e");
+      debugPrint("Erreur joinChannel sécurisé: $e");
     }
   }
 
@@ -264,6 +258,12 @@ class LivekitService extends ChangeNotifier {
   Future<void> muteMicrophone() async {
     _isLocalMuted = true;
     await _room?.localParticipant?.setMicrophoneEnabled(false);
+    notifyListeners();
+  }
+
+  Future<void> unmuteMicrophone() async {
+    _isLocalMuted = false;
+    await _room?.localParticipant?.setMicrophoneEnabled(true);
     notifyListeners();
   }
 

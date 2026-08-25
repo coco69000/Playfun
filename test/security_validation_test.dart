@@ -106,18 +106,14 @@ void main() {
         'p2': {'name': 'Bob', 'role': 'Chasseur'},
       };
 
-      final cloned = <String, dynamic>{};
+      final cloned = <String, Map<String, dynamic>>{};
       original.forEach((key, value) {
-        if (value is Map) {
-          cloned[key] = Map<String, dynamic>.from(value);
-        } else {
-          cloned[key] = value;
-        }
+        cloned[key] = Map<String, dynamic>.from(value);
       });
 
-      cloned['p1']['role'] = 'Villageois';
+      cloned['p1']!['role'] = 'Villageois';
       expect(original['p1']!['role'], 'Loup-Garou');
-      expect(cloned['p1']['role'], 'Villageois');
+      expect(cloned['p1']!['role'], 'Villageois');
     });
 
     test('Belote Card Hierarchy Power Check', () {
@@ -601,6 +597,281 @@ void main() {
       expect(getPaperIndex(1, 1, 4), 0);
       expect(getPaperIndex(0, 1, 4), 3);
       expect(getPaperIndex(2, 3, 4), 3);
+    });
+
+    test('Loup-Garou Role Camp & Encoding Normalization Check', () {
+      String normalizeRoleName(String role) {
+        String r = role.trim();
+        r = r.replaceAll('SorciÃ¨re', 'Sorcière');
+        r = r.replaceAll('NÃ©cromancien', 'Nécromancien');
+        r = r.replaceAll('HÃ©ritier', 'Héritier');
+        return r;
+      }
+
+      final Map<String, String> roleCamps = {
+        'Villageois': 'villageois',
+        'Simple Villageois': 'villageois',
+        'Loup-Garou': 'loups',
+        'Loup Garou': 'loups',
+        'Voyante': 'villageois',
+        'Chasseur': 'villageois',
+        'Cupidon': 'villageois',
+        'Sorcière': 'villageois',
+        'Petite Fille': 'villageois',
+        'Voleur': 'villageois',
+        'Salvateur': 'villageois',
+        'Garde': 'villageois',
+        'Idiot du Village': 'villageois',
+        'Ancien': 'villageois',
+        'Bouc Emissaire': 'villageois',
+        'Joueur de Flûte': 'solitaire',
+        'Loup Blanc': 'solitaire',
+        'Corbeau': 'villageois',
+        'Renard': 'villageois',
+        'Chien-Loup': 'villageois',
+        'Servante Dévouée': 'villageois',
+        'Deux Sœurs': 'villageois',
+        'Trois Frères': 'villageois',
+        'Montreur d\'Ours': 'villageois',
+        'Chevalier à l\'Epée Rouillée': 'villageois',
+        'Juge Bègue': 'villageois',
+        'Abominable Sectaire': 'solitaire',
+        'Infect Père des Loups': 'loups',
+        'Grand Méchant Loup': 'loups',
+        'Loup Bavard': 'loups',
+        'Soeur': 'villageois',
+        'Frère': 'villageois',
+        'Chuchoteur': 'villageois',
+        'Bourreau': 'villageois',
+        'Fossoyeur': 'villageois',
+        'Pyromane': 'solitaire',
+        'Loup Mystique': 'loups',
+        'Nécromancien': 'villageois',
+        'Chasseur de Têtes': 'solitaire',
+        'Dictateur': 'villageois',
+        'Mentaliste': 'villageois',
+        'Prêtre': 'villageois',
+        'Loup Déguisé': 'loups',
+        'Rat Malade': 'solitaire',
+        'Héritier': 'villageois',
+      };
+
+      String getRoleCamp(String? role) {
+        if (role == null || role.isEmpty) return 'villageois';
+        String norm = normalizeRoleName(role);
+        return roleCamps[norm] ?? roleCamps[role] ?? 'villageois';
+      }
+
+      expect(getRoleCamp('Loup-Garou'), 'loups');
+      expect(getRoleCamp('Loup Bavard'), 'loups');
+      expect(getRoleCamp('Loup Mystique'), 'loups');
+      expect(getRoleCamp('Loup Déguisé'), 'loups');
+      expect(getRoleCamp('Infect Père des Loups'), 'loups');
+      expect(getRoleCamp('Grand Méchant Loup'), 'loups');
+      expect(getRoleCamp('Rat Malade'), 'solitaire');
+      expect(getRoleCamp('Pyromane'), 'solitaire');
+      expect(getRoleCamp('Loup Blanc'), 'solitaire');
+      expect(getRoleCamp('Héritier'), 'villageois');
+      expect(getRoleCamp('HÃ©ritier'), 'villageois');
+      expect(getRoleCamp('NÃ©cromancien'), 'villageois');
+      expect(getRoleCamp('SorciÃ¨re'), 'villageois');
+      expect(getRoleCamp('Mentaliste'), 'villageois');
+      expect(getRoleCamp('Dictateur'), 'villageois');
+    });
+
+    test('Loup-Garou Rat Malade Victory Condition Check', () {
+      Map<String, dynamic> checkRatMaladeWin({
+        required List<String> livingPlayers,
+        required List<String> contaminatedLiving,
+        required bool isRatMaladeAlive,
+      }) {
+        if (!isRatMaladeAlive) return {'winner': null};
+        final int nonRatMaladeVivants = livingPlayers.length - 1;
+        if (nonRatMaladeVivants == 0) {
+          return {'winner': 'Rat Malade', 'reason': 'Solo survivor'};
+        } else if (contaminatedLiving.length >= nonRatMaladeVivants) {
+          return {'winner': 'Rat Malade', 'reason': 'All contaminated'};
+        }
+        return {'winner': null};
+      }
+
+      // Rat Malade with 3 other players, 2 contaminated -> not won yet
+      expect(
+        checkRatMaladeWin(
+          livingPlayers: ['rat', 'p1', 'p2', 'p3'],
+          contaminatedLiving: ['p1', 'p2'],
+          isRatMaladeAlive: true,
+        )['winner'],
+        isNull,
+      );
+
+      // Rat Malade with 3 other players, all 3 contaminated -> won!
+      expect(
+        checkRatMaladeWin(
+          livingPlayers: ['rat', 'p1', 'p2', 'p3'],
+          contaminatedLiving: ['p1', 'p2', 'p3'],
+          isRatMaladeAlive: true,
+        )['winner'],
+        'Rat Malade',
+      );
+
+      // Rat Malade only survivor -> won!
+      expect(
+        checkRatMaladeWin(
+          livingPlayers: ['rat'],
+          contaminatedLiving: [],
+          isRatMaladeAlive: true,
+        )['winner'],
+        'Rat Malade',
+      );
+    });
+
+    test('Loup-Garou Héritier Role Inheritance Check', () {
+      String resolveRoleAfterDeath({
+        required String originalRole,
+        required String? testateurId,
+        required String deceasedPlayerId,
+        required String deceasedPlayerRole,
+      }) {
+        if (originalRole == 'Héritier' && testateurId == deceasedPlayerId) {
+          return deceasedPlayerRole;
+        }
+        return originalRole;
+      }
+
+      expect(
+        resolveRoleAfterDeath(
+          originalRole: 'Héritier',
+          testateurId: 'player_alpha',
+          deceasedPlayerId: 'player_beta',
+          deceasedPlayerRole: 'Voyante',
+        ),
+        'Héritier',
+      );
+
+      expect(
+        resolveRoleAfterDeath(
+          originalRole: 'Héritier',
+          testateurId: 'player_alpha',
+          deceasedPlayerId: 'player_alpha',
+          deceasedPlayerRole: 'Loup-Garou',
+        ),
+        'Loup-Garou',
+      );
+    });
+
+    test('Loup-Garou Loup Blanc Isolation From Loups Vivants Check', () {
+      int countLoupsVivants(List<Map<String, dynamic>> vivants) {
+        return vivants
+            .where(
+              (p) =>
+                  (p['camp'] == 'loups' || p['infectionStatus'] == 'infecte') &&
+                  p['role'] != 'Loup Blanc',
+            )
+            .length;
+      }
+
+      final players = [
+        {'role': 'Loup Blanc', 'camp': 'solitaire', 'infectionStatus': 'infecte'},
+        {'role': 'Loup-Garou', 'camp': 'loups', 'infectionStatus': 'normal'},
+        {'role': 'Villageois', 'camp': 'villageois', 'infectionStatus': 'infecte'},
+        {'role': 'Simple Villageois', 'camp': 'villageois', 'infectionStatus': 'normal'},
+      ];
+
+      // Loup-Garou (1) + Infected Villageois (1) = 2. Loup Blanc is NOT counted.
+      expect(countLoupsVivants(players), 2);
+    });
+
+    test('Loup-Garou Loup Bavard Dictateur Mayor Election Check', () {
+      bool isLoupBavardExempt({
+        required bool dictatorTookPower,
+        required bool isMayorElectionRound2,
+      }) {
+        if (!dictatorTookPower) return false;
+        return !isMayorElectionRound2; // Exempt EXCEPT if taken on round 2 of mayor election
+      }
+
+      expect(isLoupBavardExempt(dictatorTookPower: false, isMayorElectionRound2: false), isFalse);
+      expect(isLoupBavardExempt(dictatorTookPower: true, isMayorElectionRound2: false), isTrue);
+      expect(isLoupBavardExempt(dictatorTookPower: true, isMayorElectionRound2: true), isFalse);
+    });
+
+    test('Loup-Garou Petite Fille Chat Anonymization Check', () {
+      String getChatSenderDisplayName({
+        required bool isPetiteFille,
+        required String chatType,
+        required String senderId,
+        required String senderName,
+        required String currentUserId,
+      }) {
+        final isMine = senderId == currentUserId;
+        if (isPetiteFille && chatType == 'wolf' && !isMine) {
+          return "Loup Masqué #${(senderId.hashCode.abs() % 10) + 1}";
+        }
+        return isMine ? "Vous" : senderName;
+      }
+
+      expect(
+        getChatSenderDisplayName(
+          isPetiteFille: true,
+          chatType: 'wolf',
+          senderId: 'wolf_alpha_123',
+          senderName: 'Alice',
+          currentUserId: 'petite_fille_id',
+        ),
+        startsWith("Loup Masqué #"),
+      );
+
+      expect(
+        getChatSenderDisplayName(
+          isPetiteFille: false,
+          chatType: 'wolf',
+          senderId: 'wolf_alpha_123',
+          senderName: 'Alice',
+          currentUserId: 'wolf_beta_456',
+        ),
+        'Alice',
+      );
+    });
+
+    test('Loup-Garou Mentaliste Vote Perception Check', () {
+      String getMentalisteAuraForTarget(Map<String, dynamic> targetPlayer) {
+        final isWolfCamp =
+            targetPlayer['camp'] == 'loups' ||
+            targetPlayer['role'] == 'Loup Blanc' ||
+            targetPlayer['infectionStatus'] == 'infecte';
+        return isWolfCamp ? "un Loup-Garou / Infecté" : "un Innocent";
+      }
+
+      expect(
+        getMentalisteAuraForTarget({'role': 'Villageois', 'camp': 'villageois', 'infectionStatus': 'normal'}),
+        "un Innocent",
+      );
+      expect(
+        getMentalisteAuraForTarget({'role': 'Villageois', 'camp': 'villageois', 'infectionStatus': 'infecte'}),
+        "un Loup-Garou / Infecté",
+      );
+      expect(
+        getMentalisteAuraForTarget({'role': 'Loup-Garou', 'camp': 'loups', 'infectionStatus': 'normal'}),
+        "un Loup-Garou / Infecté",
+      );
+      expect(
+        getMentalisteAuraForTarget({'role': 'Loup Blanc', 'camp': 'solitaire', 'infectionStatus': 'normal'}),
+        "un Loup-Garou / Infecté",
+      );
+    });
+
+    test('Loup-Garou Sorciere Healing Potion Safety Check', () {
+      bool canUseHealingPotion({
+        required bool hasHealingPotion,
+        required String? loupsTargetId,
+      }) {
+        return hasHealingPotion && loupsTargetId != null && loupsTargetId.isNotEmpty;
+      }
+
+      expect(canUseHealingPotion(hasHealingPotion: true, loupsTargetId: null), isFalse);
+      expect(canUseHealingPotion(hasHealingPotion: true, loupsTargetId: 'player_victim_1'), isTrue);
+      expect(canUseHealingPotion(hasHealingPotion: false, loupsTargetId: 'player_victim_1'), isFalse);
     });
   });
 }

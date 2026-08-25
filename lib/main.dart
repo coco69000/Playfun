@@ -2,17 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart' hide FirebaseService;
 
 import 'auth/auth_gate.dart';
 import 'auth/auth_service.dart';
 import 'amis.dart';
-import 'monde.dart';
 import 'firebase_options.dart';
 import 'player_state.dart';
 import 'premium_screen.dart';
 import 'livekit_service.dart';
 import 'main_screens.dart';
+import 'stats_badges_screen.dart';
+import 'theme/app_theme.dart';
+import 'theme/app_colors.dart';
+import 'screens/onboarding_screen.dart';
+import 'services/app_router.dart';
+import 'services/force_update_service.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -27,7 +32,8 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   try {
     await FirebaseAppCheck.instance.activate(
-      androidProvider: kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+      androidProvider:
+          kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
       appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.appAttest,
     );
   } catch (e) {
@@ -51,7 +57,7 @@ class MyAppWithAuth extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Jeu de Soirée',
-      theme: appTheme, // appTheme est défini dans amis.dart
+      theme: AppTheme.darkTheme,
       home: AuthGate(),
       debugShowCheckedModeBanner: false,
     );
@@ -67,86 +73,151 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   List<String> _processedInvites = [];
 
-  void _showProfileDialog(BuildContext context, PlayerState ps, AuthService auth) {
-    TextEditingController nameController = TextEditingController(text: ps.userName);
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ForceUpdateService().listenForForcedUpdate(context);
+    });
+  }
+
+  void _showProfileDialog(
+    BuildContext context,
+    PlayerState ps,
+    AuthService auth,
+  ) {
+    TextEditingController nameController = TextEditingController(
+      text: ps.userName,
+    );
     bool isEditingName = false;
 
     showDialog(
       context: context,
-      builder: (ctx) => StatefulBuilder(
-        builder: (context, setStateDialog) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            title: Text("Profil", textAlign: TextAlign.center),
-            content: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Colors.deepPurpleAccent,
-                    child: Text(
-                      ps.userName != null && ps.userName!.isNotEmpty ? ps.userName![0].toUpperCase() : "?",
-                      style: TextStyle(fontSize: 30, color: Colors.white),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-
-                  if (isEditingName)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: nameController,
-                            decoration: InputDecoration(hintText: "Nouveau pseudo", isDense: true),
-                          )
+      builder:
+          (ctx) => StatefulBuilder(
+            builder: (context, setStateDialog) {
+              return AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                title: Text("Profil", textAlign: TextAlign.center),
+                content: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Colors.deepPurpleAccent,
+                        child: Text(
+                          ps.userName != null && ps.userName!.isNotEmpty
+                              ? ps.userName![0].toUpperCase()
+                              : "?",
+                          style: TextStyle(fontSize: 30, color: Colors.white),
                         ),
-                        IconButton(
-                          icon: Icon(Icons.check, color: Colors.green),
-                          onPressed: () {
-                            if (nameController.text.trim().isNotEmpty) {
-                              ps.updateUserName(nameController.text.trim());
-                            }
-                            setStateDialog(() => isEditingName = false);
-                          }
-                        )
-                      ]
-                    )
-                  else
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(ps.userName ?? "Joueur", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                        IconButton(
-                          icon: Icon(Icons.edit, size: 18, color: Colors.white54),
-                          onPressed: () => setStateDialog(() => isEditingName = true),
-                        )
-                      ]
-                    ),
+                      ),
+                      SizedBox(height: 15),
 
-                  SizedBox(height: 5),
-                  Text("Niveau ${ps.level}", style: TextStyle(color: Colors.amber, fontSize: 18, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 5),
-                  Text("${ps.xp} / ${ps.xpForNextLevel} XP", style: TextStyle(color: Colors.white70)),
-                  Divider(height: 30),
-                  Text("Parties jouées : ${ps.gameStats.values.fold<int>(0, (sum, stat) => sum + (stat['played'] as int? ?? 0))}"),
-                  Text("Victoires : ${ps.gameStats.values.fold<int>(0, (sum, stat) => sum + (stat['won'] as int? ?? 0))}"),
-                  SizedBox(height: 20),
-                  ElevatedButton.icon(
-                    icon: Icon(Icons.logout),
-                    label: Text("Se déconnecter"),
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                      auth.signOut();
-                    }
-                  )
-                ]
-              )
-            )
-          );
-        }
-      )
+                      if (isEditingName)
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: nameController,
+                                decoration: InputDecoration(
+                                  hintText: "Nouveau pseudo",
+                                  isDense: true,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.check, color: Colors.green),
+                              onPressed: () {
+                                if (nameController.text.trim().isNotEmpty) {
+                                  ps.updateUserName(nameController.text.trim());
+                                }
+                                setStateDialog(() => isEditingName = false);
+                              },
+                            ),
+                          ],
+                        )
+                      else
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              ps.userName ?? "Joueur",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.edit,
+                                size: 18,
+                                color: Colors.white54,
+                              ),
+                              onPressed:
+                                  () => setStateDialog(
+                                    () => isEditingName = true,
+                                  ),
+                            ),
+                          ],
+                        ),
+
+                      SizedBox(height: 5),
+                      Text(
+                        "Niveau ${ps.level}",
+                        style: TextStyle(
+                          color: Colors.amber,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        "${ps.xp} / ${ps.xpForNextLevel} XP",
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                      Divider(height: 30),
+                      Text(
+                        "Parties jouées : ${ps.gameStats.values.fold<int>(0, (sum, stat) => sum + (stat['played'] as int? ?? 0))}",
+                      ),
+                      Text(
+                        "Victoires : ${ps.gameStats.values.fold<int>(0, (sum, stat) => sum + (stat['won'] as int? ?? 0))}",
+                      ),
+                      SizedBox(height: 16),
+                      OutlinedButton.icon(
+                        icon: Icon(Icons.school, size: 18),
+                        label: Text("Revoir le tutoriel"),
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          AppRouter.push(
+                            context,
+                            OnboardingScreen(
+                              onFinish: () => Navigator.pop(context),
+                            ),
+                          );
+                        },
+                      ),
+                      SizedBox(height: 12),
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.logout),
+                        label: Text("Se déconnecter"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.error,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          auth.signOut();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
     );
   }
 
@@ -206,10 +277,73 @@ class _MainScreenState extends State<MainScreen> {
       }
     }
 
+    // Écoute des invitations de salon
+    if (playerState.loungeInvites.isNotEmpty) {
+      for (var invite in playerState.loungeInvites) {
+        String loungeId = invite['loungeId'];
+        String host = invite['hostName'] ?? 'Un ami';
+        String loungeName = invite['loungeName'] ?? 'Salon';
+
+        if (!_processedInvites.contains(loungeId)) {
+          _processedInvites.add(loungeId);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            showDialog(
+              context: context,
+              builder:
+                  (ctx) => AlertDialog(
+                    title: const Text("Invitation au Salon !"),
+                    content: Text(
+                      "$host vous invite à rejoindre son salon \"$loungeName\" !",
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          playerState.clearLoungeInvite(loungeId, host);
+                          Navigator.pop(ctx);
+                        },
+                        child: const Text(
+                          "Ignorer",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          playerState.clearLoungeInvite(loungeId, host);
+                          Navigator.pop(ctx);
+                          await FirebaseService().joinLounge(
+                            loungeId,
+                            playerId,
+                            playerState.userName ?? 'Joueur',
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (_) => LoungeRoomScreen(
+                                    loungeId: loungeId,
+                                    playerId: playerId,
+                                  ),
+                            ),
+                          );
+                        },
+                        child: const Text("Rejoindre le salon"),
+                      ),
+                    ],
+                  ),
+            );
+          });
+        }
+      }
+    }
+
+    if (!playerState.hasCompletedOnboarding) {
+      return OnboardingScreen(onFinish: () => playerState.completeOnboarding());
+    }
+
     final List<Widget> _screens = [
       GameSelectionScreen(playerId: playerId),
       FriendsScreen(playerId: playerId),
-      StatsEtoileScreen(),
+      StatsAndBadgesScreen(),
       LoungeListScreen(playerId: playerId), // Nouvel onglet des Salons
     ];
 

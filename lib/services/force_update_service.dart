@@ -1,0 +1,188 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class ForceUpdateService {
+  static final ForceUpdateService _instance = ForceUpdateService._internal();
+  factory ForceUpdateService() => _instance;
+  ForceUpdateService._internal();
+
+  bool _isDialogOpen = false;
+
+  /// Écoute en temps réel les paramètres de version imposés depuis Firestore
+  void listenForForcedUpdate(BuildContext context) async {
+    try {
+      final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      final String currentVersion = packageInfo.version; // ex: "1.0.2"
+      final int currentBuildNumber = int.tryParse(packageInfo.buildNumber) ?? 0;
+
+      FirebaseFirestore.instance
+          .collection('app_config')
+          .doc('version_control')
+          .snapshots()
+          .listen((snapshot) {
+        if (!snapshot.exists || snapshot.data() == null) return;
+
+        final data = snapshot.data() as Map<String, dynamic>;
+        final bool forceUpdateActive = data['forceUpdateActive'] ?? false;
+        final String minRequiredVersion = data['minRequiredVersion'] ?? "1.0.0";
+        final int minRequiredBuild = data['minRequiredBuild'] ?? 0;
+        final String updateMessage = data['updateMessage'] ??
+            "Une nouvelle version obligatoire de l'application est disponible avec de nouvelles fonctionnalités et des correctifs de sécurité.";
+        final String storeUrlAndroid = data['storeUrlAndroid'] ??
+            "https://play.google.com/store/apps/details?id=com.parrel.playfun";
+        final String storeUrlIOS = data['storeUrlIOS'] ??
+            "https://apps.apple.com/app/idYOUR_APP_ID";
+
+        // Comparaison de version
+        bool needsUpdate = false;
+        if (forceUpdateActive) {
+          if (minRequiredBuild > 0) {
+            needsUpdate = currentBuildNumber < minRequiredBuild;
+          } else {
+            needsUpdate = _isVersionLower(currentVersion, minRequiredVersion);
+          }
+        }
+
+        if (needsUpdate && !_isDialogOpen) {
+          _showBlockingUpdateDialog(
+            context,
+            message: updateMessage,
+            storeUrl: Platform.isIOS ? storeUrlIOS : storeUrlAndroid,
+          );
+        }
+      }, onError: (e) {
+        debugPrint("[ForceUpdateService] Error listening to version_control: $e");
+      });
+    } catch (e) {
+      debugPrint("[ForceUpdateService] Initialization error: $e");
+    }
+  }
+
+  /// Compare 2 versions sous le format semver "1.2.3"
+  bool _isVersionLower(String current, String required) {
+    try {
+      List<int> currentParts = current.split('.').map((e) => int.tryParse(e) ?? 0).toList();
+      List<int> requiredParts = required.split('.').map((e) => int.tryParse(e) ?? 0).toList();
+
+      int maxLength = currentParts.length > requiredParts.length ? currentParts.length : requiredParts.length;
+
+      for (int i = 0; i < maxLength; i++) {
+        int curr = i < currentParts.length ? currentParts[i] : 0;
+        int req = i < requiredParts.length ? requiredParts[i] : 0;
+        if (curr < req) return true;
+        if (curr > req) return false;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Affiche le popup bloquant et infranchissable
+  void _showBlockingUpdateDialog(
+    BuildContext context, {
+    required String message,
+    required String storeUrl,
+  }) {
+    _isDialogOpen = true;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Interdit le clic en dehors
+      barrierColor: Colors.black.withOpacity(0.92), // Fond très opaque
+      builder: (BuildContext dialogContext) {
+        return PopScope(
+          canPop: false, // Empêche le retour physique Android
+          onPopInvokedWithResult: (didPop, result) {
+            // Blocage total du retour arrière
+          },
+          child: AlertDialog(
+            backgroundColor: const Color(0xFF1E1E2E),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+              side: const BorderSide(color: Colors.amberAccent, width: 2),
+            ),
+            title: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.system_update_alt_rounded,
+                    size: 50,
+                    color: Colors.amberAccent,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  "Mise à jour Requise !",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  message,
+                  style: const TextStyle(color: Colors.white70, fontSize: 14, height: 1.4),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Vous devez installer la dernière version pour continuer à jouer et accéder aux serveurs sécurisés.",
+                  style: TextStyle(
+                    color: Colors.amberAccent,
+                    fontSize: 12,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            actionsAlignment: MainAxisAlignment.center,
+            actions: [
+              ElevatedButton.icon(
+                icon: const Icon(Icons.download_rounded, color: Colors.black),
+                label: const Text(
+                  "METTRE À JOUR MAINTENANT",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.amberAccent,
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 8,
+                ),
+                onPressed: () async {
+                  final Uri url = Uri.parse(storeUrl);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    ).then((_) {
+      _isDialogOpen = false;
+    });
+  }
+}

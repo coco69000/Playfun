@@ -2,7 +2,9 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Profils utilisateurs : l'utilisateur ne peut pas modifier ses pièces, VIP, niveau, XP ni stats directement
+    // ==========================================
+    // PROFILS UTILISATEURS
+    // ==========================================
     match /users/{userId} {
       allow read: if request.auth != null;
       allow create: if request.auth != null && request.auth.uid == userId
@@ -10,60 +12,145 @@ service cloud.firestore {
                     && request.resource.data.isPremium == false
                     && request.resource.data.level == 1
                     && request.resource.data.xp == 0;
-      allow update: if request.auth != null && (
-        (request.auth.uid == userId && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['isPremium', 'coins', 'level', 'xp', 'gameStats'])) ||
-        (request.auth.uid != userId && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['friendRequests', 'gameInvites']))
-      );
+      
+      // Permet uniquement à l'utilisateur connecté de modifier son propre profil (hors champs sensibles)
+      allow update: if request.auth != null 
+                    && request.auth.uid == userId
+                    && !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+                        'isPremium', 'coins', 'level', 'xp', 'gameStats', 
+                        'unlockedBadges', 'badgeProgress'
+                    ]);
       allow delete: if false;
     }
 
-    // Matchmaking
+    // ==========================================
+    // MATCHMAKING
+    // ==========================================
     match /matchmaking/{docId} {
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      // Seul un joueur inscrit dans la room peut la mettre à jour
+      allow update: if request.auth != null && (
+        resource.data.players.hasAny([request.auth.uid]) ||
+        request.resource.data.players.hasAny([request.auth.uid])
+      );
+      // Seul le créateur (premier joueur) peut supprimer la room
+      allow delete: if request.auth != null && (
+        resource.data.players[0] == request.auth.uid ||
+        resource.data.hostId == request.auth.uid
+      );
     }
 
-    // Salons (Lounges)
+    // ==========================================
+    // SALONS (LOUNGES)
+    // ==========================================
     match /lounges/{loungeId} {
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      
+      // 1. Création : Force l'assignation de l'ID de l'hôte à l'UID de l'utilisateur
+      allow create: if request.auth != null && request.resource.data.hostId == request.auth.uid;
+      
+      // 2. Mise à jour : Restrictions granulaires
+      allow update: if request.auth != null && (
+        // A. L'hôte peut tout modifier
+        resource.data.hostId == request.auth.uid || 
+        
+        // B. Un membre peut s'ajouter ou se retirer de 'players'
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['players']) &&
+         (request.resource.data.players.keys().hasAny([request.auth.uid]) ||
+          resource.data.players.keys().hasAny([request.auth.uid]))) ||
+         
+        // C. Un membre peut s'ajouter ou se retirer de 'streamers'
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['streamers']) &&
+         request.resource.data.get('streamers', []) is list &&
+         (request.resource.data.get('streamers', []).hasAny([request.auth.uid]) ||
+          resource.data.get('streamers', []).hasAny([request.auth.uid]))) ||
+         
+        // D. Un membre peut s'ajouter/se retirer de 'pendingGame.joinedPlayers' SANS modifier le reste
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['pendingGame']) &&
+         request.resource.data.pendingGame is map &&
+         request.resource.data.pendingGame.gameCode == resource.data.pendingGame.gameCode &&
+         request.resource.data.pendingGame.hostId == resource.data.pendingGame.hostId &&
+         request.resource.data.pendingGame.joinedPlayers is list &&
+         (request.resource.data.pendingGame.joinedPlayers.hasAny([request.auth.uid]) ||
+          resource.data.pendingGame.joinedPlayers.hasAny([request.auth.uid])))
+      );
+      
+      allow delete: if request.auth != null && resource.data.hostId == request.auth.uid;
+      
       match /chat/{msgId} {
-        allow read, write: if request.auth != null;
+        // Sécurité renforcée : seul un membre du salon peut écrire, et l'ID doit correspondre
+        allow create: if request.auth != null && 
+                      request.resource.data.senderId == request.auth.uid &&
+                      get(/databases/$(database)/documents/lounges/$(loungeId)).data.players.keys().hasAny([request.auth.uid]);
+        allow read: if request.auth != null;
+        allow update, delete: if false;
       }
+      
       match /presences/{pId} {
-        allow read, write: if request.auth != null && request.auth.uid == pId;
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == pId;
       }
     }
 
-    // Parties (Games)
+    // ==========================================
+    // PARTIES (GAMES)
+    // ==========================================
     match /games/{gameCode} {
       allow read, create: if request.auth != null;
-      // Seul l'hôte légitime ou un participant authentifié peut déclarer la fin de partie (gameState == gameOver)
-      allow update: if request.auth != null 
-        && (
-          request.resource.data.gameState != "gameOver"
-          || resource.data.hostId == request.auth.uid
-          || (resource.data.players[request.auth.uid] != null && resource.data.players[request.auth.uid].authUid == request.auth.uid)
-        );
+      
+      // Seuls l'hôte ou les participants authentifiés de la partie peuvent effectuer des mises à jour
+      allow update: if request.auth != null && (
+        resource.data.hostId == request.auth.uid || 
+        resource.data.players.keys().hasAny([request.auth.uid]) ||
+        (resource.data.players[request.auth.uid] != null && resource.data.players[request.auth.uid].authUid == request.auth.uid)
+      );
+        
       allow delete: if request.auth != null && resource.data.hostId == request.auth.uid;
 
-      // Données secrètes de joueur (Rôles secrets, cartes cachées, grilles privées) : accessible uniquement par le joueur concerné
-      match /privatePlayerData/{pId} {
-        allow read: if request.auth != null && request.auth.uid == pId;
-        allow write: if request.auth != null;
-      }
+      // --- BLANC MANGER COCO (BMC) SPECIFIC RULES ---
+      
+      // 1. Jouer une carte (Uniquement si ce n'est pas le juge et que la carte est bien retirée de la main)
+      allow update: if request.auth != null &&
+        resource.data.gameType == 'Blanc Manger Coco' &&
+        resource.data.roundState == 'judging_selection' &&
+        resource.data.bmcJudgeId != request.auth.uid &&
+        resource.data.players.keys().hasAny([request.auth.uid]) &&
+        request.resource.data.bmcPlayedCards[request.auth.uid] != null &&
+        request.resource.data.bmcHands[request.auth.uid].size() == resource.data.bmcHands[request.auth.uid].size() - 1;
 
+      // 2. Le Juge valide le gagnant et passe au tour suivant
+      allow update: if request.auth != null &&
+        resource.data.gameType == 'Blanc Manger Coco' &&
+        resource.data.roundState == 'judge_voting' &&
+        resource.data.bmcJudgeId == request.auth.uid;
+
+      // Données privées de joueurs (rôles secrets, mots secrets, grilles cachées)
+      // Écriture autorisée pour le joueur lui-même ou l'hôte (nécessaire pour l'initialisation des manches)
       match /private_data/{targetPlayerId} {
         allow read: if request.auth != null && (
           request.auth.uid == targetPlayerId || 
           resource.data.authUid == request.auth.uid
         );
-        allow write: if request.auth != null;
+        allow write: if request.auth != null && (
+          request.auth.uid == targetPlayerId ||
+          get(/databases/$(database)/documents/games/$(gameCode)).data.hostId == request.auth.uid
+        );
+      }
+
+      match /privatePlayerData/{pId} {
+        allow read: if request.auth != null && request.auth.uid == pId;
+        allow write: if request.auth != null && (
+          request.auth.uid == pId ||
+          get(/databases/$(database)/documents/games/$(gameCode)).data.hostId == request.auth.uid
+        );
       }
 
       match /presences/{pId} {
-        allow read, write: if request.auth != null;
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == pId;
       }
 
-      // Sous-collections privées (Just One & Petit Bac) : accès strict au propriétaire
       match /just_one_private_clues/{playerId} {
         allow write: if request.auth != null && request.auth.uid == playerId;
         allow read: if request.auth != null && (
@@ -81,19 +168,31 @@ service cloud.firestore {
       }
 
       match /chat/{msgId} {
-        allow read, write: if request.auth != null;
+        allow read, create: if request.auth != null;
+        allow update, delete: if false; // Historique immuable
       }
     }
 
-    // Signalements UGC (Reports)
+    // ==========================================
+    // SIGNALEMENTS UGC (REPORTS)
+    // ==========================================
     match /reports/{reportId} {
       allow create: if request.auth != null 
         && request.resource.data.reporterId == request.auth.uid
         && request.resource.data.reportedUserId != request.auth.uid
         && request.resource.data.content.size() > 0
         && request.resource.data.content.size() < 1000;
-      allow read, update, delete: if false; // Accessible uniquement via console Firebase
+      allow read, update, delete: if false; // Accessible uniquement via console Firebase / Admin SDK
+    }
+
+    // ==========================================
+    // CONFIGURATION GLOBALE (Mise à jour forcée, maintenance)
+    // ==========================================
+    match /app_config/{docId} {
+      allow read: if true; // Lisible par toutes les instances pour vérifier la version
+      allow write: if false; // Modifiable UNIQUEMENT via la console Firebase / Admin SDK
     }
   }
 }
+
 

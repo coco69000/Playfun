@@ -829,4 +829,63 @@ class GameWords {  // ───────────────────�
       ],
     },
   };
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // LE JUGE – questions par difficulté
+  // ─────────────────────────────────────────────────────────────────────────────
+  static const Map<String, List<String>> judgeData = {
+    'soft': [
+      "Quelle est la première impression que {player} t'a laissée ?",
+      "Si {player} était un animal, lequel serait-il et pourquoi ?",
+      "Quel est le talent le plus surprenant de {player} ?",
+      "Décris {player} en 3 mots.",
+      "Quel est le super-pouvoir le plus adapté à {player} ?",
+      "Quelle chanson correspond le mieux à la personnalité de {player} ?",
+      "Si {player} ouvrait un restaurant, quel serait le plat signature ?",
+    ],
+    'hard': [
+      "Quel est le plus grand secret que tu penses que {player} cache ?",
+      "Quelle est la chose la plus embarrassante que tu aies vu {player} faire ?",
+      "Si tu devais sortir avec quelqu'un dans cette pièce, pourquoi choisirais-tu (ou non) {player} ?",
+      "Quelle critique constructive donnerais-tu à {player} ?",
+      "Quel est le pire choix vestimentaire que tu aies vu chez {player} ?",
+      "Si {player} devait être arrêté par la police, ce serait pour quoi ?",
+    ],
+    'hardcore': [
+      "Raconte un fantasme que tu imagines pour {player}.",
+      "Quelle est la chose la plus illégale que tu imagines {player} avoir faite ?",
+      "Si {player} devait coucher avec une personne ici, qui serait-ce et pourquoi ?",
+      "Quel est le plus gros défaut de {player} selon toi ?",
+      "Si tu devais trahir {player} pour 1 million d'euros, hésiterais-tu ?",
+      "Quelle vérité difficile {player} refuse-t-il/elle d'admettre sur lui/elle-même ?",
+    ],
+  };
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // LE MENTEUR – anecdotes/prompts par difficulté
+  // ─────────────────────────────────────────────────────────────────────────────
+  static const Map<String, List<String>> liarData = {
+    'soft': [
+      "Raconte une anecdote sur la chose la plus étrange que tu aies jamais mangée.",
+      "Raconte une anecdote sur le rêve le plus bizarre que tu aies fait récemment.",
+      "Raconte une anecdote sur la chose la plus folle que tu aies achetée sur un coup de tête.",
+      "Raconte une anecdote sur une fois où tu as eu vraiment très peur.",
+      "Raconte une anecdote sur ton pire voyage ou vacances ratées.",
+      "Raconte une anecdote sur une rencontre inattendue avec une célébrité ou un inconnu mémorable.",
+    ],
+    'hard': [
+      "Raconte une anecdote embarrassante qui te soit arrivée lors d'un rendez-vous amoureux.",
+      "Raconte une anecdote sur un mensonge que tu as dit à tes parents et qu'ils ont cru.",
+      "Raconte une anecdote sur la pire excuse que tu aies utilisée pour ne pas aller quelque part.",
+      "Raconte une anecdote sur une fois où tu as été témoin de quelque chose que tu n'aurais pas dû voir.",
+      "Raconte une anecdote sur une grosse gaffe commise au travail ou en public.",
+    ],
+    'hardcore': [
+      "Raconte une anecdote sur la chose la plus proche de l'illégalité que tu as faite.",
+      "Raconte une anecdote sur ton plus grand échec intime ou amoureux.",
+      "Raconte une anecdote sur la chose la plus méchante que tu aies dite ou faite à quelqu'un.",
+      "Raconte une anecdote sur une fois où tu as trahi la confiance de quelqu'un.",
+      "Raconte une anecdote sur un secret compromettant que personne ne sait sur toi.",
+    ],
+  };
 }

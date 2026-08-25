@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'amis.dart'; // On rÃ©utilise les Ã©crans de jeu du mode "amis"
 import 'player_state.dart';
-import 'package:random_string/random_string.dart'; // CORRECTION : Import manquant ajoutÃ©
+import 'package:random_string/random_string.dart';
+import 'theme/app_colors.dart';
+import 'widgets/app_buttons.dart';
 
 // Liste des jeux pour le mode "Monde" (inchangÃ©e)
 const List<Map<String, dynamic>> worldGames = [
@@ -318,13 +320,17 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animController; // Ajoutez cette variable
 
-  String _statusMessage = "PrÃ©paration de la recherche...";
+  String _statusMessage = "Préparation de la recherche...";
   Timer? _searchTimer;
   Timer? _redirectTimer;
+  Timer? _elapsedTimer;
+  int _elapsedSeconds = 0;
   String _currentScope = '';
   String? _matchmakingRoomId;
   StreamSubscription? _matchmakingSubscription;
   bool _isDisposed = false;
+  int _searchAttempts = 0;
+  bool _hasStoppedSearching = false;
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseService _firebaseService = FirebaseService();
@@ -341,13 +347,20 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
       duration: const Duration(seconds: 2),
     )..repeat();
 
+    _elapsedTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!_isDisposed) {
+        setState(() => _elapsedSeconds++);
+      }
+    });
+
     _startSearch();
   }
 
   @override
   void dispose() {
     _isDisposed = true;
-    _animController.dispose(); // Ne pas oublier !
+    _animController.dispose();
+    _elapsedTimer?.cancel();
     _searchTimer?.cancel();
     _redirectTimer?.cancel();
     _matchmakingSubscription?.cancel();
@@ -1065,107 +1078,263 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
 
   void _showFailureAndPop() {
     if (_isDisposed) return;
-    setState(() {
-      _statusMessage = "Aucun joueur trouvÃ©... Nouvelle recherche dans 10s.";
-    });
-    // Instead of popping, restart the search after a delay
-    Future.delayed(const Duration(seconds: 10), () {
+    _searchAttempts++;
+
+    if (_searchAttempts >= 2) {
       if (!_isDisposed) {
+        _matchmakingSubscription?.cancel();
+        _searchTimer?.cancel();
+        _redirectTimer?.cancel();
+        _leaveMatchmakingQueue();
+        setState(() {
+          _hasStoppedSearching = true;
+          _statusMessage = "Aucun joueur trouvé pour le moment.";
+        });
+      }
+      return;
+    }
+
+    setState(() {
+      _statusMessage = "Aucun joueur trouvé... Nouvelle tentative (${_searchAttempts}/2) dans 10s.";
+    });
+
+    Future.delayed(const Duration(seconds: 10), () {
+      if (!_isDisposed && !_hasStoppedSearching) {
         _matchmakingSubscription?.cancel();
         setState(() {
           _matchmakingRoomId = null;
-          _currentScope = widget.scope; // Reset scope to original
+          _currentScope = widget.scope;
         });
         _startSearch();
       }
     });
   }
 
+  String _formatElapsed(int seconds) {
+    final mins = (seconds ~/ 60).toString().padLeft(2, '0');
+    final secs = (seconds % 60).toString().padLeft(2, '0');
+    return '$mins:$secs';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A1A2E), // Fond sombre
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.close, color: Colors.white),
+          icon: const Icon(Icons.close, color: Colors.white70),
           onPressed: () => Navigator.of(context).pop(),
         ),
+        title: const Text(
+          "Matchmaking",
+          style: TextStyle(fontSize: 18, color: Colors.white70),
+        ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Animation Radar
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                // Cercle qui grandit et disparait
-                FadeTransition(
-                  opacity: Tween(begin: 0.5, end: 0.0).animate(_animController),
-                  child: ScaleTransition(
-                    scale: Tween(begin: 1.0, end: 2.5).animate(
-                      CurvedAnimation(
-                        parent: _animController,
-                        curve: Curves.easeOut,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          child: Column(
+            children: [
+              const Spacer(),
+
+              // Animation Radar
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  FadeTransition(
+                    opacity: Tween(begin: 0.6, end: 0.0).animate(_animController),
+                    child: ScaleTransition(
+                      scale: Tween(begin: 1.0, end: 2.8).animate(
+                        CurvedAnimation(
+                          parent: _animController,
+                          curve: Curves.easeOutCubic,
+                        ),
                       ),
-                    ),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.deepPurpleAccent,
-                          width: 2,
+                      child: Container(
+                        width: 110,
+                        height: 110,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.primaryAccent.withOpacity(0.8),
+                            width: 2,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                // IcÃ´ne centrale
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurpleAccent,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.deepPurpleAccent.withOpacity(0.5),
-                        blurRadius: 20,
-                      ),
-                    ],
+                  Container(
+                    width: 90,
+                    height: 90,
+                    decoration: BoxDecoration(
+                      gradient: AppColors.primaryGradient,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primaryAccent.withOpacity(0.5),
+                          blurRadius: 24,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.radar_rounded,
+                      size: 46,
+                      color: Colors.white,
+                    ),
                   ),
-                  child: const Icon(
-                    Icons.search,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 50),
-            Text(
-              "Recherche de joueurs...",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
+                ],
               ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Text(
-                _statusMessage,
-                style: const TextStyle(color: Colors.white70, fontSize: 16),
+              const SizedBox(height: 36),
+
+              Text(
+                widget.gameName,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
-            ),
-          ],
+              const SizedBox(height: 12),
+
+              // Criteria Pills
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  _buildCritPill(
+                    icon: Icons.group,
+                    label: "${widget.playerCount} Joueurs",
+                  ),
+                  _buildCritPill(
+                    icon: Icons.public,
+                    label: _currentScope.toUpperCase(),
+                  ),
+                  if (widget.isRanked)
+                    _buildCritPill(
+                      icon: Icons.military_tech,
+                      label: "Classé",
+                      color: Colors.amber,
+                    )
+                  else
+                    _buildCritPill(
+                      icon: Icons.sentiment_satisfied_alt,
+                      label: "Casual",
+                    ),
+                  if (widget.videoEnabled)
+                    _buildCritPill(
+                      icon: Icons.videocam,
+                      label: "Vidéo ON",
+                      color: Colors.cyanAccent,
+                    ),
+                ],
+              ),
+              const SizedBox(height: 28),
+
+              // Status Box
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  color: AppColors.surfaceVariant.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.white12),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      _statusMessage,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.timer_outlined, size: 16, color: Colors.white54),
+                        const SizedBox(width: 6),
+                        Text(
+                          "Temps écoulé : ${_formatElapsed(_elapsedSeconds)}",
+                          style: const TextStyle(
+                            color: Colors.white54,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              const Spacer(),
+
+              if (_hasStoppedSearching) ...[
+                AppPrimaryButton(
+                  width: double.infinity,
+                  label: "Relancer la recherche",
+                  icon: Icons.refresh,
+                  onPressed: () {
+                    setState(() {
+                      _searchAttempts = 0;
+                      _hasStoppedSearching = false;
+                      _matchmakingRoomId = null;
+                      _currentScope = widget.scope;
+                    });
+                    _startSearch();
+                  },
+                ),
+                const SizedBox(height: 12),
+              ],
+
+              // Cancel Button
+              AppSecondaryButton(
+                width: double.infinity,
+                label: _hasStoppedSearching ? "Quitter" : "Annuler la recherche",
+                icon: Icons.close,
+                borderColor: AppColors.error.withOpacity(0.7),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              const SizedBox(height: 12),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildCritPill({
+    required IconData icon,
+    required String label,
+    Color color = Colors.white70,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14, color: color),
+          const SizedBox(width: 5),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: color,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
       ),
     );
   }

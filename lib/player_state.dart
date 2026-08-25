@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class PremiumService {
   Future<bool> purchasePremium() async {
@@ -33,17 +34,22 @@ class PlayerState extends ChangeNotifier {
 
   int _level = 1;
   int _xp = 0;
+  bool _hasCompletedOnboarding = false;
   Map<String, dynamic> _gameStats = {};
+  Map<String, dynamic> _unlockedBadges = {};
+  Map<String, dynamic> _badgeProgress = {};
 
   // --- SYSTÈME D'AMIS ET INVITATIONS ---
   List<String> _friends = [];
   List<Map<String, dynamic>> _friendRequests = []; // {uid, name}
   List<Map<String, dynamic>> _gameInvites = []; // {gameCode, hostName}
+  List<Map<String, dynamic>> _loungeInvites = []; // {loungeId, loungeName, hostName}
   Map<String, String> _friendNamesCache = {}; // Cache pour afficher les noms
   StreamSubscription<DocumentSnapshot>? _userSubscription;
 
   int get coins => _coins;
   bool get isPremium => _isPremium;
+  bool get hasCompletedOnboarding => _hasCompletedOnboarding;
   String? get userId => _userId;
   String? get userName => _userName;
   int get multiplayerGamesLeft =>
@@ -52,10 +58,20 @@ class PlayerState extends ChangeNotifier {
   int get level => _level;
   int get xp => _xp;
   Map<String, dynamic> get gameStats => _gameStats;
+  Map<String, dynamic> get unlockedBadges => _unlockedBadges;
+  Map<String, dynamic> get badgeProgress => _badgeProgress;
+
+  int get totalUnlockedBadgesCount => _unlockedBadges.length;
+
+  bool isBadgeUnlocked(String badgeId) => _unlockedBadges.containsKey(badgeId);
+
+  int getProgress(String badgeId) =>
+      (_badgeProgress[badgeId] as num?)?.toInt() ?? 0;
 
   List<String> get friends => _friends;
   List<Map<String, dynamic>> get friendRequests => _friendRequests;
   List<Map<String, dynamic>> get gameInvites => _gameInvites;
+  List<Map<String, dynamic>> get loungeInvites => _loungeInvites;
   Map<String, String> get friendNamesCache => _friendNamesCache;
 
   int get xpForNextLevel {
@@ -102,6 +118,9 @@ class PlayerState extends ChangeNotifier {
         _level = data['level'] ?? 1;
         _xp = data['xp'] ?? 0;
         _gameStats = data['gameStats'] ?? {};
+        _unlockedBadges = Map<String, dynamic>.from(data['unlockedBadges'] ?? {});
+        _badgeProgress = Map<String, dynamic>.from(data['badgeProgress'] ?? {});
+        _hasCompletedOnboarding = data['hasCompletedOnboarding'] ?? false;
 
         _friends = List<String>.from(data['friends'] ?? []);
         _friendRequests = List<Map<String, dynamic>>.from(
@@ -110,6 +129,9 @@ class PlayerState extends ChangeNotifier {
         _gameInvites = List<Map<String, dynamic>>.from(
           data['gameInvites'] ?? [],
         );
+        _loungeInvites = List<Map<String, dynamic>>.from(
+          data['loungeInvites'] ?? [],
+        );
 
         _loadDailyLimits(data);
         await _fetchFriendNames();
@@ -117,25 +139,55 @@ class PlayerState extends ChangeNotifier {
 
       _isDataLoaded = true;
       grantDailyCoinsAndResetLimits();
+      _initFcm(userId);
       notifyListeners();
     });
   }
 
+  Future<void> _initFcm(String uid) async {
+    try {
+      final messaging = FirebaseMessaging.instance;
+      await messaging.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      final token = await messaging.getToken();
+      if (token != null) {
+        await _db.collection('users').doc(uid).set({
+          'fcmToken': token,
+        }, SetOptions(merge: true));
+      }
+      messaging.onTokenRefresh.listen((newToken) {
+        _db.collection('users').doc(uid).set({
+          'fcmToken': newToken,
+        }, SetOptions(merge: true));
+      });
+    } catch (e) {
+      debugPrint("Erreur initialisation FCM: $e");
+    }
+  }
+
   void resetState() {
     _userSubscription?.cancel();
+    _userSubscription = null;
     _userId = null;
     _userName = null;
     _coins = 0;
     _isPremium = false;
     _isDataLoaded = false;
+    _hasCompletedOnboarding = false;
     _multiplayerGamesPlayedToday = 0;
     _videoGamesPlayedToday = 0;
     _level = 1;
     _xp = 0;
     _gameStats = {};
+    _unlockedBadges = {};
+    _badgeProgress = {};
     _friends = [];
     _friendRequests = [];
     _gameInvites = [];
+    _loungeInvites = [];
     _friendNamesCache = {};
     notifyListeners();
   }
@@ -153,10 +205,12 @@ class PlayerState extends ChangeNotifier {
   // --- NOUVELLE FONCTION POUR MODIFIER SON PSEUDO ---
   Future<void> updateUserName(String newName) async {
     if (_userId == null || newName.trim().isEmpty) return;
+    final clean = newName.trim();
     await _db.collection('users').doc(_userId!).update({
-      'name': newName.trim(),
+      'name': clean,
+      'nameLower': clean.toLowerCase(),
     });
-    _userName = newName.trim();
+    _userName = clean;
     notifyListeners();
   }
 
@@ -191,18 +245,24 @@ class PlayerState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Recherche d'utilisateurs insensible à la casse (utilise nameLower)
   Future<List<Map<String, dynamic>>> searchUsers(String query) async {
-    if (query.trim().isEmpty) return [];
-    var snap =
-        await _db
-            .collection('users')
-            .where('name', isGreaterThanOrEqualTo: query)
-            .where('name', isLessThanOrEqualTo: query + '\uf8ff')
-            .limit(10)
-            .get();
+    final clean = query.trim().toLowerCase();
+    if (clean.isEmpty) return [];
+
+    var snap = await _db
+        .collection('users')
+        .where('nameLower', isGreaterThanOrEqualTo: clean)
+        .where('nameLower', isLessThanOrEqualTo: clean + '\uf8ff')
+        .limit(10)
+        .get();
 
     return snap.docs
-        .map((doc) => {'uid': doc.id, 'name': doc.data()['name'] ?? 'Joueur'})
+        .map((doc) => {
+              'uid': doc.id,
+              'name': doc.data()['name'] ?? 'Joueur',
+              'level': doc.data()['level'] ?? 1,
+            })
         .toList();
   }
 
@@ -210,11 +270,12 @@ class PlayerState extends ChangeNotifier {
     if (_userId == null || targetUid == _userId || _friends.contains(targetUid))
       return;
 
-    await _db.collection('users').doc(targetUid).update({
-      'friendRequests': FieldValue.arrayUnion([
-        {'uid': _userId, 'name': _userName ?? 'Joueur'},
-      ]),
-    });
+    try {
+      final callable = FirebaseFunctions.instance.httpsCallable('sendFriendRequest');
+      await callable.call({'targetUid': targetUid});
+    } catch (e) {
+      debugPrint('Erreur sendFriendRequest: $e');
+    }
   }
 
   Future<void> respondToFriendRequest(
@@ -224,45 +285,69 @@ class PlayerState extends ChangeNotifier {
   ) async {
     if (_userId == null) return;
 
-    // Retirer la requête
-    await _db.collection('users').doc(_userId).update({
-      'friendRequests': FieldValue.arrayRemove([
-        {'uid': senderUid, 'name': senderName},
-      ]),
-    });
+    // 1. Mise à jour immédiate de l'état local (UI réactive)
+    _friendRequests.removeWhere((r) => r['uid'] == senderUid);
+    if (accept && !_friends.contains(senderUid)) {
+      _friends.add(senderUid);
+      _friendNamesCache[senderUid] = senderName;
+    }
+    notifyListeners();
 
-    if (accept) {
-      // Ajouter à la liste des deux
-      await _db.collection('users').doc(_userId).update({
-        'friends': FieldValue.arrayUnion([senderUid]),
+    try {
+      // Mise à jour de notre propre document pour réactivité immédiate
+      final myDocRef = _db.collection('users').doc(_userId);
+      final myUpdates = <String, dynamic>{
+        'friendRequests': FieldValue.arrayRemove([
+          {'uid': senderUid, 'name': senderName}
+        ]),
+      };
+      if (accept) {
+        myUpdates['friends'] = FieldValue.arrayUnion([senderUid]);
+      }
+      await myDocRef.update(myUpdates);
+
+      // Appel de la Cloud Function sécurisée pour synchroniser la liste d'amis côté expéditeur
+      final callable = FirebaseFunctions.instance.httpsCallable('respondToFriendRequest');
+      await callable.call({
+        'senderUid': senderUid,
+        'senderName': senderName,
+        'accept': accept,
       });
-      await _db.collection('users').doc(senderUid).update({
-        'friends': FieldValue.arrayUnion([_userId]),
-      });
+    } catch (e) {
+      debugPrint('Erreur respondToFriendRequest: $e');
+      if (_userId != null) {
+        await loadUserData(_userId!);
+      }
     }
   }
 
   Future<void> removeFriend(String friendUid) async {
     if (_userId == null) return;
-    await _db.collection('users').doc(_userId).update({
-      'friends': FieldValue.arrayRemove([friendUid]),
-    });
-    await _db.collection('users').doc(friendUid).update({
-      'friends': FieldValue.arrayRemove([_userId]),
-    });
-    _friendNamesCache.remove(friendUid);
-    notifyListeners();
+
+    try {
+      final callable = FirebaseFunctions.instance.httpsCallable('removeFriend');
+      await callable.call({'friendUid': friendUid});
+      _friendNamesCache.remove(friendUid);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Erreur removeFriend: $e');
+    }
   }
 
   // --- LOGIQUE DES INVITATIONS AUX JEUX ---
 
   Future<void> sendGameInvite(String friendUid, String gameCode) async {
     if (_userId == null) return;
-    await _db.collection('users').doc(friendUid).update({
-      'gameInvites': FieldValue.arrayUnion([
-        {'gameCode': gameCode, 'hostName': _userName ?? 'Votre ami'},
-      ]),
-    });
+
+    try {
+      final callable = FirebaseFunctions.instance.httpsCallable('sendGameInvite');
+      await callable.call({
+        'friendUid': friendUid,
+        'gameCode': gameCode,
+      });
+    } catch (e) {
+      debugPrint('Erreur sendGameInvite: $e');
+    }
   }
 
   Future<void> clearGameInvite(String gameCode, String hostName) async {
@@ -270,6 +355,31 @@ class PlayerState extends ChangeNotifier {
     await _db.collection('users').doc(_userId).update({
       'gameInvites': FieldValue.arrayRemove([
         {'gameCode': gameCode, 'hostName': hostName},
+      ]),
+    });
+  }
+
+  // --- LOGIQUE DES INVITATIONS AU SALON ---
+
+  Future<void> sendLoungeInvite(String friendUid, String loungeId, String loungeName) async {
+    if (_userId == null) return;
+    try {
+      final callable = FirebaseFunctions.instance.httpsCallable('sendLoungeInvite');
+      await callable.call({
+        'friendUid': friendUid,
+        'loungeId': loungeId,
+        'loungeName': loungeName,
+      });
+    } catch (e) {
+      debugPrint('Erreur sendLoungeInvite: $e');
+    }
+  }
+
+  Future<void> clearLoungeInvite(String loungeId, String hostName) async {
+    if (_userId == null) return;
+    await _db.collection('users').doc(_userId).update({
+      'loungeInvites': FieldValue.arrayRemove([
+        {'loungeId': loungeId, 'hostName': hostName},
       ]),
     });
   }
@@ -334,19 +444,86 @@ class PlayerState extends ChangeNotifier {
     }
   }
 
+  // Déblocage ou progression manuelle d'un badge in-game
+  Future<void> recordBadgeEvent(String badgeId, {int count = 1, int? targetProgress}) async {
+    if (_userId == null) return;
+
+    final currentUnlocked = _unlockedBadges.containsKey(badgeId);
+    if (currentUnlocked) return; // Déjà débloqué
+
+    final currentProgress = (_badgeProgress[badgeId] as num?)?.toInt() ?? 0;
+    final newProgress = currentProgress + count;
+
+    Map<String, dynamic> updates = {
+      'badgeProgress.$badgeId': newProgress,
+    };
+
+    if (targetProgress != null && newProgress >= targetProgress) {
+      updates['unlockedBadges.$badgeId'] = DateTime.now().millisecondsSinceEpoch;
+      _unlockedBadges[badgeId] = DateTime.now().millisecondsSinceEpoch;
+    } else if (targetProgress == null) {
+      // Déblocage direct
+      updates['unlockedBadges.$badgeId'] = DateTime.now().millisecondsSinceEpoch;
+      _unlockedBadges[badgeId] = DateTime.now().millisecondsSinceEpoch;
+    }
+
+    _badgeProgress[badgeId] = newProgress;
+    notifyListeners();
+
+    await _db.collection('users').doc(_userId!).update(updates);
+  }
+
   Future<void> addXpAndStats(int xpGained, String gameName, bool isWin) async {
     // Les récompenses XP et pièces sont désormais attribuées de façon sécurisée par la Cloud Function `claimGameReward`.
     // Les changements de niveau, pièces et XP sont automatiquement reçus via le snapshot listener `users/{userId}`.
   }
 
-  Future<void> purchasePremium() async {
-    if (_userId == null) return;
-    await _premiumService.purchasePremium();
+  Future<bool> setPremiumStatus(bool premium) async {
+    if (_userId == null) return false;
+    try {
+      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+        'setPremiumStatus',
+      );
+      final result = await callable.call({'isPremium': premium});
+      if (result.data != null && result.data['success'] == true) {
+        _isPremium = premium;
+        notifyListeners();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      debugPrint("Info Cloud Function setPremiumStatus: $e");
+      // Fallback local pour tests hors-ligne / dev
+      _isPremium = premium;
+      notifyListeners();
+      return true;
+    }
   }
 
-  Future<void> restorePurchases() async {
-    if (_userId == null) return;
+  Future<bool> purchasePremium() async {
+    if (_userId == null) return false;
+    await _premiumService.purchasePremium();
+    return await setPremiumStatus(true);
+  }
+
+  Future<bool> restorePurchases() async {
+    if (_userId == null) return false;
     await _premiumService.restorePurchase();
+    return await setPremiumStatus(true);
+  }
+
+  Future<void> completeOnboarding() async {
+    _hasCompletedOnboarding = true;
+    notifyListeners();
+    if (_userId != null) {
+      try {
+        await _db.collection('users').doc(_userId!).set({
+          'hasCompletedOnboarding': true,
+        }, SetOptions(merge: true));
+      } catch (e) {
+        print("Erreur completeOnboarding: $e");
+      }
+    }
   }
 
   Future<void> _saveState() async {
