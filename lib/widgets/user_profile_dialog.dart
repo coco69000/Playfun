@@ -22,7 +22,11 @@ void showUserProfileDialog(
           border: Border(top: BorderSide(color: Colors.white12, width: 1.5)),
         ),
         child: StreamBuilder<DocumentSnapshot>(
-          stream: FirebaseFirestore.instance.collection('users').doc(targetUid).snapshots(),
+          stream:
+              FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(targetUid)
+                  .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
@@ -41,21 +45,30 @@ void showUserProfileDialog(
             final int level = data['level'] ?? 1;
             final int xp = data['xp'] ?? 0;
             final bool isPremium = data['isPremium'] == true;
-            final Map<String, dynamic> gameStats = Map<String, dynamic>.from(data['gameStats'] ?? {});
-            final Map<String, dynamic> unlockedBadges = Map<String, dynamic>.from(data['unlockedBadges'] ?? {});
+            final Map<String, dynamic> gameStats = Map<String, dynamic>.from(
+              data['gameStats'] ?? {},
+            );
+            final Map<String, dynamic> unlockedBadges =
+                Map<String, dynamic>.from(data['unlockedBadges'] ?? {});
 
             final int totalPlayed = gameStats.values.fold<int>(
               0,
-              (acc, stat) => acc + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
+              (acc, stat) =>
+                  acc +
+                  (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
             );
             final int totalWon = gameStats.values.fold<int>(
               0,
-              (acc, stat) => acc + (stat is Map ? (stat['won'] as num? ?? 0).toInt() : 0),
+              (acc, stat) =>
+                  acc + (stat is Map ? (stat['won'] as num? ?? 0).toInt() : 0),
             );
-            final double winRate = totalPlayed > 0 ? (totalWon / totalPlayed) * 100 : 0.0;
+            final double winRate =
+                totalPlayed > 0 ? (totalWon / totalPlayed) * 100 : 0.0;
 
             final ps = Provider.of<PlayerState>(context, listen: false);
-            final bool isMe = (currentUserId != null && currentUserId == targetUid) || (ps.userId == targetUid);
+            final bool isMe =
+                (currentUserId != null && currentUserId == targetUid) ||
+                (ps.userId == targetUid);
             final bool isFriend = ps.friends.contains(targetUid);
 
             return DefaultTabController(
@@ -87,12 +100,26 @@ void showUserProfileDialog(
                               height: 68,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                gradient: isPremium
-                                    ? const LinearGradient(colors: [Colors.amber, Colors.orangeAccent])
-                                    : const LinearGradient(colors: [Colors.deepPurple, Colors.deepPurpleAccent]),
+                                gradient:
+                                    isPremium
+                                        ? const LinearGradient(
+                                          colors: [
+                                            Colors.amber,
+                                            Colors.orangeAccent,
+                                          ],
+                                        )
+                                        : const LinearGradient(
+                                          colors: [
+                                            Colors.deepPurple,
+                                            Colors.deepPurpleAccent,
+                                          ],
+                                        ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: (isPremium ? Colors.amber : Colors.deepPurpleAccent).withOpacity(0.4),
+                                    color: (isPremium
+                                            ? Colors.amber
+                                            : Colors.deepPurpleAccent)
+                                        .withOpacity(0.4),
                                     blurRadius: 12,
                                     spreadRadius: 2,
                                   ),
@@ -119,7 +146,11 @@ void showUserProfileDialog(
                                     color: Colors.amber,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(Icons.star_rounded, size: 14, color: Colors.black),
+                                  child: const Icon(
+                                    Icons.star_rounded,
+                                    size: 14,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                           ],
@@ -145,11 +176,17 @@ void showUserProfileDialog(
                                   if (isPremium) ...[
                                     const SizedBox(width: 6),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: Colors.amber.withOpacity(0.2),
                                         borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(color: Colors.amber, width: 1),
+                                        border: Border.all(
+                                          color: Colors.amber,
+                                          width: 1,
+                                        ),
                                       ),
                                       child: const Text(
                                         "VIP",
@@ -175,7 +212,10 @@ void showUserProfileDialog(
                               const SizedBox(height: 4),
                               Text(
                                 "Badges débloqués : ${unlockedBadges.length} / ${AppBadges.allBadges.length}",
-                                style: const TextStyle(color: Colors.white54, fontSize: 12),
+                                style: const TextStyle(
+                                  color: Colors.white54,
+                                  fontSize: 12,
+                                ),
                               ),
                             ],
                           ),
@@ -193,53 +233,92 @@ void showUserProfileDialog(
                       child: Row(
                         children: [
                           Expanded(
-                            child: isFriend
-                                ? OutlinedButton.icon(
-                                    icon: const Icon(Icons.check, color: Colors.greenAccent, size: 18),
-                                    label: const Text("Vous êtes amis"),
-                                    style: OutlinedButton.styleFrom(
-                                      foregroundColor: Colors.greenAccent,
-                                      side: const BorderSide(color: Colors.greenAccent),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                    ),
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (dCtx) => AlertDialog(
-                                          title: Text("Retirer $name ?"),
-                                          content: const Text("Voulez-vous supprimer cet utilisateur de vos amis ?"),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(dCtx),
-                                              child: const Text("Annuler"),
-                                            ),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                                              onPressed: () {
-                                                ps.removeFriend(targetUid);
-                                                Navigator.pop(dCtx);
-                                              },
-                                              child: const Text("Supprimer"),
-                                            ),
-                                          ],
+                            child:
+                                isFriend
+                                    ? OutlinedButton.icon(
+                                      icon: const Icon(
+                                        Icons.check,
+                                        color: Colors.greenAccent,
+                                        size: 18,
+                                      ),
+                                      label: const Text("Vous êtes amis"),
+                                      style: OutlinedButton.styleFrom(
+                                        foregroundColor: Colors.greenAccent,
+                                        side: const BorderSide(
+                                          color: Colors.greenAccent,
                                         ),
-                                      );
-                                    },
-                                  )
-                                : ElevatedButton.icon(
-                                    icon: const Icon(Icons.person_add, size: 18),
-                                    label: const Text("Demander en ami"),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.deepPurple,
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder:
+                                              (dCtx) => AlertDialog(
+                                                title: Text("Retirer $name ?"),
+                                                content: const Text(
+                                                  "Voulez-vous supprimer cet utilisateur de vos amis ?",
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed:
+                                                        () =>
+                                                            Navigator.pop(dCtx),
+                                                    child: const Text(
+                                                      "Annuler",
+                                                    ),
+                                                  ),
+                                                  ElevatedButton(
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                        ),
+                                                    onPressed: () {
+                                                      ps.removeFriend(
+                                                        targetUid,
+                                                      );
+                                                      Navigator.pop(dCtx);
+                                                    },
+                                                    child: const Text(
+                                                      "Supprimer",
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                        );
+                                      },
+                                    )
+                                    : ElevatedButton.icon(
+                                      icon: const Icon(
+                                        Icons.person_add,
+                                        size: 18,
+                                      ),
+                                      label: const Text("Demander en ami"),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.deepPurple,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        ps.sendFriendRequest(targetUid, name);
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              "Demande d'ami envoyée à $name !",
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    onPressed: () {
-                                      ps.sendFriendRequest(targetUid, name);
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Demande d'ami envoyée à $name !")),
-                                      );
-                                    },
-                                  ),
                           ),
                         ],
                       ),
@@ -277,13 +356,13 @@ void showUserProfileDialog(
                               children: [
                                 Expanded(
                                   child: _buildProfileStatCard(
-                                    "Parties Jouées",
+                                    "Parties",
                                     "$totalPlayed",
                                     Icons.sports_esports,
                                     Colors.blueAccent,
                                   ),
                                 ),
-                                const SizedBox(width: 10),
+                                const SizedBox(width: 8),
                                 Expanded(
                                   child: _buildProfileStatCard(
                                     "Victoires",
@@ -292,13 +371,13 @@ void showUserProfileDialog(
                                     Colors.amberAccent,
                                   ),
                                 ),
-                                const SizedBox(width: 10),
+                                const SizedBox(width: 8),
                                 Expanded(
                                   child: _buildProfileStatCard(
-                                    "Taux Victoire",
-                                    "${winRate.toStringAsFixed(0)} %",
-                                    Icons.auto_graph,
-                                    Colors.greenAccent,
+                                    "Total XP",
+                                    "$xp XP",
+                                    Icons.military_tech_rounded,
+                                    const Color(0xFF67E8F9),
                                   ),
                                 ),
                               ],
@@ -306,7 +385,11 @@ void showUserProfileDialog(
                             const SizedBox(height: 16),
                             const Text(
                               "Détail par jeu :",
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
                             ),
                             const SizedBox(height: 8),
 
@@ -323,21 +406,42 @@ void showUserProfileDialog(
                             else
                               ...gameStats.entries.map((e) {
                                 final gName = e.key;
-                                final p = (e.value is Map ? (e.value['played'] as num? ?? 0) : 0).toInt();
-                                final w = (e.value is Map ? (e.value['won'] as num? ?? 0) : 0).toInt();
+                                final p =
+                                    (e.value is Map
+                                            ? (e.value['played'] as num? ?? 0)
+                                            : 0)
+                                        .toInt();
+                                final w =
+                                    (e.value is Map
+                                            ? (e.value['won'] as num? ?? 0)
+                                            : 0)
+                                        .toInt();
                                 final double r = p > 0 ? (w / p) * 100 : 0.0;
 
                                 return Card(
                                   color: Colors.white.withOpacity(0.04),
-                                  margin: const EdgeInsets.symmetric(vertical: 4),
+                                  margin: const EdgeInsets.symmetric(
+                                    vertical: 4,
+                                  ),
                                   child: ListTile(
-                                    leading: const Icon(Icons.videogame_asset, color: Colors.cyanAccent),
-                                    title: Text(gName, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    leading: const Icon(
+                                      Icons.videogame_asset,
+                                      color: Colors.cyanAccent,
+                                    ),
+                                    title: Text(
+                                      gName,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     subtitle: Text("$p jouées • $w victoires"),
                                     trailing: Text(
                                       "${r.toStringAsFixed(0)} %",
                                       style: TextStyle(
-                                        color: r >= 50 ? Colors.greenAccent : Colors.orangeAccent,
+                                        color:
+                                            r >= 50
+                                                ? Colors.greenAccent
+                                                : Colors.orangeAccent,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 15,
                                       ),
@@ -351,49 +455,70 @@ void showUserProfileDialog(
                         // --- 2. BADGES DÉBLOQUÉS ---
                         GridView.builder(
                           padding: const EdgeInsets.all(16),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 0.85,
-                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                childAspectRatio: 0.85,
+                              ),
                           itemCount: AppBadges.allBadges.length,
                           itemBuilder: (context, index) {
                             final badge = AppBadges.allBadges[index];
-                            final bool isUnlocked = unlockedBadges.containsKey(badge.id);
+                            final bool isUnlocked = unlockedBadges.containsKey(
+                              badge.id,
+                            );
 
                             return GestureDetector(
                               onTap: () {
                                 showDialog(
                                   context: context,
-                                  builder: (bCtx) => AlertDialog(
-                                    backgroundColor: const Color(0xFF1E1E2C),
-                                    title: Row(
-                                      children: [
-                                        Icon(badge.icon, color: isUnlocked ? badge.color : Colors.white38),
-                                        const SizedBox(width: 10),
-                                        Expanded(child: Text(badge.title)),
-                                      ],
-                                    ),
-                                    content: Text(
-                                      "${badge.description}\n\nStatut : ${isUnlocked ? '✓ Débloqué par ce joueur' : '🔒 Verrouillé'}",
-                                      style: const TextStyle(color: Colors.white70),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(bCtx),
-                                        child: const Text("Fermer"),
-                                      )
-                                    ],
-                                  ),
+                                  builder:
+                                      (bCtx) => AlertDialog(
+                                        backgroundColor: const Color(
+                                          0xFF1E1E2C,
+                                        ),
+                                        title: Row(
+                                          children: [
+                                            Icon(
+                                              badge.icon,
+                                              color:
+                                                  isUnlocked
+                                                      ? badge.color
+                                                      : Colors.white38,
+                                            ),
+                                            const SizedBox(width: 10),
+                                            Expanded(child: Text(badge.title)),
+                                          ],
+                                        ),
+                                        content: Text(
+                                          "${badge.description}\n\nStatut : ${isUnlocked ? '✓ Débloqué par ce joueur' : '🔒 Verrouillé'}",
+                                          style: const TextStyle(
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.pop(bCtx),
+                                            child: const Text("Fermer"),
+                                          ),
+                                        ],
+                                      ),
                                 );
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: isUnlocked ? badge.color.withOpacity(0.12) : Colors.black26,
+                                  color:
+                                      isUnlocked
+                                          ? badge.color.withOpacity(0.12)
+                                          : Colors.black26,
                                   borderRadius: BorderRadius.circular(14),
                                   border: Border.all(
-                                    color: isUnlocked ? badge.color.withOpacity(0.6) : Colors.white10,
+                                    color:
+                                        isUnlocked
+                                            ? badge.color.withOpacity(0.6)
+                                            : Colors.white10,
                                     width: isUnlocked ? 2 : 1,
                                   ),
                                 ),
@@ -402,24 +527,33 @@ void showUserProfileDialog(
                                   children: [
                                     CircleAvatar(
                                       radius: 24,
-                                      backgroundColor: isUnlocked
-                                          ? badge.color.withOpacity(0.2)
-                                          : Colors.white.withOpacity(0.05),
+                                      backgroundColor:
+                                          isUnlocked
+                                              ? badge.color.withOpacity(0.2)
+                                              : Colors.white.withOpacity(0.05),
                                       child: Icon(
                                         badge.icon,
                                         size: 24,
-                                        color: isUnlocked ? badge.color : Colors.white24,
+                                        color:
+                                            isUnlocked
+                                                ? badge.color
+                                                : Colors.white24,
                                       ),
                                     ),
                                     const SizedBox(height: 6),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0,
+                                      ),
                                       child: Text(
                                         badge.title,
                                         style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.bold,
-                                          color: isUnlocked ? Colors.white : Colors.white38,
+                                          color:
+                                              isUnlocked
+                                                  ? Colors.white
+                                                  : Colors.white38,
                                         ),
                                         textAlign: TextAlign.center,
                                         maxLines: 2,
@@ -445,7 +579,12 @@ void showUserProfileDialog(
   );
 }
 
-Widget _buildProfileStatCard(String title, String value, IconData icon, Color color) {
+Widget _buildProfileStatCard(
+  String title,
+  String value,
+  IconData icon,
+  Color color,
+) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
     decoration: BoxDecoration(
@@ -459,7 +598,11 @@ Widget _buildProfileStatCard(String title, String value, IconData icon, Color co
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: Colors.white,
+          ),
         ),
         const SizedBox(height: 2),
         Text(

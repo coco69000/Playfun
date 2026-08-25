@@ -1,3 +1,4 @@
+// File: stats_badges_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'player_state.dart';
@@ -145,6 +146,16 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
   @override
   Widget build(BuildContext context) {
     final ps = Provider.of<PlayerState>(context);
+    final int totalPlayed = ps.gameStats.values.fold<int>(
+      0,
+      (sum, stat) => sum + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
+    );
+    final int totalWon = ps.gameStats.values.fold<int>(
+      0,
+      (sum, stat) => sum + (stat is Map ? (stat['won'] as num? ?? 0).toInt() : 0),
+    );
+    final int xpRemaining = ps.xpForNextLevel - ps.xp;
+    final double avgXpPerGame = totalPlayed > 0 ? (ps.xp / totalPlayed) : 0.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -168,11 +179,10 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
         controller: _tabController,
         children: [
           // -------------------------------------------------------------
-          // ONGLET 1 : GRILLE DES 102 BADGES AVEC FILTRES
+          // ONGLET 1 : GRILLE DES BADGES AVEC FILTRES
           // -------------------------------------------------------------
           Column(
             children: [
-              // Filtres de catégories
               Container(
                 height: 54,
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -202,7 +212,6 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                   },
                 ),
               ),
-              // Grille des badges
               Expanded(
                 child: Builder(
                   builder: (context) {
@@ -310,50 +319,62 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
           ),
 
           // -------------------------------------------------------------
-          // ONGLET 2 : TABLEAU DE BORD DES STATISTIQUES DÉTAILLÉES
+          // ONGLET 2 : TABLEAU DE BORD STATISTIQUES AVEC XP COMPLET
           // -------------------------------------------------------------
           SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Niveau & XP
+                // 1. CARTE MAÎTRE : NIVEAU & JAUGE XP
                 Card(
                   color: Colors.deepPurple[900]?.withOpacity(0.4),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
+                    side: BorderSide(color: Colors.deepPurpleAccent.withOpacity(0.4)),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        const Icon(Icons.star, size: 60, color: Colors.amber),
-                        const SizedBox(height: 8),
-                        Text(
-                          "Niveau ${ps.level}",
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.star_rounded, size: 38, color: Colors.amberAccent),
+                            const SizedBox(width: 8),
+                            Text(
+                              "Niveau ${ps.level}",
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 12),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: LinearProgressIndicator(
                             value: (ps.xp / ps.xpForNextLevel).clamp(0.0, 1.0),
                             backgroundColor: Colors.grey[800],
-                            color: Colors.amber,
-                            minHeight: 10,
+                            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF67E8F9)),
+                            minHeight: 12,
                           ),
                         ),
-                        const SizedBox(height: 6),
-                        Text(
-                          "${ps.xp} / ${ps.xpForNextLevel} XP pour le niveau suivant",
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12,
-                          ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "${ps.xp} XP au compteur",
+                              style: const TextStyle(color: Color(0xFF67E8F9), fontWeight: FontWeight.w600, fontSize: 13),
+                            ),
+                            Text(
+                              "Encore $xpRemaining XP avant Niv. ${ps.level + 1}",
+                              style: const TextStyle(color: Colors.white70, fontSize: 12),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -361,32 +382,55 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                 ),
                 const SizedBox(height: 16),
 
-                // Statistiques globales en compteurs
+                // 2. COMPTEURS GLOBAUX AVEC STATS D'XP
                 Row(
                   children: [
                     Expanded(
                       child: _buildCounterCard(
                         "Parties Jouées",
-                        "${ps.gameStats.values.fold<int>(0, (sum, stat) => sum + (stat['played'] as int? ?? 0))}",
+                        "$totalPlayed",
                         Icons.sports_esports,
                         Colors.blueAccent,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: _buildCounterCard(
                         "Victoires",
-                        "${ps.gameStats.values.fold<int>(0, (sum, stat) => sum + (stat['won'] as int? ?? 0))}",
+                        "$totalWon",
                         Icons.emoji_events,
                         Colors.amberAccent,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildCounterCard(
+                        "XP Total Session",
+                        "${ps.xp} XP",
+                        Icons.military_tech_rounded,
+                        const Color(0xFF67E8F9),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _buildCounterCard(
+                        "Moyenne / Partie",
+                        "${avgXpPerGame.toStringAsFixed(1)} XP",
+                        Icons.auto_graph_rounded,
+                        Colors.purpleAccent,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
 
+                // 3. STATISTIQUES DÉTAILLÉES PAR JEU AVEC GAINS D'XP
                 const Text(
-                  "Statistiques par Jeu",
+                  "Détail par Jeu & Performance XP",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
@@ -396,7 +440,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                     child: Padding(
                       padding: EdgeInsets.all(32.0),
                       child: Text(
-                        "Jouez vos premières parties pour voir vos stats ici !",
+                        "Jouez vos premières parties pour voir vos stats d'XP ici !",
                         style: TextStyle(color: Colors.white54),
                       ),
                     ),
@@ -411,9 +455,11 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                       final rawStat = ps.gameStats[gameName];
                       int played = 0;
                       int won = 0;
+                      int gameXp = 0;
                       if (rawStat is Map) {
                         played = (rawStat['played'] as num?)?.toInt() ?? 0;
                         won = (rawStat['won'] as num?)?.toInt() ?? 0;
+                        gameXp = (rawStat['xp'] as num?)?.toInt() ?? (won * 25 + (played - won) * 8);
                       }
                       double winRate = played > 0 ? (won / played) * 100 : 0.0;
 
@@ -421,13 +467,13 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                         margin: const EdgeInsets.symmetric(vertical: 4),
                         color: Colors.white.withOpacity(0.04),
                         child: ListTile(
-                          leading: const Icon(Icons.games, color: Colors.cyanAccent),
+                          leading: const Icon(Icons.videogame_asset, color: Colors.cyanAccent),
                           title: Text(
                             gameName,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                            "$played partie${played > 1 ? 's' : ''} | $won victoire${won > 1 ? 's' : ''}",
+                            "$played jouée${played > 1 ? 's' : ''} • $won victoire${won > 1 ? 's' : ''} • ~$gameXp XP gagnés",
                           ),
                           trailing: Container(
                             padding: const EdgeInsets.symmetric(
@@ -441,7 +487,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
-                              "${winRate.toStringAsFixed(1)} %",
+                              "${winRate.toStringAsFixed(0)} %",
                               style: TextStyle(
                                 color: winRate >= 50
                                     ? Colors.greenAccent
@@ -469,7 +515,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
     Color color,
   ) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(16),
@@ -477,12 +523,12 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
       ),
       child: Column(
         children: [
-          Icon(icon, color: color, size: 28),
-          const SizedBox(height: 8),
+          Icon(icon, color: color, size: 26),
+          const SizedBox(height: 6),
           Text(
             count,
             style: const TextStyle(
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
@@ -490,7 +536,8 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
           const SizedBox(height: 2),
           Text(
             title,
-            style: const TextStyle(fontSize: 12, color: Colors.white54),
+            style: const TextStyle(fontSize: 11, color: Colors.white54),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

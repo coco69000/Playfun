@@ -31,6 +31,7 @@ import 'livekit_service.dart';
 import 'services/force_update_service.dart';
 
 import 'game_video_overlay.dart';
+import 'widgets/xp_gain_overlay.dart';
 
 final ThemeData appTheme = ThemeData(
   primarySwatch: Colors.deepPurple,
@@ -3107,6 +3108,150 @@ class _MultiplayerTeamSelectionDialogState
 class FirebaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  // =========================================================================
+  // ⚡ MOTEUR D'XP ET CALCUL DU BONUS DE VITESSE DYNAMIQUE
+  // =========================================================================
+
+  /// Récupère la durée effective du timer selon le jeu, ses réglages et son état
+  static int getEffectiveTurnTimer(Map<String, dynamic> gameData) {
+    // 1. Si le chrono a été désactivé par l'hôte
+    final bool useTimer = gameData['useTimer'] ?? true;
+    if (!useTimer) return 0;
+
+    final String gameType = gameData['gameType'] ?? '';
+    final int? customTurnTimer =
+        (gameData['turnTimerSeconds'] as num?)?.toInt();
+
+    // 2. Si une durée personnalisée globale a été définie (> 0)
+    if (customTurnTimer != null && customTurnTimer > 0) {
+      // Cas particuliers avec réglages spécifiques qui priment si configurés
+      if (gameType == 'La Patate Chaude' &&
+          gameData['hotPotatoUseGlobalTimer'] == true) {
+        return (gameData['hotPotatoGlobalDuration'] as num?)?.toInt() ?? 60;
+      }
+      if (gameType == 'Petit Bac' && gameData['petitBacTime'] != null) {
+        return (gameData['petitBacTime'] as num).toInt();
+      }
+      return customTurnTimer;
+    }
+
+    // 3. Durées par défaut spécifiques selon le type de jeu
+    switch (gameType) {
+      case 'Petit Bac':
+        return (gameData['petitBacTime'] as num?)?.toInt() ?? 120;
+      case 'Pictionary':
+        return 90;
+      case 'Devine Tête':
+      case 'Taboo':
+        return 60;
+      case 'La Patate Chaude':
+        return gameData['hotPotatoUseGlobalTimer'] == true
+            ? ((gameData['hotPotatoGlobalDuration'] as num?)?.toInt() ?? 60)
+            : 30;
+      case 'Photo Roulette':
+        return (gameData['photoRouletteTime'] as num?)?.toInt() ?? 5;
+      case "Time's Up":
+        return (gameData['currentRoundTime'] as num?)?.toInt() ?? 30;
+      case 'Infiltré & Mr. White':
+      case 'Loup-Garou':
+      case 'Poker':
+      case 'Uno':
+      case 'Zéro Pointé':
+      case 'Big Two':
+      case 'Mille Bornes':
+      case 'Rami':
+      case 'Belote':
+      case 'Yams':
+      case 'Skull':
+      case 'Blokus':
+      case 'Petits Chevaux':
+      case 'Jeu de Dames':
+      case 'Dominoes':
+      case 'Zombie!':
+      case 'Blanc Manger Coco':
+      case 'Qui Pourrait le Plus ?':
+      case 'Le Juge':
+      case 'Le Menteur':
+      case 'Synonyme ou Banni':
+      case 'Le Roi des Mêmes':
+      default:
+        return 30;
+    }
+  }
+
+  /// Calcul du bonus de rapidité (+1 à +10 XP) basé sur le temps serveur et la durée réelle
+  static int calculateSpeedBonus(
+    Timestamp? turnStartTime, {
+    required int effectiveTimerSeconds,
+  }) {
+    // Si pas de timestamp, ou chrono désactivé (<= 0) -> aucun bonus de vitesse
+    if (turnStartTime == null || effectiveTimerSeconds <= 0) return 0;
+
+    final int elapsedMs = max(
+      0,
+      DateTime.now().millisecondsSinceEpoch -
+          turnStartTime.millisecondsSinceEpoch,
+    );
+    final double elapsedSeconds = (elapsedMs / 1000.0).clamp(
+      0.0,
+      effectiveTimerSeconds.toDouble(),
+    );
+
+    // Pourcentage du temps consommé par le joueur
+    final double percentElapsed =
+        (elapsedSeconds / effectiveTimerSeconds) * 100.0;
+
+    if (percentElapsed <= 10.0)
+      return 10; // 0% - 10%  -> +10 XP (Réflexe Éclair)
+    if (percentElapsed <= 20.0) return 9; // 11% - 20% -> +9 XP (Ultra-Rapide)
+    if (percentElapsed <= 30.0) return 8; // 21% - 30% -> +8 XP (Très Rapide)
+    if (percentElapsed <= 40.0) return 7; // 31% - 40% -> +7 XP (Vif)
+    if (percentElapsed <= 50.0) return 6; // 41% - 50% -> +6 XP (Bon tempo)
+    if (percentElapsed <= 60.0) return 5; // 51% - 60% -> +5 XP (Calculé)
+    if (percentElapsed <= 70.0) return 4; // 61% - 70% -> +4 XP (Stratégique)
+    if (percentElapsed <= 80.0) return 3; // 71% - 80% -> +3 XP (Réfléchi)
+    if (percentElapsed <= 90.0) return 2; // 81% - 90% -> +2 XP (In Extremis)
+    return 1; // 91% - 100% -> +1 XP (Sur le fil)
+  }
+
+  /// Crédite l'XP au joueur en appliquant dynamiquement le bonus selon le jeu et ses réglages
+  void creditPlayerXp(
+    Transaction transaction,
+    DocumentReference gameRef,
+    Map<String, dynamic> gameData,
+    String playerId,
+    int baseAmount, {
+    bool applySpeedBonus = true,
+  }) {
+    if (baseAmount <= 0) return;
+
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final authUid = players[playerId]?['authUid'] ?? playerId;
+    final turnStartTime = gameData['turnStartTime'] as Timestamp?;
+
+    // Détection automatique de la durée du timer réelle
+    final int effectiveTimer = getEffectiveTurnTimer(gameData);
+
+    int totalXp = baseAmount;
+    if (applySpeedBonus && turnStartTime != null && effectiveTimer > 0) {
+      totalXp += calculateSpeedBonus(
+        turnStartTime,
+        effectiveTimerSeconds: effectiveTimer,
+      );
+    }
+
+    // 1. Mise à jour de la session de jeu
+    transaction.update(gameRef, {
+      'players.$playerId.xp': FieldValue.increment(totalXp),
+    });
+
+    // 2. Mise à jour du profil utilisateur persistant
+    final userDocRef = _db.collection('users').doc(authUid);
+    transaction.set(userDocRef, {
+      'xp': FieldValue.increment(totalXp),
+    }, SetOptions(merge: true));
+  }
+
   // 1. Cadavre Exquis : Nombre de mots tapés en direct
   Future<void> updateCadavreTypingCount(
     String gameCode,
@@ -3377,8 +3522,8 @@ class FirebaseService {
         .collection('games')
         .doc(gameCode)
         .collection('chat')
-        .where('chatType', isEqualTo: chatType)
         .orderBy('timestamp', descending: true)
+        .limit(10)
         .snapshots();
   }
 
@@ -3760,6 +3905,19 @@ class FirebaseService {
           'playedBy': playerId,
         };
         passedPlayers = [];
+
+        int xpBase =
+            (myHand.isEmpty)
+                ? 30
+                : (((combo['tier'] as num?)?.toInt() ?? 0) >= 1 ? 20 : 4);
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          xpBase,
+          applySpeedBonus: true,
+        );
       }
 
       if (myHand.isEmpty && !finishedPlayers.contains(playerId)) {
@@ -4046,6 +4204,20 @@ class FirebaseService {
           return;
         }
 
+        int xpBase =
+            card.startsWith('SAFETY_') ? 35 : (card.startsWith('D') ? 5 : 10);
+        if ((myData['distance'] as int) >= targetDist) {
+          xpBase = 50;
+        }
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          xpBase,
+          applySpeedBonus: true,
+        );
+
         int nextIndex = (currentIndex + 1) % playerOrder.length;
         transaction.update(gameRef, {
           'milleBornesPlayerData': pData,
@@ -4315,24 +4487,20 @@ class FirebaseService {
         return;
       }
 
-      // Mettre la partie en mode "refilling" pour le matchmaking
-      transaction.update(gameRef, {
+      final Map<String, dynamic> updates = {
         'players': players,
-        'gameState':
-            'refilling', // Ãƒâ€°tat spÃƒÂ©cial pour le matchmaking prioritaire
+        'gameState': 'refilling',
         'restartVotes': {},
-        'refillStartTime':
-            FieldValue.serverTimestamp(), // Pour le chrono de 10s
+        'refillStartTime': FieldValue.serverTimestamp(),
         'gameLog': FieldValue.arrayUnion(["Recherche de nouveaux joueurs..."]),
-      });
+      };
 
-      // Gestion de l'hÃƒÂ´te si celui-ci est parti
       String currentHost = data['hostId'];
-      if (playersToRemove.contains(currentHost)) {
-        // On assignera un nouvel hÃƒÂ´te plus tard ou on laisse le premier de la liste
-        String newHost = players.keys.first;
-        transaction.update(gameRef, {'hostId': newHost});
+      if (playersToRemove.contains(currentHost) && players.isNotEmpty) {
+        updates['hostId'] = players.keys.first;
       }
+
+      transaction.update(gameRef, updates);
     });
   }
 
@@ -4360,6 +4528,7 @@ class FirebaseService {
       players[playerId] = {
         'name': playerName,
         'score': 0,
+        'xp': 0,
         'authUid': currentUser?.uid,
         'livekitIdentity': playerId,
       };
@@ -5368,6 +5537,15 @@ class FirebaseService {
         }
       }
 
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        1,
+        applySpeedBonus: true,
+      );
+
       transaction.update(gameRef, {
         'yamsDice': currentDice,
         'yamsHeldDice': effectiveHeld,
@@ -5443,6 +5621,17 @@ class FirebaseService {
       );
       final nextPlayerId =
           playerOrder[(playerOrder.indexOf(playerId) + 1) % playerOrder.length];
+
+      int xpBase =
+          (category == 'Yams') ? 50 : (category.contains('Suite') ? 20 : 10);
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
 
       final updates = <String, dynamic>{
         'yamsScores': rawScores,
@@ -5700,6 +5889,15 @@ class FirebaseService {
         }
       }
 
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        8,
+        applySpeedBonus: true,
+      );
+
       transaction.update(gameRef, updates);
     });
   }
@@ -5889,6 +6087,14 @@ class FirebaseService {
         _db.collection('users').doc(authUid).set({
           'unlockedBadges.skyjo_col_cancel': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          25,
+          applySpeedBonus: false,
+        );
       }
     }
     grids[playerId] = playerGrid;
@@ -5928,6 +6134,14 @@ class FirebaseService {
       if ((roundScores[roundEnderId] ?? 0) > lowestScoreInRound) {
         roundScores[roundEnderId] = (roundScores[roundEnderId]! + 10);
       }
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        20,
+        applySpeedBonus: false,
+      );
 
       var totalScores = Map<String, dynamic>.from(
         gameData['totalScores'] ?? {},
@@ -6189,6 +6403,17 @@ class FirebaseService {
         _db.collection('users').doc(voterAuth).set({
           'badgeProgress.photo_roulette_perfect': FieldValue.increment(1),
         }, SetOptions(merge: true));
+
+        final int effectiveTimer = getEffectiveTurnTimer(gameData);
+        final int speedBonus = calculateSpeedBonus(
+          roundStartTime,
+          effectiveTimerSeconds: effectiveTimer,
+        );
+        final int photoXp = 10 + speedBonus;
+        updates['players.$voterId.xp'] = FieldValue.increment(photoXp);
+        _db.collection('users').doc(voterAuth).set({
+          'xp': FieldValue.increment(photoXp),
+        }, SetOptions(merge: true));
       }
 
       roundResults[voterId] = {
@@ -6331,6 +6556,14 @@ class FirebaseService {
           updates['roundState'] = 'drawing';
           updates['turnStartTime'] = FieldValue.serverTimestamp();
         }
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          5,
+          applySpeedBonus: true,
+        );
         transaction.update(gameRef, updates);
         return;
       }
@@ -6361,6 +6594,16 @@ class FirebaseService {
 
       List<String> submittedPlayers = List<String>.from(existingSubmitted2)
         ..add(playerId);
+
+      int xpBase = (type == 'drawing') ? 10 : 5;
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
 
       Map<String, dynamic> updates = {
         'albums': albums,
@@ -6731,6 +6974,15 @@ class FirebaseService {
 
       String targetRole = playerData[targetId]?['role'] ?? 'Simple Villageois';
       String targetName = playerData[targetId]?['name'] ?? 'Inconnu';
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        voyanteId,
+        10,
+        applySpeedBonus: true,
+      );
 
       if (GameData.roleCamps[targetRole] == 'loups') {
         final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
@@ -7190,7 +7442,17 @@ class FirebaseService {
       if (potionType == 'rien') {
         transaction.update(gameRef, updates);
         shouldAdvance = true;
-      } else if (potionType == 'guerison' &&
+      } else {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          sorciereId,
+          15,
+          applySpeedBonus: true,
+        );
+      }
+      if (potionType == 'guerison' &&
           playerData[sorciereId]['potions']?['guerison'] == true) {
         if (playerData[sorciereId]['potions']?['poison'] == false) {
           final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
@@ -7871,7 +8133,18 @@ class FirebaseService {
       throw Exception("Tentative d'usurpation d'identité détectée !");
     }
 
-    await gameRef.update({'dayVotes.$voterId': targetId});
+    int speedBonus = calculateSpeedBonus(
+      gameData['turnStartTime'] as Timestamp?,
+      effectiveTimerSeconds: getEffectiveTurnTimer(gameData),
+    );
+    int totalXp = 8 + speedBonus;
+    await gameRef.update({
+      'dayVotes.$voterId': targetId,
+      'players.$voterId.xp': FieldValue.increment(totalXp),
+    });
+    _db.collection('users').doc(voterAuthUid).set({
+      'xp': FieldValue.increment(totalXp),
+    }, SetOptions(merge: true));
 
     DocumentSnapshot updatedSnap = await gameRef.get();
     var updatedData = updatedSnap.data() as Map<String, dynamic>;
@@ -7934,6 +8207,22 @@ class FirebaseService {
       if (tiedCandidates.length == 1) {
         eliminatedId = tiedCandidates.first;
         newlyDeadIds.add(eliminatedId);
+
+        if (GameData.roleCamps[playerData[eliminatedId]['role']] == 'loups') {
+          for (String vId in dayVotes.keys) {
+            if (dayVotes[vId] == eliminatedId) {
+              creditPlayerXp(
+                transaction,
+                gameRef,
+                gameData,
+                vId,
+                25,
+                applySpeedBonus: false,
+              );
+            }
+          }
+        }
+
         transaction.update(gameRef, {
           'gameLog': FieldValue.arrayUnion([
             "Le village a voté et élimine ${playerData[eliminatedId]['name']}.",
@@ -8301,14 +8590,27 @@ class FirebaseService {
           'gameLog': FieldValue.arrayUnion(logMessages),
         });
       } else {
-        transaction.update(gameRef, {
-          'playerData': playerData,
-          'phase': 'nuit',
-          'subPhase': 'initial',
-          'nightNumber': FieldValue.increment(1),
-          'activePlayerId': null,
-          'pendingDayEffects': [],
-        });
+        bool wasDayVote = gameData['phase'] == 'jour_vote';
+        if (wasDayVote) {
+          transaction.update(gameRef, {
+            'playerData': playerData,
+            'phase': 'nuit',
+            'subPhase': 'initial',
+            'nightNumber': FieldValue.increment(1),
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        } else {
+          transaction.update(gameRef, {
+            'playerData': playerData,
+            'phase': 'jour_discussion',
+            'subPhase': '',
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
       }
     });
 
@@ -8390,14 +8692,27 @@ class FirebaseService {
           'pendingDayEffects': pendingDayEffects,
         });
       } else {
-        transaction.update(gameRef, {
-          'playerData': playerData,
-          'phase': 'nuit',
-          'subPhase': 'initial',
-          'nightNumber': FieldValue.increment(1),
-          'activePlayerId': null,
-          'pendingDayEffects': [],
-        });
+        bool wasDayVote = gameData['phase'] == 'jour_vote';
+        if (wasDayVote) {
+          transaction.update(gameRef, {
+            'playerData': playerData,
+            'phase': 'nuit',
+            'subPhase': 'initial',
+            'nightNumber': FieldValue.increment(1),
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        } else {
+          transaction.update(gameRef, {
+            'playerData': playerData,
+            'phase': 'jour_discussion',
+            'subPhase': '',
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
       }
     });
 
@@ -8551,6 +8866,7 @@ class FirebaseService {
         enrichedPlayers[pId] = {
           'name': pData.toString(),
           'score': 0,
+          'xp': 0,
           'livekitIdentity': pId,
           if (currentAuthUid != null && currentAuthUid.isNotEmpty)
             'authUid': currentAuthUid,
@@ -8907,6 +9223,7 @@ class FirebaseService {
         playerId: {
           'name': playerName,
           'score': 0,
+          'xp': 0,
           'authUid': FirebaseAuth.instance.currentUser?.uid,
           'livekitIdentity': playerId,
         },
@@ -9217,6 +9534,7 @@ class FirebaseService {
             players[playerId] = {
               'name': playerName,
               'score': 0,
+              'xp': 0,
               'authUid': currentUser?.uid,
               'livekitIdentity': playerId,
             };
@@ -9486,6 +9804,15 @@ class FirebaseService {
         }
         return nextIndex;
       }
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        5,
+        applySpeedBonus: true,
+      );
 
       Map<String, dynamic> updates = {
         'playerClues.$playerId': cleanClue,
@@ -9875,6 +10202,12 @@ class FirebaseService {
       if (points != 0) {
         scoreUpdates['players.$pId.score'] = FieldValue.increment(points);
       }
+      int winXp = (winnerFaction == 'Civils') ? 20 : 35;
+      scoreUpdates['players.$pId.xp'] = FieldValue.increment(winXp);
+      final pAuth = (gameData['players']?[pId]?['authUid']) ?? pId;
+      _db.collection('users').doc(pAuth).set({
+        'xp': FieldValue.increment(winXp),
+      }, SetOptions(merge: true));
     });
 
     await gameRef.update({
@@ -9968,6 +10301,14 @@ class FirebaseService {
           throw Exception("Vous ne pouvez pas buzzer votre propre équipe.");
         }
         scores[currentTeamId] = max(0, (scores[currentTeamId] ?? 0) - 1);
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          15,
+          applySpeedBonus: true,
+        );
         updates['tabooScores'] = scores;
         updates['tabooCurrentWord'] = nextWord;
         updates['tabooForbiddenWords'] = nextForbidden;
@@ -9981,6 +10322,14 @@ class FirebaseService {
           throw Exception("Seule l'équipe active peut valider.");
         }
         scores[currentTeamId] = (scores[currentTeamId] ?? 0) + 1;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          10,
+          applySpeedBonus: true,
+        );
         updates['tabooScores'] = scores;
         updates['tabooCurrentWord'] = nextWord;
         updates['tabooForbiddenWords'] = nextForbidden;
@@ -10308,11 +10657,27 @@ class FirebaseService {
       }
 
       enemyGrid[targetIndex] = result;
+      int xpBase = 0;
       if (enemyGrid.where((cell) => cell != 'unknown').length == 1 &&
           (result == 'hit' || result == 'sunk')) {
+        xpBase = 50; // Sniper 1er coup
         _db.collection('users').doc(currentAuthUid).set({
           'unlockedBadges.naval_sniper': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
+      } else if (result == 'sunk') {
+        xpBase = 25;
+      } else if (result == 'hit') {
+        xpBase = 10;
+      }
+      if (xpBase > 0) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          xpBase,
+          applySpeedBonus: true,
+        );
       }
       shooterData['enemyGrid'] = enemyGrid;
       opponentData['shipsPlaced'] = opponentShips;
@@ -10582,6 +10947,14 @@ class FirebaseService {
           myHand.add(discard.removeLast());
         }
         playerHands[playerId] = myHand;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          2,
+          applySpeedBonus: true,
+        );
         transaction.update(gameRef, {
           'ramiPlayerHands': playerHands,
           'ramiStock': stock,
@@ -10615,6 +10988,14 @@ class FirebaseService {
         myMelds.add(cards);
         playerHands[playerId] = myHand;
         melds[playerId] = myMelds;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          15,
+          applySpeedBonus: true,
+        );
         transaction.update(gameRef, {
           'ramiPlayerHands': playerHands,
           'ramiMelds': melds,
@@ -10633,6 +11014,14 @@ class FirebaseService {
         discard.add(cardToDiscard);
 
         if (myHand.isEmpty) {
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            30,
+            applySpeedBonus: true,
+          );
           _db.collection('users').doc(currentAuthUid).set({
             'unlockedBadges.rami_gin': FieldValue.serverTimestamp(),
           }, SetOptions(merge: true));
@@ -10984,6 +11373,16 @@ class FirebaseService {
         }, SetOptions(merge: true));
       }
 
+      int xpBase = (newPos == 56) ? 25 : (captured ? 15 : 5);
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
+
       Map<String, dynamic> updates = {
         'petitsChevauxPositions': allPositions,
         'petitsChevauxHasRolled': false,
@@ -11267,6 +11666,16 @@ class FirebaseService {
           }
         }
       }
+
+      int xpBase = myHand.isEmpty ? 25 : (mode == 'all_fives' ? 10 : 5);
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
 
       final Map<String, dynamic> updates = {
         'dominoesPlayerHands': hands,
@@ -11655,6 +12064,16 @@ class FirebaseService {
 
       int activePlayersCount = playerOrder.length - eliminated.length;
 
+      int xpBase = myHand.isEmpty ? 25 : (drawnCard != 'Zombie' ? 10 : 3);
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
+
       Map<String, dynamic> updates = {
         'zombiePlayerHands': hands,
         'zombieEliminatedPlayers': eliminated,
@@ -11803,6 +12222,14 @@ class FirebaseService {
       Map<String, dynamic> updates = {};
 
       if (guessed) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          15,
+          applySpeedBonus: true,
+        );
         updates['players.$playerId.score'] = FieldValue.increment(1);
         updates['guessedCount'] = guessedCount + 1;
         if (gameData['devineTeteUseTeams'] == true) {
@@ -12159,6 +12586,37 @@ class FirebaseService {
         'turnStartTime': FieldValue.serverTimestamp(),
       });
     });
+  }
+
+  /// Relance une partie en conservant les scores et les joueurs actuels
+  Future<void> restartGameKeepScores(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final gameData = snap.data() as Map<String, dynamic>;
+
+    final String gameType = gameData['gameType'] ?? '';
+    final String difficulty = gameData['difficulty'] ?? 'soft';
+    final Map<String, dynamic> players = Map<String, dynamic>.from(
+      gameData['players'] ?? {},
+    );
+
+    // Réinitialisation des états de manche tout en gardant les points
+    Map<String, dynamic> cleanUpdates = {
+      'gameState': 'playing',
+      'roundState': 'waitingForStart',
+      'currentRound': 0,
+      'gameWinner': null,
+      'gameEndReason': null,
+      'roundWinnerId': null,
+      'roundLoserId': null,
+      'turnStartTime': FieldValue.serverTimestamp(),
+      'restartVotes': {},
+    };
+
+    await gameRef.update(cleanUpdates);
+    // Relance la logique spécifique du jeu
+    await startGame(gameCode);
   }
 
   Future<void> startGame(String gameCode) async {
@@ -12932,6 +13390,16 @@ class FirebaseService {
       myHand.remove(card);
       discardPile.add(card);
 
+      int xpBase = myHand.isEmpty ? 30 : 3;
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
+
       Map<String, dynamic> updates = {
         'unoPlayerHands.$playerId': myHand,
         'unoDiscardPile': discardPile,
@@ -13229,6 +13697,15 @@ class FirebaseService {
       );
       playerCards[playerId] = centerCard..shuffle();
 
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        15,
+        applySpeedBonus: true,
+      );
+
       Map<String, dynamic> updates = {
         'dobblePlayerCards': playerCards,
         'roundWinnerId': playerId,
@@ -13503,6 +13980,16 @@ class FirebaseService {
         updates['gameWinner'] = playerOrder[0];
         updates['gameEndReason'] = "Les Noirs n'ont plus de pièces !";
       }
+
+      int xpBase = piece.endsWith('_king') ? 20 : (isCaptureMove ? 15 : 5);
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
 
       transaction.update(gameRef, updates);
     });
@@ -13788,6 +14275,17 @@ class FirebaseService {
         throw Exception("Ce n'est pas la phase de proposition d'indice.");
       }
 
+      if (expectedMasterSpy != null) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          expectedMasterSpy,
+          10,
+          applySpeedBonus: true,
+        );
+      }
+
       transaction.update(gameRef, {
         'currentClue': cleanClue,
         'clueCount': count,
@@ -13874,6 +14372,14 @@ class FirebaseService {
         updates['gameEndReason'] =
             "L'équipe ${activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin !";
       } else if (wordColor == activeTeam) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          callerId,
+          15,
+          applySpeedBonus: true,
+        );
         if (activeTeam == 'red')
           redScore--;
         else
@@ -14099,6 +14605,16 @@ class FirebaseService {
       }
 
       if (guessed) {
+        int roundNum = (gameData['currentRoundNumber'] as num?)?.toInt() ?? 1;
+        int xpBase = (roundNum == 3) ? 15 : (roundNum == 2 ? 12 : 8);
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          currentGuesserId,
+          xpBase,
+          applySpeedBonus: true,
+        );
         teamScores[activeTeamKey] = (teamScores[activeTeamKey] ?? 0) + 1;
         discarded.add(word);
       } else {
@@ -14244,6 +14760,10 @@ class FirebaseService {
       for (final pId in players.keys) pId: 0,
     };
 
+    final Map<String, int> xpGainedPerPlayer = {
+      for (final pId in players.keys) pId: 0,
+    };
+
     for (final category in categories) {
       final Map<String, String> validAnswers = {};
       for (final entry in allPlayerAnswers.entries) {
@@ -14271,6 +14791,8 @@ class FirebaseService {
         } else {
           roundScores[pId] = (roundScores[pId] ?? 0) + 5; // Réponse partagée
         }
+        int xpBase = (wordCounts[w] ?? 0) == 1 ? 10 : 3;
+        xpGainedPerPlayer[pId] = (xpGainedPerPlayer[pId] ?? 0) + xpBase;
       }
     }
 
@@ -14288,6 +14810,19 @@ class FirebaseService {
     }
     await batch.commit();
 
+    final Map<String, dynamic> xpUpdates = {};
+    for (final entry in xpGainedPerPlayer.entries) {
+      if (entry.value > 0) {
+        final pAuth = players[entry.key]?['authUid'] ?? entry.key;
+        _db.collection('users').doc(pAuth).set({
+          'xp': FieldValue.increment(entry.value),
+        }, SetOptions(merge: true));
+        xpUpdates['players.${entry.key}.xp'] = FieldValue.increment(
+          entry.value,
+        );
+      }
+    }
+
     await gameRef.update({
       'petitBacAnswers': allPlayerAnswers,
       'petitBacRoundScores': roundScores,
@@ -14295,6 +14830,7 @@ class FirebaseService {
       'roundState': 'round_results',
       'petitBacRoundEnded': true,
       'turnStartTime': FieldValue.serverTimestamp(),
+      ...xpUpdates,
     });
   }
 
@@ -14420,6 +14956,16 @@ class FirebaseService {
         'value': playValue,
         'playedBy': playerId,
       };
+
+      int xpBase = (cardsToPlay.length == 4) ? 25 : (isCutCard ? 10 : 4);
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
 
       Map<String, dynamic> updates = {
         'playerHands': hands,
@@ -14943,6 +15489,23 @@ class FirebaseService {
           updates['turnStartTime'] = FieldValue.serverTimestamp();
         }
 
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          winnerId,
+          20,
+          applySpeedBonus: true,
+        );
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          expectedDrawerId,
+          15,
+          applySpeedBonus: false,
+        );
+
         transaction.update(gameRef, updates);
 
         // 1. pic_30_strokes_win (Moins de 15 traits en mode 30 traits)
@@ -15114,6 +15677,15 @@ class FirebaseService {
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final nonGuessersCount = players.length - 1;
 
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        10,
+        applySpeedBonus: true,
+      );
+
       final updates = <String, dynamic>{
         'justOneClues': clues,
         'justOneSubmittedCount': clues.length,
@@ -15183,6 +15755,17 @@ class FirebaseService {
 
       if (isCorrect) {
         updates['justOneTotalScore'] = FieldValue.increment(1);
+        final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+        players.keys.forEach((pId) {
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            pId,
+            25,
+            applySpeedBonus: false,
+          );
+        });
       }
 
       transaction.update(gameRef, updates);
@@ -15281,6 +15864,15 @@ class FirebaseService {
       final currentIdx = playerOrder.indexOf(playerId);
       final nextIdx = (currentIdx + 1) % playerOrder.length;
       final nextPlayerId = playerOrder[nextIdx];
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        5,
+        applySpeedBonus: true,
+      );
 
       transaction.update(gameRef, {
         'hotPotatoUsedAnswers': usedAnswers,
@@ -15566,6 +16158,14 @@ class FirebaseService {
       if (callerId != targetId &&
           !(unoCalledUno[targetId] ?? false) &&
           lastActionPlayerId == targetId) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          callerId,
+          15,
+          applySpeedBonus: true,
+        );
         List<String> penaltyCards = [];
         for (int i = 0; i < 2; i++) {
           if (deck.isNotEmpty) {
@@ -16040,6 +16640,15 @@ class FirebaseService {
       myMat.add({'type': cardType, 'revealed': false});
       skullMats[playerId] = myMat;
 
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        3,
+        applySpeedBonus: true,
+      );
+
       players[playerId] = {
         ...Map<String, dynamic>.from(players[playerId] ?? {}),
         'cardsInHand': myHand.length,
@@ -16201,6 +16810,15 @@ class FirebaseService {
         currentPlayerIndex,
         players,
         {playerId},
+      );
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        8,
+        applySpeedBonus: true,
       );
 
       final Map<String, dynamic> updates = {
@@ -16419,6 +17037,14 @@ class FirebaseService {
       }
     } else {
       // Succès du défi : +1 point
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        challengerId,
+        30,
+        applySpeedBonus: true,
+      );
       final int currentScore = (players[challengerId]?['score'] ?? 0) as int;
       int newScore = currentScore + 1;
       players[challengerId] = {
@@ -16622,6 +17248,17 @@ class FirebaseService {
               ? sanitizeUserInput(cleanAnswer, maxLength: 50)
               : cleanAnswer;
 
+      if (gameType == 'Le Menteur' || gameType == 'Le Roi des Mèmes') {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          5,
+          applySpeedBonus: true,
+        );
+      }
+
       int playersCount = players.length;
       int answersCount = answers.length;
 
@@ -16766,6 +17403,17 @@ class FirebaseService {
 
       final votes = Map<String, dynamic>.from(gameData['votes'] as Map? ?? {});
       votes[voterId] = votedForId;
+
+      if (gameType == 'Qui Pourrait le Plus ?') {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          voterId,
+          5,
+          applySpeedBonus: true,
+        );
+      }
 
       int requiredVotes = players.length;
 
@@ -17100,6 +17748,14 @@ class FirebaseService {
         if (mostVotedPlayerId != null) {
           updates['players.$mostVotedPlayerId.score'] = FieldValue.increment(1);
           updates['roundWinnerId'] = mostVotedPlayerId;
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            mostVotedPlayerId!,
+            25,
+            applySpeedBonus: false,
+          );
           updates['gameEndReason'] =
               'La description la plus drôle a été choisie !';
         } else {
@@ -17199,6 +17855,14 @@ class FirebaseService {
             votes.forEach((voterId, votedId) {
               if (votedId == actualLiarId) {
                 updates['players.$voterId.score'] = FieldValue.increment(2);
+                creditPlayerXp(
+                  transaction,
+                  gameRef,
+                  gameData,
+                  voterId,
+                  15,
+                  applySpeedBonus: false,
+                );
               } else {
                 fooledCount++;
               }
@@ -17312,17 +17976,32 @@ class FirebaseService {
 
     DocumentReference gameRef = _db.collection('games').doc(gameCode);
 
-    await _db.runTransaction((transaction) async {
-      DocumentSnapshot gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) return;
+    DocumentSnapshot gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
 
-      var gameData = gameSnap.data() as Map<String, dynamic>;
-      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
-      var players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      String playerName =
-          playerData[playerId]?['name'] ??
-          players[playerId]?['name'] ??
-          'Inconnu';
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+    var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+    var players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    String playerName =
+        playerData[playerId]?['name'] ??
+        players[playerId]?['name'] ??
+        'Inconnu';
+
+    // 1. Ajout dans la sous-collection 'chat' pour le FloatingChatOverlay
+    await gameRef.collection('chat').add({
+      'senderId': playerId,
+      'senderName': playerName,
+      'text': safeMessage,
+      'chatType': chatType,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+
+    // 2. Synchronisation dans les tableaux du document pour les canaux Loup-Garou / Infiltré
+    await _db.runTransaction((transaction) async {
+      DocumentSnapshot freshSnap = await transaction.get(gameRef);
+      if (!freshSnap.exists) return;
+
+      var freshData = freshSnap.data() as Map<String, dynamic>;
 
       Map<String, dynamic> chatMessage = {
         'senderId': playerId,
@@ -17332,12 +18011,12 @@ class FirebaseService {
       };
 
       if (chatType == 'lover') {
-        List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
+        List<String> lovers = List<String>.from(freshData['lovers'] ?? []);
         if (lovers.contains(playerId) && lovers.isNotEmpty) {
           lovers.sort();
           String chatKey = lovers.join('_');
           Map<String, dynamic> loverChat = Map<String, dynamic>.from(
-            gameData['loverChatMessages']?[chatKey] ?? {},
+            freshData['loverChatMessages']?[chatKey] ?? {},
           );
           List<dynamic> currentList = List.from(loverChat['messages'] ?? []);
           if (currentList.length >= 30) currentList.removeAt(0);
@@ -17354,7 +18033,7 @@ class FirebaseService {
               ? 'wolfChatMessages'
               : (chatType == 'dead' ? 'deadChatMessages' : 'chatMessages');
 
-      List<dynamic> currentList = List.from(gameData[fieldToUpdate] ?? []);
+      List<dynamic> currentList = List.from(freshData[fieldToUpdate] ?? []);
       if (currentList.length >= 30) {
         currentList.removeAt(0);
       }
@@ -17461,6 +18140,14 @@ class FirebaseService {
         playerGrid[cardIndex]['revealed'] = true;
         grids[playerId] = playerGrid;
         counts[playerId] = (counts[playerId] ?? 0) + 1;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          2,
+          applySpeedBonus: true,
+        );
         transaction.update(gameRef, {
           'playerGrids': grids,
           'revealedInitialCardsCount': counts,
@@ -17528,6 +18215,15 @@ class FirebaseService {
       playerGrid[gridIndexToReplace]['revealed'] = true;
       grids[playerId] = playerGrid;
       discardPile.add(replacedCardValue);
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        2,
+        applySpeedBonus: true,
+      );
 
       transaction.update(gameRef, {
         'playerGrids': grids,
@@ -17625,6 +18321,15 @@ class FirebaseService {
       playerGrid[gridIndexToReplace]['revealed'] = true;
       grids[playerId] = playerGrid;
       discardPile.add(replacedCardValue);
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        2,
+        applySpeedBonus: true,
+      );
 
       transaction.update(gameRef, {
         'playerGrids': grids,
@@ -17946,6 +18651,21 @@ class FirebaseService {
         }
         playerData[playerId] = myData;
 
+        int xpBase =
+            (action == 'raise' || action == 'call')
+                ? ((myData['status'] == 'all-in') ? 15 : 3)
+                : 0;
+        if (xpBase > 0) {
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            xpBase,
+            applySpeedBonus: true,
+          );
+        }
+
         var updatedGameData = Map<String, dynamic>.from(gameData);
         updatedGameData['playerData'] = playerData;
         updatedGameData['pot'] = pot;
@@ -18127,6 +18847,7 @@ class FirebaseService {
 
     String winnerAnnouncement = "";
     List<String> winners = [];
+    PokerHand? bestHand;
 
     if (playersInHand.length == 1) {
       winners.add(playersInHand.first);
@@ -18143,7 +18864,6 @@ class FirebaseService {
         playerFinalHands[pId] = PokerHandEvaluator.evaluateHand(sevenCards);
       }
 
-      PokerHand? bestHand;
       playerFinalHands.forEach((pId, hand) {
         if (bestHand == null || hand.compareTo(bestHand!) > 0) {
           bestHand = hand;
@@ -18160,12 +18880,29 @@ class FirebaseService {
           "$winnerNames gagne(nt) le pot avec ${bestHand?.rank.name ?? 'une main'} !";
     }
 
+    Map<String, dynamic> scoreUpdates = {};
     if (winners.isNotEmpty) {
       int pot = (gameData['pot'] as num? ?? 0).toInt();
       int potPerWinner = (pot / winners.length).floor();
 
       for (String winId in winners) {
         playerData[winId]['chips'] += potPerWinner;
+        int winXp = 30;
+        if (bestHand?.rank == HandRank.straight ||
+            bestHand?.rank == HandRank.flush ||
+            bestHand?.rank == HandRank.fullHouse ||
+            bestHand?.rank == HandRank.fourOfAKind ||
+            bestHand?.rank == HandRank.straightFlush ||
+            bestHand?.rank == HandRank.royalFlush) {
+          winXp = 50;
+        }
+        final authUid = playerData[winId]['authUid'] ?? winId;
+        _db.collection('users').doc(authUid).set({
+          'xp': FieldValue.increment(winXp),
+        }, SetOptions(merge: true));
+        playerData[winId]['xp'] =
+            ((playerData[winId]['xp'] as num?)?.toInt() ?? 0) + winXp;
+        scoreUpdates['players.$winId.xp'] = FieldValue.increment(winXp);
       }
     }
 
@@ -18180,6 +18917,7 @@ class FirebaseService {
         for (var pId in playersInHand) pId: playerData[pId]['hand'],
       },
       'turnStartTime': FieldValue.serverTimestamp(),
+      ...scoreUpdates,
     };
   }
 
@@ -18299,6 +19037,15 @@ class FirebaseService {
           playerData[pId]['hand'] = hand;
         }
 
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          5,
+          applySpeedBonus: true,
+        );
+
         transaction.update(gameRef, {
           'beloteDeck': deck,
           'beloteTrumpSuit': suit,
@@ -18385,6 +19132,25 @@ class FirebaseService {
           bool roundOver = playerOrder.every(
             (pId) => (playerData[pId]['hand'] as List).isEmpty,
           );
+
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            winningPlayer,
+            5,
+            applySpeedBonus: false,
+          );
+          if (roundOver) {
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              winningPlayer,
+              20,
+              applySpeedBonus: false,
+            );
+          }
 
           if (roundOver) {
             teamScores[winnerTeam] =
@@ -18671,6 +19437,16 @@ class FirebaseService {
         gameData['blokusLastPiecesPlaced'] ?? {},
       );
       lastPiecesPlaced[playerId] = pieceId;
+
+      int xpBase = (pieceId == 1) ? 15 : (hand.isEmpty ? 40 : 5);
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
 
       Map<String, dynamic> updates = {
         'blokusBoard': board,
@@ -21744,6 +22520,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
   }
 
+  int? _lastKnownPlayerXp;
+  final List<int> _activeXpPopups = [];
+
+  void _triggerXpAnimation(int amount) {
+    if (amount <= 0) return;
+    setState(() {
+      _activeXpPopups.add(amount);
+    });
+  }
+
   final FirebaseService _firebaseService = FirebaseService();
   final TextEditingController _answerController = TextEditingController();
 
@@ -21759,6 +22545,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   List<String> _selectedRamiCards = [];
   List<String> _selectedBigTwoCards = [];
   String? _selectedCheckersPiece; // Pour stocker la piÃ¨ce sÃ©lectionnÃ©e "r,c"
+  String? _selectedDominoTile; // Pour la sélection préalable et survol de Dominos
+  int? _selectedLudoPawnIdx; // Pour la sélection préalable de pion Petits Chevaux
+  String? _selectedLudoPawnOwner; // Propriétaire du pion Petits Chevaux sélectionné
+  int? _selectedZombieCardIndex; // Pour le ciblage préalable de carte Zombie
   Timer? _playerTurnTimer;
   String?
   _zeroPointeAction; // Valeurs possibles: 'take_discard', 'use_drawn', 'discard_drawn', null
@@ -23761,6 +24551,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 final gameData = snapshot.data!.data() as Map<String, dynamic>;
                 final players =
                     (gameData['players'] as Map<String, dynamic>?) ?? {};
+
+                // ⚡ DÉTECTION DU GAIN D'XP EN TEMPS RÉEL
+                final int currentXp =
+                    (players[widget.playerId]?['xp'] as num?)?.toInt() ?? 0;
+                if (_lastKnownPlayerXp == null) {
+                  _lastKnownPlayerXp = currentXp;
+                } else if (currentXp > _lastKnownPlayerXp!) {
+                  final int gained = currentXp - _lastKnownPlayerXp!;
+                  _lastKnownPlayerXp = currentXp;
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    _triggerXpAnimation(gained);
+                  });
+                }
                 final int currentRound = gameData['currentRound'] ?? 0;
 
                 final int currentPlayerIndex =
@@ -24070,20 +24873,47 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                 );
 
-                if (showFloatingChat) {
-                  return Stack(
-                    children: [
-                      scaffold,
+                return Stack(
+                  children: [
+                    scaffold,
+
+                    if (showFloatingChat)
                       Positioned.fill(
                         child: IgnorePointer(
                           child: FloatingChatOverlay(gameCode: widget.gameCode),
                         ),
                       ),
-                    ],
-                  );
-                }
 
-                return scaffold;
+                    // ⚡ ANIMATION POPUP XP FLOTTANTE
+                    if (_activeXpPopups.isNotEmpty)
+                      Positioned(
+                        top: MediaQuery.of(context).size.height * 0.35,
+                        left: 0,
+                        right: 0,
+                        child: Center(
+                          child: IgnorePointer(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children:
+                                  _activeXpPopups.map((amount) {
+                                    return XpGainPopup(
+                                      key: UniqueKey(),
+                                      amount: amount,
+                                      onDismissed: () {
+                                        if (mounted) {
+                                          setState(() {
+                                            _activeXpPopups.remove(amount);
+                                          });
+                                        }
+                                      },
+                                    );
+                                  }).toList(),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
               },
             ),
           );
@@ -24120,60 +24950,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     if (isGameOver) {
       final winnerId = gameData['gameWinner'];
-      final winnerName = players[winnerId]?['name'] ?? 'Inconnu';
-      return Center(
-        child: Card(
-          elevation: 10,
-          color: Colors.deepPurple[900],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.emoji_events, size: 64, color: Colors.amberAccent),
-                SizedBox(height: 16),
-                Text(
-                  "Partie Terminée !",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  "$winnerName a gagné la partie !",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.amberAccent,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  "Scores finaux :",
-                  style: TextStyle(color: Colors.white70, fontSize: 16),
-                ),
-                SizedBox(height: 8),
-                ...scores.entries.map((e) {
-                  final pName = players[e.key]?['name'] ?? 'Inconnu';
-                  return Text(
-                    "$pName : ${e.value} / $targetScore pts",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  );
-                }),
-                SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: () => _exitGame(),
-                  child: Text("Retour au Salon"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Blanc Manger Coco",
+        winnerId: winnerId,
+        winnerName: players[winnerId]?['name'],
+        reason: gameData['gameEndReason'] ?? "Score cible atteint !",
+        players: players,
+        customScores: scores.map((k, v) => MapEntry(k, (v as num).toInt())),
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -24733,7 +25521,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'Uno',
       'Zéro Pointé',
       'Poker',
-      'Big Two', // Ajouté ici !
+      'Big Two',
     ].contains(gameType);
 
     // Trie les joueurs par score
@@ -24753,45 +25541,85 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     return Card(
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      color: Colors.black.withOpacity(0.4),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
         child: Container(
           width: double.infinity,
           child: Wrap(
             spacing: 8,
-            runSpacing: 8,
+            runSpacing: 6,
             alignment: WrapAlignment.center,
             children:
                 sortedPlayers.map((entry) {
                   String pId = entry.key;
                   String pName = entry.value['name'] ?? 'Inconnu';
-                  int pScore = entry.value['score'] ?? 0;
+                  int pScore =
+                      (gameType == 'Zéro Pointé')
+                          ? (gameData['totalScores']?[pId] ?? 0)
+                          : (entry.value['score'] ?? 0);
+                  int pXp = (entry.value['xp'] as num?)?.toInt() ?? 0;
                   bool isMe = pId == widget.playerId;
                   bool isSelected = _viewedOpponentId == pId;
-
-                  // Gestion particulière du score pour Zéro Pointé
-                  if (gameType == 'Zéro Pointé') {
-                    pScore = (gameData['totalScores']?[pId] ?? 0);
-                  }
 
                   return ActionChip(
                     avatar: CircleAvatar(
                       backgroundColor:
-                          isMe ? Colors.deepPurpleAccent : Colors.grey[700],
+                          isMe ? Colors.deepPurpleAccent : Colors.grey[800],
                       child: Text(
                         pName.isNotEmpty ? pName[0].toUpperCase() : "?",
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    label: Text(
-                      "$pName: $pScore",
-                    ), // Finis les symboles buggés !
+                    label: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "$pName: $pScore pts",
+                          style: TextStyle(
+                            fontWeight:
+                                isMe ? FontWeight.bold : FontWeight.normal,
+                            color: isMe ? Colors.amberAccent : Colors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 1.5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.deepPurple.withOpacity(0.4),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Colors.deepPurpleAccent.withOpacity(0.6),
+                              width: 0.8,
+                            ),
+                          ),
+                          child: Text(
+                            "$pXp XP",
+                            style: const TextStyle(
+                              color: Color(0xFF67E8F9),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     backgroundColor:
-                        isSelected ? Colors.deepPurple.withOpacity(0.5) : null,
+                        isSelected
+                            ? Colors.deepPurple.withOpacity(0.6)
+                            : const Color(0xFF1E1E28),
                     side:
                         isSelected
-                            ? BorderSide(
+                            ? const BorderSide(
                               color: Colors.deepPurpleAccent,
                               width: 2,
                             )
@@ -24800,11 +25628,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         (canViewHands && !isMe)
                             ? () {
                               setState(() {
-                                if (_viewedOpponentId == pId) {
-                                  _viewedOpponentId = null;
-                                } else {
-                                  _viewedOpponentId = pId;
-                                }
+                                _viewedOpponentId =
+                                    (_viewedOpponentId == pId) ? null : pId;
                               });
                             }
                             : null,
@@ -25003,102 +25828,24 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ..sort((a, b) => a.value.compareTo(b.value));
 
       if (gameState == 'gameOver') {
-        final winnerId = gameData['gameWinner'];
-        final winnerName = players[winnerId]?['name'] ?? 'Inconnu';
-        return Center(
-          child: Container(
-            margin: const EdgeInsets.all(20),
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: const Color(0xFF1E1B2E),
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: Colors.amberAccent, width: 2),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.amberAccent.withOpacity(0.25),
-                  blurRadius: 20,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.emoji_events_rounded,
-                  size: 64,
-                  color: Colors.amberAccent,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  "Victoire finale !",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.amberAccent,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  "$winnerName l'emporte avec le plus petit score !",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 16, color: Colors.white70),
-                ),
-                const SizedBox(height: 16),
-                const Divider(color: Colors.white24),
-                ...sortedPlayersByTotal.asMap().entries.map((entry) {
-                  int rank = entry.key + 1;
-                  String pName = players[entry.value.key]?['name'] ?? 'Joueur';
-                  int pScore = entry.value.value;
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "#$rank $pName",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight:
-                                rank == 1 ? FontWeight.bold : FontWeight.normal,
-                            color:
-                                rank == 1 ? Colors.amberAccent : Colors.white,
-                          ),
-                        ),
-                        Text(
-                          "$pScore pts",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color:
-                                rank == 1 ? Colors.amberAccent : Colors.white70,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-                const SizedBox(height: 20),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.home_rounded),
-                  label: const Text("Retour à l'accueil"),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurpleAccent,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  onPressed:
-                      () => Navigator.of(
-                        context,
-                      ).popUntil((route) => route.isFirst),
-                ),
-              ],
-            ),
+        final totalScores = Map<String, int>.from(
+          (gameData['totalScores'] as Map? ?? {}).map(
+            (k, v) => MapEntry(k.toString(), (v as num).toInt()),
           ),
+        );
+        return UniversalGameEndScreen(
+          gameTitle: "Zéro Pointé",
+          winnerId: gameData['gameWinner'],
+          winnerName: players[gameData['gameWinner']]?['name'],
+          reason: "Partie terminée avec le score le plus faible !",
+          players: players,
+          customScores: totalScores,
+          lowerScoreWins: true,
+          gameData: gameData,
+          gameCode: widget.gameCode,
+          currentPlayerId: playerId,
+          isHost: isHost,
+          onExit: _exitGame,
         );
       }
 
@@ -27143,55 +27890,64 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               children:
                                   targetHand.asMap().entries.map((entry) {
                                     final int index = entry.key;
-                                    final bool isHovered =
+                                    final bool isRemoteHovered =
                                         hoveredIndex == index;
+                                    final bool isLocalSelected =
+                                        isMyTurn &&
+                                        _selectedZombieCardIndex == index;
+                                    final bool isHovered =
+                                        isRemoteHovered || isLocalSelected;
 
                                     return _SpookyTargetCardBack(
                                       isMyTurn: isMyTurn,
                                       isHoveredLive: isHovered,
-                                      onHoverStart:
-                                          isMyTurn
-                                              ? () => _firebaseService
-                                                  .updateZombieCardHover(
-                                                    widget.gameCode,
-                                                    playerId,
-                                                    index,
-                                                  )
-                                              : null,
-                                      onHoverEnd:
-                                          isMyTurn
-                                              ? () => _firebaseService
-                                                  .updateZombieCardHover(
-                                                    widget.gameCode,
-                                                    playerId,
-                                                    null,
-                                                  )
-                                              : null,
+                                      isSelectedLocal: isLocalSelected,
                                       onTap:
                                           isMyTurn && !_isActionPending
                                               ? () async {
-                                                HapticFeedback.heavyImpact();
-                                                setState(
-                                                  () => _isActionPending = true,
-                                                );
-                                                await _firebaseService
-                                                    .updateZombieCardHover(
-                                                      widget.gameCode,
-                                                      playerId,
-                                                      null,
+                                                if (_selectedZombieCardIndex ==
+                                                    index) {
+                                                  // 2e clic : Confirmation et vol de la carte
+                                                  HapticFeedback.heavyImpact();
+                                                  setState(() {
+                                                    _isActionPending = true;
+                                                    _selectedZombieCardIndex =
+                                                        null;
+                                                  });
+                                                  await _firebaseService
+                                                      .updateZombieCardHover(
+                                                        widget.gameCode,
+                                                        playerId,
+                                                        null,
+                                                      );
+                                                  await _firebaseService
+                                                      .zombieTakeCard(
+                                                        widget.gameCode,
+                                                        playerId,
+                                                        index,
+                                                      );
+                                                  if (mounted) {
+                                                    setState(
+                                                      () =>
+                                                          _isActionPending =
+                                                              false,
                                                     );
-                                                await _firebaseService
-                                                    .zombieTakeCard(
-                                                      widget.gameCode,
-                                                      playerId,
-                                                      index,
-                                                    );
-                                                if (mounted)
+                                                  }
+                                                } else {
+                                                  // 1er clic : Ciblage préalable et diffusion live RTDB
+                                                  HapticFeedback.selectionClick();
                                                   setState(
                                                     () =>
-                                                        _isActionPending =
-                                                            false,
+                                                        _selectedZombieCardIndex =
+                                                            index,
                                                   );
+                                                  await _firebaseService
+                                                      .updateZombieCardHover(
+                                                        widget.gameCode,
+                                                        playerId,
+                                                        index,
+                                                      );
+                                                }
                                               }
                                               : null,
                                     );
@@ -27573,31 +28329,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final String? mandatoryPiece = gameData['checkersMandatoryPiece'];
 
     if (gameData['gameState'] == 'gameOver') {
-      final winnerName = players[gameData['gameWinner']]?['name'] ?? 'Inconnu';
-      return Center(
-        child: Card(
-          child: Padding(
-            padding: EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Partie TerminÃ©e !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                Text(
-                  "$winnerName a gagnÃ© !",
-                  style: TextStyle(color: Colors.amber, fontSize: 20),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () => _exitGame(),
-                  child: Text("Retour"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Jeu de Dames",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason:
+            gameData['gameEndReason'] ??
+            "Plus aucun coup possible pour l'adversaire !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -27954,43 +28698,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     if (gameData['gameState'] == 'gameOver') {
-      return Center(
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Partie Terminée !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 10),
-                if (useTeams) ...[
-                  Text("Scores Finaux :", style: TextStyle(fontSize: 20)),
-                  Text(
-                    "Équipe A: ${teamScores['teamA']}",
-                    style: TextStyle(color: Colors.redAccent, fontSize: 18),
-                  ),
-                  Text(
-                    "Équipe B: ${teamScores['teamB']}",
-                    style: TextStyle(color: Colors.blueAccent, fontSize: 18),
-                  ),
-                ] else ...[
-                  Text("Bien joué à tous !"),
-                ],
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed:
-                      () => Navigator.of(
-                        context,
-                      ).popUntil((route) => route.isFirst),
-                  child: Text("Retour"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Devine Tête",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Fin de la partie !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -28948,83 +29666,28 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     String playerId,
   ) {
     if (gameData['gameState'] == 'gameOver') {
-      final winnerId = gameData['gameWinner'];
-      final winnerName = gameData['players']?[winnerId]?['name'] ?? 'Inconnu';
-      final reason = gameData['gameEndReason'] ?? 'Objectif atteint !';
-
-      return Center(
-        child: Container(
-          margin: const EdgeInsets.all(24),
-          padding: const EdgeInsets.all(28),
-          decoration: BoxDecoration(
-            color: const Color(0xFF1E1E2E),
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: Colors.amberAccent.withOpacity(0.5),
-              width: 2,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.amberAccent.withOpacity(0.2),
-                blurRadius: 20,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.emoji_events_rounded,
-                size: 70,
-                color: Colors.amberAccent,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Victoire sur le circuit !",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                winnerName,
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.amberAccent,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                reason,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white70),
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton.icon(
-                icon: const Icon(Icons.home_rounded),
-                label: const Text("Retour au Salon"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurpleAccent,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 14,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                onPressed:
-                    () => Navigator.of(
-                      context,
-                    ).popUntil((route) => route.isFirst),
-              ),
-            ],
-          ),
-        ),
+      final Map<String, dynamic> players = Map<String, dynamic>.from(
+        gameData['players'] ?? {},
+      );
+      final Map<String, dynamic> pDatas = Map<String, dynamic>.from(
+        gameData['milleBornesPlayerData'] ?? {},
+      );
+      final Map<String, int> kmScores = {};
+      for (var entry in pDatas.entries) {
+        kmScores[entry.key] = (entry.value['distance'] as num?)?.toInt() ?? 0;
+      }
+      return UniversalGameEndScreen(
+        gameTitle: "Mille Bornes",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Objectif 1000 Bornes atteint !",
+        players: players,
+        customScores: kmScores,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -30093,38 +30756,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       return _buildBatailleNavalePlayingUI(context, playerId, myData, isMyTurn);
     } else if (roundState == 'gameOver' ||
         gameData['gameState'] == 'gameOver') {
-      final winnerId = gameData['gameWinner'];
-      final winnerName = players[winnerId]?['name'] ?? 'Inconnu';
-      return Center(
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Partie TerminÃƒÂ©e !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "$winnerName a gagnÃƒÂ© !",
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.amberAccent,
-                  ),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed:
-                      () => Navigator.of(
-                        context,
-                      ).popUntil((route) => route.isFirst),
-                  child: Text("Retour ÃƒÂ  l'accueil"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Bataille Navale",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason:
+            gameData['gameEndReason'] ??
+            "Toute la flotte adverse a été coulée !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
     return Center(child: CircularProgressIndicator());
@@ -31431,88 +32075,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final Map<String, dynamic> players = gameData['players'] ?? {};
     _unoDrawActionDone = gameData['unoDrawActionDone'] ?? false;
 
-    // --- ÉCRAN DE VICTOIRE ---
     if (gameState == 'gameOver') {
-      String winnerName =
-          players[gameData['gameWinner']]?['name'] ?? 'Quelqu\'un';
-      String reason = gameData['gameEndReason'] ?? 'La partie est terminée.';
-      return Center(
-        child: Container(
-          margin: const EdgeInsets.all(20),
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: const Color(0xFF1E1E2E),
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.amberAccent, width: 2),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.amberAccent.withOpacity(0.2),
-                blurRadius: 20,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.emoji_events_rounded,
-                size: 64,
-                color: Colors.amberAccent,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                "Victoire !",
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.amberAccent,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                winnerName,
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                reason,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white70),
-              ),
-              const SizedBox(height: 20),
-              if (isHost)
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.replay_rounded),
-                  label: const Text("Manche Suivante"),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurpleAccent,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  onPressed:
-                      _isActionPending
-                          ? null
-                          : () async {
-                            setState(() => _isActionPending = true);
-                            await _firebaseService
-                                .nextRound(widget.gameCode)
-                                .whenComplete(() {
-                                  if (mounted)
-                                    setState(() => _isActionPending = false);
-                                });
-                          },
-                ),
-            ],
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Uno",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Dernière carte posée !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: isHost,
+        onExit: _exitGame,
       );
     }
 
@@ -32346,58 +32920,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     // Gestion Game Over
     if (gameData['gameState'] == 'gameOver') {
-      List<MapEntry<String, dynamic>> sortedPlayers =
-          players.entries.toList()..sort(
-            (a, b) => (b.value['score'] ?? 0).compareTo(a.value['score'] ?? 0),
-          );
-      String winnerName =
-          sortedPlayers.isNotEmpty
-              ? sortedPlayers.first.value['name']
-              : "Personne";
-
-      return Center(
-        child: Card(
-          elevation: 10,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Partie TerminÃƒÂ©e !",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Colors.deepPurple,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Vainqueur : $winnerName",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.amber[800],
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "avec ${sortedPlayers.first.value['score']} cartes",
-                  style: TextStyle(color: Colors.grey[600]),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed:
-                      () => Navigator.of(
-                        context,
-                      ).popUntil((route) => route.isFirst),
-                  child: Text("Retour ÃƒÂ  l'accueil"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Dobble",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason:
+            gameData['gameEndReason'] ?? "Toutes les cartes ont été trouvées !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -35465,44 +35999,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     bool isGameOver = gameData['gameState'] == 'gameOver';
 
     if (isGameOver) {
-      return Center(
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Partie TerminÃƒÂ©e !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "L'ÃƒÂ©quipe ${gameWinner == 'red' ? 'Rouge' : 'Bleue'} a gagnÃƒÂ© !",
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color:
-                        gameWinner == 'red'
-                            ? Colors.redAccent
-                            : Colors.blueAccent,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  gameEndReason,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white70),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    _exitGame();
-                  },
-                  child: Text("Retour ÃƒÂ  l'accueil"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      final String winnerTeamName =
+          gameWinner == 'red'
+              ? 'Équipe Rouge'
+              : (gameWinner == 'blue'
+                  ? 'Équipe Bleue'
+                  : (players[gameWinner]?['name'] ?? 'Inconnu'));
+      return UniversalGameEndScreen(
+        gameTitle: "Codenames",
+        winnerId: gameWinner,
+        winnerName: winnerTeamName,
+        reason: gameEndReason.isNotEmpty ? gameEndReason : "Fin de mission !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -35854,62 +36367,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     // --- ECRAN GAME OVER ---
     if (gameData['gameState'] == 'gameOver') {
       final Map<String, dynamic> teamScores = gameData['teamScores'] ?? {};
-      String winnerMessage = "La partie est finie !";
-
       int scoreA = teamScores['teamA'] ?? 0;
       int scoreB = teamScores['teamB'] ?? 0;
-
-      if (scoreA > scoreB) {
-        winnerMessage = "L'ÃƒÂ©quipe A a gagnÃƒÂ© !";
-      } else if (scoreB > scoreA) {
-        winnerMessage = "L'ÃƒÂ©quipe B a gagnÃƒÂ© !";
-      } else {
-        winnerMessage = "Ãƒâ€°galitÃƒÂ© parfaite !";
-      }
-
-      return Center(
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Partie TerminÃƒÂ©e !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  winnerMessage,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.amberAccent,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Scores finaux :",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                Text(
-                  "Ãƒâ€°quipe A: $scoreA points",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                Text(
-                  "Ãƒâ€°quipe B: $scoreB points",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed:
-                      () => Navigator.of(
-                        context,
-                      ).popUntil((route) => route.isFirst),
-                  child: Text("Retour ÃƒÂ  l'accueil"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      String? winTeam =
+          scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
+      String winName =
+          scoreA > scoreB
+              ? "Équipe A"
+              : (scoreB > scoreA ? "Équipe B" : "Égalité");
+      return UniversalGameEndScreen(
+        gameTitle: "Time's Up",
+        winnerId: winTeam,
+        winnerName: winName,
+        reason:
+            "Fin des 3 manches ! Équipe A: $scoreA pts | Équipe B: $scoreB pts",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -36358,11 +36835,27 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Map<String, dynamic> gameData,
     String playerId,
   ) {
-    final String roundState =
-        gameData['roundState'] ?? 'waiting_for_categories';
     final Map<String, dynamic> players = Map<String, dynamic>.from(
       gameData['players'] ?? {},
     );
+
+    if (gameData['gameState'] == 'gameOver') {
+      return UniversalGameEndScreen(
+        gameTitle: "Petit Bac",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Fin de la partie !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
+      );
+    }
+
+    final String roundState =
+        gameData['roundState'] ?? 'waiting_for_categories';
     final bool isHost = gameData['hostId'] == playerId;
     final String currentLetter = gameData['petitBacCurrentLetter'] ?? '';
     List<String> categories = List<String>.from(
@@ -37497,6 +37990,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     double scale = 1.0,
     double rotation = 0.0,
   }) {
+    if (card.isEmpty) return const SizedBox.shrink();
+
     String suit = "";
     String rank = "";
     bool isUno = card.contains('-');
@@ -37506,6 +38001,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       rank = GameData.getUnoCardValue(card);
     } else {
       String cleanCard = card.split('_')[0];
+      if (cleanCard.length < 2) return const SizedBox.shrink();
       suit = cleanCard.substring(cleanCard.length - 1);
       rank = cleanCard.substring(0, cleanCard.length - 1);
     }
@@ -37861,6 +38357,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final Map<String, dynamic> players = Map<String, dynamic>.from(
       gameData['players'] ?? {},
     );
+
+    if (gameData['gameState'] == 'gameOver') {
+      return UniversalGameEndScreen(
+        gameTitle: "Skull",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Deux défis réussis !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
+      );
+    }
+
     final List<String> playerOrder = List<String>.from(
       gameData['playerOrder'] ?? players.keys.toList(),
     );
@@ -39935,6 +40447,36 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     String playerId,
   ) {
     final String phase = gameData['phase'] ?? 'lobby';
+    final Map<String, dynamic> players = Map<String, dynamic>.from(
+      gameData['players'] ?? {},
+    );
+    final List<dynamic> gameLog = List<dynamic>.from(gameData['gameLog'] ?? []);
+
+    if (phase == 'gameOver' || gameData['gameState'] == 'gameOver') {
+      String winnerText = gameData['gameWinner'] ?? 'Fin de la partie';
+      if (winnerText == 'village')
+        winnerText = 'Victoire des Villageois !';
+      else if (winnerText == 'loups')
+        winnerText = 'Victoire des Loups-Garous !';
+      else if (winnerText == 'amoureux')
+        winnerText = 'Victoire des Amoureux !';
+      return UniversalGameEndScreen(
+        gameTitle: "Loup-Garou",
+        winnerId: gameData['gameWinner'],
+        winnerName: winnerText,
+        reason:
+            gameLog.isNotEmpty
+                ? gameLog.last.toString()
+                : (gameData['gameEndReason'] ?? "Fin du jeu"),
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
+      );
+    }
+
     final String subPhase = gameData['subPhase'] ?? '';
     final Map<String, dynamic> playerData = Map<String, dynamic>.from(
       gameData['playerData'] ?? {},
@@ -39942,7 +40484,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final List<String> playerOrder = List<String>.from(
       gameData['playerOrder'] ?? [],
     );
-    final List<dynamic> gameLog = List<dynamic>.from(gameData['gameLog'] ?? []);
     final Map<String, dynamic> nightActions = Map<String, dynamic>.from(
       gameData['nightActions'] ?? {},
     );
@@ -41383,72 +41924,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     // --- ÉCRAN DE VICTOIRE ---
     if (gameData['gameState'] == 'gameOver') {
-      final winnerId = gameData['gameWinner'];
-      final winnerName = players[winnerId]?['name'] ?? 'Inconnu';
-      return Center(
-        child: Container(
-          margin: const EdgeInsets.all(24),
-          padding: const EdgeInsets.all(28),
-          decoration: BoxDecoration(
-            color: const Color(0xFF1E1E2E),
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.amberAccent, width: 2),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.amberAccent.withOpacity(0.25),
-                blurRadius: 20,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.emoji_events_rounded,
-                size: 70,
-                color: Colors.amberAccent,
-              ),
-              const SizedBox(height: 12),
-              const Text(
-                "Victoire Épique !",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                "$winnerName franchit la ligne d'arrivée !",
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.amberAccent,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton.icon(
-                icon: const Icon(Icons.home_rounded),
-                label: const Text("Retour au Salon"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurpleAccent,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 12,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-                onPressed:
-                    () => Navigator.of(
-                      context,
-                    ).popUntil((route) => route.isFirst),
-              ),
-            ],
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Petits Chevaux",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Arrivée au centre du plateau !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -41684,6 +42170,49 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               widget.gameCode,
                               _firebaseService,
                               isTeamMode,
+                              selectedOwnerId: _selectedLudoPawnOwner,
+                              selectedPawnIdx: _selectedLudoPawnIdx,
+                              onPawnTap: (ownerId, pawnIdx) {
+                                if (!isMyTurn || !hasRolled || dice <= 0) return;
+                                if (_selectedLudoPawnOwner == ownerId &&
+                                    _selectedLudoPawnIdx == pawnIdx) {
+                                  // 2e clic : Confirmation et déplacement !
+                                  HapticFeedback.mediumImpact();
+                                  _firebaseService.updateLudoPawnHover(
+                                    widget.gameCode,
+                                    playerId,
+                                    null,
+                                    null,
+                                  );
+                                  setState(() {
+                                    _selectedLudoPawnIdx = null;
+                                    _selectedLudoPawnOwner = null;
+                                  });
+                                  _firebaseService
+                                      .movePawnPetitsChevaux(
+                                        widget.gameCode,
+                                        playerId,
+                                        ownerId,
+                                        pawnIdx,
+                                      )
+                                      .catchError((e) {
+                                        debugPrint(e.toString());
+                                      });
+                                } else {
+                                  // 1er clic : Sélection et diffusion live RTDB
+                                  HapticFeedback.selectionClick();
+                                  setState(() {
+                                    _selectedLudoPawnIdx = pawnIdx;
+                                    _selectedLudoPawnOwner = ownerId;
+                                  });
+                                  _firebaseService.updateLudoPawnHover(
+                                    widget.gameCode,
+                                    playerId,
+                                    ownerId,
+                                    pawnIdx,
+                                  );
+                                }
+                              },
                             ),
                           ],
                         ),
@@ -41714,10 +42243,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 isMyTurn: isMyTurn && !hasRolled,
                 onTap:
                     isMyTurn && !hasRolled
-                        ? () => _firebaseService.rollDicePetitsChevaux(
-                          widget.gameCode,
-                          playerId,
-                        )
+                        ? () {
+                          setState(() {
+                            _selectedLudoPawnIdx = null;
+                            _selectedLudoPawnOwner = null;
+                          });
+                          _firebaseService.updateLudoPawnHover(
+                            widget.gameCode,
+                            playerId,
+                            null,
+                            null,
+                          );
+                          _firebaseService.rollDicePetitsChevaux(
+                            widget.gameCode,
+                            playerId,
+                          );
+                        }
                         : null,
               ),
 
@@ -41741,21 +42282,37 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      onPressed:
-                          () => _firebaseService.rollDicePetitsChevaux(
-                            widget.gameCode,
-                            playerId,
-                          ),
+                      onPressed: () {
+                        setState(() {
+                          _selectedLudoPawnIdx = null;
+                          _selectedLudoPawnOwner = null;
+                        });
+                        _firebaseService.updateLudoPawnHover(
+                          widget.gameCode,
+                          playerId,
+                          null,
+                          null,
+                        );
+                        _firebaseService.rollDicePetitsChevaux(
+                          widget.gameCode,
+                          playerId,
+                        );
+                      },
                     )
                   else if (isMyTurn && hasRolled)
                     Row(
                       children: [
-                        const Text(
-                          "Touchez un pion",
+                        Text(
+                          _selectedLudoPawnIdx != null
+                              ? "Cheval ${_selectedLudoPawnIdx! + 1} sélectionné !\nTouchez pour avancer"
+                              : "Touchez un pion",
                           style: TextStyle(
-                            color: Colors.greenAccent,
+                            color:
+                                _selectedLudoPawnIdx != null
+                                    ? Colors.amberAccent
+                                    : Colors.greenAccent,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                            fontSize: _selectedLudoPawnIdx != null ? 11 : 13,
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -41774,6 +42331,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                           ),
                           onPressed: () {
+                            setState(() {
+                              _selectedLudoPawnIdx = null;
+                              _selectedLudoPawnOwner = null;
+                            });
                             _firebaseService.updateLudoPawnHover(
                               widget.gameCode,
                               playerId,
@@ -41824,8 +42385,25 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Map<String, dynamic> gameData,
     String playerId,
   ) {
-    // â”€â”€ Extraction des donnÃ©es â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Extraction des données ───────────────────────────────────────────────
     final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+    if (gameData['gameState'] == 'gameOver') {
+      final scores = Map<String, int>.from(gameData['dominoesScores'] ?? {});
+      return UniversalGameEndScreen(
+        gameTitle: "Dominos",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Score limite atteint !",
+        players: players,
+        customScores: scores,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
+      );
+    }
     final playerOrder = List<String>.from(
       gameData['dominoesPlayerOrder'] ?? [],
     );
@@ -41870,6 +42448,34 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       return -99; // invalide
     }
 
+    void _playTile(String tile, int matchEnd) {
+      _firebaseService
+          .playDominoesTile(widget.gameCode, playerId, tile, matchEnd)
+          .then((_) {
+            _firebaseService.updateDominoHoverEnd(
+              widget.gameCode,
+              playerId,
+              null,
+            );
+            if (mounted) {
+              setState(() => _selectedDominoTile = null);
+            }
+          })
+          .catchError((e) {
+            _firebaseService.updateDominoHoverEnd(
+              widget.gameCode,
+              playerId,
+              null,
+            );
+            if (mounted) {
+              setState(() => _selectedDominoTile = null);
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(e.toString())));
+            }
+          });
+    }
+
     void onTileTap(String tile) {
       if (!isMyTurn || roundOver) return;
       if (!canPlayTile(tile)) {
@@ -41880,119 +42486,100 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       }
 
       final matchEnd = getMatchEnd(tile);
-      if (matchEnd != null && matchEnd != -99) {
-        _firebaseService.updateDominoHoverEnd(
-          widget.gameCode,
-          playerId,
-          matchEnd,
-        );
-      }
 
-      if (matchEnd == null) {
-        // Ambigu : afficher un dialogue pour choisir l'extrémité
-        showDialog(
-          context: context,
-          builder: (_) {
-            final p = tile.split('-');
-            final a = int.parse(p[0]);
-            final b = int.parse(p[1]);
-            final options =
-                openEnds.where((e) => e == a || e == b).toSet().toList();
-            return AlertDialog(
-              backgroundColor: const Color(0xFF1e3828),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              title: const Text(
-                "Choisir l'extrémité",
-                style: TextStyle(color: Colors.white),
-              ),
-              content: Text(
-                "Sur quelle extrémité poser le $tile ?",
-                style: const TextStyle(color: Colors.white70),
-              ),
-              actions:
-                  options.map((end) {
-                    return TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        _firebaseService
-                            .playDominoesTile(
-                              widget.gameCode,
-                              playerId,
-                              tile,
-                              end,
-                            )
-                            .then((_) {
-                              _firebaseService.updateDominoHoverEnd(
-                                widget.gameCode,
-                                playerId,
-                                null,
-                              );
-                            })
-                            .catchError((e) {
-                              _firebaseService.updateDominoHoverEnd(
-                                widget.gameCode,
-                                playerId,
-                                null,
-                              );
-                              if (!mounted) return;
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(e.toString())),
-                              );
-                            });
-                      },
-                      child: Text(
-                        "Sur le $end",
-                        style: const TextStyle(color: Color(0xFF34d399)),
-                      ),
-                    );
-                  }).toList(),
+      if (_selectedDominoTile == tile) {
+        // 2e clic : Confirmation et pose du domino
+        if (matchEnd == null) {
+          // Ambigu : afficher un dialogue pour choisir l'extrémité
+          final p = tile.split('-');
+          final a = int.parse(p[0]);
+          final b = int.parse(p[1]);
+          final options =
+              openEnds.where((e) => e == a || e == b).toSet().toList();
+          showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                backgroundColor: const Color(0xFF1e3828),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                title: const Text(
+                  "Choisir l'extrémité",
+                  style: TextStyle(color: Colors.white),
+                ),
+                content: Text(
+                  "Sur quelle extrémité poser le $tile ?",
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                actions:
+                    options.map((end) {
+                      return TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          _playTile(tile, end);
+                        },
+                        child: Text(
+                          "Sur le $end",
+                          style: const TextStyle(color: Color(0xFF34d399)),
+                        ),
+                      );
+                    }).toList(),
+              );
+            },
+          ).then((_) {
+            _firebaseService.updateDominoHoverEnd(
+              widget.gameCode,
+              playerId,
+              null,
             );
-          },
-        ).then((_) {
+            if (mounted) {
+              setState(() => _selectedDominoTile = null);
+            }
+          });
+          return;
+        }
+
+        if (matchEnd == -99) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Aucune extrémité compatible.")),
+          );
+          return;
+        }
+
+        _playTile(tile, matchEnd!);
+      } else {
+        // 1er clic : Sélection et diffusion live RTDB
+        HapticFeedback.selectionClick();
+        setState(() => _selectedDominoTile = tile);
+
+        if (matchEnd != null && matchEnd != -99) {
           _firebaseService.updateDominoHoverEnd(
             widget.gameCode,
             playerId,
-            null,
+            matchEnd,
           );
-        });
-        return;
-      }
-
-      if (matchEnd == -99) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Aucune extrémité compatible.")),
-        );
-        return;
-      }
-
-      _firebaseService
-          .playDominoesTile(widget.gameCode, playerId, tile, matchEnd!)
-          .then((_) {
+        } else if (matchEnd == null && openEnds.isNotEmpty) {
+          final p = tile.split('-');
+          final a = int.parse(p[0]);
+          final b = int.parse(p[1]);
+          final firstMatching =
+              openEnds.where((e) => e == a || e == b).firstOrNull;
+          if (firstMatching != null) {
             _firebaseService.updateDominoHoverEnd(
               widget.gameCode,
               playerId,
-              null,
+              firstMatching,
             );
-          })
-          .catchError((e) {
-            _firebaseService.updateDominoHoverEnd(
-              widget.gameCode,
-              playerId,
-              null,
-            );
-            if (!mounted) return;
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(e.toString())));
-          });
+          }
+        }
+      }
     }
 
-    // â”€â”€ Build â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Build ─────────────────────────────────────────────────────────────────
     return Column(
       children: [
-        // â”€â”€ Barre de scores â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Barre de scores ──────────────────────────────────────────────────
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           color: Colors.black.withOpacity(0.35),
@@ -42077,7 +42664,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ),
 
-        // â”€â”€ Mains des adversaires â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Mains des adversaires ──────────────────────────────────────────
         Container(
           height: 64,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -42125,7 +42712,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               children: [
                                 Text(
                                   (players[pId]?['name'] ?? pId).toString() +
-                                      (isActive ? ' ðŸŽ¯' : ''),
+                                      (isActive ? ' 🎯' : ''),
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 11,
@@ -42143,7 +42730,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               ],
                             ),
                           ),
-                          // Mini-reprÃ©sentation des dominos cachÃ©s
+                          // Mini-représentation des dominos cachés
                           Wrap(
                             spacing: 2,
                             children:
@@ -42466,41 +43053,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     if (gameData['gameState'] == 'gameOver') {
       final finalScores = Map<String, int>.from(
-        gameData['yamsFinalScores'] ?? {},
-      );
-      final winnerName = players[gameData['gameWinner']]?['name'] ?? 'Inconnu';
-      return Center(
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Partie Terminée !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  "Vainqueur : $winnerName",
-                  style: const TextStyle(color: Colors.amber, fontSize: 20),
-                ),
-                const SizedBox(height: 20),
-                ...finalScores.entries.map(
-                  (e) => Text("${players[e.key]?['name']}: ${e.value} pts"),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed:
-                      () => Navigator.of(
-                        context,
-                      ).popUntil((route) => route.isFirst),
-                  child: const Text("Retour à l'accueil"),
-                ),
-              ],
-            ),
-          ),
+        (gameData['yamsFinalScores'] as Map? ?? {}).map(
+          (k, v) => MapEntry(k.toString(), (v as num).toInt()),
         ),
+      );
+      return UniversalGameEndScreen(
+        gameTitle: "Yams",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason:
+            gameData['gameEndReason'] ?? "Toutes les grilles sont complétées !",
+        players: players,
+        customScores: finalScores,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -42694,48 +43263,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     // --- FIN DE PARTIE ---
     if (gameData['gameState'] == 'gameOver') {
       final String winnerTeam = gameData['gameWinner'] ?? 'teamA';
-      return Center(
-        child: Container(
-          margin: const EdgeInsets.all(20),
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: const Color(0xFF1E1E2E),
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.amberAccent, width: 2),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.emoji_events_rounded,
-                size: 60,
-                color: Colors.amber,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                "Victoire de l'${winnerTeam == 'teamA' ? 'Équipe A' : 'Équipe B'} !",
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.amberAccent,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                "Score final : ${teamScores['teamA'] ?? 0} - ${teamScores['teamB'] ?? 0}",
-                style: const TextStyle(fontSize: 16, color: Colors.white70),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed:
-                    () => Navigator.of(
-                      context,
-                    ).popUntil((route) => route.isFirst),
-                child: const Text("Retour à l'accueil"),
-              ),
-            ],
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Belote",
+        winnerId: winnerTeam,
+        winnerName: winnerTeam == 'teamA' ? 'Équipe A' : 'Équipe B',
+        reason:
+            "Score final : ${teamScores['teamA'] ?? 0} - ${teamScores['teamB'] ?? 0}",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: isHost,
+        onExit: _exitGame,
       );
     }
 
@@ -43827,6 +44366,25 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final isHost = gameData['hostId'] == playerId;
     final isGameOver = gameData['gameState'] == 'gameOver';
 
+    if (isGameOver) {
+      final scores = Map<String, int>.from(
+        totalScores.map((k, v) => MapEntry(k, (v as num).toInt())),
+      );
+      return UniversalGameEndScreen(
+        gameTitle: "Rami",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Score limite atteint !",
+        players: players,
+        customScores: scores,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: isHost,
+        onExit: _exitGame,
+      );
+    }
+
     final sortedScores =
         totalScores.entries.toList()
           ..sort((a, b) => a.value.compareTo(b.value));
@@ -43980,40 +44538,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ).recordBadgeEvent('blokus_monomino_last');
         }
       }
-      final sortedScores =
-          scores.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
-      return Center(
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.emoji_events, size: 60, color: Colors.amber),
-                SizedBox(height: 20),
-                Text(
-                  "Partie Terminée !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 20),
-                ...sortedScores.map(
-                  (e) => Text(
-                    "${players[e.key]?['name'] ?? 'Joueur'}: ${e.value} pts",
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed:
-                      () => Navigator.of(
-                        context,
-                      ).popUntil((route) => route.isFirst),
-                  child: Text("Retour"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      return UniversalGameEndScreen(
+        gameTitle: "Blokus",
+        winnerId: gameData['gameWinner'],
+        winnerName: players[gameData['gameWinner']]?['name'],
+        reason: gameData['gameEndReason'] ?? "Plus aucun coup possible !",
+        players: players,
+        customScores: scores,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -52520,8 +53056,11 @@ List<Widget> _buildLudoPawns(
   bool hasRolled,
   String gameCode,
   FirebaseService firebaseService,
-  bool isTeamMode,
-) {
+  bool isTeamMode, {
+  String? selectedOwnerId,
+  int? selectedPawnIdx,
+  void Function(String ownerId, int pawnIdx)? onPawnTap,
+}) {
   final List<Widget> pawns = [];
   final cellSize = size / 15;
 
@@ -52595,6 +53134,8 @@ List<Widget> _buildLudoPawns(
       }
 
       final double pawnRadius = cellSize * 0.44;
+      final bool isSelected =
+          (selectedOwnerId == ownerId && selectedPawnIdx == pawnIdx);
 
       pawns.add(
         AnimatedPositioned(
@@ -52604,49 +53145,11 @@ List<Widget> _buildLudoPawns(
           left: x - pawnRadius,
           top: y - pawnRadius,
           child: GestureDetector(
-            onTapDown:
-                canMove
-                    ? (_) => firebaseService.updateLudoPawnHover(
-                      gameCode,
-                      myId,
-                      ownerId,
-                      pawnIdx,
-                    )
-                    : null,
-            onTapCancel:
-                canMove
-                    ? () => firebaseService.updateLudoPawnHover(
-                      gameCode,
-                      myId,
-                      null,
-                      null,
-                    )
-                    : null,
-            onTap:
-                canMove
-                    ? () {
-                      HapticFeedback.mediumImpact();
-                      firebaseService.updateLudoPawnHover(
-                        gameCode,
-                        myId,
-                        null,
-                        null,
-                      );
-                      firebaseService
-                          .movePawnPetitsChevaux(
-                            gameCode,
-                            myId,
-                            ownerId,
-                            pawnIdx,
-                          )
-                          .catchError((e) {
-                            debugPrint(e.toString());
-                          });
-                    }
-                    : null,
+            onTap: canMove ? () => onPawnTap?.call(ownerId, pawnIdx) : null,
             child: _Pawn3DWidget(
               color: pColor,
               canMove: canMove,
+              isSelected: isSelected,
               size: pawnRadius * 2,
               pawnNumber: pawnIdx + 1,
             ),
@@ -52945,12 +53448,14 @@ class _BoardTile extends StatelessWidget {
 class HandTileWidgetSimple extends StatefulWidget {
   final String tile;
   final bool isPlayable;
+  final bool isSelected;
   final VoidCallback? onTap;
 
   const HandTileWidgetSimple({
     super.key,
     required this.tile,
     required this.isPlayable,
+    this.isSelected = false,
     this.onTap,
   });
 
@@ -52971,6 +53476,8 @@ class _HandTileWidgetSimpleState extends State<HandTileWidgetSimple> {
     final double dy =
         _pressed
             ? -2.0
+            : widget.isSelected
+            ? -16.0
             : widget.isPlayable
             ? -10.0
             : 0.0;
@@ -52990,13 +53497,29 @@ class _HandTileWidgetSimpleState extends State<HandTileWidgetSimple> {
               borderRadius: BorderRadius.circular(6),
               border: Border.all(
                 color:
-                    widget.isPlayable
+                    widget.isSelected
+                        ? Colors.amberAccent
+                        : widget.isPlayable
                         ? const Color(0xFF4ade80)
                         : Colors.grey.shade400,
-                width: widget.isPlayable ? 2.5 : 1.5,
+                width:
+                    widget.isSelected
+                        ? 3.0
+                        : widget.isPlayable
+                        ? 2.5
+                        : 1.5,
               ),
               boxShadow:
-                  widget.isPlayable
+                  widget.isSelected
+                      ? [
+                        BoxShadow(
+                          color: Colors.amberAccent.withOpacity(0.8),
+                          blurRadius: 12,
+                          spreadRadius: 2,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
+                      : widget.isPlayable
                       ? [
                         BoxShadow(
                           color: const Color(0xFF4ade80).withOpacity(0.5),
@@ -53100,63 +53623,75 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
     return StreamBuilder<QuerySnapshot>(
       stream: _firebaseService.getChatStream(widget.gameCode, 'global'),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return SizedBox.shrink();
+        if (!snapshot.hasData) return const SizedBox.shrink();
 
         final messages = snapshot.data!.docs;
-        // Ne garder que les 5 derniers messages qui ont moins de 10 secondes
+        final now = DateTime.now();
+
+        // Ne garder que les messages 'global' récents (< 8 secondes ou en cours d'envoi)
         final recentMessages =
             messages.where((doc) {
               final data = doc.data() as Map<String, dynamic>;
-              final Timestamp? time = data['timestamp'];
-              if (time == null) return false;
-              return DateTime.now().difference(time.toDate()).inSeconds < 10;
+              if (data['chatType'] != null && data['chatType'] != 'global') {
+                return false;
+              }
+              final Timestamp? time = data['timestamp'] as Timestamp?;
+              if (time == null) return true; // Message local instantané
+              return now.difference(time.toDate()).inSeconds < 8;
             }).toList();
 
-        if (recentMessages.isEmpty) return SizedBox.shrink();
+        if (recentMessages.isEmpty) return const SizedBox.shrink();
 
         return Container(
           width: double.infinity,
           height: double.infinity,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+          alignment: Alignment.centerRight,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Afficher au milieu
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children:
                 recentMessages.map((msgDoc) {
                   final msgData = msgDoc.data() as Map<String, dynamic>;
                   final sender = msgData['senderName'] ?? 'Joueur';
                   final text = msgData['text'] ?? '';
-                  return AnimatedOpacity(
-                    opacity: 1.0,
-                    duration: Duration(seconds: 1),
-                    child: SlideTransition(
-                      position: Tween<Offset>(
-                        begin: Offset(1, 0),
-                        end: Offset(0, 0),
-                      ).animate(AlwaysStoppedAnimation(1.0)),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          margin: EdgeInsets.symmetric(vertical: 4),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.6),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Text(
-                            "$sender: $text",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              shadows: [
-                                Shadow(color: Colors.black, blurRadius: 2),
-                              ],
+
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.75),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Colors.deepPurpleAccent.withOpacity(0.5),
+                      ),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black45,
+                          blurRadius: 8,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: RichText(
+                      text: TextSpan(
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: "$sender : ",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.cyanAccent,
                             ),
                           ),
-                        ),
+                          TextSpan(text: text),
+                        ],
                       ),
                     ),
                   );
@@ -54839,21 +55374,24 @@ class _ZeroPointeClearedColumnSlot extends StatelessWidget {
 class _Pawn3DWidget extends StatelessWidget {
   final Color color;
   final bool canMove;
+  final bool isSelected;
   final double size;
   final int pawnNumber;
 
   const _Pawn3DWidget({
     required this.color,
     required this.canMove,
+    this.isSelected = false,
     required this.size,
     required this.pawnNumber,
   });
 
   @override
   Widget build(BuildContext context) {
+    final double targetScale = isSelected ? 1.35 : (canMove ? 1.15 : 1.0);
     return AnimatedScale(
       duration: const Duration(milliseconds: 200),
-      scale: canMove ? 1.15 : 1.0,
+      scale: targetScale,
       child: Container(
         width: size,
         height: size,
@@ -54863,20 +55401,26 @@ class _Pawn3DWidget extends StatelessWidget {
             center: const Alignment(-0.3, -0.3),
             radius: 0.8,
             colors: [
-              Color.lerp(color, Colors.white, 0.45)!,
+              Color.lerp(color, Colors.white, isSelected ? 0.6 : 0.45)!,
               color,
               Color.lerp(color, Colors.black, 0.5)!,
             ],
           ),
           border: Border.all(
-            color: canMove ? Colors.white : Colors.black87,
-            width: canMove ? 2.2 : 1.0,
+            color:
+                isSelected
+                    ? Colors.amberAccent
+                    : (canMove ? Colors.white : Colors.black87),
+            width: isSelected ? 3.0 : (canMove ? 2.2 : 1.0),
           ),
           boxShadow: [
             BoxShadow(
-              color: canMove ? color.withOpacity(0.65) : Colors.black54,
-              blurRadius: canMove ? 10 : 4,
-              spreadRadius: canMove ? 2 : 0,
+              color:
+                  isSelected
+                      ? Colors.amberAccent.withOpacity(0.85)
+                      : (canMove ? color.withOpacity(0.65) : Colors.black54),
+              blurRadius: isSelected ? 14 : (canMove ? 10 : 4),
+              spreadRadius: isSelected ? 3 : (canMove ? 2 : 0),
               offset: const Offset(1, 3),
             ),
           ],
@@ -54887,11 +55431,11 @@ class _Pawn3DWidget extends StatelessWidget {
             children: [
               // Silhouette tête de cheval en filigrane
               Opacity(
-                opacity: 0.4,
+                opacity: isSelected ? 0.6 : 0.4,
                 child: Icon(
                   Icons.pets_rounded,
                   size: size * 0.55,
-                  color: Colors.white,
+                  color: isSelected ? Colors.amberAccent : Colors.white,
                 ),
               ),
               // Numéro du cheval
@@ -54900,7 +55444,7 @@ class _Pawn3DWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: size * 0.42,
                   fontWeight: FontWeight.w900,
-                  color: Colors.white,
+                  color: isSelected ? Colors.amberAccent : Colors.white,
                   shadows: const [Shadow(color: Colors.black, blurRadius: 3)],
                 ),
               ),
@@ -55026,37 +55570,35 @@ class _DicePipPainter extends CustomPainter {
 class _SpookyTargetCardBack extends StatelessWidget {
   final bool isMyTurn;
   final bool isHoveredLive;
-  final VoidCallback? onHoverStart;
-  final VoidCallback? onHoverEnd;
+  final bool isSelectedLocal;
   final VoidCallback? onTap;
 
   const _SpookyTargetCardBack({
     Key? key,
     required this.isMyTurn,
     this.isHoveredLive = false,
-    this.onHoverStart,
-    this.onHoverEnd,
+    this.isSelectedLocal = false,
     this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (_) => onHoverStart?.call(),
-      onTapUp: (_) => onHoverEnd?.call(),
-      onTapCancel: () => onHoverEnd?.call(),
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        width: 64,
-        height: isHoveredLive ? 112 : 98,
-        transform: Matrix4.translationValues(0, isHoveredLive ? -12 : 0, 0),
-        margin: const EdgeInsets.symmetric(horizontal: 4),
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOutBack,
+        width: 68,
+        height: isHoveredLive ? 116 : 98,
+        transform: Matrix4.translationValues(0, isHoveredLive ? -14 : 0, 0),
+        margin: const EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors:
                 isHoveredLive
-                    ? [const Color(0xFFDC2626), const Color(0xFF7F1D1D)]
+                    ? (isSelectedLocal
+                        ? [const Color(0xFFDC2626), const Color(0xFF7F1D1D)]
+                        : [const Color(0xFFB91C1C), const Color(0xFF450A0A)])
                     : [
                       const Color(0xFF3B0764),
                       const Color(0xFF1E1028),
@@ -55065,11 +55607,11 @@ class _SpookyTargetCardBack extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color:
                 isHoveredLive
-                    ? Colors.redAccent
+                    ? (isSelectedLocal ? Colors.amberAccent : Colors.redAccent)
                     : (isMyTurn ? const Color(0xFFC084FC) : Colors.white24),
             width: isHoveredLive ? 2.5 : 1.0,
           ),
@@ -55077,32 +55619,39 @@ class _SpookyTargetCardBack extends StatelessWidget {
             BoxShadow(
               color:
                   isHoveredLive
-                      ? Colors.red.withOpacity(0.6)
+                      ? (isSelectedLocal
+                          ? Colors.amberAccent.withOpacity(0.8)
+                          : Colors.red.withOpacity(0.7))
                       : (isMyTurn
                           ? const Color(0xFFA855F7).withOpacity(0.4)
                           : Colors.black54),
-              blurRadius: isHoveredLive ? 16 : 4,
+              blurRadius: isHoveredLive ? 18 : 4,
+              spreadRadius: isHoveredLive ? 2 : 0,
               offset: const Offset(1, 3),
             ),
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(9),
+          borderRadius: BorderRadius.circular(11),
           child: Stack(
             alignment: Alignment.center,
             children: [
               CustomPaint(
-                size: const Size(64, 98),
+                size: const Size(68, 116),
                 painter: _SpiderwebCardPainter(),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    isHoveredLive
-                        ? Icons.touch_app
-                        : Icons.pan_tool_alt_rounded,
-                    size: 26,
+                    isSelectedLocal
+                        ? Icons.touch_app_rounded
+                        : (isHoveredLive
+                            ? Icons.visibility_rounded
+                            : (isMyTurn
+                                ? Icons.pan_tool_alt_rounded
+                                : Icons.shield_rounded)),
+                    size: 24,
                     color:
                         isHoveredLive
                             ? Colors.white
@@ -55112,10 +55661,16 @@ class _SpookyTargetCardBack extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    isHoveredLive ? "!!" : "?",
+                    isSelectedLocal
+                        ? "VOLER !"
+                        : (isHoveredLive
+                            ? (isMyTurn ? "CIBLÉE" : "VISÉE !")
+                            : "?"),
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: isSelectedLocal || isHoveredLive ? 10 : 16,
                       fontWeight: FontWeight.w900,
+                      letterSpacing: 0.5,
                       color:
                           isHoveredLive
                               ? Colors.white
@@ -55427,4 +55982,336 @@ class _LinedParchmentPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+// =============================================================================
+// 🏆 ÉCRAN DE FIN & RÉCAPITULATIF UNIVERSEL AVEC CONSERVATION DES SCORES
+// =============================================================================
+class UniversalGameEndScreen extends StatelessWidget {
+  final String gameTitle;
+  final String? winnerId;
+  final String? winnerName;
+  final String? reason;
+  final Map<String, dynamic> players;
+  final Map<String, dynamic> gameData;
+  final String gameCode;
+  final String currentPlayerId;
+  final bool isHost;
+  final VoidCallback onExit;
+  final Map<String, int>?
+  customScores; // Pour les jeux avec un système de score custom (Yams, Zéro Pointé, etc.)
+  final bool lowerScoreWins; // Ex: Zéro Pointé où le plus petit score gagne
+
+  const UniversalGameEndScreen({
+    Key? key,
+    required this.gameTitle,
+    this.winnerId,
+    this.winnerName,
+    this.reason,
+    required this.players,
+    required this.gameData,
+    required this.gameCode,
+    required this.currentPlayerId,
+    required this.isHost,
+    required this.onExit,
+    this.customScores,
+    this.lowerScoreWins = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Calcul et tri du classement
+    final List<MapEntry<String, int>> leaderboard = [];
+
+    players.forEach((pId, pData) {
+      int score = 0;
+      if (customScores != null && customScores!.containsKey(pId)) {
+        score = customScores![pId]!;
+      } else if (pData is Map && pData.containsKey('score')) {
+        score = (pData['score'] as num?)?.toInt() ?? 0;
+      }
+      leaderboard.add(MapEntry(pId, score));
+    });
+
+    if (lowerScoreWins) {
+      leaderboard.sort((a, b) => a.value.compareTo(b.value));
+    } else {
+      leaderboard.sort((a, b) => b.value.compareTo(a.value));
+    }
+
+    final String displayWinner =
+        winnerName ??
+        (leaderboard.isNotEmpty
+            ? (players[leaderboard.first.key]?['name'] ?? 'Joueur')
+            : 'Partie terminée');
+
+    final bool amIWinner =
+        (winnerId != null && winnerId == currentPlayerId) ||
+        (leaderboard.isNotEmpty && leaderboard.first.key == currentPlayerId);
+
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+        child: Container(
+          width: double.infinity,
+          constraints: const BoxConstraints(maxWidth: 440),
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF241438), Color(0xFF130E22)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(
+              color:
+                  amIWinner
+                      ? Colors.amberAccent
+                      : Colors.deepPurpleAccent.withOpacity(0.5),
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: (amIWinner ? Colors.amberAccent : Colors.deepPurple)
+                    .withOpacity(0.35),
+                blurRadius: 25,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Trophée
+              Icon(
+                amIWinner
+                    ? Icons.emoji_events_rounded
+                    : Icons.military_tech_rounded,
+                size: 72,
+                color: amIWinner ? Colors.amberAccent : Colors.deepPurpleAccent,
+              ),
+              const SizedBox(height: 12),
+
+              Text(
+                gameTitle.toUpperCase(),
+                style: const TextStyle(
+                  color: Colors.white54,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
+              ),
+              const SizedBox(height: 6),
+
+              Text(
+                amIWinner ? "VICTOIRE !" : "FIN DE LA PARTIE",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w900,
+                  color: amIWinner ? Colors.amberAccent : Colors.white,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const SizedBox(height: 6),
+
+              Text(
+                displayWinner.contains("a gagné") ||
+                        displayWinner.contains("remporte")
+                    ? displayWinner
+                    : "$displayWinner remporte la manche !",
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white70,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
+              ),
+
+              if (reason != null && reason!.isNotEmpty) ...[
+                const SizedBox(height: 4),
+                Text(
+                  reason!,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Colors.white38,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+
+              const SizedBox(height: 20),
+              const Divider(color: Colors.white12, thickness: 1.2),
+              const SizedBox(height: 12),
+
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "CLASSEMENT DE LA SESSION :",
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.cyanAccent,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // Tableau des scores récapitulatif
+              ...leaderboard.asMap().entries.map((entry) {
+                final int rank = entry.key + 1;
+                final String pId = entry.value.key;
+                final int pScore = entry.value.value;
+                final String pName = players[pId]?['name'] ?? 'Joueur';
+                final bool isMe = (pId == currentPlayerId);
+
+                Color medalColor = Colors.white60;
+                if (rank == 1) medalColor = Colors.amberAccent;
+                if (rank == 2) medalColor = const Color(0xFFCBD5E1); // Argent
+                if (rank == 3) medalColor = const Color(0xFFCD7F32); // Bronze
+
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        isMe
+                            ? Colors.deepPurple.withOpacity(0.35)
+                            : Colors.white.withOpacity(0.04),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color:
+                          isMe
+                              ? Colors.deepPurpleAccent
+                              : (rank == 1
+                                  ? medalColor.withOpacity(0.6)
+                                  : Colors.white10),
+                      width: isMe ? 1.5 : 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 26,
+                        height: 26,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: medalColor.withOpacity(0.2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "$rank",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: medalColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          isMe ? "$pName (Moi)" : pName,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight:
+                                isMe ? FontWeight.w900 : FontWeight.bold,
+                            color: isMe ? Colors.amberAccent : Colors.white,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Text(
+                        "$pScore pts",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w900,
+                          color:
+                              rank == 1 ? Colors.amberAccent : Colors.white70,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+
+              const SizedBox(height: 26),
+
+              // Boutons d'action : Rejouer & Quitter
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.exit_to_app_rounded, size: 18),
+                      label: const Text("Quitter"),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.redAccent,
+                        side: const BorderSide(
+                          color: Colors.redAccent,
+                          width: 1.5,
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      onPressed: onExit,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    flex: isHost ? 2 : 1,
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.replay_rounded, size: 20),
+                      label: Text(
+                        isHost ? "REJOUER (GARDER PTS)" : "EN ATTENTE...",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF10B981),
+                        foregroundColor: Colors.white,
+                        elevation: 6,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      onPressed:
+                          isHost
+                              ? () {
+                                FirebaseService().restartGameKeepScores(
+                                  gameCode,
+                                );
+                              }
+                              : null,
+                    ),
+                  ),
+                ],
+              ),
+              if (!isHost) ...[
+                const SizedBox(height: 10),
+                const Text(
+                  "L'hôte peut relancer la partie en conservant vos points.",
+                  style: TextStyle(
+                    color: Colors.white38,
+                    fontSize: 11,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

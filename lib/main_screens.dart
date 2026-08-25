@@ -1070,81 +1070,159 @@ class StatsEtoileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final playerState = Provider.of<PlayerState>(context);
     final stats = playerState.gameStats;
+    final int totalPlayed = stats.values.fold<int>(
+      0,
+      (sum, stat) => sum + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
+    );
+    final double avgXpPerGame = totalPlayed > 0 ? (playerState.xp / totalPlayed) : 0.0;
 
     return SafeArea(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                const Icon(Icons.star, size: 80, color: Colors.amber),
-                Text(
-                  "Niveau ${playerState.level}",
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                LinearProgressIndicator(
-                  value: playerState.xp / playerState.xpForNextLevel,
-                  backgroundColor: Colors.grey[800],
-                  color: Colors.amber,
-                  minHeight: 10,
-                ),
-                const SizedBox(height: 5),
-                Text("${playerState.xp} / ${playerState.xpForNextLevel} XP"),
-              ],
-            ),
-          ),
-          const Divider(color: Colors.white24),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: const Text(
-              "Statistiques par jeu",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Expanded(
-            child:
-                stats.isEmpty
-                    ? const EmptyStateView(
-                      icon: Icons.insights_rounded,
-                      title: "Aucune statistique",
-                      subtitle:
-                          "Joue à des parties en ligne ou locales pour enregistrer tes victoires et exploits !",
-                    )
-                    : ListView.builder(
-                      itemCount: stats.keys.length,
-                      itemBuilder: (context, index) {
-                        String gameName = stats.keys.elementAt(index);
-                        int played = stats[gameName]['played'];
-                        int won = stats[gameName]['won'];
-                        return ListTile(
-                          leading: Icon(
-                            Icons.videogame_asset,
-                            color: Colors.cyanAccent,
-                          ),
-                          title: Text(
-                            gameName,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Text("Jouées : $played | Gagnées : $won"),
-                          trailing: Text(
-                            played > 0
-                                ? "${((won / played) * 100).toStringAsFixed(1)}%"
-                                : "0.0%",
-                            style: TextStyle(
-                              color: Colors.greenAccent,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        );
-                      },
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  const Icon(Icons.star_rounded, size: 70, color: Colors.amber),
+                  Text(
+                    "Niveau ${playerState.level}",
+                    style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
                     ),
-          ),
-        ],
+                  ),
+                  const SizedBox(height: 10),
+                  LinearProgressIndicator(
+                    value: (playerState.xp / playerState.xpForNextLevel).clamp(0.0, 1.0),
+                    backgroundColor: Colors.grey[800],
+                    color: const Color(0xFF67E8F9),
+                    minHeight: 10,
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("${playerState.xp} / ${playerState.xpForNextLevel} XP"),
+                      Text(
+                        "${playerState.xpForNextLevel - playerState.xp} XP restants",
+                        style: const TextStyle(color: Colors.white54, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // Cartes compteurs XP & Parties
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.04),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: const Color(0xFF67E8F9).withOpacity(0.3)),
+                      ),
+                      child: Column(
+                        children: [
+                          const Icon(Icons.military_tech_rounded, color: Color(0xFF67E8F9), size: 22),
+                          const SizedBox(height: 4),
+                          Text(
+                            "${playerState.xp} XP",
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          const Text("Total Accumulé", style: TextStyle(fontSize: 10, color: Colors.white54)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.04),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: Colors.purpleAccent.withOpacity(0.3)),
+                      ),
+                      child: Column(
+                        children: [
+                          const Icon(Icons.auto_graph_rounded, color: Colors.purpleAccent, size: 22),
+                          const SizedBox(height: 4),
+                          Text(
+                            "${avgXpPerGame.toStringAsFixed(1)} XP",
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          const Text("Moyenne / Partie", style: TextStyle(fontSize: 10, color: Colors.white54)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const Divider(color: Colors.white24, height: 28),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Statistiques par jeu",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+
+            stats.isEmpty
+                ? const Padding(
+                    padding: EdgeInsets.all(32.0),
+                    child: Center(
+                      child: Text(
+                        "Aucune partie jouée pour le moment.",
+                        style: TextStyle(color: Colors.white54),
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: stats.keys.length,
+                    itemBuilder: (context, index) {
+                      String gameName = stats.keys.elementAt(index);
+                      int played = stats[gameName]['played'] ?? 0;
+                      int won = stats[gameName]['won'] ?? 0;
+                      int gameXp = (stats[gameName]['xp'] as num?)?.toInt() ?? (won * 25 + (played - won) * 8);
+
+                      return ListTile(
+                        leading: const Icon(
+                          Icons.videogame_asset,
+                          color: Colors.cyanAccent,
+                        ),
+                        title: Text(
+                          gameName,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text("Jouées : $played | Gagnées : $won | ~$gameXp XP"),
+                        trailing: Text(
+                          played > 0
+                              ? "${((won / played) * 100).toStringAsFixed(0)} %"
+                              : "0 %",
+                          style: const TextStyle(
+                            color: Colors.greenAccent,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+          ],
+        ),
       ),
     );
   }
