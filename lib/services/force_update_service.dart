@@ -1,64 +1,103 @@
 import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
+import '../livekit_service.dart';
 
 class ForceUpdateService {
   static final ForceUpdateService _instance = ForceUpdateService._internal();
   factory ForceUpdateService() => _instance;
   ForceUpdateService._internal();
 
-  bool _isDialogOpen = false;
+  static GlobalKey<NavigatorState>? navigatorKey;
+  static int currentBuildNumber = 0;
+  static String currentVersion = "1.0.0";
+  static bool _initialized = false;
 
-  /// Écoute en temps réel les paramètres de version imposés depuis Firestore
-  void listenForForcedUpdate(BuildContext context) async {
+  bool _isDialogOpen = false;
+  StreamSubscription<DocumentSnapshot>? _subscription;
+
+  static Future<void> init() async {
+    if (_initialized) return;
     try {
       final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      final String currentVersion = packageInfo.version; // ex: "1.0.2"
-      final int currentBuildNumber = int.tryParse(packageInfo.buildNumber) ?? 0;
+      currentVersion = packageInfo.version;
+      currentBuildNumber = int.tryParse(packageInfo.buildNumber) ?? 0;
+      _initialized = true;
+    } catch (e) {
+      debugPrint("[ForceUpdateService] Initialization error: $e");
+    }
+  }
 
-      FirebaseFirestore.instance
-          .collection('app_config')
-          .doc('version_control')
-          .snapshots()
-          .listen((snapshot) {
-        if (!snapshot.exists || snapshot.data() == null) return;
+  static Map<String, dynamic> get versionPayload => {
+    'clientBuildNumber': currentBuildNumber,
+    'clientVersion': currentVersion,
+  };
 
-        final data = snapshot.data() as Map<String, dynamic>;
-        final bool forceUpdateActive = data['forceUpdateActive'] ?? false;
-        final String minRequiredVersion = data['minRequiredVersion'] ?? "1.0.0";
-        final int minRequiredBuild = data['minRequiredBuild'] ?? 0;
-        final String updateMessage = data['updateMessage'] ??
-            "Une nouvelle version obligatoire de l'application est disponible avec de nouvelles fonctionnalités et des correctifs de sécurité.";
-        final String storeUrlAndroid = data['storeUrlAndroid'] ??
-            "https://play.google.com/store/apps/details?id=com.parrel.playfun";
-        final String storeUrlIOS = data['storeUrlIOS'] ??
-            "https://apps.apple.com/app/idYOUR_APP_ID";
+  /// Écoute en temps réel les paramètres de version imposés depuis Firestore
+  void listenForForcedUpdate(BuildContext? context) async {
+    if (_subscription != null) return; // Évite les écoutes multiples
 
-        // Comparaison de version
-        bool needsUpdate = false;
-        if (forceUpdateActive) {
-          if (minRequiredBuild > 0) {
-            needsUpdate = currentBuildNumber < minRequiredBuild;
-          } else {
-            needsUpdate = _isVersionLower(currentVersion, minRequiredVersion);
-          }
+    await init();
+
+    _subscription = FirebaseFirestore.instance
+        .collection('app_config')
+        .doc('version_control')
+        .snapshots()
+        .listen((snapshot) {
+      if (!snapshot.exists || snapshot.data() == null) return;
+
+      final data = snapshot.data() as Map<String, dynamic>;
+      final bool forceUpdateActive = data['forceUpdateActive'] ?? false;
+      final String minRequiredVersion = data['minRequiredVersion'] ?? "1.0.0";
+      final int minRequiredBuild = data['minRequiredBuild'] ?? 0;
+      final String updateMessage = data['updateMessage'] ??
+          "Une nouvelle version obligatoire de l'application est disponible avec de nouvelles fonctionnalités et des correctifs de sécurité.";
+      final String storeUrlAndroid = data['storeUrlAndroid'] ??
+          "https://play.google.com/store/apps/details?id=com.parrel.playfun";
+      final String storeUrlIOS = data['storeUrlIOS'] ??
+          "https://apps.apple.com/app/idYOUR_APP_ID";
+
+      // Comparaison de version
+      bool needsUpdate = false;
+      if (forceUpdateActive) {
+        if (minRequiredBuild > 0) {
+          needsUpdate = currentBuildNumber < minRequiredBuild;
+        } else {
+          needsUpdate = _isVersionLower(currentVersion, minRequiredVersion);
         }
+      }
 
-        if (needsUpdate && !_isDialogOpen) {
+      if (needsUpdate && !_isDialogOpen) {
+        final targetContext = navigatorKey?.currentContext ?? context;
+        if (targetContext != null && targetContext.mounted) {
+          // 1. Coupe immédiatement les flux LiveKit (audio / vidéo) en tâche de fond
+          try {
+            final livekit = Provider.of<LivekitService>(targetContext, listen: false);
+            livekit.leaveChannel();
+          } catch (e) {
+            debugPrint("[ForceUpdateService] LiveKit leaveChannel note: $e");
+          }
+
+          // 2. Affiche le dialogue bloquant
           _showBlockingUpdateDialog(
-            context,
+            targetContext,
             message: updateMessage,
             storeUrl: Platform.isIOS ? storeUrlIOS : storeUrlAndroid,
           );
         }
-      }, onError: (e) {
-        debugPrint("[ForceUpdateService] Error listening to version_control: $e");
-      });
-    } catch (e) {
-      debugPrint("[ForceUpdateService] Initialization error: $e");
-    }
+      }
+    }, onError: (e) {
+      debugPrint("[ForceUpdateService] Error listening to version_control: $e");
+    });
+  }
+
+  void dispose() {
+    _subscription?.cancel();
+    _subscription = null;
   }
 
   /// Compare 2 versions sous le format semver "1.2.3"
@@ -87,18 +126,16 @@ class ForceUpdateService {
     required String message,
     required String storeUrl,
   }) {
+    if (!context.mounted) return;
     _isDialogOpen = true;
 
     showDialog(
       context: context,
       barrierDismissible: false, // Interdit le clic en dehors
-      barrierColor: Colors.black.withOpacity(0.92), // Fond très opaque
+      barrierColor: Colors.black.withOpacity(0.95), // Fond très opaque
       builder: (BuildContext dialogContext) {
         return PopScope(
           canPop: false, // Empêche le retour physique Android
-          onPopInvokedWithResult: (didPop, result) {
-            // Blocage total du retour arrière
-          },
           child: AlertDialog(
             backgroundColor: const Color(0xFF1E1E2E),
             shape: RoundedRectangleBorder(
@@ -141,7 +178,7 @@ class ForceUpdateService {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  "Vous devez installer la dernière version pour continuer à jouer et accéder aux serveurs sécurisés.",
+                  "L'accès aux serveurs, à l'IA et aux fonctionnalités multijoueurs est suspendu jusqu'à la mise à jour.",
                   style: TextStyle(
                     color: Colors.amberAccent,
                     fontSize: 12,

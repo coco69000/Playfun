@@ -28,6 +28,7 @@ import 'dart:io';
 import 'package:photo_manager/photo_manager.dart';
 import 'player_state.dart';
 import 'livekit_service.dart';
+import 'services/force_update_service.dart';
 
 import 'game_video_overlay.dart';
 
@@ -3106,6 +3107,120 @@ class _MultiplayerTeamSelectionDialogState
 class FirebaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  // 1. Cadavre Exquis : Nombre de mots tapés en direct
+  Future<void> updateCadavreTypingCount(String gameCode, String playerId, int wordCount) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/cadavre_typing');
+    if (wordCount <= 0) {
+      await ref.remove();
+    } else {
+      await ref.set({'playerId': playerId, 'wordCount': wordCount, 'timestamp': ServerValue.timestamp});
+    }
+  }
+  Stream<DatabaseEvent> getCadavreTypingStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/cadavre_typing').onValue;
+
+  // 2. Poker : Montant de relance en cours de sélection sur le slider
+  Future<void> updatePokerRaisePreview(String gameCode, String playerId, int? amount) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/poker_raise_preview');
+    if (amount == null) {
+      await ref.remove();
+    } else {
+      await ref.set({'playerId': playerId, 'amount': amount, 'timestamp': ServerValue.timestamp});
+    }
+  }
+  Stream<DatabaseEvent> getPokerRaisePreviewStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/poker_raise_preview').onValue;
+
+  // 3. Skull : Enchère en cours de sélection (Live Bid)
+  Future<void> updateLiveBidOrRaise(String gameCode, String playerId, int? amount) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/skull_live_bid');
+    if (amount == null) {
+      await ref.remove();
+    } else {
+      await ref.set({'bidderId': playerId, 'amount': amount, 'timestamp': ServerValue.timestamp});
+    }
+  }
+  Stream<DatabaseEvent> getLiveBidStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/skull_live_bid').onValue;
+
+  // 4. Blokus : Déplacement en direct de la pièce fantôme
+  Future<void> updateBlokusLivePreview(
+    String gameCode,
+    String playerId, {
+    required int? pieceId,
+    required int? row,
+    required int? col,
+    required int rotation,
+    required bool flipped,
+    required bool canPlace,
+  }) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/blokus_preview');
+    if (pieceId == null || row == null || col == null) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'playerId': playerId,
+        'pieceId': pieceId,
+        'row': row,
+        'col': col,
+        'rotation': rotation,
+        'flipped': flipped,
+        'canPlace': canPlace,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+  Stream<DatabaseEvent> getBlokusLivePreviewStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/blokus_preview').onValue;
+
+  // 1. Zombie : Carte visée
+  Future<void> updateZombieCardHover(String gameCode, String playerId, int? targetCardIndex) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/zombie_hover');
+    if (targetCardIndex == null) {
+      await ref.remove();
+    } else {
+      await ref.set({'playerId': playerId, 'index': targetCardIndex, 'timestamp': ServerValue.timestamp});
+    }
+  }
+  Stream<DatabaseEvent> getZombieHoverStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/zombie_hover').onValue;
+
+  // 2. Petits Chevaux : Pion visé
+  Future<void> updateLudoPawnHover(String gameCode, String playerId, String? targetOwnerId, int? pawnIndex) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/ludo_hover');
+    if (pawnIndex == null || targetOwnerId == null) {
+      await ref.remove();
+    } else {
+      await ref.set({'playerId': playerId, 'ownerId': targetOwnerId, 'pawnIndex': pawnIndex, 'timestamp': ServerValue.timestamp});
+    }
+  }
+  Stream<DatabaseEvent> getLudoHoverStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/ludo_hover').onValue;
+
+  // 3. Jeu de Dames : Pièce sélectionnée
+  Future<void> updateCheckersSelectionLive(String gameCode, String playerId, String? fromKey) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/checkers_live');
+    if (fromKey == null) {
+      await ref.remove();
+    } else {
+      await ref.set({'playerId': playerId, 'fromKey': fromKey, 'timestamp': ServerValue.timestamp});
+    }
+  }
+  Stream<DatabaseEvent> getCheckersLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/checkers_live').onValue;
+
+  // 4. Dominos : Extrémité visée
+  Future<void> updateDominoHoverEnd(String gameCode, String playerId, int? endValue) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/domino_hover');
+    if (endValue == null) {
+      await ref.remove();
+    } else {
+      await ref.set({'playerId': playerId, 'endValue': endValue, 'timestamp': ServerValue.timestamp});
+    }
+  }
+  Stream<DatabaseEvent> getDominoHoverStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/domino_hover').onValue;
+
   Future<String> createLounge(Map<String, dynamic> loungeData) async {
     final docRef = _db.collection('lounges').doc();
     await docRef.set({
@@ -4045,6 +4160,7 @@ class FirebaseService {
         'instructions': instructions,
         'count': count,
         'gameType': gameType,
+        ...ForceUpdateService.versionPayload,
       });
 
       if (result.data is List) {
@@ -4068,6 +4184,7 @@ class FirebaseService {
       final result = await callable.call({
         'clue': clue,
         'targetWord': targetWord,
+        ...ForceUpdateService.versionPayload,
       });
       return result.data['isValid'] == true;
     } catch (e) {
@@ -11750,11 +11867,17 @@ class FirebaseService {
     // Toujours utiliser 'Blanc Manger Coco' comme clé
     final bmcData = GameWords.bmcData['Blanc Manger Coco']!;
 
-    List<String> questions = List<String>.from(
-      bmcData[difficulty] ?? bmcData['soft'] ?? [],
-    );
-    if (questions.isEmpty && bmcData.containsKey('soft')) {
-      questions = List<String>.from(bmcData['soft'] ?? []);
+    List<String> questions;
+    if (gameData['aiWords'] != null &&
+        (gameData['aiWords'] as List).isNotEmpty) {
+      questions = List<String>.from(gameData['aiWords']);
+    } else {
+      questions = List<String>.from(
+        bmcData[difficulty] ?? bmcData['soft'] ?? [],
+      );
+      if (questions.isEmpty && bmcData.containsKey('soft')) {
+        questions = List<String>.from(bmcData['soft'] ?? []);
+      }
     }
 
     // CORRECTION : créer une copie du deck de réponses
@@ -11936,9 +12059,15 @@ class FirebaseService {
       // Tirage de la prochaine question
       final difficulty = gameData['difficulty'] ?? 'soft';
       final bmcData = GameWords.bmcData['Blanc Manger Coco'] ?? {};
-      List<String> questions = List<String>.from(
-        bmcData[difficulty] ?? bmcData['soft'] ?? [],
-      );
+      List<String> questions;
+      if (gameData['aiWords'] != null &&
+          (gameData['aiWords'] as List).isNotEmpty) {
+        questions = List<String>.from(gameData['aiWords']);
+      } else {
+        questions = List<String>.from(
+          bmcData[difficulty] ?? bmcData['soft'] ?? [],
+        );
+      }
       String nextQuestion = "Question...";
       if (questions.isNotEmpty) {
         nextQuestion = questions[Random().nextInt(questions.length)];
@@ -12424,8 +12553,7 @@ class FirebaseService {
       if (preAiWords != null && preAiWords.isNotEmpty) {
         words = preAiWords.map((e) => e.toString()).toList()..shuffle();
       } else if (aiInstructions != null &&
-          aiInstructions.isNotEmpty &&
-          difficulty == 'soft') {
+          aiInstructions.isNotEmpty) {
         final aiWords = await FirebaseService.generateAiWords(
           instructions: aiInstructions,
           count: 40,
@@ -12471,8 +12599,7 @@ class FirebaseService {
       if (preAiWordsJO != null && preAiWordsJO.isNotEmpty) {
         words = preAiWordsJO.map((e) => e.toString()).toList()..shuffle();
       } else if (aiInstructionsJO != null &&
-          aiInstructionsJO.isNotEmpty &&
-          difficulty == 'soft') {
+          aiInstructionsJO.isNotEmpty) {
         final aiWords = await FirebaseService.generateAiWords(
           instructions: aiInstructionsJO,
           count: 40,
@@ -18823,6 +18950,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     'Le Menteur',
     'Qui Pourrait le Plus ?',
     'Le Juge',
+    'Blanc Manger Coco',
+    'Devine Tête',
+    'Petit Bac',
   ];
 
   final FirebaseService _firebaseService = FirebaseService();
@@ -18947,7 +19077,6 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
     List<String>? preGeneratedAiWords;
     if (playerState.isPremium &&
-        _selectedDifficulty == 'soft' &&
         _aiSupportedGames.contains(_selectedGame) &&
         _aiInstructionsController.text.trim().isNotEmpty) {
       setState(() => _isAiLoading = true);
@@ -19097,7 +19226,6 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         audioEnabled: _audioEnabled,
         aiInstructions:
             (playerState.isPremium &&
-                    _selectedDifficulty == 'soft' &&
                     _aiSupportedGames.contains(_selectedGame))
                 ? (_aiInstructionsController.text.trim().isNotEmpty
                     ? _aiInstructionsController.text.trim()
@@ -19145,7 +19273,6 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
     List<String>? preGeneratedAiWords;
     if (playerState.isPremium &&
-        _selectedDifficulty == 'soft' &&
         _aiSupportedGames.contains(_selectedGame) &&
         _aiInstructionsController.text.trim().isNotEmpty) {
       setState(() => _isAiLoading = true);
@@ -19286,7 +19413,6 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       : null,
               aiInstructions:
                   (playerState.isPremium &&
-                          _selectedDifficulty == 'soft' &&
                           _aiSupportedGames.contains(_selectedGame))
                       ? (_aiInstructionsController.text.trim().isNotEmpty
                           ? _aiInstructionsController.text.trim()
@@ -19603,33 +19729,32 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                     ],
 
-                    if (_selectedDifficulty == 'soft' &&
-                        _aiSupportedGames.contains(_selectedGame)) ...[
+                    if (_aiSupportedGames.contains(_selectedGame)) ...[
                       Consumer<PlayerState>(
                         builder: (ctx, ps, _) {
                           if (!ps.isPremium) return const SizedBox.shrink();
                           return Container(
-                            margin: const EdgeInsets.only(top: 16),
+                            margin: const EdgeInsets.only(top: 16, bottom: 8),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.amberAccent),
                               borderRadius: BorderRadius.circular(12),
-                              color: Colors.amber.withOpacity(0.05),
+                              color: Colors.amber.withOpacity(0.06),
                             ),
                             padding: const EdgeInsets.all(12),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Row(
+                                Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.auto_awesome,
                                       color: Colors.amberAccent,
                                       size: 20,
                                     ),
-                                    SizedBox(width: 8),
+                                    const SizedBox(width: 8),
                                     Text(
-                                      "Thème IA Personnalisé (VIP)",
-                                      style: TextStyle(
+                                      "Thème / Prompt IA Personnalisé (VIP) : $_selectedGame",
+                                      style: const TextStyle(
                                         color: Colors.amberAccent,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -19639,12 +19764,29 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 const SizedBox(height: 8),
                                 TextField(
                                   controller: _aiInstructionsController,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     labelText:
-                                        "Entrez un thème (ex: Harry Potter, Manga, Cuisine...)",
-                                    border: OutlineInputBorder(),
+                                        "Entrez vos instructions ou un thème...",
+                                    hintText:
+                                        "ex: Cinéma des années 90, Cuisine italienne, Manga & Animés...",
+                                    border: const OutlineInputBorder(),
+                                    suffixIcon:
+                                        _aiInstructionsController
+                                                .text
+                                                .isNotEmpty
+                                            ? IconButton(
+                                              icon: const Icon(Icons.clear),
+                                              onPressed:
+                                                  () => setState(
+                                                    () =>
+                                                        _aiInstructionsController
+                                                            .clear(),
+                                                  ),
+                                            )
+                                            : null,
                                   ),
-                                  maxLines: 1,
+                                  maxLines: 2,
+                                  onChanged: (_) => setState(() {}),
                                 ),
                               ],
                             ),
@@ -26889,82 +27031,69 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
             ),
 
-          // 2. MAIN DU VOISIN (DOS DE CARTES HORREUR CARTOON À SUSPENSE)
+          // Main du voisin avec écoute en direct de la carte visée
           Expanded(
             flex: 4,
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: const Color(0xFF13091B).withOpacity(0.85),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.white10),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
+              child: StreamBuilder<DatabaseEvent>(
+                stream: _firebaseService.getZombieHoverStream(widget.gameCode),
+                builder: (context, snap) {
+                  int? hoveredIndex;
+                  if (snap.hasData && snap.data!.snapshot.value != null) {
+                    try {
+                      final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                      hoveredIndex = raw['index'] as int?;
+                    } catch (_) {}
+                  }
+
+                  return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
-                        Icons.person_pin_rounded,
-                        size: 14,
-                        color: Colors.amberAccent,
-                      ),
-                      const SizedBox(width: 6),
                       Text(
                         "Main de $targetName (${targetHand.length} cartes)",
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
+                        style: const TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 10),
+                      Expanded(
+                        child: Center(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
+                            child: Row(
+                              children: targetHand.asMap().entries.map((entry) {
+                                final int index = entry.key;
+                                final bool isHovered = hoveredIndex == index;
+
+                                return _SpookyTargetCardBack(
+                                  isMyTurn: isMyTurn,
+                                  isHoveredLive: isHovered,
+                                  onHoverStart: isMyTurn ? () => _firebaseService.updateZombieCardHover(widget.gameCode, playerId, index) : null,
+                                  onHoverEnd: isMyTurn ? () => _firebaseService.updateZombieCardHover(widget.gameCode, playerId, null) : null,
+                                  onTap: isMyTurn && !_isActionPending
+                                      ? () async {
+                                          HapticFeedback.heavyImpact();
+                                          setState(() => _isActionPending = true);
+                                          await _firebaseService.updateZombieCardHover(widget.gameCode, playerId, null);
+                                          await _firebaseService.zombieTakeCard(widget.gameCode, playerId, index);
+                                          if (mounted) setState(() => _isActionPending = false);
+                                        }
+                                      : null,
+                                );
+                              }).toList(),
+                            ),
+                          ),
                         ),
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: Center(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:
-                              targetHand.asMap().entries.map((entry) {
-                                final int index = entry.key;
-                                return _SpookyTargetCardBack(
-                                  isMyTurn: isMyTurn,
-                                  onTap:
-                                      isMyTurn && !_isActionPending
-                                          ? () async {
-                                            HapticFeedback.heavyImpact();
-                                            setState(
-                                              () => _isActionPending = true,
-                                            );
-                                            await _firebaseService
-                                                .zombieTakeCard(
-                                                  widget.gameCode,
-                                                  playerId,
-                                                  index,
-                                                )
-                                                .whenComplete(() {
-                                                  if (mounted)
-                                                    setState(
-                                                      () =>
-                                                          _isActionPending =
-                                                              false,
-                                                    );
-                                                });
-                                          }
-                                          : null,
-                                );
-                              }).toList(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),
@@ -27399,199 +27528,102 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           child: AspectRatio(
             aspectRatio: 1.0,
             child: Container(
-              margin: EdgeInsets.all(8),
+              margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.brown[900]!, width: 6),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black45,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                  ),
-                ],
+                boxShadow: const [BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(0, 5))],
               ),
-              child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 8,
-                ),
-                itemCount: 64,
-                itemBuilder: (context, index) {
-                  int r = index ~/ 8;
-                  int c = index % 8;
-                  bool isDark = (r + c) % 2 != 0;
-                  String key = "$r,$c";
-                  String? piece = board[key];
+              child: StreamBuilder<DatabaseEvent>(
+                stream: _firebaseService.getCheckersLiveStream(widget.gameCode),
+                builder: (context, liveSnap) {
+                  String? liveSelectedPiece = _selectedCheckersPiece;
+                  if (!isMyTurn && liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+                    try {
+                      final raw = Map<String, dynamic>.from(liveSnap.data!.snapshot.value as Map);
+                      liveSelectedPiece = raw['fromKey'] as String?;
+                    } catch (_) {}
+                  }
 
-                  bool isSelected = key == _selectedCheckersPiece;
-                  bool isMandatory = key == mandatoryPiece;
+                  return GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 8),
+                    itemCount: 64,
+                    itemBuilder: (context, index) {
+                      int r = index ~/ 8;
+                      int c = index % 8;
+                      bool isDark = (r + c) % 2 != 0;
+                      String key = "$r,$c";
+                      String? piece = board[key];
 
-                  Color bgColor =
-                      isDark ? Colors.brown[700]! : const Color(0xFFF5F5DC);
+                      bool isSelected = key == liveSelectedPiece;
+                      bool isMandatory = key == mandatoryPiece;
+                      Color bgColor = isDark ? Colors.brown[700]! : const Color(0xFFF5F5DC);
 
-                  return GestureDetector(
-                    onTap:
-                        isMyTurn && isDark
+                      return GestureDetector(
+                        onTap: isMyTurn && isDark
                             ? () {
-                              if (_selectedCheckersPiece == null) {
-                                // On ne peut sÃ©lectionner qu'un pion de sa couleur.
-                                // Si on est bloquÃ© (mandatoryPiece), on ne peut sÃ©lectionner QUE celui-lÃ .
-                                if (piece != null &&
-                                    piece.startsWith(currentColor)) {
-                                  if (mandatoryPiece != null &&
-                                      key != mandatoryPiece) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          "Vous devez sÃ©lectionner le pion en surbrillance orange.",
+                                if (_selectedCheckersPiece == null) {
+                                  if (piece != null && piece.startsWith(currentColor)) {
+                                    if (mandatoryPiece != null && key != mandatoryPiece) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text("Vous devez sélectionner le pion en surbrillance orange."),
+                                          duration: Duration(seconds: 2),
                                         ),
-                                        backgroundColor: Colors.orange[900],
-                                      ),
-                                    );
-                                  } else {
-                                    setState(
-                                      () => _selectedCheckersPiece = key,
-                                    );
-                                  }
-                                }
-                              } else {
-                                if (key == _selectedCheckersPiece) {
-                                  // Impossible de dÃ©sÃ©lectionner si ce pion est obligatoire
-                                  if (mandatoryPiece == key) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          "Vous Ãªtes obligÃ© de jouer ce pion.",
-                                        ),
-                                        backgroundColor: Colors.orange[900],
-                                      ),
-                                    );
-                                  } else {
-                                    setState(
-                                      () => _selectedCheckersPiece = null,
-                                    );
+                                      );
+                                      return;
+                                    }
+                                    setState(() => _selectedCheckersPiece = key);
+                                    _firebaseService.updateCheckersSelectionLive(widget.gameCode, playerId, key);
                                   }
                                 } else {
-                                  List<int> from =
-                                      _selectedCheckersPiece!
-                                          .split(',')
-                                          .map(int.parse)
-                                          .toList();
-                                  _firebaseService
-                                      .checkersMove(
-                                        widget.gameCode,
-                                        playerId,
-                                        from[0],
-                                        from[1],
-                                        r,
-                                        c,
-                                      )
-                                      .then((_) {
-                                        // Si on est lÃ , le coup a rÃ©ussi. DÃ©sÃ©lectionne le pion pour le prochain tour.
-                                        // (Sauf si c'est un mandatory, le backend va s'en charger)
-                                        setState(
-                                          () => _selectedCheckersPiece = null,
-                                        );
-                                      })
-                                      .catchError((e) {
-                                        if (!mounted) return;
-                                        ScaffoldMessenger.of(
-                                          context,
-                                        ).showSnackBar(
-                                          SnackBar(
-                                            content: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.warning_amber_rounded,
-                                                  color: Colors.white,
-                                                ),
-                                                SizedBox(width: 10),
-                                                Expanded(
-                                                  child: Text(
-                                                    e.toString().replaceAll(
-                                                      "Exception: ",
-                                                      "",
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            backgroundColor: Colors.red[900],
-                                            duration: Duration(seconds: 3),
-                                          ),
-                                        );
-                                        setState(
-                                          () => _selectedCheckersPiece = null,
-                                        );
-                                      });
+                                  if (key == _selectedCheckersPiece) {
+                                    setState(() => _selectedCheckersPiece = null);
+                                    _firebaseService.updateCheckersSelectionLive(widget.gameCode, playerId, null);
+                                  } else {
+                                    List<int> from = _selectedCheckersPiece!.split(',').map(int.parse).toList();
+                                    _firebaseService.updateCheckersSelectionLive(widget.gameCode, playerId, null);
+                                    _firebaseService.checkersMove(widget.gameCode, playerId, from[0], from[1], r, c).then((_) {
+                                      setState(() => _selectedCheckersPiece = null);
+                                    }).catchError((e) {
+                                      setState(() => _selectedCheckersPiece = null);
+                                    });
+                                  }
                                 }
                               }
-                            }
                             : null,
-                    child: Container(
-                      color: bgColor,
-                      child:
-                          piece != null
+                        child: Container(
+                          color: bgColor,
+                          child: piece != null
                               ? Center(
-                                child: AnimatedContainer(
-                                  duration: Duration(milliseconds: 200),
-                                  width: 35,
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color:
-                                        piece.startsWith('red')
-                                            ? Colors.red[800]!
-                                            : Colors.black87,
-                                    border: Border.all(
-                                      color:
-                                          isMandatory
-                                              ? Colors
-                                                  .orangeAccent // En orange si obligatoire
-                                              : (isSelected
-                                                  ? Colors.greenAccent
-                                                  : Colors.white),
-                                      width:
-                                          (isSelected || isMandatory) ? 3 : 2,
-                                    ),
-                                    boxShadow:
-                                        (isSelected || isMandatory)
-                                            ? [
-                                              BoxShadow(
-                                                color:
-                                                    isMandatory
-                                                        ? Colors.orange
-                                                        : Colors.greenAccent,
-                                                blurRadius: 8,
-                                                spreadRadius: 2,
-                                              ),
-                                            ]
-                                            : [
-                                              BoxShadow(
-                                                color: Colors.black45,
-                                                blurRadius: 4,
-                                                offset: Offset(2, 2),
-                                              ),
-                                            ],
-                                  ),
-                                  child:
-                                      piece.endsWith('_king')
-                                          ? Icon(
-                                            Icons.star,
-                                            color: Colors.amber,
-                                            size: 20,
-                                          )
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: piece.startsWith('red') ? Colors.red[800]! : Colors.black87,
+                                      border: Border.all(
+                                        color: isSelected ? Colors.greenAccent : (isMandatory ? Colors.orangeAccent : Colors.white),
+                                        width: (isSelected || isMandatory) ? 3 : 2,
+                                      ),
+                                      boxShadow: (isSelected || isMandatory)
+                                          ? [BoxShadow(color: isMandatory ? Colors.orange : Colors.greenAccent, blurRadius: 8, spreadRadius: 2)]
                                           : null,
-                                ),
-                              )
+                                    ),
+                                    child: piece.endsWith('_king') ? const Icon(Icons.star, color: Colors.amber, size: 20) : null,
+                                  ),
+                                )
                               : null,
-                    ),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }
@@ -28336,6 +28368,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     TextField(
                       controller: _answerController,
                       autofocus: true,
+                      onChanged: (text) {
+                        int wordCount = text.trim().isEmpty ? 0 : text.trim().split(RegExp(r'\s+')).length;
+                        _firebaseService.updateCadavreTypingCount(widget.gameCode, playerId, wordCount);
+                      },
                       style: const TextStyle(
                         fontFamily: 'serif',
                         fontSize: 20,
@@ -28397,6 +28433,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               playerId,
                               _answerController.text.trim(),
                             );
+                            _firebaseService.updateCadavreTypingCount(
+                              widget.gameCode,
+                              playerId,
+                              0,
+                            );
                             _answerController.clear();
                           }
                         },
@@ -28436,40 +28477,53 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         color: const Color(0xFF1E1610),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0xFFE0A96D).withOpacity(0.3)),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 16,
-            offset: Offset(0, 6),
-          ),
-        ],
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.draw_rounded, size: 54, color: Color(0xFFE0A96D)),
-          const SizedBox(height: 14),
-          Text(
-            "$currentPlayerName écrit...",
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            "La feuille est pliée pour préserver le secret de l'histoire.",
-            style: TextStyle(color: Colors.white60, fontSize: 12),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20),
-          const CircularProgressIndicator(
-            color: Color(0xFFE0A96D),
-            strokeWidth: 2.5,
-          ),
-        ],
+      child: StreamBuilder<DatabaseEvent>(
+        stream: _firebaseService.getCadavreTypingStream(widget.gameCode),
+        builder: (context, snap) {
+          int count = 0;
+          if (snap.hasData && snap.data!.snapshot.value != null) {
+            try {
+              final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+              count = raw['wordCount'] as int? ?? 0;
+            } catch (_) {}
+          }
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.history_edu_rounded, size: 54, color: Color(0xFFE0A96D)),
+              const SizedBox(height: 14),
+              Text(
+                "$currentPlayerName est en train d'écrire...",
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              if (count > 0)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+                  ),
+                  child: Text(
+                    "✏️ $count mot${count > 1 ? 's' : ''} rédigé${count > 1 ? 's' : ''}...",
+                    style: const TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
+                )
+              else
+                const Text(
+                  "La feuille est pliée pour préserver le secret.",
+                  style: TextStyle(color: Colors.white60, fontSize: 12),
+                  textAlign: TextAlign.center,
+                ),
+              const SizedBox(height: 20),
+              const CircularProgressIndicator(color: Color(0xFFE0A96D), strokeWidth: 2.5),
+            ],
+          );
+        },
       ),
     );
   }
@@ -30717,29 +30771,58 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Pot
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.black26,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Colors.amber.withOpacity(0.3)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.monetization_on, color: Colors.amber, size: 20),
-                    SizedBox(width: 8),
-                    Text(
-                      "Pot : $pot \$",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+              // Pot + Écoute de la relance en préparation
+              StreamBuilder<DatabaseEvent>(
+                stream: _firebaseService.getPokerRaisePreviewStream(widget.gameCode),
+                builder: (context, snap) {
+                  int? previewAmount;
+                  String? previewPlayerName;
+                  if (snap.hasData && snap.data!.snapshot.value != null) {
+                    try {
+                      final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                      final pId = raw['playerId'] as String?;
+                      if (pId != null && pId != playerId) {
+                        previewAmount = raw['amount'] as int?;
+                        previewPlayerName = playerData[pId]?['name'] ?? 'Adversaire';
+                      }
+                    } catch (_) {}
+                  }
+
+                  return Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.black26,
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(color: Colors.amber.withOpacity(0.3)),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.monetization_on, color: Colors.amber, size: 20),
+                            const SizedBox(width: 8),
+                            Text("Pot : $pot \$", style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                      if (previewAmount != null)
+                        Container(
+                          margin: const EdgeInsets.only(top: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent.withOpacity(0.25),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: Colors.redAccent),
+                          ),
+                          child: Text(
+                            "⚠️ $previewPlayerName prépare une relance à $previewAmount \$ !",
+                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                        ),
+                    ],
+                  );
+                },
               ),
               SizedBox(height: 20),
               // Community Cards
@@ -30965,6 +31048,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       setStateDialog(() {
                         raiseAmount = value.roundToDouble();
                       });
+                      _firebaseService.updatePokerRaisePreview(widget.gameCode, playerId, raiseAmount.toInt());
                     },
                   ),
                   SizedBox(height: 10),
@@ -30975,25 +31059,43 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       if (currentBet * 2 <= maxRaise)
                         ActionChip(
                           label: Text("x2"),
-                          onPressed:
-                              () => setStateDialog(
-                                () => raiseAmount = (currentBet * 2).toDouble(),
-                              ),
+                          onPressed: () {
+                            setStateDialog(
+                              () => raiseAmount = (currentBet * 2).toDouble(),
+                            );
+                            _firebaseService.updatePokerRaisePreview(
+                              widget.gameCode,
+                              playerId,
+                              raiseAmount.toInt(),
+                            );
+                          },
                         ),
                       if (pot <= maxRaise)
                         ActionChip(
                           label: Text("Pot"),
-                          onPressed:
-                              () => setStateDialog(
-                                () => raiseAmount = pot.toDouble(),
-                              ),
+                          onPressed: () {
+                            setStateDialog(
+                              () => raiseAmount = pot.toDouble(),
+                            );
+                            _firebaseService.updatePokerRaisePreview(
+                              widget.gameCode,
+                              playerId,
+                              raiseAmount.toInt(),
+                            );
+                          },
                         ),
                       ActionChip(
                         label: Text("All-in"),
-                        onPressed:
-                            () => setStateDialog(
-                              () => raiseAmount = maxRaise.toDouble(),
-                            ),
+                        onPressed: () {
+                          setStateDialog(
+                            () => raiseAmount = maxRaise.toDouble(),
+                          );
+                          _firebaseService.updatePokerRaisePreview(
+                            widget.gameCode,
+                            playerId,
+                            raiseAmount.toInt(),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -31001,11 +31103,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    _firebaseService.updatePokerRaisePreview(
+                      widget.gameCode,
+                      playerId,
+                      null,
+                    );
+                    Navigator.of(context).pop();
+                  },
                   child: Text("Annuler"),
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    _firebaseService.updatePokerRaisePreview(
+                      widget.gameCode,
+                      playerId,
+                      null,
+                    );
                     Navigator.of(context).pop();
                     _firebaseService.pokerAction(
                       widget.gameCode,
@@ -31021,7 +31135,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           },
         );
       },
-    );
+    ).then((_) {
+      _firebaseService.updatePokerRaisePreview(widget.gameCode, playerId, null);
+    });
   }
 
   Widget _buildUnoUI(
@@ -37314,10 +37430,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     BuildContext context, {
     required int minimumBid,
     required int maximumBid,
+    required String playerId,
   }) async {
     int selectedBid = minimumBid;
+    _firebaseService.updateLiveBidOrRaise(widget.gameCode, playerId, selectedBid);
 
-    return showModalBottomSheet<int>(
+    final result = await showModalBottomSheet<int>(
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
@@ -37370,7 +37488,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       IconButton(
                         onPressed:
                             selectedBid > minimumBid
-                                ? () => setStateModal(() => selectedBid--)
+                                ? () {
+                                    setStateModal(() => selectedBid--);
+                                    _firebaseService.updateLiveBidOrRaise(widget.gameCode, playerId, selectedBid);
+                                  }
                                 : null,
                         icon: const Icon(Icons.remove_circle_outline, size: 36),
                         color: Colors.white70,
@@ -37408,7 +37529,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       IconButton(
                         onPressed:
                             selectedBid < maximumBid
-                                ? () => setStateModal(() => selectedBid++)
+                                ? () {
+                                    setStateModal(() => selectedBid++);
+                                    _firebaseService.updateLiveBidOrRaise(widget.gameCode, playerId, selectedBid);
+                                  }
                                 : null,
                         icon: const Icon(Icons.add_circle_outline, size: 36),
                         color: Colors.white70,
@@ -37452,6 +37576,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         );
       },
     );
+
+    _firebaseService.updateLiveBidOrRaise(widget.gameCode, playerId, null);
+    return result;
   }
 
   Widget _buildSkullUI(
@@ -37599,6 +37726,46 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
               ],
             ),
+          ),
+
+          StreamBuilder<DatabaseEvent>(
+            stream: _firebaseService.getLiveBidStream(widget.gameCode),
+            builder: (context, snap) {
+              if (!snap.hasData || snap.data!.snapshot.value == null) return const SizedBox.shrink();
+              try {
+                final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                final bidderId = raw['bidderId'] as String?;
+                final liveAmount = raw['amount'] as int?;
+                if (bidderId == null || liveAmount == null || liveAmount <= 0) return const SizedBox.shrink();
+                final bidderName = players[bidderId]?['name'] ?? 'Un joueur';
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.amberAccent.withOpacity(0.6)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.flash_on_rounded, size: 16, color: Colors.amberAccent),
+                      const SizedBox(width: 6),
+                      Text(
+                        "$bidderName réfléchit à un défi de $liveAmount cartes...",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              } catch (_) {
+                return const SizedBox.shrink();
+              }
+            },
           ),
 
           // 2. TAPIS DES ADVERSAIRES & CIRCUIT
@@ -37933,6 +38100,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               context,
                               minimumBid: 1,
                               maximumBid: max(1, totalCardsOnTables),
+                              playerId: playerId,
                             );
                             if (bid == null) return;
                             setState(() => _isActionPending = true);
@@ -38005,6 +38173,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                             context,
                                             minimumBid: currentBid + 1,
                                             maximumBid: totalCardsOnTables,
+                                            playerId: playerId,
                                           );
                                           if (bid == null) return;
                                           setState(
@@ -41104,55 +41273,92 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ),
 
-        // 2. PLATEAU DE JEU EN BOIS SOMBRE / FEUTRINE
         Expanded(
           flex: 4,
           child: LayoutBuilder(
             builder: (context, constraints) {
-              final double boardSize =
-                  min(constraints.maxWidth, constraints.maxHeight) * 0.96;
-              return Center(
-                child: Container(
-                  width: boardSize,
-                  height: boardSize,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.7),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
+              final double boardSize = min(constraints.maxWidth, constraints.maxHeight) * 0.96;
+              final cellSize = boardSize / 15;
+
+              return StreamBuilder<DatabaseEvent>(
+                stream: _firebaseService.getLudoHoverStream(widget.gameCode),
+                builder: (context, hoverSnap) {
+                  String? hoveredOwner;
+                  int? hoveredPawnIdx;
+                  if (hoverSnap.hasData && hoverSnap.data!.snapshot.value != null) {
+                    try {
+                      final raw = Map<String, dynamic>.from(hoverSnap.data!.snapshot.value as Map);
+                      hoveredOwner = raw['ownerId'] as String?;
+                      hoveredPawnIdx = raw['pawnIndex'] as int?;
+                    } catch (_) {}
+                  }
+
+                  Offset? ghostDestination;
+                  if (hoveredOwner != null && hoveredPawnIdx != null && dice > 0) {
+                    final pList = List<int>.from(positions[hoveredOwner] ?? [-1, -1, -1, -1]);
+                    final curP = pList[hoveredPawnIdx];
+                    final pIdx = playerOrder.indexOf(hoveredOwner);
+                    if (curP == -1 && (dice == 1 || dice == 6)) {
+                      ghostDestination = _getLudoPathPosition(0, pIdx % 4, cellSize);
+                    } else if (curP >= 0 && curP + dice <= 56) {
+                      final targetP = curP + dice;
+                      if (targetP <= 50) {
+                        ghostDestination = _getLudoPathPosition(targetP, pIdx % 4, cellSize);
+                      } else {
+                        ghostDestination = _getLudoHomePosition(targetP - 51, pIdx % 4, cellSize);
+                      }
+                    }
+                  }
+
+                  return Center(
+                    child: Container(
+                      width: boardSize,
+                      height: boardSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.7), blurRadius: 20, offset: const Offset(0, 8))],
                       ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(24),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        // Dessin vectoriel du plateau sombre
-                        CustomPaint(
-                          size: Size(boardSize, boardSize),
-                          painter: _LudoBoardPainter(playerColors),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(24),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            CustomPaint(size: Size(boardSize, boardSize), painter: _LudoBoardPainter(playerColors)),
+                            if (ghostDestination != null)
+                              Positioned(
+                                left: ghostDestination.dx - (cellSize * 0.45),
+                                top: ghostDestination.dy - (cellSize * 0.45),
+                                child: Container(
+                                  width: cellSize * 0.9,
+                                  height: cellSize * 0.9,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.amberAccent.withOpacity(0.4),
+                                    border: Border.all(color: Colors.amberAccent, width: 2),
+                                    boxShadow: [BoxShadow(color: Colors.amberAccent.withOpacity(0.6), blurRadius: 10, spreadRadius: 2)],
+                                  ),
+                                  child: const Icon(Icons.gps_fixed, color: Colors.amberAccent, size: 16),
+                                ),
+                              ),
+                            ..._buildLudoPawns(
+                              boardSize,
+                              positions,
+                              playerOrder,
+                              playerColors,
+                              playerId,
+                              isMyTurn,
+                              dice,
+                              hasRolled,
+                              widget.gameCode,
+                              _firebaseService,
+                              isTeamMode,
+                            ),
+                          ],
                         ),
-                        // Pions avec animation de saut fluide
-                        ..._buildLudoPawns(
-                          boardSize,
-                          positions,
-                          playerOrder,
-                          playerColors,
-                          playerId,
-                          isMyTurn,
-                          dice,
-                          hasRolled,
-                          widget.gameCode,
-                          _firebaseService,
-                          isTeamMode,
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               );
             },
           ),
@@ -41235,11 +41441,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          onPressed:
-                              () => _firebaseService.passTurnPetitsChevaux(
-                                widget.gameCode,
-                                playerId,
-                              ),
+                          onPressed: () {
+                            _firebaseService.updateLudoPawnHover(widget.gameCode, playerId, null, null);
+                            _firebaseService.passTurnPetitsChevaux(
+                              widget.gameCode,
+                              playerId,
+                            );
+                          },
                         ),
                       ],
                     )
@@ -41335,9 +41543,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       }
 
       final matchEnd = getMatchEnd(tile);
+      if (matchEnd != null && matchEnd != -99) {
+        _firebaseService.updateDominoHoverEnd(widget.gameCode, playerId, matchEnd);
+      }
 
       if (matchEnd == null) {
-        // Ambigu : afficher un dialogue pour choisir l'extrÃ©mitÃ©
+        // Ambigu : afficher un dialogue pour choisir l'extrémité
         showDialog(
           context: context,
           builder: (_) {
@@ -41352,11 +41563,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 borderRadius: BorderRadius.circular(16),
               ),
               title: const Text(
-                "Choisir l'extrÃ©mitÃ©",
+                "Choisir l'extrémité",
                 style: TextStyle(color: Colors.white),
               ),
               content: Text(
-                "Sur quelle extrÃ©mitÃ© poser le $tile ?",
+                "Sur quelle extrémité poser le $tile ?",
                 style: const TextStyle(color: Colors.white70),
               ),
               actions:
@@ -41371,7 +41582,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               tile,
                               end,
                             )
+                            .then((_) {
+                              _firebaseService.updateDominoHoverEnd(
+                                widget.gameCode,
+                                playerId,
+                                null,
+                              );
+                            })
                             .catchError((e) {
+                              _firebaseService.updateDominoHoverEnd(
+                                widget.gameCode,
+                                playerId,
+                                null,
+                              );
                               if (!mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(e.toString())),
@@ -41386,20 +41609,38 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   }).toList(),
             );
           },
-        );
+        ).then((_) {
+          _firebaseService.updateDominoHoverEnd(
+            widget.gameCode,
+            playerId,
+            null,
+          );
+        });
         return;
       }
 
       if (matchEnd == -99) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Aucune extrÃ©mitÃ© compatible.")),
+          const SnackBar(content: Text("Aucune extrémité compatible.")),
         );
         return;
       }
 
       _firebaseService
           .playDominoesTile(widget.gameCode, playerId, tile, matchEnd!)
+          .then((_) {
+            _firebaseService.updateDominoHoverEnd(
+              widget.gameCode,
+              playerId,
+              null,
+            );
+          })
           .catchError((e) {
+            _firebaseService.updateDominoHoverEnd(
+              widget.gameCode,
+              playerId,
+              null,
+            );
             if (!mounted) return;
             ScaffoldMessenger.of(
               context,
@@ -41654,7 +41895,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ),
 
-        // â”€â”€ Plateau de jeu â”€â”€â”€â”€â”€â”€
         Expanded(
           flex: 4,
           child: Container(
@@ -41663,14 +41903,44 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               color: const Color(0xFF3a7bd5),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: DominoesBoardWidget(
-                chain:
-                    boardChain
-                        .map((e) => Map<String, dynamic>.from(e))
-                        .toList(),
-              ),
+            child: StreamBuilder<DatabaseEvent>(
+              stream: _firebaseService.getDominoHoverStream(widget.gameCode),
+              builder: (context, hoverSnap) {
+                int? liveHoverEnd;
+                if (hoverSnap.hasData && hoverSnap.data!.snapshot.value != null) {
+                  try {
+                    final raw = Map<String, dynamic>.from(hoverSnap.data!.snapshot.value as Map);
+                    liveHoverEnd = raw['endValue'] as int?;
+                  } catch (_) {}
+                }
+
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Stack(
+                    children: [
+                      DominoesBoardWidget(
+                        chain: boardChain.map((e) => Map<String, dynamic>.from(e)).toList(),
+                      ),
+                      if (liveHoverEnd != null)
+                        Positioned(
+                          top: 10,
+                          left: 10,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.amber.withOpacity(0.85),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              "Placement visé sur le : $liveHoverEnd",
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 11),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
         ),
@@ -43427,6 +43697,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 _blokusStartCol = col;
                 _checkBlokusPlacement(board, myColor, isFirstPiece);
               });
+              if (isMyTurn && _selectedBlokusPieceId != null) {
+                _firebaseService.updateBlokusLivePreview(
+                  widget.gameCode,
+                  playerId,
+                  pieceId: _selectedBlokusPieceId,
+                  row: _blokusStartRow,
+                  col: _blokusStartCol,
+                  rotation: _blokusRotation,
+                  flipped: _blokusFlipped,
+                  canPlace: _blokusCanPlace,
+                );
+              }
             }
           }
         }
@@ -43501,30 +43783,76 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           tooltip: "Tourner",
                           constraints: BoxConstraints(),
                           padding: EdgeInsets.symmetric(horizontal: 8),
-                          onPressed:
-                              () => setState(() {
-                                _blokusRotation = (_blokusRotation + 1) % 4;
-                                _checkBlokusPlacement(
-                                  board,
-                                  myColor,
-                                  isFirstPiece,
-                                );
-                              }),
+                          onPressed: () {
+                            setState(() {
+                              _blokusRotation = (_blokusRotation + 1) % 4;
+                              _checkBlokusPlacement(
+                                board,
+                                myColor,
+                                isFirstPiece,
+                              );
+                            });
+                            _firebaseService.updateBlokusLivePreview(
+                              widget.gameCode,
+                              playerId,
+                              pieceId: _selectedBlokusPieceId,
+                              row: _blokusStartRow,
+                              col: _blokusStartCol,
+                              rotation: _blokusRotation,
+                              flipped: _blokusFlipped,
+                              canPlace: _blokusCanPlace,
+                            );
+                          },
                         ),
                         IconButton(
                           icon: Icon(Icons.flip, color: Colors.tealAccent),
                           tooltip: "Retourner",
                           constraints: BoxConstraints(),
                           padding: EdgeInsets.symmetric(horizontal: 8),
-                          onPressed:
-                              () => setState(() {
-                                _blokusFlipped = !_blokusFlipped;
-                                _checkBlokusPlacement(
-                                  board,
-                                  myColor,
-                                  isFirstPiece,
-                                );
-                              }),
+                          onPressed: () {
+                            setState(() {
+                              _blokusFlipped = !_blokusFlipped;
+                              _checkBlokusPlacement(
+                                board,
+                                myColor,
+                                isFirstPiece,
+                              );
+                            });
+                            _firebaseService.updateBlokusLivePreview(
+                              widget.gameCode,
+                              playerId,
+                              pieceId: _selectedBlokusPieceId,
+                              row: _blokusStartRow,
+                              col: _blokusStartCol,
+                              rotation: _blokusRotation,
+                              flipped: _blokusFlipped,
+                              canPlace: _blokusCanPlace,
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.cancel, color: Colors.redAccent),
+                          tooltip: "Annuler",
+                          constraints: BoxConstraints(),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          onPressed: () {
+                            setState(() {
+                              _selectedBlokusPieceId = null;
+                              _blokusStartRow = null;
+                              _blokusStartCol = null;
+                              _blokusCanPlace = false;
+                            });
+                            _firebaseService.updateBlokusLivePreview(
+                              widget.gameCode,
+                              playerId,
+                              pieceId: null,
+                              row: null,
+                              col: null,
+                              rotation: 0,
+                              flipped: false,
+                              canPlace: false,
+                            );
+                          },
                         ),
                         IconButton(
                           icon: Icon(
@@ -43560,6 +43888,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                         _blokusStartCol = null;
                                         _blokusCanPlace = false;
                                       });
+                                      _firebaseService.updateBlokusLivePreview(
+                                        widget.gameCode,
+                                        playerId,
+                                        pieceId: null,
+                                        row: null,
+                                        col: null,
+                                        rotation: 0,
+                                        flipped: false,
+                                        canPlace: false,
+                                      );
                                     } catch (e) {
                                       ScaffoldMessenger.of(
                                         context,
@@ -43576,19 +43914,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     }
                                   }
                                   : null,
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.cancel, color: Colors.redAccent),
-                          tooltip: "Annuler",
-                          constraints: BoxConstraints(),
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          onPressed:
-                              () => setState(() {
-                                _selectedBlokusPieceId = null;
-                                _blokusStartRow = null;
-                                _blokusStartCol = null;
-                                _blokusCanPlace = false;
-                              }),
                         ),
                       ],
 
@@ -43614,6 +43939,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               _blokusStartCol = null;
                               _blokusCanPlace = false;
                             });
+                            _firebaseService.updateBlokusLivePreview(
+                              widget.gameCode,
+                              playerId,
+                              pieceId: null,
+                              row: null,
+                              col: null,
+                              rotation: 0,
+                              flipped: false,
+                              canPlace: false,
+                            );
                           },
                           child: Text("Passer", style: TextStyle(fontSize: 12)),
                         ),
@@ -43647,28 +43982,67 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 ? (details) =>
                                     _updatePiecePosition(details.localPosition)
                                 : null,
-                        child: CustomPaint(
-                          key: _canvasKey,
-                          size: Size(boardPixelSize, boardPixelSize),
-                          painter: _BlokusBoardPainter(
-                            board: board,
-                            gridSize: gridSize,
-                            cellSize: cellSize,
-                            previewPiece:
-                                _selectedBlokusPieceId != null &&
-                                        _blokusStartRow != null &&
-                                        _blokusStartCol != null
-                                    ? GameData.getRotatedPiece(
-                                      _selectedBlokusPieceId!,
-                                      _blokusRotation,
-                                      flipped: _blokusFlipped,
-                                    )
-                                    : null,
-                            previewRow: _blokusStartRow,
-                            previewCol: _blokusStartCol,
-                            previewColor: getColor(myColor),
-                            canPlace: _blokusCanPlace,
-                          ),
+                        child: StreamBuilder<DatabaseEvent>(
+                          stream: _firebaseService.getBlokusLivePreviewStream(widget.gameCode),
+                          builder: (context, snap) {
+                            List<List<int>>? ghostPiece;
+                            int? ghostRow;
+                            int? ghostCol;
+                            Color? ghostColor;
+                            bool ghostCanPlace = true;
+
+                            if (snap.hasData && snap.data!.snapshot.value != null) {
+                              try {
+                                final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                                final pId = raw['playerId'] as String?;
+                                if (pId != null && pId != playerId) {
+                                  final pIdPiece = raw['pieceId'] as int?;
+                                  final r = raw['row'] as int?;
+                                  final c = raw['col'] as int?;
+                                  final rot = raw['rotation'] as int? ?? 0;
+                                  final flip = raw['flipped'] as bool? ?? false;
+                                  ghostCanPlace = raw['canPlace'] as bool? ?? true;
+
+                                  if (pIdPiece != null && r != null && c != null) {
+                                    ghostPiece = GameData.getRotatedPiece(pIdPiece, rot, flipped: flip);
+                                    ghostRow = r;
+                                    ghostCol = c;
+                                    final oppColor = gameData['blokusPlayerColors']?[pId] ?? 'red';
+                                    ghostColor = getColor(oppColor);
+                                  }
+                                }
+                              } catch (_) {}
+                            }
+
+                            return CustomPaint(
+                              key: _canvasKey,
+                              size: Size(boardPixelSize, boardPixelSize),
+                              painter: _BlokusBoardPainter(
+                                board: board,
+                                gridSize: gridSize,
+                                cellSize: cellSize,
+                                previewPiece:
+                                    _selectedBlokusPieceId != null &&
+                                            _blokusStartRow != null &&
+                                            _blokusStartCol != null
+                                        ? GameData.getRotatedPiece(
+                                          _selectedBlokusPieceId!,
+                                          _blokusRotation,
+                                          flipped: _blokusFlipped,
+                                        )
+                                        : null,
+                                previewRow: _blokusStartRow,
+                                previewCol: _blokusStartCol,
+                                previewColor: getColor(myColor),
+                                canPlace: _blokusCanPlace,
+                                ghostPiece: ghostPiece,
+                                ghostRow: ghostRow,
+                                ghostCol: ghostCol,
+                                ghostColor: ghostColor,
+                                ghostCanPlace: ghostCanPlace,
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -43917,6 +44291,13 @@ class _BlokusBoardPainter extends CustomPainter {
   final Color previewColor;
   final bool canPlace;
 
+  // Données de la pièce fantôme de l'adversaire
+  final List<List<int>>? ghostPiece;
+  final int? ghostRow;
+  final int? ghostCol;
+  final Color? ghostColor;
+  final bool ghostCanPlace;
+
   _BlokusBoardPainter({
     required this.board,
     required this.gridSize,
@@ -43926,131 +44307,91 @@ class _BlokusBoardPainter extends CustomPainter {
     this.previewCol,
     required this.previewColor,
     required this.canPlace,
+    this.ghostPiece,
+    this.ghostRow,
+    this.ghostCol,
+    this.ghostColor,
+    this.ghostCanPlace = true,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Fond de la grille
     final bgPaint = Paint()..color = Colors.grey[900]!;
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), bgPaint);
 
-    // Dessiner les cellules
     for (int r = 0; r < gridSize; r++) {
       for (int c = 0; c < gridSize; c++) {
-        final rect = Rect.fromLTWH(
-          c * cellSize,
-          r * cellSize,
-          cellSize,
-          cellSize,
-        );
+        final rect = Rect.fromLTWH(c * cellSize, r * cellSize, cellSize, cellSize);
         final key = "${r}_${c}";
         final cellColor = board[key];
 
         if (cellColor != null) {
           Color color;
           switch (cellColor) {
-            case 'blue':
-              color = Colors.blue;
-              break;
-            case 'red':
-              color = Colors.red;
-              break;
-            case 'green':
-              color = Colors.green;
-              break;
-            case 'yellow':
-              color = Colors.yellow;
-              break;
-            default:
-              color = Colors.grey;
+            case 'blue': color = Colors.blue; break;
+            case 'red': color = Colors.red; break;
+            case 'green': color = Colors.green; break;
+            case 'yellow': color = Colors.yellow; break;
+            default: color = Colors.grey;
           }
           final paint = Paint()..color = color;
           canvas.drawRect(rect.inflate(-1), paint);
         } else {
-          // Grille vide
           final paint = Paint()..color = Colors.grey[800]!;
           canvas.drawRect(rect.inflate(-1), paint);
         }
 
-        // Bordure
-        final borderPaint =
-            Paint()
-              ..color = Colors.white10
-              ..style = PaintingStyle.stroke;
+        final borderPaint = Paint()..color = Colors.white10..style = PaintingStyle.stroke;
         canvas.drawRect(rect, borderPaint);
       }
     }
 
-    // --- AJOUT : Indications visuelles des coins de dÃ©part ---
     void drawStartCorner(int r, int c, Color color) {
       if (board["${r}_${c}"] == null) {
-        final rect = Rect.fromLTWH(
-          c * cellSize,
-          r * cellSize,
-          cellSize,
-          cellSize,
-        );
-        canvas.drawRect(
-          rect.inflate(-2),
-          Paint()
-            ..color = color.withOpacity(0.3)
-            ..style = PaintingStyle.fill,
-        );
-        canvas.drawCircle(
-          rect.center,
-          cellSize * 0.2,
-          Paint()..color = color.withOpacity(0.8),
-        );
+        final rect = Rect.fromLTWH(c * cellSize, r * cellSize, cellSize, cellSize);
+        canvas.drawRect(rect.inflate(-2), Paint()..color = color.withOpacity(0.3)..style = PaintingStyle.fill);
+        canvas.drawCircle(rect.center, cellSize * 0.2, Paint()..color = color.withOpacity(0.8));
       }
     }
 
-    // On dessine les 4 coins d'aide (Bleu, Rouge opposÃ©)
     drawStartCorner(0, 0, Colors.blue);
     drawStartCorner(19, 19, Colors.red);
     drawStartCorner(0, 19, Colors.green);
     drawStartCorner(19, 0, Colors.yellow);
-    // ---------------------------------------------------------
 
-    // Preview de la pièce
-    if (previewPiece != null && previewRow != null && previewCol != null) {
-      // --- CORRECTION 4 : La pièce garde TOUJOURS la couleur du joueur (avec opacité) ---
-      final previewPaint =
-          Paint()
-            ..color = previewColor.withOpacity(
-              0.6,
-            ); // Toujours la bonne couleur
+    // 1. DESSIN DU FANTÔME ADVERSE EN DIRECT
+    if (ghostPiece != null && ghostRow != null && ghostCol != null && ghostColor != null) {
+      final ghostFill = Paint()..color = ghostColor!.withOpacity(0.40);
+      final ghostBorder = Paint()
+        ..color = (ghostCanPlace ? ghostColor! : Colors.redAccent).withOpacity(0.8)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.0;
 
-      for (var p in previewPiece!) {
-        final row = p[0] + previewRow!;
-        final col = p[1] + previewCol!;
+      for (var p in ghostPiece!) {
+        final row = p[0] + ghostRow!;
+        final col = p[1] + ghostCol!;
         if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
-          final rect = Rect.fromLTWH(
-            col * cellSize,
-            row * cellSize,
-            cellSize,
-            cellSize,
-          );
-          canvas.drawRect(rect.inflate(-1), previewPaint);
+          final rect = Rect.fromLTWH(col * cellSize, row * cellSize, cellSize, cellSize);
+          canvas.drawRect(rect.inflate(-1), ghostFill);
+          canvas.drawRect(rect, ghostBorder);
         }
       }
+    }
 
-      // --- CORRECTION 5 : Seule la BORDURE devient rouge si le placement est invalide ---
-      final borderPaint =
-          Paint()
-            ..color = canPlace ? Colors.greenAccent : Colors.redAccent
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 2;
+    // 2. DESSIN DE MA PROPRE PRÉVISUALISATION
+    if (previewPiece != null && previewRow != null && previewCol != null) {
+      final previewPaint = Paint()..color = previewColor.withOpacity(0.65);
+      final borderPaint = Paint()
+        ..color = canPlace ? Colors.greenAccent : Colors.redAccent
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.5;
 
       for (var p in previewPiece!) {
         final row = p[0] + previewRow!;
         final col = p[1] + previewCol!;
         if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
-          final rect = Rect.fromLTWH(
-            col * cellSize,
-            row * cellSize,
-            cellSize,
-            cellSize,
-          );
+          final rect = Rect.fromLTWH(col * cellSize, row * cellSize, cellSize, cellSize);
+          canvas.drawRect(rect.inflate(-1), previewPaint);
           canvas.drawRect(rect, borderPaint);
         }
       }
@@ -51848,22 +52189,17 @@ List<Widget> _buildLudoPawns(
           left: x - pawnRadius,
           top: y - pawnRadius,
           child: GestureDetector(
-            onTap:
-                canMove
-                    ? () {
-                      HapticFeedback.mediumImpact();
-                      firebaseService
-                          .movePawnPetitsChevaux(
-                            gameCode,
-                            myId,
-                            ownerId,
-                            pawnIdx,
-                          )
-                          .catchError((e) {
-                            debugPrint(e.toString());
-                          });
-                    }
-                    : null,
+            onTapDown: canMove ? (_) => firebaseService.updateLudoPawnHover(gameCode, myId, ownerId, pawnIdx) : null,
+            onTapCancel: canMove ? () => firebaseService.updateLudoPawnHover(gameCode, myId, null, null) : null,
+            onTap: canMove
+                ? () {
+                    HapticFeedback.mediumImpact();
+                    firebaseService.updateLudoPawnHover(gameCode, myId, null, null);
+                    firebaseService.movePawnPetitsChevaux(gameCode, myId, ownerId, pawnIdx).catchError((e) {
+                      debugPrint(e.toString());
+                    });
+                  }
+                : null,
             child: _Pawn3DWidget(
               color: pColor,
               canMove: canMove,
@@ -54243,135 +54579,84 @@ class _DicePipPainter extends CustomPainter {
 // =============================================================================
 // 🎴 DOS DE CARTE DU VOISIN AVEC TENSION & DESIGN HORREUR CARTOON
 // =============================================================================
-class _SpookyTargetCardBack extends StatefulWidget {
+class _SpookyTargetCardBack extends StatelessWidget {
   final bool isMyTurn;
+  final bool isHoveredLive;
+  final VoidCallback? onHoverStart;
+  final VoidCallback? onHoverEnd;
   final VoidCallback? onTap;
 
-  const _SpookyTargetCardBack({Key? key, required this.isMyTurn, this.onTap})
-    : super(key: key);
-
-  @override
-  State<_SpookyTargetCardBack> createState() => _SpookyTargetCardBackState();
-}
-
-class _SpookyTargetCardBackState extends State<_SpookyTargetCardBack>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animController;
-  late Animation<double> _shakeAnim;
-
-  @override
-  void initState() {
-    super.initState();
-    _animController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 120),
-    );
-    _shakeAnim = Tween<double>(begin: -0.04, end: 0.04).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _animController.dispose();
-    super.dispose();
-  }
+  const _SpookyTargetCardBack({
+    Key? key,
+    required this.isMyTurn,
+    this.isHoveredLive = false,
+    this.onHoverStart,
+    this.onHoverEnd,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (_) {
-        if (widget.isMyTurn) _animController.repeat(reverse: true);
-      },
-      onTapUp: (_) {
-        _animController.stop();
-        _animController.reset();
-      },
-      onTapCancel: () {
-        _animController.stop();
-        _animController.reset();
-      },
-      onTap: widget.onTap,
-      child: AnimatedBuilder(
-        animation: _animController,
-        builder: (context, child) {
-          return Transform.rotate(
-            angle: _animController.isAnimating ? _shakeAnim.value : 0.0,
-            child: Container(
-              width: 64,
-              height: 98,
-              margin: const EdgeInsets.symmetric(horizontal: 4),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF3B0764),
-                    Color(0xFF1E1028),
-                    Color(0xFF0F051D),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color:
-                      widget.isMyTurn
-                          ? const Color(0xFFC084FC)
-                          : Colors.white24,
-                  width: widget.isMyTurn ? 2.0 : 1.0,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        widget.isMyTurn
-                            ? const Color(0xFFA855F7).withOpacity(0.4)
-                            : Colors.black54,
-                    blurRadius: widget.isMyTurn ? 10 : 4,
-                    offset: const Offset(1, 3),
+      onTapDown: (_) => onHoverStart?.call(),
+      onTapUp: (_) => onHoverEnd?.call(),
+      onTapCancel: () => onHoverEnd?.call(),
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        width: 64,
+        height: isHoveredLive ? 112 : 98,
+        transform: Matrix4.translationValues(0, isHoveredLive ? -12 : 0, 0),
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: isHoveredLive
+                ? [const Color(0xFFDC2626), const Color(0xFF7F1D1D)]
+                : [const Color(0xFF3B0764), const Color(0xFF1E1028), const Color(0xFF0F051D)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: isHoveredLive ? Colors.redAccent : (isMyTurn ? const Color(0xFFC084FC) : Colors.white24),
+            width: isHoveredLive ? 2.5 : 1.0,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: isHoveredLive ? Colors.red.withOpacity(0.6) : (isMyTurn ? const Color(0xFFA855F7).withOpacity(0.4) : Colors.black54),
+              blurRadius: isHoveredLive ? 16 : 4,
+              offset: const Offset(1, 3),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(9),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              CustomPaint(size: const Size(64, 98), painter: _SpiderwebCardPainter()),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    isHoveredLive ? Icons.touch_app : Icons.pan_tool_alt_rounded,
+                    size: 26,
+                    color: isHoveredLive ? Colors.white : (isMyTurn ? const Color(0xFFFDE047) : Colors.white30),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    isHoveredLive ? "!!" : "?",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                      color: isHoveredLive ? Colors.white : (isMyTurn ? const Color(0xFFFDE047) : Colors.white38),
+                    ),
                   ),
                 ],
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(9),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Toile d'araignée / motif de fond
-                    CustomPaint(
-                      size: const Size(64, 98),
-                      painter: _SpiderwebCardPainter(),
-                    ),
-                    // Silhouette de main zombie au centre
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.pan_tool_alt_rounded,
-                          size: 26,
-                          color:
-                              widget.isMyTurn
-                                  ? const Color(0xFFFDE047)
-                                  : Colors.white30,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          "?",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900,
-                            color:
-                                widget.isMyTurn
-                                    ? const Color(0xFFFDE047)
-                                    : Colors.white38,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
+            ],
+          ),
+        ),
       ),
     );
   }

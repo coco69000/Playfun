@@ -36,6 +36,52 @@ function sanitizeText(input = "", maxLength = 100) {
     .trim();
 }
 
+function isVersionLower(current, required) {
+  try {
+    const currentParts = (current || "").split(".").map((e) => parseInt(e, 10) || 0);
+    const requiredParts = (required || "").split(".").map((e) => parseInt(e, 10) || 0);
+    const maxLength = Math.max(currentParts.length, requiredParts.length);
+
+    for (let i = 0; i < maxLength; i++) {
+      const curr = currentParts[i] || 0;
+      const req = requiredParts[i] || 0;
+      if (curr < req) return true;
+      if (curr > req) return false;
+    }
+    return false;
+  } catch (e) {
+    return false;
+  }
+}
+
+async function assertClientVersionValid(data = {}) {
+  const { clientBuildNumber, clientVersion } = data || {};
+  const configSnap = await db.collection("app_config").doc("version_control").get();
+  if (!configSnap.exists) return;
+
+  const config = configSnap.data() || {};
+  if (!config.forceUpdateActive) return;
+
+  const minBuild = config.minRequiredBuild || 0;
+  const minVersion = config.minRequiredVersion || "1.0.0";
+
+  if (minBuild > 0) {
+    if (typeof clientBuildNumber !== "number" || clientBuildNumber < minBuild) {
+      throw new HttpsError(
+        "failed-precondition",
+        "Mise à jour requise. Votre version de l'application est obsolète."
+      );
+    }
+  } else if (minVersion) {
+    if (typeof clientVersion !== "string" || isVersionLower(clientVersion, minVersion)) {
+      throw new HttpsError(
+        "failed-precondition",
+        "Mise à jour requise. Votre version de l'application est obsolète."
+      );
+    }
+  }
+}
+
 // =========================================================================
 // 1. LIVEKIT (GÉNÉRATION DU JETON AUDIO / VIDÉO SÉCURISÉ)
 // =========================================================================
@@ -52,6 +98,8 @@ exports.generateLivekitToken = onCall(
         "Vous devez être connecté pour rejoindre l'audio/vidéo."
       );
     }
+
+    await assertClientVersionValid(request.data);
 
     const uid = request.auth.uid;
     const { roomName } = request.data || {};
@@ -159,6 +207,7 @@ exports.spendCoins = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
     const uid = request.auth.uid;
     const { amount } = request.data || {};
     const cost = parseInt(amount, 10);
@@ -200,6 +249,7 @@ exports.setPremiumStatus = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
     const uid = request.auth.uid;
     const { isPremium } = request.data || {};
     const premiumValue = isPremium === true;
@@ -217,6 +267,7 @@ exports.claimDailyBonus = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
     const uid = request.auth.uid;
     const userRef = db.collection("users").doc(uid);
 
@@ -465,6 +516,7 @@ exports.claimGameReward = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
 
     const uid = request.auth.uid;
     const { gameCode } = request.data || {};
@@ -620,6 +672,7 @@ exports.generateAiWords = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Non connecté.");
     }
+    await assertClientVersionValid(request.data);
 
     let { instructions = "", count = 20, gameType = "" } = request.data || {};
     let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 30));
@@ -667,6 +720,15 @@ exports.generateAiWords = onCall(
       userPrompt = `Génère exactement ${parsedCount} mots ou concepts concrets faciles et stimulants à dessiner en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Château", "Boulanger", "Fusée", "Cascade", "Parachute"]`;
     } else if (normalizedGame.includes("just one")) {
       userPrompt = `Génère exactement ${parsedCount} mots mystères uniques en français à faire deviner par des indices. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Chocolat", "Pyramide", "Dinosaure", "Guitare"]`;
+    } else if (normalizedGame.includes("blanc") || normalizedGame.includes("coco") || normalizedGame.includes("bmc")) {
+      systemPrompt = "Tu es un générateur de propositions pour le jeu 'Blanc Manger Coco'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} phrases courtes et amusantes à trous contenant obligatoirement "_____" (5 tirets bas) pour le jeu Blanc Manger Coco. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["La pire chose à trouver dans son lit : _____", "Pour séduire au premier rendez-vous, rien de tel que _____"]`;
+    } else if (normalizedGame.includes("devine") || normalizedGame.includes("tete") || normalizedGame.includes("tête")) {
+      systemPrompt = "Tu es un générateur de mots à deviner pour le jeu 'Devine Tête' (personnages, animaux, métiers, objets célèbres). Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} noms de personnages connus, célébrités, animaux, métiers ou objets à deviner. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Napoléon", "Astronaute", "Pikachu", "Chirurgien", "Panda"]`;
+    } else if (normalizedGame.includes("petit bac") || normalizedGame.includes("baccalaureat") || normalizedGame.includes("bac")) {
+      systemPrompt = "Tu es un générateur de catégories originales pour le jeu du Petit Bac. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} catégories originales et amusantes pour le jeu du Petit Bac. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Objet qui fait du bruit", "Métier dangereux", "Chose qu'on trouve dans un grenier", "Plat réconfortant"]`;
     }
 
     try {
@@ -719,6 +781,7 @@ exports.validateJustOneClue = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
 
     let { clue = "", targetWord = "" } = request.data || {};
     const safeClue = String(clue).slice(0, 50).replace(/[\r\n"']/g, " ").trim();
@@ -766,6 +829,7 @@ exports.sendFriendRequest = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
     const uid = request.auth.uid;
     const { targetUid } = request.data || {};
 
@@ -853,6 +917,7 @@ exports.respondToFriendRequest = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
     const uid = request.auth.uid;
     const { senderUid, senderName, accept } = request.data || {};
 
@@ -944,6 +1009,7 @@ exports.removeFriend = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
     const uid = request.auth.uid;
     const { friendUid } = request.data || {};
 
@@ -973,6 +1039,7 @@ exports.sendGameInvite = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
     const uid = request.auth.uid;
     const { friendUid, gameCode } = request.data || {};
 
@@ -1040,6 +1107,7 @@ exports.sendLoungeInvite = onCall(
     if (!request.auth) {
       throw new HttpsError("unauthenticated", "Vous devez être connecté.");
     }
+    await assertClientVersionValid(request.data);
     const uid = request.auth.uid;
     const { friendUid, loungeId, loungeName } = request.data || {};
 

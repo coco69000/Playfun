@@ -24,6 +24,8 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ForceUpdateService.navigatorKey = GlobalKey<NavigatorState>();
+  await ForceUpdateService.init();
   await Supabase.initialize(
     url: 'https://sarxmbhxptzrsahuymhr.supabase.co',
     anonKey:
@@ -56,6 +58,7 @@ class MyAppWithAuth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: ForceUpdateService.navigatorKey,
       title: 'Jeu de Soirée',
       theme: AppTheme.darkTheme,
       home: AuthGate(),

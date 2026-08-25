@@ -3,6 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'services/force_update_service.dart';
 
 class LivekitUserInfo {
   final String identity;
@@ -212,7 +213,10 @@ class LivekitService extends ChangeNotifier {
         region: "us-central1",
       ).httpsCallable("generateLivekitToken");
 
-      final result = await callable.call({"roomName": roomName});
+      final result = await callable.call({
+        "roomName": roomName,
+        ...ForceUpdateService.versionPayload,
+      });
 
       final data = Map<String, dynamic>.from(result.data as Map);
       final token = data["token"] as String;

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'services/force_update_service.dart';
 
 class PremiumService {
   Future<bool> purchasePremium() async {
@@ -255,7 +256,7 @@ class PlayerState extends ChangeNotifier {
     try {
       FirebaseFunctions.instance
           .httpsCallable('claimDailyBonus')
-          .call()
+          .call(ForceUpdateService.versionPayload)
           .then((res) {
             print("Bonus quotidien validé par le serveur : ${res.data}");
           })
@@ -308,7 +309,10 @@ class PlayerState extends ChangeNotifier {
 
     try {
       final callable = FirebaseFunctions.instance.httpsCallable('sendFriendRequest');
-      await callable.call({'targetUid': targetUid});
+      await callable.call({
+        'targetUid': targetUid,
+        ...ForceUpdateService.versionPayload,
+      });
     } catch (e) {
       debugPrint('Erreur sendFriendRequest: $e');
     }
@@ -348,6 +352,7 @@ class PlayerState extends ChangeNotifier {
         'senderUid': senderUid,
         'senderName': senderName,
         'accept': accept,
+        ...ForceUpdateService.versionPayload,
       });
     } catch (e) {
       debugPrint('Erreur respondToFriendRequest: $e');
@@ -362,7 +367,10 @@ class PlayerState extends ChangeNotifier {
 
     try {
       final callable = FirebaseFunctions.instance.httpsCallable('removeFriend');
-      await callable.call({'friendUid': friendUid});
+      await callable.call({
+        'friendUid': friendUid,
+        ...ForceUpdateService.versionPayload,
+      });
       _friendNamesCache.remove(friendUid);
       notifyListeners();
     } catch (e) {
@@ -380,6 +388,7 @@ class PlayerState extends ChangeNotifier {
       await callable.call({
         'friendUid': friendUid,
         'gameCode': gameCode,
+        ...ForceUpdateService.versionPayload,
       });
     } catch (e) {
       debugPrint('Erreur sendGameInvite: $e');
@@ -405,6 +414,7 @@ class PlayerState extends ChangeNotifier {
         'friendUid': friendUid,
         'loungeId': loungeId,
         'loungeName': loungeName,
+        ...ForceUpdateService.versionPayload,
       });
     } catch (e) {
       debugPrint('Erreur sendLoungeInvite: $e');
@@ -430,7 +440,10 @@ class PlayerState extends ChangeNotifier {
       final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
         'spendCoins',
       );
-      final result = await callable.call({'amount': amount});
+      final result = await callable.call({
+        'amount': amount,
+        ...ForceUpdateService.versionPayload,
+      });
       if (result.data != null && result.data['success'] == true) {
         _coins = (result.data['remainingCoins'] as num).toInt();
         notifyListeners();
@@ -471,7 +484,10 @@ class PlayerState extends ChangeNotifier {
       final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
         'claimGameReward',
       );
-      final result = await callable.call({'gameCode': gameCode});
+      final result = await callable.call({
+        'gameCode': gameCode,
+        ...ForceUpdateService.versionPayload,
+      });
       if (result.data != null) {
         debugPrint("Récompense validée : ${result.data}");
       }
@@ -520,7 +536,10 @@ class PlayerState extends ChangeNotifier {
       final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
         'setPremiumStatus',
       );
-      final result = await callable.call({'isPremium': premium});
+      final result = await callable.call({
+        'isPremium': premium,
+        ...ForceUpdateService.versionPayload,
+      });
       if (result.data != null && result.data['success'] == true) {
         _isPremium = premium;
         notifyListeners();
