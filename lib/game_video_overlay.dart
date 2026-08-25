@@ -238,7 +238,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
       if (participant != null) {
         for (var pub in participant.trackPublications.values) {
           if (pub.kind == TrackType.VIDEO && pub.subscribed && pub.track is VideoTrack) {
-            videoTrack = pub!.track as VideoTrack;
+            videoTrack = pub.track as VideoTrack;
             break;
           }
         }
@@ -416,7 +416,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
       if (participant != null) {
         for (var pub in participant.trackPublications.values) {
           if (pub.kind == TrackType.VIDEO && pub.subscribed && pub.track is VideoTrack) {
-            videoTrack = pub!.track as VideoTrack;
+            videoTrack = pub.track as VideoTrack;
             break;
           }
         }

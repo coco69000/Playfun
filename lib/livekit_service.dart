@@ -3,7 +3,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:convert';
 
 class LivekitUserInfo {
   final String identity;
@@ -92,6 +91,9 @@ class LivekitService extends ChangeNotifier {
       );
       _remoteUsers[event.participant.identity] = LivekitUserInfo(
         identity: event.participant.identity,
+        name: event.participant.name.isNotEmpty ? event.participant.name : 'Joueur',
+        isMuted: !event.participant.isMicrophoneEnabled(),
+        isVideoOff: !event.participant.isCameraEnabled(),
       );
       notifyListeners();
     });
@@ -123,6 +125,28 @@ class LivekitService extends ChangeNotifier {
           _remoteUsers[identity]!.isMuted = false;
         } else if (event.publication.kind == TrackType.VIDEO) {
           _remoteUsers[identity]!.isVideoOff = false;
+        }
+        notifyListeners();
+      }
+    });
+
+    listener.on<TrackSubscribedEvent>((event) {
+      final identity = event.participant.identity;
+      if (_remoteUsers.containsKey(identity)) {
+        if (event.publication.kind == TrackType.VIDEO) {
+          _remoteUsers[identity]!.isVideoOff = false;
+        } else if (event.publication.kind == TrackType.AUDIO) {
+          _remoteUsers[identity]!.isMuted = false;
+        }
+        notifyListeners();
+      }
+    });
+
+    listener.on<TrackUnsubscribedEvent>((event) {
+      final identity = event.participant.identity;
+      if (_remoteUsers.containsKey(identity)) {
+        if (event.publication.kind == TrackType.VIDEO) {
+          _remoteUsers[identity]!.isVideoOff = true;
         }
         notifyListeners();
       }
@@ -198,6 +222,17 @@ class LivekitService extends ChangeNotifier {
 
       await leaveChannel();
       await _room!.connect(livekitUrl, token);
+
+      // Récupérer les participants déjà connectés dans la salle
+      _remoteUsers.clear();
+      for (var participant in _room!.remoteParticipants.values) {
+        _remoteUsers[participant.identity] = LivekitUserInfo(
+          identity: participant.identity,
+          name: participant.name.isNotEmpty ? participant.name : 'Joueur',
+          isMuted: !participant.isMicrophoneEnabled(),
+          isVideoOff: !participant.isCameraEnabled(),
+        );
+      }
 
       await _room!.localParticipant?.setCameraEnabled(videoEnabled);
       await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);

@@ -49,6 +49,7 @@ class PlayerState extends ChangeNotifier {
 
   int get coins => _coins;
   bool get isPremium => _isPremium;
+  bool get isDataLoaded => _isDataLoaded;
   bool get hasCompletedOnboarding => _hasCompletedOnboarding;
   String? get userId => _userId;
   String? get userName => _userName;
@@ -83,63 +84,90 @@ class PlayerState extends ChangeNotifier {
     if (_isDataLoaded && _userId == userId) return;
 
     _userId = userId;
-
-    // Annule l'ancienne écoute si elle existe
     _userSubscription?.cancel();
 
-    // On écoute le document en temps réel
+    // 1. Récupération initiale (attendue avant de rendre l'UI)
+    final initialDoc = await _db.collection('users').doc(userId).get();
+    if (!initialDoc.exists) {
+      _coins = 50;
+      _isPremium = false;
+      _level = 1;
+      _xp = 0;
+      _hasCompletedOnboarding = false;
+      await _db.collection('users').doc(userId).set({
+        'coins': 50,
+        'isPremium': false,
+        'level': 1,
+        'xp': 0,
+        'name': 'Joueur',
+        'gameStats': {},
+        'friends': [],
+        'friendRequests': [],
+        'gameInvites': [],
+        'hasCompletedOnboarding': false,
+        'multiplayerGamesPlayedToday': 0,
+        'videoGamesPlayedToday': 0,
+      });
+    } else {
+      var data = initialDoc.data() as Map<String, dynamic>;
+      _userName = data['name'] ?? 'Joueur';
+      _coins = data['coins'] ?? 50;
+      _isPremium = data['isPremium'] ?? false;
+      _level = data['level'] ?? 1;
+      _xp = data['xp'] ?? 0;
+      _gameStats = data['gameStats'] ?? {};
+      _unlockedBadges = Map<String, dynamic>.from(data['unlockedBadges'] ?? {});
+      _badgeProgress = Map<String, dynamic>.from(data['badgeProgress'] ?? {});
+      _hasCompletedOnboarding = data['hasCompletedOnboarding'] ?? false;
+
+      _friends = List<String>.from(data['friends'] ?? []);
+      _friendRequests = List<Map<String, dynamic>>.from(
+        data['friendRequests'] ?? [],
+      );
+      _gameInvites = List<Map<String, dynamic>>.from(
+        data['gameInvites'] ?? [],
+      );
+      _loungeInvites = List<Map<String, dynamic>>.from(
+        data['loungeInvites'] ?? [],
+      );
+
+      _loadDailyLimits(data);
+      await _fetchFriendNames();
+    }
+
+    _isDataLoaded = true;
+    grantDailyCoinsAndResetLimits();
+    _initFcm(userId);
+    notifyListeners();
+
+    // 2. Écoute en temps réel pour les changements futurs
     _userSubscription = _db.collection('users').doc(userId).snapshots().listen((
       userDoc,
     ) async {
-      if (!userDoc.exists) {
-        // Initialisation du nouveau joueur (se conformer strictement aux règles Firestore)
-        _coins = 50;
-        _isPremium = false;
-        _level = 1;
-        _xp = 0;
-        await _db.collection('users').doc(userId).set({
-          'coins': 50,
-          'isPremium': false,
-          'level': 1,
-          'xp': 0,
-          'name': 'Joueur',
-          'gameStats': {},
-          'friends': [],
-          'friendRequests': [],
-          'gameInvites': [],
-          'multiplayerGamesPlayedToday': 0,
-          'videoGamesPlayedToday': 0,
-        });
-      } else {
-        var data = userDoc.data() as Map<String, dynamic>;
-        _userName = data['name'] ?? 'Joueur';
-        _coins = data['coins'] ?? 50;
-        _isPremium = data['isPremium'] ?? false;
-        _level = data['level'] ?? 1;
-        _xp = data['xp'] ?? 0;
-        _gameStats = data['gameStats'] ?? {};
-        _unlockedBadges = Map<String, dynamic>.from(data['unlockedBadges'] ?? {});
-        _badgeProgress = Map<String, dynamic>.from(data['badgeProgress'] ?? {});
-        _hasCompletedOnboarding = data['hasCompletedOnboarding'] ?? false;
+      if (!userDoc.exists) return;
+      var data = userDoc.data() as Map<String, dynamic>;
+      _userName = data['name'] ?? 'Joueur';
+      _coins = data['coins'] ?? 50;
+      _isPremium = data['isPremium'] ?? false;
+      _level = data['level'] ?? 1;
+      _xp = data['xp'] ?? 0;
+      _gameStats = data['gameStats'] ?? {};
+      _unlockedBadges = Map<String, dynamic>.from(data['unlockedBadges'] ?? {});
+      _badgeProgress = Map<String, dynamic>.from(data['badgeProgress'] ?? {});
+      _hasCompletedOnboarding = data['hasCompletedOnboarding'] ?? false;
 
-        _friends = List<String>.from(data['friends'] ?? []);
-        _friendRequests = List<Map<String, dynamic>>.from(
-          data['friendRequests'] ?? [],
-        );
-        _gameInvites = List<Map<String, dynamic>>.from(
-          data['gameInvites'] ?? [],
-        );
-        _loungeInvites = List<Map<String, dynamic>>.from(
-          data['loungeInvites'] ?? [],
-        );
+      _friends = List<String>.from(data['friends'] ?? []);
+      _friendRequests = List<Map<String, dynamic>>.from(
+        data['friendRequests'] ?? [],
+      );
+      _gameInvites = List<Map<String, dynamic>>.from(
+        data['gameInvites'] ?? [],
+      );
+      _loungeInvites = List<Map<String, dynamic>>.from(
+        data['loungeInvites'] ?? [],
+      );
 
-        _loadDailyLimits(data);
-        await _fetchFriendNames();
-      }
-
-      _isDataLoaded = true;
-      grantDailyCoinsAndResetLimits();
-      _initFcm(userId);
+      _loadDailyLimits(data);
       notifyListeners();
     });
   }
@@ -152,6 +180,14 @@ class PlayerState extends ChangeNotifier {
         badge: true,
         sound: true,
       );
+
+      // Permet d'afficher la bannière même quand l'application est ouverte
+      await messaging.setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+
       final token = await messaging.getToken();
       if (token != null) {
         await _db.collection('users').doc(uid).set({

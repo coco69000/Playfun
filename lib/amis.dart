@@ -3993,7 +3993,6 @@ class FirebaseService {
     }
   }
 
-  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ DeepInfra AI helper (premium soft mode) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   /// Validation de l'authentification du joueur pour empêcher toute usurpation
   static void _verifyPlayerAuth(
     Map<String, dynamic> gameData,
@@ -4027,6 +4026,10 @@ class FirebaseService {
     }
     return clean;
   }
+
+  // ——————————————————————————————————————————————————————————
+  // SILICONFLOW AI HELPER (Qwen 2.5 7B - Mode Soft VIP)
+  // ——————————————————————————————————————————————————————————
 
   /// Appel sécurisé vers la Cloud Function pour la génération de mots IA
   static Future<List<String>> generateAiWords({
@@ -5143,21 +5146,48 @@ class FirebaseService {
   }
 
   Future<void> yamsRollDice(String gameCode, String playerId) async {
-    final snap = await _db.collection('games').doc(gameCode).get();
-    if (!snap.exists) return;
-    final gameData = snap.data() as Map<String, dynamic>;
-    final heldDice = List<bool>.from(
-      gameData['yamsHeldDice'] ?? [false, false, false, false, false],
-    );
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
 
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'rollYamsDice',
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      _verifyPlayerAuth(gameData, playerId);
+
+      if (gameData['yamsCurrentPlayerId'] != playerId) {
+        throw Exception("Ce n'est pas votre tour.");
+      }
+      final int rollsLeft = gameData['yamsRollsLeft'] ?? 3;
+      if (rollsLeft <= 0) {
+        throw Exception("Plus de lancers disponibles.");
+      }
+
+      List<int> currentDice = List<int>.from(
+        gameData['yamsDice'] ?? [0, 0, 0, 0, 0],
       );
-      await callable.call({'gameCode': gameCode, 'heldDice': heldDice});
-    } catch (e) {
-      debugPrint("Erreur lors du lancer de Yams serveur : $e");
-    }
+      final List<bool> heldDice = List<bool>.from(
+        gameData['yamsHeldDice'] ?? [false, false, false, false, false],
+      );
+      final List<bool> effectiveHeld =
+          (rollsLeft == 3) ? [false, false, false, false, false] : heldDice;
+      final rand = Random();
+
+      for (int i = 0; i < 5; i++) {
+        if (!effectiveHeld[i] || currentDice[i] == 0 || rollsLeft == 3) {
+          currentDice[i] = rand.nextInt(6) + 1;
+        }
+      }
+
+      transaction.update(gameRef, {
+        'yamsDice': currentDice,
+        'yamsHeldDice': effectiveHeld,
+        'yamsRollsLeft': rollsLeft - 1,
+        'turnStartTime': FieldValue.serverTimestamp(),
+      });
+    });
   }
 
   Future<void> yamsToggleHold(
@@ -5184,18 +5214,94 @@ class FirebaseService {
     String playerId,
     String category,
   ) async {
-    try {
-      final callable = FirebaseFunctions.instance.httpsCallable(
-        'yamsScoreCategory',
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      _verifyPlayerAuth(gameData, playerId);
+
+      if (gameData['yamsCurrentPlayerId'] != playerId) {
+        throw Exception("Ce n'est pas votre tour.");
+      }
+      if (gameData['yamsRollsLeft'] == 3) {
+        throw Exception("Vous devez lancer les dés avant de marquer.");
+      }
+
+      final rawScores = Map<String, dynamic>.from(gameData['yamsScores'] ?? {});
+      final myScores = Map<String, dynamic>.from(rawScores[playerId] ?? {});
+
+      if (myScores.containsKey(category)) {
+        throw Exception("Catégorie déjà complétée.");
+      }
+
+      final dice = List<int>.from(gameData['yamsDice'] ?? []);
+      if (dice.length != 5) throw Exception("Dés invalides.");
+
+      final score = calculateYamsScore(dice, category);
+      myScores[category] = score;
+      rawScores[playerId] = myScores;
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final isGameOver = players.keys.every(
+        (pId) => (rawScores[pId] as Map?)?.length == 13,
       );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'category': category,
-      });
-    } catch (e) {
-      debugPrint("Erreur yamsScoreCategory serveur : $e");
-      rethrow;
-    }
+
+      final playerOrder = List<String>.from(
+        gameData['yamsPlayerOrder'] ?? players.keys.toList(),
+      );
+      final nextPlayerId =
+          playerOrder[(playerOrder.indexOf(playerId) + 1) % playerOrder.length];
+
+      final updates = <String, dynamic>{
+        'yamsScores': rawScores,
+        'yamsCurrentPlayerId': nextPlayerId,
+        'yamsDice': [],
+        'yamsHeldDice': [false, false, false, false, false],
+        'yamsRollsLeft': 3,
+        'turnStartTime': FieldValue.serverTimestamp(),
+      };
+
+      if (isGameOver) {
+        final Map<String, int> finalScores = {};
+        for (final pId in players.keys) {
+          final pScores = Map<String, dynamic>.from(rawScores[pId] ?? {});
+          final upperSum = [
+            'As',
+            'Deux',
+            'Trois',
+            'Quatre',
+            'Cinq',
+            'Six',
+          ].fold<int>(
+            0,
+            (sum, cat) => sum + ((pScores[cat] as num?)?.toInt() ?? 0),
+          );
+          final bonus = upperSum >= 63 ? 35 : 0;
+          final total =
+              pScores.values.fold<int>(
+                0,
+                (sum, val) => sum + ((val as num?)?.toInt() ?? 0),
+              ) +
+              bonus;
+          finalScores[pId] = total;
+        }
+
+        final winnerId =
+            finalScores.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+        updates['gameState'] = 'gameOver';
+        updates['gameWinner'] = winnerId;
+        updates['yamsFinalScores'] = finalScores;
+        updates['gameEndReason'] =
+            "Grille de Yams complétée par tous les joueurs !";
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
   int calculateYamsScore(List<int> dice, String category) {
@@ -5530,9 +5636,10 @@ class FirebaseService {
     var deck = List<int>.from(gameData['deck'] ?? []);
     var discardPile = List<int>.from(gameData['discardPile'] ?? []);
     var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
-    var playerGrid = (grids[playerId] as List)
-        .map((e) => Map<String, dynamic>.from(e as Map))
-        .toList();
+    var playerGrid =
+        (grids[playerId] as List)
+            .map((e) => Map<String, dynamic>.from(e as Map))
+            .toList();
 
     if (deck.isNotEmpty) {
       discardPile.add(deck.removeAt(0));
@@ -5540,7 +5647,8 @@ class FirebaseService {
 
     int? indexToReveal;
     for (int i = 0; i < playerGrid.length; i++) {
-      if (playerGrid[i]['revealed'] == false && playerGrid[i]['value'] != -100) {
+      if (playerGrid[i]['revealed'] == false &&
+          playerGrid[i]['value'] != -100) {
         indexToReveal = i;
         break;
       }
@@ -5569,9 +5677,10 @@ class FirebaseService {
     String playerId,
   ) async {
     var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
-    var playerGrid = (grids[playerId] as List)
-        .map((e) => Map<String, dynamic>.from(e as Map))
-        .toList();
+    var playerGrid =
+        (grids[playerId] as List)
+            .map((e) => Map<String, dynamic>.from(e as Map))
+            .toList();
     final players = Map<String, dynamic>.from(gameData['players'] ?? {});
 
     for (int col = 0; col < 4; col++) {
@@ -8981,7 +9090,8 @@ class FirebaseService {
           GameData.multiplayerGameData['Infiltré & Mr. White']!['soft']!;
     }
     final rawPair = wordPairs[Random().nextInt(wordPairs.length)];
-    final pair = rawPair.contains(':') ? rawPair.split(':') : [rawPair, rawPair];
+    final pair =
+        rawPair.contains(':') ? rawPair.split(':') : [rawPair, rawPair];
     final wordCivil = pair[0].trim();
     final wordUndercover = (pair.length > 1 ? pair[1] : pair[0]).trim();
 
@@ -9633,16 +9743,74 @@ class FirebaseService {
     String playerId,
     String action,
   ) async {
-    try {
-      final callable = FirebaseFunctions.instance.httpsCallable('tabooAction');
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'action': action,
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      if (gameData['tabooTurnActive'] != true) return;
+
+      _verifyPlayerAuth(gameData, playerId);
+
+      final currentTeamId = gameData['tabooCurrentTeamId'];
+      final tabooTeams = Map<String, dynamic>.from(
+        gameData['tabooTeams'] ?? {},
+      );
+      String? actorTeamId;
+      tabooTeams.forEach((tId, members) {
+        if ((members as List).contains(playerId)) actorTeamId = tId;
       });
-    } catch (e) {
-      debugPrint("Erreur tabooAction serveur : $e");
-      rethrow;
-    }
+
+      final scores = Map<String, int>.from(gameData['tabooScores'] ?? {});
+      final updates = <String, dynamic>{};
+      final String difficulty = gameData['difficulty'] ?? 'soft';
+      final dict =
+          GameWords.tabooWordsData[difficulty] ??
+          GameWords.tabooWordsData['soft']!;
+      final words = dict.keys.toList();
+      final nextWord = words[Random().nextInt(words.length)];
+      final nextForbidden = dict[nextWord] ?? [];
+
+      if (action == 'buzz') {
+        // Sécurité : Seule l'équipe adverse peut buzzer
+        if (actorTeamId == currentTeamId) {
+          throw Exception("Vous ne pouvez pas buzzer votre propre équipe.");
+        }
+        scores[currentTeamId] = max(0, (scores[currentTeamId] ?? 0) - 1);
+        updates['tabooScores'] = scores;
+        updates['tabooCurrentWord'] = nextWord;
+        updates['tabooForbiddenWords'] = nextForbidden;
+
+        _db.collection('users').doc(currentAuthUid).set({
+          'badgeProgress.taboo_buzz_master': FieldValue.increment(1),
+        }, SetOptions(merge: true));
+      } else if (action == 'correct') {
+        // Sécurité : Seule l'équipe active valide
+        if (actorTeamId != currentTeamId) {
+          throw Exception("Seule l'équipe active peut valider.");
+        }
+        scores[currentTeamId] = (scores[currentTeamId] ?? 0) + 1;
+        updates['tabooScores'] = scores;
+        updates['tabooCurrentWord'] = nextWord;
+        updates['tabooForbiddenWords'] = nextForbidden;
+
+        _db.collection('users').doc(currentAuthUid).set({
+          'badgeProgress.taboo_no_buzz': FieldValue.increment(1),
+        }, SetOptions(merge: true));
+      } else if (action == 'skip') {
+        if (actorTeamId != currentTeamId) {
+          throw Exception("Seule l'équipe active peut passer.");
+        }
+        updates['tabooCurrentWord'] = nextWord;
+        updates['tabooForbiddenWords'] = nextForbidden;
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
   Future<void> handleTabooTimeout(String gameCode) async {
@@ -10409,14 +10577,45 @@ class FirebaseService {
   }
 
   Future<void> rollDicePetitsChevaux(String gameCode, String playerId) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'rollPetitsChevauxDice',
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      _verifyPlayerAuth(gameData, playerId);
+
+      final playerOrder = List<String>.from(
+        gameData['petitsChevauxPlayerOrder'] ?? [],
       );
-      await callable.call({'gameCode': gameCode});
-    } catch (e) {
-      debugPrint("Erreur lors du lancer serveur : $e");
-    }
+      final currentIndex = gameData['petitsChevauxCurrentIndex'] ?? 0;
+      if (playerOrder.isEmpty || playerOrder[currentIndex] != playerId) {
+        throw Exception("Ce n'est pas votre tour.");
+      }
+      if (gameData['petitsChevauxHasRolled'] == true) {
+        throw Exception("Dés déjà lancés pour ce tour.");
+      }
+
+      final dice = Random().nextInt(6) + 1;
+      final consecutiveSixes = Map<String, dynamic>.from(
+        gameData['petitsChevauxConsecutiveSixes'] ?? {},
+      );
+      if (dice == 6) {
+        consecutiveSixes[playerId] = (consecutiveSixes[playerId] ?? 0) + 1;
+      } else {
+        consecutiveSixes[playerId] = 0;
+      }
+
+      transaction.update(gameRef, {
+        'petitsChevauxDice': dice,
+        'petitsChevauxHasRolled': true,
+        'petitsChevauxConsecutiveSixes': consecutiveSixes,
+        'turnStartTime': FieldValue.serverTimestamp(),
+      });
+    });
   }
 
   Future<void> movePawnPetitsChevaux(
@@ -13360,53 +13559,195 @@ class FirebaseService {
   Future<void> submitCodenamesClue(
     String gameCode,
     String clue,
-    int count, [
-    String? playerId,
-  ]) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'submitCodenamesClue',
-      );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'clue': clue,
-        'count': count,
+    int count,
+  ) async {
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    final cleanClue =
+        FirebaseService.sanitizeUserInput(clue, maxLength: 30).split(' ').first;
+    if (cleanClue.isEmpty) throw Exception("Indice invalide.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      final activeTeam = gameData['activeTeam'] ?? 'red';
+      final expectedMasterSpy =
+          (activeTeam == 'red')
+              ? gameData['masterSpyRed']
+              : gameData['masterSpyBlue'];
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final spyAuth =
+          players[expectedMasterSpy]?['authUid'] ?? expectedMasterSpy;
+
+      if (currentAuthUid != spyAuth) {
+        throw Exception(
+          "Seul le Maître-Espion de l'équipe active peut donner l'indice.",
+        );
+      }
+      if (gameData['roundState'] != 'clue_giving') {
+        throw Exception("Ce n'est pas la phase de proposition d'indice.");
+      }
+
+      transaction.update(gameRef, {
+        'currentClue': cleanClue,
+        'clueCount': count,
+        'guessesLeft': count + 1,
+        'roundState': 'guessing',
+        'turnStartTime': FieldValue.serverTimestamp(),
       });
-    } catch (e) {
-      print("Erreur submitCodenamesClue: $e");
-      rethrow;
-    }
+    });
   }
 
-  Future<void> revealCodenamesWord(
-    String gameCode,
-    String word, [
-    String? playerId,
-  ]) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'revealCodenamesWord',
+  Future<void> revealCodenamesWord(String gameCode, String word) async {
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    final gameRef = _db.collection('games').doc(gameCode);
+
+    await _db.runTransaction((transaction) async {
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      final activeTeam = gameData['activeTeam'] ?? 'red';
+      final activeTeamPlayers = List<String>.from(
+        (activeTeam == 'red')
+            ? (gameData['redTeam'] ?? [])
+            : (gameData['blueTeam'] ?? []),
       );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'word': word,
-      });
-    } catch (e) {
-      print("Erreur revealCodenamesWord: $e");
-      rethrow;
-    }
+      final masterSpy =
+          (activeTeam == 'red')
+              ? gameData['masterSpyRed']
+              : gameData['masterSpyBlue'];
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final callerId =
+          players.entries
+              .firstWhere(
+                (e) =>
+                    e.value['authUid'] == currentAuthUid ||
+                    e.key == currentAuthUid,
+                orElse: () => const MapEntry('', {}),
+              )
+              .key;
+
+      if (callerId.isEmpty ||
+          !activeTeamPlayers.contains(callerId) ||
+          callerId == masterSpy) {
+        throw Exception(
+          "Seul un Agent de l'équipe active peut deviner un mot.",
+        );
+      }
+      if (gameData['roundState'] != 'guessing') {
+        throw Exception("Ce n'est pas la phase de devinette.");
+      }
+
+      final revealed = Map<String, dynamic>.from(
+        gameData['codenamesRevealed'] ?? {},
+      );
+      if (revealed[word] == true) throw Exception("Ce mot est déjà révélé.");
+
+      // Lecture sécurisée de la carte clé depuis private_data
+      String wordColor = 'neutral';
+      if (masterSpy != null) {
+        final spySnap =
+            await gameRef.collection('private_data').doc(masterSpy).get();
+        if (spySnap.exists) {
+          wordColor = spySnap.data()?['keyCard']?[word] ?? 'neutral';
+        }
+      }
+
+      revealed[word] = true;
+      int redScore = gameData['redScore'] ?? 9;
+      int blueScore = gameData['blueScore'] ?? 8;
+      int guessesLeft = gameData['guessesLeft'] ?? 1;
+
+      final updates = <String, dynamic>{
+        'codenamesRevealed.$word': true,
+        'codenamesRevealedColors.$word': wordColor,
+      };
+
+      if (wordColor == 'assassin') {
+        final winnerTeam = (activeTeam == 'red') ? 'blue' : 'red';
+        updates['gameState'] = 'gameOver';
+        updates['gameWinner'] = winnerTeam;
+        updates['gameEndReason'] =
+            "L'équipe ${activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin !";
+      } else if (wordColor == activeTeam) {
+        if (activeTeam == 'red')
+          redScore--;
+        else
+          blueScore--;
+        guessesLeft--;
+        updates['redScore'] = redScore;
+        updates['blueScore'] = blueScore;
+
+        if (redScore <= 0 || blueScore <= 0) {
+          updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = activeTeam;
+          updates['gameEndReason'] = "Tous les mots ont été découverts !";
+        } else if (guessesLeft <= 0) {
+          updates['activeTeam'] = (activeTeam == 'red') ? 'blue' : 'red';
+          updates['currentClue'] = null;
+          updates['clueCount'] = 0;
+          updates['guessesLeft'] = 0;
+          updates['roundState'] = 'clue_giving';
+          updates['turnStartTime'] = FieldValue.serverTimestamp();
+        } else {
+          updates['guessesLeft'] = guessesLeft;
+        }
+      } else {
+        if (wordColor == 'red') redScore--;
+        if (wordColor == 'blue') blueScore--;
+        updates['redScore'] = redScore;
+        updates['blueScore'] = blueScore;
+
+        final nextTeam = (activeTeam == 'red') ? 'blue' : 'red';
+        if (redScore <= 0 || blueScore <= 0) {
+          updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = redScore <= 0 ? 'red' : 'blue';
+          updates['gameEndReason'] = "Victoire par découverte du dernier mot !";
+        } else {
+          updates['activeTeam'] = nextTeam;
+          updates['currentClue'] = null;
+          updates['clueCount'] = 0;
+          updates['guessesLeft'] = 0;
+          updates['roundState'] = 'clue_giving';
+          updates['turnStartTime'] = FieldValue.serverTimestamp();
+        }
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
-  Future<void> passCodenamesTurn(String gameCode, [String? playerId]) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'passCodenamesTurn',
-      );
-      await callable.call(<String, dynamic>{'gameCode': gameCode});
-    } catch (e) {
-      print("Erreur passCodenamesTurn: $e");
-      rethrow;
-    }
+  Future<void> passCodenamesTurn(String gameCode) async {
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      final activeTeam = gameData['activeTeam'] ?? 'red';
+      final nextTeam = (activeTeam == 'red') ? 'blue' : 'red';
+
+      transaction.update(gameRef, {
+        'activeTeam': nextTeam,
+        'currentClue': null,
+        'clueCount': 0,
+        'guessesLeft': 0,
+        'roundState': 'clue_giving',
+        'turnStartTime': FieldValue.serverTimestamp(),
+      });
+    });
   }
 
   Future<void> submitTimesUpWords(
@@ -13414,18 +13755,63 @@ class FirebaseService {
     String playerId,
     List<String> words,
   ) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'submitTimesUpWords',
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    final cleanWords =
+        words
+            .map((w) => FirebaseService.sanitizeUserInput(w, maxLength: 50))
+            .where((w) => w.isNotEmpty)
+            .toList();
+    if (cleanWords.isEmpty) throw Exception("Mots invalides.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      _verifyPlayerAuth(gameData, playerId);
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final submittedPlayers = Map<String, dynamic>.from(
+        gameData['timesUpSubmittedPlayers'] ?? {},
       );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'words': words,
-      });
-    } catch (e) {
-      print("Erreur submitTimesUpWords: $e");
-      rethrow;
-    }
+      submittedPlayers[playerId] = true;
+
+      final existingWords = List<String>.from(gameData['timesUpWords'] ?? []);
+      for (final w in cleanWords) {
+        if (!existingWords.contains(w)) existingWords.add(w);
+      }
+
+      final updates = <String, dynamic>{
+        'timesUpWords': existingWords,
+        'timesUpSubmittedPlayers.$playerId': true,
+      };
+
+      // Si tous les joueurs ont soumis, on initialise le premier tour
+      if (submittedPlayers.length >= players.length) {
+        final allDeck = List<String>.from(existingWords)..shuffle();
+        final playerIds = players.keys.toList()..shuffle();
+        final half = (playerIds.length / 2).ceil();
+        final teamA = playerIds.sublist(0, half);
+        final teamB = playerIds.sublist(half);
+
+        updates['timesUpCurrentDeck'] = allDeck;
+        updates['timesUpDiscarded'] = [];
+        updates['teams'] = {'teamA': teamA, 'teamB': teamB};
+        updates['teamScores'] = {'teamA': 0, 'teamB': 0};
+        updates['roundState'] = 'playing_round_1';
+        updates['currentRoundNumber'] = 1;
+        updates['currentGuesserId'] = teamA.isNotEmpty ? teamA[0] : playerId;
+        updates['currentRoundTime'] = 30;
+        updates['timesUpTeamATurnIndex'] = 1;
+        updates['timesUpTeamBTurnIndex'] = 0;
+        updates['turnStartTime'] = FieldValue.serverTimestamp();
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
   Future<void> startTimesUpRoundTurn(String gameCode) async {
@@ -13479,19 +13865,91 @@ class FirebaseService {
     String word,
     bool guessed,
   ) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'timesUpGuessWord',
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      final currentGuesserId = gameData['currentGuesserId'];
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+      // SÉCURITÉ : Seul le devineur actif peut valider ou passer
+      final guesserAuth =
+          players[currentGuesserId]?['authUid'] ?? currentGuesserId;
+      if (currentAuthUid != guesserAuth) {
+        throw Exception("Seul le devineur actif peut valider les mots.");
+      }
+
+      final currentDeck = List<String>.from(
+        gameData['timesUpCurrentDeck'] ?? [],
       );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'word': word,
-        'guessed': guessed,
-      });
-    } catch (e) {
-      print("Erreur guessTimesUpWord: $e");
-      rethrow;
-    }
+      final discarded = List<String>.from(gameData['timesUpDiscarded'] ?? []);
+      final teamScores = Map<String, dynamic>.from(
+        gameData['teamScores'] ?? {},
+      );
+      final teams = Map<String, dynamic>.from(gameData['teams'] ?? {});
+      final teamA = List<String>.from(teams['teamA'] ?? []);
+      final isTeamA = teamA.contains(currentGuesserId);
+      final activeTeamKey = isTeamA ? 'teamA' : 'teamB';
+
+      if (currentDeck.isEmpty || currentDeck[0] != word) {
+        final idx = currentDeck.indexOf(word);
+        if (idx != -1) currentDeck.removeAt(idx);
+      } else {
+        currentDeck.removeAt(0);
+      }
+
+      if (guessed) {
+        teamScores[activeTeamKey] = (teamScores[activeTeamKey] ?? 0) + 1;
+        discarded.add(word);
+      } else {
+        currentDeck.add(word); // Remis au fond du paquet
+      }
+
+      final updates = <String, dynamic>{
+        'timesUpCurrentDeck': currentDeck,
+        'timesUpDiscarded': discarded,
+        'teamScores': teamScores,
+      };
+
+      // Fin de manche : plus de cartes dans le deck
+      if (currentDeck.isEmpty) {
+        final int currentRoundNumber = gameData['currentRoundNumber'] ?? 1;
+        final int totalRounds = gameData['timesUpTotalRounds'] ?? 3;
+        final int nextRoundNumber = currentRoundNumber + 1;
+
+        if (nextRoundNumber <= totalRounds) {
+          final newDeck = List<String>.from(gameData['timesUpWords'] ?? [])
+            ..shuffle();
+          final firstGuesser = teamA.isNotEmpty ? teamA[0] : currentGuesserId;
+          updates['currentRoundNumber'] = nextRoundNumber;
+          updates['timesUpCurrentDeck'] = newDeck;
+          updates['timesUpDiscarded'] = [];
+          updates['roundState'] = 'playing_round_$nextRoundNumber';
+          updates['currentRoundTime'] = 30;
+          updates['currentGuesserId'] = firstGuesser;
+          updates['timesUpTeamATurnIndex'] = 1;
+          updates['timesUpTeamBTurnIndex'] = 0;
+          updates['turnStartTime'] = FieldValue.serverTimestamp();
+        } else {
+          updates['gameState'] = 'gameOver';
+          final int scoreA = teamScores['teamA'] ?? 0;
+          final int scoreB = teamScores['teamB'] ?? 0;
+          updates['gameWinner'] =
+              scoreA > scoreB
+                  ? 'teamA'
+                  : (scoreB > scoreA ? 'teamB' : 'equality');
+          updates['gameEndReason'] =
+              "Toutes les manches de Time's Up sont terminées !";
+        }
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
   Future<void> submitPetitBacCategories(
@@ -13567,17 +14025,82 @@ class FirebaseService {
     }
   }
 
-  /// 3. Évaluation officielle et calcul exact des points Petit Bac via Cloud Function
   Future<void> evaluatePetitBacAnswers(String gameCode) async {
-    try {
-      final callable = FirebaseFunctions.instance.httpsCallable(
-        'evaluatePetitBacRound',
-      );
-      await callable.call(<String, dynamic>{'gameCode': gameCode});
-    } catch (e) {
-      debugPrint("Erreur evaluatePetitBacRound serveur : $e");
-      rethrow;
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final gameData = snap.data() as Map<String, dynamic>;
+
+    if (gameData['roundState'] != 'answering') return;
+
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final categories = List<String>.from(gameData['petitBacCategories'] ?? []);
+    final targetLetter =
+        (gameData['petitBacCurrentLetter'] as String? ?? '').toLowerCase();
+
+    final privateAnswersSnap =
+        await gameRef.collection('petit_bac_private_answers').get();
+    final Map<String, Map<String, dynamic>> allPlayerAnswers = {};
+    for (final doc in privateAnswersSnap.docs) {
+      allPlayerAnswers[doc.id] = doc.data();
     }
+
+    final Map<String, int> roundScores = {
+      for (final pId in players.keys) pId: 0,
+    };
+
+    for (final category in categories) {
+      final Map<String, String> validAnswers = {};
+      for (final entry in allPlayerAnswers.entries) {
+        final ans =
+            (entry.value[category] as String? ?? '').trim().toLowerCase();
+        if (ans.isNotEmpty && ans.startsWith(targetLetter)) {
+          validAnswers[entry.key] = ans;
+        }
+      }
+
+      final Map<String, int> wordCounts = {};
+      for (final w in validAnswers.values) {
+        wordCounts[w] = (wordCounts[w] ?? 0) + 1;
+      }
+
+      final validCount = validAnswers.length;
+      for (final entry in validAnswers.entries) {
+        final pId = entry.key;
+        final w = entry.value;
+        if (validCount == 1) {
+          roundScores[pId] =
+              (roundScores[pId] ?? 0) + 20; // Seul joueur à avoir trouvé
+        } else if ((wordCounts[w] ?? 0) == 1) {
+          roundScores[pId] = (roundScores[pId] ?? 0) + 10; // Réponse unique
+        } else {
+          roundScores[pId] = (roundScores[pId] ?? 0) + 5; // Réponse partagée
+        }
+      }
+    }
+
+    final totalScores = Map<String, dynamic>.from(
+      gameData['petitBacTotalScores'] ?? {},
+    );
+    for (final entry in roundScores.entries) {
+      totalScores[entry.key] = (totalScores[entry.key] ?? 0) + entry.value;
+    }
+
+    // Nettoyage des réponses privées
+    final batch = _db.batch();
+    for (final doc in privateAnswersSnap.docs) {
+      batch.delete(doc.reference);
+    }
+    await batch.commit();
+
+    await gameRef.update({
+      'petitBacAnswers': allPlayerAnswers,
+      'petitBacRoundScores': roundScores,
+      'petitBacTotalScores': totalScores,
+      'roundState': 'round_results',
+      'petitBacRoundEnded': true,
+      'turnStartTime': FieldValue.serverTimestamp(),
+    });
   }
 
   Future<void> nextPetitBacRound(String gameCode) async {
@@ -14369,33 +14892,61 @@ class FirebaseService {
     String playerId,
     String clue,
   ) async {
-    try {
-      final callable = FirebaseFunctions.instance.httpsCallable(
-        'submitJustOneClue',
-      );
-      final result = await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'clue': clue,
-      });
-      if (result.data != null && result.data['allSubmitted'] == true) {
-        await _filterAndRevealJustOneClues(gameCode);
-      }
-    } catch (e) {
-      debugPrint("Erreur submitJustOneClue serveur : $e");
-      rethrow;
-    }
-  }
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
 
-  /// 2. Filtrage serveur des indices via Cloud Function
-  Future<void> _filterAndRevealJustOneClues(String gameCode) async {
-    try {
-      final callable = FirebaseFunctions.instance.httpsCallable(
-        'filterJustOneClues',
-      );
-      await callable.call(<String, dynamic>{'gameCode': gameCode});
-    } catch (e) {
-      debugPrint("Erreur filterJustOneClues serveur : $e");
-    }
+    final cleanClue =
+        FirebaseService.sanitizeUserInput(clue, maxLength: 30).trim();
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      _verifyPlayerAuth(gameData, playerId);
+
+      if (gameData['roundState'] != 'clue_giving') {
+        throw Exception("Ce n'est pas la phase de proposition d'indices.");
+      }
+      if (gameData['justOneGuesserId'] == playerId) {
+        throw Exception("Le devineur ne peut pas donner d'indice.");
+      }
+
+      final clues = Map<String, dynamic>.from(gameData['justOneClues'] ?? {});
+      clues[playerId] = cleanClue;
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final nonGuessersCount = players.length - 1;
+
+      final updates = <String, dynamic>{
+        'justOneClues': clues,
+        'justOneSubmittedCount': clues.length,
+      };
+
+      if (clues.length >= nonGuessersCount) {
+        // Filtrage des doublons
+        final Map<String, int> clueCounts = {};
+        for (final c in clues.values) {
+          final normalized = (c as String).toLowerCase().trim();
+          clueCounts[normalized] = (clueCounts[normalized] ?? 0) + 1;
+        }
+
+        final filteredClues = <String>[];
+        for (final entry in clues.entries) {
+          final normalized = (entry.value as String).toLowerCase().trim();
+          if ((clueCounts[normalized] ?? 0) == 1) {
+            filteredClues.add(entry.value as String);
+          }
+        }
+
+        updates['justOneFilteredClues'] = filteredClues;
+        updates['roundState'] = 'reveal_clues';
+        updates['turnStartTime'] = FieldValue.serverTimestamp();
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
   /// 3. Soumission de la proposition du devineur
@@ -14499,29 +15050,74 @@ class FirebaseService {
     String playerId,
     String answer,
   ) async {
-    try {
-      final callable = FirebaseFunctions.instance.httpsCallable(
-        'submitHotPotatoAnswer',
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    final cleanAnswer =
+        sanitizeUserInput(answer, maxLength: 40).trim().toLowerCase();
+    if (cleanAnswer.isEmpty) throw Exception("Réponse invalide.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      _verifyPlayerAuth(gameData, playerId);
+
+      if (gameData['roundState'] != 'playing') {
+        throw Exception("Ce n'est pas le moment de répondre.");
+      }
+      if (gameData['hotPotatoCurrentPlayerId'] != playerId) {
+        throw Exception("Ce n'est pas votre tour d'avoir la bombe !");
+      }
+
+      final usedAnswers = List<String>.from(
+        gameData['hotPotatoUsedAnswers'] ?? [],
       );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'answer': answer,
+      if (usedAnswers.contains(cleanAnswer)) {
+        throw Exception("Cette réponse a déjà été donnée !");
+      }
+      usedAnswers.add(cleanAnswer);
+
+      final playerOrder = List<String>.from(
+        gameData['playerOrder'] ?? gameData['players'].keys.toList(),
+      );
+      final currentIdx = playerOrder.indexOf(playerId);
+      final nextIdx = (currentIdx + 1) % playerOrder.length;
+      final nextPlayerId = playerOrder[nextIdx];
+
+      transaction.update(gameRef, {
+        'hotPotatoUsedAnswers': usedAnswers,
+        'hotPotatoCurrentPlayerId': nextPlayerId,
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'gameLog': FieldValue.arrayUnion([
+          "${gameData['players'][playerId]['name']} a répondu '$cleanAnswer' et passe la bombe !",
+        ]),
       });
-    } catch (e) {
-      debugPrint("Erreur submitHotPotatoAnswer serveur : $e");
-      rethrow;
-    }
+    });
   }
 
   Future<void> handleHotPotatoTimeout(String gameCode) async {
-    try {
-      final callable = FirebaseFunctions.instance.httpsCallable(
-        'handleHotPotatoTimeout',
-      );
-      await callable.call(<String, dynamic>{'gameCode': gameCode});
-    } catch (e) {
-      debugPrint("Erreur handleHotPotatoTimeout serveur : $e");
-    }
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final gameData = snap.data() as Map<String, dynamic>;
+
+    if (gameData['roundState'] != 'playing') return;
+
+    final loserId = gameData['hotPotatoCurrentPlayerId'];
+    if (loserId == null) return;
+
+    final loserName = gameData['players']?[loserId]?['name'] ?? 'Joueur';
+
+    await gameRef.update({
+      'roundState': 'result',
+      'roundLoserId': loserId,
+      'players.$loserId.score': FieldValue.increment(1),
+      'gameEndReason': "La bombe a explosé dans les mains de $loserName !",
+      'turnStartTime': FieldValue.serverTimestamp(),
+    });
   }
 
   Future<void> nextHotPotatoRound(String gameCode) async {
@@ -15897,18 +16493,30 @@ class FirebaseService {
     String playerId,
     bool isTrue,
   ) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'submitLiarTruthDeclaration',
-      );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'isTrue': isTrue,
-      });
-    } catch (e) {
-      print("Erreur submitStoryTruth: $e");
-      rethrow;
-    }
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      _verifyPlayerAuth(gameData, playerId);
+
+      final truths = Map<String, dynamic>.from(gameData['storyTruths'] ?? {});
+      truths[playerId] = isTrue;
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final updates = <String, dynamic>{'storyTruths': truths};
+
+      if (truths.length >= players.length) {
+        updates['roundState'] = 'voting';
+        updates['turnStartTime'] = FieldValue.serverTimestamp();
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
   Future<void> submitVote(
@@ -16101,18 +16709,50 @@ class FirebaseService {
     String storyOwnerId,
     String voteValue,
   ) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'submitLiarVote',
-      );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'storyOwnerId': storyOwnerId,
-        'voteValue': voteValue,
-      });
-    } catch (e) {
-      print("Erreur submitSimplifiedLiarVote: $e");
-      rethrow;
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    final gameRef = _db.collection('games').doc(gameCode);
+
+    bool allVotesIn = false;
+    await _db.runTransaction((transaction) async {
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      if (gameData['roundState'] != 'voting') return;
+
+      _verifyPlayerAuth(gameData, voterId);
+
+      final votes = Map<String, dynamic>.from(gameData['votes'] ?? {});
+      final storyVotes = Map<String, dynamic>.from(votes[storyOwnerId] ?? {});
+      storyVotes[voterId] = voteValue;
+      votes[storyOwnerId] = storyVotes;
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final expectedVotesPerStory =
+          players.length - 1; // Tous les joueurs sauf l'auteur
+
+      int completedStories = 0;
+      for (final pId in players.keys) {
+        final sVotes = Map<String, dynamic>.from(votes[pId] ?? {});
+        if (sVotes.length >= expectedVotesPerStory) {
+          completedStories++;
+        }
+      }
+
+      if (completedStories >= players.length) {
+        allVotesIn = true;
+      }
+
+      transaction.update(gameRef, {'votes': votes});
+    });
+
+    if (allVotesIn) {
+      final snap = await gameRef.get();
+      if (snap.exists) {
+        await _tallyVotes(gameRef, snap.data() as Map<String, dynamic>);
+      }
     }
   }
 
@@ -16121,33 +16761,86 @@ class FirebaseService {
     String voterId,
     String targetPlayerId,
   ) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'submitUndercoverVote',
-      );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'targetPlayerId': targetPlayerId,
-      });
-    } catch (e) {
-      print("Erreur submitUndercoverVote: $e");
-      rethrow;
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    final gameRef = _db.collection('games').doc(gameCode);
+    bool shouldTally = false;
+
+    await _db.runTransaction((transaction) async {
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      if (gameData['roundState'] != 'voting') return;
+
+      _verifyPlayerAuth(gameData, voterId);
+
+      final votes = Map<String, dynamic>.from(gameData['votes'] ?? {});
+      votes[voterId] = targetPlayerId;
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final alivePlayers =
+          players.entries
+              .where((e) => e.value['isEliminated'] != true)
+              .map((e) => e.key)
+              .toList();
+
+      if (votes.length >= alivePlayers.length) {
+        shouldTally = true;
+      }
+
+      transaction.update(gameRef, {'votes': votes});
+    });
+
+    if (shouldTally) {
+      final snap = await gameRef.get();
+      if (snap.exists) {
+        await _tallyVotes(gameRef, snap.data() as Map<String, dynamic>);
+      }
     }
   }
 
   Future<void> validateMrWhiteGuess(String gameCode, String guess) async {
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'validateMrWhiteGuess',
-      );
-      await callable.call(<String, dynamic>{
-        'gameCode': gameCode,
-        'guess': guess,
-      });
-    } catch (e) {
-      print("Erreur validateMrWhiteGuess: $e");
-      rethrow;
-    }
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    final cleanGuess =
+        sanitizeUserInput(guess, maxLength: 40).trim().toLowerCase();
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+
+      final civilianWord =
+          (gameData['civilianWord'] as String? ?? '').trim().toLowerCase();
+      final isCorrect = cleanGuess == civilianWord;
+
+      final updates = <String, dynamic>{
+        'mrWhiteGuess': cleanGuess,
+        'mrWhiteGuessCorrect': isCorrect,
+        'roundState': 'result',
+        'turnStartTime': FieldValue.serverTimestamp(),
+      };
+
+      if (isCorrect) {
+        updates['roundWinnerId'] = 'mr_white';
+        updates['gameEndReason'] =
+            "Mr. White a deviné le mot secret : '$civilianWord' !";
+        final mrWhiteId = gameData['mrWhiteId'];
+        if (mrWhiteId != null) {
+          updates['players.$mrWhiteId.score'] = FieldValue.increment(3);
+        }
+      } else {
+        updates['roundWinnerId'] = 'civilians';
+        updates['gameEndReason'] =
+            "Mr. White a échoué à deviner le mot (c'était '$civilianWord').";
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
   Future<void> _tallyVotes(
@@ -16563,11 +17256,13 @@ class FirebaseService {
         gameData['revealedInitialCardsCount'] ?? {},
       );
 
-      var playerGrid = (grids[playerId] as List)
-          .map((e) => Map<String, dynamic>.from(e as Map))
-          .toList();
+      var playerGrid =
+          (grids[playerId] as List)
+              .map((e) => Map<String, dynamic>.from(e as Map))
+              .toList();
 
-      if ((counts[playerId] ?? 0) < 2 && playerGrid[cardIndex]['revealed'] == false) {
+      if ((counts[playerId] ?? 0) < 2 &&
+          playerGrid[cardIndex]['revealed'] == false) {
         playerGrid[cardIndex]['revealed'] = true;
         grids[playerId] = playerGrid;
         counts[playerId] = (counts[playerId] ?? 0) + 1;
@@ -16621,9 +17316,10 @@ class FirebaseService {
       }
 
       var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
-      var playerGrid = (grids[playerId] as List)
-          .map((e) => Map<String, dynamic>.from(e as Map))
-          .toList();
+      var playerGrid =
+          (grids[playerId] as List)
+              .map((e) => Map<String, dynamic>.from(e as Map))
+              .toList();
       var discardPile = List<int>.from(gameData['discardPile'] ?? []);
       if (discardPile.isEmpty) return;
 
@@ -16719,9 +17415,10 @@ class FirebaseService {
       }
 
       var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
-      var playerGrid = (grids[playerId] as List)
-          .map((e) => Map<String, dynamic>.from(e as Map))
-          .toList();
+      var playerGrid =
+          (grids[playerId] as List)
+              .map((e) => Map<String, dynamic>.from(e as Map))
+              .toList();
       var discardPile = List<int>.from(gameData['discardPile'] ?? []);
       int drawnCard = gameData['drawnCard'];
 
@@ -27315,10 +28012,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     String previousAuthorName = "";
 
     if (variant == 'classic') {
-      int stepIndex =
-          passingMode == 'single'
-              ? steps.length
-              : currentRound;
+      int stepIndex = passingMode == 'single' ? steps.length : currentRound;
       final promptItem =
           stepIndex < GameData.cadavreExquisPrompts.length
               ? GameData.cadavreExquisPrompts[stepIndex]
@@ -41615,7 +42309,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           if (roundState == 'bidding' && isMyTurn)
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              margin: const EdgeInsets.symmetric(horizontal: 10, bottom: 6),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 6),
               decoration: BoxDecoration(
                 color: const Color(0xFF14141E),
                 borderRadius: BorderRadius.circular(18),
@@ -45549,7 +46243,8 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
             : (GameData.offlineUndercoverData[_difficulty]?['wordPairs'] ??
                 GameData.offlineUndercoverData['soft']!['wordPairs']!);
     final rawPair = wordPairs[random.nextInt(wordPairs.length)];
-    final pair = rawPair.contains(':') ? rawPair.split(':') : [rawPair, rawPair];
+    final pair =
+        rawPair.contains(':') ? rawPair.split(':') : [rawPair, rawPair];
     _wordCivil = pair[0].trim();
     _wordUndercover = (pair.length > 1 ? pair[1] : pair[0]).trim();
 
@@ -49766,15 +50461,13 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                               );
                                               try {
                                                 final words =
-                                                    await FirebaseService
-                                                        .generateAiWords(
-                                                          instructions:
-                                                              _aiThemeCtrl.text
-                                                                  .trim(),
-                                                          count: 40,
-                                                          gameType:
-                                                              'Devine Tête',
-                                                        );
+                                                    await FirebaseService.generateAiWords(
+                                                      instructions:
+                                                          _aiThemeCtrl.text
+                                                              .trim(),
+                                                      count: 40,
+                                                      gameType: 'Devine Tête',
+                                                    );
                                                 if (words.isNotEmpty) {
                                                   setState(() {
                                                     _customWords.addAll(words);
@@ -52297,41 +52990,54 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen> {
                         children:
                             onlineIds.map((id) {
                               String name = players[id]?['name'] ?? 'Joueur';
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 16,
-                                          child: Text(name[0].toUpperCase()),
-                                        ),
-                                        Positioned(
-                                          right: 0,
-                                          bottom: 0,
-                                          child: Container(
-                                            width: 12,
-                                            height: 12,
-                                            decoration: BoxDecoration(
-                                              color: Colors.green,
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: Colors.black,
+                              return GestureDetector(
+                                onTap: () {
+                                  showUserProfileDialog(
+                                    context,
+                                    targetUid: id,
+                                    currentUserId: widget.playerId,
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 16,
+                                            child: Text(
+                                              name.isNotEmpty
+                                                  ? name[0].toUpperCase()
+                                                  : '?',
+                                            ),
+                                          ),
+                                          Positioned(
+                                            right: 0,
+                                            bottom: 0,
+                                            child: Container(
+                                              width: 12,
+                                              height: 12,
+                                              decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      name,
-                                      style: TextStyle(fontSize: 10),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                      Text(
+                                        name,
+                                        style: TextStyle(fontSize: 10),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             }).toList(),
@@ -52676,11 +53382,25 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen> {
                                         ? CrossAxisAlignment.end
                                         : CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    isMe ? "Moi" : msg['senderName'],
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: Colors.white70,
+                                  GestureDetector(
+                                    onTap: () {
+                                      if (msg['senderId'] != null) {
+                                        showUserProfileDialog(
+                                          context,
+                                          targetUid: msg['senderId'],
+                                          currentUserId: widget.playerId,
+                                        );
+                                      }
+                                    },
+                                    child: Text(
+                                      isMe
+                                          ? "Moi"
+                                          : (msg['senderName'] ?? 'Joueur'),
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.white70,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
                                   Text(

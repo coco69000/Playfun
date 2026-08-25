@@ -49,3 +49,8 @@ app.*.map.json
 
 # Browser profiles
 .profile1/
+
+# Environment Variables & Secrets
+.env
+.env.*
+.env.local

@@ -7,6 +7,8 @@ import 'player_state.dart';
 import 'theme/app_colors.dart';
 import 'widgets/empty_state_view.dart';
 import 'widgets/game_card_feedback.dart';
+import 'widgets/user_profile_dialog.dart';
+export 'widgets/user_profile_dialog.dart';
 
 final List<Map<String, dynamic>> allAppGames = [
   {
@@ -875,51 +877,61 @@ class _FriendsScreenState extends State<FriendsScreen> {
                   bool isFriend = friends.contains(user['uid']);
                   return Card(
                     color: Colors.deepPurple[900]?.withOpacity(0.5),
-                    child: Container(
-                      width: 150,
-                      padding: EdgeInsets.all(8),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            child: Text(user['name'][0].toUpperCase()),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            user['name'],
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 8),
-                          isFriend
-                              ? Text(
-                                "Déjà ami",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () {
+                        showUserProfileDialog(
+                          context,
+                          targetUid: user['uid'],
+                          currentUserId: widget.playerId,
+                        );
+                      },
+                      child: Container(
+                        width: 150,
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              child: Text(user['name'] != null && user['name'].toString().isNotEmpty ? user['name'][0].toUpperCase() : '?'),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              user['name'] ?? 'Joueur',
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 8),
+                            isFriend
+                                ? const Text(
+                                  "Déjà ami",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
+                                )
+                                : ElevatedButton(
+                                  onPressed: () {
+                                    playerState.sendFriendRequest(
+                                      user['uid'],
+                                      user['name'] ?? 'Joueur',
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text("Demande envoyée à ${user['name'] ?? 'ce joueur'} !"),
+                                      ),
+                                    );
+                                    setState(
+                                      () => _searchResults.removeAt(index),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "Ajouter",
+                                    style: TextStyle(fontSize: 12),
+                                  ),
                                 ),
-                              )
-                              : ElevatedButton(
-                                onPressed: () {
-                                  playerState.sendFriendRequest(
-                                    user['uid'],
-                                    user['name'],
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text("Demande envoyée !"),
-                                    ),
-                                  );
-                                  setState(
-                                    () => _searchResults.removeAt(index),
-                                  );
-                                },
-                                child: Text(
-                                  "Ajouter",
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                              ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -950,6 +962,13 @@ class _FriendsScreenState extends State<FriendsScreen> {
                       child: Icon(Icons.person, color: Colors.black),
                     ),
                     title: Text("${r['name']} veut être votre ami"),
+                    onTap: () {
+                      showUserProfileDialog(
+                        context,
+                        targetUid: r['uid'],
+                        currentUserId: widget.playerId,
+                      );
+                    },
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -1019,6 +1038,13 @@ class _FriendsScreenState extends State<FriendsScreen> {
                             friendName,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
+                          onTap: () {
+                            showUserProfileDialog(
+                              context,
+                              targetUid: friendId,
+                              currentUserId: widget.playerId,
+                            );
+                          },
                           trailing: IconButton(
                             icon: const Icon(
                               Icons.person_remove,

@@ -227,6 +227,13 @@ class _MainScreenState extends State<MainScreen> {
     final authService = Provider.of<AuthService>(context, listen: false);
     final playerState = Provider.of<PlayerState>(context);
 
+    // 👉 Empêche l'affichage prématuré de l'onboarding tant que les données ne sont pas chargées
+    if (!playerState.isDataLoaded) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     if (playerState.gameInvites.isNotEmpty) {
       for (var invite in playerState.gameInvites) {
         String code = invite['gameCode'];
