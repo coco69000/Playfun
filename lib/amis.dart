@@ -3108,38 +3108,69 @@ class FirebaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   // 1. Cadavre Exquis : Nombre de mots tapés en direct
-  Future<void> updateCadavreTypingCount(String gameCode, String playerId, int wordCount) async {
+  Future<void> updateCadavreTypingCount(
+    String gameCode,
+    String playerId,
+    int wordCount,
+  ) async {
     final ref = FirebaseDatabase.instance.ref('games/$gameCode/cadavre_typing');
     if (wordCount <= 0) {
       await ref.remove();
     } else {
-      await ref.set({'playerId': playerId, 'wordCount': wordCount, 'timestamp': ServerValue.timestamp});
+      await ref.set({
+        'playerId': playerId,
+        'wordCount': wordCount,
+        'timestamp': ServerValue.timestamp,
+      });
     }
   }
+
   Stream<DatabaseEvent> getCadavreTypingStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/cadavre_typing').onValue;
 
   // 2. Poker : Montant de relance en cours de sélection sur le slider
-  Future<void> updatePokerRaisePreview(String gameCode, String playerId, int? amount) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/poker_raise_preview');
+  Future<void> updatePokerRaisePreview(
+    String gameCode,
+    String playerId,
+    int? amount,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref(
+      'games/$gameCode/poker_raise_preview',
+    );
     if (amount == null) {
       await ref.remove();
     } else {
-      await ref.set({'playerId': playerId, 'amount': amount, 'timestamp': ServerValue.timestamp});
+      await ref.set({
+        'playerId': playerId,
+        'amount': amount,
+        'timestamp': ServerValue.timestamp,
+      });
     }
   }
+
   Stream<DatabaseEvent> getPokerRaisePreviewStream(String gameCode) =>
-      FirebaseDatabase.instance.ref('games/$gameCode/poker_raise_preview').onValue;
+      FirebaseDatabase.instance
+          .ref('games/$gameCode/poker_raise_preview')
+          .onValue;
 
   // 3. Skull : Enchère en cours de sélection (Live Bid)
-  Future<void> updateLiveBidOrRaise(String gameCode, String playerId, int? amount) async {
+  Future<void> updateLiveBidOrRaise(
+    String gameCode,
+    String playerId,
+    int? amount,
+  ) async {
     final ref = FirebaseDatabase.instance.ref('games/$gameCode/skull_live_bid');
     if (amount == null) {
       await ref.remove();
     } else {
-      await ref.set({'bidderId': playerId, 'amount': amount, 'timestamp': ServerValue.timestamp});
+      await ref.set({
+        'bidderId': playerId,
+        'amount': amount,
+        'timestamp': ServerValue.timestamp,
+      });
     }
   }
+
   Stream<DatabaseEvent> getLiveBidStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/skull_live_bid').onValue;
 
@@ -3170,54 +3201,93 @@ class FirebaseService {
       });
     }
   }
+
   Stream<DatabaseEvent> getBlokusLivePreviewStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/blokus_preview').onValue;
 
   // 1. Zombie : Carte visée
-  Future<void> updateZombieCardHover(String gameCode, String playerId, int? targetCardIndex) async {
+  Future<void> updateZombieCardHover(
+    String gameCode,
+    String playerId,
+    int? targetCardIndex,
+  ) async {
     final ref = FirebaseDatabase.instance.ref('games/$gameCode/zombie_hover');
     if (targetCardIndex == null) {
       await ref.remove();
     } else {
-      await ref.set({'playerId': playerId, 'index': targetCardIndex, 'timestamp': ServerValue.timestamp});
+      await ref.set({
+        'playerId': playerId,
+        'index': targetCardIndex,
+        'timestamp': ServerValue.timestamp,
+      });
     }
   }
+
   Stream<DatabaseEvent> getZombieHoverStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/zombie_hover').onValue;
 
   // 2. Petits Chevaux : Pion visé
-  Future<void> updateLudoPawnHover(String gameCode, String playerId, String? targetOwnerId, int? pawnIndex) async {
+  Future<void> updateLudoPawnHover(
+    String gameCode,
+    String playerId,
+    String? targetOwnerId,
+    int? pawnIndex,
+  ) async {
     final ref = FirebaseDatabase.instance.ref('games/$gameCode/ludo_hover');
     if (pawnIndex == null || targetOwnerId == null) {
       await ref.remove();
     } else {
-      await ref.set({'playerId': playerId, 'ownerId': targetOwnerId, 'pawnIndex': pawnIndex, 'timestamp': ServerValue.timestamp});
+      await ref.set({
+        'playerId': playerId,
+        'ownerId': targetOwnerId,
+        'pawnIndex': pawnIndex,
+        'timestamp': ServerValue.timestamp,
+      });
     }
   }
+
   Stream<DatabaseEvent> getLudoHoverStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/ludo_hover').onValue;
 
   // 3. Jeu de Dames : Pièce sélectionnée
-  Future<void> updateCheckersSelectionLive(String gameCode, String playerId, String? fromKey) async {
+  Future<void> updateCheckersSelectionLive(
+    String gameCode,
+    String playerId,
+    String? fromKey,
+  ) async {
     final ref = FirebaseDatabase.instance.ref('games/$gameCode/checkers_live');
     if (fromKey == null) {
       await ref.remove();
     } else {
-      await ref.set({'playerId': playerId, 'fromKey': fromKey, 'timestamp': ServerValue.timestamp});
+      await ref.set({
+        'playerId': playerId,
+        'fromKey': fromKey,
+        'timestamp': ServerValue.timestamp,
+      });
     }
   }
+
   Stream<DatabaseEvent> getCheckersLiveStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/checkers_live').onValue;
 
   // 4. Dominos : Extrémité visée
-  Future<void> updateDominoHoverEnd(String gameCode, String playerId, int? endValue) async {
+  Future<void> updateDominoHoverEnd(
+    String gameCode,
+    String playerId,
+    int? endValue,
+  ) async {
     final ref = FirebaseDatabase.instance.ref('games/$gameCode/domino_hover');
     if (endValue == null) {
       await ref.remove();
     } else {
-      await ref.set({'playerId': playerId, 'endValue': endValue, 'timestamp': ServerValue.timestamp});
+      await ref.set({
+        'playerId': playerId,
+        'endValue': endValue,
+        'timestamp': ServerValue.timestamp,
+      });
     }
   }
+
   Stream<DatabaseEvent> getDominoHoverStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/domino_hover').onValue;
 
@@ -12552,8 +12622,7 @@ class FirebaseService {
       List<String> words;
       if (preAiWords != null && preAiWords.isNotEmpty) {
         words = preAiWords.map((e) => e.toString()).toList()..shuffle();
-      } else if (aiInstructions != null &&
-          aiInstructions.isNotEmpty) {
+      } else if (aiInstructions != null && aiInstructions.isNotEmpty) {
         final aiWords = await FirebaseService.generateAiWords(
           instructions: aiInstructions,
           count: 40,
@@ -12598,8 +12667,7 @@ class FirebaseService {
       List<String> words;
       if (preAiWordsJO != null && preAiWordsJO.isNotEmpty) {
         words = preAiWordsJO.map((e) => e.toString()).toList()..shuffle();
-      } else if (aiInstructionsJO != null &&
-          aiInstructionsJO.isNotEmpty) {
+      } else if (aiInstructionsJO != null && aiInstructionsJO.isNotEmpty) {
         final aiWords = await FirebaseService.generateAiWords(
           instructions: aiInstructionsJO,
           count: 40,
@@ -19225,8 +19293,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         videoEnabled: _videoEnabled,
         audioEnabled: _audioEnabled,
         aiInstructions:
-            (playerState.isPremium &&
-                    _aiSupportedGames.contains(_selectedGame))
+            (playerState.isPremium && _aiSupportedGames.contains(_selectedGame))
                 ? (_aiInstructionsController.text.trim().isNotEmpty
                     ? _aiInstructionsController.text.trim()
                     : null)
@@ -27048,7 +27115,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   int? hoveredIndex;
                   if (snap.hasData && snap.data!.snapshot.value != null) {
                     try {
-                      final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                      final raw = Map<String, dynamic>.from(
+                        snap.data!.snapshot.value as Map,
+                      );
                       hoveredIndex = raw['index'] as int?;
                     } catch (_) {}
                   }
@@ -27058,7 +27127,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     children: [
                       Text(
                         "Main de $targetName (${targetHand.length} cartes)",
-                        style: const TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 10),
                       Expanded(
@@ -27067,26 +27140,62 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             scrollDirection: Axis.horizontal,
                             physics: const BouncingScrollPhysics(),
                             child: Row(
-                              children: targetHand.asMap().entries.map((entry) {
-                                final int index = entry.key;
-                                final bool isHovered = hoveredIndex == index;
+                              children:
+                                  targetHand.asMap().entries.map((entry) {
+                                    final int index = entry.key;
+                                    final bool isHovered =
+                                        hoveredIndex == index;
 
-                                return _SpookyTargetCardBack(
-                                  isMyTurn: isMyTurn,
-                                  isHoveredLive: isHovered,
-                                  onHoverStart: isMyTurn ? () => _firebaseService.updateZombieCardHover(widget.gameCode, playerId, index) : null,
-                                  onHoverEnd: isMyTurn ? () => _firebaseService.updateZombieCardHover(widget.gameCode, playerId, null) : null,
-                                  onTap: isMyTurn && !_isActionPending
-                                      ? () async {
-                                          HapticFeedback.heavyImpact();
-                                          setState(() => _isActionPending = true);
-                                          await _firebaseService.updateZombieCardHover(widget.gameCode, playerId, null);
-                                          await _firebaseService.zombieTakeCard(widget.gameCode, playerId, index);
-                                          if (mounted) setState(() => _isActionPending = false);
-                                        }
-                                      : null,
-                                );
-                              }).toList(),
+                                    return _SpookyTargetCardBack(
+                                      isMyTurn: isMyTurn,
+                                      isHoveredLive: isHovered,
+                                      onHoverStart:
+                                          isMyTurn
+                                              ? () => _firebaseService
+                                                  .updateZombieCardHover(
+                                                    widget.gameCode,
+                                                    playerId,
+                                                    index,
+                                                  )
+                                              : null,
+                                      onHoverEnd:
+                                          isMyTurn
+                                              ? () => _firebaseService
+                                                  .updateZombieCardHover(
+                                                    widget.gameCode,
+                                                    playerId,
+                                                    null,
+                                                  )
+                                              : null,
+                                      onTap:
+                                          isMyTurn && !_isActionPending
+                                              ? () async {
+                                                HapticFeedback.heavyImpact();
+                                                setState(
+                                                  () => _isActionPending = true,
+                                                );
+                                                await _firebaseService
+                                                    .updateZombieCardHover(
+                                                      widget.gameCode,
+                                                      playerId,
+                                                      null,
+                                                    );
+                                                await _firebaseService
+                                                    .zombieTakeCard(
+                                                      widget.gameCode,
+                                                      playerId,
+                                                      index,
+                                                    );
+                                                if (mounted)
+                                                  setState(
+                                                    () =>
+                                                        _isActionPending =
+                                                            false,
+                                                  );
+                                              }
+                                              : null,
+                                    );
+                                  }).toList(),
                             ),
                           ),
                         ),
@@ -27531,22 +27640,35 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.brown[900]!, width: 6),
-                boxShadow: const [BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(0, 5))],
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black45,
+                    blurRadius: 10,
+                    offset: Offset(0, 5),
+                  ),
+                ],
               ),
               child: StreamBuilder<DatabaseEvent>(
                 stream: _firebaseService.getCheckersLiveStream(widget.gameCode),
                 builder: (context, liveSnap) {
                   String? liveSelectedPiece = _selectedCheckersPiece;
-                  if (!isMyTurn && liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+                  if (!isMyTurn &&
+                      liveSnap.hasData &&
+                      liveSnap.data!.snapshot.value != null) {
                     try {
-                      final raw = Map<String, dynamic>.from(liveSnap.data!.snapshot.value as Map);
+                      final raw = Map<String, dynamic>.from(
+                        liveSnap.data!.snapshot.value as Map,
+                      );
                       liveSelectedPiece = raw['fromKey'] as String?;
                     } catch (_) {}
                   }
 
                   return GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 8),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 8,
+                        ),
                     itemCount: 64,
                     itemBuilder: (context, index) {
                       int r = index ~/ 8;
@@ -27557,64 +27679,143 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
                       bool isSelected = key == liveSelectedPiece;
                       bool isMandatory = key == mandatoryPiece;
-                      Color bgColor = isDark ? Colors.brown[700]! : const Color(0xFFF5F5DC);
+                      Color bgColor =
+                          isDark ? Colors.brown[700]! : const Color(0xFFF5F5DC);
 
                       return GestureDetector(
-                        onTap: isMyTurn && isDark
-                            ? () {
-                                if (_selectedCheckersPiece == null) {
-                                  if (piece != null && piece.startsWith(currentColor)) {
-                                    if (mandatoryPiece != null && key != mandatoryPiece) {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                          content: Text("Vous devez sélectionner le pion en surbrillance orange."),
-                                          duration: Duration(seconds: 2),
-                                        ),
+                        onTap:
+                            isMyTurn && isDark
+                                ? () {
+                                  if (_selectedCheckersPiece == null) {
+                                    if (piece != null &&
+                                        piece.startsWith(currentColor)) {
+                                      if (mandatoryPiece != null &&
+                                          key != mandatoryPiece) {
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              "Vous devez sélectionner le pion en surbrillance orange.",
+                                            ),
+                                            duration: Duration(seconds: 2),
+                                          ),
+                                        );
+                                        return;
+                                      }
+                                      setState(
+                                        () => _selectedCheckersPiece = key,
                                       );
-                                      return;
+                                      _firebaseService
+                                          .updateCheckersSelectionLive(
+                                            widget.gameCode,
+                                            playerId,
+                                            key,
+                                          );
                                     }
-                                    setState(() => _selectedCheckersPiece = key);
-                                    _firebaseService.updateCheckersSelectionLive(widget.gameCode, playerId, key);
-                                  }
-                                } else {
-                                  if (key == _selectedCheckersPiece) {
-                                    setState(() => _selectedCheckersPiece = null);
-                                    _firebaseService.updateCheckersSelectionLive(widget.gameCode, playerId, null);
                                   } else {
-                                    List<int> from = _selectedCheckersPiece!.split(',').map(int.parse).toList();
-                                    _firebaseService.updateCheckersSelectionLive(widget.gameCode, playerId, null);
-                                    _firebaseService.checkersMove(widget.gameCode, playerId, from[0], from[1], r, c).then((_) {
-                                      setState(() => _selectedCheckersPiece = null);
-                                    }).catchError((e) {
-                                      setState(() => _selectedCheckersPiece = null);
-                                    });
+                                    if (key == _selectedCheckersPiece) {
+                                      setState(
+                                        () => _selectedCheckersPiece = null,
+                                      );
+                                      _firebaseService
+                                          .updateCheckersSelectionLive(
+                                            widget.gameCode,
+                                            playerId,
+                                            null,
+                                          );
+                                    } else {
+                                      List<int> from =
+                                          _selectedCheckersPiece!
+                                              .split(',')
+                                              .map(int.parse)
+                                              .toList();
+                                      _firebaseService
+                                          .updateCheckersSelectionLive(
+                                            widget.gameCode,
+                                            playerId,
+                                            null,
+                                          );
+                                      _firebaseService
+                                          .checkersMove(
+                                            widget.gameCode,
+                                            playerId,
+                                            from[0],
+                                            from[1],
+                                            r,
+                                            c,
+                                          )
+                                          .then((_) {
+                                            setState(
+                                              () =>
+                                                  _selectedCheckersPiece = null,
+                                            );
+                                          })
+                                          .catchError((e) {
+                                            setState(
+                                              () =>
+                                                  _selectedCheckersPiece = null,
+                                            );
+                                          });
+                                    }
                                   }
                                 }
-                              }
-                            : null,
+                                : null,
                         child: Container(
                           color: bgColor,
-                          child: piece != null
-                              ? Center(
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    width: 35,
-                                    height: 35,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: piece.startsWith('red') ? Colors.red[800]! : Colors.black87,
-                                      border: Border.all(
-                                        color: isSelected ? Colors.greenAccent : (isMandatory ? Colors.orangeAccent : Colors.white),
-                                        width: (isSelected || isMandatory) ? 3 : 2,
+                          child:
+                              piece != null
+                                  ? Center(
+                                    child: AnimatedContainer(
+                                      duration: const Duration(
+                                        milliseconds: 200,
                                       ),
-                                      boxShadow: (isSelected || isMandatory)
-                                          ? [BoxShadow(color: isMandatory ? Colors.orange : Colors.greenAccent, blurRadius: 8, spreadRadius: 2)]
-                                          : null,
+                                      width: 35,
+                                      height: 35,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color:
+                                            piece.startsWith('red')
+                                                ? Colors.red[800]!
+                                                : Colors.black87,
+                                        border: Border.all(
+                                          color:
+                                              isSelected
+                                                  ? Colors.greenAccent
+                                                  : (isMandatory
+                                                      ? Colors.orangeAccent
+                                                      : Colors.white),
+                                          width:
+                                              (isSelected || isMandatory)
+                                                  ? 3
+                                                  : 2,
+                                        ),
+                                        boxShadow:
+                                            (isSelected || isMandatory)
+                                                ? [
+                                                  BoxShadow(
+                                                    color:
+                                                        isMandatory
+                                                            ? Colors.orange
+                                                            : Colors
+                                                                .greenAccent,
+                                                    blurRadius: 8,
+                                                    spreadRadius: 2,
+                                                  ),
+                                                ]
+                                                : null,
+                                      ),
+                                      child:
+                                          piece.endsWith('_king')
+                                              ? const Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                                size: 20,
+                                              )
+                                              : null,
                                     ),
-                                    child: piece.endsWith('_king') ? const Icon(Icons.star, color: Colors.amber, size: 20) : null,
-                                  ),
-                                )
-                              : null,
+                                  )
+                                  : null,
                         ),
                       );
                     },
@@ -27623,7 +27824,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -28369,8 +28570,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       controller: _answerController,
                       autofocus: true,
                       onChanged: (text) {
-                        int wordCount = text.trim().isEmpty ? 0 : text.trim().split(RegExp(r'\s+')).length;
-                        _firebaseService.updateCadavreTypingCount(widget.gameCode, playerId, wordCount);
+                        int wordCount =
+                            text.trim().isEmpty
+                                ? 0
+                                : text.trim().split(RegExp(r'\s+')).length;
+                        _firebaseService.updateCadavreTypingCount(
+                          widget.gameCode,
+                          playerId,
+                          wordCount,
+                        );
                       },
                       style: const TextStyle(
                         fontFamily: 'serif',
@@ -28484,7 +28692,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           int count = 0;
           if (snap.hasData && snap.data!.snapshot.value != null) {
             try {
-              final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+              final raw = Map<String, dynamic>.from(
+                snap.data!.snapshot.value as Map,
+              );
               count = raw['wordCount'] as int? ?? 0;
             } catch (_) {}
           }
@@ -28492,25 +28702,42 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.history_edu_rounded, size: 54, color: Color(0xFFE0A96D)),
+              const Icon(
+                Icons.history_edu_rounded,
+                size: 54,
+                color: Color(0xFFE0A96D),
+              ),
               const SizedBox(height: 14),
               Text(
                 "$currentPlayerName est en train d'écrire...",
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               if (count > 0)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+                    border: Border.all(
+                      color: Colors.amberAccent.withOpacity(0.5),
+                    ),
                   ),
                   child: Text(
                     "✏️ $count mot${count > 1 ? 's' : ''} rédigé${count > 1 ? 's' : ''}...",
-                    style: const TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold, fontSize: 13),
+                    style: const TextStyle(
+                      color: Colors.amberAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
                   ),
                 )
               else
@@ -28520,7 +28747,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   textAlign: TextAlign.center,
                 ),
               const SizedBox(height: 20),
-              const CircularProgressIndicator(color: Color(0xFFE0A96D), strokeWidth: 2.5),
+              const CircularProgressIndicator(
+                color: Color(0xFFE0A96D),
+                strokeWidth: 2.5,
+              ),
             ],
           );
         },
@@ -30773,17 +31003,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             children: [
               // Pot + Écoute de la relance en préparation
               StreamBuilder<DatabaseEvent>(
-                stream: _firebaseService.getPokerRaisePreviewStream(widget.gameCode),
+                stream: _firebaseService.getPokerRaisePreviewStream(
+                  widget.gameCode,
+                ),
                 builder: (context, snap) {
                   int? previewAmount;
                   String? previewPlayerName;
                   if (snap.hasData && snap.data!.snapshot.value != null) {
                     try {
-                      final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                      final raw = Map<String, dynamic>.from(
+                        snap.data!.snapshot.value as Map,
+                      );
                       final pId = raw['playerId'] as String?;
                       if (pId != null && pId != playerId) {
                         previewAmount = raw['amount'] as int?;
-                        previewPlayerName = playerData[pId]?['name'] ?? 'Adversaire';
+                        previewPlayerName =
+                            playerData[pId]?['name'] ?? 'Adversaire';
                       }
                     } catch (_) {}
                   }
@@ -30791,25 +31026,44 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   return Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.black26,
                           borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: Colors.amber.withOpacity(0.3)),
+                          border: Border.all(
+                            color: Colors.amber.withOpacity(0.3),
+                          ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.monetization_on, color: Colors.amber, size: 20),
+                            const Icon(
+                              Icons.monetization_on,
+                              color: Colors.amber,
+                              size: 20,
+                            ),
                             const SizedBox(width: 8),
-                            Text("Pot : $pot \$", style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                            Text(
+                              "Pot : $pot \$",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
                       if (previewAmount != null)
                         Container(
                           margin: const EdgeInsets.only(top: 8),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.redAccent.withOpacity(0.25),
                             borderRadius: BorderRadius.circular(16),
@@ -30817,7 +31071,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           ),
                           child: Text(
                             "⚠️ $previewPlayerName prépare une relance à $previewAmount \$ !",
-                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                     ],
@@ -31048,7 +31306,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       setStateDialog(() {
                         raiseAmount = value.roundToDouble();
                       });
-                      _firebaseService.updatePokerRaisePreview(widget.gameCode, playerId, raiseAmount.toInt());
+                      _firebaseService.updatePokerRaisePreview(
+                        widget.gameCode,
+                        playerId,
+                        raiseAmount.toInt(),
+                      );
                     },
                   ),
                   SizedBox(height: 10),
@@ -31074,9 +31336,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ActionChip(
                           label: Text("Pot"),
                           onPressed: () {
-                            setStateDialog(
-                              () => raiseAmount = pot.toDouble(),
-                            );
+                            setStateDialog(() => raiseAmount = pot.toDouble());
                             _firebaseService.updatePokerRaisePreview(
                               widget.gameCode,
                               playerId,
@@ -37433,7 +37693,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     required String playerId,
   }) async {
     int selectedBid = minimumBid;
-    _firebaseService.updateLiveBidOrRaise(widget.gameCode, playerId, selectedBid);
+    _firebaseService.updateLiveBidOrRaise(
+      widget.gameCode,
+      playerId,
+      selectedBid,
+    );
 
     final result = await showModalBottomSheet<int>(
       context: context,
@@ -37489,9 +37753,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         onPressed:
                             selectedBid > minimumBid
                                 ? () {
-                                    setStateModal(() => selectedBid--);
-                                    _firebaseService.updateLiveBidOrRaise(widget.gameCode, playerId, selectedBid);
-                                  }
+                                  setStateModal(() => selectedBid--);
+                                  _firebaseService.updateLiveBidOrRaise(
+                                    widget.gameCode,
+                                    playerId,
+                                    selectedBid,
+                                  );
+                                }
                                 : null,
                         icon: const Icon(Icons.remove_circle_outline, size: 36),
                         color: Colors.white70,
@@ -37530,9 +37798,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         onPressed:
                             selectedBid < maximumBid
                                 ? () {
-                                    setStateModal(() => selectedBid++);
-                                    _firebaseService.updateLiveBidOrRaise(widget.gameCode, playerId, selectedBid);
-                                  }
+                                  setStateModal(() => selectedBid++);
+                                  _firebaseService.updateLiveBidOrRaise(
+                                    widget.gameCode,
+                                    playerId,
+                                    selectedBid,
+                                  );
+                                }
                                 : null,
                         icon: const Icon(Icons.add_circle_outline, size: 36),
                         color: Colors.white70,
@@ -37731,25 +38003,41 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           StreamBuilder<DatabaseEvent>(
             stream: _firebaseService.getLiveBidStream(widget.gameCode),
             builder: (context, snap) {
-              if (!snap.hasData || snap.data!.snapshot.value == null) return const SizedBox.shrink();
+              if (!snap.hasData || snap.data!.snapshot.value == null)
+                return const SizedBox.shrink();
               try {
-                final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                final raw = Map<String, dynamic>.from(
+                  snap.data!.snapshot.value as Map,
+                );
                 final bidderId = raw['bidderId'] as String?;
                 final liveAmount = raw['amount'] as int?;
-                if (bidderId == null || liveAmount == null || liveAmount <= 0) return const SizedBox.shrink();
+                if (bidderId == null || liveAmount == null || liveAmount <= 0)
+                  return const SizedBox.shrink();
                 final bidderName = players[bidderId]?['name'] ?? 'Un joueur';
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 4,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.amberAccent.withOpacity(0.6)),
+                    border: Border.all(
+                      color: Colors.amberAccent.withOpacity(0.6),
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.flash_on_rounded, size: 16, color: Colors.amberAccent),
+                      const Icon(
+                        Icons.flash_on_rounded,
+                        size: 16,
+                        color: Colors.amberAccent,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         "$bidderName réfléchit à un défi de $liveAmount cartes...",
@@ -41277,7 +41565,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           flex: 4,
           child: LayoutBuilder(
             builder: (context, constraints) {
-              final double boardSize = min(constraints.maxWidth, constraints.maxHeight) * 0.96;
+              final double boardSize =
+                  min(constraints.maxWidth, constraints.maxHeight) * 0.96;
               final cellSize = boardSize / 15;
 
               return StreamBuilder<DatabaseEvent>(
@@ -41285,27 +41574,46 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 builder: (context, hoverSnap) {
                   String? hoveredOwner;
                   int? hoveredPawnIdx;
-                  if (hoverSnap.hasData && hoverSnap.data!.snapshot.value != null) {
+                  if (hoverSnap.hasData &&
+                      hoverSnap.data!.snapshot.value != null) {
                     try {
-                      final raw = Map<String, dynamic>.from(hoverSnap.data!.snapshot.value as Map);
+                      final raw = Map<String, dynamic>.from(
+                        hoverSnap.data!.snapshot.value as Map,
+                      );
                       hoveredOwner = raw['ownerId'] as String?;
                       hoveredPawnIdx = raw['pawnIndex'] as int?;
                     } catch (_) {}
                   }
 
                   Offset? ghostDestination;
-                  if (hoveredOwner != null && hoveredPawnIdx != null && dice > 0) {
-                    final pList = List<int>.from(positions[hoveredOwner] ?? [-1, -1, -1, -1]);
+                  if (hoveredOwner != null &&
+                      hoveredPawnIdx != null &&
+                      dice > 0) {
+                    final pList = List<int>.from(
+                      positions[hoveredOwner] ?? [-1, -1, -1, -1],
+                    );
                     final curP = pList[hoveredPawnIdx];
                     final pIdx = playerOrder.indexOf(hoveredOwner);
                     if (curP == -1 && (dice == 1 || dice == 6)) {
-                      ghostDestination = _getLudoPathPosition(0, pIdx % 4, cellSize);
+                      ghostDestination = _getLudoPathPosition(
+                        0,
+                        pIdx % 4,
+                        cellSize,
+                      );
                     } else if (curP >= 0 && curP + dice <= 56) {
                       final targetP = curP + dice;
                       if (targetP <= 50) {
-                        ghostDestination = _getLudoPathPosition(targetP, pIdx % 4, cellSize);
+                        ghostDestination = _getLudoPathPosition(
+                          targetP,
+                          pIdx % 4,
+                          cellSize,
+                        );
                       } else {
-                        ghostDestination = _getLudoHomePosition(targetP - 51, pIdx % 4, cellSize);
+                        ghostDestination = _getLudoHomePosition(
+                          targetP - 51,
+                          pIdx % 4,
+                          cellSize,
+                        );
                       }
                     }
                   }
@@ -41316,14 +41624,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       height: boardSize,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.7), blurRadius: 20, offset: const Offset(0, 8))],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.7),
+                            blurRadius: 20,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(24),
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            CustomPaint(size: Size(boardSize, boardSize), painter: _LudoBoardPainter(playerColors)),
+                            CustomPaint(
+                              size: Size(boardSize, boardSize),
+                              painter: _LudoBoardPainter(playerColors),
+                            ),
                             if (ghostDestination != null)
                               Positioned(
                                 left: ghostDestination.dx - (cellSize * 0.45),
@@ -41334,10 +41651,25 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.amberAccent.withOpacity(0.4),
-                                    border: Border.all(color: Colors.amberAccent, width: 2),
-                                    boxShadow: [BoxShadow(color: Colors.amberAccent.withOpacity(0.6), blurRadius: 10, spreadRadius: 2)],
+                                    border: Border.all(
+                                      color: Colors.amberAccent,
+                                      width: 2,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.amberAccent.withOpacity(
+                                          0.6,
+                                        ),
+                                        blurRadius: 10,
+                                        spreadRadius: 2,
+                                      ),
+                                    ],
                                   ),
-                                  child: const Icon(Icons.gps_fixed, color: Colors.amberAccent, size: 16),
+                                  child: const Icon(
+                                    Icons.gps_fixed,
+                                    color: Colors.amberAccent,
+                                    size: 16,
+                                  ),
                                 ),
                               ),
                             ..._buildLudoPawns(
@@ -41442,7 +41774,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                           ),
                           onPressed: () {
-                            _firebaseService.updateLudoPawnHover(widget.gameCode, playerId, null, null);
+                            _firebaseService.updateLudoPawnHover(
+                              widget.gameCode,
+                              playerId,
+                              null,
+                              null,
+                            );
                             _firebaseService.passTurnPetitsChevaux(
                               widget.gameCode,
                               playerId,
@@ -41544,7 +41881,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
       final matchEnd = getMatchEnd(tile);
       if (matchEnd != null && matchEnd != -99) {
-        _firebaseService.updateDominoHoverEnd(widget.gameCode, playerId, matchEnd);
+        _firebaseService.updateDominoHoverEnd(
+          widget.gameCode,
+          playerId,
+          matchEnd,
+        );
       }
 
       if (matchEnd == null) {
@@ -41907,9 +42248,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               stream: _firebaseService.getDominoHoverStream(widget.gameCode),
               builder: (context, hoverSnap) {
                 int? liveHoverEnd;
-                if (hoverSnap.hasData && hoverSnap.data!.snapshot.value != null) {
+                if (hoverSnap.hasData &&
+                    hoverSnap.data!.snapshot.value != null) {
                   try {
-                    final raw = Map<String, dynamic>.from(hoverSnap.data!.snapshot.value as Map);
+                    final raw = Map<String, dynamic>.from(
+                      hoverSnap.data!.snapshot.value as Map,
+                    );
                     liveHoverEnd = raw['endValue'] as int?;
                   } catch (_) {}
                 }
@@ -41919,21 +42263,31 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   child: Stack(
                     children: [
                       DominoesBoardWidget(
-                        chain: boardChain.map((e) => Map<String, dynamic>.from(e)).toList(),
+                        chain:
+                            boardChain
+                                .map((e) => Map<String, dynamic>.from(e))
+                                .toList(),
                       ),
                       if (liveHoverEnd != null)
                         Positioned(
                           top: 10,
                           left: 10,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.amber.withOpacity(0.85),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
                               "Placement visé sur le : $liveHoverEnd",
-                              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 11),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 11,
+                              ),
                             ),
                           ),
                         ),
@@ -43983,7 +44337,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     _updatePiecePosition(details.localPosition)
                                 : null,
                         child: StreamBuilder<DatabaseEvent>(
-                          stream: _firebaseService.getBlokusLivePreviewStream(widget.gameCode),
+                          stream: _firebaseService.getBlokusLivePreviewStream(
+                            widget.gameCode,
+                          ),
                           builder: (context, snap) {
                             List<List<int>>? ghostPiece;
                             int? ghostRow;
@@ -43991,9 +44347,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             Color? ghostColor;
                             bool ghostCanPlace = true;
 
-                            if (snap.hasData && snap.data!.snapshot.value != null) {
+                            if (snap.hasData &&
+                                snap.data!.snapshot.value != null) {
                               try {
-                                final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                                final raw = Map<String, dynamic>.from(
+                                  snap.data!.snapshot.value as Map,
+                                );
                                 final pId = raw['playerId'] as String?;
                                 if (pId != null && pId != playerId) {
                                   final pIdPiece = raw['pieceId'] as int?;
@@ -44001,13 +44360,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   final c = raw['col'] as int?;
                                   final rot = raw['rotation'] as int? ?? 0;
                                   final flip = raw['flipped'] as bool? ?? false;
-                                  ghostCanPlace = raw['canPlace'] as bool? ?? true;
+                                  ghostCanPlace =
+                                      raw['canPlace'] as bool? ?? true;
 
-                                  if (pIdPiece != null && r != null && c != null) {
-                                    ghostPiece = GameData.getRotatedPiece(pIdPiece, rot, flipped: flip);
+                                  if (pIdPiece != null &&
+                                      r != null &&
+                                      c != null) {
+                                    ghostPiece = GameData.getRotatedPiece(
+                                      pIdPiece,
+                                      rot,
+                                      flipped: flip,
+                                    );
                                     ghostRow = r;
                                     ghostCol = c;
-                                    final oppColor = gameData['blokusPlayerColors']?[pId] ?? 'red';
+                                    final oppColor =
+                                        gameData['blokusPlayerColors']?[pId] ??
+                                        'red';
                                     ghostColor = getColor(oppColor);
                                   }
                                 }
@@ -44321,18 +44689,32 @@ class _BlokusBoardPainter extends CustomPainter {
 
     for (int r = 0; r < gridSize; r++) {
       for (int c = 0; c < gridSize; c++) {
-        final rect = Rect.fromLTWH(c * cellSize, r * cellSize, cellSize, cellSize);
+        final rect = Rect.fromLTWH(
+          c * cellSize,
+          r * cellSize,
+          cellSize,
+          cellSize,
+        );
         final key = "${r}_${c}";
         final cellColor = board[key];
 
         if (cellColor != null) {
           Color color;
           switch (cellColor) {
-            case 'blue': color = Colors.blue; break;
-            case 'red': color = Colors.red; break;
-            case 'green': color = Colors.green; break;
-            case 'yellow': color = Colors.yellow; break;
-            default: color = Colors.grey;
+            case 'blue':
+              color = Colors.blue;
+              break;
+            case 'red':
+              color = Colors.red;
+              break;
+            case 'green':
+              color = Colors.green;
+              break;
+            case 'yellow':
+              color = Colors.yellow;
+              break;
+            default:
+              color = Colors.grey;
           }
           final paint = Paint()..color = color;
           canvas.drawRect(rect.inflate(-1), paint);
@@ -44341,16 +44723,33 @@ class _BlokusBoardPainter extends CustomPainter {
           canvas.drawRect(rect.inflate(-1), paint);
         }
 
-        final borderPaint = Paint()..color = Colors.white10..style = PaintingStyle.stroke;
+        final borderPaint =
+            Paint()
+              ..color = Colors.white10
+              ..style = PaintingStyle.stroke;
         canvas.drawRect(rect, borderPaint);
       }
     }
 
     void drawStartCorner(int r, int c, Color color) {
       if (board["${r}_${c}"] == null) {
-        final rect = Rect.fromLTWH(c * cellSize, r * cellSize, cellSize, cellSize);
-        canvas.drawRect(rect.inflate(-2), Paint()..color = color.withOpacity(0.3)..style = PaintingStyle.fill);
-        canvas.drawCircle(rect.center, cellSize * 0.2, Paint()..color = color.withOpacity(0.8));
+        final rect = Rect.fromLTWH(
+          c * cellSize,
+          r * cellSize,
+          cellSize,
+          cellSize,
+        );
+        canvas.drawRect(
+          rect.inflate(-2),
+          Paint()
+            ..color = color.withOpacity(0.3)
+            ..style = PaintingStyle.fill,
+        );
+        canvas.drawCircle(
+          rect.center,
+          cellSize * 0.2,
+          Paint()..color = color.withOpacity(0.8),
+        );
       }
     }
 
@@ -44360,18 +44759,28 @@ class _BlokusBoardPainter extends CustomPainter {
     drawStartCorner(19, 0, Colors.yellow);
 
     // 1. DESSIN DU FANTÔME ADVERSE EN DIRECT
-    if (ghostPiece != null && ghostRow != null && ghostCol != null && ghostColor != null) {
+    if (ghostPiece != null &&
+        ghostRow != null &&
+        ghostCol != null &&
+        ghostColor != null) {
       final ghostFill = Paint()..color = ghostColor!.withOpacity(0.40);
-      final ghostBorder = Paint()
-        ..color = (ghostCanPlace ? ghostColor! : Colors.redAccent).withOpacity(0.8)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.0;
+      final ghostBorder =
+          Paint()
+            ..color = (ghostCanPlace ? ghostColor! : Colors.redAccent)
+                .withOpacity(0.8)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2.0;
 
       for (var p in ghostPiece!) {
         final row = p[0] + ghostRow!;
         final col = p[1] + ghostCol!;
         if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
-          final rect = Rect.fromLTWH(col * cellSize, row * cellSize, cellSize, cellSize);
+          final rect = Rect.fromLTWH(
+            col * cellSize,
+            row * cellSize,
+            cellSize,
+            cellSize,
+          );
           canvas.drawRect(rect.inflate(-1), ghostFill);
           canvas.drawRect(rect, ghostBorder);
         }
@@ -44381,16 +44790,22 @@ class _BlokusBoardPainter extends CustomPainter {
     // 2. DESSIN DE MA PROPRE PRÉVISUALISATION
     if (previewPiece != null && previewRow != null && previewCol != null) {
       final previewPaint = Paint()..color = previewColor.withOpacity(0.65);
-      final borderPaint = Paint()
-        ..color = canPlace ? Colors.greenAccent : Colors.redAccent
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.5;
+      final borderPaint =
+          Paint()
+            ..color = canPlace ? Colors.greenAccent : Colors.redAccent
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2.5;
 
       for (var p in previewPiece!) {
         final row = p[0] + previewRow!;
         final col = p[1] + previewCol!;
         if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
-          final rect = Rect.fromLTWH(col * cellSize, row * cellSize, cellSize, cellSize);
+          final rect = Rect.fromLTWH(
+            col * cellSize,
+            row * cellSize,
+            cellSize,
+            cellSize,
+          );
           canvas.drawRect(rect.inflate(-1), previewPaint);
           canvas.drawRect(rect, borderPaint);
         }
@@ -52189,17 +52604,46 @@ List<Widget> _buildLudoPawns(
           left: x - pawnRadius,
           top: y - pawnRadius,
           child: GestureDetector(
-            onTapDown: canMove ? (_) => firebaseService.updateLudoPawnHover(gameCode, myId, ownerId, pawnIdx) : null,
-            onTapCancel: canMove ? () => firebaseService.updateLudoPawnHover(gameCode, myId, null, null) : null,
-            onTap: canMove
-                ? () {
-                    HapticFeedback.mediumImpact();
-                    firebaseService.updateLudoPawnHover(gameCode, myId, null, null);
-                    firebaseService.movePawnPetitsChevaux(gameCode, myId, ownerId, pawnIdx).catchError((e) {
-                      debugPrint(e.toString());
-                    });
-                  }
-                : null,
+            onTapDown:
+                canMove
+                    ? (_) => firebaseService.updateLudoPawnHover(
+                      gameCode,
+                      myId,
+                      ownerId,
+                      pawnIdx,
+                    )
+                    : null,
+            onTapCancel:
+                canMove
+                    ? () => firebaseService.updateLudoPawnHover(
+                      gameCode,
+                      myId,
+                      null,
+                      null,
+                    )
+                    : null,
+            onTap:
+                canMove
+                    ? () {
+                      HapticFeedback.mediumImpact();
+                      firebaseService.updateLudoPawnHover(
+                        gameCode,
+                        myId,
+                        null,
+                        null,
+                      );
+                      firebaseService
+                          .movePawnPetitsChevaux(
+                            gameCode,
+                            myId,
+                            ownerId,
+                            pawnIdx,
+                          )
+                          .catchError((e) {
+                            debugPrint(e.toString());
+                          });
+                    }
+                    : null,
             child: _Pawn3DWidget(
               color: pColor,
               canMove: canMove,
@@ -54610,20 +55054,33 @@ class _SpookyTargetCardBack extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: isHoveredLive
-                ? [const Color(0xFFDC2626), const Color(0xFF7F1D1D)]
-                : [const Color(0xFF3B0764), const Color(0xFF1E1028), const Color(0xFF0F051D)],
+            colors:
+                isHoveredLive
+                    ? [const Color(0xFFDC2626), const Color(0xFF7F1D1D)]
+                    : [
+                      const Color(0xFF3B0764),
+                      const Color(0xFF1E1028),
+                      const Color(0xFF0F051D),
+                    ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: isHoveredLive ? Colors.redAccent : (isMyTurn ? const Color(0xFFC084FC) : Colors.white24),
+            color:
+                isHoveredLive
+                    ? Colors.redAccent
+                    : (isMyTurn ? const Color(0xFFC084FC) : Colors.white24),
             width: isHoveredLive ? 2.5 : 1.0,
           ),
           boxShadow: [
             BoxShadow(
-              color: isHoveredLive ? Colors.red.withOpacity(0.6) : (isMyTurn ? const Color(0xFFA855F7).withOpacity(0.4) : Colors.black54),
+              color:
+                  isHoveredLive
+                      ? Colors.red.withOpacity(0.6)
+                      : (isMyTurn
+                          ? const Color(0xFFA855F7).withOpacity(0.4)
+                          : Colors.black54),
               blurRadius: isHoveredLive ? 16 : 4,
               offset: const Offset(1, 3),
             ),
@@ -54634,14 +55091,24 @@ class _SpookyTargetCardBack extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              CustomPaint(size: const Size(64, 98), painter: _SpiderwebCardPainter()),
+              CustomPaint(
+                size: const Size(64, 98),
+                painter: _SpiderwebCardPainter(),
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    isHoveredLive ? Icons.touch_app : Icons.pan_tool_alt_rounded,
+                    isHoveredLive
+                        ? Icons.touch_app
+                        : Icons.pan_tool_alt_rounded,
                     size: 26,
-                    color: isHoveredLive ? Colors.white : (isMyTurn ? const Color(0xFFFDE047) : Colors.white30),
+                    color:
+                        isHoveredLive
+                            ? Colors.white
+                            : (isMyTurn
+                                ? const Color(0xFFFDE047)
+                                : Colors.white30),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -54649,7 +55116,12 @@ class _SpookyTargetCardBack extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
-                      color: isHoveredLive ? Colors.white : (isMyTurn ? const Color(0xFFFDE047) : Colors.white38),
+                      color:
+                          isHoveredLive
+                              ? Colors.white
+                              : (isMyTurn
+                                  ? const Color(0xFFFDE047)
+                                  : Colors.white38),
                     ),
                   ),
                 ],
