@@ -3214,6 +3214,19 @@ class FirebaseService {
     return 1; // 91% - 100% -> +1 XP (Sur le fil)
   }
 
+  /// Vérifie si le tour en cours a réellement dépassé la durée impartie
+  static bool _isTurnTimedOut(
+    Map<String, dynamic> gameData, {
+    int? customDuration,
+  }) {
+    final turnStartTime = (gameData['turnStartTime'] as Timestamp?)?.toDate();
+    if (turnStartTime == null) return false;
+    final int duration = customDuration ?? getEffectiveTurnTimer(gameData);
+    if (duration <= 0) return false;
+    final int elapsed = DateTime.now().difference(turnStartTime).inSeconds;
+    return elapsed >= (duration - 1);
+  }
+
   /// Crédite l'XP au joueur en appliquant dynamiquement le bonus selon le jeu et ses réglages
   void creditPlayerXp(
     Transaction transaction,
@@ -3806,14 +3819,38 @@ class FirebaseService {
     });
   }
 
+  /// Enregistre une notification de coup automatique visible en temps réel par tous les joueurs
+  Future<void> notifyAutoPlay(
+    DocumentReference gameRef,
+    String playerName, {
+    String? actionDetails,
+  }) async {
+    final String text =
+        actionDetails != null
+            ? "⏱️ $playerName n'a pas joué à temps. L'ordinateur a joué pour lui ($actionDetails)."
+            : "⏱️ $playerName n'a pas joué à temps. L'ordinateur a joué pour lui de façon aléatoire.";
+
+    await gameRef.update({
+      'lastTimeoutEvent': {
+        'message': text,
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+      },
+      'gameLog': FieldValue.arrayUnion([text]),
+    });
+  }
+
+  // --- BIG TWO ---
   Future<void> bigTwoAction(
     String gameCode,
     String playerId,
     String action, {
     List<String>? cards,
+    bool isAuto = false,
   }) async {
-    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto) {
+      final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+      if (currentAuthUid == null) throw Exception("Non authentifié.");
+    }
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -3822,10 +3859,13 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
       if (gameData['gameState'] != 'playing') return;
 
-      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
-        throw Exception("Action non autorisée.");
+      if (!isAuto) {
+        final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+        final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+        final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
+        if (currentAuthUid != voterAuthUid) {
+          throw Exception("Action non autorisée.");
+        }
       }
 
       List<String> playerOrder = List<String>.from(
@@ -3889,11 +3929,27 @@ class FirebaseService {
         for (String c in cards) myHand.remove(c);
         hands[playerId] = myHand;
 
-        if (combo['type'] == 'straight_flush') {
-          _db.collection('users').doc(currentAuthUid).set({
-            'unlockedBadges.bigtwo_straight_flush':
-                FieldValue.serverTimestamp(),
-          }, SetOptions(merge: true));
+        if (!isAuto) {
+          final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+          if (combo['type'] == 'straight_flush' && currentAuthUid != null) {
+            _db.collection('users').doc(currentAuthUid).set({
+              'unlockedBadges.bigtwo_straight_flush':
+                  FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+          }
+
+          int xpBase =
+              (myHand.isEmpty)
+                  ? 30
+                  : (((combo['tier'] as num?)?.toInt() ?? 0) >= 1 ? 20 : 4);
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            xpBase,
+            applySpeedBonus: true,
+          );
         }
 
         lastPlay = {
@@ -3905,19 +3961,6 @@ class FirebaseService {
           'playedBy': playerId,
         };
         passedPlayers = [];
-
-        int xpBase =
-            (myHand.isEmpty)
-                ? 30
-                : (((combo['tier'] as num?)?.toInt() ?? 0) >= 1 ? 20 : 4);
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          playerId,
-          xpBase,
-          applySpeedBonus: true,
-        );
       }
 
       if (myHand.isEmpty && !finishedPlayers.contains(playerId)) {
@@ -3982,17 +4025,48 @@ class FirebaseService {
     });
   }
 
+  // 1. TIMEOUT BIG TWO
   Future<void> handleBigTwoTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final snap = await gameRef.get();
     if (!snap.exists) return;
     final data = snap.data() as Map<String, dynamic>;
     if (data['gameState'] != 'playing') return;
-    final playerOrder = List<String>.from(data['bigTwoPlayerOrder']);
-    final currentIndex = data['bigTwoCurrentPlayerIndex'];
+    if (!_isTurnTimedOut(data)) return;
+
+    final playerOrder = List<String>.from(data['bigTwoPlayerOrder'] ?? []);
+    final currentIndex = data['bigTwoCurrentPlayerIndex'] ?? 0;
+    if (currentIndex >= playerOrder.length) return;
     final timedOutPlayerId = playerOrder[currentIndex];
-    if (data['bigTwoLastPlay'] != null) {
-      await bigTwoAction(gameCode, timedOutPlayerId, 'pass');
+    final playerName =
+        data['players']?[timedOutPlayerId]?['name'] ?? 'Un joueur';
+    final lastPlay = data['bigTwoLastPlay'];
+    final myHand = List<String>.from(
+      data['bigTwoPlayerHands']?[timedOutPlayerId] ?? [],
+    );
+
+    if (lastPlay == null) {
+      if (myHand.isNotEmpty) {
+        await notifyAutoPlay(
+          gameRef,
+          playerName,
+          actionDetails: "carte simple",
+        );
+        await bigTwoAction(
+          gameCode,
+          timedOutPlayerId,
+          'play',
+          cards: [myHand.first],
+          isAuto: true,
+        );
+      }
+    } else {
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "passe son tour",
+      );
+      await bigTwoAction(gameCode, timedOutPlayerId, 'pass', isAuto: true);
     }
   }
 
@@ -4066,15 +4140,19 @@ class FirebaseService {
     });
   }
 
+  // --- MILLE BORNES ---
   Future<void> milleBornesAction(
     String gameCode,
     String playerId,
     String action, {
     String? card,
     String? targetId,
+    bool isAuto = false,
   }) async {
-    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto) {
+      final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+      if (currentAuthUid == null) throw Exception("Non authentifié.");
+    }
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -4084,9 +4162,12 @@ class FirebaseService {
       if (gameData['gameState'] != 'playing') return;
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
-        throw Exception("Action non autorisée.");
+      if (!isAuto) {
+        final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+        final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
+        if (currentAuthUid != voterAuthUid) {
+          throw Exception("Action non autorisée.");
+        }
       }
 
       List<String> playerOrder = List<String>.from(
@@ -4141,9 +4222,7 @@ class FirebaseService {
               card == 'SAFETY_EMERGENCY') {
             myData['isOutOfGas'] = false;
           }
-        }
-        // 3. ATTAQUES STRICTES (Cible requise)
-        else if ([
+        } else if ([
           'STOP',
           'RED_LIGHT',
           'SPEED_LIMIT',
@@ -4172,9 +4251,7 @@ class FirebaseService {
           targetBattle.add(card);
           targetDataUpdate['battle'] = targetBattle;
           pData[targetId] = targetDataUpdate;
-        }
-        // 4. REMÈDES STRICTS (S'appliquent TOUJOURS au joueur, ignore tout targetId injecté)
-        else {
+        } else {
           if (card == 'GREEN_LIGHT') myData['isStopped'] = false;
           if (card == 'END_OF_LIMIT') myData['isSpeedLimited'] = false;
           if (card == 'EXTRA_TANK') myData['isOutOfGas'] = false;
@@ -4185,7 +4262,6 @@ class FirebaseService {
           myData['battle'] = battle;
         }
 
-        // Pioche automatique à la fin du coup joué pour compléter à 6
         if (deck.isNotEmpty) {
           hand.add(deck.removeAt(0));
         }
@@ -4204,19 +4280,21 @@ class FirebaseService {
           return;
         }
 
-        int xpBase =
-            card.startsWith('SAFETY_') ? 35 : (card.startsWith('D') ? 5 : 10);
-        if ((myData['distance'] as int) >= targetDist) {
-          xpBase = 50;
+        if (!isAuto) {
+          int xpBase =
+              card.startsWith('SAFETY_') ? 35 : (card.startsWith('D') ? 5 : 10);
+          if ((myData['distance'] as int) >= targetDist) {
+            xpBase = 50;
+          }
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            xpBase,
+            applySpeedBonus: true,
+          );
         }
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          playerId,
-          xpBase,
-          applySpeedBonus: true,
-        );
 
         int nextIndex = (currentIndex + 1) % playerOrder.length;
         transaction.update(gameRef, {
@@ -4238,7 +4316,6 @@ class FirebaseService {
           hand.remove(cardToDiscard);
         }
 
-        // Repioche automatique pour avoir 6 cartes
         if (deck.isNotEmpty) {
           hand.add(deck.removeAt(0));
         }
@@ -4343,10 +4420,25 @@ class FirebaseService {
     final snap = await gameRef.get();
     if (!snap.exists) return;
     final gameData = snap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
+
     final playerOrder = gameData['milleBornesPlayerOrder'] as List<dynamic>?;
     final currentIndex = gameData['milleBornesCurrentPlayerIndex'] as int?;
-    if (playerOrder != null && currentIndex != null && playerOrder.isNotEmpty) {
-      await milleBornesAction(gameCode, playerOrder[currentIndex], 'end_turn');
+    if (playerOrder != null &&
+        currentIndex != null &&
+        playerOrder.isNotEmpty &&
+        currentIndex < playerOrder.length) {
+      final timedOutPlayerId = playerOrder[currentIndex].toString();
+      final playerName =
+          gameData['players']?[timedOutPlayerId]?['name'] ?? 'Un joueur';
+      await notifyAutoPlay(gameRef, playerName, actionDetails: "fin de tour");
+      await milleBornesAction(
+        gameCode,
+        timedOutPlayerId,
+        'end_turn',
+        isAuto: true,
+      );
     }
   }
 
@@ -4689,6 +4781,7 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
       if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
 
       final String roundState = gameData['roundState'];
       if (roundState != 'answering' && roundState != 'declaring_truth') return;
@@ -4766,20 +4859,30 @@ class FirebaseService {
     });
   }
 
+  // 2. TIMEOUT BATAILLE NAVALE
   Future<void> handleBatailleNavaleTimeout(String gameCode) async {
-    await _db.runTransaction((transaction) async {
-      final gameRef = _db.collection('games').doc(gameCode);
-      final gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) return;
-      var gameData = gameSnap.data() as Map<String, dynamic>;
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
 
-      if (gameData['roundState'] == 'placement') {
+    if (gameData['roundState'] == 'placement') {
+      final int placeTimer =
+          (gameData['batailleNavalePlacementTimer'] as num?)?.toInt() ?? 60;
+      if (!_isTurnTimedOut(gameData, customDuration: placeTimer)) return;
+
+      await _db.runTransaction((transaction) async {
+        final snap = await transaction.get(gameRef);
+        if (!snap.exists) return;
+        var currentData = snap.data() as Map<String, dynamic>;
+        if (currentData['roundState'] != 'placement') return;
+
         var playerData = Map<String, dynamic>.from(
-          gameData['playerData'] ?? {},
+          currentData['playerData'] ?? {},
         );
         Random rand = Random();
 
-        // On place les bateaux directement pour les joueurs qui ne sont pas encore prêts
         playerData.forEach((pId, pInfo) {
           var pMap = Map<String, dynamic>.from(pInfo);
           if (pMap['isReady'] != true) {
@@ -4800,7 +4903,6 @@ class FirebaseService {
                 bool isHorizontal = rand.nextBool();
                 int startRow = rand.nextInt(10);
                 int startCol = rand.nextInt(10);
-
                 int actualCols = isHorizontal ? length : width;
                 int actualRows = isHorizontal ? width : length;
 
@@ -4835,7 +4937,6 @@ class FirebaseService {
                 }
               }
             }
-
             pMap['myGrid'] = grid;
             pMap['shipsPlaced'] = shipsPlaced;
             pMap['isReady'] = true;
@@ -4852,99 +4953,329 @@ class FirebaseService {
           'currentPlayerId': firstPlayer,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "Temps de placement écoulé ! La partie commence. ${playerData[firstPlayer]?['name'] ?? 'Joueur'} commence à tirer.",
+            "⏱️ Placement auto terminé pour les joueurs inactifs. ${playerData[firstPlayer]?['name'] ?? 'Joueur'} commence.",
           ]),
         });
-      } else if (gameData['roundState'] == 'playing') {
-        final currentPlayerId = gameData['currentPlayerId'];
-        if (currentPlayerId == null) return;
+      });
+    } else if (gameData['roundState'] == 'playing') {
+      if (!_isTurnTimedOut(gameData)) return;
+      final currentPlayerId = gameData['currentPlayerId'];
+      if (currentPlayerId == null) return;
 
-        var playerData = Map<String, dynamic>.from(
-          gameData['playerData'] ?? {},
-        );
-        List<String> playerIds = playerData.keys.toList();
-        String opponentId = playerIds.firstWhere(
-          (id) => id != currentPlayerId,
-          orElse: () => '',
-        );
-        if (opponentId.isEmpty) return;
+      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+      List<String> playerIds = playerData.keys.toList();
+      String opponentId = playerIds.firstWhere(
+        (id) => id != currentPlayerId,
+        orElse: () => '',
+      );
+      if (opponentId.isEmpty) return;
 
-        var shooterData = Map<String, dynamic>.from(
-          playerData[currentPlayerId] ?? {},
-        );
-        var enemyGrid = List<String>.from(
-          shooterData['enemyGrid'] ?? List.filled(100, 'unknown'),
-        );
+      var shooterData = Map<String, dynamic>.from(
+        playerData[currentPlayerId] ?? {},
+      );
+      var enemyGrid = List<String>.from(
+        shooterData['enemyGrid'] ?? List.filled(100, 'unknown'),
+      );
 
-        List<int> validTargets = [];
-        for (int i = 0; i < 100; i++) {
-          if (enemyGrid[i] == 'unknown') validTargets.add(i);
-        }
-
-        if (validTargets.isNotEmpty) {
-          int targetIndex = validTargets[Random().nextInt(validTargets.length)];
-          // Changement automatique de tour au joueur suivant
-          transaction.update(gameRef, {
-            'currentPlayerId': opponentId,
-            'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion([
-              "${shooterData['name']} a mis trop de temps à tirer ! Tour passé à ${playerData[opponentId]?['name']}.",
-            ]),
-          });
-        }
+      List<int> validTargets = [];
+      for (int i = 0; i < 100; i++) {
+        if (enemyGrid[i] == 'unknown') validTargets.add(i);
       }
-    });
+
+      if (validTargets.isNotEmpty) {
+        int targetIndex = validTargets[Random().nextInt(validTargets.length)];
+        final playerName = shooterData['name'] ?? 'Un joueur';
+        await notifyAutoPlay(
+          gameRef,
+          playerName,
+          actionDetails: "tir aléatoire",
+        );
+        await shootBatailleNavale(
+          gameCode,
+          currentPlayerId,
+          targetIndex,
+          isAuto: true,
+        );
+      }
+    }
   }
 
+  // 3. TIMEOUT PRÉSIDENT
   Future<void> handlePresidentTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final gameSnap = await gameRef.get();
     if (!gameSnap.exists) return;
     var gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
+
     final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
     final currentIndex = gameData['currentPlayerIndex'] ?? 0;
-    if (currentIndex < playerOrder.length) {
-      await passPresidentTurn(gameCode, playerOrder[currentIndex]);
+    if (currentIndex >= playerOrder.length) return;
+
+    final playerId = playerOrder[currentIndex];
+    final playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+    final lastPlay = gameData['lastPlay'];
+    final myHand = List<String>.from(gameData['playerHands']?[playerId] ?? []);
+
+    if (lastPlay == null && myHand.isNotEmpty) {
+      final String cardToPlay = myHand.contains('3C') ? '3C' : myHand.first;
+      await notifyAutoPlay(gameRef, playerName, actionDetails: "carte simple");
+      await playPresidentCards(gameCode, playerId, [cardToPlay], isAuto: true);
+    } else {
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "passe son tour",
+      );
+      await passPresidentTurn(gameCode, playerId, isAuto: true);
     }
   }
 
+  // 4. TIMEOUT BLOKUS
   Future<void> handleBlokusTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final gameSnap = await gameRef.get();
     if (!gameSnap.exists) return;
     var gameData = gameSnap.data() as Map<String, dynamic>;
-    final playerOrder = List<String>.from(gameData['blokusPlayerOrder']);
-    final currentIndex = gameData['blokusCurrentPlayerIndex'];
-    if (currentIndex < playerOrder.length) {
-      await passBlokusTurn(gameCode, playerOrder[currentIndex]);
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
+
+    final playerOrder = List<String>.from(gameData['blokusPlayerOrder'] ?? []);
+    final currentIndex = gameData['blokusCurrentPlayerIndex'] ?? 0;
+    if (currentIndex >= playerOrder.length) return;
+
+    final playerId = playerOrder[currentIndex];
+    final playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+    final myHand = List<int>.from(
+      gameData['blokusPlayerHands']?[playerId] ?? [],
+    );
+    final myColor = gameData['blokusPlayerColors']?[playerId] ?? 'blue';
+    final board = Map<String, String>.from(gameData['blokusBoard'] ?? {});
+    final isFirst = !(gameData['blokusFirstPiecePlaced']?[playerId] ?? false);
+
+    bool placed = false;
+    List<int> candidatePieces = List.from(myHand)..shuffle();
+
+    for (int pieceId in candidatePieces) {
+      for (int rot = 0; rot < 4; rot++) {
+        for (bool flip in [false, true]) {
+          final shape = GameData.getRotatedPiece(pieceId, rot, flipped: flip);
+          for (int r = 0; r < 20; r++) {
+            for (int c = 0; c < 20; c++) {
+              final coords = shape.map((p) => [p[0] + r, p[1] + c]).toList();
+
+              bool inBounds = coords.every(
+                (p) => p[0] >= 0 && p[0] < 20 && p[1] >= 0 && p[1] < 20,
+              );
+              if (!inBounds) continue;
+              if (coords.any((p) => board.containsKey("${p[0]}_${p[1]}")))
+                continue;
+
+              bool touchesEdge = coords.any((p) {
+                final neighbors = [
+                  [p[0] - 1, p[1]],
+                  [p[0] + 1, p[1]],
+                  [p[0], p[1] - 1],
+                  [p[0] + 1, p[1] + 1],
+                ];
+                return neighbors.any(
+                  (n) => board["${n[0]}_${n[1]}"] == myColor,
+                );
+              });
+              if (touchesEdge) continue;
+
+              bool touchesCorner = coords.any((p) {
+                final diags = [
+                  [p[0] - 1, p[1] - 1],
+                  [p[0] - 1, p[1] + 1],
+                  [p[0] + 1, p[1] - 1],
+                  [p[0] + 1, p[1] + 1],
+                ];
+                return diags.any((d) => board["${d[0]}_${d[1]}"] == myColor);
+              });
+
+              if (isFirst) {
+                String cornerTarget =
+                    myColor == 'blue'
+                        ? "0_0"
+                        : myColor == 'red'
+                        ? "19_19"
+                        : myColor == 'green'
+                        ? "0_19"
+                        : "19_0";
+                if (coords.any((p) => "${p[0]}_${p[1]}" == cornerTarget)) {
+                  await notifyAutoPlay(
+                    gameRef,
+                    playerName,
+                    actionDetails: "pièce posée",
+                  );
+                  await placeBlokusPiece(
+                    gameCode,
+                    playerId,
+                    pieceId,
+                    r,
+                    c,
+                    rot,
+                    flipped: flip,
+                    isAuto: true,
+                  );
+                  placed = true;
+                  break;
+                }
+              } else if (touchesCorner) {
+                await notifyAutoPlay(
+                  gameRef,
+                  playerName,
+                  actionDetails: "pièce posée",
+                );
+                await placeBlokusPiece(
+                  gameCode,
+                  playerId,
+                  pieceId,
+                  r,
+                  c,
+                  rot,
+                  flipped: flip,
+                  isAuto: true,
+                );
+                placed = true;
+                break;
+              }
+            }
+            if (placed) break;
+          }
+          if (placed) break;
+        }
+        if (placed) break;
+      }
+      if (placed) break;
+    }
+
+    if (!placed) {
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "passe son tour",
+      );
+      await passBlokusTurn(gameCode, playerId, isAuto: true);
     }
   }
 
+  // 5. TIMEOUT JEU DE DAMES
   Future<void> handleCheckersTimeout(String gameCode) async {
-    await _db.runTransaction((transaction) async {
-      final gameRef = _db.collection('games').doc(gameCode);
-      DocumentSnapshot gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) return;
-      var gameData = gameSnap.data() as Map<String, dynamic>;
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      if (gameData['gameState'] != 'playing') return;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
 
-      List<String> playerOrder = List<String>.from(
-        gameData['checkersPlayerOrder'],
+    List<String> playerOrder = List<String>.from(
+      gameData['checkersPlayerOrder'],
+    );
+    int currentIndex = gameData['checkersCurrentPlayerIndex'];
+    final playerId = playerOrder[currentIndex];
+    final playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+    final board = Map<String, String>.from(gameData['checkersBoard'] ?? {});
+    final currentColor = gameData['checkersCurrentColor'] ?? 'red';
+
+    bool hasCapture = _isAnyCaptureAvailable(board, currentColor);
+    List<Map<String, int>> legalMoves = [];
+
+    for (var entry in board.entries) {
+      if (entry.value.startsWith(currentColor)) {
+        final pos = entry.key.split(',').map(int.parse).toList();
+        final r = pos[0];
+        final c = pos[1];
+        final isKing = entry.value.endsWith('_king');
+
+        final dirs =
+            isKing
+                ? [
+                  [-1, -1],
+                  [-1, 1],
+                  [1, -1],
+                  [1, 1],
+                ]
+                : (currentColor == 'red'
+                    ? [
+                      [-1, -1],
+                      [-1, 1],
+                    ]
+                    : [
+                      [1, -1],
+                      [1, 1],
+                    ]);
+
+        if (hasCapture) {
+          if (_canPieceCapture(board, r, c, currentColor, isKing)) {
+            for (var d in [
+              [-1, -1],
+              [-1, 1],
+              [1, -1],
+              [1, 1],
+            ]) {
+              int toR = r + d[0] * 2;
+              int toC = c + d[1] * 2;
+              if (toR >= 0 &&
+                  toR < 8 &&
+                  toC >= 0 &&
+                  toC < 8 &&
+                  !board.containsKey("$toR,$toC")) {
+                int midR = r + d[0];
+                int midC = c + d[1];
+                String opp = currentColor == 'red' ? 'black' : 'red';
+                if (board["$midR,$midC"]?.startsWith(opp) == true) {
+                  legalMoves.add({
+                    'fromR': r,
+                    'fromC': c,
+                    'toR': toR,
+                    'toC': toC,
+                  });
+                }
+              }
+            }
+          }
+        } else {
+          for (var d in dirs) {
+            int toR = r + d[0];
+            int toC = c + d[1];
+            if (toR >= 0 &&
+                toR < 8 &&
+                toC >= 0 &&
+                toC < 8 &&
+                !board.containsKey("$toR,$toC")) {
+              legalMoves.add({'fromR': r, 'fromC': c, 'toR': toR, 'toC': toC});
+            }
+          }
+        }
+      }
+    }
+
+    if (legalMoves.isNotEmpty) {
+      final move = legalMoves[Random().nextInt(legalMoves.length)];
+      await notifyAutoPlay(gameRef, playerName, actionDetails: "coup forcé");
+      await checkersMove(
+        gameCode,
+        playerId,
+        move['fromR']!,
+        move['fromC']!,
+        move['toR']!,
+        move['toC']!,
+        isAuto: true,
       );
-      int currentIndex = gameData['checkersCurrentPlayerIndex'];
-      String currentColor = gameData['checkersCurrentColor'];
-
+    } else {
       String nextColor = currentColor == 'red' ? 'black' : 'red';
       int nextIndex = (currentIndex + 1) % playerOrder.length;
-
-      transaction.update(gameRef, {
+      await notifyAutoPlay(gameRef, playerName, actionDetails: "tour passé");
+      await gameRef.update({
         'checkersCurrentColor': nextColor,
         'checkersCurrentPlayerIndex': nextIndex,
         'turnStartTime': FieldValue.serverTimestamp(),
-        'gameLog': FieldValue.arrayUnion(["Temps écoulé, tour passé !"]),
       });
-    });
+    }
   }
 
   Future<void> handleCodenamesTimeout(String gameCode) async {
@@ -4952,11 +5283,13 @@ class FirebaseService {
     final gameSnap = await gameRef.get();
     if (!gameSnap.exists) return;
     final gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
 
     if (gameData['roundState'] == 'clue_giving') {
-      await submitCodenamesClue(gameCode, "Temps_Écoulé", 1);
+      await submitCodenamesClue(gameCode, "Temps_Écoulé", 1, isAuto: true);
     } else if (gameData['roundState'] == 'guessing') {
-      await passCodenamesTurn(gameCode);
+      await passCodenamesTurn(gameCode, isAuto: true);
     }
   }
 
@@ -4965,6 +5298,8 @@ class FirebaseService {
     final gameSnap = await gameRef.get();
     if (!gameSnap.exists) return;
     final gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
 
     if (gameData['roundState'] == 'collecting_words') {
       final players = Map<String, dynamic>.from(gameData['players']);
@@ -4979,7 +5314,7 @@ class FirebaseService {
             "Mot3",
             "Mot4",
             "Mot5",
-          ]);
+          ], isAuto: true);
         }
       }
     } else if (gameData['roundState'].toString().startsWith('playing_round_')) {
@@ -4989,7 +5324,10 @@ class FirebaseService {
 
   Future<void> handleGribouillisTimeout(String gameCode) async {
     final gameSnap = await _db.collection('games').doc(gameCode).get();
+    if (!gameSnap.exists) return;
     var gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
     final players = Map<String, dynamic>.from(gameData['players']);
     final submitted = List<String>.from(gameData['submittedPlayers'] ?? []);
     final roundState = gameData['roundState'];
@@ -5007,33 +5345,102 @@ class FirebaseService {
     }
   }
 
+  // 12. TIMEOUT CADAVRE EXQUIS
   Future<void> handleCadavreExquisTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final gameSnap = await gameRef.get();
     if (!gameSnap.exists) return;
     var gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
     final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
     final currentIndex = gameData['currentPlayerIndex'] ?? 0;
     if (currentIndex < playerOrder.length) {
-      await submitCadavreExquisStep(gameCode, playerOrder[currentIndex], "...");
+      final playerId = playerOrder[currentIndex];
+      final playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+      final words = [
+        "mystère",
+        "silence",
+        "regarde",
+        "chat",
+        "étrange",
+        "nuit",
+        "voyage",
+      ];
+      final randomWord = words[Random().nextInt(words.length)];
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "mot '$randomWord'",
+      );
+      await submitCadavreExquisStep(
+        gameCode,
+        playerId,
+        randomWord,
+        isAuto: true,
+      );
     }
   }
 
+  // 7. TIMEOUT PETITS CHEVAUX
   Future<void> handlePetitsChevauxTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
-    final gameSnap = await gameRef.get();
-    if (!gameSnap.exists) return;
-    var gameData = gameSnap.data() as Map<String, dynamic>;
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    var gameData = snap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
 
     final playerOrder = List<String>.from(gameData['petitsChevauxPlayerOrder']);
     final currentIndex = gameData['petitsChevauxCurrentIndex'];
     if (currentIndex >= playerOrder.length) return;
     String currentPlayerId = playerOrder[currentIndex];
+    final playerName =
+        gameData['players']?[currentPlayerId]?['name'] ?? 'Un joueur';
 
     if (gameData['petitsChevauxHasRolled'] == true) {
-      await passTurnPetitsChevaux(gameCode, currentPlayerId);
+      final positions = List<int>.from(
+        gameData['petitsChevauxPositions']?[currentPlayerId] ??
+            [-1, -1, -1, -1],
+      );
+      final dice = (gameData['petitsChevauxDice'] as num?)?.toInt() ?? 0;
+      int? validPawnIdx;
+
+      for (int i = 0; i < 4; i++) {
+        int pos = positions[i];
+        if (pos == -1 && (dice == 1 || dice == 6)) {
+          validPawnIdx = i;
+          break;
+        } else if (pos >= 0 && pos + dice <= 56) {
+          validPawnIdx = i;
+          break;
+        }
+      }
+
+      if (validPawnIdx != null) {
+        await notifyAutoPlay(
+          gameRef,
+          playerName,
+          actionDetails: "pion ${validPawnIdx + 1} déplacé",
+        );
+        await movePawnPetitsChevaux(
+          gameCode,
+          currentPlayerId,
+          currentPlayerId,
+          validPawnIdx,
+          isAuto: true,
+        );
+      } else {
+        await notifyAutoPlay(
+          gameRef,
+          playerName,
+          actionDetails: "passe son tour",
+        );
+        await passTurnPetitsChevaux(gameCode, currentPlayerId, isAuto: true);
+      }
     } else {
-      await rollDicePetitsChevaux(gameCode, currentPlayerId);
+      await notifyAutoPlay(gameRef, playerName, actionDetails: "lance le dé");
+      await rollDicePetitsChevaux(gameCode, currentPlayerId, isAuto: true);
     }
   }
 
@@ -5207,6 +5614,7 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
       if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
 
       final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
       final currentPlayerIndex = gameData['currentPlayerIndex'] ?? -1;
@@ -5341,6 +5749,7 @@ class FirebaseService {
           gameData['currentPhase'] == 'voting';
 
       if (gameData['gameState'] != 'playing' || !isVoting) return;
+      if (!_isTurnTimedOut(gameData)) return;
 
       final players = Map<String, dynamic>.from(gameData['players']);
       final votes = Map<String, dynamic>.from(gameData['votes'] ?? {});
@@ -5501,9 +5910,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> yamsRollDice(String gameCode, String playerId) async {
+  Future<void> yamsRollDice(
+    String gameCode,
+    String playerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -5511,7 +5924,9 @@ class FirebaseService {
       if (!snap.exists) return;
       final gameData = snap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, playerId);
+      if (!isAuto) {
+        _verifyPlayerAuth(gameData, playerId);
+      }
 
       if (gameData['yamsCurrentPlayerId'] != playerId) {
         throw Exception("Ce n'est pas votre tour.");
@@ -5574,13 +5989,17 @@ class FirebaseService {
     });
   }
 
+  // --- YAMS ---
   Future<void> yamsScoreCategory(
     String gameCode,
     String playerId,
-    String category,
-  ) async {
-    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    String category, {
+    bool isAuto = false,
+  }) async {
+    if (!isAuto) {
+      final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+      if (currentAuthUid == null) throw Exception("Non authentifié.");
+    }
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -5588,12 +6007,14 @@ class FirebaseService {
       if (!snap.exists) return;
       final gameData = snap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, playerId);
+      if (!isAuto) {
+        _verifyPlayerAuth(gameData, playerId);
+      }
 
       if (gameData['yamsCurrentPlayerId'] != playerId) {
         throw Exception("Ce n'est pas votre tour.");
       }
-      if (gameData['yamsRollsLeft'] == 3) {
+      if (gameData['yamsRollsLeft'] == 3 && !isAuto) {
         throw Exception("Vous devez lancer les dés avant de marquer.");
       }
 
@@ -5605,9 +6026,7 @@ class FirebaseService {
       }
 
       final dice = List<int>.from(gameData['yamsDice'] ?? []);
-      if (dice.length != 5) throw Exception("Dés invalides.");
-
-      final score = calculateYamsScore(dice, category);
+      final score = dice.length == 5 ? calculateYamsScore(dice, category) : 0;
       myScores[category] = score;
       rawScores[playerId] = myScores;
 
@@ -5622,16 +6041,18 @@ class FirebaseService {
       final nextPlayerId =
           playerOrder[(playerOrder.indexOf(playerId) + 1) % playerOrder.length];
 
-      int xpBase =
-          (category == 'Yams') ? 50 : (category.contains('Suite') ? 20 : 10);
-      creditPlayerXp(
-        transaction,
-        gameRef,
-        gameData,
-        playerId,
-        xpBase,
-        applySpeedBonus: true,
-      );
+      if (!isAuto) {
+        int xpBase =
+            (category == 'Yams') ? 50 : (category.contains('Suite') ? 20 : 10);
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          xpBase,
+          applySpeedBonus: true,
+        );
+      }
 
       final updates = <String, dynamic>{
         'yamsScores': rawScores,
@@ -5729,25 +6150,33 @@ class FirebaseService {
     }
   }
 
+  // 19. TIMEOUT YAMS
   Future<void> handleYamsTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final snap = await gameRef.get();
     if (!snap.exists) return;
     final data = snap.data() as Map<String, dynamic>;
+    if (data['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(data)) return;
+
     final currentPlayerId = data['yamsCurrentPlayerId'];
+    if (currentPlayerId == null) return;
+    final playerName =
+        data['players']?[currentPlayerId]?['name'] ?? 'Un joueur';
     final rollsLeft = (data['yamsRollsLeft'] as num?)?.toInt() ?? 3;
     final dice = List<int>.from(data['yamsDice'] ?? []);
 
     if (rollsLeft == 3) {
-      await yamsRollDice(gameCode, currentPlayerId);
+      await notifyAutoPlay(gameRef, playerName, actionDetails: "lance les dés");
+      await yamsRollDice(gameCode, currentPlayerId, isAuto: true);
     } else if (dice.isNotEmpty) {
-      // Parsing sécurisé sans cast direct
       final rawScores = Map<String, dynamic>.from(data['yamsScores'] ?? {});
       final myScores = Map<String, dynamic>.from(
         rawScores[currentPlayerId] ?? {},
       );
 
       const categories = [
+        'Chance',
         'As',
         'Deux',
         'Trois',
@@ -5760,11 +6189,15 @@ class FirebaseService {
         'Petite Suite',
         'Grande Suite',
         'Yams',
-        'Chance',
       ];
       for (String cat in categories) {
         if (!myScores.containsKey(cat)) {
-          await yamsScoreCategory(gameCode, currentPlayerId, cat);
+          await notifyAutoPlay(
+            gameRef,
+            playerName,
+            actionDetails: "catégorie $cat",
+          );
+          await yamsScoreCategory(gameCode, currentPlayerId, cat, isAuto: true);
           break;
         }
       }
@@ -5801,10 +6234,13 @@ class FirebaseService {
   Future<void> submitCadavreExquisStep(
     String gameCode,
     String playerId,
-    String rawText,
-  ) async {
-    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    String rawText, {
+    bool isAuto = false,
+  }) async {
+    if (!isAuto) {
+      final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+      if (currentAuthUid == null) throw Exception("Non authentifié.");
+    }
 
     final cleanText = sanitizeUserInput(rawText, maxLength: 80);
     if (cleanText.isEmpty) throw Exception("Texte requis.");
@@ -5817,7 +6253,9 @@ class FirebaseService {
 
       if (gameData['roundState'] != 'playing') return;
 
-      _verifyPlayerAuth(gameData, playerId);
+      if (!isAuto) {
+        _verifyPlayerAuth(gameData, playerId);
+      }
 
       List<String> playerOrder = List<String>.from(
         gameData['playerOrder'] ?? [],
@@ -5889,14 +6327,16 @@ class FirebaseService {
         }
       }
 
-      creditPlayerXp(
-        transaction,
-        gameRef,
-        gameData,
-        playerId,
-        8,
-        applySpeedBonus: true,
-      );
+      if (!isAuto) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          8,
+          applySpeedBonus: true,
+        );
+      }
 
       transaction.update(gameRef, updates);
     });
@@ -5908,55 +6348,87 @@ class FirebaseService {
     String rawText,
   ) => submitCadavreExquisStep(gameCode, playerId, rawText);
 
+  // 1. TIMEOUT UNO (CORRIGÉ & ROBUSTE)
   Future<void> handleUnoTimeout(String gameCode) async {
-    await _db.runTransaction((transaction) async {
-      final gameRef = _db.collection('games').doc(gameCode);
-      DocumentSnapshot gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists || gameSnap.data() == null) return;
-      var gameData = gameSnap.data() as Map<String, dynamic>;
+    final gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
 
-      if (gameData['gameState'] != 'playing') return;
+    final playerOrder = List<String>.from(gameData['unoPlayerOrder'] ?? []);
+    final currentIndex =
+        (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+    if (currentIndex >= playerOrder.length) return;
 
-      final unoPlayerOrder = List<String>.from(
-        gameData['unoPlayerOrder'] ?? [],
-      );
-      final unoCurrentPlayerIndex = gameData['unoCurrentPlayerIndex'] ?? 0;
-      if (unoPlayerOrder.isEmpty ||
-          unoCurrentPlayerIndex >= unoPlayerOrder.length)
-        return;
-      final timedOutPlayerId = unoPlayerOrder[unoCurrentPlayerIndex];
+    final playerId = playerOrder[currentIndex];
+    final playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+    final hands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+    final myHand = List<String>.from(hands[playerId] ?? []);
 
-      if (await _incrementInactiveCountAndCheckExpulsion(
-        transaction,
-        gameRef,
-        gameData,
-        timedOutPlayerId,
-      )) {
-        return;
+    // 1. Récupération réelle de la carte au sommet de la défausse
+    final discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
+    final String topCard = discardPile.isNotEmpty ? discardPile.last : 'red-0';
+    final String? wildColor = gameData['unoWildColorChosen'];
+    final int pendingDraw = (gameData['unoPendingDraw'] as num?)?.toInt() ?? 0;
+    final bool stackDraws = gameData['unoStackDraws'] ?? true;
+
+    // 2. Recherche d'une carte valide dans la main
+    String? playableCard;
+    if (myHand.isNotEmpty) {
+      if (pendingDraw > 0) {
+        // En cas de pénalité (+2 ou +4), on cherche une carte pour contrer (si empilement actif)
+        if (stackDraws) {
+          playableCard = myHand.firstWhere((c) {
+            final val = GameData.getUnoCardValue(c);
+            return (val == 'draw2' || val == 'wild_draw4') &&
+                GameData.canPlayUnoCard(c, topCard, wildColor);
+          }, orElse: () => '');
+        }
+      } else {
+        // Recherche normale d'une carte jouable
+        playableCard = myHand.firstWhere(
+          (c) => GameData.canPlayUnoCard(c, topCard, wildColor),
+          orElse: () => '',
+        );
       }
+    }
 
-      // Le joueur a dÃƒÂ©jÃƒÂ  piochÃƒÂ© mais n'a pas jouÃƒÂ© : il passe juste son tour
-      if (gameData['unoDrawActionDone'] == true) {
-        final int direction = gameData['unoDirection'] ?? 1;
-        final int nextIndex =
-            (unoCurrentPlayerIndex + direction + unoPlayerOrder.length) %
-            unoPlayerOrder.length;
-        transaction.update(gameRef, {
-          'unoCurrentPlayerIndex': nextIndex,
-          'unoDrawActionDone': false,
-          'unoLastDrawnCard': null,
-          'turnStartTime': FieldValue.serverTimestamp(),
-        });
-        return;
-      }
-
-      await _drawUnoCardAndPassLogic(
-        transaction,
+    // 3. ACTION AUTOMATIQUE :
+    if (playableCard != null && playableCard.isNotEmpty) {
+      // Le joueur possède une carte jouable -> L'ordinateur la pose
+      await notifyAutoPlay(
         gameRef,
-        gameData,
-        timedOutPlayerId,
+        playerName,
+        actionDetails: "carte $playableCard posée",
       );
-    });
+      await playUnoCard(
+        gameCode,
+        playerId,
+        playableCard,
+        chosenColor: 'red', // Couleur par défaut si c'est un Joker
+        isAuto: true,
+      );
+    } else {
+      // Aucune carte jouable -> Pioche (et purge de pénalité si présente) puis passage immédiat au joueur suivant
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "pioche et passe son tour",
+      );
+      await _db.runTransaction((transaction) async {
+        final freshSnap = await transaction.get(gameRef);
+        if (!freshSnap.exists) return;
+        final freshData = freshSnap.data() as Map<String, dynamic>;
+        await _drawUnoCardAndPassLogic(
+          transaction,
+          gameRef,
+          freshData,
+          playerId,
+        );
+      });
+    }
   }
 
   Future<void> handlePokerTimeout(String gameCode) async {
@@ -5965,6 +6437,7 @@ class FirebaseService {
     if (!gameSnap.exists) return;
     var gameData = gameSnap.data() as Map<String, dynamic>;
     if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
     final phase = gameData['phase'] as String?;
     if (phase == 'hand_over') {
       // Auto-advance: deal next hand
@@ -5978,8 +6451,17 @@ class FirebaseService {
     String timedOutPlayerId = playerOrder[currentPlayerIndex];
     var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
     if (playerData[timedOutPlayerId]?['status'] != 'active') return;
+    final playerName =
+        playerData[timedOutPlayerId]?['name'] ??
+        gameData['players']?[timedOutPlayerId]?['name'] ??
+        'Un joueur';
+    await notifyAutoPlay(
+      gameRef,
+      playerName,
+      actionDetails: "se couche (fold)",
+    );
     // Auto-fold by calling the normal poker action
-    await pokerAction(gameCode, timedOutPlayerId, 'fold');
+    await pokerAction(gameCode, timedOutPlayerId, 'fold', isAuto: true);
   }
 
   Future<void> handleZeroPointeTimeout(String gameCode) async {
@@ -5990,6 +6472,7 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
       if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
 
       final timedOutPlayerId = gameData['currentPlayerId'];
       if (timedOutPlayerId == null) return;
@@ -6430,12 +6913,15 @@ class FirebaseService {
     final gameRef = _db.collection('games').doc(gameCode);
     DocumentSnapshot gameSnap = await gameRef.get();
 
-    // Ã°Å¸Å¸Â¢ CORRECTION : On enlÃƒÂ¨ve le runTransaction car _tallyPhotoRouletteVotes fait dÃƒÂ©jÃƒÂ  des updates
     if (gameSnap.exists && gameSnap.get('roundState') == 'showing_photo') {
-      await _tallyPhotoRouletteVotes(
-        gameRef,
-        gameSnap.data() as Map<String, dynamic>,
-      );
+      final data = gameSnap.data() as Map<String, dynamic>;
+      if (data['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(
+        data,
+        customDuration: (data['turnTimerSeconds'] as num?)?.toInt() ?? 5,
+      ))
+        return;
+      await _tallyPhotoRouletteVotes(gameRef, data);
     }
   }
 
@@ -10261,10 +10747,11 @@ class FirebaseService {
   Future<void> tabooAction(
     String gameCode,
     String playerId,
-    String action,
-  ) async {
+    String action, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -10274,7 +10761,9 @@ class FirebaseService {
 
       if (gameData['tabooTurnActive'] != true) return;
 
-      _verifyPlayerAuth(gameData, playerId);
+      if (!isAuto) {
+        _verifyPlayerAuth(gameData, playerId);
+      }
 
       final currentTeamId = gameData['tabooCurrentTeamId'];
       final tabooTeams = Map<String, dynamic>.from(
@@ -10301,42 +10790,50 @@ class FirebaseService {
           throw Exception("Vous ne pouvez pas buzzer votre propre équipe.");
         }
         scores[currentTeamId] = max(0, (scores[currentTeamId] ?? 0) - 1);
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          playerId,
-          15,
-          applySpeedBonus: true,
-        );
+        if (!isAuto) {
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            15,
+            applySpeedBonus: true,
+          );
+        }
         updates['tabooScores'] = scores;
         updates['tabooCurrentWord'] = nextWord;
         updates['tabooForbiddenWords'] = nextForbidden;
 
-        _db.collection('users').doc(currentAuthUid).set({
-          'badgeProgress.taboo_buzz_master': FieldValue.increment(1),
-        }, SetOptions(merge: true));
+        if (!isAuto && currentAuthUid != null) {
+          _db.collection('users').doc(currentAuthUid).set({
+            'badgeProgress.taboo_buzz_master': FieldValue.increment(1),
+          }, SetOptions(merge: true));
+        }
       } else if (action == 'correct') {
         // Sécurité : Seule l'équipe active valide
         if (actorTeamId != currentTeamId) {
           throw Exception("Seule l'équipe active peut valider.");
         }
         scores[currentTeamId] = (scores[currentTeamId] ?? 0) + 1;
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          playerId,
-          10,
-          applySpeedBonus: true,
-        );
+        if (!isAuto) {
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            10,
+            applySpeedBonus: true,
+          );
+        }
         updates['tabooScores'] = scores;
         updates['tabooCurrentWord'] = nextWord;
         updates['tabooForbiddenWords'] = nextForbidden;
 
-        _db.collection('users').doc(currentAuthUid).set({
-          'badgeProgress.taboo_no_buzz': FieldValue.increment(1),
-        }, SetOptions(merge: true));
+        if (!isAuto && currentAuthUid != null) {
+          _db.collection('users').doc(currentAuthUid).set({
+            'badgeProgress.taboo_no_buzz': FieldValue.increment(1),
+          }, SetOptions(merge: true));
+        }
       } else if (action == 'skip') {
         if (actorTeamId != currentTeamId) {
           throw Exception("Seule l'équipe active peut passer.");
@@ -10354,6 +10851,12 @@ class FirebaseService {
     final gameSnap = await gameRef.get();
     if (!gameSnap.exists) return;
     var gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(
+      gameData,
+      customDuration: (gameData['tabooTurnDuration'] as num?)?.toInt() ?? 60,
+    ))
+      return;
 
     if (gameData['tabooTurnActive'] == true) {
       final String currentTeamId = gameData['tabooCurrentTeamId'];
@@ -10580,13 +11083,148 @@ class FirebaseService {
     });
   }
 
-  Future<void> shootBatailleNavale(
+  Future<void> randomizeShipsBatailleNavale(
     String gameCode,
     String playerId,
-    int targetIndex,
   ) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
     if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final gameSnap = await transaction.get(gameRef);
+      if (!gameSnap.exists) return;
+      var gameData = gameSnap.data() as Map<String, dynamic>;
+      if (gameData['roundState'] != 'placement') return;
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+        throw Exception("Action non autorisée.");
+      }
+
+      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+      var myData = Map<String, dynamic>.from(playerData[playerId] ?? {});
+
+      List<int> grid = List.filled(100, 0);
+      Map<String, dynamic> shipsPlaced = {};
+      Random rand = Random();
+
+      for (var entry in GameData.batailleNavaleShips.entries) {
+        String shipType = entry.key;
+        int shipId =
+            GameData.batailleNavaleShips.keys.toList().indexOf(shipType) + 1;
+        int length = entry.value['length'];
+        int width = entry.value['width'];
+        int area = entry.value['area'];
+        bool placed = false;
+
+        while (!placed) {
+          bool isHorizontal = rand.nextBool();
+          int startRow = rand.nextInt(10);
+          int startCol = rand.nextInt(10);
+          int actualCols = isHorizontal ? length : width;
+          int actualRows = isHorizontal ? width : length;
+
+          if (startRow + actualRows > 10 || startCol + actualCols > 10)
+            continue;
+
+          bool valid = true;
+          List<int> indices = [];
+          for (int r = 0; r < actualRows; r++) {
+            for (int c = 0; c < actualCols; c++) {
+              int idx = (startRow + r) * 10 + (startCol + c);
+              if (grid[idx] != 0) {
+                valid = false;
+                break;
+              }
+              indices.add(idx);
+            }
+            if (!valid) break;
+          }
+
+          if (valid) {
+            for (int idx in indices) grid[idx] = shipId;
+            shipsPlaced[shipType] = {
+              'id': shipId,
+              'area': area,
+              'startIndex': startRow * 10 + startCol,
+              'isHorizontal': isHorizontal,
+              'hits': 0,
+              'sunk': false,
+            };
+            placed = true;
+          }
+        }
+      }
+
+      myData['myGrid'] = grid;
+      myData['shipsPlaced'] = shipsPlaced;
+      playerData[playerId] = myData;
+
+      transaction.update(gameRef, {'playerData': playerData});
+    });
+  }
+
+  Future<void> setPlayerReadyBatailleNavale(
+    String gameCode,
+    String playerId,
+  ) async {
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (currentAuthUid == null) throw Exception("Non authentifié.");
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final gameSnap = await transaction.get(gameRef);
+      if (!gameSnap.exists) return;
+      var gameData = gameSnap.data() as Map<String, dynamic>;
+      if (gameData['roundState'] != 'placement') return;
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+        throw Exception("Action non autorisée.");
+      }
+
+      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+      var myData = Map<String, dynamic>.from(playerData[playerId] ?? {});
+      var shipsPlaced = Map<String, dynamic>.from(myData['shipsPlaced'] ?? {});
+
+      if (shipsPlaced.length != GameData.batailleNavaleShips.length) {
+        throw Exception(
+          "Veuillez placer tous vos navires avant de vous déclarer prêt.",
+        );
+      }
+
+      myData['isReady'] = true;
+      playerData[playerId] = myData;
+
+      bool allReady = playerData.values.every((p) => p['isReady'] == true);
+
+      Map<String, dynamic> updates = {'playerData': playerData};
+      if (allReady) {
+        List<String> playerIds = playerData.keys.toList();
+        String firstPlayer = playerIds[Random().nextInt(playerIds.length)];
+        updates.addAll({
+          'roundState': 'playing',
+          'currentPlayerId': firstPlayer,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "Tous les joueurs sont prêts ! ${playerData[firstPlayer]?['name'] ?? 'Joueur'} commence à tirer.",
+          ]),
+        });
+      }
+
+      transaction.update(gameRef, updates);
+    });
+  }
+
+  Future<void> shootBatailleNavale(
+    String gameCode,
+    String playerId,
+    int targetIndex, {
+    bool isAuto = false,
+  }) async {
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     if (targetIndex < 0 || targetIndex >= 100) {
       throw Exception("Cible hors de la grille.");
@@ -10603,7 +11241,8 @@ class FirebaseService {
       }
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isAuto &&
+          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -10661,9 +11300,11 @@ class FirebaseService {
       if (enemyGrid.where((cell) => cell != 'unknown').length == 1 &&
           (result == 'hit' || result == 'sunk')) {
         xpBase = 50; // Sniper 1er coup
-        _db.collection('users').doc(currentAuthUid).set({
-          'unlockedBadges.naval_sniper': FieldValue.serverTimestamp(),
-        }, SetOptions(merge: true));
+        if (!isAuto && currentAuthUid != null) {
+          _db.collection('users').doc(currentAuthUid).set({
+            'unlockedBadges.naval_sniper': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        }
       } else if (result == 'sunk') {
         xpBase = 25;
       } else if (result == 'hit') {
@@ -10713,186 +11354,51 @@ class FirebaseService {
     });
   }
 
-  // --- PLACEMENT ALÉATOIRE ---
-  Future<void> randomizeShipsBatailleNavale(
-    String gameCode,
-    String playerId,
-  ) async {
-    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
-
-    await _db.runTransaction((transaction) async {
-      final gameRef = _db.collection('games').doc(gameCode);
-      final gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) return;
-      var gameData = gameSnap.data() as Map<String, dynamic>;
-      if (gameData['roundState'] != 'placement') return;
-
-      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
-        throw Exception("Action non autorisée.");
-      }
-
-      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
-      var myData = Map<String, dynamic>.from(playerData[playerId] ?? {});
-
-      List<int> grid = List.filled(100, 0);
-      Map<String, dynamic> shipsPlaced = {};
-      Random rand = Random();
-
-      for (var entry in GameData.batailleNavaleShips.entries) {
-        String shipType = entry.key;
-        int shipId =
-            GameData.batailleNavaleShips.keys.toList().indexOf(shipType) + 1;
-        int length = entry.value['length'];
-        int width = entry.value['width'];
-        int area = entry.value['area'];
-        bool placed = false;
-
-        while (!placed) {
-          bool isHorizontal = rand.nextBool();
-          int startRow = rand.nextInt(10);
-          int startCol = rand.nextInt(10);
-
-          int actualCols = isHorizontal ? length : width;
-          int actualRows = isHorizontal ? width : length;
-
-          if (startRow + actualRows > 10 || startCol + actualCols > 10) {
-            continue;
-          }
-
-          bool valid = true;
-          List<int> indices = [];
-          for (int r = 0; r < actualRows; r++) {
-            for (int c = 0; c < actualCols; c++) {
-              int idx = (startRow + r) * 10 + (startCol + c);
-              if (grid[idx] != 0) {
-                valid = false;
-                break;
-              }
-              indices.add(idx);
-            }
-            if (!valid) break;
-          }
-
-          if (valid) {
-            for (int idx in indices) grid[idx] = shipId;
-            shipsPlaced[shipType] = {
-              'id': shipId,
-              'area': area,
-              'startIndex': startRow * 10 + startCol,
-              'isHorizontal': isHorizontal,
-              'hits': 0,
-              'sunk': false,
-            };
-            placed = true;
-          }
-        }
-      }
-
-      myData['myGrid'] = grid;
-      myData['shipsPlaced'] = shipsPlaced;
-      myData['isReady'] = false;
-      playerData[playerId] = myData;
-      transaction.update(gameRef, {'playerData': playerData});
-    });
-  }
-
-  // --- BOUTON PRÃŠT ---
-  Future<void> setPlayerReadyBatailleNavale(
-    String gameCode,
-    String playerId,
-  ) async {
-    final gameRef = _db.collection('games').doc(gameCode);
-    final myPrivateSnap =
-        await gameRef.collection('private_data').doc(playerId).get();
-    final myPrivateData = myPrivateSnap.data() ?? {};
-
-    await _db.runTransaction((transaction) async {
-      final gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) return;
-      var gameData = gameSnap.data() as Map<String, dynamic>;
-      if (gameData['roundState'] != 'placement') return;
-
-      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
-      var myData = Map<String, dynamic>.from(playerData[playerId] ?? {});
-
-      final shipsCount =
-          (myPrivateData['shipsPlaced'] as Map?)?.length ??
-          (myData['shipsPlaced'] as Map?)?.length ??
-          0;
-
-      if (shipsCount != GameData.batailleNavaleShips.length) {
-        throw Exception(
-          "Vous devez placer tous vos navires avant d'être prêt.",
-        );
-      }
-
-      myData['isReady'] = true;
-      playerData[playerId] = myData;
-
-      Map<String, dynamic> updates = {'playerData': playerData};
-
-      // Vérifie si TOUS les joueurs sont prêts
-      bool allReady = playerData.values.every((p) => p['isReady'] == true);
-      if (allReady) {
-        List<String> playerIds = playerData.keys.toList();
-        String firstPlayer = playerIds[Random().nextInt(playerIds.length)];
-        updates.addAll({
-          'roundState': 'playing',
-          'currentPlayerId': firstPlayer,
-          'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion([
-            "Tous les joueurs sont prêts ! ${playerData[firstPlayer]?['name'] ?? 'Joueur'} commence à tirer.",
-          ]),
-        });
-      } else {
-        updates['gameLog'] = FieldValue.arrayUnion([
-          "${myData['name'] ?? 'Joueur'} est prêt !",
-        ]);
-      }
-      transaction.update(gameRef, updates);
-    });
-  }
-
   Future<void> _startRamiRound(
     DocumentReference gameRef,
     Map<String, dynamic> gameData,
   ) async {
-    final players = Map<String, dynamic>.from(gameData['players']);
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
     final playerIds = players.keys.toList()..shuffle();
+    final int handSize = playerIds.length == 2 ? 10 : 7;
 
     List<String> deck = GameData.generateRamiDeck(playerIds.length);
-    Map<String, dynamic> playerHands = {};
-    Map<String, dynamic> totalScores = Map.from(
+    Map<String, List<String>> hands = {};
+    Map<String, List<dynamic>> melds = {};
+    Map<String, int> totalScores = Map<String, int>.from(
       gameData['ramiTotalScores'] ?? {},
     );
 
-    for (String pId in playerIds) {
-      List<String> hand = [];
-      for (int i = 0; i < 7; i++) {
-        if (deck.isNotEmpty) hand.add(deck.removeAt(0));
+    for (var pId in playerIds) {
+      hands[pId] = [];
+      for (int i = 0; i < handSize && deck.isNotEmpty; i++) {
+        hands[pId]!.add(deck.removeAt(0));
       }
-      playerHands[pId] = hand;
-      if (!totalScores.containsKey(pId)) totalScores[pId] = 0;
+      melds[pId] = [];
+      totalScores[pId] = totalScores[pId] ?? 0;
     }
 
-    List<String> discardPile = [deck.removeAt(0)];
+    List<String> discard = [];
+    if (deck.isNotEmpty) {
+      discard.add(deck.removeAt(0));
+    }
 
     await gameRef.update({
       'gameState': 'playing',
-      'roundState': 'player_turn',
-      'ramiStock': deck,
-      'ramiDiscard': discardPile,
-      'ramiPlayerHands': playerHands,
-      'ramiMelds': {for (var pId in playerIds) pId: []},
+      'roundState': 'playing_turn',
+      'playerOrder': playerIds,
       'ramiCurrentPlayerId': playerIds.first,
+      'ramiPlayerHands': hands,
+      'ramiMelds': melds,
+      'ramiStock': deck,
+      'ramiDiscard': discard,
       'ramiTotalScores': totalScores,
       'ramiRoundOver': false,
       'ramiHasDrawn': false,
-      'playerOrder': playerIds,
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': ["La manche de Rami commence !"],
+      'gameLog': FieldValue.arrayUnion([
+        "La manche de Rami commence ! C'est au tour de ${players[playerIds.first]?['name'] ?? 'Joueur'}.",
+      ]),
     });
   }
 
@@ -10901,9 +11407,10 @@ class FirebaseService {
     String playerId,
     String action, {
     List<String>? cards,
+    bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -10915,9 +11422,11 @@ class FirebaseService {
         return;
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
-        throw Exception("Action non autorisée.");
+      if (!isAuto) {
+        final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
+        if (currentAuthUid != voterAuthUid) {
+          throw Exception("Action non autorisée.");
+        }
       }
 
       if (gameData['ramiCurrentPlayerId'] != playerId) return;
@@ -11090,13 +11599,23 @@ class FirebaseService {
     final snap = await gameRef.get();
     if (!snap.exists) return;
     final data = snap.data() as Map<String, dynamic>;
+    if (data['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(data)) return;
+
     final currentPlayerId = data['ramiCurrentPlayerId'];
     if (currentPlayerId == null) return;
+    final playerName =
+        data['players']?[currentPlayerId]?['name'] ?? 'Un joueur';
     final hasDrawn = data['ramiHasDrawn'] ?? false;
 
     // Si le joueur n'a pas pioché, on pioche automatiquement d'abord !
     if (!hasDrawn) {
-      await ramiAction(gameCode, currentPlayerId, 'draw_stock');
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "pioche automatique",
+      );
+      await ramiAction(gameCode, currentPlayerId, 'draw_stock', isAuto: true);
     }
 
     final updatedSnap = await gameRef.get();
@@ -11107,11 +11626,17 @@ class FirebaseService {
     );
 
     if (hand.isNotEmpty) {
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "défausse automatique",
+      );
       await ramiAction(
         gameCode,
         currentPlayerId,
         'discard',
         cards: [hand.last],
+        isAuto: true,
       );
     }
   }
@@ -11152,9 +11677,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> rollDicePetitsChevaux(String gameCode, String playerId) async {
+  Future<void> rollDicePetitsChevaux(
+    String gameCode,
+    String playerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -11162,7 +11691,9 @@ class FirebaseService {
       if (!snap.exists) return;
       final gameData = snap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, playerId);
+      if (!isAuto) {
+        _verifyPlayerAuth(gameData, playerId);
+      }
 
       final playerOrder = List<String>.from(
         gameData['petitsChevauxPlayerOrder'] ?? [],
@@ -11198,10 +11729,11 @@ class FirebaseService {
     String gameCode,
     String playerId,
     String targetOwnerId,
-    int pawnIndex,
-  ) async {
+    int pawnIndex, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -11213,7 +11745,8 @@ class FirebaseService {
 
       // SÉCURITÉ AUTH
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isAuto &&
+          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -11438,9 +11971,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> passTurnPetitsChevaux(String gameCode, String playerId) async {
+  Future<void> passTurnPetitsChevaux(
+    String gameCode,
+    String playerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -11449,7 +11986,8 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isAuto &&
+          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -11777,7 +12315,8 @@ class FirebaseService {
     bool isTimeout = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isTimeout && currentAuthUid == null)
+      throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -11791,7 +12330,8 @@ class FirebaseService {
       }
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isTimeout &&
+          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -11895,14 +12435,14 @@ class FirebaseService {
     if (data['gameState'] != 'playing' || data['dominoesRoundOver'] == true) {
       return;
     }
+    if (!_isTurnTimedOut(data)) return;
 
     final playerOrder = List<String>.from(data['dominoesPlayerOrder']);
     final int currentIndex = data['dominoesCurrentPlayerIndex'];
-    await passDominoesTurn(
-      gameCode,
-      playerOrder[currentIndex],
-      isTimeout: true,
-    );
+    final playerId = playerOrder[currentIndex];
+    final playerName = data['players']?[playerId]?['name'] ?? 'Un joueur';
+    await notifyAutoPlay(gameRef, playerName, actionDetails: "passe son tour");
+    await passDominoesTurn(gameCode, playerId, isTimeout: true);
   }
 
   // --- LOGIQUE ZOMBIE! ---
@@ -11993,10 +12533,11 @@ class FirebaseService {
   Future<void> zombieTakeCard(
     String gameCode,
     String playerId,
-    int targetHandIndex,
-  ) async {
+    int targetHandIndex, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -12006,7 +12547,7 @@ class FirebaseService {
       if (gameData['gameState'] != 'playing') return;
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if (players[playerId]?['authUid'] != currentAuthUid) {
+      if (!isAuto && players[playerId]?['authUid'] != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -12064,15 +12605,17 @@ class FirebaseService {
 
       int activePlayersCount = playerOrder.length - eliminated.length;
 
-      int xpBase = myHand.isEmpty ? 25 : (drawnCard != 'Zombie' ? 10 : 3);
-      creditPlayerXp(
-        transaction,
-        gameRef,
-        gameData,
-        playerId,
-        xpBase,
-        applySpeedBonus: true,
-      );
+      if (!isAuto) {
+        int xpBase = myHand.isEmpty ? 25 : (drawnCard != 'Zombie' ? 10 : 3);
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          xpBase,
+          applySpeedBonus: true,
+        );
+      }
 
       Map<String, dynamic> updates = {
         'zombiePlayerHands': hands,
@@ -12110,6 +12653,7 @@ class FirebaseService {
     if (!snap.exists) return;
     final data = snap.data() as Map<String, dynamic>;
     if (data['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(data)) return;
 
     List<String> playerOrder = List<String>.from(data['zombiePlayerOrder']);
     List<String> eliminated = List<String>.from(
@@ -12134,8 +12678,20 @@ class FirebaseService {
     );
 
     if (targetHand.isNotEmpty) {
+      final playerName =
+          data['players']?[currentPlayerId]?['name'] ?? 'Un joueur';
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "pioche aléatoire",
+      );
       int randomIndex = Random().nextInt(targetHand.length);
-      await zombieTakeCard(gameCode, currentPlayerId, randomIndex);
+      await zombieTakeCard(
+        gameCode,
+        currentPlayerId,
+        randomIndex,
+        isAuto: true,
+      );
     }
   }
 
@@ -12251,7 +12807,21 @@ class FirebaseService {
   }
 
   Future<void> handleDevineTeteTimeout(String gameCode) async {
-    await _db.collection('games').doc(gameCode).update({
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final data = snap.data() as Map<String, dynamic>;
+    if (data['gameState'] != 'playing' ||
+        (data['roundState'] != 'playing' &&
+            data['roundState'] != 'playing_turn'))
+      return;
+    if (!_isTurnTimedOut(
+      data,
+      customDuration: (data['turnTimerSeconds'] as num?)?.toInt() ?? 60,
+    ))
+      return;
+
+    await gameRef.update({
       'roundState': 'turn_result',
       'turnStartTime': FieldValue.serverTimestamp(),
     });
@@ -12430,10 +13000,11 @@ class FirebaseService {
   Future<void> playBMCCard(
     String gameCode,
     String playerId,
-    String cardText,
-  ) async {
+    String cardText, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -12445,7 +13016,7 @@ class FirebaseService {
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
+      if (!isAuto && currentAuthUid != voterAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -12496,9 +13067,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> judgeBMCWinner(String gameCode, String winnerPlayerId) async {
+  Future<void> judgeBMCWinner(
+    String gameCode,
+    String winnerPlayerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -12513,7 +13088,7 @@ class FirebaseService {
 
       final judgeAuthUid =
           players[currentJudgeId]?['authUid'] ?? currentJudgeId;
-      if (currentAuthUid != judgeAuthUid) {
+      if (!isAuto && currentAuthUid != judgeAuthUid) {
         throw Exception("Seul le juge peut désigner le vainqueur.");
       }
 
@@ -12586,6 +13161,66 @@ class FirebaseService {
         'turnStartTime': FieldValue.serverTimestamp(),
       });
     });
+  }
+
+  Future<void> handleBMCTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    var gameData = snap.data() as Map<String, dynamic>;
+
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
+    final String roundState = gameData['roundState'] ?? '';
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final String judgeId = gameData['bmcJudgeId'] ?? '';
+
+    if (roundState == 'judging_selection') {
+      Map<String, dynamic> playedCards = Map<String, dynamic>.from(
+        gameData['bmcPlayedCards'] ?? {},
+      );
+      Map<String, dynamic> hands = Map<String, dynamic>.from(
+        gameData['bmcHands'] ?? {},
+      );
+      List<String> deck = List<String>.from(gameData['bmcDeck'] ?? []);
+
+      for (var pId in players.keys) {
+        if (pId == judgeId) continue;
+        if (!playedCards.containsKey(pId)) {
+          List<String> myHand = List<String>.from(hands[pId] ?? []);
+          if (myHand.isNotEmpty) {
+            final card = myHand.removeAt(0);
+            if (deck.isNotEmpty) {
+              myHand.add(deck.removeAt(0));
+            }
+            hands[pId] = myHand;
+            playedCards[pId] = card;
+          }
+        }
+      }
+
+      final int requiredPlays = players.length - 1;
+      Map<String, dynamic> updates = {
+        'bmcHands': hands,
+        'bmcPlayedCards': playedCards,
+        'bmcDeck': deck,
+      };
+
+      if (playedCards.length >= requiredPlays || playedCards.isNotEmpty) {
+        updates['roundState'] = 'judge_voting';
+        updates['turnStartTime'] = FieldValue.serverTimestamp();
+      }
+
+      await gameRef.update(updates);
+    } else if (roundState == 'judge_voting') {
+      Map<String, dynamic> playedCards = Map<String, dynamic>.from(
+        gameData['bmcPlayedCards'] ?? {},
+      );
+      if (playedCards.isNotEmpty) {
+        final winnerId = playedCards.keys.first;
+        await judgeBMCWinner(gameCode, winnerId, isAuto: true);
+      }
+    }
   }
 
   /// Relance une partie en conservant les scores et les joueurs actuels
@@ -13320,9 +13955,10 @@ class FirebaseService {
     String playerId,
     String card, {
     String? chosenColor,
+    bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -13333,7 +13969,7 @@ class FirebaseService {
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
 
       final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
+      if (!isAuto && currentAuthUid != voterAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -13788,10 +14424,11 @@ class FirebaseService {
     int fromR,
     int fromC,
     int toR,
-    int toC,
-  ) async {
+    int toC, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -13802,7 +14439,8 @@ class FirebaseService {
       if (gameData['gameState'] != 'playing') return;
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isAuto &&
+          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -14241,10 +14879,11 @@ class FirebaseService {
   Future<void> submitCodenamesClue(
     String gameCode,
     String clue,
-    int count,
-  ) async {
+    int count, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     final cleanClue =
         FirebaseService.sanitizeUserInput(clue, maxLength: 30).split(' ').first;
@@ -14266,7 +14905,7 @@ class FirebaseService {
       final spyAuth =
           players[expectedMasterSpy]?['authUid'] ?? expectedMasterSpy;
 
-      if (currentAuthUid != spyAuth) {
+      if (!isAuto && currentAuthUid != spyAuth) {
         throw Exception(
           "Seul le Maître-Espion de l'équipe active peut donner l'indice.",
         );
@@ -14427,9 +15066,9 @@ class FirebaseService {
     });
   }
 
-  Future<void> passCodenamesTurn(String gameCode) async {
+  Future<void> passCodenamesTurn(String gameCode, {bool isAuto = false}) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -14454,10 +15093,11 @@ class FirebaseService {
   Future<void> submitTimesUpWords(
     String gameCode,
     String playerId,
-    List<String> words,
-  ) async {
+    List<String> words, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     final cleanWords =
         words
@@ -14472,7 +15112,9 @@ class FirebaseService {
       if (!snap.exists) return;
       final gameData = snap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, playerId);
+      if (!isAuto) {
+        _verifyPlayerAuth(gameData, playerId);
+      }
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final submittedPlayers = Map<String, dynamic>.from(
@@ -14858,10 +15500,11 @@ class FirebaseService {
   Future<void> playPresidentCards(
     String gameCode,
     String playerId,
-    List<String> cardsToPlay,
-  ) async {
+    List<String> cardsToPlay, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -14871,7 +15514,7 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
 
-      if (players[playerId]?['authUid'] != currentAuthUid) {
+      if (!isAuto && players[playerId]?['authUid'] != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -15026,9 +15669,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> passPresidentTurn(String gameCode, String playerId) async {
+  Future<void> passPresidentTurn(
+    String gameCode,
+    String playerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -15038,7 +15685,7 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
 
-      if (players[playerId]?['authUid'] != currentAuthUid) {
+      if (!isAuto && players[playerId]?['authUid'] != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -15557,6 +16204,8 @@ class FirebaseService {
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
+      if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
 
       if (gameData['roundState'] == currentRoundState) {
         String reason = "";
@@ -15891,7 +16540,17 @@ class FirebaseService {
     if (!snap.exists) return;
     final gameData = snap.data() as Map<String, dynamic>;
 
-    if (gameData['roundState'] != 'playing') return;
+    if (gameData['gameState'] != 'playing' ||
+        gameData['roundState'] != 'playing')
+      return;
+    if (!_isTurnTimedOut(
+      gameData,
+      customDuration:
+          (gameData['hotPotatoSecondsLeft'] as num?)?.toInt() ??
+          (gameData['turnTimer'] as num?)?.toInt() ??
+          30,
+    ))
+      return;
 
     final loserId = gameData['hotPotatoCurrentPlayerId'];
     if (loserId == null) return;
@@ -15987,9 +16646,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> drawUnoCard(String gameCode, String playerId) async {
+  Future<void> drawUnoCard(
+    String gameCode,
+    String playerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -16001,7 +16664,7 @@ class FirebaseService {
 
       // SÉCURITÉ : Vérifier l'authUid
       final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
+      if (!isAuto && currentAuthUid != voterAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -16583,10 +17246,11 @@ class FirebaseService {
   Future<void> placeSkullCard(
     String gameCode,
     String playerId,
-    String cardType,
-  ) async {
+    String cardType, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -16602,7 +17266,7 @@ class FirebaseService {
       final Map<String, dynamic> players = Map<String, dynamic>.from(
         gameData['players'] ?? {},
       );
-      if (players[playerId]?['authUid'] != currentAuthUid) {
+      if (!isAuto && players[playerId]?['authUid'] != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -16681,9 +17345,14 @@ class FirebaseService {
     });
   }
 
-  Future<void> startSkullBid(String gameCode, String playerId, int bid) async {
+  Future<void> startSkullBid(
+    String gameCode,
+    String playerId,
+    int bid, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -16699,7 +17368,7 @@ class FirebaseService {
       final Map<String, dynamic> players = Map<String, dynamic>.from(
         gameData['players'] ?? {},
       );
-      if (players[playerId]?['authUid'] != currentAuthUid) {
+      if (!isAuto && players[playerId]?['authUid'] != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -16840,9 +17509,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> passSkullBid(String gameCode, String playerId) async {
+  Future<void> passSkullBid(
+    String gameCode,
+    String playerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -16858,7 +17531,7 @@ class FirebaseService {
       final Map<String, dynamic> players = Map<String, dynamic>.from(
         gameData['players'] ?? {},
       );
-      if (players[playerId]?['authUid'] != currentAuthUid) {
+      if (!isAuto && players[playerId]?['authUid'] != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -17160,6 +17833,8 @@ class FirebaseService {
 
     final gameData = gameSnap.data() as Map<String, dynamic>;
     if (gameData['gameType'] != 'Skull') return;
+    if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
 
     final String roundState = gameData['roundState'] ?? '';
     final List<String> playerOrder = List<String>.from(
@@ -17173,6 +17848,8 @@ class FirebaseService {
     }
 
     final String currentPlayerId = playerOrder[currentPlayerIndex];
+    final String playerName =
+        gameData['players']?[currentPlayerId]?['name'] ?? 'Un joueur';
     final Map<String, dynamic> skullHands = Map<String, dynamic>.from(
       gameData['skullHands'] ?? {},
     );
@@ -17182,8 +17859,18 @@ class FirebaseService {
 
     if (roundState == 'placing') {
       if (myHand.isNotEmpty) {
+        await notifyAutoPlay(
+          gameRef,
+          playerName,
+          actionDetails: "pose de carte",
+        );
         final String randomCard = myHand[Random().nextInt(myHand.length)];
-        await placeSkullCard(gameCode, currentPlayerId, randomCard);
+        await placeSkullCard(
+          gameCode,
+          currentPlayerId,
+          randomCard,
+          isAuto: true,
+        );
       } else {
         final Map<String, dynamic> skullMats = Map<String, dynamic>.from(
           gameData['skullMats'] ?? {},
@@ -17194,17 +17881,28 @@ class FirebaseService {
         ) {
           return sum + (cards is List ? cards.length : 0);
         });
+        await notifyAutoPlay(
+          gameRef,
+          playerName,
+          actionDetails: "enchère automatique",
+        );
         await startSkullBid(
           gameCode,
           currentPlayerId,
           max(1, totalCardsOnTables),
+          isAuto: true,
         );
       }
       return;
     }
 
     if (roundState == 'bidding') {
-      await passSkullBid(gameCode, currentPlayerId);
+      await notifyAutoPlay(
+        gameRef,
+        playerName,
+        actionDetails: "passe l'enchère",
+      );
+      await passSkullBid(gameCode, currentPlayerId, isAuto: true);
     }
   }
 
@@ -18527,9 +19225,10 @@ class FirebaseService {
     String playerId,
     String action, {
     int? amount,
+    bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     try {
       await _db.runTransaction((transaction) async {
@@ -18545,7 +19244,7 @@ class FirebaseService {
 
         // SÉCURITÉ : Vérifier l'authUid
         final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-        if (currentAuthUid != voterAuthUid) {
+        if (!isAuto && currentAuthUid != voterAuthUid) {
           throw Exception("Action non autorisée.");
         }
 
@@ -18988,9 +19687,10 @@ class FirebaseService {
     String action, {
     String? card,
     String? suit,
+    bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -19001,7 +19701,7 @@ class FirebaseService {
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
+      if (!isAuto && currentAuthUid != voterAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -19244,32 +19944,46 @@ class FirebaseService {
     }
   }
 
-  // Gestion du timeout (si un joueur ne joue pas ÃƒÂ  temps)
+  // Gestion du timeout (si un joueur ne joue pas à temps)
   Future<void> handleBeloteTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final snap = await gameRef.get();
     if (!snap.exists) return;
     final gameData = snap.data() as Map<String, dynamic>;
     if (gameData['gameState'] != 'playing') return;
+    if (!_isTurnTimedOut(gameData)) return;
 
     final playerOrder = gameData['belotePlayerOrder'] as List<dynamic>?;
     final currentIndex = gameData['beloteCurrentPlayerIndex'] as int?;
     if (playerOrder != null && currentIndex != null && playerOrder.isNotEmpty) {
       String timedOutPlayerId = playerOrder[currentIndex];
       String roundState = gameData['roundState'];
+      final playerName =
+          gameData['players']?[timedOutPlayerId]?['name'] ?? 'Un joueur';
 
       if (roundState == 'bidding') {
-        await beloteAction(gameCode, timedOutPlayerId, 'pass');
+        await notifyAutoPlay(
+          gameRef,
+          playerName,
+          actionDetails: "passe l'annonce",
+        );
+        await beloteAction(gameCode, timedOutPlayerId, 'pass', isAuto: true);
       } else if (roundState == 'playing_trick') {
         List<String> hand = List<String>.from(
           gameData['belotePlayerData'][timedOutPlayerId]['hand'],
         );
         if (hand.isNotEmpty) {
+          await notifyAutoPlay(
+            gameRef,
+            playerName,
+            actionDetails: "carte automatique",
+          );
           await beloteAction(
             gameCode,
             timedOutPlayerId,
             'play',
             card: hand.first,
+            isAuto: true,
           );
         }
       }
@@ -19317,9 +20031,10 @@ class FirebaseService {
     int startCol,
     int rotation, {
     bool flipped = false,
+    bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -19332,7 +20047,7 @@ class FirebaseService {
       // SÉCURITÉ AUTH
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
+      if (!isAuto && currentAuthUid != voterAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -19507,9 +20222,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> passBlokusTurn(String gameCode, String playerId) async {
+  Future<void> passBlokusTurn(
+    String gameCode,
+    String playerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -19521,7 +20240,7 @@ class FirebaseService {
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final voterAuthUid = players[playerId]?['authUid'] ?? playerId;
-      if (currentAuthUid != voterAuthUid) {
+      if (!isAuto && currentAuthUid != voterAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -22545,9 +23264,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   List<String> _selectedRamiCards = [];
   List<String> _selectedBigTwoCards = [];
   String? _selectedCheckersPiece; // Pour stocker la piÃ¨ce sÃ©lectionnÃ©e "r,c"
-  String? _selectedDominoTile; // Pour la sélection préalable et survol de Dominos
-  int? _selectedLudoPawnIdx; // Pour la sélection préalable de pion Petits Chevaux
-  String? _selectedLudoPawnOwner; // Propriétaire du pion Petits Chevaux sélectionné
+  String?
+  _selectedDominoTile; // Pour la sélection préalable et survol de Dominos
+  int?
+  _selectedLudoPawnIdx; // Pour la sélection préalable de pion Petits Chevaux
+  String?
+  _selectedLudoPawnOwner; // Propriétaire du pion Petits Chevaux sélectionné
   int? _selectedZombieCardIndex; // Pour le ciblage préalable de carte Zombie
   Timer? _playerTurnTimer;
   String?
@@ -22872,6 +23594,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       return;
     }
 
+    // 🔒 Seul l'hôte de la salle planifie et exécute les timeouts pour éviter les courses critiques entre appareils
+    final String hostId = gameData['hostId'] ?? '';
+    final bool isHost = hostId == widget.playerId;
+    if (!isHost) return;
+
     final turnStartTimeStamp = gameData['turnStartTime'] as Timestamp?;
     if (turnStartTimeStamp == null) return;
 
@@ -22926,6 +23653,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     } else {
       turnDuration = turnTimerDuration;
       switch (gameType) {
+        case 'Blanc Manger Cocon':
+        case 'Blanc Manger Coco':
+        case 'BMC':
+          timeoutAction =
+              () => _firebaseService.handleBMCTimeout(widget.gameCode);
+          break;
+        case 'Dobble':
+          if (roundState == 'result') {
+            turnDuration = resultTimerDuration;
+            timeoutAction =
+                () => _firebaseService.nextDobbleRound(widget.gameCode);
+          }
+          break;
         case 'Devine Tête':
           if (roundState == 'playing_turn') {
             turnDuration = Duration(seconds: 60);
@@ -22974,6 +23714,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           timeoutAction =
               () => _firebaseService.handleBeloteTimeout(widget.gameCode);
           break;
+        case 'Dominoes':
+          timeoutAction =
+              () => _firebaseService.handleDominoesTimeout(widget.gameCode);
+          break;
         case 'Loup-Garou':
           if (gameData['phase'] == 'nuit') {
             timeoutAction =
@@ -22996,43 +23740,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           } else if (currentPhase == 'discussion') {
             timeoutAction =
                 () => _firebaseService.startUndercoverVoting(widget.gameCode);
-          } else if (currentPhase == 'tie_breaker') {
-            timeoutAction = () {
-              final String? goddessId =
-                  gameData['specialRoles']?['justiceGoddess'];
-              final List<String> tiedPlayers = List<String>.from(
-                gameData['tiedPlayers'] ?? [],
-              );
-              if (tiedPlayers.isNotEmpty && goddessId != null) {
-                _firebaseService.undercoverGoddessDecision(
-                  widget.gameCode,
-                  tiedPlayers.first,
-                );
-              }
-            };
-          } else if (currentPhase == 'avenger_revenge') {
-            timeoutAction = () {
-              String? avengerId;
-              gameData['playerData'].forEach((pId, data) {
-                if ((data['specialAbilities'] as List?)?.contains('Vengeuse') ??
-                    false)
-                  avengerId = pId;
-              });
-              if (avengerId != null) {
-                List<String> activePlayers =
-                    (gameData['playerData'] as Map).entries
-                        .where((e) => e.value['status'] == 'active')
-                        .map((e) => e.key as String)
-                        .toList();
-                if (activePlayers.isNotEmpty) {
-                  _firebaseService.undercoverAvengerDecision(
-                    widget.gameCode,
-                    avengerId!,
-                    activePlayers.first,
-                  );
-                }
-              }
-            };
           }
           break;
         case 'Just One':
@@ -23046,14 +23753,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           }
           break;
         case 'Skull':
-          if (roundState == 'placing' || roundState == 'bidding') {
+          if (roundState == 'placing' ||
+              roundState == 'bidding' ||
+              roundState == 'challenging') {
             timeoutAction =
                 () => _firebaseService.handleSkullTimeout(widget.gameCode);
           }
-          break;
-        case 'Taboo':
-          timeoutAction =
-              () => _firebaseService.handleTabooTimeout(widget.gameCode);
           break;
         case 'Mille Bornes':
           timeoutAction =
@@ -23105,7 +23810,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             'Le Juge',
             'Qui Pourrait le Plus ?',
             'Le Menteur',
-            'Le Roi des Mèmes',
+            'Le Roi des Mêmes',
             'Synonyme ou Banni',
           ].contains(gameType)) {
             timeoutAction =
@@ -23122,22 +23827,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     _playerTurnTimer = Timer(
       timeRemaining.isNegative ? Duration.zero : timeRemaining,
-      () {
-        // Peu importe qui déclenche le timer (hôte ou client), on exécute l'action de mise à jour
-        // L'action Firebase gérera elle-même les conflits de requêtes simultanées grâce à ses transactions.
-        _firebaseService.getGameStream(widget.gameCode).first.then((snapshot) {
-          if (!snapshot.exists) return;
-          final latestGameData = snapshot.data() as Map<String, dynamic>;
-          final latestTimestamp = latestGameData['turnStartTime'] as Timestamp?;
+      () async {
+        if (!mounted) return;
+        final snapshot =
+            await _firebaseService.getGameStream(widget.gameCode).first;
+        if (!snapshot.exists) return;
+        final latestGameData = snapshot.data() as Map<String, dynamic>;
+        final latestTimestamp = latestGameData['turnStartTime'] as Timestamp?;
+        final latestState = latestGameData['gameState'];
+        if (latestState != 'playing') return;
 
-          if (latestTimestamp?.millisecondsSinceEpoch ==
-              turnStartTimeStamp.millisecondsSinceEpoch) {
-            // Petit délai aléatoire pour éviter que 10 personnes écrivent en base au même dixième de seconde
-            Future.delayed(Duration(milliseconds: Random().nextInt(500)), () {
-              timeoutAction?.call();
-            });
-          }
-        });
+        // Vérification stricte que le timestamp du tour n'a pas déjà avancé
+        if (latestTimestamp?.millisecondsSinceEpoch ==
+            turnStartTimeStamp.millisecondsSinceEpoch) {
+          timeoutAction?.call();
+        }
       },
     );
   }
@@ -24783,6 +25487,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               if (!isDevineTete)
                                 _buildScoreHeader(context, players, gameData),
 
+                              _buildAutoPlayBanner(gameData),
+
                               // MODIFICATION : Zone d'affichage de la main adverse intégrée ici
                               AnimatedSwitcher(
                                 duration: const Duration(milliseconds: 300),
@@ -25414,6 +26120,57 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
+  Widget _buildAutoPlayBanner(Map<String, dynamic> gameData) {
+    final lastAuto = gameData['lastAutoAction'];
+    if (lastAuto == null || lastAuto is! Map) return const SizedBox.shrink();
+
+    final time = lastAuto['time'];
+    if (time is Timestamp) {
+      final diff = DateTime.now().difference(time.toDate()).inSeconds;
+      if (diff > 12) return const SizedBox.shrink();
+    }
+
+    final message =
+        lastAuto['message'] ?? "Coup automatique joué pour cause d'inactivité.";
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.deepOrange.withOpacity(0.85),
+            Colors.amber.shade800.withOpacity(0.85),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.deepOrange.withOpacity(0.3),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.flash_on, color: Colors.yellowAccent, size: 20),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              "$message",
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 12.5,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   PreferredSizeWidget? _buildTurnTimerIndicator(Map<String, dynamic> gameData) {
     bool useTimer = gameData['useTimer'] ?? true;
     if (!useTimer) return null;
@@ -25423,19 +26180,37 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final currentPhase = gameData['currentPhase'];
     final loupGarouPhase = gameData['phase'];
 
-    // AJOUT DE 'placement' ET 'playing' ICI
     final statesWithTimer = [
-      'placement', 'playing', // <-- BATAILLE NAVALE
-      'playing_turn', 'player_turn', 'voting', 'result', 'round_end',
-      'pre-flop', 'flop', 'turn', 'river', 'hand_over',
-      'clue_giving', 'turn_result',
+      'placement',
+      'playing',
+      'playing_turn',
+      'player_turn',
+      'voting',
+      'result',
+      'round_end',
+      'pre-flop',
+      'flop',
+      'turn',
+      'river',
+      'hand_over',
+      'clue_giving',
+      'turn_result',
       'answering',
+      'declaring_truth',
       'guesser_chooses_word',
       'reveal_clues',
-      'initial_writing', 'drawing', 'guessing',
-      'nuit', 'jour_discussion', 'jour_vote',
+      'initial_writing',
+      'drawing',
+      'guessing',
+      'nuit',
+      'jour_discussion',
+      'jour_vote',
       'showing_photo',
-      'placing', 'bidding',
+      'placing',
+      'bidding',
+      'challenging',
+      'judging_selection',
+      'judge_voting',
     ];
 
     bool shouldShow =
@@ -42173,7 +42948,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               selectedOwnerId: _selectedLudoPawnOwner,
                               selectedPawnIdx: _selectedLudoPawnIdx,
                               onPawnTap: (ownerId, pawnIdx) {
-                                if (!isMyTurn || !hasRolled || dice <= 0) return;
+                                if (!isMyTurn || !hasRolled || dice <= 0)
+                                  return;
                                 if (_selectedLudoPawnOwner == ownerId &&
                                     _selectedLudoPawnIdx == pawnIdx) {
                                   // 2e clic : Confirmation et déplacement !
