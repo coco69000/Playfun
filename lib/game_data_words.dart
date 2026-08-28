@@ -726,6 +726,28 @@ class GameWords {  // ───────────────────�
     "FORCE", "FORT", "GARE", "GRAIN", "GUERRE", "HERBE", "IDÉE", "IMAGE",
   ];
 
+  static const Map<String, List<String>> codenamesByDifficulty = {
+    'soft': [
+      "MAISON", "ARBRE", "CHIEN", "CHAT", "TABLE", "ROUTE", "SOLEIL", "LUNE",
+      "EAU", "FEU", "VENT", "LIVRE", "VOITURE", "VILLE", "AVION", "FLEUR",
+      "MER", "MONTAGNE", "OISEAU", "FRUIT", "MUSIQUE", "CHEMIN", "NEIGE",
+      "PLAGE", "TRAIN"
+    ],
+    'hard': [
+      "ÉPOQUE", "MYSTÈRE", "ÉPOPÉE", "RÉSISTANCE", "ENIGME", "ALCHIMIE",
+      "CRYPTAGE", "PARADOXE", "ANALOGIE", "CONSCIENCE", "UTOPIE", "SYNERGIE",
+      "NEXUS", "QUÊTE", "PHÉNOMÈNE", "ILLUSION", "TRANSCENDANCE", "APOCALYPSE",
+      "ESPOIR", "LIBERTÉ", "DESTIN", "SYMBIOTIQUE", "CHRONIQUE", "FORGE", "MIRAGE"
+    ],
+    'hardcore': [
+      "ENTROPIE", "FRACTALE", "SYNAPSE", "HEURISTIQUE", "QUANTUM", "PARALLAXE",
+      "QUASAR", "SUPERNOVA", "ÉPIGENÈSE", "BIOLUMINESCENCE", "DICHOTOMIE",
+      "ALLÉGORIE", "AXIOME", "ONTOLOGIE", "PANOPTIQUE", "SOLIPSISME",
+      "DÉTERMINISME", "SÉRENDIPITÉ", "QUINTESSENCE", "SYNCRÉTISME", "DIALECTIQUE",
+      "ANACHRONISME", "ANTINOMIE", "ISOMORPHISME", "CHIMÈRE"
+    ],
+  };
+
   // ─────────────────────────────────────────────────────────────────────────────
   // GAGES PATATE CHAUDE (local)
   // ─────────────────────────────────────────────────────────────────────────────

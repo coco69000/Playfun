@@ -1092,12 +1092,31 @@ class StatsEtoileScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 4),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF67E8F9).withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: const Color(0xFF67E8F9).withOpacity(0.4)),
+                    ),
+                    child: Text(
+                      playerState.rankTitle,
+                      style: const TextStyle(
+                        color: Color(0xFF67E8F9),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   LinearProgressIndicator(
-                    value: (playerState.xp / playerState.xpForNextLevel).clamp(0.0, 1.0),
+                    value: playerState.levelProgressRatio,
                     backgroundColor: Colors.grey[800],
                     color: const Color(0xFF67E8F9),
                     minHeight: 10,
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   const SizedBox(height: 8),
                   Row(

@@ -976,413 +976,44 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     },
   };
 
-  static const Map<String, dynamic> multiplayerGameData = {
-    'Zombie!': {'default': []},
-    'Blokus': {'default': []},
-    'Cadavre Exquis': {'default': []},
-    'Petits Chevaux': {'default': []},
-    'Mille Bornes': {'default': []},
-    'Rami': {'default': []},
-
-    'Bataille Navale': {'default': []},
-    'Yams': {'default': []},
-    'Gribouillis': {
-      'default':
-          [], // Pas de donnÃƒÂ©es prÃƒÂ©-remplies, le jeu est gÃƒÂ©nÃƒÂ©rÃƒÂ© par les joueurs.
-    },
-    'Zéro Pointé': {'default': []},
-    'Poker': {'default': []},
-    'Dominoes': {'default': []},
-    'Big Two': {'default': []},
-    'Jeu de Dames': {'default': []},
-    'Blanc Manger Coco': {'default': []},
-
-    'Le Juge': {
-      'soft': [
-        "Quelle est la premiÃƒÂ¨re impression que {player} t'a laissÃƒÂ©e ?",
-        "Si {player} ÃƒÂ©tait un animal, lequel serait-il et pourquoi ?",
-        "Quel est le talent le plus surprenant de {player} ?",
-        "DÃƒÂ©cris {player} en 3 mots.",
-      ],
-      'hard': [
-        "Quel est le plus grand secret que tu penses que {player} cache ?",
-        "Quelle est la chose la plus embarrassante que tu aies vu {player} faire ?",
-        "Si tu devais sortir avec quelqu'un dans cette piÃƒÂ¨ce, pourquoi choisirais-tu (ou non) {player} ?",
-        "Quelle critique constructive donnerais-tu ÃƒÂ  {player} ?",
-      ],
-      'hardcore': [
-        "Raconte un fantasme que tu imagines pour {player}.",
-        "Quelle est la chose la plus illÃƒÂ©gale que tu imagines {player} avoir faite ?",
-        "Si {player} devait coucher avec une personne ici, qui serait-ce et pourquoi ?",
-        "Quel est le plus gros dÃƒÂ©faut de {player} selon toi ?",
-      ],
-    },
-    'Qui Pourrait le Plus ?': {
-      'soft': [
-        "finir une pizza entiÃƒÂ¨re tout seul ?",
-        "gagner ÃƒÂ  un concours de blagues nulles ?",
-        "oublier un anniversaire important ?",
-        "passer une journÃƒÂ©e entiÃƒÂ¨re sans son tÃƒÂ©lÃƒÂ©phone ?",
-      ],
-      'hard': [
-        "se faire virer d'un bar ?",
-        "avoir une relation secrÃƒÂ¨te au travail ?",
-        "mentir pour se sortir d'une situation embarrassante ?",
-        "partir en voyage sur un coup de tÃƒÂªte sans prÃƒÂ©venir personne ?",
-      ],
-      'hardcore': [
-        "briser un cÃ…â€œur sans remords ?",
-        "tromper son/sa partenaire ?",
-        "saboter un collÃƒÂ¨gue pour une promotion ?",
-        "finir en prison pour une nuit ?",
-      ],
-    },
-    'Le Menteur': {
-      'soft': [
-        "Raconte une anecdote sur la chose la plus ÃƒÂ©trange que tu aies jamais mangÃƒÂ©e.",
-        "Raconte une anecdote sur le rÃƒÂªve le plus bizarre que tu aies fait rÃƒÂ©cemment.",
-        "Raconte une anecdote sur la chose la plus folle que tu aies achetÃƒÂ©e sur un coup de tÃƒÂªte ?",
-        "Raconte une anecdote sur une fois oÃƒÂ¹ tu as eu vraiment trÃƒÂ¨s peur.",
-      ],
-      'hard': [
-        "Raconte une anecdote embarrassante qui te soit arrivÃƒÂ©e lors d'un rendez-vous ?",
-        "Raconte une anecdote sur un mensonge que tu as dit ÃƒÂ  tes parents et qu'ils ont cru.",
-        "Raconte une anecdote sur la pire excuse que tu aies utilisÃƒÂ©e pour ne pas aller quelque part ?",
-        "Raconte une anecdote sur une fois oÃƒÂ¹ tu as ÃƒÂ©tÃƒÂ© tÃƒÂ©moin de quelque chose que tu n'aurais pas dÃƒÂ» voir.",
-      ],
-      'hardcore': [
-        "Raconte une anecdote sur la chose la plus proche de l'illÃƒÂ©galitÃƒÂ© que tu as faite.",
-        "Raconte une anecdote sur ton plus grand 'fail' au lit.",
-        "Raconte une anecdote sur la chose la plus mÃƒÂ©chante que tu aies dite ÃƒÂ  quelqu'un ?",
-        "Raconte une anecdote sur une fois oÃƒÂ¹ tu as trahi la confiance de quelqu'un.",
-      ],
-    },
-    'Infiltré & Mr. White': {
-      'soft': [
-        "Pomme:Poire",
-        "Chien:Chat",
-        "Soleil:Lune",
-        "Voiture:VÃƒÂ©lo",
-        "Livre:Film",
-        "Plage:Piscine",
-        "Jour:Nuit",
-      ],
-      'hard': [
-        "Amour:AmitiÃƒÂ©",
-        "Politique:Religion",
-        "Science:Magie",
-        "Riche:CÃƒÂ©lÃƒÂ¨bre",
-        "Paix:LibertÃƒÂ©",
-        "Travail:Passion",
-      ],
-      'hardcore': [
-        "Plaisir:Douleur",
-        "Vie:Mort",
-        "FidÃƒÂ©litÃƒÂ©:Trahison",
-        "LÃƒÂ©gal:Moral",
-        "Sacrifice:EgoÃƒÂ¯sme",
-        "Pouvoir:Sagesse",
-      ],
-    },
-    'Synonyme ou Banni': {
-      'soft': ["Grand", "Petit", "Rapide", "Beau", "Gentil", "Manger"],
-      'hard': [
-        "Triste",
-        "Heureux",
-        "Intelligent",
-        "Difficile",
-        "Important",
-        "Parler",
-      ],
-      'hardcore': [
-        "Ambigu",
-        "Ãƒâ€°phÃƒÂ©mÃƒÂ¨re",
-        "Subtil",
-        "Complexe",
-        "Essentiel",
-        "Nostalgie",
-      ],
-    },
-    'Le Jeu des Catégories': {
-      // C'ÃƒÂ©tait 'La Patate Chaude' avant
-      'soft': [],
-      'hard': [],
-      'hardcore': [],
-    },
-    'La Patate Chaude': {'soft': [], 'hard': [], 'hardcore': []},
-
-    'Codenames': {
-      'soft': [
-        "MAISON",
-        "ARBRE",
-        "CHIEN",
-        "CHAT",
-        "TABLE",
-        "ROUTE",
-        "SOLEIL",
-        "LUNE",
-        "EAU",
-        "FEU",
-        "VENT",
-        "FLÛTE",
-        "LIVRE",
-        "VOITURE",
-        "VILLE",
-        "AVION",
-        "FLEUR",
-        "MER",
-        "MONTAGNE",
-        "OISEAU",
-        "FRUIT",
-        "MUSIQUE",
-        "CHEMIN",
-        "CHAMPS",
-        "NEIGE",
-      ],
-      'hard': [
-        "ÉPOQUE",
-        "MYSTÈRE",
-        "ÉPOPÉE",
-        "RÉSISTANCE",
-        "ENIGME",
-        "ALCHIMIE",
-        "CRYPTAGE",
-        "PARADOXE",
-        "ANALOGIE",
-        "CONSCIENCE",
-        "UTOPIE",
-        "SYNERGIE",
-        "NEXUS",
-        "QUÊTE",
-        "PHÉNOMÈNE",
-        "ILLUSION",
-        "TRANSCENDANCE",
-        "CYBERNETIQUE",
-        "APOCALYPSE",
-        "ESPOIR",
-        "LIBERTÉ",
-        "SACRIFICE",
-        "DESTIN",
-        "SYMBIOTIQUE",
-        "CHRONIQUE",
-      ],
-      'hardcore': [
-        "ENTROPIE",
-        "FRACTALE",
-        "SYNAPSE",
-        "HEURISTIQUE",
-        "QUANTUM",
-        "PARALLAXE",
-        "QUASAR",
-        "SUPERNOVA",
-        "ÉPIGENÈSE",
-        "BIOLUMINESCENCE",
-        "DICHOTOMIE",
-        "ALLÉGORIE",
-        "AXIOME",
-        "ONTOLOGIE",
-        "PANOPTIQUE",
-        "SOLIPSISME",
-        "DÉTERMINISME",
-        "SÉRENDIPITÉ",
-        "QUINTESSENCE",
-        "SYNCRÉTISME",
-        "MORPHOGÉNÈSE",
-        "DIALECTIQUE",
-        "ANACHRONISME",
-        "ANTINOMIE",
-        "ISOMORPHISME",
-      ],
-    },
-    'Time\'s Up': {
-      'soft': [
-        "Einstein",
-        "Pomme",
-        "Titanic",
-        "Spider-Man",
-        "Girafe",
-        "Brosse à dents",
-        "Réfrigérateur",
-        "Football",
-        "Pizza",
-        "Égypte",
-        "Tour Eiffel",
-        "Ordinateur",
-        "Chant",
-        "Danse",
-        "Pluie",
-      ],
-      'hard': [
-        "Dostoïevski",
-        "Quantum",
-        "Métamorphose",
-        "Surréalisme",
-        "Pyramide de Maslow",
-        "Inception",
-        "Conscience",
-        "Paradoxe",
-        "Existentialisme",
-        "Utopie",
-        "Nirvana",
-        "Chamanisme",
-        "Transhumanisme",
-        "Anachronisme",
-        "Platon",
-      ],
-      'hardcore': [
-        "Chat de Schrödinger",
-        "Rasoir d'Ockham",
-        "Paradoxe de Fermi",
-        "Effet Papillon",
-        "Ruban de Möbius",
-        "Nombre d'Or",
-        "Suite de Fibonacci",
-        "Dilemme du Prisonnier",
-        "Point de Lagrange",
-        "Constante de Planck",
-        "Équation de Drake",
-        "Grotte de Platon",
-        "Bateau de Thésée",
-        "Horloge de l'Apocalypse",
-        "Test de Turing",
-      ],
-    },
-    'Petit Bac': {
-      'default_categories': [
-        "PrÃƒÂ©nom",
-        "Ville",
-        "Fruit",
-        "Animal",
-        "MÃƒÂ©tier",
-        "Objet",
-        "Pays",
-        "CÃƒÂ©lÃƒÂ©britÃƒÂ©",
-        "Marque",
-        "Sport",
-      ],
-    },
-    'Président': {'soft': [], 'hard': [], 'hardcore': []},
-    'Pictionary': {
-      'soft': [
-        "Pomme",
-        "Maison",
-        "Arbre",
-        "Chaise",
-        "Chien",
-        "Soleil",
-        "Voiture",
-        "Fleur",
-        "Livre",
-        "Bateau",
-      ],
-      'hard': [
-        "Ãƒâ€°lectricitÃƒÂ©",
-        "LibertÃƒÂ©",
-        "GravitÃƒÂ©",
-        "Amour",
-        "RÃƒÂªve",
-        "Musique",
-        "Justice",
-        "Temps",
-        "Bonheur",
-        "Silence",
-      ],
-      'hardcore': [
-        "Nihilisme",
-        "Absurde",
-        "Paradoxe",
-        "Utopie",
-        "Existentialisme",
-        "SynesthÃƒÂ©sie",
-        "MÃƒÂ©taphysique",
-        "Conscience",
-        "Infini",
-        "Ãƒâ€°phÃƒÂ©mÃƒÂ¨re",
-      ],
-    },
-    'Just One': {
-      'soft': [
-        "Chat",
-        "Chien",
-        "Table",
-        "Livre",
-        "Ordinateur",
-        "TÃƒÂ©lÃƒÂ©phone",
-        "CafÃƒÂ©",
-        "Fleur",
-        "Musique",
-        "Pluie",
-        "Voiture",
-        "Maison",
-        "Lit",
-        "Ãƒâ€°cole",
-        "Ville",
-        "Arbre",
-        "FenÃƒÂªtre",
-        "Ciel",
-        "Oiseau",
-        "Eau",
-      ],
-      'hard': [
-        "Ãƒâ€°motion",
-        "MystÃƒÂ¨re",
-        "Voyage",
-        "Innovation",
-        "Aventure",
-        "LibertÃƒÂ©",
-        "Silence",
-        "CrÃƒÂ©ativitÃƒÂ©",
-        "Sagesse",
-        "Fantaisie",
-        "Harmonie",
-        "Ãƒâ€°quilibre",
-        "Destin",
-        "Inspiration",
-        "Intuition",
-        "Bonheur",
-        "Ãƒâ€°nergie",
-        "CuriositÃƒÂ©",
-        "Espoir",
-        "Patience",
-      ],
-      'hardcore': [
-        "Nostalgie",
-        "Ãƒâ€°phÃƒÂ©mÃƒÂ¨re",
-        "SerendipitÃƒÂ©",
-        "Dystopie",
-        "Solitude",
-        "Subconscient",
-        "AllÃƒÂ©gorie",
-        "Ãƒâ€°nigme",
-        "Ãƒâ€°phÃƒÂ©mÃƒÂ¨re",
-        "Paradoxe",
-        "Transcendence",
-        "Melancolie",
-        "Ãƒâ€°phÃƒÂ©mÃƒÂ©ride",
-        "Quintessence",
-        "RÃƒÂ©silience",
-        "ChimÃƒÂ¨re",
-        "Cognition",
-        "Ãƒâ€°lÃƒÂ©gance",
-        "Euphorie",
-        "Sarcasme",
-      ],
-    },
-    'Le Roi des Mèmes': {'default': []},
-
-    'Loup-Garou': {'default': []},
-    'Dobble': {'default': []},
-    'Skull': {'default': []},
-    'Uno': {'default': []},
-    'Photo Roulette': {
-      'default':
-          [], // Pas de donnÃƒÂ©es prÃƒÂ©-remplies, tout vient des joueurs.
-    },
-
-    'Devine Tête': {'soft': [], 'hard': [], 'hardcore': []},
-    'Taboo': {'soft': [], 'hard': [], 'hardcore': []},
-    'Belote': {'default': []},
-  };
+  static const List<String> multiplayerGames = [
+    'Zombie!',
+    'Blokus',
+    'Cadavre Exquis',
+    'Petits Chevaux',
+    'Mille Bornes',
+    'Rami',
+    'Bataille Navale',
+    'Yams',
+    'Gribouillis',
+    'Zéro Pointé',
+    'Poker',
+    'Dominoes',
+    'Big Two',
+    'Jeu de Dames',
+    'Blanc Manger Coco',
+    'Le Juge',
+    'Qui Pourrait le Plus ?',
+    'Le Menteur',
+    'Infiltré & Mr. White',
+    'Synonyme ou Banni',
+    'La Patate Chaude',
+    'Codenames',
+    "Time's Up",
+    'Petit Bac',
+    'Président',
+    'Pictionary',
+    'Just One',
+    'Le Roi des Mèmes',
+    'Loup-Garou',
+    'Dobble',
+    'Skull',
+    'Uno',
+    'Photo Roulette',
+    'Devine Tête',
+    'Taboo',
+    'Belote',
+  ];
 
   static const List<Map<String, dynamic>> allLoupGarouRoles = [
     {
@@ -1563,494 +1194,6 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     "cascade",
   ];
 
-  static const Map<String, List<String>> localHotPotatoCategories = {
-    'Marque de voiture': [],
-    'Pays d\'Europe': [],
-    'Personnage de dessin animÃƒÂ©': [],
-    'Fruit ou LÃƒÂ©gume': [],
-    'Acteur ou Actrice cÃƒÂ©lÃƒÂ¨bre': [],
-    'Sport qui se joue avec une balle': [],
-  };
-
-  static const List<String> localHotPotatoGages = [
-    "Imite le cri de Tarzan.",
-    "Touche ton nez avec ta langue.",
-    "Parle comme Yoda jusqu'au prochain tour.",
-    "Fais 10 pompes.",
-    "Laisse quelqu'un te dessiner une moustache au feutre.",
-    "Poste un selfie avec une grimace sur Instagram.",
-    "Envoie 'je pense ÃƒÂ  toi' au 5ÃƒÂ¨me contact de ton rÃƒÂ©pertoire.",
-  ];
-
-  static const Map<String, Map<String, List<String>>> localSynonymOrBanned = {
-    'soft': {
-      "words": ["Grand", "Petit", "Rapide", "Beau", "Gentil", "Manger"],
-    },
-    'hard': {
-      "words": [
-        "Triste",
-        "Heureux",
-        "Intelligent",
-        "Difficile",
-        "Important",
-        "Parler",
-      ],
-    },
-    'hardcore': {
-      "words": [
-        "Ambigu",
-        "Ãƒâ€°phÃƒÂ©mÃƒÂ¨re",
-        "Subtil",
-        "Complexe",
-        "Essentiel",
-        "Nostalgie",
-      ],
-    },
-  };
-
-  static const Map<String, List<String>> localWhoIsMostLikely = {
-    'soft': [
-      "finir une pizza entiÃƒÂ¨re tout seul ?",
-      "gagner ÃƒÂ  un concours de blagues nulles ?",
-      "oublier un anniversaire important ?",
-      "passer une journÃƒÂ©e entiÃƒÂ¨re sans son tÃƒÂ©lÃƒÂ©phone ?",
-    ],
-    'hard': [
-      "se faire virer d'un bar ?",
-      "avoir une relation secrÃƒÂ¨te au travail ?",
-      "mentir pour se sortir d'une situation embarrassante ?",
-      "partir en voyage sur un coup de tÃƒÂªte sans prÃƒÂ©venir personne ?",
-    ],
-    'hardcore': [
-      "briser un cÃ…â€œur sans remords ?",
-      "tromper son/sa partenaire ?",
-      "saboter un collÃƒÂ¨gue pour une promotion ?",
-      "finir en prison pour une nuit ?",
-    ],
-  };
-
-  static const Map<String, List<String>> offlineTruths = {
-    'soft': [
-      "Quelle est ta plus grande peur ?",
-      "Quel est le dernier mensonge que tu as dit ?",
-      "Quel est ton plus grand bÃƒÂ©guin de cÃƒÂ©lÃƒÂ©britÃƒÂ© ?",
-      "Si tu pouvais ÃƒÂ©changer ta vie avec {player} pour une journÃƒÂ©e, que ferais-tu en premier ?",
-    ],
-    'hard': [
-      "Quelle est la chose la plus folle que tu aies faite par amour ?",
-      "As-tu dÃƒÂ©jÃƒÂ  trichÃƒÂ© ÃƒÂ  un examen ?",
-      "Quelle est la pire chose que tu aies faite sans que personne ne le sache ?",
-      "As-tu dÃƒÂ©jÃƒÂ  espionnÃƒÂ© le tÃƒÂ©lÃƒÂ©phone de {player} ?",
-    ],
-    'hardcore': [
-      "Quel est ton plus grand regret sexuel ?",
-      "Avec qui dans cette piÃƒÂ¨ce aimerais-tu ÃƒÂ©changer de vie ?",
-      "Quel est ton fantasme le plus inavouable ?",
-      "Quelle est la chose la plus mÃƒÂ©chante que tu aies pensÃƒÂ©e ÃƒÂ  propos de {player} ?",
-    ],
-  };
-
-  static const Map<String, List<String>> offlineDares = {
-    'soft': [
-      "Imite ton animal prÃƒÂ©fÃƒÂ©rÃƒÂ©.",
-      "Fais 10 pompes.",
-      "Chante une chanson choisie par les autres joueurs.",
-      "Parle avec un accent bizarre jusqu'ÃƒÂ  ton prochain tour.",
-    ],
-    'hard': [
-      "Laisse {player} envoyer un SMS depuis ton tÃƒÂ©lÃƒÂ©phone ÃƒÂ  la personne de son choix.",
-      "Fais un lap dance ÃƒÂ  un objet inanimÃƒÂ©.",
-      "Poste un statut embarrassant sur tes rÃƒÂ©seaux sociaux.",
-      "Ãƒâ€°change un vÃƒÂªtement avec {player}.",
-    ],
-    'hardcore': [
-      "EnlÃƒÂ¨ve un vÃƒÂªtement de ton choix.",
-      "Appelle un de tes ex et dis-lui qu'il/elle te manque.",
-      "Laisse {player} te dessiner un tatouage au feutre sur le visage.",
-      "Donne un bisou sur la joue ÃƒÂ  la personne que tu trouves la plus attirante ici.",
-    ],
-  };
-
-  static const Map<String, List<String>> offlineCoinFlipQuestions = {
-    'soft': [
-      "Raconte un souvenir d'enfance embarrassant.",
-      "Quel est ton plaisir coupable ?",
-      "Quelle est la chanson que tu ÃƒÂ©coutes en secret ?",
-    ],
-    'hard': [
-      "Qui est la personne que tu dÃƒÂ©testes le plus et pourquoi ?",
-      "As-tu dÃƒÂ©jÃƒÂ  volÃƒÂ© quelque chose ?",
-      "Qui dans cette piÃƒÂ¨ce est le moins ton style ?",
-    ],
-    'hardcore': [
-      "DÃƒÂ©cris en dÃƒÂ©tail ton dernier fantasme.",
-      "Quelle est la pire chose que tu aies dite sur quelqu'un prÃƒÂ©sent dans la piÃƒÂ¨ce ?",
-      "Avec qui ici pourrais-tu avoir une aventure d'un soir ?",
-    ],
-  };
-
-  static const Map<String, List<String>> offlineDilemmas = {
-    'soft': [
-      "ÃƒÅ tre capable de voler ou d'ÃƒÂªtre invisible ?",
-      "Ne plus jamais manger de pizza ou de burger ?",
-    ],
-    'hard': [
-      "Savoir la date de ta mort ou la cause ?",
-      "Sauver 5 inconnus ou 1 membre de ta famille ?",
-    ],
-    'hardcore': [
-      "Recevoir 1 million d'euros mais une personne que tu ne connais pas meurt, ou ne rien recevoir ?",
-      "Passer un an en prison pour un crime que tu n'as pas commis ou que ton meilleur ami y passe 6 mois ?",
-    ],
-  };
-
-  static const Map<String, Map<String, List<String>>> offlineUndercoverData = {
-    'soft': {
-      'wordPairs': ["Pomme:Poire", "Chien:Chat"],
-      'mrWhiteWords': ["Plage", "ForÃƒÂªt"],
-    },
-    'hard': {
-      'wordPairs': ["Amour:AmitiÃƒÂ©", "Science:Magie"],
-      'mrWhiteWords': ["Mariage", "HÃƒÂ´pital"],
-    },
-    'hardcore': {
-      'wordPairs': ["Vie:Mort", "LÃƒÂ©gal:Moral"],
-      'mrWhiteWords': ["Enterrement", "ScÃƒÂ¨ne de crime"],
-    },
-  };
-
-  static List<String> codenamesWords = [
-    "BANQUE",
-    "SERPENT",
-    "FEUILLE",
-    "AVOCAT",
-    "BALEINE",
-    "CHASSEUR",
-    "CRÃƒË†ME",
-    "DOCTEUR",
-    "ESPACE",
-    "FAUX",
-    "GÃƒâ€°NIE",
-    "GLACE",
-    "HÃƒâ€°LICOPTÃƒË†RE",
-    "HÃƒâ€PITAL",
-    "INDE",
-    "JAPON",
-    "JET",
-    "JUGE",
-    "KIT",
-    "LAPIN",
-    "LUXEMBOURG",
-    "LUMIÃƒË†RE",
-    "MARIAGE",
-    "MÃƒâ€°DECIN",
-    "MORT",
-    "MUSÃƒâ€°E",
-    "NIL",
-    "NINJA",
-    "NOCE",
-    "OEIL",
-    "OPÃƒâ€°RA",
-    "ORANGE",
-    "OURS",
-    "PÃƒâ€šTE",
-    "PÃƒâ€°ROU",
-    "PILOTE",
-    "POISON",
-    "POMME",
-    "PONT",
-    "PORTE",
-    "POSTE",
-    "PRISON",
-    "RAISON",
-    "RAT",
-    "REINE",
-    "ROSE",
-    "ROUE",
-    "ROUTE",
-    "RUCHE",
-    "SATURNE",
-    "SCIE",
-    "SECRET",
-    "SIÃƒË†GE",
-    "SOLEIL",
-    "SOURIS",
-    "TABLEAU",
-    "TÃƒÅ TE",
-    "TOUR",
-    "TRAITRE",
-    "VALEUR",
-    "VENT",
-    "VERRE",
-    "VIE",
-    "VIOLON",
-    "VOITURE",
-    "VOL",
-    "YOGA",
-    "ZERO",
-    "ZODIAQUE",
-    "ZOO",
-  ];
-
-  static List<String> timesUpWords = [
-    "Superman",
-    "La Joconde",
-    "Smartphone",
-    "Le Roi Lion",
-    "Spaghetti",
-    "Mahatma Gandhi",
-    "Tour de Pise",
-    "Cheval",
-    "Banane",
-    "Clavier",
-    "L'Homme qui Marche",
-    "Harry Potter",
-    "Unicorn",
-    "ChÃƒÂ¢teau de Versailles",
-    "Volcano",
-    "Batman",
-    "Mona Lisa",
-    "Telephone",
-    "Frozen",
-    "Pizza",
-    "Nelson Mandela",
-    "Statue de la LibertÃƒÂ©",
-    "Lion",
-    "Apple",
-    "Mouse",
-    "Thinker",
-    "Lord of the Rings",
-    "Dragon",
-    "Eiffel Tower",
-    "Ocean",
-  ];
-
-  static const Map<String, List<String>> localPassTheObjectQuestions = {
-    'soft': [
-      "Ton pire rencard ?",
-      "Si tu ÃƒÂ©tais invisible une journÃƒÂ©e, tu ferais quoi ?",
-      "La chose la plus embarrassante que tu aies faite ?",
-      "Quel est ton plus grand plaisir coupable ?",
-      "Quel est le surnom le plus ridicule que l'on t'ait donnÃƒÂ© ?",
-      "Si tu pouvais avoir n'importe quel super-pouvoir, lequel choisirais-tu et pourquoi ?",
-      "Quel est le dernier truc bizarre que tu as GooglÃƒÂ© ?",
-      "Ton talent cachÃƒÂ© le plus inutile ?",
-    ],
-    'hard': [
-      "Le plus gros mensonge que tu aies dit ÃƒÂ  tes parents ?",
-      "Quel est ton secret le plus bizarre ?",
-      "Si tu devais sortir avec une personne de ce groupe, qui et pourquoi ?",
-      "La chose la plus illÃƒÂ©gale (mais pas grave) que tu aies faite ?",
-      "DÃƒÂ©cris ton premier baiser en un mot.",
-      "Si tu pouvais changer une chose de ton passÃƒÂ©, ce serait quoi et pourquoi ?",
-      "As-tu dÃƒÂ©jÃƒÂ  trichÃƒÂ© ÃƒÂ  un examen ? Raconte.",
-      "Quel est ton fantasme le plus inavouable ?",
-    ],
-    'hardcore': [
-      "Ton plus grand regret sexuel ?",
-      "Quel est le pire message que tu aies envoyÃƒÂ© ÃƒÂ  la mauvaise personne ?",
-      "Si tu devais ÃƒÂ©changer de partenaire avec quelqu'un ici pour une nuit, qui et pourquoi ?",
-      "La chose la plus mÃƒÂ©chante que tu aies dite ÃƒÂ  quelqu'un dans cette piÃƒÂ¨ce ?",
-      "Raconte ton expÃƒÂ©rience la plus ÃƒÂ©trange en public.",
-      "As-tu dÃƒÂ©jÃƒÂ  volÃƒÂ© quelque chose de valeur ? Quoi et pourquoi ?",
-      "Quel est le truc le plus fou que tu aies fait sous l'influence de l'alcool/drogues ?",
-      "DÃƒÂ©cris la pire dispute que tu aies eue avec un ami ou un membre de ta famille.",
-    ],
-  };
-
-  // Mots par niveau de difficultÃƒÂ© pour Devine Tête
-  static const Map<String, List<String>> guessTheWordWordsByDifficulty = {
-    'soft': [
-      "Chien",
-      "Chat",
-      "Soleil",
-      "Voiture",
-      "Avion",
-      "Maison",
-      "Arbre",
-      "Fleur",
-      "Ballon",
-      "VÃƒÂ©lo",
-      "Montagne",
-      "Plage",
-      "GÃƒÂ¢teau",
-      "Robot",
-      "Chapeau",
-      "Guitare",
-      "Piano",
-      "Drapeau",
-      "CÃ…â€œur",
-      "Ãƒâ€°toile",
-      "Bateau",
-      "Neige",
-      "Nuage",
-      "Coccinelle",
-      "Piscine",
-      "Pomme",
-      "Banane",
-      "Lapin",
-      "Grenouille",
-      "Tracteur",
-      "Arc-en-ciel",
-      "Bougie",
-      "Fontaine",
-      "Cerise",
-      "Glace",
-      "Bouquet",
-      "Carotte",
-      "Papillon",
-      "Tortue",
-      "Lion",
-    ],
-    'hard': [
-      "Microscope",
-      "AccordÃƒÂ©on",
-      "Phare",
-      "Volcan",
-      "Pyramide",
-      "Boussole",
-      "Sous-marin",
-      "HÃƒÂ©licoptÃƒÂ¨re",
-      "Iceberg",
-      "Tornade",
-      "Cactus",
-      "Labyrinthe",
-      "Parachute",
-      "Pingouin",
-      "Skateboard",
-      "Perroquet",
-      "CamÃƒÂ©lÃƒÂ©on",
-      "Trampoline",
-      "Caravane",
-      "ThermomÃƒÂ¨tre",
-      "Balancoire",
-      "Periscope",
-      "Tremplin",
-      "Catapulte",
-      "Escalator",
-      "Fjord",
-      "Atoll",
-      "Hutte",
-      "Champignon",
-      "Pendule",
-      "MarÃƒÂ©cage",
-      "Grotte",
-      "Igloo",
-      "BonsaÃƒÂ¯",
-      "Forge",
-      "GoÃƒÂ©lette",
-      "MontgolfiÃƒÂ¨re",
-      "Marionette",
-      "KalÃƒÂ©idoscope",
-      "Astrolabe",
-    ],
-    'hardcore': [
-      "Quasar",
-      "Algorithme",
-      "Paradoxe",
-      "PhotosynthÃƒÂ¨se",
-      "Cryptographie",
-      "Renaissance",
-      "MÃƒÂ©tamorphose",
-      "Constellation",
-      "Archipel",
-      "Supernova",
-      "Chromosome",
-      "Tectonique",
-      "Stalactite",
-      "Ãƒâ€°piphÃƒÂ©nomÃƒÂ¨ne",
-      "Rhizome",
-      "Bioluminescence",
-      "Quaternion",
-      "Antimoine",
-      "PalÃƒÂ©ontologie",
-      "Nomadisme",
-      "Synapse",
-      "Fractale",
-      "Hologramme",
-      "Catalyse",
-      "Sismographe",
-      "Entropie",
-      "Parallaxe",
-      "BiomimÃƒÂ©tisme",
-      "SÃƒÂ©rendipitÃƒÂ©",
-      "Oxymore",
-      "Panoptique",
-      "Dialectique",
-      "Abscisse",
-      "TÃƒÂ©lescope-radio",
-      "BiosphÃƒÂ¨re",
-      "Cytoplasme",
-      "NÃƒÂ©vralgie",
-      "Ãƒâ€°pigenÃƒÂ¨se",
-      "SchizoÃƒÂ¯de",
-      "DÃƒÂ©ontologie",
-    ],
-  };
-
-  static const Map<String, List<String>> guessTheWordCategories = {
-    'Animaux': [
-      "Chien",
-      "Chat",
-      "Lion",
-      "Ãƒâ€°lÃƒÂ©phant",
-      "Girafe",
-      "Tigre",
-      "Poisson",
-      "Oiseau",
-      "Serpent",
-      "Cheval",
-    ],
-    'MÃƒÂ©tiers': [
-      "MÃƒÂ©decin",
-      "Professeur",
-      "Pompier",
-      "Policier",
-      "Artiste",
-      "Cuisinier",
-      "Ãƒâ€°crivain",
-      "IngÃƒÂ©nieur",
-      "Pilote",
-      "Astronaute",
-    ],
-    'Aliments': [
-      "Pizza",
-      "Burger",
-      "Pomme",
-      "Banane",
-      "Chocolat",
-      "Fromage",
-      "PÃƒÂ¢tes",
-      "Riz",
-      "Carotte",
-      "GÃƒÂ¢teau",
-    ],
-    'PersonnalitÃƒÂ©s': [
-      "Albert Einstein",
-      "Marie Curie",
-      "Leonardo da Vinci",
-      "Elvis Presley",
-      "Michael Jackson",
-      "Reine Elizabeth II",
-      "Barack Obama",
-      "Marilyn Monroe",
-      "William Shakespeare",
-      "Oprah Winfrey",
-    ],
-    'Objets du quotidien': [
-      "TÃƒÂ©lÃƒÂ©phone",
-      "Chaise",
-      "Table",
-      "Livre",
-      "Clavier",
-      "Voiture",
-      "Ampoule",
-      "Brosse ÃƒÂ  dents",
-      "Stylo",
-      "Ciseaux",
-    ],
-  };
-
   static const List<String> petitBacDefaultCategories = [
     "PrÃƒÂ©nom",
     "Ville",
@@ -2091,143 +1234,6 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     'Y',
     'Z',
   ];
-
-  static const Map<String, List<String>> pictionaryWords = {
-    'soft': [
-      "Pomme",
-      "Maison",
-      "Arbre",
-      "Chaise",
-      "Chien",
-      "Soleil",
-      "Voiture",
-      "Fleur",
-      "Livre",
-      "Bateau",
-      "Ãƒâ€°toile",
-      "Avion",
-      "Table",
-      "TÃƒÂ©lÃƒÂ©phone",
-      "Verre",
-      "Crayon",
-      "Ballon",
-      "Nuage",
-      "Glace",
-      "Pinceau",
-    ],
-    'hard': [
-      "LibertÃƒÂ©",
-      "GravitÃƒÂ©",
-      "Amour",
-      "RÃƒÂªve",
-      "Musique",
-      "Justice",
-      "Temps",
-      "Bonheur",
-      "Silence",
-      "Ãƒâ€°lectricitÃƒÂ©",
-      "Confiance",
-      "Imagination",
-      "Sagesse",
-      "Courage",
-      "Destin",
-      "Harmonie",
-      "Frustration",
-      "Ãƒâ€°vasion",
-      "Illusion",
-      "Paradoxe",
-    ],
-    'hardcore': [
-      "Nihilisme",
-      "Absurde",
-      "Existentialisme",
-      "SynesthÃƒÂ©sie",
-      "MÃƒÂ©taphysique",
-      "Conscience",
-      "Infini",
-      "Ãƒâ€°phÃƒÂ©mÃƒÂ¨re",
-      "Utopie",
-      "RÃƒÂ©silience",
-      "Quintessence",
-      "AllÃƒÂ©gorie",
-      "Ãƒâ€°nigme",
-      "SÃƒÂ©rendipitÃƒÂ©",
-      "ChimÃƒÂ¨re",
-      "Cognition",
-      "Ãƒâ€°lÃƒÂ©gance",
-      "Euphorie",
-      "Sarcasme",
-    ],
-  };
-
-  static const Map<String, List<String>> justOneWords = {
-    'soft': [
-      "Chat",
-      "Chien",
-      "Table",
-      "Livre",
-      "Ordinateur",
-      "TÃƒÂ©lÃƒÂ©phone",
-      "CafÃƒÂ©",
-      "Fleur",
-      "Musique",
-      "Pluie",
-      "Voiture",
-      "Maison",
-      "Lit",
-      "Ãƒâ€°cole",
-      "Ville",
-      "Arbre",
-      "FenÃƒÂªtre",
-      "Ciel",
-      "Oiseau",
-      "Eau",
-    ],
-    'hard': [
-      "Ãƒâ€°motion",
-      "MystÃƒÂ¨re",
-      "Voyage",
-      "Innovation",
-      "Aventure",
-      "LibertÃƒÂ©",
-      "Silence",
-      "CrÃƒÂ©ativitÃƒÂ©",
-      "Sagesse",
-      "Fantaisie",
-      "Harmonie",
-      "Ãƒâ€°quilibre",
-      "Destin",
-      "Inspiration",
-      "Intuition",
-      "Bonheur",
-      "Ãƒâ€°nergie",
-      "CuriositÃƒÂ©",
-      "Espoir",
-      "Patience",
-    ],
-    'hardcore': [
-      "Nostalgie",
-      "Ãƒâ€°phÃƒÂ©mÃƒÂ¨re",
-      "SerendipitÃƒÂ©",
-      "Dystopie",
-      "Solitude",
-      "Subconscient",
-      "AllÃƒÂ©gorie",
-      "Ãƒâ€°nigme",
-      "Ãƒâ€°phÃƒÂ©mÃƒÂ¨re",
-      "Paradoxe",
-      "Transcendence",
-      "Melancolie",
-      "Ãƒâ€°phÃƒÂ©mÃƒÂ©ride",
-      "Quintessence",
-      "RÃƒÂ©silience",
-      "ChimÃƒÂ¨re",
-      "Cognition",
-      "Ãƒâ€°lÃƒÂ©gance",
-      "Euphorie",
-      "Sarcasme",
-    ],
-  };
 
   static final List<String> dobbleSymbols = [
     '😀',
@@ -2680,12 +1686,12 @@ class PokerHand implements Comparable<PokerHand> {
   @override
   int compareTo(PokerHand other) {
     if (rank.index != other.rank.index) {
-      return other.rank.index.compareTo(rank.index); // Higher rank wins
+      return rank.index.compareTo(other.rank.index); // Higher rank wins
     }
 
     for (int i = 0; i < kickerValues.length; i++) {
       if (kickerValues[i] != other.kickerValues[i]) {
-        return other.kickerValues[i].compareTo(kickerValues[i]);
+        return kickerValues[i].compareTo(other.kickerValues[i]);
       }
     }
     return 0; // It's a tie
@@ -3105,8 +2111,237 @@ class _MultiplayerTeamSelectionDialogState
   }
 }
 
+// Modèle pour une entrée d'historique IA
+class AiThemeHistoryItem {
+  final String id;
+  String title;
+  String prompt;
+  String gameType;
+  List<String> words;
+  final DateTime createdAt;
+
+  AiThemeHistoryItem({
+    required this.id,
+    required this.title,
+    required this.prompt,
+    required this.gameType,
+    required this.words,
+    required this.createdAt,
+  });
+
+  Map<String, dynamic> toMap() => {
+    'title': title,
+    'prompt': prompt,
+    'gameType': gameType,
+    'words': words,
+    'createdAt': Timestamp.fromDate(createdAt),
+  };
+
+  factory AiThemeHistoryItem.fromDoc(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>? ?? {};
+    return AiThemeHistoryItem(
+      id: doc.id,
+      title: data['title'] ?? 'Thème IA',
+      prompt: data['prompt'] ?? '',
+      gameType: data['gameType'] ?? '',
+      words: List<String>.from(data['words'] ?? []),
+      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+    );
+  }
+}
+
 class FirebaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  /// Retourne le nombre idéal d'éléments générés selon le jeu
+  static int getAiWordCountForGame(String gameType) {
+    switch (gameType) {
+      case 'Codenames':
+        return 35; // 25 requis pour la grille + réserve
+      case 'Time\'s Up':
+      case 'Pictionary':
+      case 'Devine Tête':
+        return 40;
+      case 'Just One':
+        return 20; // 13 cartes pour une partie complète + réserve
+      case 'Infiltré & Mr. White':
+        return 20; // 20 paires "MotCivil:MotInfiltré"
+      case 'Taboo':
+        return 25; // 25 cartes "MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5"
+      case 'Petit Bac':
+      case 'La Patate Chaude':
+      case 'Le Jeu des Catégories':
+        return 20; // 20 catégories thématiques
+      case 'Gribouillis':
+        return 15; // 15 phrases de départ amusantes à dessiner
+      case 'Cadavre Exquis':
+        return 15; // 15 débuts de récits / univers inspirants
+      case 'Le Dilemme':
+        return 20; // 20 dilemmes au format "OptionA ou OptionB"
+      case 'Action ou Vérité':
+      case 'Jeu de la Pièce':
+      case 'On se passe un objet rapidement':
+      case 'Blanc Manger Coco':
+      case 'Le Juge':
+      case 'Le Menteur':
+      case 'Qui Pourrait le Plus ?':
+      case 'Synonyme ou Banni':
+      case 'Le Roi des Mèmes':
+        return 25;
+      default:
+        return 30;
+    }
+  }
+
+  /// Instructions système personnalisées envoyées à la Cloud Function selon le jeu
+  static String formatAiPromptForGame(String gameType, String userPrompt) {
+    switch (gameType) {
+      case 'Infiltré & Mr. White':
+        return "Génère des paires de mots proches au format 'MotCivil:MotInfiltré'. Thème : $userPrompt";
+      case 'Taboo':
+        return "Génère des cartes Taboo au format 'MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5'. Thème : $userPrompt";
+      case 'Petit Bac':
+      case 'La Patate Chaude':
+      case 'Le Jeu des Catégories':
+        return "Génère des catégories originales et amusantes à faire deviner. Thème : $userPrompt";
+      case 'Gribouillis':
+        return "Génère des phrases courtes, visuelles et loufoques à faire dessiner (ex: 'Un dinosaure qui mange une glace'). Thème : $userPrompt";
+      case 'Cadavre Exquis':
+        return "Génère des phrases d'accroche ou univers d'écriture originaux. Thème : $userPrompt";
+      case 'Le Dilemme':
+        return "Génère des dilemmes cornéliens au format 'OptionA ou OptionB' (ex: 'Pouvoir voler ou Être invisible'). Thème : $userPrompt";
+      case 'Action ou Vérité':
+        return "Génère un mélange de défis (actions) et questions indiscrètes (vérités). Thème : $userPrompt";
+      case 'Jeu de la Pièce':
+      case 'On se passe un objet rapidement':
+        return "Génère des questions directes, amusantes et piquantes. Thème : $userPrompt";
+      case 'Blanc Manger Coco':
+        return "Génère des phrases courtes à trou (contenant '_____') pour le jeu. Thème : $userPrompt";
+      case 'Le Juge':
+        return "Génère des questions amusantes sur un joueur (utilise le tag '{player}'). Thème : $userPrompt";
+      case 'Qui Pourrait le Plus ?':
+        return "Génère des situations courtes commençant par une action. Thème : $userPrompt";
+      case 'Le Roi des Mèmes':
+        return "Génère des situations humoristiques et amorces de légendes de mèmes. Thème : $userPrompt";
+      default:
+        return "Génère une liste de mots/expressions pour le jeu $gameType sur le thème : $userPrompt";
+    }
+  }
+
+  /// Enregistre un pack généré par l'IA directement dans Firestore
+  Future<String> saveAiThemeToFirebase({
+    required String uid,
+    required String prompt,
+    required String gameType,
+    required List<String> words,
+    String? title,
+    String? existingDocId,
+  }) async {
+    final colRef = _db.collection('users').doc(uid).collection('ai_history');
+
+    // Titre automatique généré si aucun titre fourni
+    String autoTitle = title ?? '';
+    if (autoTitle.trim().isEmpty) {
+      if (prompt.trim().isNotEmpty) {
+        autoTitle = prompt.trim();
+        if (autoTitle.length > 28)
+          autoTitle = "${autoTitle.substring(0, 28)}...";
+      } else if (words.isNotEmpty) {
+        autoTitle = "Pack ${words.take(2).join(', ')}";
+      } else {
+        autoTitle = "Thème $gameType";
+      }
+    }
+
+    if (existingDocId != null && existingDocId.isNotEmpty) {
+      await colRef.doc(existingDocId).set({
+        'title': autoTitle,
+        'prompt': prompt,
+        'gameType': gameType,
+        'words': words,
+        'updatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+      return existingDocId;
+    } else {
+      final docRef = await colRef.add({
+        'title': autoTitle,
+        'prompt': prompt,
+        'gameType': gameType,
+        'words': words,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+      return docRef.id;
+    }
+  }
+
+  /// Écoute en temps réel de l'historique Firebase filtré par jeu
+  Stream<List<AiThemeHistoryItem>> getAiHistoryStream(
+    String uid,
+    String gameType,
+  ) {
+    return _db
+        .collection('users')
+        .doc(uid)
+        .collection('ai_history')
+        .where('gameType', isEqualTo: gameType)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map(
+          (snap) =>
+              snap.docs.map((doc) => AiThemeHistoryItem.fromDoc(doc)).toList(),
+        );
+  }
+
+  /// Suppression d'un thème sur Firebase
+  Future<void> deleteAiThemeFromFirebase(String uid, String docId) async {
+    await _db
+        .collection('users')
+        .doc(uid)
+        .collection('ai_history')
+        .doc(docId)
+        .delete();
+  }
+
+  /// Sauvegarde ou met à jour un pack IA dans l'historique de l'utilisateur (rétro-compatibilité)
+  Future<String> saveAiThemeHistory({
+    required String uid,
+    required String prompt,
+    required String gameType,
+    required List<String> words,
+    String? title,
+    String? existingId,
+  }) => saveAiThemeToFirebase(
+    uid: uid,
+    prompt: prompt,
+    gameType: gameType,
+    words: words,
+    title: title,
+    existingDocId: existingId,
+  );
+
+  /// Récupère le flux d'historique filtré pour un utilisateur et optionnellement par jeu (rétro-compatibilité)
+  Stream<List<AiThemeHistoryItem>> getAiThemeHistoryStream(
+    String uid, {
+    String? gameType,
+  }) {
+    if (gameType != null && gameType.isNotEmpty) {
+      return getAiHistoryStream(uid, gameType);
+    }
+    return _db
+        .collection('users')
+        .doc(uid)
+        .collection('ai_history')
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map(
+          (snap) =>
+              snap.docs.map((doc) => AiThemeHistoryItem.fromDoc(doc)).toList(),
+        );
+  }
+
+  /// Supprime une entrée d'historique (rétro-compatibilité)
+  Future<void> deleteAiThemeHistory(String uid, String historyId) =>
+      deleteAiThemeFromFirebase(uid, historyId);
 
   // =========================================================================
   // ⚡ MOTEUR D'XP ET CALCUL DU BONUS DE VITESSE DYNAMIQUE
@@ -3451,11 +2686,15 @@ class FirebaseService {
 
   Future<String> createLounge(Map<String, dynamic> loungeData) async {
     final docRef = _db.collection('lounges').doc();
+    final String joinCode = randomNumeric(6);
+
     await docRef.set({
       ...loungeData,
+      'joinCode': joinCode,
       'createdAt': FieldValue.serverTimestamp(),
-      'pendingGame': null, // RemplacÃ© plus loin par pendingGame
+      'pendingGame': null,
     });
+
     return docRef.id;
   }
 
@@ -3473,8 +2712,43 @@ class FirebaseService {
   }
 
   Future<void> leaveLounge(String loungeId, String playerId) async {
-    await _db.collection('lounges').doc(loungeId).update({
-      'players.$playerId': FieldValue.delete(),
+    final docRef = _db.collection('lounges').doc(loungeId);
+    await _db.runTransaction((transaction) async {
+      final snap = await transaction.get(docRef);
+      if (!snap.exists) return;
+
+      final data = snap.data() as Map<String, dynamic>;
+      final players = Map<String, dynamic>.from(data['players'] ?? {});
+      players.remove(playerId);
+
+      final updates = <String, dynamic>{
+        'players.$playerId': FieldValue.delete(),
+        'streamers': FieldValue.arrayRemove([playerId]),
+      };
+
+      // Nettoyage de la partie en attente si le joueur était dedans
+      final pendingGame = data['pendingGame'] as Map<String, dynamic>?;
+      if (pendingGame != null) {
+        if (pendingGame['hostId'] == playerId) {
+          // Si l'hôte de la partie part, on annule la partie en attente
+          updates['pendingGame'] = FieldValue.delete();
+        } else {
+          updates['pendingGame.joinedPlayers'] = FieldValue.arrayRemove([
+            playerId,
+          ]);
+        }
+      }
+
+      if (players.isEmpty) {
+        // Si le dernier joueur quitte, on supprime le salon
+        transaction.delete(docRef);
+      } else {
+        // Si l'hôte s'en va, on passe le rôle au joueur suivant
+        if (data['hostId'] == playerId) {
+          updates['hostId'] = players.keys.first;
+        }
+        transaction.update(docRef, updates);
+      }
     });
   }
 
@@ -3684,26 +2958,48 @@ class FirebaseService {
     if (size == 5) {
       bool isFlush = cards.map((c) => c['suit']).toSet().length == 1;
 
-      // Détection des suites Big Two (Ordres : 3-4-5-6-7 jusqu'à 10-J-Q-K-A)
-      List<int> ranksSorted =
-          cards.map((c) => c['rankInt'] as int).toList()..sort();
+      // Normalisation des suites Big Two :
+      // Ordres possibles de rangs : 3-4-5-6-7 (min) jusqu'à 10-J-Q-K-A, et A-2-3-4-5, 2-3-4-5-6
+      List<int> ranks = cards.map((c) => c['rankInt'] as int).toList()..sort();
+
       bool isConsecutive = true;
       for (int i = 1; i < 5; i++) {
-        if (ranksSorted[i] != ranksSorted[i - 1] + 1) {
+        if (ranks[i] != ranks[i - 1] + 1) {
           isConsecutive = false;
           break;
         }
       }
 
-      bool isStraight = isConsecutive;
+      // Détection des suites avec As et 2 (Wheel : 3, 4, 5, 14, 15) ou (3, 4, 5, 6, 15)
+      bool isA2345 =
+          (ranks[0] == 3 &&
+              ranks[1] == 4 &&
+              ranks[2] == 5 &&
+              ranks[3] == 14 &&
+              ranks[4] == 15);
+      bool is23456 =
+          (ranks[0] == 3 &&
+              ranks[1] == 4 &&
+              ranks[2] == 5 &&
+              ranks[3] == 6 &&
+              ranks[4] == 15);
 
-      if (isStraight && isFlush)
+      bool isStraight = isConsecutive || isA2345 || is23456;
+
+      int straightHighVal = cards[4]['value'];
+      if (isA2345) {
+        // Dans A-2-3-4-5, le 2 est la plus forte
+        straightHighVal = cards.firstWhere((c) => c['rankInt'] == 15)['value'];
+      }
+
+      if (isStraight && isFlush) {
         return {
           'type': 'straight_flush',
           'tier': 5,
-          'highValue': cards[4]['value'],
+          'highValue': straightHighVal,
           'size': 5,
         };
+      }
 
       Map<String, int> rankCounts = {};
       for (var c in cards)
@@ -3738,7 +3034,7 @@ class FirebaseService {
         return {
           'type': 'straight',
           'tier': 1,
-          'highValue': cards[4]['value'],
+          'highValue': straightHighVal,
           'size': 5,
         };
     }
@@ -3938,10 +3234,21 @@ class FirebaseService {
             }, SetOptions(merge: true));
           }
 
-          int xpBase =
-              (myHand.isEmpty)
-                  ? 30
-                  : (((combo['tier'] as num?)?.toInt() ?? 0) >= 1 ? 20 : 4);
+          int pieceTier = (combo['tier'] as num?)?.toInt() ?? 0;
+          int xpBase = 4;
+          if (pieceTier == 5) {
+            xpBase = 60; // Straight Flush
+          } else if (pieceTier == 4) {
+            xpBase = 35; // Four of a kind
+          } else if (pieceTier >= 1 && pieceTier <= 3) {
+            xpBase = 20; // Full, Flush, Straight
+          } else if (combo['type'] == 'triple') {
+            xpBase = 8;
+          }
+
+          if (myHand.isEmpty) {
+            xpBase += 45; // Fin de partie
+          }
           creditPlayerXp(
             transaction,
             gameRef,
@@ -3968,13 +3275,14 @@ class FirebaseService {
       }
 
       if (finishedPlayers.isNotEmpty) {
+        String winnerId = finishedPlayers.first;
         transaction.update(gameRef, {
           'gameState': 'gameOver',
-          'gameWinner': finishedPlayers.first,
+          'gameWinner': winnerId,
+          'players.$winnerId.score': FieldValue.increment(1),
           'bigTwoPlayerHands': hands,
           'bigTwoFinishedPlayers': finishedPlayers,
-          'gameEndReason':
-              '${gameData['players'][finishedPlayers.first]['name']} a gagné !',
+          'gameEndReason': '${gameData['players'][winnerId]['name']} a gagné !',
         });
         return;
       }
@@ -4268,7 +3576,54 @@ class FirebaseService {
         myData['hand'] = hand;
         pData[playerId] = myData;
 
+        if (!isAuto) {
+          int xpBase = 5; // Carte 25 à 100 km par défaut
+
+          if (card.startsWith('SAFETY_')) {
+            xpBase = 50; // Poser une Botte / Coup Fourré
+          } else if (card == 'D200') {
+            xpBase = 12; // Carte 200 km
+          } else if ([
+            'STOP',
+            'RED_LIGHT',
+            'SPEED_LIMIT',
+            'OUT_OF_GAS',
+            'FLAT_TIRE',
+          ].contains(card)) {
+            xpBase = 12; // Attaque réussie sur l'adversaire
+          } else if ([
+            'GREEN_LIGHT',
+            'END_OF_LIMIT',
+            'EXTRA_TANK',
+            'SPARE_TIRE',
+          ].contains(card)) {
+            xpBase = 10; // Parade / Réparation
+          }
+
+          if ((myData['distance'] as int) >= targetDist) {
+            xpBase += 60; // Bonus franchissement de l'arrivée (1000 km)
+          }
+
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            xpBase,
+            applySpeedBonus: true,
+          );
+        }
+
         if ((myData['distance'] as int) >= targetDist) {
+          if (myData['isOutOfGas'] != true) {
+            _db
+                .collection('users')
+                .doc(players[playerId]?['authUid'] ?? playerId)
+                .set({
+                  'unlockedBadges.mille_bornes_1000':
+                      FieldValue.serverTimestamp(),
+                }, SetOptions(merge: true));
+          }
           transaction.update(gameRef, {
             'gameState': 'gameOver',
             'gameWinner': playerId,
@@ -4278,22 +3633,6 @@ class FirebaseService {
             'milleBornesDeck': deck,
           });
           return;
-        }
-
-        if (!isAuto) {
-          int xpBase =
-              card.startsWith('SAFETY_') ? 35 : (card.startsWith('D') ? 5 : 10);
-          if ((myData['distance'] as int) >= targetDist) {
-            xpBase = 50;
-          }
-          creditPlayerXp(
-            transaction,
-            gameRef,
-            gameData,
-            playerId,
-            xpBase,
-            applySpeedBonus: true,
-          );
         }
 
         int nextIndex = (currentIndex + 1) % playerOrder.length;
@@ -5077,7 +4416,7 @@ class FirebaseService {
                   [p[0] - 1, p[1]],
                   [p[0] + 1, p[1]],
                   [p[0], p[1] - 1],
-                  [p[0] + 1, p[1] + 1],
+                  [p[0], p[1] + 1],
                 ];
                 return neighbors.any(
                   (n) => board["${n[0]}_${n[1]}"] == myColor,
@@ -6042,8 +5381,33 @@ class FirebaseService {
           playerOrder[(playerOrder.indexOf(playerId) + 1) % playerOrder.length];
 
       if (!isAuto) {
-        int xpBase =
-            (category == 'Yams') ? 50 : (category.contains('Suite') ? 20 : 10);
+        int rollsLeft = (gameData['yamsRollsLeft'] as num?)?.toInt() ?? 3;
+        int xpBase = 8; // Catégorie simple (As à Six)
+
+        if (category == 'Grande Suite' && score == 40 && rollsLeft == 2) {
+          final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+          if (currentAuthUid != null) {
+            _db.collection('users').doc(currentAuthUid).set({
+              'unlockedBadges.yams_full_suite': FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+          }
+        }
+
+        if (category == 'Yams') {
+          xpBase = 75; // YAMS complet
+        } else if (category == 'Grande Suite' || category == 'Petite Suite') {
+          xpBase = 35;
+        } else if (category == 'Full') {
+          xpBase = 25;
+        } else if (category == 'Brelan' || category == 'Carré') {
+          xpBase = 15;
+        }
+
+        // Bonus de 20 XP si la combinaison a été validée dès le premier jet de dés
+        if (rollsLeft == 2 && score > 0) {
+          xpBase += 20;
+        }
+
         creditPlayerXp(
           transaction,
           gameRef,
@@ -6079,6 +5443,19 @@ class FirebaseService {
             (sum, cat) => sum + ((pScores[cat] as num?)?.toInt() ?? 0),
           );
           final bonus = upperSum >= 63 ? 35 : 0;
+          if (upperSum >= 63) {
+            _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+              'unlockedBadges.yams_bonus_sup': FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+              40, // Prime 63 points
+              applySpeedBonus: false,
+            );
+          }
           final total =
               pScores.values.fold<int>(
                 0,
@@ -6294,6 +5671,7 @@ class FirebaseService {
       paper['steps'] = steps;
       papers[paperIndex.toString()] = paper;
 
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final updates = <String, dynamic>{'papers': papers};
 
       if (passingMode == 'single') {
@@ -6301,6 +5679,19 @@ class FirebaseService {
         if (steps.length >= totalSteps) {
           updates['roundState'] = 'results';
           updates['gameState'] = 'gameOver';
+          for (var pId in players.keys) {
+            _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+              'badgeProgress.cadavre_master': FieldValue.increment(1),
+            }, SetOptions(merge: true));
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+              30,
+              applySpeedBonus: false,
+            );
+          }
         } else {
           updates['currentPlayerIndex'] =
               (currentPlayerIndex + 1) % playerOrder.length;
@@ -6320,6 +5711,19 @@ class FirebaseService {
         if (nextRound >= totalSteps) {
           updates['roundState'] = 'results';
           updates['gameState'] = 'gameOver';
+          for (var pId in players.keys) {
+            _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+              'badgeProgress.cadavre_master': FieldValue.increment(1),
+            }, SetOptions(merge: true));
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+              30,
+              applySpeedBonus: false,
+            );
+          }
         } else {
           updates['currentPlayerIndex'] = nextPlayerIndex;
           updates['currentRound'] = nextRound;
@@ -6333,7 +5737,7 @@ class FirebaseService {
           gameRef,
           gameData,
           playerId,
-          8,
+          10,
           applySpeedBonus: true,
         );
       }
@@ -6631,6 +6035,11 @@ class FirebaseService {
       );
       roundScores.forEach((pId, score) {
         totalScores[pId] = (totalScores[pId] ?? 0) + score;
+        if (score < 0) {
+          _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+            'unlockedBadges.skyjo_negative': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        }
       });
 
       Map<String, dynamic> updates = {
@@ -6815,23 +6224,95 @@ class FirebaseService {
     String voterId,
     String votedForId,
   ) async {
-    DocumentReference gameRef = _db.collection('games').doc(gameCode);
+    final gameRef = _db.collection('games').doc(gameCode);
 
-    await gameRef.update({
-      'votes.$voterId': {
+    await _db.runTransaction((transaction) async {
+      final gameSnap = await transaction.get(gameRef);
+      if (!gameSnap.exists) return;
+
+      final gameData = gameSnap.data() as Map<String, dynamic>;
+      if (gameData['roundState'] != 'showing_photo') return;
+
+      final Map<String, dynamic> players = Map<String, dynamic>.from(
+        gameData['players'] ?? {},
+      );
+      final Map<String, dynamic> votes = Map<String, dynamic>.from(
+        gameData['votes'] ?? {},
+      );
+
+      // Enregistrement du vote avec horodatage milliseconde précis
+      final now = DateTime.now();
+      votes[voterId] = {
         'votedFor': votedForId,
-        'timestamp': FieldValue.serverTimestamp(),
-      },
+        'timestamp': now.millisecondsSinceEpoch,
+      };
+
+      transaction.update(gameRef, {'votes': votes});
+
+      // Si tout le monde a voté, on dépouille immédiatement dans la même transaction
+      if (votes.length >= players.length) {
+        final String correctOwnerId = gameData['currentPhoto']['ownerId'];
+        final Timestamp? roundStartTime =
+            gameData['roundStartTime'] as Timestamp?;
+        final int timePerPhoto =
+            (gameData['turnTimerSeconds'] as num?)?.toInt() ?? 5;
+        const int maxPoints = 1000;
+
+        final Map<String, dynamic> updates = {
+          'roundState': 'results',
+          'roundResultsTimestamp': FieldValue.serverTimestamp(),
+        };
+        final Map<String, Map<String, dynamic>> roundResults = {};
+
+        votes.forEach((vId, vData) {
+          final bool wasCorrect = (vData['votedFor'] == correctOwnerId);
+          int score = 0;
+
+          if (wasCorrect && roundStartTime != null) {
+            final int voteTimeMs = (vData['timestamp'] as num).toInt();
+            final double elapsedSeconds =
+                (voteTimeMs - roundStartTime.millisecondsSinceEpoch) / 1000.0;
+            final double timeFactor = (elapsedSeconds / timePerPhoto).clamp(
+              0.0,
+              1.0,
+            );
+            score = (maxPoints * (1.0 - timeFactor)).round();
+
+            updates['players.$vId.score'] = FieldValue.increment(score);
+
+            // Attribution XP
+            final int xpBase = 10;
+            final int speedBonus = (10 * (1.0 - timeFactor)).round().clamp(
+              1,
+              10,
+            );
+            final int totalXp = xpBase + speedBonus;
+
+            updates['players.$vId.xp'] = FieldValue.increment(totalXp);
+            final authUid = players[vId]?['authUid'] ?? vId;
+            final userRef = _db.collection('users').doc(authUid);
+            transaction.set(userRef, {
+              'xp': FieldValue.increment(totalXp),
+            }, SetOptions(merge: true));
+
+            if (elapsedSeconds <= 2.0) {
+              transaction.set(userRef, {
+                'unlockedBadges.photo_roulette_fast':
+                    FieldValue.serverTimestamp(),
+              }, SetOptions(merge: true));
+            }
+            transaction.set(userRef, {
+              'badgeProgress.photo_roulette_perfect': FieldValue.increment(1),
+            }, SetOptions(merge: true));
+          }
+
+          roundResults[vId] = {'correct': wasCorrect, 'score': score};
+        });
+
+        updates['roundResults'] = roundResults;
+        transaction.update(gameRef, updates);
+      }
     });
-
-    DocumentSnapshot gameSnap = await gameRef.get();
-    var gameData = gameSnap.data() as Map<String, dynamic>;
-    int playersCount = (gameData['players'] as Map).length;
-    int votesCount = (gameData['votes'] as Map).length;
-
-    if (votesCount == playersCount) {
-      await _tallyPhotoRouletteVotes(gameRef, gameData);
-    }
   }
 
   Future<void> _tallyPhotoRouletteVotes(
@@ -7047,7 +6528,7 @@ class FirebaseService {
           gameRef,
           gameData,
           playerId,
-          5,
+          8,
           applySpeedBonus: true,
         );
         transaction.update(gameRef, updates);
@@ -7059,7 +6540,7 @@ class FirebaseService {
 
       String albumToUpdateOwnerId;
       if (gribouillisMode == 'Brise-Glace' ||
-          (gribouillisMode == 'ComplÃƒÂ©ment' && ajouter1)) {
+          (gribouillisMode == 'Complément' && ajouter1)) {
         final int albumOwnerIndex = (myIndex + currentStep) % playerCount;
         albumToUpdateOwnerId = playerOrder[albumOwnerIndex];
       } else {
@@ -7072,7 +6553,7 @@ class FirebaseService {
       albumSteps.add(newStep);
       albums[albumToUpdateOwnerId] = albumSteps;
 
-      // Guard: empÃƒÂªcher double soumission
+      // Guard: empêcher double soumission
       List<String> existingSubmitted2 = List<String>.from(
         gameData['submittedPlayers'] ?? [],
       );
@@ -7081,7 +6562,7 @@ class FirebaseService {
       List<String> submittedPlayers = List<String>.from(existingSubmitted2)
         ..add(playerId);
 
-      int xpBase = (type == 'drawing') ? 10 : 5;
+      int xpBase = (type == 'drawing') ? 15 : 8;
       creditPlayerXp(
         transaction,
         gameRef,
@@ -7129,6 +6610,14 @@ class FirebaseService {
                     'unlockedBadges.grib_loop_perfect':
                         FieldValue.serverTimestamp(),
                   }, SetOptions(merge: true));
+                  creditPlayerXp(
+                    transaction,
+                    gameRef,
+                    gameData,
+                    albumOwnerId,
+                    40,
+                    applySpeedBonus: false,
+                  );
                 }
               }
             });
@@ -7300,6 +6789,105 @@ class FirebaseService {
     }
 
     if (winner != null) {
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final Map<String, dynamic> xpUpdates = {};
+
+      if (winner == 'Les Amoureux') {
+        for (var loverId in lovers) {
+          _db
+              .collection('users')
+              .doc(players[loverId]?['authUid'] ?? loverId)
+              .set({
+                'unlockedBadges.lg_cupidon_love_win':
+                    FieldValue.serverTimestamp(),
+              }, SetOptions(merge: true));
+        }
+      } else if (winner == 'Loup Blanc') {
+        final lbEntry =
+            playerData.entries
+                .where((e) => e.value['role'] == 'Loup Blanc')
+                .firstOrNull;
+        if (lbEntry != null) {
+          final lbId = lbEntry.key;
+          _db.collection('users').doc(players[lbId]?['authUid'] ?? lbId).set({
+            'unlockedBadges.lg_loup_blanc_solo': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        }
+      } else if (winner == 'Rat Malade') {
+        final rmEntry =
+            playerData.entries
+                .where((e) => e.value['role'] == 'Rat Malade')
+                .firstOrNull;
+        if (rmEntry != null) {
+          final rmId = rmEntry.key;
+          _db.collection('users').doc(players[rmId]?['authUid'] ?? rmId).set({
+            'unlockedBadges.lg_rat_malade_win': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        }
+      } else if (winner == 'Villageois') {
+        playerData.forEach((id, pInfo) {
+          if (pInfo['role'] == 'Simple Villageois' &&
+              pInfo['status'] == 'vivant') {
+            _db.collection('users').doc(players[id]?['authUid'] ?? id).set({
+              'unlockedBadges.lg_survivor_village':
+                  FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+          }
+        });
+      } else if (winner == 'Loups-Garous') {
+        playerData.forEach((id, pInfo) {
+          if (pInfo['role'] == 'Loup Bavard' && pInfo['status'] == 'vivant') {
+            _db.collection('users').doc(players[id]?['authUid'] ?? id).set({
+              'unlockedBadges.lg_loup_bavard_alive':
+                  FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+          }
+        });
+        bool noWolfDied = playerData.values
+            .where((p) => GameData.roleCamps[p['role']] == 'loups')
+            .every((p) => p['status'] == 'vivant');
+        if (noWolfDied) {
+          playerData.forEach((id, pInfo) {
+            if (GameData.roleCamps[pInfo['role']] == 'loups') {
+              _db.collection('users').doc(players[id]?['authUid'] ?? id).set({
+                'unlockedBadges.lg_wolf_pack_win': FieldValue.serverTimestamp(),
+              }, SetOptions(merge: true));
+            }
+          });
+        }
+      }
+
+      playerData.forEach((pId, pInfo) {
+        final role = pInfo['role'];
+        final camp = GameData.roleCamps[role];
+        final isInfected = pInfo['infectionStatus'] == 'infecte';
+        final pAuth = players[pId]?['authUid'] ?? pId;
+        int winXp = 0;
+
+        if (winner == 'Loup Blanc' && role == 'Loup Blanc') {
+          winXp = 75;
+        } else if (winner == 'Rat Malade' && role == 'Rat Malade') {
+          winXp = 75;
+        } else if (winner == 'Les Amoureux' && lovers.contains(pId)) {
+          winXp = 50;
+        } else if (winner == 'Loups-Garous' &&
+            (camp == 'loups' || isInfected)) {
+          winXp = 35;
+        } else if (winner == 'Villageois' &&
+            (camp == 'villageois' || camp == 'special') &&
+            !isInfected) {
+          winXp = 35;
+        }
+
+        if (winXp > 0) {
+          _db.collection('users').doc(pAuth).set({
+            'xp': FieldValue.increment(winXp),
+          }, SetOptions(merge: true));
+          xpUpdates['players.$pId.xp'] = FieldValue.increment(winXp);
+          xpUpdates['players.$pId.score'] = FieldValue.increment(1);
+        }
+      });
+
       await gameRef.update({
         'gameState': 'gameOver',
         'phase': 'gameOver',
@@ -7308,6 +6896,7 @@ class FirebaseService {
           "La partie est terminée. Victoire des ${winner} !",
           reason,
         ]),
+        ...xpUpdates,
       });
     }
   }
@@ -7369,8 +6958,12 @@ class FirebaseService {
             ) &&
             nightActions['loupsVoted'] != true;
       case 'loup_blanc_turn':
-        return nightNumber > 0 &&
-            nightNumber % 2 != 0 &&
+        // Nuit 0 (1ère nuit) : pas de réveil
+        // Nuit 1 (2ème nuit) : réveil
+        // Nuit 2 (3ème nuit) : repos
+        // Nuit 3 (4ème nuit) : réveil
+        return nightNumber >= 1 &&
+            (nightNumber % 2 == 1) &&
             isRoleAlive('Loup Blanc') &&
             nightActions['loupBlancActed'] != true;
       case 'sorciere_turn':
@@ -7461,12 +7054,17 @@ class FirebaseService {
       String targetRole = playerData[targetId]?['role'] ?? 'Simple Villageois';
       String targetName = playerData[targetId]?['name'] ?? 'Inconnu';
 
+      bool isWolf =
+          GameData.roleCamps[targetRole] == 'loups' ||
+          playerData[targetId]?['infectionStatus'] == 'infecte';
+      int xpGained = isWolf ? 30 : 10;
+
       creditPlayerXp(
         transaction,
         gameRef,
         gameData,
         voyanteId,
-        10,
+        xpGained,
         applySpeedBonus: true,
       );
 
@@ -7555,6 +7153,19 @@ class FirebaseService {
           "Vous ne pouvez pas protéger la même personne deux nuits de suite.",
         );
       }
+
+      String? loupTarget = gameData['nightActions']?['loupTarget'];
+      bool savedExactTarget = (loupTarget != null && loupTarget == targetId);
+      int xpGarde = savedExactTarget ? 45 : 12;
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        gardeId,
+        xpGarde,
+        applySpeedBonus: false,
+      );
 
       transaction.update(gameRef, {
         'nightActions.gardeProtect': targetId,
@@ -7928,19 +7539,27 @@ class FirebaseService {
       if (potionType == 'rien') {
         transaction.update(gameRef, updates);
         shouldAdvance = true;
-      } else {
+      }
+      if (potionType == 'guerison' &&
+          playerData[sorciereId]['potions']?['guerison'] == true) {
         creditPlayerXp(
           transaction,
           gameRef,
           gameData,
           sorciereId,
-          15,
+          25,
           applySpeedBonus: true,
         );
-      }
-      if (potionType == 'guerison' &&
-          playerData[sorciereId]['potions']?['guerison'] == true) {
         if (playerData[sorciereId]['potions']?['poison'] == false) {
+          // Bonus de 25 XP pour avoir utilisé les 2 potions !
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            sorciereId,
+            25,
+            applySpeedBonus: false,
+          );
           final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
           if (currentAuthUid != null) {
             _db.collection('users').doc(currentAuthUid).set({
@@ -7960,7 +7579,28 @@ class FirebaseService {
       } else if (potionType == 'poison' &&
           playerData[sorciereId]['potions']?['poison'] == true &&
           targetId != null) {
+        bool targetIsWolf =
+            GameData.roleCamps[playerData[targetId]?['role']] == 'loups' ||
+            playerData[targetId]?['infectionStatus'] == 'infecte';
+        int xpPoison = targetIsWolf ? 40 : 10;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          sorciereId,
+          xpPoison,
+          applySpeedBonus: true,
+        );
         if (playerData[sorciereId]['potions']?['guerison'] == false) {
+          // Bonus de 25 XP pour avoir utilisé les 2 potions !
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            sorciereId,
+            25,
+            applySpeedBonus: false,
+          );
           final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
           if (currentAuthUid != null) {
             _db.collection('users').doc(currentAuthUid).set({
@@ -8352,7 +7992,6 @@ class FirebaseService {
       }
 
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
-
       String targetRole = playerData[targetPlayerId]['role'];
       String targetCamp = GameData.roleCamps[targetRole] ?? 'unknown';
 
@@ -8375,11 +8014,8 @@ class FirebaseService {
         String currentCamp =
             GameData.roleCamps[playerData[id]['role']] ?? 'unknown';
         bool isOppositeCamp =
-            (targetCamp == 'loups' &&
-                (currentCamp == 'villageois' ||
-                    currentCamp == 'special' ||
-                    currentCamp == 'solitaire')) ||
-            ((targetCamp != 'loups') && currentCamp == 'loups');
+            (targetCamp == 'loups' && currentCamp != 'loups') ||
+            (targetCamp != 'loups' && currentCamp == 'loups');
         if (isOppositeCamp) {
           otherRevealedPlayerId = id;
           otherRevealedRole = playerData[id]['role'];
@@ -8402,7 +8038,6 @@ class FirebaseService {
         'gameLog': FieldValue.arrayUnion([logMessage]),
       });
 
-      // Vérifier s'il y a d'autres effets en file d'attente
       List<Map<String, dynamic>> pendingDayEffects =
           List<Map<String, dynamic>>.from(
             (gameData['pendingDayEffects'] as List<dynamic>?)?.map(
@@ -8414,17 +8049,18 @@ class FirebaseService {
       if (pendingDayEffects.isNotEmpty) {
         var nextEffect = pendingDayEffects.removeAt(0);
         transaction.update(gameRef, {
-          'phase': 'jour_discussion',
           'subPhase': nextEffect['subPhase'],
           'activePlayerId': nextEffect['activePlayerId'],
           'pendingDayEffects': pendingDayEffects,
         });
       } else {
         transaction.update(gameRef, {
-          'phase': 'jour_discussion',
-          'subPhase': '',
+          'phase': 'nuit',
+          'subPhase': 'initial',
+          'nightNumber': FieldValue.increment(1),
           'activePlayerId': null,
           'pendingDayEffects': [],
+          'turnStartTime': FieldValue.serverTimestamp(),
         });
       }
     });
@@ -8432,9 +8068,7 @@ class FirebaseService {
     final updatedGameData =
         (await gameRef.get()).data() as Map<String, dynamic>;
     await _checkForWinCondition(gameRef, updatedGameData);
-
-    final latestPhase = updatedGameData['phase'];
-    if (latestPhase == 'nuit') {
+    if (updatedGameData['phase'] == 'nuit') {
       await startNextNightPhase(gameCode);
     }
   }
@@ -8486,9 +8120,20 @@ class FirebaseService {
       String targetCamp = GameData.roleCamps[targetRole] ?? 'villageois';
 
       playerData[dictatorId]['powerUsed'] = true;
-      bool success = (targetCamp == 'loups');
+      bool targetIsWolf =
+          (targetCamp == 'loups') ||
+          playerData[targetId]?['infectionStatus'] == 'infecte';
+      int xpDictateur = targetIsWolf ? 50 : 10;
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        dictatorId,
+        xpDictateur,
+        applySpeedBonus: false,
+      );
 
-      if (success) {
+      if (targetIsWolf) {
         playerData[targetId]['status'] = 'mort';
         playerData[targetId]['revealedRole'] = targetRole;
         transaction.update(gameRef, {
@@ -8565,6 +8210,19 @@ class FirebaseService {
                 orElse: () => MapEntry('', {}),
               )
               .key;
+
+      if (loupBavardId.isNotEmpty &&
+          (playerData[loupBavardId]['hasSaidBavardWord'] == true) &&
+          playerData[loupBavardId]['status'] == 'vivant') {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          loupBavardId,
+          25,
+          applySpeedBonus: false,
+        );
+      }
 
       if (loupBavardId.isNotEmpty &&
           !(playerData[loupBavardId]['hasSaidBavardWord'] ?? false) &&
@@ -8694,7 +8352,14 @@ class FirebaseService {
         eliminatedId = tiedCandidates.first;
         newlyDeadIds.add(eliminatedId);
 
-        if (GameData.roleCamps[playerData[eliminatedId]['role']] == 'loups') {
+        final String? targetRole = playerData[eliminatedId]['role'];
+        final bool targetIsWolf =
+            GameData.roleCamps[targetRole] == 'loups' ||
+            playerData[eliminatedId]['infectionStatus'] == 'infecte' ||
+            targetRole == 'Loup Blanc' ||
+            targetRole == 'Rat Malade';
+
+        if (targetIsWolf) {
           for (String vId in dayVotes.keys) {
             if (dayVotes[vId] == eliminatedId) {
               creditPlayerXp(
@@ -8702,7 +8367,7 @@ class FirebaseService {
                 gameRef,
                 gameData,
                 vId,
-                25,
+                30,
                 applySpeedBonus: false,
               );
             }
@@ -8742,6 +8407,15 @@ class FirebaseService {
           _db.collection('users').doc(mercAuth).set({
             'unlockedBadges.lg_mercenaire_j1': FieldValue.serverTimestamp(),
           }, SetOptions(merge: true));
+
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            mercenaireId,
+            60,
+            applySpeedBonus: false,
+          );
 
           transaction.update(gameRef, {
             'gameState': 'gameOver',
@@ -8900,10 +8574,8 @@ class FirebaseService {
       _verifyPlayerAuth(gameData, chasseurId);
 
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
-
       String? captainDiedId;
       String? fossoyeurDiedId;
-      String? heritierDiedId; // Pour gÃƒÂ©rer l'hÃƒÂ©ritage
 
       if (playerData[chasseurId]?['role'] == 'Chasseur' &&
           playerData[targetId]?['status'] == 'vivant') {
@@ -8911,7 +8583,20 @@ class FirebaseService {
         playerData[targetId]['revealedRole'] = playerData[targetId]['role'];
         String targetName = playerData[targetId]['name'];
 
-        if (GameData.roleCamps[playerData[targetId]?['role']] == 'loups') {
+        bool targetIsWolf =
+            GameData.roleCamps[playerData[targetId]?['role']] == 'loups' ||
+            playerData[targetId]?['infectionStatus'] == 'infecte';
+        int xpChasseur = targetIsWolf ? 40 : 10;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          chasseurId,
+          xpChasseur,
+          applySpeedBonus: false,
+        );
+
+        if (targetIsWolf) {
           final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
           if (currentAuthUid != null) {
             _db.collection('users').doc(currentAuthUid).set({
@@ -8929,8 +8614,11 @@ class FirebaseService {
 
         List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
         if (lovers.length == 2 && lovers.contains(targetId)) {
-          String? otherLoverId = lovers.firstWhere((lId) => lId != targetId);
-          if (otherLoverId != null &&
+          String? otherLoverId = lovers.firstWhere(
+            (lId) => lId != targetId,
+            orElse: () => '',
+          );
+          if (otherLoverId.isNotEmpty &&
               playerData[otherLoverId]?['status'] == 'vivant') {
             playerData[otherLoverId]['status'] = 'mort';
             playerData[otherLoverId]['revealedRole'] =
@@ -8941,106 +8629,49 @@ class FirebaseService {
               transaction: transaction,
             );
 
-            if (playerData[otherLoverId]['role'] == 'Chasseur') {
-              /* Do nothing, already one chasseur */
-            }
             if (otherLoverId == gameData['captainId'])
               captainDiedId = otherLoverId;
             if (playerData[otherLoverId]['role'] == 'Fossoyeur')
               fossoyeurDiedId = otherLoverId;
-            if (playerData[otherLoverId]['role'] == 'HÃƒÂ©ritier')
-              heritierDiedId = otherLoverId;
           }
         }
 
-        if (targetId == gameData['captainId']) {
-          captainDiedId = targetId;
-        }
-
-        if (playerData[targetId]['role'] == 'Fossoyeur') {
+        if (targetId == gameData['captainId']) captainDiedId = targetId;
+        if (playerData[targetId]['role'] == 'Fossoyeur')
           fossoyeurDiedId = targetId;
-        }
-
-        if (playerData[targetId]['role'] == 'HÃƒÂ©ritier') {
-          heritierDiedId = targetId;
-        }
       }
-
-      playerData.forEach((pId, data) {
-        if (!(data['privateInfo']?.contains("infectÃƒÂ©") ?? false) &&
-            !(data['privateInfo']?.contains("contaminÃƒÂ©") ?? false) &&
-            !(data['privateInfo']?.contains("hÃƒÂ©ritÃƒÂ© du Dictateur") ??
-                false)) {
-          playerData[pId]['privateInfo'] = null;
-        }
-      });
 
       String? heritierIdCheck =
           playerData.entries
               .firstWhere(
                 (e) =>
-                    e.value['role'] == 'HÃƒÂ©ritier' &&
+                    e.value['role'] == 'Héritier' &&
                     e.value['status'] == 'vivant',
-                orElse: () => MapEntry('', {}),
+                orElse: () => const MapEntry('', {}),
               )
               .key;
       if (heritierIdCheck.isNotEmpty) {
         String? testateurId = playerData[heritierIdCheck]['testateurId'];
         if (testateurId != null &&
             playerData[testateurId]?['status'] == 'mort') {
-          String oldRole = playerData[heritierIdCheck]['role'];
           String newRole = playerData[testateurId]['role'];
-
           playerData[heritierIdCheck]['role'] = newRole;
           await _addLog(
             gameRef,
-            "${playerData[heritierIdCheck]['name']} (l'HÃƒÂ©ritier) hÃƒÂ©rite du rÃƒÂ´le de ${playerData[testateurId]['name']} : $newRole !",
+            "${playerData[heritierIdCheck]['name']} (l'Héritier) hérite du rôle de ${playerData[testateurId]['name']} : $newRole !",
             transaction: transaction,
           );
-
-          switch (newRole) {
-            case 'SorciÃƒÂ¨re':
-              playerData[heritierIdCheck]['potions'] =
-                  playerData[testateurId]['potions'] ??
-                  {'guerison': true, 'poison': true};
-              break;
-            case 'Garde':
-              playerData[heritierIdCheck]['lastProtectedId'] =
-                  playerData[testateurId]['lastProtectedId'];
-              break;
-            case 'Loup Noir':
-              playerData[heritierIdCheck]['infectionUsed'] =
-                  playerData[testateurId]['infectionUsed'];
-              break;
-            case 'Dictateur':
-              playerData[heritierIdCheck]['powerUsed'] =
-                  playerData[testateurId]['powerUsed'];
-              break;
-          }
-
-          if (GameData.roleCamps[newRole] == 'loups') {
-            for (String id in playerData.keys) {
-              if (GameData.roleCamps[playerData[id]['role']] == 'loups' ||
-                  playerData[id]['infectionStatus'] == 'infecte') {
-                String currentPrivateInfo = playerData[id]['privateInfo'] ?? '';
-                playerData[id]['privateInfo'] =
-                    (currentPrivateInfo.isEmpty
-                        ? ""
-                        : currentPrivateInfo + "\n") +
-                    "${playerData[heritierIdCheck]['name']} a rejoint la meute en hÃƒÂ©ritant !";
-              }
-            }
-          }
         }
       }
 
-      List<Map<String, dynamic>> pendingEffects = [];
-      if (gameData['pendingDayEffects'] is List) {
-        pendingEffects =
-            (gameData['pendingDayEffects'] as List)
-                .map((e) => Map<String, dynamic>.from(e as Map))
-                .toList();
-      }
+      List<Map<String, dynamic>> pendingEffects =
+          List<Map<String, dynamic>>.from(
+            (gameData['pendingDayEffects'] as List<dynamic>?)?.map(
+                  (e) => Map<String, dynamic>.from(e),
+                ) ??
+                [],
+          );
+
       if (captainDiedId != null) {
         pendingEffects.add({
           'subPhase': 'captain_designate',
@@ -9056,47 +8687,23 @@ class FirebaseService {
 
       if (pendingEffects.isNotEmpty) {
         var firstEffect = pendingEffects.removeAt(0);
-        List<String> logMessages = [];
-        if (firstEffect['subPhase'] == 'captain_designate') {
-          logMessages.add(
-            "Le Capitaine est mort ! Il doit dÃƒÂ©signer son successeur !",
-          );
-        } else if (firstEffect['subPhase'] == 'fossoyeur_reveal') {
-          logMessages.add(
-            "Le Fossoyeur va rÃƒÂ©vÃƒÂ©ler des identitÃƒÂ©s en mourant !",
-          );
-        }
         transaction.update(gameRef, {
           'playerData': playerData,
           if (captainDiedId != null) 'captainId': null,
-          'phase': 'jour_discussion',
           'subPhase': firstEffect['subPhase'],
           'activePlayerId': firstEffect['activePlayerId'],
           'pendingDayEffects': pendingEffects,
-          'gameLog': FieldValue.arrayUnion(logMessages),
         });
       } else {
-        bool wasDayVote = gameData['phase'] == 'jour_vote';
-        if (wasDayVote) {
-          transaction.update(gameRef, {
-            'playerData': playerData,
-            'phase': 'nuit',
-            'subPhase': 'initial',
-            'nightNumber': FieldValue.increment(1),
-            'activePlayerId': null,
-            'pendingDayEffects': [],
-            'turnStartTime': FieldValue.serverTimestamp(),
-          });
-        } else {
-          transaction.update(gameRef, {
-            'playerData': playerData,
-            'phase': 'jour_discussion',
-            'subPhase': '',
-            'activePlayerId': null,
-            'pendingDayEffects': [],
-            'turnStartTime': FieldValue.serverTimestamp(),
-          });
-        }
+        transaction.update(gameRef, {
+          'playerData': playerData,
+          'phase': 'nuit',
+          'subPhase': 'initial',
+          'nightNumber': FieldValue.increment(1),
+          'activePlayerId': null,
+          'pendingDayEffects': [],
+          'turnStartTime': FieldValue.serverTimestamp(),
+        });
       }
     });
 
@@ -9123,7 +8730,6 @@ class FirebaseService {
       _verifyPlayerAuth(gameData, formerCaptainId);
 
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
-
       String formerCaptainName =
           playerData[formerCaptainId]?['name'] ?? 'L\'ancien Capitaine';
       String newCaptainName = playerData[newCaptainId]?['name'] ?? 'Inconnu';
@@ -9142,24 +8748,8 @@ class FirebaseService {
             "$formerCaptainName a désigné $newCaptainName comme nouveau Capitaine !",
           ]),
         });
-      } else {
-        transaction.update(gameRef, {
-          'gameLog': FieldValue.arrayUnion([
-            "$formerCaptainName a tentÃƒÂ© de dÃƒÂ©signer $newCaptainName, mais il/elle est dÃƒÂ©jÃƒÂ  mort(e) ou n'existe pas ! La dÃƒÂ©signation est ignorÃƒÂ©e.",
-          ]),
-        });
       }
 
-      playerData.forEach((pId, data) {
-        if (!(data['privateInfo']?.contains("infectÃƒÂ©") ?? false) &&
-            !(data['privateInfo']?.contains("contaminÃƒÂ©") ?? false) &&
-            !(data['privateInfo']?.contains("hÃƒÂ©ritÃƒÂ© du Dictateur") ??
-                false)) {
-          playerData[pId]['privateInfo'] = null;
-        }
-      });
-
-      // VÃƒÂ©rifier s'il y a d'autres effets en file d'attente
       List<Map<String, dynamic>> pendingDayEffects =
           List<Map<String, dynamic>>.from(
             (gameData['pendingDayEffects'] as List<dynamic>?)?.map(
@@ -9172,33 +8762,20 @@ class FirebaseService {
         var nextEffect = pendingDayEffects.removeAt(0);
         transaction.update(gameRef, {
           'playerData': playerData,
-          'phase': 'jour_discussion',
           'subPhase': nextEffect['subPhase'],
           'activePlayerId': nextEffect['activePlayerId'],
           'pendingDayEffects': pendingDayEffects,
         });
       } else {
-        bool wasDayVote = gameData['phase'] == 'jour_vote';
-        if (wasDayVote) {
-          transaction.update(gameRef, {
-            'playerData': playerData,
-            'phase': 'nuit',
-            'subPhase': 'initial',
-            'nightNumber': FieldValue.increment(1),
-            'activePlayerId': null,
-            'pendingDayEffects': [],
-            'turnStartTime': FieldValue.serverTimestamp(),
-          });
-        } else {
-          transaction.update(gameRef, {
-            'playerData': playerData,
-            'phase': 'jour_discussion',
-            'subPhase': '',
-            'activePlayerId': null,
-            'pendingDayEffects': [],
-            'turnStartTime': FieldValue.serverTimestamp(),
-          });
-        }
+        transaction.update(gameRef, {
+          'playerData': playerData,
+          'phase': 'nuit',
+          'subPhase': 'initial',
+          'nightNumber': FieldValue.increment(1),
+          'activePlayerId': null,
+          'pendingDayEffects': [],
+          'turnStartTime': FieldValue.serverTimestamp(),
+        });
       }
     });
 
@@ -10077,14 +9654,26 @@ class FirebaseService {
       wordPairs = List<String>.from(gameData['aiWords']);
     } else {
       wordPairs =
-          GameData.multiplayerGameData['Infiltré & Mr. White']?[difficulty] ??
-          GameData.multiplayerGameData['Infiltré & Mr. White']!['soft']!;
+          GameWords.undercoverData[difficulty]?['wordPairs'] ??
+          GameWords.undercoverData['soft']!['wordPairs']!;
     }
     final rawPair = wordPairs[Random().nextInt(wordPairs.length)];
-    final pair =
-        rawPair.contains(':') ? rawPair.split(':') : [rawPair, rawPair];
-    final wordCivil = pair[0].trim();
-    final wordUndercover = (pair.length > 1 ? pair[1] : pair[0]).trim();
+    String wordCivil;
+    String wordUndercover;
+
+    if (rawPair.contains(':')) {
+      final parts = rawPair.split(':');
+      wordCivil = parts[0].trim();
+      wordUndercover = parts[1].trim();
+    } else {
+      // Sécurité anti-doublon : si l'IA renvoie des mots simples séparés
+      int idx = wordPairs.indexOf(rawPair);
+      wordCivil = rawPair.trim();
+      wordUndercover =
+          (idx + 1 < wordPairs.length)
+              ? wordPairs[idx + 1].trim()
+              : "${rawPair.trim()} (Variante)";
+    }
 
     final roleCounts = Map<String, int>.from(
       gameData['undercoverRoleCounts'] ?? {},
@@ -10296,7 +9885,7 @@ class FirebaseService {
         gameRef,
         gameData,
         playerId,
-        5,
+        8,
         applySpeedBonus: true,
       );
 
@@ -10364,7 +9953,6 @@ class FirebaseService {
     if (pData['role'] != 'Mr. White') {
       throw Exception("Seul Mr. White peut deviner.");
     }
-
     // Récupérer le mot civil depuis un joueur civil
     final allPrivate = await gameRef.collection('private_data').get();
     String civilWord = "";
@@ -10380,6 +9968,12 @@ class FirebaseService {
         guessedWord.trim().toLowerCase() == civilWord.trim().toLowerCase();
 
     if (mrWhiteWins) {
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final pAuth = players[playerId]?['authUid'] ?? playerId;
+      _db.collection('users').doc(pAuth).set({
+        'xp': FieldValue.increment(65),
+      }, SetOptions(merge: true));
+      await gameRef.update({'players.$playerId.xp': FieldValue.increment(65)});
       await _endUndercoverGameAndAssignScores(gameRef, 'Mr. White');
     } else {
       await gameRef.update({
@@ -10445,6 +10039,26 @@ class FirebaseService {
           playerData[pId]['status'] = 'eliminated';
           processedEliminations.add(pId);
 
+          // --- NOUVEAU : Récompense XP pour avoir démasqué un imposteur ---
+          String role = playerData[pId]['role'] ?? 'Civil';
+          if (role == 'Infiltré' || role == 'Mr. White') {
+            final votes = Map<String, dynamic>.from(gameData['votes'] ?? {});
+            votes.forEach((voterId, votedForId) {
+              if (votedForId == pId) {
+                // +20 XP pour les civils perspicaces !
+                creditPlayerXp(
+                  transaction,
+                  gameRef,
+                  gameData,
+                  voterId,
+                  20,
+                  applySpeedBonus: false,
+                );
+              }
+            });
+          }
+          // ----------------------------------------------------------------
+
           bool isGhost =
               (playerData[pId]['specialAbilities'] as List<dynamic>?)?.contains(
                 'Fantôme',
@@ -10469,6 +10083,15 @@ class FirebaseService {
               ) ??
               false;
           if (isBoomerang) {
+            // AJOUT DE L'XP BOOMERANG
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+              40,
+              applySpeedBonus: false,
+            );
             final players = Map<String, dynamic>.from(
               gameData['players'] ?? {},
             );
@@ -10568,7 +10191,14 @@ class FirebaseService {
     );
     eliminatedThisTurn.add(targetId);
 
+    final avengerAuth =
+        gameData['players']?[avengerId]?['authUid'] ?? avengerId;
+    _db.collection('users').doc(avengerAuth).set({
+      'xp': FieldValue.increment(35),
+    }, SetOptions(merge: true));
+
     await gameRef.update({
+      'players.$avengerId.xp': FieldValue.increment(35),
       'eliminatedThisTurn': eliminatedThisTurn,
       'turnLog': FieldValue.arrayUnion([
         "La Vengeuse emporte quelqu'un avec elle !",
@@ -10660,6 +10290,53 @@ class FirebaseService {
       }
     });
 
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+    if (winnerFaction == 'Mr. White') {
+      final mwEntry =
+          playerData.entries
+              .where(
+                (e) =>
+                    (privateMap[e.key]?['role'] ?? e.value['role']) ==
+                    'Mr. White',
+              )
+              .firstOrNull;
+      if (mwEntry != null) {
+        final mw = mwEntry.key;
+        _db.collection('users').doc(players[mw]?['authUid'] ?? mw).set({
+          'unlockedBadges.underc_mrwhite_guess': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
+    } else if (winnerFaction == 'Imposteurs') {
+      playerData.forEach((pId, p) {
+        final pPrivate = privateMap[pId] ?? {};
+        final role = pPrivate['role'] ?? p['role'] ?? 'Civil';
+        final abilities =
+            (pPrivate['specialAbilities'] as List?) ??
+            (p['specialAbilities'] as List?);
+        if (role == 'Infiltré') {
+          _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+            'unlockedBadges.underc_infiltre_win': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        }
+        if (abilities?.contains('Vendeur de Falafels') == true) {
+          _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+            'unlockedBadges.underc_falafel_bluff': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        }
+      });
+    } else if (winnerFaction == 'Civils') {
+      playerData.forEach((pId, p) {
+        final pPrivate = privateMap[pId] ?? {};
+        final role = pPrivate['role'] ?? p['role'] ?? 'Civil';
+        if (role == 'Civil') {
+          _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+            'badgeProgress.underc_civil_win_streak': FieldValue.increment(1),
+          }, SetOptions(merge: true));
+        }
+      });
+    }
+
     List<String> eliminatedOrder = List<String>.from(
       gameData['eliminatedOrder'] ?? [],
     );
@@ -10674,23 +10351,68 @@ class FirebaseService {
       if (isFouDeJoie) {
         pointsGained[firstEliminatedId] =
             (pointsGained[firstEliminatedId] ?? 0) + 4;
-        final players = Map<String, dynamic>.from(gameData['players'] ?? {});
         final fAuth =
             players[firstEliminatedId]?['authUid'] ?? firstEliminatedId;
         _db.collection('users').doc(fAuth).set({
           'unlockedBadges.underc_fou_de_joie': FieldValue.serverTimestamp(),
+          'xp': FieldValue.increment(35),
         }, SetOptions(merge: true));
       }
     }
 
+    final duellists = List<String>.from(
+      gameData['specialRoles']?['duellists'] ?? [],
+    );
+    if (duellists.length == 2) {
+      final d1Alive = playerData[duellists[0]]?['status'] == 'active';
+      final d2Alive = playerData[duellists[1]]?['status'] == 'active';
+      if (d1Alive && !d2Alive) {
+        _db
+            .collection('users')
+            .doc(players[duellists[0]]?['authUid'] ?? duellists[0])
+            .set({
+              'unlockedBadges.underc_duelliste_win':
+                  FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+      } else if (d2Alive && !d1Alive) {
+        _db
+            .collection('users')
+            .doc(players[duellists[1]]?['authUid'] ?? duellists[1])
+            .set({
+              'unlockedBadges.underc_duelliste_win':
+                  FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+      }
+    }
+
+    Map<String, dynamic> votes = Map<String, dynamic>.from(
+      gameData['votes'] ?? {},
+    );
     Map<String, dynamic> scoreUpdates = {};
     pointsGained.forEach((pId, points) {
       if (points != 0) {
         scoreUpdates['players.$pId.score'] = FieldValue.increment(points);
       }
-      int winXp = (winnerFaction == 'Civils') ? 20 : 35;
+      final pPrivate = privateMap[pId] ?? {};
+      String role = pPrivate['role'] ?? playerData[pId]?['role'] ?? 'Civil';
+
+      int winXp = (winnerFaction == 'Civils') ? 25 : 35;
+
+      // Si un infiltré gagne sans avoir reçu aucun vote contre lui
+      int votesReceived = 0;
+      votes.forEach((_, votedFor) {
+        if (votedFor == pId) votesReceived++;
+      });
+      if (role == 'Infiltré' &&
+          winnerFaction == 'Imposteurs' &&
+          votesReceived == 0) {
+        winXp = 50; // Bonus Taupe Parfaite
+      } else if (role == 'Mr. White' && winnerFaction == 'Mr. White') {
+        winXp = 45;
+      }
+
       scoreUpdates['players.$pId.xp'] = FieldValue.increment(winXp);
-      final pAuth = (gameData['players']?[pId]?['authUid']) ?? pId;
+      final pAuth = (players[pId]?['authUid']) ?? pId;
       _db.collection('users').doc(pAuth).set({
         'xp': FieldValue.increment(winXp),
       }, SetOptions(merge: true));
@@ -10722,13 +10444,36 @@ class FirebaseService {
         currentTeamPlayers[Random().nextInt(currentTeamPlayers.length)];
 
     // Choisir un mot et ses interdits
-    final String difficulty = gameData['difficulty'] ?? 'soft';
-    final tabooWords =
-        GameWords.tabooWordsData[difficulty] ??
-        GameWords.tabooWordsData['soft']!;
-    final allWords = tabooWords.keys.toList();
-    final String word = allWords[Random().nextInt(allWords.length)];
-    final List<String> forbidden = tabooWords[word] ?? [];
+    String word = "Paris";
+    List<String> forbidden = [
+      "France",
+      "Capitale",
+      "Tour Eiffel",
+      "Seine",
+      "Ville",
+    ];
+
+    if (gameData['aiWords'] != null &&
+        (gameData['aiWords'] as List).isNotEmpty) {
+      final List<String> aiDeck = List<String>.from(gameData['aiWords']);
+      final rawCard = aiDeck[Random().nextInt(aiDeck.length)];
+      if (rawCard.contains(':')) {
+        final parts = rawCard.split(':');
+        word = parts[0].trim();
+        forbidden = parts[1].split(',').map((e) => e.trim()).toList();
+      } else {
+        word = rawCard.trim();
+        forbidden = [];
+      }
+    } else {
+      final String difficulty = gameData['difficulty'] ?? 'soft';
+      final tabooWords =
+          GameWords.tabooWordsData[difficulty] ??
+          GameWords.tabooWordsData['soft']!;
+      final allWords = tabooWords.keys.toList();
+      word = allWords[Random().nextInt(allWords.length)];
+      forbidden = tabooWords[word] ?? [];
+    }
 
     await gameRef.update({
       'tabooCurrentTeamId': currentTeamId,
@@ -10739,7 +10484,7 @@ class FirebaseService {
       'turnTimerSeconds': 60, // 60 secondes par tour
       'tabooTurnActive': true,
       'gameLog': FieldValue.arrayUnion([
-        "C'est au tour de l'ÃƒÂ©quipe ${currentTeamIndex + 1} !",
+        "C'est au tour de l'équipe ${currentTeamIndex + 1} !",
       ]),
     });
   }
@@ -10776,13 +10521,36 @@ class FirebaseService {
 
       final scores = Map<String, int>.from(gameData['tabooScores'] ?? {});
       final updates = <String, dynamic>{};
-      final String difficulty = gameData['difficulty'] ?? 'soft';
-      final dict =
-          GameWords.tabooWordsData[difficulty] ??
-          GameWords.tabooWordsData['soft']!;
-      final words = dict.keys.toList();
-      final nextWord = words[Random().nextInt(words.length)];
-      final nextForbidden = dict[nextWord] ?? [];
+      String nextWord = "Paris";
+      List<String> nextForbidden = [
+        "France",
+        "Capitale",
+        "Tour Eiffel",
+        "Seine",
+        "Ville",
+      ];
+
+      if (gameData['aiWords'] != null &&
+          (gameData['aiWords'] as List).isNotEmpty) {
+        final List<String> aiDeck = List<String>.from(gameData['aiWords']);
+        final rawCard = aiDeck[Random().nextInt(aiDeck.length)];
+        if (rawCard.contains(':')) {
+          final parts = rawCard.split(':');
+          nextWord = parts[0].trim();
+          nextForbidden = parts[1].split(',').map((e) => e.trim()).toList();
+        } else {
+          nextWord = rawCard.trim();
+          nextForbidden = [];
+        }
+      } else {
+        final String difficulty = gameData['difficulty'] ?? 'soft';
+        final dict =
+            GameWords.tabooWordsData[difficulty] ??
+            GameWords.tabooWordsData['soft']!;
+        final words = dict.keys.toList();
+        nextWord = words[Random().nextInt(words.length)];
+        nextForbidden = dict[nextWord] ?? [];
+      }
 
       if (action == 'buzz') {
         // Sécurité : Seule l'équipe adverse peut buzzer
@@ -10796,7 +10564,7 @@ class FirebaseService {
             gameRef,
             gameData,
             playerId,
-            15,
+            12,
             applySpeedBonus: true,
           );
         }
@@ -10821,7 +10589,7 @@ class FirebaseService {
             gameRef,
             gameData,
             playerId,
-            10,
+            15,
             applySpeedBonus: true,
           );
         }
@@ -10833,6 +10601,13 @@ class FirebaseService {
           _db.collection('users').doc(currentAuthUid).set({
             'badgeProgress.taboo_no_buzz': FieldValue.increment(1),
           }, SetOptions(merge: true));
+
+          final teamScore = scores[currentTeamId] ?? 0;
+          if (teamScore >= 10) {
+            _db.collection('users').doc(currentAuthUid).set({
+              'unlockedBadges.taboo_speed_10': FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+          }
         }
       } else if (action == 'skip') {
         if (actorTeamId != currentTeamId) {
@@ -10864,6 +10639,17 @@ class FirebaseService {
         gameData['tabooTeams'] ?? {},
       );
       final List<String> teamIds = tabooTeams.keys.toList();
+      final scores = Map<String, int>.from(gameData['tabooScores'] ?? {});
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final clueGiverId =
+          gameData['tabooClueGiverId'] ?? gameData['currentPlayerId'];
+
+      if ((scores[currentTeamId] ?? 0) >= 4 && clueGiverId != null) {
+        final giverAuth = players[clueGiverId]?['authUid'] ?? clueGiverId;
+        _db.collection('users').doc(giverAuth).set({
+          'unlockedBadges.taboo_flawless': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
 
       int nextTeamIndex = (teamIds.indexOf(currentTeamId) + 1) % teamIds.length;
 
@@ -11296,7 +11082,7 @@ class FirebaseService {
       }
 
       enemyGrid[targetIndex] = result;
-      int xpBase = 0;
+      int xpBase = 2; // Tir à l'eau
       if (enemyGrid.where((cell) => cell != 'unknown').length == 1 &&
           (result == 'hit' || result == 'sunk')) {
         xpBase = 50; // Sniper 1er coup
@@ -11306,20 +11092,18 @@ class FirebaseService {
           }, SetOptions(merge: true));
         }
       } else if (result == 'sunk') {
-        xpBase = 25;
+        xpBase = 25; // Coulé
       } else if (result == 'hit') {
-        xpBase = 10;
+        xpBase = 10; // Touché
       }
-      if (xpBase > 0) {
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          playerId,
-          xpBase,
-          applySpeedBonus: true,
-        );
-      }
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
       shooterData['enemyGrid'] = enemyGrid;
       opponentData['shipsPlaced'] = opponentShips;
       playerData[playerId] = shooterData;
@@ -11329,10 +11113,39 @@ class FirebaseService {
 
       if ((opponentData['shipsSunk'] ?? 0) >=
           GameData.batailleNavaleShips.length) {
+        if ((shooterData['shipsSunk'] as int? ?? 0) == 0) {
+          if (currentAuthUid != null) {
+            _db.collection('users').doc(currentAuthUid).set({
+              'unlockedBadges.naval_clean_sheet': FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+          } else {
+            _db
+                .collection('users')
+                .doc(players[playerId]?['authUid'] ?? playerId)
+                .set({
+                  'unlockedBadges.naval_clean_sheet':
+                      FieldValue.serverTimestamp(),
+                }, SetOptions(merge: true));
+          }
+        }
+        int winXp = 40;
+        int myLostShips = (shooterData['shipsSunk'] as int? ?? 0);
+        if (myLostShips <= 1) {
+          winXp += 50; // Victoire Parfaite (perdu 1 navire ou moins)
+        }
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          winXp,
+          applySpeedBonus: false,
+        );
         updates.addAll({
           'gameState': 'gameOver',
           'roundState': 'gameOver',
           'gameWinner': playerId,
+          'players.$playerId.score': FieldValue.increment(1),
           'gameEndReason':
               '${shooterData['name']} a coulé toute la flotte adverse !',
         });
@@ -11528,7 +11341,7 @@ class FirebaseService {
             gameRef,
             gameData,
             playerId,
-            30,
+            35,
             applySpeedBonus: true,
           );
           _db.collection('users').doc(currentAuthUid).set({
@@ -11906,7 +11719,7 @@ class FirebaseService {
         }, SetOptions(merge: true));
       }
 
-      int xpBase = (newPos == 56) ? 25 : (captured ? 15 : 5);
+      int xpBase = (newPos == 56) ? 25 : (captured ? 20 : 5);
       creditPlayerXp(
         transaction,
         gameRef,
@@ -11938,6 +11751,27 @@ class FirebaseService {
       }
 
       if (won) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          40,
+          applySpeedBonus: false,
+        );
+        updates['players.$playerId.score'] = FieldValue.increment(1);
+        if (isTeamMode) {
+          String allyId = playerOrder[(myPlayerIdx + 2) % 4];
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            allyId,
+            40,
+            applySpeedBonus: false,
+          );
+          updates['players.$allyId.score'] = FieldValue.increment(1);
+        }
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = playerId;
         updates['gameEndReason'] = "${players[playerId]['name']} a gagné !";
@@ -12205,7 +12039,7 @@ class FirebaseService {
         }
       }
 
-      int xpBase = myHand.isEmpty ? 25 : (mode == 'all_fives' ? 10 : 5);
+      int xpBase = myHand.isEmpty ? 30 : (mode == 'all_fives' ? 10 : 5);
       creditPlayerXp(
         transaction,
         gameRef,
@@ -12240,6 +12074,14 @@ class FirebaseService {
         updates['dominoesRoundOver'] = true;
 
         if ((scores[playerId] ?? 0) >= targetScore) {
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            40,
+            applySpeedBonus: false,
+          );
           updates['gameState'] = 'gameOver';
           updates['dominoesGameWinner'] = playerId;
           updates['gameEndReason'] =
@@ -12247,6 +12089,14 @@ class FirebaseService {
         }
       } else {
         if ((scores[playerId] ?? 0) >= targetScore) {
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            playerId,
+            40,
+            applySpeedBonus: false,
+          );
           updates['gameState'] = 'gameOver';
           updates['dominoesGameWinner'] = playerId;
           updates['gameEndReason'] =
@@ -12384,6 +12234,12 @@ class FirebaseService {
         }
 
         if (winnerId != null) {
+          _db
+              .collection('users')
+              .doc(players[winnerId]?['authUid'] ?? winnerId)
+              .set({
+                'unlockedBadges.domino_block_win': FieldValue.serverTimestamp(),
+              }, SetOptions(merge: true));
           int bonus = 0;
           for (final pId in playerOrder) {
             if (pId != winnerId) bonus += playerPips[pId]!;
@@ -12606,7 +12462,7 @@ class FirebaseService {
       int activePlayersCount = playerOrder.length - eliminated.length;
 
       if (!isAuto) {
-        int xpBase = myHand.isEmpty ? 25 : (drawnCard != 'Zombie' ? 10 : 3);
+        int xpBase = myHand.isEmpty ? 30 : (drawnCard != 'Zombie' ? 12 : 4);
         creditPlayerXp(
           transaction,
           gameRef,
@@ -12628,11 +12484,26 @@ class FirebaseService {
           (p) => !eliminated.contains(p),
           orElse: () => playerId,
         );
+        Map<String, dynamic> scoreUpdates = {};
+        for (String pId in playerOrder) {
+          if (pId != loserId) {
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+              30,
+              applySpeedBonus: false,
+            );
+            scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
+          }
+        }
         updates.addAll({
           'gameState': 'gameOver',
           'zombieLoserId': loserId,
           'gameEndReason':
               "${players[loserId]?['name'] ?? 'Un joueur'} a gardé le Zombie !",
+          ...scoreUpdates,
         });
       } else {
         int nextIndex = currentIndex;
@@ -12695,7 +12566,7 @@ class FirebaseService {
     }
   }
 
-  // --- LOGIQUE DEVINE TÃŠTE MULTIJOUEUR ---
+  // --- LOGIQUE DEVINE TÊTE MULTIJOUEUR ---
   Future<void> _startDevineTeteRound(
     DocumentReference gameRef,
     Map<String, dynamic> gameData,
@@ -12757,6 +12628,7 @@ class FirebaseService {
     await gameRef.update(updates);
   }
 
+  // --- ACTION DEVINE TÊTE (MULTIJOUEUR) ---
   Future<void> actionDevineTete(
     String gameCode,
     String playerId,
@@ -12769,11 +12641,21 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
       if (gameData['currentGuesserId'] != playerId ||
-          gameData['roundState'] != 'playing_turn')
+          gameData['roundState'] != 'playing_turn') {
         return;
+      }
 
       List<String> words = List<String>.from(gameData['devineTeteWords'] ?? []);
       int guessedCount = gameData['guessedCount'] ?? 0;
+      final String difficulty = gameData['difficulty'] ?? 'soft';
+
+      // Si le paquet est presque vide, on réinjecte immédiatement des mots pour ne jamais bloquer le chrono
+      if (words.isEmpty) {
+        words = List<String>.from(
+          GameWords.devineTeteByDifficulty[difficulty] ??
+              GameWords.devineTeteByDifficulty['soft']!,
+        )..shuffle();
+      }
 
       Map<String, dynamic> updates = {};
 
@@ -12784,7 +12666,7 @@ class FirebaseService {
           gameData,
           playerId,
           15,
-          applySpeedBonus: true,
+          applySpeedBonus: false,
         );
         updates['players.$playerId.score'] = FieldValue.increment(1);
         updates['guessedCount'] = guessedCount + 1;
@@ -12794,13 +12676,10 @@ class FirebaseService {
         }
       }
 
-      if (words.isNotEmpty) {
-        updates['currentWord'] = words.removeAt(0);
-        updates['devineTeteWords'] = words;
-      } else {
-        updates['roundState'] = 'turn_result';
-        updates['turnStartTime'] = FieldValue.serverTimestamp();
-      }
+      // Mot suivant instantané
+      final nextWord = words.removeAt(0);
+      updates['currentWord'] = nextWord;
+      updates['devineTeteWords'] = words;
 
       transaction.update(gameRef, updates);
     });
@@ -12869,6 +12748,17 @@ class FirebaseService {
           final aScore = (tScores['teamA'] as num?)?.toInt() ?? 0;
           final bScore = (tScores['teamB'] as num?)?.toInt() ?? 0;
           String winnerTeam = aScore >= bScore ? 'teamA' : 'teamB';
+          List<String> winningPlayers = (winnerTeam == 'teamA') ? teamA : teamB;
+          for (String wId in winningPlayers) {
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              wId,
+              35,
+              applySpeedBonus: false,
+            );
+          }
           transaction.update(gameRef, {
             'gameState': 'gameOver',
             'gameWinner': winnerTeam,
@@ -12908,6 +12798,16 @@ class FirebaseService {
               bestPlayer = k;
             }
           });
+          if (bestPlayer.isNotEmpty) {
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              bestPlayer,
+              35,
+              applySpeedBonus: false,
+            );
+          }
           transaction.update(gameRef, {
             'gameState': 'gameOver',
             'gameWinner': bestPlayer,
@@ -12981,6 +12881,18 @@ class FirebaseService {
     final String firstJudgeId = playerIds.first;
     final int targetScore = gameData['bmcTargetScore'] ?? 10;
 
+    // Conserver les scores existants si on rejoue
+    final Map<String, dynamic> existingScores = Map<String, dynamic>.from(
+      gameData['bmcScores'] ?? {},
+    );
+    final Map<String, int> bmcScores = {
+      for (var p in playerIds)
+        p:
+            (existingScores[p] as num?)?.toInt() ??
+            (players[p]?['score'] as num?)?.toInt() ??
+            0,
+    };
+
     await gameRef.update({
       'gameState': 'playing',
       'roundState': 'judging_selection',
@@ -12989,7 +12901,7 @@ class FirebaseService {
       'bmcQuestion': currentQuestion,
       'bmcJudgeId': firstJudgeId,
       'bmcPlayedCards': {},
-      'bmcScores': {for (var p in playerIds) p: 0},
+      'bmcScores': bmcScores,
       'bmcPlayerOrder': playerIds,
       'bmcTargetScore': targetScore,
       'turnStartTime': FieldValue.serverTimestamp(),
@@ -13050,6 +12962,15 @@ class FirebaseService {
       hands[playerId] = myHand;
       playedCards[playerId] = cardText;
 
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        6,
+        applySpeedBonus: true,
+      );
+
       final int requiredPlays =
           players.length - 1; // Tous les joueurs sauf le juge
       Map<String, dynamic> updates = {
@@ -13099,6 +13020,15 @@ class FirebaseService {
         throw Exception("Ce joueur n'a pas soumis de carte.");
       }
 
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        winnerPlayerId,
+        20,
+        applySpeedBonus: false,
+      );
+
       Map<String, dynamic> bmcScores = Map<String, dynamic>.from(
         gameData['bmcScores'] ?? {},
       );
@@ -13111,6 +13041,14 @@ class FirebaseService {
       );
 
       if (newScore >= targetScore) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          winnerPlayerId,
+          40,
+          applySpeedBonus: false,
+        );
         final winnerName = players[winnerPlayerId]?['name'] ?? 'Inconnu';
         transaction.update(gameRef, {
           'bmcScores': bmcScores,
@@ -13223,20 +13161,23 @@ class FirebaseService {
     }
   }
 
-  /// Relance une partie en conservant les scores et les joueurs actuels
+  /// Relance une partie en conservant les scores et remettant l'XP de session à 0
   Future<void> restartGameKeepScores(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final snap = await gameRef.get();
     if (!snap.exists) return;
     final gameData = snap.data() as Map<String, dynamic>;
 
-    final String gameType = gameData['gameType'] ?? '';
-    final String difficulty = gameData['difficulty'] ?? 'soft';
     final Map<String, dynamic> players = Map<String, dynamic>.from(
       gameData['players'] ?? {},
     );
 
-    // Réinitialisation des états de manche tout en gardant les points
+    // Remise à zéro de l'XP de session pour chaque joueur tout en GARDANT leurs points de partie
+    final Map<String, dynamic> playerXpResets = {};
+    players.forEach((pId, _) {
+      playerXpResets['players.$pId.xp'] = 0;
+    });
+
     Map<String, dynamic> cleanUpdates = {
       'gameState': 'playing',
       'roundState': 'waitingForStart',
@@ -13247,6 +13188,7 @@ class FirebaseService {
       'roundLoserId': null,
       'turnStartTime': FieldValue.serverTimestamp(),
       'restartVotes': {},
+      ...playerXpResets, // Remet l'XP de session à 0
     };
 
     await gameRef.update(cleanUpdates);
@@ -13449,19 +13391,26 @@ class FirebaseService {
     }
 
     if (gameType == 'Le Jeu des Catégories' || gameType == 'La Patate Chaude') {
-      List<String> availableCategories = List<String>.from(
-        gameData['selectedCategories'] ?? GameData.categoriesGameList,
-      );
+      List<String> availableCategories;
+
+      // Utilisation prioritaire des catégories IA si disponibles
+      if (gameData['aiWords'] != null &&
+          (gameData['aiWords'] as List).isNotEmpty) {
+        availableCategories = List<String>.from(gameData['aiWords']);
+      } else {
+        availableCategories = List<String>.from(
+          gameData['selectedCategories'] ?? GameData.categoriesGameList,
+        );
+      }
+
       final String category =
           availableCategories[Random().nextInt(availableCategories.length)];
-
       int turnDuration = gameData['turnTimerSeconds'] ?? 30;
       if (gameType == 'La Patate Chaude' &&
           gameData['hotPotatoUseGlobalTimer'] == true) {
         turnDuration = gameData['hotPotatoGlobalDuration'] ?? 60;
       }
 
-      // Initialisation du premier tour
       await gameRef.update({
         'hotPotatoCategory': category,
         'hotPotatoCurrentPlayerId':
@@ -13522,9 +13471,9 @@ class FirebaseService {
     if (gameType == 'Codenames') {
       final List<dynamic>? preAiWordsCodenames =
           gameData['aiWords'] as List<dynamic>?;
+      final difficulty = gameData['difficulty'] ?? 'soft';
       final codenamesPool =
-          GameData.multiplayerGameData['Codenames']?[difficulty] ??
-          GameData.multiplayerGameData['Codenames']?['soft'] ??
+          GameWords.codenamesByDifficulty[difficulty] ??
           GameWords.codenamesWords;
       List<String> allWords =
           (preAiWordsCodenames != null && preAiWordsCodenames.isNotEmpty)
@@ -13618,23 +13567,62 @@ class FirebaseService {
         };
       }
 
+      // --- NOUVEAU : Si des mots IA existent, on lance directement le jeu ---
+      final List<dynamic>? aiWordsList = gameData['aiWords'] as List<dynamic>?;
+      if (aiWordsList != null && aiWordsList.isNotEmpty) {
+        final List<String> deck = List<String>.from(aiWordsList)..shuffle();
+        final firstGuesser =
+            (teams['teamA'] as List).isNotEmpty
+                ? teams['teamA'][0]
+                : playerIds[0];
+
+        await gameRef.update({
+          'teams': teams,
+          'timesUpWords': deck,
+          'timesUpCurrentDeck': deck,
+          'timesUpDiscarded': [],
+          'currentRoundNumber': 1,
+          'currentGuesserId': firstGuesser,
+          'currentRoundTime': 30,
+          'teamScores': {'teamA': 0, 'teamB': 0},
+          'gameState': 'playing',
+          'roundState': 'playing_round_1',
+          'timesUpTeamATurnIndex': 1,
+          'timesUpTeamBTurnIndex': 0,
+          ...initialTurnUpdates,
+        });
+        return;
+      }
+
+      // Sinon, saisie manuelle standard par les joueurs
       await gameRef.update({
         'teams': teams,
         'currentRoundNumber': 1,
         'teamScores': {'teamA': 0, 'teamB': 0},
         'gameState': 'playing',
         'roundState': 'collecting_words',
-        ...initialTurnUpdates, // AJOUTÃƒâ€°
+        ...initialTurnUpdates,
       });
       return;
     } else if (gameType == 'Petit Bac') {
       final random = Random();
       String randomLetter =
           GameData.alphabet[random.nextInt(GameData.alphabet.length)];
-      // Les catÃƒÂ©gories sont dÃƒÂ©jÃƒÂ  choisies depuis le lobby, on dÃƒÂ©marre directement en 'answering'
+
+      // Utilise les catégories IA si fournies, sinon les catégories par défaut
+      List<String> categories =
+          gameData['petitBacCategories'] != null &&
+                  (gameData['petitBacCategories'] as List).isNotEmpty
+              ? List<String>.from(gameData['petitBacCategories'])
+              : (gameData['aiWords'] != null &&
+                      (gameData['aiWords'] as List).isNotEmpty
+                  ? List<String>.from(gameData['aiWords']).take(6).toList()
+                  : GameData.petitBacDefaultCategories);
+
       await gameRef.update({
         'gameState': 'playing',
         'roundState': 'answering',
+        'petitBacCategories': categories,
         'petitBacCurrentLetter': randomLetter,
         'petitBacRoundStartTime': FieldValue.serverTimestamp(),
         'petitBacAnswers': {for (var pId in playerIds) pId: {}},
@@ -13643,7 +13631,7 @@ class FirebaseService {
         'petitBacSubmittedPlayers': {},
         'petitBacRoundEnded': false,
         'currentRound': 1,
-        ...initialTurnUpdates, // AJOUTÃƒâ€°
+        ...initialTurnUpdates,
       });
       return;
     } else if (gameType == 'Président') {
@@ -13724,9 +13712,15 @@ class FirebaseService {
         words =
             aiWords.isNotEmpty
                 ? (aiWords..shuffle())
-                : (List.from(GameData.pictionaryWords[difficulty]!)..shuffle());
+                : (List.from(
+                  GameWords.pictionaryWords[difficulty] ??
+                      GameWords.pictionaryWords['soft']!,
+                )..shuffle());
       } else {
-        words = List.from(GameData.pictionaryWords[difficulty]!)..shuffle();
+        words = List.from(
+          GameWords.pictionaryWords[difficulty] ??
+              GameWords.pictionaryWords['soft']!,
+        )..shuffle();
       }
       String firstDrawingPlayerId = playerIds[0];
       final bool isCollective = gameData['pictionaryTeams'] == true;
@@ -13769,9 +13763,14 @@ class FirebaseService {
         words =
             aiWords.isNotEmpty
                 ? (aiWords..shuffle())
-                : (List.from(GameData.justOneWords[difficulty]!)..shuffle());
+                : (List.from(
+                  GameWords.justOneWords[difficulty] ??
+                      GameWords.justOneWords['soft']!,
+                )..shuffle());
       } else {
-        words = List.from(GameData.justOneWords[difficulty]!)..shuffle();
+        words = List.from(
+          GameWords.justOneWords[difficulty] ?? GameWords.justOneWords['soft']!,
+        )..shuffle();
       }
       List<String> justOneDeck = words.take(13).toList();
       String firstGuesserId = playerIds[0];
@@ -14026,7 +14025,24 @@ class FirebaseService {
       myHand.remove(card);
       discardPile.add(card);
 
-      int xpBase = myHand.isEmpty ? 30 : 3;
+      String cardValue = GameData.getUnoCardValue(card);
+      int xpBase = 3;
+
+      if (cardValue == 'draw2' || cardValue == 'wild_draw4') {
+        xpBase = pendingDraw > 0 ? 15 : 10; // Bonus pour empilement
+      } else if (cardValue == 'skip' ||
+          cardValue == 'reverse' ||
+          cardValue == 'wild') {
+        xpBase = 8;
+      }
+
+      if (myHand.isEmpty) {
+        xpBase += 40; // Bonus victoire
+        if (cardValue == 'wild' || cardValue == 'wild_draw4') {
+          xpBase += 35; // Coup d'éclat : Finir sur un Joker / +4
+        }
+      }
+
       creditPlayerXp(
         transaction,
         gameRef,
@@ -14046,7 +14062,6 @@ class FirebaseService {
         'unoLastDrawnCard': null,
       };
 
-      String cardValue = GameData.getUnoCardValue(card);
       int nextPlayerIdx =
           (currentPlayerIndex + unoDirection + playerOrder.length) %
           playerOrder.length;
@@ -14371,6 +14386,14 @@ class FirebaseService {
           }
         });
 
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          highestScorer,
+          35,
+          applySpeedBonus: false,
+        );
         updates['dobbleDeck'] = [];
         updates['gameState'] = 'gameOver';
         updates['roundState'] = 'gameOver';
@@ -14599,6 +14622,7 @@ class FirebaseService {
         if (!opponentHasMoves) {
           updates['gameState'] = 'gameOver';
           updates['gameWinner'] = playerId;
+          updates['players.$playerId.score'] = FieldValue.increment(1);
           updates['gameEndReason'] =
               "L'adversaire n'a plus aucun coup possible !";
         }
@@ -14609,17 +14633,26 @@ class FirebaseService {
       int blackCount = board.values.where((p) => p.startsWith('black')).length;
 
       if (redCount == 0) {
+        String winId = playerOrder.length > 1 ? playerOrder[1] : playerOrder[0];
         updates['gameState'] = 'gameOver';
-        updates['gameWinner'] =
-            playerOrder.length > 1 ? playerOrder[1] : playerOrder[0];
+        updates['gameWinner'] = winId;
+        updates['players.$winId.score'] = FieldValue.increment(1);
         updates['gameEndReason'] = "Les Rouges n'ont plus de pièces !";
       } else if (blackCount == 0) {
+        String winId = playerOrder[0];
         updates['gameState'] = 'gameOver';
-        updates['gameWinner'] = playerOrder[0];
+        updates['gameWinner'] = winId;
+        updates['players.$winId.score'] = FieldValue.increment(1);
         updates['gameEndReason'] = "Les Noirs n'ont plus de pièces !";
       }
 
-      int xpBase = piece.endsWith('_king') ? 20 : (isCaptureMove ? 15 : 5);
+      int currentCaptures = (gameData['checkersTurnCaptures'] as int? ?? 0);
+      int xpBase = 3; // Déplacement simple
+      if (!piece.endsWith('_king') && isKing) {
+        xpBase = 20; // Promotion en Dame
+      } else if (isCaptureMove) {
+        xpBase = currentCaptures >= 2 ? 45 : 15; // Rafle
+      }
       creditPlayerXp(
         transaction,
         gameRef,
@@ -14791,7 +14824,6 @@ class FirebaseService {
         'revealedRole': null,
         'privateInfo': null,
         'infectionStatus': 'non_infecte',
-        'pyromancienBarrels': 0,
         'poisoned': false,
       };
     }
@@ -15298,6 +15330,25 @@ class FirebaseService {
                   : (scoreB > scoreA ? 'teamB' : 'equality');
           updates['gameEndReason'] =
               "Toutes les manches de Time's Up sont terminées !";
+
+          // Récompenser les membres de l'équipe gagnante (+40 XP)
+          final winningTeamKey =
+              scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
+          if (winningTeamKey != null) {
+            final winningMembers = List<String>.from(
+              teams[winningTeamKey] ?? [],
+            );
+            for (final pId in winningMembers) {
+              creditPlayerXp(
+                transaction,
+                gameRef,
+                gameData,
+                pId,
+                40,
+                applySpeedBonus: false,
+              );
+            }
+          }
         }
       }
 
@@ -15360,6 +15411,16 @@ class FirebaseService {
 
       _verifyPlayerAuth(gameData, playerId);
 
+      // Le joueur a fini de remplir avant la fin du temps !
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        20,
+        applySpeedBonus: false,
+      );
+
       transaction.update(gameRef, {'petitBacSubmittedPlayers.$playerId': true});
 
       Map<String, dynamic> submitted = Map.from(
@@ -15390,6 +15451,8 @@ class FirebaseService {
     final categories = List<String>.from(gameData['petitBacCategories'] ?? []);
     final targetLetter =
         (gameData['petitBacCurrentLetter'] as String? ?? '').toLowerCase();
+    const rareLetters = ['k', 'w', 'x', 'y', 'z', 'q'];
+    bool isRareLetter = rareLetters.contains(targetLetter.toLowerCase());
 
     final privateAnswersSnap =
         await gameRef.collection('petit_bac_private_answers').get();
@@ -15428,12 +15491,22 @@ class FirebaseService {
         if (validCount == 1) {
           roundScores[pId] =
               (roundScores[pId] ?? 0) + 20; // Seul joueur à avoir trouvé
+          _db
+              .collection('users')
+              .doc(players[entry.key]?['authUid'] ?? entry.key)
+              .set({
+                'unlockedBadges.petit_bac_solo_20':
+                    FieldValue.serverTimestamp(),
+              }, SetOptions(merge: true));
         } else if ((wordCounts[w] ?? 0) == 1) {
           roundScores[pId] = (roundScores[pId] ?? 0) + 10; // Réponse unique
         } else {
           roundScores[pId] = (roundScores[pId] ?? 0) + 5; // Réponse partagée
         }
-        int xpBase = (wordCounts[w] ?? 0) == 1 ? 10 : 3;
+        // --- NOUVELLE LOGIQUE XP ---
+        int xpBase = (wordCounts[w] ?? 0) == 1 ? 15 : 5;
+        if (isRareLetter) xpBase += 15; // Bonus lettre rare
+
         xpGainedPerPlayer[pId] = (xpGainedPerPlayer[pId] ?? 0) + xpBase;
       }
     }
@@ -15444,6 +15517,14 @@ class FirebaseService {
     for (final entry in roundScores.entries) {
       totalScores[entry.key] = (totalScores[entry.key] ?? 0) + entry.value;
     }
+
+    roundScores.forEach((pId, score) {
+      if (score >= 50) {
+        _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+          'unlockedBadges.petit_bac_round_50': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
+    });
 
     // Nettoyage des réponses privées
     final batch = _db.batch();
@@ -15780,8 +15861,20 @@ class FirebaseService {
 
     List<String> finalRanking = finishedPlayers + remainingPlayers;
     Map<String, String> ranks = {};
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
 
     if (finalRanking.isNotEmpty) {
+      final presId = finalRanking.first;
+      _db.collection('users').doc(players[presId]?['authUid'] ?? presId).set({
+        'badgeProgress.pres_double_pres': FieldValue.increment(1),
+      }, SetOptions(merge: true));
+
+      for (var pId in finalRanking.where((id) => id != finalRanking.last)) {
+        _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
+          'unlockedBadges.pres_no_tdc': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
+
       if (finalRanking.length >= 1) ranks[finalRanking[0]] = "Président";
       if (finalRanking.length >= 2) ranks[finalRanking.last] = "Trou du cul";
       if (finalRanking.length >= 4) {
@@ -16136,29 +16229,44 @@ class FirebaseService {
           updates['turnStartTime'] = FieldValue.serverTimestamp();
         }
 
+        final Timestamp? startTime =
+            gameData['pictionaryStartTime'] as Timestamp? ??
+            gameData['turnStartTime'] as Timestamp?;
+        int elapsedSeconds =
+            startTime != null
+                ? DateTime.now().difference(startTime.toDate()).inSeconds
+                : 99;
+
+        int guesserXp = 20;
+        if (elapsedSeconds <= 15) guesserXp += 15; // Bonus rapidité
+
+        int drawerXp = 20;
+        final bool only30 = gameData['pictionaryOnly30Strokes'] == true;
+        final int strokeCount =
+            (gameData['pictionaryStrokeCount'] as int? ?? 0);
+        if (only30 && strokeCount <= 15)
+          drawerXp += 20; // Bonus économie de traits
+
         creditPlayerXp(
           transaction,
           gameRef,
           gameData,
           winnerId,
-          20,
-          applySpeedBonus: true,
+          guesserXp,
+          applySpeedBonus: false,
         );
         creditPlayerXp(
           transaction,
           gameRef,
           gameData,
           expectedDrawerId,
-          15,
+          drawerXp,
           applySpeedBonus: false,
         );
 
         transaction.update(gameRef, updates);
 
         // 1. pic_30_strokes_win (Moins de 15 traits en mode 30 traits)
-        final int strokeCount =
-            (gameData['pictionaryStrokeCount'] as int? ?? 0);
-        final bool only30 = gameData['pictionaryOnly30Strokes'] == true;
         if (only30 && strokeCount <= 15) {
           _db.collection('users').doc(drawerAuthUid).set({
             'unlockedBadges.pic_30_strokes_win': FieldValue.serverTimestamp(),
@@ -16166,17 +16274,10 @@ class FirebaseService {
         }
 
         // 2. pic_fast_guess (Trouvé en moins de 10 secondes)
-        final Timestamp? startTime =
-            gameData['pictionaryStartTime'] as Timestamp? ??
-            gameData['turnStartTime'] as Timestamp?;
-        if (startTime != null) {
-          final elapsedSeconds =
-              DateTime.now().difference(startTime.toDate()).inSeconds;
-          if (elapsedSeconds <= 10) {
-            _db.collection('users').doc(drawerAuthUid).set({
-              'unlockedBadges.pic_fast_guess': FieldValue.serverTimestamp(),
-            }, SetOptions(merge: true));
-          }
+        if (elapsedSeconds <= 10) {
+          _db.collection('users').doc(drawerAuthUid).set({
+            'unlockedBadges.pic_fast_guess': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
         }
 
         // 3. pic_guesser_10 (Incrémenter la progression du devineur)
@@ -16246,7 +16347,8 @@ class FirebaseService {
     pictionaryWords.remove(currentWord);
     if (pictionaryWords.isEmpty) {
       pictionaryWords = List.from(
-        GameData.pictionaryWords[gameData['difficulty']]!,
+        GameWords.pictionaryWords[gameData['difficulty']] ??
+            GameWords.pictionaryWords['soft']!,
       )..shuffle();
     }
     String nextPictionaryWord =
@@ -16356,6 +16458,20 @@ class FirebaseService {
           }
         }
 
+        if (filteredClues.length == 1) {
+          final uniqueAuthorId =
+              clues.entries
+                  .firstWhere((e) => filteredClues.contains(e.value))
+                  .key;
+          _db
+              .collection('users')
+              .doc(players[uniqueAuthorId]?['authUid'] ?? uniqueAuthorId)
+              .set({
+                'unlockedBadges.just_one_unique_clue':
+                    FieldValue.serverTimestamp(),
+              }, SetOptions(merge: true));
+        }
+
         updates['justOneFilteredClues'] = filteredClues;
         updates['roundState'] = 'reveal_clues';
         updates['turnStartTime'] = FieldValue.serverTimestamp();
@@ -16406,12 +16522,13 @@ class FirebaseService {
         updates['justOneTotalScore'] = FieldValue.increment(1);
         final players = Map<String, dynamic>.from(gameData['players'] ?? {});
         players.keys.forEach((pId) {
+          int xp = pId == playerId ? 30 : 25;
           creditPlayerXp(
             transaction,
             gameRef,
             gameData,
             pId,
-            25,
+            xp,
             applySpeedBonus: false,
           );
         });
@@ -16440,6 +16557,27 @@ class FirebaseService {
 
       if (nextDeckIndex >= justOneDeck.length) {
         // Toutes les 13 cartes jouées → fin de partie
+        final int finalScore = gameData['justOneTotalScore'] ?? 0;
+        if (finalScore == 13) {
+          final playersMap = Map<String, dynamic>.from(
+            gameData['players'] ?? {},
+          );
+          for (final pId in playersMap.keys) {
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+              100,
+              applySpeedBonus: false,
+            );
+            final pAuth = playersMap[pId]?['authUid'] ?? pId;
+            _db.collection('users').doc(pAuth).set({
+              'unlockedBadges.just_one_13': FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+          }
+        }
+
         transaction.update(gameRef, {
           'gameState': 'gameOver',
           'gameEndReason': 'Les 13 cartes ont été jouées !',
@@ -16519,9 +16657,28 @@ class FirebaseService {
         gameRef,
         gameData,
         playerId,
-        5,
+        8,
         applySpeedBonus: true,
       );
+
+      final turnStartTime = (gameData['turnStartTime'] as Timestamp?)?.toDate();
+      final timerDuration =
+          (gameData['hotPotatoSecondsLeft'] as num?)?.toInt() ??
+          (gameData['turnTimer'] as num?)?.toInt() ??
+          30;
+      int secondsLeft = timerDuration;
+      if (turnStartTime != null) {
+        secondsLeft =
+            timerDuration - DateTime.now().difference(turnStartTime).inSeconds;
+      }
+      if (secondsLeft <= 2 && secondsLeft > 0) {
+        _db.collection('users').doc(currentAuthUid).set({
+          'unlockedBadges.patate_last_second': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
+      _db.collection('users').doc(currentAuthUid).set({
+        'badgeProgress.patate_survivor_3': FieldValue.increment(1),
+      }, SetOptions(merge: true));
 
       transaction.update(gameRef, {
         'hotPotatoUsedAnswers': usedAnswers,
@@ -16598,6 +16755,12 @@ class FirebaseService {
             winnerId = id;
           }
         });
+        if (winnerId != null) {
+          final wAuth = players[winnerId]?['authUid'] ?? winnerId;
+          _db.collection('users').doc(wAuth).set({
+            'xp': FieldValue.increment(35),
+          }, SetOptions(merge: true));
+        }
         String winnerName = players[winnerId]?['name'] ?? 'Personne';
         await gameRef.update({
           'gameState': 'gameOver',
@@ -16608,11 +16771,17 @@ class FirebaseService {
       }
     }
 
-    // RÃƒÂ©cupÃƒÂ©ration d'une catÃƒÂ©gorie alÃƒÂ©atoire parmi celles sÃƒÂ©lectionnÃƒÂ©es par l'hÃƒÂ´te
-    List<String> availableCategories = List<String>.from(
-      gameData['selectedCategories'] ?? GameData.categoriesGameList,
-    );
-    String category = "CatÃƒÂ©gorie";
+    // Récupération d'une catégorie aléatoire parmi celles sélectionnées par l'hôte ou IA
+    List<String> availableCategories;
+    if (gameData['aiWords'] != null &&
+        (gameData['aiWords'] as List).isNotEmpty) {
+      availableCategories = List<String>.from(gameData['aiWords']);
+    } else {
+      availableCategories = List<String>.from(
+        gameData['selectedCategories'] ?? GameData.categoriesGameList,
+      );
+    }
+    String category = "Catégorie";
     if (availableCategories.isNotEmpty) {
       category =
           availableCategories[Random().nextInt(availableCategories.length)];
@@ -16826,7 +16995,7 @@ class FirebaseService {
           gameRef,
           gameData,
           callerId,
-          15,
+          25,
           applySpeedBonus: true,
         );
         List<String> penaltyCards = [];
@@ -16847,6 +17016,14 @@ class FirebaseService {
 
         updates['unoCalledUno.$targetId'] = true;
       } else if (callerId == targetId && targetHand.length == 1) {
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          callerId,
+          10,
+          applySpeedBonus: true,
+        );
         updates['unoCalledUno.$targetId'] = true;
         updates['unoContraDeadline'] = null;
         updates['unoLog'] = FieldValue.arrayUnion([
@@ -16980,8 +17157,6 @@ class FirebaseService {
     if (gameType == 'Le Juge') {
       List<String> questions =
           _aiWordPool ??
-          GameData.multiplayerGameData[gameType]?[difficulty] ??
-          GameData.multiplayerGameData[gameType]?['soft'] ??
           GameWords.judgeData[difficulty] ??
           GameWords.judgeData['soft']!;
       question = questions[random.nextInt(questions.length)];
@@ -16994,8 +17169,6 @@ class FirebaseService {
     } else if (gameType == 'Qui Pourrait le Plus ?') {
       List<String> questions =
           _aiWordPool ??
-          GameData.multiplayerGameData[gameType]?[difficulty] ??
-          GameData.multiplayerGameData[gameType]?['soft'] ??
           GameWords.whoIsMostLikely[difficulty] ??
           GameWords.whoIsMostLikely['soft']!;
       question =
@@ -17004,8 +17177,6 @@ class FirebaseService {
     } else if (gameType == 'Le Menteur') {
       List<String> prompts =
           _aiWordPool ??
-          GameData.multiplayerGameData[gameType]?[difficulty] ??
-          GameData.multiplayerGameData[gameType]?['soft'] ??
           GameWords.liarData[difficulty] ??
           GameWords.liarData['soft']!;
       question = prompts[random.nextInt(prompts.length)];
@@ -17033,8 +17204,6 @@ class FirebaseService {
       if (playerOrder.length >= 3) {
         List<String> wordPairs =
             _aiWordPool ??
-            GameData.multiplayerGameData[gameType]?[difficulty] ??
-            GameData.multiplayerGameData[gameType]?['soft'] ??
             GameWords.undercoverData[difficulty]?['wordPairs'] ??
             GameWords.undercoverData['soft']!['wordPairs']!;
         String pair = wordPairs[random.nextInt(wordPairs.length)];
@@ -17075,8 +17244,6 @@ class FirebaseService {
     } else if (gameType == 'Synonyme ou Banni') {
       List<String> words =
           _aiWordPool ??
-          GameData.multiplayerGameData[gameType]?[difficulty] ??
-          GameData.multiplayerGameData[gameType]?['soft'] ??
           GameWords.synonymOrBanned[difficulty]?['words'] ??
           GameWords.synonymOrBanned['soft']!['words']!;
       String word = words[random.nextInt(words.length)];
@@ -17412,6 +17579,15 @@ class FirebaseService {
         throw Exception("Enchère invalide.");
       }
 
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        8, // +8 XP pour l'ouverture de l'enchère
+        applySpeedBonus: true,
+      );
+
       final Map<String, dynamic> updates = {
         'roundState': 'bidding',
         'skullCurrentBid': bid,
@@ -17638,6 +17814,17 @@ class FirebaseService {
 
       if (type == 'Crane') {
         challengeLost = true;
+        // Piège réussi : le propriétaire du Crâne reçoit de l'XP !
+        if (ownerId != challengerId) {
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            ownerId,
+            25,
+            applySpeedBonus: false,
+          );
+        }
         break;
       }
     }
@@ -17701,6 +17888,14 @@ class FirebaseService {
       if (playerOrder.length <= 1) {
         final String winnerId =
             playerOrder.isNotEmpty ? playerOrder.first : challengerId;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          winnerId,
+          40,
+          applySpeedBonus: false,
+        );
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = winnerId;
         updates['gameEndReason'] =
@@ -17709,13 +17904,14 @@ class FirebaseService {
         updates['roundState'] = 'result';
       }
     } else {
-      // Succès du défi : +1 point
+      // Succès du défi : +1 point (+ bonus si grosse prise de risque)
+      int challengeXp = bid >= 5 ? 50 : 30;
       creditPlayerXp(
         transaction,
         gameRef,
         gameData,
         challengerId,
-        30,
+        challengeXp,
         applySpeedBonus: true,
       );
       final int currentScore = (players[challengerId]?['score'] ?? 0) as int;
@@ -17730,10 +17926,24 @@ class FirebaseService {
       updates['players'] = players;
 
       if (newScore >= 2) {
+        _db
+            .collection('users')
+            .doc(players[challengerId]?['authUid'] ?? challengerId)
+            .set({
+              'unlockedBadges.skull_double_win': FieldValue.serverTimestamp(),
+            }, SetOptions(merge: true));
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          challengerId,
+          40,
+          applySpeedBonus: false,
+        );
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = challengerId;
         updates['gameEndReason'] =
-            '${players[challengerId]?['name'] ?? 'Un joueur'} gagne Skull avec 2 défis réussis !';
+            '${players[challengerId]?['name'] ?? 'Un joueur'} a remporté 2 défis et gagne la partie !';
       } else {
         updates['roundState'] = 'result';
       }
@@ -18425,6 +18635,14 @@ class FirebaseService {
         roundPoints.forEach((playerId, points) {
           if (points > 0) {
             updates['players.$playerId.score'] = FieldValue.increment(points);
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              playerId,
+              points * 10,
+              applySpeedBonus: false,
+            );
           }
         });
         updates['voteResults'] = votes;
@@ -18481,6 +18699,14 @@ class FirebaseService {
           final winner = topVoted.first;
           updates['roundWinnerId'] = winner;
           updates['players.$winner.score'] = FieldValue.increment(1);
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            winner,
+            15,
+            applySpeedBonus: false,
+          );
         } else {
           updates['roundWinnerId'] = null;
           updates['gameEndReason'] = "Égalité parfaite ! Aucun point attribué.";
@@ -18511,6 +18737,21 @@ class FirebaseService {
 
           players.keys.where((id) => id != loserId).forEach((winnerId) {
             updates['players.$winnerId.score'] = FieldValue.increment(1);
+            _db
+                .collection('users')
+                .doc(players[winnerId]?['authUid'] ?? winnerId)
+                .set({
+                  'unlockedBadges.synonyme_unbanned':
+                      FieldValue.serverTimestamp(),
+                }, SetOptions(merge: true));
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              winnerId,
+              15,
+              applySpeedBonus: false,
+            );
           });
         } else {
           updates['roundLoserId'] = null;
@@ -18569,6 +18810,14 @@ class FirebaseService {
               updates['players.$actualLiarId.score'] = FieldValue.increment(
                 fooledCount,
               );
+              creditPlayerXp(
+                transaction,
+                gameRef,
+                gameData,
+                actualLiarId,
+                fooledCount * 12,
+                applySpeedBonus: false,
+              );
             }
           }
         } else if (gameType == 'Infiltré & Mr. White') {
@@ -18590,6 +18839,14 @@ class FirebaseService {
                 .where((pId) => pId != undercoverId)
                 .forEach((pId) {
                   updates['players.$pId.score'] = FieldValue.increment(1);
+                  creditPlayerXp(
+                    transaction,
+                    gameRef,
+                    gameData,
+                    pId.toString(),
+                    20,
+                    applySpeedBonus: false,
+                  );
                 });
           } else if (mostVotedPlayerId == mrWhiteId) {
             updates['roundWinnerId'] = 'civilians_and_undercover';
@@ -18597,13 +18854,39 @@ class FirebaseService {
                 .where((pId) => pId != mrWhiteId)
                 .forEach((pId) {
                   updates['players.$pId.score'] = FieldValue.increment(1);
+                  creditPlayerXp(
+                    transaction,
+                    gameRef,
+                    gameData,
+                    pId.toString(),
+                    20,
+                    applySpeedBonus: false,
+                  );
                 });
           } else {
             updates['roundWinnerId'] = 'impostors';
-            if (undercoverId != null)
+            if (undercoverId != null) {
               updates['players.$undercoverId.score'] = FieldValue.increment(2);
-            if (mrWhiteId != null)
+              creditPlayerXp(
+                transaction,
+                gameRef,
+                gameData,
+                undercoverId,
+                30,
+                applySpeedBonus: false,
+              );
+            }
+            if (mrWhiteId != null) {
               updates['players.$mrWhiteId.score'] = FieldValue.increment(2);
+              creditPlayerXp(
+                transaction,
+                gameRef,
+                gameData,
+                mrWhiteId,
+                30,
+                applySpeedBonus: false,
+              );
+            }
           }
         }
       }
@@ -18648,6 +18931,15 @@ class FirebaseService {
       }
 
       final winnerName = players[winnerPlayerId]?['name'] ?? 'Joueur';
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        winnerPlayerId,
+        20,
+        applySpeedBonus: false,
+      );
 
       transaction.update(gameRef, {
         'players.$winnerPlayerId.score': FieldValue.increment(1),
@@ -19800,14 +20092,17 @@ class FirebaseService {
 
           currentTrick.forEach((pId, c) {
             String cSuit = c.substring(c.length - 1);
+            String rank = c.substring(0, c.length - 1);
             bool isTrump = (cSuit == trumpSuit);
             int cardPower = _getBeloteCardValue(c, isTrump);
+            int cardRank = _getBeloteCardRank(rank, isTrump);
 
             int totalPower = 0;
             if (isTrump) {
-              totalPower = 200 + cardPower; // Atout bat tout
+              totalPower = 2000 + (cardPower * 10) + cardRank; // Atout bat tout
             } else if (cSuit == ledSuit) {
-              totalPower = 100 + cardPower; // Couleur demandée
+              totalPower =
+                  1000 + (cardPower * 10) + cardRank; // Couleur demandée
             } else {
               totalPower = 0; // Pisse / Défausse
             }
@@ -19822,6 +20117,15 @@ class FirebaseService {
           currentTrick.values.forEach((c) {
             trickPoints += _getBeloteCardValue(c, c.endsWith(trumpSuit));
           });
+
+          if (trickPoints >= 162) {
+            final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+            if (currentAuthUid != null) {
+              _db.collection('users').doc(currentAuthUid).set({
+                'unlockedBadges.belote_capot': FieldValue.serverTimestamp(),
+              }, SetOptions(merge: true));
+            }
+          }
 
           String winnerTeam = playerData[winningPlayer]['team'];
           Map<String, dynamic> teamScores = Map.from(
@@ -19941,6 +20245,34 @@ class FirebaseService {
         default:
           return 0;
       }
+    }
+  }
+
+  int _getBeloteCardRank(String rank, bool isTrump) {
+    if (isTrump) {
+      const order = {
+        '7': 0,
+        '8': 1,
+        'Q': 2,
+        'K': 3,
+        '10': 4,
+        'A': 5,
+        '9': 6,
+        'J': 7,
+      };
+      return order[rank] ?? 0;
+    } else {
+      const order = {
+        '7': 0,
+        '8': 1,
+        '9': 2,
+        'J': 3,
+        'Q': 4,
+        'K': 5,
+        '10': 6,
+        'A': 7,
+      };
+      return order[rank] ?? 0;
     }
   }
 
@@ -20202,6 +20534,7 @@ class FirebaseService {
         updates.addAll({
           'gameState': 'gameOver',
           'gameWinner': winnerId,
+          'players.$winnerId.score': FieldValue.increment(1),
           'blokusScores': scores,
           'gameEndReason': "Fin de la partie !",
         });
@@ -20279,6 +20612,7 @@ class FirebaseService {
         updates.addAll({
           'gameState': 'gameOver',
           'gameWinner': winnerId,
+          'players.$winnerId.score': FieldValue.increment(1),
           'blokusScores': scores,
           'gameEndReason': "Fin de la partie !",
         });
@@ -20516,11 +20850,24 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     'Blanc Manger Coco',
     'Devine Tête',
     'Petit Bac',
+    'Taboo',
+    'La Patate Chaude',
+    'Le Jeu des Catégories',
+    'Le Roi des Mèmes',
+    'Gribouillis',
+    'Cadavre Exquis',
+    'Action ou Vérité',
+    'Le Dilemme',
+    'Jeu de la Pièce',
+    'On se passe un objet rapidement',
   ];
 
   final FirebaseService _firebaseService = FirebaseService();
   bool _isLoading = false;
   bool _isAiLoading = false;
+  String? _activeAiDocId;
+  String? _activeAiThemeTitle;
+  List<String>? _selectedAiWords;
   String _selectedGame = 'Gribouillis';
   String _selectedDifficulty = 'soft';
   final TextEditingController _petitBacCategoryController =
@@ -20638,19 +20985,28 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   void _createGameForFriends() async {
     final playerState = Provider.of<PlayerState>(context, listen: false);
 
-    List<String>? preGeneratedAiWords;
-    if (playerState.isPremium &&
+    List<String>? preGeneratedAiWords = _selectedAiWords;
+    if (preGeneratedAiWords == null &&
+        playerState.isPremium &&
         _aiSupportedGames.contains(_selectedGame) &&
         _aiInstructionsController.text.trim().isNotEmpty) {
       setState(() => _isAiLoading = true);
       try {
+        final promptText = _aiInstructionsController.text.trim();
+        final formattedPrompt = FirebaseService.formatAiPromptForGame(
+          _selectedGame,
+          promptText,
+        );
+        final defaultCount = FirebaseService.getAiWordCountForGame(
+          _selectedGame,
+        );
         preGeneratedAiWords = await FirebaseService.generateAiWords(
-          instructions: _aiInstructionsController.text.trim(),
-          count: 40,
+          instructions: formattedPrompt,
+          count: defaultCount,
           gameType: _selectedGame,
         );
       } catch (e) {
-        print("Erreur gÃ©nÃ©ration IA: $e");
+        print("Erreur génération IA: $e");
       } finally {
         if (mounted) setState(() => _isAiLoading = false);
       }
@@ -20749,11 +21105,21 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         return;
       }
 
+      final bool isAiActive =
+          (_selectedAiWords != null && _selectedAiWords!.isNotEmpty) ||
+          _aiInstructionsController.text.trim().isNotEmpty;
+      String effectiveDifficulty =
+          isAiActive
+              ? 'IA'
+              : (_gameHasDifficulty(_selectedGame)
+                  ? _selectedDifficulty
+                  : 'N/A');
+
       String gameCode = await _firebaseService.createGame(
         widget.playerName,
         widget.playerId,
         _selectedGame,
-        _gameHasDifficulty(_selectedGame) ? _selectedDifficulty : 'N/A',
+        effectiveDifficulty,
         dobbleSymbolsPerCard: _dobbleSymbolsPerCard,
         isSimplifiedLiar: _isSimplifiedLiar,
         liarVoteMode: _liarVoteMode,
@@ -20833,19 +21199,28 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   void _startMatchmaking({required bool isRanked}) async {
     final playerState = Provider.of<PlayerState>(context, listen: false);
 
-    List<String>? preGeneratedAiWords;
-    if (playerState.isPremium &&
+    List<String>? preGeneratedAiWords = _selectedAiWords;
+    if (preGeneratedAiWords == null &&
+        playerState.isPremium &&
         _aiSupportedGames.contains(_selectedGame) &&
         _aiInstructionsController.text.trim().isNotEmpty) {
       setState(() => _isAiLoading = true);
       try {
+        final promptText = _aiInstructionsController.text.trim();
+        final formattedPrompt = FirebaseService.formatAiPromptForGame(
+          _selectedGame,
+          promptText,
+        );
+        final defaultCount = FirebaseService.getAiWordCountForGame(
+          _selectedGame,
+        );
         preGeneratedAiWords = await FirebaseService.generateAiWords(
-          instructions: _aiInstructionsController.text.trim(),
-          count: 40,
+          instructions: formattedPrompt,
+          count: defaultCount,
           gameType: _selectedGame,
         );
       } catch (e) {
-        print("Erreur gÃ©nÃ©ration IA: $e");
+        print("Erreur génération IA: $e");
       } finally {
         if (mounted) setState(() => _isAiLoading = false);
       }
@@ -20880,6 +21255,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       await playerState.recordVideoGamePlayed();
     }
 
+    final bool isAiActive =
+        (_selectedAiWords != null && _selectedAiWords!.isNotEmpty) ||
+        _aiInstructionsController.text.trim().isNotEmpty;
+    String effectiveDifficulty =
+        isAiActive
+            ? 'IA'
+            : (_gameHasDifficulty(_selectedGame) ? _selectedDifficulty : 'N/A');
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -20896,10 +21279,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               isRanked: isRanked,
               devineTeteUseTeams:
                   _selectedGame == 'Devine Tête' ? _devineTeteUseTeams : false,
-              difficulty:
-                  _gameHasDifficulty(_selectedGame)
-                      ? _selectedDifficulty
-                      : 'N/A',
+              difficulty: effectiveDifficulty,
               dobbleSymbolsPerCard:
                   _selectedGame == 'Dobble' ? _dobbleSymbolsPerCard : false,
               isSimplifiedLiar:
@@ -21191,6 +21571,420 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     );
   }
 
+  /// Ouvre l'historique Firebase dans une bottom sheet
+  void _openAiHistorySheet(BuildContext context, String uid) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF141422),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.85,
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.3),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(24),
+                  ),
+                  border: const Border(
+                    bottom: BorderSide(color: Colors.white12),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Historique des thèmes : $_selectedGame",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close, color: Colors.white70),
+                      onPressed: () => Navigator.pop(ctx),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: StreamBuilder<List<AiThemeHistoryItem>>(
+                  stream: _firebaseService.getAiHistoryStream(
+                    uid,
+                    _selectedGame,
+                  ),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    final items = snapshot.data ?? [];
+                    if (items.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          "Aucun thème sauvegardé pour ce jeu sur Firebase.",
+                          style: TextStyle(color: Colors.white54),
+                        ),
+                      );
+                    }
+
+                    return ListView.builder(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        final item = items[index];
+                        final isSelected = _activeAiDocId == item.id;
+
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color:
+                                isSelected
+                                    ? Colors.deepPurple.withOpacity(0.3)
+                                    : const Color(0xFF1E1E2E),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color:
+                                  isSelected
+                                      ? Colors.amberAccent
+                                      : Colors.white10,
+                              width: isSelected ? 2 : 1,
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      item.title,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.delete_outline,
+                                      size: 18,
+                                      color: Colors.redAccent,
+                                    ),
+                                    onPressed:
+                                        () => _firebaseService
+                                            .deleteAiThemeFromFirebase(
+                                              uid,
+                                              item.id,
+                                            ),
+                                    visualDensity: VisualDensity.compact,
+                                  ),
+                                ],
+                              ),
+                              if (item.prompt.isNotEmpty)
+                                Text(
+                                  "Prompt : \"${item.prompt}\"",
+                                  style: const TextStyle(
+                                    color: Colors.white54,
+                                    fontSize: 12,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              const SizedBox(height: 8),
+                              Wrap(
+                                spacing: 6,
+                                runSpacing: 4,
+                                children:
+                                    item.words.take(8).map((w) {
+                                      return Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.06),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          w,
+                                          style: const TextStyle(
+                                            color: Colors.white70,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                              ),
+                              const SizedBox(height: 12),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton.icon(
+                                      icon: const Icon(Icons.check, size: 16),
+                                      label: const Text("UTILISER"),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.green[700],
+                                        foregroundColor: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _selectedAiWords = List.from(
+                                            item.words,
+                                          );
+                                          _activeAiThemeTitle = item.title;
+                                          _activeAiDocId = item.id;
+                                          _aiInstructionsController.text =
+                                              item.prompt;
+                                        });
+                                        Navigator.pop(ctx);
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: OutlinedButton.icon(
+                                      icon: const Icon(
+                                        Icons.edit_note,
+                                        size: 16,
+                                      ),
+                                      label: const Text("Modifier / Compléter"),
+                                      style: OutlinedButton.styleFrom(
+                                        foregroundColor: Colors.cyanAccent,
+                                        side: const BorderSide(
+                                          color: Colors.cyanAccent,
+                                        ),
+                                      ),
+                                      onPressed:
+                                          () => _openEditDialog(
+                                            context,
+                                            uid,
+                                            item,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  /// Boîte de dialogue pour modifier la liste et demander à l'IA de rajouter X mots
+  void _openEditDialog(
+    BuildContext context,
+    String uid,
+    AiThemeHistoryItem item,
+  ) {
+    final titleCtrl = TextEditingController(text: item.title);
+    final addWordCtrl = TextEditingController();
+    List<String> wordsList = List.from(item.words);
+    bool isGeneratingMore = false;
+
+    showDialog(
+      context: context,
+      builder: (dCtx) {
+        return StatefulBuilder(
+          builder: (context, setDState) {
+            return AlertDialog(
+              backgroundColor: const Color(0xFF1B1B2A),
+              title: const Text(
+                "Modifier le Thème",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              content: SizedBox(
+                width: double.maxFinite,
+                height: 420,
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: titleCtrl,
+                      decoration: const InputDecoration(
+                        labelText: "Titre du thème (IA / Personnalisé)",
+                      ),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: addWordCtrl,
+                            decoration: const InputDecoration(
+                              hintText: "Ajouter un mot...",
+                            ),
+                            onSubmitted: (v) {
+                              if (v.trim().isNotEmpty) {
+                                setDState(() {
+                                  wordsList.add(v.trim());
+                                  addWordCtrl.clear();
+                                });
+                              }
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.add_circle,
+                            color: Colors.greenAccent,
+                          ),
+                          onPressed: () {
+                            if (addWordCtrl.text.trim().isNotEmpty) {
+                              setDState(() {
+                                wordsList.add(addWordCtrl.text.trim());
+                                addWordCtrl.clear();
+                              });
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    // Bouton IA pour compléter la liste
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        icon:
+                            isGeneratingMore
+                                ? const SizedBox(
+                                  width: 14,
+                                  height: 14,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.amberAccent,
+                                  ),
+                                )
+                                : const Icon(
+                                  Icons.auto_awesome,
+                                  size: 16,
+                                  color: Colors.amberAccent,
+                                ),
+                        label: Text(
+                          isGeneratingMore
+                              ? "Génération en cours..."
+                              : "Compléter avec l'IA (+15 mots)",
+                          style: const TextStyle(
+                            color: Colors.amberAccent,
+                            fontSize: 12,
+                          ),
+                        ),
+                        onPressed:
+                            isGeneratingMore
+                                ? null
+                                : () async {
+                                  setDState(() => isGeneratingMore = true);
+                                  try {
+                                    final addedWords =
+                                        await FirebaseService.generateAiWords(
+                                          instructions:
+                                              "Complète cette liste sur le thème ${titleCtrl.text}. Mots existants : ${wordsList.take(10).join(', ')}",
+                                          count: 15,
+                                          gameType: _selectedGame,
+                                        );
+                                    if (addedWords.isNotEmpty) {
+                                      setDState(() {
+                                        for (var w in addedWords) {
+                                          if (!wordsList.contains(w))
+                                            wordsList.add(w);
+                                        }
+                                      });
+                                    }
+                                  } finally {
+                                    setDState(() => isGeneratingMore = false);
+                                  }
+                                },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.black26,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Wrap(
+                            spacing: 6,
+                            runSpacing: 6,
+                            children:
+                                wordsList.map((w) {
+                                  return Chip(
+                                    label: Text(
+                                      w,
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    onDeleted:
+                                        () => setDState(
+                                          () => wordsList.remove(w),
+                                        ),
+                                  );
+                                }).toList(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(dCtx),
+                  child: const Text("Annuler"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await _firebaseService.saveAiThemeToFirebase(
+                      uid: uid,
+                      prompt: item.prompt,
+                      gameType: _selectedGame,
+                      words: wordsList,
+                      title: titleCtrl.text.trim(),
+                      existingDocId: item.id,
+                    );
+                    if (_activeAiDocId == item.id) {
+                      setState(() {
+                        _selectedAiWords = wordsList;
+                        _activeAiThemeTitle = titleCtrl.text.trim();
+                      });
+                    }
+                    Navigator.pop(dCtx);
+                  },
+                  child: const Text("Enregistrer sur Firebase"),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     int totalRolesCount = _selectedLoupGarouRoles.values.fold(
@@ -21218,6 +22012,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     final bool canLocal = modes.contains('local');
     bool isDevineTete = _selectedGame.contains('Devine T');
     bool forceVideo = false;
+    final bool isAiActive =
+        (_selectedAiWords != null && _selectedAiWords!.isNotEmpty) ||
+        _aiInstructionsController.text.trim().isNotEmpty;
 
     return Scaffold(
       appBar: AppBar(
@@ -21240,7 +22037,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     DropdownButtonFormField<String>(
                       value: _selectedGame,
                       items:
-                          GameData.multiplayerGameData.keys.map((String value) {
+                          GameData.multiplayerGames.map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -21259,35 +22056,89 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     SizedBox(height: 20),
 
                     if (_gameHasDifficulty(_selectedGame)) ...[
-                      Text(
-                        "DifficultÃ©",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      SizedBox(height: 8),
-                      SegmentedButton<String>(
-                        segments: const [
-                          ButtonSegment(
-                            value: 'soft',
-                            label: Text('Soft'),
-                            icon: Icon(Icons.mood),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Difficulté",
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              color: isAiActive ? Colors.white38 : Colors.white,
+                            ),
                           ),
-                          ButtonSegment(
-                            value: 'hard',
-                            label: Text('Hard'),
-                            icon: Icon(Icons.whatshot),
-                          ),
-                          ButtonSegment(
-                            value: 'hardcore',
-                            label: Text('Hardcore'),
-                            icon: Icon(Icons.local_fire_department),
-                          ),
+                          if (isAiActive)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.amber.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Colors.amberAccent.withOpacity(0.5),
+                                ),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.auto_awesome,
+                                    color: Colors.amberAccent,
+                                    size: 12,
+                                  ),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    "Remplacé par le thème IA",
+                                    style: TextStyle(
+                                      color: Colors.amberAccent,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                         ],
-                        selected: {_selectedDifficulty},
-                        onSelectionChanged: (newSelection) {
-                          setState(
-                            () => _selectedDifficulty = newSelection.first,
-                          );
-                        },
+                      ),
+                      const SizedBox(height: 8),
+                      Opacity(
+                        opacity: isAiActive ? 0.4 : 1.0,
+                        child: IgnorePointer(
+                          ignoring:
+                              isAiActive, // Désactive les clics si l'IA est active
+                          child: SegmentedButton<String>(
+                            segments: const [
+                              ButtonSegment(
+                                value: 'soft',
+                                label: Text('Soft'),
+                                icon: Icon(Icons.mood),
+                              ),
+                              ButtonSegment(
+                                value: 'hard',
+                                label: Text('Hard'),
+                                icon: Icon(Icons.whatshot),
+                              ),
+                              ButtonSegment(
+                                value: 'hardcore',
+                                label: Text('Hardcore'),
+                                icon: Icon(Icons.local_fire_department),
+                              ),
+                            ],
+                            selected: {
+                              isAiActive ? 'soft' : _selectedDifficulty,
+                            },
+                            onSelectionChanged: (newSelection) {
+                              if (!isAiActive) {
+                                setState(
+                                  () =>
+                                      _selectedDifficulty = newSelection.first,
+                                );
+                              }
+                            },
+                          ),
+                        ),
                       ),
                     ],
 
@@ -21295,49 +22146,110 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       Consumer<PlayerState>(
                         builder: (ctx, ps, _) {
                           if (!ps.isPremium) return const SizedBox.shrink();
+
                           return Container(
-                            margin: const EdgeInsets.only(top: 16, bottom: 8),
+                            margin: const EdgeInsets.symmetric(vertical: 14),
+                            padding: const EdgeInsets.all(14),
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.amberAccent),
-                              borderRadius: BorderRadius.circular(12),
-                              color: Colors.amber.withOpacity(0.06),
+                              color: const Color(0xFF1E1B4B).withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: Colors.amberAccent.withOpacity(0.6),
+                                width: 1.5,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.amber.withOpacity(0.12),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
                             ),
-                            padding: const EdgeInsets.all(12),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Icon(
-                                      Icons.auto_awesome,
-                                      color: Colors.amberAccent,
-                                      size: 20,
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.auto_awesome,
+                                          color: Colors.amberAccent,
+                                          size: 22,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          "Génération IA : $_selectedGame",
+                                          style: const TextStyle(
+                                            color: Colors.amberAccent,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      "Thème / Prompt IA Personnalisé (VIP) : $_selectedGame",
-                                      style: const TextStyle(
-                                        color: Colors.amberAccent,
-                                        fontWeight: FontWeight.bold,
+                                    // BOUTON VOIR L'HISTORIQUE
+                                    TextButton.icon(
+                                      icon: const Icon(
+                                        Icons.history_rounded,
+                                        size: 18,
+                                        color: Colors.cyanAccent,
                                       ),
+                                      label: const Text(
+                                        "Historique",
+                                        style: TextStyle(
+                                          color: Colors.cyanAccent,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                      style: TextButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 4,
+                                        ),
+                                        visualDensity: VisualDensity.compact,
+                                      ),
+                                      onPressed:
+                                          () => _openAiHistorySheet(
+                                            context,
+                                            ps.userId ?? widget.playerId,
+                                          ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 10),
+
+                                // CHAMP DE TEXTE DU PROMPT
                                 TextField(
                                   controller: _aiInstructionsController,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                  ),
                                   decoration: InputDecoration(
-                                    labelText:
-                                        "Entrez vos instructions ou un thème...",
+                                    labelText: "Thème ou consigne pour l'IA",
                                     hintText:
-                                        "ex: Cinéma des années 90, Cuisine italienne, Manga & Animés...",
-                                    border: const OutlineInputBorder(),
+                                        "ex: Cinéma des années 90, Objets futuristes, Animaux marins...",
+                                    hintStyle: const TextStyle(
+                                      color: Colors.white38,
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.black.withOpacity(0.35),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
                                     suffixIcon:
                                         _aiInstructionsController
                                                 .text
                                                 .isNotEmpty
                                             ? IconButton(
-                                              icon: const Icon(Icons.clear),
+                                              icon: const Icon(
+                                                Icons.clear,
+                                                size: 18,
+                                              ),
                                               onPressed:
                                                   () => setState(
                                                     () =>
@@ -21350,6 +22262,210 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   maxLines: 2,
                                   onChanged: (_) => setState(() {}),
                                 ),
+
+                                const SizedBox(height: 10),
+
+                                // BOUTON DE GÉNÉRATION DIRECTE
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: ElevatedButton.icon(
+                                        icon:
+                                            _isAiLoading
+                                                ? const SizedBox(
+                                                  width: 16,
+                                                  height: 16,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                        strokeWidth: 2,
+                                                        color: Colors.black,
+                                                      ),
+                                                )
+                                                : const Icon(
+                                                  Icons.bolt_rounded,
+                                                  color: Colors.black,
+                                                ),
+                                        label: Text(
+                                          _isAiLoading
+                                              ? "Génération en cours..."
+                                              : "Générer avec l'IA",
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.amberAccent,
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 12,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed:
+                                            _isAiLoading ||
+                                                    _aiInstructionsController
+                                                        .text
+                                                        .trim()
+                                                        .isEmpty
+                                                ? null
+                                                : () async {
+                                                  final prompt =
+                                                      _aiInstructionsController
+                                                          .text
+                                                          .trim();
+                                                  setState(
+                                                    () => _isAiLoading = true,
+                                                  );
+                                                  try {
+                                                    final formattedPrompt =
+                                                        FirebaseService.formatAiPromptForGame(
+                                                          _selectedGame,
+                                                          prompt,
+                                                        );
+                                                    final wordCount =
+                                                        FirebaseService.getAiWordCountForGame(
+                                                          _selectedGame,
+                                                        );
+                                                    final generated =
+                                                        await FirebaseService.generateAiWords(
+                                                          instructions:
+                                                              formattedPrompt,
+                                                          count: wordCount,
+                                                          gameType:
+                                                              _selectedGame,
+                                                        );
+                                                    if (generated.isNotEmpty) {
+                                                      String autoTitle = prompt;
+                                                      if (autoTitle.length > 25)
+                                                        autoTitle =
+                                                            "${autoTitle.substring(0, 25)}...";
+
+                                                      final docId =
+                                                          await _firebaseService
+                                                              .saveAiThemeToFirebase(
+                                                                uid:
+                                                                    ps.userId ??
+                                                                    widget
+                                                                        .playerId,
+                                                                prompt: prompt,
+                                                                gameType:
+                                                                    _selectedGame,
+                                                                words:
+                                                                    generated,
+                                                                title:
+                                                                    autoTitle,
+                                                              );
+
+                                                      setState(() {
+                                                        _selectedAiWords =
+                                                            generated;
+                                                        _activeAiThemeTitle =
+                                                            autoTitle;
+                                                        _activeAiDocId = docId;
+                                                      });
+
+                                                      if (mounted) {
+                                                        ScaffoldMessenger.of(
+                                                          context,
+                                                        ).showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              "✨ ${generated.length} mots générés et enregistrés sur Firebase !",
+                                                            ),
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .green[800],
+                                                          ),
+                                                        );
+                                                      }
+                                                    }
+                                                  } catch (e) {
+                                                    if (mounted) {
+                                                      ScaffoldMessenger.of(
+                                                        context,
+                                                      ).showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            "Erreur IA: $e",
+                                                          ),
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                        ),
+                                                      );
+                                                    }
+                                                  } finally {
+                                                    if (mounted)
+                                                      setState(
+                                                        () =>
+                                                            _isAiLoading =
+                                                                false,
+                                                      );
+                                                  }
+                                                },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                // INDICATEUR DU PACK ACTUELLEMENT ACTIF
+                                if (_selectedAiWords != null &&
+                                    _selectedAiWords!.isNotEmpty) ...[
+                                  const SizedBox(height: 12),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.green.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color: Colors.greenAccent.withOpacity(
+                                          0.4,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.check_circle,
+                                          color: Colors.greenAccent,
+                                          size: 20,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Expanded(
+                                          child: Text(
+                                            "Pack actif : ${_activeAiThemeTitle ?? 'Thème personnalisé'} (${_selectedAiWords!.length} mots)",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(
+                                            Icons.close,
+                                            color: Colors.white54,
+                                            size: 18,
+                                          ),
+                                          padding: EdgeInsets.zero,
+                                          constraints: const BoxConstraints(),
+                                          tooltip: "Désactiver ce pack",
+                                          onPressed: () {
+                                            setState(() {
+                                              _selectedAiWords = null;
+                                              _activeAiThemeTitle = null;
+                                              _activeAiDocId = null;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ],
                             ),
                           );
@@ -23183,6 +24299,82 @@ class _MilleBornesCardInfo {
     this.isSafety = false,
     this.isDistance = false,
   });
+}
+
+class _PetitBacInputField extends StatefulWidget {
+  final String category;
+  final String currentLetter;
+  final String initialValue;
+  final Function(String) onSubmitted;
+
+  const _PetitBacInputField({
+    Key? key,
+    required this.category,
+    required this.currentLetter,
+    required this.initialValue,
+    required this.onSubmitted,
+  }) : super(key: key);
+
+  @override
+  State<_PetitBacInputField> createState() => _PetitBacInputFieldState();
+}
+
+class _PetitBacInputFieldState extends State<_PetitBacInputField> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void didUpdateWidget(_PetitBacInputField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.category != widget.category ||
+        oldWidget.currentLetter != widget.currentLetter) {
+      _controller.text = widget.initialValue;
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.category.toUpperCase(),
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        TextField(
+          controller: _controller,
+          style: TextStyle(
+            color: Colors.indigo[900],
+            fontSize: 18,
+            fontFamily: 'Courier',
+          ),
+          decoration: InputDecoration(
+            hintText: "${widget.currentLetter}...",
+            hintStyle: TextStyle(color: Colors.grey[300]),
+            border: InputBorder.none,
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(vertical: 8),
+          ),
+          onChanged: widget.onSubmitted,
+        ),
+      ],
+    );
+  }
 }
 
 class MultiplayerGameScreen extends StatefulWidget {
@@ -25135,48 +26327,54 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   Widget build(BuildContext context) {
     final String playerId = widget.playerId;
 
-    return WillPopScope(
-      onWillPop: () async {
-        final shouldPop = await showDialog<bool>(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        final shouldLeave = await showDialog<bool>(
           context: context,
           builder:
-              (context) => AlertDialog(
+              (ctx) => AlertDialog(
                 title: const Text('Quitter la partie ?'),
                 content: const Text(
-                  'Si vous quittez, vous ne pourrez pas revenir. ÃƒÅ tes-vous sÃƒÂ»r ?',
+                  'Si vous quittez, votre place sera libérée.',
                 ),
                 actions: [
                   TextButton(
-                    onPressed: () => Navigator.pop(context, false),
-                    child: const Text('Annuler'),
+                    onPressed: () => Navigator.pop(ctx, false),
+                    child: const Text('Rester'),
                   ),
-                  TextButton(
-                    onPressed: () async {
-                      if (_livekitInitialized) {
-                        await _livekitService.leaveChannel();
-                        await Future.delayed(const Duration(milliseconds: 300));
-                      }
-                      if (widget.loungeId != null) {
-                        FirebaseFirestore.instance
-                            .collection('lounges')
-                            .doc(widget.loungeId)
-                            .update({
-                              'pendingGame.joinedPlayers':
-                                  FieldValue.arrayRemove([playerId]),
-                            });
-                      }
-                      _firebaseService.removePlayerFromGame(
-                        widget.gameCode,
-                        playerId,
-                      );
-                      Navigator.pop(context, true);
-                    },
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
+                    onPressed: () => Navigator.pop(ctx, true),
                     child: const Text('Quitter'),
                   ),
                 ],
               ),
         );
-        return shouldPop ?? false;
+
+        if (shouldLeave == true && context.mounted) {
+          if (_livekitInitialized) {
+            await _livekitService.leaveChannel();
+          }
+          if (widget.loungeId != null) {
+            FirebaseFirestore.instance
+                .collection('lounges')
+                .doc(widget.loungeId)
+                .update({
+                  'pendingGame.joinedPlayers': FieldValue.arrayRemove([
+                    playerId,
+                  ]),
+                });
+          }
+          _firebaseService.removePlayerFromGame(
+            widget.gameCode,
+            widget.playerId,
+          );
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        }
       },
       child: StreamBuilder<DocumentSnapshot>(
         stream: _firebaseService.getGameStream(widget.gameCode),
@@ -25207,11 +26405,43 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             if (!_xpAwarded) {
               _xpAwarded = true;
               WidgetsBinding.instance.addPostFrameCallback((_) async {
-                // Réclamation sécurisée de la récompense (XP + pièces) via Cloud Function
-                Provider.of<PlayerState>(
-                  context,
-                  listen: false,
-                ).claimGameReward(widget.gameCode);
+                final ps = Provider.of<PlayerState>(context, listen: false);
+
+                // Récupération du mode classé et du niveau max des adversaires
+                final bool isRanked = gameData['isRanked'] == true;
+                final String myId = widget.playerId;
+                final String? winnerId = gameData['gameWinner'];
+                final bool isWin = (winnerId == myId);
+                final String currentGame = gameData['gameType'] ?? 'Inconnu';
+
+                // Enregistrement des stats par jeu
+                await ps.recordGameResult(
+                  gameName: currentGame,
+                  isWin: isWin,
+                  xpEarned: isWin ? 50 : 15,
+                );
+
+                // Calcul du niveau adverse maximum
+                int maxOpponentLvl = 1;
+                final playersMap = Map<String, dynamic>.from(
+                  gameData['players'] ?? {},
+                );
+                playersMap.forEach((pId, pData) {
+                  if (pId != myId && pData is Map) {
+                    int oppLvl = (pData['level'] as num?)?.toInt() ?? 1;
+                    if (oppLvl > maxOpponentLvl) maxOpponentLvl = oppLvl;
+                  }
+                });
+
+                // Attribution avec multiplicateurs Ranked, Giant Slayer et Win Streaks
+                if (isRanked) {
+                  await ps.handleRankedGameEnd(
+                    isWin: isWin,
+                    maxOpponentLevel: maxOpponentLvl,
+                  );
+                } else {
+                  await ps.claimGameReward(widget.gameCode);
+                }
 
                 // NOUVEAU : Envoyer les rÃ©sultats au salon si rattachÃ©
                 if (gameData['loungeId'] != null &&
@@ -26337,6 +27567,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   int pXp = (entry.value['xp'] as num?)?.toInt() ?? 0;
                   bool isMe = pId == widget.playerId;
                   bool isSelected = _viewedOpponentId == pId;
+                  final String targetAuthUid = entry.value['authUid'] ?? pId;
+                  final String myAuthUid =
+                      players[widget.playerId]?['authUid'] ?? widget.playerId;
+
+                  void openProfile() {
+                    showUserProfileDialog(
+                      context,
+                      targetUid: targetAuthUid,
+                      currentUserId: myAuthUid,
+                    );
+                  }
 
                   return ActionChip(
                     avatar: CircleAvatar(
@@ -26386,6 +27627,27 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                           ),
                         ),
+                        if (canViewHands && !isMe) ...[
+                          const SizedBox(width: 4),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _viewedOpponentId =
+                                    (_viewedOpponentId == pId) ? null : pId;
+                              });
+                            },
+                            child: Icon(
+                              _viewedOpponentId == pId
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              size: 14,
+                              color:
+                                  _viewedOpponentId == pId
+                                      ? Colors.amberAccent
+                                      : Colors.white54,
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                     backgroundColor:
@@ -26399,15 +27661,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               width: 2,
                             )
                             : null,
-                    onPressed:
-                        (canViewHands && !isMe)
-                            ? () {
-                              setState(() {
-                                _viewedOpponentId =
-                                    (_viewedOpponentId == pId) ? null : pId;
-                              });
-                            }
-                            : null,
+                    onPressed: () {
+                      openProfile();
+                    },
                   );
                 }).toList(),
           ),
@@ -29487,75 +30743,158 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
     }
 
+    // Fin du chrono de 60s pour ce joueur : annonce et passage au suivant
     if (roundState == 'turn_result') {
       return Center(
-        child: Card(
-          color: Colors.deepPurple[800],
-          child: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.timer_off, size: 60, color: Colors.amberAccent),
-                SizedBox(height: 20),
-                Text(
-                  "Temps écoulé !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "$guesserName a deviné $guessedCount mot(s) !",
-                  style: TextStyle(fontSize: 22, color: Colors.greenAccent),
-                ),
-                SizedBox(height: 20),
-                if (gameData['hostId'] == playerId)
-                  ElevatedButton(
-                    onPressed:
-                        _isActionPending
-                            ? null
-                            : () {
-                              setState(() => _isActionPending = true);
-                              _firebaseService
-                                  .nextDevineTeteTurn(widget.gameCode)
-                                  .then((_) {
-                                    if (mounted)
-                                      setState(() => _isActionPending = false);
-                                  });
-                            },
-                    child: Text("Joueur suivant"),
-                  )
-                else
-                  Text("En attente de l'hôte..."),
-              ],
+        child: Container(
+          margin: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1E1B4B),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: Colors.amberAccent.withOpacity(0.6),
+              width: 2,
             ),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 16),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.timer_off_rounded,
+                size: 54,
+                color: Colors.amberAccent,
+              ),
+              const SizedBox(height: 14),
+              Text(
+                "Temps écoulé !",
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "$guesserName a trouvé $guessedCount mot(s) !",
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.greenAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 24),
+              if (gameData['hostId'] == playerId)
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.arrow_forward_rounded),
+                  label: const Text("Tour Suivant"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green[700],
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                  onPressed:
+                      _isActionPending
+                          ? null
+                          : () {
+                            setState(() => _isActionPending = true);
+                            _firebaseService
+                                .nextDevineTeteTurn(widget.gameCode)
+                                .then((_) {
+                                  if (mounted)
+                                    setState(() => _isActionPending = false);
+                                });
+                          },
+                )
+              else
+                const Text(
+                  "En attente de l'hôte pour lancer le tour suivant...",
+                  style: TextStyle(
+                    color: Colors.white54,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+            ],
           ),
         ),
       );
     }
 
+    // Phase de jeu active
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (useTeams)
           Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  "Équipe A: ${teamScores['teamA']}",
-                  style: TextStyle(
-                    color: Colors.redAccent,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        activeTeam == 'teamA'
+                            ? Colors.redAccent.withOpacity(0.3)
+                            : Colors.black26,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color:
+                          activeTeam == 'teamA'
+                              ? Colors.redAccent
+                              : Colors.white12,
+                    ),
+                  ),
+                  child: Text(
+                    "Équipe A : ${teamScores['teamA']} pts",
+                    style: TextStyle(
+                      color:
+                          activeTeam == 'teamA'
+                              ? Colors.redAccent
+                              : Colors.white70,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
-                Text(
-                  "Équipe B: ${teamScores['teamB']}",
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        activeTeam == 'teamB'
+                            ? Colors.blueAccent.withOpacity(0.3)
+                            : Colors.black26,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color:
+                          activeTeam == 'teamB'
+                              ? Colors.blueAccent
+                              : Colors.white12,
+                    ),
+                  ),
+                  child: Text(
+                    "Équipe B : ${teamScores['teamB']} pts",
+                    style: TextStyle(
+                      color:
+                          activeTeam == 'teamB'
+                              ? Colors.blueAccent
+                              : Colors.white70,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
               ],
@@ -29563,130 +30902,140 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
 
         if (isMyTurn) ...[
-          Text(
+          const Text(
             "C'est à TOI de deviner !",
             style: TextStyle(
               color: Colors.greenAccent,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+              fontSize: 22,
+              fontWeight: FontWeight.w900,
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 4),
           Text(
             useTeams
-                ? "Ton équipe t'aide. L'équipe adverse surveille."
-                : "Regarde tes amis à l'écran, ils t'aident !",
-            style: TextStyle(color: Colors.white70, fontSize: 14),
+                ? "Écoutez les indices de votre équipe !"
+                : "Regardez vos amis à l'écran, ils vous aident !",
+            style: const TextStyle(color: Colors.white70, fontSize: 13),
             textAlign: TextAlign.center,
           ),
-          Spacer(),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              FloatingActionButton.extended(
-                heroTag: "pass_dt",
-                backgroundColor: Colors.orange,
-                onPressed:
-                    _isActionPending
-                        ? null
-                        : () {
-                          setState(() => _isActionPending = true);
-                          _firebaseService
-                              .actionDevineTete(
-                                widget.gameCode,
-                                playerId,
-                                false,
-                              )
-                              .then((_) {
-                                if (mounted)
-                                  setState(() => _isActionPending = false);
-                              });
-                        },
-                icon: Icon(Icons.skip_next, size: 30, color: Colors.white),
-                label: Text("Passer"),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFEA580C),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 14,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                onPressed: () {
+                  HapticFeedback.lightImpact();
+                  _firebaseService.actionDevineTete(
+                    widget.gameCode,
+                    playerId,
+                    false, // Passer -> mot suivant immédiat
+                  );
+                },
+                icon: const Icon(Icons.skip_next_rounded, size: 24),
+                label: const Text(
+                  "PASSER",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
-              FloatingActionButton.extended(
-                heroTag: "guess_dt",
-                backgroundColor: Colors.green,
-                onPressed:
-                    _isActionPending
-                        ? null
-                        : () {
-                          setState(() => _isActionPending = true);
-                          _firebaseService
-                              .actionDevineTete(widget.gameCode, playerId, true)
-                              .then((_) {
-                                if (mounted)
-                                  setState(() => _isActionPending = false);
-                              });
-                        },
-                icon: Icon(Icons.check, size: 30, color: Colors.white),
-                label: Text("Trouvé !"),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF16A34A),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 28,
+                    vertical: 14,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 6,
+                ),
+                onPressed: () {
+                  HapticFeedback.mediumImpact();
+                  _firebaseService.actionDevineTete(
+                    widget.gameCode,
+                    playerId,
+                    true, // Trouvé -> mot suivant immédiat
+                  );
+                },
+                icon: const Icon(Icons.check_circle_rounded, size: 24),
+                label: const Text(
+                  "TROUVÉ !",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 12),
         ] else ...[
           Text(
             useTeams && !isMyTeamTurn
-                ? "L'équipe adverse joue. \nVérifiez qu'ils ne trichent pas !"
+                ? "L'équipe adverse joue (surveillez les fautes) :"
                 : "Faites deviner ce mot à $guesserName :",
             style: TextStyle(
               color:
                   (useTeams && !isMyTeamTurn)
-                      ? Colors.redAccent
+                      ? Colors.orangeAccent
                       : Colors.amberAccent,
-              fontSize: 18,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
             decoration: BoxDecoration(
-              color:
-                  (useTeams && !isMyTeamTurn) ? Colors.grey[300] : Colors.white,
-              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.amberAccent.withOpacity(0.5),
+                  color: Colors.amberAccent.withOpacity(0.3),
                   blurRadius: 20,
                   spreadRadius: 2,
                 ),
               ],
             ),
             child: Text(
-              currentWord,
+              currentWord.toUpperCase(),
               style: TextStyle(
                 color: Colors.deepPurple[900],
                 fontSize: 32,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1.2,
               ),
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: 10),
-          Text(
-            useTeams && !isMyTeamTurn
-                ? "Ils ne doivent utiliser aucun mot de la même famille."
-                : "Utilisez votre caméra et votre micro !",
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 14,
-              fontStyle: FontStyle.italic,
+          const Spacer(),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.green.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(16),
             ),
-            textAlign: TextAlign.center,
-          ),
-          Spacer(),
-          Text(
-            "Mots trouvés : $guessedCount",
-            style: TextStyle(
-              color: Colors.greenAccent,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            child: Text(
+              "Mots trouvés : $guessedCount",
+              style: const TextStyle(
+                color: Colors.greenAccent,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 12),
         ],
       ],
     );
@@ -37801,19 +39150,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ],
       );
     } else if (roundState == 'answering') {
-      for (String category in categories) {
-        if (!_answerControllers.containsKey(category)) {
-          _answerControllers[category] = TextEditingController(
-            text: myAnswers[category] ?? '',
-          );
-        }
-      }
-
       bool hasSubmitted = submittedPlayers.containsKey(playerId);
 
       return Column(
         children: [
-          // En-tÃƒÂªte Tableau
+          // En-tête Tableau
           Container(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             decoration: blackboardDecoration.copyWith(
@@ -37911,7 +39252,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 hasSubmitted
                     ? Center(
                       child: _buildWaitingWidget(
-                        "Copies ramassÃƒÂ©es ! Attente de la sonnerie...",
+                        "Copies ramassées ! Attente de la sonnerie...",
                         players,
                         submittedPlayers.length,
                         players.length,
@@ -37935,43 +39276,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ), // Lignes de cahier
                         itemBuilder: (context, index) {
                           String category = categories[index];
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                category.toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              TextField(
-                                controller: _answerControllers[category],
-                                style: TextStyle(
-                                  color: Colors.indigo[900],
-                                  fontSize: 18,
-                                  fontFamily: 'Courier',
-                                ), // Style ÃƒÂ©criture
-                                decoration: InputDecoration(
-                                  hintText: "$currentLetter...",
-                                  hintStyle: TextStyle(color: Colors.grey[300]),
-                                  border: InputBorder.none,
-                                  isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                ),
-                                onChanged: (value) {
-                                  _firebaseService.submitPetitBacAnswer(
-                                    widget.gameCode,
-                                    playerId,
-                                    category,
-                                    value,
-                                  );
-                                },
-                              ),
-                            ],
+                          return _PetitBacInputField(
+                            key: ValueKey(
+                              'petit_bac_${category}_$currentLetter',
+                            ),
+                            category: category,
+                            currentLetter: currentLetter,
+                            initialValue: myAnswers[category] ?? '',
+                            onSubmitted: (value) {
+                              _firebaseService.submitPetitBacAnswer(
+                                widget.gameCode,
+                                playerId,
+                                category,
+                                value,
+                              );
+                            },
                           );
                         },
                       ),
@@ -47025,6 +48344,9 @@ class OfflineMenuScreen extends StatelessWidget {
   }
 }
 
+// =============================================================================
+// 1. ACTION OU VÉRITÉ LOCAL (AVEC CONFIGURATION & IA)
+// =============================================================================
 class OfflineTruthOrDareScreen extends StatefulWidget {
   final List<String> players;
   OfflineTruthOrDareScreen({required this.players});
@@ -47041,6 +48363,18 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
   bool _isSpinning = false;
   bool _playerHasToChoose = false;
 
+  // Nouveaux paramètres IA
+  final TextEditingController _aiController = TextEditingController();
+  bool _isAiLoading = false;
+  List<String> _aiTruths = [];
+  List<String> _aiDares = [];
+
+  @override
+  void dispose() {
+    _aiController.dispose();
+    super.dispose();
+  }
+
   void _onWheelStopped(int selectedIndex) {
     setState(() {
       _currentPlayerIndex = selectedIndex;
@@ -47051,10 +48385,18 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
   }
 
   void _generateNewContent(String type) {
-    List<String> contentList =
-        (type == 'truth')
-            ? GameData.offlineTruths[_difficulty]!
-            : GameData.offlineDares[_difficulty]!;
+    List<String> contentList = [];
+    if (type == 'truth') {
+      contentList =
+          _aiTruths.isNotEmpty
+              ? _aiTruths
+              : (GameWords.truths[_difficulty] ?? GameWords.truths['soft']!);
+    } else {
+      contentList =
+          _aiDares.isNotEmpty
+              ? _aiDares
+              : (GameWords.dares[_difficulty] ?? GameWords.dares['soft']!);
+    }
 
     String content = contentList[Random().nextInt(contentList.length)];
 
@@ -47069,9 +48411,12 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
           otherPlayers[Random().nextInt(otherPlayers.length)],
         );
       } else {
-        content = content.replaceAll('{player}', 'toi-mÃƒÂªme');
+        content = content.replaceAll('{player}', 'toi-même');
       }
     }
+
+    int xpGain = (type == 'truth') ? 10 : (_difficulty == 'hardcore' ? 35 : 20);
+    Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
 
     setState(() {
       _currentContent = content;
@@ -47086,10 +48431,10 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Action ou Vérité"),
+        title: const Text("Action ou Vérité"),
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: const Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Action ou Vérité'),
           ),
         ],
@@ -47109,18 +48454,129 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
                 setState(() => _difficulty = newSelection.first);
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 12),
+
+            // Module IA Premium
+            Consumer<PlayerState>(
+              builder: (ctx, ps, _) {
+                if (!ps.isPremium) return const SizedBox.shrink();
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.amberAccent.withOpacity(0.6),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.auto_awesome,
+                            color: Colors.amberAccent,
+                            size: 18,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "Thème IA Personnalisé (Actions & Vérités)",
+                            style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _aiController,
+                        decoration: const InputDecoration(
+                          hintText:
+                              "ex: Soirée pyjama, Secrets de couples, En milieu professionnel...",
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      ElevatedButton.icon(
+                        icon:
+                            _isAiLoading
+                                ? const SizedBox(
+                                  width: 16,
+                                  height: 16,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.white,
+                                  ),
+                                )
+                                : const Icon(Icons.bolt, color: Colors.white),
+                        label: Text(
+                          _isAiLoading
+                              ? "Génération..."
+                              : "Générer les défis par IA",
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amber[800],
+                        ),
+                        onPressed:
+                            _isAiLoading
+                                ? null
+                                : () async {
+                                  if (_aiController.text.trim().isNotEmpty) {
+                                    setState(() => _isAiLoading = true);
+                                    try {
+                                      final generated =
+                                          await FirebaseService.generateAiWords(
+                                            instructions:
+                                                "Génère un mélange d'actions et de vérités. Thème : ${_aiController.text.trim()}",
+                                            count: 30,
+                                            gameType: 'Action ou Vérité',
+                                          );
+                                      if (generated.isNotEmpty) {
+                                        setState(() {
+                                          _aiTruths = generated.sublist(
+                                            0,
+                                            generated.length ~/ 2,
+                                          );
+                                          _aiDares = generated.sublist(
+                                            generated.length ~/ 2,
+                                          );
+                                        });
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          const SnackBar(
+                                            content: Text("Défis IA prêts !"),
+                                            backgroundColor: Colors.green,
+                                          ),
+                                        );
+                                      }
+                                    } finally {
+                                      if (mounted)
+                                        setState(() => _isAiLoading = false);
+                                    }
+                                  }
+                                },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+
             Expanded(
               child: Center(
                 child: AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   child: _buildMainContent(currentPlayer),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildGameControls(),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildPlayerChips(),
           ],
         ),
@@ -47131,14 +48587,14 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
   Widget _buildMainContent(String currentPlayer) {
     if (_isSpinning) {
       return SpinTheWheelWidget(
-        key: ValueKey('wheel'),
+        key: const ValueKey('wheel'),
         players: widget.players,
         onSpinEnd: _onWheelStopped,
       );
     }
     if (_playerHasToChoose) {
       return Card(
-        key: ValueKey('choice'),
+        key: const ValueKey('choice'),
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -47150,7 +48606,7 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
                   color: Colors.deepPurpleAccent,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 "Choisis ton destin...",
                 style: Theme.of(context).textTheme.headlineSmall,
@@ -47178,7 +48634,7 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
                   color: Colors.deepPurpleAccent,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 _currentContent,
                 textAlign: TextAlign.center,
@@ -47199,7 +48655,7 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
   }
 
   Widget _buildGameControls() {
-    if (_isSpinning) return SizedBox(height: 50);
+    if (_isSpinning) return const SizedBox(height: 50);
 
     if (_playerHasToChoose) {
       return Row(
@@ -47207,11 +48663,11 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
         children: [
           ElevatedButton(
             onPressed: () => _generateNewContent('truth'),
-            child: Text("VÃƒÂ©ritÃƒÂ©"),
+            child: const Text("Vérité"),
           ),
           ElevatedButton(
             onPressed: () => _generateNewContent('dare'),
-            child: Text("Action"),
+            child: const Text("Action"),
           ),
         ],
       );
@@ -47234,7 +48690,8 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
         final isCurrent = index == _currentPlayerIndex && !_isSpinning;
         return Chip(
           label: Text(widget.players[index]),
-          backgroundColor: isCurrent ? Colors.deepPurple : Color(0xFF333333),
+          backgroundColor:
+              isCurrent ? Colors.deepPurple : const Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
@@ -47447,11 +48904,29 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
           _activeDilemmaVoterId = widget.players[_dilemmaVoterIndex];
         } else {
           _activeDilemmaVoterId = null;
+          _checkDilemmaXp(); // Déclenche le calcul de l'XP à la fin de tous les votes
         }
       } else {
         _activeDilemmaVoterId = null;
+        // Mode avec roue (1 seul joueur désigné)
+        Provider.of<PlayerState>(context, listen: false).addXp(15);
       }
     });
+  }
+
+  // Vérifie si le choix était majoritaire ou ultra-minoritaire (Esprit libre)
+  void _checkDilemmaXp() {
+    int countA = _dilemmaVotes.values.where((v) => v == 'A').length;
+    int countB = _dilemmaVotes.values.where((v) => v == 'B').length;
+
+    // Si un joueur est le SEUL de son camp (ex: 1 vs 4)
+    bool isUltraMinority = (countA == 1 || countB == 1);
+    int xpGain =
+        isUltraMinority
+            ? 25
+            : 12; // +25 XP Esprit libre, sinon +12 XP Majoritaire
+
+    Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
   }
 
   Widget _buildDilemmaOptionCard({
@@ -47715,11 +49190,14 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
 
     switch (widget.gameType) {
       case 'coin_flip':
-        contentList = GameData.offlineCoinFlipQuestions[_difficulty]!;
+        contentList =
+            GameWords.coinFlipQuestions[_difficulty] ??
+            GameWords.coinFlipQuestions['soft']!;
         _showCoinFlipResult = false;
         break;
       case 'dilemma':
-        contentList = GameData.offlineDilemmas[_difficulty]!;
+        contentList =
+            GameWords.dilemmas[_difficulty] ?? GameWords.dilemmas['soft']!;
         break;
     }
 
@@ -47751,8 +49229,16 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
 
   void _flipCoin() {
     Random random = Random();
+    String result = random.nextBool() ? "Pile" : "Face";
+    bool won = (_coinFlipChoice == result);
+
+    // --- ATTRIBUTION XP LOCAL ---
+    // +10 XP si gagné (bonne intuition), +15 XP si perdu (prime au courage de révéler son secret)
+    int xpGain = won ? 10 : 15;
+    Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
+
     setState(() {
-      _coinFlipResult = random.nextBool() ? "Pile" : "Face";
+      _coinFlipResult = result;
       _showCoinFlipResult = true;
     });
   }
@@ -48308,13 +49794,21 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
     final wordPairs =
         _aiWordPairs.isNotEmpty
             ? _aiWordPairs
-            : (GameData.offlineUndercoverData[_difficulty]?['wordPairs'] ??
-                GameData.offlineUndercoverData['soft']!['wordPairs']!);
+            : (GameWords.undercoverData[_difficulty]?['wordPairs'] ??
+                GameWords.undercoverData['soft']!['wordPairs']!);
     final rawPair = wordPairs[random.nextInt(wordPairs.length)];
-    final pair =
-        rawPair.contains(':') ? rawPair.split(':') : [rawPair, rawPair];
-    _wordCivil = pair[0].trim();
-    _wordUndercover = (pair.length > 1 ? pair[1] : pair[0]).trim();
+    if (rawPair.contains(':')) {
+      final parts = rawPair.split(':');
+      _wordCivil = parts[0].trim();
+      _wordUndercover = parts[1].trim();
+    } else {
+      int idx = wordPairs.indexOf(rawPair);
+      _wordCivil = rawPair.trim();
+      _wordUndercover =
+          (idx + 1 < wordPairs.length)
+              ? wordPairs[idx + 1].trim()
+              : "${rawPair.trim()} (Variante)";
+    }
 
     _playerRoles.clear();
     for (var player in _activePlayers) {
@@ -48742,11 +50236,14 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
   int _secondsLeft = 0;
   final Random _random = Random();
   final _answerController = TextEditingController();
+  final TextEditingController _aiController = TextEditingController();
+  bool _isAiLoading = false;
+  List<String> _aiCategories = [];
 
   int _currentPlayerIndex = 0;
   List<String> _usedAnswers = [];
 
-  String _selectedCategory = GameData.localHotPotatoCategories.keys.first;
+  String _selectedCategory = GameWords.hotPotatoCategories['soft']!.keys.first;
   int _turnDuration = 10;
   bool _useGlobalTimer = false;
   int _globalDuration = 30;
@@ -48755,6 +50252,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
   void dispose() {
     _turnTimer?.cancel();
     _answerController.dispose();
+    _aiController.dispose();
     super.dispose();
   }
 
@@ -48897,7 +50395,14 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
               DropdownButtonFormField<String>(
                 value: _selectedCategory,
                 items:
-                    GameData.localHotPotatoCategories.keys
+                    [
+                          ...GameWords.hotPotatoCategories['soft']!.keys,
+                          ..._aiCategories.where(
+                            (c) =>
+                                !GameWords.hotPotatoCategories['soft']!.keys
+                                    .contains(c),
+                          ),
+                        ]
                         .map(
                           (cat) =>
                               DropdownMenuItem(value: cat, child: Text(cat)),
@@ -48959,6 +50464,104 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                       (s) => setState(() => _globalDuration = s.first),
                 ),
               ],
+
+              Consumer<PlayerState>(
+                builder: (ctx, ps, _) {
+                  if (!ps.isPremium) return const SizedBox.shrink();
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 12),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.amberAccent),
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.amber.withOpacity(0.06),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Icon(
+                              Icons.auto_awesome,
+                              color: Colors.amberAccent,
+                              size: 18,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              "Catégories IA Personnalisées",
+                              style: TextStyle(
+                                color: Colors.amberAccent,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        TextField(
+                          controller: _aiController,
+                          decoration: const InputDecoration(
+                            hintText:
+                                "ex: Marques de luxe, Objets du grenier, Films d'horreur...",
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.amber[800],
+                          ),
+                          onPressed:
+                              _isAiLoading
+                                  ? null
+                                  : () async {
+                                    if (_aiController.text.trim().isNotEmpty) {
+                                      setState(() => _isAiLoading = true);
+                                      try {
+                                        final cats =
+                                            await FirebaseService.generateAiWords(
+                                              instructions:
+                                                  "Génère des catégories amusantes pour la patate chaude. Thème : ${_aiController.text.trim()}",
+                                              count: 20,
+                                              gameType: 'La Patate Chaude',
+                                            );
+                                        if (cats.isNotEmpty) {
+                                          setState(() {
+                                            _aiCategories = cats;
+                                            _selectedCategory = cats.first;
+                                          });
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                "Catégories IA chargées !",
+                                              ),
+                                              backgroundColor: Colors.green,
+                                            ),
+                                          );
+                                        }
+                                      } finally {
+                                        if (mounted)
+                                          setState(() => _isAiLoading = false);
+                                      }
+                                    }
+                                  },
+                          child:
+                              _isAiLoading
+                                  ? const SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                  : const Text("Générer les catégories par IA"),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
 
               SizedBox(height: 20),
               ElevatedButton(onPressed: _startGame, child: Text("Commencer !")),
@@ -49043,8 +50646,8 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
   Widget _buildExplodedScreen() {
     final loser = widget.players[_currentPlayerIndex];
     final gage =
-        GameData.localHotPotatoGages[_random.nextInt(
-          GameData.localHotPotatoGages.length,
+        GameWords.hotPotatoGages[_random.nextInt(
+          GameWords.hotPotatoGages.length,
         )];
     return Column(
       key: ValueKey('exploded'),
@@ -49112,7 +50715,8 @@ class _SynonymOrBannedLocalScreenState
     final words =
         _aiWordPool.isNotEmpty
             ? _aiWordPool
-            : GameData.localSynonymOrBanned[_difficulty]!['words']!;
+            : (GameWords.synonymOrBanned[_difficulty]?['words'] ??
+                GameWords.synonymOrBanned['soft']!['words']!);
     setState(() {
       _currentWord = words[Random().nextInt(words.length)];
       _currentPlayerIndex = 0;
@@ -49444,7 +51048,9 @@ class _WhoIsMostLikelyLocalScreenState
     if (_aiQuestions.isNotEmpty) {
       _currentQuestion = _aiQuestions[Random().nextInt(_aiQuestions.length)];
     } else {
-      final questions = GameData.localWhoIsMostLikely[_difficulty]!;
+      final questions =
+          GameWords.whoIsMostLikely[_difficulty] ??
+          GameWords.whoIsMostLikely['soft']!;
       _currentQuestion = questions[Random().nextInt(questions.length)];
     }
     setState(() {
@@ -50191,7 +51797,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
     List<String> allWords =
         _aiCustomWords.isNotEmpty
             ? (List.from(_aiCustomWords)..shuffle())
-            : (List.from(GameData.codenamesWords)..shuffle());
+            : (List.from(GameWords.codenamesWords)..shuffle());
     _boardWords = allWords.take(25).toList();
 
     _wordKeyMap.clear();
@@ -51762,6 +53368,9 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
     int nextIdx = eligibleIndices[_random.nextInt(eligibleIndices.length)];
     String nextPlayer = widget.players[nextIdx];
 
+    // --- ATTRIBUTION XP LOCAL : +5 XP pour un passage réussi ---
+    Provider.of<PlayerState>(context, listen: false).addXp(5);
+
     setState(() {
       _nextPlayerToPass = nextPlayer;
       _loserIndex = nextIdx;
@@ -51784,12 +53393,15 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
 
   void _triggerQuestion() {
     final questions =
-        GameData.localPassTheObjectQuestions[_difficulty] ??
-        GameData.localPassTheObjectQuestions['soft']!;
+        GameWords.passTheObjectQuestions[_difficulty] ??
+        GameWords.passTheObjectQuestions['soft']!;
 
     // Normalisation de la question pour éviter les caractères corrompus
     String rawQ = questions[_random.nextInt(questions.length)];
     String cleanQ = FirebaseService.sanitizeUserInput(rawQ, maxLength: 150);
+
+    // --- ATTRIBUTION XP LOCAL : +20 XP pour répondre à la question sous pression ---
+    Provider.of<PlayerState>(context, listen: false).addXp(20);
 
     setState(() {
       _currentQuestion = cleanQ;
@@ -51876,7 +53488,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
               DropdownButtonFormField<String>(
                 value: _difficulty,
                 items:
-                    GameData.localPassTheObjectQuestions.keys
+                    GameWords.passTheObjectQuestions.keys
                         .map(
                           (diff) =>
                               DropdownMenuItem(value: diff, child: Text(diff)),
@@ -52129,18 +53741,11 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
       pool = List.from(
         GameWords.devineTeteCategories[_difficulty]![_selectedCategory]!,
       );
-    } else if (GameWords.devineTeteByDifficulty.containsKey(_difficulty)) {
-      pool = List.from(GameWords.devineTeteByDifficulty[_difficulty]!);
     } else {
-      pool = [
-        "Lion",
-        "Tour Eiffel",
-        "Guitare",
-        "Avion",
-        "Pizza",
-        "Chocolat",
-        "Football",
-      ];
+      pool = List.from(
+        GameWords.devineTeteByDifficulty[_difficulty] ??
+            GameWords.devineTeteByDifficulty['soft']!,
+      );
     }
     _deck = pool..shuffle();
   }
@@ -52231,22 +53836,27 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
     HapticFeedback.heavyImpact();
     _roundHistory.add({'word': _currentWord!, 'guessed': guessed});
 
+    if (guessed) {
+      Provider.of<PlayerState>(context, listen: false).addXp(15);
+    }
+
     setState(() {
       _tiltFlash = guessed ? "TROUVÉ !" : "PASSÉ";
     });
 
     _flashTimer?.cancel();
-    _flashTimer = Timer(const Duration(milliseconds: 500), () {
+    _flashTimer = Timer(const Duration(milliseconds: 300), () {
       if (mounted) setState(() => _tiltFlash = null);
     });
 
-    if (_deck.isNotEmpty) {
-      setState(() {
-        _currentWord = _deck.removeAt(0);
-      });
-    } else {
-      _endTurn();
+    // Si le deck est vide avant la fin des 60s, on le recharge immédiatement
+    if (_deck.isEmpty) {
+      _prepareRoundDeck();
     }
+
+    setState(() {
+      _currentWord = _deck.removeAt(0);
+    });
   }
 
   void _stopSensors() {
@@ -52268,6 +53878,11 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
         context,
         listen: false,
       ).recordBadgeEvent('devine_tete_10');
+    }
+
+    // --- BONUS XP LOCAL : +40 XP si ≥ 8 mots trouvés dans la manche ---
+    if (pointsEarned >= 8) {
+      Provider.of<PlayerState>(context, listen: false).addXp(40);
     }
 
     if (_useTeams) {
@@ -53148,6 +54763,9 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
   }
 }
 
+// =============================================================================
+// 2. DOBBLE LOCAL (AVEC ÉCRAN DE CONFIGURATION COMPLET ET CHOIX DE SYMBOLES)
+// =============================================================================
 class DobbleLocalScreen extends StatefulWidget {
   final List<String> players;
   const DobbleLocalScreen({Key? key, required this.players}) : super(key: key);
@@ -53157,6 +54775,10 @@ class DobbleLocalScreen extends StatefulWidget {
 }
 
 class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
+  bool _isConfiguring = true;
+  int _symbolsPerCard = 8; // 6 ou 8
+  int _targetScore = 10;
+
   List<List<String>> _deck = [];
   Map<String, List<String>> _playerCards = {};
   Map<String, int> _playerScores = {};
@@ -53164,14 +54786,8 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
   bool _gameOver = false;
   String? _gameWinner;
 
-  @override
-  void initState() {
-    super.initState();
-    _startNewGame();
-  }
-
   void _startNewGame() {
-    final generatedCardsIndices = GameData.generateDobbleCards(8);
+    final generatedCardsIndices = GameData.generateDobbleCards(_symbolsPerCard);
     List<List<String>> fullDeck =
         generatedCardsIndices.map((cardIndices) {
           return cardIndices
@@ -53198,6 +54814,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
       _centerCard = initialCenterCard;
       _gameOver = initialCenterCard.isEmpty;
       _gameWinner = null;
+      _isConfiguring = false;
     });
   }
 
@@ -53214,23 +54831,17 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
   void _onCorrectGuess(String playerName, List<String> takenCard) {
     if (_gameOver) return;
 
-    if ((_playerScores[playerName] ?? 0) + 1 >= 5) {
-      Provider.of<PlayerState>(
-        context,
-        listen: false,
-      ).recordBadgeEvent('dobble_streak_5', count: 5, targetProgress: 5);
-    }
-
     setState(() {
       HapticFeedback.lightImpact();
-      _playerScores[playerName] = (_playerScores[playerName] ?? 0) + 1;
+      final newScore = (_playerScores[playerName] ?? 0) + 1;
+      _playerScores[playerName] = newScore;
       _playerCards[playerName] = takenCard..shuffle();
 
-      if (_deck.isNotEmpty) {
-        _centerCard = _deck.removeAt(0)..shuffle();
-      } else {
+      if (newScore >= _targetScore || _deck.isEmpty) {
         _gameOver = true;
         _determineWinner();
+      } else {
+        _centerCard = _deck.removeAt(0)..shuffle();
       }
     });
   }
@@ -53250,51 +54861,125 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dobble Local"),
+        title: const Text("Dobble Local"),
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: const Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Dobble'),
           ),
         ],
       ),
-      body: _gameOver ? _buildGameOverUI() : _buildGameUI(),
+      body:
+          _isConfiguring
+              ? _buildConfigUI()
+              : (_gameOver ? _buildGameOverUI() : _buildGameUI()),
+    );
+  }
+
+  Widget _buildConfigUI() {
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Card(
+          color: const Color(0xFF1E1E2E),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Icon(
+                  Icons.remove_red_eye_rounded,
+                  size: 64,
+                  color: Colors.amberAccent,
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  "Paramètres de la partie",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Symboles par carte :",
+                  style: TextStyle(color: Colors.white70),
+                ),
+                const SizedBox(height: 8),
+                SegmentedButton<int>(
+                  segments: const [
+                    ButtonSegment(value: 6, label: Text("6 (Facile)")),
+                    ButtonSegment(value: 8, label: Text("8 (Standard)")),
+                  ],
+                  selected: {_symbolsPerCard},
+                  onSelectionChanged:
+                      (s) => setState(() => _symbolsPerCard = s.first),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  "Score cible : $_targetScore points",
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                Slider(
+                  value: _targetScore.toDouble(),
+                  min: 5,
+                  max: 25,
+                  divisions: 4,
+                  label: "$_targetScore",
+                  onChanged: (v) => setState(() => _targetScore = v.toInt()),
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.play_arrow),
+                  label: const Text("COMMENCER"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurpleAccent,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: _startNewGame,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
   Widget _buildGameUI() {
     final screenWidth = MediaQuery.of(context).size.width;
-    // Radius must fit within the square: radius + card half-height + name text < half container size
     final radius = (screenWidth / 2 - 90).clamp(60.0, 130.0);
 
     return Center(
       child: AspectRatio(
-        aspectRatio: 1.0, // Garde la zone de jeu carrÃƒÂ©e
+        aspectRatio: 1.0,
         child: Stack(
           alignment: Alignment.center,
           children: [
             Draggable<List<String>>(
               data: _centerCard,
-
               feedback: Opacity(
                 opacity: 0.75,
                 child: _buildDobbleCardWidget(_centerCard, isLarge: true),
               ),
-
               childWhenDragging: Opacity(
                 opacity: 0.3,
                 child: _buildDobbleCardWidget(_centerCard, isLarge: true),
               ),
-
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Pioche (${_deck.length + 1})"),
+                  Text("Pioche (${_deck.length + 1}) - But: $_targetScore"),
                   _buildDobbleCardWidget(_centerCard, isLarge: true),
                 ],
               ),
             ),
-
             ...List.generate(widget.players.length, (index) {
               final player = widget.players[index];
               final playerCard = _playerCards[player] ?? [];
@@ -53305,7 +54990,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
 
               return Positioned(
                 left: (screenWidth / 2) + x - 60,
-                top: (screenWidth / 2) + y - 80, // un peu plus haut pour le nom
+                top: (screenWidth / 2) + y - 80,
                 child: DragTarget<List<String>>(
                   builder: (context, candidateData, rejectedData) {
                     return Column(
@@ -53315,17 +55000,15 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
                           "$player (${_playerScores[player]})",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         _buildDobbleCardWidget(playerCard),
                       ],
                     );
                   },
-
                   onWillAccept: (draggedData) {
                     return _findCommonSymbol(playerCard, draggedData ?? []) !=
                         null;
                   },
-
                   onAccept: (draggedData) {
                     _onCorrectGuess(player, draggedData);
                   },
@@ -53347,10 +55030,10 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Partie TerminÃƒÂ©e !",
+                "Partie Terminée !",
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 "Le gagnant est",
                 style: Theme.of(context).textTheme.titleLarge,
@@ -53361,12 +55044,15 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
                   context,
                 ).textTheme.headlineSmall?.copyWith(color: Colors.amberAccent),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ..._playerScores.entries
                   .map((e) => Text("${e.key}: ${e.value} points"))
                   .toList(),
-              SizedBox(height: 30),
-              ElevatedButton(onPressed: _startNewGame, child: Text("Rejouer")),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () => setState(() => _isConfiguring = true),
+                child: const Text("Nouvelle Partie"),
+              ),
             ],
           ),
         ),
@@ -53387,7 +55073,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
           color: Colors.grey[800],
           shape: BoxShape.circle,
         ),
-        child: Center(child: Text("Vide")),
+        child: const Center(child: Text("Vide")),
       );
     }
 
@@ -54487,6 +56173,87 @@ class LoungeListScreen extends StatelessWidget {
   final String playerId;
   LoungeListScreen({required this.playerId});
 
+  void _showJoinPrivateDialog(BuildContext context) {
+    final codeCtrl = TextEditingController();
+    showDialog(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text("Rejoindre un salon privé"),
+            content: TextField(
+              controller: codeCtrl,
+              decoration: const InputDecoration(
+                labelText: "Code du salon (6 chiffres) ou ID",
+                hintText: "Ex: 123456",
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text("Annuler"),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  final input = codeCtrl.text.trim();
+                  if (input.isEmpty) return;
+
+                  String? targetLoungeId;
+
+                  // 1. Recherche par code à 6 chiffres (joinCode)
+                  final querySnap =
+                      await FirebaseFirestore.instance
+                          .collection('lounges')
+                          .where('joinCode', isEqualTo: input)
+                          .limit(1)
+                          .get();
+
+                  if (querySnap.docs.isNotEmpty) {
+                    targetLoungeId = querySnap.docs.first.id;
+                  } else {
+                    // 2. Recherche par Document ID direct
+                    final doc =
+                        await FirebaseFirestore.instance
+                            .collection('lounges')
+                            .doc(input)
+                            .get();
+                    if (doc.exists) {
+                      targetLoungeId = doc.id;
+                    }
+                  }
+
+                  if (targetLoungeId != null) {
+                    Navigator.pop(ctx);
+                    final ps = Provider.of<PlayerState>(context, listen: false);
+                    await FirebaseService().joinLounge(
+                      targetLoungeId,
+                      playerId,
+                      ps.userName ?? 'Joueur',
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (_) => LoungeRoomScreen(
+                              loungeId: targetLoungeId!,
+                              playerId: playerId,
+                            ),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Code de salon introuvable."),
+                      ),
+                    );
+                  }
+                },
+                child: const Text("Rejoindre"),
+              ),
+            ],
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54494,9 +56261,20 @@ class LoungeListScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(
-              "Rejoins un salon pour discuter et lancer des jeux avec d'autres joueurs !",
-              style: TextStyle(color: Colors.white70),
+            child: Row(
+              children: [
+                const Expanded(
+                  child: Text(
+                    "Rejoins un salon public ou entre un code privé :",
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                ),
+                OutlinedButton.icon(
+                  icon: const Icon(Icons.lock_open, size: 16),
+                  label: const Text("Code Privé"),
+                  onPressed: () => _showJoinPrivateDialog(context),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -54509,11 +56287,14 @@ class LoungeListScreen extends StatelessWidget {
                       .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 final lounges = snapshot.data!.docs;
 
-                if (lounges.isEmpty)
-                  return Center(child: Text("Aucun salon public disponible."));
+                if (lounges.isEmpty) {
+                  return const Center(
+                    child: Text("Aucun salon public disponible."),
+                  );
+                }
 
                 return ListView.builder(
                   itemCount: lounges.length,
@@ -54525,25 +56306,26 @@ class LoungeListScreen extends StatelessWidget {
                         players.length >= (data['maxPlayers'] ?? 10);
 
                     return Card(
-                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       color: Colors.blueGrey[900],
                       child: ListTile(
-                        leading: Icon(
+                        leading: const Icon(
                           Icons.living,
                           size: 40,
                           color: Colors.amber,
                         ),
                         title: Text(
                           data['name'] ?? 'Salon',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        subtitle: Text(
-                          "ThÃ¨me : ${data['theme'] ?? 'GÃ©nÃ©ral'}",
-                        ),
+                        subtitle: Text("Thème : ${data['theme'] ?? 'Général'}"),
                         trailing: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.people, size: 16),
+                            const Icon(Icons.people, size: 16),
                             Text(
                               "${players.length} / ${data['maxPlayers'] ?? 10}",
                               style: TextStyle(
@@ -54586,8 +56368,8 @@ class LoungeListScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.add),
-        label: Text("CrÃ©er un Salon"),
+        icon: const Icon(Icons.add),
+        label: const Text("Créer un Salon"),
         onPressed: () {
           Navigator.push(
             context,
@@ -55000,8 +56782,17 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen> {
                         loungeId: widget.loungeId,
                       ),
                 ),
-              ).then((_) {
+              ).then((_) async {
                 _isNavigating = false;
+                // Nettoyer localement la présence dans le pendingGame à la sortie du jeu
+                await FirebaseFirestore.instance
+                    .collection('lounges')
+                    .doc(widget.loungeId)
+                    .update({
+                      'pendingGame.joinedPlayers': FieldValue.arrayRemove([
+                        widget.playerId,
+                      ]),
+                    });
               });
             });
           }

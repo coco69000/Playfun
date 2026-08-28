@@ -157,67 +157,121 @@ void showUserProfileDialog(
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
+                          child: Builder(
+                            builder: (context) {
+                              final int extra = (level ~/ 10) * 100;
+                              final int xpThreshold = 1000 + extra;
+                              final double progress = (xp / xpThreshold).clamp(0.0, 1.0);
+                              String rankTitle = 'Recrue';
+                              Color rankColor = Colors.brown.shade300;
+                              if (level >= 100) {
+                                rankTitle = 'Légende Vivante';
+                                rankColor = Colors.cyanAccent;
+                              } else if (level >= 75) {
+                                rankTitle = 'Grand Maître';
+                                rankColor = Colors.redAccent;
+                              } else if (level >= 50) {
+                                rankTitle = 'Champion';
+                                rankColor = Colors.amberAccent;
+                              } else if (level >= 30) {
+                                rankTitle = 'Stratège';
+                                rankColor = Colors.greenAccent;
+                              } else if (level >= 20) {
+                                rankTitle = 'Aventurier';
+                                rankColor = Colors.blueAccent;
+                              } else if (level >= 10) {
+                                rankTitle = 'Initié';
+                                rankColor = Colors.purpleAccent;
+                              } else if (level >= 5) {
+                                rankTitle = 'Apprenti';
+                                rankColor = Colors.lightBlueAccent;
+                              }
+
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Flexible(
-                                    child: Text(
-                                      name,
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                  Row(
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          name,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
-                                      overflow: TextOverflow.ellipsis,
+                                      if (isPremium) ...[
+                                        const SizedBox(width: 6),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 6,
+                                            vertical: 2,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.amber.withOpacity(0.2),
+                                            borderRadius: BorderRadius.circular(8),
+                                            border: Border.all(
+                                              color: Colors.amber,
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: const Text(
+                                            "VIP",
+                                            style: TextStyle(
+                                              color: Colors.amberAccent,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w900,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Niveau $level • $rankTitle",
+                                        style: TextStyle(
+                                          color: rankColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        "$xp / $xpThreshold XP",
+                                        style: const TextStyle(
+                                          color: Colors.white54,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(4),
+                                    child: LinearProgressIndicator(
+                                      value: progress,
+                                      minHeight: 5,
+                                      backgroundColor: Colors.white12,
+                                      valueColor: AlwaysStoppedAnimation<Color>(rankColor),
                                     ),
                                   ),
-                                  if (isPremium) ...[
-                                    const SizedBox(width: 6),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 6,
-                                        vertical: 2,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.amber.withOpacity(0.2),
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          color: Colors.amber,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: const Text(
-                                        "VIP",
-                                        style: TextStyle(
-                                          color: Colors.amberAccent,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w900,
-                                        ),
-                                      ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    "Badges débloqués : ${unlockedBadges.length} / ${AppBadges.allBadges.length}",
+                                    style: const TextStyle(
+                                      color: Colors.white54,
+                                      fontSize: 12,
                                     ),
-                                  ],
+                                  ),
                                 ],
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                "Niveau $level  •  $xp XP",
-                                style: const TextStyle(
-                                  color: Colors.amberAccent,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 13,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                "Badges débloqués : ${unlockedBadges.length} / ${AppBadges.allBadges.length}",
-                                style: const TextStyle(
-                                  color: Colors.white54,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
+                              );
+                            },
                           ),
                         ),
                       ],

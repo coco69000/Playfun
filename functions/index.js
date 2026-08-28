@@ -729,6 +729,9 @@ exports.generateAiWords = onCall(
     } else if (normalizedGame.includes("petit bac") || normalizedGame.includes("baccalaureat") || normalizedGame.includes("bac")) {
       systemPrompt = "Tu es un générateur de catégories originales pour le jeu du Petit Bac. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} catégories originales et amusantes pour le jeu du Petit Bac. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Objet qui fait du bruit", "Métier dangereux", "Chose qu'on trouve dans un grenier", "Plat réconfortant"]`;
+    } else if (normalizedGame.includes("taboo") || normalizedGame.includes("tabou")) {
+      systemPrompt = "Tu es un générateur de cartes pour le jeu Taboo en français. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères au format \"MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5\".";
+      userPrompt = `Génère exactement ${parsedCount} cartes pour le jeu Taboo en français au format "MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5" (un mot principal à faire deviner, suivi de 5 mots interdits évidents séparés par des virgules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Paris:France,Capitale,Tour Eiffel,Seine,Ville", "Plage:Sable,Mer,Soleil,Vacances,Serviette"]`;
     }
 
     try {

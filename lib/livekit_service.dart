@@ -23,6 +23,7 @@ class LivekitUserInfo {
 
 class LivekitService extends ChangeNotifier {
   Room? _room;
+  String? _currentRoomName;
   bool _isInitialized = false;
   String _localIdentity = '';
   bool _localUserJoined = false;
@@ -193,10 +194,14 @@ class LivekitService extends ChangeNotifier {
     _isLocalMuted = !audioEnabled;
 
     if (_room?.connectionState == ConnectionState.connected) {
-      await _room!.localParticipant?.setCameraEnabled(videoEnabled);
-      await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);
-      notifyListeners();
-      return;
+      if (_currentRoomName == roomName) {
+        await _room!.localParticipant?.setCameraEnabled(videoEnabled);
+        await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);
+        notifyListeners();
+        return;
+      } else {
+        await leaveChannel();
+      }
     }
 
     try {
@@ -226,6 +231,7 @@ class LivekitService extends ChangeNotifier {
 
       await leaveChannel();
       await _room!.connect(livekitUrl, token);
+      _currentRoomName = roomName;
 
       // Récupérer les participants déjà connectés dans la salle
       _remoteUsers.clear();
@@ -255,6 +261,7 @@ class LivekitService extends ChangeNotifier {
     } catch (e) {
       print("Error leaving room: $e");
     }
+    _currentRoomName = null;
     _remoteUsers.clear();
     _localUserJoined = false;
     _localIdentity = '';
