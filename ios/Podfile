@@ -75,6 +75,7 @@ post_install do |installer|
   # Fix: Disable GACRecaptchaProvider in FIRRecaptchaProvider.m
   recaptcha_m = File.join(installer.sandbox.root, 'FirebaseAppCheck', 'FirebaseAppCheck', 'Sources', 'RecaptchaProvider', 'FIRRecaptchaProvider.m')
   if File.exist?(recaptcha_m)
+    File.chmod(0644, recaptcha_m)
     content = File.read(recaptcha_m)
     content.gsub!('#define FIR_RECAPTCHA_PROVIDER_SWIFT_AVAILABLE 1', '#define FIR_RECAPTCHA_PROVIDER_SWIFT_AVAILABLE 0')
     File.write(recaptcha_m, content)

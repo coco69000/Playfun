@@ -64,6 +64,7 @@ jobs:
           # Patch FIRRecaptchaProvider to bypass missing GACRecaptchaProvider
           RECAPTCHA_FILE="Pods/FirebaseAppCheck/FirebaseAppCheck/Sources/RecaptchaProvider/FIRRecaptchaProvider.m"
           if [ -f "$RECAPTCHA_FILE" ]; then
+            chmod +w "$RECAPTCHA_FILE"
             sed -i '' 's/#define FIR_RECAPTCHA_PROVIDER_SWIFT_AVAILABLE 1/#define FIR_RECAPTCHA_PROVIDER_SWIFT_AVAILABLE 0/g' "$RECAPTCHA_FILE" || sed -i 's/#define FIR_RECAPTCHA_PROVIDER_SWIFT_AVAILABLE 1/#define FIR_RECAPTCHA_PROVIDER_SWIFT_AVAILABLE 0/g' "$RECAPTCHA_FILE"
             echo "✅ Patched FIRRecaptchaProvider.m"
           fi
