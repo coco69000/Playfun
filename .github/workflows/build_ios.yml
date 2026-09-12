@@ -48,17 +48,19 @@ jobs:
           rm -rf Pods Podfile.lock .symlinks
           cd ..
 
-      - name: 📦 Récupérer les dépendances
+      - name: 📦 Récupérer les dépendances Flutter
         run: flutter pub get
 
-      - name: 🍫 Installer CocoaPods (Force Device)
+      - name: ⚙️ Préparer la config Flutter
+        run: flutter build ios --release --config-only --no-codesign
+
+      - name: 🍫 Installer CocoaPods (Dernier mot sur la config)
         run: |
           cd ios
           export COCOAPODS_DISABLE_STATS=true
           export SWIFT_PACKAGE_MANAGER_DISABLE=1
           export FLUTTER_DISABLE_SPM=1
           export COCOAPODS_DISABLE_SPM=1
-          pod repo update
           pod install --repo-update
 
           # Patch FIRRecaptchaProvider with clean stub
@@ -72,22 +74,8 @@ jobs:
           '
           cd ..
 
-      - name: 🔨 Compiler pour APPAREIL PHYSIQUE (Pas de simulateur)
+      - name: 🔨 Compiler avec xcodebuild (Sans signature)
         run: |
-          # 1. Configurer le projet Flutter et générer les configurations de build sans chercher de certificat
-          flutter build ios --release --config-only --no-codesign
-
-          # 2. Assurer que le stub FIRRecaptchaProvider est en place
-          ruby -e '
-            f = "ios/Pods/FirebaseAppCheck/FirebaseAppCheck/Sources/RecaptchaProvider/FIRRecaptchaProvider.m"
-            if File.exist?(f)
-              File.chmod(0644, f)
-              File.write(f, "#import \"FirebaseAppCheck/Sources/Public/FirebaseAppCheck/FIRRecaptchaProvider.h\"\n\n@implementation FIRRecaptchaProvider\n+ (BOOL)isSupported { return NO; }\n- (nullable instancetype)initWithApp:(FIRApp *)app siteKey:(NSString *)siteKey { return nil; }\n- (void)getTokenWithCompletion:(void (^)(FIRAppCheckToken *, NSError *))h { if (h) h(nil, [NSError errorWithDomain:@\"FIRRecaptchaProvider\" code:-1 userInfo:nil]); }\n- (void)getLimitedUseTokenWithCompletion:(void (^)(FIRAppCheckToken *, NSError *))h { [self getTokenWithCompletion:h]; }\n@end\n")
-              puts "✅ Patched FIRRecaptchaProvider.m before build"
-            end
-          '
-
-          # 3. Compilation avec xcodebuild sans signature (compatible Sideloadly / AltStore)
           xcodebuild -workspace ios/Runner.xcworkspace \
             -scheme Runner \
             -configuration Release \
@@ -101,7 +89,6 @@ jobs:
             BUILD_DIR=build/ios \
             COMPILER_INDEX_STORE_ENABLE=NO
 
-          # 4. Vérification de la présence de Runner.app
           RUNNER_APP=$(find build/ios -name "Runner.app" | grep -E "Release-iphoneos|iphoneos" | head -n 1)
           if [ -n "$RUNNER_APP" ] && [ -d "$RUNNER_APP" ]; then
             echo "✅ Build Device réussie : $RUNNER_APP"
