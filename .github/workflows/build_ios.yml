@@ -73,15 +73,11 @@ jobs:
           cd ..
 
       - name: 🔨 Compiler pour APPAREIL PHYSIQUE (Pas de simulateur)
-        env:
-          CODE_SIGNING_ALLOWED: "NO"
-          CODE_SIGNING_REQUIRED: "NO"
-          CODE_SIGN_IDENTITY: ""
-          EXPANDED_CODE_SIGN_IDENTITY: ""
-          CODE_SIGN_STYLE: "Manual"
-          DEVELOPMENT_TEAM: ""
         run: |
-          # Assurer que le stub est present meme si flutter re-run pod install
+          # 1. Configurer le projet Flutter et générer les configurations de build
+          flutter build ios --release --config-only
+
+          # 2. Assurer que le stub FIRRecaptchaProvider est en place
           ruby -e '
             f = "ios/Pods/FirebaseAppCheck/FirebaseAppCheck/Sources/RecaptchaProvider/FIRRecaptchaProvider.m"
             if File.exist?(f)
@@ -91,23 +87,35 @@ jobs:
             end
           '
 
-          # --no-codesign génère un .app non signé compatible Sideloadly / AltStore
-          flutter build ios --release --no-codesign
-          
-          # Vérification que c'est bien une build device
-          if [ -d "build/ios/iphoneos/Runner.app" ]; then
-            echo "✅ Build Device réussie"
+          # 3. Compilation avec xcodebuild en signature ad-hoc (-) pour appareil physique (compatible Sideloadly / AltStore)
+          xcodebuild -workspace ios/Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -sdk iphoneos \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=YES \
+            CODE_SIGN_STYLE=Manual \
+            DEVELOPMENT_TEAM="" \
+            BUILD_DIR=build/ios \
+            COMPILER_INDEX_STORE_ENABLE=NO
+
+          # 4. Vérification de la présence de Runner.app
+          RUNNER_APP=$(find build/ios -name "Runner.app" | grep -E "Release-iphoneos|iphoneos" | head -n 1)
+          if [ -n "$RUNNER_APP" ] && [ -d "$RUNNER_APP" ]; then
+            echo "✅ Build Device réussie : $RUNNER_APP"
+            echo "RUNNER_APP_PATH=$RUNNER_APP" >> $GITHUB_ENV
           else
-            echo "❌ Erreur : Build introuvable dans build/ios/iphoneos/"
-            ls -la build/ios/
+            echo "❌ Erreur : Runner.app introuvable dans build/ios/"
+            find build/ios -maxdepth 4
             exit 1
           fi
 
       - name: 📦 Créer le fichier .IPA
         run: |
           mkdir -p build/ipa/Payload
-          # Copier depuis le dossier device (iphoneos), pas iphonesimulator
-          cp -r build/ios/iphoneos/Runner.app build/ipa/Payload/
+          cp -r "$RUNNER_APP_PATH" build/ipa/Payload/Runner.app
           cd build/ipa
           zip -r Playfun_unsigned.ipa Payload/
           cd ../..
