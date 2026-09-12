@@ -74,8 +74,8 @@ jobs:
 
       - name: 🔨 Compiler pour APPAREIL PHYSIQUE (Pas de simulateur)
         run: |
-          # 1. Configurer le projet Flutter et générer les configurations de build
-          flutter build ios --release --config-only
+          # 1. Configurer le projet Flutter et générer les configurations de build sans chercher de certificat
+          flutter build ios --release --config-only --no-codesign
 
           # 2. Assurer que le stub FIRRecaptchaProvider est en place
           ruby -e '
