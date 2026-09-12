@@ -73,6 +73,13 @@ jobs:
           cd ..
 
       - name: 🔨 Compiler pour APPAREIL PHYSIQUE (Pas de simulateur)
+        env:
+          CODE_SIGNING_ALLOWED: "NO"
+          CODE_SIGNING_REQUIRED: "NO"
+          CODE_SIGN_IDENTITY: ""
+          EXPANDED_CODE_SIGN_IDENTITY: ""
+          CODE_SIGN_STYLE: "Manual"
+          DEVELOPMENT_TEAM: ""
         run: |
           # Assurer que le stub est present meme si flutter re-run pod install
           ruby -e '
