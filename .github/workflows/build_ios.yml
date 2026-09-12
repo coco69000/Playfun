@@ -22,7 +22,7 @@ jobs:
 
       - name: 🛠️ Activer Xcode 16
         run: |
-          DEVELOPER_DIR=$(find /Applications -maxdepth 1 -name "Xcode_16*.app" | sort -V | tail -n 1)/Contents/Developer
+          DEVELOPER_DIR=$(find /Applications -maxdepth 1 -name "Xcode*16*.app" | sort -V | tail -n 1)/Contents/Developer
           if [ -d "$DEVELOPER_DIR" ]; then
             echo "✅ Utilisation de : $DEVELOPER_DIR"
             sudo xcode-select -s "$DEVELOPER_DIR"

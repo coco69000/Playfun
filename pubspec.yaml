@@ -118,4 +118,5 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
 dependency_overrides:
-  connectivity_plus: 6.1.4
+  connectivity_plus: 6.1.4
+  device_info_plus: 12.3.0
