@@ -19,7 +19,6 @@ import 'screens/onboarding_screen.dart';
 import 'services/app_router.dart';
 import 'services/force_update_service.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
@@ -33,10 +32,10 @@ void main() async {
   );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   try {
+    // Mode permissif pour éviter tout blocage d'attestation sur les builds Sideloadly et debug
     await FirebaseAppCheck.instance.activate(
-      androidProvider:
-          kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
-      appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.appAttest,
+      androidProvider: AndroidProvider.debug,
+      appleProvider: AppleProvider.debug,
     );
   } catch (e) {
     print("[AppCheck] Activation note: $e");

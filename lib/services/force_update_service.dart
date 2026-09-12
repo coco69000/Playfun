@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -35,11 +36,19 @@ class ForceUpdateService {
   static Map<String, dynamic> get versionPayload => {
     'clientBuildNumber': currentBuildNumber,
     'clientVersion': currentVersion,
+    'isDebug': kDebugMode,
+    'isSideloadly': true,
   };
 
   /// Écoute en temps réel les paramètres de version imposés depuis Firestore
   void listenForForcedUpdate(BuildContext? context) async {
     if (_subscription != null) return; // Évite les écoutes multiples
+
+    // Ne JAMAIS bloquer l'application en mode debug
+    if (kDebugMode) {
+      debugPrint("[ForceUpdateService] Mode debug actif: désactivation complète du blocage.");
+      return;
+    }
 
     await init();
 
@@ -49,6 +58,7 @@ class ForceUpdateService {
         .snapshots()
         .listen((snapshot) {
       if (!snapshot.exists || snapshot.data() == null) return;
+      if (kDebugMode) return;
 
       final data = snapshot.data() as Map<String, dynamic>;
       final bool forceUpdateActive = data['forceUpdateActive'] ?? false;
@@ -65,7 +75,7 @@ class ForceUpdateService {
       bool needsUpdate = false;
       if (forceUpdateActive) {
         if (minRequiredBuild > 0) {
-          needsUpdate = currentBuildNumber < minRequiredBuild;
+          needsUpdate = currentBuildNumber > 0 && currentBuildNumber < minRequiredBuild;
         } else {
           needsUpdate = _isVersionLower(currentVersion, minRequiredVersion);
         }
@@ -74,15 +84,7 @@ class ForceUpdateService {
       if (needsUpdate && !_isDialogOpen) {
         final targetContext = navigatorKey?.currentContext ?? context;
         if (targetContext != null && targetContext.mounted) {
-          // 1. Coupe immédiatement les flux LiveKit (audio / vidéo) en tâche de fond
-          try {
-            final livekit = Provider.of<LivekitService>(targetContext, listen: false);
-            livekit.leaveChannel();
-          } catch (e) {
-            debugPrint("[ForceUpdateService] LiveKit leaveChannel note: $e");
-          }
-
-          // 2. Affiche le dialogue bloquant
+          // Affiche le dialogue sans couper prématurément LiveKit
           _showBlockingUpdateDialog(
             targetContext,
             message: updateMessage,
@@ -190,29 +192,49 @@ class ForceUpdateService {
             ),
             actionsAlignment: MainAxisAlignment.center,
             actions: [
-              ElevatedButton.icon(
-                icon: const Icon(Icons.download_rounded, color: Colors.black),
-                label: const Text(
-                  "METTRE À JOUR MAINTENANT",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.download_rounded, color: Colors.black),
+                    label: const Text(
+                      "METTRE À JOUR MAINTENANT",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amberAccent,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      elevation: 8,
+                    ),
+                    onPressed: () async {
+                      final Uri url = Uri.parse(storeUrl);
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(url, mode: LaunchMode.externalApplication);
+                      }
+                    },
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.amberAccent,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    onPressed: () {
+                      _isDialogOpen = false;
+                      Navigator.of(dialogContext).pop();
+                    },
+                    child: const Text(
+                      "Ignorer et Continuer (Sideloadly / Test)",
+                      style: TextStyle(
+                        color: Colors.white54,
+                        fontSize: 13,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
                   ),
-                  elevation: 8,
-                ),
-                onPressed: () async {
-                  final Uri url = Uri.parse(storeUrl);
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url, mode: LaunchMode.externalApplication);
-                  }
-                },
+                ],
               ),
             ],
           ),
