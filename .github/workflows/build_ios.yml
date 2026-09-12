@@ -10,6 +10,7 @@ jobs:
     runs-on: macos-14
     timeout-minutes: 45
     env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
       COCOAPODS_DISABLE_STATS: 'true'
       SWIFT_PACKAGE_MANAGER_DISABLE: '1'
       FLUTTER_DISABLE_SPM: '1'
