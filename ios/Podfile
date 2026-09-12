@@ -72,12 +72,35 @@ post_install do |installer|
     end
   end
 
-  # Fix: Disable GACRecaptchaProvider in FIRRecaptchaProvider.m
+  # Fix: Replace FIRRecaptchaProvider.m with clean stub to avoid missing GACRecaptchaProvider Swift symbol
   recaptcha_m = File.join(installer.sandbox.root, 'FirebaseAppCheck', 'FirebaseAppCheck', 'Sources', 'RecaptchaProvider', 'FIRRecaptchaProvider.m')
   if File.exist?(recaptcha_m)
     File.chmod(0644, recaptcha_m)
-    content = File.read(recaptcha_m)
-    content.gsub!('#define FIR_RECAPTCHA_PROVIDER_SWIFT_AVAILABLE 1', '#define FIR_RECAPTCHA_PROVIDER_SWIFT_AVAILABLE 0')
-    File.write(recaptcha_m, content)
+    File.write(recaptcha_m, <<~OBJC
+      #import "FirebaseAppCheck/Sources/Public/FirebaseAppCheck/FIRRecaptchaProvider.h"
+
+      @implementation FIRRecaptchaProvider
+
+      + (BOOL)isSupported {
+        return NO;
+      }
+
+      - (nullable instancetype)initWithApp:(FIRApp *)app siteKey:(NSString *)siteKey {
+        return nil;
+      }
+
+      - (void)getTokenWithCompletion:(void (^)(FIRAppCheckToken *_Nullable token, NSError *_Nullable error))handler {
+        if (handler) {
+          handler(nil, [NSError errorWithDomain:@"FIRRecaptchaProvider" code:-1 userInfo:nil]);
+        }
+      }
+
+      - (void)getLimitedUseTokenWithCompletion:(void (^)(FIRAppCheckToken *_Nullable token, NSError *_Nullable error))handler {
+        [self getTokenWithCompletion:handler];
+      }
+
+      @end
+    OBJC
+    )
   end
 end
