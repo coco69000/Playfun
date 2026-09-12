@@ -32,6 +32,10 @@ target 'Runner' do
   target 'RunnerTests' do
     inherit! :search_paths
   end
+
+  pod 'gRPC-Core', :modular_headers => false
+  pod 'gRPC-C++', :modular_headers => false
+  pod 'BoringSSL-GRPC', :modular_headers => false
 end
 
 post_install do |installer|
@@ -48,6 +52,21 @@ post_install do |installer|
         'PERMISSION_MICROPHONE=1',
         'PERMISSION_PHOTOS=1',
       ]
+    end
+  end
+
+  # Fix: Ensure gRPC-Core.modulemap exists in Private/Public headers for Clang
+  grpc_source = File.join(installer.sandbox.root, 'Target Support Files', 'gRPC-Core', 'gRPC-Core.modulemap')
+  [
+    File.join(installer.sandbox.root, 'Headers', 'Private', 'grpc'),
+    File.join(installer.sandbox.root, 'Headers', 'Public', 'grpc')
+  ].each do |dir|
+    FileUtils.mkdir_p(dir)
+    target_file = File.join(dir, 'gRPC-Core.modulemap')
+    if File.exist?(grpc_source)
+      FileUtils.cp_r(grpc_source, target_file)
+    else
+      File.write(target_file, "module \"gRPC-Core\" {\n  export *\n}\n")
     end
   end
 end
