@@ -87,7 +87,8 @@ jobs:
             CODE_SIGN_STYLE=Manual \
             DEVELOPMENT_TEAM="" \
             BUILD_DIR=build/ios \
-            COMPILER_INDEX_STORE_ENABLE=NO
+            COMPILER_INDEX_STORE_ENABLE=NO \
+            -quiet
 
           RUNNER_APP=$(find build/ios -name "Runner.app" | grep -E "Release-iphoneos|iphoneos" | head -n 1)
           if [ -n "$RUNNER_APP" ] && [ -d "$RUNNER_APP" ]; then
