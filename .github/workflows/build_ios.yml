@@ -1,0 +1,92 @@
+name: Build Playfun iOS (Unsigned for Sideloadly)
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-14
+    timeout-minutes: 45
+    env:
+      COCOAPODS_DISABLE_STATS: 'true'
+      SWIFT_PACKAGE_MANAGER_DISABLE: '1'
+      FLUTTER_DISABLE_SPM: '1'
+      COCOAPODS_DISABLE_SPM: '1'
+
+    steps:
+      - name: 📥 Cloner le dépôt
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Activer Xcode 16
+        run: |
+          DEVELOPER_DIR=$(find /Applications -maxdepth 1 -name "Xcode_16*.app" | sort -V | tail -n 1)/Contents/Developer
+          if [ -d "$DEVELOPER_DIR" ]; then
+            echo "✅ Utilisation de : $DEVELOPER_DIR"
+            sudo xcode-select -s "$DEVELOPER_DIR"
+          else
+            echo "ℹ️ Xcode 16 non trouvé spécifiquement, utilisation de la version par défaut :"
+          fi
+          xcodebuild -version
+
+      - name: 🐦 Installer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: ⚙️ Désactiver Swift Package Manager
+        run: flutter config --no-enable-swift-package-manager
+
+      - name: 🧹 Nettoyage Complet (Critical)
+        run: |
+          flutter clean
+          rm -rf ~/Library/Developer/Xcode/DerivedData/*
+          cd ios
+          rm -rf Pods Podfile.lock .symlinks
+          cd ..
+
+      - name: 📦 Récupérer les dépendances
+        run: flutter pub get
+
+      - name: 🍫 Installer CocoaPods (Force Device)
+        run: |
+          cd ios
+          export COCOAPODS_DISABLE_STATS=true
+          export SWIFT_PACKAGE_MANAGER_DISABLE=1
+          export FLUTTER_DISABLE_SPM=1
+          export COCOAPODS_DISABLE_SPM=1
+          pod repo update
+          pod install --repo-update
+          cd ..
+
+      - name: 🔨 Compiler pour APPAREIL PHYSIQUE (Pas de simulateur)
+        run: |
+          # --no-codesign génère un .app non signé compatible Sideloadly / AltStore
+          flutter build ios --release --no-codesign
+          
+          # Vérification que c'est bien une build device
+          if [ -d "build/ios/iphoneos/Runner.app" ]; then
+            echo "✅ Build Device réussie"
+          else
+            echo "❌ Erreur : Build introuvable dans build/ios/iphoneos/"
+            ls -la build/ios/
+            exit 1
+          fi
+
+      - name: 📦 Créer le fichier .IPA
+        run: |
+          mkdir -p build/ipa/Payload
+          # Copier depuis le dossier device (iphoneos), pas iphonesimulator
+          cp -r build/ios/iphoneos/Runner.app build/ipa/Payload/
+          cd build/ipa
+          zip -r Playfun_unsigned.ipa Payload/
+          cd ../..
+
+      - name: 🚀 Télécharger l'IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Playfun-iOS-IPA
+          path: build/ipa/Playfun_unsigned.ipa
+          retention-days: 7

@@ -47907,7 +47907,7 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
           );
         },
       );
-      return; // On arrÃƒÂªte ici, le dialog s'occupe du reste
+      return; // On arrête ici, le dialog s'occupe du reste
     }
 
     // Assignation des jeux classiques
@@ -47915,7 +47915,6 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
       case 'Qui Pourrait le Plus ?':
         screen = WhoIsMostLikelyLocalScreen(players: _players);
         break;
-      case 'Infiltré & Mr. White':
       case 'Infiltré & Mr. White':
       case 'Undercover Local':
         screen = UndercoverLocalGameScreen(players: _players);
@@ -47927,13 +47926,13 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
         screen = SynonymOrBannedLocalScreen(players: _players);
         break;
       case 'Action ou Vérité':
-        screen = OfflineTruthOrDareScreen(players: _players);
+        screen = TruthOrDareLocalSetupScreen(players: _players);
         break;
       case 'Jeu de la Pièce':
-        screen = OfflineGameScreen(gameType: 'coin_flip', players: _players);
+        screen = CoinFlipLocalSetupScreen(players: _players);
         break;
       case 'Le Dilemme':
-        screen = OfflineGameScreen(gameType: 'dilemma', players: _players);
+        screen = DilemmaLocalSetupScreen(players: _players);
         break;
       case 'On se passe un objet rapidement':
         screen = PassTheObjectGameScreen(players: _players);
@@ -48031,30 +48030,30 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
         teamB.length >= widget.minPlayersPerTeam;
 
     return AlertDialog(
-      title: Text("Ãƒâ€°quipes pour ${widget.gameName}"),
+      title: Text("Équipes pour ${widget.gameName}"),
       content: Container(
         width: double.maxFinite,
         height: 400,
         child: Column(
           children: [
             ElevatedButton.icon(
-              icon: Icon(Icons.sync),
-              label: Text("Ãƒâ€°quilibrer AlÃƒÂ©atoirement"),
+              icon: const Icon(Icons.sync),
+              label: const Text("Équilibrer Aléatoirement"),
               onPressed: _autoBalance,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTeamColumn(
-                    "Ãƒâ€°quipe A (Rouge)",
+                    "Équipe A (Rouge)",
                     teamA,
                     'A',
                     Colors.redAccent,
                   ),
                   _buildTeamColumn(
-                    "Ãƒâ€°quipe B (Bleue)",
+                    "Équipe B (Bleue)",
                     teamB,
                     'B',
                     Colors.blueAccent,
@@ -48062,8 +48061,8 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
                 ],
               ),
             ),
-            Divider(),
-            Text("Joueurs non assignÃƒÂ©s"),
+            const Divider(),
+            const Text("Joueurs non assignés"),
             Expanded(
               child: SingleChildScrollView(
                 child: Wrap(
@@ -48092,7 +48091,7 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text("Annuler"),
+          child: const Text("Annuler"),
         ),
         ElevatedButton(
           onPressed:
@@ -48107,7 +48106,7 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
                     );
                   }
                   : null,
-          child: Text("Confirmer & Lancer"),
+          child: const Text("Confirmer & Lancer"),
         ),
       ],
     );
@@ -48134,7 +48133,7 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
                         (p) => ListTile(
                           title: Text(p),
                           trailing: IconButton(
-                            icon: Icon(Icons.undo, size: 18),
+                            icon: const Icon(Icons.undo, size: 18),
                             onPressed: () => _unassignPlayer(p),
                           ),
                         ),
@@ -48156,9 +48155,9 @@ class OfflineMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Choisir un Jeu Local")),
+      appBar: AppBar(title: const Text("Choisir un Jeu Local")),
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         children: [
           _buildGameCard(
             context,
@@ -48171,7 +48170,7 @@ class OfflineMenuScreen extends StatelessWidget {
           _buildGameCard(
             context,
             "Infiltré & Mr. White",
-            "DÃƒÂ©masquez l'InfiltrÃƒÂ© et Mr. White !",
+            "Démasquez l'Infiltré et Mr. White !",
             Icons.visibility_off,
             UndercoverLocalGameScreen(players: players),
             minPlayers: 3,
@@ -48179,7 +48178,7 @@ class OfflineMenuScreen extends StatelessWidget {
           _buildGameCard(
             context,
             "La Patate Chaude",
-            "Passe le tÃƒÂ©lÃƒÂ©phone avant qu'il n'explose !",
+            "Passe le téléphone avant qu'il n'explose !",
             Icons.timer,
             HotPotatoLocalScreen(players: players),
             minPlayers: 2,
@@ -48195,31 +48194,31 @@ class OfflineMenuScreen extends StatelessWidget {
           _buildGameCard(
             context,
             "Action ou Vérité",
-            "Le classique, mais c'est vous qui choisissez !",
+            "Le classique, avec choix et IA personnalisée !",
             Icons.sync_problem,
-            OfflineTruthOrDareScreen(players: players),
+            TruthOrDareLocalSetupScreen(players: players),
             minPlayers: 2,
           ),
           _buildGameCard(
             context,
             "Jeu de la Pièce",
-            "RÃƒÂ©pondez ÃƒÂ  la question... si vous perdez !",
+            "Répondez à la question secrète... si vous perdez !",
             Icons.monetization_on,
-            OfflineGameScreen(gameType: 'coin_flip', players: players),
+            CoinFlipLocalSetupScreen(players: players),
             minPlayers: 2,
           ),
           _buildGameCard(
             context,
             "Le Dilemme",
-            "Faites des choix impossibles.",
+            "Faites des choix impossibles avec options IA et votes.",
             Icons.compare_arrows,
-            OfflineGameScreen(gameType: 'dilemma', players: players),
+            DilemmaLocalSetupScreen(players: players),
             minPlayers: 2,
           ),
           _buildGameCard(
             context,
             "Codenames",
-            "Retrouvez vos mots secrets par ÃƒÂ©quipes !",
+            "Retrouvez vos mots secrets par équipes !",
             Icons.vpn_key,
             CodenamesLocalGameScreen(players: players),
             minPlayers: 4,
@@ -48235,7 +48234,7 @@ class OfflineMenuScreen extends StatelessWidget {
           _buildGameCard(
             context,
             "On se passe un objet rapidement",
-            "Une question drÃƒÂ´le pour la personne qui aura l'objet !",
+            "Une question drôle pour la personne qui aura l'objet !",
             Icons.phone_android,
             PassTheObjectGameScreen(players: players),
             minPlayers: 2,
@@ -48248,11 +48247,10 @@ class OfflineMenuScreen extends StatelessWidget {
             GuessTheWordLocalScreen(players: players),
             minPlayers: 2,
           ),
-
           _buildGameCard(
             context,
             "Dobble",
-            "RepÃƒÂ©rez le symbole commun le plus vite !",
+            "Repérez le symbole commun le plus vite !",
             Icons.remove_red_eye_outlined,
             DobbleLocalScreen(players: players),
             minPlayers: 2,
@@ -48345,25 +48343,21 @@ class OfflineMenuScreen extends StatelessWidget {
 }
 
 // =============================================================================
-// 1. ACTION OU VÉRITÉ LOCAL (AVEC CONFIGURATION & IA)
+// 1. ACTION OU VÉRITÉ LOCAL (SETUP & GAMEPLAY SÉPARÉS AVEC IA)
 // =============================================================================
-class OfflineTruthOrDareScreen extends StatefulWidget {
+class TruthOrDareLocalSetupScreen extends StatefulWidget {
   final List<String> players;
-  OfflineTruthOrDareScreen({required this.players});
+  const TruthOrDareLocalSetupScreen({Key? key, required this.players})
+    : super(key: key);
 
   @override
-  _OfflineTruthOrDareScreenState createState() =>
-      _OfflineTruthOrDareScreenState();
+  State<TruthOrDareLocalSetupScreen> createState() =>
+      _TruthOrDareLocalSetupScreenState();
 }
 
-class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
+class _TruthOrDareLocalSetupScreenState
+    extends State<TruthOrDareLocalSetupScreen> {
   String _difficulty = 'soft';
-  String _currentContent = "";
-  int _currentPlayerIndex = -1;
-  bool _isSpinning = false;
-  bool _playerHasToChoose = false;
-
-  // Nouveaux paramètres IA
   final TextEditingController _aiController = TextEditingController();
   bool _isAiLoading = false;
   List<String> _aiTruths = [];
@@ -48373,6 +48367,272 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
   void dispose() {
     _aiController.dispose();
     super.dispose();
+  }
+
+  void _launchGame() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder:
+            (_) => TruthOrDareLocalGameScreen(
+              players: widget.players,
+              difficulty: _difficulty,
+              customTruths: _aiTruths,
+              customDares: _aiDares,
+            ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Paramètres : Action ou Vérité"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => showGameRules(context, 'Action ou Vérité'),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.deepPurple.withOpacity(0.15),
+                ),
+                child: const Icon(
+                  Icons.sync_problem,
+                  size: 54,
+                  color: Colors.deepPurpleAccent,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              "Paramètres de la partie",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+
+            const Text(
+              "1. Intensité des défis",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white70,
+              ),
+            ),
+            const SizedBox(height: 8),
+            SegmentedButton<String>(
+              segments: const [
+                ButtonSegment(value: 'soft', label: Text('Soft')),
+                ButtonSegment(value: 'hard', label: Text('Hard')),
+                ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
+              ],
+              selected: {_difficulty},
+              onSelectionChanged: (s) => setState(() => _difficulty = s.first),
+            ),
+            const SizedBox(height: 20),
+
+            // IA Génératrice
+            Consumer<PlayerState>(
+              builder: (ctx, ps, _) {
+                if (!ps.isPremium) return const SizedBox.shrink();
+                return Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E1E2E),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Colors.amberAccent.withOpacity(0.5),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.auto_awesome,
+                            color: Colors.amberAccent,
+                            size: 20,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "Génération IA personnalisée",
+                            style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      TextField(
+                        controller: _aiController,
+                        decoration: InputDecoration(
+                          hintText:
+                              "ex: Soirée pyjama, Secrets de couples, Anecdotes au travail...",
+                          hintStyle: const TextStyle(color: Colors.white38),
+                          filled: true,
+                          fillColor: Colors.black.withOpacity(0.3),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton.icon(
+                        icon:
+                            _isAiLoading
+                                ? const SizedBox(
+                                  width: 14,
+                                  height: 14,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.black,
+                                  ),
+                                )
+                                : const Icon(Icons.bolt, color: Colors.black),
+                        label: Text(
+                          _isAiLoading
+                              ? "Génération..."
+                              : "Générer les défis par IA",
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amberAccent,
+                          foregroundColor: Colors.black,
+                        ),
+                        onPressed:
+                            _isAiLoading
+                                ? null
+                                : () async {
+                                  if (_aiController.text.trim().isNotEmpty) {
+                                    setState(() => _isAiLoading = true);
+                                    try {
+                                      final res =
+                                          await FirebaseService.generateAiWords(
+                                            instructions:
+                                                "Génère un mélange d'actions et de vérités divertissantes. Thème : ${_aiController.text.trim()}",
+                                            count: 30,
+                                            gameType: 'Action ou Vérité',
+                                          );
+                                      if (res.isNotEmpty) {
+                                        setState(() {
+                                          _aiTruths = res.sublist(
+                                            0,
+                                            res.length ~/ 2,
+                                          );
+                                          _aiDares = res.sublist(
+                                            res.length ~/ 2,
+                                          );
+                                        });
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              "✨ ${res.length} défis IA générés !",
+                                            ),
+                                            backgroundColor: Colors.green[800],
+                                          ),
+                                        );
+                                      }
+                                    } finally {
+                                      if (mounted) {
+                                        setState(() => _isAiLoading = false);
+                                      }
+                                    }
+                                  }
+                                },
+                      ),
+                      if (_aiTruths.isNotEmpty || _aiDares.isNotEmpty) ...[
+                        const SizedBox(height: 6),
+                        Text(
+                          "✅ ${_aiTruths.length + _aiDares.length} défis prêts !",
+                          style: const TextStyle(
+                            color: Colors.greenAccent,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+
+            ElevatedButton.icon(
+              icon: const Icon(Icons.play_arrow_rounded, size: 28),
+              label: const Text(
+                "COMMENCER LA PARTIE",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              onPressed: _launchGame,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TruthOrDareLocalGameScreen extends StatefulWidget {
+  final List<String> players;
+  final String difficulty;
+  final List<String> customTruths;
+  final List<String> customDares;
+
+  const TruthOrDareLocalGameScreen({
+    Key? key,
+    required this.players,
+    this.difficulty = 'soft',
+    this.customTruths = const [],
+    this.customDares = const [],
+  }) : super(key: key);
+
+  @override
+  State<TruthOrDareLocalGameScreen> createState() =>
+      _TruthOrDareLocalGameScreenState();
+}
+
+class _TruthOrDareLocalGameScreenState
+    extends State<TruthOrDareLocalGameScreen> {
+  late String _difficulty;
+  String _currentContent = "";
+  int _currentPlayerIndex = -1;
+  bool _isSpinning = false;
+  bool _playerHasToChoose = false;
+  final Map<String, int> _scores = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _difficulty = widget.difficulty;
+    for (var p in widget.players) {
+      _scores[p] = 0;
+    }
   }
 
   void _onWheelStopped(int selectedIndex) {
@@ -48388,13 +48648,13 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
     List<String> contentList = [];
     if (type == 'truth') {
       contentList =
-          _aiTruths.isNotEmpty
-              ? _aiTruths
+          widget.customTruths.isNotEmpty
+              ? widget.customTruths
               : (GameWords.truths[_difficulty] ?? GameWords.truths['soft']!);
     } else {
       contentList =
-          _aiDares.isNotEmpty
-              ? _aiDares
+          widget.customDares.isNotEmpty
+              ? widget.customDares
               : (GameWords.dares[_difficulty] ?? GameWords.dares['soft']!);
     }
 
@@ -48402,7 +48662,8 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
 
     if (content.contains('{player}')) {
       List<String> otherPlayers = List.from(widget.players);
-      if (_currentPlayerIndex != -1) {
+      if (_currentPlayerIndex != -1 &&
+          _currentPlayerIndex < otherPlayers.length) {
         otherPlayers.removeAt(_currentPlayerIndex);
       }
       if (otherPlayers.isNotEmpty) {
@@ -48418,6 +48679,12 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
     int xpGain = (type == 'truth') ? 10 : (_difficulty == 'hardcore' ? 35 : 20);
     Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
 
+    if (_currentPlayerIndex != -1 &&
+        _currentPlayerIndex < widget.players.length) {
+      final p = widget.players[_currentPlayerIndex];
+      _scores[p] = (_scores[p] ?? 0) + (type == 'truth' ? 1 : 2);
+    }
+
     setState(() {
       _currentContent = content;
       _playerHasToChoose = false;
@@ -48427,7 +48694,10 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
   @override
   Widget build(BuildContext context) {
     final currentPlayer =
-        _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
+        (_currentPlayerIndex >= 0 &&
+                _currentPlayerIndex < widget.players.length)
+            ? widget.players[_currentPlayerIndex]
+            : "";
 
     return Scaffold(
       appBar: AppBar(
@@ -48443,129 +48713,6 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SegmentedButton<String>(
-              segments: const [
-                ButtonSegment(value: 'soft', label: Text('Soft')),
-                ButtonSegment(value: 'hard', label: Text('Hard')),
-                ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
-              ],
-              selected: {_difficulty},
-              onSelectionChanged: (newSelection) {
-                setState(() => _difficulty = newSelection.first);
-              },
-            ),
-            const SizedBox(height: 12),
-
-            // Module IA Premium
-            Consumer<PlayerState>(
-              builder: (ctx, ps, _) {
-                if (!ps.isPremium) return const SizedBox.shrink();
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.amber.withOpacity(0.08),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Colors.amberAccent.withOpacity(0.6),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Row(
-                        children: [
-                          Icon(
-                            Icons.auto_awesome,
-                            color: Colors.amberAccent,
-                            size: 18,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            "Thème IA Personnalisé (Actions & Vérités)",
-                            style: TextStyle(
-                              color: Colors.amberAccent,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      TextField(
-                        controller: _aiController,
-                        decoration: const InputDecoration(
-                          hintText:
-                              "ex: Soirée pyjama, Secrets de couples, En milieu professionnel...",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      ElevatedButton.icon(
-                        icon:
-                            _isAiLoading
-                                ? const SizedBox(
-                                  width: 16,
-                                  height: 16,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: Colors.white,
-                                  ),
-                                )
-                                : const Icon(Icons.bolt, color: Colors.white),
-                        label: Text(
-                          _isAiLoading
-                              ? "Génération..."
-                              : "Générer les défis par IA",
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.amber[800],
-                        ),
-                        onPressed:
-                            _isAiLoading
-                                ? null
-                                : () async {
-                                  if (_aiController.text.trim().isNotEmpty) {
-                                    setState(() => _isAiLoading = true);
-                                    try {
-                                      final generated =
-                                          await FirebaseService.generateAiWords(
-                                            instructions:
-                                                "Génère un mélange d'actions et de vérités. Thème : ${_aiController.text.trim()}",
-                                            count: 30,
-                                            gameType: 'Action ou Vérité',
-                                          );
-                                      if (generated.isNotEmpty) {
-                                        setState(() {
-                                          _aiTruths = generated.sublist(
-                                            0,
-                                            generated.length ~/ 2,
-                                          );
-                                          _aiDares = generated.sublist(
-                                            generated.length ~/ 2,
-                                          );
-                                        });
-                                        ScaffoldMessenger.of(
-                                          context,
-                                        ).showSnackBar(
-                                          const SnackBar(
-                                            content: Text("Défis IA prêts !"),
-                                            backgroundColor: Colors.green,
-                                          ),
-                                        );
-                                      }
-                                    } finally {
-                                      if (mounted)
-                                        setState(() => _isAiLoading = false);
-                                    }
-                                  }
-                                },
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-
             Expanded(
               child: Center(
                 child: AnimatedSwitcher(
@@ -48619,6 +48766,8 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
     if (_currentContent.isNotEmpty) {
       return Card(
         key: ValueKey(_currentContent),
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -48662,10 +48811,18 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.teal,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
             onPressed: () => _generateNewContent('truth'),
             child: const Text("Vérité"),
           ),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepOrangeAccent,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
             onPressed: () => _generateNewContent('dare'),
             child: const Text("Action"),
           ),
@@ -48674,6 +48831,10 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
     }
 
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.deepPurple,
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+      ),
       onPressed: () => setState(() => _isSpinning = true),
       child: Text(
         _currentPlayerIndex == -1 ? "Lancer la roue" : "Tour Suivant",
@@ -48687,9 +48848,10 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
       runSpacing: 4,
       alignment: WrapAlignment.center,
       children: List.generate(widget.players.length, (index) {
+        final p = widget.players[index];
         final isCurrent = index == _currentPlayerIndex && !_isSpinning;
         return Chip(
-          label: Text(widget.players[index]),
+          label: Text("$p : ${_scores[p] ?? 0} pts"),
           backgroundColor:
               isCurrent ? Colors.deepPurple : const Color(0xFF333333),
           labelStyle: TextStyle(
@@ -48702,53 +48864,332 @@ class _OfflineTruthOrDareScreenState extends State<OfflineTruthOrDareScreen> {
   }
 }
 
-class OfflineGameScreen extends StatefulWidget {
-  final String gameType;
+// Compatibilité
+class OfflineTruthOrDareScreen extends StatelessWidget {
   final List<String> players;
-  OfflineGameScreen({required this.gameType, required this.players});
+  const OfflineTruthOrDareScreen({Key? key, required this.players})
+    : super(key: key);
 
   @override
-  _OfflineGameScreenState createState() => _OfflineGameScreenState();
+  Widget build(BuildContext context) {
+    return TruthOrDareLocalSetupScreen(players: players);
+  }
 }
 
-class _OfflineGameScreenState extends State<OfflineGameScreen> {
+// =============================================================================
+// 2. LE DILEMME : PAGE DE PARAMÈTRES & JEU AVEC IA
+// =============================================================================
+class DilemmaLocalSetupScreen extends StatefulWidget {
+  final List<String> players;
+  const DilemmaLocalSetupScreen({Key? key, required this.players})
+    : super(key: key);
+
+  @override
+  State<DilemmaLocalSetupScreen> createState() =>
+      _DilemmaLocalSetupScreenState();
+}
+
+class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
   String _difficulty = 'soft';
+  bool _useWheel = true; // Avec roue ou pour tout le groupe
+  final TextEditingController _aiController = TextEditingController();
+  bool _isAiLoading = false;
+  List<String> _aiDilemmas = [];
+
+  @override
+  void dispose() {
+    _aiController.dispose();
+    super.dispose();
+  }
+
+  void _launchGame() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder:
+            (_) => DilemmaLocalGameScreen(
+              players: widget.players,
+              difficulty: _difficulty,
+              useWheel: _useWheel,
+              customDilemmas: _aiDilemmas,
+            ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Paramètres : Le Dilemme"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => showGameRules(context, 'Le Dilemme'),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.teal.withOpacity(0.15),
+                ),
+                child: const Icon(
+                  Icons.compare_arrows_rounded,
+                  size: 54,
+                  color: Colors.tealAccent,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              "Paramètres du Dilemme",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+
+            // 1. Difficulté
+            const Text(
+              "1. Difficulté des choix",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white70,
+              ),
+            ),
+            const SizedBox(height: 8),
+            SegmentedButton<String>(
+              segments: const [
+                ButtonSegment(value: 'soft', label: Text('Soft')),
+                ButtonSegment(value: 'hard', label: Text('Hard')),
+                ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
+              ],
+              selected: {_difficulty},
+              onSelectionChanged: (s) => setState(() => _difficulty = s.first),
+            ),
+            const SizedBox(height: 20),
+
+            // 2. Mode de vote (Roue vs Tout le groupe)
+            const Text(
+              "2. Mode de jeu",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white70,
+              ),
+            ),
+            const SizedBox(height: 8),
+            SegmentedButton<bool>(
+              segments: const [
+                ButtonSegment(
+                  value: true,
+                  label: Text("Avec Roue (1 joueur)"),
+                  icon: Icon(Icons.blur_circular),
+                ),
+                ButtonSegment(
+                  value: false,
+                  label: Text("Tout le groupe"),
+                  icon: Icon(Icons.groups),
+                ),
+              ],
+              selected: {_useWheel},
+              onSelectionChanged: (s) => setState(() => _useWheel = s.first),
+            ),
+            const SizedBox(height: 20),
+
+            // 3. IA Génératrice
+            Consumer<PlayerState>(
+              builder: (ctx, ps, _) {
+                if (!ps.isPremium) return const SizedBox.shrink();
+                return Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E1E2E),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Colors.amberAccent.withOpacity(0.5),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.auto_awesome,
+                            color: Colors.amberAccent,
+                            size: 20,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "Génération IA de dilemmes personnalisés",
+                            style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      TextField(
+                        controller: _aiController,
+                        decoration: InputDecoration(
+                          hintText:
+                              "ex: Super-pouvoirs, Vie quotidienne, Choix moraux...",
+                          hintStyle: const TextStyle(color: Colors.white38),
+                          filled: true,
+                          fillColor: Colors.black.withOpacity(0.3),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton.icon(
+                        icon:
+                            _isAiLoading
+                                ? const SizedBox(
+                                  width: 14,
+                                  height: 14,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.black,
+                                  ),
+                                )
+                                : const Icon(Icons.bolt, color: Colors.black),
+                        label: Text(
+                          _isAiLoading
+                              ? "Génération..."
+                              : "Générer les dilemmes par IA",
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amberAccent,
+                          foregroundColor: Colors.black,
+                        ),
+                        onPressed:
+                            _isAiLoading
+                                ? null
+                                : () async {
+                                  if (_aiController.text.trim().isNotEmpty) {
+                                    setState(() => _isAiLoading = true);
+                                    try {
+                                      final res =
+                                          await FirebaseService.generateAiWords(
+                                            instructions:
+                                                "Génère des dilemmes au format 'OptionA ou OptionB'. Thème : ${_aiController.text.trim()}",
+                                            count: 25,
+                                            gameType: 'Le Dilemme',
+                                          );
+                                      if (res.isNotEmpty) {
+                                        setState(() => _aiDilemmas = res);
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              "✨ ${res.length} dilemmes IA générés !",
+                                            ),
+                                            backgroundColor: Colors.green[800],
+                                          ),
+                                        );
+                                      }
+                                    } finally {
+                                      if (mounted) {
+                                        setState(() => _isAiLoading = false);
+                                      }
+                                    }
+                                  }
+                                },
+                      ),
+                      if (_aiDilemmas.isNotEmpty) ...[
+                        const SizedBox(height: 6),
+                        Text(
+                          "✅ ${_aiDilemmas.length} dilemmes prêts",
+                          style: const TextStyle(
+                            color: Colors.greenAccent,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+
+            ElevatedButton.icon(
+              icon: const Icon(Icons.play_arrow_rounded, size: 28),
+              label: const Text(
+                "COMMENCER LES DILEMMES",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal[700],
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              onPressed: _launchGame,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DilemmaLocalGameScreen extends StatefulWidget {
+  final List<String> players;
+  final String difficulty;
+  final bool useWheel;
+  final List<String> customDilemmas;
+
+  const DilemmaLocalGameScreen({
+    Key? key,
+    required this.players,
+    this.difficulty = 'soft',
+    this.useWheel = true,
+    this.customDilemmas = const [],
+  }) : super(key: key);
+
+  @override
+  State<DilemmaLocalGameScreen> createState() => _DilemmaLocalGameScreenState();
+}
+
+class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
+  late String _difficulty;
+  late bool _useWheelForDilemma;
   String _currentContent = "";
-  String _title = "";
-  bool _showCoinFlipResult = false;
-  String _coinFlipChoice = "";
-  String _coinFlipResult = "";
   int _currentPlayerIndex = -1;
   bool _isSpinning = false;
 
-  // PARAMÈTRES POUR LE DILEMME LOCAL
-  bool _useWheelForDilemma = true;
-  Map<String, String> _dilemmaVotes = {}; // PlayerID -> "A" ou "B"
+  final Map<String, String> _dilemmaVotes = {};
   int _dilemmaVoterIndex = 0;
   String? _activeDilemmaVoterId;
   String _dilemmaOptionA = "";
   String _dilemmaOptionB = "";
-
-  // --- SYSTÈME DE SCORES ---
-  Map<String, int> _globalScores = {};
+  final Map<String, int> _globalScores = {};
 
   @override
   void initState() {
     super.initState();
-    _setTitle();
+    _difficulty = widget.difficulty;
+    _useWheelForDilemma = widget.useWheel;
     for (var p in widget.players) {
       _globalScores[p] = 0;
-    }
-  }
-
-  void _setTitle() {
-    switch (widget.gameType) {
-      case 'coin_flip':
-        _title = "Jeu de la Pièce";
-        break;
-      case 'dilemma':
-        _title = "Le Dilemme";
-        break;
     }
   }
 
@@ -48838,7 +49279,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
       _currentPlayerIndex = selectedIndex;
       _isSpinning = false;
       _generateNewContent();
-      if (widget.gameType == 'dilemma' && widget.players.isNotEmpty) {
+      if (widget.players.isNotEmpty) {
         _activeDilemmaVoterId = widget.players[selectedIndex];
       }
     });
@@ -48856,7 +49297,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
             otherPlayers[Random().nextInt(otherPlayers.length)];
         return content.replaceAll('{player}', randomPlayer);
       } else {
-        return content.replaceAll('{player}', 'toi-mê-me');
+        return content.replaceAll('{player}', 'toi-même');
       }
     }
     return content;
@@ -48904,27 +49345,21 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
           _activeDilemmaVoterId = widget.players[_dilemmaVoterIndex];
         } else {
           _activeDilemmaVoterId = null;
-          _checkDilemmaXp(); // Déclenche le calcul de l'XP à la fin de tous les votes
+          _checkDilemmaXp();
         }
       } else {
         _activeDilemmaVoterId = null;
-        // Mode avec roue (1 seul joueur désigné)
         Provider.of<PlayerState>(context, listen: false).addXp(15);
       }
     });
   }
 
-  // Vérifie si le choix était majoritaire ou ultra-minoritaire (Esprit libre)
   void _checkDilemmaXp() {
     int countA = _dilemmaVotes.values.where((v) => v == 'A').length;
     int countB = _dilemmaVotes.values.where((v) => v == 'B').length;
 
-    // Si un joueur est le SEUL de son camp (ex: 1 vs 4)
     bool isUltraMinority = (countA == 1 || countB == 1);
-    int xpGain =
-        isUltraMinority
-            ? 25
-            : 12; // +25 XP Esprit libre, sinon +12 XP Majoritaire
+    int xpGain = isUltraMinority ? 25 : 12;
 
     Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
   }
@@ -49014,7 +49449,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
               : '...';
       return _activeDilemmaVoterId == null
           ? "Choix enregistré !"
-          : "Dilemme pour $voterName : fait ton choix !";
+          : "Dilemme pour $voterName : fais ton choix !";
     } else {
       return _activeDilemmaVoterId == null
           ? "Tous les votes sont enregistrés !"
@@ -49186,60 +49621,35 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   void _generateNewContent() {
     List<String> contentList = [];
     Random random = Random();
-    String nextContent = "";
 
-    switch (widget.gameType) {
-      case 'coin_flip':
-        contentList =
-            GameWords.coinFlipQuestions[_difficulty] ??
-            GameWords.coinFlipQuestions['soft']!;
-        _showCoinFlipResult = false;
-        break;
-      case 'dilemma':
-        contentList =
-            GameWords.dilemmas[_difficulty] ?? GameWords.dilemmas['soft']!;
-        break;
+    if (widget.customDilemmas.isNotEmpty) {
+      contentList = widget.customDilemmas;
+    } else {
+      contentList =
+          GameWords.dilemmas[_difficulty] ?? GameWords.dilemmas['soft']!;
     }
 
-    nextContent = _processContent(
+    String nextContent = _processContent(
       contentList[random.nextInt(contentList.length)],
     );
 
     setState(() {
       _currentContent = nextContent;
-      if (widget.gameType == 'dilemma') {
-        final dilemmaOptions = _splitDilemmaOptions(nextContent);
-        _dilemmaOptionA = dilemmaOptions[0];
-        _dilemmaOptionB = dilemmaOptions[1];
-        _dilemmaVotes.clear();
+      final dilemmaOptions = _splitDilemmaOptions(nextContent);
+      _dilemmaOptionA = dilemmaOptions[0];
+      _dilemmaOptionB = dilemmaOptions[1];
+      _dilemmaVotes.clear();
 
-        if (_useWheelForDilemma) {
-          _activeDilemmaVoterId =
-              _currentPlayerIndex != -1
-                  ? widget.players[_currentPlayerIndex]
-                  : null;
-        } else {
-          _dilemmaVoterIndex = 0;
-          _activeDilemmaVoterId =
-              widget.players.isNotEmpty ? widget.players.first : null;
-        }
+      if (_useWheelForDilemma) {
+        _activeDilemmaVoterId =
+            _currentPlayerIndex != -1
+                ? widget.players[_currentPlayerIndex]
+                : null;
+      } else {
+        _dilemmaVoterIndex = 0;
+        _activeDilemmaVoterId =
+            widget.players.isNotEmpty ? widget.players.first : null;
       }
-    });
-  }
-
-  void _flipCoin() {
-    Random random = Random();
-    String result = random.nextBool() ? "Pile" : "Face";
-    bool won = (_coinFlipChoice == result);
-
-    // --- ATTRIBUTION XP LOCAL ---
-    // +10 XP si gagné (bonne intuition), +15 XP si perdu (prime au courage de révéler son secret)
-    int xpGain = won ? 10 : 15;
-    Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
-
-    setState(() {
-      _coinFlipResult = result;
-      _showCoinFlipResult = true;
     });
   }
 
@@ -49252,17 +49662,13 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentPlayer =
-        _currentPlayerIndex != -1 ? widget.players[_currentPlayerIndex] : "";
-    final isDilemma = widget.gameType == 'dilemma';
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title),
+        title: const Text("Le Dilemme"),
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
-            onPressed: () => showGameRules(context, _title),
+            onPressed: () => showGameRules(context, 'Le Dilemme'),
           ),
         ],
       ),
@@ -49270,74 +49676,6 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // FILTRE DIFFICULTE
-            SegmentedButton<String>(
-              segments: const [
-                ButtonSegment(value: 'soft', label: Text('Soft')),
-                ButtonSegment(value: 'hard', label: Text('Hard')),
-                ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
-              ],
-              selected: {_difficulty},
-              onSelectionChanged: (newSelection) {
-                setState(() {
-                  _difficulty = newSelection.first;
-                  if (!_isSpinning && _currentContent.isNotEmpty) {
-                    _generateNewContent();
-                  }
-                });
-              },
-            ),
-            const SizedBox(height: 12),
-
-            if (isDilemma && _currentContent.isEmpty && !_isSpinning) ...[
-              Card(
-                color: Colors.grey[900],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 16.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        "Mode de sélection du Dilemme",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 10),
-                      SegmentedButton<bool>(
-                        segments: const [
-                          ButtonSegment(
-                            value: true,
-                            label: Text('Avec Roue'),
-                            icon: Icon(Icons.blur_circular),
-                          ),
-                          ButtonSegment(
-                            value: false,
-                            label: Text('Sans Roue (Tous)'),
-                            icon: Icon(Icons.people),
-                          ),
-                        ],
-                        selected: {_useWheelForDilemma},
-                        onSelectionChanged:
-                            (val) => setState(() {
-                              _useWheelForDilemma = val.first;
-                            }),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-            ],
-
             Expanded(
               child: Center(
                 child: AnimatedSwitcher(
@@ -49346,7 +49684,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                       (child, animation) =>
                           ScaleTransition(scale: animation, child: child),
                   child:
-                      isDilemma && _currentContent.isNotEmpty
+                      _currentContent.isNotEmpty
                           ? _buildDilemmaVoteUI(context)
                           : _isSpinning
                           ? SpinTheWheelWidget(
@@ -49354,9 +49692,542 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                             players: widget.players,
                             onSpinEnd: _onWheelStopped,
                           )
+                          : Text(
+                            "Appuyez sur 'Lancer' pour commencer !",
+                            style: Theme.of(context).textTheme.headlineSmall
+                                ?.copyWith(color: Colors.white70),
+                            textAlign: TextAlign.center,
+                          ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            if (_currentContent.isEmpty && !_isSpinning)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.teal[700],
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 14,
+                  ),
+                ),
+                onPressed: () {
+                  if (!_useWheelForDilemma) {
+                    _startNextDilemmaRoundDirectly();
+                  } else {
+                    setState(() => _isSpinning = true);
+                  }
+                },
+                child: Text(
+                  !_useWheelForDilemma ? "Lancer le Dilemme" : "Lancer la roue",
+                ),
+              ),
+            const SizedBox(height: 10),
+            if (_currentContent.isEmpty || _isSpinning) _buildPlayerChips(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPlayerChips() {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 4,
+      alignment: WrapAlignment.center,
+      children: List.generate(widget.players.length, (index) {
+        final pName = widget.players[index];
+        final isCurrent = index == _currentPlayerIndex && !_isSpinning;
+        return ActionChip(
+          avatar: CircleAvatar(
+            backgroundColor: Colors.white24,
+            child: Text(
+              pName[0],
+              style: const TextStyle(fontSize: 10, color: Colors.white),
+            ),
+          ),
+          label: Text("$pName : ${_globalScores[pName]} pts"),
+          backgroundColor: isCurrent ? Colors.teal : const Color(0xFF333333),
+          labelStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
+          ),
+          onPressed: () => _showScoreDialog(pName),
+        );
+      }),
+    );
+  }
+}
+
+// =============================================================================
+// 3. JEU DE LA PIÈCE : PAGE DE PARAMÈTRES & JEU AVEC IA
+// =============================================================================
+class CoinFlipLocalSetupScreen extends StatefulWidget {
+  final List<String> players;
+  const CoinFlipLocalSetupScreen({Key? key, required this.players})
+    : super(key: key);
+
+  @override
+  State<CoinFlipLocalSetupScreen> createState() =>
+      _CoinFlipLocalSetupScreenState();
+}
+
+class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
+  String _difficulty = 'soft';
+  final TextEditingController _aiController = TextEditingController();
+  bool _isAiLoading = false;
+  List<String> _aiQuestions = [];
+
+  @override
+  void dispose() {
+    _aiController.dispose();
+    super.dispose();
+  }
+
+  void _launchGame() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder:
+            (_) => CoinFlipLocalGameScreen(
+              players: widget.players,
+              difficulty: _difficulty,
+              customQuestions: _aiQuestions,
+            ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Paramètres : Jeu de la Pièce"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => showGameRules(context, 'Jeu de la Pièce'),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.amber.withOpacity(0.15),
+                ),
+                child: const Icon(
+                  Icons.monetization_on_rounded,
+                  size: 54,
+                  color: Colors.amberAccent,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              "Configuration de la partie",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+
+            const Text(
+              "Difficulté des questions secrètes",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white70,
+              ),
+            ),
+            const SizedBox(height: 8),
+            SegmentedButton<String>(
+              segments: const [
+                ButtonSegment(value: 'soft', label: Text('Soft')),
+                ButtonSegment(value: 'hard', label: Text('Hard')),
+                ButtonSegment(value: 'hardcore', label: Text('Hardcore')),
+              ],
+              selected: {_difficulty},
+              onSelectionChanged: (s) => setState(() => _difficulty = s.first),
+            ),
+            const SizedBox(height: 20),
+
+            // IA Questions
+            Consumer<PlayerState>(
+              builder: (ctx, ps, _) {
+                if (!ps.isPremium) return const SizedBox.shrink();
+                return Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E1E2E),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Colors.amberAccent.withOpacity(0.5),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.auto_awesome,
+                            color: Colors.amberAccent,
+                            size: 20,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "Génération IA de questions secrètes",
+                            style: TextStyle(
+                              color: Colors.amberAccent,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      TextField(
+                        controller: _aiController,
+                        decoration: InputDecoration(
+                          hintText:
+                              "ex: Amour & Séduction, Travail, Anecdotes gênantes...",
+                          hintStyle: const TextStyle(color: Colors.white38),
+                          filled: true,
+                          fillColor: Colors.black.withOpacity(0.3),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton.icon(
+                        icon:
+                            _isAiLoading
+                                ? const SizedBox(
+                                  width: 14,
+                                  height: 14,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.black,
+                                  ),
+                                )
+                                : const Icon(Icons.bolt, color: Colors.black),
+                        label: Text(
+                          _isAiLoading
+                              ? "Génération..."
+                              : "Générer les questions IA",
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amberAccent,
+                          foregroundColor: Colors.black,
+                        ),
+                        onPressed:
+                            _isAiLoading
+                                ? null
+                                : () async {
+                                  if (_aiController.text.trim().isNotEmpty) {
+                                    setState(() => _isAiLoading = true);
+                                    try {
+                                      final res =
+                                          await FirebaseService.generateAiWords(
+                                            instructions:
+                                                "Génère des questions indiscrètes et amusantes. Thème : ${_aiController.text.trim()}",
+                                            count: 25,
+                                            gameType: 'Jeu de la Pièce',
+                                          );
+                                      if (res.isNotEmpty) {
+                                        setState(() => _aiQuestions = res);
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              "✨ ${res.length} questions IA générées !",
+                                            ),
+                                            backgroundColor: Colors.green[800],
+                                          ),
+                                        );
+                                      }
+                                    } finally {
+                                      if (mounted) {
+                                        setState(() => _isAiLoading = false);
+                                      }
+                                    }
+                                  }
+                                },
+                      ),
+                      if (_aiQuestions.isNotEmpty) ...[
+                        const SizedBox(height: 6),
+                        Text(
+                          "✅ ${_aiQuestions.length} questions prêtes",
+                          style: const TextStyle(
+                            color: Colors.greenAccent,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 30),
+
+            ElevatedButton.icon(
+              icon: const Icon(Icons.play_arrow_rounded, size: 28),
+              label: const Text(
+                "LANCER LA PIÈCE",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber[800],
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              onPressed: _launchGame,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CoinFlipLocalGameScreen extends StatefulWidget {
+  final List<String> players;
+  final String difficulty;
+  final List<String> customQuestions;
+
+  const CoinFlipLocalGameScreen({
+    Key? key,
+    required this.players,
+    this.difficulty = 'soft',
+    this.customQuestions = const [],
+  }) : super(key: key);
+
+  @override
+  State<CoinFlipLocalGameScreen> createState() =>
+      _CoinFlipLocalGameScreenState();
+}
+
+class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
+  late String _difficulty;
+  String _currentContent = "";
+  bool _showCoinFlipResult = false;
+  String _coinFlipChoice = "";
+  String _coinFlipResult = "";
+  int _currentPlayerIndex = -1;
+  bool _isSpinning = false;
+  final Map<String, int> _globalScores = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _difficulty = widget.difficulty;
+    for (var p in widget.players) {
+      _globalScores[p] = 0;
+    }
+  }
+
+  void _showScoreDialog(String selectedPlayer) {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (context, setStateDialog) {
+            return AlertDialog(
+              title: const Text(
+                "Gérer les Scores",
+                textAlign: TextAlign.center,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children:
+                    widget.players.map((p) {
+                      bool isSelected = p == selectedPlayer;
+                      return ListTile(
+                        title: Text(
+                          p,
+                          style: TextStyle(
+                            fontWeight:
+                                isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                            color: isSelected ? Colors.amber : Colors.white,
+                          ),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.remove_circle_outline,
+                                color: Colors.redAccent,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _globalScores[p] =
+                                      (_globalScores[p] ?? 0) - 1;
+                                });
+                                setStateDialog(() {});
+                              },
+                            ),
+                            Text(
+                              "${_globalScores[p]}",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.add_circle_outline,
+                                color: Colors.greenAccent,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _globalScores[p] =
+                                      (_globalScores[p] ?? 0) + 1;
+                                });
+                                setStateDialog(() {});
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx),
+                  child: const Text("Fermer"),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _onWheelStopped(int selectedIndex) {
+    setState(() {
+      _currentPlayerIndex = selectedIndex;
+      _isSpinning = false;
+      _generateNewContent();
+    });
+  }
+
+  String _processContent(String content) {
+    if (content.contains('{player}')) {
+      List<String> otherPlayers = List.from(widget.players);
+      if (_currentPlayerIndex >= 0 &&
+          _currentPlayerIndex < otherPlayers.length) {
+        otherPlayers.removeAt(_currentPlayerIndex);
+      }
+      if (otherPlayers.isNotEmpty) {
+        String randomPlayer =
+            otherPlayers[Random().nextInt(otherPlayers.length)];
+        return content.replaceAll('{player}', randomPlayer);
+      } else {
+        return content.replaceAll('{player}', 'toi-même');
+      }
+    }
+    return content;
+  }
+
+  void _generateNewContent() {
+    List<String> contentList = [];
+    Random random = Random();
+
+    if (widget.customQuestions.isNotEmpty) {
+      contentList = widget.customQuestions;
+    } else {
+      contentList =
+          GameWords.coinFlipQuestions[_difficulty] ??
+          GameWords.coinFlipQuestions['soft']!;
+    }
+
+    _showCoinFlipResult = false;
+    String nextContent = _processContent(
+      contentList[random.nextInt(contentList.length)],
+    );
+
+    setState(() {
+      _currentContent = nextContent;
+    });
+  }
+
+  void _flipCoin() {
+    Random random = Random();
+    String result = random.nextBool() ? "Pile" : "Face";
+    bool won = (_coinFlipChoice == result);
+
+    int xpGain = won ? 10 : 15;
+    Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
+
+    if (_currentPlayerIndex >= 0 &&
+        _currentPlayerIndex < widget.players.length) {
+      final p = widget.players[_currentPlayerIndex];
+      _globalScores[p] = (_globalScores[p] ?? 0) + (won ? 1 : 0);
+    }
+
+    setState(() {
+      _coinFlipResult = result;
+      _showCoinFlipResult = true;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final currentPlayer =
+        (_currentPlayerIndex >= 0 &&
+                _currentPlayerIndex < widget.players.length)
+            ? widget.players[_currentPlayerIndex]
+            : "";
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Jeu de la Pièce"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => showGameRules(context, 'Jeu de la Pièce'),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder:
+                      (child, animation) =>
+                          ScaleTransition(scale: animation, child: child),
+                  child:
+                      _isSpinning
+                          ? SpinTheWheelWidget(
+                            key: const ValueKey('wheel_spin'),
+                            players: widget.players,
+                            onSpinEnd: _onWheelStopped,
+                          )
                           : (_currentContent.isEmpty
                               ? Text(
-                                "Appuyez sur 'Lancer le tour' pour commencer !",
+                                "Appuyez sur 'Lancer la roue' pour commencer !",
                                 style: Theme.of(context).textTheme.headlineSmall
                                     ?.copyWith(color: Colors.white70),
                                 textAlign: TextAlign.center,
@@ -49364,6 +50235,9 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                               : Card(
                                 key: ValueKey<String>(_currentContent),
                                 elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(24.0),
                                   child: Column(
@@ -49382,7 +50256,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                                         style: Theme.of(
                                           context,
                                         ).textTheme.headlineMedium?.copyWith(
-                                          color: Colors.deepPurpleAccent,
+                                          color: Colors.amberAccent,
                                         ),
                                       ),
                                       const SizedBox(height: 20),
@@ -49394,8 +50268,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
                                               context,
                                             ).textTheme.headlineSmall,
                                       ),
-                                      if (widget.gameType == 'coin_flip' &&
-                                          _showCoinFlipResult)
+                                      if (_showCoinFlipResult)
                                         _buildCoinFlipResult(),
                                     ],
                                   ),
@@ -49407,8 +50280,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
             const SizedBox(height: 10),
             _buildGameControls(),
             const SizedBox(height: 10),
-            if (!isDilemma || _currentContent.isEmpty || _isSpinning)
-              _buildPlayerChips(),
+            _buildPlayerChips(),
           ],
         ),
       ),
@@ -49433,7 +50305,7 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
           ),
           label: Text("$pName : ${_globalScores[pName]} pts"),
           backgroundColor:
-              isCurrent ? Colors.deepPurple : const Color(0xFF333333),
+              isCurrent ? Colors.amber[800] : const Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
@@ -49474,29 +50346,23 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
   Widget _buildGameControls() {
     if (_isSpinning) return const SizedBox(height: 50);
 
-    if (widget.gameType == 'dilemma' && _currentContent.isNotEmpty) {
-      return const SizedBox.shrink();
-    }
-
     if (_currentContent.isEmpty) {
       return ElevatedButton(
-        onPressed: () {
-          if (widget.gameType == 'dilemma' && !_useWheelForDilemma) {
-            _startNextDilemmaRoundDirectly();
-          } else {
-            setState(() => _isSpinning = true);
-          }
-        },
-        child: Text(
-          widget.gameType == 'dilemma' && !_useWheelForDilemma
-              ? "Lancer le Dilemme"
-              : "Lancer la roue",
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.amber[800],
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
         ),
+        onPressed: () => setState(() => _isSpinning = true),
+        child: const Text("Lancer la roue"),
       );
     }
 
-    if (widget.gameType == 'coin_flip' && _showCoinFlipResult) {
+    if (_showCoinFlipResult) {
       return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.amber[800],
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+        ),
         onPressed:
             () => setState(() {
               _isSpinning = true;
@@ -49506,28 +50372,63 @@ class _OfflineGameScreenState extends State<OfflineGameScreen> {
       );
     }
 
-    if (widget.gameType == 'coin_flip') {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              _coinFlipChoice = "Pile";
-              _flipCoin();
-            },
-            child: const Text("Je choisis PILE"),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.amber[700],
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           ),
-          ElevatedButton(
-            onPressed: () {
-              _coinFlipChoice = "Face";
-              _flipCoin();
-            },
-            child: const Text("Je choisis FACE"),
+          onPressed: () {
+            _coinFlipChoice = "Pile";
+            _flipCoin();
+          },
+          child: const Text(
+            "Je choisis PILE",
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-        ],
-      );
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.amber[700],
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          ),
+          onPressed: () {
+            _coinFlipChoice = "Face";
+            _flipCoin();
+          },
+          child: const Text(
+            "Je choisis FACE",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// Compatibilité
+class OfflineGameScreen extends StatelessWidget {
+  final String gameType;
+  final List<String> players;
+
+  const OfflineGameScreen({
+    Key? key,
+    required this.gameType,
+    required this.players,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (gameType == 'coin_flip') {
+      return CoinFlipLocalSetupScreen(players: players);
+    } else if (gameType == 'dilemma') {
+      return DilemmaLocalSetupScreen(players: players);
     }
-    return const SizedBox.shrink();
+    return OfflineMenuScreen(players: players);
   }
 }
 
@@ -53308,10 +54209,15 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
   final List<int> _passedSequence =
       []; // Historique pour éviter la répétition immédiate du même joueur
 
+  final TextEditingController _aiController = TextEditingController();
+  bool _isAiLoading = false;
+  List<String> _aiQuestions = [];
+
   @override
   void dispose() {
     _gameTimer?.cancel();
     _flashTimer?.cancel();
+    _aiController.dispose();
     super.dispose();
   }
 
@@ -53392,13 +54298,16 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
   }
 
   void _triggerQuestion() {
-    final questions =
-        GameWords.passTheObjectQuestions[_difficulty] ??
-        GameWords.passTheObjectQuestions['soft']!;
-
-    // Normalisation de la question pour éviter les caractères corrompus
-    String rawQ = questions[_random.nextInt(questions.length)];
-    String cleanQ = FirebaseService.sanitizeUserInput(rawQ, maxLength: 150);
+    String cleanQ = "";
+    if (_aiQuestions.isNotEmpty) {
+      cleanQ = _aiQuestions[_random.nextInt(_aiQuestions.length)];
+    } else {
+      final questions =
+          GameWords.passTheObjectQuestions[_difficulty] ??
+          GameWords.passTheObjectQuestions['soft']!;
+      String rawQ = questions[_random.nextInt(questions.length)];
+      cleanQ = FirebaseService.sanitizeUserInput(rawQ, maxLength: 150);
+    }
 
     // --- ATTRIBUTION XP LOCAL : +20 XP pour répondre à la question sous pression ---
     Provider.of<PlayerState>(context, listen: false).addXp(20);
@@ -53426,17 +54335,17 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Passe l'Objet"),
+        title: const Text("Passe l'Objet"),
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: const Icon(Icons.info_outline),
             onPressed:
                 () => showGameRules(context, 'On se passe un objet rapidement'),
           ),
         ],
       ),
       body: AnimatedContainer(
-        duration: Duration(milliseconds: 150),
+        duration: const Duration(milliseconds: 150),
         color:
             _isFlashing
                 ? Colors.red.withOpacity(0.5)
@@ -53444,7 +54353,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: AnimatedSwitcher(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             child: _buildContentForState(),
           ),
         ),
@@ -53465,7 +54374,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
 
   Widget _buildSetupScreen() {
     return SingleChildScrollView(
-      key: ValueKey('setup'),
+      key: const ValueKey('setup'),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -53473,18 +54382,18 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Icon(
+              const Icon(
                 Icons.directions_run,
                 size: 80,
                 color: Colors.deepPurpleAccent,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 "Passe l'Objet Rapidement",
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               DropdownButtonFormField<String>(
                 value: _difficulty,
                 items:
@@ -53495,29 +54404,140 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                         )
                         .toList(),
                 onChanged: (val) => setState(() => _difficulty = val!),
-                decoration: InputDecoration(
-                  labelText: "DifficultÃƒÂ© des questions",
+                decoration: const InputDecoration(
+                  labelText: "Difficulté des questions",
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 16),
+
+              // Module IA
+              Consumer<PlayerState>(
+                builder: (ctx, ps, _) {
+                  if (!ps.isPremium) return const SizedBox.shrink();
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1E1E2E),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Colors.amberAccent.withOpacity(0.5),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Icon(
+                              Icons.auto_awesome,
+                              color: Colors.amberAccent,
+                              size: 18,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              "Génération IA de questions",
+                              style: TextStyle(
+                                color: Colors.amberAccent,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        TextField(
+                          controller: _aiController,
+                          decoration: InputDecoration(
+                            hintText:
+                                "ex: Culture générale, Gages drôles, Amis...",
+                            hintStyle: const TextStyle(color: Colors.white38),
+                            filled: true,
+                            fillColor: Colors.black.withOpacity(0.3),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        ElevatedButton.icon(
+                          icon:
+                              _isAiLoading
+                                  ? const SizedBox(
+                                    width: 14,
+                                    height: 14,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: Colors.black,
+                                    ),
+                                  )
+                                  : const Icon(Icons.bolt, color: Colors.black),
+                          label: Text(
+                            _isAiLoading
+                                ? "Génération..."
+                                : "Générer les questions IA",
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.amberAccent,
+                            foregroundColor: Colors.black,
+                          ),
+                          onPressed:
+                              _isAiLoading
+                                  ? null
+                                  : () async {
+                                    if (_aiController.text.trim().isNotEmpty) {
+                                      setState(() => _isAiLoading = true);
+                                      try {
+                                        final res =
+                                            await FirebaseService.generateAiWords(
+                                              instructions:
+                                                  "Génère des questions amusantes et rapides à poser. Thème : ${_aiController.text.trim()}",
+                                              count: 25,
+                                              gameType: 'On se passe un objet',
+                                            );
+                                        if (res.isNotEmpty) {
+                                          setState(() => _aiQuestions = res);
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                "✨ ${res.length} questions IA prêtes !",
+                                              ),
+                                              backgroundColor:
+                                                  Colors.green[800],
+                                            ),
+                                          );
+                                        }
+                                      } finally {
+                                        if (mounted) {
+                                          setState(() => _isAiLoading = false);
+                                        }
+                                      }
+                                    }
+                                  },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+
               SwitchListTile.adaptive(
-                title: Text(
-                  "DÃƒÂ©signer un joueur alÃƒÂ©atoire ÃƒÂ  qui passer",
-                ),
-                subtitle: Text(
-                  "Sinon, passez physiquement ÃƒÂ  qui vous voulez",
+                title: const Text("Désigner un joueur aléatoire à qui passer"),
+                subtitle: const Text(
+                  "Sinon, passez physiquement à qui vous voulez",
                 ),
                 value: _useButton,
                 onChanged: (val) => setState(() => _useButton = val),
               ),
               SwitchListTile.adaptive(
-                title: Text("Afficher le chronomÃƒÂ¨tre"),
+                title: const Text("Afficher le chronomètre"),
                 value: _showTimer,
                 onChanged: (val) => setState(() => _showTimer = val),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
-                "Intervalle du chrono : de $_minDuration ÃƒÂ  $_maxDuration secondes",
+                "Intervalle du chrono : de $_minDuration à $_maxDuration secondes",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               RangeSlider(
@@ -53536,10 +54556,10 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _startGame,
-                child: Text("Commencer la manche"),
+                child: const Text("Commencer la manche"),
               ),
             ],
           ),
@@ -54766,6 +55786,10 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
 // =============================================================================
 // 2. DOBBLE LOCAL (AVEC ÉCRAN DE CONFIGURATION COMPLET ET CHOIX DE SYMBOLES)
 // =============================================================================
+
+// =============================================================================
+// 👁️ DOBBLE LOCAL - DESIGN ADAPTATIF ANTI-CHEVAUCHEMENT & TAPS RÉACTIFS
+// =============================================================================
 class DobbleLocalScreen extends StatefulWidget {
   final List<String> players;
   const DobbleLocalScreen({Key? key, required this.players}) : super(key: key);
@@ -54776,7 +55800,7 @@ class DobbleLocalScreen extends StatefulWidget {
 
 class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
   bool _isConfiguring = true;
-  int _symbolsPerCard = 8; // 6 ou 8
+  int _symbolsPerCard = 8; // 6 (Facile) ou 8 (Standard)
   int _targetScore = 10;
 
   List<List<String>> _deck = [];
@@ -54785,6 +55809,15 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
   List<String> _centerCard = [];
   bool _gameOver = false;
   String? _gameWinner;
+
+  final List<Color> _playerColors = [
+    const Color(0xFF38BDF8), // Bleu ciel
+    const Color(0xFFF43F5E), // Rose néon
+    const Color(0xFF10B981), // Émeraude
+    const Color(0xFFF59E0B), // Ambre doré
+    const Color(0xFFA855F7), // Violet
+    const Color(0xFF06B6D4), // Cyan
+  ];
 
   void _startNewGame() {
     final generatedCardsIndices = GameData.generateDobbleCards(_symbolsPerCard);
@@ -54828,22 +55861,39 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
     return null;
   }
 
-  void _onCorrectGuess(String playerName, List<String> takenCard) {
+  void _claimCard(String playerName, String tappedSymbol) {
     if (_gameOver) return;
 
-    setState(() {
-      HapticFeedback.lightImpact();
-      final newScore = (_playerScores[playerName] ?? 0) + 1;
-      _playerScores[playerName] = newScore;
-      _playerCards[playerName] = takenCard..shuffle();
+    final myCard = _playerCards[playerName] ?? [];
+    final common = _findCommonSymbol(myCard, _centerCard);
 
-      if (newScore >= _targetScore || _deck.isEmpty) {
-        _gameOver = true;
-        _determineWinner();
-      } else {
-        _centerCard = _deck.removeAt(0)..shuffle();
-      }
-    });
+    if (common != null && common == tappedSymbol) {
+      HapticFeedback.heavyImpact();
+      final takenCard = List<String>.from(_centerCard);
+      final newScore = (_playerScores[playerName] ?? 0) + 1;
+
+      setState(() {
+        _playerScores[playerName] = newScore;
+        _playerCards[playerName] = takenCard..shuffle();
+
+        if (newScore >= _targetScore || _deck.isEmpty) {
+          _gameOver = true;
+          _determineWinner();
+        } else {
+          _centerCard = _deck.removeAt(0)..shuffle();
+        }
+      });
+    } else {
+      HapticFeedback.lightImpact();
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("$playerName : Mauvais symbole !"),
+          duration: const Duration(milliseconds: 600),
+          backgroundColor: Colors.red[800],
+        ),
+      );
+    }
   }
 
   void _determineWinner() {
@@ -54860,8 +55910,11 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0D1117),
       appBar: AppBar(
         title: const Text("Dobble Local"),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -54876,182 +55929,93 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
     );
   }
 
+  // ===========================================================================
+  // ⚙️ CONFIGURATION
+  // ===========================================================================
   Widget _buildConfigUI() {
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
-        child: Card(
-          color: const Color(0xFF1E1E2E),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Icon(
-                  Icons.remove_red_eye_rounded,
-                  size: 64,
-                  color: Colors.amberAccent,
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "Paramètres de la partie",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  "Symboles par carte :",
-                  style: TextStyle(color: Colors.white70),
-                ),
-                const SizedBox(height: 8),
-                SegmentedButton<int>(
-                  segments: const [
-                    ButtonSegment(value: 6, label: Text("6 (Facile)")),
-                    ButtonSegment(value: 8, label: Text("8 (Standard)")),
-                  ],
-                  selected: {_symbolsPerCard},
-                  onSelectionChanged:
-                      (s) => setState(() => _symbolsPerCard = s.first),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  "Score cible : $_targetScore points",
-                  style: const TextStyle(color: Colors.white70),
-                ),
-                Slider(
-                  value: _targetScore.toDouble(),
-                  min: 5,
-                  max: 25,
-                  divisions: 4,
-                  label: "$_targetScore",
-                  onChanged: (v) => setState(() => _targetScore = v.toInt()),
-                ),
-                const SizedBox(height: 24),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.play_arrow),
-                  label: const Text("COMMENCER"),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurpleAccent,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
-                  onPressed: _startNewGame,
-                ),
-              ],
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 420),
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF1E1B4B), Color(0xFF0F172A)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: Colors.purpleAccent.withOpacity(0.4)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purpleAccent.withOpacity(0.2),
+                blurRadius: 20,
+              ),
+            ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGameUI() {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final radius = (screenWidth / 2 - 90).clamp(60.0, 130.0);
-
-    return Center(
-      child: AspectRatio(
-        aspectRatio: 1.0,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Draggable<List<String>>(
-              data: _centerCard,
-              feedback: Opacity(
-                opacity: 0.75,
-                child: _buildDobbleCardWidget(_centerCard, isLarge: true),
-              ),
-              childWhenDragging: Opacity(
-                opacity: 0.3,
-                child: _buildDobbleCardWidget(_centerCard, isLarge: true),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Pioche (${_deck.length + 1}) - But: $_targetScore"),
-                  _buildDobbleCardWidget(_centerCard, isLarge: true),
-                ],
-              ),
-            ),
-            ...List.generate(widget.players.length, (index) {
-              final player = widget.players[index];
-              final playerCard = _playerCards[player] ?? [];
-              final angle = (2 * pi * index / widget.players.length) - (pi / 2);
-
-              final x = radius * cos(angle);
-              final y = radius * sin(angle);
-
-              return Positioned(
-                left: (screenWidth / 2) + x - 60,
-                top: (screenWidth / 2) + y - 80,
-                child: DragTarget<List<String>>(
-                  builder: (context, candidateData, rejectedData) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "$player (${_playerScores[player]})",
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        const SizedBox(height: 5),
-                        _buildDobbleCardWidget(playerCard),
-                      ],
-                    );
-                  },
-                  onWillAccept: (draggedData) {
-                    return _findCommonSymbol(playerCard, draggedData ?? []) !=
-                        null;
-                  },
-                  onAccept: (draggedData) {
-                    _onCorrectGuess(player, draggedData);
-                  },
-                ),
-              );
-            }),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGameOverUI() {
-    return Center(
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                "Partie Terminée !",
-                style: Theme.of(context).textTheme.headlineMedium,
+              const Icon(
+                Icons.remove_red_eye_rounded,
+                size: 64,
+                color: Colors.amberAccent,
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                "Paramètres de la partie",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                "Symboles par carte :",
+                style: TextStyle(color: Colors.white70),
+              ),
+              const SizedBox(height: 8),
+              SegmentedButton<int>(
+                segments: const [
+                  ButtonSegment(value: 6, label: Text("6 (Facile)")),
+                  ButtonSegment(value: 8, label: Text("8 (Standard)")),
+                ],
+                selected: {_symbolsPerCard},
+                onSelectionChanged:
+                    (s) => setState(() => _symbolsPerCard = s.first),
               ),
               const SizedBox(height: 20),
               Text(
-                "Le gagnant est",
-                style: Theme.of(context).textTheme.titleLarge,
+                "Score cible : $_targetScore cartes",
+                style: const TextStyle(color: Colors.white70),
               ),
-              Text(
-                "$_gameWinner",
-                style: Theme.of(
-                  context,
-                ).textTheme.headlineSmall?.copyWith(color: Colors.amberAccent),
+              Slider(
+                value: _targetScore.toDouble(),
+                min: 5,
+                max: 20,
+                divisions: 3,
+                label: "$_targetScore",
+                onChanged: (v) => setState(() => _targetScore = v.toInt()),
               ),
-              const SizedBox(height: 20),
-              ..._playerScores.entries
-                  .map((e) => Text("${e.key}: ${e.value} points"))
-                  .toList(),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () => setState(() => _isConfiguring = true),
-                child: const Text("Nouvelle Partie"),
+              const SizedBox(height: 24),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.play_arrow_rounded, size: 24),
+                label: const Text(
+                  "COMMENCER",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurpleAccent,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                onPressed: _startNewGame,
               ),
             ],
           ),
@@ -55060,34 +56024,302 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
     );
   }
 
-  Widget _buildDobbleCardWidget(List<String> symbols, {bool isLarge = false}) {
-    final double cardSize = isLarge ? 150 : 100;
-    final double symbolBaseSize = isLarge ? 28 : 20;
-    final double radius = isLarge ? 55 : 35;
+  // ===========================================================================
+  // 🎮 ARÈNE DE JEU ADAPTATIVE SANS CHEVAUCHEMENT
+  // ===========================================================================
+  Widget _buildGameUI() {
+    final int count = widget.players.length;
 
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final double maxW = constraints.maxWidth;
+          final double maxH = constraints.maxHeight;
+
+          // 1. CAS 2 JOUEURS (FACE À FACE IDÉAL SUR TABLE / TÉLÉPHONE)
+          if (count == 2) {
+            final double cardSize = min(
+              maxW * 0.44,
+              maxH * 0.28,
+            ).clamp(90.0, 150.0);
+            final double centerCardSize = min(
+              maxW * 0.48,
+              maxH * 0.32,
+            ).clamp(100.0, 160.0);
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Joueur 1 (Haut - rotation 180° pour être face à lui)
+                Transform.rotate(
+                  angle: pi,
+                  child: _buildPlayerSlot(widget.players[0], 0, cardSize),
+                ),
+
+                // Carte centrale au milieu
+                _buildCenterDeck(centerCardSize),
+
+                // Joueur 2 (Bas)
+                _buildPlayerSlot(widget.players[1], 1, cardSize),
+              ],
+            );
+          }
+
+          // 2. CAS 3 JOUEURS (1 EN HAUT, 2 EN BAS)
+          if (count == 3) {
+            final double cardSize = min(
+              maxW * 0.38,
+              maxH * 0.25,
+            ).clamp(80.0, 125.0);
+            final double centerCardSize = min(
+              maxW * 0.42,
+              maxH * 0.28,
+            ).clamp(90.0, 140.0);
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Transform.rotate(
+                  angle: pi,
+                  child: _buildPlayerSlot(widget.players[0], 0, cardSize),
+                ),
+                _buildCenterDeck(centerCardSize),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildPlayerSlot(widget.players[1], 1, cardSize),
+                    _buildPlayerSlot(widget.players[2], 2, cardSize),
+                  ],
+                ),
+              ],
+            );
+          }
+
+          // 3. CAS 4 JOUEURS (DISPOSITION EN CROIX 4 CÔTÉS)
+          if (count == 4) {
+            final double cardSize = min(
+              maxW * 0.32,
+              maxH * 0.22,
+            ).clamp(75.0, 115.0);
+            final double centerCardSize = min(
+              maxW * 0.38,
+              maxH * 0.26,
+            ).clamp(85.0, 130.0);
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Transform.rotate(
+                  angle: pi,
+                  child: _buildPlayerSlot(widget.players[0], 0, cardSize),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Transform.rotate(
+                      angle: pi / 2,
+                      child: _buildPlayerSlot(widget.players[1], 1, cardSize),
+                    ),
+                    _buildCenterDeck(centerCardSize),
+                    Transform.rotate(
+                      angle: -pi / 2,
+                      child: _buildPlayerSlot(widget.players[2], 2, cardSize),
+                    ),
+                  ],
+                ),
+                _buildPlayerSlot(widget.players[3], 3, cardSize),
+              ],
+            );
+          }
+
+          // 4. CAS 5 À 6 JOUEURS (DISPOSITION ORBITALE CALCULÉE POUR ZÉRO COLLISION)
+          final double centerSize = min(
+            maxW * 0.32,
+            maxH * 0.24,
+          ).clamp(80.0, 120.0);
+          final double cardSize = min(
+            maxW * 0.26,
+            maxH * 0.18,
+          ).clamp(65.0, 95.0);
+          final double radiusX = (maxW / 2) - (cardSize / 2) - 16;
+          final double radiusY = (maxH / 2) - (cardSize / 2) - 24;
+
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              _buildCenterDeck(centerSize),
+              ...List.generate(count, (index) {
+                final double angle = (2 * pi * index / count) - (pi / 2);
+                final double x = radiusX * cos(angle);
+                final double y = radiusY * sin(angle);
+
+                return Positioned(
+                  left: (maxW / 2) + x - (cardSize / 2),
+                  top: (maxH / 2) + y - (cardSize / 2),
+                  child: _buildPlayerSlot(
+                    widget.players[index],
+                    index,
+                    cardSize,
+                  ),
+                );
+              }),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  // --- CENTRE DU PLATEAU (PIOCHE CENTRALE) ---
+  Widget _buildCenterDeck(double size) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+          margin: const EdgeInsets.only(bottom: 6),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+          ),
+          child: Text(
+            "PIOCHE (${_deck.length + 1}) • BUT : $_targetScore",
+            style: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w900,
+              color: Colors.amberAccent,
+              letterSpacing: 1,
+            ),
+          ),
+        ),
+        Draggable<List<String>>(
+          data: _centerCard,
+          feedback: Material(
+            color: Colors.transparent,
+            child: _buildDobbleCard(_centerCard, size: size, isCenter: true),
+          ),
+          childWhenDragging: Opacity(
+            opacity: 0.3,
+            child: _buildDobbleCard(_centerCard, size: size, isCenter: true),
+          ),
+          child: _buildDobbleCard(_centerCard, size: size, isCenter: true),
+        ),
+      ],
+    );
+  }
+
+  // --- EMPLACEMENT & CARTE D'UN JOUEUR ---
+  Widget _buildPlayerSlot(String player, int playerIndex, double cardSize) {
+    final playerCard = _playerCards[player] ?? [];
+    final score = _playerScores[player] ?? 0;
+    final color = _playerColors[playerIndex % _playerColors.length];
+
+    return DragTarget<List<String>>(
+      onWillAccept:
+          (dragged) => _findCommonSymbol(playerCard, dragged ?? []) != null,
+      onAccept: (dragged) {
+        final common = _findCommonSymbol(playerCard, dragged);
+        if (common != null) _claimCard(player, common);
+      },
+      builder: (context, candidate, rejected) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Badge Nom + Score
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+              margin: const EdgeInsets.only(bottom: 4),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: color.withOpacity(0.6)),
+              ),
+              child: Text(
+                "$player ($score pts)",
+                style: TextStyle(
+                  color: color,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                ),
+              ),
+            ),
+            // Carte du joueur interactive
+            _buildDobbleCard(
+              playerCard,
+              size: cardSize,
+              borderColor: color,
+              onSymbolTap: (symbol) => _claimCard(player, symbol),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // --- RENDU D'UNE CARTE DOBBLE ORGANIQUE AVEC SYMBOLES ---
+  Widget _buildDobbleCard(
+    List<String> symbols, {
+    required double size,
+    Color? borderColor,
+    bool isCenter = false,
+    Function(String)? onSymbolTap,
+  }) {
     if (symbols.isEmpty) {
       return Container(
-        width: cardSize,
-        height: cardSize,
+        width: size,
+        height: size,
         decoration: BoxDecoration(
-          color: Colors.grey[800],
+          color: Colors.white10,
           shape: BoxShape.circle,
         ),
-        child: const Center(child: Text("Vide")),
       );
     }
 
+    final double baseSymbolSize = size * 0.22;
+
+    // Emplacements organisés pour 6 ou 8 symboles sans débordement
+    final List<Offset> slots =
+        symbols.length <= 6
+            ? [
+              const Offset(0.0, 0.0),
+              const Offset(0.0, -0.58),
+              const Offset(0.55, -0.20),
+              const Offset(0.35, 0.52),
+              const Offset(-0.35, 0.52),
+              const Offset(-0.55, -0.20),
+            ]
+            : [
+              const Offset(-0.20, -0.20),
+              const Offset(0.22, 0.20),
+              const Offset(0.0, -0.62),
+              const Offset(0.58, -0.30),
+              const Offset(0.58, 0.35),
+              const Offset(0.0, 0.62),
+              const Offset(-0.58, 0.35),
+              const Offset(-0.58, -0.30),
+            ];
+
     return Container(
-      width: cardSize,
-      height: cardSize,
+      width: size,
+      height: size,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
+        border: Border.all(
+          color:
+              isCenter
+                  ? Colors.amberAccent
+                  : (borderColor ?? const Color(0xFFCBD5E1)),
+          width: isCenter ? 3.5 : 2.5,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            blurRadius: 8,
-            spreadRadius: 2,
+            color: (isCenter ? Colors.amber : Colors.black).withOpacity(
+              isCenter ? 0.35 : 0.4,
+            ),
+            blurRadius: isCenter ? 14 : 8,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -55095,28 +56327,123 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
         alignment: Alignment.center,
         children: List.generate(symbols.length, (index) {
           final symbol = symbols[index];
-          final random = Random(symbol.hashCode + index);
-          final angle =
-              (2 * pi * index / symbols.length) +
-              (random.nextDouble() * 0.4 - 0.2);
-          final distance = radius * (0.8 + random.nextDouble() * 0.2);
-          final x = distance * cos(angle);
-          final y = distance * sin(angle);
-          final size = symbolBaseSize + (random.nextDouble() * 10 - 5);
+          final pos = slots[index % slots.length];
+          final posX = pos.dx * (size / 2);
+          final posY = pos.dy * (size / 2);
 
-          return Positioned(
-            left: (cardSize / 2) + x - (size / 1.5),
-            top: (cardSize / 2) + y - (size / 1.5),
-            child: Transform.rotate(
-              angle: random.nextDouble() * pi * 2,
-              child: Text(
-                symbol,
-                style: TextStyle(fontSize: size),
-                textAlign: TextAlign.center,
+          return Positioned.fill(
+            child: Center(
+              child: Transform.translate(
+                offset: Offset(posX, posY),
+                child: GestureDetector(
+                  onTap: onSymbolTap != null ? () => onSymbolTap(symbol) : null,
+                  behavior: HitTestBehavior.opaque,
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(
+                      symbol,
+                      style: TextStyle(
+                        fontSize: baseSymbolSize,
+                        shadows: const [
+                          Shadow(
+                            color: Colors.black26,
+                            blurRadius: 2,
+                            offset: Offset(1, 1),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           );
         }),
+      ),
+    );
+  }
+
+  // ===========================================================================
+  // 🏆 VICTOIRE
+  // ===========================================================================
+  Widget _buildGameOverUI() {
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: const Color(0xFF1E1B4B),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: Colors.amberAccent, width: 2),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.emoji_events_rounded,
+              size: 72,
+              color: Colors.amberAccent,
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              "PARTIE TERMINÉE !",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "Victoire de $_gameWinner !",
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.amberAccent,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Divider(color: Colors.white24),
+            ..._playerScores.entries.map((e) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      e.key,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Text(
+                      "${e.value} cartes",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+            const SizedBox(height: 24),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.replay_rounded),
+              label: const Text("Rejouer"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurpleAccent,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
+              ),
+              onPressed: () => setState(() => _isConfiguring = true),
+            ),
+          ],
+        ),
       ),
     );
   }
