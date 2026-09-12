@@ -108,7 +108,7 @@ post_install do |installer|
     )
   end
 
-  # Fix: Create framework wrapper for FirebaseFirestoreInternal to satisfy -framework FirebaseFirestoreInternal
+  # Fix: Create framework wrapper for FirebaseFirestoreInternal to satisfy -(weak_)framework FirebaseFirestoreInternal
   firestore_target = installer.pods_project.targets.find { |t| t.name == 'FirebaseFirestoreInternal' }
   if firestore_target
     phase_name = 'Create Framework Wrapper'
@@ -118,15 +118,25 @@ post_install do |installer|
       phase.shell_script = <<~'SCRIPT'
         set -e
         echo "Creating FirebaseFirestoreInternal.framework wrapper..."
-        for dir in "${BUILT_PRODUCTS_DIR}" "${BUILT_PRODUCTS_DIR}/FirebaseFirestoreInternal"; do
-          FW="$dir/FirebaseFirestoreInternal.framework"
-          mkdir -p "$FW"
-          if [ -f "${BUILT_PRODUCTS_DIR}/libFirebaseFirestoreInternal.a" ]; then
-            cp -f "${BUILT_PRODUCTS_DIR}/libFirebaseFirestoreInternal.a" "$FW/FirebaseFirestoreInternal"
-          elif [ -f "${BUILT_PRODUCTS_DIR}/FirebaseFirestoreInternal/libFirebaseFirestoreInternal.a" ]; then
-            cp -f "${BUILT_PRODUCTS_DIR}/FirebaseFirestoreInternal/libFirebaseFirestoreInternal.a" "$FW/FirebaseFirestoreInternal"
+        LIB=""
+        for candidate in "${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}" "${BUILT_PRODUCTS_DIR}/libFirebaseFirestoreInternal.a" "${BUILT_PRODUCTS_DIR}/FirebaseFirestoreInternal/libFirebaseFirestoreInternal.a"; do
+          if [ -f "$candidate" ]; then
+            LIB="$candidate"
+            break
           fi
-          cat << 'PLIST' > "$FW/Info.plist"
+        done
+        if [ -z "$LIB" ]; then
+          LIB=$(find "${SYMROOT}" "${BUILD_DIR}" "${BUILT_PRODUCTS_DIR}" -name "libFirebaseFirestoreInternal.a" 2>/dev/null | head -n 1)
+        fi
+        echo "Found static library: $LIB"
+        for dir in "${BUILT_PRODUCTS_DIR}" "${BUILT_PRODUCTS_DIR}/FirebaseFirestoreInternal" "${TARGET_BUILD_DIR}"; do
+          if [ -d "$dir" ]; then
+            FW="$dir/FirebaseFirestoreInternal.framework"
+            mkdir -p "$FW"
+            if [ -n "$LIB" ] && [ -f "$LIB" ]; then
+              cp -f "$LIB" "$FW/FirebaseFirestoreInternal"
+            fi
+            cat << 'PLIST' > "$FW/Info.plist"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -140,19 +150,22 @@ post_install do |installer|
 </dict>
 </plist>
 PLIST
+          fi
         done
         echo "✅ Created FirebaseFirestoreInternal.framework wrapper"
       SCRIPT
     end
   end
 
-  # Fix: Replace -framework "FirebaseFirestoreInternal" with -l"FirebaseFirestoreInternal" in aggregate xcconfig
-  Dir.glob(File.join(installer.sandbox.root, 'Target Support Files', 'Pods-Runner', 'Pods-Runner.*.xcconfig')).each do |file|
+  # Fix: Replace -(weak_)framework "FirebaseFirestoreInternal" with -l"FirebaseFirestoreInternal" everywhere
+  targets_to_patch = Dir.glob(File.join(installer.sandbox.root, '**', '*.xcconfig')) + [File.join(installer.sandbox.root, 'Pods.xcodeproj', 'project.pbxproj')]
+  targets_to_patch.each do |file|
+    next unless File.exist?(file)
     text = File.read(file)
-    if text.match?(/-framework\s+["']?FirebaseFirestoreInternal["']?/)
-      text = text.gsub(/-framework\s+["']?FirebaseFirestoreInternal["']?/, '-l"FirebaseFirestoreInternal"')
+    if text.match?(/-(?:weak_)?framework\s+["']?FirebaseFirestoreInternal["']?/)
+      text = text.gsub(/-(?:weak_)?framework\s+["']?FirebaseFirestoreInternal["']?/, '-l"FirebaseFirestoreInternal"')
       File.write(file, text)
-      puts "✅ Patched #{file}: replaced -framework FirebaseFirestoreInternal with -lFirebaseFirestoreInternal"
+      puts "✅ Patched #{file}: replaced -(weak_)framework FirebaseFirestoreInternal with -lFirebaseFirestoreInternal"
     end
   end
 end

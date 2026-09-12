@@ -73,15 +73,23 @@ jobs:
             end
           '
 
-          # Fix CocoaPods bug: FirebaseFirestoreInternal is built as static library but CocoaPods emits -framework
+          # Fix CocoaPods bug: FirebaseFirestoreInternal is built as static library but CocoaPods emits -(weak_)framework
           ruby -e '
-            Dir.glob("Pods/Target Support Files/Pods-Runner/Pods-Runner.*.xcconfig").each do |file|
+            targets = Dir.glob("Pods/Target Support Files/**/*.xcconfig") + Dir.glob("Pods/Pods.xcodeproj/project.pbxproj")
+            targets.each do |file|
+              next unless File.exist?(file)
               text = File.read(file)
-              if text.match?(/-framework\s+["\x27]?FirebaseFirestoreInternal["\x27]?/)
-                text.gsub!(/-framework\s+["\x27]?FirebaseFirestoreInternal["\x27]?/, "-l\"FirebaseFirestoreInternal\"")
+              if text.match?(/-(?:weak_)?framework\s+["\x27]?FirebaseFirestoreInternal["\x27]?/)
+                text.gsub!(/-(?:weak_)?framework\s+["\x27]?FirebaseFirestoreInternal["\x27]?/, "-l\"FirebaseFirestoreInternal\"")
                 File.write(file, text)
-                puts "✅ Patched #{file}: replaced -framework FirebaseFirestoreInternal with -lFirebaseFirestoreInternal"
+                puts "✅ Patched #{file}: replaced -(weak_)framework FirebaseFirestoreInternal with -lFirebaseFirestoreInternal"
               end
+            end
+
+            runner_cfg = "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
+            if File.exist?(runner_cfg)
+              puts "--- Pods-Runner.release.xcconfig frameworks ---"
+              puts File.read(runner_cfg).lines.grep(/OTHER_LDFLAGS/)
             end
           '
           cd ..
