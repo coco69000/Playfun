@@ -62,70 +62,27 @@ jobs:
           pod install --repo-update
 
           # Patch FIRRecaptchaProvider with clean stub
-          RECAPTCHA_FILE="Pods/FirebaseAppCheck/FirebaseAppCheck/Sources/RecaptchaProvider/FIRRecaptchaProvider.m"
-          if [ -f "$RECAPTCHA_FILE" ]; then
-            chmod +w "$RECAPTCHA_FILE"
-            cat << 'EOF' > "$RECAPTCHA_FILE"
-#import "FirebaseAppCheck/Sources/Public/FirebaseAppCheck/FIRRecaptchaProvider.h"
-
-@implementation FIRRecaptchaProvider
-
-+ (BOOL)isSupported {
-  return NO;
-}
-
-- (nullable instancetype)initWithApp:(FIRApp *)app siteKey:(NSString *)siteKey {
-  return nil;
-}
-
-- (void)getTokenWithCompletion:(void (^)(FIRAppCheckToken *_Nullable token, NSError *_Nullable error))handler {
-  if (handler) {
-    handler(nil, [NSError errorWithDomain:@"FIRRecaptchaProvider" code:-1 userInfo:nil]);
-  }
-}
-
-- (void)getLimitedUseTokenWithCompletion:(void (^)(FIRAppCheckToken *_Nullable token, NSError *_Nullable error))handler {
-  [self getTokenWithCompletion:handler];
-}
-
-@end
-EOF
-            echo "✅ Patched FIRRecaptchaProvider.m with clean stub"
-          fi
+          ruby -e '
+            f = "Pods/FirebaseAppCheck/FirebaseAppCheck/Sources/RecaptchaProvider/FIRRecaptchaProvider.m"
+            if File.exist?(f)
+              File.chmod(0644, f)
+              File.write(f, "#import \"FirebaseAppCheck/Sources/Public/FirebaseAppCheck/FIRRecaptchaProvider.h\"\n\n@implementation FIRRecaptchaProvider\n+ (BOOL)isSupported { return NO; }\n- (nullable instancetype)initWithApp:(FIRApp *)app siteKey:(NSString *)siteKey { return nil; }\n- (void)getTokenWithCompletion:(void (^)(FIRAppCheckToken *, NSError *))h { if (h) h(nil, [NSError errorWithDomain:@\"FIRRecaptchaProvider\" code:-1 userInfo:nil]); }\n- (void)getLimitedUseTokenWithCompletion:(void (^)(FIRAppCheckToken *, NSError *))h { [self getTokenWithCompletion:h]; }\n@end\n")
+              puts "✅ Patched FIRRecaptchaProvider.m with clean stub"
+            end
+          '
           cd ..
 
       - name: 🔨 Compiler pour APPAREIL PHYSIQUE (Pas de simulateur)
         run: |
           # Assurer que le stub est present meme si flutter re-run pod install
-          RECAPTCHA_FILE="ios/Pods/FirebaseAppCheck/FirebaseAppCheck/Sources/RecaptchaProvider/FIRRecaptchaProvider.m"
-          if [ -f "$RECAPTCHA_FILE" ]; then
-            chmod +w "$RECAPTCHA_FILE"
-            cat << 'EOF' > "$RECAPTCHA_FILE"
-#import "FirebaseAppCheck/Sources/Public/FirebaseAppCheck/FIRRecaptchaProvider.h"
-
-@implementation FIRRecaptchaProvider
-
-+ (BOOL)isSupported {
-  return NO;
-}
-
-- (nullable instancetype)initWithApp:(FIRApp *)app siteKey:(NSString *)siteKey {
-  return nil;
-}
-
-- (void)getTokenWithCompletion:(void (^)(FIRAppCheckToken *_Nullable token, NSError *_Nullable error))handler {
-  if (handler) {
-    handler(nil, [NSError errorWithDomain:@"FIRRecaptchaProvider" code:-1 userInfo:nil]);
-  }
-}
-
-- (void)getLimitedUseTokenWithCompletion:(void (^)(FIRAppCheckToken *_Nullable token, NSError *_Nullable error))handler {
-  [self getTokenWithCompletion:handler];
-}
-
-@end
-EOF
-          fi
+          ruby -e '
+            f = "ios/Pods/FirebaseAppCheck/FirebaseAppCheck/Sources/RecaptchaProvider/FIRRecaptchaProvider.m"
+            if File.exist?(f)
+              File.chmod(0644, f)
+              File.write(f, "#import \"FirebaseAppCheck/Sources/Public/FirebaseAppCheck/FIRRecaptchaProvider.h\"\n\n@implementation FIRRecaptchaProvider\n+ (BOOL)isSupported { return NO; }\n- (nullable instancetype)initWithApp:(FIRApp *)app siteKey:(NSString *)siteKey { return nil; }\n- (void)getTokenWithCompletion:(void (^)(FIRAppCheckToken *, NSError *))h { if (h) h(nil, [NSError errorWithDomain:@\"FIRRecaptchaProvider\" code:-1 userInfo:nil]); }\n- (void)getLimitedUseTokenWithCompletion:(void (^)(FIRAppCheckToken *, NSError *))h { [self getTokenWithCompletion:h]; }\n@end\n")
+              puts "✅ Patched FIRRecaptchaProvider.m before build"
+            end
+          '
 
           # --no-codesign génère un .app non signé compatible Sideloadly / AltStore
           flutter build ios --release --no-codesign
