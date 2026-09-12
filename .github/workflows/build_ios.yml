@@ -72,6 +72,18 @@ jobs:
               puts "✅ Patched FIRRecaptchaProvider.m with clean stub"
             end
           '
+
+          # Fix CocoaPods bug: FirebaseFirestoreInternal is built as static library but CocoaPods emits -framework
+          ruby -e '
+            Dir.glob("Pods/Target Support Files/Pods-Runner/Pods-Runner.*.xcconfig").each do |file|
+              text = File.read(file)
+              if text.match?(/-framework\s+["\x27]?FirebaseFirestoreInternal["\x27]?/)
+                text.gsub!(/-framework\s+["\x27]?FirebaseFirestoreInternal["\x27]?/, "-l\"FirebaseFirestoreInternal\"")
+                File.write(file, text)
+                puts "✅ Patched #{file}: replaced -framework FirebaseFirestoreInternal with -lFirebaseFirestoreInternal"
+              end
+            end
+          '
           cd ..
 
       - name: 🔨 Compiler avec xcodebuild (Sans signature)
