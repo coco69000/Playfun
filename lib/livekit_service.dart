@@ -64,21 +64,22 @@ class LivekitService extends ChangeNotifier {
   // TODO: Update this URL to your LiveKit Cloud URL or self-hosted server URL
   final String livekitUrl = "wss://playfun-wucofnjz.livekit.cloud";
 
-  Future<void> initialize() async {
-    print("[LivekitService] Initializing...");
-    if (_isInitialized) return;
-
-    print("[LivekitService] Requesting microphone and camera permissions...");
-    final statuses = await [Permission.microphone, Permission.camera].request();
-    if (statuses[Permission.microphone] != PermissionStatus.granted ||
-        statuses[Permission.camera] != PermissionStatus.granted) {
-      if (kDebugMode) print("[LivekitService] Permissions refusées");
-      return;
+  void _setupRoom() {
+    if (_room != null) {
+      try {
+        _room!.removeListener(_onRoomUpdate);
+        _room!.dispose();
+      } catch (_) {}
     }
 
     _room = Room(
-      roomOptions: RoomOptions(adaptiveStream: true, dynacast: true),
+      roomOptions: const RoomOptions(
+        adaptiveStream: true,
+        dynacast: true,
+      ),
     );
+
+    _room!.addListener(_onRoomUpdate);
 
     final listener = _room!.createListener();
     listener.on<RoomDisconnectedEvent>((event) {
@@ -88,9 +89,7 @@ class LivekitService extends ChangeNotifier {
     });
 
     listener.on<ParticipantConnectedEvent>((event) {
-      print(
-        "[LivekitService] Remote user joined: ${event.participant.identity}",
-      );
+      debugPrint("[LivekitService] Remote user joined: ${event.participant.identity}");
       _remoteUsers[event.participant.identity] = LivekitUserInfo(
         identity: event.participant.identity,
         name: event.participant.name.isNotEmpty ? event.participant.name : 'Joueur',
@@ -101,9 +100,7 @@ class LivekitService extends ChangeNotifier {
     });
 
     listener.on<ParticipantDisconnectedEvent>((event) {
-      print(
-        "[LivekitService] Remote user offline: ${event.participant.identity}",
-      );
+      debugPrint("[LivekitService] Remote user offline: ${event.participant.identity}");
       _remoteUsers.remove(event.participant.identity);
       notifyListeners();
     });
@@ -176,9 +173,80 @@ class LivekitService extends ChangeNotifier {
       _localUserJoined = true;
       notifyListeners();
     });
+  }
 
+  void _onRoomUpdate() {
+    _syncParticipants();
+    notifyListeners();
+  }
+
+  void _syncParticipants() {
+    if (_room == null) return;
+    for (var participant in _room!.remoteParticipants.values) {
+      if (!_remoteUsers.containsKey(participant.identity)) {
+        _remoteUsers[participant.identity] = LivekitUserInfo(
+          identity: participant.identity,
+          name: participant.name.isNotEmpty ? participant.name : 'Joueur',
+          isMuted: !participant.isMicrophoneEnabled(),
+          isVideoOff: !participant.isCameraEnabled(),
+        );
+      } else {
+        _remoteUsers[participant.identity]!.isMuted = !participant.isMicrophoneEnabled();
+        _remoteUsers[participant.identity]!.isVideoOff = !participant.isCameraEnabled();
+        if (participant.name.isNotEmpty) {
+          _remoteUsers[participant.identity]!.name = participant.name;
+        }
+      }
+    }
+  }
+
+  /// Récupère la piste vidéo active pour un participant (local ou distant)
+  VideoTrack? getVideoTrack(String identity) {
+    if (_room == null) return null;
+    if (identity == _localIdentity) {
+      final local = _room!.localParticipant;
+      if (local == null) return null;
+      for (var pub in local.videoTrackPublications) {
+        if (pub.track is VideoTrack && !pub.muted) {
+          return pub.track as VideoTrack;
+        }
+      }
+      for (var pub in local.trackPublications.values) {
+        if (pub.kind == TrackType.VIDEO && pub.track is VideoTrack && !pub.muted) {
+          return pub.track as VideoTrack;
+        }
+      }
+      return null;
+    }
+
+    final participant = _room!.remoteParticipants[identity];
+    if (participant == null) return null;
+    for (var pub in participant.videoTrackPublications) {
+      if (pub.track is VideoTrack && !pub.muted) {
+        return pub.track as VideoTrack;
+      }
+    }
+    for (var pub in participant.trackPublications.values) {
+      if (pub.kind == TrackType.VIDEO && pub.track is VideoTrack && !pub.muted) {
+        return pub.track as VideoTrack;
+      }
+    }
+    return null;
+  }
+
+  Future<void> initialize() async {
+    debugPrint("[LivekitService] Initializing...");
+    if (_isInitialized && _room != null) return;
+
+    try {
+      await [Permission.microphone, Permission.camera].request();
+    } catch (e) {
+      debugPrint("[LivekitService] Demande permissions: $e");
+    }
+
+    _setupRoom();
     _isInitialized = true;
-    print("[LivekitService] Initialization complete.");
+    debugPrint("[LivekitService] Initialization complete.");
     notifyListeners();
   }
 
@@ -188,15 +256,19 @@ class LivekitService extends ChangeNotifier {
     bool videoEnabled = false,
     bool audioEnabled = false,
   }) async {
-    if (!_isInitialized) await initialize();
+    if (!_isInitialized || _room == null) await initialize();
 
     _isLocalVideoOff = !videoEnabled;
     _isLocalMuted = !audioEnabled;
 
     if (_room?.connectionState == ConnectionState.connected) {
       if (_currentRoomName == roomName) {
-        await _room!.localParticipant?.setCameraEnabled(videoEnabled);
-        await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);
+        try {
+          await _room!.localParticipant?.setCameraEnabled(videoEnabled);
+        } catch (_) {}
+        try {
+          await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);
+        } catch (_) {}
         notifyListeners();
         return;
       } else {
@@ -218,39 +290,67 @@ class LivekitService extends ChangeNotifier {
         region: "us-central1",
       ).httpsCallable("generateLivekitToken");
 
+      final effectiveIdentity = identity ?? user.uid;
+
       final result = await callable.call({
         "roomName": roomName,
+        "playerId": effectiveIdentity,
+        "identity": effectiveIdentity,
         ...ForceUpdateService.versionPayload,
       });
 
       final data = Map<String, dynamic>.from(result.data as Map);
       final token = data["token"] as String;
       final serverIdentity =
-          data["identity"] as String? ?? identity ?? user.uid;
+          data["identity"] as String? ?? effectiveIdentity;
       _localIdentity = serverIdentity;
 
-      await leaveChannel();
+      // Nettoyer et réinitialiser la Room pour une connexion propre
+      if (_room == null || _room!.connectionState != ConnectionState.disconnected) {
+        _setupRoom();
+      }
+
       await _room!.connect(livekitUrl, token);
       _currentRoomName = roomName;
 
-      // Récupérer les participants déjà connectés dans la salle
-      _remoteUsers.clear();
-      for (var participant in _room!.remoteParticipants.values) {
-        _remoteUsers[participant.identity] = LivekitUserInfo(
-          identity: participant.identity,
-          name: participant.name.isNotEmpty ? participant.name : 'Joueur',
-          isMuted: !participant.isMicrophoneEnabled(),
-          isVideoOff: !participant.isCameraEnabled(),
-        );
+      _syncParticipants();
+
+      // Activation vidéo
+      if (videoEnabled) {
+        try {
+          await _room!.localParticipant?.setCameraEnabled(true);
+          _isLocalVideoOff = false;
+        } catch (e) {
+          debugPrint("[LivekitService] Erreur activation caméra: $e");
+          _isLocalVideoOff = true;
+        }
+      } else {
+        try {
+          await _room!.localParticipant?.setCameraEnabled(false);
+        } catch (_) {}
+        _isLocalVideoOff = true;
       }
 
-      await _room!.localParticipant?.setCameraEnabled(videoEnabled);
-      await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);
+      // Activation audio
+      if (audioEnabled) {
+        try {
+          await _room!.localParticipant?.setMicrophoneEnabled(true);
+          _isLocalMuted = false;
+        } catch (e) {
+          debugPrint("[LivekitService] Erreur activation micro: $e");
+          _isLocalMuted = true;
+        }
+      } else {
+        try {
+          await _room!.localParticipant?.setMicrophoneEnabled(false);
+        } catch (_) {}
+        _isLocalMuted = true;
+      }
 
       _localUserJoined = true;
       notifyListeners();
     } catch (e) {
-      debugPrint("Erreur joinChannel sécurisé: $e");
+      debugPrint("[LivekitService] Erreur joinChannel sécurisé: $e");
     }
   }
 

@@ -197,6 +197,39 @@ class SupabaseService {
 }
 
 class GameData {
+  // Jeux nécessitant un avis personnel, créatif ou une connaissance du joueur.
+  // L'auto-play est DÉSACTIVÉ pour ces jeux.
+  static const List<String> socialOpinionGames = [
+    'Qui Pourrait le Plus ?',
+    'Le Juge',
+    'Le Menteur',
+    'Le Roi des Mèmes',
+    'Action ou Vérité',
+    'Le Dilemme',
+    'Jeu de la Pièce',
+    'On se passe un objet rapidement',
+    'Synonyme ou Banni',
+    'Blanc Manger Coco',
+    'Blanc Manger Cocon',
+    'BMC',
+    'Infiltré & Mr. White',
+    'Loup-Garou',
+    'Gribouillis',
+    'Cadavre Exquis',
+    'Pictionary',
+    'Just One',
+    'Taboo',
+    "Time's Up",
+    'Devine Tête',
+    'La Patate Chaude',
+    'Le Jeu des Catégories',
+    'Photo Roulette',
+  ];
+
+  static bool isSocialOpinionGame(String gameType) {
+    return socialOpinionGames.contains(gameType);
+  }
+
   static const List<String> categoriesGameList = [
     "Marques de voiture",
     "Pays du monde",
@@ -421,8 +454,23 @@ Le gagnant final est celui qui prend tous les jetons.
         "Un mot est affichÃƒÂ©. Chaque joueur doit secrÃƒÂ¨tement soumettre un synonyme. Toutes les rÃƒÂ©ponses sont rÃƒÂ©vÃƒÂ©lÃƒÂ©es, puis les joueurs votent pour 'bannir' la proposition la moins pertinente. Le joueur banni perd la manche.",
     'Le Jeu des Catégories':
         "Plusieurs catÃƒÂ©gories sont sÃƒÂ©lectionnÃƒÂ©es (3 minimum). Une catÃƒÂ©gorie s'affiche (ex: Marque de voiture). Chacun son tour, chaque joueur doit ÃƒÂ©crire un mot valide (ex: Volvo, CitroÃƒÂ«n) avant la fin de son chrono. Si un joueur ne rÃƒÂ©pond pas ÃƒÂ  temps, il gagne 1 point. C'est celui qui a le moins de points qui gagne.",
-    'Action ou Vérité':
-        "Un joueur est dÃƒÂ©signÃƒÂ© par la roue. Il choisit entre 'Action' et 'VÃƒÂ©ritÃƒÂ©'. Un dÃƒÂ©fi correspondant lui est alors prÃƒÂ©sentÃƒÂ©.",
+    'Action ou Vérité': """
+**But du jeu**
+Gagner le plus d'XP en réalisant des actions et en répondant à des vérités !
+
+**Déroulement**
+1. La roulette désigne le joueur dont c'est le tour.
+2. Le joueur tire "Action" ou "Vérité".
+3. Mode Classique : Un défi/question aléatoire est affiché.
+4. Mode Juges : Un joueur aléatoire écrit le défi, puis le joueur le réalise.
+5. Les autres joueurs valident avec un vote Oui/Non.
+6. Le pourcentage de validation détermine l'XP gagné.
+
+**Règles spéciales**
+- 100% de validation = XP maximum
+- Le joueur avec le plus d'XP devient Admin de la partie
+- Le bouton "Fin de manche" permet de clôturer la partie
+""",
     'Jeu de la Pièce':
         "Une question secrÃƒÂ¨te est affichÃƒÂ©e. Le joueur dÃƒÂ©signÃƒÂ© choisit 'Pile' ou 'Face'. Si son choix est incorrect, il doit rÃƒÂ©vÃƒÂ©ler la question et y rÃƒÂ©pondre honnÃƒÂªtement.",
     'Le Dilemme':
@@ -1013,6 +1061,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     'Devine Tête',
     'Taboo',
     'Belote',
+    'Action ou Vérité',
   ];
 
   static const List<Map<String, dynamic>> allLoupGarouRoles = [
@@ -2347,8 +2396,51 @@ class FirebaseService {
   // ⚡ MOTEUR D'XP ET CALCUL DU BONUS DE VITESSE DYNAMIQUE
   // =========================================================================
 
+  /// Récupère l'ID du joueur dont c'est actuellement le tour
+  static String? getCurrentPlayerId(Map<String, dynamic> gameData) {
+    final gameType = gameData['gameType'] ?? '';
+    final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
+    if (gameType == 'Uno') {
+      final unoOrder = List<String>.from(
+        gameData['unoPlayerOrder'] ?? playerOrder,
+      );
+      final idx = (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < unoOrder.length) return unoOrder[idx];
+    } else if (gameType == 'Mille Bornes') {
+      final idx =
+          (gameData['milleBornesCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < playerOrder.length) return playerOrder[idx];
+    } else if (gameType == 'Petits Chevaux') {
+      final idx = (gameData['petitsChevauxCurrentIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < playerOrder.length) return playerOrder[idx];
+    } else {
+      final idx = (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < playerOrder.length) return playerOrder[idx];
+    }
+    return gameData['currentPlayerId'] as String?;
+  }
+
+  /// Détecte si le joueur dont c'est le tour est un robot / ordi
+  static bool isCurrentPlayerBot(Map<String, dynamic> gameData) {
+    final curId = getCurrentPlayerId(gameData);
+    if (curId == null) return false;
+    final players = gameData['players'] as Map<String, dynamic>?;
+    if (players != null && players[curId] is Map) {
+      final pData = players[curId] as Map;
+      if (pData['isBot'] == true || pData['replacedByBot'] == true) return true;
+    }
+    final botPlayers = gameData['botPlayers'] as Map<String, dynamic>?;
+    if (botPlayers != null && botPlayers[curId] == true) return true;
+    return false;
+  }
+
   /// Récupère la durée effective du timer selon le jeu, ses réglages et son état
   static int getEffectiveTurnTimer(Map<String, dynamic> gameData) {
+    // 0. Si le joueur actuel est un ordinateur (bot), le délai de réflexion est fixé à 5 secondes
+    if (isCurrentPlayerBot(gameData)) {
+      return 5;
+    }
+
     // 1. Si le chrono a été désactivé par l'hôte
     final bool useTimer = gameData['useTimer'] ?? true;
     if (!useTimer) return 0;
@@ -2474,6 +2566,13 @@ class FirebaseService {
     if (baseAmount <= 0) return;
 
     final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+    // Si le joueur est un bot ou a été remplacé par un bot, il ne gagne rien (aucun XP)
+    if (players[playerId]?['isBot'] == true ||
+        players[playerId]?['replacedByBot'] == true ||
+        gameData['botPlayers']?[playerId] == true) {
+      return;
+    }
     final authUid = players[playerId]?['authUid'] ?? playerId;
     final turnStartTime = gameData['turnStartTime'] as Timestamp?;
 
@@ -2703,10 +2802,13 @@ class FirebaseService {
     String playerId,
     String playerName,
   ) async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
     await _db.collection('lounges').doc(loungeId).update({
       'players.$playerId': {
         'name': playerName,
         'joinedAt': FieldValue.serverTimestamp(),
+        'authUid': currentUser?.uid,
+        'livekitIdentity': playerId,
       },
     });
   }
@@ -3335,50 +3437,86 @@ class FirebaseService {
 
   // 1. TIMEOUT BIG TWO
   Future<void> handleBigTwoTimeout(String gameCode) async {
-    final gameRef = _db.collection('games').doc(gameCode);
-    final snap = await gameRef.get();
-    if (!snap.exists) return;
-    final data = snap.data() as Map<String, dynamic>;
-    if (data['gameState'] != 'playing') return;
-    if (!_isTurnTimedOut(data)) return;
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['gameState'] != 'playing') return;
 
-    final playerOrder = List<String>.from(data['bigTwoPlayerOrder'] ?? []);
-    final currentIndex = data['bigTwoCurrentPlayerIndex'] ?? 0;
-    if (currentIndex >= playerOrder.length) return;
-    final timedOutPlayerId = playerOrder[currentIndex];
-    final playerName =
-        data['players']?[timedOutPlayerId]?['name'] ?? 'Un joueur';
-    final lastPlay = data['bigTwoLastPlay'];
-    final myHand = List<String>.from(
-      data['bigTwoPlayerHands']?[timedOutPlayerId] ?? [],
-    );
-
-    if (lastPlay == null) {
-      if (myHand.isNotEmpty) {
-        await notifyAutoPlay(
-          gameRef,
-          playerName,
-          actionDetails: "carte simple",
-        );
-        await bigTwoAction(
-          gameCode,
-          timedOutPlayerId,
-          'play',
-          cards: [myHand.first],
-          isAuto: true,
-        );
-      }
-    } else {
-      await notifyAutoPlay(
-        gameRef,
-        playerName,
-        actionDetails: "passe son tour",
+      final playerOrder = List<String>.from(
+        gameData['bigTwoPlayerOrder'] ?? [],
       );
-      await bigTwoAction(gameCode, timedOutPlayerId, 'pass', isAuto: true);
-    }
+      final currentIndex =
+          (gameData['bigTwoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (currentIndex >= playerOrder.length) return;
+
+      final playerId = playerOrder[currentIndex];
+      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+      final hands = Map<String, dynamic>.from(
+        gameData['bigTwoPlayerHands'] ?? {},
+      );
+      final myHand = List<String>.from(hands[playerId] ?? []);
+      final lastPlay = gameData['bigTwoLastPlay'];
+      List<String> passedPlayers = List<String>.from(
+        gameData['bigTwoPassedPlayers'] ?? [],
+      );
+      List<String> finishedPlayers = List<String>.from(
+        gameData['bigTwoFinishedPlayers'] ?? [],
+      );
+
+      if (lastPlay == null && myHand.isNotEmpty) {
+        // Joue la plus petite carte possible
+        final String cardToPlay = myHand.removeAt(0);
+        hands[playerId] = myHand;
+
+        final newPlay = {
+          'cards': [cardToPlay],
+          'type': 'single',
+          'tier': 0,
+          'highValue': _getBigTwoCardValue(cardToPlay),
+          'size': 1,
+          'playedBy': playerId,
+        };
+
+        int nextIndex = (currentIndex + 1) % playerOrder.length;
+        while (finishedPlayers.contains(playerOrder[nextIndex])) {
+          nextIndex = (nextIndex + 1) % playerOrder.length;
+        }
+
+        transaction.update(gameRef, {
+          'bigTwoPlayerHands': hands,
+          'bigTwoLastPlay': newPlay,
+          'bigTwoPassedPlayers': [],
+          'bigTwoCurrentPlayerIndex': nextIndex,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ $playerName a joué $cardToPlay.",
+          ]),
+        });
+      } else {
+        // Passe son tour
+        if (!passedPlayers.contains(playerId)) passedPlayers.add(playerId);
+        int activePlayers = playerOrder.length - finishedPlayers.length;
+        bool trickEnded = passedPlayers.length >= (activePlayers - 1);
+
+        int nextIndex = (currentIndex + 1) % playerOrder.length;
+        while (finishedPlayers.contains(playerOrder[nextIndex]) ||
+            (!trickEnded && passedPlayers.contains(playerOrder[nextIndex]))) {
+          nextIndex = (nextIndex + 1) % playerOrder.length;
+        }
+
+        transaction.update(gameRef, {
+          'bigTwoPassedPlayers': trickEnded ? [] : passedPlayers,
+          'bigTwoLastPlay': trickEnded ? null : lastPlay,
+          'bigTwoCurrentPlayerIndex': nextIndex,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion(["⏱️ $playerName passe son tour."]),
+        });
+      }
+    });
   }
 
-  // GÃƒÂ©nÃƒÂ©ration du deck de 101 cartes
   List<String> _generateMilleBornesDeck() {
     List<String> deck = [];
     void add(String c, int n) {
@@ -3433,6 +3571,16 @@ class FirebaseService {
         'isFlatTire': false,
         'hasRightOfWay': false,
       };
+    }
+
+    // Pioche automatique pour le premier joueur (il commence avec 7 cartes)
+    final String firstPlayerId = playerIds.first;
+    if (deck.isNotEmpty) {
+      List<String> firstHand = List<String>.from(
+        playerData[firstPlayerId]['hand'],
+      );
+      firstHand.add(deck.removeAt(0));
+      playerData[firstPlayerId]['hand'] = firstHand;
     }
 
     await gameRef.update({
@@ -3493,6 +3641,13 @@ class FirebaseService {
       List<String> deck = List<String>.from(gameData['milleBornesDeck']);
       List<String> hand = List<String>.from(myData['hand']);
       int targetDist = gameData['milleBornesTargetDistance'] ?? 1000;
+
+      // Si le joueur a 6 cartes à son tour, il pioche automatiquement la 7ème
+      if (hand.length == 6 && deck.isNotEmpty) {
+        hand.add(deck.removeAt(0));
+        myData['hand'] = hand;
+        pData[playerId] = myData;
+      }
 
       if (action == 'play' && card != null) {
         if (!hand.contains(card)) {
@@ -3570,9 +3725,6 @@ class FirebaseService {
           myData['battle'] = battle;
         }
 
-        if (deck.isNotEmpty) {
-          hand.add(deck.removeAt(0));
-        }
         myData['hand'] = hand;
         pData[playerId] = myData;
 
@@ -3636,6 +3788,18 @@ class FirebaseService {
         }
 
         int nextIndex = (currentIndex + 1) % playerOrder.length;
+        String nextPlayerId = playerOrder[nextIndex];
+        Map<String, dynamic> nextPlayerData = Map<String, dynamic>.from(
+          pData[nextPlayerId],
+        );
+        List<String> nextHand = List<String>.from(nextPlayerData['hand']);
+
+        if (deck.isNotEmpty && nextHand.length == 6) {
+          nextHand.add(deck.removeAt(0));
+          nextPlayerData['hand'] = nextHand;
+          pData[nextPlayerId] = nextPlayerData;
+        }
+
         transaction.update(gameRef, {
           'milleBornesPlayerData': pData,
           'milleBornesDeck': deck,
@@ -3655,13 +3819,22 @@ class FirebaseService {
           hand.remove(cardToDiscard);
         }
 
-        if (deck.isNotEmpty) {
-          hand.add(deck.removeAt(0));
-        }
         myData['hand'] = hand;
         pData[playerId] = myData;
 
         int nextIndex = (currentIndex + 1) % playerOrder.length;
+        String nextPlayerId = playerOrder[nextIndex];
+        Map<String, dynamic> nextPlayerData = Map<String, dynamic>.from(
+          pData[nextPlayerId],
+        );
+        List<String> nextHand = List<String>.from(nextPlayerData['hand']);
+
+        if (deck.isNotEmpty && nextHand.length == 6) {
+          nextHand.add(deck.removeAt(0));
+          nextPlayerData['hand'] = nextHand;
+          pData[nextPlayerId] = nextPlayerData;
+        }
+
         transaction.update(gameRef, {
           'milleBornesPlayerData': pData,
           'milleBornesDeck': deck,
@@ -3755,33 +3928,62 @@ class FirebaseService {
 
   // Timeout
   Future<void> handleMilleBornesTimeout(String gameCode) async {
-    final gameRef = _db.collection('games').doc(gameCode);
-    final snap = await gameRef.get();
-    if (!snap.exists) return;
-    final gameData = snap.data() as Map<String, dynamic>;
-    if (gameData['gameState'] != 'playing') return;
-    if (!_isTurnTimedOut(gameData)) return;
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['gameState'] != 'playing') return;
 
-    final playerOrder = gameData['milleBornesPlayerOrder'] as List<dynamic>?;
-    final currentIndex = gameData['milleBornesCurrentPlayerIndex'] as int?;
-    if (playerOrder != null &&
-        currentIndex != null &&
-        playerOrder.isNotEmpty &&
-        currentIndex < playerOrder.length) {
-      final timedOutPlayerId = playerOrder[currentIndex].toString();
-      final playerName =
-          gameData['players']?[timedOutPlayerId]?['name'] ?? 'Un joueur';
-      await notifyAutoPlay(gameRef, playerName, actionDetails: "fin de tour");
-      await milleBornesAction(
-        gameCode,
-        timedOutPlayerId,
-        'end_turn',
-        isAuto: true,
+      final playerOrder = List<String>.from(
+        gameData['milleBornesPlayerOrder'] ?? [],
       );
-    }
+      final currentIndex =
+          (gameData['milleBornesCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (currentIndex >= playerOrder.length) return;
+
+      final playerId = playerOrder[currentIndex];
+      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+      Map<String, dynamic> pData = Map<String, dynamic>.from(
+        gameData['milleBornesPlayerData'] ?? {},
+      );
+      Map<String, dynamic> myData = Map<String, dynamic>.from(
+        pData[playerId] ?? {},
+      );
+      List<String> hand = List<String>.from(myData['hand'] ?? []);
+      List<String> deck = List<String>.from(gameData['milleBornesDeck'] ?? []);
+
+      // Défausse la 1ère carte
+      String discarded = hand.isNotEmpty ? hand.removeAt(0) : '';
+      myData['hand'] = hand;
+      pData[playerId] = myData;
+
+      // Passage au joueur suivant + Pioche auto pour lui (6 -> 7 cartes)
+      int nextIndex = (currentIndex + 1) % playerOrder.length;
+      String nextPlayerId = playerOrder[nextIndex];
+      Map<String, dynamic> nextPlayerData = Map<String, dynamic>.from(
+        pData[nextPlayerId] ?? {},
+      );
+      List<String> nextHand = List<String>.from(nextPlayerData['hand'] ?? []);
+
+      if (deck.isNotEmpty && nextHand.length == 6) {
+        nextHand.add(deck.removeAt(0));
+        nextPlayerData['hand'] = nextHand;
+        pData[nextPlayerId] = nextPlayerData;
+      }
+
+      transaction.update(gameRef, {
+        'milleBornesPlayerData': pData,
+        'milleBornesDeck': deck,
+        'milleBornesCurrentPlayerIndex': nextIndex,
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'gameLog': FieldValue.arrayUnion([
+          "⏱️ $playerName n'a pas joué à temps (Carte $discarded défaussée).",
+        ]),
+      });
+    });
   }
 
-  /// Validation de l'authentification du joueur pour empêcher toute usurpation
   static void _verifyPlayerAuth(
     Map<String, dynamic> gameData,
     String playerId,
@@ -4056,7 +4258,7 @@ class FirebaseService {
 
           Map<String, String> rawClues = Map<String, String>.from(clues);
           String currentWord =
-              (gameData['justOneCurrentWord'] as String).toLowerCase();
+              (gameData['justOneCurrentWord'] as String? ?? '').toLowerCase();
           bool allowInvalidClues =
               gameData['justOneAllowInvalidClues'] ?? false;
 
@@ -4130,7 +4332,8 @@ class FirebaseService {
 
       if (roundState == 'answering') {
         final answers = Map<String, dynamic>.from(gameData['answers'] ?? {});
-        final gameType = gameData['gameType'];
+        final gameType = gameData['gameType'] ?? '';
+        final bool isSocial = GameData.isSocialOpinionGame(gameType);
 
         String? judgeId;
         if (gameType == 'Le Juge') judgeId = gameData['currentTargetPlayerId'];
@@ -4138,7 +4341,8 @@ class FirebaseService {
         for (var pId in players.keys) {
           if (pId == judgeId) continue;
           if (!answers.containsKey(pId)) {
-            answers[pId] = "Temps écoulé";
+            // Sur jeu social / opinion : marquer comme inactif sans réponse arbitraire
+            answers[pId] = isSocial ? "[INACTIF]" : "Temps écoulé";
             updatesMade = true;
             await _incrementInactiveCountAndCheckExpulsion(
               transaction,
@@ -4170,9 +4374,12 @@ class FirebaseService {
         final storyTruths = Map<String, dynamic>.from(
           gameData['storyTruths'] ?? {},
         );
+        final bool isSocial = GameData.isSocialOpinionGame(
+          gameData['gameType'] ?? '',
+        );
         for (var pId in players.keys) {
           if (!storyTruths.containsKey(pId)) {
-            storyTruths[pId] = Random().nextBool();
+            storyTruths[pId] = isSocial ? false : Random().nextBool();
             updatesMade = true;
             await _incrementInactiveCountAndCheckExpulsion(
               transaction,
@@ -4341,34 +4548,84 @@ class FirebaseService {
 
   // 3. TIMEOUT PRÉSIDENT
   Future<void> handlePresidentTimeout(String gameCode) async {
-    final gameRef = _db.collection('games').doc(gameCode);
-    final gameSnap = await gameRef.get();
-    if (!gameSnap.exists) return;
-    var gameData = gameSnap.data() as Map<String, dynamic>;
-    if (gameData['gameState'] != 'playing') return;
-    if (!_isTurnTimedOut(gameData)) return;
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['gameState'] != 'playing') return;
 
-    final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
-    final currentIndex = gameData['currentPlayerIndex'] ?? 0;
-    if (currentIndex >= playerOrder.length) return;
+      final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
+      final currentIndex =
+          (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (currentIndex >= playerOrder.length) return;
 
-    final playerId = playerOrder[currentIndex];
-    final playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
-    final lastPlay = gameData['lastPlay'];
-    final myHand = List<String>.from(gameData['playerHands']?[playerId] ?? []);
-
-    if (lastPlay == null && myHand.isNotEmpty) {
-      final String cardToPlay = myHand.contains('3C') ? '3C' : myHand.first;
-      await notifyAutoPlay(gameRef, playerName, actionDetails: "carte simple");
-      await playPresidentCards(gameCode, playerId, [cardToPlay], isAuto: true);
-    } else {
-      await notifyAutoPlay(
-        gameRef,
-        playerName,
-        actionDetails: "passe son tour",
+      final playerId = playerOrder[currentIndex];
+      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+      final hands = Map<String, dynamic>.from(gameData['playerHands'] ?? {});
+      final myHand = List<String>.from(hands[playerId] ?? []);
+      final lastPlay = gameData['lastPlay'];
+      List<String> passedPlayers = List<String>.from(
+        gameData['passedPlayers'] ?? [],
       );
-      await passPresidentTurn(gameCode, playerId, isAuto: true);
-    }
+      List<String> finishedPlayers = List<String>.from(
+        gameData['finishedPlayers'] ?? [],
+      );
+
+      if (lastPlay == null && myHand.isNotEmpty) {
+        final String cardToPlay = myHand.contains('3C') ? '3C' : myHand.first;
+        myHand.remove(cardToPlay);
+        hands[playerId] = myHand;
+
+        int nextIndex = (currentIndex + 1) % playerOrder.length;
+        while (finishedPlayers.contains(playerOrder[nextIndex])) {
+          nextIndex = (nextIndex + 1) % playerOrder.length;
+        }
+
+        transaction.update(gameRef, {
+          'playerHands': hands,
+          'lastPlay': {
+            'cards': [cardToPlay],
+            'value': _getPresidentCardValue(cardToPlay, false),
+            'playedBy': playerId,
+          },
+          'currentPile': FieldValue.arrayUnion([cardToPlay]),
+          'lastPlayerToPlay': playerId,
+          'currentPlayerIndex': nextIndex,
+          'passedPlayers': [],
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ $playerName a joué $cardToPlay.",
+          ]),
+        });
+      } else {
+        if (!passedPlayers.contains(playerId)) passedPlayers.add(playerId);
+        List<String> stillInPlay =
+            playerOrder
+                .where(
+                  (p) =>
+                      !finishedPlayers.contains(p) &&
+                      !passedPlayers.contains(p),
+                )
+                .toList();
+        bool trickEnded = stillInPlay.length <= 1;
+
+        int nextIndex = (currentIndex + 1) % playerOrder.length;
+        while (finishedPlayers.contains(playerOrder[nextIndex]) ||
+            (!trickEnded && passedPlayers.contains(playerOrder[nextIndex]))) {
+          nextIndex = (nextIndex + 1) % playerOrder.length;
+        }
+
+        transaction.update(gameRef, {
+          'passedPlayers': trickEnded ? [] : passedPlayers,
+          'lastPlay': trickEnded ? null : lastPlay,
+          'currentPile': trickEnded ? [] : gameData['currentPile'],
+          'currentPlayerIndex': nextIndex,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion(["⏱️ $playerName passe son tour."]),
+        });
+      }
+    });
   }
 
   // 4. TIMEOUT BLOKUS
@@ -4521,9 +4778,12 @@ class FirebaseService {
     final currentColor = gameData['checkersCurrentColor'] ?? 'red';
 
     bool hasCapture = _isAnyCaptureAvailable(board, currentColor);
+    final String? mandatoryPiece = gameData['checkersMandatoryPiece'];
     List<Map<String, int>> legalMoves = [];
 
     for (var entry in board.entries) {
+      // Si une rafle / prise multiple est en cours, seul ce pion peut jouer
+      if (mandatoryPiece != null && entry.key != mandatoryPiece) continue;
       if (entry.value.startsWith(currentColor)) {
         final pos = entry.key.split(',').map(int.parse).toList();
         final r = pos[0];
@@ -4612,6 +4872,7 @@ class FirebaseService {
       await gameRef.update({
         'checkersCurrentColor': nextColor,
         'checkersCurrentPlayerIndex': nextIndex,
+        'checkersMandatoryPiece': null,
         'turnStartTime': FieldValue.serverTimestamp(),
       });
     }
@@ -4686,39 +4947,39 @@ class FirebaseService {
 
   // 12. TIMEOUT CADAVRE EXQUIS
   Future<void> handleCadavreExquisTimeout(String gameCode) async {
-    final gameRef = _db.collection('games').doc(gameCode);
-    final gameSnap = await gameRef.get();
-    if (!gameSnap.exists) return;
-    var gameData = gameSnap.data() as Map<String, dynamic>;
-    if (gameData['gameState'] != 'playing') return;
-    if (!_isTurnTimedOut(gameData)) return;
-    final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
-    final currentIndex = gameData['currentPlayerIndex'] ?? 0;
-    if (currentIndex < playerOrder.length) {
-      final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
-      final words = [
-        "mystère",
-        "silence",
-        "regarde",
-        "chat",
-        "étrange",
-        "nuit",
-        "voyage",
-      ];
-      final randomWord = words[Random().nextInt(words.length)];
-      await notifyAutoPlay(
-        gameRef,
-        playerName,
-        actionDetails: "mot '$randomWord'",
-      );
-      await submitCadavreExquisStep(
-        gameCode,
-        playerId,
-        randomWord,
-        isAuto: true,
-      );
-    }
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final gameSnap = await transaction.get(gameRef);
+      if (!gameSnap.exists) return;
+      var gameData = gameSnap.data() as Map<String, dynamic>;
+      if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
+      final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
+      final currentIndex =
+          (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (currentIndex < playerOrder.length) {
+        final playerId = playerOrder[currentIndex];
+        final playerName =
+            gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+
+        // Cadavre Exquis est un jeu créatif/social : PAS de mot auto
+        await _incrementInactiveCountAndCheckExpulsion(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+        );
+
+        int nextIndex = (currentIndex + 1) % playerOrder.length;
+        transaction.update(gameRef, {
+          'currentPlayerIndex': nextIndex,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "⚠️ $playerName n'a pas répondu à temps (Cadavre Exquis). Tour sauté sans mot automatique.",
+          ]),
+        });
+      }
+    });
   }
 
   // 7. TIMEOUT PETITS CHEVAUX
@@ -4745,14 +5006,51 @@ class FirebaseService {
       final dice = (gameData['petitsChevauxDice'] as num?)?.toInt() ?? 0;
       int? validPawnIdx;
 
+      bool startBlocked = positions.contains(0);
+
+      // Priorité 1 : Avancer un pion déjà sur le circuit si valide
       for (int i = 0; i < 4; i++) {
         int pos = positions[i];
-        if (pos == -1 && (dice == 1 || dice == 6)) {
+        if (pos >= 0 && pos + dice <= 56) {
           validPawnIdx = i;
           break;
-        } else if (pos >= 0 && pos + dice <= 56) {
-          validPawnIdx = i;
-          break;
+        }
+      }
+
+      // Priorité 2 : Sortir un pion de l'écurie si la case de départ est libre
+      if (validPawnIdx == null && (dice == 1 || dice == 6) && !startBlocked) {
+        for (int i = 0; i < 4; i++) {
+          if (positions[i] == -1) {
+            validPawnIdx = i;
+            break;
+          }
+        }
+      }
+
+      // Priorité 3 : Mode 2v2 (Pions de l'allié)
+      bool isTeamMode = gameData['petitsChevauxTeamMode'] ?? false;
+      int myIdx = playerOrder.indexOf(currentPlayerId);
+      String targetOwnerId = currentPlayerId;
+
+      if (validPawnIdx == null && isTeamMode && playerOrder.length == 4) {
+        final String allyId = playerOrder[(myIdx + 2) % 4];
+        final List<int> allyPositions = List<int>.from(
+          gameData['petitsChevauxPositions']?[allyId] ?? [-1, -1, -1, -1],
+        );
+        bool allyStartBlocked = allyPositions.contains(0);
+        for (int i = 0; i < 4; i++) {
+          int pos = allyPositions[i];
+          if (pos > 50 && pos + dice <= 56) {
+            validPawnIdx = i;
+            targetOwnerId = allyId;
+            break;
+          } else if (pos == -1 &&
+              (dice == 1 || dice == 6) &&
+              !allyStartBlocked) {
+            validPawnIdx = i;
+            targetOwnerId = allyId;
+            break;
+          }
         }
       }
 
@@ -4765,7 +5063,7 @@ class FirebaseService {
         await movePawnPetitsChevaux(
           gameCode,
           currentPlayerId,
-          currentPlayerId,
+          targetOwnerId,
           validPawnIdx,
           isAuto: true,
         );
@@ -4842,6 +5140,7 @@ class FirebaseService {
             'playerOrder': playerOrder,
             'teams': teams,
             'inactiveTurnCounts.$playerIdToRemove': FieldValue.delete(),
+            'pendingBotReplacement': FieldValue.delete(),
           };
 
           // Si moins de 2 joueurs, on arrête tout
@@ -4900,49 +5199,103 @@ class FirebaseService {
       'inactiveTurnCounts.$timedOutPlayerId': newInactiveCount,
     });
 
-    if (newInactiveCount >= 2) {
-      var players = Map<String, dynamic>.from(gameData['players']);
-      var playerOrder = List<String>.from(gameData['playerOrder']);
+    // Seuil de 3 timers arrivés à 0
+    if (newInactiveCount >= 3) {
+      var players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      var playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
       String playerName = players[timedOutPlayerId]?['name'] ?? 'Un joueur';
-      players.remove(timedOutPlayerId);
-      playerOrder.remove(timedOutPlayerId);
+      final gameType = gameData['gameType'] ?? '';
+      final isSocial = GameData.isSocialOpinionGame(gameType);
 
+      // Notifier l'administrateur avec dialogue de décision
       Map<String, dynamic> updates = {
-        'players': players,
-        'playerOrder': playerOrder,
+        'pendingBotReplacement': {
+          'playerId': timedOutPlayerId,
+          'playerName': playerName,
+          'reason': 'inactif (3 tours sans réponse)',
+          'isSocial': isSocial,
+          'timestamp': FieldValue.serverTimestamp(),
+        },
         'gameLog': FieldValue.arrayUnion([
-          "$playerName a été expulsé pour inactivité.",
+          "⚠️ $playerName a manqué 3 tours sans jouer. L'administrateur a été invité à décider de son remplacement par l'ordinateur.",
         ]),
       };
 
-      if (gameData['gameType'] == 'Uno') {
-        var unoOrder = List<String>.from(gameData['unoPlayerOrder'] ?? [])
-          ..remove(timedOutPlayerId);
-        updates['unoPlayerOrder'] = unoOrder;
-      }
-
-      // Si l'inactivité fait tomber le jeu à moins de 2 joueurs, on arrête
-      if (players.length < 2 && gameData['gameState'] == 'playing') {
-        updates['gameState'] = 'gameOver';
-        updates['gameEndReason'] =
-            "Partie arrêtée : un joueur a été inactif, il n'y a plus assez de joueurs. Retour à l'accueil.";
-      } else {
-        if (gameData['hostId'] == timedOutPlayerId && playerOrder.isNotEmpty) {
-          updates['hostId'] = playerOrder[0];
-        }
-        if (playerOrder.isNotEmpty) {
-          int oldIndex = (gameData['playerOrder'] as List).indexOf(
-            timedOutPlayerId,
-          );
-          updates['currentPlayerIndex'] = oldIndex % playerOrder.length;
+      // Passer au joueur suivant pour débloquer la partie pendant la décision
+      if (playerOrder.isNotEmpty) {
+        int oldIndex = playerOrder.indexOf(timedOutPlayerId);
+        int currentIndex =
+            (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
+        if (oldIndex == currentIndex) {
+          int nextIndex = (currentIndex + 1) % playerOrder.length;
+          updates['currentPlayerIndex'] = nextIndex;
+          updates['turnStartTime'] = FieldValue.serverTimestamp();
         }
       }
 
-      updates['turnStartTime'] = FieldValue.serverTimestamp();
       transaction.update(gameRef, updates);
       return true;
     }
     return false;
+  }
+
+  /// Demande à l'administrateur s'il souhaite remplacer un joueur inactif/déconnecté par un bot
+  Future<void> requestBotReplacement(
+    String gameCode,
+    String playerId,
+    String playerName,
+    String reason,
+  ) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final gameData = snap.data() as Map<String, dynamic>;
+    final isSocial = GameData.isSocialOpinionGame(gameData['gameType'] ?? '');
+
+    await gameRef.update({
+      'pendingBotReplacement': {
+        'playerId': playerId,
+        'playerName': playerName,
+        'reason': reason,
+        'isSocial': isSocial,
+        'timestamp': FieldValue.serverTimestamp(),
+      },
+      'gameLog': FieldValue.arrayUnion([
+        "⚠️ $playerName ne répond plus ($reason). L'administrateur a été invité à décider de son remplacement par l'ordinateur.",
+      ]),
+    });
+  }
+
+  /// Convertit un joueur en bot : l'ordinateur joue à sa place et le joueur réel est exclu sans gains
+  Future<void> convertPlayerToBot(String gameCode, String playerId) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    await _db.runTransaction((transaction) async {
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      if (!players.containsKey(playerId)) return;
+      final playerName = players[playerId]?['name'] ?? 'Joueur';
+
+      Map<String, dynamic> updates = {
+        'players.$playerId.isBot': true,
+        'players.$playerId.replacedByBot': true,
+        'botPlayers.$playerId': true,
+        'pendingBotReplacement': FieldValue.delete(),
+        'inactiveTurnCounts.$playerId': 0,
+        'gameLog': FieldValue.arrayUnion([
+          "🤖 $playerName a été exclu et remplacé par l'ordinateur. L'IA jouera à son tour (le joueur ne gagne rien).",
+        ]),
+      };
+
+      // Si c'est actuellement le tour de ce joueur, réinitialiser turnStartTime pour donner 5s au bot
+      final curPlayerId = getCurrentPlayerId(gameData);
+      if (curPlayerId == playerId) {
+        updates['turnStartTime'] = FieldValue.serverTimestamp();
+      }
+
+      transaction.update(gameRef, updates);
+    });
   }
 
   Future<void> handleTurnTimeout(String gameCode) async {
@@ -4963,107 +5316,84 @@ class FirebaseService {
         return;
 
       final timedOutPlayerId = playerOrder[currentPlayerIndex];
+      final gameType = gameData['gameType'] ?? '';
+      final bool isSocialGame = GameData.isSocialOpinionGame(gameType);
 
-      // 1. Gestion de l'inactivitÃƒÂ© (Strike / Expulsion)
+      // 1. Gestion de l'inactivité (Strike / Expulsion après 3 timers)
       if (await _incrementInactiveCountAndCheckExpulsion(
         transaction,
         gameRef,
         gameData,
         timedOutPlayerId,
       )) {
-        return; // Le joueur a ÃƒÂ©tÃƒÂ© expulsÃƒÂ©, on s'arrÃƒÂªte lÃƒÂ .
+        return; // Alerte admin déclenchée
       }
 
       String playerName =
           gameData['players'][timedOutPlayerId]?['name'] ?? 'Joueur';
 
-      // 2. Logique spÃƒÂ©cifique pour Infiltré & Mr. White
-      if (gameData['gameType'] == 'Infiltré & Mr. White' &&
-          gameData['currentPhase'] == 'clue_giving') {
-        // Soumettre l'indice automatique
-        Map<String, dynamic> updates = {
-          'playerClues.$timedOutPlayerId': "Ce joueur est inactif",
-          'turnLog': FieldValue.arrayUnion([
-            "$playerName n'a pas rÃƒÂ©pondu (Indice auto : 'Ce joueur est inactif')",
-          ]),
-          'turnStartTime': FieldValue.serverTimestamp(),
-        };
-
-        // Calcul du prochain joueur (Logique identique ÃƒÂ  submitUndercoverClue)
-        var playerData = Map<String, dynamic>.from(gameData['playerData']);
-
-        int findNextActivePlayer(int currentIndex) {
-          int nextIndex = (currentIndex + 1) % playerOrder.length;
-          int loopGuard = 0;
-          while (playerData[playerOrder[nextIndex]]['status'] != 'active' &&
-              loopGuard < playerOrder.length) {
-            nextIndex = (nextIndex + 1) % playerOrder.length;
-            loopGuard++;
-          }
-          if (loopGuard >= playerOrder.length) return -1;
-          return nextIndex;
-        }
-
-        int nextIndex = findNextActivePlayer(currentPlayerIndex);
-
-        // VÃƒÂ©rifier si tous les joueurs actifs ont donnÃƒÂ© un indice
-        Map<String, dynamic> playerClues = Map<String, dynamic>.from(
-          gameData['playerClues'] ?? {},
-        );
-        playerClues[timedOutPlayerId] = "Ce joueur est inactif";
-        int activePlayerCount =
-            playerData.values.where((p) => p['status'] == 'active').length;
-        bool allCluesGiven =
-            activePlayerCount > 0 && playerClues.length >= activePlayerCount;
-
-        // Si on a fait le tour ou qu'il n'y a plus de joueur, on passe au vote
-        if (nextIndex == -1 || allCluesGiven) {
-          updates['currentPhase'] = 'voting';
-          updates['votes'] = {};
-          updates['turnLog'] = FieldValue.arrayUnion([
-            "La phase de vote a commencÃƒÂ© !",
-          ]);
-        } else {
-          updates['currentPlayerIndex'] = nextIndex;
-        }
-
-        transaction.update(gameRef, updates);
-        return; // On sort ici car la logique InfiltrÃƒÂ© est gÃƒÂ©rÃƒÂ©e
-      }
-
-      // 3. Gestion du timeout du Juge en phase de vote (déblocage)
-      if (gameData['gameType'] == 'Le Juge' &&
-          gameData['roundState'] == 'voting') {
-        final answers = Map<String, dynamic>.from(gameData['answers'] ?? {});
-        if (answers.isNotEmpty) {
-          final randomWinnerId = answers.keys.elementAt(
-            Random().nextInt(answers.length),
+      // 2. Si c'est un jeu social / opinion / créatif : PAS DE COUP AUTOMATIQUE !
+      if (isSocialGame) {
+        // Cas particulier Infiltré & Mr. White : avancer de joueur sans indice bidon
+        if (gameData['gameType'] == 'Infiltré & Mr. White' &&
+            gameData['currentPhase'] == 'clue_giving') {
+          var playerData = Map<String, dynamic>.from(
+            gameData['playerData'] ?? {},
           );
-          final winnerName =
-              gameData['players'][randomWinnerId]?['name'] ?? 'Joueur';
-          transaction.update(gameRef, {
-            'players.$randomWinnerId.score': FieldValue.increment(1),
-            'roundState': 'result',
-            'roundWinnerId': randomWinnerId,
-            'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion([
-              "⏳ Temps écoulé ! $winnerName est choisi au hasard et remporte la manche.",
+          int findNextActivePlayer(int currentIndex) {
+            int nextIndex = (currentIndex + 1) % playerOrder.length;
+            int loopGuard = 0;
+            while (playerData[playerOrder[nextIndex]]?['status'] != 'active' &&
+                loopGuard < playerOrder.length) {
+              nextIndex = (nextIndex + 1) % playerOrder.length;
+              loopGuard++;
+            }
+            if (loopGuard >= playerOrder.length) return -1;
+            return nextIndex;
+          }
+
+          int nextIndex = findNextActivePlayer(currentPlayerIndex);
+          Map<String, dynamic> playerClues = Map<String, dynamic>.from(
+            gameData['playerClues'] ?? {},
+          );
+          int activePlayerCount =
+              playerData.values.where((p) => p['status'] == 'active').length;
+          bool isLastPlayer =
+              (nextIndex == -1 || nextIndex <= currentPlayerIndex);
+
+          Map<String, dynamic> updates = {
+            'turnLog': FieldValue.arrayUnion([
+              "⚠️ $playerName n'a pas donné d'indice (Jeu d'opinion). Tour passé.",
             ]),
-          });
-        } else {
-          transaction.update(gameRef, {
-            'roundState': 'result',
-            'roundWinnerId': null,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion([
-              "⏳ Temps écoulé ! Aucune réponse soumise, personne ne marque.",
-            ]),
-          });
+          };
+
+          if (isLastPlayer || playerClues.length >= activePlayerCount) {
+            updates['currentPhase'] = 'voting';
+            updates['votes'] = {};
+            updates['turnLog'] = FieldValue.arrayUnion([
+              "La phase de vote a commencé !",
+            ]);
+          } else {
+            updates['currentPlayerIndex'] = nextIndex;
+          }
+          transaction.update(gameRef, updates);
+          return;
         }
+
+        // Pour tous les autres jeux d'opinion : tour passé sans coup auto
+        int nextPlayerIndex = (currentPlayerIndex + 1) % playerOrder.length;
+        transaction.update(gameRef, {
+          'currentPlayerIndex': nextPlayerIndex,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "⚠️ $playerName n'a pas répondu (Jeu d'opinion). Tour sauté sans action automatique.",
+          ]),
+        });
         return;
       }
 
-      // 4. Logique par défaut pour les autres jeux (Passer au joueur suivant simplement)
+      // 3. Logique par défaut pour les autres jeux (Passer au joueur suivant simplement)
       int nextPlayerIndex = (currentPlayerIndex + 1) % playerOrder.length;
       transaction.update(gameRef, {
         'currentPlayerIndex': nextPlayerIndex,
@@ -5754,85 +6084,107 @@ class FirebaseService {
 
   // 1. TIMEOUT UNO (CORRIGÉ & ROBUSTE)
   Future<void> handleUnoTimeout(String gameCode) async {
-    final gameRef = _db.collection('games').doc(gameCode);
-    final gameSnap = await gameRef.get();
-    if (!gameSnap.exists) return;
-    var gameData = gameSnap.data() as Map<String, dynamic>;
-    if (gameData['gameState'] != 'playing') return;
-    if (!_isTurnTimedOut(gameData)) return;
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['gameState'] != 'playing') return;
 
-    final playerOrder = List<String>.from(gameData['unoPlayerOrder'] ?? []);
-    final currentIndex =
-        (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
-    if (currentIndex >= playerOrder.length) return;
+      final playerOrder = List<String>.from(gameData['unoPlayerOrder'] ?? []);
+      final currentIndex =
+          (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
-    final playerId = playerOrder[currentIndex];
-    final playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
-    final hands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
-    final myHand = List<String>.from(hands[playerId] ?? []);
+      final playerId = playerOrder[currentIndex];
+      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+      final hands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+      final myHand = List<String>.from(hands[playerId] ?? []);
+      final discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
+      final String topCard =
+          discardPile.isNotEmpty ? discardPile.last : 'red-0';
+      final String? wildColor = gameData['unoWildColorChosen'];
+      final int direction = (gameData['unoDirection'] as num?)?.toInt() ?? 1;
 
-    // 1. Récupération réelle de la carte au sommet de la défausse
-    final discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
-    final String topCard = discardPile.isNotEmpty ? discardPile.last : 'red-0';
-    final String? wildColor = gameData['unoWildColorChosen'];
-    final int pendingDraw = (gameData['unoPendingDraw'] as num?)?.toInt() ?? 0;
-    final bool stackDraws = gameData['unoStackDraws'] ?? true;
+      final bool drawActionDone = gameData['unoDrawActionDone'] == true;
+      final String? lastDrawn = gameData['unoLastDrawnCard'] as String?;
+      int nextIndex =
+          (currentIndex + direction + playerOrder.length) % playerOrder.length;
 
-    // 2. Recherche d'une carte valide dans la main
-    String? playableCard;
-    if (myHand.isNotEmpty) {
-      if (pendingDraw > 0) {
-        // En cas de pénalité (+2 ou +4), on cherche une carte pour contrer (si empilement actif)
-        if (stackDraws) {
-          playableCard = myHand.firstWhere((c) {
-            final val = GameData.getUnoCardValue(c);
-            return (val == 'draw2' || val == 'wild_draw4') &&
-                GameData.canPlayUnoCard(c, topCard, wildColor);
-          }, orElse: () => '');
+      if (drawActionDone) {
+        // Le joueur a déjà pioché manuellement pendant son tour
+        if (lastDrawn != null &&
+            myHand.contains(lastDrawn) &&
+            GameData.canPlayUnoCard(lastDrawn, topCard, wildColor)) {
+          myHand.remove(lastDrawn);
+          discardPile.add(lastDrawn);
+          hands[playerId] = myHand;
+          transaction.update(gameRef, {
+            'unoPlayerHands': hands,
+            'unoDiscardPile': discardPile,
+            'unoCurrentPlayerIndex': nextIndex,
+            'unoDrawActionDone': false,
+            'unoLastDrawnCard': null,
+            'turnStartTime': FieldValue.serverTimestamp(),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName n'a pas joué à temps (Carte $lastDrawn posée).",
+            ]),
+          });
+        } else {
+          // Passe son tour sans repiocher
+          transaction.update(gameRef, {
+            'unoCurrentPlayerIndex': nextIndex,
+            'unoDrawActionDone': false,
+            'unoLastDrawnCard': null,
+            'turnStartTime': FieldValue.serverTimestamp(),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName n'a pas joué à temps (Tour passé).",
+            ]),
+          });
         }
-      } else {
-        // Recherche normale d'une carte jouable
-        playableCard = myHand.firstWhere(
-          (c) => GameData.canPlayUnoCard(c, topCard, wildColor),
-          orElse: () => '',
-        );
+        return;
       }
-    }
 
-    // 3. ACTION AUTOMATIQUE :
-    if (playableCard != null && playableCard.isNotEmpty) {
-      // Le joueur possède une carte jouable -> L'ordinateur la pose
-      await notifyAutoPlay(
-        gameRef,
-        playerName,
-        actionDetails: "carte $playableCard posée",
+      String playable = myHand.firstWhere(
+        (c) => GameData.canPlayUnoCard(c, topCard, wildColor),
+        orElse: () => '',
       );
-      await playUnoCard(
-        gameCode,
-        playerId,
-        playableCard,
-        chosenColor: 'red', // Couleur par défaut si c'est un Joker
-        isAuto: true,
-      );
-    } else {
-      // Aucune carte jouable -> Pioche (et purge de pénalité si présente) puis passage immédiat au joueur suivant
-      await notifyAutoPlay(
-        gameRef,
-        playerName,
-        actionDetails: "pioche et passe son tour",
-      );
-      await _db.runTransaction((transaction) async {
-        final freshSnap = await transaction.get(gameRef);
-        if (!freshSnap.exists) return;
-        final freshData = freshSnap.data() as Map<String, dynamic>;
-        await _drawUnoCardAndPassLogic(
-          transaction,
-          gameRef,
-          freshData,
-          playerId,
-        );
-      });
-    }
+
+      if (playable.isNotEmpty) {
+        myHand.remove(playable);
+        discardPile.add(playable);
+        hands[playerId] = myHand;
+
+        transaction.update(gameRef, {
+          'unoPlayerHands': hands,
+          'unoDiscardPile': discardPile,
+          'unoCurrentPlayerIndex': nextIndex,
+          'unoDrawActionDone': false,
+          'unoLastDrawnCard': null,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ $playerName n'a pas joué à temps (Carte $playable posée).",
+          ]),
+        });
+      } else {
+        List<String> deck = List<String>.from(gameData['unoDeck'] ?? []);
+        if (deck.isNotEmpty) {
+          myHand.add(deck.removeAt(0));
+          hands[playerId] = myHand;
+        }
+        transaction.update(gameRef, {
+          'unoPlayerHands': hands,
+          'unoDeck': deck,
+          'unoCurrentPlayerIndex': nextIndex,
+          'unoDrawActionDone': false,
+          'unoLastDrawnCard': null,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ $playerName n'a pas joué à temps (Pioche et passe son tour).",
+          ]),
+        });
+      }
+    });
   }
 
   Future<void> handlePokerTimeout(String gameCode) async {
@@ -6337,12 +6689,14 @@ class FirebaseService {
       int score = 0;
 
       if (wasCorrect) {
-        final Timestamp voteTime = voteData['timestamp'] as Timestamp;
+        final int voteTimeMs =
+            (voteData['timestamp'] is Timestamp)
+                ? (voteData['timestamp'] as Timestamp).millisecondsSinceEpoch
+                : (voteData['timestamp'] as num?)?.toInt() ??
+                    roundStartTime.millisecondsSinceEpoch;
 
         final double elapsedSeconds =
-            (voteTime.millisecondsSinceEpoch -
-                roundStartTime.millisecondsSinceEpoch) /
-            1000.0;
+            (voteTimeMs - roundStartTime.millisecondsSinceEpoch) / 1000.0;
 
         final double timeFactor = (elapsedSeconds / timePerPhoto).clamp(
           0.0,
@@ -8912,6 +9266,9 @@ class FirebaseService {
     String? dominoesMode,
     int? dominoesTargetScore,
     bool? petitsChevauxTeamMode,
+    bool? aoVPlayersDecide,
+    int? aoVVoteThreshold,
+    int? aoVMaxRounds,
   }) async {
     final String? currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
     Map<String, dynamic> enrichedPlayers = {};
@@ -8942,6 +9299,11 @@ class FirebaseService {
       'players': enrichedPlayers,
       'gameType': gameType,
       'enableFloatingChat': true,
+      if (gameType == 'Action ou Vérité') ...{
+        'aoVPlayersDecide': aoVPlayersDecide ?? false,
+        'aoVVoteThreshold': aoVVoteThreshold ?? 100,
+        'aoVMaxRounds': aoVMaxRounds ?? 10,
+      },
       if (gameType == 'Blanc Manger Coco') ...{'bmcTargetScore': 10},
       if (gameType == 'Devine Tête') 'devineTeteUseTeams': devineTeteUseTeams,
       'difficulty': difficulty,
@@ -9262,6 +9624,9 @@ class FirebaseService {
     int? resultTimerSeconds,
     bool? petitsChevauxTeamMode,
     bool? enableFloatingChat, // <--- NOUVEAU
+    bool? aoVPlayersDecide,
+    int? aoVVoteThreshold,
+    int? aoVMaxRounds,
   }) async {
     String gameCode = randomNumeric(6);
     await _db.collection('games').doc(gameCode).set({
@@ -9278,6 +9643,11 @@ class FirebaseService {
       'enableFloatingChat': enableFloatingChat ?? true, // <--- NOUVEAU
 
       'gameType': gameType,
+      if (gameType == 'Action ou Vérité') ...{
+        'aoVPlayersDecide': aoVPlayersDecide ?? false,
+        'aoVVoteThreshold': aoVVoteThreshold ?? 100,
+        'aoVMaxRounds': aoVMaxRounds ?? 10,
+      },
       if (gameType == 'Blanc Manger Coco') ...{'bmcTargetScore': 10},
       if (gameType == 'Devine Tête') 'devineTeteUseTeams': devineTeteUseTeams,
       'difficulty': difficulty,
@@ -10652,16 +11022,41 @@ class FirebaseService {
       }
 
       int nextTeamIndex = (teamIds.indexOf(currentTeamId) + 1) % teamIds.length;
+      int currentRoundNum =
+          (gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1;
+      int totalRounds = (gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4;
+
+      if (nextTeamIndex == 0) {
+        currentRoundNum++;
+      }
+
+      if (currentRoundNum > totalRounds) {
+        String winnerTeam =
+            (scores['team_0'] ?? 0) >= (scores['team_1'] ?? 0)
+                ? 'team_0'
+                : 'team_1';
+        String winnerName =
+            tabooTeams[winnerTeam]?['name'] ??
+            (winnerTeam == 'team_0' ? 'Équipe 1' : 'Équipe 2');
+        await gameRef.update({
+          'gameState': 'gameOver',
+          'gameWinner': winnerTeam,
+          'gameEndReason': "Fin des manches ! Victoire de $winnerName !",
+        });
+        return;
+      }
 
       await gameRef.update({
         'tabooTurnActive': false,
         'tabooCurrentTeamIndex': nextTeamIndex,
+        'tabooRoundNumber': currentRoundNum,
         'gameLog': FieldValue.arrayUnion([
-          "Temps ÃƒÂ©coulÃƒÂ© ! Passage ÃƒÂ  l'ÃƒÂ©quipe suivante.",
+          "Temps écoulé ! Passage à l'équipe suivante.",
         ]),
       });
 
       gameData['tabooCurrentTeamIndex'] = nextTeamIndex;
+      gameData['tabooRoundNumber'] = currentRoundNum;
       await _startTabooTurn(gameRef, gameData);
     }
   }
@@ -11326,6 +11721,9 @@ class FirebaseService {
       }
 
       if (action == 'discard') {
+        if (!hasDrawn && !isAuto) {
+          throw Exception("Vous devez d'abord piocher une carte.");
+        }
         if (cards == null || cards.length != 1)
           throw Exception("Défaussez exactement 1 carte.");
         String cardToDiscard = cards[0];
@@ -11344,7 +11742,9 @@ class FirebaseService {
             35,
             applySpeedBonus: true,
           );
-          _db.collection('users').doc(currentAuthUid).set({
+          final targetAuth =
+              (gameData['players'] as Map?)?[playerId]?['authUid'] ?? playerId;
+          _db.collection('users').doc(targetAuth).set({
             'unlockedBadges.rami_gin': FieldValue.serverTimestamp(),
           }, SetOptions(merge: true));
 
@@ -11529,12 +11929,70 @@ class FirebaseService {
         consecutiveSixes[playerId] = 0;
       }
 
-      transaction.update(gameRef, {
-        'petitsChevauxDice': dice,
-        'petitsChevauxHasRolled': true,
-        'petitsChevauxConsecutiveSixes': consecutiveSixes,
-        'turnStartTime': FieldValue.serverTimestamp(),
-      });
+      final positions = Map<String, dynamic>.from(
+        gameData['petitsChevauxPositions'] ?? {},
+      );
+      final List<int> myPawns = List<int>.from(
+        positions[playerId] ?? [-1, -1, -1, -1],
+      );
+      final bool isTeamMode = gameData['petitsChevauxTeamMode'] ?? false;
+      final int myIdx = playerOrder.indexOf(playerId);
+
+      // Vérifier si AU MOINS UN coup est possible
+      bool hasValidMove = false;
+
+      // 1. Vérification sur mes propres pions
+      for (int p in myPawns) {
+        if (p == -1 && (dice == 1 || dice == 6)) {
+          hasValidMove = true;
+          break;
+        } else if (p >= 0 && (p + dice <= 56)) {
+          hasValidMove = true;
+          break;
+        }
+      }
+
+      // 2. Vérification sur les pions de l'allié en mode 2v2
+      if (!hasValidMove && isTeamMode && playerOrder.length == 4) {
+        final String allyId = playerOrder[(myIdx + 2) % 4];
+        final List<int> allyPawns = List<int>.from(
+          positions[allyId] ?? [-1, -1, -1, -1],
+        );
+        for (int p in allyPawns) {
+          if (p == -1 && (dice == 1 || dice == 6)) {
+            hasValidMove = true;
+            break;
+          } else if (p > 50 && (p + dice <= 56)) {
+            hasValidMove = true;
+            break;
+          }
+        }
+      }
+
+      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+
+      if (!hasValidMove) {
+        // Aucun coup possible -> Passage automatique immédiat au joueur suivant
+        int nextIndex = (currentIndex + 1) % playerOrder.length;
+        transaction.update(gameRef, {
+          'petitsChevauxDice': dice,
+          'petitsChevauxHasRolled': false,
+          'petitsChevauxCurrentIndex': nextIndex,
+          'petitsChevauxConsecutiveSixes': consecutiveSixes,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "🎲 $playerName a fait un $dice mais aucun pion ne peut avancer. Tour passé automatiquement !",
+          ]),
+        });
+      } else {
+        // Coup possible -> Le joueur choisit son pion
+        transaction.update(gameRef, {
+          'petitsChevauxDice': dice,
+          'petitsChevauxHasRolled': true,
+          'petitsChevauxConsecutiveSixes': consecutiveSixes,
+          'turnStartTime': FieldValue.serverTimestamp(),
+        });
+      }
     });
   }
 
@@ -12823,6 +13281,405 @@ class FirebaseService {
     });
   }
 
+  // =============================================================================
+  // ACTION OU VÉRITÉ - LOGIQUE MULTIJOUEUR EN LIGNE
+  // =============================================================================
+
+  Future<void> _startActionOuVeriteRound(
+    DocumentReference gameRef,
+    Map<String, dynamic> gameData,
+  ) async {
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final playerIds = players.keys.toList()..shuffle();
+    final bool playersDecide = gameData['aoVPlayersDecide'] ?? false;
+    final int voteThreshold = gameData['aoVVoteThreshold'] ?? 100;
+
+    await gameRef.update({
+      'gameState': 'playing',
+      'roundState': 'spinning_wheel',
+      'aoVPlayerOrder': playerIds,
+      'aoVCurrentPlayerIndex': -1, // -1 = personne n'a encore été désigné
+      'aoVCurrentPlayerId': null,
+      'aoVCurrentChallenge': null,
+      'aoVChallengeType': null, // 'action' ou 'verite'
+      'aoVChallengeAuthor': null, // ID du joueur qui a écrit le défi
+      'aoVPhase':
+          'waiting_spin', // waiting_spin, spin_result, writing_challenge, performing, voting, result
+      'aoVPlayersDecide': playersDecide,
+      'aoVVoteThreshold': voteThreshold,
+      'aoVVotes': {},
+      'aoVCurrentRound': 1,
+      'aoVSpinsRemaining': gameData['aoVMaxRounds'] ?? 10,
+      'turnStartTime': FieldValue.serverTimestamp(),
+      'gameLog': FieldValue.arrayUnion([
+        "La partie d'Action ou Vérité commence ! La roulette va désigner le premier joueur.",
+      ]),
+    });
+  }
+
+  /// Le joueur tourne la roulette pour savoir qui joue
+  Future<void> aoVSpinWheel(String gameCode, String playerId) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['aoVPhase'] != 'waiting_spin') return;
+
+      final playerOrder = List<String>.from(gameData['aoVPlayerOrder'] ?? []);
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      if (playerOrder.isEmpty) return;
+
+      // Désigner un joueur aléatoire
+      final randomIndex = Random().nextInt(playerOrder.length);
+      final selectedPlayerId = playerOrder[randomIndex];
+      final selectedName = players[selectedPlayerId]?['name'] ?? 'Joueur';
+
+      transaction.update(gameRef, {
+        'aoVCurrentPlayerIndex': randomIndex,
+        'aoVCurrentPlayerId': selectedPlayerId,
+        'aoVPhase': 'spin_result',
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'gameLog': FieldValue.arrayUnion([
+          "🎰 La roulette a désigné $selectedName !",
+        ]),
+      });
+    });
+  }
+
+  /// Le joueur désigné tire Action ou Vérité
+  Future<void> aoVDrawChallengeType(String gameCode, String playerId) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['aoVPhase'] != 'spin_result') return;
+      if (gameData['aoVCurrentPlayerId'] != playerId) return;
+
+      final bool playersDecide = gameData['aoVPlayersDecide'] ?? false;
+      final playerOrder = List<String>.from(gameData['aoVPlayerOrder'] ?? []);
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+      // Tirer aléatoirement Action ou Vérité
+      final challengeType = Random().nextBool() ? 'action' : 'verite';
+
+      if (playersDecide) {
+        // Mode Juges : désigner un joueur aléatoire pour écrire le défi
+        final otherPlayers = playerOrder.where((p) => p != playerId).toList();
+        if (otherPlayers.isEmpty) return;
+
+        final authorId = otherPlayers[Random().nextInt(otherPlayers.length)];
+        final authorName = players[authorId]?['name'] ?? 'Joueur';
+        final targetPlayerName = players[playerId]?['name'] ?? 'Joueur';
+
+        transaction.update(gameRef, {
+          'aoVChallengeType': challengeType,
+          'aoVChallengeAuthor': authorId,
+          'aoVPhase': 'writing_challenge',
+          'aoVCurrentChallenge': null,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : 'VÉRITÉ'} !",
+            "✍️ $authorName doit écrire le défi...",
+          ]),
+        });
+      } else {
+        // Mode Classique : générer un défi aléatoire
+        final String difficulty = gameData['difficulty'] ?? 'soft';
+        final List<String> challenges;
+        if (challengeType == 'action') {
+          challenges = GameWords.dares[difficulty] ?? GameWords.dares['soft']!;
+        } else {
+          challenges =
+              GameWords.truths[difficulty] ?? GameWords.truths['soft']!;
+        }
+        final challenge = challenges[Random().nextInt(challenges.length)];
+        final targetPlayerName = players[playerId]?['name'] ?? 'Joueur';
+
+        transaction.update(gameRef, {
+          'aoVChallengeType': challengeType,
+          'aoVCurrentChallenge': challenge,
+          'aoVPhase': 'performing',
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : 'VÉRITÉ'} !",
+          ]),
+        });
+      }
+    });
+  }
+
+  /// Le joueur auteur soumet le défi écrit
+  Future<void> aoVSubmitWrittenChallenge(
+    String gameCode,
+    String playerId,
+    String challenge,
+  ) async {
+    final cleanChallenge = FirebaseService.sanitizeUserInput(
+      challenge,
+      maxLength: 200,
+    );
+    if (cleanChallenge.isEmpty) return;
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['aoVPhase'] != 'writing_challenge') return;
+      if (gameData['aoVChallengeAuthor'] != playerId) return;
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final currentPlayerId = gameData['aoVCurrentPlayerId'];
+      final currentPlayerName = players[currentPlayerId]?['name'] ?? 'Joueur';
+
+      transaction.update(gameRef, {
+        'aoVCurrentChallenge': cleanChallenge,
+        'aoVPhase': 'performing',
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'gameLog': FieldValue.arrayUnion([
+          "📝 Le défi a été envoyé à $currentPlayerName !",
+        ]),
+      });
+    });
+  }
+
+  /// Le joueur confirme qu'il a réalisé le défi → passe au vote
+  Future<void> aoVConfirmPerformed(String gameCode, String playerId) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['aoVPhase'] != 'performing') return;
+      if (gameData['aoVCurrentPlayerId'] != playerId) return;
+
+      transaction.update(gameRef, {
+        'aoVPhase': 'voting',
+        'aoVVotes': {},
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'gameLog': FieldValue.arrayUnion([
+          "✅ Le joueur a réalisé le défi ! Votez pour valider.",
+        ]),
+      });
+    });
+  }
+
+  /// Les autres joueurs votent pour valider (Oui/Non)
+  Future<void> aoVSubmitVote(
+    String gameCode,
+    String voterId,
+    bool isValid,
+  ) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['aoVPhase'] != 'voting') return;
+
+      final currentPlayerId = gameData['aoVCurrentPlayerId'];
+      if (voterId == currentPlayerId)
+        return; // Le joueur ne vote pas pour lui-même
+
+      final votes = Map<String, dynamic>.from(gameData['aoVVotes'] ?? {});
+      votes[voterId] = isValid;
+
+      final playerOrder = List<String>.from(gameData['aoVPlayerOrder'] ?? []);
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final votersCount = playerOrder.where((p) => p != currentPlayerId).length;
+
+      transaction.update(gameRef, {'aoVVotes': votes});
+
+      // Si tous les votes sont rentrés, calculer le résultat
+      if (votes.length >= votersCount) {
+        final yesVotes = votes.values.where((v) => v == true).length;
+        final percentage =
+            votersCount > 0 ? (yesVotes / votersCount * 100).round() : 100;
+
+        // Calcul XP basé sur le pourcentage
+        final baseXp = gameData['aoVChallengeType'] == 'action' ? 30 : 20;
+        final earnedXp = (baseXp * percentage / 100).round();
+
+        final currentPlayerName = players[currentPlayerId]?['name'] ?? 'Joueur';
+
+        // Créditer l'XP
+        transaction.update(gameRef, {
+          'players.$currentPlayerId.xp': FieldValue.increment(earnedXp),
+        });
+
+        final authUid = players[currentPlayerId]?['authUid'] ?? currentPlayerId;
+        if (authUid != null && authUid.toString().isNotEmpty) {
+          transaction.set(
+            _db.collection('users').doc(authUid.toString()),
+            {'xp': FieldValue.increment(earnedXp)},
+            SetOptions(merge: true),
+          );
+        }
+
+        transaction.update(gameRef, {
+          'aoVPhase': 'result',
+          'aoVResultPercentage': percentage,
+          'aoVEarnedXp': earnedXp,
+          'aoVSpinsRemaining': FieldValue.increment(-1),
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "📊 Résultat : $percentage% de validation !",
+            "⭐ $currentPlayerName gagne $earnedXp XP !",
+          ]),
+        });
+      }
+    });
+  }
+
+  /// Passer au tour suivant
+  Future<void> aoVNextTurn(String gameCode, String playerId) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+
+      final gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['aoVPhase'] != 'result') return;
+
+      final spinsRemaining =
+          (gameData['aoVSpinsRemaining'] as num?)?.toInt() ?? 0;
+
+      if (spinsRemaining <= 0) {
+        // Fin de la partie - déterminer le gagnant (plus d'XP)
+        final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+        String winnerId = '';
+        int maxXp = -1;
+        players.forEach((pId, pData) {
+          final xp = (pData['xp'] as num?)?.toInt() ?? 0;
+          if (xp > maxXp) {
+            maxXp = xp;
+            winnerId = pId;
+          }
+        });
+
+        transaction.update(gameRef, {
+          'gameState': 'gameOver',
+          'gameWinner': winnerId,
+          'gameEndReason':
+              "${players[winnerId]?['name'] ?? 'Joueur'} a le plus d'XP ($maxXp XP) et devient Admin !",
+        });
+      } else {
+        transaction.update(gameRef, {
+          'aoVPhase': 'waiting_spin',
+          'aoVCurrentPlayerId': null,
+          'aoVCurrentChallenge': null,
+          'aoVChallengeType': null,
+          'aoVChallengeAuthor': null,
+          'aoVVotes': {},
+          'aoVResultPercentage': null,
+          'aoVEarnedXp': null,
+          'aoVCurrentRound': FieldValue.increment(1),
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "🔄 Tour suivant ! Qui sera le prochain ?",
+          ]),
+        });
+      }
+    });
+  }
+
+  /// Fin de manche (bouton admin)
+  Future<void> aoVEndRound(String gameCode, String playerId) async {
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+
+      final gameData = snap.data() as Map<String, dynamic>;
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+      // Déterminer le gagnant (plus d'XP)
+      String winnerId = '';
+      int maxXp = -1;
+      players.forEach((pId, pData) {
+        final xp = (pData['xp'] as num?)?.toInt() ?? 0;
+        if (xp > maxXp) {
+          maxXp = xp;
+          winnerId = pId;
+        }
+      });
+
+      transaction.update(gameRef, {
+        'gameState': 'gameOver',
+        'gameWinner': winnerId,
+        'gameEndReason':
+            "Manche terminée ! ${players[winnerId]?['name'] ?? 'Joueur'} gagne avec $maxXp XP !",
+      });
+    });
+  }
+
+  /// Timeout pour Action ou Vérité
+  Future<void> handleActionOuVeriteTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+
+    final gameData = snap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+
+    final phase = gameData['aoVPhase'];
+    final currentPlayerId = gameData['aoVCurrentPlayerId'];
+
+    if (phase == 'writing_challenge') {
+      // Si l'auteur ne répond pas, générer un défi aléatoire
+      final challengeType = gameData['aoVChallengeType'] ?? 'action';
+      final difficulty = gameData['difficulty'] ?? 'soft';
+      final challenges =
+          challengeType == 'action'
+              ? (GameWords.dares[difficulty] ?? GameWords.dares['soft']!)
+              : (GameWords.truths[difficulty] ?? GameWords.truths['soft']!);
+      final challenge = challenges[Random().nextInt(challenges.length)];
+
+      await gameRef.update({
+        'aoVCurrentChallenge': challenge,
+        'aoVPhase': 'performing',
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'gameLog': FieldValue.arrayUnion([
+          "⏰ Temps écoulé ! Un défi aléatoire a été généré.",
+        ]),
+      });
+    } else if (phase == 'voting') {
+      // Forcer les votes manquants à "Oui"
+      final playerOrder = List<String>.from(gameData['aoVPlayerOrder'] ?? []);
+      final votes = Map<String, dynamic>.from(gameData['aoVVotes'] ?? {});
+      final voters = playerOrder.where((p) => p != currentPlayerId).toList();
+
+      for (final voter in voters) {
+        if (!votes.containsKey(voter)) {
+          votes[voter] = true; // Vote automatique positif
+        }
+      }
+
+      final yesVotes = votes.values.where((v) => v == true).length;
+      final percentage =
+          voters.isNotEmpty ? (yesVotes / voters.length * 100).round() : 100;
+      final baseXp = gameData['aoVChallengeType'] == 'action' ? 30 : 20;
+      final earnedXp = (baseXp * percentage / 100).round();
+
+      await gameRef.update({
+        'aoVVotes': votes,
+        'aoVPhase': 'result',
+        'aoVResultPercentage': percentage,
+        'aoVEarnedXp': earnedXp,
+        'players.$currentPlayerId.xp': FieldValue.increment(earnedXp),
+        'aoVSpinsRemaining': FieldValue.increment(-1),
+        'turnStartTime': FieldValue.serverTimestamp(),
+      });
+    }
+  }
+
   Future<void> _startBlancMangerCocoRound(
     DocumentReference gameRef,
     Map<String, dynamic> gameData,
@@ -13103,62 +13960,76 @@ class FirebaseService {
 
   Future<void> handleBMCTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
-    final snap = await gameRef.get();
-    if (!snap.exists) return;
-    var gameData = snap.data() as Map<String, dynamic>;
+    await _db.runTransaction((transaction) async {
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      var gameData = snap.data() as Map<String, dynamic>;
 
-    if (gameData['gameState'] != 'playing') return;
-    if (!_isTurnTimedOut(gameData)) return;
-    final String roundState = gameData['roundState'] ?? '';
-    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-    final String judgeId = gameData['bmcJudgeId'] ?? '';
+      if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
+      final String roundState = gameData['roundState'] ?? '';
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final String judgeId = gameData['bmcJudgeId'] ?? '';
 
-    if (roundState == 'judging_selection') {
-      Map<String, dynamic> playedCards = Map<String, dynamic>.from(
-        gameData['bmcPlayedCards'] ?? {},
-      );
-      Map<String, dynamic> hands = Map<String, dynamic>.from(
-        gameData['bmcHands'] ?? {},
-      );
-      List<String> deck = List<String>.from(gameData['bmcDeck'] ?? []);
+      if (roundState == 'judging_selection') {
+        Map<String, dynamic> playedCards = Map<String, dynamic>.from(
+          gameData['bmcPlayedCards'] ?? {},
+        );
 
-      for (var pId in players.keys) {
-        if (pId == judgeId) continue;
-        if (!playedCards.containsKey(pId)) {
-          List<String> myHand = List<String>.from(hands[pId] ?? []);
-          if (myHand.isNotEmpty) {
-            final card = myHand.removeAt(0);
-            if (deck.isNotEmpty) {
-              myHand.add(deck.removeAt(0));
-            }
-            hands[pId] = myHand;
-            playedCards[pId] = card;
+        // Blanc Manger Coco est un jeu d'humour/opinion : PAS de carte auto jouée
+        for (var pId in players.keys) {
+          if (pId == judgeId) continue;
+          if (!playedCards.containsKey(pId)) {
+            await _incrementInactiveCountAndCheckExpulsion(
+              transaction,
+              gameRef,
+              gameData,
+              pId,
+            );
           }
         }
-      }
 
-      final int requiredPlays = players.length - 1;
-      Map<String, dynamic> updates = {
-        'bmcHands': hands,
-        'bmcPlayedCards': playedCards,
-        'bmcDeck': deck,
-      };
+        Map<String, dynamic> updates = {};
+        if (playedCards.isNotEmpty) {
+          updates['roundState'] = 'judge_voting';
+          updates['turnStartTime'] = FieldValue.serverTimestamp();
+        } else {
+          // Aucun joueur n'a joué : manche annulée
+          updates['bmcPlayedCards'] = {};
+          updates['turnStartTime'] = FieldValue.serverTimestamp();
+          updates['gameLog'] = FieldValue.arrayUnion([
+            "⏳ Temps écoulé ! Aucune carte soumise, manche annulée.",
+          ]);
+        }
+        transaction.update(gameRef, updates);
+      } else if (roundState == 'judge_voting') {
+        // Le juge n'a pas voté : pas de gagnant auto désigné
+        if (judgeId.isNotEmpty) {
+          await _incrementInactiveCountAndCheckExpulsion(
+            transaction,
+            gameRef,
+            gameData,
+            judgeId,
+          );
+        }
+        final List<String> playerOrder = List<String>.from(
+          gameData['bmcPlayerOrder'] ?? players.keys.toList(),
+        );
+        int currentJudgeIdx = playerOrder.indexOf(judgeId);
+        int nextJudgeIdx = (currentJudgeIdx + 1) % playerOrder.length;
+        String nextJudgeId = playerOrder[nextJudgeIdx];
 
-      if (playedCards.length >= requiredPlays || playedCards.isNotEmpty) {
-        updates['roundState'] = 'judge_voting';
-        updates['turnStartTime'] = FieldValue.serverTimestamp();
+        transaction.update(gameRef, {
+          'bmcPlayedCards': {},
+          'bmcJudgeId': nextJudgeId,
+          'roundState': 'judging_selection',
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "⏳ Le Juge n'a pas voté à temps. Aucun gagnant, manche passée.",
+          ]),
+        });
       }
-
-      await gameRef.update(updates);
-    } else if (roundState == 'judge_voting') {
-      Map<String, dynamic> playedCards = Map<String, dynamic>.from(
-        gameData['bmcPlayedCards'] ?? {},
-      );
-      if (playedCards.isNotEmpty) {
-        final winnerId = playedCards.keys.first;
-        await judgeBMCWinner(gameCode, winnerId, isAuto: true);
-      }
-    }
+    });
   }
 
   /// Relance une partie en conservant les scores et remettant l'XP de session à 0
@@ -13205,6 +14076,11 @@ class FirebaseService {
     String gameType = gameData['gameType'];
     String difficulty = gameData['difficulty'];
     Map<String, dynamic> players = gameData['players'];
+
+    if (gameType == 'Action ou Vérité') {
+      await _startActionOuVeriteRound(gameRef, gameData);
+      return;
+    }
 
     if (gameType == 'Blanc Manger Coco') {
       await _startBlancMangerCocoRound(gameRef, gameData);
@@ -19415,6 +20291,28 @@ class FirebaseService {
         playerData[pId]['currentBet'] = 0;
         playerData[pId]['status'] = (data['chips'] ?? 0) > 0 ? 'active' : 'out';
       });
+
+      List<String> playersWithChips =
+          playerData.entries
+              .where((e) => (e.value['chips'] as num? ?? 0) > 0)
+              .map((e) => e.key)
+              .toList();
+
+      if (playersWithChips.length <= 1) {
+        String winner =
+            playersWithChips.isNotEmpty
+                ? playersWithChips.first
+                : playerIds.first;
+        String winnerName =
+            playerData[winner]?['name'] ?? players[winner]?['name'] ?? 'Joueur';
+        await gameRef.update({
+          'gameState': 'gameOver',
+          'gameWinner': winner,
+          'gameEndReason':
+              "$winnerName a remporté tous les jetons de la table !",
+        });
+        return;
+      }
     }
 
     List<String> suits = [
@@ -20302,19 +21200,37 @@ class FirebaseService {
         await beloteAction(gameCode, timedOutPlayerId, 'pass', isAuto: true);
       } else if (roundState == 'playing_trick') {
         List<String> hand = List<String>.from(
-          gameData['belotePlayerData'][timedOutPlayerId]['hand'],
+          gameData['belotePlayerData']?[timedOutPlayerId]?['hand'] ?? [],
         );
         if (hand.isNotEmpty) {
+          final currentTrick = Map<String, dynamic>.from(
+            gameData['beloteCurrentTrick'] ?? {},
+          );
+          String cardToPlay = hand.first;
+
+          if (currentTrick.isNotEmpty) {
+            String ledCard = currentTrick.values.first as String;
+            String ledSuit = ledCard.substring(ledCard.length - 1);
+            // Chercher en priorité une carte de la couleur demandée
+            final matchingCard = hand.firstWhere(
+              (c) => c.endsWith(ledSuit),
+              orElse: () => '',
+            );
+            if (matchingCard.isNotEmpty) {
+              cardToPlay = matchingCard;
+            }
+          }
+
           await notifyAutoPlay(
             gameRef,
             playerName,
-            actionDetails: "carte automatique",
+            actionDetails: "carte $cardToPlay",
           );
           await beloteAction(
             gameCode,
             timedOutPlayerId,
             'play',
-            card: hand.first,
+            card: cardToPlay,
             isAuto: true,
           );
         }
@@ -20922,6 +21838,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       60; // NOUVEAU: Chrono global pour La Patate Chaude
   int _photoRouletteRounds = 15;
   int _photoRoulettePhotosPerPlayer = 20;
+  bool _aoVPlayersDecide = false;
+  int _aoVMaxRounds = 10;
+  int _aoVVoteThreshold = 100;
   Map<String, bool> _undercoverRoleSettings = {
     'Fou de Joie': false,
     'Boomerang': false,
@@ -21068,6 +21987,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           hotPotatoUseGlobalTimer: _hotPotatoUseGlobalTimer,
           hotPotatoGlobalDuration: _hotPotatoGlobalDuration,
           selectedCategoriesList: _selectedGameCategories,
+          aoVPlayersDecide:
+              _selectedGame == 'Action ou Vérité' ? _aoVPlayersDecide : null,
+          aoVVoteThreshold:
+              _selectedGame == 'Action ou Vérité' ? _aoVVoteThreshold : null,
+          aoVMaxRounds:
+              _selectedGame == 'Action ou Vérité' ? _aoVMaxRounds : null,
         );
 
         await FirebaseFirestore.instance
@@ -21169,6 +22094,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         enableFloatingChat:
             _enableFloatingChat &&
             !['Loup-Garou', 'InfiltrÃ© & Mr. White'].contains(_selectedGame),
+        aoVPlayersDecide:
+            _selectedGame == 'Action ou Vérité' ? _aoVPlayersDecide : null,
+        aoVVoteThreshold:
+            _selectedGame == 'Action ou Vérité' ? _aoVVoteThreshold : null,
+        aoVMaxRounds:
+            _selectedGame == 'Action ou Vérité' ? _aoVMaxRounds : null,
       );
 
       if (!mounted) return;
@@ -23176,6 +24107,53 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                     ],
+                    if (_selectedGame == 'Action ou Vérité') ...[
+                      SizedBox(height: 20),
+                      Text(
+                        "Paramètres Action ou Vérité",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      SizedBox(height: 12),
+                      SwitchListTile.adaptive(
+                        title: Text("Les joueurs écrivent les défis"),
+                        subtitle: Text(
+                          "Un joueur aléatoire écrit le défi au lieu d'un défi prédéfini.",
+                        ),
+                        value: _aoVPlayersDecide,
+                        onChanged:
+                            (val) => setState(() => _aoVPlayersDecide = val),
+                        secondary: Icon(Icons.edit_note),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        "Nombre de tours : $_aoVMaxRounds",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Slider(
+                        value: _aoVMaxRounds.toDouble(),
+                        min: 5,
+                        max: 30,
+                        divisions: 25,
+                        label: "$_aoVMaxRounds tours",
+                        onChanged:
+                            (v) => setState(() => _aoVMaxRounds = v.round()),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        "Seuil de validation par défaut : $_aoVVoteThreshold%",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      Slider(
+                        value: _aoVVoteThreshold.toDouble(),
+                        min: 50,
+                        max: 100,
+                        divisions: 10,
+                        label: "$_aoVVoteThreshold%",
+                        onChanged:
+                            (v) =>
+                                setState(() => _aoVVoteThreshold = v.round()),
+                      ),
+                    ],
                     if (_selectedGame == 'Infiltré & Mr. White') ...[
                       SizedBox(height: 20),
                       Text(
@@ -24464,6 +25442,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   _selectedLudoPawnOwner; // Propriétaire du pion Petits Chevaux sélectionné
   int? _selectedZombieCardIndex; // Pour le ciblage préalable de carte Zombie
   Timer? _playerTurnTimer;
+  String? _lastExecutedTimeoutKey;
+  String? _activeScheduledTurnKey;
   String?
   _zeroPointeAction; // Valeurs possibles: 'take_discard', 'use_drawn', 'discard_drawn', null
   // --- Variables Loup Garou (Refonte UX) ---
@@ -24677,7 +25657,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             (doc.data()['lastHeartbeat'] as Timestamp?)?.toDate();
         if (lastHeartbeat != null &&
             now.difference(lastHeartbeat).inSeconds > 90) {
-          await _firebaseService.removePlayerFromGame(widget.gameCode, doc.id);
+          final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+          final pData = players[doc.id] as Map<String, dynamic>?;
+          if (pData != null &&
+              pData['isBot'] != true &&
+              pData['replacedByBot'] != true) {
+            final pending =
+                gameData['pendingBotReplacement'] as Map<String, dynamic>?;
+            if (pending?['playerId'] != doc.id) {
+              await _firebaseService.requestBotReplacement(
+                widget.gameCode,
+                doc.id,
+                pData['name'] ?? 'Joueur',
+                'déconnecté',
+              );
+            }
+          }
         }
       }
     });
@@ -24777,265 +25772,154 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   void _startPlayerTurnTimer(Map<String, dynamic> gameData) {
-    _playerTurnTimer?.cancel();
-
-    bool useTimer = gameData['useTimer'] ?? true;
-    if (!useTimer) return;
-
-    if (gameData['gameState'] != 'playing') {
+    final bool useTimer = gameData['useTimer'] ?? true;
+    final String gameType = gameData['gameType'] ?? '';
+    // Pour les jeux nécessitant un avis personnel, une connaissance d'autrui ou un défi/gage :
+    // L'auto-play au timer 0 est désactivé
+    if (!useTimer ||
+        gameData['gameState'] != 'playing' ||
+        GameData.isSocialOpinionGame(gameType)) {
+      _playerTurnTimer?.cancel();
       return;
     }
-
-    // 🔒 Seul l'hôte de la salle planifie et exécute les timeouts pour éviter les courses critiques entre appareils
-    final String hostId = gameData['hostId'] ?? '';
-    final bool isHost = hostId == widget.playerId;
-    if (!isHost) return;
 
     final turnStartTimeStamp = gameData['turnStartTime'] as Timestamp?;
     if (turnStartTimeStamp == null) return;
 
-    final turnStartTime = turnStartTimeStamp.toDate();
-    final int turnSecs = (gameData['turnTimerSeconds'] as num?)?.toInt() ?? 30;
-    final int resultSecs =
-        (gameData['resultTimerSeconds'] as num?)?.toInt() ?? 15;
-    final Duration turnTimerDuration = Duration(seconds: turnSecs);
-    Duration turnDuration = turnTimerDuration;
-    final Duration resultTimerDuration = Duration(seconds: resultSecs);
-    Function()? timeoutAction;
+    final String turnKey =
+        "${turnStartTimeStamp.millisecondsSinceEpoch}_${gameData['currentPlayerIndex'] ?? gameData['unoCurrentPlayerIndex'] ?? gameData['milleBornesCurrentPlayerIndex'] ?? gameData['petitsChevauxCurrentIndex'] ?? 0}_${gameData['roundState']}_${gameData['phase']}";
 
-    final gameType = gameData['gameType'];
-    final roundState = gameData['roundState'];
-    final currentPhase = gameData['currentPhase'];
-
-    if ([
-      'Petit Bac',
-      'Pictionary',
-      'La Patate Chaude',
-      'Le Jeu des Catégories',
-      'Photo Roulette',
-    ].contains(gameType)) {
+    // Si le timer pour CE tour précis est déjà en cours, NE PAS l'annuler
+    if (_activeScheduledTurnKey == turnKey &&
+        _playerTurnTimer != null &&
+        _playerTurnTimer!.isActive) {
       return;
     }
 
-    if (roundState == 'result' ||
-        currentPhase == 'turn_result' ||
-        roundState == 'round_end' ||
-        roundState == 'round_over') {
-      turnDuration = resultTimerDuration;
-      if (gameType == 'Infiltré & Mr. White') {
-        timeoutAction =
-            () => _firebaseService.processEliminationsAndCheckWin(
-              widget.gameCode,
-            );
-      } else {
-        timeoutAction =
-            () => _firebaseService.handleHostActionTimeout(widget.gameCode);
+    _activeScheduledTurnKey = turnKey;
+    _playerTurnTimer?.cancel();
+
+    final int turnDurationSec = FirebaseService.getEffectiveTurnTimer(gameData);
+    final int elapsedMs =
+        DateTime.now().difference(turnStartTimeStamp.toDate()).inMilliseconds;
+    final int remainingMs = (turnDurationSec * 1000) - elapsedMs;
+
+    final String hostId = gameData['hostId'] ?? '';
+    final bool isHost = hostId == widget.playerId;
+
+    // Précision en millisecondes : Déclenchement instantané à 0ms pour l'hôte,
+    // relais à +800ms pour les autres joueurs en cas de lag de l'hôte
+    final delayMs = isHost ? max(0, remainingMs) : max(0, remainingMs + 800);
+
+    _playerTurnTimer = Timer(Duration(milliseconds: delayMs), () {
+      if (!mounted) return;
+      if (_lastExecutedTimeoutKey != turnKey) {
+        _lastExecutedTimeoutKey = turnKey;
+        _executeAutoPlayForGame(gameData);
       }
-    } else if (roundState == 'voting' ||
-        currentPhase == 'voting' ||
-        roundState == 'reveal_and_vote') {
-      turnDuration = turnTimerDuration;
-      timeoutAction =
-          () => _firebaseService.handleVotingTimeout(widget.gameCode);
-    } else if (roundState == 'answering' || roundState == 'declaring_truth') {
-      turnDuration = turnTimerDuration;
-      timeoutAction =
-          () =>
-              _firebaseService.handleSimultaneousInputTimeout(widget.gameCode);
-    } else {
-      turnDuration = turnTimerDuration;
-      switch (gameType) {
-        case 'Blanc Manger Cocon':
-        case 'Blanc Manger Coco':
-        case 'BMC':
-          timeoutAction =
-              () => _firebaseService.handleBMCTimeout(widget.gameCode);
-          break;
-        case 'Dobble':
-          if (roundState == 'result') {
-            turnDuration = resultTimerDuration;
-            timeoutAction =
-                () => _firebaseService.nextDobbleRound(widget.gameCode);
-          }
-          break;
-        case 'Devine Tête':
-          if (roundState == 'playing_turn') {
-            turnDuration = Duration(seconds: 60);
-            timeoutAction =
-                () => _firebaseService.handleDevineTeteTimeout(widget.gameCode);
-          } else if (roundState == 'turn_result') {
-            turnDuration = resultTimerDuration;
-            timeoutAction =
-                () => _firebaseService.nextDevineTeteTurn(widget.gameCode);
-          }
-          break;
-        case 'Zombie!':
-          timeoutAction =
-              () => _firebaseService.handleZombieTimeout(widget.gameCode);
-          break;
-        case 'Big Two':
-          timeoutAction =
-              () => _firebaseService.handleBigTwoTimeout(widget.gameCode);
-          break;
-        case 'Uno':
-          timeoutAction =
-              () => _firebaseService.handleUnoTimeout(widget.gameCode);
-          break;
-        case 'Yams':
-          timeoutAction =
-              () => _firebaseService.handleYamsTimeout(widget.gameCode);
-          break;
-        case 'Bataille Navale':
-          timeoutAction =
-              () =>
-                  _firebaseService.handleBatailleNavaleTimeout(widget.gameCode);
-          break;
-        case 'Zéro Pointé':
-          timeoutAction =
-              () => _firebaseService.handleZeroPointeTimeout(widget.gameCode);
-          break;
-        case 'Poker':
-          timeoutAction =
-              () => _firebaseService.handlePokerTimeout(widget.gameCode);
-          break;
-        case 'Rami':
-          timeoutAction =
-              () => _firebaseService.handleRamiTimeout(widget.gameCode);
-          break;
-        case 'Belote':
-          timeoutAction =
-              () => _firebaseService.handleBeloteTimeout(widget.gameCode);
-          break;
-        case 'Dominoes':
-          timeoutAction =
-              () => _firebaseService.handleDominoesTimeout(widget.gameCode);
-          break;
-        case 'Loup-Garou':
-          if (gameData['phase'] == 'nuit') {
-            timeoutAction =
-                () => _firebaseService.startNextNightPhase(widget.gameCode);
-          } else if (gameData['phase'] == 'jour_discussion') {
-            timeoutAction =
-                () => _firebaseService.startDayVotePhase(widget.gameCode);
-          } else if (gameData['phase'] == 'jour_vote') {
-            timeoutAction =
-                () => _firebaseService.processDayVote(widget.gameCode);
-          }
-          break;
-        case 'Infiltré & Mr. White':
-          if (currentPhase == 'clue_giving') {
-            turnDuration = Duration(
-              seconds: (gameData['turnTimerSeconds'] as int?) ?? 30,
-            );
-            timeoutAction =
-                () => _firebaseService.handleTurnTimeout(widget.gameCode);
-          } else if (currentPhase == 'discussion') {
-            timeoutAction =
-                () => _firebaseService.startUndercoverVoting(widget.gameCode);
-          }
-          break;
-        case 'Just One':
-          if ([
-            'guesser_chooses_word',
-            'clue_giving',
-            'reveal_clues',
-          ].contains(roundState)) {
-            timeoutAction =
-                () => _firebaseService.handleJustOneTimeout(widget.gameCode);
-          }
-          break;
-        case 'Skull':
-          if (roundState == 'placing' ||
-              roundState == 'bidding' ||
-              roundState == 'challenging') {
-            timeoutAction =
-                () => _firebaseService.handleSkullTimeout(widget.gameCode);
-          }
-          break;
-        case 'Mille Bornes':
-          timeoutAction =
-              () => _firebaseService.handleMilleBornesTimeout(widget.gameCode);
-          break;
-        case 'Président':
-          if (gameData['gameState'] == 'card_exchange') {
-            timeoutAction =
-                () => _firebaseService.startNextPresidentRoundAfterExchange(
-                  widget.gameCode,
-                );
-          } else {
-            timeoutAction =
-                () => _firebaseService.handlePresidentTimeout(widget.gameCode);
-          }
-          break;
-        case 'Blokus':
-          timeoutAction =
-              () => _firebaseService.handleBlokusTimeout(widget.gameCode);
-          break;
-        case 'Jeu de Dames':
-          timeoutAction =
-              () => _firebaseService.handleCheckersTimeout(widget.gameCode);
-          break;
-        case 'Codenames':
-          timeoutAction =
-              () => _firebaseService.handleCodenamesTimeout(widget.gameCode);
-          break;
-        case 'Time\'s Up':
-          timeoutAction =
-              () => _firebaseService.handleTimesUpTimeout(widget.gameCode);
-          break;
-        case 'Gribouillis':
-          timeoutAction =
-              () => _firebaseService.handleGribouillisTimeout(widget.gameCode);
-          break;
-        case 'Cadavre Exquis':
-          timeoutAction =
-              () =>
-                  _firebaseService.handleCadavreExquisTimeout(widget.gameCode);
-          break;
-        case 'Petits Chevaux':
-          timeoutAction =
-              () =>
-                  _firebaseService.handlePetitsChevauxTimeout(widget.gameCode);
-          break;
-        default:
-          if (![
-            'Le Juge',
-            'Qui Pourrait le Plus ?',
-            'Le Menteur',
-            'Le Roi des Mêmes',
-            'Synonyme ou Banni',
-          ].contains(gameType)) {
-            timeoutAction =
-                () => _firebaseService.handleTurnTimeout(widget.gameCode);
-          }
-          break;
-      }
+    });
+  }
+
+  void _executeAutoPlayForGame(Map<String, dynamic> gameData) {
+    final String gameType = gameData['gameType'] ?? '';
+    final String roundState = gameData['roundState'] ?? '';
+
+    // Sécurité supplémentaire : jeux nécessitant un avis personnel, une connaissance des amis ou un défi :
+    // AUCUN coup automatique au timer 0 !
+    if (GameData.isSocialOpinionGame(gameType)) {
+      return;
     }
 
-    if (timeoutAction == null) return;
-
-    final timeRemaining =
-        turnDuration - DateTime.now().difference(turnStartTime);
-
-    _playerTurnTimer = Timer(
-      timeRemaining.isNegative ? Duration.zero : timeRemaining,
-      () async {
-        if (!mounted) return;
-        final snapshot =
-            await _firebaseService.getGameStream(widget.gameCode).first;
-        if (!snapshot.exists) return;
-        final latestGameData = snapshot.data() as Map<String, dynamic>;
-        final latestTimestamp = latestGameData['turnStartTime'] as Timestamp?;
-        final latestState = latestGameData['gameState'];
-        if (latestState != 'playing') return;
-
-        // Vérification stricte que le timestamp du tour n'a pas déjà avancé
-        if (latestTimestamp?.millisecondsSinceEpoch ==
-            turnStartTimeStamp.millisecondsSinceEpoch) {
-          timeoutAction?.call();
+    switch (gameType) {
+      case 'Uno':
+        _firebaseService.handleUnoTimeout(widget.gameCode);
+        break;
+      case 'Bataille Navale':
+        _firebaseService.handleBatailleNavaleTimeout(widget.gameCode);
+        break;
+      case 'Petits Chevaux':
+        _firebaseService.handlePetitsChevauxTimeout(widget.gameCode);
+        break;
+      case 'Mille Bornes':
+        _firebaseService.handleMilleBornesTimeout(widget.gameCode);
+        break;
+      case 'Big Two':
+        _firebaseService.handleBigTwoTimeout(widget.gameCode);
+        break;
+      case 'Président':
+      case 'Présidente':
+        _firebaseService.handlePresidentTimeout(widget.gameCode);
+        break;
+      case 'Zéro Pointé':
+        _firebaseService.handleZeroPointeTimeout(widget.gameCode);
+        break;
+      case 'Poker':
+        _firebaseService.handlePokerTimeout(widget.gameCode);
+        break;
+      case 'Yams':
+        _firebaseService.handleYamsTimeout(widget.gameCode);
+        break;
+      case 'Dominoes':
+        _firebaseService.handleDominoesTimeout(widget.gameCode);
+        break;
+      case 'Blokus':
+        _firebaseService.handleBlokusTimeout(widget.gameCode);
+        break;
+      case 'Rami':
+        _firebaseService.handleRamiTimeout(widget.gameCode);
+        break;
+      case 'Belote':
+        _firebaseService.handleBeloteTimeout(widget.gameCode);
+        break;
+      case 'Zombie!':
+        _firebaseService.handleZombieTimeout(widget.gameCode);
+        break;
+      case 'Skull':
+        _firebaseService.handleSkullTimeout(widget.gameCode);
+        break;
+      case 'Pictionary':
+        _firebaseService.handlePictionaryTimeout(widget.gameCode, roundState);
+        break;
+      case 'La Patate Chaude':
+      case 'Le Jeu des Catégories':
+        _firebaseService.handleHotPotatoTimeout(widget.gameCode);
+        break;
+      case 'Jeu de Dames':
+        _firebaseService.handleCheckersTimeout(widget.gameCode);
+        break;
+      case 'Codenames':
+        _firebaseService.handleCodenamesTimeout(widget.gameCode);
+        break;
+      case 'Time\'s Up':
+        _firebaseService.handleTimesUpTimeout(widget.gameCode);
+        break;
+      case 'Gribouillis':
+        _firebaseService.handleGribouillisTimeout(widget.gameCode);
+        break;
+      case 'Cadavre Exquis':
+        _firebaseService.handleCadavreExquisTimeout(widget.gameCode);
+        break;
+      case 'Just One':
+        _firebaseService.handleJustOneTimeout(widget.gameCode);
+        break;
+      case 'Blanc Manger Cocon':
+      case 'Blanc Manger Coco':
+      case 'BMC':
+        _firebaseService.handleBMCTimeout(widget.gameCode);
+        break;
+      case 'Devine Tête':
+        _firebaseService.handleDevineTeteTimeout(widget.gameCode);
+        break;
+      default:
+        if (['answering', 'declaring_truth'].contains(roundState)) {
+          _firebaseService.handleSimultaneousInputTimeout(widget.gameCode);
+        } else if (['voting', 'reveal_and_vote'].contains(roundState)) {
+          _firebaseService.handleVotingTimeout(widget.gameCode);
+        } else {
+          _firebaseService.handleTurnTimeout(widget.gameCode);
         }
-      },
-    );
+        break;
+    }
   }
 
   Widget _buildUndercoverGameUI(
@@ -26410,6 +27294,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 // Récupération du mode classé et du niveau max des adversaires
                 final bool isRanked = gameData['isRanked'] == true;
                 final String myId = widget.playerId;
+                final playersMap = Map<String, dynamic>.from(
+                  gameData['players'] ?? {},
+                );
+                final myData = playersMap[myId] as Map<String, dynamic>?;
+                final bool isBotOrExcluded =
+                    myData?['isBot'] == true ||
+                    myData?['replacedByBot'] == true ||
+                    (gameData['botPlayers'] as Map<String, dynamic>?)?[myId] ==
+                        true;
+
+                // Si le joueur a été exclu et remplacé par l'ordinateur : aucun gain
+                if (isBotOrExcluded) {
+                  return;
+                }
+
                 final String? winnerId = gameData['gameWinner'];
                 final bool isWin = (winnerId == myId);
                 final String currentGame = gameData['gameType'] ?? 'Inconnu';
@@ -26423,9 +27322,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
                 // Calcul du niveau adverse maximum
                 int maxOpponentLvl = 1;
-                final playersMap = Map<String, dynamic>.from(
-                  gameData['players'] ?? {},
-                );
                 playersMap.forEach((pId, pData) {
                   if (pId != myId && pData is Map) {
                     int oppLvl = (pData['level'] as num?)?.toInt() ?? 1;
@@ -26717,6 +27613,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               if (!isDevineTete)
                                 _buildScoreHeader(context, players, gameData),
 
+                              _buildAdminBotReplacementPrompt(
+                                context,
+                                gameData,
+                              ),
+                              _buildExcludedPlayerBanner(gameData),
                               _buildAutoPlayBanner(gameData),
 
                               // MODIFICATION : Zone d'affichage de la main adverse intégrée ici
@@ -27401,11 +28302,182 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
+  Widget _buildAdminBotReplacementPrompt(
+    BuildContext context,
+    Map<String, dynamic> gameData,
+  ) {
+    final bool isHost = gameData['hostId'] == widget.playerId;
+    final pending = gameData['pendingBotReplacement'];
+    if (!isHost || pending == null || pending is! Map) {
+      return const SizedBox.shrink();
+    }
+
+    final String targetPlayerId = pending['playerId'] ?? '';
+    final String targetPlayerName = pending['playerName'] ?? 'Un joueur';
+    final String reason = pending['reason'] ?? 'inactivité';
+    final bool isSocial = pending['isSocial'] == true;
+
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.all(14.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFF2A1B0E),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Colors.amber.shade700, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.4),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.warning_amber_rounded,
+                color: Colors.amber.shade400,
+                size: 24,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                "Alerte Administrateur",
+                style: TextStyle(
+                  color: Colors.amber.shade300,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            "$targetPlayerName ne joue plus ($reason). Voulez-vous le conserver et faire jouer l'ordinateur automatiquement ?",
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 13,
+              height: 1.3,
+            ),
+          ),
+          if (isSocial)
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text(
+                "⚠️ Note : Ce jeu nécessite un avis personnel. L'ordinateur sautera son tour s'il est conservé.",
+                style: TextStyle(
+                  color: Colors.orange.shade200,
+                  fontSize: 12,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.smart_toy, size: 18),
+                  label: const Text(
+                    "Conserver avec l'IA",
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal.shade700,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {
+                    _firebaseService.convertPlayerToBot(
+                      widget.gameCode,
+                      targetPlayerId,
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: OutlinedButton.icon(
+                  icon: const Icon(Icons.person_remove, size: 18),
+                  label: const Text(
+                    "Expulser",
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.redAccent.shade100,
+                    side: BorderSide(color: Colors.redAccent.shade200),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {
+                    _firebaseService.removePlayerFromGame(
+                      widget.gameCode,
+                      targetPlayerId,
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExcludedPlayerBanner(Map<String, dynamic> gameData) {
+    final players = gameData['players'] as Map<String, dynamic>? ?? {};
+    final myData = players[widget.playerId] as Map<String, dynamic>?;
+    final bool isBot =
+        myData?['isBot'] == true ||
+        myData?['replacedByBot'] == true ||
+        (gameData['botPlayers'] as Map<String, dynamic>?)?[widget.playerId] ==
+            true;
+
+    if (!isBot) return const SizedBox.shrink();
+
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
+      decoration: BoxDecoration(
+        color: Colors.red.shade900.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.redAccent, width: 1),
+      ),
+      child: Row(
+        children: const [
+          Icon(Icons.block, color: Colors.white, size: 22),
+          SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              "Vous avez été exclu de la partie pour inactivité. L'ordinateur joue à votre place (aucun gain ne vous sera attribué).",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   PreferredSizeWidget? _buildTurnTimerIndicator(Map<String, dynamic> gameData) {
     bool useTimer = gameData['useTimer'] ?? true;
-    if (!useTimer) return null;
+    if (!useTimer || gameData['gameState'] != 'playing') return null;
 
     final turnStartTimeStamp = gameData['turnStartTime'] as Timestamp?;
+    if (turnStartTimeStamp == null) return null;
+
     final roundState = gameData['roundState'];
     final currentPhase = gameData['currentPhase'];
     final loupGarouPhase = gameData['phase'];
@@ -27414,6 +28486,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'placement',
       'playing',
       'playing_turn',
+      'rolling',
       'player_turn',
       'voting',
       'result',
@@ -27448,9 +28521,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         statesWithTimer.contains(currentPhase) ||
         (loupGarouPhase != null && statesWithTimer.contains(loupGarouPhase));
 
-    if (turnStartTimeStamp == null ||
-        gameData['gameState'] != 'playing' ||
-        !shouldShow) {
+    if (!shouldShow) {
       return null;
     }
 
@@ -27467,8 +28538,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           (gameData['resultTimerSeconds'] as num?)?.toDouble() ?? 15.0;
     }
 
+    final String currentTurnKey =
+        "${turnStartTimeStamp.millisecondsSinceEpoch}_${gameData['currentPlayerIndex'] ?? gameData['unoCurrentPlayerIndex'] ?? gameData['milleBornesCurrentPlayerIndex'] ?? gameData['petitsChevauxCurrentIndex'] ?? 0}_${gameData['roundState']}_${gameData['phase']}";
+
     return PreferredSize(
-      preferredSize: Size.fromHeight(20.0),
+      preferredSize: const Size.fromHeight(20.0),
       child: StreamBuilder(
         stream: Stream.periodic(const Duration(milliseconds: 100)),
         builder: (context, snapshot) {
@@ -27476,10 +28550,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               DateTime.now().difference(turnStartTime).inMilliseconds / 1000.0;
           final progress =
               (turnDurationSeconds - elapsedSeconds) / turnDurationSeconds;
-          final remainingSeconds =
-              (turnDurationSeconds - elapsedSeconds).ceil();
+          final remainingSeconds = max(
+            0,
+            (turnDurationSeconds - elapsedSeconds).ceil(),
+          );
 
-          if (progress < 0) return const SizedBox.shrink();
+          // ⚡ DÉCLENCHEMENT INSTANTANÉ DÈS QUE LE TEMPS EST ÉCOULÉ (0s)
+          if (elapsedSeconds >= turnDurationSeconds &&
+              _lastExecutedTimeoutKey != currentTurnKey) {
+            _lastExecutedTimeoutKey = currentTurnKey;
+
+            // Exécute le coup et passe au joueur suivant sans attendre
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                _executeAutoPlayForGame(gameData);
+              }
+            });
+          }
 
           return Stack(
             alignment: Alignment.center,
@@ -27497,10 +28584,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 minHeight: 20,
               ),
               Text(
-                "$remainingSeconds",
+                "$remainingSeconds s",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontSize: 12,
                   shadows: [
                     Shadow(blurRadius: 2, color: Colors.black.withOpacity(0.8)),
                   ],
@@ -29005,32 +30093,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         tabooTeams[myTeamId] ?? [],
       ).contains(pId);
 
-      VideoTrack? videoTrack;
-      if (identity != null && livekit.room != null) {
-        if (isLocal) {
-          final localParticipant = livekit.room!.localParticipant;
-          if (localParticipant != null) {
-            for (var pub in localParticipant.trackPublications.values) {
-              if (pub.kind == TrackType.VIDEO && pub.track is VideoTrack) {
-                videoTrack = pub.track as VideoTrack;
-                break;
-              }
-            }
-          }
-        } else {
-          final participant = livekit.room!.remoteParticipants[identity];
-          if (participant != null) {
-            for (var pub in participant.trackPublications.values) {
-              if (pub.kind == TrackType.VIDEO &&
-                  pub.subscribed &&
-                  pub.track is VideoTrack) {
-                videoTrack = pub.track as VideoTrack;
-                break;
-              }
-            }
-          }
-        }
-      }
+      VideoTrack? videoTrack =
+          identity != null ? livekit.getVideoTrack(identity) : null;
 
       return Container(
         width: 64,
@@ -30338,6 +31402,48 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
   }
 
+  // =============================================================================
+  // ACTION OU VÉRITÉ - INTERFACE DE JEU EN LIGNE
+  // =============================================================================
+
+  Widget _buildActionOuVeriteUI(
+    BuildContext context,
+    Map<String, dynamic> gameData,
+    String playerId,
+  ) {
+    if (gameData['gameState'] == 'gameOver') {
+      final winnerId = gameData['gameWinner'];
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final customScores = <String, int>{};
+      players.forEach((pId, pData) {
+        if (pData is Map) {
+          customScores[pId] = (pData['xp'] as num?)?.toInt() ?? 0;
+        }
+      });
+
+      return UniversalGameEndScreen(
+        gameTitle: "Action ou Vérité",
+        winnerId: winnerId,
+        winnerName: players[winnerId]?['name'],
+        reason: gameData['gameEndReason'] ?? "La partie est terminée !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: widget.playerId == gameData['hostId'],
+        onExit: () => Navigator.pop(context),
+        customScores: customScores,
+      );
+    }
+
+    return ActionOuVeriteGameView(
+      gameData: gameData,
+      playerId: playerId,
+      gameCode: widget.gameCode,
+      firebaseService: _firebaseService,
+    );
+  }
+
   Widget _buildCheckersUI(
     BuildContext context,
     Map<String, dynamic> gameData,
@@ -30625,6 +31731,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         .replaceAll('ÃƒÂ»', 'Ã»');
 
     switch (gameType) {
+      case 'Action ou Vérité':
+        return _buildActionOuVeriteUI(context, gameData, playerId);
       case 'Jeu de Dames':
         return _buildCheckersUI(context, gameData, playerId);
       case 'Big Two':
@@ -32160,6 +33268,104 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ),
 
         const SizedBox(height: 6),
+
+        // Zone Centrale : Pioche & Infos
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.35),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.white10),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // Affichage de la Pioche
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 58,
+                    height: 76,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF1E3A8A), Color(0xFF0F172A)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Colors.cyanAccent.withOpacity(0.5),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.cyanAccent.withOpacity(0.2),
+                          blurRadius: 8,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.style_rounded,
+                          color: Colors.amberAccent,
+                          size: 24,
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          "${(gameData['milleBornesDeck'] as List?)?.length ?? 0}",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    "PIOCHE",
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white60,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ],
+              ),
+
+              // Infos d'état au milieu
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    isMyTurn
+                        ? "Main : ${myHand.length} cartes"
+                        : "Tour de l'adversaire",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: isMyTurn ? Colors.greenAccent : Colors.white70,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    isMyTurn
+                        ? "Touchez pour jouer\nMaintenez pour défausser"
+                        : "En attente...",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 10, color: Colors.white38),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
 
         // ---------------------------------------------------------------------
         // 3. MA MAIN DE CARTES (GRILLE INTERACTIVE & LISIBLE)
@@ -44506,6 +45712,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final currentPlayerId =
         playerOrder.isNotEmpty ? playerOrder[currentIndex] : '';
     final bool isMyTurn = currentPlayerId == playerId;
+    final bool isHost = gameData['hostId'] == playerId;
 
     final hands = Map<String, dynamic>.from(
       gameData['dominoesPlayerHands'] ?? {},
@@ -44674,6 +45881,44 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     // ── Build ─────────────────────────────────────────────────────────────────
     return Column(
       children: [
+        if (roundOver && gameData['gameState'] != 'gameOver')
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            color: Colors.black87,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Manche terminée ! ",
+                  style: TextStyle(
+                    color: Colors.amberAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                if (isHost)
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                    ),
+                    onPressed:
+                        () => _firebaseService.startNextDominoesRound(
+                          widget.gameCode,
+                        ),
+                    child: const Text("Manche Suivante"),
+                  )
+                else
+                  const Text(
+                    "En attente de l'hôte...",
+                    style: TextStyle(color: Colors.white70, fontSize: 13),
+                  ),
+              ],
+            ),
+          ),
+
         // ── Barre de scores ──────────────────────────────────────────────────
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -58127,23 +59372,25 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen> {
 
         List<dynamic> streamers = data['streamers'] ?? [];
 
-        return WillPopScope(
-          onWillPop: () async {
+        return PopScope(
+          canPop: !isHostOfPendingGame,
+          onPopInvokedWithResult: (didPop, result) async {
+            if (didPop) {
+              await _firebaseService.leaveLounge(
+                widget.loungeId,
+                widget.playerId,
+              );
+              return;
+            }
             if (isHostOfPendingGame) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
+                const SnackBar(
                   content: Text(
                     "Veuillez commencer ou annuler la partie avant de quitter le salon.",
                   ),
                 ),
               );
-              return false;
             }
-            await _firebaseService.leaveLounge(
-              widget.loungeId,
-              widget.playerId,
-            );
-            return true;
           },
           child: Scaffold(
             appBar: AppBar(title: Text("Salon")),
@@ -58750,32 +59997,9 @@ class _LoungeStreamingScreenState extends State<LoungeStreamingScreen> {
                               String identity = pageParticipants[idx];
                               bool isLocal = identity == livekit.localIdentity;
 
-                              VideoTrack? videoTrack;
-                              if (isLocal) {
-                                final lp = livekit.room?.localParticipant;
-                                if (lp != null) {
-                                  for (var pub in lp.trackPublications.values) {
-                                    if (pub.kind == TrackType.VIDEO &&
-                                        pub.track is VideoTrack) {
-                                      videoTrack = pub.track as VideoTrack;
-                                      break;
-                                    }
-                                  }
-                                }
-                              } else {
-                                final rp =
-                                    livekit.room?.remoteParticipants[identity];
-                                if (rp != null) {
-                                  for (var pub in rp.trackPublications.values) {
-                                    if (pub.kind == TrackType.VIDEO &&
-                                        pub.subscribed &&
-                                        pub.track is VideoTrack) {
-                                      videoTrack = pub.track as VideoTrack;
-                                      break;
-                                    }
-                                  }
-                                }
-                              }
+                              VideoTrack? videoTrack = livekit.getVideoTrack(
+                                identity,
+                              );
 
                               return Container(
                                 margin: EdgeInsets.all(4),
@@ -59876,6 +61100,1445 @@ class _LinedParchmentPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+// =============================================================================
+// 🎭 ACTION OU VÉRITÉ - WIDGET DE JEU MULTIJOUEUR EN LIGNE
+// =============================================================================
+
+class ActionOuVeriteGameView extends StatefulWidget {
+  final Map<String, dynamic> gameData;
+  final String playerId;
+  final String gameCode;
+  final FirebaseService firebaseService;
+
+  const ActionOuVeriteGameView({
+    Key? key,
+    required this.gameData,
+    required this.playerId,
+    required this.gameCode,
+    required this.firebaseService,
+  }) : super(key: key);
+
+  @override
+  State<ActionOuVeriteGameView> createState() => _ActionOuVeriteGameViewState();
+}
+
+class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _wheelController;
+  late Animation<double> _wheelAnimation;
+  final TextEditingController _challengeInputController =
+      TextEditingController();
+  bool _isSubmitting = false;
+  double _currentWheelAngle = 0.0;
+
+  static const List<Color> _sliceColors = [
+    Color(0xFFFF5722),
+    Color(0xFF9C27B0),
+    Color(0xFF2196F3),
+    Color(0xFF4CAF50),
+    Color(0xFFFFB300),
+    Color(0xFFE91E63),
+    Color(0xFF00BCD4),
+    Color(0xFFFF9800),
+    Color(0xFF3F51B5),
+    Color(0xFF009688),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _wheelController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2500),
+    );
+    _wheelAnimation = CurvedAnimation(
+      parent: _wheelController,
+      curve: Curves.easeOutCubic,
+    );
+
+    final currentIndex = widget.gameData['aoVCurrentPlayerIndex'] as int? ?? -1;
+    final playerOrder = List<String>.from(
+      widget.gameData['aoVPlayerOrder'] ?? [],
+    );
+    if (playerOrder.isNotEmpty && currentIndex >= 0) {
+      final sweepAngle = (2 * pi) / playerOrder.length;
+      _currentWheelAngle =
+          -pi / 2 - (currentIndex * sweepAngle + sweepAngle / 2);
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant ActionOuVeriteGameView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final oldIndex = oldWidget.gameData['aoVCurrentPlayerIndex'];
+    final newIndex = widget.gameData['aoVCurrentPlayerIndex'];
+    final newPhase = widget.gameData['aoVPhase'];
+
+    if (newIndex != null && newIndex != oldIndex && newPhase == 'spin_result') {
+      _spinToPlayer(newIndex as int);
+    }
+  }
+
+  void _spinToPlayer(int targetIndex) {
+    final playerOrder = List<String>.from(
+      widget.gameData['aoVPlayerOrder'] ?? [],
+    );
+    if (playerOrder.isEmpty) return;
+
+    final sweepAngle = (2 * pi) / playerOrder.length;
+    final targetBase = -pi / 2 - (targetIndex * sweepAngle + sweepAngle / 2);
+    final totalRotation =
+        (4 * 2 * pi) + (targetBase - (_currentWheelAngle % (2 * pi)));
+
+    final startAngle = _currentWheelAngle;
+    final endAngle = _currentWheelAngle + totalRotation;
+
+    _wheelController.reset();
+    _wheelAnimation = Tween<double>(begin: startAngle, end: endAngle).animate(
+      CurvedAnimation(parent: _wheelController, curve: Curves.easeOutCubic),
+    )..addListener(() {
+      setState(() {
+        _currentWheelAngle = _wheelAnimation.value;
+      });
+    });
+
+    HapticFeedback.mediumImpact();
+    _wheelController.forward();
+  }
+
+  @override
+  void dispose() {
+    _wheelController.dispose();
+    _challengeInputController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleSpinWheel() async {
+    if (_isSubmitting) return;
+    setState(() => _isSubmitting = true);
+    try {
+      HapticFeedback.lightImpact();
+      await widget.firebaseService.aoVSpinWheel(
+        widget.gameCode,
+        widget.playerId,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+      }
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
+  }
+
+  Future<void> _handleDrawChallenge() async {
+    if (_isSubmitting) return;
+    setState(() => _isSubmitting = true);
+    try {
+      HapticFeedback.mediumImpact();
+      await widget.firebaseService.aoVDrawChallengeType(
+        widget.gameCode,
+        widget.playerId,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+      }
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
+  }
+
+  Future<void> _handleSubmitWrittenChallenge() async {
+    final text = _challengeInputController.text.trim();
+    if (text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Veuillez saisir un défi ou une question."),
+        ),
+      );
+      return;
+    }
+    if (_isSubmitting) return;
+    setState(() => _isSubmitting = true);
+    try {
+      HapticFeedback.mediumImpact();
+      await widget.firebaseService.aoVSubmitWrittenChallenge(
+        widget.gameCode,
+        widget.playerId,
+        text,
+      );
+      _challengeInputController.clear();
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+      }
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
+  }
+
+  Future<void> _handleConfirmPerformed() async {
+    if (_isSubmitting) return;
+    setState(() => _isSubmitting = true);
+    try {
+      HapticFeedback.heavyImpact();
+      await widget.firebaseService.aoVConfirmPerformed(
+        widget.gameCode,
+        widget.playerId,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+      }
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
+  }
+
+  Future<void> _handleVote(bool isValid) async {
+    if (_isSubmitting) return;
+    setState(() => _isSubmitting = true);
+    try {
+      HapticFeedback.mediumImpact();
+      await widget.firebaseService.aoVSubmitVote(
+        widget.gameCode,
+        widget.playerId,
+        isValid,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Erreur de vote : $e")));
+      }
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
+  }
+
+  Future<void> _handleNextTurn() async {
+    if (_isSubmitting) return;
+    setState(() => _isSubmitting = true);
+    try {
+      HapticFeedback.lightImpact();
+      await widget.firebaseService.aoVNextTurn(
+        widget.gameCode,
+        widget.playerId,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+      }
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
+  }
+
+  Future<void> _handleEndRound() async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text("Terminer la manche ?"),
+            content: const Text(
+              "Voulez-vous clôturer la manche immédiatement ? Le joueur avec le plus d'XP deviendra l'Admin.",
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: const Text("Annuler"),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                onPressed: () => Navigator.pop(ctx, true),
+                child: const Text("Terminer"),
+              ),
+            ],
+          ),
+    );
+
+    if (confirm == true) {
+      await widget.firebaseService.aoVEndRound(
+        widget.gameCode,
+        widget.playerId,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final gameData = widget.gameData;
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final playerOrder = List<String>.from(gameData['aoVPlayerOrder'] ?? []);
+    final phase = gameData['aoVPhase'] ?? 'waiting_spin';
+    final currentPlayerId = gameData['aoVCurrentPlayerId'];
+    final currentPlayerName = players[currentPlayerId]?['name'] ?? 'Joueur';
+    final isCurrentPlayer = (widget.playerId == currentPlayerId);
+    final hostId = gameData['hostId'];
+    final isHost = (widget.playerId == hostId);
+    final int currentRound =
+        (gameData['aoVCurrentRound'] as num?)?.toInt() ?? 1;
+    final int spinsRemaining =
+        (gameData['aoVSpinsRemaining'] as num?)?.toInt() ?? 10;
+    final String? challengeType = gameData['aoVChallengeType'];
+    final String? currentChallenge = gameData['aoVCurrentChallenge'];
+    final String? challengeAuthor = gameData['aoVChallengeAuthor'];
+    final authorName = players[challengeAuthor]?['name'] ?? 'Un joueur';
+    final isAuthor = (widget.playerId == challengeAuthor);
+    final votes = Map<String, dynamic>.from(gameData['aoVVotes'] ?? {});
+    final votersCount = playerOrder.where((p) => p != currentPlayerId).length;
+    final bool hasVoted = votes.containsKey(widget.playerId);
+
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // BARRE SUPÉRIEURE : Round, Tours restants, Bouton Admin
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.deepPurple.shade700,
+                          Colors.pink.shade600,
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.pink.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.flash_on,
+                          color: Colors.amber,
+                          size: 18,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          "Tour $currentRound",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white24),
+                    ),
+                    child: Text(
+                      "$spinsRemaining tour${spinsRemaining > 1 ? 's' : ''} restant${spinsRemaining > 1 ? 's' : ''}",
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  if (isHost)
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.redAccent,
+                        side: const BorderSide(color: Colors.redAccent),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        visualDensity: VisualDensity.compact,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      icon: const Icon(Icons.flag, size: 14),
+                      label: const Text(
+                        "Fin manche",
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: _handleEndRound,
+                    ),
+                ],
+              ),
+            ),
+
+            // LISTE HORIZONTALE DES JOUEURS AVEC XP
+            SizedBox(
+              height: 72,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                itemCount: playerOrder.length,
+                itemBuilder: (context, index) {
+                  final pId = playerOrder[index];
+                  final pData = players[pId] ?? {};
+                  final pName = pData['name'] ?? 'Joueur';
+                  final pXp = (pData['xp'] as num?)?.toInt() ?? 0;
+                  final isSelected = (pId == currentPlayerId);
+
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 4,
+                      vertical: 6,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient:
+                          isSelected
+                              ? const LinearGradient(
+                                colors: [Color(0xFFFF9800), Color(0xFFFF5722)],
+                              )
+                              : LinearGradient(
+                                colors: [
+                                  Colors.white.withOpacity(0.08),
+                                  Colors.white.withOpacity(0.04),
+                                ],
+                              ),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: isSelected ? Colors.amber : Colors.white12,
+                        width: isSelected ? 2.0 : 1.0,
+                      ),
+                      boxShadow:
+                          isSelected
+                              ? [
+                                BoxShadow(
+                                  color: Colors.orange.withOpacity(0.4),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ]
+                              : null,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          radius: 14,
+                          backgroundColor:
+                              _sliceColors[index % _sliceColors.length],
+                          child: Text(
+                            pName.isNotEmpty ? pName[0].toUpperCase() : '?',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              pName,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight:
+                                    isSelected
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                fontSize: 12,
+                              ),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 11,
+                                ),
+                                const SizedBox(width: 2),
+                                Text(
+                                  "$pXp XP",
+                                  style: const TextStyle(
+                                    color: Colors.amberAccent,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // CONTENU PRINCIPAL SELON LA PHASE DU JEU
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 500),
+                    child: _buildPhaseContent(
+                      context,
+                      phase: phase,
+                      isCurrentPlayer: isCurrentPlayer,
+                      currentPlayerName: currentPlayerName,
+                      challengeType: challengeType,
+                      currentChallenge: currentChallenge,
+                      challengeAuthor: challengeAuthor,
+                      authorName: authorName,
+                      isAuthor: isAuthor,
+                      votes: votes,
+                      votersCount: votersCount,
+                      hasVoted: hasVoted,
+                      playerOrder: playerOrder,
+                      players: players,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPhaseContent(
+    BuildContext context, {
+    required String phase,
+    required bool isCurrentPlayer,
+    required String currentPlayerName,
+    required String? challengeType,
+    required String? currentChallenge,
+    required String? challengeAuthor,
+    required String? authorName,
+    required bool isAuthor,
+    required Map<String, dynamic> votes,
+    required int votersCount,
+    required bool hasVoted,
+    required List<String> playerOrder,
+    required Map<String, dynamic> players,
+  }) {
+    final playerNames =
+        playerOrder
+            .map((id) => (players[id]?['name'] ?? 'Joueur').toString())
+            .toList();
+
+    switch (phase) {
+      case 'waiting_spin':
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "🎰 Qui va relever le défi ?",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              "Faites tourner la roulette pour désigner le prochain joueur.",
+              style: TextStyle(color: Colors.white70, fontSize: 13),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            _buildRouletteWidget(playerNames),
+            const SizedBox(height: 32),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              onPressed: _isSubmitting ? null : _handleSpinWheel,
+              icon: const Icon(Icons.refresh, color: Colors.white, size: 24),
+              label: Ink(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFFFF007A), Color(0xFF7928CA)],
+                  ),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 14,
+                  ),
+                  child: const Text(
+                    "TOURNER LA ROULETTE",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+
+      case 'spin_result':
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildRouletteWidget(playerNames),
+            const SizedBox(height: 24),
+            Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.deepPurple.shade900.withOpacity(0.8),
+                    Colors.pink.shade900.withOpacity(0.8),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.amber, width: 2),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.amber.withOpacity(0.3),
+                    blurRadius: 16,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  const Text(
+                    "🎯 JOUEUR SÉLECTIONNÉ",
+                    style: TextStyle(
+                      color: Colors.amber,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    currentPlayerName,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  if (isCurrentPlayer) ...[
+                    const Text(
+                      "C'est à votre tour ! Choisissez votre destin :",
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 18),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFFF4081),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 28,
+                          vertical: 14,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        elevation: 8,
+                      ),
+                      onPressed: _isSubmitting ? null : _handleDrawChallenge,
+                      icon: const Icon(Icons.casino, color: Colors.white),
+                      label: const Text(
+                        "🎲 Tirer ACTION ou VÉRITÉ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ] else ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.amber,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          "En attente du tirage de $currentPlayerName...",
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        );
+
+      case 'writing_challenge':
+        final isAction = (challengeType == 'action');
+        final typeLabel = isAction ? "ACTION" : "VÉRITÉ";
+        final typeColor = isAction ? Colors.deepOrange : Colors.purpleAccent;
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: typeColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: typeColor, width: 2),
+              ),
+              child: Text(
+                "🔥 $currentPlayerName a tiré : $typeLabel !",
+                style: TextStyle(
+                  color: typeColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            if (isAuthor) ...[
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.08),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.white24),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.edit, color: Colors.amber, size: 20),
+                        const SizedBox(width: 8),
+                        Text(
+                          "Rédigez l'${typeLabel.toLowerCase()} pour $currentPlayerName",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+                    TextField(
+                      controller: _challengeInputController,
+                      maxLength: 180,
+                      maxLines: 3,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText:
+                            isAction
+                                ? "Ex: Fais 10 pompes en chantant..."
+                                : "Ex: Quel est ton pire moment de honte ?",
+                        hintStyle: const TextStyle(color: Colors.white38),
+                        filled: true,
+                        fillColor: Colors.black26,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: typeColor),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: typeColor, width: 2),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: typeColor,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        onPressed:
+                            _isSubmitting
+                                ? null
+                                : _handleSubmitWrittenChallenge,
+                        icon: const Icon(
+                          Icons.send_rounded,
+                          color: Colors.white,
+                        ),
+                        label: const Text(
+                          "Envoyer le défi 🚀",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ] else ...[
+              Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.06),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.white12),
+                ),
+                child: Column(
+                  children: [
+                    const Icon(
+                      Icons.history_edu,
+                      color: Colors.amber,
+                      size: 48,
+                    ),
+                    const SizedBox(height: 14),
+                    Text(
+                      "$authorName est en train d'écrire le défi...",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    const LinearProgressIndicator(color: Colors.amber),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        );
+
+      case 'performing':
+        final isAction = (challengeType == 'action');
+        final gradientColors =
+            isAction
+                ? [const Color(0xFFFF512F), const Color(0xFFDD2476)]
+                : [const Color(0xFF8A2387), const Color(0xFFE94057)];
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: gradientColors,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: gradientColors.first.withOpacity(0.5),
+                    blurRadius: 20,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      isAction ? "🔥 ACTION" : "🔮 VÉRITÉ",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    "Défi pour $currentPlayerName",
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    "« ${currentChallenge ?? '...'} »",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      height: 1.3,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 28),
+            if (isCurrentPlayer) ...[
+              const Text(
+                "Réalisez votre défi en vidéo ou au micro !",
+                style: TextStyle(color: Colors.white70, fontSize: 13),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF00E676),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  elevation: 8,
+                ),
+                onPressed: _isSubmitting ? null : _handleConfirmPerformed,
+                icon: const Icon(
+                  Icons.check_circle,
+                  color: Colors.black,
+                  size: 24,
+                ),
+                label: const Text(
+                  "J'ai réalisé mon défi ! ✅",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ] else ...[
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.08),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.visibility,
+                      color: Colors.cyanAccent,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      "Regardez $currentPlayerName réaliser le défi...",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        );
+
+      case 'voting':
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.amber.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.amber),
+              ),
+              child: const Text(
+                "🗳️ VOTE DE VALIDATION",
+                style: TextStyle(
+                  color: Colors.amber,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              "Est-ce que $currentPlayerName a relevé le défi ?",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "« ${currentChallenge ?? ''} »",
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 13,
+                fontStyle: FontStyle.italic,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                "${votes.length} / $votersCount votes reçus",
+                style: const TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+            ),
+            const SizedBox(height: 24),
+            if (isCurrentPlayer) ...[
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.06),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Column(
+                  children: [
+                    Icon(Icons.hourglass_top, color: Colors.amber, size: 36),
+                    SizedBox(height: 10),
+                    Text(
+                      "Vos amis votent pour évaluer votre prestation...",
+                      style: TextStyle(color: Colors.white70, fontSize: 13),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 14),
+                    LinearProgressIndicator(color: Colors.amber),
+                  ],
+                ),
+              ),
+            ] else if (hasVoted) ...[
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.green.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.green),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      votes[widget.playerId] == true
+                          ? Icons.thumb_up
+                          : Icons.thumb_down,
+                      color: Colors.greenAccent,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      "Votre vote a bien été enregistré !",
+                      style: TextStyle(
+                        color: Colors.greenAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ] else ...[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00C853),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        elevation: 6,
+                      ),
+                      onPressed: _isSubmitting ? null : () => _handleVote(true),
+                      icon: const Icon(Icons.thumb_up, color: Colors.white),
+                      label: const Text(
+                        "OUI, Validé ! 👍",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFD50000),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        elevation: 6,
+                      ),
+                      onPressed:
+                          _isSubmitting ? null : () => _handleVote(false),
+                      icon: const Icon(Icons.thumb_down, color: Colors.white),
+                      label: const Text(
+                        "NON, Raté ! 👎",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ],
+        );
+
+      case 'result':
+        final int percentage =
+            (widget.gameData['aoVResultPercentage'] as num?)?.toInt() ?? 100;
+        final int earnedXp =
+            (widget.gameData['aoVEarnedXp'] as num?)?.toInt() ?? 0;
+        final isSuccess = percentage >= 50;
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors:
+                      isSuccess
+                          ? [const Color(0xFF00B0FF), const Color(0xFF00E676)]
+                          : [const Color(0xFFFF5252), const Color(0xFFFF7A00)],
+                ),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color:
+                        isSuccess
+                            ? Colors.green.withOpacity(0.4)
+                            : Colors.red.withOpacity(0.4),
+                    blurRadius: 18,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    "$percentage%",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 48,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  Text(
+                    isSuccess ? "DÉFI VALIDÉ !" : "DÉFI NON VALIDÉ",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 18),
+                        const SizedBox(width: 4),
+                        Text(
+                          "+$earnedXp XP pour $currentPlayerName",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 28),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                elevation: 6,
+              ),
+              onPressed: _isSubmitting ? null : _handleNextTurn,
+              icon: const Icon(Icons.arrow_forward_rounded, size: 22),
+              label: const Text(
+                "Tour Suivant ➡️",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        );
+
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
+  Widget _buildRouletteWidget(List<String> playerNames) {
+    return SizedBox(
+      width: 250,
+      height: 250,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomPaint(
+            size: const Size(240, 240),
+            painter: _RoulettePainter(
+              playerNames: playerNames,
+              colors: _sliceColors,
+              angle: _currentWheelAngle,
+            ),
+          ),
+          // Flèche indicatrice au-dessus
+          Positioned(
+            top: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.amber.withOpacity(0.6),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.arrow_drop_down,
+                size: 40,
+                color: Colors.amber,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RoulettePainter extends CustomPainter {
+  final List<String> playerNames;
+  final List<Color> colors;
+  final double angle;
+
+  _RoulettePainter({
+    required this.playerNames,
+    required this.colors,
+    required this.angle,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (playerNames.isEmpty) return;
+
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = min(size.width / 2, size.height / 2);
+    final sweepAngle = (2 * pi) / playerNames.length;
+
+    canvas.save();
+    canvas.translate(center.dx, center.dy);
+    canvas.rotate(angle);
+
+    final paint = Paint()..style = PaintingStyle.fill;
+    final textPainter = TextPainter(
+      textDirection: TextDirection.ltr,
+      textAlign: TextAlign.center,
+    );
+
+    for (int i = 0; i < playerNames.length; i++) {
+      paint.color = colors[i % colors.length];
+      final startAngle = i * sweepAngle;
+
+      canvas.drawArc(
+        Rect.fromCircle(center: Offset.zero, radius: radius),
+        startAngle,
+        sweepAngle,
+        true,
+        paint,
+      );
+
+      final borderPaint =
+          Paint()
+            ..color = Colors.white.withOpacity(0.3)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2.0;
+      canvas.drawArc(
+        Rect.fromCircle(center: Offset.zero, radius: radius),
+        startAngle,
+        sweepAngle,
+        true,
+        borderPaint,
+      );
+
+      canvas.save();
+      final textAngle = startAngle + sweepAngle / 2;
+      canvas.rotate(textAngle);
+
+      final name =
+          playerNames[i].length > 9
+              ? '${playerNames[i].substring(0, 7)}..'
+              : playerNames[i];
+      textPainter.text = TextSpan(
+        text: name,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          shadows: [
+            Shadow(
+              blurRadius: 3.0,
+              color: Colors.black54,
+              offset: Offset(1.0, 1.0),
+            ),
+          ],
+        ),
+      );
+      textPainter.layout(maxWidth: radius * 0.7);
+      textPainter.paint(canvas, Offset(radius * 0.35, -textPainter.height / 2));
+
+      canvas.restore();
+    }
+
+    // Bordure extérieure
+    final outerRing =
+        Paint()
+          ..color = Colors.white.withOpacity(0.8)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 4.0;
+    canvas.drawCircle(Offset.zero, radius, outerRing);
+
+    // Moyeu central
+    final hubPaint =
+        Paint()
+          ..color = const Color(0xFF1E1E2C)
+          ..style = PaintingStyle.fill;
+    canvas.drawCircle(Offset.zero, radius * 0.22, hubPaint);
+
+    final hubBorder =
+        Paint()
+          ..color = const Color(0xFFFFD700)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 3.0;
+    canvas.drawCircle(Offset.zero, radius * 0.22, hubBorder);
+
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(covariant _RoulettePainter oldDelegate) {
+    return oldDelegate.angle != angle || oldDelegate.playerNames != playerNames;
+  }
 }
 
 // =============================================================================

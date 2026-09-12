@@ -33,7 +33,7 @@ final List<Map<String, dynamic>> allAppGames = [
     'name': 'Action ou Vérité',
     'icon': Icons.sync_problem,
     'image': 'actionetverite.webp',
-    'modes': ['local'],
+    'modes': ['local', 'multi', 'monde'],
   },
   {
     'name': 'Jeu de la Pièce',

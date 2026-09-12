@@ -220,30 +220,8 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
     }
 
     bool isSpeaking = isLocal ? !livekit.isLocalMuted : (livekit.remoteUsers[identity]?.isSpeaking ?? false);
-    bool isVideoOff = isLocal ? livekit.isLocalVideoOff : (livekit.remoteUsers[identity]?.isVideoOff ?? false);
 
-    VideoTrack? videoTrack;
-    if (isLocal) {
-      final localParticipant = livekit.room!.localParticipant;
-      if (localParticipant != null) {
-        for (var pub in localParticipant.trackPublications.values) {
-          if (pub.kind == TrackType.VIDEO && pub.track is VideoTrack) {
-            videoTrack = pub.track as VideoTrack;
-            break;
-          }
-        }
-      }
-    } else {
-      final participant = livekit.room!.remoteParticipants[identity];
-      if (participant != null) {
-        for (var pub in participant.trackPublications.values) {
-          if (pub.kind == TrackType.VIDEO && pub.subscribed && pub.track is VideoTrack) {
-            videoTrack = pub.track as VideoTrack;
-            break;
-          }
-        }
-      }
-    }
+    VideoTrack? videoTrack = livekit.getVideoTrack(identity);
 
         // Logique visuelle de mise en avant
         bool isDimmed = false;
@@ -308,10 +286,11 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                     Colors.black.withOpacity(isDimmed ? 0.6 : 0.0), 
                     BlendMode.darken
                 ),
-                child: (isVideoOff || videoTrack == null)
+                child: (videoTrack == null || videoTrack.muted)
                     ? Container(color: Colors.grey[900], child: Center(child: Icon(Icons.person, color: Colors.white54, size: 30)))
                     : VideoTrackRenderer(
                         videoTrack,
+                        fit: VideoViewFit.cover,
                         key: ValueKey(videoTrack.sid ?? videoTrack.hashCode),
                       ),
               )
@@ -400,28 +379,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
     bool isLocal = identity == livekit.localIdentity;
     String playerName = isLocal ? (widget.players[widget.currentPlayerId]?['name'] ?? 'Moi') : (widget.players[widget.playerLivekitIdentities.entries.firstWhere((e) => e.value == identity, orElse: () => MapEntry('', '')).key]?['name'] ?? 'Joueur');
 
-    VideoTrack? videoTrack;
-    if (isLocal) {
-      final localParticipant = livekit.room!.localParticipant;
-      if (localParticipant != null) {
-        for (var pub in localParticipant.trackPublications.values) {
-          if (pub.kind == TrackType.VIDEO && pub.track is VideoTrack) {
-            videoTrack = pub.track as VideoTrack;
-            break;
-          }
-        }
-      }
-    } else {
-      final participant = livekit.room!.remoteParticipants[identity];
-      if (participant != null) {
-        for (var pub in participant.trackPublications.values) {
-          if (pub.kind == TrackType.VIDEO && pub.subscribed && pub.track is VideoTrack) {
-            videoTrack = pub.track as VideoTrack;
-            break;
-          }
-        }
-      }
-    }
+    VideoTrack? videoTrack = livekit.getVideoTrack(identity);
 
     return GestureDetector(
       onTap: () => setState(() => _maximizedIdentity = null),

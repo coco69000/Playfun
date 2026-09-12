@@ -263,21 +263,40 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           playerState.clearGameInvite(code, host);
                           Navigator.pop(ctx);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (_) => GameLobbyScreen(
-                                    gameCode: code,
-                                    playerId: playerId,
-                                  ),
-                            ),
+
+                          // 1. Enregistrement obligatoire du joueur dans Firestore
+                          final success = await FirebaseService().joinGame(
+                            code,
+                            playerState.userName ?? 'Joueur',
+                            playerId,
                           );
+
+                          // 2. Navigation vers le salon uniquement après inscription réussie
+                          if (success && context.mounted) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (_) => GameLobbyScreen(
+                                      gameCode: code,
+                                      playerId: playerId,
+                                    ),
+                              ),
+                            );
+                          } else if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "Impossible de rejoindre : salon plein ou inexistant.",
+                                ),
+                              ),
+                            );
+                          }
                         },
-                        child: Text("Rejoindre"),
+                        child: const Text("Rejoindre"),
                       ),
                     ],
                   ),
