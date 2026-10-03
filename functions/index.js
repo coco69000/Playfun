@@ -1286,7 +1286,18 @@ exports.enforceStrictTimers = onSchedule(
           return;
         }
 
-        if (data.turnStartTime && data.turnTimerSeconds) {
+        const players = data.players || {};
+        const playerOrder = data.playerOrder || Object.keys(players);
+        if (playerOrder.length === 0) return;
+
+        const currentIndex = typeof data.currentPlayerIndex === "number" ? data.currentPlayerIndex : 0;
+        const currentPid = playerOrder[currentIndex] || playerOrder[0];
+        const isBot = players[currentPid]?.isBot === true || players[currentPid]?.replacedByBot === true || data.botPlayers?.[currentPid] === true;
+
+        // Délai de 5s pour les bots, sinon turnTimerSeconds + tolérance
+        const allowedSecs = isBot ? 5 : (data.turnTimerSeconds || 30);
+
+        if (data.turnStartTime) {
           const turnStartMs = data.turnStartTime.toDate
             ? data.turnStartTime.toDate().getTime()
             : (typeof data.turnStartTime === "number" ? data.turnStartTime : 0);
@@ -1294,27 +1305,23 @@ exports.enforceStrictTimers = onSchedule(
           if (!turnStartMs) return;
 
           const elapsedMs = now - turnStartMs;
-          const limitMs = (data.turnTimerSeconds + 5) * 1000;
-
-          if (elapsedMs > limitMs) {
-            const playerOrder = data.playerOrder || Object.keys(data.players || {});
-            if (playerOrder.length === 0) return;
-
-            const currentIndex = typeof data.currentPlayerIndex === "number" ? data.currentPlayerIndex : 0;
-            const timedOutPlayerId = playerOrder[currentIndex] || playerOrder[0];
+          if (elapsedMs > (allowedSecs + 2) * 1000) {
+            const nextIndex = (currentIndex + 1) % playerOrder.length;
+            const playerName = players[currentPid]?.name || (isBot ? "Ordinateur" : "Un joueur");
 
             const inactiveCounts = { ...(data.inactiveTurnCounts || {}) };
-            inactiveCounts[timedOutPlayerId] = (inactiveCounts[timedOutPlayerId] || 0) + 1;
-
-            const nextIndex = (currentIndex + 1) % playerOrder.length;
-            const playerName = data.players?.[timedOutPlayerId]?.name || "Un joueur";
+            if (!isBot) {
+              inactiveCounts[currentPid] = (inactiveCounts[currentPid] || 0) + 1;
+            }
 
             batch.update(doc.ref, {
               currentPlayerIndex: nextIndex,
               inactiveTurnCounts: inactiveCounts,
               turnStartTime: admin.firestore.FieldValue.serverTimestamp(),
               gameLog: admin.firestore.FieldValue.arrayUnion(
-                `⏱️ Temps écoulé ! ${playerName} a été passé automatiquement pour inactivité.`
+                isBot
+                  ? `⏱️ Tour de ${playerName} (Robot) terminé (action auto).`
+                  : `⏱️ Temps écoulé ! ${playerName} a été passé automatiquement pour inactivité.`
               ),
             });
             forcedTimeouts++;
@@ -1324,7 +1331,7 @@ exports.enforceStrictTimers = onSchedule(
 
       if (forcedTimeouts > 0) {
         await batch.commit();
-        console.log(`Serveur : ${forcedTimeouts} tours passés automatiquement pour inactivité.`);
+        console.log(`Serveur : ${forcedTimeouts} coups auto exécutés.`);
       }
     } catch (err) {
       console.error("Erreur enforceStrictTimers:", err);
@@ -1340,8 +1347,8 @@ exports.cleanupDisconnectedPlayers = onSchedule(
   },
   async (event) => {
     const now = Date.now();
-    const STALE_THRESHOLD_MS = 90 * 1000; // 90 secondes avant déconnexion
-    const REMOVAL_THRESHOLD_MS = 3 * 60 * 1000;
+    const STALE_THRESHOLD_MS = 60 * 1000; // 60 secondes d'inactivité
+    const REMOVAL_THRESHOLD_MS = 2 * 60 * 1000;
 
     try {
       const activeGames = await db
@@ -1361,8 +1368,6 @@ exports.cleanupDisconnectedPlayers = onSchedule(
         const removedPlayers = [];
 
         for (const [pId, pData] of Object.entries(players)) {
-          if (pId === hostId) continue;
-
           let lastHbMs = 0;
           if (pData.lastHeartbeat && pData.lastHeartbeat.toDate) {
             lastHbMs = pData.lastHeartbeat.toDate().getTime();
@@ -1400,6 +1405,20 @@ exports.cleanupDisconnectedPlayers = onSchedule(
 
           updates.players = updatedPlayers;
           updates.playerOrder = updatedOrder;
+
+          // CORRECTION MAJEURE : Si le nombre de joueurs tombe en dessous de 2 en pleine partie
+          if (Object.keys(updatedPlayers).length < 2 && data.gameState === "playing") {
+            const remainingPlayerId = Object.keys(updatedPlayers)[0] || null;
+            const remainingName = remainingPlayerId ? (updatedPlayers[remainingPlayerId]?.name || "Joueur") : "Inconnu";
+
+            updates.gameState = "gameOver";
+            updates.gameWinner = remainingPlayerId;
+            updates.gameEndReason = `Victoire de ${remainingName} par forfait (adversaire déconnecté).`;
+            if (remainingPlayerId) {
+              updates[`players.${remainingPlayerId}.score`] = admin.firestore.FieldValue.increment(1);
+            }
+          }
+
           updates.gameLog = admin.firestore.FieldValue.arrayUnion(
             `🚪 ${removedPlayers.length} joueur(s) retiré(s) pour inactivité prolongée.`
           );

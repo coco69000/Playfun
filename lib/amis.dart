@@ -2550,12 +2550,15 @@ class FirebaseService {
     Map<String, dynamic> gameData, {
     int? customDuration,
   }) {
+    // Si c'est un robot/ordinateur, tolérance immédiate
+    if (isCurrentPlayerBot(gameData)) return true;
+
     final turnStartTime = (gameData['turnStartTime'] as Timestamp?)?.toDate();
     if (turnStartTime == null) return false;
     final int duration = customDuration ?? getEffectiveTurnTimer(gameData);
     if (duration <= 0) return false;
     final int elapsed = DateTime.now().difference(turnStartTime).inSeconds;
-    return elapsed >= (duration - 1);
+    return elapsed >= (duration - 2); // Tolérance de 2s
   }
 
   /// Crédite l'XP au joueur en appliquant dynamiquement le bonus selon le jeu et ses réglages
@@ -3461,6 +3464,7 @@ class FirebaseService {
       if (!snap.exists) return;
       final gameData = snap.data() as Map<String, dynamic>;
       if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
 
       final playerOrder = List<String>.from(gameData['bigTwoPlayerOrder'] ?? []);
       final currentIndex = (gameData['bigTwoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
@@ -3474,7 +3478,7 @@ class FirebaseService {
       List<String> passedPlayers = List<String>.from(gameData['bigTwoPassedPlayers'] ?? []);
       List<String> finishedPlayers = List<String>.from(gameData['bigTwoFinishedPlayers'] ?? []);
 
-      // CAS A : Table vide (le joueur ouvre le pli)
+      // CAS A : Table vide
       if (lastPlay == null && myHand.isNotEmpty) {
         List<String> cardsToPlay = [];
         if (myHand.contains('3D')) {
@@ -4670,21 +4674,180 @@ class FirebaseService {
   }
 
   // =========================================================================
-  // 9. BATAILLE NAVALE
+  // 9. BATAILLE NAVALE - TIR ET GESTION DU TIMEOUT
   // =========================================================================
+  Future<void> shootBatailleNavale(
+    String gameCode,
+    String playerId,
+    int targetIndex, {
+    bool isAuto = false,
+  }) async {
+    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
+
+    if (targetIndex < 0 || targetIndex >= 100) {
+      throw Exception("Cible hors de la grille.");
+    }
+
+    await _db.runTransaction((transaction) async {
+      final gameRef = _db.collection('games').doc(gameCode);
+      final gameSnap = await transaction.get(gameRef);
+      if (!gameSnap.exists) return;
+      var gameData = gameSnap.data() as Map<String, dynamic>;
+      if (gameData['roundState'] != 'playing' ||
+          gameData['currentPlayerId'] != playerId) {
+        throw Exception("Ce n'est pas votre tour.");
+      }
+
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      if (!isAuto &&
+          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+        throw Exception("Action non autorisée.");
+      }
+
+      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+      List<String> playerIds = playerData.keys.toList();
+      String opponentId = playerIds.firstWhere((id) => id != playerId, orElse: () => '');
+      if (opponentId.isEmpty) return;
+
+      var shooterData = Map<String, dynamic>.from(playerData[playerId] ?? {});
+      var opponentData = Map<String, dynamic>.from(playerData[opponentId] ?? {});
+
+      var enemyGrid = List<String>.from(
+        shooterData['enemyGrid'] ?? List.filled(100, 'unknown'),
+      );
+      var opponentIncomingGrid = List<String>.from(
+        opponentData['incomingGrid'] ?? List.filled(100, 'unknown'),
+      );
+      var opponentGrid = List<int>.from(
+        opponentData['myGrid'] ?? List.filled(100, 0),
+      );
+      var opponentShips = Map<String, dynamic>.from(
+        opponentData['shipsPlaced'] ?? {},
+      );
+
+      if (enemyGrid[targetIndex] != 'unknown') {
+        throw Exception("Case déjà ciblée.");
+      }
+
+      String result = 'miss';
+      if (opponentGrid[targetIndex] != 0) {
+        result = 'hit';
+        int shipId = opponentGrid[targetIndex];
+
+        for (var entry in opponentShips.entries) {
+          var ship = Map<String, dynamic>.from(entry.value);
+          if (ship['id'] == shipId) {
+            ship['hits'] = (ship['hits'] as int) + 1;
+            if (ship['hits'] >= ship['area']) {
+              ship['sunk'] = true;
+              result = 'sunk';
+              for (int i = 0; i < 100; i++) {
+                if (opponentGrid[i] == shipId) {
+                  enemyGrid[i] = 'sunk';
+                  opponentIncomingGrid[i] = 'sunk';
+                }
+              }
+            }
+            opponentShips[entry.key] = ship;
+            break;
+          }
+        }
+        if (result == 'sunk') {
+          opponentData['shipsSunk'] =
+              (opponentData['shipsSunk'] as int? ?? 0) + 1;
+        }
+      }
+
+      enemyGrid[targetIndex] = result;
+      opponentIncomingGrid[targetIndex] = result;
+
+      int xpBase = 2; // Tir à l'eau
+      if (enemyGrid.where((cell) => cell != 'unknown').length == 1 &&
+          (result == 'hit' || result == 'sunk')) {
+        xpBase = 50; // Sniper 1er coup
+        if (!isAuto && currentAuthUid != null) {
+          _db.collection('users').doc(currentAuthUid).set({
+            'unlockedBadges.naval_sniper': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        }
+      } else if (result == 'sunk') {
+        xpBase = 25; // Coulé
+      } else if (result == 'hit') {
+        xpBase = 10; // Touché
+      }
+
+      creditPlayerXp(
+        transaction,
+        gameRef,
+        gameData,
+        playerId,
+        xpBase,
+        applySpeedBonus: true,
+      );
+
+      shooterData['enemyGrid'] = enemyGrid;
+      opponentData['incomingGrid'] = opponentIncomingGrid;
+      opponentData['shipsPlaced'] = opponentShips;
+      playerData[playerId] = shooterData;
+      playerData[opponentId] = opponentData;
+
+      Map<String, dynamic> updates = {'playerData': playerData};
+
+      if ((opponentData['shipsSunk'] ?? 0) >=
+          GameData.batailleNavaleShips.length) {
+        int winXp = 40;
+        int myLostShips = (shooterData['shipsSunk'] as int? ?? 0);
+        if (myLostShips <= 1) {
+          winXp += 50; // Victoire Parfaite
+        }
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          playerId,
+          winXp,
+          applySpeedBonus: false,
+        );
+        updates.addAll({
+          'gameState': 'gameOver',
+          'roundState': 'gameOver',
+          'gameWinner': playerId,
+          'players.$playerId.score': FieldValue.increment(1),
+          'gameEndReason':
+              '${shooterData['name']} a coulé toute la flotte adverse !',
+        });
+      } else {
+        // Si touché ou coulé, le joueur rejoue, sinon au tour de l'adversaire
+        String nextPlayerId =
+            (result == 'hit' || result == 'sunk') ? playerId : opponentId;
+        String logMessage =
+            (result == 'hit' || result == 'sunk')
+                ? "🎯 ${shooterData['name']} a touché une cible ! Il rejoue."
+                : "🌊 ${shooterData['name']} a tiré dans l'eau. Au tour de ${opponentData['name']}.";
+
+        updates.addAll({
+          'currentPlayerId': nextPlayerId,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([logMessage]),
+        });
+      }
+      transaction.update(gameRef, updates);
+    });
+  }
+
   Future<void> handleBatailleNavaleTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
-    final gameSnap = await gameRef.get();
-    if (!gameSnap.exists) return;
-    var gameData = gameSnap.data() as Map<String, dynamic>;
-    if (gameData['gameState'] != 'playing') return;
 
-    if (gameData['roundState'] == 'placement') {
-      await _db.runTransaction((transaction) async {
-        final snap = await transaction.get(gameRef);
-        if (!snap.exists) return;
-        var currentData = snap.data() as Map<String, dynamic>;
-        var playerData = Map<String, dynamic>.from(currentData['playerData'] ?? {});
+    await _db.runTransaction((transaction) async {
+      final snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      var gameData = snap.data() as Map<String, dynamic>;
+      if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
+
+      if (gameData['roundState'] == 'placement') {
+        var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
         Random rand = Random();
 
         playerData.forEach((pId, pInfo) {
@@ -4755,29 +4918,101 @@ class FirebaseService {
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion(["⏱️ Placement automatique effectué."]),
         });
-      });
-    } else if (gameData['roundState'] == 'playing') {
-      final currentPlayerId = gameData['currentPlayerId'];
-      if (currentPlayerId == null) return;
+      } else if (gameData['roundState'] == 'playing') {
+        final currentPlayerId = gameData['currentPlayerId'];
+        if (currentPlayerId == null) return;
 
-      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
-      List<String> playerIds = playerData.keys.toList();
-      String opponentId = playerIds.firstWhere((id) => id != currentPlayerId, orElse: () => '');
-      if (opponentId.isEmpty) return;
+        var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+        List<String> playerIds = playerData.keys.toList();
+        String opponentId = playerIds.firstWhere((id) => id != currentPlayerId, orElse: () => '');
+        if (opponentId.isEmpty) return;
 
-      var shooterData = Map<String, dynamic>.from(playerData[currentPlayerId] ?? {});
-      var enemyGrid = List<String>.from(shooterData['enemyGrid'] ?? List.filled(100, 'unknown'));
+        var shooterData = Map<String, dynamic>.from(playerData[currentPlayerId] ?? {});
+        var enemyGrid = List<String>.from(shooterData['enemyGrid'] ?? List.filled(100, 'unknown'));
 
-      List<int> validTargets = [];
-      for (int i = 0; i < 100; i++) {
-        if (enemyGrid[i] == 'unknown') validTargets.add(i);
-      }
+        List<int> validTargets = [];
+        for (int i = 0; i < 100; i++) {
+          if (enemyGrid[i] == 'unknown') validTargets.add(i);
+        }
 
-      if (validTargets.isNotEmpty) {
+        if (validTargets.isEmpty) return;
+
+        // Choix sécurisé du tir aléatoire
         int targetIndex = validTargets[Random().nextInt(validTargets.length)];
-        await shootBatailleNavale(gameCode, currentPlayerId, targetIndex, isAuto: true);
+
+        var opponentData = Map<String, dynamic>.from(playerData[opponentId] ?? {});
+        var opponentIncomingGrid = List<String>.from(
+          opponentData['incomingGrid'] ?? List.filled(100, 'unknown'),
+        );
+        var opponentGrid = List<int>.from(
+          opponentData['myGrid'] ?? List.filled(100, 0),
+        );
+        var opponentShips = Map<String, dynamic>.from(
+          opponentData['shipsPlaced'] ?? {},
+        );
+
+        String result = 'miss';
+        if (opponentGrid[targetIndex] != 0) {
+          result = 'hit';
+          int shipId = opponentGrid[targetIndex];
+
+          for (var entry in opponentShips.entries) {
+            var ship = Map<String, dynamic>.from(entry.value);
+            if (ship['id'] == shipId) {
+              ship['hits'] = (ship['hits'] as int) + 1;
+              if (ship['hits'] >= ship['area']) {
+                ship['sunk'] = true;
+                result = 'sunk';
+                for (int i = 0; i < 100; i++) {
+                  if (opponentGrid[i] == shipId) {
+                    enemyGrid[i] = 'sunk';
+                    opponentIncomingGrid[i] = 'sunk';
+                  }
+                }
+              }
+              opponentShips[entry.key] = ship;
+              break;
+            }
+          }
+          if (result == 'sunk') {
+            opponentData['shipsSunk'] =
+                (opponentData['shipsSunk'] as int? ?? 0) + 1;
+          }
+        }
+
+        enemyGrid[targetIndex] = result;
+        opponentIncomingGrid[targetIndex] = result;
+
+        shooterData['enemyGrid'] = enemyGrid;
+        opponentData['incomingGrid'] = opponentIncomingGrid;
+        opponentData['shipsPlaced'] = opponentShips;
+        playerData[currentPlayerId] = shooterData;
+        playerData[opponentId] = opponentData;
+
+        Map<String, dynamic> updates = {'playerData': playerData};
+
+        if ((opponentData['shipsSunk'] ?? 0) >= GameData.batailleNavaleShips.length) {
+          updates.addAll({
+            'gameState': 'gameOver',
+            'roundState': 'gameOver',
+            'gameWinner': currentPlayerId,
+            'players.$currentPlayerId.score': FieldValue.increment(1),
+            'gameEndReason': '${shooterData['name']} a coulé toute la flotte adverse !',
+          });
+        } else {
+          String nextPlayerId = (result == 'hit' || result == 'sunk') ? currentPlayerId : opponentId;
+          updates.addAll({
+            'currentPlayerId': nextPlayerId,
+            'turnStartTime': FieldValue.serverTimestamp(),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ ${shooterData['name']} a tiré automatiquement en ${(targetIndex ~/ 10) + 1}-${(targetIndex % 10) + 1} ($result)."
+            ]),
+          });
+        }
+
+        transaction.update(gameRef, updates);
       }
-    }
+    });
   }
 
   // =========================================================================
@@ -4791,6 +5026,9 @@ class FirebaseService {
       final gameData = snap.data() as Map<String, dynamic>;
       if (gameData['gameState'] != 'playing') return;
 
+      // Protection anti-doublon : s'assurer que le tour a réellement expiré
+      if (!_isTurnTimedOut(gameData)) return;
+
       final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
       final currentIndex = (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
@@ -4802,27 +5040,10 @@ class FirebaseService {
       final lastPlay = gameData['lastPlay'] != null ? Map<String, dynamic>.from(gameData['lastPlay']) : null;
       List<String> passedPlayers = List<String>.from(gameData['passedPlayers'] ?? []);
       List<String> finishedPlayers = List<String>.from(gameData['finishedPlayers'] ?? []);
+      bool isRevolution = gameData['isRevolutionActive'] ?? false;
 
+      // CAS A : Table vide (le joueur ouvre le pli)
       if (lastPlay == null && myHand.isNotEmpty) {
-        if (gameData['currentRound'] == 1 &&
-            (gameData['currentPile'] as List?)?.isEmpty != false &&
-            !myHand.contains('3C')) {
-          String? owner3C;
-          hands.forEach((p, h) {
-            if ((h as List).contains('3C')) owner3C = p;
-          });
-          if (owner3C != null && owner3C != playerId) {
-            int targetIdx = playerOrder.indexOf(owner3C!);
-            if (targetIdx != -1) {
-              transaction.update(gameRef, {
-                'currentPlayerIndex': targetIdx,
-                'turnStartTime': FieldValue.serverTimestamp(),
-              });
-              return;
-            }
-          }
-        }
-
         final String cardToPlay = myHand.contains('3C') ? '3C' : myHand.first;
         myHand.remove(cardToPlay);
         hands[playerId] = myHand;
@@ -4831,8 +5052,7 @@ class FirebaseService {
           finishedPlayers.add(playerId);
         }
 
-        final remaining =
-            playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+        final remaining = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
         if (remaining.length <= 1) {
           _endPresidentRound(transaction, gameRef, gameData, {
             'playerHands': hands,
@@ -4850,7 +5070,7 @@ class FirebaseService {
           'playerHands': hands,
           'lastPlay': {
             'cards': [cardToPlay],
-            'value': _getPresidentCardValue(cardToPlay, false),
+            'value': _getPresidentCardValue(cardToPlay, isRevolution),
             'playedBy': playerId,
           },
           'currentPile': FieldValue.arrayUnion([cardToPlay]),
@@ -4861,7 +5081,73 @@ class FirebaseService {
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a ouvert avec $cardToPlay."]),
         });
-      } else {
+      }
+      // CAS B : Pli en cours (tente de jouer une carte supérieure, sinon passe)
+      else if (lastPlay != null) {
+        int targetSize = (lastPlay['cards'] as List).length;
+        int lastVal = (lastPlay['value'] as num?)?.toInt() ?? 0;
+
+        // Regrouper la main par rang
+        Map<String, List<String>> rankGroups = {};
+        for (String c in myHand) {
+          String rank = _getPresidentCardRank(c);
+          rankGroups.putIfAbsent(rank, () => []).add(c);
+        }
+
+        List<String>? candidateCards;
+        for (var entry in rankGroups.entries) {
+          if (entry.value.length >= targetSize) {
+            int val = _getPresidentCardValue(entry.value.first, isRevolution);
+            if (val > lastVal) {
+              candidateCards = entry.value.take(targetSize).toList();
+              break;
+            }
+          }
+        }
+
+        // Si le joueur a une combinaison valide, il la pose
+        if (candidateCards != null) {
+          for (var c in candidateCards) {
+            myHand.remove(c);
+          }
+          hands[playerId] = myHand;
+
+          if (myHand.isEmpty && !finishedPlayers.contains(playerId)) {
+            finishedPlayers.add(playerId);
+          }
+
+          final remaining = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+          if (remaining.length <= 1) {
+            _endPresidentRound(transaction, gameRef, gameData, {
+              'playerHands': hands,
+              'finishedPlayers': finishedPlayers,
+            });
+            return;
+          }
+
+          int nextIndex = (currentIndex + 1) % playerOrder.length;
+          while (finishedPlayers.contains(playerOrder[nextIndex])) {
+            nextIndex = (nextIndex + 1) % playerOrder.length;
+          }
+
+          transaction.update(gameRef, {
+            'playerHands': hands,
+            'lastPlay': {
+              'cards': candidateCards,
+              'value': _getPresidentCardValue(candidateCards.first, isRevolution),
+              'playedBy': playerId,
+            },
+            'currentPile': FieldValue.arrayUnion(candidateCards),
+            'lastPlayerToPlay': playerId,
+            'currentPlayerIndex': nextIndex,
+            'finishedPlayers': finishedPlayers,
+            'turnStartTime': FieldValue.serverTimestamp(),
+            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a joué ${candidateCards.join(', ')}."]),
+          });
+          return;
+        }
+
+        // Sinon, le joueur passe son tour proprement
         if (!passedPlayers.contains(playerId)) passedPlayers.add(playerId);
 
         final stillInPlay = playerOrder.where((p) => !finishedPlayers.contains(p) && !passedPlayers.contains(p)).toList();
@@ -5296,19 +5582,15 @@ class FirebaseService {
           if (!players.containsKey(playerIdToRemove)) return;
 
           final callerAuthUid = currentAuthUid;
-          final targetAuthUid =
-              players[playerIdToRemove]?['authUid'] ?? playerIdToRemove;
+          final targetAuthUid = players[playerIdToRemove]?['authUid'] ?? playerIdToRemove;
           final hostAuthUid = players[hostId]?['authUid'] ?? hostId;
 
-          // SÉCURITÉ : Seul l'hôte ou la personne qui part peut déclencher le départ
+          // Sécurité : Seul l'hôte ou le joueur lui-même peut déclencher le départ
           if (callerAuthUid != targetAuthUid && callerAuthUid != hostAuthUid) {
-            throw Exception(
-              "Action non autorisée : vous ne pouvez pas expulser ce joueur.",
-            );
+            return;
           }
 
-          String removedPlayerName =
-              players[playerIdToRemove]?['name'] ?? 'Un joueur';
+          String removedPlayerName = players[playerIdToRemove]?['name'] ?? 'Un joueur';
           players.remove(playerIdToRemove);
           playerOrder.remove(playerIdToRemove);
           teams.forEach((key, playerList) {
@@ -5324,34 +5606,57 @@ class FirebaseService {
             'pendingBotReplacement': FieldValue.delete(),
           };
 
-          // Si moins de 2 joueurs, on arrête tout
+          // Cas 1 : Moins de 2 joueurs dans une partie en cours -> Victoire du joueur restant par forfait
           if (players.length < 2 && gameData['gameState'] == 'playing') {
+            final String? remainingPlayerId = players.keys.isNotEmpty ? players.keys.first : null;
+            final String remainingName = remainingPlayerId != null ? (players[remainingPlayerId]?['name'] ?? 'Joueur') : 'Inconnu';
+            
             updates['gameState'] = 'gameOver';
-            updates['gameEndReason'] =
-                "Partie arrêtée : un joueur a quitté et il n'y a plus assez de joueurs actifs. Retour à l'accueil.";
+            updates['gameWinner'] = remainingPlayerId;
+            updates['gameEndReason'] = "$removedPlayerName s'est déconnecté. Victoire de $remainingName par forfait !";
+            if (remainingPlayerId != null) {
+              updates['players.$remainingPlayerId.score'] = FieldValue.increment(1);
+            }
           } else {
-            // Sinon on passe le rôle d'hôte si besoin
-            if (gameData['hostId'] == playerIdToRemove &&
-                playerOrder.isNotEmpty) {
+            // Cas 2 : Transmission du rôle d'hôte
+            if (gameData['hostId'] == playerIdToRemove && playerOrder.isNotEmpty) {
               updates['hostId'] = playerOrder[0];
-              newLogs.add(
-                "${players[playerOrder[0]]?['name']} est le nouvel hôte.",
-              );
+              newLogs.add("${players[playerOrder[0]]?['name']} est le nouvel hôte.");
             }
 
-            int oldPlayerIndex = List<String>.from(
-              gameData['playerOrder'] ?? [],
-            ).indexOf(playerIdToRemove);
-            int currentPlayerIndex =
-                gameData['currentPlayerIndex'] as int? ?? 0;
+            // Cas 3 : Décalage propre du tour pour tous les jeux
+            int currentPlayerIndex = (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
             if (playerOrder.isNotEmpty) {
-              if (oldPlayerIndex != -1 &&
-                  oldPlayerIndex <= currentPlayerIndex &&
-                  currentPlayerIndex > 0) {
-                updates['currentPlayerIndex'] = currentPlayerIndex - 1;
-              } else if (currentPlayerIndex >= playerOrder.length) {
+              if (currentPlayerIndex >= playerOrder.length) {
                 updates['currentPlayerIndex'] = 0;
               }
+              updates['currentPlayerId'] = playerOrder[updates['currentPlayerIndex'] ?? currentPlayerIndex];
+            }
+
+            // Nettoyage des listes d'ordres spécifiques aux sous-jeux
+            if (gameData['unoPlayerOrder'] != null) {
+              List<String> unoOrder = List<String>.from(gameData['unoPlayerOrder']);
+              unoOrder.remove(playerIdToRemove);
+              updates['unoPlayerOrder'] = unoOrder;
+              if (unoOrder.isNotEmpty) {
+                int unoIdx = (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+                updates['unoCurrentPlayerIndex'] = unoIdx % unoOrder.length;
+              }
+            }
+            if (gameData['bigTwoPlayerOrder'] != null) {
+              List<String> b2Order = List<String>.from(gameData['bigTwoPlayerOrder']);
+              b2Order.remove(playerIdToRemove);
+              updates['bigTwoPlayerOrder'] = b2Order;
+            }
+            if (gameData['milleBornesPlayerOrder'] != null) {
+              List<String> mbOrder = List<String>.from(gameData['milleBornesPlayerOrder']);
+              mbOrder.remove(playerIdToRemove);
+              updates['milleBornesPlayerOrder'] = mbOrder;
+            }
+            if (gameData['petitsChevauxPlayerOrder'] != null) {
+              List<String> pcOrder = List<String>.from(gameData['petitsChevauxPlayerOrder']);
+              pcOrder.remove(playerIdToRemove);
+              updates['petitsChevauxPlayerOrder'] = pcOrder;
             }
           }
 
@@ -5464,16 +5769,11 @@ class FirebaseService {
         'botPlayers.$playerId': true,
         'pendingBotReplacement': FieldValue.delete(),
         'inactiveTurnCounts.$playerId': 0,
+        'turnStartTime': FieldValue.serverTimestamp(), // Réinitialise à 5s maintenant
         'gameLog': FieldValue.arrayUnion([
-          "🤖 $playerName a été exclu et remplacé par l'ordinateur. L'IA jouera à son tour (le joueur ne gagne rien).",
+          "🤖 $playerName a été remplacé par l'ordinateur (IA active - 5s par tour).",
         ]),
       };
-
-      // Si c'est actuellement le tour de ce joueur, réinitialiser turnStartTime pour donner 5s au bot
-      final curPlayerId = getCurrentPlayerId(gameData);
-      if (curPlayerId == playerId) {
-        updates['turnStartTime'] = FieldValue.serverTimestamp();
-      }
 
       transaction.update(gameRef, updates);
     });
@@ -6288,6 +6588,7 @@ class FirebaseService {
       if (!snap.exists) return;
       final gameData = snap.data() as Map<String, dynamic>;
       if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
 
       final playerOrder = List<String>.from(gameData['unoPlayerOrder'] ?? []);
       final currentIndex = (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
@@ -6456,7 +6757,7 @@ class FirebaseService {
   }
 
   // =========================================================================
-  // 6. ZERO POINTE (SKYJO)
+  // GESTION DU TIMEOUT / JEU AUTOMATIQUE ROBUSTE DE ZÉRO POINTÉ
   // =========================================================================
   Future<void> handleZeroPointeTimeout(String gameCode) async {
     await _db.runTransaction((transaction) async {
@@ -6466,7 +6767,51 @@ class FirebaseService {
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
       if (gameData['gameState'] != 'playing') return;
+      if (!_isTurnTimedOut(gameData)) return;
 
+      final String roundState = gameData['roundState'] ?? '';
+
+      // CAS 1 : Phase de révélation des 2 cartes initiales
+      if (roundState == 'revealing_initial') {
+        var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
+        var counts = Map<String, int>.from(
+          (gameData['revealedInitialCardsCount'] as Map? ?? {}).map(
+            (k, v) => MapEntry(k.toString(), (v as num?)?.toInt() ?? 0),
+          ),
+        );
+        var players = Map<String, dynamic>.from(gameData['players'] ?? {});
+        bool updated = false;
+
+        players.forEach((pId, _) {
+          var playerGrid = (grids[pId] as List?)
+              ?.map((e) => Map<String, dynamic>.from(e as Map))
+              .toList() ?? [];
+          int revCount = counts[pId] ?? 0;
+
+          for (int i = 0; i < playerGrid.length && revCount < 2; i++) {
+            if (playerGrid[i]['revealed'] == false) {
+              playerGrid[i]['revealed'] = true;
+              revCount++;
+              updated = true;
+            }
+          }
+          grids[pId] = playerGrid;
+          counts[pId] = revCount;
+        });
+
+        if (updated) {
+          bool allReady = counts.values.every((c) => c >= 2);
+          transaction.update(gameRef, {
+            'playerGrids': grids,
+            'revealedInitialCardsCount': counts,
+            'roundState': allReady ? 'player_turn' : 'revealing_initial',
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
+        return;
+      }
+
+      // CAS 2 : Phase de tour normale ou carte déjà piochée
       final timedOutPlayerId = gameData['currentPlayerId'];
       if (timedOutPlayerId == null) return;
 
@@ -6488,21 +6833,28 @@ class FirebaseService {
     var deck = List<int>.from(gameData['deck'] ?? []);
     var discardPile = List<int>.from(gameData['discardPile'] ?? []);
     var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
-    var playerGrid =
-        (grids[playerId] as List)
-            .map((e) => Map<String, dynamic>.from(e as Map))
-            .toList();
+    var playerGrid = (grids[playerId] as List)
+        .map((e) => Map<String, dynamic>.from(e as Map))
+        .toList();
 
+    // 1. Si une carte était déjà en cours de pioche, on la jette. Sinon on prend la 1ère du paquet
     if (gameData['drawnCard'] != null) {
       discardPile.add((gameData['drawnCard'] as num).toInt());
     } else if (deck.isNotEmpty) {
       discardPile.add(deck.removeAt(0));
+    } else if (discardPile.length > 1) {
+      int top = discardPile.removeLast();
+      deck = List<int>.from(discardPile)..shuffle();
+      discardPile = [top];
+      if (deck.isNotEmpty) {
+        discardPile.add(deck.removeAt(0));
+      }
     }
 
+    // 2. Révéler la première carte encore cachée
     int? indexToReveal;
     for (int i = 0; i < playerGrid.length; i++) {
-      if (playerGrid[i]['revealed'] == false &&
-          playerGrid[i]['value'] != -100) {
+      if (playerGrid[i]['revealed'] == false && playerGrid[i]['value'] != -100) {
         indexToReveal = i;
         break;
       }
@@ -6512,17 +6864,25 @@ class FirebaseService {
       grids[playerId] = playerGrid;
     }
 
+    // Mettre à jour l'objet gameData en mémoire pour la suite du traitement
+    gameData['playerGrids'] = grids;
+    gameData['deck'] = deck;
+    gameData['discardPile'] = discardPile;
+    gameData['drawnCard'] = null;
+
+    final String playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+
     transaction.update(gameRef, {
       'drawnCard': null,
-      'roundState': 'playing',
       'deck': deck,
       'discardPile': discardPile,
       'playerGrids': grids,
       'gameLog': FieldValue.arrayUnion([
-        "${gameData['players'][playerId]?['name'] ?? 'Un joueur'} a pioché, défaussé et révélé une carte.",
+        "⏱️ $playerName n'a pas joué à temps. Une carte a été défaussée et une case révélée.",
       ]),
     });
 
+    // 3. Traiter immédiatement la fin du tour et passer au joueur suivant
     await _processZeroPointeTurnEnd(transaction, gameRef, gameData, playerId);
   }
 
@@ -6533,12 +6893,12 @@ class FirebaseService {
     String playerId,
   ) async {
     var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
-    var playerGrid =
-        (grids[playerId] as List)
-            .map((e) => Map<String, dynamic>.from(e as Map))
-            .toList();
+    var playerGrid = (grids[playerId] as List)
+        .map((e) => Map<String, dynamic>.from(e as Map))
+        .toList();
     final players = Map<String, dynamic>.from(gameData['players'] ?? {});
 
+    // Annulation des colonnes identiques
     for (int col = 0; col < 4; col++) {
       int card1Index = col;
       int card2Index = col + 4;
@@ -6552,20 +6912,6 @@ class FirebaseService {
         playerGrid[card1Index]['value'] = -100;
         playerGrid[card2Index]['value'] = -100;
         playerGrid[card3Index]['value'] = -100;
-
-        // Débloquer le badge pour le joueur
-        final authUid = players[playerId]?['authUid'] ?? playerId;
-        _db.collection('users').doc(authUid).set({
-          'unlockedBadges.skyjo_col_cancel': FieldValue.serverTimestamp(),
-        }, SetOptions(merge: true));
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          playerId,
-          25,
-          applySpeedBonus: false,
-        );
       }
     }
     grids[playerId] = playerGrid;
@@ -6573,15 +6919,16 @@ class FirebaseService {
     bool allCardsRevealed = playerGrid.every(
       (card) => card['revealed'] == true || card['value'] == -100,
     );
+
     if (allCardsRevealed) {
+      // Fin de la manche
       Map<String, int> roundScores = {};
       int lowestScoreInRound = 999;
 
       players.keys.forEach((pId) {
-        List<Map<String, dynamic>> currentGrid =
-            (grids[pId] as List)
-                .map((card) => Map<String, dynamic>.from(card as Map))
-                .toList();
+        List<Map<String, dynamic>> currentGrid = (grids[pId] as List)
+            .map((card) => Map<String, dynamic>.from(card as Map))
+            .toList();
         for (var card in currentGrid) {
           card['revealed'] = true;
         }
@@ -6617,25 +6964,10 @@ class FirebaseService {
       if ((roundScores[roundEnderId] ?? 0) > lowestScoreInRound) {
         roundScores[roundEnderId] = (roundScores[roundEnderId]! + 10);
       }
-      creditPlayerXp(
-        transaction,
-        gameRef,
-        gameData,
-        playerId,
-        20,
-        applySpeedBonus: false,
-      );
 
-      var totalScores = Map<String, dynamic>.from(
-        gameData['totalScores'] ?? {},
-      );
+      var totalScores = Map<String, dynamic>.from(gameData['totalScores'] ?? {});
       roundScores.forEach((pId, score) {
         totalScores[pId] = (totalScores[pId] ?? 0) + score;
-        if (score < 0) {
-          _db.collection('users').doc(players[pId]?['authUid'] ?? pId).set({
-            'unlockedBadges.skyjo_negative': FieldValue.serverTimestamp(),
-          }, SetOptions(merge: true));
-        }
       });
 
       Map<String, dynamic> updates = {
@@ -6644,9 +6976,7 @@ class FirebaseService {
         'playerGrids': grids,
         'roundScores': roundScores,
         'totalScores': totalScores,
-        'gameLog': FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? 'Un joueur'} a retourné toutes ses cartes ! Fin de la manche.",
-        ]),
+        'drawnCard': null,
         'turnStartTime': FieldValue.serverTimestamp(),
       };
 
@@ -6667,23 +6997,23 @@ class FirebaseService {
         updates.addAll({
           'gameState': 'gameOver',
           'gameWinner': gameWinnerId,
-          'gameEndReason':
-              gameWinnerId != null
-                  ? "${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !"
-                  : "Fin de la partie !",
+          'gameEndReason': "${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !",
         });
       }
 
       transaction.update(gameRef, updates);
     } else {
-      var playerOrder = List<String>.from(gameData['playerOrder']);
+      // Passer au joueur suivant
+      var playerOrder = List<String>.from(gameData['playerOrder'] ?? players.keys.toList());
       int currentIndex = playerOrder.indexOf(playerId);
       int nextIndex = (currentIndex + 1) % playerOrder.length;
+      
       transaction.update(gameRef, {
         'currentPlayerId': playerOrder[nextIndex],
         'roundState': 'player_turn',
+        'drawnCard': null,
         'playerGrids': grids,
-        'turnStartTime': FieldValue.serverTimestamp(),
+        'turnStartTime': FieldValue.serverTimestamp(), // Relance immédiatement le timer pour le joueur suivant
       });
     }
   }
@@ -11630,170 +11960,7 @@ class FirebaseService {
     });
   }
 
-  Future<void> shootBatailleNavale(
-    String gameCode,
-    String playerId,
-    int targetIndex, {
-    bool isAuto = false,
-  }) async {
-    final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
-    if (targetIndex < 0 || targetIndex >= 100) {
-      throw Exception("Cible hors de la grille.");
-    }
-
-    await _db.runTransaction((transaction) async {
-      final gameRef = _db.collection('games').doc(gameCode);
-      final gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) return;
-      var gameData = gameSnap.data() as Map<String, dynamic>;
-      if (gameData['roundState'] != 'playing' ||
-          gameData['currentPlayerId'] != playerId) {
-        throw Exception("Ce n'est pas votre tour.");
-      }
-
-      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if (!isAuto &&
-          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
-        throw Exception("Action non autorisée.");
-      }
-
-      var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
-      List<String> playerIds = playerData.keys.toList();
-      String opponentId = playerIds.firstWhere((id) => id != playerId, orElse: () => '');
-      if (opponentId.isEmpty) return;
-
-      var shooterData = Map<String, dynamic>.from(playerData[playerId] ?? {});
-      var opponentData = Map<String, dynamic>.from(
-        playerData[opponentId] ?? {},
-      );
-
-      var enemyGrid = List<String>.from(
-        shooterData['enemyGrid'] ?? List.filled(100, 'unknown'),
-      );
-      var opponentGrid = List<int>.from(
-        opponentData['myGrid'] ?? List.filled(100, 0),
-      );
-      var opponentShips = Map<String, dynamic>.from(
-        opponentData['shipsPlaced'] ?? {},
-      );
-
-      if (enemyGrid[targetIndex] != 'unknown') {
-        throw Exception("Case déjà ciblée.");
-      }
-
-      String result = 'miss';
-      if (opponentGrid[targetIndex] != 0) {
-        result = 'hit';
-        int shipId = opponentGrid[targetIndex];
-
-        for (var entry in opponentShips.entries) {
-          var ship = Map<String, dynamic>.from(entry.value);
-          if (ship['id'] == shipId) {
-            ship['hits'] = (ship['hits'] as int) + 1;
-            if (ship['hits'] >= ship['area']) {
-              ship['sunk'] = true;
-              result = 'sunk';
-              for (int i = 0; i < 100; i++) {
-                if (opponentGrid[i] == shipId) enemyGrid[i] = 'sunk';
-              }
-            }
-            opponentShips[entry.key] = ship;
-            break;
-          }
-        }
-        if (result == 'sunk') {
-          opponentData['shipsSunk'] =
-              (opponentData['shipsSunk'] as int? ?? 0) + 1;
-        }
-      }
-
-      enemyGrid[targetIndex] = result;
-      int xpBase = 2; // Tir à l'eau
-      if (enemyGrid.where((cell) => cell != 'unknown').length == 1 &&
-          (result == 'hit' || result == 'sunk')) {
-        xpBase = 50; // Sniper 1er coup
-        if (!isAuto && currentAuthUid != null) {
-          _db.collection('users').doc(currentAuthUid).set({
-            'unlockedBadges.naval_sniper': FieldValue.serverTimestamp(),
-          }, SetOptions(merge: true));
-        }
-      } else if (result == 'sunk') {
-        xpBase = 25; // Coulé
-      } else if (result == 'hit') {
-        xpBase = 10; // Touché
-      }
-      creditPlayerXp(
-        transaction,
-        gameRef,
-        gameData,
-        playerId,
-        xpBase,
-        applySpeedBonus: true,
-      );
-      shooterData['enemyGrid'] = enemyGrid;
-      opponentData['shipsPlaced'] = opponentShips;
-      playerData[playerId] = shooterData;
-      playerData[opponentId] = opponentData;
-
-      Map<String, dynamic> updates = {'playerData': playerData};
-
-      if ((opponentData['shipsSunk'] ?? 0) >=
-          GameData.batailleNavaleShips.length) {
-        if ((shooterData['shipsSunk'] as int? ?? 0) == 0) {
-          if (currentAuthUid != null) {
-            _db.collection('users').doc(currentAuthUid).set({
-              'unlockedBadges.naval_clean_sheet': FieldValue.serverTimestamp(),
-            }, SetOptions(merge: true));
-          } else {
-            _db
-                .collection('users')
-                .doc(players[playerId]?['authUid'] ?? playerId)
-                .set({
-                  'unlockedBadges.naval_clean_sheet':
-                      FieldValue.serverTimestamp(),
-                }, SetOptions(merge: true));
-          }
-        }
-        int winXp = 40;
-        int myLostShips = (shooterData['shipsSunk'] as int? ?? 0);
-        if (myLostShips <= 1) {
-          winXp += 50; // Victoire Parfaite (perdu 1 navire ou moins)
-        }
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          playerId,
-          winXp,
-          applySpeedBonus: false,
-        );
-        updates.addAll({
-          'gameState': 'gameOver',
-          'roundState': 'gameOver',
-          'gameWinner': playerId,
-          'players.$playerId.score': FieldValue.increment(1),
-          'gameEndReason':
-              '${shooterData['name']} a coulé toute la flotte adverse !',
-        });
-      } else {
-        String nextPlayerId =
-            (result == 'hit' || result == 'sunk') ? playerId : opponentId;
-        String logMessage =
-            (result == 'hit' || result == 'sunk')
-                ? "${shooterData['name']} a tiré en ${(targetIndex ~/ 10) + 1}-${(targetIndex % 10) + 1} : $result. Bravo, vous rejouez !"
-                : "${shooterData['name']} a tiré en ${(targetIndex ~/ 10) + 1}-${(targetIndex % 10) + 1} : $result. Au tour de ${opponentData['name']}.";
-
-        updates.addAll({
-          'currentPlayerId': nextPlayerId,
-          'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion([logMessage]),
-        });
-      }
-      transaction.update(gameRef, updates);
-    });
-  }
 
   Future<void> _startRamiRound(
     DocumentReference gameRef,
@@ -12649,10 +12816,11 @@ class FirebaseService {
     String gameCode,
     String playerId,
     String tile,
-    int matchEnd,
-  ) async {
+    int matchEnd, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -12666,7 +12834,7 @@ class FirebaseService {
       }
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isAuto && (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -13004,15 +13172,69 @@ class FirebaseService {
   // =========================================================================
   Future<void> handleDominoesTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
-    final snap = await gameRef.get();
-    if (!snap.exists) return;
-    final data = snap.data() as Map<String, dynamic>;
-    if (data['gameState'] != 'playing' || data['dominoesRoundOver'] == true) return;
+    
+    // Boucle d'auto-play intelligente (Pioche si nécessaire, puis joue, sinon passe)
+    bool turnResolved = false;
+    int safety = 0;
 
-    final playerOrder = List<String>.from(data['dominoesPlayerOrder']);
-    final int currentIndex = data['dominoesCurrentPlayerIndex'];
-    final playerId = playerOrder[currentIndex];
-    await passDominoesTurn(gameCode, playerId, isTimeout: true);
+    while (!turnResolved && safety < 10) {
+      safety++;
+      final snap = await gameRef.get();
+      if (!snap.exists) return;
+      var data = snap.data() as Map<String, dynamic>;
+      if (data['gameState'] != 'playing' || data['dominoesRoundOver'] == true) return;
+      if (!_isTurnTimedOut(data)) return;
+
+      final playerOrder = List<String>.from(data['dominoesPlayerOrder']);
+      final int currentIndex = data['dominoesCurrentPlayerIndex'];
+      final playerId = playerOrder[currentIndex];
+      final playerName = data['players']?[playerId]?['name'] ?? 'Un joueur';
+
+      var hands = Map<String, dynamic>.from(data['dominoesPlayerHands'] ?? {});
+      var myHand = List<String>.from(hands[playerId] ?? []);
+      var openEnds = List<int>.from(data['dominoesOpenEnds'] ?? []);
+      var boneyard = List<String>.from(data['dominoesBoneyard'] ?? []);
+      String mode = data['dominoesMode'] ?? 'pioche';
+      var boardChain = List<dynamic>.from(data['dominoesBoardChain'] ?? []);
+
+      bool canPlay(String t) {
+        if (openEnds.isEmpty) return true;
+        final p = t.split('-');
+        return openEnds.contains(int.parse(p[0])) || openEnds.contains(int.parse(p[1]));
+      }
+
+      String? tileToPlay;
+      for (var t in myHand) {
+        if (canPlay(t)) {
+          tileToPlay = t;
+          break;
+        }
+      }
+
+      if (tileToPlay != null) {
+        int matchEnd = -1;
+        if (boardChain.isNotEmpty) {
+          final p = tileToPlay.split('-');
+          int a = int.parse(p[0]), b = int.parse(p[1]);
+          matchEnd = openEnds.contains(a) ? a : b;
+        }
+        await playDominoesTile(gameCode, playerId, tileToPlay, matchEnd, isAuto: true);
+        await gameRef.update({
+          'gameLog': FieldValue.arrayUnion(["⏱️ Le bot a joué $tileToPlay automatiquement."])
+        });
+        turnResolved = true;
+      } else {
+        if (mode == 'pioche' && boneyard.isNotEmpty) {
+          await drawDominoesTile(gameCode, playerId);
+        } else {
+          await passDominoesTurn(gameCode, playerId, isTimeout: true);
+          await gameRef.update({
+            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a été contraint de passer son tour."])
+          });
+          turnResolved = true;
+        }
+      }
+    }
   }
 
   // --- LOGIQUE ZOMBIE! ---
@@ -25740,6 +25962,49 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
   }
 
+  Future<void> _confirmAndExitGame() async {
+    final shouldLeave = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Quitter la partie ?'),
+        content: const Text(
+          'Si vous quittez, votre place sera libérée.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Rester'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Quitter'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldLeave == true && mounted) {
+      if (_livekitInitialized) {
+        await _livekitService.leaveChannel();
+      }
+      if (widget.loungeId != null) {
+        FirebaseFirestore.instance
+            .collection('lounges')
+            .doc(widget.loungeId)
+            .update({
+          'pendingGame.joinedPlayers':
+              FieldValue.arrayRemove([widget.playerId]),
+        });
+      }
+      _firebaseService.removePlayerFromGame(
+        widget.gameCode,
+        widget.playerId,
+      );
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    }
+  }
+
   int? _lastKnownPlayerXp;
   final List<int> _activeXpPopups = [];
 
@@ -27563,50 +27828,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
-        final shouldLeave = await showDialog<bool>(
-          context: context,
-          builder:
-              (ctx) => AlertDialog(
-                title: const Text('Quitter la partie ?'),
-                content: const Text(
-                  'Si vous quittez, votre place sera libérée.',
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(ctx, false),
-                    child: const Text('Rester'),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
-                    onPressed: () => Navigator.pop(ctx, true),
-                    child: const Text('Quitter'),
-                  ),
-                ],
-              ),
-        );
-
-        if (shouldLeave == true && context.mounted) {
-          if (_livekitInitialized) {
-            await _livekitService.leaveChannel();
-          }
-          if (widget.loungeId != null) {
-            FirebaseFirestore.instance
-                .collection('lounges')
-                .doc(widget.loungeId)
-                .update({
-                  'pendingGame.joinedPlayers': FieldValue.arrayRemove([
-                    playerId,
-                  ]),
-                });
-          }
-          _firebaseService.removePlayerFromGame(
-            widget.gameCode,
-            widget.playerId,
-          );
-          Navigator.of(context).popUntil((route) => route.isFirst);
-        }
+        await _confirmAndExitGame();
       },
       child: StreamBuilder<DocumentSnapshot>(
         stream: _firebaseService.getGameStream(widget.gameCode),
@@ -27896,6 +28118,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
                 Widget scaffold = Scaffold(
                   appBar: AppBar(
+                    leading: IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      tooltip: "Quitter la partie",
+                      onPressed: _confirmAndExitGame,
+                    ),
                     title: Text(
                       currentGameType.isNotEmpty
                           ? currentGameType
@@ -27933,7 +28160,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ? Expanded(
                               flex: 4,
                               child: GameVideoOverlay(
-                                players: gameData,
+                                gameData: gameData,
                                 playerLivekitIdentities:
                                     _playerLivekitIdentities,
                                 currentPlayerId: widget.playerId,
@@ -27942,7 +28169,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               ),
                             )
                             : GameVideoOverlay(
-                              players: gameData,
+                              gameData: gameData,
                               playerLivekitIdentities: _playerLivekitIdentities,
                               currentPlayerId: widget.playerId,
                               gameCode: widget.gameCode,
@@ -27958,8 +28185,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             children: [
-                              // MODIFICATION : Affichage des scores interactifs
-                              if (!isDevineTete && !isActionOuVerite)
+                              // Affichage du bandeau de profil / XP pour tous les jeux (y compris Action ou Vérité)
+                              if (!isDevineTete)
                                 _buildScoreHeader(context, players, gameData),
 
                               _buildAdminBotReplacementPrompt(
@@ -28837,6 +29064,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'playing_turn',
       'rolling',
       'player_turn',
+      'drawn_card_phase',     // <--- Indispensable pour Zéro Pointé
+      'revealing_initial',    // <--- Indispensable pour Zéro Pointé
+      'round_end',
       'voting',
       'result',
       'round_end',
@@ -28876,8 +29106,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     final turnStartTime = turnStartTimeStamp.toDate();
 
-    double turnDurationSeconds =
-        (gameData['turnTimerSeconds'] as num?)?.toDouble() ?? 30.0;
+    // Utiliser la durée effective (5s si bot, 30s sinon)
+    double turnDurationSeconds = FirebaseService.getEffectiveTurnTimer(gameData).toDouble();
+    if (turnDurationSeconds <= 0) turnDurationSeconds = 30.0;
 
     if (roundState == 'result' ||
         roundState == 'round_end' ||
@@ -28905,13 +29136,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           );
 
           // ⚡ DÉCLENCHEMENT INSTANTANÉ DÈS QUE LE TEMPS EST ÉCOULÉ (0s)
+          // Seul l'hôte exécute la fonction pour éviter les conflits entre clients
           if (elapsedSeconds >= turnDurationSeconds &&
               _lastExecutedTimeoutKey != currentTurnKey) {
             _lastExecutedTimeoutKey = currentTurnKey;
 
-            // Exécute le coup et passe au joueur suivant sans attendre
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted) {
+              if (mounted && gameData['hostId'] == widget.playerId) {
                 _executeAutoPlayForGame(gameData);
               }
             });
@@ -28964,15 +29195,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'Zéro Pointé',
       'Poker',
       'Big Two',
+      'Mille Bornes',
+      'Rami',
     ].contains(gameType);
 
-    // Trie les joueurs par score
     List<MapEntry<String, dynamic>> sortedPlayers =
         players.entries.toList()..sort(
           (a, b) => (b.value['score'] ?? 0).compareTo(a.value['score'] ?? 0),
         );
 
-    // Pour Zéro Pointé, on trie par score total croissant (le plus bas gagne)
     if (gameType == 'Zéro Pointé') {
       sortedPlayers.sort((a, b) {
         int scoreA = (gameData['totalScores']?[a.key] ?? 0);
@@ -29007,100 +29238,101 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   final String targetAuthUid = entry.value['authUid'] ?? pId;
                   final String myAuthUid =
                       players[widget.playerId]?['authUid'] ?? widget.playerId;
+                  final bool isBot = entry.value['isBot'] == true || entry.value['replacedByBot'] == true;
 
-                  void openProfile() {
-                    showUserProfileDialog(
-                      context,
-                      targetUid: targetAuthUid,
-                      currentUserId: myAuthUid,
-                    );
+                  void toggleOpponentHand() {
+                    if (canViewHands && !isMe) {
+                      HapticFeedback.mediumImpact();
+                      setState(() {
+                        _viewedOpponentId = (_viewedOpponentId == pId) ? null : pId;
+                      });
+                    }
                   }
 
-                  return ActionChip(
-                    avatar: CircleAvatar(
-                      backgroundColor:
-                          isMe ? Colors.deepPurpleAccent : Colors.grey[800],
-                      child: Text(
-                        pName.isNotEmpty ? pName[0].toUpperCase() : "?",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    label: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "$pName: $pScore pts",
-                          style: TextStyle(
-                            fontWeight:
-                                isMe ? FontWeight.bold : FontWeight.normal,
-                            color: isMe ? Colors.amberAccent : Colors.white,
-                            fontSize: 12,
-                          ),
-                        ),
-                        const SizedBox(width: 5),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 5,
-                            vertical: 1.5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.deepPurple.withOpacity(0.4),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: Colors.deepPurpleAccent.withOpacity(0.6),
-                              width: 0.8,
-                            ),
-                          ),
-                          child: Text(
-                            "$pXp XP",
-                            style: const TextStyle(
-                              color: Color(0xFF67E8F9),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 10.5,
-                            ),
-                          ),
-                        ),
-                        if (canViewHands && !isMe) ...[
-                          const SizedBox(width: 4),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _viewedOpponentId =
-                                    (_viewedOpponentId == pId) ? null : pId;
-                              });
-                            },
-                            child: Icon(
-                              _viewedOpponentId == pId
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              size: 14,
-                              color:
-                                  _viewedOpponentId == pId
-                                      ? Colors.amberAccent
-                                      : Colors.white54,
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                    backgroundColor:
-                        isSelected
+                  return InkWell(
+                    borderRadius: BorderRadius.circular(20),
+                    onTap: () {
+                      showUserProfileDialog(
+                        context,
+                        targetUid: targetAuthUid,
+                        currentUserId: myAuthUid,
+                      );
+                    },
+                    onLongPress: toggleOpponentHand, // <-- APPUI LONG POUR VOIR LA MAIN
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: isSelected
                             ? Colors.deepPurple.withOpacity(0.6)
                             : const Color(0xFF1E1E28),
-                    side:
-                        isSelected
-                            ? const BorderSide(
-                              color: Colors.deepPurpleAccent,
-                              width: 2,
-                            )
-                            : null,
-                    onPressed: () {
-                      openProfile();
-                    },
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: isSelected
+                              ? Colors.amberAccent
+                              : (isMe ? Colors.deepPurpleAccent : Colors.white12),
+                          width: isSelected ? 2.0 : 1.0,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CircleAvatar(
+                            radius: 12,
+                            backgroundColor: isMe ? Colors.deepPurpleAccent : Colors.grey[800],
+                            child: isBot
+                                ? const Icon(Icons.smart_toy, size: 12, color: Colors.cyanAccent)
+                                : Text(
+                                    pName.isNotEmpty ? pName[0].toUpperCase() : "?",
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            "$pName: $pScore pts",
+                            style: TextStyle(
+                              fontWeight: isMe ? FontWeight.bold : FontWeight.normal,
+                              color: isMe ? Colors.amberAccent : Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                            decoration: BoxDecoration(
+                              color: Colors.deepPurple.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              "$pXp XP",
+                              style: const TextStyle(
+                                color: Color(0xFF67E8F9),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 9.5,
+                              ),
+                            ),
+                          ),
+                          if (canViewHands && !isMe) ...[
+                            const SizedBox(width: 4),
+                            GestureDetector(
+                              onTap: toggleOpponentHand,
+                              child: Icon(
+                                _viewedOpponentId == pId
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                size: 14,
+                                color: _viewedOpponentId == pId
+                                    ? Colors.amberAccent
+                                    : Colors.white54,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
                   );
                 }).toList(),
           ),
@@ -35005,38 +35237,62 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final enemyGrid = List<String>.from(
       myData['enemyGrid'] ?? List.filled(100, 'unknown'),
     );
+    final incomingGrid = List<String>.from(
+      myData['incomingGrid'] ?? List.filled(100, 'unknown'),
+    );
     final shipsPlaced = Map<String, dynamic>.from(myData['shipsPlaced'] ?? {});
     final myGrid = List<int>.from(myData['myGrid'] ?? List.filled(100, 0));
 
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(10),
-          color: isMyTurn ? Colors.green.withOpacity(0.2) : Colors.transparent,
-          child: Text(
-            isMyTurn
-                ? "ðŸŽ¯ Ã€ vous de tirer !"
-                : "ðŸ›¡ï¸ En attente de l'adversaire...",
-            style: TextStyle(
-              color: isMyTurn ? Colors.greenAccent : Colors.white70,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: isMyTurn ? Colors.green.withOpacity(0.25) : Colors.black38,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isMyTurn ? Colors.greenAccent : Colors.white12,
             ),
           ),
-        ),
-
-        Expanded(
-          flex: 2,
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Icon(
+                isMyTurn ? Icons.my_location : Icons.shield_outlined,
+                color: isMyTurn ? Colors.greenAccent : Colors.white70,
+                size: 20,
+              ),
+              const SizedBox(width: 8),
               Text(
-                "Territoire Ennemi (Tirez ici)",
+                isMyTurn
+                    ? "🎯 À vous de tirer sur la grille adverse !"
+                    : "🛡️ En attente du tir adverse...",
                 style: TextStyle(
-                  color: Colors.redAccent,
+                  color: isMyTurn ? Colors.greenAccent : Colors.white70,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 5),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 8),
+
+        // GRILLE ADVERSE (ZONE DE TIR)
+        Expanded(
+          flex: 5,
+          child: Column(
+            children: [
+              const Text(
+                "Territoire Ennemi (Touchez une case pour tirer)",
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
+              const SizedBox(height: 4),
               Expanded(
                 child: _buildBatailleNavaleGridGame(
                   gridData: enemyGrid,
@@ -35044,7 +35300,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   onTap:
                       isMyTurn
                           ? (index) {
-                            if (enemyGrid[index] == 'unknown') {
+                            if (enemyGrid[index] == 'unknown' && !_isActionPending) {
                               _firebaseService.shootBatailleNavale(
                                 widget.gameCode,
                                 playerId,
@@ -35058,22 +35314,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ],
           ),
         ),
-        SizedBox(height: 10),
+
+        const SizedBox(height: 8),
+
+        // VOTRE FLOTTE AVEC IMPACTS ET FLAMMES PAR-DESSUS LES BATEAUX
         Expanded(
-          flex: 1,
+          flex: 4,
           child: Column(
             children: [
-              Text(
-                "Votre Flotte",
+              const Text(
+                "Votre Flotte (Tirs ennemis reçus)",
                 style: TextStyle(
-                  color: Colors.blueAccent,
+                  color: Colors.cyanAccent,
                   fontWeight: FontWeight.bold,
+                  fontSize: 13,
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 4),
               Expanded(
                 child: _buildBatailleNavaleGridGame(
-                  gridData: myGrid.map((i) => i.toString()).toList(),
+                  gridData: incomingGrid, // Tirs ennemis reçus
                   isEnemy: false,
                   myShips: shipsPlaced,
                 ),
@@ -35102,68 +35362,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             height: boardSize,
             child: Stack(
               children: [
-                // Fond de grille d'eau
+                // 1. Fond bleu océan + lignes de grille
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.cyanAccent),
-                  ),
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 10,
+                    color: const Color(0xFF0C2340),
+                    border: Border.all(
+                      color: isEnemy ? Colors.redAccent.withOpacity(0.6) : Colors.cyanAccent.withOpacity(0.6),
+                      width: 1.5,
                     ),
-                    itemCount: 100,
-                    itemBuilder: (context, index) {
-                      String status = gridData[index];
-                      Color cellColor = Colors.blue[900]!;
-                      Widget? overlay;
-
-                      if (isEnemy) {
-                        if (status == 'miss') {
-                          overlay = Icon(
-                            Icons.circle,
-                            size: 10,
-                            color: Colors.white54,
-                          );
-                        } else if (status == 'hit') {
-                          cellColor = Colors.red[900]!;
-                          overlay = Icon(
-                            Icons.local_fire_department,
-                            color: Colors.orange,
-                          );
-                        } else if (status == 'sunk') {
-                          cellColor = Colors.black87;
-                          overlay = Icon(Icons.close, color: Colors.red);
-                        }
-                      } else {
-                        // Sur MA grille, j'affiche l'eau et les impacts adverses
-                        // Les bateaux eux-mÃªmes sont dessinÃ©s en overlay (Positioned) juste aprÃ¨s
-                        if (status == 'hit' || status == 'sunk') {
-                          overlay = Icon(
-                            Icons.local_fire_department,
-                            color: Colors.redAccent,
-                          );
-                        }
-                      }
-
-                      return GestureDetector(
-                        onTap: onTap != null ? () => onTap(index) : null,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: cellColor,
-                            border: Border.all(
-                              color: Colors.white24,
-                              width: 0.5,
-                            ),
-                          ),
-                          child: Center(child: overlay),
-                        ),
-                      );
-                    },
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
 
-                // Affichage de MES bateaux (seulement pour ma grille)
+                // 2. Affichage des bateaux (sur Votre Flotte)
                 if (!isEnemy && myShips != null)
                   ...myShips.entries.map((entry) {
                     var placedData = Map<String, dynamic>.from(entry.value);
@@ -35174,10 +35385,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
                     int startRow = startIndex ~/ 10;
                     int startCol = startIndex % 10;
-                    int widthCols =
-                        isHoriz ? shipInfo['length'] : shipInfo['width'];
-                    int heightRows =
-                        isHoriz ? shipInfo['width'] : shipInfo['length'];
+                    int widthCols = isHoriz ? shipInfo['length'] : shipInfo['width'];
+                    int heightRows = isHoriz ? shipInfo['width'] : shipInfo['length'];
 
                     return Positioned(
                       left: startCol * cellSize,
@@ -35185,7 +35394,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       width: widthCols * cellSize,
                       height: heightRows * cellSize,
                       child: Opacity(
-                        opacity: isSunk ? 0.3 : 1.0, // Rendre sombre si coulÃ©
+                        opacity: isSunk ? 0.45 : 1.0,
                         child: RotatedBox(
                           quarterTurns: isHoriz ? 3 : 0,
                           child: Image.asset(
@@ -35196,6 +35405,97 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     );
                   }).toList(),
+
+                // 3. Grille des tirs, explosions et flammes (PAR-DESSUS LES BATEAUX)
+                GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 10,
+                  ),
+                  itemCount: 100,
+                  itemBuilder: (context, index) {
+                    String status = gridData[index];
+                    Color cellBgColor = Colors.transparent;
+                    Widget? overlay;
+
+                    if (isEnemy) {
+                      if (status == 'miss') {
+                        overlay = Container(
+                          width: 8,
+                          height: 8,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white54,
+                          ),
+                        );
+                      } else if (status == 'hit') {
+                        cellBgColor = Colors.red.withOpacity(0.35);
+                        overlay = const Icon(
+                          Icons.local_fire_department_rounded,
+                          color: Color(0xFFFF5722),
+                          size: 22,
+                          shadows: [
+                            Shadow(color: Colors.yellowAccent, blurRadius: 8),
+                          ],
+                        );
+                      } else if (status == 'sunk') {
+                        cellBgColor = Colors.black.withOpacity(0.5);
+                        overlay = const Icon(
+                          Icons.close_rounded,
+                          color: Colors.redAccent,
+                          size: 24,
+                        );
+                      }
+                    } else {
+                      // SUR VOTRE FLOTTE : Tirs reçus
+                      if (status == 'miss') {
+                        overlay = Container(
+                          width: 7,
+                          height: 7,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withOpacity(0.6),
+                          ),
+                        );
+                      } else if (status == 'hit' || status == 'sunk') {
+                        // 🔥 FLAMME AFFICHÉE DIRECTEMENT SUR LE BATEAU TOUCHÉ
+                        overlay = Container(
+                          decoration: BoxDecoration(
+                            color: Colors.red.withOpacity(0.3),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.local_fire_department_rounded,
+                              color: Color(0xFFFF3D00), // Flamme ardente
+                              size: 24,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.yellowAccent,
+                                  blurRadius: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                    }
+
+                    return GestureDetector(
+                      onTap: onTap != null ? () => onTap(index) : null,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: cellBgColor,
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.12),
+                            width: 0.5,
+                          ),
+                        ),
+                        child: Center(child: overlay),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -46074,7 +46374,69 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final bool roundOver = gameData['dominoesRoundOver'] ?? false;
     final String mode = gameData['dominoesMode'] ?? 'pioche';
 
-    // â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    void _showOpponentSheet(String pId) {
+      final oppName = players[pId]?['name'] ?? pId;
+      final oppScore = scores[pId] ?? 0;
+      final oppHand = List<String>.from(hands[pId] ?? []);
+      
+      showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (ctx) => Container(
+          padding: const EdgeInsets.all(24),
+          decoration: const BoxDecoration(
+            color: Color(0xFF1E1E2C),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                oppName,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "Score : $oppScore points",
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.amberAccent,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "Dominos restants : ${oppHand.length}",
+                style: const TextStyle(color: Colors.white70),
+              ),
+              const SizedBox(height: 20),
+              Wrap(
+                spacing: 4,
+                runSpacing: 4,
+                alignment: WrapAlignment.center,
+                children: List.generate(
+                  oppHand.length,
+                  (_) => Container(
+                    width: 16,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // ┌── Helpers ────────────────────────────────────────────────────────
     bool canPlayTile(String tile) {
       if (openEnds.isEmpty) return true;
       final p = tile.split('-');
@@ -46085,39 +46447,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     bool hasPlayableTile() => myHand.any(canPlayTile);
 
-    // Calcule l'extrÃ©mitÃ© de correspondance, retourne null si ambigu
-    int? getMatchEnd(String tile) {
-      if (boardChain.isEmpty) return -1; // premier domino
-      final p = tile.split('-');
-      final a = int.parse(p[0]);
-      final b = int.parse(p[1]);
-      final matchA = openEnds.contains(a);
-      final matchB = openEnds.contains(b);
-      if (matchA && matchB && a != b) return null; // ambigu
-      if (matchA) return a;
-      if (matchB) return b;
-      return -99; // invalide
-    }
-
     void _playTile(String tile, int matchEnd) {
       _firebaseService
           .playDominoesTile(widget.gameCode, playerId, tile, matchEnd)
           .then((_) {
-            _firebaseService.updateDominoHoverEnd(
-              widget.gameCode,
-              playerId,
-              null,
-            );
             if (mounted) {
               setState(() => _selectedDominoTile = null);
             }
           })
           .catchError((e) {
-            _firebaseService.updateDominoHoverEnd(
-              widget.gameCode,
-              playerId,
-              null,
-            );
             if (mounted) {
               setState(() => _selectedDominoTile = null);
               ScaffoldMessenger.of(
@@ -46136,94 +46474,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return;
       }
 
-      final matchEnd = getMatchEnd(tile);
+      if (boardChain.isEmpty) {
+        _playTile(tile, -1);
+        return;
+      }
 
-      if (_selectedDominoTile == tile) {
-        // 2e clic : Confirmation et pose du domino
-        if (matchEnd == null) {
-          // Ambigu : afficher un dialogue pour choisir l'extrémité
-          final p = tile.split('-');
-          final a = int.parse(p[0]);
-          final b = int.parse(p[1]);
-          final options =
-              openEnds.where((e) => e == a || e == b).toSet().toList();
-          showDialog(
-            context: context,
-            builder: (_) {
-              return AlertDialog(
-                backgroundColor: const Color(0xFF1e3828),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                title: const Text(
-                  "Choisir l'extrémité",
-                  style: TextStyle(color: Colors.white),
-                ),
-                content: Text(
-                  "Sur quelle extrémité poser le $tile ?",
-                  style: const TextStyle(color: Colors.white70),
-                ),
-                actions:
-                    options.map((end) {
-                      return TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          _playTile(tile, end);
-                        },
-                        child: Text(
-                          "Sur le $end",
-                          style: const TextStyle(color: Color(0xFF34d399)),
-                        ),
-                      );
-                    }).toList(),
-              );
-            },
-          ).then((_) {
-            _firebaseService.updateDominoHoverEnd(
-              widget.gameCode,
-              playerId,
-              null,
-            );
-            if (mounted) {
-              setState(() => _selectedDominoTile = null);
-            }
-          });
-          return;
-        }
+      final p = tile.split('-');
+      final a = int.parse(p[0]);
+      final b = int.parse(p[1]);
+      final validEnds = openEnds.where((e) => e == a || e == b).toSet().toList();
 
-        if (matchEnd == -99) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Aucune extrémité compatible.")),
-          );
-          return;
-        }
-
-        _playTile(tile, matchEnd!);
-      } else {
-        // 1er clic : Sélection et diffusion live RTDB
+      if (validEnds.length == 1) {
+        _playTile(tile, validEnds.first);
+      } else if (validEnds.length > 1) {
         HapticFeedback.selectionClick();
         setState(() => _selectedDominoTile = tile);
-
-        if (matchEnd != null && matchEnd != -99) {
-          _firebaseService.updateDominoHoverEnd(
-            widget.gameCode,
-            playerId,
-            matchEnd,
-          );
-        } else if (matchEnd == null && openEnds.isNotEmpty) {
-          final p = tile.split('-');
-          final a = int.parse(p[0]);
-          final b = int.parse(p[1]);
-          final firstMatching =
-              openEnds.where((e) => e == a || e == b).firstOrNull;
-          if (firstMatching != null) {
-            _firebaseService.updateDominoHoverEnd(
-              widget.gameCode,
-              playerId,
-              firstMatching,
-            );
-          }
-        }
       }
     }
 
@@ -46268,7 +46533,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           ),
 
-        // ── Barre de scores ──────────────────────────────────────────────────
+        // ── Barre de scores allégée ──────────────────────────────────────────
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           color: Colors.black.withOpacity(0.35),
@@ -46287,64 +46552,65 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 children:
                     playerOrder.map((pId) {
                       final isActive = pId == currentPlayerId;
-                      return Container(
-                        margin: const EdgeInsets.only(left: 8),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color:
-                              isActive
-                                  ? Colors.green.withOpacity(0.2)
-                                  : Colors.white.withOpacity(0.08),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
+                      return GestureDetector(
+                        onTap: () => pId != playerId ? _showOpponentSheet(pId) : null,
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
                             color:
                                 isActive
-                                    ? Colors.greenAccent.withOpacity(0.5)
-                                    : Colors.white.withOpacity(0.12),
+                                    ? Colors.green.withOpacity(0.2)
+                                    : Colors.white.withOpacity(0.08),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color:
+                                  isActive
+                                      ? Colors.greenAccent.withOpacity(0.5)
+                                      : Colors.white.withOpacity(0.12),
+                            ),
                           ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: 6,
-                              height: 6,
-                              margin: const EdgeInsets.only(right: 5),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color:
-                                    isActive
-                                        ? Colors.greenAccent
-                                        : Colors.white38,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                players[pId]?['name']
+                                        ?.toString()
+                                        .split(' ')
+                                        .first ??
+                                    pId,
+                                style: TextStyle(
+                                  color:
+                                      isActive
+                                          ? const Color(0xFF6ee7b7)
+                                          : Colors.white70,
+                                  fontSize: 12,
+                                ),
                               ),
-                            ),
-                            Text(
-                              players[pId]?['name']
-                                      ?.toString()
-                                      .split(' ')
-                                      .first ??
-                                  pId,
-                              style: TextStyle(
-                                color:
-                                    isActive
-                                        ? const Color(0xFF6ee7b7)
-                                        : Colors.white70,
-                                fontSize: 12,
+                              const SizedBox(width: 6),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.black54,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text(
+                                  '${(hands[pId] as List?)?.length ?? 0}',
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.amber,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              '${scores[pId] ?? 0}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     }).toList(),
@@ -46353,118 +46619,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ),
 
-        // ── Mains des adversaires ──────────────────────────────────────────
-        Container(
-          height: 64,
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          child: Row(
-            children:
-                playerOrder.where((pId) => pId != playerId).map((pId) {
-                  final isActive = pId == currentPlayerId;
-                  final oppHand = List<String>.from(hands[pId] ?? []);
-                  return Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color:
-                              isActive
-                                  ? Colors.amber.withOpacity(0.5)
-                                  : Colors.white.withOpacity(0.1),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 12,
-                            backgroundColor: Colors.green.withOpacity(0.25),
-                            child: Text(
-                              (players[pId]?['name'] ?? pId)[0].toUpperCase(),
-                              style: const TextStyle(
-                                color: Color(0xFFa3e635),
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  (players[pId]?['name'] ?? pId).toString() +
-                                      (isActive ? ' 🎯' : ''),
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(
-                                  '${oppHand.length} domino${oppHand.length > 1 ? 's' : ''}',
-                                  style: const TextStyle(
-                                    color: Colors.white38,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Mini-représentation des dominos cachés
-                          Wrap(
-                            spacing: 2,
-                            children:
-                                oppHand
-                                    .take(7)
-                                    .map(
-                                      (_) => Container(
-                                        width: 8,
-                                        height: 14,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.15),
-                                          borderRadius: BorderRadius.circular(
-                                            1,
-                                          ),
-                                          border: Border.all(
-                                            color: Colors.white.withOpacity(
-                                              0.08,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }).toList(),
-          ),
-        ),
-
-        // â”€â”€ Barre extrÃ©mitÃ©s ouvertes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ── Barre extrémités ouvertes ──────────────────────────────────────
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
           color: Colors.black.withOpacity(0.2),
           child: Row(
             children: [
               const Text(
-                "ExtrÃ©mitÃ©s : ",
+                "Extrémités : ",
                 style: TextStyle(color: Colors.white38, fontSize: 11),
               ),
               if (openEnds.isEmpty)
                 const Text(
-                  "â€”",
+                  "—",
                   style: TextStyle(color: Colors.white24, fontSize: 11),
                 )
               else
@@ -46512,6 +46679,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ),
 
+        // ── Plateau de jeu avec overlay de choix direct ───────────────────
         Expanded(
           flex: 4,
           child: Container(
@@ -46520,61 +46688,95 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               color: const Color(0xFF3a7bd5),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: StreamBuilder<DatabaseEvent>(
-              stream: _firebaseService.getDominoHoverStream(widget.gameCode),
-              builder: (context, hoverSnap) {
-                int? liveHoverEnd;
-                if (hoverSnap.hasData &&
-                    hoverSnap.data!.snapshot.value != null) {
-                  try {
-                    final raw = Map<String, dynamic>.from(
-                      hoverSnap.data!.snapshot.value as Map,
-                    );
-                    liveHoverEnd = raw['endValue'] as int?;
-                  } catch (_) {}
-                }
-
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Stack(
-                    children: [
-                      DominoesBoardWidget(
-                        chain:
-                            boardChain
-                                .map((e) => Map<String, dynamic>.from(e))
-                                .toList(),
-                      ),
-                      if (liveHoverEnd != null)
-                        Positioned(
-                          top: 10,
-                          left: 10,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 4,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Stack(
+                children: [
+                  DominoesBoardWidget(
+                    chain:
+                        boardChain
+                            .map((e) => Map<String, dynamic>.from(e))
+                            .toList(),
+                  ),
+                  if (_selectedDominoTile != null)
+                    Positioned.fill(
+                      child: Container(
+                        color: Colors.black.withOpacity(0.85),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.touch_app,
+                              color: Colors.amber,
+                              size: 40,
                             ),
-                            decoration: BoxDecoration(
-                              color: Colors.amber.withOpacity(0.85),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              "Placement visé sur le : $liveHoverEnd",
+                            const SizedBox(height: 16),
+                            Text(
+                              "Sur quel côté placer le $_selectedDominoTile ?",
                               style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 11,
                               ),
                             ),
-                          ),
+                            const SizedBox(height: 30),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children:
+                                  openEnds.where((e) {
+                                    final p = _selectedDominoTile!.split('-');
+                                    return e == int.parse(p[0]) ||
+                                        e == int.parse(p[1]);
+                                  }).toSet().map((end) {
+                                    return ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.amber,
+                                        foregroundColor: Colors.black,
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 28,
+                                          vertical: 16,
+                                        ),
+                                      ),
+                                      onPressed:
+                                          () => _playTile(
+                                            _selectedDominoTile!,
+                                            end,
+                                          ),
+                                      child: Text(
+                                        "Sur le $end",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                            ),
+                            const SizedBox(height: 40),
+                            TextButton(
+                              onPressed:
+                                  () => setState(
+                                    () => _selectedDominoTile = null,
+                                  ),
+                              child: const Text(
+                                "Annuler",
+                                style: TextStyle(
+                                  color: Colors.white54,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                    ],
-                  ),
-                );
-              },
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
-        // â”€â”€ Rack du joueur â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        // ── Rack du joueur ──────────────────────────────────────────────────
         Expanded(
           flex: 3,
           child: Container(
@@ -61942,118 +62144,6 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       onPressed: _handleEndRound,
                     ),
                 ],
-              ),
-            ),
-
-            // LISTE HORIZONTALE DES JOUEURS AVEC XP
-            SizedBox(
-              height: 72,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                itemCount: playerOrder.length,
-                itemBuilder: (context, index) {
-                  final pId = playerOrder[index];
-                  final pData = players[pId] ?? {};
-                  final pName = pData['name'] ?? 'Joueur';
-                  final pXp = (pData['xp'] as num?)?.toInt() ?? 0;
-                  final isSelected = (pId == currentPlayerId);
-
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 4,
-                      vertical: 6,
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient:
-                          isSelected
-                              ? const LinearGradient(
-                                colors: [Color(0xFFFF9800), Color(0xFFFF5722)],
-                              )
-                              : LinearGradient(
-                                colors: [
-                                  Colors.white.withOpacity(0.08),
-                                  Colors.white.withOpacity(0.04),
-                                ],
-                              ),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: isSelected ? Colors.amber : Colors.white12,
-                        width: isSelected ? 2.0 : 1.0,
-                      ),
-                      boxShadow:
-                          isSelected
-                              ? [
-                                BoxShadow(
-                                  color: Colors.orange.withOpacity(0.4),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ]
-                              : null,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircleAvatar(
-                          radius: 14,
-                          backgroundColor:
-                              _sliceColors[index % _sliceColors.length],
-                          child: Text(
-                            pName.isNotEmpty ? pName[0].toUpperCase() : '?',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              pName,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight:
-                                    isSelected
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                  size: 11,
-                                ),
-                                const SizedBox(width: 2),
-                                Text(
-                                  "$pXp XP",
-                                  style: const TextStyle(
-                                    color: Colors.amberAccent,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
               ),
             ),
 

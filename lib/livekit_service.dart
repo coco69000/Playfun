@@ -208,44 +208,6 @@ class LivekitService extends ChangeNotifier {
     }
   }
 
-  /// Récupère la piste vidéo active pour un participant (local ou distant)
-  VideoTrack? getVideoTrack(String identity) {
-    if (_room == null) return null;
-    if (identity == _localIdentity) {
-      final local = _room!.localParticipant;
-      if (local == null) return null;
-      for (var pub in local.videoTrackPublications) {
-        if (pub.track is VideoTrack && !pub.muted) {
-          return pub.track as VideoTrack;
-        }
-      }
-      for (var pub in local.trackPublications.values) {
-        if (pub.kind == TrackType.VIDEO &&
-            pub.track is VideoTrack &&
-            !pub.muted) {
-          return pub.track as VideoTrack;
-        }
-      }
-      return null;
-    }
-
-    final participant = _room!.remoteParticipants[identity];
-    if (participant == null) return null;
-    for (var pub in participant.videoTrackPublications) {
-      if (pub.track is VideoTrack && !pub.muted) {
-        return pub.track as VideoTrack;
-      }
-    }
-    for (var pub in participant.trackPublications.values) {
-      if (pub.kind == TrackType.VIDEO &&
-          pub.track is VideoTrack &&
-          !pub.muted) {
-        return pub.track as VideoTrack;
-      }
-    }
-    return null;
-  }
-
   Future<void> initialize() async {
     debugPrint("[LivekitService] Initializing...");
     if (_isInitialized && _room != null) return;
@@ -365,7 +327,9 @@ class LivekitService extends ChangeNotifier {
           }
         }
       } catch (cloudError) {
-        debugPrint("[LivekitService] Token Cloud Function fallback: $cloudError");
+        debugPrint(
+          "[LivekitService] Token Cloud Function fallback: $cloudError",
+        );
       }
 
       // 2. Token de secours local (Sideloadly / Test / Mode direct)
@@ -375,7 +339,8 @@ class LivekitService extends ChangeNotifier {
       );
 
       // Ne recréer _setupRoom que si la room était fermée
-      if (_room == null || _room!.connectionState == ConnectionState.disconnected) {
+      if (_room == null ||
+          _room!.connectionState == ConnectionState.disconnected) {
         _setupRoom();
       }
 
@@ -487,5 +452,56 @@ class LivekitService extends ChangeNotifier {
       _remoteUsers[identity]!.name = name;
       notifyListeners();
     }
+  }
+
+  /// Récupère la piste vidéo active pour un participant (local ou distant)
+  VideoTrack? getVideoTrack(String identity) {
+    if (_room == null) return null;
+
+    // 1. Participant local
+    if (identity == _localIdentity || identity.isEmpty) {
+      final local = _room!.localParticipant;
+      if (local == null) return null;
+      for (var pub in local.videoTrackPublications) {
+        if (pub.track is VideoTrack && !pub.muted) {
+          return pub.track as VideoTrack;
+        }
+      }
+      for (var pub in local.trackPublications.values) {
+        if (pub.kind == TrackType.VIDEO &&
+            pub.track is VideoTrack &&
+            !pub.muted) {
+          return pub.track as VideoTrack;
+        }
+      }
+      return null;
+    }
+
+    // 2. Participant distant : recherche par identifiant ou SID
+    RemoteParticipant? participant = _room!.remoteParticipants[identity];
+    if (participant == null) {
+      for (var p in _room!.remoteParticipants.values) {
+        if (p.identity == identity || p.sid == identity) {
+          participant = p;
+          break;
+        }
+      }
+    }
+
+    if (participant == null) return null;
+
+    for (var pub in participant.videoTrackPublications) {
+      if (pub.track is VideoTrack && !pub.muted) {
+        return pub.track as VideoTrack;
+      }
+    }
+    for (var pub in participant.trackPublications.values) {
+      if (pub.kind == TrackType.VIDEO &&
+          pub.track is VideoTrack &&
+          !pub.muted) {
+        return pub.track as VideoTrack;
+      }
+    }
+    return null;
   }
 }
