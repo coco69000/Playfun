@@ -316,14 +316,18 @@ class LivekitService extends ChangeNotifier {
     _isLocalVideoOff = !videoEnabled;
     _isLocalMuted = !audioEnabled;
 
+    // Si on est DÉJÀ connecté au même salon, on met à jour les flux sans détruire la Room
     if (_room?.connectionState == ConnectionState.connected) {
       if (_currentRoomName == roomName) {
         try {
           await _room!.localParticipant?.setCameraEnabled(videoEnabled);
+          _isLocalVideoOff = !videoEnabled;
         } catch (_) {}
         try {
           await _room!.localParticipant?.setMicrophoneEnabled(audioEnabled);
+          _isLocalMuted = !audioEnabled;
         } catch (_) {}
+        _localUserJoined = true;
         notifyListeners();
         return;
       } else {
@@ -340,7 +344,7 @@ class LivekitService extends ChangeNotifier {
 
       String? token;
 
-      // 1. Tente d'obtenir le jeton via la fonction Cloud sécurisée
+      // 1. Tente d'obtenir le jeton via Cloud Function
       try {
         final callable = FirebaseFunctions.instanceFor(
           region: "us-central1",
@@ -361,21 +365,17 @@ class LivekitService extends ChangeNotifier {
           }
         }
       } catch (cloudError) {
-        debugPrint(
-          "[LivekitService] Note Cloud Function (mode Sideloadly / Debug): $cloudError",
-        );
+        debugPrint("[LivekitService] Token Cloud Function fallback: $cloudError");
       }
 
-      // 2. Si la fonction Cloud n'a pas répondu ou a échoué (Sideloadly / Debug / restrictions),
-      // génération instantanée du jeton localement : AUCUN BLOCAGE POSSIBLE !
+      // 2. Token de secours local (Sideloadly / Test / Mode direct)
       token ??= _generateLocalToken(
         roomName: roomName,
         identity: _localIdentity,
       );
 
-      // Nettoyer et réinitialiser la Room pour une connexion propre
-      if (_room == null ||
-          _room!.connectionState != ConnectionState.disconnected) {
+      // Ne recréer _setupRoom que si la room était fermée
+      if (_room == null || _room!.connectionState == ConnectionState.disconnected) {
         _setupRoom();
       }
 
@@ -384,7 +384,7 @@ class LivekitService extends ChangeNotifier {
 
       _syncParticipants();
 
-      // Activation vidéo
+      // Activation Caméra
       if (videoEnabled) {
         try {
           await _room!.localParticipant?.setCameraEnabled(true);
@@ -400,7 +400,7 @@ class LivekitService extends ChangeNotifier {
         _isLocalVideoOff = true;
       }
 
-      // Activation audio
+      // Activation Micro
       if (audioEnabled) {
         try {
           await _room!.localParticipant?.setMicrophoneEnabled(true);
@@ -419,7 +419,7 @@ class LivekitService extends ChangeNotifier {
       _localUserJoined = true;
       notifyListeners();
     } catch (e) {
-      debugPrint("[LivekitService] Erreur joinChannel sécurisé: $e");
+      debugPrint("[LivekitService] Erreur joinChannel: $e");
     }
   }
 

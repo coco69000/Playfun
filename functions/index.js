@@ -1209,7 +1209,8 @@ exports.cleanupOldGames = onSchedule(
         console.log(`Nettoyage réussi : ${mmSnap.size} entrées de matchmaking supprimées.`);
       }
 
-      const loungeCutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+      // Nettoyage des salons inactifs uniquement s'ils ont plus de 48h
+      const loungeCutoff = new Date(Date.now() - 48 * 60 * 60 * 1000);
       const loungeSnap = await db
         .collection("lounges")
         .where("createdAt", "<", loungeCutoff)
@@ -1221,18 +1222,13 @@ exports.cleanupOldGames = onSchedule(
         const loungeBatch = db.batch();
 
         loungeSnap.docs.forEach((doc) => {
-          const data = doc.data();
-          const playerCount = data.players ? Object.keys(data.players).length : 0;
-
-          if (playerCount === 0 || !data.pendingGame) {
-            loungeBatch.delete(doc.ref);
-            deletedCount++;
-          }
+          loungeBatch.delete(doc.ref);
+          deletedCount++;
         });
 
         if (deletedCount > 0) {
           await loungeBatch.commit();
-          console.log(`Nettoyage réussi : ${deletedCount} salons supprimés.`);
+          console.log(`Nettoyage réussi : ${deletedCount} anciens salons supprimés.`);
         }
       }
     } catch (err) {
@@ -1270,26 +1266,21 @@ exports.enforceStrictTimers = onSchedule(
           'Le Juge',
           'Le Menteur',
           'Le Roi des Mèmes',
-          'Action ou Vérité',
           'Le Dilemme',
           'Jeu de la Pièce',
           'On se passe un objet rapidement',
           'Synonyme ou Banni',
+          'Action ou Vérité',
           'Blanc Manger Coco',
-          'Blanc Manger Cocon',
-          'BMC',
+          'Photo Roulette',
           'Infiltré & Mr. White',
-          'Loup-Garou',
-          'Gribouillis',
           'Cadavre Exquis',
+          'Gribouillis',
           'Pictionary',
-          'Just One',
-          'Taboo',
           "Time's Up",
+          'Taboo',
           'Devine Tête',
           'La Patate Chaude',
-          'Le Jeu des Catégories',
-          'Photo Roulette',
         ];
         if (data.gameType && socialOpinionGames.includes(data.gameType)) {
           return;
@@ -1349,7 +1340,7 @@ exports.cleanupDisconnectedPlayers = onSchedule(
   },
   async (event) => {
     const now = Date.now();
-    const STALE_THRESHOLD_MS = 90 * 1000;
+    const STALE_THRESHOLD_MS = 90 * 1000; // 90 secondes avant déconnexion
     const REMOVAL_THRESHOLD_MS = 3 * 60 * 1000;
 
     try {
@@ -1360,8 +1351,6 @@ exports.cleanupDisconnectedPlayers = onSchedule(
         .get();
 
       if (activeGames.empty) return;
-
-      let totalCleaned = 0;
 
       for (const doc of activeGames.docs) {
         const data = doc.data() || {};
@@ -1374,13 +1363,11 @@ exports.cleanupDisconnectedPlayers = onSchedule(
         for (const [pId, pData] of Object.entries(players)) {
           if (pId === hostId) continue;
 
-          const lastHb = pData.lastHeartbeat;
           let lastHbMs = 0;
-
-          if (lastHb && lastHb.toDate) {
-            lastHbMs = lastHb.toDate().getTime();
-          } else if (typeof lastHb === "number") {
-            lastHbMs = lastHb;
+          if (pData.lastHeartbeat && pData.lastHeartbeat.toDate) {
+            lastHbMs = pData.lastHeartbeat.toDate().getTime();
+          } else if (typeof pData.lastHeartbeat === "number") {
+            lastHbMs = pData.lastHeartbeat;
           }
 
           const isOnline = pData.isOnline !== false;
@@ -1414,19 +1401,14 @@ exports.cleanupDisconnectedPlayers = onSchedule(
           updates.players = updatedPlayers;
           updates.playerOrder = updatedOrder;
           updates.gameLog = admin.firestore.FieldValue.arrayUnion(
-            `🚪 ${removedPlayers.length} joueur(s) retiré(s) pour déconnexion prolongée.`
+            `🚪 ${removedPlayers.length} joueur(s) retiré(s) pour inactivité prolongée.`
           );
           needsUpdate = true;
-          totalCleaned += removedPlayers.length;
         }
 
         if (needsUpdate) {
           await doc.ref.update(updates);
         }
-      }
-
-      if (totalCleaned > 0) {
-        console.log(`Cleanup serveur : ${totalCleaned} joueur(s) déconnecté(s) retiré(s).`);
       }
     } catch (err) {
       console.error("Erreur cleanupDisconnectedPlayers:", err);
@@ -1442,7 +1424,7 @@ exports.cleanupLoungePresence = onSchedule(
   },
   async (event) => {
     const now = Date.now();
-    const OFFLINE_THRESHOLD_MS = 45 * 1000;
+    const OFFLINE_THRESHOLD_MS = 25 * 1000; // 25 secondes d'inactivité
 
     try {
       const lounges = await db
@@ -1453,18 +1435,17 @@ exports.cleanupLoungePresence = onSchedule(
 
       if (lounges.empty) return;
 
-      let updated = 0;
-
       for (const doc of lounges.docs) {
         const data = doc.data() || {};
         const players = data.players || {};
         const updates = {};
         let hasChanges = false;
 
-        for (const [pId, pData] of Object.entries(players)) {
-          if (pData.isOnline === false) continue;
-
-          const lastHb = pData.lastHeartbeat;
+        // Vérifier les documents de la sous-collection presences
+        const presencesSnap = await doc.ref.collection("presences").get();
+        for (const presDoc of presencesSnap.docs) {
+          const presData = presDoc.data() || {};
+          const lastHb = presData.lastHeartbeat;
           let lastHbMs = 0;
 
           if (lastHb && lastHb.toDate) {
@@ -1473,76 +1454,22 @@ exports.cleanupLoungePresence = onSchedule(
             lastHbMs = lastHb;
           }
 
-          if (lastHbMs > 0 && (now - lastHbMs) > OFFLINE_THRESHOLD_MS) {
-            updates[`players.${pId}.isOnline`] = false;
-            hasChanges = true;
-          }
-
-          if (lastHbMs > 0 && (now - lastHbMs) > 120000) {
-            updates[`players.${pId}`] = admin.firestore.FieldValue.delete();
-            hasChanges = true;
+          if (!players[presDoc.id] || (lastHbMs > 0 && (now - lastHbMs) > OFFLINE_THRESHOLD_MS)) {
+            await presDoc.ref.delete();
+            if (players[presDoc.id]) {
+              updates[`players.${presDoc.id}`] = admin.firestore.FieldValue.delete();
+              updates[`streamers`] = admin.firestore.FieldValue.arrayRemove(presDoc.id);
+              hasChanges = true;
+            }
           }
         }
 
         if (hasChanges) {
           await doc.ref.update(updates);
-          updated++;
         }
-      }
-
-      if (updated > 0) {
-        console.log(`Lounge cleanup : ${updated} salons mis à jour.`);
       }
     } catch (err) {
       console.error("Erreur cleanupLoungePresence:", err);
-    }
-  }
-);
-
-// Détection accélérée des joueurs déconnectés
-exports.cleanupDisconnectedPlayers = onSchedule(
-  {
-    schedule: "every 1 minutes",
-    region: "us-central1",
-    timeZone: "Europe/Paris",
-  },
-  async (event) => {
-    const now = Date.now();
-    const STALE_THRESHOLD_MS = 15 * 1000; // 15 secondes d'absence max
-
-    try {
-      const activeGames = await db
-        .collection("games")
-        .where("gameState", "==", "playing")
-        .limit(100)
-        .get();
-
-      for (const doc of activeGames.docs) {
-        const data = doc.data() || {};
-        const players = data.players || {};
-        const removed = [];
-
-        for (const [pId, pData] of Object.entries(players)) {
-          const lastHb = pData.lastHeartbeat?.toDate ? pData.lastHeartbeat.toDate().getTime() : 0;
-          if (lastHb > 0 && (now - lastHb) > STALE_THRESHOLD_MS) {
-            removed.push(pId);
-          }
-        }
-
-        if (removed.length > 0) {
-          const updatedPlayers = { ...players };
-          for (const id of removed) delete updatedPlayers[id];
-
-          await doc.ref.update({
-            players: updatedPlayers,
-            gameLog: admin.firestore.FieldValue.arrayUnion(
-              `🚪 Déconnexion détectée : ${removed.length} joueur(s) retiré(s).`
-            ),
-          });
-        }
-      }
-    } catch (err) {
-      console.error("Erreur cleanupDisconnectedPlayers:", err);
     }
   }
 );
