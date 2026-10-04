@@ -216,7 +216,6 @@ class GameData {
     'Gribouillis',
     'Pictionary',
     'Time\'s Up',
-    'Taboo',
     'Devine Tête',
     'La Patate Chaude',
   ];
@@ -2433,6 +2432,13 @@ class FirebaseService {
 
   /// Récupère la durée effective du timer selon le jeu, ses réglages et son état
   static int getEffectiveTurnTimer(Map<String, dynamic> gameData) {
+    // 1. Si le chrono a été désactivé par l'hôte, AUCUN timer (même pour les bots)
+    final bool useTimer = gameData['useTimer'] ?? true;
+    if (!useTimer) return 0;
+
+    final String gameType = gameData['gameType'] ?? '';
+    if (gameType == 'Dobble') return 0; // Dobble est un jeu de rapidité en temps réel
+
     // 0. Si le joueur actuel est un ordinateur (bot) ou a manqué un tour, le délai est fixé à 5 secondes
     if (isCurrentPlayerBot(gameData)) {
       return 5;
@@ -2445,11 +2451,6 @@ class FirebaseService {
       }
     }
 
-    // 1. Si le chrono a été désactivé par l'hôte
-    final bool useTimer = gameData['useTimer'] ?? true;
-    if (!useTimer) return 0;
-
-    final String gameType = gameData['gameType'] ?? '';
     final int? customTurnTimer =
         (gameData['turnTimerSeconds'] as num?)?.toInt();
 
@@ -2468,6 +2469,8 @@ class FirebaseService {
 
     // 3. Durées par défaut spécifiques selon le type de jeu
     switch (gameType) {
+      case 'Dobble':
+        return 0;
       case 'Petit Bac':
         return (gameData['petitBacTime'] as num?)?.toInt() ?? 120;
       case 'Pictionary':
@@ -6068,7 +6071,7 @@ class FirebaseService {
       'roundState': 'playing_turn',
       'yamsPlayerOrder': playerIds,
       'yamsCurrentPlayerId': playerIds.first,
-      'yamsDice': [],
+      'yamsDice': [0, 0, 0, 0, 0],
       'yamsHeldDice': [false, false, false, false, false],
       'yamsRollsLeft': 3,
       'yamsScores': scores,
@@ -6103,9 +6106,10 @@ class FirebaseService {
         throw Exception("Plus de lancers disponibles.");
       }
 
-      List<int> currentDice = List<int>.from(
-        gameData['yamsDice'] ?? [0, 0, 0, 0, 0],
-      );
+      final rawDice = gameData['yamsDice'] as List<dynamic>?;
+      List<int> currentDice = (rawDice != null && rawDice.length == 5)
+          ? List<int>.from(rawDice.map((e) => (e as num).toInt()))
+          : [0, 0, 0, 0, 0];
       final List<bool> heldDice = List<bool>.from(
         gameData['yamsHeldDice'] ?? [false, false, false, false, false],
       );
@@ -6368,41 +6372,45 @@ class FirebaseService {
     final currentPlayerId = data['yamsCurrentPlayerId'];
     if (currentPlayerId == null) return;
     final rollsLeft = (data['yamsRollsLeft'] as num?)?.toInt() ?? 3;
-    List<int> dice = List<int>.from(data['yamsDice'] ?? []);
     Map<String, dynamic> currentData = data;
 
-    if (rollsLeft == 3 || dice.isEmpty) {
-      await yamsRollDice(gameCode, currentPlayerId, isAuto: true);
-      final updatedSnap = await gameRef.get();
-      if (!updatedSnap.exists) return;
-      currentData = updatedSnap.data() as Map<String, dynamic>;
-      dice = List<int>.from(currentData['yamsDice'] ?? []);
+    if (rollsLeft == 3) {
+      try {
+        await yamsRollDice(gameCode, currentPlayerId, isAuto: true);
+        final updatedSnap = await gameRef.get();
+        if (updatedSnap.exists) {
+          currentData = updatedSnap.data() as Map<String, dynamic>;
+        }
+      } catch (_) {}
     }
 
-    if (dice.isNotEmpty) {
-      final rawScores = Map<String, dynamic>.from(currentData['yamsScores'] ?? {});
-      final myScores = Map<String, dynamic>.from(rawScores[currentPlayerId] ?? {});
+    final rawDice = currentData['yamsDice'] as List<dynamic>?;
+    List<int> dice = (rawDice != null && rawDice.length == 5)
+        ? List<int>.from(rawDice.map((e) => (e as num).toInt()))
+        : [1, 2, 3, 4, 5];
 
-      const categories = [
-        'Chance',
-        'As',
-        'Deux',
-        'Trois',
-        'Quatre',
-        'Cinq',
-        'Six',
-        'Brelan',
-        'Carré',
-        'Full',
-        'Petite Suite',
-        'Grande Suite',
-        'Yams',
-      ];
-      for (String cat in categories) {
-        if (!myScores.containsKey(cat)) {
-          await yamsScoreCategory(gameCode, currentPlayerId, cat, isAuto: true);
-          break;
-        }
+    final rawScores = Map<String, dynamic>.from(currentData['yamsScores'] ?? {});
+    final myScores = Map<String, dynamic>.from(rawScores[currentPlayerId] ?? {});
+
+    const categories = [
+      'Chance',
+      'Yams',
+      'Grande Suite',
+      'Petite Suite',
+      'Full',
+      'Carré',
+      'Brelan',
+      'Six',
+      'Cinq',
+      'Quatre',
+      'Trois',
+      'Deux',
+      'As',
+    ];
+    for (String cat in categories) {
+      if (!myScores.containsKey(cat)) {
+        await yamsScoreCategory(gameCode, currentPlayerId, cat, isAuto: true);
+        break;
       }
     }
   }
@@ -6753,7 +6761,11 @@ class FirebaseService {
       return;
     }
 
-    await pokerAction(gameCode, timedOutPlayerId, 'fold', isAuto: true);
+    final int currentBet = (gameData['currentBet'] as num? ?? 0).toInt();
+    final int myBet = (playerData[timedOutPlayerId]?['currentBet'] as num? ?? 0).toInt();
+    final String action = (myBet >= currentBet) ? 'check' : 'fold';
+
+    await pokerAction(gameCode, timedOutPlayerId, action, isAuto: true);
   }
 
   // =========================================================================
@@ -7343,34 +7355,15 @@ class FirebaseService {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
     if (currentAuthUid == null) throw Exception("Non authentifie.");
 
-    // SECURITE : Verification que l'appelant est bien le dessinateur actuel
-    final gameRef = _db.collection('games').doc(gameCode);
-    final gameSnap = await gameRef.get();
-    if (!gameSnap.exists) return;
-    final gameData = gameSnap.data() as Map<String, dynamic>;
-
-    final players = (gameData['players'] as Map<String, dynamic>?) ?? {};
-    final currentDrawerId = gameData['currentDrawingPlayerId'];
-    if (currentDrawerId == null) throw Exception("Aucun dessinateur actif.");
-
-    final drawerAuthUid =
-        players[currentDrawerId]?['authUid'] ?? currentDrawerId;
-    if (currentAuthUid != drawerAuthUid) {
-      throw Exception("Seul le dessinateur actif peut modifier le dessin.");
+    try {
+      await FirebaseDatabase.instance.ref('games/$gameCode/pictionary').set({
+        'drawing': drawingContent,
+        'strokeCount': strokeCount,
+        'timestamp': ServerValue.timestamp,
+      });
+    } catch (e) {
+      debugPrint("Erreur updatePictionaryDrawing RTDB: $e");
     }
-
-    // SECURITE : Verification de la limite de traits cote serveur
-    final bool only30Strokes = gameData['pictionaryOnly30Strokes'] ?? false;
-    if (only30Strokes && strokeCount > 30) {
-      throw Exception("Limite de 30 traits depassee.");
-    }
-
-    // Utilisation de Firebase Realtime Database pour eviter les limites de Firestore
-    await FirebaseDatabase.instance.ref('games/$gameCode/pictionary').set({
-      'drawing': drawingContent,
-      'strokeCount': strokeCount,
-      'timestamp': ServerValue.timestamp,
-    });
   }
 
   Future<void> setGribouillisResultPage(String gameCode, int newIndex) async {
@@ -9989,7 +9982,7 @@ class FirebaseService {
       },
       if (gameType == 'Codenames') ...{
         'codenamesWords': [],
-        'codenamesKeyCard': [],
+        'codenamesKeyCard': {},
         'codenamesRevealed': {},
         'redScore': 0,
         'blueScore': 0,
@@ -10334,7 +10327,7 @@ class FirebaseService {
       },
       if (gameType == 'Codenames') ...{
         'codenamesWords': [],
-        'codenamesKeyCard': [],
+        'codenamesKeyCard': {},
         'codenamesRevealed': {},
         'redScore': 0,
         'blueScore': 0,
@@ -12248,6 +12241,82 @@ class FirebaseService {
   // =========================================================================
   // 5. RAMI
   // =========================================================================
+  List<List<String>> _findValidRamiMelds(List<String> hand) {
+    final List<List<String>> foundMelds = [];
+    final List<String> remaining = List<String>.from(hand);
+
+    // 1. Chercher des Brelans / Carrés (même rang, couleurs différentes)
+    final Map<String, List<String>> byRank = {};
+    for (String c in remaining) {
+      String clean = c.split('_')[0];
+      String rank = clean.substring(0, clean.length - 1);
+      byRank.putIfAbsent(rank, () => []).add(c);
+    }
+    for (var entry in byRank.entries) {
+      final list = entry.value;
+      final Map<String, String> suitMap = {};
+      for (var c in list) {
+        String clean = c.split('_')[0];
+        String suit = clean.substring(clean.length - 1);
+        suitMap[suit] = c;
+      }
+      if (suitMap.length >= 3) {
+        final meld = suitMap.values.take(4).toList();
+        if (GameData.isValidRamiMeld(meld)) {
+          foundMelds.add(meld);
+          for (var c in meld) remaining.remove(c);
+        }
+      }
+    }
+
+    // 2. Chercher des Suites (même couleur, rangs consécutifs)
+    final Map<String, List<String>> bySuit = {};
+    for (String c in remaining) {
+      String clean = c.split('_')[0];
+      String suit = clean.substring(clean.length - 1);
+      bySuit.putIfAbsent(suit, () => []).add(c);
+    }
+    for (var entry in bySuit.entries) {
+      final list = entry.value;
+      if (list.length >= 3) {
+        int getVal(String c) {
+          String clean = c.split('_')[0];
+          String r = clean.substring(0, clean.length - 1);
+          if (r == 'A') return 1;
+          if (r == 'J') return 11;
+          if (r == 'Q') return 12;
+          if (r == 'K') return 13;
+          return int.tryParse(r) ?? 0;
+        }
+        list.sort((a, b) => getVal(a).compareTo(getVal(b)));
+        List<String> currentRun = [];
+        for (int i = 0; i < list.length; i++) {
+          if (currentRun.isEmpty) {
+            currentRun.add(list[i]);
+          } else {
+            int prevVal = getVal(currentRun.last);
+            int curVal = getVal(list[i]);
+            if (curVal == prevVal + 1) {
+              currentRun.add(list[i]);
+            } else if (curVal > prevVal + 1) {
+              if (currentRun.length >= 3 && GameData.isValidRamiMeld(currentRun)) {
+                foundMelds.add(List.from(currentRun));
+                for (var c in currentRun) remaining.remove(c);
+              }
+              currentRun = [list[i]];
+            }
+          }
+        }
+        if (currentRun.length >= 3 && GameData.isValidRamiMeld(currentRun)) {
+          foundMelds.add(List.from(currentRun));
+          for (var c in currentRun) remaining.remove(c);
+        }
+      }
+    }
+
+    return foundMelds;
+  }
+
   Future<void> handleRamiTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final snap = await gameRef.get();
@@ -12274,7 +12343,20 @@ class FirebaseService {
     final hand = List<String>.from(updatedData['ramiPlayerHands']?[currentPlayerId] ?? []);
 
     if (hand.isNotEmpty) {
-      await ramiAction(gameCode, currentPlayerId, 'discard', cards: [hand.last], isAuto: true);
+      final melds = _findValidRamiMelds(hand);
+      for (final meld in melds) {
+        try {
+          await ramiAction(gameCode, currentPlayerId, 'meld', cards: meld, isAuto: true);
+        } catch (_) {}
+      }
+
+      final postMeldSnap = await gameRef.get();
+      if (!postMeldSnap.exists) return;
+      final postMeldData = postMeldSnap.data() as Map<String, dynamic>;
+      final postHand = List<String>.from(postMeldData['ramiPlayerHands']?[currentPlayerId] ?? []);
+      if (postHand.isNotEmpty) {
+        await ramiAction(gameCode, currentPlayerId, 'discard', cards: [postHand.last], isAuto: true);
+      }
     }
   }
 
@@ -14872,6 +14954,7 @@ class FirebaseService {
       }
 
       await gameRef.update({
+        'codenamesKeyCard': keyCard,
         'codenamesWords': selectedWords,
         'redTeam': redTeam,
         'blueTeam': blueTeam,
@@ -15138,12 +15221,21 @@ class FirebaseService {
       return;
     }
     if (gameType == 'Taboo') {
-      List<String> shuffledPlayers = playerIds..shuffle();
-      int mid = shuffledPlayers.length ~/ 2;
-      Map<String, List<String>> tabooTeams = {
-        'team_0': shuffledPlayers.sublist(0, mid),
-        'team_1': shuffledPlayers.sublist(mid),
-      };
+      Map<String, List<String>> tabooTeams = {};
+      if (gameData['teams'] != null) {
+        final rawTeams = gameData['teams'] as Map;
+        rawTeams.forEach((k, v) {
+          tabooTeams['team_$k'] = List<String>.from(v as List);
+        });
+      }
+      if (tabooTeams.isEmpty || tabooTeams.length < 2) {
+        List<String> shuffledPlayers = playerIds..shuffle();
+        int mid = shuffledPlayers.length ~/ 2;
+        tabooTeams = {
+          'team_0': shuffledPlayers.sublist(0, mid),
+          'team_1': shuffledPlayers.sublist(mid),
+        };
+      }
 
       await gameRef.update({
         'gameState': 'playing',
@@ -15182,9 +15274,13 @@ class FirebaseService {
 
       final Map<String, dynamic> skullPlayers = {};
       for (final pId in playerIds) {
+        final existingData = players[pId] is Map ? players[pId] as Map : {};
         skullPlayers[pId] = {
-          'name': players[pId]?['name'] ?? 'Joueur',
-          'score': players[pId]?['score'] ?? 0,
+          'name': existingData['name'] ?? 'Joueur',
+          'score': existingData['score'] ?? 0,
+          'xp': existingData['xp'] ?? 0,
+          'authUid': existingData['authUid'] ?? pId,
+          'livekitIdentity': existingData['livekitIdentity'] ?? pId,
           'cardsInHand': 4,
           'isOut': false,
         };
@@ -15392,8 +15488,11 @@ class FirebaseService {
         applySpeedBonus: true,
       );
 
+      final Map<String, dynamic> allHands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+      allHands[playerId] = myHand;
+
       Map<String, dynamic> updates = {
-        'unoPlayerHands.$playerId': myHand,
+        'unoPlayerHands': allHands,
         'unoDiscardPile': discardPile,
         'unoWildColorChosen': null,
         'unoLastActionPlayerId': playerId,
@@ -15649,11 +15748,7 @@ class FirebaseService {
       if (!gameSnap.exists) throw Exception("Partie introuvable.");
 
       final gameData = gameSnap.data() as Map<String, dynamic>;
-      if (gameData['gameState'] != 'playing' ||
-          gameData['roundState'] != 'playing') {
-        return;
-      }
-      if (_isTurnTimedOut(gameData)) {
+      if (gameData['gameState'] != 'playing') {
         return;
       }
 
@@ -15713,8 +15808,7 @@ class FirebaseService {
         )..shuffle();
         updates['dobbleDeck'] = deck;
         updates['dobbleCenterCard'] = nextCenterCard;
-        updates['roundState'] = 'result';
-        updates['turnStartTime'] = FieldValue.serverTimestamp();
+        updates['roundState'] = 'playing';
       } else {
         // Fin de pioche : fin de partie
         final playersMap = Map<String, dynamic>.from(gameData['players'] ?? {});
@@ -17689,28 +17783,27 @@ class FirebaseService {
     String currentRoundState,
   ) async {
     DocumentReference gameRef = _db.collection('games').doc(gameCode);
+    final gameSnap = await gameRef.get();
+    if (!gameSnap.exists) return;
+    var gameData = gameSnap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
 
-    await _db.runTransaction((transaction) async {
-      DocumentSnapshot gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) return;
-      var gameData = gameSnap.data() as Map<String, dynamic>;
-      if (gameData['gameState'] != 'playing') return;
-      if (!_isTurnTimedOut(gameData)) return;
-
-      if (gameData['roundState'] == currentRoundState) {
-        String reason = "";
-        if (currentRoundState == 'drawing') {
-          reason = "Le dessinateur n'a pas soumis le dessin à temps.";
-        } else if (currentRoundState == 'guessing_drawing') {
-          reason = "Le temps est écoulé ! Personne n'a trouvé le mot.";
-        }
-        transaction.update(gameRef, {
-          'roundState': 'result',
-          'gameEndReason': reason,
-          'turnStartTime': FieldValue.serverTimestamp(),
-        });
-      }
-    });
+    if (gameData['roundState'] == 'drawing' || gameData['roundState'] == 'guessing_drawing') {
+      String reason = (gameData['roundState'] == 'drawing')
+          ? "Le dessinateur n'a pas soumis le dessin à temps."
+          : "Le temps est écoulé ! Personne n'a trouvé le mot.";
+      await gameRef.update({
+        'roundState': 'result',
+        'gameEndReason': reason,
+        'turnStartTime': FieldValue.serverTimestamp(),
+        'pictionaryStartTime': FieldValue.serverTimestamp(),
+      });
+      Future.delayed(const Duration(seconds: 3), () async {
+        await nextPictionaryRound(gameCode);
+      });
+    } else if (gameData['roundState'] == 'result') {
+      await nextPictionaryRound(gameCode);
+    }
 
     try {
       await FirebaseDatabase.instance
@@ -18296,7 +18389,9 @@ class FirebaseService {
         }
 
         myHand.addAll(drawnCards);
-        updates['unoPlayerHands.$playerId'] = myHand;
+        final Map<String, dynamic> allHands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+        allHands[playerId] = myHand;
+        updates['unoPlayerHands'] = allHands;
         updates['unoDeck'] = deck;
         updates['unoPendingDraw'] = 0; // La pénalité est purgée
         updates['unoLog'] = FieldValue.arrayUnion([
@@ -18315,7 +18410,9 @@ class FirebaseService {
 
       String drawnCard = deck.removeAt(0);
       myHand.add(drawnCard);
-      updates['unoPlayerHands.$playerId'] = myHand;
+      final Map<String, dynamic> allHands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+      allHands[playerId] = myHand;
+      updates['unoPlayerHands'] = allHands;
       updates['unoDeck'] = deck;
 
       if (discardPile.isEmpty) throw Exception("La pile de défausse est vide.");
@@ -18409,8 +18506,9 @@ class FirebaseService {
             break;
           }
         }
-        targetHand.addAll(penaltyCards);
-        updates['unoPlayerHands.$targetId'] = targetHand;
+        final Map<String, dynamic> allHands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+        allHands[targetId] = targetHand;
+        updates['unoPlayerHands'] = allHands;
         updates['unoDeck'] = deck;
         updates['unoContraDeadline'] = null;
         updates['unoLog'] = FieldValue.arrayUnion([
@@ -22634,6 +22732,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         undercoverRoleSettings: _undercoverRoleSettings,
         infiltreCount: _infiltreCount,
         mrWhiteCount: _mrWhiteCount,
+        useTimer: _useTimer,
         turnTimerSeconds: _turnTimerSeconds,
         resultTimerSeconds: _resultTimerSeconds,
         petitsChevauxTeamMode: _petitsChevauxTeamMode,
@@ -25416,6 +25515,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                 'Time\'s Up',
                 'Devine Tête',
                 'Belote',
+                'Taboo',
               ].contains(gameType) &&
               (gameData['devineTeteUseTeams'] == true ||
                   gameType != 'Devine Tête');
@@ -27776,6 +27876,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     String currentRoundState,
     Map<String, dynamic> gameData,
   ) {
+    final bool useTimer = gameData['useTimer'] ?? true;
+    if (!useTimer) {
+      _timerSubscription?.cancel();
+      return;
+    }
     _timerSubscription?.cancel();
     _timerSubscription = Stream.periodic(
       Duration(seconds: 1),
@@ -29315,6 +29420,49 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               ),
                             ),
                           ),
+                          if (gameType == 'Rami' || gameType == 'Uno' || gameType == 'Président' || gameType == 'Big Two' || gameType == 'Mille Bornes') ...[
+                            () {
+                              int? cCount;
+                              if (gameType == 'Rami') {
+                                cCount = (gameData['ramiPlayerHands']?[pId] as List?)?.length;
+                              } else if (gameType == 'Uno') {
+                                cCount = (gameData['unoPlayerHands']?[pId] as List?)?.length;
+                              } else if (gameType == 'Président') {
+                                cCount = (gameData['playerHands']?[pId] as List?)?.length;
+                              } else if (gameType == 'Big Two') {
+                                cCount = (gameData['bigTwoPlayerHands']?[pId] as List?)?.length;
+                              } else if (gameType == 'Mille Bornes') {
+                                cCount = (gameData['milleBornesPlayerData']?[pId]?['hand'] as List?)?.length;
+                              }
+                              if (cCount == null) return const SizedBox.shrink();
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 4.0),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                                  decoration: BoxDecoration(
+                                    color: Colors.amber.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(color: Colors.amberAccent.withOpacity(0.4), width: 0.8),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.style, size: 9, color: Colors.amberAccent),
+                                      const SizedBox(width: 2),
+                                      Text(
+                                        "$cCount",
+                                        style: const TextStyle(
+                                          color: Colors.amberAccent,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 9.5,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }(),
+                          ],
                           if (canViewHands && !isMe) ...[
                             const SizedBox(width: 4),
                             GestureDetector(
@@ -29481,6 +29629,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               null,
             ),
           ),
+        );
+
+      case 'Rami':
+        final ramiHand = List<String>.from(
+          gameData['ramiPlayerHands']?[opponentId] ?? [],
+        );
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "${ramiHand.length} cartes restantes",
+              style: const TextStyle(color: Colors.white70, fontSize: 11),
+            ),
+            const SizedBox(height: 4),
+            buildFannedCards(ramiHand.length),
+          ],
         );
 
       default:
@@ -30848,20 +31012,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 height: 36,
                 child: VerticalDivider(color: Colors.white24, thickness: 1),
               ),
-              const SizedBox(width: 4),
-
-              // Liste horizontale unifiée des joueurs
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  child: Row(
-                    children:
-                        players.keys
-                            .map((pId) => buildCompactParticipant(pId))
-                            .toList(),
-                  ),
-                ),
+              const Spacer(),
+              // Statut manche
+              Text(
+                "Manche ${(gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1} / ${(gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4}",
+                style: const TextStyle(color: Colors.white54, fontSize: 11, fontWeight: FontWeight.w600),
               ),
             ],
           ),
@@ -33533,11 +33688,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         // 1. BANDEAU ADVERSAIRES : CIRCUIT & PROGRESSION ÉPURÉE
         // ---------------------------------------------------------------------
         SizedBox(
-          height: 82,
+          height: 58,
           child: ListView(
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             children:
                 playerOrder.where((pId) => pId != playerId).map((pId) {
                   final oppData = Map<String, dynamic>.from(pDatas[pId] ?? {});
@@ -33987,9 +34142,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
-                          childAspectRatio: 0.85,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
+                          childAspectRatio: 1.05,
+                          crossAxisSpacing: 6,
+                          mainAxisSpacing: 6,
                         ),
                     itemCount: myHand.length,
                     itemBuilder: (ctx, i) {
@@ -35246,30 +35401,30 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           decoration: BoxDecoration(
-            color: isMyTurn ? Colors.green.withOpacity(0.25) : Colors.black38,
-            borderRadius: BorderRadius.circular(16),
+            color: isMyTurn ? Colors.greenAccent.withOpacity(0.18) : Colors.black38,
+            borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: isMyTurn ? Colors.greenAccent : Colors.white12,
+              color: isMyTurn ? Colors.greenAccent.withOpacity(0.6) : Colors.white12,
+              width: 1,
             ),
           ),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 isMyTurn ? Icons.my_location : Icons.shield_outlined,
                 color: isMyTurn ? Colors.greenAccent : Colors.white70,
-                size: 20,
+                size: 13,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 6),
               Text(
-                isMyTurn
-                    ? "🎯 À vous de tirer sur la grille adverse !"
-                    : "🛡️ En attente du tir adverse...",
+                isMyTurn ? "À votre tour" : "Tour adverse",
                 style: TextStyle(
                   color: isMyTurn ? Colors.greenAccent : Colors.white70,
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -39956,9 +40111,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final List<String> codenamesWords = List<String>.from(
       gameData['codenamesWords'] ?? [],
     );
-    final Map<String, String> keyCard = Map<String, String>.from(
-      gameData['codenamesKeyCard'] ?? {},
-    );
+    final Map<String, String> keyCard = (gameData['codenamesKeyCard'] is Map)
+        ? Map<String, String>.from(gameData['codenamesKeyCard'])
+        : {};
     final Map<String, bool> revealedWords = Map<String, bool>.from(
       gameData['codenamesRevealed'] ?? {},
     );
@@ -47590,84 +47745,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       ),
       child: Column(
         children: [
-          // 1. BANDEAU ADVERSAIRES (COMPTEURS DE CARTES)
-          Container(
-            height: 58,
-            margin: const EdgeInsets.only(top: 4, bottom: 4),
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              children:
-                  playerOrder.where((p) => p != playerId).map((pId) {
-                    final bool isOppTurn = (pId == currentPlayerId);
-                    final int handCount =
-                        (gameData['ramiPlayerHands']?[pId] as List?)?.length ??
-                        0;
-                    final String oppName = players[pId]?['name'] ?? 'Joueur';
-
-                    return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color:
-                            isOppTurn
-                                ? const Color(0xFF2E6F58).withOpacity(0.9)
-                                : Colors.black.withOpacity(0.4),
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color:
-                              isOppTurn ? Colors.amberAccent : Colors.white12,
-                          width: isOppTurn ? 1.5 : 1,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 13,
-                            backgroundColor: Colors.white24,
-                            child: Text(
-                              oppName.isNotEmpty
-                                  ? oppName[0].toUpperCase()
-                                  : '?',
-                              style: const TextStyle(
-                                fontSize: 10,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                oppName,
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold,
-                                  color:
-                                      isOppTurn
-                                          ? Colors.amberAccent
-                                          : Colors.white,
-                                ),
-                              ),
-                              Text(
-                                "$handCount carte${handCount > 1 ? 's' : ''}",
-                                style: const TextStyle(
-                                  color: Colors.white54,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
+          // 1. STATUT DU TOUR ACTUEL (MINIMALISTE)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+              decoration: BoxDecoration(
+                color: isMyTurn ? Colors.greenAccent.withOpacity(0.18) : Colors.black38,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: isMyTurn ? Colors.greenAccent.withOpacity(0.5) : Colors.white12,
+                ),
+              ),
+              child: Text(
+                isMyTurn ? "À votre tour de jouer" : "Au tour de ${players[currentPlayerId]?['name'] ?? 'l\'adversaire'}",
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: isMyTurn ? Colors.greenAccent : Colors.white70,
+                ),
+              ),
             ),
           ),
 
@@ -48533,13 +48630,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           children: [
                             Text(
                               isMyTurn
-                                  ? "C'est votre tour !"
-                                  : "Au tour de ${players[currentPlayerId]?['name'] ?? '...'}",
+                                  ? "À votre tour"
+                                  : "Tour de ${players[currentPlayerId]?['name'] ?? '...'}",
                               style: TextStyle(
                                 color:
                                     isMyTurn ? getColor(myColor) : Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                                fontSize: 12,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -48844,10 +48941,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                 ),
 
-                // --- RACK DE PIÈCES ---
+                // --- RACK DE PIÈCES (COMPACT) ---
                 Container(
-                  height: 140,
-                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  height: 95,
+                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -48898,11 +48995,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             bool isSelected = _selectedBlokusPieceId == pieceId;
 
                             Widget pieceWidget = Container(
-                              width: 85,
-                              height: 85,
+                              width: 58,
+                              height: 58,
                               margin: EdgeInsets.symmetric(
-                                horizontal: 4,
-                                vertical: 2,
+                                horizontal: 3,
+                                vertical: 1,
                               ),
                               decoration: BoxDecoration(
                                 color:

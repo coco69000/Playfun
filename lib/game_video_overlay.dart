@@ -60,7 +60,6 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
           return _buildMaximizedView(livekit, _maximizedIdentity!);
         }
 
-        // Récupération de toutes les identités connectées (local + distants)
         final List<String> allIdentities = [];
         if (livekit.localIdentity.isNotEmpty) {
           allIdentities.add(livekit.localIdentity);
@@ -85,118 +84,113 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
         if (totalPages == 0) totalPages = 1;
 
         final double overlayHeight =
-            isAudioOnly ? 70 : (widget.isFocusMode ? double.infinity : 110);
+            isAudioOnly ? 54 : (widget.isFocusMode ? double.infinity : 90);
 
         final Widget overlayContent = Container(
           width: double.infinity,
           color: Colors.black.withOpacity(0.85),
-          child: Column(
+          child: Stack(
             children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    PageView.builder(
-                      controller: _pageController,
-                      itemCount: totalPages,
-                      itemBuilder: (ctx, pageIndex) {
-                        final pageIdentities =
-                            allIdentities
-                                .skip(pageIndex * itemsPerPage)
-                                .take(itemsPerPage)
-                                .toList();
+              PageView.builder(
+                controller: _pageController,
+                itemCount: totalPages,
+                itemBuilder: (ctx, pageIndex) {
+                  final pageIdentities =
+                      allIdentities
+                          .skip(pageIndex * itemsPerPage)
+                          .take(itemsPerPage)
+                          .toList();
 
-                        final int count = pageIdentities.length;
-                        int crossAxisCount = 2;
-                        double aspectRatio = 1.0;
+                  final int count = pageIdentities.length;
+                  int crossAxisCount = 2;
+                  double aspectRatio = 1.0;
 
-                        if (!widget.isFocusMode) {
-                          if (count == 1) {
-                            crossAxisCount = 1;
-                            aspectRatio = 2.4;
-                          } else if (count == 2) {
-                            crossAxisCount = 2;
-                            aspectRatio = 1.4;
-                          } else if (count <= 4) {
-                            crossAxisCount = count;
-                            aspectRatio = 1.0;
-                          } else {
-                            crossAxisCount = 3;
-                            aspectRatio = 1.1;
-                          }
-                        } else {
-                          crossAxisCount = count <= 2 ? 1 : 2;
-                          aspectRatio = 1.0;
-                        }
+                  if (!widget.isFocusMode) {
+                    if (count == 1) {
+                      crossAxisCount = 1;
+                      aspectRatio = 2.8;
+                    } else if (count == 2) {
+                      crossAxisCount = 2;
+                      aspectRatio = 1.6;
+                    } else if (count <= 4) {
+                      crossAxisCount = count;
+                      aspectRatio = 1.1;
+                    } else {
+                      crossAxisCount = 3;
+                      aspectRatio = 1.1;
+                    }
+                  } else {
+                    crossAxisCount = count <= 2 ? 1 : 2;
+                    aspectRatio = 1.0;
+                  }
 
-                        if (isAudioOnly) {
-                          return Wrap(
-                            alignment: WrapAlignment.center,
-                            children:
-                                pageIdentities
-                                    .map((id) => _buildAudioTile(livekit, id))
-                                    .toList(),
-                          );
-                        }
+                  if (isAudioOnly) {
+                    return Wrap(
+                      alignment: WrapAlignment.center,
+                      children:
+                          pageIdentities
+                              .map((id) => _buildAudioTile(livekit, id))
+                              .toList(),
+                    );
+                  }
 
-                        return GridView.builder(
-                          padding: const EdgeInsets.all(4),
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: crossAxisCount,
-                                childAspectRatio: aspectRatio,
-                                crossAxisSpacing: 4,
-                                mainAxisSpacing: 4,
-                              ),
-                          itemCount: count,
-                          itemBuilder: (ctx, idx) {
-                            return _buildTile(livekit, pageIdentities[idx]);
-                          },
-                        );
-                      },
-                    ),
-                    if (totalPages > 1) ...[
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Center(
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.chevron_left,
-                              color: Colors.white,
-                            ),
-                            onPressed:
-                                () => _pageController.previousPage(
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.ease,
-                                ),
-                          ),
+                  return GridView.builder(
+                    padding: const EdgeInsets.all(3),
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          childAspectRatio: aspectRatio,
+                          crossAxisSpacing: 4,
+                          mainAxisSpacing: 4,
                         ),
-                      ),
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Center(
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.chevron_right,
-                              color: Colors.white,
-                            ),
-                            onPressed:
-                                () => _pageController.nextPage(
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.ease,
-                                ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
+                    itemCount: count,
+                    itemBuilder: (ctx, idx) {
+                      return _buildTile(livekit, pageIdentities[idx]);
+                    },
+                  );
+                },
               ),
-              _buildLocalControls(livekit, isAudioOnly),
+              if (totalPages > 1) ...[
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Center(
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.chevron_left,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      onPressed:
+                          () => _pageController.previousPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Center(
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.chevron_right,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      onPressed:
+                          () => _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          ),
+                    ),
+                  ),
+                ),
+              ],
             ],
           ),
         );
@@ -246,28 +240,19 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
     return GestureDetector(
       onTap: () => setState(() => _maximizedIdentity = identity),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
+        duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           border: Border.all(
             color: borderColor,
-            width: isSpeaking ? 2.5 : 1.0,
+            width: isSpeaking ? 2.0 : 1.0,
           ),
           borderRadius: BorderRadius.circular(8),
-          boxShadow:
-              isSpeaking
-                  ? [
-                    BoxShadow(
-                      color: Colors.greenAccent.withOpacity(0.3),
-                      blurRadius: 8,
-                    ),
-                  ]
-                  : [],
         ),
         child: Stack(
           fit: StackFit.expand,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(7),
               child:
                   (videoTrack == null || videoTrack.muted)
                       ? Container(
@@ -276,7 +261,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                           child: Icon(
                             Icons.person,
                             color: Colors.white54,
-                            size: 28,
+                            size: 24,
                           ),
                         ),
                       )
@@ -291,50 +276,84 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
               left: 0,
               right: 0,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
                 color: Colors.black54,
                 child: Text(
                   playerName,
-                  style: const TextStyle(color: Colors.white, fontSize: 10),
+                  style: const TextStyle(color: Colors.white, fontSize: 9.5),
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
-            if (!isLocal)
-              Positioned(
-                top: 4,
-                right: 4,
-                child: GestureDetector(
-                  onTap: () => livekit.toggleRemoteAudio(identity),
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Colors.black54,
-                      shape: BoxShape.circle,
+            // CONTRÔLES DIRECTEMENT DANS LE COIN SUPÉRIEUR DE CHAQUE CAMÉRA
+            Positioned(
+              top: 3,
+              right: 3,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (isLocal) ...[
+                    GestureDetector(
+                      onTap: livekit.toggleLocalAudio,
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        margin: const EdgeInsets.only(right: 2),
+                        decoration: BoxDecoration(
+                          color: livekit.isLocalMuted ? Colors.red.withOpacity(0.85) : Colors.black54,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          livekit.isLocalMuted ? Icons.mic_off : Icons.mic,
+                          color: Colors.white,
+                          size: 11,
+                        ),
+                      ),
                     ),
-                    child: Icon(
-                      livekit.isRemoteMuted(identity)
-                          ? Icons.volume_off
-                          : Icons.volume_up,
-                      color:
-                          livekit.isRemoteMuted(identity)
-                              ? Colors.red
-                              : Colors.white,
-                      size: 13,
+                    GestureDetector(
+                      onTap: livekit.toggleLocalVideo,
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          color: livekit.isLocalVideoOff ? Colors.red.withOpacity(0.85) : Colors.black54,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          livekit.isLocalVideoOff ? Icons.videocam_off : Icons.videocam,
+                          color: Colors.white,
+                          size: 11,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  ] else ...[
+                    GestureDetector(
+                      onTap: () => livekit.toggleRemoteAudio(identity),
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          color: livekit.isRemoteMuted(identity) ? Colors.red.withOpacity(0.85) : Colors.black54,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          livekit.isRemoteMuted(identity) ? Icons.volume_off : Icons.volume_up,
+                          color: Colors.white,
+                          size: 11,
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
               ),
+            ),
             if (isSpeaking)
               const Positioned(
-                top: 4,
-                left: 4,
+                top: 3,
+                left: 3,
                 child: Icon(
                   Icons.graphic_eq,
                   color: Colors.greenAccent,
-                  size: 15,
+                  size: 13,
                 ),
               ),
           ],
@@ -370,11 +389,11 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
             : (livekit.remoteUsers[identity]?.isSpeaking ?? false);
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: Colors.grey[900],
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: isSpeaking ? Colors.greenAccent : Colors.white24,
         ),
@@ -382,46 +401,29 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            Icons.mic,
-            color: isSpeaking ? Colors.greenAccent : Colors.white54,
-            size: 15,
-          ),
+          if (isLocal)
+            GestureDetector(
+              onTap: livekit.toggleLocalAudio,
+              child: Icon(
+                livekit.isLocalMuted ? Icons.mic_off : Icons.mic,
+                color: livekit.isLocalMuted ? Colors.red : Colors.greenAccent,
+                size: 14,
+              ),
+            )
+          else
+            GestureDetector(
+              onTap: () => livekit.toggleRemoteAudio(identity),
+              child: Icon(
+                livekit.isRemoteMuted(identity) ? Icons.volume_off : Icons.volume_up,
+                color: livekit.isRemoteMuted(identity) ? Colors.red : Colors.white70,
+                size: 14,
+              ),
+            ),
           const SizedBox(width: 4),
           Text(
             playerName,
-            style: const TextStyle(color: Colors.white, fontSize: 12),
+            style: const TextStyle(color: Colors.white, fontSize: 11),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLocalControls(LivekitService livekit, bool isAudioOnly) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: Icon(
-              livekit.isLocalMuted ? Icons.mic_off : Icons.mic,
-              color: livekit.isLocalMuted ? Colors.red : Colors.white,
-            ),
-            onPressed: livekit.toggleLocalAudio,
-            iconSize: 18,
-          ),
-          if (!isAudioOnly)
-            IconButton(
-              icon: Icon(
-                livekit.isLocalVideoOff
-                    ? Icons.videocam_off
-                    : Icons.videocam,
-                color: livekit.isLocalVideoOff ? Colors.red : Colors.white,
-              ),
-              onPressed: livekit.toggleLocalVideo,
-              iconSize: 18,
-            ),
         ],
       ),
     );
