@@ -32,7 +32,7 @@ class LivekitService extends ChangeNotifier {
   bool _isLocalMuted = true;
   bool _isLocalVideoOff = true;
 
-  Map<String, bool> _mutedRemotes = {};
+  final Map<String, bool> _mutedRemotes = {};
   bool isRemoteMuted(String identity) => _mutedRemotes[identity] ?? false;
 
   void toggleRemoteAudio(String identity) {
@@ -43,10 +43,11 @@ class LivekitService extends ChangeNotifier {
       for (var pub in participant.trackPublications.values) {
         if (pub.kind == TrackType.AUDIO) {
           // To mute, we unsubscribe from the audio track
-          if (!newState)
+          if (!newState) {
             pub.subscribe();
-          else
+          } else {
             pub.unsubscribe();
+          }
         }
       }
       _mutedRemotes[identity] = newState;
@@ -224,17 +225,23 @@ class LivekitService extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Génération locale de jeton LiveKit pour garantir une connexion à 100%
-  /// sans blocage (compatible Sideloadly, versions debug et offline cloud functions)
-  String _generateLocalToken({
+  /// Génération locale de secours réservée exclusivement au développement (kDebugMode)
+  /// Le secret est lu via --dart-define=LIVEKIT_SECRET=... pour ne jamais figurer en clair dans le binaire
+  String? _generateLocalToken({
     required String roomName,
     required String identity,
     String name = 'Joueur',
-    String apiKey = 'APIeUWh9WJsnv5S',
-    String apiSecret = 'WEnqYjqqTPYohnAeGfEbvY9RBfBhgQZBYBj5YzCnuPaB',
   }) {
-    final header = {"alg": "HS256", "typ": "JWT"};
+    if (!kDebugMode) return null; // Interdit en production (passe toujours par la Cloud Function)
 
+    const String apiKey = String.fromEnvironment(
+      'LIVEKIT_KEY',
+      defaultValue: 'APIeUWh9WJsnv5S',
+    );
+    const String apiSecret = String.fromEnvironment('LIVEKIT_SECRET');
+    if (apiSecret.isEmpty) return null;
+
+    final header = {"alg": "HS256", "typ": "JWT"};
     final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     final payload = {
       "iss": apiKey,
@@ -332,11 +339,17 @@ class LivekitService extends ChangeNotifier {
         );
       }
 
-      // 2. Token de secours local (Sideloadly / Test / Mode direct)
-      token ??= _generateLocalToken(
-        roomName: roomName,
-        identity: _localIdentity,
-      );
+      // 2. Token de secours local (strictement réservé au mode debug/test local)
+      if (token == null && kDebugMode) {
+        token = _generateLocalToken(
+          roomName: roomName,
+          identity: _localIdentity,
+        );
+      }
+
+      if (token == null) {
+        throw Exception("Impossible d'obtenir un jeton d'accès vidéo LiveKit sécurisé.");
+      }
 
       // Ne recréer _setupRoom que si la room était fermée
       if (_room == null ||

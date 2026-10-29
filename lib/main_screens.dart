@@ -9,6 +9,8 @@ import 'widgets/empty_state_view.dart';
 import 'widgets/game_card_feedback.dart';
 import 'widgets/user_profile_dialog.dart';
 export 'widgets/user_profile_dialog.dart';
+import 'l10n/app_localizations.dart';
+import 'matchmaking_localization.dart';
 
 final List<Map<String, dynamic>> allAppGames = [
   {
@@ -255,7 +257,7 @@ final List<Map<String, dynamic>> allAppGames = [
 
 class GameSelectionScreen extends StatefulWidget {
   final String playerId;
-  GameSelectionScreen({required this.playerId});
+  const GameSelectionScreen({super.key, required this.playerId});
 
   @override
   _GameSelectionScreenState createState() => _GameSelectionScreenState();
@@ -316,13 +318,13 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
     if (code.length != 6) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("Le code doit faire 6 chiffres.")));
+      ).showSnackBar(SnackBar(content: Text(MatchmakingLocalization.tr(context, 'codeMustBe6Digits'))));
       return;
     }
     final playerState = Provider.of<PlayerState>(context, listen: false);
     if (!await playerState.canPlayMultiplayer()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Limite de parties atteinte aujourd'hui.")),
+        SnackBar(content: Text(MatchmakingLocalization.tr(context, 'dailyLimitReached'))),
       );
       return;
     }
@@ -344,21 +346,21 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Impossible de rejoindre la partie. Code invalide ?"),
+          content: Text(MatchmakingLocalization.tr(context, 'invalidGameCode')),
         ),
       );
     }
   }
 
   // Génère la barre de filtres horizontaux
-  Widget _buildFilterChips() {
+  Widget _buildFilterChips(AppLocalizations? l10n) {
     final filters = [
-      {'id': 'local', 'label': 'Local', 'icon': Icons.phone_android},
-      {'id': 'multi', 'label': 'Amis', 'icon': Icons.people},
-      {'id': 'monde', 'label': 'Monde', 'icon': Icons.public},
-      {'id': 'board', 'label': 'Plateau', 'icon': Icons.grid_on},
-      {'id': 'card', 'label': 'Cartes', 'icon': Icons.style},
-      {'id': 'party', 'label': 'Ambiance', 'icon': Icons.mood},
+      {'id': 'local', 'label': l10n?.modeLocal ?? 'Local', 'icon': Icons.phone_android},
+      {'id': 'multi', 'label': l10n?.friendsTab ?? 'Amis', 'icon': Icons.people},
+      {'id': 'monde', 'label': l10n?.modeMonde ?? 'Monde', 'icon': Icons.public},
+      {'id': 'board', 'label': MatchmakingLocalization.tr(context, 'filterBoard'), 'icon': Icons.grid_on},
+      {'id': 'card', 'label': MatchmakingLocalization.tr(context, 'filterCard'), 'icon': Icons.style},
+      {'id': 'party', 'label': MatchmakingLocalization.tr(context, 'filterParty'), 'icon': Icons.mood},
     ];
 
     return SingleChildScrollView(
@@ -399,6 +401,8 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     // Filtrage combiné : Recherche textuelle + Filtres multiples
     List<Map<String, dynamic>> filteredGames =
         allAppGames.where((game) {
@@ -448,7 +452,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
           // Espace pour rejoindre via code directement
           Card(
             margin: EdgeInsets.all(16),
-            color: Colors.deepPurple[900]?.withOpacity(0.5),
+            color: Colors.deepPurple[900]?.withValues(alpha: 0.5),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
@@ -457,7 +461,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                     child: TextField(
                       controller: _joinCodeController,
                       decoration: InputDecoration(
-                        hintText: "Code de partie (6 chiffres)",
+                        hintText: l10n?.gameCode ?? "Code de partie (6 chiffres)",
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.number,
@@ -470,7 +474,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                   IconButton(
                     icon: Icon(Icons.login, color: Colors.greenAccent),
                     onPressed: _joinGameByCode,
-                    tooltip: "Rejoindre",
+                    tooltip: l10n?.joinGame ?? "Rejoindre",
                   ),
                 ],
               ),
@@ -481,7 +485,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
             child: TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search, color: Colors.deepPurpleAccent),
-                labelText: "Rechercher un jeu...",
+                labelText: l10n?.searchGame ?? "Rechercher un jeu...",
                 filled: true,
                 fillColor: Colors.black26,
                 border: OutlineInputBorder(
@@ -493,7 +497,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
           ),
 
           // Insertion de la barre de filtres sous le champ de recherche
-          _buildFilterChips(),
+          _buildFilterChips(l10n),
 
           SizedBox(height: 10),
           Expanded(
@@ -571,7 +575,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                       sigmaY: 1.5,
                                     ),
                                     child: Container(
-                                      color: Colors.black.withOpacity(0.48),
+                                      color: Colors.black.withValues(alpha: 0.48),
                                       padding: const EdgeInsets.all(12.0),
                                       child: Column(
                                         mainAxisAlignment:
@@ -728,7 +732,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.85),
+        color: color.withValues(alpha: 0.85),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -777,7 +781,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
 
 class FriendsScreen extends StatefulWidget {
   final String playerId;
-  FriendsScreen({required this.playerId});
+  const FriendsScreen({super.key, required this.playerId});
 
   @override
   _FriendsScreenState createState() => _FriendsScreenState();
@@ -823,7 +827,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                   child: TextField(
                     controller: _searchController,
                     decoration: InputDecoration(
-                      hintText: "Rechercher par pseudo...",
+                      hintText: MatchmakingLocalization.tr(context, 'searchByUsername'),
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -837,6 +841,10 @@ class _FriendsScreenState extends State<FriendsScreen> {
                 SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: _search,
+                  style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(),
+                    padding: EdgeInsets.all(16),
+                  ),
                   child:
                       _isSearching
                           ? SizedBox(
@@ -847,11 +855,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                               strokeWidth: 2,
                             ),
                           )
-                          : Text("Chercher"),
-                  style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(16),
-                  ),
+                          : Text(MatchmakingLocalization.tr(context, 'searchButton')),
                 ),
               ],
             ),
@@ -862,11 +866,11 @@ class _FriendsScreenState extends State<FriendsScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                "Résultats :",
+                MatchmakingLocalization.tr(context, 'searchResults'),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            Container(
+            SizedBox(
               height: 120,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -876,7 +880,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                   var user = _searchResults[index];
                   bool isFriend = friends.contains(user['uid']);
                   return Card(
-                    color: Colors.deepPurple[900]?.withOpacity(0.5),
+                    color: Colors.deepPurple[900]?.withValues(alpha: 0.5),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(12),
                       onTap: () {
@@ -903,9 +907,9 @@ class _FriendsScreenState extends State<FriendsScreen> {
                             ),
                             const SizedBox(height: 8),
                             isFriend
-                                ? const Text(
-                                  "Déjà ami",
-                                  style: TextStyle(
+                                ? Text(
+                                  MatchmakingLocalization.tr(context, 'alreadyFriends'),
+                                  style: const TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
                                   ),
@@ -918,16 +922,16 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                     );
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text("Demande envoyée à ${user['name'] ?? 'ce joueur'} !"),
+                                        content: Text(MatchmakingLocalization.tr(context, 'requestSentTo', {'name': user['name'] ?? 'ce joueur'})),
                                       ),
                                     );
                                     setState(
                                       () => _searchResults.removeAt(index),
                                     );
                                   },
-                                  child: const Text(
-                                    "Ajouter",
-                                    style: TextStyle(fontSize: 12),
+                                  child: Text(
+                                    MatchmakingLocalization.tr(context, 'addFriend'),
+                                    style: const TextStyle(fontSize: 12),
                                   ),
                                 ),
                           ],
@@ -946,8 +950,8 @@ class _FriendsScreenState extends State<FriendsScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                "Demandes reçues",
-                style: TextStyle(
+                MatchmakingLocalization.tr(context, 'requestsReceived'),
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.amber,
@@ -957,11 +961,11 @@ class _FriendsScreenState extends State<FriendsScreen> {
             ...requests
                 .map(
                   (r) => ListTile(
-                    leading: CircleAvatar(
+                    leading: const CircleAvatar(
                       backgroundColor: Colors.amber,
                       child: Icon(Icons.person, color: Colors.black),
                     ),
-                    title: Text("${r['name']} veut être votre ami"),
+                    title: Text(MatchmakingLocalization.tr(context, 'wantsToBeYourFriend', {'name': r['name'] ?? ''})),
                     onTap: () {
                       showUserProfileDialog(
                         context,
@@ -973,7 +977,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.check_circle,
                             color: Colors.greenAccent,
                           ),
@@ -985,7 +989,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                               ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.cancel, color: Colors.redAccent),
+                          icon: const Icon(Icons.cancel, color: Colors.redAccent),
                           onPressed:
                               () => playerState.respondToFriendRequest(
                                 r['uid'],
@@ -996,27 +1000,26 @@ class _FriendsScreenState extends State<FriendsScreen> {
                       ],
                     ),
                   ),
-                )
-                .toList(),
-            Divider(),
+                ),
+            const Divider(),
           ],
 
           // Liste des amis
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              "Mes Amis (${friends.length})",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              MatchmakingLocalization.tr(context, 'myFriendsCount', {'count': friends.length.toString()}),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
             child:
                 friends.isEmpty
-                    ? const EmptyStateView(
+                    ? EmptyStateView(
                       icon: Icons.person_add_alt_1_rounded,
-                      title: "Pas encore d'amis",
+                      title: MatchmakingLocalization.tr(context, 'noFriendsYet'),
                       subtitle:
-                          "Recherche tes potes par leur pseudo ci-dessus pour les inviter en un clic !",
+                          MatchmakingLocalization.tr(context, 'searchFriendsPrompt'),
                     )
                     : ListView.builder(
                       itemCount: friends.length,
@@ -1027,12 +1030,12 @@ class _FriendsScreenState extends State<FriendsScreen> {
                             'Chargement...';
                         return ListTile(
                           leading: CircleAvatar(
+                            backgroundColor: AppColors.primary,
                             child: Text(
                               friendName.isNotEmpty
                                   ? friendName[0].toUpperCase()
                                   : "?",
                             ),
-                            backgroundColor: AppColors.primary,
                           ),
                           title: Text(
                             friendName,
@@ -1053,7 +1056,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                             onPressed: () {
                               playerState.removeFriend(friendId);
                             },
-                            tooltip: "Retirer l'ami",
+                            tooltip: MatchmakingLocalization.tr(context, 'removeFriend'),
                           ),
                         );
                       },
@@ -1066,6 +1069,8 @@ class _FriendsScreenState extends State<FriendsScreen> {
 }
 
 class StatsEtoileScreen extends StatelessWidget {
+  const StatsEtoileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final playerState = Provider.of<PlayerState>(context);
@@ -1096,12 +1101,12 @@ class StatsEtoileScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF67E8F9).withOpacity(0.15),
+                      color: const Color(0xFF67E8F9).withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: const Color(0xFF67E8F9).withOpacity(0.4)),
+                      border: Border.all(color: const Color(0xFF67E8F9).withValues(alpha: 0.4)),
                     ),
                     child: Text(
-                      playerState.rankTitle,
+                      MatchmakingLocalization.tr(context, playerState.rankTitleKey),
                       style: const TextStyle(
                         color: Color(0xFF67E8F9),
                         fontWeight: FontWeight.bold,
@@ -1124,7 +1129,7 @@ class StatsEtoileScreen extends StatelessWidget {
                     children: [
                       Text("${playerState.xp} / ${playerState.xpForNextLevel} XP"),
                       Text(
-                        "${playerState.xpForNextLevel - playerState.xp} XP restants",
+                        MatchmakingLocalization.tr(context, 'xpRemaining', {'count': (playerState.xpForNextLevel - playerState.xp).toString()}),
                         style: const TextStyle(color: Colors.white54, fontSize: 12),
                       ),
                     ],
@@ -1142,19 +1147,22 @@ class StatsEtoileScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.04),
+                        color: Colors.white.withValues(alpha: 0.04),
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: const Color(0xFF67E8F9).withOpacity(0.3)),
+                        border: Border.all(color: const Color(0xFF67E8F9).withValues(alpha: 0.3)),
                       ),
                       child: Column(
                         children: [
                           const Icon(Icons.military_tech_rounded, color: Color(0xFF67E8F9), size: 22),
                           const SizedBox(height: 4),
                           Text(
-                            "${playerState.xp} XP",
+                            "${playerState.totalCumulativeXp} XP",
                             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                           ),
-                          const Text("Total Accumulé", style: TextStyle(fontSize: 10, color: Colors.white54)),
+                          Text(
+                            MatchmakingLocalization.tr(context, 'totalAccumulated'),
+                            style: const TextStyle(fontSize: 10, color: Colors.white54),
+                          ),
                         ],
                       ),
                     ),
@@ -1164,9 +1172,9 @@ class StatsEtoileScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.04),
+                        color: Colors.white.withValues(alpha: 0.04),
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.purpleAccent.withOpacity(0.3)),
+                        border: Border.all(color: Colors.purpleAccent.withValues(alpha: 0.3)),
                       ),
                       child: Column(
                         children: [
@@ -1176,7 +1184,10 @@ class StatsEtoileScreen extends StatelessWidget {
                             "${avgXpPerGame.toStringAsFixed(1)} XP",
                             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                           ),
-                          const Text("Moyenne / Partie", style: TextStyle(fontSize: 10, color: Colors.white54)),
+                          Text(
+                            MatchmakingLocalization.tr(context, 'averagePerGame'),
+                            style: const TextStyle(fontSize: 10, color: Colors.white54),
+                          ),
                         ],
                       ),
                     ),
@@ -1188,23 +1199,23 @@ class StatsEtoileScreen extends StatelessWidget {
             const Divider(color: Colors.white24, height: 28),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: const Align(
+              child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Statistiques par jeu",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  MatchmakingLocalization.tr(context, 'statsPerGame'),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
             const SizedBox(height: 8),
 
             stats.isEmpty
-                ? const Padding(
-                    padding: EdgeInsets.all(32.0),
+                ? Padding(
+                    padding: const EdgeInsets.all(32.0),
                     child: Center(
                       child: Text(
-                        "Aucune partie jouée pour le moment.",
-                        style: TextStyle(color: Colors.white54),
+                        MatchmakingLocalization.tr(context, 'noGamesPlayedYet'),
+                        style: const TextStyle(color: Colors.white54),
                       ),
                     ),
                   )
@@ -1227,7 +1238,7 @@ class StatsEtoileScreen extends StatelessWidget {
                           gameName,
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        subtitle: Text("Jouées : $played | Gagnées : $won | ~$gameXp XP"),
+                        subtitle: Text(MatchmakingLocalization.tr(context, 'gameStatsSummary', {'played': played.toString(), 'won': won.toString(), 'xp': gameXp.toString()})),
                         trailing: Text(
                           played > 0
                               ? "${((won / played) * 100).toStringAsFixed(0)} %"

@@ -14,7 +14,7 @@ class AppPrimaryButton extends StatefulWidget {
   final EdgeInsetsGeometry padding;
 
   const AppPrimaryButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     this.icon,
@@ -23,7 +23,7 @@ class AppPrimaryButton extends StatefulWidget {
     this.width,
     this.height = 50,
     this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-  }) : super(key: key);
+  });
 
   @override
   State<AppPrimaryButton> createState() => _AppPrimaryButtonState();
@@ -53,7 +53,7 @@ class _AppPrimaryButtonState extends State<AppPrimaryButton> {
           boxShadow: isEnabled
               ? [
                   BoxShadow(
-                    color: AppColors.primaryAccent.withOpacity(0.35),
+                    color: AppColors.primaryAccent.withValues(alpha: 0.35),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -121,14 +121,14 @@ class AppSecondaryButton extends StatelessWidget {
   final Color? borderColor;
 
   const AppSecondaryButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     this.icon,
     this.width,
     this.height = 48,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,7 @@ class AppSecondaryButton extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           side: BorderSide(
-            color: borderColor ?? AppColors.primaryAccent.withOpacity(0.8),
+            color: borderColor ?? AppColors.primaryAccent.withValues(alpha: 0.8),
             width: 1.5,
           ),
           shape: RoundedRectangleBorder(
@@ -174,11 +174,11 @@ class AppDangerButton extends StatelessWidget {
   final IconData? icon;
 
   const AppDangerButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

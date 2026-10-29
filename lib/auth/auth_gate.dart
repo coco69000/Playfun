@@ -8,6 +8,8 @@ import '../main.dart';
 import '../services/force_update_service.dart';
 
 class AuthGate extends StatefulWidget {
+  const AuthGate({super.key});
+
   @override
   State<AuthGate> createState() => _AuthGateState();
 }

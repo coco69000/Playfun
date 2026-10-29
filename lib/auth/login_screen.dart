@@ -1,10 +1,15 @@
 // File: lib/auth/login_screen.dart
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:provider/provider.dart';
 import 'auth_service.dart';
+import '../services/legal_links.dart';
+import '../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -18,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String _error = '';
   bool _isLogin = true;
   bool _isLoading = false;
+  bool _acceptedTerms = false;
 
   // Variables pour la vérification de pseudo en direct
   Timer? _debounceTimer;
@@ -62,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _error = '';
       _isUsernameAvailable = null;
       _isCheckingUsername = false;
+      _acceptedTerms = false;
     });
     _formKey.currentState?.reset();
   }
@@ -69,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context, listen: false);
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       body: Center(
@@ -83,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Icon(Icons.nightlife_rounded, size: 80, color: Colors.deepPurpleAccent),
                 const SizedBox(height: 16),
                 Text(
-                  _isLogin ? 'Bienvenue !' : 'Rejoignez-nous !',
+                  _isLogin ? (l10n?.loginTitle ?? 'Bienvenue !') : (l10n?.registerTitle ?? 'Rejoignez-nous !'),
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -92,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (!_isLogin) ...[
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'Pseudo unique',
+                      labelText: l10n?.username ?? 'Pseudo unique',
                       prefixIcon: const Icon(Icons.person),
                       suffixIcon: _isCheckingUsername
                           ? const Padding(
@@ -135,9 +143,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
 
                 TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    prefixIcon: Icon(Icons.email),
+                  decoration: InputDecoration(
+                    labelText: l10n?.email ?? 'Email',
+                    prefixIcon: const Icon(Icons.email),
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (val) => val != null && val.contains('@') ? null : 'Entrez un email valide',
@@ -146,14 +154,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16.0),
 
                 TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Mot de passe',
-                    prefixIcon: Icon(Icons.lock),
+                  decoration: InputDecoration(
+                    labelText: l10n?.password ?? 'Mot de passe',
+                    prefixIcon: const Icon(Icons.lock),
                   ),
                   obscureText: true,
                   validator: (val) => val != null && val.length >= 6 ? null : '6 caractères minimum',
                   onChanged: (val) => setState(() => _password = val),
                 ),
+                if (!_isLogin) ...[
+                  const SizedBox(height: 12.0),
+                  _buildTermsCheckbox(context),
+                ],
                 const SizedBox(height: 24.0),
 
                 if (_isLoading)
@@ -163,6 +175,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: (!_isLogin && (_isUsernameAvailable == false || _isCheckingUsername))
                         ? null
                         : () async {
+                            if (!_isLogin && !_acceptedTerms) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.redAccent,
+                                  content: Text(
+                                    "Vous devez accepter les CGU et la Politique de Confidentialité pour créer un compte.",
+                                  ),
+                                ),
+                              );
+                              return;
+                            }
                             if (_formKey.currentState!.validate()) {
                               setState(() {
                                 _isLoading = true;
@@ -190,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               }
                             }
                           },
-                    child: Text(_isLogin ? 'Connexion' : 'Créer mon compte'),
+                    child: Text(_isLogin ? (l10n?.loginButton ?? 'Connexion') : (l10n?.registerButton ?? 'Créer mon compte')),
                   ),
                 const SizedBox(height: 12.0),
 
@@ -215,6 +238,69 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTermsCheckbox(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 24,
+            width: 24,
+            child: Checkbox(
+              value: _acceptedTerms,
+              activeColor: Colors.deepPurpleAccent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              onChanged: (val) {
+                setState(() {
+                  _acceptedTerms = val ?? false;
+                });
+              },
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 13,
+                  height: 1.4,
+                ),
+                children: [
+                  const TextSpan(text: "J'ai lu et j'accepte les "),
+                  TextSpan(
+                    text: "Conditions Générales d'Utilisation (CGU / EULA)",
+                    style: const TextStyle(
+                      color: Colors.cyanAccent,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => LegalLinks.openUrl(context, LegalLinks.cguUrl),
+                  ),
+                  const TextSpan(text: " et la "),
+                  TextSpan(
+                    text: "Politique de Confidentialité",
+                    style: const TextStyle(
+                      color: Colors.cyanAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => LegalLinks.openUrl(context, LegalLinks.privacyUrl),
+                  ),
+                  const TextSpan(text: "."),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

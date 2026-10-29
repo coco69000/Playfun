@@ -1,4 +1,6 @@
 import 'game_data_words.dart';
+import 'game_ui_localization.dart';
+import 'game_message_localization.dart';
 import 'monde.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide User;
 import 'main_screens.dart';
@@ -105,7 +107,7 @@ class SupabaseService {
 
       await _client.storage.from(_bucketName).remove(pathsToDelete);
 
-      print('Dossier de jeu $gameCode supprimÃƒÂ© avec succÃƒÂ¨s.');
+      print('Dossier de jeu $gameCode supprimé avec succès.');
     } catch (e) {
       print('Erreur lors du nettoyage Supabase : $e');
     }
@@ -140,7 +142,7 @@ class SupabaseService {
             .getPublicUrl(path);
 
         print(
-          '--- [Supabase Upload] SuccÃ¨s (Tentative $attempt) : $publicUrl ---',
+          '--- [Supabase Upload] Succès (Tentative $attempt) : $publicUrl ---',
         );
         return publicUrl;
       } catch (e, stackTrace) {
@@ -149,10 +151,10 @@ class SupabaseService {
         );
         print('Erreur: $e');
         if (attempt == maxRetries) {
-          print('--- [Supabase Upload] ECHEC DÃ‰FINITIF ---');
+          print('--- [Supabase Upload] ECHEC DÉFINITIF ---');
           return null;
         }
-        // Attente avant de rÃ©essayer (permet aux sockets de se libÃ©rer)
+        // Attente avant de réessayer (permet aux sockets de se libérer)
         await Future.delayed(Duration(seconds: 2));
       }
     }
@@ -176,7 +178,7 @@ class SupabaseService {
           .from(_bucketName)
           .getPublicUrl(path);
 
-      print('Upload rÃƒÂ©ussi: $publicUrl');
+      print('Upload réussi: $publicUrl');
       return publicUrl;
     } on StorageException catch (e) {
       print('--- ERREUR SUPABASE (StorageException) ---');
@@ -223,30 +225,32 @@ class GameData {
   static bool isSocialOpinionGame(String gameType) {
     if (socialOpinionGames.contains(gameType)) return true;
     final normalized = gameType.replaceAll("’", "'").trim();
-    return socialOpinionGames.any((g) => g.replaceAll("’", "'").trim() == normalized);
+    return socialOpinionGames.any(
+      (g) => g.replaceAll("’", "'").trim() == normalized,
+    );
   }
 
   static const List<String> categoriesGameList = [
     "Marques de voiture",
     "Pays du monde",
-    "Fruits & LÃƒÂ©gumes",
+    "Fruits & Légumes",
     "Animaux",
-    "MÃƒÂ©tiers",
+    "Métiers",
     "Objets de la cuisine",
     "Villes",
     "Sports",
     "Couleurs",
     "Parties du corps",
-    "VÃƒÂªtements",
+    "Vêtements",
     "Instruments de musique",
-    "CÃƒÂ©lÃƒÂ©britÃƒÂ©s",
+    "Célébrités",
     "Fleurs & Arbres",
     "Films Disney",
-    "Super-hÃƒÂ©ros",
+    "Super-héros",
     "Verbes du 1er groupe",
     "Choses rondes",
     "Choses rouges",
-    "Marques de vÃƒÂªtements",
+    "Marques de vêtements",
   ];
   static const Map<String, String> gameRules = {
     'Blanc Manger Coco': """
@@ -270,186 +274,186 @@ class GameData {
 """,
     'Zombie!': """
 **Objectif**
-Prenez des cartes pour crÃ©er des paires assorties. Ã‰vitez d'Ãªtre le joueur qui tient la carte Zombie Ã  la fin du jeu.
-**DÃ©roulement**
+Prenez des cartes pour créer des paires assorties. Évitez d'être le joueur qui tient la carte Zombie à la fin du jeu.
+**Déroulement**
 1. Le jeu commence avec 33 cartes (16 paires + 1 carte Zombie).
-2. Les cartes sont distribuÃ©es aux 4 joueurs.
-3. Ã€ chaque tour, un joueur prend une carte au joueur suivant.
-4. Si la carte crÃ©e une paire, elle est automatiquement dÃ©faussÃ©e.
-5. La main du joueur est mÃ©langÃ©e.
-6. Le premier joueur Ã  ne plus avoir de cartes a gagnÃ©.
+2. Les cartes sont distribuées aux 4 joueurs.
+3. À chaque tour, un joueur prend une carte au joueur suivant.
+4. Si la carte crée une paire, elle est automatiquement défaussée.
+5. La main du joueur est mélangée.
+6. Le premier joueur à ne plus avoir de cartes a gagné.
 7. Le joueur restant avec la carte Zombie a perdu !
 """,
     'Yams': """
 **But du jeu**
-Obtenir le score le plus Ã©levÃ© en remplissant 13 catÃ©gories avec 5 dÃ©s.
+Obtenir le score le plus élevé en remplissant 13 catégories avec 5 dés.
 
-**DÃ©roulement d'un tour**
-1. **Lancer** : Vous pouvez lancer les 5 dÃ©s jusqu'Ã  3 fois par tour.
-2. **Garder** : AprÃ¨s le 1er ou 2Ã¨me lancer, vous pouvez garder certains dÃ©s et relancer les autres.
-3. **Score** : AprÃ¨s au moins un lancer, vous devez choisir une catÃ©gorie pour scorer. Chaque catÃ©gorie ne peut Ãªtre utilisÃ©e qu'une seule fois par partie.
+**Déroulement d'un tour**
+1. **Lancer** : Vous pouvez lancer les 5 dés jusqu'à 3 fois par tour.
+2. **Garder** : Après le 1er ou 2ème lancer, vous pouvez garder certains dés et relancer les autres.
+3. **Score** : Après au moins un lancer, vous devez choisir une catégorie pour scorer. Chaque catégorie ne peut être utilisée qu'une seule fois par partie.
 
-**CatÃ©gories**
-- **As Ã  Six** : Somme des dÃ©s correspondants. (Bonus de 35 points si la section supÃ©rieure totalise 63 points ou plus).
-- **Brelan** (3 dÃ©s identiques ou plus) : Somme de tous les dÃ©s.
-- **CarrÃ©** (4 dÃ©s identiques ou plus) : Somme de tous les dÃ©s.
-- **Full** (3 dÃ©s identiques + 1 paire) : 25 points.
-- **Petite Suite** (4 dÃ©s consÃ©cutifs) : 30 points.
-- **Grande Suite** (5 dÃ©s consÃ©cutifs) : 40 points.
-- **Yams** (5 dÃ©s identiques) : 50 points.
-- **Chance** : Somme de tous les dÃ©s.
+**Catégories**
+- **As à Six** : Somme des dés correspondants. (Bonus de 35 points si la section supérieure totalise 63 points ou plus).
+- **Brelan** (3 dés identiques ou plus) : Somme de tous les dés.
+- **Carré** (4 dés identiques ou plus) : Somme de tous les dés.
+- **Full** (3 dés identiques + 1 paire) : 25 points.
+- **Petite Suite** (4 dés consécutifs) : 30 points.
+- **Grande Suite** (5 dés consécutifs) : 40 points.
+- **Yams** (5 dés identiques) : 50 points.
+- **Chance** : Somme de tous les dés.
 """,
     'La Patate Chaude': """
 **Objectif**
 Ne pas avoir l'appareil entre les mains lorsque la patate explose !
 
-**DÃƒÂ©roulement**
-1. Un thÃƒÂ¨me s'affiche ÃƒÂ  l'ÃƒÂ©cran.
-2. Le joueur qui tient l'appareil doit donner une rÃƒÂ©ponse correspondant au thÃƒÂ¨me.
-3. DÃƒÂ¨s qu'il a rÃƒÂ©pondu, il passe rapidement l'appareil ÃƒÂ  son voisin.
-4. Le voisin doit ÃƒÂ  son tour trouver une nouvelle rÃƒÂ©ponse et passer l'appareil.
-5. Le temps est cachÃƒÂ© et alÃƒÂ©atoire : la patate peut exploser ÃƒÂ  tout moment !
-6. Le joueur qui tient l'appareil au moment de l'explosion perd la manche et reÃƒÂ§oit un gage.
+**Déroulement**
+1. Un thème s'affiche à l'écran.
+2. Le joueur qui tient l'appareil doit donner une réponse correspondant au thème.
+3. Dès qu'il a répondu, il passe rapidement l'appareil à son voisin.
+4. Le voisin doit à son tour trouver une nouvelle réponse et passer l'appareil.
+5. Le temps est caché et aléatoire : la patate peut exploser à tout moment !
+6. Le joueur qui tient l'appareil au moment de l'explosion perd la manche et reçoit un gage.
 """,
     'Gribouillis': """
-**Principe GÃƒÂ©nÃƒÂ©ral**
-Gribouillis est un jeu de dessin inspirÃƒÂ© du "tÃƒÂ©lÃƒÂ©phone arabe", oÃƒÂ¹ les idÃƒÂ©es se transforment ÃƒÂ  chaque ÃƒÂ©tape. Il existe 3 modes de jeu :
+**Principe Général**
+Gribouillis est un jeu de dessin inspiré du "téléphone arabe", où les idées se transforment à chaque étape. Il existe 3 modes de jeu :
 
-**1. Mode Normal (TÃƒÂ©lÃƒÂ©phone Arabe IllustrÃƒÂ©)**
--   **Ãƒâ€°criture** : Chaque joueur ÃƒÂ©crit une phrase.
--   **Dessin** : Chaque joueur reÃƒÂ§oit la phrase d'un autre et la dessine.
--   **Devinette** : Chaque joueur reÃƒÂ§oit un dessin et devine ce qu'il reprÃƒÂ©sente.
--   **Alternance** : Le jeu alterne dessin et devinette jusqu'ÃƒÂ  ce que chaque "album" ait fait le tour de tous les joueurs.
--   **But** : S'amuser en voyant comment une phrase simple se transforme en quelque chose de complÃƒÂ¨tement diffÃƒÂ©rent !
+**1. Mode Normal (Téléphone Arabe Illustré)**
+-   **Écriture** : Chaque joueur écrit une phrase.
+-   **Dessin** : Chaque joueur reçoit la phrase d'un autre et la dessine.
+-   **Devinette** : Chaque joueur reçoit un dessin et devine ce qu'il représente.
+-   **Alternance** : Le jeu alterne dessin et devinette jusqu'à ce que chaque "album" ait fait le tour de tous les joueurs.
+-   **But** : S'amuser en voyant comment une phrase simple se transforme en quelque chose de complètement différent !
 
-**2. Mode ComplÃƒÂ©ment (Dessin Collaboratif)**
+**2. Mode Complément (Dessin Collaboratif)**
 -   **Croquis** : Chaque joueur commence un dessin simple.
--   **ComplÃƒÂ©ment** : Chaque joueur reÃƒÂ§oit le dessin d'un autre et doit l'enrichir, sans effacer ce qui existe dÃƒÂ©jÃƒÂ .
+-   **Complément** : Chaque joueur reçoit le dessin d'un autre et doit l'enrichir, sans effacer ce qui existe déjà.
 -   **Alternance** : Le dessin passe de joueur en joueur, chacun ajoutant sa touche.
--   **ParamÃƒÂ¨tre "Ajouter 1"** :
-    -   *Si dÃƒÂ©sactivÃƒÂ© (par dÃƒÂ©faut)* : C'est une chaÃƒÂ®ne. Le dessin ÃƒÂ©volue ÃƒÂ  chaque ÃƒÂ©tape (Joueur A -> Joueur B -> Joueur C...).
-    -   *Si activÃƒÂ©* : Le dessin initial de chaque joueur est complÃƒÂ©tÃƒÂ© par tous les autres joueurs, crÃƒÂ©ant plusieurs Ã…â€œuvres collectives en parallÃƒÂ¨le.
--   **But** : CrÃƒÂ©er des Ã…â€œuvres d'art collectives surprenantes et amusantes.
+-   **Paramètre "Ajouter 1"** :
+    -   *Si désactivé (par défaut)* : C'est une chaîne. Le dessin évolue à chaque étape (Joueur A -> Joueur B -> Joueur C...).
+    -   *Si activé* : Le dessin initial de chaque joueur est complété par tous les autres joueurs, créant plusieurs Å“uvres collectives en parallèle.
+-   **But** : Créer des Å“uvres d'art collectives surprenantes et amusantes.
 
-**3. Mode Brise-Glace (Interaction CrÃƒÂ©ative)**
--   **Ãƒâ€°criture** : Chaque joueur ÃƒÂ©crit un thÃƒÂ¨me personnel (ex: "Mon animal prÃƒÂ©fÃƒÂ©rÃƒÂ©").
--   **Dessin** : Chaque joueur reÃƒÂ§oit les thÃƒÂ¨mes de **tous les autres joueurs** et doit les dessiner.
--   **But** : IdÃƒÂ©al pour briser la glace, dÃƒÂ©couvrir les goÃƒÂ»ts des autres et lancer la crÃƒÂ©ativitÃƒÂ© de maniÃƒÂ¨re collaborative et lÃƒÂ©gÃƒÂ¨re.
+**3. Mode Brise-Glace (Interaction Créative)**
+-   **Écriture** : Chaque joueur écrit un thème personnel (ex: "Mon animal préféré").
+-   **Dessin** : Chaque joueur reçoit les thèmes de **tous les autres joueurs** et doit les dessiner.
+-   **But** : Idéal pour briser la glace, découvrir les goûts des autres et lancer la créativité de manière collaborative et légère.
 """,
     'Zéro Pointé': """
-Ã°Å¸Å½Â¯ Objectif
+ðŸŽ¯ Objectif
 
-Avoir le moins de points possible ÃƒÂ  la fin de la partie.
-La partie sÃ¢â‚¬â„¢arrÃƒÂªte lorsquÃ¢â‚¬â„¢un joueur atteint 100 points ou plus, et le gagnant est celui avec le score total le plus faible.
+Avoir le moins de points possible à la fin de la partie.
+La partie s’arrête lorsqu’un joueur atteint 100 points ou plus, et le gagnant est celui avec le score total le plus faible.
 
-Ã°Å¸â€œÂ¦ MatÃƒÂ©riel
+ðŸ“¦ Matériel
 
-150 cartes numÃƒÂ©rotÃƒÂ©es de Ã¢â‚¬â€œ2 ÃƒÂ  +12
+150 cartes numérotées de –2 à +12
 
-Ã°Å¸Æ’Â Mise en place
+ðŸƒÂ Mise en place
 
-MÃƒÂ©langez toutes les cartes.
-Chaque joueur reÃƒÂ§oit 12 cartes, placÃƒÂ©es face cachÃƒÂ©e devant lui, en 4 colonnes Ãƒâ€” 3 rangÃƒÂ©es.
-Les autres cartes forment une pioche. Retournez la premiÃƒÂ¨re carte pour former la dÃƒÂ©fausse.
+Mélangez toutes les cartes.
+Chaque joueur reçoit 12 cartes, placées face cachée devant lui, en 4 colonnes × 3 rangées.
+Les autres cartes forment une pioche. Retournez la première carte pour former la défausse.
 Chaque joueur retourne 2 cartes de son choix parmi ses 12.
 
-Ã°Å¸â€â€ž DÃƒÂ©roulement dÃ¢â‚¬â„¢un tour
+ðŸâ€â€ž Déroulement d’un tour
 
-Ãƒâ‚¬ votre tour, vous disposez de **30 secondes** pour choisir entre deux actions :
+À votre tour, vous disposez de **30 secondes** pour choisir entre deux actions :
 
-1. Prendre la carte de la dÃƒÂ©fausse
-Vous devez lÃ¢â‚¬â„¢ÃƒÂ©changer avec lÃ¢â‚¬â„¢une de vos 12 cartes (face visible ou cachÃƒÂ©e).
-La carte remplacÃƒÂ©e va sur la dÃƒÂ©fausse.
+1. Prendre la carte de la défausse
+Vous devez l’échanger avec l’une de vos 12 cartes (face visible ou cachée).
+La carte remplacée va sur la défausse.
 
-2. Piocher une carte face cachÃƒÂ©e
+2. Piocher une carte face cachée
 Vous regardez la carte :
 - soit vous la gardez et remplacez une de vos cartes (comme ci-dessus),
-- soit vous la refusez Ã¢â€ â€™ vous la posez directement sur la dÃƒÂ©fausse, et dans ce cas vous devez retourner lÃ¢â‚¬â„¢une de vos cartes encore cachÃƒÂ©es.
+- soit vous la refusez → vous la posez directement sur la défausse, et dans ce cas vous devez retourner l’une de vos cartes encore cachées.
 
-Ã¢Å“â€¦ RÃƒÂ¨gles spÃƒÂ©ciales
+✅ Règles spéciales
 
-Trois cartes identiques dans une colonne Ã¢â€ â€™ elles sont immÃƒÂ©diatement dÃƒÂ©faussÃƒÂ©es (valeur 0).
+Trois cartes identiques dans une colonne → elles sont immédiatement défaussées (valeur 0).
 
 Fin de manche :
 
-La manche se termine lorsquÃ¢â‚¬â„¢un joueur a rÃƒÂ©vÃƒÂ©lÃƒÂ© toutes ses cartes.
-Tous les autres joueurs rÃƒÂ©vÃƒÂ¨lent alors leurs cartes restantes. La manche est terminÃƒÂ©e.
+La manche se termine lorsqu’un joueur a révélé toutes ses cartes.
+Tous les autres joueurs révèlent alors leurs cartes restantes. La manche est terminée.
 Tous les joueurs comptent la somme de leurs cartes.
 
-Ã¢Å¡Â Ã¯Â¸Â Attention : si le joueur qui termine nÃ¢â‚¬â„¢a pas le score le plus bas de la manche, il prend une pÃƒÂ©nalitÃƒÂ© de +10 points (son score de manche est doublÃƒÂ© dans la version originale, nous utiliserons +10 pour simplifier).
+⚠ï¸Â Attention : si le joueur qui termine n’a pas le score le plus bas de la manche, il prend une pénalité de +10 points (son score de manche est doublé dans la version originale, nous utiliserons +10 pour simplifier).
 
-Ã°Å¸Ââ€  Fin de partie
+ðŸÂâ€  Fin de partie
 
-On joue autant de manches que nÃƒÂ©cessaire.
-DÃƒÂ¨s quÃ¢â‚¬â„¢un joueur atteint 100 points ou plus, la partie sÃ¢â‚¬â„¢arrÃƒÂªte.
-Le joueur avec le plus petit score cumulÃƒÂ© gagne.
+On joue autant de manches que nécessaire.
+Dès qu’un joueur atteint 100 points ou plus, la partie s’arrête.
+Le joueur avec le plus petit score cumulé gagne.
 """,
     'Poker': """
-Ã¢â„¢Â Ã¯Â¸Â RÃƒÂ¨gles du Poker Ã¢â‚¬â€œ Texas HoldÃ¢â‚¬â„¢em
-Ã°Å¸Å½Â¯ Objectif
+♠ï¸Â Règles du Poker – Texas Hold’em
+ðŸŽ¯ Objectif
 
 Gagner les jetons des autres joueurs en ayant :
-- la meilleure main de 5 cartes lors de lÃ¢â‚¬â„¢abattage,
-- ou en les faisant abandonner (se coucher) grÃƒÂ¢ce aux mises.
+- la meilleure main de 5 cartes lors de l’abattage,
+- ou en les faisant abandonner (se coucher) grâce aux mises.
 
-Ã°Å¸Æ’Â Classement des mains (du plus fort au plus faible)
+ðŸƒÂ Classement des mains (du plus fort au plus faible)
 
-1. Quinte flush royale : 10 Ã¢â‚¬â€œ V Ã¢â‚¬â€œ D Ã¢â‚¬â€œ R Ã¢â‚¬â€œ As de la mÃƒÂªme couleur
-2. Quinte flush : 5 cartes qui se suivent, mÃƒÂªme couleur
-3. CarrÃƒÂ© : 4 cartes identiques
+1. Quinte flush royale : 10 – V – D – R – As de la même couleur
+2. Quinte flush : 5 cartes qui se suivent, même couleur
+3. Carré : 4 cartes identiques
 4. Plein : 3 cartes identiques + 1 paire
-5. Couleur (flush) : 5 cartes de la mÃƒÂªme couleur (non consÃƒÂ©cutives)
-6. Suite (quinte) : 5 cartes qui se suivent (couleurs diffÃƒÂ©rentes)
+5. Couleur (flush) : 5 cartes de la même couleur (non consécutives)
+6. Suite (quinte) : 5 cartes qui se suivent (couleurs différentes)
 7. Brelan : 3 cartes identiques
 8. Double paire
 9. Paire
-10. Carte haute (la plus forte carte si personne nÃ¢â‚¬â„¢a mieux)
+10. Carte haute (la plus forte carte si personne n’a mieux)
 
-Ã°Å¸â€â€ž DÃƒÂ©roulement dÃ¢â‚¬â„¢un coup
+ðŸâ€â€ž Déroulement d’un coup
 
 1. Blinds
-Le joueur ÃƒÂ  gauche du donneur pose la petite blind.
+Le joueur à gauche du donneur pose la petite blind.
 Le joueur suivant pose la grosse blind.
 
 2. Distribution
-Chaque joueur reÃƒÂ§oit 2 cartes fermÃƒÂ©es (les Ã‚Â« cartes privÃƒÂ©es Ã‚Â»).
+Chaque joueur reçoit 2 cartes fermées (les « cartes privées »).
 
-3. Tours dÃ¢â‚¬â„¢enchÃƒÂ¨res et cartes communes
-- PrÃƒÂ©flop : tour de mises avec les cartes privÃƒÂ©es.
-- Flop : 3 cartes communes rÃƒÂ©vÃƒÂ©lÃƒÂ©es. Nouveau tour de mises.
-- Tour : 4e carte commune rÃƒÂ©vÃƒÂ©lÃƒÂ©e. Nouveau tour de mises.
-- RiviÃƒÂ¨re : 5e et derniÃƒÂ¨re carte commune rÃƒÂ©vÃƒÂ©lÃƒÂ©e. Dernier tour de mises.
+3. Tours d’enchères et cartes communes
+- Préflop : tour de mises avec les cartes privées.
+- Flop : 3 cartes communes révélées. Nouveau tour de mises.
+- Tour : 4e carte commune révélée. Nouveau tour de mises.
+- Rivière : 5e et dernière carte commune révélée. Dernier tour de mises.
 
 4. Abattage (showdown)
 Si plusieurs joueurs restent, chacun montre son jeu.
-La meilleure combinaison de 5 cartes (parmi ses 2 cartes privÃƒÂ©es + les 5 communes) gagne le pot.
+La meilleure combinaison de 5 cartes (parmi ses 2 cartes privées + les 5 communes) gagne le pot.
 
-Ã°Å¸â€™Â° Actions possibles
+ðŸ’° Actions possibles
 
-Ãƒâ‚¬ son tour, un joueur dispose de **30 secondes** pour :
-- Checker (Parole) : ne rien miser, seulement si personne nÃ¢â‚¬â„¢a encore misÃƒÂ©.
+À son tour, un joueur dispose de **30 secondes** pour :
+- Checker (Parole) : ne rien miser, seulement si personne n’a encore misé.
 - Miser : poser des jetons dans le pot.
-- Suivre (Call) : ÃƒÂ©galer la mise en cours.
+- Suivre (Call) : égaler la mise en cours.
 - Relancer (Raise) : augmenter la mise.
 - Se coucher (Fold) : abandonner ses cartes et sortir du coup.
 
-Ã°Å¸Ââ€  Fin de partie
+ðŸÂâ€  Fin de partie
 
-Le jeu continue tant quÃ¢â‚¬â„¢il reste au moins 2 joueurs avec des jetons.
+Le jeu continue tant qu’il reste au moins 2 joueurs avec des jetons.
 Le gagnant final est celui qui prend tous les jetons.
 """,
     'Le Juge':
-        "Un joueur est dÃƒÂ©signÃƒÂ© comme 'cible'. Les autres joueurs rÃƒÂ©pondent anonymement ÃƒÂ  une question ÃƒÂ  son sujet. La cible choisit sa rÃƒÂ©ponse prÃƒÂ©fÃƒÂ©rÃƒÂ©e, et l'auteur de cette rÃƒÂ©ponse gagne un point.",
+        "Un joueur est désigné comme 'cible'. Les autres joueurs répondent anonymement à une question à son sujet. La cible choisit sa réponse préférée, et l'auteur de cette réponse gagne un point.",
     'Qui Pourrait le Plus ?':
-        "Une situation est prÃƒÂ©sentÃƒÂ©e. Tous les joueurs votent pour la personne la plus susceptible de faire cette chose. Le joueur qui reÃƒÂ§oit le plus de votes gagne un point (un honneur douteux !).",
+        "Une situation est présentée. Tous les joueurs votent pour la personne la plus susceptible de faire cette chose. Le joueur qui reçoit le plus de votes gagne un point (un honneur douteux !).",
     'Le Menteur':
-        "Mode Classique: Une question est posÃƒÂ©e. Un joueur est secrÃƒÂ¨tement dÃƒÂ©signÃƒÂ© 'menteur' et doit inventer une rÃƒÂ©ponse. Les autres disent la vÃƒÂ©ritÃƒÂ©. Votez pour dÃƒÂ©masquer le menteur.\n\nMode SimplifiÃƒÂ©: Chacun raconte une anecdote (vraie ou false) en rÃƒÂ©ponse ÃƒÂ  un thÃƒÂ¨me, puis dÃƒÂ©clare secrÃƒÂ¨tement sa vÃƒÂ©racitÃƒÂ©. Ensuite, tout le monde vote 'Vrai' ou 'Faux' pour chaque histoire. Vous gagnez des points en devinant correctement et en trompant les autres.",
+        "Mode Classique: Une question est posée. Un joueur est secrètement désigné 'menteur' et doit inventer une réponse. Les autres disent la vérité. Votez pour démasquer le menteur.\n\nMode Simplifié: Chacun raconte une anecdote (vraie ou false) en réponse à un thème, puis déclare secrètement sa véracité. Ensuite, tout le monde vote 'Vrai' ou 'Faux' pour chaque histoire. Vous gagnez des points en devinant correctement et en trompant les autres.",
     'Infiltré & Mr. White':
-        "La plupart des joueurs (Civils) recevront un mot. Un 'InfiltrÃƒÂ©' reÃƒÂ§oit un mot similaire. Et un 'Mr. White' ne reÃƒÂ§oit AUCUN mot. Chacun donne un mot-indice en **30 secondes**. Le but est de dÃƒÂ©masquer les imposteurs par un vote. Si un Civil est ÃƒÂ©liminÃƒÂ©, les imposteurs gagnent.",
+        "La plupart des joueurs (Civils) recevront un mot. Un 'Infiltré' reçoit un mot similaire. Et un 'Mr. White' ne reçoit AUCUN mot. Chacun donne un mot-indice en **30 secondes**. Le but est de démasquer les imposteurs par un vote. Si un Civil est éliminé, les imposteurs gagnent.",
     'Synonyme ou Banni':
-        "Un mot est affichÃƒÂ©. Chaque joueur doit secrÃƒÂ¨tement soumettre un synonyme. Toutes les rÃƒÂ©ponses sont rÃƒÂ©vÃƒÂ©lÃƒÂ©es, puis les joueurs votent pour 'bannir' la proposition la moins pertinente. Le joueur banni perd la manche.",
+        "Un mot est affiché. Chaque joueur doit secrètement soumettre un synonyme. Toutes les réponses sont révélées, puis les joueurs votent pour 'bannir' la proposition la moins pertinente. Le joueur banni perd la manche.",
     'Le Jeu des Catégories':
-        "Plusieurs catÃƒÂ©gories sont sÃƒÂ©lectionnÃƒÂ©es (3 minimum). Une catÃƒÂ©gorie s'affiche (ex: Marque de voiture). Chacun son tour, chaque joueur doit ÃƒÂ©crire un mot valide (ex: Volvo, CitroÃƒÂ«n) avant la fin de son chrono. Si un joueur ne rÃƒÂ©pond pas ÃƒÂ  temps, il gagne 1 point. C'est celui qui a le moins de points qui gagne.",
+        "Plusieurs catégories sont sélectionnées (3 minimum). Une catégorie s'affiche (ex: Marque de voiture). Chacun son tour, chaque joueur doit écrire un mot valide (ex: Volvo, Citroën) avant la fin de son chrono. Si un joueur ne répond pas à temps, il gagne 1 point. C'est celui qui a le moins de points qui gagne.",
     'Action ou Vérité': """
 **But du jeu**
 Gagner le plus d'XP en réalisant des actions et en répondant à des vérités !
@@ -468,416 +472,416 @@ Gagner le plus d'XP en réalisant des actions et en répondant à des vérités 
 - Le bouton "Fin de manche" permet de clôturer la partie
 """,
     'Jeu de la Pièce':
-        "Une question secrÃƒÂ¨te est affichÃƒÂ©e. Le joueur dÃƒÂ©signÃƒÂ© choisit 'Pile' ou 'Face'. Si son choix est incorrect, il doit rÃƒÂ©vÃƒÂ©ler la question et y rÃƒÂ©pondre honnÃƒÂªtement.",
+        "Une question secrète est affichée. Le joueur désigné choisit 'Pile' ou 'Face'. Si son choix est incorrect, il doit révéler la question et y répondre honnêtement.",
     'Le Dilemme':
-        "Le joueur dÃƒÂ©signÃƒÂ© doit rÃƒÂ©pondre ÃƒÂ  un dilemme cornÃƒÂ©lien. Il n'y a pas de bonne ou de mauvaise rÃƒÂ©ponse, juste des choix difficiles !",
+        "Le joueur désigné doit répondre à un dilemme cornélien. Il n'y a pas de bonne ou de mauvaise réponse, juste des choix difficiles !",
     'Codenames':
-        "Deux ÃƒÂ©quipes sÃ¢â‚¬â„¢affrontent. Chaque ÃƒÂ©quipe doit retrouver tous ses mots parmi 25, grÃƒÂ¢ce aux indices donnÃƒÂ©s par son maÃƒÂ®tre-espion. Attention : un mot Ã¢â‚¬Å“assassinÃ¢â‚¬Â fait perdre immÃƒÂ©diatement ! En mode local, le maÃƒÂ®tre-espion regarde la carte sur l'ÃƒÂ©cran et guide son ÃƒÂ©quipe. En multijoueur, le jeu gÃƒÂ¨re les rÃƒÂ´les et la carte-clÃƒÂ©.",
+        "Deux équipes s’affrontent. Chaque équipe doit retrouver tous ses mots parmi 25, grâce aux indices donnés par son maître-espion. Attention : un mot “assassinâ€Â fait perdre immédiatement ! En mode local, le maître-espion regarde la carte sur l'écran et guide son équipe. En multijoueur, le jeu gère les rôles et la carte-clé.",
     'Time\'s Up':
-        "Faire deviner un maximum de cartes en 3 manches (description libre, un mot, mime), avec de moins en moins dÃ¢â‚¬â„¢indices. L'ÃƒÂ©quipe avec le plus de points gagne. En mode local, le tÃƒÂ©lÃƒÂ©phone passe de joueur en joueur pour les devinettes. En multijoueur, le jeu gÃƒÂ¨re les rÃƒÂ´les, les tours et le chronomÃƒÂ¨tre.",
+        "Faire deviner un maximum de cartes en 3 manches (description libre, un mot, mime), avec de moins en moins d’indices. L'équipe avec le plus de points gagne. En mode local, le téléphone passe de joueur en joueur pour les devinettes. En multijoueur, le jeu gère les rôles, les tours et le chronomètre.",
     'On se passe un objet rapidement':
-        "Passez le tÃƒÂ©lÃƒÂ©phone de main en main le plus vite possible. Quand la musique ou le chrono s'arrÃƒÂªte, la personne qui a le tÃƒÂ©lÃƒÂ©phone doit rÃƒÂ©pondre ÃƒÂ  une question drÃƒÂ´le ou piquante. IdÃƒÂ©al pour briser la glace !",
+        "Passez le téléphone de main en main le plus vite possible. Quand la musique ou le chrono s'arrête, la personne qui a le téléphone doit répondre à une question drôle ou piquante. Idéal pour briser la glace !",
     'Devine Tête':
-        "Un joueur tient le tÃƒÂ©lÃƒÂ©phone sur son front. Les autres dÃƒÂ©crivent le mot affichÃƒÂ©. Inclinez le tÃƒÂ©lÃƒÂ©phone vers le bas pour 'devinÃƒÂ©', vers le haut pour 'passer'.",
+        "Un joueur tient le téléphone sur son front. Les autres décrivent le mot affiché. Inclinez le téléphone vers le bas pour 'deviné', vers le haut pour 'passer'.",
     'Petit Bac':
-        "Trouvez des mots correspondant ÃƒÂ  des catÃƒÂ©gories donnÃƒÂ©es, commenÃƒÂ§ant par une lettre spÃƒÂ©cifique. Marquez des points pour les rÃƒÂ©ponses uniques et correctes.",
+        "Trouvez des mots correspondant à des catégories données, commençant par une lettre spécifique. Marquez des points pour les réponses uniques et correctes.",
     'Président': """
 **But du jeu**
-Le but est dÃ¢â‚¬â„¢ÃƒÂªtre le premier ÃƒÂ  se dÃƒÂ©barrasser de toutes ses cartes pour devenir Président. Le dernier joueur avec des cartes en main devient le Trou du cul.
+Le but est d’être le premier à se débarrasser de toutes ses cartes pour devenir Président. Le dernier joueur avec des cartes en main devient le Trou du cul.
 
-**MatÃƒÂ©riel et Joueurs**
+**Matériel et Joueurs**
 -   **Cartes** : Un jeu de 52 cartes.
--   **Joueurs** : 3 ÃƒÂ  6 joueurs.
+-   **Joueurs** : 3 à 6 joueurs.
 
 **Valeur des Cartes**
-L'ordre des cartes, de la plus faible ÃƒÂ  la plus forte, est :
+L'ordre des cartes, de la plus faible à la plus forte, est :
 **3, 4, 5, 6, 7, 8, 9, 10, Valet, Dame, Roi, As, 2.**
 Le **2** est la carte la plus forte et peut battre n'importe quelle autre carte ou combinaison.
 
-**DÃƒÂ©roulement d'une Manche**
-1.  **Distribution** : Toutes les cartes sont distribuÃƒÂ©es ÃƒÂ©quitablement entre les joueurs.
+**Déroulement d'une Manche**
+1.  **Distribution** : Toutes les cartes sont distribuées équitablement entre les joueurs.
 2.  **Premier Tour** :
-    -   Pour la toute premiÃƒÂ¨re partie, le joueur qui possÃƒÂ¨de le **3 de TrÃƒÂ¨fle (Ã¢â„¢Â£3)** commence. Il doit obligatoirement jouer cette carte (seule ou avec d'autres 3).
-    -   Pour les manches suivantes, le **Trou du cul** de la manche prÃƒÂ©cÃƒÂ©dente commence.
+    -   Pour la toute première partie, le joueur qui possède le **3 de Trèfle (♣3)** commence. Il doit obligatoirement jouer cette carte (seule ou avec d'autres 3).
+    -   Pour les manches suivantes, le **Trou du cul** de la manche précédente commence.
 3.  **Jouer des cartes** : Le premier joueur pose sur la table :
     -   Une seule carte (ex: un 7).
     -   Une paire (ex: deux 8).
     -   Un brelan (ex: trois Valets).
-    -   Un carrÃƒÂ© (ex: quatre 5).
-4.  **Suite du tour** : Le joueur suivant (dans le sens des aiguilles d'une montre) dispose de **30 secondes** pour jouer le **mÃƒÂªme nombre de cartes** mais d'une **valeur supÃƒÂ©rieure**.
+    -   Un carré (ex: quatre 5).
+4.  **Suite du tour** : Le joueur suivant (dans le sens des aiguilles d'une montre) dispose de **30 secondes** pour jouer le **même nombre de cartes** mais d'une **valeur supérieure**.
     -   _Exemple : Si un joueur pose une paire de 6, le suivant doit poser une paire de 7, de Dames, d'As, etc._
-5.  **Passer son tour** : Si un joueur ne peut ou ne veut pas jouer, il doit passer son tour. Une fois qu'un joueur a passÃƒÂ©, il ne peut plus rejouer jusqu'ÃƒÂ  la fin du pli en cours.
-6.  **Fin d'un pli** : Le pli se termine quand tous les joueurs ont passÃƒÂ© leur tour. Le dernier joueur ÃƒÂ  avoir posÃƒÂ© des cartes remporte le pli, ramasse les cartes de la table (les met de cÃƒÂ´tÃƒÂ©) et commence le pli suivant en jouant ce qu'il souhaite.
-7.  **Le pouvoir du 2** : Jouer un ou plusieurs **2** bat n'importe quelle combinaison et met fin au pli instantanÃƒÂ©ment. La personne qui a jouÃƒÂ© le 2 remporte le pli et recommence ÃƒÂ  jouer.
+5.  **Passer son tour** : Si un joueur ne peut ou ne veut pas jouer, il doit passer son tour. Une fois qu'un joueur a passé, il ne peut plus rejouer jusqu'à la fin du pli en cours.
+6.  **Fin d'un pli** : Le pli se termine quand tous les joueurs ont passé leur tour. Le dernier joueur à avoir posé des cartes remporte le pli, ramasse les cartes de la table (les met de côté) et commence le pli suivant en jouant ce qu'il souhaite.
+7.  **Le pouvoir du 2** : Jouer un ou plusieurs **2** bat n'importe quelle combinaison et met fin au pli instantanément. La personne qui a joué le 2 remporte le pli et recommence à jouer.
     -   _Attention : pour battre une paire, il faut jouer une paire de 2 !_
 
-**Fin de la Manche et RÃƒÂ´les**
--   DÃƒÂ¨s qu'un joueur n'a plus de cartes, il a terminÃƒÂ©. La partie continue jusqu'ÃƒÂ  ce qu'il ne reste plus qu'un seul joueur.
--   L'ordre de fin dÃƒÂ©termine les rÃƒÂ´les pour la prochaine manche :
+**Fin de la Manche et Rôles**
+-   Dès qu'un joueur n'a plus de cartes, il a terminé. La partie continue jusqu'à ce qu'il ne reste plus qu'un seul joueur.
+-   L'ordre de fin détermine les rôles pour la prochaine manche :
     -   **1er** : Président
-    -   **2ÃƒÂ¨me** : Vice-Président
+    -   **2ème** : Vice-Président
     -   **Dernier** : Trou du cul
     -   **Avant-dernier** : Vice-Trou du cul
     -   **Les autres** (s'il y en a) : Neutres
 
-**Manche Suivante : L'ÃƒÂ©change des cartes !**
-Avant de commencer la nouvelle manche, les joueurs ÃƒÂ©changent des cartes :
+**Manche Suivante : L'échange des cartes !**
+Avant de commencer la nouvelle manche, les joueurs échangent des cartes :
 -   Le **Trou du cul** donne ses **deux meilleures cartes** au **Président**.
--   Le **Président** lui donne en retour les **deux cartes de son choix** (gÃƒÂ©nÃƒÂ©ralement ses plus mauvaises).
+-   Le **Président** lui donne en retour les **deux cartes de son choix** (généralement ses plus mauvaises).
 -   S'il y a 4 joueurs ou plus, le **Vice-Trou du cul** donne sa **meilleure carte** au **Vice-Président**.
 -   Le **Vice-Président** lui donne en retour la **carte de son choix**.
 
-**RÃƒÂ¨gles SpÃƒÂ©ciales**
--   Ã¢â€ºâ€ **Interdiction de finir par un 2** : Un joueur n'a pas le droit de se dÃƒÂ©barrasser de sa derniÃƒÂ¨re carte si c'est un 2. Ce coup est considÃƒÂ©rÃƒÂ© comme invalide.
--   Ã¢Å“Å  **Variante RÃƒÂ©volution (optionnelle)** : Si un joueur pose un carrÃƒÂ© (4 cartes identiques), il peut annoncer "RÃƒÂ©volution !". L'ordre de valeur des cartes est alors inversÃƒÂ© jusqu'ÃƒÂ  la fin de la manche (le 3 devient la plus forte, et le 2 la plus faible).
+**Règles Spéciales**
+-   â›â€ **Interdiction de finir par un 2** : Un joueur n'a pas le droit de se débarrasser de sa dernière carte si c'est un 2. Ce coup est considéré comme invalide.
+-   ✊ **Variante Révolution (optionnelle)** : Si un joueur pose un carré (4 cartes identiques), il peut annoncer "Révolution !". L'ordre de valeur des cartes est alors inversé jusqu'à la fin de la manche (le 3 devient la plus forte, et le 2 la plus faible).
 """,
     'Skull': """
 **But du jeu**
-RÃƒÂ©ussir deux dÃƒÂ©fis avant les autres joueurs.
+Réussir deux défis avant les autres joueurs.
 
 **Mise en place**
-- Chaque joueur commence avec 4 cartes : 3 Roses et 1 CrÃƒÂ¢ne.
-- Chaque carte posÃƒÂ©e sur le tapis reste liÃƒÂ©e ÃƒÂ  son propriÃƒÂ©taire.
+- Chaque joueur commence avec 4 cartes : 3 Roses et 1 Crâne.
+- Chaque carte posée sur le tapis reste liée à son propriétaire.
 
-**DÃƒÂ©roulement**
-1. Ãƒâ‚¬ son tour, un joueur peut poser une carte face cachÃƒÂ©e sur son tapis.
-2. Quand il ne veut plus poser, il lance un dÃƒÂ©fi en annonÃƒÂ§ant le nombre de cartes qu'il pense pouvoir retourner.
-3. Les autres joueurs peuvent surenchÃƒÂ©rir ou passer.
-4. Le plus haut enchÃƒÂ©risseur devient le challenger et retourne les cartes annoncÃƒÂ©es.
-5. Il retourne d'abord ses propres cartes posÃƒÂ©es, puis celles des autres joueurs si nÃƒÂ©cessaire.
+**Déroulement**
+1. À son tour, un joueur peut poser une carte face cachée sur son tapis.
+2. Quand il ne veut plus poser, il lance un défi en annonçant le nombre de cartes qu'il pense pouvoir retourner.
+3. Les autres joueurs peuvent surenchérir ou passer.
+4. Le plus haut enchérisseur devient le challenger et retourne les cartes annoncées.
+5. Il retourne d'abord ses propres cartes posées, puis celles des autres joueurs si nécessaire.
 
-**RÃƒÂ©solution**
-- Si un CrÃƒÂ¢ne apparaÃƒÂ®t, le dÃƒÂ©fi est perdu.
-- Si le dÃƒÂ©fi est gagnÃƒÂ©, le joueur marque un point. Le premier ÃƒÂ  2 points gagne la partie.
-- Si un dÃƒÂ©fi est perdu, le joueur perd une carte au hasard de sa main restante. S'il perd son CrÃƒÂ¢ne, il doit en dÃƒÂ©fausser une autre immÃƒÂ©diatement.
+**Résolution**
+- Si un Crâne apparaît, le défi est perdu.
+- Si le défi est gagné, le joueur marque un point. Le premier à 2 points gagne la partie.
+- Si un défi est perdu, le joueur perd une carte au hasard de sa main restante. S'il perd son Crâne, il doit en défausser une autre immédiatement.
 """,
     'Pictionary': """
 **But du jeu**
 Faire deviner un mot en dessinant, avant la fin du temps imparti.
 
-**DÃƒÂ©roulement**
-1.  **SÃƒÂ©lection du Dessinateur/Mot** : Un joueur est dÃƒÂ©signÃƒÂ© pour dessiner, et un mot lui est secrÃƒÂ¨tement attribuÃƒÂ©.
-2.  **Dessin** : Le dessinateur a un temps limitÃƒÂ© pour faire deviner le mot en dessinant. Il ne peut ni parler, ni mimer, ni ÃƒÂ©crire des lettres ou chiffres.
+**Déroulement**
+1.  **Sélection du Dessinateur/Mot** : Un joueur est désigné pour dessiner, et un mot lui est secrètement attribué.
+2.  **Dessin** : Le dessinateur a un temps limité pour faire deviner le mot en dessinant. Il ne peut ni parler, ni mimer, ni écrire des lettres ou chiffres.
 3.  **Devinettes** : Les autres joueurs proposent des mots dans un tchat.
-4.  **Validation** : Le dessinateur voit les propositions dans le tchat et clique sur un bouton "TrouvÃƒÂ© !" ÃƒÂ  cÃƒÂ´tÃƒÂ© du bon message pour dÃƒÂ©signer le gagnant.
-5.  **Points** : Le joueur qui a trouvÃƒÂ© et le dessinateur gagnent un point.
-6.  **Tour Suivant** : Un nouveau dessinateur est dÃƒÂ©signÃƒÂ©.
+4.  **Validation** : Le dessinateur voit les propositions dans le tchat et clique sur un bouton "Trouvé !" à côté du bon message pour désigner le gagnant.
+5.  **Points** : Le joueur qui a trouvé et le dessinateur gagnent un point.
+6.  **Tour Suivant** : Un nouveau dessinateur est désigné.
 
 **Options**
--   **Seulement 30 traits** : Le dessinateur est limitÃƒÂ© ÃƒÂ  30 traits maximum.
+-   **Seulement 30 traits** : Le dessinateur est limité à 30 traits maximum.
 """,
     'Just One': """
 **But du jeu**
-Faire deviner un maximum de mots mystÃƒÂ¨res ÃƒÂ  votre coÃƒÂ©quipier, en ÃƒÂ©crivant chacun un indice d'un seul mot. Les indices identiques ou invalides sont ÃƒÂ©liminÃƒÂ©s.
+Faire deviner un maximum de mots mystères à votre coéquipier, en écrivant chacun un indice d'un seul mot. Les indices identiques ou invalides sont éliminés.
 
-**DÃƒÂ©roulement**
-1.  **SÃƒÂ©lection du Devin** : Un joueur est dÃƒÂ©signÃƒÂ© comme le "Devin" pour le tour. Il ne voit pas le mot mystÃƒÂ¨re.
-2.  **Choix du Mot MystÃƒÂ¨re** : Le Devin choisit un mot parmi une liste (ou le maÃƒÂ®tre du jeu en choisit un).
-3.  **Ãƒâ€°criture des Indices** : Tous les autres joueurs ("Indices") ÃƒÂ©crivent secrÃƒÂ¨tement UN seul mot-indice qui aidera le Devin ÃƒÂ  trouver le mot mystÃƒÂ¨re.
-4.  **Filtrage des Indices** : Tous les indices sont rÃƒÂ©vÃƒÂ©lÃƒÂ©s. Les indices identiques (mÃƒÂªme si orthographiÃƒÂ©s diffÃƒÂ©remment, ex: "chat" et "chats") ou invalides (trÃƒÂ¨s proches du mot mystÃƒÂ¨re, inventÃƒÂ©s, etc.) sont ÃƒÂ©liminÃƒÂ©s. Seuls les indices uniques et valides sont montrÃƒÂ©s au Devin.
-5.  **Devinette** : Le Devin regarde les indices restants et tente de deviner le mot mystÃƒÂ¨re. Il n'a qu'UNE seule tentative.
+**Déroulement**
+1.  **Sélection du Devin** : Un joueur est désigné comme le "Devin" pour le tour. Il ne voit pas le mot mystère.
+2.  **Choix du Mot Mystère** : Le Devin choisit un mot parmi une liste (ou le maître du jeu en choisit un).
+3.  **Écriture des Indices** : Tous les autres joueurs ("Indices") écrivent secrètement UN seul mot-indice qui aidera le Devin à trouver le mot mystère.
+4.  **Filtrage des Indices** : Tous les indices sont révélés. Les indices identiques (même si orthographiés différemment, ex: "chat" et "chats") ou invalides (très proches du mot mystère, inventés, etc.) sont éliminés. Seuls les indices uniques et valides sont montrés au Devin.
+5.  **Devinette** : Le Devin regarde les indices restants et tente de deviner le mot mystère. Il n'a qu'UNE seule tentative.
 6.  **Score** :
-    -   Si le Devin trouve le mot mystÃƒÂ¨re : L'ÃƒÂ©quipe gagne 1 point.
-    -   Si le Devin ne trouve pas le mot mystÃƒÂ¨re : 0 point.
-    -   Si le Devin ne donne pas de rÃƒÂ©ponse : 0 point.
+    -   Si le Devin trouve le mot mystère : L'équipe gagne 1 point.
+    -   Si le Devin ne trouve pas le mot mystère : 0 point.
+    -   Si le Devin ne donne pas de réponse : 0 point.
 
 **Exemples d'indices invalides :**
--   Mot mystÃƒÂ¨re: "Chat". Indices invalides: "chaton", "fÃƒÂ©lin", "miaou", "minou".
--   Indices identiques: Si 2 joueurs ÃƒÂ©crivent "animal" pour "Chat", "animal" est ÃƒÂ©liminÃƒÂ©.
+-   Mot mystère: "Chat". Indices invalides: "chaton", "félin", "miaou", "minou".
+-   Indices identiques: Si 2 joueurs écrivent "animal" pour "Chat", "animal" est éliminé.
 """,
     'Le Roi des Mèmes':
-        "Chaque joueur reÃƒÂ§oit le mÃƒÂªme mÃƒÂ¨me. Il doit ajouter la description la plus drÃƒÂ´le. Ensuite, toutes les descriptions sont rÃƒÂ©vÃƒÂ©lÃƒÂ©es aux autres joueurs qui votent pour la plus drÃƒÂ´le. L'auteur de la description qui reÃƒÂ§oit le plus de votes gagne un point.",
+        "Chaque joueur reçoit le même mème. Il doit ajouter la description la plus drôle. Ensuite, toutes les descriptions sont révélées aux autres joueurs qui votent pour la plus drôle. L'auteur de la description qui reçoit le plus de votes gagne un point.",
 
     'Loup-Garou': """
 **But du jeu**
--   Pour les **Villageois** : Ãƒâ€°liminer tous les Loups-Garous, le Loup Blanc, le Rat Malade (sauf le Mercenaire s'il gagne).
--   Pour les **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard) : Ãƒâ€°liminer tous les Villageois.
--   Pour les **Solitaires** : Objectif spÃƒÂ©cifique ÃƒÂ  chacun (Loup Blanc : ÃƒÂªtre seul ; Mercenaire : tuer sa cible au J1 ; Rat Malade : contaminer tous).
--   Pour les **Amoureux** (si Loup + Villageois) : ÃƒÅ tre les deux seuls survivants.
+-   Pour les **Villageois** : Éliminer tous les Loups-Garous, le Loup Blanc, le Rat Malade (sauf le Mercenaire s'il gagne).
+-   Pour les **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard) : Éliminer tous les Villageois.
+-   Pour les **Solitaires** : Objectif spécifique à chacun (Loup Blanc : être seul ; Mercenaire : tuer sa cible au J1 ; Rat Malade : contaminer tous).
+-   Pour les **Amoureux** (si Loup + Villageois) : Être les deux seuls survivants.
 
-**DÃƒÂ©roulement**
+**Déroulement**
 Le jeu alterne entre des phases de **nuit** et de **jour**.
 
 **La Nuit**
 1.  Le meneur de jeu (l'application) annonce que le village s'endort.
-2.  DiffÃƒÂ©rents personnages se rÃƒÂ©veillent tour ÃƒÂ  tour pour utiliser leurs pouvoirs :
-    -   **Cupidon** (premiÃƒÂ¨re nuit seulement) : DÃƒÂ©signe deux joueurs qui tomberont amoureux. S'ils sont un Loup et un Villageois, leur objectif change.
-    -   L'**HÃƒÂ©ritier** (premiÃƒÂ¨re nuit seulement) : DÃƒÂ©signe un testateur.
-    -   La **Voyante** se rÃƒÂ©veille et dÃƒÂ©signe un joueur pour dÃƒÂ©couvrir son vrai rÃƒÂ´le. (Ne dÃƒÂ©tecte pas l'infection du Loup Noir).
-    -   Le **Mentaliste** (passif) perÃƒÂ§oit l'issue du vote du village.
-    -   Le **Rat Malade** : Contamine deux joueurs (qui connaÃƒÂ®tront les autres contaminÃƒÂ©s).
-    -   Les **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - votent ensemble) se rÃƒÂ©veillent, se concertent et dÃƒÂ©signent une victime ÃƒÂ  dÃƒÂ©vorer.
-        -   Le **Loup Noir** peut, une fois, transformer la victime en Loup-Garou infectÃƒÂ© (qui garde ses pouvoirs et devient Loup). Le Mentaliste et Fossoyeur peuvent dÃƒÂ©tecter l'infectÃƒÂ©, la Voyante non.
-    -   Le **Loup Blanc** (une nuit sur deux) : DÃƒÂ©vore un joueur de son choix (traverse les protections).
-    -   La **SorciÃƒÂ¨re** se rÃƒÂ©veille. Elle voit la victime des loups et peut utiliser une de ses deux potions (une seule fois par partie) : une potion de **guÃƒÂ©rison** pour sauver la victime, ou une potion d'**empoisonnement** pour tuer quelquÃ¢â‚¬â„¢un.
-    -   Le **Pyromancien** : Choisit d'entreposer un tonneau de feu grÃƒÂ©geois ou de faire exploser ceux dÃƒÂ©jÃƒÂ  placÃƒÂ©s (doit ÃƒÂªtre vivant au matin).
-    -   Le **NÃƒÂ©cromancien** : Peut communiquer avec les morts.
+2.  Différents personnages se réveillent tour à tour pour utiliser leurs pouvoirs :
+    -   **Cupidon** (première nuit seulement) : Désigne deux joueurs qui tomberont amoureux. S'ils sont un Loup et un Villageois, leur objectif change.
+    -   L'**Héritier** (première nuit seulement) : Désigne un testateur.
+    -   La **Voyante** se réveille et désigne un joueur pour découvrir son vrai rôle. (Ne détecte pas l'infection du Loup Noir).
+    -   Le **Mentaliste** (passif) perçoit l'issue du vote du village.
+    -   Le **Rat Malade** : Contamine deux joueurs (qui connaîtront les autres contaminés).
+    -   Les **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - votent ensemble) se réveillent, se concertent et désignent une victime à dévorer.
+        -   Le **Loup Noir** peut, une fois, transformer la victime en Loup-Garou infecté (qui garde ses pouvoirs et devient Loup). Le Mentaliste et Fossoyeur peuvent détecter l'infecté, la Voyante non.
+    -   Le **Loup Blanc** (une nuit sur deux) : Dévore un joueur de son choix (traverse les protections).
+    -   La **Sorcière** se réveille. Elle voit la victime des loups et peut utiliser une de ses deux potions (une seule fois par partie) : une potion de **guérison** pour sauver la victime, ou une potion d'**empoisonnement** pour tuer quelqu’un.
+    -   Le **Pyromancien** : Choisit d'entreposer un tonneau de feu grégeois ou de faire exploser ceux déjà placés (doit être vivant au matin).
+    -   Le **Nécromancien** : Peut communiquer avec les morts.
 
 **Le Jour**
-1.  Le village se rÃƒÂ©veille. L'application annonce qui est mort pendant la nuit.
-2.  Les joueurs morts rÃƒÂ©vÃƒÂ¨lent leur rÃƒÂ´le et sont ÃƒÂ©liminÃƒÂ©s (ils ne peuvent plus communiquer, sauf le NÃƒÂ©cromancien avec les morts).
+1.  Le village se réveille. L'application annonce qui est mort pendant la nuit.
+2.  Les joueurs morts révèlent leur rôle et sont éliminés (ils ne peuvent plus communiquer, sauf le Nécromancien avec les morts).
     -   Le **Loup Bavard** : Doit prononcer un mot secret sous peine de mourir au coucher du soleil (sauf si Dictateur prend le pouvoir).
-3.  Les survivants dÃƒÂ©battent pour essayer de dÃƒÂ©masquer les imposteurs.
-4.  AprÃƒÂ¨s les discussions, tous les joueurs votent pour ÃƒÂ©liminer un suspect.
-    -   Le **Dictateur** (une fois) : Peut s'emparer du vote. S'il ÃƒÂ©limine un loup, il devient Maire ; sinon, il meurt.
-    -   Le **Capitaine** : Son vote compte double. S'il est ÃƒÂ©liminÃƒÂ©, il doit dÃƒÂ©signer un successeur avant de mourir.
-    -   Le **Mercenaire** : Si sa cible est ÃƒÂ©liminÃƒÂ©e le premier jour, il gagne seul. Sinon, il devient Villageois.
-5.  Le joueur qui reÃƒÂ§oit le plus de votes est ÃƒÂ©liminÃƒÂ©, rÃƒÂ©vÃƒÂ¨le son rÃƒÂ´le, et est hors du jeu.
-    -   Le **Chasseur** : S'il est ÃƒÂ©liminÃƒÂ© (de jour comme de nuit), il a le pouvoir d'amener un autre joueur avec lui.
-    -   Le **Fossoyeur** : Ãƒâ‚¬ sa mort, il dÃƒÂ©signe deux joueurs (un du camp opposÃƒÂ©, un de son camp).
+3.  Les survivants débattent pour essayer de démasquer les imposteurs.
+4.  Après les discussions, tous les joueurs votent pour éliminer un suspect.
+    -   Le **Dictateur** (une fois) : Peut s'emparer du vote. S'il élimine un loup, il devient Maire ; sinon, il meurt.
+    -   Le **Capitaine** : Son vote compte double. S'il est éliminé, il doit désigner un successeur avant de mourir.
+    -   Le **Mercenaire** : Si sa cible est éliminée le premier jour, il gagne seul. Sinon, il devient Villageois.
+5.  Le joueur qui reçoit le plus de votes est éliminé, révèle son rôle, et est hors du jeu.
+    -   Le **Chasseur** : S'il est éliminé (de jour comme de nuit), il a le pouvoir d'amener un autre joueur avec lui.
+    -   Le **Fossoyeur** : À sa mort, il désigne deux joueurs (un du camp opposé, un de son camp).
     -   Les **Amoureux** : Si l'un meurt, l'autre le suit de chagrin.
-    -   L'**HÃƒÂ©ritier** : Si son testateur meurt, il prend son rÃƒÂ´le (sauf si mort ou contaminÃƒÂ©).
+    -   L'**Héritier** : Si son testateur meurt, il prend son rôle (sauf si mort ou contaminé).
 6.  Une nouvelle nuit commence.
 
 **Conditions de Victoire**
--   **Villageois** : Ãƒâ€°liminer tous les Loups-Garous, Loup Blanc, Rat Malade.
--   **Loups-Garous** (meute) : ÃƒÅ tre ÃƒÂ©gal ou supÃƒÂ©rieur en nombre aux Villageois.
--   **Loup Blanc** : ÃƒÅ tre le seul survivant.
+-   **Villageois** : Éliminer tous les Loups-Garous, Loup Blanc, Rat Malade.
+-   **Loups-Garous** (meute) : Être égal ou supérieur en nombre aux Villageois.
+-   **Loup Blanc** : Être le seul survivant.
 -   **Mercenaire** : Tuer sa cible le premier jour.
 -   **Rat Malade** : Contaminer tous les joueurs vivants.
--   **Amoureux** (Loup + Villageois) : ÃƒÅ tre les deux seuls survivants.
+-   **Amoureux** (Loup + Villageois) : Être les deux seuls survivants.
 
 **Notes importantes**
--   Le **Chaperon Rouge** est protÃƒÂ©gÃƒÂ© par le Chasseur contre les Loups-Garous tant que le Chasseur est en vie.
--   Le **Garde** protÃƒÂ¨ge une cible des Loups-Garous (ne peut pas protÃƒÂ©ger deux fois la mÃƒÂªme personne).
+-   Le **Chaperon Rouge** est protégé par le Chasseur contre les Loups-Garous tant que le Chasseur est en vie.
+-   Le **Garde** protège une cible des Loups-Garous (ne peut pas protéger deux fois la même personne).
 -   Les pouvoirs du Loup Blanc ignorent les protections.
--   Le Pyromancien doit ÃƒÂªtre vivant au matin pour que ses tonneaux explosent.
+-   Le Pyromancien doit être vivant au matin pour que ses tonneaux explosent.
 """,
     'Loup Noir':
-        "Vaincre les villageois est son objectif. Durant la nuit il se rÃƒÂ©veille avec les autres loups-garous. Une fois dans la partie, il pourra changer leur victime en loup-garou. Le joueur infectÃƒÂ© conserve son rÃƒÂ´le et ses pouvoirs, et cumule les propriÃƒÂ©tÃƒÂ©s d'un Loup-Garou : il se rÃƒÂ©veille la nuit avec les loups pour voter, et gagne la partie en ÃƒÂ©liminant l'ensemble des innocents. La voyante ne peut pas connaÃƒÂ®tre son identitÃƒÂ© de Loup-Garou, ce qui rend le joueur plus difficile ÃƒÂ  identifier et plus puissant. A lÃ¢â‚¬â„¢inverse, le Mentaliste et le Fossoyeur peuvent trouver lÃ¢â‚¬â„¢infectÃƒÂ© grÃƒÂ¢ce ÃƒÂ  leur pouvoir.",
+        "Vaincre les villageois est son objectif. Durant la nuit il se réveille avec les autres loups-garous. Une fois dans la partie, il pourra changer leur victime en loup-garou. Le joueur infecté conserve son rôle et ses pouvoirs, et cumule les propriétés d'un Loup-Garou : il se réveille la nuit avec les loups pour voter, et gagne la partie en éliminant l'ensemble des innocents. La voyante ne peut pas connaître son identité de Loup-Garou, ce qui rend le joueur plus difficile à identifier et plus puissant. A l’inverse, le Mentaliste et le Fossoyeur peuvent trouver l’infecté grâce à leur pouvoir.",
     'Loup Bavard':
-        "Vaincre les villageois est son objectif. Chaque jour, il reÃƒÂ§oit un message lui indiquant un mot qu'il doit prononcer avant le coucher du soleil, s'il veut rester en vie. Le Loup Bavard est donc un Loup-Garou avec une contrainte supplÃƒÂ©mentaire. Il meurt ÃƒÂ  la fin de la journÃƒÂ©e s'il n'a pas rÃƒÂ©ussi ÃƒÂ  placer son mot. Il n'a aucun mot ÃƒÂ  placer lorsque le Dictateur prend le pouvoir, sauf si le pouvoir est pris au deuxiÃƒÂ¨me tour lors de l'ÃƒÂ©lection du maire. Si le Dictateur meurt la nuit ou au matin alors quÃ¢â‚¬â„¢il avait activÃƒÂ© son pouvoir, le Loup Bavard nÃ¢â‚¬â„¢a pas de mot !",
+        "Vaincre les villageois est son objectif. Chaque jour, il reçoit un message lui indiquant un mot qu'il doit prononcer avant le coucher du soleil, s'il veut rester en vie. Le Loup Bavard est donc un Loup-Garou avec une contrainte supplémentaire. Il meurt à la fin de la journée s'il n'a pas réussi à placer son mot. Il n'a aucun mot à placer lorsque le Dictateur prend le pouvoir, sauf si le pouvoir est pris au deuxième tour lors de l'élection du maire. Si le Dictateur meurt la nuit ou au matin alors qu’il avait activé son pouvoir, le Loup Bavard n’a pas de mot !",
     'Loup Blanc':
-        "Finir seul survivant est son objectif, il se rÃƒÂ©veille la nuit avec les autres loups-garous qui le croient alliÃƒÂ©. Une nuit sur deux, il peut dÃƒÂ©vorer un autre joueur de son choix. Ãƒâ‚¬ partir de la deuxiÃƒÂ¨me nuit et toutes les deux nuits, le Loup Blanc a la possibilitÃƒÂ© de dÃƒÂ©vorer un joueur ou un Loup-Garou durant son vote de Loup Blanc (aprÃƒÂ¨s la sorciÃƒÂ¨re). Le pouvoir du Loup Blanc est supÃƒÂ©rieur aux rÃƒÂ´les de protection. Un Garde protÃƒÂ©gÃƒÂ©, ou un Chaperon Rouge, seront vulnÃƒÂ©rables face au Loup Blanc. MÃƒÂªme si le Loup Blanc venait ÃƒÂ  ÃƒÂªtre infectÃƒÂ© par le Loup Noir, il doit gagner seul. Si le Loup Blanc est en couple, il doit gagner avec son partenaire car il ne pourra jamais ÃƒÂªtre seul survivant.",
+        "Finir seul survivant est son objectif, il se réveille la nuit avec les autres loups-garous qui le croient allié. Une nuit sur deux, il peut dévorer un autre joueur de son choix. À partir de la deuxième nuit et toutes les deux nuits, le Loup Blanc a la possibilité de dévorer un joueur ou un Loup-Garou durant son vote de Loup Blanc (après la sorcière). Le pouvoir du Loup Blanc est supérieur aux rôles de protection. Un Garde protégé, ou un Chaperon Rouge, seront vulnérables face au Loup Blanc. Même si le Loup Blanc venait à être infecté par le Loup Noir, il doit gagner seul. Si le Loup Blanc est en couple, il doit gagner avec son partenaire car il ne pourra jamais être seul survivant.",
     'Mercenaire':
-        "Le premier jour, l'objectif du mercenaire est d'ÃƒÂ©liminer la cible qui lui est attribuÃƒÂ©e. S'il y parvient, il gagne seul la partie instantanÃƒÂ©ment. Sinon, il devient villageois. Le pseudo de la cible du Mercenaire est indiquÃƒÂ© au lever du jour. Le premier jour, le Mercenaire a la possibilitÃƒÂ© de voter ÃƒÂ  la derniÃƒÂ¨re seconde en cas d'ÃƒÂ©galitÃƒÂ© sur sa cible pour influencer le vote en sa faveur et gagner la partie instantanÃƒÂ©ment. MÃƒÂªme en couple, le Mercenaire a la possibilitÃƒÂ© de gagner seul au premier tour.",
+        "Le premier jour, l'objectif du mercenaire est d'éliminer la cible qui lui est attribuée. S'il y parvient, il gagne seul la partie instantanément. Sinon, il devient villageois. Le pseudo de la cible du Mercenaire est indiqué au lever du jour. Le premier jour, le Mercenaire a la possibilité de voter à la dernière seconde en cas d'égalité sur sa cible pour influencer le vote en sa faveur et gagner la partie instantanément. Même en couple, le Mercenaire a la possibilité de gagner seul au premier tour.",
     'Rat Malade':
-        "Son objectif est de contaminer tous les joueurs. Chaque nuit, il peut contaminer deux joueurs. Il gagne la partie lorsque tous les joueurs sont atteints par la maladie. Les joueurs contaminÃƒÂ©s connaissent l'identitÃƒÂ© de tous les autres joueurs contaminÃƒÂ©s. Le Rat Malade ne peut pas se contaminer lui-mÃƒÂªme.",
+        "Son objectif est de contaminer tous les joueurs. Chaque nuit, il peut contaminer deux joueurs. Il gagne la partie lorsque tous les joueurs sont atteints par la maladie. Les joueurs contaminés connaissent l'identité de tous les autres joueurs contaminés. Le Rat Malade ne peut pas se contaminer lui-même.",
     'Simple Villageois':
-        "Son objectif est de vaincre les Loups-Garous. Sa parole est son seul pouvoir de persuasion pour ÃƒÂ©liminer les Loups-Garous. En cas d'ÃƒÂ©galitÃƒÂ© lors du vote journalier et si aucun maire n'est ÃƒÂ©lu, aucun joueur ne meurt. Les votes des Simples Villageois peuvent ÃƒÂªtre dÃƒÂ©cisifs dans la lutte contre les Loups-Garous.",
+        "Son objectif est de vaincre les Loups-Garous. Sa parole est son seul pouvoir de persuasion pour éliminer les Loups-Garous. En cas d'égalité lors du vote journalier et si aucun maire n'est élu, aucun joueur ne meurt. Les votes des Simples Villageois peuvent être décisifs dans la lutte contre les Loups-Garous.",
     'Voyante':
-        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, elle peut connaÃƒÂ®tre le rÃƒÂ´le d'un joueur qu'elle aura choisi. Elle doit aider les innocents sans se faire dÃƒÂ©masquer. La Voyante ne peut pas dÃƒÂ©tecter si un joueur est infectÃƒÂ© par le Loup Noir, elle n'a accÃƒÂ¨s qu'ÃƒÂ  son rÃƒÂ´le. Copier le texte indiquant le rÃƒÂ´le du joueur observÃƒÂ© est considÃƒÂ©rÃƒÂ© comme anti-jeu.",
-    'SorciÃƒÂ¨re':
-        "Son objectif est de vaincre les Loups-Garous. Elle se rÃƒÂ©veille chaque nuit et peut utiliser une de ses deux potions : soigner la victime des Loups-Garous, ou tuer quelquÃ¢â‚¬â„¢un. Elle ne possÃƒÂ¨de qu'un exemplaire de chaque potion. Sa potion de mort outrepasse la protection du Garde ou du Chasseur sur le Chaperon Rouge.",
+        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, elle peut connaître le rôle d'un joueur qu'elle aura choisi. Elle doit aider les innocents sans se faire démasquer. La Voyante ne peut pas détecter si un joueur est infecté par le Loup Noir, elle n'a accès qu'à son rôle. Copier le texte indiquant le rôle du joueur observé est considéré comme anti-jeu.",
+    'Sorcière':
+        "Son objectif est de vaincre les Loups-Garous. Elle se réveille chaque nuit et peut utiliser une de ses deux potions : soigner la victime des Loups-Garous, ou tuer quelqu’un. Elle ne possède qu'un exemplaire de chaque potion. Sa potion de mort outrepasse la protection du Garde ou du Chasseur sur le Chaperon Rouge.",
     'Petite Fille':
-        "Son objectif est de vaincre les Loups-Garous. Elle se lÃƒÂ¨ve la nuit au moment du choix des Loups-Garous pour espionner leurs ÃƒÂ©changes. La Petite Fille voit l'ensemble des messages ÃƒÂ©crits par les Loups la nuit. Cependant, ceux-ci sont anonymisÃƒÂ©s par un pseudo et un avatar alÃƒÂ©atoire.",
+        "Son objectif est de vaincre les Loups-Garous. Elle se lève la nuit au moment du choix des Loups-Garous pour espionner leurs échanges. La Petite Fille voit l'ensemble des messages écrits par les Loups la nuit. Cependant, ceux-ci sont anonymisés par un pseudo et un avatar aléatoire.",
     'Chasseur':
         "Son objectif est de vaincre les Loups-Garous. Lorsque le Chasseur meurt, il a le pouvoir d'amener un autre joueur avec lui dans sa tombe.",
     'Garde':
-        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, il peut protÃƒÂ©ger un joueur diffÃƒÂ©rent contre une attaque des Loups-Garous. Le Garde ne peut pas protÃƒÂ©ger la mÃƒÂªme personne consÃƒÂ©cutivement. Il peut s'auto-protÃƒÂ©ger. Le joueur protÃƒÂ©gÃƒÂ© reste vulnÃƒÂ©rable ÃƒÂ  d'autres attaques telles que la potion de mort de la SorciÃƒÂ¨re.",
+        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, il peut protéger un joueur différent contre une attaque des Loups-Garous. Le Garde ne peut pas protéger la même personne consécutivement. Il peut s'auto-protéger. Le joueur protégé reste vulnérable à d'autres attaques telles que la potion de mort de la Sorcière.",
     'Cupidon':
-        "Son objectif est de vaincre les Loups-Garous. La premiÃƒÂ¨re nuit, il dÃƒÂ©signe deux amoureux. Si l'un meurt, l'autre le suivra dans sa tombe. Cupidon a pour seul pouvoir de nommer les deux amoureux. Une fois dÃƒÂ©signÃƒÂ©s, il devient similaire ÃƒÂ  un Simple Villageois. Il peut s'auto-dÃƒÂ©signer en tant qu'amoureux. Les deux amoureux peuvent appartenir ÃƒÂ  des camps diffÃƒÂ©rents. Si un Loup est couplÃƒÂ© ÃƒÂ  un Villageois, ils devront alors ÃƒÂ©liminer l'ensemble des joueurs pour remporter la partie. Les deux amoureux peuvent discuter ÃƒÂ  tout moment ÃƒÂ  travers un chat privÃƒÂ© activable via le bouton ÃƒÂ  droite de l'endroit oÃƒÂ¹ l'on ÃƒÂ©crit des messages. Le Cupidon ne gagne pas avec le couple mais avec le village ou bien les loups sÃ¢â‚¬â„¢il est infectÃƒÂ©.",
+        "Son objectif est de vaincre les Loups-Garous. La première nuit, il désigne deux amoureux. Si l'un meurt, l'autre le suivra dans sa tombe. Cupidon a pour seul pouvoir de nommer les deux amoureux. Une fois désignés, il devient similaire à un Simple Villageois. Il peut s'auto-désigner en tant qu'amoureux. Les deux amoureux peuvent appartenir à des camps différents. Si un Loup est couplé à un Villageois, ils devront alors éliminer l'ensemble des joueurs pour remporter la partie. Les deux amoureux peuvent discuter à tout moment à travers un chat privé activable via le bouton à droite de l'endroit où l'on écrit des messages. Le Cupidon ne gagne pas avec le couple mais avec le village ou bien les loups s’il est infecté.",
     'Mentaliste':
-        "Son objectif est de vaincre les Loups-Garous. Il peut percevoir l'issue du vote du village 30 secondes avant sa fin. Il peut ainsi dÃƒÂ©terminer si le vote majoritaire du village cible un Loup-Garou ou non, et influencer les joueurs ÃƒÂ  changer leur vote. Contrairement ÃƒÂ  la Voyante, il peut dÃƒÂ©tecter un joueur infectÃƒÂ© par le Loup Noir. En tant que Mentaliste, tu ne peux pas dÃƒÂ©tecter le rat et les contaminÃƒÂ©s.",
-    'NÃƒÂ©cromancien':
+        "Son objectif est de vaincre les Loups-Garous. Il peut percevoir l'issue du vote du village 30 secondes avant sa fin. Il peut ainsi déterminer si le vote majoritaire du village cible un Loup-Garou ou non, et influencer les joueurs à changer leur vote. Contrairement à la Voyante, il peut détecter un joueur infecté par le Loup Noir. En tant que Mentaliste, tu ne peux pas détecter le rat et les contaminés.",
+    'Nécromancien':
         "Vaincre les loups-garous est son objectif. La nuit, il peut communiquer avec les morts, afin d'en tirer des informations capitales...",
     'Fossoyeur':
-        "Vaincre les loups-garous est son objectif. Ãƒâ‚¬ sa mort, le fossoyeur creuse la tombe d'un joueur qu'il choisit et d'un joueur du camp opposÃƒÂ©. Les noms de ces deux joueurs seront annoncÃƒÂ©s...",
+        "Vaincre les loups-garous est son objectif. À sa mort, le fossoyeur creuse la tombe d'un joueur qu'il choisit et d'un joueur du camp opposé. Les noms de ces deux joueurs seront annoncés...",
     'Dictateur':
-        "Vaincre les loups-garous est son objectif. Il peut s'emparer du pouvoir de vote du village une fois dans la partie. S'il exÃƒÂ©cute un loup-garou, il devient Maire, sinon, il meurt. AprÃƒÂ¨s avoir dÃƒÂ©cidÃƒÂ© de faire un coup d'Ãƒâ€°tat, le Dictateur s'empare du vote au lever du jour, ou aprÃƒÂ¨s lÃ¢â‚¬â„¢ÃƒÂ©lection du maire le deuxiÃƒÂ¨me jour.. Si le Dictateur meurt la nuit ou au matin alors quÃ¢â‚¬â„¢il avait activÃƒÂ© son pouvoir, le Loup Bavard nÃ¢â‚¬â„¢a pas de mot !",
+        "Vaincre les loups-garous est son objectif. Il peut s'emparer du pouvoir de vote du village une fois dans la partie. S'il exécute un loup-garou, il devient Maire, sinon, il meurt. Après avoir décidé de faire un coup d'État, le Dictateur s'empare du vote au lever du jour, ou après l’élection du maire le deuxième jour.. Si le Dictateur meurt la nuit ou au matin alors qu’il avait activé son pouvoir, le Loup Bavard n’a pas de mot !",
     'Chaperon Rouge':
-        "Son objectif est de vaincre les Loups-Garous. Tant que le Chasseur est en vie, il est protÃƒÂ©gÃƒÂ© contre les attaques des Loups-Garous. Lorsque les Loups ciblent le Chaperon Rouge alors que le Chasseur est en vie, leur vote ne donne pas la mort. Si le Chasseur meurt, alors le Chaperon Rouge devient similaire ÃƒÂ  un Simple Villageois. ",
+        "Son objectif est de vaincre les Loups-Garous. Tant que le Chasseur est en vie, il est protégé contre les attaques des Loups-Garous. Lorsque les Loups ciblent le Chaperon Rouge alors que le Chasseur est en vie, leur vote ne donne pas la mort. Si le Chasseur meurt, alors le Chaperon Rouge devient similaire à un Simple Villageois. ",
     'Pyromancien':
-        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, le Pyromancien a le choix entre entreposer un tonneau de feu grÃƒÂ©geois chez un joueur, ou dÃƒÂ©clencher leur explosion. Il peut tuer des membres de son propre camp, il doit donc agir avec stratÃƒÂ©gie. Il n'y a pas de nombre limitÃƒÂ© de tonneau ÃƒÂ  placer, mais si le Pyromancien meurt sans avoir dÃƒÂ©clenchÃƒÂ© d'explosion, les joueurs restent en vie. Attention, contrairement ÃƒÂ  la SorciÃƒÂ¨re, le Pyromancien doit ÃƒÂªtre en vie au matin pour que lÃ¢â‚¬â„¢explosion se dÃƒÂ©clenche.",
-    'HÃƒÂ©ritier':
-        "Son objectif est de vaincre les Loups-Garous tant qu'il ne reÃƒÂ§oit pas de nouveau rÃƒÂ´le. La premiÃƒÂ¨re nuit, il dÃƒÂ©signe un testataire qui lui lÃƒÂ©guera son rÃƒÂ´le lors de sa mort. L'HÃƒÂ©ritier ne rÃƒÂ©cupÃƒÂ¨re que les pouvoirs non consommÃƒÂ©s par son testataire (potion de SorciÃƒÂ¨re, prise de pouvoir du Dictateur...), exception pour le Chasseur et le Fossoyeur. Il ne rÃƒÂ©cupÃƒÂ¨re pas l'infection (Loup Noir) ni la contamination (Rat Malade) de son testataire. Il conserve l'infection ou la contamination qu'il avait ÃƒÂ  la base. S'il hÃƒÂ©rite des pouvoirs d'un Loup-Garou, les autres loups sont informÃƒÂ©s qu'il rejoint la meute. S'il hÃƒÂ©rite des pouvoirs d'un Dictateur qui meurt durant la nuit de son coup dÃ¢â‚¬â„¢ÃƒÂ©tat, ce sera ÃƒÂ  lÃ¢â‚¬â„¢HÃƒÂ©ritier dÃ¢â‚¬â„¢en assumer les consÃƒÂ©quences et de faire le coup dÃ¢â‚¬â„¢ÃƒÂ©tat dÃƒÂ¨s son rÃƒÂ©veil.",
+        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, le Pyromancien a le choix entre entreposer un tonneau de feu grégeois chez un joueur, ou déclencher leur explosion. Il peut tuer des membres de son propre camp, il doit donc agir avec stratégie. Il n'y a pas de nombre limité de tonneau à placer, mais si le Pyromancien meurt sans avoir déclenché d'explosion, les joueurs restent en vie. Attention, contrairement à la Sorcière, le Pyromancien doit être en vie au matin pour que l’explosion se déclenche.",
+    'Héritier':
+        "Son objectif est de vaincre les Loups-Garous tant qu'il ne reçoit pas de nouveau rôle. La première nuit, il désigne un testataire qui lui léguera son rôle lors de sa mort. L'Héritier ne récupère que les pouvoirs non consommés par son testataire (potion de Sorcière, prise de pouvoir du Dictateur...), exception pour le Chasseur et le Fossoyeur. Il ne récupère pas l'infection (Loup Noir) ni la contamination (Rat Malade) de son testataire. Il conserve l'infection ou la contamination qu'il avait à la base. S'il hérite des pouvoirs d'un Loup-Garou, les autres loups sont informés qu'il rejoint la meute. S'il hérite des pouvoirs d'un Dictateur qui meurt durant la nuit de son coup d’état, ce sera à l’Héritier d’en assumer les conséquences et de faire le coup d’état dès son réveil.",
     'Dobble': """
 **But du jeu**
-ÃƒÅ tre le plus rapide ÃƒÂ  repÃƒÂ©rer l'unique symbole identique entre la carte au centre et sa propre carte.
+Être le plus rapide à repérer l'unique symbole identique entre la carte au centre et sa propre carte.
 
-**DÃƒÂ©roulement (Mode 'La Tour Infernale')**
-1.  Chaque joueur reÃƒÂ§oit une carte face cachÃƒÂ©e. Le reste des cartes forme une pioche au centre, face visible.
-2.  Au dÃƒÂ©but, tout le monde retourne sa carte.
-3.  Chaque joueur doit trouver le plus vite possible l'unique symbole qui est prÃƒÂ©sent ÃƒÂ  la fois sur sa carte et sur la carte de la pioche.
-4.  Le premier joueur qui trouve le symbole, l'annonce ÃƒÂ  haute voix, prend la carte de la pioche et la place sur sa propre carte.
-5.  Cette nouvelle carte devient sa carte pour le tour suivant. Une nouvelle carte est alors rÃƒÂ©vÃƒÂ©lÃƒÂ©e au centre de la pioche.
-6.  La partie continue jusqu'ÃƒÂ  ce que la pioche soit ÃƒÂ©puisÃƒÂ©e. Le joueur qui a amassÃƒÂ© le plus de cartes ÃƒÂ  la fin gagne !
+**Déroulement (Mode 'La Tour Infernale')**
+1.  Chaque joueur reçoit une carte face cachée. Le reste des cartes forme une pioche au centre, face visible.
+2.  Au début, tout le monde retourne sa carte.
+3.  Chaque joueur doit trouver le plus vite possible l'unique symbole qui est présent à la fois sur sa carte et sur la carte de la pioche.
+4.  Le premier joueur qui trouve le symbole, l'annonce à haute voix, prend la carte de la pioche et la place sur sa propre carte.
+5.  Cette nouvelle carte devient sa carte pour le tour suivant. Une nouvelle carte est alors révélée au centre de la pioche.
+6.  La partie continue jusqu'à ce que la pioche soit épuisée. Le joueur qui a amassé le plus de cartes à la fin gagne !
 """,
     'Uno': """
 **But du jeu**
-Se dÃƒÂ©barrasser de toutes ses cartes en ÃƒÂ©tant le premier !
+Se débarrasser de toutes ses cartes en étant le premier !
 
-**DÃƒÂ©roulement**
-1.  **Distribution** : Chaque joueur reÃƒÂ§oit 7 cartes. Le reste forme la pioche. Une carte est retournÃƒÂ©e pour commencer la pile de dÃƒÂ©fausse.
-2.  **Jouer une carte** : Le joueur dont c'est le tour dispose de **30 secondes** pour poser une carte de sa main sur la pile de dÃƒÂ©fausse. La carte jouÃƒÂ©e doit correspondre ÃƒÂ  la carte du dessus de la pile par :
+**Déroulement**
+1.  **Distribution** : Chaque joueur reçoit 7 cartes. Le reste forme la pioche. Une carte est retournée pour commencer la pile de défausse.
+2.  **Jouer une carte** : Le joueur dont c'est le tour dispose de **30 secondes** pour poser une carte de sa main sur la pile de défausse. La carte jouée doit correspondre à la carte du dessus de la pile par :
     *   **Couleur** (ex: Rouge sur Rouge)
-    *   **NumÃƒÂ©ro** (ex: un 7 Bleu sur un 7 Vert)
+    *   **Numéro** (ex: un 7 Bleu sur un 7 Vert)
     *   **Symbole** (ex: un "+2" Jaune sur un "+2" Rouge)
-    *   **Carte SpÃƒÂ©ciale** (Joker, +4, etc.)
-3.  **Piocher** : Si un joueur ne peut pas jouer de carte dans le temps imparti, il doit piocher une carte du paquet. S'il peut jouer cette carte, il peut le faire immÃƒÂ©diatement. Sinon, son tour se termine.
-4.  **Cartes SpÃƒÂ©ciales** :
+    *   **Carte Spéciale** (Joker, +4, etc.)
+3.  **Piocher** : Si un joueur ne peut pas jouer de carte dans le temps imparti, il doit piocher une carte du paquet. S'il peut jouer cette carte, il peut le faire immédiatement. Sinon, son tour se termine.
+4.  **Cartes Spéciales** :
     *   **+2 (Deux cartes)** : Le joueur suivant pioche 2 cartes et passe son tour.
     *   **Sens Interdit (Passe ton tour)** : Le joueur suivant passe son tour.
-    *   **Inversion (Changement de sens)** : Le sens de jeu est inversÃƒÂ©.
-    *   **Joker (Changement de couleur)** : Le joueur choisit la couleur de la prochaine carte ÃƒÂ  jouer. Peut ÃƒÂªtre jouÃƒÂ©e sur n'importe quelle carte.
-    *   **Super Joker +4 (Changement de couleur et Quatre cartes)** : Le joueur choisit la couleur. Le joueur suivant pioche 4 cartes ET passe son tour. Cette carte ne peut ÃƒÂªtre jouÃƒÂ©e que si le joueur n'a AUCUNE autre carte de la couleur demandÃƒÂ©e sur la pile de dÃƒÂ©fausse (sauf s'il bluffe).
+    *   **Inversion (Changement de sens)** : Le sens de jeu est inversé.
+    *   **Joker (Changement de couleur)** : Le joueur choisit la couleur de la prochaine carte à jouer. Peut être jouée sur n'importe quelle carte.
+    *   **Super Joker +4 (Changement de couleur et Quatre cartes)** : Le joueur choisit la couleur. Le joueur suivant pioche 4 cartes ET passe son tour. Cette carte ne peut être jouée que si le joueur n'a AUCUNE autre carte de la couleur demandée sur la pile de défausse (sauf s'il bluffe).
 5.  **Annoncer "UNO"** : Quand un joueur n'a plus qu'une seule carte en main, il doit annoncer "UNO !". S'il ne le fait pas et est pris par un autre joueur (avant que le joueur suivant ne joue ou ne pioche), il doit piocher 2 cartes.
-6.  **Fin de Manche** : La manche se termine lorsqu'un joueur se dÃƒÂ©barrasse de sa derniÃƒÂ¨re carte. Les points sont comptÃƒÂ©s. Le joueur qui atteint 500 points (ou un total dÃƒÂ©fini) gagne la partie.
+6.  **Fin de Manche** : La manche se termine lorsqu'un joueur se débarrasse de sa dernière carte. Les points sont comptés. Le joueur qui atteint 500 points (ou un total défini) gagne la partie.
 
 **Points des cartes :**
-*   Cartes numÃƒÂ©riques (0-9) : Leur valeur faciale.
+*   Cartes numériques (0-9) : Leur valeur faciale.
 *   +2, Sens Interdit, Inversion : 20 points.
 *   Joker, Super Joker +4 : 50 points.
 """,
     'Photo Roulette': """
     ## Principe du jeu
     * Le jeu se joue entre **3 et 10 joueurs**.
-    * Chaque joueur donne accÃƒÂ¨s ÃƒÂ  une partie de sa photothÃƒÂ¨que et choisit des photos ÃƒÂ  partager.
-    * Pendant une partie, une photo est sÃƒÂ©lectionnÃƒÂ©e **alÃƒÂ©atoirement** parmi celles de tous les joueurs, puis affichÃƒÂ©e pendant quelques secondes.
-    * Les joueurs doivent deviner **ÃƒÂ  qui appartient la photo** affichÃƒÂ©e.
+    * Chaque joueur donne accès à une partie de sa photothèque et choisit des photos à partager.
+    * Pendant une partie, une photo est sélectionnée **aléatoirement** parmi celles de tous les joueurs, puis affichée pendant quelques secondes.
+    * Les joueurs doivent deviner **à qui appartient la photo** affichée.
     * Le joueur qui devine correctement le plus de photos gagne la partie.
 
-    ## DÃƒÂ©roulement
-    1.  **SÃƒÂ©lection des photos** : Chaque joueur choisit un certain nombre de photos de sa galerie.
-    2.  **DÃƒÂ©but de la partie** : Une fois que tout le monde est prÃƒÂªt, l'hÃƒÂ´te lance la partie.
+    ## Déroulement
+    1.  **Sélection des photos** : Chaque joueur choisit un certain nombre de photos de sa galerie.
+    2.  **Début de la partie** : Une fois que tout le monde est prêt, l'hôte lance la partie.
     3.  **Tour de jeu** :
-        - Une photo alÃƒÂ©atoire est montrÃƒÂ©e pendant 5 secondes.
-        - Tous les joueurs votent pour deviner le propriÃƒÂ©taire.
-    4.  **RÃƒÂ©sultats** : Les scores sont mis ÃƒÂ  jour aprÃƒÂ¨s chaque tour.
-    5.  **Fin de la partie** : AprÃƒÂ¨s un nombre dÃƒÂ©fini de tours, le joueur avec le plus de points gagne.
+        - Une photo aléatoire est montrée pendant 5 secondes.
+        - Tous les joueurs votent pour deviner le propriétaire.
+    4.  **Résultats** : Les scores sont mis à jour après chaque tour.
+    5.  **Fin de la partie** : Après un nombre défini de tours, le joueur avec le plus de points gagne.
     """,
     'Bataille Navale': """
 **But du jeu**
-Couler tous les navires de l'adversaire avant qu'il ne coule les vÃƒÂ´tres.
+Couler tous les navires de l'adversaire avant qu'il ne coule les vôtres.
 
-**DÃƒÂ©roulement**
-1. **Placement** : Chaque joueur place secrÃƒÂ¨tement sa flotte sur une grille 10x10.
+**Déroulement**
+1. **Placement** : Chaque joueur place secrètement sa flotte sur une grille 10x10.
    - Porte-avions (5 cases)
    - Croiseur (4 cases)
    - Sous-marin (3 cases)
    - Destroyer (3 cases)
    - Patrouilleur (2 cases)
-2. **Tir** : Ãƒâ‚¬ tour de rÃƒÂ´le, les joueurs touchent une case pour tirer.
-3. **RÃƒÂ©sultat** : "TouchÃƒÂ©", "CoulÃƒÂ©" ou "Ãƒâ‚¬ l'eau". 
-4. **Victoire** : Le premier joueur ÃƒÂ  couler toute la flotte adverse gagne.
+2. **Tir** : À tour de rôle, les joueurs touchent une case pour tirer.
+3. **Résultat** : "Touché", "Coulé" ou "À l'eau". 
+4. **Victoire** : Le premier joueur à couler toute la flotte adverse gagne.
 """,
     'Mille Bornes': """
 **But du jeu**
-ÃƒÅ tre le premier ÃƒÂ  atteindre la distance cible (1000 km par dÃƒÂ©faut).
-**DÃƒÂ©roulement**
-- Chaque joueur reÃƒÂ§oit 6 cartes.
-- Ãƒâ‚¬ son tour, jouez une carte (Distance, Attaque, DÃƒÂ©fense, SÃƒÂ©curitÃƒÂ©) ou dÃƒÂ©faussez-vous.
+Être le premier à atteindre la distance cible (1000 km par défaut).
+**Déroulement**
+- Chaque joueur reçoit 6 cartes.
+- À son tour, jouez une carte (Distance, Attaque, Défense, Sécurité) ou défaussez-vous.
 - Les cartes **Attaques** (Stop, Rouge, Essence, Crevaison, Limite) bloquent l'adversaire.
-- Les cartes **DÃƒÂ©fenses** (Vert, Extra Tank, RÃƒÂ©paration, Fin Limite) contrent les attaques.
-- Les cartes **SÃƒÂ©curitÃƒÂ©** annulent une attaque et empÃƒÂªchent qu'elle se reproduise.
-- Les cartes **Distance** (25, 50, 75, 100, 200 km) font avancer votre vÃƒÂ©hicule.
-- Piochez 1 carte ÃƒÂ  la fin de votre tour.
+- Les cartes **Défenses** (Vert, Extra Tank, Réparation, Fin Limite) contrent les attaques.
+- Les cartes **Sécurité** annulent une attaque et empêchent qu'elle se reproduise.
+- Les cartes **Distance** (25, 50, 75, 100, 200 km) font avancer votre véhicule.
+- Piochez 1 carte à la fin de votre tour.
 """,
     'Rami': """
 **But du jeu**
-ÃƒÅ tre le premier ÃƒÂ  se dÃƒÂ©barrasser de toutes ses cartes en formant des combinaisons valides (melds).
+Être le premier à se débarrasser de toutes ses cartes en formant des combinaisons valides (melds).
 
-**DÃƒÂ©roulement d'un tour**
-1. **Piocher** : Prendre la carte du dessus de la dÃƒÂ©fausse OU de la pioche.
-2. **Ãƒâ€°taler (Optionnel)** : Poser des combinaisons valides sur la table.
-   - **SÃƒÂ©quence (Run)** : 3 cartes ou plus de la mÃƒÂªme couleur qui se suivent (ex: 5Ã¢â„¢Â , 6Ã¢â„¢Â , 7Ã¢â„¢Â ). L'As peut ÃƒÂªtre haut ou bas.
-   - **Groupe (Set)** : 3 ou 4 cartes de mÃƒÂªme valeur mais de couleurs diffÃƒÂ©rentes (ex: 8Ã¢â„¢Â¥, 8Ã¢â„¢Â£, 8Ã¢â„¢Â¦).
-3. **DÃƒÂ©fausser** : Se dÃƒÂ©faire d'une carte de sa main sur la dÃƒÂ©fausse.
+**Déroulement d'un tour**
+1. **Piocher** : Prendre la carte du dessus de la défausse OU de la pioche.
+2. **Étaler (Optionnel)** : Poser des combinaisons valides sur la table.
+   - **Séquence (Run)** : 3 cartes ou plus de la même couleur qui se suivent (ex: 5♠, 6♠, 7♠). L'As peut être haut ou bas.
+   - **Groupe (Set)** : 3 ou 4 cartes de même valeur mais de couleurs différentes (ex: 8♥, 8♣, 8♦).
+3. **Défausser** : Se défaire d'une carte de sa main sur la défausse.
 
 **Fin de la manche**
-Le premier joueur qui n'a plus de cartes aprÃƒÂ¨s avoir dÃƒÂ©faussÃƒÂ© gagne. Les autres comptent les points de leurs cartes restantes (Figures = 10, As = 15, autres = valeur faciale). La partie s'arrÃƒÂªte ÃƒÂ  100 points.
+Le premier joueur qui n'a plus de cartes après avoir défaussé gagne. Les autres comptent les points de leurs cartes restantes (Figures = 10, As = 15, autres = valeur faciale). La partie s'arrête à 100 points.
 """,
     'Taboo': """
 **But du jeu**
-Faire deviner un maximum de mots Ã  votre Ã©quipe avant la fin du temps imparti, sans utiliser les mots interdits !
+Faire deviner un maximum de mots à votre équipe avant la fin du temps imparti, sans utiliser les mots interdits !
 
-**DÃ©roulement**
-1. Ã€ chaque tour, un joueur ("l'orateur") tente de faire deviner un mot Ã  son Ã©quipe.
-2. L'orateur ne doit **jamais** prononcer le mot Ã  deviner, ni aucun des mots "Taboo" (mots interdits) affichÃ©s sous le mot cible. Il ne peut pas non plus utiliser de traductions ou des mots de la mÃªme famille.
-3. Si l'orateur utilise un mot Taboo, l'Ã©quipe adverse (ou le juge) signale la faute, la carte est annulÃ©e et l'orateur passe Ã  la suivante.
-4. Chaque mot devinÃ© rapporte un point Ã  l'Ã©quipe.
-5. Le tour se termine quand le temps est Ã©coulÃ©.
+**Déroulement**
+1. À chaque tour, un joueur ("l'orateur") tente de faire deviner un mot à son équipe.
+2. L'orateur ne doit **jamais** prononcer le mot à deviner, ni aucun des mots "Taboo" (mots interdits) affichés sous le mot cible. Il ne peut pas non plus utiliser de traductions ou des mots de la même famille.
+3. Si l'orateur utilise un mot Taboo, l'équipe adverse (ou le juge) signale la faute, la carte est annulée et l'orateur passe à la suivante.
+4. Chaque mot deviné rapporte un point à l'équipe.
+5. Le tour se termine quand le temps est écoulé.
 
 **Fin de partie**
-L'Ã©quipe avec le plus de points aprÃ¨s le nombre de tours dÃ©fini remporte la victoire !
+L'équipe avec le plus de points après le nombre de tours défini remporte la victoire !
 """,
     'Petits Chevaux': """
 **But du jeu**
 Amener vos chevaux au centre du plateau en contournant vos adversaires.
 
-**RÃ¨gles Classiques**
+**Règles Classiques**
 1. **Sortie de base** : Il faut faire un **1** ou un **6** pour sortir un pion.
-2. **Tour bonus** : Faire un **6**, capturer un pion ou terminer le parcours permet de rejouer. (Attention : faire 3 fois un 6 consÃ©cutif annule votre tour !).
-3. **Capture** : Tomber sur un pion adverse le renvoie Ã  sa base (impossible sur les cases protÃ©gÃ©es "Ã‰toiles" ou sur la case de dÃ©part de ce joueur).
-4. **ArrivÃ©e** : Il faut un score exact pour avancer dans l'escalier final.
+2. **Tour bonus** : Faire un **6**, capturer un pion ou terminer le parcours permet de rejouer. (Attention : faire 3 fois un 6 consécutif annule votre tour !).
+3. **Capture** : Tomber sur un pion adverse le renvoie à sa base (impossible sur les cases protégées "Étoiles" ou sur la case de départ de ce joueur).
+4. **Arrivée** : Il faut un score exact pour avancer dans l'escalier final.
 
-**Mode Ã‰quipes (2v2)**
-NÃ©cessite exactement 4 joueurs. Vous Ãªtes alliÃ© avec le joueur face Ã  vous.
-- **Victoire partagÃ©e** : La premiÃ¨re Ã©quipe qui amÃ¨ne un total de 4 pions au centre remporte la partie (ex: 3 pions pour vous et 1 pour votre alliÃ©).
-- **Entraide** : Vous pouvez utiliser votre lancer pour dÃ©placer le pion de votre alliÃ©, mais *uniquement* pour le sortir de sa base (avec un 1 ou 6) ou l'avancer dans son escalier d'arrivÃ©e.
-- **Blocage alliÃ©** : Il est impossible de capturer le pion de votre coÃ©quipier. Si votre mouvement vous fait atterrir sur lui, le coup est invalide.
+**Mode Équipes (2v2)**
+Nécessite exactement 4 joueurs. Vous êtes allié avec le joueur face à vous.
+- **Victoire partagée** : La première équipe qui amène un total de 4 pions au centre remporte la partie (ex: 3 pions pour vous et 1 pour votre allié).
+- **Entraide** : Vous pouvez utiliser votre lancer pour déplacer le pion de votre allié, mais *uniquement* pour le sortir de sa base (avec un 1 ou 6) ou l'avancer dans son escalier d'arrivée.
+- **Blocage allié** : Il est impossible de capturer le pion de votre coéquipier. Si votre mouvement vous fait atterrir sur lui, le coup est invalide.
 """,
     'Cadavre Exquis': """
 **Principe**
-Jeu surrÃ©aliste d'Ã©criture collective.
+Jeu surréaliste d'écriture collective.
 **Variantes**
-- Classique : Chacun Ã©crit un Ã©lÃ©ment de la phrase (Substantif, Adjectif, Verbe, etc.) sans voir les prÃ©cÃ©dents.
-- Continuation : Chacun voit les 3 derniers mots et complÃ¨te la phrase.
-**DÃ©roulement**
-Les feuilles tournent jusqu'Ã  ce que tout le monde ait participÃ©.
+- Classique : Chacun écrit un élément de la phrase (Substantif, Adjectif, Verbe, etc.) sans voir les précédents.
+- Continuation : Chacun voit les 3 derniers mots et complète la phrase.
+**Déroulement**
+Les feuilles tournent jusqu'à ce que tout le monde ait participé.
 """,
     'Blokus': """
 **But du jeu**
-Placer le plus grand nombre de ses piÃ¨ces sur le plateau.
-**RÃ¨gle d'or**
-Chaque nouvelle piÃ¨ce doit toucher au moins une autre piÃ¨ce de la mÃªme couleur par un coin, mais jamais par un cÃ´tÃ©.
-**DÃ©roulement**
+Placer le plus grand nombre de ses pièces sur le plateau.
+**Règle d'or**
+Chaque nouvelle pièce doit toucher au moins une autre pièce de la même couleur par un coin, mais jamais par un côté.
+**Déroulement**
 1. Le premier tour se joue obligatoirement dans le coin du plateau de votre couleur.
-2. Les tours suivants respectent la rÃ¨gle d'or.
+2. Les tours suivants respectent la règle d'or.
 3. Si vous ne pouvez plus jouer, vous passez votre tour.
 **Score**
--1 point par carrÃ© non placÃ©.
-+15 points si toutes les piÃ¨ces sont placÃ©es.
-+5 points bonus si la derniÃ¨re piÃ¨ce posÃ©e est le carrÃ© unique (1x1).
+-1 point par carré non placé.
++15 points si toutes les pièces sont placées.
++5 points bonus si la dernière pièce posée est le carré unique (1x1).
 """,
     'Dominoes': """
 **Objectif**
-ÃŠtre le premier Ã  atteindre le score cible (20, 50 ou 100 points).
+Être le premier à atteindre le score cible (20, 50 ou 100 points).
 
-**DÃ©roulement**
-Chaque joueur reÃ§oit 7 dominos. Ã€ son tour, il doit poser un domino correspondant Ã  l'une des extrÃ©mitÃ©s de la chaÃ®ne. Les doubles se jouent en croix.
+**Déroulement**
+Chaque joueur reçoit 7 dominos. À son tour, il doit poser un domino correspondant à l'une des extrémités de la chaîne. Les doubles se jouent en croix.
 
 **Modes de jeu**
-- **Pioche** : Si vous ne pouvez pas jouer, vous piochez jusqu'Ã  avoir une piÃ¨ce jouable.
-- **BloquÃ©** : Pas de pioche. Si vous ne pouvez pas jouer, vous passez votre tour.
-- **Tous les Cinq** : Le premier double jouÃ© est le "Spinner" (jouable sur 4 cÃ´tÃ©s). Vous marquez des points Ã  chaque coup si la somme des extrÃ©mitÃ©s est un multiple de 5.
+- **Pioche** : Si vous ne pouvez pas jouer, vous piochez jusqu'à avoir une pièce jouable.
+- **Bloqué** : Pas de pioche. Si vous ne pouvez pas jouer, vous passez votre tour.
+- **Tous les Cinq** : Le premier double joué est le "Spinner" (jouable sur 4 côtés). Vous marquez des points à chaque coup si la somme des extrémités est un multiple de 5.
 
 **Fin de tour**
-Si personne ne peut jouer, le tour est bloquÃ©. Les joueurs rÃ©vÃ¨lent leurs mains. Le joueur avec le moins de points remporte le tour et marque la somme des points des mains adverses.
+Si personne ne peut jouer, le tour est bloqué. Les joueurs révèlent leurs mains. Le joueur avec le moins de points remporte le tour et marque la somme des points des mains adverses.
 """,
     'Big Two': """
 **Objectif**
-ÃŠtre le premier joueur Ã  se dÃ©barrasser de toutes ses cartes.
+Être le premier joueur à se débarrasser de toutes ses cartes.
 
-**RÃ¨gles**
+**Règles**
 - Le jeu se joue avec un jeu de 52 cartes.
-- Ordre des cartes (de la plus faible Ã  la plus forte) : 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.
-- Ordre des couleurs (de la plus faible Ã  la plus forte) : Carreaux (D), TrÃ¨fles (C), CÅ“urs (H), Piques (S).
+- Ordre des cartes (de la plus faible à la plus forte) : 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.
+- Ordre des couleurs (de la plus faible à la plus forte) : Carreaux ♦ (D), Trèfles ♣ (C), Cœurs ♥ (H), Piques ♠ (S).
 - Le joueur qui a le 3 de Carreaux commence la partie.
 
 **Combinaisons**
 - **Simple** : 1 carte.
-- **Paire** : 2 cartes de mÃªme rang.
-- **Triple** : 3 cartes de mÃªme rang.
-- **Suite** : 5 cartes de rangs consÃ©cutifs (couleurs mÃ©langÃ©es).
-- **Couleur** : 5 cartes de la mÃªme couleur.
+- **Paire** : 2 cartes de même rang.
+- **Triple** : 3 cartes de même rang.
+- **Suite** : 5 cartes de rangs consécutifs (couleurs mélangées).
+- **Couleur** : 5 cartes de la même couleur.
 - **Full** : 3 cartes d'un rang + 2 cartes d'un autre rang.
-- **CarrÃ©** : 4 cartes de mÃªme rang + 1 carte quelconque.
-- **Quinte Flush** : 5 cartes consÃ©cutives de la mÃªme couleur.
+- **Carré** : 4 cartes de même rang + 1 carte quelconque.
+- **Quinte Flush** : 5 cartes consécutives de la même couleur.
 
-**HiÃ©rarchie des combinaisons de 5 cartes**
-Quinte Flush > CarrÃ© > Full > Couleur > Suite.
-Une combinaison ne peut Ãªtre battue que par une combinaison de mÃªme taille et de valeur supÃ©rieure.
+**Hiérarchie des combinaisons de 5 cartes**
+Quinte Flush > Carré > Full > Couleur > Suite.
+Une combinaison ne peut être battue que par une combinaison de même taille et de valeur supérieure.
 """,
     'Jeu de Dames': """
 **Objectif**
-Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ces.
-**RÃ¨gles**
+Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
+**Règles**
 - Se joue sur un damier 8x8, exclusivement sur les cases sombres.
-- Les piÃ¨ces avancent en diagonale d'une case.
-- Les captures sont **obligatoires** et se font en sautant par-dessus une piÃ¨ce ennemie.
-- Plusieurs captures peuvent Ãªtre enchaÃ®nÃ©es en un seul tour.
-- Lorsqu'une piÃ¨ce atteint la rangÃ©e opposÃ©e, elle est promue en "Dame" et peut se dÃ©placer et capturer en arriÃ¨re.
+- Les pièces avancent en diagonale d'une case.
+- Les captures sont **obligatoires** et se font en sautant par-dessus une pièce ennemie.
+- Plusieurs captures peuvent être enchaînées en un seul tour.
+- Lorsqu'une pièce atteint la rangée opposée, elle est promue en "Dame" et peut se déplacer et capturer en arrière.
 """,
   };
 
@@ -1006,7 +1010,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     'Petit 2': {'length': 2, 'width': 1, 'area': 2, 'image': 'petit2.webp'},
     'Moyen': {'length': 3, 'width': 1, 'area': 3, 'image': 'moyen.webp'},
     'Grand': {'length': 4, 'width': 1, 'area': 4, 'image': 'grand.webp'},
-    'TrÃ¨s Grand': {
+    'Très Grand': {
       'length': 5,
       'width': 1,
       'area': 5,
@@ -1065,22 +1069,22 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
       'name': 'Simple Villageois',
       'camp': 'villageois',
       'minPlayers': 0,
-      'description': 'Un villageois sans pouvoir spÃƒÂ©cial.',
+      'description': 'Un villageois sans pouvoir spécial.',
     },
     {
       'name': 'Loup-Garou',
       'camp': 'loups',
       'minPlayers': 0,
-      'description': 'DÃƒÂ©vore un villageois la nuit.',
+      'description': 'Dévore un villageois la nuit.',
     },
     {
       'name': 'Voyante',
       'camp': 'villageois',
       'minPlayers': 8,
-      'description': 'DÃƒÂ©couvre un rÃƒÂ´le par nuit.',
+      'description': 'Découvre un rôle par nuit.',
     },
     {
-      'name': 'SorciÃƒÂ¨re',
+      'name': 'Sorcière',
       'camp': 'villageois',
       'minPlayers': 8,
       'description': 'Potion de vie et de mort.',
@@ -1101,26 +1105,26 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
       'name': 'Cupidon',
       'camp': 'villageois',
       'minPlayers': 7,
-      'description': 'CrÃƒÂ©e deux amoureux la premiÃƒÂ¨re nuit.',
+      'description': 'Crée deux amoureux la première nuit.',
     },
     {
       'name': 'Garde',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'ProtÃƒÂ¨ge un joueur par nuit.',
+      'description': 'Protège un joueur par nuit.',
     },
     {
       'name': 'Capitaine',
       'camp': 'special',
       'minPlayers': 0,
-      'description': 'Son vote compte double. DÃƒÂ©signe son successeur.',
+      'description': 'Son vote compte double. Désigne son successeur.',
     },
     {
       'name': 'Loup Noir',
       'camp': 'loups',
       'minPlayers': 12,
       'description':
-          'Peut transformer sa victime en loup-garou infectÃƒÂ© une fois.',
+          'Peut transformer sa victime en loup-garou infecté une fois.',
     },
     {
       'name': 'Loup Bavard',
@@ -1132,8 +1136,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
       'name': 'Loup Blanc',
       'camp': 'solitaire',
       'minPlayers': 12,
-      'description':
-          'Objectif ÃƒÂªtre seul survivant. DÃƒÂ©vore une nuit sur deux.',
+      'description': 'Objectif être seul survivant. Dévore une nuit sur deux.',
     },
     {
       'name': 'Mercenaire',
@@ -1151,10 +1154,10 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
       'name': 'Mentaliste',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'ConnaÃƒÂ®t l\'issue du vote et dÃƒÂ©tecte l\'infectÃƒÂ©.',
+      'description': 'Connaît l\'issue du vote et détecte l\'infecté.',
     },
     {
-      'name': 'NÃƒÂ©cromancien',
+      'name': 'Nécromancien',
       'camp': 'villageois',
       'minPlayers': 10,
       'description': 'Communique avec les morts la nuit.',
@@ -1163,7 +1166,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
       'name': 'Fossoyeur',
       'camp': 'villageois',
       'minPlayers': 12,
-      'description': 'RÃƒÂ©vÃƒÂ¨le deux camps ÃƒÂ  sa mort.',
+      'description': 'Révèle deux camps à sa mort.',
     },
     {
       'name': 'Dictateur',
@@ -1175,7 +1178,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
       'name': 'Chaperon Rouge',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'ProtÃƒÂ©gÃƒÂ©e par le Chasseur.',
+      'description': 'Protégée par le Chasseur.',
     },
     {
       'name': 'Pyromancien',
@@ -1185,10 +1188,10 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
           'Place des tonneaux qui explosent s\'il est vivant au matin.',
     },
     {
-      'name': 'HÃƒÂ©ritier',
+      'name': 'Héritier',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'HÃƒÂ©rite du rÃƒÂ´le de son testateur ÃƒÂ  sa mort.',
+      'description': 'Hérite du rôle de son testateur à sa mort.',
     },
   ];
 
@@ -1196,7 +1199,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     'Simple Villageois': 'villageois',
     'Loup-Garou': 'loups',
     'Voyante': 'villageois',
-    'SorciÃƒÂ¨re': 'villageois',
+    'Sorcière': 'villageois',
     'Chasseur': 'villageois',
     'Petite Fille': 'villageois',
     'Cupidon': 'villageois',
@@ -1208,21 +1211,21 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     'Mercenaire': 'solitaire',
     'Rat Malade': 'solitaire',
     'Mentaliste': 'villageois',
-    'NÃƒÂ©cromancien': 'villageois',
+    'Nécromancien': 'villageois',
     'Fossoyeur': 'villageois',
     'Dictateur': 'villageois',
     'Chaperon Rouge': 'villageois',
     'Pyromancien': 'villageois',
-    'HÃƒÂ©ritier': 'villageois',
+    'Héritier': 'villageois',
   };
 
   static const List<String> bavardWords = [
     "chocolat",
     "ordinateur",
     "licorne",
-    "lÃƒÂ©gende",
-    "mystÃƒÂ¨re",
-    "fantÃƒÂ´me",
+    "légende",
+    "mystère",
+    "fantôme",
     "minuit",
     "secret",
     "ombre",
@@ -1230,24 +1233,24 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     "feuille",
     "silence",
     "murmure",
-    "ÃƒÂ©cho",
+    "écho",
     "potion",
     "miroir",
-    "rÃƒÂªve",
-    "ÃƒÂ©toile",
+    "rêve",
+    "étoile",
     "magie",
     "cascade",
   ];
 
   static const List<String> petitBacDefaultCategories = [
-    "PrÃƒÂ©nom",
+    "Prénom",
     "Ville",
     "Fruit",
     "Animal",
-    "MÃƒÂ©tier",
+    "Métier",
     "Objet",
     "Pays",
-    "CÃƒÂ©lÃƒÂ©britÃƒÂ©",
+    "Célébrité",
     "Marque",
     "Sport",
   ];
@@ -1432,7 +1435,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
   static List<List<int>> generateDobbleCards(int symbolsPerCard) {
     if (symbolsPerCard < 3) {
       throw ArgumentError(
-        "Le nombre de symboles par carte doit ÃƒÂªtre d'au moins 3.",
+        "Le nombre de symboles par carte doit être d'au moins 3.",
       );
     }
 
@@ -1475,13 +1478,13 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
 
     assert(
       cards.length == totalSymbols,
-      "La gÃƒÂ©nÃƒÂ©ration a ÃƒÂ©chouÃƒÂ© : nombre de cartes incorrect.",
+      "La génération a échoué : nombre de cartes incorrect.",
     );
 
     return cards;
   }
 
-  // DÃ©finition des 21 piÃ¨ces de base (les rotations seront gÃ©rÃ©es en code)
+  // Définition des 21 pièces de base (les rotations seront gérées en code)
   static const Map<int, List<List<int>>> blokusPieces = {
     1: [
       [0, 0],
@@ -1615,7 +1618,7 @@ Capturer toutes les piÃ¨ces de votre adversaire ou bloquer toutes ses piÃ¨ce
     ],
   };
 
-  // Helper pour obtenir les coordonnÃ©es d'une piÃ¨ce aprÃ¨s rotation
+  // Helper pour obtenir les coordonnées d'une pièce après rotation
   static List<List<int>> getRotatedPiece(
     int pieceId,
     int rotation, {
@@ -1903,7 +1906,7 @@ class MultiplayerTeamSelectionDialog extends StatefulWidget {
   final String gameCode;
   final Map<String, dynamic> players;
   final Map<int, List<String>>
-  initialTeams; // ModifiÃƒÂ© pour accepter plusieurs ÃƒÂ©quipes
+  initialTeams; // Modifié pour accepter plusieurs équipes
   final String gameName;
   final int minTeams;
 
@@ -1955,7 +1958,7 @@ class _MultiplayerTeamSelectionDialogState
   void _addTeam() {
     setState(() {
       if (teams.length < 6) {
-        // Limite ÃƒÂ  6 ÃƒÂ©quipes pour l'UI
+        // Limite à 6 équipes pour l'UI
         teams[teams.length] = [];
       }
     });
@@ -1998,9 +2001,7 @@ class _MultiplayerTeamSelectionDialogState
     setState(() {
       List<String> all = widget.players.keys.toList()..shuffle();
       unassignedPlayers.clear();
-      teams.forEach(
-        (key, value) => value.clear(),
-      ); // Vider toutes les ÃƒÂ©quipes
+      teams.forEach((key, value) => value.clear()); // Vider toutes les équipes
       for (int i = 0; i < all.length; i++) {
         int teamIndex = i % teams.length;
         teams[teamIndex]?.add(all[i]);
@@ -2013,10 +2014,10 @@ class _MultiplayerTeamSelectionDialogState
     bool canConfirm = unassignedPlayers.isEmpty;
 
     return AlertDialog(
-      title: Text("Ãƒâ€°quipes pour ${widget.gameName}"),
+      title: Text("Équipes pour ${widget.gameName}"),
       content: Container(
         width: double.maxFinite,
-        height: 500, // AugmentÃƒÂ© pour l'UI
+        height: 500, // Augmenté pour l'UI
         child: Column(
           children: [
             Row(
@@ -2024,12 +2025,12 @@ class _MultiplayerTeamSelectionDialogState
               children: [
                 ElevatedButton.icon(
                   icon: Icon(Icons.sync),
-                  label: Text("Ãƒâ€°quilibrer"),
+                  label: Text("Équilibrer"),
                   onPressed: _autoBalance,
                 ),
                 ElevatedButton.icon(
                   icon: Icon(Icons.add),
-                  label: Text("Ãƒâ€°quipe"),
+                  label: Text("Équipe"),
                   onPressed: _addTeam,
                 ),
                 if (teams.length > widget.minTeams)
@@ -2051,7 +2052,7 @@ class _MultiplayerTeamSelectionDialogState
                         int teamIndex = entry.key;
                         List<String> teamPlayers = entry.value;
                         return _buildTeamColumn(
-                          "Ãƒâ€°quipe ${teamIndex + 1}",
+                          "Équipe ${teamIndex + 1}",
                           teamPlayers,
                           teamIndex,
                           teamColors[teamIndex % teamColors.length],
@@ -2061,7 +2062,7 @@ class _MultiplayerTeamSelectionDialogState
               ),
             ),
             Divider(),
-            Text("Joueurs non assignÃƒÂ©s (${unassignedPlayers.length})"),
+            Text("Joueurs non assignés (${unassignedPlayers.length})"),
             Expanded(
               flex: 0, // Taille minimale pour le Wrap
               child: SingleChildScrollView(
@@ -2103,7 +2104,7 @@ class _MultiplayerTeamSelectionDialogState
                     Navigator.of(context).pop();
                   }
                   : null,
-          child: Text("Confirmer les ÃƒÂ©quipes"),
+          child: Text("Confirmer les équipes"),
         ),
       ],
     );
@@ -2388,6 +2389,33 @@ class FirebaseService {
   Future<void> deleteAiThemeHistory(String uid, String historyId) =>
       deleteAiThemeFromFirebase(uid, historyId);
 
+  /// Signale et bloque un joueur (UGC report + liste des utilisateurs bloqués)
+  Future<void> reportAndBlockPlayer({
+    required String reporterId,
+    required String reportedPlayerId,
+    required String reportedPlayerName,
+    required String gameCode,
+    required String reason,
+  }) async {
+    try {
+      await _db.collection('reports').add({
+        'reporterId': reporterId,
+        'reportedPlayerId': reportedPlayerId,
+        'reportedPlayerName': reportedPlayerName,
+        'gameCode': gameCode,
+        'reason': reason,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+      if (reporterId.isNotEmpty && reportedPlayerId.isNotEmpty) {
+        await _db.collection('users').doc(reporterId).set({
+          'blockedUsers': FieldValue.arrayUnion([reportedPlayerId]),
+        }, SetOptions(merge: true));
+      }
+    } catch (e) {
+      debugPrint('Error reporting/blocking player: $e');
+    }
+  }
+
   // =========================================================================
   // ⚡ MOTEUR D'XP ET CALCUL DU BONUS DE VITESSE DYNAMIQUE
   // =========================================================================
@@ -2403,12 +2431,81 @@ class FirebaseService {
       final idx = (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
       if (idx >= 0 && idx < unoOrder.length) return unoOrder[idx];
     } else if (gameType == 'Mille Bornes') {
+      final mbOrder = List<String>.from(
+        gameData['milleBornesPlayerOrder'] ?? playerOrder,
+      );
       final idx =
           (gameData['milleBornesCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
-      if (idx >= 0 && idx < playerOrder.length) return playerOrder[idx];
+      if (idx >= 0 && idx < mbOrder.length) return mbOrder[idx];
     } else if (gameType == 'Petits Chevaux') {
+      final pcOrder = List<String>.from(
+        gameData['petitsChevauxPlayerOrder'] ?? playerOrder,
+      );
       final idx = (gameData['petitsChevauxCurrentIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < pcOrder.length) return pcOrder[idx];
+    } else if (gameType == 'Big Two') {
+      final btOrder = List<String>.from(
+        gameData['bigTwoPlayerOrder'] ?? playerOrder,
+      );
+      final idx = (gameData['bigTwoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < btOrder.length) return btOrder[idx];
+    } else if (gameType == 'Jeu de Dames') {
+      final chOrder = List<String>.from(
+        gameData['checkersPlayerOrder'] ?? playerOrder,
+      );
+      final idx =
+          (gameData['checkersCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < chOrder.length) return chOrder[idx];
+    } else if (gameType == 'Blokus') {
+      final bOrder = List<String>.from(
+        gameData['blokusPlayerOrder'] ?? playerOrder,
+      );
+      final idx = (gameData['blokusCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < bOrder.length) return bOrder[idx];
+    } else if (gameType == 'Zombie!') {
+      final zOrder = List<String>.from(
+        gameData['zombiePlayerOrder'] ?? playerOrder,
+      );
+      final idx = (gameData['zombieCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < zOrder.length) return zOrder[idx];
+    } else if (gameType == 'Belote') {
+      final beloteOrder = List<String>.from(
+        gameData['belotePlayerOrder'] ?? playerOrder,
+      );
+      final idx = (gameData['beloteCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < beloteOrder.length) return beloteOrder[idx];
+    } else if (gameType == 'Dominoes') {
+      final dOrder = List<String>.from(
+        gameData['dominoesPlayerOrder'] ?? playerOrder,
+      );
+      final idx =
+          (gameData['dominoesCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      if (idx >= 0 && idx < dOrder.length) return dOrder[idx];
+    } else if (gameType == 'Skull') {
+      final idx = (gameData['skullCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
       if (idx >= 0 && idx < playerOrder.length) return playerOrder[idx];
+    } else if (gameType == 'Rami') {
+      if (gameData['ramiCurrentPlayerId'] != null) {
+        return gameData['ramiCurrentPlayerId'] as String;
+      }
+    } else if (gameType == 'Yams') {
+      if (gameData['yamsCurrentPlayerId'] != null) {
+        return gameData['yamsCurrentPlayerId'] as String;
+      }
+    } else if (gameType == 'La Patate Chaude') {
+      if (gameData['hotPotatoCurrentPlayerId'] != null) {
+        return gameData['hotPotatoCurrentPlayerId'] as String;
+      }
+    } else if (gameType == 'Action ou Vérité') {
+      if (gameData['aoVCurrentPlayerId'] != null) {
+        return gameData['aoVCurrentPlayerId'] as String;
+      }
+    } else if (gameType == 'Blanc Manger Coco' ||
+        gameType == 'Blanc Manger Cocon' ||
+        gameType == 'BMC') {
+      if (gameData['bmcJudgeId'] != null) {
+        return gameData['bmcJudgeId'] as String;
+      }
     } else {
       final idx = (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
       if (idx >= 0 && idx < playerOrder.length) return playerOrder[idx];
@@ -2437,7 +2534,8 @@ class FirebaseService {
     if (!useTimer) return 0;
 
     final String gameType = gameData['gameType'] ?? '';
-    if (gameType == 'Dobble') return 0; // Dobble est un jeu de rapidité en temps réel
+    if (gameType == 'Dobble')
+      return 0; // Dobble est un jeu de rapidité en temps réel
 
     // 0. Si le joueur actuel est un ordinateur (bot) ou a manqué un tour, le délai est fixé à 5 secondes
     if (isCurrentPlayerBot(gameData)) {
@@ -2445,7 +2543,8 @@ class FirebaseService {
     }
     final curId = getCurrentPlayerId(gameData);
     if (curId != null) {
-      final inactiveCounts = gameData['inactiveTurnCounts'] as Map<String, dynamic>?;
+      final inactiveCounts =
+          gameData['inactiveTurnCounts'] as Map<String, dynamic>?;
       if (inactiveCounts != null && (inactiveCounts[curId] as num? ?? 0) >= 1) {
         return 5;
       }
@@ -2556,7 +2655,13 @@ class FirebaseService {
     // Si c'est un robot/ordinateur, tolérance immédiate
     if (isCurrentPlayerBot(gameData)) return true;
 
-    final turnStartTime = (gameData['turnStartTime'] as Timestamp?)?.toDate();
+    final turnStartTime =
+        ((gameData['turnStartTime'] ??
+                    gameData['petitBacRoundStartTime'] ??
+                    gameData['pictionaryStartTime'] ??
+                    gameData['hotPotatoRoundStartedAt'])
+                as Timestamp?)
+            ?.toDate();
     if (turnStartTime == null) return false;
     final int duration = customDuration ?? getEffectiveTurnTimer(gameData);
     if (duration <= 0) return false;
@@ -2793,6 +2898,33 @@ class FirebaseService {
   Stream<DatabaseEvent> getDominoHoverStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/domino_hover').onValue;
 
+  Future<void> updateYamsLiveInteraction(
+    String gameCode,
+    String playerId, {
+    int? tappedDieIndex,
+    String? hoveredCategory,
+  }) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/yams_live');
+    if (tappedDieIndex == null && hoveredCategory == null) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'playerId': playerId,
+        'tappedDieIndex': tappedDieIndex,
+        'hoveredCategory': hoveredCategory,
+        'timestamp': ServerValue.timestamp,
+      });
+      if (tappedDieIndex != null) {
+        Future.delayed(const Duration(milliseconds: 1400), () {
+          ref.child('tappedDieIndex').remove();
+        });
+      }
+    }
+  }
+
+  Stream<DatabaseEvent> getYamsLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/yams_live').onValue;
+
   Future<String> createLounge(Map<String, dynamic> loungeData) async {
     final docRef = _db.collection('lounges').doc();
     final String joinCode = randomNumeric(6);
@@ -2859,7 +2991,9 @@ class FirebaseService {
 
       final pendingGame = data['pendingGame'] as Map<String, dynamic>?;
       if (pendingGame != null) {
-        updates['pendingGame.joinedPlayers'] = FieldValue.arrayRemove([playerId]);
+        updates['pendingGame.joinedPlayers'] = FieldValue.arrayRemove([
+          playerId,
+        ]);
       }
 
       transaction.update(docRef, updates);
@@ -2881,7 +3015,7 @@ class FirebaseService {
         .snapshots();
   }
 
-  // --- MISE Ã€ JOUR DE LA FONCTION POUR SUPPORTER LES MESSAGES SPÃ‰CIAUX (GAME_INVITE / GAME_RESULT) ---
+  // --- MISE À JOUR DE LA FONCTION POUR SUPPORTER LES MESSAGES SPÉCIAUX (GAME_INVITE / GAME_RESULT) ---
   Future<void> sendLoungeMessage(
     String loungeId,
     String playerId,
@@ -2922,10 +3056,14 @@ class FirebaseService {
         .doc(playerId)
         .set({'lastHeartbeat': now}, SetOptions(merge: true));
 
-    await _db.collection('lounges').doc(loungeId).update({
-      'players.$playerId.lastHeartbeat': now,
-      'players.$playerId.isOnline': true,
-    }).catchError((_) {});
+    await _db
+        .collection('lounges')
+        .doc(loungeId)
+        .update({
+          'players.$playerId.lastHeartbeat': now,
+          'players.$playerId.isOnline': true,
+        })
+        .catchError((_) {});
   }
 
   Stream<QuerySnapshot> getChatStream(String gameCode, String chatType) {
@@ -2946,7 +3084,7 @@ class FirebaseService {
       'C',
       'H',
       'S',
-    ]; // Carreaux, TrÃ¨fles, CÅ“urs, Piques
+    ]; // Carreaux (D), Trèfles (C), Cœurs (H), Piques (S)
     List<String> ranks = [
       '3',
       '4',
@@ -2971,9 +3109,39 @@ class FirebaseService {
     return deck;
   }
 
+  static (String, String) parseBigTwoCard(String rawCard) {
+    final clean = rawCard.split('_')[0].trim();
+    final rankMatch = RegExp(r'(10|[2-9]|[JQKAjqka])').firstMatch(clean);
+    final rank = rankMatch != null ? rankMatch.group(0)!.toUpperCase() : '3';
+
+    String suit = 'S';
+    final upper = clean.toUpperCase();
+    if (upper.contains('D') ||
+        clean.contains('♦') ||
+        clean.contains('\u2666') ||
+        upper.contains('CARREAU')) {
+      suit = 'D';
+    } else if (upper.contains('H') ||
+        clean.contains('♥') ||
+        clean.contains('\u2665') ||
+        upper.contains('COEUR')) {
+      suit = 'H';
+    } else if (upper.contains('C') ||
+        clean.contains('♣') ||
+        clean.contains('\u2663') ||
+        upper.contains('TREFLE')) {
+      suit = 'C';
+    } else if (upper.contains('S') ||
+        clean.contains('♠') ||
+        clean.contains('\u2660') ||
+        upper.contains('PIQUE')) {
+      suit = 'S';
+    }
+    return (rank, suit);
+  }
+
   int _getBigTwoCardValue(String card) {
-    String rank = card.substring(0, card.length - 1);
-    String suit = card.substring(card.length - 1);
+    final (rank, suit) = parseBigTwoCard(card);
     int rankVal = 0;
     switch (rank) {
       case '3':
@@ -3039,16 +3207,15 @@ class FirebaseService {
       return {'type': 'invalid', 'tier': -1, 'highValue': -1, 'size': 0};
 
     List<Map<String, dynamic>> cards =
-        cardsStr
-            .map(
-              (s) => {
-                'rank': s.substring(0, s.length - 1),
-                'suit': s.substring(s.length - 1),
-                'value': _getBigTwoCardValue(s),
-                'rankInt': _getRankInt(s.substring(0, s.length - 1)),
-              },
-            )
-            .toList();
+        cardsStr.map((s) {
+          final (r, su) = parseBigTwoCard(s);
+          return {
+            'rank': r,
+            'suit': su,
+            'value': _getBigTwoCardValue(s),
+            'rankInt': _getRankInt(r),
+          };
+        }).toList();
 
     cards.sort((a, b) => (a['value'] as int).compareTo(b['value'] as int));
     int size = cards.length;
@@ -3203,8 +3370,49 @@ class FirebaseService {
     DocumentReference gameRef,
     Map<String, dynamic> gameData,
   ) async {
-    final players = Map<String, dynamic>.from(gameData['players']);
-    final playerIds = players.keys.toList()..shuffle();
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final playerProfiles = Map<String, dynamic>.from(
+      gameData['playerProfiles'] ?? {},
+    );
+    final Set<String> allPlayerIds = {};
+    allPlayerIds.addAll(players.keys);
+    allPlayerIds.addAll(playerProfiles.keys);
+    if (gameData['playerOrder'] is List) {
+      allPlayerIds.addAll(
+        (gameData['playerOrder'] as List).map((e) => e.toString()),
+      );
+    }
+    if (gameData['bigTwoPlayerOrder'] is List) {
+      allPlayerIds.addAll(
+        (gameData['bigTwoPlayerOrder'] as List).map((e) => e.toString()),
+      );
+    }
+
+    for (String pId in allPlayerIds) {
+      String pName = 'Joueur';
+      if (players[pId] is Map &&
+          players[pId]['name'] != null &&
+          players[pId]['name'] != 'Inconnu' &&
+          players[pId]['name'].toString().trim().isNotEmpty) {
+        pName = players[pId]['name'];
+      } else if (playerProfiles[pId] is Map &&
+          playerProfiles[pId]['name'] != null &&
+          playerProfiles[pId]['name'] != 'Inconnu' &&
+          playerProfiles[pId]['name'].toString().trim().isNotEmpty) {
+        pName = playerProfiles[pId]['name'];
+      }
+      players[pId] = {
+        ...(players[pId] is Map ? players[pId] : {}),
+        'name': pName,
+        'score': (players[pId] is Map ? players[pId]['score'] : 0) ?? 0,
+      };
+      playerProfiles[pId] = {
+        ...(playerProfiles[pId] is Map ? playerProfiles[pId] : {}),
+        'name': pName,
+      };
+    }
+
+    final playerIds = allPlayerIds.toList()..shuffle();
     List<String> deck = _generateBigTwoDeck();
     Map<String, List<String>> hands = {};
     for (String pId in playerIds) {
@@ -3228,6 +3436,9 @@ class FirebaseService {
     await gameRef.update({
       'gameState': 'playing',
       'roundState': 'playing_turn',
+      'players': players,
+      'playerProfiles': playerProfiles,
+      'playerOrder': playerIds,
       'bigTwoDeck': deck,
       'bigTwoPlayerHands': hands,
       'bigTwoPlayerOrder': playerIds,
@@ -3469,17 +3680,29 @@ class FirebaseService {
       if (gameData['gameState'] != 'playing') return;
       if (!_isTurnTimedOut(gameData)) return;
 
-      final playerOrder = List<String>.from(gameData['bigTwoPlayerOrder'] ?? []);
-      final currentIndex = (gameData['bigTwoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      final playerOrder = List<String>.from(
+        gameData['bigTwoPlayerOrder'] ?? [],
+      );
+      final currentIndex =
+          (gameData['bigTwoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
       final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
-      final hands = Map<String, dynamic>.from(gameData['bigTwoPlayerHands'] ?? {});
+      final hands = Map<String, dynamic>.from(
+        gameData['bigTwoPlayerHands'] ?? {},
+      );
       final myHand = List<String>.from(hands[playerId] ?? []);
-      final lastPlay = gameData['bigTwoLastPlay'] != null ? Map<String, dynamic>.from(gameData['bigTwoLastPlay']) : null;
-      List<String> passedPlayers = List<String>.from(gameData['bigTwoPassedPlayers'] ?? []);
-      List<String> finishedPlayers = List<String>.from(gameData['bigTwoFinishedPlayers'] ?? []);
+      final lastPlay =
+          gameData['bigTwoLastPlay'] != null
+              ? Map<String, dynamic>.from(gameData['bigTwoLastPlay'])
+              : null;
+      List<String> passedPlayers = List<String>.from(
+        gameData['bigTwoPassedPlayers'] ?? [],
+      );
+      List<String> finishedPlayers = List<String>.from(
+        gameData['bigTwoFinishedPlayers'] ?? [],
+      );
 
       // CAS A : Table vide
       if (lastPlay == null && myHand.isNotEmpty) {
@@ -3492,9 +3715,16 @@ class FirebaseService {
             String rank = c.substring(0, c.length - 1);
             rankGroups.putIfAbsent(rank, () => []).add(c);
           }
-          var sortedGroups = rankGroups.entries.toList()
-            ..sort((a, b) => _getBigTwoCardValue(a.value.first).compareTo(_getBigTwoCardValue(b.value.first)));
-          cardsToPlay = sortedGroups.first.value.take(sortedGroups.first.value.length >= 2 ? 2 : 1).toList();
+          var sortedGroups =
+              rankGroups.entries.toList()..sort(
+                (a, b) => _getBigTwoCardValue(
+                  a.value.first,
+                ).compareTo(_getBigTwoCardValue(b.value.first)),
+              );
+          cardsToPlay =
+              sortedGroups.first.value
+                  .take(sortedGroups.first.value.length >= 2 ? 2 : 1)
+                  .toList();
         }
 
         for (String c in cardsToPlay) myHand.remove(c);
@@ -3516,7 +3746,8 @@ class FirebaseService {
             'players.$winnerId.score': FieldValue.increment(1),
             'bigTwoPlayerHands': hands,
             'bigTwoFinishedPlayers': finishedPlayers,
-            'gameEndReason': '${gameData['players'][winnerId]['name']} a gagné !',
+            'gameEndReason':
+                '${gameData['players'][winnerId]['name']} a gagné !',
           });
           return;
         }
@@ -3533,7 +3764,9 @@ class FirebaseService {
           'bigTwoFinishedPlayers': finishedPlayers,
           'bigTwoCurrentPlayerIndex': nextIndex,
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a joué ${cardsToPlay.join(', ')}."]),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ $playerName a joué ${cardsToPlay.join(', ')}.",
+          ]),
         });
       }
       // CAS B : Pli en cours
@@ -3543,8 +3776,12 @@ class FirebaseService {
 
         if (targetSize == 1) {
           int lastVal = (lastPlay['highValue'] as num?)?.toInt() ?? 0;
-          List<String> validCards = myHand.where((c) => _getBigTwoCardValue(c) > lastVal).toList()
-            ..sort((a, b) => _getBigTwoCardValue(a).compareTo(_getBigTwoCardValue(b)));
+          List<String> validCards =
+              myHand.where((c) => _getBigTwoCardValue(c) > lastVal).toList()
+                ..sort(
+                  (a, b) =>
+                      _getBigTwoCardValue(a).compareTo(_getBigTwoCardValue(b)),
+                );
           if (validCards.isNotEmpty) {
             winningCombo = [validCards.first];
           }
@@ -3558,7 +3795,10 @@ class FirebaseService {
           List<List<String>> pairs = [];
           for (var list in rankGroups.values) {
             if (list.length >= 2) {
-              list.sort((a, b) => _getBigTwoCardValue(a).compareTo(_getBigTwoCardValue(b)));
+              list.sort(
+                (a, b) =>
+                    _getBigTwoCardValue(a).compareTo(_getBigTwoCardValue(b)),
+              );
               int pairHighVal = _getBigTwoCardValue(list[1]);
               if (pairHighVal > lastVal) {
                 pairs.add([list[0], list[1]]);
@@ -3566,7 +3806,11 @@ class FirebaseService {
             }
           }
           if (pairs.isNotEmpty) {
-            pairs.sort((a, b) => _getBigTwoCardValue(a[1]).compareTo(_getBigTwoCardValue(b[1])));
+            pairs.sort(
+              (a, b) => _getBigTwoCardValue(
+                a[1],
+              ).compareTo(_getBigTwoCardValue(b[1])),
+            );
             winningCombo = pairs.first;
           }
         }
@@ -3590,7 +3834,8 @@ class FirebaseService {
               'players.$winnerId.score': FieldValue.increment(1),
               'bigTwoPlayerHands': hands,
               'bigTwoFinishedPlayers': finishedPlayers,
-              'gameEndReason': '${gameData['players'][winnerId]['name']} a gagné !',
+              'gameEndReason':
+                  '${gameData['players'][winnerId]['name']} a gagné !',
             });
             return;
           }
@@ -3607,7 +3852,9 @@ class FirebaseService {
             'bigTwoFinishedPlayers': finishedPlayers,
             'bigTwoCurrentPlayerIndex': nextIndex,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a joué ${winningCombo.join(', ')}."]),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName a joué ${winningCombo.join(', ')}.",
+            ]),
           });
           return;
         }
@@ -3616,8 +3863,10 @@ class FirebaseService {
           passedPlayers.add(playerId);
         }
 
-        final activePlayers = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
-        final bool trickEnded = passedPlayers.length >= (activePlayers.length - 1);
+        final activePlayers =
+            playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+        final bool trickEnded =
+            passedPlayers.length >= (activePlayers.length - 1);
 
         if (trickEnded) {
           String lastWinner = lastPlay?['playedBy'] ?? playerId;
@@ -3632,11 +3881,14 @@ class FirebaseService {
             'bigTwoPassedPlayers': [],
             'bigTwoCurrentPlayerIndex': nextIndex,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion(["⏱️ Pli terminé. Au tour de ${gameData['players']?[playerOrder[nextIndex]]?['name']} !"]),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ Pli terminé. Au tour de ${gameData['players']?[playerOrder[nextIndex]]?['name']} !",
+            ]),
           });
         } else {
           int nextIndex = (currentIndex + 1) % playerOrder.length;
-          while (finishedPlayers.contains(playerOrder[nextIndex]) || passedPlayers.contains(playerOrder[nextIndex])) {
+          while (finishedPlayers.contains(playerOrder[nextIndex]) ||
+              passedPlayers.contains(playerOrder[nextIndex])) {
             nextIndex = (nextIndex + 1) % playerOrder.length;
           }
 
@@ -3644,7 +3896,9 @@ class FirebaseService {
             'bigTwoPassedPlayers': passedPlayers,
             'bigTwoCurrentPlayerIndex': nextIndex,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName passe son tour."]),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName passe son tour.",
+            ]),
           });
         }
       }
@@ -3679,7 +3933,7 @@ class FirebaseService {
     return deck;
   }
 
-  // DÃƒÂ©marrage de la manche
+  // Démarrage de la manche
   Future<void> _startMilleBornesRound(
     DocumentReference gameRef,
     Map<String, dynamic> gameData,
@@ -3994,7 +4248,7 @@ class FirebaseService {
     });
   }
 
-  // Fonction de validation stricte des rÃ¨gles du Mille Bornes
+  // Fonction de validation stricte des règles du Mille Bornes
   bool _canPlayMilleBornesCard(
     String card,
     Map<String, dynamic> myData,
@@ -4009,11 +4263,11 @@ class FirebaseService {
 
       int distValue = int.parse(card.substring(1));
       if (myData['isSpeedLimited'] == true && distValue > 50)
-        return false; // LimitÃ© Ã  50km/h
+        return false; // Limité à 50km/h
 
       int currentDist = myData['distance'] as int;
       if (currentDist + distValue > targetDistance)
-        return false; // Ne doit pas dÃ©passer l'objectif
+        return false; // Ne doit pas dépasser l'objectif
 
       return true;
     }
@@ -4028,7 +4282,7 @@ class FirebaseService {
     ].contains(card)) {
       if (targetData == null) return false;
 
-      // VÃ©rifie si la cible subit dÃ©jÃ  cette attaque
+      // Vérifie si la cible subit déjà cette attaque
       if (card == 'STOP' || card == 'RED_LIGHT') {
         if (targetData['isStopped'] == true) return false;
       } else if (card == 'SPEED_LIMIT') {
@@ -4039,7 +4293,7 @@ class FirebaseService {
         if (targetData['isFlatTire'] == true) return false;
       }
 
-      // VÃ©rifie si la cible possÃ¨de la carte de sÃ©curitÃ© bloquante
+      // Vérifie si la cible possède la carte de sécurité bloquante
       List<String> targetSafeties = List<String>.from(
         targetData['safeties'] ?? [],
       );
@@ -4059,13 +4313,13 @@ class FirebaseService {
       return true;
     }
 
-    // 3. Cartes de RemÃƒÂ¨de (ne peuvent ÃƒÂªtre jouÃƒÂ©es que si on subit l'effet)
+    // 3. Cartes de Remède (ne peuvent être jouées que si on subit l'effet)
     if (card == 'GREEN_LIGHT') return myData['isStopped'] == true;
     if (card == 'END_OF_LIMIT') return myData['isSpeedLimited'] == true;
     if (card == 'EXTRA_TANK') return myData['isOutOfGas'] == true;
     if (card == 'SPARE_TIRE') return myData['isFlatTire'] == true;
 
-    // 4. Cartes de SÃƒÂ©curitÃƒÂ© (toujours jouables sur soi, mais pas en double)
+    // 4. Cartes de Sécurité (toujours jouables sur soi, mais pas en double)
     if (card.startsWith('SAFETY_')) {
       List<String> mySafeties = List<String>.from(myData['safeties'] ?? []);
       if (mySafeties.contains(card)) return false;
@@ -4085,17 +4339,20 @@ class FirebaseService {
     final gameData = snap.data() as Map<String, dynamic>;
     if (gameData['gameState'] != 'playing') return;
 
-    final playerOrder =
-        List<String>.from(gameData['milleBornesPlayerOrder'] ?? []);
+    final playerOrder = List<String>.from(
+      gameData['milleBornesPlayerOrder'] ?? [],
+    );
     final currentIndex =
         (gameData['milleBornesCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
     if (currentIndex >= playerOrder.length) return;
 
     final playerId = playerOrder[currentIndex];
-    Map<String, dynamic> pData =
-        Map<String, dynamic>.from(gameData['milleBornesPlayerData'] ?? {});
-    Map<String, dynamic> myData =
-        Map<String, dynamic>.from(pData[playerId] ?? {});
+    Map<String, dynamic> pData = Map<String, dynamic>.from(
+      gameData['milleBornesPlayerData'] ?? {},
+    );
+    Map<String, dynamic> myData = Map<String, dynamic>.from(
+      pData[playerId] ?? {},
+    );
     List<String> hand = List<String>.from(myData['hand'] ?? []);
     List<String> deck = List<String>.from(gameData['milleBornesDeck'] ?? []);
     int targetDist =
@@ -4149,9 +4406,8 @@ class FirebaseService {
               .toList();
       if (distCards.isNotEmpty) {
         distCards.sort(
-          (a, b) => int.parse(
-            b.substring(1),
-          ).compareTo(int.parse(a.substring(1))),
+          (a, b) =>
+              int.parse(b.substring(1)).compareTo(int.parse(a.substring(1))),
         );
         cardToPlay = distCards.first;
       }
@@ -4322,22 +4578,98 @@ class FirebaseService {
       final data = snap.data() as Map<String, dynamic>;
 
       final players = Map<String, dynamic>.from(data['players'] ?? {});
-      final restartVotes = Map<String, dynamic>.from(data['restartVotes'] ?? {});
+      final playerProfiles = Map<String, dynamic>.from(
+        data['playerProfiles'] ?? {},
+      );
+
+      // Sauvegarde préalable de tous les profils existants
+      players.forEach((pId, pData) {
+        if (pData is Map) {
+          playerProfiles[pId] = Map<String, dynamic>.from(pData);
+        }
+      });
+
+      // Rassembler tous les IDs de joueurs ayant participé à cette session
+      final Set<String> allPlayerIds = {};
+      allPlayerIds.addAll(players.keys);
+      allPlayerIds.addAll(playerProfiles.keys);
+      if (data['playerOrder'] is List) {
+        allPlayerIds.addAll(
+          (data['playerOrder'] as List).map((e) => e.toString()),
+        );
+      }
+      for (String key in [
+        'bigTwoPlayerOrder',
+        'belotePlayerOrder',
+        'unoPlayerOrder',
+        'tarotPlayerOrder',
+        'ramiPlayerOrder',
+        'yamsPlayerOrder',
+        'yamsScores',
+      ]) {
+        if (data[key] is List) {
+          allPlayerIds.addAll((data[key] as List).map((e) => e.toString()));
+        } else if (data[key] is Map) {
+          allPlayerIds.addAll((data[key] as Map).keys.map((e) => e.toString()));
+        }
+      }
+      allPlayerIds.add(playerId);
+
+      // Restaurer chaque joueur dans players pour éviter les disparitions et "Inconnu"
+      for (String pId in allPlayerIds) {
+        if (!players.containsKey(pId) || players[pId] is! Map) {
+          final profile =
+              playerProfiles[pId] is Map
+                  ? Map<String, dynamic>.from(playerProfiles[pId])
+                  : {};
+          players[pId] = {
+            'name': profile['name'] ?? 'Joueur',
+            'score': profile['score'] ?? 0,
+            'xp': profile['xp'] ?? 0,
+            'authUid': profile['authUid'] ?? pId,
+            'livekitIdentity': profile['livekitIdentity'] ?? pId,
+          };
+        } else {
+          final pMap = Map<String, dynamic>.from(players[pId]);
+          if ((pMap['name'] == null ||
+                  pMap['name'] == 'Inconnu' ||
+                  pMap['name'].toString().trim().isEmpty) &&
+              playerProfiles[pId] is Map &&
+              playerProfiles[pId]['name'] != null &&
+              playerProfiles[pId]['name'] != 'Inconnu') {
+            pMap['name'] = playerProfiles[pId]['name'];
+            players[pId] = pMap;
+          }
+        }
+      }
+
+      final restartVotes = Map<String, dynamic>.from(
+        data['restartVotes'] ?? {},
+      );
       restartVotes[playerId] = true;
 
       final String gameType = data['gameType'] ?? '';
       final int minRequired = _getMinPlayersForGame(gameType);
+      final int totalSessionPlayers = players.length;
 
-      transaction.update(gameRef, {'restartVotes': restartVotes});
+      transaction.update(gameRef, {
+        'players': players,
+        'playerProfiles': playerProfiles,
+        'restartVotes': restartVotes,
+      });
 
       // Si TOUT LE MONDE a cliqué sur Rejouer et qu'on a le minimum requis -> Relance auto instantanée
-      if (restartVotes.length >= players.length && players.length >= minRequired) {
+      if (restartVotes.length >= totalSessionPlayers &&
+          totalSessionPlayers >= minRequired) {
         final Map<String, dynamic> playerXpResets = {};
         players.forEach((pId, _) {
           playerXpResets['players.$pId.xp'] = 0;
         });
 
         transaction.update(gameRef, {
+          'players': players,
+          'playerProfiles': playerProfiles,
+          'playerOrder': players.keys.toList(),
           'gameState': 'playing',
           'roundState': 'waitingForStart',
           'currentRound': FieldValue.increment(1),
@@ -4359,7 +4691,7 @@ class FirebaseService {
     }
   }
 
-  /// 2. Fin des 30 secondes : Démarre avec les joueurs prêts ou bascule au salon
+  /// 2. Fin des 30 secondes : Démarre la manche avec tous les joueurs présents sans supprimer personne
   Future<void> handleRestartDecisionTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
 
@@ -4371,38 +4703,88 @@ class FirebaseService {
       if (data['gameState'] == 'playing') return; // Déjà relancé
 
       final players = Map<String, dynamic>.from(data['players'] ?? {});
-      final restartVotes = Map<String, dynamic>.from(data['restartVotes'] ?? {});
-      final String gameType = data['gameType'] ?? '';
-      final int minRequired = _getMinPlayersForGame(gameType);
-      String currentHost = data['hostId'] ?? '';
+      final playerProfiles = Map<String, dynamic>.from(
+        data['playerProfiles'] ?? {},
+      );
 
-      // On identifie ceux qui n'ont pas cliqué sur "Rejouer" au bout des 30s
-      final List<String> inactivePlayers = [];
-      players.forEach((pId, _) {
-        if (!restartVotes.containsKey(pId)) {
-          inactivePlayers.add(pId);
+      // On préserve l'intégralité des profils et des joueurs
+      players.forEach((pId, pData) {
+        if (pData is Map) {
+          playerProfiles[pId] = Map<String, dynamic>.from(pData);
         }
       });
 
-      // Retirer les inactifs de la partie
-      for (final pId in inactivePlayers) {
-        players.remove(pId);
+      // Rassembler tous les participants connus
+      final Set<String> allPlayerIds = {};
+      allPlayerIds.addAll(players.keys);
+      allPlayerIds.addAll(playerProfiles.keys);
+      if (data['playerOrder'] is List) {
+        allPlayerIds.addAll(
+          (data['playerOrder'] as List).map((e) => e.toString()),
+        );
+      }
+      for (String key in [
+        'bigTwoPlayerOrder',
+        'belotePlayerOrder',
+        'unoPlayerOrder',
+        'tarotPlayerOrder',
+        'ramiPlayerOrder',
+        'yamsPlayerOrder',
+        'yamsScores',
+      ]) {
+        if (data[key] is List) {
+          allPlayerIds.addAll((data[key] as List).map((e) => e.toString()));
+        } else if (data[key] is Map) {
+          allPlayerIds.addAll((data[key] as Map).keys.map((e) => e.toString()));
+        }
       }
 
-      // Si l'hôte n'a pas voté ou est parti, donner l'Admin au 1er joueur actif
-      if ((!players.containsKey(currentHost) || inactivePlayers.contains(currentHost)) && players.isNotEmpty) {
-        currentHost = players.keys.first;
+      for (String pId in allPlayerIds) {
+        if (!players.containsKey(pId) || players[pId] is! Map) {
+          final profile =
+              playerProfiles[pId] is Map
+                  ? Map<String, dynamic>.from(playerProfiles[pId])
+                  : {};
+          players[pId] = {
+            'name': profile['name'] ?? 'Joueur',
+            'score': profile['score'] ?? 0,
+            'xp': profile['xp'] ?? 0,
+            'authUid': profile['authUid'] ?? pId,
+            'livekitIdentity': profile['livekitIdentity'] ?? pId,
+          };
+        } else {
+          final pMap = Map<String, dynamic>.from(players[pId]);
+          if ((pMap['name'] == null ||
+                  pMap['name'] == 'Inconnu' ||
+                  pMap['name'].toString().trim().isEmpty) &&
+              playerProfiles[pId] is Map &&
+              playerProfiles[pId]['name'] != null &&
+              playerProfiles[pId]['name'] != 'Inconnu') {
+            pMap['name'] = playerProfiles[pId]['name'];
+            players[pId] = pMap;
+          }
+        }
       }
+
+      final restartVotes = Map<String, dynamic>.from(
+        data['restartVotes'] ?? {},
+      );
+      final String gameType = data['gameType'] ?? '';
+      final int minRequired = _getMinPlayersForGame(gameType);
+      String currentHost =
+          data['hostId'] ?? (players.isNotEmpty ? players.keys.first : '');
 
       final Map<String, dynamic> playerXpResets = {};
       players.forEach((pId, _) {
         playerXpResets['players.$pId.xp'] = 0;
       });
 
-      // CAS A : Assez de joueurs prêts (>= minRequired) -> Relance avec les scores conservés !
-      if (players.length >= minRequired) {
+      // CAS A : Assez de joueurs présents (>= minRequired) et au moins 1 a voté Rejouer
+      // -> Relance automatique pour tout le monde avec scores conservés !
+      if (players.length >= minRequired && restartVotes.isNotEmpty) {
         transaction.update(gameRef, {
           'players': players,
+          'playerProfiles': playerProfiles,
           'hostId': currentHost,
           'playerOrder': players.keys.toList(),
           'gameState': 'playing',
@@ -4413,16 +4795,17 @@ class FirebaseService {
           'turnStartTime': FieldValue.serverTimestamp(),
           'restartVotes': {},
           'gameLog': FieldValue.arrayUnion([
-            "⏱️ Fin des 30s : Partie relancée avec les ${players.length} joueurs prêts !"
+            "⏱️ Fin du compte à rebours : Partie relancée pour tous les ${players.length} joueurs !",
           ]),
           ...playerXpResets,
         });
-      } 
-      // CAS B : Moins de joueurs que le minimum (ex: 1 seul joueur restant) -> Salon d'attente avec SCORES GARDÉS
+      }
+      // CAS B : Aucun vote ou moins de joueurs que le minimum -> Salon d'attente sans perte de profil
       else {
         transaction.update(gameRef, {
           'players': players,
-          'hostId': players.isNotEmpty ? players.keys.first : currentHost,
+          'playerProfiles': playerProfiles,
+          'hostId': currentHost,
           'playerOrder': players.keys.toList(),
           'gameState': 'lobby',
           'roundState': 'waitingForStart',
@@ -4433,7 +4816,7 @@ class FirebaseService {
           'restartVotes': {},
           ...playerXpResets,
           'gameLog': FieldValue.arrayUnion([
-            "🏆 Scores conservés ! En attente de nouveaux joueurs dans le salon."
+            "🏆 Scores conservés ! En attente dans le salon.",
           ]),
         });
       }
@@ -4459,10 +4842,9 @@ class FirebaseService {
 
       Map<String, dynamic> players = Map.from(snap['players']);
       int targetCount =
-          snap['playerCount'] ??
-          0; // Le nombre de joueurs visÃƒÂ© ÃƒÂ  la crÃƒÂ©ation
+          snap['playerCount'] ?? 0; // Le nombre de joueurs visé à la création
 
-      if (players.length >= targetCount) return false; // DÃƒÂ©jÃƒÂ  plein
+      if (players.length >= targetCount) return false; // Déjà plein
 
       // Ajouter le joueur
       User? currentUser = FirebaseAuth.instance.currentUser;
@@ -4479,22 +4861,22 @@ class FirebaseService {
         'gameLog': FieldValue.arrayUnion(["$playerName a rejoint la partie !"]),
       };
 
-      // Si l'ancien hÃƒÂ´te n'est plus lÃƒÂ , le nouveau prend le relais (selon ta rÃƒÂ¨gle)
-      // Note : on a dÃƒÂ©jÃƒÂ  gÃƒÂ©rÃƒÂ© le transfert basique dans handleRestartDecisionTimeout,
-      // mais si on veut que le NOUVEAU soit hÃƒÂ´te :
-      // updates['hostId'] = playerId; // DÃƒÂ©commenter si tu veux STRICTEMENT que le nouveau soit l'hÃƒÂ´te
+      // Si l'ancien hôte n'est plus là, le nouveau prend le relais (selon ta règle)
+      // Note : on a déjà géré le transfert basique dans handleRestartDecisionTimeout,
+      // mais si on veut que le NOUVEAU soit hôte :
+      // updates['hostId'] = playerId; // Décommenter si tu veux STRICTEMENT que le nouveau soit l'hôte
 
       transaction.update(gameRef, updates);
       return true;
     });
   }
 
-  // 4. Forcer le dÃƒÂ©marrage aprÃƒÂ¨s les 10s de recherche
+  // 4. Forcer le démarrage après les 10s de recherche
   Future<void> forceStartAfterRefill(String gameCode) async {
     DocumentReference gameRef = _db.collection('games').doc(gameCode);
     DocumentSnapshot snap = await gameRef.get();
     if (snap.exists && snap['gameState'] == 'refilling') {
-      // Choisir un hÃƒÂ´te alÃƒÂ©atoire
+      // Choisir un hôte aléatoire
       Map<String, dynamic> players = snap['players'];
       List<String> ids = players.keys.toList();
       String randomHost = ids[new Random().nextInt(ids.length)];
@@ -4527,7 +4909,9 @@ class FirebaseService {
       String roundState = gameData['roundState'] ?? '';
 
       if (roundState == 'guesser_chooses_word') {
-        final List<String> words = List<String>.from(gameData['justOneWords'] ?? []);
+        final List<String> words = List<String>.from(
+          gameData['justOneWords'] ?? [],
+        );
         if (words.isNotEmpty) {
           final String randomWord = words[Random().nextInt(words.length)];
           transaction.update(gameRef, {
@@ -4710,11 +5094,16 @@ class FirebaseService {
 
       var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
       List<String> playerIds = playerData.keys.toList();
-      String opponentId = playerIds.firstWhere((id) => id != playerId, orElse: () => '');
+      String opponentId = playerIds.firstWhere(
+        (id) => id != playerId,
+        orElse: () => '',
+      );
       if (opponentId.isEmpty) return;
 
       var shooterData = Map<String, dynamic>.from(playerData[playerId] ?? {});
-      var opponentData = Map<String, dynamic>.from(playerData[opponentId] ?? {});
+      var opponentData = Map<String, dynamic>.from(
+        playerData[opponentId] ?? {},
+      );
 
       var enemyGrid = List<String>.from(
         shooterData['enemyGrid'] ?? List.filled(100, 'unknown'),
@@ -4850,7 +5239,9 @@ class FirebaseService {
       if (!_isTurnTimedOut(gameData)) return;
 
       if (gameData['roundState'] == 'placement') {
-        var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+        var playerData = Map<String, dynamic>.from(
+          gameData['playerData'] ?? {},
+        );
         Random rand = Random();
 
         playerData.forEach((pId, pInfo) {
@@ -4861,7 +5252,9 @@ class FirebaseService {
 
             for (var entry in GameData.batailleNavaleShips.entries) {
               String shipType = entry.key;
-              int shipId = GameData.batailleNavaleShips.keys.toList().indexOf(shipType) + 1;
+              int shipId =
+                  GameData.batailleNavaleShips.keys.toList().indexOf(shipType) +
+                  1;
               int length = entry.value['length'];
               int width = entry.value['width'];
               int area = entry.value['area'];
@@ -4874,7 +5267,8 @@ class FirebaseService {
                 int actualCols = isHorizontal ? length : width;
                 int actualRows = isHorizontal ? width : length;
 
-                if (startRow + actualRows > 10 || startCol + actualCols > 10) continue;
+                if (startRow + actualRows > 10 || startCol + actualCols > 10)
+                  continue;
 
                 bool valid = true;
                 List<int> indices = [];
@@ -4919,19 +5313,30 @@ class FirebaseService {
           'roundState': 'playing',
           'currentPlayerId': firstPlayer,
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion(["⏱️ Placement automatique effectué."]),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ Placement automatique effectué.",
+          ]),
         });
       } else if (gameData['roundState'] == 'playing') {
         final currentPlayerId = gameData['currentPlayerId'];
         if (currentPlayerId == null) return;
 
-        var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+        var playerData = Map<String, dynamic>.from(
+          gameData['playerData'] ?? {},
+        );
         List<String> playerIds = playerData.keys.toList();
-        String opponentId = playerIds.firstWhere((id) => id != currentPlayerId, orElse: () => '');
+        String opponentId = playerIds.firstWhere(
+          (id) => id != currentPlayerId,
+          orElse: () => '',
+        );
         if (opponentId.isEmpty) return;
 
-        var shooterData = Map<String, dynamic>.from(playerData[currentPlayerId] ?? {});
-        var enemyGrid = List<String>.from(shooterData['enemyGrid'] ?? List.filled(100, 'unknown'));
+        var shooterData = Map<String, dynamic>.from(
+          playerData[currentPlayerId] ?? {},
+        );
+        var enemyGrid = List<String>.from(
+          shooterData['enemyGrid'] ?? List.filled(100, 'unknown'),
+        );
 
         List<int> validTargets = [];
         for (int i = 0; i < 100; i++) {
@@ -4943,7 +5348,9 @@ class FirebaseService {
         // Choix sécurisé du tir aléatoire
         int targetIndex = validTargets[Random().nextInt(validTargets.length)];
 
-        var opponentData = Map<String, dynamic>.from(playerData[opponentId] ?? {});
+        var opponentData = Map<String, dynamic>.from(
+          playerData[opponentId] ?? {},
+        );
         var opponentIncomingGrid = List<String>.from(
           opponentData['incomingGrid'] ?? List.filled(100, 'unknown'),
         );
@@ -4994,21 +5401,26 @@ class FirebaseService {
 
         Map<String, dynamic> updates = {'playerData': playerData};
 
-        if ((opponentData['shipsSunk'] ?? 0) >= GameData.batailleNavaleShips.length) {
+        if ((opponentData['shipsSunk'] ?? 0) >=
+            GameData.batailleNavaleShips.length) {
           updates.addAll({
             'gameState': 'gameOver',
             'roundState': 'gameOver',
             'gameWinner': currentPlayerId,
             'players.$currentPlayerId.score': FieldValue.increment(1),
-            'gameEndReason': '${shooterData['name']} a coulé toute la flotte adverse !',
+            'gameEndReason':
+                '${shooterData['name']} a coulé toute la flotte adverse !',
           });
         } else {
-          String nextPlayerId = (result == 'hit' || result == 'sunk') ? currentPlayerId : opponentId;
+          String nextPlayerId =
+              (result == 'hit' || result == 'sunk')
+                  ? currentPlayerId
+                  : opponentId;
           updates.addAll({
             'currentPlayerId': nextPlayerId,
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              "⏱️ ${shooterData['name']} a tiré automatiquement en ${(targetIndex ~/ 10) + 1}-${(targetIndex % 10) + 1} ($result)."
+              "⏱️ ${shooterData['name']} a tiré automatiquement en ${(targetIndex ~/ 10) + 1}-${(targetIndex % 10) + 1} ($result).",
             ]),
           });
         }
@@ -5033,16 +5445,24 @@ class FirebaseService {
       if (!_isTurnTimedOut(gameData)) return;
 
       final playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
-      final currentIndex = (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
+      final currentIndex =
+          (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
       final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
       final hands = Map<String, dynamic>.from(gameData['playerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
-      final lastPlay = gameData['lastPlay'] != null ? Map<String, dynamic>.from(gameData['lastPlay']) : null;
-      List<String> passedPlayers = List<String>.from(gameData['passedPlayers'] ?? []);
-      List<String> finishedPlayers = List<String>.from(gameData['finishedPlayers'] ?? []);
+      final lastPlay =
+          gameData['lastPlay'] != null
+              ? Map<String, dynamic>.from(gameData['lastPlay'])
+              : null;
+      List<String> passedPlayers = List<String>.from(
+        gameData['passedPlayers'] ?? [],
+      );
+      List<String> finishedPlayers = List<String>.from(
+        gameData['finishedPlayers'] ?? [],
+      );
       bool isRevolution = gameData['isRevolutionActive'] ?? false;
 
       // CAS A : Table vide (le joueur ouvre le pli)
@@ -5055,7 +5475,8 @@ class FirebaseService {
           finishedPlayers.add(playerId);
         }
 
-        final remaining = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+        final remaining =
+            playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
         if (remaining.length <= 1) {
           _endPresidentRound(transaction, gameRef, gameData, {
             'playerHands': hands,
@@ -5082,7 +5503,9 @@ class FirebaseService {
           'passedPlayers': [],
           'finishedPlayers': finishedPlayers,
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a ouvert avec $cardToPlay."]),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ $playerName a ouvert avec $cardToPlay.",
+          ]),
         });
       }
       // CAS B : Pli en cours (tente de jouer une carte supérieure, sinon passe)
@@ -5119,7 +5542,8 @@ class FirebaseService {
             finishedPlayers.add(playerId);
           }
 
-          final remaining = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+          final remaining =
+              playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
           if (remaining.length <= 1) {
             _endPresidentRound(transaction, gameRef, gameData, {
               'playerHands': hands,
@@ -5137,7 +5561,10 @@ class FirebaseService {
             'playerHands': hands,
             'lastPlay': {
               'cards': candidateCards,
-              'value': _getPresidentCardValue(candidateCards.first, isRevolution),
+              'value': _getPresidentCardValue(
+                candidateCards.first,
+                isRevolution,
+              ),
               'playedBy': playerId,
             },
             'currentPile': FieldValue.arrayUnion(candidateCards),
@@ -5145,7 +5572,9 @@ class FirebaseService {
             'currentPlayerIndex': nextIndex,
             'finishedPlayers': finishedPlayers,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a joué ${candidateCards.join(', ')}."]),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName a joué ${candidateCards.join(', ')}.",
+            ]),
           });
           return;
         }
@@ -5153,7 +5582,14 @@ class FirebaseService {
         // Sinon, le joueur passe son tour proprement
         if (!passedPlayers.contains(playerId)) passedPlayers.add(playerId);
 
-        final stillInPlay = playerOrder.where((p) => !finishedPlayers.contains(p) && !passedPlayers.contains(p)).toList();
+        final stillInPlay =
+            playerOrder
+                .where(
+                  (p) =>
+                      !finishedPlayers.contains(p) &&
+                      !passedPlayers.contains(p),
+                )
+                .toList();
         final bool trickEnded = stillInPlay.isEmpty || stillInPlay.length == 1;
 
         if (trickEnded) {
@@ -5171,11 +5607,14 @@ class FirebaseService {
             'currentPlayerIndex': nextIndex,
             'lastPlayerToPlay': playerOrder[nextIndex],
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion(["⏱️ Pli terminé. Au tour de ${gameData['players']?[playerOrder[nextIndex]]?['name']}."]),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ Pli terminé. Au tour de ${gameData['players']?[playerOrder[nextIndex]]?['name']}.",
+            ]),
           });
         } else {
           int nextIndex = (currentIndex + 1) % playerOrder.length;
-          while (finishedPlayers.contains(playerOrder[nextIndex]) || passedPlayers.contains(playerOrder[nextIndex])) {
+          while (finishedPlayers.contains(playerOrder[nextIndex]) ||
+              passedPlayers.contains(playerOrder[nextIndex])) {
             nextIndex = (nextIndex + 1) % playerOrder.length;
           }
 
@@ -5183,7 +5622,9 @@ class FirebaseService {
             'passedPlayers': passedPlayers,
             'currentPlayerIndex': nextIndex,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName passe son tour."]),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName passe son tour.",
+            ]),
           });
         }
       }
@@ -5205,7 +5646,9 @@ class FirebaseService {
     if (currentIndex >= playerOrder.length) return;
 
     final playerId = playerOrder[currentIndex];
-    final myHand = List<int>.from(gameData['blokusPlayerHands']?[playerId] ?? []);
+    final myHand = List<int>.from(
+      gameData['blokusPlayerHands']?[playerId] ?? [],
+    );
     final myColor = gameData['blokusPlayerColors']?[playerId] ?? 'blue';
     final board = Map<String, String>.from(gameData['blokusBoard'] ?? {});
     final isFirst = !(gameData['blokusFirstPiecePlaced']?[playerId] ?? false);
@@ -5221,30 +5664,70 @@ class FirebaseService {
             for (int c = 0; c < 20; c++) {
               final coords = shape.map((p) => [p[0] + r, p[1] + c]).toList();
 
-              bool inBounds = coords.every((p) => p[0] >= 0 && p[0] < 20 && p[1] >= 0 && p[1] < 20);
+              bool inBounds = coords.every(
+                (p) => p[0] >= 0 && p[0] < 20 && p[1] >= 0 && p[1] < 20,
+              );
               if (!inBounds) continue;
-              if (coords.any((p) => board.containsKey("${p[0]}_${p[1]}"))) continue;
+              if (coords.any((p) => board.containsKey("${p[0]}_${p[1]}")))
+                continue;
 
               bool touchesEdge = coords.any((p) {
-                final neighbors = [[p[0] - 1, p[1]], [p[0] + 1, p[1]], [p[0], p[1] - 1], [p[0], p[1] + 1]];
-                return neighbors.any((n) => board["${n[0]}_${n[1]}"] == myColor);
+                final neighbors = [
+                  [p[0] - 1, p[1]],
+                  [p[0] + 1, p[1]],
+                  [p[0], p[1] - 1],
+                  [p[0], p[1] + 1],
+                ];
+                return neighbors.any(
+                  (n) => board["${n[0]}_${n[1]}"] == myColor,
+                );
               });
               if (touchesEdge) continue;
 
               bool touchesCorner = coords.any((p) {
-                final diags = [[p[0] - 1, p[1] - 1], [p[0] - 1, p[1] + 1], [p[0] + 1, p[1] - 1], [p[0] + 1, p[1] + 1]];
+                final diags = [
+                  [p[0] - 1, p[1] - 1],
+                  [p[0] - 1, p[1] + 1],
+                  [p[0] + 1, p[1] - 1],
+                  [p[0] + 1, p[1] + 1],
+                ];
                 return diags.any((d) => board["${d[0]}_${d[1]}"] == myColor);
               });
 
               if (isFirst) {
-                String cornerTarget = myColor == 'blue' ? "0_0" : myColor == 'red' ? "19_19" : myColor == 'green' ? "0_19" : "19_0";
+                String cornerTarget =
+                    myColor == 'blue'
+                        ? "0_0"
+                        : myColor == 'red'
+                        ? "19_19"
+                        : myColor == 'green'
+                        ? "0_19"
+                        : "19_0";
                 if (coords.any((p) => "${p[0]}_${p[1]}" == cornerTarget)) {
-                  await placeBlokusPiece(gameCode, playerId, pieceId, r, c, rot, flipped: flip, isAuto: true);
+                  await placeBlokusPiece(
+                    gameCode,
+                    playerId,
+                    pieceId,
+                    r,
+                    c,
+                    rot,
+                    flipped: flip,
+                    isAuto: true,
+                  );
                   placed = true;
                   break;
                 }
               } else if (touchesCorner) {
-                await placeBlokusPiece(gameCode, playerId, pieceId, r, c, rot, flipped: flip, isAuto: true);
+                await placeBlokusPiece(
+                  gameCode,
+                  playerId,
+                  pieceId,
+                  r,
+                  c,
+                  rot,
+                  flipped: flip,
+                  isAuto: true,
+                );
                 placed = true;
                 break;
               }
@@ -5273,7 +5756,9 @@ class FirebaseService {
     var gameData = gameSnap.data() as Map<String, dynamic>;
     if (gameData['gameState'] != 'playing') return;
 
-    List<String> playerOrder = List<String>.from(gameData['checkersPlayerOrder']);
+    List<String> playerOrder = List<String>.from(
+      gameData['checkersPlayerOrder'],
+    );
     int currentIndex = gameData['checkersCurrentPlayerIndex'];
     final playerId = playerOrder[currentIndex];
     final board = Map<String, String>.from(gameData['checkersBoard'] ?? {});
@@ -5291,14 +5776,33 @@ class FirebaseService {
         final c = pos[1];
         final isKing = entry.value.endsWith('_king');
 
-        final dirs = isKing
-            ? [[-1, -1], [-1, 1], [1, -1], [1, 1]]
-            : (currentColor == 'red' ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]]);
+        final dirs =
+            isKing
+                ? [
+                  [-1, -1],
+                  [-1, 1],
+                  [1, -1],
+                  [1, 1],
+                ]
+                : (currentColor == 'red'
+                    ? [
+                      [-1, -1],
+                      [-1, 1],
+                    ]
+                    : [
+                      [1, -1],
+                      [1, 1],
+                    ]);
 
         if (hasCapture) {
           if (_canPieceCapture(board, r, c, currentColor, isKing)) {
             String opp = currentColor == 'red' ? 'black' : 'red';
-            for (var d in [[-1, -1], [-1, 1], [1, -1], [1, 1]]) {
+            for (var d in [
+              [-1, -1],
+              [-1, 1],
+              [1, -1],
+              [1, 1],
+            ]) {
               if (isKing) {
                 bool foundOpponent = false;
                 for (int step = 1; step < 8; step++) {
@@ -5314,18 +5818,32 @@ class FirebaseService {
                     }
                   } else {
                     if (foundOpponent) {
-                      legalMoves.add({'fromR': r, 'fromC': c, 'toR': nr, 'toC': nc});
+                      legalMoves.add({
+                        'fromR': r,
+                        'fromC': c,
+                        'toR': nr,
+                        'toC': nc,
+                      });
                     }
                   }
                 }
               } else {
                 int toR = r + d[0] * 2;
                 int toC = c + d[1] * 2;
-                if (toR >= 0 && toR < 8 && toC >= 0 && toC < 8 && !board.containsKey("$toR,$toC")) {
+                if (toR >= 0 &&
+                    toR < 8 &&
+                    toC >= 0 &&
+                    toC < 8 &&
+                    !board.containsKey("$toR,$toC")) {
                   int midR = r + d[0];
                   int midC = c + d[1];
                   if (board["$midR,$midC"]?.startsWith(opp) == true) {
-                    legalMoves.add({'fromR': r, 'fromC': c, 'toR': toR, 'toC': toC});
+                    legalMoves.add({
+                      'fromR': r,
+                      'fromC': c,
+                      'toR': toR,
+                      'toC': toC,
+                    });
                   }
                 }
               }
@@ -5337,8 +5855,17 @@ class FirebaseService {
               for (int step = 1; step < 8; step++) {
                 int toR = r + d[0] * step;
                 int toC = c + d[1] * step;
-                if (toR >= 0 && toR < 8 && toC >= 0 && toC < 8 && !board.containsKey("$toR,$toC")) {
-                  legalMoves.add({'fromR': r, 'fromC': c, 'toR': toR, 'toC': toC});
+                if (toR >= 0 &&
+                    toR < 8 &&
+                    toC >= 0 &&
+                    toC < 8 &&
+                    !board.containsKey("$toR,$toC")) {
+                  legalMoves.add({
+                    'fromR': r,
+                    'fromC': c,
+                    'toR': toR,
+                    'toC': toC,
+                  });
                 } else {
                   break;
                 }
@@ -5346,8 +5873,17 @@ class FirebaseService {
             } else {
               int toR = r + d[0];
               int toC = c + d[1];
-              if (toR >= 0 && toR < 8 && toC >= 0 && toC < 8 && !board.containsKey("$toR,$toC")) {
-                legalMoves.add({'fromR': r, 'fromC': c, 'toR': toR, 'toC': toC});
+              if (toR >= 0 &&
+                  toR < 8 &&
+                  toC >= 0 &&
+                  toC < 8 &&
+                  !board.containsKey("$toR,$toC")) {
+                legalMoves.add({
+                  'fromR': r,
+                  'fromC': c,
+                  'toR': toR,
+                  'toC': toC,
+                });
               }
             }
           }
@@ -5357,7 +5893,15 @@ class FirebaseService {
 
     if (legalMoves.isNotEmpty) {
       final move = legalMoves[Random().nextInt(legalMoves.length)];
-      await checkersMove(gameCode, playerId, move['fromR']!, move['fromC']!, move['toR']!, move['toC']!, isAuto: true);
+      await checkersMove(
+        gameCode,
+        playerId,
+        move['fromR']!,
+        move['fromC']!,
+        move['toR']!,
+        move['toC']!,
+        isAuto: true,
+      );
 
       final nextSnap = await gameRef.get();
       if (nextSnap.exists) {
@@ -5406,7 +5950,9 @@ class FirebaseService {
 
     if (gameData['roundState'] == 'collecting_words') {
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final submitted = Map<String, dynamic>.from(gameData['timesUpSubmittedPlayers'] ?? {});
+      final submitted = Map<String, dynamic>.from(
+        gameData['timesUpSubmittedPlayers'] ?? {},
+      );
       final existingWords = List<String>.from(gameData['timesUpWords'] ?? []);
 
       bool missingFound = false;
@@ -5419,7 +5965,11 @@ class FirebaseService {
 
       if (missingFound || submitted.length >= players.length) {
         if (existingWords.isEmpty) {
-          final fallback = (GameWords.pictionaryWords.values.expand((list) => list).toList()..shuffle()).take(10).toList();
+          final fallback =
+              (GameWords.pictionaryWords.values.expand((list) => list).toList()
+                    ..shuffle())
+                  .take(10)
+                  .toList();
           existingWords.addAll(fallback);
         }
 
@@ -5438,7 +5988,10 @@ class FirebaseService {
           'teamScores': {'teamA': 0, 'teamB': 0},
           'roundState': 'playing_round_1',
           'currentRoundNumber': 1,
-          'currentGuesserId': teamA.isNotEmpty ? teamA[0] : (playerIds.isNotEmpty ? playerIds[0] : ''),
+          'currentGuesserId':
+              teamA.isNotEmpty
+                  ? teamA[0]
+                  : (playerIds.isNotEmpty ? playerIds[0] : ''),
           'currentRoundTime': 30,
           'timesUpTeamATurnIndex': 1,
           'timesUpTeamBTurnIndex': 0,
@@ -5523,7 +6076,10 @@ class FirebaseService {
     }
 
     if (gameData['petitsChevauxHasRolled'] == true) {
-      final positions = List<int>.from(gameData['petitsChevauxPositions']?[currentPlayerId] ?? [-1, -1, -1, -1]);
+      final positions = List<int>.from(
+        gameData['petitsChevauxPositions']?[currentPlayerId] ??
+            [-1, -1, -1, -1],
+      );
       final dice = (gameData['petitsChevauxDice'] as num?)?.toInt() ?? 0;
       int? validPawnIdx;
 
@@ -5534,7 +6090,9 @@ class FirebaseService {
           break;
         }
       }
-      if (validPawnIdx == null && (dice == 1 || dice == 6) && !positions.contains(0)) {
+      if (validPawnIdx == null &&
+          (dice == 1 || dice == 6) &&
+          !positions.contains(0)) {
         for (int i = 0; i < 4; i++) {
           if (positions[i] == -1) {
             validPawnIdx = i;
@@ -5544,7 +6102,13 @@ class FirebaseService {
       }
 
       if (validPawnIdx != null) {
-        await movePawnPetitsChevaux(gameCode, currentPlayerId, currentPlayerId, validPawnIdx, isAuto: true);
+        await movePawnPetitsChevaux(
+          gameCode,
+          currentPlayerId,
+          currentPlayerId,
+          validPawnIdx,
+          isAuto: true,
+        );
       } else {
         await passTurnPetitsChevaux(gameCode, currentPlayerId, isAuto: true);
       }
@@ -5585,7 +6149,8 @@ class FirebaseService {
           if (!players.containsKey(playerIdToRemove)) return;
 
           final callerAuthUid = currentAuthUid;
-          final targetAuthUid = players[playerIdToRemove]?['authUid'] ?? playerIdToRemove;
+          final targetAuthUid =
+              players[playerIdToRemove]?['authUid'] ?? playerIdToRemove;
           final hostAuthUid = players[hostId]?['authUid'] ?? hostId;
 
           // Sécurité : Seul l'hôte ou le joueur lui-même peut déclencher le départ
@@ -5593,7 +6158,8 @@ class FirebaseService {
             return;
           }
 
-          String removedPlayerName = players[playerIdToRemove]?['name'] ?? 'Un joueur';
+          String removedPlayerName =
+              players[playerIdToRemove]?['name'] ?? 'Un joueur';
           players.remove(playerIdToRemove);
           playerOrder.remove(playerIdToRemove);
           teams.forEach((key, playerList) {
@@ -5611,53 +6177,74 @@ class FirebaseService {
 
           // Cas 1 : Moins de 2 joueurs dans une partie en cours -> Victoire du joueur restant par forfait
           if (players.length < 2 && gameData['gameState'] == 'playing') {
-            final String? remainingPlayerId = players.keys.isNotEmpty ? players.keys.first : null;
-            final String remainingName = remainingPlayerId != null ? (players[remainingPlayerId]?['name'] ?? 'Joueur') : 'Inconnu';
-            
+            final String? remainingPlayerId =
+                players.keys.isNotEmpty ? players.keys.first : null;
+            final String remainingName =
+                remainingPlayerId != null
+                    ? (players[remainingPlayerId]?['name'] ?? 'Joueur')
+                    : 'Inconnu';
+
             updates['gameState'] = 'gameOver';
             updates['gameWinner'] = remainingPlayerId;
-            updates['gameEndReason'] = "$removedPlayerName s'est déconnecté. Victoire de $remainingName par forfait !";
+            updates['gameEndReason'] =
+                "$removedPlayerName s'est déconnecté. Victoire de $remainingName par forfait !";
             if (remainingPlayerId != null) {
-              updates['players.$remainingPlayerId.score'] = FieldValue.increment(1);
+              updates['players.$remainingPlayerId.score'] =
+                  FieldValue.increment(1);
             }
           } else {
             // Cas 2 : Transmission du rôle d'hôte
-            if (gameData['hostId'] == playerIdToRemove && playerOrder.isNotEmpty) {
+            if (gameData['hostId'] == playerIdToRemove &&
+                playerOrder.isNotEmpty) {
               updates['hostId'] = playerOrder[0];
-              newLogs.add("${players[playerOrder[0]]?['name']} est le nouvel hôte.");
+              newLogs.add(
+                "${players[playerOrder[0]]?['name']} est le nouvel hôte.",
+              );
             }
 
             // Cas 3 : Décalage propre du tour pour tous les jeux
-            int currentPlayerIndex = (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
+            int currentPlayerIndex =
+                (gameData['currentPlayerIndex'] as num?)?.toInt() ?? 0;
             if (playerOrder.isNotEmpty) {
               if (currentPlayerIndex >= playerOrder.length) {
                 updates['currentPlayerIndex'] = 0;
               }
-              updates['currentPlayerId'] = playerOrder[updates['currentPlayerIndex'] ?? currentPlayerIndex];
+              updates['currentPlayerId'] =
+                  playerOrder[updates['currentPlayerIndex'] ??
+                      currentPlayerIndex];
             }
 
             // Nettoyage des listes d'ordres spécifiques aux sous-jeux
             if (gameData['unoPlayerOrder'] != null) {
-              List<String> unoOrder = List<String>.from(gameData['unoPlayerOrder']);
+              List<String> unoOrder = List<String>.from(
+                gameData['unoPlayerOrder'],
+              );
               unoOrder.remove(playerIdToRemove);
               updates['unoPlayerOrder'] = unoOrder;
               if (unoOrder.isNotEmpty) {
-                int unoIdx = (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+                int unoIdx =
+                    (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
                 updates['unoCurrentPlayerIndex'] = unoIdx % unoOrder.length;
               }
             }
             if (gameData['bigTwoPlayerOrder'] != null) {
-              List<String> b2Order = List<String>.from(gameData['bigTwoPlayerOrder']);
+              List<String> b2Order = List<String>.from(
+                gameData['bigTwoPlayerOrder'],
+              );
               b2Order.remove(playerIdToRemove);
               updates['bigTwoPlayerOrder'] = b2Order;
             }
             if (gameData['milleBornesPlayerOrder'] != null) {
-              List<String> mbOrder = List<String>.from(gameData['milleBornesPlayerOrder']);
+              List<String> mbOrder = List<String>.from(
+                gameData['milleBornesPlayerOrder'],
+              );
               mbOrder.remove(playerIdToRemove);
               updates['milleBornesPlayerOrder'] = mbOrder;
             }
             if (gameData['petitsChevauxPlayerOrder'] != null) {
-              List<String> pcOrder = List<String>.from(gameData['petitsChevauxPlayerOrder']);
+              List<String> pcOrder = List<String>.from(
+                gameData['petitsChevauxPlayerOrder'],
+              );
               pcOrder.remove(playerIdToRemove);
               updates['petitsChevauxPlayerOrder'] = pcOrder;
             }
@@ -5772,7 +6359,8 @@ class FirebaseService {
         'botPlayers.$playerId': true,
         'pendingBotReplacement': FieldValue.delete(),
         'inactiveTurnCounts.$playerId': 0,
-        'turnStartTime': FieldValue.serverTimestamp(), // Réinitialise à 5s maintenant
+        'turnStartTime':
+            FieldValue.serverTimestamp(), // Réinitialise à 5s maintenant
         'gameLog': FieldValue.arrayUnion([
           "🤖 $playerName a été remplacé par l'ordinateur (IA active - 5s par tour).",
         ]),
@@ -5896,7 +6484,7 @@ class FirebaseService {
       if (!gameSnap.exists || gameSnap.data() == null) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      // MODIFICATION : VÃƒÂ©rification de roundState OU currentPhase (pour InfiltrÃƒÂ©)
+      // MODIFICATION : Vérification de roundState OU currentPhase (pour Infiltré)
       bool isVoting =
           gameData['roundState'] == 'voting' ||
           gameData['currentPhase'] == 'voting';
@@ -5936,7 +6524,7 @@ class FirebaseService {
       }
     });
 
-    // AprÃƒÂ¨s la transaction (si des joueurs ont ÃƒÂ©tÃƒÂ© expulsÃƒÂ©s ou non), on force le calcul des votes
+    // Après la transaction (si des joueurs ont été expulsés ou non), on force le calcul des votes
     final gameRef = _db.collection('games').doc(gameCode);
     var updatedGameData = (await gameRef.get()).data() as Map<String, dynamic>;
 
@@ -5946,7 +6534,8 @@ class FirebaseService {
       await gameRef.update({
         'roundState': 'result',
         'roundWinnerId': null,
-        'gameEndReason': "Le Juge n'a pas désigné de gagnant à temps. Aucun point attribué.",
+        'gameEndReason':
+            "Le Juge n'a pas désigné de gagnant à temps. Aucun point attribué.",
         'turnStartTime': FieldValue.serverTimestamp(),
       });
       return;
@@ -5956,19 +6545,19 @@ class FirebaseService {
       await _tallyVotes(gameRef, updatedGameData);
     } else if (updatedGameData['gameType'] == 'Infiltré & Mr. White' &&
         updatedGameData['currentPhase'] == 'voting') {
-      // Force la rÃƒÂ©solution du vote avec les votes actuels
+      // Force la résolution du vote avec les votes actuels
       var votes = Map<String, dynamic>.from(updatedGameData['votes'] ?? {});
       var playerData = Map<String, dynamic>.from(
         updatedGameData['playerData'] ?? {},
       );
 
       if (votes.isEmpty) {
-        // Personne n'a votÃƒÂ©, passer au prochain tour sans ÃƒÂ©limination
+        // Personne n'a voté, passer au prochain tour sans élimination
         await gameRef.update({
           'currentPhase': 'turn_result',
           'eliminatedThisTurn': [],
           'turnLog': FieldValue.arrayUnion([
-            "Personne n'a votÃƒÂ©. Aucun joueur ÃƒÂ©liminÃƒÂ©.",
+            "Personne n'a voté. Aucun joueur éliminé.",
           ]),
           'turnStartTime': FieldValue.serverTimestamp(),
         });
@@ -5997,9 +6586,7 @@ class FirebaseService {
           'currentPhase': 'turn_result',
           'eliminatedThisTurn':
               eliminatedPlayerId != null ? [eliminatedPlayerId] : [],
-          'turnLog': FieldValue.arrayUnion([
-            "Le temps de vote est ÃƒÂ©coulÃƒÂ© !",
-          ]),
+          'turnLog': FieldValue.arrayUnion(["Le temps de vote est écoulé !"]),
           'turnStartTime': FieldValue.serverTimestamp(),
         });
       }
@@ -6017,8 +6604,10 @@ class FirebaseService {
     var gameData = gameSnap.data() as Map<String, dynamic>;
 
     if (gameData['gameState'] != 'playing' ||
-        gameData['roundState'] != 'result')
+        (gameData['roundState'] != 'result' &&
+            gameData['currentPhase'] != 'turn_result')) {
       return;
+    }
 
     final gameType = gameData['gameType'];
     switch (gameType) {
@@ -6043,6 +6632,9 @@ class FirebaseService {
       case 'Devine Tête':
         await nextDevineTeteTurn(gameCode);
         break;
+      case 'Infiltré & Mr. White':
+        await processEliminationsAndCheckWin(gameCode);
+        break;
       case 'Yams':
       case 'Bataille Navale':
         break;
@@ -6058,8 +6650,49 @@ class FirebaseService {
     DocumentReference gameRef,
     Map<String, dynamic> gameData,
   ) async {
-    final players = Map<String, dynamic>.from(gameData['players']);
-    final playerIds = players.keys.toList()..shuffle();
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final playerProfiles = Map<String, dynamic>.from(
+      gameData['playerProfiles'] ?? {},
+    );
+    final Set<String> allPlayerIds = {};
+    allPlayerIds.addAll(players.keys);
+    allPlayerIds.addAll(playerProfiles.keys);
+    if (gameData['playerOrder'] is List) {
+      allPlayerIds.addAll(
+        (gameData['playerOrder'] as List).map((e) => e.toString()),
+      );
+    }
+    if (gameData['yamsPlayerOrder'] is List) {
+      allPlayerIds.addAll(
+        (gameData['yamsPlayerOrder'] as List).map((e) => e.toString()),
+      );
+    }
+
+    for (String pId in allPlayerIds) {
+      String pName = 'Joueur';
+      if (players[pId] is Map &&
+          players[pId]['name'] != null &&
+          players[pId]['name'] != 'Inconnu' &&
+          players[pId]['name'].toString().trim().isNotEmpty) {
+        pName = players[pId]['name'];
+      } else if (playerProfiles[pId] is Map &&
+          playerProfiles[pId]['name'] != null &&
+          playerProfiles[pId]['name'] != 'Inconnu' &&
+          playerProfiles[pId]['name'].toString().trim().isNotEmpty) {
+        pName = playerProfiles[pId]['name'];
+      }
+      players[pId] = {
+        ...(players[pId] is Map ? players[pId] : {}),
+        'name': pName,
+        'score': (players[pId] is Map ? players[pId]['score'] : 0) ?? 0,
+      };
+      playerProfiles[pId] = {
+        ...(playerProfiles[pId] is Map ? playerProfiles[pId] : {}),
+        'name': pName,
+      };
+    }
+
+    final playerIds = allPlayerIds.toList()..shuffle();
 
     Map<String, Map<String, int>> scores = {};
     for (String pId in playerIds) {
@@ -6069,6 +6702,9 @@ class FirebaseService {
     await gameRef.update({
       'gameState': 'playing',
       'roundState': 'playing_turn',
+      'players': players,
+      'playerProfiles': playerProfiles,
+      'playerOrder': playerIds,
       'yamsPlayerOrder': playerIds,
       'yamsCurrentPlayerId': playerIds.first,
       'yamsDice': [0, 0, 0, 0, 0],
@@ -6107,9 +6743,10 @@ class FirebaseService {
       }
 
       final rawDice = gameData['yamsDice'] as List<dynamic>?;
-      List<int> currentDice = (rawDice != null && rawDice.length == 5)
-          ? List<int>.from(rawDice.map((e) => (e as num).toInt()))
-          : [0, 0, 0, 0, 0];
+      List<int> currentDice =
+          (rawDice != null && rawDice.length == 5)
+              ? List<int>.from(rawDice.map((e) => (e as num).toInt()))
+              : [0, 0, 0, 0, 0];
       final List<bool> heldDice = List<bool>.from(
         gameData['yamsHeldDice'] ?? [false, false, false, false, false],
       );
@@ -6132,12 +6769,22 @@ class FirebaseService {
         applySpeedBonus: true,
       );
 
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final pName = players[playerId]?['name'] ?? 'Joueur';
+      final String rollMsg =
+          (rollsLeft == 3)
+              ? "$pName a lancé les dés !"
+              : "$pName a relancé les dés (${3 - rollsLeft + 1}/3) !";
+
       transaction.update(gameRef, {
         'yamsDice': currentDice,
         'yamsHeldDice': effectiveHeld,
         'yamsRollsLeft': rollsLeft - 1,
+        'yamsLastHoldAction': rollMsg,
+        'yamsLastTappedIndex': null,
         'turnStartTime': FieldValue.serverTimestamp(),
       });
+      updateYamsLiveInteraction(gameCode, playerId, tappedDieIndex: null);
     });
   }
 
@@ -6146,18 +6793,36 @@ class FirebaseService {
     String playerId,
     int index,
   ) async {
-    await _db.runTransaction((transaction) async {
-      final gameRef = _db.collection('games').doc(gameCode);
-      DocumentSnapshot gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) return;
-      var gameData = gameSnap.data() as Map<String, dynamic>;
-      if (gameData['yamsCurrentPlayerId'] != playerId) return;
-      if (gameData['yamsRollsLeft'] == 3) return;
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final gameData = snap.data() as Map<String, dynamic>;
+    if (gameData['yamsCurrentPlayerId'] != playerId) return;
+    if (gameData['yamsRollsLeft'] == 3) return;
 
-      List<bool> heldDice = List<bool>.from(gameData['yamsHeldDice']);
+    List<bool> heldDice = List<bool>.from(
+      gameData['yamsHeldDice'] ?? [false, false, false, false, false],
+    );
+    if (index >= 0 && index < heldDice.length) {
       heldDice[index] = !heldDice[index];
-      transaction.update(gameRef, {'yamsHeldDice': heldDice});
-    });
+      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+      final pName = players[playerId]?['name'] ?? 'Joueur';
+      final isNowHeld = heldDice[index];
+      final currentDice = List<int>.from(gameData['yamsDice'] ?? []);
+      final dieVal = (index < currentDice.length) ? currentDice[index] : 0;
+      final actionText =
+          isNowHeld
+              ? "$pName a gardé le dé de valeur $dieVal (dé #${index + 1}) 🔒"
+              : "$pName a débloqué le dé #${index + 1}";
+
+      await gameRef.update({
+        'yamsHeldDice': heldDice,
+        'yamsLastHoldAction': actionText,
+        'yamsLastTappedIndex': index,
+      });
+
+      updateYamsLiveInteraction(gameCode, playerId, tappedDieIndex: index);
+    }
   }
 
   // --- YAMS ---
@@ -6385,12 +7050,17 @@ class FirebaseService {
     }
 
     final rawDice = currentData['yamsDice'] as List<dynamic>?;
-    List<int> dice = (rawDice != null && rawDice.length == 5)
-        ? List<int>.from(rawDice.map((e) => (e as num).toInt()))
-        : [1, 2, 3, 4, 5];
+    List<int> dice =
+        (rawDice != null && rawDice.length == 5)
+            ? List<int>.from(rawDice.map((e) => (e as num).toInt()))
+            : [1, 2, 3, 4, 5];
 
-    final rawScores = Map<String, dynamic>.from(currentData['yamsScores'] ?? {});
-    final myScores = Map<String, dynamic>.from(rawScores[currentPlayerId] ?? {});
+    final rawScores = Map<String, dynamic>.from(
+      currentData['yamsScores'] ?? {},
+    );
+    final myScores = Map<String, dynamic>.from(
+      rawScores[currentPlayerId] ?? {},
+    );
 
     const categories = [
       'Chance',
@@ -6599,7 +7269,8 @@ class FirebaseService {
       if (!_isTurnTimedOut(gameData)) return;
 
       final playerOrder = List<String>.from(gameData['unoPlayerOrder'] ?? []);
-      final currentIndex = (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
+      final currentIndex =
+          (gameData['unoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
@@ -6607,17 +7278,24 @@ class FirebaseService {
       final hands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
       final discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
-      final String topCard = discardPile.isNotEmpty ? discardPile.last : 'red-0';
+      final String topCard =
+          discardPile.isNotEmpty ? discardPile.last : 'red-0';
       final String? wildColor = gameData['unoWildColorChosen'];
       final int direction = (gameData['unoDirection'] as num?)?.toInt() ?? 1;
 
       final bool drawActionDone = gameData['unoDrawActionDone'] == true;
       final String? lastDrawn = gameData['unoLastDrawnCard'] as String?;
-      int nextIndex = (currentIndex + direction + playerOrder.length) % playerOrder.length;
+      int nextIndex =
+          (currentIndex + direction + playerOrder.length) % playerOrder.length;
 
       String determineBestUnoColor(List<String> hand) {
         const colors = ['red', 'blue', 'green', 'yellow'];
-        Map<String, int> counts = {'red': 0, 'blue': 0, 'green': 0, 'yellow': 0};
+        Map<String, int> counts = {
+          'red': 0,
+          'blue': 0,
+          'green': 0,
+          'yellow': 0,
+        };
         for (var c in hand) {
           for (var col in colors) {
             if (c.startsWith(col)) counts[col] = (counts[col] ?? 0) + 1;
@@ -6636,11 +7314,16 @@ class FirebaseService {
 
       // 1. Déjà pioché : jouer la carte piochée si possible, sinon passer
       if (drawActionDone) {
-        if (lastDrawn != null && myHand.contains(lastDrawn) && GameData.canPlayUnoCard(lastDrawn, topCard, wildColor)) {
+        if (lastDrawn != null &&
+            myHand.contains(lastDrawn) &&
+            GameData.canPlayUnoCard(lastDrawn, topCard, wildColor)) {
           myHand.remove(lastDrawn);
           discardPile.add(lastDrawn);
           hands[playerId] = myHand;
-          final String? autoWild = lastDrawn.startsWith('wild') ? determineBestUnoColor(myHand) : null;
+          final String? autoWild =
+              lastDrawn.startsWith('wild')
+                  ? determineBestUnoColor(myHand)
+                  : null;
 
           if (myHand.isEmpty) {
             transaction.update(gameRef, {
@@ -6663,7 +7346,9 @@ class FirebaseService {
             'unoLastDrawnCard': null,
             'unoWildColorChosen': autoWild,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a joué $lastDrawn."]),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName a joué $lastDrawn.",
+            ]),
           });
         } else {
           transaction.update(gameRef, {
@@ -6671,7 +7356,9 @@ class FirebaseService {
             'unoDrawActionDone': false,
             'unoLastDrawnCard': null,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName passe son tour."]),
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName passe son tour.",
+            ]),
           });
         }
         return;
@@ -6687,7 +7374,8 @@ class FirebaseService {
         myHand.remove(playable);
         discardPile.add(playable);
         hands[playerId] = myHand;
-        final String? autoWild = playable.startsWith('wild') ? determineBestUnoColor(myHand) : null;
+        final String? autoWild =
+            playable.startsWith('wild') ? determineBestUnoColor(myHand) : null;
 
         if (myHand.isEmpty) {
           transaction.update(gameRef, {
@@ -6710,7 +7398,9 @@ class FirebaseService {
           'unoLastDrawnCard': null,
           'unoWildColorChosen': autoWild,
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a joué $playable."]),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ $playerName a joué $playable.",
+          ]),
         });
       }
       // 3. Piocher
@@ -6727,7 +7417,9 @@ class FirebaseService {
           'unoDrawActionDone': false,
           'unoLastDrawnCard': null,
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion(["⏱️ $playerName pioche et passe son tour."]),
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ $playerName pioche et passe son tour.",
+          ]),
         });
       }
     });
@@ -6749,7 +7441,8 @@ class FirebaseService {
       return;
     }
     List<String> playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
-    int currentPlayerIndex = (gameData['currentPlayerIndex'] as num? ?? 0).toInt();
+    int currentPlayerIndex =
+        (gameData['currentPlayerIndex'] as num? ?? 0).toInt();
     if (currentPlayerIndex >= playerOrder.length) return;
     String timedOutPlayerId = playerOrder[currentPlayerIndex];
     var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
@@ -6762,7 +7455,8 @@ class FirebaseService {
     }
 
     final int currentBet = (gameData['currentBet'] as num? ?? 0).toInt();
-    final int myBet = (playerData[timedOutPlayerId]?['currentBet'] as num? ?? 0).toInt();
+    final int myBet =
+        (playerData[timedOutPlayerId]?['currentBet'] as num? ?? 0).toInt();
     final String action = (myBet >= currentBet) ? 'check' : 'fold';
 
     await pokerAction(gameCode, timedOutPlayerId, action, isAuto: true);
@@ -6795,9 +7489,11 @@ class FirebaseService {
         bool updated = false;
 
         players.forEach((pId, _) {
-          var playerGrid = (grids[pId] as List?)
-              ?.map((e) => Map<String, dynamic>.from(e as Map))
-              .toList() ?? [];
+          var playerGrid =
+              (grids[pId] as List?)
+                  ?.map((e) => Map<String, dynamic>.from(e as Map))
+                  .toList() ??
+              [];
           int revCount = counts[pId] ?? 0;
 
           for (int i = 0; i < playerGrid.length && revCount < 2; i++) {
@@ -6845,9 +7541,10 @@ class FirebaseService {
     var deck = List<int>.from(gameData['deck'] ?? []);
     var discardPile = List<int>.from(gameData['discardPile'] ?? []);
     var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
-    var playerGrid = (grids[playerId] as List)
-        .map((e) => Map<String, dynamic>.from(e as Map))
-        .toList();
+    var playerGrid =
+        (grids[playerId] as List)
+            .map((e) => Map<String, dynamic>.from(e as Map))
+            .toList();
 
     // 1. Si une carte était déjà en cours de pioche, on la jette. Sinon on prend la 1ère du paquet
     if (gameData['drawnCard'] != null) {
@@ -6866,7 +7563,8 @@ class FirebaseService {
     // 2. Révéler la première carte encore cachée
     int? indexToReveal;
     for (int i = 0; i < playerGrid.length; i++) {
-      if (playerGrid[i]['revealed'] == false && playerGrid[i]['value'] != -100) {
+      if (playerGrid[i]['revealed'] == false &&
+          playerGrid[i]['value'] != -100) {
         indexToReveal = i;
         break;
       }
@@ -6882,7 +7580,8 @@ class FirebaseService {
     gameData['discardPile'] = discardPile;
     gameData['drawnCard'] = null;
 
-    final String playerName = gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+    final String playerName =
+        gameData['players']?[playerId]?['name'] ?? 'Un joueur';
 
     transaction.update(gameRef, {
       'drawnCard': null,
@@ -6905,9 +7604,10 @@ class FirebaseService {
     String playerId,
   ) async {
     var grids = Map<String, dynamic>.from(gameData['playerGrids'] ?? {});
-    var playerGrid = (grids[playerId] as List)
-        .map((e) => Map<String, dynamic>.from(e as Map))
-        .toList();
+    var playerGrid =
+        (grids[playerId] as List)
+            .map((e) => Map<String, dynamic>.from(e as Map))
+            .toList();
     final players = Map<String, dynamic>.from(gameData['players'] ?? {});
 
     // Annulation des colonnes identiques
@@ -6938,9 +7638,10 @@ class FirebaseService {
       int lowestScoreInRound = 999;
 
       players.keys.forEach((pId) {
-        List<Map<String, dynamic>> currentGrid = (grids[pId] as List)
-            .map((card) => Map<String, dynamic>.from(card as Map))
-            .toList();
+        List<Map<String, dynamic>> currentGrid =
+            (grids[pId] as List)
+                .map((card) => Map<String, dynamic>.from(card as Map))
+                .toList();
         for (var card in currentGrid) {
           card['revealed'] = true;
         }
@@ -6977,7 +7678,9 @@ class FirebaseService {
         roundScores[roundEnderId] = (roundScores[roundEnderId]! + 10);
       }
 
-      var totalScores = Map<String, dynamic>.from(gameData['totalScores'] ?? {});
+      var totalScores = Map<String, dynamic>.from(
+        gameData['totalScores'] ?? {},
+      );
       roundScores.forEach((pId, score) {
         totalScores[pId] = (totalScores[pId] ?? 0) + score;
       });
@@ -7009,23 +7712,27 @@ class FirebaseService {
         updates.addAll({
           'gameState': 'gameOver',
           'gameWinner': gameWinnerId,
-          'gameEndReason': "${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !",
+          'gameEndReason':
+              "${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !",
         });
       }
 
       transaction.update(gameRef, updates);
     } else {
       // Passer au joueur suivant
-      var playerOrder = List<String>.from(gameData['playerOrder'] ?? players.keys.toList());
+      var playerOrder = List<String>.from(
+        gameData['playerOrder'] ?? players.keys.toList(),
+      );
       int currentIndex = playerOrder.indexOf(playerId);
       int nextIndex = (currentIndex + 1) % playerOrder.length;
-      
+
       transaction.update(gameRef, {
         'currentPlayerId': playerOrder[nextIndex],
         'roundState': 'player_turn',
         'drawnCard': null,
         'playerGrids': grids,
-        'turnStartTime': FieldValue.serverTimestamp(), // Relance immédiatement le timer pour le joueur suivant
+        'turnStartTime':
+            FieldValue.serverTimestamp(), // Relance immédiatement le timer pour le joueur suivant
       });
     }
   }
@@ -7148,8 +7855,8 @@ class FirebaseService {
           'currentRound': FieldValue.increment(1),
           'currentPhoto': nextPhoto,
           'playedPhotos': FieldValue.arrayUnion([nextPhoto['url']]),
-          'votes': {}, // RÃƒÂ©initialiser les votes
-          'roundResults': null, // RÃƒÂ©initialiser les rÃƒÂ©sultats
+          'votes': {}, // Réinitialiser les votes
+          'roundResults': null, // Réinitialiser les résultats
           'roundStartTime': FieldValue.serverTimestamp(),
           'turnStartTime': FieldValue.serverTimestamp(),
         });
@@ -7420,7 +8127,7 @@ class FirebaseService {
       };
 
       if (currentStep == 0) {
-        // Guard: empÃƒÂªcher double soumission
+        // Guard: empêcher double soumission
         List<String> existingSubmitted = List<String>.from(
           gameData['submittedPlayers'] ?? [],
         );
@@ -7548,7 +8255,7 @@ class FirebaseService {
             updates['roundState'] =
                 (nextStep % 2 != 0) ? 'drawing' : 'guessing';
           } else {
-            // ComplÃƒÂ©ment et Brise-Glace n'ont que du dessin aprÃƒÂ¨s l'ÃƒÂ©tape 0.
+            // Complément et Brise-Glace n'ont que du dessin après l'étape 0.
             updates['roundState'] = 'drawing';
           }
         }
@@ -7562,7 +8269,7 @@ class FirebaseService {
       'phase': 'jour_vote',
       'dayVotes': {},
       'gameLog': FieldValue.arrayUnion([
-        "Le temps des dÃƒÂ©bats est terminÃƒÂ©. Le village doit maintenant voter !",
+        "Le temps des débats est terminé. Le village doit maintenant voter !",
       ]),
       'turnStartTime': FieldValue.serverTimestamp(),
     });
@@ -7573,7 +8280,7 @@ class FirebaseService {
       final response = await http.get(Uri.parse('https://meme-api.com/gimme'));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        return data['url']; // L'URL de l'image du mÃƒÂ¨me
+        return data['url']; // L'URL de l'image du mème
       } else {
         print('Failed to load meme: ${response.statusCode}');
         return 'https://via.placeholder.com/300x200?text=Erreur+Memes'; // Image d'erreur
@@ -7670,25 +8377,25 @@ class FirebaseService {
       if (isLover1WolfCamp != isLover2WolfCamp && vivants.length == 2) {
         winner = "Les Amoureux";
         reason =
-            "Seuls les deux amoureux d'un camp opposÃƒÂ© sont encore en vie. Leur amour triomphe de tout !";
+            "Seuls les deux amoureux d'un camp opposé sont encore en vie. Leur amour triomphe de tout !";
       }
     }
 
     if (winner == null && loupBlancVivant == 1 && vivants.length == 1) {
       winner = "Loup Blanc";
       reason =
-          "Le Loup Blanc est le dernier survivant ! Il a dÃƒÂ©vorÃƒÂ© tout le monde.";
+          "Le Loup Blanc est le dernier survivant ! Il a dévoré tout le monde.";
     }
 
-    // Le Rat Malade gagne quand tous les AUTRES joueurs vivants sont contaminÃƒÂ©s (ou qu'il est le seul survivant)
+    // Le Rat Malade gagne quand tous les AUTRES joueurs vivants sont contaminés (ou qu'il est le seul survivant)
     if (winner == null &&
         ratMaladeVivant > 0 &&
         contaminesVivants == vivants.length - ratMaladeVivant) {
       winner = "Rat Malade";
       reason =
           vivants.length == ratMaladeVivant
-              ? "Le Rat Malade est le seul survivant ! Il a empoisonnÃƒÂ© tout le monde !"
-              : "Tous les autres survivants sont contaminÃƒÂ©s par le Rat Malade. Il a gagnÃƒÂ© !";
+              ? "Le Rat Malade est le seul survivant ! Il a empoisonné tout le monde !"
+              : "Tous les autres survivants sont contaminés par le Rat Malade. Il a gagné !";
     }
 
     if (winner == null &&
@@ -7696,7 +8403,7 @@ class FirebaseService {
         loupsVivants >= (villageoisVivants + solitairesNonLoupsVivants)) {
       winner = "Loups-Garous";
       reason =
-          "Les Loups-Garous sont devenus majoritaires, ils ne peuvent plus perdre. Ils ont gagnÃƒÂ© !";
+          "Les Loups-Garous sont devenus majoritaires, ils ne peuvent plus perdre. Ils ont gagné !";
     }
 
     if (winner == null &&
@@ -7705,8 +8412,7 @@ class FirebaseService {
         loupBlancVivant == 0 &&
         villageoisVivants > 0) {
       winner = "Villageois";
-      reason =
-          "Toutes les menaces ont ÃƒÂ©tÃƒÂ© ÃƒÂ©liminÃƒÂ©es ! Le village a gagnÃƒÂ© !";
+      reason = "Toutes les menaces ont été éliminées ! Le village a gagné !";
     }
 
     if (winner != null) {
@@ -9788,9 +10494,9 @@ class FirebaseService {
     required String gameType,
     required String difficulty,
     int? playerCount,
-    bool isPremiumLobby = false, // NOUVEAU PARAMÃƒË†TRE
-    bool videoEnabled = false, // NOUVEAU PARAMÃƒË†TRE
-    bool audioEnabled = false, // NOUVEAU PARAMÃƒË†TRE
+    bool isPremiumLobby = false, // NOUVEAU PARAMÈTRE
+    bool videoEnabled = false, // NOUVEAU PARAMÈTRE
+    bool audioEnabled = false, // NOUVEAU PARAMÈTRE
     bool devineTeteUseTeams = false,
     List<String>? aiWords, // Pre-generated AI words
     String? cadavreVariant,
@@ -9879,7 +10585,7 @@ class FirebaseService {
       'videoEnabled': videoEnabled, // NOUVEAU CHAMP
       'audioEnabled': audioEnabled, // NOUVEAU CHAMP
       'useTimer':
-          true, // <--- AJOUTER CECI : Force le timer pour les parties crÃƒÂ©ÃƒÂ©es via matchmaking
+          true, // <--- AJOUTER CECI : Force le timer pour les parties créées via matchmaking
       'turnTimerSeconds': turnTimerSeconds ?? 30,
       'resultTimerSeconds': resultTimerSeconds ?? 15,
       if (aiInstructions != null && aiInstructions.isNotEmpty)
@@ -10139,9 +10845,9 @@ class FirebaseService {
     String playerId,
     String gameType,
     String difficulty, {
-    bool isPremiumLobby = false, // NOUVEAU PARAMÃƒË†TRE
-    bool videoEnabled = false, // NOUVEAU PARAMÃƒË†TRE
-    bool audioEnabled = false, // NOUVEAU PARAMÃƒË†TRE
+    bool isPremiumLobby = false, // NOUVEAU PARAMÈTRE
+    bool videoEnabled = false, // NOUVEAU PARAMÈTRE
+    bool audioEnabled = false, // NOUVEAU PARAMÈTRE
     bool devineTeteUseTeams = false,
     String?
     aiInstructions, // AI instructions for premium users (soft mode only)
@@ -10151,7 +10857,7 @@ class FirebaseService {
 
     int? playerCount,
     String? scope,
-    List<String>? selectedCategoriesList, // <--- NOUVEAU PARAMÃƒË†TRE
+    List<String>? selectedCategoriesList, // <--- NOUVEAU PARAMÈTRE
     int? hotPotatoTurnDuration, // <--- AJOUTER
 
     bool dobbleSymbolsPerCard = false,
@@ -10179,14 +10885,14 @@ class FirebaseService {
     int? photoRoulettePhotosPerPlayer,
     int? photoRouletteTime,
     String? photoRouletteMediaType,
-    Map<String, bool>? undercoverRoleSettings, // NOUVEAU PARAMÃƒË†TRE
+    Map<String, bool>? undercoverRoleSettings, // NOUVEAU PARAMÈTRE
     int? infiltreCount,
     int? mrWhiteCount,
     int? undercoverClueTime,
     int? timesUpTotalRounds,
     String? dominoesMode,
     int? dominoesTargetScore,
-    bool? useTimer, // <--- AJOUTER CE PARAMÃƒË†TRE
+    bool? useTimer, // <--- AJOUTER CE PARAMÈTRE
     int? turnTimerSeconds,
     int? resultTimerSeconds,
     bool? petitsChevauxTeamMode,
@@ -10204,7 +10910,7 @@ class FirebaseService {
       if (aiInstructions != null && aiInstructions.isNotEmpty)
         'aiInstructions': aiInstructions,
       if (aiWords != null && aiWords.isNotEmpty) 'aiWords': aiWords,
-      'useTimer': useTimer ?? true, // <--- AJOUTER CECI (Par dÃƒÂ©faut true)
+      'useTimer': useTimer ?? true, // <--- AJOUTER CECI (Par défaut true)
       'turnTimerSeconds': turnTimerSeconds ?? 30,
       'resultTimerSeconds': resultTimerSeconds ?? 15,
       'enableFloatingChat': enableFloatingChat ?? true, // <--- NOUVEAU
@@ -10233,7 +10939,7 @@ class FirebaseService {
       'roundState': 'waitingForStart',
 
       'playerCount': playerCount, // Stocke le nombre de joueurs cible
-      'scope': scope, // Stocke la portÃƒÂ©e de la partie ('pays' ou 'monde')
+      'scope': scope, // Stocke la portée de la partie ('pays' ou 'monde')
 
       if (gameType == 'Petits Chevaux') ...{
         'petitsChevauxTeamMode': petitsChevauxTeamMode ?? false,
@@ -10453,7 +11159,7 @@ class FirebaseService {
       if (gameType == 'Le Jeu des Catégories' ||
           gameType == 'La Patate Chaude') ...{
         'selectedCategories':
-            selectedCategoriesList, // Liste des catÃƒÂ©gories choisies
+            selectedCategoriesList, // Liste des catégories choisies
         'currentCategory': null,
         'hotPotatoUseGlobalTimer': hotPotatoUseGlobalTimer ?? false,
         'hotPotatoGlobalDuration': hotPotatoGlobalDuration ?? 60,
@@ -10516,12 +11222,12 @@ class FirebaseService {
 
     return _db
         .runTransaction((transaction) async {
-          print("[DEBUG joinGame] DÃƒÂ©marrage de la transaction.");
+          print("[DEBUG joinGame] Démarrage de la transaction.");
           DocumentSnapshot gameSnap = await transaction.get(gameRef);
 
           if (gameSnap.exists && gameSnap.get('gameState') == 'lobby') {
             print(
-              "[DEBUG joinGame] Partie trouvÃƒÂ©e et en lobby. Lecture des donnÃƒÂ©es...",
+              "[DEBUG joinGame] Partie trouvée et en lobby. Lecture des données...",
             );
 
             final Map<String, dynamic> players = Map<String, dynamic>.from(
@@ -10540,19 +11246,19 @@ class FirebaseService {
             };
 
             print(
-              "[DEBUG joinGame] JOUEURS MIS Ãƒâ‚¬ JOUR (APRÃƒË†S AJOUT): $players",
+              "[DEBUG joinGame] JOUEURS MIS À JOUR (APRÈS AJOUT): $players",
             );
 
             transaction.update(gameRef, {'players': players});
 
             print(
-              "[DEBUG joinGame] Transaction.update() appelÃƒÂ©e avec la nouvelle liste de joueurs.",
+              "[DEBUG joinGame] Transaction.update() appelée avec la nouvelle liste de joueurs.",
             );
 
             if (gameSnap['gameType'] == 'Petit Bac') {
               transaction.update(gameRef, {'petitBacTotalScores.$playerId': 0});
             }
-            print("[DEBUG joinGame] Transaction rÃƒÂ©ussie. Retourne true.");
+            print("[DEBUG joinGame] Transaction réussie. Retourne true.");
             return true;
           }
 
@@ -11376,7 +12082,7 @@ class FirebaseService {
       tabooTeams[currentTeamId] ?? [],
     );
 
-    // Choisir un donneur d'indice alÃƒÂ©atoire dans l'ÃƒÂ©quipe actuelle
+    // Choisir un donneur d'indice aléatoire dans l'équipe actuelle
     final String clueGiverId =
         currentTeamPlayers[Random().nextInt(currentTeamPlayers.length)];
 
@@ -11571,11 +12277,14 @@ class FirebaseService {
 
     if (gameData['tabooTurnActive'] == true) {
       final String currentTeamId = gameData['tabooCurrentTeamId'];
-      final tabooTeams = Map<String, dynamic>.from(gameData['tabooTeams'] ?? {});
+      final tabooTeams = Map<String, dynamic>.from(
+        gameData['tabooTeams'] ?? {},
+      );
       final List<String> teamIds = tabooTeams.keys.toList();
       final scores = Map<String, int>.from(gameData['tabooScores'] ?? {});
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final clueGiverId = gameData['tabooClueGiverId'] ?? gameData['currentPlayerId'];
+      final clueGiverId =
+          gameData['tabooClueGiverId'] ?? gameData['currentPlayerId'];
 
       if ((scores[currentTeamId] ?? 0) >= 4 && clueGiverId != null) {
         final giverAuth = players[clueGiverId]?['authUid'] ?? clueGiverId;
@@ -11585,7 +12294,8 @@ class FirebaseService {
       }
 
       int nextTeamIndex = (teamIds.indexOf(currentTeamId) + 1) % teamIds.length;
-      int currentRoundNum = (gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1;
+      int currentRoundNum =
+          (gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1;
       int totalRounds = (gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4;
 
       if (nextTeamIndex == 0) {
@@ -11593,8 +12303,13 @@ class FirebaseService {
       }
 
       if (currentRoundNum > totalRounds) {
-        String winnerTeam = (scores['team_0'] ?? 0) >= (scores['team_1'] ?? 0) ? 'team_0' : 'team_1';
-        String winnerName = tabooTeams[winnerTeam]?['name'] ?? (winnerTeam == 'team_0' ? 'Équipe 1' : 'Équipe 2');
+        String winnerTeam =
+            (scores['team_0'] ?? 0) >= (scores['team_1'] ?? 0)
+                ? 'team_0'
+                : 'team_1';
+        String winnerName =
+            tabooTeams[winnerTeam]?['name'] ??
+            (winnerTeam == 'team_0' ? 'Équipe 1' : 'Équipe 2');
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': winnerTeam,
@@ -11607,7 +12322,9 @@ class FirebaseService {
         'tabooTurnActive': false,
         'tabooCurrentTeamIndex': nextTeamIndex,
         'tabooRoundNumber': currentRoundNum,
-        'gameLog': FieldValue.arrayUnion(["Temps écoulé ! Passage à l'équipe suivante."]),
+        'gameLog': FieldValue.arrayUnion([
+          "Temps écoulé ! Passage à l'équipe suivante.",
+        ]),
       });
 
       gameData['tabooCurrentTeamIndex'] = nextTeamIndex;
@@ -11953,8 +12670,6 @@ class FirebaseService {
     });
   }
 
-
-
   Future<void> _startRamiRound(
     DocumentReference gameRef,
     Map<String, dynamic> gameData,
@@ -12080,9 +12795,10 @@ class FirebaseService {
                 ]),
                 if (gameOver) ...{
                   'gameState': 'gameOver',
-                  'gameWinner': totalScores.entries
-                      .reduce((a, b) => a.value < b.value ? a : b)
-                      .key,
+                  'gameWinner':
+                      totalScores.entries
+                          .reduce((a, b) => a.value < b.value ? a : b)
+                          .key,
                   'gameEndReason': "Score cible atteint !",
                 },
               });
@@ -12288,6 +13004,7 @@ class FirebaseService {
           if (r == 'K') return 13;
           return int.tryParse(r) ?? 0;
         }
+
         list.sort((a, b) => getVal(a).compareTo(getVal(b)));
         List<String> currentRun = [];
         for (int i = 0; i < list.length; i++) {
@@ -12299,7 +13016,8 @@ class FirebaseService {
             if (curVal == prevVal + 1) {
               currentRun.add(list[i]);
             } else if (curVal > prevVal + 1) {
-              if (currentRun.length >= 3 && GameData.isValidRamiMeld(currentRun)) {
+              if (currentRun.length >= 3 &&
+                  GameData.isValidRamiMeld(currentRun)) {
                 foundMelds.add(List.from(currentRun));
                 for (var c in currentRun) remaining.remove(c);
               }
@@ -12340,22 +13058,38 @@ class FirebaseService {
         updatedData['gameState'] == 'gameOver') {
       return;
     }
-    final hand = List<String>.from(updatedData['ramiPlayerHands']?[currentPlayerId] ?? []);
+    final hand = List<String>.from(
+      updatedData['ramiPlayerHands']?[currentPlayerId] ?? [],
+    );
 
     if (hand.isNotEmpty) {
       final melds = _findValidRamiMelds(hand);
       for (final meld in melds) {
         try {
-          await ramiAction(gameCode, currentPlayerId, 'meld', cards: meld, isAuto: true);
+          await ramiAction(
+            gameCode,
+            currentPlayerId,
+            'meld',
+            cards: meld,
+            isAuto: true,
+          );
         } catch (_) {}
       }
 
       final postMeldSnap = await gameRef.get();
       if (!postMeldSnap.exists) return;
       final postMeldData = postMeldSnap.data() as Map<String, dynamic>;
-      final postHand = List<String>.from(postMeldData['ramiPlayerHands']?[currentPlayerId] ?? []);
+      final postHand = List<String>.from(
+        postMeldData['ramiPlayerHands']?[currentPlayerId] ?? [],
+      );
       if (postHand.isNotEmpty) {
-        await ramiAction(gameCode, currentPlayerId, 'discard', cards: [postHand.last], isAuto: true);
+        await ramiAction(
+          gameCode,
+          currentPlayerId,
+          'discard',
+          cards: [postHand.last],
+          isAuto: true,
+        );
       }
     }
   }
@@ -12368,7 +13102,7 @@ class FirebaseService {
     final players = Map<String, dynamic>.from(gameData['players']);
     final playerIds = players.keys.toList()..shuffle();
 
-    // Protection : 2v2 nÃ©cessite 4 joueurs
+    // Protection : 2v2 nécessite 4 joueurs
     bool isTeamMode = gameData['petitsChevauxTeamMode'] ?? false;
     if (playerIds.length != 4) isTeamMode = false;
 
@@ -12819,7 +13553,7 @@ class FirebaseService {
     final players = Map<String, dynamic>.from(gameData['players']);
     final playerIds = players.keys.toList()..shuffle();
 
-    // GÃ©nÃ©rer le jeu complet (28 tuiles)
+    // Générer le jeu complet (28 tuiles)
     List<String> fullDeck = [];
     for (int i = 0; i <= 6; i++) {
       for (int j = i; j <= 6; j++) {
@@ -12840,7 +13574,7 @@ class FirebaseService {
     String mode = gameData['dominoesMode'] ?? 'pioche';
     List<String> boneyard = (mode == 'pioche') ? fullDeck : [];
 
-    // Trouver qui commence : le double le plus Ã©levÃ©
+    // Trouver qui commence : le double le plus élevé
     int startIndex = 0;
     int highestDouble = -1;
     for (int i = 0; i < playerIds.length; i++) {
@@ -12857,7 +13591,7 @@ class FirebaseService {
     }
 
     // Si aucun double, le premier joueur commence
-    // (highestDouble == -1 signifie aucun double â†’ startIndex reste 0)
+    // (highestDouble == -1 signifie aucun double → startIndex reste 0)
 
     Map<String, int> scores = Map<String, int>.from(
       gameData['dominoesScores'] ?? {},
@@ -12871,11 +13605,11 @@ class FirebaseService {
       'roundState': 'playing_turn',
       'dominoesBoneyard': boneyard,
       'dominoesPlayerHands': hands,
-      // CORRECTION : chaÃ®ne = liste de maps {tile, matchEnd, side}
-      // pour savoir dans quel sens chaque tuile est posÃ©e
+      // CORRECTION : chaîne = liste de maps {tile, matchEnd, side}
+      // pour savoir dans quel sens chaque tuile est posée
       'dominoesBoardChain': [],
       'dominoesOpenEnds':
-          [], // [leftEnd, rightEnd] â€” toujours 2 valeurs max (ou 4 avec spinner)
+          [], // [leftEnd, rightEnd] — toujours 2 valeurs max (ou 4 avec spinner)
       'dominoesScores': scores,
       'dominoesCurrentPlayerIndex': startIndex,
       'dominoesPlayerOrder': playerIds,
@@ -12886,14 +13620,14 @@ class FirebaseService {
     });
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ─────────────────────────────────────────────────────────────
   // playDominoesTile
-  //   matchEnd : l'extrÃ©mitÃ© sur laquelle le joueur pose la tuile.
+  //   matchEnd : l'extrémité sur laquelle le joueur pose la tuile.
   //              -1 si c'est le premier domino (plateau vide).
   //   side     : 'left' | 'right' | 'top' | 'bottom'
-  //              indique oÃ¹ la tuile est ajoutÃ©e sur la chaÃ®ne.
+  //              indique où la tuile est ajoutée sur la chaîne.
   //              Le client le calcule et l'envoie pour l'affichage.
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ─────────────────────────────────────────────────────────────
   Future<void> playDominoesTile(
     String gameCode,
     String playerId,
@@ -12916,7 +13650,8 @@ class FirebaseService {
       }
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if (!isAuto && (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isAuto &&
+          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -13254,7 +13989,7 @@ class FirebaseService {
   // =========================================================================
   Future<void> handleDominoesTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
-    
+
     // Boucle d'auto-play intelligente (Pioche si nécessaire, puis joue, sinon passe)
     bool turnResolved = false;
     int safety = 0;
@@ -13264,7 +13999,8 @@ class FirebaseService {
       final snap = await gameRef.get();
       if (!snap.exists) return;
       var data = snap.data() as Map<String, dynamic>;
-      if (data['gameState'] != 'playing' || data['dominoesRoundOver'] == true) return;
+      if (data['gameState'] != 'playing' || data['dominoesRoundOver'] == true)
+        return;
       if (!_isTurnTimedOut(data)) return;
 
       final playerOrder = List<String>.from(data['dominoesPlayerOrder']);
@@ -13282,7 +14018,8 @@ class FirebaseService {
       bool canPlay(String t) {
         if (openEnds.isEmpty) return true;
         final p = t.split('-');
-        return openEnds.contains(int.parse(p[0])) || openEnds.contains(int.parse(p[1]));
+        return openEnds.contains(int.parse(p[0])) ||
+            openEnds.contains(int.parse(p[1]));
       }
 
       String? tileToPlay;
@@ -13300,9 +14037,17 @@ class FirebaseService {
           int a = int.parse(p[0]), b = int.parse(p[1]);
           matchEnd = openEnds.contains(a) ? a : b;
         }
-        await playDominoesTile(gameCode, playerId, tileToPlay, matchEnd, isAuto: true);
+        await playDominoesTile(
+          gameCode,
+          playerId,
+          tileToPlay,
+          matchEnd,
+          isAuto: true,
+        );
         await gameRef.update({
-          'gameLog': FieldValue.arrayUnion(["⏱️ Le bot a joué $tileToPlay automatiquement."])
+          'gameLog': FieldValue.arrayUnion([
+            "⏱️ Le bot a joué $tileToPlay automatiquement.",
+          ]),
         });
         turnResolved = true;
       } else {
@@ -13311,7 +14056,9 @@ class FirebaseService {
         } else {
           await passDominoesTurn(gameCode, playerId, isTimeout: true);
           await gameRef.update({
-            'gameLog': FieldValue.arrayUnion(["⏱️ $playerName a été contraint de passer son tour."])
+            'gameLog': FieldValue.arrayUnion([
+              "⏱️ $playerName a été contraint de passer son tour.",
+            ]),
           });
           turnResolved = true;
         }
@@ -13547,23 +14294,35 @@ class FirebaseService {
     if (data['gameState'] != 'playing') return;
 
     List<String> playerOrder = List<String>.from(data['zombiePlayerOrder']);
-    List<String> eliminated = List<String>.from(data['zombieEliminatedPlayers'] ?? []);
+    List<String> eliminated = List<String>.from(
+      data['zombieEliminatedPlayers'] ?? [],
+    );
     int currentIndex = data['zombieCurrentPlayerIndex'];
     String currentPlayerId = playerOrder[currentIndex];
 
     int targetIndex = currentIndex;
     do {
       targetIndex = (targetIndex + 1) % playerOrder.length;
-    } while (eliminated.contains(playerOrder[targetIndex]) && targetIndex != currentIndex);
+    } while (eliminated.contains(playerOrder[targetIndex]) &&
+        targetIndex != currentIndex);
 
     if (targetIndex == currentIndex) return;
 
-    Map<String, List<dynamic>> hands = Map<String, List<dynamic>>.from(data['zombiePlayerHands']);
-    List<String> targetHand = List<String>.from(hands[playerOrder[targetIndex]] ?? []);
+    Map<String, List<dynamic>> hands = Map<String, List<dynamic>>.from(
+      data['zombiePlayerHands'],
+    );
+    List<String> targetHand = List<String>.from(
+      hands[playerOrder[targetIndex]] ?? [],
+    );
 
     if (targetHand.isNotEmpty) {
       int randomIndex = Random().nextInt(targetHand.length);
-      await zombieTakeCard(gameCode, currentPlayerId, randomIndex, isAuto: true);
+      await zombieTakeCard(
+        gameCode,
+        currentPlayerId,
+        randomIndex,
+        isAuto: true,
+      );
     }
   }
 
@@ -13695,7 +14454,8 @@ class FirebaseService {
     if (!snap.exists) return;
     final data = snap.data() as Map<String, dynamic>;
     if (data['gameState'] != 'playing' ||
-        (data['roundState'] != 'playing' && data['roundState'] != 'playing_turn')) {
+        (data['roundState'] != 'playing' &&
+            data['roundState'] != 'playing_turn')) {
       return;
     }
 
@@ -13880,7 +14640,9 @@ class FirebaseService {
         'aoVCurrentPlayerIndex': randomIndex,
         'aoVCurrentPlayerId': selectedPlayerId,
         'aoVPhase': 'spin_result',
-        'aoVSpinCount': FieldValue.increment(1), // Force la détection de rotation
+        'aoVSpinCount': FieldValue.increment(
+          1,
+        ), // Force la détection de rotation
         'turnStartTime': FieldValue.serverTimestamp(),
         'gameLog': FieldValue.arrayUnion([
           "🎲 La roulette a désigné $selectedName !",
@@ -14214,11 +14976,13 @@ class FirebaseService {
       final voters = playerOrder.where((p) => p != currentPlayerId).toList();
 
       // Ne compter QUE les votes réellement exprimés sans forcer OUI pour les inactifs
-      final validVotes = votes.entries.where((e) => voters.contains(e.key)).toList();
+      final validVotes =
+          votes.entries.where((e) => voters.contains(e.key)).toList();
       final yesVotes = validVotes.where((e) => e.value == true).length;
-      final percentage = validVotes.isNotEmpty
-          ? (yesVotes / validVotes.length * 100).round()
-          : 0;
+      final percentage =
+          validVotes.isNotEmpty
+              ? (yesVotes / validVotes.length * 100).round()
+              : 0;
       final baseXp = gameData['aoVChallengeType'] == 'action' ? 30 : 20;
       final earnedXp = (baseXp * percentage / 100).round();
 
@@ -14533,7 +15297,9 @@ class FirebaseService {
       final String judgeId = gameData['bmcJudgeId'] ?? '';
 
       if (roundState == 'judging_selection') {
-        Map<String, dynamic> playedCards = Map<String, dynamic>.from(gameData['bmcPlayedCards'] ?? {});
+        Map<String, dynamic> playedCards = Map<String, dynamic>.from(
+          gameData['bmcPlayedCards'] ?? {},
+        );
         Map<String, dynamic> updates = {};
         if (playedCards.isNotEmpty) {
           updates['roundState'] = 'judge_voting';
@@ -14542,12 +15308,14 @@ class FirebaseService {
           updates['bmcPlayedCards'] = {};
           updates['turnStartTime'] = FieldValue.serverTimestamp();
           updates['gameLog'] = FieldValue.arrayUnion([
-            "⏳ Temps écoulé ! Aucune carte soumise, manche annulée."
+            "⏳ Temps écoulé ! Aucune carte soumise, manche annulée.",
           ]);
         }
         transaction.update(gameRef, updates);
       } else if (roundState == 'judge_voting') {
-        final List<String> playerOrder = List<String>.from(gameData['bmcPlayerOrder'] ?? players.keys.toList());
+        final List<String> playerOrder = List<String>.from(
+          gameData['bmcPlayerOrder'] ?? players.keys.toList(),
+        );
         int currentJudgeIdx = playerOrder.indexOf(judgeId);
         int nextJudgeIdx = (currentJudgeIdx + 1) % playerOrder.length;
         String nextJudgeId = playerOrder[nextJudgeIdx];
@@ -14558,7 +15326,7 @@ class FirebaseService {
           'roundState': 'judging_selection',
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "⏳ Le Juge n'a pas voté à temps. Aucun gagnant, manche passée."
+            "⏳ Le Juge n'a pas voté à temps. Aucun gagnant, manche passée.",
           ]),
         });
       }
@@ -14571,7 +15339,9 @@ class FirebaseService {
     final snap = await gameRef.get();
     if (!snap.exists) return;
     final gameData = snap.data() as Map<String, dynamic>;
-    final Map<String, dynamic> players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final Map<String, dynamic> players = Map<String, dynamic>.from(
+      gameData['players'] ?? {},
+    );
     final String gameType = gameData['gameType'] ?? '';
     final int minRequired = _getMinPlayersForGame(gameType);
 
@@ -14591,7 +15361,7 @@ class FirebaseService {
         'restartVotes': {},
         ...playerXpResets,
         'gameLog': FieldValue.arrayUnion([
-          "🏆 Vos points sont conservés ! En attente de joueurs pour lancer la suite de la session."
+          "🏆 Vos points sont conservés ! En attente de joueurs pour lancer la suite de la session.",
         ]),
       });
       return;
@@ -14691,7 +15461,7 @@ class FirebaseService {
     if (gameType == 'Synonyme ou Banni' && players.length < 3) {
       await gameRef.update({
         'gameLog': FieldValue.arrayUnion([
-          "Synonyme ou Banni nÃƒÂ©cessite au moins 3 joueurs !",
+          "Synonyme ou Banni nécessite au moins 3 joueurs !",
         ]),
       });
       return;
@@ -14702,7 +15472,7 @@ class FirebaseService {
     final Map<String, dynamic> initialTurnUpdates = {
       'inactiveTurnCounts': {
         for (var pId in playerIds) pId: 0,
-      }, // Initialiser les compteurs ÃƒÂ  0
+      }, // Initialiser les compteurs à 0
       'turnStartTime': FieldValue.serverTimestamp(),
     };
 
@@ -14722,10 +15492,10 @@ class FirebaseService {
     if (gameType == 'Gribouillis') {
       String mode = gameData['gribouillisMode'];
       String initialState;
-      if (mode == 'ComplÃƒÂ©ment') {
+      if (mode == 'Complément') {
         initialState = 'initial_drawing';
       } else {
-        // Normal et Brise-Glace commencent par ÃƒÂ©crire
+        // Normal et Brise-Glace commencent par écrire
         initialState = 'initial_writing';
       }
 
@@ -14742,7 +15512,7 @@ class FirebaseService {
         'currentStep': 0,
         'submittedPlayers': [],
         'gribouillisResultPageIndex': 0,
-        ...initialTurnUpdates, // AJOUTÃƒâ€°
+        ...initialTurnUpdates, // AJOUTÉ
       };
 
       await gameRef.update(gameUpdates);
@@ -14798,7 +15568,7 @@ class FirebaseService {
         'roundWinnerId': null,
         'commonSymbol': null,
         'dobbleStartedAt': FieldValue.serverTimestamp(),
-        ...initialTurnUpdates, // AJOUTÃƒâ€°
+        ...initialTurnUpdates, // AJOUTÉ
       });
       return;
     }
@@ -14851,7 +15621,7 @@ class FirebaseService {
 
     if (gameType == 'Uno') {
       if (playerIds.length < 2 || playerIds.length > 10) {
-        throw Exception("Uno nÃƒÂ©cessite entre 2 et 10 joueurs.");
+        throw Exception("Uno nécessite entre 2 et 10 joueurs.");
       }
       List<String> deck = GameData.generateUnoDeck();
       Map<String, List<String>> playerHands = {};
@@ -14883,7 +15653,7 @@ class FirebaseService {
         'gameState': 'playing',
         'roundState': 'playing_turn',
         'unoLog': ['La partie de Uno commence !'],
-        ...initialTurnUpdates, // AJOUTÃƒâ€°
+        ...initialTurnUpdates, // AJOUTÉ
       });
 
       await _applyFirstUnoCardEffect(gameRef, firstCard, playerIds[0]);
@@ -15117,7 +15887,7 @@ class FirebaseService {
         'passedPlayers': [],
         'finishedPlayers': [],
         'isRevolutionActive': false,
-        ...initialTurnUpdates, // AJOUTÃƒâ€°
+        ...initialTurnUpdates, // AJOUTÉ
       });
       return;
     } else if (gameType == 'Pictionary') {
@@ -15216,7 +15986,7 @@ class FirebaseService {
         'justOneAllowInvalidClues': justOneAllowInvalidClues,
         'playerOrder': playerIds,
         'currentPlayerIndex': 0,
-        ...initialTurnUpdates, // AJOUTÃƒâ€°
+        ...initialTurnUpdates, // AJOUTÉ
       });
       return;
     }
@@ -15243,7 +16013,7 @@ class FirebaseService {
         'tabooTeams': tabooTeams,
         'tabooScores': {'team_0': 0, 'team_1': 0},
         'tabooCurrentTeamIndex': 0,
-        'tabooTotalRounds': 4, // 2 tours par ÃƒÂ©quipe
+        'tabooTotalRounds': 4, // 2 tours par équipe
         'tabooRoundNumber': 1,
         ...initialTurnUpdates,
       });
@@ -15258,7 +16028,7 @@ class FirebaseService {
     if (gameType == 'Photo Roulette') {
       await gameRef.update({
         'gameState': 'playing',
-        ...initialTurnUpdates, // AJOUTÃƒâ€°
+        ...initialTurnUpdates, // AJOUTÉ
       });
       return;
     }
@@ -15310,11 +16080,9 @@ class FirebaseService {
 
     await gameRef.update({
       'gameState': 'playing',
-      'playerOrder':
-          playerIds, // Enregistre la liste mÃƒÂ©langÃƒÂ©e des joueurs
-      'currentPlayerIndex':
-          -1, // Initialise l'index ÃƒÂ  -1 avant le premier tour
-      ...initialTurnUpdates, // AJOUTÃƒâ€°
+      'playerOrder': playerIds, // Enregistre la liste mélangée des joueurs
+      'currentPlayerIndex': -1, // Initialise l'index à -1 avant le premier tour
+      ...initialTurnUpdates, // AJOUTÉ
     });
 
     await nextRound(gameCode);
@@ -15488,7 +16256,9 @@ class FirebaseService {
         applySpeedBonus: true,
       );
 
-      final Map<String, dynamic> allHands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+      final Map<String, dynamic> allHands = Map<String, dynamic>.from(
+        gameData['unoPlayerHands'] ?? {},
+      );
       allHands[playerId] = myHand;
 
       Map<String, dynamic> updates = {
@@ -16243,7 +17013,7 @@ class FirebaseService {
       await gameRef.update({
         'gameState': 'lobby',
         'error_message':
-            "Erreur: Le nombre de rÃƒÂ´les (${assignedRoles.length}) ne correspond pas au nombre de joueurs ($playerCount).",
+            "Erreur: Le nombre de rôles (${assignedRoles.length}) ne correspond pas au nombre de joueurs ($playerCount).",
       });
 
       return;
@@ -16267,7 +17037,7 @@ class FirebaseService {
 
     playerData.forEach((pId, data) {
       switch (data['role']) {
-        case 'SorciÃƒÂ¨re':
+        case 'Sorcière':
           playerData[pId]['potions'] = {'guerison': true, 'poison': true};
           break;
         case 'Garde':
@@ -16286,7 +17056,7 @@ class FirebaseService {
         case 'Dictateur':
           playerData[pId]['powerUsed'] = false;
           break;
-        case 'HÃƒÂ©ritier':
+        case 'Héritier':
           playerData[pId]['testateurId'] = null;
           break;
       }
@@ -16316,7 +17086,7 @@ class FirebaseService {
             possibleTargets[Random().nextInt(possibleTargets.length)];
         playerData[mercenaireId]['mercenaireTarget'] = mercenaireTargetId;
         playerData[mercenaireId]['privateInfo'] =
-            "Votre cible est ${playerData[mercenaireTargetId]?['name'] ?? 'Inconnu'}. Ãƒâ€°liminez-le(la) au Jour 1 !";
+            "Votre cible est ${playerData[mercenaireTargetId]?['name'] ?? 'Inconnu'}. Éliminez-le(la) au Jour 1 !";
       }
     }
 
@@ -16329,7 +17099,7 @@ class FirebaseService {
       'playerOrder': playerIds,
       'gameLog': [
         'La nuit tombe sur le village de Thiercelieux...',
-        'Chacun a reÃƒÂ§u son rÃƒÂ´le secret.',
+        'Chacun a reçu son rôle secret.',
       ],
       'nightActions': {},
       'dayVotes': {},
@@ -16631,8 +17401,9 @@ class FirebaseService {
     DocumentSnapshot gameSnap = await gameRef.get();
     Map<String, dynamic> gameData = gameSnap.data() as Map<String, dynamic>;
 
-    List<String> currentDeck =
-        List<String>.from(gameData['timesUpCurrentDeck'] ?? []);
+    List<String> currentDeck = List<String>.from(
+      gameData['timesUpCurrentDeck'] ?? [],
+    );
     if (currentDeck.isEmpty) {
       final int currentRoundNumber =
           (gameData['currentRoundNumber'] as num?)?.toInt() ?? 1;
@@ -16641,12 +17412,13 @@ class FirebaseService {
       final int nextRoundNumber = currentRoundNumber + 1;
       final teams = Map<String, dynamic>.from(gameData['teams'] ?? {});
       final teamA = List<dynamic>.from(teams['teamA'] ?? []);
-      final teamScores =
-          Map<String, dynamic>.from(gameData['teamScores'] ?? {});
+      final teamScores = Map<String, dynamic>.from(
+        gameData['teamScores'] ?? {},
+      );
 
       if (nextRoundNumber <= totalRounds) {
-        final newDeck =
-            List<String>.from(gameData['timesUpWords'] ?? [])..shuffle();
+        final newDeck = List<String>.from(gameData['timesUpWords'] ?? [])
+          ..shuffle();
         final firstGuesser =
             teamA.isNotEmpty
                 ? teamA[0] as String
@@ -17386,7 +18158,7 @@ class FirebaseService {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
-      if (!gameSnap.exists) throw Exception("Partie non trouvÃƒÂ©e");
+      if (!gameSnap.exists) throw Exception("Partie non trouvée");
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
       Map<String, String> ranks = Map<String, String>.from(
@@ -17499,11 +18271,11 @@ class FirebaseService {
       }
 
       transaction.update(gameRef, {
-        'gameState': 'card_exchange', // NOUVEL Ãƒâ€°TAT
+        'gameState': 'card_exchange', // NOUVEL ÉTAT
         'roundState': 'exchange',
-        'playerHands': playerHands, // Mains avant l'ÃƒÂ©change
+        'playerHands': playerHands, // Mains avant l'échange
         'cardExchangeData':
-            exchangeData, // Informations sur les cartes ÃƒÂ  ÃƒÂ©changer
+            exchangeData, // Informations sur les cartes à échanger
         'turnStartTime': FieldValue.serverTimestamp(),
       });
     });
@@ -17555,7 +18327,7 @@ class FirebaseService {
         'gameState': 'playing',
         'roundState': 'playing_turn',
         'currentRound': FieldValue.increment(1),
-        'playerHands': playerHands, // Les mains finales, aprÃƒÂ¨s l'ÃƒÂ©change
+        'playerHands': playerHands, // Les mains finales, après l'échange
         'currentPlayerIndex': startingPlayerIndex,
         'lastPlayerToPlay': playerIds[startingPlayerIndex],
         'currentPile': [],
@@ -17564,7 +18336,7 @@ class FirebaseService {
         'finishedPlayers': [],
         'isRevolutionActive': false,
         'cardExchangeData':
-            FieldValue.delete(), // Nettoyer les donnÃƒÂ©es d'ÃƒÂ©change
+            FieldValue.delete(), // Nettoyer les données d'échange
         'turnStartTime': FieldValue.serverTimestamp(),
       });
     });
@@ -17613,7 +18385,7 @@ class FirebaseService {
       if (gameSnap.get('roundState') == 'drawing' ||
           gameSnap.get('roundState') == 'guessing_drawing') {
         print(
-          "--- DEBUG PICTIONARY --- Condition 'roundState == drawing' ou 'guessing_drawing' est VRAIE. Mise ÃƒÂ  jour de la base de donnÃƒÂ©es...",
+          "--- DEBUG PICTIONARY --- Condition 'roundState == drawing' ou 'guessing_drawing' est VRAIE. Mise à jour de la base de données...",
         );
 
         final List<dynamic> currentGuesses = List.from(
@@ -17623,7 +18395,7 @@ class FirebaseService {
         transaction.update(gameRef, {'pictionaryGuesses': currentGuesses});
       } else {
         print(
-          "--- DEBUG PICTIONARY --- Condition 'roundState == drawing' est FAUSSE. L'ÃƒÂ©tat actuel est '${gameSnap.get('roundState')}'",
+          "--- DEBUG PICTIONARY --- Condition 'roundState == drawing' est FAUSSE. L'état actuel est '${gameSnap.get('roundState')}'",
         );
       }
     });
@@ -17788,10 +18560,12 @@ class FirebaseService {
     var gameData = gameSnap.data() as Map<String, dynamic>;
     if (gameData['gameState'] != 'playing') return;
 
-    if (gameData['roundState'] == 'drawing' || gameData['roundState'] == 'guessing_drawing') {
-      String reason = (gameData['roundState'] == 'drawing')
-          ? "Le dessinateur n'a pas soumis le dessin à temps."
-          : "Le temps est écoulé ! Personne n'a trouvé le mot.";
+    if (gameData['roundState'] == 'drawing' ||
+        gameData['roundState'] == 'guessing_drawing') {
+      String reason =
+          (gameData['roundState'] == 'drawing')
+              ? "Le dessinateur n'a pas soumis le dessin à temps."
+              : "Le temps est écoulé ! Personne n'a trouvé le mot.";
       await gameRef.update({
         'roundState': 'result',
         'gameEndReason': reason,
@@ -17883,7 +18657,7 @@ class FirebaseService {
       'justOneFilteredClues': [],
       'justOneGuesserAnswer': null,
       'justOneRevealIndex': 0,
-      // AJOUT IMPORTANT : On remet le chrono ÃƒÂ  zÃƒÂ©ro pour que les joueurs aient 30s complÃƒÂ¨tes pour ÃƒÂ©crire
+      // AJOUT IMPORTANT : On remet le chrono à zéro pour que les joueurs aient 30s complètes pour écrire
       'turnStartTime': FieldValue.serverTimestamp(),
     });
   }
@@ -18389,7 +19163,9 @@ class FirebaseService {
         }
 
         myHand.addAll(drawnCards);
-        final Map<String, dynamic> allHands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+        final Map<String, dynamic> allHands = Map<String, dynamic>.from(
+          gameData['unoPlayerHands'] ?? {},
+        );
         allHands[playerId] = myHand;
         updates['unoPlayerHands'] = allHands;
         updates['unoDeck'] = deck;
@@ -18410,7 +19186,9 @@ class FirebaseService {
 
       String drawnCard = deck.removeAt(0);
       myHand.add(drawnCard);
-      final Map<String, dynamic> allHands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+      final Map<String, dynamic> allHands = Map<String, dynamic>.from(
+        gameData['unoPlayerHands'] ?? {},
+      );
       allHands[playerId] = myHand;
       updates['unoPlayerHands'] = allHands;
       updates['unoDeck'] = deck;
@@ -18506,7 +19284,9 @@ class FirebaseService {
             break;
           }
         }
-        final Map<String, dynamic> allHands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
+        final Map<String, dynamic> allHands = Map<String, dynamic>.from(
+          gameData['unoPlayerHands'] ?? {},
+        );
         allHands[targetId] = targetHand;
         updates['unoPlayerHands'] = allHands;
         updates['unoDeck'] = deck;
@@ -18639,7 +19419,7 @@ class FirebaseService {
     final int nextPlayerIndex = (currentPlayerIndex + 1) % playerOrder.length;
     String activePlayerId = playerOrder[nextPlayerIndex];
 
-    String question = "Question non trouvÃƒÂ©e";
+    String question = "Question non trouvée";
     String? currentTargetPlayerId;
     String? liarId;
     String? undercoverId;
@@ -18753,7 +19533,7 @@ class FirebaseService {
       roundState = 'answering';
     } else if (gameType == 'Le Roi des Mèmes') {
       memeUrl = await _fetchRandomMemeUrl();
-      question = "Ajoute la description la plus drÃƒÂ´le ÃƒÂ  ce mÃƒÂ¨me !";
+      question = "Ajoute la description la plus drôle à ce mème !";
       roundState = 'answering';
     } else if (gameType == 'Skull') {
       await nextSkullRound(gameCode);
@@ -18819,7 +19599,7 @@ class FirebaseService {
         'turnStartTime': FieldValue.serverTimestamp(),
       });
       await _applyFirstUnoCardEffect(gameRef, firstCard, playerOrder[0]);
-      return; // On arrÃƒÂªte l'exÃƒÂ©cution ici pour Uno
+      return; // On arrête l'exécution ici pour Uno
     }
 
     final updateMap = {
@@ -20591,7 +21371,7 @@ class FirebaseService {
     await gameRef.update({
       'gameState': 'playing',
       'roundState':
-          'revealing_initial', // Phase oÃƒÂ¹ chaque joueur retourne 2 cartes
+          'revealing_initial', // Phase où chaque joueur retourne 2 cartes
       'deck': deck,
       'playerGrids': playerGrids,
       'discardPile': discardPile,
@@ -20603,7 +21383,7 @@ class FirebaseService {
       'totalScores': totalScores, // Garder les scores totaux
       'revealedInitialCardsCount': revealedCardsCount,
       'gameLog': [
-        "La partie de Zéro Pointé commence ! Chaque joueur doit rÃƒÂ©vÃƒÂ©ler 2 cartes.",
+        "La partie de Zéro Pointé commence ! Chaque joueur doit révéler 2 cartes.",
       ],
       'turnStartTime': FieldValue.serverTimestamp(),
     });
@@ -20908,8 +21688,7 @@ class FirebaseService {
   ) async {
     final players = Map<String, dynamic>.from(gameData['players']);
     final playerIds =
-        players.keys
-            .toList(); // Ne pas mÃƒÂ©langer pour garder l'ordre des blinds
+        players.keys.toList(); // Ne pas mélanger pour garder l'ordre des blinds
 
     Map<String, dynamic> playerData = Map.from(gameData['playerData'] ?? {});
     bool isFirstHand = playerData.isEmpty;
@@ -20954,12 +21733,7 @@ class FirebaseService {
       }
     }
 
-    List<String> suits = [
-      'H',
-      'D',
-      'C',
-      'S',
-    ]; // Coeur, Carreau, TrÃƒÂ¨fle, Pique
+    List<String> suits = ['H', 'D', 'C', 'S']; // Coeur, Carreau, Trèfle, Pique
     List<String> ranks = [
       '2',
       '3',
@@ -22199,8 +22973,7 @@ void showGameRules(BuildContext context, String gameType) {
     builder: (BuildContext context) {
       String gameTitle = gameType;
       String rules =
-          GameData.gameRules[gameType] ??
-          "Aucune rÃƒÂ¨gle trouvÃƒÂ©e pour ce jeu.";
+          GameData.gameRules[gameType] ?? "Aucune règle trouvée pour ce jeu.";
       if (gameType == 'Undercover Local' ||
           gameType == 'Infiltré & Mr. White' ||
           gameType == 'Infiltré & Mr. White') {
@@ -22209,7 +22982,7 @@ void showGameRules(BuildContext context, String gameType) {
       }
 
       return AlertDialog(
-        title: Text("RÃƒÂ¨gles : $gameTitle"),
+        title: Text("Règles : $gameTitle"),
         content: SingleChildScrollView(child: Text(rules)),
         actions: <Widget>[
           TextButton(
@@ -22238,12 +23011,12 @@ class FriendsModeHomeScreen extends StatelessWidget {
               Icon(Icons.nightlife, color: Colors.deepPurpleAccent, size: 80),
               SizedBox(height: 20),
               Text(
-                'Jeu de SoirÃƒÂ©e',
+                'Jeu de Soirée',
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Le compagnon de vos meilleures soirÃƒÂ©es',
+                'Le compagnon de vos meilleures soirées',
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -22314,7 +23087,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
             ),
             SizedBox(height: 40),
             ElevatedButton(
-              child: Text("CrÃƒÂ©er une partie"),
+              child: Text("Créer une partie"),
               onPressed: () {
                 if (_nameController.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -22362,7 +23135,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
                         (_) => JoinGameScreen(
                           playerName: _nameController.text.trim(),
                           playerId:
-                              this.playerId, // Utiliser la variable dÃƒÂ©jÃƒÂ  disponible
+                              this.playerId, // Utiliser la variable déjà disponible
                         ),
                   ),
                 );
@@ -22488,8 +23261,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   Map<String, bool> _undercoverRoleSettings = {
     'Fou de Joie': false,
     'Boomerang': false,
-    'DÃ©esse de la Justice': false,
-    'FantÃ´me': false,
+    'Déesse de la Justice': false,
+    'Fantôme': false,
     'Amoureux': false,
     'Mr. Meme': false,
     'Vendeur de Falafels': false,
@@ -22593,7 +23366,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Pas assez de piÃ¨ces pour crÃ©er cette partie ! CoÃ»t : $cost piÃ¨ces.",
+            "Pas assez de pièces pour créer cette partie ! Coût : $cost pièces.",
           ),
         ),
       );
@@ -22661,7 +23434,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           widget.loungeId!,
           widget.playerId,
           widget.playerName,
-          "J'ai lancÃ© une partie de $_selectedGame !",
+          "J'ai lancé une partie de $_selectedGame !",
           type: 'game_invite',
           extraData: {
             'gameCode': gameCode,
@@ -22738,7 +23511,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         petitsChevauxTeamMode: _petitsChevauxTeamMode,
         enableFloatingChat:
             _enableFloatingChat &&
-            !['Loup-Garou', 'InfiltrÃ© & Mr. White'].contains(_selectedGame),
+            !['Loup-Garou', 'Infiltré & Mr. White'].contains(_selectedGame),
         aoVPlayersDecide:
             _selectedGame == 'Action ou Vérité' ? _aoVPlayersDecide : null,
         aoVVoteThreshold:
@@ -22763,7 +23536,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Erreur lors de la crÃ©ation de la partie: $e"),
+            content: Text("Erreur lors de la création de la partie: $e"),
           ),
         );
       }
@@ -22819,7 +23592,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Pas assez de piÃ¨ces pour lancer une recherche ! CoÃ»t : 1 piÃ¨ce.",
+            "Pas assez de pièces pour lancer une recherche ! Coût : 1 pièce.",
           ),
         ),
       );
@@ -23573,7 +24346,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     if (_selectedGame == 'Loup-Garou') {
       if (totalRolesCount < 5) {
         canProceed = false;
-        validationMessage = "SÃ©lectionnez au moins 5 rÃ´les pour commencer.";
+        validationMessage = "Sélectionnez au moins 5 rôles pour commencer.";
       }
     }
 
@@ -23594,7 +24367,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("CrÃ©er une Partie"),
+        title: Text("Créer une Partie"),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -23625,9 +24398,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           _initializeLoupGarouRoles();
                         });
                       },
-                      decoration: InputDecoration(
-                        labelText: "Jeu sÃ©lectionnÃ©",
-                      ),
+                      decoration: InputDecoration(labelText: "Jeu sélectionné"),
                     ),
                     SizedBox(height: 20),
 
@@ -24059,8 +24830,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         segments: const [
                           ButtonSegment(value: 'Normal', label: Text('Normal')),
                           ButtonSegment(
-                            value: 'ComplÃ©ment',
-                            label: Text('ComplÃ©ment'),
+                            value: 'Complément',
+                            label: Text('Complément'),
                           ),
                           ButtonSegment(
                             value: 'Brise-Glace',
@@ -24072,12 +24843,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           setState(() => _gribouillisMode = newSelection.first);
                         },
                       ),
-                      if (_gribouillisMode == 'ComplÃ©ment') ...[
+                      if (_gribouillisMode == 'Complément') ...[
                         SizedBox(height: 10),
                         SwitchListTile.adaptive(
-                          title: Text("ParamÃ¨tre 'Ajouter 1'"),
+                          title: Text("Paramètre 'Ajouter 1'"),
                           subtitle: Text(
-                            "Chacun complÃ¨te le mÃªme dessin initial au lieu de la chaÃ®ne.",
+                            "Chacun complète le même dessin initial au lieu de la chaîne.",
                           ),
                           value: _gribouillisAjouter1,
                           onChanged:
@@ -24111,7 +24882,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Poker') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Jetons de dÃ©part: $_pokerStartChips",
+                        "Jetons de départ: $_pokerStartChips",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -24165,7 +24936,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Le Menteur') ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
-                        title: Text("Jeu SimplifiÃ© (Vrai/Faux)"),
+                        title: Text("Jeu Simplifié (Vrai/Faux)"),
                         subtitle: Text(
                           "Chacun raconte une histoire, les autres votent Vrai ou Faux.",
                         ),
@@ -24185,7 +24956,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           segments: const [
                             ButtonSegment(
                               value: 'simultaneous',
-                              label: Text('SimultanÃ©'),
+                              label: Text('Simultané'),
                             ),
                             ButtonSegment(
                               value: 'turn_by_turn',
@@ -24204,7 +24975,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Petit Bac') ...[
                       SizedBox(height: 20),
                       Text(
-                        "CatÃ©gories du Petit Bac",
+                        "Catégories du Petit Bac",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 8),
@@ -24232,7 +25003,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             child: TextField(
                               controller: _petitBacCategoryController,
                               decoration: InputDecoration(
-                                labelText: "Ajouter une catÃ©gorie",
+                                labelText: "Ajouter une catégorie",
                               ),
                               onSubmitted: (value) {
                                 if (value.trim().isNotEmpty &&
@@ -24271,9 +25042,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Président') ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
-                        title: Text("Variante RÃ©volution"),
+                        title: Text("Variante Révolution"),
                         subtitle: Text(
-                          "Si un joueur pose un carrÃ©, l'ordre des cartes est inversÃ© pour le reste de la manche.",
+                          "Si un joueur pose un carré, l'ordre des cartes est inversé pour le reste de la manche.",
                         ),
                         value: _presidentRevolution,
                         onChanged:
@@ -24288,7 +25059,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       SwitchListTile.adaptive(
                         title: Text("Seulement 30 traits"),
                         subtitle: Text(
-                          "Le dessinateur est limitÃ© Ã  30 traits maximum par dessin.",
+                          "Le dessinateur est limité à 30 traits maximum par dessin.",
                         ),
                         value: _pictionaryOnly30Strokes,
                         onChanged:
@@ -24309,7 +25080,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         segments: const [
                           ButtonSegment(
                             value: 'classic',
-                            label: Text('Classique (SurrÃ©aliste)'),
+                            label: Text('Classique (Surréaliste)'),
                           ),
                           ButtonSegment(
                             value: 'continuation',
@@ -24331,7 +25102,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         segments: const [
                           ButtonSegment(
                             value: 'single',
-                            label: Text('1 feuille partagÃ©e'),
+                            label: Text('1 feuille partagée'),
                           ),
                           ButtonSegment(
                             value: 'multiple',
@@ -24350,10 +25121,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
                         title: Text(
-                          "Autoriser les indices invalides (simplifiÃ©)",
+                          "Autoriser les indices invalides (simplifié)",
                         ),
                         subtitle: Text(
-                          "Les indices identiques seront toujours Ã©liminÃ©s, mais pas ceux trop proches du mot.",
+                          "Les indices identiques seront toujours éliminés, mais pas ceux trop proches du mot.",
                         ),
                         value: _justOneAllowInvalidClues,
                         onChanged:
@@ -24367,12 +25138,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Loup-Garou') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Configuration des RÃ´les",
+                        "Configuration des Rôles",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Total des rÃ´les sÃ©lectionnÃ©s : $totalRolesCount. (Minimum 5 requis)",
+                        "Total des rôles sélectionnés : $totalRolesCount. (Minimum 5 requis)",
                         style: TextStyle(
                           color:
                               totalRolesCount < 5
@@ -24470,16 +25241,16 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       }).toList(),
                     ],
 
-                    if (_selectedGame == 'Le Jeu des CatÃ©gories' ||
+                    if (_selectedGame == 'Le Jeu des Catégories' ||
                         _selectedGame == 'La Patate Chaude') ...[
                       SizedBox(height: 20),
                       Text(
-                        "ParamÃ¨tres du Jeu",
+                        "Paramètres du Jeu",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 15),
                       Text(
-                        "SÃ©lectionnez au moins 3 catÃ©gories :",
+                        "Sélectionnez au moins 3 catégories :",
                         style: TextStyle(
                           color:
                               _selectedGameCategories.length < 3
@@ -24516,7 +25287,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         SwitchListTile.adaptive(
                           title: Text("Chrono global (Bombe)"),
                           subtitle: Text(
-                            "Le temps ne se rÃ©initialise pas Ã  chaque joueur. La patate explose Ã  la fin !",
+                            "Le temps ne se réinitialise pas à chaque joueur. La patate explose à la fin !",
                           ),
                           value: _hotPotatoUseGlobalTimer,
                           onChanged:
@@ -24527,7 +25298,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         ),
                         if (_hotPotatoUseGlobalTimer) ...[
                           Text(
-                            "DurÃ©e de la bombe : $_hotPotatoGlobalDuration s",
+                            "Durée de la bombe : $_hotPotatoGlobalDuration s",
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Slider(
@@ -24548,7 +25319,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == "Time's Up") ...[
                       SizedBox(height: 20),
                       Text(
-                        "ParamÃ¨tres Time's Up",
+                        "Paramètres Time's Up",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
@@ -24590,9 +25361,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Petits Chevaux') ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
-                        title: Text("Ã‰quipes 2v2"),
+                        title: Text("Équipes 2v2"),
                         subtitle: Text(
-                          "NÃ©cessite exactement 4 joueurs. Vous aidez le joueur en face de vous.",
+                          "Nécessite exactement 4 joueurs. Vous aidez le joueur en face de vous.",
                         ),
                         value: _petitsChevauxTeamMode,
                         onChanged:
@@ -24605,7 +25376,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Dominoes') ...[
                       SizedBox(height: 20),
                       Text(
-                        "ParamÃ¨tres Dominos",
+                        "Paramètres Dominos",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
@@ -24616,10 +25387,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       SegmentedButton<String>(
                         segments: const [
                           ButtonSegment(value: 'pioche', label: Text('Pioche')),
-                          ButtonSegment(
-                            value: 'bloque',
-                            label: Text('BloquÃ©'),
-                          ),
+                          ButtonSegment(value: 'bloque', label: Text('Bloqué')),
                           ButtonSegment(
                             value: 'all_fives',
                             label: Text('All Fives'),
@@ -24650,12 +25418,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Uno') ...[
                       SizedBox(height: 20),
                       Text(
-                        "ParamÃ¨tres Uno",
+                        "Paramètres Uno",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Cartes de dÃ©part :",
+                        "Cartes de départ :",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<int>(
@@ -24685,12 +25453,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Photo Roulette') ...[
                       SizedBox(height: 20),
                       Text(
-                        "ParamÃ¨tres Photo Roulette",
+                        "Paramètres Photo Roulette",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Type de mÃ©dia",
+                        "Type de média",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<String>(
@@ -24701,8 +25469,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             icon: Icon(Icons.photo),
                           ),
                           ButtonSegment(
-                            value: 'VidÃ©os',
-                            label: Text('VidÃ©os'),
+                            value: 'Vidéos',
+                            label: Text('Vidéos'),
                             icon: Icon(Icons.videocam),
                           ),
                           ButtonSegment(
@@ -24720,7 +25488,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Nombre de tours (photos Ã  deviner) : $_photoRouletteRounds",
+                        "Nombre de tours (photos à deviner) : $_photoRouletteRounds",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -24736,7 +25504,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Photos piochÃ©es par joueur : $_photoRoulettePhotosPerPlayer",
+                        "Photos piochées par joueur : $_photoRoulettePhotosPerPlayer",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -24802,7 +25570,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Infiltré & Mr. White') ...[
                       SizedBox(height: 20),
                       Text(
-                        "RÃ´les de Base",
+                        "Rôles de Base",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       Card(
@@ -24868,7 +25636,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          "Total imposteurs : ${_infiltreCount + _mrWhiteCount}. La rÃ©partition finale sera ajustÃ©e si nÃ©cessaire pour garantir au moins 1 civil.",
+                          "Total imposteurs : ${_infiltreCount + _mrWhiteCount}. La répartition finale sera ajustée si nécessaire pour garantir au moins 1 civil.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white70,
@@ -24878,13 +25646,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "RÃ´les SpÃ©ciaux (Optionnel)",
+                        "Rôles Spéciaux (Optionnel)",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SwitchListTile.adaptive(
                         title: Text("Fou de Joie"),
                         subtitle: Text(
-                          "Gagne +4 points s'il est Ã©liminÃ© en premier.",
+                          "Gagne +4 points s'il est éliminé en premier.",
                         ),
                         value: _undercoverRoleSettings['Fou de Joie']!,
                         onChanged:
@@ -24896,7 +25664,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       SwitchListTile.adaptive(
                         title: Text("Boomerang"),
                         subtitle: Text(
-                          "La 1Ã¨re fois qu'il est votÃ©, les votes rebondissent.",
+                          "La 1ère fois qu'il est voté, les votes rebondissent.",
                         ),
                         value: _undercoverRoleSettings['Boomerang']!,
                         onChanged:
@@ -24905,33 +25673,30 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("DÃ©esse de la Justice"),
-                        subtitle: Text(
-                          "Tranche en cas d'Ã©galitÃ©, mÃªme morte.",
-                        ),
-                        value:
-                            _undercoverRoleSettings['DÃ©esse de la Justice']!,
+                        title: Text("Déesse de la Justice"),
+                        subtitle: Text("Tranche en cas d'égalité, même morte."),
+                        value: _undercoverRoleSettings['Déesse de la Justice']!,
                         onChanged:
                             (val) => setState(
                               () =>
-                                  _undercoverRoleSettings['DÃ©esse de la Justice'] =
+                                  _undercoverRoleSettings['Déesse de la Justice'] =
                                       val,
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("FantÃ´me"),
+                        title: Text("Fantôme"),
                         subtitle: Text(
-                          "Peut toujours voter aprÃ¨s son Ã©limination.",
+                          "Peut toujours voter après son élimination.",
                         ),
-                        value: _undercoverRoleSettings['FantÃ´me']!,
+                        value: _undercoverRoleSettings['Fantôme']!,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings['FantÃ´me'] = val,
+                              () => _undercoverRoleSettings['Fantôme'] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
                         title: Text("Amoureux (5+ joueurs)"),
-                        subtitle: Text("Si l'un est Ã©liminÃ©, l'autre aussi."),
+                        subtitle: Text("Si l'un est éliminé, l'autre aussi."),
                         value: _undercoverRoleSettings['Amoureux']!,
                         onChanged:
                             (val) => setState(
@@ -24941,7 +25706,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       SwitchListTile.adaptive(
                         title: Text("Mr. Meme"),
                         subtitle: Text(
-                          "Un joueur devra mimer son indice Ã  chaque tour.",
+                          "Un joueur devra mimer son indice à chaque tour.",
                         ),
                         value: _undercoverRoleSettings['Mr. Meme']!,
                         onChanged:
@@ -24951,9 +25716,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SwitchListTile.adaptive(
                         title: Text("Vendeur de Falafels (4+ joueurs)"),
-                        subtitle: Text(
-                          "ReÃ§oit un pouvoir spÃ©cial alÃ©atoire.",
-                        ),
+                        subtitle: Text("Reçoit un pouvoir spécial aléatoire."),
                         value: _undercoverRoleSettings['Vendeur de Falafels']!,
                         onChanged:
                             (val) => setState(
@@ -24964,9 +25727,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SwitchListTile.adaptive(
                         title: Text("Vengeuse (5+ joueurs)"),
-                        subtitle: Text(
-                          "Ã‰limine quelqu'un en Ã©tant Ã©liminÃ©e.",
-                        ),
+                        subtitle: Text("Élimine quelqu'un en étant éliminée."),
                         value: _undercoverRoleSettings['Vengeuse']!,
                         onChanged:
                             (val) => setState(
@@ -24988,13 +25749,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
                     Divider(height: 30, thickness: 1, color: Colors.white24),
                     Text(
-                      "ParamÃ¨tres GÃ©nÃ©raux",
+                      "Paramètres Généraux",
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SwitchListTile.adaptive(
                       title: Text("Activer le Timer"),
                       subtitle: Text(
-                        "Si dÃ©sactivÃ©, le jeu n'avance pas automatiquement",
+                        "Si désactivé, le jeu n'avance pas automatiquement",
                       ),
                       value: _useTimer,
                       onChanged: (val) => setState(() => _useTimer = val),
@@ -25002,7 +25763,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     ),
                     if (_useTimer) ...[
                       Text(
-                        "DurÃ©e de rÃ©ponse par joueur : ${_turnTimerSeconds}s",
+                        "Durée de réponse par joueur : ${_turnTimerSeconds}s",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -25016,7 +25777,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 setState(() => _turnTimerSeconds = v.round()),
                       ),
                       Text(
-                        "DurÃ©e d'affichage des rÃ©sultats : ${_resultTimerSeconds}s",
+                        "Durée d'affichage des résultats : ${_resultTimerSeconds}s",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -25311,9 +26072,7 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
       if (!gameSnap.exists || gameSnap['gameState'] != 'lobby') {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              "Code de partie invalide ou partie dÃƒÂ©jÃƒÂ  commencÃƒÂ©e.",
-            ),
+            content: Text("Code de partie invalide ou partie déjà commencée."),
           ),
         );
         if (mounted) setState(() => _isLoading = false);
@@ -25325,12 +26084,12 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
       if (!isPremiumLobby) {
         bool success = await playerState.spendCoins(
           1,
-        ); // CoÃƒÂ»t pour rejoindre: 1 piÃƒÂ¨ce
+        ); // Coût pour rejoindre: 1 pièce
         if (!success) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                "Pas assez de piÃƒÂ¨ces pour rejoindre cette partie ! CoÃƒÂ»t : 1 piÃƒÂ¨ce.",
+                "Pas assez de pièces pour rejoindre cette partie ! Coût : 1 pièce.",
               ),
             ),
           );
@@ -25735,12 +26494,17 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           // Affichage des points de session conservés
-                          subtitle: (pData['score'] != null && (pData['score'] as num) > 0)
-                              ? Text(
-                                  "Score de session : ${pData['score']} victoires",
-                                  style: const TextStyle(color: Colors.amberAccent, fontSize: 12),
-                                )
-                              : null,
+                          subtitle:
+                              (pData['score'] != null &&
+                                      (pData['score'] as num) > 0)
+                                  ? Text(
+                                    "Score de session : ${pData['score']} victoires",
+                                    style: const TextStyle(
+                                      color: Colors.amberAccent,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                  : null,
                           trailing: const Chip(
                             label: Text("Prêt"),
                             backgroundColor: Colors.green,
@@ -25819,7 +26583,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                                             ).showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  "Invitation envoyÃ©e Ã  $fName !",
+                                                  "Invitation envoyée à $fName !",
                                                 ),
                                               ),
                                             );
@@ -26065,23 +26829,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   Future<void> _confirmAndExitGame() async {
     final shouldLeave = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Quitter la partie ?'),
-        content: const Text(
-          'Si vous quittez, votre place sera libérée.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Rester'),
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Quitter la partie ?'),
+            content: const Text('Si vous quittez, votre place sera libérée.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: const Text('Rester'),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                onPressed: () => Navigator.pop(ctx, true),
+                child: const Text('Quitter'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Quitter'),
-          ),
-        ],
-      ),
     );
 
     if (shouldLeave == true && mounted) {
@@ -26093,14 +26856,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             .collection('lounges')
             .doc(widget.loungeId)
             .update({
-          'pendingGame.joinedPlayers':
-              FieldValue.arrayRemove([widget.playerId]),
-        });
+              'pendingGame.joinedPlayers': FieldValue.arrayRemove([
+                widget.playerId,
+              ]),
+            });
       }
-      _firebaseService.removePlayerFromGame(
-        widget.gameCode,
-        widget.playerId,
-      );
+      _firebaseService.removePlayerFromGame(widget.gameCode, widget.playerId);
       Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
@@ -26129,7 +26890,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   List<String> _selectedPresidentCards = [];
   List<String> _selectedRamiCards = [];
   List<String> _selectedBigTwoCards = [];
-  String? _selectedCheckersPiece; // Pour stocker la piÃ¨ce sÃ©lectionnÃ©e "r,c"
+  String? _selectedCheckersPiece; // Pour stocker la pièce sélectionnée "r,c"
   String?
   _selectedDominoTile; // Pour la sélection préalable et survol de Dominos
   int?
@@ -26175,11 +26936,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   // ... autres variables existantes ...
 
-  // Variables pour la pÃƒÂ©nalitÃƒÂ© Dobble
-  DateTime? _lastDobbleErrorTime; // Heure de la derniÃƒÂ¨re erreur
-  bool _isDobbleBlocked = false; // Si l'interface est bloquÃƒÂ©e
+  // Variables pour la pénalité Dobble
+  DateTime? _lastDobbleErrorTime; // Heure de la dernière erreur
+  bool _isDobbleBlocked = false; // Si l'interface est bloquée
   int _dobbleBlockCountdown = 0; // Compteur de secondes restantes
-  Timer? _dobblePenaltyTimer; // Timer pour gÃƒÂ©rer le dÃƒÂ©compte
+  Timer? _dobblePenaltyTimer; // Timer pour gérer le décompte
   final List<String> _myTimesUpWords = [];
   final TextEditingController _timesUpWordController = TextEditingController();
   final TextEditingController _pictionaryGuessController =
@@ -26205,7 +26966,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   bool _justOneHasSubmittedGuess = false;
 
   bool _isActionPending = false;
-  bool _xpAwarded = false; // AJOUT : EmpÃƒÂªcher de donner l'XP plusieurs fois
+  bool _xpAwarded = false; // AJOUT : Empêcher de donner l'XP plusieurs fois
 
   StreamSubscription? _timerSubscription;
   String?
@@ -26255,7 +27016,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     _gribouillisPageController = PageController();
 
-    // Ãƒâ€°couter les changements de LivekitService pour mettre ÃƒÂ  jour Firestore
+    // Écouter les changements de LivekitService pour mettre à jour Firestore
     _livekitService.addListener(() {
       if (_livekitService.localUserJoined &&
           _livekitService.localIdentity.isNotEmpty) {
@@ -26289,7 +27050,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
-      // L'app est en arriÃƒÂ¨re-plan Ã¢â‚¬â€ si pas de retour dans 60s, retirer le joueur
+      // L'app est en arrière-plan â€â€ si pas de retour dans 60s, retirer le joueur
       _pauseRemovalTimer?.cancel();
       _pauseRemovalTimer = Timer(const Duration(seconds: 60), () {
         _firebaseService.removePlayerFromGame(widget.gameCode, widget.playerId);
@@ -26297,7 +27058,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     } else if (state == AppLifecycleState.resumed) {
       _pauseRemovalTimer?.cancel();
       _pauseRemovalTimer = null;
-      // Mettre ÃƒÂ  jour le heartbeat immÃƒÂ©diatement au retour
+      // Mettre à jour le heartbeat immédiatement au retour
       _sendHeartbeat();
     } else if (state == AppLifecycleState.detached) {
       if (widget.loungeId != null) {
@@ -26329,7 +27090,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     _stalePlayerCheckTimer = Timer.periodic(const Duration(seconds: 30), (
       _,
     ) async {
-      // Seul l'hÃƒÂ´te vÃƒÂ©rifie les joueurs inactifs
+      // Seul l'hôte vérifie les joueurs inactifs
       final gameSnap =
           await FirebaseFirestore.instance
               .collection('games')
@@ -26408,7 +27169,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     super.dispose();
   }
 
-  // Copie cette mÃƒÂ©thode dans ta classe _MultiplayerGameScreenState
+  // Copie cette méthode dans ta classe _MultiplayerGameScreenState
   Widget _buildEasel(String text, {bool isCancelled = false}) {
     return Container(
       margin: EdgeInsets.all(4),
@@ -26468,36 +27229,66 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   // =========================================================================
-  // 1. GESTION CENTRALISÉE DU TIMER (AUTORITÉ HÔTE UNIQUE)
+  // 1. GESTION CENTRALISÉE DU TIMER (HÔTE & JOUEUR ACTIF)
   // =========================================================================
+
+  String _computeTurnKey(
+    Map<String, dynamic> gameData,
+    Timestamp turnStartTimeStamp,
+  ) {
+    final idx =
+        gameData['currentPlayerIndex'] ??
+        gameData['unoCurrentPlayerIndex'] ??
+        gameData['milleBornesCurrentPlayerIndex'] ??
+        gameData['petitsChevauxCurrentIndex'] ??
+        gameData['bigTwoCurrentPlayerIndex'] ??
+        gameData['checkersCurrentPlayerIndex'] ??
+        gameData['skullCurrentPlayerIndex'] ??
+        gameData['blokusCurrentPlayerIndex'] ??
+        gameData['zombieCurrentPlayerIndex'] ??
+        gameData['beloteCurrentPlayerIndex'] ??
+        gameData['dominoesCurrentPlayerIndex'] ??
+        gameData['ramiCurrentPlayerId'] ??
+        gameData['yamsCurrentPlayerId'] ??
+        gameData['currentPlayerId'] ??
+        gameData['hotPotatoCurrentPlayerId'] ??
+        gameData['aoVCurrentPlayerId'] ??
+        gameData['bmcJudgeId'] ??
+        gameData['subPhase'] ??
+        0;
+    return "${turnStartTimeStamp.millisecondsSinceEpoch}_${idx}_${gameData['roundState']}_${gameData['phase']}_${gameData['aoVPhase']}_${gameData['currentRound']}";
+  }
 
   void _startPlayerTurnTimer(Map<String, dynamic> gameData) {
     final bool useTimer = gameData['useTimer'] ?? true;
-    final String gameType = gameData['gameType'] ?? '';
 
-    // Les jeux d'opinion/sociaux n'ont pas d'action automatique arbitraire
-    if (!useTimer ||
-        gameData['gameState'] != 'playing' ||
-        GameData.isSocialOpinionGame(gameType)) {
+    if (!useTimer || gameData['gameState'] != 'playing') {
       _playerTurnTimer?.cancel();
       return;
     }
 
-    final turnStartTimeStamp = gameData['turnStartTime'] as Timestamp?;
+    final turnStartTimeStamp =
+        (gameData['turnStartTime'] ??
+                gameData['petitBacRoundStartTime'] ??
+                gameData['pictionaryStartTime'] ??
+                gameData['hotPotatoRoundStartedAt'])
+            as Timestamp?;
     if (turnStartTimeStamp == null) return;
 
     final String hostId = gameData['hostId'] ?? '';
+    final String curPlayerId =
+        FirebaseService.getCurrentPlayerId(gameData) ?? '';
     final bool isHost = hostId == widget.playerId;
+    final bool isCurrentPlayer = curPlayerId == widget.playerId;
 
-    // SÉCURITÉ CRITIQUE : Seul l'hôte exécute les écritures de timeout en base
+    // SÉCURITÉ CRITIQUE : Seul l'hôte ou le joueur actif déclenchent le timeout
     // pour éviter les doubles exécutions et les boucles infinies.
-    if (!isHost) {
+    if (!isHost && !isCurrentPlayer) {
       _playerTurnTimer?.cancel();
       return;
     }
 
-    final String turnKey =
-        "${turnStartTimeStamp.millisecondsSinceEpoch}_${gameData['currentPlayerIndex'] ?? gameData['unoCurrentPlayerIndex'] ?? gameData['milleBornesCurrentPlayerIndex'] ?? gameData['petitsChevauxCurrentIndex'] ?? gameData['bigTwoCurrentPlayerIndex'] ?? gameData['checkersCurrentPlayerIndex'] ?? 0}_${gameData['roundState']}_${gameData['phase']}";
+    final String turnKey = _computeTurnKey(gameData, turnStartTimeStamp);
 
     if (_activeScheduledTurnKey == turnKey &&
         _playerTurnTimer != null &&
@@ -26525,8 +27316,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   void _executeAutoPlayForGame(Map<String, dynamic> gameData) {
     final String gameType = gameData['gameType'] ?? '';
     final String roundState = gameData['roundState'] ?? '';
-
-    if (GameData.isSocialOpinionGame(gameType)) return;
 
     switch (gameType) {
       // --- JEUX DE CARTES ---
@@ -26583,6 +27372,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         break;
 
       // --- JEUX D'AMBIANCE & ÉQUIPES ---
+      case 'Petit Bac':
+        _firebaseService.evaluatePetitBacAnswers(widget.gameCode);
+        break;
       case 'Pictionary':
         _firebaseService.handlePictionaryTimeout(widget.gameCode, roundState);
         break;
@@ -26622,12 +27414,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'BMC':
         _firebaseService.handleBMCTimeout(widget.gameCode);
         break;
+      case 'Loup-Garou':
+        final String phase = gameData['phase'] ?? '';
+        if (phase == 'nuit') {
+          _firebaseService.startNextNightPhase(widget.gameCode);
+        } else if (phase == 'jour_discussion') {
+          _firebaseService.startDayVotePhase(widget.gameCode);
+        } else if (phase == 'jour_vote') {
+          _firebaseService.processDayVote(widget.gameCode);
+        }
+        break;
 
       default:
         if (['answering', 'declaring_truth'].contains(roundState)) {
           _firebaseService.handleSimultaneousInputTimeout(widget.gameCode);
-        } else if (['voting', 'reveal_and_vote'].contains(roundState)) {
+        } else if (['voting', 'reveal_and_vote'].contains(roundState) ||
+            gameData['currentPhase'] == 'voting') {
           _firebaseService.handleVotingTimeout(widget.gameCode);
+        } else if (roundState == 'result' ||
+            gameData['currentPhase'] == 'turn_result') {
+          _firebaseService.handleHostActionTimeout(widget.gameCode);
         } else {
           _firebaseService.handleTurnTimeout(widget.gameCode);
         }
@@ -26681,8 +27487,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  "VOTRE IDENTITÉ",
+                Text(
+                  GameUiLocalization.tr(context, "VOTRE IDENTITÉ"),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 12,
@@ -26696,12 +27502,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   text: TextSpan(
                     style: const TextStyle(fontSize: 14, color: Colors.white),
                     children: [
-                      const TextSpan(
-                        text: "Rôle: ",
+                      TextSpan(
+                        text: "${GameUiLocalization.tr(context, "Rôle:")} ",
                         style: TextStyle(color: Colors.white70),
                       ),
                       TextSpan(
-                        text: "$myRole",
+                        text: GameUiLocalization.tr(context, "$myRole"),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.amberAccent,
@@ -26715,9 +27521,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   text: TextSpan(
                     style: const TextStyle(fontSize: 14, color: Colors.white),
                     children: [
-                      const TextSpan(
-                        text: "Mot: ",
-                        style: TextStyle(color: Colors.white70),
+                      TextSpan(
+                        text: "${GameUiLocalization.tr(context, "Mot:")} ",
+                        style: const TextStyle(color: Colors.white70),
                       ),
                       TextSpan(
                         text: "$mySecretWord",
@@ -26735,9 +27541,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     padding: const EdgeInsets.only(top: 4.0),
                     child: Column(
                       children: [
-                        const Text(
-                          "Capacités:",
-                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                        Text(
+                          GameUiLocalization.tr(context, "Capacités:"),
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 14,
+                          ),
                         ),
                         Wrap(
                           spacing: 8.0,
@@ -26840,7 +27649,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Partie TerminÃƒÂ©e !",
+                "Partie Terminée !",
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -26857,7 +27666,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               if (isHost)
                 ElevatedButton(
                   onPressed: () => _firebaseService.startGame(widget.gameCode),
-                  child: Text("Rejouer"),
+                  child: Text(GameUiLocalization.tr(context, "Rejouer")),
                 ),
             ],
           ),
@@ -26881,13 +27690,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "RÃƒÂ©sultat du vote",
+          "Résultat du vote",
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         SizedBox(height: 20),
         if (eliminatedIds.isEmpty)
           Text(
-            "Personne n'a ÃƒÂ©tÃƒÂ© ÃƒÂ©liminÃƒÂ© (ÃƒÂ©galitÃƒÂ©).",
+            "Personne n'a été éliminé (égalité).",
             style: TextStyle(fontSize: 18, color: Colors.amber),
           )
         else
@@ -26902,7 +27711,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ? "$pRole (${specialAbilities.join(', ')})"
                     : pRole;
             return Text(
-              "$pName a ÃƒÂ©tÃƒÂ© ÃƒÂ©liminÃƒÂ© ! Son rÃƒÂ´le ÃƒÂ©tait : $roleDisplay",
+              "$pName a été éliminé ! Son rôle était : $roleDisplay",
               style: TextStyle(fontSize: 18, color: Colors.amber),
               textAlign: TextAlign.center,
             );
@@ -26914,10 +27723,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 () => _firebaseService.processEliminationsAndCheckWin(
                   widget.gameCode,
                 ),
-            child: Text("Continuer"),
+            child: Text(GameUiLocalization.tr(context, "Continuer")),
           )
         else
-          Center(child: Text("En attente de l'hÃƒÂ´te...")),
+          Center(
+            child: Text(
+              GameUiLocalization.tr(context, "En attente de l'hôte..."),
+            ),
+          ),
       ],
     );
   }
@@ -26952,9 +27765,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Vengeance !", style: Theme.of(context).textTheme.headlineMedium),
         Text(
-          "Tu as ÃƒÂ©tÃƒÂ© ÃƒÂ©liminÃƒÂ©e. Emporte quelqu'un avec toi !",
+          GameUiLocalization.tr(context, "Vengeance !"),
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        Text(
+          GameUiLocalization.tr(
+            context,
+            "Tu as été éliminé(e). Emporte quelqu'un avec toi !",
+          ),
           style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
@@ -26967,7 +27786,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   avengerId!,
                   pId,
                 ),
-            child: Text("Ãƒâ€°liminer ${playerData[pId]['name']}"),
+            child: Text(
+              GameUiLocalization.tr(context, "undercoverEliminatePlayer", {
+                'name': "${playerData[pId]['name']}",
+              }),
+            ),
           ),
         ),
       ],
@@ -26976,21 +27799,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   static const Map<String, String> _undercoverRoleDescriptions = {
     'Fou de Joie':
-        "Si vous ÃƒÂªtes le premier joueur ÃƒÂ©liminÃƒÂ© de la partie (mort ou vif), vous gagnez 4 points bonus ÃƒÂ  la fin.",
+        "Si vous êtes le premier joueur éliminé de la partie (mort ou vif), vous gagnez 4 points bonus à la fin.",
     'Boomerang':
-        "La premiÃƒÂ¨re fois que la majoritÃƒÂ© vote contre vous, tous ceux qui ont votÃƒÂ© contre vous sont ÃƒÂ©liminÃƒÂ©s ÃƒÂ  votre place. Ce pouvoir ne fonctionne qu'une fois.",
-    'DÃƒÂ©esse de la Justice':
-        "En cas d'ÃƒÂ©galitÃƒÂ© lors d'un vote, c'est vous qui dÃƒÂ©cidez qui est ÃƒÂ©liminÃƒÂ© parmi les joueurs ÃƒÂ  ÃƒÂ©galitÃƒÂ©. Ce pouvoir persiste mÃƒÂªme aprÃƒÂ¨s votre mort.",
-    'FantÃƒÂ´me':
-        "MÃƒÂªme aprÃƒÂ¨s votre ÃƒÂ©limination, vous continuez ÃƒÂ  participer aux votes pour ÃƒÂ©liminer les joueurs.",
+        "La première fois que la majorité vote contre vous, tous ceux qui ont voté contre vous sont éliminés à votre place. Ce pouvoir ne fonctionne qu'une fois.",
+    'Déesse de la Justice':
+        "En cas d'égalité lors d'un vote, c'est vous qui décidez qui est éliminé parmi les joueurs à égalité. Ce pouvoir persiste même après votre mort.",
+    'Fantôme':
+        "Même après votre élimination, vous continuez à participer aux votes pour éliminer les joueurs.",
     'Amoureux':
-        "Un autre joueur est secrÃƒÂ¨tement dÃƒÂ©signÃƒÂ© comme votre amoureux. Si l'un de vous deux est ÃƒÂ©liminÃƒÂ©, l'autre meurt de chagrin et est ÃƒÂ©liminÃƒÂ© aussi.",
+        "Un autre joueur est secrètement désigné comme votre amoureux. Si l'un de vous deux est éliminé, l'autre meurt de chagrin et est éliminé aussi.",
     'Mr. Meme':
-        "Au lieu de donner un indice oral, vous devez mimer votre mot-indice ÃƒÂ  chaque tour.",
+        "Au lieu de donner un indice oral, vous devez mimer votre mot-indice à chaque tour.",
     'Vendeur de Falafels':
-        "Vous n'avez pas de mot, comme Mr. White, mais vous gagnez si les imposteurs gagnent. Vous pouvez mentir et prÃƒÂ©tendre avoir un mot pour vous intÃƒÂ©grer.",
+        "Vous n'avez pas de mot, comme Mr. White, mais vous gagnez si les imposteurs gagnent. Vous pouvez mentir et prétendre avoir un mot pour vous intégrer.",
     'Vengeuse':
-        "Si vous ÃƒÂªtes ÃƒÂ©liminÃƒÂ©e, vous pouvez choisir d'emporter un autre joueur (encore en vie) avec vous dans la tombe.",
+        "Si vous êtes éliminée, vous pouvez choisir d'emporter un autre joueur (encore en vie) avec vous dans la tombe.",
     'Duellistes':
         "Un autre joueur est votre duelliste secret. Si vous survivez plus longtemps que lui, vous gagnez 2 points bonus. S'il survit plus longtemps que vous, vous perdez 2 points.",
   };
@@ -27003,11 +27826,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           title: Text(roleName),
           content: Text(
             _undercoverRoleDescriptions[roleName] ??
-                "Aucune description trouvÃƒÂ©e pour ce rÃƒÂ´le.",
+                "Aucune description trouvée pour ce rôle.",
           ),
           actions: <Widget>[
             TextButton(
-              child: Text("Fermer"),
+              child: Text(GameUiLocalization.tr(context, "Fermer")),
               onPressed: () {
                 Navigator.of(dialogContext).pop();
               },
@@ -27042,7 +27865,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         SizedBox(height: 10),
         Text(
           isMyTurn
-              ? "Ã°Å¸Å½Â¯ C'est ÃƒÂ  toi de donner un indice !"
+              ? "ðŸŽ¯ C'est à toi de donner un indice !"
               : "Au tour de $currentPlayerName...",
           style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
@@ -27124,7 +27947,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               color: Colors.white,
                             ),
                           )
-                          : Text('Valider'),
+                          : Text(GameUiLocalization.tr(context, "Valider")),
                 ),
               ],
             ),
@@ -27134,7 +27957,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Ã¢Å“â€¦ Indice envoyÃƒÂ© ! En attente des autres joueurs...',
+              '✅ Indice envoyé ! En attente des autres joueurs...',
               style: TextStyle(
                 color: Colors.greenAccent,
                 fontStyle: FontStyle.italic,
@@ -27182,18 +28005,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 setState(() => _isActionPending = false);
                             });
                       },
-              child: Text("Lancer le vote"),
+              child: Text(GameUiLocalization.tr(context, "Lancer le vote")),
             )
           else
-            Text("DÃƒÂ©battez ! L'hÃƒÂ´te lancera le vote."),
+            Text(
+              GameUiLocalization.tr(
+                context,
+                "Débattez ! L'hôte lancera le vote.",
+              ),
+            ),
         ] else if (currentPhase == 'voting') ...[
           Text(
-            "Ãƒâ‚¬ qui la sentence ?",
+            GameUiLocalization.tr(context, "À qui la sentence ?"),
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           if (hasVoted)
             Text(
-              "Vote enregistrÃƒÂ©. En attente...",
+              "Vote enregistré. En attente...",
               style: TextStyle(color: Colors.greenAccent),
             )
           else if (!canIVote)
@@ -27245,8 +28073,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final Map<String, IconData> roleIcons = {
       'Boomerang': Icons.autorenew,
       'Vengeuse': Icons.whatshot,
-      'DÃƒÂ©esse de la Justice': Icons.gavel,
-      'FantÃƒÂ´me': Icons.visibility,
+      'Déesse de la Justice': Icons.gavel,
+      'Fantôme': Icons.visibility,
       'Amoureux': Icons.favorite,
       'Mr. Meme': Icons.gesture,
       'Vendeur de Falafels': Icons.fastfood,
@@ -27373,7 +28201,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           children: [
                             Chip(
                               label: Text(
-                                "${voters.length} vote(s)",
+                                GameUiLocalization.tr(
+                                  context,
+                                  "undercoverVoteCount",
+                                  {'count': '${voters.length}'},
+                                ),
                                 style: TextStyle(fontSize: 10),
                               ),
                               padding: EdgeInsets.zero,
@@ -27568,12 +28400,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "PrÃƒÂ©paration de la partie",
+              "Préparation de la partie",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             SizedBox(height: 20),
             Text(
-              "L'application va sÃƒÂ©lectionner ${gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20} photos alÃƒÂ©atoires dans votre galerie.",
+              "L'application va sélectionner ${gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20} photos aléatoires dans votre galerie.",
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
@@ -27584,7 +28416,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   children: [
                     Icon(Icons.check_circle, color: Colors.green, size: 50),
                     Text(
-                      "Vous ÃƒÂªtes prÃƒÂªt !",
+                      "Vous êtes prêt !",
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text("En attente des autres joueurs..."),
@@ -27596,12 +28428,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             else
               ElevatedButton.icon(
                 icon: Icon(Icons.sync),
-                label: Text("Autoriser et Lancer la sÃƒÂ©lection"),
+                label: Text("Autoriser et Lancer la sélection"),
                 onPressed: () => _pickAndUploadPhotos(playerId, gameData),
               ),
             SizedBox(height: 30),
             Text(
-              "Joueurs prÃƒÂªts: ${readyPlayers.length} / ${players.length}",
+              "Joueurs prêts: ${readyPlayers.length} / ${players.length}",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             ...players.keys.map((pId) {
@@ -27641,7 +28473,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return Column(
           children: [
             Text(
-              "Ãƒâ‚¬ qui est cette photo ?",
+              "À qui est cette photo ?",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             SizedBox(height: 10),
@@ -27675,12 +28507,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               flex: 2,
               child:
                   hasVoted
-                      ? _buildWaitingWidget(
-                        "Vous avez votÃƒÂ© !",
-                        players,
-                        0,
-                        0,
-                      )
+                      ? _buildWaitingWidget("Vous avez voté !", players, 0, 0)
                       : GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -27731,7 +28558,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             (gameData['roundResultsTimestamp'] as Timestamp?)?.toDate();
 
         if (startTime == null)
-          return Center(child: Text("Calcul des rÃƒÂ©sultats..."));
+          return Center(child: Text("Calcul des résultats..."));
 
         if (isHost) {
           _startPhotoRouletteTimer(
@@ -27739,13 +28566,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             5,
             widget.gameCode,
             roundState,
-          ); // 5s pour voir les rÃƒÂ©sultats
+          ); // 5s pour voir les résultats
         }
 
         return Column(
           children: [
             Text(
-              "La photo ÃƒÂ©tait ÃƒÂ ... $correctOwnerName !",
+              "La photo était à... $correctOwnerName !",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             StreamBuilder(
@@ -27829,7 +28656,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Partie TerminÃƒÂ©e !",
+                    "Partie Terminée !",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   SizedBox(height: 10),
@@ -27856,7 +28683,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         () => Navigator.of(
                           context,
                         ).popUntil((route) => route.isFirst),
-                    child: Text("Retour ÃƒÂ  l'accueil"),
+                    child: Text(
+                      GameUiLocalization.tr(context, "Retour à l'accueil"),
+                    ),
                   ),
                 ],
               ),
@@ -27891,7 +28720,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return;
       }
 
-      // --- AJOUT IMPORTANT : Forcer le rafraÃƒÂ®chissement de l'ÃƒÂ©cran ---
+      // --- AJOUT IMPORTANT : Forcer le rafraîchissement de l'écran ---
       setState(() {});
       // ---------------------------------------------------------------
 
@@ -27903,7 +28732,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         _timerSubscription?.cancel();
 
         String gameType = gameData['gameType'];
-        // VÃƒÂ©rification pour ÃƒÂ©viter les appels multiples si l'hÃƒÂ´te a dÃƒÂ©jÃƒÂ  dÃƒÂ©clenchÃƒÂ©
+        // Vérification pour éviter les appels multiples si l'hôte a déjà déclenché
         final String playerId = widget.playerId;
         final bool isHost = gameData['hostId'] == playerId;
 
@@ -27952,9 +28781,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             });
             return Scaffold(
               body: Center(
-                child: Text(
-                  "La partie a ÃƒÂ©tÃƒÂ© terminÃƒÂ©e ou n'existe plus.",
-                ),
+                child: Text("La partie a été terminée ou n'existe plus."),
               ),
             );
           }
@@ -28014,7 +28841,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   await ps.claimGameReward(widget.gameCode);
                 }
 
-                // NOUVEAU : Envoyer les rÃ©sultats au salon si rattachÃ©
+                // NOUVEAU : Envoyer les résultats au salon si rattaché
                 if (gameData['loungeId'] != null &&
                     gameData['hostId'] == widget.playerId &&
                     !(gameData['loungeResultPosted'] ?? false)) {
@@ -28028,8 +28855,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   await _firebaseService.sendLoungeMessage(
                     gameData['loungeId'],
                     widget.playerId,
-                    "SystÃ¨me",
-                    "La partie est terminÃ©e !",
+                    "Système",
+                    "La partie est terminée !",
                     type: 'game_result',
                     extraData: {
                       'gameName': gameData['gameType'],
@@ -28088,7 +28915,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   _lastProcessedRound = currentRound;
                 }
 
-                // Gestion des timers spÃƒÂ©cifiques (inchangÃƒÂ©)
+                // Gestion des timers spécifiques (inchangé)
                 if (gameData['petitBacRoundStartTime'] != null &&
                     !(gameData['petitBacRoundEnded'] ?? false)) {
                   final Timestamp roundStartTimeStamp =
@@ -28151,7 +28978,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
                 _unoDrawActionDone = gameData['unoDrawActionDone'] ?? false;
 
-                // RÃƒÂ©cupÃƒÂ©rer les UIDs Agora de tous les joueurs
+                // Récupérer les UIDs Agora de tous les joueurs
                 _playerLivekitIdentities = {};
                 players.forEach((pId, pData) {
                   if (pData['livekitIdentity'] != null) {
@@ -28159,7 +28986,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   }
                 });
 
-                // DÃƒÂ©terminer les paramÃƒÂ¨tres spÃƒÂ©cifiques pour Time's Up
+                // Déterminer les paramètres spécifiques pour Time's Up
                 bool isTimeUpMime = false;
                 String? timeUpActiveTeam;
                 String? activePlayerId;
@@ -28175,7 +29002,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   int currentRoundNumber = gameData['currentRoundNumber'] ?? 1;
                   isTimeUpMime = currentRoundNumber == 3; // Mode Mime
 
-                  // Trouver l'ÃƒÂ©quipe active
+                  // Trouver l'équipe active
                   String currentGuesserId = gameData['currentGuesserId'] ?? '';
                   List<String> redTeam = List<String>.from(
                     gameData['redTeam'] ?? [],
@@ -28195,7 +29022,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   activePlayerForVideo = activePlayerId;
                 }
 
-                // Connexion LiveKit si vidÃ©o ou audio activÃ© dans les options de la partie
+                // Connexion LiveKit si vidéo ou audio activé dans les options de la partie
                 if (!_livekitInitialized &&
                     (gameData['videoEnabled'] == true ||
                         gameData['audioEnabled'] == true)) {
@@ -28942,8 +29769,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       if (diff > 12) return const SizedBox.shrink();
     }
 
-    final message =
-        lastAuto['message'] ?? "Coup automatique joué pour cause d'inactivité.";
+    final message = GameMessageLocalization.tr(
+      context,
+      lastAuto['message'] ?? "Coup automatique joué pour cause d'inactivité.",
+    );
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 6.0),
@@ -29156,25 +29985,35 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     bool useTimer = gameData['useTimer'] ?? true;
     if (!useTimer || gameData['gameState'] != 'playing') return null;
 
-    final turnStartTimeStamp = gameData['turnStartTime'] as Timestamp?;
+    final turnStartTimeStamp =
+        (gameData['turnStartTime'] ??
+                gameData['petitBacRoundStartTime'] ??
+                gameData['pictionaryStartTime'] ??
+                gameData['hotPotatoRoundStartedAt'])
+            as Timestamp?;
     if (turnStartTimeStamp == null) return null;
 
-    final roundState = gameData['roundState'];
-    final currentPhase = gameData['currentPhase'];
-    final loupGarouPhase = gameData['phase'];
+    final roundState = gameData['roundState']?.toString();
+    final currentPhase = gameData['currentPhase']?.toString();
+    final loupGarouPhase = gameData['phase']?.toString();
+    final aoVPhase = gameData['aoVPhase']?.toString();
 
     final statesWithTimer = [
       'placement',
       'playing',
       'playing_turn',
+      'playing_trick',
+      'playing_round_1',
+      'playing_round_2',
+      'playing_round_3',
+      'collecting_words',
       'rolling',
       'player_turn',
-      'drawn_card_phase',     // <--- Indispensable pour Zéro Pointé
-      'revealing_initial',    // <--- Indispensable pour Zéro Pointé
+      'drawn_card_phase', // <--- Indispensable pour Zéro Pointé
+      'revealing_initial', // <--- Indispensable pour Zéro Pointé
       'round_end',
       'voting',
       'result',
-      'round_end',
       'pre-flop',
       'flop',
       'turn',
@@ -29189,6 +30028,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'initial_writing',
       'drawing',
       'guessing',
+      'guessing_drawing',
       'nuit',
       'jour_discussion',
       'jour_vote',
@@ -29198,12 +30038,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'challenging',
       'judging_selection',
       'judge_voting',
+      'spin_result',
+      'writing_challenge',
+      'performing',
     ];
 
     bool shouldShow =
-        statesWithTimer.contains(roundState) ||
-        statesWithTimer.contains(currentPhase) ||
-        (loupGarouPhase != null && statesWithTimer.contains(loupGarouPhase));
+        (roundState != null &&
+            (statesWithTimer.contains(roundState) ||
+                roundState.startsWith('playing_round_'))) ||
+        (currentPhase != null && statesWithTimer.contains(currentPhase)) ||
+        (loupGarouPhase != null && statesWithTimer.contains(loupGarouPhase)) ||
+        (aoVPhase != null && statesWithTimer.contains(aoVPhase));
 
     if (!shouldShow) {
       return null;
@@ -29212,7 +30058,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final turnStartTime = turnStartTimeStamp.toDate();
 
     // Utiliser la durée effective (5s si bot, 30s sinon)
-    double turnDurationSeconds = FirebaseService.getEffectiveTurnTimer(gameData).toDouble();
+    double turnDurationSeconds =
+        FirebaseService.getEffectiveTurnTimer(gameData).toDouble();
     if (turnDurationSeconds <= 0) turnDurationSeconds = 30.0;
 
     if (roundState == 'result' ||
@@ -29223,8 +30070,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           (gameData['resultTimerSeconds'] as num?)?.toDouble() ?? 15.0;
     }
 
-    final String currentTurnKey =
-        "${turnStartTimeStamp.millisecondsSinceEpoch}_${gameData['currentPlayerIndex'] ?? gameData['unoCurrentPlayerIndex'] ?? gameData['milleBornesCurrentPlayerIndex'] ?? gameData['petitsChevauxCurrentIndex'] ?? 0}_${gameData['roundState']}_${gameData['phase']}";
+    final String currentTurnKey = _computeTurnKey(gameData, turnStartTimeStamp);
 
     return PreferredSize(
       preferredSize: const Size.fromHeight(20.0),
@@ -29241,14 +30087,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           );
 
           // ⚡ DÉCLENCHEMENT INSTANTANÉ DÈS QUE LE TEMPS EST ÉCOULÉ (0s)
-          // Seul l'hôte exécute la fonction pour éviter les conflits entre clients
+          // Seul l'hôte ou le joueur actif exécute la fonction pour éviter les conflits
           if (elapsedSeconds >= turnDurationSeconds &&
               _lastExecutedTimeoutKey != currentTurnKey) {
             _lastExecutedTimeoutKey = currentTurnKey;
 
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted && gameData['hostId'] == widget.playerId) {
-                _executeAutoPlayForGame(gameData);
+              if (mounted) {
+                final bool isHost = gameData['hostId'] == widget.playerId;
+                final bool isCurrentPlayer =
+                    FirebaseService.getCurrentPlayerId(gameData) ==
+                    widget.playerId;
+                if (isHost || isCurrentPlayer) {
+                  _executeAutoPlayForGame(gameData);
+                }
               }
             });
           }
@@ -29293,7 +30145,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   ) {
     String gameType = gameData['gameType'] ?? '';
 
-    // Liste des jeux où voir la main adverse est pertinent
+    // Liste des jeux où voir la main/grille adverse est pertinent
     bool canViewHands = [
       'Président',
       'Uno',
@@ -29302,6 +30154,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'Big Two',
       'Mille Bornes',
       'Rami',
+      'Yams',
     ].contains(gameType);
 
     List<MapEntry<String, dynamic>> sortedPlayers =
@@ -29332,24 +30185,49 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             children:
                 sortedPlayers.map((entry) {
                   String pId = entry.key;
-                  String pName = entry.value['name'] ?? 'Inconnu';
+                  bool isMe = pId == widget.playerId;
+                  String pName = 'Joueur';
+                  final rawName =
+                      entry.value is Map ? entry.value['name'] : null;
+                  if (rawName != null &&
+                      rawName.toString().trim().isNotEmpty &&
+                      rawName != 'Inconnu') {
+                    pName = rawName.toString();
+                  } else {
+                    final profileMap =
+                        gameData['playerProfiles'] as Map<String, dynamic>?;
+                    final profName = profileMap?[pId]?['name'];
+                    if (profName != null &&
+                        profName.toString().trim().isNotEmpty &&
+                        profName != 'Inconnu') {
+                      pName = profName.toString();
+                    } else if (isMe) {
+                      final authName =
+                          FirebaseAuth.instance.currentUser?.displayName;
+                      if (authName != null && authName.trim().isNotEmpty) {
+                        pName = authName;
+                      }
+                    }
+                  }
                   int pScore =
                       (gameType == 'Zéro Pointé')
                           ? (gameData['totalScores']?[pId] ?? 0)
                           : (entry.value['score'] ?? 0);
                   int pXp = (entry.value['xp'] as num?)?.toInt() ?? 0;
-                  bool isMe = pId == widget.playerId;
                   bool isSelected = _viewedOpponentId == pId;
                   final String targetAuthUid = entry.value['authUid'] ?? pId;
                   final String myAuthUid =
                       players[widget.playerId]?['authUid'] ?? widget.playerId;
-                  final bool isBot = entry.value['isBot'] == true || entry.value['replacedByBot'] == true;
+                  final bool isBot =
+                      entry.value['isBot'] == true ||
+                      entry.value['replacedByBot'] == true;
 
                   void toggleOpponentHand() {
                     if (canViewHands && !isMe) {
                       HapticFeedback.mediumImpact();
                       setState(() {
-                        _viewedOpponentId = (_viewedOpponentId == pId) ? null : pId;
+                        _viewedOpponentId =
+                            (_viewedOpponentId == pId) ? null : pId;
                       });
                     }
                   }
@@ -29357,24 +30235,41 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   return InkWell(
                     borderRadius: BorderRadius.circular(20),
                     onTap: () {
+                      if (canViewHands && !isMe) {
+                        toggleOpponentHand();
+                      } else {
+                        showUserProfileDialog(
+                          context,
+                          targetUid: targetAuthUid,
+                          currentUserId: myAuthUid,
+                        );
+                      }
+                    },
+                    onLongPress: () {
                       showUserProfileDialog(
                         context,
                         targetUid: targetAuthUid,
                         currentUserId: myAuthUid,
                       );
                     },
-                    onLongPress: toggleOpponentHand, // <-- APPUI LONG POUR VOIR LA MAIN
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
-                        color: isSelected
-                            ? Colors.deepPurple.withOpacity(0.6)
-                            : const Color(0xFF1E1E28),
+                        color:
+                            isSelected
+                                ? Colors.deepPurple.withOpacity(0.6)
+                                : const Color(0xFF1E1E28),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: isSelected
-                              ? Colors.amberAccent
-                              : (isMe ? Colors.deepPurpleAccent : Colors.white12),
+                          color:
+                              isSelected
+                                  ? Colors.amberAccent
+                                  : (isMe
+                                      ? Colors.deepPurpleAccent
+                                      : Colors.white12),
                           width: isSelected ? 2.0 : 1.0,
                         ),
                       ),
@@ -29383,30 +30278,44 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         children: [
                           CircleAvatar(
                             radius: 12,
-                            backgroundColor: isMe ? Colors.deepPurpleAccent : Colors.grey[800],
-                            child: isBot
-                                ? const Icon(Icons.smart_toy, size: 12, color: Colors.cyanAccent)
-                                : Text(
-                                    pName.isNotEmpty ? pName[0].toUpperCase() : "?",
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
+                            backgroundColor:
+                                isMe
+                                    ? Colors.deepPurpleAccent
+                                    : Colors.grey[800],
+                            child:
+                                isBot
+                                    ? const Icon(
+                                      Icons.smart_toy,
+                                      size: 12,
+                                      color: Colors.cyanAccent,
+                                    )
+                                    : Text(
+                                      pName.isNotEmpty
+                                          ? pName[0].toUpperCase()
+                                          : "?",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
                           ),
                           const SizedBox(width: 6),
                           Text(
                             "$pName: $pScore pts",
                             style: TextStyle(
-                              fontWeight: isMe ? FontWeight.bold : FontWeight.normal,
+                              fontWeight:
+                                  isMe ? FontWeight.bold : FontWeight.normal,
                               color: isMe ? Colors.amberAccent : Colors.white,
                               fontSize: 12,
                             ),
                           ),
                           const SizedBox(width: 5),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 1,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.deepPurple.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(6),
@@ -29420,34 +30329,90 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               ),
                             ),
                           ),
-                          if (gameType == 'Rami' || gameType == 'Uno' || gameType == 'Président' || gameType == 'Big Two' || gameType == 'Mille Bornes') ...[
+                          if (gameType == 'Rami' ||
+                              gameType == 'Uno' ||
+                              gameType == 'Président' ||
+                              gameType == 'Big Two' ||
+                              gameType == 'Mille Bornes' ||
+                              gameType == 'Yams') ...[
                             () {
                               int? cCount;
+                              IconData badgeIcon = Icons.style;
                               if (gameType == 'Rami') {
-                                cCount = (gameData['ramiPlayerHands']?[pId] as List?)?.length;
+                                cCount =
+                                    (gameData['ramiPlayerHands']?[pId] as List?)
+                                        ?.length;
                               } else if (gameType == 'Uno') {
-                                cCount = (gameData['unoPlayerHands']?[pId] as List?)?.length;
+                                cCount =
+                                    (gameData['unoPlayerHands']?[pId] as List?)
+                                        ?.length;
                               } else if (gameType == 'Président') {
-                                cCount = (gameData['playerHands']?[pId] as List?)?.length;
+                                cCount =
+                                    (gameData['playerHands']?[pId] as List?)
+                                        ?.length;
                               } else if (gameType == 'Big Two') {
-                                cCount = (gameData['bigTwoPlayerHands']?[pId] as List?)?.length;
+                                cCount =
+                                    (gameData['bigTwoPlayerHands']?[pId]
+                                            as List?)
+                                        ?.length;
                               } else if (gameType == 'Mille Bornes') {
-                                cCount = (gameData['milleBornesPlayerData']?[pId]?['hand'] as List?)?.length;
+                                cCount =
+                                    (gameData['milleBornesPlayerData']?[pId]?['hand']
+                                            as List?)
+                                        ?.length;
+                              } else if (gameType == 'Yams') {
+                                badgeIcon = Icons.casino;
+                                final sMap = Map<String, dynamic>.from(
+                                  gameData['yamsScores']?[pId] ?? {},
+                                );
+                                int sUpper = [
+                                  'As',
+                                  'Deux',
+                                  'Trois',
+                                  'Quatre',
+                                  'Cinq',
+                                  'Six',
+                                ].fold<int>(
+                                  0,
+                                  (sum, cat) =>
+                                      sum + ((sMap[cat] as num?)?.toInt() ?? 0),
+                                );
+                                int sBonus = sUpper >= 63 ? 35 : 0;
+                                cCount =
+                                    sMap.values.fold<int>(
+                                      0,
+                                      (sum, val) =>
+                                          sum + ((val as num?)?.toInt() ?? 0),
+                                    ) +
+                                    sBonus;
                               }
-                              if (cCount == null) return const SizedBox.shrink();
+                              if (cCount == null)
+                                return const SizedBox.shrink();
                               return Padding(
                                 padding: const EdgeInsets.only(left: 4.0),
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4,
+                                    vertical: 1,
+                                  ),
                                   decoration: BoxDecoration(
                                     color: Colors.amber.withOpacity(0.2),
                                     borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(color: Colors.amberAccent.withOpacity(0.4), width: 0.8),
+                                    border: Border.all(
+                                      color: Colors.amberAccent.withOpacity(
+                                        0.4,
+                                      ),
+                                      width: 0.8,
+                                    ),
                                   ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Icon(Icons.style, size: 9, color: Colors.amberAccent),
+                                      Icon(
+                                        badgeIcon,
+                                        size: 9,
+                                        color: Colors.amberAccent,
+                                      ),
                                       const SizedBox(width: 2),
                                       Text(
                                         "$cCount",
@@ -29472,9 +30437,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     ? Icons.visibility_off
                                     : Icons.visibility,
                                 size: 14,
-                                color: _viewedOpponentId == pId
-                                    ? Colors.amberAccent
-                                    : Colors.white54,
+                                color:
+                                    _viewedOpponentId == pId
+                                        ? Colors.amberAccent
+                                        : Colors.white54,
                               ),
                             ),
                           ],
@@ -29647,6 +30613,136 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ],
         );
 
+      case 'Yams':
+        final rawScores = Map<String, dynamic>.from(
+          gameData['yamsScores'] ?? {},
+        );
+        final oppScores = Map<String, dynamic>.from(
+          rawScores[opponentId] ?? {},
+        );
+        int oppUpper = [
+          'As',
+          'Deux',
+          'Trois',
+          'Quatre',
+          'Cinq',
+          'Six',
+        ].fold<int>(
+          0,
+          (sum, cat) => sum + ((oppScores[cat] as num?)?.toInt() ?? 0),
+        );
+        int oppBonus = oppUpper >= 63 ? 35 : 0;
+        int oppTotal =
+            oppScores.values.fold<int>(
+              0,
+              (sum, val) => sum + ((val as num?)?.toInt() ?? 0),
+            ) +
+            oppBonus;
+
+        const List<String> categories = [
+          'As',
+          'Deux',
+          'Trois',
+          'Quatre',
+          'Cinq',
+          'Six',
+          'Brelan',
+          'Carré',
+          'Full',
+          'Petite Suite',
+          'Grande Suite',
+          'Yams',
+          'Chance',
+        ];
+
+        return Container(
+          constraints: const BoxConstraints(maxHeight: 180),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Total: $oppTotal pts",
+                      style: const TextStyle(
+                        color: Colors.amberAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                    ),
+                    Text(
+                      "Section sup: $oppUpper/63 pts ${oppBonus > 0 ? '(+35)' : ''}",
+                      style: TextStyle(
+                        color:
+                            oppBonus > 0 ? Colors.greenAccent : Colors.white70,
+                        fontSize: 11,
+                      ),
+                    ),
+                    Text(
+                      "${oppScores.length}/13 remplies",
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    alignment: WrapAlignment.center,
+                    children:
+                        categories.map((cat) {
+                          final hasScore = oppScores.containsKey(cat);
+                          final scoreVal = oppScores[cat];
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 7,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color:
+                                  hasScore
+                                      ? ((scoreVal as num? ?? 0) > 0
+                                          ? Colors.amber.withOpacity(0.2)
+                                          : Colors.red.withOpacity(0.15))
+                                      : Colors.white.withOpacity(0.05),
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(
+                                color:
+                                    hasScore
+                                        ? ((scoreVal as num? ?? 0) > 0
+                                            ? Colors.amberAccent
+                                            : Colors.redAccent.withOpacity(0.5))
+                                        : Colors.white12,
+                              ),
+                            ),
+                            child: Text(
+                              "$cat: ${hasScore ? '$scoreVal' : '—'}",
+                              style: TextStyle(
+                                fontSize: 10.5,
+                                fontWeight:
+                                    hasScore
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                color: hasScore ? Colors.white : Colors.white38,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+
       default:
         return const SizedBox.shrink();
     }
@@ -29701,7 +30797,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           gameTitle: "Zéro Pointé",
           winnerId: gameData['gameWinner'],
           winnerName: players[gameData['gameWinner']]?['name'],
-          reason: "Partie terminée avec le score le plus faible !",
+          reason: GameUiLocalization.tr(
+            context,
+            "Partie terminée avec le score le plus faible !",
+          ),
           players: players,
           customScores: totalScores,
           lowerScoreWins: true,
@@ -29732,7 +30831,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               const SizedBox(height: 8),
               Text(
-                "Fin de la Manche !",
+                GameUiLocalization.tr(context, "Fin de la Manche !"),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -29740,7 +30839,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               const SizedBox(height: 4),
               Text(
-                "$roundEnderName a dévoilé toutes ses cartes en premier.",
+                GameUiLocalization.tr(context, "skyjoRoundEnderNotice", {
+                  'name': roundEnderName,
+                }),
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white70, fontSize: 13),
               ),
@@ -29772,7 +30873,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                       ),
                       Text(
-                        "+$rScore cette manche  •  Total: $tScore pts",
+                        GameUiLocalization.tr(
+                          context,
+                          "skyjoRoundScoreNotice",
+                          {'roundScore': '$rScore', 'totalScore': '$tScore'},
+                        ),
                         style: const TextStyle(
                           color: Colors.white70,
                           fontSize: 12,
@@ -29796,7 +30901,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               strokeWidth: 2,
                             ),
                           )
-                          : const Text("Manche Suivante"),
+                          : Text(
+                            GameUiLocalization.tr(context, "Manche Suivante"),
+                          ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green[700],
                     padding: const EdgeInsets.symmetric(
@@ -29821,9 +30928,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           },
                 )
               else
-                const Text(
-                  "En attente de l'hôte pour la prochaine manche...",
-                  style: TextStyle(
+                Text(
+                  GameUiLocalization.tr(
+                    context,
+                    "En attente de l'hôte pour la prochaine manche...",
+                  ),
+                  style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: Colors.white54,
                     fontSize: 12,
@@ -29871,8 +30981,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "RÉVÉLEZ VOS 2 PREMIÈRES CARTES",
+                    Text(
+                      GameUiLocalization.tr(
+                        context,
+                        "RÉVÉLEZ VOS 2 PREMIÈRES CARTES",
+                      ),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
@@ -29881,7 +30994,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                     Text(
-                      "$revealedCount / 2 cartes retournées",
+                      GameUiLocalization.tr(
+                        context,
+                        "skyjoCardsRevealedCount",
+                        {'count': '$revealedCount'},
+                      ),
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -29911,30 +31028,47 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     // --- 3. TOUR DE JEU ACTIF ---
     String instructions =
         isMyTurn
-            ? "C'est votre tour !"
-            : "Tour de ${players[gameData['currentPlayerId']]?['name'] ?? '...'}";
+            ? GameUiLocalization.tr(context, "C'est votre tour !")
+            : GameUiLocalization.tr(context, "Au tour de {name}", {
+              'name': players[gameData['currentPlayerId']]?['name'] ?? '...',
+            });
     Color instructionColor = isMyTurn ? Colors.greenAccent : Colors.white70;
 
     if (isMyTurn) {
       if (drawnCard != null) {
         if (_zeroPointeAction == 'use_drawn') {
-          instructions =
-              "Touchez une carte pour la REMPLACER par le $drawnCard.";
+          instructions = GameUiLocalization.tr(
+            context,
+            "skyjoReplaceWithDrawn",
+            {'card': '$drawnCard'},
+          );
           instructionColor = Colors.greenAccent;
         } else if (_zeroPointeAction == 'discard_drawn') {
-          instructions = "Touchez une carte FACE CACHÉE pour la RÉVÉLER.";
+          instructions = GameUiLocalization.tr(
+            context,
+            "skyjoTapHiddenToReveal",
+          );
           instructionColor = Colors.orangeAccent;
         } else {
-          instructions = "Choisissez l'action pour le $drawnCard :";
+          instructions = GameUiLocalization.tr(
+            context,
+            "skyjoChooseActionForDrawn",
+            {'card': '$drawnCard'},
+          );
         }
       } else {
         if (_zeroPointeAction == 'take_discard') {
-          instructions =
-              "Touchez une carte pour la REMPLACER par la défausse (${discardPile.isNotEmpty ? discardPile.last : 0}).";
+          instructions = GameUiLocalization.tr(
+            context,
+            "skyjoReplaceWithDiscard",
+            {'card': '${discardPile.isNotEmpty ? discardPile.last : 0}'},
+          );
           instructionColor = Colors.amberAccent;
         } else {
-          instructions =
-              "Prenez la Défausse visible ou Piochez une carte cachée.";
+          instructions = GameUiLocalization.tr(
+            context,
+            "Prenez la Défausse visible ou Piochez une carte cachée",
+          );
         }
       }
     }
@@ -29986,9 +31120,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     padding: EdgeInsets.zero,
                     visualDensity: VisualDensity.compact,
                   ),
-                  child: const Text(
-                    "Annuler",
-                    style: TextStyle(color: Colors.redAccent, fontSize: 11),
+                  child: Text(
+                    GameUiLocalization.tr(context, "Annuler"),
+                    style: const TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 11,
+                    ),
                   ),
                 ),
             ],
@@ -30055,9 +31192,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(color: Colors.white24),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  "Vide",
+                                  GameUiLocalization.tr(context, "Vide"),
                                   style: TextStyle(
                                     color: Colors.white38,
                                     fontSize: 10,
@@ -30068,8 +31205,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ],
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      "DÉFAUSSE",
+                    Text(
+                      GameUiLocalization.tr(context, "DÉFAUSSE"),
                       style: TextStyle(
                         color: Colors.white60,
                         fontSize: 9,
@@ -30109,8 +31246,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       scale: 0.9,
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      "PIOCHE",
+                    Text(
+                      GameUiLocalization.tr(context, "PIOCHE"),
                       style: TextStyle(
                         color: Colors.white60,
                         fontSize: 9,
@@ -30134,8 +31271,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       scale: 0.9,
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      "PIOCHÉE",
+                    Text(
+                      GameUiLocalization.tr(context, "PIOCHÉE"),
                       style: TextStyle(
                         color: Colors.greenAccent,
                         fontSize: 9,
@@ -30161,8 +31298,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Expanded(
                   child: ElevatedButton.icon(
                     icon: const Icon(Icons.swap_horiz_rounded, size: 16),
-                    label: const Text(
-                      "GARDER & REMPLACER",
+                    label: Text(
+                      GameUiLocalization.tr(context, "GARDER & REMPLACER"),
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
@@ -30189,8 +31326,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Expanded(
                   child: OutlinedButton.icon(
                     icon: const Icon(Icons.delete_outline_rounded, size: 16),
-                    label: const Text(
-                      "JETER & DÉVOILER",
+                    label: Text(
+                      GameUiLocalization.tr(context, "JETER & DÉVOILER"),
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
@@ -30251,9 +31388,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             } else if (_zeroPointeAction == 'discard_drawn') {
               if (myGrid[index]['revealed'] == true) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
+                  SnackBar(
                     content: Text(
-                      "Cette carte est déjà visible ! Choisissez une carte cachée.",
+                      GameUiLocalization.tr(
+                        context,
+                        "Cette carte est déjà visible ! Choisissez une carte cachée.",
+                      ),
                     ),
                     backgroundColor: Colors.orange,
                   ),
@@ -30390,7 +31530,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         gameData['playerOrder'] ?? [],
       );
       if (playerOrder.isEmpty)
-        return Center(child: Text("Aucun album ÃƒÂ  afficher."));
+        return Center(child: Text("Aucun album à afficher."));
 
       final int serverPageIndex = gameData['gribouillisResultPageIndex'] ?? 0;
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -30448,7 +31588,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                   child: Column(
                     children: [
-                      // En-tÃƒÂªte Album
+                      // En-tête Album
                       Container(
                         width: double.infinity,
                         padding: EdgeInsets.all(12),
@@ -30498,10 +31638,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       SizedBox(width: 5),
                                       Text(
                                         index == 0
-                                            ? "DÃƒÂ©part par $authorName"
+                                            ? "Départ par $authorName"
                                             : (isDrawing
-                                                ? "DessinÃƒÂ© par $authorName"
-                                                : "DevinÃƒÂ© par $authorName"),
+                                                ? "Dessiné par $authorName"
+                                                : "Deviné par $authorName"),
                                         style: TextStyle(
                                           color: Colors.grey[600],
                                           fontSize: 12,
@@ -30547,7 +31687,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   else
                                     Center(
                                       child: Text(
-                                        'Ã¢â‚¬Å“ ${step['content']} Ã¢â‚¬Â',
+                                        '“ ${step['content']} â€Â',
                                         style: TextStyle(
                                           fontSize: 20,
                                           color: Colors.black87,
@@ -30585,7 +31725,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     );
                   },
                   icon: Icon(Icons.navigate_before),
-                  label: Text("PrÃƒÂ©c."),
+                  label: Text("Préc."),
                 ),
                 Text(
                   "Album ${serverPageIndex + 1} / ${playerOrder.length}",
@@ -30632,7 +31772,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     if (currentStep > 0) {
       String sourceAlbumOwnerId;
 
-      if ((gribouillisMode == 'ComplÃƒÂ©ment' && ajouter1) ||
+      if ((gribouillisMode == 'Complément' && ajouter1) ||
           gribouillisMode == 'Brise-Glace') {
         sourceAlbumOwnerId = playerOrder[(myIndex + currentStep) % playerCount];
       } else {
@@ -30644,7 +31784,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         gameData['albums'][sourceAlbumOwnerId] ?? [],
       );
       if (sourceAlbum.isNotEmpty) {
-        if ((gribouillisMode == 'ComplÃƒÂ©ment' && ajouter1) ||
+        if ((gribouillisMode == 'Complément' && ajouter1) ||
             gribouillisMode == 'Brise-Glace') {
           stepToProcess = Map<String, dynamic>.from(sourceAlbum[0]);
         } else {
@@ -30662,7 +31802,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               child: Column(
                 children: [
                   Text(
-                    "Devine ce que reprÃƒÂ©sente ce dessin :",
+                    "Devine ce que représente ce dessin :",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Expanded(
@@ -30695,7 +31835,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           else
             Text(
               gribouillisMode == 'Brise-Glace'
-                  ? "Ãƒâ€°cris un thÃƒÂ¨me ou une phrase !"
+                  ? "Écris un thème ou une phrase !"
                   : "Imagine une phrase !",
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
@@ -30703,7 +31843,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           SizedBox(height: 20),
           TextField(
             controller: _answerController,
-            decoration: InputDecoration(labelText: "Ãƒâ€°cris ta phrase..."),
+            decoration: InputDecoration(labelText: "Écris ta phrase..."),
             maxLines: 2,
           ),
           SizedBox(height: 20),
@@ -30729,14 +31869,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       String promptText;
       if (stepToProcess != null && stepToProcess['type'] == 'text') {
         promptText = 'Dessine cette phrase :\n"${stepToProcess['content']}"';
-      } else if (gribouillisMode == 'ComplÃƒÂ©ment') {
-        promptText = "ComplÃƒÂ¨te ce dessin !";
+      } else if (gribouillisMode == 'Complément') {
+        promptText = "Complète ce dessin !";
       } else {
         promptText = "Commence par un dessin !";
       }
 
       final String? backgroundDrawingData =
-          (gribouillisMode == 'ComplÃƒÂ©ment' &&
+          (gribouillisMode == 'Complément' &&
                   stepToProcess != null &&
                   stepToProcess['type'] == 'drawing')
               ? stepToProcess['content'] as String?
@@ -30780,7 +31920,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
     }
 
-    return Center(child: Text("Ãƒâ€°tat Gribouillis inconnu : $roundState"));
+    return Center(child: Text("État Gribouillis inconnu : $roundState"));
   }
 
   Widget _buildTabooUI(
@@ -31016,7 +32156,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               // Statut manche
               Text(
                 "Manche ${(gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1} / ${(gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4}",
-                style: const TextStyle(color: Colors.white54, fontSize: 11, fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                  color: Colors.white54,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),
@@ -31469,7 +32613,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               const SizedBox(height: 24),
               ElevatedButton.icon(
                 icon: const Icon(Icons.home_rounded),
-                label: const Text("Retour au Salon"),
+                label: Text(GameUiLocalization.tr(context, "Retour au Salon")),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4C1D95),
                   padding: const EdgeInsets.symmetric(
@@ -31867,13 +33011,61 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Map<String, dynamic> gameData,
     String playerId,
   ) {
-    final players = Map<String, dynamic>.from(gameData['players']);
-    final playerOrder = List<String>.from(gameData['bigTwoPlayerOrder']);
-    final hands = Map<String, dynamic>.from(gameData['bigTwoPlayerHands']);
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final playerProfiles = Map<String, dynamic>.from(
+      gameData['playerProfiles'] ?? {},
+    );
+
+    String resolvePlayerName(String pId) {
+      final pMap = players[pId] is Map ? players[pId] : null;
+      final rawName = pMap?['name'];
+      if (rawName != null &&
+          rawName.toString().trim().isNotEmpty &&
+          rawName != 'Inconnu') {
+        return rawName.toString();
+      }
+      final profName =
+          playerProfiles[pId] is Map ? playerProfiles[pId]['name'] : null;
+      if (profName != null &&
+          profName.toString().trim().isNotEmpty &&
+          profName != 'Inconnu') {
+        return profName.toString();
+      }
+      if (pId == playerId) {
+        final authName = FirebaseAuth.instance.currentUser?.displayName;
+        if (authName != null && authName.trim().isNotEmpty) return authName;
+      }
+      return 'Joueur';
+    }
+
+    final Set<String> allParticipantIds = {};
+    allParticipantIds.addAll(players.keys);
+    allParticipantIds.addAll(playerProfiles.keys);
+    if (gameData['bigTwoPlayerOrder'] is List) {
+      allParticipantIds.addAll(
+        (gameData['bigTwoPlayerOrder'] as List).map((e) => e.toString()),
+      );
+    }
+    for (String pId in allParticipantIds) {
+      if (!players.containsKey(pId) || players[pId] is! Map) {
+        players[pId] = {'name': resolvePlayerName(pId), 'score': 0};
+      } else if (players[pId]['name'] == null ||
+          players[pId]['name'] == 'Inconnu') {
+        players[pId]['name'] = resolvePlayerName(pId);
+      }
+    }
+
+    final playerOrder = List<String>.from(gameData['bigTwoPlayerOrder'] ?? []);
+    final hands = Map<String, dynamic>.from(
+      gameData['bigTwoPlayerHands'] ?? {},
+    );
     final myHand = List<String>.from(hands[playerId] ?? []);
-    final currentIndex = gameData['bigTwoCurrentPlayerIndex'];
+    final currentIndex =
+        (gameData['bigTwoCurrentPlayerIndex'] as num?)?.toInt() ?? 0;
     final currentPlayerId =
-        playerOrder.isNotEmpty ? playerOrder[currentIndex] : '';
+        (playerOrder.isNotEmpty && currentIndex < playerOrder.length)
+            ? playerOrder[currentIndex]
+            : '';
     final isMyTurn = currentPlayerId == playerId;
     final lastPlay =
         gameData['bigTwoLastPlay'] != null
@@ -31884,35 +33076,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
 
     if (gameData['gameState'] == 'gameOver') {
-      final winnerName = players[gameData['gameWinner']]?['name'] ?? 'Inconnu';
-      return Center(
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Partie TerminÃ©e !",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "$winnerName a gagnÃ© !",
-                  style: TextStyle(color: Colors.amber, fontSize: 20),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed:
-                      () => Navigator.of(
-                        context,
-                      ).popUntil((route) => route.isFirst),
-                  child: Text("Retour"),
-                ),
-              ],
-            ),
-          ),
-        ),
+      final winnerId = gameData['gameWinner'];
+      return UniversalGameEndScreen(
+        gameTitle: "Big Two",
+        winnerId: winnerId,
+        winnerName: resolvePlayerName(winnerId ?? ''),
+        reason:
+            gameData['gameEndReason'] ?? "La partie de Big Two est terminée !",
+        players: players,
+        gameData: gameData,
+        gameCode: widget.gameCode,
+        currentPlayerId: playerId,
+        isHost: gameData['hostId'] == playerId,
+        onExit: _exitGame,
       );
     }
 
@@ -31922,26 +33098,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         Expanded(
           flex: 2,
           child: Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   isMyTurn
                       ? "C'est votre tour !"
-                      : "Au tour de ${players[currentPlayerId]?['name']}",
+                      : "Au tour de ${resolvePlayerName(currentPlayerId)}",
                   style: TextStyle(
                     color: isMyTurn ? Colors.greenAccent : Colors.white70,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 if (lastPlay != null) ...[
-                  Text(
+                  const Text(
                     "Carte(s) en jeu :",
                     style: TextStyle(color: Colors.white54),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:
@@ -31949,13 +33125,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             .map((c) => _buildBigTwoCard(c.toString()))
                             .toList(),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    "JouÃ© par ${players[lastPlay['playedBy']]?['name']}",
-                    style: TextStyle(fontSize: 12, color: Colors.white38),
+                    "Joué par ${resolvePlayerName(lastPlay['playedBy'] ?? '')}",
+                    style: const TextStyle(fontSize: 12, color: Colors.white70),
                   ),
                 ] else
-                  Text(
+                  const Text(
                     "Aucune carte en jeu. Jouez ce que vous voulez !",
                     style: TextStyle(color: Colors.amber),
                   ),
@@ -32035,29 +33211,59 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   Widget _buildBigTwoCard(String card, {bool isSelected = false}) {
-    String rank = card.substring(0, card.length - 1);
-    String suit = card.substring(card.length - 1);
-    Color textColor = (suit == 'H' || suit == 'D') ? Colors.red : Colors.black;
-    String suitSymbol =
-        {'H': 'â™¥', 'D': 'â™¦', 'C': 'â™£', 'S': 'â™ '}[suit] ?? '?';
+    if (card.trim().isEmpty) return const SizedBox.shrink();
+    final (rank, suitKey) = FirebaseService.parseBigTwoCard(card);
+
+    final bool isRed = (suitKey == 'H' || suitKey == 'D');
+    final Color textColor =
+        isRed ? const Color(0xFFE11D48) : const Color(0xFF0F172A);
+
+    Widget buildSuitIcon(double size) {
+      if (suitKey == 'H') {
+        return Icon(Icons.favorite_rounded, size: size, color: textColor);
+      } else if (suitKey == 'D') {
+        return CustomPaint(
+          size: Size(size * 0.85, size * 0.85),
+          painter: _BigTwoDiamondPainter(textColor),
+        );
+      } else if (suitKey == 'C') {
+        return CustomPaint(
+          size: Size(size, size),
+          painter: _BigTwoClubPainter(textColor),
+        );
+      } else {
+        return CustomPaint(
+          size: Size(size, size),
+          painter: _BigTwoSpadePainter(textColor),
+        );
+      }
+    }
 
     return Container(
-      width: 60,
-      height: 90,
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      width: 62,
+      height: 94,
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: isSelected ? Colors.greenAccent : Colors.grey,
-          width: isSelected ? 3 : 1,
+          color: isSelected ? Colors.greenAccent : const Color(0xFFCBD5E1),
+          width: isSelected ? 3.0 : 1.2,
         ),
         boxShadow: [
-          BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(2, 3)),
+          BoxShadow(
+            color:
+                isSelected
+                    ? Colors.greenAccent.withOpacity(0.5)
+                    : Colors.black26,
+            blurRadius: isSelected ? 8 : 4,
+            offset: const Offset(1, 3),
+          ),
         ],
       ),
       child: Stack(
         children: [
+          // Centre : grand rang et symbole vectoriel net
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -32066,35 +33272,59 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   rank,
                   style: TextStyle(
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w900,
                     color: textColor,
+                    height: 1.0,
                   ),
                 ),
-                Text(
-                  suitSymbol,
-                  style: TextStyle(fontSize: 24, color: textColor),
-                ),
+                const SizedBox(height: 3),
+                buildSuitIcon(22),
               ],
             ),
           ),
+          // Coin supérieur gauche
           Positioned(
             top: 4,
-            left: 4,
-            child: Text(
-              rank,
-              style: TextStyle(
-                fontSize: 12,
-                color: textColor,
-                fontWeight: FontWeight.bold,
-              ),
+            left: 5,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  rank,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: textColor,
+                    fontWeight: FontWeight.w900,
+                    height: 1.0,
+                  ),
+                ),
+                const SizedBox(height: 1),
+                buildSuitIcon(10),
+              ],
             ),
           ),
+          // Coin inférieur droit inversé
           Positioned(
-            top: 18,
-            left: 4,
-            child: Text(
-              suitSymbol,
-              style: TextStyle(fontSize: 12, color: textColor),
+            bottom: 4,
+            right: 5,
+            child: Transform.rotate(
+              angle: 3.14159,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    rank,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: textColor,
+                      fontWeight: FontWeight.w900,
+                      height: 1.0,
+                    ),
+                  ),
+                  const SizedBox(height: 1),
+                  buildSuitIcon(10),
+                ],
+              ),
             ),
           ),
         ],
@@ -32114,7 +33344,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       setState(() => _selectedBigTwoCards.clear());
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString().replaceAll('Exception: ', ''))),
+        SnackBar(
+          content: Text(
+            GameMessageLocalization.tr(
+              context,
+              e.toString().replaceAll('Exception: ', ''),
+            ),
+          ),
+        ),
       );
     } finally {
       if (mounted) setState(() => _isActionPending = false);
@@ -32131,7 +33368,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString().replaceAll('Exception: ', ''))),
+        SnackBar(
+          content: Text(
+            GameMessageLocalization.tr(
+              context,
+              e.toString().replaceAll('Exception: ', ''),
+            ),
+          ),
+        ),
       );
     } finally {
       if (mounted) setState(() => _isActionPending = false);
@@ -32198,7 +33442,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final bool isMyTurn = currentPlayerId == playerId;
     final players = gameData['players'] as Map<String, dynamic>;
 
-    // NOUVEAU : RÃ©cupÃ©rer le pion obligatoire s'il y a une prise multiple en cours
+    // NOUVEAU : Récupérer le pion obligatoire s'il y a une prise multiple en cours
     final String? mandatoryPiece = gameData['checkersMandatoryPiece'];
 
     if (gameData['gameState'] == 'gameOver') {
@@ -32239,7 +33483,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    "âš ï¸ Prise en chaÃ®ne ! Vous devez rejouer le pion clignotant.",
+                    "⚠ï¸ Prise en chaîne ! Vous devez rejouer le pion clignotant.",
                     style: TextStyle(
                       color: Colors.orangeAccent,
                       fontSize: 14,
@@ -32453,18 +33697,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   ) {
     final String rawGameType = gameData['gameType'] ?? '';
 
-    // Normalisation UTF-8 pour Ã©viter les erreurs d'accentuation ("non implÃ©mentÃ©")
+    // Normalisation UTF-8 pour éviter les erreurs d'accentuation ("non implémenté")
     final String gameType = rawGameType
-        .replaceAll('ÃƒÆ’Ã‚Â©', 'Ã©')
-        .replaceAll('ÃƒÂ©', 'Ã©')
-        .replaceAll('ÃƒÆ’Ã‚Â¨', 'Ã¨')
-        .replaceAll('ÃƒÂ¨', 'Ã¨')
-        .replaceAll('ÃƒÆ’Ã‚Âª', 'Ãª')
-        .replaceAll('ÃƒÂª', 'Ãª')
-        .replaceAll('ÃƒÆ’Ã‚Â´', 'Ã´')
-        .replaceAll('ÃƒÂ´', 'Ã´')
-        .replaceAll('ÃƒÆ’Ã‚Â»', 'Ã»')
-        .replaceAll('ÃƒÂ»', 'Ã»');
+        .replaceAll('é', 'é')
+        .replaceAll('é', 'é')
+        .replaceAll('è', 'è')
+        .replaceAll('è', 'è')
+        .replaceAll('ê', 'ê')
+        .replaceAll('ê', 'ê')
+        .replaceAll('ô', 'ô')
+        .replaceAll('ô', 'ô')
+        .replaceAll('û', 'û')
+        .replaceAll('û', 'û');
 
     switch (gameType) {
       case 'Action ou Vérité':
@@ -32539,7 +33783,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'Le Roi des Mêmes':
         return _getWidgetForRoundState(context, gameData, playerId);
       default:
-        return Center(child: Text("Jeu non implÃ©mentÃ© : $rawGameType"));
+        return Center(child: Text("Jeu non implémenté : $rawGameType"));
     }
   }
 
@@ -32614,7 +33858,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               const SizedBox(height: 14),
               Text(
-                "Temps écoulé !",
+                GameUiLocalization.tr(context, "Temps écoulé !"),
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -32622,7 +33866,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               const SizedBox(height: 8),
               Text(
-                "$guesserName a trouvé $guessedCount mot(s) !",
+                GameUiLocalization.tr(context, "dtGuessedWords", {
+                  'name': guesserName,
+                  'count': '$guessedCount',
+                }),
                 style: const TextStyle(
                   fontSize: 20,
                   color: Colors.greenAccent,
@@ -32633,7 +33880,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               if (gameData['hostId'] == playerId)
                 ElevatedButton.icon(
                   icon: const Icon(Icons.arrow_forward_rounded),
-                  label: const Text("Tour Suivant"),
+                  label: Text(GameUiLocalization.tr(context, "Tour Suivant")),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green[700],
                     padding: const EdgeInsets.symmetric(
@@ -32700,7 +33947,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                   ),
                   child: Text(
-                    "Équipe A : ${teamScores['teamA']} pts",
+                    GameUiLocalization.tr(context, "Équipe A : {pts} pts", {
+                      'pts': "${teamScores['teamA']}",
+                    }),
                     style: TextStyle(
                       color:
                           activeTeam == 'teamA'
@@ -32730,7 +33979,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                   ),
                   child: Text(
-                    "Équipe B : ${teamScores['teamB']} pts",
+                    GameUiLocalization.tr(context, "Équipe B : {pts} pts", {
+                      'pts': "${teamScores['teamB']}",
+                    }),
                     style: TextStyle(
                       color:
                           activeTeam == 'teamB'
@@ -32746,9 +33997,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
 
         if (isMyTurn) ...[
-          const Text(
-            "C'est à TOI de deviner !",
-            style: TextStyle(
+          Text(
+            GameUiLocalization.tr(context, "C'est à TOI de deviner !"),
+            style: const TextStyle(
               color: Colors.greenAccent,
               fontSize: 22,
               fontWeight: FontWeight.w900,
@@ -32757,8 +34008,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           const SizedBox(height: 4),
           Text(
             useTeams
-                ? "Écoutez les indices de votre équipe !"
-                : "Regardez vos amis à l'écran, ils vous aident !",
+                ? GameUiLocalization.tr(
+                  context,
+                  "Écoutez les indices de votre équipe !",
+                )
+                : GameUiLocalization.tr(
+                  context,
+                  "Regardez vos amis à l'écran, ils vous aident !",
+                ),
             style: const TextStyle(color: Colors.white70, fontSize: 13),
             textAlign: TextAlign.center,
           ),
@@ -32787,9 +34044,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   );
                 },
                 icon: const Icon(Icons.skip_next_rounded, size: 24),
-                label: const Text(
-                  "PASSER",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                label: Text(
+                  GameUiLocalization.tr(context, "PASSER"),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               ElevatedButton.icon(
@@ -32814,9 +34074,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   );
                 },
                 icon: const Icon(Icons.check_circle_rounded, size: 24),
-                label: const Text(
-                  "TROUVÉ !",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                label: Text(
+                  GameUiLocalization.tr(context, "TROUVÉ !"),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -32825,8 +34088,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ] else ...[
           Text(
             useTeams && !isMyTeamTurn
-                ? "L'équipe adverse joue (surveillez les fautes) :"
-                : "Faites deviner ce mot à $guesserName :",
+                ? GameUiLocalization.tr(
+                  context,
+                  "L'équipe adverse joue (surveillez les fautes) :",
+                )
+                : GameUiLocalization.tr(context, "dtMakeGuessWordTo", {
+                  'name': guesserName,
+                }),
             style: TextStyle(
               color:
                   (useTeams && !isMyTeamTurn)
@@ -33008,8 +34276,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       children: [
                         Text(
                           isMyTurn
-                              ? "À VOUS D'ÉCRIRE !"
-                              : "AU TOUR DE $currentPlayerName",
+                              ? GameUiLocalization.tr(
+                                context,
+                                "À VOUS D'ÉCRIRE !",
+                              )
+                              : GameUiLocalization.tr(
+                                context,
+                                "ceTurnOfPlayer",
+                                {'name': currentPlayerName},
+                              ),
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w900,
@@ -33022,8 +34297,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         Text(
                           variant == 'classic'
-                              ? "Surréalisme classique"
-                              : "Suite de 3 mots",
+                              ? GameUiLocalization.tr(
+                                context,
+                                "Surréalisme classique",
+                              )
+                              : GameUiLocalization.tr(
+                                context,
+                                "Suite de 3 mots",
+                              ),
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.white38,
@@ -33044,7 +34325,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     border: Border.all(color: Colors.white10),
                   ),
                   child: Text(
-                    "Étape ${currentRound + 1} / $totalSteps",
+                    GameUiLocalization.tr(context, "ceStepOfTotal", {
+                      'step': '${currentRound + 1}',
+                      'total': '$totalSteps',
+                    }),
                     style: const TextStyle(
                       color: Color(0xFFE0A96D),
                       fontSize: 11,
@@ -33150,7 +34434,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          "Bout visible de $previousAuthorName :",
+                          GameUiLocalization.tr(context, "ceVisibleSnippetOf", {
+                            'name': previousAuthorName,
+                          }),
                           style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -33196,16 +34482,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   vertical: 8,
                 ),
                 color: const Color(0xFFEFE6D5),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.edit_note_rounded,
                       size: 16,
                       color: Color(0xFF8C7355),
                     ),
                     SizedBox(width: 6),
                     Text(
-                      "PREMIÈRE LIGNE DU MANUSCRIT",
+                      GameUiLocalization.tr(
+                        context,
+                        "PREMIÈRE LIGNE DU MANUSCRIT",
+                      ),
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
@@ -33297,8 +34586,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       alignment: Alignment.centerRight,
                       child: ElevatedButton.icon(
                         icon: const Icon(Icons.send_rounded, size: 16),
-                        label: const Text(
-                          "PLIER & PASSER",
+                        label: Text(
+                          GameUiLocalization.tr(context, "PLIER & PASSER"),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
@@ -33395,7 +34684,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               const SizedBox(height: 14),
               Text(
-                "$currentPlayerName est en train d'écrire...",
+                GameUiLocalization.tr(context, "cePlayerWriting", {
+                  'name': currentPlayerName,
+                }),
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -33427,9 +34718,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                 )
               else
-                const Text(
-                  "La feuille est pliée pour préserver le secret.",
-                  style: TextStyle(color: Colors.white60, fontSize: 12),
+                Text(
+                  GameUiLocalization.tr(
+                    context,
+                    "La feuille est pliée pour préserver le secret.",
+                  ),
+                  style: const TextStyle(color: Colors.white60, fontSize: 12),
                   textAlign: TextAlign.center,
                 ),
               const SizedBox(height: 20),
@@ -33462,8 +34756,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             color: Color(0xFFE0A96D),
           ),
           const SizedBox(height: 8),
-          const Text(
-            "Le Grand Dépliage !",
+          Text(
+            GameUiLocalization.tr(context, "Le Grand Dépliage !"),
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w900,
@@ -33472,8 +34766,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
-            "Voici les œuvres collectives nées de votre imagination :",
+          Text(
+            GameUiLocalization.tr(
+              context,
+              "Voici les œuvres collectives nées de votre imagination :",
+            ),
             style: TextStyle(color: Colors.white60, fontSize: 13),
             textAlign: TextAlign.center,
           ),
@@ -33515,8 +34812,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         children: [
                           Text(
                             passingMode == 'multiple'
-                                ? "HISTOIRE #${paperIndex + 1}"
-                                : "HISTOIRE COLLECTIVE",
+                                ? GameUiLocalization.tr(
+                                  context,
+                                  "ceStoryNumber",
+                                  {'index': '${paperIndex + 1}'},
+                                )
+                                : GameUiLocalization.tr(
+                                  context,
+                                  "HISTOIRE COLLECTIVE",
+                                ),
                             style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -33860,8 +35164,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         children: [
                           Text(
                             isMyTurn
-                                ? "À VOUS DE ROULER !"
-                                : "TOUR DE ${players[currentPlayerId]?['name'] ?? ''}",
+                                ? GameUiLocalization.tr(
+                                  context,
+                                  "À VOUS DE ROULER !",
+                                )
+                                : GameUiLocalization.tr(context, "mbTurnOf", {
+                                  'name':
+                                      players[currentPlayerId]?['name'] ?? '',
+                                }),
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -33889,8 +35199,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   Row(
                     children: [
                       if (mySafeties.isEmpty)
-                        const Text(
-                          "Aucune botte",
+                        Text(
+                          GameUiLocalization.tr(context, "Aucune botte"),
                           style: TextStyle(
                             color: Colors.white24,
                             fontSize: 11,
@@ -34063,9 +35373,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "PIOCHE",
-                    style: TextStyle(
+                  Text(
+                    GameUiLocalization.tr(context, "PIOCHE"),
+                    style: const TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
                       color: Colors.white60,
@@ -34081,8 +35391,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 children: [
                   Text(
                     isMyTurn
-                        ? "Main : ${myHand.length} cartes"
-                        : "Tour de l'adversaire",
+                        ? GameUiLocalization.tr(context, "mbHandCount", {
+                          'count': '${myHand.length}',
+                        })
+                        : GameUiLocalization.tr(
+                          context,
+                          "Tour de l'adversaire",
+                        ),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: isMyTurn ? Colors.greenAccent : Colors.white70,
@@ -34092,8 +35407,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   const SizedBox(height: 4),
                   Text(
                     isMyTurn
-                        ? "Touchez pour jouer\nMaintenez pour défausser"
-                        : "En attente...",
+                        ? GameUiLocalization.tr(
+                          context,
+                          "Touchez pour jouer\nMaintenez pour défausser",
+                        )
+                        : GameUiLocalization.tr(context, "En attente..."),
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 10, color: Colors.white38),
                   ),
@@ -34121,7 +35439,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Vos cartes en main (${myHand.length})",
+                      GameUiLocalization.tr(context, "mbCardsInHand", {
+                        'count': '${myHand.length}',
+                      }),
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -34129,9 +35449,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                     if (isMyTurn)
-                      const Text(
-                        "Touchez pour jouer • Restez appuyé pour défausser",
-                        style: TextStyle(color: Colors.white38, fontSize: 10),
+                      Text(
+                        GameUiLocalization.tr(
+                          context,
+                          "Touchez pour jouer • Restez appuyé pour défausser",
+                        ),
+                        style: const TextStyle(
+                          color: Colors.white38,
+                          fontSize: 10,
+                        ),
                       ),
                   ],
                 ),
@@ -34218,7 +35544,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       height: 38,
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.skip_next_rounded, size: 18),
-                        label: const Text("Défausser la 1ère carte & Passer"),
+                        label: Text(
+                          GameUiLocalization.tr(
+                            context,
+                            "Défausser la 1ère carte & Passer",
+                          ),
+                        ),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white60,
                           side: const BorderSide(color: Colors.white24),
@@ -34681,9 +36012,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               children: [
                 const Icon(Icons.gps_fixed_rounded, color: Colors.redAccent),
                 const SizedBox(width: 10),
-                const Text(
-                  "Choisir la cible",
-                  style: TextStyle(color: Colors.white),
+                Text(
+                  GameUiLocalization.tr(context, "Choisir la cible"),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ],
             ),
@@ -34789,9 +36120,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: const Text(
-                  "Annuler",
-                  style: TextStyle(color: Colors.white54),
+                child: Text(
+                  GameUiLocalization.tr(context, "Annuler"),
+                  style: const TextStyle(color: Colors.white54),
                 ),
               ),
             ],
@@ -34875,7 +36206,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               padding: EdgeInsets.all(8),
               color: Colors.black45,
               child: Text(
-                "Placez votre flotte !",
+                GameUiLocalization.tr(context, "Placez votre flotte !"),
                 style: TextStyle(
                   color: Colors.cyanAccent,
                   fontWeight: FontWeight.bold,
@@ -35177,7 +36508,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     unplacedShips.isEmpty && _pendingShipType == null
                         ? Center(
                           child: Text(
-                            "Flotte déployée !",
+                            GameUiLocalization.tr(context, "Flotte déployée !"),
                             style: TextStyle(
                               color: Colors.greenAccent,
                               fontSize: 18,
@@ -35272,7 +36603,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   if (_pendingShipType != null) ...[
                     ElevatedButton.icon(
                       icon: Icon(Icons.rotate_right),
-                      label: Text("Tourner"),
+                      label: Text(GameUiLocalization.tr(context, "Tourner")),
                       onPressed:
                           () => setState(
                             () =>
@@ -35295,7 +36626,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 ),
                               )
                               : Icon(Icons.check),
-                      label: Text("Valider"),
+                      label: Text(GameUiLocalization.tr(context, "Valider")),
                       onPressed:
                           _isActionPending
                               ? null
@@ -35329,7 +36660,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              "Placement invalide (chevauchement ou hors grille) !",
+                                              GameUiLocalization.tr(
+                                                context,
+                                                "Placement invalide (chevauchement ou hors grille) !",
+                                              ),
                                             ),
                                           ),
                                         );
@@ -35343,7 +36677,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ] else ...[
                     ElevatedButton.icon(
                       icon: Icon(Icons.casino),
-                      label: Text("Aléatoire"),
+                      label: Text(GameUiLocalization.tr(context, "Aléatoire")),
                       onPressed:
                           isReady
                               ? null
@@ -35355,7 +36689,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                     ElevatedButton.icon(
                       icon: Icon(isReady ? Icons.check : Icons.play_arrow),
-                      label: Text(isReady ? "Prêt !" : "PRÊT"),
+                      label: Text(
+                        isReady
+                            ? GameUiLocalization.tr(context, "Prêt !")
+                            : GameUiLocalization.tr(context, "PRÊT"),
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             isReady
@@ -35403,10 +36741,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           decoration: BoxDecoration(
-            color: isMyTurn ? Colors.greenAccent.withOpacity(0.18) : Colors.black38,
+            color:
+                isMyTurn
+                    ? Colors.greenAccent.withOpacity(0.18)
+                    : Colors.black38,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: isMyTurn ? Colors.greenAccent.withOpacity(0.6) : Colors.white12,
+              color:
+                  isMyTurn
+                      ? Colors.greenAccent.withOpacity(0.6)
+                      : Colors.white12,
               width: 1,
             ),
           ),
@@ -35421,7 +36765,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               const SizedBox(width: 6),
               Text(
-                isMyTurn ? "À votre tour" : "Tour adverse",
+                isMyTurn
+                    ? GameUiLocalization.tr(context, "À votre tour")
+                    : GameUiLocalization.tr(context, "Tour adverse"),
                 style: TextStyle(
                   color: isMyTurn ? Colors.greenAccent : Colors.white70,
                   fontSize: 12,
@@ -35439,8 +36785,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           flex: 5,
           child: Column(
             children: [
-              const Text(
-                "Territoire Ennemi (Touchez une case pour tirer)",
+              Text(
+                GameUiLocalization.tr(
+                  context,
+                  "Territoire Ennemi (Touchez une case pour tirer)",
+                ),
                 style: TextStyle(
                   color: Colors.redAccent,
                   fontWeight: FontWeight.bold,
@@ -35455,7 +36804,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   onTap:
                       isMyTurn
                           ? (index) {
-                            if (enemyGrid[index] == 'unknown' && !_isActionPending) {
+                            if (enemyGrid[index] == 'unknown' &&
+                                !_isActionPending) {
                               _firebaseService.shootBatailleNavale(
                                 widget.gameCode,
                                 playerId,
@@ -35477,8 +36827,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           flex: 4,
           child: Column(
             children: [
-              const Text(
-                "Votre Flotte (Tirs ennemis reçus)",
+              Text(
+                GameUiLocalization.tr(
+                  context,
+                  "Votre Flotte (Tirs ennemis reçus)",
+                ),
                 style: TextStyle(
                   color: Colors.cyanAccent,
                   fontWeight: FontWeight.bold,
@@ -35522,7 +36875,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   decoration: BoxDecoration(
                     color: const Color(0xFF0C2340),
                     border: Border.all(
-                      color: isEnemy ? Colors.redAccent.withOpacity(0.6) : Colors.cyanAccent.withOpacity(0.6),
+                      color:
+                          isEnemy
+                              ? Colors.redAccent.withOpacity(0.6)
+                              : Colors.cyanAccent.withOpacity(0.6),
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(8),
@@ -35540,8 +36896,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
                     int startRow = startIndex ~/ 10;
                     int startCol = startIndex % 10;
-                    int widthCols = isHoriz ? shipInfo['length'] : shipInfo['width'];
-                    int heightRows = isHoriz ? shipInfo['width'] : shipInfo['length'];
+                    int widthCols =
+                        isHoriz ? shipInfo['length'] : shipInfo['width'];
+                    int heightRows =
+                        isHoriz ? shipInfo['width'] : shipInfo['length'];
 
                     return Positioned(
                       left: startCol * cellSize,
@@ -35726,7 +37084,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Main TerminÃƒÂ©e",
+                  GameUiLocalization.tr(context, "Main Terminée"),
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -35744,11 +37102,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ElevatedButton(
                     onPressed:
                         () => _firebaseService.startGame(widget.gameCode),
-                    child: Text("Distribuer la suite"),
+                    child: Text(
+                      GameUiLocalization.tr(context, "Distribuer la suite"),
+                    ),
                   )
                 else
                   Text(
-                    "Attente du donneur...",
+                    GameUiLocalization.tr(context, "Attente du donneur..."),
                     style: TextStyle(color: Colors.white54),
                   ),
               ],
@@ -35825,7 +37185,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              "Pot : $pot \$",
+                              GameUiLocalization.tr(context, "pokerPot", {
+                                'amount': '$pot',
+                              }),
                               style: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,
@@ -35848,7 +37210,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             border: Border.all(color: Colors.redAccent),
                           ),
                           child: Text(
-                            "⚠️ $previewPlayerName prépare une relance à $previewAmount \$ !",
+                            GameUiLocalization.tr(context, "pokerRaiseAlert", {
+                              'name': previewPlayerName ?? '',
+                              'amount': '$previewAmount',
+                            }),
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -35875,7 +37240,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               )
                               .toList()
                           : [
-                            // Emplacements vides pour le rÃƒÂ©alisme
+                            // Emplacements vides pour le réalisme
                             for (int i = 0; i < 5; i++)
                               Container(
                                 width: 60,
@@ -35917,7 +37282,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 offset: Offset(
                                   0,
                                   isMyTurn ? -10 : 0,
-                                ), // LÃƒÂ©gÃƒÂ¨re animation si c'est mon tour
+                                ), // Légère animation si c'est mon tour
                                 child: _buildCard(
                                   card: card,
                                   isSelected: false,
@@ -35929,7 +37294,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   )
                 else
                   Text(
-                    "CouchÃƒÂ©",
+                    GameUiLocalization.tr(context, "Couché"),
                     style: TextStyle(
                       color: Colors.grey,
                       fontStyle: FontStyle.italic,
@@ -35958,7 +37323,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                     SizedBox(width: 15),
                     Text(
-                      "Mise actuelle: ${myData['currentBet']}",
+                      GameUiLocalization.tr(
+                        context,
+                        "Mise actuelle: {amount}",
+                        {'amount': "${myData['currentBet']}"},
+                      ),
                       style: TextStyle(color: Colors.white70),
                     ),
                   ],
@@ -35971,7 +37340,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   _buildPokerActionButtons(gameData, playerId)
                 else
                   Text(
-                    "En attente...",
+                    GameUiLocalization.tr(context, "En attente..."),
                     style: TextStyle(color: Colors.white38),
                   ),
               ],
@@ -36002,7 +37371,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 playerId,
                 'fold',
               ),
-          child: Text("Se Coucher"),
+          child: Text(GameUiLocalization.tr(context, "Se Coucher")),
         ),
         if (canCheck)
           ElevatedButton(
@@ -36012,7 +37381,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   playerId,
                   'check',
                 ),
-            child: Text("Checker"),
+            child: Text(GameUiLocalization.tr(context, "Checker")),
           ),
         if (!canCheck)
           ElevatedButton(
@@ -36022,13 +37391,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   playerId,
                   'call',
                 ),
-            child: Text("Suivre ($currentBet)"),
+            child: Text(
+              GameUiLocalization.tr(context, "pokerCall", {
+                'amount': '$currentBet',
+              }),
+            ),
           ),
         ElevatedButton(
           onPressed: () {
             _showRaiseDialog(gameData, playerId);
           },
-          child: Text("Relancer"),
+          child: Text(GameUiLocalization.tr(context, "Relancer")),
         ),
       ],
     );
@@ -36067,7 +37440,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return StatefulBuilder(
           builder: (context, setStateDialog) {
             return AlertDialog(
-              title: Text("Choisir le montant de la relance"),
+              title: Text(
+                GameUiLocalization.tr(
+                  context,
+                  "Choisir le montant de la relance",
+                ),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -36149,7 +37527,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     );
                     Navigator.of(context).pop();
                   },
-                  child: Text("Annuler"),
+                  child: Text(GameUiLocalization.tr(context, "Annuler")),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -36166,7 +37544,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       amount: raiseAmount.toInt(),
                     );
                   },
-                  child: Text("Relancer ${raiseAmount.toInt()}"),
+                  child: Text(
+                    GameUiLocalization.tr(context, "pokerRaiseTo", {
+                      'amount': '${raiseAmount.toInt()}',
+                    }),
+                  ),
                 ),
               ],
             );
@@ -36311,7 +37693,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 ),
                               ],
                             ),
-                            child: const Column(
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
@@ -36321,7 +37703,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 ),
                                 SizedBox(height: 4),
                                 Text(
-                                  "PIOCHE",
+                                  GameUiLocalization.tr(context, "PIOCHE"),
                                   style: TextStyle(
                                     fontSize: 9,
                                     fontWeight: FontWeight.bold,
@@ -36445,8 +37827,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         children: [
           Text(
             isMyTurn
-                ? "C'est TON tour !"
-                : "Au tour de ${players[currentPlayerId]?['name'] ?? 'Inconnu'}",
+                ? GameUiLocalization.tr(context, "C'est TON tour !")
+                : GameUiLocalization.tr(context, "Au tour de {name}", {
+                  'name': players[currentPlayerId]?['name'] ?? 'Inconnu',
+                }),
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               color: isMyTurn ? Colors.white : Colors.white70,
             ),
@@ -36454,8 +37838,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           if (pendingDraw > 0)
             Text(
               isMyTurn
-                  ? "Tu dois piocher $pendingDraw cartes !"
-                  : "Doit piocher $pendingDraw cartes !",
+                  ? GameUiLocalization.tr(context, "unoYouMustDraw", {
+                    'count': '$pendingDraw',
+                  })
+                  : GameUiLocalization.tr(context, "unoMustDraw", {
+                    'count': '$pendingDraw',
+                  }),
               style: TextStyle(
                 color: Colors.redAccent,
                 fontWeight: FontWeight.bold,
@@ -36463,7 +37851,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           if (wildColorChosen != null)
             Text(
-              "Couleur choisie : ${wildColorChosen.toUpperCase()}",
+              "${GameUiLocalization.tr(context, "Couleur choisie :")} ${GameUiLocalization.tr(context, wildColorChosen).toUpperCase()}",
               style: TextStyle(
                 color: currentColor,
                 fontWeight: FontWeight.bold,
@@ -36540,7 +37928,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     return Expanded(
       child:
           myHand.isEmpty
-              ? Center(child: Text("Vous n'avez plus de cartes !"))
+              ? Center(
+                child: Text(
+                  GameUiLocalization.tr(
+                    context,
+                    "Vous n'avez plus de cartes !",
+                  ),
+                ),
+              )
               : GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 5,
@@ -36630,14 +38025,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         if (isMyTurn && pendingDraw > 0)
           ElevatedButton.icon(
             icon: const Icon(Icons.download_for_offline_rounded),
-            label: Text("Piocher $pendingDraw cartes"),
+            label: Text(
+              GameUiLocalization.tr(context, "unoDrawCountCards", {
+                'count': '$pendingDraw',
+              }),
+            ),
             onPressed: _isActionPending ? null : () => _onUnoDrawTapped(),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
           ),
         if (isMyTurn && hasDrawnPlayable)
           ElevatedButton.icon(
             icon: const Icon(Icons.skip_next_rounded),
-            label: const Text("Garder & Passer"),
+            label: Text(GameUiLocalization.tr(context, "Garder & Passer")),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
             onPressed:
                 _isActionPending
@@ -36656,7 +38055,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ElevatedButton.icon(
           icon: const Icon(Icons.flash_on),
-          label: const Text("UNO!"),
+          label: Text(GameUiLocalization.tr(context, "UNO!")),
           onPressed:
               canSayUno && !_isUnoCalling && !_isActionPending
                   ? () async {
@@ -36685,7 +38084,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         if (canContraUno)
           ElevatedButton.icon(
             icon: const Icon(Icons.warning_amber_rounded),
-            label: const Text("Contre UNO!"),
+            label: Text(GameUiLocalization.tr(context, "Contre UNO!")),
             onPressed:
                 _isActionPending
                     ? null
@@ -36737,16 +38136,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     String cardText;
     switch (value) {
       case 'skip':
-        cardText = 'Ã°Å¸Å¡Â«';
+        cardText = 'ðŸš«';
         break;
       case 'reverse':
-        cardText = 'Ã°Å¸â€â€ž';
+        cardText = 'ðŸâ€â€ž';
         break;
       case 'draw2':
         cardText = '+2';
         break;
       case 'wild':
-        cardText = 'Ã°Å¸Å’Ë†';
+        cardText = 'ðŸŒˆ';
         break;
       case 'wild_draw4':
         cardText = '+4';
@@ -36859,25 +38258,25 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
   }
 
-  // Animation visuelle simple : Fait apparaÃƒÂ®tre une carte au centre qui descend vers le bas
-  // Animation visuelle simple : Fait apparaÃƒÂ®tre une carte au centre qui descend vers le bas
+  // Animation visuelle simple : Fait apparaître une carte au centre qui descend vers le bas
+  // Animation visuelle simple : Fait apparaître une carte au centre qui descend vers le bas
   void _animateCardFly(BuildContext context) {
     OverlayEntry? entry;
 
     entry = OverlayEntry(
       builder: (context) {
-        // DÃƒÂ©marre au centre (deck) et va vers le bas (main)
+        // Démarre au centre (deck) et va vers le bas (main)
         return TweenAnimationBuilder<double>(
           tween: Tween(begin: 0.0, end: 1.0),
           duration: Duration(milliseconds: 600),
           curve: Curves.easeInOutCubic,
           onEnd: () {
-            entry?.remove(); // On nettoie ÃƒÂ  la fin
+            entry?.remove(); // On nettoie à la fin
           },
           builder: (context, value, child) {
             // Interpolation de position
-            // Start: Centre ÃƒÂ©cran (MediaQuery / 2)
-            // End: Bas ÃƒÂ©cran (Main du joueur)
+            // Start: Centre écran (MediaQuery / 2)
+            // End: Bas écran (Main du joueur)
             final size = MediaQuery.of(context).size;
             final startY = size.height * 0.4; // Un peu au-dessus du centre
             final endY = size.height * 0.85; // Vers la main
@@ -36891,7 +38290,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               top: currentY,
               left:
                   (size.width / 2) -
-                  30, // CentrÃƒÂ© horizontalement (- moitiÃƒÂ© largeur carte)
+                  30, // Centré horizontalement (- moitié largeur carte)
               child: Opacity(
                 opacity:
                     1.0 -
@@ -36909,7 +38308,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         BoxShadow(color: Colors.black54, blurRadius: 10),
                       ],
                     ),
-                    // Dos de carte gÃƒÂ©nÃƒÂ©rique
+                    // Dos de carte générique
                     child: Center(child: Icon(Icons.style, color: Colors.red)),
                   ),
                 ),
@@ -36953,7 +38352,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Choisissez une couleur"),
+          title: Text(GameUiLocalization.tr(context, "Choisissez une couleur")),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children:
@@ -37011,7 +38410,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     setState(() => _isActionPending = false);
                                 }
                               },
-                      child: Text(colorName.toUpperCase()),
+                      child: Text(
+                        GameUiLocalization.tr(context, colorName).toUpperCase(),
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _mapUnoColorToFlutterColor(colorName),
                         minimumSize: Size(150, 50),
@@ -37047,7 +38448,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       gameData['players'] ?? {},
     );
 
-    // RÃƒÂ©cupÃƒÂ©ration des infos pour le HUD
+    // Récupération des infos pour le HUD
     final List<dynamic> deck = gameData['dobbleDeck'] ?? [];
     final int cardsLeftInDeck = deck.length;
     final int myScore = players[playerId]?['score'] ?? 0;
@@ -37059,7 +38460,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
         reason:
-            gameData['gameEndReason'] ?? "Toutes les cartes ont été trouvées !",
+            gameData['gameEndReason'] ??
+            GameUiLocalization.tr(context, 'dobbleAllCardsFound'),
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -37072,11 +38474,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     // Chargement initial
     if (myCard.isEmpty || centerCard.isEmpty) {
       return Center(
-        child: _buildWaitingWidget("Distribution des cartes...", players, 0, 0),
+        child: _buildWaitingWidget(
+          GameUiLocalization.tr(context, 'dobbleDealingCards'),
+          players,
+          0,
+          0,
+        ),
       );
     }
 
-    // Fond d'ÃƒÂ©cran style "Table de jeu"
+    // Fond d'écran style "Table de jeu"
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -37087,7 +38494,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           colors: [
             Color(0xFF2C3E50),
             Color(0xFF4CA1AF),
-          ], // DÃƒÂ©gradÃƒÂ© Bleu Gris Pro
+          ], // Dégradé Bleu Gris Pro
         ),
       ),
       child: SafeArea(
@@ -37186,9 +38593,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: Colors.white24),
                         ),
-                        child: const Text(
-                          "CARTE AU CENTRE",
-                          style: TextStyle(
+                        child: Text(
+                          GameUiLocalization.tr(context, 'dobbleCenterCard'),
+                          style: const TextStyle(
                             color: Colors.white70,
                             fontWeight: FontWeight.bold,
                             fontSize: 11,
@@ -37233,7 +38640,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    "Pioche : $cardsLeftInDeck carte${cardsLeftInDeck > 1 ? 's' : ''}",
+                    GameUiLocalization.tr(context, 'dobbleDeckCards', {
+                      'count': "$cardsLeftInDeck",
+                    }),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -37267,16 +38676,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
+                      children: [
+                        const Icon(
                           Icons.touch_app_rounded,
                           color: Colors.greenAccent,
                           size: 16,
                         ),
-                        SizedBox(width: 6),
+                        const SizedBox(width: 6),
                         Text(
-                          "Touchez le symbole identique !",
-                          style: TextStyle(
+                          GameUiLocalization.tr(context, 'dobbleTapSameSymbol'),
+                          style: const TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -37321,7 +38730,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ],
                       ),
                       child: Text(
-                        "Mes Cartes : $myScore",
+                        GameUiLocalization.tr(context, 'dobbleMyCardsCount', {
+                          'count': "$myScore",
+                        }),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -37351,9 +38762,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       color: Colors.redAccent,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      "BLOQUÉ !",
-                      style: TextStyle(
+                    Text(
+                      GameUiLocalization.tr(context, 'dobbleBlocked'),
+                      style: const TextStyle(
                         color: Colors.redAccent,
                         fontSize: 36,
                         fontWeight: FontWeight.w900,
@@ -37361,9 +38772,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                     const SizedBox(height: 6),
-                    const Text(
-                      "Trop d'erreurs rapides.",
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    Text(
+                      GameUiLocalization.tr(context, 'dobbleTooManyErrors'),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
                     ),
                     const SizedBox(height: 18),
                     Container(
@@ -37533,13 +38947,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ),
         SizedBox(height: 10),
         Text(
-          "$winnerName a trouvÃƒÂ© le symbole !",
+          GameUiLocalization.tr(context, 'dobbleFoundSymbol', {
+            'name': winnerName,
+          }),
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             color: iAmWinner ? Colors.greenAccent : Colors.amberAccent,
           ),
         ),
         Text(
-          "Le symbole ÃƒÂ©tait :",
+          GameUiLocalization.tr(context, 'dobbleSymbolWas'),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         Text(commonSymbol ?? "?", style: TextStyle(fontSize: 40)),
@@ -37561,11 +38977,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child:
                 _isActionPending
                     ? CircularProgressIndicator(color: Colors.white)
-                    : Text("Tour Suivant"),
+                    : Text(GameUiLocalization.tr(context, "Tour Suivant")),
           )
         else
           Text(
-            "En attente de l'hÃƒÂ´te...",
+            GameUiLocalization.tr(context, "En attente de l'hôte..."),
             style: TextStyle(fontStyle: FontStyle.italic),
           ),
       ],
@@ -37573,13 +38989,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   void _onSymbolTap(String symbol) {
-    // 1. Si l'interface est bloquÃƒÂ©e, on ne fait rien (ou on affiche un rappel)
+    // 1. Si l'interface est bloquée, on ne fait rien (ou on affiche un rappel)
     if (_isDobbleBlocked) {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "PÃƒâ€°NALITÃƒâ€° ! Attendez $_dobbleBlockCountdown secondes.",
+            GameUiLocalization.tr(context, 'dobblePenaltyWait', {
+              'seconds': "$_dobbleBlockCountdown",
+            }),
             textAlign: TextAlign.center,
           ),
           backgroundColor: Colors.red[900],
@@ -37597,24 +39015,24 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     _firebaseService
         .submitDobbleGuess(widget.gameCode, playerId, symbol)
         .then((_) {
-          // SuccÃƒÂ¨s : On rÃƒÂ©initialise le compteur d'erreur si on trouve le bon symbole
+          // Succès : On réinitialise le compteur d'erreur si on trouve le bon symbole
           _lastDobbleErrorTime = null;
         })
         .catchError((e) {
-          // --- LOGIQUE DE PÃƒâ€°NALITÃƒâ€° ---
+          // --- LOGIQUE DE PÉNALITÉ ---
           final now = DateTime.now();
 
-          // Si on a dÃƒÂ©jÃƒÂ  fait une erreur il y a moins de 3 secondes
+          // Si on a déjà fait une erreur il y a moins de 3 secondes
           if (_lastDobbleErrorTime != null &&
               now.difference(_lastDobbleErrorTime!).inSeconds < 3) {
-            _triggerDobblePenalty(); // DÃƒâ€°CLENCHER LE BLOCAGE
+            _triggerDobblePenalty(); // DÉCLENCHER LE BLOCAGE
           } else {
-            // Sinon, on enregistre l'heure de cette premiÃƒÂ¨re erreur
+            // Sinon, on enregistre l'heure de cette première erreur
             _lastDobbleErrorTime = now;
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  "Mauvais symbole ! Attention, une 2ÃƒÂ¨me erreur bloque le jeu !",
+                  GameUiLocalization.tr(context, 'dobbleWrongSymbolWarning'),
                 ),
                 backgroundColor: Colors.orange,
                 duration: Duration(seconds: 1),
@@ -37635,7 +39053,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       _lastDobbleErrorTime = null; // Reset pour la prochaine fois
     });
 
-    // Lancer le timer de dÃƒÂ©blocage
+    // Lancer le timer de déblocage
     _dobblePenaltyTimer?.cancel();
     _dobblePenaltyTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
@@ -37721,16 +39139,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     String voterId,
   ) {
     print(
-      "--- DÃƒâ€°BUT DE LA CONSTRUCTION DE L'UI DE VOTE 'Qui Pourrait le Plus ?' ---",
+      "--- DÉBUT DE LA CONSTRUCTION DE L'UI DE VOTE 'Qui Pourrait le Plus ?' ---",
     );
-    print("Ãƒâ€°tat de _isActionPending au dÃƒÂ©but: $_isActionPending");
+    print("État de _isActionPending au début: $_isActionPending");
 
     final players = (gameData['players'] as Map<String, dynamic>?) ?? {};
     final String question =
-        gameData['currentQuestion'] ?? "Erreur: Question non trouvÃƒÂ©e.";
+        gameData['currentQuestion'] ?? "Erreur: Question non trouvée.";
 
-    print("Question ÃƒÂ  afficher: $question");
-    print("Nombre de joueurs ÃƒÂ  afficher: ${players.length}");
+    print("Question à afficher: $question");
+    print("Nombre de joueurs à afficher: ${players.length}");
 
     return Column(
       children: [
@@ -37774,7 +39192,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   ">>> CLIC sur le joueur '$pName' (ID: $pId) !",
                                 );
                                 print(
-                                  "   - Passage de _isActionPending ÃƒÂ  true.",
+                                  "   - Passage de _isActionPending à true.",
                                 );
                                 setState(() => _isActionPending = true);
 
@@ -37787,7 +39205,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     })
                                     .whenComplete(() {
                                       print(
-                                        "   - Appel Firebase terminÃƒÂ©. Passage de _isActionPending ÃƒÂ  false.",
+                                        "   - Appel Firebase terminé. Passage de _isActionPending à false.",
                                       );
                                       if (mounted) {
                                         setState(
@@ -37795,7 +39213,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                         );
                                       } else {
                                         print(
-                                          "   - ATTENTION: Le widget n'est plus montÃƒÂ©, setState annulÃƒÂ©.",
+                                          "   - ATTENTION: Le widget n'est plus monté, setState annulé.",
                                         );
                                       }
                                     });
@@ -37825,7 +39243,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       if (roundState == 'voting') {
         if (votes.containsKey(playerId)) {
           return _buildWaitingWidget(
-            "Vote enregistrÃƒÂ©. En attente des autres joueurs...",
+            "Vote enregistré. En attente des autres joueurs...",
             players,
             votes.length,
             players.length,
@@ -37862,7 +39280,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         if (gameType == 'Le Juge' &&
             gameData['currentTargetPlayerId'] == playerId) {
           return _buildWaitingWidget(
-            "Les autres joueurs rÃƒÂ©pondent...",
+            "Les autres joueurs répondent...",
             players,
             answers.length,
             players.length - 1,
@@ -37882,7 +39300,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         if (gameType == 'Le Juge' &&
             gameData['currentTargetPlayerId'] == playerId) {
           return _buildWaitingWidget(
-            "Les autres joueurs rÃƒÂ©pondent...",
+            "Les autres joueurs répondent...",
             players,
             answers.length,
             players.length - 1,
@@ -37896,7 +39314,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         );
         if (storyTruths.containsKey(playerId)) {
           return _buildWaitingWidget(
-            "En attente des dÃƒÂ©clarations...",
+            "En attente des déclarations...",
             players,
             storyTruths.length,
             players.length,
@@ -37992,7 +39410,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             Icon(Icons.psychology, size: 70, color: Colors.amber),
             SizedBox(height: 16),
             Text(
-              "Dernière chance Mr. White !",
+              GameUiLocalization.tr(context, "Dernière chance Mr. White !"),
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(color: Colors.amber),
@@ -38000,7 +39418,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
             SizedBox(height: 12),
             Text(
-              "Vous avez été démasqué ! Si vous devinez le mot secret des Civils, vous remportez la victoire solo !",
+              GameUiLocalization.tr(context, "mrWhiteSecretWordPrompt"),
               style: TextStyle(color: Colors.white70, fontSize: 16),
               textAlign: TextAlign.center,
             ),
@@ -38052,7 +39470,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       )
                       : Icon(Icons.check, color: Colors.white),
               label: Text(
-                "Valider mon choix",
+                GameUiLocalization.tr(context, "Valider mon choix"),
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
@@ -38093,14 +39511,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Icon(Icons.balance, color: Colors.deepOrange, size: 36),
                 SizedBox(height: 8),
                 Text(
-                  "Égalité parfaite !",
+                  GameUiLocalization.tr(context, "Égalité parfaite !"),
                   style: Theme.of(
                     context,
                   ).textTheme.titleLarge?.copyWith(color: Colors.deepOrange),
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "Votez uniquement parmi les suspects ex-aequo ci-dessous :",
+                  GameUiLocalization.tr(
+                    context,
+                    "Votez uniquement parmi les suspects ex-aequo ci-dessous :",
+                  ),
                   style: TextStyle(color: Colors.white70),
                   textAlign: TextAlign.center,
                 ),
@@ -38415,11 +39836,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     String playerId,
   ) {
     final gameType = gameData['gameType'];
-    final String? memeUrl = gameData['memeUrl']; // 1. RÃƒÂ©cupÃƒÂ©rer l'URL
+    final String? memeUrl = gameData['memeUrl']; // 1. Récupérer l'URL
 
     Widget? secretInfoWidget;
 
-    // 2. Si c'est le jeu des mÃƒÂ¨mes, on prÃƒÂ©pare l'image
+    // 2. Si c'est le jeu des mèmes, on prépare l'image
     if (gameType == 'Le Roi des Mèmes' && memeUrl != null) {
       secretInfoWidget = Container(
         constraints: BoxConstraints(maxHeight: 300), // Limiter la hauteur
@@ -38468,13 +39889,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 20),
 
-                // 3. Afficher le widget secret (l'image du mÃƒÂ¨me)
+                // 3. Afficher le widget secret (l'image du mème)
                 if (secretInfoWidget != null) secretInfoWidget,
 
                 SizedBox(height: 20),
                 TextField(
                   controller: _answerController,
-                  decoration: InputDecoration(labelText: "Votre rÃƒÂ©ponse..."),
+                  decoration: InputDecoration(labelText: "Votre réponse..."),
                   maxLines: 1,
                 ),
                 SizedBox(height: 20),
@@ -38528,7 +39949,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Icon(Icons.lock, size: 60, color: Colors.amber),
           SizedBox(height: 20),
           Text(
-            "Moment de vÃƒÂ©ritÃƒÂ©...",
+            "Moment de vérité...",
             style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
@@ -38546,7 +39967,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               child: Column(
                 children: [
                   Text(
-                    "Ton histoire ÃƒÂ©tait-elle...",
+                    "Ton histoire était-elle...",
                     style: TextStyle(fontSize: 18, color: Colors.white70),
                     textAlign: TextAlign.center,
                   ),
@@ -38604,7 +40025,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "(Ce choix restera secret jusqu'ÃƒÂ  la fin)",
+                    "(Ce choix restera secret jusqu'à la fin)",
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white38,
@@ -38620,7 +40041,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
-  // Helper pour les boutons animÃƒÂ©s
+  // Helper pour les boutons animés
   Widget _buildAnimatedTruthButton({
     required String label,
     required Color color,
@@ -38675,8 +40096,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     if (voteMode == 'turn_by_turn') {
       // ... (Gardez la logique 'turn_by_turn' existante, elle est fonctionnelle. On peut juste styliser la carte principale)
-      // Pour ne pas tout recopier, je focus sur la liste complÃƒÂ¨te qui est plus utilisÃƒÂ©e.
-      // Vous pouvez appliquer le mÃƒÂªme style de Card que ci-dessous.
+      // Pour ne pas tout recopier, je focus sur la liste complète qui est plus utilisée.
+      // Vous pouvez appliquer le même style de Card que ci-dessous.
       final playerOrder = List<String>.from(gameData['playerOrder']);
       final revealIndex = gameData['revealIndex'] as int;
       final storyOwnerId = playerOrder[revealIndex];
@@ -38688,7 +40109,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
       if (storyVotes.containsKey(voterId)) {
         return _buildWaitingWidget(
-          "Vote enregistrÃƒÂ©...",
+          "Vote enregistré...",
           players,
           storyVotes.length,
           players.length - 1,
@@ -38788,13 +40209,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ),
       );
     } else {
-      // Mode SimultanÃƒÂ© : Liste
+      // Mode Simultané : Liste
       return Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "DÃƒÂ©tecteur de Mensonges",
+              "Détecteur de Mensonges",
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
@@ -38891,7 +40312,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                             child: Center(
                               child: Text(
-                                "Tu as votÃƒÂ© : ${myVote!.toUpperCase()}",
+                                "Tu as voté : ${myVote!.toUpperCase()}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color:
@@ -39039,7 +40460,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 final pId = players.keys.elementAt(index);
                 final pName = players[pId]['name'];
 
-                // On ne vote pas pour soi-mÃƒÂªme sauf exception
+                // On ne vote pas pour soi-même sauf exception
                 bool isMe = pId == voterId;
 
                 return GestureDetector(
@@ -39106,9 +40527,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           ),
         ] else ...[
-          // Vote sur les rÃƒÂ©ponses (Synonyme ou Banni)
+          // Vote sur les réponses (Synonyme ou Banni)
           Text(
-            "Bannissez une rÃƒÂ©ponse !",
+            "Bannissez une réponse !",
             style: TextStyle(color: Colors.redAccent),
           ),
           SizedBox(height: 10),
@@ -39214,8 +40635,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
         Text(
           isTarget
-              ? "Ã°Å¸â€˜â€˜ Choisis ta rÃƒÂ©ponse prÃƒÂ©fÃƒÂ©rÃƒÂ©e :"
-              : "Ã¢ÂÂ³ En attente du choix de $judgeName...",
+              ? "ðŸ‘‘ Choisis ta réponse préférée :"
+              : "âÂÂ³ En attente du choix de $judgeName...",
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: 15),
@@ -39287,7 +40708,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Map<String, dynamic> gameData,
     String playerId,
   ) {
-    // DÃƒÂ©tection du mode Mondial : Soit c'est un lobby Premium, soit c'est un jeu configurÃƒÂ© avec Timer + Scope Monde
+    // Détection du mode Mondial : Soit c'est un lobby Premium, soit c'est un jeu configuré avec Timer + Scope Monde
     final bool isWorldMode =
         gameData['isPremiumLobby'] == true ||
         (gameData['useTimer'] == true && gameData['scope'] == 'monde');
@@ -39299,10 +40720,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final bool isHost = gameData['hostId'] == playerId;
 
     // ---------------------------------------------------------------------
-    // 1. Ãƒâ€°TAT REFILLING : Un joueur a quittÃƒÂ©, on cherche un remplaÃƒÂ§ant
+    // 1. ÉTAT REFILLING : Un joueur a quitté, on cherche un remplaçant
     // ---------------------------------------------------------------------
     if (gameState == 'refilling') {
-      // Initialisation du timer de 10s si ce n'est pas dÃƒÂ©jÃƒÂ  fait
+      // Initialisation du timer de 10s si ce n'est pas déjà fait
       if (_postGameTimer == null || !_postGameTimer!.isActive) {
         _refillCountdown = 10;
         _postGameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -39312,7 +40733,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           });
           if (_refillCountdown <= 0) {
             timer.cancel();
-            // Le temps est ÃƒÂ©coulÃƒÂ©, on force le dÃƒÂ©marrage avec les joueurs prÃƒÂ©sents
+            // Le temps est écoulé, on force le démarrage avec les joueurs présents
             _firebaseService.forceStartAfterRefill(widget.gameCode);
           }
         });
@@ -39328,18 +40749,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 CircularProgressIndicator(),
                 SizedBox(height: 20),
                 Text(
-                  "Un joueur a quittÃƒÂ©...",
+                  "Un joueur a quitté...",
                   style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Recherche de remplaÃƒÂ§ants en cours...",
+                  "Recherche de remplaçants en cours...",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "DÃƒÂ©marrage automatique dans",
+                  "Démarrage automatique dans",
                   style: TextStyle(color: Colors.white70),
                 ),
                 Text(
@@ -39352,7 +40773,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "Joueurs connectÃƒÂ©s : ${players.length}",
+                  "Joueurs connectés : ${players.length}",
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
               ],
@@ -39363,7 +40784,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     // ---------------------------------------------------------------------
-    // 2. Ãƒâ€°TAT GAME OVER (MODE MONDIAL) : Vote pour Rejouer ou Quitter
+    // 2. ÉTAT GAME OVER (MODE MONDIAL) : Vote pour Rejouer ou Quitter
     // ---------------------------------------------------------------------
     if (isWorldMode && gameState == 'gameOver') {
       final restartVotes = Map<String, dynamic>.from(
@@ -39371,9 +40792,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
       final bool hasVoted = restartVotes.containsKey(playerId);
 
-      // Initialisation du timer de vote de 15s
+      // Initialisation du timer de vote de 30s
       if (_postGameTimer == null || !_postGameTimer!.isActive) {
-        _postGameCountdown = 15;
+        _postGameCountdown = 30;
         _postGameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
           if (!mounted) return;
           setState(() {
@@ -39381,8 +40802,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           });
           if (_postGameCountdown <= 0) {
             timer.cancel();
-            // Si je suis l'hÃƒÂ´te ou le premier joueur (fail-safe), je dÃƒÂ©clenche le nettoyage
-            // FirebaseService gÃƒÂ¨re la concurrence via Transaction
             if (isHost || players.keys.first == playerId) {
               _firebaseService.handleRestartDecisionTimeout(widget.gameCode);
             }
@@ -39390,15 +40809,27 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         });
       }
 
-      // RÃƒÂ©cupÃƒÂ©ration du gagnant pour l'affichage
+      final playerProfiles = Map<String, dynamic>.from(
+        gameData['playerProfiles'] ?? {},
+      );
       List<MapEntry<String, dynamic>> sortedPlayers =
           players.entries.toList()..sort(
             (a, b) => (b.value['score'] ?? 0).compareTo(a.value['score'] ?? 0),
           );
-      String winnerName =
-          sortedPlayers.isNotEmpty
-              ? sortedPlayers.first.value['name']
-              : "Personne";
+      String winnerName = "Personne";
+      if (sortedPlayers.isNotEmpty) {
+        final topPId = sortedPlayers.first.key;
+        final rawName = sortedPlayers.first.value['name'];
+        if (rawName != null &&
+            rawName.toString().trim().isNotEmpty &&
+            rawName != 'Inconnu') {
+          winnerName = rawName.toString();
+        } else if (playerProfiles[topPId]?['name'] != null) {
+          winnerName = playerProfiles[topPId]['name'].toString();
+        } else {
+          winnerName = "Joueur";
+        }
+      }
 
       return Center(
         child: Card(
@@ -39408,7 +40839,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Partie TerminÃƒÂ©e !",
+                  GameUiLocalization.tr(context, "Partie terminée !"),
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(height: 10),
@@ -39420,7 +40851,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 5),
                 Text(
-                  gameData['gameEndReason'] ?? "",
+                  GameMessageLocalization.tr(
+                    context,
+                    gameData['gameEndReason'] ?? "",
+                  ),
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white70),
                 ),
@@ -39504,7 +40938,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 15),
                 Text(
-                  "Si un joueur ne rÃƒÂ©pond pas ou quitte, la partie cherchera un remplaÃƒÂ§ant.",
+                  "Si un joueur ne répond pas ou quitte, la partie cherchera un remplaçant.",
                   style: TextStyle(
                     fontSize: 11,
                     color: Colors.white38,
@@ -39520,7 +40954,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     // ---------------------------------------------------------------------
-    // 3. AFFICHAGE STANDARD DES RÃƒâ€°SULTATS (Mode Amis ou Fin de Tour)
+    // 3. AFFICHAGE STANDARD DES RÉSULTATS (Mode Amis ou Fin de Tour)
     // ---------------------------------------------------------------------
     final gameType = gameData['gameType'];
     String resultText = "";
@@ -39531,16 +40965,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final bool isSkullGameOver =
         gameType == 'Skull' && gameData['gameState'] == 'gameOver';
 
-    // --- LOGIQUE SPÃƒâ€°CIFIQUE PAR JEU (CopiÃƒÂ©e de l'ancienne version) ---
+    // --- LOGIQUE SPÉCIFIQUE PAR JEU (Copiée de l'ancienne version) ---
     switch (gameType) {
       case 'Le Juge':
         final winnerId = gameData['roundWinnerId'];
         final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
         final winningAnswer =
             (gameData['answers'] as Map<String, dynamic>?)?[winnerId] ??
-            'aucune rÃƒÂ©ponse';
+            'aucune réponse';
         resultText =
-            "$winnerName a ÃƒÂ©tÃƒÂ© choisi pour sa rÃƒÂ©ponse et gagne 1 point !";
+            "$winnerName a été choisi pour sa réponse et gagne 1 point !";
         extraInfo = Text(
           '"${winningAnswer}"',
           style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white70),
@@ -39550,7 +40984,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
       case 'Le Menteur':
         if (isSimplifiedLiar) {
-          resultText = "RÃƒÂ©sultats des votes";
+          resultText = "Résultats des votes";
           final answers = gameData['answers'] as Map<String, dynamic>;
           final storyTruths = gameData['storyTruths'] as Map<String, dynamic>;
           final votes = gameData['voteResults'] as Map<String, dynamic>;
@@ -39575,7 +41009,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Histoire de $storyOwnerName (ÃƒÂ©tait $actualTruth)',
+                              'Histoire de $storyOwnerName (était $actualTruth)',
                               style: Theme.of(
                                 context,
                               ).textTheme.titleLarge?.copyWith(
@@ -39618,7 +41052,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     size: 16,
                                   ),
                                   SizedBox(width: 8),
-                                  Text('$voterName a votÃƒÂ© : $voteValue'),
+                                  Text('$voterName a voté : $voteValue'),
                                 ],
                               );
                             }),
@@ -39633,9 +41067,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         } else {
           final liarId = gameData['liarId'];
           final liarName = players[liarId]?['name'] ?? 'Le menteur';
-          resultText = "Le menteur ÃƒÂ©tait... $liarName !";
+          resultText = "Le menteur était... $liarName !";
           extraInfo = Text(
-            "Les points ont ÃƒÂ©tÃƒÂ© distribuÃƒÂ©s en fonction de vos votes.",
+            "Les points ont été distribués en fonction de vos votes.",
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
@@ -39653,21 +41087,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         final winner = gameData['roundWinnerId'];
 
         if (winner == 'impostors') {
-          resultText =
-              "Les imposteurs ont gagnÃƒÂ© ! Un civil a ÃƒÂ©tÃƒÂ© ÃƒÂ©liminÃƒÂ©.";
+          resultText = "Les imposteurs ont gagné ! Un civil a été éliminé.";
         } else if (winner == 'civilians_and_mrwhite') {
-          resultText =
-              "L'InfiltrÃƒÂ© ($undercoverName) a ÃƒÂ©tÃƒÂ© dÃƒÂ©masquÃƒÂ© !";
+          resultText = "L'Infiltré ($undercoverName) a été démasqué !";
         } else if (winner == 'civilians_and_undercover') {
-          resultText = "Mr. White ($mrWhiteName) a ÃƒÂ©tÃƒÂ© dÃƒÂ©masquÃƒÂ© !";
+          resultText = "Mr. White ($mrWhiteName) a été démasqué !";
         } else {
-          resultText = "Le tour est terminÃƒÂ© !";
+          resultText = "Le tour est terminé !";
         }
 
         extraInfo = Column(
           children: [
             Text(
-              "Le mot des Civils ÃƒÂ©tait : '${wordPair[0]}'",
+              "Le mot des Civils était : '${wordPair[0]}'",
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white70,
@@ -39675,7 +41107,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
             if (undercoverId != null)
               Text(
-                "Le mot de l'InfiltrÃƒÂ© (${undercoverName}) ÃƒÂ©tait : '${wordPair[1]}'",
+                "Le mot de l'Infiltré (${undercoverName}) était : '${wordPair[1]}'",
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color: Colors.white70,
@@ -39700,16 +41132,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           final word = gameData['roundData'];
           final loserAnswer = gameData['answers'][loserId];
           resultText =
-              "$loserName a ÃƒÂ©tÃƒÂ© banni pour sa proposition '$loserAnswer' !";
+              "$loserName a été banni pour sa proposition '$loserAnswer' !";
           extraInfo = Text(
-            "Le mot ÃƒÂ  trouver ÃƒÂ©tait un synonyme de '$word'. Les autres joueurs marquent 1 point.",
+            "Le mot à trouver était un synonyme de '$word'. Les autres joueurs marquent 1 point.",
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
             ),
           );
         } else {
-          resultText = "Ãƒâ€°galitÃƒÂ© dans les votes ! Personne n'est banni.";
+          resultText = "Égalité dans les votes ! Personne n'est banni.";
         }
         break;
 
@@ -39719,17 +41151,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         if (loserId != null) {
           final loserName = players[loserId]?['name'] ?? 'Inconnu';
           resultText =
-              "${loserName} n'a pas rÃƒÂ©pondu ÃƒÂ  temps et gagne 1 point !";
+              "${loserName} n'a pas répondu à temps et gagne 1 point !";
           extraInfo = Text(
-            gameData['gameEndReason'] ?? "Temps ÃƒÂ©coulÃƒÂ© !",
+            gameData['gameEndReason'] ?? "Temps écoulé !",
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
             ),
           );
         } else {
-          resultText =
-              "Ãƒâ€°galitÃƒÂ© ! Personne ne prend de point ce tour-ci.";
+          resultText = "Égalité ! Personne ne prend de point ce tour-ci.";
         }
         break;
 
@@ -39741,9 +41172,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             'Le dessinateur';
         if (winnerId != null) {
           final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
-          resultText = "$winnerName a trouvÃƒÂ© le mot : '$currentWord' !";
+          resultText = "$winnerName a trouvé le mot : '$currentWord' !";
           extraInfo = Text(
-            "FÃƒÂ©licitations au dessinateur $drawingPlayerName et ÃƒÂ  $winnerName !",
+            "Félicitations au dessinateur $drawingPlayerName et à $winnerName !",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -39751,10 +41182,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           );
         } else {
-          resultText = "Personne n'a trouvÃƒÂ© le mot : '$currentWord'.";
+          resultText = "Personne n'a trouvé le mot : '$currentWord'.";
           extraInfo = Text(
             gameEndReason ??
-                "Le temps est ÃƒÂ©coulÃƒÂ© ou le dessin ÃƒÂ©tait trop complexe !",
+                "Le temps est écoulé ou le dessin était trop complexe !",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -39769,11 +41200,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         final guesserName =
             players[gameData['justOneGuesserId']]?['name'] ?? 'Le devin';
         final guesserAnswer =
-            gameData['justOneGuesserAnswer'] ?? '(pas de rÃƒÂ©ponse)';
-        if (gameEndReason == 'Mot devinÃƒÂ© !') {
-          resultText = "$guesserName a trouvÃƒÂ© le mot : '$currentWord' !";
+            gameData['justOneGuesserAnswer'] ?? '(pas de réponse)';
+        if (gameEndReason == 'Mot deviné !') {
+          resultText = "$guesserName a trouvé le mot : '$currentWord' !";
           extraInfo = Text(
-            "Sa rÃƒÂ©ponse ÃƒÂ©tait : '$guesserAnswer'.",
+            "Sa réponse était : '$guesserAnswer'.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -39781,11 +41212,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           );
         } else {
-          resultText = "$guesserName n'a pas trouvÃƒÂ© le mot.";
+          resultText = "$guesserName n'a pas trouvé le mot.";
           extraInfo = Column(
             children: [
               Text(
-                "Le mot ÃƒÂ©tait : '$currentWord'.",
+                "Le mot était : '$currentWord'.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
@@ -39793,7 +41224,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
               ),
               Text(
-                "Sa rÃƒÂ©ponse ÃƒÂ©tait : '$guesserAnswer'.",
+                "Sa réponse était : '$guesserAnswer'.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
@@ -39817,7 +41248,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           resultText =
               "${players[winnerId]?['name'] ?? 'Un joueur'} remporte Skull !";
           extraInfo = Text(
-            gameData['gameEndReason'] ?? 'Deux dÃƒÂ©fis rÃƒÂ©ussis.',
+            gameData['gameEndReason'] ?? 'Deux défis réussis.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -39825,22 +41256,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           );
         } else if (outcome == 'won') {
-          resultText =
-              "DÃƒÂ©fi gagnÃƒÂ© : $challengeBid carte(s) rÃƒÂ©vÃƒÂ©lÃƒÂ©e(s) !";
+          resultText = "Défi gagné : $challengeBid carte(s) révélée(s) !";
         } else if (outcome == 'lost') {
           final loserName =
               players[gameData['skullLastChallengeLoserId']]?['name'] ??
               'Le challenger';
-          resultText = "$loserName a perdu le dÃƒÂ©fi.";
+          resultText = "$loserName a perdu le défi.";
         } else {
-          resultText = "Le tour est terminÃƒÂ©.";
+          resultText = "Le tour est terminé.";
         }
 
         if (revealed.isNotEmpty) {
           extraInfo = Column(
             children: [
               Text(
-                "Cartes rÃƒÂ©vÃƒÂ©lÃƒÂ©es :",
+                "Cartes révélées :",
                 style: TextStyle(color: Colors.white70),
               ),
               SizedBox(height: 8),
@@ -39855,7 +41285,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           players[card['ownerId']]?['name'] ?? 'Joueur';
                       return Chip(
                         label: Text(
-                          '$ownerName : ${card['type'] == 'Crane' ? 'CrÃƒÂ¢ne' : 'Rose'}',
+                          '$ownerName : ${card['type'] == 'Crane' ? 'Crâne' : 'Rose'}',
                         ),
                         backgroundColor:
                             card['type'] == 'Crane'
@@ -39876,7 +41306,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           final winningDescription =
               (gameData['answers'] as Map<String, dynamic>?)?[winnerId] ??
               'une description hilarante';
-          resultText = "$winnerName a gagnÃƒÂ© avec sa description :";
+          resultText = "$winnerName a gagné avec sa description :";
           extraInfo = Column(
             children: [
               Text(
@@ -39895,7 +41325,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     fit: BoxFit.contain,
                     errorBuilder:
                         (context, error, stackTrace) => Center(
-                          child: Text("Erreur de chargement du mÃƒÂ¨me."),
+                          child: Text("Erreur de chargement du mème."),
                         ),
                   ),
                 ),
@@ -39903,9 +41333,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           );
         } else {
           resultText =
-              "Personne n'a gagnÃƒÂ© ce tour. Ãƒâ€°galitÃƒÂ© des votes ou pas de description.";
+              "Personne n'a gagné ce tour. Égalité des votes ou pas de description.";
           extraInfo = Text(
-            gameEndReason ?? "",
+            GameMessageLocalization.tr(context, gameEndReason ?? ""),
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
@@ -39921,16 +41351,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
           final commonSym = gameData['commonSymbol'];
           resultText =
-              "$winnerName a trouvÃƒÂ© le symbole $commonSym ! Il gagne la carte.";
+              "$winnerName a trouvé le symbole $commonSym ! Il gagne la carte.";
           extraInfo = Text(
             "Score actuel de ${players[winnerId]?['name'] ?? 'Lui'}: ${players[winnerId]?['score'] ?? 0} cartes.",
             style: TextStyle(fontStyle: FontStyle.italic),
           );
         } else {
           resultText =
-              "Le tour est terminÃƒÂ©. Personne n'a trouvÃƒÂ© le symbole commun.";
+              "Le tour est terminé. Personne n'a trouvé le symbole commun.";
           extraInfo = Text(
-            gameEndReason ?? "Un problÃƒÂ¨me est survenu.",
+            GameMessageLocalization.tr(
+              context,
+              gameEndReason ?? "Un problème est survenu.",
+            ),
             style: TextStyle(fontStyle: FontStyle.italic),
           );
         }
@@ -39941,16 +41374,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         final roundWinnerId = gameData['roundWinnerId'];
         if (roundWinnerId != null) {
           final winnerName = players[roundWinnerId]?['name'] ?? 'Inconnu';
-          resultText =
-              "$winnerName a ÃƒÂ©tÃƒÂ© dÃƒÂ©signÃƒÂ©(e) et gagne 1 point !";
+          resultText = "$winnerName a été désigné(e) et gagne 1 point !";
         } else {
-          resultText =
-              "Ãƒâ€°galitÃƒÂ© ! Personne ne marque de point ce tour-ci.";
+          resultText = "Égalité ! Personne ne marque de point ce tour-ci.";
         }
         break;
     }
 
-    // Affichage final de la carte de rÃƒÂ©sultat
+    // Affichage final de la carte de résultat
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -39970,7 +41401,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         if (extraInfo != null) extraInfo,
         SizedBox(height: 40),
 
-        // Affichage des contrÃƒÂ´les (HÃƒÂ´te vs Client)
+        // Affichage des contrôles (Hôte vs Client)
         if (isHost && !isSkullGameOver)
           ElevatedButton(
             onPressed:
@@ -40039,11 +41470,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         else if (isSkullGameOver)
           TextButton(
             onPressed: () => _exitGame(),
-            child: Text("Retour ÃƒÂ  l'accueil"),
+            child: Text("Retour à l'accueil"),
           )
         else
           Text(
-            "En attente de l'hÃƒÂ´te pour le tour suivant...",
+            "En attente de l'hôte pour le tour suivant...",
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
@@ -40086,7 +41517,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Votre action est en cours d'enregistrement...",
+              GameUiLocalization.tr(context, 'actionPendingMsg'),
               style: TextStyle(color: Colors.amberAccent, fontSize: 14),
             ),
           ),
@@ -40111,9 +41542,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final List<String> codenamesWords = List<String>.from(
       gameData['codenamesWords'] ?? [],
     );
-    final Map<String, String> keyCard = (gameData['codenamesKeyCard'] is Map)
-        ? Map<String, String>.from(gameData['codenamesKeyCard'])
-        : {};
+    final Map<String, String> keyCard =
+        (gameData['codenamesKeyCard'] is Map)
+            ? Map<String, String>.from(gameData['codenamesKeyCard'])
+            : {};
     final Map<String, bool> revealedWords = Map<String, bool>.from(
       gameData['codenamesRevealed'] ?? {},
     );
@@ -40135,15 +41567,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     if (isGameOver) {
       final String winnerTeamName =
           gameWinner == 'red'
-              ? 'Équipe Rouge'
+              ? GameUiLocalization.tr(context, 'codenamesRedTeam')
               : (gameWinner == 'blue'
-                  ? 'Équipe Bleue'
+                  ? GameUiLocalization.tr(context, 'codenamesBlueTeam')
                   : (players[gameWinner]?['name'] ?? 'Inconnu'));
       return UniversalGameEndScreen(
         gameTitle: "Codenames",
         winnerId: gameWinner,
         winnerName: winnerTeamName,
-        reason: gameEndReason.isNotEmpty ? gameEndReason : "Fin de mission !",
+        reason:
+            gameEndReason.isNotEmpty
+                ? gameEndReason
+                : GameUiLocalization.tr(context, 'codenamesMissionEnd'),
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -40167,13 +41602,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           child: Column(
             children: [
               Text(
-                "C'est au tour de l'ÃƒÂ©quipe : ${activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
+                GameUiLocalization.tr(context, 'codenamesTeamTurn', {
+                  'team':
+                      activeTeam == 'red'
+                          ? GameUiLocalization.tr(context, 'codenamesRed')
+                          : GameUiLocalization.tr(context, 'codenamesBlue'),
+                }),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 5),
               Text(
-                "Vous ÃƒÂªtes : ${redTeam.contains(playerId) ? 'Ãƒâ€°quipe Rouge' : (blueTeam.contains(playerId) ? 'Ãƒâ€°quipe Bleue' : 'Spectateur')}"
-                "${(playerId == masterSpyRed || playerId == masterSpyBlue) ? ' (MaÃƒÂ®tre-espion)' : ' (Agent)'}",
+                "${GameUiLocalization.tr(context, 'codenamesYouAre')}${redTeam.contains(playerId) ? GameUiLocalization.tr(context, 'codenamesRedTeam') : (blueTeam.contains(playerId) ? GameUiLocalization.tr(context, 'codenamesBlueTeam') : GameUiLocalization.tr(context, 'codenamesSpectator'))}"
+                "${(playerId == masterSpyRed || playerId == masterSpyBlue) ? ' (${GameUiLocalization.tr(context, 'codenamesMasterSpy')})' : ' (${GameUiLocalization.tr(context, 'codenamesAgent')})'}",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
@@ -40286,7 +41726,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return Column(
           children: [
             Text(
-              "Vue Maître-Espion (Carte Clé)",
+              GameUiLocalization.tr(context, 'codenamesMasterSpyView'),
               style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(
@@ -40339,7 +41779,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   TextField(
                     controller: clueController,
                     decoration: InputDecoration(
-                      labelText: "Votre indice (un mot)",
+                      labelText: GameUiLocalization.tr(
+                        context,
+                        'codenamesClueLabel',
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -40355,7 +41798,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             )
                             .toList(),
                     onChanged: (val) => chosenCount = val!,
-                    decoration: InputDecoration(labelText: "Nombre de mots"),
+                    decoration: InputDecoration(
+                      labelText: GameUiLocalization.tr(
+                        context,
+                        'codenamesWordCountLabel',
+                      ),
+                    ),
                   ),
                   SizedBox(height: 10),
 
@@ -40392,13 +41840,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 strokeWidth: 2,
                               ),
                             )
-                            : Text("Donner l'indice"),
+                            : Text(
+                              GameUiLocalization.tr(
+                                context,
+                                'codenamesGiveClue',
+                              ),
+                            ),
                   ),
                 ],
               )
             else if (gameData['currentClue'] != null)
               Text(
-                "Vous avez donné l'indice: '${gameData['currentClue']} ${gameData['clueCount']}'",
+                GameUiLocalization.tr(context, 'codenamesClueGiven', {
+                  'clue': "${gameData['currentClue']}",
+                  'count': "${gameData['clueCount']}",
+                }),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontStyle: FontStyle.italic),
               ),
@@ -40421,13 +41877,27 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     return Column(
       children: [
-        Text("Vue Agent", style: Theme.of(context).textTheme.titleLarge),
+        Text(
+          GameUiLocalization.tr(context, 'codenamesAgentView'),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         SizedBox(height: 10),
         if (currentClue != null)
           Column(
             children: [
               Text(
-                "Indice de ${activeTeam == 'red' ? 'votre maÃƒÂ®tre-espion rouge' : 'votre maÃƒÂ®tre-espion bleu'}:",
+                GameUiLocalization.tr(context, 'codenamesClueFromSpy', {
+                  'spy':
+                      activeTeam == 'red'
+                          ? GameUiLocalization.tr(
+                            context,
+                            'codenamesYourMasterSpyRed',
+                          )
+                          : GameUiLocalization.tr(
+                            context,
+                            'codenamesYourMasterSpyBlue',
+                          ),
+                }),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
@@ -40441,7 +41911,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               SizedBox(height: 5),
               Text(
-                "Essais restants : $guessesLeft",
+                GameUiLocalization.tr(context, 'codenamesGuessesLeft', {
+                  'count': "$guessesLeft",
+                }),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 10),
@@ -40469,13 +41941,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               strokeWidth: 2,
                             ),
                           )
-                          : Text("Passer son tour"),
+                          : Text(
+                            GameUiLocalization.tr(context, 'codenamesPassTurn'),
+                          ),
                 ),
             ],
           )
         else
           Text(
-            "En attente de l'indice du MaÃƒÂ®tre-Espion ${activeTeam == 'red' ? 'rouge' : 'bleu'}...",
+            GameUiLocalization.tr(context, 'codenamesWaitingForClue', {
+              'team':
+                  activeTeam == 'red'
+                      ? GameUiLocalization.tr(context, 'codenamesRedLower')
+                      : GameUiLocalization.tr(context, 'codenamesBlueLower'),
+            }),
             style: Theme.of(
               context,
             ).textTheme.titleLarge?.copyWith(color: Colors.white70),
@@ -40495,7 +41974,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
     final bool isHost = gameData['hostId'] == playerId;
 
-    // --- CORRECTION ICI : RÃƒÂ©cupÃƒÂ©ration correcte du numÃƒÂ©ro de la manche ---
+    // --- CORRECTION ICI : Récupération correcte du numéro de la manche ---
     final int currentRoundNumber = gameData['currentRoundNumber'] ?? 1;
 
     // --- ECRAN GAME OVER ---
@@ -40507,14 +41986,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
       String winName =
           scoreA > scoreB
-              ? "Équipe A"
-              : (scoreB > scoreA ? "Équipe B" : "Égalité");
+              ? GameUiLocalization.tr(context, 'timesUpTeamA')
+              : (scoreB > scoreA
+                  ? GameUiLocalization.tr(context, 'timesUpTeamB')
+                  : GameUiLocalization.tr(context, 'timesUpDraw'));
       return UniversalGameEndScreen(
         gameTitle: "Time's Up",
         winnerId: winTeam,
         winnerName: winName,
-        reason:
-            "Fin des 3 manches ! Équipe A: $scoreA pts | Équipe B: $scoreB pts",
+        reason: GameUiLocalization.tr(context, 'timesUpGameOverReason', {
+          'scoreA': "$scoreA",
+          'scoreB': "$scoreB",
+        }),
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -40532,7 +42015,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
       if (submittedPlayers.containsKey(playerId)) {
         return _buildWaitingWidget(
-          "En attente que tous les joueurs soumettent leurs mots...",
+          GameUiLocalization.tr(context, 'timesUpWaitingForWords'),
           players,
           submittedPlayers.length,
           players.length,
@@ -40545,12 +42028,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "Ajoutez $targetWordCount mots ou expressions",
+            GameUiLocalization.tr(context, 'timesUpAddWordsCount', {
+              'count': "$targetWordCount",
+            }),
             style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
           Text(
-            "(personnes, objets, films, lieux...)",
+            GameUiLocalization.tr(context, 'timesUpWordsSubtitle'),
             style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
@@ -40562,8 +42047,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   controller: _timesUpWordController,
                   enabled: _myTimesUpWords.length < targetWordCount,
                   decoration: InputDecoration(
-                    labelText:
-                        "Mot ÃƒÂ  deviner (${_myTimesUpWords.length}/$targetWordCount)",
+                    labelText: GameUiLocalization.tr(
+                      context,
+                      'timesUpWordInputLabel',
+                      {
+                        'current': "${_myTimesUpWords.length}",
+                        'target': "$targetWordCount",
+                      },
+                    ),
                   ),
                   onSubmitted: (value) {
                     final word = value.trim();
@@ -40599,12 +42090,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             _timesUpWordController.clear();
                           });
                         },
-                tooltip: "Ajouter ce mot",
+                tooltip: GameUiLocalization.tr(
+                  context,
+                  'timesUpAddWordTooltip',
+                ),
               ),
             ],
           ),
           SizedBox(height: 20),
-          Text("Vos mots :", style: Theme.of(context).textTheme.titleLarge),
+          Text(
+            GameUiLocalization.tr(context, 'timesUpYourWords'),
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           SizedBox(height: 10),
           Expanded(
             child: SingleChildScrollView(
@@ -40665,7 +42162,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         strokeWidth: 2,
                       ),
                     )
-                    : Text("Soumettre mes $targetWordCount mots"),
+                    : Text(
+                      GameUiLocalization.tr(context, 'timesUpSubmitWords', {
+                        'count': "$targetWordCount",
+                      }),
+                    ),
           ),
         ],
       );
@@ -40687,18 +42188,31 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       final List<dynamic> teamA = List.from(teams['teamA'] ?? []);
       final List<dynamic> teamB = List.from(teams['teamB'] ?? []);
       final String myTeam =
-          teamA.contains(playerId) ? 'Ãƒâ€°quipe A' : 'Ãƒâ€°quipe B';
+          teamA.contains(playerId)
+              ? GameUiLocalization.tr(context, 'timesUpTeamA')
+              : GameUiLocalization.tr(context, 'timesUpTeamB');
 
       String currentModeDescription = "";
       if (currentRoundNumber == 1)
-        currentModeDescription = "Description libre";
+        currentModeDescription = GameUiLocalization.tr(
+          context,
+          'timesUpModeFree',
+        );
       else if (currentRoundNumber == 2)
-        currentModeDescription = "Un seul mot";
+        currentModeDescription = GameUiLocalization.tr(
+          context,
+          'timesUpModeOneWord',
+        );
       else if (currentRoundNumber == 3)
-        currentModeDescription = "Mime";
+        currentModeDescription = GameUiLocalization.tr(
+          context,
+          'timesUpModeMime',
+        );
 
       String currentWordToGuess =
-          currentDeck.isNotEmpty ? currentDeck.first : "FIN DE MANCHE !";
+          currentDeck.isNotEmpty
+              ? currentDeck.first
+              : GameUiLocalization.tr(context, 'timesUpRoundEnd');
 
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -40708,7 +42222,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "Ãƒâ€°quipe A: ${teamScores['teamA'] ?? 0}",
+                GameUiLocalization.tr(context, 'timesUpTeamAScore', {
+                  'score': "${teamScores['teamA'] ?? 0}",
+                }),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -40719,7 +42235,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
               ),
               Text(
-                "Ãƒâ€°quipe B: ${teamScores['teamB'] ?? 0}",
+                GameUiLocalization.tr(context, 'timesUpTeamBScore', {
+                  'score': "${teamScores['teamB'] ?? 0}",
+                }),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -40733,7 +42251,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
           SizedBox(height: 4),
           Text(
-            "Vous ÃƒÂªtes dans $myTeam",
+            GameUiLocalization.tr(context, 'timesUpYouAreInTeam', {
+              'team': myTeam,
+            }),
             style: TextStyle(fontSize: 12, color: Colors.white54),
           ),
           SizedBox(height: 8),
@@ -40745,7 +42265,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              "Manche $currentRoundNumber : $currentModeDescription",
+              GameUiLocalization.tr(context, 'timesUpRoundMode', {
+                'round': "$currentRoundNumber",
+                'mode': currentModeDescription,
+              }),
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
@@ -40756,7 +42279,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             Column(
               children: [
                 Text(
-                  "C'est TON tour de faire deviner !",
+                  GameUiLocalization.tr(context, 'timesUpYourTurnToMakeGuess'),
                   style: TextStyle(
                     color: Colors.greenAccent,
                     fontSize: 20,
@@ -40765,7 +42288,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 20),
 
-                // CARTE Ãƒâ‚¬ DEVINER
+                // CARTE À DEVINER
                 Container(
                   height: 200,
                   width: 300,
@@ -40869,8 +42392,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("Passer", style: TextStyle(color: Colors.orange)),
-                    Text("TrouvÃƒÂ© !", style: TextStyle(color: Colors.green)),
+                    Text(
+                      GameUiLocalization.tr(context, 'Passer'),
+                      style: TextStyle(color: Colors.orange),
+                    ),
+                    Text(
+                      GameUiLocalization.tr(context, 'timesUpFound'),
+                      style: TextStyle(color: Colors.green),
+                    ),
                   ],
                 ),
                 SizedBox(height: 20),
@@ -40887,7 +42416,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     setState(() => _isActionPending = false);
                                 });
                           },
-                  child: Text("Fin de mon tour"),
+                  child: Text(
+                    GameUiLocalization.tr(context, 'timesUpEndMyTurn'),
+                  ),
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 ),
               ],
@@ -40897,7 +42428,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             Column(
               children: [
                 Text(
-                  "C'est au tour de",
+                  GameUiLocalization.tr(context, 'timesUpTurnOf'),
                   style: TextStyle(fontSize: 20, color: Colors.white70),
                 ),
                 SizedBox(height: 10),
@@ -40910,7 +42441,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 10),
                 Text(
-                  players[currentGuesserId]?['name'] ?? 'Quelqu\'un',
+                  players[currentGuesserId]?['name'] ??
+                      GameUiLocalization.tr(context, 'timesUpSomeone'),
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 40),
@@ -40929,13 +42461,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text("secondes", style: TextStyle(fontSize: 12)),
+                      Text(
+                        GameUiLocalization.tr(context, 'timesUpSeconds'),
+                        style: TextStyle(fontSize: 12),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(height: 40),
                 Text(
-                  "Cartes restantes : ${currentDeck.length}",
+                  GameUiLocalization.tr(context, 'timesUpCardsLeft', {
+                    'count': "${currentDeck.length}",
+                  }),
                   style: TextStyle(color: Colors.white54),
                 ),
                 SizedBox(height: 20),
@@ -40953,7 +42490,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       setState(() => _isActionPending = false);
                                   });
                             },
-                    child: Text("Forcer le joueur suivant (HÃƒÂ´te)"),
+                    child: Text(
+                      GameUiLocalization.tr(context, 'timesUpForceNextPlayer'),
+                    ),
                   ),
               ],
             ),
@@ -40978,7 +42517,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         gameTitle: "Petit Bac",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Fin de la partie !",
+        reason:
+            gameData['gameEndReason'] ??
+            GameUiLocalization.tr(context, 'petitBacGameOverReason'),
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -41013,9 +42554,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
     }
 
-    // DÃƒÂ©coration style "Tableau noir"
+    // Décoration style "Tableau noir"
     final BoxDecoration blackboardDecoration = BoxDecoration(
-      color: Color(0xFF2F3E2F), // Vert foncÃƒÂ© tableau
+      color: Color(0xFF2F3E2F), // Vert foncé tableau
       borderRadius: BorderRadius.circular(12),
       border: Border.all(color: Color(0xFF8D6E63), width: 8), // Cadre en bois
       boxShadow: [
@@ -41037,12 +42578,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       return Column(
         children: [
           Text(
-            "Tour ${gameData['currentRound']}",
+            GameUiLocalization.tr(context, 'petitBacRound', {
+              'round': "${gameData['currentRound']}",
+            }),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           SizedBox(height: 10),
           Text(
-            "Choisissez les catÃƒÂ©gories :",
+            GameUiLocalization.tr(context, 'petitBacChooseCategories'),
             style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
@@ -41082,7 +42625,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         child: TextField(
                           controller: categoryController,
                           decoration: InputDecoration(
-                            labelText: "Ajouter une catÃƒÂ©gorie",
+                            labelText: GameUiLocalization.tr(
+                              context,
+                              'petitBacAddCategory',
+                            ),
                           ),
                         ),
                       ),
@@ -41128,7 +42674,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      "Veuillez choisir au moins une catÃƒÂ©gorie.",
+                                      GameUiLocalization.tr(
+                                        context,
+                                        'petitBacMinOneCategory',
+                                      ),
                                     ),
                                   ),
                                 );
@@ -41144,14 +42693,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 strokeWidth: 2,
                               ),
                             )
-                            : Text("Valider les catÃƒÂ©gories"),
+                            : Text(
+                              GameUiLocalization.tr(
+                                context,
+                                'petitBacValidateCategories',
+                              ),
+                            ),
                   ),
                 ],
               ),
             )
           else
             Text(
-              "En attente de l'hÃƒÂ´te...",
+              GameUiLocalization.tr(context, "En attente de l'hôte..."),
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white70,
@@ -41180,14 +42734,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Tour ${gameData['currentRound']}",
+                      GameUiLocalization.tr(context, 'petitBacRound', {
+                        'round': "${gameData['currentRound']}",
+                      }),
                       style: chalkStyle.copyWith(
                         fontSize: 14,
                         color: Colors.white70,
                       ),
                     ),
                     Text(
-                      "Lettre : $currentLetter",
+                      GameUiLocalization.tr(context, 'petitBacLetter', {
+                        'letter': currentLetter,
+                      }),
                       style: chalkStyle.copyWith(
                         fontSize: 32,
                         color: Colors.yellowAccent,
@@ -41262,7 +42820,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 hasSubmitted
                     ? Center(
                       child: _buildWaitingWidget(
-                        "Copies ramassées ! Attente de la sonnerie...",
+                        GameUiLocalization.tr(
+                          context,
+                          'petitBacWaitingForBell',
+                        ),
                         players,
                         submittedPlayers.length,
                         players.length,
@@ -41312,7 +42873,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           if (!hasSubmitted)
             ElevatedButton.icon(
               icon: Icon(Icons.check),
-              label: Text("J'ai fini !"),
+              label: Text(GameUiLocalization.tr(context, 'petitBacIFinished')),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[700],
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
@@ -41357,14 +42918,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: Column(
               children: [
                 Text(
-                  "CORRECTION",
+                  GameUiLocalization.tr(context, 'petitBacCorrection'),
                   style: chalkStyle.copyWith(
                     fontSize: 24,
                     decoration: TextDecoration.underline,
                   ),
                 ),
                 SizedBox(height: 5),
-                Text("Lettre : $currentLetter", style: chalkStyle),
+                Text(
+                  GameUiLocalization.tr(context, 'petitBacLetter', {
+                    'letter': currentLetter,
+                  }),
+                  style: chalkStyle,
+                ),
               ],
             ),
           ),
@@ -41522,7 +43088,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           strokeWidth: 2,
                         ),
                       )
-                      : Text("Prochain Tour"),
+                      : Text(GameUiLocalization.tr(context, "Prochain Tour")),
             ),
         ],
       );
@@ -41544,7 +43110,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       gameData['playerRanks'] ?? {},
     );
 
-    // --- Ãƒâ€°CRAN DE FIN DE MANCHE ---
+    // --- ÉCRAN DE FIN DE MANCHE ---
     if (gameState == 'round_over') {
       List<String> finalRanking = List<String>.from(
         gameData['finishedPlayers'] ?? [],
@@ -41565,7 +43131,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Fin de la Manche",
+                  GameUiLocalization.tr(context, "Fin de la Manche"),
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 Divider(),
@@ -41582,7 +43148,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           players[rankEntry.key]?['name'] ?? 'Inconnu',
                         ),
                         trailing: Text(
-                          rankEntry.value,
+                          GameUiLocalization.tr(context, rankEntry.value),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.amber,
@@ -41606,10 +43172,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       setState(() => _isActionPending = false);
                                   });
                             },
-                    child: Text("Suite"),
+                    child: Text(GameUiLocalization.tr(context, "Suite")),
                   )
                 else
-                  Text("En attente de l'hÃƒÂ´te..."),
+                  Text(
+                    GameUiLocalization.tr(context, "En attente de l'hôte..."),
+                  ),
               ],
             ),
           ),
@@ -41617,7 +43185,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
     }
 
-    // --- Ãƒâ€°CRAN D'Ãƒâ€°CHANGE ---
+    // --- ÉCRAN D'ÉCHANGE ---
     if (gameState == 'card_exchange') {
       List<Map<String, dynamic>> exchangeData = List<Map<String, dynamic>>.from(
         gameData['cardExchangeData'] ?? [],
@@ -41626,7 +43194,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Ãƒâ€°change des cartes",
+            GameUiLocalization.tr(context, "Échange des cartes"),
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           SizedBox(height: 20),
@@ -41640,7 +43208,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 padding: EdgeInsets.all(12),
                 child: Column(
                   children: [
-                    Text("$fromName donne ÃƒÂ  $toName :"),
+                    Text(
+                      GameUiLocalization.tr(context, "presidentGivesTo", {
+                        'from': fromName,
+                        'to': toName,
+                      }),
+                    ),
                     SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -41677,7 +43250,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 setState(() => _isActionPending = false);
                             });
                       },
-              child: Text("Commencer"),
+              child: Text(GameUiLocalization.tr(context, "Commencer")),
             ),
         ],
       );
@@ -41704,21 +43277,24 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     String instructionText =
         isMyTurn
-            ? "Ãƒâ‚¬ vous de jouer !"
-            : "Au tour de ${players[currentPlayerId]?['name']}";
-    if (isRevolutionActive) instructionText += " (RÃƒÂ©volution !)";
+            ? GameUiLocalization.tr(context, "À vous de jouer !")
+            : GameUiLocalization.tr(context, "Au tour de {name}", {
+              'name': players[currentPlayerId]?['name'] ?? '',
+            });
+    if (isRevolutionActive)
+      instructionText += GameUiLocalization.tr(context, " (Révolution !)");
 
-    // Validation locale pour activer/dÃƒÂ©sactiver le bouton
+    // Validation locale pour activer/désactiver le bouton
     bool isPlayValid() {
       if (_selectedPresidentCards.isEmpty) return false;
-      // (Ici vous pouvez remettre votre logique de validation complÃƒÂ¨te prÃƒÂ©sente dans votre code original)
-      // Pour l'UI, on simplifie : s'il a sÃƒÂ©lectionnÃƒÂ© quelque chose, le bouton s'active, le backend vÃƒÂ©rifiera.
+      // (Ici vous pouvez remettre votre logique de validation complète présente dans votre code original)
+      // Pour l'UI, on simplifie : s'il a sélectionné quelque chose, le bouton s'active, le backend vérifiera.
       return true;
     }
 
     return Column(
       children: [
-        // 1. Info & RÃƒÂ©volution
+        // 1. Info & Révolution
         Container(
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           decoration: BoxDecoration(
@@ -41759,7 +43335,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                     child: Center(
                       child: Text(
-                        "Vide",
+                        GameUiLocalization.tr(context, "Vide"),
                         style: TextStyle(color: Colors.white24),
                       ),
                     ),
@@ -41784,10 +43360,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
         Spacer(),
 
-        // 4. MAIN DU JOUEUR (Ãƒâ€°VENTAIL + SÃƒâ€°LECTION)
+        // 4. MAIN DU JOUEUR (ÉVENTAIL + SÉLECTION)
         if (finishedPlayers.contains(playerId))
           Text(
-            "Vous avez fini !",
+            GameUiLocalization.tr(context, "Vous avez fini !"),
             style: TextStyle(fontSize: 24, color: Colors.amber),
           )
         else
@@ -41801,9 +43377,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 if (_selectedPresidentCards.contains(card)) {
                   _selectedPresidentCards.remove(card);
                 } else {
-                  // Logique : si on clique sur un autre rang, on change la sÃƒÂ©lection
+                  // Logique : si on clique sur un autre rang, on change la sélection
                   if (_selectedPresidentCards.isNotEmpty) {
-                    // On rÃƒÂ©cupÃƒÂ¨re le rang de la premiÃƒÂ¨re carte sÃƒÂ©lectionnÃƒÂ©e
+                    // On récupère le rang de la première carte sélectionnée
                     String currentRank = _selectedPresidentCards.first
                         .substring(0, _selectedPresidentCards.first.length - 1);
                     String newRank = card.substring(0, card.length - 1);
@@ -41827,7 +43403,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             children: [
               ElevatedButton.icon(
                 icon: Icon(Icons.skip_next),
-                label: Text("Passer"),
+                label: Text(GameUiLocalization.tr(context, "Passer")),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey[700],
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -41850,7 +43426,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               ElevatedButton.icon(
                 icon: Icon(Icons.play_arrow),
-                label: Text("JOUER (${_selectedPresidentCards.length})"),
+                label: Text(
+                  GameUiLocalization.tr(context, "presidentPlayCards", {
+                    'count': '${_selectedPresidentCards.length}',
+                  }),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[700],
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -41882,7 +43462,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               .catchError((e) {
                                 if (mounted)
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("Coup invalide !")),
+                                    SnackBar(
+                                      content: Text(
+                                        GameUiLocalization.tr(
+                                          context,
+                                          "Coup invalide !",
+                                        ),
+                                      ),
+                                    ),
                                   );
                               })
                               .whenComplete(() {
@@ -41895,7 +43482,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ],
           )
         else
-          SizedBox(height: 50), // Espace rÃƒÂ©servÃƒÂ©
+          SizedBox(height: 50), // Espace réservé
       ],
     );
   }
@@ -42327,8 +43914,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    "ANNONCER UN DÉFI",
+                  Text(
+                    GameUiLocalization.tr(context, "ANNONCER UN DÉFI"),
                     style: TextStyle(
                       letterSpacing: 2,
                       fontSize: 13,
@@ -42338,7 +43925,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    "Combien de cartes pensez-vous retourner sans trouver de Crâne ?",
+                    GameUiLocalization.tr(
+                      context,
+                      "Combien de cartes pensez-vous retourner sans trouver de Crâne ?",
+                    ),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.7),
@@ -42413,7 +44003,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    "Maximum possible : $maximumBid cartes",
+                    "${GameUiLocalization.tr(context, "Maximum possible")} : $maximumBid ${GameUiLocalization.tr(context, "cartes")}",
                     style: const TextStyle(color: Colors.white38, fontSize: 11),
                   ),
                   const SizedBox(height: 28),
@@ -42423,7 +44013,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.flash_on_rounded, size: 20),
                       label: Text(
-                        "LANCER LE DÉFI ($selectedBid)",
+                        "${GameUiLocalization.tr(context, "LANCER LE DÉFI")} ($selectedBid)",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -42467,7 +44057,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         gameTitle: "Skull",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Deux défis réussis !",
+        reason:
+            gameData['gameEndReason'] ??
+            GameUiLocalization.tr(context, "Deux défis réussis !"),
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -42562,8 +44154,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       children: [
                         Text(
                           roundState == 'bidding'
-                              ? "ENCHÈRE : $currentBid / $totalCardsOnTables"
-                              : "PHASE DE POSE",
+                              ? "${GameUiLocalization.tr(context, "ENCHÈRE")} : $currentBid / $totalCardsOnTables"
+                              : GameUiLocalization.tr(context, "PHASE DE POSE"),
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w900,
@@ -42576,8 +44168,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         Text(
                           isMyTurn
-                              ? "C'est à votre tour !"
-                              : "Tour de ${players[currentPlayerId]?['name'] ?? '...'}",
+                              ? GameUiLocalization.tr(
+                                context,
+                                "C'est à votre tour !",
+                              )
+                              : "${GameUiLocalization.tr(context, "Tour de")} ${players[currentPlayerId]?['name'] ?? '...'}",
                           style: TextStyle(
                             fontSize: 11,
                             color:
@@ -42629,7 +44224,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 final liveAmount = raw['amount'] as int?;
                 if (bidderId == null || liveAmount == null || liveAmount <= 0)
                   return const SizedBox.shrink();
-                final bidderName = players[bidderId]?['name'] ?? 'Un joueur';
+                final bidderName =
+                    players[bidderId]?['name'] ??
+                    GameUiLocalization.tr(context, "Un joueur");
                 return Container(
                   margin: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -42656,7 +44253,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        "$bidderName réfléchit à un défi de $liveAmount cartes...",
+                        "$bidderName ${GameUiLocalization.tr(context, "réfléchit à un défi de")} $liveAmount ${GameUiLocalization.tr(context, "cartes")}...",
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,
@@ -42748,7 +44345,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
-                                    isMe ? "Moi ($name)" : name,
+                                    isMe
+                                        ? "${GameUiLocalization.tr(context, "Moi")} ($name)"
+                                        : name,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
@@ -42788,16 +44387,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               alignment: Alignment.center,
                               child:
                                   isOut
-                                      ? const Text(
-                                        "Éliminé",
+                                      ? Text(
+                                        GameUiLocalization.tr(
+                                          context,
+                                          "Éliminé",
+                                        ),
                                         style: TextStyle(
                                           color: Colors.redAccent,
                                           fontSize: 11,
                                         ),
                                       )
                                       : hiddenCount == 0
-                                      ? const Text(
-                                        "Tapis vide",
+                                      ? Text(
+                                        GameUiLocalization.tr(
+                                          context,
+                                          "Tapis vide",
+                                        ),
                                         style: TextStyle(
                                           color: Colors.white24,
                                           fontSize: 11,
@@ -42859,12 +44464,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       ),
                             ),
                             if (hasPassed && !isOut)
-                              const Center(
+                              Center(
                                 child: Padding(
-                                  padding: EdgeInsets.only(top: 4.0),
+                                  padding: const EdgeInsets.only(top: 4.0),
                                   child: Text(
-                                    "A PASSÉ",
-                                    style: TextStyle(
+                                    GameUiLocalization.tr(context, "A PASSÉ"),
+                                    style: const TextStyle(
                                       fontSize: 9,
                                       color: Colors.redAccent,
                                       fontWeight: FontWeight.bold,
@@ -42907,7 +44512,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "VOTRE MAIN (${myHand.length} cartes)",
+                        "${GameUiLocalization.tr(context, "VOTRE MAIN")} (${myHand.length} ${GameUiLocalization.tr(context, "cartes")})",
                         style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -42918,8 +44523,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       if (isMyTurn)
                         Text(
                           roundState == 'placing'
-                              ? "Touchez pour poser"
-                              : "Enchérissez ou passez",
+                              ? GameUiLocalization.tr(
+                                context,
+                                "Touchez pour poser",
+                              )
+                              : GameUiLocalization.tr(
+                                context,
+                                "Enchérissez ou passez",
+                              ),
                           style: const TextStyle(
                             fontSize: 11,
                             color: Colors.amberAccent,
@@ -42936,7 +44547,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       children: [
                         _buildSkullDiscCard(
                           type: 'Rose',
-                          label: "ROSE",
+                          label: GameUiLocalization.tr(context, "ROSE"),
                           icon: Icons.filter_vintage_rounded,
                           color: const Color(0xFFF472B6), // Rose doux
                           count: myHand.where((c) => c == 'Rose').length,
@@ -42959,7 +44570,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         const SizedBox(width: 16),
                         _buildSkullDiscCard(
                           type: 'Crane',
-                          label: "CRÂNE",
+                          label: GameUiLocalization.tr(context, "CRÂNE"),
                           icon: Icons.coronavirus_rounded,
                           color: const Color(0xFFEF4444), // Rouge crâne
                           count: myHand.where((c) => c == 'Crane').length,
@@ -42988,7 +44599,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         height: 48,
                         child: OutlinedButton.icon(
                           icon: const Icon(Icons.flash_on_rounded, size: 18),
-                          label: const Text("LANCER LE DÉFI (ENCHÈRE)"),
+                          label: Text(
+                            GameUiLocalization.tr(
+                              context,
+                              "LANCER LE DÉFI (ENCHÈRE)",
+                            ),
+                          ),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.amberAccent,
                             side: const BorderSide(
@@ -43028,7 +44644,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               height: 50,
                               child: OutlinedButton.icon(
                                 icon: const Icon(Icons.close_rounded),
-                                label: const Text("PASSER"),
+                                label: Text(
+                                  GameUiLocalization.tr(context, "PASSER"),
+                                ),
                                 style: OutlinedButton.styleFrom(
                                   foregroundColor: Colors.redAccent,
                                   side: const BorderSide(
@@ -43060,7 +44678,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               height: 50,
                               child: ElevatedButton.icon(
                                 icon: const Icon(Icons.trending_up_rounded),
-                                label: const Text("SURENCHÉRIR"),
+                                label: Text(
+                                  GameUiLocalization.tr(context, "SURENCHÉRIR"),
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.amber[700],
                                   foregroundColor: Colors.black,
@@ -43108,8 +44728,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       Container(
                         padding: const EdgeInsets.all(12),
                         alignment: Alignment.center,
-                        child: const Text(
-                          "En attente de la décision du joueur en cours...",
+                        child: Text(
+                          GameUiLocalization.tr(
+                            context,
+                            "En attente de la décision du joueur en cours...",
+                          ),
                           style: TextStyle(
                             color: Colors.white54,
                             fontStyle: FontStyle.italic,
@@ -43259,7 +44882,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final bool drawingBlocked =
         pictionaryOnly30Strokes && _pictionaryStrokeCount >= 30;
     final String drawerName =
-        players[currentDrawingPlayerId]?['name'] ?? 'Quelqu\'un';
+        players[currentDrawingPlayerId]?['name'] ??
+        GameUiLocalization.tr(context, "Quelqu'un");
 
     if (roundState == 'result') {
       return _buildResultUI(context, gameData, playerId);
@@ -43272,8 +44896,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Container(
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              'Mot à dessiner : ${currentPictionaryWord ?? "..."}',
-              style: TextStyle(
+              '${GameUiLocalization.tr(context, "Mot à dessiner")} : ${currentPictionaryWord != null ? GameUiLocalization.tr(context, currentPictionaryWord) : "..."}',
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.amberAccent,
@@ -43294,7 +44918,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               border: Border.all(
                 color: Colors.grey[400]!,
                 width: 8,
-              ), // Cadre ÃƒÂ©pais style tableau
+              ), // Cadre épais style tableau
               boxShadow: [
                 BoxShadow(
                   color: Colors.black45,
@@ -43432,7 +45056,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   ),
                                 ),
                               ))
-                          // Utilisation de Realtime Database pour ÃƒÂ©viter le spam de StreamBuilder Firestore
+                          // Utilisation de Realtime Database pour éviter le spam de StreamBuilder Firestore
                           : StreamBuilder<DatabaseEvent>(
                             stream:
                                 FirebaseDatabase.instance
@@ -43465,7 +45089,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       color: Colors.grey[300],
                                     ),
                                     Text(
-                                      "En attente du dessin...",
+                                      GameUiLocalization.tr(
+                                        context,
+                                        "En attente du dessin...",
+                                      ),
                                       style: TextStyle(color: Colors.grey[400]),
                                     ),
                                   ],
@@ -43496,7 +45123,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         if (pictionaryOnly30Strokes && amIDrawingPlayer) ...[
                           SizedBox(width: 8),
                           Text(
-                            "$_pictionaryStrokeCount/30 traits",
+                            "$_pictionaryStrokeCount/30 ${GameUiLocalization.tr(context, "traits")}",
                             style: TextStyle(
                               color:
                                   drawingBlocked ? Colors.red : Colors.black54,
@@ -43546,7 +45173,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               Expanded(
                 child: Builder(
                   builder: (context) {
-                    // Utilisation du Provider pour avoir les mises ÃƒÂ  jour en temps rÃƒÂ©el
+                    // Utilisation du Provider pour avoir les mises à jour en temps réel
                     final gameDataFromProvider =
                         Provider.of<DocumentSnapshot>(
                               context,
@@ -43588,7 +45215,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               guessData['guesserName'] ?? '...',
                               style: TextStyle(fontSize: 10),
                             ),
-                            // Bouton pour valider la bonne rÃƒÂ©ponse (seulement pour le dessinateur)
+                            // Bouton pour valider la bonne réponse (seulement pour le dessinateur)
                             trailing:
                                 amIDrawingPlayer
                                     ? ElevatedButton(
@@ -43643,7 +45270,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final int totalScore = gameData['justOneTotalScore'] ?? 0;
 
     bool amIGuesser = playerId == justOneGuesserId;
-    String guesserName = players[justOneGuesserId]?['name'] ?? 'Quelqu\'un';
+    String guesserName =
+        players[justOneGuesserId]?['name'] ??
+        GameUiLocalization.tr(context, "Quelqu'un");
 
     // Reset flag si nouveau tour (indice pas encore soumis)
     if (roundState == 'clue_giving' && !justOneClues.containsKey(playerId)) {
@@ -43654,14 +45283,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     if (gameData['gameState'] == 'gameOver') {
       String rating =
           totalScore >= 12
-              ? 'Ã°Å¸Ââ€  LÃƒÂ©gendaire !'
+              ? '🏆 ${GameUiLocalization.tr(context, "Légendaire !")}'
               : totalScore >= 10
-              ? 'Ã¢Â­Â Excellent !'
+              ? '⭐ ${GameUiLocalization.tr(context, "Excellent !")}'
               : totalScore >= 7
-              ? 'Ã°Å¸â€˜Â Bien jouÃƒÂ© !'
+              ? '👍 ${GameUiLocalization.tr(context, "Bien joué !")}'
               : totalScore >= 4
-              ? 'Ã°Å¸Ëœâ€¦ Pas mal !'
-              : 'Ã°Å¸â€™Âª On peut mieux faire !';
+              ? '😅 ${GameUiLocalization.tr(context, "Pas mal !")}'
+              : '💪 ${GameUiLocalization.tr(context, "On peut mieux faire !")}';
       bool isHost = gameData['hostId'] == playerId;
       return Center(
         child: Card(
@@ -43671,13 +45300,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Partie terminÃƒÂ©e !",
+                  GameUiLocalization.tr(context, "Partie terminée !"),
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 16),
                 Text(
-                  "Score collectif",
+                  GameUiLocalization.tr(context, "Score collectif"),
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
@@ -43712,7 +45341,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       setState(() => _isActionPending = false);
                                   });
                             },
-                    child: Text("Retour au salon"),
+                    child: Text(
+                      GameUiLocalization.tr(context, "Retour au salon"),
+                    ),
                   ),
               ],
             ),
@@ -43721,7 +45352,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
     }
 
-    // RÃƒÂ©sultat du tour
+    // Résultat du tour
     if (roundState == 'result') {
       final String answer = gameData['justOneGuesserAnswer'] ?? '';
       final bool wasCorrect =
@@ -43736,12 +45367,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Carte $deckIndex / $deckTotal",
+                  "${GameUiLocalization.tr(context, "Carte")} $deckIndex / $deckTotal",
                   style: TextStyle(color: Colors.white54, fontSize: 14),
                 ),
                 SizedBox(height: 12),
                 Text(
-                  wasCorrect ? "Ã¢Å“â€¦ Bravo !" : "Ã¢ÂÅ’ RatÃƒÂ© !",
+                  wasCorrect
+                      ? "✅ ${GameUiLocalization.tr(context, 'Bravo !')}"
+                      : "❌ ${GameUiLocalization.tr(context, 'Raté !')}",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -43751,14 +45384,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "Le mot ÃƒÂ©tait : ${justOneCurrentWord ?? ''}",
+                  "${GameUiLocalization.tr(context, "Le mot était :")} ${justOneCurrentWord ?? ''}",
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
                 if (answer.isNotEmpty)
                   Text(
-                    "RÃƒÂ©ponse de $guesserName : \"$answer\"",
-                    style: TextStyle(color: Colors.white70),
+                    "${GameUiLocalization.tr(context, "Réponse de")} $guesserName : \"$answer\"",
+                    style: const TextStyle(color: Colors.white70),
                     textAlign: TextAlign.center,
                   ),
                 SizedBox(height: 16),
@@ -43769,7 +45402,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    "Score : $totalScore / $deckIndex",
+                    "${GameUiLocalization.tr(context, "Score")} : $totalScore / $deckIndex",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -43797,14 +45430,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ? CircularProgressIndicator(color: Colors.white)
                             : Text(
                               deckIndex >= deckTotal
-                                  ? "Voir le score final"
-                                  : "Carte suivante Ã¢â€ â€™",
+                                  ? GameUiLocalization.tr(
+                                    context,
+                                    "Voir le score final",
+                                  )
+                                  : "${GameUiLocalization.tr(context, "Carte suivante")} →",
                             ),
                   ),
                 if (!isHost)
                   Text(
-                    "En attente de l'hÃƒÂ´te pour la suite...",
-                    style: TextStyle(color: Colors.white54),
+                    GameUiLocalization.tr(
+                      context,
+                      "En attente de l'hôte pour la suite...",
+                    ),
+                    style: const TextStyle(color: Colors.white54),
                   ),
               ],
             ),
@@ -43814,14 +45453,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     switch (roundState) {
-      // --- PHASE 2 : LES AUTRES Ãƒâ€°CRIVENT LES INDICES ---
+      // --- PHASE 2 : LES AUTRES ÉCRIVENT LES INDICES ---
       case 'clue_giving':
         if (amIGuesser) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Chut ! Ferme les yeux Ã°Å¸â„¢Ë†",
+                "🤫 ${GameUiLocalization.tr(context, 'Chut ! Ferme les yeux')} 🙈",
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               SizedBox(height: 8),
@@ -43831,12 +45470,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               SizedBox(height: 20),
               Text(
-                "Les autres ÃƒÂ©crivent des indices pour toi...",
+                "Les autres écrivent des indices pour toi...",
                 style: TextStyle(fontSize: 16, color: Colors.white70),
               ),
               SizedBox(height: 30),
               _buildWaitingWidget(
-                "Indices soumis : ${justOneClues.length} / ${players.length - 1}",
+                "${GameUiLocalization.tr(context, "Indices soumis")} : ${justOneClues.length} / ${players.length - 1}",
                 players,
                 justOneClues.length,
                 players.length - 1,
@@ -43844,10 +45483,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ],
           );
         } else {
-          // Si j'ai dÃƒÂ©jÃƒÂ  soumis
+          // Si j'ai déjà soumis
           if (justOneClues.containsKey(playerId) || _justOneHasSubmittedClue) {
             return _buildWaitingWidget(
-              "Indice envoyÃƒÂ© ! En attente des autres...",
+              GameUiLocalization.tr(
+                context,
+                "Indice envoyé ! En attente des autres...",
+              ),
               players,
               justOneClues.length,
               players.length - 1,
@@ -43857,12 +45499,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Carte $deckIndex / $deckTotal Ã¢â‚¬â€ Score : $totalScore",
+                "${GameUiLocalization.tr(context, 'Carte')} $deckIndex / $deckTotal — ${GameUiLocalization.tr(context, 'Score')} : $totalScore",
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 8),
               Text(
-                "Faites deviner le mot :",
+                GameUiLocalization.tr(context, "Faites deviner le mot :"),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
@@ -43884,7 +45526,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               TextField(
                 controller: _justOneClueController,
                 decoration: InputDecoration(
-                  labelText: "Ton indice (UN SEUL mot)",
+                  labelText: GameUiLocalization.tr(
+                    context,
+                    "Ton indice (UN SEUL mot)",
+                  ),
                 ),
                 onChanged:
                     (val) =>
@@ -43904,7 +45549,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               1) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text("Un seul mot autorisÃƒÂ© !"),
+                                content: Text(
+                                  GameUiLocalization.tr(
+                                    context,
+                                    "Un seul mot autorisé !",
+                                  ),
+                                ),
                               ),
                             );
                             return;
@@ -43931,7 +45581,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 child:
                     _isActionPending
                         ? CircularProgressIndicator(color: Colors.white)
-                        : Text("Envoyer l'indice"),
+                        : Text(
+                          GameUiLocalization.tr(context, "Envoyer l'indice"),
+                        ),
               ),
             ],
           );
@@ -43950,13 +45602,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "Le mot est : ${justOneCurrentWord}",
+                  "${GameUiLocalization.tr(context, "Le mot est :")} ${justOneCurrentWord}",
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "Indices montrÃƒÂ©s ÃƒÂ  $guesserName :",
-                  style: TextStyle(color: Colors.white70),
+                  "${GameUiLocalization.tr(context, "Indices montrés à")} $guesserName :",
+                  style: const TextStyle(color: Colors.white70),
                 ),
                 SizedBox(height: 20),
                 Wrap(
@@ -43969,8 +45621,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 SizedBox(height: 20),
                 if (justOneFilteredClues.isEmpty)
                   Text(
-                    "Tous les indices ont ÃƒÂ©tÃƒÂ© annulÃƒÂ©s !",
-                    style: TextStyle(color: Colors.red),
+                    GameUiLocalization.tr(
+                      context,
+                      "Tous les indices ont été annulés !",
+                    ),
+                    style: const TextStyle(color: Colors.red),
                   ),
               ],
             ),
@@ -43980,12 +45635,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           return Column(
             children: [
               Text(
-                "Carte $deckIndex / $deckTotal Ã¢â‚¬â€ Score : $totalScore",
+                "${GameUiLocalization.tr(context, 'Carte')} $deckIndex / $deckTotal — ${GameUiLocalization.tr(context, 'Score')} : $totalScore",
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 8),
               Text(
-                "Voici tes indices !",
+                GameUiLocalization.tr(context, "Voici tes indices !"),
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               SizedBox(height: 20),
@@ -43998,8 +45653,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    "AÃƒÂ¯e ! Tous les indices ÃƒÂ©taient identiques ou invalides. Ils ont ÃƒÂ©tÃƒÂ© effacÃƒÂ©s !",
-                    style: TextStyle(color: Colors.white),
+                    GameUiLocalization.tr(
+                      context,
+                      "Aïe ! Tous les indices étaient identiques ou invalides. Ils ont été effacés !",
+                    ),
+                    style: const TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -44016,7 +45674,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
               TextField(
                 controller: _justOneGuessController,
-                decoration: InputDecoration(labelText: "Ta proposition..."),
+                decoration: InputDecoration(
+                  labelText: GameUiLocalization.tr(
+                    context,
+                    "Ta proposition...",
+                  ),
+                ),
                 onChanged: (val) => setState(() {}),
               ),
               SizedBox(height: 10),
@@ -44042,7 +45705,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 child:
                     _isActionPending
                         ? CircularProgressIndicator(color: Colors.white)
-                        : Text("Je valide !"),
+                        : Text(GameUiLocalization.tr(context, "Je valide !")),
               ),
               SizedBox(height: 20),
             ],
@@ -44068,7 +45731,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     // Handle gameOver for Categories
     if (gameData['gameState'] == 'gameOver') {
       final String gameEndReason =
-          gameData['gameEndReason'] ?? 'Partie terminÃƒÂ©e !';
+          gameData['gameEndReason'] ??
+          GameUiLocalization.tr(context, "Partie terminée !");
       List<MapEntry<String, int>> sortedScores = [];
       players.forEach((id, data) {
         sortedScores.add(
@@ -44084,19 +45748,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Partie TerminÃƒÂ©e !",
+                  "Partie Terminée !",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  gameEndReason,
+                  GameMessageLocalization.tr(context, gameEndReason),
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Colors.amberAccent,
                   ),
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "Classement final",
+                  GameUiLocalization.tr(context, "Classement final"),
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(height: 8),
@@ -44119,7 +45783,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       () => Navigator.of(
                         context,
                       ).popUntil((route) => route.isFirst),
-                  child: Text("Retour ÃƒÂ  l'accueil"),
+                  child: Text("Retour à l'accueil"),
                 ),
               ],
             ),
@@ -44137,7 +45801,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       secondsLeft = max(0, duration - elapsed);
     }
 
-    final String category = gameData['hotPotatoCategory'] ?? "CatÃƒÂ©gorie";
+    final String category = gameData['hotPotatoCategory'] ?? "Catégorie";
     final List<String> usedAnswers = List<String>.from(
       gameData['hotPotatoUsedAnswers'] ?? [],
     );
@@ -44177,7 +45841,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Manche $currentRound",
+                "${GameUiLocalization.tr(context, "Manche")} $currentRound",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
               Row(
@@ -44219,8 +45883,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             children: [
               Text(
                 isMyTurn
-                    ? "C'EST Ãƒâ‚¬ TOI !"
-                    : "Au tour de $currentPotatoPlayerName",
+                    ? GameUiLocalization.tr(context, "C'EST À TOI !")
+                    : "${GameUiLocalization.tr(context, "Au tour de")} $currentPotatoPlayerName",
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: isMyTurn ? Colors.redAccent : Colors.white,
@@ -44272,7 +45936,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
         SizedBox(height: 30),
 
-        // Carte de la catÃƒÂ©gorie
+        // Carte de la catégorie
         Card(
           elevation: 8,
           shape: RoundedRectangleBorder(
@@ -44290,8 +45954,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: Column(
               children: [
                 Text(
-                  "CatÃƒÂ©gorie",
-                  style: TextStyle(color: Colors.white70, letterSpacing: 2),
+                  GameUiLocalization.tr(context, "Catégorie"),
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    letterSpacing: 2,
+                  ),
                 ),
                 SizedBox(height: 10),
                 Text(
@@ -44317,7 +45984,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 controller: _answerController,
                 autofocus: true,
                 decoration: InputDecoration(
-                  labelText: "Vite ! Un mot !",
+                  labelText: GameUiLocalization.tr(context, "Vite ! Un mot !"),
                   filled: true,
                   fillColor: Colors.white,
                   labelStyle: TextStyle(color: Colors.black54),
@@ -44331,7 +45998,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               SizedBox(height: 15),
               ElevatedButton.icon(
                 icon: Icon(Icons.send),
-                label: Text("VALIDER & PASSER"),
+                label: Text(GameUiLocalization.tr(context, "VALIDER & PASSER")),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.redAccent,
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
@@ -44349,8 +46016,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "PrÃƒÂ©pare ta rÃƒÂ©ponse pendant que les autres paniquent...",
-              style: TextStyle(
+              GameUiLocalization.tr(
+                context,
+                "Prépare ta réponse pendant que les autres paniquent...",
+              ),
+              style: const TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white38,
               ),
@@ -44405,7 +46075,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       _answerController.clear();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString().replaceAll('Exception: ', ''))),
+        SnackBar(
+          content: Text(
+            GameMessageLocalization.tr(
+              context,
+              e.toString().replaceAll('Exception: ', ''),
+            ),
+          ),
+        ),
       );
     } finally {
       if (mounted) setState(() => _isActionPending = false);
@@ -44423,7 +46100,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final String? loserId = gameData['roundWinnerId'];
     final String loserName = players[loserId]?['name'] ?? 'Inconnu';
     final String gameEndReason =
-        gameData['gameEndReason'] ?? "La patate a explosÃƒÂ© !";
+        gameData['gameEndReason'] ??
+        GameUiLocalization.tr(context, "La patate a explosé !");
     final isHost = gameData['hostId'] == playerId;
     final String gameType = gameData['gameType'] ?? '';
     final bool isCategories = gameType == 'Le Jeu des Catégories';
@@ -44461,16 +46139,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ),
         SizedBox(height: 20),
         Text(
-          "$loserName a perdu !",
+          "$loserName ${GameUiLocalization.tr(context, "a perdu !")}",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 10),
-        Text(gameEndReason, style: Theme.of(context).textTheme.bodyMedium),
+        Text(
+          GameMessageLocalization.tr(context, gameEndReason),
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
         if (isCategories) ...[
           SizedBox(height: 20),
           Text(
-            "Scores (moins = mieux)",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            GameUiLocalization.tr(context, "Scores (moins = mieux)"),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           SizedBox(height: 8),
           ...sortedScores.map(
@@ -44505,12 +46186,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         strokeWidth: 2,
                       ),
                     )
-                    : Text("Nouvelle Manche"),
+                    : Text(GameUiLocalization.tr(context, "Nouvelle Manche")),
           )
         else
           Text(
-            "En attente de l'hÃƒÂ´te pour la prochaine manche...",
-            style: TextStyle(
+            GameUiLocalization.tr(
+              context,
+              "En attente de l'hôte pour la prochaine manche...",
+            ),
+            style: const TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
             ),
@@ -44532,7 +46216,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       for (int i = logs.length - 1; i >= 0; i--) {
         String log = logs[i].toString();
         morningLogs.insert(0, log);
-        if (log.contains("Le soleil se lÃ¨ve")) break;
+        if (log.contains("Le soleil se lève")) break;
       }
       return morningLogs.join("\n\n");
     } else if (phase == 'jour_vote') {
@@ -44570,7 +46254,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         winnerName: winnerText,
         reason:
             gameLog.isNotEmpty
-                ? gameLog.last.toString()
+                ? GameMessageLocalization.tr(context, gameLog.last.toString())
                 : (gameData['gameEndReason'] ?? "Fin du jeu"),
         players: players,
         gameData: gameData,
@@ -45206,7 +46890,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            gameLog.isNotEmpty ? gameLog.last.toString() : "Fin du jeu",
+            gameLog.isNotEmpty
+                ? GameMessageLocalization.tr(context, gameLog.last.toString())
+                : "Fin du jeu",
             style: const TextStyle(
               color: Colors.white,
               fontSize: 13,
@@ -45960,12 +47646,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
-  // --- MISE Ã€ JOUR DE L'AVATAR POUR LE RENDRE INTERACTIF ---
+  // --- MISE À JOUR DE L'AVATAR POUR LE RENDRE INTERACTIF ---
 
   Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) {
     if (startTime == null) return const SizedBox.shrink();
 
-    // TweenAnimationBuilder permet un chrono visuel super fluide sans Timer bloquant et setState manuel, ce qui allÃƒÂ¨ge grandement le thread (Point 4)
+    // TweenAnimationBuilder permet un chrono visuel super fluide sans Timer bloquant et setState manuel, ce qui allège grandement le thread (Point 4)
     final endTime = startTime.toDate().add(
       Duration(seconds: durationInSeconds),
     );
@@ -46094,9 +47780,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       Text(
                         isMyTurn
                             ? (hasRolled
-                                ? "DÉPLACEZ UN CHEVAL !"
-                                : "À VOUS DE LANCER !")
-                            : "TOUR DE ${players[currentPlayerId]?['name'] ?? ''}",
+                                ? GameUiLocalization.tr(
+                                  context,
+                                  'DÉPLACEZ UN CHEVAL !',
+                                )
+                                : GameUiLocalization.tr(
+                                  context,
+                                  'À VOUS DE LANCER !',
+                                ))
+                            : "${GameUiLocalization.tr(context, 'TOUR DE ')}${players[currentPlayerId]?['name'] ?? ''}",
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -46105,7 +47797,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                       ),
                       Text(
-                        isTeamMode ? "Mode 2v2 Alliés" : "Course individuelle",
+                        isTeamMode
+                            ? GameUiLocalization.tr(context, 'Mode 2v2 Alliés')
+                            : GameUiLocalization.tr(
+                              context,
+                              'Course individuelle',
+                            ),
                         style: const TextStyle(
                           fontSize: 10,
                           color: Colors.white38,
@@ -46137,7 +47834,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                       const SizedBox(width: 2),
                       Text(
-                        "6 consécutifs : $mySixStreak/3",
+                        GameUiLocalization.tr(
+                          context,
+                          '6 consécutifs : {streak}/3',
+                          {'streak': '$mySixStreak'},
+                        ),
                         style: const TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
@@ -46375,7 +48076,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   if (isMyTurn && !hasRolled)
                     ElevatedButton.icon(
                       icon: const Icon(Icons.casino_rounded, size: 20),
-                      label: const Text("LANCER LE DÉ"),
+                      label: Text(
+                        GameUiLocalization.tr(context, 'LANCER LE DÉ'),
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurpleAccent,
                         foregroundColor: Colors.white,
@@ -46409,8 +48112,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       children: [
                         Text(
                           _selectedLudoPawnIdx != null
-                              ? "Cheval ${_selectedLudoPawnIdx! + 1} sélectionné !\nTouchez pour avancer"
-                              : "Touchez un pion",
+                              ? GameUiLocalization.tr(
+                                context,
+                                'Cheval {pawn} sélectionné !\nTouchez pour avancer',
+                                {'pawn': '${_selectedLudoPawnIdx! + 1}'},
+                              )
+                              : GameUiLocalization.tr(
+                                context,
+                                'Touchez un pion',
+                              ),
                           style: TextStyle(
                             color:
                                 _selectedLudoPawnIdx != null
@@ -46423,7 +48133,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         const SizedBox(width: 12),
                         OutlinedButton.icon(
                           icon: const Icon(Icons.skip_next_rounded, size: 16),
-                          label: const Text("Passer"),
+                          label: Text(GameUiLocalization.tr(context, 'Passer')),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.white60,
                             side: const BorderSide(color: Colors.white24),
@@ -46467,7 +48177,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          "${players[currentPlayerId]?['name'] ?? 'Un joueur'} réfléchit...",
+                          GameUiLocalization.tr(
+                            context,
+                            '{name} réfléchit...',
+                            {
+                              'name':
+                                  players[currentPlayerId]?['name'] ??
+                                  GameUiLocalization.tr(context, 'Un joueur'),
+                            },
+                          ),
                           style: const TextStyle(
                             color: Colors.white54,
                             fontSize: 12,
@@ -46533,61 +48251,68 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       final oppName = players[pId]?['name'] ?? pId;
       final oppScore = scores[pId] ?? 0;
       final oppHand = List<String>.from(hands[pId] ?? []);
-      
+
       showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
-        builder: (ctx) => Container(
-          padding: const EdgeInsets.all(24),
-          decoration: const BoxDecoration(
-            color: Color(0xFF1E1E2C),
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                oppName,
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+        builder:
+            (ctx) => Container(
+              padding: const EdgeInsets.all(24),
+              decoration: const BoxDecoration(
+                color: Color(0xFF1E1E2C),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
               ),
-              const SizedBox(height: 10),
-              Text(
-                "Score : $oppScore points",
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.amberAccent,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                "Dominos restants : ${oppHand.length}",
-                style: const TextStyle(color: Colors.white70),
-              ),
-              const SizedBox(height: 20),
-              Wrap(
-                spacing: 4,
-                runSpacing: 4,
-                alignment: WrapAlignment.center,
-                children: List.generate(
-                  oppHand.length,
-                  (_) => Container(
-                    width: 16,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      color: Colors.white24,
-                      borderRadius: BorderRadius.circular(4),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    oppName,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
-                ),
+                  const SizedBox(height: 10),
+                  Text(
+                    GameUiLocalization.tr(context, 'Score : {score} points', {
+                      'score': '$oppScore',
+                    }),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.amberAccent,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    GameUiLocalization.tr(
+                      context,
+                      'Dominos restants : {count}',
+                      {'count': '${oppHand.length}'},
+                    ),
+                    style: const TextStyle(color: Colors.white70),
+                  ),
+                  const SizedBox(height: 20),
+                  Wrap(
+                    spacing: 4,
+                    runSpacing: 4,
+                    alignment: WrapAlignment.center,
+                    children: List.generate(
+                      oppHand.length,
+                      (_) => Container(
+                        width: 16,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color: Colors.white24,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
-              const SizedBox(height: 20),
-            ],
-          ),
-        ),
+            ),
       );
     }
 
@@ -46624,7 +48349,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       if (!isMyTurn || roundOver) return;
       if (!canPlayTile(tile)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Impossible de jouer ce domino ici.")),
+          SnackBar(
+            content: Text(
+              GameUiLocalization.tr(
+                context,
+                'Impossible de jouer ce domino ici.',
+              ),
+            ),
+          ),
         );
         return;
       }
@@ -46637,7 +48369,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       final p = tile.split('-');
       final a = int.parse(p[0]);
       final b = int.parse(p[1]);
-      final validEnds = openEnds.where((e) => e == a || e == b).toSet().toList();
+      final validEnds =
+          openEnds.where((e) => e == a || e == b).toSet().toList();
 
       if (validEnds.length == 1) {
         _playTile(tile, validEnds.first);
@@ -46658,9 +48391,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Manche terminée ! ",
-                  style: TextStyle(
+                Text(
+                  GameUiLocalization.tr(context, 'Manche terminée ! '),
+                  style: const TextStyle(
                     color: Colors.amberAccent,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -46677,12 +48410,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         () => _firebaseService.startNextDominoesRound(
                           widget.gameCode,
                         ),
-                    child: const Text("Manche Suivante"),
+                    child: Text(
+                      GameUiLocalization.tr(context, 'Manche Suivante'),
+                    ),
                   )
                 else
-                  const Text(
-                    "En attente de l'hôte...",
-                    style: TextStyle(color: Colors.white70, fontSize: 13),
+                  Text(
+                    GameUiLocalization.tr(context, "En attente de l'hôte..."),
+                    style: const TextStyle(color: Colors.white70, fontSize: 13),
                   ),
               ],
             ),
@@ -46708,7 +48443,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     playerOrder.map((pId) {
                       final isActive = pId == currentPlayerId;
                       return GestureDetector(
-                        onTap: () => pId != playerId ? _showOpponentSheet(pId) : null,
+                        onTap:
+                            () =>
+                                pId != playerId
+                                    ? _showOpponentSheet(pId)
+                                    : null,
                         child: Container(
                           margin: const EdgeInsets.only(left: 8),
                           padding: const EdgeInsets.symmetric(
@@ -46780,9 +48519,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           color: Colors.black.withOpacity(0.2),
           child: Row(
             children: [
-              const Text(
-                "Extrémités : ",
-                style: TextStyle(color: Colors.white38, fontSize: 11),
+              Text(
+                GameUiLocalization.tr(context, 'Extrémités : '),
+                style: const TextStyle(color: Colors.white38, fontSize: 11),
               ),
               if (openEnds.isEmpty)
                 const Text(
@@ -46826,7 +48565,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    'pioche : ${boneyard.length}',
+                    GameUiLocalization.tr(context, 'pioche : {count}', {
+                      'count': '${boneyard.length}',
+                    }),
                     style: const TextStyle(color: Colors.white38, fontSize: 11),
                   ),
                 ),
@@ -46867,7 +48608,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              "Sur quel côté placer le $_selectedDominoTile ?",
+                              GameUiLocalization.tr(
+                                context,
+                                'Sur quel côté placer le {tile} ?',
+                                {'tile': '$_selectedDominoTile'},
+                              ),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -46878,34 +48623,44 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children:
-                                  openEnds.where((e) {
-                                    final p = _selectedDominoTile!.split('-');
-                                    return e == int.parse(p[0]) ||
-                                        e == int.parse(p[1]);
-                                  }).toSet().map((end) {
-                                    return ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.amber,
-                                        foregroundColor: Colors.black,
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 28,
-                                          vertical: 16,
-                                        ),
-                                      ),
-                                      onPressed:
-                                          () => _playTile(
-                                            _selectedDominoTile!,
-                                            end,
+                                  openEnds
+                                      .where((e) {
+                                        final p = _selectedDominoTile!.split(
+                                          '-',
+                                        );
+                                        return e == int.parse(p[0]) ||
+                                            e == int.parse(p[1]);
+                                      })
+                                      .toSet()
+                                      .map((end) {
+                                        return ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.amber,
+                                            foregroundColor: Colors.black,
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 28,
+                                              vertical: 16,
+                                            ),
                                           ),
-                                      child: Text(
-                                        "Sur le $end",
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
+                                          onPressed:
+                                              () => _playTile(
+                                                _selectedDominoTile!,
+                                                end,
+                                              ),
+                                          child: Text(
+                                            GameUiLocalization.tr(
+                                              context,
+                                              'Sur le {end}',
+                                              {'end': '$end'},
+                                            ),
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        );
+                                      })
+                                      .toList(),
                             ),
                             const SizedBox(height: 40),
                             TextButton(
@@ -46913,9 +48668,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   () => setState(
                                     () => _selectedDominoTile = null,
                                   ),
-                              child: const Text(
-                                "Annuler",
-                                style: TextStyle(
+                              child: Text(
+                                GameUiLocalization.tr(context, 'Annuler'),
+                                style: const TextStyle(
                                   color: Colors.white54,
                                   fontSize: 16,
                                 ),
@@ -46972,8 +48727,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         child: Text(
                           isMyTurn
-                              ? "C'est votre tour !"
-                              : "Tour de ${players[currentPlayerId]?['name'] ?? '...'}",
+                              ? GameUiLocalization.tr(
+                                context,
+                                "C'est votre tour !",
+                              )
+                              : "${GameUiLocalization.tr(context, 'Tour de')} ${players[currentPlayerId]?['name'] ?? '...'}",
                           style: TextStyle(
                             color:
                                 isMyTurn
@@ -47002,9 +48760,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       SnackBar(content: Text(e.toString())),
                                     ),
                                   ),
-                          child: const Text(
-                            "Piocher",
-                            style: TextStyle(
+                          child: Text(
+                            GameUiLocalization.tr(context, 'Piocher'),
+                            style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 12,
                             ),
@@ -47026,9 +48784,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       SnackBar(content: Text(e.toString())),
                                     ),
                                   ),
-                          child: const Text(
-                            "Passer",
-                            style: TextStyle(
+                          child: Text(
+                            GameUiLocalization.tr(context, 'Passer'),
+                            style: const TextStyle(
                               color: Colors.redAccent,
                               fontSize: 12,
                             ),
@@ -47070,16 +48828,82 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Map<String, dynamic> gameData,
     String playerId,
   ) {
-    final players = Map<String, dynamic>.from(gameData['players']);
-    final currentPlayerId = gameData['yamsCurrentPlayerId'];
+    // Consolidation complète de tous les joueurs et adversaires
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    final playerProfiles = Map<String, dynamic>.from(
+      gameData['playerProfiles'] ?? {},
+    );
+    final rawScores = Map<String, dynamic>.from(gameData['yamsScores'] ?? {});
+    final Set<String> allPlayerIds = {};
+    allPlayerIds.addAll(players.keys);
+    allPlayerIds.addAll(playerProfiles.keys);
+    allPlayerIds.addAll(rawScores.keys);
+    if (gameData['yamsPlayerOrder'] is List) {
+      allPlayerIds.addAll(
+        (gameData['yamsPlayerOrder'] as List).map((e) => e.toString()),
+      );
+    }
+    if (gameData['playerOrder'] is List) {
+      allPlayerIds.addAll(
+        (gameData['playerOrder'] as List).map((e) => e.toString()),
+      );
+    }
+
+    String getPlayerName(String pId) {
+      final pMap = players[pId] is Map ? players[pId] : null;
+      final rawName = pMap?['name'];
+      if (rawName != null &&
+          rawName.toString().trim().isNotEmpty &&
+          rawName != 'Inconnu') {
+        return rawName.toString();
+      }
+      final profName =
+          playerProfiles[pId] is Map ? playerProfiles[pId]['name'] : null;
+      if (profName != null &&
+          profName.toString().trim().isNotEmpty &&
+          profName != 'Inconnu') {
+        return profName.toString();
+      }
+      if (pId == playerId) {
+        final authName = FirebaseAuth.instance.currentUser?.displayName;
+        if (authName != null && authName.trim().isNotEmpty) return authName;
+      }
+      return 'Joueur';
+    }
+
+    for (String pId in allPlayerIds) {
+      if (!players.containsKey(pId) || players[pId] is! Map) {
+        players[pId] = {'name': getPlayerName(pId), 'score': 0};
+      } else if (players[pId]['name'] == null ||
+          players[pId]['name'] == 'Inconnu') {
+        players[pId]['name'] = getPlayerName(pId);
+      }
+    }
+
+    final currentPlayerId = gameData['yamsCurrentPlayerId'] ?? playerId;
     final isMyTurn = currentPlayerId == playerId;
     final List<int> dice = List<int>.from(gameData['yamsDice'] ?? []);
     final List<bool> heldDice = List<bool>.from(
       gameData['yamsHeldDice'] ?? [false, false, false, false, false],
     );
     final int rollsLeft = gameData['yamsRollsLeft'] ?? 3;
-    final rawScores = Map<String, dynamic>.from(gameData['yamsScores'] ?? {});
     final myScores = Map<String, dynamic>.from(rawScores[playerId] ?? {});
+
+    int calcUpper(Map<String, dynamic> s) => [
+      'As',
+      'Deux',
+      'Trois',
+      'Quatre',
+      'Cinq',
+      'Six',
+    ].fold<int>(0, (sum, cat) => sum + ((s[cat] as num?)?.toInt() ?? 0));
+    int calcBonus(Map<String, dynamic> s) => calcUpper(s) >= 63 ? 35 : 0;
+    int calcTotal(Map<String, dynamic> s) =>
+        s.values.fold<int>(
+          0,
+          (sum, val) => sum + ((val as num?)?.toInt() ?? 0),
+        ) +
+        calcBonus(s);
 
     const List<String> categories = [
       'As',
@@ -47106,7 +48930,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       return UniversalGameEndScreen(
         gameTitle: "Yams",
         winnerId: gameData['gameWinner'],
-        winnerName: players[gameData['gameWinner']]?['name'],
+        winnerName: getPlayerName(gameData['gameWinner'] ?? ''),
         reason:
             gameData['gameEndReason'] ?? "Toutes les grilles sont complétées !",
         players: players,
@@ -47119,159 +48943,803 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
     }
 
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          color: isMyTurn ? Colors.green.withOpacity(0.2) : Colors.transparent,
-          child: Text(
-            isMyTurn
-                ? "C'est votre tour !"
-                : "Au tour de ${players[currentPlayerId]?['name'] ?? '...'}",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: isMyTurn ? Colors.greenAccent : Colors.white,
-            ),
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(5, (index) {
-                  final value = dice.isNotEmpty ? dice[index] : 0;
-                  final isHeld = heldDice[index];
-                  return GestureDetector(
-                    onTap:
-                        isMyTurn && rollsLeft < 3 && dice.isNotEmpty
-                            ? () => _firebaseService.yamsToggleHold(
-                              widget.gameCode,
-                              playerId,
-                              index,
-                            )
-                            : null,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: isHeld ? Colors.amber : Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.black, width: 2),
+    final opponentIds = allPlayerIds.where((id) => id != playerId).toList();
+    final String? primaryOpponentId =
+        opponentIds.isNotEmpty
+            ? ((_viewedOpponentId != null &&
+                    opponentIds.contains(_viewedOpponentId))
+                ? _viewedOpponentId
+                : opponentIds.first)
+            : null;
+    final primaryOpponentScores =
+        (primaryOpponentId != null)
+            ? Map<String, dynamic>.from(rawScores[primaryOpponentId] ?? {})
+            : <String, dynamic>{};
+    final String oppName =
+        (primaryOpponentId != null)
+            ? getPlayerName(primaryOpponentId)
+            : 'Adversaire';
+
+    final int myUpper = calcUpper(myScores);
+    final int myBonus = calcBonus(myScores);
+    final int myTotal = calcTotal(myScores);
+    final int oppUpper = calcUpper(primaryOpponentScores);
+    final int oppBonus = calcBonus(primaryOpponentScores);
+    final int oppTotal = calcTotal(primaryOpponentScores);
+    final String? lastHoldAction = gameData['yamsLastHoldAction'] as String?;
+    final int? firestoreTappedDie =
+        (gameData['yamsLastTappedIndex'] as num?)?.toInt();
+
+    return StreamBuilder<DatabaseEvent>(
+      stream: _firebaseService.getYamsLiveStream(widget.gameCode),
+      builder: (context, liveSnap) {
+        int? liveTappedDie;
+        if (liveSnap.hasData && liveSnap.data!.snapshot.value is Map) {
+          final liveMap = Map<dynamic, dynamic>.from(
+            liveSnap.data!.snapshot.value as Map,
+          );
+          if (liveMap['playerId'] != playerId) {
+            liveTappedDie = (liveMap['tappedDieIndex'] as num?)?.toInt();
+          }
+        }
+        if (liveTappedDie == null && !isMyTurn && firestoreTappedDie != null) {
+          liveTappedDie = firestoreTappedDie;
+        }
+
+        final bool isInspectingOpponentOnly =
+            (_viewedOpponentId != null && _viewedOpponentId != playerId);
+
+        return Column(
+          children: [
+            // --- SÉLECTEUR RAPIDE D'ONGLET / VUE DE LA GRILLE ---
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              color: Colors.black45,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ChoiceChip(
+                      avatar: const Icon(
+                        Icons.compare_arrows_rounded,
+                        size: 14,
                       ),
-                      child: Center(
-                        child: Text(
-                          value > 0 ? value.toString() : "?",
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                      label: const Text(
+                        "Face-à-face (côte à côte)",
+                        style: TextStyle(fontSize: 11),
+                      ),
+                      selected: !isInspectingOpponentOnly,
+                      onSelected: (_) {
+                        setState(() => _viewedOpponentId = null);
+                      },
+                      selectedColor: Colors.deepPurpleAccent,
+                      backgroundColor: Colors.white10,
+                    ),
+                    if (primaryOpponentId != null) ...[
+                      const SizedBox(width: 8),
+                      ChoiceChip(
+                        avatar: const Icon(Icons.visibility_rounded, size: 14),
+                        label: Text(
+                          "Fiche de $oppName ($oppTotal pts)",
+                          style: const TextStyle(fontSize: 11),
+                        ),
+                        selected: isInspectingOpponentOnly,
+                        onSelected: (_) {
+                          setState(() => _viewedOpponentId = primaryOpponentId);
+                        },
+                        selectedColor: Colors.amber.shade800,
+                        backgroundColor: Colors.white10,
+                      ),
+                    ],
+                    if (opponentIds.length > 1) ...[
+                      const SizedBox(width: 8),
+                      ...opponentIds.where((id) => id != primaryOpponentId).map(
+                        (otherId) {
+                          final otherName = getPlayerName(otherId);
+                          final otherTotal = calcTotal(
+                            Map<String, dynamic>.from(rawScores[otherId] ?? {}),
+                          );
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 6),
+                            child: ActionChip(
+                              avatar: const Icon(Icons.person, size: 13),
+                              label: Text(
+                                "$otherName ($otherTotal pts)",
+                                style: const TextStyle(fontSize: 11),
+                              ),
+                              onPressed: () {
+                                setState(() => _viewedOpponentId = otherId);
+                              },
+                              backgroundColor: Colors.white12,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+
+            // --- ZONE DE DÉS EN DIRECT & STATUT TEMPS RÉEL ---
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: const BoxDecoration(
+                color: Colors.black38,
+                border: Border(bottom: BorderSide(color: Colors.white12)),
+              ),
+              child: Column(
+                children: [
+                  // BANNIÈRE DE STATUT EN DIRECT
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    margin: const EdgeInsets.only(bottom: 8),
+                    decoration: BoxDecoration(
+                      color:
+                          isMyTurn
+                              ? Colors.green.withOpacity(0.22)
+                              : Colors.blueGrey.withOpacity(0.25),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color:
+                            isMyTurn
+                                ? Colors.greenAccent
+                                : Colors.amberAccent.withOpacity(0.5),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          isMyTurn
+                              ? Icons.play_arrow_rounded
+                              : Icons.visibility_rounded,
+                          size: 16,
+                          color:
+                              isMyTurn
+                                  ? Colors.greenAccent
+                                  : Colors.amberAccent,
+                        ),
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            isMyTurn
+                                ? "C'est votre tour ! Touchez un dé pour le garder (doré 🔒)"
+                                : (lastHoldAction != null &&
+                                        lastHoldAction.isNotEmpty
+                                    ? "👉 $lastHoldAction (${3 - rollsLeft}/3 lancers)"
+                                    : "👉 ${getPlayerName(currentPlayerId)} joue en direct... (${3 - rollsLeft}/3 lancers)"),
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.bold,
+                              color:
+                                  isMyTurn ? Colors.greenAccent : Colors.white,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // RANGÉE DE DÉS AVEC INTERACTION TEMPS RÉEL
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(5, (index) {
+                      final value = dice.isNotEmpty ? dice[index] : 0;
+                      final isHeld = heldDice[index];
+                      final isOpponentInteracting =
+                          (!isMyTurn && liveTappedDie == index);
+
+                      return GestureDetector(
+                        onTap:
+                            isMyTurn && rollsLeft < 3 && dice.isNotEmpty
+                                ? () {
+                                  HapticFeedback.selectionClick();
+                                  _firebaseService.updateYamsLiveInteraction(
+                                    widget.gameCode,
+                                    playerId,
+                                    tappedDieIndex: index,
+                                  );
+                                  _firebaseService.yamsToggleHold(
+                                    widget.gameCode,
+                                    playerId,
+                                    index,
+                                  );
+                                }
+                                : null,
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          width: 56,
+                          height: 56,
+                          decoration: BoxDecoration(
+                            gradient:
+                                isHeld
+                                    ? const LinearGradient(
+                                      colors: [
+                                        Color(0xFFFFDF00),
+                                        Color(0xFFD4AF37),
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    )
+                                    : const LinearGradient(
+                                      colors: [
+                                        Color(0xFFFFFFFF),
+                                        Color(0xFFF1F5F9),
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color:
+                                  isOpponentInteracting
+                                      ? Colors.cyanAccent
+                                      : (isHeld
+                                          ? const Color(0xFFB45309)
+                                          : const Color(0xFF0F172A)),
+                              width:
+                                  isOpponentInteracting
+                                      ? 3.5
+                                      : (isHeld ? 2.8 : 1.5),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    isOpponentInteracting
+                                        ? Colors.cyanAccent.withOpacity(0.8)
+                                        : (isHeld
+                                            ? Colors.amberAccent.withOpacity(
+                                              0.55,
+                                            )
+                                            : Colors.black26),
+                                blurRadius:
+                                    isOpponentInteracting
+                                        ? 12
+                                        : (isHeld ? 8 : 4),
+                                offset: const Offset(1, 2),
+                              ),
+                            ],
+                          ),
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Text(
+                                  value > 0 ? "$value" : "?",
+                                  style: TextStyle(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.w900,
+                                    color:
+                                        isHeld
+                                            ? const Color(0xFF78350F)
+                                            : const Color(0xFF0F172A),
+                                  ),
+                                ),
+                              ),
+                              if (isHeld)
+                                const Positioned(
+                                  top: 3,
+                                  right: 3,
+                                  child: Icon(
+                                    Icons.lock,
+                                    size: 12,
+                                    color: Color(0xFF78350F),
+                                  ),
+                                ),
+                              if (isOpponentInteracting)
+                                Positioned(
+                                  bottom: 2,
+                                  left: 1,
+                                  right: 1,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 2,
+                                      vertical: 1,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.cyanAccent,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: const Text(
+                                      "CLIC",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        GameUiLocalization.tr(
+                          context,
+                          'Lancers restants : {count}',
+                          {'count': '$rollsLeft'},
+                        ),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      if (heldDice.where((h) => h).isNotEmpty) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            "🔒 ${heldDice.where((h) => h).length} gardé(s)",
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Colors.amberAccent,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  if (isMyTurn && rollsLeft > 0) ...[
+                    const SizedBox(height: 8),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.casino, size: 18),
+                      label: Text(
+                        rollsLeft == 3
+                            ? GameUiLocalization.tr(context, 'Lancer les dés')
+                            : GameUiLocalization.tr(context, 'Relancer'),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        HapticFeedback.mediumImpact();
+                        _firebaseService.yamsRollDice(
+                          widget.gameCode,
+                          playerId,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurpleAccent,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 10,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
                         ),
                       ),
                     ),
-                  );
-                }),
+                  ],
+                ],
               ),
-              const SizedBox(height: 16),
-              Text(
-                "Lancers restants : $rollsLeft",
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 10),
-              if (isMyTurn && rollsLeft > 0)
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.casino),
-                  label: Text(rollsLeft == 3 ? "Lancer les dés" : "Relancer"),
-                  onPressed:
-                      () => _firebaseService.yamsRollDice(
-                        widget.gameCode,
-                        playerId,
-                      ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
-                  ),
-                ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              final cat = categories[index];
-              final myScore = myScores[cat];
-              final canScore =
-                  isMyTurn &&
-                  rollsLeft < 3 &&
-                  dice.isNotEmpty &&
-                  myScore == null;
-              final potentialScore =
-                  canScore
-                      ? _firebaseService.calculateYamsScore(dice, cat)
-                      : null;
+            ),
 
-              return Card(
-                color:
-                    canScore
-                        ? Colors.deepPurple.withOpacity(0.4)
-                        : (myScore != null
-                            ? Colors.grey.withOpacity(0.2)
-                            : null),
-                margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                child: ListTile(
-                  title: Text(
-                    cat,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  trailing:
-                      myScore != null
-                          ? Text(
-                            "$myScore pts",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.greenAccent,
+            // --- EN-TÊTE DE LA FEUILLE DE SCORE ---
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+              color: Colors.black54,
+              child:
+                  isInspectingOpponentOnly
+                      ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "COMBINAISON",
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white54,
+                              letterSpacing: 0.8,
                             ),
-                          )
-                          : (canScore
-                              ? ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      (potentialScore ?? 0) > 0
-                                          ? Colors.green.shade700
-                                          : Colors.grey.shade800,
+                          ),
+                          Text(
+                            "GRILLE DE $oppName ($oppTotal pts)",
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.amberAccent,
+                            ),
+                          ),
+                        ],
+                      )
+                      : Row(
+                        children: [
+                          const Expanded(
+                            flex: 4,
+                            child: Text(
+                              "COMBINAISON",
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white54,
+                                letterSpacing: 0.8,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Center(
+                              child: Text(
+                                "Moi (${myTotal} pts)",
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.greenAccent,
                                 ),
-                                child: Text("Valider (+$potentialScore pts)"),
-                                onPressed: () {
-                                  if (cat == 'Yams' &&
-                                      dice.isNotEmpty &&
-                                      dice.every((d) => d == dice.first)) {
-                                    Provider.of<PlayerState>(
-                                      context,
-                                      listen: false,
-                                    ).recordBadgeEvent('yams_yams');
-                                  }
-                                  _firebaseService.yamsScoreCategory(
-                                    widget.gameCode,
-                                    playerId,
-                                    cat,
-                                  );
-                                },
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                          if (primaryOpponentId != null)
+                            Expanded(
+                              flex: 4,
+                              child: Center(
+                                child: Text(
+                                  "$oppName (${oppTotal} pts)",
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.amberAccent,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+            ),
+
+            // --- LISTE DES COMBINAISONS AVEC SCORES EN TEMPS RÉEL ---
+            Expanded(
+              child: ListView.builder(
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  final cat = categories[index];
+                  final myCellScore = myScores[cat];
+                  final oppCellScore = primaryOpponentScores[cat];
+                  final canScore =
+                      isMyTurn &&
+                      rollsLeft < 3 &&
+                      dice.isNotEmpty &&
+                      myCellScore == null;
+                  final potentialScore =
+                      canScore
+                          ? _firebaseService.calculateYamsScore(dice, cat)
+                          : null;
+
+                  if (isInspectingOpponentOnly) {
+                    // Vue plein écran de la fiche de l'adversaire
+                    return Container(
+                      decoration: BoxDecoration(
+                        color:
+                            index % 2 == 0
+                                ? Colors.white.withOpacity(0.03)
+                                : Colors.transparent,
+                        border: const Border(
+                          bottom: BorderSide(color: Colors.white10, width: 0.5),
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            GameUiLocalization.tr(context, cat),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              color: Colors.white,
+                            ),
+                          ),
+                          oppCellScore != null
+                              ? Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color:
+                                      (oppCellScore as num) > 0
+                                          ? Colors.amber.withOpacity(0.25)
+                                          : Colors.red.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  "$oppCellScore pts",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        (oppCellScore as num) > 0
+                                            ? Colors.amberAccent
+                                            : Colors.white38,
+                                  ),
+                                ),
                               )
                               : const Text(
-                                "-",
-                                style: TextStyle(color: Colors.white38),
-                              )),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
+                                "En attente...",
+                                style: TextStyle(
+                                  color: Colors.white30,
+                                  fontSize: 12,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  // Vue côte à côte (Moi vs Adversaire)
+                  return Container(
+                    decoration: BoxDecoration(
+                      color:
+                          index % 2 == 0
+                              ? Colors.white.withOpacity(0.03)
+                              : Colors.transparent,
+                      border: const Border(
+                        bottom: BorderSide(color: Colors.white10, width: 0.5),
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 5,
+                    ),
+                    child: Row(
+                      children: [
+                        // Nom de la combinaison
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            GameUiLocalization.tr(context, cat),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.5,
+                              color: canScore ? Colors.white : Colors.white70,
+                            ),
+                          ),
+                        ),
+
+                        // Colonne "Moi"
+                        Expanded(
+                          flex: 4,
+                          child: Center(
+                            child:
+                                myCellScore != null
+                                    ? Text(
+                                      "$myCellScore",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            (myCellScore as num) > 0
+                                                ? Colors.greenAccent
+                                                : Colors.white38,
+                                      ),
+                                    )
+                                    : (canScore
+                                        ? ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                (potentialScore ?? 0) > 0
+                                                    ? Colors.green.shade700
+                                                    : Colors.grey.shade800,
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 6,
+                                              vertical: 2,
+                                            ),
+                                            minimumSize: const Size(60, 26),
+                                          ),
+                                          child: Text(
+                                            "+${potentialScore ?? 0}",
+                                            style: const TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            if (cat == 'Yams' &&
+                                                dice.isNotEmpty &&
+                                                dice.every(
+                                                  (d) => d == dice.first,
+                                                )) {
+                                              Provider.of<PlayerState>(
+                                                context,
+                                                listen: false,
+                                              ).recordBadgeEvent('yams_yams');
+                                            }
+                                            _firebaseService.yamsScoreCategory(
+                                              widget.gameCode,
+                                              playerId,
+                                              cat,
+                                            );
+                                          },
+                                        )
+                                        : const Text(
+                                          "-",
+                                          style: TextStyle(
+                                            color: Colors.white24,
+                                            fontSize: 14,
+                                          ),
+                                        )),
+                          ),
+                        ),
+
+                        // Colonne "Adversaire" (visible en direct permanent !)
+                        if (primaryOpponentId != null)
+                          Expanded(
+                            flex: 4,
+                            child: Center(
+                              child:
+                                  oppCellScore != null
+                                      ? Text(
+                                        "$oppCellScore",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              (oppCellScore as num) > 0
+                                                  ? Colors.amberAccent
+                                                  : Colors.white38,
+                                        ),
+                                      )
+                                      : const Text(
+                                        "-",
+                                        style: TextStyle(
+                                          color: Colors.white24,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // --- PIED DE PAGE : TOTAUX COMPARATIFS ---
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.black87,
+                border: const Border(top: BorderSide(color: Colors.white24)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    blurRadius: 4,
+                    offset: const Offset(0, -2),
+                  ),
+                ],
+              ),
+              child:
+                  isInspectingOpponentOnly
+                      ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "TOTAL ADVERSAIRE",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "$oppTotal pts",
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.amberAccent,
+                                ),
+                              ),
+                              Text(
+                                "1-6: $oppUpper/63 ${oppBonus > 0 ? '(+35)' : ''}",
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                      : Row(
+                        children: [
+                          const Expanded(
+                            flex: 4,
+                            child: Text(
+                              "TOTAL",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "$myTotal pts",
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.greenAccent,
+                                  ),
+                                ),
+                                Text(
+                                  "1-6: $myUpper/63 ${myBonus > 0 ? '(+35)' : ''}",
+                                  style: const TextStyle(
+                                    fontSize: 9.5,
+                                    color: Colors.white54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (primaryOpponentId != null)
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "$oppTotal pts",
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.amberAccent,
+                                    ),
+                                  ),
+                                  Text(
+                                    "1-6: $oppUpper/63 ${oppBonus > 0 ? '(+35)' : ''}",
+                                    style: const TextStyle(
+                                      fontSize: 9.5,
+                                      color: Colors.white54,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
+                      ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -47312,9 +49780,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       return UniversalGameEndScreen(
         gameTitle: "Belote",
         winnerId: winnerTeam,
-        winnerName: winnerTeam == 'teamA' ? 'Équipe A' : 'Équipe B',
-        reason:
-            "Score final : ${teamScores['teamA'] ?? 0} - ${teamScores['teamB'] ?? 0}",
+        winnerName:
+            winnerTeam == 'teamA'
+                ? GameUiLocalization.tr(context, 'Équipe A')
+                : GameUiLocalization.tr(context, 'Équipe B'),
+        reason: GameUiLocalization.tr(
+          context,
+          'Score final : {scoreA} - {scoreB}',
+          {
+            'scoreA': '${teamScores['teamA'] ?? 0}',
+            'scoreB': '${teamScores['teamB'] ?? 0}',
+          },
+        ),
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -47350,7 +49827,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Équipe A : ${teamScores['teamA'] ?? 0} pts",
+                      GameUiLocalization.tr(context, 'Équipe A : {pts} pts', {
+                        'pts': '${teamScores['teamA'] ?? 0}',
+                      }),
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -47361,7 +49840,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                     Text(
-                      "Équipe B : ${teamScores['teamB'] ?? 0} pts",
+                      GameUiLocalization.tr(context, 'Équipe B : {pts} pts', {
+                        'pts': '${teamScores['teamB'] ?? 0}',
+                      }),
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -47395,8 +49876,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     children: [
                       Text(
                         trumpSuit != null
-                            ? "ATOUT : ${_getSuitSymbol(trumpSuit)}"
-                            : "ENCHÈRES EN COURS",
+                            ? GameUiLocalization.tr(context, 'ATOUT : {suit}', {
+                              'suit': _getSuitSymbol(context, trumpSuit),
+                            })
+                            : GameUiLocalization.tr(
+                              context,
+                              'ENCHÈRES EN COURS',
+                            ),
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 12,
@@ -47438,8 +49924,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 if (currentTrick.isEmpty && roundState == 'playing_trick')
                   Text(
                     isMyTurn
-                        ? "À VOUS D'OUVRIR LE PLI !"
-                        : "Tour de ${playerData[playerOrder[currentIndex]]?['name'] ?? ''}",
+                        ? GameUiLocalization.tr(
+                          context,
+                          "À VOUS D'OUVRIR LE PLI !",
+                        )
+                        : "${GameUiLocalization.tr(context, 'Tour de')} ${playerData[playerOrder[currentIndex]]?['name'] ?? ''}",
                     style: TextStyle(
                       color: isMyTurn ? Colors.greenAccent : Colors.white38,
                       fontWeight: FontWeight.bold,
@@ -47453,9 +49942,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        "CARTE À PRENDRE",
-                        style: TextStyle(
+                      Text(
+                        GameUiLocalization.tr(context, 'CARTE À PRENDRE'),
+                        style: const TextStyle(
                           color: Colors.amberAccent,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
@@ -47527,9 +50016,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    "PRENDRE L'ATOUT OU PASSER :",
-                    style: TextStyle(
+                  Text(
+                    GameUiLocalization.tr(
+                      context,
+                      "PRENDRE L'ATOUT OU PASSER :",
+                    ),
+                    style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
@@ -47566,7 +50058,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             );
                           },
                           child: Text(
-                            _getSuitSymbol(suit),
+                            _getSuitSymbol(context, suit),
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -47590,7 +50082,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             'pass',
                           );
                         },
-                        child: const Text("Passer"),
+                        child: Text(GameUiLocalization.tr(context, 'Passer')),
                       ),
                     ],
                   ),
@@ -47614,7 +50106,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Votre main (${myHand.length})",
+                      GameUiLocalization.tr(context, 'Votre main ({count})', {
+                        'count': '${myHand.length}',
+                      }),
                       style: const TextStyle(
                         color: Colors.white60,
                         fontSize: 11,
@@ -47622,9 +50116,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                     if (isMyTurn && roundState == 'playing_trick')
-                      const Text(
-                        "Touchez une carte pour la poser",
-                        style: TextStyle(
+                      Text(
+                        GameUiLocalization.tr(
+                          context,
+                          'Touchez une carte pour la poser',
+                        ),
+                        style: const TextStyle(
                           color: Colors.greenAccent,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
@@ -47693,16 +50190,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   // --- HELPERS SYMBOLES DE COULEUR POUR LA BELOTE ---
-  String _getSuitSymbol(String suit) {
+  String _getSuitSymbol(BuildContext context, String suit) {
     switch (suit) {
       case 'H':
-        return '♥ Cœur';
+        return GameUiLocalization.tr(context, '♥ Cœur');
       case 'D':
-        return '♦ Carreau';
+        return GameUiLocalization.tr(context, '♦ Carreau');
       case 'C':
-        return '♣ Trèfle';
+        return GameUiLocalization.tr(context, '♣ Trèfle');
       case 'S':
-        return '♠ Pique';
+        return GameUiLocalization.tr(context, '♠ Pique');
       default:
         return suit;
     }
@@ -47751,14 +50248,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
               decoration: BoxDecoration(
-                color: isMyTurn ? Colors.greenAccent.withOpacity(0.18) : Colors.black38,
+                color:
+                    isMyTurn
+                        ? Colors.greenAccent.withOpacity(0.18)
+                        : Colors.black38,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: isMyTurn ? Colors.greenAccent.withOpacity(0.5) : Colors.white12,
+                  color:
+                      isMyTurn
+                          ? Colors.greenAccent.withOpacity(0.5)
+                          : Colors.white12,
                 ),
               ),
               child: Text(
-                isMyTurn ? "À votre tour de jouer" : "Au tour de ${players[currentPlayerId]?['name'] ?? 'l\'adversaire'}",
+                isMyTurn
+                    ? GameUiLocalization.tr(context, 'À votre tour de jouer')
+                    : GameUiLocalization.tr(context, 'Au tour de {name}', {
+                      'name':
+                          players[currentPlayerId]?['name'] ??
+                          GameUiLocalization.tr(context, "l'adversaire"),
+                    }),
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.bold,
@@ -47781,10 +50290,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               child:
                   melds.values.every((list) => (list as List).isEmpty)
-                      ? const Center(
+                      ? Center(
                         child: Text(
-                          "Aucune combinaison étalée sur la table",
-                          style: TextStyle(
+                          GameUiLocalization.tr(
+                            context,
+                            'Aucune combinaison étalée sur la table',
+                          ),
+                          style: const TextStyle(
                             color: Colors.white38,
                             fontSize: 12,
                             fontStyle: FontStyle.italic,
@@ -47829,7 +50341,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Combinaisons de ${players[pId]?['name'] ?? 'Joueur'}",
+                                      GameUiLocalization.tr(
+                                        context,
+                                        'Combinaisons de {name}',
+                                        {
+                                          'name':
+                                              players[pId]?['name'] ??
+                                              GameUiLocalization.tr(
+                                                context,
+                                                'Joueur',
+                                              ),
+                                        },
+                                      ),
                                       style: const TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
@@ -47966,7 +50489,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        "PIOCHE",
+                        GameUiLocalization.tr(context, 'PIOCHE'),
                         style: TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.bold,
@@ -48002,9 +50525,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       child: Text(
                         isMyTurn
                             ? (hasDrawn
-                                ? "Étale ou Défausse"
-                                : "Pioche une carte")
-                            : "Au tour de ${players[currentPlayerId]?['name'] ?? ''}",
+                                ? GameUiLocalization.tr(
+                                  context,
+                                  'Étale ou Défausse',
+                                )
+                                : GameUiLocalization.tr(
+                                  context,
+                                  'Pioche une carte',
+                                ))
+                            : GameUiLocalization.tr(
+                              context,
+                              'Au tour de {name}',
+                              {'name': players[currentPlayerId]?['name'] ?? ''},
+                            ),
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -48045,10 +50578,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(color: Colors.white24),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                "Vide",
-                                style: TextStyle(
+                                GameUiLocalization.tr(context, 'Vide'),
+                                style: const TextStyle(
                                   color: Colors.white38,
                                   fontSize: 10,
                                 ),
@@ -48057,7 +50590,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           ),
                       const SizedBox(height: 4),
                       Text(
-                        "DÉFAUSSE",
+                        GameUiLocalization.tr(context, 'DÉFAUSSE'),
                         style: TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.bold,
@@ -48142,7 +50675,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           ElevatedButton.icon(
                             icon: const Icon(Icons.layers_rounded, size: 16),
                             label: Text(
-                              "Étaler (${_selectedRamiCards.length})",
+                              GameUiLocalization.tr(
+                                context,
+                                'Étaler ({count})',
+                                {'count': '${_selectedRamiCards.length}'},
+                              ),
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.teal[700],
@@ -48190,7 +50727,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               Icons.arrow_downward_rounded,
                               size: 16,
                             ),
-                            label: const Text("Défausser & Fin"),
+                            label: Text(
+                              GameUiLocalization.tr(context, 'Défausser & Fin'),
+                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.orange[800],
                               foregroundColor: Colors.white,
@@ -48405,7 +50944,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
             const SizedBox(height: 12),
             Text(
-              isGameOver ? "Partie Terminée !" : "Fin de la Manche",
+              isGameOver
+                  ? GameUiLocalization.tr(context, 'Partie Terminée !')
+                  : GameUiLocalization.tr(context, 'Fin de la Manche'),
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -48441,7 +50982,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             if (isHost && !isGameOver)
               ElevatedButton.icon(
                 icon: const Icon(Icons.arrow_forward_rounded),
-                label: const Text("Manche Suivante"),
+                label: Text(GameUiLocalization.tr(context, 'Manche Suivante')),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[700],
                 ),
@@ -48450,7 +50991,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             else if (isGameOver)
               ElevatedButton.icon(
                 icon: const Icon(Icons.home_rounded),
-                label: const Text("Retour à l'accueil"),
+                label: Text(
+                  GameUiLocalization.tr(context, "Retour à l'accueil"),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurpleAccent,
                 ),
@@ -48460,9 +51003,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ).popUntil((route) => route.isFirst),
               )
             else
-              const Text(
-                "En attente de l'hôte...",
-                style: TextStyle(color: Colors.white54),
+              Text(
+                GameUiLocalization.tr(context, "En attente de l'hôte..."),
+                style: const TextStyle(color: Colors.white54),
               ),
           ],
         ),
@@ -48470,7 +51013,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
-  // NOUVELLE UI BLOKUS COMPLÃˆTE
+  // NOUVELLE UI BLOKUS COMPLÈTE
   // NOUVELLE UI BLOKUS COMPLÈTE
   Widget _buildBlokusUI(
     BuildContext context,
@@ -48568,7 +51111,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           if (activePiece != null) {
             final col = (localOffset.dx / cellSize).floor().clamp(0, 19);
             final row = ((localOffset.dy / cellSize) - 2).floor().clamp(0, 19);
-            
+
             setState(() {
               _selectedBlokusPieceId = activePiece;
               _blokusStartRow = row;
@@ -48630,8 +51173,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           children: [
                             Text(
                               isMyTurn
-                                  ? "À votre tour"
-                                  : "Tour de ${players[currentPlayerId]?['name'] ?? '...'}",
+                                  ? GameUiLocalization.tr(
+                                    context,
+                                    'À votre tour',
+                                  )
+                                  : "${GameUiLocalization.tr(context, 'Tour de')} ${players[currentPlayerId]?['name'] ?? '...'}",
                               style: TextStyle(
                                 color:
                                     isMyTurn ? getColor(myColor) : Colors.white,
@@ -48642,8 +51188,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                             if (isFirstPiece && isMyTurn)
                               Text(
-                                "Placez dans votre coin !",
-                                style: TextStyle(
+                                GameUiLocalization.tr(
+                                  context,
+                                  'Placez dans votre coin !',
+                                ),
+                                style: const TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 11,
                                 ),
@@ -48658,7 +51207,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             Icons.rotate_right,
                             color: Colors.deepPurpleAccent,
                           ),
-                          tooltip: "Tourner",
+                          tooltip: GameUiLocalization.tr(context, 'Tourner'),
                           constraints: BoxConstraints(),
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           onPressed: () {
@@ -48684,7 +51233,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         IconButton(
                           icon: Icon(Icons.flip, color: Colors.tealAccent),
-                          tooltip: "Retourner",
+                          tooltip: GameUiLocalization.tr(context, 'Retourner'),
                           constraints: BoxConstraints(),
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           onPressed: () {
@@ -48710,7 +51259,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         IconButton(
                           icon: Icon(Icons.cancel, color: Colors.redAccent),
-                          tooltip: "Annuler",
+                          tooltip: GameUiLocalization.tr(context, 'Annuler'),
                           constraints: BoxConstraints(),
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           onPressed: () {
@@ -48740,7 +51289,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     ? Colors.greenAccent
                                     : Colors.grey,
                           ),
-                          tooltip: "Valider le placement",
+                          tooltip: GameUiLocalization.tr(
+                            context,
+                            'Valider le placement',
+                          ),
                           constraints: BoxConstraints(),
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           onPressed:
@@ -48828,7 +51380,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               canPlace: false,
                             );
                           },
-                          child: Text("Passer", style: TextStyle(fontSize: 12)),
+                          child: Text(
+                            GameUiLocalization.tr(context, 'Passer'),
+                            style: const TextStyle(fontSize: 12),
+                          ),
                         ),
                     ],
                   ),
@@ -48975,8 +51530,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Vos pièces",
-                              style: TextStyle(
+                              GameUiLocalization.tr(context, 'Vos pièces'),
+                              style: const TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
@@ -49090,7 +51645,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
-  // Fonction de vÃ©rification du placement
+  // Fonction de vérification du placement
   void _checkBlokusPlacement(
     Map<String, String> board,
     String myColor,
@@ -49341,7 +51896,7 @@ class _BlokusBoardPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-// PAINTER POUR LES PIÃˆCES DANS LA MAIN
+// PAINTER POUR LES PIÈCES DANS LA MAIN
 class _BlokusPiecePainter extends CustomPainter {
   final int pieceId;
   final int rotation;
@@ -49526,7 +52081,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
       interpolation:
           img
               .Interpolation
-              .nearest, // Pas d'interpolation pour garder la nettetÃƒÂ©
+              .nearest, // Pas d'interpolation pour garder la netteté
     );
 
     return base64Encode(img.encodePng(finalImage));
@@ -49661,7 +52216,7 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
     } else if (name.isNotEmpty) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("Ce joueur existe dÃƒÂ©jÃƒÂ  !")));
+      ).showSnackBar(SnackBar(content: Text("Ce joueur existe déjà !")));
     }
   }
 
@@ -49690,9 +52245,7 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
                 Expanded(
                   child: TextField(
                     controller: _nameController,
-                    decoration: InputDecoration(
-                      labelText: "PrÃƒÂ©nom du joueur",
-                    ),
+                    decoration: InputDecoration(labelText: "Prénom du joueur"),
                     onSubmitted: (_) => _addPlayer(),
                   ),
                 ),
@@ -52607,7 +55160,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
     _playerRoles.clear();
     for (var player in _activePlayers) {
       if (player == undercover) {
-        _playerRoles[player] = "InfiltrÃƒÂ©";
+        _playerRoles[player] = "Infiltré";
       } else if (player == _mrWhitePlayer) {
         _playerRoles[player] = "Mr. White";
       } else {
@@ -52637,9 +55190,9 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
     setState(() {
       _gameState = UndercoverGameState.result;
       if (impostorsWin) {
-        _resultMessage = "$player ÃƒÂ©tait un Civil ! Les Imposteurs gagnent !";
+        _resultMessage = "$player était un Civil ! Les Imposteurs gagnent !";
       } else {
-        _resultMessage = "$player ÃƒÂ©tait l'${role} ! Les Civils gagnent !";
+        _resultMessage = "$player était l'${role} ! Les Civils gagnent !";
       }
     });
   }
@@ -52762,9 +55315,9 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            labelText: "ThÃƒÂ¨me pour les paires de mots",
+                            labelText: "Thème pour les paires de mots",
                             hintText:
-                                "ex: animaux:objets, cuisine... (format civil:infiltrÃƒÂ©)",
+                                "ex: animaux:objets, cuisine... (format civil:infiltré)",
                             border: OutlineInputBorder(),
                           ),
                           maxLines: 1,
@@ -52814,7 +55367,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                               ),
                             ),
                             SizedBox(width: 8),
-                            Text("GÃƒÂ©nÃƒÂ©ration IA..."),
+                            Text("Génération IA..."),
                           ],
                         )
                         : Text("Commencer la manche"),
@@ -52837,7 +55390,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Passe le tÃƒÂ©lÃƒÂ©phone ÃƒÂ ",
+                "Passe le téléphone à",
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               SizedBox(height: 10),
@@ -52849,13 +55402,13 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
               ),
               SizedBox(height: 20),
               Text(
-                "Regarde ton rÃƒÂ´le et ne le montre ÃƒÂ  personne !",
+                "Regarde ton rôle et ne le montre à personne !",
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () => _showRoleDialog(currentPlayer),
-                child: Text("Voir mon rÃƒÂ´le"),
+                child: Text("Voir mon rôle"),
               ),
             ],
           ),
@@ -52868,7 +55421,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
     String role = _playerRoles[player]!;
     String content = "Tu es: $role\n\n";
     if (role == "Civil") content += "Ton mot est : $_wordCivil";
-    if (role == "InfiltrÃƒÂ©") content += "Ton mot est : $_wordUndercover";
+    if (role == "Infiltré") content += "Ton mot est : $_wordUndercover";
     if (role == "Mr. White") content += "Tu n'as pas de mot. Bluffe !";
 
     showDialog(
@@ -52876,7 +55429,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
       barrierDismissible: false,
       builder:
           (context) => AlertDialog(
-            title: Text("Ton RÃƒÂ´le, $player"),
+            title: Text("Ton Rôle, $player"),
             content: Text(
               content,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -52910,12 +55463,12 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Ãƒâ‚¬ vos discussions !",
+                "À vos discussions !",
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               SizedBox(height: 10),
               Text(
-                "Tout le monde connaÃƒÂ®t son rÃƒÂ´le. Ãƒâ‚¬ tour de rÃƒÂ´le, donnez un mot-indice. Quand vous ÃƒÂªtes prÃƒÂªts, passez au vote pour ÃƒÂ©liminer quelqu'un.$startingPlayerInstruction",
+                "Tout le monde connaît son rôle. À tour de rôle, donnez un mot-indice. Quand vous êtes prêts, passez au vote pour éliminer quelqu'un.$startingPlayerInstruction",
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
@@ -52938,7 +55491,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
       key: ValueKey('vote_phase'),
       children: [
         Text(
-          "Qui ÃƒÂ©liminer ?",
+          "Qui éliminer ?",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 10),
@@ -52972,7 +55525,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "RÃƒÂ©sultat du tour",
+                "Résultat du tour",
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -52987,12 +55540,12 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
               if (_resultMessage.contains("gagnent")) ...[
                 SizedBox(height: 20),
                 Text(
-                  "Le mot des civils ÃƒÂ©tait : $_wordCivil",
+                  "Le mot des civils était : $_wordCivil",
                   style: TextStyle(fontStyle: FontStyle.italic),
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  "Le mot de l'infiltrÃƒÂ© ÃƒÂ©tait : $_wordUndercover",
+                  "Le mot de l'infiltré était : $_wordUndercover",
                   style: TextStyle(fontStyle: FontStyle.italic),
                   textAlign: TextAlign.center,
                 ),
@@ -53051,8 +55604,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
   }
 
   void _startGame() {
-    _turnTimer
-        ?.cancel(); // Annule tout timer prÃƒÂ©cÃƒÂ©dent par sÃƒÂ©curitÃƒÂ©
+    _turnTimer?.cancel(); // Annule tout timer précédent par sécurité
     _usedAnswers.clear();
     _currentPlayerIndex = _random.nextInt(widget.players.length);
 
@@ -53061,8 +55613,8 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
     } else {
       int duration = _turnDuration;
       if (_turnDuration == 0) {
-        // Mode alÃƒÂ©atoire
-        duration = 5 + _random.nextInt(11); // 5 ÃƒÂ  15 secondes
+        // Mode aléatoire
+        duration = 5 + _random.nextInt(11); // 5 à 15 secondes
       }
       _secondsLeft = duration;
     }
@@ -53095,16 +55647,14 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
   void _passPotato() {
     final answer = _answerController.text.trim().toLowerCase();
     if (answer.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Tu dois ÃƒÂ©crire une rÃƒÂ©ponse !")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Tu dois écrire une réponse !")));
       return;
     }
     if (_usedAnswers.contains(answer)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Cette rÃƒÂ©ponse a dÃƒÂ©jÃƒÂ  ÃƒÂ©tÃƒÂ© donnÃƒÂ©e !"),
-        ),
+        SnackBar(content: Text("Cette réponse a déjà été donnée !")),
       );
       return;
     }
@@ -53203,21 +55753,21 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                         )
                         .toList(),
                 onChanged: (val) => setState(() => _selectedCategory = val!),
-                decoration: InputDecoration(labelText: "CatÃƒÂ©gorie"),
+                decoration: InputDecoration(labelText: "Catégorie"),
               ),
               SizedBox(height: 20),
 
               Text(
-                "DurÃƒÂ©e du tour (par joueur)",
+                "Durée du tour (par joueur)",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(height: 8),
               SegmentedButton<int>(
-                // Remplacer Wrap par SegmentedButton pour la cohÃƒÂ©rence
+                // Remplacer Wrap par SegmentedButton pour la cohérence
                 segments: const [
                   ButtonSegment(value: 10, label: Text('10s')),
                   ButtonSegment(value: 15, label: Text('15s')),
-                  ButtonSegment(value: 0, label: Text('AlÃƒÂ©atoire')),
+                  ButtonSegment(value: 0, label: Text('Aléatoire')),
                 ],
                 selected: {_turnDuration},
                 onSelectionChanged:
@@ -53234,8 +55784,8 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
               Divider(height: 30),
 
               SwitchListTile.adaptive(
-                title: Text("Compte ÃƒÂ  rebours global"),
-                subtitle: Text("Le chrono ne se rÃƒÂ©initialise pas."),
+                title: Text("Compte à rebours global"),
+                subtitle: Text("Le chrono ne se réinitialise pas."),
                 value: _useGlobalTimer,
                 onChanged: (val) => setState(() => _useGlobalTimer = val),
                 secondary: Icon(Icons.hourglass_bottom),
@@ -53243,7 +55793,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
               if (_useGlobalTimer) ...[
                 SizedBox(height: 10),
                 Text(
-                  "DurÃƒÂ©e du chrono global",
+                  "Durée du chrono global",
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(height: 8),
@@ -53378,7 +55928,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
         ),
         SizedBox(height: 10),
         Text(
-          "C'est ÃƒÂ  ${widget.players[_currentPlayerIndex]} !",
+          "C'est à ${widget.players[_currentPlayerIndex]} !",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 20),
@@ -53388,7 +55938,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
             child: Column(
               children: [
                 Text(
-                  "CatÃƒÂ©gorie:",
+                  "Catégorie:",
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
@@ -53403,7 +55953,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
         SizedBox(height: 20),
         TextField(
           controller: _answerController,
-          decoration: InputDecoration(labelText: "Ta rÃƒÂ©ponse rapide !"),
+          decoration: InputDecoration(labelText: "Ta réponse rapide !"),
           onSubmitted: (_) => _passPotato(),
         ),
         SizedBox(height: 20),
@@ -53418,7 +55968,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
               children: [
                 if (_usedAnswers.isNotEmpty)
                   Text(
-                    "Mots dÃƒÂ©jÃƒÂ  utilisÃƒÂ©s :",
+                    "Mots déjà utilisés :",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 Wrap(
@@ -53639,7 +56189,7 @@ class _SynonymOrBannedLocalScreenState
                   TextField(
                     controller: _aiController,
                     decoration: InputDecoration(
-                      labelText: "ThÃƒÂ¨me pour les mots",
+                      labelText: "Thème pour les mots",
                       hintText: "ex: animaux, cuisine, film...",
                       border: OutlineInputBorder(),
                     ),
@@ -53687,7 +56237,7 @@ class _SynonymOrBannedLocalScreenState
                         ),
                       ),
                       SizedBox(width: 8),
-                      Text("GÃƒÂ©nÃƒÂ©ration IA..."),
+                      Text("Génération IA..."),
                     ],
                   )
                   : Text("Commencer la manche"),
@@ -53703,7 +56253,7 @@ class _SynonymOrBannedLocalScreenState
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Passe le tÃƒÂ©lÃƒÂ©phone ÃƒÂ  $currentPlayer",
+          "Passe le téléphone à $currentPlayer",
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 20),
@@ -53738,7 +56288,7 @@ class _SynonymOrBannedLocalScreenState
           textAlign: TextAlign.center,
         ),
         Text(
-          "Le mot ÃƒÂ©tait : $_currentWord",
+          "Le mot était : $_currentWord",
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: 20),
@@ -53770,7 +56320,7 @@ class _SynonymOrBannedLocalScreenState
         Icon(Icons.block, color: Colors.redAccent, size: 80),
         SizedBox(height: 20),
         Text(
-          "La proposition de $_bannedPlayer a ÃƒÂ©tÃƒÂ© bannie !",
+          "La proposition de $_bannedPlayer a été bannie !",
           style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
@@ -54530,7 +57080,7 @@ enum CodenamesLocalGameState {
 
 class CodenamesLocalGameScreen extends StatefulWidget {
   final List<String> players;
-  final List<String>? redTeam; // Ãƒâ€°quipes optionnelles
+  final List<String>? redTeam; // Équipes optionnelles
   final List<String>? blueTeam;
 
   const CodenamesLocalGameScreen({
@@ -54547,8 +57097,7 @@ class CodenamesLocalGameScreen extends StatefulWidget {
 
 class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
   CodenamesLocalGameState _gameState = CodenamesLocalGameState.setup;
-  bool _masterSpyReady =
-      false; // Cache la carte-clÃƒÂ© jusquÃ¢â‚¬â„¢ÃƒÂ  confirmation
+  bool _masterSpyReady = false; // Cache la carte-clé jusqu’à confirmation
   List<String> _redTeam = [];
   List<String> _blueTeam = [];
   String? _masterSpyRed;
@@ -54576,7 +57125,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
       _blueTeam = widget.blueTeam!;
     } else if (widget.players.length < 4) {
       _gameResult =
-          "Il faut au moins 4 joueurs pour Codenames (2 par ÃƒÂ©quipe) !";
+          "Il faut au moins 4 joueurs pour Codenames (2 par équipe) !";
       _gameState = CodenamesLocalGameState.gameOver;
     }
   }
@@ -54631,7 +57180,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
         _masterSpyBlue == null) {
       setState(() {
         _gameResult =
-            "Impossible de former les ÃƒÂ©quipes (taille minimale non atteinte). RedÃƒÂ©marrer avec au moins 4 joueurs.";
+            "Impossible de former les équipes (taille minimale non atteinte). Redémarrer avec au moins 4 joueurs.";
         _gameState = CodenamesLocalGameState.gameOver;
       });
       return;
@@ -54671,7 +57220,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
 
       if (actualColor == 'assassin') {
         _gameResult =
-            "L'ÃƒÂ©quipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'} a rÃƒÂ©vÃƒÂ©lÃƒÂ© l'Assassin ! L'ÃƒÂ©quipe ${opponentTeam == 'red' ? 'Rouge' : 'Bleue'} gagne !";
+            "L'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin ! L'équipe ${opponentTeam == 'red' ? 'Rouge' : 'Bleue'} gagne !";
         _gameState = CodenamesLocalGameState.gameOver;
         return;
       }
@@ -54685,7 +57234,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
         _guessesLeft--;
         if (_redScore == 0 || _blueScore == 0) {
           _gameResult =
-              "L'ÃƒÂ©quipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'} a trouvÃƒÂ© tous ses mots et gagne !";
+              "L'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'} a trouvé tous ses mots et gagne !";
           _gameState = CodenamesLocalGameState.gameOver;
           return;
         }
@@ -54698,7 +57247,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
 
           if (_redScore == 0 || _blueScore == 0) {
             _gameResult =
-                "L'ÃƒÂ©quipe ${actualColor == 'red' ? 'Rouge' : 'Bleue'} a trouvÃƒÂ© tous ses mots et gagne !";
+                "L'équipe ${actualColor == 'red' ? 'Rouge' : 'Bleue'} a trouvé tous ses mots et gagne !";
             _gameState = CodenamesLocalGameState.gameOver;
             return;
           }
@@ -54781,7 +57330,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 16),
               Text(
-                "Passez le tÃƒÂ©lÃƒÂ©phone ÃƒÂ ",
+                "Passez le téléphone à",
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
@@ -54799,13 +57348,13 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 4),
               Text(
-                "MaÃƒÂ®tre-Espion de l'ÃƒÂ©quipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
+                "Maître-Espion de l'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
                 style: TextStyle(color: Colors.white70),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 24),
               Text(
-                "Passez le tÃƒÂ©lÃƒÂ©phone ÃƒÂ  $currentMasterSpy, puis appuyez ci-dessous.",
+                "Passez le téléphone à $currentMasterSpy, puis appuyez ci-dessous.",
                 style: TextStyle(color: Colors.white54, fontSize: 12),
                 textAlign: TextAlign.center,
               ),
@@ -54846,13 +57395,13 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 16),
               Text(
-                "Passez le tÃƒÂ©lÃƒÂ©phone aux agents",
+                "Passez le téléphone aux agents",
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 8),
               Text(
-                "Ãƒâ€°quipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
+                "Équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   color:
                       _activeTeam == 'red'
@@ -54920,12 +57469,12 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 20),
               Text(
-                "Ãƒâ€°quipe Rouge: ${_redTeam.join(', ')}",
+                "Équipe Rouge: ${_redTeam.join(', ')}",
                 style: TextStyle(color: Colors.redAccent),
               ),
               SizedBox(height: 8),
               Text(
-                "Ãƒâ€°quipe Bleue: ${_blueTeam.join(', ')}",
+                "Équipe Bleue: ${_blueTeam.join(', ')}",
                 style: TextStyle(color: Colors.blueAccent),
               ),
               SizedBox(height: 20),
@@ -54963,7 +57512,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            labelText: "ThÃƒÂ¨me pour les 25 mots",
+                            labelText: "Thème pour les 25 mots",
                             hintText: "ex: animaux, cuisine, Harry Potter...",
                             border: OutlineInputBorder(),
                           ),
@@ -55012,7 +57561,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
                               ),
                             ),
                             SizedBox(width: 8),
-                            Text("GÃƒÂ©nÃƒÂ©ration IA..."),
+                            Text("Génération IA..."),
                           ],
                         )
                         : Text("Commencer la partie"),
@@ -55061,14 +57610,14 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "Tu es le MaÃƒÂ®tre-Espion. Assure-toi d'ÃƒÂªtre seul(e) ÃƒÂ  voir l'ÃƒÂ©cran.",
+                  "Tu es le Maître-Espion. Assure-toi d'être seul(e) à voir l'écran.",
                   style: TextStyle(color: Colors.white70, fontSize: 13),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 24),
                 ElevatedButton.icon(
                   icon: Icon(Icons.visibility),
-                  label: Text("Voir la carte-clÃƒÂ©"),
+                  label: Text("Voir la carte-clé"),
                   onPressed: () => setState(() => _masterSpyReady = true),
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
@@ -55090,7 +57639,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
         _buildScoreDisplay(),
         SizedBox(height: 15),
         Text(
-          "$currentMasterSpy Ã¢â‚¬â€ MaÃƒÂ®tre-Espion ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
+          "$currentMasterSpy â€â€ Maître-Espion ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 15),
@@ -55133,7 +57682,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
         _buildScoreDisplay(),
         SizedBox(height: 15),
         Text(
-          "Passe le tÃƒÂ©lÃƒÂ©phone aux agents de l'ÃƒÂ©quipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
+          "Passe le téléphone aux agents de l'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         Text(
@@ -55164,7 +57713,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Partie TerminÃƒÂ©e !",
+                "Partie Terminée !",
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -55269,12 +57818,12 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             textColor = Colors.white;
             statusIcon = Icons.dangerous; // Assassin
           } else {
-            cardColor = Colors.brown[300]!; // TÃƒÂ©moin
+            cardColor = Colors.brown[300]!; // Témoin
             textColor = Colors.white70;
             statusIcon = Icons.directions_walk;
           }
         } else if (showKey) {
-          // Vue MaÃƒÂ®tre Espion (teinte lÃƒÂ©gÃƒÂ¨re)
+          // Vue Maître Espion (teinte légère)
           if (actualColor == 'red') overlayColor = Colors.red.withOpacity(0.3);
           if (actualColor == 'blue')
             overlayColor = Colors.blue.withOpacity(0.3);
@@ -55294,7 +57843,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             transform:
                 Matrix4.identity()..scale(
                   isRevealed ? 0.95 : 1.0,
-                ), // Petit effet de "flip" simulÃƒÂ©
+                ), // Petit effet de "flip" simulé
             decoration: BoxDecoration(
               color: cardColor,
               borderRadius: BorderRadius.circular(6),
@@ -55320,7 +57869,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             ),
             child: Stack(
               children: [
-                // Fond colorÃƒÂ© pour maÃƒÂ®tre espion
+                // Fond coloré pour maître espion
                 if (overlayColor != null) Container(color: overlayColor),
 
                 // Contenu
@@ -55372,7 +57921,7 @@ enum TimesUpLocalGameState {
 
 class TimesUpLocalGameScreen extends StatefulWidget {
   final List<String> players;
-  final List<String>? teamA; // Ãƒâ€°quipes optionnelles
+  final List<String>? teamA; // Équipes optionnelles
   final List<String>? teamB;
 
   const TimesUpLocalGameScreen({
@@ -55451,7 +58000,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              "Mot ajoutÃƒÂ© pour $player ! Total: ${_playersWords[player]?.length}",
+              "Mot ajouté pour $player ! Total: ${_playersWords[player]?.length}",
             ),
           ),
         );
@@ -55624,13 +58173,13 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
               SizedBox(height: 20),
               if (widget.players.length < 4)
                 Text(
-                  "Besoin d'au moins 4 joueurs (2 par ÃƒÂ©quipe) pour jouer !",
+                  "Besoin d'au moins 4 joueurs (2 par équipe) pour jouer !",
                   style: TextStyle(color: Colors.redAccent, fontSize: 16),
                   textAlign: TextAlign.center,
                 )
               else ...[
                 Text(
-                  "Les ÃƒÂ©quipes seront formÃƒÂ©es alÃƒÂ©atoirement.",
+                  "Les équipes seront formées aléatoirement.",
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
@@ -55688,16 +58237,15 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                           TextField(
                             controller: _aiController,
                             decoration: InputDecoration(
-                              labelText: "ThÃƒÂ¨me pour les mots ÃƒÂ  deviner",
-                              hintText:
-                                  "ex: cÃƒÂ©lÃƒÂ©britÃƒÂ©s, animaux, cuisine...",
+                              labelText: "Thème pour les mots à deviner",
+                              hintText: "ex: célébrités, animaux, cuisine...",
                               border: OutlineInputBorder(),
                             ),
                             maxLines: 1,
                           ),
                           SizedBox(height: 6),
                           Text(
-                            "L'IA gÃƒÂ©nÃƒÂ©rera les mots automatiquement (la phase de saisie manuelle sera ignorÃƒÂ©e).",
+                            "L'IA générera les mots automatiquement (la phase de saisie manuelle sera ignorée).",
                             style: TextStyle(
                               fontSize: 11,
                               color: Colors.white54,
@@ -55760,7 +58308,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                                 ),
                               ),
                               SizedBox(width: 8),
-                              Text("GÃƒÂ©nÃƒÂ©ration IA..."),
+                              Text("Génération IA..."),
                             ],
                           )
                           : Text("Commencer la partie"),
@@ -55783,7 +58331,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Passe le tÃƒÂ©lÃƒÂ©phone ÃƒÂ  $currentPlayerForInput",
+          "Passe le téléphone à $currentPlayerForInput",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         Text(
@@ -55821,7 +58369,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                 currentPlayerForInput,
                 _wordInputController.text.trim(),
               );
-              _wordInputController.clear(); // Vider le champ aprÃƒÂ¨s l'ajout
+              _wordInputController.clear(); // Vider le champ après l'ajout
             }
           },
           child: Text("Ajouter ce mot"),
@@ -55844,7 +58392,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         ),
         SizedBox(height: 20),
         Text(
-          "Mots restants ÃƒÂ  ajouter pour $currentPlayerForInput: ${5 - wordsForCurrentPlayer}",
+          "Mots restants à ajouter pour $currentPlayerForInput: ${5 - wordsForCurrentPlayer}",
           style: TextStyle(color: Colors.white70),
         ),
         SizedBox(height: 20),
@@ -55880,7 +58428,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         ),
         SizedBox(height: 10),
         Text(
-          "C'est au tour de ${currentGuesser} (${_activeTeam == 'red' ? 'Ãƒâ€°quipe Rouge' : 'Ãƒâ€°quipe Bleue'})",
+          "C'est au tour de ${currentGuesser} (${_activeTeam == 'red' ? 'Équipe Rouge' : 'Équipe Bleue'})",
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 20),
@@ -55898,7 +58446,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Mots devinÃƒÂ©s ce tour : ${_discardedWords.length}",
+                  "Mots devinés ce tour : ${_discardedWords.length}",
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
@@ -55918,7 +58466,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                   _currentDeck.isNotEmpty
                       ? () => _guessWord(currentWord, true)
                       : null,
-              child: Text("DevinÃƒÂ© !"),
+              child: Text("Deviné !"),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
             ),
             ElevatedButton(
@@ -55949,7 +58497,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
     } else if ((_teamScores['blue'] ?? -1) > (_teamScores['red'] ?? -1)) {
       winnerTeam = 'Bleue';
     } else {
-      winnerTeam = 'Ãƒâ€°galitÃƒÂ© !';
+      winnerTeam = 'Égalité !';
     }
 
     if (_teamScores['red'] == -1) {
@@ -55966,7 +58514,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  "Veuillez revenir ÃƒÂ  l'ÃƒÂ©cran de configuration des joueurs.",
+                  "Veuillez revenir à l'écran de configuration des joueurs.",
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
@@ -55990,13 +58538,13 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Partie TerminÃƒÂ©e !",
+                "Partie Terminée !",
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10),
               Text(
-                "L'ÃƒÂ©quipe $winnerTeam a gagnÃƒÂ© !",
+                "L'équipe $winnerTeam a gagné !",
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color:
                       winnerTeam == 'Rouge'
@@ -56490,7 +59038,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
               SizedBox(height: 10),
               if (_nextPlayerToPass != null)
                 Text(
-                  "Passe ÃƒÂ  $_nextPlayerToPass !",
+                  "Passe à $_nextPlayerToPass !",
                   style: Theme.of(
                     context,
                   ).textTheme.titleLarge?.copyWith(color: Colors.amberAccent),
@@ -56516,7 +59064,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
         ),
         SizedBox(height: 10),
         Text(
-          "Il/Elle doit rÃƒÂ©pondre ÃƒÂ  la question :",
+          "Il/Elle doit répondre à la question :",
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
@@ -58369,9 +60917,9 @@ class __DobbleSymbolButtonState extends State<_DobbleSymbolButton>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 100), // Animation trÃƒÂ¨s rapide (pop)
+      duration: Duration(milliseconds: 100), // Animation très rapide (pop)
     );
-    // L'emoji grossit de 1.0 ÃƒÂ  1.5 puis revient
+    // L'emoji grossit de 1.0 à 1.5 puis revient
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 1.5,
@@ -58419,7 +60967,7 @@ class __DobbleSymbolButtonState extends State<_DobbleSymbolButton>
   }
 }
 
-// Classe helper pour stocker la position et la taille des symboles placÃƒÂ©s
+// Classe helper pour stocker la position et la taille des symboles placés
 class _PlacedSymbolData {
   final double x;
   final double y;
@@ -58844,7 +61392,7 @@ List<Widget> _buildLudoPawns(
   return pawns;
 }
 
-// â”€â”€â”€ ModÃ¨le d'une tuile posÃ©e â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Modèle d'une tuile posée ──────────────────────────────
 class PlacedTile {
   final String tile;
   final int matchEnd;
@@ -58869,7 +61417,7 @@ class LayoutResult {
   LayoutResult(this.tiles, this.boardSize);
 }
 
-// â”€â”€â”€ Moteur de layout (Vraie logique bout Ã  bout) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Moteur de layout (Vraie logique bout à bout) ──────────
 class ChainLayoutEngine {
   static const double HALF_W = 24.0; // largeur d'une demi-tuile
   static const double HALF_H = 36.0; // hauteur d'une demi-tuile
@@ -58890,7 +61438,7 @@ class ChainLayoutEngine {
       final b = int.parse(parts[1]);
       final isDouble = a == b;
 
-      // Largeur physique de la tuile posÃ©e (un double se pose Ã  la verticale)
+      // Largeur physique de la tuile posée (un double se pose à la verticale)
       final double tileWidth = isDouble ? HALF_W * 2 : HALF_W * 4;
 
       if (i == 0) {
@@ -58916,7 +61464,7 @@ class ChainLayoutEngine {
         bool attachRight = false;
 
         if (matchEnd == leftVal && matchEnd == rightVal) {
-          attachRight = true; // Si ambigu, on part Ã  droite
+          attachRight = true; // Si ambigu, on part à droite
         } else if (matchEnd == leftVal) {
           attachLeft = true;
         } else if (matchEnd == rightVal) {
@@ -58965,7 +61513,7 @@ class ChainLayoutEngine {
       }
     }
 
-    // Centrer le tout pour que toutes les coordonnÃ©es soient positives
+    // Centrer le tout pour que toutes les coordonnées soient positives
     if (result.isEmpty) return LayoutResult([], const Size(300, 200));
 
     double minX = result
@@ -59003,7 +61551,7 @@ class ChainLayoutEngine {
   }
 }
 
-// â”€â”€â”€ Widget du plateau de jeu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Widget du plateau de jeu ──────────────────────────────
 class DominoesBoardWidget extends StatelessWidget {
   final List<Map<String, dynamic>> chain;
 
@@ -59048,7 +61596,7 @@ class DominoesBoardWidget extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Tuile sur le plateau â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Tuile sur le plateau ──────────────────────────────────
 class _BoardTile extends StatelessWidget {
   final String tile;
   final bool flipped;
@@ -59126,7 +61674,7 @@ class _BoardTile extends StatelessWidget {
   }
 }
 
-// â”€â”€â”€ Tuile en main (rack) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Tuile en main (rack) ──────────────────────────────────
 class HandTileWidgetSimple extends StatefulWidget {
   final String tile;
   final bool isPlayable;
@@ -59240,7 +61788,7 @@ class _HandTileWidgetSimpleState extends State<HandTileWidgetSimple> {
   }
 }
 
-// â”€â”€â”€ Nouveau rendu des points SANS GridView (ZÃ©ro crash) â”€â”€
+// ─── Nouveau rendu des points SANS GridView (Zéro crash) ──
 class _PipGrid extends StatelessWidget {
   final int value;
 
@@ -59386,7 +61934,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
 }
 
 // ==================================================================
-// SECTION DES SALONS (LOUNGES) - VERSION UNIQUE ET COMPLÃˆTE
+// SECTION DES SALONS (LOUNGES) - VERSION UNIQUE ET COMPLÈTE
 // ==================================================================
 
 class LoungeListScreen extends StatelessWidget {
@@ -59498,10 +62046,11 @@ class LoungeListScreen extends StatelessWidget {
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               // Requête simple insensible aux index manquants
-              stream: FirebaseFirestore.instance
-                  .collection('lounges')
-                  .where('isPrivate', isEqualTo: false)
-                  .snapshots(),
+              stream:
+                  FirebaseFirestore.instance
+                      .collection('lounges')
+                      .where('isPrivate', isEqualTo: false)
+                      .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
@@ -59512,8 +62061,12 @@ class LoungeListScreen extends StatelessWidget {
                 lounges.sort((a, b) {
                   final aData = a.data() as Map<String, dynamic>;
                   final bData = b.data() as Map<String, dynamic>;
-                  final aTime = (aData['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now();
-                  final bTime = (bData['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now();
+                  final aTime =
+                      (aData['createdAt'] as Timestamp?)?.toDate() ??
+                      DateTime.now();
+                  final bTime =
+                      (bData['createdAt'] as Timestamp?)?.toDate() ??
+                      DateTime.now();
                   return bTime.compareTo(aTime);
                 });
 
@@ -59531,43 +62084,65 @@ class LoungeListScreen extends StatelessWidget {
                   itemCount: lounges.length,
                   itemBuilder: (context, index) {
                     final data = lounges[index].data() as Map<String, dynamic>;
-                    final players = data['players'] as Map<String, dynamic>? ?? {};
-                    final bool isFull = players.length >= (data['maxPlayers'] ?? 10);
+                    final players =
+                        data['players'] as Map<String, dynamic>? ?? {};
+                    final bool isFull =
+                        players.length >= (data['maxPlayers'] ?? 10);
                     final String hostId = data['hostId'] ?? '';
                     final bool amIHost = hostId == playerId;
 
                     return Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      color: amIHost ? Colors.deepPurple[900]?.withOpacity(0.5) : Colors.blueGrey[900],
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      color:
+                          amIHost
+                              ? Colors.deepPurple[900]?.withOpacity(0.5)
+                              : Colors.blueGrey[900],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                         side: BorderSide(
-                          color: amIHost ? Colors.amberAccent.withOpacity(0.5) : Colors.white10,
+                          color:
+                              amIHost
+                                  ? Colors.amberAccent.withOpacity(0.5)
+                                  : Colors.white10,
                         ),
                       ),
                       child: ListTile(
                         leading: Icon(
                           Icons.living_rounded,
                           size: 38,
-                          color: amIHost ? Colors.amberAccent : Colors.cyanAccent,
+                          color:
+                              amIHost ? Colors.amberAccent : Colors.cyanAccent,
                         ),
                         title: Row(
                           children: [
                             Text(
                               data['name'] ?? 'Salon',
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                             if (amIHost) ...[
                               const SizedBox(width: 8),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.amber,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: const Text(
                                   "Mon Salon",
-                                  style: TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ],
@@ -59581,32 +62156,39 @@ class LoungeListScreen extends StatelessWidget {
                             Text(
                               "${players.length} / ${data['maxPlayers'] ?? 10}",
                               style: TextStyle(
-                                color: isFull ? Colors.redAccent : Colors.greenAccent,
+                                color:
+                                    isFull
+                                        ? Colors.redAccent
+                                        : Colors.greenAccent,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
                         ),
-                        onTap: isFull && !amIHost
-                            ? null
-                            : () async {
-                                final ps = Provider.of<PlayerState>(context, listen: false);
-                                await FirebaseService().joinLounge(
-                                  lounges[index].id,
-                                  playerId,
-                                  ps.userName ?? 'Joueur',
-                                );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder:
-                                        (_) => LoungeRoomScreen(
-                                          loungeId: lounges[index].id,
-                                          playerId: playerId,
-                                        ),
-                                  ),
-                                );
-                              },
+                        onTap:
+                            isFull && !amIHost
+                                ? null
+                                : () async {
+                                  final ps = Provider.of<PlayerState>(
+                                    context,
+                                    listen: false,
+                                  );
+                                  await FirebaseService().joinLounge(
+                                    lounges[index].id,
+                                    playerId,
+                                    ps.userName ?? 'Joueur',
+                                  );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (_) => LoungeRoomScreen(
+                                            loungeId: lounges[index].id,
+                                            playerId: playerId,
+                                          ),
+                                    ),
+                                  );
+                                },
                       ),
                     );
                   },
@@ -59661,13 +62243,11 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
 
     final ps = Provider.of<PlayerState>(context, listen: false);
     if (!ps.isPremium) {
-      bool success = await ps.spendCoins(5); // Le salon coÃ»te 5 piÃ¨ces
+      bool success = await ps.spendCoins(5); // Le salon coûte 5 pièces
       if (!success) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              "Vous avez besoin de 5 piÃ¨ces pour crÃ©er un salon.",
-            ),
+            content: Text("Vous avez besoin de 5 pièces pour créer un salon."),
           ),
         );
         return;
@@ -59681,14 +62261,14 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
       'theme':
           _themeCtrl.text.trim().isNotEmpty
               ? _themeCtrl.text.trim()
-              : 'GÃ©nÃ©ral',
+              : 'Général',
       'description': _descCtrl.text.trim(),
       'maxPlayers': _maxPlayers.toInt(),
       'isPrivate': _isPrivate,
       'hostId': widget.playerId,
       'players': {
         widget.playerId: {
-          'name': ps.userName ?? 'HÃ´te',
+          'name': ps.userName ?? 'Hôte',
           'joinedAt': FieldValue.serverTimestamp(),
         },
       },
@@ -59713,7 +62293,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("CrÃ©er un Salon")),
+      appBar: AppBar(title: Text("Créer un Salon")),
       body:
           _isLoading
               ? Center(child: CircularProgressIndicator())
@@ -59729,7 +62309,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                     TextField(
                       controller: _themeCtrl,
                       decoration: InputDecoration(
-                        labelText: "ThÃ¨me (ex: Fun, Tryhard, Chill)",
+                        labelText: "Thème (ex: Fun, Tryhard, Chill)",
                       ),
                     ),
                     SizedBox(height: 10),
@@ -59751,9 +62331,9 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                       onChanged: (v) => setState(() => _maxPlayers = v),
                     ),
                     SwitchListTile.adaptive(
-                      title: Text("Salon PrivÃ©"),
+                      title: Text("Salon Privé"),
                       subtitle: Text(
-                        "N'apparaÃ®tra pas dans la liste publique.",
+                        "N'apparaîtra pas dans la liste publique.",
                       ),
                       value: _isPrivate,
                       onChanged: (v) => setState(() => _isPrivate = v),
@@ -59761,7 +62341,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                     SizedBox(height: 30),
                     ElevatedButton(
                       onPressed: _createLounge,
-                      child: Text("CrÃ©er le Salon (CoÃ»t: 5 piÃ¨ces)"),
+                      child: Text("Créer le Salon (Coût: 5 pièces)"),
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, 50),
                       ),
@@ -59877,7 +62457,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                             MaterialPageRoute(
                               builder:
                                   (_) => CreateGameScreen(
-                                    playerName: ps.userName ?? "HÃ´te",
+                                    playerName: ps.userName ?? "Hôte",
                                     playerId: widget.playerId,
                                     initialGame: game['name'],
                                     loungeId: widget.loungeId,
@@ -59912,7 +62492,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     String newGameCode = randomNumeric(6);
 
     Map<String, dynamic> hostOnly = {
-      widget.playerId: {'name': ps.userName ?? 'HÃ´te', 'score': 0},
+      widget.playerId: {'name': ps.userName ?? 'Hôte', 'score': 0},
     };
 
     await _firebaseService.createGameWithAllPlayers(
@@ -59996,8 +62576,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     await _firebaseService.sendLoungeMessage(
       widget.loungeId,
       widget.playerId,
-      ps.userName ?? 'HÃ´te',
-      "J'ai lancÃ© une partie de ${data['gameType'] ?? 'Gribouillis'} !",
+      ps.userName ?? 'Hôte',
+      "J'ai lancé une partie de ${data['gameType'] ?? 'Gribouillis'} !",
       type: 'game_invite',
       extraData: {
         'gameCode': newGameCode,
@@ -60017,9 +62597,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
               .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData || !snapshot.data!.exists) {
-          return Scaffold(
-            body: Center(child: Text("Ce salon a Ã©tÃ© fermÃ©.")),
-          );
+          return Scaffold(body: Center(child: Text("Ce salon a été fermé.")));
         }
         final data = snapshot.data!.data() as Map<String, dynamic>;
         final players = data['players'] as Map<String, dynamic>? ?? {};
@@ -60092,23 +62670,34 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
               actions: [
                 if (isHost)
                   IconButton(
-                    icon: const Icon(Icons.delete_forever, color: Colors.redAccent),
+                    icon: const Icon(
+                      Icons.delete_forever,
+                      color: Colors.redAccent,
+                    ),
                     tooltip: "Fermer le salon",
                     onPressed: () async {
                       final confirm = await showDialog<bool>(
                         context: context,
-                        builder: (ctx) => AlertDialog(
-                          title: const Text("Fermer le salon ?"),
-                          content: const Text("Le salon sera définitivement supprimé pour tous les participants."),
-                          actions: [
-                            TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text("Annuler")),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                              onPressed: () => Navigator.pop(ctx, true),
-                              child: const Text("Fermer le salon"),
+                        builder:
+                            (ctx) => AlertDialog(
+                              title: const Text("Fermer le salon ?"),
+                              content: const Text(
+                                "Le salon sera définitivement supprimé pour tous les participants.",
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(ctx, false),
+                                  child: const Text("Annuler"),
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                  ),
+                                  onPressed: () => Navigator.pop(ctx, true),
+                                  child: const Text("Fermer le salon"),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
                       );
 
                       if (confirm == true) {
@@ -60152,7 +62741,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           .collection('presences')
                           .snapshots(),
                   builder: (context, presenceSnap) {
-                    if (!presenceSnap.hasData) return const SizedBox(height: 65);
+                    if (!presenceSnap.hasData)
+                      return const SizedBox(height: 65);
                     final now = DateTime.now();
                     List<String> onlineIds = [];
                     for (var doc in presenceSnap.data!.docs) {
@@ -60298,7 +62888,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           if (msg['type'] == 'game_invite' ||
                               (msg['text'] != null &&
                                   msg['text'].toString().contains(
-                                    "J'ai lancÃ© une partie",
+                                    "J'ai lancé une partie",
                                   ))) {
                             String gameCode =
                                 msg['extraData']?['gameCode'] ??
@@ -60344,7 +62934,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               child: Column(
                                 children: [
                                   Text(
-                                    "${msg['senderName']} a crÃ©Ã© une partie de $gameName !",
+                                    "${msg['senderName']} a créé une partie de $gameName !",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -60352,14 +62942,14 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                   ),
                                   SizedBox(height: 10),
                                   Text(
-                                    "${joinedPlayers.length} joueur(s) prÃªts",
+                                    "${joinedPlayers.length} joueur(s) prêts",
                                   ),
                                   SizedBox(height: 10),
                                   if (isGameFinished)
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),
                                       child: Text(
-                                        "Cette partie est terminÃ©e ou annulÃ©e.",
+                                        "Cette partie est terminée ou annulée.",
                                         style: TextStyle(
                                           fontStyle: FontStyle.italic,
                                           color: Colors.grey,
@@ -60486,7 +63076,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               child: Column(
                                 children: [
                                   Text(
-                                    "Partie de ${msg['extraData']['gameName']} terminÃ©e !",
+                                    "Partie de ${msg['extraData']['gameName']} terminée !",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -60668,7 +63258,7 @@ class _LoungeStreamingScreenState extends State<LoungeStreamingScreen> {
     await _livekitService.joinChannel(
       widget.loungeId,
       identity: widget.playerId,
-      videoEnabled: true, // Force l'activation de la vidÃ©o pour le stream
+      videoEnabled: true, // Force l'activation de la vidéo pour le stream
       audioEnabled: true, // Force l'activation de l'audio pour le stream
     );
     await FirebaseService().joinLoungeStream(widget.loungeId, widget.playerId);
@@ -63250,25 +65840,134 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseFirestore.instance.collection('games').doc(widget.gameCode).snapshots(),
+      stream:
+          FirebaseFirestore.instance
+              .collection('games')
+              .doc(widget.gameCode)
+              .snapshots(),
       builder: (context, snapshot) {
-        final currentData = snapshot.hasData && snapshot.data!.exists
-            ? (snapshot.data!.data() as Map<String, dynamic>)
-            : widget.gameData;
+        final currentData =
+            snapshot.hasData && snapshot.data!.exists
+                ? (snapshot.data!.data() as Map<String, dynamic>)
+                : widget.gameData;
 
-        final currentPlayers = Map<String, dynamic>.from(currentData['players'] ?? widget.players);
+        final currentPlayersRaw = currentData['players'];
+        final Map<String, dynamic> currentPlayers = Map<String, dynamic>.from(
+          widget.players,
+        );
+        if (currentPlayersRaw is Map) {
+          currentPlayersRaw.forEach((k, v) {
+            final key = k.toString();
+            if (v is Map) {
+              currentPlayers[key] = {
+                ...(currentPlayers[key] is Map ? currentPlayers[key] : {}),
+                ...Map<String, dynamic>.from(v),
+              };
+            } else {
+              currentPlayers[key] = v;
+            }
+          });
+        }
+
+        final playerProfiles = Map<String, dynamic>.from(
+          currentData['playerProfiles'] ?? {},
+        );
+
+        // Rassembler tous les identifiants de joueurs de la partie pour ne jamais tomber à 1/1
+        final Set<String> allParticipantIds = {};
+        allParticipantIds.addAll(currentPlayers.keys);
+        allParticipantIds.addAll(widget.players.keys.map((e) => e.toString()));
+        allParticipantIds.addAll(playerProfiles.keys);
+        if (currentData['playerOrder'] is List) {
+          allParticipantIds.addAll(
+            (currentData['playerOrder'] as List).map((e) => e.toString()),
+          );
+        }
+        for (String key in [
+          'bigTwoPlayerOrder',
+          'belotePlayerOrder',
+          'unoPlayerOrder',
+          'tarotPlayerOrder',
+          'ramiPlayerOrder',
+          'yamsPlayerOrder',
+          'yamsScores',
+        ]) {
+          if (currentData[key] is List) {
+            allParticipantIds.addAll(
+              (currentData[key] as List).map((e) => e.toString()),
+            );
+          } else if (currentData[key] is Map) {
+            allParticipantIds.addAll(
+              (currentData[key] as Map).keys.map((e) => e.toString()),
+            );
+          }
+        }
+        allParticipantIds.add(widget.currentPlayerId);
+
+        // Veiller à ce que chaque participant soit dans currentPlayers
+        for (String pId in allParticipantIds) {
+          if (!currentPlayers.containsKey(pId) || currentPlayers[pId] is! Map) {
+            final prof =
+                playerProfiles[pId] is Map
+                    ? Map<String, dynamic>.from(playerProfiles[pId])
+                    : (widget.players[pId] is Map
+                        ? Map<String, dynamic>.from(widget.players[pId])
+                        : {});
+            currentPlayers[pId] = prof;
+          }
+        }
+
         final currentHostId = currentData['hostId'] ?? '';
         final bool isCurrentHost = (currentHostId == widget.currentPlayerId);
-        final restartVotes = Map<String, dynamic>.from(currentData['restartVotes'] ?? {});
+        final restartVotes = Map<String, dynamic>.from(
+          currentData['restartVotes'] ?? {},
+        );
         final bool hasVoted = restartVotes.containsKey(widget.currentPlayerId);
         final int readyCount = restartVotes.length;
-        final int totalPlayers = currentPlayers.length;
+        final int totalPlayers =
+            currentPlayers.length >= 2
+                ? currentPlayers.length
+                : (allParticipantIds.length >= 2
+                    ? allParticipantIds.length
+                    : (widget.players.length >= 2
+                        ? widget.players.length
+                        : currentPlayers.length));
+
+        String resolvePlayerName(String pId) {
+          final fromPlayers =
+              currentPlayers[pId] is Map ? currentPlayers[pId]['name'] : null;
+          if (fromPlayers != null &&
+              fromPlayers.toString().trim().isNotEmpty &&
+              fromPlayers != 'Inconnu') {
+            return fromPlayers.toString();
+          }
+          final fromProfiles =
+              playerProfiles[pId] is Map ? playerProfiles[pId]['name'] : null;
+          if (fromProfiles != null &&
+              fromProfiles.toString().trim().isNotEmpty &&
+              fromProfiles != 'Inconnu') {
+            return fromProfiles.toString();
+          }
+          final fromWidget =
+              widget.players[pId] is Map ? widget.players[pId]['name'] : null;
+          if (fromWidget != null &&
+              fromWidget.toString().trim().isNotEmpty &&
+              fromWidget != 'Inconnu') {
+            return fromWidget.toString();
+          }
+          if (pId == widget.currentPlayerId) {
+            final authName = FirebaseAuth.instance.currentUser?.displayName;
+            if (authName != null && authName.trim().isNotEmpty) return authName;
+          }
+          return 'Joueur';
+        }
 
         // Calcul du classement par score conservé
         final List<MapEntry<String, int>> leaderboard = [];
         currentPlayers.forEach((pId, pData) {
           int score = 0;
-          if (widget.customScores != null && widget.customScores!.containsKey(pId)) {
+          if (widget.customScores != null &&
+              widget.customScores!.containsKey(pId)) {
             score = widget.customScores![pId]!;
           } else if (pData is Map && pData.containsKey('score')) {
             score = (pData['score'] as num?)?.toInt() ?? 0;
@@ -63282,13 +65981,17 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
           leaderboard.sort((a, b) => b.value.compareTo(a.value));
         }
 
-        final String displayWinner = widget.winnerName ??
+        final String displayWinner =
+            widget.winnerName ??
             (leaderboard.isNotEmpty
-                ? (currentPlayers[leaderboard.first.key]?['name'] ?? 'Joueur')
+                ? resolvePlayerName(leaderboard.first.key)
                 : 'Partie terminée');
 
-        final bool amIWinner = (widget.winnerId != null && widget.winnerId == widget.currentPlayerId) ||
-            (leaderboard.isNotEmpty && leaderboard.first.key == widget.currentPlayerId);
+        final bool amIWinner =
+            (widget.winnerId != null &&
+                widget.winnerId == widget.currentPlayerId) ||
+            (leaderboard.isNotEmpty &&
+                leaderboard.first.key == widget.currentPlayerId);
 
         return Center(
           child: SingleChildScrollView(
@@ -63305,12 +66008,16 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                 ),
                 borderRadius: BorderRadius.circular(28),
                 border: Border.all(
-                  color: amIWinner ? Colors.amberAccent : Colors.deepPurpleAccent.withOpacity(0.5),
+                  color:
+                      amIWinner
+                          ? Colors.amberAccent
+                          : Colors.deepPurpleAccent.withOpacity(0.5),
                   width: 2,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: (amIWinner ? Colors.amberAccent : Colors.deepPurple).withOpacity(0.35),
+                    color: (amIWinner ? Colors.amberAccent : Colors.deepPurple)
+                        .withOpacity(0.35),
                     blurRadius: 25,
                     spreadRadius: 2,
                   ),
@@ -63321,9 +66028,14 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                 children: [
                   // Trophée et En-tête
                   Icon(
-                    amIWinner ? Icons.emoji_events_rounded : Icons.military_tech_rounded,
+                    amIWinner
+                        ? Icons.emoji_events_rounded
+                        : Icons.military_tech_rounded,
                     size: 64,
-                    color: amIWinner ? Colors.amberAccent : Colors.deepPurpleAccent,
+                    color:
+                        amIWinner
+                            ? Colors.amberAccent
+                            : Colors.deepPurpleAccent,
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -63360,12 +66072,18 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
 
                   // BARRE D'ÉTAT : COMPTEUR JOUEURS PRÊTS + CHRONO 30S
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: _secondsLeft <= 5 ? Colors.redAccent : Colors.amberAccent.withOpacity(0.4),
+                        color:
+                            _secondsLeft <= 5
+                                ? Colors.redAccent
+                                : Colors.amberAccent.withOpacity(0.4),
                       ),
                     ),
                     child: Row(
@@ -63373,7 +66091,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.people_alt_rounded, color: Colors.greenAccent, size: 18),
+                            const Icon(
+                              Icons.people_alt_rounded,
+                              color: Colors.greenAccent,
+                              size: 18,
+                            ),
                             const SizedBox(width: 8),
                             Text(
                               "$readyCount / $totalPlayers prêts",
@@ -63386,9 +66108,15 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                           ],
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
                           decoration: BoxDecoration(
-                            color: _secondsLeft <= 5 ? Colors.redAccent.withOpacity(0.25) : Colors.white10,
+                            color:
+                                _secondsLeft <= 5
+                                    ? Colors.redAccent.withOpacity(0.25)
+                                    : Colors.white10,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -63396,14 +66124,20 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               Icon(
                                 Icons.timer,
                                 size: 14,
-                                color: _secondsLeft <= 5 ? Colors.redAccent : Colors.amberAccent,
+                                color:
+                                    _secondsLeft <= 5
+                                        ? Colors.redAccent
+                                        : Colors.amberAccent,
                               ),
                               const SizedBox(width: 4),
                               Text(
                                 "$_secondsLeft s",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
-                                  color: _secondsLeft <= 5 ? Colors.redAccent : Colors.amberAccent,
+                                  color:
+                                      _secondsLeft <= 5
+                                          ? Colors.redAccent
+                                          : Colors.amberAccent,
                                   fontSize: 13,
                                 ),
                               ),
@@ -63437,7 +66171,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                     final int rank = entry.key + 1;
                     final String pId = entry.value.key;
                     final int pScore = entry.value.value;
-                    final String pName = currentPlayers[pId]?['name'] ?? 'Joueur';
+                    final String pName = resolvePlayerName(pId);
                     final bool isMe = (pId == widget.currentPlayerId);
                     final bool playerReady = restartVotes.containsKey(pId);
                     final bool isPlayerAdmin = (pId == currentHostId);
@@ -63449,12 +66183,19 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
 
                     return Container(
                       margin: const EdgeInsets.symmetric(vertical: 3),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
-                        color: isMe ? Colors.deepPurple.withOpacity(0.35) : Colors.white.withOpacity(0.04),
+                        color:
+                            isMe
+                                ? Colors.deepPurple.withOpacity(0.35)
+                                : Colors.white.withOpacity(0.04),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: isMe ? Colors.deepPurpleAccent : Colors.white10,
+                          color:
+                              isMe ? Colors.deepPurpleAccent : Colors.white10,
                           width: isMe ? 1.5 : 1,
                         ),
                       ),
@@ -63462,7 +66203,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                         children: [
                           Text(
                             "#$rank",
-                            style: TextStyle(fontWeight: FontWeight.bold, color: medalColor, fontSize: 13),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: medalColor,
+                              fontSize: 13,
+                            ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -63472,8 +66217,14 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                   child: Text(
                                     isMe ? "$pName (Moi)" : pName,
                                     style: TextStyle(
-                                      fontWeight: isMe ? FontWeight.w900 : FontWeight.bold,
-                                      color: isMe ? Colors.amberAccent : Colors.white,
+                                      fontWeight:
+                                          isMe
+                                              ? FontWeight.w900
+                                              : FontWeight.bold,
+                                      color:
+                                          isMe
+                                              ? Colors.amberAccent
+                                              : Colors.white,
                                       fontSize: 13,
                                     ),
                                     overflow: TextOverflow.ellipsis,
@@ -63481,16 +66232,26 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                 ),
                                 if (isPlayerAdmin) ...[
                                   const SizedBox(width: 4),
-                                  const Icon(Icons.admin_panel_settings, size: 14, color: Colors.amberAccent),
+                                  const Icon(
+                                    Icons.admin_panel_settings,
+                                    size: 14,
+                                    color: Colors.amberAccent,
+                                  ),
                                 ],
                               ],
                             ),
                           ),
                           // Badge Prêt / En attente
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
-                              color: playerReady ? Colors.green.withOpacity(0.2) : Colors.white10,
+                              color:
+                                  playerReady
+                                      ? Colors.green.withOpacity(0.2)
+                                      : Colors.white10,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
@@ -63498,7 +66259,10 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
-                                color: playerReady ? Colors.greenAccent : Colors.white38,
+                                color:
+                                    playerReady
+                                        ? Colors.greenAccent
+                                        : Colors.white38,
                               ),
                             ),
                           ),
@@ -63508,7 +66272,10 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w900,
-                              color: rank == 1 ? Colors.amberAccent : Colors.white70,
+                              color:
+                                  rank == 1
+                                      ? Colors.amberAccent
+                                      : Colors.white70,
                             ),
                           ),
                         ],
@@ -63525,13 +66292,20 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                         children: [
                           Expanded(
                             child: OutlinedButton.icon(
-                              icon: const Icon(Icons.exit_to_app_rounded, size: 16),
+                              icon: const Icon(
+                                Icons.exit_to_app_rounded,
+                                size: 16,
+                              ),
                               label: const Text("Quitter"),
                               style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.redAccent,
                                 side: const BorderSide(color: Colors.redAccent),
-                                padding: const EdgeInsets.symmetric(vertical: 13),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 13,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
                               ),
                               onPressed: widget.onExit,
                             ),
@@ -63540,24 +66314,45 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                           Expanded(
                             flex: 2,
                             child: ElevatedButton.icon(
-                              icon: Icon(hasVoted ? Icons.check_circle : Icons.replay_rounded, size: 18),
+                              icon: Icon(
+                                hasVoted
+                                    ? Icons.check_circle
+                                    : Icons.replay_rounded,
+                                size: 18,
+                              ),
                               label: Text(
-                                hasVoted ? "PRÊT ($readyCount/$totalPlayers)" : "REJOUER (GARDER PTS)",
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5),
+                                hasVoted
+                                    ? "PRÊT ($readyCount/$totalPlayers)"
+                                    : "REJOUER (GARDER PTS)",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.5,
+                                ),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: hasVoted ? Colors.grey[700] : const Color(0xFF10B981),
+                                backgroundColor:
+                                    hasVoted
+                                        ? Colors.grey[700]
+                                        : const Color(0xFF10B981),
                                 foregroundColor: Colors.white,
                                 elevation: 5,
-                                padding: const EdgeInsets.symmetric(vertical: 13),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 13,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
                               ),
-                              onPressed: hasVoted
-                                  ? null
-                                  : () {
-                                      HapticFeedback.mediumImpact();
-                                      FirebaseService().submitRestartVote(widget.gameCode, widget.currentPlayerId);
-                                    },
+                              onPressed:
+                                  hasVoted
+                                      ? null
+                                      : () {
+                                        HapticFeedback.mediumImpact();
+                                        FirebaseService().submitRestartVote(
+                                          widget.gameCode,
+                                          widget.currentPlayerId,
+                                        );
+                                      },
                             ),
                           ),
                         ],
@@ -63569,13 +66364,23 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: TextButton.icon(
-                            icon: const Icon(Icons.flash_on, size: 16, color: Colors.amberAccent),
+                            icon: const Icon(
+                              Icons.flash_on,
+                              size: 16,
+                              color: Colors.amberAccent,
+                            ),
                             label: const Text(
                               "Admin : Lancer maintenant avec les joueurs prêts",
-                              style: TextStyle(color: Colors.amberAccent, fontSize: 11, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                color: Colors.amberAccent,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             onPressed: () {
-                              FirebaseService().restartGameKeepScores(widget.gameCode);
+                              FirebaseService().restartGameKeepScores(
+                                widget.gameCode,
+                              );
                             },
                           ),
                         ),
@@ -63590,4 +66395,111 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
       },
     );
   }
+}
+
+class _BigTwoSpadePainter extends CustomPainter {
+  final Color color;
+  _BigTwoSpadePainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill
+          ..isAntiAlias = true;
+
+    final w = size.width;
+    final h = size.height;
+    final path = Path();
+
+    // Pointe en haut
+    path.moveTo(w * 0.5, 0);
+    // Côté droit
+    path.cubicTo(w * 0.75, h * 0.28, w, h * 0.52, w * 0.78, h * 0.72);
+    path.cubicTo(w * 0.62, h * 0.85, w * 0.52, h * 0.75, w * 0.5, h * 0.68);
+    // Côté gauche
+    path.cubicTo(w * 0.48, h * 0.75, w * 0.38, h * 0.85, w * 0.22, h * 0.72);
+    path.cubicTo(0, h * 0.52, w * 0.25, h * 0.28, w * 0.5, 0);
+    path.close();
+
+    // Pied du pique
+    final stem = Path();
+    stem.moveTo(w * 0.44, h * 0.65);
+    stem.lineTo(w * 0.56, h * 0.65);
+    stem.lineTo(w * 0.68, h);
+    stem.lineTo(w * 0.32, h);
+    stem.close();
+
+    canvas.drawPath(path, paint);
+    canvas.drawPath(stem, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class _BigTwoClubPainter extends CustomPainter {
+  final Color color;
+  _BigTwoClubPainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill
+          ..isAntiAlias = true;
+
+    final w = size.width;
+    final h = size.height;
+    final r = w * 0.25;
+
+    // 3 lobes
+    canvas.drawCircle(Offset(w * 0.5, h * 0.28), r, paint);
+    canvas.drawCircle(Offset(w * 0.28, h * 0.56), r, paint);
+    canvas.drawCircle(Offset(w * 0.72, h * 0.56), r, paint);
+    canvas.drawCircle(Offset(w * 0.5, h * 0.5), r * 0.8, paint);
+
+    // Pied du trèfle
+    final stem = Path();
+    stem.moveTo(w * 0.44, h * 0.55);
+    stem.lineTo(w * 0.56, h * 0.55);
+    stem.lineTo(w * 0.68, h);
+    stem.lineTo(w * 0.32, h);
+    stem.close();
+
+    canvas.drawPath(stem, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class _BigTwoDiamondPainter extends CustomPainter {
+  final Color color;
+  _BigTwoDiamondPainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.fill
+          ..isAntiAlias = true;
+
+    final w = size.width;
+    final h = size.height;
+    final path = Path();
+    path.moveTo(w * 0.5, 0);
+    path.lineTo(w, h * 0.5);
+    path.lineTo(w * 0.5, h);
+    path.lineTo(0, h * 0.5);
+    path.close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

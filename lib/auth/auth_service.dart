@@ -97,4 +97,13 @@ class AuthService {
   Future<void> signOut() async {
     await _auth.signOut();
   }
+
+  Future<void> deleteCurrentUser() async {
+    try {
+      await _auth.currentUser?.delete();
+    } catch (e) {
+      print("Erreur suppression compte auth: $e");
+      await _auth.signOut();
+    }
+  }
 }

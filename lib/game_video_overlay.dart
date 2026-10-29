@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:provider/provider.dart';
 import 'livekit_service.dart';
+import 'amis.dart';
+import 'matchmaking_localization.dart';
+import 'l10n/app_localizations.dart';
 
 class GameVideoOverlay extends StatefulWidget {
   final Map<String, dynamic> gameData;
@@ -14,7 +17,7 @@ class GameVideoOverlay extends StatefulWidget {
   final bool isFocusMode;
 
   const GameVideoOverlay({
-    Key? key,
+    super.key,
     required this.gameData,
     required this.playerLivekitIdentities,
     required this.currentPlayerId,
@@ -23,7 +26,7 @@ class GameVideoOverlay extends StatefulWidget {
     this.timeUpActiveTeam,
     this.activePlayerId,
     this.isFocusMode = false,
-  }) : super(key: key);
+  });
 
   @override
   State<GameVideoOverlay> createState() => _GameVideoOverlayState();
@@ -32,6 +35,7 @@ class GameVideoOverlay extends StatefulWidget {
 class _GameVideoOverlayState extends State<GameVideoOverlay> {
   String? _maximizedIdentity;
   final PageController _pageController = PageController();
+  final Set<String> _blockedIdentities = {};
 
   @override
   void dispose() {
@@ -46,6 +50,101 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
     return {};
   }
 
+  void _showReportAndBlockDialog(
+    BuildContext context,
+    LivekitService livekit,
+    String targetIdentity,
+    String targetName,
+  ) {
+    final reasons = [
+      MatchmakingLocalization.tr(context, 'reportReason1'),
+      MatchmakingLocalization.tr(context, 'reportReason2'),
+      MatchmakingLocalization.tr(context, 'reportReason3'),
+      MatchmakingLocalization.tr(context, 'reportReason4'),
+    ];
+    String selectedReason = reasons.first;
+
+    showDialog(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (context, setStateDialog) {
+          return AlertDialog(
+            title: Text(MatchmakingLocalization.tr(context, 'reportOrBlock', {'name': targetName})),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  MatchmakingLocalization.tr(context, 'selectReportReason'),
+                  style: const TextStyle(color: Colors.white70, fontSize: 13),
+                ),
+                const SizedBox(height: 10),
+                ...reasons.map(
+                  (r) => RadioListTile<String>(
+                    contentPadding: EdgeInsets.zero,
+                    dense: true,
+                    title: Text(r, style: const TextStyle(fontSize: 13)),
+                    value: r,
+                    groupValue: selectedReason,
+                    activeColor: Colors.redAccent,
+                    onChanged: (val) {
+                      if (val != null) {
+                        setStateDialog(() => selectedReason = val);
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: Text(AppLocalizations.of(context)?.cancel ?? "Annuler"),
+              ),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                ),
+                icon: const Icon(Icons.block, size: 16),
+                label: Text(MatchmakingLocalization.tr(context, 'reportAndBlock')),
+                onPressed: () async {
+                  Navigator.pop(ctx);
+                  setState(() {
+                    _blockedIdentities.add(targetIdentity);
+                    if (_maximizedIdentity == targetIdentity) {
+                      _maximizedIdentity = null;
+                    }
+                  });
+                  // Coupe le son distant s'il n'était pas déjà coupé
+                  if (!livekit.isRemoteMuted(targetIdentity)) {
+                    livekit.toggleRemoteAudio(targetIdentity);
+                  }
+                  final messenger = ScaffoldMessenger.of(context);
+                  await FirebaseService().reportAndBlockPlayer(
+                    reporterId: widget.currentPlayerId,
+                    reportedPlayerId: targetIdentity,
+                    reportedPlayerName: targetName,
+                    gameCode: widget.gameCode,
+                    reason: selectedReason,
+                  );
+                  if (mounted) {
+                    messenger.showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          "$targetName a été signalé et masqué pour vous.",
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<LivekitService>(
@@ -56,7 +155,8 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
             widget.gameData['audioEnabled'] == true &&
             widget.gameData['videoEnabled'] != true;
 
-        if (_maximizedIdentity != null) {
+        if (_maximizedIdentity != null &&
+            !_blockedIdentities.contains(_maximizedIdentity)) {
           return _buildMaximizedView(livekit, _maximizedIdentity!);
         }
 
@@ -66,14 +166,15 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
         }
 
         for (final id in livekit.remoteUsers.keys) {
-          if (!allIdentities.contains(id)) {
+          if (!allIdentities.contains(id) && !_blockedIdentities.contains(id)) {
             allIdentities.add(id);
           }
         }
 
         if (livekit.room != null) {
           for (final p in livekit.room!.remoteParticipants.values) {
-            if (!allIdentities.contains(p.identity)) {
+            if (!allIdentities.contains(p.identity) &&
+                !_blockedIdentities.contains(p.identity)) {
               allIdentities.add(p.identity);
             }
           }
@@ -88,7 +189,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
 
         final Widget overlayContent = Container(
           width: double.infinity,
-          color: Colors.black.withOpacity(0.85),
+          color: Colors.black.withValues(alpha: 0.85),
           child: Stack(
             children: [
               PageView.builder(
@@ -137,13 +238,12 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                   return GridView.builder(
                     padding: const EdgeInsets.all(3),
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: crossAxisCount,
-                          childAspectRatio: aspectRatio,
-                          crossAxisSpacing: 4,
-                          mainAxisSpacing: 4,
-                        ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      childAspectRatio: aspectRatio,
+                      crossAxisSpacing: 4,
+                      mainAxisSpacing: 4,
+                    ),
                     itemCount: count,
                     itemBuilder: (ctx, idx) {
                       return _buildTile(livekit, pageIdentities[idx]);
@@ -163,11 +263,10 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                         color: Colors.white,
                         size: 20,
                       ),
-                      onPressed:
-                          () => _pageController.previousPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.ease,
-                          ),
+                      onPressed: () => _pageController.previousPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.ease,
+                      ),
                     ),
                   ),
                 ),
@@ -182,11 +281,10 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                         color: Colors.white,
                         size: 20,
                       ),
-                      onPressed:
-                          () => _pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.ease,
-                          ),
+                      onPressed: () => _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.ease,
+                      ),
                     ),
                   ),
                 ),
@@ -276,7 +374,10 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
               left: 0,
               right: 0,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1.5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 4,
+                  vertical: 1.5,
+                ),
                 color: Colors.black54,
                 child: Text(
                   playerName,
@@ -287,7 +388,6 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                 ),
               ),
             ),
-            // CONTRÔLES DIRECTEMENT DANS LE COIN SUPÉRIEUR DE CHAQUE CAMÉRA
             Positioned(
               top: 3,
               right: 3,
@@ -301,7 +401,10 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                         padding: const EdgeInsets.all(3),
                         margin: const EdgeInsets.only(right: 2),
                         decoration: BoxDecoration(
-                          color: livekit.isLocalMuted ? Colors.red.withOpacity(0.85) : Colors.black54,
+                          color:
+                              livekit.isLocalMuted
+                                  ? Colors.red.withValues(alpha: 0.85)
+                                  : Colors.black54,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -316,11 +419,16 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                       child: Container(
                         padding: const EdgeInsets.all(3),
                         decoration: BoxDecoration(
-                          color: livekit.isLocalVideoOff ? Colors.red.withOpacity(0.85) : Colors.black54,
+                          color:
+                              livekit.isLocalVideoOff
+                                  ? Colors.red.withValues(alpha: 0.85)
+                                  : Colors.black54,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
-                          livekit.isLocalVideoOff ? Icons.videocam_off : Icons.videocam,
+                          livekit.isLocalVideoOff
+                              ? Icons.videocam_off
+                              : Icons.videocam,
                           color: Colors.white,
                           size: 11,
                         ),
@@ -331,13 +439,40 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                       onTap: () => livekit.toggleRemoteAudio(identity),
                       child: Container(
                         padding: const EdgeInsets.all(3),
+                        margin: const EdgeInsets.only(right: 2),
                         decoration: BoxDecoration(
-                          color: livekit.isRemoteMuted(identity) ? Colors.red.withOpacity(0.85) : Colors.black54,
+                          color:
+                              livekit.isRemoteMuted(identity)
+                                  ? Colors.red.withValues(alpha: 0.85)
+                                  : Colors.black54,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
-                          livekit.isRemoteMuted(identity) ? Icons.volume_off : Icons.volume_up,
+                          livekit.isRemoteMuted(identity)
+                              ? Icons.volume_off
+                              : Icons.volume_up,
                           color: Colors.white,
+                          size: 11,
+                        ),
+                      ),
+                    ),
+                    // BOUTON SIGNALER / BLOQUER (UGC STORE POLICY)
+                    GestureDetector(
+                      onTap: () => _showReportAndBlockDialog(
+                        context,
+                        livekit,
+                        identity,
+                        playerName,
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: const BoxDecoration(
+                          color: Colors.black54,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.flag_outlined,
+                          color: Colors.orangeAccent,
                           size: 11,
                         ),
                       ),
@@ -414,8 +549,13 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
             GestureDetector(
               onTap: () => livekit.toggleRemoteAudio(identity),
               child: Icon(
-                livekit.isRemoteMuted(identity) ? Icons.volume_off : Icons.volume_up,
-                color: livekit.isRemoteMuted(identity) ? Colors.red : Colors.white70,
+                livekit.isRemoteMuted(identity)
+                    ? Icons.volume_off
+                    : Icons.volume_up,
+                color:
+                    livekit.isRemoteMuted(identity)
+                        ? Colors.red
+                        : Colors.white70,
                 size: 14,
               ),
             ),
@@ -424,6 +564,22 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
             playerName,
             style: const TextStyle(color: Colors.white, fontSize: 11),
           ),
+          if (!isLocal) ...[
+            const SizedBox(width: 4),
+            GestureDetector(
+              onTap: () => _showReportAndBlockDialog(
+                context,
+                livekit,
+                identity,
+                playerName,
+              ),
+              child: const Icon(
+                Icons.flag_outlined,
+                color: Colors.orangeAccent,
+                size: 13,
+              ),
+            ),
+          ],
         ],
       ),
     );

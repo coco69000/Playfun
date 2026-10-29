@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'player_state.dart';
 import 'badges_data.dart';
+import 'badges_localization.dart';
+import 'l10n/app_localizations.dart';
+import 'matchmaking_localization.dart';
 
 class StatsAndBadgesScreen extends StatefulWidget {
-  const StatsAndBadgesScreen({Key? key}) : super(key: key);
+  const StatsAndBadgesScreen({super.key});
 
   @override
   _StatsAndBadgesScreenState createState() => _StatsAndBadgesScreenState();
@@ -59,7 +62,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: isUnlocked
-                    ? badge.color.withOpacity(0.2)
+                    ? badge.color.withValues(alpha: 0.2)
                     : Colors.white10,
                 border: Border.all(
                   color: isUnlocked ? badge.color : Colors.white24,
@@ -74,7 +77,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
             ),
             const SizedBox(height: 16),
             Text(
-              badge.title,
+              badge.getLocalizedTitle(context),
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -85,14 +88,14 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
             const SizedBox(height: 8),
             Chip(
               label: Text(
-                badge.category,
+                badge.getLocalizedCategory(context),
                 style: const TextStyle(fontSize: 11, color: Colors.white),
               ),
               backgroundColor: Colors.deepPurple[900],
             ),
             const SizedBox(height: 12),
             Text(
-              badge.description,
+              badge.getLocalizedDescription(context),
               style: const TextStyle(color: Colors.white70, fontSize: 14),
               textAlign: TextAlign.center,
             ),
@@ -109,7 +112,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
               ),
               const SizedBox(height: 6),
               Text(
-                "$progress / ${badge.maxProgress}",
+                "${progress.clamp(0, badge.maxProgress)} / ${badge.maxProgress}",
                 style: const TextStyle(color: Colors.white54, fontSize: 12),
               ),
             ],
@@ -118,12 +121,12 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
               decoration: BoxDecoration(
                 color: isUnlocked
-                    ? Colors.green.withOpacity(0.2)
-                    : Colors.red.withOpacity(0.1),
+                    ? Colors.green.withValues(alpha: 0.2)
+                    : Colors.red.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                isUnlocked ? "✓ DÉBLOQUÉ" : "🔒 VERROUILLÉ",
+                MatchmakingLocalization.tr(context, isUnlocked ? 'badgeUnlocked' : 'badgeLocked'),
                 style: TextStyle(
                   color: isUnlocked ? Colors.greenAccent : Colors.redAccent,
                   fontWeight: FontWeight.bold,
@@ -136,7 +139,10 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text("Fermer", style: TextStyle(color: Colors.white70)),
+            child: Text(
+              MatchmakingLocalization.tr(context, 'close'),
+              style: const TextStyle(color: Colors.white70),
+            ),
           ),
         ],
       ),
@@ -146,6 +152,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
   @override
   Widget build(BuildContext context) {
     final ps = Provider.of<PlayerState>(context);
+    final l10n = AppLocalizations.of(context);
     final int totalPlayed = ps.gameStats.values.fold<int>(
       0,
       (sum, stat) => sum + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
@@ -166,11 +173,11 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
           tabs: [
             Tab(
               icon: const Icon(Icons.military_tech),
-              text: "Badges (${ps.totalUnlockedBadgesCount}/${AppBadges.allBadges.length})",
+              text: "${l10n?.tabBadges ?? 'Badges'} (${ps.totalUnlockedBadgesCount}/${AppBadges.allBadges.length})",
             ),
-            const Tab(
-              icon: Icon(Icons.bar_chart),
-              text: "Statistiques",
+            Tab(
+              icon: const Icon(Icons.bar_chart),
+              text: l10n?.tabStats ?? "Statistiques",
             ),
           ],
         ),
@@ -196,7 +203,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                     return Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: FilterChip(
-                        label: Text(cat),
+                        label: Text(BadgesLocalization.getCategory(cat, Localizations.localeOf(context).languageCode)),
                         selected: isSelected,
                         selectedColor: Colors.amber,
                         checkmarkColor: Colors.black,
@@ -244,19 +251,19 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                           child: Container(
                             decoration: BoxDecoration(
                               color: isUnlocked
-                                  ? badge.color.withOpacity(0.12)
+                                  ? badge.color.withValues(alpha: 0.12)
                                   : Colors.black26,
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
                                 color: isUnlocked
-                                    ? badge.color.withOpacity(0.6)
+                                    ? badge.color.withValues(alpha: 0.6)
                                     : Colors.white10,
                                 width: isUnlocked ? 2 : 1,
                               ),
                               boxShadow: isUnlocked
                                   ? [
                                       BoxShadow(
-                                        color: badge.color.withOpacity(0.2),
+                                        color: badge.color.withValues(alpha: 0.2),
                                         blurRadius: 8,
                                       ),
                                     ]
@@ -271,8 +278,8 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                                     CircleAvatar(
                                       radius: 26,
                                       backgroundColor: isUnlocked
-                                          ? badge.color.withOpacity(0.2)
-                                          : Colors.white.withOpacity(0.05),
+                                          ? badge.color.withValues(alpha: 0.2)
+                                          : Colors.white.withValues(alpha: 0.05),
                                       child: Icon(
                                         badge.icon,
                                         size: 26,
@@ -293,7 +300,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                                   child: Text(
-                                    badge.title,
+                                    badge.getLocalizedTitle(context),
                                     style: TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.bold,
@@ -328,10 +335,10 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
               children: [
                 // 1. CARTE MAÎTRE : NIVEAU & JAUGE XP
                 Card(
-                  color: Colors.deepPurple[900]?.withOpacity(0.4),
+                  color: Colors.deepPurple[900]?.withValues(alpha: 0.4),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(color: Colors.deepPurpleAccent.withOpacity(0.4)),
+                    side: BorderSide(color: Colors.deepPurpleAccent.withValues(alpha: 0.4)),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -343,7 +350,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                             const Icon(Icons.star_rounded, size: 38, color: Colors.amberAccent),
                             const SizedBox(width: 8),
                             Text(
-                              "Niveau ${ps.level}",
+                              "${l10n?.level ?? 'Niveau'} ${ps.level}",
                               style: const TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.bold,
@@ -387,7 +394,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                   children: [
                     Expanded(
                       child: _buildCounterCard(
-                        "Parties Jouées",
+                        l10n?.gamesPlayed ?? "Parties Jouées",
                         "$totalPlayed",
                         Icons.sports_esports,
                         Colors.blueAccent,
@@ -396,7 +403,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                     const SizedBox(width: 10),
                     Expanded(
                       child: _buildCounterCard(
-                        "Victoires",
+                        l10n?.gamesWon ?? "Victoires",
                         "$totalWon",
                         Icons.emoji_events,
                         Colors.amberAccent,
@@ -465,7 +472,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
 
                       return Card(
                         margin: const EdgeInsets.symmetric(vertical: 4),
-                        color: Colors.white.withOpacity(0.04),
+                        color: Colors.white.withValues(alpha: 0.04),
                         child: ListTile(
                           leading: const Icon(Icons.videogame_asset, color: Colors.cyanAccent),
                           title: Text(
@@ -482,8 +489,8 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                             ),
                             decoration: BoxDecoration(
                               color: winRate >= 50
-                                  ? Colors.green.withOpacity(0.2)
-                                  : Colors.orange.withOpacity(0.2),
+                                  ? Colors.green.withValues(alpha: 0.2)
+                                  : Colors.orange.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
@@ -517,9 +524,9 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [

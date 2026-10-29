@@ -1,4 +1,4 @@
-const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const { onCall, onRequest, HttpsError } = require("firebase-functions/v2/https");
 const { onSchedule } = require("firebase-functions/v2/scheduler");
 const admin = require("firebase-admin");
 
@@ -6,9 +6,12 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-const getLivekitApiKey = () => process.env.LIVEKIT_API_KEY || "APIeUWh9WJsnv5S";
-const getLivekitApiSecret = () => process.env.LIVEKIT_API_SECRET || "WEnqYjqqTPYohnAeGfEbvY9RBfBhgQZBYBj5YzCnuPaB";
-const getSiliconFlowApiKey = () => process.env.SILICONFLOW_API_KEY || "";
+const getLivekitApiKey = () => process.env.LIVEKIT_API_KEY;
+const getLivekitApiSecret = () => process.env.LIVEKIT_API_SECRET;
+const getSiliconFlowApiKey = () => process.env.SILICONFLOW_API_KEY;
+
+// Secret de webhook configuré sur le dashboard RevenueCat
+const REVENUECAT_WEBHOOK_AUTH_KEY = process.env.REVENUECAT_WEBHOOK_AUTH_KEY || "Floconlebestdu69";
 
 const ROOM_NAME_REGEX = /^[a-zA-Z0-9_-]{3,80}$/;
 const IDENTITY_REGEX = /^[a-zA-Z0-9_-]{3,100}$/;
@@ -56,32 +59,45 @@ function isVersionLower(current, required) {
 
 async function assertClientVersionValid(data = {}) {
   const { clientBuildNumber, clientVersion, isDebug, isSideloadly } = data || {};
-  // Ne JAMAIS bloquer le mode debug ou les installations Sideloadly / Test
-  if (isDebug || isSideloadly || clientBuildNumber === 0 || clientBuildNumber === 999999) {
+  // Ne jamais bloquer le mode debug
+  if (isDebug || clientBuildNumber === 999999) {
     return;
   }
 
-  const configSnap = await db.collection("app_config").doc("version_control").get();
+  // Lecture de la configuration de version (supporte config/app_version et app_config/version_control)
+  let configSnap = await db.collection("config").doc("app_version").get();
+  if (!configSnap.exists) {
+    configSnap = await db.collection("app_config").doc("version_control").get();
+  }
   if (!configSnap.exists) return;
 
   const config = configSnap.data() || {};
-  if (!config.forceUpdateActive) return;
 
-  const minBuild = config.minRequiredBuild || 0;
-  const minVersion = config.minRequiredVersion || "1.0.0";
+  // 1. Blocage si maintenance activée
+  if (config.isMaintenance === true) {
+    throw new HttpsError("unavailable", "SERVEUR_EN_MAINTENANCE");
+  }
 
+  const forceActive = config.forceUpdateActive !== false;
+  if (!forceActive) return;
+
+  const minBuild = Number(config.minRequiredBuildNumber || config.minRequiredBuild || 0);
+  const minVersion = config.minRequiredVersionName || config.minRequiredVersion || "1.0.0";
+  const clientBuild = Number(clientBuildNumber || 0);
+
+  // 2. Blocage si build client obsolète
   if (minBuild > 0) {
-    if (typeof clientBuildNumber === "number" && clientBuildNumber > 0 && clientBuildNumber < minBuild) {
+    if (clientBuild > 0 && clientBuild < minBuild) {
       throw new HttpsError(
         "failed-precondition",
-        "Mise à jour requise. Votre version de l'application est obsolète."
+        "VERSION_OBSOLETE"
       );
     }
   } else if (minVersion) {
     if (typeof clientVersion === "string" && isVersionLower(clientVersion, minVersion)) {
       throw new HttpsError(
         "failed-precondition",
-        "Mise à jour requise. Votre version de l'application est obsolète."
+        "VERSION_OBSOLETE"
       );
     }
   }
@@ -92,79 +108,61 @@ async function assertClientVersionValid(data = {}) {
 // =========================================================================
 
 exports.generateLivekitToken = onCall(
-  {
-    region: "us-central1",
-    enforceAppCheck: false,
-  },
+  { region: "us-central1", enforceAppCheck: false },
   async (request) => {
-    // Mode permissif (support Sideloadly, debug et utilisateurs invités)
-    const uid = request.auth ? request.auth.uid : "guest_user";
+    if (!request.auth) {
+      throw new HttpsError("unauthenticated", "Connexion requise pour rejoindre le chat audio/vidéo.");
+    }
+    const uid = request.auth.uid;
+    const { roomName } = request.data || {};
 
-    try {
-      await assertClientVersionValid(request.data);
-    } catch (_) {
-      // Ne jamais bloquer le flux audio/vidéo sur une vérification de version en mode debug/sideloadly
+    if (!roomName || !ROOM_NAME_REGEX.test(roomName)) {
+      throw new HttpsError("invalid-argument", "Identifiant de salon invalide.");
     }
 
-    const { roomName, playerId: reqPlayerId, identity: reqIdentity, playerName: reqPlayerName } = request.data || {};
-
-    if (typeof roomName !== "string" || !ROOM_NAME_REGEX.test(roomName)) {
-      throw new HttpsError("invalid-argument", "Nom de salon invalide.");
+    const apiKey = getLivekitApiKey();
+    const apiSecret = getLivekitApiSecret();
+    if (!apiKey || !apiSecret) {
+      throw new HttpsError("internal", "Configuration serveur vidéo manquante.");
     }
 
-    if (!getLivekitApiKey() || !getLivekitApiSecret()) {
-      console.error("Paramètres LiveKit manquants.");
-      throw new HttpsError("internal", "Configuration serveur manquante.");
+    let isAllowed = false;
+    let playerName = "Joueur";
+
+    // Vérifier l'appartenance à la partie
+    const gameSnap = await db.collection("games").doc(roomName).get();
+    if (gameSnap.exists) {
+      const data = gameSnap.data() || {};
+      const playerId = getPlayerIdFromUid(data.players || {}, uid);
+      if (playerId && data.players[playerId]) {
+        isAllowed = true;
+        playerName = data.players[playerId].name || "Joueur";
+      }
+    } else {
+      // Ou appartenance au salon (lounge)
+      const loungeSnap = await db.collection("lounges").doc(roomName).get();
+      if (loungeSnap.exists) {
+        const lData = loungeSnap.data() || {};
+        if (lData.players && lData.players[uid]) {
+          isAllowed = true;
+          playerName = lData.players[uid].name || "Membre";
+        }
+      }
     }
 
-    let gameSnap = await db.collection("games").doc(roomName).get();
-    let isLounge = false;
-
-    if (!gameSnap.exists) {
-      gameSnap = await db.collection("lounges").doc(roomName).get();
-      isLounge = true;
+    if (!isAllowed) {
+      throw new HttpsError("permission-denied", "Vous ne faites pas partie de cette session.");
     }
 
-    const gameData = gameSnap.exists ? (gameSnap.data() || {}) : {};
-    const players = gameData.players || {};
-
-    // Résolution robuste et permissive de l'identité du joueur
-    let playerId = reqPlayerId || reqIdentity || getPlayerIdFromUid(players, uid) || uid;
-    let playerData = players[playerId] || (reqPlayerId ? players[reqPlayerId] : null);
-
-    if (!playerData) {
-      playerData = {
-        name: reqPlayerName || "Joueur",
-        livekitIdentity: reqIdentity || playerId,
-      };
-    }
-
-    if (!isLounge && gameData.gameState === "gameOver") {
-      throw new HttpsError("failed-precondition", "La partie est terminée.");
-    }
-
-    const rawIdentity = reqIdentity || playerData.livekitIdentity || playerId || uid;
-    const participantIdentity = String(rawIdentity).replace(/[^a-zA-Z0-9_-]/g, "_");
-
-    if (
-      typeof participantIdentity !== "string" ||
-      !IDENTITY_REGEX.test(participantIdentity)
-    ) {
-      throw new HttpsError("failed-precondition", "Identité LiveKit invalide.");
-    }
+    const participantIdentity = uid.replace(/[^a-zA-Z0-9_-]/g, "_");
 
     try {
       const { AccessToken } = require("livekit-server-sdk");
-
-      const token = new AccessToken(
-        getLivekitApiKey(),
-        getLivekitApiSecret(),
-        {
-          identity: participantIdentity,
-          name: playerData.name || "Joueur",
-          ttl: "4h",
-        }
-      );
+      const token = new AccessToken(apiKey, apiSecret, {
+        identity: participantIdentity,
+        name: playerName,
+        ttl: "4h",
+      });
 
       token.addGrant({
         roomJoin: true,
@@ -172,23 +170,72 @@ exports.generateLivekitToken = onCall(
         canPublish: true,
         canSubscribe: true,
         canPublishData: true,
-        canUpdateOwnMetadata: true,
-        roomAdmin: false,
-        roomCreate: false,
-        roomList: false,
-        roomRecord: false,
       });
 
-      const jwt = await token.toJwt();
-
       return {
-        token: jwt,
+        token: await token.toJwt(),
         identity: participantIdentity,
       };
-    } catch (error) {
-      console.error("Erreur génération token LiveKit:", error);
-      throw new HttpsError("internal", "Impossible de générer le token LiveKit.");
+    } catch (err) {
+      console.error("Erreur génération LiveKit:", err);
+      throw new HttpsError("internal", "Échec d'émission du jeton vidéo.");
     }
+  }
+);
+
+// =========================================================================
+// 2. SOCIAL : DEMANDES D'AMIS SANS CRASH TRANSACTIONNEL
+// =========================================================================
+
+exports.respondToFriendRequest = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    if (!request.auth) {
+      throw new HttpsError("unauthenticated", "Connexion requise.");
+    }
+    const uid = request.auth.uid;
+    const { senderUid, accept } = request.data || {};
+
+    if (!senderUid || typeof senderUid !== "string") {
+      throw new HttpsError("invalid-argument", "Expéditeur invalide.");
+    }
+
+    const userRef = db.collection("users").doc(uid);
+    const senderRef = db.collection("users").doc(senderUid);
+
+    return await db.runTransaction(async (t) => {
+      // 🔴 TOUTES LES LECTURES EN PREMIER
+      const userSnap = await t.get(userRef);
+      const senderSnap = await t.get(senderRef);
+
+      if (!userSnap.exists) {
+        throw new HttpsError("not-found", "Votre profil est introuvable.");
+      }
+
+      const userData = userSnap.data() || {};
+      const friendRequests = userData.friendRequests || [];
+      const matchingReq = friendRequests.find((r) => r && r.uid === senderUid);
+
+      if (!matchingReq) {
+        throw new HttpsError("failed-precondition", "Cette invitation n'existe plus.");
+      }
+
+      // 🔴 ÉCRITURES APRÈS
+      t.update(userRef, {
+        friendRequests: admin.firestore.FieldValue.arrayRemove(matchingReq),
+      });
+
+      if (accept === true && senderSnap.exists) {
+        t.update(userRef, {
+          friends: admin.firestore.FieldValue.arrayUnion(senderUid),
+        });
+        t.update(senderRef, {
+          friends: admin.firestore.FieldValue.arrayUnion(uid),
+        });
+      }
+
+      return { success: true, accepted: accept === true };
+    });
   }
 );
 
@@ -238,24 +285,6 @@ exports.spendCoins = onCall(
   }
 );
 
-exports.setPremiumStatus = onCall(
-  { region: "us-central1" },
-  async (request) => {
-    if (!request.auth) {
-      throw new HttpsError("unauthenticated", "Vous devez être connecté.");
-    }
-    await assertClientVersionValid(request.data);
-    const uid = request.auth.uid;
-    const { isPremium } = request.data || {};
-    const premiumValue = isPremium === true;
-
-    const userRef = db.collection("users").doc(uid);
-    await userRef.set({ isPremium: premiumValue }, { merge: true });
-
-    return { success: true, isPremium: premiumValue };
-  }
-);
-
 exports.claimDailyBonus = onCall(
   { region: "us-central1" },
   async (request) => {
@@ -274,14 +303,12 @@ exports.claimDailyBonus = onCall(
 
       const data = snap.data() || {};
       const lastGrant = data.lastDailyCoinGrant ? data.lastDailyCoinGrant.toDate() : null;
-      const now = new Date();
+      const getParisDateStr = (d) =>
+        new Intl.DateTimeFormat("fr-CA", { timeZone: "Europe/Paris" }).format(d);
 
-      if (lastGrant) {
-        const lastGrantDay = new Date(lastGrant.getFullYear(), lastGrant.getMonth(), lastGrant.getDate());
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        if (lastGrantDay.getTime() === today.getTime()) {
-          throw new HttpsError("failed-precondition", "Bonus déjà réclamé aujourd'hui.");
-        }
+      const now = new Date();
+      if (lastGrant && getParisDateStr(lastGrant) === getParisDateStr(now)) {
+        throw new HttpsError("failed-precondition", "Bonus déjà réclamé aujourd'hui.");
       }
 
       const isPremium = data.isPremium || false;
@@ -376,8 +403,8 @@ function evaluateUserBadges(userData, gameData, isWinner, uid, newLevel, updated
   }
 
   if (gameType === "Mille Bornes" && isWinner) {
-    const pData = gameData.milleBornesPlayerData?.[userPlayerId] || gameData.milleBornesPlayerData?.[uid] || {};
-    if (pData.distance >= 1000 && !pData.isOutOfGas && !pData.isFlatTire) {
+    const pData = gameData.milleBornesPlayerData?.[userPlayerId] || gameData.milleBornesPlayerData?.[uid];
+    if (pData && typeof pData.distance === "number" && pData.distance >= 1000 && !pData.isOutOfGas && !pData.isFlatTire) {
       unlock("mille_bornes_1000");
     }
   }
@@ -392,18 +419,14 @@ function evaluateUserBadges(userData, gameData, isWinner, uid, newLevel, updated
   if (gameType === "Président") {
     const ranks = gameData.playerRanks || {};
     const myRank = ranks[userPlayerId] || ranks[uid];
-    if (myRank === "Präsident" || myRank === "Président") {
+    if (myRank === "Président") {
       incrementProgress("pres_double_pres", 2);
-    }
-    const hadTdc = (gameData.penaltyTDC === userPlayerId || gameData.penaltyTDC === uid || myRank === "Trou du cul");
-    if (isWinner && !hadTdc) {
-      unlock("pres_no_tdc");
     }
   }
 
   if (gameType === "Blokus" && isWinner) {
-    const myHand = gameData.blokusPlayerHands?.[uid] || gameData.blokusPlayerHands?.[userPlayerId] || [];
-    if (myHand.length === 0) unlock("blokus_all_placed");
+    const hand = gameData.blokusPlayerHands?.[uid] || gameData.blokusPlayerHands?.[userPlayerId];
+    if (Array.isArray(hand) && hand.length === 0) unlock("blokus_all_placed");
     const lastPiece = (gameData.blokusLastPiecesPlaced || {})[userPlayerId] || (gameData.blokusLastPiecesPlaced || {})[uid];
     if (lastPiece === 1) unlock("blokus_monomino_last");
   }
@@ -414,11 +437,13 @@ function evaluateUserBadges(userData, gameData, isWinner, uid, newLevel, updated
     if (upperSum >= 63) unlock("yams_bonus_sup");
   }
 
+  // 🟠 CORRECTION Bataille Navale : vérifier l'existence explicite de la flotte
   if (gameType === "Bataille Navale" && isWinner) {
-    const pData = gameData.playerData?.[userPlayerId] || gameData.playerData?.[uid] || {};
-    const ships = pData.shipsPlaced || {};
-    const unhitShips = Object.values(ships).filter(s => (s.hits || 0) === 0).length;
-    if (unhitShips >= 3) unlock("naval_clean_sheet");
+    const pData = gameData.playerData?.[userPlayerId] || gameData.playerData?.[uid];
+    if (pData && pData.shipsPlaced && Object.keys(pData.shipsPlaced).length > 0) {
+      const unhitShips = Object.values(pData.shipsPlaced).filter((s) => (s.hits || 0) === 0).length;
+      if (unhitShips >= 3) unlock("naval_clean_sheet");
+    }
   }
 
   if (gameType === "Skull" && isWinner) {
@@ -464,8 +489,12 @@ function evaluateUserBadges(userData, gameData, isWinner, uid, newLevel, updated
         unlock("underc_infiltre_win");
       }
     }
-    if (isWinner && role === "Civil") {
-      incrementProgress("underc_civil_win_streak", 3);
+    if (pData.role === "Civil") {
+      if (isWinner && winnerFaction === "Civils") {
+        incrementProgress("underc_civil_win_streak", 3);
+      } else {
+        badgeProgress["underc_civil_win_streak"] = 0; // Remise à zéro si défaite
+      }
     }
     if (abilities.includes("Vendeur de Falafels") && isWinner) {
       unlock("underc_falafel_bluff");
@@ -475,11 +504,8 @@ function evaluateUserBadges(userData, gameData, isWinner, uid, newLevel, updated
     }
   }
 
-  if (gameType === "Just One") {
-    if (gameData.justOneTotalScore === 13) unlock("just_one_13");
-    if (gameData.justOneFilteredClues && gameData.justOneFilteredClues.length === 1) {
-      unlock("just_one_unique_clue");
-    }
+  if (gameType === "Just One" && gameData.justOneTotalScore === 13) {
+    unlock("just_one_13");
   }
 
   if (gameType === "Dobble" && isWinner) {
@@ -591,10 +617,18 @@ exports.claimGameReward = onCall(
         const role = pData.role;
         const isWolf = role === "Loup-Garou" || role === "Loup Noir" || role === "Loup Bavard" || pData.infectionStatus === "infecte";
 
-        if (logStr.includes("Victoire des Loups-Garous") && isWolf) isWinner = true;
-        if (logStr.includes("Victoire des Villageois") && !isWolf && role !== "Loup Blanc" && role !== "Rat Malade") isWinner = true;
-        if (logStr.includes("Victoire du Loup Blanc") && role === "Loup Blanc") isWinner = true;
-        if (logStr.includes("Victoire du Rat Malade") && role === "Rat Malade") isWinner = true;
+        if (gameData.gameWinner === "Les Amoureux" || logStr.includes("Victoire des Amoureux")) {
+          const lovers = gameData.lovers || [];
+          if (lovers.includes(userPlayerId) || lovers.includes(uid)) isWinner = true;
+        } else if (logStr.includes("Victoire des Loups-Garous") && isWolf) {
+          isWinner = true;
+        } else if (logStr.includes("Victoire des Villageois") && !isWolf && role !== "Loup Blanc" && role !== "Rat Malade") {
+          isWinner = true;
+        } else if (logStr.includes("Victoire du Loup Blanc") && role === "Loup Blanc") {
+          isWinner = true;
+        } else if (logStr.includes("Victoire du Rat Malade") && role === "Rat Malade") {
+          isWinner = true;
+        }
       }
 
       const gameType = gameData.gameType || "jeu";
@@ -661,6 +695,8 @@ exports.claimGameReward = onCall(
 // 4. GÉNÉRATION ET VALIDATION IA (SILICONFLOW - QWEN 2.5 7B INSTRUCT)
 // =========================================================================
 
+const aiRateLimiter = new Map();
+
 exports.generateAiWords = onCall(
   { region: "us-central1" },
   async (request) => {
@@ -669,8 +705,17 @@ exports.generateAiWords = onCall(
     }
     await assertClientVersionValid(request.data);
 
+    const uid = request.auth.uid;
+    const now = Date.now();
+    const lastCall = aiRateLimiter.get(uid) || 0;
+    if (now - lastCall < 3000) {
+      throw new HttpsError("resource-exhausted", "Veuillez patienter 3 secondes entre chaque génération.");
+    }
+    aiRateLimiter.set(uid, now);
+
     let { instructions = "", count = 20, gameType = "" } = request.data || {};
-    let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 30));
+    // Plafond relevé à 45 pour supporter Codenames (35) et Time's Up / Pictionary / Devine Tête (40)
+    let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 45));
 
     const safeInstructions = String(instructions)
       .slice(0, 150)
@@ -705,7 +750,7 @@ exports.generateAiWords = onCall(
     } else if (normalizedGame.includes("menteur")) {
       systemPrompt = "Tu es un générateur de sujets d'anecdotes pour le jeu 'Le Menteur'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} sujets d'anecdotes stimulants pour raconter une histoire vraie ou inventée. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Ta pire honte en public", "Une rencontre improbable avec une célébrité", "Le pire cadeau qu'on t'ait offert"]`;
-    } else if (normalizedGame.includes("time") || normalizedGame.includes("up")) {
+    } else if (normalizedGame.includes("time's up") || normalizedGame.includes("times up") || normalizedGame === "time up") {
       userPrompt = `Génère exactement ${parsedCount} noms de personnalités célèbres, personnages de fiction connus, ou objets emblématiques en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Albert Einstein", "Harry Potter", "Tour Eiffel", "Astronaute"]`;
     } else if (normalizedGame.includes("codenames")) {
       userPrompt = `Génère exactement ${parsedCount} mots simples et variés en français (un seul mot par élément, en lettres majuscules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["ESPION", "PLAGE", "CHÂTEAU", "SOLEIL", "PIRATE"]`;
@@ -742,7 +787,7 @@ exports.generateAiWords = onCall(
             { role: "system", content: systemPrompt },
             { role: "user", content: userPrompt },
           ],
-          max_tokens: 1024,
+          max_tokens: 1536,
           temperature: 0.7,
         }),
       });
@@ -902,6 +947,12 @@ exports.sendFriendRequest = onCall(
         console.log(`Notification de demande d'ami envoyée à ${targetUid}`);
       } catch (err) {
         console.error("Erreur envoi notification demande d'ami :", err);
+        if (
+          err.code === "messaging/registration-token-not-registered" ||
+          err.code === "messaging/invalid-registration-token"
+        ) {
+          await targetRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => {});
+        }
       }
     }
 
@@ -909,123 +960,23 @@ exports.sendFriendRequest = onCall(
   }
 );
 
-exports.respondToFriendRequest = onCall(
-  { region: "us-central1" },
-  async (request) => {
-    if (!request.auth) {
-      throw new HttpsError("unauthenticated", "Vous devez être connecté.");
-    }
-    await assertClientVersionValid(request.data);
-    const uid = request.auth.uid;
-    const { senderUid, senderName, accept } = request.data || {};
-
-    if (!senderUid || typeof senderUid !== "string") {
-      throw new HttpsError("invalid-argument", "Identifiant d'expéditeur invalide.");
-    }
-
-    const userRef = db.collection("users").doc(uid);
-    const senderRef = db.collection("users").doc(senderUid);
-
-    let senderFcmToken = null;
-    let currentUserName = "Un joueur";
-
-    const result = await db.runTransaction(async (t) => {
-      const userSnap = await t.get(userRef);
-      if (!userSnap.exists) {
-        throw new HttpsError("not-found", "Profil utilisateur introuvable.");
-      }
-
-      const userData = userSnap.data() || {};
-      currentUserName = userData.name || "Un joueur";
-      const friendRequests = userData.friendRequests || [];
-      const matchingReq = friendRequests.find((r) => r && r.uid === senderUid);
-      const reqToRemove = matchingReq || { uid: senderUid, name: senderName || "Joueur" };
-
-      t.update(userRef, {
-        friendRequests: admin.firestore.FieldValue.arrayRemove(reqToRemove),
-      });
-
-      if (accept === true) {
-        const senderSnap = await t.get(senderRef);
-        if (senderSnap.exists) {
-          senderFcmToken = senderSnap.data()?.fcmToken || null;
-          t.update(userRef, {
-            friends: admin.firestore.FieldValue.arrayUnion(senderUid),
-          });
-          t.update(senderRef, {
-            friends: admin.firestore.FieldValue.arrayUnion(uid),
-          });
-        }
-      }
-
-      return { success: true, accepted: accept === true };
-    });
-
-    // Envoi de la notification push si la demande est acceptée
-    if (accept === true && senderFcmToken) {
-      const message = {
-        token: senderFcmToken,
-        notification: {
-          title: "Demande d'ami acceptée ! 🎉",
-          body: `${currentUserName} a accepté votre demande d'ami.`,
-        },
-        data: {
-          type: "friend_request_accepted",
-          friendUid: uid,
-        },
-        android: {
-          priority: "high",
-          notification: {
-            sound: "default",
-            channelId: "high_importance_channel",
-          },
-        },
-        apns: {
-          payload: {
-            aps: {
-              sound: "default",
-            },
-          },
-        },
-      };
-
-      try {
-        await admin.messaging().send(message);
-        console.log(`Notification demande d'ami acceptée envoyée à ${senderUid}`);
-      } catch (err) {
-        console.error("Erreur lors de l'envoi de la notification push :", err);
-      }
-    }
-
-    return result;
-  }
-);
-
 exports.removeFriend = onCall(
   { region: "us-central1" },
   async (request) => {
-    if (!request.auth) {
-      throw new HttpsError("unauthenticated", "Vous devez être connecté.");
-    }
+    if (!request.auth) throw new HttpsError("unauthenticated", "Connexion requise.");
     await assertClientVersionValid(request.data);
+
     const uid = request.auth.uid;
     const { friendUid } = request.data || {};
-
-    if (!friendUid || typeof friendUid !== "string") {
-      throw new HttpsError("invalid-argument", "Identifiant d'ami invalide.");
-    }
+    if (!friendUid) throw new HttpsError("invalid-argument", "Ami invalide.");
 
     const userRef = db.collection("users").doc(uid);
     const friendRef = db.collection("users").doc(friendUid);
 
-    const batch = db.batch();
-    batch.update(userRef, {
-      friends: admin.firestore.FieldValue.arrayRemove(friendUid),
-    });
-    batch.update(friendRef, {
-      friends: admin.firestore.FieldValue.arrayRemove(uid),
-    });
-    await batch.commit();
+    await Promise.all([
+      userRef.update({ friends: admin.firestore.FieldValue.arrayRemove(friendUid) }).catch(() => { }),
+      friendRef.update({ friends: admin.firestore.FieldValue.arrayRemove(uid) }).catch(() => { }),
+    ]);
 
     return { success: true };
   }
@@ -1046,8 +997,16 @@ exports.sendGameInvite = onCall(
     }
 
     const callerSnap = await db.collection("users").doc(uid).get();
-    const callerName = (callerSnap.exists && callerSnap.data()?.name) || "Votre ami";
+    if (!callerSnap.exists) {
+      throw new HttpsError("not-found", "Profil introuvable.");
+    }
 
+    const friends = callerSnap.data()?.friends || [];
+    if (!friends.includes(friendUid)) {
+      throw new HttpsError("permission-denied", "Vous ne pouvez inviter que vos amis.");
+    }
+
+    const callerName = callerSnap.data()?.name || "Votre ami";
     const friendRef = db.collection("users").doc(friendUid);
     const friendSnap = await friendRef.get();
     if (!friendSnap.exists) {
@@ -1058,6 +1017,7 @@ exports.sendGameInvite = onCall(
       gameInvites: admin.firestore.FieldValue.arrayUnion({
         gameCode: gameCode.trim().toUpperCase(),
         hostName: callerName,
+        timestamp: Date.now(),
       }),
     });
 
@@ -1092,6 +1052,12 @@ exports.sendGameInvite = onCall(
         await admin.messaging().send(message);
       } catch (err) {
         console.error("Erreur envoi notification game invite:", err);
+        if (
+          err.code === "messaging/registration-token-not-registered" ||
+          err.code === "messaging/invalid-registration-token"
+        ) {
+          await friendRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => {});
+        }
       }
     }
 
@@ -1162,6 +1128,12 @@ exports.sendLoungeInvite = onCall(
         await admin.messaging().send(message);
       } catch (err) {
         console.error("Erreur envoi notification lounge invite:", err);
+        if (
+          err.code === "messaging/registration-token-not-registered" ||
+          err.code === "messaging/invalid-registration-token"
+        ) {
+          await friendRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => {});
+        }
       }
     }
 
@@ -1259,42 +1231,102 @@ exports.enforceStrictTimers = onSchedule(
       const batch = db.batch();
       let forcedTimeouts = 0;
 
+      // Jeux d'opinion, créatifs, temps réel ou à sous-phases complexes gérés par les transactions clientes
+      const excludedGames = [
+        'Qui Pourrait le Plus ?',
+        'Le Juge',
+        'Le Menteur',
+        'Le Roi des Mèmes',
+        'Le Dilemme',
+        'Jeu de la Pièce',
+        'On se passe un objet rapidement',
+        'Synonyme ou Banni',
+        'Action ou Vérité',
+        'Blanc Manger Coco',
+        'Photo Roulette',
+        'Infiltré & Mr. White',
+        'Cadavre Exquis',
+        'Gribouillis',
+        'Pictionary',
+        "Time's Up",
+        'Taboo',
+        'Devine Tête',
+        'La Patate Chaude',
+        'Loup-Garou',
+        'Dobble',
+        'Petit Bac',
+        'Just One',
+        'Codenames',
+      ];
+
       activeGames.forEach((doc) => {
         const data = doc.data() || {};
-        const socialOpinionGames = [
-          'Qui Pourrait le Plus ?',
-          'Le Juge',
-          'Le Menteur',
-          'Le Roi des Mèmes',
-          'Le Dilemme',
-          'Jeu de la Pièce',
-          'On se passe un objet rapidement',
-          'Synonyme ou Banni',
-          'Action ou Vérité',
-          'Blanc Manger Coco',
-          'Photo Roulette',
-          'Infiltré & Mr. White',
-          'Cadavre Exquis',
-          'Gribouillis',
-          'Pictionary',
-          "Time's Up",
-          'Taboo',
-          'Devine Tête',
-          'La Patate Chaude',
-        ];
-        if (data.gameType && socialOpinionGames.includes(data.gameType)) {
+        const gameType = data.gameType || "";
+
+        if (!gameType || excludedGames.includes(gameType)) {
           return;
         }
 
         const players = data.players || {};
-        const playerOrder = data.playerOrder || Object.keys(players);
-        if (playerOrder.length === 0) return;
 
-        const currentIndex = typeof data.currentPlayerIndex === "number" ? data.currentPlayerIndex : 0;
-        const currentPid = playerOrder[currentIndex] || playerOrder[0];
-        const isBot = players[currentPid]?.isBot === true || players[currentPid]?.replacedByBot === true || data.botPlayers?.[currentPid] === true;
+        // 1. Déterminer la liste d'ordre et le champ d'index/ID selon le jeu
+        let orderField = "playerOrder";
+        let indexField = "currentPlayerIndex";
+        let usesPlayerIdDirectly = false;
+        let idField = "currentPlayerId";
 
-        // Délai de 5s pour les bots, sinon turnTimerSeconds + tolérance
+        if (gameType === "Uno") {
+          orderField = "unoPlayerOrder";
+          indexField = "unoCurrentPlayerIndex";
+        } else if (gameType === "Mille Bornes") {
+          orderField = "milleBornesPlayerOrder";
+          indexField = "milleBornesCurrentPlayerIndex";
+        } else if (gameType === "Big Two") {
+          orderField = "bigTwoPlayerOrder";
+          indexField = "bigTwoCurrentPlayerIndex";
+        } else if (gameType === "Petits Chevaux") {
+          orderField = "petitsChevauxPlayerOrder";
+          indexField = "petitsChevauxCurrentIndex";
+        } else if (gameType === "Blokus") {
+          orderField = "blokusPlayerOrder";
+          indexField = "blokusCurrentPlayerIndex";
+        } else if (gameType === "Jeu de Dames") {
+          orderField = "checkersPlayerOrder";
+          indexField = "checkersCurrentPlayerIndex";
+        } else if (gameType === "Dominoes") {
+          orderField = "dominoesPlayerOrder";
+          indexField = "dominoesCurrentPlayerIndex";
+        } else if (gameType === "Yams") {
+          orderField = "yamsPlayerOrder";
+          usesPlayerIdDirectly = true;
+          idField = "yamsCurrentPlayerId";
+        } else if (gameType === "Rami") {
+          usesPlayerIdDirectly = true;
+          idField = "ramiCurrentPlayerId";
+        } else if (gameType === "Zéro Pointé" || gameType === "Bataille Navale") {
+          usesPlayerIdDirectly = true;
+          idField = "currentPlayerId";
+        }
+
+        const playerOrder = data[orderField] || data.playerOrder || Object.keys(players);
+        if (!Array.isArray(playerOrder) || playerOrder.length === 0) return;
+
+        let currentIndex = 0;
+        let currentPid = playerOrder[0];
+
+        if (usesPlayerIdDirectly) {
+          currentPid = data[idField] || playerOrder[0];
+          currentIndex = Math.max(0, playerOrder.indexOf(currentPid));
+        } else {
+          currentIndex = typeof data[indexField] === "number" ? data[indexField] : 0;
+          currentPid = playerOrder[currentIndex] || playerOrder[0];
+        }
+
+        const isBot =
+          players[currentPid]?.isBot === true ||
+          players[currentPid]?.replacedByBot === true ||
+          data.botPlayers?.[currentPid] === true;
+
         const allowedSecs = isBot ? 5 : (data.turnTimerSeconds || 30);
 
         if (data.turnStartTime) {
@@ -1305,8 +1337,11 @@ exports.enforceStrictTimers = onSchedule(
           if (!turnStartMs) return;
 
           const elapsedMs = now - turnStartMs;
-          if (elapsedMs > (allowedSecs + 2) * 1000) {
-            const nextIndex = (currentIndex + 1) % playerOrder.length;
+          // On laisse une marge supplémentaire côté serveur (+8s) pour laisser le client exécuter le coup auto riche en premier
+          if (elapsedMs > (allowedSecs + 8) * 1000) {
+            const direction = (gameType === "Uno" && typeof data.unoDirection === "number") ? data.unoDirection : 1;
+            const nextIndex = (currentIndex + direction + playerOrder.length) % playerOrder.length;
+            const nextPid = playerOrder[nextIndex];
             const playerName = players[currentPid]?.name || (isBot ? "Ordinateur" : "Un joueur");
 
             const inactiveCounts = { ...(data.inactiveTurnCounts || {}) };
@@ -1314,8 +1349,7 @@ exports.enforceStrictTimers = onSchedule(
               inactiveCounts[currentPid] = (inactiveCounts[currentPid] || 0) + 1;
             }
 
-            batch.update(doc.ref, {
-              currentPlayerIndex: nextIndex,
+            const updatePayload = {
               inactiveTurnCounts: inactiveCounts,
               turnStartTime: admin.firestore.FieldValue.serverTimestamp(),
               gameLog: admin.firestore.FieldValue.arrayUnion(
@@ -1323,7 +1357,15 @@ exports.enforceStrictTimers = onSchedule(
                   ? `⏱️ Tour de ${playerName} (Robot) terminé (action auto).`
                   : `⏱️ Temps écoulé ! ${playerName} a été passé automatiquement pour inactivité.`
               ),
-            });
+            };
+
+            if (usesPlayerIdDirectly) {
+              updatePayload[idField] = nextPid;
+            } else {
+              updatePayload[indexField] = nextIndex;
+            }
+
+            batch.update(doc.ref, updatePayload);
             forcedTimeouts++;
           }
         }
@@ -1331,7 +1373,7 @@ exports.enforceStrictTimers = onSchedule(
 
       if (forcedTimeouts > 0) {
         await batch.commit();
-        console.log(`Serveur : ${forcedTimeouts} coups auto exécutés.`);
+        console.log(`Serveur : ${forcedTimeouts} tours débloqués.`);
       }
     } catch (err) {
       console.error("Erreur enforceStrictTimers:", err);
@@ -1345,92 +1387,80 @@ exports.cleanupDisconnectedPlayers = onSchedule(
     region: "us-central1",
     timeZone: "Europe/Paris",
   },
-  async (event) => {
+  async () => {
     const now = Date.now();
-    const STALE_THRESHOLD_MS = 60 * 1000; // 60 secondes d'inactivité
-    const REMOVAL_THRESHOLD_MS = 2 * 60 * 1000;
+    const STALE_THRESHOLD_MS = 60 * 1000;
+    const REMOVAL_THRESHOLD_MS = 120 * 1000;
 
     try {
       const activeGames = await db
         .collection("games")
         .where("gameState", "in", ["playing", "lobby"])
-        .limit(200)
+        .limit(100)
         .get();
 
-      if (activeGames.empty) return;
-
       for (const doc of activeGames.docs) {
-        const data = doc.data() || {};
-        const players = data.players || {};
-        const hostId = data.hostId;
-        let needsUpdate = false;
-        const updates = {};
-        const removedPlayers = [];
+        try {
+          const data = doc.data() || {};
+          const players = data.players || {};
+          const removedPlayers = [];
+          const updates = {};
 
-        for (const [pId, pData] of Object.entries(players)) {
-          let lastHbMs = 0;
-          if (pData.lastHeartbeat && pData.lastHeartbeat.toDate) {
-            lastHbMs = pData.lastHeartbeat.toDate().getTime();
-          } else if (typeof pData.lastHeartbeat === "number") {
-            lastHbMs = pData.lastHeartbeat;
-          }
+          for (const [pId, pData] of Object.entries(players)) {
+            const lastHb = pData.lastHeartbeat?.toDate ? pData.lastHeartbeat.toDate().getTime() : pData.lastHeartbeat || 0;
+            const isOnline = pData.isOnline !== false;
 
-          const isOnline = pData.isOnline !== false;
-
-          if (isOnline && lastHbMs > 0 && (now - lastHbMs) > STALE_THRESHOLD_MS) {
-            updates[`players.${pId}.isOnline`] = false;
-            updates[`players.${pId}.disconnectedAt`] = admin.firestore.FieldValue.serverTimestamp();
-            needsUpdate = true;
-          }
-
-          if (!isOnline && pData.disconnectedAt) {
-            const dcTime = pData.disconnectedAt.toDate
-              ? pData.disconnectedAt.toDate().getTime()
-              : 0;
-
-            if (dcTime > 0 && (now - dcTime) > REMOVAL_THRESHOLD_MS) {
-              removedPlayers.push(pId);
+            if (isOnline && lastHb > 0 && (now - lastHb) > STALE_THRESHOLD_MS) {
+              updates[`players.${pId}.isOnline`] = false;
+              updates[`players.${pId}.disconnectedAt`] = admin.firestore.FieldValue.serverTimestamp();
             }
-          }
-        }
 
-        if (removedPlayers.length > 0) {
-          const updatedPlayers = { ...players };
-          let updatedOrder = [...(data.playerOrder || [])];
-
-          for (const pId of removedPlayers) {
-            delete updatedPlayers[pId];
-            updatedOrder = updatedOrder.filter((id) => id !== pId);
-          }
-
-          updates.players = updatedPlayers;
-          updates.playerOrder = updatedOrder;
-
-          // CORRECTION MAJEURE : Si le nombre de joueurs tombe en dessous de 2 en pleine partie
-          if (Object.keys(updatedPlayers).length < 2 && data.gameState === "playing") {
-            const remainingPlayerId = Object.keys(updatedPlayers)[0] || null;
-            const remainingName = remainingPlayerId ? (updatedPlayers[remainingPlayerId]?.name || "Joueur") : "Inconnu";
-
-            updates.gameState = "gameOver";
-            updates.gameWinner = remainingPlayerId;
-            updates.gameEndReason = `Victoire de ${remainingName} par forfait (adversaire déconnecté).`;
-            if (remainingPlayerId) {
-              updates[`players.${remainingPlayerId}.score`] = admin.firestore.FieldValue.increment(1);
+            if (!isOnline && pData.disconnectedAt) {
+              const dcTime = pData.disconnectedAt.toDate ? pData.disconnectedAt.toDate().getTime() : 0;
+              if (dcTime > 0 && (now - dcTime) > REMOVAL_THRESHOLD_MS) {
+                removedPlayers.push(pId);
+              }
             }
           }
 
-          updates.gameLog = admin.firestore.FieldValue.arrayUnion(
-            `🚪 ${removedPlayers.length} joueur(s) retiré(s) pour inactivité prolongée.`
-          );
-          needsUpdate = true;
-        }
+          if (removedPlayers.length > 0) {
+            // Nettoyage avec chemins pointés individuels (évite le conflit racine vs imbriqué)
+            for (const rId of removedPlayers) {
+              updates[`players.${rId}`] = admin.firestore.FieldValue.delete();
+            }
 
-        if (needsUpdate) {
-          await doc.ref.update(updates);
+            const currentOrder = data.playerOrder || [];
+            const newOrder = currentOrder.filter((id) => !removedPlayers.includes(id));
+            updates.playerOrder = newOrder;
+
+            // Retrait dans les listes des sous-jeux
+            ["unoPlayerOrder", "milleBornesPlayerOrder", "blokusPlayerOrder", "checkersPlayerOrder"].forEach((orderKey) => {
+              if (Array.isArray(data[orderKey])) {
+                updates[orderKey] = data[orderKey].filter((id) => !removedPlayers.includes(id));
+              }
+            });
+
+            // Victoire par forfait si un seul joueur reste en jeu
+            const survivingKeys = Object.keys(players).filter((id) => !removedPlayers.includes(id));
+            if (survivingKeys.length === 1 && data.gameState === "playing") {
+              const winnerId = survivingKeys[0];
+              const winnerName = players[winnerId]?.name || "Joueur";
+              updates.gameState = "gameOver";
+              updates.gameWinner = winnerId;
+              updates.gameEndReason = `Victoire de ${winnerName} par abandon des adversaires.`;
+              updates[`players.${winnerId}.score`] = admin.firestore.FieldValue.increment(1);
+            }
+          }
+
+          if (Object.keys(updates).length > 0) {
+            await doc.ref.update(updates);
+          }
+        } catch (innerError) {
+          console.error(`Erreur nettoyage doc ${doc.id}:`, innerError);
         }
       }
     } catch (err) {
-      console.error("Erreur cleanupDisconnectedPlayers:", err);
+      console.error("Erreur générale cleanupDisconnectedPlayers:", err);
     }
   }
 );
@@ -1462,6 +1492,7 @@ exports.cleanupLoungePresence = onSchedule(
 
         // Vérifier les documents de la sous-collection presences
         const presencesSnap = await doc.ref.collection("presences").get();
+        const expiredStreamers = [];
         for (const presDoc of presencesSnap.docs) {
           const presData = presDoc.data() || {};
           const lastHb = presData.lastHeartbeat;
@@ -1477,10 +1508,14 @@ exports.cleanupLoungePresence = onSchedule(
             await presDoc.ref.delete();
             if (players[presDoc.id]) {
               updates[`players.${presDoc.id}`] = admin.firestore.FieldValue.delete();
-              updates[`streamers`] = admin.firestore.FieldValue.arrayRemove(presDoc.id);
+              expiredStreamers.push(presDoc.id);
               hasChanges = true;
             }
           }
+        }
+
+        if (expiredStreamers.length > 0) {
+          updates[`streamers`] = admin.firestore.FieldValue.arrayRemove(...expiredStreamers);
         }
 
         if (hasChanges) {
@@ -1489,6 +1524,114 @@ exports.cleanupLoungePresence = onSchedule(
       }
     } catch (err) {
       console.error("Erreur cleanupLoungePresence:", err);
+    }
+  }
+);
+
+exports.deleteUserAccount = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    if (!request.auth) throw new HttpsError("unauthenticated", "Connexion requise.");
+    const uid = request.auth.uid;
+    const userRef = db.collection("users").doc(uid);
+
+    try {
+      const userSnap = await userRef.get();
+      if (userSnap.exists) {
+        const friends = userSnap.data()?.friends || [];
+        await Promise.all(
+          friends.map((fUid) =>
+            db.collection("users").doc(fUid).update({
+              friends: admin.firestore.FieldValue.arrayRemove(uid),
+            }).catch(() => { })
+          )
+        );
+        await db.recursiveDelete(userRef);
+      }
+      await admin.auth().deleteUser(uid);
+      return { success: true };
+    } catch (error) {
+      console.error("Erreur deleteUserAccount:", error);
+      throw new HttpsError("internal", "Impossible de supprimer le compte.");
+    }
+  }
+);
+
+// =========================================================================
+// REVENUECAT WEBHOOK SÉCURISÉ & SYNCHRONISÉ AVEC FIRESTORE
+// =========================================================================
+exports.revenueCatWebhook = onRequest(
+  { region: "us-central1" },
+  async (req, res) => {
+    // Vérification du Bearer Token configuré dans le dashboard RevenueCat
+    const authHeader = req.headers.authorization;
+    if (authHeader !== `Bearer ${REVENUECAT_WEBHOOK_AUTH_KEY}`) {
+      console.warn("[Webhook RevenueCat] Tentative d'accès non autorisée.");
+      return res.status(401).send("Unauthorized");
+    }
+
+    try {
+      const event = req.body && req.body.event;
+      if (!event) {
+        return res.status(400).send("Événement manquant");
+      }
+
+      const type = event.type;
+      const appUserId = event.app_user_id;
+
+      if (!appUserId) {
+        return res.status(200).send("Événement anonyme ignoré");
+      }
+
+      const userRef = db.collection("users").doc(appUserId);
+
+      // 1. Activation ou renouvellement du statut VIP
+      if (
+        type === "INITIAL_PURCHASE" ||
+        type === "RENEWAL" ||
+        type === "PRODUCT_CHANGE" ||
+        type === "UNCANCELLATION"
+      ) {
+        const entitlementList = event.entitlement_ids || [];
+        // Vérifie si l'utilisateur possède l'entitlement VIP
+        const isVip =
+          entitlementList.includes("daytalia_vip") ||
+          entitlementList.includes("vip") ||
+          entitlementList.length > 0;
+
+        await userRef.set(
+          {
+            isPremium: isVip,
+            vipPlan: event.product_id || "monthly",
+            vipExpiresAt: event.expiration_at_ms
+              ? admin.firestore.Timestamp.fromMillis(event.expiration_at_ms)
+              : null,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        );
+        console.log(`[RevenueCat] Utilisateur ${appUserId} activé VIP via ${type}`);
+      }
+      // 2. Révocation en cas d'expiration ou d'annulation
+      else if (
+        type === "CANCELLATION" ||
+        type === "EXPIRATION" ||
+        type === "BILLING_ISSUE"
+      ) {
+        await userRef.set(
+          {
+            isPremium: false,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        );
+        console.log(`[RevenueCat] Statut VIP révoqué pour ${appUserId} (${type})`);
+      }
+
+      return res.status(200).json({ received: true });
+    } catch (error) {
+      console.error("[RevenueCat Webhook Error]:", error);
+      return res.status(500).send("Erreur serveur");
     }
   }
 );

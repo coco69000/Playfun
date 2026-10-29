@@ -3,24 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'services/force_update_service.dart';
+import 'services/premium_service.dart';
 import 'badges_data.dart';
-
-class PremiumService {
-  Future<bool> purchasePremium() async {
-    print("Simulation d'un achat premium réussi.");
-    return true;
-  }
-
-  Future<bool> restorePurchase() async {
-    print("Simulation d'une restauration d'achat premium réussie.");
-    return true;
-  }
-}
 
 class PlayerState extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  final PremiumService _premiumService = PremiumService();
 
   String? _userId;
   String? _userName;
@@ -32,7 +21,6 @@ class PlayerState extends ChangeNotifier {
   DateTime? _lastDailyCoinGrant;
   DateTime? _lastMultiplayerReset;
   DateTime? _lastVideoGamesReset;
-  Set<String> _unlockedParametersToday = {};
 
   int _level = 1;
   int _xp = 0;
@@ -80,37 +68,82 @@ class PlayerState extends ChangeNotifier {
     if (_userId == null) return;
     bool changed = false;
     Map<String, dynamic> updates = {};
+    int totalXpReward = 0;
 
     for (final badge in AppBadges.allBadges) {
-      if (badge.maxProgress > 1) {
-        final currentProg = (_badgeProgress[badge.id] as num?)?.toInt() ?? 0;
-        if (currentProg >= badge.maxProgress && !_unlockedBadges.containsKey(badge.id)) {
-          final now = DateTime.now().millisecondsSinceEpoch;
-          _unlockedBadges[badge.id] = now;
-          updates['unlockedBadges.${badge.id}'] = now;
+      final currentProg = getProgress(badge.id);
+      final isUnlocked = _unlockedBadges.containsKey(badge.id);
 
-          // Récompense XP selon la rareté
-          int xpReward = 50;
-          if (badge.maxProgress >= 100 || badge.id == 'lvl_100' || badge.id == 'games_500' || badge.id == 'wins_100') {
-            xpReward = 500;
-          } else if (badge.maxProgress >= 25 || badge.id == 'lvl_50' || badge.id == 'games_200' || badge.id == 'wins_50') {
-            xpReward = 250;
-          }
-          _xp += xpReward;
-          updates['xp'] = FieldValue.increment(xpReward);
-          changed = true;
+      if (!isUnlocked && currentProg >= badge.maxProgress) {
+        final now = DateTime.now().millisecondsSinceEpoch;
+        _unlockedBadges[badge.id] = now;
+        updates['unlockedBadges.${badge.id}'] = now;
+
+        // Récompense XP selon la rareté
+        int xpReward = 50;
+        if (badge.maxProgress >= 100 || badge.id == 'lvl_100' || badge.id == 'games_500' || badge.id == 'wins_100') {
+          xpReward = 500;
+        } else if (badge.maxProgress >= 25 || badge.id == 'lvl_50' || badge.id == 'games_200' || badge.id == 'wins_50' || badge.id == 'social_versatile_25') {
+          xpReward = 250;
         }
+        totalXpReward += xpReward;
+        changed = true;
       }
     }
 
     if (changed) {
       await _db.collection('users').doc(_userId!).set(updates, SetOptions(merge: true));
       notifyListeners();
+
+      if (totalXpReward > 0) {
+        await addXp(totalXpReward);
+      }
     }
   }
 
-  int getProgress(String badgeId) =>
-      (_badgeProgress[badgeId] as num?)?.toInt() ?? 0;
+  int getProgress(String badgeId) {
+    final def = AppBadges.getById(badgeId);
+    int raw = (_badgeProgress[badgeId] as num?)?.toInt() ?? 0;
+
+    // Calcul dynamique pour les badges basés sur les statistiques globales du joueur
+    if (badgeId.startsWith('lvl_')) {
+      raw = raw > _level ? raw : _level;
+    } else if (badgeId.startsWith('social_friends_')) {
+      raw = raw > _friends.length ? raw : _friends.length;
+    } else if (badgeId.startsWith('games_')) {
+      final totalPlayed = _gameStats.values.fold<int>(
+        0,
+        (acc, stat) => acc + (stat is Map ? (stat['played'] as num? ?? 0).toInt() : 0),
+      );
+      raw = raw > totalPlayed ? raw : totalPlayed;
+    } else if (badgeId.startsWith('wins_')) {
+      final totalWon = _gameStats.values.fold<int>(
+        0,
+        (acc, stat) => acc + (stat is Map ? (stat['won'] as num? ?? 0).toInt() : 0),
+      );
+      raw = raw > totalWon ? raw : totalWon;
+    } else if (badgeId.startsWith('social_versatile_')) {
+      final gamesCount = _gameStats.keys.length;
+      raw = raw > gamesCount ? raw : gamesCount;
+    } else if (badgeId == 'uno_win_10') {
+      final unoWon = (_gameStats['Uno'] is Map ? (_gameStats['Uno']['won'] as num? ?? 0).toInt() : 0);
+      raw = raw > unoWon ? raw : unoWon;
+    } else if (badgeId == 'dobble_win_10') {
+      final dobbleWon = (_gameStats['Dobble'] is Map ? (_gameStats['Dobble']['won'] as num? ?? 0).toInt() : 0);
+      raw = raw > dobbleWon ? raw : dobbleWon;
+    } else if (badgeId == 'meme_king_5') {
+      final memeWon = (_gameStats['Le Roi des Mèmes'] is Map ? (_gameStats['Le Roi des Mèmes']['won'] as num? ?? 0).toInt() : 0);
+      raw = raw > memeWon ? raw : memeWon;
+    }
+
+    // Si le badge est déjà débloqué, afficher au minimum la progression maximale requise
+    if (_unlockedBadges.containsKey(badgeId) && def != null && def.maxProgress > 1) {
+      if (raw < def.maxProgress) {
+        raw = def.maxProgress;
+      }
+    }
+    return raw;
+  }
 
   List<String> get friends => _friends;
   List<Map<String, dynamic>> get friendRequests => _friendRequests;
@@ -121,6 +154,15 @@ class PlayerState extends ChangeNotifier {
   int get xpForNextLevel {
     int extra = (_level ~/ 10) * 100;
     return 1000 + extra;
+  }
+
+  /// Total d'XP accumulé tout au long de la progression du joueur
+  int get totalCumulativeXp {
+    int total = _xp;
+    for (int lvl = 1; lvl < _level; lvl++) {
+      total += 1000 + (lvl ~/ 10) * 100;
+    }
+    return total;
   }
 
   String get rankTitle {
@@ -134,6 +176,17 @@ class PlayerState extends ChangeNotifier {
     return 'Recrue';
   }
 
+  String get rankTitleKey {
+    if (_level >= 100) return 'rankLegendeVivante';
+    if (_level >= 75) return 'rankGrandMaitre';
+    if (_level >= 50) return 'rankChampion';
+    if (_level >= 30) return 'rankStratege';
+    if (_level >= 20) return 'rankAventurier';
+    if (_level >= 10) return 'rankInitie';
+    if (_level >= 5) return 'rankApprenti';
+    return 'rankRecrue';
+  }
+
   double get levelProgressRatio {
     if (xpForNextLevel <= 0) return 0.0;
     return (_xp / xpForNextLevel).clamp(0.0, 1.0);
@@ -141,6 +194,9 @@ class PlayerState extends ChangeNotifier {
 
   /// Recalcule et applique le niveau en fonction de l'XP actuel
   Future<void> _checkAndNormalizeLevel({bool persist = true}) async {
+    if (_level < 1) _level = 1;
+    if (_xp < 0) _xp = 0;
+
     bool hasLeveledUp = false;
 
     while (_xp >= xpForNextLevel) {
@@ -148,22 +204,28 @@ class PlayerState extends ChangeNotifier {
       _level++;
       _coins += 20; // 20 pièces bonus par niveau
       hasLeveledUp = true;
-
-      // Déblocage des badges de palier de niveau
-      if (_level >= 100) recordBadgeEvent('lvl_100');
-      if (_level >= 50) recordBadgeEvent('lvl_50');
-      if (_level >= 25) recordBadgeEvent('lvl_25');
-      if (_level >= 10) recordBadgeEvent('lvl_10');
-      if (_level >= 5) recordBadgeEvent('lvl_5');
     }
 
-    if (hasLeveledUp && persist && _userId != null) {
-      await _db.collection('users').doc(_userId!).set({
-        'level': _level,
-        'xp': _xp,
-        'coins': _coins,
-      }, SetOptions(merge: true));
+    if (hasLeveledUp) {
+      // Déblocage propre et attendu des badges de palier de niveau
+      await _checkLevelBadges();
+
+      if (persist && _userId != null) {
+        await _db.collection('users').doc(_userId!).set({
+          'level': _level,
+          'xp': _xp,
+          'coins': _coins,
+        }, SetOptions(merge: true));
+      }
     }
+  }
+
+  Future<void> _checkLevelBadges() async {
+    if (_level >= 100) await recordBadgeEvent('lvl_100');
+    if (_level >= 50) await recordBadgeEvent('lvl_50');
+    if (_level >= 25) await recordBadgeEvent('lvl_25');
+    if (_level >= 10) await recordBadgeEvent('lvl_10');
+    if (_level >= 5) await recordBadgeEvent('lvl_5');
   }
 
   Future<void> loadUserData(String userId) async {
@@ -172,7 +234,26 @@ class PlayerState extends ChangeNotifier {
     _userId = userId;
     _userSubscription?.cancel();
 
-    // 1. Récupération initiale (attendue avant de rendre l'UI)
+    // 1. Initialiser RevenueCat avec l'ID Firebase du joueur
+    await PremiumService.init(userId);
+
+    // 2. Vérifier si l'utilisateur est VIP sur RevenueCat
+    final isVipOnStore = await PremiumService.isUserVip();
+    if (isVipOnStore) {
+      _isPremium = true;
+    }
+
+    // 3. Écouter les changements en temps réel (renouvellement, expiration)
+    Purchases.addCustomerInfoUpdateListener((customerInfo) {
+      final active = customerInfo.entitlements.all[PremiumService.entitlementId]?.isActive == true;
+      if (_isPremium != active) {
+        _isPremium = active;
+        setPremiumStatus(active);
+        notifyListeners();
+      }
+    });
+
+    // 4. Récupération initiale Firestore (attendue avant de rendre l'UI)
     final initialDoc = await _db.collection('users').doc(userId).get();
     if (!initialDoc.exists) {
       _coins = 50;
@@ -290,6 +371,16 @@ class PlayerState extends ChangeNotifier {
           'fcmToken': newToken,
         }, SetOptions(merge: true));
       });
+
+      // Gestion des interactions lors du clic sur une notification push
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        debugPrint("Notification push ouverte (arrière-plan) : ${message.data}");
+      });
+
+      final initialMessage = await messaging.getInitialMessage();
+      if (initialMessage != null) {
+        debugPrint("Application ouverte depuis une notification push : ${initialMessage.data}");
+      }
     } catch (e) {
       debugPrint("Erreur initialisation FCM: $e");
     }
@@ -317,6 +408,24 @@ class PlayerState extends ChangeNotifier {
     _loungeInvites = [];
     _friendNamesCache = {};
     notifyListeners();
+  }
+
+  /// Supprime définitivement le compte et toutes les données associées (Exigence Apple & Google Play)
+  Future<bool> deleteAccount() async {
+    if (_userId == null) return false;
+    try {
+      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+        'deleteUserAccount',
+      );
+      await callable.call(ForceUpdateService.versionPayload);
+    } catch (e) {
+      debugPrint("Fallback suppression directe Firestore : $e");
+      try {
+        await _db.collection('users').doc(_userId!).delete();
+      } catch (_) {}
+    }
+    resetState();
+    return true;
   }
 
   void _loadDailyLimits(Map<String, dynamic> data) {
@@ -380,7 +489,7 @@ class PlayerState extends ChangeNotifier {
     var snap = await _db
         .collection('users')
         .where('nameLower', isGreaterThanOrEqualTo: clean)
-        .where('nameLower', isLessThanOrEqualTo: clean + '\uf8ff')
+        .where('nameLower', isLessThanOrEqualTo: '$clean\uf8ff')
         .limit(10)
         .get();
 
@@ -394,8 +503,9 @@ class PlayerState extends ChangeNotifier {
   }
 
   Future<void> sendFriendRequest(String targetUid, String targetName) async {
-    if (_userId == null || targetUid == _userId || _friends.contains(targetUid))
+    if (_userId == null || targetUid == _userId || _friends.contains(targetUid)) {
       return;
+    }
 
     try {
       final callable = FirebaseFunctions.instance.httpsCallable('sendFriendRequest');
@@ -609,9 +719,20 @@ class PlayerState extends ChangeNotifier {
       recordBadgeEvent('uno_win_10', count: 1, targetProgress: 10);
     } else if (gameName == 'Dobble') {
       recordBadgeEvent('dobble_win_10', count: 1, targetProgress: 10);
+      recordBadgeEvent('dobble_streak_5', count: 1, targetProgress: 5);
     } else if (gameName == 'Le Roi des Mêmes') {
       recordBadgeEvent('meme_king_1');
       recordBadgeEvent('meme_king_5', count: 1, targetProgress: 5);
+    } else if (gameName == 'Bataille Navale') {
+      recordBadgeEvent('naval_clean_sheet');
+      recordBadgeEvent('naval_sniper');
+    } else if (gameName == 'Zéro Pointé') {
+      recordBadgeEvent('skyjo_negative');
+      recordBadgeEvent('skyjo_col_cancel');
+    } else if (gameName == "Time's Up") {
+      recordBadgeEvent('taboo_express_3');
+      recordBadgeEvent('taboo_speed_10', count: 1, targetProgress: 10);
+      recordBadgeEvent('taboo_flawless');
     }
   }
 
@@ -640,26 +761,32 @@ class PlayerState extends ChangeNotifier {
     final currentUnlocked = _unlockedBadges.containsKey(badgeId);
     if (currentUnlocked) return; // Déjà débloqué
 
-    final currentProgress = (_badgeProgress[badgeId] as num?)?.toInt() ?? 0;
-    final newProgress = currentProgress + count;
+    int currentProgress = (_badgeProgress[badgeId] as num?)?.toInt() ?? 0;
+    if (badgeId.startsWith('lvl_') && _level > currentProgress) {
+      currentProgress = _level;
+    } else if (badgeId.startsWith('social_friends_') && _friends.length > currentProgress) {
+      currentProgress = _friends.length;
+    }
+
+    final newProgress = badgeId.startsWith('lvl_')
+        ? currentProgress
+        : (currentProgress + count);
 
     Map<String, dynamic> updates = {
       'badgeProgress.$badgeId': newProgress,
     };
 
-    bool newlyUnlocked = false;
-    if (targetProgress != null && newProgress >= targetProgress) {
-      newlyUnlocked = true;
-    } else if (targetProgress == null) {
-      newlyUnlocked = true;
-    }
+    final badgeDef = AppBadges.getById(badgeId);
+    final effectiveTarget = targetProgress ?? badgeDef?.maxProgress ?? 1;
+    final bool newlyUnlocked = newProgress >= effectiveTarget;
+    int xpReward = 0;
 
     if (newlyUnlocked) {
-      updates['unlockedBadges.$badgeId'] = DateTime.now().millisecondsSinceEpoch;
-      _unlockedBadges[badgeId] = DateTime.now().millisecondsSinceEpoch;
+      final now = DateTime.now().millisecondsSinceEpoch;
+      updates['unlockedBadges.$badgeId'] = now;
+      _unlockedBadges[badgeId] = now;
 
-      final badgeDef = AppBadges.getById(badgeId);
-      int xpReward = 50; // Palier Bronze / standard (+50 XP)
+      xpReward = 50; // Palier Bronze / standard (+50 XP)
       if (badgeDef != null) {
         if (badgeDef.maxProgress >= 100 || badgeId == 'lvl_100' || badgeId == 'games_500' || badgeId == 'wins_100') {
           xpReward = 500; // Palier Or / Légendaire (+500 XP)
@@ -667,14 +794,17 @@ class PlayerState extends ChangeNotifier {
           xpReward = 250; // Palier Argent / Vétéran (+250 XP)
         }
       }
-      updates['xp'] = FieldValue.increment(xpReward);
-      _xp += xpReward;
     }
 
     _badgeProgress[badgeId] = newProgress;
     notifyListeners();
 
     await _db.collection('users').doc(_userId!).set(updates, SetOptions(merge: true));
+
+    // Si le déblocage rapporte de l'XP, on le crédite proprement via addXp
+    if (xpReward > 0) {
+      await addXp(xpReward);
+    }
   }
 
   // 1. Crédit direct d'XP pour les modes locaux et actions instantanées
@@ -682,18 +812,13 @@ class PlayerState extends ChangeNotifier {
     if (_userId == null || amount <= 0) return;
     _xp += amount;
 
+    bool hasLeveledUp = false;
     // Vérification du passage de niveau
     while (_xp >= xpForNextLevel) {
       _xp -= xpForNextLevel;
       _level++;
       _coins += 20; // 20 pièces bonus à chaque niveau gagné
-
-      // 🏆 DÉBLOCAGE BADGES DE NIVEAUX
-      if (_level >= 100) recordBadgeEvent('lvl_100');
-      if (_level >= 50) recordBadgeEvent('lvl_50');
-      if (_level >= 25) recordBadgeEvent('lvl_25');
-      if (_level >= 10) recordBadgeEvent('lvl_10');
-      if (_level >= 5) recordBadgeEvent('lvl_5');
+      hasLeveledUp = true;
     }
 
     notifyListeners();
@@ -703,6 +828,11 @@ class PlayerState extends ChangeNotifier {
       'level': _level,
       'coins': _coins,
     }, SetOptions(merge: true));
+
+    if (hasLeveledUp) {
+      // 🏆 DÉBLOCAGE BADGES DE NIVEAUX
+      await _checkLevelBadges();
+    }
   }
 
   // 2. Gestion de fin de partie Classée (Ranked) avec multiplicateurs et Win Streaks
@@ -804,43 +934,34 @@ class PlayerState extends ChangeNotifier {
       isWin: isWin,
       xpEarned: xpGained,
     );
-  }
-
-  Future<bool> setPremiumStatus(bool premium) async {
-    if (_userId == null) return false;
-    try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'setPremiumStatus',
-      );
-      final result = await callable.call({
-        'isPremium': premium,
-        ...ForceUpdateService.versionPayload,
-      });
-      if (result.data != null && result.data['success'] == true) {
-        _isPremium = premium;
-        notifyListeners();
-        return true;
-      }
-      return false;
-    } catch (e) {
-      debugPrint("Info Cloud Function setPremiumStatus: $e");
-      // Fallback local pour tests hors-ligne / dev
-      _isPremium = premium;
-      notifyListeners();
-      return true;
+    if (xpGained > 0) {
+      await addXp(xpGained);
     }
   }
 
-  Future<bool> purchasePremium() async {
-    if (_userId == null) return false;
-    await _premiumService.purchasePremium();
-    return await setPremiumStatus(true);
+  Future<bool> setPremiumStatus(bool premium) async {
+    _isPremium = premium;
+    notifyListeners();
+    return true;
+  }
+
+  Future<bool> purchasePackage(Package package) async {
+    final success = await PremiumService.purchasePackage(package);
+    if (success) {
+      _isPremium = true;
+      notifyListeners();
+    }
+    return success;
   }
 
   Future<bool> restorePurchases() async {
     if (_userId == null) return false;
-    await _premiumService.restorePurchase();
-    return await setPremiumStatus(true);
+    final success = await PremiumService.restorePurchases();
+    if (success) {
+      _isPremium = true;
+      notifyListeners();
+    }
+    return success;
   }
 
   Future<void> completeOnboarding() async {
@@ -863,16 +984,19 @@ class PlayerState extends ChangeNotifier {
       'multiplayerGamesPlayedToday': _multiplayerGamesPlayedToday,
       'videoGamesPlayedToday': _videoGamesPlayedToday,
     };
-    if (_lastDailyCoinGrant != null)
+    if (_lastDailyCoinGrant != null) {
       userData['lastDailyCoinGrant'] = Timestamp.fromDate(_lastDailyCoinGrant!);
-    if (_lastMultiplayerReset != null)
+    }
+    if (_lastMultiplayerReset != null) {
       userData['lastMultiplayerReset'] = Timestamp.fromDate(
         _lastMultiplayerReset!,
       );
-    if (_lastVideoGamesReset != null)
+    }
+    if (_lastVideoGamesReset != null) {
       userData['lastVideoGamesReset'] = Timestamp.fromDate(
         _lastVideoGamesReset!,
       );
+    }
 
     await _db
         .collection('users')

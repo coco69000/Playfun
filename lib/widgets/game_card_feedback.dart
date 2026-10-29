@@ -14,7 +14,7 @@ class InteractiveGameCard extends StatefulWidget {
   final EdgeInsetsGeometry margin;
 
   const InteractiveGameCard({
-    Key? key,
+    super.key,
     required this.child,
     this.onTap,
     this.onLongPress,
@@ -23,7 +23,7 @@ class InteractiveGameCard extends StatefulWidget {
     this.selectedScale = 1.08,
     this.borderRadius,
     this.margin = const EdgeInsets.all(4),
-  }) : super(key: key);
+  });
 
   @override
   State<InteractiveGameCard> createState() => _InteractiveGameCardState();
@@ -52,14 +52,14 @@ class _InteractiveGameCardState extends State<InteractiveGameCard> {
             boxShadow: widget.isSelected
                 ? [
                     BoxShadow(
-                      color: AppColors.primaryAccent.withOpacity(0.6),
+                      color: AppColors.primaryAccent.withValues(alpha: 0.6),
                       blurRadius: 16,
                       spreadRadius: 2,
                     ),
                   ]
                 : [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       blurRadius: 6,
                       offset: const Offset(0, 3),
                     ),

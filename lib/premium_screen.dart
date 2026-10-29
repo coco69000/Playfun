@@ -1,347 +1,295 @@
-// lib/premium_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'player_state.dart';
+import 'services/premium_service.dart';
+import 'services/legal_links.dart';
+import 'l10n/app_localizations.dart';
+import 'matchmaking_localization.dart';
 
-class PremiumScreen extends StatelessWidget {
+class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
 
-  static const List<String> aiGames = [
-    'Pictionary',
-    'Just One',
-    'Codenames',
-    "Time's Up",
-    'Synonyme ou Banni',
-    'Infiltré & Mr. White',
-    'Le Menteur',
-    'Qui Pourrait le Plus ?',
-    'Le Juge',
-  ];
+  @override
+  State<PremiumScreen> createState() => _PremiumScreenState();
+}
+
+class _PremiumScreenState extends State<PremiumScreen> {
+  Offering? _offering;
+  Package? _selectedPackage;
+  bool _isLoading = true;
+  bool _isPurchasing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadOfferings();
+  }
+
+  Future<void> _loadOfferings() async {
+    final off = await PremiumService.getCurrentOffering();
+    if (mounted) {
+      setState(() {
+        _offering = off;
+        if (off != null && off.availablePackages.isNotEmpty) {
+          // Sélectionne l'offre annuelle par défaut si disponible
+          _selectedPackage = off.availablePackages.firstWhere(
+            (p) => p.packageType == PackageType.annual,
+            orElse: () => off.availablePackages.first,
+          );
+        }
+        _isLoading = false;
+      });
+    }
+  }
+
+  /// Calcule le prix mensuel équivalent pour l'abonnement annuel dans la monnaie locale du joueur
+  String _calculateMonthlyEquivalent(Package annualPackage) {
+    try {
+      final double totalPrice = annualPackage.storeProduct.price;
+      final double monthlyPrice = totalPrice / 12.0;
+
+      // Récupération du format de devise du store (ex: "$47.99" ou "47,99 €")
+      final String fullPriceString = annualPackage.storeProduct.priceString;
+      final String currencySymbol = fullPriceString.replaceAll(RegExp(r'[\d.,\s]'), '');
+      final bool isPrefix = fullPriceString.trim().startsWith(currencySymbol);
+
+      final String formattedNumber = monthlyPrice.toStringAsFixed(2);
+
+      return isPrefix ? "$currencySymbol$formattedNumber" : "$formattedNumber $currencySymbol";
+    } catch (_) {
+      return "~";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Consumer<PlayerState>(
       builder: (context, playerState, child) {
         return Scaffold(
+          backgroundColor: const Color(0xFF0F0E17),
           appBar: AppBar(
-            title: const Text("Statut & Boutique VIP"),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text(l10n?.vipPass ?? "Pass VIP"),
             centerTitle: true,
           ),
           body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // --- CARTE STATUT DU JOUEUR ---
-                Card(
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Mon Profil",
-                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            playerState.isPremium
-                                ? Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: Colors.amber[700],
-                                      borderRadius: BorderRadius.circular(20),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.amber.withValues(alpha: 0.4),
-                                          blurRadius: 8,
-                                          offset: const Offset(0, 2),
-                                        )
-                                      ],
-                                    ),
-                                    child: const Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(Icons.star, color: Colors.white, size: 16),
-                                        SizedBox(width: 4),
-                                        Text(
-                                          "VIP ACTIF",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[700],
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: const Text(
-                                      "Joueur Standard",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        _buildStatRow(
-                          context,
-                          icon: Icons.monetization_on,
-                          iconColor: Colors.amber,
-                          title: "Mes Pièces",
-                          value: playerState.isPremium ? "∞ (Illimitées)" : "${playerState.coins}",
-                        ),
-                        const Divider(height: 20),
-                        _buildStatRow(
-                          context,
-                          icon: Icons.games,
-                          iconColor: Colors.lightBlueAccent,
-                          title: "Parties en ligne du jour",
-                          value: playerState.isPremium
-                              ? "Illimitées"
-                              : "${playerState.multiplayerGamesLeft} / 20 restantes",
-                        ),
-                        const Divider(height: 20),
-                        _buildStatRow(
-                          context,
-                          icon: Icons.videocam,
-                          iconColor: Colors.purpleAccent,
-                          title: "Parties avec Vidéo du jour",
-                          value: playerState.isPremium
-                              ? "Illimitées"
-                              : "${playerState.videoGamesLeftToday} / 4 restantes",
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                // --- CARTE IA PREMIUM & JEUX SUPPORTÉS ---
-                Card(
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  color: const Color(0xFF1E1B4B), // Deep indigo
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Row(
-                          children: [
-                            Icon(Icons.auto_awesome, color: Colors.amberAccent, size: 24),
-                            SizedBox(width: 8),
-                            Text(
-                              "Génération par IA (Mode Soft)",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          "En tant que VIP, vous pouvez entrer n'importe quel thème personnalisé (ex: \"Harry Potter\", \"Cuisine du monde\", \"Années 90\") pour générer des mots inédits sur 9 jeux :",
-                          style: TextStyle(color: Colors.white70, fontSize: 13.5, height: 1.4),
-                        ),
-                        const SizedBox(height: 12),
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 6,
-                          children: aiGames.map((game) {
-                            return Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.deepPurple.withValues(alpha: 0.5),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: Colors.deepPurpleAccent.withValues(alpha: 0.6),
-                                ),
-                              ),
-                              child: Text(
-                                game,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                // --- SECTION SI DÉJÀ VIP OU NON ---
                 if (playerState.isPremium) ...[
-                  Card(
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    color: Colors.green[900]?.withValues(alpha: 0.8),
-                    child: Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        children: [
-                          const Icon(Icons.verified, color: Colors.greenAccent, size: 48),
-                          const SizedBox(height: 8),
-                          const Text(
-                            "Votre abonnement VIP est actif",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          const Text(
-                            "Vous profitez de toutes les fonctionnalités illimitées et de l'IA !",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white70, fontSize: 13),
-                          ),
-                          const SizedBox(height: 16),
-                          OutlinedButton.icon(
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.white70,
-                              side: const BorderSide(color: Colors.white38),
-                            ),
-                            icon: const Icon(Icons.refresh, size: 16),
-                            label: const Text("Désactiver le VIP (Mode Test / Dev)"),
-                            onPressed: () async {
-                              await playerState.setPremiumStatus(false);
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text("Statut VIP désactivé pour les tests."),
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                        ],
+                  Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.green.shade900, const Color(0xFF064E3B)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: Colors.greenAccent, width: 1.5),
+                    ),
+                    child: Column(
+                      children: [
+                        const Icon(Icons.verified_rounded, color: Colors.greenAccent, size: 54),
+                        const SizedBox(height: 12),
+                        Text(
+                          l10n?.vipActive ?? "Votre Pass VIP est actif !",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          l10n?.vipActiveDesc ?? "Toutes les fonctionnalités sont illimitées.",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Colors.white70, fontSize: 13),
+                        ),
+                      ],
                     ),
                   ),
                 ] else ...[
-                  // --- CARTE D'ACHAT VIP ---
-                  Card(
-                    elevation: 6,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                  Center(
+                    child: Container(
+                      width: 72,
+                      height: 72,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: const LinearGradient(
+                          colors: [Colors.amber, Colors.orangeAccent],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.amber.withValues(alpha: 0.4),
+                            blurRadius: 20,
+                            spreadRadius: 3,
+                          ),
+                        ],
+                      ),
+                      child: const Icon(Icons.star_rounded, size: 44, color: Colors.black),
                     ),
-                    color: const Color(0xFF2E1065), // Rich dark violet
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const Text(
-                            "Devenir VIP Premium",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 8),
-                          const Text(
-                            "Débloquez l'expérience Playfun ultime sans aucune limite :",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white70, fontSize: 14),
-                          ),
-                          const SizedBox(height: 16),
-                          _buildPerkItem("🪙", "Pièces & Salons illimités"),
-                          _buildPerkItem("🎮", "Parties en ligne illimitées (plus de limite de 20/jour)"),
-                          _buildPerkItem("📹", "Parties avec Vidéo illimitées"),
-                          _buildPerkItem("👥", "Vos amis jouent gratuitement avec vous dans vos lobbies"),
-                          _buildPerkItem("✨", "Génération IA illimitée sur 9 jeux (mode Soft)"),
-                          const SizedBox(height: 22),
-                          ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.amber[600],
-                              foregroundColor: Colors.black,
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              elevation: 4,
-                            ),
-                            icon: const Icon(Icons.star, color: Colors.black),
-                            label: const Text(
-                              "S'abonner (4,99 € / mois)",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            onPressed: () async {
-                              bool success = await playerState.purchasePremium();
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: success ? Colors.green[800] : Colors.red[800],
-                                    content: Text(
-                                      success
-                                          ? "Félicitations, vous êtes maintenant VIP Premium !"
-                                          : "Erreur lors de l'activation VIP.",
-                                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    MatchmakingLocalization.tr(context, 'unlockUnlimitedAccess'),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    MatchmakingLocalization.tr(context, 'enjoyAllFeatures'),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white60, fontSize: 14),
+                  ),
+                  const SizedBox(height: 24),
+
+                  _buildFeatureRow(Icons.auto_awesome, MatchmakingLocalization.tr(context, 'featureAi')),
+                  _buildFeatureRow(Icons.videocam_rounded, MatchmakingLocalization.tr(context, 'featureVideo')),
+                  _buildFeatureRow(Icons.living_rounded, MatchmakingLocalization.tr(context, 'featureLounges')),
+                  _buildFeatureRow(Icons.block_rounded, MatchmakingLocalization.tr(context, 'featureNoAds')),
+
+                  const SizedBox(height: 24),
+
+                  // AFFICHAGE DYNAMIQUE DES OFFRES SELON LE PAYS
+                  if (_isLoading)
+                    const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(32),
+                        child: CircularProgressIndicator(color: Colors.amberAccent),
+                      ),
+                    )
+                  else if (_offering != null && _offering!.availablePackages.isNotEmpty) ...[
+                    ..._offering!.availablePackages.map((pkg) => _buildPackageCard(pkg)),
+                  ] else ...[
+                    // Carte par défaut si le store met du temps à répondre
+                    _buildPlaceholderCard(
+                      isAnnual: true,
+                      isSelected: true,
+                      title: l10n?.annualSubscription ?? "Abonnement Annuel",
+                      subtitle: MatchmakingLocalization.tr(context, 'annualBillingDiscount', {'price': '47,99 €', 'monthly': '3,99 €'}),
+                      price: "47,99 €",
+                    ),
+                    _buildPlaceholderCard(
+                      isAnnual: false,
+                      isSelected: false,
+                      title: l10n?.monthlySubscription ?? "Abonnement Mensuel",
+                      subtitle: MatchmakingLocalization.tr(context, 'monthlyBillingNoCommitment', {'price': '4,99 €'}),
+                      price: "4,99 €",
+                    ),
+                  ],
+
+                  const SizedBox(height: 20),
+
+                  // BOUTON PRINCIPAL D'ABONNEMENT (AVEC DEVISE ET PRIX EXACTS DU STORE)
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amber[600],
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      elevation: 6,
+                    ),
+                    onPressed: (_isPurchasing || _selectedPackage == null)
+                        ? null
+                        : () async {
+                            final messenger = ScaffoldMessenger.of(context);
+                            setState(() => _isPurchasing = true);
+                            final success = await playerState.purchasePackage(_selectedPackage!);
+                            setState(() => _isPurchasing = false);
+                            if (mounted) {
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: success ? Colors.green[800] : Colors.red[800],
+                                  content: Text(
+                                    success
+                                        ? MatchmakingLocalization.tr(context, 'congratsVip')
+                                        : MatchmakingLocalization.tr(context, 'paymentFailed'),
                                   ),
-                                );
-                              }
-                            },
+                                ),
+                              );
+                            }
+                          },
+                    child: _isPurchasing
+                        ? const SizedBox(
+                            width: 22,
+                            height: 22,
+                            child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.black),
+                          )
+                        : Text(
+                            _selectedPackage != null
+                                ? (_selectedPackage!.packageType == PackageType.annual
+                                    ? MatchmakingLocalization.tr(context, 'subscribeAnnual', {'price': _selectedPackage!.storeProduct.priceString})
+                                    : MatchmakingLocalization.tr(context, 'subscribeMonthly', {'price': _selectedPackage!.storeProduct.priceString}))
+                                : MatchmakingLocalization.tr(context, 'subscribeNow'),
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
                           ),
-                          const SizedBox(height: 10),
-                          TextButton(
-                            onPressed: () async {
-                              bool success = await playerState.restorePurchases();
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
+                  ),
+
+                  const SizedBox(height: 14),
+
+                  Center(
+                    child: TextButton.icon(
+                      icon: const Icon(Icons.restore, color: Colors.white60, size: 18),
+                      label: Text(
+                        l10n?.restorePurchases ?? "Restaurer mes achats",
+                        style: const TextStyle(color: Colors.white60, fontSize: 13),
+                      ),
+                      onPressed: _isPurchasing
+                          ? null
+                          : () async {
+                              final messenger = ScaffoldMessenger.of(context);
+                              setState(() => _isPurchasing = true);
+                              final success = await playerState.restorePurchases();
+                              setState(() => _isPurchasing = false);
+                              if (mounted) {
+                                messenger.showSnackBar(
                                   SnackBar(
                                     content: Text(
                                       success
                                           ? "Achats restaurés avec succès !"
-                                          : "Recherche d'achats précédents terminée.",
+                                          : "Aucun achat actif trouvé.",
                                     ),
                                   ),
                                 );
                               }
                             },
-                            child: const Text(
-                              "Restaurer mes achats",
-                              style: TextStyle(color: Colors.white70),
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
+
+                  const SizedBox(height: 12),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 16,
+                    children: [
+                      TextButton(
+                        onPressed: () => LegalLinks.openUrl(context, LegalLinks.cguUrl),
+                        child: Text(
+                          MatchmakingLocalization.tr(context, 'termsOfUse'),
+                          style: const TextStyle(color: Colors.white38, fontSize: 11, decoration: TextDecoration.underline),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => LegalLinks.openUrl(context, LegalLinks.privacyUrl),
+                        child: Text(
+                          MatchmakingLocalization.tr(context, 'privacyPolicy'),
+                          style: const TextStyle(color: Colors.white38, fontSize: 11, decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                 ],
               ],
             ),
@@ -351,48 +299,189 @@ class PremiumScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatRow(
-    BuildContext context, {
-    required IconData icon,
-    required Color iconColor,
-    required String title,
-    required String value,
-  }) {
-    return Row(
-      children: [
-        Icon(icon, color: iconColor, size: 24),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.w500),
+  Widget _buildFeatureRow(IconData icon, String label) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: Colors.amber.withValues(alpha: 0.15),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: Colors.amberAccent, size: 16),
           ),
-        ),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              label,
+              style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _buildPerkItem(String emoji, String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+  /// Carte d'abonnement construite avec la devise et le prix réel de l'utilisateur
+  Widget _buildPackageCard(Package package) {
+    final bool isSelected = _selectedPackage == package;
+    final bool isAnnual = package.packageType == PackageType.annual;
+    final l10n = AppLocalizations.of(context);
+    final String title = isAnnual
+        ? (l10n?.annualSubscription ?? "Abonnement Annuel")
+        : (l10n?.monthlySubscription ?? "Abonnement Mensuel");
+    final String localizedPrice = package.storeProduct.priceString;
+
+    String subtitle = "";
+    if (isAnnual) {
+      final monthlyEquiv = _calculateMonthlyEquivalent(package);
+      subtitle = MatchmakingLocalization.tr(context, 'annualBillingDiscount', {'price': localizedPrice, 'monthly': monthlyEquiv});
+    } else {
+      subtitle = MatchmakingLocalization.tr(context, 'monthlyBillingNoCommitment', {'price': localizedPrice});
+    }
+
+    return GestureDetector(
+      onTap: () => setState(() => _selectedPackage = package),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFF261E38) : const Color(0xFF161522),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: isSelected ? Colors.amberAccent : Colors.white12,
+            width: isSelected ? 2.5 : 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+              color: isSelected ? Colors.amberAccent : Colors.white38,
+              size: 22,
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (isAnnual)
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFFFF9800), Color(0xFFFF5722)],
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        MatchmakingLocalization.tr(context, 'recommendedDiscount'),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.5,
+                      color: isSelected ? Colors.white : Colors.white70,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: isAnnual ? Colors.amberAccent.shade100 : Colors.white38,
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              localizedPrice,
+              style: TextStyle(
+                color: isSelected ? Colors.amberAccent : Colors.white,
+                fontSize: 17,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPlaceholderCard({
+    required bool isAnnual,
+    required bool isSelected,
+    required String title,
+    required String subtitle,
+    required String price,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isSelected ? const Color(0xFF261E38) : const Color(0xFF161522),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: isSelected ? Colors.amberAccent : Colors.white12,
+          width: isSelected ? 2.5 : 1,
+        ),
+      ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(emoji, style: const TextStyle(fontSize: 16)),
-          const SizedBox(width: 10),
+          Icon(
+            isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+            color: isSelected ? Colors.amberAccent : Colors.white38,
+            size: 22,
+          ),
+          const SizedBox(width: 14),
           Expanded(
-            child: Text(
-              text,
-              style: const TextStyle(color: Colors.white, fontSize: 13.5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (isAnnual)
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFFFF9800), Color(0xFFFF5722)],
+                      ),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      MatchmakingLocalization.tr(context, 'recommendedDiscount'),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.5,
+                    color: isSelected ? Colors.white : Colors.white70,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(subtitle, style: const TextStyle(color: Colors.white38, fontSize: 11)),
+              ],
             ),
           ),
+          Text(price, style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w900)),
         ],
       ),
     );

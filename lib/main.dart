@@ -1,8 +1,11 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:firebase_core/firebase_core.dart' hide FirebaseService;
+import 'l10n/app_localizations.dart';
+import 'matchmaking_localization.dart';
 
 import 'auth/auth_gate.dart';
 import 'auth/auth_service.dart';
@@ -18,6 +21,7 @@ import 'theme/app_colors.dart';
 import 'screens/onboarding_screen.dart';
 import 'services/app_router.dart';
 import 'services/force_update_service.dart';
+import 'services/legal_links.dart';
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 
@@ -54,26 +58,63 @@ void main() async {
 }
 
 class MyAppWithAuth extends StatelessWidget {
+  const MyAppWithAuth({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: ForceUpdateService.navigatorKey,
-      title: 'Jeu de Soirée',
+      title: 'PlayFun',
       theme: AppTheme.darkTheme,
       home: AuthGate(),
       debugShowCheckedModeBanner: false,
+      builder: (context, child) => ForceUpdateGate(child: child ?? const SizedBox.shrink()),
+
+      // --- CONFIGURATION MULTILINGUE GLOBALE ---
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), // Anglais (Canada / USA / UK)
+        Locale('fr', ''), // Français (France / Canada / Belgique)
+        Locale('es', ''), // Espagnol (Mexique / Espagne / USA)
+        Locale('de', ''), // Allemand
+        Locale('it', ''), // Italien
+        Locale('pt', ''), // Portugais
+        Locale('nl', ''), // Néerlandais
+        Locale('pl', ''), // Polonais
+        Locale('ru', ''), // Russe
+        Locale('uk', ''), // Ukrainien
+        Locale('ro', ''), // Roumain
+        Locale('el', ''), // Grec
+        Locale('cs', ''), // Tchèque
+        Locale('sv', ''), // Suédois
+        Locale('da', ''), // Danois
+        Locale('fi', ''), // Finnois
+        Locale('no', ''), // Norvégien
+        Locale('hu', ''), // Hongrois
+        Locale('sk', ''), // Slovaquie
+        Locale('hr', ''), // Croatie
+        Locale('bg', ''), // Bulgarie
+        Locale('tr', ''), // Turquie
+      ],
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  List<String> _processedInvites = [];
+  final List<String> _processedInvites = [];
 
   @override
   void initState() {
@@ -93,6 +134,8 @@ class _MainScreenState extends State<MainScreen> {
     );
     bool isEditingName = false;
 
+    final l10n = AppLocalizations.of(context);
+
     showDialog(
       context: context,
       builder:
@@ -102,7 +145,7 @@ class _MainScreenState extends State<MainScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                title: Text("Profil", textAlign: TextAlign.center),
+                title: Text(l10n?.profileTitle ?? "Profil & Paramètres", textAlign: TextAlign.center),
                 content: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -114,10 +157,10 @@ class _MainScreenState extends State<MainScreen> {
                           ps.userName != null && ps.userName!.isNotEmpty
                               ? ps.userName![0].toUpperCase()
                               : "?",
-                          style: TextStyle(fontSize: 30, color: Colors.white),
+                          style: const TextStyle(fontSize: 30, color: Colors.white),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
 
                       if (isEditingName)
                         Row(
@@ -126,13 +169,13 @@ class _MainScreenState extends State<MainScreen> {
                               child: TextField(
                                 controller: nameController,
                                 decoration: InputDecoration(
-                                  hintText: "Nouveau pseudo",
+                                  hintText: l10n?.newUsernameHint ?? "Nouveau pseudo",
                                   isDense: true,
                                 ),
                               ),
                             ),
                             IconButton(
-                              icon: Icon(Icons.check, color: Colors.green),
+                              icon: const Icon(Icons.check, color: Colors.green),
                               onPressed: () {
                                 if (nameController.text.trim().isNotEmpty) {
                                   ps.updateUserName(nameController.text.trim());
@@ -148,13 +191,13 @@ class _MainScreenState extends State<MainScreen> {
                           children: [
                             Text(
                               ps.userName ?? "Joueur",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.edit,
                                 size: 18,
                                 color: Colors.white54,
@@ -167,31 +210,31 @@ class _MainScreenState extends State<MainScreen> {
                           ],
                         ),
 
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
-                        "Niveau ${ps.level}",
-                        style: TextStyle(
+                        "${l10n?.level ?? 'Niveau'} ${ps.level}",
+                        style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
                         "${ps.xp} / ${ps.xpForNextLevel} XP",
-                        style: TextStyle(color: Colors.white70),
+                        style: const TextStyle(color: Colors.white70),
                       ),
-                      Divider(height: 30),
+                      const Divider(height: 30),
                       Text(
-                        "Parties jouées : ${ps.gameStats.values.fold<int>(0, (sum, stat) => sum + (stat['played'] as int? ?? 0))}",
+                        "${l10n?.gamesPlayed ?? 'Parties jouées'} : ${ps.gameStats.values.fold<int>(0, (acc, stat) => acc + (stat['played'] as int? ?? 0))}",
                       ),
                       Text(
-                        "Victoires : ${ps.gameStats.values.fold<int>(0, (sum, stat) => sum + (stat['won'] as int? ?? 0))}",
+                        "${l10n?.gamesWon ?? 'Victoires'} : ${ps.gameStats.values.fold<int>(0, (acc, stat) => acc + (stat['won'] as int? ?? 0))}",
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       OutlinedButton.icon(
-                        icon: Icon(Icons.school, size: 18),
-                        label: Text("Revoir le tutoriel"),
+                        icon: const Icon(Icons.school, size: 18),
+                        label: Text(MatchmakingLocalization.tr(context, 'reviewTutorial')),
                         onPressed: () {
                           Navigator.pop(ctx);
                           AppRouter.push(
@@ -202,16 +245,103 @@ class _MainScreenState extends State<MainScreen> {
                           );
                         },
                       ),
-                      SizedBox(height: 12),
+                      const Divider(height: 24),
+                      Text(
+                        MatchmakingLocalization.tr(context, 'legalSectionTitle'),
+                        style: const TextStyle(
+                          color: Colors.white54,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 8,
+                        children: [
+                          TextButton.icon(
+                            icon: const Icon(
+                              Icons.description_outlined,
+                              size: 16,
+                              color: Colors.cyanAccent,
+                            ),
+                            label: Text(
+                              MatchmakingLocalization.tr(context, 'termsOfUse'),
+                              style: const TextStyle(color: Colors.cyanAccent, fontSize: 13),
+                            ),
+                            onPressed: () =>
+                                LegalLinks.openUrl(context, LegalLinks.cguUrl),
+                          ),
+                          TextButton.icon(
+                            icon: const Icon(
+                              Icons.privacy_tip_outlined,
+                              size: 16,
+                              color: Colors.cyanAccent,
+                            ),
+                            label: Text(
+                              MatchmakingLocalization.tr(context, 'privacyPolicy'),
+                              style: const TextStyle(color: Colors.cyanAccent, fontSize: 13),
+                            ),
+                            onPressed: () =>
+                                LegalLinks.openUrl(context, LegalLinks.privacyUrl),
+                          ),
+                        ],
+                      ),
+                      const Text(
+                        "Édité par Parrel • v1.0.0",
+                        style: TextStyle(color: Colors.white38, fontSize: 11),
+                      ),
+                      const SizedBox(height: 14),
                       ElevatedButton.icon(
-                        icon: Icon(Icons.logout),
-                        label: Text("Se déconnecter"),
+                        icon: const Icon(Icons.logout),
+                        label: Text(l10n?.logout ?? "Se déconnecter"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.error,
                         ),
                         onPressed: () {
                           Navigator.pop(ctx);
                           auth.signOut();
+                        },
+                      ),
+                      const SizedBox(height: 8),
+                      TextButton.icon(
+                        icon: const Icon(
+                          Icons.delete_forever,
+                          color: Colors.redAccent,
+                          size: 18,
+                        ),
+                        label: Text(
+                          l10n?.deleteAccount ?? "Supprimer mon compte",
+                          style: const TextStyle(color: Colors.redAccent, fontSize: 12.5),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (confirmCtx) => AlertDialog(
+                              title: Text(MatchmakingLocalization.tr(context, 'deleteAccountTitle')),
+                              content: Text(
+                                MatchmakingLocalization.tr(context, 'deleteAccountDesc'),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(confirmCtx),
+                                  child: Text(l10n?.cancel ?? "Annuler"),
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                  ),
+                                  onPressed: () async {
+                                    Navigator.pop(confirmCtx);
+                                    Navigator.pop(ctx);
+                                    await ps.deleteAccount();
+                                    await auth.deleteCurrentUser();
+                                  },
+                                  child: Text(MatchmakingLocalization.tr(context, 'deleteAccountConfirmBtn')),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
                     ],
@@ -248,8 +378,8 @@ class _MainScreenState extends State<MainScreen> {
               context: context,
               builder:
                   (ctx) => AlertDialog(
-                    title: Text("Invitation !"),
-                    content: Text("$host vous invite à rejoindre sa partie !"),
+                    title: Text(MatchmakingLocalization.tr(context, 'gameInviteTitle')),
+                    content: Text(MatchmakingLocalization.tr(context, 'gameInviteDesc', {'host': host})),
                     actions: [
                       TextButton(
                         onPressed: () {
@@ -257,8 +387,8 @@ class _MainScreenState extends State<MainScreen> {
                           Navigator.pop(ctx);
                         },
                         child: Text(
-                          "Ignorer",
-                          style: TextStyle(color: Colors.grey),
+                          MatchmakingLocalization.tr(context, 'ignore'),
+                          style: const TextStyle(color: Colors.grey),
                         ),
                       ),
                       ElevatedButton(
@@ -287,15 +417,15 @@ class _MainScreenState extends State<MainScreen> {
                             );
                           } else if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
+                              SnackBar(
                                 content: Text(
-                                  "Impossible de rejoindre : salon plein ou inexistant.",
+                                  MatchmakingLocalization.tr(context, 'cannotJoinLobby'),
                                 ),
                               ),
                             );
                           }
                         },
-                        child: const Text("Rejoindre"),
+                        child: Text(AppLocalizations.of(context)?.joinGame ?? "Rejoindre"),
                       ),
                     ],
                   ),
@@ -319,9 +449,9 @@ class _MainScreenState extends State<MainScreen> {
               context: context,
               builder:
                   (ctx) => AlertDialog(
-                    title: const Text("Invitation au Salon !"),
+                    title: Text(MatchmakingLocalization.tr(context, 'loungeInviteTitle')),
                     content: Text(
-                      "$host vous invite à rejoindre son salon \"$loungeName\" !",
+                      MatchmakingLocalization.tr(context, 'loungeInviteDesc', {'host': host, 'lounge': loungeName}),
                     ),
                     actions: [
                       TextButton(
@@ -329,9 +459,9 @@ class _MainScreenState extends State<MainScreen> {
                           playerState.clearLoungeInvite(loungeId, host);
                           Navigator.pop(ctx);
                         },
-                        child: const Text(
-                          "Ignorer",
-                          style: TextStyle(color: Colors.grey),
+                        child: Text(
+                          MatchmakingLocalization.tr(context, 'ignore'),
+                          style: const TextStyle(color: Colors.grey),
                         ),
                       ),
                       ElevatedButton(
@@ -354,7 +484,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                           );
                         },
-                        child: const Text("Rejoindre le salon"),
+                        child: Text(MatchmakingLocalization.tr(context, 'joinLounge')),
                       ),
                     ],
                   ),
@@ -368,16 +498,18 @@ class _MainScreenState extends State<MainScreen> {
       return OnboardingScreen(onFinish: () => playerState.completeOnboarding());
     }
 
-    final List<Widget> _screens = [
+    final List<Widget> screens = [
       GameSelectionScreen(playerId: playerId),
       FriendsScreen(playerId: playerId),
       StatsAndBadgesScreen(),
       LoungeListScreen(playerId: playerId), // Nouvel onglet des Salons
     ];
 
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jeu de Soirée'),
+        title: Text(l10n?.appTitle ?? 'PlayFun'),
         actions: [
           IconButton(
             icon: Icon(Icons.star, color: Colors.amberAccent),
@@ -407,7 +539,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: _screens[_currentIndex],
+      body: screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.deepPurpleAccent,
@@ -418,7 +550,7 @@ class _MainScreenState extends State<MainScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.videogame_asset),
-            label: "Jeux",
+            label: l10n?.gamesTab ?? "Jeux",
           ),
           BottomNavigationBarItem(
             icon: Stack(
@@ -439,13 +571,16 @@ class _MainScreenState extends State<MainScreen> {
                   ),
               ],
             ),
-            label: "Amis",
+            label: l10n?.friendsTab ?? "Amis",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: "Étoile"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: l10n?.statsTab ?? "Étoile",
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.living),
-            label: "Salons",
-          ), // Remplace VIP
+            label: l10n?.loungesTab ?? "Salons",
+          ),
         ],
       ),
     );

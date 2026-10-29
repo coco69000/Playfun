@@ -5,28 +5,46 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:provider/provider.dart';
-import '../livekit_service.dart';
+import '../theme/app_colors.dart';
 
+// --- CONFIGURATION DE LA VERSION ACTUELLE ---
+const int CURRENT_APP_BUILD_NUMBER = 1;
+const String CURRENT_APP_VERSION_NAME = "1.0.0";
+
+// URL du Play Store et de l'App Store
+const String ANDROID_STORE_URL =
+    "https://play.google.com/store/apps/details?id=com.parrel.playfun";
+const String IOS_STORE_URL =
+    "https://apps.apple.com/app/idXXXXXXXXX"; // Remplacer par votre ID App Store réel
+
+// --- GESTIONNAIRE GLOBAL DE SÉCURITÉ ---
 class ForceUpdateService {
   static final ForceUpdateService _instance = ForceUpdateService._internal();
   factory ForceUpdateService() => _instance;
   ForceUpdateService._internal();
 
   static GlobalKey<NavigatorState>? navigatorKey;
-  static int currentBuildNumber = 0;
-  static String currentVersion = "1.0.0";
+  static int currentBuildNumber = CURRENT_APP_BUILD_NUMBER;
+  static String currentVersion = CURRENT_APP_VERSION_NAME;
   static bool _initialized = false;
 
-  bool _isDialogOpen = false;
-  StreamSubscription<DocumentSnapshot>? _subscription;
+  /// Déclencheur d'urgence si une Cloud Function renvoie VERSION_OBSOLETE ou SERVEUR_EN_MAINTENANCE
+  static final ValueNotifier<bool> isLockdownTriggered = ValueNotifier<bool>(false);
+  static String lockdownMessage = "Cette version de l'application est obsolète. Veuillez installer la dernière version.";
+  static bool lockdownIsMaintenance = false;
+
+  static void triggerLockdown({String? message, bool isMaintenance = false}) {
+    if (message != null) lockdownMessage = message;
+    lockdownIsMaintenance = isMaintenance;
+    isLockdownTriggered.value = true;
+  }
 
   static Future<void> init() async {
     if (_initialized) return;
     try {
       final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      currentVersion = packageInfo.version;
-      currentBuildNumber = int.tryParse(packageInfo.buildNumber) ?? 0;
+      currentVersion = packageInfo.version.isNotEmpty ? packageInfo.version : CURRENT_APP_VERSION_NAME;
+      currentBuildNumber = int.tryParse(packageInfo.buildNumber) ?? CURRENT_APP_BUILD_NUMBER;
       _initialized = true;
     } catch (e) {
       debugPrint("[ForceUpdateService] Initialization error: $e");
@@ -34,214 +52,304 @@ class ForceUpdateService {
   }
 
   static Map<String, dynamic> get versionPayload => {
-    'clientBuildNumber': currentBuildNumber,
+    'clientBuildNumber': currentBuildNumber > 0 ? currentBuildNumber : CURRENT_APP_BUILD_NUMBER,
     'clientVersion': currentVersion,
     'isDebug': kDebugMode,
-    'isSideloadly': true,
+    'isSideloadly': false,
   };
 
-  /// Écoute en temps réel les paramètres de version imposés depuis Firestore
-  void listenForForcedUpdate(BuildContext? context) async {
-    if (_subscription != null) return; // Évite les écoutes multiples
-
-    // Ne JAMAIS bloquer l'application en mode debug
-    if (kDebugMode) {
-      debugPrint("[ForceUpdateService] Mode debug actif: désactivation complète du blocage.");
-      return;
-    }
-
-    await init();
-
-    _subscription = FirebaseFirestore.instance
-        .collection('app_config')
-        .doc('version_control')
-        .snapshots()
-        .listen((snapshot) {
-      if (!snapshot.exists || snapshot.data() == null) return;
-      if (kDebugMode) return;
-
-      final data = snapshot.data() as Map<String, dynamic>;
-      final bool forceUpdateActive = data['forceUpdateActive'] ?? false;
-      final String minRequiredVersion = data['minRequiredVersion'] ?? "1.0.0";
-      final int minRequiredBuild = data['minRequiredBuild'] ?? 0;
-      final String updateMessage = data['updateMessage'] ??
-          "Une nouvelle version obligatoire de l'application est disponible avec de nouvelles fonctionnalités et des correctifs de sécurité.";
-      final String storeUrlAndroid = data['storeUrlAndroid'] ??
-          "https://play.google.com/store/apps/details?id=com.parrel.playfun";
-      final String storeUrlIOS = data['storeUrlIOS'] ??
-          "https://apps.apple.com/app/idYOUR_APP_ID";
-
-      // Comparaison de version
-      bool needsUpdate = false;
-      if (forceUpdateActive) {
-        if (minRequiredBuild > 0) {
-          needsUpdate = currentBuildNumber > 0 && currentBuildNumber < minRequiredBuild;
-        } else {
-          needsUpdate = _isVersionLower(currentVersion, minRequiredVersion);
-        }
-      }
-
-      if (needsUpdate && !_isDialogOpen) {
-        final targetContext = navigatorKey?.currentContext ?? context;
-        if (targetContext != null && targetContext.mounted) {
-          // Affiche le dialogue sans couper prématurément LiveKit
-          _showBlockingUpdateDialog(
-            targetContext,
-            message: updateMessage,
-            storeUrl: Platform.isIOS ? storeUrlIOS : storeUrlAndroid,
-          );
-        }
-      }
-    }, onError: (e) {
-      debugPrint("[ForceUpdateService] Error listening to version_control: $e");
-    });
+  /// Maintenu pour compatibilité existante
+  void listenForForcedUpdate(BuildContext? context) {
+    init();
   }
+}
 
-  void dispose() {
-    _subscription?.cancel();
-    _subscription = null;
-  }
+// --- WIDGET ENVELOPPE DE SÉCURITÉ GLOBALE (FORCE & SOFT UPDATE) ---
+class ForceUpdateGate extends StatefulWidget {
+  final Widget child;
+  const ForceUpdateGate({super.key, required this.child});
 
-  /// Compare 2 versions sous le format semver "1.2.3"
-  bool _isVersionLower(String current, String required) {
-    try {
-      List<int> currentParts = current.split('.').map((e) => int.tryParse(e) ?? 0).toList();
-      List<int> requiredParts = required.split('.').map((e) => int.tryParse(e) ?? 0).toList();
+  @override
+  State<ForceUpdateGate> createState() => _ForceUpdateGateState();
+}
 
-      int maxLength = currentParts.length > requiredParts.length ? currentParts.length : requiredParts.length;
+class _ForceUpdateGateState extends State<ForceUpdateGate> {
+  bool _hasShownSoftDialog = false;
 
-      for (int i = 0; i < maxLength; i++) {
-        int curr = i < currentParts.length ? currentParts[i] : 0;
-        int req = i < requiredParts.length ? requiredParts[i] : 0;
-        if (curr < req) return true;
-        if (curr > req) return false;
-      }
-      return false;
-    } catch (e) {
-      return false;
-    }
-  }
+  void _showSoftUpdateDialog(
+    BuildContext context,
+    String message,
+    String storeUrl,
+    String newVersion,
+  ) {
+    if (_hasShownSoftDialog) return;
+    _hasShownSoftDialog = true;
 
-  /// Affiche le popup bloquant et infranchissable
-  void _showBlockingUpdateDialog(
-    BuildContext context, {
-    required String message,
-    required String storeUrl,
-  }) {
-    if (!context.mounted) return;
-    _isDialogOpen = true;
-
-    showDialog(
-      context: context,
-      barrierDismissible: false, // Interdit le clic en dehors
-      barrierColor: Colors.black.withOpacity(0.95), // Fond très opaque
-      builder: (BuildContext dialogContext) {
-        return PopScope(
-          canPop: false, // Empêche le retour physique Android
-          child: AlertDialog(
-            backgroundColor: const Color(0xFF1E1E2E),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-              side: const BorderSide(color: Colors.amberAccent, width: 2),
-            ),
-            title: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.amber.withOpacity(0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.system_update_alt_rounded,
-                    size: 50,
-                    color: Colors.amberAccent,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  "Mise à jour Requise !",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  message,
-                  style: const TextStyle(color: Colors.white70, fontSize: 14, height: 1.4),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  "L'accès aux serveurs, à l'IA et aux fonctionnalités multijoueurs est suspendu jusqu'à la mise à jour.",
-                  style: TextStyle(
-                    color: Colors.amberAccent,
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-            actionsAlignment: MainAxisAlignment.center,
-            actions: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.download_rounded, color: Colors.black),
-                    label: const Text(
-                      "METTRE À JOUR MAINTENANT",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.amberAccent,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      elevation: 8,
-                    ),
-                    onPressed: () async {
-                      final Uri url = Uri.parse(storeUrl);
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url, mode: LaunchMode.externalApplication);
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  TextButton(
-                    onPressed: () {
-                      _isDialogOpen = false;
-                      Navigator.of(dialogContext).pop();
-                    },
-                    child: const Text(
-                      "Ignorer et Continuer (Sideloadly / Test)",
-                      style: TextStyle(
-                        color: Colors.white54,
-                        fontSize: 13,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-                ],
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (ctx) => AlertDialog(
+          backgroundColor: AppColors.card,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: const Row(
+            children: [
+              Icon(Icons.system_update_rounded, color: Colors.amberAccent),
+              SizedBox(width: 10),
+              Text(
+                "Mise à jour disponible",
+                style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
           ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                message.isNotEmpty
+                    ? message
+                    : "Une nouvelle version ($newVersion) de Playfun est disponible avec des nouveautés et corrections !",
+                style: const TextStyle(fontSize: 14, height: 1.4, color: Colors.white70),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text(
+                "Plus tard",
+                style: TextStyle(color: Colors.white54),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amberAccent,
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              onPressed: () async {
+                Navigator.pop(ctx);
+                final uri = Uri.parse(storeUrl);
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                }
+              },
+              child: const Text("Mettre à jour", style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Si un verrouillage serveur d'urgence a été déclenché localement
+    return ValueListenableBuilder<bool>(
+      valueListenable: ForceUpdateService.isLockdownTriggered,
+      builder: (context, isLocked, _) {
+        if (isLocked) {
+          final defaultStoreUrl = Platform.isIOS ? IOS_STORE_URL : ANDROID_STORE_URL;
+          return ForceUpdateScreen(
+            message: ForceUpdateService.lockdownMessage,
+            storeUrl: defaultStoreUrl,
+            isMaintenance: ForceUpdateService.lockdownIsMaintenance,
+            minVersion: CURRENT_APP_VERSION_NAME,
+          );
+        }
+
+        // Écoute Firestore en temps réel sur config/app_version
+        return StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('config')
+              .doc('app_version')
+              .snapshots(),
+          builder: (context, snapshot) {
+            // Supporte également le fallback app_config/version_control si config/app_version est absent
+            if (!snapshot.hasData || !snapshot.data!.exists) {
+              return StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('app_config')
+                    .doc('version_control')
+                    .snapshots(),
+                builder: (context, fallbackSnap) {
+                  if (!fallbackSnap.hasData || !fallbackSnap.data!.exists) {
+                    return widget.child;
+                  }
+                  return _evaluateConfig(fallbackSnap.data!.data() as Map<String, dynamic>? ?? {});
+                },
+              );
+            }
+
+            final data = snapshot.data!.data() as Map<String, dynamic>? ?? {};
+            return _evaluateConfig(data);
+          },
         );
       },
-    ).then((_) {
-      _isDialogOpen = false;
-    });
+    );
+  }
+
+  Widget _evaluateConfig(Map<String, dynamic> data) {
+    final int minRequiredBuildNumber =
+        (data['minRequiredBuildNumber'] ?? data['minRequiredBuild'] ?? 1) as int;
+    final int latestBuildNumber =
+        (data['latestBuildNumber'] ?? minRequiredBuildNumber) as int;
+    final bool isMaintenance = (data['isMaintenance'] ?? false) == true;
+    final bool forceUpdateActive = (data['forceUpdateActive'] ?? true) == true;
+
+    final String updateMessage = data['updateMessage'] ??
+        (isMaintenance
+            ? "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !"
+            : "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l'application pour continuer à jouer.");
+
+    // Détection automatique du bon Store (iOS vs Android)
+    final String defaultStoreUrl = Platform.isIOS ? IOS_STORE_URL : ANDROID_STORE_URL;
+    final String storeUrl = (Platform.isIOS
+            ? (data['storeUrlIos'] ?? data['storeUrlIOS'])
+            : data['storeUrlAndroid']) ??
+        data['storeUrl'] ??
+        defaultStoreUrl;
+
+    final String minVersionName = data['minRequiredVersionName'] ?? data['minRequiredVersion'] ?? "Dernière version";
+    final String latestVersionName = data['latestVersionName'] ?? minVersionName;
+
+    final int activeBuild = ForceUpdateService.currentBuildNumber > 0
+        ? ForceUpdateService.currentBuildNumber
+        : CURRENT_APP_BUILD_NUMBER;
+
+    // 1. CAS BLOQUANT : Version obsolète ou maintenance activée (Écran complet infranchissable)
+    if (isMaintenance || (forceUpdateActive && activeBuild < minRequiredBuildNumber)) {
+      return ForceUpdateScreen(
+        message: updateMessage,
+        storeUrl: storeUrl,
+        isMaintenance: isMaintenance,
+        minVersion: minVersionName,
+      );
+    }
+
+    // 2. CAS RECOMMANDÉ : Mise à jour disponible mais non obligatoire (Popup alert)
+    if (activeBuild < latestBuildNumber) {
+      _showSoftUpdateDialog(context, updateMessage, storeUrl, latestVersionName);
+    }
+
+    return widget.child;
+  }
+}
+
+// --- ÉCRAN DE BLOCAGE TOTAL (HARD UPDATE & MAINTENANCE) ---
+class ForceUpdateScreen extends StatelessWidget {
+  final String message;
+  final String storeUrl;
+  final bool isMaintenance;
+  final String minVersion;
+
+  const ForceUpdateScreen({
+    super.key,
+    required this.message,
+    required this.storeUrl,
+    required this.isMaintenance,
+    required this.minVersion,
+  });
+
+  Future<void> _openStore() async {
+    final uri = Uri.parse(storeUrl);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false, // Empêche le bouton retour physique ou gestuel
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 28.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: (isMaintenance ? Colors.orange : Colors.amber)
+                        .withValues(alpha: 0.12),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    isMaintenance
+                        ? Icons.construction_rounded
+                        : Icons.system_update_rounded,
+                    size: 72,
+                    color: isMaintenance ? Colors.orange : Colors.amberAccent,
+                  ),
+                ),
+                const SizedBox(height: 28),
+                Text(
+                  isMaintenance ? "Maintenance en cours" : "Mise à jour requise",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 14),
+                Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    height: 1.4,
+                    color: Colors.white70,
+                  ),
+                ),
+                const SizedBox(height: 14),
+                if (!isMaintenance)
+                  Chip(
+                    label: Text(
+                      "Version requise : $minVersion",
+                      style: const TextStyle(color: Colors.amberAccent, fontSize: 12),
+                    ),
+                    backgroundColor: Colors.amber.withValues(alpha: 0.12),
+                    side: const BorderSide(color: Colors.amberAccent, width: 0.8),
+                  ),
+                const SizedBox(height: 36),
+                if (!isMaintenance)
+                  SizedBox(
+                    width: double.infinity,
+                    height: 52,
+                    child: ElevatedButton.icon(
+                      onPressed: _openStore,
+                      icon: const Icon(
+                        Icons.download_rounded,
+                        color: Colors.black,
+                      ),
+                      label: const Text(
+                        "Mettre à jour maintenant",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amberAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        elevation: 6,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

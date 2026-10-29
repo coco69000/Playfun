@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../theme/app_colors.dart';
 import '../widgets/app_buttons.dart';
+import '../l10n/app_localizations.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final VoidCallback onFinish;
 
-  const OnboardingScreen({Key? key, required this.onFinish}) : super(key: key);
+  const OnboardingScreen({super.key, required this.onFinish});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -16,36 +17,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Map<String, dynamic>> _slides = [
+  List<Map<String, dynamic>> _getSlides(AppLocalizations? l10n) => [
     {
-      'title': 'Joue avec tes potes',
-      'subtitle':
+      'title': l10n?.onboardingSlide1Title ?? 'Joue avec tes potes',
+      'subtitle': l10n?.onboardingSlide1Subtitle ??
           'Choisis parmi plus de 30 jeux d\'ambiance, de cartes et de plateau. Joue en Local, entre Amis ou avec le Monde entier !',
       'icon': Icons.sports_esports_rounded,
-      'gradient': [Color(0xFF7B1FA2), Color(0xFF512DA8)],
+      'gradient': const [Color(0xFF7B1FA2), Color(0xFF512DA8)],
       'accent': Colors.cyanAccent,
     },
     {
-      'title': 'Gagne des pièces & Débloque des Badges',
-      'subtitle':
+      'title': l10n?.onboardingSlide2Title ?? 'Gagne des pièces & Débloque des Badges',
+      'subtitle': l10n?.onboardingSlide2Subtitle ??
           'Gagne de l\'expérience à chaque victoire, grimpe les niveaux et débloque des succès exclusifs pour personnaliser ton profil.',
       'icon': Icons.emoji_events_rounded,
-      'gradient': [Color(0xFFFF8F00), Color(0xFFFF6F00)],
-      'accent': Color(0xFFFFD700),
+      'gradient': const [Color(0xFFFF8F00), Color(0xFFFF6F00)],
+      'accent': const Color(0xFFFFD700),
     },
     {
-      'title': 'Crée ou rejoins en 2 secondes',
-      'subtitle':
+      'title': l10n?.onboardingSlide3Title ?? 'Crée ou rejoins en 2 secondes',
+      'subtitle': l10n?.onboardingSlide3Subtitle ??
           'Un code à 6 chiffres suffit pour réunir tes amis, ou lance le Matchmaking rapide pour trouver des joueurs en direct.',
       'icon': Icons.flash_on_rounded,
-      'gradient': [Color(0xFF00897B), Color(0xFF004D40)],
+      'gradient': const [Color(0xFF00897B), Color(0xFF004D40)],
       'accent': Colors.tealAccent,
     },
   ];
 
-  void _nextPage() {
+  void _nextPage(int count) {
     HapticFeedback.lightImpact();
-    if (_currentPage < _slides.length - 1) {
+    if (_currentPage < count - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 350),
         curve: Curves.easeOutCubic,
@@ -57,6 +58,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final slides = _getSlides(l10n);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -70,8 +74,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   const SizedBox(width: 60), // Spacer
                   Text(
-                    "Bienvenue",
-                    style: TextStyle(
+                    l10n?.onboardingWelcome ?? "Bienvenue",
+                    style: const TextStyle(
                       color: Colors.white54,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -83,9 +87,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       HapticFeedback.lightImpact();
                       widget.onFinish();
                     },
-                    child: const Text(
-                      "Passer",
-                      style: TextStyle(
+                    child: Text(
+                      l10n?.onboardingSkip ?? "Passer",
+                      style: const TextStyle(
                         color: AppColors.textSecondary,
                         fontSize: 14,
                       ),
@@ -100,11 +104,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: PageView.builder(
                 controller: _pageController,
                 onPageChanged: (index) => setState(() => _currentPage = index),
-                itemCount: _slides.length,
+                itemCount: slides.length,
                 itemBuilder: (context, index) {
-                  final slide = _slides[index];
+                  final slide = slides[index];
                   final List<Color> bgGradient = slide['gradient'] as List<Color>;
-                  final Color accent = slide['accent'] as Color;
 
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 28.0),
@@ -124,7 +127,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: bgGradient.first.withOpacity(0.5),
+                                color: bgGradient.first.withValues(alpha: 0.5),
                                 blurRadius: 30,
                                 spreadRadius: 4,
                                 offset: const Offset(0, 10),
@@ -180,7 +183,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
-                      _slides.length,
+                      slides.length,
                       (index) => AnimatedContainer(
                         duration: const Duration(milliseconds: 250),
                         margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -200,13 +203,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   // Next / Finish Button
                   AppPrimaryButton(
                     width: double.infinity,
-                    label: _currentPage == _slides.length - 1
-                        ? "C'est parti ! 🚀"
-                        : "Suivant",
-                    icon: _currentPage == _slides.length - 1
+                    label: _currentPage == slides.length - 1
+                        ? (l10n?.onboardingStart ?? "C'est parti ! 🚀")
+                        : (l10n?.onboardingNext ?? "Suivant"),
+                    icon: _currentPage == slides.length - 1
                         ? Icons.play_arrow_rounded
                         : Icons.arrow_forward_rounded,
-                    onPressed: _nextPage,
+                    onPressed: () => _nextPage(slides.length),
                   ),
                 ],
               ),

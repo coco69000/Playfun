@@ -13,7 +13,7 @@ class EmptyStateView extends StatelessWidget {
   final double iconSize;
 
   const EmptyStateView({
-    Key? key,
+    super.key,
     required this.icon,
     required this.title,
     required this.subtitle,
@@ -21,7 +21,7 @@ class EmptyStateView extends StatelessWidget {
     this.onActionPressed,
     this.actionIcon,
     this.iconSize = 64,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +35,17 @@ class EmptyStateView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppColors.primaryAccent.withOpacity(0.08),
+                color: AppColors.primaryAccent.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: AppColors.primaryAccent.withOpacity(0.2),
+                  color: AppColors.primaryAccent.withValues(alpha: 0.2),
                   width: 2,
                 ),
               ),
               child: Icon(
                 icon,
                 size: iconSize,
-                color: AppColors.primaryLight.withOpacity(0.8),
+                color: AppColors.primaryLight.withValues(alpha: 0.8),
               ),
             ),
             const SizedBox(height: 20),

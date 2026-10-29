@@ -6,10 +6,10 @@ class XpGainPopup extends StatefulWidget {
   final VoidCallback onDismissed;
 
   const XpGainPopup({
-    Key? key,
+    super.key,
     required this.amount,
     required this.onDismissed,
-  }) : super(key: key);
+  });
 
   @override
   State<XpGainPopup> createState() => _XpGainPopupState();
@@ -110,18 +110,18 @@ class _XpGainPopupState extends State<XpGainPopup>
                   ),
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                     width: 2.0,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF06B6D4).withOpacity(0.6),
+                      color: const Color(0xFF06B6D4).withValues(alpha: 0.6),
                       blurRadius: 20,
                       spreadRadius: 3,
                       offset: const Offset(0, 4),
                     ),
                     BoxShadow(
-                      color: const Color(0xFF8B5CF6).withOpacity(0.5),
+                      color: const Color(0xFF8B5CF6).withValues(alpha: 0.5),
                       blurRadius: 30,
                       spreadRadius: 6,
                     ),

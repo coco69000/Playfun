@@ -4,13 +4,14 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'amis.dart'; // On rÃ©utilise les Ã©crans de jeu du mode "amis"
+import 'amis.dart'; // On réutilise les écrans de jeu du mode "amis"
 import 'player_state.dart';
 import 'package:random_string/random_string.dart';
 import 'theme/app_colors.dart';
 import 'widgets/app_buttons.dart';
+import 'matchmaking_localization.dart';
 
-// Liste des jeux pour le mode "Monde" (inchangÃ©e)
+// Liste des jeux pour le mode "Monde" (inchangée)
 const List<Map<String, dynamic>> worldGames = [
   {'name': 'Blokus', 'icon': Icons.grid_on, 'image': 'blokus.webp'},
   {'name': 'Yams', 'icon': Icons.casino, 'image': 'yams.webp'},
@@ -56,8 +57,10 @@ const List<Map<String, dynamic>> worldGames = [
   {'name': 'Jeu de Dames', 'icon': Icons.grid_on, 'image': 'dames.webp'},
 ];
 
-// WorldGameScreen (inchangÃ©)
+// WorldGameScreen (inchangé)
 class WorldGameScreen extends StatefulWidget {
+  const WorldGameScreen({super.key});
+
   @override
   _WorldGameScreenState createState() => _WorldGameScreenState();
 }
@@ -68,7 +71,7 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Fond dÃ©gradÃ© sombre et moderne
+      // Fond dégradé sombre et moderne
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -89,14 +92,14 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                   controller: _nameController,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: "Votre pseudo",
+                    labelText: MatchmakingLocalization.tr(context, 'yourUsername'),
                     labelStyle: const TextStyle(color: Colors.white70),
                     prefixIcon: const Icon(
                       Icons.person,
                       color: Colors.cyanAccent,
                     ),
                     filled: true,
-                    fillColor: Colors.white.withOpacity(0.1), // Effet verre
+                    fillColor: Colors.white.withValues(alpha: 0.1), // Effet verre
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -127,14 +130,14 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
     );
   }
 
-  // Nouvelle mÃ©thode pour une carte plus jolie
+  // Nouvelle méthode pour une carte plus jolie
   Widget _buildGameCard(Map<String, dynamic> game) {
     final String? imageName = game['image'];
 
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.deepPurple[900]?.withOpacity(0.4),
+        color: Colors.deepPurple[900]?.withValues(alpha: 0.4),
         image:
             imageName != null
                 ? DecorationImage(
@@ -142,7 +145,7 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                   fit: BoxFit.cover,
                 )
                 : null,
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
         boxShadow: [
           BoxShadow(
             color: Colors.black45,
@@ -154,19 +157,19 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: BackdropFilter(
-          // Flou lÃ©ger
+          // Flou léger
           filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
           child: Material(
-            color: Colors.black.withOpacity(
-              0.45,
+            color: Colors.black.withValues(
+              alpha: 0.45,
             ), // Assombrissement pour le texte
             child: InkWell(
               borderRadius: BorderRadius.circular(20),
               onTap: () {
                 if (_nameController.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Veuillez d'abord entrer un pseudo !"),
+                    SnackBar(
+                      content: Text(MatchmakingLocalization.tr(context, 'enterUsernamePrompt')),
                     ),
                   );
                   return;
@@ -194,7 +197,7 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.deepPurpleAccent.withOpacity(0.3),
+                      color: Colors.deepPurpleAccent.withValues(alpha: 0.3),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -224,7 +227,7 @@ class _WorldGameScreenState extends State<WorldGameScreen> {
   }
 }
 
-// SearchingForPlayersScreen (constructeur inchangÃ©)
+// SearchingForPlayersScreen (constructeur inchangé)
 class SearchingForPlayersScreen extends StatefulWidget {
   final String playerName;
   final String gameName;
@@ -268,7 +271,7 @@ class SearchingForPlayersScreen extends StatefulWidget {
   final int? dominoesTargetScore;
 
   const SearchingForPlayersScreen({
-    Key? key,
+    super.key,
     required this.playerId,
     this.isRanked = false,
     required this.playerName,
@@ -309,7 +312,7 @@ class SearchingForPlayersScreen extends StatefulWidget {
     this.timesUpTotalRounds,
     this.dominoesMode,
     this.dominoesTargetScore,
-  }) : super(key: key);
+  });
 
   @override
   _SearchingForPlayersScreenState createState() =>
@@ -388,7 +391,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
       // PHASE 1 : RECHERCHE PRIORITAIRE DANS LES PARTIES EN COURS (REFILLING)
       // -----------------------------------------------------------------------
       // On cherche d'abord s'il existe une partie active qui a perdu un joueur
-      // et qui cherche un remplaÃ§ant avec les mÃªmes paramÃ¨tres.
+      // et qui cherche un remplaçant avec les mêmes paramètres.
 
       Query refillingQuery = _db
           .collection('games')
@@ -416,21 +419,21 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         isEqualTo: widget.difficulty,
       );
 
-      // Application des filtres spÃ©cifiques au jeu (Copie de la logique de filtre)
+      // Application des filtres spécifiques au jeu (Copie de la logique de filtre)
       switch (widget.gameName) {
         case 'Gribouillis':
           refillingQuery = refillingQuery.where(
             'gribouillisMode',
             isEqualTo: widget.gribouillisMode,
           );
-          if (widget.gribouillisMode == 'ComplÃ©ment') {
+          if (widget.gribouillisMode == 'Complément') {
             refillingQuery = refillingQuery.where(
               'gribouillisSettings.ajouter1',
               isEqualTo: widget.gribouillisAjouter1,
             );
           }
           break;
-        case 'ZÃ©ro PointÃ©':
+        case 'Zéro Pointé':
           refillingQuery = refillingQuery.where(
             'targetScore',
             isEqualTo: widget.zeroPointeTargetScore,
@@ -467,7 +470,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             isEqualTo: widget.petitBacTime,
           );
           break;
-        case 'PrÃ©sident':
+        case 'Président':
           refillingQuery = refillingQuery.where(
             'revolutionParam',
             isEqualTo: widget.presidentRevolution,
@@ -486,15 +489,15 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           );
           break;
         case 'Loup-Garou':
-          // Note: Le hash des rÃ´les n'est pas toujours stockÃ© dans 'games' de la mÃªme faÃ§on que 'matchmaking'.
+          // Note: Le hash des rôles n'est pas toujours stocké dans 'games' de la même façon que 'matchmaking'.
           // Si vous stockez 'roleSettings', il est difficile de filtrer parfaitement ici sans hash.
-          // On suppose ici que l'utilisateur veut n'importe quelle partie LG ou que vous avez ajoutÃ© loupGarouRolesHash dans 'games'.
-          // Si vous l'avez ajoutÃ© dans createGame :
+          // On suppose ici que l'utilisateur veut n'importe quelle partie LG ou que vous avez ajouté loupGarouRolesHash dans 'games'.
+          // Si vous l'avez ajouté dans createGame :
           if (widget.selectedLoupGarouRoles != null) {
             final rolesHash = _generateLoupGarouRolesHash(
               widget.selectedLoupGarouRoles!,
             );
-            // Assurez-vous d'ajouter ce champ lors de la crÃ©ation de la partie dans FirebaseService
+            // Assurez-vous d'ajouter ce champ lors de la création de la partie dans FirebaseService
             // refillingQuery = refillingQuery.where('loupGarouRolesHash', isEqualTo: rolesHash);
           }
           break;
@@ -529,14 +532,14 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           break;
       }
 
-      // ExÃ©cuter la requÃªte Refilling
+      // Exécuter la requête Refilling
       final refillingSnap = await refillingQuery.limit(1).get();
 
       if (refillingSnap.docs.isNotEmpty) {
         final gameDoc = refillingSnap.docs.first;
         final gameData = gameDoc.data() as Map<String, dynamic>;
 
-        // VÃ©rification de sÃ©curitÃ© : est-ce qu'il y a vraiment de la place ?
+        // Vérification de sécurité : est-ce qu'il y a vraiment de la place ?
         final playersMap = gameData['players'] as Map<String, dynamic>? ?? {};
         final int currentCount = playersMap.length;
         final int targetCount = gameData['playerCount'] ?? widget.playerCount;
@@ -551,7 +554,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
 
           if (joined) {
             if (!_isDisposed) {
-              // Redirection immÃ©diate vers le jeu
+              // Redirection immédiate vers le jeu
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -563,7 +566,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                 ),
               );
             }
-            return; // SuccÃ¨s, on arrÃªte tout ici
+            return; // Succès, on arrête tout ici
           }
         }
       }
@@ -571,8 +574,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
       // -----------------------------------------------------------------------
       // PHASE 2 : RECHERCHE STANDARD (FILE D'ATTENTE MATCHMAKING)
       // -----------------------------------------------------------------------
-      // Si aucune partie en attente de remplissage n'a Ã©tÃ© trouvÃ©e, on passe
-      // Ã  la logique classique de crÃ©ation/rejoint de salle d'attente.
+      // Si aucune partie en attente de remplissage n'a été trouvée, on passe
+      // à la logique classique de création/rejoint de salle d'attente.
 
       Query query = _db
           .collection('matchmaking')
@@ -596,21 +599,21 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
 
       query = query.where('difficulty', isEqualTo: widget.difficulty);
 
-      // Application des filtres (Exactement les mÃªmes que ci-dessus, mais sur la collection matchmaking)
+      // Application des filtres (Exactement les mêmes que ci-dessus, mais sur la collection matchmaking)
       switch (widget.gameName) {
         case 'Gribouillis':
           query = query.where(
             'gribouillisMode',
             isEqualTo: widget.gribouillisMode,
           );
-          if (widget.gribouillisMode == 'ComplÃ©ment') {
+          if (widget.gribouillisMode == 'Complément') {
             query = query.where(
               'gribouillisAjouter1',
               isEqualTo: widget.gribouillisAjouter1,
             );
           }
           break;
-        case 'ZÃ©ro PointÃ©':
+        case 'Zéro Pointé':
           query = query.where(
             'zeroPointeTargetScore',
             isEqualTo: widget.zeroPointeTargetScore,
@@ -641,7 +644,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         case 'Petit Bac':
           query = query.where('petitBacTime', isEqualTo: widget.petitBacTime);
           break;
-        case 'PrÃ©sident':
+        case 'Président':
           query = query.where(
             'presidentRevolution',
             isEqualTo: widget.presidentRevolution,
@@ -706,7 +709,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           }).toList();
 
       if (validDocs.isNotEmpty) {
-        // Salle trouvÃ©e avec d'autres joueurs -> Rejoindre
+        // Salle trouvée avec d'autres joueurs -> Rejoindre
         final roomDoc = validDocs.first;
         final roomRef = roomDoc.reference;
 
@@ -724,7 +727,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             'playerNames.$playerId': widget.playerName,
           });
           final List players = List.from(roomData['players'] ?? []);
-          // Si on est le dernier joueur nÃ©cessaire, on marque comme full
+          // Si on est le dernier joueur nécessaire, on marque comme full
           if (players.length + 1 == widget.playerCount) {
             transaction.update(roomRef, {'status': 'full'});
           }
@@ -735,7 +738,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           _listenToMatchmakingRoom();
         }
       } else {
-        // Aucune salle avec d'autres joueurs -> CrÃ©er une nouvelle salle
+        // Aucune salle avec d'autres joueurs -> Créer une nouvelle salle
         final newRoomRef = _db.collection('matchmaking').doc();
 
         String? loupGarouRolesHash;
@@ -759,7 +762,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           'videoEnabled': widget.videoEnabled,
           'audioEnabled': widget.audioEnabled,
 
-          // ParamÃ¨tres spÃ©cifiques
+          // Paramètres spécifiques
           'gribouillisMode': widget.gribouillisMode,
           'gribouillisAjouter1': widget.gribouillisAjouter1,
           'zeroPointeTargetScore': widget.zeroPointeTargetScore,
@@ -790,7 +793,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
       if (!_isDisposed) {
         setState(() {
           _statusMessage =
-              "Erreur de connexion au matchmaking. Veuillez rÃ©essayer.";
+              "Erreur de connexion au matchmaking. Veuillez réessayer.";
         });
         print("Erreur _findAndJoinGame: $e");
       }
@@ -805,7 +808,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         await _db.runTransaction((transaction) async {
           final snapshot = await transaction.get(roomRef);
           if (snapshot.exists) {
-            final data = snapshot.data() as Map<String, dynamic>?;
+            final data = snapshot.data();
             final List players = List.from(data?['players'] ?? []);
             if (players.length == 1 && players.contains(playerId)) {
               transaction.delete(roomRef);
@@ -817,7 +820,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             }
           }
         });
-        print("Joueur retirÃ© de la file d'attente: $_matchmakingRoomId");
+        print("Joueur retiré de la file d'attente: $_matchmakingRoomId");
       } catch (e) {
         print("Erreur en quittant la file d'attente : $e");
       }
@@ -834,10 +837,10 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         .listen(
           _onMatchmakingUpdate,
           onError: (error) {
-            print("Erreur d'Ã©coute de la salle: $error");
+            print("Erreur d'écoute de la salle: $error");
             if (!_isDisposed) {
               setState(
-                () => _statusMessage = "Erreur de connexion Ã  la salle.",
+                () => _statusMessage = "Erreur de connexion à la salle.",
               );
             }
           },
@@ -845,7 +848,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
   }
 
   Future<void> _onMatchmakingUpdate(DocumentSnapshot snapshot) async {
-    if (!snapshot.exists || _isDisposed) return; // <--- CORRIGÃ‰
+    if (!snapshot.exists || _isDisposed) return; // <--- CORRIGÉ
 
     final data = snapshot.data() as Map<String, dynamic>;
     final List players = data['players'] ?? [];
@@ -956,10 +959,16 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             players.where((p) => p != widget.playerId).toList();
         setState(() {
           if (otherPlayers.isNotEmpty) {
-            _statusMessage =
-                "Salle trouvÃ©e ! ${players.length} / ${widget.playerCount} joueurs.";
+            _statusMessage = MatchmakingLocalization.tr(
+              context,
+              'roomFound',
+              {
+                'current': '${players.length}',
+                'target': '${widget.playerCount}',
+              },
+            );
           } else {
-            _statusMessage = "En attente d'autres joueurs...";
+            _statusMessage = MatchmakingLocalization.tr(context, 'waitingForOtherPlayers');
           }
         });
       }
@@ -973,7 +982,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     if (_currentScope == 'pays') {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Recherche Ã©tendue au monde entier."),
+          content: Text(MatchmakingLocalization.tr(context, 'searchExtendedWorldwide')),
           duration: Duration(seconds: 3),
         ),
       );
@@ -998,7 +1007,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     _searchTimer?.cancel();
     _redirectTimer?.cancel();
     setState(() {
-      _statusMessage = "Recherche de joueurs avec les mÃªmes options...";
+      _statusMessage = MatchmakingLocalization.tr(context, 'searchingWithSameOptions');
     });
     _findAndJoinGame();
     _searchTimer = Timer(Duration(seconds: 30), _handle30SecondTimeout);
@@ -1010,7 +1019,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text("Redirection vers une salle presque pleine..."),
+        content: Text(MatchmakingLocalization.tr(context, 'redirectingToAlmostFullRoom')),
         duration: Duration(seconds: 3),
       ),
     );
@@ -1088,14 +1097,18 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         _leaveMatchmakingQueue();
         setState(() {
           _hasStoppedSearching = true;
-          _statusMessage = "Aucun joueur trouvé pour le moment.";
+          _statusMessage = MatchmakingLocalization.tr(context, 'noPlayersFound');
         });
       }
       return;
     }
 
     setState(() {
-      _statusMessage = "Aucun joueur trouvé... Nouvelle tentative (${_searchAttempts}/2) dans 10s.";
+      _statusMessage = MatchmakingLocalization.tr(
+        context,
+        'newAttemptIn10s',
+        {'attempt': '$_searchAttempts'},
+      );
     });
 
     Future.delayed(const Duration(seconds: 10), () {
@@ -1127,9 +1140,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           icon: const Icon(Icons.close, color: Colors.white70),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
-          "Matchmaking",
-          style: TextStyle(fontSize: 18, color: Colors.white70),
+        title: Text(
+          MatchmakingLocalization.tr(context, 'matchmakingTitle'),
+          style: const TextStyle(fontSize: 18, color: Colors.white70),
         ),
       ),
       body: SafeArea(
@@ -1158,7 +1171,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: AppColors.primaryAccent.withOpacity(0.8),
+                            color: AppColors.primaryAccent.withValues(alpha: 0.8),
                             width: 2,
                           ),
                         ),
@@ -1173,7 +1186,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primaryAccent.withOpacity(0.5),
+                          color: AppColors.primaryAccent.withValues(alpha: 0.5),
                           blurRadius: 24,
                           spreadRadius: 2,
                         ),
@@ -1208,7 +1221,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                 children: [
                   _buildCritPill(
                     icon: Icons.group,
-                    label: "${widget.playerCount} Joueurs",
+                    label: MatchmakingLocalization.tr(context, 'playersCountPill', {'count': '${widget.playerCount}'}),
                   ),
                   _buildCritPill(
                     icon: Icons.public,
@@ -1217,18 +1230,18 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                   if (widget.isRanked)
                     _buildCritPill(
                       icon: Icons.military_tech,
-                      label: "Classé",
+                      label: MatchmakingLocalization.tr(context, 'ranked'),
                       color: Colors.amber,
                     )
                   else
                     _buildCritPill(
                       icon: Icons.sentiment_satisfied_alt,
-                      label: "Casual",
+                      label: MatchmakingLocalization.tr(context, 'casual'),
                     ),
                   if (widget.videoEnabled)
                     _buildCritPill(
                       icon: Icons.videocam,
-                      label: "Vidéo ON",
+                      label: MatchmakingLocalization.tr(context, 'videoOn'),
                       color: Colors.cyanAccent,
                     ),
                 ],
@@ -1239,7 +1252,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceVariant.withOpacity(0.6),
+                  color: AppColors.surfaceVariant.withValues(alpha: 0.6),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.white12),
                 ),
@@ -1261,7 +1274,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
                         const Icon(Icons.timer_outlined, size: 16, color: Colors.white54),
                         const SizedBox(width: 6),
                         Text(
-                          "Temps écoulé : ${_formatElapsed(_elapsedSeconds)}",
+                          MatchmakingLocalization.tr(context, 'elapsedTime', {'time': _formatElapsed(_elapsedSeconds)}),
                           style: const TextStyle(
                             color: Colors.white54,
                             fontSize: 13,
@@ -1278,7 +1291,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
               if (_hasStoppedSearching) ...[
                 AppPrimaryButton(
                   width: double.infinity,
-                  label: "Relancer la recherche",
+                  label: MatchmakingLocalization.tr(context, 'restartSearch'),
                   icon: Icons.refresh,
                   onPressed: () {
                     setState(() {
@@ -1296,9 +1309,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
               // Cancel Button
               AppSecondaryButton(
                 width: double.infinity,
-                label: _hasStoppedSearching ? "Quitter" : "Annuler la recherche",
+                label: _hasStoppedSearching ? MatchmakingLocalization.tr(context, 'quit') : MatchmakingLocalization.tr(context, 'cancelSearch'),
                 icon: Icons.close,
-                borderColor: AppColors.error.withOpacity(0.7),
+                borderColor: AppColors.error.withValues(alpha: 0.7),
                 onPressed: () => Navigator.of(context).pop(),
               ),
               const SizedBox(height: 12),
@@ -1317,9 +1330,9 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.08),
+        color: Colors.white.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

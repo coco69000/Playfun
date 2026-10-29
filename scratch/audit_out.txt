@@ -1,0 +1,1269 @@
+== amis.dart 1268
+123 1 --- [Supabase Upload] Tentative $attempt/$maxRetries pour la partie $gameCode ---
+144 1 --- [Supabase Upload] Succès (Tentative $attempt) : $publicUrl ---
+204 26 Qui Pourrait le Plus ?
+205 24 Le Juge
+206 22 Le Menteur
+207 14 Le Roi des Mèmes
+208 11 Le Dilemme
+209 11 Jeu de la Pièce
+210 8 On se passe un objet rapidement
+212 27 Action ou Vérité
+215 33 Infiltré & Mr. White
+220 25 Devine Tête
+221 33 La Patate Chaude
+232 1 Pays du monde
+233 1 Fruits & Légumes
+235 1 Métiers
+236 1 Objets de la cuisine
+240 1 Parties du corps
+241 1 Vêtements
+243 1 Célébrités
+246 1 Super-héros
+247 1 Verbes du 1er groupe
+250 1 Marques de vêtements
+317 1 téléphone arabe
+336 1 Mon animal préféré
+340 15 Zéro Pointé
+443 1 Un joueur est désigné comme 'cible'. Les autres joueurs répondent anonymement à une question à son sujet. La c
+445 1 Une situation est présentée. Tous les joueurs votent pour la personne la plus susceptible de faire cette chose
+447 1 Mode Classique: Une question est posée. Un joueur est secrètement désigné 'menteur' et doit inventer une répon
+449 1 La plupart des joueurs (Civils) recevront un mot. Un 'Infiltré' reçoit un mot similaire. Et un 'Mr. White' ne 
+451 1 Un mot est affiché. Chaque joueur doit secrètement soumettre un synonyme. Toutes les réponses sont révélées, p
+452 15 Le Jeu des Catégories
+453 1 Plusieurs catégories sont sélectionnées (3 minimum). Une catégorie s'affiche (ex: Marque de voiture). Chacun s
+460 2 Vérité
+469 1 Fin de manche
+472 1 Une question secrète est affichée. Le joueur désigné choisit 'Pile' ou 'Face'. Si son choix est incorrect, il 
+474 1 Le joueur désigné doit répondre à un dilemme cornélien. Il n'y a pas de bonne ou de mauvaise réponse, juste de
+476 1 Deux équipes s’affrontent. Chaque équipe doit retrouver tous ses mots parmi 25, grâce aux indices donnés par s
+478 1 Faire deviner un maximum de cartes en 3 manches (description libre, un mot, mime), avec de moins en moins d’in
+480 1 Passez le téléphone de main en main le plus vite possible. Quand la musique ou le chrono s'arrête, la personne
+482 1 Un joueur tient le téléphone sur son front. Les autres décrivent le mot affiché. Inclinez le téléphone vers le
+484 1 Trouvez des mots correspondant à des catégories données, commençant par une lettre spécifique. Marquez des poi
+533 1 Révolution !
+563 1 Trouvé !
+586 1 félin
+590 1 Chaque joueur reçoit le même mème. Il doit ajouter la description la plus drôle. Ensuite, toutes les descripti
+648 1 Vaincre les villageois est son objectif. Durant la nuit il se réveille avec les autres loups-garous. Une fois 
+650 1 Vaincre les villageois est son objectif. Chaque jour, il reçoit un message lui indiquant un mot qu'il doit pro
+652 1 Finir seul survivant est son objectif, il se réveille la nuit avec les autres loups-garous qui le croient alli
+654 1 Le premier jour, l'objectif du mercenaire est d'éliminer la cible qui lui est attribuée. S'il y parvient, il g
+656 1 Son objectif est de contaminer tous les joueurs. Chaque nuit, il peut contaminer deux joueurs. Il gagne la par
+658 1 Son objectif est de vaincre les Loups-Garous. Sa parole est son seul pouvoir de persuasion pour éliminer les L
+660 1 Son objectif est de vaincre les Loups-Garous. Chaque nuit, elle peut connaître le rôle d'un joueur qu'elle aur
+661 8 Sorcière
+662 1 Son objectif est de vaincre les Loups-Garous. Elle se réveille chaque nuit et peut utiliser une de ses deux po
+664 1 Son objectif est de vaincre les Loups-Garous. Elle se lève la nuit au moment du choix des Loups-Garous pour es
+666 1 Son objectif est de vaincre les Loups-Garous. Lorsque le Chasseur meurt, il a le pouvoir d'amener un autre jou
+668 1 Son objectif est de vaincre les Loups-Garous. Chaque nuit, il peut protéger un joueur différent contre une att
+670 1 Son objectif est de vaincre les Loups-Garous. La première nuit, il désigne deux amoureux. Si l'un meurt, l'aut
+672 1 Son objectif est de vaincre les Loups-Garous. Il peut percevoir l'issue du vote du village 30 secondes avant s
+673 4 Nécromancien
+674 1 Vaincre les loups-garous est son objectif. La nuit, il peut communiquer avec les morts, afin d'en tirer des in
+676 1 Vaincre les loups-garous est son objectif. À sa mort, le fossoyeur creuse la tombe d'un joueur qu'il choisit e
+678 1 Vaincre les loups-garous est son objectif. Il peut s'emparer du pouvoir de vote du village une fois dans la pa
+680 1 Son objectif est de vaincre les Loups-Garous. Tant que le Chasseur est en vie, il est protégé contre les attaq
+682 1 Son objectif est de vaincre les Loups-Garous. Chaque nuit, le Pyromancien a le choix entre entreposer un tonne
+683 11 Héritier
+684 1 Son objectif est de vaincre les Loups-Garous tant qu'il ne reçoit pas de nouveau rôle. La première nuit, il dé
+689 1 La Tour Infernale
+752 1 Touché
+752 1 Coulé
+752 1 À l'eau
+802 1 Étoiles
+886 1 un substantif (ex: le chat)
+887 1 un adjectif (ex: mignon)
+888 1 un verbe (ex: mange)
+889 1 un substantif (ex: la souris)
+890 1 un adjectif (ex: mort)
+1010 1 Très Grand
+1069 1 Un villageois sans pouvoir spécial.
+1075 1 Dévore un villageois la nuit.
+1081 1 Découvre un rôle par nuit.
+1093 1 Tire sur quelqu\'un en mourant.
+1099 1 Espionne les loups la nuit.
+1105 1 Crée deux amoureux la première nuit.
+1111 1 Protège un joueur par nuit.
+1117 1 Son vote compte double. Désigne son successeur.
+1124 1 Peut transformer sa victime en loup-garou infecté une fois.
+1130 1 Doit prononcer un mot secret chaque jour.
+1137 1 Objectif être seul survivant. Dévore une nuit sur deux.
+1143 1 Gagne seul s\'il tue sa cible au Jour 1.
+1149 1 Contamine tous les joueurs pour gagner.
+1155 1 Connaît l\'issue du vote et détecte l\'infecté.
+1161 1 Communique avec les morts la nuit.
+1167 1 Révèle deux camps à sa mort.
+1173 1 Prend le pouvoir du vote une fois.
+1179 1 Protégée par le Chasseur.
+1186 1 Place des tonneaux qui explosent s\'il est vivant au matin.
+1192 1 Hérite du rôle de son testateur à sa mort.
+1224 1 légende
+1225 1 mystère
+1226 1 fantôme
+1234 1 écho
+1237 1 rêve
+1238 1 étoile
+1244 1 Prénom
+1248 1 Métier
+1251 1 Célébrité
+1436 1 Le nombre de symboles par carte doit être d'au moins 3.
+1445 1 Pas assez de symboles uniques pour $symbolsPerCard symboles par carte. Requis: $totalSymbols, Disponibles: ${d
+1479 1 La génération a échoué : nombre de cartes incorrect.
+2017 2 Équipes pour ${widget.gameName}
+2055 1 Équipe ${teamIndex + 1}
+2065 1 Joueurs non assignés (${unassignedPlayers.length})
+2190 1 Thème IA
+2214 1 MotCivil:MotInfiltré
+2246 1 Génère des paires de mots proches au format 'MotCivil:MotInfiltré'. Thème : $userPrompt
+2248 1 Génère des cartes Taboo au format 'MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5'. Thème : $userP
+2252 1 Génère des catégories originales et amusantes à faire deviner. Thème : $userPrompt
+2254 1 Génère des phrases courtes, visuelles et loufoques à faire dessiner (ex: 'Un dinosaure qui mange une glace'). 
+2256 1 Génère des phrases d'accroche ou univers d'écriture originaux. Thème : $userPrompt
+2258 1 Génère des dilemmes cornéliens au format 'OptionA ou OptionB' (ex: 'Pouvoir voler ou Être invisible'). Thème :
+2260 1 Génère un mélange de défis (actions) et questions indiscrètes (vérités). Thème : $userPrompt
+2263 1 Génère des questions directes, amusantes et piquantes. Thème : $userPrompt
+2265 1 Génère des phrases courtes à trou (contenant '_____') pour le jeu. Thème : $userPrompt
+2267 1 Génère des questions amusantes sur un joueur (utilise le tag '{player}'). Thème : $userPrompt
+2269 1 Génère des situations courtes commençant par une action. Thème : $userPrompt
+2271 1 Génère des situations humoristiques et amorces de légendes de mèmes. Thème : $userPrompt
+2273 1 Génère une liste de mots/expressions pour le jeu $gameType sur le thème : $userPrompt
+2298 1 Thème $gameType
+2605 2 Le Roi des Mêmes
+3366 49 Joueur
+3429 1 ⏱️ $playerName n'a pas joué à temps. L'ordinateur a joué pour lui ($actionDetails).
+3430 1 ⏱️ $playerName n'a pas joué à temps. L'ordinateur a joué pour lui de façon aléatoire.
+3451 67 Non authentifié.
+3466 37 Action non autorisée.
+3496 2 Vous devez jouer au moins une carte.
+3499 1 Tentative de triche : doublons de cartes.
+3503 1 Carte non trouvée dans votre main.
+3512 1 Vous devez jouer le même nombre de cartes.
+3516 1 Combinaison de 5 cartes trop faible.
+3519 2 Vous devez jouer une carte plus forte.
+3715 1 ⏱️ $playerName a joué ${cardsToPlay.join(', ')}.
+3789 1 ⏱️ $playerName a joué ${winningCombo.join(', ')}.
+3814 1 ⏱️ Pli terminé. Au tour de ${gameData['players']?[playerOrder[nextIndex]]?['name']} !
+3826 3 ⏱️ $playerName passe son tour.
+3947 12 Ce n'est pas votre tour.
+3967 1 Carte introuvable dans la main.
+3976 1 Coup invalide selon les règles du Mille Bornes !
+4012 1 Cible adverse valide obligatoire pour une attaque.
+4407 2 Non autorisé : usurpation d'identité détectée.
+4697 1 ⏱️ Fin du compte à rebours : Partie relancée pour tous les ${players.length} joueurs !
+4718 1 🏆 Scores conservés ! En attente dans le salon.
+4761 1 $playerName a rejoint la partie !
+4851 1 (Temps écoulé)
+4898 1 Temps écoulé
+4922 1 Le temps est écoulé, on avance !
+4953 1 Le temps est écoulé pour déclarer la vérité !
+4974 1 Cible hors de la grille.
+5015 1 Case déjà ciblée.
+5111 1 🎯 ${shooterData['name']} a touché une cible ! Il rejoue.
+5112 1 🌊 ${shooterData['name']} a tiré dans l'eau. Au tour de ${opponentData['name']}.
+5204 1 ⏱️ Placement automatique effectué.
+5293 1 ⏱️ ${shooterData['name']} a tiré automatiquement en ${(targetIndex ~/ 10) + 1}-${(targetIndex % 10) + 1} ($res
+5367 1 ⏱️ $playerName a ouvert avec $cardToPlay.
+5430 1 ⏱️ $playerName a joué ${candidateCards.join(', ')}.
+5456 1 ⏱️ Pli terminé. Au tour de ${gameData['players']?[playerOrder[nextIndex]]?['name']}.
+5729 1 ⏰ Temps écoulé pour la saisie des mots. La partie démarre avec les mots saisis !
+5885 1 $removedPlayerName a quitté la partie.
+5901 1 $removedPlayerName s'est déconnecté. Victoire de $remainingName par forfait !
+5909 1 ${players[playerOrder[0]]?['name']} est le nouvel hôte.
+5986 1 inactif (3 tours sans réponse)
+5991 1 ⚠️ $playerName a manqué 3 tours sans jouer. L'administrateur a été invité à décider de son remplacement par l'
+6035 1 ⚠️ $playerName ne répond plus ($reason). L'administrateur a été invité à décider de son remplacement par l'ord
+6059 1 🤖 $playerName a été remplacé par l'ordinateur (IA active - 5s par tour).
+6132 1 ⚠️ $playerName n'a pas donné d'indice (Jeu d'opinion). Tour passé.
+6141 2 La phase de vote a commencé !
+6156 1 ⚠️ $playerName n'a pas répondu (Jeu d'opinion). Tour sauté sans action automatique.
+6168 1 $playerName n'a pas joué à temps. Son tour est passé.
+6231 1 Le Juge n'a pas désigné de gagnant à temps. Aucun point attribué.
+6253 1 Personne n'a voté. Aucun joueur éliminé.
+6283 1 Le temps de vote est écoulé !
+6398 1 La partie de Yams commence !
+6457 1 $pName a lancé les dés !
+6458 1 $pName a relancé les dés (${3 - rollsLeft + 1}/3) !
+6495 1 $pName a gardé le dé de valeur $dieVal (dé #${index + 1}) 🔒
+6496 1 $pName a débloqué le dé #${index + 1}
+6534 1 Vous devez lancer les dés avant de marquer.
+6541 1 Catégorie déjà complétée.
+6651 1 Grille de Yams complétée par tous les joueurs !
+6827 1 Ce n'est pas votre tour d'écrire.
+6998 2 $playerName a gagné !
+7011 1 ⏱️ $playerName a joué $lastDrawn.
+7058 1 ⏱️ $playerName a joué $playable.
+7075 1 ⏱️ $playerName pioche et passe son tour.
+7238 1 ⏱️ $playerName n'a pas joué à temps. Une carte a été défaussée et une case révélée.
+7357 1 ${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !
+7809 9 Complément
+7907 9 jour_vote
+7910 1 Le temps des débats est terminé. Le village doit maintenant voter !
+8016 3 Les Amoureux
+8018 1 Seuls les deux amoureux d'un camp opposé sont encore en vie. Leur amour triomphe de tout !
+8025 1 Le Loup Blanc est le dernier survivant ! Il a dévoré tout le monde.
+8035 1 Le Rat Malade est le seul survivant ! Il a empoisonné tout le monde !
+8036 1 Tous les autres survivants sont contaminés par le Rat Malade. Il a gagné !
+8044 1 Les Loups-Garous sont devenus majoritaires, ils ne peuvent plus perdre. Ils ont gagné !
+8054 1 Toutes les menaces ont été éliminées ! Le village a gagné !
+8162 1 La partie est terminée. Victoire des ${winner} !
+8348 1 La Voyante a sondé une âme cette nuit...
+8351 1 Le rôle de $targetName est : $targetRole.
+8386 1 L'Héritier a choisi son testateur...
+8419 1 Vous ne pouvez pas protéger la même personne deux nuits de suite.
+8441 1 Le Garde monte la garde cette nuit...
+8494 1 Joueurs contaminés par la maladie : $contaminatedNames.
+8502 1 Une odeur pestilentielle s'est répandue dans le village...
+8604 1 Les Loups-Garous ont désigné leur proie. Le Loup Noir réfléchit...
+8614 1 Les Loups-Garous ont choisi leur victime...
+8657 1 Le Loup Blanc a rôdé en solitaire cette nuit...
+8695 1 Vous avez été infecté par le Loup Noir ! Vous devenez un Loup-Garou.
+8700 1 Le Loup Noir a utilisé son pouvoir d'infection !
+8708 1 Le Loup Noir n'a pas utilisé son infection.
+8747 1 La Petite Fille a été trop curieuse ! Les Loups la dévorent sur-le-champ !
+8755 3 infecté
+8757 3 contaminé
+8760 1 Vous avez espionné $targetName et découvert son rôle : $targetRole.
+8767 1 Vous vous sentez observé(e) cette nuit...
+8840 1 La Sorcière a utilisé sa potion de guérison.
+8881 1 La Sorcière a concocté un poison mortel...
+8931 1 Le Pyromancien a entreposé un tonneau de feu grégeois...
+8940 1 Le Pyromancien allume la mèche de ses tonneaux !
+9075 1 Le soleil se lève sur Thiercelieux...
+9107 3 ${playerData[otherLoverId]['name']} est mort(e) de chagrin pour son amour !
+9130 2 ${playerData[heritierId]['name']} (l'Héritier) hérite du rôle de ${playerData[testateurId]['name']} : $newRole
+9149 2 ${playerData[heritierId]['name']} hérite également du statut de Capitaine !
+9173 1 Votre mot du jour : '$newWord'. Prononcez-le dans le chat avant le coucher du soleil !
+9177 1 Miraculeusement, personne n'a péri cette nuit !
+9180 1 Le village découvre avec effroi le(s) corps de : ${deadThisNightNames.toSet().join(', ')}.
+9188 1 mot du jour
+9222 9 jour_discussion
+9298 1 ${playerData[fossoyeurId]['name']} (le Fossoyeur) révèle : ${playerData[targetPlayerId]['name']} était un(e) $
+9301 1  Et ${playerData[otherRevealedPlayerId]['name']} était un(e) $otherRevealedRole !
+9354 1 Le Dictateur
+9360 1 $dictateurName déclare un Coup d'État !
+9408 1 Le Dictateur ${playerData[dictatorId]['name']} a exécuté un imposteur (${playerData[targetId]['name']} - $targ
+9416 1 Le Dictateur s'est trompé en exécutant un innocent ! Il subit la peine capitale.
+9501 1 Le Loup Bavard (${playerData[loupBavardId]['name']}) n'a pas dit son mot et est mort au coucher du soleil !
+9543 1 Tentative d'usurpation d'identité détectée !
+9645 1 Le village a voté et élimine ${playerData[eliminatedId]['name']}.
+9651 1 Égalité parfaite lors du vote. Aucun habitant n'est exécuté aujourd'hui.
+9691 1 Le Mercenaire ${playerData[mercenaireId]['name']} a fait éliminer sa cible au Jour 1 ! Il remporte la partie s
+9728 1 ${playerData[otherLoverId]['name']} meurt de chagrin pour son amour !
+9877 1 Le Chasseur tire et tue $targetName !
+9927 1 ${playerData[heritierIdCheck]['name']} (l'Héritier) hérite du rôle de ${playerData[testateurId]['name']} : $ne
+10014 1 $formerCaptainName a désigné $newCaptainName comme nouveau Capitaine !
+10093 1 Vous êtes amoureux de $lover2Name !
+10095 1 Vous êtes amoureux de $lover1Name !
+10097 1 Cupidon a désigné $lover1Name et $lover2Name comme amoureux !
+10266 15 pioche
+10858 1 [DEBUG joinGame] Tentative de rejoindre la partie '$gameCode' par '$playerName' (ID: $playerId).
+10869 1 [DEBUG joinGame] Partie trouvée et en lobby. Lecture des données...
+10888 1 [DEBUG joinGame] JOUEURS MIS À JOUR (APRÈS AJOUT): $players
+10894 1 [DEBUG joinGame] Transaction.update() appelée avec la nouvelle liste de joueurs.
+10905 1 [DEBUG joinGame] La partie n'existe pas ou n'est plus en lobby. Retourne false.
+10980 12 Infiltré
+11009 2 Vous n'avez pas de mot
+11060 1 ❤️ Votre amoureux(se) : $amoureux2Name
+11062 1 ❤️ Votre amoureux(se) : $amoureux1Name
+11074 9 Déesse de la Justice
+11115 1 La partie commence ! Donnez votre indice...
+11177 1 ${playerData[playerId]?['name'] ?? 'Joueur'} a dit : '$cleanClue'
+11197 1 La phase de vote commence !
+11263 1 ${gameData['playerData']?[playerId]?['name'] ?? 'Mr. White'} a proposé '$guessedWord', mais ce n'était pas le 
+11300 1 La Déesse de la Justice a rendu son verdict !
+11346 7 Fantôme
+11451 1 Un nouveau tour commence.
+11486 1 La Vengeuse emporte quelqu'un avec elle !
+11733 2 Tour Eiffel
+11769 1 C'est au tour de l'équipe ${currentTeamIndex + 1} !
+11841 1 Vous ne pouvez pas buzzer votre propre équipe.
+11866 1 Seule l'équipe active peut valider.
+11897 1 Seule l'équipe active peut passer.
+11942 1 Équipe 1
+11942 1 Équipe 2
+11946 1 Fin des manches ! Victoire de $winnerName !
+11955 1 Temps écoulé ! Passage à l'équipe suivante.
+12021 1 Ce navire a déjà été placé.
+12036 1 Le navire dépasse de la grille.
+12044 1 Emplacement déjà occupé par un autre navire.
+12085 1 Flottes placées ! ${playerData[firstPlayer]['name']} commence à tirer.
+12274 1 Veuillez placer tous vos navires avant de vous déclarer prêt.
+12292 1 Tous les joueurs sont prêts ! ${playerData[firstPlayer]?['name'] ?? 'Joueur'} commence à tirer.
+12346 1 La manche de Rami commence ! C'est au tour de ${players[playerIds.first]?['name'] ?? 'Joueur'}.
+12389 1 Vous avez déjà pioché.
+12424 1 Pioche et défausse épuisées. Fin de manche !
+12439 1 Défausse vide.
+12460 2 Vous devez d'abord piocher une carte.
+12464 1 Il faut au moins 3 cartes pour étaler.
+12468 1 Tentative de triche : vous ne pouvez pas utiliser la même carte deux fois dans une combinaison.
+12473 1 Carte manquante dans votre main.
+12477 1 Combinaison invalide selon les règles du Rami !
+12504 1 Défaussez exactement 1 carte.
+12507 1 Carte non trouvée.
+12557 1 ${players[playerId]['name']} a gagné la manche !
+12739 1 La partie 2v2 commence !
+12739 1 La partie commence !
+12770 1 Dés déjà lancés pour ce tour.
+12836 1 🎲 $playerName a fait un $dice mais aucun pion ne peut avancer. Tour passé automatiquement !
+12887 1 Vous devez d'abord lancer le dé.
+12901 1 Vous ne pouvez pas déplacer le pion d'un adversaire !
+12915 1 Il faut un 1 ou un 6 pour sortir le pion d'un allié.
+12919 1 Vous ne pouvez aider un allié que pour sortir ou dans l'escalier final.
+12932 1 Il faut un 6 ou un 1 pour sortir de l'écurie.
+12948 1 Case de départ occupée par votre équipe.
+12968 1 Lancer trop élevé pour entrer dans l'escalier.
+12972 1 Lancer trop élevé pour atteindre le centre.
+12992 1 Case occupée par votre équipe.
+12997 1 Case refuge protégée. Capture impossible.
+13087 1 ${players[playerId]['name']} a gagné !
+13260 1 La partie n'est pas en cours.
+13271 1 Ce n'est pas votre tour !
+13277 1 Ce domino n'est pas dans votre main.
+13292 1 Extrémité non disponible sur le plateau ($openEnds).
+13297 1 La tuile $tile ne possède pas la valeur $matchEnd requise.
+13508 1 Vous devez piocher une tuile avant de pouvoir passer votre tour.
+13591 1 Seul l'hôte peut lancer la manche suivante.
+13650 1 ⏱️ Le bot a joué $tileToPlay automatiquement.
+13659 1 ⏱️ $playerName a été contraint de passer son tour.
+13747 1 La partie de Zombie! commence ! Paires initiales défaussées.
+13803 1 Index de carte invalide.
+13868 1 ${players[loserId]?['name'] ?? 'Un joueur'} a gardé le Zombie !
+14109 1 Chaque joueur a deviné une fois !
+14158 1 Tout le monde est passé !
+14201 1 La partie d'Action ou Vérité commence ! La roulette va désigner le premier joueur.
+14231 1 🎲 La roulette a désigné $selectedName !
+14271 2 🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : 'VÉRITÉ'} !
+14272 1 ✍️ $authorName doit écrire le défi...
+14331 1 📝 Le défi a été envoyé à $currentPlayerName !
+14353 1 ✅ Le joueur a réalisé le défi ! Votez pour valider.
+14419 1 📊 Résultat : $percentage% de validation !
+14420 1 ⭐ $currentPlayerName gagne $earnedXp XP !
+14457 1 ${players[winnerId]?['name'] ?? 'Joueur'} a le plus d'XP ($maxXp XP) et devient Admin !
+14472 1 🔄 Tour suivant ! Qui sera le prochain ?
+14504 1 Manche terminée ! ${players[winnerId]?['name'] ?? 'Joueur'} gagne avec $maxXp XP !
+14531 1 ⏰ Temps écoulé pour choisir. Tour passé (0 XP).
+14542 1 ⏰ Temps écoulé pour rédiger le défi. Tour passé sans point (0 XP).
+14553 1 ⏰ Temps écoulé ! Défi échoué (0 XP).
+14638 9 Quelqu\'un
+14698 1 Le juge ne peut pas jouer de carte.
+14713 1 Carte non trouvée dans la main.
+14774 1 Seul le juge peut désigner le vainqueur.
+14781 1 Ce joueur n'a pas soumis de carte.
+14820 1 $winnerName a atteint $targetScore points et remporte la partie !
+14890 1 ⏳ Temps écoulé ! Aucune carte soumise, manche annulée.
+14906 1 ⏳ Le Juge n'a pas voté à temps. Aucun gagnant, manche passée.
+14939 1 🏆 Vos points sont conservés ! En attente de joueurs pour lancer la suite de la session.
+15039 1 Synonyme ou Banni nécessite au moins 3 joueurs !
+15199 1 Uno nécessite entre 2 et 10 joueurs.
+15230 1 La partie de Uno commence !
+15693 1 Inversion à 2 joueurs : le premier joueur passe son tour !
+15702 1 Direction inversée dès le départ !
+15711 1 ${playerOrder[initialIndex]} passe son tour !
+15718 1 La première carte est un +2 ! Le premier joueur doit piocher ou empiler.
+15746 5 Partie non trouvée.
+15767 3 La pile de défausse est vide.
+15774 2 Ce n'est pas votre tour de jouer.
+15778 2 Vous n'avez pas cette carte en main.
+15787 1 Vous devez piocher $pendingDraw cartes, ou contrer avec un +2/+4.
+15795 1 Vous devez jouer la carte que vous venez de piocher ou passer votre tour.
+15802 1 Cette carte ne peut pas être jouée. La couleur ou le symbole ne correspond pas.
+15858 1 ${players[playerId]?['name'] ?? 'Joueur'} a joué une Inversion et rejoue !
+15867 1 ${players[playerId]?['name'] ?? 'Joueur'} a inversé le sens de jeu !
+15878 1 Joueur suivant
+15880 1 ${players[playerId]?['name'] ?? 'Joueur'} a sauté le tour de $skippedPlayerName !
+15887 1 ${players[playerId]?['name'] ?? 'Joueur'} a empilé un +2. Cumul : ${pendingDraw + 2} cartes !
+15892 1 ${players[playerId]?['name'] ?? 'Joueur'} a joué un +2 !
+15898 1 Veuillez choisir une couleur pour le Joker.
+15902 1 ${players[playerId]?['name'] ?? 'Joueur'} a joué un Joker et choisi la couleur $chosenColor !
+15908 1 Veuillez choisir une couleur pour le Super Joker +4.
+15915 1 ${players[playerId]?['name'] ?? 'Joueur'} a empilé un +4. Cumul : ${pendingDraw + 4} cartes !
+15920 1 ${players[playerId]?['name'] ?? 'Joueur'} a joué un Super Joker +4 !
+15933 1 ${players[playerId]?['name'] ?? 'Joueur'} a posé sa dernière carte et remporte la manche !
+15948 1 ${players[playerId]?['name'] ?? 'Joueur'} gagne la manche avec +$roundScore points !
+15956 1 ${players[playerId]?['name'] ?? 'Joueur'} n'a plus qu'une seule carte !
+15995 1 ${players[playerId]?['name'] ?? 'Joueur'} passe son tour.
+16056 1 ${gameData['players']?[playerId]?['name'] ?? 'Joueur'} n'a pas joué à temps, pioche et passe son tour.
+16093 1 Partie introuvable.
+16111 1 Cartes introuvables.
+16183 1 Toutes les cartes ont été jouées !
+16221 1 La partie de Jeu de Dames commence ! Les Rouges jouent en premier.
+16270 1 Aucun pion sur cette case.
+16274 1 Vous ne pouvez déplacer que vos propres pions.
+16280 1 Prise multiple obligatoire avec le pion en $mandatoryPiece.
+16289 1 Déplacement diagonal invalide.
+16292 1 Destination hors du damier.
+16295 1 Case de destination occupée.
+16308 1 Impossible de sauter par-dessus vos propres pièces.
+16318 1 Impossible de sauter par-dessus plusieurs pièces d'un coup.
+16328 1 Un pion simple ne peut avancer que d'une seule case.
+16332 1 Les pions rouges avancent vers le haut.
+16335 1 Les pions noirs avancent vers le bas.
+16339 1 Distance de saut invalide pour un pion simple.
+16345 1 Prise obligatoire ! Vous devez capturer une pièce.
+16422 1 Les Rouges n'ont plus de pièces !
+16428 1 Les Noirs n'ont plus de pièces !
+16591 1 Erreur: Le nombre de rôles (${assignedRoles.length}) ne correspond pas au nombre de joueurs ($playerCount).
+16664 1 Votre cible est ${playerData[mercenaireTargetId]?['name'] ?? 'Inconnu'}. Éliminez-le(la) au Jour 1 !
+16676 1 La nuit tombe sur le village de Thiercelieux...
+16677 1 Chacun a reçu son rôle secret.
+16724 1 Seul le Maître-Espion de l'équipe active peut donner l'indice.
+16728 1 Ce n'est pas la phase de proposition d'indice.
+16789 1 Seul un Agent de l'équipe active peut deviner un mot.
+16793 1 Ce n'est pas la phase de devinette.
+16799 1 Ce mot est déjà révélé.
+16826 1 L'équipe ${activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin !
+16847 1 Tous les mots ont été découverts !
+16868 1 Victoire par découverte du dernier mot !
+17019 2 Toutes les manches de Time's Up sont terminées !
+17087 1 Seul le devineur actif peut valider les mots.
+17455 1 Vous n'avez pas ces cartes.
+17464 1 Toutes les cartes jouées doivent avoir la même valeur.
+17482 1 Vous devez jouer le même nombre de cartes que le pli précédent.
+17486 1 Vous devez jouer une combinaison plus forte.
+17497 1 Le premier coup de la partie doit contenir le 3 de Trèfle.
+17592 2 Partie non trouvée
+17707 3 Trou du cul
+17710 2 Vice-Trou du cul
+17961 1 --- DEBUG PICTIONARY --- Condition 'roundState == drawing' ou 'guessing_drawing' est VRAIE. Mise à jour de la 
+17971 1 --- DEBUG PICTIONARY --- Condition 'roundState == drawing' est FAUSSE. L'état actuel est '${gameSnap.get('roun
+18005 1 Seul le dessinateur actif peut valider la réponse.
+18010 1 Usurpation d'identité du dessinateur.
+18015 1 Gagnant invalide.
+18037 1 $guessedCount/${collectiveWords.length} mots devinés !
+18056 1 Mot trouvé avec succès !
+18138 1 Le dessinateur n'a pas soumis le dessin à temps.
+18139 1 Le temps est écoulé ! Personne n'a trouvé le mot.
+18257 1 Ce n'est pas la phase de proposition d'indices.
+18260 1 Le devineur ne peut pas donner d'indice.
+18342 1 Ce n'est pas le moment de deviner.
+18345 1 Seul le devineur peut faire une proposition.
+18355 2 Mot deviné !
+18355 1 Mot non deviné.
+18421 1 Les 13 cartes ont été jouées !
+18461 1 Réponse invalide.
+18472 1 Ce n'est pas le moment de répondre.
+18475 1 Ce n'est pas votre tour d'avoir la bombe !
+18482 2 Cette réponse a déjà été donnée !
+18526 1 ${gameData['players'][playerId]['name']} a répondu '$cleanAnswer' et passe la bombe !
+18562 1 La bombe a explosé dans les mains de $loserName !
+18609 1 $winnerName gagne avec $lowestScore point${lowestScore > 1 ? 
+18696 1 Ce n'est pas votre tour de piocher.
+18709 1 La pioche est vide. La défausse est mélangée pour former une nouvelle pioche.
+18713 1 Impossible de piocher, il n'y a plus de cartes disponibles.
+18743 1 ${players[playerId]?['name'] ?? 'Joueur'} a pioché $pendingDraw carte(s).
+18774 1 ${players[playerId]?['name'] ?? 'Joueur'} a pioché une carte et peut la jouer.
+18781 1 ${players[playerId]?['name'] ?? 'Joueur'} a pioché une carte et passe son tour.
+18830 1 ${players[targetId]?['name'] ?? 'Le joueur'} n'a pas 1 carte, l'appel UNO est invalide.
+18860 1 ${players[callerId]?['name'] ?? 'Joueur'} a crié Contre UNO ! ${players[targetId]?['name'] ?? 'Joueur'} pioche
+18876 1 ${players[targetId]?['name'] ?? 'Joueur'} a dit UNO !
+18914 1 Ce n'est pas votre tour de choisir la couleur.
+18928 1 ${players[playerId]?['name'] ?? 'Joueur'} a choisi la couleur $chosenColor !
+18932 1 Vous ne pouvez pas choisir une couleur maintenant.
+18979 1 ERREUR CRITIQUE: playerOrder est vide dans nextRound. Impossible de continuer.
+18987 1 Question non trouvée
+19021 1 Qui pourrait le plus ${questions[random.nextInt(questions.length)]}
+19044 1 Honnête
+19064 1 Décrivez votre mot secret en un seul mot. Imposteurs, bluffez !
+19087 1 Pas assez de joueurs pour ce mode.
+19096 1 Trouvez le meilleur synonyme pour le mot : $word
+19101 1 Ajoute la description la plus drôle à ce mème !
+19132 1 ${players[overallWinnerId]?['name']} a atteint ${updatedScores[overallWinnerId]} points et gagne la partie !
+19162 1 Une nouvelle manche de Uno commence !
+19350 1 Plus aucun joueur actif.
+19413 1 Chaque joueur actif doit poser au moins une carte avant de lancer une enchère.
+19425 1 Enchère invalide.
+19496 1 La surenchère doit être supérieure.
+19921 1 pose de carte
+19943 1 enchère automatique
+19959 1 passe l'enchère
+19974 1 Réponse vide.
+19993 1 Le Juge ne peut pas soumettre de réponse.
+20026 1 Tout le monde a répondu ! Place au dévoilement.
+20034 1 Tous les synonymes sont soumis ! Votez pour bannir le pire.
+20047 1 Tout le monde a répondu ! Place au vote.
+20056 1 Toutes les réponses sont reçues ! Le Juge doit trancher.
+20136 1 Joueur ciblé introuvable.
+20141 1 Interdiction formelle de voter pour soi-même !
+20145 1 Vous ne pouvez pas bannir votre propre synonyme !
+20150 2 Seul le Juge en titre peut désigner le gagnant.
+20154 2 Ce joueur n'a pas soumis de réponse.
+20213 2 Égalité parfaite ! Aucun point attribué.
+20246 1 Égalité dans les votes : aucun joueur banni ce tour.
+20256 2 $winnerName remporte la manche !
+20428 1 Mr. White a deviné le mot secret : '$civilianWord' !
+20436 1 Mr. White a échoué à deviner le mot (c'était '$civilianWord').
+20530 1 La description la plus drôle a été choisie !
+20532 1 Aucune description n\'a été votée.
+20951 1 La partie de Zéro Pointé commence ! Chaque joueur doit révéler 2 cartes.
+21018 1 Tout le monde a révélé ses cartes. La partie commence !
+21118 1 Plus aucune carte disponible.
+21231 1 Vous devez choisir une carte face cachée non éliminée.
+21296 1 $winnerName a remporté tous les jetons de la table !
+21389 1 Nouvelle main ! ${players[playerIds[dealerIndex]]['name']} est le donneur.
+21390 1 ${players[smallBlindId]['name']} pose la petite blind de $smallBlindActual.
+21391 1 ${players[bigBlindId]['name']} pose la grosse blind de $bigBlindActual.
+21413 1 La partie n'existe pas.
+21433 1 Données de jeu invalides (playerOrder/currentPlayerIndex).
+21437 1 Ce n'est pas le tour de $playerId.
+21446 1 Données du joueur $playerId introuvables.
+21463 1 Vous ne pouvez pas checker, quelqu'un a misé.
+21474 1 ${myData['name']} suit pour $callAmount.
+21487 1 La relance doit être strictement supérieure à la mise actuelle.
+21495 1 Vous n'avez pas assez de jetons pour cette relance.
+21503 1 La relance doit être d'au moins le double de la mise précédente (ou faire tapis).
+21518 1 ${myData['name']} fait tapis (all-in) en relançant à $totalBetAmount !
+21521 1 ${myData['name']} relance à $totalBetAmount.
+21728 1 ${playerData[winners.first]['name']} gagne le pot par forfait !
+21753 1 $winnerNames gagne(nt) le pot avec ${bestHand?.rank.name ?? 'une main'} !
+21817 2 La Belote requiert exactement 4 joueurs.
+21854 1 La partie de Belote commence !
+21933 1 ${playerData[playerId]['name']} a pris à $suit !
+21944 1 Carte non possédée.
+21960 1 Vous devez fournir la couleur demandée ($ledSuit).
+22211 1 carte $cardToPlay
+22254 1 La partie de Blokus commence !
+22293 1 Pièce déjà utilisée.
+22314 1 Case déjà occupée !
+22328 1 Contact par le côté interdit !
+22365 1 Le premier coup doit couvrir votre coin de départ !
+22371 1 Votre pièce doit toucher une de vos pièces par un coin !
+22439 3 Fin de la partie !
+22548 1 Aucune règle trouvée pour ce jeu.
+22557 1 Règles : $gameTitle
+22586 1 Jeu de Soirée
+22591 1 Le compagnon de vos meilleures soirées
+22650 1 Entrez votre pseudo
+22662 1 Créer une partie
+22666 2 Veuillez entrer un pseudo.
+22686 1 Rejoindre une partie
+22927 3 Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.
+22941 1 Pas assez de pièces pour créer cette partie ! Coût : $cost pièces.
+23009 1 J'ai lancé une partie de $_selectedGame !
+23111 1 Erreur lors de la création de la partie: $e
+23167 1 Pas assez de pièces pour lancer une recherche ! Coût : 1 pièce.
+23312 1 Comment voulez-vous jouer ?
+23333 1 Désactivez la 'Recherche Publique' pour pouvoir jouer en Local.
+23343 1 Désactivez la Vidéo ou l'Audio pour pouvoir jouer en Local.
+23364 1 Local indisponible (Vidéo/Audio actif)
+23365 1 Jouer en Local (Sur cet appareil)
+23387 2 La vidéo est obligatoire pour jouer à Devine Tête en ligne.
+23388 1 Désactivez la 'Recherche Publique' pour créer une partie privée.
+23399 1 Privé indisponible (Recherche active)
+23401 1 Privé indisponible (Vidéo requise)
+23402 1 Créer une partie privée (Avec code)
+23428 1 Activez le bouton 'Recherche Publique' dans les paramètres pour jouer avec le monde.
+23437 1 Recherche rapide (Vidéo requise)
+23438 1 Recherche Monde (Désactivée)
+23462 1 La vidéo est obligatoire pour jouer à Devine Tête en Classé.
+23463 1 Activez le bouton 'Recherche Publique' dans les paramètres pour jouer en Classé.
+23470 1 Partie Classée (Ranked)
+23472 1 Partie Classée (Vidéo requise)
+23473 1 Partie Classée (Désactivée)
+23480 1 Ce jeu requiert de connaître les autres joueurs et n'est pas disponible en matchmaking public.
+23524 1 Historique des thèmes : $_selectedGame
+23552 1 Aucun thème sauvegardé pour ce jeu sur Firebase.
+23684 1 Modifier / Compléter
+23735 1 Modifier le Thème
+23746 1 Titre du thème (IA / Personnalisé)
+23760 2 Ajouter un mot...
+23810 2 Génération en cours...
+23811 1 Compléter avec l'IA (+15 mots)
+23826 1 Complète cette liste sur le thème ${titleCtrl.text}. Mots existants : ${wordsList.take(10).join(', ')}
+23899 1 Enregistrer sur Firebase
+23921 1 Sélectionnez au moins 5 rôles pour commencer.
+23942 1 Créer une Partie
+23974 1 Jeu sélectionné
+23984 1 Difficulté
+24014 1 Remplacé par le thème IA
+24105 1 Génération IA : $_selectedGame
+24154 1 Thème ou consigne pour l'IA
+24156 1 ex: Cinéma des années 90, Objets futuristes, Animaux marins...
+24212 1 Générer avec l'IA
+24298 1 ✨ ${generated.length} mots générés et enregistrés sur Firebase !
+24360 1 Pack actif : ${_activeAiThemeTitle ?? 'Thème personnalisé'} (${_selectedAiWords!.length} mots)
+24377 1 Désactiver ce pack
+24423 1 Paramètre 'Ajouter 1'
+24425 1 Chacun complète le même dessin initial au lieu de la chaîne.
+24459 1 Jetons de départ: $_pokerStartChips
+24497 1 Plus de symboles par carte (8 au lieu de 6)
+24500 1 Plus complexe, plus de cartes, plus de symboles.
+24513 1 Jeu Simplifié (Vrai/Faux)
+24515 1 Chacun raconte une histoire, les autres votent Vrai ou Faux.
+24533 1 Simultané
+24537 2 Tour par tour
+24552 1 Catégories du Petit Bac
+24580 1 Ajouter une catégorie
+24619 1 Variante Révolution
+24621 1 Si un joueur pose un carré, l'ordre des cartes est inversé pour le reste de la manche.
+24636 1 Le dessinateur est limité à 30 traits maximum par dessin.
+24657 1 Classique (Surréaliste)
+24679 1 1 feuille partagée
+24683 1 1 feuille par joueur
+24698 1 Autoriser les indices invalides (simplifié)
+24701 1 Les indices identiques seront toujours éliminés, mais pas ceux trop proches du mot.
+24715 1 Configuration des Rôles
+24720 1 Total des rôles sélectionnés : $totalRolesCount. (Minimum 5 requis)
+24822 1 Paramètres du Jeu
+24827 1 Sélectionnez au moins 3 catégories :
+24864 1 Le temps ne se réinitialise pas à chaque joueur. La patate explose à la fin !
+24875 1 Durée de la bombe : $_hotPotatoGlobalDuration s
+24896 1 Paramètres Time's Up
+24924 1 Jouer par équipes (Mode 2v2+)
+24926 1 Un joueur devine, son équipe l'aide, l'équipe adverse vérifie.
+24938 1 Équipes 2v2
+24940 1 Nécessite exactement 4 joueurs. Vous aidez le joueur en face de vous.
+24953 1 Paramètres Dominos
+24963 1 Pioche
+24966 1 Bloqué
+24998 1 Paramètres Uno
+25003 1 Cartes de départ :
+25020 1 Empilement des cartes +2/+4
+25022 1 Permet de jouer un +2 sur un +2 (ou +4 sur +2/+4) pour faire piocher plus.
+25033 1 Paramètres Photo Roulette
+25038 1 Type de média
+25049 3 Vidéos
+25068 1 Nombre de tours (photos à deviner) : $_photoRouletteRounds
+25084 1 Photos piochées par joueur : $_photoRoulettePhotosPerPlayer
+25103 1 Paramètres Action ou Vérité
+25108 1 Les joueurs écrivent les défis
+25110 1 Un joueur aléatoire écrit le défi au lieu d'un défi prédéfini.
+25133 1 Seuil de validation par défaut : $_aoVVoteThreshold%
+25150 1 Rôles de Base
+25155 1 Nombre d'Infiltrés
+25216 1 Total imposteurs : ${_infiltreCount + _mrWhiteCount}. La répartition finale sera ajustée si nécessaire pour ga
+25226 1 Rôles Spéciaux (Optionnel)
+25232 1 Gagne +4 points s'il est éliminé en premier.
+25244 1 La 1ère fois qu'il est voté, les votes rebondissent.
+25255 1 Tranche en cas d'égalité, même morte.
+25269 1 Peut toujours voter après son élimination.
+25278 1 Amoureux (5+ joueurs)
+25279 1 Si l'un est éliminé, l'autre aussi.
+25289 1 Un joueur devra mimer son indice à chaque tour.
+25298 1 Vendeur de Falafels (4+ joueurs)
+25300 1 Reçoit un pouvoir spécial aléatoire.
+25311 1 Vengeuse (5+ joueurs)
+25313 1 Élimine quelqu'un en étant éliminée.
+25322 1 Duellistes (5+ joueurs)
+25324 1 Duel secret pour des points bonus/malus.
+25336 1 Paramètres Généraux
+25340 1 Activer le Timer
+25342 1 Si désactivé, le jeu n'avance pas automatiquement
+25350 1 Durée de réponse par joueur : ${_turnTimerSeconds}s
+25364 1 Durée d'affichage des résultats : ${_resultTimerSeconds}s
+25407 1 Activer la Vidéo ${forceVideo ? '(Obligatoire)' : ''}
+25411 1 Caméra indispensable pour ce jeu.
+25413 1 Micro + Caméra (Désactive le mode Local)
+25414 1 Réservé VIP ou limite atteinte
+25441 1 Active le micro sans la caméra (Désactive le mode Local)
+25465 1 Paramètres de Recherche Publique
+25470 1 Autoriser la Recherche Rapide & Classée
+25477 1 Active les boutons de recherche mondiale pour jouer avec des inconnus.
+25492 1 Nombre de joueurs recherchés : ${_playerCount.toInt()}
+25518 1 Le Monde
+25538 1 Avec Vidéo
+25542 1 Sans Vidéo
+25587 1 LANCER LE JEU
+25631 1 Le code doit comporter 6 chiffres.
+25660 1 Code de partie invalide ou partie déjà commencée.
+25678 1 Pas assez de pièces pour rejoindre cette partie ! Coût : 1 pièce.
+25688 1 Vous rejoignez une partie VIP, c'est gratuit !
+25713 1 Impossible de rejoindre la partie.
+25730 1 Rejoindre une Partie
+25743 1 Code de la partie (6 chiffres)
+25893 1 Formez 2 équipes de 2 joueurs dans 'Composer les équipes'.
+25899 1 Il faut au moins 4 joueurs.
+25902 1 Veuillez créer au moins 2 équipes.
+25906 1 Tous les joueurs doivent être assignés à une équipe.
+25910 1 Chaque équipe doit posséder au moins 2 joueurs.
+25924 1 Au moins 5 joueurs requis.
+25928 1 Rôles ($selectedRolesCount) ≠ Joueurs (${players.length}).
+25934 1 Ce jeu requiert exactement 4 joueurs.
+25940 1 Au moins 3 joueurs requis.
+25946 1 Au moins 2 joueurs requis.
+26030 1 Difficulté : ${gameData['difficulty'] ?? 'Standard'}
+26036 1 Joueurs présents (${players.length})
+26167 1 Invitation envoyée à $fName !
+26713 1 déconnecté
+26910 1 Présidente
+27236 1 Victoire des ${winnerFaction} !
+27271 1 Résultat du vote
+27277 1 Personne n'a été éliminé (égalité).
+27292 1 $pName a été éliminé ! Son rôle était : $roleDisplay
+27327 1 La Vengeuse choisit sa cible...
+27366 1 Si vous êtes le premier joueur éliminé de la partie (mort ou vif), vous gagnez 4 points bonus à la fin.
+27368 1 La première fois que la majorité vote contre vous, tous ceux qui ont voté contre vous sont éliminés à votre pl
+27370 1 En cas d'égalité lors d'un vote, c'est vous qui décidez qui est éliminé parmi les joueurs à égalité. Ce pouvoi
+27372 1 Même après votre élimination, vous continuez à participer aux votes pour éliminer les joueurs.
+27374 1 Un autre joueur est secrètement désigné comme votre amoureux. Si l'un de vous deux est éliminé, l'autre meurt 
+27376 1 Au lieu de donner un indice oral, vous devez mimer votre mot-indice à chaque tour.
+27378 1 Vous n'avez pas de mot, comme Mr. White, mais vous gagnez si les imposteurs gagnent. Vous pouvez mentir et pré
+27380 1 Si vous êtes éliminée, vous pouvez choisir d'emporter un autre joueur (encore en vie) avec vous dans la tombe.
+27382 1 Un autre joueur est votre duelliste secret. Si vous survivez plus longtemps que lui, vous gagnez 2 points bonu
+27393 1 Aucune description trouvée pour ce rôle.
+27432 1 ðŸŽ¯ C'est à toi de donner un indice !
+27433 1 Au tour de $currentPlayerName...
+27524 1 ✅ Indice envoyé ! En attente des autres joueurs...
+27583 1 Vote enregistré. En attente...
+27588 1 Vous ne pouvez pas voter.
+27593 1 Appuie sur la bulle d'un joueur pour voter.
+27803 1 Permission refusée. Impossible d'accéder à la galerie.
+27829 1 Aucun album média trouvé.
+27844 1 Votre galerie est vide.
+27881 1 Échec de l'upload des photos vers Supabase.
+27890 1 Erreur lors de la sélection des photos : $e
+27958 1 Préparation de la partie
+27963 1 L'application va sélectionner ${gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20} photos aléatoires
+27974 1 Vous êtes prêt !
+27977 2 En attente des autres joueurs...
+27986 1 Autoriser et Lancer la sélection
+27991 1 Joueurs prêts: ${readyPlayers.length} / ${players.length}
+28017 1 Chargement de la photo...
+28031 1 À qui est cette photo ?
+28066 1 Vous avez voté !
+28121 1 Calcul des résultats...
+28135 1 La photo était à... $correctOwnerName !
+28224 1 Le gagnant est $winnerName !
+28255 1 Chargement de la partie...
+28343 1 La partie a été terminée ou n'existe plus.
+28418 1 Système
+28419 2 La partie est terminée !
+28615 1 Quitter la partie
+28621 1 Jeu en cours
+28899 1 Vous êtes le Juge !
+28900 1 Juge ce tour : $judgeName
+29002 1 En attente des cartes des joueurs...
+29008 1 $playedCount / $nonJudgeCount joueurs ont répondu
+29027 1 Carte envoyée !
+29051 1 En attente des autres joueurs ($playedCount / $nonJudgeCount)...
+29062 1 Choisissez votre meilleure réponse :
+29147 1 Cliquez sur la carte gagnante !
+29148 1 Le Juge est en train de choisir...
+29250 1 Envoyer un message ou proposer un mot...
+29333 1 Coup automatique joué pour cause d'inactivité.
+29385 1 inactivité
+29427 1 $targetPlayerName ne joue plus ($reason). Voulez-vous le conserver et faire jouer l'ordinateur automatiquement
+29438 1 ⚠️ Note : Ce jeu nécessite un avis personnel. L'ordinateur sautera son tour s'il est conservé.
+29453 1 Conserver avec l'IA
+29529 1 Vous avez été exclu de la partie pour inactivité. L'ordinateur joue à votre place (aucun gain ne vous sera att
+29959 1 N'a plus de cartes
+30004 1 ${hand.length} cartes restantes
+30019 1 $count cartes restantes
+30035 1 ${handUno.length} cartes restantes
+30084 1 ${ramiHand.length} cartes restantes
+30898 1 Aucun album à afficher.
+31006 1 Départ par $authorName
+31008 1 Dessiné par $authorName
+31009 1 Deviné par $authorName
+31093 1 Préc.
+31170 1 Devine ce que représente ce dessin :
+31203 1 Écris un thème ou une phrase !
+31204 1 Imagine une phrase !
+31211 1 Écris ta phrase...
+31238 1 Complète ce dessin !
+31240 1 Commence par un dessin !
+31282 1 Ouvrir la zone de dessin
+31288 1 État Gribouillis inconnu : $roundState
+31473 1 Éq. 1 : ${tabooScores['team_0'] ?? 0} pts
+31501 1 Éq. 2 : ${tabooScores['team_1'] ?? 0} pts
+31523 1 Manche ${(gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1} / ${(gameData['tabooTotalRounds'] as num?)?.toI
+31572 1 Vous êtes l'orateur : faites deviner le mot !
+31574 1 $clueGiverName fait deviner à votre équipe !
+31868 1 💬 Écoutez attentivement et proposez vos réponses !
+31881 1 ⏳ Fin du tour...
+31919 1 Un survivant
+31956 1 VOUS AVEZ ÉTÉ INFECTÉ !
+31956 1 SURVIVANTS ÉCHAPPÉS !
+31970 1 $loserName est resté avec le Zombie entre les mains !
+32079 1 PIOCHEZ CHEZ $targetName !
+32080 1 TOUR DE ${players[currentPlayerId]?['name'] ?? ''}
+32093 1 Choisissez une carte face cachée au hasard
+32094 1 En attente de la pioche...
+32170 1 ${players[pId]?['name']} (Sauvé !)
+32212 1 Main de $targetName (${targetHand.length} cartes)
+32331 1 VOTRE MAIN DE SURVIE (${myHand.length} cartes)
+32340 1 Les paires sont défaussées automatiquement
+32430 1 La partie de Big Two est terminée !
+32453 1 Au tour de ${resolvePlayerName(currentPlayerId)}
+32462 1 Carte(s) en jeu :
+32475 1 Joué par ${resolvePlayerName(lastPlay['playedBy'] ?? '')}
+32480 1 Aucune carte en jeu. Jouez ce que vous voulez !
+32543 1 Jouer (${_selectedBigTwoCards.length})
+32782 1 Plus aucun coup possible pour l'adversaire !
+32801 1 C'est votre tour ! (${currentColor == 'red' ? 'Rouges' : 'Noirs'})
+32802 1 Au tour de ${players[currentPlayerId]?['name'] ?? '...'}
+32813 1 ⚠ï¸ Prise en chaîne ! Vous devez rejouer le pion clignotant.
+32887 1 Vous devez sélectionner le pion en surbrillance orange.
+33113 1 Jeu non implémenté : $rawGameType
+33445 1 Mots trouvés : $guessedCount
+33509 1 la suite de l\'histoire...
+33510 1 Écrivez $promptItem
+33512 1 Complétez la phrase (1 à 8 mots)
+33517 1 Auteur précédent
+33849 1 Écrivez ici...
+33992 1 ✏️ $count mot${count > 1 ? 's' : ''} rédigé${count > 1 ? 's' : ''}...
+34186 1 Retour au Salon
+34538 1 ARRÊTÉ
+35114 1 Véhicule\nPrioritaire
+35116 1 PRIORITÉ
+35135 1 Citerne\nInépuisable
+35215 1 RÉPARÉ
+35224 2 CARTE
+35313 1 🛡️ Protégé par une Botte
+35402 1 Toute la flotte adverse a été coulée !
+36788 1 Dernière carte posée !
+38295 1 --- DÉBUT DE LA CONSTRUCTION DE L'UI DE VOTE 'Qui Pourrait le Plus ?' ---
+38301 1 Erreur: Question non trouvée.
+38320 1 Votez pour un joueur :
+38345 1 >>> CLIC sur le joueur '$pName' (ID: $pId) !
+38348 1    - Passage de _isActionPending à true.
+38356 1 !!! ERREUR Firebase lors du vote: $e
+38361 1    - Appel Firebase terminé. Passage de _isActionPending à false.
+38369 1    - ATTENTION: Le widget n'est plus monté, setState annulé.
+38399 1 Vote enregistré. En attente des autres joueurs...
+38427 2 En attente des autres...
+38436 2 Les autres joueurs répondent...
+38470 1 En attente des déclarations...
+38488 1 En attente des votes...
+38526 1 La partie continue...
+38530 1 La partie va bientôt commencer...
+38550 1 $mrWhiteName a été démasqué ! Il tente de deviner le mot secret des civils...
+38582 1 Quel était le mot des Civils ?
+38649 1 Vote décisif enregistré. En attente des autres...
+38742 1 (Vous)
+38837 1 Vous êtes le Juge. Attendez les réponses...
+38848 1 Carte jouée ! Attente des autres...
+38857 1 Choisissez une carte à jouer :
+38930 1 Choisissez la meilleure réponse !
+38930 1 Le Juge choisit...
+38955 1 En attente du choix du juge...
+38968 1 Choisir
+39048 1 Votre réponse...
+39102 1 Moment de vérité...
+39120 1 Ton histoire était-elle...
+39178 1 (Ce choix restera secret jusqu'à la fin)
+39262 1 Vote enregistré...
+39270 1 Les autres jugent ton histoire...
+39368 1 Détecteur de Mensonges
+39465 1 Tu as voté : ${myVote!.toUpperCase()}
+39598 1 Pointez quelqu'un !
+39682 1 Bannissez une réponse !
+39741 1 le juge
+39788 1 ðŸ‘‘ Choisis ta réponse préférée :
+39789 1 âÂÂ³ En attente du choix de $judgeName...
+39902 1 Un joueur a quitté...
+39908 1 Recherche de remplaçants en cours...
+39913 1 Démarrage automatique dans
+39926 1 Joueurs connectés : ${players.length}
+40008 1 Voulez-vous rejouer ?
+40084 1 Si un joueur ne répond pas ou quitte, la partie cherchera un remplaçant.
+40118 1 aucune réponse
+40120 1 $winnerName a été choisi pour sa réponse et gagne 1 point !
+40130 1 Résultats des votes
+40155 1 Histoire de $storyOwnerName (était $actualTruth)
+40198 1 $voterName a voté : $voteValue
+40212 1 Le menteur
+40213 1 Le menteur était... $liarName !
+40215 1 Les points ont été distribués en fonction de vos votes.
+40234 1 Les imposteurs ont gagné ! Un civil a été éliminé.
+40237 1 L'Infiltré ($undercoverName) a été démasqué !
+40239 1 Mr. White ($mrWhiteName) a été démasqué !
+40241 1 Le tour est terminé !
+40247 1 Le mot des Civils était : '${wordPair[0]}'
+40255 1 Le mot de l'Infiltré (${undercoverName}) était : '${wordPair[1]}'
+40263 1 Mr. White (${mrWhiteName}) n'avait pas de mot.
+40280 1 $loserName a été banni pour sa proposition '$loserAnswer' !
+40282 1 Le mot à trouver était un synonyme de '$word'. Les autres joueurs marquent 1 point.
+40289 1 Égalité dans les votes ! Personne n'est banni.
+40299 1 ${loserName} n'a pas répondu à temps et gagne 1 point !
+40309 1 Égalité ! Personne ne prend de point ce tour-ci.
+40318 1 Le dessinateur
+40321 1 $winnerName a trouvé le mot : '$currentWord' !
+40323 1 Félicitations au dessinateur $drawingPlayerName et à $winnerName !
+40331 1 Personne n'a trouvé le mot : '$currentWord'.
+40334 1 Le temps est écoulé ou le dessin était trop complexe !
+40347 1 Le devin
+40349 1 (pas de réponse)
+40351 1 $guesserName a trouvé le mot : '$currentWord' !
+40353 2 Sa réponse était : '$guesserAnswer'.
+40361 1 $guesserName n'a pas trouvé le mot.
+40365 1 Le mot était : '$currentWord'.
+40395 1 ${players[winnerId]?['name'] ?? 'Un joueur'} remporte Skull !
+40397 1 Deux défis réussis.
+40406 1 Défi gagné : $challengeBid carte(s) révélée(s) !
+40410 1 Le challenger
+40411 1 $loserName a perdu le défi.
+40413 1 Le tour est terminé.
+40420 1 Cartes révélées :
+40435 1 Crâne
+40455 1 une description hilarante
+40456 1 $winnerName a gagné avec sa description :
+40475 1 Erreur de chargement du mème.
+40483 1 Personne n'a gagné ce tour. Égalité des votes ou pas de description.
+40501 1 $winnerName a trouvé le symbole $commonSym ! Il gagne la carte.
+40503 1 Score actuel de ${players[winnerId]?['name'] ?? 'Lui'}: ${players[winnerId]?['score'] ?? 0} cartes.
+40508 1 Le tour est terminé. Personne n'a trouvé le symbole commun.
+40510 1 Un problème est survenu.
+40522 1 $winnerName a été désigné(e) et gagne 1 point !
+40525 1 Égalité ! Personne ne marque de point ce tour-ci.
+40534 2 Fin du tour
+40614 1 Tour suivant
+40623 1 En attente de l'hôte pour le tour suivant...
+42597 1 Plus de cartes !
+42629 1 Trié par couleur
+42629 1 Trier la main
+43878 1 ${GameUiLocalization.tr(context, "Mot à dessiner")} : ${currentPictionaryWord != null ? GameUiLocalization.tr(
+44260 1 🏆 ${GameUiLocalization.tr(context, "Légendaire !")}
+44264 1 👍 ${GameUiLocalization.tr(context, "Bien joué !")}
+44266 1 😅 ${GameUiLocalization.tr(context, "Pas mal !")}
+44427 1 🤫 ${GameUiLocalization.tr(context, 'Chut ! Ferme les yeux')} 🙈
+44432 2 Carte $deckIndex / $deckTotal
+44463 2 ${GameUiLocalization.tr(context, 'Carte')} $deckIndex / $deckTotal — ${GameUiLocalization.tr(context, 'Score')
+45132 1 La nuit tombe sur le village...\n\nFermez les yeux.
+45138 1 Le soleil se lève
+45142 1 Le moment est venu...\n\nLe village doit voter.
+45163 1 Fin de la partie
+45165 1 Victoire des Villageois !
+45167 1 Victoire des Loups-Garous !
+45169 1 Victoire des Amoureux !
+45177 2 Fin du jeu
+45513 1 Valider le couple (${_lgLocalSelection.length}/2)
+45537 1 L'Héritier choisit son testament
+45541 1 Sélectionnez votre testateur
+45563 1 Contaminez jusqu'à 2 joueurs
+45591 1 Espionnez un joueur...
+45609 1 la victime
+45652 1 Choisissez une victime à dévorer
+45662 1 Cible des loups : $victimeName
+45664 1 Touchez le joueur à éliminer
+45719 1 Le Pyromancien prépare ses explosifs
+45759 1 Débats du village
+45761 1 Le Capitaine désigne son successeur
+45763 1 Dernier tir du Chasseur...
+45765 1 Le Fossoyeur révèle une sépulture
+45767 1 Coup d'État du Dictateur !
+45774 1 Coup d'État
+45786 1 Ouvrir les votes
+45795 1 Vote du tribunal populaire
+45797 1 Touchez un suspect pour voter
+45800 1 Clôturer le vote
+45807 1 Partie terminée !
+46479 1 Écrire au ${_selectedChatType == 'wolf' ? 'meute' : 'village'}...
+46702 1 ${GameUiLocalization.tr(context, 'TOUR DE ')}${players[currentPlayerId]?['name'] ?? ''}
+47597 2 ${GameUiLocalization.tr(context, 'Tour de')} ${players[currentPlayerId]?['name'] ?? '...'}
+47843 1 Face-à-face (côte à côte)
+47919 1 C'est votre tour ! Touchez un dé pour le garder (doré 🔒)
+47922 1 👉 ${getPlayerName(currentPlayerId)} joue en direct... (${3 - rollsLeft}/3 lancers)
+48062 1 🔒 ${heldDice.where((h) => h).length} gardé(s)
+48575 1 ${GameUiLocalization.tr(context, 'Tour de')} ${playerData[playerOrder[currentIndex]]?['name'] ?? ''}
+50769 1 Vous devez dessiner quelque chose !
+50785 1 Erreur lors de la sauvegarde du dessin.
+50821 1 Ce joueur existe déjà !
+50841 1 Ajoutez les joueurs
+50851 1 Prénom du joueur
+50873 1 Ajoutez au moins 2 joueurs pour commencer.
+50922 1 Choisir un jeu
+51091 2 Équilibrer Aléatoirement
+51100 1 Équipe A (Rouge)
+51106 1 Équipe B (Bleue)
+51208 1 Choisir un Jeu Local
+51215 1 Votez pour la personne la plus susceptible de...
+51223 1 Démasquez l'Infiltré et Mr. White !
+51231 1 Passe le téléphone avant qu'il n'explose !
+51239 1 Proposez le meilleur synonyme et votez !
+51247 1 Le classique, avec choix et IA personnalisée !
+51255 1 Répondez à la question secrète... si vous perdez !
+51263 1 Faites des choix impossibles avec options IA et votes.
+51271 1 Retrouvez vos mots secrets par équipes !
+51279 1 Faites deviner des noms en 3 manches !
+51287 1 Une question drôle pour la personne qui aura l'objet !
+51295 1 Devinez le mot avec l'aide des autres !
+51303 1 Repérez le symbole commun le plus vite !
+51341 1 Il faut au moins $minPlayers joueurs pour ce mode !
+51351 1 Ce mode supporte au maximum $maxPlayers joueurs !
+51441 1 Paramètres : Action ou Vérité
+51470 2 Paramètres de la partie
+51481 1 1. Intensité des défis
+51524 1 Génération IA personnalisée
+51537 1 ex: Soirée pyjama, Secrets de couples, Anecdotes au travail...
+51561 4 Génération...
+51562 1 Générer les défis par IA
+51578 1 Génère un mélange d'actions et de vérités divertissantes. Thème : ${_aiController.text.trim()}
+51597 1 ✨ ${res.length} défis IA générés !
+51614 1 ✅ ${_aiTruths.length + _aiDares.length} défis prêts !
+51632 1 COMMENCER LA PARTIE
+51725 3 toi-même
+51808 1 Choisis ton destin...
+51827 2 C'est au tour de
+51848 2 Appuyez sur 'Lancer la roue' pour commencer !
+51890 3 Lancer la roue
+51974 1 Paramètres : Le Dilemme
+52003 1 Paramètres du Dilemme
+52015 1 1. Difficulté des choix
+52046 1 Avec Roue (1 joueur)
+52051 1 Tout le groupe
+52085 1 Génération IA de dilemmes personnalisés
+52123 1 Générer les dilemmes par IA
+52139 1 Génère des dilemmes au format 'OptionA ou OptionB'. Thème : ${_aiController.text.trim()}
+52150 1 ✨ ${res.length} dilemmes IA générés !
+52167 1 ✅ ${_aiDilemmas.length} dilemmes prêts
+52185 1 COMMENCER LES DILEMMES
+52254 2 Gérer les Scores
+52483 1 Égalité
+52501 1 Choix enregistré !
+52502 1 Dilemme pour $voterName : fais ton choix !
+52505 1 Tous les votes sont enregistrés !
+52506 1 C'est au tour de $_activeDilemmaVoterId de voter !
+52550 1 LE DILEMME
+52649 1 Le joueur désigné doit faire son choix.
+52657 1 En attente du vote de : $_activeDilemmaVoterId (${_dilemmaVotes.length} / ${widget.players.length})
+52746 1 Appuyez sur 'Lancer' pour commencer !
+52772 1 Lancer le Dilemme
+52855 1 Paramètres : Jeu de la Pièce
+52884 1 Configuration de la partie
+52895 1 Difficulté des questions secrètes
+52938 1 Génération IA de questions secrètes
+52951 1 ex: Amour & Séduction, Travail, Anecdotes gênantes...
+52976 2 Générer les questions IA
+52992 1 Génère des questions indiscrètes et amusantes. Thème : ${_aiController.text.trim()}
+53003 1 ✨ ${res.length} questions IA générées !
+53020 1 ✅ ${_aiQuestions.length} questions prêtes
+53038 1 LANCER LA PIÈCE
+53376 1 Tu as choisi $_coinFlipChoice. La pièce est tombée sur... $_coinFlipResult !
+53382 1 PERDU ! Révèle la question et réponds-y !
+53383 1 GAGNÉ ! Ton secret est préservé.
+53439 1 Je choisis PILE
+53454 1 Je choisis FACE
+53552 1 La roue tourne...
+53731 1 Pas assez de joueurs ! Il faut au moins $minPlayers joueurs pour cette configuration.
+53797 1 $player était un Civil ! Les Imposteurs gagnent !
+53799 1 $player était l'${role} ! Les Civils gagnent !
+53873 1 Requiert 4+ joueurs
+53874 1 Requiert 3+ joueurs
+53883 1 Il devra donner le premier indice
+53922 1 Thème pour les paires de mots
+53924 1 ex: animaux:objets, cuisine... (format civil:infiltré)
+53974 4 Génération IA...
+53977 3 Commencer la manche
+53997 1 Passe le téléphone à
+54009 1 Regarde ton rôle et ne le montre à personne !
+54015 1 Voir mon rôle
+54027 1 Ton mot est : $_wordCivil
+54028 1 Ton mot est : $_wordUndercover
+54029 1 Tu n'as pas de mot. Bluffe !
+54036 1 Ton Rôle, $player
+54070 1 À vos discussions !
+54075 1 Tout le monde connaît son rôle. À tour de rôle, donnez un mot-indice. Quand vous êtes prêts, passez au vote po
+54084 1 Passer au Vote
+54132 1 Résultat du tour
+54144 1 gagnent
+54147 1 Le mot des civils était : $_wordCivil
+54152 1 Le mot de l'infiltré était : $_wordUndercover
+54256 1 Tu dois écrire une réponse !
+54368 1 Durée du tour (par joueur)
+54394 1 Compte à rebours global
+54395 1 Le chrono ne se réinitialise pas.
+54403 1 Durée du chrono global
+54442 1 Catégories IA Personnalisées
+54455 1 ex: Marques de luxe, Objets du grenier, Films d'horreur...
+54474 1 Génère des catégories amusantes pour la patate chaude. Thème : ${_aiController.text.trim()}
+54488 1 Catégories IA chargées !
+54509 1 Générer les catégories par IA
+54538 1 C'est à ${widget.players[_currentPlayerIndex]} !
+54548 1 Catégorie:
+54563 1 Ta réponse rapide !
+54578 1 Mots déjà utilisés :
+54618 1 $loser a perdu !
+54628 1 un autre joueur
+54799 1 Thème pour les mots
+54863 1 Passe le téléphone à $currentPlayer
+54893 1 Votez pour bannir la pire proposition !
+54898 1 Le mot était : $_currentWord
+54930 1 La proposition de $_bannedPlayer a été bannie !
+54936 1 $_bannedPlayer a perdu cette manche !
+54945 1 Nouvelle manche
+55071 2 Tableau des Scores
+55282 1 Thème IA (ex: Soirée arrosée, Travail, Vacances...)
+55299 1 Générer des situations IA
+55344 1 Qui dans le groupe...
+55349 1 ...pourrait le plus $_currentQuestion
+55367 1 Lancer les votes !
+55390 3 Qui pourrait le plus $_currentQuestion
+55413 1 Désignez la personne choisie par le groupe :
+55483 1 Passez l'appareil à :
+55497 1 Votez secrètement pour le joueur de votre choix :
+55563 1 Égalité ! (+1 pt chacun)
+55564 1 Désigné par le groupe (+1 pt) :
+55590 1 Détail des votes :
+55617 1 Voté par : ${votersList.join(', ')}
+55656 1 Décision unanime du groupe pour ${winners.join(', ')} !
+55736 1 Il faut au moins 4 joueurs pour Codenames (2 par équipe) !
+55791 1 Impossible de former les équipes (taille minimale non atteinte). Redémarrer avec au moins 4 joueurs.
+55831 1 L'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin ! L'équipe ${opponentTeam == 'red' ? 
+55845 1 L'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'} a trouvé tous ses mots et gagne !
+55858 1 L'équipe ${actualColor == 'red' ? 'Rouge' : 'Bleue'} a trouvé tous ses mots et gagne !
+55941 1 Passez le téléphone à
+55959 1 Maître-Espion de l'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}
+55965 1 Passez le téléphone à $currentMasterSpy, puis appuyez ci-dessous.
+55972 1 C'est fait
+56006 1 Passez le téléphone aux agents
+56012 1 Équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}
+56047 1 C'est parti !
+56080 1 Équipe Rouge: ${_redTeam.join(', ')}
+56085 1 Équipe Bleue: ${_blueTeam.join(', ')}
+56123 1 Thème pour les 25 mots
+56175 2 Commencer la partie
+56221 1 Tu es le Maître-Espion. Assure-toi d'être seul(e) à voir l'écran.
+56228 1 Voir la carte-clé
+56250 1 $currentMasterSpy â€â€ Maître-Espion ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}
+56293 1 Passe le téléphone aux agents de l'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}
+56309 1 Passer son tour
+56342 2 Nouvelle Partie
+56611 1 Mot ajouté pour $player ! Total: ${_playersWords[player]?.length}
+56784 1 Besoin d'au moins 4 joueurs (2 par équipe) pour jouer !
+56790 1 Les équipes seront formées aléatoirement.
+56848 1 Thème pour les mots à deviner
+56850 1 ex: célébrités, animaux, cuisine...
+56857 1 L'IA générera les mots automatiquement (la phase de saisie manuelle sera ignorée).
+56943 1 Passe le téléphone à $currentPlayerForInput
+57004 1 Mots restants à ajouter pour $currentPlayerForInput: ${5 - wordsForCurrentPlayer}
+57009 1 Total des mots dans le chapeau: ${_allWords.length}
+57020 1 FIN DE MANCHE !
+57026 1 Un seul mot
+57035 1 Manche $_currentRoundNumber : $modeText
+57040 1 C'est au tour de ${currentGuesser} (${_activeTeam == 'red' ? 'Équipe Rouge' : 'Équipe Bleue'})
+57058 1 Mots devinés ce tour : ${_discardedWords.length}
+57062 1 Mots restants dans le paquet : ${_currentDeck.length}
+57078 1 Deviné !
+57109 1 Égalité !
+57121 1 Erreur: Nombre de joueurs insuffisant
+57126 1 Veuillez revenir à l'écran de configuration des joueurs.
+57156 1 L'équipe $winnerTeam a gagné !
+57458 1 Difficulté des questions
+57489 1 Génération IA de questions
+57502 1 ex: Culture générale, Gages drôles, Amis...
+57543 1 Génère des questions amusantes et rapides à poser. Thème : ${_aiController.text.trim()}
+57545 1 On se passe un objet
+57554 1 ✨ ${res.length} questions IA prêtes !
+57576 1 Désigner un joueur aléatoire à qui passer
+57578 1 Sinon, passez physiquement à qui vous voulez
+57584 1 Afficher le chronomètre
+57590 1 Intervalle du chrono : de $_minDuration à $_maxDuration secondes
+57650 1 Passe à $_nextPlayerToPass !
+57670 1 $loserName a perdu !
+57676 1 Il/Elle doit répondre à la question :
+57729 1 Équipe Rouge
+57730 1 Équipe Bleue
+57914 2 PASSÉ
+58029 1 $_teamAName (Équipe Rouge)
+58030 1 $_teamBName (Équipe Bleue)
+58070 1 PROCHAIN JOUEUR / ÉQUIPE :
+58095 1 Jouer par Équipes
+58099 1 2 équipes s'affrontent
+58099 1 Chacun pour soi
+58114 1 Modifier les équipes et les membres
+58125 1 Difficulté des mots :
+58154 1 Durée du chrono :
+58163 1 Illimité
+58178 1 Mots personnalisés / IA
+58198 1 Thème IA (ex: Animaux marins, Super-héros...)
+58316 1 LANCER SUR LE FRONT !
+58339 1 Composition des Équipes
+58371 1 ÉQUIPE 1
+58424 1 ÉQUIPE 2
+58472 1 Valider les équipes
+58499 1 PLACEZ LE TÉLÉPHONE SUR VOTRE FRONT !
+58562 1 Trouvés : ${_roundHistory.where((e) => e['guessed'] == true).length}
+58601 1 Bas = Trouvé
+58612 1 Arrêter
+58645 1 Résultats du passage
+58668 1 +$foundCount points marqués !
+58680 1 Touchez un mot pour modifier le résultat en cas d'erreur de capteur :
+58827 1 Continuer la partie
+59028 1 Symboles par carte :
+59043 1 Score cible : $_targetScore cartes
+59237 1 PIOCHE (${_deck.length + 1}) • BUT : $_targetScore
+59439 1 PARTIE TERMINÉE !
+59471 1 ${e.value} cartes
+59617 1 Écurie 1
+59623 1 Écurie 2
+59630 1 Écurie 3
+59637 1 Écurie 4
+60559 1 Rejoindre un salon privé
+60563 1 Code du salon (6 chiffres) ou ID
+60643 1 Rejoins un salon public ou entre un code privé :
+60649 1 Code Privé
+60680 1 Aucun salon public disponible pour le moment.\nCréez-en un avec le bouton ci-dessous !
+60733 1 Thème : ${data['theme'] ?? 'Général'}
+60778 2 Créer un Salon
+60826 1 Vous avez besoin de 5 pièces pour créer un salon.
+60841 1 Général
+60848 4 Hôte
+60883 1 Nom du salon
+60889 1 Thème (ex: Fun, Tryhard, Chill)
+60900 1 Nombre max de joueurs : ${_maxPlayers.toInt()}
+60913 1 N'apparaîtra pas dans la liste publique.
+60921 1 Créer le Salon (Coût: 5 pièces)
+61008 1 Lancer un jeu pour le salon
+61157 1 J'ai lancé une partie de ${data['gameType'] ?? 'Gribouillis'} !
+61178 1 Ce salon a été fermé.
+61240 1 Veuillez commencer ou annuler la partie avant de quitter le salon.
+61253 2 Fermer le salon
+61258 1 Fermer le salon ?
+61259 1 Le salon sera définitivement supprimé pour tous les participants.
+61405 1 Lancer un Stream
+61406 1 Rejoindre le Stream (${streamers.length})
+61458 1 J'ai lancé une partie
+61504 1 ${msg['senderName']} a créé une partie de $gameName !
+61512 1 ${joinedPlayers.length} joueur(s) prêts
+61519 1 Cette partie est terminée ou annulée.
+61541 1 EN PARTIE
+61625 1 En attente du lancement...
+61646 1 Partie de ${msg['extraData']['gameName']} terminée !
+61680 1 Voir les stats
+62676 1 CIBLÉE
+62676 1 VISÉE !
+62767 1 INFECTÉ
+62931 1 Arbalète
+62937 1 Tronçonneuse
+63162 1 Veuillez saisir un défi ou une question.
+63254 1 Terminer la manche ?
+63256 1 Voulez-vous clôturer la manche immédiatement ? Le joueur avec le plus d'XP deviendra l'Admin.
+63345 1 Tour $currentRound
+63367 1 $spinsRemaining tour${spinsRemaining > 1 ? 's' : ''} restant${spinsRemaining > 1 ? 's' : ''}
+63392 1 Fin manche
+63464 1 🎰 Qui va relever le défi ?
+63474 1 Faites tourner la roulette pour désigner le prochain joueur.
+63550 1 🎯 JOUEUR SÉLECTIONNÉ
+63570 1 C'est à votre tour ! Choisissez votre destin :
+63590 1 🎲 Tirer ACTION ou VÉRITÉ
+63612 1 En attente du tirage de $currentPlayerName...
+63629 1 VÉRITÉ
+63643 1 🔥 $currentPlayerName a tiré : $typeLabel !
+63668 1 Rédigez l'${typeLabel.toLowerCase()} pour $currentPlayerName
+63687 1 Ex: Quel est ton pire moment de honte ?
+63721 1 Envoyer le défi 🚀
+63750 1 $authorName est en train d'écrire le défi...
+63807 1 🔮 VÉRITÉ
+63818 1 Défi pour $currentPlayerName
+63842 1 Réalisez votre défi en vidéo ou au micro !
+63865 1 J'ai réalisé mon défi ! ✅
+63893 1 Regardez $currentPlayerName réaliser le défi...
+63930 1 Est-ce que $currentPlayerName a relevé le défi ?
+63956 1 ${votes.length} / $votersCount votes reçus
+63973 1 Vos amis votent pour évaluer votre prestation...
+64002 1 Votre vote a bien été enregistré !
+64029 1 OUI, Validé ! 👍
+64053 1 NON, Raté ! 👎
+64110 1 DÉFI VALIDÉ !
+64110 1 DÉFI NON VALIDÉ
+64134 1 +$earnedXp XP pour $currentPlayerName
+64164 1 Tour Suivant ➡️
+64519 1 Partie terminée
+64571 1 FIN DE LA MANCHE
+64581 1 $displayWinner a gagné cette manche !
+64610 1 $readyCount / $totalPlayers prêts
+64655 1 SCORES CONSERVÉS DE LA SESSION :
+64728 1 ✓ Prêt
+64776 1 PRÊT ($readyCount/$totalPlayers)
+64805 1 Admin : Lancer maintenant avec les joueurs prêts

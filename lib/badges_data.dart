@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'badges_localization.dart';
 
 class BadgeDef {
   final String id;
@@ -18,6 +19,33 @@ class BadgeDef {
     required this.category,
     this.maxProgress = 1,
   });
+
+  String getLocalizedTitle(BuildContext context) {
+    try {
+      final lang = Localizations.localeOf(context).languageCode;
+      return BadgesLocalization.getBadgeTitle(id, lang) ?? title;
+    } catch (_) {
+      return title;
+    }
+  }
+
+  String getLocalizedDescription(BuildContext context) {
+    try {
+      final lang = Localizations.localeOf(context).languageCode;
+      return BadgesLocalization.getBadgeDescription(id, lang) ?? description;
+    } catch (_) {
+      return description;
+    }
+  }
+
+  String getLocalizedCategory(BuildContext context) {
+    try {
+      final lang = Localizations.localeOf(context).languageCode;
+      return BadgesLocalization.getCategory(category, lang);
+    } catch (_) {
+      return category;
+    }
+  }
 }
 
 class AppBadges {

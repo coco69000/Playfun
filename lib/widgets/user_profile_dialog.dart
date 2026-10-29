@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../badges_data.dart';
 import '../player_state.dart';
+import '../amis.dart';
+import '../l10n/app_localizations.dart';
+import '../matchmaking_localization.dart';
 
 void showUserProfileDialog(
   BuildContext context, {
@@ -28,14 +31,15 @@ void showUserProfileDialog(
                   .doc(targetUid)
                   .snapshots(),
           builder: (context, snapshot) {
+            final l10n = AppLocalizations.of(context);
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
             }
             if (!snapshot.data!.exists || snapshot.data!.data() == null) {
-              return const Center(
+              return Center(
                 child: Text(
-                  "Profil introuvable ou joueur inexistant.",
-                  style: TextStyle(color: Colors.white70),
+                  l10n?.profileNotFound ?? "Profil introuvable ou joueur inexistant.",
+                  style: const TextStyle(color: Colors.white70),
                 ),
               );
             }
@@ -62,8 +66,6 @@ void showUserProfileDialog(
               (acc, stat) =>
                   acc + (stat is Map ? (stat['won'] as num? ?? 0).toInt() : 0),
             );
-            final double winRate =
-                totalPlayed > 0 ? (totalWon / totalPlayed) * 100 : 0.0;
 
             final ps = Provider.of<PlayerState>(context, listen: false);
             final bool isMe =
@@ -119,7 +121,7 @@ void showUserProfileDialog(
                                     color: (isPremium
                                             ? Colors.amber
                                             : Colors.deepPurpleAccent)
-                                        .withOpacity(0.4),
+                                        .withValues(alpha: 0.4),
                                     blurRadius: 12,
                                     spreadRadius: 2,
                                   ),
@@ -162,28 +164,28 @@ void showUserProfileDialog(
                               final int extra = (level ~/ 10) * 100;
                               final int xpThreshold = 1000 + extra;
                               final double progress = (xp / xpThreshold).clamp(0.0, 1.0);
-                              String rankTitle = 'Recrue';
+                              String rankTitle = MatchmakingLocalization.tr(context, 'rankRecrue');
                               Color rankColor = Colors.brown.shade300;
                               if (level >= 100) {
-                                rankTitle = 'Légende Vivante';
+                                rankTitle = MatchmakingLocalization.tr(context, 'rankLegendeVivante');
                                 rankColor = Colors.cyanAccent;
                               } else if (level >= 75) {
-                                rankTitle = 'Grand Maître';
+                                rankTitle = MatchmakingLocalization.tr(context, 'rankGrandMaitre');
                                 rankColor = Colors.redAccent;
                               } else if (level >= 50) {
-                                rankTitle = 'Champion';
+                                rankTitle = MatchmakingLocalization.tr(context, 'rankChampion');
                                 rankColor = Colors.amberAccent;
                               } else if (level >= 30) {
-                                rankTitle = 'Stratège';
+                                rankTitle = MatchmakingLocalization.tr(context, 'rankStratege');
                                 rankColor = Colors.greenAccent;
                               } else if (level >= 20) {
-                                rankTitle = 'Aventurier';
+                                rankTitle = MatchmakingLocalization.tr(context, 'rankAventurier');
                                 rankColor = Colors.blueAccent;
                               } else if (level >= 10) {
-                                rankTitle = 'Initié';
+                                rankTitle = MatchmakingLocalization.tr(context, 'rankInitie');
                                 rankColor = Colors.purpleAccent;
                               } else if (level >= 5) {
-                                rankTitle = 'Apprenti';
+                                rankTitle = MatchmakingLocalization.tr(context, 'rankApprenti');
                                 rankColor = Colors.lightBlueAccent;
                               }
 
@@ -211,7 +213,7 @@ void showUserProfileDialog(
                                             vertical: 2,
                                           ),
                                           decoration: BoxDecoration(
-                                            color: Colors.amber.withOpacity(0.2),
+                                            color: Colors.amber.withValues(alpha: 0.2),
                                             borderRadius: BorderRadius.circular(8),
                                             border: Border.all(
                                               color: Colors.amber,
@@ -234,7 +236,7 @@ void showUserProfileDialog(
                                   Row(
                                     children: [
                                       Text(
-                                        "Niveau $level • $rankTitle",
+                                        MatchmakingLocalization.tr(context, 'levelWithRank', {'level': level.toString(), 'rank': rankTitle}),
                                         style: TextStyle(
                                           color: rankColor,
                                           fontWeight: FontWeight.bold,
@@ -295,7 +297,7 @@ void showUserProfileDialog(
                                         color: Colors.greenAccent,
                                         size: 18,
                                       ),
-                                      label: const Text("Vous êtes amis"),
+                                      label: Text(MatchmakingLocalization.tr(context, 'youAreFriends')),
                                       style: OutlinedButton.styleFrom(
                                         foregroundColor: Colors.greenAccent,
                                         side: const BorderSide(
@@ -312,17 +314,17 @@ void showUserProfileDialog(
                                           context: context,
                                           builder:
                                               (dCtx) => AlertDialog(
-                                                title: Text("Retirer $name ?"),
-                                                content: const Text(
-                                                  "Voulez-vous supprimer cet utilisateur de vos amis ?",
+                                                title: Text(MatchmakingLocalization.tr(context, 'removeFriendConfirmTitle', {'name': name})),
+                                                content: Text(
+                                                  MatchmakingLocalization.tr(context, 'removeFriendConfirmContent'),
                                                 ),
                                                 actions: [
                                                   TextButton(
                                                     onPressed:
                                                         () =>
                                                             Navigator.pop(dCtx),
-                                                    child: const Text(
-                                                      "Annuler",
+                                                    child: Text(
+                                                      l10n?.cancel ?? "Annuler",
                                                     ),
                                                   ),
                                                   ElevatedButton(
@@ -337,8 +339,8 @@ void showUserProfileDialog(
                                                       );
                                                       Navigator.pop(dCtx);
                                                     },
-                                                    child: const Text(
-                                                      "Supprimer",
+                                                    child: Text(
+                                                      MatchmakingLocalization.tr(context, 'delete'),
                                                     ),
                                                   ),
                                                 ],
@@ -351,7 +353,7 @@ void showUserProfileDialog(
                                         Icons.person_add,
                                         size: 18,
                                       ),
-                                      label: const Text("Demander en ami"),
+                                      label: Text(MatchmakingLocalization.tr(context, 'addFriend')),
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.deepPurple,
                                         shape: RoundedRectangleBorder(
@@ -378,6 +380,57 @@ void showUserProfileDialog(
                       ),
                     ),
 
+                  // BOUTON SIGNALER / BLOQUER (CONFORMITÉ GUIDELINE 1.2 UGC)
+                  if (!isMe) ...[
+                    const SizedBox(height: 8),
+                    Center(
+                      child: TextButton.icon(
+                        icon: const Icon(Icons.flag_outlined, color: Colors.orangeAccent, size: 16),
+                        label: Text(
+                          "Signaler ou bloquer $name",
+                          style: const TextStyle(color: Colors.orangeAccent, fontSize: 12),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (reportCtx) => AlertDialog(
+                              title: Text(MatchmakingLocalization.tr(context, 'reportPlayerTitle', {'name': name})),
+                              content: Text(
+                                MatchmakingLocalization.tr(context, 'reportPlayerConfirm'),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(reportCtx),
+                                  child: Text(AppLocalizations.of(context)?.cancel ?? "Annuler"),
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
+                                  onPressed: () async {
+                                    Navigator.pop(reportCtx);
+                                    Navigator.pop(ctx);
+                                    await FirebaseService().reportAndBlockPlayer(
+                                      reporterId: ps.userId ?? '',
+                                      reportedPlayerId: targetUid,
+                                      reportedPlayerName: name,
+                                      gameCode: 'profile_report',
+                                      reason: 'Signalé depuis le profil utilisateur',
+                                    );
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text(MatchmakingLocalization.tr(context, 'userReportedBlocked', {'name': name}))),
+                                      );
+                                    }
+                                  },
+                                  child: Text(MatchmakingLocalization.tr(context, 'reportAndBlock')),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+
                   const SizedBox(height: 12),
 
                   // Barre d'onglets (Statistiques & Badges)
@@ -388,11 +441,11 @@ void showUserProfileDialog(
                     tabs: [
                       Tab(
                         icon: const Icon(Icons.bar_chart_rounded),
-                        text: "Stats ($totalPlayed parties)",
+                        text: "${l10n?.tabStats ?? 'Stats'} ($totalPlayed)",
                       ),
                       Tab(
                         icon: const Icon(Icons.military_tech_rounded),
-                        text: "Badges (${unlockedBadges.length})",
+                        text: "${l10n?.tabBadges ?? 'Badges'} (${unlockedBadges.length})",
                       ),
                     ],
                   ),
@@ -410,7 +463,7 @@ void showUserProfileDialog(
                               children: [
                                 Expanded(
                                   child: _buildProfileStatCard(
-                                    "Parties",
+                                    l10n?.gamesPlayed ?? "Parties",
                                     "$totalPlayed",
                                     Icons.sports_esports,
                                     Colors.blueAccent,
@@ -419,7 +472,7 @@ void showUserProfileDialog(
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: _buildProfileStatCard(
-                                    "Victoires",
+                                    l10n?.gamesWon ?? "Victoires",
                                     "$totalWon",
                                     Icons.emoji_events,
                                     Colors.amberAccent,
@@ -428,7 +481,7 @@ void showUserProfileDialog(
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: _buildProfileStatCard(
-                                    "Total XP",
+                                    "XP",
                                     "$xp XP",
                                     Icons.military_tech_rounded,
                                     const Color(0xFF67E8F9),
@@ -473,7 +526,7 @@ void showUserProfileDialog(
                                 final double r = p > 0 ? (w / p) * 100 : 0.0;
 
                                 return Card(
-                                  color: Colors.white.withOpacity(0.04),
+                                  color: Colors.white.withValues(alpha: 0.04),
                                   margin: const EdgeInsets.symmetric(
                                     vertical: 4,
                                   ),
@@ -488,7 +541,7 @@ void showUserProfileDialog(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    subtitle: Text("$p jouées • $w victoires"),
+                                    subtitle: Text(MatchmakingLocalization.tr(context, 'playedAndWonSummary', {'played': '$p', 'won': '$w'})),
                                     trailing: Text(
                                       "${r.toStringAsFixed(0)} %",
                                       style: TextStyle(
@@ -542,11 +595,11 @@ void showUserProfileDialog(
                                                       : Colors.white38,
                                             ),
                                             const SizedBox(width: 10),
-                                            Expanded(child: Text(badge.title)),
+                                            Expanded(child: Text(badge.getLocalizedTitle(context))),
                                           ],
                                         ),
                                         content: Text(
-                                          "${badge.description}\n\nStatut : ${isUnlocked ? '✓ Débloqué par ce joueur' : '🔒 Verrouillé'}",
+                                          "${badge.getLocalizedDescription(context)}\n\n${MatchmakingLocalization.tr(context, isUnlocked ? 'badgeUnlocked' : 'badgeLocked')}",
                                           style: const TextStyle(
                                             color: Colors.white70,
                                           ),
@@ -555,7 +608,7 @@ void showUserProfileDialog(
                                           TextButton(
                                             onPressed:
                                                 () => Navigator.pop(bCtx),
-                                            child: const Text("Fermer"),
+                                            child: Text(MatchmakingLocalization.tr(context, 'close')),
                                           ),
                                         ],
                                       ),
@@ -565,13 +618,13 @@ void showUserProfileDialog(
                                 decoration: BoxDecoration(
                                   color:
                                       isUnlocked
-                                          ? badge.color.withOpacity(0.12)
+                                          ? badge.color.withValues(alpha: 0.12)
                                           : Colors.black26,
                                   borderRadius: BorderRadius.circular(14),
                                   border: Border.all(
                                     color:
                                         isUnlocked
-                                            ? badge.color.withOpacity(0.6)
+                                            ? badge.color.withValues(alpha: 0.6)
                                             : Colors.white10,
                                     width: isUnlocked ? 2 : 1,
                                   ),
@@ -583,8 +636,8 @@ void showUserProfileDialog(
                                       radius: 24,
                                       backgroundColor:
                                           isUnlocked
-                                              ? badge.color.withOpacity(0.2)
-                                              : Colors.white.withOpacity(0.05),
+                                              ? badge.color.withValues(alpha: 0.2)
+                                              : Colors.white.withValues(alpha: 0.05),
                                       child: Icon(
                                         badge.icon,
                                         size: 24,
@@ -600,7 +653,7 @@ void showUserProfileDialog(
                                         horizontal: 4.0,
                                       ),
                                       child: Text(
-                                        badge.title,
+                                        badge.getLocalizedTitle(context),
                                         style: TextStyle(
                                           fontSize: 10,
                                           fontWeight: FontWeight.bold,
@@ -642,9 +695,9 @@ Widget _buildProfileStatCard(
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
     decoration: BoxDecoration(
-      color: Colors.white.withOpacity(0.05),
+      color: Colors.white.withValues(alpha: 0.05),
       borderRadius: BorderRadius.circular(14),
-      border: Border.all(color: color.withOpacity(0.3)),
+      border: Border.all(color: color.withValues(alpha: 0.3)),
     ),
     child: Column(
       children: [
