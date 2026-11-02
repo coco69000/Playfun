@@ -186,6 +186,17 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       subtitle: MatchmakingLocalization.tr(context, 'monthlyBillingNoCommitment', {'price': '4,99 €'}),
                       price: "4,99 €",
                     ),
+                    const SizedBox(height: 8),
+                    Center(
+                      child: TextButton.icon(
+                        icon: const Icon(Icons.refresh, color: Colors.amberAccent, size: 18),
+                        label: const Text(
+                          "Recharger les offres du Store",
+                          style: TextStyle(color: Colors.amberAccent, fontSize: 13),
+                        ),
+                        onPressed: _loadOfferings,
+                      ),
+                    ),
                   ],
 
                   const SizedBox(height: 20),
@@ -205,21 +216,17 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         ? null
                         : () async {
                             final messenger = ScaffoldMessenger.of(context);
+                            final successText = MatchmakingLocalization.tr(context, 'congratsVip');
+                            final failText = MatchmakingLocalization.tr(context, 'paymentFailed');
                             setState(() => _isPurchasing = true);
                             final success = await playerState.purchasePackage(_selectedPackage!);
-                            setState(() => _isPurchasing = false);
-                            if (mounted) {
-                              messenger.showSnackBar(
-                                SnackBar(
-                                  backgroundColor: success ? Colors.green[800] : Colors.red[800],
-                                  content: Text(
-                                    success
-                                        ? MatchmakingLocalization.tr(context, 'congratsVip')
-                                        : MatchmakingLocalization.tr(context, 'paymentFailed'),
-                                  ),
-                                ),
-                              );
-                            }
+                            if (mounted) setState(() => _isPurchasing = false);
+                            messenger.showSnackBar(
+                              SnackBar(
+                                backgroundColor: success ? Colors.green[800] : Colors.red[800],
+                                content: Text(success ? successText : failText),
+                              ),
+                            );
                           },
                     child: _isPurchasing
                         ? const SizedBox(

@@ -1,3 +1,4 @@
+import '../game_content_localization.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
@@ -93,12 +94,12 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
         builder: (ctx) => AlertDialog(
           backgroundColor: AppColors.card,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          title: const Row(
+          title: Row(
             children: [
-              Icon(Icons.system_update_rounded, color: Colors.amberAccent),
-              SizedBox(width: 10),
+              const Icon(Icons.system_update_rounded, color: Colors.amberAccent),
+              const SizedBox(width: 10),
               Text(
-                "Mise à jour disponible",
+                GameContentLocalization.ui(context, "Mise à jour disponible"),
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
@@ -110,7 +111,7 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
               Text(
                 message.isNotEmpty
                     ? message
-                    : "Une nouvelle version ($newVersion) de Playfun est disponible avec des nouveautés et corrections !",
+                    : GameContentLocalization.format(context, "Une nouvelle version ({0}) de Playfun est disponible avec des nouveautés et corrections !", [newVersion]),
                 style: const TextStyle(fontSize: 14, height: 1.4, color: Colors.white70),
               ),
             ],
@@ -118,8 +119,8 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text(
-                "Plus tard",
+              child: Text(
+                GameContentLocalization.ui(context, "Plus tard"),
                 style: TextStyle(color: Colors.white54),
               ),
             ),
@@ -136,7 +137,7 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 }
               },
-              child: const Text("Mettre à jour", style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(GameContentLocalization.ui(context, "Mettre à jour"), style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),

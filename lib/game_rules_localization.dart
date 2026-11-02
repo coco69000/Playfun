@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 /// Centralized localization service for all game rules and Loup-Garou roles.
-/// Supports French (fr), English (en), Spanish (es), and fallbacks for others.
+/// Fully localized in 22 languages for UI and core languages (FR, EN, ES, DE, IT, PT) with English fallback.
 class GameRulesLocalization {
+
   static const Map<String, Map<String, String>> _uiStrings = {
     'fr': {
       'rulesTitle': 'Règles : {game}',
@@ -34,9 +35,89 @@ class GameRulesLocalization {
       'noRulesFound': 'Nenhuma regra encontrada para este jogo.',
       'understoodButton': 'Entendi!',
     },
+    'nl': {
+      'rulesTitle': 'Regels: {game}',
+      'noRulesFound': 'Geen regels gevonden voor dit spel.',
+      'understoodButton': 'Begrepen!',
+    },
+    'pl': {
+      'rulesTitle': 'Zasady: {game}',
+      'noRulesFound': 'Nie znaleziono zasad dla tej gry.',
+      'understoodButton': 'Rozumiem!',
+    },
+    'ru': {
+      'rulesTitle': 'Правила: {game}',
+      'noRulesFound': 'Правила для этой игры не найдены.',
+      'understoodButton': 'Понятно!',
+    },
+    'uk': {
+      'rulesTitle': 'Правила: {game}',
+      'noRulesFound': 'Правила для цієї гри не знайдені.',
+      'understoodButton': 'Зрозуміло!',
+    },
+    'ro': {
+      'rulesTitle': 'Reguli: {game}',
+      'noRulesFound': 'Nu s-au găsit reguli pentru acest joc.',
+      'understoodButton': 'Am înțeles!',
+    },
+    'el': {
+      'rulesTitle': 'Κανόνες: {game}',
+      'noRulesFound': 'Δεν βρέθηκαν κανόνες για αυτό το παιχνίδι.',
+      'understoodButton': 'Κατάλαβα!',
+    },
+    'cs': {
+      'rulesTitle': 'Pravidla: {game}',
+      'noRulesFound': 'Pro tuto hru nebyla nalezena žádná pravidla.',
+      'understoodButton': 'Rozumím!',
+    },
+    'sv': {
+      'rulesTitle': 'Regler: {game}',
+      'noRulesFound': 'Inga regler hittades för detta spel.',
+      'understoodButton': 'Förstått!',
+    },
+    'da': {
+      'rulesTitle': 'Regler: {game}',
+      'noRulesFound': 'Ingen regler fundet for dette spil.',
+      'understoodButton': 'Forstået!',
+    },
+    'fi': {
+      'rulesTitle': 'Säännöt: {game}',
+      'noRulesFound': 'Tälle pelille ei löytynyt sääntöjä.',
+      'understoodButton': 'Selvä!',
+    },
+    'no': {
+      'rulesTitle': 'Regler: {game}',
+      'noRulesFound': 'Ingen regler funnet for dette spillet.',
+      'understoodButton': 'Forstått!',
+    },
+    'hu': {
+      'rulesTitle': 'Szabályok: {game}',
+      'noRulesFound': 'Ehhez a játékhoz nem találhatók szabályok.',
+      'understoodButton': 'Értem!',
+    },
+    'sk': {
+      'rulesTitle': 'Pravidlá: {game}',
+      'noRulesFound': 'Pre túto hru sa nenašli žiadne pravidlá.',
+      'understoodButton': 'Rozumiem!',
+    },
+    'hr': {
+      'rulesTitle': 'Pravila: {game}',
+      'noRulesFound': 'Nisu pronađena pravila za ovu igru.',
+      'understoodButton': 'Razumijem!',
+    },
+    'bg': {
+      'rulesTitle': 'Правила: {game}',
+      'noRulesFound': 'Няма намерени правила за тази игра.',
+      'understoodButton': 'Разбрах!',
+    },
+    'tr': {
+      'rulesTitle': 'Kurallar: {game}',
+      'noRulesFound': 'Bu oyun için kural bulunamadı.',
+      'understoodButton': 'Anlaşıldı!',
+    },
   };
 
-  static const Map<String, Map<String, String>> _gameTitles = {
+static const Map<String, Map<String, String>> _gameTitles = {
     'en': {
       'Action ou Vérité': 'Truth or Dare',
       'Bataille Navale': 'Battleship',
@@ -121,6 +202,132 @@ class GameRulesLocalization {
       'Mercenaire': 'Mercenario',
       'Rat Malade': 'Rata Infectada',
     },
+    'de': {
+      'Action ou Vérité': 'Wahrheit oder Pflicht',
+      'Bataille Navale': 'Schiffe Versenken',
+      'Cadavre Exquis': 'Cadavre Exquis',
+      'Devine Tête': 'Wer bin ich?',
+      'Infiltré & Mr. White': 'Undercover & Mr. White',
+      'Jeu de Dames': 'Dame',
+      'Jeu de la Pièce': 'Münzwurf',
+      'La Patate Chaude': 'Heiße Kartoffel',
+      'Le Dilemme': 'Das Dilemma',
+      'Le Jeu des Catégories': 'Kategorie-Duell',
+      'Le Juge': 'Der Richter',
+      'Le Menteur': 'Der Lügner',
+      'Le Roi des Mèmes': 'Meme-König',
+      'Loup-Garou': 'Werwölfe',
+      'On se passe un objet rapidement': 'Tickende Bombe',
+      'Petit Bac': 'Stadt, Land, Fluss',
+      'Petits Chevaux': 'Mensch ärgere Dich nicht',
+      'Président': 'Präsident',
+      'Qui Pourrait le Plus ?': 'Wer würde am ehesten?',
+      'Synonyme ou Banni': 'Synonym oder Verbannt',
+      'Zéro Pointé': 'Skyjo (Null Punkte)',
+      'Simple Villageois': 'Einfacher Dorfbewohner',
+      'Voyante': 'Seherin',
+      'Sorcière': 'Hexe',
+      'Petite Fille': 'Kleines Mädchen',
+      'Chasseur': 'Jäger',
+      'Garde': 'Leibwächter',
+      'Cupidon': 'Amor',
+      'Mentaliste': 'Mentalist',
+      'Nécromancien': 'Nekromant',
+      'Fossoyeur': 'Totengräber',
+      'Dictateur': 'Diktator',
+      'Chaperon Rouge': 'Rotkäppchen',
+      'Pyromancien': 'Pyromant',
+      'Héritier': 'Erbe',
+      'Loup Noir': 'Schwarzer Wolf',
+      'Loup Bavard': 'Geschwätziger Wolf',
+      'Loup Blanc': 'Weißer Wolf',
+      'Mercenaire': 'Söldner',
+      'Rat Malade': 'Kranke Ratte',
+    },
+    'it': {
+      'Action ou Vérité': 'Obbligo o Verità',
+      'Bataille Navale': 'Battaglia Navale',
+      'Cadavre Exquis': 'Cadavere Squisito',
+      'Devine Tête': 'Chi sono?',
+      'Infiltré & Mr. White': 'Undercover & Mr. White',
+      'Jeu de Dames': 'Dama',
+      'Jeu de la Pièce': 'Lancio della Moneta',
+      'La Patate Chaude': 'Patata Bollente',
+      'Le Dilemme': 'Il Dilemma',
+      'Le Jeu des Catégories': 'Gioco delle Categorie',
+      'Le Juge': 'Il Giudice',
+      'Le Menteur': 'Il Bugiardo',
+      'Le Roi des Mèmes': 'Re dei Meme',
+      'Loup-Garou': 'Lupi Mannari',
+      'On se passe un objet rapidement': 'Passa la Bomba',
+      'Petit Bac': 'Nomi, Cose, Città',
+      'Petits Chevaux': 'Non t\'arrabbiare',
+      'Président': 'Presidente',
+      'Qui Pourrait le Plus ?': 'Chi è più probabile che?',
+      'Synonyme ou Banni': 'Sinonimo o Bandito',
+      'Zéro Pointé': 'Skyjo (Punti Zero)',
+      'Simple Villageois': 'Semplice Villico',
+      'Voyante': 'Veggente',
+      'Sorcière': 'Strega',
+      'Petite Fille': 'Bambina',
+      'Chasseur': 'Cacciatore',
+      'Garde': 'Guardia del Corpo',
+      'Cupidon': 'Cupido',
+      'Mentaliste': 'Mentalista',
+      'Nécromancien': 'Negromante',
+      'Fossoyeur': 'Becchino',
+      'Dictateur': 'Dittatore',
+      'Chaperon Rouge': 'Cappuccetto Rosso',
+      'Pyromancien': 'Piromante',
+      'Héritier': 'Erede',
+      'Loup Noir': 'Lupo Nero',
+      'Loup Bavard': 'Lupo Chiacchierone',
+      'Loup Blanc': 'Lupo Bianco',
+      'Mercenaire': 'Mercenario',
+      'Rat Malade': 'Ratto Infetto',
+    },
+    'pt': {
+      'Action ou Vérité': 'Verdade ou Desafio',
+      'Bataille Navale': 'Batalha Naval',
+      'Cadavre Exquis': 'Cadáver Esquisito',
+      'Devine Tête': 'Quem Sou Eu?',
+      'Infiltré & Mr. White': 'Undercover & Mr. White',
+      'Jeu de Dames': 'Damas',
+      'Jeu de la Pièce': 'Cara ou Coroa',
+      'La Patate Chaude': 'Batata Quente',
+      'Le Dilemme': 'O Dilema',
+      'Le Jeu des Catégories': 'Jogo das Categorias',
+      'Le Juge': 'O Juiz',
+      'Le Menteur': 'O Mentiroso',
+      'Le Roi des Mèmes': 'Rei dos Memes',
+      'Loup-Garou': 'Lobisomem',
+      'On se passe un objet rapidement': 'Passa a Bomba',
+      'Petit Bac': 'Stop / Adedonha',
+      'Petits Chevaux': 'Ludo',
+      'Président': 'Presidente',
+      'Qui Pourrait le Plus ?': 'Quem Tem Mais Chance De?',
+      'Synonyme ou Banni': 'Sinônimo ou Banido',
+      'Zéro Pointé': 'Skyjo (Zero Pontos)',
+      'Simple Villageois': 'Aldeão',
+      'Voyante': 'Vidente',
+      'Sorcière': 'Bruxa',
+      'Petite Fille': 'Menina',
+      'Chasseur': 'Caçador',
+      'Garde': 'Guarda-costas',
+      'Cupidon': 'Cupido',
+      'Mentaliste': 'Mentalista',
+      'Nécromancien': 'Necromante',
+      'Fossoyeur': 'Coveiro',
+      'Dictateur': 'Ditador',
+      'Chaperon Rouge': 'Chapeuzinho Vermelho',
+      'Pyromancien': 'Piromante',
+      'Héritier': 'Herdeiro',
+      'Loup Noir': 'Lobo Negro',
+      'Loup Bavard': 'Lobo Falador',
+      'Loup Blanc': 'Lobo Branco',
+      'Mercenaire': 'Mercenário',
+      'Rat Malade': 'Rato Doente',
+    },
   };
 
   static String _getLocaleCode(BuildContext? context) {
@@ -159,19 +366,30 @@ class GameRulesLocalization {
     String key = gameKey;
     if (key == 'Undercover Local') key = 'Infiltré & Mr. White';
 
-    if (lang == 'en') {
-      return _rulesEn[key] ?? _rulesFr[key] ?? 'No rules found for this game.';
-    } else if (lang == 'es') {
-      return _rulesEs[key] ?? _rulesEn[key] ?? _rulesFr[key] ?? 'No se encontraron reglas para este juego.';
+    final normalizedLang = lang.toLowerCase().trim().split(RegExp(r'[-_]')).first;
+
+    if (normalizedLang == 'fr') {
+      return _rulesFr[key] ?? _rulesEn[key] ?? tr(null, 'noRulesFound');
+    } else if (normalizedLang == 'es') {
+      return _rulesEs[key] ?? _rulesEn[key] ?? _rulesFr[key] ?? tr(null, 'noRulesFound');
+    } else if (normalizedLang == 'de') {
+      return _rulesDe[key] ?? _rulesEn[key] ?? _rulesFr[key] ?? tr(null, 'noRulesFound');
+    } else if (normalizedLang == 'it') {
+      return _rulesIt[key] ?? _rulesEn[key] ?? _rulesFr[key] ?? tr(null, 'noRulesFound');
+    } else if (normalizedLang == 'pt') {
+      return _rulesPt[key] ?? _rulesEn[key] ?? _rulesFr[key] ?? tr(null, 'noRulesFound');
+    } else if (normalizedLang == 'en') {
+      return _rulesEn[key] ?? _rulesFr[key] ?? tr(null, 'noRulesFound');
     } else {
-      return _rulesFr[key] ?? _rulesEn[key] ?? 'Aucune règle trouvée pour ce jeu.';
+      // Pour les 16 autres langues (nl, pl, ru, uk, ro, el, cs, sv, da, fi, no, hu, sk, hr, bg, tr)
+      return _rulesEn[key] ?? _rulesFr[key] ?? _uiStrings[normalizedLang]?['noRulesFound'] ?? _uiStrings['en']!['noRulesFound']!;
     }
   }
 
   static Map<String, String> getAllFrenchRules() => _rulesFr;
 
   // =========================================================================
-  // FRENCH RULES (Nettoyé, sans encodage corrompu)
+  // FRENCH RULES
   // =========================================================================
   static const Map<String, String> _rulesFr = {
     'Blanc Manger Coco': """
@@ -489,6 +707,14 @@ Jeu de cartes en équipes de 2. Marquez le maximum de points en remportant des p
   // =========================================================================
   // ENGLISH RULES
   // =========================================================================
+
+  // =========================================================================
+  // ENGLISH RULES
+  // =========================================================================
+
+  // =========================================================================
+  // ENGLISH RULES
+  // =========================================================================
   static const Map<String, String> _rulesEn = {
     'Blanc Manger Coco': """
 **Objective**
@@ -800,6 +1026,14 @@ Traditional 2v2 card trick game. Score points by taking tricks with or without t
   // =========================================================================
   // SPANISH RULES
   // =========================================================================
+
+  // =========================================================================
+  // SPANISH RULES
+  // =========================================================================
+
+  // =========================================================================
+  // SPANISH RULES
+  // =========================================================================
   static const Map<String, String> _rulesEs = {
     'Blanc Manger Coco': """
 **Objetivo**
@@ -935,4 +1169,292 @@ Consigue la mayor puntuación completando 13 categorías con 5 dados.
     'Mercenaire': "Si su objetivo es ejecutado el primer día, gana la partida al instante.",
     'Rat Malade': "Contagia a dos personas cada noche. Si infecta a todos los vivos, ¡gana solo!",
   };
+
+  // =========================================================================
+  // GERMAN RULES
+  // =========================================================================
+  static const Map<String, String> _rulesDe = {
+    'Blanc Manger Coco': """**Ziel des Spiels**
+Der Spieler mit den meisten Punkten am Ende gewinnt.
+
+**Ablauf**
+1. Jeder Spieler erhält 7 Antwortkarten auf die Hand.
+2. Ein Spieler ist der Richter (wechselt jede Runde).
+3. Der Richter liest die Fragekarte laut vor.
+4. Alle anderen wählen verdeckt 1 Antwortkarte aus ihrer Hand.
+5. Der Richter liest alle Antworten vor und kürt die lustigste.
+6. Der Rundengewinner erhält 1 Punkt und alle ziehen wieder auf 7 Karten auf.""",
+    'Zombie!': """**Ziel**
+Bilde passende Kartenpaare und vermeide es, am Ende die Zombie-Karte zu halten.
+
+**Ablauf**
+1. 33 Karten (16 Paare + 1 Zombie) werden verteilt.
+2. Reihum zieht jeder eine Karte vom Nachbarn.
+3. Paare werden sofort abgelegt. Wer zuerst keine Karten mehr hat, gewinnt!""",
+    'Yams': """**Ziel**
+Erziele die höchste Punktzahl, indem du 13 Kategorien mit 5 Würfeln ausfüllst.
+
+**Ablauf**
+1. Bis zu 3 Würfe pro Zug.
+2. Beliebige Würfel beiseitelegen und den Rest neu würfeln.
+3. Nach jedem Zug eine freie Kategorie auf dem Wertungsbogen eintragen.""",
+    'La Patate Chaude': """**Ziel des Spiels**
+Gib die heiße Kartoffel weiter, bevor die geheime Zeit abläuft!
+
+**Ablauf**
+1. Nenne ein gültiges Wort zur aktuellen Kategorie.
+2. Drücke auf 'Kartoffel weitergeben!'.
+3. Bei wem die Kartoffel explodiert, der erhält eine Strafe.""",
+    'Gribouillis': """**Ziel**
+Zeichne den geheimen Begriff so schnell und verständlich wie möglich, damit deine Mitspieler ihn erraten, bevor der Timer abläuft.""",
+    'Zéro Pointé': """**Ziel**
+Erziele die geringste Punktzahl über mehrere Runden. Tausche hohe Karten gegen niedrige aus und decke Spalten auf, um sie zu eliminieren.""",
+    'Poker': "Texas Hold'em: Bilde mit deinen 2 Handkarten und den 5 Gemeinschaftskarten die beste 5-Karten-Kombination und gewinne die Chips deiner Gegner.",
+    'Le Juge': "Ein Spieler ist der Richter. Alle anderen antworten anonym auf eine Frage. Der Richter vergibt den Punkt an die überzeugendste oder witzigste Antwort.",
+    'Qui Pourrait le Plus ?': "Wer von der Gruppe würde am ehesten...? Alle stimmen gleichzeitig ab. Wer die meisten Stimmen erhält, gewinnt die Runde oder trinkt!",
+    'Le Menteur': "Finde den Lügner! Unter lauter wahren Antworten verbirgt sich eine erfundene. Enttarne die Täuschung, um Punkte zu sammeln.",
+    'Infiltré & Mr. White': "Zivilisten haben dasselbe geheime Wort, der Undercover ein leicht abweichendes, und Mr. White hat gar kein Wort. Diskutiert, stimmt ab und entlarvt die Spione!",
+    'Synonyme ou Banni': "Umschreibe das Wort mit einem Synonym, ohne die verbotenen Begriffe zu benutzen. Dein Team muss es vor Ablauf der Zeit erraten.",
+    'Le Jeu des Catégories': "Nennt reihum ein passendes Wort zur Kategorie. Wer zögert, wiederholt oder nichts mehr weiß, scheidet aus!",
+    'Action ou Vérité': "Wähle Wahrheit oder Pflicht! Beantworte pikante Fragen ehrlich oder meistere lustige und verrückte Herausforderungen.",
+    'Jeu de la Pièce': "Setze auf Kopf oder Zahl. Liegst du richtig, verteilst du Schlucke/Strafen. Liegst du falsch, musst du selbst büßen!",
+    'Le Dilemme': "Wähle zwischen zwei unmöglichen oder urkomischen Optionen (A oder B). Vergleiche deine Wahl mit der weltweiten Statistik und deinen Freunden!",
+    'Codenames': "Zwei Teams wetteifern darum, alle ihre Wörter auf dem Spielfeld aufzudecken, indem der Geheimdienstchef Hinweise aus einem einzigen Wort und einer Zahl gibt.",
+    'Time\'s Up': "Errate Begriffe in 3 Runden: 1. Runde: Freie Beschreibung. 2. Runde: Nur 1 einzelnes Wort. 3. Runde: Nur Pantomime und Geräusche!",
+    'On se passe un objet rapidement': "Reiche das Smartphone blitzschnell weiter. Wenn der geheime Wecker klingelt, verliert derjenige, der das Gerät in den Händen hält!",
+    'Devine Tête': "Halte das Smartphone an deine Stirn. Deine Mitspieler umschreiben oder pantomimen das Wort, bis du es errätst!",
+    'Petit Bac': "Stadt, Land, Fluss: Finde zu einem zufälligen Buchstaben so schnell wie möglich für jede Kategorie ein passendes Wort.",
+    'Président': "Lege immer höhere Karten oder Kombinationen ab. Wer zuerst alle Handkarten loswird, wird Präsident; der Letzte wird Bettler!",
+    'Skull': "Ein nervenaufreibendes Bluff-Spiel mit 3 Rosen und 1 Totenkopf. Biete darauf, wie viele Karten du aufdecken kannst, ohne einen Schädel zu erwischen!",
+    'Pictionary': "Zeichne den gesuchten Begriff, damit dein Team ihn vor Ablauf der Sanduhr errät. Buchstaben, Zahlen und Gesten sind verboten!",
+    'Just One': "Kooperatives Partyspiel: Jeder notiert verdeckt einen Ein-Wort-Hinweis. Doppelte Hinweise werden eliminiert, bevor der Ratende sie sieht!",
+    'Le Roi des Mèmes': "Wähle das witzigste Meme-Bild zu der vorgegebenen Situation. Der Meme-König kürt den Gewinner!",
+    'Loup-Garou': "Dorfbewohner gegen Werwölfe. Nachts fressen die Wölfe im Verborgenen, tagsüber debattiert das Dorf und stimmt über die Hinrichtung ab.",
+    'Dobble': "Finde blitzschnell das einzige übereinstimmende Symbol zwischen deiner Karte und der offenen Karte in der Mitte!",
+    'Uno': "Werde deine Karten durch passende Farben oder Zahlen los. Nutze Aktionskarten (+2, Richtungswechsel, Aussetzen) und vergiss nicht 'Uno!' zu rufen!",
+    'Photo Roulette': "Ein zufälliges Foto aus der Galerie eines Spielers erscheint für 5 Sekunden. Errate blitzschnell, wem es gehört!",
+    'Bataille Navale': "Versenke die gegnerische Flotte auf dem 10x10-Gitter, indem du Koordinaten abschießt: Treffer, Wasser oder Versenkt!",
+    'Mille Bornes': "Erreiche als Erster 1000 Kilometer, indem du Distanzkarten spielst und Pannen deines Gegners mit Ass-Karten parierst.",
+    'Rami': "Bilde Sätze (gleiche Werte) und Sequenzen (gleiche Farbe), um als Erster alle Karten auf deiner Hand auszulegen.",
+    'Taboo': "Lass dein Team den Begriff erraten, ohne die 5 verbotenen Tabu-Wörter zu erwähnen!",
+    'Petits Chevaux': "Würfle eine 6, um aus dem Stall zu kommen, wirf gegnerische Pferde und bringe alle vier Figuren sicher ins Ziel.",
+    'Cadavre Exquis': "Gemeinschaftliches Schreiben: Jeder verfasst einen Satzteil, ohne zu wissen, was die Vorgänger geschrieben haben. Das Ergebnis ist herrlich surreal!",
+    'Blokus': "Platziere deine bunten Teile so auf dem Brett, dass sie eigene Steine nur an den Ecken berühren, niemals Kante an Kante!",
+    'Dominoes': "Lege passende Steine mit gleichen Augenzahlen an die Kettenenden an. Wer zuerst keine Steine mehr hat, gewinnt die Runde.",
+    'Big Two': "Das beliebte asiatische Kartenspiel, bei dem die 2 die höchste Karte ist. Spiele höhere Kombinationen, um deine Hand zu leeren.",
+    'Jeu de Dames': "Ziehe diagonal auf den dunklen Feldern vorwärts. Schlagen ist Pflicht! Erreiche die gegnerische Grundlinie, um eine Dame zu krönen.",
+    'Belote': "Klassisches französisches Stichspiel für 2 Teams à 2 Spieler, bei dem die Trumpffarbe den Spielverlauf dominiert.",
+    'Simple Villageois': "Hat keine magischen Kräfte, aber seine Stimme und Wachsamkeit sind entscheidend, um Werwölfe zu enttarnen.",
+    'Voyante': "Darf jede Nacht heimlich die wahre Identität eines Spielers ihrer Wahl ansehen.",
+    'Sorcière': "Besitzt zwei Tränke: einen Heiltrank, um ein Opfer zu retten, und einen Gifttrank, um einen Spieler zu eliminieren.",
+    'Petite Fille': "Kann nachts heimlich blinzeln, um die Werwölfe zu beobachten – auf eigene Gefahr!",
+    'Chasseur': "Wenn er stirbt, feuert er einen letzten Schuss ab und reißt einen Spieler seiner Wahl mit in den Tod.",
+    'Garde': "Schützt jede Nacht einen Mitspieler vor den nächtlichen Angriffen der Werwölfe.",
+    'Cupidon': "Verliebt in der ersten Nacht zwei Spieler unsterblich ineinander. Stirbt einer, stirbt auch der andere aus Kummer!",
+    'Mentaliste': "Erfährt 30 Sekunden vor Ende des Dorf-Votings das vorläufige Ergebnis.",
+    'Nécromancien': "Kann nachts mit den Geistern der Verstorbenen kommunizieren.",
+    'Fossoyeur': "Nennt beim Ableben zwei Verdächtige: einen Unschuldigen und einen Feind.",
+    'Dictateur': "Kann einmalig die Macht an sich reißen und die Hinrichtung allein bestimmen.",
+    'Chaperon Rouge': "Solange der Jäger lebt, ist Rotkäppchen immun gegen Werwolf-Angriffe.",
+    'Pyromancien': "Platziert nachts explosive Fässer und kann sie am nächsten Morgen zünden.",
+    'Héritier': "Erbt die besonderen Fähigkeiten seines Meisters, wenn dieser stirbt.",
+    'Loup Noir': "Kann das nächtliche Opfer infizieren und in einen neuen Werwolf verwandeln.",
+    'Loup Bavard': "Muss tagsüber ein geheimes Pflichtwort im Chat sagen, sonst stirbt er bei Sonnenuntergang.",
+    'Loup Blanc': "Ein Einzelgänger, der jede zweite Nacht einen anderen Werwolf fressen kann. Gewinnt allein!",
+    'Mercenaire': "Gewinnt sofort das Spiel, wenn sein Ziel am ersten Tag vom Dorf hingerichtet wird.",
+    'Rat Malade': "Infiziert jede Nacht zwei Spieler. Wenn alle Überlebenden krank sind, gewinnt er die Partie allein!",
+  };
+
+
+  // =========================================================================
+  // ITALIAN RULES
+  // =========================================================================
+  static const Map<String, String> _rulesIt = {
+    'Blanc Manger Coco': """**Scopo del gioco**
+Il giocatore con più punti alla fine della partita vince.
+
+**Svolgimento**
+1. Ogni giocatore riceve 7 carte risposta.
+2. Un giocatore fa da Giudice (il ruolo gira a ogni turno).
+3. Il Giudice legge la carta domanda ad alta voce.
+4. Gli altri scelgono segretamente 1 carta risposta dalla propria mano.
+5. Il Giudice legge le risposte e premia la più divertente.
+6. Il vincitore fa 1 punto e tutti pescano fino a 7 carte.""",
+    'Zombie!': """**Obiettivo**
+Crea coppie uguali di carte ed evita di rimanere con la carta Zombie alla fine della partita.
+
+**Svolgimento**
+1. 33 carte distribuite (16 coppie + 1 Zombie).
+2. A turno, ciascuno pesca una carta dal vicino.
+3. Le coppie formate si scartano subito. Chi finisce le carte per primo vince!""",
+    'Yams': """**Scopo**
+Ottieni il punteggio più alto completando le 13 combinazioni con 5 dadi.
+
+**Svolgimento**
+1. Fino a 3 lanci per turno.
+2. Tieni i dadi desiderati e rilancia gli altri.
+3. Segna il risultato in una casella libera del tabellone.""",
+    'La Patate Chaude': """**Scopo del gioco**
+Passa la patata bollente prima che scada il timer segreto!
+
+**Svolgimento**
+1. Pronuncia una parola valida per la categoria in corso.
+2. Premi 'Passa la patata!'.
+3. Chi ha la patata in mano quando esplode subisce una penitenza.""",
+    'Gribouillis': """**Obiettivo**
+Disegna la parola segreta il più velocemente possibile per farla indovinare ai tuoi amici prima dello scadere del tempo!""",
+    'Zéro Pointé': """**Obiettivo**
+Ottieni il minor numero di punti totali. Scambia le carte alte con quelle basse e forma colonne uguali per eliminarle.""",
+    'Poker': "Texas Hold'em: ottieni fiches creando la combinazione migliore di 5 carte con le tue 2 carte segrete e le 5 carte comuni.",
+    'Le Juge': "Un giocatore è il Giudice. Gli altri rispondono anonimamente a una domanda. Il Giudice premia la risposta più arguta o divertente.",
+    'Qui Pourrait le Plus ?': "Chi di noi farebbe più probabilmente...? Tutti votano contemporaneamente. Chi riceve più voti subisce una penitenza o beve!",
+    'Le Menteur': "Scopri chi sta mentendo! Tra risposte veritiere si nasconde un impostore. Smaschera l'inganno per guadagnare punti.",
+    'Infiltré & Mr. White': "I Civili condividono la stessa parola segreta, l'Infiltrato ne riceve una simile, e Mr. White non sa nulla. Discutete, votate e smascherate le spie!",
+    'Synonyme ou Banni': "Fai indovinare la parola usando sinonimi, senza pronunciare i termini proibiti. La tua squadra deve indovinare prima dello scadere del tempo.",
+    'Le Jeu des Catégories': "Dite a turno una parola della categoria scelta. Chi esita, ripete o sbaglia viene eliminato o subisce una penalità!",
+    'Action ou Vérité': "Scegli Obbligo o Verità! Rispondi sinceramente a domande imbarazzanti oppure affronta sfide divertenti e audaci.",
+    'Jeu de la Pièce': "Scommetti su Testa o Croce. Se indovini distribuisci sorsi/penitenze; se sbagli, tocca a te pagare pegno!",
+    'Le Dilemme': "Scegli tra due opzioni impossibili o esilaranti (A o B). Confronta la tua scelta con le percentuali mondiali e con i tuoi amici!",
+    'Codenames': "Due squadre rivali competono per svelare tutte le proprie parole sul tabellone grazie agli indizi in codice del proprio caposquadra.",
+    'Time\'s Up': "Fai indovinare personaggi in 3 manche: 1ª manche: Descrizione libera. 2ª manche: 1 sola parola. 3ª manche: Solo mimica e suoni!",
+    'On se passe un objet rapidement': "Passatevi lo smartphone a tutta velocità. Quando suona il timer segreto, chi ha in mano il dispositivo ha perso!",
+    'Devine Tête': "Posiziona lo smartphone sulla fronte. I tuoi compagni descrivono o mimano la parola finché non la indovini!",
+    'Petit Bac': "Nomi, Cose, Città: con una lettera estratta a sorte, compila tutte le categorie il più velocemente possibile.",
+    'Président': "Scarta combinazioni di valore sempre superiore per svuotare la mano per primo e diventare il Presidente!",
+    'Skull': "Un gioco di bluff e deduzione con 3 Rose e 1 Teschio. Scommetti quante carte puoi girare senza incappare nel teschio!",
+    'Pictionary': "Disegna il soggetto misterioso per farlo indovinare ai tuoi compagni di squadra prima dello scadere del tempo!",
+    'Just One': "Gioco cooperativo: ciascuno scrive un indizio di una sola parola. Gli indizi identici vengono annullati prima che il giocatore possa leggerli!",
+    'Le Roi des Mèmes': "Abbina l'immagine meme più esilarante alla situazione proposta. Il Re del turno vota il meme migliore!",
+    'Loup-Garou': "Villici contro Lupi Mannari. I lupi colpiscono nel buio della notte, mentre di giorno il villaggio dibatte e vota chi giustiziare.",
+    'Dobble': "Trova per primo l'unico simbolo identico presente tra la tua carta e quella scoperta al centro del tavolo!",
+    'Uno': "Scarta le tue carte abbinandole per colore o valore. Usa carte speciali (+2, Salto, Cambio giro) e non dimenticare di urlare 'Uno!'.",
+    'Photo Roulette': "Una foto a caso dalla galleria di un giocatore appare per 5 secondi. Indovina subito di chi è prima che scada il tempo!",
+    'Bataille Navale': "Affonda la flotta nemica sulla griglia 10x10 sparando le coordinate: Acqua, Colpito o Affondato!",
+    'Mille Bornes': "Percorri per primo 1000 chilometri giocando carte distanza e superando attacchi e guasti con le carte speciali.",
+    'Rami': "Calate combinazioni (tris/quartine) e scale dello stesso seme per essere i primi a restare senza carte in mano.",
+    'Taboo': "Fai indovinare la parola alla tua squadra senza mai pronunciare nessuna delle 5 parole tabù vietate!",
+    'Petits Chevaux': "Fai un 6 per uscire dalla stalla, mangia i cavalli nemici e porta tutte le tue quattro pedine al centro del tabellone.",
+    'Cadavre Exquis': "Scrittura collettiva e surreale: ciascuno aggiunge una parola o frase senza vedere quanto scritto dai compagni in precedenza.",
+    'Blokus': "Piazza i tuoi pezzi geometrici sulla plancia toccando i tuoi precedenti pezzi solo per gli angoli, mai lato contro lato!",
+    'Dominoes': "Unisci le tessere facendo combaciare i numeri alle estremità della catena. Chi esaurisce per primo le tessere vince il round.",
+    'Big Two': "Celebre gioco di carte in cui il 2 ha il valore più alto. Calate combinazioni superiori per liberarvi di tutte le carte.",
+    'Jeu de Dames': "Muovi in diagonale sulle caselle scure. Mangiare le pedine avversarie è obbligatorio. Raggiungi l'ultima riga per promuovere a Dama!",
+    'Belote': "Classico gioco di carte a prese per 4 giocatori (due coppie) dove il seme di Atout determina l'andamento della mano.",
+    'Simple Villageois': "Non ha poteri magici, ma la sua perspicacia e il suo voto sono indispensabili per smascherare i lupi.",
+    'Voyante': "Ogni notte può scoprire la vera identità di un giocatore a sua scelta.",
+    'Sorcière': "Dispone di due pozioni: una di guarigione per salvare la vittima e una di veleno per eliminare un giocatore.",
+    'Petite Fille': "Può spiare i lupi durante la notte aprendo leggermente gli occhi a proprio rischio e pericolo.",
+    'Chasseur': "Se viene eliminato, spara un ultimo colpo portando con sé nella tomba un giocatore a sua scelta.",
+    'Garde': "Protegge ogni notte un giocatore dagli attacchi dei lupi mannari.",
+    'Cupidon': "La prima notte fa innamorare due giocatori: se uno muore, l'altro muore all'istante di crepacuore!",
+    'Mentaliste': "Scopre il risultato parziale del voto del villaggio 30 secondi prima della sua chiusura.",
+    'Nécromancien': "Può comunicare di notte con gli spiriti dei giocatori già eliminati.",
+    'Fossoyeur': "Quando muore, indica due sospettati: uno è innocente e uno è colpevole.",
+    'Dictateur': "Può proclamare la legge marziale una volta per partita e decidere da solo chi giustiziare.",
+    'Chaperon Rouge': "Finché il Cacciatore è in vita, Cappuccetto Rosso è immune agli attacchi dei lupi.",
+    'Pyromancien': "Piazza barili di polvere da sparo nelle case di notte e può farli brillare all'alba.",
+    'Héritier': "Eredita i poteri speciali del suo mentore quando questi passa a miglior vita.",
+    'Loup Noir': "Può infettare la vittima della notte trasformandola in un lupo alleato.",
+    'Loup Bavard': "Deve pronunciare una parola segreta nella chat diurna, altrimenti perirà al tramonto.",
+    'Loup Blanc': "Lupo solitario che ogni due notti può sbranare un altro lupo. Vince se resta l'ultimo sopravvissuto!",
+    'Mercenaire': "Vince istantaneamente la partita se il suo bersaglio viene giustiziato dal villaggio il primo giorno.",
+    'Rat Malade': "Contagia due giocatori a notte. Se tutti i sopravvissuti vengono infettati, vince in solitaria!",
+  };
+
+
+  // =========================================================================
+  // PORTUGUESE RULES
+  // =========================================================================
+  static const Map<String, String> _rulesPt = {
+    'Blanc Manger Coco': """**Objetivo do jogo**
+O jogador com mais pontos no final da partida vence.
+
+**Como jogar**
+1. Cada jogador recebe 7 cartas de resposta.
+2. Um jogador é o Juiz (o papel muda a cada rodada).
+3. O Juiz lê a carta de pergunta em voz alta.
+4. Os outros jogadores escolhem secretamente 1 carta de resposta da mão.
+5. O Juiz lê as respostas e escolhe a mais engraçada.
+6. O vencedor ganha 1 ponto e todos compram até ter 7 cartas.""",
+    'Zombie!': """**Objetivo**
+Forme pares de cartas iguais e evite ficar com a carta do Zumbi no final da partida.
+
+**Como jogar**
+1. 33 cartas distribuídas (16 pares + 1 Zumbi).
+2. Na sua vez, pegue uma carta do vizinho.
+3. Os pares formados são descartados imediatamente. Quem zerar a mão primeiro vence!""",
+    'Yams': """**Objetivo**
+Faça a maior pontuação completando 13 categorias com 5 dados.
+
+**Como jogar**
+1. Até 3 lançamentos por turno.
+2. Guarde os dados que desejar e role o resto novamente.
+3. Anote a pontuação em uma categoria vazia da folha de jogo.""",
+    'La Patate Chaude': """**Objetivo do jogo**
+Passe a batata quente adiante antes que o cronômetro secreto exploda!
+
+**Como jogar**
+1. Diga uma palavra válida para o tema da rodada.
+2. Toque em 'Passar a batata!'.
+3. Quem estiver segurando a batata quando ela explodir cumpre uma prenda.""",
+    'Gribouillis': """**Objetivo**
+Desenhe a palavra secreta com rapidez e clareza para que seus amigos adivinhem antes do tempo acabar!""",
+    'Zéro Pointé': """**Objetivo**
+Consiga a menor pontuação total. Troque cartas altas por cartas baixas e forme colunas iguais para eliminá-las.""",
+    'Poker': "Texas Hold'em: ganhe fichas formando a melhor mão de 5 cartas com suas 2 cartas fechadas e as 5 cartas comunitárias.",
+    'Le Juge': "Um jogador é o Juiz. Os demais respondem anonimamente a uma pergunta. O Juiz premia a melhor resposta.",
+    'Qui Pourrait le Plus ?': "Quem de nós tem mais chance de...? Todos votam juntos. O mais votado paga um desafio ou bebe!",
+    'Le Menteur': "Descubra quem é o mentiroso! Entre respostas verdadeiras há uma invenção. Desmascare a farsa para pontuar.",
+    'Infiltré & Mr. White': "Os Civis compartilham uma palavra secreta, o Infiltrado recebe uma parecida e o Mr. White não sabe nada. Conversem, votem e eliminem os espiões!",
+    'Synonyme ou Banni': "Faça sua equipe adivinhar a palavra usando sinônimos, sem pronunciar os termos proibidos.",
+    'Le Jeu des Catégories': "Falem em turnos uma palavra da categoria indicada. Quem hesitar, repetir ou errar é eliminado!",
+    'Action ou Vérité': "Escolha Verdade ou Desafio! Responda com sinceridade a perguntas picantes ou encare desafios hilários.",
+    'Jeu de la Pièce': "Aposte em Cara ou Coroa. Se acertar, distribui goles ou castigos; se errar, você é quem cumpre a prenda!",
+    'Le Dilemme': "Escolha entre duas opções difíceis ou engraçadas (A ou B). Compare sua escolha com as respostas da comunidade e de seus amigos!",
+    'Codenames': "Duas equipes competem para decifrar todas as suas palavras no tabuleiro através das pistas em código dadas pelo líder.",
+    'Time\'s Up': "Adivinhe personalidades em 3 rodadas: 1ª rodada: Descrição livre. 2ª rodada: Apenas 1 palavra. 3ª rodada: Só mímica e sons!",
+    'On se passe un objet rapidement': "Passe o celular o mais rápido possível. Quando o alarme secreto disparar, quem estiver com ele perde a rodada!",
+    'Devine Tête': "Coloque o celular na testa. Seus amigos dão dicas ou fazem mímicas para você adivinhar a palavra!",
+    'Petit Bac': "Stop / Adedonha: com uma letra sorteada, preencha todas as categorias o mais rápido possível.",
+    'Président': "Descarte combinações maiores para esvaziar sua mão primeiro e se tornar o Presidente da rodada!",
+    'Skull': "Blefe e dedução com 3 Rosas e 1 Caveira. Aposte quantas cartas pode virar sem encontrar uma caveira!",
+    'Pictionary': "Desenhe para sua equipe adivinhar a palavra antes que a areia da ampulheta acabe! Letras e números são proibidos.",
+    'Just One': "Jogo cooperativo: cada jogador escreve uma dica de uma palavra só. Dicas repetidas são anuladas antes de o adivinho vê-las!",
+    'Le Roi des Mèmes': "Escolha a imagem de meme mais engraçada para a situação proposta. O Rei da rodada elege o vencedor!",
+    'Loup-Garou': "Aldeões contra Lobisomens. Os lobos atacam na escuridão da noite, e durante o dia a aldeia debate e vota quem queimar na fogueira.",
+    'Dobble': "Encontre o único símbolo comum entre a sua carta e a carta aberta no centro antes de todo mundo!",
+    'Uno': "Livre-se de suas cartas combinando cor ou número. Use cartas de ação (+2, Bloqueio, Inverter) e não se esqueça de gritar 'Uno!'.",
+    'Photo Roulette': "Uma foto aleatória da galeria de um jogador surge por 5 segundos. Adivinhe de quem é antes do tempo se esgotar!",
+    'Bataille Navale': "Afunde a frota inimiga no tabuleiro 10x10 disparando coordenadas: Água, Atingido ou Afundado!",
+    'Mille Bornes': "Seja o primeiro a percorrer 1000 quilômetros jogando cartas de distância e superando os golpes do adversário.",
+    'Rami': "Baixe trincas e sequências do mesmo naipe para ser o primeiro a descartar toda a sua mão.",
+    'Taboo': "Faça sua equipe adivinhar a palavra secreta sem mencionar nenhuma das 5 palavras proibidas!",
+    'Petits Chevaux': "Tire um 6 para sair do estábulo, capture peças inimigas e leve seus quatro cavalos ao centro do tabuleiro.",
+    'Cadavre Exquis': "Escrita colaborativa surreal: cada jogador escreve uma parte da frase sem ver o que os outros escreveram antes.",
+    'Blokus': "Posicione suas peças no tabuleiro encostando apenas nas pontas de suas peças anteriores, nunca lado a lado!",
+    'Dominoes': "Conecte as peças igualando os números das pontas. Quem esvaziar a mão primeiro vence a rodada.",
+    'Big Two': "Jogo clássico em que o 2 é a carta mais forte. Descarte combinações superiores para zerar suas cartas.",
+    'Jeu de Dames': "Mova em diagonal pelas casas escuras. Capturar peças é obrigatório. Chegue à última linha para virar Dama!",
+    'Belote': "Jogo tradicional de cartas em duplas onde o naipe de Trunfo domina a partida.",
+    'Simple Villageois': "Não possui poderes mágicos, mas sua dedução e seu voto são vitais para eliminar os lobisomens.",
+    'Voyante': "Pode ver secretamente a identidade de um jogador a cada noite.",
+    'Sorcière': "Possui duas poções: uma de cura para salvar a vítima da noite e uma de veneno para eliminar um jogador.",
+    'Petite Fille': "Pode espiar os lobisomens durante a noite entreabrindo os olhos, correndo risco de vida.",
+    'Chasseur': "Se for eliminado, dispara um último tiro levando consigo um jogador à sua escolha.",
+    'Garde': "Protege um jogador a cada noite contra o ataque dos lobisomens.",
+    'Cupidon': "Na primeira noite, une dois jogadores pelo amor: se um morrer, o outro morre de tristeza instantaneamente!",
+    'Mentaliste': "Descobre o resultado parcial da votação da aldeia 30 segundos antes do encerramento.",
+    'Nécromancien': "Consegue se comunicar durante a noite com os espíritos dos jogadores já eliminados.",
+    'Fossoyeur': "Ao morrer, indica dois suspeitos: um inocente e um traidor.",
+    'Dictateur': "Pode assumir o controle total de uma votação e executar sozinho o jogador que desejar.",
+    'Chaperon Rouge': "Enquanto o Caçador estiver vivo, a Chapeuzinho Vermelho é imune aos ataques dos lobos.",
+    'Pyromancien': "Instala barris de pólvora durante a noite e pode detoná-los ao amanhecer.",
+    'Héritier': "Herda as habilidades de seu mentor caso ele venha a falecer.",
+    'Loup Noir': "Pode infectar a vítima da noite para transformá-la em um novo lobisomem aliado.",
+    'Loup Bavard': "Deve pronunciar uma palavra secreta no chat diurno, caso contrário morrerá ao pôr do sol.",
+    'Loup Blanc': "Lobo solitário que a cada duas noites pode devorar outro lobo. Vence se for o único sobrevivente!",
+    'Mercenaire': "Vence imediatamente se seu alvo secreto for executado pela aldeia logo no primeiro dia.",
+    'Rat Malade': "Infesta dois jogadores por noite. Se todos os sobreviventes estiverem contaminados, ele vence sozinho!",
+  };
+
 }

@@ -2,12 +2,15 @@
   "firestore": {
     "rules": "firestore.rules"
   },
+  "database": {
+    "rules": "database.rules.json"
+  },
   "storage": {
     "rules": "storage.rules"
   },
   "functions": {
     "source": "functions",
-    "runtime": "nodejs20",
+    "runtime": "nodejs22",
     "ignore": [
       "node_modules",
       ".git",
@@ -16,4 +19,3 @@
     ]
   }
 }
-

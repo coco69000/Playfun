@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PremiumService {
+  // Clé de test RevenueCat fournie par l'utilisateur
+  static const String _testApiKey = "test_lbeeCXmGuOHWIBHjDMzoockkGRh";
   // Vos vraies clés récupérées depuis votre écran RevenueCat
   static const String _googleApiKey = "goog_pSOoDGbmVHmYQosrJibzHKpnFYX";
   // Clé Apple (à renseigner dès que l'app iOS est ajoutée sur RevenueCat)
@@ -12,28 +14,51 @@ class PremiumService {
   static const String entitlementId = "daytalia_vip";
 
   static bool _initialized = false;
+  static String? _currentUserId;
+
+  /// Clé API active selon l'environnement (clé de test en debug/test)
+  static String get activeApiKey {
+    if (kDebugMode) return _testApiKey;
+    if (Platform.isAndroid) return _googleApiKey;
+    if (Platform.isIOS) return _appleApiKey;
+    return _testApiKey;
+  }
 
   /// Initialise le SDK avec l'UID du joueur connecté
   static Future<void> init(String userId) async {
-    if (_initialized) return;
-
     try {
-      await Purchases.setLogLevel(kDebugMode ? LogLevel.debug : LogLevel.warn);
-
-      PurchasesConfiguration configuration;
-      if (Platform.isAndroid) {
-        configuration = PurchasesConfiguration(_googleApiKey)..appUserID = userId;
-      } else if (Platform.isIOS) {
-        configuration = PurchasesConfiguration(_appleApiKey)..appUserID = userId;
-      } else {
+      if (_initialized) {
+        if (_currentUserId != userId) {
+          _currentUserId = userId;
+          await Purchases.logIn(userId);
+          debugPrint("[RevenueCat] Utilisateur changé avec succès: $userId");
+        }
         return;
       }
 
+      await Purchases.setLogLevel(kDebugMode ? LogLevel.debug : LogLevel.warn);
+
+      final selectedKey = activeApiKey;
+      PurchasesConfiguration configuration = PurchasesConfiguration(selectedKey)..appUserID = userId;
+
       await Purchases.configure(configuration);
       _initialized = true;
+      _currentUserId = userId;
       debugPrint("[RevenueCat] Initialisé avec succès pour l'UID: $userId");
     } catch (e) {
       debugPrint("[RevenueCat] Erreur d'initialisation: $e");
+    }
+  }
+
+  /// Déconnecte l'utilisateur de RevenueCat lors d'une déconnexion
+  static Future<void> logout() async {
+    if (!_initialized) return;
+    try {
+      await Purchases.logOut();
+      _currentUserId = null;
+      debugPrint("[RevenueCat] Déconnexion effectuée");
+    } catch (e) {
+      debugPrint("[RevenueCat] Erreur logout: $e");
     }
   }
 

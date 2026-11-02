@@ -12,11 +12,17 @@ import 'game_words/game_words_es.dart';
 import 'game_words/game_words_de.dart';
 import 'game_words/game_words_it.dart';
 import 'game_words/game_words_pt.dart';
+import 'game_words/game_words_extra.dart';
 
 export 'game_words/game_words_data.dart';
 
 class GameWords {
   static const List<String> supportedLanguages = ['fr', 'en', 'es', 'de', 'it', 'pt'];
+
+  /// Langues supplémentaires disposant d'une traduction des jeux (Qui Pourrait le Plus ?,
+  /// La Patate Chaude, Synonyme ou Banni, Action ou Vérité, Jeu de la Pièce) ; le reste du
+  /// contenu retombe sur l'anglais.
+  static bool _isExtra(String code) => gameWordsExtra.containsKey(code);
 
   static String? _customLanguage;
 
@@ -35,7 +41,7 @@ class GameWords {
     if (_customLanguage != null) return _customLanguage!;
     try {
       final code = ui.PlatformDispatcher.instance.locale.languageCode.toLowerCase();
-      if (supportedLanguages.contains(code)) return code;
+      if (supportedLanguages.contains(code) || _isExtra(code)) return code;
       // Pour les langues non listées (nl, pl, sv, da, fi, cs, ru, etc.), repli sur l'anglais
       return 'en';
     } catch (_) {}
@@ -47,9 +53,9 @@ class GameWords {
     final code = lang.toLowerCase().trim();
     if (code.contains('-') || code.contains('_')) {
       final base = code.split(RegExp(r'[-_]')).first;
-      if (supportedLanguages.contains(base)) return base;
+      if (supportedLanguages.contains(base) || _isExtra(base)) return base;
     }
-    if (supportedLanguages.contains(code)) return code;
+    if (supportedLanguages.contains(code) || _isExtra(code)) return code;
     return 'en';
   }
 
@@ -68,8 +74,9 @@ class GameWords {
       case 'pt':
         return gameWordsPt;
       case 'fr':
-      default:
         return gameWordsFr;
+      default:
+        return gameWordsExtra[effectiveLang] ?? gameWordsEn;
     }
   }
 

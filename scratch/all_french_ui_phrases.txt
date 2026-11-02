@@ -1,0 +1,638 @@
+#${index + 1}
+$_bannedPlayer a perdu cette manche !
+$_blueScore mots
+$_guessesLeft essais disponibles
+$_postGameCountdown s
+$_redScore mots
+$_refillCountdown s
+$_secondsLeft s
+$_teamAScore pts
+$_teamBScore pts
+$authorName est en train d'écrire le défi...
+$cat: ${hasScore ? '$scoreVal' : '—'}
+$count cartes restantes
+$currentCount / $totalExpected
+$currentMasterSpy â€â€ Maître-Espion ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}
+$displayWinner a gagné cette manche !
+$loser a perdu !
+$loserName a perdu !
+$loserName est resté avec le Zombie entre les mains !
+$myDistance / $targetDist km
+$myTotal pts
+$oppCellScore pts
+$oppDist km
+$oppName (${oppTotal} pts)
+$oppTotal pts
+$otherName ($otherTotal pts)
+$p : ${_scores[p] ?? 0} pts
+$pName : ${_globalScores[pName]} pts
+$pName a été éliminé ! Son rôle était : $roleDisplay
+$pName: $pScore pts
+$pScore pts
+$pXp XP
+$playedCount / $nonJudgeCount joueurs ont répondu
+$player ($score pts)
+$playerName : Mauvais symbole !
+$rank. $name: $score points
+$readyCount / $totalPlayers prêts
+$remainingSeconds s
+$spinsRemaining tour${spinsRemaining > 1 ? 's' : ''} restant${spinsRemaining > 1 ? 's' : ''}
+$targetPlayerName ne joue plus ($reason). Voulez-vous le conserver et faire jouer l'ordinateur automatiquement ?
+$totalScore / $deckTotal
+$voterName a voté : $voteValue
+$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}
+${(gameData['milleBornesDeck'] as List?)?.length ?? 0}
+${(hands[pId] as List?)?.length ?? 0}
+${GameUiLocalization.tr(context, "Mot à dessiner")} : ${currentPictionaryWord != null ? GameUiLocalization.tr(context, currentPictionaryWord) : "..."}
+${GameUiLocalization.tr(context, 'Carte')} $deckIndex / $deckTotal — ${GameUiLocalization.tr(context, 'Score')} : $totalScore
+${_teamScores['blue']} points
+${_teamScores['red']} points
+${e.key + 1}. ${e.value.key}: ${e.value.value} pt${e.value.value > 1 ? 's' : ''}
+${e.key}: ${e.value} pt${e.value > 1 ? 's' : ''}
+${e.value['name']?.toString().substring(0, min(4, (e.value['name']?.toString().length ?? 0)))}: ${e.value['score'] ?? 0}
+${e.value['name']}: ${e.value['score'] ?? 0} 🃏
+${e.value['name']}: ${scores[e.key] ?? 0}
+${e.value} cartes
+${e.value} pts
+${hand.length} cartes restantes
+${handUno.length} cartes restantes
+${item.words.length} éléments
+${joinedPlayers.length} joueur(s) prêts
+${msg['senderName']} a créé une partie de $gameName !
+${oppScores.length}/13 remplies
+${players.length} / ${data['maxPlayers'] ?? 10}
+${players[pId]?['name']} (Sauvé !)
+${ramiHand.length} cartes restantes
+${votes.length} / $votersCount votes reçus
+'$currentClue $clueCount'
+(Ce choix restera secret jusqu'à la fin)
++$earnedXp XP pour $currentPlayerName
++$foundCount points marqués !
++${potentialScore ?? 0}
++${scoreGained} pts
+... $peekingSnippet
+...pourrait le plus $_currentQuestion
+0 PTS
+0 s
+1 (Description)
+1 feuille par joueur
+1 feuille partagée
+1-6: $myUpper/63 ${myBonus > 0 ? '(+35)' : ''}
+1-6: $oppUpper/63 ${oppBonus > 0 ? '(+35)' : ''}
+1. Difficulté des choix
+1. Intensité des défis
+2 (+ 1 Mot)
+2. Mode de jeu
+3 (+ Mime)
+6 (Facile)
+8 (Standard)
+Action ou Vérité
+Active le micro sans la caméra (Désactive le mode Local)
+Active les boutons de recherche mondiale pour jouer avec des inconnus.
+Activer la Vidéo ${forceVideo ? '(Obligatoire)' : ''}
+Activer le Timer
+Admin : Lancer maintenant avec les joueurs prêts
+Afficher le chronomètre
+Ajoute 5 mots que tu aimerais faire deviner.
+Ajouter ce mot
+Ajoutez au moins 2 joueurs pour commencer.
+Ajoutez les joueurs
+Album ${serverPageIndex + 1} / ${playerOrder.length}
+Album de $ownerName
+Alerte Administrateur
+All Fives
+Aléatoire
+Ambiance / Tonalité de jeu :
+Amoureux (5+ joueurs)
+Appuie sur la bulle d'un joueur pour voter.
+Appuyez sur 'Lancer la roue' pour commencer !
+Appuyez sur 'Lancer' pour commencer !
+Arrêter
+Aucun album média trouvé.
+Aucun album à afficher.
+Aucun vote
+Aucune carte en jeu. Jouez ce que vous voulez !
+Autoriser et Lancer la sélection
+Autoriser la Recherche Rapide & Classée
+Autoriser les indices invalides (simplifié)
+Avec Roue (1 joueur)
+Avec Vidéo
+BLANC MANGER COCO
+BOOM !
+BUZZ ! (MOT INTERDIT)
+Bannissez une réponse !
+Bas = Trouvé
+Besoin d'au moins 4 joueurs (2 par équipe) pour jouer !
+Blinds: $_pokerSmallBlind / $_pokerBigBlind
+Bloqué
+C'est au tour de
+C'est au tour de ${currentGuesser} (${_activeTeam == 'red' ? 'Équipe Rouge' : 'Équipe Bleue'})
+C'est fait
+C'est parti !
+C'est à ${widget.players[_currentPlayerIndex]} !
+C'est à votre tour ! Choisissez votre destin :
+COMMENCER LA PARTIE
+COMMENCER LES DILEMMES
+Calcul des résultats...
+Carte $deckIndex / $deckTotal
+Carte envoyée !
+Carte(s) en jeu :
+Cartes de départ :
+Cartes révélées :
+Catégorie:
+Catégories IA Personnalisées
+Catégories IA chargées !
+Catégories du Petit Bac
+Ce jeu requiert de connaître les autres joueurs et n'est pas disponible en matchmaking public.
+Ce joueur existe déjà !
+Ce mode supporte au maximum $maxPlayers joueurs !
+Ce salon a été fermé.
+Cette partie est terminée ou annulée.
+Cette réponse a déjà été donnée !
+Chacun complète le même dessin initial au lieu de la chaîne.
+Chacun raconte une histoire, les autres votent Vrai ou Faux.
+Chargement de la photo...
+Choisir un Jeu Local
+Choisis ton destin...
+Choisissez une carte à jouer :
+Choisissez votre meilleure réponse :
+Chrono global (Bombe)
+Classement Final :
+Classique (Surréaliste)
+Code Privé
+Code de partie invalide ou partie déjà commencée.
+Code de salon copié !
+Code de salon introuvable.
+Code: ${widget.loungeId.substring(0, 6)}
+Codenames Local
+Commencer !
+Commencer la manche
+Commencer la partie
+Comment voulez-vous jouer ?
+Communication (En ligne)
+Complément
+Composer les équipes
+Composition des Équipes
+Compris !
+Compte à rebours global
+Configuration de la partie
+Configuration des Rôles
+Confirmer & Lancer
+Confirmer les équipes
+Conserver avec l'IA
+Continuer la partie
+Créer le Salon (Coût: 5 pièces)
+Créer un Salon
+Créer une Partie
+Créer une partie
+Dessine !
+Devine Tête
+Devine ce que représente ce dessin :
+Deviné !
+Difficulté
+Difficulté : ${gameData['difficulty'] ?? 'Standard'}
+Difficulté des mots :
+Difficulté des questions secrètes
+Dilemme Suivant
+Dobble Local
+Donner l'indice
+Duel secret pour des points bonus/malus.
+Duellistes (5+ joueurs)
+Durée d'affichage des résultats : ${_resultTimerSeconds}s
+Durée de la bombe : $_hotPotatoGlobalDuration s
+Durée de réponse par joueur : ${_turnTimerSeconds}s
+Durée du chrono :
+Durée du chrono global
+Durée du tour (par joueur)
+Décision unanime du groupe pour ${winners.join(', ')} !
+Déesse de la Justice
+Défi pour $currentPlayerName
+Démarrage automatique dans
+Démarrer la partie
+Désactivez la 'Recherche Publique' pour pouvoir jouer en Local.
+Désactivez la Vidéo ou l'Audio pour pouvoir jouer en Local.
+Désigner un joueur aléatoire à qui passer
+Désignez la personne choisie par le groupe :
+Détail des votes :
+Détecteur de Mensonges
+EN PARTIE
+Empilement des cartes +2/+4
+En attente de l'hôte pour lancer le tour suivant...
+En attente de l'hôte pour le tour suivant...
+En attente de l'hôte...
+En attente des autres joueurs ($playedCount / $nonJudgeCount)...
+En attente des autres joueurs...
+En attente des cartes des joueurs...
+En attente du choix du juge...
+En attente du tirage de $currentPlayerName...
+En attente du vote de : $_activeDilemmaVoterId (${_dilemmaVotes.length} / ${widget.players.length})
+En attente...
+Enregistrer sur Firebase
+Entrez votre pseudo
+Envoyer le défi 🚀
+Erreur : $e
+Erreur IA: $e
+Erreur de chargement du mème.
+Erreur de connexion au salon.
+Erreur de connexion.
+Erreur de vote : $e
+Erreur lors de la création de la partie: $e
+Erreur lors de la sauvegarde du dessin.
+Erreur lors de la sélection des photos : $e
+Erreur: $e
+Erreur: ${e.toString().replaceAll('Exception: ', '')}
+Erreur: ${e.toString()}
+Erreur: ${snapshot.error}
+Erreur: Nombre de joueurs insuffisant
+Essais restants : $_guessesLeft
+Est-ce que $currentPlayerName a relevé le défi ?
+Face-à-face (côte à côte)
+Fait ! Je passe !
+Faites tourner la roulette pour désigner le prochain joueur.
+Fantôme
+Fermer le salon
+Fermer le salon ?
+Fiche de $oppName ($oppTotal pts)
+Fin du tour
+Fin manche
+Fou de Joie
+Félicitations au dessinateur $drawingPlayerName et à $winnerName !
+GRILLE DE $oppName ($oppTotal pts)
+Gagne +4 points s'il est éliminé en premier.
+Groupe (Ensemble)
+Génération IA : $_selectedGame
+Génération IA de dilemmes personnalisés
+Génération IA de questions
+Génération IA de questions secrètes
+Génération IA personnalisée
+Génération IA...
+Générer des situations IA
+Générer les catégories par IA
+Gérer les Scores
+Haut = Passer
+Histoire de $storyOwnerName (était $actualTruth)
+Historique des thèmes IA
+IA Premium
+INFECTÉ
+Il devra donner le premier indice
+Il faut au moins $minPlayers joueurs pour ce mode !
+Il/Elle doit répondre à la question :
+Illimité
+Impossible de charger l'image
+Impossible de rejoindre la partie.
+Inclure Mr. White ?
+Indice : "$_currentClue $_clueCount"
+Indice : '$_currentClue $_clueCount'
+Infiltré & Mr. White
+Intervalle du chrono : de $_minDuration à $_maxDuration secondes
+Invitation envoyée à $fName !
+Inviter au salon
+Inviter mes Amis
+J'ai compris !
+J'ai fini !
+J'ai fini d'ajouter mes mots
+J'ai réalisé mon défi ! ✅
+Je choisis FACE
+Je choisis PILE
+Je passe l'objet !
+Jetons de départ: $_pokerStartChips
+Jeu : $gameType
+Jeu Simplifié (Vrai/Faux)
+Jeu de ${players[_viewedOpponentId]?['name']}
+Jeu de Soirée
+Jeu de la Pièce
+Jeu non implémenté : $rawGameType
+Jouer (${_selectedBigTwoCards.length})
+Jouer par Équipes
+Jouer par équipes (Mode 2v2+)
+Joueurs connectés : ${players.length}
+Joueurs non assignés
+Joueurs non assignés (${unassignedPlayers.length})
+Joueurs présents (${players.length})
+Joueurs prêts: ${readyPlayers.length} / ${players.length}
+Joué par ${resolvePlayerName(lastPlay['playedBy'] ?? '')}
+L'IA générera les mots automatiquement (la phase de saisie manuelle sera ignorée).
+L'application va sélectionner ${gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20} photos aléatoires dans votre galerie.
+L'histoire de $storyOwnerName
+L'équipe $winnerTeam a gagné !
+LANCER LA PIÈCE
+LANCER LE JEU
+LANCER SUR LE FRONT !
+LE DILEMME
+La 1ère fois qu'il est voté, les votes rebondissent.
+La Patate Chaude
+La Vengeuse choisit sa cible...
+La partie a été terminée ou n'existe plus.
+La partie commence...
+La partie n'existe plus.
+La photo était à... $correctOwnerName !
+La proposition de $_bannedPlayer a été bannie !
+La roue tourne...
+Lancer la roue
+Lancer les votes !
+Lancer un jeu pour le salon
+Le Dilemme
+Le Monde
+Le chrono ne se réinitialise pas.
+Le code doit comporter 6 chiffres.
+Le compagnon de vos meilleures soirées
+Le dessinateur est limité à 30 traits maximum par dessin.
+Le gagnant est $winnerName !
+Le joueur désigné doit faire son choix.
+Le mot de l'Infiltré (${undercoverName}) était : '${wordPair[1]}'
+Le mot de l'infiltré était : $_wordUndercover
+Le mot des Civils était : '${wordPair[0]}'
+Le mot des civils était : $_wordCivil
+Le mot est :
+Le mot à trouver était un synonyme de '$word'. Les autres joueurs marquent 1 point.
+Le mot était : $_currentWord
+Le mot était : '$currentWord'.
+Le salon sera définitivement supprimé pour tous les participants.
+Le temps ne se réinitialise pas à chaque joueur. La patate explose à la fin !
+Les autres écrivent des indices pour toi...
+Les indices identiques seront toujours éliminés, mais pas ceux trop proches du mot.
+Les joueurs écrivent les défis
+Les paires sont défaussées automatiquement
+Les points ont été distribués en fonction de vos votes.
+Les équipes seront formées aléatoirement.
+MOT CIBLE
+Main de $targetName (${targetHand.length} cartes)
+Manche $_currentRoundNumber : $modeText
+Manche ${(gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1} / ${(gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4}
+Maître-Espion de l'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}
+Min requis : $minCount | Recommandé : $defaultCount
+Mode Local (Hors ligne)
+Mode Multijoueur
+Mode de jeu
+Mode de jeu :
+Mode de transmission
+Mode de vote
+Modifier le Thème
+Modifier les équipes et les membres
+Moi (${myTotal} pts)
+Moment de vérité...
+Mon Pays
+Mon Salon
+Mot ajouté pour $player ! Total: ${_playersWords[player]?.length}
+Mots devinés ce tour : ${_discardedWords.length}
+Mots déjà utilisés :
+Mots personnalisés / IA
+Mots restants dans le paquet : ${_currentDeck.length}
+Mots restants à ajouter pour $currentPlayerForInput: ${5 - wordsForCurrentPlayer}
+Mots trouvés : $guessedCount
+Mr. Meme
+Mr. White (${mrWhiteName}) n'avait pas de mot.
+Mr. White commence ?
+Multijoueur (En ligne)
+Mélanger plusieurs thèmes :
+N'a plus de cartes
+N'apparaîtra pas dans la liste publique.
+NON, Raté ! 👎
+Nombre d'Infiltrés
+Nombre d'éléments :
+Nombre de Mr. White
+Nombre de joueurs recherchés : ${_playerCount.toInt()}
+Nombre de manches : $_timesUpTotalRounds
+Nombre de manches : $_totalRounds
+Nombre de tours (photos à deviner) : $_photoRouletteRounds
+Nombre de tours : $_aoVMaxRounds
+Nombre max de joueurs : ${_maxPlayers.toInt()}
+Nouvelle Manche
+Nouvelle Partie
+Nouvelle manche
+Nécessite exactement 4 joueurs. Vous aidez le joueur en face de vous.
+OUI, Validé ! 👍
+Objectif: $targetScore pts
+Ouvrir la zone de dessin
+PARTAGEZ CE CODE AVEC VOS AMIS
+PARTIE TERMINÉE !
+PIOCHE (${_deck.length + 1}) • BUT : $_targetScore
+PLACEZ LE TÉLÉPHONE SUR VOTRE FRONT !
+PROCHAIN JOUEUR / ÉQUIPE :
+Pack actif : ${_activeAiThemeTitle ?? 'Thème personnalisé'} (${_selectedAiWords!.length} éléments)
+Paramètre 'Ajouter 1'
+Paramètres : Action ou Vérité
+Paramètres : Jeu de la Pièce
+Paramètres : Le Dilemme
+Paramètres Action ou Vérité
+Paramètres Dominos
+Paramètres Généraux
+Paramètres Photo Roulette
+Paramètres Time's Up
+Paramètres Uno
+Paramètres de Recherche Publique
+Paramètres de la partie
+Paramètres du Dilemme
+Paramètres du Jeu
+Participants (Mode Local)
+Partie Terminée !
+Partie de ${msg['extraData']['gameName']} terminée !
+Pas assez de pièces pour créer cette partie ! Coût : $cost pièces.
+Pas assez de pièces pour lancer une recherche ! Coût : 1 pièce.
+Pas assez de pièces pour rejoindre cette partie ! Coût : 1 pièce.
+Passe l'Objet
+Passe l'Objet Rapidement
+Passe le téléphone aux agents de l'équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}
+Passe le téléphone à
+Passe le téléphone à $currentPlayer
+Passe le téléphone à $currentPlayerForInput
+Passe à $_nextPlayerToPass !
+Passer au Vote
+Passer son tour
+Passez l'appareil à :
+Passez le téléphone aux agents
+Passez le téléphone à
+Passez le téléphone à $currentMasterSpy, puis appuyez ci-dessous.
+Passez vite !
+Permet de jouer un +2 sur un +2 (ou +4 sur +2/+4) pour faire piocher plus.
+Permission refusée. Impossible d'accéder à la galerie.
+Personne n'a été éliminé (égalité).
+Peu importe
+Peut toujours voter après son élimination.
+Phase de discussion
+Phase de jeu inconnue : $currentPhase
+Photos piochées par joueur : $_photoRoulettePhotosPerPlayer
+Plus complexe, plus de cartes, plus de symboles.
+Plus de cartes !
+Plus de symboles par carte (8 au lieu de 6)
+Pointez quelqu'un !
+Pour $_selectedGame
+Préc.
+Préparation de la partie
+Prêt
+Qui Pourrait le Plus ?
+Qui dans le groupe...
+Qui pourrait le plus $_currentQuestion
+Qui éliminer ?
+Quitter la partie ?
+Recherche de remplaçants en cours...
+Regarde ton rôle et ne le montre à personne !
+Regardez $currentPlayerName réaliser le défi...
+Rejoindre un salon privé
+Rejoindre une Partie
+Rejoindre une partie
+Rejoins un salon public ou entre un code privé :
+Remplacé par le thème IA
+Retour au Salon
+Retour à l'accueil
+Reçoit un pouvoir spécial aléatoire.
+Règles : $gameTitle
+Réalisez votre défi en vidéo ou au micro !
+Rédigez l'${typeLabel.toLowerCase()} pour $currentPlayerName
+Résultat du tour
+Résultat du vote
+Résultats du passage
+Rôles Spéciaux (Optionnel)
+Rôles de Base
+SCORES CONSERVÉS DE LA SESSION :
+SITUATION :
+Sa réponse était : '$guesserAnswer'.
+Salon Privé
+Sans Vidéo
+Score Cible
+Score Cible : $_dominoesTargetScore
+Score actuel de ${players[winnerId]?['name'] ?? 'Lui'}: ${players[winnerId]?['score'] ?? 0} cartes.
+Score cible : $_targetScore cartes
+Score de session : ${pData['score']} victoires
+Section sup: $oppUpper/63 pts ${oppBonus > 0 ? '(+35)' : ''}
+Seuil de validation par défaut : $_aoVVoteThreshold%
+Seulement 30 traits
+Si désactivé, le jeu n'avance pas automatiquement
+Si l'un est éliminé, l'autre aussi.
+Si un joueur ne répond pas ou quitte, la partie cherchera un remplaçant.
+Si un joueur pose un carré, l'ordre des cartes est inversé pour le reste de la manche.
+Si vous quittez, votre place sera libérée.
+Simultané
+Sinon, passez physiquement à qui vous voulez
+Situation :
+Situation suivante
+Son gage :
+Statistiques - ${msg['extraData']['gameName']}
+Suite (3 derniers mots)
+Symboles par carte :
+Synonyme ou Banni
+Sélectionnez au moins 3 catégories :
+TOTAL ADVERSAIRE
+TOURNER LA ROULETTE
+TROUVÉ !
+Tableau des Scores
+Temps restant : $_secondsRemaining s
+Temps restant : $seconds s
+Terminer la manche ?
+Thème : ${data['theme'] ?? 'Général'}
+Time's Up
+Time's Up Local
+Ton Rôle, $player
+Ton histoire était-elle...
+Total des mots dans le chapeau: ${_allWords.length}
+Total des rôles sélectionnés : $totalRolesCount. (Minimum 5 requis)
+Total imposteurs : ${_infiltreCount + _mrWhiteCount}. La répartition finale sera ajustée si nécessaire pour garantir au moins 1 civil.
+Total: $oppTotal pts
+Touchez un mot pour modifier le résultat en cas d'erreur de capteur :
+Tour $currentRound
+Tour Suivant
+Tour Suivant ➡️
+Tour par tour
+Tour suivant
+Tous les jeux
+Tout le groupe
+Tout le monde connaît son rôle. À tour de rôle, donnez un mot-indice. Quand vous êtes prêts, passez au vote pour éliminer quelqu'un.$startingPlayerInstruction
+Tranche en cas d'égalité, même morte.
+Trouvés : ${_roundHistory.where((e) => e['guessed'] == true).length}
+Tu as choisi $_coinFlipChoice. La pièce est tombée sur... $_coinFlipResult !
+Tu as voté : ${myVote!.toUpperCase()}
+Tu dois écrire une réponse !
+Tu es le Maître-Espion. Assure-toi d'être seul(e) à voir l'écran.
+Type de média
+Un joueur a quitté...
+Un joueur aléatoire écrit le défi au lieu d'un défi prédéfini.
+Un joueur devine, son équipe l'aide, l'équipe adverse vérifie.
+Un joueur devra mimer son indice à chaque tour.
+VOTRE MAIN DE SURVIE (${myHand.length} cartes)
+Vainqueur : $winnerName
+Valider et passer
+Valider les équipes
+Variante Révolution
+Vendeur de Falafels (4+ joueurs)
+Vengeuse (5+ joueurs)
+Vernissage !
+Veuillez commencer ou annuler la partie avant de quitter le salon.
+Veuillez entrer un pseudo.
+Veuillez revenir à l'écran de configuration des joueurs.
+Veuillez saisir un défi ou une question.
+Victoire de $_gameWinner !
+Victoire des ${winnerFaction} !
+Vidéos
+Voir la carte-clé
+Voir les stats
+Voir mon rôle
+Voix uniquement (Audio)
+Vos amis votent pour évaluer votre prestation...
+Vote enregistré. En attente...
+Votes :
+Votez pour bannir la pire proposition !
+Votez pour un joueur :
+Votez secrètement pour le joueur de votre choix :
+Votez tous ensemble !
+Votre galerie est vide.
+Votre vote a bien été enregistré !
+Voté par : ${votersList.join(', ')}
+Voulez-vous clôturer la manche immédiatement ? Le joueur avec le plus d'XP deviendra l'Admin.
+Voulez-vous rejouer ?
+Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.
+Vous avez besoin de 5 pièces pour créer un salon.
+Vous avez été exclu de la partie pour inactivité. L'ordinateur joue à votre place (aucun gain ne vous sera attribué).
+Vous devez dessiner quelque chose !
+Vous devez sélectionner le pion en surbrillance orange.
+Vous n'avez pas encore d'amis !
+Vous ne pouvez pas voter.
+Vous rejoignez une partie VIP, c'est gratuit !
+Vous êtes prêt !
+Vérité
+ZOMBIE EN MAIN
+« $fullText »
+« ${currentChallenge ?? ''} »
+« ${currentChallenge ?? '...'} »
+À qui est cette photo ?
+À vos discussions !
+ÉQUIPE 1
+ÉQUIPE 2
+Échec de l'upload des photos vers Supabase.
+Élimine quelqu'un en étant éliminée.
+Éq. 1 : ${tabooScores['team_0'] ?? 0} pts
+Éq. 2 : ${tabooScores['team_1'] ?? 0} pts
+Équilibrer
+Équilibrer Aléatoirement
+Équipe
+Équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}
+Équipe Bleue: ${_blueTeam.join(', ')}
+Équipe Rouge: ${_redTeam.join(', ')}
+Équipes 2v2
+Équipes pour ${widget.gameName}
+État Gribouillis inconnu : $roundState
+⏱️ $_secondsLeft s
+⏳ Fin du tour...
+⚠ï¸ Prise en chaîne ! Vous devez rejouer le pion clignotant.
+⚠️ Note : Ce jeu nécessite un avis personnel. L'ordinateur sautera son tour s'il est conservé.
+✅ ${_aiDilemmas.length} dilemmes prêts
+✅ ${_aiQuestions.length} questions prêtes
+✅ ${_aiTruths.length + _aiDares.length} défis prêts !
+✅ Indice envoyé ! En attente des autres joueurs...
+✏️ $count mot${count > 1 ? 's' : ''} rédigé${count > 1 ? 's' : ''}...
+✨ ${_selectedAiThemes.length} combiné(s)
+✨ ${generated.length} éléments générés et sauvegardés !
+✨ ${res.length} dilemmes IA générés !
+✨ ${res.length} défis IA générés !
+✨ ${res.length} questions IA générées !
+✨ ${res.length} questions IA prêtes !
+✨ Pack '${item.title}' activé (${item.words.length} éléments) !
+✨ Thèmes fusionnés ! Le pack actif contient désormais ${_selectedAiWords!.length} éléments.
+🎯 JOUEUR SÉLECTIONNÉ
+🎰 Qui va relever le défi ?
+🎲 Tirer ACTION ou VÉRITÉ
+💬 Écoutez attentivement et proposez vos réponses !
+🔒 ${heldDice.where((h) => h).length} gardé(s)
+🔥 $currentPlayerName a tiré : $typeLabel !
+🗳️ VOTE DE VALIDATION
+🛡️ ${oppSafeties.length}
+🤫 ${GameUiLocalization.tr(context, 'Chut ! Ferme les yeux')} 🙈

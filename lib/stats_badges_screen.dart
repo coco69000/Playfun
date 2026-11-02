@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'player_state.dart';
 import 'badges_data.dart';
 import 'badges_localization.dart';
+import 'game_content_localization.dart';
+import 'game_rules_localization.dart';
 import 'l10n/app_localizations.dart';
 import 'matchmaking_localization.dart';
 
@@ -173,11 +175,11 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
           tabs: [
             Tab(
               icon: const Icon(Icons.military_tech),
-              text: "${l10n?.tabBadges ?? 'Badges'} (${ps.totalUnlockedBadgesCount}/${AppBadges.allBadges.length})",
+              text: "${l10n?.tabBadges ?? GameContentLocalization.ui(context, 'Badges')} (${ps.totalUnlockedBadgesCount}/${AppBadges.allBadges.length})",
             ),
             Tab(
               icon: const Icon(Icons.bar_chart),
-              text: l10n?.tabStats ?? "Statistiques",
+              text: l10n?.tabStats ?? GameContentLocalization.ui(context, "Statistiques"),
             ),
           ],
         ),
@@ -374,11 +376,11 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "${ps.xp} XP au compteur",
+                              GameContentLocalization.format(context, "{0} XP au compteur", [ps.xp]),
                               style: const TextStyle(color: Color(0xFF67E8F9), fontWeight: FontWeight.w600, fontSize: 13),
                             ),
                             Text(
-                              "Encore $xpRemaining XP avant Niv. ${ps.level + 1}",
+                              GameContentLocalization.format(context, "Encore {0} XP avant Niv. {1}", [xpRemaining, ps.level + 1]),
                               style: const TextStyle(color: Colors.white70, fontSize: 12),
                             ),
                           ],
@@ -394,7 +396,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                   children: [
                     Expanded(
                       child: _buildCounterCard(
-                        l10n?.gamesPlayed ?? "Parties Jouées",
+                        l10n?.gamesPlayed ?? GameContentLocalization.ui(context, "Parties Jouées"),
                         "$totalPlayed",
                         Icons.sports_esports,
                         Colors.blueAccent,
@@ -403,7 +405,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                     const SizedBox(width: 10),
                     Expanded(
                       child: _buildCounterCard(
-                        l10n?.gamesWon ?? "Victoires",
+                        l10n?.gamesWon ?? GameContentLocalization.ui(context, "Victoires"),
                         "$totalWon",
                         Icons.emoji_events,
                         Colors.amberAccent,
@@ -416,7 +418,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                   children: [
                     Expanded(
                       child: _buildCounterCard(
-                        "XP Total Session",
+                        GameContentLocalization.ui(context, "XP Total Session"),
                         "${ps.xp} XP",
                         Icons.military_tech_rounded,
                         const Color(0xFF67E8F9),
@@ -425,7 +427,7 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                     const SizedBox(width: 10),
                     Expanded(
                       child: _buildCounterCard(
-                        "Moyenne / Partie",
+                        GameContentLocalization.ui(context, "Moyenne / Partie"),
                         "${avgXpPerGame.toStringAsFixed(1)} XP",
                         Icons.auto_graph_rounded,
                         Colors.purpleAccent,
@@ -436,19 +438,19 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                 const SizedBox(height: 24),
 
                 // 3. STATISTIQUES DÉTAILLÉES PAR JEU AVEC GAINS D'XP
-                const Text(
-                  "Détail par Jeu & Performance XP",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Text(
+                  GameContentLocalization.ui(context, "Détail par Jeu & Performance XP"),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
 
                 if (ps.gameStats.isEmpty)
-                  const Center(
+                  Center(
                     child: Padding(
-                      padding: EdgeInsets.all(32.0),
+                      padding: const EdgeInsets.all(32.0),
                       child: Text(
-                        "Jouez vos premières parties pour voir vos stats d'XP ici !",
-                        style: TextStyle(color: Colors.white54),
+                        GameContentLocalization.ui(context, "Jouez vos premières parties pour voir vos stats d'XP ici !"),
+                        style: const TextStyle(color: Colors.white54),
                       ),
                     ),
                   )
@@ -469,6 +471,10 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                         gameXp = (rawStat['xp'] as num?)?.toInt() ?? (won * 25 + (played - won) * 8);
                       }
                       double winRate = played > 0 ? (won / played) * 100 : 0.0;
+                      final localizedGameName = GameRulesLocalization.getGameTitle(
+                        context,
+                        gameName,
+                      );
 
                       return Card(
                         margin: const EdgeInsets.symmetric(vertical: 4),
@@ -476,11 +482,21 @@ class _StatsAndBadgesScreenState extends State<StatsAndBadgesScreen>
                         child: ListTile(
                           leading: const Icon(Icons.videogame_asset, color: Colors.cyanAccent),
                           title: Text(
-                            gameName,
+                            localizedGameName,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                            "$played jouée${played > 1 ? 's' : ''} • $won victoire${won > 1 ? 's' : ''} • ~$gameXp XP gagnés",
+                            GameContentLocalization.format(
+                              context,
+                              "{0} jouée{1} • {2} victoire{3} • ~{4} XP gagnés",
+                              [
+                                played,
+                                played > 1 ? 's' : '',
+                                won,
+                                won > 1 ? 's' : '',
+                                gameXp,
+                              ],
+                            ),
                           ),
                           trailing: Container(
                             padding: const EdgeInsets.symmetric(

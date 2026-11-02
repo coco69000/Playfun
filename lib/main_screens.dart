@@ -1,3 +1,5 @@
+import 'game_content_localization.dart';
+import 'game_rules_localization.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -407,9 +409,9 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
     List<Map<String, dynamic>> filteredGames =
         allAppGames.where((game) {
           // 1. Recherche par texte
-          final matchesSearch = game['name'].toLowerCase().contains(
-            _searchQuery.toLowerCase(),
-          );
+          final locTitle = GameRulesLocalization.getGameTitle(context, game['name'] as String);
+          final matchesSearch = game['name'].toLowerCase().contains(_searchQuery.toLowerCase()) ||
+              locTitle.toLowerCase().contains(_searchQuery.toLowerCase());
           if (!matchesSearch) return false;
 
           // 2. Recherche par jetons/filtres
@@ -505,10 +507,10 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                 filteredGames.isEmpty
                     ? EmptyStateView(
                       icon: Icons.search_off_rounded,
-                      title: "Aucun jeu trouvé",
+                      title: GameContentLocalization.ui(context, "Aucun jeu trouvé"),
                       subtitle:
-                          "Essaie d'ajuster tes filtres ou d'effectuer une autre recherche.",
-                      actionLabel: "Réinitialiser les filtres",
+                          GameContentLocalization.ui(context, "Essaie d'ajuster tes filtres ou d'effectuer une autre recherche."),
+                      actionLabel: GameContentLocalization.ui(context, "Réinitialiser les filtres"),
                       actionIcon: Icons.refresh,
                       onActionPressed: () {
                         setState(() {
@@ -589,7 +591,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            game['name'] as String,
+                                            GameRulesLocalization.getGameTitle(context, game['name'] as String),
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15,

@@ -34,6 +34,7 @@ class PlayerState extends ChangeNotifier {
   List<Map<String, dynamic>> _friendRequests = []; // {uid, name}
   List<Map<String, dynamic>> _gameInvites = []; // {gameCode, hostName}
   List<Map<String, dynamic>> _loungeInvites = []; // {loungeId, loungeName, hostName}
+  List<String> _blockedUsers = [];
   Map<String, String> _friendNamesCache = {}; // Cache pour afficher les noms
   StreamSubscription<DocumentSnapshot>? _userSubscription;
 
@@ -43,6 +44,33 @@ class PlayerState extends ChangeNotifier {
   bool get hasCompletedOnboarding => _hasCompletedOnboarding;
   String? get userId => _userId;
   String? get userName => _userName;
+  List<String> get blockedUsers => _blockedUsers;
+  bool isUserBlocked(String? uid) => uid != null && _blockedUsers.contains(uid);
+
+  Future<void> blockUser(String uid) async {
+    if (_userId == null || uid.isEmpty) return;
+    if (!_blockedUsers.contains(uid)) {
+      _blockedUsers.add(uid);
+      notifyListeners();
+    }
+    await _db.collection('users').doc(_userId!).set({
+      'blockedUsers': FieldValue.arrayUnion([uid]),
+    }, SetOptions(merge: true)).catchError((e) {
+      debugPrint("Error blockUser: $e");
+    });
+  }
+
+  Future<void> unblockUser(String uid) async {
+    if (_userId == null || uid.isEmpty) return;
+    if (_blockedUsers.remove(uid)) {
+      notifyListeners();
+    }
+    await _db.collection('users').doc(_userId!).update({
+      'blockedUsers': FieldValue.arrayRemove([uid]),
+    }).catchError((e) {
+      debugPrint("Error unblockUser: $e");
+    });
+  }
   int get multiplayerGamesLeft =>
       isPremium ? 999 : (20 - _multiplayerGamesPlayedToday);
   int get videoGamesLeftToday => isPremium ? 999 : (4 - _videoGamesPlayedToday);
@@ -137,7 +165,7 @@ class PlayerState extends ChangeNotifier {
     }
 
     // Si le badge est déjà débloqué, afficher au minimum la progression maximale requise
-    if (_unlockedBadges.containsKey(badgeId) && def != null && def.maxProgress > 1) {
+    if (_unlockedBadges.containsKey(badgeId) && def != null) {
       if (raw < def.maxProgress) {
         raw = def.maxProgress;
       }
@@ -257,13 +285,13 @@ class PlayerState extends ChangeNotifier {
     final initialDoc = await _db.collection('users').doc(userId).get();
     if (!initialDoc.exists) {
       _coins = 50;
-      _isPremium = false;
+      _isPremium = isVipOnStore;
       _level = 1;
       _xp = 0;
       _hasCompletedOnboarding = false;
       await _db.collection('users').doc(userId).set({
         'coins': 50,
-        'isPremium': false,
+        'isPremium': isVipOnStore,
         'level': 1,
         'xp': 0,
         'name': 'Joueur',
@@ -280,7 +308,13 @@ class PlayerState extends ChangeNotifier {
       var data = initialDoc.data() as Map<String, dynamic>;
       _userName = data['name'] ?? 'Joueur';
       _coins = data['coins'] ?? 50;
-      _isPremium = data['isPremium'] ?? false;
+      final firestoreIsPremium = data['isPremium'] == true;
+      _isPremium = isVipOnStore || firestoreIsPremium;
+      if (isVipOnStore && !firestoreIsPremium) {
+        _db.collection('users').doc(userId).set({
+          'isPremium': true,
+        }, SetOptions(merge: true));
+      }
       _level = data['level'] ?? 1;
       _xp = (data['xp'] as num?)?.toInt() ?? 0;
       _gameStats = Map<String, dynamic>.from(data['gameStats'] ?? {});
@@ -298,6 +332,8 @@ class PlayerState extends ChangeNotifier {
       _loungeInvites = List<Map<String, dynamic>>.from(
         data['loungeInvites'] ?? [],
       );
+      _blockedUsers = List<String>.from(data['blockedUsers'] ?? []);
+      _blockedUsers = List<String>.from(data['blockedUsers'] ?? []);
 
       _loadDailyLimits(data);
       await _fetchFriendNames();
@@ -318,7 +354,8 @@ class PlayerState extends ChangeNotifier {
       var data = userDoc.data() as Map<String, dynamic>;
       _userName = data['name'] ?? 'Joueur';
       _coins = data['coins'] ?? 50;
-      _isPremium = data['isPremium'] ?? false;
+      final firestoreIsPremium = data['isPremium'] == true;
+      _isPremium = firestoreIsPremium || isVipOnStore;
       _level = data['level'] ?? 1;
       _xp = (data['xp'] as num?)?.toInt() ?? 0;
       _gameStats = Map<String, dynamic>.from(data['gameStats'] ?? {});
@@ -336,6 +373,8 @@ class PlayerState extends ChangeNotifier {
       _loungeInvites = List<Map<String, dynamic>>.from(
         data['loungeInvites'] ?? [],
       );
+      _blockedUsers = List<String>.from(data['blockedUsers'] ?? []);
+      _blockedUsers = List<String>.from(data['blockedUsers'] ?? []);
 
       _loadDailyLimits(data);
       await _checkAndNormalizeLevel(persist: true);
@@ -387,6 +426,7 @@ class PlayerState extends ChangeNotifier {
   }
 
   void resetState() {
+    PremiumService.logout();
     _userSubscription?.cancel();
     _userSubscription = null;
     _userId = null;
@@ -406,6 +446,7 @@ class PlayerState extends ChangeNotifier {
     _friendRequests = [];
     _gameInvites = [];
     _loungeInvites = [];
+    _blockedUsers = [];
     _friendNamesCache = {};
     notifyListeners();
   }
@@ -942,6 +983,15 @@ class PlayerState extends ChangeNotifier {
   Future<bool> setPremiumStatus(bool premium) async {
     _isPremium = premium;
     notifyListeners();
+    if (_userId != null) {
+      try {
+        await _db.collection('users').doc(_userId!).set({
+          'isPremium': premium,
+        }, SetOptions(merge: true));
+      } catch (e) {
+        debugPrint("Erreur setPremiumStatus Firestore: $e");
+      }
+    }
     return true;
   }
 
@@ -949,6 +999,15 @@ class PlayerState extends ChangeNotifier {
     final success = await PremiumService.purchasePackage(package);
     if (success) {
       _isPremium = true;
+      if (_userId != null) {
+        try {
+          await _db.collection('users').doc(_userId!).set({
+            'isPremium': true,
+          }, SetOptions(merge: true));
+        } catch (e) {
+          debugPrint("Erreur purchasePackage Firestore: $e");
+        }
+      }
       notifyListeners();
     }
     return success;
@@ -959,6 +1018,13 @@ class PlayerState extends ChangeNotifier {
     final success = await PremiumService.restorePurchases();
     if (success) {
       _isPremium = true;
+      try {
+        await _db.collection('users').doc(_userId!).set({
+          'isPremium': true,
+        }, SetOptions(merge: true));
+      } catch (e) {
+        debugPrint("Erreur restorePurchases Firestore: $e");
+      }
       notifyListeners();
     }
     return success;

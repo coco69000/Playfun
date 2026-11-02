@@ -102,7 +102,7 @@ class AppBadges {
     BadgeDef(id: 'dames_king_triumph', title: 'Dame Triomphante', description: 'Promouvoir 2 Dames dans la même partie.', icon: Icons.star, color: Colors.yellowAccent, category: 'Plateau', maxProgress: 2),
     BadgeDef(id: 'naval_sniper', title: 'Tir Chirurgical', description: 'Toucher un bateau adverse dès le tout premier tir de Bataille Navale.', icon: Icons.my_location, color: Colors.cyan, category: 'Plateau'),
     BadgeDef(id: 'naval_clean_sheet', title: 'Flotte Intouchable', description: 'Gagner une Bataille Navale avec au moins 3 bateaux indemnes.', icon: Icons.anchor, color: Colors.blueAccent, category: 'Plateau'),
-    BadgeDef(id: 'skull_double_win', title: 'Sang Froid', description: 'Remporter 2 défis d\'affilée sans jamais révéler de Crâne à Skull.', icon: Icons.sentiment_very_satisfied, color: Colors.purple, category: 'Plateau', maxProgress: 2),
+    BadgeDef(id: 'skull_double_win', title: 'Sang Froid', description: 'Remporter 2 défis d\'affilée sans jamais révéler de Crâne à Skull.', icon: Icons.sentiment_very_satisfied, color: Colors.purple, category: 'Plateau', maxProgress: 1),
 
     // ==========================================
     // 🐺 IV. LOUP-GAROU & DÉDUCTION (18 Badges)
@@ -116,7 +116,7 @@ class AppBadges {
     BadgeDef(id: 'lg_loup_bavard_alive', title: 'Bavard Survivant', description: 'Placer votre mot secret et survivre jusqu\'à la fin avec le Loup Bavard.', icon: Icons.record_voice_over, color: Colors.orange, category: 'Loup-Garou'),
     BadgeDef(id: 'lg_loup_blanc_solo', title: 'Loup Solitaire', description: 'Gagner seul en tant que Loup Blanc.', icon: Icons.nightlight, color: Colors.grey, category: 'Loup-Garou'),
     BadgeDef(id: 'lg_dictateur_coup', title: 'Putsch Réussi', description: 'Exécuter un Loup-Garou lors de votre Coup d\'État de Dictateur.', icon: Icons.gavel, color: Colors.amber, category: 'Loup-Garou'),
-    BadgeDef(id: 'lg_pyro_detonate_3', title: 'Grand Brasier', description: 'Faire exploser 3 tonneaux vivants le même matin avec le Pyromancien.', icon: Icons.local_fire_department, color: Colors.deepOrangeAccent, category: 'Loup-Garou', maxProgress: 3),
+    BadgeDef(id: 'lg_pyro_detonate_3', title: 'Grand Brasier', description: 'Faire exploser 3 tonneaux vivants le même matin avec le Pyromancien.', icon: Icons.local_fire_department, color: Colors.deepOrangeAccent, category: 'Loup-Garou', maxProgress: 1),
     BadgeDef(id: 'lg_rat_malade_win', title: 'Pandémie Totale', description: 'Contaminer tout le village et gagner avec le Rat Malade.', icon: Icons.coronavirus, color: Colors.green, category: 'Loup-Garou'),
     BadgeDef(id: 'lg_mercenaire_j1', title: 'Contrat Rempli', description: 'Faire éliminer votre cible au Jour 1 avec le Mercenaire.', icon: Icons.attach_money, color: Colors.yellow, category: 'Loup-Garou'),
     BadgeDef(id: 'lg_heritier_role', title: 'Testament Ouvert', description: 'Hériter d\'un rôle actif suite à la mort de votre testateur.', icon: Icons.history_edu, color: Colors.teal, category: 'Loup-Garou'),
@@ -167,7 +167,7 @@ class AppBadges {
     BadgeDef(id: 'taboo_express_3', title: 'Débit Mitraillette', description: 'Faire deviner 3 mots en moins de 30 secondes à Taboo.', icon: Icons.bolt, color: Colors.orangeAccent, category: 'Mots'),
     BadgeDef(id: 'taboo_flawless', title: 'Tour Parfait', description: 'Gagner une manche de Taboo sans aucun mot passé ni buzz subi.', icon: Icons.verified, color: Colors.tealAccent, category: 'Mots'),
     BadgeDef(id: 'taboo_speed_10', title: 'Machine à Mots', description: 'Faire deviner 10 mots au cours d\'une seule manche de Taboo.', icon: Icons.rocket_launch, color: Colors.purpleAccent, category: 'Mots', maxProgress: 10),
-    BadgeDef(id: 'devine_tete_10', title: 'Devin Télépathe', description: 'Deviner 10 mots dans le temps imparti à Devine Tête.', icon: Icons.headset_mic, color: Colors.cyanAccent, category: 'Mots', maxProgress: 10),
+    BadgeDef(id: 'devine_tete_10', title: 'Devin Télépathe', description: 'Deviner 10 mots dans le temps imparti à Devine Tête.', icon: Icons.headset_mic, color: Colors.cyanAccent, category: 'Mots', maxProgress: 1),
     BadgeDef(id: 'patate_last_second', title: 'À la Seconde Près', description: 'Passer la Patate Chaude avec moins de 2 secondes restantes.', icon: Icons.whatshot, color: Colors.orange, category: 'Mots'),
     BadgeDef(id: 'patate_survivor_3', title: 'Sang Froid Explosif', description: 'Survivre à 3 manches de Patate Chaude d\'affilée.', icon: Icons.shield, color: Colors.deepPurple, category: 'Mots', maxProgress: 3),
     BadgeDef(id: 'synonyme_unbanned', title: 'Vocabulaire Royal', description: 'Ne jamais être banni pendant toute une partie de Synonyme ou Banni.', icon: Icons.spellcheck, color: Colors.indigoAccent, category: 'Mots'),

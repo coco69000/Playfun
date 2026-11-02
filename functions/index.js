@@ -714,13 +714,13 @@ exports.generateAiWords = onCall(
     aiRateLimiter.set(uid, now);
 
     let { instructions = "", count = 20, gameType = "" } = request.data || {};
-    // Plafond relevé à 45 pour supporter Codenames (35) et Time's Up / Pictionary / Devine Tête (40)
-    let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 45));
+    // Plafond relevé à 100 pour supporter de grands packs personnalisés et mix multi-thèmes
+    let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 100));
 
     const safeInstructions = String(instructions)
-      .slice(0, 150)
+      .slice(0, 350)
       .replace(/[\r\n"`]/g, " ")
-      .replace(/[^a-zA-Z0-9À-ÿ\s,.\-':/&?]/g, "")
+      .replace(/[^a-zA-Z0-9À-ÿ\s,.\-':/&?+!()]/g, "")
       .trim();
 
     const safeGameType = String(gameType)
@@ -772,6 +772,24 @@ exports.generateAiWords = onCall(
     } else if (normalizedGame.includes("taboo") || normalizedGame.includes("tabou")) {
       systemPrompt = "Tu es un générateur de cartes pour le jeu Taboo en français. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères au format \"MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5\".";
       userPrompt = `Génère exactement ${parsedCount} cartes pour le jeu Taboo en français au format "MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5" (un mot principal à faire deviner, suivi de 5 mots interdits évidents séparés par des virgules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Paris:France,Capitale,Tour Eiffel,Seine,Ville", "Plage:Sable,Mer,Soleil,Vacances,Serviette"]`;
+    } else if (normalizedGame.includes("action") || normalizedGame.includes("vérité") || normalizedGame.includes("verite")) {
+      systemPrompt = "Tu es un générateur de défis et questions pour le jeu Action ou Vérité. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} propositions pour Action ou Vérité (répartis équitablement entre 'Action: ...' et 'Vérité: ...'). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Action: Imite un animal pendant 30 secondes", "Vérité: Quel est ton pire défaut secret ?"]`;
+    } else if (normalizedGame.includes("dilemme") || normalizedGame.includes("préfères") || normalizedGame.includes("preferes")) {
+      systemPrompt = "Tu es un générateur de dilemmes cornéliens au format 'Option A ou Option B'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} dilemmes cornéliens au format "Option A ou Option B". Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Pouvoir voler ou Être invisible", "Ne plus jamais pouvoir écouter de musique ou Ne plus jamais pouvoir regarder de film"]`;
+    } else if (normalizedGame.includes("patate") || normalizedGame.includes("catégorie") || normalizedGame.includes("categorie")) {
+      systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} catégories d'énumération rapides et accessibles pour la Patate Chaude. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Des marques de voitures", "Des choses qu'on trouve dans un frigo", "Des super-héros"]`;
+    } else if (normalizedGame.includes("mème") || normalizedGame.includes("meme")) {
+      systemPrompt = "Tu es un générateur de situations humoristiques pour Le Roi des Mèmes. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} situations humoristiques d'amorce de mème. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Quand le prof dit que l'examen sera facile", "Quand tu entends ton réveil sonner après 2h de sommeil"]`;
+    } else if (normalizedGame.includes("cadavre")) {
+      systemPrompt = "Tu es un générateur d'amorces de récits pour le jeu Cadavre Exquis. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} débuts de phrases narratives intrigantes ou insolites. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Dans une ruelle sombre de Tokyo, un détective découvrit...", "Ce matin-là, la gravité terrestre s'inversa soudainement..."]`;
+    } else if (normalizedGame.includes("pièce") || normalizedGame.includes("piece") || normalizedGame.includes("objet")) {
+      systemPrompt = "Tu es un générateur de questions spontanées et amusantes pour jeu de rapidité. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
+      userPrompt = `Génère exactement ${parsedCount} questions directes, défis courts ou questions indiscrètes amusantes. Thème imposé: ${safeInstructions || 'Général'}.`;
     }
 
     try {
@@ -787,34 +805,34 @@ exports.generateAiWords = onCall(
             { role: "system", content: systemPrompt },
             { role: "user", content: userPrompt },
           ],
-          max_tokens: 1536,
+          max_tokens: 2500,
           temperature: 0.7,
         }),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Erreur SiliconFlow API:", errorText);
-        throw new Error("Erreur fournisseur IA SiliconFlow");
-      }
+if (!response.ok) {
+  const errorText = await response.text();
+  console.error("Erreur SiliconFlow API:", errorText);
+  throw new Error("Erreur fournisseur IA SiliconFlow");
+}
 
-      const data = await response.json();
-      const content = data.choices?.[0]?.message?.content || "";
-      const match = content.match(/\[[\s\S]*?\]/);
-      if (match) {
-        const list = JSON.parse(match[0]);
-        if (Array.isArray(list)) {
-          return list
-            .map((item) => String(item).trim())
-            .filter((item) => item.length > 0)
-            .slice(0, parsedCount);
-        }
-      }
-      return [];
+const data = await response.json();
+const content = data.choices?.[0]?.message?.content || "";
+const match = content.match(/\[[\s\S]*?\]/);
+if (match) {
+  const list = JSON.parse(match[0]);
+  if (Array.isArray(list)) {
+    return list
+      .map((item) => String(item).trim())
+      .filter((item) => item.length > 0)
+      .slice(0, parsedCount);
+  }
+}
+return [];
     } catch (e) {
-      console.error("Erreur IA sécurisée (SiliconFlow):", e);
-      throw new HttpsError("internal", "Impossible de générer les mots.");
-    }
+  console.error("Erreur IA sécurisée (SiliconFlow):", e);
+  throw new HttpsError("internal", "Impossible de générer les mots.");
+}
   }
 );
 
@@ -951,7 +969,7 @@ exports.sendFriendRequest = onCall(
           err.code === "messaging/registration-token-not-registered" ||
           err.code === "messaging/invalid-registration-token"
         ) {
-          await targetRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => {});
+          await targetRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => { });
         }
       }
     }
@@ -1056,7 +1074,7 @@ exports.sendGameInvite = onCall(
           err.code === "messaging/registration-token-not-registered" ||
           err.code === "messaging/invalid-registration-token"
         ) {
-          await friendRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => {});
+          await friendRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => { });
         }
       }
     }
@@ -1132,7 +1150,7 @@ exports.sendLoungeInvite = onCall(
           err.code === "messaging/registration-token-not-registered" ||
           err.code === "messaging/invalid-registration-token"
         ) {
-          await friendRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => {});
+          await friendRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => { });
         }
       }
     }
@@ -1181,12 +1199,14 @@ exports.cleanupOldGames = onSchedule(
         console.log(`Nettoyage réussi : ${mmSnap.size} entrées de matchmaking supprimées.`);
       }
 
-      // Nettoyage des salons inactifs uniquement s'ils ont plus de 48h
-      const loungeCutoff = new Date(Date.now() - 48 * 60 * 60 * 1000);
+      // Nettoyage des salons : NE JAMAIS supprimer les salons permanents ou les salons créés par les utilisateurs.
+      // Seuls les salons temporaires explicitement fermés (status == 'closed') et sans activité depuis plus de 30 jours sont nettoyés.
+      const loungeCutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
       const loungeSnap = await db
         .collection("lounges")
+        .where("status", "==", "closed")
         .where("createdAt", "<", loungeCutoff)
-        .limit(200)
+        .limit(100)
         .get();
 
       if (!loungeSnap.empty) {
@@ -1194,13 +1214,16 @@ exports.cleanupOldGames = onSchedule(
         const loungeBatch = db.batch();
 
         loungeSnap.docs.forEach((doc) => {
-          loungeBatch.delete(doc.ref);
-          deletedCount++;
+          const lData = doc.data() || {};
+          if (lData.isPermanent !== true) {
+            loungeBatch.delete(doc.ref);
+            deletedCount++;
+          }
         });
 
         if (deletedCount > 0) {
           await loungeBatch.commit();
-          console.log(`Nettoyage réussi : ${deletedCount} anciens salons supprimés.`);
+          console.log(`Nettoyage réussi : ${deletedCount} anciens salons fermés supprimés.`);
         }
       }
     } catch (err) {

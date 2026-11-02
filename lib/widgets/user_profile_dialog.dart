@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../badges_data.dart';
 import '../player_state.dart';
 import '../amis.dart';
+import '../game_content_localization.dart';
+import '../game_rules_localization.dart';
 import '../l10n/app_localizations.dart';
 import '../matchmaking_localization.dart';
 
@@ -380,54 +382,194 @@ void showUserProfileDialog(
                       ),
                     ),
 
-                  // BOUTON SIGNALER / BLOQUER (CONFORMITÉ GUIDELINE 1.2 UGC)
-                  if (!isMe) ...[
-                    const SizedBox(height: 8),
+                  // BOUTON MINIMALISTE "JOUEURS BLOQUÉS" POUR SOI-MÊME
+                  if (isMe) ...[
+                    const SizedBox(height: 6),
                     Center(
                       child: TextButton.icon(
-                        icon: const Icon(Icons.flag_outlined, color: Colors.orangeAccent, size: 16),
-                        label: Text(
-                          "Signaler ou bloquer $name",
-                          style: const TextStyle(color: Colors.orangeAccent, fontSize: 12),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                          backgroundColor: Colors.white.withValues(alpha: 0.05),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (reportCtx) => AlertDialog(
-                              title: Text(MatchmakingLocalization.tr(context, 'reportPlayerTitle', {'name': name})),
-                              content: Text(
-                                MatchmakingLocalization.tr(context, 'reportPlayerConfirm'),
+                        icon: const Icon(Icons.block, color: Colors.white60, size: 14),
+                        label: Text(
+                          ps.blockedUsers.isNotEmpty
+                              ? "Joueurs bloqués (${ps.blockedUsers.length})"
+                              : "Joueurs bloqués",
+                          style: const TextStyle(color: Colors.white70, fontSize: 12),
+                        ),
+                        onPressed: () => _showBlockedUsersDialog(context, ps),
+                      ),
+                    ),
+                  ],
+
+                  // BOUTONS SIGNALER / BLOQUER / DÉBLOQUER POUR AUTRUI
+                  if (!isMe) ...[
+                    const SizedBox(height: 8),
+                    Builder(
+                      builder: (context) {
+                        final bool isBlocked = ps.isUserBlocked(targetUid);
+                        if (isBlocked) {
+                          return Center(
+                            child: TextButton.icon(
+                              style: TextButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                                backgroundColor: Colors.greenAccent.withValues(alpha: 0.12),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                               ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(reportCtx),
-                                  child: Text(AppLocalizations.of(context)?.cancel ?? "Annuler"),
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
-                                  onPressed: () async {
-                                    Navigator.pop(reportCtx);
-                                    Navigator.pop(ctx);
-                                    await FirebaseService().reportAndBlockPlayer(
-                                      reporterId: ps.userId ?? '',
-                                      reportedPlayerId: targetUid,
-                                      reportedPlayerName: name,
-                                      gameCode: 'profile_report',
-                                      reason: 'Signalé depuis le profil utilisateur',
-                                    );
-                                    if (context.mounted) {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text(MatchmakingLocalization.tr(context, 'userReportedBlocked', {'name': name}))),
-                                      );
-                                    }
-                                  },
-                                  child: Text(MatchmakingLocalization.tr(context, 'reportAndBlock')),
-                                ),
-                              ],
+                              icon: const Icon(Icons.lock_open, color: Colors.greenAccent, size: 15),
+                              label: Text(
+                                "Débloquer $name",
+                                style: const TextStyle(color: Colors.greenAccent, fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                              onPressed: () async {
+                                final myId = ps.userId ?? '';
+                                await ps.unblockUser(targetUid);
+                                await FirebaseService().unblockPlayer(myId, targetUid);
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("$name a été débloqué.")),
+                                  );
+                                }
+                              },
                             ),
                           );
-                        },
-                      ),
+                        }
+
+                        return Center(
+                          child: TextButton.icon(
+                            icon: const Icon(Icons.flag_outlined, color: Colors.orangeAccent, size: 16),
+                            label: Text(
+                              GameContentLocalization.format(context, "Signaler ou bloquer {0}", [name]),
+                              style: const TextStyle(color: Colors.orangeAccent, fontSize: 12),
+                            ),
+                            onPressed: () {
+                              String selectedReason = "Comportement inapproprié ou insultes";
+                              showDialog(
+                                context: context,
+                                builder: (reportCtx) => StatefulBuilder(
+                                  builder: (context, setReportState) {
+                                    return AlertDialog(
+                                      backgroundColor: const Color(0xFF1E1E2C),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                      title: Text(
+                                        MatchmakingLocalization.tr(context, 'reportPlayerTitle', {'name': name}),
+                                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
+                                      ),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            MatchmakingLocalization.tr(context, 'reportPlayerConfirm'),
+                                            style: const TextStyle(color: Colors.white70, fontSize: 13),
+                                          ),
+                                          const SizedBox(height: 12),
+                                          const Text(
+                                            "Motif du signalement :",
+                                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white.withValues(alpha: 0.06),
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(color: Colors.white12),
+                                            ),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton<String>(
+                                                value: selectedReason,
+                                                isExpanded: true,
+                                                dropdownColor: const Color(0xFF1E1E2C),
+                                                style: const TextStyle(fontSize: 12, color: Colors.white),
+                                                items: const [
+                                                  DropdownMenuItem(
+                                                    value: "Comportement inapproprié ou insultes",
+                                                    child: Text("Comportement inapproprié ou insultes"),
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    value: "Triche ou anti-jeu",
+                                                    child: Text("Triche ou anti-jeu"),
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    value: "Spam ou publicité",
+                                                    child: Text("Spam ou publicité"),
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    value: "Pseudo ou image offensante",
+                                                    child: Text("Pseudo ou image offensante"),
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    value: "Autre",
+                                                    child: Text("Autre"),
+                                                  ),
+                                                ],
+                                                onChanged: (val) {
+                                                  if (val != null) setReportState(() => selectedReason = val);
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(reportCtx),
+                                          child: Text(AppLocalizations.of(context)?.cancel ?? "Annuler", style: const TextStyle(color: Colors.white60)),
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(backgroundColor: Colors.orangeAccent, foregroundColor: Colors.black),
+                                          onPressed: () async {
+                                            Navigator.pop(reportCtx);
+                                            final myId = ps.userId ?? '';
+                                            await FirebaseService().reportAndBlockPlayer(
+                                              reporterId: myId,
+                                              reportedPlayerId: targetUid,
+                                              reportedPlayerName: name,
+                                              gameCode: 'profile_report',
+                                              reason: selectedReason,
+                                            );
+                                            if (context.mounted) {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text("Signalement envoyé concernant $name. Merci de votre vigilance !")),
+                                              );
+                                            }
+                                          },
+                                          child: const Text("Signaler"),
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent, foregroundColor: Colors.white),
+                                          onPressed: () async {
+                                            Navigator.pop(reportCtx);
+                                            Navigator.pop(ctx);
+                                            final myId = ps.userId ?? '';
+                                            await ps.blockUser(targetUid);
+                                            await FirebaseService().reportAndBlockPlayer(
+                                              reporterId: myId,
+                                              reportedPlayerId: targetUid,
+                                              reportedPlayerName: name,
+                                              gameCode: 'profile_report',
+                                              reason: selectedReason,
+                                            );
+                                            if (context.mounted) {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text(MatchmakingLocalization.tr(context, 'userReportedBlocked', {'name': name}))),
+                                              );
+                                            }
+                                          },
+                                          child: Text(MatchmakingLocalization.tr(context, 'reportAndBlock')),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ],
 
@@ -536,7 +678,7 @@ void showUserProfileDialog(
                                       color: Colors.cyanAccent,
                                     ),
                                     title: Text(
-                                      gName,
+                                      GameRulesLocalization.getGameTitle(context, gName),
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -719,5 +861,103 @@ Widget _buildProfileStatCard(
         ),
       ],
     ),
+  );
+}
+
+
+void _showBlockedUsersDialog(BuildContext context, PlayerState ps) {
+  showDialog(
+    context: context,
+    builder: (dialogCtx) {
+      return Consumer<PlayerState>(
+        builder: (context, playerState, _) {
+          final blockedList = playerState.blockedUsers;
+          final myId = playerState.userId ?? '';
+
+          return AlertDialog(
+            backgroundColor: const Color(0xFF1E1E2C),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            title: Row(
+              children: [
+                const Icon(Icons.block, color: Colors.redAccent, size: 22),
+                const SizedBox(width: 8),
+                Text(
+                  "Joueurs bloqués (${blockedList.length})",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Colors.white),
+                ),
+              ],
+            ),
+            content: blockedList.isEmpty
+                ? const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Text(
+                      "Vous n'avez bloqué aucun joueur.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white54, fontSize: 14),
+                    ),
+                  )
+                : SizedBox(
+                    width: double.maxFinite,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: blockedList.length,
+                      separatorBuilder: (_, __) => const Divider(color: Colors.white12, height: 1),
+                      itemBuilder: (context, index) {
+                        final bUid = blockedList[index];
+                        return FutureBuilder<DocumentSnapshot>(
+                          future: FirebaseFirestore.instance.collection('users').doc(bUid).get(),
+                          builder: (context, snap) {
+                            final uData = snap.data?.data() as Map<String, dynamic>?;
+                            final bName = uData?['name'] ?? 'Joueur ($bUid)';
+
+                            return ListTile(
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                              leading: CircleAvatar(
+                                radius: 16,
+                                backgroundColor: Colors.white12,
+                                child: Text(
+                                  bName.isNotEmpty ? bName[0].toUpperCase() : '?',
+                                  style: const TextStyle(fontSize: 12, color: Colors.white),
+                                ),
+                              ),
+                              title: Text(
+                                bName,
+                                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              trailing: TextButton.icon(
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                  backgroundColor: Colors.greenAccent.withValues(alpha: 0.15),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                ),
+                                icon: const Icon(Icons.lock_open, size: 14, color: Colors.greenAccent),
+                                label: const Text("Débloquer", style: TextStyle(color: Colors.greenAccent, fontSize: 12)),
+                                onPressed: () async {
+                                  await playerState.unblockUser(bUid);
+                                  await FirebaseService().unblockPlayer(myId, bUid);
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("$bName a été débloqué.")),
+                                    );
+                                  }
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(dialogCtx),
+                child: const Text("Fermer", style: TextStyle(color: Colors.white70)),
+              ),
+            ],
+          );
+        },
+      );
+    },
   );
 }

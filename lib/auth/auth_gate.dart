@@ -1,3 +1,4 @@
+import '../game_content_localization.dart';
 // File: lib/auth/auth_gate.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +48,8 @@ class _AuthGateState extends State<AuthGate> {
               return const Scaffold(body: Center(child: CircularProgressIndicator()));
             }
             if (playerStateSnapshot.hasError) {
-              return const Scaffold(
-                body: Center(child: Text("Erreur de chargement des données utilisateur.")),
+              return Scaffold(
+                body: Center(child: Text(GameContentLocalization.ui(context, "Erreur de chargement des données utilisateur."))),
               );
             }
 

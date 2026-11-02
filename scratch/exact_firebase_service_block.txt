@@ -1,0 +1,186 @@
+  /// Retourne le nombre idéal d'éléments générés selon le jeu
+  static int getAiWordCountForGame(String gameType) {
+    switch (gameType) {
+      case 'Codenames':
+        return 35; // 25 requis pour la grille + réserve
+      case 'Time\'s Up':
+      case 'Pictionary':
+      case 'Devine Tête':
+        return 40;
+      case 'Just One':
+        return 20; // 13 cartes pour une partie complète + réserve
+      case 'Infiltré & Mr. White':
+        return 20; // 20 paires "MotCivil:MotInfiltré"
+      case 'Taboo':
+        return 25; // 25 cartes "MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5"
+      case 'Petit Bac':
+      case 'La Patate Chaude':
+      case 'Le Jeu des Catégories':
+        return 20; // 20 catégories thématiques
+      case 'Gribouillis':
+        return 15; // 15 phrases de départ amusantes à dessiner
+      case 'Cadavre Exquis':
+        return 15; // 15 débuts de récits / univers inspirants
+      case 'Le Dilemme':
+        return 20; // 20 dilemmes au format "OptionA ou OptionB"
+      case 'Action ou Vérité':
+      case 'Jeu de la Pièce':
+      case 'On se passe un objet rapidement':
+      case 'Blanc Manger Coco':
+      case 'Le Juge':
+      case 'Le Menteur':
+      case 'Qui Pourrait le Plus ?':
+      case 'Synonyme ou Banni':
+      case 'Le Roi des Mèmes':
+        return 25;
+      default:
+        return 30;
+    }
+  }
+
+  /// Instructions système personnalisées envoyées à la Cloud Function selon le jeu
+  static String formatAiPromptForGame(String gameType, String userPrompt) {
+    switch (gameType) {
+      case 'Infiltré & Mr. White':
+        return "Génère des paires de mots proches au format 'MotCivil:MotInfiltré'. Thème : $userPrompt";
+      case 'Taboo':
+        return "Génère des cartes Taboo au format 'MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5'. Thème : $userPrompt";
+      case 'Petit Bac':
+      case 'La Patate Chaude':
+      case 'Le Jeu des Catégories':
+        return "Génère des catégories originales et amusantes à faire deviner. Thème : $userPrompt";
+      case 'Gribouillis':
+        return "Génère des phrases courtes, visuelles et loufoques à faire dessiner (ex: 'Un dinosaure qui mange une glace'). Thème : $userPrompt";
+      case 'Cadavre Exquis':
+        return "Génère des phrases d'accroche ou univers d'écriture originaux. Thème : $userPrompt";
+      case 'Le Dilemme':
+        return "Génère des dilemmes cornéliens au format 'OptionA ou OptionB' (ex: 'Pouvoir voler ou Être invisible'). Thème : $userPrompt";
+      case 'Action ou Vérité':
+        return "Génère un mélange de défis (actions) et questions indiscrètes (vérités). Thème : $userPrompt";
+      case 'Jeu de la Pièce':
+      case 'On se passe un objet rapidement':
+        return "Génère des questions directes, amusantes et piquantes. Thème : $userPrompt";
+      case 'Blanc Manger Coco':
+        return "Génère des phrases courtes à trou (contenant '_____') pour le jeu. Thème : $userPrompt";
+      case 'Le Juge':
+        return "Génère des questions amusantes sur un joueur (utilise le tag '{player}'). Thème : $userPrompt";
+      case 'Qui Pourrait le Plus ?':
+        return "Génère des situations courtes commençant par une action. Thème : $userPrompt";
+      case 'Le Roi des Mèmes':
+        return "Génère des situations humoristiques et amorces de légendes de mèmes. Thème : $userPrompt";
+      default:
+        return "Génère une liste de mots/expressions pour le jeu $gameType sur le thème : $userPrompt";
+    }
+  }
+
+  /// Enregistre un pack généré par l'IA directement dans Firestore
+  Future<String> saveAiThemeToFirebase({
+    required String uid,
+    required String prompt,
+    required String gameType,
+    required List<String> words,
+    String? title,
+    String? existingDocId,
+  }) async {
+    final colRef = _db.collection('users').doc(uid).collection('ai_history');
+
+    // Titre automatique généré si aucun titre fourni
+    String autoTitle = title ?? '';
+    if (autoTitle.trim().isEmpty) {
+      if (prompt.trim().isNotEmpty) {
+        autoTitle = prompt.trim();
+        if (autoTitle.length > 28)
+          autoTitle = "${autoTitle.substring(0, 28)}...";
+      } else if (words.isNotEmpty) {
+        autoTitle = "Pack ${words.take(2).join(', ')}";
+      } else {
+        autoTitle = "Thème $gameType";
+      }
+    }
+
+    if (existingDocId != null && existingDocId.isNotEmpty) {
+      await colRef.doc(existingDocId).set({
+        'title': autoTitle,
+        'prompt': prompt,
+        'gameType': gameType,
+        'words': words,
+        'updatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+      return existingDocId;
+    } else {
+      final docRef = await colRef.add({
+        'title': autoTitle,
+        'prompt': prompt,
+        'gameType': gameType,
+        'words': words,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+      return docRef.id;
+    }
+  }
+
+  /// Écoute en temps réel de l'historique Firebase filtré par jeu
+  Stream<List<AiThemeHistoryItem>> getAiHistoryStream(
+    String uid,
+    String gameType,
+  ) {
+    return _db
+        .collection('users')
+        .doc(uid)
+        .collection('ai_history')
+        .where('gameType', isEqualTo: gameType)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map(
+          (snap) =>
+              snap.docs.map((doc) => AiThemeHistoryItem.fromDoc(doc)).toList(),
+        );
+  }
+
+  /// Suppression d'un thème sur Firebase
+  Future<void> deleteAiThemeFromFirebase(String uid, String docId) async {
+    await _db
+        .collection('users')
+        .doc(uid)
+        .collection('ai_history')
+        .doc(docId)
+        .delete();
+  }
+
+  /// Sauvegarde ou met à jour un pack IA dans l'historique de l'utilisateur (rétro-compatibilité)
+  Future<String> saveAiThemeHistory({
+    required String uid,
+    required String prompt,
+    required String gameType,
+    required List<String> words,
+    String? title,
+    String? existingId,
+  }) => saveAiThemeToFirebase(
+    uid: uid,
+    prompt: prompt,
+    gameType: gameType,
+    words: words,
+    title: title,
+    existingDocId: existingId,
+  );
+
+  /// Récupère le flux d'historique filtré pour un utilisateur et optionnellement par jeu (rétro-compatibilité)
+  Stream<List<AiThemeHistoryItem>> getAiThemeHistoryStream(
+    String uid, {
+    String? gameType,
+  }) {
+    if (gameType != null && gameType.isNotEmpty) {
+      return getAiHistoryStream(uid, gameType);
+    }
+    return _db
+        .collection('users')
+        .doc(uid)
+        .collection('ai_history')
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map(
+          (snap) =>
+              snap.docs.map((doc) => AiThemeHistoryItem.fromDoc(doc)).toList(),
+        );
+  }
+

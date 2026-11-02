@@ -10,6 +10,7 @@ import 'matchmaking_localization.dart';
 import 'auth/auth_gate.dart';
 import 'auth/auth_service.dart';
 import 'amis.dart';
+import 'game_data_words.dart';
 import 'firebase_options.dart';
 import 'player_state.dart';
 import 'premium_screen.dart';
@@ -24,9 +25,60 @@ import 'services/force_update_service.dart';
 import 'services/legal_links.dart';
 
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+/// Langue choisie manuellement par l'utilisateur (null = langue du téléphone).
+final ValueNotifier<Locale?> appLocale = ValueNotifier<Locale?>(null);
+
+const Map<String, String> kAppLanguages = {
+  'fr': '🇫🇷 Français',
+  'en': '🇬🇧 English',
+  'es': '🇪🇸 Español',
+  'de': '🇩🇪 Deutsch',
+  'it': '🇮🇹 Italiano',
+  'pt': '🇵🇹 Português',
+  'nl': '🇳🇱 Nederlands',
+  'pl': '🇵🇱 Polski',
+  'ru': '🇷🇺 Русский',
+  'uk': '🇺🇦 Українська',
+  'ro': '🇷🇴 Română',
+  'el': '🇬🇷 Ελληνικά',
+  'cs': '🇨🇿 Čeština',
+  'sv': '🇸🇪 Svenska',
+  'da': '🇩🇰 Dansk',
+  'fi': '🇫🇮 Suomi',
+  'no': '🇳🇴 Norsk',
+  'hu': '🇭🇺 Magyar',
+  'sk': '🇸🇰 Slovenčina',
+  'hr': '🇭🇷 Hrvatski',
+  'bg': '🇧🇬 Български',
+  'tr': '🇹🇷 Türkçe',
+};
+
+Future<void> setAppLanguage(String? code) async {
+  appLocale.value = code == null ? null : Locale(code);
+  if (code == null) {
+    GameWords.resetToDeviceLanguage();
+  } else {
+    GameWords.setLanguage(code);
+  }
+  final prefs = await SharedPreferences.getInstance();
+  if (code == null) {
+    await prefs.remove('app_language');
+  } else {
+    await prefs.setString('app_language', code);
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  try {
+    final saved = (await SharedPreferences.getInstance()).getString('app_language');
+    if (saved != null) {
+      appLocale.value = Locale(saved);
+      GameWords.setLanguage(saved);
+    }
+  } catch (_) {}
   ForceUpdateService.navigatorKey = GlobalKey<NavigatorState>();
   await ForceUpdateService.init();
   await Supabase.initialize(
@@ -62,7 +114,10 @@ class MyAppWithAuth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ValueListenableBuilder<Locale?>(
+      valueListenable: appLocale,
+      builder: (context, loc, _) => MaterialApp(
+      locale: loc,
       navigatorKey: ForceUpdateService.navigatorKey,
       title: 'PlayFun',
       theme: AppTheme.darkTheme,
@@ -101,6 +156,7 @@ class MyAppWithAuth extends StatelessWidget {
         Locale('bg', ''), // Bulgarie
         Locale('tr', ''), // Turquie
       ],
+      ),
     );
   }
 }
@@ -145,7 +201,28 @@ class _MainScreenState extends State<MainScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                title: Text(l10n?.profileTitle ?? "Profil & Paramètres", textAlign: TextAlign.center),
+                title: Row(
+                  children: [
+                    const SizedBox(width: 40),
+                    Expanded(
+                      child: Text(l10n?.profileTitle ?? "Profil & Paramètres", textAlign: TextAlign.center),
+                    ),
+                    PopupMenuButton<String>(
+                      tooltip: 'Language',
+                      icon: const Icon(Icons.language, color: Colors.cyanAccent),
+                      onSelected: (code) => setAppLanguage(code),
+                      itemBuilder:
+                          (_) => kAppLanguages.entries
+                              .map(
+                                (e) => PopupMenuItem<String>(
+                                  value: e.key,
+                                  child: Text(e.value),
+                                ),
+                              )
+                              .toList(),
+                    ),
+                  ],
+                ),
                 content: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -524,16 +601,45 @@ class _MainScreenState extends State<MainScreen> {
             onTap: () => _showProfileDialog(context, playerState, authService),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: CircleAvatar(
-                radius: 16,
-                backgroundColor: Colors.deepPurpleAccent,
-                child: Text(
-                  playerState.userName != null &&
-                          playerState.userName!.isNotEmpty
-                      ? playerState.userName![0].toUpperCase()
-                      : "?",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  CircleAvatar(
+                    radius: 16,
+                    backgroundColor:
+                        playerState.isPremium
+                            ? Colors.amber[700]
+                            : Colors.deepPurpleAccent,
+                    child: Text(
+                      playerState.userName != null &&
+                              playerState.userName!.isNotEmpty
+                          ? playerState.userName![0].toUpperCase()
+                          : "?",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  if (playerState.isPremium)
+                    Positioned(
+                      bottom: -2,
+                      right: -2,
+                      child: Container(
+                        padding: const EdgeInsets.all(1.5),
+                        decoration: const BoxDecoration(
+                          color: Colors.amber,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.star,
+                          size: 9,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
           ),

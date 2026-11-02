@@ -49,4 +49,56 @@ class GameWordsLanguageData {
     required this.judgeData,
     required this.liarData,
   });
+
+  /// Copie avec remplacement des contenus des jeux traduits dans des langues supplémentaires.
+  GameWordsLanguageData copyWith({
+    Map<String, List<String>>? devineTeteByDifficulty,
+    Map<String, Map<String, List<String>>>? devineTeteCategories,
+    Map<String, List<String>>? pictionaryWords,
+    Map<String, List<String>>? justOneWords,
+    Map<String, Map<String, List<String>>>? hotPotatoCategories,
+    List<String>? hotPotatoGages,
+    Map<String, Map<String, List<String>>>? undercoverData,
+    List<String>? petitBacDefaultCategories,
+    Map<String, List<String>>? timesUpWords,
+    Map<String, Map<String, List<String>>>? synonymOrBanned,
+    Map<String, List<String>>? whoIsMostLikely,
+    Map<String, List<String>>? truths,
+    Map<String, List<String>>? dares,
+    Map<String, List<String>>? coinFlipQuestions,
+    Map<String, List<String>>? dilemmas,
+    Map<String, List<String>>? passTheObjectQuestions,
+    List<String>? codenamesWords,
+    Map<String, List<String>>? codenamesByDifficulty,
+    Map<String, Map<String, List<String>>>? tabooWordsData,
+    Map<String, Map<String, List<String>>>? bmcData,
+    Map<String, List<String>>? judgeData,
+    Map<String, List<String>>? liarData,
+  }) {
+    return GameWordsLanguageData(
+      devineTeteByDifficulty: devineTeteByDifficulty ?? this.devineTeteByDifficulty,
+      devineTeteCategories: devineTeteCategories ?? this.devineTeteCategories,
+      pictionaryWords: pictionaryWords ?? this.pictionaryWords,
+      justOneWords: justOneWords ?? this.justOneWords,
+      hotPotatoCategories: hotPotatoCategories ?? this.hotPotatoCategories,
+      hotPotatoGages: hotPotatoGages ?? this.hotPotatoGages,
+      undercoverData: undercoverData ?? this.undercoverData,
+      petitBacDefaultCategories: petitBacDefaultCategories ?? this.petitBacDefaultCategories,
+      timesUpWords: timesUpWords ?? this.timesUpWords,
+      synonymOrBanned: synonymOrBanned ?? this.synonymOrBanned,
+      whoIsMostLikely: whoIsMostLikely ?? this.whoIsMostLikely,
+      truths: truths ?? this.truths,
+      dares: dares ?? this.dares,
+      coinFlipQuestions: coinFlipQuestions ?? this.coinFlipQuestions,
+      dilemmas: dilemmas ?? this.dilemmas,
+      passTheObjectQuestions: passTheObjectQuestions ?? this.passTheObjectQuestions,
+      codenamesWords: codenamesWords ?? this.codenamesWords,
+      codenamesByDifficulty: codenamesByDifficulty ?? this.codenamesByDifficulty,
+      tabooWordsData: tabooWordsData ?? this.tabooWordsData,
+      bmcData: bmcData ?? this.bmcData,
+      judgeData: judgeData ?? this.judgeData,
+      liarData: liarData ?? this.liarData,
+    );
+  }
 }
+
