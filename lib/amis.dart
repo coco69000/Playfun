@@ -23653,7 +23653,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           gameType: _selectedGame,
           difficulty: _selectedDifficulty,
           playerCount: widget.loungePlayers!.length,
-          isPremiumLobby: _isPremiumLobby,
+          isPremiumLobby: playerState.isPremium,
           videoEnabled: _videoEnabled,
           audioEnabled: _audioEnabled,
           useTimer: _useTimer,
@@ -23667,7 +23667,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               _selectedGame == "Time's Up" ? _timesUpTotalRounds : null,
           petitBacCategories:
               _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
-          petitBacTime: _selectedGame == 'Petit Bac' ? _petitBacTime : null,
+          petitBacTime: _selectedGame == 'Petit Bac' ? _turnTimerSeconds : null,
           photoRouletteRounds:
               _selectedGame == 'Photo Roulette' ? _photoRouletteRounds : null,
           photoRoulettePhotosPerPlayer:
@@ -23675,7 +23675,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                   ? _photoRoulettePhotosPerPlayer
                   : null,
           photoRouletteTime:
-              _selectedGame == 'Photo Roulette' ? _photoRouletteTime : null,
+              _selectedGame == 'Photo Roulette' ? _turnTimerSeconds : null,
           photoRouletteMediaType:
               _selectedGame == 'Photo Roulette' ? _photoRouletteMediaType : null,
           infiltreCount:
@@ -23683,7 +23683,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           mrWhiteCount:
               _selectedGame == 'Infiltré & Mr. White' ? _mrWhiteCount : null,
           undercoverClueTime:
-              _selectedGame == 'Infiltré & Mr. White' ? _undercoverClueTime : null,
+              _selectedGame == 'Infiltré & Mr. White' ? _turnTimerSeconds : null,
           undercoverRoleSettings: _undercoverRoleSettings,
           selectedLoupGarouRoles: _selectedLoupGarouRoles,
           petitsChevauxTeamMode:
@@ -23696,8 +23696,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           justOneAllowInvalidClues: _justOneAllowInvalidClues,
           cadavreVariant: _cadavreVariant,
           cadavrePassingMode: _cadavrePassingMode,
-          aiInstructions: _aiInstructions,
-          aiWords: _aiWords,
+          aiInstructions:
+              (playerState.isPremium && _aiSupportedGames.contains(_selectedGame))
+                  ? (_aiInstructionsController.text.trim().isNotEmpty
+                      ? _aiInstructionsController.text.trim()
+                      : null)
+                  : null,
+          aiWords: preGeneratedAiWords,
           dobbleSymbolsPerCard: _dobbleSymbolsPerCard,
           isSimplifiedLiar: _isSimplifiedLiar,
           liarVoteMode: _liarVoteMode,
