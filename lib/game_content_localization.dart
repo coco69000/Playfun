@@ -4,7 +4,9 @@
 // (clés stockées dans Firestore / utilisées par la logique de jeu).
 // Ordre des langues : fr, en, es, de, it, pt, nl, pl, ru, uk, ro, el, cs, sv, da, fi, no, hu, sk, hr, bg, tr.
 
+import 'dart:ui' as dart_ui;
 import 'package:flutter/widgets.dart';
+import 'game_ui_localization.dart';
 
 class GameContentLocalization {
   static const List<String> _langs = [
@@ -13,9 +15,14 @@ class GameContentLocalization {
   ];
 
   static String _code(BuildContext? context) {
-    if (context == null) return 'fr';
+    if (context != null) {
+      try {
+        final loc = Localizations.maybeLocaleOf(context);
+        if (loc != null) return loc.languageCode.toLowerCase();
+      } catch (_) {}
+    }
     try {
-      return Localizations.localeOf(context).languageCode.toLowerCase();
+      return dart_ui.PlatformDispatcher.instance.locale.languageCode.toLowerCase();
     } catch (_) {
       return 'fr';
     }
@@ -64,8 +71,14 @@ class GameContentLocalization {
     return text;
   }
 
-  static String ui(BuildContext? context, String frText) =>
-      _lookup(_ui, _code(context), frText) ?? _lookup(_roles, _code(context), frText) ?? frText;
+  static String ui(BuildContext? context, String frText) {
+    final code = _code(context);
+    final res = _lookup(_ui, code, frText) ?? _lookup(_roles, code, frText);
+    if (res != null && (code == 'fr' || res != frText)) return res;
+    final fromGui = GameUiLocalization.tr(context, frText);
+    if (fromGui != frText) return fromGui;
+    return res ?? frText;
+  }
 
   static const Map<String, String> _ui = {
     "Invitation envoyée à {0} !": "Invitation envoyée à {0} !|Invite sent to {0}!|¡Invitación enviada a {0}!|Einladung an {0} gesendet!|Invito inviato a {0}!|Convite enviado para {0}!|Uitnodiging verzonden naar {0}!|Zaproszenie wysłane do {0}!|Приглашение отправлено {0}!|Запрошення надіслано {0}!|Invitație trimisă lui {0}!|Η πρόσκληση στάλθηκε στον/στην {0}!|Pozvánka odeslána uživateli {0}!|Inbjudan skickad till {0}!|Invitation sendt til {0}!|Kutsu lähetetty käyttäjälle {0}!|Invitasjon sendt til {0}!|Meghívó elküldve {0} részére!|Pozvánka odoslaná používateľovi {0}!|Pozivnica poslana korisniku {0}!|Поканата е изпратена на {0}!|{0} kullanıcısına davet gönderildi!",

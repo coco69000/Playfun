@@ -3,6 +3,7 @@
 // Support exhaustif des 22 langues configurées dans l'application :
 // fr, en, es, de, it, pt, nl, pl, ru, uk, ro, el, cs, sv, da, fi, no, hu, sk, hr, bg, tr.
 
+import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart';
 
 class GameUiLocalization {
@@ -11,7 +12,14 @@ class GameUiLocalization {
     String lang = 'fr';
     if (context != null) {
       try {
-        lang = Localizations.localeOf(context).languageCode.toLowerCase();
+        final loc = Localizations.maybeLocaleOf(context);
+        if (loc != null) lang = loc.languageCode.toLowerCase();
+      } catch (_) {
+        lang = 'fr';
+      }
+    } else {
+      try {
+        lang = ui.PlatformDispatcher.instance.locale.languageCode.toLowerCase();
       } catch (_) {
         lang = 'fr';
       }
@@ -42,7 +50,10 @@ class GameUiLocalization {
 
     if (params != null && params.isNotEmpty) {
       params.forEach((placeholder, value) {
-        translation = translation!.replaceAll('{\$placeholder}', value);
+        translation = translation!
+            .replaceAll('{' + placeholder + '}', value)
+            .replaceAll('{' + placeholder.toLowerCase() + '}', value)
+            .replaceAll('{' + placeholder.toUpperCase() + '}', value);
       });
     }
 

@@ -31426,7 +31426,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     if (showFloatingChat)
                       Positioned(
                         left: 10,
-                        bottom: (currentGameType == 'Pictionary') ? 64 : 12,
+                        right: 10,
+                        bottom: (currentGameType == 'Pictionary') ? 64 : 10,
                         child: FloatingChatOverlay(
                           gameCode: widget.gameCode,
                           playerId: playerId,
@@ -50924,6 +50925,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return;
       }
 
+      if (_selectedDominoTile == tile) {
+        setState(() => _selectedDominoTile = null);
+        return;
+      }
+
       if (boardChain.isEmpty) {
         _playTile(tile, -1);
         return;
@@ -51156,93 +51162,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         boardChain
                             .map((e) => Map<String, dynamic>.from(e))
                             .toList(),
+                    selectedTile: _selectedDominoTile,
+                    onEndTap: (matchEnd) {
+                      if (_selectedDominoTile != null) {
+                        _playTile(_selectedDominoTile!, matchEnd);
+                      }
+                    },
                   ),
-                  if (_selectedDominoTile != null)
-                    Positioned.fill(
-                      child: Container(
-                        color: Colors.black.withOpacity(0.85),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.touch_app,
-                              color: Colors.amber,
-                              size: 40,
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              GameUiLocalization.tr(
-                                context,
-                                'Sur quel côté placer le {tile} ?',
-                                {'tile': '$_selectedDominoTile'},
-                              ),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 30),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children:
-                                  openEnds
-                                      .where((e) {
-                                        final p = _selectedDominoTile!.split(
-                                          '-',
-                                        );
-                                        return e == int.parse(p[0]) ||
-                                            e == int.parse(p[1]);
-                                      })
-                                      .toSet()
-                                      .map((end) {
-                                        return ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.amber,
-                                            foregroundColor: Colors.black,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 28,
-                                              vertical: 16,
-                                            ),
-                                          ),
-                                          onPressed:
-                                              () => _playTile(
-                                                _selectedDominoTile!,
-                                                end,
-                                              ),
-                                          child: Text(
-                                            GameUiLocalization.tr(
-                                              context,
-                                              'Sur le {end}',
-                                              {'end': '$end'},
-                                            ),
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        );
-                                      })
-                                      .toList(),
-                            ),
-                            const SizedBox(height: 40),
-                            TextButton(
-                              onPressed:
-                                  () => setState(
-                                    () => _selectedDominoTile = null,
-                                  ),
-                              child: Text(
-                                GameUiLocalization.tr(context, 'Annuler'),
-                                style: const TextStyle(
-                                  color: Colors.white54,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                 ],
               ),
             ),
@@ -64779,7 +64705,19 @@ enum TileOrientation { horizontal, vertical }
 class LayoutResult {
   final List<PlacedTile> tiles;
   final Size boardSize;
-  LayoutResult(this.tiles, this.boardSize);
+  final int leftVal;
+  final int rightVal;
+  final PlacedTile? leftTile;
+  final PlacedTile? rightTile;
+
+  LayoutResult(
+    this.tiles,
+    this.boardSize, {
+    this.leftVal = -1,
+    this.rightVal = -1,
+    this.leftTile,
+    this.rightTile,
+  });
 }
 
 // ─── Moteur de layout (Vraie logique bout à bout) ──────────
@@ -64912,51 +64850,222 @@ class ChainLayoutEngine {
           );
         }).toList();
 
-    return LayoutResult(shiftedResult, Size(totalWidth, totalHeight));
+    PlacedTile? leftTile;
+    PlacedTile? rightTile;
+    if (shiftedResult.isNotEmpty) {
+      leftTile = shiftedResult.reduce((a, b) => a.position.dx < b.position.dx ? a : b);
+      rightTile = shiftedResult.reduce((a, b) => a.position.dx > b.position.dx ? a : b);
+    }
+    return LayoutResult(
+      shiftedResult,
+      Size(totalWidth, totalHeight),
+      leftVal: leftVal,
+      rightVal: rightVal,
+      leftTile: leftTile,
+      rightTile: rightTile,
+    );
   }
 }
 
 // ─── Widget du plateau de jeu ──────────────────────────────
-class DominoesBoardWidget extends StatelessWidget {
+class DominoesBoardWidget extends StatefulWidget {
   final List<Map<String, dynamic>> chain;
+  final String? selectedTile;
+  final ValueChanged<int>? onEndTap;
 
-  const DominoesBoardWidget({super.key, required this.chain});
+  const DominoesBoardWidget({
+    super.key,
+    required this.chain,
+    this.selectedTile,
+    this.onEndTap,
+  });
+
+  @override
+  State<DominoesBoardWidget> createState() => _DominoesBoardWidgetState();
+}
+
+class _DominoesBoardWidgetState extends State<DominoesBoardWidget>
+    with SingleTickerProviderStateMixin {
+  final TransformationController _transformationController =
+      TransformationController();
+  late AnimationController _glowAnimController;
+  int _lastChainLength = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    _glowAnimController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _glowAnimController.dispose();
+    _transformationController.dispose();
+    super.dispose();
+  }
+
+  void _autoFit(Size boardSize, BoxConstraints constraints) {
+    if (constraints.maxWidth <= 0 || constraints.maxHeight <= 0) return;
+    final scaleX = (constraints.maxWidth - 36) / boardSize.width;
+    final scaleY = (constraints.maxHeight - 36) / boardSize.height;
+    final scale = min(scaleX, scaleY).clamp(0.08, 1.0);
+
+    final tx = (constraints.maxWidth - boardSize.width * scale) / 2;
+    final ty = (constraints.maxHeight - boardSize.height * scale) / 2;
+
+    _transformationController.value = Matrix4.identity()
+      ..translate(tx, ty)
+      ..scale(scale);
+  }
 
   @override
   Widget build(BuildContext context) {
     final engine = ChainLayoutEngine();
-    final layout = engine.computeLayout(chain);
+    final layout = engine.computeLayout(widget.chain);
 
-    return InteractiveViewer(
-      minScale: 0.1,
-      maxScale: 2.5,
-      constrained: false, // Permet le scroll infini
-      boundaryMargin: const EdgeInsets.all(double.infinity),
-      child: SizedBox(
-        width: layout.boardSize.width,
-        height: layout.boardSize.height,
-        child: Stack(
-          alignment: Alignment.center,
-          children:
-              layout.tiles
-                  .map(
-                    (p) => Positioned(
-                      left:
-                          p.position.dx -
-                          (p.orientation == TileOrientation.vertical
-                              ? ChainLayoutEngine.HALF_W
-                              : ChainLayoutEngine.HALF_W * 2),
-                      top:
-                          p.position.dy -
-                          (p.orientation == TileOrientation.vertical
-                              ? ChainLayoutEngine.HALF_W * 2
-                              : ChainLayoutEngine.HALF_H),
-                      child: _BoardTile(tile: p.tile, flipped: p.flipped),
+    // Parsing du domino sélectionné pour savoir quelle extrémité illuminer
+    int? selA;
+    int? selB;
+    if (widget.selectedTile != null) {
+      final parts = widget.selectedTile!.split('-');
+      if (parts.length == 2) {
+        selA = int.tryParse(parts[0]);
+        selB = int.tryParse(parts[1]);
+      }
+    }
+
+    final bool matchLeft = (selA != null && selB != null) &&
+        (layout.leftVal == selA || layout.leftVal == selB) &&
+        layout.leftTile != null;
+
+    final bool matchRight = (selA != null && selB != null) &&
+        (layout.rightVal == selA || layout.rightVal == selB) &&
+        layout.rightTile != null;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (_lastChainLength != widget.chain.length) {
+          _lastChainLength = widget.chain.length;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) _autoFit(layout.boardSize, constraints);
+          });
+        }
+
+        return InteractiveViewer(
+          transformationController: _transformationController,
+          minScale: 0.05,
+          maxScale: 3.0,
+          constrained: false,
+          boundaryMargin: const EdgeInsets.all(double.infinity),
+          child: SizedBox(
+            width: layout.boardSize.width,
+            height: layout.boardSize.height,
+            child: Stack(
+              alignment: Alignment.center,
+              children: layout.tiles.map((p) {
+                final bool isLeftEnd = (p == layout.leftTile) && matchLeft;
+                final bool isRightEnd = (p == layout.rightTile) && matchRight;
+                final bool isIlluminated = isLeftEnd || isRightEnd;
+                final int endValue = isLeftEnd ? layout.leftVal : layout.rightVal;
+
+                return Positioned(
+                  left: p.position.dx -
+                      (p.orientation == TileOrientation.vertical
+                          ? ChainLayoutEngine.HALF_W
+                          : ChainLayoutEngine.HALF_W * 2),
+                  top: p.position.dy -
+                      (p.orientation == TileOrientation.vertical
+                          ? ChainLayoutEngine.HALF_W * 2
+                          : ChainLayoutEngine.HALF_H),
+                  child: GestureDetector(
+                    onTap: isIlluminated && widget.onEndTap != null
+                        ? () => widget.onEndTap!(endValue)
+                        : null,
+                    behavior: HitTestBehavior.opaque,
+                    child: AnimatedBuilder(
+                      animation: _glowAnimController,
+                      builder: (context, child) {
+                        final glow = isIlluminated ? _glowAnimController.value : 0.0;
+                        return Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: isIlluminated
+                                    ? [
+                                        BoxShadow(
+                                          color: Colors.amberAccent.withValues(
+                                            alpha: 0.4 + 0.5 * glow,
+                                          ),
+                                          blurRadius: 10 + 10 * glow,
+                                          spreadRadius: 2 + 3 * glow,
+                                        ),
+                                      ]
+                                    : null,
+                              ),
+                              child: _BoardTile(
+                                tile: p.tile,
+                                flipped: p.flipped,
+                                isHighlighted: isIlluminated,
+                              ),
+                            ),
+                            if (isIlluminated)
+                              Positioned(
+                                top: -24,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [Colors.amber, Colors.orangeAccent],
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withValues(alpha: 0.5),
+                                        blurRadius: 4,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.touch_app,
+                                        size: 11,
+                                        color: Colors.black,
+                                      ),
+                                      const SizedBox(width: 3),
+                                      Text(
+                                        "$endValue",
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                          ],
+                        );
+                      },
                     ),
-                  )
-                  .toList(),
-        ),
-      ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -64965,8 +65074,13 @@ class DominoesBoardWidget extends StatelessWidget {
 class _BoardTile extends StatelessWidget {
   final String tile;
   final bool flipped;
+  final bool isHighlighted;
 
-  const _BoardTile({required this.tile, required this.flipped});
+  const _BoardTile({
+    required this.tile,
+    required this.flipped,
+    this.isHighlighted = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -64985,9 +65099,10 @@ class _BoardTile extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(
-          color:
-              isDouble ? Colors.amber.withOpacity(0.8) : Colors.grey.shade400,
-          width: 1.5,
+          color: isHighlighted
+              ? Colors.amberAccent
+              : (isDouble ? Colors.amber.withOpacity(0.8) : Colors.grey.shade400),
+          width: isHighlighted ? 2.5 : 1.5,
         ),
         boxShadow: const [
           BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(2, 2)),
@@ -65222,7 +65337,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
   final FirebaseService _firebaseService = FirebaseService();
   final TextEditingController _textCtrl = TextEditingController();
   final ScrollController _scrollCtrl = ScrollController();
-  bool _isExpanded = false;
+  bool _isSwipedUp = false; // false = 3 messages, true = 5 messages
   bool _isSending = false;
 
   @override
@@ -65270,14 +65385,12 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
     return StreamBuilder<QuerySnapshot>(
       stream: _firebaseService.getChatStream(widget.gameCode, 'global'),
       builder: (context, snapshot) {
         final messages = snapshot.hasData ? snapshot.data!.docs : [];
-
         final ps = Provider.of<PlayerState>(context, listen: false);
+
         // Messages ordonnés chronologiquement (du plus ancien au plus récent)
         final List<Map<String, dynamic>> allMessages = messages
             .map((doc) => doc.data() as Map<String, dynamic>)
@@ -65290,302 +65403,192 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
             .reversed
             .toList();
 
-        // 3 derniers messages pour le mode réduit
-        final List<Map<String, dynamic>> lastThreeMessages = allMessages.length > 3
-            ? allMessages.sublist(allMessages.length - 3)
+        // 3 messages par défaut, 5 messages si swipé vers le haut
+        final int targetCount = _isSwipedUp ? 5 : 3;
+        final List<Map<String, dynamic>> displayMessages = allMessages.length > targetCount
+            ? allMessages.sublist(allMessages.length - targetCount)
             : allMessages;
 
-        if (_isExpanded) {
-          // --- FENÊTRE AGRANDIE (TRANSPARENTE & MINIMALISTE) ---
-          final chatWidth = min(screenWidth * 0.85, 300.0);
-          return Material(
-            color: Colors.transparent,
-            child: Container(
-              width: chatWidth,
-              height: 310,
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.70),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.45),
-                    blurRadius: 14,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  // En-tête avec bouton réduire
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.06),
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.chat_bubble_outline_rounded, size: 14, color: Colors.cyanAccent),
-                        const SizedBox(width: 6),
-                        const Text(
-                          "Chat en direct",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Spacer(),
-                        InkWell(
-                          onTap: () => setState(() => _isExpanded = false),
-                          borderRadius: BorderRadius.circular(8),
-                          child: const Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Icon(Icons.close_fullscreen_rounded, size: 15, color: Colors.white70),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Liste des messages complète défilable
-                  Expanded(
-                    child: allMessages.isEmpty
-                        ? const Center(
-                            child: Text(
-                              "Aucun message pour l'instant",
-                              style: TextStyle(color: Colors.white38, fontSize: 11),
-                            ),
-                          )
-                        : ListView.builder(
-                            controller: _scrollCtrl,
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                            itemCount: allMessages.length,
-                            itemBuilder: (context, index) {
-                              final msg = allMessages[index];
-                              final sender = msg['senderName'] ?? 'Joueur';
-                              final text = msg['text'] ?? '';
-                              final isMe = msg['senderId'] == widget.playerId;
-
-                              return Align(
-                                alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(10),
-                                  onTap: isMe
-                                      ? null
-                                      : () {
-                                          if (msg['senderId'] != null) {
-                                            showUserProfileDialog(
-                                              context,
-                                              targetUid: msg['senderId'],
-                                              currentUserId: widget.playerId,
-                                            );
-                                          }
-                                        },
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 2.5),
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                    decoration: BoxDecoration(
-                                      color: isMe
-                                          ? Colors.deepPurpleAccent.withValues(alpha: 0.40)
-                                          : Colors.white.withValues(alpha: 0.12),
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        color: isMe
-                                            ? Colors.deepPurpleAccent.withValues(alpha: 0.5)
-                                            : Colors.white.withValues(alpha: 0.08),
-                                      ),
-                                    ),
-                                    child: RichText(
-                                      text: TextSpan(
-                                        style: const TextStyle(fontSize: 12, color: Colors.white),
-                                        children: [
-                                          TextSpan(
-                                            text: "$sender : ",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 11.5,
-                                              color: isMe ? Colors.pinkAccent : Colors.cyanAccent,
-                                            ),
-                                          ),
-                                          TextSpan(text: text),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                  ),
-                  // Saisie de message
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.04),
-                      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _textCtrl,
-                            style: const TextStyle(color: Colors.white, fontSize: 12),
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                              hintText: "Écrire un message...",
-                              hintStyle: const TextStyle(color: Colors.white38, fontSize: 11),
-                              filled: true,
-                              fillColor: Colors.black.withValues(alpha: 0.35),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide: const BorderSide(color: Colors.cyanAccent, width: 1),
-                              ),
-                            ),
-                            onSubmitted: (_) => _sendMessage(),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-                        IconButton(
-                          icon: _isSending
-                              ? const SizedBox(
-                                  width: 14,
-                                  height: 14,
-                                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.cyanAccent),
-                                )
-                              : const Icon(Icons.send_rounded, size: 16, color: Colors.cyanAccent),
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                          onPressed: _sendMessage,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-
-        // --- FENÊTRE RÉDUITE : 3 DERNIERS MESSAGES, DÉFILABLE, TRANSPARENTE ET MINIMALISTE ---
-        final chatWidth = min(screenWidth * 0.72, 245.0);
         return Material(
           color: Colors.transparent,
-          child: Container(
-            width: chatWidth,
-            constraints: const BoxConstraints(maxHeight: 120),
-            decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.28),
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.25),
-                  blurRadius: 8,
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Mini barre de contrôle
-                InkWell(
-                  onTap: () => setState(() => _isExpanded = true),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.chat_bubble_outline_rounded, size: 11, color: Colors.cyanAccent),
-                        const SizedBox(width: 4),
-                        const Text(
-                          "Chat",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Icon(Icons.open_in_full_rounded, size: 11, color: Colors.white60),
-                      ],
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // ── MESSAGES FLOTTANTS SANS ENCADRÉ LOURD, AVEC SWIPE HAUT/BAS ──
+              if (displayMessages.isNotEmpty)
+                GestureDetector(
+                  onVerticalDragEnd: (details) {
+                    final vel = details.primaryVelocity;
+                    if (vel != null) {
+                      if (vel < -60) {
+                        // Swipe vers le haut : on affiche 5 messages
+                        setState(() => _isSwipedUp = true);
+                      } else if (vel > 60) {
+                        // Swipe vers le bas : on revient à 3 messages
+                        setState(() => _isSwipedUp = false);
+                      }
+                    }
+                  },
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxHeight: _isSwipedUp ? 150.0 : 90.0,
                     ),
-                  ),
-                ),
-                // 3 derniers messages défilables et transparents
-                Flexible(
-                  child: lastThreeMessages.isEmpty
-                      ? InkWell(
-                          onTap: () => setState(() => _isExpanded = true),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                            child: Text(
-                              "Toucher pour écrire...",
-                              style: TextStyle(color: Colors.white38, fontSize: 10, fontStyle: FontStyle.italic),
-                            ),
-                          ),
-                        )
-                      : Scrollbar(
-                          thumbVisibility: false,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            itemCount: lastThreeMessages.length,
-                            itemBuilder: (context, index) {
-                              final msg = lastThreeMessages[index];
-                              final sender = msg['senderName'] ?? 'Joueur';
-                              final text = msg['text'] ?? '';
-                              final isMe = msg['senderId'] == widget.playerId;
+                    child: Scrollbar(
+                      controller: _scrollCtrl,
+                      thumbVisibility: _isSwipedUp,
+                      child: ListView.builder(
+                        controller: _scrollCtrl,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: displayMessages.length,
+                        itemBuilder: (context, index) {
+                          final msg = displayMessages[index];
+                          final sender = msg['senderName'] ?? 'Joueur';
+                          final text = msg['text'] ?? '';
+                          final isMe = msg['senderId'] == widget.playerId;
 
-                              return Container(
-                                margin: const EdgeInsets.symmetric(vertical: 1.5),
-                                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                          return Align(
+                            alignment: Alignment.centerLeft,
+                            child: GestureDetector(
+                              onTap: isMe
+                                  ? null
+                                  : () {
+                                      if (msg['senderId'] != null) {
+                                        showUserProfileDialog(
+                                          context,
+                                          targetUid: msg['senderId'],
+                                          currentUserId: widget.playerId,
+                                        );
+                                      }
+                                    },
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 9,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.black.withValues(alpha: 0.35),
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                    color: Colors.white.withValues(alpha: 0.05),
+                                    color: isMe
+                                        ? Colors.pinkAccent.withValues(alpha: 0.3)
+                                        : Colors.white.withValues(alpha: 0.08),
                                   ),
                                 ),
                                 child: RichText(
                                   text: TextSpan(
-                                    style: const TextStyle(fontSize: 10.5, color: Colors.white),
+                                    style: const TextStyle(
+                                      fontSize: 11.5,
+                                      color: Colors.white,
+                                    ),
                                     children: [
                                       TextSpan(
                                         text: "$sender : ",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                          color: isMe ? Colors.pinkAccent : Colors.cyanAccent,
+                                          fontSize: 11,
+                                          color: isMe
+                                              ? Colors.pinkAccent
+                                              : Colors.cyanAccent,
                                         ),
                                       ),
                                       TextSpan(text: text),
                                     ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ),
-              ],
-            ),
+
+              const SizedBox(height: 6),
+
+              // ── LONGUE BARRE DE TCHAT EN BAS ──
+              Container(
+                height: 42,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.50),
+                  borderRadius: BorderRadius.circular(22),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.16),
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.chat_bubble_outline_rounded,
+                      size: 16,
+                      color: Colors.cyanAccent,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        controller: _textCtrl,
+                        style: const TextStyle(color: Colors.white, fontSize: 13),
+                        decoration: const InputDecoration(
+                          isDense: true,
+                          contentPadding: EdgeInsets.symmetric(vertical: 10),
+                          hintText: "Écrire un message...",
+                          hintStyle: TextStyle(
+                            color: Colors.white38,
+                            fontSize: 12,
+                          ),
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          filled: false,
+                        ),
+                        onSubmitted: (_) => _sendMessage(),
+                      ),
+                    ),
+                    IconButton(
+                      icon: _isSending
+                          ? const SizedBox(
+                              width: 14,
+                              height: 14,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.cyanAccent,
+                              ),
+                            )
+                          : const Icon(
+                              Icons.send_rounded,
+                              size: 18,
+                              color: Colors.cyanAccent,
+                            ),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(
+                        minWidth: 32,
+                        minHeight: 32,
+                      ),
+                      onPressed: _sendMessage,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         );
       },
     );
   }
 }
-
 // ==================================================================
 // SECTION DES SALONS (LOUNGES) - VERSION UNIQUE ET COMPLÈTE
 // ==================================================================

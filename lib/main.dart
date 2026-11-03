@@ -605,12 +605,43 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         title: Text(l10n?.appTitle ?? 'PlayFun'),
         actions: [
+          // Solde de Pièces (Illimité si VIP)
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const PremiumScreen()),
+            ),
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.amber.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.amberAccent.withValues(alpha: 0.6), width: 1),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.monetization_on, color: Colors.amberAccent, size: 16),
+                  const SizedBox(width: 5),
+                  Text(
+                    playerState.isPremium ? "∞" : "${playerState.coins}",
+                    style: const TextStyle(
+                      color: Colors.amberAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           IconButton(
             icon: Icon(Icons.star, color: Colors.amberAccent),
             onPressed:
                 () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => PremiumScreen()),
+                  MaterialPageRoute(builder: (_) => const PremiumScreen()),
                 ),
             tooltip: "VIP / Premium",
           ),
