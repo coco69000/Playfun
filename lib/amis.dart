@@ -2646,6 +2646,12 @@ class FirebaseService {
       if (gameType == 'Petit Bac' && gameData['petitBacTime'] != null) {
         return (gameData['petitBacTime'] as num).toInt();
       }
+      if (gameType == 'Photo Roulette') {
+        return (gameData['photoRouletteTime'] as num?)?.toInt() ?? 5;
+      }
+      if (gameType == "Time's Up" && gameData['currentRoundTime'] != null) {
+        return (gameData['currentRoundTime'] as num).toInt();
+      }
       return customTurnTimer;
     }
 
@@ -2740,6 +2746,7 @@ class FirebaseService {
 
     final turnStartTime =
         ((gameData['turnStartTime'] ??
+                    gameData['roundStartTime'] ??
                     gameData['petitBacRoundStartTime'] ??
                     gameData['pictionaryStartTime'] ??
                     gameData['hotPotatoRoundStartedAt'])
@@ -10619,6 +10626,8 @@ class FirebaseService {
     Map<String, bool>? undercoverRoleSettings,
     int? infiltreCount,
     int? mrWhiteCount,
+    int? undercoverClueTime,
+    bool? useTimer,
     int? turnTimerSeconds,
     int? resultTimerSeconds,
     String? aiInstructions,
@@ -10671,8 +10680,7 @@ class FirebaseService {
       'isPremiumLobby': isPremiumLobby, // NOUVEAU CHAMP
       'videoEnabled': videoEnabled, // NOUVEAU CHAMP
       'audioEnabled': audioEnabled, // NOUVEAU CHAMP
-      'useTimer':
-          true, // <--- AJOUTER CECI : Force le timer pour les parties créées via matchmaking
+      'useTimer': useTimer ?? true,
       'turnTimerSeconds': turnTimerSeconds ?? 30,
       'resultTimerSeconds': resultTimerSeconds ?? 15,
       if (aiInstructions != null && aiInstructions.isNotEmpty)
@@ -10810,6 +10818,7 @@ class FirebaseService {
         'petitBacTotalScores': {},
         'petitBacSubmittedPlayers': {},
         'petitBacRoundEnded': false,
+        if (petitBacTime != null) 'petitBacTime': petitBacTime,
       },
       if (gameType == 'Président') ...{
         'playerHands': {},
@@ -10885,6 +10894,7 @@ class FirebaseService {
           'photosPerPlayer': photoRoulettePhotosPerPlayer ?? 20,
           'mediaType': photoRouletteMediaType ?? 'Photos',
         },
+        if (photoRouletteTime != null) 'photoRouletteTime': photoRouletteTime,
         'photos': {},
         'readyPlayers': {},
         'playedPhotos': [],
@@ -10912,6 +10922,7 @@ class FirebaseService {
         'unoCalledUno': {},
         'unoLastActionPlayerId': null,
         'unoStackDraws': unoStackDraws ?? true,
+        if (unoStartingCards != null) 'unoStartingCards': unoStartingCards,
       },
       if (gameType == 'Rami') ...{
         'ramiTargetScore': zeroPointeTargetScore ?? 100,
@@ -11176,6 +11187,7 @@ class FirebaseService {
         'petitBacTotalScores': {},
         'petitBacSubmittedPlayers': {},
         'petitBacRoundEnded': false,
+        if (petitBacTime != null) 'petitBacTime': petitBacTime,
       },
       if (gameType == 'Président') ...{
         'playerHands': {},
@@ -11262,6 +11274,7 @@ class FirebaseService {
           'photosPerPlayer': photoRoulettePhotosPerPlayer ?? 20,
           'mediaType': photoRouletteMediaType ?? 'Photos',
         },
+        if (photoRouletteTime != null) 'photoRouletteTime': photoRouletteTime,
         'photos': {},
         'readyPlayers': {},
         'playedPhotos': [],
@@ -11279,6 +11292,7 @@ class FirebaseService {
         'unoCalledUno': {},
         'unoLastActionPlayerId': null,
         'unoStackDraws': unoStackDraws ?? true,
+        if (unoStartingCards != null) 'unoStartingCards': unoStartingCards,
       },
       if (gameType == 'Rami') ...{
         'ramiTargetScore': zeroPointeTargetScore ?? 100,
@@ -23639,6 +23653,51 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           gameType: _selectedGame,
           difficulty: _selectedDifficulty,
           playerCount: widget.loungePlayers!.length,
+          isPremiumLobby: _isPremiumLobby,
+          videoEnabled: _videoEnabled,
+          audioEnabled: _audioEnabled,
+          useTimer: _useTimer,
+          turnTimerSeconds: _turnTimerSeconds,
+          unoStartingCards: _selectedGame == 'Uno' ? _unoStartingCards : null,
+          unoStackDraws: _selectedGame == 'Uno' ? _unoStackDraws : null,
+          dominoesMode: _selectedGame == 'Dominoes' ? _dominoesMode : null,
+          dominoesTargetScore:
+              _selectedGame == 'Dominoes' ? _dominoesTargetScore : null,
+          timesUpTotalRounds:
+              _selectedGame == "Time's Up" ? _timesUpTotalRounds : null,
+          petitBacCategories:
+              _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
+          petitBacTime: _selectedGame == 'Petit Bac' ? _petitBacTime : null,
+          photoRouletteRounds:
+              _selectedGame == 'Photo Roulette' ? _photoRouletteRounds : null,
+          photoRoulettePhotosPerPlayer:
+              _selectedGame == 'Photo Roulette'
+                  ? _photoRoulettePhotosPerPlayer
+                  : null,
+          photoRouletteTime:
+              _selectedGame == 'Photo Roulette' ? _photoRouletteTime : null,
+          photoRouletteMediaType:
+              _selectedGame == 'Photo Roulette' ? _photoRouletteMediaType : null,
+          infiltreCount:
+              _selectedGame == 'Infiltré & Mr. White' ? _infiltreCount : null,
+          mrWhiteCount:
+              _selectedGame == 'Infiltré & Mr. White' ? _mrWhiteCount : null,
+          undercoverClueTime:
+              _selectedGame == 'Infiltré & Mr. White' ? _undercoverClueTime : null,
+          undercoverRoleSettings: _undercoverRoleSettings,
+          selectedLoupGarouRoles: _selectedLoupGarouRoles,
+          petitsChevauxTeamMode:
+              _selectedGame == 'Petits Chevaux' ? _petitsChevauxTeamMode : null,
+          pokerStartChips: _selectedGame == 'Poker' ? _pokerStartChips : null,
+          pokerSmallBlind: _selectedGame == 'Poker' ? _pokerSmallBlind : null,
+          pokerBigBlind: _selectedGame == 'Poker' ? _pokerBigBlind : null,
+          pictionaryOnly30Strokes: _pictionaryOnly30Strokes,
+          pictionaryUseTeams: _pictionaryUseTeams,
+          justOneAllowInvalidClues: _justOneAllowInvalidClues,
+          cadavreVariant: _cadavreVariant,
+          cadavrePassingMode: _cadavrePassingMode,
+          aiInstructions: _aiInstructions,
+          aiWords: _aiWords,
           dobbleSymbolsPerCard: _dobbleSymbolsPerCard,
           isSimplifiedLiar: _isSimplifiedLiar,
           liarVoteMode: _liarVoteMode,
@@ -28720,6 +28779,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     final turnStartTimeStamp =
         (gameData['turnStartTime'] ??
+                gameData['roundStartTime'] ??
                 gameData['petitBacRoundStartTime'] ??
                 gameData['pictionaryStartTime'] ??
                 gameData['hotPotatoRoundStartedAt'])
@@ -31594,6 +31654,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     final turnStartTimeStamp =
         (gameData['turnStartTime'] ??
+                gameData['roundStartTime'] ??
                 gameData['petitBacRoundStartTime'] ??
                 gameData['pictionaryStartTime'] ??
                 gameData['hotPotatoRoundStartedAt'])
