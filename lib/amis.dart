@@ -3096,6 +3096,91 @@ class FirebaseService {
     await docRef.delete();
   }
 
+  Future<void> sweepLoungeGame(String loungeId) async {
+    try {
+      final loungeDoc = await _db.collection('lounges').doc(loungeId).get();
+      if (!loungeDoc.exists) return;
+      final lData = loungeDoc.data() as Map<String, dynamic>;
+      final pendingGame = lData['pendingGame'] as Map<String, dynamic>?;
+      if (pendingGame == null) return;
+
+      final String gameCode = pendingGame['gameCode'] ?? '';
+      if (gameCode.isEmpty) {
+        await _db.collection('lounges').doc(loungeId).update({'pendingGame': FieldValue.delete()});
+        return;
+      }
+
+      final gameDoc = await _db.collection('games').doc(gameCode).get();
+      if (!gameDoc.exists) {
+        await _db.collection('lounges').doc(loungeId).update({'pendingGame': FieldValue.delete()});
+        return;
+      }
+
+      final gData = gameDoc.data() as Map<String, dynamic>;
+      final String gState = gData['gameState'] ?? '';
+      final String status = pendingGame['status'] ?? '';
+
+      if (gState == 'gameOver' || gState == 'finished' || status == 'cancelled') {
+        String winnerName = gData['players']?[gData['gameWinner']]?['name'] ?? 'Inconnu';
+        String reason = gData['gameEndReason'] ?? '';
+        await _db.collection('lounges').doc(loungeId).update({
+          'pendingGame': FieldValue.delete(),
+          'lastGameResult': {
+            'gameName': gData['gameType'] ?? pendingGame['gameName'] ?? 'Jeu',
+            'winnerName': winnerName,
+            'reason': reason,
+            'timestamp': FieldValue.serverTimestamp(),
+          },
+        });
+        return;
+      }
+
+      if (status == 'started') {
+        final presencesSnap = await _db.collection('games').doc(gameCode).collection('presences').get();
+        final now = DateTime.now();
+        bool hasActivePlayer = false;
+
+        for (var pDoc in presencesSnap.docs) {
+          final pMap = pDoc.data();
+          final ts = pMap['lastHeartbeat'] as Timestamp?;
+          if (ts != null && now.difference(ts.toDate()).inSeconds < 35) {
+            hasActivePlayer = true;
+            break;
+          }
+        }
+
+        if (!hasActivePlayer && presencesSnap.docs.isNotEmpty) {
+          await _db.collection('games').doc(gameCode).update({
+            'gameState': 'gameOver',
+            'gameEndReason': 'Abandon (tous les joueurs déconnectés)',
+          });
+          await sendLoungeMessage(
+            loungeId,
+            'system',
+            'Système',
+            'La partie est terminée : tous les joueurs se sont déconnectés.',
+            type: 'game_result',
+            extraData: {
+              'gameName': gData['gameType'] ?? pendingGame['gameName'],
+              'winnerName': 'Aucun',
+              'reason': 'Tous les joueurs se sont déconnectés',
+              'oldGameCode': gameCode,
+            },
+          );
+          await _db.collection('lounges').doc(loungeId).update({
+            'pendingGame': FieldValue.delete(),
+            'lastGameResult': {
+              'gameName': gData['gameType'] ?? pendingGame['gameName'],
+              'winnerName': 'Aucun',
+              'reason': 'Tous les joueurs se sont déconnectés',
+              'timestamp': FieldValue.serverTimestamp(),
+            },
+          });
+        }
+      }
+    } catch (_) {}
+  }
+
   Stream<QuerySnapshot> getLoungeChatStream(String loungeId) {
     return _db
         .collection('lounges')
@@ -3903,6 +3988,34 @@ class FirebaseService {
             );
             winningCombo = pairs.first;
           }
+        } else if (targetSize == 3) {
+          int lastVal = (lastPlay['highValue'] as num?)?.toInt() ?? 0;
+          Map<String, List<String>> rankGroups = {};
+          for (String c in myHand) {
+            String rank = c.substring(0, c.length - 1);
+            rankGroups.putIfAbsent(rank, () => []).add(c);
+          }
+          List<List<String>> triples = [];
+          for (var list in rankGroups.values) {
+            if (list.length >= 3) {
+              list.sort(
+                (a, b) =>
+                    _getBigTwoCardValue(a).compareTo(_getBigTwoCardValue(b)),
+              );
+              int tripleHighVal = _getBigTwoCardValue(list[2]);
+              if (tripleHighVal > lastVal) {
+                triples.add([list[0], list[1], list[2]]);
+              }
+            }
+          }
+          if (triples.isNotEmpty) {
+            triples.sort(
+              (a, b) => _getBigTwoCardValue(
+                a[2],
+              ).compareTo(_getBigTwoCardValue(b[2])),
+            );
+            winningCombo = triples.first;
+          }
         }
 
         if (winningCombo != null) {
@@ -4560,8 +4673,10 @@ class FirebaseService {
 
   static void _verifyPlayerAuth(
     Map<String, dynamic> gameData,
-    String playerId,
-  ) {
+    String playerId, {
+    bool isAuto = false,
+  }) {
+    if (isAuto) return;
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
     if (currentAuthUid == null) throw Exception("Non authentifié.");
 
@@ -5558,7 +5673,10 @@ class FirebaseService {
 
       // CAS A : Table vide (le joueur ouvre le pli)
       if (lastPlay == null && myHand.isNotEmpty) {
-        final String cardToPlay = myHand.contains('3C') ? '3C' : myHand.first;
+        final List<String> sortedHand = List<String>.from(myHand)
+          ..sort((a, b) => _getPresidentCardValue(a, isRevolution)
+              .compareTo(_getPresidentCardValue(b, isRevolution)));
+        final String cardToPlay = (!isRevolution && myHand.contains('3C')) ? '3C' : sortedHand.first;
         myHand.remove(cardToPlay);
         hands[playerId] = myHand;
 
@@ -5604,15 +5722,19 @@ class FirebaseService {
         int targetSize = (lastPlay['cards'] as List).length;
         int lastVal = (lastPlay['value'] as num?)?.toInt() ?? 0;
 
-        // Regrouper la main par rang
+        // Regrouper la main par rang et trier par valeur croissante
         Map<String, List<String>> rankGroups = {};
         for (String c in myHand) {
           String rank = _getPresidentCardRank(c);
           rankGroups.putIfAbsent(rank, () => []).add(c);
         }
 
+        var sortedEntries = rankGroups.entries.toList()
+          ..sort((a, b) => _getPresidentCardValue(a.value.first, isRevolution)
+              .compareTo(_getPresidentCardValue(b.value.first, isRevolution)));
+
         List<String>? candidateCards;
-        for (var entry in rankGroups.entries) {
+        for (var entry in sortedEntries) {
           if (entry.value.length >= targetSize) {
             int val = _getPresidentCardValue(entry.value.first, isRevolution);
             if (val > lastVal) {
@@ -6172,35 +6294,38 @@ class FirebaseService {
             [-1, -1, -1, -1],
       );
       final dice = (gameData['petitsChevauxDice'] as num?)?.toInt() ?? 0;
-      int? validPawnIdx;
+      List<int> candidatePawns = [];
 
       for (int i = 0; i < 4; i++) {
         int pos = positions[i];
         if (pos >= 0 && pos + dice <= 56) {
-          validPawnIdx = i;
-          break;
+          candidatePawns.add(i);
         }
       }
-      if (validPawnIdx == null &&
-          (dice == 1 || dice == 6) &&
-          !positions.contains(0)) {
+      if ((dice == 1 || dice == 6) && !positions.contains(0)) {
         for (int i = 0; i < 4; i++) {
           if (positions[i] == -1) {
-            validPawnIdx = i;
-            break;
+            candidatePawns.add(i);
           }
         }
       }
 
-      if (validPawnIdx != null) {
-        await movePawnPetitsChevaux(
-          gameCode,
-          currentPlayerId,
-          currentPlayerId,
-          validPawnIdx,
-          isAuto: true,
-        );
-      } else {
+      bool moved = false;
+      for (int pawnIdx in candidatePawns) {
+        try {
+          await movePawnPetitsChevaux(
+            gameCode,
+            currentPlayerId,
+            currentPlayerId,
+            pawnIdx,
+            isAuto: true,
+          );
+          moved = true;
+          break;
+        } catch (_) {}
+      }
+
+      if (!moved) {
         await passTurnPetitsChevaux(gameCode, currentPlayerId, isAuto: true);
       }
     }
@@ -8458,31 +8583,13 @@ class FirebaseService {
     List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
     bool areLoversAlive =
         lovers.length == 2 &&
-        vivants.any(
-          (p) =>
-              playerData.entries.firstWhere((e) => e.value == p).key ==
-              lovers[0],
-        ) &&
-        vivants.any(
-          (p) =>
-              playerData.entries.firstWhere((e) => e.value == p).key ==
-              lovers[1],
-        );
+        playerData[lovers[0]]?['status'] == 'vivant' &&
+        playerData[lovers[1]]?['status'] == 'vivant';
 
-    if (areLoversAlive) {
-      var lover1 = playerData[lovers[0]];
-      var lover2 = playerData[lovers[1]];
-      bool isLover1WolfCamp =
-          GameData.roleCamps[lover1['role']] == 'loups' ||
-          lover1['infectionStatus'] == 'infecte';
-      bool isLover2WolfCamp =
-          GameData.roleCamps[lover2['role']] == 'loups' ||
-          lover2['infectionStatus'] == 'infecte';
-      if (isLover1WolfCamp != isLover2WolfCamp && vivants.length == 2) {
-        winner = "Les Amoureux";
-        reason =
-            "Seuls les deux amoureux d'un camp opposé sont encore en vie. Leur amour triomphe de tout !";
-      }
+    if (areLoversAlive && vivants.length == 2) {
+      winner = "Les Amoureux";
+      reason =
+          "Seuls les deux amoureux sont encore en vie. Leur amour triomphe de tout !";
     }
 
     if (winner == null && loupBlancVivant == 1 && vivants.length == 1) {
@@ -8504,6 +8611,7 @@ class FirebaseService {
 
     if (winner == null &&
         loupsVivants > 0 &&
+        loupBlancVivant == 0 &&
         loupsVivants >= (villageoisVivants + solitairesNonLoupsVivants)) {
       winner = "Loups-Garous";
       reason =
@@ -8762,8 +8870,9 @@ class FirebaseService {
   Future<void> voyanteSee(
     String gameCode,
     String voyanteId,
-    String targetId,
-  ) async {
+    String targetId, {
+    bool isAuto = false,
+  }) async {
     bool shouldAdvance = false;
     await _db.runTransaction((transaction) async {
       shouldAdvance = false;
@@ -8772,7 +8881,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, voyanteId);
+      _verifyPlayerAuth(gameData, voyanteId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'voyante_turn') return;
       if (gameData['nightActions']?['voyanteActed'] == true) return;
@@ -8828,15 +8937,16 @@ class FirebaseService {
   Future<void> heritierChooseTestateur(
     String gameCode,
     String heritierId,
-    String testateurId,
-  ) async {
+    String testateurId, {
+    bool isAuto = false,
+  }) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, heritierId);
+      _verifyPlayerAuth(gameData, heritierId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'heritier_turn') return;
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
@@ -8859,8 +8969,9 @@ class FirebaseService {
   Future<void> gardeProtect(
     String gameCode,
     String gardeId,
-    String targetId,
-  ) async {
+    String targetId, {
+    bool isAuto = false,
+  }) async {
     bool shouldAdvance = false;
     await _db.runTransaction((transaction) async {
       shouldAdvance = false;
@@ -8869,7 +8980,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, gardeId);
+      _verifyPlayerAuth(gameData, gardeId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'garde_turn') return;
       if (gameData['nightActions']?['gardeActed'] == true) return;
@@ -8919,15 +9030,16 @@ class FirebaseService {
   Future<void> ratMaladeContaminate(
     String gameCode,
     String ratMaladeId,
-    List<String> targetIds,
-  ) async {
+    List<String> targetIds, {
+    bool isAuto = false,
+  }) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, ratMaladeId);
+      _verifyPlayerAuth(gameData, ratMaladeId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'rat_malade_turn') return;
       if (gameData['nightActions']?['ratMaladeActed'] == true) return;
@@ -8988,8 +9100,9 @@ class FirebaseService {
   Future<void> loupGarouVote(
     String gameCode,
     String voterId,
-    String targetId,
-  ) async {
+    String targetId, {
+    bool isAuto = false,
+  }) async {
     bool shouldAdvancePhase = false;
 
     await _db.runTransaction((transaction) async {
@@ -8999,7 +9112,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, voterId);
+      _verifyPlayerAuth(gameData, voterId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'loups_turn') return;
 
@@ -9094,8 +9207,9 @@ class FirebaseService {
   Future<void> loupBlancDevour(
     String gameCode,
     String loupBlancId,
-    String targetId,
-  ) async {
+    String targetId, {
+    bool isAuto = false,
+  }) async {
     bool shouldAdvance = false;
     await _db.runTransaction((transaction) async {
       shouldAdvance = false;
@@ -9104,7 +9218,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, loupBlancId);
+      _verifyPlayerAuth(gameData, loupBlancId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'loup_blanc_turn') return;
       if (gameData['nightActions']?['loupBlancActed'] == true) return;
@@ -9136,15 +9250,16 @@ class FirebaseService {
   Future<void> loupNoirInfect(
     String gameCode,
     String loupNoirId,
-    bool infectChosenTarget,
-  ) async {
+    bool infectChosenTarget, {
+    bool isAuto = false,
+  }) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, loupNoirId);
+      _verifyPlayerAuth(gameData, loupNoirId, isAuto: isAuto);
 
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
       if (playerData[loupNoirId]?['role'] != 'Loup Noir' ||
@@ -9182,8 +9297,9 @@ class FirebaseService {
   Future<void> petiteFilleSpy(
     String gameCode,
     String spyId,
-    String targetId,
-  ) async {
+    String targetId, {
+    bool isAuto = false,
+  }) async {
     bool shouldAdvance = false;
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -9191,7 +9307,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, spyId);
+      _verifyPlayerAuth(gameData, spyId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'loups_turn') return;
 
@@ -9245,8 +9361,9 @@ class FirebaseService {
     String gameCode,
     String sorciereId,
     String potionType,
-    String? targetId,
-  ) async {
+    String? targetId, {
+    bool isAuto = false,
+  }) async {
     bool shouldAdvance = false;
     await _db.runTransaction((transaction) async {
       shouldAdvance = false;
@@ -9255,7 +9372,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, sorciereId);
+      _verifyPlayerAuth(gameData, sorciereId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'sorciere_turn') return;
       if (gameData['nightActions']?['sorciereActed'] == true) return;
@@ -9362,8 +9479,9 @@ class FirebaseService {
     String gameCode,
     String pyromancienId,
     String actionType,
-    String? targetId,
-  ) async {
+    String? targetId, {
+    bool isAuto = false,
+  }) async {
     bool shouldAdvance = false;
     await _db.runTransaction((transaction) async {
       shouldAdvance = false;
@@ -9372,7 +9490,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, pyromancienId);
+      _verifyPlayerAuth(gameData, pyromancienId, isAuto: isAuto);
 
       if (gameData['subPhase'] != 'pyromancien_turn') return;
       if (gameData['nightActions']?['pyromancienActed'] == true) return;
@@ -9684,6 +9802,7 @@ class FirebaseService {
     if (pendingDayEffects.isNotEmpty) {
       var firstEffect = pendingDayEffects.removeAt(0);
       transaction.update(gameRef, {
+        'isPostVote': false,
         'phase': 'jour_discussion',
         'subPhase': firstEffect['subPhase'],
         'activePlayerId': firstEffect['activePlayerId'],
@@ -9692,6 +9811,7 @@ class FirebaseService {
       });
     } else {
       transaction.update(gameRef, {
+        'isPostVote': false,
         'phase': 'jour_discussion',
         'subPhase': '',
         'activePlayerId': null,
@@ -9704,8 +9824,9 @@ class FirebaseService {
   Future<void> fossoyeurReveal(
     String gameCode,
     String fossoyeurId,
-    String targetPlayerId,
-  ) async {
+    String targetPlayerId, {
+    bool isAuto = false,
+  }) async {
     final gameRef = _db.collection('games').doc(gameCode);
 
     await _db.runTransaction((transaction) async {
@@ -9713,7 +9834,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, fossoyeurId);
+      _verifyPlayerAuth(gameData, fossoyeurId, isAuto: isAuto);
 
       final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
       if (currentAuthUid != null) {
@@ -9785,14 +9906,25 @@ class FirebaseService {
           'pendingDayEffects': pendingDayEffects,
         });
       } else {
-        transaction.update(gameRef, {
-          'phase': 'nuit',
-          'subPhase': 'initial',
-          'nightNumber': FieldValue.increment(1),
-          'activePlayerId': null,
-          'pendingDayEffects': [],
-          'turnStartTime': FieldValue.serverTimestamp(),
-        });
+        bool isPostVote = gameData['isPostVote'] == true;
+        if (isPostVote) {
+          transaction.update(gameRef, {
+            'phase': 'nuit',
+            'subPhase': 'initial',
+            'nightNumber': FieldValue.increment(1),
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        } else {
+          transaction.update(gameRef, {
+            'phase': 'jour_discussion',
+            'subPhase': '',
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
       }
     });
 
@@ -9831,8 +9963,9 @@ class FirebaseService {
   Future<void> dictateurCoup(
     String gameCode,
     String dictatorId,
-    String targetId,
-  ) async {
+    String targetId, {
+    bool isAuto = false,
+  }) async {
     final gameRef = _db.collection('games').doc(gameCode);
 
     await _db.runTransaction((transaction) async {
@@ -9840,7 +9973,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, dictatorId);
+      _verifyPlayerAuth(gameData, dictatorId, isAuto: isAuto);
 
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
       if (playerData[dictatorId]?['role'] != 'Dictateur' ||
@@ -9864,9 +9997,48 @@ class FirebaseService {
         applySpeedBonus: false,
       );
 
+      String executedId = targetIsWolf ? targetId : dictatorId;
+      List<String> deaths = [executedId];
+      playerData[executedId]['status'] = 'mort';
+      playerData[executedId]['revealedRole'] = playerData[executedId]['role'];
+
+      // Amoureux mort de chagrin
+      List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
+      if (lovers.contains(executedId)) {
+        String partnerId = lovers.firstWhere((id) => id != executedId);
+        if (playerData[partnerId]?['status'] == 'vivant') {
+          playerData[partnerId]['status'] = 'mort';
+          playerData[partnerId]['revealedRole'] = playerData[partnerId]['role'];
+          deaths.add(partnerId);
+        }
+      }
+
+      String? chasseurDiedId;
+      String? captainDiedId;
+      String? fossoyeurDiedId;
+
+      for (String dId in deaths) {
+        if (playerData[dId]?['role'] == 'Chasseur') chasseurDiedId = dId;
+        if (playerData[dId]?['role'] == 'Fossoyeur') fossoyeurDiedId = dId;
+        if (gameData['captainId'] == dId) captainDiedId = dId;
+
+        // Héritier
+        String? heritierId = gameData['heritierId'];
+        if (heritierId != null &&
+            playerData[heritierId]?['heritierTargetId'] == dId &&
+            playerData[heritierId]?['status'] == 'vivant' &&
+            playerData[heritierId]?['powerUsed'] != true) {
+          playerData[heritierId]['role'] = playerData[dId]['role'];
+          playerData[heritierId]['powerUsed'] = true;
+          if (captainDiedId == dId) {
+            gameData['captainId'] = heritierId;
+            captainDiedId = null;
+          }
+        }
+      }
+
       if (targetIsWolf) {
-        playerData[targetId]['status'] = 'mort';
-        playerData[targetId]['revealedRole'] = targetRole;
+        playerData[dictatorId]['captainId'] = dictatorId;
         transaction.update(gameRef, {
           'captainId': dictatorId,
           'gameLog': FieldValue.arrayUnion([
@@ -9874,8 +10046,6 @@ class FirebaseService {
           ]),
         });
       } else {
-        playerData[dictatorId]['status'] = 'mort';
-        playerData[dictatorId]['revealedRole'] = playerData[dictatorId]['role'];
         transaction.update(gameRef, {
           'gameLog': FieldValue.arrayUnion([
             "Le Dictateur s'est trompé en exécutant un innocent ! Il subit la peine capitale.",
@@ -9883,20 +10053,58 @@ class FirebaseService {
         });
       }
 
-      transaction.update(gameRef, {
-        'playerData': playerData,
-        'dictatorUsed': true,
-        'phase': 'nuit',
-        'subPhase': 'initial',
-        'nightNumber': FieldValue.increment(1),
-        'turnStartTime': FieldValue.serverTimestamp(),
-      });
+      List<Map<String, dynamic>> pendingDayEffects = [];
+      if (captainDiedId != null) {
+        pendingDayEffects.add({
+          'subPhase': 'captain_designate',
+          'activePlayerId': captainDiedId,
+        });
+      }
+      if (chasseurDiedId != null) {
+        pendingDayEffects.add({
+          'subPhase': 'chasseur_revenge',
+          'activePlayerId': chasseurDiedId,
+        });
+      }
+      if (fossoyeurDiedId != null) {
+        pendingDayEffects.add({
+          'subPhase': 'fossoyeur_reveal',
+          'activePlayerId': fossoyeurDiedId,
+        });
+      }
+
+      if (pendingDayEffects.isNotEmpty) {
+        var firstEffect = pendingDayEffects.removeAt(0);
+        transaction.update(gameRef, {
+          'playerData': playerData,
+          'dictatorUsed': true,
+          'isPostVote': true,
+          'subPhase': firstEffect['subPhase'],
+          'activePlayerId': firstEffect['activePlayerId'],
+          'pendingDayEffects': pendingDayEffects,
+          'turnStartTime': FieldValue.serverTimestamp(),
+        });
+      } else {
+        transaction.update(gameRef, {
+          'playerData': playerData,
+          'dictatorUsed': true,
+          'isPostVote': true,
+          'phase': 'nuit',
+          'subPhase': 'initial',
+          'nightNumber': FieldValue.increment(1),
+          'activePlayerId': null,
+          'pendingDayEffects': [],
+          'turnStartTime': FieldValue.serverTimestamp(),
+        });
+      }
     });
 
     final updatedGameData =
         (await gameRef.get()).data() as Map<String, dynamic>;
     await _checkForWinCondition(gameRef, updatedGameData);
-    await startNextNightPhase(gameCode);
+    if (updatedGameData['phase'] == 'nuit') {
+      await startNextNightPhase(gameCode);
+    }
   }
 
   /// Détection du mot secret du Loup Bavard dans le chat
@@ -10266,6 +10474,7 @@ class FirebaseService {
       if (pendingDayEffects.isNotEmpty) {
         var firstEffect = pendingDayEffects.removeAt(0);
         transaction.update(gameRef, {
+          'isPostVote': true,
           'phase': 'jour_discussion',
           'subPhase': firstEffect['subPhase'],
           'activePlayerId': firstEffect['activePlayerId'],
@@ -10273,6 +10482,7 @@ class FirebaseService {
         });
       } else {
         transaction.update(gameRef, {
+          'isPostVote': true,
           'phase': 'nuit',
           'subPhase': 'initial',
           'nightNumber': FieldValue.increment(1),
@@ -10294,15 +10504,16 @@ class FirebaseService {
   Future<void> chasseurShoot(
     String gameCode,
     String chasseurId,
-    String targetId,
-  ) async {
+    String targetId, {
+    bool isAuto = false,
+  }) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, chasseurId);
+      _verifyPlayerAuth(gameData, chasseurId, isAuto: isAuto);
 
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
       String? captainDiedId;
@@ -10426,15 +10637,27 @@ class FirebaseService {
           'pendingDayEffects': pendingEffects,
         });
       } else {
-        transaction.update(gameRef, {
-          'playerData': playerData,
-          'phase': 'nuit',
-          'subPhase': 'initial',
-          'nightNumber': FieldValue.increment(1),
-          'activePlayerId': null,
-          'pendingDayEffects': [],
-          'turnStartTime': FieldValue.serverTimestamp(),
-        });
+        bool isPostVote = gameData['isPostVote'] == true;
+        if (isPostVote) {
+          transaction.update(gameRef, {
+            'playerData': playerData,
+            'phase': 'nuit',
+            'subPhase': 'initial',
+            'nightNumber': FieldValue.increment(1),
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        } else {
+          transaction.update(gameRef, {
+            'playerData': playerData,
+            'phase': 'jour_discussion',
+            'subPhase': '',
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
       }
     });
 
@@ -10450,15 +10673,16 @@ class FirebaseService {
   Future<void> captainDesignate(
     String gameCode,
     String formerCaptainId,
-    String newCaptainId,
-  ) async {
+    String newCaptainId, {
+    bool isAuto = false,
+  }) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, formerCaptainId);
+      _verifyPlayerAuth(gameData, formerCaptainId, isAuto: isAuto);
 
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
       String formerCaptainName =
@@ -10498,15 +10722,27 @@ class FirebaseService {
           'pendingDayEffects': pendingDayEffects,
         });
       } else {
-        transaction.update(gameRef, {
-          'playerData': playerData,
-          'phase': 'nuit',
-          'subPhase': 'initial',
-          'nightNumber': FieldValue.increment(1),
-          'activePlayerId': null,
-          'pendingDayEffects': [],
-          'turnStartTime': FieldValue.serverTimestamp(),
-        });
+        bool isPostVote = gameData['isPostVote'] == true;
+        if (isPostVote) {
+          transaction.update(gameRef, {
+            'playerData': playerData,
+            'phase': 'nuit',
+            'subPhase': 'initial',
+            'nightNumber': FieldValue.increment(1),
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        } else {
+          transaction.update(gameRef, {
+            'playerData': playerData,
+            'phase': 'jour_discussion',
+            'subPhase': '',
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
       }
     });
 
@@ -10521,8 +10757,9 @@ class FirebaseService {
   Future<void> selectCupidonLover(
     String gameCode,
     String cupidonId,
-    String targetId,
-  ) async {
+    String targetId, {
+    bool isAuto = false,
+  }) async {
     bool shouldAdvance = false;
     await _db.runTransaction((transaction) async {
       shouldAdvance = false;
@@ -10531,7 +10768,7 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       var gameData = gameSnap.data() as Map<String, dynamic>;
 
-      _verifyPlayerAuth(gameData, cupidonId);
+      _verifyPlayerAuth(gameData, cupidonId, isAuto: isAuto);
 
       var playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
       if (playerData[cupidonId]?['role'] != 'Cupidon' ||
@@ -10589,6 +10826,149 @@ class FirebaseService {
       resetPlayers,
       resetPlayers.keys.toList()..shuffle(),
     );
+  }
+
+  Future<void> handleLoupGarouTimeout(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final gameData = snap.data() as Map<String, dynamic>;
+    if (gameData['gameState'] != 'playing') return;
+
+    final String phase = gameData['phase'] ?? '';
+    final String subPhase = gameData['subPhase'] ?? '';
+    final String? activePlayerId = gameData['activePlayerId'];
+    final playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
+    final livingPlayers = playerData.entries
+        .where((e) => e.value['status'] == 'vivant')
+        .map((e) => e.key)
+        .toList();
+
+    // 1. Sous-phases de pouvoirs prioritaires
+    if (subPhase == 'captain_designate' && activePlayerId != null) {
+      final candidates = livingPlayers.where((id) => id != activePlayerId).toList();
+      if (candidates.isNotEmpty) {
+        candidates.shuffle();
+        await captainDesignate(gameCode, activePlayerId, candidates.first, isAuto: true);
+      }
+      return;
+    }
+
+    if (subPhase == 'chasseur_revenge' && activePlayerId != null) {
+      final targets = livingPlayers.where((id) => id != activePlayerId).toList();
+      if (targets.isNotEmpty) {
+        targets.shuffle();
+        await chasseurShoot(gameCode, activePlayerId, targets.first, isAuto: true);
+      }
+      return;
+    }
+
+    if (subPhase == 'fossoyeur_reveal' && activePlayerId != null) {
+      final targets = livingPlayers.where((id) => id != activePlayerId).toList();
+      if (targets.isNotEmpty) {
+        targets.shuffle();
+        await fossoyeurReveal(gameCode, activePlayerId, targets.first, isAuto: true);
+      }
+      return;
+    }
+
+    if (subPhase == 'dictateur_coup') {
+      await gameRef.update({
+        'subPhase': '',
+        'activePlayerId': null,
+      });
+      return;
+    }
+
+    // 2. Nuit
+    if (phase == 'nuit') {
+      if (subPhase == 'loups_turn') {
+        final wolfVotes = Map<String, dynamic>.from(gameData['wolfVotes'] ?? {});
+        final wolves = livingPlayers.where((id) =>
+            GameData.roleCamps[playerData[id]?['role']] == 'loups' ||
+            playerData[id]?['infectionStatus'] == 'infecte').toList();
+        final nonWolves = livingPlayers.where((id) => !wolves.contains(id)).toList();
+
+        if (nonWolves.isNotEmpty) {
+          nonWolves.shuffle();
+          final defaultTarget = nonWolves.first;
+          for (var wolfId in wolves) {
+            if (!wolfVotes.containsKey(wolfId)) {
+              await loupGarouVote(gameCode, wolfId, defaultTarget, isAuto: true);
+            }
+          }
+        }
+        await startNextNightPhase(gameCode);
+        return;
+      }
+
+      if (subPhase == 'voyante_turn' && activePlayerId != null) {
+        final targets = livingPlayers.where((id) => id != activePlayerId).toList();
+        if (targets.isNotEmpty) {
+          targets.shuffle();
+          await voyanteSee(gameCode, activePlayerId, targets.first, isAuto: true);
+        }
+        await startNextNightPhase(gameCode);
+        return;
+      }
+
+      if (subPhase == 'garde_turn' && activePlayerId != null) {
+        final lastProtected = gameData['lastGardeProtected'];
+        final targets = livingPlayers.where((id) => id != lastProtected).toList();
+        if (targets.isNotEmpty) {
+          targets.shuffle();
+          await gardeProtect(gameCode, activePlayerId, targets.first, isAuto: true);
+        }
+        await startNextNightPhase(gameCode);
+        return;
+      }
+
+      if (subPhase == 'sorciere_turn') {
+        await startNextNightPhase(gameCode);
+        return;
+      }
+
+      if (subPhase == 'cupidon_turn' && activePlayerId != null) {
+        if (livingPlayers.length >= 2) {
+          livingPlayers.shuffle();
+          await selectCupidonLover(gameCode, activePlayerId, livingPlayers[0], isAuto: true);
+          await selectCupidonLover(gameCode, activePlayerId, livingPlayers[1], isAuto: true);
+        }
+        await startNextNightPhase(gameCode);
+        return;
+      }
+
+      if (subPhase == 'rat_malade_turn' && activePlayerId != null) {
+        final targets = livingPlayers.where((id) =>
+            id != activePlayerId && playerData[id]?['poisoned'] != true).toList();
+        if (targets.isNotEmpty) {
+          targets.shuffle();
+          await ratMaladeContaminate(gameCode, activePlayerId, targets.take(2).toList(), isAuto: true);
+        }
+        await startNextNightPhase(gameCode);
+        return;
+      }
+
+      if (subPhase == 'loup_blanc_turn') {
+        await startNextNightPhase(gameCode);
+        return;
+      }
+
+      await startNextNightPhase(gameCode);
+      return;
+    }
+
+    // 3. Jour - Discussion
+    if (phase == 'jour_discussion') {
+      await startDayVotePhase(gameCode);
+      return;
+    }
+
+    // 4. Jour - Vote
+    if (phase == 'jour_vote') {
+      await processDayVote(gameCode);
+      return;
+    }
   }
 
   Future<void> createGameWithAllPlayers({
@@ -13941,9 +14321,9 @@ class FirebaseService {
   // ────────────────────────────────────────────────────────────
   // drawDominoesTile — pioche une tuile
   // ────────────────────────────────────────────────────────────
-  Future<void> drawDominoesTile(String gameCode, String playerId) async {
+  Future<void> drawDominoesTile(String gameCode, String playerId, {bool isAuto = false}) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (currentAuthUid == null) throw Exception("Non authentifié.");
+    if (!isAuto && currentAuthUid == null) throw Exception("Non authentifié.");
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -13958,7 +14338,7 @@ class FirebaseService {
       if (gameData['dominoesMode'] != 'pioche') return;
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if ((players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isAuto && (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception("Action non autorisée.");
       }
 
@@ -14180,7 +14560,7 @@ class FirebaseService {
         turnResolved = true;
       } else {
         if (mode == 'pioche' && boneyard.isNotEmpty) {
-          await drawDominoesTile(gameCode, playerId);
+          await drawDominoesTile(gameCode, playerId, isAuto: true);
         } else {
           await passDominoesTurn(gameCode, playerId, isTimeout: true);
           await gameRef.update({
@@ -29117,14 +29497,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         _firebaseService.handleBMCTimeout(widget.gameCode);
         break;
       case 'Loup-Garou':
-        final String phase = gameData['phase'] ?? '';
-        if (phase == 'nuit') {
-          _firebaseService.startNextNightPhase(widget.gameCode);
-        } else if (phase == 'jour_discussion') {
-          _firebaseService.startDayVotePhase(widget.gameCode);
-        } else if (phase == 'jour_vote') {
-          _firebaseService.processDayVote(widget.gameCode);
-        }
+        _firebaseService.handleLoupGarouTimeout(widget.gameCode);
         break;
 
       default:
@@ -30652,17 +31025,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   await ps.claimGameReward(widget.gameCode);
                 }
 
-                // NOUVEAU : Envoyer les résultats au salon si rattaché
+                // NOUVEAU : Envoyer les résultats au salon si rattaché (fiabilisé : premier client qui détecte la fin)
                 if (gameData['loungeId'] != null &&
-                    gameData['hostId'] == widget.playerId &&
                     !(gameData['loungeResultPosted'] ?? false)) {
                   await FirebaseFirestore.instance
                       .collection('games')
                       .doc(widget.gameCode)
                       .update({'loungeResultPosted': true});
                   String winnerName =
-                      gameData['players'][gameData['gameWinner']]?['name'] ??
+                      gameData['players']?[gameData['gameWinner']]?['name'] ??
                       'Inconnu';
+                  String reason = gameData['gameEndReason'] ?? '';
                   await _firebaseService.sendLoungeMessage(
                     gameData['loungeId'],
                     widget.playerId,
@@ -30672,14 +31045,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     extraData: {
                       'gameName': gameData['gameType'],
                       'winnerName': winnerName,
-                      'reason': gameData['gameEndReason'] ?? '',
+                      'reason': reason,
                       'oldGameCode': widget.gameCode,
                     },
                   );
                   await FirebaseFirestore.instance
                       .collection('lounges')
                       .doc(gameData['loungeId'])
-                      .update({'pendingGame': FieldValue.delete()});
+                      .update({
+                        'pendingGame': FieldValue.delete(),
+                        'lastGameResult': {
+                          'gameName': gameData['gameType'],
+                          'winnerName': winnerName,
+                          'reason': reason,
+                          'timestamp': FieldValue.serverTimestamp(),
+                        },
+                      });
                 }
               });
             }
@@ -66155,10 +66536,18 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _sendHeartbeat();
+    _sweepLoungeGame();
     _heartbeatTimer = Timer.periodic(
       const Duration(seconds: 10),
-      (_) => _sendHeartbeat(),
+      (_) {
+        _sendHeartbeat();
+        _sweepLoungeGame();
+      },
     );
+  }
+
+  Future<void> _sweepLoungeGame() async {
+    await _firebaseService.sweepLoungeGame(widget.loungeId);
   }
 
   @override
@@ -66369,6 +66758,380 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         'gameName': data['gameType'] ?? 'Gribouillis',
         'hostId': widget.playerId,
       },
+    );
+  }
+
+  Widget _buildPlayGameButton(
+    Map<String, dynamic> loungeData,
+    Map<String, dynamic> players,
+    bool isHost,
+  ) {
+    final pendingGame = loungeData['pendingGame'] as Map<String, dynamic>?;
+    final String status = pendingGame?['status'] ?? '';
+
+    if (pendingGame == null || status == 'finished' || status == 'cancelled') {
+      if (!isHost) return const SizedBox.shrink();
+      return Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: ElevatedButton.icon(
+          icon: const Icon(Icons.videogame_asset, size: 18),
+          label: Text(GameContentLocalization.ui(context, "Jouer")),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          ),
+          onPressed: () => _openGameLauncher(players),
+        ),
+      );
+    }
+
+    if (status == 'waiting') {
+      List<dynamic> joined = pendingGame['joinedPlayers'] ?? [];
+      return Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: ElevatedButton.icon(
+          icon: const Icon(Icons.hourglass_top, size: 18),
+          label: Text("${GameContentLocalization.ui(context, "En attente")} (${joined.length})"),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurple,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          ),
+          onPressed: () {
+            _showPendingGameDialog(pendingGame, isHost);
+          },
+        ),
+      );
+    }
+
+    if (status == 'started') {
+      final gameName = pendingGame['gameName'] ?? GameContentLocalization.ui(context, "Jeu");
+      return Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: ElevatedButton.icon(
+          icon: const Icon(Icons.play_circle_fill, size: 18),
+          label: Text("${GameContentLocalization.ui(context, "En cours")} ($gameName)"),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.orange[800],
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => MultiplayerGameScreen(
+                  gameCode: pendingGame['gameCode'],
+                  playerId: widget.playerId,
+                  loungeId: widget.loungeId,
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+
+    return const SizedBox.shrink();
+  }
+
+  Widget _buildLoungeGameBanner(
+    BuildContext context,
+    Map<String, dynamic> loungeData,
+    Map<String, dynamic> players,
+    bool isHost,
+  ) {
+    final pendingGame = loungeData['pendingGame'] as Map<String, dynamic>?;
+    final lastGameResult = loungeData['lastGameResult'] as Map<String, dynamic>?;
+    final String status = pendingGame?['status'] ?? '';
+
+    // 1. Partie en cours
+    if (pendingGame != null && status == 'started') {
+      final String gameCode = pendingGame['gameCode'] ?? '';
+      final String gameName = pendingGame['gameName'] ?? 'Jeu';
+      final List<dynamic> joinedPlayers = pendingGame['joinedPlayers'] ?? [];
+      final bool isPlayerJoined = joinedPlayers.contains(widget.playerId);
+
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.green[900]?.withOpacity(0.85),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.greenAccent, width: 1.5),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 10,
+              height: 10,
+              decoration: const BoxDecoration(
+                color: Colors.greenAccent,
+                shape: BoxShape.circle,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "PARTIE EN COURS : $gameName",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 13,
+                    ),
+                  ),
+                  Text(
+                    "${joinedPlayers.length} joueur(s) en jeu",
+                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                  ),
+                ],
+              ),
+            ),
+            if (isPlayerJoined)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => MultiplayerGameScreen(
+                        gameCode: gameCode,
+                        playerId: widget.playerId,
+                        loungeId: widget.loungeId,
+                      ),
+                    ),
+                  );
+                },
+                child: const Text("Rejoindre", style: TextStyle(fontSize: 12)),
+              ),
+            if (isHost) ...[
+              const SizedBox(width: 6),
+              IconButton(
+                icon: const Icon(Icons.close, color: Colors.white70, size: 20),
+                tooltip: "Clôturer la partie",
+                onPressed: () async {
+                  await FirebaseFirestore.instance
+                      .collection('lounges')
+                      .doc(widget.loungeId)
+                      .update({'pendingGame': FieldValue.delete()});
+                },
+              ),
+            ],
+          ],
+        ),
+      );
+    }
+
+    // 2. Partie en attente
+    if (pendingGame != null && status == 'waiting') {
+      final String gameCode = pendingGame['gameCode'] ?? '';
+      final String gameName = pendingGame['gameName'] ?? 'Jeu';
+      final String hostId = pendingGame['hostId'] ?? '';
+      final bool isGameHost = hostId == widget.playerId;
+      final List<dynamic> joinedPlayers = pendingGame['joinedPlayers'] ?? [];
+      final bool hasJoined = joinedPlayers.contains(widget.playerId);
+
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.deepPurple[900]?.withOpacity(0.9),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.purpleAccent, width: 1.5),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.hourglass_empty, color: Colors.amberAccent, size: 20),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Partie de $gameName en attente",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 13,
+                    ),
+                  ),
+                  Text(
+                    "${joinedPlayers.length} joueur(s) prêt(s)",
+                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                  ),
+                ],
+              ),
+            ),
+            if (isGameHost) ...[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                ),
+                onPressed: () async {
+                  await FirebaseFirestore.instance
+                      .collection('lounges')
+                      .doc(widget.loungeId)
+                      .update({'pendingGame.status': 'started'});
+                  await FirebaseFirestore.instance
+                      .collection('games')
+                      .doc(gameCode)
+                      .update({'gameState': 'playing'});
+                },
+                child: const Text("Commencer", style: TextStyle(fontSize: 12)),
+              ),
+              const SizedBox(width: 6),
+              TextButton(
+                onPressed: () async {
+                  await FirebaseFirestore.instance
+                      .collection('lounges')
+                      .doc(widget.loungeId)
+                      .update({'pendingGame': FieldValue.delete()});
+                },
+                child: const Text("Annuler", style: TextStyle(color: Colors.redAccent, fontSize: 12)),
+              ),
+            ] else ...[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: hasJoined ? Colors.grey[700] : Colors.blueAccent,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                ),
+                onPressed: () async {
+                  if (hasJoined) {
+                    await FirebaseFirestore.instance
+                        .collection('lounges')
+                        .doc(widget.loungeId)
+                        .update({
+                          'pendingGame.joinedPlayers': FieldValue.arrayRemove([widget.playerId]),
+                        });
+                  } else {
+                    await FirebaseFirestore.instance
+                        .collection('lounges')
+                        .doc(widget.loungeId)
+                        .update({
+                          'pendingGame.joinedPlayers': FieldValue.arrayUnion([widget.playerId]),
+                        });
+                    final ps = Provider.of<PlayerState>(context, listen: false);
+                    await _firebaseService.joinGame(gameCode, ps.userName ?? 'Joueur', widget.playerId);
+                  }
+                },
+                child: Text(hasJoined ? "Prêt ✓" : "Rejoindre", style: const TextStyle(fontSize: 12)),
+              ),
+            ],
+          ],
+        ),
+      );
+    }
+
+    // 3. Partie terminée (lastGameResult)
+    if (lastGameResult != null && (pendingGame == null || status == 'finished' || status == 'cancelled')) {
+      final String gName = lastGameResult['gameName'] ?? 'Jeu';
+      final String winner = lastGameResult['winnerName'] ?? '';
+      final String reason = lastGameResult['reason'] ?? '';
+
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.amber[900]?.withOpacity(0.85),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.amberAccent, width: 1.5),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.emoji_events, color: Colors.amberAccent, size: 20),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "TERMINÉ : $gName",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 13,
+                    ),
+                  ),
+                  Text(
+                    winner.isNotEmpty ? "Vainqueur : $winner ${reason.isNotEmpty ? "($reason)" : ""}" : reason,
+                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.close, color: Colors.white70, size: 18),
+              onPressed: () async {
+                await FirebaseFirestore.instance
+                    .collection('lounges')
+                    .doc(widget.loungeId)
+                    .update({'lastGameResult': FieldValue.delete()});
+              },
+            ),
+          ],
+        ),
+      );
+    }
+
+    return const SizedBox.shrink();
+  }
+
+  void _showPendingGameDialog(Map<String, dynamic> pendingGame, bool isHost) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(pendingGame['gameName'] ?? 'Partie'),
+        content: Text("${(pendingGame['joinedPlayers'] as List? ?? []).length} joueur(s) prêt(s)"),
+        actions: [
+          if (isHost) ...[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(ctx);
+                await FirebaseFirestore.instance
+                    .collection('lounges')
+                    .doc(widget.loungeId)
+                    .update({'pendingGame': FieldValue.delete()});
+              },
+              child: const Text("Annuler la partie", style: TextStyle(color: Colors.redAccent)),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(ctx);
+                await FirebaseFirestore.instance
+                    .collection('lounges')
+                    .doc(widget.loungeId)
+                    .update({'pendingGame.status': 'started'});
+                await FirebaseFirestore.instance
+                    .collection('games')
+                    .doc(pendingGame['gameCode'])
+                    .update({'gameState': 'playing'});
+              },
+              child: const Text("Lancer"),
+            ),
+          ] else ...[
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text("Fermer"),
+            ),
+          ],
+        ],
+      ),
     );
   }
 
@@ -66668,20 +67431,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           },
                         ),
                       ),
-                      if (isHost && (pendingGame == null || pendingGame['status'] == 'finished')) ...[
-                        SizedBox(width: 10),
-                        ElevatedButton(
-                          onPressed: () => _openGameLauncher(players),
-                          child: Icon(Icons.videogame_asset),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                          ),
-                        ),
-                      ],
+                      _buildPlayGameButton(data, players, isHost),
                     ],
                   ),
                 ),
                 Divider(),
+                _buildLoungeGameBanner(context, data, players, isHost),
                 // Liste de messages de chat avec logique game_invite et game_result
                 Expanded(
                   child: StreamBuilder<QuerySnapshot>(
