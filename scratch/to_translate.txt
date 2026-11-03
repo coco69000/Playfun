@@ -1,0 +1,128 @@
+(Vous)
+0 PTS
+0 s
+10s
+15s
+30s
+45s
+60s
+90s
+Admin : Lancer maintenant avec les joueurs prêts
+Alerte Administrateur
+All-in
+Ambiance / Tonalité de jeu :
+Arrêter
+Autoriser les indices invalides (simplifié)
+Bannissez une réponse !
+Bas = Trouvé
+Bleu
+C'est fait
+C'est à votre tour ! Choisissez votre destin :
+CLIC
+COMBINAISON
+Cartes révélées :
+Catégories du Petit Bac
+Ce jeu requiert de connaître les autres joueurs et n'est pas disponible en matchmaking public.
+Chacun raconte une histoire, les autres votent Vrai ou Faux.
+Choisissez une carte à jouer :
+Codenames Local
+Configuration des Rôles
+Conserver avec l'IA
+Difficulté
+Dobble Local
+Démarrage automatique dans
+Désactiver ce pack
+En attente de l'hôte pour le tour suivant...
+En attente de l'hôte...
+En attente...
+Envoyer le défi 🚀
+Envoyer un message ou proposer un mot...
+Erreur lors de la sauvegarde du dessin.
+Expulser
+FUSIONNER
+Faites tourner la roulette pour désigner le prochain joueur.
+Fin manche
+Gagne +4 points s'il est éliminé en premier.
+Haut = Passer
+Historique
+Historique des thèmes IA
+INFECTÉ
+J'ai réalisé mon défi ! ✅
+KM
+LANCER LE JEU
+La 1ère fois qu'il est voté, les votes rebondissent.
+La Vengeuse choisit sa cible...
+La roue tourne...
+Les indices identiques seront toujours éliminés, mais pas ceux trop proches du mot.
+Mode de jeu
+Mode de transmission
+Mode de vote
+Modifier le Thème
+Mélanger plusieurs thèmes :
+N'a plus de cartes
+N'apparaîtra pas dans la liste publique.
+NON, Raté ! 👎
+Nombre d'éléments :
+OUI, Validé ! 👍
+PARTAGEZ CE CODE AVEC VOS AMIS
+PLACEZ LE TÉLÉPHONE SUR VOTRE FRONT !
+Paramètres Time's Up
+Pas assez de pièces pour rejoindre cette partie ! Coût : 1 pièce.
+Passe l'Objet
+Passe l'Objet Rapidement
+Passez vite !
+Permission refusée. Impossible d'accéder à la galerie.
+Phase de discussion
+Plus complexe, plus de cartes, plus de symboles.
+Plus de cartes !
+Plus de symboles par carte (8 au lieu de 6)
+Pointez quelqu'un !
+Pot
+Précisions ou idées supplémentaires (optionnel)
+Pseudo
+QUESTION
+Quel était le mot des Civils ?
+Quitter la partie
+Recherche de remplaçants en cours...
+Rester
+Retirer
+Réalisez votre défi en vidéo ou au micro !
+SCORES CONSERVÉS DE LA SESSION :
+Score Cible
+Si désactivé, le jeu n'avance pas automatiquement
+Si l'un est éliminé, l'autre aussi.
+Si un joueur ne répond pas ou quitte, la partie cherchera un remplaçant.
+Si un joueur pose un carré, l'ordre des cartes est inversé pour le reste de la manche.
+Soumettre
+TOTAL
+TOTAL ADVERSAIRE
+TOURNER LA ROULETTE
+Terminer
+Time's Up Local
+Touchez un mot pour modifier le résultat en cas d'erreur de capteur :
+Tour Suivant ➡️
+Tous les jeux
+Tranche en cas d'égalité, même morte.
+Un joueur a quitté...
+Un joueur aléatoire écrit le défi au lieu d'un défi prédéfini.
+Un joueur devine, son équipe l'aide, l'équipe adverse vérifie.
+Variante
+Vos amis votent pour évaluer votre prestation...
+Votez pour un joueur :
+Votre galerie est vide.
+Votre réponse...
+Votre vote a bien été enregistré !
+Voulez-vous clôturer la manche immédiatement ? Le joueur avec le plus d'XP deviendra l'Admin.
+Voulez-vous rejouer ?
+Vous avez été exclu de la partie pour inactivité. L'ordinateur joue à votre place (aucun gain ne vous sera attribué).
+Vous devez dessiner quelque chose !
+Vous n'avez pas encore d'amis !
+ZOMBIE
+ÉQUIPE 1
+ÉQUIPE 2
+⚠ï¸ Prise en chaîne ! Vous devez rejouer le pion clignotant.
+⚠️ Note : Ce jeu nécessite un avis personnel. L'ordinateur sautera son tour s'il est conservé.
+🎯 JOUEUR SÉLECTIONNÉ
+🎰 Qui va relever le défi ?
+🎲 Tirer ACTION ou VÉRITÉ
+🗳️ VOTE DE VALIDATION

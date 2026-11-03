@@ -1,0 +1,57 @@
+Line 29450: Text("$rank. $name: $score points")
+  Strings: ['$rank. $name: $score points']
+
+Line 31336: Text( "Jetons: $chips \$ | Mise: $bet \$", style: const TextStyle(color: Colors.amberAccent, fontSize: 11)
+  Strings: ['Jetons: $chips \\$ | Mise: $bet \\$']
+
+Line 31486: Text( "$cat: ${hasScore ? '$scoreVal' : '—'}", style: TextStyle( fontSize: 10.5, fontWeight: hasScore ? FontWeight.bold : FontWeight.normal, color: hasScore ? Colors.white : Colors.white38, )
+  Strings: ["$cat: ${hasScore ? '$scoreVal' : '—'}"]
+
+Line 32450: Text( '“ ${step['content']} â€Â', style: TextStyle( fontSize: 20, color: Colors.black87, fontWeight: FontWeight.w500, fontFamily: 'Courier', )
+  Strings: ['“ ${step[', ']} â€Â\x9d', 'Courier']
+
+Line 35585: Text( '« $fullText »', style: const TextStyle( fontFamily: 'serif', fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)
+  Strings: ['« $fullText »', 'serif']
+
+Line 35830: Text( "🛡️ ${oppSafeties.length}", style: const TextStyle( fontSize: 10, color: Colors.cyanAccent, fontWeight: FontWeight.bold, )
+  Strings: ['🛡️ ${oppSafeties.length}']
+
+Line 38055: Text( "${myData['chips']} \$", style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold, color: Colors.greenAccent, )
+  Strings: ["${myData['chips']} \\$"]
+
+Line 39294: Text( "${e.value['name']}: ${e.value['score'] ?? 0} 🃏", style: const TextStyle( color: Colors.white70, fontSize: 11, )
+  Strings: ["${e.value['name']}: ${e.value['score'] ?? 0} 🃏"]
+
+Line 40876: Text( '"$story"', style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic)
+  Strings: ['"$story"']
+
+Line 41021: Text( '"$story"', style: TextStyle( fontSize: 16, fontStyle: FontStyle.italic, )
+  Strings: ['"$story"']
+
+Line 41695: Text( '"${winningAnswer}"', style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white70)
+  Strings: ['"${winningAnswer}"']
+
+Line 41740: Text( '"$story"', style: TextStyle( fontStyle: FontStyle.italic, color: Colors.white70, )
+  Strings: ['"$story"']
+
+Line 42017: Text( '"${winningDescription}"', style: Theme.of( context, )
+  Strings: ['"${winningDescription}"']
+
+Line 46475: Text( "${e.key + 1}. ${e.value.key}: ${e.value.value} pt${e.value.value > 1 ? 's' : ''}", style: TextStyle( fontSize: 16, fontWeight: e.key == 0 ? FontWeight.bold : FontWeight.normal, )
+  Strings: ["${e.key + 1}. ${e.value.key}: ${e.value.value} pt${e.value.value > 1 ? 's' : ''}"]
+
+Line 46865: Text( "${e.key}: ${e.value} pt${e.value > 1 ? 's' : ''}", style: TextStyle(fontSize: 14)
+  Strings: ["${e.key}: ${e.value} pt${e.value > 1 ? 's' : ''}"]
+
+Line 57839: Text( "$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}", style: const TextStyle( color: Colors.white, fontWeight: FontWeight.bold, )
+  Strings: ["$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}"]
+
+Line 60887: Text( "⏱️ $_secondsLeft s", style: TextStyle( fontSize: 22, fontWeight: FontWeight.bold, color: _secondsLeft <= 10 ? Colors.redAccent : Colors.white, )
+  Strings: ['⏱️ $_secondsLeft s']
+
+Line 66215: Text( "« ${currentChallenge ?? '...'} »", style: const TextStyle( color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, height: 1.3, )
+  Strings: ["« ${currentChallenge ?? '...'} »"]
+
+Line 66324: Text( "« ${currentChallenge ?? ''} »", style: const TextStyle( color: Colors.white70, fontSize: 13, fontStyle: FontStyle.italic, )
+  Strings: ["« ${currentChallenge ?? ''} »"]
+

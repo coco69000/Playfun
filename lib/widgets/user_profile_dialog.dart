@@ -40,7 +40,7 @@ void showUserProfileDialog(
             if (!snapshot.data!.exists || snapshot.data!.data() == null) {
               return Center(
                 child: Text(
-                  l10n?.profileNotFound ?? "Profil introuvable ou joueur inexistant.",
+                  GameContentLocalization.ui(context, "Profil introuvable ou joueur inexistant."),
                   style: const TextStyle(color: Colors.white70),
                 ),
               );
@@ -267,7 +267,7 @@ void showUserProfileDialog(
                                   ),
                                   const SizedBox(height: 6),
                                   Text(
-                                    "Badges débloqués : ${unlockedBadges.length} / ${AppBadges.allBadges.length}",
+                                    GameContentLocalization.format(context, "Badges débloqués : {0} / {1}", [unlockedBadges.length, AppBadges.allBadges.length]),
                                     style: const TextStyle(
                                       color: Colors.white54,
                                       fontSize: 12,
@@ -395,8 +395,8 @@ void showUserProfileDialog(
                         icon: const Icon(Icons.block, color: Colors.white60, size: 14),
                         label: Text(
                           ps.blockedUsers.isNotEmpty
-                              ? "Joueurs bloqués (${ps.blockedUsers.length})"
-                              : "Joueurs bloqués",
+                              ? GameContentLocalization.format(context, "Joueurs bloqués ({0})", [ps.blockedUsers.length])
+                              : GameContentLocalization.ui(context, "Joueurs bloqués"),
                           style: const TextStyle(color: Colors.white70, fontSize: 12),
                         ),
                         onPressed: () => _showBlockedUsersDialog(context, ps),
@@ -420,7 +420,7 @@ void showUserProfileDialog(
                               ),
                               icon: const Icon(Icons.lock_open, color: Colors.greenAccent, size: 15),
                               label: Text(
-                                "Débloquer $name",
+                                GameContentLocalization.format(context, "Débloquer {0}", [name]),
                                 style: const TextStyle(color: Colors.greenAccent, fontSize: 12, fontWeight: FontWeight.bold),
                               ),
                               onPressed: () async {
@@ -466,8 +466,8 @@ void showUserProfileDialog(
                                             style: const TextStyle(color: Colors.white70, fontSize: 13),
                                           ),
                                           const SizedBox(height: 12),
-                                          const Text(
-                                            "Motif du signalement :",
+                                          Text(
+                                            GameContentLocalization.ui(context, "Motif du signalement :"),
                                             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
                                           ),
                                           const SizedBox(height: 6),
@@ -484,26 +484,26 @@ void showUserProfileDialog(
                                                 isExpanded: true,
                                                 dropdownColor: const Color(0xFF1E1E2C),
                                                 style: const TextStyle(fontSize: 12, color: Colors.white),
-                                                items: const [
+                                                items: [
                                                   DropdownMenuItem(
                                                     value: "Comportement inapproprié ou insultes",
-                                                    child: Text("Comportement inapproprié ou insultes"),
+                                                    child: Text(GameContentLocalization.ui(context, "Comportement inapproprié ou insultes")),
                                                   ),
                                                   DropdownMenuItem(
                                                     value: "Triche ou anti-jeu",
-                                                    child: Text("Triche ou anti-jeu"),
+                                                    child: Text(GameContentLocalization.ui(context, "Triche ou anti-jeu")),
                                                   ),
                                                   DropdownMenuItem(
                                                     value: "Spam ou publicité",
-                                                    child: Text("Spam ou publicité"),
+                                                    child: Text(GameContentLocalization.ui(context, "Spam ou publicité")),
                                                   ),
                                                   DropdownMenuItem(
                                                     value: "Pseudo ou image offensante",
-                                                    child: Text("Pseudo ou image offensante"),
+                                                    child: Text(GameContentLocalization.ui(context, "Pseudo ou image offensante")),
                                                   ),
                                                   DropdownMenuItem(
                                                     value: "Autre",
-                                                    child: Text("Autre"),
+                                                    child: Text(GameContentLocalization.ui(context, "Autre")),
                                                   ),
                                                 ],
                                                 onChanged: (val) {
@@ -537,7 +537,7 @@ void showUserProfileDialog(
                                               );
                                             }
                                           },
-                                          child: const Text("Signaler"),
+                                          child: Text(GameContentLocalization.ui(context, "Signaler")),
                                         ),
                                         ElevatedButton(
                                           style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent, foregroundColor: Colors.white),
@@ -632,8 +632,8 @@ void showUserProfileDialog(
                               ],
                             ),
                             const SizedBox(height: 16),
-                            const Text(
-                              "Détail par jeu :",
+                            Text(
+                              GameContentLocalization.ui(context, "Détail par jeu :"),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
@@ -643,11 +643,11 @@ void showUserProfileDialog(
                             const SizedBox(height: 8),
 
                             if (gameStats.isEmpty)
-                              const Padding(
-                                padding: EdgeInsets.all(24.0),
+                              Padding(
+                                padding: const EdgeInsets.all(24.0),
                                 child: Center(
                                   child: Text(
-                                    "Ce joueur n'a pas encore de parties enregistrées.",
+                                    GameContentLocalization.ui(context, "Ce joueur n'a pas encore de parties enregistrées."),
                                     style: TextStyle(color: Colors.white38),
                                   ),
                                 ),
@@ -888,10 +888,10 @@ void _showBlockedUsersDialog(BuildContext context, PlayerState ps) {
               ],
             ),
             content: blockedList.isEmpty
-                ? const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Text(
-                      "Vous n'avez bloqué aucun joueur.",
+                      GameContentLocalization.ui(context, "Vous n'avez bloqué aucun joueur."),
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white54, fontSize: 14),
                     ),
@@ -932,7 +932,7 @@ void _showBlockedUsersDialog(BuildContext context, PlayerState ps) {
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                 ),
                                 icon: const Icon(Icons.lock_open, size: 14, color: Colors.greenAccent),
-                                label: const Text("Débloquer", style: TextStyle(color: Colors.greenAccent, fontSize: 12)),
+                                label: Text(GameContentLocalization.ui(context, "Débloquer"), style: TextStyle(color: Colors.greenAccent, fontSize: 12)),
                                 onPressed: () async {
                                   await playerState.unblockUser(bUid);
                                   await FirebaseService().unblockPlayer(myId, bUid);
@@ -952,7 +952,7 @@ void _showBlockedUsersDialog(BuildContext context, PlayerState ps) {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(dialogCtx),
-                child: const Text("Fermer", style: TextStyle(color: Colors.white70)),
+                child: Text(GameContentLocalization.ui(context, "Fermer"), style: TextStyle(color: Colors.white70)),
               ),
             ],
           );

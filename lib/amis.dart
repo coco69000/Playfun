@@ -2035,7 +2035,7 @@ class _MultiplayerTeamSelectionDialogState
                 if (teams.length > widget.minTeams)
                   ElevatedButton.icon(
                     icon: Icon(Icons.remove),
-                    label: Text("Retirer"),
+                    label: Text(GameContentLocalization.ui(context, "Retirer")),
                     onPressed: _removeLastTeam,
                   ),
               ],
@@ -23093,12 +23093,15 @@ class FriendsModeHomeScreen extends StatelessWidget {
               Icon(Icons.nightlife, color: Colors.deepPurpleAccent, size: 80),
               SizedBox(height: 20),
               Text(
-                'Jeu de Soirée',
+                GameContentLocalization.ui(context, "Jeu de Soirée"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Le compagnon de vos meilleures soirées',
+                GameContentLocalization.ui(
+                  context,
+                  "Le compagnon de vos meilleures soirées",
+                ),
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -23163,14 +23166,16 @@ class MultiplayerMenuScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Entrez votre pseudo",
+              GameContentLocalization.ui(context, "Entrez votre pseudo"),
               style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: "Pseudo"),
+              decoration: InputDecoration(
+                labelText: GameContentLocalization.ui(context, "Pseudo"),
+              ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 40),
@@ -23181,7 +23186,14 @@ class MultiplayerMenuScreen extends StatelessWidget {
               onPressed: () {
                 if (_nameController.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Veuillez entrer un pseudo.")),
+                    SnackBar(
+                      content: Text(
+                        GameContentLocalization.ui(
+                          context,
+                          "Veuillez entrer un pseudo.",
+                        ),
+                      ),
+                    ),
                   );
                   return;
                 }
@@ -23215,7 +23227,14 @@ class MultiplayerMenuScreen extends StatelessWidget {
               onPressed: () {
                 if (_nameController.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Veuillez entrer un pseudo.")),
+                    SnackBar(
+                      content: Text(
+                        GameContentLocalization.ui(
+                          context,
+                          "Veuillez entrer un pseudo.",
+                        ),
+                      ),
+                    ),
                   );
                   return;
                 }
@@ -23472,7 +23491,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.",
+            GameContentLocalization.ui(
+              context,
+              "Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.",
+            ),
           ),
         ),
       );
@@ -23486,7 +23508,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Pas assez de pièces pour créer cette partie ! Coût : $cost pièces.",
+            GameContentLocalization.format(
+              context,
+              "Pas assez de pièces pour créer cette partie ! Coût : {0} pièces.",
+              [cost],
+            ),
           ),
         ),
       );
@@ -23707,7 +23733,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.",
+            GameContentLocalization.ui(
+              context,
+              "Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.",
+            ),
           ),
         ),
       );
@@ -23720,7 +23749,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Pas assez de pièces pour lancer une recherche ! Coût : 1 pièce.",
+            GameContentLocalization.ui(
+              context,
+              "Pas assez de pièces pour lancer une recherche ! Coût : 1 pièce.",
+            ),
           ),
         ),
       );
@@ -23865,7 +23897,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Comment voulez-vous jouer ?",
+                GameContentLocalization.ui(
+                  context,
+                  "Comment voulez-vous jouer ?",
+                ),
                 style: Theme.of(context).textTheme.headlineSmall,
                 textAlign: TextAlign.center,
               ),
@@ -23886,7 +23921,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  "Désactivez la 'Recherche Publique' pour pouvoir jouer en Local.",
+                                  GameContentLocalization.ui(
+                                    context,
+                                    "Désactivez la 'Recherche Publique' pour pouvoir jouer en Local.",
+                                  ),
                                 ),
                               ),
                             );
@@ -23896,7 +23934,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  "Désactivez la Vidéo ou l'Audio pour pouvoir jouer en Local.",
+                                  GameContentLocalization.ui(
+                                    context,
+                                    "Désactivez la Vidéo ou l'Audio pour pouvoir jouer en Local.",
+                                  ),
                                 ),
                               ),
                             );
@@ -23940,8 +23981,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             SnackBar(
                               content: Text(
                                 blockOnlineForDevineTete
-                                    ? "La vidéo est obligatoire pour jouer à Devine Tête en ligne."
-                                    : "Désactivez la 'Recherche Publique' pour créer une partie privée.",
+                                    ? GameContentLocalization.ui(
+                                      context,
+                                      "La vidéo est obligatoire pour jouer à Devine Tête en ligne.",
+                                    )
+                                    : GameContentLocalization.ui(
+                                      context,
+                                      "Désactivez la 'Recherche Publique' pour créer une partie privée.",
+                                    ),
                               ),
                             ),
                           );
@@ -23952,10 +23999,19 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         },
                 label: Text(
                   isPublicSearchEnabled
-                      ? "Privé indisponible (Recherche active)"
+                      ? GameContentLocalization.ui(
+                        context,
+                        "Privé indisponible (Recherche active)",
+                      )
                       : blockOnlineForDevineTete
-                      ? "Privé indisponible (Vidéo requise)"
-                      : "Créer une partie privée (Avec code)",
+                      ? GameContentLocalization.ui(
+                        context,
+                        "Privé indisponible (Vidéo requise)",
+                      )
+                      : GameContentLocalization.ui(
+                        context,
+                        "Créer une partie privée (Avec code)",
+                      ),
                 ),
               ),
               SizedBox(height: 12),
@@ -23980,18 +24036,33 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               SnackBar(
                                 content: Text(
                                   blockOnlineForDevineTete
-                                      ? "La vidéo est obligatoire pour jouer à Devine Tête en ligne."
-                                      : "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer avec le monde.",
+                                      ? GameContentLocalization.ui(
+                                        context,
+                                        "La vidéo est obligatoire pour jouer à Devine Tête en ligne.",
+                                      )
+                                      : GameContentLocalization.ui(
+                                        context,
+                                        "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer avec le monde.",
+                                      ),
                                 ),
                               ),
                             );
                           },
                   label: Text(
                     _enablePublicSearch
-                        ? "Recherche rapide (Monde)"
+                        ? GameContentLocalization.ui(
+                          context,
+                          "Recherche rapide (Monde)",
+                        )
                         : blockOnlineForDevineTete
-                        ? "Recherche rapide (Vidéo requise)"
-                        : "Recherche Monde (Désactivée)",
+                        ? GameContentLocalization.ui(
+                          context,
+                          "Recherche rapide (Vidéo requise)",
+                        )
+                        : GameContentLocalization.ui(
+                          context,
+                          "Recherche Monde (Désactivée)",
+                        ),
                   ),
                 ),
                 SizedBox(height: 12),
@@ -24015,25 +24086,43 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               SnackBar(
                                 content: Text(
                                   blockOnlineForDevineTete
-                                      ? "La vidéo est obligatoire pour jouer à Devine Tête en Classé."
-                                      : "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer en Classé.",
+                                      ? GameContentLocalization.ui(
+                                        context,
+                                        "La vidéo est obligatoire pour jouer à Devine Tête en Classé.",
+                                      )
+                                      : GameContentLocalization.ui(
+                                        context,
+                                        "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer en Classé.",
+                                      ),
                                 ),
                               ),
                             );
                           },
                   label: Text(
                     _enablePublicSearch
-                        ? "Partie Classée (Ranked)"
+                        ? GameContentLocalization.ui(
+                          context,
+                          "Partie Classée (Ranked)",
+                        )
                         : blockOnlineForDevineTete
-                        ? "Partie Classée (Vidéo requise)"
-                        : "Partie Classée (Désactivée)",
+                        ? GameContentLocalization.ui(
+                          context,
+                          "Partie Classée (Vidéo requise)",
+                        )
+                        : GameContentLocalization.ui(
+                          context,
+                          "Partie Classée (Désactivée)",
+                        ),
                   ),
                 ),
               ],
 
               if (!canMonde && widget.isWorldMode) ...[
                 Text(
-                  "Ce jeu requiert de connaître les autres joueurs et n'est pas disponible en matchmaking public.",
+                  GameContentLocalization.ui(
+                    context,
+                    "Ce jeu requiert de connaître les autres joueurs et n'est pas disponible en matchmaking public.",
+                  ),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.redAccent,
@@ -24091,9 +24180,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   color: Colors.cyanAccent,
                                   size: 22,
                                 ),
-                                const SizedBox(width: 8),
-                                const Text(
-                                  "Historique des thèmes IA",
+                                SizedBox(width: 8),
+                                Text(
+                                  GameContentLocalization.ui(
+                                    context,
+                                    "Historique des thèmes IA",
+                                  ),
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -24140,7 +24232,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      "Pour $_selectedGame",
+                                      GameContentLocalization.format(
+                                        context,
+                                        "Pour {0}",
+                                        [_selectedGame],
+                                      ),
                                       style: TextStyle(
                                         color:
                                             historyFilter == _selectedGame
@@ -24180,7 +24276,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      "Tous les jeux",
+                                      GameContentLocalization.ui(
+                                        context,
+                                        "Tous les jeux",
+                                      ),
                                       style: TextStyle(
                                         color:
                                             historyFilter == 'all'
@@ -24227,8 +24326,15 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   const SizedBox(height: 12),
                                   Text(
                                     historyFilter == 'all'
-                                        ? "Aucun thème IA sauvegardé sur votre compte."
-                                        : "Aucun thème sauvegardé pour $_selectedGame.",
+                                        ? GameContentLocalization.ui(
+                                          context,
+                                          "Aucun thème IA sauvegardé sur votre compte.",
+                                        )
+                                        : GameContentLocalization.format(
+                                          context,
+                                          "Aucun thème sauvegardé pour {0}.",
+                                          [_selectedGame],
+                                        ),
                                     style: const TextStyle(
                                       color: Colors.white54,
                                       fontSize: 14,
@@ -24329,7 +24435,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                         ),
                                                   ),
                                                   child: Text(
-                                                    "${item.words.length} éléments",
+                                                    GameContentLocalization.format(
+                                                      context,
+                                                      "{0} éléments",
+                                                      [item.words.length],
+                                                    ),
                                                     style: const TextStyle(
                                                       color: Colors.amberAccent,
                                                       fontSize: 10,
@@ -24362,7 +24472,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   if (item.prompt.isNotEmpty) ...[
                                     const SizedBox(height: 6),
                                     Text(
-                                      "Prompt : \"${item.prompt}\"",
+                                      GameContentLocalization.format(
+                                        context,
+                                        'Prompt : "{0}"',
+                                        [item.prompt],
+                                      ),
                                       style: const TextStyle(
                                         color: Colors.white54,
                                         fontSize: 12,
@@ -24409,8 +24523,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             Icons.check_circle_rounded,
                                             size: 16,
                                           ),
-                                          label: const Text(
-                                            "UTILISER",
+                                          label: Text(
+                                            GameContentLocalization.ui(
+                                              context,
+                                              "UTILISER",
+                                            ),
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold,
@@ -24451,15 +24568,18 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           },
                                         ),
                                       ),
-                                      const SizedBox(width: 6),
+                                      SizedBox(width: 6),
                                       Expanded(
                                         child: ElevatedButton.icon(
                                           icon: const Icon(
                                             Icons.merge_type_rounded,
                                             size: 16,
                                           ),
-                                          label: const Text(
-                                            "FUSIONNER",
+                                          label: Text(
+                                            GameContentLocalization.ui(
+                                              context,
+                                              "FUSIONNER",
+                                            ),
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold,
@@ -24493,7 +24613,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             ).showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  "✨ Thèmes fusionnés ! Le pack actif contient désormais ${_selectedAiWords!.length} éléments.",
+                                                  GameContentLocalization.format(
+                                                    context,
+                                                    "✨ Thèmes fusionnés ! Le pack actif contient désormais {0} éléments.",
+                                                    [_selectedAiWords!.length],
+                                                  ),
                                                 ),
                                                 backgroundColor:
                                                     Colors.deepPurple,
@@ -24558,8 +24682,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           builder: (context, setDState) {
             return AlertDialog(
               backgroundColor: const Color(0xFF1B1B2A),
-              title: const Text(
-                "Modifier le Thème",
+              title: Text(
+                GameContentLocalization.ui(context, "Modifier le Thème"),
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               content: SizedBox(
@@ -24634,8 +24758,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 ),
                         label: Text(
                           isGeneratingMore
-                              ? "Génération en cours..."
-                              : "Compléter avec l'IA (+15 mots)",
+                              ? GameContentLocalization.ui(
+                                context,
+                                "Génération en cours...",
+                              )
+                              : GameContentLocalization.ui(
+                                context,
+                                "Compléter avec l'IA (+15 mots)",
+                              ),
                           style: const TextStyle(
                             color: Colors.amberAccent,
                             fontSize: 12,
@@ -24723,7 +24853,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     }
                     Navigator.pop(dCtx);
                   },
-                  child: const Text("Enregistrer sur Firebase"),
+                  child: Text(
+                    GameContentLocalization.ui(
+                      context,
+                      "Enregistrer sur Firebase",
+                    ),
+                  ),
                 ),
               ],
             );
@@ -24806,7 +24941,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Difficulté",
+                            GameContentLocalization.ui(context, "Difficulté"),
                             style: Theme.of(
                               context,
                             ).textTheme.bodyMedium?.copyWith(
@@ -24826,7 +24961,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   color: Colors.amberAccent.withOpacity(0.5),
                                 ),
                               ),
-                              child: const Row(
+                              child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Icon(
@@ -24836,7 +24971,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   ),
                                   SizedBox(width: 4),
                                   Text(
-                                    "Remplacé par le thème IA",
+                                    GameContentLocalization.ui(
+                                      context,
+                                      "Remplacé par le thème IA",
+                                    ),
                                     style: TextStyle(
                                       color: Colors.amberAccent,
                                       fontSize: 11,
@@ -24848,7 +24986,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Opacity(
                         opacity: isAiActive ? 0.4 : 1.0,
                         child: IgnorePointer(
@@ -24858,17 +24996,26 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             segments: [
                               ButtonSegment(
                                 value: 'soft',
-                                label: Text('Soft'),
+                                label: Text(
+                                  GameContentLocalization.ui(context, "Soft"),
+                                ),
                                 icon: Icon(Icons.mood),
                               ),
                               ButtonSegment(
                                 value: 'hard',
-                                label: Text('Hard'),
+                                label: Text(
+                                  GameContentLocalization.ui(context, "Hard"),
+                                ),
                                 icon: Icon(Icons.whatshot),
                               ),
                               ButtonSegment(
                                 value: 'hardcore',
-                                label: Text('Hardcore'),
+                                label: Text(
+                                  GameContentLocalization.ui(
+                                    context,
+                                    "Hardcore",
+                                  ),
+                                ),
                                 icon: Icon(Icons.local_fire_department),
                               ),
                             ],
@@ -24960,9 +25107,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             size: 20,
                                           ),
                                         ),
-                                        const SizedBox(width: 10),
+                                        SizedBox(width: 10),
                                         Text(
-                                          "Génération IA : $_selectedGame",
+                                          GameContentLocalization.format(
+                                            context,
+                                            "Génération IA : {0}",
+                                            [_selectedGame],
+                                          ),
                                           style: const TextStyle(
                                             color: Colors.amberAccent,
                                             fontWeight: FontWeight.bold,
@@ -24977,8 +25128,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                         size: 18,
                                         color: Colors.cyanAccent,
                                       ),
-                                      label: const Text(
-                                        "Historique",
+                                      label: Text(
+                                        GameContentLocalization.ui(
+                                          context,
+                                          "Historique",
+                                        ),
                                         style: TextStyle(
                                           color: Colors.cyanAccent,
                                           fontWeight: FontWeight.bold,
@@ -25000,15 +25154,18 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 12),
+                                SizedBox(height: 12),
 
                                 // SÉLECTEUR MULTI-THÈMES
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      "Mélanger plusieurs thèmes :",
+                                    Text(
+                                      GameContentLocalization.ui(
+                                        context,
+                                        "Mélanger plusieurs thèmes :",
+                                      ),
                                       style: TextStyle(
                                         color: Colors.white70,
                                         fontSize: 12,
@@ -25093,7 +25250,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     },
                                   ),
                                 ),
-                                const SizedBox(height: 12),
+                                SizedBox(height: 12),
 
                                 // SÉLECTEUR DU NOMBRE D'ÉLÉMENTS
                                 Row(
@@ -25104,8 +25261,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text(
-                                          "Nombre d'éléments :",
+                                        Text(
+                                          GameContentLocalization.ui(
+                                            context,
+                                            "Nombre d'éléments :",
+                                          ),
                                           style: TextStyle(
                                             color: Colors.white70,
                                             fontSize: 12,
@@ -25113,7 +25273,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           ),
                                         ),
                                         Text(
-                                          "Min requis : $minCount | Recommandé : $defaultCount",
+                                          GameContentLocalization.format(
+                                            context,
+                                            "Min requis : {0} | Recommandé : {1}",
+                                            [minCount, defaultCount],
+                                          ),
                                           style: const TextStyle(
                                             color: Colors.white38,
                                             fontSize: 10,
@@ -25211,8 +25375,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 ),
 
                                 // SÉLECTEUR DE STYLE / AMBIANCE
-                                const Text(
-                                  "Ambiance / Tonalité de jeu :",
+                                Text(
+                                  GameContentLocalization.ui(
+                                    context,
+                                    "Ambiance / Tonalité de jeu :",
+                                  ),
                                   style: TextStyle(
                                     color: Colors.white70,
                                     fontSize: 12,
@@ -25258,7 +25425,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                         );
                                       }).toList(),
                                 ),
-                                const SizedBox(height: 10),
+                                SizedBox(height: 10),
 
                                 // CHAMP DE TEXTE LIBRE
                                 TextField(
@@ -25268,8 +25435,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     fontSize: 13,
                                   ),
                                   decoration: InputDecoration(
-                                    labelText:
-                                        "Précisions ou idées supplémentaires (optionnel)",
+                                    labelText: GameContentLocalization.ui(
+                                      context,
+                                      "Précisions ou idées supplémentaires (optionnel)",
+                                    ),
                                     labelStyle: const TextStyle(fontSize: 12),
                                     hintText:
                                         _selectedAiThemes.isEmpty
@@ -25329,7 +25498,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                 ),
                                         label: Text(
                                           _isAiLoading
-                                              ? "Génération en cours..."
+                                              ? GameContentLocalization.ui(
+                                                context,
+                                                "Génération en cours...",
+                                              )
                                               : "Générer avec l'IA ($currentCount éléments)",
                                           style: const TextStyle(
                                             color: Colors.black,
@@ -25432,7 +25604,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                         ).showSnackBar(
                                                           SnackBar(
                                                             content: Text(
-                                                              "✨ ${generated.length} éléments générés et sauvegardés !",
+                                                              GameContentLocalization.format(
+                                                                context,
+                                                                "✨ {0} éléments générés et sauvegardés !",
+                                                                [
+                                                                  generated
+                                                                      .length,
+                                                                ],
+                                                              ),
                                                             ),
                                                             backgroundColor:
                                                                 Colors
@@ -25448,7 +25627,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                       ).showSnackBar(
                                                         SnackBar(
                                                           content: Text(
-                                                            "Erreur IA: $e",
+                                                            GameContentLocalization.format(
+                                                              context,
+                                                              "Erreur IA: {0}",
+                                                              [e],
+                                                            ),
                                                           ),
                                                           backgroundColor:
                                                               Colors.red,
@@ -25494,7 +25677,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                         const SizedBox(width: 8),
                                         Expanded(
                                           child: Text(
-                                            "Pack actif : ${_activeAiThemeTitle ?? 'Thème personnalisé'} (${_selectedAiWords!.length} éléments)",
+                                            "Pack actif : ${_activeAiThemeTitle ?? GameContentLocalization.ui(context, 'Thème personnalisé')} (${_selectedAiWords!.length} éléments)",
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -25511,7 +25694,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           ),
                                           padding: EdgeInsets.zero,
                                           constraints: const BoxConstraints(),
-                                          tooltip: "Désactiver ce pack",
+                                          tooltip: GameContentLocalization.ui(
+                                            context,
+                                            "Désactiver ce pack",
+                                          ),
                                           onPressed: () {
                                             setState(() {
                                               _selectedAiWords = null;
@@ -25533,12 +25719,17 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Gribouillis') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Mode de jeu",
+                        GameContentLocalization.ui(context, "Mode de jeu"),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<String>(
                         segments: [
-                          ButtonSegment(value: 'Normal', label: Text('Normal')),
+                          ButtonSegment(
+                            value: 'Normal',
+                            label: Text(
+                              GameContentLocalization.ui(context, 'Normal'),
+                            ),
+                          ),
                           ButtonSegment(
                             value: 'Complément',
                             label: Text(
@@ -25547,7 +25738,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           ),
                           ButtonSegment(
                             value: 'Brise-Glace',
-                            label: Text('Brise-Glace'),
+                            label: Text(
+                              GameContentLocalization.ui(
+                                context,
+                                'Brise-Glace',
+                              ),
+                            ),
                           ),
                         ],
                         selected: {_gribouillisMode},
@@ -25565,7 +25761,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                           ),
                           subtitle: Text(
-                            "Chacun complète le même dessin initial au lieu de la chaîne.",
+                            GameContentLocalization.ui(
+                              context,
+                              "Chacun complète le même dessin initial au lieu de la chaîne.",
+                            ),
                           ),
                           value: _gribouillisAjouter1,
                           onChanged:
@@ -25579,7 +25778,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Zéro Pointé') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Score Cible",
+                        GameContentLocalization.ui(context, "Score Cible"),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<int>(
@@ -25599,7 +25798,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Poker') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Jetons de départ: $_pokerStartChips",
+                        GameContentLocalization.format(
+                          context,
+                          "Jetons de départ: {0}",
+                          [_pokerStartChips],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -25637,10 +25840,16 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
                         title: Text(
-                          "Plus de symboles par carte (8 au lieu de 6)",
+                          GameContentLocalization.ui(
+                            context,
+                            "Plus de symboles par carte (8 au lieu de 6)",
+                          ),
                         ),
                         subtitle: Text(
-                          "Plus complexe, plus de cartes, plus de symboles.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Plus complexe, plus de cartes, plus de symboles.",
+                          ),
                         ),
                         value: _dobbleSymbolsPerCard,
                         onChanged:
@@ -25660,7 +25869,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           ),
                         ),
                         subtitle: Text(
-                          "Chacun raconte une histoire, les autres votent Vrai ou Faux.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Chacun raconte une histoire, les autres votent Vrai ou Faux.",
+                          ),
                         ),
                         value: _isSimplifiedLiar,
                         onChanged:
@@ -25671,7 +25883,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       if (_isSimplifiedLiar) ...[
                         SizedBox(height: 10),
                         Text(
-                          "Mode de vote",
+                          GameContentLocalization.ui(context, "Mode de vote"),
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         SegmentedButton<String>(
@@ -25707,7 +25919,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Petit Bac') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Catégories du Petit Bac",
+                        GameContentLocalization.ui(
+                          context,
+                          "Catégories du Petit Bac",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 8),
@@ -25778,7 +25993,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           GameUiLocalization.tr(context, "Variante Révolution"),
                         ),
                         subtitle: Text(
-                          "Si un joueur pose un carré, l'ordre des cartes est inversé pour le reste de la manche.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Si un joueur pose un carré, l'ordre des cartes est inversé pour le reste de la manche.",
+                          ),
                         ),
                         value: _presidentRevolution,
                         onChanged:
@@ -25795,7 +26013,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           GameUiLocalization.tr(context, "Seulement 30 traits"),
                         ),
                         subtitle: Text(
-                          "Le dessinateur est limité à 30 traits maximum par dessin.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Le dessinateur est limité à 30 traits maximum par dessin.",
+                          ),
                         ),
                         value: _pictionaryOnly30Strokes,
                         onChanged:
@@ -25809,7 +26030,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Cadavre Exquis') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Variante",
+                        GameContentLocalization.ui(context, "Variante"),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SegmentedButton<String>(
@@ -25841,7 +26062,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "Mode de transmission",
+                        GameContentLocalization.ui(
+                          context,
+                          "Mode de transmission",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SegmentedButton<String>(
@@ -25857,7 +26081,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           ),
                           ButtonSegment(
                             value: 'multiple',
-                            label: Text('1 feuille par joueur'),
+                            label: Text(
+                              GameContentLocalization.ui(
+                                context,
+                                '1 feuille par joueur',
+                              ),
+                            ),
                           ),
                         ],
                         selected: {_cadavrePassingMode},
@@ -25872,10 +26101,16 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
                         title: Text(
-                          "Autoriser les indices invalides (simplifié)",
+                          GameContentLocalization.ui(
+                            context,
+                            "Autoriser les indices invalides (simplifié)",
+                          ),
                         ),
                         subtitle: Text(
-                          "Les indices identiques seront toujours éliminés, mais pas ceux trop proches du mot.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Les indices identiques seront toujours éliminés, mais pas ceux trop proches du mot.",
+                          ),
                         ),
                         value: _justOneAllowInvalidClues,
                         onChanged:
@@ -25889,7 +26124,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Loup-Garou') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Configuration des Rôles",
+                        GameContentLocalization.ui(
+                          context,
+                          "Configuration des Rôles",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
@@ -25996,12 +26234,18 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         _selectedGame == 'La Patate Chaude') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Paramètres du Jeu",
+                        GameContentLocalization.ui(
+                          context,
+                          "Paramètres du Jeu",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 15),
                       Text(
-                        "Sélectionnez au moins 3 catégories :",
+                        GameContentLocalization.ui(
+                          context,
+                          "Sélectionnez au moins 3 catégories :",
+                        ),
                         style: TextStyle(
                           color:
                               _selectedGameCategories.length < 3
@@ -26043,7 +26287,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                           ),
                           subtitle: Text(
-                            "Le temps ne se réinitialise pas à chaque joueur. La patate explose à la fin !",
+                            GameContentLocalization.ui(
+                              context,
+                              "Le temps ne se réinitialise pas à chaque joueur. La patate explose à la fin !",
+                            ),
                           ),
                           value: _hotPotatoUseGlobalTimer,
                           onChanged:
@@ -26054,7 +26301,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         ),
                         if (_hotPotatoUseGlobalTimer) ...[
                           Text(
-                            "Durée de la bombe : $_hotPotatoGlobalDuration s",
+                            GameContentLocalization.format(
+                              context,
+                              "Durée de la bombe : {0} s",
+                              [_hotPotatoGlobalDuration],
+                            ),
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Slider(
@@ -26075,12 +26326,19 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == "Time's Up") ...[
                       SizedBox(height: 20),
                       Text(
-                        "Paramètres Time's Up",
+                        GameContentLocalization.ui(
+                          context,
+                          "Paramètres Time's Up",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Nombre de manches : $_timesUpTotalRounds",
+                        GameContentLocalization.format(
+                          context,
+                          "Nombre de manches : {0}",
+                          [_timesUpTotalRounds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<int>(
@@ -26103,9 +26361,17 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Devine Tête') ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
-                        title: Text("Jouer par équipes (Mode 2v2+)"),
+                        title: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Jouer par équipes (Mode 2v2+)",
+                          ),
+                        ),
                         subtitle: Text(
-                          "Un joueur devine, son équipe l'aide, l'équipe adverse vérifie.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Un joueur devine, son équipe l'aide, l'équipe adverse vérifie.",
+                          ),
                         ),
                         value: _devineTeteUseTeams,
                         onChanged:
@@ -26117,9 +26383,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Petits Chevaux') ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
-                        title: Text("Équipes 2v2"),
+                        title: Text(
+                          GameContentLocalization.ui(context, "Équipes 2v2"),
+                        ),
                         subtitle: Text(
-                          "Nécessite exactement 4 joueurs. Vous aidez le joueur en face de vous.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Nécessite exactement 4 joueurs. Vous aidez le joueur en face de vous.",
+                          ),
                         ),
                         value: _petitsChevauxTeamMode,
                         onChanged:
@@ -26132,21 +26403,36 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Dominoes') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Paramètres Dominos",
+                        GameContentLocalization.ui(
+                          context,
+                          "Paramètres Dominos",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Mode de jeu :",
+                        GameContentLocalization.ui(context, "Mode de jeu :"),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<String>(
                         segments: [
-                          ButtonSegment(value: 'pioche', label: Text('Pioche')),
-                          ButtonSegment(value: 'bloque', label: Text('Bloqué')),
+                          ButtonSegment(
+                            value: 'pioche',
+                            label: Text(
+                              GameContentLocalization.ui(context, 'Pioche'),
+                            ),
+                          ),
+                          ButtonSegment(
+                            value: 'bloque',
+                            label: Text(
+                              GameContentLocalization.ui(context, "Bloqué"),
+                            ),
+                          ),
                           ButtonSegment(
                             value: 'all_fives',
-                            label: Text('All Fives'),
+                            label: Text(
+                              GameContentLocalization.ui(context, 'All Fives'),
+                            ),
                           ),
                         ],
                         selected: {_dominoesMode},
@@ -26155,7 +26441,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Score Cible : $_dominoesTargetScore",
+                        GameContentLocalization.format(
+                          context,
+                          "Score Cible : {0}",
+                          [_dominoesTargetScore],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -26174,12 +26464,15 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Uno') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Paramètres Uno",
+                        GameContentLocalization.ui(context, "Paramètres Uno"),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Cartes de départ :",
+                        GameContentLocalization.ui(
+                          context,
+                          "Cartes de départ :",
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<int>(
@@ -26214,29 +26507,38 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Photo Roulette') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Paramètres Photo Roulette",
+                        GameContentLocalization.ui(
+                          context,
+                          "Paramètres Photo Roulette",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Type de média",
+                        GameContentLocalization.ui(context, "Type de média"),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<String>(
                         segments: [
                           ButtonSegment(
                             value: 'Photos',
-                            label: Text('Photos'),
+                            label: Text(
+                              GameContentLocalization.ui(context, 'Photos'),
+                            ),
                             icon: Icon(Icons.photo),
                           ),
                           ButtonSegment(
                             value: 'Vidéos',
-                            label: Text('Vidéos'),
+                            label: Text(
+                              GameContentLocalization.ui(context, "Vidéos"),
+                            ),
                             icon: Icon(Icons.videocam),
                           ),
                           ButtonSegment(
                             value: 'Mixte',
-                            label: Text('Mixte'),
+                            label: Text(
+                              GameContentLocalization.ui(context, 'Mixte'),
+                            ),
                             icon: Icon(Icons.collections),
                           ),
                         ],
@@ -26265,7 +26567,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Photos piochées par joueur : $_photoRoulettePhotosPerPlayer",
+                        GameContentLocalization.format(
+                          context,
+                          "Photos piochées par joueur : {0}",
+                          [_photoRoulettePhotosPerPlayer],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -26284,14 +26590,25 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Action ou Vérité') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Paramètres Action ou Vérité",
+                        GameContentLocalization.ui(
+                          context,
+                          "Paramètres Action ou Vérité",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 12),
                       SwitchListTile.adaptive(
-                        title: Text("Les joueurs écrivent les défis"),
+                        title: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Les joueurs écrivent les défis",
+                          ),
+                        ),
                         subtitle: Text(
-                          "Un joueur aléatoire écrit le défi au lieu d'un défi prédéfini.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Un joueur aléatoire écrit le défi au lieu d'un défi prédéfini.",
+                          ),
                         ),
                         value: _aoVPlayersDecide,
                         onChanged:
@@ -26300,7 +26617,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        "Nombre de tours : $_aoVMaxRounds",
+                        GameContentLocalization.format(
+                          context,
+                          "Nombre de tours : {0}",
+                          [_aoVMaxRounds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -26314,7 +26635,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        "Seuil de validation par défaut : $_aoVVoteThreshold%",
+                        GameContentLocalization.format(
+                          context,
+                          "Seuil de validation par défaut : {0}%",
+                          [_aoVVoteThreshold],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -26331,7 +26656,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (_selectedGame == 'Infiltré & Mr. White') ...[
                       SizedBox(height: 20),
                       Text(
-                        "Rôles de Base",
+                        GameContentLocalization.ui(context, "Rôles de Base"),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       Card(
@@ -26407,7 +26732,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          "Total imposteurs : ${_infiltreCount + _mrWhiteCount}. La répartition finale sera ajustée si nécessaire pour garantir au moins 1 civil.",
+                          GameContentLocalization.format(
+                            context,
+                            "Total imposteurs : {0}. La répartition finale sera ajustée si nécessaire pour garantir au moins 1 civil.",
+                            [_infiltreCount + _mrWhiteCount],
+                          ),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white70,
@@ -26417,13 +26746,21 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "Rôles Spéciaux (Optionnel)",
+                        GameContentLocalization.ui(
+                          context,
+                          "Rôles Spéciaux (Optionnel)",
+                        ),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Fou de Joie"),
+                        title: Text(
+                          GameContentLocalization.ui(context, "Fou de Joie"),
+                        ),
                         subtitle: Text(
-                          "Gagne +4 points s'il est éliminé en premier.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Gagne +4 points s'il est éliminé en premier.",
+                          ),
                         ),
                         value: _undercoverRoleSettings['Fou de Joie']!,
                         onChanged:
@@ -26433,9 +26770,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Boomerang"),
+                        title: Text(
+                          GameContentLocalization.ui(context, "Boomerang"),
+                        ),
                         subtitle: Text(
-                          "La 1ère fois qu'il est voté, les votes rebondissent.",
+                          GameContentLocalization.ui(
+                            context,
+                            "La 1ère fois qu'il est voté, les votes rebondissent.",
+                          ),
                         ),
                         value: _undercoverRoleSettings['Boomerang']!,
                         onChanged:
@@ -26444,8 +26786,18 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Déesse de la Justice"),
-                        subtitle: Text("Tranche en cas d'égalité, même morte."),
+                        title: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Déesse de la Justice",
+                          ),
+                        ),
+                        subtitle: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Tranche en cas d'égalité, même morte.",
+                          ),
+                        ),
                         value: _undercoverRoleSettings['Déesse de la Justice']!,
                         onChanged:
                             (val) => setState(
@@ -26455,9 +26807,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Fantôme"),
+                        title: Text(
+                          GameContentLocalization.ui(context, "Fantôme"),
+                        ),
                         subtitle: Text(
-                          "Peut toujours voter après son élimination.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Peut toujours voter après son élimination.",
+                          ),
                         ),
                         value: _undercoverRoleSettings['Fantôme']!,
                         onChanged:
@@ -26466,8 +26823,18 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Amoureux (5+ joueurs)"),
-                        subtitle: Text("Si l'un est éliminé, l'autre aussi."),
+                        title: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Amoureux (5+ joueurs)",
+                          ),
+                        ),
+                        subtitle: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Si l'un est éliminé, l'autre aussi.",
+                          ),
+                        ),
                         value: _undercoverRoleSettings['Amoureux']!,
                         onChanged:
                             (val) => setState(
@@ -26475,9 +26842,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Mr. Meme"),
+                        title: Text(
+                          GameContentLocalization.ui(context, "Mr. Meme"),
+                        ),
                         subtitle: Text(
-                          "Un joueur devra mimer son indice à chaque tour.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Un joueur devra mimer son indice à chaque tour.",
+                          ),
                         ),
                         value: _undercoverRoleSettings['Mr. Meme']!,
                         onChanged:
@@ -26486,8 +26858,18 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Vendeur de Falafels (4+ joueurs)"),
-                        subtitle: Text("Reçoit un pouvoir spécial aléatoire."),
+                        title: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Vendeur de Falafels (4+ joueurs)",
+                          ),
+                        ),
+                        subtitle: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Reçoit un pouvoir spécial aléatoire.",
+                          ),
+                        ),
                         value: _undercoverRoleSettings['Vendeur de Falafels']!,
                         onChanged:
                             (val) => setState(
@@ -26497,8 +26879,18 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Vengeuse (5+ joueurs)"),
-                        subtitle: Text("Élimine quelqu'un en étant éliminée."),
+                        title: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Vengeuse (5+ joueurs)",
+                          ),
+                        ),
+                        subtitle: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Élimine quelqu'un en étant éliminée.",
+                          ),
+                        ),
                         value: _undercoverRoleSettings['Vengeuse']!,
                         onChanged:
                             (val) => setState(
@@ -26506,9 +26898,17 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text("Duellistes (5+ joueurs)"),
+                        title: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Duellistes (5+ joueurs)",
+                          ),
+                        ),
                         subtitle: Text(
-                          "Duel secret pour des points bonus/malus.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Duel secret pour des points bonus/malus.",
+                          ),
                         ),
                         value: _undercoverRoleSettings['Duellistes']!,
                         onChanged:
@@ -26520,7 +26920,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
                     Divider(height: 30, thickness: 1, color: Colors.white24),
                     Text(
-                      "Paramètres Généraux",
+                      GameContentLocalization.ui(
+                        context,
+                        "Paramètres Généraux",
+                      ),
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SwitchListTile.adaptive(
@@ -26528,7 +26931,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         GameUiLocalization.tr(context, "Activer le Timer"),
                       ),
                       subtitle: Text(
-                        "Si désactivé, le jeu n'avance pas automatiquement",
+                        GameContentLocalization.ui(
+                          context,
+                          "Si désactivé, le jeu n'avance pas automatiquement",
+                        ),
                       ),
                       value: _useTimer,
                       onChanged: (val) => setState(() => _useTimer = val),
@@ -26536,7 +26942,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     ),
                     if (_useTimer) ...[
                       Text(
-                        "Durée de réponse par joueur : ${_turnTimerSeconds}s",
+                        GameContentLocalization.format(
+                          context,
+                          "Durée de réponse par joueur : {0}s",
+                          [_turnTimerSeconds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -26550,7 +26960,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 setState(() => _turnTimerSeconds = v.round()),
                       ),
                       Text(
-                        "Durée d'affichage des résultats : ${_resultTimerSeconds}s",
+                        GameContentLocalization.format(
+                          context,
+                          "Durée d'affichage des résultats : {0}s",
+                          [_resultTimerSeconds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -26597,7 +27011,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 ),
                                 subtitle: Text(
                                   forceVideo
-                                      ? "Caméra indispensable pour ce jeu."
+                                      ? GameContentLocalization.ui(
+                                        context,
+                                        "Caméra indispensable pour ce jeu.",
+                                      )
                                       : (canEnableVideo
                                           ? "Micro + Caméra (Désactive le mode Local)"
                                           : "Réservé VIP ou limite atteinte"),
@@ -26632,7 +27049,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     ),
                                   ),
                                   subtitle: Text(
-                                    "Active le micro sans la caméra (Désactive le mode Local)",
+                                    GameContentLocalization.ui(
+                                      context,
+                                      "Active le micro sans la caméra (Désactive le mode Local)",
+                                    ),
                                   ),
                                   value: forceVideo ? false : _audioEnabled,
                                   onChanged:
@@ -26656,19 +27076,28 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 Divider(color: Colors.white24, height: 30),
 
                                 Text(
-                                  "Paramètres de Recherche Publique",
+                                  GameContentLocalization.ui(
+                                    context,
+                                    "Paramètres de Recherche Publique",
+                                  ),
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 SwitchListTile.adaptive(
                                   title: Text(
-                                    "Autoriser la Recherche Rapide & Classée",
+                                    GameContentLocalization.ui(
+                                      context,
+                                      "Autoriser la Recherche Rapide & Classée",
+                                    ),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.amber,
                                     ),
                                   ),
                                   subtitle: Text(
-                                    "Active les boutons de recherche mondiale pour jouer avec des inconnus.",
+                                    GameContentLocalization.ui(
+                                      context,
+                                      "Active les boutons de recherche mondiale pour jouer avec des inconnus.",
+                                    ),
                                   ),
                                   value: _enablePublicSearch,
                                   onChanged:
@@ -26704,12 +27133,22 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     segments: [
                                       ButtonSegment(
                                         value: 'pays',
-                                        label: Text('Mon Pays'),
+                                        label: Text(
+                                          GameContentLocalization.ui(
+                                            context,
+                                            'Mon Pays',
+                                          ),
+                                        ),
                                         icon: Icon(Icons.flag),
                                       ),
                                       ButtonSegment(
                                         value: 'monde',
-                                        label: Text('Le Monde'),
+                                        label: Text(
+                                          GameContentLocalization.ui(
+                                            context,
+                                            'Le Monde',
+                                          ),
+                                        ),
                                         icon: Icon(Icons.public),
                                       ),
                                     ],
@@ -26793,7 +27232,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   }
                                 },
                                 label: Text(
-                                  "LANCER LE JEU",
+                                  GameContentLocalization.ui(
+                                    context,
+                                    "LANCER LE JEU",
+                                  ),
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -26837,7 +27279,14 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
   void _joinGame() async {
     if (_codeController.text.trim().length != 6) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Le code doit comporter 6 chiffres.")),
+        SnackBar(
+          content: Text(
+            GameContentLocalization.ui(
+              context,
+              "Le code doit comporter 6 chiffres.",
+            ),
+          ),
+        ),
       );
       return;
     }
@@ -26851,7 +27300,10 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.",
+            GameContentLocalization.ui(
+              context,
+              "Vous avez atteint votre limite de 20 parties multijoueur pour aujourd'hui.",
+            ),
           ),
         ),
       );
@@ -26887,7 +27339,10 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                "Pas assez de pièces pour rejoindre cette partie ! Coût : 1 pièce.",
+                GameContentLocalization.ui(
+                  context,
+                  "Pas assez de pièces pour rejoindre cette partie ! Coût : 1 pièce.",
+                ),
               ),
             ),
           );
@@ -26938,9 +27393,13 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Erreur de connexion.")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            GameContentLocalization.ui(context, "Erreur de connexion."),
+          ),
+        ),
+      );
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -26979,7 +27438,9 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
                     SizedBox(height: 30),
                     ElevatedButton(
                       onPressed: _joinGame,
-                      child: Text("Rejoindre"),
+                      child: Text(
+                        GameContentLocalization.ui(context, "Rejoindre"),
+                      ),
                     ),
                   ],
                 ),
@@ -27036,9 +27497,16 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
         stream: _firebaseService.getGameStream(gameCode),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           if (snapshot.hasError)
-            return const Center(child: Text("Erreur de connexion au salon."));
+            return Center(
+              child: Text(
+                GameContentLocalization.ui(
+                  context,
+                  "Erreur de connexion au salon.",
+                ),
+              ),
+            );
           if (!snapshot.data!.exists) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (mounted) {
@@ -27204,8 +27672,11 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: [
-                          const Text(
-                            "PARTAGEZ CE CODE AVEC VOS AMIS",
+                          Text(
+                            GameContentLocalization.ui(
+                              context,
+                              "PARTAGEZ CE CODE AVEC VOS AMIS",
+                            ),
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 12,
@@ -27228,7 +27699,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                                   color: Colors.amberAccent,
                                 ),
                               ),
-                              const SizedBox(width: 12),
+                              SizedBox(width: 12),
                               IconButton(
                                 icon: const Icon(
                                   Icons.copy,
@@ -27268,7 +27739,11 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-                        "Difficulté : ${gameData['difficulty'] ?? 'Standard'}",
+                        GameContentLocalization.format(
+                          context,
+                          "Difficulté : {0}",
+                          [gameData['difficulty'] ?? 'Standard'],
+                        ),
                       ),
                     ),
                   ),
@@ -27317,7 +27792,8 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                             color: isPlayerHost ? Colors.amber : Colors.white70,
                           ),
                           title: Text(
-                            pData['name'] ?? 'Joueur',
+                            pData['name'] ??
+                                GameContentLocalization.ui(context, 'Joueur'),
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           // Affichage des points de session conservés
@@ -27325,7 +27801,11 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                               (pData['score'] != null &&
                                       (pData['score'] as num) > 0)
                                   ? Text(
-                                    "Score de session : ${pData['score']} victoires",
+                                    GameContentLocalization.format(
+                                      context,
+                                      "Score de session : {0} victoires",
+                                      [pData['score']],
+                                    ),
                                     style: const TextStyle(
                                       color: Colors.amberAccent,
                                       fontSize: 12,
@@ -27346,7 +27826,9 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                   if (isHost) ...[
                     ElevatedButton.icon(
                       icon: const Icon(Icons.person_add),
-                      label: const Text("Inviter mes Amis"),
+                      label: Text(
+                        GameContentLocalization.ui(context, "Inviter mes Amis"),
+                      ),
 
                       onPressed: () {
                         // Ouvre le bottom sheet pour inviter
@@ -27364,7 +27846,10 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                                 height: 200,
                                 child: Center(
                                   child: Text(
-                                    "Vous n'avez pas encore d'amis !",
+                                    GameContentLocalization.ui(
+                                      context,
+                                      "Vous n'avez pas encore d'amis !",
+                                    ),
                                   ),
                                 ),
                               );
@@ -27374,7 +27859,10 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    "Inviter au salon",
+                                    GameContentLocalization.ui(
+                                      context,
+                                      "Inviter au salon",
+                                    ),
                                     style:
                                         Theme.of(context).textTheme.titleLarge,
                                   ),
@@ -27395,7 +27883,12 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.green,
                                           ),
-                                          child: Text("Inviter"),
+                                          child: Text(
+                                            GameContentLocalization.ui(
+                                              context,
+                                              "Inviter",
+                                            ),
+                                          ),
                                           onPressed: () {
                                             ps.sendGameInvite(
                                               fId,
@@ -27412,7 +27905,11 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                                             ).showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  "Invitation envoyée à $fName !",
+                                                  GameContentLocalization.format(
+                                                    context,
+                                                    "Invitation envoyée à {0} !",
+                                                    [fName],
+                                                  ),
                                                 ),
                                               ),
                                             );
@@ -27468,7 +27965,13 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                                         context,
                                       ).showSnackBar(
                                         SnackBar(
-                                          content: Text("Erreur: $e"),
+                                          content: Text(
+                                            GameContentLocalization.format(
+                                              context,
+                                              "Erreur: {0}",
+                                              [e],
+                                            ),
+                                          ),
                                           backgroundColor: Colors.red,
                                         ),
                                       );
@@ -27486,7 +27989,10 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                     )
                   else
                     Text(
-                      "En attente de l'hôte...",
+                      GameContentLocalization.ui(
+                        context,
+                        "En attente de l'hôte...",
+                      ),
                       style: TextStyle(
                         fontStyle: FontStyle.italic,
                         color: Colors.white70,
@@ -27682,12 +28188,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('Rester'),
+                child: Text(GameContentLocalization.ui(context, "Rester")),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('Quitter'),
+                child: Text(GameContentLocalization.ui(context, 'Quitter')),
               ),
             ],
           ),
@@ -28467,7 +28973,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             break;
           default:
             mainContent = Center(
-              child: Text("Phase de jeu inconnue : $currentPhase"),
+              child: Text(
+                GameContentLocalization.format(
+                  context,
+                  "Phase de jeu inconnue : {0}",
+                  [currentPhase],
+                ),
+              ),
             );
         }
 
@@ -28495,13 +29007,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Partie Terminée !",
+                GameContentLocalization.ui(context, "Partie Terminée !"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
               Text(
-                "Victoire des ${winnerFaction} !",
+                GameContentLocalization.format(context, "Victoire des {0} !", [
+                  winnerFaction,
+                ]),
                 style: Theme.of(
                   context,
                 ).textTheme.headlineSmall?.copyWith(color: Colors.amber),
@@ -28536,13 +29050,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Résultat du vote",
+          GameContentLocalization.ui(context, "Résultat du vote"),
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         SizedBox(height: 20),
         if (eliminatedIds.isEmpty)
           Text(
-            "Personne n'a été éliminé (égalité).",
+            GameContentLocalization.ui(
+              context,
+              "Personne n'a été éliminé (égalité).",
+            ),
             style: TextStyle(fontSize: 18, color: Colors.amber),
           )
         else
@@ -28557,7 +29074,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ? "$pRole (${specialAbilities.join(', ')})"
                     : pRole;
             return Text(
-              "$pName a été éliminé ! Son rôle était : $roleDisplay",
+              GameContentLocalization.format(
+                context,
+                "{0} a été éliminé ! Son rôle était : {1}",
+                [pName, roleDisplay],
+              ),
               style: TextStyle(fontSize: 18, color: Colors.amber),
               textAlign: TextAlign.center,
             );
@@ -28596,7 +29117,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     if (playerId != avengerId) {
       return Center(
         child: Text(
-          "La Vengeuse choisit sa cible...",
+          GameContentLocalization.ui(
+            context,
+            "La Vengeuse choisit sa cible...",
+          ),
           textAlign: TextAlign.center,
         ),
       );
@@ -28672,7 +29196,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           title: Text(roleName),
           content: Text(
             _undercoverRoleDescriptions[roleName] ??
-                "Aucune description trouvée pour ce rôle.",
+                GameContentLocalization.ui(
+                  context,
+                  "Aucune description trouvée pour ce rôle.",
+                ),
           ),
           actions: <Widget>[
             TextButton(
@@ -28711,8 +29238,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         SizedBox(height: 10),
         Text(
           isMyTurn
-              ? "ðŸŽ¯ C'est à toi de donner un indice !"
-              : "Au tour de $currentPlayerName...",
+              ? GameContentLocalization.ui(
+                context,
+                "🎯 C'est à toi de donner un indice !",
+              )
+              : GameContentLocalization.format(context, "Au tour de {0}...", [
+                currentPlayerName,
+              ]),
           style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
@@ -28803,7 +29335,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              '✅ Indice envoyé ! En attente des autres joueurs...',
+              GameContentLocalization.ui(
+                context,
+                "✅ Indice envoyé ! En attente des autres joueurs...",
+              ),
               style: TextStyle(
                 color: Colors.greenAccent,
                 fontStyle: FontStyle.italic,
@@ -28833,7 +29368,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       children: [
         if (currentPhase == 'discussion') ...[
           Text(
-            "Phase de discussion",
+            GameContentLocalization.ui(context, "Phase de discussion"),
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           SizedBox(height: 10),
@@ -28867,17 +29402,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
           if (hasVoted)
             Text(
-              "Vote enregistré. En attente...",
+              GameContentLocalization.ui(
+                context,
+                "Vote enregistré. En attente...",
+              ),
               style: TextStyle(color: Colors.greenAccent),
             )
           else if (!canIVote)
             Text(
-              "Vous ne pouvez pas voter.",
+              GameContentLocalization.ui(context, "Vous ne pouvez pas voter."),
               style: TextStyle(color: Colors.redAccent),
             )
           else
             Text(
-              "Appuie sur la bulle d'un joueur pour voter.",
+              GameContentLocalization.ui(
+                context,
+                "Appuie sur la bulle d'un joueur pour voter.",
+              ),
               style: TextStyle(color: Colors.amberAccent),
             ),
         ],
@@ -29089,9 +29630,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       if (ps != PermissionState.authorized && ps != PermissionState.limited) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(
-                "Permission refusée. Impossible d'accéder à la galerie.",
+                GameContentLocalization.ui(
+                  context,
+                  "Permission refusée. Impossible d'accéder à la galerie.",
+                ),
               ),
             ),
           );
@@ -29139,7 +29683,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       if (allPhotos.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Votre galerie est vide.")),
+            SnackBar(
+              content: Text(
+                GameContentLocalization.ui(context, "Votre galerie est vide."),
+              ),
+            ),
           );
           setState(() => _isUploading = false);
         }
@@ -29263,12 +29811,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Préparation de la partie",
+              GameContentLocalization.ui(context, "Préparation de la partie"),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             SizedBox(height: 20),
             Text(
-              "L'application va sélectionner ${gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20} photos aléatoires dans votre galerie.",
+              GameContentLocalization.format(
+                context,
+                "L'application va sélectionner {0} photos aléatoires dans votre galerie.",
+                [gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20],
+              ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
@@ -29279,7 +29831,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   children: [
                     Icon(Icons.check_circle, color: Colors.green, size: 50),
                     Text(
-                      "Vous êtes prêt !",
+                      GameContentLocalization.ui(context, "Vous êtes prêt !"),
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text(
@@ -29306,7 +29858,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
             SizedBox(height: 30),
             Text(
-              "Joueurs prêts: ${readyPlayers.length} / ${players.length}",
+              GameContentLocalization.format(
+                context,
+                "Joueurs prêts: {0} / {1}",
+                [readyPlayers.length, players.length],
+              ),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             ...players.keys.map((pId) {
@@ -29332,7 +29888,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         final bool hasVoted = votes.containsKey(playerId);
 
         if (photoUrl == null || startTime == null)
-          return Center(child: Text("Chargement de la photo..."));
+          return Center(
+            child: Text(
+              GameContentLocalization.ui(context, "Chargement de la photo..."),
+            ),
+          );
 
         if (isHost) {
           _startPhotoRouletteTimer(
@@ -29346,7 +29906,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return Column(
           children: [
             Text(
-              "À qui est cette photo ?",
+              GameContentLocalization.ui(context, "À qui est cette photo ?"),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             SizedBox(height: 10),
@@ -29449,7 +30009,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return Column(
           children: [
             Text(
-              "La photo était à... $correctOwnerName !",
+              GameContentLocalization.format(
+                context,
+                "La photo était à... {0} !",
+                [correctOwnerName],
+              ),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             StreamBuilder(
@@ -29494,7 +30058,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           children: [
                             if (wasCorrect)
                               Text(
-                                "+${scoreGained} pts",
+                                GameContentLocalization.format(
+                                  context,
+                                  "+{0} pts",
+                                  [scoreGained],
+                                ),
                                 style: TextStyle(
                                   color: Colors.greenAccent,
                                   fontWeight: FontWeight.bold,
@@ -29533,19 +30101,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Partie Terminée !",
+                    GameContentLocalization.ui(context, "Partie Terminée !"),
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Le gagnant est $winnerName !",
+                    GameContentLocalization.format(
+                      context,
+                      "Le gagnant est {0} !",
+                      [winnerName],
+                    ),
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Colors.amberAccent,
                     ),
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "Classement Final :",
+                    GameContentLocalization.ui(context, "Classement Final :"),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   ...sortedPlayers.asMap().entries.map((entry) {
@@ -29649,7 +30221,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           }
           if (snapshot.hasError) {
             return Scaffold(
-              body: Center(child: Text("Erreur: ${snapshot.error}")),
+              body: Center(
+                child: Text(
+                  GameContentLocalization.format(context, "Erreur: {0}", [
+                    snapshot.error,
+                  ]),
+                ),
+              ),
             );
           }
           if (!snapshot.data!.exists) {
@@ -29934,13 +30512,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   appBar: AppBar(
                     leading: IconButton(
                       icon: const Icon(Icons.arrow_back),
-                      tooltip: "Quitter la partie",
+                      tooltip: GameContentLocalization.ui(
+                        context,
+                        "Quitter la partie",
+                      ),
                       onPressed: _confirmAndExitGame,
                     ),
                     title: Text(
                       currentGameType.isNotEmpty
                           ? currentGameType
-                          : "Jeu en cours",
+                          : GameContentLocalization.ui(context, "Jeu en cours"),
                     ),
                     actions: [
                       IconButton(
@@ -30048,7 +30629,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    "Jeu de ${players[_viewedOpponentId]?['name']}",
+                                                    GameContentLocalization.format(
+                                                      context,
+                                                      "Jeu de {0}",
+                                                      [
+                                                        players[_viewedOpponentId]?['name'],
+                                                      ],
+                                                    ),
                                                     style: TextStyle(
                                                       color: Colors.white70,
                                                       fontWeight:
@@ -30218,8 +30805,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   SizedBox(width: 8),
                   Text(
                     amIJudge
-                        ? "Vous êtes le Juge !"
-                        : "Juge ce tour : $judgeName",
+                        ? GameContentLocalization.ui(
+                          context,
+                          "Vous êtes le Juge !",
+                        )
+                        : GameContentLocalization.format(
+                          context,
+                          "Juge ce tour : {0}",
+                          [judgeName],
+                        ),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -30228,7 +30822,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ],
               ),
               Text(
-                "Objectif: $targetScore pts",
+                GameContentLocalization.format(context, "Objectif: {0} pts", [
+                  targetScore,
+                ]),
                 style: TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ],
@@ -30254,7 +30850,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "BLANC MANGER COCO",
+                GameContentLocalization.ui(context, "BLANC MANGER COCO"),
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
@@ -30321,13 +30917,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Icon(Icons.hourglass_top, size: 48, color: Colors.amberAccent),
           SizedBox(height: 16),
           Text(
-            "En attente des cartes des joueurs...",
+            GameContentLocalization.ui(
+              context,
+              "En attente des cartes des joueurs...",
+            ),
             style: TextStyle(fontSize: 18, color: Colors.white),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 8),
           Text(
-            "$playedCount / $nonJudgeCount joueurs ont répondu",
+            GameContentLocalization.format(
+              context,
+              "{0} / {1} joueurs ont répondu",
+              [playedCount, nonJudgeCount],
+            ),
             style: TextStyle(
               fontSize: 16,
               color: Colors.white70,
@@ -30346,7 +30949,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Icon(Icons.check_circle_outline, size: 48, color: Colors.greenAccent),
           SizedBox(height: 12),
           Text(
-            "Carte envoyée !",
+            GameContentLocalization.ui(context, "Carte envoyée !"),
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -30381,7 +30984,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Choisissez votre meilleure réponse :",
+          GameContentLocalization.ui(
+            context,
+            "Choisissez votre meilleure réponse :",
+          ),
           style: TextStyle(color: Colors.white70, fontSize: 14),
         ),
         SizedBox(height: 8),
@@ -30466,8 +31072,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       children: [
         Text(
           amIJudge
-              ? "Cliquez sur la carte gagnante !"
-              : "Le Juge est en train de choisir...",
+              ? GameContentLocalization.ui(
+                context,
+                "Cliquez sur la carte gagnante !",
+              )
+              : GameContentLocalization.ui(
+                context,
+                "Le Juge est en train de choisir...",
+              ),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -30569,7 +31181,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: TextField(
               controller: _chatController,
               decoration: InputDecoration(
-                hintText: "Envoyer un message ou proposer un mot...",
+                hintText: GameContentLocalization.ui(
+                  context,
+                  "Envoyer un message ou proposer un mot...",
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -30735,9 +31350,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 color: Colors.amber.shade400,
                 size: 24,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
-                "Alerte Administrateur",
+                GameContentLocalization.ui(context, "Alerte Administrateur"),
                 style: TextStyle(
                   color: Colors.amber.shade300,
                   fontWeight: FontWeight.bold,
@@ -30746,7 +31361,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             "$targetPlayerName ne joue plus ($reason). Voulez-vous le conserver et faire jouer l'ordinateur automatiquement ?",
             style: const TextStyle(
@@ -30759,7 +31374,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
               child: Text(
-                "⚠️ Note : Ce jeu nécessite un avis personnel. L'ordinateur sautera son tour s'il est conservé.",
+                GameContentLocalization.ui(
+                  context,
+                  "⚠️ Note : Ce jeu nécessite un avis personnel. L'ordinateur sautera son tour s'il est conservé.",
+                ),
                 style: TextStyle(
                   color: Colors.orange.shade200,
                   fontSize: 12,
@@ -30767,14 +31385,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
               ),
             ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Row(
             children: [
               Expanded(
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.smart_toy, size: 18),
-                  label: const Text(
-                    "Conserver avec l'IA",
+                  label: Text(
+                    GameContentLocalization.ui(context, "Conserver avec l'IA"),
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -30793,12 +31411,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   },
                 ),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: 10),
               Expanded(
                 child: OutlinedButton.icon(
                   icon: const Icon(Icons.person_remove, size: 18),
-                  label: const Text(
-                    "Expulser",
+                  label: Text(
+                    GameContentLocalization.ui(context, "Expulser"),
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -30845,12 +31463,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         border: Border.all(color: Colors.redAccent, width: 1),
       ),
       child: Row(
-        children: const [
+        children: [
           Icon(Icons.block, color: Colors.white, size: 22),
           SizedBox(width: 10),
           Expanded(
             child: Text(
-              "Vous avez été exclu de la partie pour inactivité. L'ordinateur joue à votre place (aucun gain ne vous sera attribué).",
+              GameContentLocalization.ui(
+                context,
+                "Vous avez été exclu de la partie pour inactivité. L'ordinateur joue à votre place (aucun gain ne vous sera attribué).",
+              ),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 12,
@@ -31003,7 +31624,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 minHeight: 20,
               ),
               Text(
-                "$remainingSeconds s",
+                GameContentLocalization.format(context, "{0} s", [
+                  remainingSeconds,
+                ]),
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -31350,19 +31973,19 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(4),
         border: Border.all(color: Colors.white24),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(color: Colors.black45, offset: Offset(1, 1), blurRadius: 2),
         ],
       ),
-      child: const Center(
+      child: Center(
         child: Icon(Icons.style_rounded, color: Colors.white24, size: 16),
       ),
     );
 
     Widget buildFannedCards(int count, {List<String>? visibleCards}) {
       if (count == 0) {
-        return const Text(
-          "N'a plus de cartes",
+        return Text(
+          GameContentLocalization.ui(context, "N'a plus de cartes"),
           style: TextStyle(color: Colors.white70, fontSize: 12),
         );
       }
@@ -32435,7 +33058,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "Vernissage !",
+              GameContentLocalization.ui(context, "Vernissage !"),
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
@@ -32485,7 +33108,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           ),
                         ),
                         child: Text(
-                          "Album de $ownerName",
+                          GameContentLocalization.format(
+                            context,
+                            "Album de {0}",
+                            [ownerName],
+                          ),
                           style: TextStyle(
                             color: Colors.brown[800],
                             fontSize: 20,
@@ -32524,10 +33151,22 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       SizedBox(width: 5),
                                       Text(
                                         index == 0
-                                            ? "Départ par $authorName"
+                                            ? GameContentLocalization.format(
+                                              context,
+                                              "Départ par {0}",
+                                              [authorName],
+                                            )
                                             : (isDrawing
-                                                ? "Dessiné par $authorName"
-                                                : "Deviné par $authorName"),
+                                                ? GameContentLocalization.format(
+                                                  context,
+                                                  "Dessiné par {0}",
+                                                  [authorName],
+                                                )
+                                                : GameContentLocalization.format(
+                                                  context,
+                                                  "Deviné par {0}",
+                                                  [authorName],
+                                                )),
                                         style: TextStyle(
                                           color: Colors.grey[600],
                                           fontSize: 12,
@@ -32614,7 +33253,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   label: Text(GameContentLocalization.ui(context, "Préc.")),
                 ),
                 Text(
-                  "Album ${serverPageIndex + 1} / ${playerOrder.length}",
+                  GameContentLocalization.format(context, "Album {0} / {1}", [
+                    serverPageIndex + 1,
+                    playerOrder.length,
+                  ]),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 ElevatedButton.icon(
@@ -32627,7 +33269,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     );
                   },
                   icon: Icon(Icons.navigate_next),
-                  label: Text("Suiv."),
+                  label: Text(GameContentLocalization.ui(context, "Suiv.")),
                 ),
               ],
             ),
@@ -32688,7 +33330,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               child: Column(
                 children: [
                   Text(
-                    "Devine ce que représente ce dessin :",
+                    GameContentLocalization.ui(
+                      context,
+                      "Devine ce que représente ce dessin :",
+                    ),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Expanded(
@@ -32720,16 +33365,25 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             )
           else
             Text(
-              gribouillisMode == 'Brise-Glace'
-                  ? "Écris un thème ou une phrase !"
-                  : "Imagine une phrase !",
+              gribouillisMode ==
+                      GameContentLocalization.ui(context, 'Brise-Glace')
+                  ? GameContentLocalization.ui(
+                    context,
+                    "Écris un thème ou une phrase !",
+                  )
+                  : GameContentLocalization.ui(context, "Imagine une phrase !"),
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
           SizedBox(height: 20),
           TextField(
             controller: _answerController,
-            decoration: InputDecoration(labelText: "Écris ta phrase..."),
+            decoration: InputDecoration(
+              labelText: GameContentLocalization.ui(
+                context,
+                "Écris ta phrase...",
+              ),
+            ),
             maxLines: 2,
           ),
           SizedBox(height: 20),
@@ -32800,13 +33454,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 );
               }
             },
-            child: Text("Ouvrir la zone de dessin"),
+            child: Text(
+              GameContentLocalization.ui(context, "Ouvrir la zone de dessin"),
+            ),
           ),
         ],
       );
     }
 
-    return Center(child: Text("État Gribouillis inconnu : $roundState"));
+    return Center(
+      child: Text(
+        GameContentLocalization.format(
+          context,
+          "État Gribouillis inconnu : {0}",
+          [roundState],
+        ),
+      ),
+    );
   }
 
   Widget _buildTabooUI(
@@ -32944,7 +33608,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
             const SizedBox(height: 3),
             Text(
-              isLocal ? "Moi" : name,
+              isLocal ? GameContentLocalization.ui(context, "Moi") : name,
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: isGiver ? FontWeight.bold : FontWeight.normal,
@@ -32991,7 +33655,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        "Éq. 1 : ${tabooScores['team_0'] ?? 0} pts",
+                        GameContentLocalization.format(
+                          context,
+                          "Éq. 1 : {0} pts",
+                          [tabooScores['team_0'] ?? 0],
+                        ),
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -33019,7 +33687,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        "Éq. 2 : ${tabooScores['team_1'] ?? 0} pts",
+                        GameContentLocalization.format(
+                          context,
+                          "Éq. 2 : {0} pts",
+                          [tabooScores['team_1'] ?? 0],
+                        ),
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -33094,10 +33766,21 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               Flexible(
                 child: Text(
                   amIClueGiver
-                      ? "Vous êtes l'orateur : faites deviner le mot !"
+                      ? GameContentLocalization.ui(
+                        context,
+                        "Vous êtes l'orateur : faites deviner le mot !",
+                      )
                       : (isMyTeamTurn
-                          ? "$clueGiverName fait deviner à votre équipe !"
-                          : "Surveillez $clueGiverName et buzzez en cas d'interdit !"),
+                          ? GameContentLocalization.format(
+                            context,
+                            "{0} fait deviner à votre équipe !",
+                            [clueGiverName],
+                          )
+                          : GameContentLocalization.format(
+                            context,
+                            "Surveillez {0} et buzzez en cas d'interdit !",
+                            [clueGiverName],
+                          )),
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -33179,7 +33862,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       child: Column(
                         children: [
                           Text(
-                            "MOT CIBLE",
+                            GameContentLocalization.ui(context, "MOT CIBLE"),
                             style: TextStyle(
                               letterSpacing: 2,
                               fontSize: 11,
@@ -33218,9 +33901,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 size: 14,
                                 color: Colors.redAccent.shade200,
                               ),
-                              const SizedBox(width: 6),
+                              SizedBox(width: 6),
                               Text(
-                                "INTERDITS",
+                                GameContentLocalization.ui(
+                                  context,
+                                  "INTERDITS",
+                                ),
                                 style: TextStyle(
                                   letterSpacing: 1.5,
                                   fontSize: 11,
@@ -33273,7 +33959,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ),
 
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
 
         // 4. PANNEAU DE CONTRÔLES ET BOUTONS D'ACTION
         if (isTurnActive) ...[
@@ -33288,8 +33974,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       height: 52,
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.skip_next_rounded),
-                        label: const Text(
-                          "Passer",
+                        label: Text(
+                          GameContentLocalization.ui(context, "Passer"),
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         style: OutlinedButton.styleFrom(
@@ -33313,15 +33999,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     flex: 2,
                     child: SizedBox(
                       height: 52,
                       child: ElevatedButton.icon(
                         icon: const Icon(Icons.check_circle_rounded, size: 22),
-                        label: const Text(
-                          "TROUVÉ !",
+                        label: Text(
+                          GameContentLocalization.ui(context, "TROUVÉ !"),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
@@ -33358,8 +34044,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 height: 54,
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.warning_amber_rounded, size: 26),
-                  label: const Text(
-                    "BUZZ ! (MOT INTERDIT)",
+                  label: Text(
+                    GameContentLocalization.ui(
+                      context,
+                      "BUZZ ! (MOT INTERDIT)",
+                    ),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
@@ -33389,8 +34078,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               alignment: Alignment.center,
-              child: const Text(
-                "💬 Écoutez attentivement et proposez vos réponses !",
+              child: Text(
+                GameContentLocalization.ui(
+                  context,
+                  "💬 Écoutez attentivement et proposez vos réponses !",
+                ),
                 style: TextStyle(
                   color: Colors.white60,
                   fontSize: 13,
@@ -33402,8 +34094,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10),
             alignment: Alignment.center,
-            child: const Text(
-              "⏳ Fin du tour...",
+            child: Text(
+              GameContentLocalization.ui(context, "⏳ Fin du tour..."),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -33478,7 +34170,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               const SizedBox(height: 14),
               Text(
-                amILoser ? "VOUS AVEZ ÉTÉ INFECTÉ !" : "SURVIVANTS ÉCHAPPÉS !",
+                amILoser
+                    ? GameContentLocalization.ui(
+                      context,
+                      "VOUS AVEZ ÉTÉ INFECTÉ !",
+                    )
+                    : GameContentLocalization.ui(
+                      context,
+                      "SURVIVANTS ÉCHAPPÉS !",
+                    ),
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w900,
@@ -33492,7 +34192,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               const SizedBox(height: 8),
               Text(
-                "$loserName est resté avec le Zombie entre les mains !",
+                GameContentLocalization.format(
+                  context,
+                  "{0} est resté avec le Zombie entre les mains !",
+                  [loserName],
+                ),
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white70, fontSize: 14),
               ),
@@ -33601,8 +34305,16 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       children: [
                         Text(
                           isMyTurn
-                              ? "PIOCHEZ CHEZ $targetName !"
-                              : "TOUR DE ${players[currentPlayerId]?['name'] ?? ''}",
+                              ? GameContentLocalization.format(
+                                context,
+                                "PIOCHEZ CHEZ {0} !",
+                                [targetName],
+                              )
+                              : GameContentLocalization.format(
+                                context,
+                                "TOUR DE {0}",
+                                [players[currentPlayerId]?['name'] ?? ''],
+                              ),
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w900,
@@ -33615,8 +34327,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         Text(
                           isMyTurn
-                              ? "Choisissez une carte face cachée au hasard"
-                              : "En attente de la pioche...",
+                              ? GameContentLocalization.ui(
+                                context,
+                                "Choisissez une carte face cachée au hasard",
+                              )
+                              : GameContentLocalization.ui(
+                                context,
+                                "En attente de la pioche...",
+                              ),
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.white38,
@@ -33638,7 +34356,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: const Color(0xFFEF4444)),
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
                         Icon(
                           Icons.warning_amber_rounded,
@@ -33647,7 +34365,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         SizedBox(width: 4),
                         Text(
-                          "ZOMBIE EN MAIN",
+                          GameContentLocalization.ui(context, "ZOMBIE EN MAIN"),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 9,
@@ -33861,8 +34579,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           letterSpacing: 1.2,
                         ),
                       ),
-                      const Text(
-                        "Les paires sont défaussées automatiquement",
+                      Text(
+                        GameContentLocalization.ui(
+                          context,
+                          "Les paires sont défaussées automatiquement",
+                        ),
                         style: TextStyle(color: Colors.white30, fontSize: 10),
                       ),
                     ],
@@ -33990,20 +34711,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               children: [
                 Text(
                   isMyTurn
-                      ? "C'est votre tour !"
+                      ? GameContentLocalization.ui(
+                        context,
+                        "C'est votre tour !",
+                      )
                       : "Au tour de ${resolvePlayerName(currentPlayerId)}",
                   style: TextStyle(
                     color: isMyTurn ? Colors.greenAccent : Colors.white70,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 if (lastPlay != null) ...[
-                  const Text(
-                    "Carte(s) en jeu :",
+                  Text(
+                    GameContentLocalization.ui(context, "Carte(s) en jeu :"),
                     style: TextStyle(color: Colors.white54),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:
@@ -34011,14 +34735,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             .map((c) => _buildBigTwoCard(c.toString()))
                             .toList(),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Text(
                     "Joué par ${resolvePlayerName(lastPlay['playedBy'] ?? '')}",
                     style: const TextStyle(fontSize: 12, color: Colors.white70),
                   ),
                 ] else
-                  const Text(
-                    "Aucune carte en jeu. Jouez ce que vous voulez !",
+                  Text(
+                    GameContentLocalization.ui(
+                      context,
+                      "Aucune carte en jeu. Jouez ce que vous voulez !",
+                    ),
                     style: TextStyle(color: Colors.amber),
                   ),
               ],
@@ -34357,8 +35084,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             children: [
               Text(
                 isMyTurn
-                    ? "C'est votre tour ! (${currentColor == 'red' ? 'Rouges' : 'Noirs'})"
-                    : "Au tour de ${players[currentPlayerId]?['name'] ?? '...'}",
+                    ? GameContentLocalization.format(
+                      context,
+                      "C'est votre tour ! ({0})",
+                      [
+                        currentColor == 'red'
+                            ? GameContentLocalization.ui(context, 'Rouges')
+                            : GameContentLocalization.ui(context, 'Noirs'),
+                      ],
+                    )
+                    : GameContentLocalization.format(
+                      context,
+                      "Au tour de {0}...",
+                      [players[currentPlayerId]?['name'] ?? '...'],
+                    ),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -34369,7 +35108,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    "⚠ï¸ Prise en chaîne ! Vous devez rejouer le pion clignotant.",
+                    GameContentLocalization.ui(
+                      context,
+                      "⚠️ Prise en chaîne ! Vous devez rejouer le pion clignotant.",
+                    ),
                     style: TextStyle(
                       color: Colors.orangeAccent,
                       fontSize: 14,
@@ -34441,9 +35183,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                         ScaffoldMessenger.of(
                                           context,
                                         ).showSnackBar(
-                                          const SnackBar(
+                                          SnackBar(
                                             content: Text(
-                                              "Vous devez sélectionner le pion en surbrillance orange.",
+                                              GameContentLocalization.ui(
+                                                context,
+                                                "Vous devez sélectionner le pion en surbrillance orange.",
+                                              ),
                                             ),
                                             duration: Duration(seconds: 2),
                                           ),
@@ -34798,8 +35543,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           },
                 )
               else
-                const Text(
-                  "En attente de l'hôte pour lancer le tour suivant...",
+                Text(
+                  GameContentLocalization.ui(
+                    context,
+                    "En attente de l'hôte pour lancer le tour suivant...",
+                  ),
                   style: TextStyle(
                     color: Colors.white54,
                     fontStyle: FontStyle.italic,
@@ -35032,7 +35780,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
-              "Mots trouvés : $guessedCount",
+              GameContentLocalization.format(context, "Mots trouvés : {0}", [
+                guessedCount,
+              ]),
               style: const TextStyle(
                 color: Colors.greenAccent,
                 fontSize: 16,
@@ -35456,8 +36206,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         height: 1.5,
                       ),
                       cursorColor: const Color(0xFF78350F),
-                      decoration: const InputDecoration(
-                        hintText: "Écrivez ici...",
+                      decoration: InputDecoration(
+                        hintText: GameContentLocalization.ui(
+                          context,
+                          "Écrivez ici...",
+                        ),
                         hintStyle: TextStyle(
                           color: Colors.black26,
                           fontStyle: FontStyle.italic,
@@ -35602,7 +36355,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                   ),
                   child: Text(
-                    "✏️ $count mot${count > 1 ? 's' : ''} rédigé${count > 1 ? 's' : ''}...",
+                    GameContentLocalization.format(
+                      context,
+                      "✏️ {0} mots rédigés...",
+                      [count],
+                    ),
                     style: const TextStyle(
                       color: Colors.amberAccent,
                       fontWeight: FontWeight.bold,
@@ -36616,8 +37373,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                         ],
                                       ),
                                     ),
-                                    const Text(
-                                      "KM",
+                                    Text(
+                                      GameContentLocalization.ui(context, "KM"),
                                       style: TextStyle(
                                         fontSize: 9,
                                         fontWeight: FontWeight.bold,
@@ -36955,7 +37712,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                       child: ListTile(
                         title: Text(
-                          players[pId]?['name'] ?? 'Joueur',
+                          players[pId]?['name'] ??
+                              GameContentLocalization.ui(context, 'Joueur'),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: isProtected ? Colors.white38 : Colors.white,
@@ -36963,8 +37721,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         subtitle: Text(
                           isProtected
-                              ? "🛡️ Protégé par une Botte"
-                              : "Distance : ${pData['distance'] ?? 0} km",
+                              ? GameContentLocalization.ui(
+                                context,
+                                "🛡️ Protégé par une Botte",
+                              )
+                              : GameContentLocalization.format(
+                                context,
+                                "Distance : {0} km",
+                                [pData['distance'] ?? 0],
+                              ),
                           style: TextStyle(
                             fontSize: 12,
                             color:
@@ -38383,7 +39148,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                       if (pot <= maxRaise)
                         ActionChip(
-                          label: Text("Pot"),
+                          label: Text(
+                            GameContentLocalization.ui(context, "Pot"),
+                          ),
                           onPressed: () {
                             setStateDialog(() => raiseAmount = pot.toDouble());
                             _firebaseService.updatePokerRaisePreview(
@@ -40057,7 +40824,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ),
         SizedBox(height: 20),
         Text(
-          "Votez pour un joueur :",
+          GameContentLocalization.ui(context, "Votez pour un joueur :"),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 10),
@@ -40319,7 +41086,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             TextField(
               controller: _answerController,
               decoration: InputDecoration(
-                labelText: "Quel était le mot des Civils ?",
+                labelText: GameContentLocalization.ui(
+                  context,
+                  "Quel était le mot des Civils ?",
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -40482,7 +41252,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                       if (isMe)
                         Text(
-                          "(Vous)",
+                          GameContentLocalization.ui(context, "(Vous)"),
                           style: TextStyle(color: Colors.white54, fontSize: 12),
                         ),
                     ],
@@ -40558,7 +41328,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: Column(
               children: [
                 Text(
-                  "QUESTION",
+                  GameContentLocalization.ui(context, "QUESTION"),
                   style: TextStyle(color: Colors.white54, letterSpacing: 2),
                 ),
                 SizedBox(height: 8),
@@ -40597,7 +41367,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ] else ...[
           Text(
-            "Choisissez une carte à jouer :",
+            GameContentLocalization.ui(
+              context,
+              "Choisissez une carte à jouer :",
+            ),
             style: Theme.of(context).textTheme.titleLarge,
           ),
           SizedBox(height: 8),
@@ -40670,7 +41443,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     return Column(
       children: [
         Text(
-          isJudge ? "Choisissez la meilleure réponse !" : "Le Juge choisit...",
+          isJudge
+              ? GameContentLocalization.ui(
+                context,
+                "Choisissez la meilleure réponse !",
+              )
+              : GameContentLocalization.ui(context, "Le Juge choisit..."),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 16),
@@ -40695,7 +41473,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   subtitle:
                       !isJudge
                           ? Text(
-                            "En attente du choix du juge...",
+                            GameContentLocalization.ui(
+                              context,
+                              "En attente du choix du juge...",
+                            ),
                             style: TextStyle(color: Colors.grey, fontSize: 11),
                           )
                           : null,
@@ -40708,7 +41489,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 entry.key,
                               );
                             },
-                            child: Text("Choisir"),
+                            child: Text(
+                              GameContentLocalization.ui(context, "Choisir"),
+                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                             ),
@@ -40749,7 +41532,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             },
             errorBuilder: (context, error, stackTrace) {
               return Text(
-                "Impossible de charger l'image",
+                GameContentLocalization.ui(
+                  context,
+                  "Impossible de charger l'image",
+                ),
                 style: TextStyle(color: Colors.red),
               );
             },
@@ -40788,7 +41574,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 SizedBox(height: 20),
                 TextField(
                   controller: _answerController,
-                  decoration: InputDecoration(labelText: "Votre réponse..."),
+                  decoration: InputDecoration(
+                    labelText: GameContentLocalization.ui(
+                      context,
+                      "Votre réponse...",
+                    ),
+                  ),
                   maxLines: 1,
                 ),
                 SizedBox(height: 20),
@@ -40820,7 +41611,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               strokeWidth: 2,
                             ),
                           )
-                          : Text("Soumettre"),
+                          : Text(
+                            GameContentLocalization.ui(context, "Soumettre"),
+                          ),
                 ),
               ],
             ),
@@ -40842,7 +41635,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Icon(Icons.lock, size: 60, color: Colors.amber),
           SizedBox(height: 20),
           Text(
-            "Moment de vérité...",
+            GameContentLocalization.ui(context, "Moment de vérité..."),
             style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
@@ -40860,7 +41653,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               child: Column(
                 children: [
                   Text(
-                    "Ton histoire était-elle...",
+                    GameContentLocalization.ui(
+                      context,
+                      "Ton histoire était-elle...",
+                    ),
                     style: TextStyle(fontSize: 18, color: Colors.white70),
                     textAlign: TextAlign.center,
                   ),
@@ -40918,7 +41714,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "(Ce choix restera secret jusqu'à la fin)",
+                    GameContentLocalization.ui(
+                      context,
+                      "(Ce choix restera secret jusqu'à la fin)",
+                    ),
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white38,
@@ -41032,7 +41831,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 CircleAvatar(child: Text(storyOwnerName[0]), radius: 30),
                 SizedBox(height: 10),
                 Text(
-                  "L'histoire de $storyOwnerName",
+                  GameContentLocalization.format(context, "L'histoire de {0}", [
+                    storyOwnerName,
+                  ]),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Divider(),
@@ -41108,7 +41909,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "Détecteur de Mensonges",
+              GameContentLocalization.ui(context, "Détecteur de Mensonges"),
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
@@ -41222,7 +42023,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               Expanded(
                                 child: ElevatedButton.icon(
                                   icon: Icon(Icons.check),
-                                  label: Text("VRAI"),
+                                  label: Text(
+                                    GameContentLocalization.ui(context, "VRAI"),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.green,
                                     foregroundColor: Colors.white,
@@ -41256,7 +42059,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               Expanded(
                                 child: ElevatedButton.icon(
                                   icon: Icon(Icons.close),
-                                  label: Text("FAUX"),
+                                  label: Text(
+                                    GameContentLocalization.ui(context, "FAUX"),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.red,
                                     foregroundColor: Colors.white,
@@ -41338,7 +42143,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         SizedBox(height: 20),
 
         if (voteOnPlayers) ...[
-          Text("Pointez quelqu'un !", style: TextStyle(color: Colors.white70)),
+          Text(
+            GameContentLocalization.ui(context, "Pointez quelqu'un !"),
+            style: TextStyle(color: Colors.white70),
+          ),
           SizedBox(height: 10),
           Expanded(
             child: GridView.builder(
@@ -41422,7 +42230,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ] else ...[
           // Vote sur les réponses (Synonyme ou Banni)
           Text(
-            "Bannissez une réponse !",
+            GameContentLocalization.ui(context, "Bannissez une réponse !"),
             style: TextStyle(color: Colors.redAccent),
           ),
           SizedBox(height: 10),
@@ -41506,7 +42314,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           child: Column(
             children: [
               Text(
-                "QUESTION",
+                GameContentLocalization.ui(context, "QUESTION"),
                 style: TextStyle(
                   color: Colors.white54,
                   letterSpacing: 2,
@@ -41528,8 +42336,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
         Text(
           isTarget
-              ? "ðŸ‘‘ Choisis ta réponse préférée :"
-              : "âÂÂ³ En attente du choix de $judgeName...",
+              ? GameContentLocalization.ui(
+                context,
+                "👑 Choisis ta réponse préférée :",
+              )
+              : GameContentLocalization.format(
+                context,
+                "⏳ En attente du choix de {0}...",
+                [judgeName],
+              ),
           style: Theme.of(context).textTheme.titleMedium,
         ),
         SizedBox(height: 15),
@@ -41642,22 +42457,30 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 CircularProgressIndicator(),
                 SizedBox(height: 20),
                 Text(
-                  "Un joueur a quitté...",
+                  GameContentLocalization.ui(context, "Un joueur a quitté..."),
                   style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Recherche de remplaçants en cours...",
+                  GameContentLocalization.ui(
+                    context,
+                    "Recherche de remplaçants en cours...",
+                  ),
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "Démarrage automatique dans",
+                  GameContentLocalization.ui(
+                    context,
+                    "Démarrage automatique dans",
+                  ),
                   style: TextStyle(color: Colors.white70),
                 ),
                 Text(
-                  "$_refillCountdown s",
+                  GameContentLocalization.format(context, "{0} s", [
+                    _refillCountdown,
+                  ]),
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -41666,7 +42489,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "Joueurs connectés : ${players.length}",
+                  GameContentLocalization.format(
+                    context,
+                    "Joueurs connectés : {0}",
+                    [players.length],
+                  ),
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
               ],
@@ -41737,7 +42564,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Vainqueur : $winnerName",
+                  GameContentLocalization.format(context, "Vainqueur : {0}", [
+                    winnerName,
+                  ]),
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Colors.amberAccent,
                   ),
@@ -41755,12 +42584,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Divider(height: 30),
 
                 Text(
-                  "Voulez-vous rejouer ?",
+                  GameContentLocalization.ui(context, "Voulez-vous rejouer ?"),
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "$_postGameCountdown s",
+                  GameContentLocalization.format(context, "{0} s", [
+                    _postGameCountdown,
+                  ]),
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -41802,7 +42633,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                     OutlinedButton.icon(
                       icon: Icon(Icons.exit_to_app),
-                      label: Text("Quitter"),
+                      label: Text(
+                        GameContentLocalization.ui(context, "Quitter"),
+                      ),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.redAccent,
                         side: BorderSide(color: Colors.redAccent),
@@ -41831,7 +42664,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
                 SizedBox(height: 15),
                 Text(
-                  "Si un joueur ne répond pas ou quitte, la partie cherchera un remplaçant.",
+                  GameContentLocalization.ui(
+                    context,
+                    "Si un joueur ne répond pas ou quitte, la partie cherchera un remplaçant.",
+                  ),
                   style: TextStyle(
                     fontSize: 11,
                     color: Colors.white38,
@@ -41922,7 +42758,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                             Divider(height: 20),
                             Text(
-                              "Votes :",
+                              GameContentLocalization.ui(context, "Votes :"),
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             ...storyVotes.entries.map((voteEntry) {
@@ -41945,7 +42781,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                     size: 16,
                                   ),
                                   SizedBox(width: 8),
-                                  Text('$voterName a voté : $voteValue'),
+                                  Text(
+                                    GameContentLocalization.format(
+                                      context,
+                                      "{0} a voté : {1}",
+                                      [voterName, voteValue],
+                                    ),
+                                  ),
                                 ],
                               );
                             }),
@@ -41962,7 +42804,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           final liarName = players[liarId]?['name'] ?? 'Le menteur';
           resultText = "Le menteur était... $liarName !";
           extraInfo = Text(
-            "Les points ont été distribués en fonction de vos votes.",
+            GameContentLocalization.ui(
+              context,
+              "Les points ont été distribués en fonction de vos votes.",
+            ),
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
@@ -41992,7 +42837,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         extraInfo = Column(
           children: [
             Text(
-              "Le mot des Civils était : '${wordPair[0]}'",
+              GameContentLocalization.format(
+                context,
+                "Le mot des Civils était : '{0}'",
+                [wordPair[0]],
+              ),
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white70,
@@ -42027,7 +42876,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           resultText =
               "$loserName a été banni pour sa proposition '$loserAnswer' !";
           extraInfo = Text(
-            "Le mot à trouver était un synonyme de '$word'. Les autres joueurs marquent 1 point.",
+            GameContentLocalization.format(
+              context,
+              "Le mot à trouver était un synonyme de '{0}'. Les autres joueurs marquent 1 point.",
+              [word],
+            ),
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
@@ -42046,7 +42899,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           resultText =
               "${loserName} n'a pas répondu à temps et gagne 1 point !";
           extraInfo = Text(
-            gameData['gameEndReason'] ?? "Temps écoulé !",
+            gameData['gameEndReason'] ??
+                GameContentLocalization.ui(context, "Temps écoulé !"),
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
@@ -42067,7 +42921,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
           resultText = "$winnerName a trouvé le mot : '$currentWord' !";
           extraInfo = Text(
-            "Félicitations au dessinateur $drawingPlayerName et à $winnerName !",
+            GameContentLocalization.format(
+              context,
+              "Félicitations au dessinateur {0} et à {1} !",
+              [drawingPlayerName, winnerName],
+            ),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -42078,7 +42936,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           resultText = "Personne n'a trouvé le mot : '$currentWord'.";
           extraInfo = Text(
             gameEndReason ??
-                "Le temps est écoulé ou le dessin était trop complexe !",
+                GameContentLocalization.ui(
+                  context,
+                  "Le temps est écoulé ou le dessin était trop complexe !",
+                ),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -42097,7 +42958,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         if (gameEndReason == 'Mot deviné !') {
           resultText = "$guesserName a trouvé le mot : '$currentWord' !";
           extraInfo = Text(
-            "Sa réponse était : '$guesserAnswer'.",
+            GameContentLocalization.format(
+              context,
+              "Sa réponse était : '{0}'.",
+              [guesserAnswer],
+            ),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -42109,7 +42974,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           extraInfo = Column(
             children: [
               Text(
-                "Le mot était : '$currentWord'.",
+                GameContentLocalization.format(
+                  context,
+                  "Le mot était : '{0}'.",
+                  [currentWord],
+                ),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
@@ -42117,7 +42986,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
               ),
               Text(
-                "Sa réponse était : '$guesserAnswer'.",
+                GameContentLocalization.format(
+                  context,
+                  "Sa réponse était : '{0}'.",
+                  [guesserAnswer],
+                ),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
@@ -42141,7 +43014,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           resultText =
               "${players[winnerId]?['name'] ?? 'Un joueur'} remporte Skull !";
           extraInfo = Text(
-            gameData['gameEndReason'] ?? 'Deux défis réussis.',
+            gameData['gameEndReason'] ??
+                GameContentLocalization.ui(context, 'Deux défis réussis.'),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -42163,7 +43037,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           extraInfo = Column(
             children: [
               Text(
-                "Cartes révélées :",
+                GameContentLocalization.ui(context, "Cartes révélées :"),
                 style: TextStyle(color: Colors.white70),
               ),
               SizedBox(height: 8),
@@ -42251,7 +43125,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           resultText =
               "$winnerName a trouvé le symbole $commonSym ! Il gagne la carte.";
           extraInfo = Text(
-            "Score actuel de ${players[winnerId]?['name'] ?? 'Lui'}: ${players[winnerId]?['score'] ?? 0} cartes.",
+            GameContentLocalization.format(
+              context,
+              "Score actuel de {0}: {1} cartes.",
+              [
+                players[winnerId]?['name'] ?? 'Lui',
+                players[winnerId]?['score'] ?? 0,
+              ],
+            ),
             style: TextStyle(fontStyle: FontStyle.italic),
           );
         } else {
@@ -42375,7 +43256,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           )
         else
           Text(
-            "En attente de l'hôte pour le tour suivant...",
+            GameContentLocalization.ui(
+              context,
+              "En attente de l'hôte pour le tour suivant...",
+            ),
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
@@ -44475,11 +45359,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     VoidCallback? onSortTap,
   }) {
     if (cards.isEmpty) {
-      return const SizedBox(
+      return SizedBox(
         height: 100,
         child: Center(
           child: Text(
-            "Plus de cartes !",
+            GameContentLocalization.ui(context, "Plus de cartes !"),
             style: TextStyle(
               color: Colors.white60,
               fontSize: 16,
@@ -44511,7 +45395,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   color: _isHandSorted ? Colors.amberAccent : Colors.white70,
                 ),
                 label: Text(
-                  _isHandSorted ? "Trié par couleur" : "Trier la main",
+                  _isHandSorted
+                      ? GameContentLocalization.ui(context, "Trié par couleur")
+                      : GameContentLocalization.ui(context, "Trier la main"),
                   style: TextStyle(
                     fontSize: 11,
                     color: _isHandSorted ? Colors.amberAccent : Colors.white,
@@ -46366,12 +47252,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               SizedBox(height: 8),
               Text(
-                "Carte $deckIndex / $deckTotal",
+                GameContentLocalization.format(context, "Carte {0} / {1}", [
+                  deckIndex,
+                  deckTotal,
+                ]),
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 20),
               Text(
-                "Les autres écrivent des indices pour toi...",
+                GameContentLocalization.ui(
+                  context,
+                  "Les autres écrivent des indices pour toi...",
+                ),
                 style: TextStyle(fontSize: 16, color: Colors.white70),
               ),
               SizedBox(height: 30),
@@ -46498,7 +47390,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Carte $deckIndex / $deckTotal",
+                  GameContentLocalization.format(context, "Carte {0} / {1}", [
+                    deckIndex,
+                    deckTotal,
+                  ]),
                   style: TextStyle(color: Colors.white54, fontSize: 14),
                 ),
                 SizedBox(height: 8),
@@ -46649,7 +47544,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Partie Terminée !",
+                  GameContentLocalization.ui(context, "Partie Terminée !"),
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(height: 10),
@@ -48287,7 +49182,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           SizedBox(
             width: 60,
             child: Text(
-              isMe ? "Moi" : name,
+              isMe ? GameContentLocalization.ui(context, "Moi") : name,
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: isMe ? FontWeight.bold : FontWeight.w500,
@@ -48574,7 +49469,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       builder: (BuildContext context, Duration value, Widget? child) {
         final seconds = value.inSeconds;
         return Text(
-          "Temps restant : $seconds s",
+          GameContentLocalization.format(context, "Temps restant : {0} s", [
+            seconds,
+          ]),
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             color: seconds < 20 ? Colors.redAccent : Colors.amberAccent,
           ),
@@ -49333,8 +50230,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "Dominos",
+              Text(
+                GameContentLocalization.ui(context, "Dominos"),
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
@@ -49907,8 +50804,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         Icons.compare_arrows_rounded,
                         size: 14,
                       ),
-                      label: const Text(
-                        "Face-à-face (côte à côte)",
+                      label: Text(
+                        GameContentLocalization.ui(
+                          context,
+                          "Face-à-face (côte à côte)",
+                        ),
                         style: TextStyle(fontSize: 11),
                       ),
                       selected: !isInspectingOpponentOnly,
@@ -50383,8 +51283,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                   ),
                                 ),
                               )
-                              : const Text(
-                                "En attente...",
+                              : Text(
+                                GameContentLocalization.ui(
+                                  context,
+                                  "En attente...",
+                                ),
                                 style: TextStyle(
                                   color: Colors.white30,
                                   fontSize: 12,
@@ -50544,8 +51447,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "TOTAL ADVERSAIRE",
+                          Text(
+                            GameContentLocalization.ui(
+                              context,
+                              "TOTAL ADVERSAIRE",
+                            ),
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w900,
@@ -50578,10 +51484,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       )
                       : Row(
                         children: [
-                          const Expanded(
+                          Expanded(
                             flex: 4,
                             child: Text(
-                              "TOTAL",
+                              GameContentLocalization.ui(context, "TOTAL"),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w900,
@@ -51863,7 +52769,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      players[e.key]?['name'] ?? 'Joueur',
+                      players[e.key]?['name'] ??
+                          GameContentLocalization.ui(context, 'Joueur'),
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 15,
@@ -53067,7 +53974,12 @@ class _DrawingScreenState extends State<DrawingScreen> {
                     widget.backgroundDrawingData == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text("Vous devez dessiner quelque chose !"),
+                      content: Text(
+                        GameContentLocalization.ui(
+                          context,
+                          "Vous devez dessiner quelque chose !",
+                        ),
+                      ),
                     ),
                   );
                   return;
@@ -53083,7 +53995,12 @@ class _DrawingScreenState extends State<DrawingScreen> {
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text("Erreur lors de la sauvegarde du dessin."),
+                      content: Text(
+                        GameContentLocalization.ui(
+                          context,
+                          "Erreur lors de la sauvegarde du dessin.",
+                        ),
+                      ),
                     ),
                   );
                 }
@@ -53136,14 +54053,18 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Participants (Mode Local)")),
+      appBar: AppBar(
+        title: Text(
+          GameContentLocalization.ui(context, "Participants (Mode Local)"),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Ajoutez les joueurs",
+              GameContentLocalization.ui(context, "Ajoutez les joueurs"),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             SizedBox(height: 16),
@@ -53173,7 +54094,10 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
                   _players.isEmpty
                       ? Center(
                         child: Text(
-                          "Ajoutez au moins 2 joueurs pour commencer.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Ajoutez au moins 2 joueurs pour commencer.",
+                          ),
                           style: TextStyle(color: Colors.white70),
                         ),
                       )
@@ -53221,8 +54145,10 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
                       },
               child: Text(
                 widget.targetGame != null
-                    ? "Lancer ${widget.targetGame}"
-                    : "Choisir un jeu",
+                    ? GameContentLocalization.format(context, "Lancer {0}", [
+                      widget.targetGame,
+                    ])
+                    : GameContentLocalization.ui(context, "Choisir un jeu"),
               ),
             ),
           ],
@@ -53515,7 +54441,11 @@ class OfflineMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Choisir un Jeu Local")),
+      appBar: AppBar(
+        title: Text(
+          GameContentLocalization.ui(context, "Choisir un Jeu Local"),
+        ),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -53648,7 +54578,11 @@ class OfflineMenuScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  "Il faut au moins $minPlayers joueurs pour ce mode !",
+                  GameContentLocalization.format(
+                    context,
+                    "Il faut au moins {0} joueurs pour ce mode !",
+                    [minPlayers],
+                  ),
                 ),
               ),
             );
@@ -53658,7 +54592,11 @@ class OfflineMenuScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  "Ce mode supporte au maximum $maxPlayers joueurs !",
+                  GameContentLocalization.format(
+                    context,
+                    "Ce mode supporte au maximum {0} joueurs !",
+                    [maxPlayers],
+                  ),
                 ),
               ),
             );
@@ -53777,7 +54715,7 @@ class _TruthOrDareLocalSetupScreenState
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               GameContentLocalization.ui(context, "Paramètres de la partie"),
               style: TextStyle(
@@ -53787,7 +54725,7 @@ class _TruthOrDareLocalSetupScreenState
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             Text(
               GameContentLocalization.ui(context, "1. Intensité des défis"),
@@ -53796,12 +54734,21 @@ class _TruthOrDareLocalSetupScreenState
                 color: Colors.white70,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             SegmentedButton<String>(
               segments: [
-                ButtonSegment(value: 'soft', label: Text(GameContentLocalization.ui(context, 'Soft'))),
-                ButtonSegment(value: 'hard', label: Text(GameContentLocalization.ui(context, 'Hard'))),
-                ButtonSegment(value: 'hardcore', label: Text(GameContentLocalization.ui(context, 'Hardcore'))),
+                ButtonSegment(
+                  value: 'soft',
+                  label: Text(GameContentLocalization.ui(context, 'Soft')),
+                ),
+                ButtonSegment(
+                  value: 'hard',
+                  label: Text(GameContentLocalization.ui(context, 'Hard')),
+                ),
+                ButtonSegment(
+                  value: 'hardcore',
+                  label: Text(GameContentLocalization.ui(context, 'Hardcore')),
+                ),
               ],
               selected: {_difficulty},
               onSelectionChanged: (s) => setState(() => _difficulty = s.first),
@@ -53833,7 +54780,10 @@ class _TruthOrDareLocalSetupScreenState
                           ),
                           SizedBox(width: 8),
                           Text(
-                            GameContentLocalization.ui(context, "Génération IA personnalisée"),
+                            GameContentLocalization.ui(
+                              context,
+                              "Génération IA personnalisée",
+                            ),
                             style: TextStyle(
                               color: Colors.amberAccent,
                               fontWeight: FontWeight.bold,
@@ -53841,11 +54791,14 @@ class _TruthOrDareLocalSetupScreenState
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       TextField(
                         controller: _aiController,
                         decoration: InputDecoration(
-                          hintText: GameContentLocalization.ui(context, "ex: Soirée pyjama, Secrets de couples, Anecdotes au travail..."),
+                          hintText: GameContentLocalization.ui(
+                            context,
+                            "ex: Soirée pyjama, Secrets de couples, Anecdotes au travail...",
+                          ),
                           hintStyle: const TextStyle(color: Colors.white38),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.3),
@@ -53854,11 +54807,11 @@ class _TruthOrDareLocalSetupScreenState
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       ElevatedButton.icon(
                         icon:
                             _isAiLoading
-                                ? const SizedBox(
+                                ? SizedBox(
                                   width: 14,
                                   height: 14,
                                   child: CircularProgressIndicator(
@@ -53867,7 +54820,17 @@ class _TruthOrDareLocalSetupScreenState
                                   ),
                                 )
                                 : const Icon(Icons.bolt, color: Colors.black),
-                        label: Text(_isAiLoading ? GameContentLocalization.ui(context, "Génération...") : GameContentLocalization.ui(context, "Générer les défis par IA")),
+                        label: Text(
+                          _isAiLoading
+                              ? GameContentLocalization.ui(
+                                context,
+                                "Génération...",
+                              )
+                              : GameContentLocalization.ui(
+                                context,
+                                "Générer les défis par IA",
+                              ),
+                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amberAccent,
                           foregroundColor: Colors.black,
@@ -53901,7 +54864,11 @@ class _TruthOrDareLocalSetupScreenState
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              "✨ ${res.length} défis IA générés !",
+                                              GameContentLocalization.format(
+                                                context,
+                                                "✨ {0} défis IA générés !",
+                                                [res.length],
+                                              ),
                                             ),
                                             backgroundColor: Colors.green[800],
                                           ),
@@ -53918,7 +54885,11 @@ class _TruthOrDareLocalSetupScreenState
                       if (_aiTruths.isNotEmpty || _aiDares.isNotEmpty) ...[
                         const SizedBox(height: 6),
                         Text(
-                          "✅ ${_aiTruths.length + _aiDares.length} défis prêts !",
+                          GameContentLocalization.format(
+                            context,
+                            "✅ {0} défis prêts !",
+                            [_aiTruths.length + _aiDares.length],
+                          ),
                           style: const TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 12,
@@ -53931,7 +54902,7 @@ class _TruthOrDareLocalSetupScreenState
                 );
               },
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
 
             ElevatedButton.icon(
               icon: const Icon(Icons.play_arrow_rounded, size: 28),
@@ -54112,9 +55083,9 @@ class _TruthOrDareLocalGameScreenState
                   color: Colors.deepPurpleAccent,
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
               Text(
-                "Choisis ton destin...",
+                GameContentLocalization.ui(context, "Choisis ton destin..."),
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ],
@@ -54133,7 +55104,7 @@ class _TruthOrDareLocalGameScreenState
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "C'est au tour de",
+                GameContentLocalization.ui(context, "C'est au tour de"),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
@@ -54142,7 +55113,7 @@ class _TruthOrDareLocalGameScreenState
                   color: Colors.deepPurpleAccent,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Text(
                 _currentContent,
                 textAlign: TextAlign.center,
@@ -54153,7 +55124,11 @@ class _TruthOrDareLocalGameScreenState
         ),
       );
     }
-    return Text(GameContentLocalization.ui(context, "Appuyez sur 'Lancer la roue' pour commencer !"),
+    return Text(
+      GameContentLocalization.ui(
+        context,
+        "Appuyez sur 'Lancer la roue' pour commencer !",
+      ),
       style: Theme.of(
         context,
       ).textTheme.headlineSmall?.copyWith(color: Colors.white70),
@@ -54162,7 +55137,7 @@ class _TruthOrDareLocalGameScreenState
   }
 
   Widget _buildGameControls() {
-    if (_isSpinning) return const SizedBox(height: 50);
+    if (_isSpinning) return SizedBox(height: 50);
 
     if (_playerHasToChoose) {
       return Row(
@@ -54194,7 +55169,11 @@ class _TruthOrDareLocalGameScreenState
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
       ),
       onPressed: () => setState(() => _isSpinning = true),
-      child: Text(_currentPlayerIndex == -1 ? GameContentLocalization.ui(context, "Lancer la roue") : GameContentLocalization.ui(context, "Tour Suivant")),
+      child: Text(
+        _currentPlayerIndex == -1
+            ? GameContentLocalization.ui(context, "Lancer la roue")
+            : GameContentLocalization.ui(context, "Tour Suivant"),
+      ),
     );
   }
 
@@ -54207,7 +55186,12 @@ class _TruthOrDareLocalGameScreenState
         final p = widget.players[index];
         final isCurrent = index == _currentPlayerIndex && !_isSpinning;
         return Chip(
-          label: Text("$p : ${_scores[p] ?? 0} pts"),
+          label: Text(
+            GameContentLocalization.format(context, "{0} : {1} pts", [
+              p,
+              _scores[p] ?? 0,
+            ]),
+          ),
           backgroundColor:
               isCurrent ? Colors.deepPurple : const Color(0xFF333333),
           labelStyle: TextStyle(
@@ -54306,7 +55290,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               GameContentLocalization.ui(context, "Paramètres du Dilemme"),
               style: TextStyle(
@@ -54316,7 +55300,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 1. Difficulté
             Text(
@@ -54326,17 +55310,26 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                 color: Colors.white70,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             SegmentedButton<String>(
               segments: [
-                ButtonSegment(value: 'soft', label: Text(GameContentLocalization.ui(context, 'Soft'))),
-                ButtonSegment(value: 'hard', label: Text(GameContentLocalization.ui(context, 'Hard'))),
-                ButtonSegment(value: 'hardcore', label: Text(GameContentLocalization.ui(context, 'Hardcore'))),
+                ButtonSegment(
+                  value: 'soft',
+                  label: Text(GameContentLocalization.ui(context, 'Soft')),
+                ),
+                ButtonSegment(
+                  value: 'hard',
+                  label: Text(GameContentLocalization.ui(context, 'Hard')),
+                ),
+                ButtonSegment(
+                  value: 'hardcore',
+                  label: Text(GameContentLocalization.ui(context, 'Hardcore')),
+                ),
               ],
               selected: {_difficulty},
               onSelectionChanged: (s) => setState(() => _difficulty = s.first),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             // 2. Mode de vote (Roue vs Tout le groupe)
             Text(
@@ -54346,7 +55339,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                 color: Colors.white70,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             SegmentedButton<bool>(
               segments: [
                 ButtonSegment(
@@ -54358,7 +55351,9 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                 ),
                 ButtonSegment(
                   value: false,
-                  label: Text("Tout le groupe"),
+                  label: Text(
+                    GameContentLocalization.ui(context, "Tout le groupe"),
+                  ),
                   icon: Icon(Icons.groups),
                 ),
               ],
@@ -54390,7 +55385,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                             color: Colors.amberAccent,
                             size: 20,
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text(
                             GameContentLocalization.ui(
                               context,
@@ -54403,7 +55398,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       TextField(
                         controller: _aiController,
                         decoration: InputDecoration(
@@ -54419,11 +55414,11 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       ElevatedButton.icon(
                         icon:
                             _isAiLoading
-                                ? const SizedBox(
+                                ? SizedBox(
                                   width: 14,
                                   height: 14,
                                   child: CircularProgressIndicator(
@@ -54491,7 +55486,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                                 },
                       ),
                       if (_aiDilemmas.isNotEmpty) ...[
-                        const SizedBox(height: 6),
+                        SizedBox(height: 6),
                         Text(
                           GameContentLocalization.format(
                             context,
@@ -54510,7 +55505,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                 );
               },
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
 
             ElevatedButton.icon(
               icon: const Icon(Icons.play_arrow_rounded, size: 28),
@@ -54586,7 +55581,8 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
         return StatefulBuilder(
           builder: (context, setStateDialog) {
             return AlertDialog(
-              title: Text(GameContentLocalization.ui(context, "Gérer les Scores"),
+              title: Text(
+                GameContentLocalization.ui(context, "Gérer les Scores"),
                 textAlign: TextAlign.center,
               ),
               content: Column(
@@ -54796,7 +55792,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                   fontSize: 16,
                 ),
               ),
-              const SizedBox(height: 14),
+              SizedBox(height: 14),
               ClipRRect(
                 borderRadius: BorderRadius.circular(999),
                 child: LinearProgressIndicator(
@@ -54806,7 +55802,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                   valueColor: AlwaysStoppedAnimation<Color>(color),
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
               Text(
                 voteCount <= 1
                     ? GameContentLocalization.format(context, '{0} vote', [
@@ -55124,7 +56120,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             if (_currentContent.isEmpty && !_isSpinning)
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -55171,7 +56167,12 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
               style: const TextStyle(fontSize: 10, color: Colors.white),
             ),
           ),
-          label: Text("$pName : ${_globalScores[pName]} pts"),
+          label: Text(
+            GameContentLocalization.format(context, "{0} : {1} pts", [
+              pName,
+              _globalScores[pName],
+            ]),
+          ),
           backgroundColor: isCurrent ? Colors.teal : const Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
@@ -55256,7 +56257,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               GameContentLocalization.ui(context, "Configuration de la partie"),
               style: TextStyle(
@@ -55266,21 +56267,33 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             Text(
-              GameContentLocalization.ui(context, "Difficulté des questions secrètes"),
+              GameContentLocalization.ui(
+                context,
+                "Difficulté des questions secrètes",
+              ),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white70,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             SegmentedButton<String>(
               segments: [
-                ButtonSegment(value: 'soft', label: Text(GameContentLocalization.ui(context, 'Soft'))),
-                ButtonSegment(value: 'hard', label: Text(GameContentLocalization.ui(context, 'Hard'))),
-                ButtonSegment(value: 'hardcore', label: Text(GameContentLocalization.ui(context, 'Hardcore'))),
+                ButtonSegment(
+                  value: 'soft',
+                  label: Text(GameContentLocalization.ui(context, 'Soft')),
+                ),
+                ButtonSegment(
+                  value: 'hard',
+                  label: Text(GameContentLocalization.ui(context, 'Hard')),
+                ),
+                ButtonSegment(
+                  value: 'hardcore',
+                  label: Text(GameContentLocalization.ui(context, 'Hardcore')),
+                ),
               ],
               selected: {_difficulty},
               onSelectionChanged: (s) => setState(() => _difficulty = s.first),
@@ -55312,7 +56325,10 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            GameContentLocalization.ui(context, "Génération IA de questions secrètes"),
+                            GameContentLocalization.ui(
+                              context,
+                              "Génération IA de questions secrètes",
+                            ),
                             style: TextStyle(
                               color: Colors.amberAccent,
                               fontWeight: FontWeight.bold,
@@ -55320,11 +56336,14 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       TextField(
                         controller: _aiController,
                         decoration: InputDecoration(
-                          hintText: GameContentLocalization.ui(context, "ex: Amour & Séduction, Travail, Anecdotes gênantes..."),
+                          hintText: GameContentLocalization.ui(
+                            context,
+                            "ex: Amour & Séduction, Travail, Anecdotes gênantes...",
+                          ),
                           hintStyle: const TextStyle(color: Colors.white38),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.3),
@@ -55333,11 +56352,11 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       ElevatedButton.icon(
                         icon:
                             _isAiLoading
-                                ? const SizedBox(
+                                ? SizedBox(
                                   width: 14,
                                   height: 14,
                                   child: CircularProgressIndicator(
@@ -55346,7 +56365,17 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                                   ),
                                 )
                                 : const Icon(Icons.bolt, color: Colors.black),
-                        label: Text(_isAiLoading ? GameContentLocalization.ui(context, "Génération...") : GameContentLocalization.ui(context, "Générer les questions IA")),
+                        label: Text(
+                          _isAiLoading
+                              ? GameContentLocalization.ui(
+                                context,
+                                "Génération...",
+                              )
+                              : GameContentLocalization.ui(
+                                context,
+                                "Générer les questions IA",
+                              ),
+                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amberAccent,
                           foregroundColor: Colors.black,
@@ -55372,7 +56401,11 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              "✨ ${res.length} questions IA générées !",
+                                              GameContentLocalization.format(
+                                                context,
+                                                "✨ {0} questions IA générées !",
+                                                [res.length],
+                                              ),
                                             ),
                                             backgroundColor: Colors.green[800],
                                           ),
@@ -55389,7 +56422,11 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                       if (_aiQuestions.isNotEmpty) ...[
                         const SizedBox(height: 6),
                         Text(
-                          "✅ ${_aiQuestions.length} questions prêtes",
+                          GameContentLocalization.format(
+                            context,
+                            "✅ {0} questions prêtes",
+                            [_aiQuestions.length],
+                          ),
                           style: const TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 12,
@@ -55402,7 +56439,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                 );
               },
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
 
             ElevatedButton.icon(
               icon: const Icon(Icons.play_arrow_rounded, size: 28),
@@ -55469,7 +56506,8 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
         return StatefulBuilder(
           builder: (context, setStateDialog) {
             return AlertDialog(
-              title: Text(GameContentLocalization.ui(context, "Gérer les Scores"),
+              title: Text(
+                GameContentLocalization.ui(context, "Gérer les Scores"),
                 textAlign: TextAlign.center,
               ),
               content: Column(
@@ -55653,7 +56691,10 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
                           )
                           : (_currentContent.isEmpty
                               ? Text(
-                                "Appuyez sur 'Lancer la roue' pour commencer !",
+                                GameContentLocalization.ui(
+                                  context,
+                                  "Appuyez sur 'Lancer la roue' pour commencer !",
+                                ),
                                 style: Theme.of(context).textTheme.headlineSmall
                                     ?.copyWith(color: Colors.white70),
                                 textAlign: TextAlign.center,
@@ -55671,7 +56712,10 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "C'est au tour de",
+                                        GameContentLocalization.ui(
+                                          context,
+                                          "C'est au tour de",
+                                        ),
                                         style:
                                             Theme.of(
                                               context,
@@ -55729,7 +56773,12 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
               style: const TextStyle(fontSize: 10, color: Colors.white),
             ),
           ),
-          label: Text("$pName : ${_globalScores[pName]} pts"),
+          label: Text(
+            GameContentLocalization.format(context, "{0} : {1} pts", [
+              pName,
+              _globalScores[pName],
+            ]),
+          ),
           backgroundColor:
               isCurrent ? Colors.amber[800] : const Color(0xFF333333),
           labelStyle: TextStyle(
@@ -55749,12 +56798,24 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
       child: Column(
         children: [
           Text(
-            "Tu as choisi $_coinFlipChoice. La pièce est tombée sur... $_coinFlipResult !",
+            GameContentLocalization.format(
+              context,
+              "Tu as choisi {0}. La pièce est tombée sur... {1} !",
+              [_coinFlipChoice, _coinFlipResult],
+            ),
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Text(
-            lost ? GameContentLocalization.ui(context, "PERDU ! Révèle la question et réponds-y !") : GameContentLocalization.ui(context, "GAGNÉ ! Ton secret est préservé."),
+            lost
+                ? GameContentLocalization.ui(
+                  context,
+                  "PERDU ! Révèle la question et réponds-y !",
+                )
+                : GameContentLocalization.ui(
+                  context,
+                  "GAGNÉ ! Ton secret est préservé.",
+                ),
             style: TextStyle(
               fontSize: 18,
               color: lost ? Colors.redAccent : Colors.greenAccent,
@@ -55768,7 +56829,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
   }
 
   Widget _buildGameControls() {
-    if (_isSpinning) return const SizedBox(height: 50);
+    if (_isSpinning) return SizedBox(height: 50);
 
     if (_currentContent.isEmpty) {
       return ElevatedButton(
@@ -55809,7 +56870,8 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
             _coinFlipChoice = "Pile";
             _flipCoin();
           },
-          child: Text(GameContentLocalization.ui(context, "Je choisis PILE"),
+          child: Text(
+            GameContentLocalization.ui(context, "Je choisis PILE"),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -55823,7 +56885,8 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
             _coinFlipChoice = "Face";
             _flipCoin();
           },
-          child: Text(GameContentLocalization.ui(context, "Je choisis FACE"),
+          child: Text(
+            GameContentLocalization.ui(context, "Je choisis FACE"),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -55921,7 +56984,7 @@ class _SpinTheWheelWidgetState extends State<SpinTheWheelWidget>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "La roue tourne...",
+          GameContentLocalization.ui(context, "La roue tourne..."),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 20),
@@ -56223,16 +57286,27 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Configuration",
+                GameContentLocalization.ui(context, "Configuration"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
               SegmentedButton<String>(
                 segments: [
-                  ButtonSegment(value: 'soft', label: Text(GameContentLocalization.ui(context, 'Soft'))),
-                  ButtonSegment(value: 'hard', label: Text(GameContentLocalization.ui(context, 'Hard'))),
-                  ButtonSegment(value: 'hardcore', label: Text(GameContentLocalization.ui(context, 'Hardcore'))),
+                  ButtonSegment(
+                    value: 'soft',
+                    label: Text(GameContentLocalization.ui(context, 'Soft')),
+                  ),
+                  ButtonSegment(
+                    value: 'hard',
+                    label: Text(GameContentLocalization.ui(context, 'Hard')),
+                  ),
+                  ButtonSegment(
+                    value: 'hardcore',
+                    label: Text(
+                      GameContentLocalization.ui(context, 'Hardcore'),
+                    ),
+                  ),
                 ],
                 selected: {_difficulty},
                 onSelectionChanged:
@@ -56246,8 +57320,14 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                 ),
                 subtitle: Text(
                   _includeMrWhite
-                      ? "Requiert 4+ joueurs"
-                      : "Requiert 3+ joueurs",
+                      ? GameContentLocalization.ui(
+                        context,
+                        "Requiert 4+ joueurs",
+                      )
+                      : GameContentLocalization.ui(
+                        context,
+                        "Requiert 3+ joueurs",
+                      ),
                 ),
                 value: _includeMrWhite,
                 onChanged: (val) => setState(() => _includeMrWhite = val),
@@ -56258,7 +57338,12 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                   title: Text(
                     GameUiLocalization.tr(context, "Mr. White commence ?"),
                   ),
-                  subtitle: Text("Il devra donner le premier indice"),
+                  subtitle: Text(
+                    GameContentLocalization.ui(
+                      context,
+                      "Il devra donner le premier indice",
+                    ),
+                  ),
                   value: _mrWhiteStarts,
                   onChanged: (val) => setState(() => _mrWhiteStarts = val),
                   secondary: Icon(Icons.play_arrow),
@@ -56285,7 +57370,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                             ),
                             SizedBox(width: 8),
                             Text(
-                              "IA Premium",
+                              GameContentLocalization.ui(context, "IA Premium"),
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontWeight: FontWeight.bold,
@@ -56297,9 +57382,14 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            labelText: "Thème pour les paires de mots",
-                            hintText:
-                                "ex: animaux:objets, cuisine... (format civil:infiltré)",
+                            labelText: GameContentLocalization.ui(
+                              context,
+                              "Thème pour les paires de mots",
+                            ),
+                            hintText: GameContentLocalization.ui(
+                              context,
+                              "ex: animaux:objets, cuisine... (format civil:infiltré)",
+                            ),
                             border: OutlineInputBorder(),
                           ),
                           maxLines: 1,
@@ -56379,7 +57469,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Passe le téléphone à",
+                GameContentLocalization.ui(context, "Passe le téléphone à"),
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               SizedBox(height: 10),
@@ -56391,7 +57481,10 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
               ),
               SizedBox(height: 20),
               Text(
-                "Regarde ton rôle et ne le montre à personne !",
+                GameContentLocalization.ui(
+                  context,
+                  "Regarde ton rôle et ne le montre à personne !",
+                ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 30),
@@ -56457,12 +57550,16 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "À vos discussions !",
+                GameContentLocalization.ui(context, "À vos discussions !"),
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               SizedBox(height: 10),
               Text(
-                "Tout le monde connaît son rôle. À tour de rôle, donnez un mot-indice. Quand vous êtes prêts, passez au vote pour éliminer quelqu'un.$startingPlayerInstruction",
+                GameContentLocalization.format(
+                  context,
+                  "Tout le monde connaît son rôle. À tour de rôle, donnez un mot-indice. Quand vous êtes prêts, passez au vote pour éliminer quelqu'un.{0}",
+                  [startingPlayerInstruction],
+                ),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
@@ -56485,7 +57582,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
       key: ValueKey('vote_phase'),
       children: [
         Text(
-          "Qui éliminer ?",
+          GameContentLocalization.ui(context, "Qui éliminer ?"),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 10),
@@ -56519,7 +57616,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Résultat du tour",
+                GameContentLocalization.ui(context, "Résultat du tour"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -56534,12 +57631,20 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
               if (_resultMessage.contains("gagnent")) ...[
                 SizedBox(height: 20),
                 Text(
-                  "Le mot des civils était : $_wordCivil",
+                  GameContentLocalization.format(
+                    context,
+                    "Le mot des civils était : {0}",
+                    [_wordCivil],
+                  ),
                   style: TextStyle(fontStyle: FontStyle.italic),
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  "Le mot de l'infiltré était : $_wordUndercover",
+                  GameContentLocalization.format(
+                    context,
+                    "Le mot de l'infiltré était : {0}",
+                    [_wordUndercover],
+                  ),
                   style: TextStyle(fontStyle: FontStyle.italic),
                   textAlign: TextAlign.center,
                 ),
@@ -56692,7 +57797,9 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(GameRulesLocalization.getGameTitle(context, "La Patate Chaude")),
+        title: Text(
+          GameRulesLocalization.getGameTitle(context, "La Patate Chaude"),
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -56758,12 +57865,17 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                         )
                         .toList(),
                 onChanged: (val) => setState(() => _selectedCategory = val!),
-                decoration: InputDecoration(labelText: GameContentLocalization.ui(context, "Catégorie")),
+                decoration: InputDecoration(
+                  labelText: GameContentLocalization.ui(context, "Catégorie"),
+                ),
               ),
               SizedBox(height: 20),
 
               Text(
-                GameContentLocalization.ui(context, "Durée du tour (par joueur)"),
+                GameContentLocalization.ui(
+                  context,
+                  "Durée du tour (par joueur)",
+                ),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(height: 8),
@@ -56852,7 +57964,10 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                             ),
                             SizedBox(width: 8),
                             Text(
-                              GameContentLocalization.ui(context, "Catégories IA Personnalisées"),
+                              GameContentLocalization.ui(
+                                context,
+                                "Catégories IA Personnalisées",
+                              ),
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontWeight: FontWeight.bold,
@@ -56860,12 +57975,14 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            hintText:
-                                GameContentLocalization.ui(context, "ex: Marques de luxe, Objets du grenier, Films d'horreur..."),
+                            hintText: GameContentLocalization.ui(
+                              context,
+                              "ex: Marques de luxe, Objets du grenier, Films d'horreur...",
+                            ),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -56898,7 +58015,10 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                                           ).showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                GameContentLocalization.ui(context, "Catégories IA chargées !"),
+                                                GameContentLocalization.ui(
+                                                  context,
+                                                  "Catégories IA chargées !",
+                                                ),
                                               ),
                                               backgroundColor: Colors.green,
                                             ),
@@ -56912,7 +58032,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                                   },
                           child:
                               _isAiLoading
-                                  ? const SizedBox(
+                                  ? SizedBox(
                                     width: 16,
                                     height: 16,
                                     child: CircularProgressIndicator(
@@ -56949,14 +58069,16 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
       key: ValueKey('playing'),
       children: [
         Text(
-          "$_secondsLeft s",
+          GameContentLocalization.format(context, "{0} s", [_secondsLeft]),
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             color: _secondsLeft < 5 ? Colors.redAccent : Colors.white,
           ),
         ),
         SizedBox(height: 10),
         Text(
-          GameContentLocalization.format(context, "C'est à {0} !", [widget.players[_currentPlayerIndex]]),
+          GameContentLocalization.format(context, "C'est à {0} !", [
+            widget.players[_currentPlayerIndex],
+          ]),
 
           style: Theme.of(context).textTheme.headlineSmall,
         ),
@@ -56982,7 +58104,12 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
         SizedBox(height: 20),
         TextField(
           controller: _answerController,
-          decoration: InputDecoration(labelText: GameContentLocalization.ui(context, "Ta réponse rapide !")),
+          decoration: InputDecoration(
+            labelText: GameContentLocalization.ui(
+              context,
+              "Ta réponse rapide !",
+            ),
+          ),
           onSubmitted: (_) => _passPotato(),
         ),
         SizedBox(height: 20),
@@ -57041,13 +58168,19 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 10),
-        Text(GameContentLocalization.ui(context, "Son gage :"), style: Theme.of(context).textTheme.bodyMedium),
+        Text(
+          GameContentLocalization.ui(context, "Son gage :"),
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
         SizedBox(height: 10),
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              gage.replaceAll('{player}', 'un autre joueur'),
+              gage.replaceAll(
+                '{player}',
+                GameContentLocalization.ui(context, 'un autre joueur'),
+              ),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
@@ -57134,7 +58267,9 @@ class _SynonymOrBannedLocalScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(GameRulesLocalization.getGameTitle(context, "Synonyme ou Banni")),
+        title: Text(
+          GameRulesLocalization.getGameTitle(context, "Synonyme ou Banni"),
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -57179,9 +58314,18 @@ class _SynonymOrBannedLocalScreenState
         SizedBox(height: 20),
         SegmentedButton<String>(
           segments: [
-            ButtonSegment(value: 'soft', label: Text(GameContentLocalization.ui(context, 'Soft'))),
-            ButtonSegment(value: 'hard', label: Text(GameContentLocalization.ui(context, 'Hard'))),
-            ButtonSegment(value: 'hardcore', label: Text(GameContentLocalization.ui(context, 'Hardcore'))),
+            ButtonSegment(
+              value: 'soft',
+              label: Text(GameContentLocalization.ui(context, 'Soft')),
+            ),
+            ButtonSegment(
+              value: 'hard',
+              label: Text(GameContentLocalization.ui(context, 'Hard')),
+            ),
+            ButtonSegment(
+              value: 'hardcore',
+              label: Text(GameContentLocalization.ui(context, 'Hardcore')),
+            ),
           ],
           selected: {_difficulty},
           onSelectionChanged: (s) => setState(() => _difficulty = s.first),
@@ -57209,7 +58353,7 @@ class _SynonymOrBannedLocalScreenState
                       ),
                       SizedBox(width: 8),
                       Text(
-                        "IA Premium",
+                        GameContentLocalization.ui(context, "IA Premium"),
                         style: TextStyle(
                           color: Colors.amberAccent,
                           fontWeight: FontWeight.bold,
@@ -57221,8 +58365,14 @@ class _SynonymOrBannedLocalScreenState
                   TextField(
                     controller: _aiController,
                     decoration: InputDecoration(
-                      labelText: GameContentLocalization.ui(context, "Thème pour les mots"),
-                      hintText: GameContentLocalization.ui(context, "ex: animaux, cuisine, film..."),
+                      labelText: GameContentLocalization.ui(
+                        context,
+                        "Thème pour les mots",
+                      ),
+                      hintText: GameContentLocalization.ui(
+                        context,
+                        "ex: animaux, cuisine, film...",
+                      ),
                       border: OutlineInputBorder(),
                     ),
                     maxLines: 1,
@@ -57287,7 +58437,9 @@ class _SynonymOrBannedLocalScreenState
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          GameContentLocalization.format(context, "Passe le téléphone à {0}", [currentPlayer]),
+          GameContentLocalization.format(context, "Passe le téléphone à {0}", [
+            currentPlayer,
+          ]),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 20),
@@ -57302,7 +58454,9 @@ class _SynonymOrBannedLocalScreenState
         SizedBox(height: 30),
         TextField(
           controller: _answerController,
-          decoration: InputDecoration(labelText: GameContentLocalization.ui(context, "Ton synonyme...")),
+          decoration: InputDecoration(
+            labelText: GameContentLocalization.ui(context, "Ton synonyme..."),
+          ),
           onSubmitted: (_) => _submitAnswer(),
         ),
         SizedBox(height: 20),
@@ -57320,12 +58474,17 @@ class _SynonymOrBannedLocalScreenState
       key: ValueKey('voting'),
       children: [
         Text(
-          GameContentLocalization.ui(context, "Votez pour bannir la pire proposition !"),
+          GameContentLocalization.ui(
+            context,
+            "Votez pour bannir la pire proposition !",
+          ),
           style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
         Text(
-          GameContentLocalization.format(context, "Le mot était : {0}", [_currentWord]),
+          GameContentLocalization.format(context, "Le mot était : {0}", [
+            _currentWord,
+          ]),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: 20),
@@ -57357,13 +58516,21 @@ class _SynonymOrBannedLocalScreenState
         Icon(Icons.block, color: Colors.redAccent, size: 80),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, "La proposition de {0} a été bannie !", [_bannedPlayer]),
+          GameContentLocalization.format(
+            context,
+            "La proposition de {0} a été bannie !",
+            [_bannedPlayer],
+          ),
           style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, "{0} a perdu cette manche !", [_bannedPlayer]),
+          GameContentLocalization.format(
+            context,
+            "{0} a perdu cette manche !",
+            [_bannedPlayer],
+          ),
           style: Theme.of(
             context,
           ).textTheme.titleLarge?.copyWith(color: Colors.amber),
@@ -57575,7 +58742,9 @@ class _WhoIsMostLikelyLocalScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(GameRulesLocalization.getGameTitle(context, "Qui Pourrait le Plus ?")),
+        title: Text(
+          GameRulesLocalization.getGameTitle(context, "Qui Pourrait le Plus ?"),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -57591,9 +58760,20 @@ class _WhoIsMostLikelyLocalScreenState
               // FILTRE DIFFICULTE
               SegmentedButton<String>(
                 segments: [
-                  ButtonSegment(value: 'soft', label: Text(GameContentLocalization.ui(context, 'Soft'))),
-                  ButtonSegment(value: 'hard', label: Text(GameContentLocalization.ui(context, 'Hard'))),
-                  ButtonSegment(value: 'hardcore', label: Text(GameContentLocalization.ui(context, 'Hardcore'))),
+                  ButtonSegment(
+                    value: 'soft',
+                    label: Text(GameContentLocalization.ui(context, 'Soft')),
+                  ),
+                  ButtonSegment(
+                    value: 'hard',
+                    label: Text(GameContentLocalization.ui(context, 'Hard')),
+                  ),
+                  ButtonSegment(
+                    value: 'hardcore',
+                    label: Text(
+                      GameContentLocalization.ui(context, 'Hardcore'),
+                    ),
+                  ),
                 ],
                 selected: {_difficulty},
                 onSelectionChanged:
@@ -57602,18 +58782,22 @@ class _WhoIsMostLikelyLocalScreenState
                       _getNewQuestion();
                     }),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               // NOUVEAU: CHOIX DU MODE DE VOTE PENDANT LE JEU
               SegmentedButton<String>(
                 segments: [
                   ButtonSegment(
                     value: 'grouper',
-                    label: Text(GameContentLocalization.ui(context, 'Groupe (Ensemble)')),
+                    label: Text(
+                      GameContentLocalization.ui(context, 'Groupe (Ensemble)'),
+                    ),
                     icon: Icon(Icons.groups),
                   ),
                   ButtonSegment(
                     value: 'chacun',
-                    label: Text(GameContentLocalization.ui(context, 'Tour par tour')),
+                    label: Text(
+                      GameContentLocalization.ui(context, 'Tour par tour'),
+                    ),
                     icon: Icon(Icons.person),
                   ),
                 ],
@@ -57663,7 +58847,12 @@ class _WhoIsMostLikelyLocalScreenState
               style: const TextStyle(fontSize: 10, color: Colors.white),
             ),
           ),
-          label: Text("$pName : ${_globalScores[pName]} pts"),
+          label: Text(
+            GameContentLocalization.format(context, "{0} : {1} pts", [
+              pName,
+              _globalScores[pName],
+            ]),
+          ),
           backgroundColor:
               isCurrentVoter ? Colors.deepPurple : const Color(0xFF333333),
           labelStyle: TextStyle(
@@ -57708,17 +58897,19 @@ class _WhoIsMostLikelyLocalScreenState
                   TextField(
                     controller: _aiController,
                     decoration: InputDecoration(
-                      labelText:
-                          GameContentLocalization.ui(context, "Thème IA (ex: Soirée arrosée, Travail, Vacances...)"),
+                      labelText: GameContentLocalization.ui(
+                        context,
+                        "Thème IA (ex: Soirée arrosée, Travail, Vacances...)",
+                      ),
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   ElevatedButton.icon(
                     icon: const Icon(Icons.auto_awesome),
                     label:
                         _isAiLoading
-                            ? const SizedBox(
+                            ? SizedBox(
                               width: 16,
                               height: 16,
                               child: CircularProgressIndicator(
@@ -57776,12 +58967,19 @@ class _WhoIsMostLikelyLocalScreenState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    GameContentLocalization.ui(context, "Qui dans le groupe..."),
+                    GameContentLocalization.ui(
+                      context,
+                      "Qui dans le groupe...",
+                    ),
                     style: TextStyle(color: Colors.white70, fontSize: 16),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Text(
-                    GameContentLocalization.format(context, "...pourrait le plus {0}", [_currentQuestion]),
+                    GameContentLocalization.format(
+                      context,
+                      "...pourrait le plus {0}",
+                      [_currentQuestion],
+                    ),
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -57822,7 +59020,11 @@ class _WhoIsMostLikelyLocalScreenState
                     style: TextStyle(color: Colors.grey[400], fontSize: 12),
                   ),
                   Text(
-                    "Qui pourrait le plus $_currentQuestion",
+                    GameContentLocalization.format(
+                      context,
+                      "Qui pourrait le plus {0}",
+                      [_currentQuestion],
+                    ),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -57833,8 +59035,9 @@ class _WhoIsMostLikelyLocalScreenState
               ),
             ),
           ),
-          const SizedBox(height: 16),
-          Text(GameContentLocalization.ui(context, "Votez tous ensemble !"),
+          SizedBox(height: 16),
+          Text(
+            GameContentLocalization.ui(context, "Votez tous ensemble !"),
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -57842,8 +59045,12 @@ class _WhoIsMostLikelyLocalScreenState
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
-          Text(GameContentLocalization.ui(context, "Désignez la personne choisie par le groupe :"),
+          SizedBox(height: 8),
+          Text(
+            GameContentLocalization.ui(
+              context,
+              "Désignez la personne choisie par le groupe :",
+            ),
             style: TextStyle(color: Colors.white70),
             textAlign: TextAlign.center,
           ),
@@ -57896,11 +59103,15 @@ class _WhoIsMostLikelyLocalScreenState
             child: Column(
               children: [
                 Text(
-                  "Situation :",
+                  GameContentLocalization.ui(context, "Situation :"),
                   style: TextStyle(color: Colors.grey[400], fontSize: 12),
                 ),
                 Text(
-                  GameContentLocalization.format(context, "Qui pourrait le plus {0}", [_currentQuestion]),
+                  GameContentLocalization.format(
+                    context,
+                    "Qui pourrait le plus {0}",
+                    [_currentQuestion],
+                  ),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -57911,7 +59122,7 @@ class _WhoIsMostLikelyLocalScreenState
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Text(
           GameContentLocalization.ui(context, "Passez l'appareil à :"),
           style: Theme.of(context).textTheme.bodyMedium,
@@ -57925,9 +59136,12 @@ class _WhoIsMostLikelyLocalScreenState
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
-          GameContentLocalization.ui(context, "Votez secrètement pour le joueur de votre choix :"),
+          GameContentLocalization.ui(
+            context,
+            "Votez secrètement pour le joueur de votre choix :",
+          ),
           style: TextStyle(color: Colors.white70),
           textAlign: TextAlign.center,
         ),
@@ -57977,9 +59191,13 @@ class _WhoIsMostLikelyLocalScreenState
                   GameContentLocalization.ui(context, "SITUATION :"),
                   style: TextStyle(color: Colors.white54, fontSize: 12),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
-                  GameContentLocalization.format(context, "Qui pourrait le plus {0}", [_currentQuestion]),
+                  GameContentLocalization.format(
+                    context,
+                    "Qui pourrait le plus {0}",
+                    [_currentQuestion],
+                  ),
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -57990,11 +59208,14 @@ class _WhoIsMostLikelyLocalScreenState
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Text(
           winners.length > 1
               ? GameContentLocalization.ui(context, "Égalité ! (+1 pt chacun)")
-              : GameContentLocalization.ui(context, "Désigné par le groupe (+1 pt) :"),
+              : GameContentLocalization.ui(
+                context,
+                "Désigné par le groupe (+1 pt) :",
+              ),
           style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
@@ -58017,7 +59238,7 @@ class _WhoIsMostLikelyLocalScreenState
                   )
                   .toList(),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         if (_votingMode == 'chacun') ...[
           Text(
             GameContentLocalization.ui(context, "Détail des votes :"),
@@ -58047,7 +59268,11 @@ class _WhoIsMostLikelyLocalScreenState
                     subtitle:
                         votersList.isNotEmpty
                             ? Text(
-                              GameContentLocalization.format(context, "Voté par : {0}", [votersList.join(", ")]),
+                              GameContentLocalization.format(
+                                context,
+                                "Voté par : {0}",
+                                [votersList.join(", ")],
+                              ),
                               style: const TextStyle(fontSize: 12),
                             )
                             : Text(
@@ -58348,7 +59573,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Codenames"),
+        title: Text(GameContentLocalization.ui(context, "Codenames")),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -58446,7 +59671,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               SizedBox(height: 16),
               ElevatedButton.icon(
                 icon: Icon(Icons.check_circle_outline),
-                label: Text("C'est fait"),
+                label: Text(GameContentLocalization.ui(context, "C'est fait")),
                 onPressed:
                     () => setState(
                       () => _gameState = CodenamesLocalGameState.masterSpyTurn,
@@ -58480,13 +59705,18 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 16),
               Text(
-                GameContentLocalization.ui(context, "Passez le téléphone aux agents"),
+                GameContentLocalization.ui(
+                  context,
+                  "Passez le téléphone aux agents",
+                ),
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 8),
               Text(
-                "Équipe ${_activeTeam == 'red' ? 'Rouge' : 'Bleue'}",
+                GameContentLocalization.format(context, "Équipe {0}", [
+                  _activeTeam == 'red' ? 'Rouge' : 'Bleue',
+                ]),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   color:
                       _activeTeam == 'red'
@@ -58504,7 +59734,9 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  GameContentLocalization.format(context, "Indice : {0}", ["$_currentClue $_clueCount"]),
+                  GameContentLocalization.format(context, "Indice : {0}", [
+                    "$_currentClue $_clueCount",
+                  ]),
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.amberAccent,
@@ -58548,7 +59780,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Codenames Local",
+                GameContentLocalization.ui(context, "Codenames Local"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -58589,7 +59821,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
                             ),
                             SizedBox(width: 8),
                             Text(
-                              "IA Premium",
+                              GameContentLocalization.ui(context, "IA Premium"),
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontWeight: FontWeight.bold,
@@ -58709,7 +59941,10 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  GameContentLocalization.ui(context, "Tu es le Maître-Espion. Assure-toi d'être seul(e) à voir l'écran."),
+                  GameContentLocalization.ui(
+                    context,
+                    "Tu es le Maître-Espion. Assure-toi d'être seul(e) à voir l'écran.",
+                  ),
                   style: TextStyle(color: Colors.white70, fontSize: 13),
                   textAlign: TextAlign.center,
                 ),
@@ -58740,7 +59975,13 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
         _buildScoreDisplay(),
         SizedBox(height: 15),
         Text(
-          GameContentLocalization.format(context, "{0} — Maître-Espion {1}", [currentMasterSpy, GameContentLocalization.ui(context, _activeTeam == 'red' ? 'Rouge' : 'Bleue')]),
+          GameContentLocalization.format(context, "{0} — Maître-Espion {1}", [
+            currentMasterSpy,
+            GameContentLocalization.ui(
+              context,
+              _activeTeam == 'red' ? 'Rouge' : 'Bleue',
+            ),
+          ]),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 15),
@@ -58811,7 +60052,9 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
           ),
         ),
         Text(
-          "Essais restants : $_guessesLeft",
+          GameContentLocalization.format(context, "Essais restants : {0}", [
+            _guessesLeft,
+          ]),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: 15),
@@ -58835,7 +60078,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Partie Terminée !",
+                GameContentLocalization.ui(context, "Partie Terminée !"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -58874,7 +60117,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             Column(
               children: [
                 Text(
-                  "Rouge",
+                  GameContentLocalization.ui(context, "Rouge"),
                   style: TextStyle(
                     color: Colors.redAccent,
                     fontWeight: FontWeight.bold,
@@ -58896,7 +60139,7 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             Column(
               children: [
                 Text(
-                  "Bleu",
+                  GameContentLocalization.ui(context, "Bleu"),
                   style: TextStyle(
                     color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,
@@ -59260,7 +60503,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Time's Up"),
+        title: Text(GameContentLocalization.ui(context, "Time's Up")),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -59304,25 +60547,35 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Time's Up Local",
+                GameContentLocalization.ui(context, "Time's Up Local"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
               if (widget.players.length < 4)
                 Text(
-                  GameContentLocalization.ui(context, "Besoin d'au moins 4 joueurs (2 par équipe) pour jouer !"),
+                  GameContentLocalization.ui(
+                    context,
+                    "Besoin d'au moins 4 joueurs (2 par équipe) pour jouer !",
+                  ),
                   style: TextStyle(color: Colors.redAccent, fontSize: 16),
                   textAlign: TextAlign.center,
                 )
               else ...[
                 Text(
-                  GameContentLocalization.ui(context, "Les équipes seront formées aléatoirement."),
+                  GameContentLocalization.ui(
+                    context,
+                    "Les équipes seront formées aléatoirement.",
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
                 Text(
-                  GameContentLocalization.format(context, "Nombre de manches : {0}", ["$_totalRounds"]),
+                  GameContentLocalization.format(
+                    context,
+                    "Nombre de manches : {0}",
+                    ["$_totalRounds"],
+                  ),
                   style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -59363,7 +60616,10 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                               ),
                               SizedBox(width: 8),
                               Text(
-                                "IA Premium",
+                                GameContentLocalization.ui(
+                                  context,
+                                  "IA Premium",
+                                ),
                                 style: TextStyle(
                                   color: Colors.amberAccent,
                                   fontWeight: FontWeight.bold,
@@ -59389,7 +60645,10 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                           ),
                           SizedBox(height: 6),
                           Text(
-                            GameContentLocalization.ui(context, "L'IA générera les mots automatiquement (la phase de saisie manuelle sera ignorée)."),
+                            GameContentLocalization.ui(
+                              context,
+                              "L'IA générera les mots automatiquement (la phase de saisie manuelle sera ignorée).",
+                            ),
                             style: TextStyle(
                               fontSize: 11,
                               color: Colors.white54,
@@ -59485,11 +60744,16 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Passe le téléphone à $currentPlayerForInput",
+          GameContentLocalization.format(context, "Passe le téléphone à {0}", [
+            currentPlayerForInput,
+          ]),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         Text(
-          GameContentLocalization.ui(context, "Ajoute 5 mots que tu aimerais faire deviner."),
+          GameContentLocalization.ui(
+            context,
+            "Ajoute 5 mots que tu aimerais faire deviner.",
+          ),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: 20),
@@ -59548,12 +60812,20 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         ),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, "Mots restants à ajouter pour {0}: {1}", [currentPlayerForInput, "${5 - wordsForCurrentPlayer}"]),
+          GameContentLocalization.format(
+            context,
+            "Mots restants à ajouter pour {0}: {1}",
+            [currentPlayerForInput, "${5 - wordsForCurrentPlayer}"],
+          ),
           style: TextStyle(color: Colors.white70),
         ),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, "Total des mots dans le chapeau: {0}", ["${_allWords.length}"]),
+          GameContentLocalization.format(
+            context,
+            "Total des mots dans le chapeau: {0}",
+            ["${_allWords.length}"],
+          ),
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
@@ -59581,12 +60853,25 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          GameContentLocalization.format(context, "Manche {0} : {1}", ["$_currentRoundNumber", modeText]),
+          GameContentLocalization.format(context, "Manche {0} : {1}", [
+            "$_currentRoundNumber",
+            modeText,
+          ]),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 10),
         Text(
-          GameContentLocalization.format(context, "C'est au tour de {0} ({1})", [currentGuesser, GameContentLocalization.ui(context, _activeTeam == 'red' ? 'Équipe Rouge' : 'Équipe Bleue')]),
+          GameContentLocalization.format(
+            context,
+            "C'est au tour de {0} ({1})",
+            [
+              currentGuesser,
+              GameContentLocalization.ui(
+                context,
+                _activeTeam == 'red' ? 'Équipe Rouge' : 'Équipe Bleue',
+              ),
+            ],
+          ),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 20),
@@ -59604,11 +60889,19 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Mots devinés ce tour : ${_discardedWords.length}",
+                  GameContentLocalization.format(
+                    context,
+                    "Mots devinés ce tour : {0}",
+                    [_discardedWords.length],
+                  ),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
-                  "Mots restants dans le paquet : ${_currentDeck.length}",
+                  GameContentLocalization.format(
+                    context,
+                    "Mots restants dans le paquet : {0}",
+                    [_currentDeck.length],
+                  ),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -59667,12 +60960,18 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Erreur: Nombre de joueurs insuffisant",
+                  GameContentLocalization.ui(
+                    context,
+                    "Erreur: Nombre de joueurs insuffisant",
+                  ),
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  "Veuillez revenir à l'écran de configuration des joueurs.",
+                  GameContentLocalization.ui(
+                    context,
+                    "Veuillez revenir à l'écran de configuration des joueurs.",
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
@@ -59696,13 +60995,17 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Partie Terminée !",
+                GameContentLocalization.ui(context, "Partie Terminée !"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10),
               Text(
-                "L'équipe $winnerTeam a gagné !",
+                GameContentLocalization.format(
+                  context,
+                  "L'équipe {0} a gagné !",
+                  [winnerTeam],
+                ),
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color:
                       winnerTeam == 'Rouge'
@@ -59715,7 +61018,9 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
               SizedBox(height: 40),
               ElevatedButton(
                 onPressed: _resetGame,
-                child: Text("Nouvelle Partie"),
+                child: Text(
+                  GameContentLocalization.ui(context, "Nouvelle Partie"),
+                ),
               ),
             ],
           ),
@@ -59734,7 +61039,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
             Column(
               children: [
                 Text(
-                  "Rouge",
+                  GameContentLocalization.ui(context, "Rouge"),
                   style: TextStyle(
                     color: Colors.redAccent,
                     fontWeight: FontWeight.bold,
@@ -59742,7 +61047,9 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                   ),
                 ),
                 Text(
-                  GameContentLocalization.format(context, "{0} points", ["${_teamScores['red']}"]),
+                  GameContentLocalization.format(context, "{0} points", [
+                    "${_teamScores['red']}",
+                  ]),
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -59754,7 +61061,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
             Column(
               children: [
                 Text(
-                  "Bleu",
+                  GameContentLocalization.ui(context, "Bleu"),
                   style: TextStyle(
                     color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,
@@ -59762,7 +61069,9 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                   ),
                 ),
                 Text(
-                  GameContentLocalization.format(context, "{0} points", ["${_teamScores['blue']}"]),
+                  GameContentLocalization.format(context, "{0} points", [
+                    "${_teamScores['blue']}",
+                  ]),
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -59934,7 +61243,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Passe l'Objet"),
+        title: Text(GameContentLocalization.ui(context, "Passe l'Objet")),
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -59986,13 +61295,13 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                 size: 80,
                 color: Colors.deepPurpleAccent,
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
               Text(
-                "Passe l'Objet Rapidement",
+                GameContentLocalization.ui(context, "Passe l'Objet Rapidement"),
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               DropdownButtonFormField<String>(
                 value: _difficulty,
                 items:
@@ -60038,7 +61347,10 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                             ),
                             SizedBox(width: 8),
                             Text(
-                              GameContentLocalization.ui(context, "Génération IA de questions"),
+                              GameContentLocalization.ui(
+                                context,
+                                "Génération IA de questions",
+                              ),
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontWeight: FontWeight.bold,
@@ -60046,11 +61358,14 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            hintText: GameContentLocalization.ui(context, "ex: Culture générale, Gages drôles, Amis..."),
+                            hintText: GameContentLocalization.ui(
+                              context,
+                              "ex: Culture générale, Gages drôles, Amis...",
+                            ),
                             hintStyle: const TextStyle(color: Colors.white38),
                             filled: true,
                             fillColor: Colors.black.withOpacity(0.3),
@@ -60059,11 +61374,11 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                             ),
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         ElevatedButton.icon(
                           icon:
                               _isAiLoading
-                                  ? const SizedBox(
+                                  ? SizedBox(
                                     width: 14,
                                     height: 14,
                                     child: CircularProgressIndicator(
@@ -60072,7 +61387,17 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                                     ),
                                   )
                                   : const Icon(Icons.bolt, color: Colors.black),
-                          label: Text(_isAiLoading ? GameContentLocalization.ui(context, "Génération...") : GameContentLocalization.ui(context, "Générer les questions IA")),
+                          label: Text(
+                            _isAiLoading
+                                ? GameContentLocalization.ui(
+                                  context,
+                                  "Génération...",
+                                )
+                                : GameContentLocalization.ui(
+                                  context,
+                                  "Générer les questions IA",
+                                ),
+                          ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.amberAccent,
                             foregroundColor: Colors.black,
@@ -60135,7 +61460,10 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                   ),
                 ),
                 subtitle: Text(
-                  GameContentLocalization.ui(context, "Sinon, passez physiquement à qui vous voulez"),
+                  GameContentLocalization.ui(
+                    context,
+                    "Sinon, passez physiquement à qui vous voulez",
+                  ),
                 ),
                 value: _useButton,
                 onChanged: (val) => setState(() => _useButton = val),
@@ -60149,7 +61477,11 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
               ),
               const SizedBox(height: 20),
               Text(
-                "Intervalle du chrono : de $_minDuration à $_maxDuration secondes",
+                GameContentLocalization.format(
+                  context,
+                  "Intervalle du chrono : de {0} à {1} secondes",
+                  [_minDuration, _maxDuration],
+                ),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               RangeSlider(
@@ -60189,12 +61521,14 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
       children: [
         if (_showTimer)
           Text(
-            GameContentLocalization.format(context, "Temps restant : {0} s", ["$_secondsRemaining"]),
+            GameContentLocalization.format(context, "Temps restant : {0} s", [
+              "$_secondsRemaining",
+            ]),
             style: Theme.of(context).textTheme.headlineMedium,
           )
         else
           Text(
-            "Passez vite !",
+            GameContentLocalization.ui(context, "Passez vite !"),
             style: Theme.of(context).textTheme.headlineMedium,
           ),
         SizedBox(height: 30),
@@ -60213,7 +61547,9 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
               SizedBox(height: 10),
               if (_nextPlayerToPass != null)
                 Text(
-                  GameContentLocalization.format(context, "Passe à {0} !", ["$_nextPlayerToPass"]),
+                  GameContentLocalization.format(context, "Passe à {0} !", [
+                    "$_nextPlayerToPass",
+                  ]),
                   style: Theme.of(
                     context,
                   ).textTheme.titleLarge?.copyWith(color: Colors.amberAccent),
@@ -60239,7 +61575,10 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
         ),
         SizedBox(height: 10),
         Text(
-          GameContentLocalization.ui(context, "Il/Elle doit répondre à la question :"),
+          GameContentLocalization.ui(
+            context,
+            "Il/Elle doit répondre à la question :",
+          ),
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
@@ -60598,8 +61937,12 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
     if (_useTeams) {
       currentGuesser =
           _activeTeam == 0
-              ? GameContentLocalization.format(context, "{0} (Équipe Rouge)", [_teamAName])
-              : GameContentLocalization.format(context, "{0} (Équipe Bleue)", [_teamBName]);
+              ? GameContentLocalization.format(context, "{0} (Équipe Rouge)", [
+                _teamAName,
+              ])
+              : GameContentLocalization.format(context, "{0} (Équipe Bleue)", [
+                _teamBName,
+              ]);
     } else {
       currentGuesser = widget.players[_currentPlayerIndex];
     }
@@ -60649,7 +61992,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                   Text(
                     currentGuesser,
                     style: const TextStyle(
@@ -60662,7 +62005,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // Mode de jeu (Équipes vs Solo)
             SwitchListTile.adaptive(
@@ -60702,7 +62045,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                       () => _gameState = GuessTheWordGameState.teamSetup,
                     ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
             ],
 
             // Difficulté
@@ -60715,31 +62058,31 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
               segments: [
                 ButtonSegment(
                   value: 'soft',
-                  label: Text('Facile'),
+                  label: Text(GameContentLocalization.ui(context, 'Facile')),
                   icon: Icon(Icons.sentiment_satisfied),
                 ),
                 ButtonSegment(
                   value: 'hard',
-                  label: Text('Moyen'),
+                  label: Text(GameContentLocalization.ui(context, 'Moyen')),
                   icon: Icon(Icons.whatshot),
                 ),
                 ButtonSegment(
                   value: 'hardcore',
-                  label: Text('Expert'),
+                  label: Text(GameContentLocalization.ui(context, 'Expert')),
                   icon: Icon(Icons.local_fire_department),
                 ),
               ],
               selected: {_difficulty},
               onSelectionChanged: (s) => setState(() => _difficulty = s.first),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // Durée de la manche
             Text(
               GameContentLocalization.ui(context, "Durée du chrono :"),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             SegmentedButton<int>(
               segments: [
                 ButtonSegment(value: 30, label: Text('30s')),
@@ -60754,7 +62097,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
               onSelectionChanged:
                   (s) => setState(() => _roundDuration = s.first),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // Thème IA ou mots personnalisés
             ExpansionTile(
@@ -60782,8 +62125,10 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                   child: TextField(
                                     controller: _aiThemeCtrl,
                                     decoration: InputDecoration(
-                                      labelText:
-                                          GameContentLocalization.ui(context, "Thème IA (ex: Animaux marins, Super-héros...)"),
+                                      labelText: GameContentLocalization.ui(
+                                        context,
+                                        "Thème IA (ex: Animaux marins, Super-héros...)",
+                                      ),
                                       border: const OutlineInputBorder(),
                                     ),
                                   ),
@@ -60946,7 +62291,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
               ),
               onPressed: () => setState(() => _autoAssignTeams()),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Expanded(
               child: Row(
                 children: [
@@ -60961,8 +62306,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                       ),
                       child: Column(
                         children: [
-                          const Text(
-                            "ÉQUIPE 1",
+                          Text(
+                            GameContentLocalization.ui(context, "ÉQUIPE 1"),
                             style: TextStyle(
                               color: Colors.redAccent,
                               fontWeight: FontWeight.bold,
@@ -61002,7 +62347,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   // Équipe 2 (Bleue)
                   Expanded(
                     child: Container(
@@ -61014,8 +62359,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                       ),
                       child: Column(
                         children: [
-                          const Text(
-                            "ÉQUIPE 2",
+                          Text(
+                            GameContentLocalization.ui(context, "ÉQUIPE 2"),
                             style: TextStyle(
                               color: Colors.blueAccent,
                               fontWeight: FontWeight.bold,
@@ -61090,9 +62435,12 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
               size: 80,
               color: Colors.amberAccent,
             ),
-            const SizedBox(height: 16),
-            const Text(
-              "PLACEZ LE TÉLÉPHONE SUR VOTRE FRONT !",
+            SizedBox(height: 16),
+            Text(
+              GameContentLocalization.ui(
+                context,
+                "PLACEZ LE TÉLÉPHONE SUR VOTRE FRONT !",
+              ),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -61193,8 +62541,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                       Icons.arrow_downward,
                       color: Colors.greenAccent,
                     ),
-                    label: const Text(
-                      "Bas = Trouvé",
+                    label: Text(
+                      GameContentLocalization.ui(context, "Bas = Trouvé"),
                       style: TextStyle(color: Colors.greenAccent),
                     ),
                     onPressed: () => _onWordResult(true),
@@ -61204,8 +62552,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                       Icons.stop_circle,
                       color: Colors.redAccent,
                     ),
-                    label: const Text(
-                      "Arrêter",
+                    label: Text(
+                      GameContentLocalization.ui(context, "Arrêter"),
                       style: TextStyle(color: Colors.redAccent),
                     ),
                     onPressed: _endTurn,
@@ -61215,8 +62563,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                       Icons.arrow_upward,
                       color: Colors.orangeAccent,
                     ),
-                    label: const Text(
-                      "Haut = Passer",
+                    label: Text(
+                      GameContentLocalization.ui(context, "Haut = Passer"),
                       style: TextStyle(color: Colors.orangeAccent),
                     ),
                     onPressed: () => _onWordResult(false),
@@ -61261,9 +62609,13 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                     color: Colors.greenAccent,
                     size: 30,
                   ),
-                  const SizedBox(width: 10),
+                  SizedBox(width: 10),
                   Text(
-                    "+$foundCount points marqués !",
+                    GameContentLocalization.format(
+                      context,
+                      "+{0} points marqués !",
+                      [foundCount],
+                    ),
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -61273,9 +62625,12 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                 ],
               ),
             ),
-            const SizedBox(height: 12),
-            const Text(
-              "Touchez un mot pour modifier le résultat en cas d'erreur de capteur :",
+            SizedBox(height: 12),
+            Text(
+              GameContentLocalization.ui(
+                context,
+                "Touchez un mot pour modifier le résultat en cas d'erreur de capteur :",
+              ),
               style: TextStyle(color: Colors.white70, fontSize: 13),
               textAlign: TextAlign.center,
             ),
@@ -61311,15 +62666,15 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                 },
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 backgroundColor: Colors.deepPurple,
               ),
               onPressed: _advanceToNextTurn,
-              child: const Text(
-                "Tour Suivant",
+              child: Text(
+                GameContentLocalization.ui(context, "Tour Suivant"),
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
@@ -61538,7 +62893,11 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("$playerName : Mauvais symbole !"),
+          content: Text(
+            GameContentLocalization.format(context, "{0} : Mauvais symbole !", [
+              playerName,
+            ]),
+          ),
           duration: const Duration(milliseconds: 600),
           backgroundColor: Colors.red[800],
         ),
@@ -61562,7 +62921,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0D1117),
       appBar: AppBar(
-        title: const Text("Dobble Local"),
+        title: Text(GameContentLocalization.ui(context, "Dobble Local")),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -61613,8 +62972,9 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
                 size: 64,
                 color: Colors.amberAccent,
               ),
-              const SizedBox(height: 12),
-              Text(GameContentLocalization.ui(context, "Paramètres de la partie"),
+              SizedBox(height: 12),
+              Text(
+                GameContentLocalization.ui(context, "Paramètres de la partie"),
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -61622,24 +62982,38 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 24),
-              const Text(
-                "Symboles par carte :",
+              SizedBox(height: 24),
+              Text(
+                GameContentLocalization.ui(context, "Symboles par carte :"),
                 style: TextStyle(color: Colors.white70),
               ),
               const SizedBox(height: 8),
               SegmentedButton<int>(
                 segments: [
-                  ButtonSegment(value: 6, label: Text("6 (Facile)")),
-                  ButtonSegment(value: 8, label: Text("8 (Standard)")),
+                  ButtonSegment(
+                    value: 6,
+                    label: Text(
+                      GameContentLocalization.ui(context, "6 (Facile)"),
+                    ),
+                  ),
+                  ButtonSegment(
+                    value: 8,
+                    label: Text(
+                      GameContentLocalization.ui(context, "8 (Standard)"),
+                    ),
+                  ),
                 ],
                 selected: {_symbolsPerCard},
                 onSelectionChanged:
                     (s) => setState(() => _symbolsPerCard = s.first),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Text(
-                "Score cible : $_targetScore cartes",
+                GameContentLocalization.format(
+                  context,
+                  "Score cible : {0} cartes",
+                  [_targetScore],
+                ),
                 style: const TextStyle(color: Colors.white70),
               ),
               Slider(
@@ -61650,11 +63024,11 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
                 label: "$_targetScore",
                 onChanged: (v) => setState(() => _targetScore = v.toInt()),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               ElevatedButton.icon(
                 icon: const Icon(Icons.play_arrow_rounded, size: 24),
-                label: const Text(
-                  "COMMENCER",
+                label: Text(
+                  GameContentLocalization.ui(context, "COMMENCER"),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -62033,9 +63407,9 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
               size: 72,
               color: Colors.amberAccent,
             ),
-            const SizedBox(height: 12),
-            const Text(
-              "PARTIE TERMINÉE !",
+            SizedBox(height: 12),
+            Text(
+              GameContentLocalization.ui(context, "PARTIE TERMINÉE !"),
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w900,
@@ -62044,7 +63418,9 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              "Victoire de $_gameWinner !",
+              GameContentLocalization.format(context, "Victoire de {0} !", [
+                _gameWinner,
+              ]),
               style: const TextStyle(
                 fontSize: 18,
                 color: Colors.amberAccent,
@@ -62067,7 +63443,9 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
                       ),
                     ),
                     Text(
-                      "${e.value} cartes",
+                      GameContentLocalization.format(context, "{0} cartes", [
+                        e.value,
+                      ]),
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -63217,13 +64595,18 @@ class LoungeListScreen extends StatelessWidget {
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Code de salon introuvable."),
+                      SnackBar(
+                        content: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Code de salon introuvable.",
+                          ),
+                        ),
                       ),
                     );
                   }
                 },
-                child: const Text("Rejoindre"),
+                child: Text(GameContentLocalization.ui(context, "Rejoindre")),
               ),
             ],
           ),
@@ -63239,9 +64622,12 @@ class LoungeListScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
-                    "Rejoins un salon public ou entre un code privé :",
+                    GameContentLocalization.ui(
+                      context,
+                      "Rejoins un salon public ou entre un code privé :",
+                    ),
                     style: TextStyle(color: Colors.white70),
                   ),
                 ),
@@ -63283,9 +64669,12 @@ class LoungeListScreen extends StatelessWidget {
                 });
 
                 if (lounges.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      "Aucun salon public disponible pour le moment.\nCréez-en un avec le bouton ci-dessous !",
+                      GameContentLocalization.ui(
+                        context,
+                        "Aucun salon public disponible pour le moment.\nCréez-en un avec le bouton ci-dessous !",
+                      ),
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white54, height: 1.4),
                     ),
@@ -63331,7 +64720,8 @@ class LoungeListScreen extends StatelessWidget {
                         title: Row(
                           children: [
                             Text(
-                              data['name'] ?? 'Salon',
+                              data['name'] ??
+                                  GameContentLocalization.ui(context, 'Salon'),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
@@ -63348,8 +64738,11 @@ class LoungeListScreen extends StatelessWidget {
                                   color: Colors.amber,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: const Text(
-                                  "Mon Salon",
+                                child: Text(
+                                  GameContentLocalization.ui(
+                                    context,
+                                    "Mon Salon",
+                                  ),
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 10,
@@ -63360,7 +64753,13 @@ class LoungeListScreen extends StatelessWidget {
                             ],
                           ],
                         ),
-                        subtitle: Text("Thème : ${data['theme'] ?? 'Général'}"),
+                        subtitle: Text(
+                          GameContentLocalization.format(
+                            context,
+                            "Thème : {0}",
+                            [data['theme'] ?? 'Général'],
+                          ),
+                        ),
                         trailing: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -63554,7 +64953,10 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                         GameContentLocalization.ui(context, "Salon Privé"),
                       ),
                       subtitle: Text(
-                        "N'apparaîtra pas dans la liste publique.",
+                        GameContentLocalization.ui(
+                          context,
+                          "N'apparaîtra pas dans la liste publique.",
+                        ),
                       ),
                       value: _isPrivate,
                       onChanged: (v) => setState(() => _isPrivate = v),
@@ -63654,7 +65056,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "Lancer un jeu pour le salon",
+                    GameContentLocalization.ui(
+                      context,
+                      "Lancer un jeu pour le salon",
+                    ),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
@@ -63888,9 +65293,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
             }
             if (isHostOfPendingGame) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
+                SnackBar(
                   content: Text(
-                    "Veuillez commencer ou annuler la partie avant de quitter le salon.",
+                    GameContentLocalization.ui(
+                      context,
+                      "Veuillez commencer ou annuler la partie avant de quitter le salon.",
+                    ),
                   ),
                 ),
               );
@@ -63898,7 +65306,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
           },
           child: Scaffold(
             appBar: AppBar(
-              title: const Text("Salon"),
+              title: Text(GameContentLocalization.ui(context, "Salon")),
               actions: [
                 if (isHost)
                   IconButton(
@@ -63918,8 +65326,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                   "Fermer le salon ?",
                                 ),
                               ),
-                              content: const Text(
-                                "Le salon sera définitivement supprimé pour tous les participants.",
+                              content: Text(
+                                GameContentLocalization.ui(
+                                  context,
+                                  "Le salon sera définitivement supprimé pour tous les participants.",
+                                ),
                               ),
                               actions: [
                                 TextButton(
@@ -63962,7 +65373,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        data['name'] ?? 'Salon',
+                        data['name'] ??
+                            GameContentLocalization.ui(context, 'Salon'),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -64079,7 +65491,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           icon: Icon(Icons.videocam),
                           label: Text(
                             streamers.isEmpty
-                                ? "Lancer un Stream"
+                                ? GameContentLocalization.ui(
+                                  context,
+                                  "Lancer un Stream",
+                                )
                                 : "Rejoindre le Stream (${streamers.length})",
                           ),
                           style: ElevatedButton.styleFrom(
@@ -64178,7 +65593,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               child: Column(
                                 children: [
                                   Text(
-                                    "${msg['senderName']} a créé une partie de $gameName !",
+                                    GameContentLocalization.format(
+                                      context,
+                                      "{0} a créé une partie de {1} !",
+                                      [msg['senderName'], gameName],
+                                    ),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -64193,7 +65612,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),
                                       child: Text(
-                                        "Cette partie est terminée ou annulée.",
+                                        GameContentLocalization.ui(
+                                          context,
+                                          "Cette partie est terminée ou annulée.",
+                                        ),
                                         style: TextStyle(
                                           fontStyle: FontStyle.italic,
                                           color: Colors.grey,
@@ -64215,7 +65637,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                           ),
                                         ),
                                         child: Text(
-                                          "EN PARTIE",
+                                          GameContentLocalization.ui(
+                                            context,
+                                            "EN PARTIE",
+                                          ),
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -64270,7 +65695,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                               gameCode,
                                             );
                                           },
-                                          child: Text("Commencer"),
+                                          child: Text(
+                                            GameContentLocalization.ui(
+                                              context,
+                                              "Commencer",
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -64304,8 +65734,14 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                               },
                                       child: Text(
                                         hasJoined
-                                            ? "En attente du lancement..."
-                                            : "Rejoindre",
+                                            ? GameContentLocalization.ui(
+                                              context,
+                                              "En attente du lancement...",
+                                            )
+                                            : GameContentLocalization.ui(
+                                              context,
+                                              "Rejoindre",
+                                            ),
                                       ),
                                     ),
                                 ],
@@ -64325,7 +65761,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               child: Column(
                                 children: [
                                   Text(
-                                    "Partie de ${msg['extraData']['gameName']} terminée !",
+                                    GameContentLocalization.format(
+                                      context,
+                                      "Partie de {0} terminée !",
+                                      [msg['extraData']['gameName']],
+                                    ),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -64342,10 +65782,25 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                             builder:
                                                 (_) => AlertDialog(
                                                   title: Text(
-                                                    "Statistiques - ${msg['extraData']['gameName']}",
+                                                    GameContentLocalization.format(
+                                                      context,
+                                                      "Statistiques - {0}",
+                                                      [
+                                                        msg['extraData']['gameName'],
+                                                      ],
+                                                    ),
                                                   ),
                                                   content: Text(
-                                                    "Vainqueur : ${msg['extraData']['winnerName'] ?? 'Inconnu'}\n${msg['extraData']['reason'] ?? ''}",
+                                                    GameContentLocalization.format(
+                                                      context,
+                                                      "Vainqueur : {0}\n{1}",
+                                                      [
+                                                        msg['extraData']['winnerName'] ??
+                                                            'Inconnu',
+                                                        msg['extraData']['reason'] ??
+                                                            '',
+                                                      ],
+                                                    ),
                                                   ),
                                                   actions: [
                                                     TextButton(
@@ -64353,7 +65808,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                                           () => Navigator.pop(
                                                             context,
                                                           ),
-                                                      child: Text("Fermer"),
+                                                      child: Text(
+                                                        GameContentLocalization.ui(
+                                                          context,
+                                                          "Fermer",
+                                                        ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -64372,7 +65832,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                         SizedBox(width: 10),
                                         ElevatedButton.icon(
                                           icon: Icon(Icons.refresh),
-                                          label: Text("Relancer"),
+                                          label: Text(
+                                            GameContentLocalization.ui(
+                                              context,
+                                              "Relancer",
+                                            ),
+                                          ),
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.green,
                                           ),
@@ -64428,8 +65893,15 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                     },
                                     child: Text(
                                       isMe
-                                          ? "Moi"
-                                          : (msg['senderName'] ?? 'Joueur'),
+                                          ? GameContentLocalization.ui(
+                                            context,
+                                            "Moi",
+                                          )
+                                          : (msg['senderName'] ??
+                                              GameContentLocalization.ui(
+                                                context,
+                                                'Joueur',
+                                              )),
                                       style: const TextStyle(
                                         fontSize: 10,
                                         color: Colors.white70,
@@ -65360,7 +66832,12 @@ class _SpookyTargetCardBack extends StatelessWidget {
                     isSelectedLocal
                         ? "VOLER !"
                         : (isHoveredLive
-                            ? (isMyTurn ? "CIBLÉE" : "VISÉE !")
+                            ? (isMyTurn
+                                ? GameContentLocalization.ui(context, "CIBLÉE")
+                                : GameContentLocalization.ui(
+                                  context,
+                                  "VISÉE !",
+                                ))
                             : "?"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -65451,7 +66928,7 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
               Positioned(
                 top: 4,
                 child: Text(
-                  "INFECTÉ",
+                  GameContentLocalization.ui(context, "INFECTÉ"),
                   style: TextStyle(
                     fontSize: 8,
                     fontWeight: FontWeight.w900,
@@ -65475,9 +66952,9 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
                       size: 32,
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    "ZOMBIE",
+                  SizedBox(height: 4),
+                  Text(
+                    GameContentLocalization.ui(context, "ZOMBIE"),
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w900,
@@ -65812,9 +67289,13 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
       );
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, "Erreur : {0}", [e]),
+            ),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
@@ -65832,9 +67313,13 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
       );
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, "Erreur : {0}", [e]),
+            ),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
@@ -65868,9 +67353,13 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
       _challengeInputController.clear();
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, "Erreur : {0}", [e]),
+            ),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
@@ -65888,9 +67377,13 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
       );
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, "Erreur : {0}", [e]),
+            ),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
@@ -65909,9 +67402,15 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
       );
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Erreur de vote : $e")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, "Erreur de vote : {0}", [
+                e,
+              ]),
+            ),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
@@ -65929,9 +67428,13 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
       );
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, "Erreur : {0}", [e]),
+            ),
+          ),
+        );
       }
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
@@ -65944,8 +67447,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
       builder:
           (ctx) => AlertDialog(
             title: Text(GameUiLocalization.tr(context, "Terminer la manche ?")),
-            content: const Text(
-              "Voulez-vous clôturer la manche immédiatement ? Le joueur avec le plus d'XP deviendra l'Admin.",
+            content: Text(
+              GameContentLocalization.ui(
+                context,
+                "Voulez-vous clôturer la manche immédiatement ? Le joueur avec le plus d'XP deviendra l'Admin.",
+              ),
             ),
             actions: [
               TextButton(
@@ -65955,7 +67461,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text("Terminer"),
+                child: Text(GameContentLocalization.ui(context, "Terminer")),
               ),
             ],
           ),
@@ -66034,7 +67540,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          "Tour $currentRound",
+                          GameContentLocalization.format(context, "Tour {0}", [
+                            currentRound,
+                          ]),
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -66056,7 +67564,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       border: Border.all(color: Colors.white24),
                     ),
                     child: Text(
-                      "$spinsRemaining tour${spinsRemaining > 1 ? 's' : ''} restant${spinsRemaining > 1 ? 's' : ''}",
+                      GameContentLocalization.format(
+                        context,
+                        "{0} tours restants",
+                        [spinsRemaining],
+                      ),
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -66080,8 +67592,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         ),
                       ),
                       icon: const Icon(Icons.flag, size: 14),
-                      label: const Text(
-                        "Fin manche",
+                      label: Text(
+                        GameContentLocalization.ui(context, "Fin manche"),
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -66152,8 +67664,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "🎰 Qui va relever le défi ?",
+            Text(
+              GameContentLocalization.ui(
+                context,
+                "🎰 Qui va relever le défi ?",
+              ),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 22,
@@ -66161,9 +67676,12 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 6),
-            const Text(
-              "Faites tourner la roulette pour désigner le prochain joueur.",
+            SizedBox(height: 6),
+            Text(
+              GameContentLocalization.ui(
+                context,
+                "Faites tourner la roulette pour désigner le prochain joueur.",
+              ),
               style: TextStyle(color: Colors.white70, fontSize: 13),
               textAlign: TextAlign.center,
             ),
@@ -66196,8 +67714,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                     horizontal: 24,
                     vertical: 14,
                   ),
-                  child: const Text(
-                    "TOURNER LA ROULETTE",
+                  child: Text(
+                    GameContentLocalization.ui(context, "TOURNER LA ROULETTE"),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -66238,8 +67756,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
               ),
               child: Column(
                 children: [
-                  const Text(
-                    "🎯 JOUEUR SÉLECTIONNÉ",
+                  Text(
+                    GameContentLocalization.ui(
+                      context,
+                      "🎯 JOUEUR SÉLECTIONNÉ",
+                    ),
                     style: TextStyle(
                       color: Colors.amber,
                       fontSize: 14,
@@ -66247,7 +67768,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       letterSpacing: 1.5,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     currentPlayerName,
                     style: const TextStyle(
@@ -66256,14 +67777,17 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       fontWeight: FontWeight.w900,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   if (isCurrentPlayer) ...[
-                    const Text(
-                      "C'est à votre tour ! Choisissez votre destin :",
+                    Text(
+                      GameContentLocalization.ui(
+                        context,
+                        "C'est à votre tour ! Choisissez votre destin :",
+                      ),
                       style: TextStyle(color: Colors.white70, fontSize: 14),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 18),
+                    SizedBox(height: 18),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF4081),
@@ -66278,8 +67802,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       ),
                       onPressed: _isSubmitting ? null : _handleDrawChallenge,
                       icon: const Icon(Icons.casino, color: Colors.white),
-                      label: const Text(
-                        "🎲 Tirer ACTION ou VÉRITÉ",
+                      label: Text(
+                        GameContentLocalization.ui(
+                          context,
+                          "🎲 Tirer ACTION ou VÉRITÉ",
+                        ),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -66301,7 +67828,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         ),
                         const SizedBox(width: 12),
                         Text(
-                          "En attente du tirage de $currentPlayerName...",
+                          GameContentLocalization.format(
+                            context,
+                            "En attente du tirage de {0}...",
+                            [currentPlayerName],
+                          ),
                           style: const TextStyle(
                             color: Colors.white70,
                             fontStyle: FontStyle.italic,
@@ -66332,7 +67863,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 border: Border.all(color: typeColor, width: 2),
               ),
               child: Text(
-                "🔥 $currentPlayerName a tiré : $typeLabel !",
+                GameContentLocalization.format(
+                  context,
+                  "🔥 {0} a tiré : {1} !",
+                  [currentPlayerName, typeLabel],
+                ),
                 style: TextStyle(
                   color: typeColor,
                   fontWeight: FontWeight.bold,
@@ -66390,7 +67925,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
@@ -66409,8 +67944,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                           Icons.send_rounded,
                           color: Colors.white,
                         ),
-                        label: const Text(
-                          "Envoyer le défi 🚀",
+                        label: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Envoyer le défi 🚀",
+                          ),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -66439,7 +67977,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                     ),
                     const SizedBox(height: 14),
                     Text(
-                      "$authorName est en train d'écrire le défi...",
+                      GameContentLocalization.format(
+                        context,
+                        "{0} est en train d'écrire le défi...",
+                        [authorName],
+                      ),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -66496,7 +68038,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      isAction ? "🔥 ACTION" : "🔮 VÉRITÉ",
+                      isAction
+                          ? GameContentLocalization.ui(context, "🔥 ACTION")
+                          : GameContentLocalization.ui(context, "🔮 VÉRITÉ"),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -66507,14 +68051,16 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    "Défi pour $currentPlayerName",
+                    GameContentLocalization.format(context, "Défi pour {0}", [
+                      currentPlayerName,
+                    ]),
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Text(
                     "« ${currentChallenge ?? '...'} »",
                     style: const TextStyle(
@@ -66528,13 +68074,16 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 ],
               ),
             ),
-            const SizedBox(height: 28),
+            SizedBox(height: 28),
             if (isCurrentPlayer) ...[
-              const Text(
-                "Réalisez votre défi en vidéo ou au micro !",
+              Text(
+                GameContentLocalization.ui(
+                  context,
+                  "Réalisez votre défi en vidéo ou au micro !",
+                ),
                 style: TextStyle(color: Colors.white70, fontSize: 13),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF00E676),
@@ -66553,8 +68102,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                   color: Colors.black,
                   size: 24,
                 ),
-                label: const Text(
-                  "J'ai réalisé mon défi ! ✅",
+                label: Text(
+                  GameContentLocalization.ui(
+                    context,
+                    "J'ai réalisé mon défi ! ✅",
+                  ),
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,
@@ -66582,7 +68134,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      "Regardez $currentPlayerName réaliser le défi...",
+                      GameContentLocalization.format(
+                        context,
+                        "Regardez {0} réaliser le défi...",
+                        [currentPlayerName],
+                      ),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 13,
@@ -66607,8 +68163,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.amber),
               ),
-              child: const Text(
-                "🗳️ VOTE DE VALIDATION",
+              child: Text(
+                GameContentLocalization.ui(context, "🗳️ VOTE DE VALIDATION"),
                 style: TextStyle(
                   color: Colors.amber,
                   fontWeight: FontWeight.bold,
@@ -66619,7 +68175,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
             ),
             const SizedBox(height: 16),
             Text(
-              "Est-ce que $currentPlayerName a relevé le défi ?",
+              GameContentLocalization.format(
+                context,
+                "Est-ce que {0} a relevé le défi ?",
+                [currentPlayerName],
+              ),
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -66645,11 +68205,15 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
-                "${votes.length} / $votersCount votes reçus",
+                GameContentLocalization.format(
+                  context,
+                  "{0} / {1} votes reçus",
+                  [votes.length, votersCount],
+                ),
                 style: const TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             if (isCurrentPlayer) ...[
               Container(
                 padding: const EdgeInsets.all(20),
@@ -66657,12 +68221,15 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                   color: Colors.white.withOpacity(0.06),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     Icon(Icons.hourglass_top, color: Colors.amber, size: 36),
                     SizedBox(height: 10),
                     Text(
-                      "Vos amis votent pour évaluer votre prestation...",
+                      GameContentLocalization.ui(
+                        context,
+                        "Vos amis votent pour évaluer votre prestation...",
+                      ),
                       style: TextStyle(color: Colors.white70, fontSize: 13),
                       textAlign: TextAlign.center,
                     ),
@@ -66689,9 +68256,12 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       color: Colors.greenAccent,
                       size: 20,
                     ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      "Votre vote a bien été enregistré !",
+                    SizedBox(width: 8),
+                    Text(
+                      GameContentLocalization.ui(
+                        context,
+                        "Votre vote a bien été enregistré !",
+                      ),
                       style: TextStyle(
                         color: Colors.greenAccent,
                         fontWeight: FontWeight.bold,
@@ -66717,8 +68287,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       ),
                       onPressed: _isSubmitting ? null : () => _handleVote(true),
                       icon: const Icon(Icons.thumb_up, color: Colors.white),
-                      label: const Text(
-                        "OUI, Validé ! 👍",
+                      label: Text(
+                        GameContentLocalization.ui(context, "OUI, Validé ! 👍"),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -66727,7 +68297,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       ),
                     ),
                   ),
-                  const SizedBox(width: 14),
+                  SizedBox(width: 14),
                   Expanded(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
@@ -66741,8 +68311,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       onPressed:
                           _isSubmitting ? null : () => _handleVote(false),
                       icon: const Icon(Icons.thumb_down, color: Colors.white),
-                      label: const Text(
-                        "NON, Raté ! 👎",
+                      label: Text(
+                        GameContentLocalization.ui(context, "NON, Raté ! 👎"),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -66799,7 +68369,12 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                     ),
                   ),
                   Text(
-                    isSuccess ? "DÉFI VALIDÉ !" : "DÉFI NON VALIDÉ",
+                    isSuccess
+                        ? GameContentLocalization.ui(context, "DÉFI VALIDÉ !")
+                        : GameContentLocalization.ui(
+                          context,
+                          "DÉFI NON VALIDÉ",
+                        ),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -66823,7 +68398,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         const Icon(Icons.star, color: Colors.amber, size: 18),
                         const SizedBox(width: 4),
                         Text(
-                          "+$earnedXp XP pour $currentPlayerName",
+                          GameContentLocalization.format(
+                            context,
+                            "+{0} XP pour {1}",
+                            [earnedXp, currentPlayerName],
+                          ),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -66836,7 +68415,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 ],
               ),
             ),
-            const SizedBox(height: 28),
+            SizedBox(height: 28),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -66852,8 +68431,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
               ),
               onPressed: _isSubmitting ? null : _handleNextTurn,
               icon: const Icon(Icons.arrow_forward_rounded, size: 22),
-              label: const Text(
-                "Tour Suivant ➡️",
+              label: Text(
+                GameContentLocalization.ui(context, "Tour Suivant ➡️"),
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
@@ -67308,7 +68887,12 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    amIWinner ? "VICTOIRE !" : "FIN DE LA MANCHE",
+                    amIWinner
+                        ? GameContentLocalization.ui(context, "VICTOIRE !")
+                        : GameContentLocalization.ui(
+                          context,
+                          "FIN DE LA MANCHE",
+                        ),
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
@@ -67318,7 +68902,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "$displayWinner a gagné cette manche !",
+                    GameContentLocalization.format(
+                      context,
+                      "{0} a gagné cette manche !",
+                      [displayWinner],
+                    ),
                     style: const TextStyle(
                       fontSize: 15,
                       color: Colors.white70,
@@ -67357,7 +68945,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              "$readyCount / $totalPlayers prêts",
+                              GameContentLocalization.format(
+                                context,
+                                "{0} / {1} prêts",
+                                [readyCount, totalPlayers],
+                              ),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -67390,7 +68982,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                "$_secondsLeft s",
+                                GameContentLocalization.format(
+                                  context,
+                                  "{0} s",
+                                  [_secondsLeft],
+                                ),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   color:
@@ -67407,14 +69003,17 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 14),
+                  SizedBox(height: 14),
                   const Divider(color: Colors.white12, thickness: 1),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
 
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "SCORES CONSERVÉS DE LA SESSION :",
+                      GameContentLocalization.ui(
+                        context,
+                        "SCORES CONSERVÉS DE LA SESSION :",
+                      ),
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
@@ -67514,7 +69113,12 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              playerReady ? "✓ Prêt" : "...",
+                              playerReady
+                                  ? GameContentLocalization.ui(
+                                    context,
+                                    "✓ Prêt",
+                                  )
+                                  : "...",
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
@@ -67555,7 +69159,9 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                 Icons.exit_to_app_rounded,
                                 size: 16,
                               ),
-                              label: const Text("Quitter"),
+                              label: Text(
+                                GameContentLocalization.ui(context, "Quitter"),
+                              ),
                               style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.redAccent,
                                 side: const BorderSide(color: Colors.redAccent),
@@ -67619,7 +69225,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
 
                       // BOUTON SPÉCIAL ADMIN : FORCER LE LANCEMENT MANUEL SI BESOIN
                       if (isCurrentHost && totalPlayers >= 2) ...[
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         SizedBox(
                           width: double.infinity,
                           child: TextButton.icon(
@@ -67628,8 +69234,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               size: 16,
                               color: Colors.amberAccent,
                             ),
-                            label: const Text(
-                              "Admin : Lancer maintenant avec les joueurs prêts",
+                            label: Text(
+                              GameContentLocalization.ui(
+                                context,
+                                "Admin : Lancer maintenant avec les joueurs prêts",
+                              ),
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontSize: 11,
