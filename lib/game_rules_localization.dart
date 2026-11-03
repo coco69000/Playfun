@@ -1,3 +1,4 @@
+import 'game_content_localization.dart';
 import 'package:flutter/material.dart';
 
 /// Centralized localization service for all game rules and Loup-Garou roles.
@@ -11,11 +12,15 @@ class GameRulesLocalization {
       'understoodButton': 'Compris !',
     },
     'en': {
+      'Codenames': 'Codenames',
+      "Time's Up": "Time's Up",
       'rulesTitle': 'Rules: {game}',
       'noRulesFound': 'No rules found for this game.',
       'understoodButton': 'Got it!',
     },
     'es': {
+      'Codenames': 'Codenames',
+      "Time's Up": "Time's Up",
       'rulesTitle': 'Reglas: {game}',
       'noRulesFound': 'No se encontraron reglas para este juego.',
       'understoodButton': '¡Entendido!',
@@ -119,6 +124,8 @@ class GameRulesLocalization {
 
 static const Map<String, Map<String, String>> _gameTitles = {
     'en': {
+      'Codenames': 'Codenames',
+      "Time's Up": "Time's Up",
       'Action ou Vérité': 'Truth or Dare',
       'Bataille Navale': 'Battleship',
       'Cadavre Exquis': 'Exquisite Corpse',
@@ -161,6 +168,8 @@ static const Map<String, Map<String, String>> _gameTitles = {
       'Rat Malade': 'Plague Rat',
     },
     'es': {
+      'Codenames': 'Codenames',
+      "Time's Up": "Time's Up",
       'Action ou Vérité': 'Verdad o Reto',
       'Bataille Navale': 'Batalla Naval',
       'Cadavre Exquis': 'Cadáver Exquisito',
@@ -354,7 +363,10 @@ static const Map<String, Map<String, String>> _gameTitles = {
   static String getGameTitle(BuildContext? context, String gameKey) {
     final lang = _getLocaleCode(context);
     if (lang == 'fr') return gameKey;
-    return _gameTitles[lang]?[gameKey] ?? _gameTitles['en']?[gameKey] ?? gameKey;
+    return _gameTitles[lang]?[gameKey] ??
+        GameContentLocalization.roleName(lang, gameKey) ??
+        _gameTitles['en']?[gameKey] ??
+        gameKey;
   }
 
   static String getRules(BuildContext? context, String gameKey) {
