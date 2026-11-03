@@ -4250,6 +4250,7 @@ class FirebaseService {
           transaction.update(gameRef, {
             'gameState': 'gameOver',
             'gameWinner': playerId,
+            'players.$playerId.score': FieldValue.increment(1),
             'gameEndReason':
                 '${players[playerId]['name']} a atteint $targetDist km !',
             'milleBornesPlayerData': pData,
@@ -7049,6 +7050,7 @@ class FirebaseService {
             finalScores.entries.reduce((a, b) => a.value > b.value ? a : b).key;
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = winnerId;
+        updates['players.$winnerId.score'] = FieldValue.increment(1);
         updates['yamsFinalScores'] = finalScores;
         updates['gameEndReason'] =
             "Grille de Yams complétée par tous les joueurs !";
@@ -7795,6 +7797,8 @@ class FirebaseService {
         updates.addAll({
           'gameState': 'gameOver',
           'gameWinner': gameWinnerId,
+          if (gameWinnerId != null)
+            'players.$gameWinnerId.score': FieldValue.increment(1),
           'gameEndReason':
               "${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !",
         });
@@ -12393,10 +12397,17 @@ class FirebaseService {
         String winnerName =
             tabooTeams[winnerTeam]?['name'] ??
             (winnerTeam == 'team_0' ? 'Équipe 1' : 'Équipe 2');
+        Map<String, dynamic> scoreUpdates = {};
+        if (tabooTeams[winnerTeam] is List) {
+          for (var pId in (tabooTeams[winnerTeam] as List)) {
+            scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
+          }
+        }
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': winnerTeam,
           'gameEndReason': "Fin des manches ! Victoire de $winnerName !",
+          ...scoreUpdates,
         });
         return;
       }
@@ -12882,6 +12893,8 @@ class FirebaseService {
                       totalScores.entries
                           .reduce((a, b) => a.value < b.value ? a : b)
                           .key,
+                  'players.${totalScores.entries.reduce((a, b) => a.value < b.value ? a : b).key}.score':
+                      FieldValue.increment(1),
                   'gameEndReason': "Score cible atteint !",
                 },
               });
@@ -13016,6 +13029,8 @@ class FirebaseService {
                   totalScores.entries
                       .reduce((a, b) => a.value < b.value ? a : b)
                       .key,
+              'players.${totalScores.entries.reduce((a, b) => a.value < b.value ? a : b).key}.score':
+                  FieldValue.increment(1),
               'gameEndReason': "Score cible atteint !",
             },
           });
@@ -13867,7 +13882,9 @@ class FirebaseService {
             applySpeedBonus: false,
           );
           updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = playerId;
           updates['dominoesGameWinner'] = playerId;
+          updates['players.$playerId.score'] = FieldValue.increment(1);
           updates['gameEndReason'] =
               "${players[playerId]['name']} atteint $targetScore points !";
         }
@@ -13882,7 +13899,9 @@ class FirebaseService {
             applySpeedBonus: false,
           );
           updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = playerId;
           updates['dominoesGameWinner'] = playerId;
+          updates['players.$playerId.score'] = FieldValue.increment(1);
           updates['gameEndReason'] =
               "${players[playerId]['name']} atteint $targetScore points !";
         } else {
@@ -14034,7 +14053,9 @@ class FirebaseService {
 
           if ((scores[winnerId] ?? 0) >= targetScore) {
             updates['gameState'] = 'gameOver';
+            updates['gameWinner'] = winnerId;
             updates['dominoesGameWinner'] = winnerId;
+            updates['players.$winnerId.score'] = FieldValue.increment(1);
             updates['gameEndReason'] =
                 "${players[winnerId]['name']} atteint $targetScore points !";
           }
@@ -14604,6 +14625,8 @@ class FirebaseService {
           transaction.update(gameRef, {
             'gameState': 'gameOver',
             'gameWinner': winnerTeam,
+            for (String wId in winningPlayers)
+              'players.$wId.score': FieldValue.increment(1),
             'gameEndReason': 'Chaque joueur a deviné une fois !',
           });
           return;
@@ -14653,6 +14676,8 @@ class FirebaseService {
           transaction.update(gameRef, {
             'gameState': 'gameOver',
             'gameWinner': bestPlayer,
+            if (bestPlayer.isNotEmpty)
+              'players.$bestPlayer.score': FieldValue.increment(1),
             'gameEndReason': 'Tout le monde est passé !',
           });
           return;
@@ -14953,6 +14978,8 @@ class FirebaseService {
         transaction.update(gameRef, {
           'gameState': 'gameOver',
           'gameWinner': winnerId,
+          if (winnerId.isNotEmpty)
+            'players.$winnerId.score': FieldValue.increment(1),
           'gameEndReason':
               "${players[winnerId]?['name'] ?? 'Joueur'} a le plus d'XP ($maxXp XP) et devient Admin !",
         });
@@ -17330,6 +17357,10 @@ class FirebaseService {
         final winnerTeam = (activeTeam == 'red') ? 'blue' : 'red';
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = winnerTeam;
+        final winMembers = List<dynamic>.from(gameData[winnerTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+        for (var pId in winMembers) {
+          updates['players.$pId.score'] = FieldValue.increment(1);
+        }
         updates['gameEndReason'] =
             "L'équipe ${activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin !";
       } else if (wordColor == activeTeam) {
@@ -17352,6 +17383,10 @@ class FirebaseService {
         if (redScore <= 0 || blueScore <= 0) {
           updates['gameState'] = 'gameOver';
           updates['gameWinner'] = activeTeam;
+          final winMembers = List<dynamic>.from(gameData[activeTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+          for (var pId in winMembers) {
+            updates['players.$pId.score'] = FieldValue.increment(1);
+          }
           updates['gameEndReason'] = "Tous les mots ont été découverts !";
         } else if (guessesLeft <= 0) {
           updates['activeTeam'] = (activeTeam == 'red') ? 'blue' : 'red';
@@ -17371,8 +17406,13 @@ class FirebaseService {
 
         final nextTeam = (activeTeam == 'red') ? 'blue' : 'red';
         if (redScore <= 0 || blueScore <= 0) {
+          final winTeam = redScore <= 0 ? 'red' : 'blue';
           updates['gameState'] = 'gameOver';
-          updates['gameWinner'] = redScore <= 0 ? 'red' : 'blue';
+          updates['gameWinner'] = winTeam;
+          final winMembers = List<dynamic>.from(gameData[winTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+          for (var pId in winMembers) {
+            updates['players.$pId.score'] = FieldValue.increment(1);
+          }
           updates['gameEndReason'] = "Victoire par découverte du dernier mot !";
         } else {
           updates['activeTeam'] = nextTeam;
@@ -17520,6 +17560,14 @@ class FirebaseService {
       } else {
         final int scoreA = (teamScores['teamA'] as num?)?.toInt() ?? 0;
         final int scoreB = (teamScores['teamB'] as num?)?.toInt() ?? 0;
+        final winnerTeamKey = scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
+        Map<String, dynamic> scoreUpdates = {};
+        if (winnerTeamKey != null) {
+          final winningMembers = List<dynamic>.from(teams[winnerTeamKey] ?? []);
+          for (var pId in winningMembers) {
+            scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
+          }
+        }
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner':
@@ -17527,6 +17575,7 @@ class FirebaseService {
                   ? 'teamA'
                   : (scoreB > scoreA ? 'teamB' : 'equality'),
           'gameEndReason': "Toutes les manches de Time's Up sont terminées !",
+          ...scoreUpdates,
         });
       }
       return;
@@ -17669,7 +17718,7 @@ class FirebaseService {
           updates['gameEndReason'] =
               "Toutes les manches de Time's Up sont terminées !";
 
-          // Récompenser les membres de l'équipe gagnante (+40 XP)
+          // Récompenser les membres de l'équipe gagnante (+40 XP + 1 point)
           final winningTeamKey =
               scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
           if (winningTeamKey != null) {
@@ -17685,6 +17734,7 @@ class FirebaseService {
                 40,
                 applySpeedBonus: false,
               );
+              updates['players.$pId.score'] = FieldValue.increment(1);
             }
           }
         }
@@ -17892,6 +17942,37 @@ class FirebaseService {
       'petitBacRoundEnded': true,
       'turnStartTime': FieldValue.serverTimestamp(),
       ...xpUpdates,
+    });
+  }
+
+  Future<void> finishPetitBacGame(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final gameData = snap.data() as Map<String, dynamic>;
+    final totalScores = Map<String, dynamic>.from(
+      gameData['petitBacTotalScores'] ?? {},
+    );
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+    String? winnerId;
+    int maxScore = -1;
+    totalScores.forEach((pId, sc) {
+      final s = (sc as num?)?.toInt() ?? 0;
+      if (s > maxScore) {
+        maxScore = s;
+        winnerId = pId;
+      }
+    });
+
+    await gameRef.update({
+      'gameState': 'gameOver',
+      'gameWinner': winnerId,
+      'gameEndReason':
+          winnerId != null
+              ? "${players[winnerId]?['name'] ?? 'Un joueur'} gagne avec $maxScore points !"
+              : "Fin de la partie !",
+      if (winnerId != null) 'players.$winnerId.score': FieldValue.increment(1),
     });
   }
 
@@ -18226,11 +18307,16 @@ class FirebaseService {
       }
     }
 
+    final String? presidentWinnerId =
+        finalRanking.isNotEmpty ? finalRanking.first : null;
     updates.addAll({
       'gameState': 'round_over',
       'roundState': 'results',
       'playerRanks': ranks,
       'finishedPlayers': finalRanking,
+      if (presidentWinnerId != null) 'gameWinner': presidentWinnerId,
+      if (presidentWinnerId != null)
+        'players.$presidentWinnerId.score': FieldValue.increment(1),
       'isRevolutionActive': false,
       'penaltyTDC': FieldValue.delete(),
     });
@@ -20262,6 +20348,7 @@ class FirebaseService {
         );
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = winnerId;
+        updates['players.$winnerId.score'] = FieldValue.increment(1);
         updates['gameEndReason'] =
             '${players[winnerId]?['name'] ?? 'Un joueur'} est le dernier survivant et remporte Skull !';
       } else {
@@ -21809,6 +21896,7 @@ class FirebaseService {
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': winner,
+          'players.$winner.score': FieldValue.increment(1),
           'gameEndReason':
               "$winnerName a remporté tous les jetons de la table !",
         });
@@ -22558,6 +22646,16 @@ class FirebaseService {
                 (teamScores['teamA'] >= targetScore) ||
                 (teamScores['teamB'] >= targetScore);
 
+            Map<String, dynamic> scoreUpdates = {};
+            if (gameOver) {
+              String winnerTeam = (teamScores['teamA'] ?? 0) > (teamScores['teamB'] ?? 0) ? 'teamA' : 'teamB';
+              playerData.forEach((pId, pInfo) {
+                if (pInfo is Map && pInfo['team'] == winnerTeam) {
+                  scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
+                }
+              });
+            }
+
             transaction.update(gameRef, {
               'belotePlayerData': playerData,
               'beloteTeamScores': teamScores,
@@ -22571,6 +22669,7 @@ class FirebaseService {
                           : 'teamB')
                       : null,
               'turnStartTime': FieldValue.serverTimestamp(),
+              ...scoreUpdates,
             });
           } else {
             int winnerIndex = playerOrder.indexOf(winningPlayer);
@@ -44851,34 +44950,59 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
           SizedBox(height: 10),
           if (isHost)
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-              ),
-              onPressed:
-                  _isActionPending
-                      ? null
-                      : () {
-                        setState(() => _isActionPending = true);
-                        _firebaseService
-                            .nextPetitBacRound(widget.gameCode)
-                            .whenComplete(() {
-                              if (mounted)
-                                setState(() => _isActionPending = false);
-                            });
-                      },
-              child:
-                  _isActionPending
-                      ? SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                      : Text(GameUiLocalization.tr(context, "Prochain Tour")),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed:
+                      _isActionPending
+                          ? null
+                          : () {
+                            setState(() => _isActionPending = true);
+                            _firebaseService
+                                .nextPetitBacRound(widget.gameCode)
+                                .whenComplete(() {
+                                  if (mounted)
+                                    setState(() => _isActionPending = false);
+                                });
+                          },
+                  child:
+                      _isActionPending
+                          ? SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
+                          : Text(GameUiLocalization.tr(context, "Prochain Tour")),
+                ),
+                const SizedBox(width: 12),
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.redAccent,
+                    side: const BorderSide(color: Colors.redAccent),
+                  ),
+                  onPressed:
+                      _isActionPending
+                          ? null
+                          : () {
+                            setState(() => _isActionPending = true);
+                            _firebaseService
+                                .finishPetitBacGame(widget.gameCode)
+                                .whenComplete(() {
+                                  if (mounted)
+                                    setState(() => _isActionPending = false);
+                                });
+                          },
+                  child: Text(GameUiLocalization.tr(context, "Terminer la partie")),
+                ),
+              ],
             ),
         ],
       );

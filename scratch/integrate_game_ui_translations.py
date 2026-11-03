@@ -3,633 +3,622 @@ import re
 with open('lib/amis.dart', 'r', encoding='utf-8') as f:
     text = f.read()
 
-# =========================================================================
-# 1. LOCAL GAMES BUG FIXES
-# =========================================================================
+# 1. Mille Bornes:
+mb_target = """          transaction.update(gameRef, {
+            'gameState': 'gameOver',
+            'gameWinner': playerId,
+            'gameEndReason':
+                '${players[playerId]['name']} a atteint $targetDist km !',
+            'milleBornesPlayerData': pData,
+            'milleBornesDeck': deck,
+          });"""
+mb_replace = """          transaction.update(gameRef, {
+            'gameState': 'gameOver',
+            'gameWinner': playerId,
+            'players.$playerId.score': FieldValue.increment(1),
+            'gameEndReason':
+                '${players[playerId]['name']} a atteint $targetDist km !',
+            'milleBornesPlayerData': pData,
+            'milleBornesDeck': deck,
+          });"""
+assert text.count(mb_target) == 1, f"Mille Bornes target count {text.count(mb_target)}"
+text = text.replace(mb_target, mb_replace)
 
-# Fix 1.1: minPlayersPerTeam for 2-3 players in local team selection dialog
-old_teams_dlg = """    if (isTeamGame) {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return TeamSelectionDialog(
-            allPlayers: _players,
-            gameName: gameName,
-            onTeamsConfirmed: (teamA, teamB) {"""
+# 2. Belote:
+belote_target = """            int targetScore = gameData['beloteTargetScore'] ?? 500;
+            bool gameOver =
+                (teamScores['teamA'] >= targetScore) ||
+                (teamScores['teamB'] >= targetScore);
 
-new_teams_dlg = """    if (isTeamGame) {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return TeamSelectionDialog(
-            allPlayers: _players,
-            gameName: gameName,
-            minPlayersPerTeam: _players.length >= 4 ? 2 : 1,
-            onTeamsConfirmed: (teamA, teamB) {"""
+            transaction.update(gameRef, {
+              'belotePlayerData': playerData,
+              'beloteTeamScores': teamScores,
+              'beloteCurrentTrick': {},
+              'roundState': gameOver ? 'gameOver' : 'round_over',
+              'gameState': gameOver ? 'gameOver' : 'playing',
+              'gameWinner':
+                  gameOver
+                      ? (teamScores['teamA'] > teamScores['teamB']
+                          ? 'teamA'
+                          : 'teamB')
+                      : null,
+              'turnStartTime': FieldValue.serverTimestamp(),
+            });"""
+belote_replace = """            int targetScore = gameData['beloteTargetScore'] ?? 500;
+            bool gameOver =
+                (teamScores['teamA'] >= targetScore) ||
+                (teamScores['teamB'] >= targetScore);
 
-assert text.count(old_teams_dlg) == 1, f"old_teams_dlg count {text.count(old_teams_dlg)}"
-text = text.replace(old_teams_dlg, new_teams_dlg)
+            Map<String, dynamic> scoreUpdates = {};
+            if (gameOver) {
+              String winnerTeam = (teamScores['teamA'] ?? 0) > (teamScores['teamB'] ?? 0) ? 'teamA' : 'teamB';
+              playerData.forEach((pId, pInfo) {
+                if (pInfo is Map && pInfo['team'] == winnerTeam) {
+                  scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
+                }
+              });
+            }
 
-# Fix 1.2: Codenames local game - preserve selected teams instead of overwriting them with random shuffle
-old_cn_teams = """    List<String> shuffledPlayers = List.from(widget.players)..shuffle();
-    int mid = shuffledPlayers.length ~/ 2;
-    _redTeam = shuffledPlayers.sublist(0, mid);
-    _blueTeam = shuffledPlayers.sublist(mid);"""
+            transaction.update(gameRef, {
+              'belotePlayerData': playerData,
+              'beloteTeamScores': teamScores,
+              'beloteCurrentTrick': {},
+              'roundState': gameOver ? 'gameOver' : 'round_over',
+              'gameState': gameOver ? 'gameOver' : 'playing',
+              'gameWinner':
+                  gameOver
+                      ? (teamScores['teamA'] > teamScores['teamB']
+                          ? 'teamA'
+                          : 'teamB')
+                      : null,
+              'turnStartTime': FieldValue.serverTimestamp(),
+              ...scoreUpdates,
+            });"""
+assert text.count(belote_target) == 1, f"Belote target count {text.count(belote_target)}"
+text = text.replace(belote_target, belote_replace)
 
-new_cn_teams = """    if (widget.redTeam != null &&
-        widget.blueTeam != null &&
-        widget.redTeam!.isNotEmpty &&
-        widget.blueTeam!.isNotEmpty) {
-      _redTeam = List.from(widget.redTeam!);
-      _blueTeam = List.from(widget.blueTeam!);
-    } else {
-      List<String> shuffledPlayers = List.from(widget.players)..shuffle();
-      int mid = shuffledPlayers.length ~/ 2;
-      _redTeam = shuffledPlayers.sublist(0, mid);
-      _blueTeam = shuffledPlayers.sublist(mid);
-    }"""
+# 3. Rami:
+rami_target1 = """                if (gameOver) ...{
+                  'gameState': 'gameOver',
+                  'gameWinner':
+                      totalScores.entries
+                          .reduce((a, b) => a.value < b.value ? a : b)
+                          .key,
+                  'gameEndReason': "Score cible atteint !",
+                },"""
+rami_replace1 = """                if (gameOver) ...{
+                  'gameState': 'gameOver',
+                  'gameWinner':
+                      totalScores.entries
+                          .reduce((a, b) => a.value < b.value ? a : b)
+                          .key,
+                  'players.${totalScores.entries.reduce((a, b) => a.value < b.value ? a : b).key}.score':
+                      FieldValue.increment(1),
+                  'gameEndReason': "Score cible atteint !",
+                },"""
+assert text.count(rami_target1) == 1, f"Rami target 1 count {text.count(rami_target1)}"
+text = text.replace(rami_target1, rami_replace1)
 
-assert text.count(old_cn_teams) == 1, f"old_cn_teams count {text.count(old_cn_teams)}"
-text = text.replace(old_cn_teams, new_cn_teams)
+rami_target2 = """            if (gameOver) ...{
+              'gameState': 'gameOver',
+              'gameWinner':
+                  totalScores.entries
+                      .reduce((a, b) => a.value < b.value ? a : b)
+                      .key,
+              'gameEndReason': "Score cible atteint !",
+            },"""
+rami_replace2 = """            if (gameOver) ...{
+              'gameState': 'gameOver',
+              'gameWinner':
+                  totalScores.entries
+                      .reduce((a, b) => a.value < b.value ? a : b)
+                      .key,
+              'players.${totalScores.entries.reduce((a, b) => a.value < b.value ? a : b).key}.score':
+                  FieldValue.increment(1),
+              'gameEndReason': "Score cible atteint !",
+            },"""
+assert text.count(rami_target2) == 1, f"Rami target 2 count {text.count(rami_target2)}"
+text = text.replace(rami_target2, rami_replace2)
 
-# Fix 1.3: Time's Up local game - support 2+ players instead of blocking < 4
-old_tu_min = """    if (widget.players.length < 4) {
-      _gameState = TimesUpLocalGameState.gameOver;
-      _teamScores['red'] = -1;
-      _teamScores['blue'] = -1;
-    } else {
-      _assignTeams();
-    }"""
+# 4. Zéro Pointé:
+zero_target = """        updates.addAll({
+          'gameState': 'gameOver',
+          'gameWinner': gameWinnerId,
+          'gameEndReason':
+              "${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !",
+        });"""
+zero_replace = """        updates.addAll({
+          'gameState': 'gameOver',
+          'gameWinner': gameWinnerId,
+          if (gameWinnerId != null)
+            'players.$gameWinnerId.score': FieldValue.increment(1),
+          'gameEndReason':
+              "${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !",
+        });"""
+assert text.count(zero_target) == 1, f"Zero Pointe target count {text.count(zero_target)}"
+text = text.replace(zero_target, zero_replace)
 
-new_tu_min = """    if (widget.players.length < 2) {
-      _gameState = TimesUpLocalGameState.gameOver;
-      _teamScores['red'] = -1;
-      _teamScores['blue'] = -1;
-    } else {
-      _assignTeams();
-    }"""
+# 5. Dominoes:
+domino_target1 = """          updates['gameState'] = 'gameOver';
+          updates['dominoesGameWinner'] = playerId;
+          updates['gameEndReason'] =
+              "${players[playerId]['name']} atteint $targetScore points !";"""
+domino_replace1 = """          updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = playerId;
+          updates['dominoesGameWinner'] = playerId;
+          updates['players.$playerId.score'] = FieldValue.increment(1);
+          updates['gameEndReason'] =
+              "${players[playerId]['name']} atteint $targetScore points !";"""
+assert text.count(domino_target1) == 2, f"Dominoes target 1 count {text.count(domino_target1)}"
+text = text.replace(domino_target1, domino_replace1)
 
-assert text.count(old_tu_min) == 1, f"old_tu_min count {text.count(old_tu_min)}"
-text = text.replace(old_tu_min, new_tu_min)
+domino_target2 = """          if ((scores[winnerId] ?? 0) >= targetScore) {
+            updates['gameState'] = 'gameOver';
+            updates['dominoesGameWinner'] = winnerId;
+            updates['gameEndReason'] =
+                "${players[winnerId]['name']} atteint $targetScore points !";
+          }"""
+domino_replace2 = """          if ((scores[winnerId] ?? 0) >= targetScore) {
+            updates['gameState'] = 'gameOver';
+            updates['gameWinner'] = winnerId;
+            updates['dominoesGameWinner'] = winnerId;
+            updates['players.$winnerId.score'] = FieldValue.increment(1);
+            updates['gameEndReason'] =
+                "${players[winnerId]['name']} atteint $targetScore points !";
+          }"""
+assert text.count(domino_target2) == 1, f"Dominoes target 2 count {text.count(domino_target2)}"
+text = text.replace(domino_target2, domino_replace2)
 
-# Fix 1.4: SynonymOrBanned local screen - dispose controllers to prevent memory leak
-old_syn_disp = """  void _startRound() {
-    final words =
-        _aiWordPool.isNotEmpty
-            ? _aiWordPool
-            : (GameWords.synonymOrBanned[_difficulty]?['words'] ??
-                GameWords.synonymOrBanned['soft']!['words']!);"""
+# 6. Président:
+pres_target = """    updates.addAll({
+      'gameState': 'round_over',
+      'roundState': 'results',
+      'playerRanks': ranks,
+      'finishedPlayers': finalRanking,
+      'isRevolutionActive': false,
+      'penaltyTDC': FieldValue.delete(),
+    });"""
+pres_replace = """    final String? presidentWinnerId =
+        finalRanking.isNotEmpty ? finalRanking.first : null;
+    updates.addAll({
+      'gameState': 'round_over',
+      'roundState': 'results',
+      'playerRanks': ranks,
+      'finishedPlayers': finalRanking,
+      if (presidentWinnerId != null) 'gameWinner': presidentWinnerId,
+      if (presidentWinnerId != null)
+        'players.$presidentWinnerId.score': FieldValue.increment(1),
+      'isRevolutionActive': false,
+      'penaltyTDC': FieldValue.delete(),
+    });"""
+assert text.count(pres_target) == 1, f"President target count {text.count(pres_target)}"
+text = text.replace(pres_target, pres_replace)
 
-new_syn_disp = """  @override
-  void dispose() {
-    _answerController.dispose();
-    _aiController.dispose();
-    super.dispose();
-  }
-
-  void _startRound() {
-    final words =
-        _aiWordPool.isNotEmpty
-            ? _aiWordPool
-            : (GameWords.synonymOrBanned[_difficulty]?['words'] ??
-                GameWords.synonymOrBanned['soft']!['words']!);"""
-
-assert text.count(old_syn_disp) == 1, f"old_syn_disp count {text.count(old_syn_disp)}"
-text = text.replace(old_syn_disp, new_syn_disp)
-
-
-# =========================================================================
-# 2. FLOATING CHAT AT BOTTOM-LEFT WITH EXPAND/REDUCE & TRANSPARENT MESSAGES
-# =========================================================================
-
-# Placement in _FriendsGameScreenState:
-old_chat_placement = """                    if (showFloatingChat)
-                      Positioned.fill(
-                        child: IgnorePointer(
-                          child: FloatingChatOverlay(gameCode: widget.gameCode),
-                        ),
-                      ),"""
-
-new_chat_placement = """                    if (showFloatingChat)
-                      Positioned(
-                        left: 10,
-                        bottom: (currentGameType == 'Pictionary') ? 64 : 12,
-                        child: FloatingChatOverlay(
-                          gameCode: widget.gameCode,
-                          playerId: playerId,
-                          playerName: players[playerId]?['name'] ?? 'Joueur',
-                          gameData: gameData,
-                        ),
-                      ),"""
-
-assert text.count(old_chat_placement) == 1, f"old_chat_placement count {text.count(old_chat_placement)}"
-text = text.replace(old_chat_placement, new_chat_placement)
-
-# Update scaffold bottomNavigationBar: keep it persistent only for Pictionary (where players type live guesses)
-old_scaffold_bot = """                  bottomNavigationBar:
-                      showFloatingChat
-                          ? Padding(
-                            padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom,
-                            ),
-                            child: _buildPersistentChatInput(
-                              widget.gameCode,
-                              playerId,
-                              players[playerId]?['name'] ?? 'Joueur',
-                              gameData,
-                            ),
-                          )
-                          : null,"""
-
-new_scaffold_bot = """                  bottomNavigationBar:
-                      (showFloatingChat && currentGameType == 'Pictionary')
-                          ? Padding(
-                            padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom,
-                            ),
-                            child: _buildPersistentChatInput(
-                              widget.gameCode,
-                              playerId,
-                              players[playerId]?['name'] ?? 'Joueur',
-                              gameData,
-                            ),
-                          )
-                          : null,"""
-
-assert text.count(old_scaffold_bot) == 1, f"old_scaffold_bot count {text.count(old_scaffold_bot)}"
-text = text.replace(old_scaffold_bot, new_scaffold_bot)
-
-# Replace FloatingChatOverlay widget definition
-old_overlay_code = """class FloatingChatOverlay extends StatefulWidget {
-  final String gameCode;
-
-  const FloatingChatOverlay({Key? key, required this.gameCode})
-    : super(key: key);
-
-  @override
-  _FloatingChatOverlayState createState() => _FloatingChatOverlayState();
-}
-
-class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
-  final FirebaseService _firebaseService = FirebaseService();
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: _firebaseService.getChatStream(widget.gameCode, 'global'),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return const SizedBox.shrink();
-
-        final messages = snapshot.data!.docs;
-        final now = DateTime.now();
-
-        // Ne garder que les messages 'global' récents (< 8 secondes ou en cours d'envoi)
-        final recentMessages =
-            messages.where((doc) {
-              final data = doc.data() as Map<String, dynamic>;
-              if (data['chatType'] != null && data['chatType'] != 'global') {
-                return false;
-              }
-              final Timestamp? time = data['timestamp'] as Timestamp?;
-              if (time == null) return true; // Message local instantané
-              return now.difference(time.toDate()).inSeconds < 8;
-            }).toList();
-
-        if (recentMessages.isEmpty) return const SizedBox.shrink();
-
-        return Container(
-          width: double.infinity,
-          height: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-          alignment: Alignment.centerRight,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children:
-                recentMessages.map((msgDoc) {
-                  final msgData = msgDoc.data() as Map<String, dynamic>;
-                  final sender = msgData['senderName'] ?? 'Joueur';
-                  final text = msgData['text'] ?? '';
-
-                  return Container(
-                    margin: const EdgeInsets.symmetric(vertical: 4),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.75),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: Colors.deepPurpleAccent.withOpacity(0.5),
-                      ),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black45,
-                          blurRadius: 8,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: RichText(
-                      text: TextSpan(
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: "$sender : ",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.cyanAccent,
-                            ),
-                          ),
-                          TextSpan(text: text),
-                        ],
-                      ),
-                    ),
-                  );
-                }).toList(),
-          ),
-        );
-      },
-    );
-  }
-}"""
-
-new_overlay_code = """class FloatingChatOverlay extends StatefulWidget {
-  final String gameCode;
-  final String playerId;
-  final String playerName;
-  final Map<String, dynamic> gameData;
-
-  const FloatingChatOverlay({
-    Key? key,
-    required this.gameCode,
-    required this.playerId,
-    required this.playerName,
-    required this.gameData,
-  }) : super(key: key);
-
-  @override
-  State<FloatingChatOverlay> createState() => _FloatingChatOverlayState();
-}
-
-class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
-  final FirebaseService _firebaseService = FirebaseService();
-  final TextEditingController _textCtrl = TextEditingController();
-  final ScrollController _scrollCtrl = ScrollController();
-  bool _isExpanded = false;
-  bool _isSending = false;
-
-  @override
-  void dispose() {
-    _textCtrl.dispose();
-    _scrollCtrl.dispose();
-    super.dispose();
-  }
-
-  void _sendMessage() {
-    final text = _textCtrl.text.trim();
-    if (text.isEmpty || _isSending) return;
-
-    setState(() => _isSending = true);
-    final isPictionaryGuessing = widget.gameData['gameType'] == 'Pictionary' &&
-        (widget.gameData['roundState'] == 'drawing' ||
-            widget.gameData['roundState'] == 'guessing_drawing') &&
-        widget.gameData['currentDrawingPlayerId'] != widget.playerId;
-
-    if (isPictionaryGuessing) {
-      _firebaseService
-          .submitPictionaryGuess(
-            widget.gameCode,
-            widget.playerId,
-            widget.playerName,
-            text,
-          )
-          .whenComplete(() {
-            if (mounted) setState(() => _isSending = false);
-          });
-    } else {
-      _firebaseService
-          .sendChatMessage(
-            widget.gameCode,
-            widget.playerId,
-            text,
-            'global',
-          )
-          .whenComplete(() {
-            if (mounted) setState(() => _isSending = false);
-          });
-    }
-    _textCtrl.clear();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    return StreamBuilder<QuerySnapshot>(
-      stream: _firebaseService.getChatStream(widget.gameCode, 'global'),
-      builder: (context, snapshot) {
-        final messages = snapshot.hasData ? snapshot.data!.docs : [];
-
-        // Messages ordonnés chronologiquement (du plus ancien au plus récent)
-        final List<Map<String, dynamic>> allMessages = messages
-            .map((doc) => doc.data() as Map<String, dynamic>)
-            .where((data) => data['chatType'] == null || data['chatType'] == 'global')
-            .toList()
-            .reversed
-            .toList();
-
-        // 3 derniers messages pour le mode réduit
-        final List<Map<String, dynamic>> lastThreeMessages = allMessages.length > 3
-            ? allMessages.sublist(allMessages.length - 3)
-            : allMessages;
-
-        if (_isExpanded) {
-          // --- FENÊTRE AGRANDIE (TRANSPARENTE & MINIMALISTE) ---
-          final chatWidth = min(screenWidth * 0.85, 300.0);
-          return Material(
-            color: Colors.transparent,
-            child: Container(
-              width: chatWidth,
-              height: 310,
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.70),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.45),
-                    blurRadius: 14,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  // En-tête avec bouton réduire
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.06),
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.chat_bubble_outline_rounded, size: 14, color: Colors.cyanAccent),
-                        const SizedBox(width: 6),
-                        const Text(
-                          "Chat en direct",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Spacer(),
-                        InkWell(
-                          onTap: () => setState(() => _isExpanded = false),
-                          borderRadius: BorderRadius.circular(8),
-                          child: const Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Icon(Icons.close_fullscreen_rounded, size: 15, color: Colors.white70),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Liste des messages complète défilable
-                  Expanded(
-                    child: allMessages.isEmpty
-                        ? const Center(
-                            child: Text(
-                              "Aucun message pour l'instant",
-                              style: TextStyle(color: Colors.white38, fontSize: 11),
-                            ),
-                          )
-                        : ListView.builder(
-                            controller: _scrollCtrl,
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                            itemCount: allMessages.length,
-                            itemBuilder: (context, index) {
-                              final msg = allMessages[index];
-                              final sender = msg['senderName'] ?? 'Joueur';
-                              final text = msg['text'] ?? '';
-                              final isMe = msg['senderId'] == widget.playerId;
-
-                              return Align(
-                                alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(vertical: 2.5),
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                    color: isMe
-                                        ? Colors.deepPurpleAccent.withValues(alpha: 0.40)
-                                        : Colors.white.withValues(alpha: 0.12),
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      color: isMe
-                                          ? Colors.deepPurpleAccent.withValues(alpha: 0.5)
-                                          : Colors.white.withValues(alpha: 0.08),
-                                    ),
-                                  ),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: const TextStyle(fontSize: 12, color: Colors.white),
-                                      children: [
-                                        TextSpan(
-                                          text: "$sender : ",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 11.5,
-                                            color: isMe ? Colors.pinkAccent : Colors.cyanAccent,
-                                          ),
-                                        ),
-                                        TextSpan(text: text),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                  ),
-                  // Saisie de message
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.04),
-                      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _textCtrl,
-                            style: const TextStyle(color: Colors.white, fontSize: 12),
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                              hintText: "Écrire un message...",
-                              hintStyle: const TextStyle(color: Colors.white38, fontSize: 11),
-                              filled: true,
-                              fillColor: Colors.black.withValues(alpha: 0.35),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide: const BorderSide(color: Colors.cyanAccent, width: 1),
-                              ),
-                            ),
-                            onSubmitted: (_) => _sendMessage(),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-                        IconButton(
-                          icon: _isSending
-                              ? const SizedBox(
-                                  width: 14,
-                                  height: 14,
-                                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.cyanAccent),
-                                )
-                              : const Icon(Icons.send_rounded, size: 16, color: Colors.cyanAccent),
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                          onPressed: _sendMessage,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+# 7. Time's Up:
+timesup_target1 = """      } else {
+        final int scoreA = (teamScores['teamA'] as num?)?.toInt() ?? 0;
+        final int scoreB = (teamScores['teamB'] as num?)?.toInt() ?? 0;
+        await gameRef.update({
+          'gameState': 'gameOver',
+          'gameWinner':
+              scoreA > scoreB
+                  ? 'teamA'
+                  : (scoreB > scoreA ? 'teamB' : 'equality'),
+          'gameEndReason': "Toutes les manches de Time's Up sont terminées !",
+        });
+      }"""
+timesup_replace1 = """      } else {
+        final int scoreA = (teamScores['teamA'] as num?)?.toInt() ?? 0;
+        final int scoreB = (teamScores['teamB'] as num?)?.toInt() ?? 0;
+        final winnerTeamKey = scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
+        Map<String, dynamic> scoreUpdates = {};
+        if (winnerTeamKey != null) {
+          final winningMembers = List<dynamic>.from(teams[winnerTeamKey] ?? []);
+          for (var pId in winningMembers) {
+            scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
+          }
         }
+        await gameRef.update({
+          'gameState': 'gameOver',
+          'gameWinner':
+              scoreA > scoreB
+                  ? 'teamA'
+                  : (scoreB > scoreA ? 'teamB' : 'equality'),
+          'gameEndReason': "Toutes les manches de Time's Up sont terminées !",
+          ...scoreUpdates,
+        });
+      }"""
+assert text.count(timesup_target1) == 1, f"Times Up target 1 count {text.count(timesup_target1)}"
+text = text.replace(timesup_target1, timesup_replace1)
 
-        // --- FENÊTRE RÉDUITE : 3 DERNIERS MESSAGES, DÉFILABLE, TRANSPARENTE ET MINIMALISTE ---
-        final chatWidth = min(screenWidth * 0.72, 245.0);
-        return Material(
-          color: Colors.transparent,
-          child: Container(
-            width: chatWidth,
-            constraints: const BoxConstraints(maxHeight: 120),
-            decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.28),
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.25),
-                  blurRadius: 8,
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Mini barre de contrôle
-                InkWell(
-                  onTap: () => setState(() => _isExpanded = true),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.chat_bubble_outline_rounded, size: 11, color: Colors.cyanAccent),
-                        const SizedBox(width: 4),
-                        const Text(
-                          "Chat",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Icon(Icons.open_in_full_rounded, size: 11, color: Colors.white60),
-                      ],
-                    ),
-                  ),
-                ),
-                // 3 derniers messages défilables et transparents
-                Flexible(
-                  child: lastThreeMessages.isEmpty
-                      ? InkWell(
-                          onTap: () => setState(() => _isExpanded = true),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                            child: Text(
-                              "Toucher pour écrire...",
-                              style: TextStyle(color: Colors.white38, fontSize: 10, fontStyle: FontStyle.italic),
-                            ),
-                          ),
-                        )
-                      : Scrollbar(
-                          thumbVisibility: false,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            itemCount: lastThreeMessages.length,
-                            itemBuilder: (context, index) {
-                              final msg = lastThreeMessages[index];
-                              final sender = msg['senderName'] ?? 'Joueur';
-                              final text = msg['text'] ?? '';
-                              final isMe = msg['senderId'] == widget.playerId;
+timesup_target2 = """          // Récompenser les membres de l'équipe gagnante (+40 XP)
+          final winningTeamKey =
+              scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
+          if (winningTeamKey != null) {
+            final winningMembers = List<String>.from(
+              teams[winningTeamKey] ?? [],
+            );
+            for (final pId in winningMembers) {
+              creditPlayerXp(
+                transaction,
+                gameRef,
+                gameData,
+                pId,
+                40,
+                applySpeedBonus: false,
+              );
+            }
+          }"""
+timesup_replace2 = """          // Récompenser les membres de l'équipe gagnante (+40 XP + 1 point)
+          final winningTeamKey =
+              scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
+          if (winningTeamKey != null) {
+            final winningMembers = List<String>.from(
+              teams[winningTeamKey] ?? [],
+            );
+            for (final pId in winningMembers) {
+              creditPlayerXp(
+                transaction,
+                gameRef,
+                gameData,
+                pId,
+                40,
+                applySpeedBonus: false,
+              );
+              updates['players.$pId.score'] = FieldValue.increment(1);
+            }
+          }"""
+assert text.count(timesup_target2) == 1, f"Times Up target 2 count {text.count(timesup_target2)}"
+text = text.replace(timesup_target2, timesup_replace2)
 
-                              return Container(
-                                margin: const EdgeInsets.symmetric(vertical: 1.5),
-                                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withValues(alpha: 0.35),
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: Colors.white.withValues(alpha: 0.05),
-                                  ),
-                                ),
-                                child: RichText(
-                                  text: TextSpan(
-                                    style: const TextStyle(fontSize: 10.5, color: Colors.white),
-                                    children: [
-                                      TextSpan(
-                                        text: "$sender : ",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                          color: isMe ? Colors.pinkAccent : Colors.cyanAccent,
-                                        ),
-                                      ),
-                                      TextSpan(text: text),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                ),
-              ],
-            ),
-          ),
+# 8. Devine Tête:
+dt_target1 = """          transaction.update(gameRef, {
+            'gameState': 'gameOver',
+            'gameWinner': winnerTeam,
+            'gameEndReason': 'Chaque joueur a deviné une fois !',
+          });"""
+dt_replace1 = """          transaction.update(gameRef, {
+            'gameState': 'gameOver',
+            'gameWinner': winnerTeam,
+            for (String wId in winningPlayers)
+              'players.$wId.score': FieldValue.increment(1),
+            'gameEndReason': 'Chaque joueur a deviné une fois !',
+          });"""
+assert text.count(dt_target1) == 1, f"Devine Tete target 1 count {text.count(dt_target1)}"
+text = text.replace(dt_target1, dt_replace1)
+
+dt_target2 = """          transaction.update(gameRef, {
+            'gameState': 'gameOver',
+            'gameWinner': bestPlayer,
+            'gameEndReason': 'Tout le monde est passé !',
+          });"""
+dt_replace2 = """          transaction.update(gameRef, {
+            'gameState': 'gameOver',
+            'gameWinner': bestPlayer,
+            if (bestPlayer.isNotEmpty)
+              'players.$bestPlayer.score': FieldValue.increment(1),
+            'gameEndReason': 'Tout le monde est passé !',
+          });"""
+assert text.count(dt_target2) == 1, f"Devine Tete target 2 count {text.count(dt_target2)}"
+text = text.replace(dt_target2, dt_replace2)
+
+# 9. Poker:
+poker_target = """        await gameRef.update({
+          'gameState': 'gameOver',
+          'gameWinner': winner,
+          'gameEndReason':
+              "$winnerName a remporté tous les jetons de la table !",
+        });"""
+poker_replace = """        await gameRef.update({
+          'gameState': 'gameOver',
+          'gameWinner': winner,
+          'players.$winner.score': FieldValue.increment(1),
+          'gameEndReason':
+              "$winnerName a remporté tous les jetons de la table !",
+        });"""
+assert text.count(poker_target) == 1, f"Poker target count {text.count(poker_target)}"
+text = text.replace(poker_target, poker_replace)
+
+# 10. Yams:
+yams_target = """        final winnerId =
+            finalScores.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+        updates['gameState'] = 'gameOver';
+        updates['gameWinner'] = winnerId;
+        updates['yamsFinalScores'] = finalScores;
+        updates['gameEndReason'] =
+            "Grille de Yams complétée par tous les joueurs !";"""
+yams_replace = """        final winnerId =
+            finalScores.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+        updates['gameState'] = 'gameOver';
+        updates['gameWinner'] = winnerId;
+        updates['players.$winnerId.score'] = FieldValue.increment(1);
+        updates['yamsFinalScores'] = finalScores;
+        updates['gameEndReason'] =
+            "Grille de Yams complétée par tous les joueurs !";"""
+assert text.count(yams_target) == 1, f"Yams target count {text.count(yams_target)}"
+text = text.replace(yams_target, yams_replace)
+
+# 11. Action ou Vérité:
+aov_target = """        transaction.update(gameRef, {
+          'gameState': 'gameOver',
+          'gameWinner': winnerId,
+          'gameEndReason':
+              "${players[winnerId]?['name'] ?? 'Joueur'} a le plus d'XP ($maxXp XP) et devient Admin !",
+        });"""
+aov_replace = """        transaction.update(gameRef, {
+          'gameState': 'gameOver',
+          'gameWinner': winnerId,
+          if (winnerId.isNotEmpty)
+            'players.$winnerId.score': FieldValue.increment(1),
+          'gameEndReason':
+              "${players[winnerId]?['name'] ?? 'Joueur'} a le plus d'XP ($maxXp XP) et devient Admin !",
+        });"""
+assert text.count(aov_target) == 1, f"AoV target count {text.count(aov_target)}"
+text = text.replace(aov_target, aov_replace)
+
+# 12. Skull (last survivor):
+skull_target = """      if (playerOrder.length <= 1) {
+        final String winnerId =
+            playerOrder.isNotEmpty ? playerOrder.first : challengerId;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          winnerId,
+          40,
+          applySpeedBonus: false,
         );
-      },
-    );
-  }
-}"""
+        updates['gameState'] = 'gameOver';
+        updates['gameWinner'] = winnerId;
+        updates['gameEndReason'] =
+            '${players[winnerId]?['name'] ?? 'Un joueur'} est le dernier survivant et remporte Skull !';
+      }"""
+skull_replace = """      if (playerOrder.length <= 1) {
+        final String winnerId =
+            playerOrder.isNotEmpty ? playerOrder.first : challengerId;
+        creditPlayerXp(
+          transaction,
+          gameRef,
+          gameData,
+          winnerId,
+          40,
+          applySpeedBonus: false,
+        );
+        updates['gameState'] = 'gameOver';
+        updates['gameWinner'] = winnerId;
+        updates['players.$winnerId.score'] = FieldValue.increment(1);
+        updates['gameEndReason'] =
+            '${players[winnerId]?['name'] ?? 'Un joueur'} est le dernier survivant et remporte Skull !';
+      }"""
+assert text.count(skull_target) == 1, f"Skull target count {text.count(skull_target)}"
+text = text.replace(skull_target, skull_replace)
 
-assert text.count(old_overlay_code) == 1, f"old_overlay_code count {text.count(old_overlay_code)}"
-text = text.replace(old_overlay_code, new_overlay_code)
+# 13. Codenames:
+code_target1 = """      if (wordColor == 'assassin') {
+        final winnerTeam = (activeTeam == 'red') ? 'blue' : 'red';
+        updates['gameState'] = 'gameOver';
+        updates['gameWinner'] = winnerTeam;
+        updates['gameEndReason'] =
+            "L'équipe ${activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin !";
+      }"""
+code_replace1 = """      if (wordColor == 'assassin') {
+        final winnerTeam = (activeTeam == 'red') ? 'blue' : 'red';
+        updates['gameState'] = 'gameOver';
+        updates['gameWinner'] = winnerTeam;
+        final winMembers = List<dynamic>.from(gameData[winnerTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+        for (var pId in winMembers) {
+          updates['players.$pId.score'] = FieldValue.increment(1);
+        }
+        updates['gameEndReason'] =
+            "L'équipe ${activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin !";
+      }"""
+assert text.count(code_target1) == 1, f"Codenames target 1 count {text.count(code_target1)}"
+text = text.replace(code_target1, code_replace1)
+
+code_target2 = """        if (redScore <= 0 || blueScore <= 0) {
+          updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = activeTeam;
+          updates['gameEndReason'] = "Tous les mots ont été découverts !";
+        }"""
+code_replace2 = """        if (redScore <= 0 || blueScore <= 0) {
+          updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = activeTeam;
+          final winMembers = List<dynamic>.from(gameData[activeTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+          for (var pId in winMembers) {
+            updates['players.$pId.score'] = FieldValue.increment(1);
+          }
+          updates['gameEndReason'] = "Tous les mots ont été découverts !";
+        }"""
+assert text.count(code_target2) == 1, f"Codenames target 2 count {text.count(code_target2)}"
+text = text.replace(code_target2, code_replace2)
+
+code_target3 = """        if (redScore <= 0 || blueScore <= 0) {
+          updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = redScore <= 0 ? 'red' : 'blue';
+          updates['gameEndReason'] = "Victoire par découverte du dernier mot !";
+        }"""
+code_replace3 = """        if (redScore <= 0 || blueScore <= 0) {
+          final winTeam = redScore <= 0 ? 'red' : 'blue';
+          updates['gameState'] = 'gameOver';
+          updates['gameWinner'] = winTeam;
+          final winMembers = List<dynamic>.from(gameData[winTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+          for (var pId in winMembers) {
+            updates['players.$pId.score'] = FieldValue.increment(1);
+          }
+          updates['gameEndReason'] = "Victoire par découverte du dernier mot !";
+        }"""
+assert text.count(code_target3) == 1, f"Codenames target 3 count {text.count(code_target3)}"
+text = text.replace(code_target3, code_replace3)
+
+# 14. Taboo:
+taboo_target = """      if (currentRoundNum > totalRounds) {
+        String winnerTeam =
+            (scores['team_0'] ?? 0) >= (scores['team_1'] ?? 0)
+                ? 'team_0'
+                : 'team_1';
+        String winnerName =
+            tabooTeams[winnerTeam]?['name'] ??
+            (winnerTeam == 'team_0' ? 'Équipe 1' : 'Équipe 2');
+        await gameRef.update({
+          'gameState': 'gameOver',
+          'gameWinner': winnerTeam,
+          'gameEndReason': "Fin des manches ! Victoire de $winnerName !",
+        });
+        return;
+      }"""
+taboo_replace = """      if (currentRoundNum > totalRounds) {
+        String winnerTeam =
+            (scores['team_0'] ?? 0) >= (scores['team_1'] ?? 0)
+                ? 'team_0'
+                : 'team_1';
+        String winnerName =
+            tabooTeams[winnerTeam]?['name'] ??
+            (winnerTeam == 'team_0' ? 'Équipe 1' : 'Équipe 2');
+        Map<String, dynamic> scoreUpdates = {};
+        if (tabooTeams[winnerTeam] is List) {
+          for (var pId in (tabooTeams[winnerTeam] as List)) {
+            scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
+          }
+        }
+        await gameRef.update({
+          'gameState': 'gameOver',
+          'gameWinner': winnerTeam,
+          'gameEndReason': "Fin des manches ! Victoire de $winnerName !",
+          ...scoreUpdates,
+        });
+        return;
+      }"""
+assert text.count(taboo_target) == 1, f"Taboo target count {text.count(taboo_target)}"
+text = text.replace(taboo_target, taboo_replace)
+
+# 15. Petit Bac: finishPetitBacGame method definition
+pb_method_target = """  Future<void> nextPetitBacRound(String gameCode) async {"""
+pb_method_replace = """  Future<void> finishPetitBacGame(String gameCode) async {
+    final gameRef = _db.collection('games').doc(gameCode);
+    final snap = await gameRef.get();
+    if (!snap.exists) return;
+    final gameData = snap.data() as Map<String, dynamic>;
+    final totalScores = Map<String, dynamic>.from(
+      gameData['petitBacTotalScores'] ?? {},
+    );
+    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+    String? winnerId;
+    int maxScore = -1;
+    totalScores.forEach((pId, sc) {
+      final s = (sc as num?)?.toInt() ?? 0;
+      if (s > maxScore) {
+        maxScore = s;
+        winnerId = pId;
+      }
+    });
+
+    await gameRef.update({
+      'gameState': 'gameOver',
+      'gameWinner': winnerId,
+      'gameEndReason':
+          winnerId != null
+              ? "${players[winnerId]?['name'] ?? 'Un joueur'} gagne avec $maxScore points !"
+              : "Fin de la partie !",
+      if (winnerId != null) 'players.$winnerId.score': FieldValue.increment(1),
+    });
+  }
+
+  Future<void> nextPetitBacRound(String gameCode) async {"""
+assert text.count(pb_method_target) == 1, f"Petit Bac method target count {text.count(pb_method_target)}"
+text = text.replace(pb_method_target, pb_method_replace)
+
+# Petit Bac UI button:
+pb_ui_target = """          if (isHost)
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              onPressed:
+                  _isActionPending
+                      ? null
+                      : () {
+                        setState(() => _isActionPending = true);
+                        _firebaseService
+                            .nextPetitBacRound(widget.gameCode)
+                            .whenComplete(() {
+                              if (mounted)
+                                setState(() => _isActionPending = false);
+                            });
+                      },
+              child:
+                  _isActionPending
+                      ? SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                      : Text(GameUiLocalization.tr(context, "Prochain Tour")),
+            ),"""
+pb_ui_replace = """          if (isHost)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed:
+                      _isActionPending
+                          ? null
+                          : () {
+                            setState(() => _isActionPending = true);
+                            _firebaseService
+                                .nextPetitBacRound(widget.gameCode)
+                                .whenComplete(() {
+                                  if (mounted)
+                                    setState(() => _isActionPending = false);
+                                });
+                          },
+                  child:
+                      _isActionPending
+                          ? SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
+                          : Text(GameUiLocalization.tr(context, "Prochain Tour")),
+                ),
+                const SizedBox(width: 12),
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.redAccent,
+                    side: const BorderSide(color: Colors.redAccent),
+                  ),
+                  onPressed:
+                      _isActionPending
+                          ? null
+                          : () {
+                            setState(() => _isActionPending = true);
+                            _firebaseService
+                                .finishPetitBacGame(widget.gameCode)
+                                .whenComplete(() {
+                                  if (mounted)
+                                    setState(() => _isActionPending = false);
+                                });
+                          },
+                  child: Text(GameUiLocalization.tr(context, "Terminer la partie")),
+                ),
+              ],
+            ),"""
+assert text.count(pb_ui_target) == 1, f"Petit Bac UI target count {text.count(pb_ui_target)}"
+text = text.replace(pb_ui_target, pb_ui_replace)
 
 with open('lib/amis.dart', 'w', encoding='utf-8') as f:
     f.write(text)
 
-print("Applied chat and local fixes successfully!")
+print("All session points and Petit Bac fixes applied successfully!")
 
