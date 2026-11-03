@@ -322,6 +322,23 @@ class _MainScreenState extends State<MainScreen> {
                           );
                         },
                       ),
+                      const SizedBox(height: 8),
+                      // Bouton minimaliste Joueurs bloqués pour débloquer
+                      TextButton.icon(
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          backgroundColor: Colors.white.withValues(alpha: 0.05),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        ),
+                        icon: const Icon(Icons.block, color: Colors.white60, size: 15),
+                        label: Text(
+                          ps.blockedUsers.isNotEmpty
+                              ? "Joueurs bloqués (${ps.blockedUsers.length})"
+                              : "Joueurs bloqués",
+                          style: const TextStyle(color: Colors.white70, fontSize: 12),
+                        ),
+                        onPressed: () => showBlockedUsersDialog(context, ps),
+                      ),
                       const Divider(height: 24),
                       Text(
                         MatchmakingLocalization.tr(context, 'legalSectionTitle'),

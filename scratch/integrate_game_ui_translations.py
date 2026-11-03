@@ -1,108 +1,22 @@
-with open('lib/amis.dart', 'r', encoding='utf-8') as f:
-    text = f.read()
+import re
 
-target = """          isPremiumLobby: _isPremiumLobby,
-          videoEnabled: _videoEnabled,
-          audioEnabled: _audioEnabled,
-          useTimer: _useTimer,
-          turnTimerSeconds: _turnTimerSeconds,
-          unoStartingCards: _selectedGame == 'Uno' ? _unoStartingCards : null,
-          unoStackDraws: _selectedGame == 'Uno' ? _unoStackDraws : null,
-          dominoesMode: _selectedGame == 'Dominoes' ? _dominoesMode : null,
-          dominoesTargetScore:
-              _selectedGame == 'Dominoes' ? _dominoesTargetScore : null,
-          timesUpTotalRounds:
-              _selectedGame == "Time's Up" ? _timesUpTotalRounds : null,
-          petitBacCategories:
-              _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
-          petitBacTime: _selectedGame == 'Petit Bac' ? _petitBacTime : null,
-          photoRouletteRounds:
-              _selectedGame == 'Photo Roulette' ? _photoRouletteRounds : null,
-          photoRoulettePhotosPerPlayer:
-              _selectedGame == 'Photo Roulette'
-                  ? _photoRoulettePhotosPerPlayer
-                  : null,
-          photoRouletteTime:
-              _selectedGame == 'Photo Roulette' ? _photoRouletteTime : null,
-          photoRouletteMediaType:
-              _selectedGame == 'Photo Roulette' ? _photoRouletteMediaType : null,
-          infiltreCount:
-              _selectedGame == 'Infiltré & Mr. White' ? _infiltreCount : null,
-          mrWhiteCount:
-              _selectedGame == 'Infiltré & Mr. White' ? _mrWhiteCount : null,
-          undercoverClueTime:
-              _selectedGame == 'Infiltré & Mr. White' ? _undercoverClueTime : null,
-          undercoverRoleSettings: _undercoverRoleSettings,
-          selectedLoupGarouRoles: _selectedLoupGarouRoles,
-          petitsChevauxTeamMode:
-              _selectedGame == 'Petits Chevaux' ? _petitsChevauxTeamMode : null,
-          pokerStartChips: _selectedGame == 'Poker' ? _pokerStartChips : null,
-          pokerSmallBlind: _selectedGame == 'Poker' ? _pokerSmallBlind : null,
-          pokerBigBlind: _selectedGame == 'Poker' ? _pokerBigBlind : null,
-          pictionaryOnly30Strokes: _pictionaryOnly30Strokes,
-          pictionaryUseTeams: _pictionaryUseTeams,
-          justOneAllowInvalidClues: _justOneAllowInvalidClues,
-          cadavreVariant: _cadavreVariant,
-          cadavrePassingMode: _cadavrePassingMode,
-          aiInstructions: _aiInstructions,
-          aiWords: _aiWords,"""
+with open('lib/badges_data.dart', 'r', encoding='utf-8', errors='ignore') as f:
+    text_data = f.read()
 
-replace = """          isPremiumLobby: playerState.isPremium,
-          videoEnabled: _videoEnabled,
-          audioEnabled: _audioEnabled,
-          useTimer: _useTimer,
-          turnTimerSeconds: _turnTimerSeconds,
-          unoStartingCards: _selectedGame == 'Uno' ? _unoStartingCards : null,
-          unoStackDraws: _selectedGame == 'Uno' ? _unoStackDraws : null,
-          dominoesMode: _selectedGame == 'Dominoes' ? _dominoesMode : null,
-          dominoesTargetScore:
-              _selectedGame == 'Dominoes' ? _dominoesTargetScore : null,
-          timesUpTotalRounds:
-              _selectedGame == "Time's Up" ? _timesUpTotalRounds : null,
-          petitBacCategories:
-              _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
-          petitBacTime: _selectedGame == 'Petit Bac' ? _turnTimerSeconds : null,
-          photoRouletteRounds:
-              _selectedGame == 'Photo Roulette' ? _photoRouletteRounds : null,
-          photoRoulettePhotosPerPlayer:
-              _selectedGame == 'Photo Roulette'
-                  ? _photoRoulettePhotosPerPlayer
-                  : null,
-          photoRouletteTime:
-              _selectedGame == 'Photo Roulette' ? _turnTimerSeconds : null,
-          photoRouletteMediaType:
-              _selectedGame == 'Photo Roulette' ? _photoRouletteMediaType : null,
-          infiltreCount:
-              _selectedGame == 'Infiltré & Mr. White' ? _infiltreCount : null,
-          mrWhiteCount:
-              _selectedGame == 'Infiltré & Mr. White' ? _mrWhiteCount : null,
-          undercoverClueTime:
-              _selectedGame == 'Infiltré & Mr. White' ? _turnTimerSeconds : null,
-          undercoverRoleSettings: _undercoverRoleSettings,
-          selectedLoupGarouRoles: _selectedLoupGarouRoles,
-          petitsChevauxTeamMode:
-              _selectedGame == 'Petits Chevaux' ? _petitsChevauxTeamMode : null,
-          pokerStartChips: _selectedGame == 'Poker' ? _pokerStartChips : null,
-          pokerSmallBlind: _selectedGame == 'Poker' ? _pokerSmallBlind : null,
-          pokerBigBlind: _selectedGame == 'Poker' ? _pokerBigBlind : null,
-          pictionaryOnly30Strokes: _pictionaryOnly30Strokes,
-          pictionaryUseTeams: _pictionaryUseTeams,
-          justOneAllowInvalidClues: _justOneAllowInvalidClues,
-          cadavreVariant: _cadavreVariant,
-          cadavrePassingMode: _cadavrePassingMode,
-          aiInstructions:
-              (playerState.isPremium && _aiSupportedGames.contains(_selectedGame))
-                  ? (_aiInstructionsController.text.trim().isNotEmpty
-                      ? _aiInstructionsController.text.trim()
-                      : null)
-                  : null,
-          aiWords: preGeneratedAiWords,"""
+with open('lib/badges_localization.dart', 'r', encoding='utf-8', errors='ignore') as f:
+    text_loc = f.read()
 
-assert text.count(target) == 1, f"Count: {text.count(target)}"
-text = text.replace(target, replace)
+badges = re.findall(r"BadgeDef\s*\(\s*id:\s*['\"]([^'\"]+)['\"]", text_data)
 
-with open('lib/amis.dart', 'w', encoding='utf-8') as f:
-    f.write(text)
+missing = []
+for b in badges:
+    if f"'{b}'" not in text_loc and f'"{b}"' not in text_loc:
+        missing.append(b)
 
-print("Fixed lounge forward variables successfully!")
+print(f"Total defined badges in badges_data.dart: {len(badges)}")
+print(f"Missing from badges_localization.dart: {len(missing)}")
+if missing:
+    print("Missing IDs:", missing)
+else:
+    print("All 104 badges are 100% localized in badges_localization.dart!")
 

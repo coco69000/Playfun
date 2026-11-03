@@ -967,6 +967,7 @@ class PlayerState extends ChangeNotifier {
       await recordGameWin(gameName: gameName);
     }
     await recordMultiplayerGame(gameName: gameName);
+    await _syncProgressAndBadges();
   }
 
   Future<void> addXpAndStats(int xpGained, String gameName, bool isWin) async {

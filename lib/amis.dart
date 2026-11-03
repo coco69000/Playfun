@@ -6207,14 +6207,24 @@ class FirebaseService {
   }
 
   Future<void> updatePlayerHeartbeat(String gameCode, String playerId) async {
+    final now = FieldValue.serverTimestamp();
     await _db
         .collection('games')
         .doc(gameCode)
         .collection('presences')
         .doc(playerId)
         .set({
-          'lastHeartbeat': FieldValue.serverTimestamp(),
+          'lastHeartbeat': now,
         }, SetOptions(merge: true));
+
+    await _db
+        .collection('games')
+        .doc(gameCode)
+        .update({
+          'players.$playerId.lastHeartbeat': now,
+          'players.$playerId.isOnline': true,
+        })
+        .catchError((_) {});
   }
 
   Future<void> removePlayerFromGame(
@@ -27620,15 +27630,41 @@ class GameLobbyScreen extends StatefulWidget {
   _GameLobbyScreenState createState() => _GameLobbyScreenState();
 }
 
-class _GameLobbyScreenState extends State<GameLobbyScreen> {
+class _GameLobbyScreenState extends State<GameLobbyScreen>
+    with WidgetsBindingObserver {
   final FirebaseService _firebaseService = FirebaseService();
   late LivekitService _livekitService;
   bool _livekitInitialized = false;
+  Timer? _heartbeatTimer;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _livekitService = Provider.of<LivekitService>(context, listen: false);
+    _sendHeartbeat();
+    _heartbeatTimer = Timer.periodic(
+      const Duration(seconds: 15),
+      (_) => _sendHeartbeat(),
+    );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _sendHeartbeat();
+    }
+  }
+
+  void _sendHeartbeat() {
+    _firebaseService.updatePlayerHeartbeat(widget.gameCode, widget.playerId);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _heartbeatTimer?.cancel();
+    super.dispose();
   }
 
   Future<void> _connectToLivekit(bool videoEnabled, bool audioEnabled) async {
@@ -27947,52 +27983,136 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
 
                       return Card(
                         color: teamColor,
-                        child: ListTile(
-                          leading: Icon(
-                            isPlayerHost
-                                ? Icons.admin_panel_settings
-                                : Icons.person,
-                            color: isPlayerHost ? Colors.amber : Colors.white70,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          side: BorderSide(
+                            color: isPlayerHost
+                                ? Colors.amber.withValues(alpha: 0.5)
+                                : Colors.white10,
                           ),
-                          title: Text(
-                            pData['name'] ??
-                                GameContentLocalization.ui(context, 'Joueur'),
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          // Affichage des points de session conservés
-                          subtitle:
-                              (pData['score'] != null &&
-                                      (pData['score'] as num) > 0)
-                                  ? Text(
-                                    GameContentLocalization.format(
-                                      context,
-                                      "Score de session : {0} victoires",
-                                      [pData['score']],
-                                    ),
-                                    style: const TextStyle(
-                                      color: Colors.amberAccent,
-                                      fontSize: 12,
-                                    ),
-                                  )
-                                  : null,
-                          trailing: Chip(
-                            label: Text(
-                              GameContentLocalization.ui(context, "Prêt"),
+                        ),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(14),
+                          onTap: () {
+                            showUserProfileDialog(
+                              context,
+                              targetUid: pId,
+                              currentUserId: currentPlayerId,
+                            );
+                          },
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: isPlayerHost
+                                  ? Colors.amber.withValues(alpha: 0.2)
+                                  : Colors.deepPurpleAccent.withValues(alpha: 0.2),
+                              child: Icon(
+                                isPlayerHost
+                                    ? Icons.admin_panel_settings
+                                    : Icons.person,
+                                color: isPlayerHost ? Colors.amber : Colors.cyanAccent,
+                              ),
                             ),
-                            backgroundColor: Colors.green,
+                            title: Text(
+                              pData['name'] ??
+                                  GameContentLocalization.ui(context, 'Joueur'),
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: (pData['score'] != null &&
+                                    (pData['score'] as num) > 0)
+                                ? Text(
+                                  GameContentLocalization.format(
+                                    context,
+                                    "Score de session : {0} victoires",
+                                    [pData['score']],
+                                  ),
+                                  style: const TextStyle(
+                                    color: Colors.amberAccent,
+                                    fontSize: 12,
+                                  ),
+                                )
+                                : Text(
+                                  isPlayerHost ? "Hôte du salon" : "Appuyer pour voir profil",
+                                  style: const TextStyle(
+                                    color: Colors.white38,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Chip(
+                                  label: Text(
+                                    GameContentLocalization.ui(context, "Prêt"),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.green.shade700,
+                                  padding: EdgeInsets.zero,
+                                  visualDensity: VisualDensity.compact,
+                                ),
+                                if (pId != currentPlayerId) ...[
+                                  const SizedBox(width: 4),
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.more_vert,
+                                      size: 18,
+                                      color: Colors.white54,
+                                    ),
+                                    onPressed: () {
+                                      showUserProfileDialog(
+                                        context,
+                                        targetUid: pId,
+                                        currentUserId: currentPlayerId,
+                                      );
+                                    },
+                                    tooltip: "Profil & Options",
+                                  ),
+                                ],
+                              ],
+                            ),
                           ),
                         ),
                       );
                     },
                   ),
                   const SizedBox(height: 24),
-                  if (isHost) ...[
-                    ElevatedButton.icon(
-                      icon: const Icon(Icons.person_add),
+                  // BOUTON INVITER MES AMIS (MODERNE, DYNAMIQUE & ACCESSIBLE)
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF2575FC).withValues(alpha: 0.35),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      ),
+                      icon: const Icon(Icons.person_add_alt_1_rounded, color: Colors.white, size: 22),
                       label: Text(
                         GameContentLocalization.ui(context, "Inviter mes Amis"),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                          color: Colors.white,
+                        ),
                       ),
-
                       onPressed: () {
                         // Ouvre le bottom sheet pour inviter
                         showModalBottomSheet(
@@ -28089,38 +28209,73 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                         );
                       },
                     ),
-                  ],
+                  ),
 
-                  if (isHost && isTeamGame)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: OutlinedButton.icon(
-                        icon: Icon(Icons.groups),
-                        label: Text(
-                          GameContentLocalization.ui(
-                            context,
-                            "Composer les équipes",
-                          ),
-                        ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder:
-                                (dContext) => MultiplayerTeamSelectionDialog(
-                                  gameCode: gameCode,
-                                  players: players,
-                                  initialTeams: teams,
-                                  gameName: gameType,
-                                ),
-                          );
-                        },
+                  if (isHost && isTeamGame) ...[
+                    const SizedBox(height: 12),
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 13),
+                        side: const BorderSide(color: Colors.cyanAccent, width: 1.5),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        foregroundColor: Colors.cyanAccent,
                       ),
+                      icon: const Icon(Icons.groups_rounded, size: 22),
+                      label: Text(
+                        GameContentLocalization.ui(
+                          context,
+                          "Composer les équipes",
+                        ),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder:
+                              (dContext) => MultiplayerTeamSelectionDialog(
+                                gameCode: gameCode,
+                                players: players,
+                                initialTeams: teams,
+                                gameName: gameType,
+                              ),
+                        );
+                      },
                     ),
+                  ],
+                  const SizedBox(height: 12),
+                  // BOUTON DÉMARRER LA PARTIE (MODERNE, ÉLÉGANT AVEC GRADIENT & GLOW)
                   if (isHost)
-                    ElevatedButton(
-                      onPressed:
-                          canStart
-                              ? () {
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: canStart
+                            ? const LinearGradient(
+                                colors: [Color(0xFF00B09B), Color(0xFF96C93D)],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              )
+                            : null,
+                        color: canStart ? null : Colors.white12,
+                        boxShadow: canStart
+                            ? [
+                                BoxShadow(
+                                  color: const Color(0xFF00B09B).withValues(alpha: 0.45),
+                                  blurRadius: 14,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ]
+                            : [],
+                      ),
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        ),
+                        onPressed: canStart
+                            ? () {
+                                HapticFeedback.mediumImpact();
                                 _firebaseService.startGame(gameCode).catchError(
                                   (e) {
                                     if (mounted) {
@@ -28142,25 +28297,56 @@ class _GameLobbyScreenState extends State<GameLobbyScreen> {
                                   },
                                 );
                               }
-                              : null,
-                      child: Text(
-                        GameContentLocalization.ui(
-                          context,
-                          "Démarrer la partie",
+                            : null,
+                        icon: Icon(
+                          Icons.play_arrow_rounded,
+                          size: 26,
+                          color: canStart ? Colors.white : Colors.white38,
+                        ),
+                        label: Text(
+                          GameContentLocalization.ui(
+                            context,
+                            "Démarrer la partie",
+                          ),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.8,
+                            color: canStart ? Colors.white : Colors.white38,
+                          ),
                         ),
                       ),
                     )
                   else
-                    Text(
-                      GameContentLocalization.ui(
-                        context,
-                        "En attente de l'hôte...",
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: Colors.white12),
                       ),
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.white70,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.amberAccent),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            GameContentLocalization.ui(
+                              context,
+                              "En attente de l'hôte pour lancer...",
+                            ),
+                            style: const TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   if (isHost && !canStart)
                     Padding(
@@ -30462,6 +30648,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     maxOpponentLevel: maxOpponentLvl,
                   );
                 } else {
+                  await ps.addXp(isWin ? 50 : 15);
                   await ps.claimGameReward(widget.gameCode);
                 }
 
@@ -64709,10 +64896,15 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
       builder: (context, snapshot) {
         final messages = snapshot.hasData ? snapshot.data!.docs : [];
 
+        final ps = Provider.of<PlayerState>(context, listen: false);
         // Messages ordonnés chronologiquement (du plus ancien au plus récent)
         final List<Map<String, dynamic>> allMessages = messages
             .map((doc) => doc.data() as Map<String, dynamic>)
-            .where((data) => data['chatType'] == null || data['chatType'] == 'global')
+            .where((data) {
+              if (data['chatType'] != null && data['chatType'] != 'global') return false;
+              if (ps.isUserBlocked(data['senderId'])) return false;
+              return true;
+            })
             .toList()
             .reversed
             .toList();
@@ -64796,34 +64988,48 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
 
                               return Align(
                                 alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(vertical: 2.5),
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                    color: isMe
-                                        ? Colors.deepPurpleAccent.withValues(alpha: 0.40)
-                                        : Colors.white.withValues(alpha: 0.12),
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(10),
+                                  onTap: isMe
+                                      ? null
+                                      : () {
+                                          if (msg['senderId'] != null) {
+                                            showUserProfileDialog(
+                                              context,
+                                              targetUid: msg['senderId'],
+                                              currentUserId: widget.playerId,
+                                            );
+                                          }
+                                        },
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(vertical: 2.5),
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                    decoration: BoxDecoration(
                                       color: isMe
-                                          ? Colors.deepPurpleAccent.withValues(alpha: 0.5)
-                                          : Colors.white.withValues(alpha: 0.08),
+                                          ? Colors.deepPurpleAccent.withValues(alpha: 0.40)
+                                          : Colors.white.withValues(alpha: 0.12),
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color: isMe
+                                            ? Colors.deepPurpleAccent.withValues(alpha: 0.5)
+                                            : Colors.white.withValues(alpha: 0.08),
+                                      ),
                                     ),
-                                  ),
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: const TextStyle(fontSize: 12, color: Colors.white),
-                                      children: [
-                                        TextSpan(
-                                          text: "$sender : ",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 11.5,
-                                            color: isMe ? Colors.pinkAccent : Colors.cyanAccent,
+                                    child: RichText(
+                                      text: TextSpan(
+                                        style: const TextStyle(fontSize: 12, color: Colors.white),
+                                        children: [
+                                          TextSpan(
+                                            text: "$sender : ",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 11.5,
+                                              color: isMe ? Colors.pinkAccent : Colors.cyanAccent,
+                                            ),
                                           ),
-                                        ),
-                                        TextSpan(text: text),
-                                      ],
+                                          TextSpan(text: text),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -65003,291 +65209,212 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
 // SECTION DES SALONS (LOUNGES) - VERSION UNIQUE ET COMPLÈTE
 // ==================================================================
 
-class LoungeListScreen extends StatelessWidget {
+class LoungeListScreen extends StatefulWidget {
   final String playerId;
-  LoungeListScreen({required this.playerId});
+  const LoungeListScreen({Key? key, required this.playerId}) : super(key: key);
 
-  void _showJoinPrivateDialog(BuildContext context) {
-    final codeCtrl = TextEditingController();
-    showDialog(
-      context: context,
-      builder:
-          (ctx) => AlertDialog(
-            title: Text(
-              GameContentLocalization.ui(context, "Rejoindre un salon privé"),
-            ),
-            content: TextField(
-              controller: codeCtrl,
-              decoration: const InputDecoration(
-                labelText: "Code du salon (6 chiffres) ou ID",
-                hintText: "Ex: 123456",
+  @override
+  State<LoungeListScreen> createState() => _LoungeListScreenState();
+}
+
+class _LoungeListScreenState extends State<LoungeListScreen>
+    with SingleTickerProviderStateMixin {
+  int _selectedTabIndex = 0; // 0 = Publics, 1 = Privé avec code
+  final TextEditingController _searchCtrl = TextEditingController();
+  final TextEditingController _privateCodeCtrl = TextEditingController();
+  bool _isJoiningPrivate = false;
+
+  String _selectedTheme = 'Tous';
+  String _sortBy = 'recent'; // 'recent', 'players', 'slots'
+  bool _hideFull = false;
+
+  final List<String> _themes = [
+    'Tous',
+    'Général',
+    'Fun',
+    'Gaming',
+    'Chill',
+    'Soirée',
+    'Compétition',
+  ];
+
+  @override
+  void dispose() {
+    _searchCtrl.dispose();
+    _privateCodeCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _joinWithCode(String rawCode) async {
+    final input = rawCode.trim();
+    if (input.isEmpty) return;
+
+    setState(() => _isJoiningPrivate = true);
+
+    try {
+      String? targetLoungeId;
+      final querySnap = await FirebaseFirestore.instance
+          .collection('lounges')
+          .where('joinCode', isEqualTo: input)
+          .limit(1)
+          .get();
+
+      if (querySnap.docs.isNotEmpty) {
+        targetLoungeId = querySnap.docs.first.id;
+      } else {
+        final doc = await FirebaseFirestore.instance
+            .collection('lounges')
+            .doc(input)
+            .get();
+        if (doc.exists) {
+          targetLoungeId = doc.id;
+        }
+      }
+
+      if (targetLoungeId != null && mounted) {
+        final ps = Provider.of<PlayerState>(context, listen: false);
+        await FirebaseService().joinLounge(
+          targetLoungeId,
+          widget.playerId,
+          ps.userName ?? 'Joueur',
+        );
+        if (mounted) {
+          _privateCodeCtrl.clear();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => LoungeRoomScreen(
+                loungeId: targetLoungeId!,
+                playerId: widget.playerId,
               ),
             ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(ctx),
-                child: Text(GameUiLocalization.tr(context, "Annuler")),
+          );
+        }
+      } else if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              GameContentLocalization.ui(
+                context,
+                "Code de salon privé introuvable.",
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  final input = codeCtrl.text.trim();
-                  if (input.isEmpty) return;
-
-                  String? targetLoungeId;
-
-                  final querySnap =
-                      await FirebaseFirestore.instance
-                          .collection('lounges')
-                          .where('joinCode', isEqualTo: input)
-                          .limit(1)
-                          .get();
-
-                  if (querySnap.docs.isNotEmpty) {
-                    targetLoungeId = querySnap.docs.first.id;
-                  } else {
-                    final doc =
-                        await FirebaseFirestore.instance
-                            .collection('lounges')
-                            .doc(input)
-                            .get();
-                    if (doc.exists) {
-                      targetLoungeId = doc.id;
-                    }
-                  }
-
-                  if (targetLoungeId != null) {
-                    Navigator.pop(ctx);
-                    final ps = Provider.of<PlayerState>(context, listen: false);
-                    await FirebaseService().joinLounge(
-                      targetLoungeId,
-                      playerId,
-                      ps.userName ?? 'Joueur',
-                    );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (_) => LoungeRoomScreen(
-                              loungeId: targetLoungeId!,
-                              playerId: playerId,
-                            ),
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          GameContentLocalization.ui(
-                            context,
-                            "Code de salon introuvable.",
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                },
-                child: Text(GameContentLocalization.ui(context, "Rejoindre")),
-              ),
-            ],
+            ),
+            backgroundColor: Colors.redAccent,
           ),
-    );
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Erreur lors de la connexion : $e"),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isJoiningPrivate = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    GameContentLocalization.ui(
-                      context,
-                      "Rejoins un salon public ou entre un code privé :",
-                    ),
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                ),
-                OutlinedButton.icon(
-                  icon: const Icon(Icons.lock_open, size: 16),
-                  label: Text(
-                    GameContentLocalization.ui(context, "Code Privé"),
-                  ),
-                  onPressed: () => _showJoinPrivateDialog(context),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              // Requête simple insensible aux index manquants
-              stream:
-                  FirebaseFirestore.instance
-                      .collection('lounges')
-                      .where('isPrivate', isEqualTo: false)
-                      .snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                final lounges = snapshot.data!.docs.toList();
-
-                // Tri côté client par date de création
-                lounges.sort((a, b) {
-                  final aData = a.data() as Map<String, dynamic>;
-                  final bData = b.data() as Map<String, dynamic>;
-                  final aTime =
-                      (aData['createdAt'] as Timestamp?)?.toDate() ??
-                      DateTime.now();
-                  final bTime =
-                      (bData['createdAt'] as Timestamp?)?.toDate() ??
-                      DateTime.now();
-                  return bTime.compareTo(aTime);
-                });
-
-                if (lounges.isEmpty) {
-                  return Center(
-                    child: Text(
-                      GameContentLocalization.ui(
-                        context,
-                        "Aucun salon public disponible pour le moment.\nCréez-en un avec le bouton ci-dessous !",
-                      ),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white54, height: 1.4),
-                    ),
-                  );
-                }
-
-                return ListView.builder(
-                  itemCount: lounges.length,
-                  itemBuilder: (context, index) {
-                    final data = lounges[index].data() as Map<String, dynamic>;
-                    final players =
-                        data['players'] as Map<String, dynamic>? ?? {};
-                    final bool isFull =
-                        players.length >= (data['maxPlayers'] ?? 10);
-                    final String hostId = data['hostId'] ?? '';
-                    final bool amIHost = hostId == playerId;
-
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      color:
-                          amIHost
-                              ? Colors.deepPurple[900]?.withOpacity(0.5)
-                              : Colors.blueGrey[900],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        side: BorderSide(
-                          color:
-                              amIHost
-                                  ? Colors.amberAccent.withOpacity(0.5)
-                                  : Colors.white10,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // SÉLECTEUR SEGMENTÉ : SALONS PUBLICS / SALONS PRIVÉS
+            Container(
+              margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.06),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white12),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() => _selectedTabIndex = 0),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          gradient: _selectedTabIndex == 0
+                              ? const LinearGradient(
+                                  colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+                                )
+                              : null,
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                      ),
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.living_rounded,
-                          size: 38,
-                          color:
-                              amIHost ? Colors.amberAccent : Colors.cyanAccent,
-                        ),
-                        title: Row(
-                          children: [
-                            Text(
-                              data['name'] ??
-                                  GameContentLocalization.ui(context, 'Salon'),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            if (amIHost) ...[
-                              const SizedBox(width: 8),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 6,
-                                  vertical: 2,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.amber,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Text(
-                                  GameContentLocalization.ui(
-                                    context,
-                                    "Mon Salon",
-                                  ),
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ],
-                        ),
-                        subtitle: Text(
-                          GameContentLocalization.format(
-                            context,
-                            "Thème : {0}",
-                            [data['theme'] ?? 'Général'],
-                          ),
-                        ),
-                        trailing: Column(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.people, size: 16),
+                            Icon(
+                              Icons.public_rounded,
+                              size: 18,
+                              color: _selectedTabIndex == 0 ? Colors.white : Colors.white60,
+                            ),
+                            const SizedBox(width: 8),
                             Text(
-                              "${players.length} / ${data['maxPlayers'] ?? 10}",
+                              GameContentLocalization.ui(context, "Salons Publics"),
                               style: TextStyle(
-                                color:
-                                    isFull
-                                        ? Colors.redAccent
-                                        : Colors.greenAccent,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                                color: _selectedTabIndex == 0 ? Colors.white : Colors.white60,
                               ),
                             ),
                           ],
                         ),
-                        onTap:
-                            isFull && !amIHost
-                                ? null
-                                : () async {
-                                  final ps = Provider.of<PlayerState>(
-                                    context,
-                                    listen: false,
-                                  );
-                                  await FirebaseService().joinLounge(
-                                    lounges[index].id,
-                                    playerId,
-                                    ps.userName ?? 'Joueur',
-                                  );
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder:
-                                          (_) => LoungeRoomScreen(
-                                            loungeId: lounges[index].id,
-                                            playerId: playerId,
-                                          ),
-                                    ),
-                                  );
-                                },
                       ),
-                    );
-                  },
-                );
-              },
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() => _selectedTabIndex = 1),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          gradient: _selectedTabIndex == 1
+                              ? const LinearGradient(
+                                  colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+                                )
+                              : null,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.vpn_key_rounded,
+                              size: 18,
+                              color: _selectedTabIndex == 1 ? Colors.white : Colors.white60,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              GameContentLocalization.ui(context, "Rejoindre Privé"),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                                color: _selectedTabIndex == 1 ? Colors.white : Colors.white60,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+
+            // CONTENU SELON ONGLET SÉLECTIONNÉ
+            if (_selectedTabIndex == 1)
+              Expanded(child: _buildPrivateJoinView())
+            else
+              Expanded(child: _buildPublicLoungesView()),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add_rounded),
@@ -65297,11 +65424,554 @@ class LoungeListScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => CreateLoungeScreen(playerId: playerId),
+              builder: (_) => CreateLoungeScreen(playerId: widget.playerId),
             ),
           );
         },
       ),
+    );
+  }
+
+  // VUE 1 : REJOINDRE AVEC UN CODE PRIVÉ
+  Widget _buildPrivateJoinView() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 20),
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.deepPurple.shade900.withValues(alpha: 0.5),
+                  const Color(0xFF1E1E2C),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: Colors.deepPurpleAccent.withValues(alpha: 0.3)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.deepPurple.withValues(alpha: 0.2),
+                  blurRadius: 18,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.amberAccent.withValues(alpha: 0.15),
+                  ),
+                  child: const Icon(Icons.lock_rounded, size: 44, color: Colors.amberAccent),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  GameContentLocalization.ui(context, "Rejoindre un Salon Privé"),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  GameContentLocalization.ui(
+                    context,
+                    "Entrez le code à 6 chiffres ou l'identifiant partagé par l'hôte.",
+                  ),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white60, fontSize: 13, height: 1.4),
+                ),
+                const SizedBox(height: 24),
+                TextField(
+                  controller: _privateCodeCtrl,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.text,
+                  style: const TextStyle(
+                    color: Colors.amberAccent,
+                    fontSize: 24,
+                    letterSpacing: 4,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: "123456",
+                    hintStyle: TextStyle(
+                      color: Colors.white24,
+                      fontSize: 22,
+                      letterSpacing: 4,
+                    ),
+                    filled: true,
+                    fillColor: Colors.black26,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(color: Colors.white24),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(color: Colors.amberAccent, width: 2),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.paste_rounded, color: Colors.amberAccent),
+                      tooltip: "Coller",
+                      onPressed: () async {
+                        final clip = await Clipboard.getData('text/plain');
+                        if (clip?.text != null) {
+                          _privateCodeCtrl.text = clip!.text!.trim();
+                        }
+                      },
+                    ),
+                  ),
+                  onSubmitted: _joinWithCode,
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amberAccent,
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      elevation: 4,
+                    ),
+                    onPressed: _isJoiningPrivate
+                        ? null
+                        : () => _joinWithCode(_privateCodeCtrl.text),
+                    child: _isJoiningPrivate
+                        ? const SizedBox(
+                            width: 22,
+                            height: 22,
+                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.login_rounded, size: 20),
+                              const SizedBox(width: 8),
+                              Text(
+                                GameContentLocalization.ui(context, "Rejoindre le Salon"),
+                                style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
+                              ),
+                            ],
+                          ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // VUE 0 : LISTE DES SALONS PUBLICS AVEC RECHERCHE, THÈMES & FILTRES
+  Widget _buildPublicLoungesView() {
+    return Column(
+      children: [
+        // BARRE DE RECHERCHE + FILTRES RAPIDES
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _searchCtrl,
+                  onChanged: (_) => setState(() {}),
+                  style: const TextStyle(fontSize: 13, color: Colors.white),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    hintText: "Rechercher un salon...",
+                    hintStyle: const TextStyle(color: Colors.white38, fontSize: 12),
+                    prefixIcon: const Icon(Icons.search, size: 18, color: Colors.cyanAccent),
+                    suffixIcon: _searchCtrl.text.isNotEmpty
+                        ? IconButton(
+                            icon: const Icon(Icons.clear, size: 16, color: Colors.white54),
+                            onPressed: () => setState(() => _searchCtrl.clear()),
+                          )
+                        : null,
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.05),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: const BorderSide(color: Colors.white12),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: const BorderSide(color: Colors.white10),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              PopupMenuButton<String>(
+                tooltip: "Trier",
+                icon: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.white12),
+                  ),
+                  child: const Icon(Icons.sort_rounded, size: 18, color: Colors.cyanAccent),
+                ),
+                onSelected: (val) => setState(() => _sortBy = val),
+                itemBuilder: (ctx) => [
+                  PopupMenuItem(
+                    value: 'recent',
+                    child: Row(
+                      children: [
+                        Icon(Icons.access_time, size: 16, color: _sortBy == 'recent' ? Colors.amber : Colors.white70),
+                        const SizedBox(width: 8),
+                        Text("Plus récents", style: TextStyle(color: _sortBy == 'recent' ? Colors.amber : Colors.white)),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: 'players',
+                    child: Row(
+                      children: [
+                        Icon(Icons.people, size: 16, color: _sortBy == 'players' ? Colors.amber : Colors.white70),
+                        const SizedBox(width: 8),
+                        Text("Plus actifs", style: TextStyle(color: _sortBy == 'players' ? Colors.amber : Colors.white)),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: 'slots',
+                    child: Row(
+                      children: [
+                        Icon(Icons.event_seat, size: 16, color: _sortBy == 'slots' ? Colors.amber : Colors.white70),
+                        const SizedBox(width: 8),
+                        Text("Places disponibles", style: TextStyle(color: _sortBy == 'slots' ? Colors.amber : Colors.white)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 4),
+              IconButton(
+                tooltip: _hideFull ? "Afficher les salons pleins" : "Masquer les salons pleins",
+                icon: Icon(
+                  _hideFull ? Icons.filter_alt_rounded : Icons.filter_alt_outlined,
+                  size: 20,
+                  color: _hideFull ? Colors.amberAccent : Colors.white60,
+                ),
+                onPressed: () => setState(() => _hideFull = !_hideFull),
+              ),
+            ],
+          ),
+        ),
+
+        // CHIPS DES THÈMES
+        SizedBox(
+          height: 38,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: _themes.length,
+            itemBuilder: (context, idx) {
+              final t = _themes[idx];
+              final isSel = _selectedTheme == t;
+              return Padding(
+                padding: const EdgeInsets.only(right: 6.0),
+                child: FilterChip(
+                  label: Text(t),
+                  selected: isSel,
+                  selectedColor: Colors.deepPurpleAccent,
+                  checkmarkColor: Colors.white,
+                  labelStyle: TextStyle(
+                    color: isSel ? Colors.white : Colors.white70,
+                    fontSize: 11,
+                    fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
+                  ),
+                  backgroundColor: Colors.white.withValues(alpha: 0.05),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  onSelected: (_) => setState(() => _selectedTheme = t),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 6),
+
+        // LISTE STREAMÉE DE TOUS LES SALONS PUBLICS SANS RISQUE DE DISPARITION
+        Expanded(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('lounges').snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final now = DateTime.now();
+              final allDocs = snapshot.data!.docs;
+
+              // Filtrage résilient : exclure uniquement si explicitement privé
+              List<DocumentSnapshot> filtered = allDocs.where((doc) {
+                final d = doc.data() as Map<String, dynamic>;
+                if (d['isPrivate'] == true) return false;
+                if (d['status'] == 'closed') return false;
+
+                // Filtre de recherche
+                if (_searchCtrl.text.isNotEmpty) {
+                  final q = _searchCtrl.text.toLowerCase();
+                  final name = (d['name'] ?? '').toString().toLowerCase();
+                  final theme = (d['theme'] ?? '').toString().toLowerCase();
+                  final desc = (d['description'] ?? '').toString().toLowerCase();
+                  if (!name.contains(q) && !theme.contains(q) && !desc.contains(q)) {
+                    return false;
+                  }
+                }
+
+                // Filtre de thème
+                if (_selectedTheme != 'Tous') {
+                  final theme = (d['theme'] ?? '').toString().toLowerCase();
+                  if (theme != _selectedTheme.toLowerCase()) {
+                    return false;
+                  }
+                }
+
+                // Filtre salons pleins
+                if (_hideFull) {
+                  final players = d['players'] as Map<String, dynamic>? ?? {};
+                  final maxP = (d['maxPlayers'] as num?)?.toInt() ?? 10;
+                  if (players.length >= maxP) return false;
+                }
+
+                return true;
+              }).toList();
+
+              // Calcul de la présence active en direct pour chaque salon
+              int getActiveOnlineCount(Map<String, dynamic> data) {
+                final players = data['players'] as Map<String, dynamic>? ?? {};
+                int activeCount = 0;
+                players.forEach((pId, pVal) {
+                  if (pVal is Map) {
+                    final isOnline = pVal['isOnline'] != false;
+                    final hb = (pVal['lastHeartbeat'] as Timestamp?)?.toDate();
+                    if (isOnline && hb != null && now.difference(hb).inSeconds < 60) {
+                      activeCount++;
+                    } else if (pId == data['hostId']) {
+                      // L'hôte d'un salon récent compte comme présent
+                      final created = (data['createdAt'] as Timestamp?)?.toDate();
+                      if (created != null && now.difference(created).inMinutes < 60) {
+                        activeCount++;
+                      }
+                    }
+                  }
+                });
+                return activeCount > 0 ? activeCount : (players.isNotEmpty ? 1 : 0);
+              }
+
+              // Tri intelligent
+              filtered.sort((a, b) {
+                final aData = a.data() as Map<String, dynamic>;
+                final bData = b.data() as Map<String, dynamic>;
+
+                final bool aIsMyHost = aData['hostId'] == widget.playerId;
+                final bool bIsMyHost = bData['hostId'] == widget.playerId;
+                // Mon salon toujours en tête !
+                if (aIsMyHost && !bIsMyHost) return -1;
+                if (!aIsMyHost && bIsMyHost) return 1;
+
+                if (_sortBy == 'players') {
+                  final aOnline = getActiveOnlineCount(aData);
+                  final bOnline = getActiveOnlineCount(bData);
+                  return bOnline.compareTo(aOnline);
+                } else if (_sortBy == 'slots') {
+                  final aMax = (aData['maxPlayers'] as num?)?.toInt() ?? 10;
+                  final bMax = (bData['maxPlayers'] as num?)?.toInt() ?? 10;
+                  final aAvail = (aMax - getActiveOnlineCount(aData)).clamp(0, 99);
+                  final bAvail = (bMax - getActiveOnlineCount(bData)).clamp(0, 99);
+                  return bAvail.compareTo(aAvail);
+                }
+
+                // Par défaut : plus récents
+                final aTime = (aData['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now();
+                final bTime = (bData['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now();
+                return bTime.compareTo(aTime);
+              });
+
+              if (filtered.isEmpty) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.search_off_rounded, size: 50, color: Colors.white24),
+                        const SizedBox(height: 12),
+                        Text(
+                          _searchCtrl.text.isNotEmpty || _selectedTheme != 'Tous'
+                              ? "Aucun salon ne correspond à vos filtres."
+                              : "Aucun salon public disponible.\nCréez le vôtre ci-dessous !",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Colors.white54, height: 1.4, fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+
+              return ListView.builder(
+                padding: const EdgeInsets.only(bottom: 80),
+                itemCount: filtered.length,
+                itemBuilder: (context, index) {
+                  final doc = filtered[index];
+                  final data = doc.data() as Map<String, dynamic>;
+                  final players = data['players'] as Map<String, dynamic>? ?? {};
+                  final int maxPlayers = (data['maxPlayers'] as num?)?.toInt() ?? 10;
+                  final int activeCount = getActiveOnlineCount(data);
+                  final bool isFull = activeCount >= maxPlayers;
+                  final String hostId = data['hostId'] ?? '';
+                  final bool amIHost = hostId == widget.playerId;
+                  final String theme = data['theme'] ?? 'Général';
+
+                  return Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                    color: amIHost
+                        ? Colors.deepPurple[900]?.withValues(alpha: 0.5)
+                        : const Color(0xFF1C1D2A),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(
+                        color: amIHost
+                            ? Colors.amberAccent.withValues(alpha: 0.6)
+                            : Colors.white.withValues(alpha: 0.08),
+                        width: amIHost ? 1.5 : 1,
+                      ),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                      leading: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: (amIHost ? Colors.amberAccent : Colors.cyanAccent).withValues(alpha: 0.15),
+                        ),
+                        child: Icon(
+                          Icons.living_rounded,
+                          size: 26,
+                          color: amIHost ? Colors.amberAccent : Colors.cyanAccent,
+                        ),
+                      ),
+                      title: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              data['name'] ?? GameContentLocalization.ui(context, 'Salon'),
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          if (amIHost) ...[
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Text(
+                                "MON SALON",
+                                style: TextStyle(color: Colors.black, fontSize: 9, fontWeight: FontWeight.w900),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.08),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                theme,
+                                style: const TextStyle(color: Colors.white70, fontSize: 10),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            // INDICATEUR EN LIGNE
+                            Row(
+                              children: [
+                                Container(
+                                  width: 7,
+                                  height: 7,
+                                  decoration: BoxDecoration(
+                                    color: activeCount > 0 ? Colors.greenAccent : Colors.white30,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  "$activeCount en ligne",
+                                  style: TextStyle(
+                                    color: activeCount > 0 ? Colors.greenAccent : Colors.white38,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.people, size: 16, color: isFull ? Colors.redAccent : Colors.white70),
+                          const SizedBox(height: 2),
+                          Text(
+                            "$activeCount / $maxPlayers",
+                            style: TextStyle(
+                              color: isFull ? Colors.redAccent : Colors.white70,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: isFull && !amIHost
+                          ? null
+                          : () async {
+                              final ps = Provider.of<PlayerState>(context, listen: false);
+                              await FirebaseService().joinLounge(
+                                doc.id,
+                                widget.playerId,
+                                ps.userName ?? 'Joueur',
+                              );
+                              if (context.mounted) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => LoungeRoomScreen(
+                                      loungeId: doc.id,
+                                      playerId: widget.playerId,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -65361,11 +66031,15 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
       'description': _descCtrl.text.trim(),
       'maxPlayers': _maxPlayers.toInt(),
       'isPrivate': _isPrivate,
+      'status': 'active',
+      'isPermanent': true,
       'hostId': widget.playerId,
       'players': {
         widget.playerId: {
           'name': ps.userName ?? 'Hôte',
           'joinedAt': FieldValue.serverTimestamp(),
+          'lastHeartbeat': FieldValue.serverTimestamp(),
+          'isOnline': true,
         },
       },
     };
@@ -65994,7 +66668,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           },
                         ),
                       ),
-                      if (isHost && pendingGame == null) ...[
+                      if (isHost && (pendingGame == null || pendingGame['status'] == 'finished')) ...[
                         SizedBox(width: 10),
                         ElevatedButton(
                           onPressed: () => _openGameLauncher(players),
@@ -66016,7 +66690,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     ),
                     builder: (context, chatSnap) {
                       if (!chatSnap.hasData) return SizedBox.shrink();
-                      final messages = chatSnap.data!.docs;
+                      final ps = Provider.of<PlayerState>(context, listen: false);
+                      final messages = chatSnap.data!.docs.where((doc) {
+                        final m = doc.data() as Map<String, dynamic>;
+                        return !ps.isUserBlocked(m['senderId']);
+                      }).toList();
                       return ListView.builder(
                         reverse: true,
                         itemCount: messages.length,

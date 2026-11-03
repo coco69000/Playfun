@@ -399,7 +399,7 @@ void showUserProfileDialog(
                               : GameContentLocalization.ui(context, "Joueurs bloqués"),
                           style: const TextStyle(color: Colors.white70, fontSize: 12),
                         ),
-                        onPressed: () => _showBlockedUsersDialog(context, ps),
+                        onPressed: () => showBlockedUsersDialog(context, ps),
                       ),
                     ),
                   ],
@@ -865,7 +865,7 @@ Widget _buildProfileStatCard(
 }
 
 
-void _showBlockedUsersDialog(BuildContext context, PlayerState ps) {
+void showBlockedUsersDialog(BuildContext context, PlayerState ps) {
   showDialog(
     context: context,
     builder: (dialogCtx) {
