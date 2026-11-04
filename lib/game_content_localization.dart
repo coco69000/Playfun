@@ -75,7 +75,10 @@ class GameContentLocalization {
 
   static String ui(BuildContext? context, String frText) {
     final code = _code(context);
-    final res = _lookup(_ui, code, frText) ?? _lookup(_roles, code, frText);
+    final res = _lookup(_ui, code, frText) ??
+        _lookup(_roles, code, frText) ??
+        _lookup(_cadavre, code, frText) ??
+        _lookup(_categories, code, frText);
     if (res != null && (code == 'fr' || res != frText)) return res;
     final fromGui = GameUiLocalization.tr(context, frText);
     if (fromGui != frText) return fromGui;

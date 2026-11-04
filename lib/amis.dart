@@ -7742,8 +7742,10 @@ class FirebaseService {
       int paperIndex =
           (passingMode == 'single')
               ? 0
-              : ((currentPlayerIndex - currentRound + playerOrder.length) %
-                  playerOrder.length);
+              : (((currentPlayerIndex -
+                          (currentRound % playerOrder.length) +
+                          playerOrder.length) %
+                      playerOrder.length));
 
       Map<String, dynamic> papers = Map<String, dynamic>.from(
         gameData['papers'] ?? {},
@@ -16192,6 +16194,10 @@ class FirebaseService {
 
       // Retirer la carte jouée et piocher immédiatement une nouvelle carte
       myHand.remove(cardText);
+      if (deck.isEmpty) {
+        final bmcData = GameWords.bmcData['Blanc Manger Coco'] ?? {};
+        deck = List<String>.from(bmcData['reponses'] ?? [])..shuffle();
+      }
       if (deck.isNotEmpty) {
         myHand.add(deck.removeAt(0));
       }
@@ -19579,6 +19585,11 @@ class FirebaseService {
         final updates = <String, dynamic>{};
 
         if (isCollective) {
+          try {
+            FirebaseDatabase.instance
+                .ref('games/$gameCode/pictionary')
+                .remove();
+          } catch (_) {}
           // Mode collectif : avancer à la carte suivante ou terminer le lot
           final List<String> collectiveWords = List<String>.from(
             gameData['pictionaryCollectiveWords'] ?? [],
@@ -20443,6 +20454,7 @@ class FirebaseService {
             break;
           }
         }
+        targetHand.addAll(penaltyCards);
         final Map<String, dynamic> allHands = Map<String, dynamic>.from(
           gameData['unoPlayerHands'] ?? {},
         );
@@ -32451,6 +32463,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     judgeId,
                     amIJudge,
                     playerId,
+                    question,
                   ),
         ),
       ],
@@ -32624,9 +32637,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     Map<String, dynamic> players,
     String judgeId,
     bool amIJudge,
-    String playerId,
-  ) {
-    List<MapEntry<String, dynamic>> entries = playedCards.entries.toList();
+    String playerId, [
+    String question = '',
+  ]) {
+    final int seed = question.isNotEmpty
+        ? (question.hashCode ^ judgeId.hashCode)
+        : (playedCards.keys.join().hashCode ^ judgeId.hashCode);
+    final List<MapEntry<String, dynamic>> entries =
+        playedCards.entries.toList()..shuffle(Random(seed));
 
     return StreamBuilder<DatabaseEvent>(
       stream: _firebaseService.getJudgeCardInspectLiveStream(widget.gameCode),
@@ -37637,8 +37655,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     int paperIndex =
         passingMode == 'single'
             ? 0
-            : ((currentPlayerIndex - currentRound + playerOrder.length) %
-                playerOrder.length);
+            : (((currentPlayerIndex -
+                        (currentRound % playerOrder.length) +
+                        playerOrder.length) %
+                    playerOrder.length));
     Map<String, dynamic> currentPaper = Map<String, dynamic>.from(
       papers[paperIndex.toString()] ?? {'steps': []},
     );
@@ -44275,49 +44295,88 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
           ),
         ] else ...[
-          // Vote sur les réponses (Synonyme ou Banni)
+          // Vote sur les réponses (Synonyme ou Banni & Le Roi des Mèmes)
           Text(
-            GameContentLocalization.ui(context, "Bannissez une réponse !"),
-            style: TextStyle(color: Colors.redAccent),
+            gameType == 'Le Roi des Mèmes'
+                ? GameContentLocalization.ui(
+                  context,
+                  "Votez pour la description la plus drôle !",
+                )
+                : GameContentLocalization.ui(context, "Bannissez une réponse !"),
+            style: TextStyle(
+              color:
+                  gameType == 'Le Roi des Mèmes'
+                      ? Colors.amberAccent
+                      : Colors.redAccent,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
-            child: ListView.builder(
-              itemCount: answers.length,
-              itemBuilder: (context, index) {
-                final entry = answers.entries.elementAt(index);
-                if (entry.key == voterId) return SizedBox.shrink();
+            child: Builder(
+              builder: (context) {
+                // Filtrer sa propre réponse et mélanger anonymement
+                final int seed =
+                    (gameData['currentRound'] ?? 0).hashCode ^
+                    mainTitle.hashCode;
+                final eligibleAnswers =
+                    answers.entries.where((e) => e.key != voterId).toList()
+                      ..shuffle(Random(seed));
 
-                return Card(
-                  color: Colors.red[50],
-                  margin: EdgeInsets.symmetric(vertical: 6),
-                  child: ListTile(
-                    title: Text(
-                      entry.value,
-                      style: TextStyle(
-                        color: Colors.red[900],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                return ListView.builder(
+                  itemCount: eligibleAnswers.length,
+                  itemBuilder: (context, index) {
+                    final entry = eligibleAnswers[index];
+
+                    return Card(
+                      color:
+                          gameType == 'Le Roi des Mèmes'
+                              ? Colors.purple[900]
+                              : Colors.red[50],
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      child: ListTile(
+                        title: Text(
+                          entry.value,
+                          style: TextStyle(
+                            color:
+                                gameType == 'Le Roi des Mèmes'
+                                    ? Colors.white
+                                    : Colors.red[900],
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        trailing: Icon(
+                          gameType == 'Le Roi des Mèmes'
+                              ? Icons.thumb_up
+                              : Icons.gavel,
+                          color:
+                              gameType == 'Le Roi des Mèmes'
+                                  ? Colors.amberAccent
+                                  : Colors.red,
+                        ),
+                        onTap:
+                            _isActionPending
+                                ? null
+                                : () {
+                                  setState(() => _isActionPending = true);
+                                  _firebaseService
+                                      .submitVote(
+                                        widget.gameCode,
+                                        voterId,
+                                        entry.key,
+                                      )
+                                      .whenComplete(() {
+                                        if (mounted)
+                                          setState(
+                                            () => _isActionPending = false,
+                                          );
+                                      });
+                                },
                       ),
-                    ),
-                    trailing: Icon(Icons.gavel, color: Colors.red),
-                    onTap:
-                        _isActionPending
-                            ? null
-                            : () {
-                              setState(() => _isActionPending = true);
-                              _firebaseService
-                                  .submitVote(
-                                    widget.gameCode,
-                                    voterId,
-                                    entry.key,
-                                  )
-                                  .whenComplete(() {
-                                    if (mounted)
-                                      setState(() => _isActionPending = false);
-                                  });
-                            },
-                  ),
+                    );
+                  },
                 );
               },
             ),
@@ -44337,6 +44396,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final question = gameData['currentQuestion'] ?? "Question...";
     final judgeName =
         players[gameData['currentTargetPlayerId']]?['name'] ?? 'le juge';
+
+    final int seed = (gameData['currentRound'] ?? 0).hashCode ^ question.hashCode;
+    final List<MapEntry<String, dynamic>> shuffledAnswers =
+        answers.entries.toList()..shuffle(Random(seed));
 
     return Column(
       children: [
@@ -44453,9 +44516,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               }
 
               return ListView.builder(
-                itemCount: answers.length,
+                itemCount: shuffledAnswers.length,
                 itemBuilder: (context, index) {
-                  final entry = answers.entries.elementAt(index);
+                  final entry = shuffledAnswers[index];
                   final bool isInspected = inspectedAnswer == entry.value;
 
                   return GestureDetector(
@@ -55805,6 +55868,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     if (isFirstPiece) {
+      final List<String> validCorners = ["0_0", "19_19", "0_19", "19_0"];
       String cornerTarget =
           myColor == 'blue'
               ? "0_0"
@@ -55814,7 +55878,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ? "0_19"
               : "19_0";
       bool coversCorner = absoluteCoords.any(
-        (c) => "${c[0]}_${c[1]}" == cornerTarget,
+        (c) {
+          final key = "${c[0]}_${c[1]}";
+          return key == cornerTarget ||
+              (validCorners.contains(key) && !board.containsKey(key));
+        },
       );
       setState(() => _blokusCanPlace = coversCorner);
     } else {
@@ -62757,8 +62825,10 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         _currentDeck.remove(word);
         if (guessed) {
           _teamScores[_activeTeam] = (_teamScores[_activeTeam] ?? 0) + 1;
+          _discardedWords.add(word);
+        } else {
+          _currentDeck.add(word);
         }
-        _discardedWords.add(word);
       }
       if (_currentDeck.isEmpty) {
         _endTurn();
