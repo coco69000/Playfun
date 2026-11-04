@@ -3015,6 +3015,68 @@ class FirebaseService {
   Stream<DatabaseEvent> getYamsLiveStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/yams_live').onValue;
 
+  // 5. Big Two : Cartes sélectionnées en direct
+  Future<void> updateBigTwoLiveSelection(
+    String gameCode,
+    String playerId,
+    int selectedCount,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/bigtwo_live');
+    if (selectedCount <= 0) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'playerId': playerId,
+        'selectedCount': selectedCount,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getBigTwoLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/bigtwo_live').onValue;
+
+  // 6. BMC & Le Juge : Inspection de carte / réponse en direct par le Juge
+  Future<void> updateJudgeCardInspectLive(
+    String gameCode,
+    String judgeId,
+    String? cardText,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/judge_inspect_live');
+    if (cardText == null || cardText.isEmpty) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'judgeId': judgeId,
+        'cardText': cardText,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getJudgeCardInspectLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/judge_inspect_live').onValue;
+
+  // 7. Taboo : Détection tactile du Buzzer en direct
+  Future<void> updateTabooBuzzerLive(
+    String gameCode,
+    String playerId,
+    bool isTouching,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/taboo_buzzer_live');
+    if (!isTouching) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'playerId': playerId,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getTabooBuzzerLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/taboo_buzzer_live').onValue;
+
   Future<String> createLounge(Map<String, dynamic> loungeData) async {
     final docRef = _db.collection('lounges').doc();
     final String joinCode = randomNumeric(6);
@@ -3826,9 +3888,12 @@ class FirebaseService {
         });
       } else {
         int nextIndex = (currentIndex + 1) % playerOrder.length;
-        while (finishedPlayers.contains(playerOrder[nextIndex]) ||
-            passedPlayers.contains(playerOrder[nextIndex])) {
+        int loopCount = 0;
+        while ((finishedPlayers.contains(playerOrder[nextIndex]) ||
+                passedPlayers.contains(playerOrder[nextIndex])) &&
+            loopCount < playerOrder.length) {
           nextIndex = (nextIndex + 1) % playerOrder.length;
+          loopCount++;
         }
 
         transaction.update(gameRef, {
@@ -3928,8 +3993,11 @@ class FirebaseService {
         }
 
         int nextIndex = (currentIndex + 1) % playerOrder.length;
-        while (finishedPlayers.contains(playerOrder[nextIndex])) {
+        int loopCount = 0;
+        while (finishedPlayers.contains(playerOrder[nextIndex]) &&
+            loopCount < playerOrder.length) {
           nextIndex = (nextIndex + 1) % playerOrder.length;
+          loopCount++;
         }
 
         transaction.update(gameRef, {
@@ -4044,8 +4112,11 @@ class FirebaseService {
           }
 
           int nextIndex = (currentIndex + 1) % playerOrder.length;
-          while (finishedPlayers.contains(playerOrder[nextIndex])) {
+          int loopCount = 0;
+          while (finishedPlayers.contains(playerOrder[nextIndex]) &&
+              loopCount < playerOrder.length) {
             nextIndex = (nextIndex + 1) % playerOrder.length;
+            loopCount++;
           }
 
           transaction.update(gameRef, {
@@ -4075,8 +4146,11 @@ class FirebaseService {
           String lastWinner = lastPlay?['playedBy'] ?? playerId;
           int nextIndex = playerOrder.indexOf(lastWinner);
           if (nextIndex == -1) nextIndex = 0;
-          while (finishedPlayers.contains(playerOrder[nextIndex])) {
+          int loopCount = 0;
+          while (finishedPlayers.contains(playerOrder[nextIndex]) &&
+              loopCount < playerOrder.length) {
             nextIndex = (nextIndex + 1) % playerOrder.length;
+            loopCount++;
           }
 
           transaction.update(gameRef, {
@@ -4090,9 +4164,12 @@ class FirebaseService {
           });
         } else {
           int nextIndex = (currentIndex + 1) % playerOrder.length;
-          while (finishedPlayers.contains(playerOrder[nextIndex]) ||
-              passedPlayers.contains(playerOrder[nextIndex])) {
+          int loopCount = 0;
+          while ((finishedPlayers.contains(playerOrder[nextIndex]) ||
+                  passedPlayers.contains(playerOrder[nextIndex])) &&
+              loopCount < playerOrder.length) {
             nextIndex = (nextIndex + 1) % playerOrder.length;
+            loopCount++;
           }
 
           transaction.update(gameRef, {
@@ -6713,6 +6790,7 @@ class FirebaseService {
       // MODIFICATION : Vérification de roundState OU currentPhase (pour Infiltré)
       bool isVoting =
           gameData['roundState'] == 'voting' ||
+          gameData['roundState'] == 'reveal_and_vote' ||
           gameData['currentPhase'] == 'voting';
 
       if (gameData['gameState'] != 'playing' || !isVoting) return;
@@ -8059,6 +8137,10 @@ class FirebaseService {
       if (!gameSnap.exists) return;
 
       var gameData = gameSnap.data() as Map<String, dynamic>;
+      if (gameData['roundState'] != 'results' &&
+          gameData['roundState'] != 'photo_selection') {
+        return;
+      }
       Map<String, dynamic> allPhotosMap = Map.from(gameData['photos'] ?? {});
       List<dynamic> playedPhotos = List.from(gameData['playedPhotos'] ?? []);
 
@@ -21326,7 +21408,10 @@ class FirebaseService {
       if (!snap.exists) return;
       final gameData = snap.data() as Map<String, dynamic>;
 
-      if (gameData['roundState'] != 'voting') return;
+      if (gameData['roundState'] != 'voting' &&
+          gameData['roundState'] != 'reveal_and_vote') {
+        return;
+      }
 
       _verifyPlayerAuth(gameData, voterId);
 
@@ -21339,19 +21424,36 @@ class FirebaseService {
       final expectedVotesPerStory =
           players.length - 1; // Tous les joueurs sauf l'auteur
 
-      int completedStories = 0;
-      for (final pId in players.keys) {
-        final sVotes = Map<String, dynamic>.from(votes[pId] ?? {});
-        if (sVotes.length >= expectedVotesPerStory) {
-          completedStories++;
+      final voteMode = gameData['liarVoteMode'] ?? 'simultaneous';
+      final playerOrder = List<String>.from(
+        gameData['playerOrder'] ?? players.keys.toList(),
+      );
+      final revealIndex = (gameData['revealIndex'] as num?)?.toInt() ?? 0;
+      final updates = <String, dynamic>{'votes': votes};
+
+      if (voteMode == 'turn_by_turn') {
+        if (storyVotes.length >= expectedVotesPerStory) {
+          if (revealIndex + 1 < playerOrder.length) {
+            updates['revealIndex'] = revealIndex + 1;
+            updates['turnStartTime'] = FieldValue.serverTimestamp();
+          } else {
+            allVotesIn = true;
+          }
+        }
+      } else {
+        int completedStories = 0;
+        for (final pId in players.keys) {
+          final sVotes = Map<String, dynamic>.from(votes[pId] ?? {});
+          if (sVotes.length >= expectedVotesPerStory) {
+            completedStories++;
+          }
+        }
+        if (completedStories >= players.length) {
+          allVotesIn = true;
         }
       }
 
-      if (completedStories >= players.length) {
-        allVotesIn = true;
-      }
-
-      transaction.update(gameRef, {'votes': votes});
+      transaction.update(gameRef, updates);
     });
 
     if (allVotesIn) {
@@ -21458,7 +21560,10 @@ class FirebaseService {
       if (!gameSnap.exists) return;
       final gameData = gameSnap.data() as Map<String, dynamic>;
 
-      if (gameData['roundState'] != 'voting') return;
+      if (gameData['roundState'] != 'voting' &&
+          gameData['roundState'] != 'reveal_and_vote') {
+        return;
+      }
 
       final votes = Map.from(gameData['votes'] as Map<String, dynamic>);
       final gameType = gameData['gameType'];
@@ -30744,11 +30849,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               builder: (context, snapshot) {
                 int elapsed = DateTime.now().difference(startTime).inSeconds;
                 int remaining = 5 - elapsed;
-                if (remaining <= 0 && isHost) {
+                if (remaining <= 0 && isHost && !_isActionPending) {
+                  _isActionPending = true;
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    _firebaseService.startNextPhotoRouletteRound(
-                      widget.gameCode,
-                    );
+                    _firebaseService
+                        .startNextPhotoRouletteRound(widget.gameCode)
+                        .whenComplete(() {
+                          if (mounted) setState(() => _isActionPending = false);
+                        });
                   });
                 }
                 return LinearProgressIndicator(
@@ -31806,101 +31914,165 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   ) {
     List<MapEntry<String, dynamic>> entries = playedCards.entries.toList();
 
-    return Column(
-      children: [
-        Text(
-          amIJudge
-              ? GameContentLocalization.ui(
-                context,
-                "Cliquez sur la carte gagnante !",
-              )
-              : GameContentLocalization.ui(
-                context,
-                "Le Juge est en train de choisir...",
-              ),
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: amIJudge ? Colors.amberAccent : Colors.white70,
-          ),
-        ),
-        SizedBox(height: 12),
-        Expanded(
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 1.3,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
-            itemCount: entries.length,
-            itemBuilder: (context, index) {
-              final entry = entries[index];
-              final winnerPlayerId = entry.key;
-              final cardText = entry.value.toString();
+    return StreamBuilder<DatabaseEvent>(
+      stream: _firebaseService.getJudgeCardInspectLiveStream(widget.gameCode),
+      builder: (context, liveSnap) {
+        String? inspectedCard;
+        if (liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+          try {
+            final raw = Map<String, dynamic>.from(
+              liveSnap.data!.snapshot.value as Map,
+            );
+            inspectedCard = raw['cardText'] as String?;
+          } catch (_) {}
+        }
 
-              return GestureDetector(
-                onTap:
-                    (amIJudge && !_isActionPending)
-                        ? () {
-                          setState(() => _isActionPending = true);
-                          _firebaseService
-                              .judgeBMCWinner(widget.gameCode, winnerPlayerId)
-                              .whenComplete(() {
-                                if (mounted)
-                                  setState(() => _isActionPending = false);
-                              });
-                        }
-                        : null,
-                child: Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: amIJudge ? Colors.amber : Colors.transparent,
-                      width: amIJudge ? 2 : 0,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 6,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          cardText,
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          overflow: TextOverflow.fade,
-                        ),
-                      ),
-                      if (amIJudge)
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Icon(
-                            Icons.star,
-                            color: Colors.amber[800],
-                            size: 24,
-                          ),
-                        ),
-                    ],
-                  ),
+        return Column(
+          children: [
+            Text(
+              amIJudge
+                  ? GameContentLocalization.ui(
+                    context,
+                    "Cliquez sur la carte gagnante !",
+                  )
+                  : (inspectedCard != null
+                      ? "👀 Le Juge lit une carte à voix haute..."
+                      : GameContentLocalization.ui(
+                        context,
+                        "Le Juge est en train de choisir...",
+                      )),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: amIJudge ? Colors.amberAccent : Colors.white70,
+              ),
+            ),
+            if (inspectedCard != null && !amIJudge) ...[
+              const SizedBox(height: 6),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.amber.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
                 ),
-              );
-            },
-          ),
-        ),
-      ],
+                child: Text(
+                  "Le Juge hésite sur : « $inspectedCard »",
+                  style: const TextStyle(
+                    color: Colors.amberAccent,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+            SizedBox(height: 12),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.3,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemCount: entries.length,
+                itemBuilder: (context, index) {
+                  final entry = entries[index];
+                  final winnerPlayerId = entry.key;
+                  final cardText = entry.value.toString();
+                  final bool isInspected = inspectedCard == cardText;
+
+                  return GestureDetector(
+                    onTap:
+                        (amIJudge && !_isActionPending)
+                            ? () {
+                              _firebaseService.updateJudgeCardInspectLive(
+                                widget.gameCode,
+                                playerId,
+                                cardText,
+                              );
+                              setState(() => _isActionPending = true);
+                              _firebaseService
+                                  .judgeBMCWinner(widget.gameCode, winnerPlayerId)
+                                  .whenComplete(() {
+                                    _firebaseService.updateJudgeCardInspectLive(
+                                      widget.gameCode,
+                                      playerId,
+                                      null,
+                                    );
+                                    if (mounted)
+                                      setState(() => _isActionPending = false);
+                                  });
+                            }
+                            : null,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isInspected
+                              ? Colors.amberAccent
+                              : (amIJudge ? Colors.amber : Colors.transparent),
+                          width: isInspected ? 3.5 : (amIJudge ? 2 : 0),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: isInspected
+                                ? Colors.amberAccent.withOpacity(0.6)
+                                : Colors.black26,
+                            blurRadius: isInspected ? 12 : 6,
+                            spreadRadius: isInspected ? 2 : 0,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              cardText,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              overflow: TextOverflow.fade,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (isInspected)
+                                const Icon(
+                                  Icons.visibility,
+                                  color: Colors.amber,
+                                  size: 18,
+                                )
+                              else
+                                const SizedBox.shrink(),
+                              if (amIJudge)
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.amber[800],
+                                  size: 24,
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -34539,6 +34711,56 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
         const SizedBox(height: 12),
 
+        // Détection live du buzzer pour avertir l'orateur
+        StreamBuilder<DatabaseEvent>(
+          stream: _firebaseService.getTabooBuzzerLiveStream(widget.gameCode),
+          builder: (context, snap) {
+            String? buzzerPlayerId;
+            if (snap.hasData && snap.data!.snapshot.value != null) {
+              try {
+                final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                buzzerPlayerId = raw['playerId'] as String?;
+              } catch (_) {}
+            }
+
+            if (buzzerPlayerId != null && buzzerPlayerId != playerId) {
+              final bName = players[buzzerPlayerId]?['name'] ?? 'L\'adversaire';
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent.withOpacity(0.25),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: Colors.redAccent, width: 1.5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.redAccent.withOpacity(0.4),
+                      blurRadius: 10,
+                      spreadRadius: 1,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.touch_app, color: Colors.redAccent, size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      "⚠️ $bName a le doigt sur le BUZZER !",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
+
         // 3. CARTE TABOO CENTRALE MINIMALISTE & DESIGN
         Expanded(
           child: Center(
@@ -34781,35 +35003,47 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               child: SizedBox(
                 width: double.infinity,
                 height: 54,
-                child: ElevatedButton.icon(
-                  icon: const Icon(Icons.warning_amber_rounded, size: 26),
-                  label: Text(
-                    GameContentLocalization.ui(
-                      context,
-                      "BUZZ ! (MOT INTERDIT)",
-                    ),
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFDC2626),
-                    foregroundColor: Colors.white,
-                    elevation: 6,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  onPressed: () {
-                    HapticFeedback.heavyImpact();
-                    _firebaseService.tabooAction(
-                      widget.gameCode,
-                      playerId,
-                      'buzz',
-                    );
+                child: Listener(
+                  onPointerDown: (_) {
+                    _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, true);
                   },
+                  onPointerUp: (_) {
+                    _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, false);
+                  },
+                  onPointerCancel: (_) {
+                    _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, false);
+                  },
+                  child: ElevatedButton.icon(
+                    icon: const Icon(Icons.warning_amber_rounded, size: 26),
+                    label: Text(
+                      GameContentLocalization.ui(
+                        context,
+                        "BUZZ ! (MOT INTERDIT)",
+                      ),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFDC2626),
+                      foregroundColor: Colors.white,
+                      elevation: 6,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: () {
+                      HapticFeedback.heavyImpact();
+                      _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, false);
+                      _firebaseService.tabooAction(
+                        widget.gameCode,
+                        playerId,
+                        'buzz',
+                      );
+                    },
+                  ),
                 ),
               ),
             )
@@ -35448,17 +35682,80 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  isMyTurn
-                      ? GameContentLocalization.ui(
-                        context,
-                        "C'est votre tour !",
-                      )
-                      : "Au tour de ${resolvePlayerName(currentPlayerId)}",
-                  style: TextStyle(
-                    color: isMyTurn ? Colors.greenAccent : Colors.white70,
-                    fontWeight: FontWeight.bold,
-                  ),
+                StreamBuilder<DatabaseEvent>(
+                  stream: _firebaseService.getBigTwoLiveStream(widget.gameCode),
+                  builder: (context, snap) {
+                    int liveCount = 0;
+                    String? livePlayerId;
+                    if (snap.hasData && snap.data!.snapshot.value != null) {
+                      try {
+                        final raw = Map<String, dynamic>.from(
+                          snap.data!.snapshot.value as Map,
+                        );
+                        livePlayerId = raw['playerId'] as String?;
+                        liveCount = (raw['selectedCount'] as num?)?.toInt() ?? 0;
+                      } catch (_) {}
+                    }
+
+                    final bool showThinking =
+                        !isMyTurn &&
+                        livePlayerId == currentPlayerId &&
+                        liveCount > 0;
+
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          isMyTurn
+                              ? GameContentLocalization.ui(
+                                context,
+                                "C'est votre tour !",
+                              )
+                              : "Au tour de ${resolvePlayerName(currentPlayerId)}",
+                          style: TextStyle(
+                            color: isMyTurn ? Colors.greenAccent : Colors.white70,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        if (showThinking) ...[
+                          const SizedBox(height: 6),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.amber.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: Colors.amberAccent.withOpacity(0.6),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(
+                                  Icons.style,
+                                  color: Colors.amberAccent,
+                                  size: 14,
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  "${resolvePlayerName(currentPlayerId)} a sélectionné $liveCount carte${liveCount > 1 ? 's' : ''}...",
+                                  style: const TextStyle(
+                                    color: Colors.amberAccent,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ],
+                    );
+                  },
                 ),
                 SizedBox(height: 20),
                 if (lastPlay != null) ...[
@@ -35517,6 +35814,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                           else
                                             _selectedBigTwoCards.add(card);
                                         });
+                                        _firebaseService.updateBigTwoLiveSelection(
+                                          widget.gameCode,
+                                          playerId,
+                                          _selectedBigTwoCards.length,
+                                        );
                                       }
                                       : null,
                               child: Transform.translate(
@@ -35686,6 +35988,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   void bigTwoPlay() async {
     setState(() => _isActionPending = true);
+    _firebaseService.updateBigTwoLiveSelection(widget.gameCode, widget.playerId, 0);
     try {
       await _firebaseService.bigTwoAction(
         widget.gameCode,
@@ -35712,6 +36015,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   void bigTwoPass() async {
     setState(() => _isActionPending = true);
+    _firebaseService.updateBigTwoLiveSelection(widget.gameCode, widget.playerId, 0);
     try {
       await _firebaseService.bigTwoAction(
         widget.gameCode,
@@ -35858,6 +36162,51 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ),
                   ),
                 ),
+              StreamBuilder<DatabaseEvent>(
+                stream: _firebaseService.getCheckersLiveStream(widget.gameCode),
+                builder: (context, liveSnap) {
+                  String? liveSelected;
+                  if (!isMyTurn &&
+                      liveSnap.hasData &&
+                      liveSnap.data!.snapshot.value != null) {
+                    try {
+                      final raw = Map<String, dynamic>.from(
+                        liveSnap.data!.snapshot.value as Map,
+                      );
+                      liveSelected = raw['fromKey'] as String?;
+                    } catch (_) {}
+                  }
+                  if (liveSelected != null) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 6.0),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.touch_app, color: Colors.amberAccent, size: 14),
+                            const SizedBox(width: 6),
+                            Text(
+                              "${players[currentPlayerId]?['name'] ?? 'L\'adversaire'} a sélectionné son pion et réfléchit...",
+                              style: const TextStyle(
+                                color: Colors.amberAccent,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
             ],
           ),
         ),
@@ -36012,13 +36361,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                         border: Border.all(
                                           color:
                                               isSelected
-                                                  ? Colors.greenAccent
+                                                  ? (isMyTurn ? Colors.greenAccent : Colors.amberAccent)
                                                   : (isMandatory
                                                       ? Colors.orangeAccent
                                                       : Colors.white),
                                           width:
                                               (isSelected || isMandatory)
-                                                  ? 3
+                                                  ? 3.5
                                                   : 2,
                                         ),
                                         boxShadow:
@@ -36028,10 +36377,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                                     color:
                                                         isMandatory
                                                             ? Colors.orange
-                                                            : Colors
-                                                                .greenAccent,
-                                                    blurRadius: 8,
-                                                    spreadRadius: 2,
+                                                            : (isMyTurn
+                                                                ? Colors.greenAccent
+                                                                : Colors.amberAccent),
+                                                    blurRadius: 10,
+                                                    spreadRadius: 3,
                                                   ),
                                                 ]
                                                 : null,
@@ -43073,75 +43423,151 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
         ),
 
-        Text(
-          isTarget
-              ? GameContentLocalization.ui(
-                context,
-                "👑 Choisis ta réponse préférée :",
-              )
-              : GameContentLocalization.format(
-                context,
-                "⏳ En attente du choix de {0}...",
-                [judgeName],
-              ),
-          style: Theme.of(context).textTheme.titleMedium,
+        StreamBuilder<DatabaseEvent>(
+          stream: _firebaseService.getJudgeCardInspectLiveStream(widget.gameCode),
+          builder: (context, liveSnap) {
+            String? inspectedAnswer;
+            if (liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+              try {
+                final raw = Map<String, dynamic>.from(
+                  liveSnap.data!.snapshot.value as Map,
+                );
+                inspectedAnswer = raw['cardText'] as String?;
+              } catch (_) {}
+            }
+
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  isTarget
+                      ? GameContentLocalization.ui(
+                        context,
+                        "👑 Choisis ta réponse préférée :",
+                      )
+                      : (inspectedAnswer != null
+                          ? "👑 Le Juge examine attentivement une réponse..."
+                          : GameContentLocalization.format(
+                            context,
+                            "⏳ En attente du choix de {0}...",
+                            [judgeName],
+                          )),
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                if (inspectedAnswer != null && !isTarget) ...[
+                  const SizedBox(height: 6),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.amber.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+                    ),
+                    child: Text(
+                      "Le Juge lit : « $inspectedAnswer »",
+                      style: const TextStyle(
+                        color: Colors.amberAccent,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ],
+            );
+          },
         ),
         SizedBox(height: 15),
 
         Expanded(
-          child: ListView.builder(
-            itemCount: answers.length,
-            itemBuilder: (context, index) {
-              final entry = answers.entries.elementAt(index);
-              return GestureDetector(
-                onTap:
-                    isTarget && !_isActionPending
-                        ? () {
-                          setState(() => _isActionPending = true);
-                          _firebaseService
-                              .selectWinningAnswer(widget.gameCode, entry.key)
-                              .whenComplete(() {
-                                if (mounted)
-                                  setState(() => _isActionPending = false);
-                              });
-                        }
-                        : null,
-                child: AnimatedContainer(
-                  duration: Duration(milliseconds: 200),
-                  margin: EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: isTarget ? Colors.deepPurple : Colors.transparent,
-                      width: isTarget ? 2 : 0,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          entry.value,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black87,
-                            fontStyle: FontStyle.italic,
-                          ),
+          child: StreamBuilder<DatabaseEvent>(
+            stream: _firebaseService.getJudgeCardInspectLiveStream(widget.gameCode),
+            builder: (context, liveSnap) {
+              String? inspectedAnswer;
+              if (liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+                try {
+                  final raw = Map<String, dynamic>.from(
+                    liveSnap.data!.snapshot.value as Map,
+                  );
+                  inspectedAnswer = raw['cardText'] as String?;
+                } catch (_) {}
+              }
+
+              return ListView.builder(
+                itemCount: answers.length,
+                itemBuilder: (context, index) {
+                  final entry = answers.entries.elementAt(index);
+                  final bool isInspected = inspectedAnswer == entry.value;
+
+                  return GestureDetector(
+                    onTap:
+                        isTarget && !_isActionPending
+                            ? () {
+                              _firebaseService.updateJudgeCardInspectLive(
+                                widget.gameCode,
+                                widget.playerId,
+                                entry.value.toString(),
+                              );
+                              setState(() => _isActionPending = true);
+                              _firebaseService
+                                  .selectWinningAnswer(widget.gameCode, entry.key)
+                                  .whenComplete(() {
+                                    _firebaseService.updateJudgeCardInspectLive(
+                                      widget.gameCode,
+                                      widget.playerId,
+                                      null,
+                                    );
+                                    if (mounted)
+                                      setState(() => _isActionPending = false);
+                                  });
+                            }
+                            : null,
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      margin: EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isInspected
+                              ? Colors.amberAccent
+                              : (isTarget ? Colors.deepPurple : Colors.transparent),
+                          width: isInspected ? 3.5 : (isTarget ? 2 : 0),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: isInspected
+                                ? Colors.amberAccent.withOpacity(0.5)
+                                : Colors.black12,
+                            blurRadius: isInspected ? 10 : 4,
+                            spreadRadius: isInspected ? 2 : 0,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                       ),
-                      if (isTarget)
-                        Icon(Icons.touch_app, color: Colors.deepPurple),
-                    ],
-                  ),
-                ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              entry.value,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black87,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                          if (isInspected)
+                            const Icon(Icons.visibility, color: Colors.amber, size: 20)
+                          else if (isTarget)
+                            Icon(Icons.touch_app, color: Colors.deepPurple),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               );
             },
           ),
