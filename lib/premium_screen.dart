@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -182,6 +183,39 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             color: Colors.white70,
                             fontSize: 13,
                           ),
+                        ),
+                        const SizedBox(height: 18),
+                        OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: Colors.greenAccent, width: 1.2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 18,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            backgroundColor: Colors.black.withValues(alpha: 0.25),
+                          ),
+                          icon: const Icon(
+                            Icons.settings_outlined,
+                            color: Colors.greenAccent,
+                            size: 18,
+                          ),
+                          label: const Text(
+                            "Gérer mon abonnement",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                          ),
+                          onPressed: () {
+                            final String subUrl = Platform.isIOS
+                                ? 'https://apps.apple.com/account/subscriptions'
+                                : 'https://play.google.com/store/account/subscriptions';
+                            LegalLinks.openUrl(context, subUrl);
+                          },
                         ),
                       ],
                     ),
@@ -543,6 +577,22 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         child: Text(
                           MatchmakingLocalization.tr(context, 'privacyPolicy'),
                           style: const TextStyle(
+                            color: Colors.white38,
+                            fontSize: 11,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          final String subUrl = Platform.isIOS
+                              ? 'https://apps.apple.com/account/subscriptions'
+                              : 'https://play.google.com/store/account/subscriptions';
+                          LegalLinks.openUrl(context, subUrl);
+                        },
+                        child: const Text(
+                          "Gérer mes abonnements",
+                          style: TextStyle(
                             color: Colors.white38,
                             fontSize: 11,
                             decoration: TextDecoration.underline,

@@ -24,6 +24,7 @@ import 'screens/onboarding_screen.dart';
 import 'services/app_router.dart';
 import 'services/force_update_service.dart';
 import 'services/legal_links.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -254,6 +255,7 @@ class _MainScreenState extends State<MainScreen> {
       text: ps.userName,
     );
     bool isEditingName = false;
+    bool isUploadingPhoto = false;
 
     final l10n = AppLocalizations.of(context);
 
@@ -262,6 +264,100 @@ class _MainScreenState extends State<MainScreen> {
       builder:
           (ctx) => StatefulBuilder(
             builder: (context, setStateDialog) {
+              Future<void> pickProfileImage() async {
+                final ImagePicker picker = ImagePicker();
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: const Color(0xFF1E1B2E),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  ),
+                  builder: (bottomSheetCtx) {
+                    return SafeArea(
+                      child: Wrap(
+                        children: [
+                          ListTile(
+                            leading: const Icon(Icons.photo_camera_rounded, color: Colors.amberAccent),
+                            title: const Text("Prendre une photo", style: TextStyle(color: Colors.white)),
+                            onTap: () async {
+                              Navigator.pop(bottomSheetCtx);
+                              try {
+                                final XFile? image = await picker.pickImage(
+                                  source: ImageSource.camera,
+                                  maxWidth: 600,
+                                  maxHeight: 600,
+                                  imageQuality: 85,
+                                );
+                                if (image != null) {
+                                  setStateDialog(() => isUploadingPhoto = true);
+                                  final ok = await ps.uploadProfilePhoto(image);
+                                  setStateDialog(() => isUploadingPhoto = false);
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(ok ? "Photo de profil mise à jour !" : "Échec du changement de photo."),
+                                        backgroundColor: ok ? Colors.green[800] : Colors.red[800],
+                                      ),
+                                    );
+                                  }
+                                }
+                              } catch (e) {
+                                setStateDialog(() => isUploadingPhoto = false);
+                              }
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.photo_library_rounded, color: Colors.cyanAccent),
+                            title: const Text("Choisir depuis la galerie", style: TextStyle(color: Colors.white)),
+                            onTap: () async {
+                              Navigator.pop(bottomSheetCtx);
+                              try {
+                                final XFile? image = await picker.pickImage(
+                                  source: ImageSource.gallery,
+                                  maxWidth: 600,
+                                  maxHeight: 600,
+                                  imageQuality: 85,
+                                );
+                                if (image != null) {
+                                  setStateDialog(() => isUploadingPhoto = true);
+                                  final ok = await ps.uploadProfilePhoto(image);
+                                  setStateDialog(() => isUploadingPhoto = false);
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(ok ? "Photo de profil mise à jour !" : "Échec du changement de photo."),
+                                        backgroundColor: ok ? Colors.green[800] : Colors.red[800],
+                                      ),
+                                    );
+                                  }
+                                }
+                              } catch (e) {
+                                setStateDialog(() => isUploadingPhoto = false);
+                              }
+                            },
+                          ),
+                          if (ps.photoUrl != null && ps.photoUrl!.isNotEmpty)
+                            ListTile(
+                              leading: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent),
+                              title: const Text("Supprimer la photo", style: TextStyle(color: Colors.redAccent)),
+                              onTap: () async {
+                                Navigator.pop(bottomSheetCtx);
+                                setStateDialog(() => isUploadingPhoto = true);
+                                await ps.deleteProfilePhoto();
+                                setStateDialog(() => isUploadingPhoto = false);
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text("Photo de profil retirée.")),
+                                  );
+                                }
+                              },
+                            ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              }
               return AlertDialog(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -299,18 +395,78 @@ class _MainScreenState extends State<MainScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundColor: Colors.deepPurpleAccent,
-                        child: Text(
-                          ps.userName != null && ps.userName!.isNotEmpty
-                              ? ps.userName![0].toUpperCase()
-                              : "?",
-                          style: const TextStyle(
-                            fontSize: 30,
-                            color: Colors.white,
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: 42,
+                            backgroundColor:
+                                ps.isPremium
+                                    ? Colors.amber[700]
+                                    : Colors.deepPurpleAccent,
+                            backgroundImage:
+                                (ps.photoUrl != null && ps.photoUrl!.isNotEmpty)
+                                    ? NetworkImage(ps.photoUrl!)
+                                    : null,
+                            child:
+                                isUploadingPhoto
+                                    ? const SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 2.5,
+                                      ),
+                                    )
+                                    : ((ps.photoUrl == null ||
+                                            ps.photoUrl!.isEmpty)
+                                        ? Text(
+                                          ps.userName != null &&
+                                                  ps.userName!.isNotEmpty
+                                              ? ps.userName![0].toUpperCase()
+                                              : "?",
+                                          style: const TextStyle(
+                                            fontSize: 32,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                        : null),
                           ),
-                        ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: isUploadingPhoto ? null : pickProfileImage,
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.amber[600],
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(0xFF1E1B2E),
+                                      width: 2.5,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withValues(alpha: 0.4),
+                                        blurRadius: 4,
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.camera_alt_rounded,
+                                    size: 16,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 15),
 
@@ -816,17 +972,26 @@ class _MainScreenState extends State<MainScreen> {
                         playerState.isPremium
                             ? Colors.amber[700]
                             : Colors.deepPurpleAccent,
-                    child: Text(
-                      playerState.userName != null &&
-                              playerState.userName!.isNotEmpty
-                          ? playerState.userName![0].toUpperCase()
-                          : "?",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    backgroundImage:
+                        (playerState.photoUrl != null &&
+                                playerState.photoUrl!.isNotEmpty)
+                            ? NetworkImage(playerState.photoUrl!)
+                            : null,
+                    child:
+                        (playerState.photoUrl == null ||
+                                playerState.photoUrl!.isEmpty)
+                            ? Text(
+                              playerState.userName != null &&
+                                      playerState.userName!.isNotEmpty
+                                  ? playerState.userName![0].toUpperCase()
+                                  : "?",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                            : null,
                   ),
                   if (playerState.isPremium)
                     Positioned(

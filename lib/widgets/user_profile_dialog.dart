@@ -8,6 +8,7 @@ import '../game_content_localization.dart';
 import '../game_rules_localization.dart';
 import '../l10n/app_localizations.dart';
 import '../matchmaking_localization.dart';
+import 'package:image_picker/image_picker.dart';
 
 void showUserProfileDialog(
   BuildContext context, {
@@ -48,6 +49,7 @@ void showUserProfileDialog(
 
             final data = snapshot.data!.data() as Map<String, dynamic>;
             final String name = data['name'] ?? 'Joueur';
+            final String? photoUrl = data['photoUrl'] as String?;
             final int level = data['level'] ?? 1;
             final int xp = data['xp'] ?? 0;
             final bool isPremium = data['isPremium'] == true;
@@ -104,8 +106,15 @@ void showUserProfileDialog(
                               height: 68,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                gradient:
-                                    isPremium
+                                image: (photoUrl != null && photoUrl.isNotEmpty)
+                                    ? DecorationImage(
+                                      image: NetworkImage(photoUrl),
+                                      fit: BoxFit.cover,
+                                    )
+                                    : null,
+                                gradient: (photoUrl != null && photoUrl.isNotEmpty)
+                                    ? null
+                                    : (isPremium
                                         ? const LinearGradient(
                                           colors: [
                                             Colors.amber,
@@ -117,7 +126,7 @@ void showUserProfileDialog(
                                             Colors.deepPurple,
                                             Colors.deepPurpleAccent,
                                           ],
-                                        ),
+                                        )),
                                 boxShadow: [
                                   BoxShadow(
                                     color: (isPremium
@@ -129,21 +138,23 @@ void showUserProfileDialog(
                                   ),
                                 ],
                               ),
-                              child: Center(
-                                child: Text(
-                                  name.isNotEmpty ? name[0].toUpperCase() : '?',
-                                  style: const TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                              child: (photoUrl != null && photoUrl.isNotEmpty)
+                                  ? null
+                                  : Center(
+                                    child: Text(
+                                      name.isNotEmpty ? name[0].toUpperCase() : '?',
+                                      style: const TextStyle(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
                             ),
                             if (isPremium)
                               Positioned(
                                 bottom: -2,
-                                right: -2,
+                                right: isMe ? 22 : -2,
                                 child: Container(
                                   padding: const EdgeInsets.all(4),
                                   decoration: const BoxDecoration(
@@ -154,6 +165,117 @@ void showUserProfileDialog(
                                     Icons.star_rounded,
                                     size: 14,
                                     color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            if (isMe)
+                              Positioned(
+                                bottom: -2,
+                                right: -2,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () async {
+                                      final ImagePicker picker = ImagePicker();
+                                      showModalBottomSheet(
+                                        context: context,
+                                        backgroundColor: const Color(0xFF1E1B2E),
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                        ),
+                                        builder: (bCtx) {
+                                          return SafeArea(
+                                            child: Wrap(
+                                              children: [
+                                                ListTile(
+                                                  leading: const Icon(Icons.photo_camera_rounded, color: Colors.amberAccent),
+                                                  title: const Text("Prendre une photo", style: TextStyle(color: Colors.white)),
+                                                  onTap: () async {
+                                                    Navigator.pop(bCtx);
+                                                    try {
+                                                      final XFile? img = await picker.pickImage(
+                                                        source: ImageSource.camera,
+                                                        maxWidth: 600,
+                                                        maxHeight: 600,
+                                                        imageQuality: 85,
+                                                      );
+                                                      if (img != null) {
+                                                        final ok = await ps.uploadProfilePhoto(img);
+                                                        if (context.mounted) {
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(
+                                                              content: Text(ok ? "Photo de profil mise à jour !" : "Échec de l'envoi."),
+                                                              backgroundColor: ok ? Colors.green[800] : Colors.red[800],
+                                                            ),
+                                                          );
+                                                        }
+                                                      }
+                                                    } catch (_) {}
+                                                  },
+                                                ),
+                                                ListTile(
+                                                  leading: const Icon(Icons.photo_library_rounded, color: Colors.cyanAccent),
+                                                  title: const Text("Choisir depuis la galerie", style: TextStyle(color: Colors.white)),
+                                                  onTap: () async {
+                                                    Navigator.pop(bCtx);
+                                                    try {
+                                                      final XFile? img = await picker.pickImage(
+                                                        source: ImageSource.gallery,
+                                                        maxWidth: 600,
+                                                        maxHeight: 600,
+                                                        imageQuality: 85,
+                                                      );
+                                                      if (img != null) {
+                                                        final ok = await ps.uploadProfilePhoto(img);
+                                                        if (context.mounted) {
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(
+                                                              content: Text(ok ? "Photo de profil mise à jour !" : "Échec de l'envoi."),
+                                                              backgroundColor: ok ? Colors.green[800] : Colors.red[800],
+                                                            ),
+                                                          );
+                                                        }
+                                                      }
+                                                    } catch (_) {}
+                                                  },
+                                                ),
+                                                if (photoUrl != null && photoUrl.isNotEmpty)
+                                                  ListTile(
+                                                    leading: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent),
+                                                    title: const Text("Supprimer la photo", style: TextStyle(color: Colors.redAccent)),
+                                                    onTap: () async {
+                                                      Navigator.pop(bCtx);
+                                                      await ps.deleteProfilePhoto();
+                                                      if (context.mounted) {
+                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                          const SnackBar(content: Text("Photo de profil retirée.")),
+                                                        );
+                                                      }
+                                                    },
+                                                  ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                        color: Colors.amber[600],
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: const Color(0xFF161622),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: const Icon(
+                                        Icons.camera_alt_rounded,
+                                        size: 14,
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

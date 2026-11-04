@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'services/force_update_service.dart';
 import 'services/premium_service.dart';
@@ -13,6 +15,7 @@ class PlayerState extends ChangeNotifier {
 
   String? _userId;
   String? _userName;
+  String? _photoUrl;
   int _coins = 0;
   bool _isPremium = false;
   bool _isDataLoaded = false;
@@ -44,6 +47,7 @@ class PlayerState extends ChangeNotifier {
   bool get hasCompletedOnboarding => _hasCompletedOnboarding;
   String? get userId => _userId;
   String? get userName => _userName;
+  String? get photoUrl => _photoUrl;
   List<String> get blockedUsers => _blockedUsers;
   bool isUserBlocked(String? uid) => uid != null && _blockedUsers.contains(uid);
 
@@ -307,6 +311,7 @@ class PlayerState extends ChangeNotifier {
     } else {
       var data = initialDoc.data() as Map<String, dynamic>;
       _userName = data['name'] ?? 'Joueur';
+      _photoUrl = data['photoUrl'] as String?;
       _coins = data['coins'] ?? 50;
       final firestoreIsPremium = data['isPremium'] == true;
       _isPremium = isVipOnStore || firestoreIsPremium;
@@ -353,6 +358,7 @@ class PlayerState extends ChangeNotifier {
       if (!userDoc.exists) return;
       var data = userDoc.data() as Map<String, dynamic>;
       _userName = data['name'] ?? 'Joueur';
+      _photoUrl = data['photoUrl'] as String?;
       _coins = data['coins'] ?? 50;
       final firestoreIsPremium = data['isPremium'] == true;
       _isPremium = firestoreIsPremium || isVipOnStore;
@@ -431,6 +437,7 @@ class PlayerState extends ChangeNotifier {
     _userSubscription = null;
     _userId = null;
     _userName = null;
+    _photoUrl = null;
     _coins = 0;
     _isPremium = false;
     _isDataLoaded = false;
@@ -479,7 +486,7 @@ class PlayerState extends ChangeNotifier {
     _videoGamesPlayedToday = data['videoGamesPlayedToday'] ?? 0;
   }
 
-  // --- NOUVELLE FONCTION POUR MODIFIER SON PSEUDO ---
+  // --- GESTION DU PSEUDO ET DE LA PHOTO DE PROFIL ---
   Future<void> updateUserName(String newName) async {
     if (_userId == null || newName.trim().isEmpty) return;
     final clean = newName.trim();
@@ -489,6 +496,66 @@ class PlayerState extends ChangeNotifier {
     });
     _userName = clean;
     notifyListeners();
+  }
+
+  /// Met à jour l'URL de la photo dans Firestore
+  Future<void> updatePhotoUrl(String? newUrl) async {
+    if (_userId == null) return;
+    if (newUrl == null) {
+      await _db.collection('users').doc(_userId!).update({
+        'photoUrl': FieldValue.delete(),
+      });
+    } else {
+      await _db.collection('users').doc(_userId!).update({
+        'photoUrl': newUrl,
+      });
+    }
+    _photoUrl = newUrl;
+    notifyListeners();
+  }
+
+  /// Téléverse une nouvelle photo de profil sur Firebase Storage et l'associe à l'utilisateur
+  Future<bool> uploadProfilePhoto(XFile imageFile) async {
+    if (_userId == null) return false;
+    try {
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('avatars')
+          .child('$_userId.jpg');
+      final bytes = await imageFile.readAsBytes();
+      final metadata = SettableMetadata(
+        contentType: 'image/jpeg',
+        cacheControl: 'public, max-age=3600',
+      );
+      await storageRef.putData(bytes, metadata);
+      final downloadUrl = await storageRef.getDownloadURL();
+      // Ajout d'un timestamp pour forcer le rafraîchissement d'image côté client
+      final versionedUrl = "$downloadUrl${downloadUrl.contains('?') ? '&' : '?'}v=${DateTime.now().millisecondsSinceEpoch}";
+      await updatePhotoUrl(versionedUrl);
+      return true;
+    } catch (e) {
+      debugPrint("Erreur upload photo de profil: $e");
+      return false;
+    }
+  }
+
+  /// Supprime la photo de profil personnalisée
+  Future<bool> deleteProfilePhoto() async {
+    if (_userId == null) return false;
+    try {
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('avatars')
+          .child('$_userId.jpg');
+      await storageRef.delete().catchError((e) {
+        debugPrint("Image non trouvée sur Firebase Storage: $e");
+      });
+      await updatePhotoUrl(null);
+      return true;
+    } catch (e) {
+      debugPrint("Erreur suppression photo: $e");
+      return false;
+    }
   }
 
   void grantDailyCoinsAndResetLimits() {
