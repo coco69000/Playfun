@@ -945,13 +945,16 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
   static bool isValidRamiMeld(List<String> cards) {
     if (cards.length < 3) return false;
 
-    List<Map<String, String>> parsed =
-        cards.map((c) {
-          String cleanC = c.split('_')[0];
-          String rank = cleanC.substring(0, cleanC.length - 1);
-          String suit = cleanC.substring(cleanC.length - 1);
-          return {'rank': rank, 'suit': suit};
-        }).toList();
+    List<Map<String, String>> parsed = [];
+    for (String c in cards) {
+      String cleanC = c.split('_')[0].trim();
+      if (cleanC.toUpperCase().contains('JOKER') || cleanC.length < 2) {
+        return false;
+      }
+      String rank = cleanC.substring(0, cleanC.length - 1);
+      String suit = cleanC.substring(cleanC.length - 1);
+      parsed.add({'rank': rank, 'suit': suit});
+    }
 
     // Check for Set (same rank, different suits)
     bool isSet = parsed.every((c) => c['rank'] == parsed[0]['rank']);
@@ -964,27 +967,25 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
     // Check for Run (same suit, consecutive ranks)
     bool isRun = parsed.every((c) => c['suit'] == parsed[0]['suit']);
     if (isRun) {
-      List<int> rankValuesLow =
-          parsed.map((c) {
-              String r = c['rank']!;
-              if (r == 'A') return 1;
-              if (r == 'J') return 11;
-              if (r == 'Q') return 12;
-              if (r == 'K') return 13;
-              return int.parse(r);
-            }).toList()
-            ..sort();
+      int? parseVal(String r, bool aceHigh) {
+        if (r == 'A') return aceHigh ? 14 : 1;
+        if (r == 'J') return 11;
+        if (r == 'Q') return 12;
+        if (r == 'K') return 13;
+        return int.tryParse(r);
+      }
 
-      List<int> rankValuesHigh =
-          parsed.map((c) {
-              String r = c['rank']!;
-              if (r == 'A') return 14;
-              if (r == 'J') return 11;
-              if (r == 'Q') return 12;
-              if (r == 'K') return 13;
-              return int.parse(r);
-            }).toList()
-            ..sort();
+      List<int> rankValuesLow = [];
+      List<int> rankValuesHigh = [];
+      for (var c in parsed) {
+        int? vLow = parseVal(c['rank']!, false);
+        int? vHigh = parseVal(c['rank']!, true);
+        if (vLow == null || vHigh == null) return false;
+        rankValuesLow.add(vLow);
+        rankValuesHigh.add(vHigh);
+      }
+      rankValuesLow.sort();
+      rankValuesHigh.sort();
 
       bool isConsecutiveLow = true;
       for (int i = 1; i < rankValuesLow.length; i++) {
@@ -1002,6 +1003,7 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
         }
       }
 
+      // Rejette les suites non consécutives sans lever d'exception
       return isConsecutiveLow || isConsecutiveHigh;
     }
     return false;
@@ -3663,8 +3665,11 @@ class FirebaseService {
 
       int straightHighVal = cards[4]['value'];
       if (isA2345) {
-        // Dans A-2-3-4-5, le 2 est la plus forte
-        straightHighVal = cards.firstWhere((c) => c['rankInt'] == 15)['value'];
+        // Dans A-2-3-4-5, la carte la plus haute de la suite est le 5
+        straightHighVal = cards.firstWhere((c) => c['rankInt'] == 5)['value'];
+      } else if (is23456) {
+        // Dans 2-3-4-5-6, la carte la plus haute de la suite est le 6
+        straightHighVal = cards.firstWhere((c) => c['rankInt'] == 6)['value'];
       }
 
       if (isStraight && isFlush) {
@@ -4017,7 +4022,14 @@ class FirebaseService {
       if (trickEnded) {
         String lastPlayedBy = lastPlay?['playedBy'] ?? playerId;
         int nextIndex = playerOrder.indexOf(lastPlayedBy);
-        if (nextIndex == -1) nextIndex = 0;
+        if (nextIndex == -1 || finishedPlayers.contains(playerOrder[nextIndex])) {
+          final remainingActive = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+          if (remainingActive.isNotEmpty) {
+            nextIndex = playerOrder.indexOf(remainingActive.first);
+          } else {
+            nextIndex = 0;
+          }
+        }
         int loopCount = 0;
         while (finishedPlayers.contains(playerOrder[nextIndex]) &&
             loopCount < playerOrder.length) {
@@ -4292,7 +4304,14 @@ class FirebaseService {
         if (trickEnded) {
           String lastWinner = lastPlay?['playedBy'] ?? playerId;
           int nextIndex = playerOrder.indexOf(lastWinner);
-          if (nextIndex == -1) nextIndex = 0;
+          if (nextIndex == -1 || finishedPlayers.contains(playerOrder[nextIndex])) {
+            final remainingActive = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+            if (remainingActive.isNotEmpty) {
+              nextIndex = playerOrder.indexOf(remainingActive.first);
+            } else {
+              nextIndex = 0;
+            }
+          }
           int loopCount = 0;
           while (finishedPlayers.contains(playerOrder[nextIndex]) &&
               loopCount < playerOrder.length) {
@@ -4517,6 +4536,50 @@ class FirebaseService {
           Map<String, dynamic> targetDataUpdate = Map<String, dynamic>.from(
             pData[targetId],
           );
+
+          String? matchingSafety;
+          if (card == 'STOP' || card == 'RED_LIGHT' || card == 'SPEED_LIMIT') {
+            matchingSafety = 'SAFETY_RIGHT_OF_WAY';
+          } else if (card == 'FLAT_TIRE') {
+            matchingSafety = 'SAFETY_REPAIRS';
+          } else if (card == 'OUT_OF_GAS') {
+            matchingSafety = 'SAFETY_EXTRA_TANK';
+          }
+
+          List<String> targetHand = List<String>.from(targetDataUpdate['hand'] ?? []);
+          if (matchingSafety != null && targetHand.contains(matchingSafety)) {
+            // COUP-FOURRÉ OFFICIEL !
+            targetHand.remove(matchingSafety);
+            List<String> targetSafeties = List<String>.from(targetDataUpdate['safeties'] ?? []);
+            targetSafeties.add(matchingSafety);
+            targetDataUpdate['safeties'] = targetSafeties;
+            if (matchingSafety == 'SAFETY_RIGHT_OF_WAY') {
+              targetDataUpdate['isStopped'] = false;
+              targetDataUpdate['isSpeedLimited'] = false;
+              targetDataUpdate['hasRightOfWay'] = true;
+            } else if (matchingSafety == 'SAFETY_REPAIRS') {
+              targetDataUpdate['isFlatTire'] = false;
+            } else if (matchingSafety == 'SAFETY_EXTRA_TANK') {
+              targetDataUpdate['isOutOfGas'] = false;
+            }
+            if (deck.isNotEmpty) {
+              targetHand.add(deck.removeAt(0));
+            }
+            targetDataUpdate['hand'] = targetHand;
+            pData[targetId] = targetDataUpdate;
+            int coupFourreIndex = playerOrder.indexOf(targetId);
+            transaction.update(gameRef, {
+              'milleBornesPlayerData': pData,
+              'milleBornesDeck': deck,
+              'milleBornesCurrentPlayerIndex': coupFourreIndex,
+              'turnStartTime': FieldValue.serverTimestamp(),
+              'gameLog': FieldValue.arrayUnion([
+                "⚡ COUP-FOURRÉ ! ${players[targetId]?['name']} pare l'attaque avec ${matchingSafety} et prend la main !",
+              ]),
+            });
+            return;
+          }
+
           if (card == 'STOP' || card == 'RED_LIGHT')
             targetDataUpdate['isStopped'] = true;
           if (card == 'SPEED_LIMIT') targetDataUpdate['isSpeedLimited'] = true;
@@ -5109,6 +5172,13 @@ class FirebaseService {
           'roundLoserId': null,
           'turnStartTime': FieldValue.serverTimestamp(),
           'restartVotes': {},
+          'beloteTeamScores': {},
+          'beloteTotalScores': {},
+          'ramiTotalScores': {},
+          'ramiRoundScores': {},
+          'ramiMelds': {},
+          'yamsScores': {},
+          'totalScores': {},
           ...playerXpResets,
         });
       }
@@ -5224,6 +5294,13 @@ class FirebaseService {
           'gameEndReason': null,
           'turnStartTime': FieldValue.serverTimestamp(),
           'restartVotes': {},
+          'beloteTeamScores': {},
+          'beloteTotalScores': {},
+          'ramiTotalScores': {},
+          'ramiRoundScores': {},
+          'ramiMelds': {},
+          'yamsScores': {},
+          'totalScores': {},
           'gameLog': FieldValue.arrayUnion([
             "⏱️ Fin du compte à rebours : Partie relancée pour tous les ${players.length} joueurs !",
           ]),
@@ -6717,6 +6794,11 @@ class FirebaseService {
     Map<String, dynamic> gameData,
     String timedOutPlayerId,
   ) async {
+    final gameType = gameData['gameType'] ?? '';
+    const realTimeGames = ['Dobble', 'La Patate Chaude'];
+    if (realTimeGames.contains(gameType)) {
+      return false; // Pas d'expulsion d'inactivité individuelle sur les jeux d'observation en temps réel
+    }
     var inactiveCounts = Map<String, int>.from(
       gameData['inactiveTurnCounts'] ?? {},
     );
@@ -7031,15 +7113,38 @@ class FirebaseService {
           }
         });
 
-        String? eliminatedPlayerId =
-            tiedPlayers.isNotEmpty ? tiedPlayers.first : null;
-        await gameRef.update({
-          'currentPhase': 'turn_result',
-          'eliminatedThisTurn':
-              eliminatedPlayerId != null ? [eliminatedPlayerId] : [],
-          'turnLog': FieldValue.arrayUnion(["Le temps de vote est écoulé !"]),
-          'turnStartTime': FieldValue.serverTimestamp(),
-        });
+        if (tiedPlayers.length > 1) {
+          final String? goddessId = updatedGameData['specialRoles']?['justiceGoddess'];
+          if (goddessId != null) {
+            await gameRef.update({
+              'currentPhase': 'tie_breaker',
+              'tieBreakerCandidates': tiedPlayers,
+              'turnLog': FieldValue.arrayUnion([
+                "Égalité lors du vote ! La Déesse de la Justice doit trancher.",
+              ]),
+              'turnStartTime': FieldValue.serverTimestamp(),
+            });
+          } else {
+            await gameRef.update({
+              'currentPhase': 'turn_result',
+              'eliminatedThisTurn': [],
+              'turnLog': FieldValue.arrayUnion([
+                "Égalité parfaite lors du vote (${tiedPlayers.length} joueurs ex-aequo) ! Aucun joueur éliminé.",
+              ]),
+              'turnStartTime': FieldValue.serverTimestamp(),
+            });
+          }
+        } else {
+          String? eliminatedPlayerId =
+              tiedPlayers.isNotEmpty ? tiedPlayers.first : null;
+          await gameRef.update({
+            'currentPhase': 'turn_result',
+            'eliminatedThisTurn':
+                eliminatedPlayerId != null ? [eliminatedPlayerId] : [],
+            'turnLog': FieldValue.arrayUnion(["Le temps de vote est écoulé !"]),
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
       }
     } else if (updatedGameData['gameType'] == 'Le Juge' &&
         updatedGameData['roundState'] == 'voting') {
@@ -7428,6 +7533,7 @@ class FirebaseService {
   }
 
   int calculateYamsScore(List<int> dice, String category) {
+    if (dice.length != 5 || dice.any((d) => d < 1 || d > 6)) return 0;
     Map<int, int> counts = {};
     for (int d in dice) counts[d] = (counts[d] ?? 0) + 1;
     int sum = dice.fold(0, (a, b) => a + b);
@@ -7503,7 +7609,7 @@ class FirebaseService {
 
     final rawDice = currentData['yamsDice'] as List<dynamic>?;
     List<int> dice =
-        (rawDice != null && rawDice.length == 5)
+        (rawDice != null && rawDice.length == 5 && !rawDice.contains(0))
             ? List<int>.from(rawDice.map((e) => (e as num).toInt()))
             : [1, 2, 3, 4, 5];
 
@@ -8068,6 +8174,8 @@ class FirebaseService {
       int card2Index = col + 4;
       int card3Index = col + 8;
       if (playerGrid[card1Index]['value'] != -100 &&
+          playerGrid[card2Index]['value'] != -100 &&
+          playerGrid[card3Index]['value'] != -100 &&
           playerGrid[card1Index]['revealed'] == true &&
           playerGrid[card2Index]['revealed'] == true &&
           playerGrid[card3Index]['revealed'] == true &&
@@ -8102,6 +8210,8 @@ class FirebaseService {
           int c2 = col + 4;
           int c3 = col + 8;
           if (currentGrid[c1]['value'] != -100 &&
+              currentGrid[c2]['value'] != -100 &&
+              currentGrid[c3]['value'] != -100 &&
               currentGrid[c1]['value'] == currentGrid[c2]['value'] &&
               currentGrid[c1]['value'] == currentGrid[c3]['value']) {
             currentGrid[c1]['value'] = -100;
@@ -8416,6 +8526,18 @@ class FirebaseService {
         transaction.update(gameRef, updates);
       }
     });
+
+    final freshSnap = await gameRef.get();
+    if (freshSnap.exists) {
+      final freshData = freshSnap.data() as Map<String, dynamic>;
+      if (freshData['roundState'] == 'showing_photo') {
+        final fVotes = Map<String, dynamic>.from(freshData['votes'] ?? {});
+        final fPlayers = Map<String, dynamic>.from(freshData['players'] ?? {});
+        if (fVotes.length >= fPlayers.length) {
+          await _tallyPhotoRouletteVotes(gameRef, freshData);
+        }
+      }
+    }
   }
 
   Future<void> _tallyPhotoRouletteVotes(
@@ -9066,6 +9188,7 @@ class FirebaseService {
           if (currentSubPhase == 'loups_voted' ||
               currentSubPhase == 'loup_noir_action') {
             currentPhaseIndex = nightPhaseOrder.indexOf('loups_turn');
+            transaction.update(gameRef, {'nightActions.loupsVoted': true});
           }
           if (currentPhaseIndex == -1) currentPhaseIndex = -1;
 
@@ -11057,6 +11180,51 @@ class FirebaseService {
     );
   }
 
+  Future<void> _advancePendingDayEffects(DocumentReference gameRef) async {
+    await _db.runTransaction((transaction) async {
+      DocumentSnapshot snap = await transaction.get(gameRef);
+      if (!snap.exists) return;
+      var gameData = snap.data() as Map<String, dynamic>;
+      List<Map<String, dynamic>> pendingDayEffects =
+          List<Map<String, dynamic>>.from(
+            (gameData['pendingDayEffects'] as List<dynamic>?)?.map(
+                  (e) => Map<String, dynamic>.from(e),
+                ) ??
+                [],
+          );
+      if (pendingDayEffects.isNotEmpty) {
+        var nextEffect = pendingDayEffects.removeAt(0);
+        transaction.update(gameRef, {
+          'subPhase': nextEffect['subPhase'],
+          'activePlayerId': nextEffect['activePlayerId'],
+          'pendingDayEffects': pendingDayEffects,
+          'turnStartTime': FieldValue.serverTimestamp(),
+        });
+      } else {
+        bool isPostVote = gameData['isPostVote'] == true;
+        if (isPostVote) {
+          transaction.update(gameRef, {
+            'isPostVote': true,
+            'phase': 'nuit',
+            'subPhase': 'initial',
+            'nightNumber': FieldValue.increment(1),
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        } else {
+          transaction.update(gameRef, {
+            'phase': 'jour_discussion',
+            'subPhase': '',
+            'activePlayerId': null,
+            'pendingDayEffects': [],
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
+      }
+    });
+  }
+
   Future<void> handleLoupGarouTimeout(String gameCode) async {
     final gameRef = _db.collection('games').doc(gameCode);
     final snap = await gameRef.get();
@@ -11079,6 +11247,8 @@ class FirebaseService {
       if (candidates.isNotEmpty) {
         candidates.shuffle();
         await captainDesignate(gameCode, activePlayerId, candidates.first, isAuto: true);
+      } else {
+        await _advancePendingDayEffects(gameRef);
       }
       return;
     }
@@ -11088,6 +11258,8 @@ class FirebaseService {
       if (targets.isNotEmpty) {
         targets.shuffle();
         await chasseurShoot(gameCode, activePlayerId, targets.first, isAuto: true);
+      } else {
+        await _advancePendingDayEffects(gameRef);
       }
       return;
     }
@@ -11097,6 +11269,8 @@ class FirebaseService {
       if (targets.isNotEmpty) {
         targets.shuffle();
         await fossoyeurReveal(gameCode, activePlayerId, targets.first, isAuto: true);
+      } else {
+        await _advancePendingDayEffects(gameRef);
       }
       return;
     }
@@ -11111,6 +11285,19 @@ class FirebaseService {
 
     // 2. Nuit
     if (phase == 'nuit') {
+      if (subPhase == 'loup_noir_action') {
+        final loupNoirEntry = playerData.entries.firstWhere(
+          (e) => e.value['role'] == 'Loup Noir' && e.value['status'] == 'vivant',
+          orElse: () => const MapEntry('', {}),
+        );
+        if (loupNoirEntry.key.isNotEmpty) {
+          await loupNoirInfect(gameCode, loupNoirEntry.key, false, isAuto: true);
+        } else {
+          await startNextNightPhase(gameCode);
+        }
+        return;
+      }
+
       if (subPhase == 'loups_turn') {
         final wolfVotes = Map<String, dynamic>.from(gameData['wolfVotes'] ?? {});
         final wolves = livingPlayers.where((id) =>
@@ -12174,6 +12361,17 @@ class FirebaseService {
               )
               .key;
     }
+    if (privatePlayerData.values.any(
+      (p) => (p['specialAbilities'] as List).contains('Fou de Joie'),
+    )) {
+      specialRolesData['fouDeJoie'] =
+          privatePlayerData.entries
+              .firstWhere(
+                (e) =>
+                    (e.value['specialAbilities'] as List).contains('Fou de Joie'),
+              )
+              .key;
+    }
 
     // Écriture des données privées sécurisées
     for (String pId in playerIds) {
@@ -12336,7 +12534,13 @@ class FirebaseService {
       _db.collection('users').doc(pAuth).set({
         'xp': FieldValue.increment(65),
       }, SetOptions(merge: true));
-      await gameRef.update({'players.$playerId.xp': FieldValue.increment(65)});
+      await gameRef.update({
+        'players.$playerId.xp': FieldValue.increment(65),
+        'turnLog': FieldValue.arrayUnion([
+          "${gameData['playerData']?[playerId]?['name'] ?? 'Mr. White'} a deviné le mot civil ('$civilWord') !",
+        ]),
+        'eliminatedThisTurn': [],
+      });
       await _endUndercoverGameAndAssignScores(gameRef, 'Mr. White');
     } else {
       await gameRef.update({
@@ -12710,7 +12914,8 @@ class FirebaseService {
           (firstPrivate['specialAbilities'] as List<dynamic>?) ??
           (playerData[firstEliminatedId]?['specialAbilities']
               as List<dynamic>?);
-      bool isFouDeJoie = abilities?.contains('Fou de Joie') ?? false;
+      bool isFouDeJoie = (abilities?.contains('Fou de Joie') ?? false) ||
+          (gameData['specialRoles']?['fouDeJoie'] == firstEliminatedId);
       if (isFouDeJoie) {
         pointsGained[firstEliminatedId] =
             (pointsGained[firstEliminatedId] ?? 0) + 4;
@@ -13497,10 +13702,13 @@ class FirebaseService {
               );
               playerHands.forEach((pId, pHand) {
                 int penalty = (pHand as List).fold(0, (sum, c) {
-                  String rank = (c as String)
-                      .split('_')[0]
-                      .substring(0, (c as String).split('_')[0].length - 1);
-                  return sum + (GameData.ramiCardValues[rank] ?? 0);
+                  if (c == null) return sum;
+                  String str = c.toString().trim();
+                  if (str.toUpperCase().contains('JOKER')) return sum + 20;
+                  String base = str.split('_')[0].trim();
+                  if (base.length < 2) return sum;
+                  String rank = base.substring(0, base.length - 1);
+                  return sum + (GameData.ramiCardValues[rank] ?? 5);
                 });
                 totalScores[pId] = (totalScores[pId] ?? 0) + penalty;
               });
@@ -14029,6 +14237,28 @@ class FirebaseService {
       int currentPos = targetPositions[pawnIndex];
       int dice = gameData['petitsChevauxDice'];
 
+      Map<String, dynamic> consecutiveSixes = Map<String, dynamic>.from(
+        gameData['petitsChevauxConsecutiveSixes'] ?? {},
+      );
+      int mySixes = consecutiveSixes[playerId] ?? 0;
+      if (mySixes >= 3) {
+        targetPositions[pawnIndex] = -1;
+        allPositions[targetOwnerId] = targetPositions;
+        consecutiveSixes[playerId] = 0;
+        transaction.update(gameRef, {
+          'petitsChevauxPositions': allPositions,
+          'petitsChevauxConsecutiveSixes': consecutiveSixes,
+          'petitsChevauxCurrentIndex': (currentIndex + 1) % playerOrder.length,
+          'petitsChevauxHasRolled': false,
+          'petitsChevauxDice': 0,
+          'turnStartTime': FieldValue.serverTimestamp(),
+          'gameLog': FieldValue.arrayUnion([
+            "⚠️ 3 six consécutifs ! Le pion de ${players[playerId]?['name'] ?? 'Joueur'} retourne à l'écurie et son tour passe.",
+          ]),
+        });
+        return;
+      }
+
       if (isTeammate) {
         if (currentPos == -1 && (dice != 1 && dice != 6)) {
           throw Exception(
@@ -14089,7 +14319,16 @@ class FirebaseService {
           }
         } else if (currentPos > 50) {
           if (newPos > 56) {
-            throw Exception("Lancer trop élevé pour atteindre le centre.");
+            transaction.update(gameRef, {
+              'petitsChevauxHasRolled': false,
+              'petitsChevauxDice': 0,
+              'petitsChevauxCurrentIndex': (currentIndex + 1) % playerOrder.length,
+              'turnStartTime': FieldValue.serverTimestamp(),
+              'gameLog': FieldValue.arrayUnion([
+                "🎲 Lancer trop élevé ($dice) pour atteindre le centre. Tour passé !",
+              ]),
+            });
+            return;
           }
         }
 
@@ -14130,10 +14369,10 @@ class FirebaseService {
 
       allPositions[targetOwnerId] = targetPositions;
 
-      Map<String, dynamic> consecutiveSixes = Map<String, dynamic>.from(
+      consecutiveSixes = Map<String, dynamic>.from(
         gameData['petitsChevauxConsecutiveSixes'] ?? {},
       );
-      int mySixes = consecutiveSixes[playerId] ?? 0;
+      mySixes = consecutiveSixes[playerId] ?? 0;
       bool reachedFinish = newPos == 56;
       bool extraTurn = (dice == 6 || captured || reachedFinish);
 
@@ -14209,18 +14448,7 @@ class FirebaseService {
         return;
       }
 
-      if (mySixes >= 3) {
-        targetPositions[pawnIndex] = -1;
-        allPositions[targetOwnerId] = targetPositions;
-        consecutiveSixes[playerId] = 0;
-        updates['petitsChevauxPositions'] = allPositions;
-        updates['petitsChevauxConsecutiveSixes'] = consecutiveSixes;
-        updates['petitsChevauxCurrentIndex'] =
-            (currentIndex + 1) % playerOrder.length;
-        updates['turnStartTime'] = FieldValue.serverTimestamp();
-        transaction.update(gameRef, updates);
-        return;
-      }
+      // Pénalité des 3 six consécutifs déjà traitée en début d'action pour préserver l'intégrité du plateau
 
       updates['petitsChevauxConsecutiveSixes'] = consecutiveSixes;
       if (extraTurn) {
@@ -16467,7 +16695,6 @@ class FirebaseService {
       }
 
       await gameRef.update({
-        'codenamesKeyCard': keyCard,
         'codenamesWords': selectedWords,
         'redTeam': redTeam,
         'blueTeam': blueTeam,
@@ -16853,10 +17080,10 @@ class FirebaseService {
     switch (cardValue) {
       case 'reverse':
         if (playerOrder.length == 2) {
-          // À 2 joueurs, Reverse agit comme un Skip
-          nextPlayerIndex = (initialIndex + 1) % 2;
+          // À 2 joueurs, Reverse agit comme un Skip (le joueur initial joue)
+          nextPlayerIndex = initialIndex;
           updates['unoLog'] = FieldValue.arrayUnion([
-            "Inversion à 2 joueurs : le premier joueur passe son tour !",
+            "Inversion à 2 joueurs : le premier joueur commence la partie !",
           ]);
         } else {
           unoDirection = -1;
@@ -19512,16 +19739,31 @@ class FirebaseService {
       };
 
       if (clues.length >= nonGuessersCount) {
+        // Normalisation stricte Just One : sans accents, ponctuation, ni pluriels simples
+        String normalizeJustOneClue(String raw) {
+          var s = raw.toLowerCase().trim();
+          const withDia = 'àáâãäåçèéêëìíîïñòóôõöùúûüýÿ';
+          const withoutDia = 'aaaaaaceeeeiiiinooooouuuuyy';
+          for (int i = 0; i < withDia.length; i++) {
+            s = s.replaceAll(withDia[i], withoutDia[i]);
+          }
+          s = s.replaceAll(RegExp(r'[^a-z0-9]'), '');
+          if (s.length > 3 && s.endsWith('s') && !s.endsWith('ss')) {
+            s = s.substring(0, s.length - 1);
+          }
+          return s;
+        }
+
         // Filtrage des doublons
         final Map<String, int> clueCounts = {};
         for (final c in clues.values) {
-          final normalized = (c as String).toLowerCase().trim();
+          final normalized = normalizeJustOneClue(c as String);
           clueCounts[normalized] = (clueCounts[normalized] ?? 0) + 1;
         }
 
         final filteredClues = <String>[];
         for (final entry in clues.entries) {
-          final normalized = (entry.value as String).toLowerCase().trim();
+          final normalized = normalizeJustOneClue(entry.value as String);
           if ((clueCounts[normalized] ?? 0) == 1) {
             filteredClues.add(entry.value as String);
           }
@@ -39277,10 +39519,17 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               },
                               onAccept: (shipType) {
                                 if (isReady) return;
+                                var shipInfo = GameData.batailleNavaleShips[shipType]!;
+                                int actualCols = _pendingShipHorizontal ? shipInfo['length'] : shipInfo['width'];
+                                int actualRows = _pendingShipHorizontal ? shipInfo['width'] : shipInfo['length'];
+                                int finalRow = r;
+                                int finalCol = c;
+                                if (finalRow + actualRows > 10) finalRow = 10 - actualRows;
+                                if (finalCol + actualCols > 10) finalCol = 10 - actualCols;
                                 setState(() {
                                   _pendingShipType = shipType;
-                                  _pendingShipRow = r;
-                                  _pendingShipCol = c;
+                                  _pendingShipRow = finalRow;
+                                  _pendingShipCol = finalCol;
                                   _hoveredShipType = null;
                                   _hoveredRow = null;
                                   _hoveredCol = null;
@@ -39532,6 +39781,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
                             return Draggable<String>(
                               data: shipType,
+                              dragAnchorStrategy: pointerDragAnchorStrategy,
                               feedback: Opacity(
                                 opacity: 0.8,
                                 child: SizedBox(
@@ -39593,12 +39843,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ElevatedButton.icon(
                       icon: Icon(Icons.rotate_right),
                       label: Text(GameUiLocalization.tr(context, "Tourner")),
-                      onPressed:
-                          () => setState(
-                            () =>
-                                _pendingShipHorizontal =
-                                    !_pendingShipHorizontal,
-                          ),
+                      onPressed: () {
+                        setState(() {
+                          _pendingShipHorizontal = !_pendingShipHorizontal;
+                          if (_pendingShipType != null) {
+                            var shipInfo = GameData.batailleNavaleShips[_pendingShipType!]!;
+                            int actualCols = _pendingShipHorizontal ? shipInfo['length'] : shipInfo['width'];
+                            int actualRows = _pendingShipHorizontal ? shipInfo['width'] : shipInfo['length'];
+                            if (_pendingShipRow! + actualRows > 10) _pendingShipRow = 10 - actualRows;
+                            if (_pendingShipCol! + actualCols > 10) _pendingShipCol = 10 - actualCols;
+                          }
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
                       ),
@@ -40806,7 +41062,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         GestureDetector(
                           onTap:
                               isMyTurn &&
-                                      pendingDraw == 0 &&
                                       !_unoDrawActionDone &&
                                       !_isActionPending
                                   ? () => _onUnoDrawTapped()
@@ -41038,7 +41293,6 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         GestureDetector(
           onTap:
               isMyTurn &&
-                      pendingDraw == 0 &&
                       !_unoDrawActionDone &&
                       !_isActionPending
                   ? () => _onUnoDrawTapped()
@@ -42655,6 +42909,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       );
     }
 
+    final String? goddessId = gameData['specialRoles']?['justiceGoddess'];
+    final bool isGoddess = goddessId != null && goddessId == playerId;
+
+    if (goddessId != null && !isGoddess) {
+      return _buildWaitingWidget(
+        "Égalité parfaite ! La Déesse de la Justice est en train de trancher...",
+        players,
+        0,
+        1,
+      );
+    }
+
     return Column(
       children: [
         Card(
@@ -42705,17 +42971,24 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ? null
                         : () {
                           setState(() => _isActionPending = true);
-                          _firebaseService
-                              .submitUndercoverVote(
-                                widget.gameCode,
-                                playerId,
-                                cId,
-                              )
-                              .whenComplete(() {
-                                if (mounted) {
-                                  setState(() => _isActionPending = false);
-                                }
-                              });
+                          if (goddessId != null && isGoddess) {
+                            _firebaseService.undercoverGoddessDecision(
+                              widget.gameCode,
+                              cId,
+                            ).whenComplete(() {
+                              if (mounted) setState(() => _isActionPending = false);
+                            });
+                          } else {
+                            _firebaseService
+                                .submitUndercoverVote(
+                                  widget.gameCode,
+                                  playerId,
+                                  cId,
+                                )
+                                .whenComplete(() {
+                                  if (mounted) setState(() => _isActionPending = false);
+                                });
+                          }
                         },
                 child: Container(
                   decoration: BoxDecoration(
@@ -44909,6 +45182,26 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final String gameEndReason = gameData['gameEndReason'] ?? '';
 
     bool isMasterSpy = (playerId == masterSpyRed || playerId == masterSpyBlue);
+    if (isMasterSpy && keyCard.isEmpty) {
+      return StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('games')
+            .doc(widget.gameCode)
+            .collection('private_data')
+            .doc(playerId)
+            .snapshots(),
+        builder: (context, spySnap) {
+          final spyKeyCard = Map<String, String>.from(
+            spySnap.data?.data() != null
+                ? ((spySnap.data!.data() as Map<String, dynamic>)['keyCard'] ?? {})
+                : {},
+          );
+          final updatedGameData = Map<String, dynamic>.from(gameData);
+          updatedGameData['codenamesKeyCard'] = spyKeyCard;
+          return _buildCodenamesUI(context, updatedGameData, playerId);
+        },
+      );
+    }
     bool isMyTeamTurn =
         (activeTeam == 'red' && redTeam.contains(playerId)) ||
         (activeTeam == 'blue' && blueTeam.contains(playerId));
@@ -48345,11 +48638,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
+  int _lastPictionaryRound = -1;
+
   Widget _buildPictionaryUI(
     BuildContext context,
     Map<String, dynamic> gameData,
     String playerId,
   ) {
+    final int currentPictionaryRound = (gameData['currentRound'] as num?)?.toInt() ?? 0;
+    if (_lastPictionaryRound != currentPictionaryRound) {
+      _lastPictionaryRound = currentPictionaryRound;
+      _pictionaryDrawingController.clear();
+    }
     final String roundState = gameData['roundState'] ?? 'setup';
     final Map<String, dynamic> players = Map<String, dynamic>.from(
       gameData['players'] ?? {},
@@ -50255,10 +50555,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               myStatus == 'vivant' &&
               nightActions['sorciereActed'] != true) {
             final victimeId = nightActions['loupTarget'];
-            final victimeName = playerData[victimeId]?['name'] ?? 'Personne';
+            final victimeName = (victimeId != null && playerData[victimeId] != null)
+                ? playerData[victimeId]['name']
+                : 'Aucune victime cette nuit (protégée ou épargnée)';
             promptText = "Cible des loups : $victimeName";
             if (_lgActionMode == 'poison')
-              promptText = "Touchez le joueur à éliminer";
+              promptText = "Touchez le joueur à éliminer avec le poison";
 
             centerActionWidget = Wrap(
               spacing: 6,
@@ -65924,7 +66226,7 @@ class _DominoesBoardWidgetState extends State<DominoesBoardWidget>
     if (constraints.maxWidth <= 0 || constraints.maxHeight <= 0) return;
     final scaleX = (constraints.maxWidth - 36) / boardSize.width;
     final scaleY = (constraints.maxHeight - 36) / boardSize.height;
-    final scale = min(scaleX, scaleY).clamp(0.08, 1.0);
+    final scale = min(scaleX, scaleY).clamp(0.40, 1.20);
 
     final tx = (constraints.maxWidth - boardSize.width * scale) / 2;
     final ty = (constraints.maxHeight - boardSize.height * scale) / 2;
