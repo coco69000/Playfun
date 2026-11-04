@@ -487,7 +487,7 @@ Gagner le plus d'XP en réalisant des actions et en répondant à des vérités 
         "Un joueur tient le téléphone sur son front. Les autres décrivent le mot affiché. Inclinez le téléphone vers le bas pour 'deviné', vers le haut pour 'passer'.",
     'Petit Bac':
         "Trouvez des mots correspondant à des catégories données, commençant par une lettre spécifique. Marquez des points pour les réponses uniques et correctes.",
-    GameContentLocalization.ui(context, "Président"): """
+    'Président': """
 **But du jeu**
 Le but est d’être le premier à se débarrasser de toutes ses cartes pour devenir Président. Le dernier joueur avec des cartes en main devient le Trou du cul.
 
@@ -888,11 +888,11 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
   };
 
   static const List<String> cadavreExquisPrompts = [
-    GameContentLocalization.ui(context, "un substantif (ex: le chat)"),
-    GameContentLocalization.ui(context, "un adjectif (ex: mignon)"),
-    GameContentLocalization.ui(context, "un verbe (ex: mange)"),
-    GameContentLocalization.ui(context, "un substantif (ex: la souris)"),
-    GameContentLocalization.ui(context, "un adjectif (ex: mort)"),
+    "un substantif (ex: le chat)",
+    "un adjectif (ex: mignon)",
+    "un verbe (ex: mange)",
+    "un substantif (ex: la souris)",
+    "un adjectif (ex: mort)",
   ];
 
   static const Map<String, int> ramiCardValues = {
@@ -1010,17 +1010,17 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
   }
 
   static const Map<String, Map<String, dynamic>> batailleNavaleShips = {
-    GameContentLocalization.ui(context, "Petit 1"): {'length': 2, 'width': 1, 'area': 2, 'image': 'petit1.webp'},
-    GameContentLocalization.ui(context, "Petit 2"): {'length': 2, 'width': 1, 'area': 2, 'image': 'petit2.webp'},
-    GameContentLocalization.ui(context, "Moyen"): {'length': 3, 'width': 1, 'area': 3, 'image': 'moyen.webp'},
-    GameContentLocalization.ui(context, "Grand"): {'length': 4, 'width': 1, 'area': 4, 'image': 'grand.webp'},
-    GameContentLocalization.ui(context, "Très Grand"): {
+    'Petit 1': {'length': 2, 'width': 1, 'area': 2, 'image': 'petit1.webp'},
+    'Petit 2': {'length': 2, 'width': 1, 'area': 2, 'image': 'petit2.webp'},
+    'Moyen': {'length': 3, 'width': 1, 'area': 3, 'image': 'moyen.webp'},
+    'Grand': {'length': 4, 'width': 1, 'area': 4, 'image': 'grand.webp'},
+    'Très Grand': {
       'length': 5,
       'width': 1,
       'area': 5,
       'image': 'tresgrand.webp',
     },
-    GameContentLocalization.ui(context, "Super Grand"): {
+    'Super Grand': {
       'length': 5,
       'width': 2,
       'area': 10,
@@ -1053,7 +1053,7 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
     'Codenames',
     "Time's Up",
     'Petit Bac',
-    GameContentLocalization.ui(context, "Président"),
+    'Président',
     'Pictionary',
     'Just One',
     'Le Roi des Mèmes',
@@ -5452,7 +5452,7 @@ class FirebaseService {
         transaction.update(gameRef, {
           'justOneGuesserAnswer': "(Temps écoulé)",
           'roundState': 'result',
-          'gameEndReason': GameContentLocalization.ui(context, "Temps écoulé !"),
+          'gameEndReason': "Temps écoulé !",
           'turnStartTime': FieldValue.serverTimestamp(),
         });
       }
@@ -5521,7 +5521,7 @@ class FirebaseService {
             'roundState': nextState,
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              GameContentLocalization.ui(context, "Le temps est écoulé, on avance !"),
+              "Le temps est écoulé, on avance !",
             ]),
           });
         }
@@ -5552,7 +5552,7 @@ class FirebaseService {
                 (voteMode == 'turn_by_turn') ? 'reveal_and_vote' : 'voting',
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              GameContentLocalization.ui(context, "Le temps est écoulé pour déclarer la vérité !"),
+              "Le temps est écoulé pour déclarer la vérité !",
             ]),
           });
         }
@@ -6704,7 +6704,7 @@ class FirebaseService {
             (playerList as List).remove(playerIdToRemove);
           });
 
-          List<String> newLogs = [GameContentLocalization.format(context, "{0} a quitté la partie.", ["$removedPlayerName"])];
+          List<String> newLogs = ["$removedPlayerName a quitté la partie."];
           Map<String, dynamic> updates = {
             'players': players,
             'playerOrder': playerOrder,
@@ -6831,7 +6831,7 @@ class FirebaseService {
         'pendingBotReplacement': {
           'playerId': timedOutPlayerId,
           'playerName': playerName,
-          'reason': GameContentLocalization.ui(context, "inactif (3 tours sans réponse)"),
+          'reason': "inactif (3 tours sans réponse)",
           'isSocial': isSocial,
           'timestamp': FieldValue.serverTimestamp(),
         },
@@ -7170,7 +7170,7 @@ class FirebaseService {
             'currentPhase': 'turn_result',
             'eliminatedThisTurn':
                 eliminatedPlayerId != null ? [eliminatedPlayerId] : [],
-            'turnLog': FieldValue.arrayUnion([GameContentLocalization.ui(context, "Le temps de vote est écoulé !")]),
+            'turnLog': FieldValue.arrayUnion(["Le temps de vote est écoulé !"]),
             'turnStartTime': FieldValue.serverTimestamp(),
           });
         }
@@ -7211,7 +7211,7 @@ class FirebaseService {
       case 'Skull':
         await nextSkullRound(gameCode);
         break;
-      case GameContentLocalization.ui(context, "Président"):
+      case 'Président':
         await nextPresidentRound(gameCode);
         break;
       case 'Devine Tête':
@@ -7864,7 +7864,7 @@ class FirebaseService {
       final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
       final hands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
-      final discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
+      List<String> discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
       final String topCard =
           discardPile.isNotEmpty ? discardPile.last : 'red-0';
       final String? wildColor = gameData['unoWildColorChosen'];
@@ -11667,7 +11667,7 @@ class FirebaseService {
         'petitBacRoundEnded': false,
         if (petitBacTime != null) 'petitBacTime': petitBacTime,
       },
-      if (gameType == GameContentLocalization.ui(context, "Président")) ...{
+      if (gameType == 'Président') ...{
         'playerHands': {},
         'playerRanks': {},
         'currentPlayerIndex': 0,
@@ -12036,7 +12036,7 @@ class FirebaseService {
         'petitBacRoundEnded': false,
         if (petitBacTime != null) 'petitBacTime': petitBacTime,
       },
-      if (gameType == GameContentLocalization.ui(context, "Président")) ...{
+      if (gameType == 'Président') ...{
         'playerHands': {},
         'playerRanks': {},
         'currentPlayerIndex': 0,
@@ -12296,7 +12296,7 @@ class FirebaseService {
     List<String> specialRolesPool = [];
     roleSettings.forEach((role, isEnabled) {
       if (isEnabled) {
-        if (role == GameContentLocalization.ui(context, "Amoureux") && playerCount < 5) return;
+        if (role == 'Amoureux' && playerCount < 5) return;
         if (role == 'Vendeur de Falafels' && playerCount < 4) return;
         if (role == 'Vengeuse' && playerCount < 5) return;
         if (role == 'Duellistes' && playerCount < 5) return;
@@ -12347,20 +12347,20 @@ class FirebaseService {
     List<String> tempPlayers = List.from(playerIds)..shuffle();
 
     if (privatePlayerData.values.any(
-          (p) => (p['specialAbilities'] as List).contains(GameContentLocalization.ui(context, "Amoureux")),
+          (p) => (p['specialAbilities'] as List).contains('Amoureux'),
         ) &&
         tempPlayers.length >= 2) {
       String amoreuxId =
           privatePlayerData.entries
               .firstWhere(
                 (e) =>
-                    (e.value['specialAbilities'] as List).contains(GameContentLocalization.ui(context, "Amoureux")),
+                    (e.value['specialAbilities'] as List).contains('Amoureux'),
               )
               .key;
       tempPlayers.remove(amoreuxId);
       String partnerId = tempPlayers.removeAt(0);
       (privatePlayerData[partnerId]!['specialAbilities'] as List<String>).add(
-        GameContentLocalization.ui(context, "Amoureux"),
+        'Amoureux',
       );
       specialRolesData['lovers'] = [amoreuxId, partnerId];
       String amoureux1Name = players[amoreuxId]['name'];
@@ -13296,7 +13296,7 @@ class FirebaseService {
         'tabooCurrentTeamIndex': nextTeamIndex,
         'tabooRoundNumber': currentRoundNum,
         'gameLog': FieldValue.arrayUnion([
-          GameContentLocalization.ui(context, "Temps écoulé ! Passage à l'équipe suivante."),
+          "Temps écoulé ! Passage à l'équipe suivante.",
         ]),
       });
 
@@ -13903,7 +13903,7 @@ class FirebaseService {
             'ramiRoundOver': true,
             'roundState': 'round_end',
             'gameLog': FieldValue.arrayUnion([
-              GameContentLocalization.format(context, "{0} a gagné la manche !", [players[playerId]["name"]]),
+              "${players[playerId]["name"]} a gagné la manche !",
             ]),
             if (gameOver) ...{
               'gameState': 'gameOver',
@@ -14105,7 +14105,7 @@ class FirebaseService {
       'petitsChevauxConsecutiveSixes': consecutiveSixes,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': [
-        isTeamMode ? GameContentLocalization.ui(context, "La partie 2v2 commence !") : GameContentLocalization.ui(context, "La partie commence !"),
+        isTeamMode ? "La partie 2v2 commence !" : "La partie commence !",
       ],
     });
   }
@@ -14509,7 +14509,7 @@ class FirebaseService {
         }
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = playerId;
-        updates['gameEndReason'] = GameContentLocalization.format(context, "{0} a gagné !", [players[playerId]["name"]]);
+        updates['gameEndReason'] = "${players[playerId]["name"]} a gagné !";
         transaction.update(gameRef, updates);
         return;
       }
@@ -15175,7 +15175,7 @@ class FirebaseService {
       'zombieEliminatedPlayers': eliminatedPlayers,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': [
-        GameContentLocalization.ui(context, "La partie de Zombie! commence ! Paires initiales défaussées."),
+        "La partie de Zombie! commence ! Paires initiales défaussées.",
       ],
     });
   }
@@ -16708,7 +16708,7 @@ class FirebaseService {
         'unoLastActionPlayerId': null,
         'gameState': 'playing',
         'roundState': 'playing_turn',
-        'unoLog': [GameContentLocalization.ui(context, "La partie de Uno commence !")],
+        'unoLog': ["La partie de Uno commence !"],
         ...initialTurnUpdates, // AJOUTÉ
       });
 
@@ -16882,7 +16882,7 @@ class FirebaseService {
         ...initialTurnUpdates,
       });
       return;
-    } else if (gameType == GameContentLocalization.ui(context, "Président")) {
+    } else if (gameType == 'Président') {
       List<String> suits = ['C', 'D', 'H', 'S'];
       List<String> ranks = [
         '3',
@@ -17660,7 +17660,7 @@ class FirebaseService {
         updates['gameState'] = 'gameOver';
         updates['roundState'] = 'gameOver';
         updates['gameWinner'] = highestScorer;
-        updates['gameEndReason'] = GameContentLocalization.ui(context, "Toutes les cartes ont été jouées !");
+        updates['gameEndReason'] = "Toutes les cartes ont été jouées !";
       }
 
       transaction.update(gameRef, updates);
@@ -17698,7 +17698,7 @@ class FirebaseService {
       'checkersCurrentColor': 'red', // Les rouges commencent
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': [
-        GameContentLocalization.ui(context, "La partie de Jeu de Dames commence ! Les Rouges jouent en premier."),
+        "La partie de Jeu de Dames commence ! Les Rouges jouent en premier.",
       ],
     });
   }
@@ -18296,7 +18296,7 @@ class FirebaseService {
       revealed[word] = true;
       int redScore = gameData['redScore'] ?? 9;
       int blueScore = gameData['blueScore'] ?? 8;
-      int guessesLeft = gameData['guessesLeft'] ?? 1;
+      guessesLeft = gameData['guessesLeft'] ?? 1;
 
       final updates = <String, dynamic>{
         'codenamesRevealed.$word': true,
@@ -19258,15 +19258,15 @@ class FirebaseService {
         }, SetOptions(merge: true));
       }
 
-      if (finalRanking.length >= 1) ranks[finalRanking[0]] = GameContentLocalization.ui(context, "Président");
-      if (finalRanking.length >= 2) ranks[finalRanking.last] = GameContentLocalization.ui(context, "Trou du cul");
+      if (finalRanking.length >= 1) ranks[finalRanking[0]] = "Président";
+      if (finalRanking.length >= 2) ranks[finalRanking.last] = "Trou du cul";
       if (finalRanking.length >= 4) {
-        ranks[finalRanking[1]] = GameContentLocalization.ui(context, "Vice-Président");
-        ranks[finalRanking[finalRanking.length - 2]] = GameContentLocalization.ui(context, "Vice-Trou du cul");
+        ranks[finalRanking[1]] = "Vice-Président";
+        ranks[finalRanking[finalRanking.length - 2]] = "Vice-Trou du cul";
       }
       for (int i = 0; i < finalRanking.length; i++) {
         if (!ranks.containsKey(finalRanking[i])) {
-          ranks[finalRanking[i]] = GameContentLocalization.ui(context, "Neutre");
+          ranks[finalRanking[i]] = "Neutre";
         }
       }
     }
@@ -19337,14 +19337,14 @@ class FirebaseService {
       String? presidentId =
           ranks.entries
               .firstWhere(
-                (e) => e.value == GameContentLocalization.ui(context, "Président"),
+                (e) => e.value == "Président",
                 orElse: () => MapEntry("", ""),
               )
               .key;
       String? loserId =
           ranks.entries
               .firstWhere(
-                (e) => e.value == GameContentLocalization.ui(context, "Trou du cul"),
+                (e) => e.value == "Trou du cul",
                 orElse: () => MapEntry("", ""),
               )
               .key;
@@ -19372,14 +19372,14 @@ class FirebaseService {
         String? vicePId =
             ranks.entries
                 .firstWhere(
-                  (e) => e.value == GameContentLocalization.ui(context, "Vice-Président"),
+                  (e) => e.value == "Vice-Président",
                   orElse: () => MapEntry("", ""),
                 )
                 .key;
         String? viceLId =
             ranks.entries
                 .firstWhere(
-                  (e) => e.value == GameContentLocalization.ui(context, "Vice-Trou du cul"),
+                  (e) => e.value == "Vice-Trou du cul",
                   orElse: () => MapEntry("", ""),
                 )
                 .key;
@@ -19449,7 +19449,7 @@ class FirebaseService {
       String? loserId =
           ranks.entries
               .firstWhere(
-                (e) => e.value == GameContentLocalization.ui(context, "Trou du cul"),
+                (e) => e.value == "Trou du cul",
                 orElse: () => MapEntry("", ""),
               )
               .key;
@@ -19697,8 +19697,8 @@ class FirebaseService {
         gameData['roundState'] == 'guessing_drawing') {
       String reason =
           (gameData['roundState'] == 'drawing')
-              ? GameContentLocalization.ui(context, "Le dessinateur n'a pas soumis le dessin à temps.")
-              : GameContentLocalization.ui(context, "Le temps est écoulé ! Personne n'a trouvé le mot.");
+              ? "Le dessinateur n'a pas soumis le dessin à temps."
+              : "Le temps est écoulé ! Personne n'a trouvé le mot.";
       await gameRef.update({
         'roundState': 'result',
         'gameEndReason': reason,
@@ -19934,7 +19934,7 @@ class FirebaseService {
       Map<String, dynamic> updates = {
         'justOneGuesserAnswer': cleanGuess,
         'roundState': 'result',
-        'gameEndReason': isCorrect ? GameContentLocalization.ui(context, "Mot deviné !") : GameContentLocalization.ui(context, "Mot non deviné."),
+        'gameEndReason': isCorrect ? "Mot deviné !" : "Mot non deviné.",
         'turnStartTime': FieldValue.serverTimestamp(),
       };
 
@@ -20061,7 +20061,7 @@ class FirebaseService {
         gameData['hotPotatoUsedAnswers'] ?? [],
       );
       if (usedAnswers.contains(cleanAnswer)) {
-        throw Exception(GameContentLocalization.ui(context, "Cette réponse a déjà été donnée !"));
+        throw Exception("Cette réponse a déjà été donnée !");
       }
       usedAnswers.add(cleanAnswer);
 
@@ -20753,7 +20753,7 @@ class FirebaseService {
         'gameState': 'playing',
         'roundState': 'playing_turn',
         'unoLog': FieldValue.arrayUnion([
-          GameContentLocalization.ui(context, "Une nouvelle manche de Uno commence !"),
+          "Une nouvelle manche de Uno commence !",
         ]),
         'turnStartTime': FieldValue.serverTimestamp(),
       });
@@ -21811,7 +21811,7 @@ class FirebaseService {
           } else {
             updates['roundWinnerId'] = null;
             updates['gameEndReason'] =
-                GameContentLocalization.ui(context, "Égalité parfaite ! Aucun point attribué.");
+                "Égalité parfaite ! Aucun point attribué.";
           }
         } else if (gameType == 'Synonyme ou Banni') {
           final Map<String, int> banCounts = {};
@@ -21844,7 +21844,7 @@ class FirebaseService {
           } else {
             updates['roundLoserId'] = null;
             updates['gameEndReason'] =
-                GameContentLocalization.ui(context, "Égalité dans les votes : aucun joueur banni ce tour.");
+                "Égalité dans les votes : aucun joueur banni ce tour.";
           }
         } else if (gameType == 'Le Juge') {
           final winnerPlayerId = votedForId;
@@ -22151,7 +22151,7 @@ class FirebaseService {
             applySpeedBonus: false,
           );
           updates['gameEndReason'] =
-              GameContentLocalization.ui(context, "La description la plus drôle a été choisie !");
+              "La description la plus drôle a été choisie !";
         } else {
           updates['gameEndReason'] = 'Aucune description n\'a été votée.';
         }
@@ -22187,7 +22187,7 @@ class FirebaseService {
           );
         } else {
           updates['roundWinnerId'] = null;
-          updates['gameEndReason'] = GameContentLocalization.ui(context, "Égalité parfaite ! Aucun point attribué.");
+          updates['gameEndReason'] = "Égalité parfaite ! Aucun point attribué.";
         }
         updates['voteResults'] = voteCounts;
       } else if (gameType == 'Synonyme ou Banni') {
@@ -23345,12 +23345,13 @@ class FirebaseService {
     List<String> winners = [];
     PokerHand? bestHand;
 
+    Map<String, PokerHand> playerFinalHands = {};
     if (playersInHand.length == 1) {
       winners.add(playersInHand.first);
       winnerAnnouncement =
           "${playerData[winners.first]['name']} gagne le pot par forfait !";
+      playerFinalHands[winners.first] = PokerHand(HandRank.highCard, []);
     } else {
-      Map<String, PokerHand> playerFinalHands = {};
       for (String pId in playersInHand) {
         final playerHand =
             (playerData[pId]['hand'] as List<dynamic>? ?? [])
@@ -24019,7 +24020,7 @@ class FirebaseService {
       'blokusCurrentPlayerIndex': 0,
       'blokusPassedPlayers': [],
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': [GameContentLocalization.ui(context, "La partie de Blokus commence !")],
+      'gameLog': ["La partie de Blokus commence !"],
     });
   }
 
@@ -24660,7 +24661,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     'Boomerang': false,
     'Déesse de la Justice': false,
     'Fantôme': false,
-    GameContentLocalization.ui(context, "Amoureux"): false,
+    'Amoureux': false,
     'Mr. Meme': false,
     'Vendeur de Falafels': false,
     'Vengeuse': false,
@@ -28940,7 +28941,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                   (teams[1]?.length ?? 0) != 2) {
                 canStart = false;
                 requirementMessage =
-                    "Formez 2 équipes de 2 joueurs dans GameContentLocalization.ui(context, "Composer les équipes").";
+                    "Formez 2 équipes de 2 joueurs dans 'Composer les équipes'.";
               }
             } else {
               // Autres jeux par équipes (Codenames, Time's Up, etc.)
@@ -30174,7 +30175,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'Uno':
         _firebaseService.handleUnoTimeout(widget.gameCode);
         break;
-      case GameContentLocalization.ui(context, "Président"):
+      case 'Président':
       case 'Présidente':
         _firebaseService.handlePresidentTimeout(widget.gameCode);
         break;
@@ -30666,7 +30667,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         "En cas d'égalité lors d'un vote, c'est vous qui décidez qui est éliminé parmi les joueurs à égalité. Ce pouvoir persiste même après votre mort.",
     'Fantôme':
         "Même après votre élimination, vous continuez à participer aux votes pour éliminer les joueurs.",
-    GameContentLocalization.ui(context, "Amoureux"):
+    'Amoureux':
         "Un autre joueur est secrètement désigné comme votre amoureux. Si l'un de vous deux est éliminé, l'autre meurt de chagrin et est éliminé aussi.",
     'Mr. Meme':
         "Au lieu de donner un indice oral, vous devez mimer votre mot-indice à chaque tour.",
@@ -33479,7 +33480,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 cCount =
                                     (gameData['unoPlayerHands']?[pId] as List?)
                                         ?.length;
-                              } else if (gameType == GameContentLocalization.ui(context, "Président")) {
+                              } else if (gameType == 'Président') {
                                 cCount =
                                     (gameData['playerHands']?[pId] as List?)
                                         ?.length;
@@ -33650,7 +33651,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     switch (gameType) {
-      case GameContentLocalization.ui(context, "Président"):
+      case 'Président':
         final hand = List<String>.from(
           gameData['playerHands']?[opponentId] ?? [],
         );
@@ -37196,7 +37197,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return _buildTimesUpUI(context, gameData, playerId);
       case 'Petit Bac':
         return _buildPetitBacUI(context, gameData, playerId);
-      case GameContentLocalization.ui(context, "Président"):
+      case 'Président':
         return _buildPresidentUI(context, gameData, playerId);
       case 'Skull':
         return _buildSkullUI(context, gameData, playerId);
@@ -39374,7 +39375,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SAFETY_RIGHT_OF_WAY':
         return const _MilleBornesCardInfo(
           name: "Véhicule\nPrioritaire",
-          category: GameContentLocalization.ui(context, "BOTTE"),
+          category: "BOTTE",
           badgeText: "PRIORITÉ",
           icon: Icons.emergency_rounded,
           primaryColor: Color(0xFFFFD700),
@@ -39384,7 +39385,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SAFETY_REPAIRS':
         return const _MilleBornesCardInfo(
           name: "Pneu\nIncrevable",
-          category: GameContentLocalization.ui(context, "BOTTE"),
+          category: "BOTTE",
           badgeText: "INCREVABLE",
           icon: Icons.verified_rounded,
           primaryColor: Color(0xFFFFD700),
@@ -39395,7 +39396,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SAFETY_EMERGENCY':
         return const _MilleBornesCardInfo(
           name: "Citerne\nInépuisable",
-          category: GameContentLocalization.ui(context, "BOTTE"),
+          category: "BOTTE",
           badgeText: "CITERNE",
           icon: Icons.local_gas_station_rounded,
           primaryColor: Color(0xFFFFD700),
@@ -39408,7 +39409,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'RED_LIGHT':
         return const _MilleBornesCardInfo(
           name: "Feu Rouge",
-          category: GameContentLocalization.ui(context, "ATTAQUE"),
+          category: "ATTAQUE",
           badgeText: "STOP",
           icon: Icons.traffic_rounded,
           primaryColor: Color(0xFFEF4444),
@@ -39417,7 +39418,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SPEED_LIMIT':
         return const _MilleBornesCardInfo(
           name: "Limite 50",
-          category: GameContentLocalization.ui(context, "ATTAQUE"),
+          category: "ATTAQUE",
           badgeText: "50 MAX",
           icon: Icons.speed_rounded,
           primaryColor: Color(0xFFFB923C),
@@ -39426,7 +39427,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'OUT_OF_GAS':
         return const _MilleBornesCardInfo(
           name: "Panne\nd'essence",
-          category: GameContentLocalization.ui(context, "ATTAQUE"),
+          category: "ATTAQUE",
           badgeText: "VIDE",
           icon: Icons.no_crash_rounded,
           primaryColor: Color(0xFFF43F5E),
@@ -39435,8 +39436,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'FLAT_TIRE':
         return const _MilleBornesCardInfo(
           name: "Crevaison",
-          category: GameContentLocalization.ui(context, "ATTAQUE"),
-          badgeText: GameContentLocalization.ui(context, "CREVAISON"),
+          category: "ATTAQUE",
+          badgeText: "CREVAISON",
           icon: Icons.tire_repair_rounded,
           primaryColor: Color(0xFFE11D48),
           secondaryColor: Color(0xFF881337),
@@ -39446,7 +39447,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'GREEN_LIGHT':
         return const _MilleBornesCardInfo(
           name: "Feu Vert",
-          category: GameContentLocalization.ui(context, "PARADE"),
+          category: "PARADE",
           badgeText: "ROULEZ",
           icon: Icons.check_circle_rounded,
           primaryColor: Color(0xFF10B981),
@@ -39455,7 +39456,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'END_OF_LIMIT':
         return const _MilleBornesCardInfo(
           name: "Fin de\nLimite",
-          category: GameContentLocalization.ui(context, "PARADE"),
+          category: "PARADE",
           badgeText: "FIN 50",
           icon: Icons.all_inclusive_rounded,
           primaryColor: Color(0xFFF59E0B),
@@ -39464,7 +39465,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'EXTRA_TANK':
         return const _MilleBornesCardInfo(
           name: "Essence",
-          category: GameContentLocalization.ui(context, "PARADE"),
+          category: "PARADE",
           badgeText: "PLEIN",
           icon: Icons.local_gas_station_rounded,
           primaryColor: Color(0xFF10B981),
@@ -39473,7 +39474,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SPARE_TIRE':
         return const _MilleBornesCardInfo(
           name: "Roue de\nSecours",
-          category: GameContentLocalization.ui(context, "PARADE"),
+          category: "PARADE",
           badgeText: "RÉPARÉ",
           icon: Icons.change_circle_rounded,
           primaryColor: Color(0xFF10B981),
@@ -51657,7 +51658,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ],
                 if (amILover && lovers.length == 2) ...[
                   const SizedBox(width: 4),
-                  _buildChatTab(GameContentLocalization.ui(context, "Amoureux"), 'lover', Colors.pinkAccent),
+                  _buildChatTab('Amoureux', 'lover', Colors.pinkAccent),
                 ],
               ],
             ),
@@ -70596,23 +70597,23 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
   String _getSurvivorEquipment(String rank) {
     switch (rank) {
       case 'A':
-        return GameContentLocalization.ui(context, "Lampe");
+        return "Lampe";
       case '2':
-        return GameContentLocalization.ui(context, "Pied-de-biche");
+        return "Pied-de-biche";
       case '3':
-        return GameContentLocalization.ui(context, "Trousse soin");
+        return "Trousse soin";
       case '4':
-        return GameContentLocalization.ui(context, "Hache");
+        return "Hache";
       case '5':
-        return GameContentLocalization.ui(context, "Arbalète");
+        return "Arbalète";
       case '6':
-        return GameContentLocalization.ui(context, "Fusil");
+        return "Fusil";
       case '7':
-        return GameContentLocalization.ui(context, "Talkie");
+        return "Talkie";
       case '8':
-        return GameContentLocalization.ui(context, "Tronçonneuse");
+        return "Tronçonneuse";
       default:
-        return GameContentLocalization.ui(context, "Survie");
+        return "Survie";
     }
   }
 
