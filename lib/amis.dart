@@ -3077,6 +3077,153 @@ class FirebaseService {
   Stream<DatabaseEvent> getTabooBuzzerLiveStream(String gameCode) =>
       FirebaseDatabase.instance.ref('games/$gameCode/taboo_buzzer_live').onValue;
 
+  // 8. Bataille Navale : Viseur radar en direct
+  Future<void> updateBatailleNavaleAimLive(
+    String gameCode,
+    String playerId,
+    int? targetIndex,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/naval_aim_live');
+    if (targetIndex == null) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'playerId': playerId,
+        'targetIndex': targetIndex,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getBatailleNavaleAimStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/naval_aim_live').onValue;
+
+  // 9. Loup-Garou : Visée nocturne des loups et votes en direct
+  Future<void> updateLoupGarouLiveTarget(
+    String gameCode,
+    String playerId,
+    String? targetId,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/loup_live_target/$playerId');
+    if (targetId == null) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'targetId': targetId,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getLoupGarouLiveTargetStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/loup_live_target').onValue;
+
+  // 10. Codenames : Pointage de carte en direct par les espions
+  Future<void> updateCodenamesLivePoint(
+    String gameCode,
+    String playerId,
+    String? word,
+    String teamColor,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/codenames_live/$playerId');
+    if (word == null) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'word': word,
+        'team': teamColor,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getCodenamesLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/codenames_live').onValue;
+
+  // 11. Petit Bac : Progression des catégories remplies en direct
+  Future<void> updatePetitBacLiveProgress(
+    String gameCode,
+    String playerId,
+    int filledCount,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/petit_bac_live/$playerId');
+    if (filledCount <= 0) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'filledCount': filledCount,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getPetitBacLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/petit_bac_live').onValue;
+
+  // 12. Uno : Hésitation couleur Joker en direct
+  Future<void> updateUnoLiveColorChoosing(
+    String gameCode,
+    String playerId,
+    String? choosingColor,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/uno_live');
+    if (choosingColor == null) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'playerId': playerId,
+        'color': choosingColor,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getUnoLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/uno_live').onValue;
+
+  // 13. Mille Bornes : Cible d'attaque en cours en direct
+  Future<void> updateMilleBornesTargetLive(
+    String gameCode,
+    String playerId,
+    String? card,
+    String? targetId,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/mille_bornes_live');
+    if (card == null) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'playerId': playerId,
+        'card': card,
+        'targetId': targetId,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getMilleBornesLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/mille_bornes_live').onValue;
+
+  // 14. Infiltré & Mr. White : Soupçons pointés en direct
+  Future<void> updateUndercoverLiveSuspect(
+    String gameCode,
+    String playerId,
+    String? suspectId,
+  ) async {
+    final ref = FirebaseDatabase.instance.ref('games/$gameCode/undercover_live/$playerId');
+    if (suspectId == null) {
+      await ref.remove();
+    } else {
+      await ref.set({
+        'suspectId': suspectId,
+        'timestamp': ServerValue.timestamp,
+      });
+    }
+  }
+
+  Stream<DatabaseEvent> getUndercoverLiveStream(String gameCode) =>
+      FirebaseDatabase.instance.ref('games/$gameCode/undercover_live').onValue;
+
   Future<String> createLounge(Map<String, dynamic> loungeData) async {
     final docRef = _db.collection('lounges').doc();
     final String joinCode = randomNumeric(6);
@@ -30195,9 +30342,58 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     return Column(
       children: [
         if (currentPhase == 'discussion') ...[
-          Text(
-            GameContentLocalization.ui(context, "Phase de discussion"),
-            style: Theme.of(context).textTheme.headlineSmall,
+          StreamBuilder<DatabaseEvent>(
+            stream: _firebaseService.getUndercoverLiveStream(widget.gameCode),
+            builder: (context, snap) {
+              Map<String, String> suspects = {};
+              if (snap.hasData && snap.data!.snapshot.value != null) {
+                try {
+                  final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                  raw.forEach((sId, data) {
+                    if (data is Map && data['suspectId'] != null) {
+                      suspects[sId] = data['suspectId'].toString();
+                    }
+                  });
+                } catch (_) {}
+              }
+
+              if (suspects.isEmpty) {
+                return Text(
+                  GameContentLocalization.ui(context, "Phase de discussion"),
+                  style: Theme.of(context).textTheme.headlineSmall,
+                );
+              }
+
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    GameContentLocalization.ui(context, "Phase de discussion"),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 4),
+                  Wrap(
+                    spacing: 6,
+                    children: suspects.entries.map((entry) {
+                      final accuserName = playerData[entry.key]?['name'] ?? 'Joueur';
+                      final targetName = playerData[entry.value]?['name'] ?? 'Suspect';
+                      return Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+                        ),
+                        child: Text(
+                          "👀 $accuserName soupçonne $targetName",
+                          style: const TextStyle(color: Colors.amberAccent, fontSize: 11),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              );
+            },
           ),
           SizedBox(height: 10),
           if (isHost)
@@ -37727,6 +37923,50 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     return Column(
       children: [
+        StreamBuilder<DatabaseEvent>(
+          stream: _firebaseService.getMilleBornesLiveStream(widget.gameCode),
+          builder: (context, snap) {
+            String? attackerId;
+            String? attackCard;
+            if (snap.hasData && snap.data!.snapshot.value != null) {
+              try {
+                final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                attackerId = raw['playerId'] as String?;
+                attackCard = raw['card'] as String?;
+              } catch (_) {}
+            }
+
+            if (attackerId != null && attackerId != playerId && attackCard != null) {
+              final aName = players[attackerId]?['name'] ?? 'L\'adversaire';
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent.withOpacity(0.25),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.redAccent),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.warning_amber_rounded, color: Colors.redAccent, size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      "⚠️ $aName prépare une attaque ($attackCard) contre un joueur !",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
+
         // ---------------------------------------------------------------------
         // 1. BANDEAU ADVERSAIRES : CIRCUIT & PROGRESSION ÉPURÉE
         // ---------------------------------------------------------------------
@@ -38738,6 +38978,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final pDatas = Map<String, dynamic>.from(
       gameData['milleBornesPlayerData'] ?? {},
     );
+    _firebaseService.updateMilleBornesTargetLive(widget.gameCode, widget.playerId, card, null);
 
     showDialog(
       context: context,
@@ -38839,6 +39080,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         enabled: !isProtected,
                         onTap: () {
                           Navigator.pop(ctx);
+                          _firebaseService.updateMilleBornesTargetLive(widget.gameCode, widget.playerId, null, null);
                           _firebaseService
                               .milleBornesAction(
                                 widget.gameCode,
@@ -39468,6 +39710,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
+  int? _selectedNavalTarget;
+
   Widget _buildBatailleNavalePlayingUI(
     BuildContext context,
     String playerId,
@@ -39527,7 +39771,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
         const SizedBox(height: 8),
 
-        // GRILLE ADVERSE (ZONE DE TIR)
+        // GRILLE ADVERSE (ZONE DE TIR) AVEC VISEUR LIVE
         Expanded(
           flex: 5,
           child: Column(
@@ -39535,9 +39779,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               Text(
                 GameUiLocalization.tr(
                   context,
-                  "Territoire Ennemi (Touchez une case pour tirer)",
+                  "Territoire Ennemi (Touchez pour viser, confirmez pour tirer)",
                 ),
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.redAccent,
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
@@ -39548,16 +39792,37 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 child: _buildBatailleNavaleGridGame(
                   gridData: enemyGrid,
                   isEnemy: true,
+                  selectedTargetIndex: isMyTurn ? _selectedNavalTarget : null,
                   onTap:
                       isMyTurn
                           ? (index) {
-                            if (enemyGrid[index] == 'unknown' &&
-                                !_isActionPending) {
-                              _firebaseService.shootBatailleNavale(
-                                widget.gameCode,
-                                playerId,
-                                index,
-                              );
+                            if (enemyGrid[index] == 'unknown' && !_isActionPending) {
+                              if (_selectedNavalTarget == index) {
+                                // 2e clic : Confirmation et tir !
+                                setState(() {
+                                  _isActionPending = true;
+                                  _selectedNavalTarget = null;
+                                });
+                                _firebaseService.updateBatailleNavaleAimLive(
+                                  widget.gameCode,
+                                  playerId,
+                                  null,
+                                );
+                                _firebaseService
+                                    .shootBatailleNavale(widget.gameCode, playerId, index)
+                                    .whenComplete(() {
+                                      if (mounted) setState(() => _isActionPending = false);
+                                    });
+                              } else {
+                                // 1er clic : Verrouillage laser de la cible en direct
+                                HapticFeedback.selectionClick();
+                                setState(() => _selectedNavalTarget = index);
+                                _firebaseService.updateBatailleNavaleAimLive(
+                                  widget.gameCode,
+                                  playerId,
+                                  index,
+                                );
+                              }
                             }
                           }
                           : null,
@@ -39569,31 +39834,79 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
         const SizedBox(height: 8),
 
-        // VOTRE FLOTTE AVEC IMPACTS ET FLAMMES PAR-DESSUS LES BATEAUX
+        // VOTRE FLOTTE AVEC DÉTECTION DU RADAR ADVERSE EN DIRECT
         Expanded(
           flex: 4,
-          child: Column(
-            children: [
-              Text(
-                GameUiLocalization.tr(
-                  context,
-                  "Votre Flotte (Tirs ennemis reçus)",
-                ),
-                style: TextStyle(
-                  color: Colors.cyanAccent,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Expanded(
-                child: _buildBatailleNavaleGridGame(
-                  gridData: incomingGrid, // Tirs ennemis reçus
-                  isEnemy: false,
-                  myShips: shipsPlaced,
-                ),
-              ),
-            ],
+          child: StreamBuilder<DatabaseEvent>(
+            stream: _firebaseService.getBatailleNavaleAimStream(widget.gameCode),
+            builder: (context, aimSnap) {
+              int? enemyAimedIndex;
+              if (aimSnap.hasData && aimSnap.data!.snapshot.value != null) {
+                try {
+                  final raw = Map<String, dynamic>.from(aimSnap.data!.snapshot.value as Map);
+                  final aPlayerId = raw['playerId'] as String?;
+                  if (aPlayerId != null && aPlayerId != playerId) {
+                    enemyAimedIndex = (raw['targetIndex'] as num?)?.toInt();
+                  }
+                } catch (_) {}
+              }
+
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        GameUiLocalization.tr(
+                          context,
+                          "Votre Flotte (Tirs ennemis reçus)",
+                        ),
+                        style: const TextStyle(
+                          color: Colors.cyanAccent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
+                      if (enemyAimedIndex != null) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent.withOpacity(0.25),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.redAccent, width: 1.2),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.gps_fixed, color: Colors.redAccent, size: 12),
+                              const SizedBox(width: 4),
+                              Text(
+                                "🚨 RADAR : Case ${String.fromCharCode(65 + enemyAimedIndex ~/ 10)}${enemyAimedIndex % 10 + 1} ciblée !",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Expanded(
+                    child: _buildBatailleNavaleGridGame(
+                      gridData: incomingGrid,
+                      isEnemy: false,
+                      myShips: shipsPlaced,
+                      enemyAimedIndex: enemyAimedIndex,
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ],
@@ -39605,6 +39918,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     required bool isEnemy,
     Map<String, dynamic>? myShips,
     Function(int)? onTap,
+    int? selectedTargetIndex,
+    int? enemyAimedIndex,
   }) {
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -39741,17 +40056,62 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       }
                     }
 
+                    final bool isTargetedByMe = (isEnemy && selectedTargetIndex == index);
+                    final bool isAimedByEnemy = (!isEnemy && enemyAimedIndex == index);
+
+                    Widget? liveOverlay = overlay;
+                    if (isTargetedByMe) {
+                      liveOverlay = Container(
+                        decoration: BoxDecoration(
+                          color: Colors.cyanAccent.withOpacity(0.25),
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.cyanAccent, width: 2),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.cyanAccent.withOpacity(0.6),
+                              blurRadius: 8,
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.gps_fixed_rounded, color: Colors.cyanAccent, size: 20),
+                        ),
+                      );
+                    } else if (isAimedByEnemy) {
+                      liveOverlay = Container(
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent.withOpacity(0.35),
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.redAccent, width: 2),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.redAccent.withOpacity(0.8),
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.gps_fixed_rounded, color: Colors.redAccent, size: 22),
+                        ),
+                      );
+                    }
+
                     return GestureDetector(
                       onTap: onTap != null ? () => onTap(index) : null,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: cellBgColor,
+                          color: (isTargetedByMe || isAimedByEnemy)
+                              ? (isTargetedByMe ? Colors.cyan.withOpacity(0.2) : Colors.red.withOpacity(0.25))
+                              : cellBgColor,
                           border: Border.all(
-                            color: Colors.white.withOpacity(0.12),
-                            width: 0.5,
+                            color: (isTargetedByMe || isAimedByEnemy)
+                                ? (isTargetedByMe ? Colors.cyanAccent : Colors.redAccent)
+                                : Colors.white.withOpacity(0.12),
+                            width: (isTargetedByMe || isAimedByEnemy) ? 1.5 : 0.5,
                           ),
                         ),
-                        child: Center(child: overlay),
+                        child: Center(child: liveOverlay),
                       ),
                     );
                   },
@@ -40370,7 +40730,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // 1. BANDEAU DE STATUT DU TOUR
+                  // 1. BANDEAU DE STATUT DU TOUR AVEC LIVE COLOR CHOOSING
                   _buildUnoTurnStatus(
                     context,
                     gameData,
@@ -40379,6 +40739,47 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     pendingDraw,
                     wildColorChosen,
                     currentColor,
+                  ),
+                  StreamBuilder<DatabaseEvent>(
+                    stream: _firebaseService.getUnoLiveStream(widget.gameCode),
+                    builder: (context, snap) {
+                      String? choosingColor;
+                      if (snap.hasData && snap.data!.snapshot.value != null) {
+                        try {
+                          final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                          choosingColor = raw['color'] as String?;
+                        } catch (_) {}
+                      }
+
+                      if (choosingColor != null && !isMyTurn) {
+                        final String chooserName = players[currentPlayerId]?['name'] ?? 'L\'adversaire';
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(color: Colors.amberAccent, width: 1.5),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.palette_rounded, color: Colors.amberAccent, size: 16),
+                              const SizedBox(width: 8),
+                              Text(
+                                "🌈 $chooserName hésite et choisit la couleur...",
+                                style: const TextStyle(
+                                  color: Colors.amberAccent,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
                   ),
 
                   const SizedBox(height: 8),
@@ -41096,6 +41497,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   void _showColorPicker(String card) {
+    _firebaseService.updateUnoLiveColorChoosing(widget.gameCode, widget.playerId, 'Joker');
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -41114,6 +41516,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               ? null
                               : () async {
                                 Navigator.of(context).pop();
+                                _firebaseService.updateUnoLiveColorChoosing(widget.gameCode, widget.playerId, null);
                                 setState(() => _isActionPending = true);
                                 try {
                                   final String playerId = widget.playerId;
@@ -44601,33 +45004,98 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   cardColor = Colors.brown[700]!;
               }
 
-              return GestureDetector(
-                onTap:
-                    canGuess && !isRevealed && !_isActionPending
-                        ? () {
-                          setState(() => _isActionPending = true);
-                          _firebaseService
-                              .revealCodenamesWord(widget.gameCode, word)
-                              .whenComplete(() {
-                                if (mounted)
-                                  setState(() => _isActionPending = false);
-                              });
+              return StreamBuilder<DatabaseEvent>(
+                stream: _firebaseService.getCodenamesLiveStream(widget.gameCode),
+                builder: (context, liveSnap) {
+                  List<String> pointers = [];
+                  String? pointTeam;
+                  if (liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+                    try {
+                      final raw = Map<String, dynamic>.from(liveSnap.data!.snapshot.value as Map);
+                      raw.forEach((pId, pData) {
+                        if (pData is Map && pData['word'] == word) {
+                          final pName = players[pId]?['name'] ?? 'Espion';
+                          pointers.add(pName);
+                          pointTeam = pData['team'] as String?;
                         }
-                        : null,
+                      });
+                    } catch (_) {}
+                  }
 
-                child: Card(
-                  color: cardColor,
-                  child: Center(
-                    child: Text(
-                      word,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: textColor,
-                        fontWeight: FontWeight.bold,
+                  final bool isPointed = pointers.isNotEmpty;
+                  final Color pointColor = (pointTeam == 'red') ? Colors.redAccent : Colors.cyanAccent;
+
+                  return GestureDetector(
+                    onTap:
+                        canGuess && !isRevealed && !_isActionPending
+                            ? () {
+                              _firebaseService.updateCodenamesLivePoint(
+                                widget.gameCode,
+                                playerId,
+                                word,
+                                activeTeam,
+                              );
+                              setState(() => _isActionPending = true);
+                              _firebaseService
+                                  .revealCodenamesWord(widget.gameCode, word)
+                                  .whenComplete(() {
+                                    _firebaseService.updateCodenamesLivePoint(
+                                      widget.gameCode,
+                                      playerId,
+                                      null,
+                                      activeTeam,
+                                    );
+                                    if (mounted)
+                                      setState(() => _isActionPending = false);
+                                  });
+                            }
+                            : null,
+
+                    child: Card(
+                      color: cardColor,
+                      shape: isPointed
+                          ? RoundedRectangleBorder(
+                            side: BorderSide(color: pointColor, width: 2.5),
+                            borderRadius: BorderRadius.circular(6),
+                          )
+                          : null,
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Text(
+                              word,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          if (isPointed)
+                            Positioned(
+                              top: 2,
+                              right: 2,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                                decoration: BoxDecoration(
+                                  color: pointColor,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  "👆 ${pointers.first}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               );
             },
           ),
@@ -45668,7 +46136,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
       return Column(
         children: [
-          // En-tête Tableau
+          // En-tête Tableau avec progression live
           Container(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             decoration: blackboardDecoration.copyWith(
@@ -45677,32 +46145,35 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 bottom: Radius.circular(12),
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      GameUiLocalization.tr(context, 'petitBacRound', {
-                        'round': "${gameData['currentRound']}",
-                      }),
-                      style: chalkStyle.copyWith(
-                        fontSize: 14,
-                        color: Colors.white70,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          GameUiLocalization.tr(context, 'petitBacRound', {
+                            'round': "${gameData['currentRound']}",
+                          }),
+                          style: chalkStyle.copyWith(
+                            fontSize: 14,
+                            color: Colors.white70,
+                          ),
+                        ),
+                        Text(
+                          GameUiLocalization.tr(context, 'petitBacLetter', {
+                            'letter': currentLetter,
+                          }),
+                          style: chalkStyle.copyWith(
+                            fontSize: 32,
+                            color: Colors.yellowAccent,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      GameUiLocalization.tr(context, 'petitBacLetter', {
-                        'letter': currentLetter,
-                      }),
-                      style: chalkStyle.copyWith(
-                        fontSize: 32,
-                        color: Colors.yellowAccent,
-                      ),
-                    ),
-                  ],
-                ),
                 Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -45761,7 +46232,59 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ),
               ],
             ),
-          ),
+            StreamBuilder<DatabaseEvent>(
+              stream: _firebaseService.getPetitBacLiveStream(widget.gameCode),
+              builder: (context, snap) {
+                Map<String, int> progress = {};
+                if (snap.hasData && snap.data!.snapshot.value != null) {
+                  try {
+                    final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                    raw.forEach((pId, data) {
+                      if (data is Map) {
+                        progress[pId] = (data['filledCount'] as num?)?.toInt() ?? 0;
+                      }
+                    });
+                  } catch (_) {}
+                }
+
+                if (progress.isEmpty) return const SizedBox.shrink();
+
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 4,
+                    children: progress.entries.map((e) {
+                      final pName = players[e.key]?['name'] ?? 'Joueur';
+                      final count = e.value;
+                      final bool isFull = count >= categories.length && categories.isNotEmpty;
+                      return Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: isFull ? Colors.redAccent.withOpacity(0.35) : Colors.black38,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: isFull ? Colors.redAccent : Colors.white24,
+                            width: isFull ? 1.5 : 0.8,
+                          ),
+                        ),
+                        child: Text(
+                          "$pName: $count/${categories.length}${isFull ? ' 🔥' : ' ⚡'}",
+                          style: TextStyle(
+                            color: isFull ? Colors.yellowAccent : Colors.white70,
+                            fontSize: 11,
+                            fontWeight: isFull ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
 
           SizedBox(height: 10),
 
@@ -45811,6 +46334,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 category,
                                 value,
                               );
+                              myAnswers[category] = value;
+                              final filled = myAnswers.values.where((v) => v != null && v.toString().trim().isNotEmpty).length;
+                              _firebaseService.updatePetitBacLiveProgress(widget.gameCode, playerId, filled);
                             },
                           );
                         },
@@ -49463,12 +49989,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             break;
           case 'loups_turn':
             setState(() => _isActionPending = true);
-            if (amILoup)
+            if (amILoup) {
+              _firebaseService.updateLoupGarouLiveTarget(widget.gameCode, playerId, targetId);
               await _firebaseService.loupGarouVote(
                 widget.gameCode,
                 playerId,
                 targetId,
               );
+            }
             if (myRole == 'Petite Fille')
               await _firebaseService.petiteFilleSpy(
                 widget.gameCode,
@@ -49987,21 +50515,80 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       return Positioned(
                         left: centerX + x - (avatarSize / 2),
                         top: centerY + y - (avatarSize / 2),
-                        child: _buildPlayerAvatar(
-                          pData,
-                          pId,
-                          pId == playerId,
-                          votesReceived[pId],
-                          captainId,
-                          lovers,
-                          amILoup,
-                          nightNumber,
-                          currentRoundState: phase,
-                          contaminatedPlayers: contaminatedPlayers,
-                          canSeeLovers: canSeeLovers,
-                          isSelectable: canSelectTarget(pId),
-                          isSelected: _lgLocalSelection.contains(pId),
-                          onTap: () => handleTargetSelection(pId),
+                        child: StreamBuilder<DatabaseEvent>(
+                          stream: _firebaseService.getLoupGarouLiveTargetStream(widget.gameCode),
+                          builder: (context, liveSnap) {
+                            List<String> targetingWolves = [];
+                            if (subPhase == 'loups_turn' && amILoup && liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+                              try {
+                                final raw = Map<String, dynamic>.from(liveSnap.data!.snapshot.value as Map);
+                                raw.forEach((wId, wData) {
+                                  if (wData is Map && wData['targetId'] == pId) {
+                                    final wName = playerData[wId]?['name'] ?? 'Loup';
+                                    targetingWolves.add(wName);
+                                  }
+                                });
+                              } catch (_) {}
+                            }
+
+                            final bool isWolfTargeted = targetingWolves.isNotEmpty;
+
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                _buildPlayerAvatar(
+                                  pData,
+                                  pId,
+                                  pId == playerId,
+                                  votesReceived[pId],
+                                  captainId,
+                                  lovers,
+                                  amILoup,
+                                  nightNumber,
+                                  currentRoundState: phase,
+                                  contaminatedPlayers: contaminatedPlayers,
+                                  canSeeLovers: canSeeLovers,
+                                  isSelectable: canSelectTarget(pId),
+                                  isSelected: _lgLocalSelection.contains(pId),
+                                  onTap: () => handleTargetSelection(pId),
+                                ),
+                                if (isWolfTargeted)
+                                  Positioned(
+                                    top: -8,
+                                    right: -8,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red[900],
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(color: Colors.redAccent, width: 1.5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.redAccent.withOpacity(0.6),
+                                            blurRadius: 8,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Text("🐺", style: TextStyle(fontSize: 10)),
+                                          const SizedBox(width: 2),
+                                          Text(
+                                            targetingWolves.first,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 9,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            );
+                          },
                         ),
                       );
                     }).toList(),
