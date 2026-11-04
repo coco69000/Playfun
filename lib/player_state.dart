@@ -9,6 +9,7 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'services/force_update_service.dart';
 import 'services/premium_service.dart';
 import 'badges_data.dart';
+import 'auth/auth_service.dart';
 
 class PlayerState extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -487,15 +488,33 @@ class PlayerState extends ChangeNotifier {
   }
 
   // --- GESTION DU PSEUDO ET DE LA PHOTO DE PROFIL ---
-  Future<void> updateUserName(String newName) async {
-    if (_userId == null || newName.trim().isEmpty) return;
+  Future<bool> updateUserName(String newName) async {
+    if (_userId == null || newName.trim().isEmpty) return false;
     final clean = newName.trim();
-    await _db.collection('users').doc(_userId!).update({
-      'name': clean,
-      'nameLower': clean.toLowerCase(),
-    });
-    _userName = clean;
-    notifyListeners();
+    if (clean.length < 3) return false;
+
+    try {
+      final HttpsCallable callable =
+          FirebaseFunctions.instance.httpsCallable('updateUserUsername');
+      final res = await callable.call({'username': clean});
+      if (res.data is Map && res.data['success'] == true) {
+        _userName = clean;
+        notifyListeners();
+        return true;
+      }
+    } catch (e) {
+      debugPrint("Erreur updateUserUsername callable: $e");
+      final available = await AuthService().isUsernameAvailable(clean);
+      if (!available) return false;
+      await _db.collection('users').doc(_userId!).update({
+        'name': clean,
+        'nameLower': clean.toLowerCase(),
+      });
+      _userName = clean;
+      notifyListeners();
+      return true;
+    }
+    return false;
   }
 
   /// Met à jour l'URL de la photo dans Firestore

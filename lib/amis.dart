@@ -3453,12 +3453,23 @@ class FirebaseService {
   }
 
   Stream<QuerySnapshot> getChatStream(String gameCode, String chatType) {
-    return _db
+    var query = _db
         .collection('games')
         .doc(gameCode)
         .collection('chat')
-        .orderBy('timestamp', descending: true)
-        .limit(10)
+        .orderBy('timestamp', descending: true);
+    if (chatType.isNotEmpty && chatType != 'all') {
+      return _db
+          .collection('games')
+          .doc(gameCode)
+          .collection('chat')
+          .where('chatType', isEqualTo: chatType)
+          .orderBy('timestamp', descending: true)
+          .limit(30)
+          .snapshots();
+    }
+    return query
+        .limit(30)
         .snapshots();
   }
 
@@ -10061,7 +10072,10 @@ class FirebaseService {
       deadThisNightNames.add(playerData[deadId]['name'] ?? 'Inconnu');
       processedDeaths.add(deadId);
 
-      if (playerData[deadId]['role'] == 'Chasseur') chasseurDiedId = deadId;
+      if (playerData[deadId]['role'] == 'Chasseur' &&
+          playerData[deadId]['infectionStatus'] != 'infecte') {
+        chasseurDiedId = deadId;
+      }
       if (deadId == gameData['captainId']) captainDiedId = deadId;
       if (playerData[deadId]['role'] == 'Fossoyeur') fossoyeurDiedId = deadId;
 
@@ -10162,12 +10176,25 @@ class FirebaseService {
       }
     });
 
+    final String? dictatorId = playerData.entries
+        .firstWhere(
+          (e) => e.value['role'] == 'Dictateur',
+          orElse: () => const MapEntry('', {}),
+        )
+        .key;
+    final bool dictatorValid = dictatorId != null &&
+        dictatorId.isNotEmpty &&
+        playerData[dictatorId]?['status'] == 'vivant' &&
+        playerData[dictatorId]?['infectionStatus'] != 'infecte';
+
+    final bool dictatorActiveCoup = (gameData['dictatorTookPowerAtNight'] == true) && dictatorValid;
+
     transaction.update(gameRef, {
       'playerData': playerData,
       'gameLog': FieldValue.arrayUnion(logMessages),
       'nightActions': {},
       'dayVotes': {},
-      'dictatorTookPowerAtNight': false,
+      'dictatorTookPowerAtNight': dictatorActiveCoup,
     });
 
     // File d'attente des pouvoirs de jour
@@ -10177,7 +10204,7 @@ class FirebaseService {
         'subPhase': 'captain_designate',
         'activePlayerId': captainDiedId,
       });
-    if (chasseurDiedId != null)
+    if (chasseurDiedId != null && playerData[chasseurDiedId]?['infectionStatus'] != 'infecte')
       pendingDayEffects.add({
         'subPhase': 'chasseur_revenge',
         'activePlayerId': chasseurDiedId,
@@ -10186,6 +10213,11 @@ class FirebaseService {
       pendingDayEffects.add({
         'subPhase': 'fossoyeur_reveal',
         'activePlayerId': fossoyeurDiedId,
+      });
+    if (dictatorActiveCoup)
+      pendingDayEffects.add({
+        'subPhase': 'dictateur_coup',
+        'activePlayerId': dictatorId,
       });
 
     if (pendingDayEffects.isNotEmpty) {
@@ -10334,6 +10366,7 @@ class FirebaseService {
 
     final playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
     if (playerData[dictateurId]?['powerUsed'] == true ||
+        playerData[dictateurId]?['infectionStatus'] == 'infecte' ||
         playerData[dictateurId]?['status'] != 'vivant')
       return;
 
@@ -10366,7 +10399,9 @@ class FirebaseService {
 
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
       if (playerData[dictatorId]?['role'] != 'Dictateur' ||
-          playerData[dictatorId]?['status'] != 'vivant')
+          playerData[dictatorId]?['status'] != 'vivant' ||
+          playerData[dictatorId]?['powerUsed'] == true ||
+          playerData[dictatorId]?['infectionStatus'] == 'infecte')
         return;
 
       String targetRole = playerData[targetId]['role'];
@@ -10407,7 +10442,10 @@ class FirebaseService {
       String? fossoyeurDiedId;
 
       for (String dId in deaths) {
-        if (playerData[dId]?['role'] == 'Chasseur') chasseurDiedId = dId;
+        if (playerData[dId]?['role'] == 'Chasseur' &&
+            playerData[dId]?['infectionStatus'] != 'infecte') {
+          chasseurDiedId = dId;
+        }
         if (playerData[dId]?['role'] == 'Fossoyeur') fossoyeurDiedId = dId;
         if (gameData['captainId'] == dId) captainDiedId = dId;
 
@@ -10449,7 +10487,8 @@ class FirebaseService {
           'activePlayerId': captainDiedId,
         });
       }
-      if (chasseurDiedId != null) {
+      if (chasseurDiedId != null &&
+          playerData[chasseurDiedId]?['infectionStatus'] != 'infecte') {
         pendingDayEffects.add({
           'subPhase': 'chasseur_revenge',
           'activePlayerId': chasseurDiedId,
@@ -10776,7 +10815,10 @@ class FirebaseService {
         playerData[deadId]['revealedRole'] = playerData[deadId]['role'];
         processedDeaths.add(deadId);
 
-        if (playerData[deadId]['role'] == 'Chasseur') chasseurDiedId = deadId;
+        if (playerData[deadId]['role'] == 'Chasseur' &&
+          playerData[deadId]['infectionStatus'] != 'infecte') {
+        chasseurDiedId = deadId;
+      }
         if (deadId == gameData['captainId']) captainDiedId = deadId;
         if (playerData[deadId]['role'] == 'Fossoyeur') fossoyeurDiedId = deadId;
 
@@ -10854,7 +10896,8 @@ class FirebaseService {
           'subPhase': 'captain_designate',
           'activePlayerId': captainDiedId,
         });
-      if (chasseurDiedId != null)
+      if (chasseurDiedId != null &&
+          playerData[chasseurDiedId]?['infectionStatus'] != 'infecte')
         pendingDayEffects.add({
           'subPhase': 'chasseur_revenge',
           'activePlayerId': chasseurDiedId,
@@ -10915,6 +10958,7 @@ class FirebaseService {
       String? fossoyeurDiedId;
 
       if (playerData[chasseurId]?['role'] == 'Chasseur' &&
+          playerData[chasseurId]?['infectionStatus'] != 'infecte' &&
           playerData[targetId]?['status'] == 'vivant') {
         playerData[targetId]['status'] = 'mort';
         playerData[targetId]['revealedRole'] = playerData[targetId]['role'];
@@ -17643,30 +17687,53 @@ class FirebaseService {
       } else {
         // Fin de pioche : fin de partie
         final playersMap = Map<String, dynamic>.from(gameData['players'] ?? {});
-        String highestScorer = playerId;
         int maxScore = -1;
+        List<String> topScorers = [];
         playersMap.forEach((k, v) {
           int sc = (v is Map ? (v['score'] ?? 0) : 0);
           if (k == playerId) sc += 1;
           if (sc > maxScore) {
             maxScore = sc;
-            highestScorer = k;
+            topScorers = [k];
+          } else if (sc == maxScore) {
+            topScorers.add(k);
           }
         });
 
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          highestScorer,
-          35,
-          applySpeedBonus: false,
-        );
+        if (topScorers.length <= 1) {
+          final singleWinner = topScorers.isNotEmpty ? topScorers.first : playerId;
+          creditPlayerXp(
+            transaction,
+            gameRef,
+            gameData,
+            singleWinner,
+            35,
+            applySpeedBonus: false,
+          );
+          updates['gameWinner'] = singleWinner;
+          updates['gameEndReason'] = "Toutes les cartes ont été jouées !";
+        } else {
+          // Égalité parfaite entre plusieurs joueurs
+          for (final wId in topScorers) {
+            creditPlayerXp(
+              transaction,
+              gameRef,
+              gameData,
+              wId,
+              25,
+              applySpeedBonus: false,
+            );
+          }
+          final names = topScorers.map((id) => playersMap[id]?['name'] ?? 'Joueur').join(', ');
+          updates['gameWinner'] = topScorers.contains(playerId) ? playerId : topScorers.first;
+          updates['isTie'] = true;
+          updates['tiedWinners'] = topScorers;
+          updates['gameEndReason'] = "Égalité parfaite ($names) !";
+        }
+
         updates['dobbleDeck'] = [];
         updates['gameState'] = 'gameOver';
         updates['roundState'] = 'gameOver';
-        updates['gameWinner'] = highestScorer;
-        updates['gameEndReason'] = "Toutes les cartes ont été jouées !";
       }
 
       transaction.update(gameRef, updates);
@@ -22473,59 +22540,14 @@ class FirebaseService {
         players[playerId]?['name'] ??
         'Inconnu';
 
-    // 1. Ajout dans la sous-collection 'chat' pour le FloatingChatOverlay
+    // Écriture unique dans la sous-collection 'chat' pour éviter la saturation du document principal (1 Mo)
     await gameRef.collection('chat').add({
       'senderId': playerId,
       'senderName': playerName,
       'text': safeMessage,
+      'message': safeMessage,
       'chatType': chatType,
       'timestamp': FieldValue.serverTimestamp(),
-    });
-
-    // 2. Synchronisation dans les tableaux du document pour les canaux Loup-Garou / Infiltré
-    await _db.runTransaction((transaction) async {
-      DocumentSnapshot freshSnap = await transaction.get(gameRef);
-      if (!freshSnap.exists) return;
-
-      var freshData = freshSnap.data() as Map<String, dynamic>;
-
-      Map<String, dynamic> chatMessage = {
-        'senderId': playerId,
-        'senderName': playerName,
-        'message': safeMessage,
-        'timestamp': DateTime.now().millisecondsSinceEpoch,
-      };
-
-      if (chatType == 'lover') {
-        List<String> lovers = List<String>.from(freshData['lovers'] ?? []);
-        if (lovers.contains(playerId) && lovers.isNotEmpty) {
-          lovers.sort();
-          String chatKey = lovers.join('_');
-          Map<String, dynamic> loverChat = Map<String, dynamic>.from(
-            freshData['loverChatMessages']?[chatKey] ?? {},
-          );
-          List<dynamic> currentList = List.from(loverChat['messages'] ?? []);
-          if (currentList.length >= 30) currentList.removeAt(0);
-          currentList.add(chatMessage);
-          transaction.update(gameRef, {
-            'loverChatMessages.$chatKey.messages': currentList,
-          });
-        }
-        return;
-      }
-
-      String fieldToUpdate =
-          chatType == 'wolf'
-              ? 'wolfChatMessages'
-              : (chatType == 'dead' ? 'deadChatMessages' : 'chatMessages');
-
-      List<dynamic> currentList = List.from(freshData[fieldToUpdate] ?? []);
-      if (currentList.length >= 30) {
-        currentList.removeAt(0);
-      }
-      currentList.add(chatMessage);
-
-      transaction.update(gameRef, {fieldToUpdate: currentList});
     });
 
     // Déclenche la vérification du mot pour le Loup Bavard
@@ -23223,16 +23245,28 @@ class FirebaseService {
       safetyCounter++;
     } while ((playerData[playerOrder[nextIndex]]?['status'] == 'folded' ||
             playerData[playerOrder[nextIndex]]?['status'] == 'all-in') &&
-        safetyCounter <= playerOrder.length);
+        safetyCounter <= playerOrder.length * 2);
 
     if (safetyCounter > playerOrder.length) {
       var updatedData = Map<String, dynamic>.from(gameData);
       Map<String, dynamic> allUpdates = {};
-      while (updatedData['phase'] != 'river') {
+      int phaseGuard = 0;
+      while (updatedData['phase'] != 'river' &&
+          updatedData['phase'] != 'showdown' &&
+          phaseGuard < 10) {
         final phaseUpdates = _startNextPokerPhase(updatedData);
+        if (phaseUpdates.isEmpty) break;
         allUpdates.addAll(phaseUpdates);
         updatedData.addAll(phaseUpdates);
+        phaseGuard++;
       }
+      if (updatedData['phase'] == 'river') {
+        final showdownUpdates = _startNextPokerPhase(updatedData);
+        allUpdates.addAll(showdownUpdates);
+        updatedData.addAll(showdownUpdates);
+      }
+      allUpdates['phase'] = 'showdown';
+      updatedData['phase'] = 'showdown';
       allUpdates.addAll(_determinePokerWinner(updatedData));
       return allUpdates;
     }
@@ -28867,9 +28901,16 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
               ),
             );
           if (!snapshot.data!.exists) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
               if (mounted) {
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                if (_livekitInitialized) {
+                  try {
+                    await _livekitService.leaveChannel();
+                  } catch (_) {}
+                }
+                if (mounted) {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                }
               }
             });
             return Center(
@@ -29643,8 +29684,29 @@ class MultiplayerGameScreen extends StatefulWidget {
 
 class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     with WidgetsBindingObserver {
+  Future<void> _safePopToFirst() async {
+    if (_livekitInitialized) {
+      try {
+        await _livekitService.leaveChannel();
+      } catch (e) {
+        print("Erreur leaveChannel safePop: $e");
+      }
+    }
+    if (mounted) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    }
+  }
+
   void _exitGame() async {
     final String playerId = widget.playerId;
+
+    if (_livekitInitialized) {
+      try {
+        await _livekitService.leaveChannel();
+      } catch (e) {
+        print("Erreur lors de la déconnexion LiveKit : $e");
+      }
+    }
 
     // Nettoyage complet du salon avant de quitter pour éviter la boucle de redirection
     if (widget.loungeId != null) {
@@ -29676,7 +29738,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         Navigator.of(context).pop();
       }
     } else {
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      if (mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
     }
   }
 
@@ -31685,10 +31749,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   }),
                   SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed:
-                        () => Navigator.of(
-                          context,
-                        ).popUntil((route) => route.isFirst),
+                    onPressed: _safePopToFirst,
                     child: Text(
                       GameUiLocalization.tr(context, "Retour à l'accueil"),
                     ),
@@ -35923,10 +35984,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
-                onPressed:
-                    () => Navigator.of(
-                      context,
-                    ).popUntil((route) => route.isFirst),
+                onPressed: _safePopToFirst,
               ),
             ],
           ),
@@ -51665,32 +51723,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     switch (_selectedChatType) {
       case 'wolf':
-        currentChatMessages = List<dynamic>.from(
-          gameData['wolfChatMessages'] ?? [],
-        );
         canSendMessage = amILoup && !amIDead;
         break;
       case 'dead':
-        currentChatMessages = List<dynamic>.from(
-          gameData['deadChatMessages'] ?? [],
-        );
         canSendMessage = amIDead || amINecromancer;
         break;
       case 'lover':
-        if (lovers.isNotEmpty && lovers.contains(playerId)) {
-          lovers.sort();
-          String chatKey = lovers.join('_');
-          Map<String, dynamic> loverChat = Map<String, dynamic>.from(
-            gameData['loverChatMessages']?[chatKey] ?? {},
-          );
-          currentChatMessages = List<dynamic>.from(loverChat['messages'] ?? []);
-          canSendMessage = amILover && !amIDead;
-        }
+        canSendMessage = amILover && !amIDead;
         break;
       default:
-        currentChatMessages = List<dynamic>.from(
-          gameData['chatMessages'] ?? [],
-        );
         canSendMessage = !amIDead;
         break;
     }
@@ -51730,40 +51771,46 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
           // Messages
           Expanded(
-            child: ListView.builder(
-              reverse: true,
-              physics: const BouncingScrollPhysics(),
-              itemCount: currentChatMessages.length,
-              itemBuilder: (context, index) {
-                final messageData =
-                    currentChatMessages[currentChatMessages.length - 1 - index];
-                final senderId = messageData['senderId'];
-                final senderName = messageData['senderName'] ?? 'Inconnu';
-                final message = messageData['message'] ?? '';
-                final isMine = senderId == playerId;
+            child: StreamBuilder<QuerySnapshot>(
+              stream: _firebaseService.getChatStream(widget.gameCode, _selectedChatType),
+              builder: (context, snapshot) {
+                final docs = snapshot.hasData ? snapshot.data!.docs : [];
+                return ListView.builder(
+                  reverse: false,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: docs.length,
+                  itemBuilder: (context, index) {
+                    final messageData =
+                        docs[docs.length - 1 - index].data() as Map<String, dynamic>;
+                    final senderId = messageData['senderId'];
+                    final senderName = messageData['senderName'] ?? 'Inconnu';
+                    final message = messageData['text'] ?? messageData['message'] ?? '';
+                    final isMine = senderId == playerId;
 
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 1.5),
-                  child: RichText(
-                    text: TextSpan(
-                      style: const TextStyle(fontSize: 11, color: Colors.white),
-                      children: [
-                        TextSpan(
-                          text: isMine ? "Moi: " : "$senderName: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color:
-                                isMine
-                                    ? Colors.cyanAccent
-                                    : (_selectedChatType == 'wolf'
-                                        ? Colors.redAccent.shade100
-                                        : Colors.white60),
-                          ),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 1.5),
+                      child: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(fontSize: 11, color: Colors.white),
+                          children: [
+                            TextSpan(
+                              text: isMine ? "Moi: " : "$senderName: ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    isMine
+                                        ? Colors.cyanAccent
+                                        : (_selectedChatType == 'wolf'
+                                            ? Colors.redAccent.shade100
+                                            : Colors.white60),
+                              ),
+                            ),
+                            TextSpan(text: message),
+                          ],
                         ),
-                        TextSpan(text: message),
-                      ],
-                    ),
-                  ),
+                      ),
+                    );
+                  },
                 );
               },
             ),
@@ -55156,10 +55203,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurpleAccent,
                 ),
-                onPressed:
-                    () => Navigator.of(
-                      context,
-                    ).popUntil((route) => route.isFirst),
+                onPressed: _safePopToFirst,
               )
             else
               Text(
@@ -68200,18 +68244,23 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
   final FirebaseService _firebaseService = FirebaseService();
   bool _isNavigating = false;
   Timer? _heartbeatTimer;
+  bool _isHost = false;
+  int _sweepCounter = 0;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _sendHeartbeat();
-    _sweepLoungeGame();
     _heartbeatTimer = Timer.periodic(
       const Duration(seconds: 10),
       (_) {
         _sendHeartbeat();
-        _sweepLoungeGame();
+        _sweepCounter++;
+        // Seul l'hôte balaie l'état du jeu toutes les 40 secondes
+        if (_isHost && _sweepCounter % 4 == 0) {
+          _sweepLoungeGame();
+        }
       },
     );
   }
@@ -68826,6 +68875,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         final data = snapshot.data!.data() as Map<String, dynamic>;
         final players = data['players'] as Map<String, dynamic>? ?? {};
         final isHost = data['hostId'] == widget.playerId;
+        _isHost = isHost;
         final pendingGame = data['pendingGame'];
 
         bool isHostOfPendingGame =

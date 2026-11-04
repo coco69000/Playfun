@@ -246,6 +246,216 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  void _showChangeEmailDialog(BuildContext context, AuthService auth) {
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+    String? errorText;
+    bool isLoading = false;
+
+    showDialog(
+      context: context,
+      builder: (dlgCtx) => StatefulBuilder(
+        builder: (context, setDlgState) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          backgroundColor: const Color(0xFF1E1B2E),
+          title: const Row(
+            children: [
+              Icon(Icons.email_outlined, color: Colors.cyanAccent),
+              SizedBox(width: 8),
+              Text("Changer d'email", style: TextStyle(color: Colors.white, fontSize: 18)),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  labelText: "Nouvel email",
+                  prefixIcon: Icon(Icons.alternate_email, color: Colors.cyanAccent),
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  labelText: "Mot de passe actuel",
+                  prefixIcon: Icon(Icons.lock_outline, color: Colors.cyanAccent),
+                ),
+              ),
+              if (errorText != null) ...[
+                const SizedBox(height: 10),
+                Text(errorText!, style: const TextStyle(color: Colors.redAccent, fontSize: 12)),
+              ],
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: isLoading ? null : () => Navigator.pop(dlgCtx),
+              child: const Text("Annuler"),
+            ),
+            ElevatedButton(
+              onPressed: isLoading ? null : () async {
+                final newEmail = emailController.text.trim();
+                final pwd = passwordController.text.trim();
+                if (!newEmail.contains('@') || newEmail.length < 5) {
+                  setDlgState(() => errorText = "Veuillez entrer une adresse email valide.");
+                  return;
+                }
+                if (pwd.isEmpty) {
+                  setDlgState(() => errorText = "Veuillez entrer votre mot de passe actuel.");
+                  return;
+                }
+                setDlgState(() {
+                  isLoading = true;
+                  errorText = null;
+                });
+                try {
+                  await auth.updateEmail(newEmail, pwd);
+                  if (dlgCtx.mounted) Navigator.pop(dlgCtx);
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Email mis à jour avec succès !"),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  setDlgState(() {
+                    isLoading = false;
+                    errorText = e.toString().replaceAll(RegExp(r'\[.*?\]'), '').trim();
+                  });
+                }
+              },
+              child: isLoading
+                  ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                  : const Text("Confirmer"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showChangePasswordDialog(BuildContext context, AuthService auth) {
+    final currentPwdController = TextEditingController();
+    final newPwdController = TextEditingController();
+    final confirmPwdController = TextEditingController();
+    String? errorText;
+    bool isLoading = false;
+
+    showDialog(
+      context: context,
+      builder: (dlgCtx) => StatefulBuilder(
+        builder: (context, setDlgState) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          backgroundColor: const Color(0xFF1E1B2E),
+          title: const Row(
+            children: [
+              Icon(Icons.lock_reset_rounded, color: Colors.amberAccent),
+              SizedBox(width: 8),
+              Text("Modifier mot de passe", style: TextStyle(color: Colors.white, fontSize: 18)),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: currentPwdController,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: "Mot de passe actuel",
+                    prefixIcon: Icon(Icons.lock_outline, color: Colors.amberAccent),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: newPwdController,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: "Nouveau mot de passe",
+                    prefixIcon: Icon(Icons.vpn_key_outlined, color: Colors.amberAccent),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: confirmPwdController,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: "Confirmer le mot de passe",
+                    prefixIcon: Icon(Icons.check_circle_outline, color: Colors.amberAccent),
+                  ),
+                ),
+                if (errorText != null) ...[
+                  const SizedBox(height: 10),
+                  Text(errorText!, style: const TextStyle(color: Colors.redAccent, fontSize: 12)),
+                ],
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: isLoading ? null : () => Navigator.pop(dlgCtx),
+              child: const Text("Annuler"),
+            ),
+            ElevatedButton(
+              onPressed: isLoading ? null : () async {
+                final cur = currentPwdController.text.trim();
+                final next = newPwdController.text.trim();
+                final conf = confirmPwdController.text.trim();
+                if (cur.isEmpty) {
+                  setDlgState(() => errorText = "Entrez votre mot de passe actuel.");
+                  return;
+                }
+                if (next.length < 6) {
+                  setDlgState(() => errorText = "Le nouveau mot de passe doit faire au moins 6 caractères.");
+                  return;
+                }
+                if (next != conf) {
+                  setDlgState(() => errorText = "Les deux mots de passe ne correspondent pas.");
+                  return;
+                }
+                setDlgState(() {
+                  isLoading = true;
+                  errorText = null;
+                });
+                try {
+                  await auth.updatePassword(cur, next);
+                  if (dlgCtx.mounted) Navigator.pop(dlgCtx);
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Mot de passe modifié avec succès !"),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  setDlgState(() {
+                    isLoading = false;
+                    errorText = e.toString().replaceAll(RegExp(r'\[.*?\]'), '').trim();
+                  });
+                }
+              },
+              child: isLoading
+                  ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                  : const Text("Changer"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   void _showProfileDialog(
     BuildContext context,
     PlayerState ps,
@@ -255,6 +465,8 @@ class _MainScreenState extends State<MainScreen> {
       text: ps.userName,
     );
     bool isEditingName = false;
+    bool isCheckingName = false;
+    String? nameError;
     bool isUploadingPhoto = false;
 
     final l10n = AppLocalizations.of(context);
@@ -471,29 +683,85 @@ class _MainScreenState extends State<MainScreen> {
                       const SizedBox(height: 15),
 
                       if (isEditingName)
-                        Row(
+                        Column(
                           children: [
-                            Expanded(
-                              child: TextField(
-                                controller: nameController,
-                                decoration: InputDecoration(
-                                  hintText:
-                                      l10n?.newUsernameHint ?? "Nouveau pseudo",
-                                  isDense: true,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                    controller: nameController,
+                                    decoration: InputDecoration(
+                                      hintText:
+                                          l10n?.newUsernameHint ?? "Nouveau pseudo",
+                                      isDense: true,
+                                      errorText: nameError,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.check,
-                                color: Colors.green,
-                              ),
-                              onPressed: () {
-                                if (nameController.text.trim().isNotEmpty) {
-                                  ps.updateUserName(nameController.text.trim());
-                                }
-                                setStateDialog(() => isEditingName = false);
-                              },
+                                if (isCheckingName)
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    child: SizedBox(
+                                      width: 18,
+                                      height: 18,
+                                      child: CircularProgressIndicator(strokeWidth: 2),
+                                    ),
+                                  )
+                                else ...[
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.check,
+                                      color: Colors.green,
+                                    ),
+                                    onPressed: () async {
+                                      final newName = nameController.text.trim();
+                                      if (newName.isEmpty || newName == ps.userName) {
+                                        setStateDialog(() {
+                                          isEditingName = false;
+                                          nameError = null;
+                                        });
+                                        return;
+                                      }
+                                      if (newName.length < 3) {
+                                        setStateDialog(() => nameError = "3 caractères minimum");
+                                        return;
+                                      }
+                                      setStateDialog(() {
+                                        isCheckingName = true;
+                                        nameError = null;
+                                      });
+                                      final success = await ps.updateUserName(newName);
+                                      if (!context.mounted) return;
+                                      if (success) {
+                                        setStateDialog(() {
+                                          isCheckingName = false;
+                                          isEditingName = false;
+                                          nameError = null;
+                                        });
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(
+                                            content: Text("Pseudo mis à jour !"),
+                                            backgroundColor: Colors.green,
+                                          ),
+                                        );
+                                      } else {
+                                        setStateDialog(() {
+                                          isCheckingName = false;
+                                          nameError = "Ce pseudo est déjà pris.";
+                                        });
+                                      }
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.close, color: Colors.white54, size: 18),
+                                    onPressed: () => setStateDialog(() {
+                                      isEditingName = false;
+                                      nameError = null;
+                                      nameController.text = ps.userName ?? '';
+                                    }),
+                                  ),
+                                ],
+                              ],
                             ),
                           ],
                         )
@@ -516,7 +784,11 @@ class _MainScreenState extends State<MainScreen> {
                               ),
                               onPressed:
                                   () => setStateDialog(
-                                    () => isEditingName = true,
+                                    () {
+                                      isEditingName = true;
+                                      nameError = null;
+                                      nameController.text = ps.userName ?? '';
+                                    },
                                   ),
                             ),
                           ],
@@ -536,12 +808,55 @@ class _MainScreenState extends State<MainScreen> {
                         "${ps.xp} / ${ps.xpForNextLevel} XP",
                         style: const TextStyle(color: Colors.white70),
                       ),
-                      const Divider(height: 30),
+                      const Divider(height: 24),
                       Text(
                         "${l10n?.gamesPlayed ?? 'Parties jouées'} : ${ps.gameStats.values.fold<int>(0, (acc, stat) => acc + (stat['played'] as int? ?? 0))}",
                       ),
                       Text(
                         "${l10n?.gamesWon ?? 'Victoires'} : ${ps.gameStats.values.fold<int>(0, (acc, stat) => acc + (stat['won'] as int? ?? 0))}",
+                      ),
+                      const Divider(height: 24),
+                      Row(
+                        children: const [
+                          Icon(Icons.security, size: 16, color: Colors.cyanAccent),
+                          SizedBox(width: 8),
+                          Text(
+                            "Compte & Sécurité",
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                side: const BorderSide(color: Colors.cyanAccent, width: 0.8),
+                              ),
+                              icon: const Icon(Icons.email_outlined, size: 15, color: Colors.cyanAccent),
+                              label: const Text("Email", style: TextStyle(color: Colors.cyanAccent, fontSize: 12)),
+                              onPressed: () => _showChangeEmailDialog(context, auth),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                side: const BorderSide(color: Colors.amberAccent, width: 0.8),
+                              ),
+                              icon: const Icon(Icons.lock_reset_rounded, size: 15, color: Colors.amberAccent),
+                              label: const Text("Mot de passe", style: TextStyle(color: Colors.amberAccent, fontSize: 12)),
+                              onPressed: () => _showChangePasswordDialog(context, auth),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 16),
                       OutlinedButton.icon(

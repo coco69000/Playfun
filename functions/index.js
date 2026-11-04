@@ -398,8 +398,16 @@ function evaluateUserBadges(userData, gameData, isWinner, uid, newLevel, updated
   }
 
   if (gameType === "Zéro Pointé") {
-    const finalScore = gameData.totalScores?.[uid] || gameData.totalScores?.[userPlayerId] || 0;
-    if (finalScore < 0) unlock("skyjo_negative");
+    const roundScores = gameData.roundScores || {};
+    const myRoundScore = roundScores[uid] !== undefined ? roundScores[uid] : roundScores[userPlayerId];
+    if (typeof myRoundScore === "number" && myRoundScore < 0 && myRoundScore > -100) {
+      unlock("skyjo_negative");
+    } else {
+      const finalScore = gameData.totalScores?.[uid] !== undefined ? gameData.totalScores?.[uid] : gameData.totalScores?.[userPlayerId];
+      if (typeof finalScore === "number" && finalScore < 0 && finalScore > -100) {
+        unlock("skyjo_negative");
+      }
+    }
   }
 
   if (gameType === "Mille Bornes" && isWinner) {
@@ -585,18 +593,27 @@ exports.claimGameReward = onCall(
         if (
           rawWinner === uid ||
           rawWinner === userPlayerId ||
-          (players[rawWinner] && (players[rawWinner].authUid === uid || rawWinner === uid))
+          (players[rawWinner] && (players[rawWinner].authUid === uid || rawWinner === uid)) ||
+          (Array.isArray(gameData.tiedWinners) && (gameData.tiedWinners.includes(uid) || gameData.tiedWinners.includes(userPlayerId)))
         ) {
           isWinner = true;
-        } else if (rawWinner === "teamA" || rawWinner === "teamB") {
+        } else {
           const teams = gameData.teams || {};
-          const myTeam = teams[rawWinner] || [];
-          if (myTeam.includes(userPlayerId) || myTeam.includes(uid)) {
-            isWinner = true;
+          const tabooTeams = gameData.tabooTeams || {};
+          let myTeamMembers = teams[rawWinner] || tabooTeams[rawWinner] || [];
+          if (!Array.isArray(myTeamMembers) && typeof myTeamMembers === "object" && myTeamMembers !== null) {
+            myTeamMembers = myTeamMembers.members || myTeamMembers.players || [];
           }
-        } else if (rawWinner === "red" || rawWinner === "blue") {
-          const teamList = rawWinner === "red" ? (gameData.redTeam || []) : (gameData.blueTeam || []);
-          if (teamList.includes(userPlayerId) || teamList.includes(uid)) {
+          if (!Array.isArray(myTeamMembers) || myTeamMembers.length === 0) {
+            if (rawWinner === "red" || rawWinner === "teamA" || rawWinner === "team_0") {
+              myTeamMembers = gameData.redTeam || teams.teamA || teams["0"] || teams.team_0 || [];
+            } else if (rawWinner === "blue" || rawWinner === "teamB" || rawWinner === "team_1") {
+              myTeamMembers = gameData.blueTeam || teams.teamB || teams["1"] || teams.team_1 || [];
+            } else if (gameData[rawWinner + "Team"]) {
+              myTeamMembers = gameData[rawWinner + "Team"];
+            }
+          }
+          if (Array.isArray(myTeamMembers) && (myTeamMembers.includes(userPlayerId) || myTeamMembers.includes(uid))) {
             isWinner = true;
           }
         }
@@ -810,29 +827,29 @@ exports.generateAiWords = onCall(
         }),
       });
 
-if (!response.ok) {
-  const errorText = await response.text();
-  console.error("Erreur SiliconFlow API:", errorText);
-  throw new Error("Erreur fournisseur IA SiliconFlow");
-}
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Erreur SiliconFlow API:", errorText);
+        throw new Error("Erreur fournisseur IA SiliconFlow");
+      }
 
-const data = await response.json();
-const content = data.choices?.[0]?.message?.content || "";
-const match = content.match(/\[[\s\S]*?\]/);
-if (match) {
-  const list = JSON.parse(match[0]);
-  if (Array.isArray(list)) {
-    return list
-      .map((item) => String(item).trim())
-      .filter((item) => item.length > 0)
-      .slice(0, parsedCount);
-  }
-}
-return [];
+      const data = await response.json();
+      const content = data.choices?.[0]?.message?.content || "";
+      const match = content.match(/\[[\s\S]*?\]/);
+      if (match) {
+        const list = JSON.parse(match[0]);
+        if (Array.isArray(list)) {
+          return list
+            .map((item) => String(item).trim())
+            .filter((item) => item.length > 0)
+            .slice(0, parsedCount);
+        }
+      }
+      return [];
     } catch (e) {
-  console.error("Erreur IA sécurisée (SiliconFlow):", e);
-  throw new HttpsError("internal", "Impossible de générer les mots.");
-}
+      console.error("Erreur IA sécurisée (SiliconFlow):", e);
+      throw new HttpsError("internal", "Impossible de générer les mots.");
+    }
   }
 );
 
@@ -1382,6 +1399,11 @@ exports.enforceStrictTimers = onSchedule(
               ),
             };
 
+            if (gameType === "Uno") {
+              updatePayload.unoDrawActionDone = false;
+              updatePayload.unoLastDrawnCard = null;
+            }
+
             if (usesPlayerIdDirectly) {
               updatePayload[idField] = nextPid;
             } else {
@@ -1656,5 +1678,166 @@ exports.revenueCatWebhook = onRequest(
       console.error("[RevenueCat Webhook Error]:", error);
       return res.status(500).send("Erreur serveur");
     }
+  }
+);
+
+/**
+ * Vérifie si un pseudo est disponible via Cloud Functions
+ */
+exports.checkUsernameAvailable = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    const { username } = request.data || {};
+    if (typeof username !== "string") {
+      return { available: false, reason: "Pseudo invalide." };
+    }
+    const clean = username.trim();
+    const cleanLower = clean.toLowerCase();
+    if (cleanLower.length < 3) {
+      return { available: false, reason: "Le pseudo doit comporter au moins 3 caractères." };
+    }
+    if (cleanLower.length > 25) {
+      return { available: false, reason: "Le pseudo ne doit pas dépasser 25 caractères." };
+    }
+
+    const currentUid = request.auth ? request.auth.uid : null;
+    const snap = await db.collection("users")
+      .where("nameLower", "==", cleanLower)
+      .limit(2)
+      .get();
+
+    if (snap.empty) {
+      return { available: true };
+    }
+
+    if (snap.size === 1 && currentUid && snap.docs[0].id === currentUid) {
+      return { available: true };
+    }
+
+    return { available: false, reason: "Ce pseudo est déjà pris." };
+  }
+);
+
+/**
+ * Modifie le pseudo d'un utilisateur en vérifiant l'unicité
+ */
+exports.updateUserUsername = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    if (!request.auth) {
+      throw new HttpsError("unauthenticated", "Vous devez être connecté.");
+    }
+    const uid = request.auth.uid;
+    const { username } = request.data || {};
+    if (typeof username !== "string") {
+      throw new HttpsError("invalid-argument", "Pseudo invalide.");
+    }
+    const clean = username.trim();
+    const cleanLower = clean.toLowerCase();
+    if (cleanLower.length < 3) {
+      throw new HttpsError("invalid-argument", "Le pseudo doit comporter au moins 3 caractères.");
+    }
+    if (cleanLower.length > 25) {
+      throw new HttpsError("invalid-argument", "Le pseudo ne doit pas dépasser 25 caractères.");
+    }
+
+    const snap = await db.collection("users")
+      .where("nameLower", "==", cleanLower)
+      .limit(2)
+      .get();
+
+    const otherUser = snap.docs.find((d) => d.id !== uid);
+    if (otherUser) {
+      throw new HttpsError("already-exists", "Ce pseudo est déjà utilisé par un autre joueur.");
+    }
+
+    await db.collection("users").doc(uid).update({
+      name: clean,
+      nameLower: cleanLower,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    return { success: true, name: clean };
+  }
+);
+
+
+/**
+ * Vérifie si un pseudo est disponible via Cloud Functions
+ */
+exports.checkUsernameAvailable = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    const { username } = request.data || {};
+    if (typeof username !== "string") {
+      return { available: false, reason: "Pseudo invalide." };
+    }
+    const clean = username.trim();
+    const cleanLower = clean.toLowerCase();
+    if (cleanLower.length < 3) {
+      return { available: false, reason: "Le pseudo doit comporter au moins 3 caractères." };
+    }
+    if (cleanLower.length > 25) {
+      return { available: false, reason: "Le pseudo ne doit pas dépasser 25 caractères." };
+    }
+
+    const currentUid = request.auth ? request.auth.uid : null;
+    const snap = await db.collection("users")
+      .where("nameLower", "==", cleanLower)
+      .limit(2)
+      .get();
+
+    if (snap.empty) {
+      return { available: true };
+    }
+
+    if (snap.size === 1 && currentUid && snap.docs[0].id === currentUid) {
+      return { available: true };
+    }
+
+    return { available: false, reason: "Ce pseudo est déjà pris." };
+  }
+);
+
+/**
+ * Modifie le pseudo d'un utilisateur en vérifiant l'unicité
+ */
+exports.updateUserUsername = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    if (!request.auth) {
+      throw new HttpsError("unauthenticated", "Vous devez être connecté.");
+    }
+    const uid = request.auth.uid;
+    const { username } = request.data || {};
+    if (typeof username !== "string") {
+      throw new HttpsError("invalid-argument", "Pseudo invalide.");
+    }
+    const clean = username.trim();
+    const cleanLower = clean.toLowerCase();
+    if (cleanLower.length < 3) {
+      throw new HttpsError("invalid-argument", "Le pseudo doit comporter au moins 3 caractères.");
+    }
+    if (cleanLower.length > 25) {
+      throw new HttpsError("invalid-argument", "Le pseudo ne doit pas dépasser 25 caractères.");
+    }
+
+    const snap = await db.collection("users")
+      .where("nameLower", "==", cleanLower)
+      .limit(2)
+      .get();
+
+    const otherUser = snap.docs.find((d) => d.id !== uid);
+    if (otherUser) {
+      throw new HttpsError("already-exists", "Ce pseudo est déjà utilisé par un autre joueur.");
+    }
+
+    await db.collection("users").doc(uid).update({
+      name: clean,
+      nameLower: cleanLower,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    return { success: true, name: clean };
   }
 );

@@ -1,6 +1,7 @@
 // lib/auth/auth_service.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -8,10 +9,21 @@ class AuthService {
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
-  // Vérifier en temps réel si un pseudo est disponible
+  // Vérifier en temps réel si un pseudo est disponible (via Cloud Functions)
   Future<bool> isUsernameAvailable(String username) async {
     final clean = username.trim().toLowerCase();
     if (clean.length < 3) return false;
+
+    try {
+      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('checkUsernameAvailable');
+      final res = await callable.call({'username': username.trim()});
+      final data = res.data;
+      if (data is Map && data['available'] != null) {
+        return data['available'] == true;
+      }
+    } catch (e) {
+      print("Erreur checkUsernameAvailable Cloud Function: $e");
+    }
 
     final snap = await _firestore
         .collection('users')
@@ -20,6 +32,61 @@ class AuthService {
         .get();
 
     return snap.docs.isEmpty;
+  }
+
+  // Changer l'adresse email
+  Future<void> updateEmail(String newEmail, String currentPassword) async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw FirebaseAuthException(
+        code: 'no-current-user',
+        message: 'Utilisateur non connecté.',
+      );
+    }
+
+    final trimmedEmail = newEmail.trim();
+    final currentEmail = user.email;
+
+    if (currentEmail != null && currentEmail.isNotEmpty) {
+      final cred = EmailAuthProvider.credential(
+        email: currentEmail,
+        password: currentPassword,
+      );
+      await user.reauthenticateWithCredential(cred);
+    }
+
+    await user.verifyBeforeUpdateEmail(trimmedEmail);
+
+    await _firestore.collection('users').doc(user.uid).update({
+      'email': trimmedEmail,
+    });
+  }
+
+  // Changer le mot de passe
+  Future<void> updatePassword(String currentPassword, String newPassword) async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw FirebaseAuthException(
+        code: 'no-current-user',
+        message: 'Utilisateur non connecté.',
+      );
+    }
+
+    final currentEmail = user.email;
+    if (currentEmail != null && currentEmail.isNotEmpty) {
+      final cred = EmailAuthProvider.credential(
+        email: currentEmail,
+        password: currentPassword,
+      );
+      await user.reauthenticateWithCredential(cred);
+    }
+
+    await user.updatePassword(newPassword.trim());
+  }
+
+  // Envoyer un email de réinitialisation de mot de passe
+  Future<void> sendPasswordReset(String email) async {
+    await _auth.sendPasswordResetEmail(email: email.trim());
   }
 
   // Se connecter avec email et mot de passe
