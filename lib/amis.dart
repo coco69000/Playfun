@@ -487,7 +487,7 @@ Gagner le plus d'XP en réalisant des actions et en répondant à des vérités 
         "Un joueur tient le téléphone sur son front. Les autres décrivent le mot affiché. Inclinez le téléphone vers le bas pour 'deviné', vers le haut pour 'passer'.",
     'Petit Bac':
         "Trouvez des mots correspondant à des catégories données, commençant par une lettre spécifique. Marquez des points pour les réponses uniques et correctes.",
-    'Président': """
+    GameContentLocalization.ui(context, "Président"): """
 **But du jeu**
 Le but est d’être le premier à se débarrasser de toutes ses cartes pour devenir Président. Le dernier joueur avec des cartes en main devient le Trou du cul.
 
@@ -888,11 +888,11 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
   };
 
   static const List<String> cadavreExquisPrompts = [
-    "un substantif (ex: le chat)",
-    "un adjectif (ex: mignon)",
-    "un verbe (ex: mange)",
-    "un substantif (ex: la souris)",
-    "un adjectif (ex: mort)",
+    GameContentLocalization.ui(context, "un substantif (ex: le chat)"),
+    GameContentLocalization.ui(context, "un adjectif (ex: mignon)"),
+    GameContentLocalization.ui(context, "un verbe (ex: mange)"),
+    GameContentLocalization.ui(context, "un substantif (ex: la souris)"),
+    GameContentLocalization.ui(context, "un adjectif (ex: mort)"),
   ];
 
   static const Map<String, int> ramiCardValues = {
@@ -1010,17 +1010,17 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
   }
 
   static const Map<String, Map<String, dynamic>> batailleNavaleShips = {
-    'Petit 1': {'length': 2, 'width': 1, 'area': 2, 'image': 'petit1.webp'},
-    'Petit 2': {'length': 2, 'width': 1, 'area': 2, 'image': 'petit2.webp'},
-    'Moyen': {'length': 3, 'width': 1, 'area': 3, 'image': 'moyen.webp'},
-    'Grand': {'length': 4, 'width': 1, 'area': 4, 'image': 'grand.webp'},
-    'Très Grand': {
+    GameContentLocalization.ui(context, "Petit 1"): {'length': 2, 'width': 1, 'area': 2, 'image': 'petit1.webp'},
+    GameContentLocalization.ui(context, "Petit 2"): {'length': 2, 'width': 1, 'area': 2, 'image': 'petit2.webp'},
+    GameContentLocalization.ui(context, "Moyen"): {'length': 3, 'width': 1, 'area': 3, 'image': 'moyen.webp'},
+    GameContentLocalization.ui(context, "Grand"): {'length': 4, 'width': 1, 'area': 4, 'image': 'grand.webp'},
+    GameContentLocalization.ui(context, "Très Grand"): {
       'length': 5,
       'width': 1,
       'area': 5,
       'image': 'tresgrand.webp',
     },
-    'Super Grand': {
+    GameContentLocalization.ui(context, "Super Grand"): {
       'length': 5,
       'width': 2,
       'area': 10,
@@ -1053,7 +1053,7 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
     'Codenames',
     "Time's Up",
     'Petit Bac',
-    'Président',
+    GameContentLocalization.ui(context, "Président"),
     'Pictionary',
     'Just One',
     'Le Roi des Mèmes',
@@ -2053,7 +2053,7 @@ class _MultiplayerTeamSelectionDialogState
                         int teamIndex = entry.key;
                         List<String> teamPlayers = entry.value;
                         return _buildTeamColumn(
-                          "Équipe ${teamIndex + 1}",
+                          GameContentLocalization.format(context, "Équipe {0}", [teamIndex + 1]),
                           teamPlayers,
                           teamIndex,
                           teamColors[teamIndex % teamColors.length],
@@ -3647,29 +3647,20 @@ class FirebaseService {
         }
       }
 
-      // Détection des suites avec As et 2 (Wheel : 3, 4, 5, 14, 15) ou (3, 4, 5, 6, 15)
+      // Détection de la quinte basse Wheel A-2-3-4-5 (rangs 3, 4, 5, As=14, 2=15)
       bool isA2345 =
           (ranks[0] == 3 &&
               ranks[1] == 4 &&
               ranks[2] == 5 &&
               ranks[3] == 14 &&
               ranks[4] == 15);
-      bool is23456 =
-          (ranks[0] == 3 &&
-              ranks[1] == 4 &&
-              ranks[2] == 5 &&
-              ranks[3] == 6 &&
-              ranks[4] == 15);
 
-      bool isStraight = isConsecutive || isA2345 || is23456;
+      bool isStraight = isConsecutive || isA2345;
 
       int straightHighVal = cards[4]['value'];
       if (isA2345) {
-        // Dans A-2-3-4-5, la carte la plus haute de la suite est le 5
+        // Dans la suite A-2-3-4-5, la carte haute pour battre une autre quinte est le 5
         straightHighVal = cards.firstWhere((c) => c['rankInt'] == 5)['value'];
-      } else if (is23456) {
-        // Dans 2-3-4-5-6, la carte la plus haute de la suite est le 6
-        straightHighVal = cards.firstWhere((c) => c['rankInt'] == 6)['value'];
       }
 
       if (isStraight && isFlush) {
@@ -4567,6 +4558,8 @@ class FirebaseService {
             }
             targetDataUpdate['hand'] = targetHand;
             pData[targetId] = targetDataUpdate;
+            myData['hand'] = hand;
+            pData[playerId] = myData;
             int coupFourreIndex = playerOrder.indexOf(targetId);
             transaction.update(gameRef, {
               'milleBornesPlayerData': pData,
@@ -5459,7 +5452,7 @@ class FirebaseService {
         transaction.update(gameRef, {
           'justOneGuesserAnswer': "(Temps écoulé)",
           'roundState': 'result',
-          'gameEndReason': 'Temps écoulé !',
+          'gameEndReason': GameContentLocalization.ui(context, "Temps écoulé !"),
           'turnStartTime': FieldValue.serverTimestamp(),
         });
       }
@@ -5528,7 +5521,7 @@ class FirebaseService {
             'roundState': nextState,
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              "Le temps est écoulé, on avance !",
+              GameContentLocalization.ui(context, "Le temps est écoulé, on avance !"),
             ]),
           });
         }
@@ -5559,7 +5552,7 @@ class FirebaseService {
                 (voteMode == 'turn_by_turn') ? 'reveal_and_vote' : 'voting',
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              "Le temps est écoulé pour déclarer la vérité !",
+              GameContentLocalization.ui(context, "Le temps est écoulé pour déclarer la vérité !"),
             ]),
           });
         }
@@ -5996,8 +5989,11 @@ class FirebaseService {
         }
 
         int nextIndex = (currentIndex + 1) % playerOrder.length;
-        while (finishedPlayers.contains(playerOrder[nextIndex])) {
+        int loopGuard1 = 0;
+        while (finishedPlayers.contains(playerOrder[nextIndex]) &&
+            loopGuard1 < playerOrder.length) {
           nextIndex = (nextIndex + 1) % playerOrder.length;
+          loopGuard1++;
         }
 
         transaction.update(gameRef, {
@@ -6067,8 +6063,11 @@ class FirebaseService {
           }
 
           int nextIndex = (currentIndex + 1) % playerOrder.length;
-          while (finishedPlayers.contains(playerOrder[nextIndex])) {
+          int loopGuard2 = 0;
+          while (finishedPlayers.contains(playerOrder[nextIndex]) &&
+              loopGuard2 < playerOrder.length) {
             nextIndex = (nextIndex + 1) % playerOrder.length;
+            loopGuard2++;
           }
 
           transaction.update(gameRef, {
@@ -6110,8 +6109,11 @@ class FirebaseService {
           String lastWinner = gameData['lastPlayerToPlay'] ?? playerId;
           int nextIndex = playerOrder.indexOf(lastWinner);
           if (nextIndex == -1) nextIndex = 0;
-          while (finishedPlayers.contains(playerOrder[nextIndex])) {
+          int loopGuard3 = 0;
+          while (finishedPlayers.contains(playerOrder[nextIndex]) &&
+              loopGuard3 < playerOrder.length) {
             nextIndex = (nextIndex + 1) % playerOrder.length;
+            loopGuard3++;
           }
 
           transaction.update(gameRef, {
@@ -6127,9 +6129,12 @@ class FirebaseService {
           });
         } else {
           int nextIndex = (currentIndex + 1) % playerOrder.length;
-          while (finishedPlayers.contains(playerOrder[nextIndex]) ||
-              passedPlayers.contains(playerOrder[nextIndex])) {
+          int loopGuard4 = 0;
+          while ((finishedPlayers.contains(playerOrder[nextIndex]) ||
+                  passedPlayers.contains(playerOrder[nextIndex])) &&
+              loopGuard4 < playerOrder.length) {
             nextIndex = (nextIndex + 1) % playerOrder.length;
+            loopGuard4++;
           }
 
           transaction.update(gameRef, {
@@ -6209,7 +6214,8 @@ class FirebaseService {
               });
 
               if (isFirst) {
-                String cornerTarget =
+                final List<String> validCorners = ["0_0", "19_19", "0_19", "19_0"];
+                String defaultCorner =
                     myColor == 'blue'
                         ? "0_0"
                         : myColor == 'red'
@@ -6217,7 +6223,12 @@ class FirebaseService {
                         : myColor == 'green'
                         ? "0_19"
                         : "19_0";
-                if (coords.any((p) => "${p[0]}_${p[1]}" == cornerTarget)) {
+                bool matchesCorner = coords.any((p) {
+                  final key = "${p[0]}_${p[1]}";
+                  return key == defaultCorner ||
+                      (validCorners.contains(key) && !board.containsKey(key));
+                });
+                if (matchesCorner) {
                   await placeBlokusPiece(
                     gameCode,
                     playerId,
@@ -6693,7 +6704,7 @@ class FirebaseService {
             (playerList as List).remove(playerIdToRemove);
           });
 
-          List<String> newLogs = ["$removedPlayerName a quitté la partie."];
+          List<String> newLogs = [GameContentLocalization.format(context, "{0} a quitté la partie.", ["$removedPlayerName"])];
           Map<String, dynamic> updates = {
             'players': players,
             'playerOrder': playerOrder,
@@ -6820,7 +6831,7 @@ class FirebaseService {
         'pendingBotReplacement': {
           'playerId': timedOutPlayerId,
           'playerName': playerName,
-          'reason': 'inactif (3 tours sans réponse)',
+          'reason': GameContentLocalization.ui(context, "inactif (3 tours sans réponse)"),
           'isSocial': isSocial,
           'timestamp': FieldValue.serverTimestamp(),
         },
@@ -7115,7 +7126,7 @@ class FirebaseService {
 
         if (tiedPlayers.length > 1) {
           final String? goddessId = updatedGameData['specialRoles']?['justiceGoddess'];
-          if (goddessId != null) {
+          if (goddessId != null && playerData[goddessId]?['status'] == 'alive') {
             await gameRef.update({
               'currentPhase': 'tie_breaker',
               'tieBreakerCandidates': tiedPlayers,
@@ -7125,14 +7136,32 @@ class FirebaseService {
               'turnStartTime': FieldValue.serverTimestamp(),
             });
           } else {
-            await gameRef.update({
-              'currentPhase': 'turn_result',
-              'eliminatedThisTurn': [],
-              'turnLog': FieldValue.arrayUnion([
-                "Égalité parfaite lors du vote (${tiedPlayers.length} joueurs ex-aequo) ! Aucun joueur éliminé.",
-              ]),
-              'turnStartTime': FieldValue.serverTimestamp(),
-            });
+            int tieCount = (updatedGameData['votingTieCount'] as num? ?? 0).toInt() + 1;
+            int aliveCount = playerData.values.where((p) => p['status'] == 'alive').length;
+
+            if (tieCount >= 2 || aliveCount <= 3) {
+              // Égalité persistante ou fin de partie bloquée : tirage au sort parmi les ex-aequo
+              String randomEliminated = tiedPlayers[Random().nextInt(tiedPlayers.length)];
+              await gameRef.update({
+                'currentPhase': 'turn_result',
+                'eliminatedThisTurn': [randomEliminated],
+                'votingTieCount': 0,
+                'turnLog': FieldValue.arrayUnion([
+                  "Égalité persistante ! Le destin départage au hasard : ${playerData[randomEliminated]?['name']} est éliminé.",
+                ]),
+                'turnStartTime': FieldValue.serverTimestamp(),
+              });
+            } else {
+              await gameRef.update({
+                'currentPhase': 'turn_result',
+                'eliminatedThisTurn': [],
+                'votingTieCount': tieCount,
+                'turnLog': FieldValue.arrayUnion([
+                  "Égalité parfaite lors du vote (${tiedPlayers.length} joueurs ex-aequo) ! Aucun joueur éliminé.",
+                ]),
+                'turnStartTime': FieldValue.serverTimestamp(),
+              });
+            }
           }
         } else {
           String? eliminatedPlayerId =
@@ -7141,7 +7170,7 @@ class FirebaseService {
             'currentPhase': 'turn_result',
             'eliminatedThisTurn':
                 eliminatedPlayerId != null ? [eliminatedPlayerId] : [],
-            'turnLog': FieldValue.arrayUnion(["Le temps de vote est écoulé !"]),
+            'turnLog': FieldValue.arrayUnion([GameContentLocalization.ui(context, "Le temps de vote est écoulé !")]),
             'turnStartTime': FieldValue.serverTimestamp(),
           });
         }
@@ -7182,7 +7211,7 @@ class FirebaseService {
       case 'Skull':
         await nextSkullRound(gameCode);
         break;
-      case 'Président':
+      case GameContentLocalization.ui(context, "Président"):
         await nextPresidentRound(gameCode);
         break;
       case 'Devine Tête':
@@ -7964,6 +7993,11 @@ class FirebaseService {
       // 3. Piocher
       else {
         List<String> deck = List<String>.from(gameData['unoDeck'] ?? []);
+        if (deck.isEmpty && discardPile.length > 1) {
+          String topCardDiscard = discardPile.removeLast();
+          deck = List<String>.from(discardPile)..shuffle();
+          discardPile = [topCardDiscard];
+        }
         if (deck.isNotEmpty) {
           myHand.add(deck.removeAt(0));
           hands[playerId] = myHand;
@@ -7971,6 +8005,7 @@ class FirebaseService {
         transaction.update(gameRef, {
           'unoPlayerHands': hands,
           'unoDeck': deck,
+          'unoDiscardPile': discardPile,
           'unoCurrentPlayerIndex': nextIndex,
           'unoDrawActionDone': false,
           'unoLastDrawnCard': null,
@@ -10444,6 +10479,7 @@ class FirebaseService {
           'phase': 'nuit',
           'subPhase': 'initial',
           'nightNumber': FieldValue.increment(1),
+          'nightActions': {},
           'activePlayerId': null,
           'pendingDayEffects': [],
           'turnStartTime': FieldValue.serverTimestamp(),
@@ -10616,13 +10652,17 @@ class FirebaseService {
 
       Map<String, int> voteCounts = {};
       dayVotes.forEach((voterId, targetId) {
-        voteCounts[targetId] = (voteCounts[targetId] ?? 0) + 1;
+        if (playerData[voterId]?['status'] == 'vivant' &&
+            playerData[targetId]?['status'] == 'vivant') {
+          voteCounts[targetId] = (voteCounts[targetId] ?? 0) + 1;
+        }
       });
 
-      // Vote double du Capitaine
+      // Vote double du Capitaine (uniquement si vivant et vote sur joueur vivant)
       if (captainId != null && playerData[captainId]?['status'] == 'vivant') {
         String? captainVote = dayVotes[captainId];
-        if (captainVote != null) {
+        if (captainVote != null &&
+            playerData[captainVote]?['status'] == 'vivant') {
           voteCounts[captainVote] = (voteCounts[captainVote] ?? 0) + 1;
         }
       }
@@ -10838,6 +10878,7 @@ class FirebaseService {
           'phase': 'nuit',
           'subPhase': 'initial',
           'nightNumber': FieldValue.increment(1),
+          'nightActions': {},
           'pendingDayEffects': [],
           'turnStartTime': FieldValue.serverTimestamp(),
         });
@@ -11626,7 +11667,7 @@ class FirebaseService {
         'petitBacRoundEnded': false,
         if (petitBacTime != null) 'petitBacTime': petitBacTime,
       },
-      if (gameType == 'Président') ...{
+      if (gameType == GameContentLocalization.ui(context, "Président")) ...{
         'playerHands': {},
         'playerRanks': {},
         'currentPlayerIndex': 0,
@@ -11995,7 +12036,7 @@ class FirebaseService {
         'petitBacRoundEnded': false,
         if (petitBacTime != null) 'petitBacTime': petitBacTime,
       },
-      if (gameType == 'Président') ...{
+      if (gameType == GameContentLocalization.ui(context, "Président")) ...{
         'playerHands': {},
         'playerRanks': {},
         'currentPlayerIndex': 0,
@@ -12255,7 +12296,7 @@ class FirebaseService {
     List<String> specialRolesPool = [];
     roleSettings.forEach((role, isEnabled) {
       if (isEnabled) {
-        if (role == 'Amoureux' && playerCount < 5) return;
+        if (role == GameContentLocalization.ui(context, "Amoureux") && playerCount < 5) return;
         if (role == 'Vendeur de Falafels' && playerCount < 4) return;
         if (role == 'Vengeuse' && playerCount < 5) return;
         if (role == 'Duellistes' && playerCount < 5) return;
@@ -12306,20 +12347,20 @@ class FirebaseService {
     List<String> tempPlayers = List.from(playerIds)..shuffle();
 
     if (privatePlayerData.values.any(
-          (p) => (p['specialAbilities'] as List).contains('Amoureux'),
+          (p) => (p['specialAbilities'] as List).contains(GameContentLocalization.ui(context, "Amoureux")),
         ) &&
         tempPlayers.length >= 2) {
       String amoreuxId =
           privatePlayerData.entries
               .firstWhere(
                 (e) =>
-                    (e.value['specialAbilities'] as List).contains('Amoureux'),
+                    (e.value['specialAbilities'] as List).contains(GameContentLocalization.ui(context, "Amoureux")),
               )
               .key;
       tempPlayers.remove(amoreuxId);
       String partnerId = tempPlayers.removeAt(0);
       (privatePlayerData[partnerId]!['specialAbilities'] as List<String>).add(
-        'Amoureux',
+        GameContentLocalization.ui(context, "Amoureux"),
       );
       specialRolesData['lovers'] = [amoreuxId, partnerId];
       String amoureux1Name = players[amoreuxId]['name'];
@@ -13255,7 +13296,7 @@ class FirebaseService {
         'tabooCurrentTeamIndex': nextTeamIndex,
         'tabooRoundNumber': currentRoundNum,
         'gameLog': FieldValue.arrayUnion([
-          "Temps écoulé ! Passage à l'équipe suivante.",
+          GameContentLocalization.ui(context, "Temps écoulé ! Passage à l'équipe suivante."),
         ]),
       });
 
@@ -13862,7 +13903,7 @@ class FirebaseService {
             'ramiRoundOver': true,
             'roundState': 'round_end',
             'gameLog': FieldValue.arrayUnion([
-              "${players[playerId]['name']} a gagné la manche !",
+              GameContentLocalization.format(context, "{0} a gagné la manche !", [players[playerId]["name"]]),
             ]),
             if (gameOver) ...{
               'gameState': 'gameOver',
@@ -14064,7 +14105,7 @@ class FirebaseService {
       'petitsChevauxConsecutiveSixes': consecutiveSixes,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': [
-        isTeamMode ? "La partie 2v2 commence !" : "La partie commence !",
+        isTeamMode ? GameContentLocalization.ui(context, "La partie 2v2 commence !") : GameContentLocalization.ui(context, "La partie commence !"),
       ],
     });
   }
@@ -14120,14 +14161,39 @@ class FirebaseService {
       // Vérifier si AU MOINS UN coup est possible
       bool hasValidMove = false;
 
-      // 1. Vérification sur mes propres pions
+      final List<int> startOffsets = [0, 13, 39, 26];
+      int myStartOffset = startOffsets[myIdx];
+
+      // 1. Vérification précise sur mes propres pions
       for (int p in myPawns) {
         if (p == -1 && (dice == 1 || dice == 6)) {
-          hasValidMove = true;
-          break;
+          // Sortie d'écurie : vérifier que la case départ n'est pas bloquée par un pion de mon équipe
+          bool blocked = false;
+          for (int i = 0; i < playerOrder.length; i++) {
+            if (playerOrder[i] == playerId || (isTeamMode && (i % 2 == myIdx % 2))) {
+              List<int> oPos = List<int>.from(positions[playerOrder[i]] ?? []);
+              for (int op in oPos) {
+                if (op >= 0 && op <= 50) {
+                  if ((op + startOffsets[i]) % 52 == myStartOffset) blocked = true;
+                }
+              }
+            }
+          }
+          if (!blocked) {
+            hasValidMove = true;
+            break;
+          }
         } else if (p >= 0 && (p + dice <= 56)) {
-          hasValidMove = true;
-          break;
+          if (p <= 50 && (p + dice > 50)) {
+            // Entrée dans l'escalier
+            if (50 + (p + dice - 50) <= 56) {
+              hasValidMove = true;
+              break;
+            }
+          } else {
+            hasValidMove = true;
+            break;
+          }
         }
       }
 
@@ -14443,7 +14509,7 @@ class FirebaseService {
         }
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = playerId;
-        updates['gameEndReason'] = "${players[playerId]['name']} a gagné !";
+        updates['gameEndReason'] = GameContentLocalization.format(context, "{0} a gagné !", [players[playerId]["name"]]);
         transaction.update(gameRef, updates);
         return;
       }
@@ -14660,14 +14726,12 @@ class FirebaseService {
         openEnds.remove(matchEnd);
         if (isDouble) {
           if (mode == 'all_fives' && !spinnerPlayed) {
-            openEnds.addAll([a, b]);
+            // Le premier double devient le Spinner et ouvre les 3 côtés restants
+            openEnds.addAll([a, a, a]);
             spinnerPlayed = true;
           } else {
-            if (mode == 'all_fives') {
-              openEnds.addAll([a, a]);
-            } else {
-              openEnds.add(a);
-            }
+            // Les doubles suivants ne créent pas de nouvel embranchement
+            openEnds.add(a);
           }
         } else {
           final int otherEnd = (a == matchEnd) ? b : a;
@@ -15111,7 +15175,7 @@ class FirebaseService {
       'zombieEliminatedPlayers': eliminatedPlayers,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': [
-        "La partie de Zombie! commence ! Paires initiales défaussées.",
+        GameContentLocalization.ui(context, "La partie de Zombie! commence ! Paires initiales défaussées."),
       ],
     });
   }
@@ -15641,7 +15705,28 @@ class FirebaseService {
       if (playersDecide) {
         // Mode Juges : désigner un joueur aléatoire pour écrire le défi
         final otherPlayers = playerOrder.where((p) => p != playerId).toList();
-        if (otherPlayers.isEmpty) return;
+        if (otherPlayers.isEmpty) {
+          // Fallback automatique si aucun autre joueur disponible
+          final String difficulty = gameData['difficulty'] ?? 'soft';
+          final List<String> fallbackChallenges = challengeType == 'action'
+              ? (GameWords.dares[difficulty] ?? GameWords.dares['soft']!)
+              : (GameWords.truths[difficulty] ?? GameWords.truths['soft']!);
+          final chosenChallenge =
+              fallbackChallenges[Random().nextInt(fallbackChallenges.length)];
+          final targetPlayerName = players[playerId]?['name'] ?? 'Joueur';
+
+          transaction.update(gameRef, {
+            'aoVChallengeType': challengeType,
+            'aoVCurrentChallenge': chosenChallenge,
+            'aoVPhase': 'performing',
+            'turnStartTime': FieldValue.serverTimestamp(),
+            'gameLog': FieldValue.arrayUnion([
+              "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : 'VÉRITÉ'} !",
+              "ℹ️ Aucun autre joueur disponible pour écrire le défi. Défi sélectionné automatiquement.",
+            ]),
+          });
+          return;
+        }
 
         final authorId = otherPlayers[Random().nextInt(otherPlayers.length)];
         final authorName = players[authorId]?['name'] ?? 'Joueur';
@@ -16623,7 +16708,7 @@ class FirebaseService {
         'unoLastActionPlayerId': null,
         'gameState': 'playing',
         'roundState': 'playing_turn',
-        'unoLog': ['La partie de Uno commence !'],
+        'unoLog': [GameContentLocalization.ui(context, "La partie de Uno commence !")],
         ...initialTurnUpdates, // AJOUTÉ
       });
 
@@ -16797,7 +16882,7 @@ class FirebaseService {
         ...initialTurnUpdates,
       });
       return;
-    } else if (gameType == 'Président') {
+    } else if (gameType == GameContentLocalization.ui(context, "Président")) {
       List<String> suits = ['C', 'D', 'H', 'S'];
       List<String> ranks = [
         '3',
@@ -17575,7 +17660,7 @@ class FirebaseService {
         updates['gameState'] = 'gameOver';
         updates['roundState'] = 'gameOver';
         updates['gameWinner'] = highestScorer;
-        updates['gameEndReason'] = "Toutes les cartes ont été jouées !";
+        updates['gameEndReason'] = GameContentLocalization.ui(context, "Toutes les cartes ont été jouées !");
       }
 
       transaction.update(gameRef, updates);
@@ -17613,7 +17698,7 @@ class FirebaseService {
       'checkersCurrentColor': 'red', // Les rouges commencent
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': [
-        "La partie de Jeu de Dames commence ! Les Rouges jouent en premier.",
+        GameContentLocalization.ui(context, "La partie de Jeu de Dames commence ! Les Rouges jouent en premier."),
       ],
     });
   }
@@ -18188,6 +18273,11 @@ class FirebaseService {
         throw Exception("Ce n'est pas la phase de devinette.");
       }
 
+      int guessesLeft = (gameData['guessesLeft'] as num? ?? 1).toInt();
+      if (guessesLeft <= 0) {
+        throw Exception("Aucun essai restant pour ce tour.");
+      }
+
       final revealed = Map<String, dynamic>.from(
         gameData['codenamesRevealed'] ?? {},
       );
@@ -18697,10 +18787,24 @@ class FirebaseService {
 
     final players = Map<String, dynamic>.from(gameData['players'] ?? {});
     final categories = List<String>.from(gameData['petitBacCategories'] ?? []);
+    String normalizePetitBacStr(String str) {
+      return str
+          .trim()
+          .toLowerCase()
+          .replaceAll(RegExp(r'[àáâãäå]'), 'a')
+          .replaceAll(RegExp(r'[ç]'), 'c')
+          .replaceAll(RegExp(r'[èéêë]'), 'e')
+          .replaceAll(RegExp(r'[ìíîï]'), 'i')
+          .replaceAll(RegExp(r'[ñ]'), 'n')
+          .replaceAll(RegExp(r'[òóôõö]'), 'o')
+          .replaceAll(RegExp(r'[ùúûü]'), 'u')
+          .replaceAll(RegExp(r'[ýÿ]'), 'y');
+    }
+
     final targetLetter =
-        (gameData['petitBacCurrentLetter'] as String? ?? '').toLowerCase();
+        normalizePetitBacStr(gameData['petitBacCurrentLetter'] as String? ?? '');
     const rareLetters = ['k', 'w', 'x', 'y', 'z', 'q'];
-    bool isRareLetter = rareLetters.contains(targetLetter.toLowerCase());
+    bool isRareLetter = rareLetters.contains(targetLetter);
 
     final privateAnswersSnap =
         await gameRef.collection('petit_bac_private_answers').get();
@@ -18720,10 +18824,10 @@ class FirebaseService {
     for (final category in categories) {
       final Map<String, String> validAnswers = {};
       for (final entry in allPlayerAnswers.entries) {
-        final ans =
-            (entry.value[category] as String? ?? '').trim().toLowerCase();
-        if (ans.isNotEmpty && ans.startsWith(targetLetter)) {
-          validAnswers[entry.key] = ans;
+        final rawAns = (entry.value[category] as String? ?? '').trim();
+        final normAns = normalizePetitBacStr(rawAns);
+        if (normAns.isNotEmpty && normAns.startsWith(targetLetter)) {
+          validAnswers[entry.key] = normAns;
         }
       }
 
@@ -19154,15 +19258,15 @@ class FirebaseService {
         }, SetOptions(merge: true));
       }
 
-      if (finalRanking.length >= 1) ranks[finalRanking[0]] = "Président";
-      if (finalRanking.length >= 2) ranks[finalRanking.last] = "Trou du cul";
+      if (finalRanking.length >= 1) ranks[finalRanking[0]] = GameContentLocalization.ui(context, "Président");
+      if (finalRanking.length >= 2) ranks[finalRanking.last] = GameContentLocalization.ui(context, "Trou du cul");
       if (finalRanking.length >= 4) {
-        ranks[finalRanking[1]] = "Vice-Président";
-        ranks[finalRanking[finalRanking.length - 2]] = "Vice-Trou du cul";
+        ranks[finalRanking[1]] = GameContentLocalization.ui(context, "Vice-Président");
+        ranks[finalRanking[finalRanking.length - 2]] = GameContentLocalization.ui(context, "Vice-Trou du cul");
       }
       for (int i = 0; i < finalRanking.length; i++) {
         if (!ranks.containsKey(finalRanking[i])) {
-          ranks[finalRanking[i]] = "Neutre";
+          ranks[finalRanking[i]] = GameContentLocalization.ui(context, "Neutre");
         }
       }
     }
@@ -19233,14 +19337,14 @@ class FirebaseService {
       String? presidentId =
           ranks.entries
               .firstWhere(
-                (e) => e.value == "Président",
+                (e) => e.value == GameContentLocalization.ui(context, "Président"),
                 orElse: () => MapEntry("", ""),
               )
               .key;
       String? loserId =
           ranks.entries
               .firstWhere(
-                (e) => e.value == "Trou du cul",
+                (e) => e.value == GameContentLocalization.ui(context, "Trou du cul"),
                 orElse: () => MapEntry("", ""),
               )
               .key;
@@ -19268,14 +19372,14 @@ class FirebaseService {
         String? vicePId =
             ranks.entries
                 .firstWhere(
-                  (e) => e.value == "Vice-Président",
+                  (e) => e.value == GameContentLocalization.ui(context, "Vice-Président"),
                   orElse: () => MapEntry("", ""),
                 )
                 .key;
         String? viceLId =
             ranks.entries
                 .firstWhere(
-                  (e) => e.value == "Vice-Trou du cul",
+                  (e) => e.value == GameContentLocalization.ui(context, "Vice-Trou du cul"),
                   orElse: () => MapEntry("", ""),
                 )
                 .key;
@@ -19345,7 +19449,7 @@ class FirebaseService {
       String? loserId =
           ranks.entries
               .firstWhere(
-                (e) => e.value == "Trou du cul",
+                (e) => e.value == GameContentLocalization.ui(context, "Trou du cul"),
                 orElse: () => MapEntry("", ""),
               )
               .key;
@@ -19593,8 +19697,8 @@ class FirebaseService {
         gameData['roundState'] == 'guessing_drawing') {
       String reason =
           (gameData['roundState'] == 'drawing')
-              ? "Le dessinateur n'a pas soumis le dessin à temps."
-              : "Le temps est écoulé ! Personne n'a trouvé le mot.";
+              ? GameContentLocalization.ui(context, "Le dessinateur n'a pas soumis le dessin à temps.")
+              : GameContentLocalization.ui(context, "Le temps est écoulé ! Personne n'a trouvé le mot.");
       await gameRef.update({
         'roundState': 'result',
         'gameEndReason': reason,
@@ -19619,6 +19723,11 @@ class FirebaseService {
     try {
       await FirebaseDatabase.instance
           .ref('games/$gameCode/pictionary')
+          .remove();
+    } catch (_) {}
+    try {
+      await FirebaseDatabase.instance
+          .ref('games/$gameCode/pictionaryChat')
           .remove();
     } catch (_) {}
 
@@ -19825,7 +19934,7 @@ class FirebaseService {
       Map<String, dynamic> updates = {
         'justOneGuesserAnswer': cleanGuess,
         'roundState': 'result',
-        'gameEndReason': isCorrect ? 'Mot deviné !' : 'Mot non deviné.',
+        'gameEndReason': isCorrect ? GameContentLocalization.ui(context, "Mot deviné !") : GameContentLocalization.ui(context, "Mot non deviné."),
         'turnStartTime': FieldValue.serverTimestamp(),
       };
 
@@ -19952,7 +20061,7 @@ class FirebaseService {
         gameData['hotPotatoUsedAnswers'] ?? [],
       );
       if (usedAnswers.contains(cleanAnswer)) {
-        throw Exception("Cette réponse a déjà été donnée !");
+        throw Exception(GameContentLocalization.ui(context, "Cette réponse a déjà été donnée !"));
       }
       usedAnswers.add(cleanAnswer);
 
@@ -19972,16 +20081,21 @@ class FirebaseService {
         applySpeedBonus: true,
       );
 
-      final turnStartTime = (gameData['turnStartTime'] as Timestamp?)?.toDate();
+      final roundStartedAt = ((gameData['hotPotatoRoundStartedAt'] ??
+              gameData['turnStartTime']) as Timestamp?)
+          ?.toDate();
       final timerDuration =
           (gameData['hotPotatoSecondsLeft'] as num?)?.toInt() ??
+          (gameData['hotPotatoGlobalDuration'] as num?)?.toInt() ??
           (gameData['turnTimer'] as num?)?.toInt() ??
           30;
-      int secondsLeft = timerDuration;
-      if (turnStartTime != null) {
-        secondsLeft =
-            timerDuration - DateTime.now().difference(turnStartTime).inSeconds;
-      }
+
+      int elapsed = roundStartedAt != null
+          ? DateTime.now().difference(roundStartedAt).inSeconds
+          : 0;
+      if (elapsed <= 0) elapsed = 1;
+      int secondsLeft = max(0, timerDuration - elapsed);
+
       if (secondsLeft <= 2 && secondsLeft > 0) {
         _db.collection('users').doc(currentAuthUid).set({
           'unlockedBadges.patate_last_second': FieldValue.serverTimestamp(),
@@ -19994,6 +20108,7 @@ class FirebaseService {
       transaction.update(gameRef, {
         'hotPotatoUsedAnswers': usedAnswers,
         'hotPotatoCurrentPlayerId': nextPlayerId,
+        'hotPotatoSecondsLeft': secondsLeft,
         'turnStartTime': FieldValue.serverTimestamp(),
         'gameLog': FieldValue.arrayUnion([
           "${gameData['players'][playerId]['name']} a répondu '$cleanAnswer' et passe la bombe !",
@@ -20638,7 +20753,7 @@ class FirebaseService {
         'gameState': 'playing',
         'roundState': 'playing_turn',
         'unoLog': FieldValue.arrayUnion([
-          'Une nouvelle manche de Uno commence !',
+          GameContentLocalization.ui(context, "Une nouvelle manche de Uno commence !"),
         ]),
         'turnStartTime': FieldValue.serverTimestamp(),
       });
@@ -21155,7 +21270,7 @@ class FirebaseService {
     }
 
     // 1. Récupération des cartes dans les mains de chaque joueur propriétaire
-    for (String pId in playerOrder) {
+    for (String pId in skullMats.keys) {
       List<Map<String, dynamic>> mat = List<Map<String, dynamic>>.from(
         (skullMats[pId] as List? ?? []).map(
           (c) => Map<String, dynamic>.from(c as Map),
@@ -21168,6 +21283,12 @@ class FirebaseService {
       }
       skullHands[pId] = hand;
       skullMats[pId] = <Map<String, dynamic>>[]; // Tapis remis à zéro
+      if (players.containsKey(pId)) {
+        players[pId] = {
+          ...Map<String, dynamic>.from(players[pId] ?? {}),
+          'cardsInHand': hand.length,
+        };
+      }
     }
 
     final Map<String, dynamic> updates = {
@@ -21690,7 +21811,7 @@ class FirebaseService {
           } else {
             updates['roundWinnerId'] = null;
             updates['gameEndReason'] =
-                "Égalité parfaite ! Aucun point attribué.";
+                GameContentLocalization.ui(context, "Égalité parfaite ! Aucun point attribué.");
           }
         } else if (gameType == 'Synonyme ou Banni') {
           final Map<String, int> banCounts = {};
@@ -21723,7 +21844,7 @@ class FirebaseService {
           } else {
             updates['roundLoserId'] = null;
             updates['gameEndReason'] =
-                "Égalité dans les votes : aucun joueur banni ce tour.";
+                GameContentLocalization.ui(context, "Égalité dans les votes : aucun joueur banni ce tour.");
           }
         } else if (gameType == 'Le Juge') {
           final winnerPlayerId = votedForId;
@@ -22030,7 +22151,7 @@ class FirebaseService {
             applySpeedBonus: false,
           );
           updates['gameEndReason'] =
-              'La description la plus drôle a été choisie !';
+              GameContentLocalization.ui(context, "La description la plus drôle a été choisie !");
         } else {
           updates['gameEndReason'] = 'Aucune description n\'a été votée.';
         }
@@ -22066,7 +22187,7 @@ class FirebaseService {
           );
         } else {
           updates['roundWinnerId'] = null;
-          updates['gameEndReason'] = "Égalité parfaite ! Aucun point attribué.";
+          updates['gameEndReason'] = GameContentLocalization.ui(context, "Égalité parfaite ! Aucun point attribué.");
         }
         updates['voteResults'] = voteCounts;
       } else if (gameType == 'Synonyme ou Banni') {
@@ -22865,8 +22986,10 @@ class FirebaseService {
 
     playerData[smallBlindId]['chips'] -= smallBlindActual;
     playerData[smallBlindId]['currentBet'] = smallBlindActual;
+    playerData[smallBlindId]['totalBet'] = smallBlindActual;
     playerData[bigBlindId]['chips'] -= bigBlindActual;
     playerData[bigBlindId]['currentBet'] = bigBlindActual;
+    playerData[bigBlindId]['totalBet'] = bigBlindActual;
     int pot = smallBlindActual + bigBlindActual;
 
     await gameRef.update({
@@ -22973,6 +23096,7 @@ class FirebaseService {
             }
             myData['chips'] -= callAmount;
             myData['currentBet'] += callAmount;
+            myData['totalBet'] = ((myData['totalBet'] as num?)?.toInt() ?? 0) + callAmount;
             pot += callAmount;
             break;
           case 'raise':
@@ -23006,6 +23130,7 @@ class FirebaseService {
                 totalBetAmount - (myData['currentBet'] as num).toInt();
             myData['chips'] -= raiseAmount;
             myData['currentBet'] = totalBetAmount;
+            myData['totalBet'] = ((myData['totalBet'] as num?)?.toInt() ?? 0) + raiseAmount;
             pot += raiseAmount;
             currentBet = totalBetAmount;
             lastRaiserId = playerId;
@@ -23252,12 +23377,63 @@ class FirebaseService {
     }
 
     Map<String, dynamic> scoreUpdates = {};
-    if (winners.isNotEmpty) {
-      int pot = (gameData['pot'] as num? ?? 0).toInt();
-      int potPerWinner = (pot / winners.length).floor();
+    if (playersInHand.isNotEmpty) {
+      int totalPot = (gameData['pot'] as num? ?? 0).toInt();
+
+      // Gestion des Side Pots selon l'investissement de chaque joueur
+      Map<String, int> totalBets = {};
+      for (String pId in playerData.keys) {
+        totalBets[pId] = ((playerData[pId]['totalBet'] as num?)?.toInt() ?? 0);
+      }
+
+      List<int> betTiers = totalBets.values.where((b) => b > 0).toSet().toList()..sort();
+      bool hasAllIn = playerData.values.any((p) => p['status'] == 'all-in');
+
+      if (hasAllIn && betTiers.length > 1) {
+        int prevTier = 0;
+        int remainingPot = totalPot;
+
+        for (int tier in betTiers) {
+          int sidePot = 0;
+          for (String pId in totalBets.keys) {
+            int b = totalBets[pId]!;
+            if (b > prevTier) {
+              sidePot += min(b - prevTier, tier - prevTier);
+            }
+          }
+          if (sidePot <= 0) continue;
+          sidePot = min(sidePot, remainingPot);
+
+          List<String> eligible = playersInHand.where((id) => totalBets[id]! >= tier).toList();
+          if (eligible.isEmpty) eligible = playersInHand;
+
+          PokerHand? tierBestHand;
+          List<String> tierWinners = [];
+          for (String pId in eligible) {
+            PokerHand h = playerFinalHands[pId]!;
+            if (tierBestHand == null || h.compareTo(tierBestHand) > 0) {
+              tierBestHand = h;
+              tierWinners = [pId];
+            } else if (h.compareTo(tierBestHand) == 0) {
+              tierWinners.add(pId);
+            }
+          }
+
+          int share = (sidePot / tierWinners.length).floor();
+          for (String wId in tierWinners) {
+            playerData[wId]['chips'] = (playerData[wId]['chips'] as int) + share;
+          }
+          remainingPot -= sidePot;
+          prevTier = tier;
+        }
+      } else {
+        int potPerWinner = (totalPot / winners.length).floor();
+        for (String winId in winners) {
+          playerData[winId]['chips'] += potPerWinner;
+        }
+      }
 
       for (String winId in winners) {
-        playerData[winId]['chips'] += potPerWinner;
         int winXp = 30;
         if (bestHand?.rank == HandRank.straight ||
             bestHand?.rank == HandRank.flush ||
@@ -23432,11 +23608,33 @@ class FirebaseService {
           ]),
         });
       } else if (action == 'pass') {
+        int passCount = (gameData['belotePassCount'] as num? ?? 0).toInt() + 1;
+        int biddingRound = (gameData['beloteBiddingRound'] as num? ?? 1).toInt();
         int nextIndex = (currentIndex + 1) % playerOrder.length;
-        transaction.update(gameRef, {
-          'beloteCurrentPlayerIndex': nextIndex,
-          'turnStartTime': FieldValue.serverTimestamp(),
-        });
+
+        if (passCount >= 4) {
+          if (biddingRound == 1) {
+            // Passe générale au 1er tour -> Passage au 2e tour
+            transaction.update(gameRef, {
+              'beloteBiddingRound': 2,
+              'belotePassCount': 0,
+              'beloteCurrentPlayerIndex': nextIndex,
+              'turnStartTime': FieldValue.serverTimestamp(),
+              'gameLog': FieldValue.arrayUnion([
+                "Passe générale au 1er tour d'enchères. Début du 2nd tour !",
+              ]),
+            });
+          } else {
+            // Passe générale au 2e tour -> Nouvelle donne
+            _startBeloteRound(gameRef, gameData);
+          }
+        } else {
+          transaction.update(gameRef, {
+            'belotePassCount': passCount,
+            'beloteCurrentPlayerIndex': nextIndex,
+            'turnStartTime': FieldValue.serverTimestamp(),
+          });
+        }
       } else if (action == 'play' && card != null) {
         List<String> hand = List.from(playerData[playerId]['hand']);
         if (!hand.contains(card)) throw Exception("Carte non possédée.");
@@ -23446,17 +23644,78 @@ class FirebaseService {
         );
         String trumpSuit = gameData['beloteTrumpSuit'] ?? 'H';
 
-        // Validation de jeu (Fournir la couleur si possible)
+        // Validation de jeu (Fournir la couleur si possible + règles de coupe à l'atout)
         if (currentTrick.isNotEmpty) {
           String ledCard = currentTrick.values.first as String;
           String ledSuit = ledCard.substring(ledCard.length - 1);
           String playedSuit = card.substring(card.length - 1);
           bool hasLedSuit = hand.any((c) => c.endsWith(ledSuit));
 
-          if (hasLedSuit && playedSuit != ledSuit) {
-            throw Exception(
-              "Vous devez fournir la couleur demandée ($ledSuit).",
-            );
+          if (hasLedSuit) {
+            if (playedSuit != ledSuit) {
+              throw Exception(
+                "Vous devez fournir la couleur demandée ($ledSuit).",
+              );
+            }
+          } else {
+            // Ne peut pas fournir la couleur demandée
+            // Déterminer qui est maître actuellement sur le pli
+            String masterId = currentTrick.keys.first;
+            int highestPower = -1;
+            int highestTrumpPower = -1;
+            currentTrick.forEach((pId, c) {
+              String cSuit = c.substring(c.length - 1);
+              String rank = c.substring(0, c.length - 1);
+              bool isTrump = (cSuit == trumpSuit);
+              int cardPower = _getBeloteCardValue(c, isTrump);
+              int cardRank = _getBeloteCardRank(rank, isTrump);
+              int power = isTrump
+                  ? (2000 + cardPower * 10 + cardRank)
+                  : (cSuit == ledSuit ? (1000 + cardPower * 10 + cardRank) : 0);
+              if (power > highestPower) {
+                highestPower = power;
+                masterId = pId;
+              }
+              if (isTrump && power > highestTrumpPower) {
+                highestTrumpPower = power;
+              }
+            });
+
+            bool partnerIsMaster =
+                (playerData[masterId]?['team'] == playerData[playerId]?['team']);
+            bool hasTrump = hand.any((c) => c.endsWith(trumpSuit));
+
+            // Si le partenaire n'est pas maître et qu'on possède de l'atout
+            if (!partnerIsMaster && hasTrump) {
+              if (highestTrumpPower > 0) {
+                // Un atout a déjà été joué par un adversaire : obligation de surcouper si possible
+                bool canOverTrump = hand.any((c) {
+                  if (!c.endsWith(trumpSuit)) return false;
+                  String rank = c.substring(0, c.length - 1);
+                  int pwr = 2000 +
+                      _getBeloteCardValue(c, true) * 10 +
+                      _getBeloteCardRank(rank, true);
+                  return pwr > highestTrumpPower;
+                });
+
+                if (canOverTrump) {
+                  int playedPwr = (playedSuit == trumpSuit)
+                      ? (2000 +
+                          _getBeloteCardValue(card, true) * 10 +
+                          _getBeloteCardRank(
+                              card.substring(0, card.length - 1), true))
+                      : 0;
+                  if (playedPwr <= highestTrumpPower) {
+                    throw Exception("Vous devez monter à l'atout (surcouper) !");
+                  }
+                }
+              } else {
+                // Pas encore d'atout sur le pli et l'adversaire est maître -> couper obligatoire
+                if (playedSuit != trumpSuit) {
+                  throw Exception("Vous devez couper à l'atout !");
+                }
+              }
+            }
           }
         }
 
@@ -23760,7 +24019,7 @@ class FirebaseService {
       'blokusCurrentPlayerIndex': 0,
       'blokusPassedPlayers': [],
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': ["La partie de Blokus commence !"],
+      'gameLog': [GameContentLocalization.ui(context, "La partie de Blokus commence !")],
     });
   }
 
@@ -23858,6 +24117,7 @@ class FirebaseService {
       }
 
       if (isFirstPiece) {
+        final List<String> validCorners = ["0_0", "19_19", "0_19", "19_0"];
         String cornerTarget =
             myColor == 'blue'
                 ? "0_0"
@@ -23867,7 +24127,11 @@ class FirebaseService {
                 ? "0_19"
                 : "19_0";
         bool coversCorner = absoluteCoords.any(
-          (c) => "${c[0]}_${c[1]}" == cornerTarget,
+          (c) {
+            final key = "${c[0]}_${c[1]}";
+            return key == cornerTarget ||
+                (validCorners.contains(key) && !board.containsKey(key));
+          },
         );
         if (!coversCorner) {
           throw Exception(
@@ -24097,7 +24361,7 @@ class FriendsModeHomeScreen extends StatelessWidget {
               Text(
                 GameContentLocalization.ui(
                   context,
-                  "Le compagnon de vos meilleures soirées",
+                  GameContentLocalization.ui(context, "Le compagnon de vos meilleures soirées"),
                 ),
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
@@ -24396,7 +24660,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     'Boomerang': false,
     'Déesse de la Justice': false,
     'Fantôme': false,
-    'Amoureux': false,
+    GameContentLocalization.ui(context, "Amoureux"): false,
     'Mr. Meme': false,
     'Vendeur de Falafels': false,
     'Vengeuse': false,
@@ -24853,7 +25117,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               petitBacTime:
                   _selectedGame == 'Petit Bac' ? _turnTimerSeconds : null,
               presidentRevolution:
-                  _selectedGame == 'Président' ? _presidentRevolution : false,
+                  _selectedGame == GameContentLocalization.ui(context, "Président") ? _presidentRevolution : false,
               pictionaryOnly30Strokes:
                   _selectedGame == 'Pictionary'
                       ? _pictionaryOnly30Strokes
@@ -25005,16 +25269,16 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     isPublicSearchEnabled
                         ? GameContentLocalization.ui(
                           context,
-                          "Local indisponible (Recherche active)",
+                          GameContentLocalization.ui(context, "Local indisponible (Recherche active)"),
                         )
                         : isCommunicationEnabled
                         ? GameContentLocalization.ui(
                           context,
-                          "Local indisponible (Vidéo/Audio actif)",
+                          GameContentLocalization.ui(context, "Local indisponible (Vidéo/Audio actif)"),
                         )
                         : GameContentLocalization.ui(
                           context,
-                          "Jouer en Local (Sur cet appareil)",
+                          GameContentLocalization.ui(context, "Jouer en Local (Sur cet appareil)"),
                         ),
                   ),
                 ),
@@ -25057,12 +25321,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                   isPublicSearchEnabled
                       ? GameContentLocalization.ui(
                         context,
-                        "Privé indisponible (Recherche active)",
+                        GameContentLocalization.ui(context, "Privé indisponible (Recherche active)"),
                       )
                       : blockOnlineForDevineTete
                       ? GameContentLocalization.ui(
                         context,
-                        "Privé indisponible (Vidéo requise)",
+                        GameContentLocalization.ui(context, "Privé indisponible (Vidéo requise)"),
                       )
                       : GameContentLocalization.ui(
                         context,
@@ -25113,7 +25377,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         : blockOnlineForDevineTete
                         ? GameContentLocalization.ui(
                           context,
-                          "Recherche rapide (Vidéo requise)",
+                          GameContentLocalization.ui(context, "Recherche rapide (Vidéo requise)"),
                         )
                         : GameContentLocalization.ui(
                           context,
@@ -25163,11 +25427,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         : blockOnlineForDevineTete
                         ? GameContentLocalization.ui(
                           context,
-                          "Partie Classée (Vidéo requise)",
+                          GameContentLocalization.ui(context, "Partie Classée (Vidéo requise)"),
                         )
                         : GameContentLocalization.ui(
                           context,
-                          "Partie Classée (Désactivée)",
+                          GameContentLocalization.ui(context, "Partie Classée (Désactivée)"),
                         ),
                   ),
                 ),
@@ -27042,7 +27306,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                     ],
 
-                    if (_selectedGame == 'Président') ...[
+                    if (_selectedGame == GameContentLocalization.ui(context, "Président")) ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
                         title: Text(
@@ -27300,7 +27564,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       Text(
                         GameContentLocalization.ui(
                           context,
-                          "Sélectionnez au moins 3 catégories :",
+                          GameContentLocalization.ui(context, "Sélectionnez au moins 3 catégories :"),
                         ),
                         style: TextStyle(
                           color:
@@ -27891,10 +28155,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             "Si l'un est éliminé, l'autre aussi.",
                           ),
                         ),
-                        value: _undercoverRoleSettings['Amoureux']!,
+                        value: _undercoverRoleSettings[GameContentLocalization.ui(context, "Amoureux")]!,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings['Amoureux'] = val,
+                              () => _undercoverRoleSettings[GameContentLocalization.ui(context, "Amoureux")] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -28676,7 +28940,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                   (teams[1]?.length ?? 0) != 2) {
                 canStart = false;
                 requirementMessage =
-                    "Formez 2 équipes de 2 joueurs dans 'Composer les équipes'.";
+                    "Formez 2 équipes de 2 joueurs dans GameContentLocalization.ui(context, "Composer les équipes").";
               }
             } else {
               // Autres jeux par équipes (Codenames, Time's Up, etc.)
@@ -28951,7 +29215,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                                         currentUserId: currentPlayerId,
                                       );
                                     },
-                                    tooltip: "Profil & Options",
+                                    tooltip: GameContentLocalization.ui(context, "Profil & Options"),
                                   ),
                                 ],
                               ],
@@ -29107,7 +29371,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                       label: Text(
                         GameContentLocalization.ui(
                           context,
-                          "Composer les équipes",
+                          GameContentLocalization.ui(context, "Composer les équipes"),
                         ),
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
@@ -29910,7 +30174,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'Uno':
         _firebaseService.handleUnoTimeout(widget.gameCode);
         break;
-      case 'Président':
+      case GameContentLocalization.ui(context, "Président"):
       case 'Présidente':
         _firebaseService.handlePresidentTimeout(widget.gameCode);
         break;
@@ -30402,7 +30666,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         "En cas d'égalité lors d'un vote, c'est vous qui décidez qui est éliminé parmi les joueurs à égalité. Ce pouvoir persiste même après votre mort.",
     'Fantôme':
         "Même après votre élimination, vous continuez à participer aux votes pour éliminer les joueurs.",
-    'Amoureux':
+    GameContentLocalization.ui(context, "Amoureux"):
         "Un autre joueur est secrètement désigné comme votre amoureux. Si l'un de vous deux est éliminé, l'autre meurt de chagrin et est éliminé aussi.",
     'Mr. Meme':
         "Au lieu de donner un indice oral, vous devez mimer votre mot-indice à chaque tour.",
@@ -30737,7 +31001,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       'Vengeuse': Icons.whatshot,
       'Déesse de la Justice': Icons.gavel,
       'Fantôme': Icons.visibility,
-      'Amoureux': Icons.favorite,
+      GameContentLocalization.ui(context, "Amoureux"): Icons.favorite,
       'Mr. Meme': Icons.gesture,
       'Vendeur de Falafels': Icons.fastfood,
       'Duellistes': Icons.compare_arrows,
@@ -30989,7 +31253,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         }
       }
 
-      if (uploadedUrls.isNotEmpty) {
+      if (uploadedUrls.length >= 3) {
         await _firebaseService.playerReadyForPhotoRoulette(
           widget.gameCode,
           playerId,
@@ -31002,7 +31266,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               content: Text(
                 GameContentLocalization.ui(
                   context,
-                  "Échec de l'upload des photos vers Supabase.",
+                  uploadedUrls.isEmpty
+                      ? "Échec de l'upload des photos vers Supabase."
+                      : "Il faut au moins 3 photos pour jouer à Photo Roulette.",
                 ),
               ),
             ),
@@ -33014,7 +33280,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
     // Liste des jeux où voir la main/grille adverse est pertinent
     bool canViewHands = [
-      'Président',
+      GameContentLocalization.ui(context, "Président"),
       'Uno',
       'Zéro Pointé',
       'Poker',
@@ -33198,7 +33464,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           ),
                           if (gameType == 'Rami' ||
                               gameType == 'Uno' ||
-                              gameType == 'Président' ||
+                              gameType == GameContentLocalization.ui(context, "Président") ||
                               gameType == 'Big Two' ||
                               gameType == 'Mille Bornes' ||
                               gameType == 'Yams') ...[
@@ -33213,7 +33479,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 cCount =
                                     (gameData['unoPlayerHands']?[pId] as List?)
                                         ?.length;
-                              } else if (gameType == 'Président') {
+                              } else if (gameType == GameContentLocalization.ui(context, "Président")) {
                                 cCount =
                                     (gameData['playerHands']?[pId] as List?)
                                         ?.length;
@@ -33384,7 +33650,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     }
 
     switch (gameType) {
-      case 'Président':
+      case GameContentLocalization.ui(context, "Président"):
         final hand = List<String>.from(
           gameData['playerHands']?[opponentId] ?? [],
         );
@@ -36930,7 +37196,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         return _buildTimesUpUI(context, gameData, playerId);
       case 'Petit Bac':
         return _buildPetitBacUI(context, gameData, playerId);
-      case 'Président':
+      case GameContentLocalization.ui(context, "Président"):
         return _buildPresidentUI(context, gameData, playerId);
       case 'Skull':
         return _buildSkullUI(context, gameData, playerId);
@@ -37482,11 +37748,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           variant == 'classic'
                               ? GameUiLocalization.tr(
                                 context,
-                                "Surréalisme classique",
+                                GameContentLocalization.ui(context, "Surréalisme classique"),
                               )
                               : GameUiLocalization.tr(
                                 context,
-                                "Suite de 3 mots",
+                                GameContentLocalization.ui(context, "Suite de 3 mots"),
                               ),
                           style: const TextStyle(
                             fontSize: 10,
@@ -37676,7 +37942,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     Text(
                       GameUiLocalization.tr(
                         context,
-                        "PREMIÈRE LIGNE DU MANUSCRIT",
+                        GameContentLocalization.ui(context, "PREMIÈRE LIGNE DU MANUSCRIT"),
                       ),
                       style: TextStyle(
                         fontSize: 10,
@@ -37911,7 +38177,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 Text(
                   GameUiLocalization.tr(
                     context,
-                    "La feuille est pliée pour préserver le secret.",
+                    GameContentLocalization.ui(context, "La feuille est pliée pour préserver le secret."),
                   ),
                   style: const TextStyle(color: Colors.white60, fontSize: 12),
                   textAlign: TextAlign.center,
@@ -38268,7 +38534,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           children: [
                             Expanded(
                               child: Text(
-                                players[pId]?['name'] ?? 'Adversaire',
+                                players[pId]?['name'] ?? GameContentLocalization.ui(context, "Adversaire"),
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
@@ -38632,7 +38898,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         })
                         : GameUiLocalization.tr(
                           context,
-                          "Tour de l'adversaire",
+                          GameContentLocalization.ui(context, "Tour de l'adversaire"),
                         ),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -38783,7 +39049,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         label: Text(
                           GameUiLocalization.tr(
                             context,
-                            "Défausser la 1ère carte & Passer",
+                            GameContentLocalization.ui(context, "Défausser la 1ère carte & Passer"),
                           ),
                         ),
                         style: OutlinedButton.styleFrom(
@@ -39094,7 +39360,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
       return _MilleBornesCardInfo(
         name: km,
-        category: "DISTANCE",
+        category: GameContentLocalization.ui(context, "DISTANCE"),
         badgeText: "$km KM",
         icon: distIcon,
         primaryColor: cardColor,
@@ -39108,7 +39374,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SAFETY_RIGHT_OF_WAY':
         return const _MilleBornesCardInfo(
           name: "Véhicule\nPrioritaire",
-          category: "BOTTE",
+          category: GameContentLocalization.ui(context, "BOTTE"),
           badgeText: "PRIORITÉ",
           icon: Icons.emergency_rounded,
           primaryColor: Color(0xFFFFD700),
@@ -39118,7 +39384,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SAFETY_REPAIRS':
         return const _MilleBornesCardInfo(
           name: "Pneu\nIncrevable",
-          category: "BOTTE",
+          category: GameContentLocalization.ui(context, "BOTTE"),
           badgeText: "INCREVABLE",
           icon: Icons.verified_rounded,
           primaryColor: Color(0xFFFFD700),
@@ -39129,7 +39395,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SAFETY_EMERGENCY':
         return const _MilleBornesCardInfo(
           name: "Citerne\nInépuisable",
-          category: "BOTTE",
+          category: GameContentLocalization.ui(context, "BOTTE"),
           badgeText: "CITERNE",
           icon: Icons.local_gas_station_rounded,
           primaryColor: Color(0xFFFFD700),
@@ -39142,7 +39408,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'RED_LIGHT':
         return const _MilleBornesCardInfo(
           name: "Feu Rouge",
-          category: "ATTAQUE",
+          category: GameContentLocalization.ui(context, "ATTAQUE"),
           badgeText: "STOP",
           icon: Icons.traffic_rounded,
           primaryColor: Color(0xFFEF4444),
@@ -39151,7 +39417,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SPEED_LIMIT':
         return const _MilleBornesCardInfo(
           name: "Limite 50",
-          category: "ATTAQUE",
+          category: GameContentLocalization.ui(context, "ATTAQUE"),
           badgeText: "50 MAX",
           icon: Icons.speed_rounded,
           primaryColor: Color(0xFFFB923C),
@@ -39160,7 +39426,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'OUT_OF_GAS':
         return const _MilleBornesCardInfo(
           name: "Panne\nd'essence",
-          category: "ATTAQUE",
+          category: GameContentLocalization.ui(context, "ATTAQUE"),
           badgeText: "VIDE",
           icon: Icons.no_crash_rounded,
           primaryColor: Color(0xFFF43F5E),
@@ -39169,8 +39435,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'FLAT_TIRE':
         return const _MilleBornesCardInfo(
           name: "Crevaison",
-          category: "ATTAQUE",
-          badgeText: "CREVAISON",
+          category: GameContentLocalization.ui(context, "ATTAQUE"),
+          badgeText: GameContentLocalization.ui(context, "CREVAISON"),
           icon: Icons.tire_repair_rounded,
           primaryColor: Color(0xFFE11D48),
           secondaryColor: Color(0xFF881337),
@@ -39180,7 +39446,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'GREEN_LIGHT':
         return const _MilleBornesCardInfo(
           name: "Feu Vert",
-          category: "PARADE",
+          category: GameContentLocalization.ui(context, "PARADE"),
           badgeText: "ROULEZ",
           icon: Icons.check_circle_rounded,
           primaryColor: Color(0xFF10B981),
@@ -39189,7 +39455,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'END_OF_LIMIT':
         return const _MilleBornesCardInfo(
           name: "Fin de\nLimite",
-          category: "PARADE",
+          category: GameContentLocalization.ui(context, "PARADE"),
           badgeText: "FIN 50",
           icon: Icons.all_inclusive_rounded,
           primaryColor: Color(0xFFF59E0B),
@@ -39198,7 +39464,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'EXTRA_TANK':
         return const _MilleBornesCardInfo(
           name: "Essence",
-          category: "PARADE",
+          category: GameContentLocalization.ui(context, "PARADE"),
           badgeText: "PLEIN",
           icon: Icons.local_gas_station_rounded,
           primaryColor: Color(0xFF10B981),
@@ -39207,7 +39473,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'SPARE_TIRE':
         return const _MilleBornesCardInfo(
           name: "Roue de\nSecours",
-          category: "PARADE",
+          category: GameContentLocalization.ui(context, "PARADE"),
           badgeText: "RÉPARÉ",
           icon: Icons.change_circle_rounded,
           primaryColor: Color(0xFF10B981),
@@ -40050,7 +40316,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               Text(
                 GameUiLocalization.tr(
                   context,
-                  "Territoire Ennemi (Touchez pour viser, confirmez pour tirer)",
+                  GameContentLocalization.ui(context, "Territoire Ennemi (Touchez pour viser, confirmez pour tirer)"),
                 ),
                 style: const TextStyle(
                   color: Colors.redAccent,
@@ -40130,7 +40396,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       Text(
                         GameUiLocalization.tr(
                           context,
-                          "Votre Flotte (Tirs ennemis reçus)",
+                          GameContentLocalization.ui(context, "Votre Flotte (Tirs ennemis reçus)"),
                         ),
                         style: const TextStyle(
                           color: Colors.cyanAccent,
@@ -40534,7 +40800,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       if (pId != null && pId != playerId) {
                         previewAmount = raw['amount'] as int?;
                         previewPlayerName =
-                            playerData[pId]?['name'] ?? 'Adversaire';
+                            playerData[pId]?['name'] ?? GameContentLocalization.ui(context, "Adversaire");
                       }
                     } catch (_) {}
                   }
@@ -44811,7 +45077,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             players[gameData['justOneGuesserId']]?['name'] ?? 'Le devin';
         final guesserAnswer =
             gameData['justOneGuesserAnswer'] ?? '(pas de réponse)';
-        if (gameEndReason == 'Mot deviné !') {
+        if (gameEndReason == GameContentLocalization.ui(context, "Mot deviné !")) {
           resultText = "$guesserName a trouvé le mot : '$currentWord' !";
           extraInfo = Text(
             GameContentLocalization.format(
@@ -44961,7 +45227,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           );
         } else {
           resultText =
-              "Personne n'a gagné ce tour. Égalité des votes ou pas de description.";
+              GameContentLocalization.ui(context, "Personne n'a gagné ce tour. Égalité des votes ou pas de description.");
           extraInfo = Text(
             GameMessageLocalization.tr(context, gameEndReason ?? ""),
             style: TextStyle(
@@ -44993,7 +45259,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           );
         } else {
           resultText =
-              "Le tour est terminé. Personne n'a trouvé le symbole commun.";
+              GameContentLocalization.ui(context, "Le tour est terminé. Personne n'a trouvé le symbole commun.");
           extraInfo = Text(
             GameMessageLocalization.tr(
               context,
@@ -45011,7 +45277,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           final winnerName = players[roundWinnerId]?['name'] ?? 'Inconnu';
           resultText = "$winnerName a été désigné(e) et gagne 1 point !";
         } else {
-          resultText = "Égalité ! Personne ne marque de point ce tour-ci.";
+          resultText = GameContentLocalization.ui(context, "Égalité ! Personne ne marque de point ce tour-ci.");
         }
         break;
     }
@@ -48201,7 +48467,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       ? Text(
                                         GameUiLocalization.tr(
                                           context,
-                                          "Éliminé",
+                                          GameContentLocalization.ui(context, "Éliminé"),
                                         ),
                                         style: TextStyle(
                                           color: Colors.redAccent,
@@ -48212,7 +48478,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                       ? Text(
                                         GameUiLocalization.tr(
                                           context,
-                                          "Tapis vide",
+                                          GameContentLocalization.ui(context, "Tapis vide"),
                                         ),
                                         style: TextStyle(
                                           color: Colors.white24,
@@ -50638,8 +50904,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 _buildActionButton(
                   label:
                       _lgActionMode == 'placer_tonneau'
-                          ? "Annuler"
-                          : "Poser tonneau",
+                          ? GameContentLocalization.ui(context, "Annuler")
+                          : GameContentLocalization.ui(context, "Poser tonneau"),
                   icon: Icons.local_gas_station,
                   color: Colors.orangeAccent,
                   onPressed:
@@ -50685,7 +50951,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             !(myData['powerUsed'] ?? false) &&
             !(gameData['dictatorUsed'] ?? false)) {
           centerActionWidget = _buildActionButton(
-            label: "Coup d'État",
+            label: GameContentLocalization.ui(context, "Coup d'État"),
             icon: Icons.gavel,
             color: Colors.deepPurpleAccent,
             onPressed:
@@ -50738,7 +51004,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             mainAxisSize: MainAxisSize.min,
             children: [
               _buildActionButton(
-                label: "Quitter",
+                label: GameContentLocalization.ui(context, "Quitter"),
                 icon: Icons.exit_to_app,
                 color: Colors.redAccent,
                 onPressed: () => _exitGame(),
@@ -50746,7 +51012,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               if (isHost) ...[
                 const SizedBox(width: 8),
                 _buildActionButton(
-                  label: "Rejouer",
+                  label: GameContentLocalization.ui(context, "Rejouer"),
                   icon: Icons.replay,
                   color: Colors.greenAccent,
                   onPressed:
@@ -51380,18 +51646,18 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                _buildChatTab("Village", 'global', Colors.blueAccent),
+                _buildChatTab(GameContentLocalization.ui(context, "Village"), 'global', Colors.blueAccent),
                 if (amILoup || (amIDead && amILoup)) ...[
                   const SizedBox(width: 4),
-                  _buildChatTab("Loups", 'wolf', Colors.redAccent),
+                  _buildChatTab(GameContentLocalization.ui(context, "Loups"), 'wolf', Colors.redAccent),
                 ],
                 if (amIDead || amINecromancer) ...[
                   const SizedBox(width: 4),
-                  _buildChatTab("Outre-tombe", 'dead', Colors.purpleAccent),
+                  _buildChatTab(GameContentLocalization.ui(context, "Outre-tombe"), 'dead', Colors.purpleAccent),
                 ],
                 if (amILover && lovers.length == 2) ...[
                   const SizedBox(width: 4),
-                  _buildChatTab("Amoureux", 'lover', Colors.pinkAccent),
+                  _buildChatTab(GameContentLocalization.ui(context, "Amoureux"), 'lover', Colors.pinkAccent),
                 ],
               ],
             ),
@@ -51695,7 +51961,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ? GameUiLocalization.tr(context, 'Mode 2v2 Alliés')
                             : GameUiLocalization.tr(
                               context,
-                              'Course individuelle',
+                              GameContentLocalization.ui(context, "Course individuelle"),
                             ),
                         style: const TextStyle(
                           fontSize: 10,
@@ -52013,7 +52279,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               )
                               : GameUiLocalization.tr(
                                 context,
-                                'Touchez un pion',
+                                GameContentLocalization.ui(context, "Touchez un pion"),
                               ),
                           style: TextStyle(
                             color:
@@ -52777,7 +53043,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final String oppName =
         (primaryOpponentId != null)
             ? getPlayerName(primaryOpponentId)
-            : 'Adversaire';
+            : GameContentLocalization.ui(context, "Adversaire");
 
     final int myUpper = calcUpper(myScores);
     final int myBonus = calcBonus(myScores);
@@ -52826,7 +53092,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       label: Text(
                         GameContentLocalization.ui(
                           context,
-                          "Face-à-face (côte à côte)",
+                          GameContentLocalization.ui(context, "Face-à-face (côte à côte)"),
                         ),
                         style: TextStyle(fontSize: 11),
                       ),
@@ -53413,7 +53679,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           ),
                         ),
 
-                        // Colonne "Adversaire" (visible en direct permanent !)
+                        // Colonne GameContentLocalization.ui(context, "Adversaire") (visible en direct permanent !)
                         if (primaryOpponentId != null)
                           Expanded(
                             flex: 4,
@@ -53469,7 +53735,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           Text(
                             GameContentLocalization.ui(
                               context,
-                              "TOTAL ADVERSAIRE",
+                              GameContentLocalization.ui(context, "TOTAL ADVERSAIRE"),
                             ),
                             style: TextStyle(
                               fontSize: 12,
@@ -53754,7 +54020,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     isMyTurn
                         ? GameUiLocalization.tr(
                           context,
-                          "À VOUS D'OUVRIR LE PLI !",
+                          GameContentLocalization.ui(context, "À VOUS D'OUVRIR LE PLI !"),
                         )
                         : GameContentLocalization.format(context, "Tour de {0}", [playerData[playerOrder[currentIndex]]?['name'] ?? '']),
                     style: TextStyle(
@@ -53847,7 +54113,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   Text(
                     GameUiLocalization.tr(
                       context,
-                      "PRENDRE L'ATOUT OU PASSER :",
+                      GameContentLocalization.ui(context, "PRENDRE L'ATOUT OU PASSER :"),
                     ),
                     style: const TextStyle(
                       color: Colors.white70,
@@ -55004,7 +55270,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               isMyTurn
                                   ? GameUiLocalization.tr(
                                     context,
-                                    'À votre tour',
+                                    GameContentLocalization.ui(context, "À votre tour"),
                                   )
                                   : "${GameUiLocalization.tr(context, 'Tour de')} ${players[currentPlayerId]?['name'] ?? '...'}",
                               style: TextStyle(
@@ -56488,7 +56754,7 @@ class OfflineMenuScreen extends StatelessWidget {
           _buildGameCard(
             context,
             "La Patate Chaude",
-            "Passe le téléphone avant qu'il n'explose !",
+            GameContentLocalization.ui(context, "Passe le téléphone avant qu'il n'explose !"),
             Icons.timer,
             HotPotatoLocalScreen(players: players),
             minPlayers: 2,
@@ -56544,7 +56810,7 @@ class OfflineMenuScreen extends StatelessWidget {
           _buildGameCard(
             context,
             "On se passe un objet rapidement",
-            "Une question drôle pour la personne qui aura l'objet !",
+            GameContentLocalization.ui(context, "Une question drôle pour la personne qui aura l'objet !"),
             Icons.phone_android,
             PassTheObjectGameScreen(players: players),
             minPlayers: 2,
@@ -57715,14 +57981,14 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
     ).firstMatch(normalized);
 
     if (match == null) {
-      return [normalized, 'Je passe'];
+      return [normalized, GameContentLocalization.ui(context, "Je passe")];
     }
 
     final first = normalized.substring(0, match.start).trim();
     final second = normalized.substring(match.end).trim();
 
     if (first.isEmpty || second.isEmpty) {
-      return [normalized, 'Je passe'];
+      return [normalized, GameContentLocalization.ui(context, "Je passe")];
     }
 
     return [first, second];
@@ -59342,11 +59608,11 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                   _includeMrWhite
                       ? GameContentLocalization.ui(
                         context,
-                        "Requiert 4+ joueurs",
+                        GameContentLocalization.ui(context, "Requiert 4+ joueurs"),
                       )
                       : GameContentLocalization.ui(
                         context,
-                        "Requiert 3+ joueurs",
+                        GameContentLocalization.ui(context, "Requiert 3+ joueurs"),
                       ),
                 ),
                 value: _includeMrWhite,
@@ -59361,7 +59627,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                   subtitle: Text(
                     GameContentLocalization.ui(
                       context,
-                      "Il devra donner le premier indice",
+                      GameContentLocalization.ui(context, "Il devra donner le premier indice"),
                     ),
                   ),
                   value: _mrWhiteStarts,
@@ -59524,7 +59790,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
     String content = "Tu es: $role\n\n";
     if (role == "Civil") content += "Ton mot est : $_wordCivil";
     if (role == "Infiltré") content += "Ton mot est : $_wordUndercover";
-    if (role == "Mr. White") content += "Tu n'as pas de mot. Bluffe !";
+    if (role == "Mr. White") content += GameContentLocalization.ui(context, "Tu n'as pas de mot. Bluffe !");
 
     showDialog(
       context: context,
@@ -59781,7 +60047,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
           content: Text(
             GameContentLocalization.ui(
               context,
-              "Cette réponse a déjà été donnée !",
+              GameContentLocalization.ui(context, "Cette réponse a déjà été donnée !"),
             ),
           ),
         ),
@@ -63350,7 +63616,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                 decoration: InputDecoration(
                   labelText: GameContentLocalization.ui(
                     context,
-                    "Difficulté des questions",
+                    GameContentLocalization.ui(context, "Difficulté des questions"),
                   ),
                 ),
               ),
@@ -63612,7 +63878,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
         Text(
           GameContentLocalization.ui(
             context,
-            "Il/Elle doit répondre à la question :",
+            GameContentLocalization.ui(context, "Il/Elle doit répondre à la question :"),
           ),
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
@@ -67229,7 +67495,7 @@ class _LoungeListScreenState extends State<LoungeListScreen>
                     ),
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.paste_rounded, color: Colors.amberAccent),
-                      tooltip: "Coller",
+                      tooltip: GameContentLocalization.ui(context, "Coller"),
                       onPressed: () async {
                         final clip = await Clipboard.getData('text/plain');
                         if (clip?.text != null) {
@@ -68597,7 +68863,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                   child: Text(
                                     GameUiLocalization.tr(
                                       context,
-                                      "Fermer le salon",
+                                      GameContentLocalization.ui(context, "Fermer le salon"),
                                     ),
                                   ),
                                 ),
@@ -68921,7 +69187,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                           child: Text(
                                             GameUiLocalization.tr(
                                               context,
-                                              "Annuler",
+                                              GameContentLocalization.ui(context, "Annuler"),
                                             ),
                                           ),
                                         ),
@@ -68944,7 +69210,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                           child: Text(
                                             GameContentLocalization.ui(
                                               context,
-                                              "Commencer",
+                                              GameContentLocalization.ui(context, "Commencer"),
                                             ),
                                           ),
                                         ),
@@ -68986,7 +69252,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                             )
                                             : GameContentLocalization.ui(
                                               context,
-                                              "Rejoindre",
+                                              GameContentLocalization.ui(context, "Rejoindre"),
                                             ),
                                       ),
                                     ),
@@ -70082,7 +70348,7 @@ class _SpookyTargetCardBack extends StatelessWidget {
                                 ? GameContentLocalization.ui(context, "CIBLÉE")
                                 : GameContentLocalization.ui(
                                   context,
-                                  "VISÉE !",
+                                  GameContentLocalization.ui(context, "VISÉE !"),
                                 ))
                             : "?"),
                     textAlign: TextAlign.center,
@@ -70330,23 +70596,23 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
   String _getSurvivorEquipment(String rank) {
     switch (rank) {
       case 'A':
-        return "Lampe";
+        return GameContentLocalization.ui(context, "Lampe");
       case '2':
-        return "Pied-de-biche";
+        return GameContentLocalization.ui(context, "Pied-de-biche");
       case '3':
-        return "Trousse soin";
+        return GameContentLocalization.ui(context, "Trousse soin");
       case '4':
-        return "Hache";
+        return GameContentLocalization.ui(context, "Hache");
       case '5':
-        return "Arbalète";
+        return GameContentLocalization.ui(context, "Arbalète");
       case '6':
-        return "Fusil";
+        return GameContentLocalization.ui(context, "Fusil");
       case '7':
-        return "Talkie";
+        return GameContentLocalization.ui(context, "Talkie");
       case '8':
-        return "Tronçonneuse";
+        return GameContentLocalization.ui(context, "Tronçonneuse");
       default:
-        return "Survie";
+        return GameContentLocalization.ui(context, "Survie");
     }
   }
 
@@ -71193,7 +71459,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         label: Text(
                           GameContentLocalization.ui(
                             context,
-                            "Envoyer le défi 🚀",
+                            GameContentLocalization.ui(context, "Envoyer le défi 🚀"),
                           ),
                           style: TextStyle(
                             color: Colors.white,
