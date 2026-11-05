@@ -25923,7 +25923,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             ).showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  "✨ Pack '${item.title}' activé (${item.words.length} éléments) !",
+                                                  GameContentLocalization.format(
+                                                    context,
+                                                    "✨ Pack '{0}' activé ({1} éléments) !",
+                                                    [item.title, item.words.length],
+                                                  ),
                                                 ),
                                                 backgroundColor:
                                                     Colors.green[800],
@@ -26552,7 +26556,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           ),
                                         ),
                                         child: Text(
-                                          "✨ ${_selectedAiThemes.length} combiné(s)",
+GameContentLocalization.format(
+context,
+"✨ {0} combiné(s)",
+[_selectedAiThemes.length],
+),
                                           style: const TextStyle(
                                             color: Colors.amberAccent,
                                             fontSize: 11,
@@ -26809,8 +26817,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     labelStyle: const TextStyle(fontSize: 12),
                                     hintText:
                                         _selectedAiThemes.isEmpty
-                                            ? "ex: Mythologie grecque, Objets insolites, Pirates..."
-                                            : "ex: Pas d'animaux dangereux, uniquement des films cultes...",
+                                            ? GameContentLocalization.ui(context, "ex: Mythologie grecque, Objets insolites, Pirates...")
+                                            : GameContentLocalization.ui(context, "ex: Pas d'animaux dangereux, uniquement des films cultes..."),
                                     hintStyle: const TextStyle(
                                       color: Colors.white30,
                                       fontSize: 12,
@@ -27185,7 +27193,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Blinds: $_pokerSmallBlind / $_pokerBigBlind",
+                        GameContentLocalization.format(
+                          context,
+                          "Blinds: {0} / {1}",
+                          [_pokerSmallBlind, _pokerBigBlind],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -27193,7 +27205,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         min: 5,
                         max: 100,
                         divisions: 19,
-                        label: "Petite Blind: ${_pokerSmallBlind.round()}",
+                        label: GameContentLocalization.format(context, "Petite Blind: {0}", [_pokerSmallBlind.round()]),
                         onChanged: (double value) {
                           setState(() {
                             _pokerSmallBlind = value.round();
@@ -27317,7 +27329,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             child: TextField(
                               controller: _petitBacCategoryController,
                               decoration: InputDecoration(
-                                labelText: "Ajouter une catégorie",
+                                labelText: GameContentLocalization.ui(context, "Ajouter une catégorie"),
                               ),
                               onSubmitted: (value) {
                                 if (value.trim().isNotEmpty &&
@@ -27499,7 +27511,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Total des rôles sélectionnés : $totalRolesCount. (Minimum 5 requis)",
+                        GameContentLocalization.format(context, "Total des rôles sélectionnés : {0}. (Minimum 5 requis)", [totalRolesCount]),
                         style: TextStyle(
                           color:
                               totalRolesCount < 5
@@ -27863,7 +27875,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           ),
                         ),
                         subtitle: Text(
-                          "Permet de jouer un +2 sur un +2 (ou +4 sur +2/+4) pour faire piocher plus.",
+                          GameContentLocalization.ui(
+                            context,
+                            "Permet de jouer un +2 sur un +2 (ou +4 sur +2/+4) pour faire piocher plus.",
+                          ),
                         ),
                         value: _unoStackDraws,
                         onChanged:
@@ -27918,7 +27933,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Nombre de tours (photos à deviner) : $_photoRouletteRounds",
+                        GameContentLocalization.format(
+                          context,
+                          "Nombre de tours (photos à deviner) : {0}",
+                          [_photoRouletteRounds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -27996,7 +28015,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         min: 5,
                         max: 30,
                         divisions: 25,
-                        label: "$_aoVMaxRounds tours",
+                        label: GameContentLocalization.format(context, "{0} tours", [_aoVMaxRounds]),
                         onChanged:
                             (v) => setState(() => _aoVMaxRounds = v.round()),
                       ),
@@ -28350,7 +28369,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     if (modes.contains('multi') || modes.contains('monde')) ...[
                       Divider(height: 30, thickness: 1, color: Colors.white24),
                       Text(
-                        "Communication (En ligne)",
+GameContentLocalization.ui(context, "Communication (En ligne)"),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
@@ -28374,8 +28393,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             children: [
                               SwitchListTile.adaptive(
                                 title: Text(
-                                  "Activer la Vidéo ${forceVideo ? '(Obligatoire)' : ''}",
-                                ),
+"${GameContentLocalization.ui(context, "Activer la Vidéo")} ${forceVideo ? '(${GameContentLocalization.ui(context, "Obligatoire")})' : ''}",
+),
                                 subtitle: Text(
                                   forceVideo
                                       ? GameContentLocalization.ui(
@@ -28479,7 +28498,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
                                   // --- NOUVEAU PLACEMENT DU SLIDER JOUEURS ---
                                   Text(
-                                    "Nombre de joueurs recherchés : ${_playerCount.toInt()}",
+GameContentLocalization.format(
+context,
+"Nombre de joueurs recherchés : {0}",
+[_playerCount.toInt()],
+),
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
@@ -29135,7 +29158,11 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                         color: Colors.cyanAccent,
                       ),
                       title: Text(
-                        "Jeu : $gameType",
+GameContentLocalization.format(
+context,
+"Jeu : {0}",
+[GameRulesLocalization.getGameTitle(context, gameType)],
+),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
@@ -29149,7 +29176,11 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    "Joueurs présents (${players.length})",
+GameContentLocalization.format(
+context,
+"Joueurs présents ({0})",
+[players.length],
+),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 10),
@@ -29232,7 +29263,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                                   ),
                                 )
                                 : Text(
-                                  isPlayerHost ? "Hôte du salon" : "Appuyer pour voir profil",
+                                  isPlayerHost ? GameContentLocalization.ui(context, "Hôte du salon") : GameContentLocalization.ui(context, "Appuyer pour voir profil"),
                                   style: const TextStyle(
                                     color: Colors.white38,
                                     fontSize: 11,
@@ -30977,7 +31008,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
                         ),
                         child: Text(
-                          "👀 $accuserName soupçonne $targetName",
+GameContentLocalization.format(
+context,
+"👀 {0} soupçonne {1}",
+[accuserName, targetName],
+),
                           style: const TextStyle(color: Colors.amberAccent, fontSize: 11),
                         ),
                       );
@@ -31745,7 +31780,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     int rank = entry.key + 1;
                     String name = entry.value.value['name'];
                     int score = entry.value.value['score'];
-                    return Text("$rank. $name: $score points");
+                    return Text(
+GameContentLocalization.format(
+context,
+"{0}. {1}: {2} points",
+[rank, name, score],
+),
+);
                   }),
                   SizedBox(height: 20),
                   ElevatedButton(
@@ -32607,7 +32648,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           ),
           SizedBox(height: 16),
           Text(
-            "En attente des autres joueurs ($playedCount / $nonJudgeCount)...",
+GameContentLocalization.format(
+context,
+"En attente des autres joueurs ({0} / {1})...",
+[playedCount, nonJudgeCount],
+),
             style: TextStyle(color: Colors.white54),
           ),
         ],
@@ -32750,7 +32795,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
                 ),
                 child: Text(
-                  "Le Juge hésite sur : « $inspectedCard »",
+GameContentLocalization.format(
+context,
+"Le Juge hésite sur : « {0} »",
+[inspectedCard],
+),
                   style: const TextStyle(
                     color: Colors.amberAccent,
                     fontSize: 12,
@@ -33738,7 +33787,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "${hand.length} cartes restantes",
+GameContentLocalization.format(
+context,
+"{0} cartes restantes",
+[hand.length],
+),
               style: const TextStyle(color: Colors.white70, fontSize: 11),
             ),
             const SizedBox(height: 4),
@@ -33753,7 +33806,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "$count cartes restantes",
+GameContentLocalization.format(
+context,
+"{0} cartes restantes",
+[count],
+),
               style: const TextStyle(color: Colors.white70, fontSize: 11),
             ),
             const SizedBox(height: 4),
@@ -33769,7 +33826,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "${handUno.length} cartes restantes",
+GameContentLocalization.format(
+context,
+"{0} cartes restantes",
+[handUno.length],
+),
               style: const TextStyle(color: Colors.white70, fontSize: 11),
             ),
             const SizedBox(height: 4),
@@ -33787,7 +33848,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Jetons: $chips \$ | Mise: $bet \$",
+GameContentLocalization.format(
+context,
+"Jetons: {0} \$ | Mise: {1} \$",
+[chips, bet],
+),
               style: const TextStyle(color: Colors.amberAccent, fontSize: 11),
             ),
             const SizedBox(height: 4),
@@ -33818,7 +33883,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "${ramiHand.length} cartes restantes",
+GameContentLocalization.format(
+context,
+"{0} cartes restantes",
+[ramiHand.length],
+),
               style: const TextStyle(color: Colors.white70, fontSize: 11),
             ),
             const SizedBox(height: 4),
@@ -33879,7 +33948,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Total: $oppTotal pts",
+GameContentLocalization.format(
+context,
+"Total: {0} pts",
+[oppTotal],
+),
                       style: const TextStyle(
                         color: Colors.amberAccent,
                         fontWeight: FontWeight.bold,
@@ -33887,7 +33960,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                     Text(
-                      "Section sup: $oppUpper/63 pts ${oppBonus > 0 ? '(+35)' : ''}",
+GameContentLocalization.format(
+context,
+"Section sup: {0}",
+["$oppUpper/63 pts ${oppBonus > 0 ? '(+35)' : ''}"],
+),
                       style: TextStyle(
                         color:
                             oppBonus > 0 ? Colors.greenAccent : Colors.white70,
@@ -33895,7 +33972,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                     ),
                     Text(
-                      "${oppScores.length}/13 remplies",
+GameContentLocalization.format(
+context,
+"{0}/13 remplies",
+[oppScores.length],
+),
                       style: const TextStyle(
                         color: Colors.white54,
                         fontSize: 11,
@@ -35421,7 +35502,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               const Spacer(),
               // Statut manche
               Text(
-                "Manche ${(gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1} / ${(gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4}",
+GameContentLocalization.format(
+context,
+"Manche {0} / {1}",
+[(gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1, (gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4],
+),
                 style: const TextStyle(
                   color: Colors.white54,
                   fontSize: 11,
@@ -35543,7 +35628,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     const Icon(Icons.touch_app, color: Colors.redAccent, size: 16),
                     const SizedBox(width: 8),
                     Text(
-                      "⚠️ $bName a le doigt sur le BUZZER !",
+                      GameContentLocalization.format(context, "⚠️ {0} a le doigt sur le BUZZER !", [bName]),
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -36177,7 +36262,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              "${players[pId]?['name']} (Sauvé !)",
+GameContentLocalization.format(
+context,
+"{0} (Sauvé !)",
+[players[pId]?['name'] ?? ''],
+),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
@@ -36219,7 +36308,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Main de $targetName (${targetHand.length} cartes)",
+GameContentLocalization.format(
+context,
+"Main de {0} ({1} cartes)",
+[targetName, targetHand.length],
+),
                         style: const TextStyle(
                           color: Colors.white70,
                           fontSize: 13,
@@ -36536,7 +36629,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
-                                  "${resolvePlayerName(currentPlayerId)} a sélectionné $liveCount carte${liveCount > 1 ? 's' : ''}...",
+GameContentLocalization.format(
+context,
+"{0} a sélectionné {1} carte{2}...",
+[resolvePlayerName(currentPlayerId), liveCount, liveCount > 1 ? 's' : ''],
+),
                                   style: const TextStyle(
                                     color: Colors.amberAccent,
                                     fontSize: 12,
@@ -36567,7 +36664,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Joué par ${resolvePlayerName(lastPlay['playedBy'] ?? '')}",
+GameContentLocalization.format(
+context,
+"Joué par {0}",
+[resolvePlayerName(lastPlay['playedBy'] ?? '')],
+),
                     style: const TextStyle(fontSize: 12, color: Colors.white70),
                   ),
                 ] else
@@ -36643,7 +36744,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             _selectedBigTwoCards.isNotEmpty
                                 ? () => bigTwoPlay()
                                 : null,
-                        child: Text("Jouer (${_selectedBigTwoCards.length})"),
+                        child: Text(
+                        GameContentLocalization.format(
+                          context,
+                          "Jouer ({0})",
+                          [_selectedBigTwoCards.length],
+                        ),
+                      ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                         ),
@@ -36986,7 +37093,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             const Icon(Icons.touch_app, color: Colors.amberAccent, size: 14),
                             const SizedBox(width: 6),
                             Text(
-                              "${players[currentPlayerId]?['name'] ?? 'L\'adversaire'} a sélectionné son pion et réfléchit...",
+                              GameContentLocalization.format(context, "{0} a sélectionné son pion et réfléchit...", [players[currentPlayerId]?['name'] ?? GameContentLocalization.ui(context, "L'adversaire")]),
                               style: const TextStyle(
                                 color: Colors.amberAccent,
                                 fontSize: 12,
@@ -38552,7 +38659,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     const Icon(Icons.warning_amber_rounded, color: Colors.redAccent, size: 16),
                     const SizedBox(width: 8),
                     Text(
-                      "⚠️ $aName prépare une attaque ($attackCard) contre un joueur !",
+                      GameContentLocalization.format(
+                        context,
+                        "⚠️ {0} prépare une attaque ({1}) contre un joueur !",
+                        [aName, attackCard],
+                      ),
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -40498,7 +40609,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               const Icon(Icons.gps_fixed, color: Colors.redAccent, size: 12),
                               const SizedBox(width: 4),
                               Text(
-                                "🚨 RADAR : Case ${String.fromCharCode(65 + enemyAimedIndex ~/ 10)}${enemyAimedIndex % 10 + 1} ciblée !",
+                                "🚨 " + GameContentLocalization.format(context, "RADAR : Case {0} ciblée !", ["${String.fromCharCode(65 + enemyAimedIndex ~/ 10)}${enemyAimedIndex % 10 + 1}"]),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -41383,7 +41494,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               const Icon(Icons.palette_rounded, color: Colors.amberAccent, size: 16),
                               const SizedBox(width: 8),
                               Text(
-                                "🌈 $chooserName hésite et choisit la couleur...",
+                                GameContentLocalization.format(context, "🌈 {0} hésite et choisit la couleur...", [chooserName]),
                                 style: const TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 12,
@@ -41834,7 +41945,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            "Erreur: ${e.toString().replaceAll('Exception: ', '')}",
+                            GameContentLocalization.format(context, "Erreur : {0}", [e.toString().replaceAll('Exception: ', '')]),
                           ),
                         ),
                       );
@@ -43685,7 +43796,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      gameData['currentQuestion'] ?? "Question...",
+                      gameData['currentQuestion'] ?? GameContentLocalization.ui(context, "Question..."),
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
@@ -43973,7 +44084,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _buildAnimatedTruthButton(
-                      label: "VRAI",
+                      label: GameContentLocalization.ui(context, "VRAI"),
                       color: Colors.green,
                       icon: Icons.thumb_up,
                       onTap:
@@ -43997,7 +44108,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                               },
                     ),
                     _buildAnimatedTruthButton(
-                      label: "FAUX",
+                      label: GameContentLocalization.ui(context, "FAUX"),
                       color: Colors.red,
                       icon: Icons.thumb_down,
                       onTap:
@@ -44131,7 +44242,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                             child: Center(
                               child: Text(
-                                "Tu as voté : ${myVote!.toUpperCase()}",
+GameContentLocalization.format(
+context,
+"Tu as voté : {0}",
+[myVote!.toUpperCase()],
+),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color:
@@ -44543,7 +44658,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
                     ),
                     child: Text(
-                      "Le Juge lit : « $inspectedAnswer »",
+GameContentLocalization.format(
+context,
+"Le Juge lit : « {0} »",
+[inspectedAnswer],
+),
                       style: const TextStyle(
                         color: Colors.amberAccent,
                         fontSize: 12,
@@ -44855,8 +44974,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       icon: Icon(Icons.replay),
                       label: Text(
                         hasVoted
-                            ? "En attente (${restartVotes.length}/${players.length})"
-                            : "REJOUER",
+                            ? GameContentLocalization.format(context, "En attente ({0}/{1})", [restartVotes.length, players.length])
+                            : GameContentLocalization.ui(context, "REJOUER"),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: hasVoted ? Colors.grey : Colors.green,
@@ -44947,7 +45066,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             (gameData['answers'] as Map<String, dynamic>?)?[winnerId] ??
             'aucune réponse';
         resultText =
-            "$winnerName a été choisi pour sa réponse et gagne 1 point !";
+            GameContentLocalization.format(context, "{0} a été choisi pour sa réponse et gagne 1 point !", [winnerName]);
         extraInfo = Text(
           '"${winningAnswer}"',
           style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white70),
@@ -44982,7 +45101,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Histoire de $storyOwnerName (était $actualTruth)',
+                              GameContentLocalization.format(context, "Histoire de {0} (était {1})", [storyOwnerName, actualTruth]),
                               style: Theme.of(
                                 context,
                               ).textTheme.titleLarge?.copyWith(
@@ -45093,7 +45212,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             ),
             if (undercoverId != null)
               Text(
-                "Le mot de l'Infiltré (${undercoverName}) était : '${wordPair[1]}'",
+GameContentLocalization.format(
+context,
+"Le mot de l'Infiltré ({0}) était : '{1}'",
+[undercoverName, wordPair[1]],
+),
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color: Colors.white70,
@@ -45101,7 +45224,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
             if (mrWhiteId != null)
               Text(
-                "Mr. White (${mrWhiteName}) n'avait pas de mot.",
+GameContentLocalization.format(
+context,
+"Mr. White ({0}) n'avait pas de mot.",
+[mrWhiteName],
+),
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color: Colors.white70,
@@ -45296,8 +45423,12 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           players[card['ownerId']]?['name'] ?? 'Joueur';
                       return Chip(
                         label: Text(
-                          '$ownerName : ${card['type'] == 'Crane' ? 'Crâne' : 'Rose'}',
-                        ),
+GameContentLocalization.format(
+context,
+"{0} : {1}",
+[ownerName, card['type'] == 'Crane' ? GameContentLocalization.ui(context, "Crâne") : GameContentLocalization.ui(context, "Rose")],
+),
+),
                         backgroundColor:
                             card['type'] == 'Crane'
                                 ? Colors.redAccent.withOpacity(0.3)
@@ -45417,7 +45548,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              resultText,
+              GameMessageLocalization.tr(context, resultText),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
@@ -45529,7 +45660,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         ),
         SizedBox(height: 20),
         Text(
-          message,
+          GameContentLocalization.ui(context, message),
           style: TextStyle(color: Colors.white70, fontStyle: FontStyle.italic),
           textAlign: TextAlign.center,
         ),
@@ -46255,7 +46386,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             if (mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("Erreur: ${e.toString()}"),
+                                  content: Text(GameContentLocalization.format(context, "Erreur : {0}", [e.toString()])),
                                 ),
                               );
                             }
@@ -51762,7 +51893,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 ],
                 if (amILover && lovers.length == 2) ...[
                   const SizedBox(width: 4),
-                  _buildChatTab('Amoureux', 'lover', Colors.pinkAccent),
+                  _buildChatTab(GameContentLocalization.ui(context, "Amoureux"), 'lover', Colors.pinkAccent),
                 ],
               ],
             ),
@@ -51794,7 +51925,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                           style: const TextStyle(fontSize: 11, color: Colors.white),
                           children: [
                             TextSpan(
-                              text: isMine ? "Moi: " : "$senderName: ",
+                              text: isMine ? "${GameContentLocalization.ui(context, "Moi")}: " : "$senderName: ",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color:
@@ -51828,7 +51959,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       style: const TextStyle(fontSize: 12, color: Colors.white),
                       decoration: InputDecoration(
                         hintText:
-                            "Écrire au ${_selectedChatType == 'wolf' ? 'meute' : 'village'}...",
+                            GameContentLocalization.format(
+                              context,
+                              "Écrire au {0}...",
+                              [_selectedChatType == 'wolf' ? GameContentLocalization.ui(context, "meute") : GameContentLocalization.ui(context, "village")],
+                            ),
                         hintStyle: const TextStyle(
                           color: Colors.white30,
                           fontSize: 11,
@@ -53553,7 +53688,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                             ),
                           ),
                           Text(
-                            "GRILLE DE $oppName ($oppTotal pts)",
+GameContentLocalization.format(
+context,
+"GRILLE DE {0} ({1} pts)",
+[oppName, oppTotal],
+),
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -59032,7 +59171,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
 
   void _flipCoin() {
     Random random = Random();
-    String result = random.nextBool() ? "Pile" : "Face";
+    String result = random.nextBool() ? GameContentLocalization.ui(context, "Pile") : GameContentLocalization.ui(context, "Face");
     bool won = (_coinFlipChoice == result);
 
     int xpGain = won ? 10 : 15;
@@ -59266,7 +59405,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           ),
           onPressed: () {
-            _coinFlipChoice = "Pile";
+            _coinFlipChoice = GameContentLocalization.ui(context, "Pile");
             _flipCoin();
           },
           child: Text(
@@ -59281,7 +59420,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           ),
           onPressed: () {
-            _coinFlipChoice = "Face";
+            _coinFlipChoice = GameContentLocalization.ui(context, "Face");
             _flipCoin();
           },
           child: Text(
@@ -61701,7 +61840,11 @@ class _WhoIsMostLikelyLocalScreenState
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        "$votesReceived ${votesReceived > 1 ? 'votes' : 'vote'}",
+GameContentLocalization.format(
+context,
+"{0} {1}",
+[votesReceived, votesReceived > 1 ? GameContentLocalization.ui(context, "votes") : GameContentLocalization.ui(context, "vote")],
+),
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -61717,7 +61860,11 @@ class _WhoIsMostLikelyLocalScreenState
           const Spacer(),
           Center(
             child: Text(
-              "Décision unanime du groupe pour ${winners.join(', ')} !",
+GameContentLocalization.format(
+context,
+"Décision unanime du groupe pour {0} !",
+[winners.join(', ')],
+),
               style: const TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white70,
@@ -62161,7 +62308,11 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 8),
               Text(
-                "$_guessesLeft essais disponibles",
+GameContentLocalization.format(
+context,
+"{0} essais disponibles",
+[_guessesLeft],
+),
                 style: TextStyle(color: Colors.white70),
               ),
               SizedBox(height: 24),
@@ -64919,7 +65070,11 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                   else
                     const SizedBox.shrink(),
                   Text(
-                    "Trouvés : ${_roundHistory.where((e) => e['guessed'] == true).length}",
+GameContentLocalization.format(
+context,
+"Trouvés : {0}",
+[_roundHistory.where((e) => e['guessed'] == true).length],
+),
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -65623,7 +65778,11 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
             border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
           ),
           child: Text(
-            "PIOCHE (${_deck.length + 1}) • BUT : $_targetScore",
+GameContentLocalization.format(
+context,
+"PIOCHE ({0}) • BUT : {1}",
+[_deck.length + 1, _targetScore],
+),
             style: const TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w900,
@@ -67402,9 +67561,15 @@ class _LoungeListScreenState extends State<LoungeListScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Erreur lors de la connexion : $e"),
-            backgroundColor: Colors.redAccent,
-          ),
+content: Text(
+GameContentLocalization.format(
+context,
+"Erreur lors de la connexion : {0}",
+[e],
+),
+),
+backgroundColor: Colors.redAccent,
+),
         );
       }
     } finally {
@@ -67904,8 +68069,8 @@ class _LoungeListScreenState extends State<LoungeListScreen>
                         const SizedBox(height: 12),
                         Text(
                           _searchCtrl.text.isNotEmpty || _selectedTheme != 'Tous'
-                              ? "Aucun salon ne correspond à vos filtres."
-                              : "Aucun salon public disponible.\nCréez le vôtre ci-dessous !",
+                              ? GameContentLocalization.ui(context, "Aucun salon ne correspond à vos filtres.")
+                              : GameContentLocalization.ui(context, "Aucun salon public disponible.\nCréez le vôtre ci-dessous !"),
                           textAlign: TextAlign.center,
                           style: const TextStyle(color: Colors.white54, height: 1.4, fontSize: 14),
                         ),
@@ -68029,7 +68194,11 @@ class _LoungeListScreenState extends State<LoungeListScreen>
                           Icon(Icons.people, size: 16, color: isFull ? Colors.redAccent : Colors.white70),
                           const SizedBox(height: 2),
                           Text(
-                            "$activeCount / $maxPlayers",
+GameContentLocalization.format(
+context,
+"{0} / {1}",
+[activeCount, maxPlayers],
+),
                             style: TextStyle(
                               color: isFull ? Colors.redAccent : Colors.white70,
                               fontWeight: FontWeight.bold,
@@ -68815,8 +68984,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(pendingGame['gameName'] ?? 'Partie'),
-        content: Text("${(pendingGame['joinedPlayers'] as List? ?? []).length} joueur(s) prêt(s)"),
+        title: Text(GameContentLocalization.ui(context, pendingGame['gameName'] ?? 'Partie')),
+        content: Text(GameContentLocalization.format(context, "{0} joueur(s) prêt(s)", [(pendingGame['joinedPlayers'] as List? ?? []).length])),
         actions: [
           if (isHost) ...[
             TextButton(
@@ -68841,12 +69010,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     .doc(pendingGame['gameCode'])
                     .update({'gameState': 'playing'});
               },
-              child: const Text("Lancer"),
+              child: Text(GameContentLocalization.ui(context, "Lancer")),
             ),
           ] else ...[
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text("Fermer"),
+              child: Text(GameContentLocalization.ui(context, "Fermer")),
             ),
           ],
         ],
@@ -69238,8 +69407,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                   ),
                                   SizedBox(height: 10),
                                   Text(
-                                    "${joinedPlayers.length} joueur(s) prêts",
-                                  ),
+GameContentLocalization.format(context, "{0} joueur(s) prêts", [joinedPlayers.length]),
+),
                                   SizedBox(height: 10),
                                   if (isGameFinished)
                                     Padding(
@@ -71525,7 +71694,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         const Icon(Icons.edit, color: Colors.amber, size: 20),
                         const SizedBox(width: 8),
                         Text(
-                          "Rédigez l'${typeLabel.toLowerCase()} pour $currentPlayerName",
+GameContentLocalization.format(
+context,
+"Rédigez l'{0} pour {1}",
+[typeLabel.toLowerCase(), currentPlayerName],
+),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -72706,7 +72879,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               children: [
                                 Flexible(
                                   child: Text(
-                                    isMe ? "$pName (Moi)" : pName,
+                                    isMe ? "$pName (${GameContentLocalization.ui(context, 'Moi')})" : pName,
                                     style: TextStyle(
                                       fontWeight:
                                           isMe
@@ -72820,8 +72993,8 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               ),
                               label: Text(
                                 hasVoted
-                                    ? "PRÊT ($readyCount/$totalPlayers)"
-                                    : "REJOUER (GARDER PTS)",
+                                    ? "${GameContentLocalization.ui(context, 'PRÊT')} ($readyCount/$totalPlayers)"
+                                    : GameContentLocalization.ui(context, "REJOUER (GARDER PTS)"),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12.5,
