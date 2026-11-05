@@ -335,7 +335,7 @@ Gribouillis est un jeu de dessin inspiré du "téléphone arabe", où les idées
 -   **But** : Créer des Å“uvres d'art collectives surprenantes et amusantes.
 
 **3. Mode Brise-Glace (Interaction Créative)**
--   **Écriture** : Chaque joueur écrit un thème personnel (ex: "Mon animal préféré").
+-   **Écriture** : Chaque joueur écrit un thème personnel (ex: AppLocalizations.of(context)!.monAnimalPrefere).
 -   **Dessin** : Chaque joueur reçoit les thèmes de **tous les autres joueurs** et doit les dessiner.
 -   **But** : Idéal pour briser la glace, découvrir les goûts des autres et lancer la créativité de manière collaborative et légère.
 """,
@@ -442,17 +442,15 @@ Le jeu continue tant qu’il reste au moins 2 joueurs avec des jetons.
 Le gagnant final est celui qui prend tous les jetons.
 """,
     'Le Juge':
-        "Un joueur est désigné comme 'cible'. Les autres joueurs répondent anonymement à une question à son sujet. La cible choisit sa réponse préférée, et l'auteur de cette réponse gagne un point.",
-    'Qui Pourrait le Plus ?':
-        "Une situation est présentée. Tous les joueurs votent pour la personne la plus susceptible de faire cette chose. Le joueur qui reçoit le plus de votes gagne un point (un honneur douteux !).",
-    'Le Menteur':
-        "Mode Classique: Une question est posée. Un joueur est secrètement désigné 'menteur' et doit inventer une réponse. Les autres disent la vérité. Votez pour démasquer le menteur.\n\nMode Simplifié: Chacun raconte une anecdote (vraie ou false) en réponse à un thème, puis déclare secrètement sa véracité. Ensuite, tout le monde vote 'Vrai' ou 'Faux' pour chaque histoire. Vous gagnez des points en devinant correctement et en trompant les autres.",
+        AppLocalizations.of(context)!.unJoueurEstDesigneComme,
+    'Qui Pourrait le Plus ?AppLocalizations.of(context)!.uneSituationEstPresenteeTousLe Menteur':
+        AppLocalizations.of(context)!.modeClassiqueUneQuestionEst,
     'Infiltré & Mr. White':
-        "La plupart des joueurs (Civils) recevront un mot. Un 'Infiltré' reçoit un mot similaire. Et un 'Mr. White' ne reçoit AUCUN mot. Chacun donne un mot-indice en **30 secondes**. Le but est de démasquer les imposteurs par un vote. Si un Civil est éliminé, les imposteurs gagnent.",
+        AppLocalizations.of(context)!.laPlupartDesJoueursCivils,
     'Synonyme ou Banni':
-        "Un mot est affiché. Chaque joueur doit secrètement soumettre un synonyme. Toutes les réponses sont révélées, puis les joueurs votent pour 'bannir' la proposition la moins pertinente. Le joueur banni perd la manche.",
+        AppLocalizations.of(context)!.unMotEstAfficheChaque,
     'Le Jeu des Catégories':
-        "Plusieurs catégories sont sélectionnées (3 minimum). Une catégorie s'affiche (ex: Marque de voiture). Chacun son tour, chaque joueur doit écrire un mot valide (ex: Volvo, Citroën) avant la fin de son chrono. Si un joueur ne répond pas à temps, il gagne 1 point. C'est celui qui a le moins de points qui gagne.",
+        AppLocalizations.of(context)!.plusieursCategoriesSontSelectionnees3,
     'Action ou Vérité': """
 **But du jeu**
 Gagner le plus d'XP en réalisant des actions et en répondant à des vérités !
@@ -471,19 +469,19 @@ Gagner le plus d'XP en réalisant des actions et en répondant à des vérités 
 - Le bouton "Fin de manche" permet de clôturer la partie
 """,
     'Jeu de la Pièce':
-        "Une question secrète est affichée. Le joueur désigné choisit 'Pile' ou 'Face'. Si son choix est incorrect, il doit révéler la question et y répondre honnêtement.",
+        AppLocalizations.of(context)!.uneQuestionSecreteEstAffichee,
     'Le Dilemme':
-        "Le joueur désigné doit répondre à un dilemme cornélien. Il n'y a pas de bonne ou de mauvaise réponse, juste des choix difficiles !",
+        AppLocalizations.of(context)!.leJoueurDesigneDoitRepondre,
     'Codenames':
-        "Deux équipes s’affrontent. Chaque équipe doit retrouver tous ses mots parmi 25, grâce aux indices donnés par son maître-espion. Attention : un mot “assassinâ€Â fait perdre immédiatement ! En mode local, le maître-espion regarde la carte sur l'écran et guide son équipe. En multijoueur, le jeu gère les rôles et la carte-clé.",
+        AppLocalizations.of(context)!.deuxEquipesSaffrontentChaqueEquipe,
     'Time\'s Up':
-        "Faire deviner un maximum de cartes en 3 manches (description libre, un mot, mime), avec de moins en moins d’indices. L'équipe avec le plus de points gagne. En mode local, le téléphone passe de joueur en joueur pour les devinettes. En multijoueur, le jeu gère les rôles, les tours et le chronomètre.",
+        AppLocalizations.of(context)!.faireDevinerUnMaximumDe,
     'On se passe un objet rapidement':
-        "Passez le téléphone de main en main le plus vite possible. Quand la musique ou le chrono s'arrête, la personne qui a le téléphone doit répondre à une question drôle ou piquante. Idéal pour briser la glace !",
+        AppLocalizations.of(context)!.passezLeTelephoneDeMain,
     'Devine Tête':
-        "Un joueur tient le téléphone sur son front. Les autres décrivent le mot affiché. Inclinez le téléphone vers le bas pour 'deviné', vers le haut pour 'passer'.",
+        AppLocalizations.of(context)!.unJoueurTientLeTelephone,
     'Petit Bac':
-        "Trouvez des mots correspondant à des catégories données, commençant par une lettre spécifique. Marquez des points pour les réponses uniques et correctes.",
+        AppLocalizations.of(context)!.trouvezDesMotsCorrespondantA,
     'Président': """
 **But du jeu**
 Le but est d’être le premier à se débarrasser de toutes ses cartes pour devenir Président. Le dernier joueur avec des cartes en main devient le Trou du cul.
@@ -589,7 +587,7 @@ Faire deviner un maximum de mots mystères à votre coéquipier, en écrivant ch
 -   Indices identiques: Si 2 joueurs écrivent "animal" pour "Chat", "animal" est éliminé.
 """,
     'Le Roi des Mèmes':
-        "Chaque joueur reçoit le même mème. Il doit ajouter la description la plus drôle. Ensuite, toutes les descriptions sont révélées aux autres joueurs qui votent pour la plus drôle. L'auteur de la description qui reçoit le plus de votes gagne un point.",
+        AppLocalizations.of(context)!.chaqueJoueurRecoitLeMeme,
 
     'Loup-Garou': """
 **But du jeu**
@@ -647,43 +645,43 @@ Le jeu alterne entre des phases de **nuit** et de **jour**.
 -   Le Pyromancien doit être vivant au matin pour que ses tonneaux explosent.
 """,
     'Loup Noir':
-        "Vaincre les villageois est son objectif. Durant la nuit il se réveille avec les autres loups-garous. Une fois dans la partie, il pourra changer leur victime en loup-garou. Le joueur infecté conserve son rôle et ses pouvoirs, et cumule les propriétés d'un Loup-Garou : il se réveille la nuit avec les loups pour voter, et gagne la partie en éliminant l'ensemble des innocents. La voyante ne peut pas connaître son identité de Loup-Garou, ce qui rend le joueur plus difficile à identifier et plus puissant. A l’inverse, le Mentaliste et le Fossoyeur peuvent trouver l’infecté grâce à leur pouvoir.",
+        AppLocalizations.of(context)!.vaincreLesVillageoisEstSon,
     'Loup Bavard':
-        "Vaincre les villageois est son objectif. Chaque jour, il reçoit un message lui indiquant un mot qu'il doit prononcer avant le coucher du soleil, s'il veut rester en vie. Le Loup Bavard est donc un Loup-Garou avec une contrainte supplémentaire. Il meurt à la fin de la journée s'il n'a pas réussi à placer son mot. Il n'a aucun mot à placer lorsque le Dictateur prend le pouvoir, sauf si le pouvoir est pris au deuxième tour lors de l'élection du maire. Si le Dictateur meurt la nuit ou au matin alors qu’il avait activé son pouvoir, le Loup Bavard n’a pas de mot !",
+        AppLocalizations.of(context)!.vaincreLesVillageoisEstSon1,
     'Loup Blanc':
-        "Finir seul survivant est son objectif, il se réveille la nuit avec les autres loups-garous qui le croient allié. Une nuit sur deux, il peut dévorer un autre joueur de son choix. À partir de la deuxième nuit et toutes les deux nuits, le Loup Blanc a la possibilité de dévorer un joueur ou un Loup-Garou durant son vote de Loup Blanc (après la sorcière). Le pouvoir du Loup Blanc est supérieur aux rôles de protection. Un Garde protégé, ou un Chaperon Rouge, seront vulnérables face au Loup Blanc. Même si le Loup Blanc venait à être infecté par le Loup Noir, il doit gagner seul. Si le Loup Blanc est en couple, il doit gagner avec son partenaire car il ne pourra jamais être seul survivant.",
+        AppLocalizations.of(context)!.finirSeulSurvivantEstSon,
     'Mercenaire':
-        "Le premier jour, l'objectif du mercenaire est d'éliminer la cible qui lui est attribuée. S'il y parvient, il gagne seul la partie instantanément. Sinon, il devient villageois. Le pseudo de la cible du Mercenaire est indiqué au lever du jour. Le premier jour, le Mercenaire a la possibilité de voter à la dernière seconde en cas d'égalité sur sa cible pour influencer le vote en sa faveur et gagner la partie instantanément. Même en couple, le Mercenaire a la possibilité de gagner seul au premier tour.",
+        AppLocalizations.of(context)!.lePremierJourLObjectif,
     'Rat Malade':
-        "Son objectif est de contaminer tous les joueurs. Chaque nuit, il peut contaminer deux joueurs. Il gagne la partie lorsque tous les joueurs sont atteints par la maladie. Les joueurs contaminés connaissent l'identité de tous les autres joueurs contaminés. Le Rat Malade ne peut pas se contaminer lui-même.",
+        AppLocalizations.of(context)!.sonObjectifEstDeContaminer,
     'Simple Villageois':
-        "Son objectif est de vaincre les Loups-Garous. Sa parole est son seul pouvoir de persuasion pour éliminer les Loups-Garous. En cas d'égalité lors du vote journalier et si aucun maire n'est élu, aucun joueur ne meurt. Les votes des Simples Villageois peuvent être décisifs dans la lutte contre les Loups-Garous.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre,
     'Voyante':
-        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, elle peut connaître le rôle d'un joueur qu'elle aura choisi. Elle doit aider les innocents sans se faire démasquer. La Voyante ne peut pas détecter si un joueur est infecté par le Loup Noir, elle n'a accès qu'à son rôle. Copier le texte indiquant le rôle du joueur observé est considéré comme anti-jeu.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre1,
     'Sorcière':
-        "Son objectif est de vaincre les Loups-Garous. Elle se réveille chaque nuit et peut utiliser une de ses deux potions : soigner la victime des Loups-Garous, ou tuer quelqu’un. Elle ne possède qu'un exemplaire de chaque potion. Sa potion de mort outrepasse la protection du Garde ou du Chasseur sur le Chaperon Rouge.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre2,
     'Petite Fille':
-        "Son objectif est de vaincre les Loups-Garous. Elle se lève la nuit au moment du choix des Loups-Garous pour espionner leurs échanges. La Petite Fille voit l'ensemble des messages écrits par les Loups la nuit. Cependant, ceux-ci sont anonymisés par un pseudo et un avatar aléatoire.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre3,
     'Chasseur':
-        "Son objectif est de vaincre les Loups-Garous. Lorsque le Chasseur meurt, il a le pouvoir d'amener un autre joueur avec lui dans sa tombe.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre4,
     'Garde':
-        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, il peut protéger un joueur différent contre une attaque des Loups-Garous. Le Garde ne peut pas protéger la même personne consécutivement. Il peut s'auto-protéger. Le joueur protégé reste vulnérable à d'autres attaques telles que la potion de mort de la Sorcière.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre5,
     'Cupidon':
-        "Son objectif est de vaincre les Loups-Garous. La première nuit, il désigne deux amoureux. Si l'un meurt, l'autre le suivra dans sa tombe. Cupidon a pour seul pouvoir de nommer les deux amoureux. Une fois désignés, il devient similaire à un Simple Villageois. Il peut s'auto-désigner en tant qu'amoureux. Les deux amoureux peuvent appartenir à des camps différents. Si un Loup est couplé à un Villageois, ils devront alors éliminer l'ensemble des joueurs pour remporter la partie. Les deux amoureux peuvent discuter à tout moment à travers un chat privé activable via le bouton à droite de l'endroit où l'on écrit des messages. Le Cupidon ne gagne pas avec le couple mais avec le village ou bien les loups s’il est infecté.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre6,
     'Mentaliste':
-        "Son objectif est de vaincre les Loups-Garous. Il peut percevoir l'issue du vote du village 30 secondes avant sa fin. Il peut ainsi déterminer si le vote majoritaire du village cible un Loup-Garou ou non, et influencer les joueurs à changer leur vote. Contrairement à la Voyante, il peut détecter un joueur infecté par le Loup Noir. En tant que Mentaliste, tu ne peux pas détecter le rat et les contaminés.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre7,
     'Nécromancien':
-        "Vaincre les loups-garous est son objectif. La nuit, il peut communiquer avec les morts, afin d'en tirer des informations capitales...",
+        AppLocalizations.of(context)!.vaincreLesLoupsGarousEst,
     'Fossoyeur':
-        "Vaincre les loups-garous est son objectif. À sa mort, le fossoyeur creuse la tombe d'un joueur qu'il choisit et d'un joueur du camp opposé. Les noms de ces deux joueurs seront annoncés...",
+        AppLocalizations.of(context)!.vaincreLesLoupsGarousEst1,
     'Dictateur':
-        "Vaincre les loups-garous est son objectif. Il peut s'emparer du pouvoir de vote du village une fois dans la partie. S'il exécute un loup-garou, il devient Maire, sinon, il meurt. Après avoir décidé de faire un coup d'État, le Dictateur s'empare du vote au lever du jour, ou après l’élection du maire le deuxième jour.. Si le Dictateur meurt la nuit ou au matin alors qu’il avait activé son pouvoir, le Loup Bavard n’a pas de mot !",
+        AppLocalizations.of(context)!.vaincreLesLoupsGarousEst2,
     'Chaperon Rouge':
-        "Son objectif est de vaincre les Loups-Garous. Tant que le Chasseur est en vie, il est protégé contre les attaques des Loups-Garous. Lorsque les Loups ciblent le Chaperon Rouge alors que le Chasseur est en vie, leur vote ne donne pas la mort. Si le Chasseur meurt, alors le Chaperon Rouge devient similaire à un Simple Villageois. ",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre8,
     'Pyromancien':
-        "Son objectif est de vaincre les Loups-Garous. Chaque nuit, le Pyromancien a le choix entre entreposer un tonneau de feu grégeois chez un joueur, ou déclencher leur explosion. Il peut tuer des membres de son propre camp, il doit donc agir avec stratégie. Il n'y a pas de nombre limité de tonneau à placer, mais si le Pyromancien meurt sans avoir déclenché d'explosion, les joueurs restent en vie. Attention, contrairement à la Sorcière, le Pyromancien doit être en vie au matin pour que l’explosion se déclenche.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre9,
     'Héritier':
-        "Son objectif est de vaincre les Loups-Garous tant qu'il ne reçoit pas de nouveau rôle. La première nuit, il désigne un testataire qui lui léguera son rôle lors de sa mort. L'Héritier ne récupère que les pouvoirs non consommés par son testataire (potion de Sorcière, prise de pouvoir du Dictateur...), exception pour le Chasseur et le Fossoyeur. Il ne récupère pas l'infection (Loup Noir) ni la contamination (Rat Malade) de son testataire. Il conserve l'infection ou la contamination qu'il avait à la base. S'il hérite des pouvoirs d'un Loup-Garou, les autres loups sont informés qu'il rejoint la meute. S'il hérite des pouvoirs d'un Dictateur qui meurt durant la nuit de son coup d’état, ce sera à l’Héritier d’en assumer les conséquences et de faire le coup d’état dès son réveil.",
+        AppLocalizations.of(context)!.sonObjectifEstDeVaincre10,
     'Dobble': """
 **But du jeu**
 Être le plus rapide à repérer l'unique symbole identique entre la carte au centre et sa propre carte.
@@ -751,7 +749,7 @@ Couler tous les navires de l'adversaire avant qu'il ne coule les vôtres.
    - Destroyer (3 cases)
    - Patrouilleur (2 cases)
 2. **Tir** : À tour de rôle, les joueurs touchent une case pour tirer.
-3. **Résultat** : "Touché", "Coulé" ou "À l'eau". 
+3. **Résultat** : AppLocalizations.of(context)!.touche, "Coulé" ou "À l'eau". 
 4. **Victoire** : Le premier joueur à couler toute la flotte adverse gagne.
 """,
     'Mille Bornes': """
@@ -1070,22 +1068,22 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
       'name': 'Simple Villageois',
       'camp': 'villageois',
       'minPlayers': 0,
-      'description': 'Un villageois sans pouvoir spécial.',
+      'description': AppLocalizations.of(context)!.unVillageoisSansPouvoirSpecial,
     },
     {
       'name': 'Loup-Garou',
       'camp': 'loups',
       'minPlayers': 0,
-      'description': 'Dévore un villageois la nuit.',
+      'description': AppLocalizations.of(context)!.devoreUnVillageoisLaNuit,
     },
     {
       'name': 'Voyante',
       'camp': 'villageois',
       'minPlayers': 8,
-      'description': 'Découvre un rôle par nuit.',
+      'description': AppLocalizations.of(context)!.decouvreUnRoleParNuit,
     },
     {
-      'name': 'Sorcière',
+      'name': AppLocalizations.of(context)!.sorciere,
       'camp': 'villageois',
       'minPlayers': 8,
       'description': 'Potion de vie et de mort.',
@@ -1094,105 +1092,105 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
       'name': 'Chasseur',
       'camp': 'villageois',
       'minPlayers': 9,
-      'description': 'Tire sur quelqu\'un en mourant.',
+      'description': AppLocalizations.of(context)!.tireSurQuelquUnEn,
     },
     {
       'name': 'Petite Fille',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'Espionne les loups la nuit.',
+      'description': AppLocalizations.of(context)!.espionneLesLoupsLaNuit,
     },
     {
       'name': 'Cupidon',
       'camp': 'villageois',
       'minPlayers': 7,
-      'description': 'Crée deux amoureux la première nuit.',
+      'description': AppLocalizations.of(context)!.creeDeuxAmoureuxLaPremiere,
     },
     {
       'name': 'Garde',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'Protège un joueur par nuit.',
+      'description': AppLocalizations.of(context)!.protegeUnJoueurParNuit,
     },
     {
       'name': 'Capitaine',
       'camp': 'special',
       'minPlayers': 0,
-      'description': 'Son vote compte double. Désigne son successeur.',
+      'description': AppLocalizations.of(context)!.sonVoteCompteDoubleDesigne,
     },
     {
       'name': 'Loup Noir',
       'camp': 'loups',
       'minPlayers': 12,
       'description':
-          'Peut transformer sa victime en loup-garou infecté une fois.',
+          AppLocalizations.of(context)!.peutTransformerSaVictimeEn,
     },
     {
       'name': 'Loup Bavard',
       'camp': 'loups',
       'minPlayers': 10,
-      'description': 'Doit prononcer un mot secret chaque jour.',
+      'description': AppLocalizations.of(context)!.doitPrononcerUnMotSecret,
     },
     {
       'name': 'Loup Blanc',
       'camp': 'solitaire',
       'minPlayers': 12,
-      'description': 'Objectif être seul survivant. Dévore une nuit sur deux.',
+      'description': AppLocalizations.of(context)!.objectifEtreSeulSurvivantDevore,
     },
     {
       'name': 'Mercenaire',
       'camp': 'solitaire',
       'minPlayers': 8,
-      'description': 'Gagne seul s\'il tue sa cible au Jour 1.',
+      'description': AppLocalizations.of(context)!.gagneSeulSIlTue,
     },
     {
       'name': 'Rat Malade',
       'camp': 'solitaire',
       'minPlayers': 15,
-      'description': 'Contamine tous les joueurs pour gagner.',
+      'description': AppLocalizations.of(context)!.contamineTousLesJoueursPour,
     },
     {
       'name': 'Mentaliste',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'Connaît l\'issue du vote et détecte l\'infecté.',
+      'description': AppLocalizations.of(context)!.connaitLIssueDuVote,
     },
     {
-      'name': 'Nécromancien',
+      'name': AppLocalizations.of(context)!.necromancien,
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'Communique avec les morts la nuit.',
+      'description': AppLocalizations.of(context)!.communiqueAvecLesMortsLa,
     },
     {
       'name': 'Fossoyeur',
       'camp': 'villageois',
       'minPlayers': 12,
-      'description': 'Révèle deux camps à sa mort.',
+      'description': AppLocalizations.of(context)!.reveleDeuxCampsASa,
     },
     {
       'name': 'Dictateur',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'Prend le pouvoir du vote une fois.',
+      'description': AppLocalizations.of(context)!.prendLePouvoirDuVote,
     },
     {
       'name': 'Chaperon Rouge',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'Protégée par le Chasseur.',
+      'description': AppLocalizations.of(context)!.protegeeParLeChasseur,
     },
     {
       'name': 'Pyromancien',
       'camp': 'villageois',
       'minPlayers': 15,
       'description':
-          'Place des tonneaux qui explosent s\'il est vivant au matin.',
+          AppLocalizations.of(context)!.placeDesTonneauxQuiExplosent,
     },
     {
-      'name': 'Héritier',
+      'name': AppLocalizations.of(context)!.heritier,
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': 'Hérite du rôle de son testateur à sa mort.',
+      'description': AppLocalizations.of(context)!.heriteDuRoleDeSon,
     },
   ];
 
@@ -1500,7 +1498,7 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
   }
 
   // Définition des 21 pièces de base (les rotations seront gérées en code)
-  static const Map<int, List<List<int>>> blokusPieces = {
+  static Map<int, List<List<int>>> blokusPieces = {
     1: [
       [0, 0],
     ],
@@ -1657,7 +1655,7 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
   }
 }
 
-const Map<String, int> _presidentCardValues = {
+Map<String, int> _presidentCardValues = {
   '3': 1,
   '4': 2,
   '5': 3,
@@ -1673,7 +1671,7 @@ const Map<String, int> _presidentCardValues = {
   '2': 13,
 };
 
-const Map<String, int> _presidentCardValuesRevolution = {
+Map<String, int> _presidentCardValuesRevolution = {
   '3': 13,
   '4': 12,
   '5': 11,
@@ -2213,7 +2211,7 @@ class AiThemeHistoryItem {
     final data = doc.data() as Map<String, dynamic>? ?? {};
     return AiThemeHistoryItem(
       id: doc.id,
-      title: data['title'] ?? 'Thème IA',
+      title: data['title'] ?? AppLocalizations.of(context)!.themeIa,
       prompt: data['prompt'] ?? '',
       gameType: data['gameType'] ?? '',
       words: List<String>.from(data['words'] ?? []),
@@ -2256,8 +2254,7 @@ class FirebaseService {
       case 'Blanc Manger Coco':
       case 'Le Juge':
       case 'Le Menteur':
-      case 'Qui Pourrait le Plus ?':
-      case 'Synonyme ou Banni':
+      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.caseLabelSynonyme ou Banni':
       case 'Le Roi des Mèmes':
         return 25;
       default:
@@ -2324,7 +2321,7 @@ class FirebaseService {
     }
 
     String combinedTheme =
-        themeParts.isEmpty ? "Général et varié" : themeParts.join(" + ");
+        themeParts.isEmpty ? AppLocalizations.of(context)!.generalEtVarie : themeParts.join(" + ");
     if (themeParts.length > 1) {
       combinedTheme = "Mélange équilibré des thèmes suivants : $combinedTheme";
     }
@@ -2346,11 +2343,11 @@ class FirebaseService {
       case 'Le Jeu des Catégories':
         return "Génère des catégories originales et amusantes à faire deviner. Thème : $finalPrompt";
       case 'Gribouillis':
-        return "Génère des phrases courtes, visuelles et loufoques à faire dessiner (ex: 'Un dinosaure qui mange une glace'). Thème : $finalPrompt";
+        return "Génère des phrases courtes, visuelles et loufoques à faire dessiner (ex: AppLocalizations.of(context)!.unDinosaureQuiMangeUne). Thème : $finalPrompt";
       case 'Cadavre Exquis':
         return "Génère des phrases d'accroche ou univers d'écriture originaux. Thème : $finalPrompt";
       case 'Le Dilemme':
-        return "Génère des dilemmes cornéliens au format 'OptionA ou OptionB' (ex: 'Pouvoir voler ou Être invisible'). Thème : $finalPrompt";
+        return "Génère des dilemmes cornéliens au format 'OptionA ou OptionB' (ex: AppLocalizations.of(context)!.pouvoirVolerOuEtreInvisible). Thème : $finalPrompt";
       case 'Action ou Vérité':
         return "Génère un mélange de défis (actions) et questions indiscrètes (vérités). Thème : $finalPrompt";
       case 'Jeu de la Pièce':
@@ -2360,9 +2357,7 @@ class FirebaseService {
         return "Génère des phrases courtes à trou (contenant '_____') pour le jeu. Thème : $finalPrompt";
       case 'Le Juge':
         return "Génère des questions amusantes sur un joueur (utilise le tag '{player}'). Thème : $finalPrompt";
-      case 'Qui Pourrait le Plus ?':
-        return "Génère des situations courtes commençant par une action. Thème : $finalPrompt";
-      case 'Le Roi des Mèmes':
+      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.returnGenereDesSituationsCourtes(finalPrompt)Le Roi des Mèmes':
         return "Génère des situations humoristiques et amorces de légendes de mèmes. Thème : $finalPrompt";
       default:
         return "Génère une liste de mots/expressions pour le jeu $gameType sur le thème : $finalPrompt";
@@ -2711,8 +2706,7 @@ class FirebaseService {
       case 'Dominoes':
       case 'Zombie!':
       case 'Blanc Manger Coco':
-      case 'Qui Pourrait le Plus ?':
-      case 'Le Juge':
+      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.caseLabelLe Juge':
       case 'Le Menteur':
       case 'Synonyme ou Banni':
       case 'Le Roi des Mêmes':
@@ -3381,7 +3375,7 @@ class FirebaseService {
         if (!hasActivePlayer && presencesSnap.docs.isNotEmpty) {
           await _db.collection('games').doc(gameCode).update({
             'gameState': 'gameOver',
-            'gameEndReason': 'Abandon (tous les joueurs déconnectés)',
+            'gameEndReason': AppLocalizations.of(context)!.abandonTousLesJoueursDeconnectes,
           });
           await sendLoungeMessage(
             loungeId,
@@ -3392,7 +3386,7 @@ class FirebaseService {
             extraData: {
               'gameName': gData['gameType'] ?? pendingGame['gameName'],
               'winnerName': 'Aucun',
-              'reason': 'Tous les joueurs se sont déconnectés',
+              'reason': AppLocalizations.of(context)!.tousLesJoueursSeSont,
               'oldGameCode': gameCode,
             },
           );
@@ -3401,7 +3395,7 @@ class FirebaseService {
             'lastGameResult': {
               'gameName': gData['gameType'] ?? pendingGame['gameName'],
               'winnerName': 'Aucun',
-              'reason': 'Tous les joueurs se sont déconnectés',
+              'reason': AppLocalizations.of(context)!.tousLesJoueursSeSont,
               'timestamp': FieldValue.serverTimestamp(),
             },
           });
@@ -3867,8 +3861,8 @@ class FirebaseService {
   }) async {
     final String text =
         actionDetails != null
-            ? "⏱️ $playerName n'a pas joué à temps. L'ordinateur a joué pour lui ($actionDetails)."
-            : "⏱️ $playerName n'a pas joué à temps. L'ordinateur a joué pour lui de façon aléatoire.";
+            ? AppLocalizations.of(context)!.nAPasJoueA(playerName, actionDetails)
+            : AppLocalizations.of(context)!.nAPasJoueA1(playerName);
 
     await gameRef.update({
       'lastTimeoutEvent': {
@@ -4107,7 +4101,7 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+      final playerName = gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
       final hands = Map<String, dynamic>.from(
         gameData['bigTwoPlayerHands'] ?? {},
       );
@@ -5138,7 +5132,7 @@ class FirebaseService {
                   ? Map<String, dynamic>.from(playerProfiles[pId])
                   : {};
           players[pId] = {
-            'name': profile['name'] ?? 'Joueur',
+            'name': profile['name'] ?? AppLocalizations.of(context)!.joueur,
             'score': profile['score'] ?? 0,
             'xp': profile['xp'] ?? 0,
             'authUid': profile['authUid'] ?? pId,
@@ -5268,7 +5262,7 @@ class FirebaseService {
                   ? Map<String, dynamic>.from(playerProfiles[pId])
                   : {};
           players[pId] = {
-            'name': profile['name'] ?? 'Joueur',
+            'name': profile['name'] ?? AppLocalizations.of(context)!.joueur,
             'score': profile['score'] ?? 0,
             'xp': profile['xp'] ?? 0,
             'authUid': profile['authUid'] ?? pId,
@@ -5479,9 +5473,9 @@ class FirebaseService {
         });
       } else if (roundState == 'reveal_clues') {
         transaction.update(gameRef, {
-          'justOneGuesserAnswer': "(Temps écoulé)",
+          'justOneGuesserAnswer': AppLocalizations.of(context)!.tempsEcoule1,
           'roundState': 'result',
-          'gameEndReason': "Temps écoulé !",
+          'gameEndReason': AppLocalizations.of(context)!.tempsEcoule,
           'turnStartTime': FieldValue.serverTimestamp(),
         });
       }
@@ -5526,7 +5520,7 @@ class FirebaseService {
           if (pId == judgeId) continue;
           if (!answers.containsKey(pId)) {
             // Sur jeu social / opinion : marquer comme inactif sans réponse arbitraire
-            answers[pId] = isSocial ? "[INACTIF]" : "Temps écoulé";
+            answers[pId] = isSocial ? "[INACTIF]" : AppLocalizations.of(context)!.tempsEcoule2;
             updatesMade = true;
             await _incrementInactiveCountAndCheckExpulsion(
               transaction,
@@ -5744,8 +5738,8 @@ class FirebaseService {
             (result == 'hit' || result == 'sunk') ? playerId : opponentId;
         String logMessage =
             (result == 'hit' || result == 'sunk')
-                ? "🎯 ${shooterData['name']} a touché une cible ! Il rejoue."
-                : "🌊 ${shooterData['name']} a tiré dans l'eau. Au tour de ${opponentData['name']}.";
+                ? AppLocalizations.of(context)!.aToucheUneCibleIl(shooterData['name'])
+                : AppLocalizations.of(context)!.aTireDansLEau(shooterData['name'], opponentData['name']);
 
         updates.addAll({
           'currentPlayerId': nextPlayerId,
@@ -5979,7 +5973,7 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+      final playerName = gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
       final hands = Map<String, dynamic>.from(gameData['playerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
       final lastPlay =
@@ -6726,7 +6720,7 @@ class FirebaseService {
           }
 
           String removedPlayerName =
-              players[playerIdToRemove]?['name'] ?? 'Un joueur';
+              players[playerIdToRemove]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
           players.remove(playerIdToRemove);
           playerOrder.remove(playerIdToRemove);
           teams.forEach((key, playerList) {
@@ -6748,7 +6742,7 @@ class FirebaseService {
                 players.keys.isNotEmpty ? players.keys.first : null;
             final String remainingName =
                 remainingPlayerId != null
-                    ? (players[remainingPlayerId]?['name'] ?? 'Joueur')
+                    ? (players[remainingPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur)
                     : 'Inconnu';
 
             updates['gameState'] = 'gameOver';
@@ -6851,7 +6845,7 @@ class FirebaseService {
     if (newInactiveCount >= 3) {
       var players = Map<String, dynamic>.from(gameData['players'] ?? {});
       var playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
-      String playerName = players[timedOutPlayerId]?['name'] ?? 'Un joueur';
+      String playerName = players[timedOutPlayerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
       final gameType = gameData['gameType'] ?? '';
       final isSocial = GameData.isSocialOpinionGame(gameType);
 
@@ -6860,7 +6854,7 @@ class FirebaseService {
         'pendingBotReplacement': {
           'playerId': timedOutPlayerId,
           'playerName': playerName,
-          'reason': "inactif (3 tours sans réponse)",
+          'reason': AppLocalizations.of(context)!.inactif3ToursSansReponse,
           'isSocial': isSocial,
           'timestamp': FieldValue.serverTimestamp(),
         },
@@ -6923,7 +6917,7 @@ class FirebaseService {
       final gameData = snap.data() as Map<String, dynamic>;
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       if (!players.containsKey(playerId)) return;
-      final playerName = players[playerId]?['name'] ?? 'Joueur';
+      final playerName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
       Map<String, dynamic> updates = {
         'players.$playerId.isBot': true,
@@ -6974,7 +6968,7 @@ class FirebaseService {
       }
 
       String playerName =
-          gameData['players'][timedOutPlayerId]?['name'] ?? 'Joueur';
+          gameData['players'][timedOutPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
       // 2. Si c'est un jeu social / opinion / créatif : PAS DE COUP AUTOMATIQUE !
       if (isSocialGame) {
@@ -7108,7 +7102,7 @@ class FirebaseService {
         'roundState': 'result',
         'roundWinnerId': null,
         'gameEndReason':
-            "Le Juge n'a pas désigné de gagnant à temps. Aucun point attribué.",
+            AppLocalizations.of(context)!.leJugeNAPas,
         'turnStartTime': FieldValue.serverTimestamp(),
       });
       return;
@@ -7384,11 +7378,11 @@ class FirebaseService {
       );
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final pName = players[playerId]?['name'] ?? 'Joueur';
+      final pName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
       final String rollMsg =
           (rollsLeft == 3)
-              ? "$pName a lancé les dés !"
-              : "$pName a relancé les dés (${3 - rollsLeft + 1}/3) !";
+              ? AppLocalizations.of(context)!.aLanceLesDes(pName)
+              : AppLocalizations.of(context)!.aRelanceLesDes3(pName, 3 - rollsLeft + 1);
 
       transaction.update(gameRef, {
         'yamsDice': currentDice,
@@ -7420,14 +7414,14 @@ class FirebaseService {
     if (index >= 0 && index < heldDice.length) {
       heldDice[index] = !heldDice[index];
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final pName = players[playerId]?['name'] ?? 'Joueur';
+      final pName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
       final isNowHeld = heldDice[index];
       final currentDice = List<int>.from(gameData['yamsDice'] ?? []);
       final dieVal = (index < currentDice.length) ? currentDice[index] : 0;
       final actionText =
           isNowHeld
-              ? "$pName a gardé le dé de valeur $dieVal (dé #${index + 1}) 🔒"
-              : "$pName a débloqué le dé #${index + 1}";
+              ? AppLocalizations.of(context)!.aGardeLeDeDe(pName, dieVal, index + 1)
+              : AppLocalizations.of(context)!.aDebloqueLeDe(pName, index + 1);
 
       await gameRef.update({
         'yamsHeldDice': heldDice,
@@ -7892,7 +7886,7 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+      final playerName = gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
       final hands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
       List<String> discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
@@ -7951,7 +7945,7 @@ class FirebaseService {
               'unoPlayerHands': hands,
               'unoDiscardPile': discardPile,
               'unoWildColorChosen': autoWild,
-              'gameEndReason': '$playerName a gagné !',
+              'gameEndReason': AppLocalizations.of(context)!.aGagne(playerName),
             });
             return;
           }
@@ -8003,7 +7997,7 @@ class FirebaseService {
             'unoPlayerHands': hands,
             'unoDiscardPile': discardPile,
             'unoWildColorChosen': autoWild,
-            'gameEndReason': '$playerName a gagné !',
+            'gameEndReason': AppLocalizations.of(context)!.aGagne(playerName),
           });
           return;
         }
@@ -8205,7 +8199,7 @@ class FirebaseService {
     gameData['drawnCard'] = null;
 
     final String playerName =
-        gameData['players']?[playerId]?['name'] ?? 'Un joueur';
+        gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
 
     transaction.update(gameRef, {
       'drawnCard': null,
@@ -8343,7 +8337,7 @@ class FirebaseService {
           if (gameWinnerId != null)
             'players.$gameWinnerId.score': FieldValue.increment(1),
           'gameEndReason':
-              "${players[gameWinnerId]?['name'] ?? 'Joueur'} gagne avec le score le plus bas !",
+              AppLocalizations.of(context)!.gagneAvecLeScoreLe(players[gameWinnerId]?['name'] ?? 'Joueur'),
         });
       }
 
@@ -9022,8 +9016,8 @@ class FirebaseService {
       winner = "Rat Malade";
       reason =
           vivants.length == ratMaladeVivant
-              ? "Le Rat Malade est le seul survivant ! Il a empoisonné tout le monde !"
-              : "Tous les autres survivants sont contaminés par le Rat Malade. Il a gagné !";
+              ? AppLocalizations.of(context)!.leRatMaladeEstLe
+              : AppLocalizations.of(context)!.tousLesAutresSurvivantsSont;
     }
 
     if (winner == null &&
@@ -9340,7 +9334,7 @@ class FirebaseService {
           "La Voyante a sondé une âme cette nuit...",
         ]),
         'playerData.$voyanteId.privateInfo':
-            "Le rôle de $targetName est : $targetRole.",
+            AppLocalizations.of(context)!.leRoleDeEst(targetName, targetRole),
         'nightActions.voyanteActed': true,
       });
       shouldAdvance = true;
@@ -10388,7 +10382,7 @@ class FirebaseService {
         playerData[dictateurId]?['status'] != 'vivant')
       return;
 
-    final dictateurName = playerData[dictateurId]?['name'] ?? 'Le Dictateur';
+    final dictateurName = playerData[dictateurId]?['name'] ?? AppLocalizations.of(context)!.leDictateur;
     await gameRef.update({
       'subPhase': 'dictateur_coup',
       'activePlayerId': dictateurId,
@@ -11249,9 +11243,9 @@ class FirebaseService {
           'lovers': currentLovers,
           'nightActions.cupidonActed': true,
           'playerData.${currentLovers[0]}.privateInfo':
-              "Vous êtes amoureux de $lover2Name !",
+              AppLocalizations.of(context)!.vousEtesAmoureuxDe(lover2Name),
           'playerData.${currentLovers[1]}.privateInfo':
-              "Vous êtes amoureux de $lover1Name !",
+              AppLocalizations.of(context)!.vousEtesAmoureuxDe1(lover1Name),
           'gameLog': FieldValue.arrayUnion([
             "Cupidon a désigné $lover1Name et $lover2Name comme amoureux !",
           ]),
@@ -11630,7 +11624,7 @@ class FirebaseService {
         'phase': 'placement',
       },
       if (gameType == 'Dominoes') ...{
-        'dominoesMode': dominoesMode ?? 'pioche',
+        'dominoesMode': dominoesMode ?? AppLocalizations.of(context)!.pioche3,
         'dominoesTargetScore': dominoesTargetScore ?? 50,
         'dominoesBoneyard': [],
         'dominoesPlayerHands': {},
@@ -11977,7 +11971,7 @@ class FirebaseService {
         'phase': 'placement',
       },
       if (gameType == 'Dominoes') ...{
-        'dominoesMode': dominoesMode ?? 'pioche',
+        'dominoesMode': dominoesMode ?? AppLocalizations.of(context)!.pioche3,
         'dominoesTargetScore': dominoesTargetScore ?? 50,
         'dominoesBoneyard': [],
         'dominoesPlayerHands': {},
@@ -12317,11 +12311,7 @@ class FirebaseService {
     String wordUndercover;
 
     if (rawPair.contains(':')) {
-      final parts = rawPair.split(':');
-      wordCivil = parts[0].trim();
-      wordUndercover = parts[1].trim();
-    } else {
-      // Sécurité anti-doublon : si l'IA renvoie des mots simples séparés
+      final parts = rawPair.split(':AppLocalizations.of(context)!.wordcivilParts0TrimWordundercoverIA renvoie des mots simples séparés
       int idx = wordPairs.indexOf(rawPair);
       wordCivil = rawPair.trim();
       wordUndercover =
@@ -12379,7 +12369,7 @@ class FirebaseService {
           (baseRole == 'Infiltré')
               ? wordUndercover
               : (baseRole == 'Mr. White' || baseRole == 'Vendeur de Falafels')
-              ? "Vous n'avez pas de mot"
+              ? AppLocalizations.of(context)!.vousNAvezPasDe
               : wordCivil;
       if (baseRole == 'Vendeur de Falafels') baseRole = 'Civil';
 
@@ -12558,7 +12548,7 @@ class FirebaseService {
       Map<String, dynamic> updates = {
         'playerClues.$playerId': cleanClue,
         'turnLog': FieldValue.arrayUnion([
-          "${playerData[playerId]?['name'] ?? 'Joueur'} a dit : '$cleanClue'",
+          "${playerData[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a dit : '$cleanClue'",
         ]),
         'turnStartTime': FieldValue.serverTimestamp(),
       };
@@ -13339,7 +13329,7 @@ class FirebaseService {
                 : 'team_1';
         String winnerName =
             tabooTeams[winnerTeam]?['name'] ??
-            (winnerTeam == 'team_0' ? 'Équipe 1' : 'Équipe 2');
+            (winnerTeam == 'team_0' ? AppLocalizations.of(context)!.equipe12 : AppLocalizations.of(context)!.equipe21);
         Map<String, dynamic> scoreUpdates = {};
         if (tabooTeams[winnerTeam] is List) {
           for (var pId in (tabooTeams[winnerTeam] as List)) {
@@ -13349,7 +13339,7 @@ class FirebaseService {
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': winnerTeam,
-          'gameEndReason': "Fin des manches ! Victoire de $winnerName !",
+          'gameEndReason': AppLocalizations.of(context)!.finDesManchesVictoireDe(winnerName),
           ...scoreUpdates,
         });
         return;
@@ -13698,7 +13688,7 @@ class FirebaseService {
           'currentPlayerId': firstPlayer,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "Tous les joueurs sont prêts ! ${playerData[firstPlayer]?['name'] ?? 'Joueur'} commence à tirer.",
+            "Tous les joueurs sont prêts ! ${playerData[firstPlayer]?['name'] ?? AppLocalizations.of(context)!.joueur} commence à tirer.",
           ]),
         });
       }
@@ -13750,7 +13740,7 @@ class FirebaseService {
       'ramiHasDrawn': false,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': FieldValue.arrayUnion([
-        "La manche de Rami commence ! C'est au tour de ${players[playerIds.first]?['name'] ?? 'Joueur'}.",
+        "La manche de Rami commence ! C'est au tour de ${players[playerIds.first]?['name'] ?? AppLocalizations.of(context)!.joueur}.",
       ]),
     });
   }
@@ -13841,7 +13831,7 @@ class FirebaseService {
                           .key,
                   'players.${totalScores.entries.reduce((a, b) => a.value < b.value ? a : b).key}.score':
                       FieldValue.increment(1),
-                  'gameEndReason': "Score cible atteint !",
+                  'gameEndReason': AppLocalizations.of(context)!.scoreCibleAtteint,
                 },
               });
               return;
@@ -13977,7 +13967,7 @@ class FirebaseService {
                       .key,
               'players.${totalScores.entries.reduce((a, b) => a.value < b.value ? a : b).key}.score':
                   FieldValue.increment(1),
-              'gameEndReason': "Score cible atteint !",
+              'gameEndReason': AppLocalizations.of(context)!.scoreCibleAtteint,
             },
           });
           return;
@@ -14169,7 +14159,7 @@ class FirebaseService {
       'petitsChevauxConsecutiveSixes': consecutiveSixes,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': [
-        isTeamMode ? "La partie 2v2 commence !" : "La partie commence !",
+        isTeamMode ? AppLocalizations.of(context)!.laPartie2v2Commence : AppLocalizations.of(context)!.laPartieCommence1,
       ],
     });
   }
@@ -14278,7 +14268,7 @@ class FirebaseService {
         }
       }
 
-      final playerName = gameData['players']?[playerId]?['name'] ?? 'Joueur';
+      final playerName = gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
       if (!hasValidMove) {
         // Aucun coup possible -> Passage automatique immédiat au joueur suivant
@@ -14383,7 +14373,7 @@ class FirebaseService {
           'petitsChevauxDice': 0,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "⚠️ 3 six consécutifs ! Le pion de ${players[playerId]?['name'] ?? 'Joueur'} retourne à l'écurie et son tour passe.",
+            "⚠️ 3 six consécutifs ! Le pion de ${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} retourne à l'écurie et son tour passe.",
           ]),
         });
         return;
@@ -14660,7 +14650,7 @@ class FirebaseService {
       }
     }
 
-    String mode = gameData['dominoesMode'] ?? 'pioche';
+    String mode = gameData['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
     List<String> boneyard = (mode == 'pioche') ? fullDeck : [];
 
     // Trouver qui commence : le double le plus élevé
@@ -14779,7 +14769,7 @@ class FirebaseService {
       }
 
       bool spinnerPlayed = gameData['dominoesSpinnerPlayed'] ?? false;
-      final String mode = gameData['dominoesMode'] ?? 'pioche';
+      final String mode = gameData['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
 
       if (boardChain.isEmpty) {
         openEnds = [a, b];
@@ -15099,13 +15089,13 @@ class FirebaseService {
       final playerOrder = List<String>.from(data['dominoesPlayerOrder']);
       final int currentIndex = data['dominoesCurrentPlayerIndex'];
       final playerId = playerOrder[currentIndex];
-      final playerName = data['players']?[playerId]?['name'] ?? 'Un joueur';
+      final playerName = data['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
 
       var hands = Map<String, dynamic>.from(data['dominoesPlayerHands'] ?? {});
       var myHand = List<String>.from(hands[playerId] ?? []);
       var openEnds = List<int>.from(data['dominoesOpenEnds'] ?? []);
       var boneyard = List<String>.from(data['dominoesBoneyard'] ?? []);
-      String mode = data['dominoesMode'] ?? 'pioche';
+      String mode = data['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
       var boardChain = List<dynamic>.from(data['dominoesBoardChain'] ?? []);
 
       bool canPlay(String t) {
@@ -15360,7 +15350,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'zombieLoserId': loserId,
           'gameEndReason':
-              "${players[loserId]?['name'] ?? 'Un joueur'} a gardé le Zombie !",
+              AppLocalizations.of(context)!.aGardeLeZombie(players[loserId]?['name'] ?? 'Un joueur'),
           ...scoreUpdates,
         });
       } else {
@@ -15616,7 +15606,7 @@ class FirebaseService {
             'gameWinner': winnerTeam,
             for (String wId in winningPlayers)
               'players.$wId.score': FieldValue.increment(1),
-            'gameEndReason': 'Chaque joueur a deviné une fois !',
+            'gameEndReason': AppLocalizations.of(context)!.chaqueJoueurADevineUne,
           });
           return;
         }
@@ -15667,7 +15657,7 @@ class FirebaseService {
             'gameWinner': bestPlayer,
             if (bestPlayer.isNotEmpty)
               'players.$bestPlayer.score': FieldValue.increment(1),
-            'gameEndReason': 'Tout le monde est passé !',
+            'gameEndReason': AppLocalizations.of(context)!.toutLeMondeEstPasse,
           });
           return;
         }
@@ -15731,7 +15721,7 @@ class FirebaseService {
 
       final randomIndex = Random().nextInt(playerOrder.length);
       final selectedPlayerId = playerOrder[randomIndex];
-      final selectedName = players[selectedPlayerId]?['name'] ?? 'Joueur';
+      final selectedName = players[selectedPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
       transaction.update(gameRef, {
         'aoVCurrentPlayerIndex': randomIndex,
@@ -15777,7 +15767,7 @@ class FirebaseService {
               : (GameWords.truths[difficulty] ?? GameWords.truths['soft']!);
           final chosenChallenge =
               fallbackChallenges[Random().nextInt(fallbackChallenges.length)];
-          final targetPlayerName = players[playerId]?['name'] ?? 'Joueur';
+          final targetPlayerName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
           transaction.update(gameRef, {
             'aoVChallengeType': challengeType,
@@ -15785,7 +15775,7 @@ class FirebaseService {
             'aoVPhase': 'performing',
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : 'VÉRITÉ'} !",
+              "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : AppLocalizations.of(context)!.verite1} !",
               "ℹ️ Aucun autre joueur disponible pour écrire le défi. Défi sélectionné automatiquement.",
             ]),
           });
@@ -15793,8 +15783,8 @@ class FirebaseService {
         }
 
         final authorId = otherPlayers[Random().nextInt(otherPlayers.length)];
-        final authorName = players[authorId]?['name'] ?? 'Joueur';
-        final targetPlayerName = players[playerId]?['name'] ?? 'Joueur';
+        final authorName = players[authorId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+        final targetPlayerName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
         transaction.update(gameRef, {
           'aoVChallengeType': challengeType,
@@ -15803,7 +15793,7 @@ class FirebaseService {
           'aoVCurrentChallenge': null,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : 'VÉRITÉ'} !",
+            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : AppLocalizations.of(context)!.verite1} !",
             "✍️ $authorName doit écrire le défi...",
           ]),
         });
@@ -15818,7 +15808,7 @@ class FirebaseService {
               GameWords.truths[difficulty] ?? GameWords.truths['soft']!;
         }
         final challenge = challenges[Random().nextInt(challenges.length)];
-        final targetPlayerName = players[playerId]?['name'] ?? 'Joueur';
+        final targetPlayerName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
         transaction.update(gameRef, {
           'aoVChallengeType': challengeType,
@@ -15826,7 +15816,7 @@ class FirebaseService {
           'aoVPhase': 'performing',
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : 'VÉRITÉ'} !",
+            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : AppLocalizations.of(context)!.verite1} !",
           ]),
         });
       }
@@ -15856,7 +15846,7 @@ class FirebaseService {
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final currentPlayerId = gameData['aoVCurrentPlayerId'];
-      final currentPlayerName = players[currentPlayerId]?['name'] ?? 'Joueur';
+      final currentPlayerName = players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
       transaction.update(gameRef, {
         'aoVCurrentChallenge': cleanChallenge,
@@ -15928,7 +15918,7 @@ class FirebaseService {
         final baseXp = gameData['aoVChallengeType'] == 'action' ? 30 : 20;
         final earnedXp = (baseXp * percentage / 100).round();
 
-        final currentPlayerName = players[currentPlayerId]?['name'] ?? 'Joueur';
+        final currentPlayerName = players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
         // Créditer l'XP
         transaction.update(gameRef, {
@@ -15991,7 +15981,7 @@ class FirebaseService {
           if (winnerId.isNotEmpty)
             'players.$winnerId.score': FieldValue.increment(1),
           'gameEndReason':
-              "${players[winnerId]?['name'] ?? 'Joueur'} a le plus d'XP ($maxXp XP) et devient Admin !",
+              AppLocalizations.of(context)!.aLePlusDXp(players[winnerId]?['name'] ?? 'Joueur', maxXp),
         });
       } else {
         transaction.update(gameRef, {
@@ -16006,39 +15996,7 @@ class FirebaseService {
           'aoVCurrentRound': FieldValue.increment(1),
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "🔄 Tour suivant ! Qui sera le prochain ?",
-          ]),
-        });
-      }
-    });
-  }
-
-  /// Fin de manche (bouton admin)
-  Future<void> aoVEndRound(String gameCode, String playerId) async {
-    await _db.runTransaction((transaction) async {
-      final gameRef = _db.collection('games').doc(gameCode);
-      final snap = await transaction.get(gameRef);
-      if (!snap.exists) return;
-
-      final gameData = snap.data() as Map<String, dynamic>;
-      final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-
-      // Déterminer le gagnant (plus d'XP)
-      String winnerId = '';
-      int maxXp = -1;
-      players.forEach((pId, pData) {
-        final xp = (pData['xp'] as num?)?.toInt() ?? 0;
-        if (xp > maxXp) {
-          maxXp = xp;
-          winnerId = pId;
-        }
-      });
-
-      transaction.update(gameRef, {
-        'gameState': 'gameOver',
-        'gameWinner': winnerId,
-        'gameEndReason':
-            "Manche terminée ! ${players[winnerId]?['name'] ?? 'Joueur'} gagne avec $maxXp XP !",
+            "🔄 Tour suivant ! Qui sera le prochain ?AppLocalizations.of(context)!.finDeMancheBoutonAdminManche terminée ! ${players[winnerId]?['name'] ?? AppLocalizations.of(context)!.joueur} gagne avec $maxXp XP !",
       });
     });
   }
@@ -16174,7 +16132,7 @@ class FirebaseService {
     String currentQuestion = questions[Random().nextInt(questions.length)];
     if (currentQuestion.contains('{player}')) {
       String targetId = playerIds[Random().nextInt(playerIds.length)];
-      String targetName = players[targetId]?['name'] ?? 'Quelqu\'un';
+      String targetName = players[targetId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
       currentQuestion = currentQuestion.replaceAll('{player}', targetName);
     }
 
@@ -16360,7 +16318,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'gameWinner': winnerPlayerId,
           'gameEndReason':
-              '$winnerName a atteint $targetScore points et remporte la partie !',
+              AppLocalizations.of(context)!.aAtteintPointsEtRemporte(winnerName, targetScore),
         });
         return;
       }
@@ -16387,7 +16345,7 @@ class FirebaseService {
         nextQuestion = questions[Random().nextInt(questions.length)];
         if (nextQuestion.contains('{player}')) {
           String randomP = playerOrder[Random().nextInt(playerOrder.length)];
-          String randomName = players[randomP]?['name'] ?? 'Quelqu\'un';
+          String randomName = players[randomP]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
           nextQuestion = nextQuestion.replaceAll('{player}', randomName);
         }
       }
@@ -17051,7 +17009,7 @@ class FirebaseService {
         'currentPictionaryWord':
             isCollective
                 ? collectiveWords[0]
-                : (words.isNotEmpty ? words[0] : "Mot Manquant"),
+                : (words.isNotEmpty ? words[0] : AppLocalizations.of(context)!.motManquant),
         'pictionaryDrawing': null,
         'pictionaryGuesses': [],
         'pictionaryStrokeCount': 0,
@@ -17169,7 +17127,7 @@ class FirebaseService {
       for (final pId in playerIds) {
         final existingData = players[pId] is Map ? players[pId] as Map : {};
         skullPlayers[pId] = {
-          'name': existingData['name'] ?? 'Joueur',
+          'name': existingData['name'] ?? AppLocalizations.of(context)!.joueur,
           'score': existingData['score'] ?? 0,
           'xp': existingData['xp'] ?? 0,
           'authUid': existingData['authUid'] ?? pId,
@@ -17403,7 +17361,7 @@ class FirebaseService {
           if (playerOrder.length == 2) {
             nextPlayerIdx = currentPlayerIndex; // Rejoue à 2 joueurs
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? 'Joueur'} a joué une Inversion et rejoue !",
+              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a joué une Inversion et rejoue !",
             ]);
           } else {
             unoDirection *= -1;
@@ -17412,7 +17370,7 @@ class FirebaseService {
                 (currentPlayerIndex + unoDirection + playerOrder.length) %
                 playerOrder.length;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? 'Joueur'} a inversé le sens de jeu !",
+              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a inversé le sens de jeu !",
             ]);
           }
           break;
@@ -17423,21 +17381,21 @@ class FirebaseService {
               playerOrder.length;
           final skippedPlayerName =
               players[playerOrder[skippedPlayerIndex]]?['name'] ??
-              'Joueur suivant';
+              AppLocalizations.of(context)!.timesUpForceNextPlayer;
           updates['unoLog'] = FieldValue.arrayUnion([
-            "${players[playerId]?['name'] ?? 'Joueur'} a sauté le tour de $skippedPlayerName !",
+            "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a sauté le tour de $skippedPlayerName !",
           ]);
           break;
         case 'draw2':
           if (stackDraws && pendingDraw > 0) {
             updates['unoPendingDraw'] = pendingDraw + 2;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? 'Joueur'} a empilé un +2. Cumul : ${pendingDraw + 2} cartes !",
+              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a empilé un +2. Cumul : ${pendingDraw + 2} cartes !",
             ]);
           } else {
             updates['unoPendingDraw'] = 2;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? 'Joueur'} a joué un +2 !",
+              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a joué un +2 !",
             ]);
           }
           break;
@@ -17447,7 +17405,7 @@ class FirebaseService {
           }
           updates['unoWildColorChosen'] = chosenColor;
           updates['unoLog'] = FieldValue.arrayUnion([
-            "${players[playerId]?['name'] ?? 'Joueur'} a joué un Joker et choisi la couleur $chosenColor !",
+            "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a joué un Joker et choisi la couleur $chosenColor !",
           ]);
           break;
         case 'wild_draw4':
@@ -17460,12 +17418,12 @@ class FirebaseService {
           if (stackDraws && pendingDraw > 0) {
             updates['unoPendingDraw'] = pendingDraw + 4;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? 'Joueur'} a empilé un +4. Cumul : ${pendingDraw + 4} cartes !",
+              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a empilé un +4. Cumul : ${pendingDraw + 4} cartes !",
             ]);
           } else {
             updates['unoPendingDraw'] = 4;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? 'Joueur'} a joué un Super Joker +4 !",
+              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a joué un Super Joker +4 !",
             ]);
           }
           break;
@@ -17478,7 +17436,7 @@ class FirebaseService {
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = playerId;
         updates['gameEndReason'] =
-            "${players[playerId]?['name'] ?? 'Joueur'} a posé sa dernière carte et remporte la manche !";
+            "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a posé sa dernière carte et remporte la manche !";
 
         int roundScore = 0;
         final handsMap = Map<String, dynamic>.from(
@@ -17493,7 +17451,7 @@ class FirebaseService {
         });
         updates['players.$playerId.score'] = FieldValue.increment(roundScore);
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? 'Joueur'} gagne la manche avec +$roundScore points !",
+          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} gagne la manche avec +$roundScore points !",
         ]);
       } else if (myHand.length == 1) {
         updates['unoCalledUno.$playerId'] = false;
@@ -17501,7 +17459,7 @@ class FirebaseService {
           DateTime.now().add(const Duration(seconds: 3)),
         );
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? 'Joueur'} n'a plus qu'une seule carte !",
+          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} n'a plus qu'une seule carte !",
         ]);
       }
       transaction.update(gameRef, updates);
@@ -17540,7 +17498,7 @@ class FirebaseService {
         'unoLastDrawnCard': null,
         'turnStartTime': FieldValue.serverTimestamp(),
         'gameLog': FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? 'Joueur'} passe son tour.",
+          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} passe son tour.",
         ]),
       });
     });
@@ -17601,7 +17559,7 @@ class FirebaseService {
       'unoCurrentPlayerIndex': nextPlayerIndex,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': FieldValue.arrayUnion([
-        "${gameData['players']?[playerId]?['name'] ?? 'Joueur'} n'a pas joué à temps, pioche et passe son tour.",
+        "${gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} n'a pas joué à temps, pioche et passe son tour.",
       ]),
     });
   }
@@ -17742,7 +17700,7 @@ class FirebaseService {
               applySpeedBonus: false,
             );
           }
-          final names = topScorers.map((id) => playersMap[id]?['name'] ?? 'Joueur').join(', ');
+          final names = topScorers.map((id) => playersMap[id]?['name'] ?? AppLocalizations.of(context)!.joueur).join(', ');
           updates['gameWinner'] = topScorers.contains(playerId) ? playerId : topScorers.first;
           updates['isTie'] = true;
           updates['tiedWinners'] = topScorers;
@@ -18159,7 +18117,7 @@ class FirebaseService {
       await gameRef.update({
         'gameState': 'lobby',
         'error_message':
-            "Erreur: Le nombre de rôles (${assignedRoles.length}) ne correspond pas au nombre de joueurs ($playerCount).",
+            AppLocalizations.of(context)!.erreurLeNombreDeRoles(assignedRoles.length, playerCount),
       });
 
       return;
@@ -18615,7 +18573,7 @@ class FirebaseService {
               scoreA > scoreB
                   ? 'teamA'
                   : (scoreB > scoreA ? 'teamB' : 'equality'),
-          'gameEndReason': "Toutes les manches de Time's Up sont terminées !",
+          'gameEndReason': AppLocalizations.of(context)!.toutesLesManchesDeTime,
           ...scoreUpdates,
         });
       }
@@ -19025,8 +18983,8 @@ class FirebaseService {
       'gameWinner': winnerId,
       'gameEndReason':
           winnerId != null
-              ? "${players[winnerId]?['name'] ?? 'Un joueur'} gagne avec $maxScore points !"
-              : "Fin de la partie !",
+              ? AppLocalizations.of(context)!.gagneAvecPoints(players[winnerId]?['name'] ?? 'Un joueur', maxScore)
+              : AppLocalizations.of(context)!.finDeLaPartie,
       if (winnerId != null) 'players.$winnerId.score': FieldValue.increment(1),
     });
   }
@@ -19793,8 +19751,8 @@ class FirebaseService {
         gameData['roundState'] == 'guessing_drawing') {
       String reason =
           (gameData['roundState'] == 'drawing')
-              ? "Le dessinateur n'a pas soumis le dessin à temps."
-              : "Le temps est écoulé ! Personne n'a trouvé le mot.";
+              ? AppLocalizations.of(context)!.leDessinateurNAPas
+              : AppLocalizations.of(context)!.leTempsEstEcoulePersonne;
       await gameRef.update({
         'roundState': 'result',
         'gameEndReason': reason,
@@ -20030,7 +19988,7 @@ class FirebaseService {
       Map<String, dynamic> updates = {
         'justOneGuesserAnswer': cleanGuess,
         'roundState': 'result',
-        'gameEndReason': isCorrect ? "Mot deviné !" : "Mot non deviné.",
+        'gameEndReason': isCorrect ? AppLocalizations.of(context)!.motDevine : AppLocalizations.of(context)!.motNonDevine,
         'turnStartTime': FieldValue.serverTimestamp(),
       };
 
@@ -20096,7 +20054,7 @@ class FirebaseService {
 
         transaction.update(gameRef, {
           'gameState': 'gameOver',
-          'gameEndReason': 'Les 13 cartes ont été jouées !',
+          'gameEndReason': AppLocalizations.of(context)!.les13CartesOntEte,
           'turnStartTime': FieldValue.serverTimestamp(),
         });
         return;
@@ -20237,13 +20195,13 @@ class FirebaseService {
     final loserId = gameData['hotPotatoCurrentPlayerId'];
     if (loserId == null) return;
 
-    final loserName = gameData['players']?[loserId]?['name'] ?? 'Joueur';
+    final loserName = gameData['players']?[loserId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
     await gameRef.update({
       'roundState': 'result',
       'roundLoserId': loserId,
       'players.$loserId.score': FieldValue.increment(1),
-      'gameEndReason': "La bombe a explosé dans les mains de $loserName !",
+      'gameEndReason': AppLocalizations.of(context)!.laBombeAExploseDans(loserName),
       'turnStartTime': FieldValue.serverTimestamp(),
     });
   }
@@ -20290,7 +20248,7 @@ class FirebaseService {
         await gameRef.update({
           'gameState': 'gameOver',
           'gameEndReason':
-              '$winnerName gagne avec $lowestScore point${lowestScore > 1 ? 's' : ''} !',
+              AppLocalizations.of(context)!.gagneAvecPointLowestscore1(winnerName, lowestScore)s' : ''} !',
         });
         return;
       }
@@ -20426,7 +20384,7 @@ class FirebaseService {
         updates['unoDeck'] = deck;
         updates['unoPendingDraw'] = 0; // La pénalité est purgée
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? 'Joueur'} a pioché $pendingDraw carte(s).",
+          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a pioché $pendingDraw carte(s).",
         ]);
 
         int nextPlayerIdx =
@@ -20459,14 +20417,14 @@ class FirebaseService {
 
       if (canPlayDrawnCard) {
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? 'Joueur'} a pioché une carte et peut la jouer.",
+          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a pioché une carte et peut la jouer.",
         ]);
         updates['unoDrawActionDone'] =
             true; // Indique à l'UI de permettre de jouer la carte
         updates['unoLastDrawnCard'] = drawnCard;
       } else {
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? 'Joueur'} a pioché une carte et passe son tour.",
+          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a pioché une carte et passe son tour.",
         ]);
         int nextPlayerIdx =
             (currentPlayerIndex + unoDirection + playerOrder.length) %
@@ -20515,7 +20473,7 @@ class FirebaseService {
 
       if (targetHand.length != 1) {
         throw Exception(
-          "${players[targetId]?['name'] ?? 'Le joueur'} n'a pas 1 carte, l'appel UNO est invalide.",
+          "${players[targetId]?['name'] ?? AppLocalizations.of(context)!.leJoueur} n'a pas 1 carte, l'appel UNO est invalide.",
         );
       }
       Map<String, dynamic> updates = {};
@@ -20548,7 +20506,7 @@ class FirebaseService {
         updates['unoDeck'] = deck;
         updates['unoContraDeadline'] = null;
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[callerId]?['name'] ?? 'Joueur'} a crié Contre UNO ! ${players[targetId]?['name'] ?? 'Joueur'} pioche 2 cartes.",
+          "${players[callerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a crié Contre UNO ! ${players[targetId]?['name'] ?? AppLocalizations.of(context)!.joueur} pioche 2 cartes.",
         ]);
 
         updates['unoCalledUno.$targetId'] = true;
@@ -20564,7 +20522,7 @@ class FirebaseService {
         updates['unoCalledUno.$targetId'] = true;
         updates['unoContraDeadline'] = null;
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[targetId]?['name'] ?? 'Joueur'} a dit UNO !",
+          "${players[targetId]?['name'] ?? AppLocalizations.of(context)!.joueur} a dit UNO !",
         ]);
       } else {
         throw Exception("Appel UNO invalide.");
@@ -20616,7 +20574,7 @@ class FirebaseService {
         transaction.update(gameRef, {
           'unoWildColorChosen': chosenColor,
           'unoLog': FieldValue.arrayUnion([
-            "${players[playerId]?['name'] ?? 'Joueur'} a choisi la couleur $chosenColor !",
+            "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a choisi la couleur $chosenColor !",
           ]),
         });
       } else {
@@ -20703,11 +20661,7 @@ class FirebaseService {
         players[currentTargetPlayerId]['name'],
       );
       roundState = 'answering';
-    } else if (gameType == 'Qui Pourrait le Plus ?') {
-      List<String> questions =
-          _aiWordPool ??
-          GameWords.whoIsMostLikely[difficulty] ??
-          GameWords.whoIsMostLikely['soft']!;
+    } else if (gameType == 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft']!;
       question =
           "Qui pourrait le plus ${questions[random.nextInt(questions.length)]}";
       roundState = 'voting';
@@ -20732,7 +20686,7 @@ class FirebaseService {
         for (var pId in players.keys) {
           await gameRef.collection('private_data').doc(pId).set({
             'isLiar': (pId == secretLiarId),
-            'role': (pId == secretLiarId) ? 'Menteur' : 'Honnête',
+            'role': (pId == secretLiarId) ? 'Menteur' : AppLocalizations.of(context)!.honnete,
           });
         }
         liarId = null;
@@ -20745,23 +20699,12 @@ class FirebaseService {
             GameWords.undercoverData['soft']!['wordPairs']!;
         String pair = wordPairs[random.nextInt(wordPairs.length)];
         List<String> words =
-            pair.contains(':') ? pair.split(':') : [pair, pair];
-
-        List<String> shuffledRoles = List.from(playerOrder)..shuffle();
-        String secUndercoverId = shuffledRoles[0];
-        String secMrWhiteId = shuffledRoles[1];
-
-        question =
-            "Décrivez votre mot secret en un seul mot. Imposteurs, bluffez !";
-        for (var pId in players.keys) {
-          String pRole =
-              (pId == secUndercoverId)
-                  ? 'Infiltré'
+            pair.contains(':AppLocalizations.of(context)!.pairSplit:AppLocalizations.of(context)!.pairPairListStringShuffledrolesInfiltré'
                   : (pId == secMrWhiteId ? 'Mr. White' : 'Civil');
           String pWord =
               (pId == secUndercoverId)
                   ? words[1]
-                  : (pId == secMrWhiteId ? "Vous n'avez pas de mot" : words[0]);
+                  : (pId == secMrWhiteId ? AppLocalizations.of(context)!.vousNAvezPasDe : words[0]);
 
           await gameRef.collection('private_data').doc(pId).set({
             'role': pRole,
@@ -20820,7 +20763,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'gameWinner': overallWinnerId,
           'gameEndReason':
-              "${players[overallWinnerId]?['name']} a atteint ${updatedScores[overallWinnerId]} points et gagne la partie !",
+              AppLocalizations.of(context)!.aAtteintPointsEtGagne(players[overallWinnerId]?['name'], updatedScores[overallWinnerId]),
         });
         return;
       }
@@ -21443,7 +21386,7 @@ class FirebaseService {
         updates['gameWinner'] = winnerId;
         updates['players.$winnerId.score'] = FieldValue.increment(1);
         updates['gameEndReason'] =
-            '${players[winnerId]?['name'] ?? 'Un joueur'} est le dernier survivant et remporte Skull !';
+            '${players[winnerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur} est le dernier survivant et remporte Skull !';
       } else {
         updates['roundState'] = 'result';
       }
@@ -21487,7 +21430,7 @@ class FirebaseService {
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = challengerId;
         updates['gameEndReason'] =
-            '${players[challengerId]?['name'] ?? 'Un joueur'} a remporté 2 défis et gagne la partie !';
+            '${players[challengerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur} a remporté 2 défis et gagne la partie !';
       } else {
         updates['roundState'] = 'result';
       }
@@ -21558,7 +21501,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'gameWinner': winnerId,
           'gameEndReason':
-              '${players[winnerId]?['name'] ?? 'Un joueur'} remporte Skull !',
+              AppLocalizations.of(context)!.playersWinneridname'] ?? AppLocalizations.of(context)!.unJoueur} remporte Skull !',
         });
         return;
       }
@@ -21603,7 +21546,7 @@ class FirebaseService {
 
     final String currentPlayerId = playerOrder[currentPlayerIndex];
     final String playerName =
-        gameData['players']?[currentPlayerId]?['name'] ?? 'Un joueur';
+        gameData['players']?[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
     final Map<String, dynamic> skullHands = Map<String, dynamic>.from(
       gameData['skullHands'] ?? {},
     );
@@ -21616,7 +21559,7 @@ class FirebaseService {
         await notifyAutoPlay(
           gameRef,
           playerName,
-          actionDetails: "pose de carte",
+          actionDetails: AppLocalizations.of(context)!.poseDeCarte,
         );
         final String randomCard = myHand[Random().nextInt(myHand.length)];
         await placeSkullCard(
@@ -21638,7 +21581,7 @@ class FirebaseService {
         await notifyAutoPlay(
           gameRef,
           playerName,
-          actionDetails: "enchère automatique",
+          actionDetails: AppLocalizations.of(context)!.enchereAutomatique,
         );
         await startSkullBid(
           gameCode,
@@ -21654,7 +21597,7 @@ class FirebaseService {
       await notifyAutoPlay(
         gameRef,
         playerName,
-        actionDetails: "passe l'enchère",
+        actionDetails: AppLocalizations.of(context)!.passeLEnchere,
       );
       await passSkullBid(gameCode, currentPlayerId, isAuto: true);
     }
@@ -21834,11 +21777,7 @@ class FirebaseService {
         throw Exception("Joueur ciblé introuvable.");
       }
 
-      if (gameType == 'Qui Pourrait le Plus ?') {
-        if (voterId == votedForId) {
-          throw Exception("Interdiction formelle de voter pour soi-même !");
-        }
-      } else if (gameType == 'Synonyme ou Banni') {
+      if (gameType == 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.elseIfGametypeSynonyme ou Banni') {
         if (voterId == votedForId) {
           throw Exception("Vous ne pouvez pas bannir votre propre synonyme !");
         }
@@ -21856,20 +21795,7 @@ class FirebaseService {
       final votes = Map<String, dynamic>.from(gameData['votes'] as Map? ?? {});
       votes[voterId] = votedForId;
 
-      if (gameType == 'Qui Pourrait le Plus ?') {
-        creditPlayerXp(
-          transaction,
-          gameRef,
-          gameData,
-          voterId,
-          5,
-          applySpeedBonus: true,
-        );
-      }
-
-      int requiredVotes = players.length;
-
-      if (gameType == 'Le Juge') {
+      if (gameType == 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIfLe Juge') {
         requiredVotes = 1;
       }
 
@@ -21881,24 +21807,7 @@ class FirebaseService {
       if (votes.length >= requiredVotes) {
         final updates = <String, dynamic>{'votes': votes};
 
-        if (gameType == 'Qui Pourrait le Plus ?') {
-          final Map<String, int> voteCounts = {};
-          for (final target in votes.values) {
-            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1;
-          }
-
-          int maxVotes = 0;
-          List<String> topVoted = [];
-          voteCounts.forEach((target, count) {
-            if (count > maxVotes) {
-              maxVotes = count;
-              topVoted = [target];
-            } else if (count == maxVotes) {
-              topVoted.add(target);
-            }
-          });
-
-          updates['roundState'] = 'result';
+        if (gameType == 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.forFinalTargetInVotesroundState'] = 'result';
           updates['turnStartTime'] = FieldValue.serverTimestamp();
 
           if (topVoted.length == 1) {
@@ -21945,7 +21854,7 @@ class FirebaseService {
           }
         } else if (gameType == 'Le Juge') {
           final winnerPlayerId = votedForId;
-          final winnerName = players[winnerPlayerId]?['name'] ?? 'Joueur';
+          final winnerName = players[winnerPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
           updates['roundState'] = 'result';
           updates['roundWinnerId'] = winnerPlayerId;
           updates['players.$winnerPlayerId.score'] = FieldValue.increment(1);
@@ -22253,26 +22162,7 @@ class FirebaseService {
           updates['gameEndReason'] = 'Aucune description n\'a été votée.';
         }
         updates['voteResults'] = voteCounts;
-      } else if (gameType == 'Qui Pourrait le Plus ?') {
-        final Map<String, int> voteCounts = {};
-        for (final target in votes.values) {
-          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1;
-        }
-
-        int maxVotes = 0;
-        List<String> topVoted = [];
-        voteCounts.forEach((target, count) {
-          if (count > maxVotes) {
-            maxVotes = count;
-            topVoted = [target];
-          } else if (count == maxVotes) {
-            topVoted.add(target);
-          }
-        });
-
-        if (topVoted.length == 1) {
-          final winner = topVoted.first;
-          updates['roundWinnerId'] = winner;
+      } else if (gameType == 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId'] = winner;
           updates['players.$winner.score'] = FieldValue.increment(1);
           creditPlayerXp(
             transaction,
@@ -22511,7 +22401,7 @@ class FirebaseService {
         throw Exception("Ce joueur n'a pas soumis de réponse.");
       }
 
-      final winnerName = players[winnerPlayerId]?['name'] ?? 'Joueur';
+      final winnerName = players[winnerPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
 
       creditPlayerXp(
         transaction,
@@ -22963,13 +22853,13 @@ class FirebaseService {
                 ? playersWithChips.first
                 : playerIds.first;
         String winnerName =
-            playerData[winner]?['name'] ?? players[winner]?['name'] ?? 'Joueur';
+            playerData[winner]?['name'] ?? players[winner]?['name'] ?? AppLocalizations.of(context)!.joueur;
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': winner,
           'players.$winner.score': FieldValue.increment(1),
           'gameEndReason':
-              "$winnerName a remporté tous les jetons de la table !",
+              AppLocalizations.of(context)!.aRemporteTousLesJetons(winnerName),
         });
         return;
       }
@@ -23438,7 +23328,7 @@ class FirebaseService {
           .map((id) => playerData[id]?['name'] ?? 'Inconnu')
           .join(' et ');
       winnerAnnouncement =
-          "$winnerNames gagne(nt) le pot avec ${bestHand?.rank.name ?? 'une main'} !";
+          "$winnerNames gagne(nt) le pot avec ${bestHand?.rank.name ?? AppLocalizations.of(context)!.uneMain} !";
     }
 
     Map<String, dynamic> scoreUpdates = {};
@@ -24006,7 +23896,7 @@ class FirebaseService {
       String timedOutPlayerId = playerOrder[currentIndex];
       String roundState = gameData['roundState'];
       final playerName =
-          gameData['players']?[timedOutPlayerId]?['name'] ?? 'Un joueur';
+          gameData['players']?[timedOutPlayerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
 
       if (roundState == 'bidding') {
         await notifyAutoPlay(
@@ -24041,7 +23931,7 @@ class FirebaseService {
           await notifyAutoPlay(
             gameRef,
             playerName,
-            actionDetails: "carte $cardToPlay",
+            actionDetails: AppLocalizations.of(context)!.carte1(cardToPlay),
           );
           await beloteAction(
             gameCode,
@@ -24274,7 +24164,7 @@ class FirebaseService {
           'gameWinner': winnerId,
           'players.$winnerId.score': FieldValue.increment(1),
           'blokusScores': scores,
-          'gameEndReason': "Fin de la partie !",
+          'gameEndReason': AppLocalizations.of(context)!.finDeLaPartie,
         });
       } else {
         int nextIndex =
@@ -24365,7 +24255,7 @@ class FirebaseService {
           'gameWinner': winnerId,
           'players.$winnerId.score': FieldValue.increment(1),
           'blokusScores': scores,
-          'gameEndReason': "Fin de la partie !",
+          'gameEndReason': AppLocalizations.of(context)!.finDeLaPartie,
         });
       } else {
         updates['blokusCurrentPlayerIndex'] = nextIndex;
@@ -24377,217 +24267,23 @@ class FirebaseService {
 }
 
 void showGameRules(BuildContext context, String gameType) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      final gameTitle = GameRulesLocalization.getGameTitle(context, gameType);
-      final rules = GameRulesLocalization.getRules(context, gameType);
-
-      return AlertDialog(
-        title: Text(
-          'rulesTitle',
-        ),
-        content: SingleChildScrollView(child: Text(rules)),
-        actions: <Widget>[
-          TextButton(
-            child: Text('understoodButton'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
-
-class FriendsModeHomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Icon(Icons.nightlife, color: Colors.deepPurpleAccent, size: 80),
-              SizedBox(height: 20),
-              Text(
-                AppLocalizations.of(context)!.jeuDeSoiree,
-                style: Theme.of(context).textTheme.headlineMedium,
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                AppLocalizations.of(context)!.leCompagnonDeVosMeilleures,
-                style: Theme.of(context).textTheme.bodyMedium,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 70),
-              ElevatedButton.icon(
-                icon: Icon(Icons.people),
-                label: Text(
-                  AppLocalizations.of(context)!.multijoueurEnLigne,
-                ),
-                onPressed: () {
-                  final String playerId = Provider.of<String>(
-                    context,
-                    listen: false,
-                  );
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => MultiplayerMenuScreen(playerId: playerId),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton.icon(
-                icon: Icon(Icons.person),
-                label: Text(
-                  AppLocalizations.of(context)!.modeLocalHorsLigne,
-                ),
-                onPressed:
-                    () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => LocalPlayerSetupScreen(),
-                      ),
-                    ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MultiplayerMenuScreen extends StatelessWidget {
-  final _nameController = TextEditingController();
-  final String playerId; // 1. Ajouter ce champ
-
-  MultiplayerMenuScreen({Key? key, required this.playerId}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.modeMultijoueur),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.entrezVotrePseudo,
-              style: Theme.of(context).textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.pseudo,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 40),
-            ElevatedButton(
-              child: Text(
-                AppLocalizations.of(context)!.creerUnePartie,
-              ),
-              onPressed: () {
-                if (_nameController.text.trim().isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        AppLocalizations.of(context)!.veuillezEntrerUnPseudo,
-                      ),
-                    ),
-                  );
-                  return;
-                }
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (_) => CreateGameScreen(
-                          playerName: _nameController.text.trim(),
-                          playerId:
-                              this.playerId, // Utilise la variable de la classe
-                        ),
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 15),
-            OutlinedButton(
-              child: Text(
-                AppLocalizations.of(context)!.rejoindreUnePartie,
-              ),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.white,
-                side: BorderSide(color: Colors.deepPurple),
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              onPressed: () {
-                if (_nameController.text.trim().isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        AppLocalizations.of(context)!.veuillezEntrerUnPseudo,
-                      ),
-                    ),
-                  );
-                  return;
-                }
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (_) => JoinGameScreen(
-                          playerName: _nameController.text.trim(),
-                          playerId:
-                              this.playerId, // Utiliser la variable déjà disponible
-                        ),
-                  ),
-                );
-              },
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final rules = GameData.gameRules[gameType] ?? "";
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)!.rulesTitle),
+          content: SingleChildScrollView(child: Text(rules)),
+          actions: <Widget>[
+            TextButton(
+              child: Text(AppLocalizations.of(context)!.understoodButton),
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
-}
-
-class CreateGameScreen extends StatefulWidget {
-  final String playerName;
-  final bool isWorldMode;
-  final String? initialGame;
-  final String playerId;
-  final String? loungeId;
-  final Map<String, dynamic>? loungePlayers;
-
-  CreateGameScreen({
-    required this.playerName,
-    this.isWorldMode = false,
-    this.initialGame,
-    required this.playerId,
-    this.loungeId,
-    this.loungePlayers,
-  });
 
   @override
   _CreateGameScreenState createState() => _CreateGameScreenState();
@@ -25145,9 +24841,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ? _liarVoteMode
                       : 'simultaneous',
               quiPourraitVoteMode:
-                  _selectedGame == 'Qui Pourrait le Plus ?'
-                      ? _quiPourraitVoteMode
-                      : 'grouper',
+                  _selectedGame == 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.quipourraitvotemodegrouper',
               petitBacCategories:
                   _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
               petitBacTime:
@@ -25296,8 +24990,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     isPublicSearchEnabled
                         ? "Local indisponible (Recherche active)"
                         : isCommunicationEnabled
-                        ? "Local indisponible (Vidéo/Audio actif)"
-                        : "Jouer en Local (Sur cet appareil)",
+                        ? AppLocalizations.of(context)!.localIndisponibleVideoAudioActif
+                        : AppLocalizations.of(context)!.jouerEnLocalSurCet,
                   ),
                 ),
                 SizedBox(height: 12),
@@ -25319,8 +25013,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             SnackBar(
                               content: Text(
                                 blockOnlineForDevineTete
-                                    ? "La vidéo est obligatoire pour jouer à Devine Tête en ligne."
-                                    : "Désactivez la 'Recherche Publique' pour créer une partie privée.",
+                                    ? AppLocalizations.of(context)!.laVideoEstObligatoirePour
+                                    : AppLocalizations.of(context)!.desactivezLaRecherchePubliquePour1,
                               ),
                             ),
                           );
@@ -25331,10 +25025,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         },
                 label: Text(
                   isPublicSearchEnabled
-                      ? "Privé indisponible (Recherche active)"
+                      ? AppLocalizations.of(context)!.priveIndisponibleRechercheActive
                       : blockOnlineForDevineTete
-                      ? "Privé indisponible (Vidéo requise)"
-                      : "Créer une partie privée (Avec code)",
+                      ? AppLocalizations.of(context)!.priveIndisponibleVideoRequise
+                      : AppLocalizations.of(context)!.creerUnePartiePriveeAvec,
                 ),
               ),
               SizedBox(height: 12),
@@ -25359,8 +25053,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               SnackBar(
                                 content: Text(
                                   blockOnlineForDevineTete
-                                      ? "La vidéo est obligatoire pour jouer à Devine Tête en ligne."
-                                      : "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer avec le monde.",
+                                      ? AppLocalizations.of(context)!.laVideoEstObligatoirePour
+                                      : AppLocalizations.of(context)!.activezLeBoutonRecherchePublique,
                                 ),
                               ),
                             );
@@ -25369,8 +25063,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     _enablePublicSearch
                         ? "Recherche rapide (Monde)"
                         : blockOnlineForDevineTete
-                        ? "Recherche rapide (Vidéo requise)"
-                        : "Recherche Monde (Désactivée)",
+                        ? AppLocalizations.of(context)!.rechercheRapideVideoRequise
+                        : AppLocalizations.of(context)!.rechercheMondeDesactivee,
                   ),
                 ),
                 SizedBox(height: 12),
@@ -25394,18 +25088,18 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               SnackBar(
                                 content: Text(
                                   blockOnlineForDevineTete
-                                      ? "La vidéo est obligatoire pour jouer à Devine Tête en Classé."
-                                      : "Activez le bouton 'Recherche Publique' dans les paramètres pour jouer en Classé.",
+                                      ? AppLocalizations.of(context)!.laVideoEstObligatoirePour1
+                                      : AppLocalizations.of(context)!.activezLeBoutonRecherchePublique1,
                                 ),
                               ),
                             );
                           },
                   label: Text(
                     _enablePublicSearch
-                        ? "Partie Classée (Ranked)"
+                        ? AppLocalizations.of(context)!.partieClasseeRanked
                         : blockOnlineForDevineTete
-                        ? "Partie Classée (Vidéo requise)"
-                        : "Partie Classée (Désactivée)",
+                        ? AppLocalizations.of(context)!.partieClasseeVideoRequise
+                        : AppLocalizations.of(context)!.partieClasseeDesactivee,
                   ),
                 ),
               ],
@@ -25491,7 +25185,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        // Filtres : "Ce jeu" vs "Tous les jeux"
+                        // Filtres : AppLocalizations.of(context)!.ceJeu vs "Tous les jeux"
                         Row(
                           children: [
                             Expanded(
@@ -25586,7 +25280,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
-                          return const Center(
+                          return Center(
                             child: CircularProgressIndicator(),
                           );
                         }
@@ -25606,8 +25300,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   const SizedBox(height: 12),
                                   Text(
                                     historyFilter == 'all'
-                                        ? "Aucun thème IA sauvegardé sur votre compte."
-                                        : "Aucun thème sauvegardé pour {0}.",
+                                        ? AppLocalizations.of(context)!.aucunThemeIaSauvegardeSur
+                                        : AppLocalizations.of(context)!.aucunThemeSauvegardePour,
                                     style: const TextStyle(
                                       color: Colors.white54,
                                       fontSize: 14,
@@ -25751,7 +25445,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
-                                  const SizedBox(height: 8),
+                                  SizedBox(height: 8),
                                   Wrap(
                                     spacing: 6,
                                     runSpacing: 4,
@@ -26013,8 +25707,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 ),
                         label: Text(
                           isGeneratingMore
-                              ? "Génération en cours..."
-                              : "Compléter avec l'IA (+15 mots)",
+                              ? AppLocalizations.of(context)!.generationEnCours
+                              : AppLocalizations.of(context)!.completerAvecLIa15,
                           style: const TextStyle(
                             color: Colors.amberAccent,
                             fontSize: 12,
@@ -26029,7 +25723,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     final addedWords =
                                         await FirebaseService.generateAiWords(
                                           instructions:
-                                              "Complète cette liste sur le thème ${titleCtrl.text}. Mots existants : ${wordsList.take(10).join(', ')}",
+                                              AppLocalizations.of(context)!.completeCetteListeSurLe(titleCtrl.text, wordsList.take(10).join(', ')),
                                           count: 15,
                                           gameType: _selectedGame,
                                         );
@@ -26659,8 +26353,8 @@ AppLocalizations.of(context)!.combineS,
                                     labelStyle: const TextStyle(fontSize: 12),
                                     hintText:
                                         _selectedAiThemes.isEmpty
-                                            ? "ex: Mythologie grecque, Objets insolites, Pirates..."
-                                            : "ex: Pas d'animaux dangereux, uniquement des films cultes...",
+                                            ? AppLocalizations.of(context)!.exMythologieGrecqueObjetsInsolites
+                                            : AppLocalizations.of(context)!.exPasDAnimauxDangereux,
                                     hintStyle: const TextStyle(
                                       color: Colors.white30,
                                       fontSize: 12,
@@ -26715,8 +26409,8 @@ AppLocalizations.of(context)!.combineS,
                                                 ),
                                         label: Text(
                                           _isAiLoading
-                                              ? "Génération en cours..."
-                                              : "Générer avec l'IA ($currentCount éléments)",
+                                              ? AppLocalizations.of(context)!.generationEnCours
+                                              : AppLocalizations.of(context)!.genererAvecLIaElements(currentCount),
                                           style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
@@ -26880,7 +26574,7 @@ AppLocalizations.of(context)!.combineS,
                                         const SizedBox(width: 8),
                                         Expanded(
                                           child: Text(
-                                            AppLocalizations.of(context)!.packActifElements(_activeAiThemeTitle ?? 'Thème personnalisé', _selectedAiWords!.length),
+                                            AppLocalizations.of(context)!.packActifElements(_activeAiThemeTitle ?? AppLocalizations.of(context)!.themePersonnalise, _selectedAiWords!.length),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -26931,7 +26625,7 @@ AppLocalizations.of(context)!.combineS,
                             ),
                           ),
                           ButtonSegment(
-                            value: 'Complément',
+                            value: AppLocalizations.of(context)!.complement,
                             label: Text(
                               AppLocalizations.of(context)!.complement,
                             ),
@@ -27518,7 +27212,7 @@ AppLocalizations.of(context)!.combineS,
                       SegmentedButton<String>(
                         segments: [
                           ButtonSegment(
-                            value: 'pioche',
+                            value: AppLocalizations.of(context)!.pioche3,
                             label: Text(
                               AppLocalizations.of(context)!.pioche,
                             ),
@@ -27616,7 +27310,7 @@ AppLocalizations.of(context)!.combineS,
                             icon: Icon(Icons.photo),
                           ),
                           ButtonSegment(
-                            value: 'Vidéos',
+                            value: AppLocalizations.of(context)!.videos,
                             label: Text(
                               AppLocalizations.of(context)!.videos,
                             ),
@@ -27791,7 +27485,7 @@ AppLocalizations.of(context)!.combineS,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: EdgeInsets.only(top: 8.0),
                         child: Text(
                           AppLocalizations.of(context)!.totalImposteursLaRepartitionFinale,
                           textAlign: TextAlign.center,
@@ -28009,10 +27703,10 @@ AppLocalizations.of(context)!.communicationEnLigne,
 ),
                                 subtitle: Text(
                                   forceVideo
-                                      ? "Caméra indispensable pour ce jeu."
+                                      ? AppLocalizations.of(context)!.cameraIndispensablePourCeJeu
                                       : (canEnableVideo
-                                          ? "Micro + Caméra (Désactive le mode Local)"
-                                          : "Réservé VIP ou limite atteinte"),
+                                          ? AppLocalizations.of(context)!.microCameraDesactiveLeMode
+                                          : AppLocalizations.of(context)!.reserveVipOuLimiteAtteinte),
                                 ),
                                 value: forceVideo ? true : _videoEnabled,
                                 onChanged:
@@ -28787,7 +28481,7 @@ AppLocalizations.of(context)!.joueursPresents,
                             ),
                             title: Text(
                               pData['name'] ??
-                                  'Joueur',
+                                  AppLocalizations.of(context)!.joueur,
                               style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             subtitle: (pData['score'] != null &&
@@ -28800,7 +28494,7 @@ AppLocalizations.of(context)!.joueursPresents,
                                   ),
                                 )
                                 : Text(
-                                  isPlayerHost ? "Hôte du salon" : "Appuyer pour voir profil",
+                                  isPlayerHost ? AppLocalizations.of(context)!.hoteDuSalon : AppLocalizations.of(context)!.appuyerPourVoirProfil,
                                   style: const TextStyle(
                                     color: Colors.white38,
                                     fontSize: 11,
@@ -29589,7 +29283,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               await _firebaseService.requestBotReplacement(
                 widget.gameCode,
                 doc.id,
-                pData['name'] ?? 'Joueur',
+                pData['name'] ?? AppLocalizations.of(context)!.joueur,
                 'déconnecté',
               );
             }
@@ -30254,23 +29948,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   static const Map<String, String> _undercoverRoleDescriptions = {
     'Fou de Joie':
-        "Si vous êtes le premier joueur éliminé de la partie (mort ou vif), vous gagnez 4 points bonus à la fin.",
+        AppLocalizations.of(context)!.siVousEtesLePremier,
     'Boomerang':
-        "La première fois que la majorité vote contre vous, tous ceux qui ont voté contre vous sont éliminés à votre place. Ce pouvoir ne fonctionne qu'une fois.",
+        AppLocalizations.of(context)!.laPremiereFoisQueLa,
     'Déesse de la Justice':
-        "En cas d'égalité lors d'un vote, c'est vous qui décidez qui est éliminé parmi les joueurs à égalité. Ce pouvoir persiste même après votre mort.",
+        AppLocalizations.of(context)!.enCasDEgaliteLors,
     'Fantôme':
-        "Même après votre élimination, vous continuez à participer aux votes pour éliminer les joueurs.",
+        AppLocalizations.of(context)!.memeApresVotreEliminationVous,
     'Amoureux':
-        "Un autre joueur est secrètement désigné comme votre amoureux. Si l'un de vous deux est éliminé, l'autre meurt de chagrin et est éliminé aussi.",
+        AppLocalizations.of(context)!.unAutreJoueurEstSecretement,
     'Mr. Meme':
-        "Au lieu de donner un indice oral, vous devez mimer votre mot-indice à chaque tour.",
+        AppLocalizations.of(context)!.auLieuDeDonnerUn,
     'Vendeur de Falafels':
-        "Vous n'avez pas de mot, comme Mr. White, mais vous gagnez si les imposteurs gagnent. Vous pouvez mentir et prétendre avoir un mot pour vous intégrer.",
+        AppLocalizations.of(context)!.vousNAvezPasDe1,
     'Vengeuse':
-        "Si vous êtes éliminée, vous pouvez choisir d'emporter un autre joueur (encore en vie) avec vous dans la tombe.",
+        AppLocalizations.of(context)!.siVousEtesElimineeVous,
     'Duellistes':
-        "Un autre joueur est votre duelliste secret. Si vous survivez plus longtemps que lui, vous gagnez 2 points bonus. S'il survit plus longtemps que vous, vous perdez 2 points.",
+        AppLocalizations.of(context)!.unAutreJoueurEstVotre,
   };
 
   void _showRoleDescriptionDialog(BuildContext context, String roleName) {
@@ -30281,7 +29975,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           title: Text(GameContentLocalization.role(context, roleName)),
           content: Text(
             _undercoverRoleDescriptions[roleName] ??
-                "Aucune description trouvée pour ce rôle.",
+                AppLocalizations.of(context)!.aucuneDescriptionTrouveePourCe,
           ),
           actions: <Widget>[
             TextButton(
@@ -30320,8 +30014,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         SizedBox(height: 10),
         Text(
           isMyTurn
-              ? "🎯 C'est à toi de donner un indice !"
-              : "Au tour de {0}...",
+              ? AppLocalizations.of(context)!.cEstAToiDe1
+              : AppLocalizations.of(context)!.auTourDe,
           style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
@@ -30474,10 +30168,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   Wrap(
                     spacing: 6,
                     children: suspects.entries.map((entry) {
-                      final accuserName = playerData[entry.key]?['name'] ?? 'Joueur';
+                      final accuserName = playerData[entry.key]?['name'] ?? AppLocalizations.of(context)!.joueur;
                       final targetName = playerData[entry.value]?['name'] ?? 'Suspect';
                       return Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                         decoration: BoxDecoration(
                           color: Colors.amber.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(10),
@@ -30832,8 +30526,8 @@ AppLocalizations.of(context)!.soupconne,
                 GameContentLocalization.ui(
                   context,
                   uploadedUrls.isEmpty
-                      ? "Échec de l'upload des photos vers Supabase."
-                      : "Il faut au moins 3 photos pour jouer à Photo Roulette.",
+                      ? AppLocalizations.of(context)!.echecDeLUploadDes
+                      : AppLocalizations.of(context)!.ilFautAuMoins3,
                 ),
               ),
             ),
@@ -31622,7 +31316,7 @@ AppLocalizations.of(context)!.points,
                             child: _buildPersistentChatInput(
                               widget.gameCode,
                               playerId,
-                              players[playerId]?['name'] ?? 'Joueur',
+                              players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur,
                               gameData,
                             ),
                           )
@@ -31773,7 +31467,7 @@ AppLocalizations.of(context)!.points,
                         child: FloatingChatOverlay(
                           gameCode: widget.gameCode,
                           playerId: playerId,
-                          playerName: players[playerId]?['name'] ?? 'Joueur',
+                          playerName: players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur,
                           gameData: gameData,
                         ),
                       ),
@@ -31848,7 +31542,7 @@ AppLocalizations.of(context)!.points,
         gameTitle: "Blanc Manger Coco",
         winnerId: winnerId,
         winnerName: players[winnerId]?['name'],
-        reason: gameData['gameEndReason'] ?? "Score cible atteint !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.scoreCibleAtteint,
         players: players,
         customScores: scores.map((k, v) => MapEntry(k, (v as num).toInt())),
         gameData: gameData,
@@ -31885,8 +31579,8 @@ AppLocalizations.of(context)!.points,
                   SizedBox(width: 8),
                   Text(
                     amIJudge
-                        ? "Vous êtes le Juge !"
-                        : "Juge ce tour : {0}",
+                        ? AppLocalizations.of(context)!.vousEtesLeJuge
+                        : AppLocalizations.of(context)!.jugeCeTour,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -32152,10 +31846,10 @@ AppLocalizations.of(context)!.enAttenteDesAutresJoueurs1,
           children: [
             Text(
               amIJudge
-                  ? "Cliquez sur la carte gagnante !"
+                  ? AppLocalizations.of(context)!.cliquezSurLaCarteGagnante
                   : (inspectedCard != null
-                      ? "👀 Le Juge lit une carte à voix haute..."
-                      : "Le Juge est en train de choisir..."),
+                      ? AppLocalizations.of(context)!.leJugeLitUneCarte
+                      : AppLocalizations.of(context)!.leJugeEstEnTrain),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -32390,7 +32084,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
 
     final message = GameMessageLocalization.tr(
       context,
-      lastAuto['message'] ?? "Coup automatique joué pour cause d'inactivité.",
+      lastAuto['message'] ?? AppLocalizations.of(context)!.coupAutomatiqueJouePourCause,
     );
     return Container(
       width: double.infinity,
@@ -32442,8 +32136,8 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
     }
 
     final String targetPlayerId = pending['playerId'] ?? '';
-    final String targetPlayerName = pending['playerName'] ?? 'Un joueur';
-    final String reason = pending['reason'] ?? 'inactivité';
+    final String targetPlayerName = pending['playerName'] ?? AppLocalizations.of(context)!.unJoueur;
+    final String reason = pending['reason'] ?? AppLocalizations.of(context)!.inactivite;
     final bool isSocial = pending['isSocial'] == true;
 
     return Container(
@@ -32693,9 +32387,9 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
     final String currentTurnKey = _computeTurnKey(gameData, turnStartTimeStamp);
 
     return PreferredSize(
-      preferredSize: const Size.fromHeight(20.0),
+      preferredSize: Size.fromHeight(20.0),
       child: StreamBuilder(
-        stream: Stream.periodic(const Duration(milliseconds: 100)),
+        stream: Stream.periodic(Duration(milliseconds: 100)),
         builder: (context, snapshot) {
           final elapsedSeconds =
               DateTime.now().difference(turnStartTime).inMilliseconds / 1000.0;
@@ -33348,7 +33042,7 @@ AppLocalizations.of(context)!.k13Remplies,
                               ),
                             ),
                             child: Text(
-                              "$cat: ${hasScore ? '$scoreVal' : '—'}",
+                              AppLocalizations.of(context)!.str8f522b(cat, hasScore ? '$scoreVal' : '—'),
                               style: TextStyle(
                                 fontSize: 10.5,
                                 fontWeight:
@@ -33418,10 +33112,10 @@ AppLocalizations.of(context)!.k13Remplies,
           ),
         );
         return UniversalGameEndScreen(
-          gameTitle: "Zéro Pointé",
+          gameTitle: AppLocalizations.of(context)!.zeroPointe,
           winnerId: gameData['gameWinner'],
           winnerName: players[gameData['gameWinner']]?['name'],
-          reason: "Partie terminée avec le score le plus faible !",
+          reason: AppLocalizations.of(context)!.partieTermineeAvecLeScore,
           players: players,
           customScores: totalScores,
           lowerScoreWins: true,
@@ -33468,7 +33162,7 @@ AppLocalizations.of(context)!.k13Remplies,
               const Divider(color: Colors.white24),
               const SizedBox(height: 6),
               ...sortedPlayersByTotal.map((entry) {
-                final pName = players[entry.key]?['name'] ?? 'Joueur';
+                final pName = players[entry.key]?['name'] ?? AppLocalizations.of(context)!.joueur;
                 final rScore = roundScores[entry.key] ?? 0;
                 final tScore = entry.value;
                 return Container(
@@ -33570,7 +33264,7 @@ AppLocalizations.of(context)!.k13Remplies,
       return Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -33633,8 +33327,8 @@ AppLocalizations.of(context)!.k13Remplies,
     // --- 3. TOUR DE JEU ACTIF ---
     String instructions =
         isMyTurn
-            ? "C'est votre tour !"
-            : "Au tour de {name}";
+            ? AppLocalizations.of(context)!.cEstVotreTour
+            : AppLocalizations.of(context)!.auTourDe1;
     Color instructionColor = isMyTurn ? Colors.greenAccent : Colors.white70;
 
     if (isMyTurn) {
@@ -34224,10 +33918,10 @@ AppLocalizations.of(context)!.k13Remplies,
                                       SizedBox(width: 5),
                                       Text(
                                         index == 0
-                                            ? "Départ par {0}"
+                                            ? AppLocalizations.of(context)!.departPar
                                             : (isDrawing
-                                                ? "Dessiné par {0}"
-                                                : "Deviné par {0}"),
+                                                ? AppLocalizations.of(context)!.dessinePar
+                                                : AppLocalizations.of(context)!.devinePar),
                                         style: TextStyle(
                                           color: Colors.grey[600],
                                           fontSize: 12,
@@ -34422,8 +34116,8 @@ AppLocalizations.of(context)!.k13Remplies,
             Text(
               gribouillisMode ==
                       'Brise-Glace'
-                  ? "Écris un thème ou une phrase !"
-                  : "Imagine une phrase !",
+                  ? AppLocalizations.of(context)!.ecrisUnThemeOuUne
+                  : AppLocalizations.of(context)!.imagineUnePhrase,
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
@@ -34566,7 +34260,7 @@ AppLocalizations.of(context)!.k13Remplies,
 
     Widget buildCompactParticipant(String pId) {
       final String? identity = playerLivekitIdentities[pId];
-      final String name = players[pId]?['name'] ?? 'Joueur';
+      final String name = players[pId]?['name'] ?? AppLocalizations.of(context)!.joueur;
       final bool isGiver = (pId == clueGiverId);
       final bool isLocal = (pId == playerId);
       final bool isSameTeam = List<String>.from(
@@ -34651,7 +34345,7 @@ AppLocalizations.of(context)!.k13Remplies,
                   ),
               ],
             ),
-            const SizedBox(height: 3),
+            SizedBox(height: 3),
             Text(
               isLocal ? "Moi" : name,
               style: TextStyle(
@@ -34807,10 +34501,10 @@ context,
               Flexible(
                 child: Text(
                   amIClueGiver
-                      ? "Vous êtes l'orateur : faites deviner le mot !"
+                      ? AppLocalizations.of(context)!.vousEtesLOrateurFaites
                       : (isMyTeamTurn
-                          ? "{0} fait deviner à votre équipe !"
-                          : "Surveillez {0} et buzzez en cas d'interdit !"),
+                          ? AppLocalizations.of(context)!.faitDevinerAVotreEquipe
+                          : AppLocalizations.of(context)!.surveillezEtBuzzezEnCas),
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -35001,7 +34695,7 @@ context,
                             children:
                                 forbiddenWords.map((word) {
                                   return Container(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                       horizontal: 14,
                                       vertical: 8,
                                     ),
@@ -35216,7 +34910,7 @@ context,
     // --- ÉCRAN DE FIN DE PARTIE ---
     if (gameData['gameState'] == 'gameOver') {
       final loserId = gameData['zombieLoserId'];
-      final loserName = players[loserId]?['name'] ?? "Un survivant";
+      final loserName = players[loserId]?['name'] ?? AppLocalizations.of(context)!.unSurvivant;
       final bool amILoser = loserId == playerId;
 
       return Center(
@@ -35254,8 +34948,8 @@ context,
               const SizedBox(height: 14),
               Text(
                 amILoser
-                    ? "VOUS AVEZ ÉTÉ INFECTÉ !"
-                    : "SURVIVANTS ÉCHAPPÉS !",
+                    ? AppLocalizations.of(context)!.vousAvezEteInfecte
+                    : AppLocalizations.of(context)!.survivantsEchappes,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w900,
@@ -35375,8 +35069,8 @@ context,
                       children: [
                         Text(
                           isMyTurn
-                              ? "PIOCHEZ CHEZ {0} !"
-                              : "TOUR DE {0}",
+                              ? AppLocalizations.of(context)!.piochezChez
+                              : AppLocalizations.of(context)!.tourDe,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w900,
@@ -35389,8 +35083,8 @@ context,
                         ),
                         Text(
                           isMyTurn
-                              ? "Choisissez une carte face cachée au hasard"
-                              : "En attente de la pioche...",
+                              ? AppLocalizations.of(context)!.choisissezUneCarteFaceCachee
+                              : AppLocalizations.of(context)!.enAttenteDeLaPioche,
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.white38,
@@ -35455,11 +35149,11 @@ context,
                         decoration: BoxDecoration(
                           color: const Color(0xFF065F46),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: const Color(0xFF34D399)),
+                          border: Border.all(color: Color(0xFF34D399)),
                         ),
                         child: Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.check_circle_rounded,
                               color: Colors.greenAccent,
                               size: 12,
@@ -35742,7 +35436,7 @@ AppLocalizations.of(context)!.mainDeCartes,
         winnerId: winnerId,
         winnerName: resolvePlayerName(winnerId ?? ''),
         reason:
-            gameData['gameEndReason'] ?? "La partie de Big Two est terminée !",
+            gameData['gameEndReason'] ?? AppLocalizations.of(context)!.laPartieDeBigTwo,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -35787,8 +35481,8 @@ AppLocalizations.of(context)!.mainDeCartes,
                       children: [
                         Text(
                           isMyTurn
-                              ? "C'est votre tour !"
-                              : "Au tour de ${resolvePlayerName(currentPlayerId)}",
+                              ? AppLocalizations.of(context)!.cEstVotreTour
+                              : AppLocalizations.of(context)!.auTourDe2(resolvePlayerName(currentPlayerId)),
                           style: TextStyle(
                             color: isMyTurn ? Colors.greenAccent : Colors.white70,
                             fontWeight: FontWeight.bold,
@@ -35985,7 +35679,7 @@ context,
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: isSelected ? Colors.greenAccent : const Color(0xFFCBD5E1),
+          color: isSelected ? Colors.greenAccent : Color(0xFFCBD5E1),
           width: isSelected ? 3.0 : 1.2,
         ),
         boxShadow: [
@@ -36142,10 +35836,10 @@ context,
       });
 
       return UniversalGameEndScreen(
-        gameTitle: "Action ou Vérité",
+        gameTitle: AppLocalizations.of(context)!.actionOuVerite,
         winnerId: winnerId,
         winnerName: players[winnerId]?['name'],
-        reason: gameData['gameEndReason'] ?? "La partie est terminée !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.laPartieEstTerminee,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -36192,7 +35886,7 @@ context,
         winnerName: players[gameData['gameWinner']]?['name'],
         reason:
             gameData['gameEndReason'] ??
-            "Plus aucun coup possible pour l'adversaire !",
+            AppLocalizations.of(context)!.plusAucunCoupPossiblePour,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -36211,8 +35905,8 @@ context,
             children: [
               Text(
                 isMyTurn
-                    ? "C'est votre tour ! ({0})"
-                    : "Au tour de {0}...",
+                    ? AppLocalizations.of(context)!.cEstVotreTour1
+                    : AppLocalizations.of(context)!.auTourDe,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -36562,8 +36256,7 @@ context,
         return _buildDominoesUI(context, gameData, playerId);
       case 'Blanc Manger Coco':
         return _buildBlancMangerCocoUI(context, gameData, playerId);
-      case 'Qui Pourrait le Plus ?':
-      case 'Synonyme ou Banni':
+      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.caseLabelSynonyme ou Banni':
       case 'Le Juge':
       case 'Le Menteur':
       case 'Le Roi des Mêmes':
@@ -36591,7 +36284,7 @@ context,
     );
     final bool isMyTurn = playerId == currentGuesserId;
     final String guesserName =
-        players[currentGuesserId]?['name'] ?? 'Un joueur';
+        players[currentGuesserId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
 
     final bool useTeams = gameData['devineTeteUseTeams'] == true;
     final String activeTeam = gameData['activeTeam'] ?? 'teamA';
@@ -36608,10 +36301,10 @@ context,
 
     if (gameData['gameState'] == 'gameOver') {
       return UniversalGameEndScreen(
-        gameTitle: "Devine Tête",
+        gameTitle: AppLocalizations.of(context)!.devineTete,
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Fin de la partie !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.finDeLaPartie,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -36791,8 +36484,8 @@ context,
           const SizedBox(height: 4),
           Text(
             useTeams
-                ? "Écoutez les indices de votre équipe !"
-                : "Regardez vos amis à l'écran, ils vous aident !",
+                ? AppLocalizations.of(context)!.ecoutezLesIndicesDeVotre
+                : AppLocalizations.of(context)!.regardezVosAmisAL,
             style: const TextStyle(color: Colors.white70, fontSize: 13),
             textAlign: TextAlign.center,
           ),
@@ -36802,7 +36495,7 @@ context,
             children: [
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFEA580C),
+                  backgroundColor: Color(0xFFEA580C),
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
@@ -36820,7 +36513,7 @@ context,
                     false, // Passer -> mot suivant immédiat
                   );
                 },
-                icon: const Icon(Icons.skip_next_rounded, size: 24),
+                icon: Icon(Icons.skip_next_rounded, size: 24),
                 label: Text(
                   AppLocalizations.of(context)!.passer1,
                   style: const TextStyle(
@@ -36865,7 +36558,7 @@ context,
         ] else ...[
           Text(
             useTeams && !isMyTeamTurn
-                ? "L'équipe adverse joue (surveillez les fautes) :"
+                ? AppLocalizations.of(context)!.lEquipeAdverseJoueSurveillez
                 : "dtMakeGuessWordTo",
             style: TextStyle(
               color:
@@ -36947,7 +36640,7 @@ context,
         playerOrder.isNotEmpty && playerOrder[currentPlayerIndex] == playerId;
     final currentPlayerName =
         playerOrder.isNotEmpty
-            ? (players[playerOrder[currentPlayerIndex]]?['name'] ?? 'Un joueur')
+            ? (players[playerOrder[currentPlayerIndex]]?['name'] ?? AppLocalizations.of(context)!.unJoueur)
             : '...';
 
     // --- 1. ÉCRAN DES RÉSULTATS / DÉPLIAGE DU PARCHEMIN ---
@@ -36977,7 +36670,7 @@ context,
       final promptItem =
           stepIndex < GameData.cadavreExquisPrompts.length
               ? GameData.cadavreExquisPrompts[stepIndex]
-              : 'la suite de l\'histoire...';
+              : AppLocalizations.of(context)!.laSuiteDeLHistoire;
       grammaticalPrompt = "Écrivez $promptItem";
     } else {
       grammaticalPrompt = "Complétez la phrase (1 à 8 mots)";
@@ -36985,7 +36678,7 @@ context,
         final lastStep = steps.last;
         String lastText = (lastStep['text'] ?? '').toString().trim();
         previousAuthorName =
-            players[lastStep['authorId']]?['name'] ?? 'Auteur précédent';
+            players[lastStep['authorId']]?['name'] ?? AppLocalizations.of(context)!.auteurPrecedent;
         List<String> words = lastText.split(' ');
         peekingSnippet =
             words.length <= 3
@@ -36995,7 +36688,7 @@ context,
     }
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: RadialGradient(
           center: Alignment.topCenter,
           radius: 1.2,
@@ -37050,7 +36743,7 @@ context,
                       children: [
                         Text(
                           isMyTurn
-                              ? "À VOUS D'ÉCRIRE !"
+                              ? AppLocalizations.of(context)!.aVousDEcrire
                               : "ceTurnOfPlayer",
                           style: TextStyle(
                             fontSize: 11,
@@ -37064,8 +36757,8 @@ context,
                         ),
                         Text(
                           variant == 'classic'
-                              ? "Surréalisme classique"
-                              : "Suite de 3 mots",
+                              ? AppLocalizations.of(context)!.surrealismeClassique
+                              : AppLocalizations.of(context)!.suiteDe3Mots,
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.white38,
@@ -37150,7 +36843,7 @@ context,
           BoxShadow(
             color: Colors.black.withOpacity(0.6),
             blurRadius: 20,
-            offset: const Offset(0, 8),
+            offset: Offset(0, 8),
           ),
         ],
       ),
@@ -37190,7 +36883,7 @@ context,
                           size: 14,
                           color: Color(0xFF8C7355),
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           "ceVisibleSnippetOf",
                           style: const TextStyle(
@@ -37275,7 +36968,7 @@ context,
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF78350F).withOpacity(0.12),
+                        color: Color(0xFF78350F).withOpacity(0.12),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: const Color(0xFF78350F).withOpacity(0.3),
@@ -37579,7 +37272,7 @@ context,
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: Text(
-                        '« $fullText »',
+                        AppLocalizations.of(context)!.strb74c15(fullText),
                         style: const TextStyle(
                           fontFamily: 'serif',
                           fontSize: 20,
@@ -37625,7 +37318,7 @@ context,
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: "$authorName : ",
+                                        text: AppLocalizations.of(context)!.str1e0607(authorName),
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xFF78350F),
@@ -37690,7 +37383,7 @@ context,
         gameTitle: "Mille Bornes",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Objectif 1000 Bornes atteint !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.objectif1000BornesAtteint,
         players: players,
         customScores: kmScores,
         gameData: gameData,
@@ -37753,7 +37446,7 @@ context,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(Icons.warning_amber_rounded, color: Colors.redAccent, size: 16),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(
                       AppLocalizations.of(context)!.prepareUneAttaqueContreUn,
                       style: const TextStyle(
@@ -37946,7 +37639,7 @@ context,
                         children: [
                           Text(
                             isMyTurn
-                                ? "À VOUS DE ROULER !"
+                                ? AppLocalizations.of(context)!.aVousDeRouler
                                 : "mbTurnOf",
                             style: TextStyle(
                               fontSize: 11,
@@ -38051,7 +37744,7 @@ context,
                 children: [
                   _buildStateIndicator(
                     label: myData['isStopped'] == true
-                        ? "ARRÊTÉ"
+                        ? AppLocalizations.of(context)!.arrete
                         : "FEU VERT",
                     icon:
                         myData['isStopped'] == true
@@ -38170,7 +37863,7 @@ context,
                   Text(
                     isMyTurn
                         ? "mbHandCount"
-                        : "Tour de l'adversaire",
+                        : AppLocalizations.of(context)!.tourDeLAdversaire,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: isMyTurn ? Colors.greenAccent : Colors.white70,
@@ -38180,8 +37873,8 @@ context,
                   const SizedBox(height: 4),
                   Text(
                     isMyTurn
-                        ? "Touchez pour jouer\nMaintenez pour défausser"
-                        : "En attente...",
+                        ? AppLocalizations.of(context)!.touchezPourJouerNmaintenezPour
+                        : AppLocalizations.of(context)!.enAttente,
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 10, color: Colors.white38),
                   ),
@@ -38353,7 +38046,7 @@ context,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          color: const Color(0xFF1A1A24),
+          color: Color(0xFF1A1A24),
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
             colors:
@@ -38365,7 +38058,7 @@ context,
                     ]
                     : [
                       info.secondaryColor.withOpacity(0.4),
-                      const Color(0xFF161622),
+                      Color(0xFF161622),
                     ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -38633,9 +38326,9 @@ context,
       // 🛡️ BOTTES (Sécurités permanentes)
       case 'SAFETY_RIGHT_OF_WAY':
         return const _MilleBornesCardInfo(
-          name: "Véhicule\nPrioritaire",
+          name: AppLocalizations.of(context)!.vehiculeNprioritaire,
           category: "BOTTE",
-          badgeText: "PRIORITÉ",
+          badgeText: AppLocalizations.of(context)!.priorite,
           icon: Icons.emergency_rounded,
           primaryColor: Color(0xFFFFD700),
           secondaryColor: Color(0xFFB45309),
@@ -38654,7 +38347,7 @@ context,
       case 'SAFETY_EXTRA_TANK':
       case 'SAFETY_EMERGENCY':
         return const _MilleBornesCardInfo(
-          name: "Citerne\nInépuisable",
+          name: AppLocalizations.of(context)!.citerneNinepuisable,
           category: "BOTTE",
           badgeText: "CITERNE",
           icon: Icons.local_gas_station_rounded,
@@ -38734,7 +38427,7 @@ context,
         return const _MilleBornesCardInfo(
           name: "Roue de\nSecours",
           category: "PARADE",
-          badgeText: "RÉPARÉ",
+          badgeText: AppLocalizations.of(context)!.repare,
           icon: Icons.change_circle_rounded,
           primaryColor: Color(0xFF10B981),
           secondaryColor: Color(0xFF065F46),
@@ -38743,8 +38436,8 @@ context,
       default:
         return _MilleBornesCardInfo(
           name: card,
-          category: "CARTE",
-          badgeText: "CARTE",
+          category: AppLocalizations.of(context)!.carte2,
+          badgeText: AppLocalizations.of(context)!.carte2,
           icon: Icons.style_rounded,
           primaryColor: Colors.grey.shade400,
           secondaryColor: Colors.grey.shade800,
@@ -38826,7 +38519,7 @@ context,
                       child: ListTile(
                         title: Text(
                           players[pId]?['name'] ??
-                              'Joueur',
+                              AppLocalizations.of(context)!.joueur,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: isProtected ? Colors.white38 : Colors.white,
@@ -38834,8 +38527,8 @@ context,
                         ),
                         subtitle: Text(
                           isProtected
-                              ? "🛡️ Protégé par une Botte"
-                              : "Distance : {0} km",
+                              ? AppLocalizations.of(context)!.protegeParUneBotte
+                              : AppLocalizations.of(context)!.distanceKm,
                           style: TextStyle(
                             fontSize: 12,
                             color:
@@ -38924,7 +38617,7 @@ context,
         winnerName: players[gameData['gameWinner']]?['name'],
         reason:
             gameData['gameEndReason'] ??
-            "Toute la flotte adverse a été coulée !",
+            AppLocalizations.of(context)!.touteLaFlotteAdverseA,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -39467,8 +39160,8 @@ context,
                       icon: Icon(isReady ? Icons.check : Icons.play_arrow),
                       label: Text(
                         isReady
-                            ? "Prêt !"
-                            : "PRÊT",
+                            ? AppLocalizations.of(context)!.pret1
+                            : AppLocalizations.of(context)!.pret2,
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
@@ -39544,8 +39237,8 @@ context,
               const SizedBox(width: 6),
               Text(
                 isMyTurn
-                    ? "À votre tour"
-                    : "Tour adverse",
+                    ? AppLocalizations.of(context)!.aVotreTour
+                    : AppLocalizations.of(context)!.tourAdverse,
                 style: TextStyle(
                   color: isMyTurn ? Colors.greenAccent : Colors.white70,
                   fontSize: 12,
@@ -39651,7 +39344,7 @@ context,
                       if (enemyAimedIndex != null) ...[
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
                             color: Colors.redAccent.withOpacity(0.25),
                             borderRadius: BorderRadius.circular(10),
@@ -39716,7 +39409,7 @@ context,
                 // 1. Fond bleu océan + lignes de grille
                 Container(
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0C2340),
+                    color: Color(0xFF0C2340),
                     border: Border.all(
                       color:
                           isEnemy
@@ -40472,7 +40165,7 @@ context,
         gameTitle: "Uno",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Dernière carte posée !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.derniereCartePosee,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -40743,8 +40436,8 @@ context,
         children: [
           Text(
             isMyTurn
-                ? "C'est TON tour !"
-                : "Au tour de {name}",
+                ? AppLocalizations.of(context)!.cEstTonTour
+                : AppLocalizations.of(context)!.auTourDe1,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               color: isMyTurn ? Colors.white : Colors.white70,
             ),
@@ -41459,7 +41152,7 @@ context,
                             child: Chip(
                               backgroundColor: Colors.black.withOpacity(0.45),
                               label: Text(
-                                "${e.value['name']}: ${e.value['score'] ?? 0} 🃏",
+                                AppLocalizations.of(context)!.str422faa(e.value['name'], e.value['score'] ?? 0),
                                 style: const TextStyle(
                                   color: Colors.white70,
                                   fontSize: 11,
@@ -41635,7 +41328,7 @@ context,
                       ),
                       child: Text(
                         'dobbleMyCardsCount',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           fontSize: 13,
@@ -41834,7 +41527,7 @@ context,
     final Map<String, dynamic> players = Map<String, dynamic>.from(
       gameData['players'],
     );
-    final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
+    final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
     final isHost = gameData['hostId'] == playerId;
     final bool iAmWinner = winnerId == playerId;
 
@@ -42037,13 +41730,9 @@ context,
     String voterId,
   ) {
     print(
-      "--- DÉBUT DE LA CONSTRUCTION DE L'UI DE VOTE 'Qui Pourrait le Plus ?' ---",
-    );
-    print("État de _isActionPending au début: $_isActionPending");
-
-    final players = (gameData['players'] as Map<String, dynamic>?) ?? {};
+      "--- DÉBUT DE LA CONSTRUCTION DE L'UI DE VOTE 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.printEtatDeIsactionpendingAu(_isActionPending)players'] as Map<String, dynamic>?) ?? {};
     final String question =
-        gameData['currentQuestion'] ?? "Erreur: Question non trouvée.";
+        gameData['currentQuestion'] ?? AppLocalizations.of(context)!.erreurQuestionNonTrouvee;
 
     print("Question à afficher: $question");
     print("Nombre de joueurs à afficher: ${players.length}");
@@ -42448,7 +42137,7 @@ context,
             itemCount: candidates.length,
             itemBuilder: (context, index) {
               final cId = candidates[index];
-              final cName = players[cId]?['name'] ?? 'Joueur';
+              final cName = players[cId]?['name'] ?? AppLocalizations.of(context)!.joueur;
               final isMe = cId == playerId;
 
               return GestureDetector(
@@ -42556,7 +42245,7 @@ context,
             children:
                 players.entries.map((e) {
                   return Text(
-                    "${e.value['name']}: ${scores[e.key] ?? 0}",
+                    AppLocalizations.of(context)!.str95d36e(e.value['name'], scores[e.key] ?? 0),
                     style: TextStyle(
                       color: e.key == judgeId ? Colors.amber : Colors.white70,
                       fontWeight:
@@ -42692,8 +42381,8 @@ context,
       children: [
         Text(
           isJudge
-              ? "Choisissez la meilleure réponse !"
-              : "Le Juge choisit...",
+              ? AppLocalizations.of(context)!.choisissezLaMeilleureReponse
+              : AppLocalizations.of(context)!.leJugeChoisit,
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 16),
@@ -43351,7 +43040,7 @@ context,
             gameType == 'Infiltré & Mr. White' ||
             gameType == 'Le Menteur');
 
-    String mainTitle = gameData['currentQuestion'] ?? "Votez !";
+    String mainTitle = gameData['currentQuestion'] ?? AppLocalizations.of(context)!.votez;
 
     return Column(
       children: [
@@ -43463,8 +43152,8 @@ context,
           // Vote sur les réponses (Synonyme ou Banni & Le Roi des Mèmes)
           Text(
             gameType == 'Le Roi des Mèmes'
-                ? "Votez pour la description la plus drôle !"
-                : "Bannissez une réponse !",
+                ? AppLocalizations.of(context)!.votezPourLaDescriptionLa
+                : AppLocalizations.of(context)!.bannissezUneReponse,
             style: TextStyle(
               color:
                   gameType == 'Le Roi des Mèmes'
@@ -43557,7 +43246,7 @@ context,
     final players = (gameData['players'] as Map<String, dynamic>?) ?? {};
     final question = gameData['currentQuestion'] ?? "Question...";
     final judgeName =
-        players[gameData['currentTargetPlayerId']]?['name'] ?? 'le juge';
+        players[gameData['currentTargetPlayerId']]?['name'] ?? AppLocalizations.of(context)!.leJuge;
 
     final int seed = (gameData['currentRound'] ?? 0).hashCode ^ question.hashCode;
     final List<MapEntry<String, dynamic>> shuffledAnswers =
@@ -43624,10 +43313,10 @@ context,
               children: [
                 Text(
                   isTarget
-                      ? "👑 Choisis ta réponse préférée :"
+                      ? AppLocalizations.of(context)!.choisisTaReponsePreferee
                       : (inspectedAnswer != null
-                          ? "👑 Le Juge examine attentivement une réponse..."
-                          : "⏳ En attente du choix de {0}..."),
+                          ? AppLocalizations.of(context)!.leJugeExamineAttentivementUne
+                          : AppLocalizations.of(context)!.enAttenteDuChoixDe),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 if (inspectedAnswer != null && !isTarget) ...[
@@ -43936,7 +43625,7 @@ AppLocalizations.of(context)!.leJugeLit,
                       icon: Icon(Icons.replay),
                       label: Text(
                         hasVoted
-                            ? "En attente ({0}/{1})"
+                            ? AppLocalizations.of(context)!.enAttente1
                             : "REJOUER",
                       ),
                       style: ElevatedButton.styleFrom(
@@ -44020,10 +43709,10 @@ AppLocalizations.of(context)!.leJugeLit,
     switch (gameType) {
       case 'Le Juge':
         final winnerId = gameData['roundWinnerId'];
-        final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
+        final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
         final winningAnswer =
             (gameData['answers'] as Map<String, dynamic>?)?[winnerId] ??
-            'aucune réponse';
+            AppLocalizations.of(context)!.aucuneReponse;
         resultText =
             "{0} a été choisi pour sa réponse et gagne 1 point !";
         extraInfo = Text(
@@ -44119,7 +43808,7 @@ AppLocalizations.of(context)!.leJugeLit,
           break;
         } else {
           final liarId = gameData['liarId'];
-          final liarName = players[liarId]?['name'] ?? 'Le menteur';
+          final liarName = players[liarId]?['name'] ?? AppLocalizations.of(context)!.leMenteur;
           resultText = "Le menteur était... $liarName !";
           extraInfo = Text(
             AppLocalizations.of(context)!.lesPointsOntEteDistribues,
@@ -44181,7 +43870,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
       case 'Synonyme ou Banni':
         final loserId = gameData['roundLoserId'];
         if (loserId != null) {
-          final loserName = players[loserId]?['name'] ?? 'Quelqu\'un';
+          final loserName = players[loserId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
           final word = gameData['roundData'];
           final loserAnswer = gameData['answers'][loserId];
           resultText =
@@ -44207,7 +43896,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
               "${loserName} n'a pas répondu à temps et gagne 1 point !";
           extraInfo = Text(
             gameData['gameEndReason'] ??
-                "Temps écoulé !",
+                AppLocalizations.of(context)!.tempsEcoule,
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
@@ -44220,12 +43909,12 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
 
       case 'Pictionary':
         final winnerId = gameData['roundWinnerId'];
-        final currentWord = gameData['currentPictionaryWord'] ?? 'Mot';
+        final currentWord = gameData['currentPictionaryWord'] ?? AppLocalizations.of(context)!.mot;
         final drawingPlayerName =
             players[gameData['currentDrawingPlayerId']]?['name'] ??
-            'Le dessinateur';
+            AppLocalizations.of(context)!.leDessinateur;
         if (winnerId != null) {
-          final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
+          final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
           resultText = "$winnerName a trouvé le mot : '$currentWord' !";
           extraInfo = Text(
             AppLocalizations.of(context)!.felicitationsAuDessinateurEtA,
@@ -44239,7 +43928,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
           resultText = "Personne n'a trouvé le mot : '$currentWord'.";
           extraInfo = Text(
             gameEndReason ??
-                "Le temps est écoulé ou le dessin était trop complexe !",
+                AppLocalizations.of(context)!.leTempsEstEcouleOu,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -44250,11 +43939,11 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
         break;
 
       case 'Just One':
-        final currentWord = gameData['justOneCurrentWord'] ?? 'Mot';
+        final currentWord = gameData['justOneCurrentWord'] ?? AppLocalizations.of(context)!.mot;
         final guesserName =
-            players[gameData['justOneGuesserId']]?['name'] ?? 'Le devin';
+            players[gameData['justOneGuesserId']]?['name'] ?? AppLocalizations.of(context)!.leDevin;
         final guesserAnswer =
-            gameData['justOneGuesserAnswer'] ?? '(pas de réponse)';
+            gameData['justOneGuesserAnswer'] ?? AppLocalizations.of(context)!.pasDeReponse;
         if (gameEndReason == "Mot deviné !") {
           resultText = "$guesserName a trouvé le mot : '$currentWord' !";
           extraInfo = Text(
@@ -44300,10 +43989,10 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
 
         if (gameData['gameState'] == 'gameOver' && winnerId != null) {
           resultText =
-              "${players[winnerId]?['name'] ?? 'Un joueur'} remporte Skull !";
+              "${players[winnerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur} remporte Skull !";
           extraInfo = Text(
             gameData['gameEndReason'] ??
-                'Deux défis réussis.',
+                AppLocalizations.of(context)!.deuxDefisReussis,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -44315,7 +44004,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
         } else if (outcome == 'lost') {
           final loserName =
               players[gameData['skullLastChallengeLoserId']]?['name'] ??
-              'Le challenger';
+              AppLocalizations.of(context)!.leChallenger;
           resultText = "$loserName a perdu le défi.";
         } else {
           resultText = "Le tour est terminé.";
@@ -44337,10 +44026,10 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                       final Map<String, dynamic> card =
                           Map<String, dynamic>.from(entry as Map);
                       final String ownerName =
-                          players[card['ownerId']]?['name'] ?? 'Joueur';
+                          players[card['ownerId']]?['name'] ?? AppLocalizations.of(context)!.joueur;
                       return Chip(
                         label: Text(
-"{0} : {1}",
+AppLocalizations.of(context)!.stre93cb0,
 ),
                         backgroundColor:
                             card['type'] == 'Crane'
@@ -44357,15 +44046,11 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
       case 'Le Roi des Mèmes':
         final winnerId = gameData['roundWinnerId'];
         if (winnerId != null) {
-          final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
+          final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
           final winningDescription =
               (gameData['answers'] as Map<String, dynamic>?)?[winnerId] ??
-              'une description hilarante';
-          resultText = "$winnerName a gagné avec sa description :";
-          extraInfo = Column(
-            children: [
-              Text(
-                '"${winningDescription}"',
+              AppLocalizations.of(context)!.uneDescriptionHilarante;
+          resultText = "$winnerName a gagné avec sa description :AppLocalizations.of(context)!.extrainfoColumnChildrenText${winningDescription}"',
                 style: Theme.of(
                   context,
                 ).textTheme.titleLarge?.copyWith(color: Colors.greenAccent),
@@ -44405,7 +44090,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
       case 'Dobble':
         final winnerId = gameData['roundWinnerId'];
         if (winnerId != null) {
-          final winnerName = players[winnerId]?['name'] ?? 'Quelqu\'un';
+          final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
           final commonSym = gameData['commonSymbol'];
           resultText =
               "$winnerName a trouvé le symbole $commonSym ! Il gagne la carte.";
@@ -44419,16 +44104,14 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
           extraInfo = Text(
             GameMessageLocalization.tr(
               context,
-              gameEndReason ?? "Un problème est survenu.",
+              gameEndReason ?? AppLocalizations.of(context)!.unProblemeEstSurvenu,
             ),
             style: TextStyle(fontStyle: FontStyle.italic),
           );
         }
         break;
 
-      case 'Qui Pourrait le Plus ?':
-      default:
-        final roundWinnerId = gameData['roundWinnerId'];
+      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId'];
         if (roundWinnerId != null) {
           final winnerName = players[roundWinnerId]?['name'] ?? 'Inconnu';
           resultText = "$winnerName a été désigné(e) et gagne 1 point !";
@@ -45895,7 +45578,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                     spacing: 8,
                     runSpacing: 4,
                     children: progress.entries.map((e) {
-                      final pName = players[e.key]?['name'] ?? 'Joueur';
+                      final pName = players[e.key]?['name'] ?? AppLocalizations.of(context)!.joueur;
                       final count = e.value;
                       final bool isFull = count >= categories.length && categories.isNotEmpty;
                       return Container(
@@ -45909,7 +45592,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                           ),
                         ),
                         child: Text(
-                          "$pName: $count/${categories.length}${isFull ? ' 🔥' : ' ⚡'}",
+                          AppLocalizations.of(context)!.str98e212(pName, count, categories.length, isFull ? ' 🔥' : ' ⚡'),
                           style: TextStyle(
                             color: isFull ? Colors.yellowAccent : Colors.white70,
                             fontSize: 11,
@@ -45986,7 +45669,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
           if (!hasSubmitted)
             ElevatedButton.icon(
               icon: Icon(Icons.check),
-              label: Text('petitBacIFinished'),
+              label: Text(AppLocalizations.of(context)!.petitBacIFinished),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[700],
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
@@ -46410,8 +46093,8 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
 
     String instructionText =
         isMyTurn
-            ? "À vous de jouer !"
-            : "Au tour de {name}";
+            ? AppLocalizations.of(context)!.aVousDeJouer
+            : AppLocalizations.of(context)!.auTourDe1;
     if (isRevolutionActive)
       instructionText += " (Révolution !)";
 
@@ -46737,8 +46420,8 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                 ),
                 label: Text(
                   _isHandSorted
-                      ? "Trié par couleur"
-                      : "Trier la main",
+                      ? AppLocalizations.of(context)!.trieParCouleur
+                      : AppLocalizations.of(context)!.trierLaMain,
                   style: TextStyle(
                     fontSize: 11,
                     color: _isHandSorted ? Colors.amberAccent : Colors.white,
@@ -47184,7 +46867,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
         winnerName: players[gameData['gameWinner']]?['name'],
         reason:
             gameData['gameEndReason'] ??
-            "Deux défis réussis !",
+            AppLocalizations.of(context)!.deuxDefisReussis1,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -47293,7 +46976,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                         ),
                         Text(
                           isMyTurn
-                              ? "C'est à votre tour !"
+                              ? AppLocalizations.of(context)!.cEstAVotreTour1
                               : "${"Tour de"} ${players[currentPlayerId]?['name'] ?? '...'}",
                           style: TextStyle(
                             fontSize: 11,
@@ -47348,7 +47031,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                   return const SizedBox.shrink();
                 final bidderName =
                     players[bidderId]?['name'] ??
-                    "Un joueur";
+                    AppLocalizations.of(context)!.unJoueur;
                 return Container(
                   margin: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -47406,7 +47089,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                       final bool isMe = (pId == playerId);
                       final bool isCurrent = (pId == currentPlayerId);
                       final bool hasPassed = passedPlayers.contains(pId);
-                      final String name = players[pId]?['name'] ?? 'Joueur';
+                      final String name = players[pId]?['name'] ?? AppLocalizations.of(context)!.joueur;
                       final int score = (players[pId]?['score'] ?? 0) as int;
                       final bool isOut = players[pId]?['isOut'] == true;
                       final List matCards = (skullMats[pId] as List? ?? []);
@@ -47639,8 +47322,8 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                       if (isMyTurn)
                         Text(
                           roundState == 'placing'
-                              ? "Touchez pour poser"
-                              : "Enchérissez ou passez",
+                              ? AppLocalizations.of(context)!.touchezPourPoser
+                              : AppLocalizations.of(context)!.encherissezOuPassez,
                           style: const TextStyle(
                             fontSize: 11,
                             color: Colors.amberAccent,
@@ -47994,7 +47677,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
         pictionaryOnly30Strokes && _pictionaryStrokeCount >= 30;
     final String drawerName =
         players[currentDrawingPlayerId]?['name'] ??
-        "Quelqu'un";
+        AppLocalizations.of(context)!.timesUpSomeone;
 
     if (roundState == 'result') {
       return _buildResultUI(context, gameData, playerId);
@@ -48007,7 +47690,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
           Container(
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              '${"Mot à dessiner"} : ${currentPictionaryWord != null ? GameUiLocalization.tr(context, currentPictionaryWord) : "..."}',
+              AppLocalizations.of(context)!.str4c885c("Mot à dessiner", currentPictionaryWord != null ? GameUiLocalization.tr(context, currentPictionaryWord) : "..."),
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -48380,7 +48063,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
     bool amIGuesser = playerId == justOneGuesserId;
     String guesserName =
         players[justOneGuesserId]?['name'] ??
-        "Quelqu'un";
+        AppLocalizations.of(context)!.timesUpSomeone;
 
     // Reset flag si nouveau tour (indice pas encore soumis)
     if (roundState == 'clue_giving' && !justOneClues.containsKey(playerId)) {
@@ -48538,7 +48221,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                             ? CircularProgressIndicator(color: Colors.white)
                             : Text(
                               deckIndex >= deckTotal
-                                  ? "Voir le score final"
+                                  ? AppLocalizations.of(context)!.voirLeScoreFinal
                                   : "${"Carte suivante"} →",
                             ),
                   ),
@@ -48598,7 +48281,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "${'Carte'} $deckIndex / $deckTotal — ${'Score'} : $totalScore",
+                AppLocalizations.of(context)!.str6bd6b6('Carte', deckIndex, deckTotal, 'Score', totalScore),
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 8),
@@ -48700,32 +48383,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "${"Indices montrés à"} $guesserName :",
-                  style: const TextStyle(color: Colors.white70),
-                ),
-                SizedBox(height: 20),
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  children:
-                      justOneFilteredClues
-                          .map((clue) => _buildEasel(clue.toString()))
-                          .toList(),
-                ),
-                SizedBox(height: 20),
-                if (justOneFilteredClues.isEmpty)
-                  Text(
-                    AppLocalizations.of(context)!.tousLesIndicesOntEte,
-                    style: const TextStyle(color: Colors.red),
-                  ),
-              ],
-            ),
-          );
-        } else {
-          // C'est au devin de jouer
-          return Column(
-            children: [
-              Text(
-                "${'Carte'} $deckIndex / $deckTotal — ${'Score'} : $totalScore",
+                  "${"Indices montrés à"} $guesserName :AppLocalizations.of(context)!.styleConstTextstyleColorColors${'Carte'} $deckIndex / $deckTotal — ${'Score'} : $totalScore",
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 8),
@@ -48816,7 +48474,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
     if (gameData['gameState'] == 'gameOver') {
       final String gameEndReason =
           gameData['gameEndReason'] ??
-          "Partie terminée !";
+          AppLocalizations.of(context)!.partieTerminee1;
       List<MapEntry<String, int>> sortedScores = [];
       players.forEach((id, data) {
         sortedScores.add(
@@ -48887,14 +48545,14 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
       secondsLeft = max(0, duration - elapsed);
     }
 
-    final String category = gameData['hotPotatoCategory'] ?? "Catégorie";
+    final String category = gameData['hotPotatoCategory'] ?? AppLocalizations.of(context)!.categorie;
     final List<String> usedAnswers = List<String>.from(
       gameData['hotPotatoUsedAnswers'] ?? [],
     );
 
     final bool isMyTurn = playerId == currentPotatoPlayerId;
     final String currentPotatoPlayerName =
-        players[currentPotatoPlayerId]?['name'] ?? 'Quelqu\'un';
+        players[currentPotatoPlayerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
 
     if (roundState == 'exploded') {
       return _buildHotPotatoExplodedUI(context, gameData, playerId);
@@ -48939,7 +48597,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                             padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: Chip(
                               label: Text(
-                                "${e.value['name']?.toString().substring(0, min(4, (e.value['name']?.toString().length ?? 0)))}: ${e.value['score'] ?? 0}",
+                                AppLocalizations.of(context)!.strf0868c(e.value['name']?.toString().substring(0, min(4, (e.value['name']?.toString().length ?? 0))), e.value['score'] ?? 0),
                                 style: TextStyle(fontSize: 11),
                               ),
                               padding: EdgeInsets.zero,
@@ -48969,7 +48627,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
             children: [
               Text(
                 isMyTurn
-                    ? "C'EST À TOI !"
+                    ? AppLocalizations.of(context)!.cEstAToi
                     : "${"Au tour de"} $currentPotatoPlayerName",
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
@@ -49184,7 +48842,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
     final String loserName = players[loserId]?['name'] ?? 'Inconnu';
     final String gameEndReason =
         gameData['gameEndReason'] ??
-        "La patate a explosé !";
+        AppLocalizations.of(context)!.laPatateAExplose;
     final isHost = gameData['hostId'] == playerId;
     final String gameType = gameData['gameType'] ?? '';
     final bool isCategories = gameType == 'Le Jeu des Catégories';
@@ -49321,7 +48979,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
     final List<dynamic> gameLog = List<dynamic>.from(gameData['gameLog'] ?? []);
 
     if (phase == 'gameOver' || gameData['gameState'] == 'gameOver') {
-      String winnerText = gameData['gameWinner'] ?? 'Fin de la partie';
+      String winnerText = gameData['gameWinner'] ?? AppLocalizations.of(context)!.finDeLaPartie1;
       if (winnerText == 'village')
         winnerText = 'Victoire des Villageois !';
       else if (winnerText == 'loups')
@@ -49394,7 +49052,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
     }
 
     String promptText =
-        isNight ? "Le village s'endort..." : "Le village délibère...";
+        isNight ? AppLocalizations.of(context)!.leVillageSEndort : AppLocalizations.of(context)!.leVillageDelibere;
     Widget? centerActionWidget;
 
     // Décompte des votes
@@ -49670,7 +49328,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
       switch (subPhase) {
         case 'cupidon_turn':
           promptText =
-              lovers.isEmpty ? "Désignez 2 amoureux" : "Amoureux unis !";
+              lovers.isEmpty ? AppLocalizations.of(context)!.designez2Amoureux : AppLocalizations.of(context)!.amoureuxUnis;
           if (myRole == 'Cupidon' && myStatus == 'vivant' && lovers.isEmpty) {
             centerActionWidget = _buildActionButton(
               label: GameContentLocalization.format(context, "Valider le couple ({0}/2)", [_lgLocalSelection.length.toString()]),
@@ -49769,45 +49427,8 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
               !(myData['infectionUsed'] ?? true) &&
               nightActions['loupTarget'] != null) {
             String targetName =
-                playerData[nightActions['loupTarget']]?['name'] ?? 'la victime';
-            promptText = "Infecter $targetName ?";
-            centerActionWidget = Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _buildActionButton(
-                  label: AppLocalizations.of(context)!.infecter,
-                  icon: Icons.auto_fix_high,
-                  color: Colors.purpleAccent,
-                  onPressed: () {
-                    Provider.of<PlayerState>(
-                      context,
-                      listen: false,
-                    ).recordBadgeEvent('lg_loup_noir_infect');
-                    _firebaseService.loupNoirInfect(
-                      widget.gameCode,
-                      playerId,
-                      true,
-                    );
-                  },
-                ),
-                const SizedBox(width: 8),
-                _buildActionButton(
-                  label: AppLocalizations.of(context)!.devorer,
-                  icon: Icons.close,
-                  color: Colors.redAccent,
-                  onPressed:
-                      () => _firebaseService.loupNoirInfect(
-                        widget.gameCode,
-                        playerId,
-                        false,
-                      ),
-                ),
-              ],
-            );
-          }
-          break;
-        case 'loup_blanc_turn':
-          promptText = "Le Loup Blanc frappe en solitaire";
+                playerData[nightActions['loupTarget']]?['name'] ?? AppLocalizations.of(context)!.laVictime;
+            promptText = "Infecter $targetName ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinLe Loup Blanc frappe en solitaire";
           if (myRole == 'Loup Blanc' &&
               myStatus == 'vivant' &&
               nightNumber % 2 != 0 &&
@@ -49823,7 +49444,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
             final victimeId = nightActions['loupTarget'];
             final victimeName = (victimeId != null && playerData[victimeId] != null)
                 ? playerData[victimeId]['name']
-                : 'Aucune victime cette nuit (protégée ou épargnée)';
+                : AppLocalizations.of(context)!.aucuneVictimeCetteNuitProtegee;
             promptText = "Cible des loups : $victimeName";
             if (_lgActionMode == 'poison')
               promptText = "Touchez le joueur à éliminer avec le poison";
@@ -50020,7 +49641,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
           radius: 1.1,
           colors:
               isNight
-                  ? [const Color(0xFF0F172A), const Color(0xFF020617)]
+                  ? [Color(0xFF0F172A), const Color(0xFF020617)]
                   : [const Color(0xFF1E293B), const Color(0xFF0F172A)],
         ),
       ),
@@ -50657,200 +50278,10 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                           style: const TextStyle(fontSize: 11, color: Colors.white),
                           children: [
                             TextSpan(
-                              text: isMine ? "${"Moi"}: " : "$senderName: ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    isMine
-                                        ? Colors.cyanAccent
-                                        : (_selectedChatType == 'wolf'
-                                            ? Colors.redAccent.shade100
-                                            : Colors.white60),
-                              ),
-                            ),
-                            TextSpan(text: message),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-
-          // Barre d'envoi compacte
-          if (canSendMessage)
-            Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 32,
-                    child: TextField(
-                      controller: _chatController,
-                      style: const TextStyle(fontSize: 12, color: Colors.white),
-                      decoration: InputDecoration(
-                        hintText:
-                            AppLocalizations.of(context)!.ecrireAu,
-                        hintStyle: const TextStyle(
-                          color: Colors.white30,
-                          fontSize: 11,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white.withOpacity(0.08),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 0,
-                        ),
-                      ),
-                      onSubmitted: (text) {
-                        if (text.trim().isNotEmpty) {
-                          _firebaseService.sendChatMessage(
-                            widget.gameCode,
-                            playerId,
-                            text.trim(),
-                            _selectedChatType,
-                          );
-                          _chatController.clear();
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 4),
-                IconButton(
-                  icon: const Icon(
-                    Icons.send_rounded,
-                    size: 18,
-                    color: Colors.cyanAccent,
-                  ),
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                  onPressed: () {
-                    if (_chatController.text.trim().isNotEmpty) {
-                      _firebaseService.sendChatMessage(
-                        widget.gameCode,
-                        playerId,
-                        _chatController.text.trim(),
-                        _selectedChatType,
-                      );
-                      _chatController.clear();
-                    }
-                  },
-                ),
-              ],
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildChatTab(String label, String type, Color activeColor) {
-    final bool isSelected = _selectedChatType == type;
-    return GestureDetector(
-      onTap: () => setState(() => _selectedChatType = type),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-        decoration: BoxDecoration(
-          color:
-              isSelected
-                  ? activeColor.withOpacity(0.25)
-                  : Colors.white.withOpacity(0.04),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color:
-                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent,
-          ),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 10,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-            color: isSelected ? activeColor : Colors.white60,
-          ),
-        ),
-      ),
-    );
-  }
-
-  // --- MISE À JOUR DE L'AVATAR POUR LE RENDRE INTERACTIF ---
-
-  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) {
-    if (startTime == null) return const SizedBox.shrink();
-
-    // TweenAnimationBuilder permet un chrono visuel super fluide sans Timer bloquant et setState manuel, ce qui allège grandement le thread (Point 4)
-    final endTime = startTime.toDate().add(
-      Duration(seconds: durationInSeconds),
-    );
-    final remaining = endTime.difference(DateTime.now());
-
-    if (remaining.isNegative)
-      return Text(
-        AppLocalizations.of(context)!.k0S,
-        style: Theme.of(
-          context,
-        ).textTheme.headlineSmall?.copyWith(color: Colors.redAccent),
-      );
-
-    return TweenAnimationBuilder<Duration>(
-      duration: remaining,
-      tween: Tween(begin: remaining, end: Duration.zero),
-      builder: (BuildContext context, Duration value, Widget? child) {
-        final seconds = value.inSeconds;
-        return Text(
-          AppLocalizations.of(context)!.tempsRestantS,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: seconds < 20 ? Colors.redAccent : Colors.amberAccent,
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildPetitsChevauxUI(
-    BuildContext context,
-    Map<String, dynamic> gameData,
-    String playerId,
-  ) {
-    final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-    final playerOrder = List<String>.from(
-      gameData['petitsChevauxPlayerOrder'] ?? [],
-    );
-    final positions = Map<String, dynamic>.from(
-      gameData['petitsChevauxPositions'] ?? {},
-    );
-    final int currentIndex = gameData['petitsChevauxCurrentIndex'] ?? 0;
-    final String currentPlayerId =
-        playerOrder.isNotEmpty ? playerOrder[currentIndex] : '';
-    final bool isMyTurn = currentPlayerId == playerId;
-    final int dice = (gameData['petitsChevauxDice'] as num?)?.toInt() ?? 0;
-    final bool hasRolled = gameData['petitsChevauxHasRolled'] ?? false;
-    final bool isTeamMode = gameData['petitsChevauxTeamMode'] ?? false;
-    final Map<String, dynamic> consecutiveSixes = Map<String, dynamic>.from(
-      gameData['petitsChevauxConsecutiveSixes'] ?? {},
-    );
-    final int mySixStreak = consecutiveSixes[playerId] ?? 0;
-
-    // Palette moderne fluo / arcade sur fond sombre
-    final List<Color> playerColors = [
-      const Color(0xFFEF4444), // Rouge néon
-      const Color(0xFF38BDF8), // Bleu ciel néon
-      const Color(0xFF10B981), // Vert émeraude
-      const Color(0xFFF59E0B), // Ambre doré
-    ];
-
-    // --- ÉCRAN DE VICTOIRE ---
-    if (gameData['gameState'] == 'gameOver') {
-      return UniversalGameEndScreen(
-        gameTitle: "Petits Chevaux",
+                              text: isMine ? "${"Moi"}: " : "$senderName: AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldPetits Chevaux",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Arrivée au centre du plateau !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.arriveeAuCentreDuPlateau,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -50912,9 +50343,9 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                       Text(
                         isMyTurn
                             ? (hasRolled
-                                ? 'DÉPLACEZ UN CHEVAL !'
-                                : 'À VOUS DE LANCER !')
-                            : "TOUR DE {0}",
+                                ? AppLocalizations.of(context)!.deplacezUnCheval
+                                : AppLocalizations.of(context)!.aVousDeLancer)
+                            : AppLocalizations.of(context)!.tourDe,
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -50924,7 +50355,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                       ),
                       Text(
                         isTeamMode
-                            ? 'Mode 2v2 Alliés'
+                            ? AppLocalizations.of(context)!.mode2v2Allies
                             : "Course individuelle",
                         style: const TextStyle(
                           fontSize: 10,
@@ -51194,7 +50625,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                 children: [
                   if (isMyTurn && !hasRolled)
                     ElevatedButton.icon(
-                      icon: const Icon(Icons.casino_rounded, size: 20),
+                      icon: Icon(Icons.casino_rounded, size: 20),
                       label: Text(
                         AppLocalizations.of(context)!.lancerLeDe,
                       ),
@@ -51231,8 +50662,8 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                       children: [
                         Text(
                           _selectedLudoPawnIdx != null
-                              ? 'Cheval {pawn} sélectionné !\nTouchez pour avancer'
-                              : "Touchez un pion",
+                              ? AppLocalizations.of(context)!.chevalSelectionneNtouchezPourAvancer
+                              : AppLocalizations.of(context)!.touchezUnPion,
                           style: TextStyle(
                             color:
                                 _selectedLudoPawnIdx != null
@@ -51242,9 +50673,9 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                             fontSize: _selectedLudoPawnIdx != null ? 11 : 13,
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         OutlinedButton.icon(
-                          icon: const Icon(Icons.skip_next_rounded, size: 16),
+                          icon: Icon(Icons.skip_next_rounded, size: 16),
                           label: Text(AppLocalizations.of(context)!.passer),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.white60,
@@ -51321,7 +50752,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
         gameTitle: "Dominos",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Score limite atteint !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.scoreLimiteAtteint,
         players: players,
         customScores: scores,
         gameData: gameData,
@@ -51349,7 +50780,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
     final boneyard = List<String>.from(gameData['dominoesBoneyard'] ?? []);
     final scores = Map<String, int>.from(gameData['dominoesScores'] ?? {});
     final bool roundOver = gameData['dominoesRoundOver'] ?? false;
-    final String mode = gameData['dominoesMode'] ?? 'pioche';
+    final String mode = gameData['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
 
     void _showOpponentSheet(String pId) {
       final oppName = players[pId]?['name'] ?? pId;
@@ -51596,7 +51027,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                                 ),
                                 child: Text(
                                   '${(hands[pId] as List?)?.length ?? 0}',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 10,
                                     color: Colors.amber,
                                     fontWeight: FontWeight.bold,
@@ -51745,7 +51176,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                         ),
                         child: Text(
                           isMyTurn
-                              ? "C'est votre tour !"
+                              ? AppLocalizations.of(context)!.cEstVotreTour
                               : "${'Tour de'} ${players[currentPlayerId]?['name'] ?? '...'}",
                           style: TextStyle(
                             color:
@@ -51947,7 +51378,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
         winnerId: gameData['gameWinner'],
         winnerName: getPlayerName(gameData['gameWinner'] ?? ''),
         reason:
-            gameData['gameEndReason'] ?? "Toutes les grilles sont complétées !",
+            gameData['gameEndReason'] ?? AppLocalizations.of(context)!.toutesLesGrillesSontCompletees,
         players: players,
         customScores: finalScores,
         gameData: gameData,
@@ -52122,7 +51553,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                         Flexible(
                           child: Text(
                             isMyTurn
-                                ? "C'est votre tour ! Touchez un dé pour le garder (doré 🔒)"
+                                ? AppLocalizations.of(context)!.cEstVotreTourTouchez
                                 : (lastHoldAction != null &&
                                         lastHoldAction.isNotEmpty
                                     ? "👉 $lastHoldAction (${3 - rollsLeft}/3 lancers)"
@@ -52318,7 +51749,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
                       icon: const Icon(Icons.casino, size: 18),
                       label: Text(
                         rollsLeft == 3
-                            ? 'Lancer les dés'
+                            ? AppLocalizations.of(context)!.lancerLesDes
                             : 'Relancer',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -52617,7 +52048,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                                   : Colors.white38,
                                         ),
                                       )
-                                      : const Text(
+                                      : Text(
                                         "-",
                                         style: TextStyle(
                                           color: Colors.white24,
@@ -52674,7 +52105,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                 ),
                               ),
                               Text(
-                                "1-6: $oppUpper/63 ${oppBonus > 0 ? '(+35)' : ''}",
+                                AppLocalizations.of(context)!.k1663(oppUpper, oppBonus > 0 ? '(+35)' : ''),
                                 style: const TextStyle(
                                   fontSize: 10,
                                   color: Colors.white54,
@@ -52712,7 +52143,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                   ),
                                 ),
                                 Text(
-                                  "1-6: $myUpper/63 ${myBonus > 0 ? '(+35)' : ''}",
+                                  AppLocalizations.of(context)!.k16631(myUpper, myBonus > 0 ? '(+35)' : ''),
                                   style: const TextStyle(
                                     fontSize: 9.5,
                                     color: Colors.white54,
@@ -52736,7 +52167,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                     ),
                                   ),
                                   Text(
-                                    "1-6: $oppUpper/63 ${oppBonus > 0 ? '(+35)' : ''}",
+                                    AppLocalizations.of(context)!.k1663(oppUpper, oppBonus > 0 ? '(+35)' : ''),
                                     style: const TextStyle(
                                       fontSize: 9.5,
                                       color: Colors.white54,
@@ -52793,9 +52224,9 @@ AppLocalizations.of(context)!.grilleDePts,
         winnerId: winnerTeam,
         winnerName:
             winnerTeam == 'teamA'
-                ? 'Équipe A'
-                : 'Équipe B',
-        reason: 'Score final : {scoreA} - {scoreB}',
+                ? AppLocalizations.of(context)!.timesUpTeamA
+                : AppLocalizations.of(context)!.timesUpTeamB,
+        reason: AppLocalizations.of(context)!.scoreFinal,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -52879,7 +52310,7 @@ AppLocalizations.of(context)!.grilleDePts,
                             ? GameUiLocalization.tr(context, 'ATOUT : {suit}', {
                               'suit': _getSuitSymbol(context, trumpSuit),
                             })
-                            : 'ENCHÈRES EN COURS',
+                            : AppLocalizations.of(context)!.encheresEnCours,
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 12,
@@ -52921,8 +52352,8 @@ AppLocalizations.of(context)!.grilleDePts,
                 if (currentTrick.isEmpty && roundState == 'playing_trick')
                   Text(
                     isMyTurn
-                        ? "À VOUS D'OUVRIR LE PLI !"
-                        : "Tour de {0}",
+                        ? AppLocalizations.of(context)!.aVousDOuvrirLe
+                        : AppLocalizations.of(context)!.tourDe1,
                     style: TextStyle(
                       color: isMyTurn ? Colors.greenAccent : Colors.white38,
                       fontWeight: FontWeight.bold,
@@ -53018,7 +52449,7 @@ AppLocalizations.of(context)!.grilleDePts,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -53085,7 +52516,7 @@ AppLocalizations.of(context)!.grilleDePts,
           Container(
             padding: const EdgeInsets.fromLTRB(10, 6, 10, 8),
             decoration: BoxDecoration(
-              color: const Color(0xFF0B1713),
+              color: Color(0xFF0B1713),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -53219,7 +52650,7 @@ AppLocalizations.of(context)!.grilleDePts,
     }
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: RadialGradient(
           center: Alignment.center,
           radius: 1.2,
@@ -53248,8 +52679,8 @@ AppLocalizations.of(context)!.grilleDePts,
               ),
               child: Text(
                 isMyTurn
-                    ? 'À votre tour de jouer'
-                    : 'Au tour de {name}',
+                    ? AppLocalizations.of(context)!.aVotreTourDeJouer
+                    : AppLocalizations.of(context)!.auTourDe1,
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.bold,
@@ -53263,7 +52694,7 @@ AppLocalizations.of(context)!.grilleDePts,
           Expanded(
             flex: 3,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
+              margin: EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.3),
@@ -53493,9 +52924,9 @@ AppLocalizations.of(context)!.grilleDePts,
                       child: Text(
                         isMyTurn
                             ? (hasDrawn
-                                ? 'Étale ou Défausse'
-                                : 'Pioche une carte')
-                            : 'Au tour de {name}',
+                                ? AppLocalizations.of(context)!.etaleOuDefausse
+                                : AppLocalizations.of(context)!.piocheUneCarte)
+                            : AppLocalizations.of(context)!.auTourDe1,
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -53855,7 +53286,7 @@ AppLocalizations.of(context)!.grilleDePts,
         gameTitle: "Rami",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Score limite atteint !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.scoreLimiteAtteint,
         players: players,
         customScores: scores,
         gameData: gameData,
@@ -53899,8 +53330,8 @@ AppLocalizations.of(context)!.grilleDePts,
             const SizedBox(height: 12),
             Text(
               isGameOver
-                  ? 'Partie Terminée !'
-                  : 'Fin de la Manche',
+                  ? AppLocalizations.of(context)!.partieTerminee
+                  : AppLocalizations.of(context)!.finDeLaManche1,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -53915,7 +53346,7 @@ AppLocalizations.of(context)!.grilleDePts,
                   children: [
                     Text(
                       players[e.key]?['name'] ??
-                          'Joueur',
+                          AppLocalizations.of(context)!.joueur,
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 15,
@@ -54025,7 +53456,7 @@ AppLocalizations.of(context)!.grilleDePts,
         gameTitle: "Blokus",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? "Plus aucun coup possible !",
+        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.plusAucunCoupPossible,
         players: players,
         customScores: scores,
         gameData: gameData,
@@ -54125,7 +53556,7 @@ AppLocalizations.of(context)!.grilleDePts,
                           children: [
                             Text(
                               isMyTurn
-                                  ? "À votre tour"
+                                  ? AppLocalizations.of(context)!.aVotreTour
                                   : "${'Tour de'} ${players[currentPlayerId]?['name'] ?? '...'}",
                               style: TextStyle(
                                 color:
@@ -55274,8 +54705,8 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
                       },
               child: Text(
                 widget.targetGame != null
-                    ? "Lancer {0}"
-                    : "Choisir un jeu",
+                    ? AppLocalizations.of(context)!.lancer1
+                    : AppLocalizations.of(context)!.choisirUnJeu,
               ),
             ),
           ],
@@ -55319,10 +54750,7 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
 
     // Assignation des jeux classiques
     switch (gameName) {
-      case 'Qui Pourrait le Plus ?':
-        screen = WhoIsMostLikelyLocalScreen(players: _players);
-        break;
-      case 'Infiltré & Mr. White':
+      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.screenWhoismostlikelylocalscreenPlayersPlayersBreakInfiltré & Mr. White':
       case 'Undercover Local':
         screen = UndercoverLocalGameScreen(players: _players);
         break;
@@ -55936,8 +55364,8 @@ class _TruthOrDareLocalSetupScreenState
                                 : const Icon(Icons.bolt, color: Colors.black),
                         label: Text(
                           _isAiLoading
-                              ? "Génération..."
-                              : "Générer les défis par IA",
+                              ? AppLocalizations.of(context)!.generation
+                              : AppLocalizations.of(context)!.genererLesDefisParIa,
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amberAccent,
@@ -55953,9 +55381,9 @@ class _TruthOrDareLocalSetupScreenState
                                       final res =
                                           await FirebaseService.generateAiWords(
                                             instructions:
-                                                "Génère un mélange d'actions et de vérités divertissantes. Thème : ${_aiController.text.trim()}",
+                                                AppLocalizations.of(context)!.genereUnMelangeDActions(_aiController.text.trim()),
                                             count: 30,
-                                            gameType: 'Action ou Vérité',
+                                            gameType: AppLocalizations.of(context)!.actionOuVerite,
                                           );
                                       if (res.isNotEmpty) {
                                         setState(() {
@@ -56268,8 +55696,8 @@ class _TruthOrDareLocalGameScreenState
       onPressed: () => setState(() => _isSpinning = true),
       child: Text(
         _currentPlayerIndex == -1
-            ? "Lancer la roue"
-            : "Tour Suivant",
+            ? AppLocalizations.of(context)!.lancerLaRoue
+            : AppLocalizations.of(context)!.tourSuivant,
       ),
     );
   }
@@ -56372,12 +55800,12 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
           children: [
             Center(
               child: Container(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.teal.withOpacity(0.15),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.compare_arrows_rounded,
                   size: 54,
                   color: Colors.tealAccent,
@@ -56517,8 +55945,8 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                                 : const Icon(Icons.bolt, color: Colors.black),
                         label: Text(
                           _isAiLoading
-                              ? "Génération..."
-                              : "Générer les dilemmes par IA",
+                              ? AppLocalizations.of(context)!.generation
+                              : AppLocalizations.of(context)!.genererLesDilemmesParIa,
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amberAccent,
@@ -56540,7 +55968,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                                                   [_aiController.text.trim()],
                                                 ),
                                             count: 25,
-                                            gameType: 'Le Dilemme',
+                                            gameType: AppLocalizations.of(context)!.leDilemme1,
                                           );
                                       if (res.isNotEmpty) {
                                         setState(() => _aiDilemmas = res);
@@ -56888,10 +56316,10 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
               ),
               if (isWinning && voteCount > 0)
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: EdgeInsets.only(top: 8.0),
                   child: Text(
                     isTied
-                        ? 'Égalité'
+                        ? AppLocalizations.of(context)!.egalite
                         : 'Majoritaire',
                     style: TextStyle(color: color, fontWeight: FontWeight.bold),
                   ),
@@ -56910,12 +56338,12 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
               ? widget.players[_currentPlayerIndex]
               : '...';
       return _activeDilemmaVoterId == null
-          ? "Choix enregistré !"
-          : "Dilemme pour {0} : fais ton choix !";
+          ? AppLocalizations.of(context)!.choixEnregistre
+          : AppLocalizations.of(context)!.dilemmePourFaisTonChoix;
     } else {
       return _activeDilemmaVoterId == null
-          ? "Tous les votes sont enregistrés !"
-          : "C'est au tour de {0} de voter !";
+          ? AppLocalizations.of(context)!.tousLesVotesSontEnregistres
+          : AppLocalizations.of(context)!.cEstAuTourDe1;
     }
   }
 
@@ -56923,7 +56351,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
     return _useWheelForDilemma
         ? (_currentPlayerIndex != -1
             ? widget.players[_currentPlayerIndex]
-            : "Joueur")
+            : AppLocalizations.of(context)!.joueur)
         : (_activeDilemmaVoterId ?? "Fin");
   }
 
@@ -57184,8 +56612,8 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                 },
                 child: Text(
                   !_useWheelForDilemma
-                      ? "Lancer le Dilemme"
-                      : "Lancer la roue",
+                      ? AppLocalizations.of(context)!.lancerLeDilemme
+                      : AppLocalizations.of(context)!.lancerLaRoue,
                 ),
               ),
             const SizedBox(height: 10),
@@ -57281,7 +56709,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -57292,7 +56720,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                   shape: BoxShape.circle,
                   color: Colors.amber.withOpacity(0.15),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.monetization_on_rounded,
                   size: 54,
                   color: Colors.amberAccent,
@@ -57400,8 +56828,8 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                                 : const Icon(Icons.bolt, color: Colors.black),
                         label: Text(
                           _isAiLoading
-                              ? "Génération..."
-                              : "Générer les questions IA",
+                              ? AppLocalizations.of(context)!.generation
+                              : AppLocalizations.of(context)!.genererLesQuestionsIa,
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amberAccent,
@@ -57417,9 +56845,9 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                                       final res =
                                           await FirebaseService.generateAiWords(
                                             instructions:
-                                                "Génère des questions indiscrètes et amusantes. Thème : ${_aiController.text.trim()}",
+                                                AppLocalizations.of(context)!.genereDesQuestionsIndiscretesEt(_aiController.text.trim()),
                                             count: 25,
-                                            gameType: 'Jeu de la Pièce',
+                                            gameType: AppLocalizations.of(context)!.jeuDeLaPiece,
                                           );
                                       if (res.isNotEmpty) {
                                         setState(() => _aiQuestions = res);
@@ -57814,8 +57242,8 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
           SizedBox(height: 10),
           Text(
             lost
-                ? "PERDU ! Révèle la question et réponds-y !"
-                : "GAGNÉ ! Ton secret est préservé.",
+                ? AppLocalizations.of(context)!.perduReveleLaQuestionEt
+                : AppLocalizations.of(context)!.gagneTonSecretEstPreserve,
             style: TextStyle(
               fontSize: 18,
               color: lost ? Colors.redAccent : Colors.greenAccent,
@@ -58184,54 +57612,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                 GameWords.undercoverData['soft']!['wordPairs']!);
     final rawPair = wordPairs[random.nextInt(wordPairs.length)];
     if (rawPair.contains(':')) {
-      final parts = rawPair.split(':');
-      _wordCivil = parts[0].trim();
-      _wordUndercover = parts[1].trim();
-    } else {
-      int idx = wordPairs.indexOf(rawPair);
-      _wordCivil = rawPair.trim();
-      _wordUndercover =
-          (idx + 1 < wordPairs.length)
-              ? wordPairs[idx + 1].trim()
-              : "${rawPair.trim()} (Variante)";
-    }
-
-    _playerRoles.clear();
-    for (var player in _activePlayers) {
-      if (player == undercover) {
-        _playerRoles[player] = "Infiltré";
-      } else if (player == _mrWhitePlayer) {
-        _playerRoles[player] = "Mr. White";
-      } else {
-        _playerRoles[player] = "Civil";
-      }
-    }
-
-    setState(() {
-      _gameState = UndercoverGameState.revealing;
-      _currentPlayerRevealIndex = 0;
-      _resultMessage = "";
-    });
-  }
-
-  void _nextPlayerReveal() {
-    if (_currentPlayerRevealIndex < _activePlayers.length - 1) {
-      setState(() => _currentPlayerRevealIndex++);
-    } else {
-      setState(() => _gameState = UndercoverGameState.discussing);
-    }
-  }
-
-  void _eliminatePlayer(String player) {
-    String role = _playerRoles[player]!;
-    bool impostorsWin = role == "Civil";
-
-    setState(() {
-      _gameState = UndercoverGameState.result;
-      if (impostorsWin) {
-        _resultMessage = "$player était un Civil ! Les Imposteurs gagnent !";
-      } else {
-        _resultMessage = "$player était l'${role} ! Les Civils gagnent !";
+      final parts = rawPair.split(':AppLocalizations.of(context)!.wordcivilParts0TrimWordundercover1(rawPair.trim(), player)${role} ! Les Civils gagnent !";
       }
     });
   }
@@ -58320,8 +57701,8 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                 ),
                 subtitle: Text(
                   _includeMrWhite
-                      ? "Requiert 4+ joueurs"
-                      : "Requiert 3+ joueurs",
+                      ? AppLocalizations.of(context)!.requiert4Joueurs
+                      : AppLocalizations.of(context)!.requiert3Joueurs,
                 ),
                 value: _includeMrWhite,
                 onChanged: (val) => setState(() => _includeMrWhite = val),
@@ -58397,7 +57778,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                                   await FirebaseService.generateAiWords(
                                     instructions: _aiController.text.trim(),
                                     count: 30,
-                                    gameType: 'Infiltré & Mr. White',
+                                    gameType: AppLocalizations.of(context)!.infiltreMrWhite,
                                   );
                               _aiWordPairs = words;
                             } catch (e) {
@@ -58947,9 +58328,9 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                                         final cats =
                                             await FirebaseService.generateAiWords(
                                               instructions:
-                                                  "Génère des catégories amusantes pour la patate chaude. Thème : ${_aiController.text.trim()}",
+                                                  AppLocalizations.of(context)!.genereDesCategoriesAmusantesPour(_aiController.text.trim()),
                                               count: 20,
-                                              gameType: 'La Patate Chaude',
+                                              gameType: AppLocalizations.of(context)!.laPatateChaude,
                                             );
                                         if (cats.isNotEmpty) {
                                           setState(() {
@@ -59669,20 +59050,7 @@ class _WhoIsMostLikelyLocalScreenState
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
-            onPressed: () => showGameRules(context, 'Qui Pourrait le Plus ?'),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            if (_phase != LocalWhoIsPhase.results) ...[
-              // FILTRE DIFFICULTE
-              SegmentedButton<String>(
-                segments: [
-                  ButtonSegment(
-                    value: 'soft',
+            onPressed: () => showGameRules(context, 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft',
                     label: Text(AppLocalizations.of(context)!.soft),
                   ),
                   ButtonSegment(
@@ -59846,7 +59214,7 @@ class _WhoIsMostLikelyLocalScreenState
                                       await FirebaseService.generateAiWords(
                                         instructions: _aiController.text.trim(),
                                         count: 30,
-                                        gameType: 'Qui Pourrait le Plus ?',
+                                        gameType: AppLocalizations.of(context)!.quiPourraitLePlus,
                                       );
                                   if (questions.isNotEmpty) {
                                     setState(() {
@@ -60085,7 +59453,7 @@ class _WhoIsMostLikelyLocalScreenState
                 SizedBox(height: 4),
                 Text(
                   AppLocalizations.of(context)!.quiPourraitLePlus1,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -60098,8 +59466,8 @@ class _WhoIsMostLikelyLocalScreenState
         SizedBox(height: 16),
         Text(
           winners.length > 1
-              ? "Égalité ! (+1 pt chacun)"
-              : "Désigné par le groupe (+1 pt) :",
+              ? AppLocalizations.of(context)!.egalite1PtChacun
+              : AppLocalizations.of(context)!.designeParLeGroupe1,
           style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
@@ -61652,7 +61020,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
     String currentWord =
         _currentDeck.isNotEmpty
             ? _currentDeck.first
-            : "FIN DE MANCHE !";
+            : AppLocalizations.of(context)!.timesUpRoundEnd;
 
     String modeText = '';
     if (_currentRoundNumber == 1)
@@ -61679,7 +61047,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
               currentGuesser,
               GameContentLocalization.ui(
                 context,
-                _activeTeam == 'red' ? 'Équipe Rouge' : 'Équipe Bleue',
+                _activeTeam == 'red' ? AppLocalizations.of(context)!.codenamesRedTeam : AppLocalizations.of(context)!.codenamesBlueTeam,
               ),
             ],
           ),
@@ -62169,8 +61537,8 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                                   : const Icon(Icons.bolt, color: Colors.black),
                           label: Text(
                             _isAiLoading
-                                ? "Génération..."
-                                : "Générer les questions IA",
+                                ? AppLocalizations.of(context)!.generation
+                                : AppLocalizations.of(context)!.genererLesQuestionsIa,
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.amberAccent,
@@ -62192,7 +61560,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                                                     [_aiController.text.trim()],
                                                   ),
                                               count: 25,
-                                              gameType: 'On se passe un objet',
+                                              gameType: AppLocalizations.of(context)!.onSePasseUnObjet,
                                             );
                                         if (res.isNotEmpty) {
                                           setState(() => _aiQuestions = res);
@@ -62331,7 +61699,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
         ),
         SizedBox(height: 10),
         Text(
-          "Il/Elle doit répondre à la question :",
+          AppLocalizations.of(context)!.ilElleDoitRepondreA,
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
@@ -62574,8 +61942,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
     setState(() {
       _tiltFlash =
           guessed
-              ? "TROUVÉ !"
-              : "PASSÉ";
+              ? AppLocalizations.of(context)!.trouve
+              : AppLocalizations.of(context)!.passe;
     });
 
     _flashTimer?.cancel();
@@ -62690,8 +62058,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
     if (_useTeams) {
       currentGuesser =
           _activeTeam == 0
-              ? "{0} (Équipe Rouge)"
-              : "{0} (Équipe Bleue)";
+              ? AppLocalizations.of(context)!.equipeRouge
+              : AppLocalizations.of(context)!.equipeBleue;
     } else {
       currentGuesser = widget.players[_currentPlayerIndex];
     }
@@ -62761,8 +62129,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
               ),
               subtitle: Text(
                 _useTeams
-                    ? "2 équipes s'affrontent"
-                    : "Chacun pour soi",
+                    ? AppLocalizations.of(context)!.k2EquipesSAffrontent
+                    : AppLocalizations.of(context)!.chacunPourSoi,
               ),
               value: _useTeams,
               secondary: const Icon(
@@ -62889,7 +62257,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                                           _aiThemeCtrl.text
                                                               .trim(),
                                                       count: 40,
-                                                      gameType: 'Devine Tête',
+                                                      gameType: AppLocalizations.of(context)!.devineTete,
                                                     );
                                                 if (words.isNotEmpty) {
                                                   setState(() {
@@ -63242,7 +62610,7 @@ context,
 "Trouvés : {0}",
 [_roundHistory.where((e) => e['guessed'] == true).length],
 ),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.greenAccent,
@@ -65461,7 +64829,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                         itemCount: displayMessages.length,
                         itemBuilder: (context, index) {
                           final msg = displayMessages[index];
-                          final sender = msg['senderName'] ?? 'Joueur';
+                          final sender = msg['senderName'] ?? AppLocalizations.of(context)!.joueur;
                           final text = msg['text'] ?? '';
                           final isMe = msg['senderId'] == widget.playerId;
 
@@ -65502,7 +64870,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: "$sender : ",
+                                        text: AppLocalizations.of(context)!.stre786cb(sender),
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 11,
@@ -65676,7 +65044,7 @@ class _LoungeListScreenState extends State<LoungeListScreen>
         await FirebaseService().joinLounge(
           targetLoungeId,
           widget.playerId,
-          ps.userName ?? 'Joueur',
+          ps.userName ?? AppLocalizations.of(context)!.joueur,
         );
         if (mounted) {
           _privateCodeCtrl.clear();
@@ -65834,7 +65202,7 @@ backgroundColor: Colors.redAccent,
   // VUE 1 : REJOINDRE AVEC UN CODE PRIVÉ
   Widget _buildPrivateJoinView() {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -65886,7 +65254,7 @@ backgroundColor: Colors.redAccent,
                   controller: _privateCodeCtrl,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.text,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.amberAccent,
                     fontSize: 24,
                     letterSpacing: 4,
@@ -66021,7 +65389,7 @@ backgroundColor: Colors.redAccent,
                     child: Row(
                       children: [
                         Icon(Icons.access_time, size: 16, color: _sortBy == 'recent' ? Colors.amber : Colors.white70),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(AppLocalizations.of(context)!.plusRecents, style: TextStyle(color: _sortBy == 'recent' ? Colors.amber : Colors.white)),
                       ],
                     ),
@@ -66050,7 +65418,7 @@ backgroundColor: Colors.redAccent,
               ),
               const SizedBox(width: 4),
               IconButton(
-                tooltip: _hideFull ? "Afficher les salons pleins" : "Masquer les salons pleins",
+                tooltip: _hideFull ? AppLocalizations.of(context)!.afficherLesSalonsPleins : AppLocalizations.of(context)!.masquerLesSalonsPleins,
                 icon: Icon(
                   _hideFull ? Icons.filter_alt_rounded : Icons.filter_alt_outlined,
                   size: 20,
@@ -66205,8 +65573,8 @@ backgroundColor: Colors.redAccent,
                         const SizedBox(height: 12),
                         Text(
                           _searchCtrl.text.isNotEmpty || _selectedTheme != 'Tous'
-                              ? "Aucun salon ne correspond à vos filtres."
-                              : "Aucun salon public disponible.\nCréez le vôtre ci-dessous !",
+                              ? AppLocalizations.of(context)!.aucunSalonNeCorrespondA
+                              : AppLocalizations.of(context)!.aucunSalonPublicDisponibleNcreez,
                           textAlign: TextAlign.center,
                           style: const TextStyle(color: Colors.white54, height: 1.4, fontSize: 14),
                         ),
@@ -66228,7 +65596,7 @@ backgroundColor: Colors.redAccent,
                   final bool isFull = activeCount >= maxPlayers;
                   final String hostId = data['hostId'] ?? '';
                   final bool amIHost = hostId == widget.playerId;
-                  final String theme = data['theme'] ?? 'Général';
+                  final String theme = data['theme'] ?? AppLocalizations.of(context)!.general;
 
                   return Card(
                     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -66262,7 +65630,7 @@ backgroundColor: Colors.redAccent,
                         children: [
                           Flexible(
                             child: Text(
-                              data['name'] ?? 'Salon',
+                              data['name'] ?? AppLocalizations.of(context)!.salon,
                               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -66346,7 +65714,7 @@ backgroundColor: Colors.redAccent,
                               await FirebaseService().joinLounge(
                                 doc.id,
                                 widget.playerId,
-                                ps.userName ?? 'Joueur',
+                                ps.userName ?? AppLocalizations.of(context)!.joueur,
                               );
                               if (context.mounted) {
                                 Navigator.push(
@@ -66420,7 +65788,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
       'theme':
           _themeCtrl.text.trim().isNotEmpty
               ? _themeCtrl.text.trim()
-              : 'Général',
+              : AppLocalizations.of(context)!.general,
       'description': _descCtrl.text.trim(),
       'maxPlayers': _maxPlayers.toInt(),
       'isPrivate': _isPrivate,
@@ -66429,7 +65797,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
       'hostId': widget.playerId,
       'players': {
         widget.playerId: {
-          'name': ps.userName ?? 'Hôte',
+          'name': ps.userName ?? AppLocalizations.of(context)!.hote,
           'joinedAt': FieldValue.serverTimestamp(),
           'lastHeartbeat': FieldValue.serverTimestamp(),
           'isOnline': true,
@@ -66568,7 +65936,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       _firebaseService.joinLounge(
         widget.loungeId,
         widget.playerId,
-        ps.userName ?? 'Joueur',
+        ps.userName ?? AppLocalizations.of(context)!.joueur,
       );
       _sendHeartbeat();
     }
@@ -66592,7 +65960,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       _firebaseService.sendLoungeMessage(
         widget.loungeId,
         widget.playerId,
-        ps.userName ?? 'Joueur',
+        ps.userName ?? AppLocalizations.of(context)!.joueur,
         _chatCtrl.text.trim(),
       );
       _chatCtrl.clear();
@@ -66608,7 +65976,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     AppLocalizations.of(context)!.lancerUnJeuPourLe,
                     style: Theme.of(context).textTheme.titleLarge,
@@ -66639,7 +66007,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                             MaterialPageRoute(
                               builder:
                                   (_) => CreateGameScreen(
-                                    playerName: ps.userName ?? "Hôte",
+                                    playerName: ps.userName ?? AppLocalizations.of(context)!.hote,
                                     playerId: widget.playerId,
                                     initialGame: game['name'],
                                     loungeId: widget.loungeId,
@@ -66674,7 +66042,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     String newGameCode = randomNumeric(6);
 
     Map<String, dynamic> hostOnly = {
-      widget.playerId: {'name': ps.userName ?? 'Hôte', 'score': 0},
+      widget.playerId: {'name': ps.userName ?? AppLocalizations.of(context)!.hote, 'score': 0},
     };
 
     await _firebaseService.createGameWithAllPlayers(
@@ -66758,7 +66126,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     await _firebaseService.sendLoungeMessage(
       widget.loungeId,
       widget.playerId,
-      ps.userName ?? 'Hôte',
+      ps.userName ?? AppLocalizations.of(context)!.hote,
       "J'ai lancé une partie de ${data['gameType'] ?? 'Gribouillis'} !",
       type: 'game_invite',
       extraData: {
@@ -66818,7 +66186,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       return Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
-          icon: const Icon(Icons.play_circle_fill, size: 18),
+          icon: Icon(Icons.play_circle_fill, size: 18),
           label: Text("${"En cours"} ($gameName)"),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.orange[800],
@@ -66958,7 +66326,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         ),
         child: Row(
           children: [
-            const Icon(Icons.hourglass_empty, color: Colors.amberAccent, size: 20),
+            Icon(Icons.hourglass_empty, color: Colors.amberAccent, size: 20),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -66997,7 +66365,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                       .doc(gameCode)
                       .update({'gameState': 'playing'});
                 },
-                child: Text(AppLocalizations.of(context)!.commencer, style: const TextStyle(fontSize: 12)),
+                child: Text(AppLocalizations.of(context)!.commencer, style: TextStyle(fontSize: 12)),
               ),
               const SizedBox(width: 6),
               TextButton(
@@ -67032,10 +66400,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           'pendingGame.joinedPlayers': FieldValue.arrayUnion([widget.playerId]),
                         });
                     final ps = Provider.of<PlayerState>(context, listen: false);
-                    await _firebaseService.joinGame(gameCode, ps.userName ?? 'Joueur', widget.playerId);
+                    await _firebaseService.joinGame(gameCode, ps.userName ?? AppLocalizations.of(context)!.joueur, widget.playerId);
                   }
                 },
-                child: Text(hasJoined ? "Prêt ✓" : "Rejoindre", style: const TextStyle(fontSize: 12)),
+                child: Text(hasJoined ? AppLocalizations.of(context)!.pret3 : AppLocalizations.of(context)!.rejoindre, style: const TextStyle(fontSize: 12)),
               ),
             ],
           ],
@@ -67075,7 +66443,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     ),
                   ),
                   Text(
-                    winner.isNotEmpty ? "${'Vainqueur :'} $winner ${reason.isNotEmpty ? "(${GameMessageLocalization.tr(context, reason)})" : ""}" : GameMessageLocalization.tr(context, reason),
+                    winner.isNotEmpty ? AppLocalizations.of(context)!.reasonIsnotempty('Vainqueur :', winner)(${GameMessageLocalization.tr(context, reason)})" : ""}" : GameMessageLocalization.tr(context, reason),
                     style: const TextStyle(color: Colors.white70, fontSize: 11),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -67104,7 +66472,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(GameContentLocalization.ui(context, pendingGame['gameName'] ?? 'Partie')),
+        title: Text(GameContentLocalization.ui(context, pendingGame['gameName'] ?? AppLocalizations.of(context)!.partie)),
         content: Text(GameContentLocalization.format(context, "{0} joueur(s) prêt(s)", [(pendingGame['joinedPlayers'] as List? ?? []).length])),
         actions: [
           if (isHost) ...[
@@ -67288,7 +66656,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     children: [
                       Text(
                         data['name'] ??
-                            'Salon',
+                            AppLocalizations.of(context)!.salon,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -67405,8 +66773,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           icon: Icon(Icons.videocam),
                           label: Text(
                             streamers.isEmpty
-                                ? "Lancer un Stream"
-                                : "Rejoindre le Stream (${streamers.length})",
+                                ? AppLocalizations.of(context)!.lancerUnStream
+                                : AppLocalizations.of(context)!.rejoindreLeStream(streamers.length),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueAccent,
@@ -67619,14 +66987,14 @@ AppLocalizations.of(context)!.joueurSPrets,
                                                     });
                                                 await _firebaseService.joinGame(
                                                   gameCode,
-                                                  ps.userName ?? 'Joueur',
+                                                  ps.userName ?? AppLocalizations.of(context)!.joueur,
                                                   widget.playerId,
                                                 );
                                               },
                                       child: Text(
                                         hasJoined
-                                            ? "En attente du lancement..."
-                                            : "Rejoindre",
+                                            ? AppLocalizations.of(context)!.enAttenteDuLancement
+                                            : AppLocalizations.of(context)!.rejoindre,
                                       ),
                                     ),
                                 ],
@@ -67752,7 +67120,7 @@ AppLocalizations.of(context)!.joueurSPrets,
                                       isMe
                                           ? "Moi"
                                           : (msg['senderName'] ??
-                                              'Joueur'),
+                                              AppLocalizations.of(context)!.joueur),
                                       style: const TextStyle(
                                         fontSize: 10,
                                         color: Colors.white70,
@@ -68118,7 +67486,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
     // DOS DE CARTE (FACE CACHÉE)
     if (!isRevealed) {
       return AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 200),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [Color(0xFF2E1065), Color(0xFF1E1B4B), Color(0xFF0F172A)],
@@ -68681,11 +68049,11 @@ class _SpookyTargetCardBack extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     isSelectedLocal
-                        ? "VOLER !"
+                        ? AppLocalizations.of(context)!.voler
                         : (isHoveredLive
                             ? (isMyTurn
-                                ? "CIBLÉE"
-                                : "VISÉE !")
+                                ? AppLocalizations.of(context)!.ciblee
+                                : AppLocalizations.of(context)!.visee)
                             : "?"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -69322,7 +68690,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     final playerOrder = List<String>.from(gameData['aoVPlayerOrder'] ?? []);
     final phase = gameData['aoVPhase'] ?? 'waiting_spin';
     final currentPlayerId = gameData['aoVCurrentPlayerId'];
-    final currentPlayerName = players[currentPlayerId]?['name'] ?? 'Joueur';
+    final currentPlayerName = players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
     final isCurrentPlayer = (widget.playerId == currentPlayerId);
     final hostId = gameData['hostId'];
     final isHost = (widget.playerId == hostId);
@@ -69333,7 +68701,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     final String? challengeType = gameData['aoVChallengeType'];
     final String? currentChallenge = gameData['aoVCurrentChallenge'];
     final String? challengeAuthor = gameData['aoVChallengeAuthor'];
-    final authorName = players[challengeAuthor]?['name'] ?? 'Un joueur';
+    final authorName = players[challengeAuthor]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
     final isAuthor = (widget.playerId == challengeAuthor);
     final votes = Map<String, dynamic>.from(gameData['aoVVotes'] ?? {});
     final votersCount = playerOrder.where((p) => p != currentPlayerId).length;
@@ -69490,7 +68858,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
   }) {
     final playerNames =
         playerOrder
-            .map((id) => (players[id]?['name'] ?? 'Joueur').toString())
+            .map((id) => (players[id]?['name'] ?? AppLocalizations.of(context)!.joueur).toString())
             .toList();
 
     switch (phase) {
@@ -69664,7 +69032,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
 
       case 'writing_challenge':
         final isAction = (challengeType == 'action');
-        final typeLabel = isAction ? "ACTION" : "VÉRITÉ";
+        final typeLabel = isAction ? "ACTION" : AppLocalizations.of(context)!.verite1;
         final typeColor = isAction ? Colors.deepOrange : Colors.purpleAccent;
 
         return Column(
@@ -69725,8 +69093,8 @@ context,
                       decoration: InputDecoration(
                         hintText:
                             isAction
-                                ? "Ex: Fais 10 pompes en chantant..."
-                                : "Ex: Quel est ton pire moment de honte ?",
+                                ? AppLocalizations.of(context)!.exFais10PompesEn
+                                : AppLocalizations.of(context)!.exQuelEstTonPire,
                         hintStyle: const TextStyle(color: Colors.white38),
                         filled: true,
                         fillColor: Colors.black26,
@@ -69830,7 +69198,7 @@ context,
                   BoxShadow(
                     color: gradientColors.first.withOpacity(0.5),
                     blurRadius: 20,
-                    offset: const Offset(0, 4),
+                    offset: Offset(0, 4),
                   ),
                 ],
               ),
@@ -69848,7 +69216,7 @@ context,
                     child: Text(
                       isAction
                           ? "🔥 ACTION"
-                          : "🔮 VÉRITÉ",
+                          : AppLocalizations.of(context)!.verite2,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -69868,7 +69236,7 @@ context,
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "« ${currentChallenge ?? '...'} »",
+                    AppLocalizations.of(context)!.strc1ea47(currentChallenge ?? '...'),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -69981,7 +69349,7 @@ context,
             ),
             const SizedBox(height: 10),
             Text(
-              "« ${currentChallenge ?? ''} »",
+              AppLocalizations.of(context)!.str5dd9e1(currentChallenge ?? ''),
               style: const TextStyle(
                 color: Colors.white70,
                 fontSize: 13,
@@ -70068,7 +69436,7 @@ context,
                         elevation: 6,
                       ),
                       onPressed: _isSubmitting ? null : () => _handleVote(true),
-                      icon: const Icon(Icons.thumb_up, color: Colors.white),
+                      icon: Icon(Icons.thumb_up, color: Colors.white),
                       label: Text(
                         AppLocalizations.of(context)!.ouiValide,
                         style: TextStyle(
@@ -70152,8 +69520,8 @@ context,
                   ),
                   Text(
                     isSuccess
-                        ? "DÉFI VALIDÉ !"
-                        : "DÉFI NON VALIDÉ",
+                        ? AppLocalizations.of(context)!.defiValide
+                        : AppLocalizations.of(context)!.defiNonValide,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -70195,7 +69563,7 @@ context,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: 32,
                   vertical: 16,
                 ),
@@ -70215,7 +69583,7 @@ context,
         );
 
       default:
-        return const SizedBox.shrink();
+        return SizedBox.shrink();
     }
   }
 
@@ -70598,7 +69966,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
             widget.winnerName ??
             (leaderboard.isNotEmpty
                 ? resolvePlayerName(leaderboard.first.key)
-                : 'Partie terminée');
+                : AppLocalizations.of(context)!.partieTerminee3);
 
         final bool amIWinner =
             (widget.winnerId != null &&
@@ -70663,8 +70031,8 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                   const SizedBox(height: 4),
                   Text(
                     amIWinner
-                        ? "VICTOIRE !"
-                        : "FIN DE LA MANCHE",
+                        ? AppLocalizations.of(context)!.victoire
+                        : AppLocalizations.of(context)!.finDeLaManche2,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
@@ -70871,7 +70239,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                             ),
                             child: Text(
                               playerReady
-                                  ? "✓ Prêt"
+                                  ? AppLocalizations.of(context)!.pret4
                                   : "...",
                               style: TextStyle(
                                 fontSize: 10,
@@ -70955,7 +70323,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                         : const Color(0xFF10B981),
                                 foregroundColor: Colors.white,
                                 elevation: 5,
-                                padding: const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                   vertical: 13,
                                 ),
                                 shape: RoundedRectangleBorder(
