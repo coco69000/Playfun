@@ -1912,5 +1912,558 @@
   "partieTerminee3": "Partie terminée",
   "victoire": "VICTOIRE !",
   "finDeLaManche2": "FIN DE LA MANCHE",
-  "pret4": "✓ Prêt"
+  "pret4": "✓ Prêt",
+  "jAiLanceUnePartie": "J'ai lancé une partie de {selectedGame} !",
+  "@jAiLanceUnePartie": {
+    "placeholders": {
+      "selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "ia": "IA",
+  "localIndisponibleRechercheActive": "Local indisponible (Recherche active)",
+  "rechercheRapideMonde": "Recherche rapide (Monde)",
+  "selectionnezAuMoins5Roles": "Sélectionnez au moins 5 rôles pour commencer.",
+  "petiteBlind": "Petite Blind: '{'0'}'",
+  "simpleVillageois": "Simple Villageois",
+  "capitaine": "Capitaine",
+  "s2": "{hotPotatoGlobalDuration} s",
+  "@s2": {
+    "placeholders": {
+      "hotPotatoGlobalDuration": {
+        "type": "Object"
+      }
+    }
+  },
+  "nombreDeJoueursRecherches": "Nombre de joueurs recherchés : '{'0'}'",
+  "laBeloteRequiertExactement4": "La Belote requiert exactement 4 joueurs.",
+  "formez2EquipesDe2": "Formez 2 équipes de 2 joueurs dans 'Composer les équipes'.",
+  "ilFautAuMoins4": "Il faut au moins 4 joueurs.",
+  "veuillezCreerAuMoins2": "Veuillez créer au moins 2 équipes.",
+  "tousLesJoueursDoiventEtre": "Tous les joueurs doivent être assignés à une équipe.",
+  "chaqueEquipeDoitPossederAu": "Chaque équipe doit posséder au moins 2 joueurs.",
+  "auMoins5JoueursRequis": "Au moins 5 joueurs requis.",
+  "rolesJoueurs": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playersLength}).",
+  "@rolesJoueurs": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playersLength": {
+        "type": "Object"
+      }
+    }
+  },
+  "ceJeuRequiertExactement4": "Ce jeu requiert exactement 4 joueurs.",
+  "auMoins3JoueursRequis": "Au moins 3 joueurs requis.",
+  "auMoins2JoueursRequis": "Au moins 2 joueurs requis.",
+  "jeu": "Jeu : '{'0'}'",
+  "ami": "Ami",
+  "deconnecte": "déconnecté",
+  "suspect": "Suspect",
+  "anonyme": "Anonyme",
+  "vousAvezVote": "Vous avez voté !",
+  "inconnu": "Inconnu",
+  "personne": "Personne",
+  "chargementDeLaPartie": "Chargement de la partie...",
+  "systeme": "Système",
+  "jeuEnCours": "Jeu en cours",
+  "asLabel": "As",
+  "deux": "Deux",
+  "trois": "Trois",
+  "quatre": "Quatre",
+  "cinq": "Cinq",
+  "six": "Six",
+  "sectionSup": "Section sup: '{'0'}'",
+  "k63Pts": "{oppUpper}/63 pts {value}",
+  "@k63Pts": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
+  "prenezLaDefausseVisibleOu": "Prenez la Défausse visible ou Piochez une carte cachée",
+  "aa": "“ {value} â€Â",
+  "@aa": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
+  "dessineCettePhrase": "Dessine cette phrase :\n\"{value}\"",
+  "@dessineCettePhrase": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
+  "completeCeDessin": "Complète ce dessin !",
+  "commenceParUnDessin": "Commence par un dessin !",
+  "orateur": "Orateur",
+  "moi": "Moi",
+  "manche1": "Manche '{'0'}' / '{'1'}'",
+  "voisin": "Voisin",
+  "aSelectionneCarte": "'{'0'}' a sélectionné '{'1'}' carte'{'2'}'...",
+  "jouePar": "Joué par '{'0'}'",
+  "lAdversaire": "L'adversaire",
+  "ecrivez": "Écrivez {promptItem}",
+  "@ecrivez": {
+    "placeholders": {
+      "promptItem": {
+        "type": "Object"
+      }
+    }
+  },
+  "completezLaPhrase1A": "Complétez la phrase (1 à 8 mots)",
+  "auteur": "Auteur",
+  "adversaire": "Adversaire",
+  "feuVert": "FEU VERT",
+  "feuRouge": "Feu Rouge",
+  "limite501": "Limite 50",
+  "crevaison1": "Crevaison",
+  "feuVert1": "Feu Vert",
+  "finDeLimite": "Fin de\nLimite",
+  "fin50": "FIN 50",
+  "essence": "Essence",
+  "roueDeSecours": "Roue de\nSecours",
+  "radarCaseCiblee": "RADAR : Case '{'0'}' ciblée !",
+  "ys": "ðŸš«",
+  "yaaz": "ðŸâ€â€ž",
+  "joker": "Joker",
+  "voteEnregistreEnAttenteDes": "Vote enregistré. En attente des autres joueurs...",
+  "enAttenteDesAutres": "En attente des autres...",
+  "lesAutresJoueursRepondent": "Les autres joueurs répondent...",
+  "enAttenteDesDeclarations": "En attente des déclarations...",
+  "enAttenteDesVotes": "En attente des votes...",
+  "laPartieContinue": "La partie continue...",
+  "laPartieVaBientotCommencer": "La partie va bientôt commencer...",
+  "mrWhite": "Mr. White",
+  "aEteDemasqueIlTente": "{mrWhiteName} a été démasqué ! Il tente de deviner le mot secret des civils...",
+  "@aEteDemasqueIlTente": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
+  "voteDecisifEnregistreEnAttente": "Vote décisif enregistré. En attente des autres...",
+  "egaliteParfaiteLaDeesseDe": "Égalité parfaite ! La Déesse de la Justice est en train de trancher...",
+  "vousEtesLeJugeAttendez": "Vous êtes le Juge. Attendez les réponses...",
+  "carteJoueeAttenteDesAutres": "Carte jouée ! Attente des autres...",
+  "question1": "Question...",
+  "voteEnregistre": "Vote enregistré...",
+  "lesAutresJugentTonHistoire": "Les autres jugent ton histoire...",
+  "vrai1": "Vrai",
+  "faux1": "Faux",
+  "tuAsVote": "Tu as voté : '{'0'}'",
+  "aEteChoisiPourSa": "'{'0'}' a été choisi pour sa réponse et gagne 1 point !",
+  "resultatsDesVotes": "Résultats des votes",
+  "leMenteurEtait": "Le menteur était... {liarName} !",
+  "@leMenteurEtait": {
+    "placeholders": {
+      "liarName": {
+        "type": "Object"
+      }
+    }
+  },
+  "lesImposteursOntGagneUn": "Les imposteurs ont gagné ! Un civil a été éliminé.",
+  "lInfiltreAEteDemasque": "L'Infiltré ({undercoverName}) a été démasqué !",
+  "@lInfiltreAEteDemasque": {
+    "placeholders": {
+      "undercoverName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mrWhiteAEteDemasque": "Mr. White ({mrWhiteName}) a été démasqué !",
+  "@mrWhiteAEteDemasque": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
+  "leTourEstTermine": "Le tour est terminé !",
+  "aEteBanniPourSa": "{loserName} a été banni pour sa proposition ''{loserAnswer}' !",
+  "@aEteBanniPourSa": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
+  "egaliteDansLesVotesPersonne": "Égalité dans les votes ! Personne n'est banni.",
+  "nAPasReponduA": "{loserName} n'a pas répondu à temps et gagne 1 point !",
+  "@nAPasReponduA": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
+  "egalitePersonneNePrendDe": "Égalité ! Personne ne prend de point ce tour-ci.",
+  "aTrouveLeMot": "{winnerName} a trouvé le mot : ''{currentWord}' !",
+  "@aTrouveLeMot": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe": "Personne n'a trouvé le mot : ''{currentWord}'.",
+  "@personneNATrouveLe": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot1": "{guesserName} a trouvé le mot : ''{currentWord}' !",
+  "@aTrouveLeMot1": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasTrouveLe": "{guesserName} n'a pas trouvé le mot.",
+  "@nAPasTrouveLe": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
+  "remporteSkull": "{value} remporte Skull !",
+  "@remporteSkull": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
+  "defiGagneCarteSRevelee": "Défi gagné : {challengeBid} carte(s) révélée(s) !",
+  "@defiGagneCarteSRevelee": {
+    "placeholders": {
+      "challengeBid": {
+        "type": "Object"
+      }
+    }
+  },
+  "aPerduLeDefi": "{loserName} a perdu le défi.",
+  "@aPerduLeDefi": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
+  "leTourEstTermine1": "Le tour est terminé.",
+  "aGagneAvecSaDescription": "{winnerName} a gagné avec sa description :AppLocalizations.of(context)!.extrainfoColumnChildrenText{winningDescription}",
+  "@aGagneAvecSaDescription": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "winningDescription": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNAGagneCe": "Personne n'a gagné ce tour. Égalité des votes ou pas de description.",
+  "aTrouveLeSymboleIl": "{winnerName} a trouvé le symbole {commonSym} ! Il gagne la carte.",
+  "@aTrouveLeSymboleIl": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "commonSym": {
+        "type": "Object"
+      }
+    }
+  },
+  "leTourEstTerminePersonne": "Le tour est terminé. Personne n'a trouvé le symbole commun.",
+  "aEteDesigneEEt": "{winnerName} a été désigné(e) et gagne 1 point !",
+  "@aEteDesigneEEt": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "egalitePersonneNeMarqueDe": "Égalité ! Personne ne marque de point ce tour-ci.",
+  "espion": "Espion",
+  "revolution": " (Révolution !)",
+  "rose1": "Rose",
+  "crane1": "Crane",
+  "motADessiner": "Mot à dessiner",
+  "indiceEnvoyeEnAttenteDes1": "Indice envoyé ! En attente des autres...",
+  "carte3": "Carte",
+  "score": "Score",
+  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLocalizations.of(context)!.styleConstTextstyleColorColors{value2} {deckIndex} / {deckTotal} — {value3} : {totalScore}",
+  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "guesserName": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "value3": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
+  "laNuitTombeSurLe": "La nuit tombe sur le village...\n\nFermez les yeux.",
+  "leMomentEstVenuLe": "Le moment est venu...\n\nLe village doit voter.",
+  "victoireDesVillageois": "Victoire des Villageois !",
+  "victoireDesLoupsGarous": "Victoire des Loups-Garous !",
+  "victoireDesAmoureux": "Victoire des Amoureux !",
+  "finDuJeu": "Fin du jeu",
+  "loup": "Loup",
+  "validerLeCouple2": "Valider le couple ('{'0'}'/2)",
+  "lHeritierChoisitSonTestament": "L'Héritier choisit son testament",
+  "selectionnezVotreTestateur": "Sélectionnez votre testateur",
+  "leGardeProtegeUnVillageois": "Le Garde protège un villageois",
+  "selectionnezQuiProteger": "Sélectionnez qui protéger",
+  "laVoyanteConsulteLesAstres": "La Voyante consulte les astres",
+  "touchezUnJoueurPourSonder": "Touchez un joueur pour sonder son rôle",
+  "leRatMaladeRode": "Le Rat Malade rôde...",
+  "contaminezJusquA2Joueurs": "Contaminez jusqu'à 2 joueurs",
+  "contaminer": "Contaminer ('{'0'}')",
+  "lesLoupsChassentEnMeute": "Les Loups chassent en meute",
+  "votezPourDevorerUneProie": "Votez pour dévorer une proie",
+  "espionnezUnJoueur": "Espionnez un joueur...",
+  "leLoupNoirDecideDu": "Le Loup Noir décide du destin de la proie",
+  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infecter {targetName} ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinLe Loup Blanc frappe en solitaire",
+  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
+  "choisissezUneVictimeADevorer": "Choisissez une victime à dévorer",
+  "laSorcierePrepareSesPotions": "La Sorcière prépare ses potions",
+  "cibleDesLoups": "Cible des loups : {victimeName}",
+  "@cibleDesLoups": {
+    "placeholders": {
+      "victimeName": {
+        "type": "Object"
+      }
+    }
+  },
+  "touchezLeJoueurAEliminer": "Touchez le joueur à éliminer avec le poison",
+  "empoisonner": "Empoisonner",
+  "lePyromancienPrepareSesExplosifs": "Le Pyromancien prépare ses explosifs",
+  "poserTonneau": "Poser tonneau",
+  "debatsDuVillage": "Débats du village",
+  "leCapitaineDesigneSonSuccesseur": "Le Capitaine désigne son successeur",
+  "dernierTirDuChasseur": "Dernier tir du Chasseur...",
+  "leFossoyeurReveleUneSepulture": "Le Fossoyeur révèle une sépulture",
+  "coupDEtatDuDictateur": "Coup d'État du Dictateur !",
+  "voteDuTribunalPopulaire": "Vote du tribunal populaire",
+  "touchezUnSuspectPourVoter": "Touchez un suspect pour voter",
+  "village": "Village",
+  "loups": "Loups",
+  "outreTombe": "Outre-tombe",
+  "amoureux": "Amoureux",
+  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName}: AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldPetits Chevaux",
+  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
+    "placeholders": {
+      "senderName": {
+        "type": "Object"
+      }
+    }
+  },
+  "courseIndividuelle": "Course individuelle",
+  "k3Lancers": "👉 {lastHoldAction} ({value}/3 lancers)",
+  "@k3Lancers": {
+    "placeholders": {
+      "lastHoldAction": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueEnDirect3Lancers": "👉 {value} joue en direct... ({value2}/3 lancers)",
+  "@joueEnDirect3Lancers": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      }
+    }
+  },
+  "gardeS": "🔒 '{'0'}' gardé(s)",
+  "cur": "♥ Cœur",
+  "carreau": "♦ Carreau",
+  "trefle": "♣ Trèfle",
+  "pique": "♠ Pique",
+  "equipeARouge": "Équipe A (Rouge)",
+  "equipeBBleue": "Équipe B (Bleue)",
+  "votezPourLaPersonneLa": "Votez pour la personne la plus susceptible de...",
+  "demasquezLInfiltreEtMr": "Démasquez l'Infiltré et Mr. White !",
+  "passeLeTelephoneAvantQu": "Passe le téléphone avant qu'il n'explose !",
+  "proposezLeMeilleurSynonymeEt": "Proposez le meilleur synonyme et votez !",
+  "leClassiqueAvecChoixEt": "Le classique, avec choix et IA personnalisée !",
+  "repondezALaQuestionSecrete": "Répondez à la question secrète... si vous perdez !",
+  "faitesDesChoixImpossiblesAvec": "Faites des choix impossibles avec options IA et votes.",
+  "retrouvezVosMotsSecretsPar": "Retrouvez vos mots secrets par équipes !",
+  "faitesDevinerDesNomsEn": "Faites deviner des noms en 3 manches !",
+  "uneQuestionDrolePourLa": "Une question drôle pour la personne qui aura l'objet !",
+  "devinezLeMotAvecL": "Devinez le mot avec l'aide des autres !",
+  "reperezLeSymboleCommunLe": "Repérez le symbole commun le plus vite !",
+  "genereDesDilemmesAuFormat": "Génère des dilemmes au format 'OptionA ou OptionB'. Thème : '{'0'}'",
+  "jePasse": "Je passe",
+  "vote": "'{'0'}' vote",
+  "votes1": "'{'0'}' votes",
+  "majoritaire": "Majoritaire",
+  "fin": "Fin",
+  "pile": "Pile",
+  "face": "Face",
+  "pasAssezDeJoueursIl": "Pas assez de joueurs ! Il faut au moins {minPlayers} joueurs pour cette configuration.",
+  "@pasAssezDeJoueursIl": {
+    "placeholders": {
+      "minPlayers": {
+        "type": "Object"
+      }
+    }
+  },
+  "tuEs": "Tu es: {role}\n\n",
+  "@tuEs": {
+    "placeholders": {
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
+  "tonMotEst": "Ton mot est : {wordCivil}",
+  "@tonMotEst": {
+    "placeholders": {
+      "wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
+  "tonMotEst1": "Ton mot est : {wordUndercover}",
+  "@tonMotEst1": {
+    "placeholders": {
+      "wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
+  "tuNAsPasDe": "Tu n'as pas de mot. Bluffe !",
+  "commeConvenuTuCommences": "\n\n{mrWhitePlayer}, comme convenu, tu commences !",
+  "@commeConvenuTuCommences": {
+    "placeholders": {
+      "mrWhitePlayer": {
+        "type": "Object"
+      }
+    }
+  },
+  "quiPourraitLePlusApplocalizations": "Qui Pourrait le Plus ?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft",
+  "votePar": "Voté par : '{'0'}'",
+  "decisionUnanimeDuGroupePour": "Décision unanime du groupe pour '{'0'}' !",
+  "ilFautAuMoins41": "Il faut au moins 4 joueurs pour Codenames (2 par équipe) !",
+  "impossibleDeFormerLesEquipes": "Impossible de former les équipes (taille minimale non atteinte). Redémarrer avec au moins 4 joueurs.",
+  "lEquipeAReveleL": "L'équipe '{'0'}' a révélé l'Assassin ! L'équipe '{'1'}' gagne !",
+  "bleue": "Bleue",
+  "lEquipeATrouveTous": "L'équipe '{'0'}' a trouvé tous ses mots et gagne !",
+  "maitreEspionDeLEquipe": "Maître-Espion de l'équipe '{'0'}'",
+  "equipeRouge1": "Équipe Rouge: '{'0'}'",
+  "equipeBleue1": "Équipe Bleue: '{'0'}'",
+  "maitreEspion": "'{'0'}' — Maître-Espion '{'1'}'",
+  "passeLeTelephoneAuxAgents": "Passe le téléphone aux agents de l'équipe '{'0'}'",
+  "mime": "Mime",
+  "cEstAuTourDe2": "C'est au tour de '{'0'}' ('{'1'}')",
+  "genereDesQuestionsAmusantesEt": "Génère des questions amusantes et rapides à poser. Thème : '{'0'}'",
+  "s3": "{minDuration} s",
+  "@s3": {
+    "placeholders": {
+      "minDuration": {
+        "type": "Object"
+      }
+    }
+  },
+  "s4": "{maxDuration} s",
+  "@s4": {
+    "placeholders": {
+      "maxDuration": {
+        "type": "Object"
+      }
+    }
+  },
+  "fin1": "FIN",
+  "trouves": "Trouvés : '{'0'}'",
+  "ecurie1": "Écurie 1",
+  "ecurie2": "Écurie 2",
+  "ecurie3": "Écurie 3",
+  "ecurie4": "Écurie 4",
+  "nombreMaxDeJoueurs": "Nombre max de joueurs : '{'0'}'",
+  "jAiLanceUnePartie1": "J'ai lancé une partie de {value} !",
+  "@jAiLanceUnePartie1": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
+  "jeu1": "Jeu",
+  "partieDeEnAttente": "Partie de '{'0'}' en attente",
+  "termine": "TERMINÉ : '{'0'}'",
+  "vainqueur2": "Vainqueur :",
+  "joueurSPretS": "'{'0'}' joueur(s) prêt(s)",
+  "code": "Code: {value}",
+  "@code": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
+  "lampe": "Lampe",
+  "trousseSoin": "Trousse soin",
+  "hache": "Hache",
+  "arbalete": "Arbalète",
+  "fusil": "Fusil",
+  "talkie": "Talkie",
+  "tronconneuse": "Tronçonneuse",
+  "survie": "Survie",
+  "redigezLPour": "Rédigez l''{'0'}' pour '{'1'}'",
+  "rejouerGarderPts": "REJOUER (GARDER PTS)",
+  "indicesMontresA": "Indices montrés à"
 }
