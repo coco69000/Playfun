@@ -88,14 +88,14 @@ DATABASE_KEYS = {
     'slots', 'recent', 'text/plain', 'Courier', 'serif', 'fr',
     # Valeurs d'état / rôles internes stockés en base et comparés dans la logique métier
     'Héritier', 'Sorcière', 'Infiltré', 'Fantôme', 'Déesse de la Justice', 'Les Amoureux',
-    'infecté', 'contaminé', 'pioche', 'Carré', 'Complément', 'Système', 'Aucun', 'Joueur',
+    'infecté', 'contaminé', 'pioche', 'Carré', 'Complément', 'Aucun',
     'Simple Villageois', 'Voyante', 'Chasseur', 'Petite Fille', 'Cupidon', 'Garde',
     'Capitaine', 'Loup Noir', 'Loup Bavard', 'Loup Blanc', 'Mercenaire', 'Rat Malade',
     'Mentaliste', 'Fossoyeur', 'Dictateur', 'Chaperon Rouge', 'Pyromancien', 'Villageois',
     'Loups-Garous', 'villageois', 'loups', 'solitaire', 'special', 'Mr. White', 'Civil',
     'Civils', 'Imposteurs', 'Amoureux', 'Duellistes', 'Mr. Meme', 'Fou de Joie',
     'Boomerang', 'Vengeuse', 'Vendeur de Falafels', 'Trou du cul', 'Vice-Trou du cul',
-    'Neutre', 'Personne', 'Inconnu', 'Normal', 'Zombie', 'Rose', 'Crane',
+    'Neutre', 'Normal', 'Zombie', 'Rose', 'Crane',
     'As', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Brelan', 'Full', 'Petite Suite',
     'Grande Suite', 'Chance', 'CARREAU', 'COEUR', 'TREFLE', 'PIQUE',
     'Paris', 'France', 'Capitale', 'Seine', 'Ville', 'meute', 'village',
@@ -158,6 +158,8 @@ FR_WORDS = {
     "donneur", "pose", "petite", "grosse", "couche", "tapis", "suit",
     "abattage", "forfait", "pris", "adversaire", "selectionne", "pion",
     "reflechit", "termine", "restant", "ecrire", "meute", "vie",
+    "personne", "systeme", "disponible", "ami", "connecte", "utilisateur",
+    "identifiants", "incorrects", "compte", "inexistant",
 }
 
 
@@ -362,7 +364,17 @@ def parse_dart_map_literal(map_str):
 def escape_icu_single_quotes(text):
     if not isinstance(text, str):
         return text
-    return text.replace("''", "'").replace("'", "''")
+    # Protéger les blocs '{...}' déjà échappés pour ICU (ex: '{0}', '{player}')
+    protected = {}
+    def _protect(m):
+        tok = f"\x01ICU_{len(protected)}\x01"
+        protected[tok] = f"'{m.group(1)}'"
+        return tok
+    s = re.sub(r"'+(\{[A-Za-z0-9_]+\})'+", _protect, text)
+    s = s.replace("''", "'").replace("'", "''")
+    for tok, orig in protected.items():
+        s = s.replace(tok, orig)
+    return s
 
 
 def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict, rules_dict):
@@ -638,6 +650,322 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
         )
         content = content[:m_rules.start()] + prefix + new_rules_block + suffix + content[m_rules.end():]
 
+    # G. Corrections explicites des textes résiduels (IA Le Juge, gameLog/turnLog, Poker FLOP/TURN/RIVER, GameUiLocalization.tr)
+    residual_explicit_fixes = [
+        (
+            'return "Génère des questions amusantes sur un joueur (utilise le tag \'{player}\'). Thème : $finalPrompt";',
+            "return _l10n.aiPromptLeJuge(finalPrompt);",
+            "aiPromptLeJuge",
+            "Génère des questions amusantes sur un joueur (utilise le tag '{player}'). Thème : {finalPrompt}",
+            ["finalPrompt"],
+        ),
+        (
+            '\'gameLog\': ["La partie de Yams commence !"]',
+            "'gameLog': [_l10n.logYamsStart]",
+            "logYamsStart",
+            "La partie de Yams commence !",
+            [],
+        ),
+        (
+            '\'turnLog\': ["La partie commence ! Donnez votre indice..."]',
+            "'turnLog': [_l10n.logClueGivingStart]",
+            "logClueGivingStart",
+            "La partie commence ! Donnez votre indice...",
+            [],
+        ),
+        (
+            '\'gameLog\': ["La partie commence ! Donnez votre indice..."]',
+            "'gameLog': [_l10n.logClueGivingStart]",
+            "logClueGivingStart",
+            "La partie commence ! Donnez votre indice...",
+            [],
+        ),
+        (
+            '\'gameLog\': FieldValue.arrayUnion(["La partie de Belote commence !"])',
+            "'gameLog': FieldValue.arrayUnion([_l10n.logBeloteStart])",
+            "logBeloteStart",
+            "La partie de Belote commence !",
+            [],
+        ),
+        (
+            '\'gameLog\': ["La partie de Belote commence !"]',
+            "'gameLog': [_l10n.logBeloteStart]",
+            "logBeloteStart",
+            "La partie de Belote commence !",
+            [],
+        ),
+        (
+            '\'gameLog\': ["La partie de Blokus commence !"]',
+            "'gameLog': [_l10n.logBlokusStart]",
+            "logBlokusStart",
+            "La partie de Blokus commence !",
+            [],
+        ),
+        (
+            'log.add("--- FLOP ---");',
+            "log.add(_l10n.pokerFlop);",
+            "pokerFlop",
+            "--- FLOP ---",
+            [],
+        ),
+        (
+            'log.add("--- TURN ---");',
+            "log.add(_l10n.pokerTurn);",
+            "pokerTurn",
+            "--- TURN ---",
+            [],
+        ),
+        (
+            'log.add("--- RIVER ---");',
+            "log.add(_l10n.pokerRiver);",
+            "pokerRiver",
+            "--- RIVER ---",
+            [],
+        ),
+        (
+            '"🎲 $targetPlayerName a tiré : ${challengeType == \'action\' ? \'ACTION\' : _l10n.verite1} !"',
+            "_l10n.aTireDefi(targetPlayerName, challengeType == 'action' ? _l10n.action1 : _l10n.verite1)",
+            "aTireDefi",
+            "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+            ["targetPlayerName", "challengeLabel"],
+        ),
+        (
+            '"L\'équipe ${activeTeam == \'red\' ? \'Rouge\' : \'Bleue\'} a révélé l\'Assassin !"',
+            "_l10n.lEquipeAReveleLAssassin(activeTeam == 'red' ? _l10n.codenamesRed : _l10n.codenamesBlue)",
+            "lEquipeAReveleLAssassin",
+            "L'équipe {teamName} a révélé l'Assassin !",
+            ["teamName"],
+        ),
+        (
+            'GameUiLocalization.tr(context, "Multijoueur (En ligne)")',
+            "AppLocalizations.of(context)!.multijoueurEnLigne",
+            "multijoueurEnLigne",
+            "Multijoueur (En ligne)",
+            [],
+        ),
+        (
+            'GameUiLocalization.tr(context, "Mode Local (Hors ligne)")',
+            "AppLocalizations.of(context)!.modeLocalHorsLigne",
+            "modeLocalHorsLigne",
+            "Mode Local (Hors ligne)",
+            [],
+        ),
+        (
+            'GameContentLocalization.ui(context, "Mode Multijoueur")',
+            "AppLocalizations.of(context)!.modeMultijoueur",
+            "modeMultijoueur",
+            "Mode Multijoueur",
+            [],
+        ),
+        (
+            'GameContentLocalization.ui(context, "Pseudo")',
+            "AppLocalizations.of(context)!.pseudo",
+            "pseudo",
+            "Pseudo",
+            [],
+        ),
+        (
+            '"${GameUiLocalization.tr(context, "LANCER LE DÉFI")} ($selectedBid)"',
+            '"${AppLocalizations.of(context)!.lancerLeDefi} ($selectedBid)"',
+            "lancerLeDefi",
+            "LANCER LE DÉFI",
+            [],
+        ),
+        (
+            '"${GameUiLocalization.tr(context, "Maximum possible")} : $maximumBid ${GameUiLocalization.tr(context, "cartes")}"',
+            "AppLocalizations.of(context)!.maximumPossibleCartes(maximumBid)",
+            "maximumPossibleCartes",
+            "Maximum possible : {maximumBid} cartes",
+            ["maximumBid"],
+        ),
+        (
+            '"$bidderName ${GameUiLocalization.tr(context, "réfléchit à un défi de")} $liveAmount ${GameUiLocalization.tr(context, "cartes")}..."',
+            "AppLocalizations.of(context)!.reflechitAUnDefiDeCartes(bidderName, liveAmount)",
+            "reflechitAUnDefiDeCartes",
+            "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+            ["bidderName", "liveAmount"],
+        ),
+        (
+            '"${GameUiLocalization.tr(context, "Moi")} ($name)"',
+            '"${AppLocalizations.of(context)!.moi} ($name)"',
+            "moi",
+            "Moi",
+            [],
+        ),
+        (
+            '"${GameUiLocalization.tr(context, "VOTRE MAIN")} (${myHand.length} ${GameUiLocalization.tr(context, "cartes")})"',
+            "AppLocalizations.of(context)!.votreMainCartes(myHand.length)",
+            "votreMainCartes",
+            "VOTRE MAIN ({count} cartes)",
+            ["count"],
+        ),
+        (
+            '"$_pictionaryStrokeCount/30 ${GameUiLocalization.tr(context, "traits")}"',
+            "AppLocalizations.of(context)!.pictionaryStrokesCount(_pictionaryStrokeCount)",
+            "pictionaryStrokesCount",
+            "{count}/30 traits",
+            ["count"],
+        ),
+        (
+            '"${GameUiLocalization.tr(context, "Le mot était :")} ${justOneCurrentWord ?? \'\'}"',
+            '"${AppLocalizations.of(context)!.leMotEtait} ${justOneCurrentWord ?? \'\'}"',
+            "leMotEtait",
+            "Le mot était :",
+            [],
+        ),
+        (
+            '"${GameUiLocalization.tr(context, "Indices soumis")} : ${justOneClues.length} / ${players.length - 1}"',
+            "AppLocalizations.of(context)!.indicesSoumisCount(justOneClues.length, players.length - 1)",
+            "indicesSoumisCount",
+            "Indices soumis : {submitted} / {total}",
+            ["submitted", "total"],
+        ),
+        (
+            '"${GameUiLocalization.tr(context, "Au tour de")} $currentPotatoPlayerName"',
+            "AppLocalizations.of(context)!.auTourDe2(currentPotatoPlayerName)",
+            "auTourDe2",
+            "Au tour de {playerName}",
+            ["playerName"],
+        ),
+        (
+            '"$loserName ${GameUiLocalization.tr(context, "a perdu !")}"',
+            "AppLocalizations.of(context)!.joueurAPerdu(loserName)",
+            "joueurAPerdu",
+            "{loserName} a perdu !",
+            ["loserName"],
+        ),
+        (
+            '"${GameUiLocalization.tr(context, "Couleur choisie :")} ${GameUiLocalization.tr(context, wildColorChosen).toUpperCase()}"',
+            '"${AppLocalizations.of(context)!.couleurChoisie} ${GameUiLocalization.tr(context, wildColorChosen).toUpperCase()}"',
+            "couleurChoisie",
+            "Couleur choisie :",
+            [],
+        ),
+        (
+            'GameUiLocalization.tr(context, "pokerRaiseTo", {\n                      \'amount\': \'${raiseAmount.toInt()}\',\n                    })',
+            "AppLocalizations.of(context)!.pokerRaiseTo('${raiseAmount.toInt()}')",
+            "pokerRaiseTo",
+            "Relancer à {amount}",
+            ["amount"],
+        ),
+        (
+            '"${"ENCHÈRE"} : $currentBid / $totalCardsOnTables"',
+            '"${AppLocalizations.of(context)!.enchere} : $currentBid / $totalCardsOnTables"',
+            "enchere",
+            "ENCHÈRE",
+            [],
+        ),
+        (
+            '"${"Tour de"} ${players[currentPlayerId]?[\'name\'] ?? \'...\'}"',
+            "GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '...'])",
+            "tourDe",
+            "Tour de '{0}'",
+            [],
+        ),
+        (
+            '"${"Réponse de"} $guesserName : \\"$answer\\""',
+            "AppLocalizations.of(context)!.reponseDeJoueur(guesserName, answer)",
+            "reponseDeJoueur",
+            'Réponse de {guesserName} : "{answer}"',
+            ["guesserName", "answer"],
+        ),
+        (
+            '"${"Score"} : $totalScore / $deckIndex"',
+            '"${AppLocalizations.of(context)!.score} : $totalScore / $deckIndex"',
+            "score",
+            "Score",
+            [],
+        ),
+        (
+            '"${"Carte suivante"} →"',
+            '"${AppLocalizations.of(context)!.carteSuivante} →"',
+            "carteSuivante",
+            "Carte suivante",
+            [],
+        ),
+        (
+            '"${"Le mot est :"} ${justOneCurrentWord}"',
+            '"${AppLocalizations.of(context)!.leMotEst} ${justOneCurrentWord}"',
+            "leMotEst",
+            "Le mot est :",
+            [],
+        ),
+        (
+            '"${"Manche"} $currentRound"',
+            '"${AppLocalizations.of(context)!.manche} $currentRound"',
+            "manche",
+            "Manche",
+            [],
+        ),
+        (
+            'text: "${"Rôle:"} "',
+            'text: "${AppLocalizations.of(context)!.roleLabel} "',
+            "roleLabel",
+            "Rôle:",
+            [],
+        ),
+        (
+            '"${GameContentLocalization.ui(context, "Activer la Vidéo")} ${forceVideo ? \'(${GameContentLocalization.ui(context, "Obligatoire")})\' : \'\'}"',
+            '"${AppLocalizations.of(context)!.enableVideo} ${forceVideo ? \'(${AppLocalizations.of(context)!.obligatoire})\' : \'\'}"',
+            "obligatoire",
+            "Obligatoire",
+            [],
+        ),
+        (
+            'GameContentLocalization.format(context, "{0} a sélectionné son pion et réfléchit...", [players[currentPlayerId]?[\'name\'] ?? \'...\'])',
+            "AppLocalizations.of(context)!.aSelectionneSonPionEtReflechit(players[currentPlayerId]?['name'] ?? '...')",
+            "aSelectionneSonPionEtReflechit",
+            "{playerName} a sélectionné son pion et réfléchit...",
+            ["playerName"],
+        ),
+        (
+            'GameContentLocalization.format(\n                              context,\n                              "Écrire au {0}...",\n                              [_selectedChatType == \'wolf\' ? GameContentLocalization.ui(context, "meute") : GameContentLocalization.ui(context, "village")],\n                            )',
+            "AppLocalizations.of(context)!.ecrireAu(_selectedChatType == 'wolf' ? AppLocalizations.of(context)!.meute : AppLocalizations.of(context)!.village)",
+            "ecrireAu",
+            "Écrire au {target}...",
+            ["target"],
+        ),
+        (
+            'GameContentLocalization.format(context, "TERMINÉ : {0}", [GameContentLocalization.ui(context, gName)])',
+            "AppLocalizations.of(context)!.termineJeu(GameContentLocalization.ui(context, gName))",
+            "termineJeu",
+            "TERMINÉ : {gameName}",
+            ["gameName"],
+        ),
+    ]
+    key_to_msg.setdefault("meute", "meute")
+    key_to_msg.setdefault("village", "village")
+    key_to_msg.setdefault("enableVideo", "Activer la Vidéo")
+    for old_s, new_s, k_name, fr_msg, ph_list in residual_explicit_fixes:
+        key_to_msg[k_name] = escape_icu_single_quotes(fr_msg)
+        if ph_list:
+            meta_tags["@" + k_name] = {"placeholders": {p: {"type": "Object"} for p in ph_list}}
+        # Supporter LF et CRLF lors du remplacement dans content
+        old_s_crlf = old_s.replace("\n", "\r\n")
+        if old_s in content:
+            content = content.replace(old_s, new_s)
+            stats["raw_keys"] += 1
+        elif old_s_crlf in content:
+            content = content.replace(old_s_crlf, new_s)
+            stats["raw_keys"] += 1
+
+    # Codenames L44200-44201
+    codenames_old = (
+        '"${GameUiLocalization.tr(context, \'codenamesYouAre\')}${redTeam.contains(playerId) ? GameUiLocalization.tr(context, \'codenamesRedTeam\') : (blueTeam.contains(playerId) ? GameUiLocalization.tr(context, \'codenamesBlueTeam\') : GameUiLocalization.tr(context, \'codenamesSpectator\'))}"\n'
+        '                "${(playerId == masterSpyRed || playerId == masterSpyBlue) ? \' (${GameUiLocalization.tr(context, \'codenamesMasterSpy\')})\' : \' (${GameUiLocalization.tr(context, \'codenamesAgent\')})\'}"'
+    )
+    codenames_new = (
+        '"${AppLocalizations.of(context)!.codenamesYouAre}${redTeam.contains(playerId) ? AppLocalizations.of(context)!.codenamesRedTeam : (blueTeam.contains(playerId) ? AppLocalizations.of(context)!.codenamesBlueTeam : AppLocalizations.of(context)!.codenamesSpectator)}'
+        '${(playerId == masterSpyRed || playerId == masterSpyBlue) ? \' (${AppLocalizations.of(context)!.codenamesMasterSpy})\' : \' (${AppLocalizations.of(context)!.codenamesAgent})\'}"'
+    )
+    for ck in ("codenamesYouAre", "codenamesRedTeam", "codenamesBlueTeam", "codenamesSpectator", "codenamesMasterSpy", "codenamesAgent"):
+        if ck in ui_dict:
+            key_to_msg[ck] = escape_icu_single_quotes(ui_dict[ck].get("fr", ck))
+    if codenames_old in content:
+        content = content.replace(codenames_old, codenames_new)
+    elif codenames_old.replace("\n", "\r\n") in content:
+        content = content.replace(codenames_old.replace("\n", "\r\n"), codenames_new)
+
     print(
         f"  ✅ Réparations appliquées : {stats['raw_keys']} clés brutes, "
         f"{stats['zero_templates']} gabarits {{0}}/{{1}}, "
@@ -762,8 +1090,20 @@ def is_safe_replacement_position(src, start, end):
     if after_stripped.startswith(("'", '"', "r'", 'r"')) or before_stripped.endswith(("'", '"')):
         return False
 
-    # 3. Index de Map / JSON : `map['key']`
-    if before_stripped.endswith("[") and after_stripped.startswith("]"):
+    # 3. Index de Map / JSON : `map['key']` ou `map?['key']` (uniquement si '[' est précédé d'un identifiant, ')', ']' ou '?')
+    if re.search(r"[a-zA-Z0-9_)\]\?]\s*\[\s*$", before_slice) and after_stripped.startswith("]"):
+        return False
+
+    # 3b. Fallback déjà localisé avec `l10n?.cle ?? "..."` ou `AppLocalizations.of(context)?.cle ?? "..."`
+    if before_stripped.endswith("??") and re.search(r"(?:l10n|_l10n|AppLocalizations)", before_slice):
+        return False
+
+    # 3c. Valeurs internes de DropdownMenuItem ou de filtre de catégories de badges
+    if re.search(r"(?:DropdownMenuItem\s*(?:<[^>]+>)?\s*\(\s*value\s*:|selectedReason\s*=|_selectedCategory\s*=|_categories\s*=\s*\[[^\]]*)\s*$", before_slice, re.S):
+        return False
+
+    # 3d. Valeur par défaut d'un paramètre optionnel de fonction/constructeur (doit rester constante en Dart)
+    if before_stripped.endswith("=") and after_stripped.startswith((",", "}", "]", ")")):
         return False
 
     # 4. Comparaisons logiques (==, !=)
@@ -788,9 +1128,28 @@ def is_safe_replacement_position(src, start, end):
     if re.search(r"\bcase\s+$", before_slice):
         return False
 
-    # 9. Contexte `const`
-    if re.search(r"\bconst\b[^;{}]*$", before_slice):
-        return False
+    # 9. Contexte `const` (vérifie si `start` est réellement à l'intérieur d'une expression const ouverte)
+    for cm in re.finditer(r"\bconst\b", before_slice):
+        tail = before_slice[cm.end():]
+        if ";" in tail:
+            continue
+        depth = 0
+        ended_at_comma = False
+        saw_open = False
+        for ch in tail:
+            if ch in "([{":
+                depth += 1
+                saw_open = True
+            elif ch in ")]}":
+                depth -= 1
+                if depth < 0:
+                    ended_at_comma = True
+                    break
+            elif ch == "," and saw_open and depth == 0:
+                ended_at_comma = True
+                break
+        if not ended_at_comma:
+            return False
 
     return True
 
@@ -931,6 +1290,8 @@ def is_translatable(s):
         return False
     if t.startswith(("[DEBUG", "--- [", "--- ERREUR", "games/", "petit_bac_", "result_dobble_", "pawn_", "input_", "voting_step_", "word_input_", "playing_round_", "INACTIF_")):
         return False
+    if "max-age=" in t or re.match(r"^[\U0001F1E6-\U0001F1FF]", t):
+        return False
     if re.match(r"^(assets/|http://|https://|/|\\|\.|#[0-9a-fA-F]+$|[0-9_+-]+$|.*\.webp$|.*\.png$|.*\.jpg$)", t):
         return False
     if " " not in t and (re.fullmatch(r"[a-z]+(?:[A-Z][a-zA-Z0-9]*)+", t) or "_" in t or "-" in t):
@@ -950,8 +1311,8 @@ def is_translatable(s):
     return False
 
 
-def build_scope_locator(src):
-    has_global_l10n = "AppLocalizations get _l10n" in src
+def build_scope_locator(src, force_global_l10n=True):
+    has_global_l10n = force_global_l10n or ("AppLocalizations get _l10n" in src)
     brace_matches = {}
     stack = []
     i = 0
@@ -1452,23 +1813,113 @@ def verify_all_arb_files_synced(expected_keys):
 
 
 # ----------------------------------------------------------------------------
-# 7. EXÉCUTION PRINCIPALE
+# 7. EXÉCUTION PRINCIPALE (MULTI-FICHIERS DART HORS GAME_DATA_WORDS)
 # ----------------------------------------------------------------------------
+EXCLUDED_DART_FILES = {
+    "game_data_words.dart",
+    "firebase_options.dart",
+    "badges_data.dart",
+}
+
+
+def get_target_dart_files(file_arg):
+    """
+    Retourne la liste des fichiers Dart à internationaliser.
+    Par défaut (ou si --file all), traite lib/amis.dart ainsi que tous les autres
+    fichiers .dart de lib/ SAUF game_data_words.dart, game_words/*, l10n/* et *_localization.dart.
+    """
+    if file_arg and file_arg not in ("all", DART_FILE, "amis.dart", "lib/amis.dart", "lib\\amis.dart"):
+        p = file_arg if os.path.exists(file_arg) else os.path.join("lib", file_arg)
+        return [p] if os.path.exists(p) else []
+
+    targets = []
+    amis_p = os.path.join("lib", "amis.dart")
+    if os.path.exists(amis_p):
+        targets.append(amis_p)
+
+    for root, _, files in sorted(os.walk("lib")):
+        parts = set(root.replace("\\", "/").split("/"))
+        # Ne JAMAIS toucher aux dossiers game_words, l10n ou theme
+        if parts & {"game_words", "l10n", "theme"}:
+            continue
+        for fn in sorted(files):
+            if not fn.endswith(".dart"):
+                continue
+            if fn == "amis.dart" or fn in EXCLUDED_DART_FILES or fn.endswith("_localization.dart"):
+                continue
+            targets.append(os.path.join(root, fn))
+    return targets
+
+
+def ensure_l10n_imports_and_getter(content, dart_path):
+    """
+    S'assure qu'un fichier Dart qui utilise `AppLocalizations` ou `_l10n` possède :
+    1. L'import vers `l10n/app_localizations.dart`
+    2. Le getter top-level `AppLocalizations get _l10n` si `_l10n.` est appelé dans le fichier.
+    """
+    uses_app_loc = "AppLocalizations" in content
+    uses_global_l10n = re.search(r"\b_l10n\.", content) is not None
+    if not uses_app_loc and not uses_global_l10n:
+        return content
+
+    rel_dir = os.path.dirname(os.path.relpath(dart_path, "lib"))
+    prefix = "../" * len([p for p in rel_dir.replace("\\", "/").split("/") if p and p != "."])
+    l10n_import_path = f"{prefix}l10n/app_localizations.dart"
+    words_import_path = f"{prefix}game_data_words.dart"
+
+    lines = content.splitlines(keepends=True)
+    last_import_idx = -1
+    for idx, line in enumerate(lines):
+        if re.match(r"^\s*import\s+['\"]", line):
+            last_import_idx = idx
+
+    inserts = []
+    if "app_localizations.dart" not in content:
+        inserts.append(f"import '{l10n_import_path}';\n")
+    if uses_global_l10n and "AppLocalizations get _l10n" not in content:
+        if "flutter/material.dart" not in content and "flutter/widgets.dart" not in content and "dart:ui" not in content:
+            inserts.append("import 'dart:ui' show Locale;\n")
+        if "game_data_words.dart" not in content and "GameWords" not in content:
+            inserts.append(f"import '{words_import_path}';\n")
+
+    if inserts:
+        insert_pos = last_import_idx + 1 if last_import_idx >= 0 else 0
+        lines[insert_pos:insert_pos] = inserts
+        content = "".join(lines)
+
+    if uses_global_l10n and "AppLocalizations get _l10n" not in content:
+        getter_code = (
+            "\nAppLocalizations get _l10n {\n"
+            "  try {\n"
+            "    return lookupAppLocalizations(Locale(GameWords.currentLanguage));\n"
+            "  } catch (_) {\n"
+            "    return lookupAppLocalizations(const Locale('fr'));\n"
+            "  }\n"
+            "}\n"
+        )
+        # Insérer juste après le dernier import
+        m_last_imp = None
+        for m in re.finditer(r"^\s*import\s+['\"][^'\"]+['\"][^;]*;\s*\r?\n", content, re.M):
+            m_last_imp = m
+        if m_last_imp:
+            pos = m_last_imp.end()
+            content = content[:pos] + getter_code + content[pos:]
+        else:
+            content = getter_code + content
+
+    return content
+
+
 def run(args):
-    dart_path = args.file if os.path.exists(args.file) else os.path.join("lib", args.file)
-    if not os.path.exists(dart_path):
-        print(f"❌ Fichier non trouvé : {dart_path}", flush=True)
+    target_files = get_target_dart_files(args.file)
+    if not target_files:
+        print(f"❌ Aucun fichier Dart trouvé pour : {args.file}", flush=True)
         return 1
 
     print("=" * 65, flush=True)
-    print(f"🚀 TRAITEMENT INTERNATIONALISATION INTÉGRALE : {dart_path}", flush=True)
+    print(f"🚀 TRAITEMENT INTERNATIONALISATION INTÉGRALE ({len(target_files)} fichiers Dart)", flush=True)
+    print("   (Exclusion stricte : game_data_words.dart & game_words/*)", flush=True)
     print("=" * 65, flush=True)
-
-    print(f"📂 Lecture du fichier source {dart_path}...", flush=True)
-    with open(dart_path, "r", encoding="utf-8") as f:
-        original_content = f.read()
-    content = original_content
-    print(f"   ✔️ {len(content):,} caractères lus ({content.count(chr(10)) + 1:,} lignes).", flush=True)
 
     os.makedirs(L10N_DIR, exist_ok=True)
     fr_path = os.path.join(L10N_DIR, "app_fr.arb")
@@ -1485,107 +1936,118 @@ def run(args):
     # Charger les dictionnaires 22 langues existants du projet
     ui_dict, fr_to_langs, rules_dict = load_project_dictionaries()
 
-    # Étape 1 : Réparation des clés brutes, gabarits {0}/{1}, clés '$' et GameData.gameRules
-    content = repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict, rules_dict)
-
     # Indexer les signatures (message_normalisé, tuple_placeholders) -> clé existante
     sig_to_key = {}
     for k, v in key_to_msg.items():
-        phs = tuple(re.findall(r"\{([A-Za-z0-9_]+)\}", v))
+        phs = tuple(_get_active_icu_placeholders(v))
         sig_to_key[(v.replace("''", "'"), phs)] = k
 
-    # Étape 2 : Scanner et internationaliser toutes les chaînes françaises restantes
-    print("\n🔍 [LEXER DART] Analyse syntaxique de toutes les chaînes littérales...", flush=True)
-    tokens = scan_dart_strings(content)
-    print(f"   ✔️ {len(tokens)} chaînes littérales analysées dans {dart_path}.", flush=True)
-
-    print("🧭 [PORTÉES] Détection des portées BuildContext et accesseurs _l10n...", flush=True)
-    context_ranges, has_global_l10n = build_scope_locator(content)
-    print(f"   ✔️ {len(context_ranges)} portées `BuildContext` détectées (getter global `_l10n` actif: {has_global_l10n}).", flush=True)
-
-    out = []
-    last = 0
-    replaced_count = 0
+    total_replaced_all_files = 0
     report_lines = []
 
-    for tok in tokens:
-        if tok["raw"]:
-            continue
-        start, end = tok["start"], tok["end"]
-        body = tok["body"]
+    for dart_path in target_files:
+        print(f"\n📂 Analyse du fichier source {dart_path}...", flush=True)
+        with open(dart_path, "r", encoding="utf-8") as f:
+            original_content = f.read()
+        content = original_content
+        print(f"   ✔️ {len(content):,} caractères lus ({content.count(chr(10)) + 1:,} lignes).", flush=True)
 
-        if not is_translatable(body):
-            continue
-        if not is_safe_replacement_position(content, start, end):
-            continue
+        # Étape 1 (spécifique à amis.dart) : Réparation des clés brutes, gabarits {0}/{1}, clés '$' et GameData.gameRules
+        if os.path.basename(dart_path) == "amis.dart":
+            content = repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict, rules_dict)
+            for k, v in key_to_msg.items():
+                phs = tuple(_get_active_icu_placeholders(v))
+                sig_to_key[(v.replace("''", "'"), phs)] = k
 
-        parsed = parse_interpolations(body.strip())
-        if parsed is None:
-            continue
-        arb_msg_raw, ph_names, arg_exprs = parsed
-        arb_msg = escape_icu_single_quotes(arb_msg_raw)
-        phs_tuple = tuple(ph_names)
+        # Étape 2 : Scanner et internationaliser toutes les chaînes françaises restantes
+        tokens = scan_dart_strings(content)
+        context_ranges, has_global_l10n = build_scope_locator(content, force_global_l10n=True)
 
-        accessor = get_l10n_accessor(start, context_ranges, has_global_l10n)
-        if accessor is None:
-            continue
+        out = []
+        last = 0
+        replaced_count = 0
 
-        sig = (arb_msg_raw, phs_tuple)
-        if sig in sig_to_key:
-            key = sig_to_key[sig]
-        else:
-            base_key = make_clean_key(arb_msg_raw)
-            key, idx = base_key, 1
-            while key in key_to_msg:
-                existing_phs = tuple(re.findall(r"\{([A-Za-z0-9_]+)\}", key_to_msg[key]))
-                if key_to_msg[key].replace("''", "'") == arb_msg_raw and existing_phs == phs_tuple:
-                    break
-                key = f"{base_key}{idx}"
-                idx += 1
-            key_to_msg[key] = arb_msg
-            sig_to_key[sig] = key
+        for tok in tokens:
+            if tok["raw"]:
+                continue
+            start, end = tok["start"], tok["end"]
+            body = tok["body"]
 
-        if ph_names:
-            meta_tags["@" + key] = {
-                "placeholders": {p: {"type": "Object"} for p in ph_names}
-            }
-            dart_call = f"{accessor}.{key}({', '.join(arg_exprs)})"
-        else:
-            dart_call = f"{accessor}.{key}"
+            if not is_translatable(body):
+                continue
+            if not is_safe_replacement_position(content, start, end):
+                continue
 
-        out.append(content[last:start])
-        out.append(dart_call)
-        last = end
-        replaced_count += 1
-        preview_body = body.replace("\n", "\\n")[:60]
-        print(f"  ➕ [EXTRACTION #{replaced_count}] {dart_call}  <--  \"{preview_body}\"", flush=True)
-        report_lines.append(f"REPLACED: {dart_call} -> {body!r}")
+            parsed = parse_interpolations(body.strip())
+            if parsed is None:
+                continue
+            arb_msg_raw, ph_names, arg_exprs = parsed
+            arb_msg = escape_icu_single_quotes(arb_msg_raw)
+            phs_tuple = tuple(ph_names)
 
-    out.append(content[last:])
-    new_content = "".join(out)
+            accessor = get_l10n_accessor(start, context_ranges, has_global_l10n)
+            if accessor is None:
+                continue
+
+            sig = (arb_msg_raw, phs_tuple)
+            if sig in sig_to_key:
+                key = sig_to_key[sig]
+            else:
+                base_key = make_clean_key(arb_msg_raw)
+                key, idx = base_key, 1
+                while key in key_to_msg:
+                    existing_phs = tuple(_get_active_icu_placeholders(key_to_msg[key]))
+                    if key_to_msg[key].replace("''", "'") == arb_msg_raw and existing_phs == phs_tuple:
+                        break
+                    key = f"{base_key}{idx}"
+                    idx += 1
+                key_to_msg[key] = arb_msg
+                sig_to_key[sig] = key
+
+            if ph_names:
+                meta_tags["@" + key] = {
+                    "placeholders": {p: {"type": "Object"} for p in ph_names}
+                }
+                dart_call = f"{accessor}.{key}({', '.join(arg_exprs)})"
+            else:
+                dart_call = f"{accessor}.{key}"
+
+            out.append(content[last:start])
+            out.append(dart_call)
+            last = end
+            replaced_count += 1
+            total_replaced_all_files += 1
+            preview_body = body.replace("\n", "\\n")[:60]
+            print(f"  ➕ [{os.path.basename(dart_path)} #{replaced_count}] {dart_call}  <--  \"{preview_body}\"", flush=True)
+            report_lines.append(f"[{dart_path}] REPLACED: {dart_call} -> {body!r}")
+
+        out.append(content[last:])
+        new_content = "".join(out)
+        new_content = ensure_l10n_imports_and_getter(new_content, dart_path)
+
+        if not args.dry_run:
+            if new_content != original_content:
+                bak_path = dart_path + ".bak"
+                if not os.path.exists(bak_path):
+                    shutil.copy2(dart_path, bak_path)
+                    print(f"  🛟 Copie de sauvegarde créée : {bak_path}", flush=True)
+                with open(dart_path, "w", encoding="utf-8") as f:
+                    f.write(new_content)
+                print(f"  💾 {dart_path} mis à jour ({replaced_count} chaînes extraites).", flush=True)
+            else:
+                print(f"  ✅ {dart_path} déjà à jour (0 nouvelle modification).", flush=True)
 
     if args.dry_run:
-        print(f"🧪 [DRY-RUN] {replaced_count} nouvelles chaînes françaises seraient remplacées (aucun fichier modifié).", flush=True)
+        print(f"\n🧪 [DRY-RUN] {total_replaced_all_files} nouvelles chaînes françaises seraient remplacées (aucun fichier modifié).", flush=True)
         if report_lines:
             with open(REPORT_FILE, "w", encoding="utf-8") as f:
                 f.write("\n".join(report_lines))
             print(f"📄 Rapport écrit dans {REPORT_FILE}", flush=True)
         return 0
 
-    bak_path = dart_path + ".bak"
-    if not os.path.exists(bak_path):
-        shutil.copy2(dart_path, bak_path)
-        print(f"🛟 Copie de sauvegarde créée : {bak_path}", flush=True)
-
-    if new_content != original_content:
-        with open(dart_path, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        print(f"💾 {dart_path} mis à jour avec {replaced_count} nouvelles chaînes françaises internationalisées.", flush=True)
-        if report_lines:
-            with open(REPORT_FILE, "w", encoding="utf-8") as f:
-                f.write("\n".join(report_lines))
-    else:
-        print(f"✅ {dart_path} est déjà modifié et à jour (0 nouvelle modification requise). Reprise directe de la traduction des .arb...", flush=True)
+    if report_lines:
+        with open(REPORT_FILE, "w", encoding="utf-8") as f:
+            f.write("\n".join(report_lines))
 
     # Étape 3 : Audit et nettoyage des clés orphelines pour que 100 % des clés .arb soient associées
     audit_and_prune_unused_keys(key_to_msg, meta_tags)

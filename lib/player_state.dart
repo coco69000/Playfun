@@ -10,7 +10,18 @@ import 'services/force_update_service.dart';
 import 'services/premium_service.dart';
 import 'badges_data.dart';
 import 'auth/auth_service.dart';
+import 'l10n/app_localizations.dart';
+import 'dart:ui' show Locale;
+import 'game_data_words.dart';
 
+
+AppLocalizations get _l10n {
+  try {
+    return lookupAppLocalizations(Locale(GameWords.currentLanguage));
+  } catch (_) {
+    return lookupAppLocalizations(const Locale('fr'));
+  }
+}
 class PlayerState extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -199,12 +210,12 @@ class PlayerState extends ChangeNotifier {
   }
 
   String get rankTitle {
-    if (_level >= 100) return 'Légende Vivante';
-    if (_level >= 75) return 'Grand Maître';
+    if (_level >= 100) return _l10n.legendeVivante;
+    if (_level >= 75) return _l10n.grandMaitre;
     if (_level >= 50) return 'Champion';
-    if (_level >= 30) return 'Stratège';
+    if (_level >= 30) return _l10n.stratege;
     if (_level >= 20) return 'Aventurier';
-    if (_level >= 10) return 'Initié';
+    if (_level >= 10) return _l10n.initie;
     if (_level >= 5) return 'Apprenti';
     return 'Recrue';
   }
@@ -299,7 +310,7 @@ class PlayerState extends ChangeNotifier {
         'isPremium': isVipOnStore,
         'level': 1,
         'xp': 0,
-        'name': 'Joueur',
+        'name': _l10n.joueur,
         'gameStats': {},
         'friends': [],
         'friendRequests': [],
@@ -311,7 +322,7 @@ class PlayerState extends ChangeNotifier {
       });
     } else {
       var data = initialDoc.data() as Map<String, dynamic>;
-      _userName = data['name'] ?? 'Joueur';
+      _userName = data['name'] ?? _l10n.joueur;
       _photoUrl = data['photoUrl'] as String?;
       _coins = data['coins'] ?? 50;
       final firestoreIsPremium = data['isPremium'] == true;
@@ -358,7 +369,7 @@ class PlayerState extends ChangeNotifier {
     ) async {
       if (!userDoc.exists) return;
       var data = userDoc.data() as Map<String, dynamic>;
-      _userName = data['name'] ?? 'Joueur';
+      _userName = data['name'] ?? _l10n.joueur;
       _photoUrl = data['photoUrl'] as String?;
       _coins = data['coins'] ?? 50;
       final firestoreIsPremium = data['isPremium'] == true;
@@ -601,7 +612,7 @@ class PlayerState extends ChangeNotifier {
       if (!_friendNamesCache.containsKey(friendId)) {
         var doc = await _db.collection('users').doc(friendId).get();
         if (doc.exists) {
-          _friendNamesCache[friendId] = doc.data()?['name'] ?? 'Inconnu';
+          _friendNamesCache[friendId] = doc.data()?['name'] ?? _l10n.inconnu;
         }
       }
     }
@@ -623,7 +634,7 @@ class PlayerState extends ChangeNotifier {
     return snap.docs
         .map((doc) => {
               'uid': doc.id,
-              'name': doc.data()['name'] ?? 'Joueur',
+              'name': doc.data()['name'] ?? _l10n.joueur,
               'level': doc.data()['level'] ?? 1,
             })
         .toList();

@@ -6,7 +6,18 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'services/force_update_service.dart';
+import 'l10n/app_localizations.dart';
+import 'dart:ui' show Locale;
+import 'game_data_words.dart';
 
+
+AppLocalizations get _l10n {
+  try {
+    return lookupAppLocalizations(Locale(GameWords.currentLanguage));
+  } catch (_) {
+    return lookupAppLocalizations(const Locale('fr'));
+  }
+}
 class LivekitUserInfo {
   final String identity;
   String name;
@@ -97,7 +108,7 @@ class LivekitService extends ChangeNotifier {
         name:
             event.participant.name.isNotEmpty
                 ? event.participant.name
-                : 'Joueur',
+                : _l10n.joueur,
         isMuted: !event.participant.isMicrophoneEnabled(),
         isVideoOff: !event.participant.isCameraEnabled(),
       );
@@ -193,7 +204,7 @@ class LivekitService extends ChangeNotifier {
       if (!_remoteUsers.containsKey(participant.identity)) {
         _remoteUsers[participant.identity] = LivekitUserInfo(
           identity: participant.identity,
-          name: participant.name.isNotEmpty ? participant.name : 'Joueur',
+          name: participant.name.isNotEmpty ? participant.name : _l10n.joueur,
           isMuted: !participant.isMicrophoneEnabled(),
           isVideoOff: !participant.isCameraEnabled(),
         );
@@ -348,7 +359,7 @@ class LivekitService extends ChangeNotifier {
       }
 
       if (token == null) {
-        throw Exception("Impossible d'obtenir un jeton d'accès vidéo LiveKit sécurisé.");
+        throw Exception(_l10n.impossibleDObtenirUnJeton);
       }
 
       // Ne recréer _setupRoom que si la room était fermée

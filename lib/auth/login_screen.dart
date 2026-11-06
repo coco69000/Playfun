@@ -119,9 +119,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                     ),
                     validator: (val) {
-                      if (val == null || val.trim().isEmpty) return 'Entrez un pseudo';
-                      if (val.trim().length < 3) return '3 caractères minimum';
-                      if (_isUsernameAvailable == false) return 'Ce pseudo est déjà pris';
+                      if (val == null || val.trim().isEmpty) return AppLocalizations.of(context)!.entrezUnPseudo;
+                      if (val.trim().length < 3) return AppLocalizations.of(context)!.k3CaracteresMinimum;
+                      if (_isUsernameAvailable == false) return AppLocalizations.of(context)!.cePseudoEstDejaPris1;
                       return null;
                     },
                     onChanged: (val) => _onUsernameChanged(val, authService),
@@ -131,8 +131,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.only(top: 4.0, left: 12.0),
                       child: Text(
                         _isUsernameAvailable!
-                            ? '✅ Pseudo disponible'
-                            : '❌ Pseudo déjà pris par un autre joueur',
+                            ? AppLocalizations.of(context)!.pseudoDisponible
+                            : AppLocalizations.of(context)!.pseudoDejaPrisParUn,
                         style: TextStyle(
                           fontSize: 12,
                           color: _isUsernameAvailable! ? Colors.greenAccent : Colors.redAccent,
@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIcon: const Icon(Icons.email),
                   ),
                   keyboardType: TextInputType.emailAddress,
-                  validator: (val) => val != null && val.contains('@') ? null : 'Entrez un email valide',
+                  validator: (val) => val != null && val.contains('@') ? null : AppLocalizations.of(context)!.entrezUnEmailValide,
                   onChanged: (val) => setState(() => _email = val),
                 ),
                 const SizedBox(height: 16.0),
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIcon: const Icon(Icons.lock),
                   ),
                   obscureText: true,
-                  validator: (val) => val != null && val.length >= 6 ? null : '6 caractères minimum',
+                  validator: (val) => val != null && val.length >= 6 ? null : AppLocalizations.of(context)!.k6CaracteresMinimum,
                   onChanged: (val) => setState(() => _password = val),
                 ),
                 if (!_isLogin) ...[
@@ -196,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   final result = await authService.signInWithEmail(_email, _password);
                                   if (result == null && mounted) {
                                     setState(() {
-                                      _error = 'Identifiants incorrects ou compte inexistant.';
+                                      _error = AppLocalizations.of(context)!.identifiantsIncorrectsOuCompteInexistant;
                                       _isLoading = false;
                                     });
                                   }
@@ -220,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextButton(
                   onPressed: _toggleFormType,
                   child: Text(
-                    _isLogin ? 'Pas de compte ? S\'inscrire' : 'Déjà un compte ? Se connecter',
+                    _isLogin ? AppLocalizations.of(context)!.pasDeCompteSInscrire : AppLocalizations.of(context)!.dejaUnCompteSeConnecter,
                     style: const TextStyle(color: Colors.deepPurpleAccent),
                   ),
                 ),
@@ -276,7 +276,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   const TextSpan(text: "J'ai lu et j'accepte les "),
                   TextSpan(
-                    text: "Conditions Générales d'Utilisation (CGU / EULA)",
+                    text: AppLocalizations.of(context)!.conditionsGeneralesDUtilisationCgu,
                     style: const TextStyle(
                       color: Colors.cyanAccent,
                       fontWeight: FontWeight.bold,
@@ -287,7 +287,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const TextSpan(text: " et la "),
                   TextSpan(
-                    text: "Politique de Confidentialité",
+                    text: AppLocalizations.of(context)!.politiqueDeConfidentialite,
                     style: const TextStyle(
                       color: Colors.cyanAccent,
                       fontWeight: FontWeight.bold,

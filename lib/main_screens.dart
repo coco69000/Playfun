@@ -333,7 +333,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
 
     bool success = await _firebaseService.joinGame(
       code,
-      playerState.userName ?? 'Joueur',
+      playerState.userName ?? AppLocalizations.of(context)!.joueur,
       widget.playerId,
     );
     if (success) {
@@ -615,7 +615,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                             children: [
                                               if (modes.contains('local'))
                                                 _buildModeBadge(
-                                                  label: "Local",
+                                                  label: AppLocalizations.of(context)!.modeLocal,
                                                   icon: Icons.phone_android,
                                                   color: Colors.green.shade800,
                                                 ),
@@ -627,7 +627,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
                                                 ),
                                               if (modes.contains('monde'))
                                                 _buildModeBadge(
-                                                  label: "Monde",
+                                                  label: AppLocalizations.of(context)!.modeMonde,
                                                   icon: Icons.public,
                                                   color: Colors.purple.shade800,
                                                 ),
@@ -770,7 +770,7 @@ class _GameSelectionScreenState extends State<GameSelectionScreen> {
         MaterialPageRoute(
           builder:
               (_) => CreateGameScreen(
-                playerName: playerState.userName ?? "Joueur",
+                playerName: playerState.userName ?? AppLocalizations.of(context)!.joueur,
                 initialGame: gameName,
                 playerId: widget.playerId,
                 isWorldMode: true,
@@ -903,7 +903,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              user['name'] ?? 'Joueur',
+                              user['name'] ?? AppLocalizations.of(context)!.joueur,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
@@ -920,11 +920,11 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                   onPressed: () {
                                     playerState.sendFriendRequest(
                                       user['uid'],
-                                      user['name'] ?? 'Joueur',
+                                      user['name'] ?? AppLocalizations.of(context)!.joueur,
                                     );
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text(MatchmakingLocalization.tr(context, 'requestSentTo', {'name': user['name'] ?? 'ce joueur'})),
+                                        content: Text(MatchmakingLocalization.tr(context, 'requestSentTo', {'name': user['name'] ?? AppLocalizations.of(context)!.ceJoueur})),
                                       ),
                                     );
                                     setState(

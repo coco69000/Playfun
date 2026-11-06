@@ -2632,7 +2632,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get tapisVide => 'Prázdný stůl';
 
   @override
-  String get ecrireAu => 'Piš {0}...';
+  String ecrireAu(Object target) {
+    return 'Napsat pro $target...';
+  }
 
   @override
   String get reflechit => '{jméno} myslí... {name}';
@@ -3802,8 +3804,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get laPartieDeBigTwo => 'Hra Velká dvojka skončila!';
 
   @override
-  String auTourDe2(Object resolvePlayerNamecurrentPlayerId) {
-    return 'Na řadě je $resolvePlayerNamecurrentPlayerId';
+  String auTourDe2(Object playerName) {
+    return 'Na řadě je $playerName';
   }
 
   @override
@@ -7074,7 +7076,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String votreMotDuJourPrononcez(Object newWord) {
-    return 'Tvoje slovo dne: \'$newWord\'. Řekni ho v chatu před západem slunce!';
+    return 'Tvoje slovo dne: {newWord}. Řekni ho v chatu před západem slunce!';
   }
 
   @override
@@ -7997,4 +7999,299 @@ class AppLocalizationsCs extends AppLocalizations {
   String jAiLanceUnePartie4(Object datagameTypeGribou) {
     return 'J\'ai lancé une partie de $datagameTypeGribou !';
   }
+
+  @override
+  String get meute => 'smečka';
+
+  @override
+  String aiPromptLeJuge(Object finalPrompt) {
+    return 'Génère des questions amusantes sur un joueur (utilise le tag \'\'). Thème : $finalPrompt';
+  }
+
+  @override
+  String get logYamsStart => 'Hra Vrhcáby začíná!';
+
+  @override
+  String get logClueGivingStart => 'Hra začíná! Dejte svou nápovědu...';
+
+  @override
+  String get logBeloteStart => 'La partie de Belote commence !';
+
+  @override
+  String get logBlokusStart => 'Hra Blokus začíná!';
+
+  @override
+  String get pokerFlop => '--- FLOP ---';
+
+  @override
+  String get pokerTurn => '--- TURN ---';
+
+  @override
+  String get pokerRiver => '--- RIVER ---';
+
+  @override
+  String aTireDefi(Object targetPlayerName, Object challengeLabel) {
+    return '🎲 $targetPlayerName a tiré : $challengeLabel !';
+  }
+
+  @override
+  String lEquipeAReveleLAssassin(Object teamName) {
+    return 'L\'équipe $teamName a révélé l\'Assassin !';
+  }
+
+  @override
+  String get lancerLeDefi => 'LANCER LE DÉFI';
+
+  @override
+  String maximumPossibleCartes(Object maximumBid) {
+    return 'Maximum possible : $maximumBid cartes';
+  }
+
+  @override
+  String reflechitAUnDefiDeCartes(Object bidderName, Object liveAmount) {
+    return '$bidderName réfléchit à un défi de $liveAmount cartes...';
+  }
+
+  @override
+  String votreMainCartes(Object count) {
+    return 'VOTRE MAIN ($count cartes)';
+  }
+
+  @override
+  String pictionaryStrokesCount(Object count) {
+    return '$count/30 traits';
+  }
+
+  @override
+  String indicesSoumisCount(Object submitted, Object total) {
+    return 'Indices soumis : $submitted / $total';
+  }
+
+  @override
+  String joueurAPerdu(Object loserName) {
+    return '$loserName prohrál(a)!';
+  }
+
+  @override
+  String get couleurChoisie => 'Couleur choisie :';
+
+  @override
+  String pokerRaiseTo(Object amount) {
+    return 'Navýšit na $amount';
+  }
+
+  @override
+  String get enchere => 'ENCHÈRE';
+
+  @override
+  String reponseDeJoueur(Object guesserName, Object answer) {
+    return 'Réponse de $guesserName : \"$answer\"';
+  }
+
+  @override
+  String get carteSuivante => 'Carte suivante';
+
+  @override
+  String get roleLabel => 'Rôle:';
+
+  @override
+  String get obligatoire => 'Povinné';
+
+  @override
+  String aSelectionneSonPionEtReflechit(Object playerName) {
+    return '$playerName vybral(a) figurku a přemýšlí...';
+  }
+
+  @override
+  String termineJeu(Object gameName) {
+    return 'DOKONČENO: $gameName';
+  }
+
+  @override
+  String aRejointLaPartie(Object playerName) {
+    return '$playerName se připojil(a) ke hře!';
+  }
+
+  @override
+  String aQuitteLaPartie(Object removedPlayerName) {
+    return '$removedPlayerName opustil(a) hru.';
+  }
+
+  @override
+  String aEteSignaleEtMasque(Object targetName) {
+    return '$targetName a été signalé et masqué pour vous.';
+  }
+
+  @override
+  String get impossibleDObtenirUnJeton =>
+      'Impossible d\'obtenir un jeton d\'accès vidéo LiveKit sécurisé.';
+
+  @override
+  String get veuillezEntrerUneAdresseEmail =>
+      'Veuillez entrer une adresse email valide.';
+
+  @override
+  String get veuillezEntrerVotreMotDe =>
+      'Veuillez entrer votre mot de passe actuel.';
+
+  @override
+  String get entrezVotreMotDePasse => 'Entrez votre mot de passe actuel.';
+
+  @override
+  String get leNouveauMotDePasse =>
+      'Le nouveau mot de passe doit faire au moins 6 caractères.';
+
+  @override
+  String get lesDeuxMotsDePasse =>
+      'Les deux mots de passe ne correspondent pas.';
+
+  @override
+  String get photoDeProfilMiseA => 'Photo de profil mise à jour !';
+
+  @override
+  String get echecDuChangementDePhoto => 'Échec du changement de photo.';
+
+  @override
+  String get k3CaracteresMinimum => '3 caractères minimum';
+
+  @override
+  String get cePseudoEstDejaPris => 'Ce pseudo est déjà pris.';
+
+  @override
+  String get unAmi => 'Un ami';
+
+  @override
+  String get ceJoueur => 'ce joueur';
+
+  @override
+  String get preparationDeLaRecherche => 'Préparation de la recherche...';
+
+  @override
+  String get erreurDeConnexionAuMatchmaking =>
+      'Erreur de connexion au matchmaking. Veuillez réessayer.';
+
+  @override
+  String get erreurDeConnexionALa => 'Erreur de connexion à la salle.';
+
+  @override
+  String get legendeVivante => 'Légende Vivante';
+
+  @override
+  String get grandMaitre => 'Grand Maître';
+
+  @override
+  String get stratege => 'Stratège';
+
+  @override
+  String get initie => 'Initié';
+
+  @override
+  String get illimiteesVip => 'Illimitées (VIP)';
+
+  @override
+  String pieces(Object playerStatecoins) {
+    return '$playerStatecoins pièces';
+  }
+
+  @override
+  String get utilisateurNonConnecte => 'Utilisateur non connecté.';
+
+  @override
+  String get entrezUnPseudo => 'Entrez un pseudo';
+
+  @override
+  String get cePseudoEstDejaPris1 => 'Ce pseudo est déjà pris';
+
+  @override
+  String get pseudoDejaPrisParUn => '❌ Pseudo déjà pris par un autre joueur';
+
+  @override
+  String get cetteVersionDeLApplication =>
+      'Cette version de l\'application est obsolète. Veuillez installer la dernière version.';
+
+  @override
+  String get playfunEstActuellementEnMaintenance =>
+      'Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !';
+
+  @override
+  String get uneNouvelleVersionDePlayfun =>
+      'Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l\'application pour continuer à jouer.';
+
+  @override
+  String get derniereVersion => 'Dernière version';
+
+  @override
+  String get echecDeLEnvoi => 'Échec de l\'envoi.';
+
+  @override
+  String demandeDAmiEnvoyeeA(Object name) {
+    return 'Žádost o přátelství odeslána uživateli $name!';
+  }
+
+  @override
+  String aEteDebloque(Object name) {
+    return 'Hráč $name byl odblokován.';
+  }
+
+  @override
+  String get comportementInapproprieOuInsultes =>
+      'Nevhodné chování nebo urážky';
+
+  @override
+  String get spamOuPublicite => 'Spam nebo reklama';
+
+  @override
+  String get pseudoOuImageOffensante => 'Urážlivá přezdívka nebo obrázek';
+
+  @override
+  String signalementEnvoyeConcernantMerciDe(Object name) {
+    return 'Nahlášení týkající se uživatele $name odesláno. Děkujeme za bdělost!';
+  }
+
+  @override
+  String joueur1(Object bUid) {
+    return 'Joueur ($bUid)';
+  }
+
+  @override
+  String aEteDebloque1(Object bName) {
+    return 'Hráč $bName byl odblokován.';
+  }
+
+  @override
+  String get enableVideo => 'Zapnout video';
+
+  @override
+  String get pseudoDisponible => '✅ Pseudo disponible';
+
+  @override
+  String get entrezUnEmailValide => 'Entrez un email valide';
+
+  @override
+  String get k6CaracteresMinimum => '6 caractères minimum';
+
+  @override
+  String get pasDeCompteSInscrire => 'Pas de compte ? S\'inscrire';
+
+  @override
+  String get dejaUnCompteSeConnecter => 'Déjà un compte ? Se connecter';
+
+  @override
+  String get conditionsGeneralesDUtilisationCgu =>
+      'Conditions Générales d\'Utilisation (CGU / EULA)';
+
+  @override
+  String get politiqueDeConfidentialite => 'Politique de Confidentialité';
+
+  @override
+  String get miseAJourRequise => 'Mise à jour requise';
+
+  @override
+  String joueursBloques(Object blockedListlength) {
+    return 'Blokovaní hráči ($blockedListlength)';
+  }
+
+  @override
+  String get identifiantsIncorrectsOuCompteInexistant =>
+      'Identifiants incorrects ou compte inexistant.';
 }

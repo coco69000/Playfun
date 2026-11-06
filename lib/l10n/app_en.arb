@@ -452,7 +452,7 @@
   "leMotATrouverEtait": "The word to come up with was a synonym for '''{0}'''. The other players score 1 point.",
   "felicitationsAuDessinateurEtA": "Congratulations to the cartoonist '{0}' and to '{1}' !",
   "saReponseEtait": "His answer was: '''{0}'''.",
-  "leMotEtait": "The word was: '''{0}'''.",
+  "leMotEtait": "The word was:",
   "cartesRevelees": "Revealed cards:",
   "erreurDeChargementDuMeme": "Error loading meme.",
   "scoreActuelDeCartes": "Current score of '{0}': '{1,}' cards.",
@@ -804,7 +804,7 @@
   "jAiFiniDAjouter": "I''m done adding my words",
   "motsRestantsAAjouterPour": "Remaining words to add for '{0}': '{1}'",
   "totalDesMotsDansLe": "Total words in the hat: '{0}'",
-  "manche": "Round '{0}' : '{1}'",
+  "manche": "Round",
   "motsDevinesCeTour": "Words guessed this round: '{0}'",
   "motsRestantsDansLePaquet": "Words left in the package: '{0}'",
   "devine": "Guessed!",
@@ -1001,7 +1001,14 @@
   "votreFlotteTirsEnnemisRecus": "Your Fleet (Enemy shots received)",
   "elimine": "Eliminated",
   "tapisVide": "Empty play area",
-  "ecrireAu": "Write to '{0}'...",
+  "ecrireAu": "Write to {target}...",
+  "@ecrireAu": {
+    "placeholders": {
+      "target": {
+        "type": "Object"
+      }
+    }
+  },
   "reflechit": "'{name}' thinks...",
   "faceAFaceCoteA": "Head-to-head (side by side)",
   "totalAdversaire": "OPPONENT TOTAL",
@@ -1877,10 +1884,10 @@
   "choisissezUneCarteFaceCachee": "Pick a random face-down card",
   "enAttenteDeLaPioche": "Waiting for draw...",
   "laPartieDeBigTwo": "The Big Two game is over!",
-  "auTourDe2": "{resolvePlayerNamecurrentPlayerId}''s turn",
+  "auTourDe2": "{playerName}''s turn",
   "@auTourDe2": {
     "placeholders": {
-      "resolvePlayerNamecurrentPlayerId": {
+      "playerName": {
         "type": "Object"
       }
     }
@@ -3575,7 +3582,7 @@
       }
     }
   },
-  "votreMotDuJourPrononcez": "Your word of the day: ''{newWord}''. Say it in chat before sunset!",
+  "votreMotDuJourPrononcez": "Your word of the day: '{newWord}'. Say it in chat before sunset!",
   "@votreMotDuJourPrononcez": {
     "placeholders": {
       "newWord": {
@@ -4421,7 +4428,7 @@
       }
     }
   },
-  "aReponduEtPasseLa": "{gameDataplayerspla} answered ''{cleanAnswer}'' and passed the bomb!",
+  "aReponduEtPasseLa": "{gameDataplayerspla} answered '{cleanAnswer}' and passed the bomb!",
   "@aReponduEtPasseLa": {
     "placeholders": {
       "gameDataplayerspla": {
@@ -4752,5 +4759,257 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "meute": "pack",
+  "aiPromptLeJuge": "Génère des questions amusantes sur un joueur (utilise le tag ''''). Thème : {finalPrompt}",
+  "@aiPromptLeJuge": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "logYamsStart": "Yahtzee game begins!",
+  "logClueGivingStart": "Game starts! Give your clue...",
+  "logBeloteStart": "La partie de Belote commence !",
+  "logBlokusStart": "Blokus game begins!",
+  "pokerFlop": "--- FLOP ---",
+  "pokerTurn": "--- TURN ---",
+  "pokerRiver": "--- RIVER ---",
+  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "@aTireDefi": {
+    "placeholders": {
+      "targetPlayerName": {
+        "type": "Object"
+      },
+      "challengeLabel": {
+        "type": "Object"
+      }
+    }
+  },
+  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "@lEquipeAReveleLAssassin": {
+    "placeholders": {
+      "teamName": {
+        "type": "Object"
+      }
+    }
+  },
+  "lancerLeDefi": "LAUNCH CHALLENGE",
+  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "@maximumPossibleCartes": {
+    "placeholders": {
+      "maximumBid": {
+        "type": "Object"
+      }
+    }
+  },
+  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "@reflechitAUnDefiDeCartes": {
+    "placeholders": {
+      "bidderName": {
+        "type": "Object"
+      },
+      "liveAmount": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "@votreMainCartes": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "pictionaryStrokesCount": "{count}/30 traits",
+  "@pictionaryStrokesCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "@indicesSoumisCount": {
+    "placeholders": {
+      "submitted": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueurAPerdu": "{loserName} lost!",
+  "@joueurAPerdu": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
+  "couleurChoisie": "Couleur choisie :",
+  "pokerRaiseTo": "Raise {amount}",
+  "@pokerRaiseTo": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "enchere": "BID",
+  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "@reponseDeJoueur": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      },
+      "answer": {
+        "type": "Object"
+      }
+    }
+  },
+  "carteSuivante": "Next card",
+  "roleLabel": "Rôle:",
+  "obligatoire": "Mandatory",
+  "aSelectionneSonPionEtReflechit": "{playerName} selected their pawn and is thinking...",
+  "@aSelectionneSonPionEtReflechit": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "termineJeu": "FINISHED: {gameName}",
+  "@termineJeu": {
+    "placeholders": {
+      "gameName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aRejointLaPartie": "{playerName} joined the game!",
+  "@aRejointLaPartie": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aQuitteLaPartie": "{removedPlayerName} left the game.",
+  "@aQuitteLaPartie": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "@aEteSignaleEtMasque": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
+  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
+  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
+  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
+  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
+  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
+  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
+  "photoDeProfilMiseA": "Photo de profil mise à jour !",
+  "echecDuChangementDePhoto": "Échec du changement de photo.",
+  "k3CaracteresMinimum": "3 caractères minimum",
+  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
+  "unAmi": "Un ami",
+  "ceJoueur": "ce joueur",
+  "preparationDeLaRecherche": "Préparation de la recherche...",
+  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
+  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
+  "legendeVivante": "Légende Vivante",
+  "grandMaitre": "Grand Maître",
+  "stratege": "Stratège",
+  "initie": "Initié",
+  "illimiteesVip": "Illimitées (VIP)",
+  "pieces": "{playerStatecoins} pièces",
+  "@pieces": {
+    "placeholders": {
+      "playerStatecoins": {
+        "type": "Object"
+      }
+    }
+  },
+  "utilisateurNonConnecte": "Utilisateur non connecté.",
+  "entrezUnPseudo": "Entrez un pseudo",
+  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
+  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
+  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
+  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
+  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
+  "derniereVersion": "Dernière version",
+  "echecDeLEnvoi": "Échec de l''envoi.",
+  "demandeDAmiEnvoyeeA": "Friend request sent to {name}!",
+  "@demandeDAmiEnvoyeeA": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteDebloque": "{name} has been unblocked.",
+  "@aEteDebloque": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "comportementInapproprieOuInsultes": "Inappropriate behavior or insults",
+  "spamOuPublicite": "Spam or advertising",
+  "pseudoOuImageOffensante": "Offensive nickname or picture",
+  "signalementEnvoyeConcernantMerciDe": "Report sent regarding {name}. Thank you for your vigilance!",
+  "@signalementEnvoyeConcernantMerciDe": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueur1": "Joueur ({bUid})",
+  "@joueur1": {
+    "placeholders": {
+      "bUid": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteDebloque1": "{bName} has been unblocked.",
+  "@aEteDebloque1": {
+    "placeholders": {
+      "bName": {
+        "type": "Object"
+      }
+    }
+  },
+  "enableVideo": "Enable Video",
+  "pseudoDisponible": "✅ Pseudo disponible",
+  "entrezUnEmailValide": "Entrez un email valide",
+  "k6CaracteresMinimum": "6 caractères minimum",
+  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
+  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
+  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
+  "politiqueDeConfidentialite": "Politique de Confidentialité",
+  "miseAJourRequise": "Mise à jour requise",
+  "joueursBloques": "Blocked players ({blockedListlength})",
+  "@joueursBloques": {
+    "placeholders": {
+      "blockedListlength": {
+        "type": "Object"
+      }
+    }
+  },
+  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
 }

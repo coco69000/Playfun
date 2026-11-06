@@ -308,8 +308,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                               ),
                               Text(
                                 playerState.isPremium
-                                    ? "Illimitées (VIP)"
-                                    : "${playerState.coins} pièces",
+                                    ? AppLocalizations.of(context)!.illimiteesVip
+                                    : AppLocalizations.of(context)!.pieces(playerState.coins),
                                 style: const TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 16,
@@ -540,8 +540,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                     SnackBar(
                                       content: Text(
                                         success
-                                            ? "Achats restaurés avec succès !"
-                                            : "Aucun achat actif trouvé.",
+                                            ? AppLocalizations.of(context)!.purchasesRestored
+                                            : AppLocalizations.of(context)!.noPurchasesFound,
                                       ),
                                     ),
                                   );

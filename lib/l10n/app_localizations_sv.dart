@@ -2641,7 +2641,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get tapisVide => 'Tom spelyta';
 
   @override
-  String get ecrireAu => 'Skriv till {0}...';
+  String ecrireAu(Object target) {
+    return 'Skriv till $target...';
+  }
 
   @override
   String get reflechit => '{name} tror...';
@@ -3813,8 +3815,8 @@ class AppLocalizationsSv extends AppLocalizations {
   String get laPartieDeBigTwo => 'Big Two-spelet är slut!';
 
   @override
-  String auTourDe2(Object resolvePlayerNamecurrentPlayerId) {
-    return '${resolvePlayerNamecurrentPlayerId}s tur';
+  String auTourDe2(Object playerName) {
+    return '${playerName}s tur';
   }
 
   @override
@@ -7095,7 +7097,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String votreMotDuJourPrononcez(Object newWord) {
-    return 'Ditt ord för dagen: \'$newWord\'. Säg det i chatten före solnedgången!';
+    return 'Ditt ord för dagen: {newWord}. Säg det i chatten före solnedgången!';
   }
 
   @override
@@ -7787,7 +7789,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String aReponduEtPasseLa(Object gameDataplayerspla, Object cleanAnswer) {
-    return '$gameDataplayerspla svarade \'$cleanAnswer\' och skickade bomben vidare!';
+    return '$gameDataplayerspla svarade {cleanAnswer} och skickade bomben vidare!';
   }
 
   @override
@@ -8018,4 +8020,299 @@ class AppLocalizationsSv extends AppLocalizations {
   String jAiLanceUnePartie4(Object datagameTypeGribou) {
     return 'J\'ai lancé une partie de $datagameTypeGribou !';
   }
+
+  @override
+  String get meute => 'flock';
+
+  @override
+  String aiPromptLeJuge(Object finalPrompt) {
+    return 'Génère des questions amusantes sur un joueur (utilise le tag \'\'). Thème : $finalPrompt';
+  }
+
+  @override
+  String get logYamsStart => 'Yatzy-spelet börjar!';
+
+  @override
+  String get logClueGivingStart => 'Spelet börjar! Ge din ledtråd...';
+
+  @override
+  String get logBeloteStart => 'La partie de Belote commence !';
+
+  @override
+  String get logBlokusStart => 'Blokus-spelet börjar!';
+
+  @override
+  String get pokerFlop => '--- FLOP ---';
+
+  @override
+  String get pokerTurn => '--- TURN ---';
+
+  @override
+  String get pokerRiver => '--- RIVER ---';
+
+  @override
+  String aTireDefi(Object targetPlayerName, Object challengeLabel) {
+    return '🎲 $targetPlayerName a tiré : $challengeLabel !';
+  }
+
+  @override
+  String lEquipeAReveleLAssassin(Object teamName) {
+    return 'L\'équipe $teamName a révélé l\'Assassin !';
+  }
+
+  @override
+  String get lancerLeDefi => 'LANCER LE DÉFI';
+
+  @override
+  String maximumPossibleCartes(Object maximumBid) {
+    return 'Maximum possible : $maximumBid cartes';
+  }
+
+  @override
+  String reflechitAUnDefiDeCartes(Object bidderName, Object liveAmount) {
+    return '$bidderName réfléchit à un défi de $liveAmount cartes...';
+  }
+
+  @override
+  String votreMainCartes(Object count) {
+    return 'VOTRE MAIN ($count cartes)';
+  }
+
+  @override
+  String pictionaryStrokesCount(Object count) {
+    return '$count/30 traits';
+  }
+
+  @override
+  String indicesSoumisCount(Object submitted, Object total) {
+    return 'Indices soumis : $submitted / $total';
+  }
+
+  @override
+  String joueurAPerdu(Object loserName) {
+    return '$loserName förlorade!';
+  }
+
+  @override
+  String get couleurChoisie => 'Couleur choisie :';
+
+  @override
+  String pokerRaiseTo(Object amount) {
+    return 'Höj till $amount';
+  }
+
+  @override
+  String get enchere => 'ENCHÈRE';
+
+  @override
+  String reponseDeJoueur(Object guesserName, Object answer) {
+    return 'Réponse de $guesserName : \"$answer\"';
+  }
+
+  @override
+  String get carteSuivante => 'Carte suivante';
+
+  @override
+  String get roleLabel => 'Rôle:';
+
+  @override
+  String get obligatoire => 'Obligatoriskt';
+
+  @override
+  String aSelectionneSonPionEtReflechit(Object playerName) {
+    return '$playerName har valt sin pjäs och funderar...';
+  }
+
+  @override
+  String termineJeu(Object gameName) {
+    return 'AVSLUTAD: $gameName';
+  }
+
+  @override
+  String aRejointLaPartie(Object playerName) {
+    return '$playerName gick med i spelet!';
+  }
+
+  @override
+  String aQuitteLaPartie(Object removedPlayerName) {
+    return '$removedPlayerName lämnade spelet.';
+  }
+
+  @override
+  String aEteSignaleEtMasque(Object targetName) {
+    return '$targetName a été signalé et masqué pour vous.';
+  }
+
+  @override
+  String get impossibleDObtenirUnJeton =>
+      'Impossible d\'obtenir un jeton d\'accès vidéo LiveKit sécurisé.';
+
+  @override
+  String get veuillezEntrerUneAdresseEmail =>
+      'Veuillez entrer une adresse email valide.';
+
+  @override
+  String get veuillezEntrerVotreMotDe =>
+      'Veuillez entrer votre mot de passe actuel.';
+
+  @override
+  String get entrezVotreMotDePasse => 'Entrez votre mot de passe actuel.';
+
+  @override
+  String get leNouveauMotDePasse =>
+      'Le nouveau mot de passe doit faire au moins 6 caractères.';
+
+  @override
+  String get lesDeuxMotsDePasse =>
+      'Les deux mots de passe ne correspondent pas.';
+
+  @override
+  String get photoDeProfilMiseA => 'Photo de profil mise à jour !';
+
+  @override
+  String get echecDuChangementDePhoto => 'Échec du changement de photo.';
+
+  @override
+  String get k3CaracteresMinimum => '3 caractères minimum';
+
+  @override
+  String get cePseudoEstDejaPris => 'Ce pseudo est déjà pris.';
+
+  @override
+  String get unAmi => 'Un ami';
+
+  @override
+  String get ceJoueur => 'ce joueur';
+
+  @override
+  String get preparationDeLaRecherche => 'Préparation de la recherche...';
+
+  @override
+  String get erreurDeConnexionAuMatchmaking =>
+      'Erreur de connexion au matchmaking. Veuillez réessayer.';
+
+  @override
+  String get erreurDeConnexionALa => 'Erreur de connexion à la salle.';
+
+  @override
+  String get legendeVivante => 'Légende Vivante';
+
+  @override
+  String get grandMaitre => 'Grand Maître';
+
+  @override
+  String get stratege => 'Stratège';
+
+  @override
+  String get initie => 'Initié';
+
+  @override
+  String get illimiteesVip => 'Illimitées (VIP)';
+
+  @override
+  String pieces(Object playerStatecoins) {
+    return '$playerStatecoins pièces';
+  }
+
+  @override
+  String get utilisateurNonConnecte => 'Utilisateur non connecté.';
+
+  @override
+  String get entrezUnPseudo => 'Entrez un pseudo';
+
+  @override
+  String get cePseudoEstDejaPris1 => 'Ce pseudo est déjà pris';
+
+  @override
+  String get pseudoDejaPrisParUn => '❌ Pseudo déjà pris par un autre joueur';
+
+  @override
+  String get cetteVersionDeLApplication =>
+      'Cette version de l\'application est obsolète. Veuillez installer la dernière version.';
+
+  @override
+  String get playfunEstActuellementEnMaintenance =>
+      'Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !';
+
+  @override
+  String get uneNouvelleVersionDePlayfun =>
+      'Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l\'application pour continuer à jouer.';
+
+  @override
+  String get derniereVersion => 'Dernière version';
+
+  @override
+  String get echecDeLEnvoi => 'Échec de l\'envoi.';
+
+  @override
+  String demandeDAmiEnvoyeeA(Object name) {
+    return 'Vänförfrågan skickad till $name!';
+  }
+
+  @override
+  String aEteDebloque(Object name) {
+    return '$name har avblockerats.';
+  }
+
+  @override
+  String get comportementInapproprieOuInsultes =>
+      'Olämpligt beteende eller förolämpningar';
+
+  @override
+  String get spamOuPublicite => 'Spam eller reklam';
+
+  @override
+  String get pseudoOuImageOffensante => 'Stötande smeknamn eller bild';
+
+  @override
+  String signalementEnvoyeConcernantMerciDe(Object name) {
+    return 'Anmälan skickad gällande $name. Tack för din vaksamhet!';
+  }
+
+  @override
+  String joueur1(Object bUid) {
+    return 'Joueur ($bUid)';
+  }
+
+  @override
+  String aEteDebloque1(Object bName) {
+    return '$bName har avblockerats.';
+  }
+
+  @override
+  String get enableVideo => 'Aktivera video';
+
+  @override
+  String get pseudoDisponible => '✅ Pseudo disponible';
+
+  @override
+  String get entrezUnEmailValide => 'Entrez un email valide';
+
+  @override
+  String get k6CaracteresMinimum => '6 caractères minimum';
+
+  @override
+  String get pasDeCompteSInscrire => 'Pas de compte ? S\'inscrire';
+
+  @override
+  String get dejaUnCompteSeConnecter => 'Déjà un compte ? Se connecter';
+
+  @override
+  String get conditionsGeneralesDUtilisationCgu =>
+      'Conditions Générales d\'Utilisation (CGU / EULA)';
+
+  @override
+  String get politiqueDeConfidentialite => 'Politique de Confidentialité';
+
+  @override
+  String get miseAJourRequise => 'Mise à jour requise';
+
+  @override
+  String joueursBloques(Object blockedListlength) {
+    return 'Blockerade spelare ($blockedListlength)';
+  }
+
+  @override
+  String get identifiantsIncorrectsOuCompteInexistant =>
+      'Identifiants incorrects ou compte inexistant.';
 }

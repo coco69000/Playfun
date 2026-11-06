@@ -1301,7 +1301,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get saReponseEtait => 'La sua risposta fu: \'\'{0}\'.';
 
   @override
-  String get leMotEtait => 'La parola era: \'\'{0}\'.';
+  String get leMotEtait => 'La parola era:';
 
   @override
   String get cartesRevelees => 'Carte rivelate:';
@@ -2148,7 +2148,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get totalDesMotsDansLe => 'Totale parole nel cappello: {0}';
 
   @override
-  String get manche => 'Round {0} : {1}';
+  String get manche => 'Mano';
 
   @override
   String get motsDevinesCeTour => 'Parole indovinate in questo turno: {0}';
@@ -2661,7 +2661,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get tapisVide => 'Tappeto vuoto';
 
   @override
-  String get ecrireAu => 'Scrivi a {0}...';
+  String ecrireAu(Object target) {
+    return 'Scrivi a $target...';
+  }
 
   @override
   String get reflechit => '{name} pensa...';
@@ -3841,8 +3843,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get laPartieDeBigTwo => 'La partita di Big Two è terminata!';
 
   @override
-  String auTourDe2(Object resolvePlayerNamecurrentPlayerId) {
-    return 'Turno di $resolvePlayerNamecurrentPlayerId';
+  String auTourDe2(Object playerName) {
+    return 'Turno di $playerName';
   }
 
   @override
@@ -7168,7 +7170,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String votreMotDuJourPrononcez(Object newWord) {
-    return 'La tua parola del giorno: \'$newWord\'. Dilla in chat prima del tramonto!';
+    return 'La tua parola del giorno: {newWord}. Dilla in chat prima del tramonto!';
   }
 
   @override
@@ -7860,7 +7862,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String aReponduEtPasseLa(Object gameDataplayerspla, Object cleanAnswer) {
-    return '$gameDataplayerspla ha risposto \'$cleanAnswer\' e ha passato la bomba!';
+    return '$gameDataplayerspla ha risposto {cleanAnswer} e ha passato la bomba!';
   }
 
   @override
@@ -8091,4 +8093,299 @@ class AppLocalizationsIt extends AppLocalizations {
   String jAiLanceUnePartie4(Object datagameTypeGribou) {
     return 'J\'ai lancé une partie de $datagameTypeGribou !';
   }
+
+  @override
+  String get meute => 'branco';
+
+  @override
+  String aiPromptLeJuge(Object finalPrompt) {
+    return 'Génère des questions amusantes sur un joueur (utilise le tag \'\'). Thème : $finalPrompt';
+  }
+
+  @override
+  String get logYamsStart => 'La partita di Yams inizia!';
+
+  @override
+  String get logClueGivingStart => 'La partita inizia! Dai il tuo indizio...';
+
+  @override
+  String get logBeloteStart => 'La partie de Belote commence !';
+
+  @override
+  String get logBlokusStart => 'La partita di Blokus inizia!';
+
+  @override
+  String get pokerFlop => '--- FLOP ---';
+
+  @override
+  String get pokerTurn => '--- TURN ---';
+
+  @override
+  String get pokerRiver => '--- RIVER ---';
+
+  @override
+  String aTireDefi(Object targetPlayerName, Object challengeLabel) {
+    return '🎲 $targetPlayerName a tiré : $challengeLabel !';
+  }
+
+  @override
+  String lEquipeAReveleLAssassin(Object teamName) {
+    return 'L\'équipe $teamName a révélé l\'Assassin !';
+  }
+
+  @override
+  String get lancerLeDefi => 'LANCIA LA SFIDA';
+
+  @override
+  String maximumPossibleCartes(Object maximumBid) {
+    return 'Maximum possible : $maximumBid cartes';
+  }
+
+  @override
+  String reflechitAUnDefiDeCartes(Object bidderName, Object liveAmount) {
+    return '$bidderName réfléchit à un défi de $liveAmount cartes...';
+  }
+
+  @override
+  String votreMainCartes(Object count) {
+    return 'VOTRE MAIN ($count cartes)';
+  }
+
+  @override
+  String pictionaryStrokesCount(Object count) {
+    return '$count/30 traits';
+  }
+
+  @override
+  String indicesSoumisCount(Object submitted, Object total) {
+    return 'Indices soumis : $submitted / $total';
+  }
+
+  @override
+  String joueurAPerdu(Object loserName) {
+    return '$loserName ha perso!';
+  }
+
+  @override
+  String get couleurChoisie => 'Couleur choisie :';
+
+  @override
+  String pokerRaiseTo(Object amount) {
+    return 'Rilancia a $amount';
+  }
+
+  @override
+  String get enchere => 'OFFERTA';
+
+  @override
+  String reponseDeJoueur(Object guesserName, Object answer) {
+    return 'Réponse de $guesserName : \"$answer\"';
+  }
+
+  @override
+  String get carteSuivante => 'Carta successiva';
+
+  @override
+  String get roleLabel => 'Rôle:';
+
+  @override
+  String get obligatoire => 'Obbligatorio';
+
+  @override
+  String aSelectionneSonPionEtReflechit(Object playerName) {
+    return '$playerName ha selezionato la sua pedina e sta pensando...';
+  }
+
+  @override
+  String termineJeu(Object gameName) {
+    return 'TERMINATO: $gameName';
+  }
+
+  @override
+  String aRejointLaPartie(Object playerName) {
+    return '$playerName è entrato nella partita!';
+  }
+
+  @override
+  String aQuitteLaPartie(Object removedPlayerName) {
+    return '$removedPlayerName ha lasciato la partita.';
+  }
+
+  @override
+  String aEteSignaleEtMasque(Object targetName) {
+    return '$targetName a été signalé et masqué pour vous.';
+  }
+
+  @override
+  String get impossibleDObtenirUnJeton =>
+      'Impossible d\'obtenir un jeton d\'accès vidéo LiveKit sécurisé.';
+
+  @override
+  String get veuillezEntrerUneAdresseEmail =>
+      'Veuillez entrer une adresse email valide.';
+
+  @override
+  String get veuillezEntrerVotreMotDe =>
+      'Veuillez entrer votre mot de passe actuel.';
+
+  @override
+  String get entrezVotreMotDePasse => 'Entrez votre mot de passe actuel.';
+
+  @override
+  String get leNouveauMotDePasse =>
+      'Le nouveau mot de passe doit faire au moins 6 caractères.';
+
+  @override
+  String get lesDeuxMotsDePasse =>
+      'Les deux mots de passe ne correspondent pas.';
+
+  @override
+  String get photoDeProfilMiseA => 'Photo de profil mise à jour !';
+
+  @override
+  String get echecDuChangementDePhoto => 'Échec du changement de photo.';
+
+  @override
+  String get k3CaracteresMinimum => '3 caractères minimum';
+
+  @override
+  String get cePseudoEstDejaPris => 'Ce pseudo est déjà pris.';
+
+  @override
+  String get unAmi => 'Un ami';
+
+  @override
+  String get ceJoueur => 'ce joueur';
+
+  @override
+  String get preparationDeLaRecherche => 'Préparation de la recherche...';
+
+  @override
+  String get erreurDeConnexionAuMatchmaking =>
+      'Erreur de connexion au matchmaking. Veuillez réessayer.';
+
+  @override
+  String get erreurDeConnexionALa => 'Erreur de connexion à la salle.';
+
+  @override
+  String get legendeVivante => 'Légende Vivante';
+
+  @override
+  String get grandMaitre => 'Grand Maître';
+
+  @override
+  String get stratege => 'Stratège';
+
+  @override
+  String get initie => 'Initié';
+
+  @override
+  String get illimiteesVip => 'Illimitées (VIP)';
+
+  @override
+  String pieces(Object playerStatecoins) {
+    return '$playerStatecoins pièces';
+  }
+
+  @override
+  String get utilisateurNonConnecte => 'Utilisateur non connecté.';
+
+  @override
+  String get entrezUnPseudo => 'Entrez un pseudo';
+
+  @override
+  String get cePseudoEstDejaPris1 => 'Ce pseudo est déjà pris';
+
+  @override
+  String get pseudoDejaPrisParUn => '❌ Pseudo déjà pris par un autre joueur';
+
+  @override
+  String get cetteVersionDeLApplication =>
+      'Cette version de l\'application est obsolète. Veuillez installer la dernière version.';
+
+  @override
+  String get playfunEstActuellementEnMaintenance =>
+      'Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !';
+
+  @override
+  String get uneNouvelleVersionDePlayfun =>
+      'Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l\'application pour continuer à jouer.';
+
+  @override
+  String get derniereVersion => 'Dernière version';
+
+  @override
+  String get echecDeLEnvoi => 'Échec de l\'envoi.';
+
+  @override
+  String demandeDAmiEnvoyeeA(Object name) {
+    return 'Richiesta di amicizia inviata a $name!';
+  }
+
+  @override
+  String aEteDebloque(Object name) {
+    return '$name è stato sbloccato.';
+  }
+
+  @override
+  String get comportementInapproprieOuInsultes =>
+      'Comportamento inappropriato o insulti';
+
+  @override
+  String get spamOuPublicite => 'Spam o pubblicità';
+
+  @override
+  String get pseudoOuImageOffensante => 'Nickname o immagine offensiva';
+
+  @override
+  String signalementEnvoyeConcernantMerciDe(Object name) {
+    return 'Segnalazione inviata per $name. Grazie per la vigilanza!';
+  }
+
+  @override
+  String joueur1(Object bUid) {
+    return 'Joueur ($bUid)';
+  }
+
+  @override
+  String aEteDebloque1(Object bName) {
+    return '$bName è stato sbloccato.';
+  }
+
+  @override
+  String get enableVideo => 'Attiva il video';
+
+  @override
+  String get pseudoDisponible => '✅ Pseudo disponible';
+
+  @override
+  String get entrezUnEmailValide => 'Entrez un email valide';
+
+  @override
+  String get k6CaracteresMinimum => '6 caractères minimum';
+
+  @override
+  String get pasDeCompteSInscrire => 'Pas de compte ? S\'inscrire';
+
+  @override
+  String get dejaUnCompteSeConnecter => 'Déjà un compte ? Se connecter';
+
+  @override
+  String get conditionsGeneralesDUtilisationCgu =>
+      'Conditions Générales d\'Utilisation (CGU / EULA)';
+
+  @override
+  String get politiqueDeConfidentialite => 'Politique de Confidentialité';
+
+  @override
+  String get miseAJourRequise => 'Mise à jour requise';
+
+  @override
+  String joueursBloques(Object blockedListlength) {
+    return 'Giocatori bloccati ($blockedListlength)';
+  }
+
+  @override
+  String get identifiantsIncorrectsOuCompteInexistant =>
+      'Identifiants incorrects ou compte inexistant.';
 }

@@ -2,7 +2,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import '../l10n/app_localizations.dart';
+import 'package:flutter/widgets.dart';
+import '../game_data_words.dart';
 
+
+AppLocalizations get _l10n {
+  try {
+    return lookupAppLocalizations(Locale(GameWords.currentLanguage));
+  } catch (_) {
+    return lookupAppLocalizations(const Locale('fr'));
+  }
+}
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -40,7 +51,7 @@ class AuthService {
     if (user == null) {
       throw FirebaseAuthException(
         code: 'no-current-user',
-        message: 'Utilisateur non connecté.',
+        message: _l10n.utilisateurNonConnecte,
       );
     }
 
@@ -68,7 +79,7 @@ class AuthService {
     if (user == null) {
       throw FirebaseAuthException(
         code: 'no-current-user',
-        message: 'Utilisateur non connecté.',
+        message: _l10n.utilisateurNonConnecte,
       );
     }
 
@@ -114,7 +125,7 @@ class AuthService {
       if (!available) {
         throw FirebaseAuthException(
           code: 'username-already-in-use',
-          message: 'Ce pseudo est déjà pris.',
+          message: _l10n.cePseudoEstDejaPris,
         );
       }
 
@@ -128,7 +139,7 @@ class AuthService {
         await _firestore.collection('users').doc(user.uid).set({
           'uid': user.uid,
           'email': email.trim(),
-          'name': cleanName.isEmpty ? 'Joueur' : cleanName,
+          'name': cleanName.isEmpty ? _l10n.joueur : cleanName,
           'nameLower': cleanLower, // Indispensable pour la recherche insensible à la casse
           'coins': 50,
           'isPremium': false,

@@ -303,11 +303,11 @@ class _MainScreenState extends State<MainScreen> {
                 final newEmail = emailController.text.trim();
                 final pwd = passwordController.text.trim();
                 if (!newEmail.contains('@') || newEmail.length < 5) {
-                  setDlgState(() => errorText = "Veuillez entrer une adresse email valide.");
+                  setDlgState(() => errorText = AppLocalizations.of(context)!.veuillezEntrerUneAdresseEmail);
                   return;
                 }
                 if (pwd.isEmpty) {
-                  setDlgState(() => errorText = "Veuillez entrer votre mot de passe actuel.");
+                  setDlgState(() => errorText = AppLocalizations.of(context)!.veuillezEntrerVotreMotDe);
                   return;
                 }
                 setDlgState(() {
@@ -413,15 +413,15 @@ class _MainScreenState extends State<MainScreen> {
                 final next = newPwdController.text.trim();
                 final conf = confirmPwdController.text.trim();
                 if (cur.isEmpty) {
-                  setDlgState(() => errorText = "Entrez votre mot de passe actuel.");
+                  setDlgState(() => errorText = AppLocalizations.of(context)!.entrezVotreMotDePasse);
                   return;
                 }
                 if (next.length < 6) {
-                  setDlgState(() => errorText = "Le nouveau mot de passe doit faire au moins 6 caractères.");
+                  setDlgState(() => errorText = AppLocalizations.of(context)!.leNouveauMotDePasse);
                   return;
                 }
                 if (next != conf) {
-                  setDlgState(() => errorText = "Les deux mots de passe ne correspondent pas.");
+                  setDlgState(() => errorText = AppLocalizations.of(context)!.lesDeuxMotsDePasse);
                   return;
                 }
                 setDlgState(() {
@@ -507,7 +507,7 @@ class _MainScreenState extends State<MainScreen> {
                                   if (context.mounted) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text(ok ? "Photo de profil mise à jour !" : "Échec du changement de photo."),
+                                        content: Text(ok ? AppLocalizations.of(context)!.photoDeProfilMiseA : AppLocalizations.of(context)!.echecDuChangementDePhoto),
                                         backgroundColor: ok ? Colors.green[800] : Colors.red[800],
                                       ),
                                     );
@@ -537,7 +537,7 @@ class _MainScreenState extends State<MainScreen> {
                                   if (context.mounted) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text(ok ? "Photo de profil mise à jour !" : "Échec du changement de photo."),
+                                        content: Text(ok ? AppLocalizations.of(context)!.photoDeProfilMiseA : AppLocalizations.of(context)!.echecDuChangementDePhoto),
                                         backgroundColor: ok ? Colors.green[800] : Colors.red[800],
                                       ),
                                     );
@@ -723,7 +723,7 @@ class _MainScreenState extends State<MainScreen> {
                                         return;
                                       }
                                       if (newName.length < 3) {
-                                        setStateDialog(() => nameError = "3 caractères minimum");
+                                        setStateDialog(() => nameError = AppLocalizations.of(context)!.k3CaracteresMinimum);
                                         return;
                                       }
                                       setStateDialog(() {
@@ -747,7 +747,7 @@ class _MainScreenState extends State<MainScreen> {
                                       } else {
                                         setStateDialog(() {
                                           isCheckingName = false;
-                                          nameError = "Ce pseudo est déjà pris.";
+                                          nameError = AppLocalizations.of(context)!.cePseudoEstDejaPris;
                                         });
                                       }
                                     },
@@ -770,7 +770,7 @@ class _MainScreenState extends State<MainScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              ps.userName ?? "Joueur",
+                              ps.userName ?? AppLocalizations.of(context)!.joueur,
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -1104,7 +1104,7 @@ class _MainScreenState extends State<MainScreen> {
 
                           final success = await FirebaseService().joinGame(
                             code,
-                            playerState.userName ?? 'Joueur',
+                            playerState.userName ?? AppLocalizations.of(context)!.joueur,
                             playerId,
                           );
 
@@ -1148,8 +1148,8 @@ class _MainScreenState extends State<MainScreen> {
     if (playerState.loungeInvites.isNotEmpty) {
       for (var invite in playerState.loungeInvites) {
         String loungeId = invite['loungeId'];
-        String host = invite['hostName'] ?? 'Un ami';
-        String loungeName = invite['loungeName'] ?? 'Salon';
+        String host = invite['hostName'] ?? AppLocalizations.of(context)!.unAmi;
+        String loungeName = invite['loungeName'] ?? AppLocalizations.of(context)!.salon;
 
         if (!_processedInvites.contains(loungeId)) {
           _processedInvites.add(loungeId);
@@ -1185,7 +1185,7 @@ class _MainScreenState extends State<MainScreen> {
                           await FirebaseService().joinLounge(
                             loungeId,
                             playerId,
-                            playerState.userName ?? 'Joueur',
+                            playerState.userName ?? AppLocalizations.of(context)!.joueur,
                           );
                           Navigator.push(
                             context,

@@ -131,7 +131,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
                     messenger.showSnackBar(
                       SnackBar(
                         content: Text(
-                          "$targetName a été signalé et masqué pour vous.",
+                          AppLocalizations.of(context)!.aEteSignaleEtMasque(targetName),
                         ),
                       ),
                     );
@@ -304,7 +304,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
 
   Widget _buildTile(LivekitService livekit, String identity) {
     final bool isLocal = identity == livekit.localIdentity;
-    String playerName = 'Joueur';
+    String playerName = AppLocalizations.of(context)!.joueur;
 
     final players = _playersMap;
     if (isLocal) {
@@ -318,11 +318,11 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
         }
       }
       if (matchedPId != null) {
-        playerName = players[matchedPId]?['name'] ?? 'Joueur';
+        playerName = players[matchedPId]?['name'] ?? AppLocalizations.of(context)!.joueur;
       } else if (players.containsKey(identity)) {
-        playerName = players[identity]?['name'] ?? 'Joueur';
+        playerName = players[identity]?['name'] ?? AppLocalizations.of(context)!.joueur;
       } else {
-        playerName = livekit.remoteUsers[identity]?.name ?? 'Joueur';
+        playerName = livekit.remoteUsers[identity]?.name ?? AppLocalizations.of(context)!.joueur;
       }
     }
 
@@ -500,7 +500,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
   Widget _buildAudioTile(LivekitService livekit, String identity) {
     final bool isLocal = identity == livekit.localIdentity;
     final players = _playersMap;
-    String playerName = 'Joueur';
+    String playerName = AppLocalizations.of(context)!.joueur;
 
     if (isLocal) {
       playerName = players[widget.currentPlayerId]?['name'] ?? 'Moi';
@@ -515,7 +515,7 @@ class _GameVideoOverlayState extends State<GameVideoOverlay> {
       playerName =
           players[matchedPId ?? identity]?['name'] ??
           livekit.remoteUsers[identity]?.name ??
-          'Joueur';
+          AppLocalizations.of(context)!.joueur;
     }
 
     final bool isSpeaking =

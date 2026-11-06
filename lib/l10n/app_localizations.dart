@@ -2547,7 +2547,7 @@ abstract class AppLocalizations {
   /// No description provided for @leMotEtait.
   ///
   /// In en, this message translates to:
-  /// **'The word was: \'\'\'{0}\'\'\'.'**
+  /// **'The word was:'**
   String get leMotEtait;
 
   /// No description provided for @cartesRevelees.
@@ -4137,7 +4137,7 @@ abstract class AppLocalizations {
   /// No description provided for @manche.
   ///
   /// In en, this message translates to:
-  /// **'Round \'{0}\' : \'{1}\''**
+  /// **'Round'**
   String get manche;
 
   /// No description provided for @motsDevinesCeTour.
@@ -5091,8 +5091,8 @@ abstract class AppLocalizations {
   /// No description provided for @ecrireAu.
   ///
   /// In en, this message translates to:
-  /// **'Write to \'{0}\'...'**
-  String get ecrireAu;
+  /// **'Write to {target}...'**
+  String ecrireAu(Object target);
 
   /// No description provided for @reflechit.
   ///
@@ -6972,8 +6972,8 @@ abstract class AppLocalizations {
   /// No description provided for @auTourDe2.
   ///
   /// In en, this message translates to:
-  /// **'{resolvePlayerNamecurrentPlayerId}\'\'s turn'**
-  String auTourDe2(Object resolvePlayerNamecurrentPlayerId);
+  /// **'{playerName}\'\'s turn'**
+  String auTourDe2(Object playerName);
 
   /// No description provided for @laPartieEstTerminee.
   ///
@@ -12736,7 +12736,7 @@ abstract class AppLocalizations {
   /// No description provided for @votreMotDuJourPrononcez.
   ///
   /// In en, this message translates to:
-  /// **'Your word of the day: \'\'{newWord}\'\'. Say it in chat before sunset!'**
+  /// **'Your word of the day: \'{newWord}\'. Say it in chat before sunset!'**
   String votreMotDuJourPrononcez(Object newWord);
 
   /// No description provided for @declareUnCoupDEtat.
@@ -13699,7 +13699,7 @@ abstract class AppLocalizations {
   /// No description provided for @aReponduEtPasseLa.
   ///
   /// In en, this message translates to:
-  /// **'{gameDataplayerspla} answered \'\'{cleanAnswer}\'\' and passed the bomb!'**
+  /// **'{gameDataplayerspla} answered \'{cleanAnswer}\' and passed the bomb!'**
   String aReponduEtPasseLa(Object gameDataplayerspla, Object cleanAnswer);
 
   /// No description provided for @aPiocheCarteS.
@@ -14019,6 +14019,480 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'J\'\'ai lancé une partie de {datagameTypeGribou} !'**
   String jAiLanceUnePartie4(Object datagameTypeGribou);
+
+  /// No description provided for @meute.
+  ///
+  /// In en, this message translates to:
+  /// **'pack'**
+  String get meute;
+
+  /// No description provided for @aiPromptLeJuge.
+  ///
+  /// In en, this message translates to:
+  /// **'Génère des questions amusantes sur un joueur (utilise le tag \'\'\'\'). Thème : {finalPrompt}'**
+  String aiPromptLeJuge(Object finalPrompt);
+
+  /// No description provided for @logYamsStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Yahtzee game begins!'**
+  String get logYamsStart;
+
+  /// No description provided for @logClueGivingStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Game starts! Give your clue...'**
+  String get logClueGivingStart;
+
+  /// No description provided for @logBeloteStart.
+  ///
+  /// In en, this message translates to:
+  /// **'La partie de Belote commence !'**
+  String get logBeloteStart;
+
+  /// No description provided for @logBlokusStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Blokus game begins!'**
+  String get logBlokusStart;
+
+  /// No description provided for @pokerFlop.
+  ///
+  /// In en, this message translates to:
+  /// **'--- FLOP ---'**
+  String get pokerFlop;
+
+  /// No description provided for @pokerTurn.
+  ///
+  /// In en, this message translates to:
+  /// **'--- TURN ---'**
+  String get pokerTurn;
+
+  /// No description provided for @pokerRiver.
+  ///
+  /// In en, this message translates to:
+  /// **'--- RIVER ---'**
+  String get pokerRiver;
+
+  /// No description provided for @aTireDefi.
+  ///
+  /// In en, this message translates to:
+  /// **'🎲 {targetPlayerName} a tiré : {challengeLabel} !'**
+  String aTireDefi(Object targetPlayerName, Object challengeLabel);
+
+  /// No description provided for @lEquipeAReveleLAssassin.
+  ///
+  /// In en, this message translates to:
+  /// **'L\'\'équipe {teamName} a révélé l\'\'Assassin !'**
+  String lEquipeAReveleLAssassin(Object teamName);
+
+  /// No description provided for @lancerLeDefi.
+  ///
+  /// In en, this message translates to:
+  /// **'LAUNCH CHALLENGE'**
+  String get lancerLeDefi;
+
+  /// No description provided for @maximumPossibleCartes.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum possible : {maximumBid} cartes'**
+  String maximumPossibleCartes(Object maximumBid);
+
+  /// No description provided for @reflechitAUnDefiDeCartes.
+  ///
+  /// In en, this message translates to:
+  /// **'{bidderName} réfléchit à un défi de {liveAmount} cartes...'**
+  String reflechitAUnDefiDeCartes(Object bidderName, Object liveAmount);
+
+  /// No description provided for @votreMainCartes.
+  ///
+  /// In en, this message translates to:
+  /// **'VOTRE MAIN ({count} cartes)'**
+  String votreMainCartes(Object count);
+
+  /// No description provided for @pictionaryStrokesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}/30 traits'**
+  String pictionaryStrokesCount(Object count);
+
+  /// No description provided for @indicesSoumisCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Indices soumis : {submitted} / {total}'**
+  String indicesSoumisCount(Object submitted, Object total);
+
+  /// No description provided for @joueurAPerdu.
+  ///
+  /// In en, this message translates to:
+  /// **'{loserName} lost!'**
+  String joueurAPerdu(Object loserName);
+
+  /// No description provided for @couleurChoisie.
+  ///
+  /// In en, this message translates to:
+  /// **'Couleur choisie :'**
+  String get couleurChoisie;
+
+  /// No description provided for @pokerRaiseTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Raise {amount}'**
+  String pokerRaiseTo(Object amount);
+
+  /// No description provided for @enchere.
+  ///
+  /// In en, this message translates to:
+  /// **'BID'**
+  String get enchere;
+
+  /// No description provided for @reponseDeJoueur.
+  ///
+  /// In en, this message translates to:
+  /// **'Réponse de {guesserName} : \"{answer}\"'**
+  String reponseDeJoueur(Object guesserName, Object answer);
+
+  /// No description provided for @carteSuivante.
+  ///
+  /// In en, this message translates to:
+  /// **'Next card'**
+  String get carteSuivante;
+
+  /// No description provided for @roleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rôle:'**
+  String get roleLabel;
+
+  /// No description provided for @obligatoire.
+  ///
+  /// In en, this message translates to:
+  /// **'Mandatory'**
+  String get obligatoire;
+
+  /// No description provided for @aSelectionneSonPionEtReflechit.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerName} selected their pawn and is thinking...'**
+  String aSelectionneSonPionEtReflechit(Object playerName);
+
+  /// No description provided for @termineJeu.
+  ///
+  /// In en, this message translates to:
+  /// **'FINISHED: {gameName}'**
+  String termineJeu(Object gameName);
+
+  /// No description provided for @aRejointLaPartie.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerName} joined the game!'**
+  String aRejointLaPartie(Object playerName);
+
+  /// No description provided for @aQuitteLaPartie.
+  ///
+  /// In en, this message translates to:
+  /// **'{removedPlayerName} left the game.'**
+  String aQuitteLaPartie(Object removedPlayerName);
+
+  /// No description provided for @aEteSignaleEtMasque.
+  ///
+  /// In en, this message translates to:
+  /// **'{targetName} a été signalé et masqué pour vous.'**
+  String aEteSignaleEtMasque(Object targetName);
+
+  /// No description provided for @impossibleDObtenirUnJeton.
+  ///
+  /// In en, this message translates to:
+  /// **'Impossible d\'\'obtenir un jeton d\'\'accès vidéo LiveKit sécurisé.'**
+  String get impossibleDObtenirUnJeton;
+
+  /// No description provided for @veuillezEntrerUneAdresseEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Veuillez entrer une adresse email valide.'**
+  String get veuillezEntrerUneAdresseEmail;
+
+  /// No description provided for @veuillezEntrerVotreMotDe.
+  ///
+  /// In en, this message translates to:
+  /// **'Veuillez entrer votre mot de passe actuel.'**
+  String get veuillezEntrerVotreMotDe;
+
+  /// No description provided for @entrezVotreMotDePasse.
+  ///
+  /// In en, this message translates to:
+  /// **'Entrez votre mot de passe actuel.'**
+  String get entrezVotreMotDePasse;
+
+  /// No description provided for @leNouveauMotDePasse.
+  ///
+  /// In en, this message translates to:
+  /// **'Le nouveau mot de passe doit faire au moins 6 caractères.'**
+  String get leNouveauMotDePasse;
+
+  /// No description provided for @lesDeuxMotsDePasse.
+  ///
+  /// In en, this message translates to:
+  /// **'Les deux mots de passe ne correspondent pas.'**
+  String get lesDeuxMotsDePasse;
+
+  /// No description provided for @photoDeProfilMiseA.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo de profil mise à jour !'**
+  String get photoDeProfilMiseA;
+
+  /// No description provided for @echecDuChangementDePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Échec du changement de photo.'**
+  String get echecDuChangementDePhoto;
+
+  /// No description provided for @k3CaracteresMinimum.
+  ///
+  /// In en, this message translates to:
+  /// **'3 caractères minimum'**
+  String get k3CaracteresMinimum;
+
+  /// No description provided for @cePseudoEstDejaPris.
+  ///
+  /// In en, this message translates to:
+  /// **'Ce pseudo est déjà pris.'**
+  String get cePseudoEstDejaPris;
+
+  /// No description provided for @unAmi.
+  ///
+  /// In en, this message translates to:
+  /// **'Un ami'**
+  String get unAmi;
+
+  /// No description provided for @ceJoueur.
+  ///
+  /// In en, this message translates to:
+  /// **'ce joueur'**
+  String get ceJoueur;
+
+  /// No description provided for @preparationDeLaRecherche.
+  ///
+  /// In en, this message translates to:
+  /// **'Préparation de la recherche...'**
+  String get preparationDeLaRecherche;
+
+  /// No description provided for @erreurDeConnexionAuMatchmaking.
+  ///
+  /// In en, this message translates to:
+  /// **'Erreur de connexion au matchmaking. Veuillez réessayer.'**
+  String get erreurDeConnexionAuMatchmaking;
+
+  /// No description provided for @erreurDeConnexionALa.
+  ///
+  /// In en, this message translates to:
+  /// **'Erreur de connexion à la salle.'**
+  String get erreurDeConnexionALa;
+
+  /// No description provided for @legendeVivante.
+  ///
+  /// In en, this message translates to:
+  /// **'Légende Vivante'**
+  String get legendeVivante;
+
+  /// No description provided for @grandMaitre.
+  ///
+  /// In en, this message translates to:
+  /// **'Grand Maître'**
+  String get grandMaitre;
+
+  /// No description provided for @stratege.
+  ///
+  /// In en, this message translates to:
+  /// **'Stratège'**
+  String get stratege;
+
+  /// No description provided for @initie.
+  ///
+  /// In en, this message translates to:
+  /// **'Initié'**
+  String get initie;
+
+  /// No description provided for @illimiteesVip.
+  ///
+  /// In en, this message translates to:
+  /// **'Illimitées (VIP)'**
+  String get illimiteesVip;
+
+  /// No description provided for @pieces.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerStatecoins} pièces'**
+  String pieces(Object playerStatecoins);
+
+  /// No description provided for @utilisateurNonConnecte.
+  ///
+  /// In en, this message translates to:
+  /// **'Utilisateur non connecté.'**
+  String get utilisateurNonConnecte;
+
+  /// No description provided for @entrezUnPseudo.
+  ///
+  /// In en, this message translates to:
+  /// **'Entrez un pseudo'**
+  String get entrezUnPseudo;
+
+  /// No description provided for @cePseudoEstDejaPris1.
+  ///
+  /// In en, this message translates to:
+  /// **'Ce pseudo est déjà pris'**
+  String get cePseudoEstDejaPris1;
+
+  /// No description provided for @pseudoDejaPrisParUn.
+  ///
+  /// In en, this message translates to:
+  /// **'❌ Pseudo déjà pris par un autre joueur'**
+  String get pseudoDejaPrisParUn;
+
+  /// No description provided for @cetteVersionDeLApplication.
+  ///
+  /// In en, this message translates to:
+  /// **'Cette version de l\'\'application est obsolète. Veuillez installer la dernière version.'**
+  String get cetteVersionDeLApplication;
+
+  /// No description provided for @playfunEstActuellementEnMaintenance.
+  ///
+  /// In en, this message translates to:
+  /// **'Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !'**
+  String get playfunEstActuellementEnMaintenance;
+
+  /// No description provided for @uneNouvelleVersionDePlayfun.
+  ///
+  /// In en, this message translates to:
+  /// **'Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l\'\'application pour continuer à jouer.'**
+  String get uneNouvelleVersionDePlayfun;
+
+  /// No description provided for @derniereVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Dernière version'**
+  String get derniereVersion;
+
+  /// No description provided for @echecDeLEnvoi.
+  ///
+  /// In en, this message translates to:
+  /// **'Échec de l\'\'envoi.'**
+  String get echecDeLEnvoi;
+
+  /// No description provided for @demandeDAmiEnvoyeeA.
+  ///
+  /// In en, this message translates to:
+  /// **'Friend request sent to {name}!'**
+  String demandeDAmiEnvoyeeA(Object name);
+
+  /// No description provided for @aEteDebloque.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has been unblocked.'**
+  String aEteDebloque(Object name);
+
+  /// No description provided for @comportementInapproprieOuInsultes.
+  ///
+  /// In en, this message translates to:
+  /// **'Inappropriate behavior or insults'**
+  String get comportementInapproprieOuInsultes;
+
+  /// No description provided for @spamOuPublicite.
+  ///
+  /// In en, this message translates to:
+  /// **'Spam or advertising'**
+  String get spamOuPublicite;
+
+  /// No description provided for @pseudoOuImageOffensante.
+  ///
+  /// In en, this message translates to:
+  /// **'Offensive nickname or picture'**
+  String get pseudoOuImageOffensante;
+
+  /// No description provided for @signalementEnvoyeConcernantMerciDe.
+  ///
+  /// In en, this message translates to:
+  /// **'Report sent regarding {name}. Thank you for your vigilance!'**
+  String signalementEnvoyeConcernantMerciDe(Object name);
+
+  /// No description provided for @joueur1.
+  ///
+  /// In en, this message translates to:
+  /// **'Joueur ({bUid})'**
+  String joueur1(Object bUid);
+
+  /// No description provided for @aEteDebloque1.
+  ///
+  /// In en, this message translates to:
+  /// **'{bName} has been unblocked.'**
+  String aEteDebloque1(Object bName);
+
+  /// No description provided for @enableVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Video'**
+  String get enableVideo;
+
+  /// No description provided for @pseudoDisponible.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ Pseudo disponible'**
+  String get pseudoDisponible;
+
+  /// No description provided for @entrezUnEmailValide.
+  ///
+  /// In en, this message translates to:
+  /// **'Entrez un email valide'**
+  String get entrezUnEmailValide;
+
+  /// No description provided for @k6CaracteresMinimum.
+  ///
+  /// In en, this message translates to:
+  /// **'6 caractères minimum'**
+  String get k6CaracteresMinimum;
+
+  /// No description provided for @pasDeCompteSInscrire.
+  ///
+  /// In en, this message translates to:
+  /// **'Pas de compte ? S\'\'inscrire'**
+  String get pasDeCompteSInscrire;
+
+  /// No description provided for @dejaUnCompteSeConnecter.
+  ///
+  /// In en, this message translates to:
+  /// **'Déjà un compte ? Se connecter'**
+  String get dejaUnCompteSeConnecter;
+
+  /// No description provided for @conditionsGeneralesDUtilisationCgu.
+  ///
+  /// In en, this message translates to:
+  /// **'Conditions Générales d\'\'Utilisation (CGU / EULA)'**
+  String get conditionsGeneralesDUtilisationCgu;
+
+  /// No description provided for @politiqueDeConfidentialite.
+  ///
+  /// In en, this message translates to:
+  /// **'Politique de Confidentialité'**
+  String get politiqueDeConfidentialite;
+
+  /// No description provided for @miseAJourRequise.
+  ///
+  /// In en, this message translates to:
+  /// **'Mise à jour requise'**
+  String get miseAJourRequise;
+
+  /// No description provided for @joueursBloques.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked players ({blockedListlength})'**
+  String joueursBloques(Object blockedListlength);
+
+  /// No description provided for @identifiantsIncorrectsOuCompteInexistant.
+  ///
+  /// In en, this message translates to:
+  /// **'Identifiants incorrects ou compte inexistant.'**
+  String get identifiantsIncorrectsOuCompteInexistant;
 }
 
 class _AppLocalizationsDelegate

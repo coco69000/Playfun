@@ -1001,7 +1001,14 @@
   "votreFlotteTirsEnnemisRecus": "Vaša flota (Primljeni neprijateljski hici)",
   "elimine": "Eliminiran",
   "tapisVide": "Prazan stol",
-  "ecrireAu": "Piši '{0}'...",
+  "ecrireAu": "Piši grupi {target}...",
+  "@ecrireAu": {
+    "placeholders": {
+      "target": {
+        "type": "Object"
+      }
+    }
+  },
   "reflechit": "'{name}' misli...",
   "faceAFaceCoteA": "Dvoboj (rame uz rame)",
   "totalAdversaire": "UKUPNO PROTIVNIK",
@@ -1877,10 +1884,10 @@
   "choisissezUneCarteFaceCachee": "Odaberite nasumičnu licem prema dolje okrenutu kartu",
   "enAttenteDeLaPioche": "Čekanje na vučenje karte...",
   "laPartieDeBigTwo": "Igra Big Two je završena!",
-  "auTourDe2": "Red igrača {resolvePlayerNamecurrentPlayerId}",
+  "auTourDe2": "Red igrača {playerName}",
   "@auTourDe2": {
     "placeholders": {
-      "resolvePlayerNamecurrentPlayerId": {
+      "playerName": {
         "type": "Object"
       }
     }
@@ -3575,7 +3582,7 @@
       }
     }
   },
-  "votreMotDuJourPrononcez": "Tvoja riječ dana: ''{newWord}''. Izgovori je u chatu prije zalaska sunca!",
+  "votreMotDuJourPrononcez": "Tvoja riječ dana: '{newWord}'. Izgovori je u chatu prije zalaska sunca!",
   "@votreMotDuJourPrononcez": {
     "placeholders": {
       "newWord": {
@@ -4421,7 +4428,7 @@
       }
     }
   },
-  "aReponduEtPasseLa": "{gameDataplayerspla} je odgovorio/la ''{cleanAnswer}'' i proslijedio/la bombu!",
+  "aReponduEtPasseLa": "{gameDataplayerspla} je odgovorio/la '{cleanAnswer}' i proslijedio/la bombu!",
   "@aReponduEtPasseLa": {
     "placeholders": {
       "gameDataplayerspla": {
@@ -4752,5 +4759,257 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "meute": "čopor",
+  "aiPromptLeJuge": "Génère des questions amusantes sur un joueur (utilise le tag ''''). Thème : {finalPrompt}",
+  "@aiPromptLeJuge": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "logYamsStart": "Igra Jamb počinje!",
+  "logClueGivingStart": "Igra počinje! Dajte svoj trag...",
+  "logBeloteStart": "La partie de Belote commence !",
+  "logBlokusStart": "Igra Blokus počinje!",
+  "pokerFlop": "--- FLOP ---",
+  "pokerTurn": "--- TURN ---",
+  "pokerRiver": "--- RIVER ---",
+  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "@aTireDefi": {
+    "placeholders": {
+      "targetPlayerName": {
+        "type": "Object"
+      },
+      "challengeLabel": {
+        "type": "Object"
+      }
+    }
+  },
+  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "@lEquipeAReveleLAssassin": {
+    "placeholders": {
+      "teamName": {
+        "type": "Object"
+      }
+    }
+  },
+  "lancerLeDefi": "LANCER LE DÉFI",
+  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "@maximumPossibleCartes": {
+    "placeholders": {
+      "maximumBid": {
+        "type": "Object"
+      }
+    }
+  },
+  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "@reflechitAUnDefiDeCartes": {
+    "placeholders": {
+      "bidderName": {
+        "type": "Object"
+      },
+      "liveAmount": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "@votreMainCartes": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "pictionaryStrokesCount": "{count}/30 traits",
+  "@pictionaryStrokesCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "@indicesSoumisCount": {
+    "placeholders": {
+      "submitted": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueurAPerdu": "{loserName} je izgubio/la!",
+  "@joueurAPerdu": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
+  "couleurChoisie": "Couleur choisie :",
+  "pokerRaiseTo": "Digni na {amount}",
+  "@pokerRaiseTo": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "enchere": "ENCHÈRE",
+  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "@reponseDeJoueur": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      },
+      "answer": {
+        "type": "Object"
+      }
+    }
+  },
+  "carteSuivante": "Carte suivante",
+  "roleLabel": "Rôle:",
+  "obligatoire": "Obavezno",
+  "aSelectionneSonPionEtReflechit": "{playerName} je odabrao/odabrala pijuna i razmišlja...",
+  "@aSelectionneSonPionEtReflechit": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "termineJeu": "ZAVRŠENO: {gameName}",
+  "@termineJeu": {
+    "placeholders": {
+      "gameName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aRejointLaPartie": "{playerName} se pridružio/pridružila igri!",
+  "@aRejointLaPartie": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aQuitteLaPartie": "{removedPlayerName} je napustio/napustila igru.",
+  "@aQuitteLaPartie": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "@aEteSignaleEtMasque": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
+  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
+  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
+  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
+  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
+  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
+  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
+  "photoDeProfilMiseA": "Photo de profil mise à jour !",
+  "echecDuChangementDePhoto": "Échec du changement de photo.",
+  "k3CaracteresMinimum": "3 caractères minimum",
+  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
+  "unAmi": "Un ami",
+  "ceJoueur": "ce joueur",
+  "preparationDeLaRecherche": "Préparation de la recherche...",
+  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
+  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
+  "legendeVivante": "Légende Vivante",
+  "grandMaitre": "Grand Maître",
+  "stratege": "Stratège",
+  "initie": "Initié",
+  "illimiteesVip": "Illimitées (VIP)",
+  "pieces": "{playerStatecoins} pièces",
+  "@pieces": {
+    "placeholders": {
+      "playerStatecoins": {
+        "type": "Object"
+      }
+    }
+  },
+  "utilisateurNonConnecte": "Utilisateur non connecté.",
+  "entrezUnPseudo": "Entrez un pseudo",
+  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
+  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
+  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
+  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
+  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
+  "derniereVersion": "Dernière version",
+  "echecDeLEnvoi": "Échec de l''envoi.",
+  "demandeDAmiEnvoyeeA": "Zahtjev za prijateljstvo poslan korisniku {name}!",
+  "@demandeDAmiEnvoyeeA": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteDebloque": "{name} je deblokiran.",
+  "@aEteDebloque": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "comportementInapproprieOuInsultes": "Neprikladno ponašanje ili uvrede",
+  "spamOuPublicite": "Spam ili oglašavanje",
+  "pseudoOuImageOffensante": "Uvredljiv nadimak ili slika",
+  "signalementEnvoyeConcernantMerciDe": "Prijava poslana u vezi s {name}. Hvala na oprezu!",
+  "@signalementEnvoyeConcernantMerciDe": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueur1": "Joueur ({bUid})",
+  "@joueur1": {
+    "placeholders": {
+      "bUid": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteDebloque1": "{bName} je deblokiran.",
+  "@aEteDebloque1": {
+    "placeholders": {
+      "bName": {
+        "type": "Object"
+      }
+    }
+  },
+  "enableVideo": "Uključi video",
+  "pseudoDisponible": "✅ Pseudo disponible",
+  "entrezUnEmailValide": "Entrez un email valide",
+  "k6CaracteresMinimum": "6 caractères minimum",
+  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
+  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
+  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
+  "politiqueDeConfidentialite": "Politique de Confidentialité",
+  "miseAJourRequise": "Mise à jour requise",
+  "joueursBloques": "Blokirani igrači ({blockedListlength})",
+  "@joueursBloques": {
+    "placeholders": {
+      "blockedListlength": {
+        "type": "Object"
+      }
+    }
+  },
+  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
 }

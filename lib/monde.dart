@@ -10,7 +10,17 @@ import 'package:random_string/random_string.dart';
 import 'theme/app_colors.dart';
 import 'widgets/app_buttons.dart';
 import 'matchmaking_localization.dart';
+import 'l10n/app_localizations.dart';
+import 'game_data_words.dart';
 
+
+AppLocalizations get _l10n {
+  try {
+    return lookupAppLocalizations(Locale(GameWords.currentLanguage));
+  } catch (_) {
+    return lookupAppLocalizations(const Locale('fr'));
+  }
+}
 // Liste des jeux pour le mode "Monde" (inchangée)
 const List<Map<String, dynamic>> worldGames = [
   {'name': 'Blokus', 'icon': Icons.grid_on, 'image': 'blokus.webp'},
@@ -323,7 +333,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animController; // Ajoutez cette variable
 
-  String _statusMessage = "Préparation de la recherche...";
+  String _statusMessage = _l10n.preparationDeLaRecherche;
   Timer? _searchTimer;
   Timer? _redirectTimer;
   Timer? _elapsedTimer;
@@ -793,7 +803,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
       if (!_isDisposed) {
         setState(() {
           _statusMessage =
-              "Erreur de connexion au matchmaking. Veuillez réessayer.";
+              AppLocalizations.of(context)!.erreurDeConnexionAuMatchmaking;
         });
         print("Erreur _findAndJoinGame: $e");
       }
@@ -840,7 +850,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             print("Erreur d'écoute de la salle: $error");
             if (!_isDisposed) {
               setState(
-                () => _statusMessage = "Erreur de connexion à la salle.",
+                () => _statusMessage = AppLocalizations.of(context)!.erreurDeConnexionALa,
               );
             }
           },

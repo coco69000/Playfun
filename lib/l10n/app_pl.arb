@@ -1001,7 +1001,14 @@
   "votreFlotteTirsEnnemisRecus": "Twoja Flota (Otrzymane strzały wroga)",
   "elimine": "Wyeliminowany",
   "tapisVide": "Pusty stół",
-  "ecrireAu": "Napisz do '{0}'...",
+  "ecrireAu": "Napisz do {target}...",
+  "@ecrireAu": {
+    "placeholders": {
+      "target": {
+        "type": "Object"
+      }
+    }
+  },
   "reflechit": "'{imię}' myśli... '{name}'",
   "faceAFaceCoteA": "Pojedynek (obok siebie)",
   "totalAdversaire": "WYNIK PRZECIWNIKA",
@@ -1877,10 +1884,10 @@
   "choisissezUneCarteFaceCachee": "Wybierz losową zakrytą kartę",
   "enAttenteDeLaPioche": "Oczekiwanie na dobieranie...",
   "laPartieDeBigTwo": "Gra w Wielką Dwójkę zakończona!",
-  "auTourDe2": "Tura gracza {resolvePlayerNamecurrentPlayerId}",
+  "auTourDe2": "Tura gracza {playerName}",
   "@auTourDe2": {
     "placeholders": {
-      "resolvePlayerNamecurrentPlayerId": {
+      "playerName": {
         "type": "Object"
       }
     }
@@ -3575,7 +3582,7 @@
       }
     }
   },
-  "votreMotDuJourPrononcez": "Twoje słowo dnia: ''{newWord}''. Wypowiedz je na czacie przed zachodem słońca!",
+  "votreMotDuJourPrononcez": "Twoje słowo dnia: '{newWord}'. Wypowiedz je na czacie przed zachodem słońca!",
   "@votreMotDuJourPrononcez": {
     "placeholders": {
       "newWord": {
@@ -4752,5 +4759,257 @@
         "type": "Object"
       }
     }
-  }
+  },
+  "meute": "wataha",
+  "aiPromptLeJuge": "Génère des questions amusantes sur un joueur (utilise le tag ''''). Thème : {finalPrompt}",
+  "@aiPromptLeJuge": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "logYamsStart": "Gra w Kości się zaczyna!",
+  "logClueGivingStart": "Gra się zaczyna! Podaj swoją wskazówkę...",
+  "logBeloteStart": "La partie de Belote commence !",
+  "logBlokusStart": "Gra w Blokus się zaczyna!",
+  "pokerFlop": "--- FLOP ---",
+  "pokerTurn": "--- TURN ---",
+  "pokerRiver": "--- RIVER ---",
+  "aTireDefi": "🎲 {targetPlayerName} a tiré : {challengeLabel} !",
+  "@aTireDefi": {
+    "placeholders": {
+      "targetPlayerName": {
+        "type": "Object"
+      },
+      "challengeLabel": {
+        "type": "Object"
+      }
+    }
+  },
+  "lEquipeAReveleLAssassin": "L''équipe {teamName} a révélé l''Assassin !",
+  "@lEquipeAReveleLAssassin": {
+    "placeholders": {
+      "teamName": {
+        "type": "Object"
+      }
+    }
+  },
+  "lancerLeDefi": "LANCER LE DÉFI",
+  "maximumPossibleCartes": "Maximum possible : {maximumBid} cartes",
+  "@maximumPossibleCartes": {
+    "placeholders": {
+      "maximumBid": {
+        "type": "Object"
+      }
+    }
+  },
+  "reflechitAUnDefiDeCartes": "{bidderName} réfléchit à un défi de {liveAmount} cartes...",
+  "@reflechitAUnDefiDeCartes": {
+    "placeholders": {
+      "bidderName": {
+        "type": "Object"
+      },
+      "liveAmount": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreMainCartes": "VOTRE MAIN ({count} cartes)",
+  "@votreMainCartes": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "pictionaryStrokesCount": "{count}/30 traits",
+  "@pictionaryStrokesCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "indicesSoumisCount": "Indices soumis : {submitted} / {total}",
+  "@indicesSoumisCount": {
+    "placeholders": {
+      "submitted": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueurAPerdu": "{loserName} przegrywa!",
+  "@joueurAPerdu": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
+  "couleurChoisie": "Couleur choisie :",
+  "pokerRaiseTo": "Przebij do {amount}",
+  "@pokerRaiseTo": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
+  "enchere": "ENCHÈRE",
+  "reponseDeJoueur": "Réponse de {guesserName} : \"{answer}\"",
+  "@reponseDeJoueur": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      },
+      "answer": {
+        "type": "Object"
+      }
+    }
+  },
+  "carteSuivante": "Carte suivante",
+  "roleLabel": "Rôle:",
+  "obligatoire": "Wymagane",
+  "aSelectionneSonPionEtReflechit": "{playerName} wybrał(a) pionek i myśli...",
+  "@aSelectionneSonPionEtReflechit": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "termineJeu": "ZAKOŃCZONE: {gameName}",
+  "@termineJeu": {
+    "placeholders": {
+      "gameName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aRejointLaPartie": "{playerName} dołączył(a) do gry!",
+  "@aRejointLaPartie": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aQuitteLaPartie": "{removedPlayerName} opuścił(a) grę.",
+  "@aQuitteLaPartie": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteSignaleEtMasque": "{targetName} a été signalé et masqué pour vous.",
+  "@aEteSignaleEtMasque": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
+  "impossibleDObtenirUnJeton": "Impossible d''obtenir un jeton d''accès vidéo LiveKit sécurisé.",
+  "veuillezEntrerUneAdresseEmail": "Veuillez entrer une adresse email valide.",
+  "veuillezEntrerVotreMotDe": "Veuillez entrer votre mot de passe actuel.",
+  "entrezVotreMotDePasse": "Entrez votre mot de passe actuel.",
+  "leNouveauMotDePasse": "Le nouveau mot de passe doit faire au moins 6 caractères.",
+  "lesDeuxMotsDePasse": "Les deux mots de passe ne correspondent pas.",
+  "photoDeProfilMiseA": "Photo de profil mise à jour !",
+  "echecDuChangementDePhoto": "Échec du changement de photo.",
+  "k3CaracteresMinimum": "3 caractères minimum",
+  "cePseudoEstDejaPris": "Ce pseudo est déjà pris.",
+  "unAmi": "Un ami",
+  "ceJoueur": "ce joueur",
+  "preparationDeLaRecherche": "Préparation de la recherche...",
+  "erreurDeConnexionAuMatchmaking": "Erreur de connexion au matchmaking. Veuillez réessayer.",
+  "erreurDeConnexionALa": "Erreur de connexion à la salle.",
+  "legendeVivante": "Légende Vivante",
+  "grandMaitre": "Grand Maître",
+  "stratege": "Stratège",
+  "initie": "Initié",
+  "illimiteesVip": "Illimitées (VIP)",
+  "pieces": "{playerStatecoins} pièces",
+  "@pieces": {
+    "placeholders": {
+      "playerStatecoins": {
+        "type": "Object"
+      }
+    }
+  },
+  "utilisateurNonConnecte": "Utilisateur non connecté.",
+  "entrezUnPseudo": "Entrez un pseudo",
+  "cePseudoEstDejaPris1": "Ce pseudo est déjà pris",
+  "pseudoDejaPrisParUn": "❌ Pseudo déjà pris par un autre joueur",
+  "cetteVersionDeLApplication": "Cette version de l''application est obsolète. Veuillez installer la dernière version.",
+  "playfunEstActuellementEnMaintenance": "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !",
+  "uneNouvelleVersionDePlayfun": "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l''application pour continuer à jouer.",
+  "derniereVersion": "Dernière version",
+  "echecDeLEnvoi": "Échec de l''envoi.",
+  "demandeDAmiEnvoyeeA": "Wysłano zaproszenie do znajomych do {name}!",
+  "@demandeDAmiEnvoyeeA": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteDebloque": "{name} został odblokowany.",
+  "@aEteDebloque": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "comportementInapproprieOuInsultes": "Niewłaściwe zachowanie lub obelgi",
+  "spamOuPublicite": "Spam lub reklama",
+  "pseudoOuImageOffensante": "Obraźliwy pseudonim lub zdjęcie",
+  "signalementEnvoyeConcernantMerciDe": "Zgłoszenie dotyczące {name} zostało wysłane. Dziękujemy za czujność!",
+  "@signalementEnvoyeConcernantMerciDe": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueur1": "Joueur ({bUid})",
+  "@joueur1": {
+    "placeholders": {
+      "bUid": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteDebloque1": "{bName} został odblokowany.",
+  "@aEteDebloque1": {
+    "placeholders": {
+      "bName": {
+        "type": "Object"
+      }
+    }
+  },
+  "enableVideo": "Włącz wideo",
+  "pseudoDisponible": "✅ Pseudo disponible",
+  "entrezUnEmailValide": "Entrez un email valide",
+  "k6CaracteresMinimum": "6 caractères minimum",
+  "pasDeCompteSInscrire": "Pas de compte ? S''inscrire",
+  "dejaUnCompteSeConnecter": "Déjà un compte ? Se connecter",
+  "conditionsGeneralesDUtilisationCgu": "Conditions Générales d''Utilisation (CGU / EULA)",
+  "politiqueDeConfidentialite": "Politique de Confidentialité",
+  "miseAJourRequise": "Mise à jour requise",
+  "joueursBloques": "Zablokowani gracze ({blockedListlength})",
+  "@joueursBloques": {
+    "placeholders": {
+      "blockedListlength": {
+        "type": "Object"
+      }
+    }
+  },
+  "identifiantsIncorrectsOuCompteInexistant": "Identifiants incorrects ou compte inexistant."
 }

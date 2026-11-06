@@ -1833,7 +1833,7 @@ class FirebaseService {
       case 'Blanc Manger Coco':
         return _l10n.genereDesPhrasesCourtesA1(finalPrompt);
       case 'Le Juge':
-        return "Génère des questions amusantes sur un joueur (utilise le tag '{player}'). Thème : $finalPrompt";
+        return _l10n.aiPromptLeJuge(finalPrompt);
       case 'Qui Pourrait le Plus ?':
         return _l10n.genereDesSituationsHumoristiquesEt1(finalPrompt);
       default:
@@ -2821,7 +2821,7 @@ class FirebaseService {
       final String status = pendingGame['status'] ?? '';
 
       if (gState == 'gameOver' || gState == 'finished' || status == 'cancelled') {
-        String winnerName = gData['players']?[gData['gameWinner']]?['name'] ?? 'Inconnu';
+        String winnerName = gData['players']?[gData['gameWinner']]?['name'] ?? _l10n.inconnu;
         String reason = gData['gameEndReason'] ?? '';
         await _db.collection('lounges').doc(loungeId).update({
           'pendingGame': FieldValue.delete(),
@@ -2857,7 +2857,7 @@ class FirebaseService {
           await sendLoungeMessage(
             loungeId,
             'system',
-            'Système',
+            _l10n.systeme,
             _l10n.laPartieEstTermineeTous,
             type: 'game_result',
             extraData: {
@@ -3269,7 +3269,7 @@ class FirebaseService {
     }
 
     for (String pId in allPlayerIds) {
-      String pName = 'Joueur';
+      String pName = _l10n.joueur;
       if (players[pId] is Map &&
           players[pId]['name'] != null &&
           players[pId]['name'] != 'Inconnu' &&
@@ -4858,7 +4858,7 @@ class FirebaseService {
 
       Map<String, dynamic> updates = {
         'players': players,
-        'gameLog': FieldValue.arrayUnion(["$playerName a rejoint la partie !"]),
+        'gameLog': FieldValue.arrayUnion([_l10n.aRejointLaPartie(playerName)]),
       };
 
       // Si l'ancien hôte n'est plus là, le nouveau prend le relais (selon ta règle)
@@ -6204,7 +6204,7 @@ class FirebaseService {
             (playerList as List).remove(playerIdToRemove);
           });
 
-          List<String> newLogs = ["$removedPlayerName a quitté la partie."];
+          List<String> newLogs = [_l10n.aQuitteLaPartie(removedPlayerName)];
           Map<String, dynamic> updates = {
             'players': players,
             'playerOrder': playerOrder,
@@ -6220,7 +6220,7 @@ class FirebaseService {
             final String remainingName =
                 remainingPlayerId != null
                     ? (players[remainingPlayerId]?['name'] ?? _l10n.joueur)
-                    : 'Inconnu';
+                    : _l10n.inconnu;
 
             updates['gameState'] = 'gameOver';
             updates['gameWinner'] = remainingPlayerId;
@@ -6670,7 +6670,7 @@ class FirebaseService {
             'currentPhase': 'turn_result',
             'eliminatedThisTurn':
                 eliminatedPlayerId != null ? [eliminatedPlayerId] : [],
-            'turnLog': FieldValue.arrayUnion(["Le temps de vote est écoulé !"]),
+            'turnLog': FieldValue.arrayUnion([_l10n.leTempsDeVoteEst]),
             'turnStartTime': FieldValue.serverTimestamp(),
           });
         }
@@ -6754,7 +6754,7 @@ class FirebaseService {
     }
 
     for (String pId in allPlayerIds) {
-      String pName = 'Joueur';
+      String pName = _l10n.joueur;
       if (players[pId] is Map &&
           players[pId]['name'] != null &&
           players[pId]['name'] != 'Inconnu' &&
@@ -6797,7 +6797,7 @@ class FirebaseService {
       'yamsRollsLeft': 3,
       'yamsScores': scores,
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': ["La partie de Yams commence !"],
+      'gameLog': [_l10n.logYamsStart],
     });
   }
 
@@ -8234,7 +8234,7 @@ class FirebaseService {
       final bool ajouter1 =
           gameData['gribouillisSettings']?['ajouter1'] ?? false;
       final int currentStep = gameData['currentStep'];
-      final String myName = players[playerId]?['name'] ?? 'Inconnu';
+      final String myName = players[playerId]?['name'] ?? _l10n.inconnu;
 
       final newStep = {
         'type': type,
@@ -8781,7 +8781,7 @@ class FirebaseService {
         return;
 
       String targetRole = playerData[targetId]?['role'] ?? 'Simple Villageois';
-      String targetName = playerData[targetId]?['name'] ?? 'Inconnu';
+      String targetName = playerData[targetId]?['name'] ?? _l10n.inconnu;
 
       bool isWolf =
           GameData.roleCamps[targetRole] == 'loups' ||
@@ -9220,7 +9220,7 @@ class FirebaseService {
         shouldAdvance = true;
       } else {
         String targetRole = playerData[targetId]?['role'] ?? 'Inconnu';
-        String targetName = playerData[targetId]?['name'] ?? 'Inconnu';
+        String targetName = playerData[targetId]?['name'] ?? _l10n.inconnu;
 
         if (!(playerData[spyId]?['privateInfo']?.contains("infecté") ??
                 false) &&
@@ -9544,7 +9544,7 @@ class FirebaseService {
     deadThisNightIds = deadThisNightIds.toSet().toList();
 
     // 5. Application des morts en cascade (Amoureux, Capitaine, Chasseur, Fossoyeur)
-    List<String> logMessages = ["Le soleil se lève sur Thiercelieux..."];
+    List<String> logMessages = [_l10n.leSoleilSeLeveSur];
     List<String> deadThisNightNames = [];
     String? chasseurDiedId, captainDiedId, fossoyeurDiedId;
     List<String> processingQueue = List.from(deadThisNightIds);
@@ -9558,7 +9558,7 @@ class FirebaseService {
 
       playerData[deadId]['status'] = 'mort';
       playerData[deadId]['revealedRole'] = playerData[deadId]['role'];
-      deadThisNightNames.add(playerData[deadId]['name'] ?? 'Inconnu');
+      deadThisNightNames.add(playerData[deadId]['name'] ?? _l10n.inconnu);
       processedDeaths.add(deadId);
 
       if (playerData[deadId]['role'] == 'Chasseur' &&
@@ -11967,7 +11967,7 @@ class FirebaseService {
       'playerClues': {},
       'votes': {},
       'eliminatedOrder': [],
-      'turnLog': ["La partie commence ! Donnez votre indice..."],
+      'turnLog': [_l10n.logClueGivingStart],
       'turnStartTime': FieldValue.serverTimestamp(),
       'inactiveTurnCounts': {for (var pId in playerIds) pId: 0},
     });
@@ -12062,7 +12062,7 @@ class FirebaseService {
     await _db.collection('games').doc(gameCode).update({
       'currentPhase': 'voting',
       'votes': {},
-      'turnLog': FieldValue.arrayUnion(["La phase de vote a commencé !"]),
+      'turnLog': FieldValue.arrayUnion([_l10n.laPhaseDeVoteA]),
       'turnStartTime': FieldValue.serverTimestamp(),
     });
   }
@@ -12309,7 +12309,7 @@ class FirebaseService {
         'currentPlayerIndex': firstActiveIndex,
         'votes': {},
         'playerClues': {},
-        'turnLog': FieldValue.arrayUnion(["Un nouveau tour commence."]),
+        'turnLog': FieldValue.arrayUnion([_l10n.unNouveauTourCommence]),
         'turnStartTime': FieldValue.serverTimestamp(),
       });
     }
@@ -15256,7 +15256,7 @@ class FirebaseService {
             'aoVPhase': 'performing',
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : _l10n.verite1} !",
+              _l10n.aTireDefi(targetPlayerName, challengeType == 'action' ? _l10n.action1 : _l10n.verite1),
               _l10n.iAucunAutreJoueurDisponible,
             ]),
           });
@@ -15274,7 +15274,7 @@ class FirebaseService {
           'aoVCurrentChallenge': null,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : _l10n.verite1} !",
+            _l10n.aTireDefi(targetPlayerName, challengeType == 'action' ? _l10n.action1 : _l10n.verite1),
             _l10n.doitEcrireLeDefi(authorName),
           ]),
         });
@@ -15297,7 +15297,7 @@ class FirebaseService {
           'aoVPhase': 'performing',
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : _l10n.verite1} !",
+            _l10n.aTireDefi(targetPlayerName, challengeType == 'action' ? _l10n.action1 : _l10n.verite1),
           ]),
         });
       }
@@ -15824,7 +15824,7 @@ class FirebaseService {
           40,
           applySpeedBonus: false,
         );
-        final winnerName = players[winnerPlayerId]?['name'] ?? 'Inconnu';
+        final winnerName = players[winnerPlayerId]?['name'] ?? _l10n.inconnu;
         transaction.update(gameRef, {
           'bmcScores': bmcScores,
           'players.$winnerPlayerId.score': FieldValue.increment(1),
@@ -16247,7 +16247,7 @@ class FirebaseService {
         'unoLastActionPlayerId': null,
         'gameState': 'playing',
         'roundState': 'playing_turn',
-        'unoLog': ["La partie de Uno commence !"],
+        'unoLog': [_l10n.laPartieDeUnoCommence],
         ...initialTurnUpdates, // AJOUTÉ
       });
 
@@ -17874,7 +17874,7 @@ class FirebaseService {
           updates['players.$pId.score'] = FieldValue.increment(1);
         }
         updates['gameEndReason'] =
-            "L'équipe ${activeTeam == 'red' ? 'Rouge' : 'Bleue'} a révélé l'Assassin !";
+            _l10n.lEquipeAReveleLAssassin(activeTeam == 'red' ? _l10n.codenamesRed : _l10n.codenamesBlue);
       } else if (wordColor == activeTeam) {
         creditPlayerXp(
           transaction,
@@ -19757,7 +19757,7 @@ class FirebaseService {
             'xp': FieldValue.increment(35),
           }, SetOptions(merge: true));
         }
-        String winnerName = players[winnerId]?['name'] ?? 'Personne';
+        String winnerName = players[winnerId]?['name'] ?? _l10n.personne;
         await gameRef.update({
           'gameState': 'gameOver',
           'gameEndReason':
@@ -21998,7 +21998,7 @@ class FirebaseService {
         'roundState': 'result',
         'roundWinnerId': winnerPlayerId,
         'turnStartTime': FieldValue.serverTimestamp(),
-        'gameLog': FieldValue.arrayUnion(["$winnerName remporte la manche !"]),
+        'gameLog': FieldValue.arrayUnion([_l10n.remporteLaManche(winnerName)]),
       });
     });
   }
@@ -22027,7 +22027,7 @@ class FirebaseService {
     String playerName =
         playerData[playerId]?['name'] ??
         players[playerId]?['name'] ??
-        'Inconnu';
+        _l10n.inconnu;
 
     // Écriture unique dans la sous-collection 'chat' pour éviter la saturation du document principal (1 Mo)
     await gameRef.collection('chat').add({
@@ -22809,17 +22809,17 @@ class FirebaseService {
             deck.removeAt(0),
             deck.removeAt(0),
           ]);
-        log.add("--- FLOP ---");
+        log.add(_l10n.pokerFlop);
         break;
       case 'flop':
         nextPhase = 'turn';
         if (deck.isNotEmpty) communityCards.add(deck.removeAt(0));
-        log.add("--- TURN ---");
+        log.add(_l10n.pokerTurn);
         break;
       case 'turn':
         nextPhase = 'river';
         if (deck.isNotEmpty) communityCards.add(deck.removeAt(0));
-        log.add("--- RIVER ---");
+        log.add(_l10n.pokerRiver);
         break;
       case 'river':
         nextPhase = 'showdown';
@@ -22906,7 +22906,7 @@ class FirebaseService {
       });
 
       final winnerNames = winners
-          .map((id) => playerData[id]?['name'] ?? 'Inconnu')
+          .map((id) => playerData[id]?['name'] ?? _l10n.inconnu)
           .join(' et ');
       winnerAnnouncement =
           _l10n.gagneNtLePotAvec(winnerNames, bestHand?.rank.name ?? _l10n.uneMain);
@@ -23061,7 +23061,7 @@ class FirebaseService {
           gameData['beloteTeamScores'] ?? {'teamA': 0, 'teamB': 0},
       'beloteTargetScore': gameData['beloteTargetScore'] ?? 500,
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': FieldValue.arrayUnion(["La partie de Belote commence !"]),
+      'gameLog': FieldValue.arrayUnion([_l10n.logBeloteStart]),
     });
   }
 
@@ -23555,7 +23555,7 @@ class FirebaseService {
       'blokusCurrentPlayerIndex': 0,
       'blokusPassedPlayers': [],
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': ["La partie de Blokus commence !"],
+      'gameLog': [_l10n.logBlokusStart],
     });
   }
 
@@ -23896,7 +23896,7 @@ class FriendsModeHomeScreen extends StatelessWidget {
               ElevatedButton.icon(
                 icon: Icon(Icons.people),
                 label: Text(
-                  GameUiLocalization.tr(context, "Multijoueur (En ligne)"),
+                  AppLocalizations.of(context)!.multijoueurEnLigne,
                 ),
                 onPressed: () {
                   final String playerId = Provider.of<String>(
@@ -23916,7 +23916,7 @@ class FriendsModeHomeScreen extends StatelessWidget {
               ElevatedButton.icon(
                 icon: Icon(Icons.person),
                 label: Text(
-                  GameUiLocalization.tr(context, "Mode Local (Hors ligne)"),
+                  AppLocalizations.of(context)!.modeLocalHorsLigne,
                 ),
                 onPressed:
                     () => Navigator.push(
@@ -23944,7 +23944,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(GameContentLocalization.ui(context, "Mode Multijoueur")),
+        title: Text(AppLocalizations.of(context)!.modeMultijoueur),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -23961,7 +23961,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: GameContentLocalization.ui(context, "Pseudo"),
+                labelText: AppLocalizations.of(context)!.pseudo,
               ),
               textAlign: TextAlign.center,
             ),
@@ -27482,7 +27482,7 @@ AppLocalizations.of(context)!.communicationEnLigne,
                             children: [
                               SwitchListTile.adaptive(
                                 title: Text(
-"${GameContentLocalization.ui(context, "Activer la Vidéo")} ${forceVideo ? '(${GameContentLocalization.ui(context, "Obligatoire")})' : ''}",
+"${AppLocalizations.of(context)!.enableVideo} ${forceVideo ? '(${AppLocalizations.of(context)!.obligatoire})' : ''}",
 ),
                                 subtitle: Text(
                                   forceVideo
@@ -29438,7 +29438,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     style: TextStyle(fontSize: 14, color: Colors.white),
                     children: [
                       TextSpan(
-                        text: "${"Rôle:"} ",
+                        text: "${AppLocalizations.of(context)!.roleLabel} ",
                         style: TextStyle(color: Colors.white70),
                       ),
                       TextSpan(
@@ -39918,9 +39918,7 @@ AppLocalizations.of(context)!.jouePar,
                     );
                   },
                   child: Text(
-                    GameUiLocalization.tr(context, "pokerRaiseTo", {
-                      'amount': '${raiseAmount.toInt()}',
-                    }),
+                    AppLocalizations.of(context)!.pokerRaiseTo('${raiseAmount.toInt()}'),
                   ),
                 ),
               ],
@@ -40258,7 +40256,7 @@ AppLocalizations.of(context)!.jouePar,
             ),
           if (wildColorChosen != null)
             Text(
-              "${GameUiLocalization.tr(context, "Couleur choisie :")} ${GameUiLocalization.tr(context, wildColorChosen).toUpperCase()}",
+              "${AppLocalizations.of(context)!.couleurChoisie} ${GameUiLocalization.tr(context, wildColorChosen).toUpperCase()}",
               style: TextStyle(
                 color: currentColor,
                 fontWeight: FontWeight.bold,
@@ -44197,8 +44195,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               ),
               SizedBox(height: 5),
               Text(
-                "${GameUiLocalization.tr(context, 'codenamesYouAre')}${redTeam.contains(playerId) ? GameUiLocalization.tr(context, 'codenamesRedTeam') : (blueTeam.contains(playerId) ? GameUiLocalization.tr(context, 'codenamesBlueTeam') : GameUiLocalization.tr(context, 'codenamesSpectator'))}"
-                "${(playerId == masterSpyRed || playerId == masterSpyBlue) ? ' (${GameUiLocalization.tr(context, 'codenamesMasterSpy')})' : ' (${GameUiLocalization.tr(context, 'codenamesAgent')})'}",
+                "${AppLocalizations.of(context)!.codenamesYouAre}${redTeam.contains(playerId) ? AppLocalizations.of(context)!.codenamesRedTeam : (blueTeam.contains(playerId) ? AppLocalizations.of(context)!.codenamesBlueTeam : AppLocalizations.of(context)!.codenamesSpectator)}${(playerId == masterSpyRed || playerId == masterSpyBlue) ? ' (${AppLocalizations.of(context)!.codenamesMasterSpy})' : ' (${AppLocalizations.of(context)!.codenamesAgent})'}",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
@@ -46642,7 +46639,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "${GameUiLocalization.tr(context, "Maximum possible")} : $maximumBid ${GameUiLocalization.tr(context, "cartes")}",
+                    AppLocalizations.of(context)!.maximumPossibleCartes(maximumBid),
                     style: TextStyle(color: Colors.white38, fontSize: 11),
                   ),
                   SizedBox(height: 28),
@@ -46652,7 +46649,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                     child: ElevatedButton.icon(
                       icon: Icon(Icons.flash_on_rounded, size: 20),
                       label: Text(
-                        "${GameUiLocalization.tr(context, "LANCER LE DÉFI")} ($selectedBid)",
+                        "${AppLocalizations.of(context)!.lancerLeDefi} ($selectedBid)",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -46793,7 +46790,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       children: [
                         Text(
                           roundState == 'bidding'
-                              ? "${"ENCHÈRE"} : $currentBid / $totalCardsOnTables"
+                              ? "${AppLocalizations.of(context)!.enchere} : $currentBid / $totalCardsOnTables"
                               : AppLocalizations.of(context)!.phaseDePose,
                           style: TextStyle(
                             fontSize: 12,
@@ -46808,7 +46805,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         Text(
                           isMyTurn
                               ? AppLocalizations.of(context)!.cEstAVotreTour1
-                              : "${"Tour de"} ${players[currentPlayerId]?['name'] ?? '...'}",
+                              : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '...']),
                           style: TextStyle(
                             fontSize: 11,
                             color:
@@ -46889,7 +46886,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       ),
                       SizedBox(width: 6),
                       Text(
-                        "$bidderName ${GameUiLocalization.tr(context, "réfléchit à un défi de")} $liveAmount ${GameUiLocalization.tr(context, "cartes")}...",
+                        AppLocalizations.of(context)!.reflechitAUnDefiDeCartes(bidderName, liveAmount),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
@@ -46982,7 +46979,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                 Expanded(
                                   child: Text(
                                     isMe
-                                        ? "${GameUiLocalization.tr(context, "Moi")} ($name)"
+                                        ? "${AppLocalizations.of(context)!.moi} ($name)"
                                         : name,
                                     style: TextStyle(
                                       fontSize: 12,
@@ -47142,7 +47139,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${GameUiLocalization.tr(context, "VOTRE MAIN")} (${myHand.length} ${GameUiLocalization.tr(context, "cartes")})",
+                        AppLocalizations.of(context)!.votreMainCartes(myHand.length),
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -47745,7 +47742,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         if (pictionaryOnly30Strokes && amIDrawingPlayer) ...[
                           SizedBox(width: 8),
                           Text(
-                            "$_pictionaryStrokeCount/30 ${GameUiLocalization.tr(context, "traits")}",
+                            AppLocalizations.of(context)!.pictionaryStrokesCount(_pictionaryStrokeCount),
                             style: TextStyle(
                               color:
                                   drawingBlocked ? Colors.red : Colors.black54,
@@ -48006,13 +48003,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "${GameUiLocalization.tr(context, "Le mot était :")} ${justOneCurrentWord ?? ''}",
+                  "${AppLocalizations.of(context)!.leMotEtait} ${justOneCurrentWord ?? ''}",
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
                 if (answer.isNotEmpty)
                   Text(
-                    "${"Réponse de"} $guesserName : \"$answer\"",
+                    AppLocalizations.of(context)!.reponseDeJoueur(guesserName, answer),
                     style: TextStyle(color: Colors.white70),
                     textAlign: TextAlign.center,
                   ),
@@ -48024,7 +48021,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    "${"Score"} : $totalScore / $deckIndex",
+                    "${AppLocalizations.of(context)!.score} : $totalScore / $deckIndex",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -48053,7 +48050,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             : Text(
                               deckIndex >= deckTotal
                                   ? AppLocalizations.of(context)!.voirLeScoreFinal
-                                  : "${"Carte suivante"} →",
+                                  : "${AppLocalizations.of(context)!.carteSuivante} →",
                             ),
                   ),
                 if (!isHost)
@@ -48094,7 +48091,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               ),
               SizedBox(height: 30),
               _buildWaitingWidget(
-                "${GameUiLocalization.tr(context, "Indices soumis")} : ${justOneClues.length} / ${players.length - 1}",
+                AppLocalizations.of(context)!.indicesSoumisCount(justOneClues.length, players.length - 1),
                 players,
                 justOneClues.length,
                 players.length - 1,
@@ -48215,7 +48212,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "${"Le mot est :"} ${justOneCurrentWord}",
+                  "${AppLocalizations.of(context)!.leMotEst} ${justOneCurrentWord}",
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(height: 20),
@@ -48447,7 +48444,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${"Manche"} $currentRound",
+                "${AppLocalizations.of(context)!.manche} $currentRound",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
               Row(
@@ -48490,7 +48487,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               Text(
                 isMyTurn
                     ? AppLocalizations.of(context)!.cEstAToi
-                    : "${GameUiLocalization.tr(context, "Au tour de")} $currentPotatoPlayerName",
+                    : AppLocalizations.of(context)!.auTourDe2(currentPotatoPlayerName),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: isMyTurn ? Colors.redAccent : Colors.white,
@@ -48742,7 +48739,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         ),
         SizedBox(height: 20),
         Text(
-          "$loserName ${GameUiLocalization.tr(context, "a perdu !")}",
+          AppLocalizations.of(context)!.joueurAPerdu(loserName),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 10),
@@ -50211,11 +50208,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       style: const TextStyle(fontSize: 12, color: Colors.white),
                       decoration: InputDecoration(
                         hintText:
-                            GameContentLocalization.format(
-                              context,
-                              "Écrire au {0}...",
-                              [_selectedChatType == 'wolf' ? GameContentLocalization.ui(context, "meute") : GameContentLocalization.ui(context, "village")],
-                            ),
+                            AppLocalizations.of(context)!.ecrireAu(_selectedChatType == 'wolf' ? AppLocalizations.of(context)!.meute : AppLocalizations.of(context)!.village),
                         hintStyle: const TextStyle(
                           color: Colors.white30,
                           fontSize: 11,
@@ -66686,7 +66679,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    GameContentLocalization.format(context, "TERMINÉ : {0}", [GameContentLocalization.ui(context, gName)]),
+                    AppLocalizations.of(context)!.termineJeu(GameContentLocalization.ui(context, gName)),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

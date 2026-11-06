@@ -9,7 +9,16 @@ import '../game_rules_localization.dart';
 import '../l10n/app_localizations.dart';
 import '../matchmaking_localization.dart';
 import 'package:image_picker/image_picker.dart';
+import '../game_data_words.dart';
 
+
+AppLocalizations get _l10n {
+  try {
+    return lookupAppLocalizations(Locale(GameWords.currentLanguage));
+  } catch (_) {
+    return lookupAppLocalizations(const Locale('fr'));
+  }
+}
 void showUserProfileDialog(
   BuildContext context, {
   required String targetUid,
@@ -48,7 +57,7 @@ void showUserProfileDialog(
             }
 
             final data = snapshot.data!.data() as Map<String, dynamic>;
-            final String name = data['name'] ?? 'Joueur';
+            final String name = data['name'] ?? _l10n.joueur;
             final String? photoUrl = data['photoUrl'] as String?;
             final int level = data['level'] ?? 1;
             final int xp = data['xp'] ?? 0;
@@ -204,7 +213,7 @@ void showUserProfileDialog(
                                                         if (context.mounted) {
                                                           ScaffoldMessenger.of(context).showSnackBar(
                                                             SnackBar(
-                                                              content: Text(ok ? "Photo de profil mise à jour !" : "Échec de l'envoi."),
+                                                              content: Text(ok ? _l10n.photoDeProfilMiseA : _l10n.echecDeLEnvoi),
                                                               backgroundColor: ok ? Colors.green[800] : Colors.red[800],
                                                             ),
                                                           );
@@ -230,7 +239,7 @@ void showUserProfileDialog(
                                                         if (context.mounted) {
                                                           ScaffoldMessenger.of(context).showSnackBar(
                                                             SnackBar(
-                                                              content: Text(ok ? "Photo de profil mise à jour !" : "Échec de l'envoi."),
+                                                              content: Text(ok ? _l10n.photoDeProfilMiseA : _l10n.echecDeLEnvoi),
                                                               backgroundColor: ok ? Colors.green[800] : Colors.red[800],
                                                             ),
                                                           );
@@ -493,7 +502,7 @@ void showUserProfileDialog(
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              "Demande d'ami envoyée à $name !",
+                                              _l10n.demandeDAmiEnvoyeeA(name),
                                             ),
                                           ),
                                         );
@@ -551,7 +560,7 @@ void showUserProfileDialog(
                                 await FirebaseService().unblockPlayer(myId, targetUid);
                                 if (context.mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("$name a été débloqué.")),
+                                    SnackBar(content: Text(_l10n.aEteDebloque(name))),
                                   );
                                 }
                               },
@@ -655,7 +664,7 @@ void showUserProfileDialog(
                                             );
                                             if (context.mounted) {
                                               ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text("Signalement envoyé concernant $name. Merci de votre vigilance !")),
+                                                SnackBar(content: Text(_l10n.signalementEnvoyeConcernantMerciDe(name))),
                                               );
                                             }
                                           },
@@ -1004,7 +1013,7 @@ void showBlockedUsersDialog(BuildContext context, PlayerState ps) {
                 const Icon(Icons.block, color: Colors.redAccent, size: 22),
                 const SizedBox(width: 8),
                 Text(
-                  "Joueurs bloqués (${blockedList.length})",
+                  AppLocalizations.of(context)!.joueursBloques(blockedList.length),
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Colors.white),
                 ),
               ],
@@ -1030,7 +1039,7 @@ void showBlockedUsersDialog(BuildContext context, PlayerState ps) {
                           future: FirebaseFirestore.instance.collection('users').doc(bUid).get(),
                           builder: (context, snap) {
                             final uData = snap.data?.data() as Map<String, dynamic>?;
-                            final bName = uData?['name'] ?? 'Joueur ($bUid)';
+                            final bName = uData?['name'] ?? AppLocalizations.of(context)!.joueur1(bUid);
 
                             return ListTile(
                               contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
@@ -1060,7 +1069,7 @@ void showBlockedUsersDialog(BuildContext context, PlayerState ps) {
                                   await FirebaseService().unblockPlayer(myId, bUid);
                                   if (context.mounted) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("$bName a été débloqué.")),
+                                      SnackBar(content: Text(AppLocalizations.of(context)!.aEteDebloque1(bName))),
                                     );
                                   }
                                 },

@@ -7,7 +7,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../theme/app_colors.dart';
+import '../l10n/app_localizations.dart';
+import '../game_data_words.dart';
 
+
+AppLocalizations get _l10n {
+  try {
+    return lookupAppLocalizations(Locale(GameWords.currentLanguage));
+  } catch (_) {
+    return lookupAppLocalizations(const Locale('fr'));
+  }
+}
 // --- CONFIGURATION DE LA VERSION ACTUELLE ---
 const int CURRENT_APP_BUILD_NUMBER = 1;
 const String CURRENT_APP_VERSION_NAME = "1.0.0";
@@ -31,7 +41,7 @@ class ForceUpdateService {
 
   /// Déclencheur d'urgence si une Cloud Function renvoie VERSION_OBSOLETE ou SERVEUR_EN_MAINTENANCE
   static final ValueNotifier<bool> isLockdownTriggered = ValueNotifier<bool>(false);
-  static String lockdownMessage = "Cette version de l'application est obsolète. Veuillez installer la dernière version.";
+  static String lockdownMessage = _l10n.cetteVersionDeLApplication;
   static bool lockdownIsMaintenance = false;
 
   static void triggerLockdown({String? message, bool isMaintenance = false}) {
@@ -202,8 +212,8 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
 
     final String updateMessage = data['updateMessage'] ??
         (isMaintenance
-            ? "Playfun est actuellement en maintenance pour améliorer vos soirées. Revenez dans un instant !"
-            : "Une nouvelle version de Playfun est disponible ! Vous devez mettre à jour l'application pour continuer à jouer.");
+            ? AppLocalizations.of(context)!.playfunEstActuellementEnMaintenance
+            : AppLocalizations.of(context)!.uneNouvelleVersionDePlayfun);
 
     // Détection automatique du bon Store (iOS vs Android)
     final String defaultStoreUrl = Platform.isIOS ? IOS_STORE_URL : ANDROID_STORE_URL;
@@ -213,7 +223,7 @@ class _ForceUpdateGateState extends State<ForceUpdateGate> {
         data['storeUrl'] ??
         defaultStoreUrl;
 
-    final String minVersionName = data['minRequiredVersionName'] ?? data['minRequiredVersion'] ?? "Dernière version";
+    final String minVersionName = data['minRequiredVersionName'] ?? data['minRequiredVersion'] ?? AppLocalizations.of(context)!.derniereVersion;
     final String latestVersionName = data['latestVersionName'] ?? minVersionName;
 
     final int activeBuild = ForceUpdateService.currentBuildNumber > 0
@@ -290,7 +300,7 @@ class ForceUpdateScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 28),
                 Text(
-                  isMaintenance ? "Maintenance en cours" : "Mise à jour requise",
+                  isMaintenance ? "Maintenance en cours" : AppLocalizations.of(context)!.miseAJourRequise,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 24,
