@@ -9794,7 +9794,7 @@ class FirebaseService {
           _l10n.leFossoyeurReveleEtaitUn1(playerData[fossoyeurId]['name'], playerData[targetPlayerId]['name'], targetRole);
       if (otherRevealedPlayerId != null) {
         logMessage +=
-            _l10n.etEtaitUnE(playerData[otherRevealedPlayerId]['name'], otherRevealedRole);
+            _l10n.etEtaitUnE(playerData[otherRevealedPlayerId]['name'], otherRevealedRole ?? '');
       }
       transaction.update(gameRef, {
         'gameLog': FieldValue.arrayUnion([logMessage]),
@@ -51272,7 +51272,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         child: Text(
                           isMyTurn
                               ? AppLocalizations.of(context)!.cEstVotreTour
-                              : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? ''])(players[currentPlayerId]?['name'] ?? '...'),
+                              : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '...']),
                           style: TextStyle(
                             color:
                                 isMyTurn
@@ -53650,7 +53650,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                             Text(
                               isMyTurn
                                   ? AppLocalizations.of(context)!.aVotreTour
-                                  : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? ''])(players[currentPlayerId]?['name'] ?? '...'),
+                                  : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '...']),
                               style: TextStyle(
                                 color:
                                     isMyTurn ? getColor(myColor) : Colors.white,
@@ -67118,13 +67118,15 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               ),
                               child: Column(
                                 children: [
-                                 GameContentLocalization.format(context, AppLocalizations.of(context)!.aCreeUnePartieDe, [msg['senderName'], gameName])Localizations.of(context)!.aCreeUnePartieDe,
+                                  Text(
+                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.aCreeUnePartieDe, [msg['senderName'], gameName]),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
                                   ),
-                                  SizedBox(height: 10GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPrets, [joinedPlayers.length])
+                                  SizedBox(height: 10),
+                                  Text(
 GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPrets, [joinedPlayers.length]),
 ),
                                   SizedBox(height: 10),
@@ -67262,7 +67264,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                               ),
                               child: Column(
                                 children: [
-                                 GameContentLocalization.format(context, AppLocalizations.of(context)!.partieDeTerminee, [msg['extraData']['gameName']])Localizations.of(context)!.partieDeTerminee,
+                                  Text(
+                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.partieDeTerminee, [msg['extraData']['gameName']]),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -67279,19 +67282,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                             builder:
                                                 (_) => AlertDialog(
                                                   title: Text(
-         GameContentLocalization.format(context, AppLocalizations.of(context)!.statistiques, [
-                                                        msg['extraData']['gameName'],
-                                                      ]) GameContentLocalization.format(context, AppLocalizations.of(context)!.statistiques, [
+                                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.statistiques, [
                                                         msg['extraData']['gameName'],
                                                       ]),
                                                   ),
                                                   content: Text(
-         GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur1, [
-                                                        msg['extraData']['winnerName'] ??
-                                                            'Inconnu',
-                                                        msg['extraData']['reason'] ??
-                                                            '',
-                                                      ])   GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur1, [
+                                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur1, [
                                                         msg['extraData']['winnerName'] ??
                                                             'Inconnu',
                                                         msg['extraData']['reason'] ??
@@ -68768,7 +68764,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBarGameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e])      GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
             ),
           ),
         );
@@ -68790,7 +68788,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBarGameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e])      GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
             ),
           ),
         );
@@ -68825,7 +68825,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBarGameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e])      GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
             ),
           ),
         );
@@ -68847,7 +68849,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBarGameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e])      GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
             ),
           ),
         );
@@ -68870,9 +68874,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBarGameContentLocalization.format(context, AppLocalizations.of(context)!.erreurDeVote, [
-                e,
-              ]) GameContentLocalization.format(context, AppLocalizations.of(context)!.erreurDeVote, [
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreurDeVote, [
                 e,
               ]),
             ),
@@ -68896,7 +68900,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBarGameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e])      GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+          SnackBar(
+            content: Text(
+              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
             ),
           ),
         );
@@ -69001,9 +69007,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                           size: 18,
                         ),
                         SizedBox(width: 4),
-             GameContentLocalization.format(context, AppLocalizations.of(context)!.tour, [
-                            currentRound,
-                          ])         GameContentLocalization.format(context, AppLocalizations.of(context)!.tour, [
+                        Text(
+                          GameContentLocalization.format(context, AppLocalizations.of(context)!.tour, [
                             currentRound,
                           ]),
                           style: TextStyle(
@@ -69026,7 +69031,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.white24),
                     ),
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.toursRestants, [spinsRemaining])GameContentLocalization.format(context, AppLocalizations.of(context)!.toursRestants, [spinsRemaining]),
+                    child: Text(
+                      GameContentLocalization.format(context, AppLocalizations.of(context)!.toursRestants, [spinsRemaining]),
                       style: TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -69270,7 +69276,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                           ),
                         ),
                         SizedBox(width: 12),
-             GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttenteDuTirageDe, [currentPlayerName])alizations.of(context)!.enAttenteDuTirageDe,
+                        Text(
+                          GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttenteDuTirageDe, [currentPlayerName]),
                           style: TextStyle(
                             color: Colors.white70,
                             fontStyle: FontStyle.italic,
@@ -69300,7 +69307,8 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: typeColor, width: 2),
               ),
-GameContentLocalization.format(context, AppLocalizations.of(context)!.aTire, [currentPlayerName, typeLabel])        GameContentLocalization.format(context, AppLocalizations.of(context)!.aTire, [currentPlayerName, typeLabel]),
+              child: Text(
+                GameContentLocalization.format(context, AppLocalizations.of(context)!.aTire, [currentPlayerName, typeLabel]),
                 style: TextStyle(
                   color: typeColor,
                   fontWeight: FontWeight.bold,
@@ -69410,7 +69418,8 @@ AppLocalizations.of(context)!.redigezLPour,
                       size: 48,
                     ),
                     SizedBox(height: 14),
-     GameContentLocalization.format(context, AppLocalizations.of(context)!.estEnTrainDEcrire, [authorName])ocalizations.of(context)!.estEnTrainDEcrire,
+                    Text(
+                      GameContentLocalization.format(context, AppLocalizations.of(context)!.estEnTrainDEcrire, [authorName]),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -69479,9 +69488,8 @@ AppLocalizations.of(context)!.redigezLPour,
                     ),
                   ),
                   SizedBox(height: 16),
- GameContentLocalization.format(context, AppLocalizations.of(context)!.defiPour, [
-                      currentPlayerName,
-                    ])     GameContentLocalization.format(context, AppLocalizations.of(context)!.defiPour, [
+                  Text(
+                    GameContentLocalization.format(context, AppLocalizations.of(context)!.defiPour, [
                       currentPlayerName,
                     ]),
                     style: TextStyle(
@@ -69557,7 +69565,8 @@ AppLocalizations.of(context)!.redigezLPour,
                       size: 20,
                     ),
                     SizedBox(width: 8),
-     GameContentLocalization.format(context, AppLocalizations.of(context)!.regardezRealiserLeDefi, [currentPlayerName])zations.of(context)!.regardezRealiserLeDefi,
+                    Text(
+                      GameContentLocalization.format(context, AppLocalizations.of(context)!.regardezRealiserLeDefi, [currentPlayerName]),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 13,
@@ -69592,7 +69601,9 @@ AppLocalizations.of(context)!.redigezLPour,
                 ),
               ),
             ),
-            SizedBox(heGameContentLocalization.format(context, AppLocalizations.of(context)!.estCeQueAReleve, [currentPlayerName])pLocalizations.of(context)!.estCeQueAReleve,
+            SizedBox(height: 16),
+            Text(
+              GameContentLocalization.format(context, AppLocalizations.of(context)!.estCeQueAReleve, [currentPlayerName]),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -69617,7 +69628,8 @@ AppLocalizations.of(context)!.redigezLPour,
                 color: Colors.white10,
                 borderRadius: BorderRadius.circular(12),
               ),
-GameContentLocalization.format(context, AppLocalizations.of(context)!.votesRecus, [votes.length, votersCount])   GameContentLocalization.format(context, AppLocalizations.of(context)!.votesRecus, [votes.length, votersCount]),
+              child: Text(
+                GameContentLocalization.format(context, AppLocalizations.of(context)!.votesRecus, [votes.length, votersCount]),
                 style: TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ),
@@ -69796,7 +69808,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.votesRecus
                       children: [
                         Icon(Icons.star, color: Colors.amber, size: 18),
                         SizedBox(width: 4),
-             GameContentLocalization.format(context, AppLocalizations.of(context)!.xpPour, [earnedXp, currentPlayerName])       GameContentLocalization.format(context, AppLocalizations.of(context)!.xpPour, [earnedXp, currentPlayerName]),
+                        Text(
+                          GameContentLocalization.format(context, AppLocalizations.of(context)!.xpPour, [earnedXp, currentPlayerName]),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -70292,7 +70305,8 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                     ),
                   ),
                   SizedBox(height: 4),
- GameContentLocalization.format(context, AppLocalizations.of(context)!.aGagneCetteManche, [displayWinner])ocalizations.of(context)!.aGagneCetteManche,
+                  Text(
+                    GameContentLocalization.format(context, AppLocalizations.of(context)!.aGagneCetteManche, [displayWinner]),
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.white70,
@@ -70330,7 +70344,8 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               size: 18,
                             ),
                             SizedBox(width: 8),
-                     GameContentLocalization.format(context, AppLocalizations.of(context)!.prets, [readyCount, totalPlayers])        GameContentLocalization.format(context, AppLocalizations.of(context)!.prets, [readyCount, totalPlayers]),
+                            Text(
+                              GameContentLocalization.format(context, AppLocalizations.of(context)!.prets, [readyCount, totalPlayers]),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -70362,9 +70377,8 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                         : Colors.amberAccent,
                               ),
                               SizedBox(width: 4),
-                         GameContentLocalization.format(context, AppLocalizations.of(context)!.s, [_secondsLeft])            GameContentLocalization.format(context, AppLocalizations.of(context)!.s, [
-                  remainingSeconds,
-                ]),
+                              Text(
+                                GameContentLocalization.format(context, AppLocalizations.of(context)!.s, [_secondsLeft]),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   color:

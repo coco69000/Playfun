@@ -30,7 +30,25 @@ class AppLocalizationsTr extends AppLocalizations {
   String get confirmerLesEquipes => 'Takımları Onayla';
 
   @override
+  String get jeuDeSoiree => 'Parti Oyunu';
+
+  @override
+  String get multijoueurEnLigne => 'Çok Oyunculu (Çevrimiçi)';
+
+  @override
+  String get modeLocalHorsLigne => 'Yerel Mod (Çevrimdışı)';
+
+  @override
+  String get modeMultijoueur => 'Çok Oyunculu Mod';
+
+  @override
   String get entrezVotrePseudo => 'Takma adını gir';
+
+  @override
+  String get pseudo => 'Kullanıcı Adı';
+
+  @override
+  String get creerUnePartie => 'Oyun oluştur';
 
   @override
   String get veuillezEntrerUnPseudo => 'Lütfen bir takma ad gir.';
@@ -970,6 +988,9 @@ class AppLocalizationsTr extends AppLocalizations {
       '⚠️ Zincirleme alma! Yanıp sönen taşı oynatmalısınız.';
 
   @override
+  String get aSelectionneSonPionEt => '{0} piyonunu seçti ve düşünüyor...';
+
+  @override
   String get vousDevezSelectionnerLePion =>
       'Turuncu vurgulu taşı seçmelisiniz.';
 
@@ -987,10 +1008,10 @@ class AppLocalizationsTr extends AppLocalizations {
       'Sonraki turu başlatması için kurucu bekleniyor...';
 
   @override
-  String get equipeAPts => 'Takım A: {puan} puan';
+  String get equipeAPts => 'Takım A: {pts} puan';
 
   @override
-  String get equipeBPts => 'B takımı: {puan} puan';
+  String get equipeBPts => 'B takımı: {pts} puan';
 
   @override
   String get cEstAToiDe => 'Tahmin etme sırası SENDE!';
@@ -1078,7 +1099,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get couche => 'Çekildi';
 
   @override
-  String get miseActuelle => 'Mevcut Bahis: {miktar}';
+  String get miseActuelle => 'Mevcut Bahis: {amount}';
 
   @override
   String get enAttente => 'Bekleniyor...';
@@ -1385,7 +1406,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get classementFinal1 => 'Final sıralaması';
 
   @override
-  String pt(Object eValueKey, Object eValueValue, Object p, Object p2) {
+  String pt(Object p, Object eValueKey, Object eValueValue, Object p2) {
     return '$p. $eValueKey: $eValueValue puan$p2';
   }
 
@@ -1441,6 +1462,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get cloturerLeVote => 'Oylamayı kapat';
 
   @override
+  String get k0S => '0 s';
+
+  @override
   String get tempsRestantS => 'Kalan süre: {0} s';
 
   @override
@@ -1450,10 +1474,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get lancerLeDe => 'ZAR AT';
 
   @override
-  String get scorePoints => 'Puan: {puan} puan';
+  String get scorePoints => 'Puan: {score} puan';
 
   @override
-  String get dominosRestants => 'Kalan domino taşları: {sayı}';
+  String get dominosRestants => 'Kalan domino taşları: {sayı} {count}';
 
   @override
   String get impossibleDeJouerCeDomino => 'Bu domino buraya oynanamaz.';
@@ -1468,7 +1492,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get extremites => 'Uçlar: ';
 
   @override
-  String get pioche2 => 'Beraberlik: {Sayım}';
+  String get pioche2 => 'Beraberlik: {Sayım} {count}';
 
   @override
   String get piocher => 'Çek';
@@ -1485,7 +1509,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get clic => 'TIK';
 
   @override
-  String get lancersRestants => 'Kalan Atışlar: {Sayı}';
+  String get lancersRestants => 'Kalan Atışlar: {Sayı} {count}';
 
   @override
   String get combinaison => 'KOMBİNASYON';
@@ -1494,7 +1518,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get grilleDePts => '{0} GRID ({1} puan)';
 
   @override
-  String pts3(Object myTotal, Object p) {
+  String pts3(Object p, Object myTotal) {
     return '$p ($myTotal hasta)';
   }
 
@@ -1525,7 +1549,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get carteAPrendre => 'ALINACAK KART';
 
   @override
-  String get votreMain => 'Elin ({say})';
+  String get votreMain => 'Elin ({count})';
 
   @override
   String get touchezUneCartePourLa => 'Oynamak için bir karta dokunun';
@@ -1534,7 +1558,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get aucuneCombinaisonEtaleeSurLa => 'Masada henüz kombinasyon yok';
 
   @override
-  String get etaler => 'Yayılma ({sayısı})';
+  String get etaler => 'Yayılma ({sayısı}) {count}';
 
   @override
   String get defausserFin => 'At ve bitir';
@@ -2605,7 +2629,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tapisVide => 'Boş alan';
 
   @override
-  String get reflechit => '{} sanıyor...';
+  String get ecrireAu => '{0}...';
+
+  @override
+  String get reflechit => '{} sanıyor... {name}';
 
   @override
   String get faceAFaceCoteA => 'Birebir (yan yana)';
@@ -2617,7 +2644,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get prendreLAtoutOuPasser => 'KOZU AL VEYA PAS GEÇ:';
 
   @override
-  String get combinaisonsDe => '{isimlerinin birleşimleri}';
+  String get combinaisonsDe => '{isimlerinin birleşimleri} {name}';
 
   @override
   String get ilDevraDonnerLePremier => 'İlk ipucunu onun vermesi gerekecek';
@@ -2641,17 +2668,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get understoodButton => 'Anlıyorum';
 
   @override
-  String skyjoRoundEnderNotice(Object name, Object roundEnderName) {
+  String skyjoRoundEnderNotice(Object name) {
     return '$name önce tüm kartlarını açtı.';
   }
 
   @override
-  String skyjoRoundScoreNotice(
-    Object roundScore,
-    Object totalScore,
-    Object rScore,
-    Object tScore,
-  ) {
+  String skyjoRoundScoreNotice(Object roundScore, Object totalScore) {
     return '+$roundScore bu tur  •  Toplam: $totalScore puan';
   }
 
@@ -2674,37 +2696,32 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String skyjoCardsRevealedCount(Object count, Object revealedCount) {
+  String skyjoCardsRevealedCount(Object count) {
     return '$count / 2 kart çevrildi';
   }
 
   @override
-  String ceTurnOfPlayer(Object name, Object currentPlayerName) {
+  String ceTurnOfPlayer(Object name) {
     return 'SIRA: $name';
   }
 
   @override
-  String ceStepOfTotal(
-    Object step,
-    Object total,
-    Object currentRound,
-    Object totalSteps,
-  ) {
+  String ceStepOfTotal(Object step, Object total) {
     return 'Adım $step / $total';
   }
 
   @override
-  String ceVisibleSnippetOf(Object name, Object previousAuthorName) {
+  String ceVisibleSnippetOf(Object name) {
     return '$name tarafından görünen kısım:';
   }
 
   @override
-  String cePlayerWriting(Object name, Object currentPlayerName) {
+  String cePlayerWriting(Object name) {
     return '$name yazıyor...';
   }
 
   @override
-  String ceStoryNumber(Object index, Object paperIndex) {
+  String ceStoryNumber(Object index) {
     return 'HİKAYE #$index';
   }
 
@@ -2724,10 +2741,21 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get dobbleAllCardsFound => 'Tüm kartlar eşleşti!';
+
+  @override
   String get dobbleDealingCards => 'Kartlar dağıtılıyor...';
 
   @override
   String get dobbleCenterCard => 'ORTA KART';
+
+  @override
+  String dobbleDeckCards(Object count) {
+    return 'ÇEK ($count kart)';
+  }
+
+  @override
+  String get dobbleTapSameSymbol => 'Aynı sembolü bul!';
 
   @override
   String dobbleMyCardsCount(Object count) {
@@ -2741,6 +2769,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dobbleTooManyErrors => 'Çok fazla seri hata.';
 
   @override
+  String get dobblePenaltyWait => 'Cezayı bekle!';
+
+  @override
+  String get dobbleWrongSymbolWarning => 'Kötü sembol! Tıkanıklığa dikkat et.';
+
+  @override
   String dobbleFoundSymbol(Object name) {
     return '$name sembolü buldu!';
   }
@@ -2749,37 +2783,32 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dobbleSymbolWas => 'Sembol şuydu:';
 
   @override
-  String pokerPot(Object amount, Object pot) {
+  String pokerPot(Object amount) {
     return 'Pot: $amount \\\$';
   }
 
   @override
-  String pokerRaiseAlert(
-    Object name,
-    Object amount,
-    Object previewAmount,
-    Object previewPlayerName,
-  ) {
+  String pokerRaiseAlert(Object name, Object amount) {
     return '⚠️ $name, $amount \\\$ tutarına yükseltmeye hazırlanıyor!';
   }
 
   @override
-  String pokerCall(Object amount, Object callAmount) {
+  String pokerCall(Object amount) {
     return 'Gör ($amount)';
   }
 
   @override
-  String unoYouMustDraw(Object count, Object pendingDraw) {
+  String unoYouMustDraw(Object count) {
     return '$count kart çekmelisiniz!';
   }
 
   @override
-  String unoMustDraw(Object count, Object name, Object pendingDraw) {
+  String unoMustDraw(Object count) {
     return '$count kart çekmeli!';
   }
 
   @override
-  String unoDrawCountCards(Object count, Object pendingDraw) {
+  String unoDrawCountCards(Object count) {
     return '$count kart çek';
   }
 
@@ -2793,9 +2822,21 @@ class AppLocalizationsTr extends AppLocalizations {
   String get codenamesBlueTeam => 'Mavi Takım';
 
   @override
+  String get codenamesSpectator => 'İzleyici';
+
+  @override
+  String get codenamesMasterSpy => 'Casus Başı';
+
+  @override
+  String get codenamesAgent => 'Ajan';
+
+  @override
   String codenamesTeamTurn(Object team) {
     return 'Sıra $team takımında';
   }
+
+  @override
+  String get codenamesYouAre => 'Rolünüz: ';
 
   @override
   String get codenamesMasterSpyView => 'Casus Başı Görünümü (Anahtar Kart)';
@@ -2836,12 +2877,12 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String timesUpTeamAScore(Object score, Object scoreA, Object teamA) {
+  String timesUpTeamAScore(Object score) {
     return 'A Takımı: $score';
   }
 
   @override
-  String timesUpTeamBScore(Object score, Object scoreB, Object teamB) {
+  String timesUpTeamBScore(Object score) {
     return 'B Takımı: $score';
   }
 
@@ -2967,6 +3008,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get petitBacAddCategory => 'Kategori ekle';
 
   @override
+  String get petitBacMinOneCategory => 'En az bir kategoriye ihtiyacınız var!';
+
+  @override
   String get petitBacValidateCategories => 'Kategorileri Onayla';
 
   @override
@@ -2975,10 +3019,17 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get petitBacWaitingForBell =>
+      'Çarşaf geri geldi! Zil çalmayı bekliyorum...';
+
+  @override
   String get petitBacIFinished => 'Bitti! (Dur)';
 
   @override
   String get petitBacCorrection => 'DEĞERLENDİRME';
+
+  @override
+  String get petitBacGameOverReason => 'Little Bac oyunu bitti!';
 
   @override
   String presidentGivesTo(Object from, Object to) {
@@ -2994,8 +3045,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get actionPendingMsg => 'Eyleminiz kaydediliyor...';
 
   @override
+  String get monAnimalPrefere => 'En sevdiğim hayvan';
+
+  @override
   String get unJoueurEstDesigneComme =>
       'Bir oyuncu \'hedef\' olarak belirlenir. Diğer oyuncular onlarla ilgili bir soruyu anonim olarak yanıtlar. Hedef tercih ettiği cevabı seçer ve cevabın yazarı bir puan kazanır.';
+
+  @override
+  String get uneSituationEstPresenteeTous =>
+      ': \r\n        \"Bir durum sunuluyor. Tüm oyuncular, bu işi yapacak kişi için oy verir. En çok oy alan oyuncu bir puan kazanır (şüpheli bir onur!).\",    ';
 
   @override
   String get modeClassiqueUneQuestionEst =>
@@ -3122,6 +3180,9 @@ class AppLocalizationsTr extends AppLocalizations {
       'Amacı, yeni bir rol alana kadar Kurtadamları yenmektir. İlk gece, ölümünden sonra rolünü ona bırakacak bir vasiyetçi belirler. Varis, vasiyetçisinin tüketmediği güçleri (Cadı iksiri, Diktatör\'ün güç ele geçirmesi vb.) geri alır, Avcı ve Mezar Kazıcı hariçtir. Vasiyetçisinden enfeksiyonu (Kara Kurt) veya kontaminasyonu (Hasta Fare) geri kazanmaz. Enfeksiyonu veya kontaminasyonu üssünde tutar. Bir Kurtadamın güçlerini miras alırsa, diğer kurtlara sürüye katılacağı bildirilir. Eğer darbe gecesi ölen bir Diktatörün güçlerini miras alırsa, sonuçları üstlenip uyanır uyanmaz darbeyi gerçekleştirmek Varis\'e düşecektir.';
 
   @override
+  String get touche => 'Touchdown';
+
+  @override
   String get unVillageoisSansPouvoirSpecial =>
       'Özel yeteneği olmayan bir köylü.';
 
@@ -3203,7 +3264,21 @@ class AppLocalizationsTr extends AppLocalizations {
   String get themeIa => 'Yapay Zeka Teması';
 
   @override
+  String get caseLabel => ':\nkutu kutusu';
+
+  @override
   String get generalEtVarie => 'Genel ve çeşitli';
+
+  @override
+  String get unDinosaureQuiMangeUne => 'Bir dinozor dondurma dondurma';
+
+  @override
+  String get pouvoirVolerOuEtreInvisible => 'Uçmak veya görünmez olmak';
+
+  @override
+  String returnGenereDesSituationsCourtes(Object finalPrompt) {
+    return ':\n“Generates kısa durumlar bir eylemle başlar. Tema: $finalPrompt \";\nkutu kutusu';
+  }
 
   @override
   String get abandonTousLesJoueursDeconnectes =>
@@ -3213,7 +3288,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tousLesJoueursSeSont => 'Tüm oyuncular kopmuştu';
 
   @override
-  String nAPasJoueA(Object actionDetails, Object playerName) {
+  String nAPasJoueA(Object playerName, Object actionDetails) {
     return '$playerName zamanında oynamadı. Bilgisayar onun için oynadı ( $actionDetails ).';
   }
 
@@ -3237,7 +3312,7 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String aTireDansLEau(Object opponentDataname, Object shooterDataname) {
+  String aTireDansLEau(Object shooterDataname, Object opponentDataname) {
     return '🌊 $shooterDataname suya ateş etti. Sıra $opponentDataname oyuncusunda.';
   }
 
@@ -3257,12 +3332,15 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String aGardeLeDeDe(Object dieVal, Object index1, Object pName) {
+  String get aRelanceLesDes3 => '{pName} zarı yeniden attı ({3rollsLeft1}/3)!';
+
+  @override
+  String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return '$pName $dieVal değerli zarı tuttu (zar #$index1) 🔒';
   }
 
   @override
-  String aDebloqueLeDe(Object index1, Object pName) {
+  String aDebloqueLeDe(Object pName, Object index1) {
     return '$pName #$index1 numaralı zarın kilidini açtı';
   }
 
@@ -3306,6 +3384,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get pioche3 => 'Kazma';
 
   @override
+  String get wordcivilParts0TrimWordundercover =>
+      '); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parçalar[1].trim(); \r\n    \'\'}\' başka \'\'{\' \r\n      Tekrarlanma karşıtı güvenlik: eğer';
+
+  @override
   String get vousNAvezPasDe => 'Sözün yok';
 
   @override
@@ -3343,15 +3425,19 @@ class AppLocalizationsTr extends AppLocalizations {
   String get verite1 => 'GERÇEK';
 
   @override
-  String aLePlusDXp(Object maxXp, Object playerswinnerIdnameJoueur) {
+  String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur en çok XP ($maxXp XP) alan ve Yönetici oluyor!';
   }
+
+  @override
+  String get finDeMancheBoutonAdmin =>
+      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  Kapak Sonu (yönetici düğme)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) asenkron \'\'{\' \r\n    await _db.runTransaction((transaction) async\'\'{\' \r\n      final gameRef = _db.collection(\'games\').doc(gameCode); \r\n      final snap = bekleyin transaction.get(gameRef); \r\n      eğer (!snap.exists) geri döner; \r\n\r\n      final gameData = snap.data() Harita<String, dinamik> olarak; \r\n      final players = Harita<Dizi, dinamik>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Kazananı belirleyin (daha fazla XP)\r\n      String winnerId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        final xp = (pData[\'xp\'] num?)?. toInt() ?? 0; \r\n        if (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'GameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Birisi';
 
   @override
-  String aAtteintPointsEtRemporte(Object targetScore, Object winnerName) {
+  String aAtteintPointsEtRemporte(Object winnerName, Object targetScore) {
     return '$winnerName $targetScore puana ulaştı ve maçı kazandı!';
   }
 
@@ -3367,7 +3453,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get toutesLesManchesDeTime => 'Tüm Time\'s Up turları tamamlandı!';
 
   @override
-  String gagneAvecPoints(Object maxScore, Object playerswinnerIdnameUnjoueur) {
+  String gagneAvecPoints(Object playerswinnerIdnameUnjoueur, Object maxScore) {
     return '$playerswinnerIdnameUnjoueur $maxScore puanla kazandı!';
   }
 
@@ -3398,7 +3484,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get leJoueur => 'Oyuncu';
 
   @override
+  String get listStringQuestionsAiwordpoolGamewords =>
+      ') \'\'{\' \r\n      Liste<Dizi> sorular =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[zorluk] ?? \r\n          GameWords.whoIsMostLikely[';
+
+  @override
   String get honnete => 'Dürüst';
+
+  @override
+  String get pairSplit => ') ? pair.split(';
+
+  @override
+  String get pairPairListStringShuffledroles =>
+      '): [hatta, hatta]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Soru =\r\n            \"Gizli kelimeni tek kelimeyle anlat. Sahtekarlar, blöf!\"; \r\n        for (var pId in players.keys) \'\'{\' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3418,6 +3515,22 @@ class AppLocalizationsTr extends AppLocalizations {
   String get passeLEnchere => 'teklifi pas geçiyor';
 
   @override
+  String get elseIfGametype =>
+      ') \'\'{\' \r\n        if (voterId == votedForId) \'\'{\' \r\n          throw Exception (\"Kendi adına oy kullanmanın resmi yasaklanması!\"); \r\n        \'\'}\'\'}\' başka bir durum (gameType ==\r\n      ';
+
+  @override
+  String get intRequiredvotesPlayersLengthIf =>
+      ') { \r\n        creditPlayerXp( \r\n          işlem, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: doğru, \r\n        ); \r\n      } \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ';
+
+  @override
+  String get forFinalTargetInVotes =>
+      ') \'\'{\' \r\n          final Harita<Dizisi, int> voteCounts = {}; \r\n          for (votes.values içindeki nihai hedef) { \r\n            voteCounts[hedef Dizisi olarak] = (voteCounts[target] ?? 0) + 1; \r\n          } \r\n\r\n          int maxVotes = 0; \r\n          List<String> topVoted = []; \r\n          voteCounts.forEach((hedef, sayı) \'\'{\' \r\n            if (> maxVotes say) { \r\n              maxVotes = sayım; \r\n              topVoted = [hedef]; \r\n            } başka bir şey varsa (sayı == maxVotes) { \r\n              topVoted.add(hedef); \r\n            }\'\'}\'); \r\n\r\n          güncellemeler[\r\n          ';
+
+  @override
+  String get forFinalTargetInVotes1 =>
+      ') \'\'{\' \r\n        final Harita<Dizisi, int> voteCounts = {}; \r\n        for (votes.values içindeki nihai hedef) { \r\n          voteCounts[hedef Dizisi olarak] = (voteCounts[target] ?? 0) + 1; \r\n        } \r\n\r\n        int maxVotes = 0; \r\n        List<String> topVoted = []; \r\n        voteCounts.forEach((hedef, sayı) \'\'{\' \r\n          if (> maxVotes say) { \r\n            maxVotes = sayım; \r\n            topVoted = [hedef]; \r\n          } başka bir şey varsa (sayı == maxVotes) { \r\n            topVoted.add(hedef); \r\n          }\'\'}\'); \r\n\r\n        if (topVoted.length == 1) \'\'{\' \r\n          final kazanan = topVoted.first; \r\n          güncellemeler[\r\n        ';
+
+  @override
   String aRemporteTousLesJetons(Object winnerName) {
     return '$winnerName masadaki tüm fişleri kazandı!';
   }
@@ -3429,6 +3542,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String carte1(Object cardToPlay) {
     return 'kart $cardToPlay';
   }
+
+  @override
+  String get quipourraitvotemode =>
+      '? _quiPourraitVoteMode\r\n                      : ';
 
   @override
   String get localIndisponibleVideoAudioActif =>
@@ -3500,7 +3617,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get completerAvecLIa15 => 'Yapay zeka ile tamamla (+15 kelime)';
 
   @override
-  String completeCetteListeSurLe(Object join, Object text) {
+  String completeCetteListeSurLe(Object text, Object join) {
     return 'Bu temayı tamamlayın $text. Mevcut kelimeler: $join';
   }
 
@@ -3792,10 +3909,15 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String printEtatDeIsactionpendingAu(Object _isActionPending) {
+    return ' ---\", \r\n    ); \r\n    print(\"Initial _isActionPending statusu: $_isActionPending\"); \r\n\r\n    final oyuncular = (gameData[';
+  }
+
+  @override
   String get erreurQuestionNonTrouvee => 'Hata: Soru bulunamadı.';
 
   @override
-  String str95d36e(Object key0, Object valuename) {
+  String str95d36e(Object valuename, Object key0) {
     return '$valuename: $key0';
   }
 
@@ -3864,10 +3986,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get uneDescriptionHilarante => 'komik bir açıklama';
 
   @override
+  String get extrainfoColumnChildrenText =>
+      '; \r\n          extraInfo = Sütun( \r\n            çocuklar: [ \r\n              Metin( \r\n                \'';
+
+  @override
   String get unProblemeEstSurvenu => 'Bir sorun ortaya çıktı.';
 
   @override
-  String str98e212(Object count, Object isFull, Object length, Object pName) {
+  String get defaultFinalRoundwinneridGamedata =>
+      ': \r\n      Varsayılan: \r\n        final turWinnerId = gameData[';
+
+  @override
+  String str98e212(Object pName, Object count, Object length, Object isFull) {
     return '$pName: $count/$length$isFull';
   }
 
@@ -3912,6 +4042,10 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get styleConstTextstyleColorColors =>
+      ', \r\n                  stil: sürekli TextStyle (renk: Colors.white70), \r\n                ), \r\n                SizedBox (yükseklik: 20), \r\n                Wrap( \r\n                  hizalama: WrapAlignment.center, \r\n                  Çocuklar: \r\n                      justOneFilteredClues\r\n                          .map((ipucu) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (yükseklik: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Metin( \r\n                    AppLocalizations.of(bağlam)!. allCluesHave Been Edilmiş, \r\n                    style: const TextStyle (renk: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        \'\'}\' başka \'\'{\' \r\n          Oyun kahinin kalması\r\n          dönüş Sütun( \r\n            çocuklar: [ \r\n              Metin(                ';
+
+  @override
   String strf0868c(Object length0, Object valuescore0) {
     return '$length0: $valuescore0';
   }
@@ -3941,8 +4075,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get laVictime => 'Kurban';
 
   @override
+  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
+      '; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              çocuklar: [ \r\n                _buildActionButton( \r\n                  etiket: AppLocalizations.of(bağlam)!. enfekte eder, \r\n                  Simge: Icons.auto_fix_high, \r\n                  renk: Colors.purpleAccent, \r\n                  onPressed: () \'\'{\' \r\n                    Provider.of<PlayerState>( \r\n                      bağlam, \r\n                      dinle: yanlış, \r\n                    ).recordBadgeEvent(\'lg_loup_noir_infect\'); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      doğru, \r\n                    ); \r\n                  \'\'}\', \r\n                ), \r\n                const SizedBox(genişlik: 8), \r\n                _buildActionButton( \r\n                  etiket: AppLocalizations.of(bağlam)!. yut, \r\n                  icon: Icons.close, \r\n                  color: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        yanlış, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          \'\'}\' \r\n          station wagon; \r\n        Kutu \'loup_blanc_turn\': \r\n          promptText = ';
+
+  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Dün gece kayıp yok (korunan ya da korunan değil)';
+
+  @override
+  String get styleTextstyleFontweightFontweightBold =>
+      ', \r\n                              Stil: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Renk: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == \'kurt\' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(metin: mesaj), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  \'\'}\', \r\n                ); \r\n              \'\'}\', \r\n            ), \r\n          ), \r\n\r\n          Kompakt gönderme çubuğu\r\n          if (canSendMessage)\r\n            Row( \r\n              çocuklar: [ \r\n                Genişletildi( \r\n                  çocuk: SizedBox( \r\n                    boy: 32, \r\n                    child: TextField( \r\n                      Kontrolör: _chatController, \r\n                      style: const TextStyle(fontSize: 12, color: Colors.white), \r\n                      süsleme: InputDecoration( \r\n                        hintMetin: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          renk: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        sınır: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        dolu: doğru, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          yatay: 10, \r\n                          Diki: 0, \r\n                        ), \r\n                      ), \r\n                      onGönderildi: (metin) \'\'{\' \r\n                        if (text.trim().isNotEmpty) { \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        }\'\'}\', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox(genişlik: 4), \r\n                IconButton( \r\n                  icon: const Icon( \r\n                    Icons.send_rounded, \r\n                    Beden: 18, \r\n                    renk: Colors.cyanAccent, \r\n                  ), \r\n                  Padding: EdgeInsets.zero, \r\n                  kısıtlamalar: const BoxConstraints(), \r\n                  onPressed: () \'\'{\' \r\n                    if (_chatController.text.trim().isNotEmpty) { \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    }\'\'}\', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  \'\'}\' \r\n\r\n  Widget _buildChatTab(String etiketi, String type, Color activeColor) { \r\n    final bool isChosen = _selectedChatType == type; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      çocuk: Konteyner( \r\n        dolgu: sürekli EdgeInsets.simetrik (yatay: 8, diki: 3), \r\n        süs: BoxDecoration( \r\n          Renk: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          sınır: Border.all( \r\n            Renk: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        çocuk: Metin( \r\n          etiket, \r\n          Stil: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isChosen ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  } \r\n\r\n  --- AVATAR\'I ETKILEŞIMLI HALE GETIRMEK IÇIN GÜNCELLENDI--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'{\' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder, zamanlayıcı ve manuel setState\'i engellemeden süper akıcı görsel zamanlayıcı sağlar, bu da iş parçacığını büyük ölçüde hafifler (Nokta 4)\r\n    final endTime = startTime.toDate().add( \r\n      Süre(saniye: süreSaniyelerde), \r\n    ); \r\n    son kalan = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Metin( \r\n        AppLocalizations.of(context)!. k0S, \r\n        stil: Theme.of( \r\n          bağlam, \r\n        ).textTheme.headlineSmall?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      Süre: kalan, \r\n      tween: Tween (başlangıç: kalan, bitiş: Süre.sıfır), \r\n      builder: (BuildContext bağlamı, Süre değeri, Widget? çocuğu) { \r\n        son saniyeler = value.inSeconds; \r\n        return Metin( \r\n          AppLocalizations.of(bağlam)!. zaman kalan, \r\n          style: Theme.of(bağlam).textTheme.headlineSmall?. copyWith( \r\n            Renk: saniye < 20 ? Renkler.kırmızıAccent : Renkler.kehribar Aksan, \r\n          ), \r\n        ); \r\n      }, \r\n    ); \r\n  \'\'}\' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext bağlamı, \r\n    Harita<String, dinamik> gameData, \r\n    String playerId, \r\n  ) \'\'{\' \r\n    final players = Harita<Dizgi, dinamik>.from(gameData[\'players\'] ?? {}); \r\n    final playerOrder = List<String>.from( \r\n      gameData[\'littleHorsesPlayerOrder\'] ?? [], \r\n    ); \r\n    final pozisyonları = Harita<Dizi, dinamik>.from( \r\n      gameData[\'littleHorsesPositions\'] ?? {}, \r\n    ); \r\n    final int currentIndex = gameData[\'smallHorsesCurrentIndex\'] ?? 0; \r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty mi? playerOrder[currentIndex]: \'; \r\n    son bool isMyTurn = currentPlayerId == playerId; \r\n    final int zar = (gameData[\'littleHorsesDice\'] num?)?. toInt() ?? 0; \r\n    final bool hasRoll = gameData[\'littleHorsesHasRolled\'] ?? yanlış; \r\n    final bool isTeamMode = gameData[\'smallTeamHorses\'] ?? yanlış; \r\n    final Harita<Dizi, dinamik> ardışıkSixes = Harita<Dizi, dinamik>.from( \r\n      gameData[\'smallHorsesArdışık Altılar\'] ?? {}, \r\n    ); \r\n    final int mySixStreak = ardışık Altılar[playerId] ?? 0; \r\n\r\n    Neon Modern Palet / Koyu Arka Planda Arcade\r\n    final Liste<Color> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Kırmızı\r\n      const Color(0xFF38BDF8), // Neon gökyüzü mavisi\r\n      const Color(0xFF10B981), // Zümrüt Yeşili\r\n      const Color(0xFFF59E0B), // Altın Kehribar\r\n    ]; \r\n\r\n    --- ZAFER EKRANI--- \r\n    if (gameData[\'gameState\'] == \'gameOver\') \'\'{\' \r\n      return UniversalGameEndScreen( \r\n        OyunBaşlık:\r\n                      \r\n                  ';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Tahtanın merkezine ulaşıldı!';
@@ -3958,7 +4100,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get chevalSelectionneNtouchezPourAvancer =>
-      'At {piyon seçil} di!\\nİÖne gitmek için dokun';
+      'At {piyon seçil} di!\\nİÖne gitmek için dokun {pawn}';
 
   @override
   String get touchezUnPion => 'Bir taşa dokunun';
@@ -3977,12 +4119,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get lancerLesDes => 'Zarları At';
 
   @override
-  String k1663(Object oppBonus035, Object oppUpper) {
+  String k1663(Object oppUpper, Object oppBonus035) {
     return '1-6: $oppUpper/63 $oppBonus035';
   }
 
   @override
-  String k16631(Object myBonus035, Object myUpper) {
+  String k16631(Object myUpper, Object myBonus035) {
     return '1-6: $myUpper/63 $myBonus035';
   }
 
@@ -4015,6 +4157,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get choisirUnJeu => 'Bir oyun seçin';
+
+  @override
+  String get screenWhoismostlikelylocalscreenPlayersPlayersBreak =>
+      ': \r\n        ekran = KimEnMuhtemelYerel Ekran (oyuncular: _players); \r\n        station wagon; \r\n      kutu ';
 
   @override
   String get generation => 'Oluşturuluyor...';
@@ -4063,6 +4209,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get gagneTonSecretEstPreserve => 'KAZANDIN! Sırrın güvende.';
 
   @override
+  String get wordcivilParts0TrimWordundercover1 =>
+      '); \r\n      _wordCivil = parçalar[0].trim(); \r\n      _wordUndercover = parçalar[1].trim(); \r\n    \'\'}\' başka \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (Varyant)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    (_activePlayers\'de VAR oyuncusu) \'\'{\' \r\n      if (oyuncu == gizli) \'\'{\' \r\n        _playerRoles[oyuncu] = \"Sızıcı\"; \r\n      \'\'}\' başka bir şey varsa (oyuncu == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[oyuncu] = \"Bay Beyaz\"; \r\n      \'\'}\' başka \'\'{\' \r\n        _playerRoles[oyuncu] = \"Medeni\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  void _nextPlayerReveal() \'\'{\' \r\n    eğer (_currentPlayerRevealIndex < _activePlayers.uzunluk - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } başka { \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(Yaylı) \'\'{\' \r\n    String role = _playerRoles[oyuncu]!; \r\n    bool sahtekarlarıWin = rol == \"Sivil\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.result; \r\n      if (sahtekarlarWin) \'\'{\' \r\n        _resultMessage = \"{player} bir sivildi! Sahtekarlar kazandı!\"; \r\n      \'\'}\' başka \'\'{\' \r\n        _resultMessage = \"{player}\r\n    \r\n  ';
+
+  @override
   String get requiert4Joueurs => 'En az 4 oyuncu gerekir';
 
   @override
@@ -4072,6 +4222,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String genereDesCategoriesAmusantesPour(Object trim) {
     return 'Sıcak patates için eğlenceli kategoriler oluşturun. Tema: $trim';
   }
+
+  @override
+  String get bodyPaddingPaddingConstEdgeinsets =>
+      '), \r\n          ), \r\n        ], \r\n      ), \r\n      Gövde: Dolgu( \r\n        dolgu: const EdgeInsets.all(16.0), \r\n        child: Column( \r\n          çocuklar: [ \r\n            if (_phase != LocalWhoIsPhase.results) ... [ \r\n              ZORLUK FILTRESI\r\n              SegmentedButton<String>( \r\n                Bölümler: [ \r\n                  ButtonSegment( \r\n                    Değer: ';
 
   @override
   String get egalite1PtChacun => 'Beraberlik! (Herkese +1 puan)';
@@ -4248,8 +4402,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get auMoins5JoueursRequis => 'En az 5 oyuncu gerekli.';
 
   @override
-  String rolesJoueurs(Object playersLength, Object selectedRolesCount) {
-    return 'Roller ( $selectedRolesCount )';
+  String rolesJoueurs(Object selectedRolesCount, Object playersLength) {
+    return 'Roller ( $selectedRolesCount ) $playersLength';
   }
 
   @override
@@ -4511,8 +4665,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get leTourEstTermine => 'Bu bitti!';
 
   @override
-  String aEteBanniPourSa(Object loserAnswer, Object loserName) {
-    return '$loserName önerisi için yasaklandı \" $loserAnswer \"!';
+  String aEteBanniPourSa(Object loserName, Object loserAnswer) {
+    return '$loserName önerisi için yasaklandı \"  \"! $loserAnswer';
   }
 
   @override
@@ -4529,17 +4683,17 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String aTrouveLeMot(Object winnerName) {
-    return '$winnerName sözcüğü buldu: \" 99999\"!';
+    return '$winnerName sözcüğü buldu: \" 99999\"! ';
   }
 
   @override
   String personneNATrouveLe(Object currentWord) {
-    return 'Kimse kelimeyi bulamadı: “ $currentWord ”.';
+    return 'Kimse kelimeyi bulamadı: “ {currentWord} ”.';
   }
 
   @override
   String aTrouveLeMot1(Object guesserName) {
-    return '$guesserName sözcüğü buldu: \" 99999\"!';
+    return '$guesserName sözcüğü buldu: \" 99999\"! ';
   }
 
   @override
@@ -4566,12 +4720,17 @@ class AppLocalizationsTr extends AppLocalizations {
   String get leTourEstTermine1 => 'Sıra bitti.';
 
   @override
+  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
+    return '$winnerName onun açıklamasıyla kazandı:AppLocalizations.of(context)! ekstrainfoColumn çocukText 99999 $winningDescription';
+  }
+
+  @override
   String get personneNAGagneCe =>
       'Bu turda kazanan olmadı. Beraberlik veya açıklama yok.';
 
   @override
-  String aTrouveLeSymboleIl(Object commonSym, Object winnerName) {
-    return '$winnerName sembolü 99999 buldu! Kartı kazanır.';
+  String aTrouveLeSymboleIl(Object winnerName, Object commonSym) {
+    return '$winnerName sembolü 99999 buldu! Kartı kazanır. $commonSym';
   }
 
   @override
@@ -4611,6 +4770,19 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get score => 'Puan';
+
+  @override
+  String applocalizationsOfContextStyleconsttextstylecolorcolors(
+    Object value,
+    Object guesserName,
+    Object value2,
+    Object deckIndex,
+    Object deckTotal,
+    Object value3,
+    Object totalScore,
+  ) {
+    return '$value $guesserName :AppLocalizations.of(context)! .styleConstTextstyleRenk Renkleri $value2 $deckIndex $deckIndex / $deckTotal - $value3 : $totalScore';
+  }
 
   @override
   String get laNuitTombeSurLe => 'Gece köye düşüyor...\n\nGözlerinizi kapatın.';
@@ -4677,6 +4849,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get leLoupNoirDecideDu => 'Kara Kurt avın kaderini belirliyor';
 
   @override
+  String
+  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
+    Object targetName,
+  ) {
+    return 'Infect $targetName ?AppLocalizations.of(context)!centeractionwidgetRowMainaxissizeMainaxisMinThe White Wolf, solo';
+  }
+
+  @override
   String get choisissezUneVictimeADevorer => 'Yenecek bir kurban seçin';
 
   @override
@@ -4734,6 +4914,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get amoureux => 'Aşıklar';
+
+  @override
+  String
+  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
+    Object senderName,
+  ) {
+    return '$senderName : AppLocalizations.of(context)!.styleTextstyleFontweightBold Little Horses';
+  }
 
   @override
   String get courseIndividuelle => 'Bireysel Yarış';
@@ -4868,6 +5056,10 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get quiPourraitLePlusApplocalizations =>
+      'Kim daha fazla olabilir?AppLocalizations.of(context)!bodyPaddingConstEdgeinsetssoft';
+
+  @override
   String get votePar => 'Oylama: {0}';
 
   @override
@@ -4961,6 +5153,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get partieDeEnAttente => 'Bölüm \"{\"0\"';
 
   @override
+  String get termine => 'Terminated: {0}';
+
+  @override
+  String get vainqueur2 => 'Kazanan:';
+
+  @override
   String get joueurSPretS => 'Oyuncu(s) hazır';
 
   @override
@@ -5000,6 +5198,26 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get indicesMontresA => 'Indices göstermiştir at';
+
+  @override
+  String get playersWinneridname => 'Oyuncular kazananidname';
+
+  @override
+  String get packageSensorsPlusSensorsPlus =>
+      'Paket:sensors artı /sensors artı.dart';
+
+  @override
+  String get supabaseUploadEchecDefinitif => '[Supabase Upload] DEFINITE ---';
+
+  @override
+  String get erreurSupabaseStorageexception =>
+      '--- SUPBASE ERROR (StorageException) ---';
+
+  @override
+  String get erreurInattendueLorsDeL => '--- UPLOAD\'a yemin ederim ---';
+
+  @override
+  String get timeSUp1 => 'Time\\\'s Up';
 
   @override
   String get marquesDeVoiture => 'Araba markaları';
@@ -5062,10 +5280,68 @@ class AppLocalizationsTr extends AppLocalizations {
   String get marquesDeVetements => 'Giyim markaları';
 
   @override
+  String get butDuJeuEtreLe =>
+      '**Game hedefi**\nOyunun sonunda en çok puanla oyuncu olun.\n\n**Draft**\n1. Her oyuncu **7 yanıt kartı** el ele alır.\n2. Bir oyuncu **Juge** (her turda rol döner).\n3. Yargıç, **question kartı** aloud\'u okur.\n4. Tüm ** Diğer oyuncular** gizlice seçim **1 cevap kartı** ellerinden seçip gönder.\n5. Yargıç tüm cevapları okur ve tasarlar ** en komik**.\n6. Yuvarlak puanın kazananı **1 puan**.\n7. Her oyuncu **poche** 7\'ye geri dönmek için yeni bir kart\n8. Yargıç rolü bir sonraki oyuncuya geçer.\n\n** Önemli kurallar**\nYargıç **, dönüşü sırasında** kartı oynamıyor.\nCevaplar **anonymous**: Yargıç kimin yazdığını bilmiyor.\n- Sadece bir kart ** iş başına oynayabiliriz.';
+
+  @override
+  String get objectifPrenezDesCartesPour =>
+      '**\nEşleme çiftleri oluşturmak için kartları alın. Oyunun sonunda Zombie kartı tutan oyuncu olmaktan kaçının.\n**Draft**\n1. Oyun 33 kartla başlar (16 çift + 1 Zombi kartı).\n2. Kartlar 4 oyuncuya dağıtılır.\n3. Her bir oyuncu bir sonraki oyuncudan bir kart alır.\n4. Kart bir çift yaratırsa, otomatik olarak yenilir.\n5. Oyuncunun eli karışık.\n6. Artık kartların kazanamadığı ilk oyuncu.\n7. Zombi kartı ile kalan oyuncu kaybetti!';
+
+  @override
+  String get butDuJeuObtenirLe =>
+      '**Game hedefi**\nEn yüksek puanı 5 dice ile 13 kategori doldurarak alın.\n\n**Running of a tower**\n1. **Lance **: 5 dice up to 3 kez sırayla atabilirsiniz.\n2. ** Keep** : 1. veya 2. attan sonra, bazı işaretleri tutabilir ve başkalarını yeniden başlatabilirsiniz.\n3. **Score**: En az bir attan sonra, puan almak için bir kategori seçmek zorundasınız. Her kategori sadece bir kez kısmen kullanılabilir.\n\n**Kategori**\n- ** Six**\'e gelince: İlgili işaretlerin Sum. (Üst bölümün toplam 63 puan veya daha fazla olması durumunda 35 puan).\n**Brelan** (3 veya daha aynı indeks): Tüm dice sum.\n** Square** (4 veya daha aynı indeks): Tüm dice sum.\n**Full** (3 aynı + 1 çift): 25 puan.\n* **Küçük Suite** (4 ardı ardıl indeks): 30 puan.\n**Large Suite** (5 ardıl indeks): 40 puan.\n**Yams ** (5 aynısı): 50 puan.\n- **Chance **: Tüm işaretlerin Sum.';
+
+  @override
+  String get objectifNePasAvoirL =>
+      '**\nPatates patladığında elinizdeki cihazınız yok!\n\n**Draft**\n1. Ekranda bir tema görünür.\n2. Cihazı tutan oyuncu temaya karşılık gelen bir cevap vermelidir.\n3. En kısa sürede, uçağın komşuna hızlı bir şekilde geçti.\n4. Komşu yeni bir cevap bulmak ve cihazı geçmek zorundadır.\n5. Zaman gizli ve rastgele: patates herhangi bir zamanda patlayabilir!\n6. Patlama zamanında cihazı tutan oyuncu işi kaybeder ve bir rehin alır.';
+
+  @override
+  String get principeGeneralGribouillisEstUn =>
+      '**Genel prensip**\nGribouillis, her aşamada fikirlerin değiştiği \"Arap telefon\" tarafından ilham verilen bir çizim oyunudur. 3 oyun modları var:\n\n**1. Normal Mode (Arapça Illustrated Phone)**\n**Writing**: Her oyuncu bir cümle yazar.\n**Drawing**: Her oyuncu başka bir cümle alır ve çizer.\n**Devinette**: Her oyuncu bir çizim alır ve neyi temsil ettiğini tahmin eder.\n**Alternance** : Oyun çizimi değiştirir ve her \"album\" tüm oyunculara kadar tahmin eder.\n**Ama** : Basit bir cümlenin tamamen farklı bir şeye nasıl dönüşeceğini görmek eğlenceli!\n\n**2. Complement Mode (Collaborative Drawing)**\n**Croquis **: Her oyuncu basit bir çizim başlatır.\n**Complete**: Her oyuncu başka bir çizimi alır ve onu zenginleştirmeli, zaten var olan şeyleri bozmadan.\n**Alternance**: Çizim oyuncudan oyuncuya gider, her biri dokunuşunu ekliyor.\n**Parameter \"Add 1\"**:\n- * Eğer engelli (default)*: Bir dizedir. Çizim her aşamada gelişti (Oyuncu A -> Oyuncu B -> Oyuncu C...).\n* etkinleştirilirse *: Her oyuncunun ilk çizimi diğer tüm oyuncular tarafından tamamlandı, paralel olarak birkaç kolektif iş yaratıyor.\n**Ama**: Sanatın şaşırtıcı ve eğlenceli kolektif eserlerini oluşturun.\n\n**3. Brise-Glace Mode (Creative Interaction)**\n**Writing**: Her oyuncu kişisel bir tema yazar (ex: AppLocalizations.of(context)!\n**Drawing**: Her oyuncu ** diğer tüm oyunculardan gelen temaları alır ve bunları çizmelidir.\n**Ama **: Buzu kırmak için ideal, başkalarının zevklerini keşfedin ve işbirliği ve ışık bir şekilde yaratıcılığı başlatın.';
+
+  @override
+  String get yzObjectifAvoirLeMoins =>
+      'Objektif Hedef\n\nOyunun sonunda mümkün olduğunca az puan var.\nOyun bir oyuncunun 100 puan veya daha fazla ulaştığında durur ve kazanan en düşük toplam puanla biridir.\n\nEkipman\n\n150 kart -2 ila +12\n\nUygulama Uygulama Uygulama Uygulama\n\nTüm kartları karıştırın.\nHer oyuncu 12 kart alır, önünde yüz çevirir, 4 sütunda × 3 sıra.\nDiğer kartlar bir stok oluşturur. Atıkları oluşturmak için ilk kartı döndürür.\nHer oyuncu 12\'den seçimlerini 2 kart döndürür.\n\nBir tur kursu\n\nBuna karşılık, iki eylem arasında seçim yapmak için **30 saniyeniz var:\n\n1. Atık kartı alın\n12 kartınızla değiştirmeniz gerekir (göremez veya gizli taraf).\nDeğiştirilen kart boşa gider.\n\n2. Piocher bir kart yüz aşağı\nHaritaya bakıyorsunuz:\n- ya bunu tutarsınız ve kartlarınızın birini değiştirirsiniz (yukarıdaki gibi),\n- ya da bunu reddediyorsunuz - doğrudan atıkta yersiniz ve bu durumda kartlarınızdan birini hala gizli bırakmanız gerekir.\n\nÖzel kurallar\n\nBir sütunda üç aynı kart hemen yenilir (değer 0).\n\nİşin Sonu:\n\nBir oyuncu tüm kartlarını açığa çıkardığında iş biter.\nDiğer tüm oyuncular daha sonra kalan kartlarını ortaya koyarlar. İş bitti.\nTüm oyuncular kartlarının toplamını sayıyorlar.\n\nLütfen dikkat: Eğer bitiren oyuncu yuvarlak en düşük puana sahip değilse, +10 puan cezası alır (iş puanı orijinal sürümde iki katına çıkarılır, +10\'u basitleştirmek için kullanacağız).\n\nOyun Sonu\n\nİhtiyacımız olduğu kadar birçok kol yapıyoruz.\nBir oyuncu 100 puan veya daha fazla ulaştığında, oyun durur.\nEn düşük genel puanla oyuncu kazanır.';
+
+  @override
+  String get iAReglesDuPoker =>
+      'Objektif Hedef\n\nDiğer oyunculardan gelen fişleri sahip olmak:\n- Katlanma sırasında en iyi 5 kart,\n- veya onlara bahis sayesinde pes ederler.\n\nEl sınıflandırması (en güçlüten en zayıfına)\n\n1. Kraliyet Ayakkabıları: 10 – V – D – R – Aynı renkte A\n2. Quint kızar: birbirlerini takip eden 5 kart, aynı renkte\n3. Square: 4 aynı kart\n4. Full: 3 aynı kart + 1 çift\n5. Renk (flush): Aynı renkte 5 kart (konsecutive)\n6. Sonraki (Fifth): birbirini takip eden 5 kart (farklı renkler)\n7. Brelan: 3 aynı kart\n8. Çift çift çift çifti\n9. Pair\n10. Yüksek kart (en yüksek kart eğer kimse daha iyi olursa)\n\nð\n\n1. Körler\nSatıcının soluna oyuncu küçük körü ayarlar.\nBir sonraki oyuncu büyük körü ayarlar.\n\n2. Dağıtım Dağıtım\nHer oyuncu 2 kapalı kart alır (özel kartlar).\n\n3. Auction kuleleri ve ortak kartları\n- Preflop: özel kartlarla hile yapın.\nFlop: 3 ortak harita ortaya çıktı. Yeni bahisler.\nKule: 4. ortak harita ortaya çıktı. Yeni bahisler.\nNehri: 5. ve son ortak harita ortaya çıktı. Son bahis.\n\n4. atış (düşük)\nBirkaç oyuncu kalırsa, her biri oyunlarını gösterir.\n5 karttan en iyi kombinasyonu ( 2 özel kart + 5 komün) kupayı kazanır.\n\nOlası eylemler\n\nBuna karşılık, bir oyuncu **30 saniye ** için:\n- Checker: hiçbir şey bahsetmiyor, sadece kimse tekrar bahsetmezse.\ntencerede bazı cips koyun.\n- Takip (Call): koşuya eşit.\n- Restart (Raise): bahis artışı.\n- Yataka git (Fold): kartlarını bırakın ve ondan çıkar.\n\nOyun Sonu\n\nOyun, en az 2 oyuncuyu cipsle kaldığı sürece devam ediyor.\nNihai kazanan tüm çipleri alan kişidir.';
+
+  @override
+  String get butDuJeuGagnerLe =>
+      '**Game hedefi**\nHareketleri gerçekleştirmek ve gerçeğe cevap vererek en XP\'yi kazanın!\n\n**Draft**\n1. rulet, onu açan oyuncudur.\n2. Oyuncu \"Action\" veya \"Verity\" vurur.\n3. Klasik mod: rastgele bir meydan okuma / soru gösteriliyor.\n4. Yargıç Mode: rastgele bir oyuncu meydan okumayı yazar, sonra oyuncu bunu fark eder.\n5. Diğer oyuncular Evet / Hayır oyu ile doğrulanır.\n6. Geçerlilik yüzdesi XP\'nin kazandığını belirler.\n\n**Özel kurallar**\n-% 100 doğrulama = maksimum XP\n- En XP ile oyuncu oyun yöneticisi olur\n- \"Son of handle\" düğmesine basmak için izin verir';
+
+  @override
+  String get butDuJeuLeBut =>
+      '**Game hedefi**\nHedef, tüm kartlarından Başkan olmak için kurtulmak için ilk olmak. Eldeki son oyuncu Ass deliği olur.\n\n**Mal ve Oyuncular**\n**Maps **: 52 kart.\n**Oyuncular **: 3 ila 6 oyuncu.\n\n**Card Value**\nKartların emri, en zayıftan en güçlüye göre:\n**3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2.**\n**2** en güçlü kart ve başka bir kartı veya kombinasyonu yenebilir.\n\n**Manual operation**\n1. **Distribution**: Tüm kartlar oyuncular arasında eşit olarak dağıtılır.\n2. ** İlk tur**:\n- İlk oyun için, Trèfle\'nin **3\'üne sahip olan oyuncu (Sadece veya diğerleriyle 3).\n- Bir sonraki kollar için, **Assess tekerleği ** önceki koldan başlar.\n3. ** Play cards**: İlk oyuncu masaya koyar:\n- Sadece bir kart (e.g. one 7).\n- Bir çift (ex: iki 8).\n- A brelan (ex: üç Valets).\n- Bir meydan (ex: dört 5).\n4. ** Yuvarlaktan Ayrıştırma**: Bir sonraki oyuncu (bir saat yönünde) **30 saniye ** aynı sayıda kart oynamak için ** ancak ** yüksek değer**.\nÖrnek: Bir oyuncu bir çift 6 getirirse, bir sonraki bir çift 7, bayanlar, vb. olmalıdır.\n5. **Skip your turn**: Bir oyuncu oynamak istemiyor veya oynamak istemiyorsa, onun dönüşünü geçmelidir. Bir oyuncu geçtiğinde, mevcut katın sonuna kadar tekrar oynayamaz.\n6. **Katılımın Sonu**: Tüm oyuncular dönüşlerini geçtiğinde kat biter. En son oyuncu, kartları kat kazanır, masadan kartları alır (bir yanan) ve istediği şeyi oynayarak bir sonraki kata başlar.\n7. ** 2 **\'nin gücü: Bir veya daha fazla **2 ** herhangi bir kombinasyon yendi ve anında kat biter. 2 oynayan kişi tekrar oynamaya başlar.\nBir çift yenmek için, iki çift oynamak zorundasınız!\n\n** İngilizce Kanalı ve Rollerin Sonu**\n- Bir oyuncunun kartları olmadığı kadar, bitti. Oyun sadece bir oyuncu kalana kadar devam ediyor.\n- Sonunda sipariş sonraki tur için rolleri belirler:\n**1st**: Başkan\n**2nd**: Vice-President\n**Son** : Ass deliği\n**Sonsuz ** : Vice-Ass-Trou\n**Diğer** (eğer varsa): Neutral\n\n**Sonraki ay: Card Exchange! **\nYeni tura başlamadan önce, oyuncular kart değiştirir:\n- **Ass deliği ** en iyi iki kart ** Başkan\'a verir.\n- **Chair** ona seçimin ** iki kartını geri döndürüyor - (genellikle en kötüsü).\n- 4 oyuncu veya daha fazlası varsa, **Vice-Cut**, **Vice-President**\'e verir.\n- **Vice-President** ona seçiminin **map verir.\n\n**Özel kurallar**\n›â € ** 2** ile bitmiyor: Bir oyuncunun son kartından kurtulma hakkı yoktur, eğer bir 2. Bu darbe geçersiz kabul edilir.\n**Variant Revolution (optional)**: Bir oyuncu bir meydan (4 aynı kart) ayarlarsa, \"Revolution!\" diyebilir. Kartların değeri siparişi, o zaman kolun sonuna kadar ters döndürülür (üç en güçlü hale gelir ve en zayıf olanı).';
+
+  @override
+  String get butDuJeuReussirDeux =>
+      '**Game hedefi**\nDiğer oyunculardan önce iki zorluk.\n\n**In place**\nHer oyuncu 4 kartla başlar: 3 Gül ve 1 Skull.\n- Halıdaki her kart sahibine bağlı kalır.\n\n**Draft**\n1.Başlangıçta, bir oyuncu halısına bir kart yüzebilir.\n2. Artık ortaya çıkmak istemediğinde, geri dönebileceğini düşündüğü kartların sayısını duyurarak zorluk çekiyor.\n3. Diğer oyuncular teklif edebilir veya geçebilir.\n4. En yüksek teklif veren meydan okumacı olur ve reklam kartı döndürür.\n5. Önce kendi kartlarını geri döndürür, o zaman gerekli olan diğer oyunculardan.\n\n**Resolution**\n- Eğer bir Skull görünürse, meydan okuma kaybolur.\n- Eğer meydan okuma kazanılırsa, oyuncu bir puan alır. İlk olarak 2 puan oyunu kazanır.\n- Bir meydan okuma kaybolursa, oyuncu geri kalan taraftan rastgele bir kart kaybeder. Skull\'unu kaybederse hemen bir tane daha geri almak zorundadır.';
+
+  @override
+  String get butDuJeuFaireDeviner =>
+      '**Game hedefi**\nÇizim yoluyla bir kelime tahmin etmek için, tahsis edilen zamanın sonuna kadar.\n\n**Draft**\n1. **Drawer / kelime seçimi**: Bir oyuncu çizmek için belirlenir ve bir kelime gizlice ona atılır.\n2. **Drawing**: Taslak, kelimeyi çizim yoluyla tahmin etmek için sınırlı bir zamana sahiptir. Ne konuşabilir ne de mimik ya da mektuplar veya rakamlar yazabilir.\n3. **Devinettes **: Diğer oyuncular bir sohbette kelimeler sunar.\n4. **Validation**: karikatürist, kazananı tasarlamak için iyi bir mesajın ardından sohbet ve tıklamalarda önerileri görür.\n5. **Points **: Yaralanan ve taslak bir noktayı kazanan oyuncu.\n6. **Sonraki Tower**: Yeni bir taslak atanır.\n\n**\n** Sadece 30 vuruş **: Tasarcı en fazla 30 özellikle sınırlıdır.';
+
+  @override
+  String get butDuJeuFaireDeviner1 =>
+      '**Game hedefi**\nEşiniz mümkün olduğunca çok gizemli kelime tahmin edelim, her biri tek bir kelime ipucu yaz. Aynı veya geçersiz endeksler ortadan kaldırılacaktır.\n\n**Draft**\n1. ** Devin **\'in Seçilmesi: Bir oyuncu yuvarlak için \"Devin\" olarak belirlenir. Söz gizemini görmüyor.\n2. **Choice of the Word Mystery**: Devin bir listeden bir kelime seçer (veya oyunun efendisi bir tane seçer).\n3. **Indice Writing**: Diğer tüm oyuncular (\"Indices\") gizlice Devin\'in kelime gizemini bulmasına yardımcı olacak bir tek kelime indeksi yazmaktadır.\n4. **Indices Filter **: All indices ortaya çıkıyor. Aynı indices (farklı olarak farklı, e.g. \"chat\" ve \"chats\" veya geçersiz (sözcülüğe çok yakın), icat edilmiş, vs.) ortadan kaldırılmıştır. Sadece Devin\'de benzersiz ve geçerli ipuçları gösteriliyor.\n5. **Devinette**: Devin kalan ipuçlarına bakar ve sözcüğü gizemi tahmin etmeye çalışır. Sadece bir denemesi var.\n6. **Rating**:\n- Devin sözcüğü gizemi bulursa: Takım 1 puan kazanır.\n- Devin sözcüğü gizemi bulamazsa: 0 nokta.\n- Devin cevap vermezse: 0 nokta.\n\n**Düzüğün geçersizliği:**\n- Gizem kelimesi: \"Chat.\" Invalid indices: \"chaton\", \"feel\", \"miaou\", \"minou\".\n- Identical indices: 2 oyuncu \"Chat\" için \"hayvan\" yazıyorsa, \"hayvan\" ortadan kaldırıldı.';
+
+  @override
+  String get butDuJeuPourLes =>
+      '**Game hedefi**\n**Village**: Tüm Wolf-Garous, White Wolf, Malade Rat (Eğer kazanırsa Mercenary hariç).\n- **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Tüm Köylüleri aydınlatın.\n- **Solitaires **: Her kişiye özel bir hedef (Beyaz Loup: yalnız olmak; Mercenary: J1\'deki hedefini Öldür; Rat Hasta: Bütünü kirletin).\n- ** Lovers ** (eğer Wolf + Village) : Sadece iki kurtulan olmak.\n\n**Draft**\nOyun ** gece ** ve **day** aşamaları arasında değişir.\n\n* Gece **\n1. Oyun lideri (Uygulama) köyün uyku olduğunu ilan eder.\n2. Farklı karakterler güçlerini kullanmak için uyanır:\n**Cupidon ** (ilk gece sadece): Aşık olacak iki oyuncuyu isimlendirin. Eğer bir Wolf ve bir Köyr ise, amaçları değişir.\n-**Heritage** (ilk gece sadece): Bir testciye noterler.\n- **Bakın - uyanır ve gerçek rolünü keşfetmek için bir oyuncu tasarlar. ( Black Wolf enfeksiyonunu tespit etmeyin).\n**Mentalist** (pasif) köy oylamasının sonuçlarını algılar.\n**Rat Malade**: İki oyuncuyu (diğerlerini kirletenleri kim bilir).\n- The **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - birlikte oylama) uyanmak, konser ve yemek için bir kurban tasarlamak.\n**Black Loup**, kurbanı bir kez enfekte bir Loup-Garou\'ya çevirebilir (ki güçleri tutar ve Wolf olur). Ruhist ve Fossoyer enfekte olanı tespit edebilir, Voyante hayır.\n- The ** White Loup** (bir gece ikisinden): Despouses a player of his choice (turns the protections).\n- Sorcery ** uyanır. Kurt kurbanını görür ve iki potdan birini kullanabilir (sadece bir kez bir kez): kurbanı kurtarmak için **healing**\'i kurtarmak için, ya da**poisoning**\'i öldürmek için.\n- **Pyroman**: Yunan ateşinin bir varilini ya da zaten yerleştirilenleri (günde hayatta kalma) saklamayı seçin.\n**Necromancer**: Ölülerle iletişim kurabilir.\n\n* Gün **\n1. Köy uyanıyor. Uygulama bir gecede ölenleri duyurdu.\n2. Dead oyuncuları rollerini ortaya çıkarır ve ortadan kaldırılabilir (daha fazla iletişim kuramazlar, Necromank’ın ölülerle dışında).\n- Le **Loup Bavard**: Gün batımında gizli bir kelime ya da ölmeli (daha az Dictator güç alır).\n3. Hayatta kalanlar, engelleyicileri açığa çıkarmaya çalışmayı tartışıyorlar.\n4. Tartışmalardan sonra, tüm oyuncular şüpheliyi ortadan kaldırmak için oy kullandılar.\n**Dictator** (once): oy alabilir. Bir kurtu ortadan kaldırırsa, belediye başkanı olur; Aksi takdirde ölür.\n- The **Captain **: Onun oylaması iki katına çıkıyor. Eğer ortadan kaldırılırsa, ölmeden önce bir hale gelmelidir.\n**Mercenary**: Hedefi ilk günde ortadan kaldırılırsa, yalnız kazanır. Aksi takdirde, bir Köyr olur.\n5. En çok oy alan oyuncu ortadan kaldırıldı, rolünü ortaya koyuyor ve oyundan çıkıyor.\n- **Chasseur**: Eğer ortadan kaldırılırsa (gün ve gece), onunla başka bir oyuncu getirme gücüne sahiptir.\n- **Fossoyeur**: Öldüğünde, iki oyuncuyu (biri kamptan biri) tespit etti.\n- The Lovers **: Biri ölürse, diğeri onu kederle takip eder.\n- The**Heritage**: Testatörü ölürse, rolünü alır (daha az ölü veya kirlenmiş).\n6. Yeni bir gece başlar.\n\n**Conditions of Victory**\n**Village**: Tüm Wolf-Garous, Beyaz Wolf, Hasta Rat.\n**Loups-Garous** (moute): Köylere numarada eşit veya daha yüksek olmak.\n**Beyaz Loup **: Sadece kurtulan olmak.\n**Mercenary**: İlk gün hedefini öldür.\n- **Rat Malade**: Tüm canlı oyuncuları yok edin.\n** Lovers ** (Loup + Village) : Sadece iki kurtulan olmak.\n\n**İhraman notları **\n- **Chaperon Rouge**, Hunter\'ın hayattayken Wolf-Garous\'a karşı Hunter tarafından korunuyor.\n**Garde ** bir Wolf-Garous hedefi korur (aynı kişiyi iki kez koruyamaz).\n- Beyaz Wolf\'un güçleri korumaları bilmiyorlar.\n- Pyroman sabah onun kovanları patlamak için hayatta olmalıdır.';
+
+  @override
   String get loupNoir => 'Kara Kurt';
 
   @override
+  String get loupBavard => 'Geveze Kurt';
+
+  @override
   String get loupBlanc => 'Beyaz Kurt';
+
+  @override
+  String get mercenaire => 'Paralı Asker';
 
   @override
   String get ratMalade => 'Hasta Fare';
@@ -5077,6 +5353,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get petiteFille => 'Küçük Kız';
 
   @override
+  String get chasseur => 'Avcı';
+
+  @override
   String get garde => 'Koruma';
 
   @override
@@ -5086,10 +5365,68 @@ class AppLocalizationsTr extends AppLocalizations {
   String get mentaliste => 'Mentalist';
 
   @override
+  String get fossoyeur => 'Mezarcı';
+
+  @override
   String get dictateur => 'Diktatör';
 
   @override
+  String get chaperonRouge => 'Kırmızı Başlıklı Kız';
+
+  @override
   String get pyromancien => 'Piromancer';
+
+  @override
+  String get butDuJeuEtreLe1 =>
+      '**Game hedefi**\nMerkezdeki kart ile kendi kartı arasındaki tek aynı sembolü bulmak için en hızlı olun.\n\n**Draft (Mode ‘The Infernal Tower’)**\n1. Her oyuncu bir kart yüzünü alır. Kartların geri kalanı merkezde bir Borsa oluşturur, görünür.\n2. İlk başta herkes kartlarını döndürür.\n3. Her oyuncu hem kartında hem de Borsada bulunan tek sembolü mümkün olduğunca çabuk bulmak zorundadır.\n4. sembolü bulur ilk oyuncu, duyuru aloud, Stock kartı alır ve kendi kartında yer alır.\n5. Bu yeni kart bir sonraki tur için kartı haline gelir. Daha sonra Borsa\'nın merkezinde yeni bir harita ortaya çıktı.\n6. Oyun Borsa tükeninceye kadar devam ediyor. Sonunda en çok kartları toplayan oyuncu kazanır!';
+
+  @override
+  String get butDuJeuSeDebarrasser =>
+      '**Game hedefi**\nİlk olarak tüm kartlarından kurtulun!\n\n**Draft**\n1. **Distribution**: Her oyuncu 7 kart alır. Geri kalanlar borsayı oluşturur. Bir kart atık yığınına başlamak için geri döndü.\n2. ** Bir kart **: Döndüren oyuncu, **30 saniye**\'in elini çöp yığınına koymak için var. Oynanmış kart, yığının en üst kartıyla eşleştirmelidir:\n* **Renk** (ex: Red on Red)\n* **Number ** (ex: one 7 Blue on one 7 Green)\n* **Symbol ** (ex: a yellow \"+2\" on a red \"+2\")\n* **Özel Kart** (Joker, +4, vb.)\n3. **Piocher**: Bir oyuncu bütün zamanların bir kart oynayamazsa, paketten bir kart almalıdır. Bu kartı oynayabilirse hemen yapabilir. Aksi takdirde, onun dönüşü biter.\n4. **Özel kartlar**:\n* **+2 (İki kart)**: Bir sonraki oyuncu 2 kart alır ve dönüşünü geçer.\n* **Senler İzinsiz (Hareketinizi Geçin)** : Bir sonraki oyuncu dönüşünü geçer.\n* **Invers ( anlamını değiştir)**: Oyun duygusu tersine döndü.\n* **Joker (Colour Change)**: Oyuncu bir sonraki kartın rengini oynamak için seçer. Herhangi bir kartta oynatılabilir.\n* **Super Joker +4 (Colour Change and Four Cards)**: Oyuncu renk seçer. Sonraki oyuncu 4 kart alır ve dönüşünü geçer. Bu kart sadece oyuncunun atık yığını üzerinde talep edilen rengin başka kartı varsa oynatılabilir (bu bluffs).\n5. **Announce \"UNO\"**: Bir oyuncunun elinde sadece bir kart olduğu zaman, \"UNO!\" duyurmalıdır. Eğer bunu yapmazsa ve başka bir oyuncu tarafından alınırsa (Bir sonraki oyuncu oynanmadan önce), 2 kart almalıdır.\n6. ** Kanalın Sonu**: Bir oyuncu son kartından kurtulduğunda iş biter. Puanlar sayılıyor. 500 puana ulaşan oyuncu (veya tanımlanmış bir toplam) oyunu kazanır.\n\n**Map Noktaları:**\n* Dijital kartlar (0-9): Yüz değeri.\n* +2, Sens İzinsiz, Invers: 20 puan.\n* Joker, Super Joker +4: 50 puan.';
+
+  @override
+  String get principeDuJeuLeJeu =>
+      '## Game prensibi\n* Oyun **3 ve 10 oyuncu arasında oynanır**.\n* Her oyuncu fotoğraf kütüphanesinin bir parçasına erişim sağlar ve paylaşmak için fotoğraflar seçer.\n* Bir oyun sırasında, bir fotoğraf seçilir **randomly ** tüm oyuncular arasında, sonra birkaç saniye boyunca görüntülenir.\n* Oyuncular tahmin etmelidir ** fotoğrafa sahip kim.\n* En fotoğrafları doğru tahmin eden oyuncu oyunu kazanır.\n\n## Prosedür\n1. **Fotoğrafların Seçilmesi**: Her oyuncu galerilerinden birkaç fotoğraf seçer.\n2. **Oyuna başlayın**: Herkes hazır olduğunda, ev sahibi oyunu başlatır.\n3. ** Play Tower**:\n- 5 saniye boyunca rastgele bir fotoğraf gösteriliyor.\n- Tüm oyuncular sahibi tahmin etmeye oy verirler.\n4. **Results**: Her turdan sonra puanlar güncellenir.\n5. **Oyunun Sonu**: Bir dizi turdan sonra, oyuncu en puanlarla kazanır.';
+
+  @override
+  String get butDuJeuCoulerTous =>
+      '**Game hedefi**\nStuck tüm rakibin gemilerini batırmadan önce.\n\n**Draft**\n1. **Placement**: Her oyuncu kendi filosunu 10x10 bir ızgara üzerinde gizlice yerleştirir.\nUçak taşıyıcıları (5 kutu)\nCruiser (4 kutu)\n- Denizaltı (3 hücre)\n- Destroyer (3 kutu)\n- Guard (2 kutu)\n2. **Tir**: Buna karşılık, oyuncular vurmak için bir kutuya dokunurlar.\n3. **Result**: AppLocalizations.of(context)! touche, \"Coated\" veya \"To water\".\n4. **Victoire**: İlk oyuncu tüm karşıt filosunu batırmak için.';
+
+  @override
+  String get butDuJeuEtreLe2 =>
+      '**Game hedefi**\nHedef mesafeye ulaşmak için ilk olun (1000 km varsayılan).\n**Draft**\n- Her oyuncu altı kart alır.\n- Dönüşte, bir kart (Distance, Attack, Defense, Security) oynayın veya ondan kurtulun.\n**Attacks** kartları ( Dur, Red, Essence, Crevaison, Limit) rakibi engeller.\nHaritalar **Defenses ** (Yeşil, Ekstra Tank, Onarım, End Limit) karşı saldırılar.\n- ** Güvenlik** kartları bir saldırıyı iptal eder ve recurrence\'ı önler.\n- Haritalar **Distance ** (25, 50, 75, 100, 200 km) aracınızı ileriye taşır.\n- Dönüşünüzün sonunda bir kart seçin.';
+
+  @override
+  String get butDuJeuEtreLe3 =>
+      '**Game hedefi**\nGeçerli kombinasyonlar (melds) yaratarak tüm kartlarından kurtulmak için ilk olun.\n\n**Running of a tower**\n1. **Piocher **: Atıkların üst kısmından haritayı alın OR Stock.\n2. **Sale (Okul)**: Masada geçerli kombinasyonlar yerleştirin.\n**Sequence (Run)**: Takip eden aynı renkte 3 veya daha fazla kart (örneğin 5) Ace yüksek veya düşük olabilir.\n- ** Grup (Set)**: Aynı değerin 3 veya 4 kartı ama farklı renkler (e.g. 8♥, 8\n3. **Default **: Bir karttan bir karttan kurtulun.\n\n**Son of handle**\nArtık yendikten sonra kartları olmayan ilk oyuncu kazanır. Diğerleri kalan kartlarının puanlarını sayıyor (Figures = 10, as = 15, diğerleri = yüz değeri). Oyun 100 noktada durur.';
+
+  @override
+  String get butDuJeuFaireDeviner2 =>
+      '**Game hedefi**\nEkibinizi zaman sonuna kadar en fazla kelime tahmin edin, yasak kelimeleri kullanmadan!\n\n**Draft**\n1. Her dönüş, bir oyuncu (\" hoparlör\") ekibini bir kelime tahmin etmeye çalışır.\n2. konuşmacı, tahmin etmek için kelimeyi ya da hedef kelime altında gösterilen \"Taboo\" kelimesinin herhangi birini belirtmemelidir. Aynı aileden çevirileri veya kelimeleri kullanamaz.\n3. Eğer konuşmacı bir Taboo kelimesini kullanıyorsa, karşıt takım (veya yargı) hatayı bildiriyorsa, kart iptal edilir ve konuşmacı bir sonrakiye taşınır.\n4. Her tahmin edilen kelime takıma bir noktayı döndürür.\n5. dönüş zamanı geldiğinde sona erer.\n\n**Katın Sonu**\nTurların sayısına göre en çok puanla takım kazanır!';
+
+  @override
+  String get butDuJeuAmenerVos =>
+      '**Game hedefi**\nAtlarınızı rakiplerinizi atlayarak platosunun merkezine getirin.\n\n**Classic kuralları**\n1. **Temel çıkış**: Bir **1** veya bir **6** bir piyon çıkarmak zorundasınız.\n2. ** Bonus Tour**: Bir **6** yapmak, bir piyon yakalamak veya dersi bitirmek, yeniden oynamanıza izin verir. (Savaş: 6 kez sırtını iptal eder!).\n3. **Capture **: Karşı bir piyon üzerine düşmek onu üssüne geri döndürür (bu oyuncunun başlangıç kutusu üzerinde veya bu oyuncunun başlangıç kutusunda).\n4. **Arrived**: Son stairwell\'e ulaşmak için tam bir puan alır.\n\n**Team modu (2v2) **\nTam olarak 4 oyuncu gerektirir. Siz önünüzdeki oyuncuyla müttefiksiniz.\n**Shared Victory**: Merkeze toplam 4 parça getiren ilk takım oyunu kazanır (ex: 3 parça sizin ve 1\'i müttefikiniz için).\n**Entraide **: Müttefikinizin piyonunu taşımak için atışını kullanabilirsiniz, ancak * sadece * 1 veya 6) ile veya onu bitiş merdivenine taşıyabilirsiniz.\n**Allied blocked**: Eşinizin piyonunu yakalamak imkansızdır. Eğer hareketiniz size onun üzerinde toprak yaparsa, darbe geçersizdir.';
+
+  @override
+  String get principeJeuSurrealisteDEcriture =>
+      '**Principle**\nŞaşırtıcı kolektif yazı oyunu.\n**Variant**\n- Classic: Herkes cümlenin bir unsuru yazar (Güncel, Adjective, Verb, vs.) öncekileri görmeden.\nSüreklilik: Herkes son 3 kelimeyi görür ve cümleyi tamamlar.\n**Draft**\nYapraklar herkesin katıldığına kadar döner.';
+
+  @override
+  String get butDuJeuPlacerLe =>
+      '**Game hedefi**\nSetteki parçalarının çoğunu yerleştirin.\n**Gold rule**\nHer yeni parça bir köşe tarafından aynı renkte en az başka bir parçaya dokunmalıdır, ancak asla bir taraf tarafından değil.\n**Draft**\n1. İlk tur, renginizin platter kısmında oynanır.\n2. Aşağıdaki kuleler altın kuralına saygı gösterir.\n3. Artık oynayamıyorsanız, dönüşünüzü geçiyorsunuz.\n**Rating **\n-1 meydanda yer verilmeyen nokta.\n+15 puan eğer tüm parçalar yerleştirilirse.\n+5 bonus noktaları son parça tek kare (1x1) ise.';
+
+  @override
+  String get objectifEtreLePremierA =>
+      '**\nHedef puanı elde etmek için ilk olun (20, 50 veya 100 puan).\n\n**Draft**\nHer oyuncu 7 domino alır. Buna karşılık, zincirin sona ermesinden birine karşılık gelen bir domino yeri olmalıdır. Çiftler haçlarda oynanır.\n\n** Play mode **\n**Pike**: Eğer oynayamıyorsanız, bir oyuna sahip olana kadar seçin.\n**Blocked**: Hiçbir seçici değil. Oynayamıyorsanız, dönüşünüzü geçersin.\n**All Five **: İlk çift oynadığı \"Spinner\" (4 tarafta oynanabilir). Her vuruşta, sonların toplamı bir çok 5.\n\n**Son of turn**\nHiç kimse oynayabilirse, hile bloke edilir. Oyuncular ellerini açığa çıkarırlar. En az puan olan oyuncu yuvarlak kazanır ve karşı ellerin puanlarının toplamını gösterir.';
+
+  @override
+  String get objectifEtreLePremierJoueur =>
+      '**\nTüm kartlarından kurtulmak için ilk oyuncu olun.\n\n**Rules**\n- Oyun 52 kart oyunu ile oynanır.\nKartların siparişi (en düşükten en yüksek): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Renklerin siparişi (en güçlüye en zayıf olanı): Kaplamalar ♦\n- Ürünlerin 3\'ü olan oyuncu oyuna başlar.\n\n** Kombinasyonlar**\n**Simple**: 1 harita.\n**Pair**: Aynı rütbenin 2 kartı.\n**Triple**: Aynı rütbenin 3 kartı.\n**Continued**: 5 ardı sıralı kartlar (kıtılmış renkler).\n**Renk**: Aynı renkte 5 kart.\n**Full**: Bir satır + 2 kart başka bir sıra.\n- ** Square**: Aynı rütbenin 4 kartı + 1 kartı her türlü.\n**Quinte Flush**: Aynı renkte 5 ardışık kart.\n\n** 5 kart kombinasyonununHierarşisi**\nFlush Quinte > Square > Full > Color > Suite.\nBir kombinasyon sadece aynı büyüklükte ve daha yüksek değerin bir kombinasyonu tarafından yenilebilir.';
+
+  @override
+  String get objectifCapturerToutesLesPieces =>
+      '**\nTüm rakibinizin paralarını yakalayın veya tüm paralarını engeller.\n**Rules**\n- 8x8 çeker üzerinde oyun, sadece karanlık kutularda.\n- Parçalar bir kutuda diagonal olarak hareket eder.\n- Yakalananlar **mandatory** ve bir düşman parçası üzerinden atlayarak yapılır.\n- Birkaç yakalama bir turda zincirlenebilir.\n- Bir oda ters sıraya ulaştığında, \"Dame\"de terfi edilir ve geri yakalayabilir.';
 
   @override
   String get unSubstantifExLeChat => 'bir isim (örn. kedi)';
@@ -5105,6 +5442,21 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get unAdjectifExMort => 'bir sıfat (örn. ölü)';
+
+  @override
+  String get petit1 => 'Küçük 1';
+
+  @override
+  String get petit2 => 'Küçük 2';
+
+  @override
+  String get grand => 'Büyük Büyük Büyük Büyük Büyük';
+
+  @override
+  String get tresGrand => 'Çok büyük';
+
+  @override
+  String get superGrand => 'Süper Büyük';
 
   @override
   String get potionDeVieEtDe => 'Yaşam ve ölüm iksiri.';
@@ -5153,7 +5505,16 @@ class AppLocalizationsTr extends AppLocalizations {
       'Nesil başarısız oldu: yanlış sayıda kart.';
 
   @override
+  String get blancMangerCocon => 'Beyaz Yeme Cocon';
+
+  @override
+  String get leRoiDesMemes => 'Caps Kralı';
+
+  @override
   String get laPartieEstTermineeTous => 'Oyun bitti: tüm oyuncular kesildi.';
+
+  @override
+  String get aucun => 'Hiçbir şey yok';
 
   @override
   String get nonAuthentifie => 'Kimlik doğrulanmadı.';
@@ -5181,6 +5542,9 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get vousDevezJouerUneCarte => 'Daha yüksek bir kart oynamalısınız.';
+
+  @override
+  String get aGagne1 => 'kazandı!';
 
   @override
   String get ceNEstPasVotre => 'Sıra sende değil.';
@@ -5217,6 +5581,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get caseDejaCiblee => 'Kare zaten hedef alındı.';
 
   @override
+  String get aCouleTouteLaFlotte => '] Tüm düşman filosunu cezalandırın!';
+
+  @override
   String get placementAutomatiqueEffectue =>
       '⏱️ Otomatik yerleştirme tamamlandı.';
 
@@ -5234,6 +5601,12 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get egaliteLorsDuVoteLa =>
       'Oy vermede eşitlik! Adalet tanrıçası kural olmalıdır.';
+
+  @override
+  String get leTempsDeVoteEst => 'Oylama süresi doldu!';
+
+  @override
+  String get laPartieDeYamsCommence => 'Yatzy oyunu başlıyor!';
 
   @override
   String get plusDeLancersDisponibles => 'Başka zar atma hakkı kalmadı.';
@@ -5280,6 +5653,9 @@ class AppLocalizationsTr extends AppLocalizations {
       'Tartışma sona erdi. Köy şimdi oy kullanmalı!';
 
   @override
+  String get lesAmoureux => 'Aşıklar';
+
+  @override
   String get seulsLesDeuxAmoureuxSont =>
       'Sadece iki aşık hayatta kaldı. Aşkları her şeye galip geldi!';
 
@@ -5288,8 +5664,14 @@ class AppLocalizationsTr extends AppLocalizations {
       'Ak Kurt son hayatta kalan oldu! Herkesi parçalayıp yedi.';
 
   @override
+  String get loupsGarous => 'Kurt Adamlar';
+
+  @override
   String get lesLoupsGarousSontDevenus =>
       'Kurt adamlar çoğunluğu elde etti ve artık kaybedemezler. Kazandılar!';
+
+  @override
+  String get villageois => 'Köylüler';
 
   @override
   String get toutesLesMenacesOntEte =>
@@ -5337,6 +5719,12 @@ class AppLocalizationsTr extends AppLocalizations {
       'Küçük Kız çok meraklıydı! Kurtlar onu anında parçaladı!';
 
   @override
+  String get infecte1 => 'enfekte';
+
+  @override
+  String get contamine => 'bulaşmış';
+
+  @override
   String get vousVousSentezObserveE =>
       'Bu gece izlendiğinizi hissediyorsunuz...';
 
@@ -5355,8 +5743,14 @@ class AppLocalizationsTr extends AppLocalizations {
       'Piromant fıçılarının fitilini ateşliyor!';
 
   @override
+  String get leSoleilSeLeveSur => 'Güneş Thiercelieux üzerinde doğuyor...';
+
+  @override
   String get miraculeusementPersonneNAPeri =>
       'Mucizevi şekilde bu gece kimse ölmedi!';
+
+  @override
+  String get motDuJour => 'günün kelimesi';
 
   @override
   String get leDictateurSEstTrompe =>
@@ -5369,6 +5763,42 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get egaliteParfaiteLorsDuVote1 =>
       'Oylamada tam beraberlik. Bugün kimse idam edilmeyecek.';
+
+  @override
+  String get lAncienCapitaine => 'Eski Kaptan';
+
+  @override
+  String get amoureux1 => 'Lovers 1';
+
+  @override
+  String get amoureux2 => 'Lovers 2';
+
+  @override
+  String get debugJoingameDemarrageDeLa => '[DEBUG joinGame] İşleme başlayın.';
+
+  @override
+  String get debugJoingamePartieTrouveeEt =>
+      '[DEBUG joinGame] Bölüm bulundu ve lobide. Data reading...';
+
+  @override
+  String get debugJoingameTransactionUpdateAppelee =>
+      '[DEBUG joinGame] Transaction.update() yeni oyuncu listesi ile adlandırılır.';
+
+  @override
+  String get debugJoingameTransactionReussieRetourne =>
+      '[DEBUG PlayGame] Başarılı işlem. Gerçek geri dönün.';
+
+  @override
+  String get debugJoingameLaPartieN =>
+      '[DEBUG joinGame] Oyun mevcut değildir veya lobide artık yoktur. Yanlışlara geri dönün.';
+
+  @override
+  String get erreurCritiqueDansJoingame => '--- katılmak için CRITICAL ERROR –';
+
+  @override
+  String
+  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
+      ':AppLocalizations.of(context)! .wordcivilParts0TrimWordundercoverIA ayrı basit kelimeler döndürür';
 
   @override
   String get infiltre => 'Köstebek';
@@ -5386,6 +5816,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get duellistes => 'Duelists';
 
   @override
+  String get laPartieCommenceDonnezVotre => 'Oyun başlıyor! İpucunuzu verin...';
+
+  @override
   String get laPhaseDeVoteCommence => 'Oylama aşaması başlıyor!';
 
   @override
@@ -5396,10 +5829,34 @@ class AppLocalizationsTr extends AppLocalizations {
   String get laDeesseDeLaJustice => 'Adalet tanrıçası kararını verdi!';
 
   @override
+  String get unNouveauTourCommence => 'Yeni bir tur başlıyor.';
+
+  @override
   String get laVengeuseEmporteQuelquUn => 'Avenger onunla birini alır!';
 
   @override
+  String get civils => 'Siviller';
+
+  @override
+  String get imposteurs => 'Sahtekarlar';
+
+  @override
+  String get paris => 'Paris';
+
+  @override
+  String get france => 'Fransa Fransa';
+
+  @override
+  String get capitale => 'Capital Capital Capital';
+
+  @override
   String get tourEiffel => 'Eiffel Kulesi';
+
+  @override
+  String get seine => 'Seine Seine';
+
+  @override
+  String get ville => 'Şehir Şehri';
 
   @override
   String get vousNePouvezPasBuzzer =>
@@ -5463,6 +5920,9 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'Kart bulunamadı.';
+
+  @override
+  String get aGagneLaManche => 'O yuvarlak kazandı!';
 
   @override
   String get desDejaLancesPourCe => 'Dice zaten bu tur için başlattı.';
@@ -5578,6 +6038,9 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get unoNecessiteEntre2Et => 'Uno 2 ve 10 oyuncu arasında gerektirir.';
+
+  @override
+  String get laPartieDeUnoCommence => 'Uno oyunu başlıyor!';
 
   @override
   String get inversionA2JoueursLe =>
@@ -5752,7 +6215,20 @@ class AppLocalizationsTr extends AppLocalizations {
   String get partieNonTrouvee1 => 'Bölüm bulunamadı';
 
   @override
+  String get trouDuCul => 'Ezik';
+
+  @override
   String get vicePresident => 'Başkan Yardımcısı';
+
+  @override
+  String get viceTrouDuCul => 'Yardımcı Ezik';
+
+  @override
+  String get neutre => 'Nötr';
+
+  @override
+  String get debugPictionaryConditionRoundstateDrawing =>
+      '--- DEBUG PICTIONARY – Durum \'düşün\' veya \'görüntü çizimi\' TRUE. Update database...';
 
   @override
   String get dessinateurIntrouvable => 'Drawr bulunamadı.';
@@ -5776,6 +6252,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get leDevineurNePeutPas => 'Tahminer bir ipucu veremez.';
+
+  @override
+  String get aaaaaaceeeeiiiinooooouuuuyy =>
+      'Ináâêëìíïñòóôõçéêëìíïñòóôõöùúûüý ÿ';
 
   @override
   String get ceNEstPasLe => 'Tahmin etme zamanı değil.';
@@ -5811,7 +6291,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get vousNePouvezPasChoisir => 'Şu anda renk seçemezsiniz.';
 
   @override
+  String get erreurCritiquePlayerorderEstVide =>
+      'CRITICAL ERROR: oyuncu sipariş sonraki Round\'da boş. Ben devam edemiyorum.';
+
+  @override
   String get questionNonTrouvee => 'Soru bulunamadı';
+
+  @override
+  String get quiPourraitLePlusApplocalizations1 =>
+      'Kim daha fazla olabilir?AppLocalizations.of(context)!listStringQuestionsAiwordpoolGamewordssoft';
+
+  @override
+  String get menteur => 'Liar Liar';
 
   @override
   String get pasAssezDeJoueursPour => 'Bu moda için yeterli oyuncu değil.';
@@ -5838,6 +6329,18 @@ class AppLocalizationsTr extends AppLocalizations {
       'Teklif önceki tekliften daha yüksek olmalıdır.';
 
   @override
+  String get applocalizationsOfContextUnjoueurEst =>
+      ']? AppLocalizations.of(context)!.aPlayer} son kurtulan ve Skull kazanır!';
+
+  @override
+  String get applocalizationsOfContextUnjoueurA =>
+      ']? AppLocalizations.of(context)!.aPlayer} 2 zorluk kazandı ve oyunu kazandı!';
+
+  @override
+  String get applocalizationsOfContextUnjoueurRemporte =>
+      ']? AppLocalizations.of(context)!.aPlayer} Skull kazanır!';
+
+  @override
   String get reponseVide => 'Boş cevap.';
 
   @override
@@ -5861,6 +6364,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Hedeflenen oyuncu bulunamadı.';
 
   @override
+  String get quiPourraitLePlusApplocalizations2 =>
+      'Kim daha fazla olabilir?AppLocalizations.of(context)!elseGametypeSynonym veya Banni';
+
+  @override
   String get vousNePouvezPasBannir => 'Kendi eşanlamlınızı yasaklayamazsınız!';
 
   @override
@@ -5868,6 +6375,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get ceJoueurNAPas1 => 'Bu oyuncu bir cevap göndermedi.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations3 =>
+      'Kim daha fazla olabilir?AppLocalizations.of(context)!.intRequiredvotesPlayersLength if Yargıç';
+
+  @override
+  String get quiPourraitLePlusApplocalizations4 =>
+      'Kim daha fazlasını yapabilir?AppLocalizations.of(context)!ForFinalTargetInVotesroundState';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
@@ -5879,6 +6394,13 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get laDescriptionLaPlusDrole => 'En komik açıklama seçildi!';
+
+  @override
+  String get aucuneDescriptionNAEte => 'Hiçbir açıklama oy kullanmadı.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations5 =>
+      'Kim daha fazla olabilir?AppLocalizations.of(context)!ForSonTargetInVotes1roundWinnerId';
 
   @override
   String get jugeIntrouvable => 'Yargıç bulunamadı.';
@@ -5922,6 +6444,9 @@ class AppLocalizationsTr extends AppLocalizations {
       'Yükseltme en az önceki bahsin iki katı olmalıdır (veya rest çekilmelidir).';
 
   @override
+  String get laPartieDeBeloteCommence => 'Belote oyunu başlıyor!';
+
+  @override
   String get passeGeneraleAu1erTour =>
       'Genel olarak ilk açık artırmalara geçer. 2. turdan başlayın!';
 
@@ -5936,6 +6461,9 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get passeLAnnonce => 'anonsu pas geçiyor';
+
+  @override
+  String get laPartieDeBlokusCommence => 'Blokus oyunu başlıyor!';
 
   @override
   String get pieceDejaUtilisee => 'Parça zaten kullanıldı.';
@@ -6006,7 +6534,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get piquantInsolite => '🌶️ Baharatlı & Sıra Dışı';
 
   @override
+  String get quiPourraitLePlusApplocalizations6 =>
+      'Kim daha fazla?AppLocalizations.of(context)! . Who could your mode group';
+
+  @override
   String get devineT => 'Tahmin T';
+
+  @override
+  String get presidente => 'Başkan Başkan';
 
   @override
   String get chargement => 'Yükleniyor...';
@@ -6016,6 +6551,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get exception => 'İstiklal:';
+
+  @override
+  String get debutDeLaConstructionDe =>
+      '--- THE HIM OF VOTE\'NİN YARATICI YARATICI YARATICI YARATICI YARATICI KAYNAKLARI: {}; {}?';
 
   @override
   String get clicSurLeJoueurPname => '>>> KC oyuncu \'\$pName\' (ID: \$pId)!';
@@ -6034,6 +6573,10 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get attentionLeWidgetNEst =>
       '- ATTENTION: Widget\'s gitti, devlet iptal etti.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations7 =>
+      'Kim daha fazla olabilir?AppLocalizations.of(context)!defaultFinalRoundwinneridGamedat aroundWinnerId';
 
   @override
   String get phaseDePose => 'POSITION PHASE';
@@ -6071,6 +6614,9 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get undercoverLocal => 'Undercover Local';
+
+  @override
   String get toiMeme => 'kendini';
 
   @override
@@ -6098,6 +6644,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get enCours => 'CURRENT: {0}';
 
   @override
+  String get gamemessagelocalizationTrContextReason =>
+      '\"\": GameMessageLocalization.tr(context, reason)';
+
+  @override
   String get jAiLanceUnePartie2 => 'Bir oyun başlattım';
 
   @override
@@ -6107,7 +6657,256 @@ class AppLocalizationsTr extends AppLocalizations {
   String get appTitle => 'Parti Oyunu';
 
   @override
+  String get loginTitle => 'Hoş Geldiniz!';
+
+  @override
+  String get registerTitle => 'Bize Katılın!';
+
+  @override
+  String get email => 'E-posta';
+
+  @override
+  String get password => 'Şifre';
+
+  @override
+  String get username => 'Kullanıcı adı';
+
+  @override
+  String get loginButton => 'Giriş Yap';
+
+  @override
+  String get registerButton => 'Hesap Oluştur';
+
+  @override
+  String get termsAcceptance =>
+      'Kullanım Koşulları ve Gizlilik Politikasını okudum ve kabul ediyorum.';
+
+  @override
+  String get gamesTab => 'Oyunlar';
+
+  @override
+  String get friendsTab => 'Arkadaşlar';
+
+  @override
+  String get statsTab => 'Profil';
+
+  @override
+  String get loungesTab => 'Salonlar';
+
+  @override
   String get createGame => 'Oyun oluştur';
+
+  @override
+  String get joinGame => 'Katıl';
+
+  @override
+  String get gameCode => 'Oyun kodu (6 haneli)';
+
+  @override
+  String get startGame => 'Oyunu Başlat';
+
+  @override
+  String get leaveGame => 'Oyundan Ayrıl';
+
+  @override
+  String get rules => 'Kurallar';
+
+  @override
+  String get level => 'Seviye';
+
+  @override
+  String get coins => 'Jetonlar';
+
+  @override
+  String get gameOver => 'Oyun Bitti!';
+
+  @override
+  String get victory => 'Zafer!';
+
+  @override
+  String get defeat => 'Yenilgi';
+
+  @override
+  String get nextRound => 'Sonraki Tur';
+
+  @override
+  String get onboardingWelcome => 'Hoş Geldiniz';
+
+  @override
+  String get onboardingSkip => 'Pas';
+
+  @override
+  String get onboardingNext => 'İleri';
+
+  @override
+  String get onboardingStart => 'Başlayalım! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Arkadaşlarınla Oyna';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      '30\'dan fazla parti, kart ve masa oyunu arasından seçim yapın.';
+
+  @override
+  String get onboardingSlide2Title => 'Jeton Kazan & Rozet Aç';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Her galibiyette XP kazanın, seviye atlayın ve özel başarıların kilidini açın.';
+
+  @override
+  String get onboardingSlide3Title => 'Saniyeler İçinde Katıl';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'Arkadaşlarını toplamak için 6 haneli kod yeterli.';
+
+  @override
+  String get vipPass => 'VIP Kartı';
+
+  @override
+  String get vipActive => 'VIP Kartınız aktif!';
+
+  @override
+  String get vipActiveDesc =>
+      'Tüm özellikler (Yapay Zeka, Odalar, Video, Eşleştirme) sınırsızdır.';
+
+  @override
+  String get choosePlan => 'Planınızı seçin:';
+
+  @override
+  String get restorePurchases => 'Satın alımları geri yükle';
+
+  @override
+  String get purchasesRestored => 'Satın alımlar başarıyla geri yüklendi!';
+
+  @override
+  String get noPurchasesFound => 'Aktif satın alım bulunamadı.';
+
+  @override
+  String get monthlySubscription => 'Aylık Abonelik';
+
+  @override
+  String get annualSubscription => 'Yıllık Abonelik';
+
+  @override
+  String get lifetimeAccess => 'Ömür Boyu Erişim';
+
+  @override
+  String get popularTag => 'POPÜLER';
+
+  @override
+  String get chooseButton => 'Seç';
+
+  @override
+  String get vipCongratulations => 'Tebrikler, artık VIP\'siniz!';
+
+  @override
+  String get purchaseFailed => 'Satın alma tamamlanamadı.';
+
+  @override
+  String get profileTitle => 'Profil & Ayarlar';
+
+  @override
+  String get profileNotFound => 'Profil bulunamadı veya oyuncu mevcut değil.';
+
+  @override
+  String get tabStats => 'İstatistikler';
+
+  @override
+  String get tabBadges => 'Rozetler & Başarılar';
+
+  @override
+  String get tabSettings => 'Ayarlar';
+
+  @override
+  String get gamesPlayed => 'Oynanan oyunlar';
+
+  @override
+  String get gamesWon => 'Galibiyetler';
+
+  @override
+  String get winRate => 'Kazanma oranı';
+
+  @override
+  String get soundEffects => 'Ses efektleri';
+
+  @override
+  String get music => 'Müzik';
+
+  @override
+  String get editUsername => 'Kullanıcı adını değiştir';
+
+  @override
+  String get newUsernameHint => 'Yeni kullanıcı adı';
+
+  @override
+  String get logout => 'Çıkış Yap';
+
+  @override
+  String get deleteAccount => 'Hesabı Sil';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Hesabınızı kalıcı olarak silmek istediğinizden emin misiniz?';
+
+  @override
+  String get cancel => 'İptal';
+
+  @override
+  String get confirm => 'Onayla';
+
+  @override
+  String get save => 'Kaydet';
+
+  @override
+  String get modeLocal => 'Yerel';
+
+  @override
+  String get modeMulti => 'Çevrim İçi';
+
+  @override
+  String get modeMonde => 'Dünya';
+
+  @override
+  String get searchGame => 'Oyun ara...';
+
+  @override
+  String get filterAll => 'Tüm oyunlar';
+
+  @override
+  String get createLounge => 'Oda oluştur';
+
+  @override
+  String get joinLounge => 'Odaya katıl';
+
+  @override
+  String get loungeCode => 'Oda kodu';
+
+  @override
+  String get publicLounges => 'Herkese açık odalar';
+
+  @override
+  String get noLoungesAvailable => 'Şu anda herkese açık oda bulunmuyor.';
+
+  @override
+  String get playersCount => 'Oyuncular';
+
+  @override
+  String get howToPlay => 'Nasıl oynanır?';
+
+  @override
+  String get copiedToClipboard => 'Panoya kopyalandı!';
+
+  @override
+  String get connectionError => 'Bağlantı hatası. Lütfen tekrar deneyin.';
+
+  @override
+  String get loading => 'Yükleniyor...';
+
+  @override
+  String get success => 'Başarılı!';
 
   @override
   String pasAssezDeSymbolesUniques1(
@@ -7150,5 +7949,61 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String aRelanceLesDes2(Object pName, Object val) {
     return '0 dice\'yi yeniden başlattı ( 1 / 3). $pName $val';
+  }
+
+  @override
+  String jAiLanceUnePartie3(Object _selectedGame) {
+    return 'J\'ai lancé une partie de $_selectedGame !';
+  }
+
+  @override
+  String rolesJoueurs1(Object selectedRolesCount, Object playerslength) {
+    return 'Rôles ($selectedRolesCount) ≠ Joueurs ($playerslength).';
+  }
+
+  @override
+  String dessineCettePhrase1(Object stepToProcessconte) {
+    return 'Dessine cette phrase :\n\"$stepToProcessconte\"';
+  }
+
+  @override
+  String aEteBanniPourSa1(Object loserName, Object loserAnswer) {
+    return '$loserName a été banni pour sa proposition \'$loserAnswer\' !';
+  }
+
+  @override
+  String aTrouveLeMot2(Object winnerName, Object currentWord) {
+    return '$winnerName a trouvé le mot : \'$currentWord\' !';
+  }
+
+  @override
+  String personneNATrouveLe1(Object currentWord) {
+    return 'Personne n\'a trouvé le mot : \'$currentWord\'.';
+  }
+
+  @override
+  String aTrouveLeMot3(Object guesserName, Object currentWord) {
+    return '$guesserName a trouvé le mot : \'$currentWord\' !';
+  }
+
+  @override
+  String get revolution1 => '(Révolution !)';
+
+  @override
+  String tonMotEst2(Object _wordCivil) {
+    return 'Kelimeniz: $_wordCivil';
+  }
+
+  @override
+  String tonMotEst3(Object _wordUndercover) {
+    return 'Kelimeniz: $_wordUndercover';
+  }
+
+  @override
+  String get egalite1 => 'Berabere!';
+
+  @override
+  String jAiLanceUnePartie4(Object datagameTypeGribou) {
+    return 'J\'ai lancé une partie de $datagameTypeGribou !';
   }
 }

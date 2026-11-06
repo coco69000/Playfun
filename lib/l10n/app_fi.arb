@@ -7,7 +7,13 @@
   "joueursNonAssignes": "Jakamattomat pelaajat ('{0}')",
   "annuler": "Peruuta",
   "confirmerLesEquipes": "Vahvista tiimit",
+  "jeuDeSoiree": "Bilepeli",
+  "multijoueurEnLigne": "Moninpeli (Verkossa)",
+  "modeLocalHorsLigne": "Paikallinen tila (Offline)",
+  "modeMultijoueur": "Moninpelitila",
   "entrezVotrePseudo": "Anna nimimerkkisi",
+  "pseudo": "Nimimerkki",
+  "creerUnePartie": "Luo peli",
   "veuillezEntrerUnPseudo": "Anna nimimerkki.",
   "rejoindreUnePartie": "Liity peliin",
   "vousAvezAtteintVotreLimite": "Olet saavuttanut tämän päivän 20 moninpelin rajan.",
@@ -48,6 +54,16 @@
   "elementsGeneresEtSauvegardes": "✨ '{0}' tuotettuja ja tallennettuja esineitä!",
   "erreurIa": "AI-virhe: '{0}'",
   "packActifElements": "Aktiivinen paketti: {p} ({p2} esinettä)",
+  "@packActifElements": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "p2": {
+        "type": "Object"
+      }
+    }
+  },
   "desactiverCePack": "Poista tämä paketti käytöstä",
   "modeDeJeu": "Pelitila",
   "normal": "Normaali",
@@ -254,7 +270,24 @@
   "vousAvezEteExcluDe": "Sinut poistettiin toimettomuuden vuoksi. Tietokone pelaa puolestasi (ei palkintoja).",
   "s": "'{0}' s",
   "pts1": "{pName}: {pScore} pistettä",
+  "@pts1": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "pScore": {
+        "type": "Object"
+      }
+    }
+  },
   "xp": "{pXp} XP",
+  "@xp": {
+    "placeholders": {
+      "pXp": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPlusDeCartes": "Ei enää kortteja",
   "cartesRestantes": "'{0}' korttia jäljellä",
   "jetonsMise": "Pelimerkit: '{$0,}' | Panokset: '{$1,}'",
@@ -302,13 +335,14 @@
   "aucuneCarteEnJeuJouez": "Ei kortteja pelissä. Pelaa mitä haluat!",
   "jouer": "Pelaa ('{0}')",
   "priseEnChaineVousDevez": "⚠️ Ketjusyönti! Sinun täytyy siirtää vilkkuvaa nappulaa.",
+  "aSelectionneSonPionEt": "'{0}' on valinnut pelinappulansa ja ajattelee...",
   "vousDevezSelectionnerLePion": "Sinun täytyy valita oranssilla korostettu nappula.",
   "jeuNonImplemente": "Toteuttamaton peli: '{0}'",
   "tempsEcoule": "Aika loppui!",
   "tourSuivant": "Seuraava vuoro",
   "enAttenteDeLHote3": "Odotetaan huoneen ylläpitäjää seuraavan vuoron aloittamiseksi...",
-  "equipeAPts": "Joukkue A: '{pistettä}' pistettä",
-  "equipeBPts": "B-joukkue: '{pistettä}' pistettä",
+  "equipeAPts": "Joukkue A: '{pistettä}' pistettä '{pts}'",
+  "equipeBPts": "B-joukkue: '{pistettä}' pistettä '{pts}'",
   "cEstAToiDe": "On SINUN VUOROSI arvata!",
   "passer1": "OHITA",
   "motsTrouves": "Löydetyt sanat: '{0}'",
@@ -319,7 +353,24 @@
   "voiciLesUvresCollectivesNees": "Tässä ovat mielikuvituksenne synnyttämät yhteisteokset:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' valmistaa hyökkäyksen ('{1}') pelaajaa vastaan!",
   "km": "{oppDist} km",
+  "@km": {
+    "placeholders": {
+      "oppDist": {
+        "type": "Object"
+      }
+    }
+  },
   "km1": "{myDistance} / {targetDist} km",
+  "@km1": {
+    "placeholders": {
+      "myDistance": {
+        "type": "Object"
+      },
+      "targetDist": {
+        "type": "Object"
+      }
+    }
+  },
   "aucuneBotte": "Ei turvakortteja",
   "limite50": "NOPEUSRAJOITUS 50",
   "crevaison": "RENGASRIKKU",
@@ -335,7 +386,7 @@
   "distribuerLaSuite": "Jaa seuraava",
   "attenteDuDonneur": "Odotetaan jakajaa...",
   "couche": "Luovuttanut",
-  "miseActuelle": "Nykyinen panos: '{summa}'",
+  "miseActuelle": "Nykyinen panos: '{amount}'",
   "enAttente": "Odotetaan...",
   "seCoucher": "Luovuta",
   "checker": "Sökötä",
@@ -350,6 +401,13 @@
   "uno": "UNO!",
   "contreUno": "Vasta-UNO!",
   "erreur1": "Virhe: {p}",
+  "@erreur1": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezUneCouleur": "Valitse väri",
   "votezPourUnJoueur": "Äänestä pelaajaa:",
   "derniereChanceMrWhite": "Viimeinen mahdollisuus Mr. White!",
@@ -435,6 +493,22 @@
   "jeValide": "Vahvistan!",
   "classementFinal1": "Lopulliset sijoitukset",
   "pt": "{p}. {eValueKey}: {eValueValue} p{p2}",
+  "@pt": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "eValueKey": {
+        "type": "Object"
+      },
+      "eValueValue": {
+        "type": "Object"
+      },
+      "p2": {
+        "type": "Object"
+      }
+    }
+  },
   "categorie": "Kategoria",
   "viteUnMot": "Nopeasti! Yksi sana!",
   "validerPasser": "VAHVISTA JA ETENPÄIN",
@@ -442,6 +516,19 @@
   "boom": "PUM!",
   "scoresMoinsMieux": "Pisteet (vähemmän = parempi)",
   "pt1": "{eKey}: {eValue} p{p}",
+  "@pt1": {
+    "placeholders": {
+      "eKey": {
+        "type": "Object"
+      },
+      "eValue": {
+        "type": "Object"
+      },
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "nouvelleManche": "Uusi kierros",
   "infecter": "Tartuta",
   "devorer": "Ahmia",
@@ -451,36 +538,95 @@
   "coupDEtat": "Vallankaappaus",
   "ouvrirLesVotes": "Avaa äänestys",
   "cloturerLeVote": "Päätä äänestys",
+  "k0S": "0 s",
   "tempsRestantS": "Jäljellä oleva aika: '{0}' s",
   "k6Consecutifs3": "6 peräkkäin: '{streak}'/3",
   "lancerLeDe": "HEITÄ NOPPAA",
-  "scorePoints": "Pisteet: '{pisteet}'",
-  "dominosRestants": "Jäljellä olevat dominot: '{lasketaan}'",
+  "scorePoints": "Pisteet: '{score}'",
+  "dominosRestants": "Jäljellä olevat dominot: '{count}'",
   "impossibleDeJouerCeDomino": "Tätä palikkaa ei voi pelata tähän.",
   "mancheTerminee": "Kierros päättyi! ",
   "dominos": "Dominopalikat",
   "extremites": "Päät: ",
-  "pioche2": "Tasapeli: '{Laske}'",
+  "pioche2": "Tasapeli: '{count}'",
   "piocher": "Nosta",
   "ficheDePts": "'{0}' ennätys ('{1}' pistettä)",
   "pts2": "{otherName} ({otherTotal} pistettä)",
+  "@pts2": {
+    "placeholders": {
+      "otherName": {
+        "type": "Object"
+      },
+      "otherTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "clic": "KLIKKAUS",
-  "lancersRestants": "Jäljellä olevat heitot: '{Laske}'",
+  "lancersRestants": "Jäljellä olevat heitot: '{count}'",
   "combinaison": "YHDISTELMÄ",
   "grilleDePts": "RUUDUKKO '{0}' ('{1}' pistettä)",
   "pts3": "{p} ({myTotal} pistettä)",
+  "@pts3": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "myTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "pts4": "{oppName} ({oppTotal} pistettä)",
+  "@pts4": {
+    "placeholders": {
+      "oppName": {
+        "type": "Object"
+      },
+      "oppTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "pts5": "{oppCellScore} pisteet",
+  "@pts5": {
+    "placeholders": {
+      "oppCellScore": {
+        "type": "Object"
+      }
+    }
+  },
   "pts6": "{oppTotal} pisteet",
+  "@pts6": {
+    "placeholders": {
+      "oppTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "total": "YHTEENSÄ",
   "pts7": "{myTotal} pisteet",
+  "@pts7": {
+    "placeholders": {
+      "myTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "carteAPrendre": "OTETTAVA KORTTI",
-  "votreMain": "Kätesi ('{laske}')",
+  "votreMain": "Kätesi ('{count}')",
   "touchezUneCartePourLa": "Napauta korttia pelataksesi sen",
   "aucuneCombinaisonEtaleeSurLa": "Ei yhdistelmiä pöydällä vielä",
-  "etaler": "Levitys ('{}')",
+  "etaler": "Levitys ('{}') '{count}'",
   "defausserFin": "Heitä pois ja lopeta",
   "pts8": "{eValue} pisteet",
+  "@pts8": {
+    "placeholders": {
+      "eValue": {
+        "type": "Object"
+      }
+    }
+  },
   "placezDansVotreCoin": "Aseta omaan kulmaasi!",
   "retourner": "Peilaa",
   "validerLePlacement": "Vahvista asettelu",
@@ -699,6 +845,13 @@
   "validerLesEquipes": "Vahvista tiimit",
   "placezLeTelephoneSurVotre": "ASETA PUHELIN OTSALLESI!",
   "s1": "⏱️ {secondsLeft} s",
+  "@s1": {
+    "placeholders": {
+      "secondsLeft": {
+        "type": "Object"
+      }
+    }
+  },
   "basTrouve": "Alas = Löydetty",
   "arreter": "Lopeta",
   "hautPasser": "Ylös = Ohi",
@@ -706,7 +859,21 @@
   "pointsMarques": "+'{0}' pistettä!",
   "touchezUnMotPourModifier": "Napauta sanaa muokataksesi tulosta anturivirheen sattuessa:",
   "pts10": "{teamAScore} pisteet",
+  "@pts10": {
+    "placeholders": {
+      "teamAScore": {
+        "type": "Object"
+      }
+    }
+  },
   "pts11": "{teamBScore} pisteet",
+  "@pts11": {
+    "placeholders": {
+      "teamBScore": {
+        "type": "Object"
+      }
+    }
+  },
   "continuerLaPartie": "Jatka peliä",
   "mauvaisSymbole": "'{0}' : Huono symboli!",
   "dobbleLocal": "Paikallinen Dobble",
@@ -717,6 +884,16 @@
   "commencer2": "ALOITA",
   "piocheBut": "TASAPELI ('{0}') • MAALI : '{1}'",
   "pts12": "{player} ({score} pistettä)",
+  "@pts12": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "partieTerminee2": "PELI PÄÄTTYI!",
   "victoireDe": "Voitto '{0}' !",
   "cartes": "'{0}' korttia",
@@ -803,6 +980,13 @@
   "prets": "'{0}' / '{1}' valmiina",
   "scoresConservesDeLaSession": "TALLENNETUT ISTUNNON PISTEET:",
   "pts13": "{pScore} pisteet",
+  "@pts13": {
+    "placeholders": {
+      "pScore": {
+        "type": "Object"
+      }
+    }
+  },
   "adminLancerMaintenantAvecLes": "Ylläpitäjä: Aloita nyt valmiiden pelaajien kanssa",
   "leCompagnonDeVosMeilleures": "Parhaiden iltojesi kumppani",
   "desactivezLaRecherchePubliquePour": "Poista ''Julkinen haku'' käytöstä pelataksesi paikallisesti.",
@@ -817,11 +1001,12 @@
   "votreFlotteTirsEnnemisRecus": "Oma laivueesi (Vastaanotetut vihollisen osumat)",
   "elimine": "Pudonnut",
   "tapisVide": "Tyhjä pelialue",
-  "reflechit": "'{nimi}' ajattelee...",
+  "ecrireAu": "Kirjoita '{0}'...",
+  "reflechit": "'{name}' ajattelee...",
   "faceAFaceCoteA": "Kaksinkamppailu (vierekkäin)",
   "totalAdversaire": "VASTUSTAJAN YHTEENSÄ",
   "prendreLAtoutOuPasser": "OTA VALTTI TAI PASSAA:",
-  "combinaisonsDe": "Yhdistelmät '{nimistä}'",
+  "combinaisonsDe": "Yhdistelmät '{nimistä}' '{name}'",
   "ilDevraDonnerLePremier": "Hänen on annettava ensimmäinen vihje",
   "cetteReponseADejaEte": "Tämä vastaus on jo annettu!",
   "themePourLes25Mots": "Aihe 25 sanalle",
@@ -830,51 +1015,299 @@
   "rulesTitle": "Pelin säännöt",
   "understoodButton": "Ymmärrän",
   "skyjoRoundEnderNotice": "{name} paljasti kaikki korttinsa ensin.",
+  "@skyjoRoundEnderNotice": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoRoundScoreNotice": "+{roundScore} tämä kierros  •  Yhteensä: {totalScore} p",
+  "@skyjoRoundScoreNotice": {
+    "placeholders": {
+      "roundScore": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoReplaceWithDrawn": "Napauta korttia KORVATAKSESI sen kortilla {card}.",
+  "@skyjoReplaceWithDrawn": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoTapHiddenToReveal": "Napauta PIILOTETTUA korttia PALJASTAAKSESI sen.",
   "skyjoChooseActionForDrawn": "Valitse toiminto kortille {card}:",
+  "@skyjoChooseActionForDrawn": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoReplaceWithDiscard": "Napauta korttia KORVATAKSESI sen poistopakasta ({card}).",
+  "@skyjoReplaceWithDiscard": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoCardsRevealedCount": "{count} / 2 korttia käännetty",
+  "@skyjoCardsRevealedCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "ceTurnOfPlayer": "PELAAJAN {name} VUORO",
+  "@ceTurnOfPlayer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "ceStepOfTotal": "Vaihe {step} / {total}",
+  "@ceStepOfTotal": {
+    "placeholders": {
+      "step": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
   "ceVisibleSnippetOf": "Näkyvä osa käyttäjältä {name}:",
+  "@ceVisibleSnippetOf": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "cePlayerWriting": "{name} kirjoittaa...",
+  "@cePlayerWriting": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "ceStoryNumber": "TARINA #{index}",
+  "@ceStoryNumber": {
+    "placeholders": {
+      "index": {
+        "type": "Object"
+      }
+    }
+  },
   "mbTurnOf": "PELAAJAN {name} VUORO",
+  "@mbTurnOf": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "mbHandCount": "Käsi: {count} korttia",
+  "@mbHandCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "mbCardsInHand": "Kortit kädessä ({count})",
+  "@mbCardsInHand": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "dobbleAllCardsFound": "Kaikki kortit on löydetty!",
   "dobbleDealingCards": "Jaetaan kortteja...",
   "dobbleCenterCard": "KESKIKORTTI",
+  "dobbleDeckCards": "NOSTA ({count} korttia)",
+  "@dobbleDeckCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "dobbleTapSameSymbol": "Etsi identtinen symboli!",
   "dobbleMyCardsCount": "Omat Kortit: {count}",
+  "@dobbleMyCardsCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "dobbleBlocked": "LUKITTU!",
   "dobbleTooManyErrors": "Liikaa nopeita virheitä.",
+  "dobblePenaltyWait": "Odota rangaistusta!",
+  "dobbleWrongSymbolWarning": "Huono symboli! Varo tukosta.",
   "dobbleFoundSymbol": "{name} löysi symbolin!",
+  "@dobbleFoundSymbol": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "dobbleSymbolWas": "Symboli oli:",
   "pokerPot": "Potti: {amount} \\$",
+  "@pokerPot": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "pokerRaiseAlert": "⚠️ {name} valmistelee korotusta summaan {amount} \\$!",
+  "@pokerRaiseAlert": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      },
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "pokerCall": "Katso ({amount})",
+  "@pokerCall": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "unoYouMustDraw": "Sinun täytyy nostaa {count} korttia!",
+  "@unoYouMustDraw": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "unoMustDraw": "Täytyy nostaa {count} korttia!",
+  "@unoMustDraw": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "unoDrawCountCards": "Nosta {count} korttia",
+  "@unoDrawCountCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesMissionEnd": "Tehtävä päättynyt!",
   "codenamesRedTeam": "Punainen joukkue",
   "codenamesBlueTeam": "Sininen joukkue",
+  "codenamesSpectator": "Katsoja",
+  "codenamesMasterSpy": "Vakoojamestari",
+  "codenamesAgent": "Agentti",
   "codenamesTeamTurn": "On joukkueen vuoro: {team}",
+  "@codenamesTeamTurn": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
+  "codenamesYouAre": "Olet: ",
   "codenamesMasterSpyView": "Vakoojamestarinäkymä (Avainkortti)",
   "codenamesClueLabel": "Vihjeesi (yksi sana)",
   "codenamesWordCountLabel": "Sanojen määrä",
   "codenamesGiveClue": "Anna vihje",
   "codenamesClueGiven": "Annoit vihjeen: ''{clue} {count}''",
+  "@codenamesClueGiven": {
+    "placeholders": {
+      "clue": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesAgentView": "Agenttinäkymä",
   "codenamesClueFromSpy": "Vihje pelaajalta {spy}:",
+  "@codenamesClueFromSpy": {
+    "placeholders": {
+      "spy": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesGuessesLeft": "Yrityksiä jäljellä: {count}",
+  "@codenamesGuessesLeft": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesPassTurn": "Päätä vuoro",
   "codenamesWaitingForClue": "Odotetaan {team} Vakoojamestarin vihjettä...",
+  "@codenamesWaitingForClue": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamAScore": "Joukkue A: {score}",
+  "@timesUpTeamAScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamBScore": "Joukkue B: {score}",
+  "@timesUpTeamBScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpYouAreInTeam": "Olet tiimissä {team}",
+  "@timesUpYouAreInTeam": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpRoundMode": "Kierros {round}: {mode}",
+  "@timesUpRoundMode": {
+    "placeholders": {
+      "round": {
+        "type": "Object"
+      },
+      "mode": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpYourTurnToMakeGuess": "On SINUN vuorosi selittää!",
   "timesUpRoundEnd": "KIERROS PÄÄTTYI!",
   "timesUpFound": "Löytyi!",
@@ -883,36 +1316,144 @@
   "timesUpSomeone": "Joku",
   "timesUpSeconds": "sekuntia",
   "timesUpCardsLeft": "Kortteja jäljellä: {count}",
+  "@timesUpCardsLeft": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpForceNextPlayer": "Pakota seuraava pelaaja (Isäntä)",
   "timesUpGameOverReason": "3 kierroksen loppu! Joukkue A: {scoreA} p | Joukkue B: {scoreB} p",
+  "@timesUpGameOverReason": {
+    "placeholders": {
+      "scoreA": {
+        "type": "Object"
+      },
+      "scoreB": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamA": "Tiimi A",
   "timesUpTeamB": "Tiimi B",
   "timesUpDraw": "Tasapeli",
   "timesUpWaitingForWords": "Odotetaan, että kaikki pelaajat lähettävät sanansa...",
   "timesUpAddWordsCount": "Lisää {count} sanaa tai ilmausta",
+  "@timesUpAddWordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpWordsSubtitle": "(henkilöt, esineet, elokuvat, paikat...)",
   "timesUpWordInputLabel": "Arvattava sana ({current}/{target})",
+  "@timesUpWordInputLabel": {
+    "placeholders": {
+      "current": {
+        "type": "Object"
+      },
+      "target": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpAddWordTooltip": "Lisää tämä sana",
   "timesUpYourWords": "Sanasi:",
   "timesUpSubmitWords": "Lähetä {count} sanaani",
+  "@timesUpSubmitWords": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpModeFree": "Vapaa kuvaus",
   "timesUpModeOneWord": "Vain yksi sana",
   "timesUpModeMime": "Pantomimi",
   "dtGuessedWords": "{name} löysi {count} sanaa!",
+  "@dtGuessedWords": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "dtMakeGuessWordTo": "Saa {name} arvaamaan tämä sana:",
+  "@dtMakeGuessWordTo": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "undercoverEliminatePlayer": "Pudota {name}",
+  "@undercoverEliminatePlayer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "undercoverVoteCount": "{count} ääni(ä)",
+  "@undercoverVoteCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "petitBacRound": "Kierros {round}",
+  "@petitBacRound": {
+    "placeholders": {
+      "round": {
+        "type": "Object"
+      }
+    }
+  },
   "petitBacChooseCategories": "Valitse kategoriat:",
   "petitBacAddCategory": "Lisää kategoria",
+  "petitBacMinOneCategory": "Tarvitset vähintään yhden kategorian!",
   "petitBacValidateCategories": "Vahvista kategoriat",
   "petitBacLetter": "Kirjain: {letter}",
+  "@petitBacLetter": {
+    "placeholders": {
+      "letter": {
+        "type": "Object"
+      }
+    }
+  },
+  "petitBacWaitingForBell": "Lakana palautettu! Odotan kelloa...",
   "petitBacIFinished": "Olen valmis! (Lopeta)",
   "petitBacCorrection": "TARKISTUS",
+  "petitBacGameOverReason": "Little Bac -peli ohi!",
   "presidentGivesTo": "{from} antaa pelaajalle {to}:",
+  "@presidentGivesTo": {
+    "placeholders": {
+      "from": {
+        "type": "Object"
+      },
+      "to": {
+        "type": "Object"
+      }
+    }
+  },
   "presidentPlayCards": "PELAA ({count})",
+  "@presidentPlayCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "actionPendingMsg": "Toimintoasi tallennetaan...",
+  "monAnimalPrefere": "Lempieläimeni",
   "unJoueurEstDesigneComme": "Pelaaja määritellään ''kohteeksi''. Muut pelaajat vastaavat nimettömästi kysymykseen hänestä. Kohde valitsee mieluisan vastauksensa, ja sen tekijä saa yhden pisteen.",
+  "uneSituationEstPresenteeTous": ": \r\n        \"Tilanne esitellään. Kaikki pelaajat äänestävät henkilöä, joka todennäköisimmin tekee tämän. Eniten ääniä saanut pelaaja saa yhden pisteen (kyseenalainen kunnia!).\",    ",
   "modeClassiqueUneQuestionEst": "Klassinen tila: Kysytään kysymys. Yksi pelaaja nimetään salaa ''valehtelijaksi'' ja hänen täytyy keksiä vastaus. Muut kertovat totta. Äänestä valehtelijan paljastamisesta.\\n\\nYksinkertaistettu tila: Kaikki kertovat anekdootin (totta tai epätosia) teeman perusteella ja ilmoittavat salaa totuudenmukaisuutensa. Sitten kaikki äänestävät ''Totta'' tai ''Epätota'' jokaisesta tarinasta. Pisteitä ansaitsee arvaamalla oikein ja harhauttamalla muita.",
   "laPlupartDesJoueursCivils": "Useimmat pelaajat (siviilit) saavat sanan. ''Infiltrator'' saa samanlaisen sanan. Ja ''Mr. White'' ei saa YHTÄÄN sanaa. Jokainen pelaaja saa vihjesanan **30 sekunnissa**. Tavoitteena on paljastaa huijarit äänestämällä. Jos siviili eliminoidaan, huijarit voittavat.",
   "unMotEstAfficheChaque": "Näytetään sana. Jokaisen pelaajan tulee salaa lähettää synonyymi. Kaikki vastaukset paljastetaan, ja pelaajat äänestävät ''bannaan'' vähiten relevantin ehdotuksen. Kielletty pelaaja häviää kierroksen.",
@@ -944,6 +1485,7 @@
   "sonObjectifEstDeVaincre8": "Hänen tavoitteensa on voittaa ihmissudet. Niin kauan kuin metsästäjä on elossa, hän on suojattu ihmissusihyökkäyksiltä. Kun sudet kohdistavat hyökkäyksensä Punahilkkaan metsästäjän ollessa elossa, heidän äänensä ei johda kuolemaan. Jos metsästäjä kuolee, punahilkka muistuttaa yksinkertaista kyläläistä. ",
   "sonObjectifEstDeVaincre9": "Hänen tavoitteensa on voittaa ihmissudet. Joka yö pyromantilla on valinta säilyttää kreikkalainen tulitynnyri pelaajan kotiin tai laukaista räjähdys. Hän voi tappaa oman puolensa jäseniä, joten hänen on toimittava strategisesti. Tynnyrien määrälle ei ole rajoitusta, mutta jos pyromantti kuolee laukaisematta räjähdystä, pelaajat pysyvät hengissä. Ole varovainen, toisin kuin noita, pyromantin täytyy olla elossa aamulla, jotta räjähdys laukeaa.",
   "sonObjectifEstDeVaincre10": "Hänen tavoitteensa on voittaa ihmissudet, kunnes hän saa uuden roolin. Ensimmäisenä yönä hän nimeää testamentin tekijän, joka perii hänen roolinsa hänelle kuolemansa jälkeen. Perillinen saa takaisin vain ne voimat, joita hänen testamenttinsa ei kuluta (Noidan juoma, diktaattorin vallan kaappaus jne.), paitsi Metsästäjä ja haudankaivaja. Hän ei saa infektiota (Musta Susi) eikä saastumista (Sairas Rotta) testamenttikirjoittajaltaan. Hän pitää infektion tai saastumisen tukikohdassa. Jos hän perii ihmissuden voimat, muille sudille kerrotaan, että hän liittyy laumaan. Jos hän perii diktaattorin voimat, joka kuolee vallankaappauksen yönä, perillisen tehtävänä on ottaa vastuu seurauksista ja toteuttaa vallankaappaus heti herättyään.",
+  "touche": "Touchdown",
   "unVillageoisSansPouvoirSpecial": "Kyläläinen ilman erikoisvoimia.",
   "devoreUnVillageoisLaNuit": "Syö kyläläisen yöllä.",
   "decouvreUnRoleParNuit": "Löytää yhden roolin yössä.",
@@ -968,49 +1510,219 @@
   "heritier": "Perillinen",
   "heriteDuRoleDeSon": "Perii perinnönjättäjän roolin tämän kuollessa.",
   "themeIa": "Tekoälyteema",
+  "caseLabel": ": \r\n      laatikko ",
   "generalEtVarie": "Yleistä ja monipuolista",
+  "unDinosaureQuiMangeUne": "Dinosaurus syömässä jäätelöä",
+  "pouvoirVolerOuEtreInvisible": "Kyky lentää tai olla näkymätön",
+  "returnGenereDesSituationsCourtes": ": \r\n        return \"Luo lyhyitä tilanteita, jotka alkavat toiminnolla. Teema: {finalPrompt}\"; \r\n      laatikko ",
+  "@returnGenereDesSituationsCourtes": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "abandonTousLesJoueursDeconnectes": "Antautuminen (kaikki pelaajat katkaistu)",
   "tousLesJoueursSeSont": "Kaikki pelaajat ovat katkaisseet yhteyden",
   "nAPasJoueA": "⏱️ {playerName} ei soittanut ajoissa. Tietokone soitti hänelle ({actionDetails}).",
+  "@nAPasJoueA": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "actionDetails": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA1": "⏱️ {playerName} ei pelannut ajoissa. Tietokone pelasi hänen puolestaan satunnaisesti.",
+  "@nAPasJoueA1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "joueur": "Pelaaja",
   "tempsEcoule1": "(Aika kului)",
   "tempsEcoule2": "Kulunut aika",
   "aToucheUneCibleIl": "🎯 {shooterDataname} osui maaliin! Pelaa uudestaan.",
+  "@aToucheUneCibleIl": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "aTireDansLEau": "🌊 {shooterDataname} ampui veteen. Pelaajan {opponentDataname} vuoro.",
+  "@aTireDansLEau": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      },
+      "opponentDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "unJoueur": "Pelaaja",
   "inactif3ToursSansReponse": "ei-aktiivinen (3 vuoroa vastaamatta)",
   "leJugeNAPas": "Tuomari ei määrittänyt voittajaa ajoissa. Pisteitä ei jaettu.",
   "aLanceLesDes": "{pName} heitti noppia!",
+  "@aLanceLesDes": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aRelanceLesDes3": "'{'pName'}' heitti nopat uudelleen ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} piti nopan arvolla {dieVal} (noppa #{index1}) 🔒",
+  "@aGardeLeDeDe": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "dieVal": {
+        "type": "Object"
+      },
+      "index1": {
+        "type": "Object"
+      }
+    }
+  },
   "aDebloqueLeDe": "{pName} avasi nopan #{index1}",
+  "@aDebloqueLeDe": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "index1": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagne": "{playerName} voitti!",
+  "@aGagne": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneAvecLeScoreLe": "{playersgameWinnerIdnameJoueur} voittaa pienimmällä pistemäärällä!",
+  "@gagneAvecLeScoreLe": {
+    "placeholders": {
+      "playersgameWinnerIdnameJoueur": {
+        "type": "Object"
+      }
+    }
+  },
   "leRatMaladeEstLe": "Sairas rotta on ainoa eloonjäänyt! Myrkytti kaikki!",
   "tousLesAutresSurvivantsSont": "Kaikki muut eloonjääneet ovat sairastuneet Sairaan rotan tartunnasta. Hän voitti!",
   "leRoleDeEst": "Pelaajan {targetName} rooli on: {targetRole}.",
+  "@leRoleDeEst": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leDictateur": "Diktaattori",
   "vousEtesAmoureuxDe": "Olet rakastunut pelaajaan {lover2Name}!",
+  "@vousEtesAmoureuxDe": {
+    "placeholders": {
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "vousEtesAmoureuxDe1": "Olet rakastunut pelaajaan {lover1Name}!",
+  "@vousEtesAmoureuxDe1": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      }
+    }
+  },
   "pioche3": "Haku",
+  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = osat[1].trim(); \r\n    '''}''' muuta '''{''' \r\n      Kaksoisrinnan suojaus: jos",
   "vousNAvezPasDe": "Sinulla ei ole sanoja",
   "equipe12": "Joukkue 1",
   "equipe21": "Joukkue 2",
   "finDesManchesVictoireDe": "Kierrokset päättyivät! Voittaja on {winnerName}!",
+  "@finDesManchesVictoireDe": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "scoreCibleAtteint": "Tavoitepisteet saavutettu!",
   "laPartie2v2Commence": "2v2-peli alkaa!",
   "laPartieCommence1": "Peli alkaa!",
   "aGardeLeZombie": "{playersloserIdnameUnjoueur} piti Zombien!",
+  "@aGardeLeZombie": {
+    "placeholders": {
+      "playersloserIdnameUnjoueur": {
+        "type": "Object"
+      }
+    }
+  },
   "chaqueJoueurADevineUne": "Jokainen pelaaja arvasi kerran!",
   "toutLeMondeEstPasse": "Kaikki passasivat!",
   "verite1": "TOTUUS",
   "aLePlusDXp": "{playerswinnerIdnameJoueur} on eniten XP:tä ({maxXp} XP) ja hänestä tulee Admin!",
+  "@aLePlusDXp": {
+    "placeholders": {
+      "playerswinnerIdnameJoueur": {
+        "type": "Object"
+      },
+      "maxXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Suojan loppu (admin-nappi)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async '''{''' \r\n    await _db.runTransaction((transaction) async'''{''' \r\n      final gameRef = _db.collection(''games'').doc(gameCode); \r\n      final snap = odota transaction.get(gameRef); \r\n      jos (!snap.exists) palautetaan; \r\n\r\n      final gameData = snap.data() karttana<merkkijonona, dynaamisena>; \r\n      final players = Map<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Ratkaise voittaja (enemmän XP:tä)\r\n      String winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        final xp = (pData[''xp''] numerona?)?. toInt() ?? 0; \r\n        jos (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Joku",
   "aAtteintPointsEtRemporte": "{winnerName} saavutti {targetScore} pistettä ja voitti pelin!",
+  "@aAtteintPointsEtRemporte": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "motManquant": "Puuttuva sana",
   "erreurLeNombreDeRoles": "Virhe: Roolien määrä ({length}) ei vastaa pelaajien määrää ({playerCount}).",
+  "@erreurLeNombreDeRoles": {
+    "placeholders": {
+      "length": {
+        "type": "Object"
+      },
+      "playerCount": {
+        "type": "Object"
+      }
+    }
+  },
   "toutesLesManchesDeTime": "Kaikki Time''s Up -kierrokset ovat päättyneet!",
   "gagneAvecPoints": "{playerswinnerIdnameUnjoueur} voittaa {maxScore} pisteellä!",
+  "@gagneAvecPoints": {
+    "placeholders": {
+      "playerswinnerIdnameUnjoueur": {
+        "type": "Object"
+      },
+      "maxScore": {
+        "type": "Object"
+      }
+    }
+  },
   "finDeLaPartie": "Peli päättyi!",
   "leDessinateurNAPas": "Piirtäjä ei palauttanut piirrosta ajoissa.",
   "leTempsEstEcoulePersonne": "Aika loppui! Kukaan ei löytänyt sanaa.",
@@ -1018,15 +1730,54 @@
   "motNonDevine": "Sanaa ei arvattu.",
   "les13CartesOntEte": "Kaikki 13 korttia on pelattu!",
   "laBombeAExploseDans": "Pommi räjähti pelaajan {loserName} käsissä!",
+  "@laBombeAExploseDans": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "leJoueur": "Pelaaja",
+  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Lista<Merkkijono> kysymykset =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely [vaikeustaso] ?? \r\n          GameWords.whoIsMostTodennäköisesti[",
   "honnete": "Rehellisesti",
+  "pairSplit": ") ? pari.split(",
+  "pairPairListStringShuffledroles": "): [jopa, jopa]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Kysymys =\r\n            \"Kuvaile salainen sanasi yhdellä sanalla. Huijarit, bluffakaa!\"; \r\n        for (var pId in players.keys) '''{''' \r\n          Merkkijono pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} saavutti {updatedScoresoverallWinnerId} pistettä ja voitti pelin!",
+  "@aAtteintPointsEtGagne": {
+    "placeholders": {
+      "playersoverallWinnerIdname": {
+        "type": "Object"
+      },
+      "updatedScoresoverallWinnerId": {
+        "type": "Object"
+      }
+    }
+  },
   "poseDeCarte": "kortin pelaaminen",
   "enchereAutomatique": "automaattinen tarjous",
   "passeLEnchere": "passaa huudon",
+  "elseIfGametype": ") '''{''' \r\n        if (voterId == votedForId) '''{''' \r\n          throw Exception (\"Virallinen kielto äänestää itse!\"); \r\n        '''}''''}''' muuten, jos (gameType ==\r\n      ",
+  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          Kauppa, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: totta, \r\n        ); \r\n      }' \r\n\r\n      int vaaditaanÄänet = pelaajat.pituus; \r\n\r\n      if (gameType == ",
+  "forFinalTargetInVotes": ") '''{''' \r\n          final Map<String, int> voteCounts = '{}'; \r\n          for (lopullinen kohde votes.valuesissa) '{' \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxVotes = 0; \r\n          Lista<Merkkijono> topVoted = []; \r\n          voteCounts.forEach((target, count) '''{''' \r\n            if (laske > maxVotes) '{' \r\n              maxVotes = laskenta; \r\n              topVoted = [kohde]; \r\n            '}' muuten, jos (count == maxVotes) '{' \r\n              topVoted.add(target); \r\n            '}''''}'''); \r\n\r\n          Päivitykset[\r\n          ",
+  "forFinalTargetInVotes1": ") '''{''' \r\n        final Map<String, int> voteCounts = '{}'; \r\n        for (lopullinen kohde votes.valuesissa) '{' \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxVotes = 0; \r\n        Lista<Merkkijono> topVoted = []; \r\n        voteCounts.forEach((target, count) '''{''' \r\n          if (laske > maxVotes) '{' \r\n            maxVotes = laskenta; \r\n            topVoted = [kohde]; \r\n          '}' muuten, jos (count == maxVotes) '{' \r\n            topVoted.add(target); \r\n          '}''''}'''); \r\n\r\n        if (topVoted.length == 1) '''{''' \r\n          lopullinen voittaja = topVoted.first; \r\n          Päivitykset[\r\n        ",
   "aRemporteTousLesJetons": "{winnerName} voitti kaikki pelimerkit pöydällä!",
+  "@aRemporteTousLesJetons": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "uneMain": "Yksi käsi",
   "carte1": "kortti {cardToPlay}",
+  "@carte1": {
+    "placeholders": {
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "quipourraitvotemode": "? _quiPourraitVoteMode\r\n                      : ",
   "localIndisponibleVideoAudioActif": "Paikallinen ei käytettävissä (video/ääni päällä)",
   "jouerEnLocalSurCet": "Pelaa paikallisesti (Tällä laitteella)",
   "laVideoEstObligatoirePour": "Video vaaditaan Arvaa kuka olen -pelin pelaamiseen verkossa.",
@@ -1048,9 +1799,26 @@
   "generationEnCours": "Luodaan...",
   "completerAvecLIa15": "Täydennä tekoälyllä (+15 sanaa)",
   "completeCetteListeSurLe": "Täytä tämä teemalista {text}. Olemassa olevat sanat: {join}",
+  "@completeCetteListeSurLe": {
+    "placeholders": {
+      "text": {
+        "type": "Object"
+      },
+      "join": {
+        "type": "Object"
+      }
+    }
+  },
   "exMythologieGrecqueObjetsInsolites": "esim.: Kreikkalainen mytologia, epätavalliset esineet, merirosvot...",
   "exPasDAnimauxDangereux": "esim.: Ei vaarallisia eläimiä, vain kulttielokuvia...",
   "genererAvecLIaElements": "Luo tekoälyllä ({currentCount} elementtejä)",
+  "@genererAvecLIaElements": {
+    "placeholders": {
+      "currentCount": {
+        "type": "Object"
+      }
+    }
+  },
   "themePersonnalise": "Mukautettu teema",
   "cameraIndispensablePourCeJeu": "Kamera on välttämätön tässä pelissä.",
   "microCameraDesactiveLeMode": "Mikrofoni + Kamera (Poistaa paikallisen tilan käytöstä)",
@@ -1079,6 +1847,16 @@
   "coupAutomatiqueJouePourCause": "Automaattinen siirto pelattiin passiivisuuden vuoksi.",
   "inactivite": "Passiivisuus",
   "str8f522b": "{cat}: {hasScorescoreVal}",
+  "@str8f522b": {
+    "placeholders": {
+      "cat": {
+        "type": "Object"
+      },
+      "hasScorescoreVal": {
+        "type": "Object"
+      }
+    }
+  },
   "zeroPointe": "Skyjo (Nolla pistettä)",
   "partieTermineeAvecLeScore": "Peli päättyi pienimmällä pistemäärällä!",
   "cEstVotreTour": "On sinun vuorosi!",
@@ -1100,6 +1878,13 @@
   "enAttenteDeLaPioche": "Odotetaan kortin nostoa...",
   "laPartieDeBigTwo": "Big Two -peli on päättynyt!",
   "auTourDe2": "Pelaajan {resolvePlayerNamecurrentPlayerId} vuoro",
+  "@auTourDe2": {
+    "placeholders": {
+      "resolvePlayerNamecurrentPlayerId": {
+        "type": "Object"
+      }
+    }
+  },
   "laPartieEstTerminee": "Peli on päättynyt!",
   "plusAucunCoupPossiblePour": "Vastustajalla ei ole enää siirtoja!",
   "cEstVotreTour1": "Sinun vuorosi! ('{0}')",
@@ -1112,7 +1897,21 @@
   "surrealismeClassique": "Klassinen surrealismi",
   "suiteDe3Mots": "Jatka 3 sanalla",
   "strb74c15": "\" {fullText} \"",
+  "@strb74c15": {
+    "placeholders": {
+      "fullText": {
+        "type": "Object"
+      }
+    }
+  },
   "str1e0607": "{authorName} : ",
+  "@str1e0607": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
   "objectif1000BornesAtteint": "1000 km tavoite saavutettu!",
   "aVousDeRouler": "SINUN VUOROSI AJAA!",
   "arrete": "PYSÄHTYNYT",
@@ -1133,8 +1932,36 @@
   "derniereCartePosee": "Viimeisin pelattu kortti!",
   "cEstTonTour": "On SINUN vuorosi!",
   "str422faa": "{valuename}: {valuescore0} 🃏",
+  "@str422faa": {
+    "placeholders": {
+      "valuename": {
+        "type": "Object"
+      },
+      "valuescore0": {
+        "type": "Object"
+      }
+    }
+  },
+  "printEtatDeIsactionpendingAu": " ---\", \r\n    ); \r\n    print(\"Alkuperäinen _isActionPending tila: {_isActionPending}\"); \r\n\r\n    final players = (gameData[",
+  "@printEtatDeIsactionpendingAu": {
+    "placeholders": {
+      "_isActionPending": {
+        "type": "Object"
+      }
+    }
+  },
   "erreurQuestionNonTrouvee": "Virhe: Kysymystä ei löytynyt.",
   "str95d36e": "{valuename}: {key0}",
+  "@str95d36e": {
+    "placeholders": {
+      "valuename": {
+        "type": "Object"
+      },
+      "key0": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezLaMeilleureReponse": "Valitse paras vastaus!",
   "leJugeChoisit": "Tuomari valitsee...",
   "votez": "Äänestä!",
@@ -1156,8 +1983,26 @@
   "leChallenger": "Haastaja",
   "stre93cb0": "'{0}' : '{1}'",
   "uneDescriptionHilarante": "hulvaton kuvateksti",
+  "extrainfoColumnChildrenText": "; \r\n          extraInfo = Sarakke( \r\n            lapset: [ \r\n              Teksti( \r\n                ''",
   "unProblemeEstSurvenu": "Ongelma on ilmennyt.",
+  "defaultFinalRoundwinneridGamedata": ": \r\n      oletus: \r\n        viimeinen kierrosVoittajaId = gameData[",
   "str98e212": "{pName}: {count}/{length}{isFull}",
+  "@str98e212": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      },
+      "length": {
+        "type": "Object"
+      },
+      "isFull": {
+        "type": "Object"
+      }
+    }
+  },
   "aVousDeJouer": "Sinun vuorosi pelata!",
   "trieParCouleur": "Lajiteltu maan mukaan",
   "trierLaMain": "Järjestä käsi",
@@ -1166,9 +2011,49 @@
   "touchezPourPoser": "Aseta napauttamalla",
   "encherissezOuPassez": "Tarjoa tai passaa",
   "str4c885c": "{motdessiner}: {p}",
+  "@str4c885c": {
+    "placeholders": {
+      "motdessiner": {
+        "type": "Object"
+      },
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "voirLeScoreFinal": "Katso lopputulos",
   "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "@str6bd6b6": {
+    "placeholders": {
+      "carte": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "score": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
+  "styleConstTextstyleColorColors": ", \r\n                  tyyli: const TextStyle (väri: Colors.white70), \r\n                ), \r\n                SizedBox (korkeus: 20), \r\n                Wrap( \r\n                  kohdistus: WrapAlignment.center, \r\n                  Lapset: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (korkeus: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Teksti( \r\n                    AppLocalizations.of(context)!. allCluesOn ollut, \r\n                    style: const TextStyle (väri: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' muuta '''{''' \r\n          Ennustajan tehtävä on pelata\r\n          return Column( \r\n            lapset: [ \r\n              Teksti(                ",
   "strf0868c": "{length0}: {valuescore0}",
+  "@strf0868c": {
+    "placeholders": {
+      "length0": {
+        "type": "Object"
+      },
+      "valuescore0": {
+        "type": "Object"
+      }
+    }
+  },
   "cEstAToi": "SINUN VUOROSI!",
   "laPatateAExplose": "Peruna räjähti!",
   "finDeLaPartie1": "Pelin loppu",
@@ -1177,19 +2062,41 @@
   "designez2Amoureux": "Valitse 2 rakastavaista",
   "amoureuxUnis": "Rakastavaiset yhdistetty!",
   "laVictime": "Uhri",
+  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Rivi( \r\n              mainAxisSize: MainAxisSize.min, \r\n              lapset: [ \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. Tartuttaa \r\n                  Ikoni: Icons.auto_fix_high, \r\n                  väri: Colors.purpleAccent, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      Konteksti, \r\n                      Kuule: väärin, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      totta, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox (leveys: 8), \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. niele, \r\n                  ikoni: Icons.close, \r\n                  väri: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        väärin, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          farmariauto; \r\n        Laatikko ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Ei uhreja viime yönä (suojattu tai säästetty)",
+  "styleTextstyleFontweightFontweightBold": ", \r\n                              style: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Väri: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''susi'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan (teksti: viesti), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Kompakti lähetyspalkki\r\n          if (canSendMessage)\r\n            Row( \r\n              lapset: [ \r\n                Laajennettu( \r\n                  lapsi: SizedBox( \r\n                    Pituus: 32, \r\n                    lapsi: TextField( \r\n                      Ohjaaja: _chatController, \r\n                      style: const TextStyle (fontSize: 12, color: Colors.white), \r\n                      koriste: InputDecoration( \r\n                        vihjeTeksti: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          väri: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        raja: OutlineInputRaja( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        täytetty: totta, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          vaaka: 10, \r\n                          Pystysuora: 0, \r\n                        ), \r\n                      ), \r\n                      onLähetetty: (teksti) '''{''' \r\n                        if (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (leveys: 4), \r\n                IconButton( \r\n                  ikoni: const Ikon( \r\n                    Icons.send_rounded, \r\n                    Koko: 18, \r\n                    väri: Colors.cyanAccent, \r\n                  ), \r\n                  pehmustet: EdgeInsets.zero, \r\n                  rajoitteet: const BoxConstraints(), \r\n                  onPressed: () '''{''' \r\n                    if (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(Merkkimerkkimerkki, merkkijonotyyppi, väri activeColor) '{' \r\n    viimeinen bool onValittu = _selectedChatType == tyyppi; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      lapsi: Kontti( \r\n        pehmustet: jatkuu EdgeInsets.symmetric(vaakasuora: 8, pystysuora: 3), \r\n        koristelu: BoxDecoration( \r\n          Väri: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          raja: Border.all( \r\n            Väri: \r\n                isValittu ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        lapsi: Teksti( \r\n          levy-yhtiö, \r\n          style: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isValittu ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- PÄIVITETTY AVATAR INTERAKTIIVISEKSI--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) '''{''' \r\n    if (startTime == null) palauta const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder mahdollistaa erittäin sulavan visuaalisen ajastimen ilman ajastinta ja manuaalista setStatea, mikä keventää säiettä huomattavasti (Kohta 4)\r\n    final endTime = startTime.toDate().add( \r\n      Kesto (sekunti: kestoInSeconds), \r\n    ); \r\n    jäljelle jäänyt = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        tyyli: Teema( \r\n          Konteksti, \r\n        ).textTheme.headlineSmall?. copyWith(väri: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      Kesto: jäljellä, \r\n      tween: Teini-ikäinen (alku: jää, loppu: Kesto.nolla), \r\n      builder: (BuildContext-konteksti, Kestoarvo, Widget? lapsi) '{' \r\n        viimeiset sekunnit = value.inSeconds; \r\n        return Text( \r\n          AppLocalizations.of(context)!. jäljellä oleva aika, \r\n          style: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            väri: sekunti < 20 ? Värit.punainenKorostus: Värit.meripihkaKorostus, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext-konteksti, \r\n    Kartta<String, dynaaminen> gameData, \r\n    String playerId, \r\n  ) '''{''' \r\n    final players = Map<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n    final playerOrder = List<String>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    final positions = Map<String, dynamic>.from( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    viimeinen bool isMyTurn = currentPlayerId == playerId; \r\n    final int noppi = (gameData[''littleHorsesDice''] numerona?)?. toInt() ?? 0; \r\n    final bool hasRolled = gameData[''littleHorsesHasRolled''] ?? väärin; \r\n    final bool isTeamMode = gameData[''smallTeamHorses''] ?? väärin; \r\n    final Map<String, dynaaminen> peräkkäinen Sixes = Map<String, dynaaminen>.from( \r\n      gameData[''smallHorsesPeräkkäiset''] ?? '{}', \r\n    ); \r\n    final int mySixStreak = peräkkäiset kuutoset[playerId] ?? 0; \r\n\r\n    Neon Modern Palette / Arcade tummalla taustalla\r\n    final List<Color> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon taivaansininen\r\n      const Color(0xFF10B981), // Smaragdinvihreä\r\n      const Color(0xFFF59E0B), // Kultainen meripihka\r\n    ]; \r\n\r\n    --- VOITONNÄYTTÖ--- \r\n    if (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      return UniversalGameEndScreen( \r\n        peliOtsikko:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Saavuttu laudan keskelle!",
   "deplacezUnCheval": "SIIRRÄ HEVOSTA!",
   "aVousDeLancer": "SINUN VUOROSI HEITTÄÄ!",
   "mode2v2Allies": "2v2 Liittolaistila",
-  "chevalSelectionneNtouchezPourAvancer": "Hevonen '{sotilas}' valittuna!\\nNapauta edetäksesi",
+  "chevalSelectionneNtouchezPourAvancer": "Hevonen '{pawn}' valittuna!\\nNapauta edetäksesi",
   "touchezUnPion": "Napauta nappulaa",
   "scoreLimiteAtteint": "Tavoitepistemäärä saavutettu!",
   "toutesLesGrillesSontCompletees": "Kaikki tuloskortit on täytetty!",
   "cEstVotreTourTouchez": "On sinun vuorosi! Lukitse noppa koskettamalla sitä (kulta 🔒)",
   "lancerLesDes": "Heitä noppia",
   "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "@k1663": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "oppBonus035": {
+        "type": "Object"
+      }
+    }
+  },
   "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "@k16631": {
+    "placeholders": {
+      "myUpper": {
+        "type": "Object"
+      },
+      "myBonus035": {
+        "type": "Object"
+      }
+    }
+  },
   "scoreFinal": "Lopputulos: '{scoreA}' - '{scoreB}'",
   "encheresEnCours": "TARJOUSKIERROS KÄYNNISSÄ",
   "aVousDOuvrirLe": "SINUN VUOROSI ALOITTAA TIKKI!",
@@ -1200,9 +2107,17 @@
   "plusAucunCoupPossible": "Ei enää siirtoja mahdollista!",
   "lancer1": "Heitä '{0}'",
   "choisirUnJeu": "Valitse peli",
+  "screenWhoismostlikelylocalscreenPlayersPlayersBreak": ": \r\n        näyttö = KukaOnTodennäköisinPaikallinenNäyttö (pelaajat: _players); \r\n        farmariauto; \r\n      laatikko ",
   "generation": "Luodaan...",
   "genererLesDefisParIa": "Luo haasteet tekoälyllä",
   "genereUnMelangeDActions": "Luo viihdyttävän totuuden ja tehtävän sekoituksen. Teema: {trim}",
+  "@genereUnMelangeDActions": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
   "genererLesDilemmesParIa": "Luo dilemmoja tekoälyllä",
   "egalite": "Tasapeli",
   "choixEnregistre": "Valinta tallennettu!",
@@ -1212,11 +2127,27 @@
   "lancerLeDilemme": "Pyöräytä dilemmaa",
   "genererLesQuestionsIa": "Luo tekoälykysymyksiä",
   "genereDesQuestionsIndiscretesEt": "Synnyttää harkitsemattomia ja hauskoja kysymyksiä. Teema: {trim}",
+  "@genereDesQuestionsIndiscretesEt": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
   "perduReveleLaQuestionEt": "HÄVIÖ! Paljasta kysymys ja vastaa siihen!",
   "gagneTonSecretEstPreserve": "VOITTO! Salaisuutesi on turvassa.",
+  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = osat[0].trim(); \r\n      _wordUndercover = osat[1].trim(); \r\n    '''}''' muuta '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (variantti)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    for (var-pelaaja _activePlayers) '''{''' \r\n      if (pelaaja == peitetehtävässä) '''{''' \r\n        _playerRoles[pelaaja] = \"Soluttautuja\"; \r\n      '''}''' muuten, jos (pelaaja == _mrWhitePlayer) '''{''' \r\n        _playerRoles[soittaja] = \"Herra White\"; \r\n      '''}''' muuta '''{''' \r\n        _playerRoles[pelaaja] = \"Siviili\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.paljastava; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  void _nextPlayerReveal() '''{''' \r\n    jos (_currentPlayerRevealIndex < _activePlayers.pituus - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' muuta '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(jousisoittaja) '''{''' \r\n    String role = _playerRoles[soittaja]!; \r\n    bool impostorsWin = rooli == \"Siviili\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      if (huijarit) '''{''' \r\n        _resultMessage = \"'{'player'}' oli siviili! Huijarit voittavat!\"; \r\n      '''}''' muuta '''{''' \r\n        _resultMessage = \"'{'player'}' oli\r\n    \r\n  ",
   "requiert4Joueurs": "Vaatii vähintään 4 pelaajaa",
   "requiert3Joueurs": "Vaatii vähintään 3 pelaajaa",
   "genereDesCategoriesAmusantesPour": "Luo hauskoja kategorioita kuumalle perunalle. Teema: {trim}",
+  "@genereDesCategoriesAmusantesPour": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
+  "bodyPaddingPaddingConstEdgeinsets": "), \r\n          ), \r\n        ], \r\n      ), \r\n      Runko: Pehmusteet( \r\n        pehmustet: const EdgeInsets.all (16.0), \r\n        lapsi: Column( \r\n          lapset: [ \r\n            if (_phase != LocalWhoIsPhase.results) ... [ \r\n              VAIKEUSTASOSUODATIN\r\n              SegmentedButton<String>( \r\n                Segmentit: [ \r\n                  ButtonSegment( \r\n                    Arvo: ",
   "egalite1PtChacun": "Tasapeli! (+1 piste kullekin)",
   "designeParLeGroupe1": "Ryhmän valitsema (+1 piste):",
   "onSePasseUnObjet": "Välitämme esineen toisillemme",
@@ -1227,6 +2158,13 @@
   "k2EquipesSAffrontent": "2 joukkuetta kohtaa toisensa",
   "chacunPourSoi": "Kaikki kaikkia vastaan",
   "stre786cb": "{sender} : ",
+  "@stre786cb": {
+    "placeholders": {
+      "sender": {
+        "type": "Object"
+      }
+    }
+  },
   "afficherLesSalonsPleins": "Näytä täydet huoneet",
   "masquerLesSalonsPleins": "Piilota täydet huoneet",
   "aucunSalonNeCorrespondA": "Mikään huone ei vastaa suodattimiasi.",
@@ -1237,6 +2175,13 @@
   "partie": "Osa",
   "lancerUnStream": "Aloita Lähetys",
   "rejoindreLeStream": "Liity streamiin ({length})",
+  "@rejoindreLeStream": {
+    "placeholders": {
+      "length": {
+        "type": "Object"
+      }
+    }
+  },
   "enAttenteDuLancement": "Odotetaan käynnistystä...",
   "voler": "VARASTA!",
   "ciblee": "KOHTEENA",
@@ -1245,7 +2190,21 @@
   "exQuelEstTonPire": "Esim: Mikä on noloin hetkesi?",
   "verite2": "🔮 TOTUUS",
   "strc1ea47": "\" {p} \"",
+  "@strc1ea47": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "str5dd9e1": "\" {currentChallenge} \"",
+  "@str5dd9e1": {
+    "placeholders": {
+      "currentChallenge": {
+        "type": "Object"
+      }
+    }
+  },
   "defiValide": "HAASTE HYVÄKSYTTY!",
   "defiNonValide": "HAASTE HYLÄTTY",
   "partieTerminee3": "Peli suoritettu",
@@ -1253,6 +2212,13 @@
   "finDeLaManche2": "KIERROKSEN LOPPU",
   "pret4": "✓ Valmis",
   "jAiLanceUnePartie": "Heitin {selectedGame} pelin!",
+  "@jAiLanceUnePartie": {
+    "placeholders": {
+      "selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
   "ia": "IA",
   "localIndisponibleRechercheActive": "Paikallinen ei käytettävissä (Haku aktiivinen)",
   "rechercheRapideMonde": "Pikahaku (maailma)",
@@ -1261,6 +2227,13 @@
   "simpleVillageois": "Kyläläinen",
   "capitaine": "Kapteeni",
   "s2": "{hotPotatoGlobalDuration} s",
+  "@s2": {
+    "placeholders": {
+      "hotPotatoGlobalDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "nombreDeJoueursRecherches": "Haettujen pelaajien määrä: \"'{'''0'''}'\"",
   "laBeloteRequiertExactement4": "Belote vaatii täsmälleen 4 pelaajaa.",
   "formez2EquipesDe2": "Form 2 joukkuetta 2 pelaajaa ''Compose joukkueet''.",
@@ -1269,7 +2242,17 @@
   "tousLesJoueursDoiventEtre": "Kaikki pelaajat on asetettava joukkueeseen.",
   "chaqueEquipeDoitPossederAu": "Jokaisella joukkueella on oltava vähintään 2 pelaajaa.",
   "auMoins5JoueursRequis": "Vähintään viisi pelaajaa tarvitaan.",
-  "rolesJoueurs": "Roolit ( {selectedRolesCount} )",
+  "rolesJoueurs": "Roolit ( {selectedRolesCount} ) {playersLength}",
+  "@rolesJoueurs": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playersLength": {
+        "type": "Object"
+      }
+    }
+  },
   "ceJeuRequiertExactement4": "Tämä peli vaatii täsmälleen 4 pelaajaa.",
   "auMoins3JoueursRequis": "Vähintään kolme pelaajaa tarvitaan.",
   "auMoins2JoueursRequis": "Vähintään 2 pelaajaa tarvitaan.",
@@ -1292,9 +2275,33 @@
   "six": "Kuutoset",
   "sectionSup": "Sup-osa: \"'{'''0'''}'\"",
   "k63Pts": "{oppUpper} /63 s. {value}",
+  "@k63Pts": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "prenezLaDefausseVisibleOu": "Ota näkyvä poistokortti tai nosta piilotettu kortti",
   "aa": "- {value} â € Â €",
+  "@aa": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "dessineCettePhrase": "Vedä tämä lause:\n\" {value} \"",
+  "@dessineCettePhrase": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "completeCeDessin": "Täydennä tämä piirros!",
   "commenceParUnDessin": "Aloita piirroksella!",
   "orateur": "Vihjeenantaja",
@@ -1305,6 +2312,13 @@
   "jouePar": "Soitti \"'{'''0'''}'",
   "lAdversaire": "Vastustaja",
   "ecrivez": "Kirjoita {promptItem}",
+  "@ecrivez": {
+    "placeholders": {
+      "promptItem": {
+        "type": "Object"
+      }
+    }
+  },
   "completezLaPhrase1A": "Täydennä lause (1–8 sanaa)",
   "auteur": "Tekijä",
   "adversaire": "Vastustaja",
@@ -1330,6 +2344,13 @@
   "laPartieVaBientotCommencer": "Peli alkaa pian...",
   "mrWhite": "Mr. White",
   "aEteDemasqueIlTente": "{mrWhiteName} paljastui! Hän yrittää arvata siviilien salasanan.",
+  "@aEteDemasqueIlTente": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
   "voteDecisifEnregistreEnAttente": "Ratkaiseva ääni tallennettu. Odotetaan...",
   "egaliteParfaiteLaDeesseDe": "Täydellinen tasa-arvo! Oikeuden jumalatar päättää...",
   "vousEtesLeJugeAttendez": "Sinä olet tuomari. Odota vastauksia.",
@@ -1343,26 +2364,141 @@
   "aEteChoisiPourSa": "\"'{'''0'''}'\" valittiin hänen vastaus ja voitti 1 piste!",
   "resultatsDesVotes": "Äänestystulokset",
   "leMenteurEtait": "Valehtelija oli... {liarName}!",
+  "@leMenteurEtait": {
+    "placeholders": {
+      "liarName": {
+        "type": "Object"
+      }
+    }
+  },
   "lesImposteursOntGagneUn": "Huijarit ovat voittaneet! Siviili eliminoitiin.",
   "lInfiltreAEteDemasque": "Soluttautunut ( {undercoverName} ) paljastui!",
+  "@lInfiltreAEteDemasque": {
+    "placeholders": {
+      "undercoverName": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteAEteDemasque": "Herra White ( {mrWhiteName} ) on altistunut!",
+  "@mrWhiteAEteDemasque": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTermine": "Se on ohi!",
-  "aEteBanniPourSa": "{loserName} kiellettiin ehdotuksen \"9 {loserAnswer} \" osalta!",
+  "aEteBanniPourSa": "{loserName} kiellettiin ehdotuksen \"9  \" osalta! {loserAnswer}",
+  "@aEteBanniPourSa": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteDansLesVotesPersonne": "Tasa-arvo äänissä! Ketään ei kielletä.",
   "nAPasReponduA": "{loserName} ei vastannut ajoissa ja voitti 1 piste!",
+  "@nAPasReponduA": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersonneNePrendDe": "Tasa-arvo! Kukaan ei käänny tästä.",
-  "aTrouveLeMot": "{winnerName} löysi sanan: \" 99999.\"",
-  "personneNATrouveLe": "Kukaan ei löytänyt sanaa '' ''9909''.",
-  "aTrouveLeMot1": "{guesserName} löysi sanan: \" 99999.\"",
+  "aTrouveLeMot": "{winnerName} löysi sanan: \" 99999.\" ",
+  "@aTrouveLeMot": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe": "Kukaan ei löytänyt sanaa '' ''9909''. '{currentWord}'",
+  "@personneNATrouveLe": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot1": "{guesserName} löysi sanan: \" 99999.\" ",
+  "@aTrouveLeMot1": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasTrouveLe": "{guesserName} ei löytänyt sanaa.",
+  "@nAPasTrouveLe": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
   "remporteSkull": "{value} voittaa Kallon!",
+  "@remporteSkull": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "defiGagneCarteSRevelee": "Haaste voitettu: {challengeBid} kortti(a) paljastettu!",
+  "@defiGagneCarteSRevelee": {
+    "placeholders": {
+      "challengeBid": {
+        "type": "Object"
+      }
+    }
+  },
   "aPerduLeDefi": "{loserName} hävisi haasteen.",
+  "@aPerduLeDefi": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTermine1": "Vuoro on päättynyt.",
+  "aGagneAvecSaDescription": "{winnerName} voitti kuvauksellaan:AppLocalizations.of [conteksti]!. extrainfoColumnChildText 99999 {winningDescription}",
+  "@aGagneAvecSaDescription": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "winningDescription": {
+        "type": "Object"
+      }
+    }
+  },
   "personneNAGagneCe": "Kukaan ei voittanut tätä kierrosta. Tasapeli tai ei kuvatekstejä.",
-  "aTrouveLeSymboleIl": "{winnerName} löysi symboli 99999! Hän voittaa kortin.",
+  "aTrouveLeSymboleIl": "{winnerName} löysi symboli 99999! Hän voittaa kortin. {commonSym}",
+  "@aTrouveLeSymboleIl": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "commonSym": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTerminePersonne": "Vuoro päättyi. Kukaan ei löytänyt yhteistä symbolia.",
   "aEteDesigneEEt": "{winnerName} nimettiin ja voitti 1 piste!",
+  "@aEteDesigneEEt": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersonneNeMarqueDe": "Tasapeli! Kukaan ei saa pistettä tällä vuorolla.",
   "espion": "Vakooja",
   "revolution": " (Vallankumous!)",
@@ -1372,6 +2508,32 @@
   "indiceEnvoyeEnAttenteDes1": "Vihje lähetetty! Odotetaan muita...",
   "carte3": "Kartta",
   "score": "Pistemäärä",
+  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLocalizations.of [conteksti]! .styleConstTextstyle Värit {value2} {deckIndex} / {deckTotal} ... {value3} : {totalScore}",
+  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "guesserName": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "value3": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
   "laNuitTombeSurLe": "Yö on kylässä.\n\nSulje silmäsi.",
   "leMomentEstVenuLe": "Aika on tullut...\n\nKylän on äänestettävä.",
   "victoireDesVillageois": "Kyläläiset voittavat!",
@@ -1393,9 +2555,24 @@
   "votezPourDevorerUneProie": "Äänestä uhrin ahmimisesta",
   "espionnezUnJoueur": "Vakoile pelaajaa...",
   "leLoupNoirDecideDu": "Musta Susi päättää uhrin kohtalosta",
+  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Tartuta {targetName} ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinValkoinen susi iskee yksin",
+  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezUneVictimeADevorer": "Valitse ahmaistava uhri",
   "laSorcierePrepareSesPotions": "Noita keittää taikajuomiaan",
   "cibleDesLoups": "Susien kohde: {victimeName}",
+  "@cibleDesLoups": {
+    "placeholders": {
+      "victimeName": {
+        "type": "Object"
+      }
+    }
+  },
   "touchezLeJoueurAEliminer": "Kosketa pelaajaa poistaa myrkky",
   "empoisonner": "Myrkytä",
   "lePyromancienPrepareSesExplosifs": "Pyromaani valmistelee räjähteitään",
@@ -1411,9 +2588,37 @@
   "loups": "Sudet",
   "outreTombe": "Tuonela",
   "amoureux": "Rakastavaiset",
+  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : AppLocalizations.of(context)!.tyyliTextstyleFontweightBoldSmall Hevoset",
+  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
+    "placeholders": {
+      "senderName": {
+        "type": "Object"
+      }
+    }
+  },
   "courseIndividuelle": "Yksilökilpailu",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 heittoa)",
+  "@k3Lancers": {
+    "placeholders": {
+      "lastHoldAction": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "joueEnDirect3Lancers": "👉 {value} heittää suorana... ({value2}/3 heittoa)",
+  "@joueEnDirect3Lancers": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      }
+    }
+  },
   "gardeS": "\"'{'''0'''}'\" pidetty",
   "cur": "♥ Hertta",
   "carreau": "♦ Ruutu",
@@ -1442,11 +2647,47 @@
   "pile": "Klaava",
   "face": "Kruuna",
   "pasAssezDeJoueursIl": "Liian vähän pelaajia! Tähän kokoonpanoon tarvitaan vähintään {minPlayers} pelaajaa.",
+  "@pasAssezDeJoueursIl": {
+    "placeholders": {
+      "minPlayers": {
+        "type": "Object"
+      }
+    }
+  },
   "tuEs": "Olet: {role}",
+  "@tuEs": {
+    "placeholders": {
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
   "tonMotEst": "Sanasi on: {wordCivil}",
+  "@tonMotEst": {
+    "placeholders": {
+      "wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
   "tonMotEst1": "Sanasi on: {wordUndercover}",
+  "@tonMotEst1": {
+    "placeholders": {
+      "wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
   "tuNAsPasDe": "Sinulla ei ole sanaa. Bluffaa!",
   "commeConvenuTuCommences": "{mrWhitePlayer} , kuten sovittiin, sinä aloitat!",
+  "@commeConvenuTuCommences": {
+    "placeholders": {
+      "mrWhitePlayer": {
+        "type": "Object"
+      }
+    }
+  },
+  "quiPourraitLePlusApplocalizations": "Ketkä voisivat lisätä?Lisää paikkoja...",
   "votePar": "Äänesti: \"'{'''0'')",
   "decisionUnanimeDuGroupePour": "Ryhmän yksimielinen päätös '''{'''0''!",
   "ilFautAuMoins41": "Codenames vaatii vähintään 4 pelaajaa (2 per joukkue)!",
@@ -1463,7 +2704,21 @@
   "cEstAuTourDe2": "Käännös '{'''0'''}' ('{'1'}}')",
   "genereDesQuestionsAmusantesEt": "Luo hauskoja ja nopeita kysymyksiä. Teema: \"'{'''0'''}'",
   "s3": "{minDuration} s",
+  "@s3": {
+    "placeholders": {
+      "minDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "s4": "{maxDuration} s",
+  "@s4": {
+    "placeholders": {
+      "maxDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "fin1": "LOPPU",
   "trouves": "Löytyi: \"'{'''0'''}'\"",
   "ecurie1": "Talli 1",
@@ -1472,10 +2727,26 @@
   "ecurie4": "Talli 4",
   "nombreMaxDeJoueurs": "Pelaajien enimmäismäärä: \"'{'''0'''}'\"",
   "jAiLanceUnePartie1": "Heitin {value} pelin!",
+  "@jAiLanceUnePartie1": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "jeu1": "Peli",
   "partieDeEnAttente": "Osa \"'{'''0'''}' \":sta",
+  "termine": "Päätetty: \"'{'''0'''}'\"",
+  "vainqueur2": "Voittaja:",
   "joueurSPretS": "Pelaajat valmiina",
   "code": "Koodi: {value}",
+  "@code": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "lampe": "Taskulamppu",
   "trousseSoin": "Ensiapulaukku",
   "hache": "Kirves",
@@ -1487,6 +2758,12 @@
   "redigezLPour": "Kirjoita \"'{'''0'''}' \" '{'''1'''}' \"",
   "rejouerGarderPts": "PELAA UUDELLEEN (SÄILYTÄ P)",
   "indicesMontresA": "Indeksit",
+  "playersWinneridname": "Pelaajien voittajanimi",
+  "packageSensorsPlusSensorsPlus": "paketti:sensorit plus/sensorit plus.dart",
+  "supabaseUploadEchecDefinitif": "--- [Supabase Upload] LOPULLINEN ---",
+  "erreurSupabaseStorageexception": "--- VIRHE (varastopoikkeus) ---",
+  "erreurInattendueLorsDeL": "--- INSTITUTUTUT VIRHEET",
+  "timeSUp1": "Aika\\''s Up",
   "marquesDeVoiture": "Automerkit",
   "paysDuMonde": "Maailman maat",
   "fruitsLegumes": "Hedelmät & vihannekset",
@@ -1507,21 +2784,57 @@
   "chosesRondes": "Pyöreät asiat",
   "chosesRouges": "Punaiset asiat",
   "marquesDeVetements": "Vaatemerkit",
+  "butDuJeuEtreLe": "** Pelitavoite\nOle pelaaja eniten pisteitä pelin lopussa.\n\n**Draft\n1. Jokainen pelaaja saa **7 vastauskorttia** kädessään.\n2. Pelaaja on nimetty **Juge** (rooli pyörii jokaisella kierroksella).\n3. Tuomari lukee ** kysymyskortin ** ääneen.\n4. Kaikki **muut pelaajat** valitse salaa **1 vastauskortti** kädestään ja lähetä se.\n5. Tuomari lukee kaikki vastaukset ja nimeää **hauskin**.\n6. Pyöreän pisteen voittaja **1 piste**.\n7. Jokainen pelaaja **poche** uusi kortti palata 7.\n8. Tuomarin rooli siirtyy seuraavalle pelaajalle.\n\n** Tärkeät säännöt\n- Tuomari ei pelaa korttia vuoronsa aikana.\n- Vastaukset ovat ** anonyymi**: Tuomari ei tiedä kuka kirjoitti mitä.\n- Voimme pelata vain yhden kortin.",
+  "objectifPrenezDesCartesPour": "** Tavoite\nOta kortit luoda vastaavia paria. Vältä olla pelaaja, joka pitää Zombie kortti lopussa pelin.\n**Draft\n1. Peli alkaa 33 korttia (16 paria + 1 zombie kortti).\n2. Kortit jaetaan 4 pelaajaa.\n3. Jokainen vuoro pelaaja ottaa kortin seuraava pelaaja.\n4. Jos kortti luo parin, se lyödään automaattisesti.\n5. Pelaajan käsi on sekoitettu.\n6. Ensimmäinen pelaaja ei ole enää kortteja voitti.\n7. Jäljellä oleva pelaaja Zombie kortti menetetty!",
+  "butDuJeuObtenirLe": "** Pelitavoite\nHanki korkein pisteet täyttämällä 13 luokat 5 noppaa.\n\nTornin kulku\n1. **Lance**: Voit heittää 5 noppaa jopa 3 kertaa per kierros.\n2. Kun 1. tai 2. heittää, voit pitää joitakin noppaa ja käynnistää toiset.\n3. ** Pistemäärä**: Kun vähintään yksi heittää, sinun täytyy valita luokan pisteet. Kutakin luokkaa voidaan käyttää vain kerran osaa kohden.\n\n**Luokka\n- **Kuten Six **: Summa vastaava noppaa. (Rajoitetaan 35 pistettä, jos yläosa on yhteensä 63 pistettä tai enemmän).\n- Noppien summa.\n- ** Neliö** (neljä tai useampia identtisiä noppaa): Noppien summa.\n- ** Täysi ** (3 noppaa identtistä + 1 paria): 25 pistettä.\n- ** Pieni sviitti** (4 perättäistä noppaa): 30 pistettä.\n- **suuri sviitti** (5 perättäistä noppaa): 40 pistettä.\n- **Yams** (5 noppaa identtistä): 50 pistettä.\n- Chance.",
+  "objectifNePasAvoirL": "** Tavoite\nÄlä pidä laitetta käsissäsi, kun peruna räjähtää!\n\n**Draft\n1. Teema näkyy näytöllä.\n2. Laitteen pitävän pelaajan on annettava teemaa vastaava vastaus.\n3. Heti kun hän vastasi, hän nopeasti ohitti koneen lähimmäiselleen.\n4. Naapurin on puolestaan löydettävä uusi vastaus ja läpäistävä laite.\n5. Aika on piilotettu ja sattumanvarainen: peruna voi räjähtää milloin tahansa!\n6. Laitetta räjähdyksen aikaan pitävä pelaaja menettää kahvan ja saa pantin.",
+  "principeGeneralGribouillisEstUn": "**Yleisperiaate\nGribouillis on \"Arab-puhelimen\" innoittama piirustuspeli, jossa ideat muuttuvat joka vaiheessa. On olemassa 3 pelitilat:\n\n**1. Normaali tila (Arabinen kuvapuhelin)\n- Jokainen pelaaja kirjoittaa lauseen.\n- **Drawing**: Jokainen pelaaja saa toisen virkkeen ja vetää sen.\n- **Devinette **: Jokainen pelaaja saa piirustuksen ja arvaa mitä se edustaa.\n- **Vaihtoehto **: Peli varajäsenet piirustus ja arvaa, kunnes jokainen \"albumi\" on kiertänyt kaikki pelaajat.\n- Mutta... Hauskaa nähdä miten yksinkertainen lause muuttuu aivan erilaiseksi!\n\n**2. Täydennystila (yhteispiirustus)\n- Croquis**: Jokainen pelaaja aloittaa yksinkertainen piirustus.\n- **Täydellinen**: Jokainen pelaaja saa toisen piirroksen ja täytyy rikastuttaa sitä poistamatta sitä, mitä on jo olemassa.\n-Ei. Piirustus menee pelaajalta pelaajalle, jokainen lisää sen kosketus.\n- ** Parametri \"Lisää 1\" **:\n- * Jos ei käytössä (oletusarvo) *: Se on naru. Piirustus kehittyy jokaisessa vaiheessa (Player A -> Player B -> Player C...).\n- * Jos aktivoit*: Ensimmäiset piirustukset jokaisesta pelaajasta ovat kaikkien muiden pelaajien tekemiä, luoden samanaikaisesti useita kollektiivisia teoksia.\n- Mutta... Luo yllättäviä ja hauskoja kollektiivisia taideteoksia.\n\n**3. Brise-Glace-tila (luova vuorovaikutus)\n- ** Kirjoittaminen**: Jokainen pelaaja kirjoittaa henkilökohtaisen teeman (entinen: AppLocalizations.of(context)!.myPreference).\n- ** Drawing**: Jokainen pelaaja vastaanottaa teemat **kaikki muut pelaajat** ja täytyy piirtää ne.\n- ** Mutta **: Ihanteellinen rikkoa jäätä, löytää toisten makuja ja käynnistää luovuutta yhteistyöllä ja kevyellä tavalla.",
+  "yzObjectifAvoirLeMoins": "Tavoite\n\nOn niin vähän pisteitä kuin mahdollista pelin lopussa.\nPeli loppuu, kun pelaaja saavuttaa 100 pistettä tai enemmän, ja voittaja on yksi alhaisin kokonaispistemäärä.\n\nLaitteet\n\n150 korttia numeroituna \n\nTäytäntöönpano\n\nSekoita kaikki kortit.\nJokainen pelaaja saa 12 korttia, jotka asetetaan kasvot alas hänen eteensä, 4 saraketta × 3 riviä.\nMuut kortit muodostavat osake. Palauta ensimmäinen kortti muodostaa jäte.\nJokainen pelaaja palauttaa kaksi korttia hänen valintansa hänen 12.\n\nKiertueen kulku\n\nSinulla on **30 sekuntia** valita kahden toimen välillä:\n\n1. Ota jätekortti\nSinun täytyy vaihtaa se yksi 12 korttia (näkyvä tai piilotettu puoli).\nKorvattu kortti menee hukkaan.\n\n2. Piocher kortti kasvot alaspäin\nKatso karttaa.\n- joko pidät sen ja korvaat yhden korttisi (kuten edellä),\n- joko kieltäydyt siitä → laitat sen suoraan jätteeseen, ja tässä tapauksessa sinun täytyy palauttaa yksi kortti vielä piilossa.\n\nErityissäännöt\n\nKolme samanlaista korttia sarakkeessa → on välittömästi kukistettu (arvo 0).\n\nKäsivarren loppu:\n\nKahva päättyy, kun pelaaja on paljastanut kaikki korttinsa.\nKaikki muut pelaajat sitten paljastaa jäljellä olevat kortit. Kahva on ohi.\nKaikki pelaajat laskevat korttiensa summan.\n\nHuomaa: jos pelaaja, joka lopettaa ei ole alhaisin pisteet kierroksella, hän ottaa rangaistus +10 pistettä (hänen kahva pisteet on kaksinkertaistunut alkuperäisessä versiossa, käytämme +10 yksinkertaistaa).\n\nPeli päättyy\n\nPelaamme niin monta hihaa kuin tarvitsemme.\nKun pelaaja saavuttaa 100 pistettä tai enemmän, peli pysähtyy.\nPelaaja, jolla on pienin kumulatiivinen pisteet voittaa.",
+  "iAReglesDuPoker": "Tavoite\n\nVoita pelimerkkejä muilta pelaajilta:\n- viiden kortin paras käsi teurastuksen aikana,\n- tai pakottamalla heidät luopumaan (uneen) ansiosta vedot.\n\nKäsien luokittelu (vahvimmasta heikoimpaan)\n\n1. Kuninkaallinen väri: 10 V \n2. Quint väri: 5 korttia, jotka seuraavat toisiaan, sama väri\n3. Neliö: 4 samanlaista korttia\n4. Täysi: 3 identtistä korttia + 1 pari\n5. Väri (neste): 5 korttia samaa väriä (ei-seuraava)\n6. Seuraava (viides): 5 korttia, jotka seuraavat toisiaan (eri värit)\n7. Brelan: 3 samanlaista korttia\n8. Tuplapari\n9. Pari\n10. Korkea kortti (korkein kortti, jos kukaan ei parane)\n\nð\n\n1. Kaihtimet\nPelaaja vasemmalle jakaja asettaa pieni sokea.\nSeuraava pelaaja asettaa ison sokean.\n\n2. Jakelu\nJokainen pelaaja saa 2 suljettua korttia (yksityinen kortti).\n\n3. Huutokauppatornit ja yhteiset kortit\n- Preflop: veto temppu yksityisten korttien.\n-Kolme yleistä karttaa paljastui. Uudet vedot.\n- Neljäs yleinen kartta paljastui. Uudet vedot.\n- Viides ja viimeinen yhteinen kartta. Viimeinen veto.\n\n4. Ammunta (näytös)\nJos useita pelaajia jää, jokainen näyttää pelinsä.\nParas yhdistelmä 5 korttia (sekä sen 2 yksityistä korttia + 5 kuntaa) voittaa potin.\n\nMahdolliset toimet\n\nPelaajalla puolestaan on **30 sekuntia**:\nÄlä lyö mitään vetoa.\nLaita sipsejä pottiin.\n- Follow (Call): yhtä käynnissä.\n- Uudelleenkäynnistäminen (Raise): lisätä veto.\n- Mene nukkumaan.\n\nPeli päättyy\n\nPeli jatkuu niin kauan kuin on olemassa vähintään 2 pelaajaa pelimerkkejä.\nViimeinen voittaja on se, joka ottaa kaikki pelimerkit.",
+  "butDuJeuGagnerLe": "** Pelitavoite\nVoita eniten XP toteuttamalla toimia ja vastaamalla totuuksiin!\n\n**Draft\n1. Ruletti on pelaaja, jonka vuoro se on.\n2. Pelaaja ampuu \"Action\" tai \"Verity.\"\n3. Klassinen tila: Satunnainen haaste / kysymys näkyy.\n4. Tuomaritila: Satunnainen pelaaja kirjoittaa haasteen, sitten pelaaja ymmärtää sen.\n5. Muut pelaajat vahvistavat äänellä kyllä/ei.\n6. Validointiprosentti määrittää XP voitti.\n\nErityissäännöt\n- 100% validointi = maksimi XP\n- Pelaaja eniten XP tulee admin pelin\n- Kahvan loppu -painike mahdollistaa osan sulkemisen",
+  "butDuJeuLeBut": "** Pelitavoite\nTavoitteena on olla ensimmäinen päästä eroon kaikista hänen kortteja tulla presidentti. Viimeinen pelaaja kortti kädessä tulee Kusipää.\n\n**Materiaali ja pelaajat **\n-Maps. 52 korttia.\n- **Pelaajat**: 3-6 pelaajaa.\n\nKortin arvo\nKorttien järjestys heikoimmasta vahvimpaan on:\n**3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2. **\n** ** on vahvin kortti ja voi voittaa minkä tahansa muun kortin tai yhdistelmän.\n\n** Manuaalinen toiminta\n1. ** Jakelu**: Kaikki kortit jaetaan tasaisesti pelaajien kesken.\n2. ** Ensimmäinen kierros**:\n- Aivan ensimmäinen peli, pelaaja, joka omistaa **3 Trèfle (Hänen täytyy pelata tätä korttia (vain tai muiden 3).\n- Seuraavat hihat, **Assess pyörä** edellisen hihan alkaa.\n3. **Pelaa kortteja**: Ensimmäinen pelaaja laittaa pöydälle:\n- Vain yksi kortti (esim. yksi 7).\n- Yksi pari (entinen: kaksi 8).\n- Brelan (entinen: kolme valets).\n- Yksi neliö (ex: neljä 5).\n4. **Jatkuu kierroksella**: Seuraavalla pelaajalla ( myötäpäivään) on **30 sekuntia** pelata sama määrä kortteja** mutta ** korkeampi arvo**.\n- Esimerkki: Jos pelaaja aiheuttaa pari 6, seuraava on aiheuttaa pari 7, Hyvät naiset, Kuten, jne.\n5. ** Ohita vuorosi **: Jos pelaaja ei voi pelata tai ei halua pelata, hänen täytyy siirtää vuoronsa. Kun pelaaja on mennyt, hän ei voi pelata uudelleen ennen loppua nykyinen taitto.\n6. ** Taitoksen loppu**: Taitto päättyy, kun kaikki pelaajat ovat ohittaneet vuoronsa. Viimeinen pelaaja on sijoitettu kortit voittaa taittuu, poimii kortit pöydästä (asettaa ne syrjään) ja alkaa seuraavan kertaiseksi pelaamalla mitä hän haluaa.\n7. **Voima 2**: Pelaa yksi tai useampi **2** voittaa minkä tahansa yhdistelmän ja päättyy kertaiseksi heti. Henkilö, joka pelasi 2 voittaa kertaiseksi ja alkaa pelata uudelleen.\nVoit voittaa pari, sinun täytyy pelata kaksi!\n\n** Englannin kanaalin loppu ja roolit\n- Heti kun pelaajalla ei ole kortteja, hän on valmis. Peli jatkuu, kunnes jäljellä on enää yksi pelaaja.\n- Loppujärjestys määrittää seuraavan kierroksen tehtävät:\n- **\n- **2.**: varapuheenjohtaja\nKusipää!\n- **Ennen viimeistä **:\n- ** Muu ** (jos on): Neutraali\n\nEnsi kuussa: Kortinvaihto!\nEnnen uuden kierroksen alkua pelaajat vaihtavat kortteja:\n- Paskiainen antaa kaksi parasta korttiaan.\n- ** Puheenjohtaja ** antaa hänelle vastineeksi ** kaksi korttia valinta** (yleensä hänen pahin).\n- Jos pelaajia on vähintään neljä, **Vice- Cut ** antaa ** parhaan korttinsa ** ** ** varapuheenjohtajalle**.\n- Varapresidentti ** antaa hänelle **kartat hänen valintansa**.\n\nErityissäännöt\n-Ei voi päättyä 2: Pelaajalla ei ole oikeutta päästä eroon viimeisestä kortistaan, jos se on 2. Tämä isku ei kelpaa.\n**Variant Revolution (valinnainen)**: Jos pelaaja asettaa neliö (4 identtistä korttia), hän voi ilmoittaa \"vallankumous!\". Korttien arvojärjestys käännetään sitten hihan loppuun asti (kolmesta tulee vahvin ja kahdesta heikoin).",
+  "butDuJeuReussirDeux": "** Pelitavoite\nMenestyä kaksi haastetta ennen muita pelaajia.\n\nPaikka\n- Jokainen pelaaja aloittaa 4 korttia: 3 ruusuja ja 1 Skull.\n- Jokainen kortti on sidottu omistajaansa.\n\n**Draft\n1. puolestaan, pelaaja voi laittaa kortin kasvot alas hänen matto.\n2. Kun hän ei enää halua poseerata, hän haastaa ilmoittamalla korttien määrä hän luulee voivansa palata.\n3. Muut pelaajat voivat tarjota tai läpäistä.\n4. Korkein tarjoaja tulee haastaja ja palauttaa mainostetut kortit.\n5. Ensin hän palauttaa omia kortteja, sitten muiden pelaajien tarvittaessa.\n\n**Resoluutio\n- Jos Kallo ilmestyy, haaste on menetetty.\n- Jos haaste on voitettu, pelaaja piste. Ensimmäinen 2 pistettä voittaa pelin.\n- Jos haaste on menetetty, pelaaja menettää kortin sattumanvaraisesti hänen jäljellä käsi. Jos hän menettää kallonsa, hänen on peruttava toinen heti.",
+  "butDuJeuFaireDeviner": "** Pelitavoite\nArvaa sana piirtämällä, ennen kuin varattu aika päättyy.\n\n**Draft\n1. Pelaaja on nimetty piirtämään, ja sana on salaa hänelle.\n2. **Drawing**: Laatijalla on rajallinen aika arvata sana piirtämällä. Hän ei osaa puhua eikä matkia eikä kirjoittaa kirjeitä tai lukuja.\n3. **Devinettes**: Muut pelaajat tarjoavat sanoja chatissa.\n4. ** Validation**: Sarjakuvailija näkee ehdotukset chatissa ja klikkaa \"Etsi!\" painiketta vieressä hyvän viestin nimetä voittaja.\n5. **Points**: Pelaaja, joka löysi ja valmistelija voittaa pisteen.\n6. **Seuraava torni**: Nimitetään uusi valmistelija.\n\n**vaihtoehdot\n- ** Vain 30 aivohalvausta **: Laatija on enintään 30 ominaisuutta.",
+  "butDuJeuFaireDeviner1": "** Pelitavoite\nAnna kumppanisi arvata mahdollisimman monta salaperäistä sanaa, jokainen kirjoittaa yhden sanan vihje. Samat tai virheelliset indeksit poistetaan.\n\n**Draft\n1. **Valinta Devin**: Pelaaja on nimetty \"Devin\" kierroksen. Hän ei näe sanaa mysteeri.\n2. ** Sanan valinta Mysteeri**: Devin valitsee sanan listasta (tai pelin mestari valitsee).\n3.\n4. **Indikaatit Suodatin**: Kaikki indeksit paljastetaan. Samat indeksit (vaikka ne olisi kirjoitettu eri tavalla, esim. \"chat\" ja \"chats\") tai virheellinen (erittäin lähellä sanaa mysteeri, keksitty, jne.) poistetaan. Vain ainutlaatuiset ja pätevät vihjeet näkyvät Devinissä.\n5. **Devinette **: Devin katsoo loput vihjeet ja yrittää arvata sanan mysteeri. Hänellä on vain yksi yritys.\n6.\n- Jos Devin löytää sanan mysteeri: joukkue voittaa 1 pisteen.\n- Jos Devin ei pidä sanaa mysteeri:\n- Jos Devin ei vastaa, selvä.\n\n**Esimerkkejä virheellisistä indekseistä:**\n- Salaperäinen sana: \"Chat.\" Virheelliset indeksit: \"chaton,\" \"tunne,\" \"miaou,\" \"minou.\"\n- Identtiset indeksit: Jos 2 pelaajaa kirjoittaa \"eläin\" varten \"Chat,\" \"eläin\" eliminoidaan.",
+  "butDuJeuPourLes": "** Pelitavoite\n- **Village**: Poista kaikki Wolf-Garous, White Wolf, Malade Rat (paitsi palkkasoturi jos se voittaa).\n- Loups-Garou** (Loup-Garou, Loup Noir, Loup Bavard): Poista kaikki kyläläiset.\n- ** Solitaireille**: kullekin henkilölle ominainen tavoite (White Loup: yksin oleminen; palkkasoturi: tapa hänen tavoitteensa J1; rotta Sairas: saastuttaa kaikki).\n- ** rakastavaisille** (jos Wolf + Village): Vain kaksi eloonjäänyttä.\n\n**Draft\nPeli vuorottelee ** yön** ja ** päivän ** vaiheiden välillä.\n\nYö\n1. Pelin johtaja (sovellus) ilmoittaa, että kylä on unessa.\n2. Eri merkit herää puolestaan käyttää niiden valtuuksia:\n- ** Cupidon ** (vain ensimmäinen yö): Nimeä kaksi pelaajaa, jotka rakastuvat. Jos he ovat susi ja kyläläinen, heidän tavoitteensa muuttuu.\n- **Heritage ** (vain ensimmäinen yö): Viittaa testaajaan.\n- **Seeing** herää ja nimeää pelaaja löytää hänen todellinen rooli. (Älä havaitse mustan suden infektiota).\n- Mentalist** (passiivinen) näkee kylääänestyksen tuloksen.\n- **Rat Malade**: saastuttaa kaksi pelaajaa (jotka tietävät muiden saastuneen).\n- Loups-Garou** (Loup-Garou, Loup Noir, Loup Bavard - äänestävät yhdessä) heräävät, konsertoivat ja nimeävät uhrin syömään.\n- ** Musta luukku ** voi kerran tehdä uhrista tartunnan saaneen Loup-Garoun (joka pitää voimansa ja muuttuu Wolfiksi). Mentalisti ja Fossoyer voivat havaita tartunnan saaneet.\n**Valkoinen loup ** (yksi yö kahdesta): Desposes pelaaja valintansa (kääntää suojaukset).\n- Taikuus herää. Hän näkee susiuhrin ja voi käyttää toista kahdesta juomastaan (vain kerran per osa): ** parantavaa ** juomaa uhrin pelastamiseksi tai ** myrkkyjuomaa ** jonkun tappamiseksi.\n- **Pyroman **: Valitsee varastoida tynnyrin Kreikan tulipalo tai räjäyttää ne jo sijoitettu (on oltava elossa aamulla).\n- Voi kommunikoida kuolleiden kanssa.\n\nPäivä\n1. Kylä herää. Sovellus ilmoittaa, kuka kuoli yön yli.\n2. Kuolleet pelaajat paljastavat roolinsa ja eliminoidaan (he eivät voi enää kommunikoida, paitsi Necromank kuolleiden kanssa).\n- Le **Loup Bavard **: Täytyy lausua salainen sana tai kuolla auringon laskiessa (ellei Diktaattori ota valtaa).\n3. Eloonjääneet riitelevät yrittäessään paljastaa huijareita.\n4. Keskustelujen jälkeen kaikki pelaajat äänestävät epäillyn eliminoimiseksi.\nVoimme äänestää. Jos hän eliminoi suden, hänestä tulee pormestari.\n- Hänen äänensä on kaksinkertainen. Hänen on nimettävä seuraaja ennen kuolemaansa.\n- Aamulla. Jos kohde eliminoidaan ensimmäisenä päivänä, hän voittaa yksin. Muuten hänestä tulee kyläläinen.\n5. Pelaaja, joka saa eniten ääniä poistetaan, paljastaa roolinsa, ja on poissa pelistä.\nJos hänet eliminoidaan (päivin ja öin), hän voi tuoda mukanaan toisen pelaajan.\n- **Fossoyeur **: Kun hän kuoli, hän tunnisti kaksi pelaajaa (yksi vastapäätä leiriä, yksi hänen leiri).\n- Rakastavaiset... Jos toinen kuolee, toinen seuraa häntä surulla.\n- Heritage **: Jos hänen testaajansa kuolee, hän ottaa roolinsa (ellei kuollut tai saastunut).\n6. Uusi yö alkaa.\n\nVoiton edellytykset\nEliminoikaa kaikki susirotuiset, valkoinen susi, sairas rotta.\n- Loups-Garous ** (viitta): Yhtä paljon tai enemmän kuin kyläläiset.\nOlet ainoa selviytyjä.\nTapa hänen kohteensa ensimmäisenä päivänä.\n- Rat Malade**: Contaminate kaikki live pelaajat.\n- ** Rakastavaiset ** (Loup + Village): Olla ainoat eloonjääneet.\n\n** Tärkeät huomautukset **\n- **Chaperon Rouge** on suojeltu Hunter vastaan Susi-Garous kun Hunter on elossa.\n- **Garde ** suojaa Wolf-Garous- kohdetta (ei voi suojata kahdesti samaa henkilöä).\n- Valkoisen suden voimat eivät tiedä suojausta.\n- Pyroman on oltava elossa aamulla.",
   "loupNoir": "Musta susi",
+  "loupBavard": "Puhelias susi",
   "loupBlanc": "Valkoinen susi",
+  "mercenaire": "Palkkasoturi",
   "ratMalade": "Ruttorotta",
   "voyante": "Näkijä",
   "petiteFille": "Pikkutyttö",
+  "chasseur": "Metsästäjä",
   "garde": "Henkivartija",
   "cupidon": "Amor",
   "mentaliste": "Mentalisti",
+  "fossoyeur": "Haudankaivaja",
   "dictateur": "Diktaattori",
+  "chaperonRouge": "Punahilkka",
   "pyromancien": "Pyromanti",
+  "butDuJeuEtreLe1": "** Pelitavoite\nNopein havaita ainoa sama symboli kortin keskustassa ja sen oma kortti.\n\n**Draft (Mode ''The Infernal Tower'') **\n1. Jokainen pelaaja saa kortin kasvot alaspäin. Loput kortit muodostavat varaston keskellä, kasvot näkyvät.\n2. Aluksi jokainen palauttaa korttinsa.\n3. Jokaisen pelaajan täytyy löytää mahdollisimman nopeasti ainoa symboli, joka on läsnä sekä hänen kortti ja Stock Card.\n4. Ensimmäinen pelaaja, joka löytää symbolin, ilmoitus ääneen, ottaa Stock-kortin ja sijoittaa sen omalla kortillaan.\n5. Tämä uusi kortti tulee hänen kortti seuraavan kierroksen. Uusi kartta paljastetaan sitten Stockin keskustassa.\n6. Peli jatkuu, kunnes osake on loppunut. Pelaaja, joka keräsi eniten kortteja lopussa voittaa!",
+  "butDuJeuSeDebarrasser": "** Pelitavoite\nHankkiudu eroon hänen korteistaan olemalla ensimmäinen!\n\n**Draft\n1. **Jakaminen**: Jokainen pelaaja saa 7 korttia. Loput muodostavat osan. Kortti palautetaan jätekasan käynnistämiseksi.\n2. **Pelaa korttia**: Pelaaja, jonka vuoro on **30 sekuntia** laittaa kortti kädessään roskakasa. Pelattavan kortin on vastattava pinon huippukorttia seuraavasti:\n* **väri** (entinen: punainen punaisella)\n* ** Luku** (entinen: yksi 7 sinistä 7 vihreällä)\n* ** Symboli** (entinen: keltainen \"+2 \" punaisella \"+2)\n* **Erityiskortti** (Joker, +4, jne.)\n3. Jos pelaaja ei voi pelata korttia sovitussa ajassa, hänen on valittava kortti paketista. Jos hän pystyy tähän, hän voi tehdä sen heti. Muuten hänen vuoronsa loppuu.\n4. **Erityiskortit**:\n* **+2 (kaksi korttia)**: Seuraava pelaaja valitsee kaksi korttia ja kulkee hänen vuoronsa.\n* **Sens Kielletty (Pass your turn) **: Seuraava pelaaja ohittaa vuoronsa.\n* **Inversio (merkityksen muutos)**: Pelin tunne on päinvastainen.\n* **Joker (värinmuutos)**: Pelaaja valitsee seuraavan pelattavan kortin värin. Sitä voi pelata millä tahansa kortilla.\n* **Super Joker +4 (värinvaihto ja neljä korttia) **: Pelaaja valitsee värin. Seuraava pelaaja valitsee 4 korttia ja kulkee hänen vuoronsa. Tätä korttia voi pelata vain, jos pelaajalla ei ole muuta värikorttia, jota pyydetään jätekasaan (ellei se bluffaa).\n5. Kun pelaajalla on vain yksi kortti kädessään, hänen täytyy ilmoittaa \"UNO!\". Jos hän ei tee niin ja on ottanut toinen pelaaja (ennen seuraavan pelaajan pelaa tai poimii), hänen on valittava 2 korttia.\n6. ** Kanavan loppu**: Kahva päättyy, kun pelaaja pääsee eroon viimeisestä kortistaan. Pisteet lasketaan. Pelaaja, joka saavuttaa 500 pistettä (tai määritetty kokonaismäärä) voittaa pelin.\n\n**karttapisteet:\n* Digitaaliset kortit (0-9): Kasvojen arvo.\n* +2, Sens Kielletty, Inversion: 20 pistettä.\n* Jokeri, Super Joker +4: 50 pistettä.",
+  "principeDuJeuLeJeu": "Peliperiaate\n* Peliä pelataan välillä **3 ja 10 pelaajaa**.\n* Jokainen pelaaja antaa pääsyn osa hänen kuvakirjasto ja valitsee valokuvia jakaa.\n* Pelin aikana valitaan kuva ** satunnaisesti** kaikkien pelaajien joukosta, sitten näytetään muutaman sekunnin ajan.\n* Pelaajien täytyy arvata **Kuka omistaa kuvan** esillä.\n* Pelaaja, joka oikein arvaa eniten kuvia voittaa pelin.\n\nMenettely\n1. **Kuvien valinta**: Jokainen pelaaja valitsee useita kuvia heidän galleria.\n2. **Pelin aloitus**: Kun kaikki ovat valmiita, isäntä käynnistää pelin.\n3. **Pelaa torni**:\n- Satunnainen kuva näkyy 5 sekuntia.\n- Kaikki äänestävät omistajaa.\n4. **Tulokset**: Pisteet päivitetään jokaisen kierroksen jälkeen.\n5. **Pelin loppu**: Kun asetettu määrä kierroksia, pelaaja eniten pisteitä voittaa.",
+  "butDuJeuCoulerTous": "** Pelitavoite\nJumissa kaikki vastustajan alukset ennen kuin hän upottaa sinun.\n\n**Draft\n1. ** Paikka**: Jokainen pelaaja asettaa laivastonsa salaa 10x10 verkkoon.\n- Lentoyhtiöt (5 laatikkoa)\n- Cruiser (4 laatikkoa)\n- Sukellusvene (3 solua)\n- Tuhoaja (3 laatikkoa)\n- Partio (2 laatikkoa)\n2. Pelaajat puolestaan koskettavat laatikko ampua.\n3. **Julkaisu**: AppLocalizations.of(context)!.touche, \"Comulated\" or \"To water.\"\n4. ** Viktoire**: Ensimmäinen pelaaja upottaa koko vastustajan laivasto voittaa.",
+  "butDuJeuEtreLe2": "** Pelitavoite\nOle ensimmäinen saavuttaa tavoiteetäisyys (1000 km oletusarvoisesti).\n**Draft\n- Jokainen pelaaja saa kuusi korttia.\n- vuorotellen pelata korttia (etäisyys, hyökkäys, puolustus, turvallisuus) tai päästä eroon siitä.\n- Attacks** kortit (Stop, Red, Essence, Crevaison, Limit) estää vastustajan.\n- Kartat ** Puolustus ** (vihreä, ylimääräinen säiliö, korjaus, End Limit) vastahyökkäykset.\n- ** Turvallisuus** kortit peruuttaa hyökkäyksen ja estää sen uusiutuminen.\n- Kartat ** Etäisyys** (25, 50, 75, 100, 200 km) ajoneuvoa eteenpäin.\n- Valitse yksi kortti vuorosi lopussa.",
+  "butDuJeuEtreLe3": "** Pelitavoite\nOle ensimmäinen päästä eroon kaikista hänen kortteja muodostamalla päteviä yhdistelmiä (sulatus).\n\nTornin kulku\n1. ** Piocher **: Ota kartta jätteen päältä OR Stock.\n2. **Sale (valinnainen)**: Aseta voimassa olevat yhdistelmät pöydälle.\n- **Sequence (Run)**: 3 tai useampia samanvärisiä kortteja (esim. 5) Ässä voi olla korkea tai matala.\n- **Ryhmä (Set)**: 3 tai 4 korttia, joiden arvo on sama, mutta jotka ovat erivärisiä (esim.\n3.\n\nKahvan loppu\nEnsimmäinen pelaaja, jolla ei ole enää kortteja tappion jälkeen voittaa. Muut laskevat jäljellä olevien korttien pisteet (kuvat = 10, As = 15, muut = nimellisarvo). Peli loppuu 100 pistettä.",
+  "butDuJeuFaireDeviner2": "** Pelitavoite\nSaat tiimisi arvaamaan maksimisanat ennen ajan loppua, käyttämättä kiellettyjä sanoja!\n\n**Draft\n1. Jokainen vuoro, pelaaja (\"kaiuttimen\") yrittää saada hänen joukkue arvata sana.\n2. Puhuja ei saa koskaan ** koskaan** lausua sanaa arvata, eikä mitään sanaa \"Taboo\" (ei sanoja) näkyvissä kohdesanan alla. Hän ei myöskään voi käyttää saman perheen käännöksiä tai sanoja.\n3. Jos puhuja käyttää Taboo-sanaa, vastapuolen ryhmä (tai tuomari) ilmoittaa viasta, kortti peruutetaan ja puhuja siirtyy seuraavaan.\n4. Jokainen arvattu sana palauttaa pisteen joukkueeseen.\n5. Käännös päättyy, kun aika on lopussa.\n\n**Osan loppu\nJoukkue, jossa eniten pisteitä jälkeen useita kierrosta määritelty voittaa!",
+  "butDuJeuAmenerVos": "** Pelitavoite\nTuo hevoset tasangon keskustaan ohittamalla vastustajat.\n\n**Klassiset säännöt\n1. ** Perusuloskäynti**: Sinun täytyy tehdä **1 ** tai **6 ** ottaa pelinappula.\n2. ** Bonus Tour**: Tehdään **6**, napataan pelinappula tai viimeistely kurssin avulla voidaan toistaa. (Varoitus: 3 kertaa 6 peräkkäin peruuttaa vuorosi!).\n3. ** Capture **: Putoaminen vastakkaisen pelinappula palauttaa sen tukikohtaansa (Mahdotonta suojatuissa \"Stars\"-laatikoissa tai tämän pelaajan aloituslaatikossa).\n4. Loppuportaikkoon pääseminen vaatii tarkan pisteet.\n\n** Joukkuetila (2v2) **\nVaatii täsmälleen 4 pelaajaa. Olet liittoutunut edessäsi olevan pelaajan kanssa.\n- **Jaettu voitto**: Ensimmäinen joukkue, joka tuo yhteensä 4 kappaletta keskustaan voittaa pelin (entinen: 3 kappaletta sinulle ja 1 liittolaisellesi).\n- **Entraide**: Voit käyttää heittoa siirtääksesi liittolaisesi pelinappulan, mutta *vain* saadaksesi sen pois tukikohdastaan (1 tai 6) tai siirtääksesi sen loppuun portaikkoon.\n- **Liitosten esto **: On mahdotonta vangita parisi sotilasta. Jos liikkeesi saa sinut putoamaan hänen päälleen, isku on virheellinen.",
+  "principeJeuSurrealisteDEcriture": "**Päähenkilö\nSurrealistinen kollektiivinen kirjoituspeli.\n**Variant\n- Classic: Jokainen kirjoittaa osan lauseesta (Substantial, Adjektiivi, Verb, jne.) näkemättä ennakkotapauksia.\n- Jatko: Kaikki näkevät viimeiset kolme sanaa ja täydentää lause.\n**Draft\nLehdet pyörivät, kunnes kaikki ovat osallistuneet.",
+  "butDuJeuPlacerLe": "** Pelitavoite\nLaita suurin osa hänen paloistaan kuvauspaikalle.\nKultainen sääntö\nJokainen uusi pala on kosketettava vähintään toinen pala samaa väriä kulman, mutta ei koskaan toisella puolella.\n**Draft\n1. Ensimmäinen kierros pelataan kulmassa lautasen väri.\n2. Seuraavat tornit kunnioittavat kultaista sääntöä.\n3. Jos et voi pelata enää, ohitat vuorosi.\n**Rating\n-1 pistettä per neliö ei ole sijoitettu.\n+15 pistettä, jos kaikki osat on sijoitettu.\n+5 bonuspistettä, jos viimeinen pala on yksi neliö (1x1).",
+  "objectifEtreLePremierA": "** Tavoite\nOle ensimmäinen saavuttaa tavoite pisteet (20, 50 tai 100 pistettä).\n\n**Draft\nJokainen pelaaja saa 7 dominoa. Hänen on puolestaan asetettava domino, joka vastaa yhtä ketjun päistä. Kaksoset pelataan ristillä.\n\n**Pelitila\n-Ei. Jos et voi pelata, valitse, kunnes olet pelattavissa.\nEi valintoja. Jos et pysty pelaamaan, annat vuorosi.\n- **Kaikki Viisi **: Ensimmäinen kaksinkertainen pelataan on \"Spinner\" (soitettava 4 puolin). Saat pisteitä jokaisella iskulla, jos summa päättyy on useita 5.\n\n**Käännyksen loppu\nJos kukaan ei voi pelata, temppu on estetty. Pelaajat paljastavat kätensä. Pelaaja, jolla on vähiten pisteitä voittaa kierroksen ja merkitsee summa pistettä vastakkaisilla käsillä.",
+  "objectifEtreLePremierJoueur": "** Tavoite\nOle ensimmäinen pelaaja päästä eroon kaikki hänen kortit.\n\n** Säännöt\n- Peliä pelataan 52 korttipelillä.\n- Korttien järjestys (alhaisuudesta korkeimpaan): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Värijärjestys (heikoimmasta vahvimpaan): Laatat ♦ (D), Trèfles\n- Pelaaja, jolla on 3 laatat aloittaa pelin.\n\n** Yhdistelmät\n- **Simple**: 1 kartta.\n- Kaksi samaa korttia.\n- Kolme samaa korttia.\n- **Jatka**: 5 peräkkäistä rivikorttia (yhdistelmävärit).\n- **väri**: 5 samanväristä korttia.\n- ** Täysi**: 3 korttia yhdellä rivillä + 2 korttia toisella rivillä.\n- ** Neliö**: 4 korttia, jotka ovat saman arvoisia + 1 kortti minkä tahansa.\n- ** Quinte Flush **: 5 peräkkäistä korttia samaa väriä.\n\n** Viiden kortin yhdistelmien hierarkia\nFlush kvinte > Neliö > Täysi > Väri > Sviitti.\nYhdistelmän voi voittaa vain samankokoinen ja suurempi arvo.",
+  "objectifCapturerToutesLesPieces": "** Tavoite\nCapture kaikki vastustajan kolikot tai estää kaikki hänen kolikoita.\n** Säännöt\n- Pelataan 8x8-ruudulla, yksinomaan tummissa laatikoissa.\n- Palaset liikkuvat vinosti laatikossa.\n- Saalis on ** pakollinen** ja tehdään hyppäämällä yli vihollisen pala.\n- Useat saaliit voidaan kahlita yhteen erää.\n- Kun huone saavuttaa vastakkaisen rivin, se ylennetään \"Dame\" ja voi liikkua ja vangita takaisin.",
   "unSubstantifExLeChat": "substantiivi (esim. kissa)",
   "unAdjectifExMignon": "adjektiivi (esim. söpö)",
   "unVerbeExMange": "verbi (esim. syö)",
   "unSubstantifExLaSouris": "substantiivi (esim. hiiri)",
   "unAdjectifExMort": "adjektiivi (esim. kuollut)",
+  "petit1": "Pieni 1",
+  "petit2": "Pieni 2",
+  "grand": "Suuri",
+  "tresGrand": "Hyvin suuri",
+  "superGrand": "Super iso",
   "potionDeVieEtDe": "Elämän ja kuoleman taikajuoma.",
   "legende": "legenda",
   "mystere": "mysteeri",
@@ -1537,7 +2850,10 @@
   "crepuscule": "hämärä",
   "leNombreDeSymbolesPar": "Tunnusten lukumäärän korttia kohti on oltava vähintään 3.",
   "laGenerationAEchoueNombre": "Generation epäonnistui: väärä määrä kortteja.",
+  "blancMangerCocon": "Valkoinen syö cocon",
+  "leRoiDesMemes": "Meemikuningas",
   "laPartieEstTermineeTous": "Peli on ohi: kaikki pelaajat ovat irti.",
+  "aucun": "Ei ole",
   "nonAuthentifie": "Ei todennettu.",
   "actionNonAutorisee": "Toiminto ei ole sallittu.",
   "vousDevezJouerAuMoins": "Sinun on pelattava vähintään yksi kortti.",
@@ -1547,6 +2863,7 @@
   "vousDevezJouerLeMeme": "Sinun on pelattava sama määrä kortteja.",
   "combinaisonDe5CartesTrop": "5 kortin yhdistelmä on liian heikko.",
   "vousDevezJouerUneCarte": "Sinun on pelattava suurempi kortti.",
+  "aGagne1": "Hän voitti!",
   "ceNEstPasVotre": "Ei ole sinun vuorosi.",
   "carteIntrouvableDansLaMain": "Korttia ei löydy kädestä.",
   "coupInvalideSelonLesRegles": "Sääntöjen vastainen siirto Mille Bornesissa!",
@@ -1557,11 +2874,14 @@
   "leTempsEstEcoulePour": "Aika totuuden julistamiseen on päättynyt!",
   "cibleHorsDeLaGrille": "Kohde ruudukon ulkopuolella.",
   "caseDejaCiblee": "Ruutuun on jo tähdätty.",
+  "aCouleTouteLaFlotte": "Upotin koko vihollislaivaston!",
   "placementAutomatiqueEffectue": "⏱️ Automaattinen asettelu tehty.",
   "tempsEcoulePourLaSaisie": "⏰ Sanojen syöttöaika loppui. Peli alkaa syötetyillä sanoilla!",
   "laPhaseDeVoteA": "Äänestysvaihe on alkanut!",
   "personneNAVoteAucun": "Kukaan ei äänestänyt. Ketään ei poistettu.",
   "egaliteLorsDuVoteLa": "Tasa-arvo äänestämisessä! Oikeuden jumalattaren on hallittava.",
+  "leTempsDeVoteEst": "Äänestysaika päättyi!",
+  "laPartieDeYamsCommence": "Jatsi-peli alkaa!",
   "plusDeLancersDisponibles": "Ei enää heittoja jäljellä.",
   "vousDevezLancerLesDes": "Heitä nopat ennen pisteiden kirjaamista.",
   "categorieDejaCompletee": "Kategoria on jo täytetty.",
@@ -1576,9 +2896,12 @@
   "ceNEstPasVotre1": "Ei ole sinun vuorosi kirjoittaa.",
   "nonAuthentifie1": "Ei aitoa.",
   "leTempsDesDebatsEst": "Keskustelu on ohi. Kylän on nyt äänestettävä!",
+  "lesAmoureux": "Rakastavaiset",
   "seulsLesDeuxAmoureuxSont": "Vain kaksi rakastavaista on enää elossa. Heidän rakkautensa voittaa kaiken!",
   "leLoupBlancEstLe": "Valkoinen susi on viimeinen eloonjäänyt! Hän ahmia kaikki suihinsa.",
+  "loupsGarous": "Ihmissudet",
   "lesLoupsGarousSontDevenus": "Ihmissudet ovat saaneet enemmistön eivätkä voi hävitä. He voittivat!",
+  "villageois": "Kyläläiset",
   "toutesLesMenacesOntEte": "Kaikki uhat on poistettu! Kylä voitti!",
   "laVoyanteASondeUne": "Seer tutki sielun sinä iltana.",
   "lHeritierAChoisiSon": "Perillinen on valinnut perinnönjättäjänsä...",
@@ -1592,25 +2915,48 @@
   "leLoupNoirAUtilise": "Musta susi käytti tartuntavoimaansa!",
   "leLoupNoirNA": "Musta susi ei käyttänyt tartuntaa.",
   "laPetiteFilleAEte": "Pikku tyttö oli liian utelias! Sudet ahmivat hänet heti!",
+  "infecte1": "tartunnan saanut",
+  "contamine": "saastunut",
   "vousVousSentezObserveE": "Tunnet olevasi tarkkailtuna tänä yönä...",
   "laSorciereAUtiliseSa": "Noita käytti parannusjuomansa.",
   "laSorciereAConcocteUn": "Noita keitti tappavan myrkyn...",
   "lePyromancienAEntreposeUn": "Pyromaani asetti tynnyrillisen kreikkalaista tulta...",
   "lePyromancienAllumeLaMeche": "Pyromaani sytyttää tynnyreidensä sytytyslangan!",
+  "leSoleilSeLeveSur": "Aurinko nousee Thiercelieux''n ylle...",
   "miraculeusementPersonneNAPeri": "Ihmeen kaupalla kukaan ei kuollut tänä yönä!",
+  "motDuJour": "päivän sana",
   "leDictateurSEstTrompe": "Dikaattori teloitti syyttömän vahingossa! Kärsii kuolemanrangaistuksen.",
   "tentativeDUsurpationDIdentite": "Henkilöllisyysvarkausyritys havaittu!",
   "egaliteParfaiteLorsDuVote1": "Äänestys päättyi tasan. Ketään ei teloiteta tänään.",
+  "lAncienCapitaine": "Entinen kapteeni.",
+  "amoureux1": "Rakastajat 1",
+  "amoureux2": "Rakastavaiset 2",
+  "debugJoingameDemarrageDeLa": "[DEBUG liittyi Game] Aloita kauppa.",
+  "debugJoingamePartieTrouveeEt": "[DEBUG liittyi Game] Osa löytyi ja aulassa. Tietojen lukeminen...",
+  "debugJoingameTransactionUpdateAppelee": "[DEBUG liittyäGame] Transaction.update() kutsutaan uuden soittolistan.",
+  "debugJoingameTransactionReussieRetourne": "Onnistunut liiketoimi. Mene takaisin tosissasi.",
+  "debugJoingameLaPartieN": "[DEBUG liittyi Game] Peli ei ole olemassa tai ei ole enää aulassa. Palaa valheeseen.",
+  "erreurCritiqueDansJoingame": "--- CRIITINEN VIRHE LIITTYESSÄPeli ---",
+  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":AppLocalizations.of [conteksti]! .wordcivilParts0TrimWordundercoverIA palauttaa erilliset yksinkertaiset sanat",
   "infiltre": "Soluttautuja",
   "civil": "Siviili",
   "vendeurDeFalafels": "Falafelsin myyjä",
   "vengeuse": "Kostaja",
   "duellistes": "Kaksilistat",
+  "laPartieCommenceDonnezVotre": "Peli alkaa! Anna vihjeesi...",
   "laPhaseDeVoteCommence": "Äänestysvaihe alkaa!",
   "seulMrWhitePeutDeviner": "Vain Mr. White saa arvata.",
   "laDeesseDeLaJustice": "Oikeuden jumalatar on tehnyt päätöksensä!",
+  "unNouveauTourCommence": "Uusi vuoro alkaa.",
   "laVengeuseEmporteQuelquUn": "Kostaja ottaa jonkun mukaansa!",
+  "civils": "Siviilit",
+  "imposteurs": "Huijarit",
+  "paris": "Pariisi",
+  "france": "Ranska",
+  "capitale": "Pääoma",
   "tourEiffel": "Eiffel-torni",
+  "seine": "Seine",
+  "ville": "Kaupunki",
   "vousNePouvezPasBuzzer": "Et voi summeroida omaa tiimiäsi.",
   "seuleLEquipeActivePeut": "Vain aktiivinen tiimi voi vahvistaa.",
   "seuleLEquipeActivePeut1": "Vain aktiivinen tiimi voi passata.",
@@ -1630,6 +2976,7 @@
   "combinaisonInvalideSelonLesRegles": "Sääntöjen vastainen yhdistelmä Rommissa!",
   "defaussezExactement1Carte": "Hylkää tasan 1 kortti.",
   "carteNonTrouvee": "Korttia ei löytynyt.",
+  "aGagneLaManche": "Hän voitti kierroksen!",
   "desDejaLancesPourCe": "Dice on jo lähtenyt kiertueelle.",
   "vousDevezDAbordLancer": "Sinun on heitettävä noppaa ensin.",
   "vousNePouvezPasDeplacer": "Et voi siirtää vastustajan nappulaa!",
@@ -1663,6 +3010,7 @@
   "vosPointsSontConservesEn": "Pisteesi pidetään! Odottaa pelaajien käynnistää seuraavan istunnon.",
   "synonymeOuBanniNecessiteAu": "Synonym tai Banni vaatii vähintään kolme pelaajaa!",
   "unoNecessiteEntre2Et": "Uno vaatii 2-10 pelaajaa.",
+  "laPartieDeUnoCommence": "Uno-peli alkaa!",
   "inversionA2JoueursLe": "Inversio 2 pelaajalle: ensimmäinen pelaaja aloittaa pelin!",
   "directionInverseeDesLeDepart": "Suunta vaihdettu alusta alkaen!",
   "laPremiereCarteEstUn": "Ensimmäinen kortti on +2! Ensimmäisen pelaajan on nostettava tai pinottava.",
@@ -1713,7 +3061,11 @@
   "vousDevezJouerUneCombinaison": "Sinun täytyy pelata vahvempi yhdistelmä.",
   "lePremierCoupDeLa": "Ensimmäinen laukaus pelin täytyy sisältää 3. Clover.",
   "partieNonTrouvee1": "Osa ei löytynyt",
+  "trouDuCul": "Pummi",
   "vicePresident": "Varapresidentti",
+  "viceTrouDuCul": "Varapummi",
+  "neutre": "Neutraali",
+  "debugPictionaryConditionRoundstateDrawing": "--- KESKUSPANKKI -- Kunto ''roundstate'' tai ''arvaava piirustus'' on totta. Päivitä tietokanta...",
   "dessinateurIntrouvable": "Piirrintä ei löytynyt.",
   "seulLeDessinateurActifPeut": "Vain piirtäjä voi vahvistaa vastauksen.",
   "usurpationDIdentiteDuDessinateur": "Syöttäjän identiteetti on musertava.",
@@ -1721,6 +3073,7 @@
   "motTrouveAvecSucces": "Sana löytyi onnistuneesti!",
   "ceNEstPasLa2": "Tämä ei ole ehdotettu indeksivaihe.",
   "leDevineurNePeutPas": "Arvaaja ei tiedä.",
+  "aaaaaaceeeeiiiinooooouuuuyy": "ináâäåçéêëìïñóõöùúûüý",
   "ceNEstPasLe": "Nyt ei ole aika arvata.",
   "seulLeDevineurPeutFaire": "Vain arvaaja voi tehdä ehdotuksen.",
   "reponseInvalide": "Väärä vastaus.",
@@ -1731,7 +3084,10 @@
   "impossibleDePiocherIlN": "Ei voi nostaa, kortteja ei ole enää saatavilla.",
   "ceNEstPasVotre6": "Ei ole sinun vuorosi valita väriä.",
   "vousNePouvezPasChoisir": "Et voi valita väriä nyt.",
+  "erreurCritiquePlayerorderEstVide": "KRIITINEN VIRHE: soittimen järjestys on tyhjä seuraavassa Round. En voi jatkaa.",
   "questionNonTrouvee": "Kysymystä ei löytynyt",
+  "quiPourraitLePlusApplocalizations1": "Ketkä voisivat lisätä?AppLocalizations.of(context)!.listStringkysymyksetAiwordpoolGamewordssoft",
+  "menteur": "Valehtelija.",
   "pasAssezDeJoueursPour": "Ei tarpeeksi pelaajia tähän muotiin.",
   "ajouteLaDescriptionLaPlus": "Lisää hauskin kuvaus tähän meme!",
   "uneNouvelleMancheDeUno": "Uusi Uno-kierros alkaa!",
@@ -1739,6 +3095,9 @@
   "chaqueJoueurActifDoitPoser": "Jokaisen pelaajan on asetettava vähintään 1 kortti ennen tarjouksen tekemistä.",
   "enchereInvalide": "Virheellinen tarjous.",
   "laSurenchereDoitEtreSuperieure": "Korotuksen on oltava korkeampi.",
+  "applocalizationsOfContextUnjoueurEst": "AppLocalizations.of [context]!.aPlayer'}' on viimeinen selviytyjä ja voittaa Skull!",
+  "applocalizationsOfContextUnjoueurA": "] ? AppLocalizations.of [context]!.aPlayer'}' voitti 2 haastetta ja voitti pelin!",
+  "applocalizationsOfContextUnjoueurRemporte": "AppLocalizations.of [context]!aPlayer'}' voittaa Kallo!",
   "reponseVide": "Tyhjä vastaus.",
   "leJugeNePeutPas1": "Tuomari ei voi lähettää vastausta.",
   "toutLeMondeARepondu": "Kaikki vastasivat! Avataan ovi.",
@@ -1746,12 +3105,17 @@
   "toutLeMondeARepondu1": "Kaikki vastasivat! Äänestä.",
   "toutesLesReponsesSontRecues": "Kaikki vastaukset on vastaanotettu! Tuomarin on päätettävä.",
   "joueurCibleIntrouvable": "Kohdettua pelaajaa ei löytynyt.",
+  "quiPourraitLePlusApplocalizations2": "Kuka voisi lisätä?Lisää sijaintia...jos pelityyppiSynonym tai Banni",
   "vousNePouvezPasBannir": "Et voi kieltää omaa synonyymiäsi!",
   "seulLeJugeEnTitre": "Vain tuomari voi valita voittajan.",
   "ceJoueurNAPas1": "Tämä pelaaja ei lähettänyt vastausta.",
+  "quiPourraitLePlusApplocalizations3": "Kenellä voisi olla enemmän?Lisää paikkakuntia.of(context)!.. Tuomari",
+  "quiPourraitLePlusApplocalizations4": "Kenellä voisi olla enemmän?Lisätietoja... [konteksti]!",
   "egaliteParfaiteAucunPointAttribue": "Täydellinen tasapeli! Pisteitä ei jaettu.",
   "egaliteDansLesVotesAucun": "Tasapeli äänestyksessä: ketään ei karkotettu tällä vuorolla.",
   "laDescriptionLaPlusDrole": "Hauskin kuvaus valittiin!",
+  "aucuneDescriptionNAEte": "Kuvauksesta ei äänestetty.",
+  "quiPourraitLePlusApplocalizations5": "Kenellä voisi olla enemmän?Lisätietoja...[konteksti]!.lopulliselle kohteelleÄänet1voittajan ympäri",
   "jugeIntrouvable": "Tuomaria ei löytynyt.",
   "laPartieDeZeroPointe": "Nollapeli alkaa! Jokaisen pelaajan on paljastettava 2 korttia.",
   "toutLeMondeARevele": "Kaikki ovat paljastaneet korttinsa. Peli alkaa!",
@@ -1764,11 +3128,13 @@
   "laRelanceDoitEtreStrictement": "Korotuksen on oltava suurempi kuin nykyinen panos.",
   "vousNAvezPasAssez": "Ei tarpeeksi pelimerkkejä tähän korotukseen.",
   "laRelanceDoitEtreD": "Korotuksen on oltava vähintään kaksinkertainen edelliseen panokseen nähden (tai all-in).",
+  "laPartieDeBeloteCommence": "Belote-peli alkaa!",
   "passeGeneraleAu1erTour": "Yleispassi ensimmäiseen huutokauppaan. Toinen kierros alkaa!",
   "carteNonPossedee": "Kortti ei ole riivattu.",
   "vousDevezMonterAL": "Sinun täytyy kiivetä etu (yli leikattu)!",
   "vousDevezCouperAL": "Sinun täytyy leikata se irti!",
   "passeLAnnonce": "passaa ilmoituksen",
+  "laPartieDeBlokusCommence": "Blokus-peli alkaa!",
   "pieceDejaUtilisee": "Pala on jo käytetty.",
   "horsLimites": "Rajan ulkopuolella!",
   "caseDejaOccupee": "Ruutu on jo varattu!",
@@ -1791,15 +3157,19 @@
   "cultureDefi": "🧠 Tietovisa & Haaste",
   "familleToutPublic": "👨‍👩‍👧‍👦 Perhe & Kaikenikäiset",
   "piquantInsolite": "🌶️ Pistävä & Omalaatuinen",
+  "quiPourraitLePlusApplocalizations6": "Kuka voisi enemmän?AppLocalizations.of(context)! - Kuka voisi modegroupisi?",
   "devineT": "Arvaa.",
+  "presidente": "Puheenjohtaja",
   "chargement": "Ladataan...",
   "cursive": "Kohdista",
   "exception": "Poikkeus:",
+  "debutDeLaConstructionDe": "-- ÄÄNEN HÄNEN RAKENNUS ''Kuka voisi eniten?AppLocations.of(context)!.printIsactionriippuenStateTo(onActionPending)players''] kuten kartta <String, dynaaminen>?? '{}';",
   "clicSurLeJoueurPname": ">>> CLIC on player ''$pName'' (ID: $pId)!",
   "passageDeIsactionpendingATrue": "- Siirtyminen ActionPanding totuuteen.",
   "erreurFirebaseLorsDuVote": "! ERREUR Tuliasema äänestyksen aikana: $e",
   "appelFirebaseTerminePassageDe": "- Tuliasema kutsuu. Siirtyminen isActionPendingistä väärään.",
   "attentionLeWidgetNEst": "- Widget on poissa.",
+  "quiPourraitLePlusApplocalizations7": "Kenellä voisi olla enemmän?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId",
   "phaseDePose": "KANNANVAIHE",
   "stre9f4a5": "🏆 Legendaarista!",
   "str21f597": "⭐ Erinomainen!",
@@ -1811,6 +3181,14 @@
   "str487ca1": "Chut! Sulje silmäsi.",
   "leSoleilSeLeve": "Aurinko nousee",
   "atout": "VALTTI: {suit}",
+  "@atout": {
+    "placeholders": {
+      "suit": {
+        "type": "Object"
+      }
+    }
+  },
+  "undercoverLocal": "Salainen paikallinen",
   "toiMeme": "itsesi",
   "unAutreJoueur": "toinen pelaaja",
   "tous": "Kaikki",
@@ -1820,83 +3198,689 @@
   "soiree": "Bileet",
   "competition": "Kilpailu",
   "enCours": "CURRENT: '{'0'}'",
+  "gamemessagelocalizationTrContextReason": ": \"\"'}'\": GameMessageLocalization.tr(conteksti, syy),",
   "jAiLanceUnePartie2": "Aloitin pelin",
   "piedDeBiche": "Sorkkarauta",
   "appTitle": "Bilepeli",
+  "loginTitle": "Tervetuloa!",
+  "registerTitle": "Liity mukaan!",
+  "email": "Sähköposti",
+  "password": "Salasana",
+  "username": "Käyttäjätunnus",
+  "loginButton": "Kirjaudu sisään",
+  "registerButton": "Luo tili",
+  "termsAcceptance": "Olen lukenut ja hyväksyn käyttöehdot ja tietosuojaselosteen.",
+  "gamesTab": "Pelit",
+  "friendsTab": "Ystävät",
+  "statsTab": "Profiili",
+  "loungesTab": "Aulat",
   "createGame": "Luo peli",
+  "joinGame": "Liity",
+  "gameCode": "Pelikoodi (6 numeroa)",
+  "startGame": "Aloita peli",
+  "leaveGame": "Poistu pelistä",
+  "rules": "Säännöt",
+  "level": "Taso",
+  "coins": "Kolikot",
+  "gameOver": "Peli päättyi!",
+  "victory": "Voitto!",
+  "defeat": "Häviö",
+  "nextRound": "Seuraava Kierros",
+  "onboardingWelcome": "Tervetuloa",
+  "onboardingSkip": "Ohita",
+  "onboardingNext": "Seuraava",
+  "onboardingStart": "Aloitetaan! 🚀",
+  "onboardingSlide1Title": "Pelaa ystävien kanssa",
+  "onboardingSlide1Subtitle": "Valitse yli 30 bile-, kortti- ja lautapelin joukosta. Pelaa paikallisesti, ystävien kanssa tai maailmanlaajuisesti!",
+  "onboardingSlide2Title": "Ansaitse kolikoita ja merkkejä",
+  "onboardingSlide2Subtitle": "Ansaitse XP:tä jokaisesta voitosta, nouse tasoilla ja avaa ainutlaatuisia saavutuksia.",
+  "onboardingSlide3Title": "Luo tai liity sekunneissa",
+  "onboardingSlide3Subtitle": "6-numeroinen koodi riittää ystävien kokoamiseen, tai käynnistä nopea otteluhaku.",
+  "vipPass": "VIP-Passi",
+  "vipActive": "VIP-passisi on aktiivinen!",
+  "vipActiveDesc": "Kaikki ominaisuudet (tekoäly, huoneet, video, ottelunhaku) ovat rajattomia.",
+  "choosePlan": "Valitse tilauksesi:",
+  "restorePurchases": "Palauta ostokset",
+  "purchasesRestored": "Ostokset palautettu onnistuneesti!",
+  "noPurchasesFound": "Aktiivisia ostoksia ei löytynyt.",
+  "monthlySubscription": "Kuukausitilaus",
+  "annualSubscription": "Vuositilaus",
+  "lifetimeAccess": "Elinikäinen pääsy",
+  "popularTag": "SUOSITTU",
+  "chooseButton": "Valitse",
+  "vipCongratulations": "Onnittelut, olet VIP!",
+  "purchaseFailed": "Ostosta ei suoritettu loppuun.",
+  "profileTitle": "Profiili ja asetukset",
+  "profileNotFound": "Profiilia ei löydy tai pelaajaa ei ole olemassa.",
+  "tabStats": "Tilastot",
+  "tabBadges": "Merkit ja saavutukset",
+  "tabSettings": "Asetukset",
+  "gamesPlayed": "Pelatut pelit",
+  "gamesWon": "Voitot",
+  "winRate": "Voittoprosentti",
+  "soundEffects": "Äänitehosteet",
+  "music": "Musiikki",
+  "editUsername": "Vaihda käyttäjätunnus",
+  "newUsernameHint": "Uusi käyttäjätunnus",
+  "logout": "Kirjaudu ulos",
+  "deleteAccount": "Poista tili",
+  "deleteAccountConfirm": "Haluatko varmasti poistaa tilisi pysyvästi?",
+  "cancel": "Peruuta",
+  "confirm": "Vahvista",
+  "save": "Tallenna",
+  "modeLocal": "Paikallinen",
+  "modeMulti": "Verkossa",
+  "modeMonde": "Maailma",
+  "searchGame": "Etsi peliä...",
+  "filterAll": "Kaikki pelit",
+  "createLounge": "Luo huone",
+  "joinLounge": "Liity huoneeseen",
+  "loungeCode": "Huonekoodi",
+  "publicLounges": "Julkiset huoneet",
+  "noLoungesAvailable": "Julkisia huoneita ei ole tällä hetkellä saatavilla.",
+  "playersCount": "Pelaajat",
+  "howToPlay": "Kuinka pelata?",
+  "copiedToClipboard": "Kopioitu leikepöydälle!",
+  "connectionError": "Yhteysvirhe. Yritä uudelleen.",
+  "loading": "Ladataan...",
+  "success": "Onnistui!",
   "pasAssezDeSymbolesUniques1": "Ei tarpeeksi ainutlaatuisia symboleja 0 kortin symboleja. Vaaditaan: 1 , Saatavana: 2 . {symbolsPerCard} {totalSymbols} {dobbleSymbolslength}",
+  "@pasAssezDeSymbolesUniques1": {
+    "placeholders": {
+      "symbolsPerCard": {
+        "type": "Object"
+      },
+      "totalSymbols": {
+        "type": "Object"
+      },
+      "dobbleSymbolslength": {
+        "type": "Object"
+      }
+    }
+  },
   "melangeEquilibreDesThemesSuivants1": "Tasapainotettu yhdistelmä seuraavia teemoja: 0 {combinedTheme}",
+  "@melangeEquilibreDesThemesSuivants1": {
+    "placeholders": {
+      "combinedTheme": {
+        "type": "Object"
+      }
+    }
+  },
   "ambianceTonImpose": "[Tunnelma / Vaadittu sävy: {style}]",
+  "@ambianceTonImpose": {
+    "placeholders": {
+      "style": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPairesDeMots1": "Luo paria samanlaisia sanoja \"MotCivil:MotInfilted\" muodossa. Teema: 0 {finalPrompt}",
+  "@genereDesPairesDeMots1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesCartesTabooAu1": "Luo Taboo-kortit muodossa \"kohdesana:Kielletty1,Kielletty2,Kielletty3,Kielletty4,Kielletty5.\" Teema: 0 {finalPrompt}",
+  "@genereDesCartesTabooAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesCategoriesOriginalesEt1": "Luo alkuperäisen ja hauska kategoriat arvata. Teema: 0 {finalPrompt}",
+  "@genereDesCategoriesOriginalesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesCourtesVisuelles1": "Luo lyhyitä, visuaalisia ja hämmentyneitä lauseita piirtää (esim. ''Dinosaurus syö jäätä''). Teema: 0 {finalPrompt}",
+  "@genereDesPhrasesCourtesVisuelles1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesDAccroche1": "Luo alkuperäisiä saalislauseita tai kirjoittaa universumia. Teema: 0 {finalPrompt}",
+  "@genereDesPhrasesDAccroche1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesDilemmesCorneliensAu1": "Luo sarveiskalvon pulmia muodossa \"OptionA tai vaihtoehtoB\" (esim. \"Voi lentää tai olla näkymätön\"). Teema: 0 {finalPrompt}",
+  "@genereDesDilemmesCorneliensAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereUnMelangeDeDefis1": "Aiheuttaa joukon haasteita (toimia) ja epätahdikkaita kysymyksiä (totuuksia). Teema: 0 {finalPrompt}",
+  "@genereUnMelangeDeDefis1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesQuestionsDirectesAmusantes1": "Luo suoria, hauskoja ja mausteisia kysymyksiä. Teema: 0 {finalPrompt}",
+  "@genereDesQuestionsDirectesAmusantes1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesCourtesA1": "Luo lyhyt reikä lauseita (sisältää '') peli. Teema: 0 {finalPrompt}",
+  "@genereDesPhrasesCourtesA1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesSituationsHumoristiquesEt1": "Luo humoristisia tilanteita ja alkaa legendoja memes. Teema: 0 {finalPrompt}",
+  "@genereDesSituationsHumoristiquesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereUneListeDeMots1": "Luo lista sanoista / ilmeistä peli 0 teemalla: 1 {gameType} {finalPrompt}",
+  "@genereUneListeDeMots1": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      },
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "theme": "Teema {gameType}",
+  "@theme": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      }
+    }
+  },
   "passeSonTour2": "⏱️ {playerName} ohittaa vuoronsa.",
+  "@passeSonTour2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "finDuCompteARebours1": "⏱️ Fin du compte à rebours : Partie relancée pour tous les {playerslength} joueurs !",
+  "@finDuCompteARebours1": {
+    "placeholders": {
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
   "aOuvertAvec": "⏱️ {playerName} avasi kortilla {cardToPlay}.",
+  "@aOuvertAvec": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
   "sEstDeconnecteVictoireDe": "{removedPlayerName} katkaisi yhteyden. Pelaajan {remainingName} voitto luovutuksella!",
+  "@sEstDeconnecteVictoireDe": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      },
+      "remainingName": {
+        "type": "Object"
+      }
+    }
+  },
   "aManque3ToursSans": "0 jäi 3 kierrosta pelaamatta. Valvojaa pyydettiin päättämään sen korvaamisesta tietokoneella. {playerName}",
+  "@aManque3ToursSans": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "neRepondPlusLAdministrateur": "⚠️ {playerName} ei vastaa ({reason}). Ylläpitäjää pyydettiin päättämään tietokoneen pelaamisesta tilalla.",
+  "@neRepondPlusLAdministrateur": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "reason": {
+        "type": "Object"
+      }
+    }
+  },
   "aEteRemplaceParL": "🤖 {playerName} korvattiin tietokoneella (Tekoäly aktiivinen - 5s per vuoro).",
+  "@aEteRemplaceParL": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasDonneD": "⚠️ {playerName} ei antanut vihjettä (Mielipidepeli). Vuoro ohitettu.",
+  "@nAPasDonneD": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasReponduJeu": "⚠️ {playerName} ei vastannut (Mielipidepeli). Vuoro ohitettiin ilman toimintoa.",
+  "@nAPasReponduJeu": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA3": "{playerName} ei pelannut ajoissa. Vuoro meni ohi.",
+  "@nAPasJoueA3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteParfaiteLorsDuVote2": "Täydellinen tasa-arvo äänestyksessä (0 pelaajaa ex-aequo)! Yksikään pelaaja ei ole eliminoitu. {tiedPlayerslength}",
+  "@egaliteParfaiteLorsDuVote2": {
+    "placeholders": {
+      "tiedPlayerslength": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue": "⏱️ {playerName} pelasi {lastDrawn}.",
+  "@aJoue": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "lastDrawn": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue1": "⏱️ {playerName} pelasi {playable}.",
+  "@aJoue1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "playable": {
+        "type": "Object"
+      }
+    }
+  },
   "piocheEtPasseSonTour": "⏱️ {playerName} nostaa ja ohittaa vuoronsa.",
+  "@piocheEtPasseSonTour": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA4": "⏱️ {playerName} aika loppui. Kortti hylättiin ja ruutu paljastettiin.",
+  "@nAPasJoueA4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "laPartieEstTermineeVictoire1": "Peli päättyi. Joukkueen {winner} voitto!",
+  "@laPartieEstTermineeVictoire1": {
+    "placeholders": {
+      "winner": {
+        "type": "Object"
+      }
+    }
+  },
   "joueursContaminesParLaMaladie1": "Ruttoon sairastuneet pelaajat: {contaminatedNames}.",
+  "@joueursContaminesParLaMaladie1": {
+    "placeholders": {
+      "contaminatedNames": {
+        "type": "Object"
+      }
+    }
+  },
   "vousAvezEspionneEtDecouvert": "Vakoilit pelaajaa {targetName} ja sait tietää roolin: {targetRole}.",
+  "@vousAvezEspionneEtDecouvert": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "votreMotDuJourPrononcez": "Päivän sanasi: ''{newWord}''. Sano se chatissa ennen auringonlaskua!",
+  "@votreMotDuJourPrononcez": {
+    "placeholders": {
+      "newWord": {
+        "type": "Object"
+      }
+    }
+  },
   "declareUnCoupDEtat": "{dictateurName} julistaa vallankaappauksen!",
+  "@declareUnCoupDEtat": {
+    "placeholders": {
+      "dictateurName": {
+        "type": "Object"
+      }
+    }
+  },
   "leChasseurTireEtTue1": "Metsästäjä ampuu ja tappaa pelaajan {targetName}!",
+  "@leChasseurTireEtTue1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "aDesigneCommeNouveauCapitaine": "{formerCaptainName} nimitti pelaajan {newCaptainName} uudeksi Kapteeniksi!",
+  "@aDesigneCommeNouveauCapitaine": {
+    "placeholders": {
+      "formerCaptainName": {
+        "type": "Object"
+      },
+      "newCaptainName": {
+        "type": "Object"
+      }
+    }
+  },
   "cupidonADesigneEtComme": "Cupido valitsi pelaajat {lover1Name} ja {lover2Name} rakastavaisiksi!",
+  "@cupidonADesigneEtComme": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      },
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "votreAmoureuxSe": "❤️ Rakkaasi: {amoureux2Name}",
+  "@votreAmoureuxSe": {
+    "placeholders": {
+      "amoureux2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "votreAmoureuxSe1": "❤️ Rakkaasi: {amoureux1Name}",
+  "@votreAmoureuxSe1": {
+    "placeholders": {
+      "amoureux1Name": {
+        "type": "Object"
+      }
+    }
+  },
   "cEstAuTourDe4": "On joukkueen vuoro! {currentTeamIndex1}",
+  "@cEstAuTourDe4": {
+    "placeholders": {
+      "currentTeamIndex1": {
+        "type": "Object"
+      }
+    }
+  },
   "aFaitUnMaisAucun": "Käänny automaattisesti! {playerName} {dice}",
+  "@aFaitUnMaisAucun": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
   "lancerTropElevePourAtteindre": "Käänny ohi! {dice}",
+  "@lancerTropElevePourAtteindre": {
+    "placeholders": {
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
   "extremiteNonDisponibleSurLe1": "Pää ei saatavilla laudalla ({openEnds}).",
+  "@extremiteNonDisponibleSurLe1": {
+    "placeholders": {
+      "openEnds": {
+        "type": "Object"
+      }
+    }
+  },
   "laTuileNePossedePas": "Laatalla {tile} ei ole vaadittua arvoa {matchEnd}.",
+  "@laTuileNePossedePas": {
+    "placeholders": {
+      "tile": {
+        "type": "Object"
+      },
+      "matchEnd": {
+        "type": "Object"
+      }
+    }
+  },
   "leBotAJoueAutomatiquement": "⏱️ Botti pelasi automaattisesti {tileToPlay}.",
+  "@leBotAJoueAutomatiquement": {
+    "placeholders": {
+      "tileToPlay": {
+        "type": "Object"
+      }
+    }
+  },
   "aEteContraintDePasser": "⏱️ {playerName} joutui ohittamaan vuoronsa.",
+  "@aEteContraintDePasser": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "laRouletteADesigne": "Ruletti on nimennyt 0! {selectedName}",
+  "@laRouletteADesigne": {
+    "placeholders": {
+      "selectedName": {
+        "type": "Object"
+      }
+    }
+  },
   "doitEcrireLeDefi": "Nollan täytyy kirjoittaa haaste... {authorName}",
+  "@doitEcrireLeDefi": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
   "leDefiAEteEnvoye1": "Haaste lähetettiin 0! {currentPlayerName}",
+  "@leDefiAEteEnvoye1": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
   "resultatDeValidation": "Tulos: 0 % validointi! {percentage}",
+  "@resultatDeValidation": {
+    "placeholders": {
+      "percentage": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneXp": "0 voittaa 1 XP! {currentPlayerName} {earnedXp}",
+  "@gagneXp": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      },
+      "earnedXp": {
+        "type": "Object"
+      }
+    }
+  },
   "tourSuivantQuiSeraLe1": "Seuraava käännös! Kuka on seuraava?",
   "passeSonTour3": "-Sen vuoro! {playerOrderinitialIn}",
+  "@passeSonTour3": {
+    "placeholders": {
+      "playerOrderinitialIn": {
+        "type": "Object"
+      }
+    }
+  },
   "vousDevezPiocherCartesOu": "Sinun on nostettava {pendingDraw} korttia tai vastattava +2/+4-kortilla.",
+  "@vousDevezPiocherCartesOu": {
+    "placeholders": {
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteParfaite1": "Täydellinen tasa-arvo! {names}",
+  "@egaliteParfaite1": {
+    "placeholders": {
+      "names": {
+        "type": "Object"
+      }
+    }
+  },
   "priseMultipleObligatoireAvecLe1": "Pakollinen monisyönti nappulalla ruudussa {mandatoryPiece}.",
+  "@priseMultipleObligatoireAvecLe1": {
+    "placeholders": {
+      "mandatoryPiece": {
+        "type": "Object"
+      }
+    }
+  },
   "motsDevines": "0 / 1 sana arvattu! {guessedCount} {collectiveWordslengt}",
+  "@motsDevines": {
+    "placeholders": {
+      "guessedCount": {
+        "type": "Object"
+      },
+      "collectiveWordslengt": {
+        "type": "Object"
+      }
+    }
+  },
   "quiPourraitLePlus3": "Kuka todennäköisimmin {questionsrandomnextI}",
+  "@quiPourraitLePlus3": {
+    "placeholders": {
+      "questionsrandomnextI": {
+        "type": "Object"
+      }
+    }
+  },
   "decrivezVotreMotSecretEn": "Kuvaile salainen sana yhdellä sanalla. Hämäystä!",
   "trouvezLeMeilleurSynonymePour1": "Etsi paras synonyymi sanalle: 0 {word}",
+  "@trouvezLeMeilleurSynonymePour1": {
+    "placeholders": {
+      "word": {
+        "type": "Object"
+      }
+    }
+  },
   "interdictionFormelleDeVoterPour": "Itsensä äänestäminen on ehdottomasti kielletty!",
   "remporteLaManche": "Nolla voittaa kahvan! {winnerName}",
+  "@remporteLaManche": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteADevineLe1": "Herra White arvasi salasanan: \"0.\" {civilianWord}",
+  "@mrWhiteADevineLe1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteAEchoueA1": "Herra White ei arvannut sanaa (se oli '' 0 ''). {civilianWord}",
+  "@mrWhiteAEchoueA1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
   "aucuneDescriptionNAEte1": "Yhtään kuvausta ei äänestetty.",
   "ceNEstPasLe3": "Nyt ei ole nollan vuoro. {playerId}",
+  "@ceNEstPasLe3": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
   "donneesDuJoueurIntrouvables": "Pelaajan tietoja 0 ei löytynyt. {playerId}",
+  "@donneesDuJoueurIntrouvables": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
   "vousDevezFournirLaCouleur1": "Sinun täytyy antaa pyydetty väri (0). {ledSuit}",
+  "@vousDevezFournirLaCouleur1": {
+    "placeholders": {
+      "ledSuit": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagneAvecSaDescription1": "{winnerName} voitti kuvatekstillään:",
+  "@aGagneAvecSaDescription1": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "leLoupBlancFrappeEn": "Valkoinen Susi iskee yksin",
   "etaitUnCivilLesImposteurs": "{player} oli Siviili! Huijarit voittavat!",
+  "@etaitUnCivilLesImposteurs": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      }
+    }
+  },
   "etaitLLesCivilsGagnent": "{player} oli {role}! Siviilit voittavat!",
+  "@etaitLLesCivilsGagnent": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
   "question2": "kysymys",
   "mrWhiteSecretWordPrompt": "Sinut on paljastettu! Jos arvaat Siviilien salaisen sanan, voitat yksin!",
   "codenamesRed": "Punainen",
@@ -1963,79 +3947,683 @@
   "lanterne": "lyhty",
   "parchemin": "pergamentti",
   "aGagne2": "{gameDataplayerswin} voitti!",
+  "@aGagne2": {
+    "placeholders": {
+      "gameDataplayerswin": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue2": "⏱️ {playerName} pelasi {cardsToPlayjoin}.",
+  "@aJoue2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardsToPlayjoin": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue3": "⏱️ {playerName} pelasi {winningCombojoin}.",
+  "@aJoue3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "winningCombojoin": {
+        "type": "Object"
+      }
+    }
+  },
   "pliTermineAuTourDe2": "⏱️ Tikki päättyi. Pelaajan {gameDataplayerspla} vuoro!",
+  "@pliTermineAuTourDe2": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "stop": "SEIS",
   "coupFourrePareLAttaque1": "- Mitä? Valmistelkaa hyökkäys yhdellä ja tarttukaa käteen! {playerstargetIdnam} {matchingSafety}",
+  "@coupFourrePareLAttaque1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      },
+      "matchingSafety": {
+        "type": "Object"
+      }
+    }
+  },
   "aAtteintKm": "{playersplayerIdnam} saavutti {targetDist} km!",
+  "@aAtteintKm": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "targetDist": {
+        "type": "Object"
+      }
+    }
+  },
   "aCouleTouteLaFlotte1": "{shooterDataname} upotti koko vihollislaivaston!",
+  "@aCouleTouteLaFlotte1": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "aTireAutomatiquementEn": "0 automaattisesti ammuttu 1 - 2 (3). {shooterDataname} {targetIndex101} {targetIndex1011} {result}",
+  "@aTireAutomatiquementEn": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      },
+      "targetIndex101": {
+        "type": "Object"
+      },
+      "targetIndex1011": {
+        "type": "Object"
+      },
+      "result": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue4": "⏱️ {playerName} pelasi {candidateCardsjoin}.",
+  "@aJoue4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "candidateCardsjoin": {
+        "type": "Object"
+      }
+    }
+  },
   "pliTermineAuTourDe3": "Olen valmis. Nollan kohdalla. {gameDataplayerspla}",
+  "@pliTermineAuTourDe3": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "estLeNouvelHote1": "{playersplayerOrder} on uusi huoneen luoja.",
+  "@estLeNouvelHote1": {
+    "placeholders": {
+      "playersplayerOrder": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersistanteLeDestinDepartage1": "Jatkuva tasa-arvo! Kohtalo alkaa sattumanvaraisesti: 0 on eliminoitu. {playerDatarandomEl}",
+  "@egalitePersistanteLeDestinDepartage1": {
+    "placeholders": {
+      "playerDatarandomEl": {
+        "type": "Object"
+      }
+    }
+  },
   "estMortEDeChagrin1": "{playerDataotherLov} kuoli surusta rakkautensa tähden!",
+  "@estMortEDeChagrin1": {
+    "placeholders": {
+      "playerDataotherLov": {
+        "type": "Object"
+      }
+    }
+  },
   "lHeritierHeriteDuRole2": "{playerDataheritier} (Perillinen) perii pelaajan {playerDatatestateu} roolin: {newRole}!",
+  "@lHeritierHeriteDuRole2": {
+    "placeholders": {
+      "playerDataheritier": {
+        "type": "Object"
+      },
+      "playerDatatestateu": {
+        "type": "Object"
+      },
+      "newRole": {
+        "type": "Object"
+      }
+    }
+  },
   "heriteEgalementDuStatutDe1": "{playerDataheritier} perii myös Kapteenin aseman!",
+  "@heriteEgalementDuStatutDe1": {
+    "placeholders": {
+      "playerDataheritier": {
+        "type": "Object"
+      }
+    }
+  },
   "leVillageDecouvreAvecEffroi1": "Kylä löytää kauhun ruumiit: 0 . {deadThisNightNames}",
+  "@leVillageDecouvreAvecEffroi1": {
+    "placeholders": {
+      "deadThisNightNames": {
+        "type": "Object"
+      }
+    }
+  },
   "leFossoyeurReveleEtaitUn1": "{playerDatafossoyeu} (Haudankaivaja) paljastaa: {playerDatatargetPl} oli {targetRole}!",
+  "@leFossoyeurReveleEtaitUn1": {
+    "placeholders": {
+      "playerDatafossoyeu": {
+        "type": "Object"
+      },
+      "playerDatatargetPl": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "etEtaitUnE": "Ja 0 oli 1! {playerDataotherRev} {otherRevealedRole}",
+  "@etEtaitUnE": {
+    "placeholders": {
+      "playerDataotherRev": {
+        "type": "Object"
+      },
+      "otherRevealedRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leDictateurAExecuteUn1": "Dikaattori {playerDatadictator} teloitti huijarin ({playerDatatargetId} - {targetRole}) ja hänestä tulee Kapteeni!",
+  "@leDictateurAExecuteUn1": {
+    "placeholders": {
+      "playerDatadictator": {
+        "type": "Object"
+      },
+      "playerDatatargetId": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leLoupBavardNA1": "Lörppösusi ({playerDataloupBava}) ei sanonut sanaansa ja kuoli auringonlaskussa!",
+  "@leLoupBavardNA1": {
+    "placeholders": {
+      "playerDataloupBava": {
+        "type": "Object"
+      }
+    }
+  },
   "leVillageAVoteEt1": "Kylä äänesti ja poistaa pelaajan {playerDataeliminat}.",
+  "@leVillageAVoteEt1": {
+    "placeholders": {
+      "playerDataeliminat": {
+        "type": "Object"
+      }
+    }
+  },
   "leMercenaireAFaitEliminer1": "Palkkasoturi {playerDatamercenai} eliminoi kohteensa 1. päivänä! Voittaa pelin yksin!",
+  "@leMercenaireAFaitEliminer1": {
+    "placeholders": {
+      "playerDatamercenai": {
+        "type": "Object"
+      }
+    }
+  },
   "meurtDeChagrinPourSon1": "{playerDataotherLov} kuolee särkyneeseen sydämeen!",
+  "@meurtDeChagrinPourSon1": {
+    "placeholders": {
+      "playerDataotherLov": {
+        "type": "Object"
+      }
+    }
+  },
   "lAncienCapitaine1": "Entinen kapteeni.",
   "aDit": "0 sanoi: '' 1 '' {playerDataplayerId} {cleanClue}",
+  "@aDit": {
+    "placeholders": {
+      "playerDataplayerId": {
+        "type": "Object"
+      },
+      "cleanClue": {
+        "type": "Object"
+      }
+    }
+  },
   "aDevineLeMotCivil1": "0 arvasi siviilisanan (\"1\")! {gameDataplayerData} {civilWord}",
+  "@aDevineLeMotCivil1": {
+    "placeholders": {
+      "gameDataplayerData": {
+        "type": "Object"
+      },
+      "civilWord": {
+        "type": "Object"
+      }
+    }
+  },
   "aProposeMaisCeN": "0 ehdotti \" 1 \" mutta se ei ollut siviilisana ('' 2 '')! {gameDataplayerData} {guessedWord} {civilWord}",
+  "@aProposeMaisCeN": {
+    "placeholders": {
+      "gameDataplayerData": {
+        "type": "Object"
+      },
+      "guessedWord": {
+        "type": "Object"
+      },
+      "civilWord": {
+        "type": "Object"
+      }
+    }
+  },
   "flottesPlaceesCommenceATirer1": "Kellui! Nolla alkaa ampua. {playerDatafirstPla}",
+  "@flottesPlaceesCommenceATirer1": {
+    "placeholders": {
+      "playerDatafirstPla": {
+        "type": "Object"
+      }
+    }
+  },
   "tousLesJoueursSontPrets1": "Kaikki pelaajat ovat valmiina! Nolla alkaa ampua. {playerDatafirstPla}",
+  "@tousLesJoueursSontPrets1": {
+    "placeholders": {
+      "playerDatafirstPla": {
+        "type": "Object"
+      }
+    }
+  },
   "laMancheDeRamiCommence1": "Ramin hiha alkaa! Nyt on nollan vuoro. {playersplayerIdsfi}",
+  "@laMancheDeRamiCommence1": {
+    "placeholders": {
+      "playersplayerIdsfi": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagneLaManche1": "{playersplayerIdnam} voitti kierroksen!",
+  "@aGagneLaManche1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "k3SixConsecutifsLePion1": "Kolme kuusi peräkkäistä! Nollan pelinappula palaa tallille ja sen vuoro kulkee. {playersplayerIdnam}",
+  "@k3SixConsecutifsLePion1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagne3": "{playersplayerIdnam} voitti!",
+  "@aGagne3": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "atteintPoints": "0 saavutti 1 pisteen! {playersplayerIdnam} {targetScore}",
+  "@atteintPoints": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "atteintPoints1": "0 saavutti 1 pisteen! {playerswinnerIdnam} {targetScore}",
+  "@atteintPoints1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "mancheTermineeGagneAvecXp": "Hihat päälle! 0 voittoa 1 XP! {playerswinnerIdnam} {maxXp}",
+  "@mancheTermineeGagneAvecXp": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      },
+      "maxXp": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUneInversionEt1": "{playersplayerIdnam} pelasi Suunnanvaihdon ja pelaa uudelleen!",
+  "@aJoueUneInversionEt1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aInverseLeSensDe1": "{playersplayerIdnam} käänsi pelisuunnan!",
+  "@aInverseLeSensDe1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aSauteLeTourDe1": "{playersplayerIdnam} ohitti pelaajan {skippedPlayerName} vuoron!",
+  "@aSauteLeTourDe1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "skippedPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
   "aEmpileUn2Cumul1": "{playersplayerIdnam} pinoi +2-kortin. Yhteensä: {pendingDraw2} korttia!",
+  "@aEmpileUn2Cumul1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw2": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUn21": "{playersplayerIdnam} pelasi +2-kortin!",
+  "@aJoueUn21": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUnJokerEt1": "{playersplayerIdnam} pelasi Villi-kortin ja valitsi värin {chosenColor}!",
+  "@aJoueUnJokerEt1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "chosenColor": {
+        "type": "Object"
+      }
+    }
+  },
   "aEmpileUn4Cumul1": "{playersplayerIdnam} pinoi +4-kortin. Yhteensä: {pendingDraw4} korttia!",
+  "@aEmpileUn4Cumul1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw4": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUnSuperJoker1": "{playersplayerIdnam} pelasi Nosta 4 Villi -kortin!",
+  "@aJoueUnSuperJoker1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aPoseSaDerniereCarte1": "{playersplayerIdnam} pelasi viimeisen korttinsa ja voittaa kierroksen!",
+  "@aPoseSaDerniereCarte1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneLaMancheAvecPoints": "{playersplayerIdnam} voittaa kierroksen pisteillä +{roundScore}!",
+  "@gagneLaMancheAvecPoints": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "roundScore": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPlusQuUne1": "Pelaajalla {playersplayerIdnam} on enää yksi kortti jäljellä!",
+  "@nAPlusQuUne1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "passeSonTour4": "Nolla kulkee vuorollaan. {playersplayerIdnam}",
+  "@passeSonTour4": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA5": "{gameDataplayerspla} ei pelannut ajoissa, nostaa ja ohittaa vuoronsa.",
+  "@nAPasJoueA5": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "votreCibleEstEliminezLe1": "Kohteenne on nolla. {playerDatamercenai}",
+  "@votreCibleEstEliminezLe1": {
+    "placeholders": {
+      "playerDatamercenai": {
+        "type": "Object"
+      }
+    }
+  },
   "aReponduEtPasseLa": "{gameDataplayerspla} vastasi ''{cleanAnswer}'' ja antoi pommin eteenpäin!",
+  "@aReponduEtPasseLa": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      },
+      "cleanAnswer": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheCarteS": "{playersplayerIdnam} nosti {pendingDraw} kortti(a).",
+  "@aPiocheCarteS": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheUneCarteEt2": "{playersplayerIdnam} nosti kortin ja voi pelata sen.",
+  "@aPiocheUneCarteEt2": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheUneCarteEt3": "{playersplayerIdnam} nosti kortin ja ohittaa vuoronsa.",
+  "@aPiocheUneCarteEt3": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPas1Carte1": "Pelaajalla {playerstargetIdnam} ei ole 1 korttia, UNO-huuto virheellinen.",
+  "@nAPas1Carte1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aCrieContreUnoPioche1": "{playerscallerIdnam} huusi Vasta-UNO! {playerstargetIdnam} nostaa 2 korttia.",
+  "@aCrieContreUnoPioche1": {
+    "placeholders": {
+      "playerscallerIdnam": {
+        "type": "Object"
+      },
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aDitUno1": "{playerstargetIdnam} huusi UNO!",
+  "@aDitUno1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "appelUnoInvalide": "Virheellinen UNO-huuto.",
   "aChoisiLaCouleur": "0 on valinnut värin 1! {playersplayerIdnam} {chosenColor}",
+  "@aChoisiLaCouleur": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "chosenColor": {
+        "type": "Object"
+      }
+    }
+  },
   "estLeDernierSurvivantEt": "0 on viimeinen selviytyjä ja voittaa Kallo! {playerswinnerIdnam}",
+  "@estLeDernierSurvivantEt": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aRemporte2DefisEt": "0 voitti 2 haastetta ja voitti pelin! {playerschallengerI}",
+  "@aRemporte2DefisEt": {
+    "placeholders": {
+      "playerschallengerI": {
+        "type": "Object"
+      }
+    }
+  },
   "nouvelleMainEstLeDonneur1": "Uusi jako! {playersplayerIdsde} on jakaja.",
+  "@nouvelleMainEstLeDonneur1": {
+    "placeholders": {
+      "playersplayerIdsde": {
+        "type": "Object"
+      }
+    }
+  },
   "poseLaPetiteBlindDe1": "{playerssmallBlindI} asettaa pienen blindin {smallBlindActual}.",
+  "@poseLaPetiteBlindDe1": {
+    "placeholders": {
+      "playerssmallBlindI": {
+        "type": "Object"
+      },
+      "smallBlindActual": {
+        "type": "Object"
+      }
+    }
+  },
   "poseLaGrosseBlindDe1": "{playersbigBlindIdn} asettaa suuren blindin {bigBlindActual}.",
+  "@poseLaGrosseBlindDe1": {
+    "placeholders": {
+      "playersbigBlindIdn": {
+        "type": "Object"
+      },
+      "bigBlindActual": {
+        "type": "Object"
+      }
+    }
+  },
   "seCouche1": "{myDataname} luovuttaa (Fold).",
+  "@seCouche1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "faitTapisAllIn1": "{myDataname} menee all-in!",
+  "@faitTapisAllIn1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "suitPour": "{myDataname} maksaa {callAmount} (Call).",
+  "@suitPour": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "callAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "faitTapisAllInEn1": "0 tekee matto (kaikki-in) uudelleen laukaistaan 1 ! {myDataname} {totalBetAmount}",
+  "@faitTapisAllInEn1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "totalBetAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "relanceA": "{myDataname} korottaa summaan {totalBetAmount}.",
+  "@relanceA": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "totalBetAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "abattageShowdown": "--- NÄYTTÖ (SHOWDOWN) ---",
   "gagneLePotParForfait1": "{playerDatawinnersf} voittaa potin luovutuksella!",
+  "@gagneLePotParForfait1": {
+    "placeholders": {
+      "playerDatawinnersf": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneNtLePotAvec": "{winnerNames} voittaa potin kädellä {bestHandranknamel1}!",
+  "@gagneNtLePotAvec": {
+    "placeholders": {
+      "winnerNames": {
+        "type": "Object"
+      },
+      "bestHandranknamel1": {
+        "type": "Object"
+      }
+    }
+  },
   "aPrisA": "Otti yhden! {playerDataplayerId} {suit}",
+  "@aPrisA": {
+    "placeholders": {
+      "playerDataplayerId": {
+        "type": "Object"
+      },
+      "suit": {
+        "type": "Object"
+      }
+    }
+  },
   "histoireCollective": "YHTEINEN TARINA",
   "distance": "ETÄISYYS",
   "botte": "TURVA",
@@ -2051,7 +4639,118 @@
   "plein": "TÄYSI",
   "rejouer1": "REPLAY",
   "infecter1": "Tartutetaanko {targetName}?",
+  "@infecter1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "action1": "TOIMI",
   "action2": "🔥 TOIMINTA",
-  "aRelanceLesDes2": "0 käynnisti nopan uudelleen (1/3). {pName} {val}"
+  "aRelanceLesDes2": "0 käynnisti nopan uudelleen (1/3). {pName} {val}",
+  "@aRelanceLesDes2": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "val": {
+        "type": "Object"
+      }
+    }
+  },
+  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "@jAiLanceUnePartie3": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "@rolesJoueurs1": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "@dessineCettePhrase1": {
+    "placeholders": {
+      "stepToProcessconte": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "@aEteBanniPourSa1": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "@aTrouveLeMot2": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "@personneNATrouveLe1": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "@aTrouveLeMot3": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "revolution1": "(Révolution !)",
+  "tonMotEst2": "Sanasi on: {_wordCivil}",
+  "@tonMotEst2": {
+    "placeholders": {
+      "_wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
+  "tonMotEst3": "Sanasi on: {_wordUndercover}",
+  "@tonMotEst3": {
+    "placeholders": {
+      "_wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
+  "egalite1": "Tasapeli!",
+  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "@jAiLanceUnePartie4": {
+    "placeholders": {
+      "datagameTypeGribou": {
+        "type": "Object"
+      }
+    }
+  }
 }

@@ -519,9 +519,9 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
             )
             matches = []
             for m in re.finditer(rf"(?:AppLocalizations\.of\(([^)]+)\)!|_l10n)\.{re.escape(k)}\b", content):
-                before = content[max(0, m.start() - 55):m.start()]
+                before = content[max(0, m.start() - 160):m.start()]
                 after = content[m.end():m.end() + 40].lstrip()
-                if "GameContentLocalization.format" in before or after.startswith(".replaceAll"):
+                if "GameContentLocalization.format" in before or after.startswith(".replaceAll") or after.startswith("("):
                     continue
                 # Ignorer si c'est dans "${AppLocalizations.of(context)!.vainqueur} $winner" (L67089)
                 if before.endswith("${") and after.startswith("}"):
@@ -549,15 +549,15 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
                 zero_replacements.append((s, e, rep))
                 stats["zero_templates"] += 1
 
+        for s, e, rep in sorted(zero_replacements, key=lambda x: x[0], reverse=True):
+            content = content[:s] + rep + content[e:]
+
         # Aussi réparer `vainqueur` à L67089 ("Vainqueur : '{0}'" utilisé dans "${...!.vainqueur} $winner")
         if "vainqueur" in key_to_msg and "{0}" in key_to_msg["vainqueur"]:
             content = content.replace(
                 '"${AppLocalizations.of(context)!.vainqueur} $winner',
                 '"${GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur, [winner])}',
             )
-
-        for s, e, rep in sorted(zero_replacements, key=lambda x: x[0], reverse=True):
-            content = content[:s] + rep + content[e:]
 
     # E. Réparer les 41 clés '$' corrompues dans lib/amis.dart et dans key_to_msg
     direct_code_fixes = {
@@ -579,7 +579,7 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
         "AppLocalizations.of(context)!.strb8097d": '"👆 ${pointers.first}"',
         "AppLocalizations.of(context)!.strd83364": '"${(hands[pId] as List?)?.length ?? 0}"',
         "AppLocalizations.of(context)!.stree98fd": '"${myData[\'chips\']} \\$"',
-        "AppLocalizations.of(context)!.streabdaf": "AppLocalizations.of(context)!.tourDe(players[currentPlayerId]?['name'] ?? '...')",
+        "AppLocalizations.of(context)!.streabdaf": "GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '...'])",
         "print(AppLocalizations.of(context)!.aiErrorE);": "print('AI error: $e');",
         "print(\n                                    AppLocalizations.of(context)!.clicSurLeJoueurPname,\n                                  );": "print('>>> CLIC sur le joueur $pName (ID: $pId) !');",
         "print(AppLocalizations.of(context)!.erreurDisposeLivekitserviceE);": "print('Erreur dispose LivekitService: $e');",
@@ -609,6 +609,10 @@ def repair_all_broken_keys_and_templates(content, key_to_msg, meta_tags, ui_dict
         "str487ca1": "🤫 Chut ! Ferme les yeux 🙈",
         "str85bff7": "✅ Bravo !",
         "strfa1b8c": "❌ Raté !",
+        "aEteBanniPourSa": "{loserName} a été banni pour sa réponse : \"{loserAnswer}\"",
+        "personneNATrouveLe": "Personne n'a trouvé le mot : \"{currentWord}\" !",
+        "aTrouveLeMot": "{winnerName} a trouvé le mot !",
+        "aTrouveLeMot1": "{guesserName} a trouvé le mot !",
     }
     for k, clean_fr in clean_arb_overrides.items():
         key_to_msg[k] = escape_icu_single_quotes(clean_fr)
@@ -882,7 +886,10 @@ def parse_interpolations(raw_msg):
                     c += 1
                 used_names.add(clean_id)
                 ph_names.append(clean_id)
-                arg_exprs.append(expr)
+                if expr == "otherRevealedRole":
+                    arg_exprs.append("otherRevealedRole ?? ''")
+                else:
+                    arg_exprs.append(expr)
                 arb_parts.append(f"{{{clean_id}}}")
                 idx = j
                 continue
@@ -901,7 +908,10 @@ def parse_interpolations(raw_msg):
                     c += 1
                 used_names.add(clean_id)
                 ph_names.append(clean_id)
-                arg_exprs.append(expr)
+                if expr == "otherRevealedRole":
+                    arg_exprs.append("otherRevealedRole ?? ''")
+                else:
+                    arg_exprs.append(expr)
                 arb_parts.append(f"{{{clean_id}}}")
                 idx += len(m.group(0))
                 continue
@@ -1249,11 +1259,40 @@ def fast_translate(text, target_code, key_name="", lang_label=""):
     return res
 
 
+def _get_active_icu_placeholders(arb_str):
+    """Retourne uniquement les placeholders ICU actifs {param}, en ignorant ceux échappés entre apostrophes simples '{param}'."""
+    # Masquer les '' (apostrophe littérale échappée), puis masquer les sections '...'
+    s = arb_str.replace("''", "\x00")
+    s = re.sub(r"'[^']*'", "", s)
+    phs = list(dict.fromkeys(re.findall(r"\{([A-Za-z0-9_]+)\}", s)))
+    return [p for p in phs if not p.isdigit()]
+
+
 def _save_synced_arb(arb_file, code, data, key_to_msg, meta_tags):
     synced = {"@@locale": code}
     for k in key_to_msg:
-        synced[k] = data.get(k, key_to_msg[k])
-        if code == "en" and "@" + k in meta_tags:
+        fr_v = key_to_msg[k]
+        val = data.get(k, fr_v)
+        # S'assurer que les placeholders ICU actifs {param} correspondent exactement à ceux de app_fr.arb
+        fr_phs = _get_active_icu_placeholders(fr_v)
+        val_phs = _get_active_icu_placeholders(val)
+        if not fr_phs:
+            # Si la clé française est un getter sans argument, aucun placeholder ICU actif ne doit exister dans les autres langues
+            for stray_p in val_phs:
+                val = re.sub(rf"(?<!')(\{{{re.escape(stray_p)}\}})(?!')", r"'\1'", val)
+        elif val_phs != fr_phs:
+            if len(val_phs) == len(fr_phs):
+                for old_p, new_p in zip(val_phs, fr_phs):
+                    val = val.replace("{" + old_p + "}", "{" + new_p + "}")
+            else:
+                for old_p in val_phs:
+                    if old_p not in fr_phs:
+                        val = val.replace("{" + old_p + "}", "")
+                for new_p in fr_phs:
+                    if "{" + new_p + "}" not in val:
+                        val = val + " {" + new_p + "}"
+        synced[k] = val
+        if "@" + k in meta_tags:
             synced["@" + k] = meta_tags["@" + k]
     with open(arb_file, "w", encoding="utf-8") as f:
         json.dump(synced, f, ensure_ascii=False, indent=2)
@@ -1282,14 +1321,19 @@ def process_language(code, argos_code, key_to_msg, meta_tags, ui_dict):
                 dict_applied += 1
         elif (clean_fr, argos_code) in GLOBAL_TRANSLATION_CACHE:
             new_val = GLOBAL_TRANSLATION_CACHE[(clean_fr, argos_code)]
-            if k not in data:
+            if k not in data or data.get(k) == v:
                 data[k] = new_val
                 dict_applied += 1
 
-    # Clés nécessitant encore une traduction IA Argos (absentes de data)
+    # Clés nécessitant encore une traduction IA Argos (absentes de data ou restées en français par défaut)
     todo = {
         k: v for k, v in key_to_msg.items()
-        if k not in data
+        if k not in data or (
+            data.get(k) == v
+            and len(v) > 3
+            and k not in ui_dict
+            and (v.replace("''", "'"), argos_code) not in GLOBAL_TRANSLATION_CACHE
+        )
     }
 
     # Sauvegarder immédiatement l'état synchronisé initial (permet de reprendre en cas d'arrêt)
@@ -1358,24 +1402,28 @@ def audit_and_prune_unused_keys(key_to_msg, meta_tags):
                     amis_code = txt
 
     full_code = "\n".join(all_dart_code)
-    used_in_amis = set(re.findall(r"(?:AppLocalizations\.of\([^)]+\)!|_l10n|l10n)\.([a-zA-Z0-9_]+)", amis_code))
-    used_in_all = set(re.findall(r"(?:AppLocalizations\.of\([^)]+\)!|_l10n|l10n)\.([a-zA-Z0-9_]+)", full_code))
+    used_in_amis = set(re.findall(r"(?:AppLocalizations\.of\([^)]+\)\s*[!?]?|_l10n|l10n)\s*\??\.([a-zA-Z0-9_]+)", amis_code))
+    used_in_all = set(re.findall(r"(?:AppLocalizations\.of\([^)]+\)\s*[!?]?|_l10n|l10n)\s*\??\.([a-zA-Z0-9_]+)", full_code))
 
-    unused = set(key_to_msg.keys()) - used_in_all
-    for k in unused:
-        key_to_msg.pop(k, None)
-        meta_tags.pop("@" + k, None)
+    # Ne JAMAIS supprimer de clés existantes des fichiers .arb !
+    # Garantir que seules les clés avec placeholders ICU actifs (non échappés entre '...') ont un bloc @key
+    meta_tags.clear()
+    for k, v in key_to_msg.items():
+        phs = _get_active_icu_placeholders(v)
+        if phs:
+            meta_tags["@" + k] = {"placeholders": {p: {"type": "Object"} for p in phs}}
+            key_to_msg[k] = v
+    _save_synced_arb(os.path.join(L10N_DIR, "app_fr.arb"), SOURCE_LANG, key_to_msg, key_to_msg, meta_tags)
 
     missing_in_arb = used_in_all - set(key_to_msg.keys())
     print(f"  📂 Fichiers Dart analysés dans lib/      : {dart_files_scanned}", flush=True)
     print(f"  • Clés appelées dans lib/amis.dart       : {len(used_in_amis)}", flush=True)
     print(f"  • Clés appelées dans tout lib/*.dart     : {len(used_in_all)}", flush=True)
-    print(f"  • Clés orphelines nettoyées des .arb     : {len(unused)}", flush=True)
-    print(f"  • Clés actives dans les 22 fichiers .arb : {len(key_to_msg)} (100% associées)", flush=True)
+    print(f"  • Clés conservées dans les 22 .arb       : {len(key_to_msg)} (aucune clé supprimée)", flush=True)
     if missing_in_arb:
         print(f"  ⚠️ Attention : clés appelées mais absentes de app_fr.arb : {sorted(missing_in_arb)}", flush=True)
     else:
-        print("  ✅ Toutes les clés appelées dans le code sont présentes dans les fichiers .arb !", flush=True)
+        print("  ✅ 100 % des clés appelées dans amis.dart et lib/*.dart sont bien présentes dans les 22 fichiers .arb !", flush=True)
 
 
 def verify_all_arb_files_synced(expected_keys):
@@ -1555,8 +1603,8 @@ def run(args):
     print(f"💾 {fr_path} sauvegardé ({len(key_to_msg)} entrées actives).", flush=True)
 
     # Étape 4 : Traduction hybride et synchronisation des 21 autres fichiers .arb
+    preload_cache_from_dictionaries(ui_dict, fr_to_langs, rules_dict, key_to_msg)
     if not args.no_translate:
-        preload_cache_from_dictionaries(ui_dict, fr_to_langs, rules_dict, key_to_msg)
         setup_argos_models()
         print(f"🌍 [TRADUCTION MULTILINGUE] Lancement sur {len(LANGS)} langues ({args.workers} workers CPU)...", flush=True)
         start_t = time.time()
@@ -1576,6 +1624,17 @@ def run(args):
 
         total_time = int(time.time() - start_t)
         print(f"\n⚡ Traduction & synchronisation des {len(LANGS)} langues terminées en {total_time // 60}m {total_time % 60}s !", flush=True)
+    else:
+        for code, argos_code in LANGS.items():
+            arb_file = os.path.join(L10N_DIR, f"app_{code}.arb")
+            data = json.load(open(arb_file, "r", encoding="utf-8")) if os.path.exists(arb_file) else {}
+            for k, v in key_to_msg.items():
+                clean_fr = v.replace("''", "'")
+                if k in ui_dict and code in ui_dict[k]:
+                    data[k] = escape_icu_single_quotes(ui_dict[k][code])
+                elif (clean_fr, argos_code) in GLOBAL_TRANSLATION_CACHE and k not in data:
+                    data[k] = GLOBAL_TRANSLATION_CACHE[(clean_fr, argos_code)]
+            _save_synced_arb(arb_file, code, data, key_to_msg, meta_tags)
 
     verify_all_arb_files_synced(set(key_to_msg.keys()))
 

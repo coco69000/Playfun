@@ -7,7 +7,13 @@
   "joueursNonAssignes": "Неназначенные игроки ('{0}')",
   "annuler": "Отмена",
   "confirmerLesEquipes": "Подтвердить команды",
+  "jeuDeSoiree": "Игра для вечеринок",
+  "multijoueurEnLigne": "Мультиплеер (Онлайн)",
+  "modeLocalHorsLigne": "Локальный режим (Офлайн)",
+  "modeMultijoueur": "Многопользовательский режим",
   "entrezVotrePseudo": "Введите свой ник",
+  "pseudo": "Псевдоним",
+  "creerUnePartie": "Создать игру",
   "veuillezEntrerUnPseudo": "Пожалуйста, введите ник.",
   "rejoindreUnePartie": "Присоединиться к игре",
   "vousAvezAtteintVotreLimite": "Вы достигли лимита в 20 многопользовательских игр на сегодня.",
@@ -48,6 +54,16 @@
   "elementsGeneresEtSauvegardes": "✨ '{0}' предметы генерируются и сохраняются!",
   "erreurIa": "Ошибка ИИ: '{0}'",
   "packActifElements": "Активный набор: {p} ({p2} предметов)",
+  "@packActifElements": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "p2": {
+        "type": "Object"
+      }
+    }
+  },
   "desactiverCePack": "Отключить этот набор",
   "modeDeJeu": "Режим игры",
   "normal": "Обычный",
@@ -254,7 +270,24 @@
   "vousAvezEteExcluDe": "Вы исключены за неактивность. Компьютер играет за вас (награды не начисляются).",
   "s": "'{0}' с",
   "pts1": "{pName}: {pScore} баллов",
+  "@pts1": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "pScore": {
+        "type": "Object"
+      }
+    }
+  },
   "xp": "{pXp} XP",
+  "@xp": {
+    "placeholders": {
+      "pXp": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPlusDeCartes": "Нет карт",
   "cartesRestantes": "'{осталось 0}' карт",
   "jetonsMise": "Фишки: '{$0,}' | Ставка: '{$1,}'",
@@ -302,13 +335,14 @@
   "aucuneCarteEnJeuJouez": "На столе нет карт. Играйте что угодно!",
   "jouer": "Играть ('{0}')",
   "priseEnChaineVousDevez": "⚠️ Серия взятий! Вы должны пойти мигающей шашкой.",
+  "aSelectionneSonPionEt": "'{0}' выбрал пешку и думает...",
   "vousDevezSelectionnerLePion": "Вы должны выбрать шашку, подсвеченную оранжевым.",
   "jeuNonImplemente": "Нереализованная игра: '{0}'",
   "tempsEcoule": "Время вышло!",
   "tourSuivant": "Следующий ход",
   "enAttenteDeLHote3": "Ожидание хоста для начала следующего хода...",
-  "equipeAPts": "Команда А: '{очков}' очков",
-  "equipeBPts": "Команда B: '{очков}' очков",
+  "equipeAPts": "Команда А: '{очков}' очков '{pts}'",
+  "equipeBPts": "Команда B: '{очков}' очков '{pts}'",
   "cEstAToiDe": "Вам отгадывать!",
   "passer1": "ПРОПУСТИТЬ",
   "motsTrouves": "Найденные слова: '{0}'",
@@ -319,7 +353,24 @@
   "voiciLesUvresCollectivesNees": "Вот коллективные произведения вашей фантазии:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' готовится к атаке ('{1}') против игрока!",
   "km": "{oppDist} км",
+  "@km": {
+    "placeholders": {
+      "oppDist": {
+        "type": "Object"
+      }
+    }
+  },
   "km1": "{myDistance} / {targetDist} км",
+  "@km1": {
+    "placeholders": {
+      "myDistance": {
+        "type": "Object"
+      },
+      "targetDist": {
+        "type": "Object"
+      }
+    }
+  },
   "aucuneBotte": "Нет карт защиты",
   "limite50": "ОГРАНИЧЕНИЕ 50",
   "crevaison": "ПРОКОЛ ШИНЫ",
@@ -335,7 +386,7 @@
   "distribuerLaSuite": "Раздать следующую",
   "attenteDuDonneur": "Ожидание дилера...",
   "couche": "Сбросил",
-  "miseActuelle": "Текущая ставка: '{сумма}'",
+  "miseActuelle": "Текущая ставка: '{сумма}' '{amount}'",
   "enAttente": "Ожидание...",
   "seCoucher": "Пас",
   "checker": "Чек",
@@ -350,6 +401,13 @@
   "uno": "УНО!",
   "contreUno": "Контр-УНО!",
   "erreur1": "Ошибка: {p}",
+  "@erreur1": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezUneCouleur": "Выберите цвет",
   "votezPourUnJoueur": "Голосуйте за игрока:",
   "derniereChanceMrWhite": "Последний шанс, Мистер Уайт!",
@@ -435,6 +493,22 @@
   "jeValide": "Я подтверждаю!",
   "classementFinal1": "Итоговая таблица",
   "pt": "{p}. {eValueKey}: {eValueValue} очк{p2}",
+  "@pt": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "eValueKey": {
+        "type": "Object"
+      },
+      "eValueValue": {
+        "type": "Object"
+      },
+      "p2": {
+        "type": "Object"
+      }
+    }
+  },
   "categorie": "Категория",
   "viteUnMot": "Быстро! Одно слово!",
   "validerPasser": "ПОДТВЕРДИТЬ И ПЕРЕДАТЬ",
@@ -442,6 +516,19 @@
   "boom": "БУМ!",
   "scoresMoinsMieux": "Очки (меньше = лучше)",
   "pt1": "{eKey}: {eValue} очк{p}",
+  "@pt1": {
+    "placeholders": {
+      "eKey": {
+        "type": "Object"
+      },
+      "eValue": {
+        "type": "Object"
+      },
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "nouvelleManche": "Новый раунд",
   "infecter": "Заразить",
   "devorer": "Сожрать",
@@ -451,36 +538,95 @@
   "coupDEtat": "Переворот",
   "ouvrirLesVotes": "Открыть голосование",
   "cloturerLeVote": "Завершить голосование",
+  "k0S": "0 с",
   "tempsRestantS": "Оставшееся время: '{0}' с",
   "k6Consecutifs3": "6 подряд: '{streak}'/3",
   "lancerLeDe": "БРОСИТЬ КУБИК",
-  "scorePoints": "Счёт: '{набрал}' очков",
-  "dominosRestants": "Оставшиеся домино: '{считают}'",
+  "scorePoints": "Счёт: '{набрал}' очков '{score}'",
+  "dominosRestants": "Оставшиеся домино: '{считают}' '{count}'",
   "impossibleDeJouerCeDomino": "Эту костяшку нельзя сюда положить.",
   "mancheTerminee": "Раунд окончен! ",
   "dominos": "Домино",
   "extremites": "Концы: ",
-  "pioche2": "Ничья: '{Счёт}'",
+  "pioche2": "Ничья: '{Счёт}' '{count}'",
   "piocher": "Взять",
   "ficheDePts": "'{0}' рекорд ('{1}' очков)",
   "pts2": "{otherName} ({otherTotal} очков)",
+  "@pts2": {
+    "placeholders": {
+      "otherName": {
+        "type": "Object"
+      },
+      "otherTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "clic": "КЛИК",
-  "lancersRestants": "Оставшиеся броски: '{Считать}'",
+  "lancersRestants": "Оставшиеся броски: '{Считать}' '{count}'",
   "combinaison": "КОМБИНАЦИЯ",
   "grilleDePts": "СЕТКА '{0}' ('{1}' очков)",
   "pts3": "{p} ({myTotal} очков)",
+  "@pts3": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "myTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "pts4": "{oppName} ({oppTotal} очков)",
+  "@pts4": {
+    "placeholders": {
+      "oppName": {
+        "type": "Object"
+      },
+      "oppTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "pts5": "{oppCellScore} баллов",
+  "@pts5": {
+    "placeholders": {
+      "oppCellScore": {
+        "type": "Object"
+      }
+    }
+  },
   "pts6": "{oppTotal} баллов",
+  "@pts6": {
+    "placeholders": {
+      "oppTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "total": "ИТОГО",
   "pts7": "{myTotal} баллов",
+  "@pts7": {
+    "placeholders": {
+      "myTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "carteAPrendre": "КАРТА ДЛЯ ВЗЯТИЯ",
-  "votreMain": "Твоя рука ('{считай}')",
+  "votreMain": "Твоя рука ('{считай}') '{count}'",
   "touchezUneCartePourLa": "Коснитесь карты, чтобы сыграть",
   "aucuneCombinaisonEtaleeSurLa": "На столе пока нет комбинаций",
-  "etaler": "Спред ('{счёт}')",
+  "etaler": "Спред ('{счёт}') '{count}'",
   "defausserFin": "Сброс и конец",
   "pts8": "{eValue} баллов",
+  "@pts8": {
+    "placeholders": {
+      "eValue": {
+        "type": "Object"
+      }
+    }
+  },
   "placezDansVotreCoin": "Поставьте в свой угол!",
   "retourner": "Отразить",
   "validerLePlacement": "Подтвердить размещение",
@@ -699,6 +845,13 @@
   "validerLesEquipes": "Подтвердить команды",
   "placezLeTelephoneSurVotre": "ПРИЛОЖИТЕ ТЕЛЕФОН КО ЛБУ!",
   "s1": "⏱️ {secondsLeft} с",
+  "@s1": {
+    "placeholders": {
+      "secondsLeft": {
+        "type": "Object"
+      }
+    }
+  },
   "basTrouve": "Вниз = Угадано",
   "arreter": "Остановить",
   "hautPasser": "Вверх = Пас",
@@ -706,7 +859,21 @@
   "pointsMarques": "+'{набрано 0,}' очков!",
   "touchezUnMotPourModifier": "Нажмите на слово, чтобы изменить результат в случае ошибки датчика:",
   "pts10": "{teamAScore} баллов",
+  "@pts10": {
+    "placeholders": {
+      "teamAScore": {
+        "type": "Object"
+      }
+    }
+  },
   "pts11": "{teamBScore} баллов",
+  "@pts11": {
+    "placeholders": {
+      "teamBScore": {
+        "type": "Object"
+      }
+    }
+  },
   "continuerLaPartie": "Продолжить игру",
   "mauvaisSymbole": "'{0}' : Плохой символ!",
   "dobbleLocal": "Dobble Локально",
@@ -717,6 +884,16 @@
   "commencer2": "НАЧАТЬ",
   "piocheBut": "НИЧЬЯ ('{0}') • ГОЛ : '{1}'",
   "pts12": "{player} ({score} очков)",
+  "@pts12": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "partieTerminee2": "ИГРА ОКОНЧЕНА!",
   "victoireDe": "Победа '{0}' !",
   "cartes": "'{0}' карт",
@@ -803,6 +980,13 @@
   "prets": "'{0}' / '{1}' готов",
   "scoresConservesDeLaSession": "СОХРАНЁННЫЙ СЧЁТ СЕССИИ:",
   "pts13": "{pScore} баллов",
+  "@pts13": {
+    "placeholders": {
+      "pScore": {
+        "type": "Object"
+      }
+    }
+  },
   "adminLancerMaintenantAvecLes": "Админ: Начать сейчас с готовыми игроками",
   "leCompagnonDeVosMeilleures": "Спутник ваших лучших вечеров",
   "desactivezLaRecherchePubliquePour": "Отключите «Публичный поиск», чтобы играть локально.",
@@ -817,11 +1001,12 @@
   "votreFlotteTirsEnnemisRecus": "Ваш флот (Полученные вражеские выстрелы)",
   "elimine": "Выбыл",
   "tapisVide": "Пустой стол",
-  "reflechit": "'{имя}' думает...",
+  "ecrireAu": "Напишите '{0}'...",
+  "reflechit": "'{имя}' думает... '{name}'",
   "faceAFaceCoteA": "Лицом к лицу (рядом)",
   "totalAdversaire": "ИТОГО СОПЕРНИКА",
   "prendreLAtoutOuPasser": "ВЗЯТЬ КОЗЫРЬ ИЛИ ПАСОВАТЬ:",
-  "combinaisonsDe": "Комбинации '{названия}'",
+  "combinaisonsDe": "Комбинации '{названия}' '{name}'",
   "ilDevraDonnerLePremier": "Он должен дать первую подсказку",
   "cetteReponseADejaEte": "Этот ответ уже был дан!",
   "themePourLes25Mots": "Тема для 25 слов",
@@ -830,51 +1015,299 @@
   "rulesTitle": "Правила игры",
   "understoodButton": "Понимаю",
   "skyjoRoundEnderNotice": "{name} первым раскрыл все свои карты.",
+  "@skyjoRoundEnderNotice": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoRoundScoreNotice": "+{roundScore} в этом раунде  •  Всего: {totalScore} очк.",
+  "@skyjoRoundScoreNotice": {
+    "placeholders": {
+      "roundScore": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoReplaceWithDrawn": "Нажмите на карту, чтобы ЗАМЕНИТЬ её на {card}.",
+  "@skyjoReplaceWithDrawn": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoTapHiddenToReveal": "Нажмите на ЗАКРЫТУЮ карту, чтобы ОТКРЫТЬ её.",
   "skyjoChooseActionForDrawn": "Выберите действие для {card}:",
+  "@skyjoChooseActionForDrawn": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoReplaceWithDiscard": "Нажмите на карту, чтобы ЗАМЕНИТЬ её из сброса ({card}).",
+  "@skyjoReplaceWithDiscard": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoCardsRevealedCount": "{count} / 2 карт открыто",
+  "@skyjoCardsRevealedCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "ceTurnOfPlayer": "ХОД {name}",
+  "@ceTurnOfPlayer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "ceStepOfTotal": "Шаг {step} / {total}",
+  "@ceStepOfTotal": {
+    "placeholders": {
+      "step": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
   "ceVisibleSnippetOf": "Видимый фрагмент от {name}:",
+  "@ceVisibleSnippetOf": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "cePlayerWriting": "{name} пишет...",
+  "@cePlayerWriting": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "ceStoryNumber": "ИСТОРИЯ #{index}",
+  "@ceStoryNumber": {
+    "placeholders": {
+      "index": {
+        "type": "Object"
+      }
+    }
+  },
   "mbTurnOf": "ХОД {name}",
+  "@mbTurnOf": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "mbHandCount": "Рука: {count} карт",
+  "@mbHandCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "mbCardsInHand": "Карты на руках ({count})",
+  "@mbCardsInHand": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "dobbleAllCardsFound": "Все карты были найдены!",
   "dobbleDealingCards": "Раздача карт...",
   "dobbleCenterCard": "КАРТА В ЦЕНТРЕ",
+  "dobbleDeckCards": "ТЯНИ ({count} карт)",
+  "@dobbleDeckCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "dobbleTapSameSymbol": "Найдите тот же символ!",
   "dobbleMyCardsCount": "Мои Карты: {count}",
+  "@dobbleMyCardsCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "dobbleBlocked": "ЗАБЛОКИРОВАН!",
   "dobbleTooManyErrors": "Слишком много быстрых ошибок.",
+  "dobblePenaltyWait": "Дождитесь наказания!",
+  "dobbleWrongSymbolWarning": "Плохой символ! Будьте осторожны с блокировкой.",
   "dobbleFoundSymbol": "{name} нашел символ!",
+  "@dobbleFoundSymbol": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "dobbleSymbolWas": "Символом было:",
   "pokerPot": "Банк: {amount} \\$",
+  "@pokerPot": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "pokerRaiseAlert": "⚠️ {name} готовит повышение до {amount} \\$!",
+  "@pokerRaiseAlert": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      },
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "pokerCall": "Колл ({amount})",
+  "@pokerCall": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "unoYouMustDraw": "Вы должны взять {count} карт(ы)!",
+  "@unoYouMustDraw": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "unoMustDraw": "Должен взять {count} карт(ы)!",
+  "@unoMustDraw": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "unoDrawCountCards": "Взять {count} карт",
+  "@unoDrawCountCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesMissionEnd": "Миссия завершена!",
   "codenamesRedTeam": "Красная команда",
   "codenamesBlueTeam": "Синяя команда",
+  "codenamesSpectator": "Зритель",
+  "codenamesMasterSpy": "Капитан",
+  "codenamesAgent": "Агент",
   "codenamesTeamTurn": "Ход команды: {team}",
+  "@codenamesTeamTurn": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
+  "codenamesYouAre": "Вы: ",
   "codenamesMasterSpyView": "Вид Капитана (Карта-Ключ)",
   "codenamesClueLabel": "Ваша подсказка (одно слово)",
   "codenamesWordCountLabel": "Количество слов",
   "codenamesGiveClue": "Дать подсказку",
   "codenamesClueGiven": "Вы дали подсказку: ''{clue} {count}''",
+  "@codenamesClueGiven": {
+    "placeholders": {
+      "clue": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesAgentView": "Вид Агента",
   "codenamesClueFromSpy": "Подсказка от {spy}:",
+  "@codenamesClueFromSpy": {
+    "placeholders": {
+      "spy": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesGuessesLeft": "Осталось попыток: {count}",
+  "@codenamesGuessesLeft": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesPassTurn": "Завершить ход",
   "codenamesWaitingForClue": "Ожидание подсказки {team} Капитана...",
+  "@codenamesWaitingForClue": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamAScore": "Команда А: {score}",
+  "@timesUpTeamAScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamBScore": "Команда Б: {score}",
+  "@timesUpTeamBScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpYouAreInTeam": "Вы в {team}",
+  "@timesUpYouAreInTeam": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpRoundMode": "Раунд {round}: {mode}",
+  "@timesUpRoundMode": {
+    "placeholders": {
+      "round": {
+        "type": "Object"
+      },
+      "mode": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpYourTurnToMakeGuess": "ТВОЙ черед объяснять слова!",
   "timesUpRoundEnd": "КОНЕЦ РАУНДА!",
   "timesUpFound": "Угадано!",
@@ -883,36 +1316,144 @@
   "timesUpSomeone": "Кто-то",
   "timesUpSeconds": "секунд",
   "timesUpCardsLeft": "Осталось карт: {count}",
+  "@timesUpCardsLeft": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpForceNextPlayer": "Сменить игрока принудительно (Хост)",
   "timesUpGameOverReason": "Конец 3 раундов! Команда А: {scoreA} очк. | Команда Б: {scoreB} очк.",
+  "@timesUpGameOverReason": {
+    "placeholders": {
+      "scoreA": {
+        "type": "Object"
+      },
+      "scoreB": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamA": "Команда А",
   "timesUpTeamB": "Команда Б",
   "timesUpDraw": "Ничья",
   "timesUpWaitingForWords": "Ожидание, пока все игроки отправят свои слова...",
   "timesUpAddWordsCount": "Добавьте {count} слов или фраз",
+  "@timesUpAddWordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpWordsSubtitle": "(люди, предметы, фильмы, места...)",
   "timesUpWordInputLabel": "Слово для угадывания ({current}/{target})",
+  "@timesUpWordInputLabel": {
+    "placeholders": {
+      "current": {
+        "type": "Object"
+      },
+      "target": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpAddWordTooltip": "Добавить это слово",
   "timesUpYourWords": "Ваши слова:",
   "timesUpSubmitWords": "Отправить мои {count} слов",
+  "@timesUpSubmitWords": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpModeFree": "Свободное описание",
   "timesUpModeOneWord": "Только одно слово",
   "timesUpModeMime": "Пантомима",
   "dtGuessedWords": "{name} отгадал {count} слов(а)!",
+  "@dtGuessedWords": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "dtMakeGuessWordTo": "Помогите {name} угадать это слово:",
+  "@dtMakeGuessWordTo": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "undercoverEliminatePlayer": "Исключить {name}",
+  "@undercoverEliminatePlayer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "undercoverVoteCount": "{count} голос(ов)",
+  "@undercoverVoteCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "petitBacRound": "Раунд {round}",
+  "@petitBacRound": {
+    "placeholders": {
+      "round": {
+        "type": "Object"
+      }
+    }
+  },
   "petitBacChooseCategories": "Выберите категории:",
   "petitBacAddCategory": "Добавить категорию",
+  "petitBacMinOneCategory": "Вам нужна хотя бы одна категория!",
   "petitBacValidateCategories": "Подтвердить категории",
   "petitBacLetter": "Буква: {letter}",
+  "@petitBacLetter": {
+    "placeholders": {
+      "letter": {
+        "type": "Object"
+      }
+    }
+  },
+  "petitBacWaitingForBell": "Простыня возвращена! Жду звонка...",
   "petitBacIFinished": "Я закончил! (Стоп)",
   "petitBacCorrection": "ПРОВЕРКА",
+  "petitBacGameOverReason": "Игра Литтл Бак окончен!",
   "presidentGivesTo": "{from} отдаёт {to}:",
+  "@presidentGivesTo": {
+    "placeholders": {
+      "from": {
+        "type": "Object"
+      },
+      "to": {
+        "type": "Object"
+      }
+    }
+  },
   "presidentPlayCards": "СЫГРАТЬ ({count})",
+  "@presidentPlayCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "actionPendingMsg": "Ваше действие записывается...",
+  "monAnimalPrefere": "Моё любимое животное",
   "unJoueurEstDesigneComme": "Игрок называется «целью». Остальные игроки анонимно отвечают на вопрос о нём. Цель выбирает предпочтительный ответ, и автор этого ответа получает одно очко.",
+  "uneSituationEstPresenteeTous": ": \r\n        «Представляется ситуация. Все игроки голосуют за того, кто с наибольшей вероятностью выполнит это. Игрок, набравший больше всего голосов, получает одно очко (сомнительная честь!).»    ",
   "modeClassiqueUneQuestionEst": "Классический режим: Задаётся вопрос. Один игрок тайно называется «лжецом» и должен придумать ответ. Остальные говорят правду. Голосуйте за разоблачение лжеца.\\n\\nУпрощённый режим: Каждый рассказывает анекдот (правдивый или ложный) в ответ на тему, а затем тайно заявляет о своей правдивости. Затем все голосуют «Правда» или «Ложь» за каждую историю. Очки вы зарабатываете, угадывая правильно и обманывая других.",
   "laPlupartDesJoueursCivils": "Большинство игроков (гражданские) получают слово. «Инфильтратор» получает похожее слово. А «Мистер Уайт» не получает НИКАКОГО слова. Каждый игрок получает слово с подсказкой за **30 секунд**. Цель — разоблачить самозванцев путем голосования. Если гражданский выбывает, побеждают самозванцы.",
   "unMotEstAfficheChaque": "Отображается слово. Каждый игрок должен тайно представить синоним. Все ответы раскрываются, после чего игроки голосуют за «бан» наименее релевантного предложения. Забаненный игрок проигрывает раунд.",
@@ -944,6 +1485,7 @@
   "sonObjectifEstDeVaincre8": "Его цель — победить оборотней. Пока Охотник жив, он защищён от атак оборотней. Когда Волки нацеливаются на Красную Шапочку, пока Охотник жив, их голос не приводит к смерти. Если Охотник умирает, Красная Шапочка становится похожей на простого жителя. ",
   "sonObjectifEstDeVaincre9": "Его цель — победить оборотней. Каждую ночь у Пироманта есть выбор: хранить греческую бочку с огнём у игрока дома или устроить его взрыв. Он может убивать членов своей стороны, поэтому должен действовать стратегически. Нет ограничений по количеству бочек, но если Пиромант умирает, не вызвав взрыва, игроки остаются живы. Будьте осторожны: в отличие от Ведьмы, Пиромант должен быть жив утром, чтобы взрыв сработал.",
   "sonObjectifEstDeVaincre10": "Его цель — победить оборотней, пока не получит новую роль. В первую ночь он назначает завещателя, который после смерти передаёт ему свою роль. Наследник восстанавливает только те силы, которые не были использованы его завещателем (зелье ведьмы, захват власти диктатором и т.д.), кроме Охотника и Могильщика. Он не восстанавливает инфекцию (Чёрный Волк) или заражение (Больной Крыса) у своего завещателя. Он сохраняет инфекцию или заражение, которое было у него на базе. Если он наследует силы оборотня, другим волкам сообщают, что он присоединяется к стае. Если он унаследует силы диктатора, умирающего в ночь его государственного переворота, наследник должен нести последствия и провести государственный переворот сразу после пробуждения.",
+  "touche": "Тачдаун",
   "unVillageoisSansPouvoirSpecial": "Житель без особых способностей.",
   "devoreUnVillageoisLaNuit": "Пожирает жителя ночью.",
   "decouvreUnRoleParNuit": "Узнает одну роль за ночь.",
@@ -968,49 +1510,219 @@
   "heritier": "Наследник",
   "heriteDuRoleDeSon": "Наследует роль завещателя после его смерти.",
   "themeIa": "Тема ИИ",
+  "caseLabel": ": \r\n      Коробка ",
   "generalEtVarie": "Общее и разнообразное",
+  "unDinosaureQuiMangeUne": "Динозавр ест мороженое",
+  "pouvoirVolerOuEtreInvisible": "Возможность летать или быть невидимой",
+  "returnGenereDesSituationsCourtes": ": \r\n        return «Генерирует короткие ситуации, начинающиеся с действия. Тема: {finalPrompt}»; \r\n      Коробка ",
+  "@returnGenereDesSituationsCourtes": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "abandonTousLesJoueursDeconnectes": "Сдаться (все игроки отключены)",
   "tousLesJoueursSeSont": "Все игроки отключились",
   "nAPasJoueA": "⏱️ {playerName} не вовремя играл. Компьютер играл за него ({actionDetails}).",
+  "@nAPasJoueA": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "actionDetails": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA1": "⏱️ {playerName} не сыграл(а) вовремя. Компьютер сыграл за него случайным образом.",
+  "@nAPasJoueA1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "joueur": "Игрок",
   "tempsEcoule1": "(Прошло время)",
   "tempsEcoule2": "Прошедшее время",
   "aToucheUneCibleIl": "🎯 {shooterDataname} попал(а) в цель! Игрок ходит снова.",
+  "@aToucheUneCibleIl": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "aTireDansLEau": "🌊 {shooterDataname} выстрелил(а) в воду. Ход переходит к {opponentDataname}.",
+  "@aTireDansLEau": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      },
+      "opponentDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "unJoueur": "Игрок",
   "inactif3ToursSansReponse": "неактивен (3 хода без ответа)",
   "leJugeNAPas": "Судья не определил победителя вовремя. Очки не начисляются.",
   "aLanceLesDes": "{pName} бросил(а) кубики!",
+  "@aLanceLesDes": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aRelanceLesDes3": "'{'pName'}' перебросил кости ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} оставил(а) кубик со значением {dieVal} (кубик #{index1}) 🔒",
+  "@aGardeLeDeDe": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "dieVal": {
+        "type": "Object"
+      },
+      "index1": {
+        "type": "Object"
+      }
+    }
+  },
   "aDebloqueLeDe": "{pName} разблокировал(а) кубик #{index1}",
+  "@aDebloqueLeDe": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "index1": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagne": "{playerName} победил(а)!",
+  "@aGagne": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneAvecLeScoreLe": "{playersgameWinnerIdnameJoueur} выигрывать с наименьшим результатом!",
+  "@gagneAvecLeScoreLe": {
+    "placeholders": {
+      "playersgameWinnerIdnameJoueur": {
+        "type": "Object"
+      }
+    }
+  },
   "leRatMaladeEstLe": "Чумная крыса — единственный выживший! Она отравила всех!",
   "tousLesAutresSurvivantsSont": "Все выжившие заражены Чумной крысой. Она победила!",
   "leRoleDeEst": "Роль игрока {targetName}: {targetRole}.",
+  "@leRoleDeEst": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leDictateur": "Диктатор",
   "vousEtesAmoureuxDe": "Вы влюблены в {lover2Name}!",
+  "@vousEtesAmoureuxDe": {
+    "placeholders": {
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "vousEtesAmoureuxDe1": "Вы влюблены в {lover1Name}!",
+  "@vousEtesAmoureuxDe1": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      }
+    }
+  },
   "pioche3": "Кирка",
+  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' ещё '''{''' \r\n      Анти-дублирующея безопасность: если",
   "vousNAvezPasDe": "У тебя нет слов",
   "equipe12": "Команда 1",
   "equipe21": "Команда 2",
   "finDesManchesVictoireDe": "Конец раундов! Победа {winnerName}!",
+  "@finDesManchesVictoireDe": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "scoreCibleAtteint": "Целевой счёт достигнут!",
   "laPartie2v2Commence": "Игра 2х2 начинается!",
   "laPartieCommence1": "Игра начинается!",
   "aGardeLeZombie": "{playersloserIdnameUnjoueur} оставил Зомби!",
+  "@aGardeLeZombie": {
+    "placeholders": {
+      "playersloserIdnameUnjoueur": {
+        "type": "Object"
+      }
+    }
+  },
   "chaqueJoueurADevineUne": "Каждый игрок угадал по одному разу!",
   "toutLeMondeEstPasse": "Все спасовали!",
   "verite1": "ИСТИНА",
   "aLePlusDXp": "{playerswinnerIdnameJoueur} набирает больше всего опыта ({maxXp} опыта) и становится админом!",
+  "@aLePlusDXp": {
+    "placeholders": {
+      "playerswinnerIdnameJoueur": {
+        "type": "Object"
+      },
+      "maxXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Конец рукава (кнопка администратора)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async '''{''' \r\n    ожидать _db.runTransaction((transaction) async'''{''' \r\n      финальная играRef = _db.collection(''games'').doc(gameCode); \r\n      final snap = waitit transaction.get(gameRef); \r\n      если (!snap.exists) return; \r\n\r\n      финальная играData = snap.data() как Map<String, динамический>; \r\n      финальные игроки = Карта<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Определить победителя (больше опыта)\r\n      Победитель струныId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        final xp = (pData[''xp''] as num?)?. toInt() ?? 0; \r\n        если (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Кто-то",
   "aAtteintPointsEtRemporte": "{winnerName} набрал {targetScore} очков и выиграл игру!",
+  "@aAtteintPointsEtRemporte": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "motManquant": "Пропущенное слово",
   "erreurLeNombreDeRoles": "Ошибка: Количество ролей ({length}) не совпадает с числом игроков ({playerCount}).",
+  "@erreurLeNombreDeRoles": {
+    "placeholders": {
+      "length": {
+        "type": "Object"
+      },
+      "playerCount": {
+        "type": "Object"
+      }
+    }
+  },
   "toutesLesManchesDeTime": "Все раунды Time''s Up завершены!",
   "gagneAvecPoints": "{playerswinnerIdnameUnjoueur} побеждает с {maxScore} очками!",
+  "@gagneAvecPoints": {
+    "placeholders": {
+      "playerswinnerIdnameUnjoueur": {
+        "type": "Object"
+      },
+      "maxScore": {
+        "type": "Object"
+      }
+    }
+  },
   "finDeLaPartie": "Игра окончена!",
   "leDessinateurNAPas": "Художник не отправил рисунок вовремя.",
   "leTempsEstEcoulePersonne": "Время вышло! Никто не угадал слово.",
@@ -1018,15 +1730,54 @@
   "motNonDevine": "Слово не угадано.",
   "les13CartesOntEte": "Все 13 карт сыграны!",
   "laBombeAExploseDans": "Бомба взорвалась в руках {loserName}!",
+  "@laBombeAExploseDans": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "leJoueur": "Игрок",
+  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Вопросы по списку<String> =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[сложность]?? \r\n          GameWords.whoIsMostLikely[",
   "honnete": "Честно",
+  "pairSplit": ") ? pair.split(",
+  "pairPairListStringShuffledroles": "): [чётные, чётные]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = перетасованныеРоли[1]; \r\n\r\n        Вопрос =\r\n            «Опиши своё секретное слово одним словом. Самозванцы, блеф!»; \r\n        для (var pId в players.keys) '''{''' \r\n          Строка pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} набрал {updatedScoresoverallWinnerId} очков и выиграл игру!",
+  "@aAtteintPointsEtGagne": {
+    "placeholders": {
+      "playersoverallWinnerIdname": {
+        "type": "Object"
+      },
+      "updatedScoresoverallWinnerId": {
+        "type": "Object"
+      }
+    }
+  },
   "poseDeCarte": "выкладывание карты",
   "enchereAutomatique": "авто-ставка",
   "passeLEnchere": "пропускает ставку",
+  "elseIfGametype": ") '''{''' \r\n        если (voterId == votedForId) '{' \r\n          бросить исключение («Формальный запрет голосовать за себя!»); \r\n        '}''''}''' другое, если (gameType ==\r\n      ",
+  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          транзакция, \r\n          gameRef, \r\n          gameData, \r\n          избиратель, \r\n          5, \r\n          applySpeedBonus: верно, \r\n        ); \r\n      }' \r\n\r\n      int requiredГолоса = игроки.Длина; \r\n\r\n      если (gameType == ",
+  "forFinalTargetInVotes": ") '''{''' \r\n          итоговая карта<Строка, int> voteCounts = '{}'; \r\n          для (окончательная цель в голосах.значениях) '{' \r\n            voteCounts[цель как строка] = (voteCounts[цель] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxГолосов = 0; \r\n          Список<Строка> верх Голосовали = []; \r\n          voteCounts.forEach((цель, подсчёт) '''{''' \r\n            если (считать > maxVotes) '{' \r\n              maxVotes = count; \r\n              topVoted = [цель]; \r\n            '}' еще, если (count == maxVotes) '{' \r\n              topVoted.add(цель); \r\n            '}''''}'''); \r\n\r\n          Обновления[\r\n          ",
+  "forFinalTargetInVotes1": ") '''{''' \r\n        итоговая карта<Строка, int> voteCounts = '{}'; \r\n        для (окончательная цель в голосах.значениях) '{' \r\n          voteCounts[цель как строка] = (voteCounts[цель] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxГолосов = 0; \r\n        Список<Строка> верх Голосовали = []; \r\n        voteCounts.forEach((цель, подсчёт) '''{''' \r\n          если (считать > maxVotes) '{' \r\n            maxVotes = count; \r\n            topVoted = [цель]; \r\n          '}' еще, если (count == maxVotes) '{' \r\n            topVoted.add(цель); \r\n          '}''''}'''); \r\n\r\n        если (topVoted.length == 1) '''{''' \r\n          финальный победитель = лучший. Первое место; \r\n          Обновления[\r\n        ",
   "aRemporteTousLesJetons": "{winnerName} выиграл все фишки на столе!",
+  "@aRemporteTousLesJetons": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "uneMain": "Одна рука",
   "carte1": "карта {cardToPlay}",
+  "@carte1": {
+    "placeholders": {
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "quipourraitvotemode": "? _quiPourraitVoteMode\r\n                      : ",
   "localIndisponibleVideoAudioActif": "Локальная игра недоступна (видео/аудио включено)",
   "jouerEnLocalSurCet": "Играть локально (На этом устройстве)",
   "laVideoEstObligatoirePour": "Для игры «Угадай, кто я» онлайн необходимо видео.",
@@ -1048,9 +1799,26 @@
   "generationEnCours": "Генерация...",
   "completerAvecLIa15": "Дополнить с помощью ИИ (+15 слов)",
   "completeCetteListeSurLe": "Заполните этот список на тему {text}. Существующие слова: {join}",
+  "@completeCetteListeSurLe": {
+    "placeholders": {
+      "text": {
+        "type": "Object"
+      },
+      "join": {
+        "type": "Object"
+      }
+    }
+  },
   "exMythologieGrecqueObjetsInsolites": "напр.: Греческая мифология, необычные предметы, пираты...",
   "exPasDAnimauxDangereux": "напр.: Без опасных животных, только культовые фильмы...",
   "genererAvecLIaElements": "Генерируйте с помощью ИИ ({currentCount} элементов)",
+  "@genererAvecLIaElements": {
+    "placeholders": {
+      "currentCount": {
+        "type": "Object"
+      }
+    }
+  },
   "themePersonnalise": "Пользовательская тема",
   "cameraIndispensablePourCeJeu": "Для этой игры камера обязательна.",
   "microCameraDesactiveLeMode": "Микрофон + Камера (Отключает локальный режим)",
@@ -1079,6 +1847,16 @@
   "coupAutomatiqueJouePourCause": "Автоматический ход сыгран из-за бездействия.",
   "inactivite": "Бездействие",
   "str8f522b": "{cat}: {hasScorescoreVal}",
+  "@str8f522b": {
+    "placeholders": {
+      "cat": {
+        "type": "Object"
+      },
+      "hasScorescoreVal": {
+        "type": "Object"
+      }
+    }
+  },
   "zeroPointe": "Скайджо (Ноль очков)",
   "partieTermineeAvecLeScore": "Игра завершена с наименьшим счётом!",
   "cEstVotreTour": "Ваш ход!",
@@ -1100,6 +1878,13 @@
   "enAttenteDeLaPioche": "Ожидание взятия карты...",
   "laPartieDeBigTwo": "Игра в Большую двойку завершена!",
   "auTourDe2": "Ход игрока {resolvePlayerNamecurrentPlayerId}",
+  "@auTourDe2": {
+    "placeholders": {
+      "resolvePlayerNamecurrentPlayerId": {
+        "type": "Object"
+      }
+    }
+  },
   "laPartieEstTerminee": "Игра окончена!",
   "plusAucunCoupPossiblePour": "У противника больше нет ходов!",
   "cEstVotreTour1": "Твоя очередь! ('{0}')",
@@ -1112,7 +1897,21 @@
   "surrealismeClassique": "Классический сюрреализм",
   "suiteDe3Mots": "Продолжение из 3 слов",
   "strb74c15": "« {fullText} »",
+  "@strb74c15": {
+    "placeholders": {
+      "fullText": {
+        "type": "Object"
+      }
+    }
+  },
   "str1e0607": "{authorName} : ",
+  "@str1e0607": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
   "objectif1000BornesAtteint": "Цель в 1000 км достигнута!",
   "aVousDeRouler": "ВАШ ЧЕРЁД ЕХАТЬ!",
   "arrete": "ОСТАНОВЛЕН",
@@ -1133,8 +1932,36 @@
   "derniereCartePosee": "Последняя сыгранная карта!",
   "cEstTonTour": "ТВОЙ ход!",
   "str422faa": "{valuename}: {valuescore0} 🃏",
+  "@str422faa": {
+    "placeholders": {
+      "valuename": {
+        "type": "Object"
+      },
+      "valuescore0": {
+        "type": "Object"
+      }
+    }
+  },
+  "printEtatDeIsactionpendingAu": " ---\", \r\n    ); \r\n    print(\"Первоначальный _isActionPending статус: {_isActionPending}\"); \r\n\r\n    финальные игроки = (gameData[",
+  "@printEtatDeIsactionpendingAu": {
+    "placeholders": {
+      "_isActionPending": {
+        "type": "Object"
+      }
+    }
+  },
   "erreurQuestionNonTrouvee": "Ошибка: Вопрос не найден.",
   "str95d36e": "{valuename}: {key0}",
+  "@str95d36e": {
+    "placeholders": {
+      "valuename": {
+        "type": "Object"
+      },
+      "key0": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezLaMeilleureReponse": "Выберите лучший ответ!",
   "leJugeChoisit": "Судья выбирает...",
   "votez": "Голосуйте!",
@@ -1156,8 +1983,26 @@
   "leChallenger": "Претендент",
   "stre93cb0": "'{0}' : '{1}'",
   "uneDescriptionHilarante": "уморительная подпись",
+  "extrainfoColumnChildrenText": "; \r\n          extraInfo = Колонка( \r\n            дети: [ \r\n              Текст( \r\n                ''",
   "unProblemeEstSurvenu": "Возникла проблема.",
+  "defaultFinalRoundwinneridGamedata": ": \r\n      По умолчанию: \r\n        финальный раундWinnerId = gameData[",
   "str98e212": "{pName}: {count}/{length}{isFull}",
+  "@str98e212": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      },
+      "length": {
+        "type": "Object"
+      },
+      "isFull": {
+        "type": "Object"
+      }
+    }
+  },
   "aVousDeJouer": "Ваш ход!",
   "trieParCouleur": "По мастям",
   "trierLaMain": "Сортировать карты",
@@ -1166,9 +2011,49 @@
   "touchezPourPoser": "Нажмите, чтобы положить",
   "encherissezOuPassez": "Делайте ставку или пасуйте",
   "str4c885c": "{motdessiner}: {p}",
+  "@str4c885c": {
+    "placeholders": {
+      "motdessiner": {
+        "type": "Object"
+      },
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "voirLeScoreFinal": "Посмотреть финальный счёт",
   "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
-  "strf0868c": "{length0} : 99999",
+  "@str6bd6b6": {
+    "placeholders": {
+      "carte": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "score": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
+  "styleConstTextstyleColorColors": ",\nстиль: const TextStyle (цвет: Colors.white70),\n),\nSizeBox (высота: 20),\nОбертывание()\nИсполнитель: WrapAlignment.center\nДети:\nOneFilteredClues\n.map((clue) => buildEasel(clue.toString()))\n.toList(),\n),\nSizeBox (высота: 20),\nЕсли (только OneFilteredClues.isEmpty)\nТекст\nAppLocalizations.of(context)!.allIndicesOntEte\nстиль: const TextStyle (цвет: Colors.red),\n),\n]\n),\n);\n\"Еще один\"\nОригинальное название: It''s the guess to play\nОбратная колонка()\nДети: [\nТекст",
+  "strf0868c": "{length0} : 99999 {valuescore0}",
+  "@strf0868c": {
+    "placeholders": {
+      "length0": {
+        "type": "Object"
+      },
+      "valuescore0": {
+        "type": "Object"
+      }
+    }
+  },
   "cEstAToi": "ТВОЯ ОЧЕРЕДЬ!",
   "laPatateAExplose": "Картошка взорвалась!",
   "finDeLaPartie1": "Конец игры",
@@ -1177,19 +2062,41 @@
   "designez2Amoureux": "Выберите 2 влюблённых",
   "amoureuxUnis": "Влюблённые соединены!",
   "laVictime": "жертва",
+  "centeractionwidgetRowMainaxissizeMainaxissizeMin": ";\nДеятельность центра Виджет = ряд()\nmainAxisSize: MainAxisSize.min\nДети: [\nРазработчик:ActionButton\nЯрлык: AppLocalizations.of(context)!.infect\nиконка: Icons.auto fix high\nЦвет: Colors.purpleAccess\nнажатый: () '''{'\nПровайдер.of<PlayerState>()\nконтекст,\nЛожный, ложный,\n)recordBadgeEvent(''lg loup noir infect'');\nFirebaseService.loupNoirInfect\nwidget.gameCode,\nИгрок Id,\nПравда.\n);\n'',\n),\nConst SizedBox (ширина: 8),\nРазработчик:ActionButton\nЯрлык: AppLocalizations.of(контекст)! выкупщик,\nИкона: Icons.close\nЦвет: Colors.redAccess\nПод давлением:\n() => FirebaseService.loupNoirInfect()\nwidget.gameCode,\nИгрок Id,\nложный,\n),\n),\n]\n);\n''\nСломать.\nОригинальное название: Loup Blanc Turn\nБыстрый текст =",
   "aucuneVictimeCetteNuitProtegee": "Никаких жертв сегодня (защищенных или спасенных)",
+  "styleTextstyleFontweightFontweightBold": ",\nСтиль: TextStyle()\nИсточник: FontWeight.bold\nЦвет:\nмой\nColors.cyanAccess\n(выбранный ChatType == \"волк\")\nЦвета.redAccess.shade100\nЦвета: White60,\n),\n),\nTextSpan (текст: сообщение),\n]\n),\n),\n);\n'',\n);\n'',\n),\n),\n\n// Компактная коробка передач\nЕсли (может отправить сообщение)\nРоу.\nДети: [\nРасширенный()\nРебенок: SizeBox\nвысота: 32,\nРебенок: TextField()\nКонтроллер: ChatController\nстиль: const TextStyle (размер шрифта: 12, цвет: Colors.white),\nУкрашение: InputDecoration()\nhintText:\nAppLocalizations.of(context)!.writeTo,\nТекстовый стиль Const TextStyle\nЦвет: Colors.white30,\nРазмер шрифта: 11,\n),\nГраница: OutlineInputBorder()\nBorderRadius: BorderRadius.circulal(16)\nBorderSide.none, BorderSide.none\n),\nДочь: Правда,\nfillColor: Colors.white.withOpacity (0.08),\nContentPadding: const EdgeInsets.symmetric\nгоризонтальный: 10,\nвертикально: 0,\n),\n),\nonSubmitted: (текст) '''{'''\nЕсли (text.trim(.isNotEmpty))\nFirebaseService.sendChatMessage\nwidget.gameCode,\nИгрок Id,\ntext.trim(),\nвыбранный ЧатТип,\n);\nchatController.clear();\n''\n'',\n),\n),\n),\nconst SizedBox (ширина: 4),\nIconButton\nИкона: Const Icon\nIcons.send округлен,\nРазмер: 18,\nЦвет: Colors.cyanAccent,\n),\nEdgeInsets.zero,\nОграничения: Const BoxConstraints(),\nнажатый: () '''{'\n(chatController.text.trim(.isNotEmpty))\nFirebaseService.sendChatMessage\nwidget.gameCode,\nИгрок Id,\nchatController.text.trim(),\nвыбранный ЧатТип,\n);\nchatController.clear();\n''\n'',\n),\n]\n),\n]\n),\n);\n''\n\nВиджетная сборкаChatTab (String label, String type, Color activeColor)\nконечный бул выбран = выбран тип чата == тип;\nОбратный гестадетектор()\nonTap: () => setState(() => selectedChatType = type),\nРебенок: контейнер\nпрокладка: const EdgeInsets.symmetric (горизонтальный: 8, вертикальный: 3),\nУкрашение: BoxDecoration()\nЦвет:\nИзбранный\nActiveColor.withOpacity (0,25)\n: Colors.white.withOpacity(0.04),\nBorderRadius: BorderRadius.circulal(10)\nГраница: Border.all\nЦвет:\nИзбранный? ActiveColor.withOpacity(0.6): Colors.transparent\n),\n),\nРебенок: текст()\nэтикетка,\nСтиль: TextStyle()\nРазмер шрифта: 10,\nШрифт Вес: выбран? FontWeight.bold: FontWeight.normal\nЦвет: выбран? Активный цвет: Colors.white60\n),\n),\n),\n);\n''\n\nОБНОВЛЕНИЕ АВАТАРА ДЛЯ МЕЖДУНАРОДНОЙ -\n\nWidget buildSyncTimer (Timestamp? startTime, интеграцияInSeconds)\nесли (startTime) null return const SizedBox.shrink();\n\n// TweenAnimationBuilder позволяет сверхтекучее визуальное время без блокировщика таймера и ручного набораState, что значительно облегчает резьбу (Точка 4)\nFinal endTime = startTime.toDate().add()\nДлительность (секунды: продолжительность)\n);\nОкончательный остаток = endTime.difference (DateTime.now()).\n\nЕсли (remaining.isNegative)\nВозвращать текст\nAppLocalizations.of(context)!.k0S\nНазвание: Theme.of()\nконтекст,\n)textTheme.headlineSmall?.copyWith(цвет: Colors.redAccess),\n);\n\n(перенаправлено с «TweenAnimationBuilder»)\nпродолжительность: оставшаяся,\nTween (начало: остаток, конец: Duration.zero)\nРазработчик: (BuildContext context, Duration value, Widget? child)\nконечные секунды = значение.inSeconds;\nВозвращать текст\nAppLocalizations.of(context)!.timeRestantS\nСтиль: Theme.of(context.textTheme.headlineSmall?.copyWith)\nЦвет: второй < 20? Colors.redAccess: Colors.amberAccess,\n),\n);\n'',\n);\n''\n\nWidget buildSmallChevauxUI\nСоздайте контекст,\nMap<String, Dynamic> GameData\nСтрунный игрок,\n) '''{'\nконечные игроки = Map<String, dynamic>.from(gameData[''players'']?? '''{''')\nПоследний заказ игрока = List<String>.from()\nGameData [''LittleChevauxPlayerOrder'']?\n);\nОкончательные позиции = Map<String, dynamic>.from()\nGameData[''smallChevauxPositions'']??\n);\nFinal int currentIndex = gameData[''smallChevauxCurrentIndex'']? 0;\nПоследний струнный токPlayerId =\nplayerOrder.isNotEmpty? playerOrder[currentIndex] :'';\nFinal bool isMyTurn = currentPlayerId ==playerId;\nFinal intice = (gameData [''smallChevauxDice''] как число??.toInt()??? 0;\nFinal bool hasRolled = gameData[''littleChevauxHasRolled'']?? false;\nFinal bool isTeamMode = gameData[''smallChevauxTeamMode'']?? false;\nFinal Map<String, dynamic> consecutiveSixs = Map<String, dynamic>.from()\nGameData[''smallChevauxConsecutiveSixes'']??\n);\nПоследний int mySixStreak = последовательные Sixes[playerId]??? 0;\n\n// Современный флуопаллет / аркада на темном фоне\nЗаключительный список <Color> PlayerColors =\nconst Color (0xFFEF4444) // Неоновый красный\nconst Color (0xFF38BDF8) // Неоново-голубое небо\nconst Color(0xFF10B981) // Изумрудно-зеленый\nconst Color(0xFFF59E0B), // Золотой янтарь\n]\n\n//-- Виктория КРИН ----\nесли (gameData [''gameState''] == ''gameOver'')\nВозвращение UniversalGameEndScreen\nНазвание игры:",
   "arriveeAuCentreDuPlateau": "Прибытие в центр доски!",
   "deplacezUnCheval": "ПЕРЕДВИНЬТЕ ЛОШАДЬ!",
   "aVousDeLancer": "ВАШ ЧЕРЁД БРОСАТЬ!",
   "mode2v2Allies": "Режим союзников 2х2",
-  "chevalSelectionneNtouchezPourAvancer": "Лошадь выбрана! Toggle для продвижения вперед",
+  "chevalSelectionneNtouchezPourAvancer": "Лошадь выбрана! Toggle для продвижения вперед '{pawn}'",
   "touchezUnPion": "Коснитесь фишки",
   "scoreLimiteAtteint": "Достигнут лимит очков!",
   "toutesLesGrillesSontCompletees": "Все таблицы заполнены!",
   "cEstVotreTourTouchez": "Ваш ход! Нажмите на кубик, чтобы зафиксировать (золотой 🔒)",
   "lancerLesDes": "Бросить кости",
   "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "@k1663": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "oppBonus035": {
+        "type": "Object"
+      }
+    }
+  },
   "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "@k16631": {
+    "placeholders": {
+      "myUpper": {
+        "type": "Object"
+      },
+      "myBonus035": {
+        "type": "Object"
+      }
+    }
+  },
   "scoreFinal": "Итоговый счёт: '{scoreA}' - '{scoreB}'",
   "encheresEnCours": "ТОРГИ ИДУТ",
   "aVousDOuvrirLe": "ВАШ ЧЕРЁД ХОДИТЬ ВО ВЗЯТКУ!",
@@ -1200,9 +2107,17 @@
   "plusAucunCoupPossible": "Ходов больше нет!",
   "lancer1": "Брось '{0}'",
   "choisirUnJeu": "Выбрать игру",
+  "screenWhoismostlikelylocalscreenPlayersPlayersBreak": ": \r\n        screen = WhoIsMostLikelyLocalScreen (игроки: _players); \r\n        универсал; \r\n      Коробка ",
   "generation": "Генерация...",
   "genererLesDefisParIa": "Сгенерировать задания ИИ",
   "genereUnMelangeDActions": "Создаёт смесь развлекательной правды и вызова. Тема: {trim}",
+  "@genereUnMelangeDActions": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
   "genererLesDilemmesParIa": "Сгенерировать дилеммы с ИИ",
   "egalite": "Ничья",
   "choixEnregistre": "Выбор сохранён!",
@@ -1212,11 +2127,27 @@
   "lancerLeDilemme": "Запустить дилемму",
   "genererLesQuestionsIa": "Сгенерировать вопросы ИИ",
   "genereDesQuestionsIndiscretesEt": "Порождает неосторожные и забавные вопросы. Тема: {trim}",
+  "@genereDesQuestionsIndiscretesEt": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
   "perduReveleLaQuestionEt": "ПРОИГРЫШ! Открой вопрос и ответь на него!",
   "gagneTonSecretEstPreserve": "ПОБЕДА! Твой секрет сохранён.",
+  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    '''}''' ещё '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : «'{'trim'}' (вариант)»; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    для (игрок VAR в _activePlayers) '''{''' \r\n      if (игрок == под прикрытием) '{' \r\n        _playerRoles[игрок] = «Инфильтратор»; \r\n      '}' еще, если (игрок == _mrWhitePlayer) '{' \r\n        _playerRoles[игрок] = «Мистер Уайт»; \r\n      '}' ещё '{' \r\n        _playerRoles[игрок] = «Гражданский»; \r\n      '}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  пустота _nextPlayerReveal() '''{''' \r\n    если (_currentPlayerRevealIndex < _activePlayers.длина - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' ещё '{' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(Струнник) '''{''' \r\n    String role = _playerRoles[игрок]!; \r\n    bool impostorsWin = роль == «Гражданский»; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      если (самозванцыПобеда) '''{''' \r\n        _resultMessage = «'{'player'}' был гражданским! Победили самозванцы!»; \r\n      '''}''' ещё '''{''' \r\n        _resultMessage = \"'{'player'}' был\r\n    \r\n  ",
   "requiert4Joueurs": "Требуется 4+ игрока",
   "requiert3Joueurs": "Требуется 3+ игрока",
   "genereDesCategoriesAmusantesPour": "Создайте интересные категории для горячей картошки. Тема: {trim}",
+  "@genereDesCategoriesAmusantesPour": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
+  "bodyPaddingPaddingConstEdgeinsets": "), \r\n          ), \r\n        ], \r\n      ), \r\n      Корпус: Подкладка ( \r\n        наполнение: конст EdgeInsets.all(16.0), \r\n        ребёнок: Колонка( \r\n          дети: [ \r\n            если (_phase != LocalWhoIsPhase.results) ... [ \r\n              ФИЛЬТР СЛОЖНОСТИ\r\n              Сегментированная кнопка<Строка>( \r\n                Сегменты: [ \r\n                  ButtonSegment( \r\n                    Ценность: ",
   "egalite1PtChacun": "Ничья! (+1 очко каждому)",
   "designeParLeGroupe1": "Выбран группой (+1 очко):",
   "onSePasseUnObjet": "Мы передаём друг другу предмет",
@@ -1227,6 +2158,13 @@
   "k2EquipesSAffrontent": "2 команды соревнуются",
   "chacunPourSoi": "Каждый за себя",
   "stre786cb": "{sender} : ",
+  "@stre786cb": {
+    "placeholders": {
+      "sender": {
+        "type": "Object"
+      }
+    }
+  },
   "afficherLesSalonsPleins": "Показать полные комнаты",
   "masquerLesSalonsPleins": "Скрыть полные комнаты",
   "aucunSalonNeCorrespondA": "Нет комнат, соответствующих вашим фильтрам.",
@@ -1237,6 +2175,13 @@
   "partie": "Часть",
   "lancerUnStream": "Запустить стрим",
   "rejoindreLeStream": "Присоединяйтесь к стриму ({length})",
+  "@rejoindreLeStream": {
+    "placeholders": {
+      "length": {
+        "type": "Object"
+      }
+    }
+  },
   "enAttenteDuLancement": "Ожидание старта...",
   "voler": "УКРАСТЬ!",
   "ciblee": "ЦЕЛЬ",
@@ -1245,7 +2190,21 @@
   "exQuelEstTonPire": "Напр.: Твой самый неловкий момент?",
   "verite2": "🔮 ПРАВДА",
   "strc1ea47": "« {p} »",
+  "@strc1ea47": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "str5dd9e1": "« {currentChallenge} »",
+  "@str5dd9e1": {
+    "placeholders": {
+      "currentChallenge": {
+        "type": "Object"
+      }
+    }
+  },
   "defiValide": "ЗАДАНИЕ ЗАЧТЕНО!",
   "defiNonValide": "ЗАДАНИЕ НЕ ЗАЧТЕНО",
   "partieTerminee3": "Игра завершена",
@@ -1253,6 +2212,13 @@
   "finDeLaManche2": "КОНЕЦ РАУНДА",
   "pret4": "✓ Готов",
   "jAiLanceUnePartie": "Я бросил игру {selectedGame} !",
+  "@jAiLanceUnePartie": {
+    "placeholders": {
+      "selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
   "ia": "ИА",
   "localIndisponibleRechercheActive": "Локальный недоступен (Поиск активен)",
   "rechercheRapideMonde": "Быстрый поиск (мир)",
@@ -1261,6 +2227,13 @@
   "simpleVillageois": "Селянин",
   "capitaine": "Капитан",
   "s2": "{hotPotatoGlobalDuration} с",
+  "@s2": {
+    "placeholders": {
+      "hotPotatoGlobalDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "nombreDeJoueursRecherches": "Количество искомых игроков: '{0}'",
   "laBeloteRequiertExactement4": "«Белоте» требуется 4 игрока.",
   "formez2EquipesDe2": "Форма 2 команды из 2 игроков в составе команд.",
@@ -1269,7 +2242,17 @@
   "tousLesJoueursDoiventEtre": "Все игроки должны быть назначены в команду.",
   "chaqueEquipeDoitPossederAu": "Каждая команда должна иметь не менее 2 игроков.",
   "auMoins5JoueursRequis": "Требуется минимум 5 игроков.",
-  "rolesJoueurs": "Роли ( {selectedRolesCount} )",
+  "rolesJoueurs": "Роли ( {selectedRolesCount} ) {playersLength}",
+  "@rolesJoueurs": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playersLength": {
+        "type": "Object"
+      }
+    }
+  },
   "ceJeuRequiertExactement4": "Для игры требуется ровно 4 игрока.",
   "auMoins3JoueursRequis": "Требуется как минимум 3 игрока.",
   "auMoins2JoueursRequis": "Требуется минимум 2 игрока.",
@@ -1292,9 +2275,33 @@
   "six": "Шестёрки",
   "sectionSup": "Оригинальное название: '{0}'",
   "k63Pts": "{oppUpper} /63 ppts {value}",
+  "@k63Pts": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "prenezLaDefausseVisibleOu": "Возьмите открытый сброс или возьмите скрытую карту",
   "aa": "- {value}",
+  "@aa": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "dessineCettePhrase": "Нарисуйте это предложение:\n\" {value} \"",
+  "@dessineCettePhrase": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "completeCeDessin": "Дополни этот рисунок!",
   "commenceParUnDessin": "Начни с рисунка!",
   "orateur": "Ведущий",
@@ -1305,6 +2312,13 @@
   "jouePar": "Игры издательства '{0}'",
   "lAdversaire": "Противник",
   "ecrivez": "Напишите {promptItem}",
+  "@ecrivez": {
+    "placeholders": {
+      "promptItem": {
+        "type": "Object"
+      }
+    }
+  },
   "completezLaPhrase1A": "Дополните предложение (от 1 до 8 слов)",
   "auteur": "Автор",
   "adversaire": "Соперник",
@@ -1330,6 +2344,13 @@
   "laPartieVaBientotCommencer": "Игра скоро начнется...",
   "mrWhite": "Мистер Белый",
   "aEteDemasqueIlTente": "{mrWhiteName} был разоблачен! Он пытается угадать тайное слово мирных жителей...",
+  "@aEteDemasqueIlTente": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
   "voteDecisifEnregistreEnAttente": "Решающий голос учтён. Ожидание остальных...",
   "egaliteParfaiteLaDeesseDe": "Идеальное равенство! Богиня Справедливости решает...",
   "vousEtesLeJugeAttendez": "Ты судья. Дождитесь ответов...",
@@ -1343,26 +2364,141 @@
   "aEteChoisiPourSa": "\"0\" был выбран за его ответ и выиграл 1 очко!",
   "resultatsDesVotes": "Результаты голосования",
   "leMenteurEtait": "Лжецом был... {liarName}!",
+  "@leMenteurEtait": {
+    "placeholders": {
+      "liarName": {
+        "type": "Object"
+      }
+    }
+  },
   "lesImposteursOntGagneUn": "Обманщики победили! Был ликвидирован гражданский.",
   "lInfiltreAEteDemasque": "Проникший ( {undercoverName} ) был разоблачен!",
+  "@lInfiltreAEteDemasque": {
+    "placeholders": {
+      "undercoverName": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteAEteDemasque": "Мистер Уайт ( {mrWhiteName} ) разоблачён!",
+  "@mrWhiteAEteDemasque": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTermine": "Все кончено!",
-  "aEteBanniPourSa": "{loserName} был запрещен за его предложение {loserAnswer} !",
+  "aEteBanniPourSa": "{loserName} был запрещен за его предложение  ! {loserAnswer}",
+  "@aEteBanniPourSa": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteDansLesVotesPersonne": "Равенство в голосах! Никто не запрещен.",
   "nAPasReponduA": "{loserName} не ответил вовремя и выиграл 1 очко!",
+  "@nAPasReponduA": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersonneNePrendDe": "Равенство! Никто не принимает этот поворот.",
-  "aTrouveLeMot": "{winnerName} нашел слово: 99999!",
-  "personneNATrouveLe": "Никто не нашел слова {currentWord} .",
-  "aTrouveLeMot1": "{guesserName} нашел слово: 99999!",
+  "aTrouveLeMot": "{winnerName} нашел слово: 99999! ",
+  "@aTrouveLeMot": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe": "Никто не нашел слова '{currentWord}' .",
+  "@personneNATrouveLe": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot1": "{guesserName} нашел слово: 99999! ",
+  "@aTrouveLeMot1": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasTrouveLe": "{guesserName} не нашел этого слова.",
+  "@nAPasTrouveLe": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
   "remporteSkull": "{value} выиграл Череп!",
+  "@remporteSkull": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "defiGagneCarteSRevelee": "Вызов выигран: раскрыто {challengeBid} карт(ы)!",
+  "@defiGagneCarteSRevelee": {
+    "placeholders": {
+      "challengeBid": {
+        "type": "Object"
+      }
+    }
+  },
   "aPerduLeDefi": "{loserName} проиграли.",
+  "@aPerduLeDefi": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTermine1": "Ход окончен.",
+  "aGagneAvecSaDescription": "{winnerName} выиграл с его описанием:AppLocalizations.of(контекст)! Исполнитель: 99999 {winningDescription}",
+  "@aGagneAvecSaDescription": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "winningDescription": {
+        "type": "Object"
+      }
+    }
+  },
   "personneNAGagneCe": "Никто не выиграл в этом раунде. Ничья или нет подписей.",
-  "aTrouveLeSymboleIl": "{winnerName} нашел символ 99999! Он выиграл карту.",
+  "aTrouveLeSymboleIl": "{winnerName} нашел символ 99999! Он выиграл карту. {commonSym}",
+  "@aTrouveLeSymboleIl": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "commonSym": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTerminePersonne": "Раунд окончен. Никто не нашел общий символ.",
   "aEteDesigneEEt": "{winnerName} был назван и выиграл 1 очко!",
+  "@aEteDesigneEEt": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersonneNeMarqueDe": "Ничья! Никто не получает очков в этом раунде.",
   "espion": "Шпион",
   "revolution": " (Революция!)",
@@ -1372,6 +2508,32 @@
   "indiceEnvoyeEnAttenteDes1": "Подсказка отправлена! Ожидание остальных...",
   "carte3": "Карта",
   "score": "счет",
+  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLocalizations.of(контекст)! .styleConstTextstyleColorColors {value2} {deckIndex} / {deckTotal} — {value3} : {totalScore}",
+  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "guesserName": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "value3": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
   "laNuitTombeSurLe": "Ночь выпадает на деревню...\n\nЗакрой глаза.",
   "leMomentEstVenuLe": "Время пришло...\n\nДеревня должна голосовать.",
   "victoireDesVillageois": "Победа Жителей!",
@@ -1393,9 +2555,24 @@
   "votezPourDevorerUneProie": "Голосуйте за жертву",
   "espionnezUnJoueur": "Шпионь за игроком...",
   "leLoupNoirDecideDu": "Чёрный Волк решает судьбу жертвы",
+  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infect {targetName} ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinThe White Wolf поражает соло",
+  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezUneVictimeADevorer": "Выберите жертву",
   "laSorcierePrepareSesPotions": "Ведьма готовит зелья",
   "cibleDesLoups": "Цель волков: {victimeName}",
+  "@cibleDesLoups": {
+    "placeholders": {
+      "victimeName": {
+        "type": "Object"
+      }
+    }
+  },
   "touchezLeJoueurAEliminer": "Прикоснитесь к игроку, чтобы избавиться от яда",
   "empoisonner": "Отравить",
   "lePyromancienPrepareSesExplosifs": "Пиромант готовит взрывчатку",
@@ -1411,9 +2588,37 @@
   "loups": "Волки",
   "outreTombe": "Загробный мир",
   "amoureux": "Влюблённые",
+  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldSmall Horses",
+  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
+    "placeholders": {
+      "senderName": {
+        "type": "Object"
+      }
+    }
+  },
   "courseIndividuelle": "Индивидуальная гонка",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 бросков)",
+  "@k3Lancers": {
+    "placeholders": {
+      "lastHoldAction": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "joueEnDirect3Lancers": "👉 {value} ходит в реальном времени... ({value2}/3 бросков)",
+  "@joueEnDirect3Lancers": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      }
+    }
+  },
   "gardeS": "'{'''0'''}' сохранено",
   "cur": "♥ Червы",
   "carreau": "♦ Бубны",
@@ -1442,11 +2647,47 @@
   "pile": "Решка",
   "face": "Орёл",
   "pasAssezDeJoueursIl": "Недостаточно игроков! Нужно как минимум {minPlayers} игроков для такой конфигурации.",
+  "@pasAssezDeJoueursIl": {
+    "placeholders": {
+      "minPlayers": {
+        "type": "Object"
+      }
+    }
+  },
   "tuEs": "Вы находитесь: {role}",
+  "@tuEs": {
+    "placeholders": {
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
   "tonMotEst": "Твое слово: {wordCivil}",
+  "@tonMotEst": {
+    "placeholders": {
+      "wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
   "tonMotEst1": "Твое слово: {wordUndercover}",
+  "@tonMotEst1": {
+    "placeholders": {
+      "wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
   "tuNAsPasDe": "У тебя нет слова. Блефуй!",
   "commeConvenuTuCommences": "{mrWhitePlayer} , как договорились, начинайте!",
+  "@commeConvenuTuCommences": {
+    "placeholders": {
+      "mrWhitePlayer": {
+        "type": "Object"
+      }
+    }
+  },
+  "quiPourraitLePlusApplocalizations": "Кто может больше?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft",
   "votePar": "Проголосовано: '{0}'",
   "decisionUnanimeDuGroupePour": "Единогласное решение группы для '{0}'!",
   "ilFautAuMoins41": "Для Codenames требуется не менее 4 игроков (по 2 в команде)!",
@@ -1463,7 +2704,21 @@
   "cEstAuTourDe2": "Это поворот '{'0'}' ('''{'''1'')''",
   "genereDesQuestionsAmusantesEt": "Создает веселые и быстрые вопросы. Тема: «(0)»",
   "s3": "{minDuration} с",
+  "@s3": {
+    "placeholders": {
+      "minDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "s4": "{maxDuration} с",
+  "@s4": {
+    "placeholders": {
+      "maxDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "fin1": "Конец",
   "trouves": "Оригинальное название: '{0}'",
   "ecurie1": "Конюшня 1",
@@ -1472,10 +2727,26 @@
   "ecurie4": "Конюшня 4",
   "nombreMaxDeJoueurs": "Максимальное количество игроков: 0",
   "jAiLanceUnePartie1": "Я бросил игру {value} !",
+  "@jAiLanceUnePartie1": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "jeu1": "Игра",
   "partieDeEnAttente": "Часть \"'{'''0'''}'\" в ожидании",
+  "termine": "Прекращено: '{0}'",
+  "vainqueur2": "Победитель:",
   "joueurSPretS": "Игрок(ы) готовы",
   "code": "Код: {value}",
+  "@code": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "lampe": "Фонарик",
   "trousseSoin": "Аптечка",
   "hache": "Топор",
@@ -1487,6 +2758,12 @@
   "redigezLPour": "Напишите '''{'''0'''' для '''{'''1''''",
   "rejouerGarderPts": "ПЕРЕИГРАТЬ (СОХРАНИТЬ ОЧК)",
   "indicesMontresA": "Индексы, показанные на",
+  "playersWinneridname": "Игроки Wineridname",
+  "packageSensorsPlusSensorsPlus": "Датчики +/датчики plus.dart",
+  "supabaseUploadEchecDefinitif": "- [Supabase Upload] Определение -",
+  "erreurSupabaseStorageexception": "- Ошибка хранения (StorageException) -",
+  "erreurInattendueLorsDeL": "- Невнятная ошибка на поверхности -",
+  "timeSUp1": "Time''s Up",
   "marquesDeVoiture": "Марки автомобилей",
   "paysDuMonde": "Страны мира",
   "fruitsLegumes": "Фрукты и овощи",
@@ -1507,21 +2784,57 @@
   "chosesRondes": "Круглые предметы",
   "chosesRouges": "Красные предметы",
   "marquesDeVetements": "Марки одежды",
+  "butDuJeuEtreLe": "**Игровой гол**\nБудьте игроком с наибольшим количеством очков в конце игры.\n\n**Проект**\n1.Каждый игрок получает **7 ответных карт** в руке.\n2.Игрок называется **Juge** (роль поворачивается на каждом раунде).\n3.Судья читает вслух **вопросную карточку**.\n4.Все **другие игроки** тайно выбирают **1 ответную карту** из своей руки и отправляют ее.\n5.Судья зачитывает все ответы и обозначает ** самое смешное**.\n6. Победитель раунда набрал **1 очко**.\n7.Каждый игрок **поче** новую карту, чтобы вернуться к 7.\n8.Роль судьи переходит к следующему игроку.\n\n** Важные правила**\nСудья не играет в карты во время своей очереди.\nОтветы являются анонимными: судья не знает, кто что написал.\n- Мы можем играть только по одной карте** за ручку.",
+  "objectifPrenezDesCartesPour": "** Цель**\nВозьмите карты, чтобы создать соответствующие пары. Избегайте быть игроком, который держит карту Зомби в конце игры.\n**Проект**\nИгра начинается с 33 карт (16 пар + 1 карта Зомби).\n2.Карты распределяются между 4 игроками.\n3.Каждый ход игрок берет карту у следующего игрока.\n4.Если карта создает пару, она автоматически побеждена.\n5.Рука игрока смешанная.\n6.Первый игрок, у которого больше нет карт, выиграл.\n7.Оставшийся игрок с картой Зомби проиграл!",
+  "butDuJeuObtenirLe": "**Игровой гол**\nПолучите самый высокий балл, заполнив 13 категорий 5 кубиками.\n\n**Бег башни**\n1. **Lance**: Вы можете бросать 5 костей до 3 раз за поворот.\n2. ** Держите** : После 1-го или 2-го броска можно сохранить одни кости и перезапустить другие.\n3. **Score**: После хотя бы одного броска нужно выбрать категорию, чтобы забить. Каждая категория может использоваться только один раз.\n\n** Категория**\n** До шести**: Сумма соответствующих кубиков. (Связано 35 баллов, если верхняя часть составляет 63 балла и более).\n**Брелан** (3 или более одинаковых костей): Сумма всех костей.\n- ** Квадрат** (4 или более одинаковых костей): Сумма всех костей.\n**Полный** (3 кости одинаковые + 1 пара): 25 очков.\n**Маленькая сюита** (4 кости подряд): 30 очков.\n- ** Большой люкс** (5 кости подряд): 40 очков.\n** Ямс** (5 одинаковых костей): 50 очков.\n** Шанс**: Сумма всех костей.",
+  "objectifNePasAvoirL": "** Цель**\nНе держите устройство в руках, когда картофель взорвется.\n\n**Проект**\n1.На экране появляется тема.\n2 Игрок, удерживающий устройство, должен дать ответ, соответствующий теме.\n3.Как только он ответил, он быстро передал самолет соседу.\n4.Сосед должен, в свою очередь, найти новый ответ и передать устройство.\n5.Время скрыто и случайно: картофель может взорваться в любой момент!\n6.Игрок, удерживающий устройство в момент взрыва, теряет ручку и получает залог.",
+  "principeGeneralGribouillisEstUn": "** Общий принцип**\nGribouillis — это игра в жанре рисунка, вдохновленная «арабским телефоном», где идеи меняются на каждом этапе. Существует 3 режима игры:\n\n**1. Обычный режим (арабский иллюстрированный телефон)**\n**Письмо**: Каждый игрок пишет предложение.\nРисунок: каждый игрок получает другое предложение и рисует его.\nДевинетт: Каждый игрок получает рисунок и угадывает, что он представляет.\n**Альтернатива** Игра чередуется рисованием и угадыванием, пока каждый «альбом» не обойдет всех игроков.\n- **Но** Забавно видеть, как простое предложение превращается во что-то совершенно другое!\n\n**2. Режим дополнения (совместное рисование)**\nКрокиз: Каждый игрок начинает простой рисунок.\n**Завершение**: каждый игрок получает чужой рисунок и должен его обогатить, не удаляя то, что уже существует.\n- **Альтернатива** Рисунок переходит от игрока к игроку, каждый добавляет свое прикосновение.\n**Параметр \"Добавить 1\"**:\n* Если отключен (по умолчанию): Это веревка. Рисунок развивается на каждом этапе (Игрок A -> Игрок B -> Игрок C...).\n*Если активировано*: Первоначальный рисунок каждого игрока завершается всеми остальными игроками, создавая параллельно несколько коллективных работ.\n- **Но**: Создавайте удивительные и веселые коллективные произведения искусства.\n\n**3. Режим Бриз-Глейс (творческое взаимодействие)**\n**Письмо**: Каждый игрок пишет персональную тему (например: AppLocalizations.of(context)!.myPreference).\nРисование: каждый игрок получает темы от всех других игроков и должен их рисовать.\nИдеально, чтобы разбить лед, открыть вкусы других и запустить творчество в совместной и легкой форме.",
+  "yzObjectifAvoirLeMoins": "Цель\n\nВ конце игры наберите как можно меньше очков.\nИгра останавливается, когда игрок достигает 100 очков или более, а победителем является тот, у кого наименьший общий счет.\n\nоборудование\n\n150 карт с номерами от -2 до +12\n\nОсуществление\n\nСмешайте все карты.\nКаждый игрок получает 12 карт, размещенных лицом вниз перед ним, в 4 столбцах × 3 ряда.\nОстальные карты образуют запас. Верните первую карту, чтобы сформировать отходы.\nКаждый игрок возвращает 2 карты по своему выбору из 12.\n\nКурс экскурсии\n\nВ свою очередь, у вас есть 30 секунд, чтобы выбрать между двумя действиями:\n\n1. Возьмите карту отходов\nВы должны обменять его на одну из 12 карт (видимую или скрытую).\nЗаменяемая карточка идет на отходы.\n\n2. Пиохер карточка лицом вниз\nПосмотрите на карту:\nлибо вы его сохраните и замените одну из своих карточек (как указано выше),\n- либо вы откажетесь от него, вы поместите его прямо на отходы, и в этом случае вы должны вернуть одну из ваших карт, все еще скрытых.\n\nСпециальные правила\n\nТри одинаковые карты в столбце → сразу побеждены (значение 0).\n\nКонец рукоятки:\n\nРукоятка заканчивается, когда игрок раскрывает все свои карты.\nВсе остальные игроки раскрывают оставшиеся карты. Ручка окончена.\nВсе игроки подсчитывают сумму своих карт.\n\nОбратите внимание: если игрок, который финиширует, не имеет наименьшего счета в раунде, он берет штраф в размере +10 очков (его счет ручки удваивается в оригинальной версии, мы будем использовать +10 для упрощения).\n\nКонец игры\n\nМы играем столько, сколько нам нужно.\nКак только игрок достигает 100 или более очков, игра прекращается.\nИгрок с наименьшим кумулятивным счетом выигрывает.",
+  "iAReglesDuPoker": "Цель\n\nВыиграйте фишки от других игроков, имея:\n- лучшая рука из 5 карт во время убоя;\nИли же заставить их отказаться (спать) благодаря ставкам.\n\nКлассификация рук (от самых сильных до самых слабых)\n\n1. Royal flush: 10 - V - D - R - A того же цвета\n2. Quint flush: 5 карт, которые следуют друг за другом одного цвета\n3.Квадрат: 4 одинаковые карты\n4 Полный: 3 одинаковые карты + 1 пара\n5. Цвет (флеш): 5 карт одного цвета (непоследовательный)\n6. Следующий (пятый): 5 карт, которые следуют друг за другом (разные цвета)\n7.Брелан: 3 одинаковые карты\n8. Двойная пара\n9.Пара\n10. Высокая карта (высшая карта, если никто не становится лучше)\n\nð\n\n1. Слепые\nИгрок слева от дилера устанавливает небольшую слепоту.\nСледующий игрок делает большую слепоту.\n\n2. Распределение\nКаждый игрок получает по 2 закрытые карты («частные карты»).\n\n3. Аукционные башни и обычные карты\nПрефлоп: трюк с частными картами.\n- Флоп: раскрыты 3 общие карты. Новые ставки.\n- Башня: раскрыта 4-я общая карта. Новые ставки.\nРека: раскрыта 5-я и последняя общая карта. Последняя ставка.\n\n4. Стрельба (показ)\nЕсли несколько игроков остаются, каждый показывает свою игру.\nЛучшая комбинация из 5 карт (среди 2 частных карт + 5 коммун) выигрывает банк.\n\nВозможные действия\n\nВ свою очередь, у игрока есть 30 секунд для:\n- Не делай ставки, только если больше никто не сделает ставки.\nПоложите чипсы в кастрюлю.\n- Следуй (Звонок): равно бегу.\nПерезапуск (подъем): увеличение ставки.\n- Иди спать (складывай): сними его карты и вылезай из них.\n\nКонец игры\n\nИгра продолжается до тех пор, пока остаются не менее 2 игроков с фишками.\nПобедителем становится тот, кто берет все фишки.",
+  "butDuJeuGagnerLe": "**Игровой гол**\nВыиграйте больше всего XP, выполняя действия и отвечая на правду!\n\n**Проект**\n1.Рулетка - это игрок, чья очередь.\n2.Игрок снимает «Действие» или «Верность».\n3. Классический режим: отображается случайный вызов/вопрос.\n4. Режим судьи: случайный игрок пишет вызов, затем игрок понимает его.\n5.Другие игроки голосуют «да»/«нет».\n6.Процент валидации определяет выигранный XP.\n\n**Специальные правила**\n100% валидация = максимум XP\nИгрок с наибольшим количеством XP становится администратором игры\n- Кнопка \"Конец рукоятки\" позволяет закрыть деталь",
+  "butDuJeuLeBut": "**Игровой гол**\nЦель состоит в том, чтобы первым избавиться от всех своих карт, чтобы стать президентом. Последним игроком с картами в руках становится Дурак.\n\nМатериалы и игроки**\nКарты: 52 карты.\n** Игроки: от 3 до 6 игроков.\n\n** Карточная стоимость**\nПорядок карт, от самых слабых до самых сильных, таков:\n**3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2**\n**2** является самой сильной картой и может обыграть любую другую карту или комбинацию.\n\n**Ручная работа**\n1.** Распределение**: Все карты распределяются поровну между игроками.\n2.** Первый раунд**:\nДля самой первой игры игрок, которому принадлежит **3 Трефле (он должен играть в эту карту (только или с другими 3).\n- Для следующих рукавов начинается колесо **Assess** предыдущего рукава.\n3. ** Игровые карты**: Первый игрок ставит на стол:\n- Только одна карта (например, одна 7).\n- Одна пара (например, две 8).\n- Брелан (экс: три Валета).\n- Один квадрат (например: четыре 5).\n4.**Продолжение раунда**: Следующий игрок (в направлении по часовой стрелке) имеет **30 секунд **, чтобы играть такое же количество карт **, но более высокое значение **.\nПример: Если игрок позирует парой из 6, то следующий должен позировать парой из 7, Леди, Ас и т.д.\n5. **Пропустите свой ход**: Если игрок не может или не хочет играть, он должен пройти свою очередь. После того, как игрок прошел, он не может играть снова до конца текущего сгиба.\n6. ** Конец сгиба**: Складка заканчивается, когда все игроки прошли свою очередь. Последний игрок, разместивший карты, выигрывает сгиб, поднимает карты со стола (откладывает их в сторону) и начинает следующий сгиб, играя то, что он хочет.\n7. * * Сила 2 * *: Играйте один или несколько * * 2 * * бьет любую комбинацию и мгновенно заканчивает сгиб. Человек, который сыграл 2, выигрывает сгиб и начинает играть снова.\nЧтобы обыграть пару, нужно сыграть пару 2!\n\nКонец английского канала и роли\n- Как только у игрока нет карт, он закончил. Игра продолжается до тех пор, пока не останется только один игрок.\nПорядок окончания определяет роли для следующего раунда:\n**1st**: Президент\n**2nd**: Заместитель Председателя\nОригинальное название: The Asshole\n**До последнего**: Вице-адвокат\n** Другое** (если есть): Нейтральное\n\n** В следующем месяце: Обмен картами! **\nПеред началом нового раунда игроки обмениваются картами:\n- Дурак дает свои две лучшие карты президенту.\n**Председатель** дает ему взамен ** две карты по его выбору** (обычно его худшие).\nЕсли есть 4 игрока или более, Vice-Cut дает свою лучшую карту вице-президенту.\n** Вице-президент** дает ему карту по своему выбору**.\n\n**Специальные правила**\nНе может закончиться 2**: Игрок не имеет права избавиться от своей последней карты, если она равна 2. Этот удар считается недействительным.\n**Вариантная революция (факультативно): Если игрок устанавливает квадрат (4 одинаковые карты), он может объявить «Революцию!». Порядок стоимости карт затем изменяется до конца рукава (3 становится самым сильным, а 2 самым слабым).",
+  "butDuJeuReussirDeux": "**Игровой гол**\nУспешное решение двух задач перед другими игроками.\n\n** На месте**\nКаждый игрок начинает с 4 карт: 3 розы и 1 череп.\nКаждая открытка на ковре остается привязанной к своему владельцу.\n\n**Проект**\n1.В свою очередь, игрок может положить карточку лицом вниз на свой ковер.\n2 Когда он больше не хочет позировать, он бросает вызов, объявляя количество карт, которые, по его мнению, он может вернуть.\n3.Другие игроки могут делать ставки или проходить.\n4.Высшая ставка становится претендентом и возвращает рекламируемые карты.\n5.Сначала он возвращает свои карты, затем карты других игроков, если это необходимо.\n\n** Резолюция**\nЕсли появляется череп, вызов пропадает.\nЕсли вызов выигран, игрок набирает очко. Первый на 2 очках выигрывает игру.\nЕсли вызов проигран, игрок теряет карту наугад из оставшейся руки. Если он потеряет череп, он должен немедленно отменить еще один.",
+  "butDuJeuFaireDeviner": "**Игровой гол**\nУгадать слово по рисунку, до окончания отведенного времени.\n\n**Проект**\n1. ** Выбор рисунка/слова** Игрок предназначен для рисования, и ему тайно приписывается слово.\n2. ** Рисование**: чертежник имеет ограниченное время, чтобы угадать слово рисунком. Он не может ни говорить, ни имитировать, ни писать буквы или цифры.\n3. **Девинеты**: Другие игроки предлагают слова в чате.\n4. ** Проверка**: Карикатурист видит предложения в чате и нажимает кнопку «Найти!» рядом с хорошим сообщением для обозначения победителя.\n5. ** Точки**: игрок, нашедший и чертежник, выигрывает очко.\n6. **Следующая башня**: назначается новый чертежник.\n\n** Варианты**\n** Всего 30 ударов**: Чертежник ограничен максимум 30 чертами.",
+  "butDuJeuFaireDeviner1": "**Игровой гол**\nПозвольте вашему партнеру угадать как можно больше загадочных слов, каждое из которых содержит одну подсказку. Те же или недействительные индексы должны быть исключены.\n\n**Проект**\n1. **Выбор Девина**: Игрок обозначается как «Девин» для раунда. Он не видит слова \"тайна\".\n2. **Выбор слова Тайна**: Девин выбирает слово из списка (или мастер игры выбирает одно).\n3. **Indice Writing**: Все остальные игроки («Индексы») тайно пишут ОДИН единственный индекс слов, который поможет Девину найти слово «тайна».\n4.**Фильтр индексов**: Выявляются все индексы. Устраняются одни и те же индексы (даже если они написаны по-разному, например, «чат» и «чаты») или недействительные (очень близкие к слову «тайна», «придумано» и т.д.). Только уникальные и достоверные подсказки показаны в Девине.\n5. **Девинет**: Девин смотрит на оставшиеся подсказки и пытается угадать слово «тайна». У него только одна попытка.\n6.** Рейтинг**:\n- Если Девин находит слово \"тайна\": команда выигрывает 1 очко.\n- Если Девин не найдет слово \"тайна\": 0 баллов.\n- Если Девин не отвечает: 0 баллов.\n\n** Примеры недействительных индексов:**\n- Загадочное слово: \"Чат\". Недействительные индексы: «чатон», «чувство», «миау», «миноу».\nИдентичные индексы: если 2 игрока пишут «животное» для «Чата», «животное» устраняется.",
+  "butDuJeuPourLes": "**Игровой гол**\nДля ** Деревни **: Устраните всех Волка-Гаруса, Белого Волка, Маладе Крысы (кроме Наемника, если он выиграет).\n- Для **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Устраните всех жителей деревни.\nЦель, специфичная для каждого человека (White Loup: одиночество; Mercenary: Убить свою цель в J1; Rat Sick: заразить всех).\nДля влюбленных (если волк + деревня): быть единственными двумя выжившими.\n\n**Проект**\nИгра чередуется между фазами **ночь** и **день**.\n\n*Ночь**\n1.Руководитель игры (приложение) объявляет, что деревня спит.\n2. Различные персонажи просыпаются по очереди, чтобы использовать свои силы:\n**Купидон** (только первая ночь): Назовите двух игроков, которые влюбятся. Если они волк и крестьянин, их цель меняется.\nНаследие (только в первую ночь): Относится к тестировщику.\n** Видя** пробуждается и назначает игрока, чтобы узнать его истинную роль. (Не обнаружите инфекцию черного волка).\n**Менталист** (пассивный) воспринимает результаты голосования в деревне.\nКрысиный маладе: загрязняет двух игроков (которые будут знать, что другие заражены).\nЛупы-Гарус (Loup-Garou, Loup Noir, Loup Bavard) просыпаются, устраивают концерты и назначают жертву на обед.\nЧерный Луп однажды может превратить жертву в зараженного Лупа-Гароу (который сохраняет свои силы и становится Волком). Менталист и Фоссоер могут обнаружить зараженного, Войанте нет.\nБелый Луп (одна ночь из двух): Презирает игрока по его выбору (отменяет защиту).\nВолшебство просыпается. Она видит жертву волка и может использовать одно из двух зелий (только один раз на часть): зелье исцеления, чтобы спасти жертву, или зелье отравления, чтобы убить кого-то.\nПироманский язык: выбирает хранить бочонок греческого огня или взрывать уже размещенные (должны быть живыми утром).\nНекромант: может общаться с мертвыми.\n\n*День**\n1.Деревня просыпается. Приложение сообщает, кто умер ночью.\n2.Мертвые игроки раскрывают свою роль и устраняются (они больше не могут общаться, кроме Некроманка с мертвыми).\nЛе Лу Бавар: должен произнести тайное слово или умереть на закате (если диктатор не возьмет власть).\n3.Выжившие пытаются разоблачить самозванцев.\n4.После обсуждений все игроки голосуют за устранение подозреваемого.\n**Диктатор** (один раз): может принять участие в голосовании. Если он устраняет волка, он становится мэром; в противном случае он умирает.\n**Капитан**: Его голос считается двойным. В случае ликвидации он должен назначить преемника до своей смерти.\n- Наемник: Если его цель будет устранена в первый день, он победит в одиночку. В противном случае он становится крестьянином.\n5.Игрок, получивший наибольшее количество голосов, устраняется, раскрывает свою роль и выходит из игры.\nКассир: Если он будет устранен (день и ночь), он может взять с собой другого игрока.\nФоссойер: Когда он умер, он определил двух игроков (один из противоположного лагеря, один из его лагеря).\n- Любовники**: Если один умирает, другой следует за ним с горем.\n- Наследие**: Если его завещатель умирает, он берет на себя роль (если он не умер или не заражен).\n6 Начинается новая ночь.\n\n**Условия победы**\n** Деревня**: Избавьтесь от всех волков-гарусов, белых волков, больных крыс.\n- **Волосы-Гарус** (маута): Быть равным или выше по численности жителям села.\nБелая Луп: быть единственным выжившим.\nНаемник: Убейте свою цель в первый день.\nRat Malade: Загрязните всех живых игроков.\n** Влюбленные** (Луп + Деревня) : Быть единственными двумя выжившими.\n\n** Важные примечания**\nКрасные Шапероны защищены Охотником от Вольфа-Гаруса, пока Охотник жив.\nСад защищает цель Вольфа-Гаруса (не может защитить дважды одного и того же человека).\nСилы Белого Волка не знают защиты.\nПироман должен быть жив утром, чтобы его бочки взорвались.",
   "loupNoir": "Чёрный волк",
+  "loupBavard": "Болтливый волк",
   "loupBlanc": "Белый волк",
+  "mercenaire": "Наёмник",
   "ratMalade": "Больная крыса",
   "voyante": "Провидица",
   "petiteFille": "Девочка",
+  "chasseur": "Охотник",
   "garde": "Телохранитель",
   "cupidon": "Купидон",
   "mentaliste": "Менталист",
+  "fossoyeur": "Могильщик",
   "dictateur": "Диктатор",
+  "chaperonRouge": "Красная Шапочка",
   "pyromancien": "Пиромант",
+  "butDuJeuEtreLe1": "**Игровой гол**\nСтаньте самым быстрым, чтобы обнаружить единственный идентичный символ между картой в центре и собственной картой.\n\n(перенаправлено с «The Infernal Tower»)\n1 Каждый игрок получает карту лицом вниз. Остальные карты образуют Сток в центре, лицо видно.\n2 Сначала все возвращают свою карту.\n3.Каждый игрок должен как можно быстрее найти единственный символ, который присутствует как на его карте, так и на Стоковой карте.\n4.Первый игрок, который находит символ, объявление вслух, берет карту Сток и помещает ее на свою собственную карту.\n5 Эта новая карта становится его картой на следующий раунд. Затем в центре Акции раскрывается новая карта.\n6.Игра продолжается до тех пор, пока запас не исчерпан. Игрок, который собрал больше всего карт в конце, выигрывает!",
+  "butDuJeuSeDebarrasser": "**Игровой гол**\nИзбавьтесь от всех его карт, став первым!\n\n**Проект**\n1.** Распределение**: Каждый игрок получает 7 карт. Остальное формирует запас. Карта возвращается, чтобы начать кучу отходов.\n2. **Играй в карту**: Игрок, чья очередь, имеет 30 секунд, чтобы положить карту в руку на кучу отходов. Карта должна соответствовать верхней карте стека:\n** Цвет ** (например, красный на красном)\n** Номер ** (например: один 7 синий на один 7 зеленый)\n** Символ** (например: желтый «+2» на красном «+2»)\n** Специальная карта** (Джокер, +4 и т.д.)\n3. **Пиочер**: Если игрок не может разыграть карту в отведенное время, он должен выбрать карту из пакета. Если он сможет разыграть эту карту, он сможет сделать это немедленно. В противном случае его очередь заканчивается.\n4. ** Специальные карточки**:\n**+2 (две карты)**: Следующий игрок выбирает 2 карты и проходит свою очередь.\n**Сенс Запретный (Пройдите свою очередь)**: Следующий игрок проходит свою очередь.\n** Инверсия (изменение смысла)**: Чувство игры меняется.\n** Джокер (Изменение цвета): Игрок выбирает цвет следующей карты для игры. Играть можно на любой карте.\nСупер Джокер +4 (Colour Change and Four Cards) Игрок выбирает цвет. Следующий игрок выбирает 4 карты и проходит свою очередь. В эту карту можно играть, только если у игрока нет другой карты цвета, запрошенной на куче отходов (если она не блефует).\n5. **Объявить \"UNO\"**: Когда у игрока в руках только одна карта, он должен объявить «UNO!». Если он этого не сделает и его заберет другой игрок (до того, как следующий игрок сыграет или подберет), он должен выбрать 2 карты.\n6. ** Конец канала**: Рукоятка заканчивается, когда игрок избавляется от своей последней карты. Засчитываются очки. Игрок, набравший 500 очков (или определенную сумму), выигрывает игру.\n\n**Точки карты:**\nЦифровые карты (0-9): их лицевое значение.\n+2, Sens Forbidden, Inversion: 20 баллов.\nДжокер, Супер Джокер +4: 50 очков.",
+  "principeDuJeuLeJeu": "## Игровой принцип\nИгра проводится между **3 и 10 игроками*.\nКаждый игрок предоставляет доступ к части своей фотобиблиотеки и выбирает фотографии для совместного использования.\nВо время игры выбирается фотография **случайно** из числа всех игроков, затем отображается в течение нескольких секунд.\nИгроки должны угадать, кому принадлежит отображаемая фотография.\nИгрок, который правильно угадывает большинство фотографий, выигрывает игру.\n\n## Процедура\n1.** Подборка фотографий**: Каждый игрок выбирает несколько фотографий из своей галереи.\n2.** Начало игры**: Как только все будут готовы, хозяин запускает игру.\n3. ** Игровая башня**:\nСлучайная фотография показывается в течение 5 секунд.\nВсе игроки голосуют, чтобы угадать владельца.\n4. **Результаты**: Оценки обновляются после каждого раунда.\n5.** Конец игры**: После установленного количества раундов игрок с наибольшим количеством очков выигрывает.",
+  "butDuJeuCoulerTous": "**Игровой гол**\nЗастряли все корабли противника, прежде чем он потопит ваши.\n\n**Проект**\n1. ** Место**: Каждый игрок тайно размещает свой флот на сетке 10х10.\n- Авианосцы (5 ящиков)\nКрейсер (4 коробки)\nПодводная лодка (3 клетки)\nРазрушитель (3 коробки)\nПатруль (2 коробки)\n2. **Тир**: В свою очередь, игроки прикасаются к коробке, чтобы выстрелить.\n3. **Результат**: AppLocalizations.of(context)!.touche, \"Coulated\" или \"To water\".\n4. **Виктуар**: побеждает первый игрок, потопивший весь противостоящий флот.",
+  "butDuJeuEtreLe2": "**Игровой гол**\nСтаньте первым, кто достигнет цели (1000 км по умолчанию).\n**Проект**\n- Каждый игрок получает шесть карт.\nВ свою очередь, играйте в карты (расстояние, атака, защита, безопасность) или избавляйтесь от них.\n- Карты **Attacks** (стоп, красный, эссенция, кривазон, лимит) блокируют противника.\n- Карты ** Обороны** (зеленый, дополнительный танк, ремонт, конечный предел) контратаки.\n** Карты безопасности** отменяют атаку и предотвращают ее повторение.\n- Карты ** Расстояние** (25, 50, 75, 100, 200 км) перемещают ваш автомобиль вперед.\n- Выберите одну карту в конце вашей очереди.",
+  "butDuJeuEtreLe3": "**Игровой гол**\nСтаньте первым, кто избавится от всех своих карт, сформировав действительные комбинации.\n\n**Бег башни**\n1. **Пиочер**: Возьмите карту с верхней части отходов.\n2.**Продажа (факультативно)**: Поместите действительные комбинации на стол.\n**Последовательность (Бег)**: 3 или более карт того же цвета, которые следуют (например, 5) Туз может быть высоким или низким.\n-**Группа (набор)**: 3 или 4 карты одинакового значения, но разных цветов (например, 8♥, 8)\n3. ** Дефолт**: Избавьтесь от карточки с его руки на отходах.\n\n** Конец ручки**\nПервый игрок, у которого больше нет карт после поражения, выигрывает. Остальные подсчитывают очки оставшихся карт (рисунки = 10, As = 15, другие = номинал). Игра заканчивается на 100 очков.",
+  "butDuJeuFaireDeviner2": "**Игровой гол**\nЗаставьте свою команду угадать максимум слов до конца времени, не используя запрещенные слова!\n\n**Проект**\n1.На каждом повороте игрок (\"спикер\") пытается заставить свою команду угадать слово.\n2.Спикер не должен ** никогда** произносить слово, чтобы угадать, и ни одно из слов \"табу\" (без слов), отображаемых под целевым словом. Он не может использовать переводы или слова из одной семьи.\n3. Если говорящий использует табу, команда (или судья) сообщает о вине, карта отменяется, и говорящий переходит к следующему.\n4 Каждое угаданное слово возвращает команде очко.\n5.Поворот заканчивается, когда время истекает.\n\n** Конец части**\nКоманда с наибольшим количеством очков после количества кругов определила победы!",
+  "butDuJeuAmenerVos": "**Игровой гол**\nПриведите лошадей к центру плато, минуя противников.\n\n**Классические правила**\n1.**Основной выход**: Вы должны сделать **1** или **6**, чтобы вытащить пешку.\n2. ** Бонусный тур**: Создание ***6**, захват пешки или окончание курса позволяет переиграть. (Предупреждение: 3 раза по 6 подряд отменяет вашу очередь!)\n3. **Захват**: Падение на противостоящую пешку возвращает ее на базу (невозможно на защищенных «Звездах» коробках или на стартовой коробке этого игрока).\n4.**Прибыли**: Требуется точный счет, чтобы добраться до финальной лестницы.\n\n** Режим команды (2v2)**\nТребуется ровно 4 игрока. Вы находитесь в союзе с игроком перед вами.\n** Победа**: Первая команда, которая приносит в центр в общей сложности 4 штуки, выигрывает игру (например, 3 штуки для вас и 1 для вашего союзника).\nВы можете использовать свой бросок, чтобы переместить пешку вашего союзника, но только для того, чтобы вытащить ее из своей базы (с 1 или 6) или переместить ее на свою финишную лестницу.\n-**Блокировка союзников**: Невозможно поймать пешку вашего партнера. Если ваше движение заставляет вас приземлиться на него, удар недействителен.",
+  "principeJeuSurrealisteDEcriture": "** Принцип**\nСюрреалистическая коллективная игра.\n** Вариант**\nКлассика: каждый пишет элемент предложения (существенный, прилагательный, глагол и т. д.), не видя прецедентов.\nВсе видят последние 3 слова и завершают предложение.\n**Проект**\nЛистья вращаются, пока все не примут участие.",
+  "butDuJeuPlacerLe": "**Игровой гол**\nПоместите большинство его частей на съемочную площадку.\n** Золотое правило**\nКаждый новый предмет должен касаться, по крайней мере, другого куска того же цвета за углом, но никогда не с одной стороны.\n**Проект**\n1.Первый раунд проводится в углу тарелки вашего цвета.\n2 Следующие башни уважают золотое правило.\n3.Если ты больше не можешь играть, ты проходишь свою очередь.\n** Рейтинг**\n1 балл за квадрат не помещается.\n+15 баллов при размещении всех частей.\n+5 бонусных баллов, если последняя часть - один квадрат (1x1).",
+  "objectifEtreLePremierA": "** Цель**\nСтаньте первым, кто достигнет целевого балла (20, 50 или 100 баллов).\n\n**Проект**\nКаждый игрок получает 7 домино. В свою очередь, он должен разместить домино, соответствующее одному из концов цепи. Двойники играют в крестах.\n\n** Режим игры**\n- **Пик**: Если вы не можете играть, вы выбираете, пока у вас есть играбельная игра.\n- **Заблокировано**: Никаких пиков. Если ты не можешь играть, ты проходишь свою очередь.\n** Все пятеро**: Первый дубль — «Шпиннер» (играем на 4-х сторонах). Вы набираете очки при каждом ударе, если сумма концов кратна 5.\n\n** Конец поворота**\nЕсли никто не может играть, трюк блокируется. Игроки открывают свои руки. Игрок с наименьшим количеством очков выигрывает раунд и отмечает сумму очков противоположных рук.",
+  "objectifEtreLePremierJoueur": "** Цель**\nСтаньте первым игроком, который избавится от всех своих карт.\n\n**Правила**\nИгра проводится с 52 карточной игрой.\n- Порядок карт (от низшего к высшему): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\nПорядок цветов (от самых слабых до самых сильных): Tiles ♦ (D), Trèfles\nИгрок, у которого есть 3 Tiles, начинает игру.\n\n** Комбинации**\n- **Простая**: 1 карта.\n**Пара**: 2 карты одного ранга.\n**Тройной**: 3 карты одного ранга.\n**Продолжение**: 5 карт подряд (смешанные цвета).\n** Цвет: 5 карт одного цвета.\n**Полный**: 3 карты одного ряда + 2 карты другого ряда.\n- ** Площадь**: 4 карты одного ранга + 1 карта любого вида.\nQuinte Flush: 5 последовательных карт одного цвета.\n\n** Иерархия комбинаций 5 карт**\nFlush Quinte > Square > Full > Color > Suite.\nКомбинацию можно победить только комбинацией того же размера и более высокой стоимости.",
+  "objectifCapturerToutesLesPieces": "** Цель**\nЗахватите все монеты вашего противника или заблокируйте все его монеты.\n**Правила**\nИграет на шашке 8х8, исключительно на темных коробках.\n- Куски движутся по диагонали в коробке.\nУловы являются обязательными и производятся путем прыжка через вражеский кусок.\n- Несколько уловов можно зацепить за один раунд.\nКогда комната достигает противоположного ряда, она продвигается в «Даме» и может двигаться и захватывать обратно.",
   "unSubstantifExLeChat": "существительное (напр. кот)",
   "unAdjectifExMignon": "прилагательное (напр. милый)",
   "unVerbeExMange": "глагол (напр. ест)",
   "unSubstantifExLaSouris": "существительное (напр. мышь)",
   "unAdjectifExMort": "прилагательное (напр. мёртвый)",
+  "petit1": "Маленький 1",
+  "petit2": "Маленький 2",
+  "grand": "большой",
+  "tresGrand": "Очень большой",
+  "superGrand": "Супер Большой",
   "potionDeVieEtDe": "Зелье жизни и смерти.",
   "legende": "легенда",
   "mystere": "тайна",
@@ -1537,7 +2850,10 @@
   "crepuscule": "сумерки",
   "leNombreDeSymbolesPar": "Количество символов на карточке должно быть не менее 3.",
   "laGenerationAEchoueNombre": "Поколение провалилось: неправильное количество карт.",
+  "blancMangerCocon": "Белые едят кокон",
+  "leRoiDesMemes": "Король мемов",
   "laPartieEstTermineeTous": "Игра окончена: все игроки отключены.",
+  "aucun": "Никто",
   "nonAuthentifie": "Не аутентифицирован.",
   "actionNonAutorisee": "Действие запрещено.",
   "vousDevezJouerAuMoins": "Вы должны сыграть хотя бы одну карту.",
@@ -1547,6 +2863,7 @@
   "vousDevezJouerLeMeme": "Вы должны сыграть такое же число карт.",
   "combinaisonDe5CartesTrop": "Комбинация из 5 карт слишком слабая.",
   "vousDevezJouerUneCarte": "Вы должны сыграть карту старше.",
+  "aGagne1": "Он победил!",
   "ceNEstPasVotre": "Сейчас не ваш ход.",
   "carteIntrouvableDansLaMain": "Карта в руке не найдена.",
   "coupInvalideSelonLesRegles": "Недопустимый ход по правилам Миль Борн!",
@@ -1557,11 +2874,14 @@
   "leTempsEstEcoulePour": "Время на объявление правды истекло!",
   "cibleHorsDeLaGrille": "Цель за пределами сетки.",
   "caseDejaCiblee": "Клетка уже обстреляна.",
+  "aCouleTouteLaFlotte": "Потопил весь вражеский флот!",
   "placementAutomatiqueEffectue": "⏱️ Автоматическая расстановка выполнена.",
   "tempsEcoulePourLaSaisie": "⏰ Время ввода слов вышло. Игра начинается с уже введёнными словами!",
   "laPhaseDeVoteA": "Началась фаза голосования!",
   "personneNAVoteAucun": "Никто не голосовал. Никто не исключён.",
   "egaliteLorsDuVoteLa": "Равенство в голосовании! Богиня справедливости должна править.",
+  "leTempsDeVoteEst": "Время голосования вышло!",
+  "laPartieDeYamsCommence": "Игра в Ямс начинается!",
   "plusDeLancersDisponibles": "Больше нет доступных бросков.",
   "vousDevezLancerLesDes": "Сначала бросьте кубики, чтобы записать очки.",
   "categorieDejaCompletee": "Категория уже заполнена.",
@@ -1576,9 +2896,12 @@
   "ceNEstPasVotre1": "Сейчас не ваша очередь писать.",
   "nonAuthentifie1": "Не аутентифицировать.",
   "leTempsDesDebatsEst": "Дебаты закончились. Деревня должна проголосовать!",
+  "lesAmoureux": "Влюблённые",
   "seulsLesDeuxAmoureuxSont": "Только двое влюблённых остались в живых. Их любовь побеждает всё!",
   "leLoupBlancEstLe": "Белый волк — единственный выживший! Он пожрал всех.",
+  "loupsGarous": "Оборотни",
   "lesLoupsGarousSontDevenus": "Оборотни в большинстве и больше не могут проиграть. Они победили!",
+  "villageois": "Деревенские",
   "toutesLesMenacesOntEte": "Все угрозы устранены! Деревня победила!",
   "laVoyanteASondeUne": "Провидец прощупал душу той ночью...",
   "lHeritierAChoisiSon": "Наследник выбрал своего завещателя...",
@@ -1592,25 +2915,48 @@
   "leLoupNoirAUtilise": "Чёрный волк использовал силу заражения!",
   "leLoupNoirNA": "Чёрный волк не стал использовать заражение.",
   "laPetiteFilleAEte": "Маленькая девочка была слишком любопытна! Волки съедают её на месте!",
+  "infecte1": "инфицирован",
+  "contamine": "зараженный",
   "vousVousSentezObserveE": "Вы чувствуете за собой слежку этой ночью...",
   "laSorciereAUtiliseSa": "Ведьма использовала зелье исцеления.",
   "laSorciereAConcocteUn": "Ведьма сварила смертельный яд...",
   "lePyromancienAEntreposeUn": "Пироман установил бочку дикого огня...",
   "lePyromancienAllumeLaMeche": "Пироман поджигает фитиль своих бочек!",
+  "leSoleilSeLeveSur": "Над Тьерселье встаёт солнце...",
   "miraculeusementPersonneNAPeri": "Чудом этой ночью никто не погиб!",
+  "motDuJour": "слово дня",
   "leDictateurSEstTrompe": "Диктатор ошибся и казнил невиновного! Он сам казнён.",
   "tentativeDUsurpationDIdentite": "Попытка кражи личности обнаружена!",
   "egaliteParfaiteLorsDuVote1": "Ничья в голосовании. Сегодня никого не казнят.",
+  "lAncienCapitaine": "Бывший капитан",
+  "amoureux1": "Любовники 1",
+  "amoureux2": "Любовники 2",
+  "debugJoingameDemarrageDeLa": "[DEBUG присоединяется к игре] Начните сделку.",
+  "debugJoingamePartieTrouveeEt": "[DEBUG присоединяется к игре] Часть найдена и в лобби. Чтение данных...",
+  "debugJoingameTransactionUpdateAppelee": "[DEBUG joinGame] Transaction.update() с новым списком игроков.",
+  "debugJoingameTransactionReussieRetourne": "Успешная сделка. Возвращайся назад.",
+  "debugJoingameLaPartieN": "[DEBUG присоединяется к игре] Игры больше нет или нет в лобби. Возвращайся к лжи.",
+  "erreurCritiqueDansJoingame": "Критическая ошибка в игре",
+  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":AppLocalizations.of(контекст)! .wordcivilParts0TrimWordundercoverIA возвращает отдельные простые слова",
   "infiltre": "Инфильтрант",
   "civil": "Мирный житель",
   "vendeurDeFalafels": "Продавец фалафелей",
   "vengeuse": "мститель",
   "duellistes": "Дуэлянты",
+  "laPartieCommenceDonnezVotre": "Игра начинается! Назовите подсказку...",
   "laPhaseDeVoteCommence": "Начинается фаза голосования!",
   "seulMrWhitePeutDeviner": "Только Мистер Вайт может угадывать.",
   "laDeesseDeLaJustice": "Богиня Справедливости вынесла свой вердикт!",
+  "unNouveauTourCommence": "Начинается новый ход.",
   "laVengeuseEmporteQuelquUn": "Мститель забирает с собой кого-то!",
+  "civils": "Мирные",
+  "imposteurs": "Самозванцы",
+  "paris": "Париж",
+  "france": "Франция",
+  "capitale": "капитал",
   "tourEiffel": "Эйфелева башня",
+  "seine": "Сена",
+  "ville": "Город",
   "vousNePouvezPasBuzzer": "Нельзя нажимать кнопку против своей команды.",
   "seuleLEquipeActivePeut": "Только активная команда может подтверждать.",
   "seuleLEquipeActivePeut1": "Только активная команда может спасовать.",
@@ -1630,6 +2976,7 @@
   "combinaisonInvalideSelonLesRegles": "Недопустимая комбинация по правилам Рамми!",
   "defaussezExactement1Carte": "Сбросьте ровно 1 карту.",
   "carteNonTrouvee": "Карта не найдена.",
+  "aGagneLaManche": "Он выиграл раунд!",
   "desDejaLancesPourCe": "Dice уже приступили к этому туру.",
   "vousDevezDAbordLancer": "Сначала нужно бросить кубик.",
   "vousNePouvezPasDeplacer": "Нельзя ходить фишкой соперника!",
@@ -1663,6 +3010,7 @@
   "vosPointsSontConservesEn": "Ваши очки сохранены! Ждем, когда игроки начнут следующую сессию.",
   "synonymeOuBanniNecessiteAu": "Синониму или Банни требуется не менее 3 игроков!",
   "unoNecessiteEntre2Et": "Уно требует от 2 до 10 игроков.",
+  "laPartieDeUnoCommence": "Игра в Уно начинается!",
   "inversionA2JoueursLe": "Инверсия для 2 игроков: первый игрок начинает игру!",
   "directionInverseeDesLeDepart": "Направление изменено с самого начала!",
   "laPremiereCarteEstUn": "Первая карта — +2! Первый игрок должен взять карты или сложить сверху.",
@@ -1713,7 +3061,11 @@
   "vousDevezJouerUneCombinaison": "Нужно играть более сильную комбинацию.",
   "lePremierCoupDeLa": "Первый выстрел игры должен содержать 3-й Кловер.",
   "partieNonTrouvee1": "Часть не найдена",
+  "trouDuCul": "Неудачник",
   "vicePresident": "Вице-президент",
+  "viceTrouDuCul": "Вице-неудачник",
+  "neutre": "Нейтрал",
+  "debugPictionaryConditionRoundstateDrawing": "Условие «круглый штат» или «угадывающий рисунок» является истинным. Обновление базы данных...",
   "dessinateurIntrouvable": "Рисунок не найден.",
   "seulLeDessinateurActifPeut": "Только рисующий игрок может подтвердить ответ.",
   "usurpationDIdentiteDuDessinateur": "Личность Драчмана ошеломляет.",
@@ -1721,6 +3073,7 @@
   "motTrouveAvecSucces": "Слово найдено успешно!",
   "ceNEstPasLa2": "Это не тот этап индекса, который предлагается.",
   "leDevineurNePeutPas": "Угадатель не может дать подсказку.",
+  "aaaaaaceeeeiiiinooooouuuuyy": "ináâãäåçéëìííòóôôõúúûý ÿ",
   "ceNEstPasLe": "Сейчас не время угадывать.",
   "seulLeDevineurPeutFaire": "Только отгадывающий может сделать предложение.",
   "reponseInvalide": "Неверный ответ.",
@@ -1731,7 +3084,10 @@
   "impossibleDePiocherIlN": "Нельзя взять карту: карты закончились.",
   "ceNEstPasVotre6": "Сейчас не ваша очередь выбирать цвет.",
   "vousNePouvezPasChoisir": "Вы не можете выбирать цвет сейчас.",
+  "erreurCritiquePlayerorderEstVide": "Критическая ошибка: в следующем раунде порядок игроков пуст. Я не могу продолжать.",
   "questionNonTrouvee": "Вопрос не найден",
+  "quiPourraitLePlusApplocalizations1": "Кто может больше?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft",
+  "menteur": "лжец",
   "pasAssezDeJoueursPour": "Не хватает игроков для такой моды.",
   "ajouteLaDescriptionLaPlus": "Добавьте самое смешное описание к этому мему!",
   "uneNouvelleMancheDeUno": "Начинается новый раунд Уно!",
@@ -1739,6 +3095,9 @@
   "chaqueJoueurActifDoitPoser": "Каждый активный игрок должен выложить минимум 1 карту до начала торгов.",
   "enchereInvalide": "Недопустимая ставка.",
   "laSurenchereDoitEtreSuperieure": "Ставка должна быть выше.",
+  "applocalizationsOfContextUnjoueurEst": "AppLocalizations.of (context)!.aPlayer - последний выживший и побеждает Черепа!",
+  "applocalizationsOfContextUnjoueurA": "??? AppLocalizations.of(context)!.aPlayer выиграла 2 задания и выиграла игру!",
+  "applocalizationsOfContextUnjoueurRemporte": "?? AppLocalizations.of (context)!.aPlayer выигрывает Skull!",
   "reponseVide": "Пустой ответ.",
   "leJugeNePeutPas1": "Судья не может отправлять ответ.",
   "toutLeMondeARepondu": "Все ответили! Давай откроем дверь.",
@@ -1746,12 +3105,17 @@
   "toutLeMondeARepondu1": "Все ответили! Голосуйте.",
   "toutesLesReponsesSontRecues": "Все ответы получены! Судья должен принять решение.",
   "joueurCibleIntrouvable": "Целевой игрок не найден.",
+  "quiPourraitLePlusApplocalizations2": "Кто может больше?AppLocalizations.of(context)!.elseIfGametypeSynonym или Banni",
   "vousNePouvezPasBannir": "Нельзя банить собственный синоним!",
   "seulLeJugeEnTitre": "Только действующий Судья может выбрать победителя.",
   "ceJoueurNAPas1": "Этот игрок не отправил ответ.",
+  "quiPourraitLePlusApplocalizations3": "Кто может больше?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIf Судья",
+  "quiPourraitLePlusApplocalizations4": "Кто может больше?AppLocalizations.of(context)!.forFinalTargetInVotesroundState",
   "egaliteParfaiteAucunPointAttribue": "Абсолютная ничья! Очки не присуждены.",
   "egaliteDansLesVotesAucun": "Ничья при голосовании: никто не изгнан.",
   "laDescriptionLaPlusDrole": "Было выбрано самое смешное описание!",
+  "aucuneDescriptionNAEte": "Никакое описание не было проголосовано.",
+  "quiPourraitLePlusApplocalizations5": "Кто может больше?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId",
   "jugeIntrouvable": "Судья не найден.",
   "laPartieDeZeroPointe": "Игра в Зеро Поинт начинается! Каждый игрок должен открыть 2 карты.",
   "toutLeMondeARevele": "Все открыли свои карты. Игра начинается!",
@@ -1764,11 +3128,13 @@
   "laRelanceDoitEtreStrictement": "Повышение должно превышать текущую ставку.",
   "vousNAvezPasAssez": "У вас недостаточно фишек для этого повышения.",
   "laRelanceDoitEtreD": "Повышение должно быть минимум вдвое больше предыдущей ставки (или олл-ин).",
+  "laPartieDeBeloteCommence": "Игра Belote начинается!",
   "passeGeneraleAu1erTour": "Общий пропуск на первый раунд аукционов. Начало 2-го раунда!",
   "carteNonPossedee": "Карты не было.",
   "vousDevezMonterAL": "Вы должны получить преимущество (сверху).",
   "vousDevezCouperAL": "Ты должен отрезать его!",
   "passeLAnnonce": "пропускает объявление",
+  "laPartieDeBlokusCommence": "Игра в Блокус начинается!",
   "pieceDejaUtilisee": "Деталь уже использована.",
   "horsLimites": "За пределами поля!",
   "caseDejaOccupee": "Клетка уже занята!",
@@ -1791,15 +3157,19 @@
   "cultureDefi": "🧠 Эрудиция и Вызов",
   "familleToutPublic": "👨‍👩‍👧‍👦 Семья и Для всех",
   "piquantInsolite": "🌶️ Острое и Необычное",
+  "quiPourraitLePlusApplocalizations6": "Кто может больше?AppLocalizations.of(контекст)! Кто может быть вашим модемом",
   "devineT": "Угадай Т",
+  "presidente": "Президент",
   "chargement": "Загрузка...",
   "cursive": "извилистый",
   "exception": "Исключение:",
+  "debutDeLaConstructionDe": "--- СОТРУДНИЧЕСТВО ЕГО ГОЛОСА «Кто мог бы больше всего?AppLocations.of(context)!.printIsactiondependingStateTo( isActionPending)players)» как Map<String, dynamic>??",
   "clicSurLeJoueurPname": ">>> CLIC на плеере ''$pName'' (ID: $pId)!",
   "passageDeIsactionpendingATrue": "- Переход от действия к истине.",
   "erreurFirebaseLorsDuVote": "!!! Ошибка Пожарная база во время голосования: $e",
   "appelFirebaseTerminePassageDe": "- Пожарная база закончилась. Переход от действия к ложному.",
   "attentionLeWidgetNEst": "Внимание: Виджет ушел, штат отменили.",
+  "quiPourraitLePlusApplocalizations7": "Кто может больше?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId",
   "phaseDePose": "Фаза позиции",
   "stre9f4a5": "🏆 Легендарно!",
   "str21f597": "⭐ Отлично!",
@@ -1811,6 +3181,14 @@
   "str487ca1": "$'{'''Хватит! Закрой глаза.",
   "leSoleilSeLeve": "Солнце восходит",
   "atout": "КОЗЫРЬ: {suit}",
+  "@atout": {
+    "placeholders": {
+      "suit": {
+        "type": "Object"
+      }
+    }
+  },
+  "undercoverLocal": "Под прикрытием местных",
   "toiMeme": "себя",
   "unAutreJoueur": "другой игрок",
   "tous": "Все",
@@ -1820,83 +3198,689 @@
   "soiree": "Вечеринка",
   "competition": "Соревнование",
   "enCours": "Источник: '{'0'}'",
+  "gamemessagelocalizationTrContextReason": ": \"\"'}' : GameMessageLocalization.tr (контекст, причина),",
   "jAiLanceUnePartie2": "Я начал игру",
   "piedDeBiche": "Лом",
   "appTitle": "Игра для вечеринок",
+  "loginTitle": "Добро пожаловать!",
+  "registerTitle": "Присоединяйтесь!",
+  "email": "Эл. почта",
+  "password": "Пароль",
+  "username": "Имя пользователя",
+  "loginButton": "Войти",
+  "registerButton": "Создать аккаунт",
+  "termsAcceptance": "Я принимаю Условия использования и Политику конфиденциальности.",
+  "gamesTab": "Игры",
+  "friendsTab": "Друзья",
+  "statsTab": "Профиль",
+  "loungesTab": "Салоны",
   "createGame": "Создать игру",
+  "joinGame": "Войти",
+  "gameCode": "Код игры (6 цифр)",
+  "startGame": "Начать игру",
+  "leaveGame": "Покинуть игру",
+  "rules": "Правила",
+  "level": "Уровень",
+  "coins": "Монеты",
+  "gameOver": "Игра окончена!",
+  "victory": "Победа!",
+  "defeat": "Поражение",
+  "nextRound": "Следующий раунд",
+  "onboardingWelcome": "Добро пожаловать",
+  "onboardingSkip": "Пас",
+  "onboardingNext": "Далее",
+  "onboardingStart": "Поехали! 🚀",
+  "onboardingSlide1Title": "Играйте с друзьями",
+  "onboardingSlide1Subtitle": "Выбирайте из более чем 30 игр для вечеринок, карточных и настольных игр. Играйте локально, с друзьями или со всем миром!",
+  "onboardingSlide2Title": "Зарабатывайте монеты и значки",
+  "onboardingSlide2Subtitle": "Получайте опыт за победы, повышайте уровень и открывайте уникальные достижения.",
+  "onboardingSlide3Title": "Создавайте или входите за секунды",
+  "onboardingSlide3Subtitle": "6-значный код соберет друзей, или начните быстрый подбор онлайн.",
+  "vipPass": "VIP-Пропуск",
+  "vipActive": "Ваш VIP-пропуск активен!",
+  "vipActiveDesc": "Все функции (ИИ, Комнаты, Видео, Подбор игроков) без ограничений.",
+  "choosePlan": "Выберите тариф:",
+  "restorePurchases": "Восстановить покупки",
+  "purchasesRestored": "Покупки успешно восстановлены!",
+  "noPurchasesFound": "Активных покупок не найдено.",
+  "monthlySubscription": "Месячная подписка",
+  "annualSubscription": "Годовая подписка",
+  "lifetimeAccess": "Вечный доступ",
+  "popularTag": "ПОПУЛЯРНО",
+  "chooseButton": "Выбрать",
+  "vipCongratulations": "Поздравляем, вы VIP!",
+  "purchaseFailed": "Покупка не завершена.",
+  "profileTitle": "Профиль и настройки",
+  "profileNotFound": "Профиль не найден или игрок не существует.",
+  "tabStats": "Статистика",
+  "tabBadges": "Значки и достижения",
+  "tabSettings": "Настройки",
+  "gamesPlayed": "Сыграно игр",
+  "gamesWon": "Победы",
+  "winRate": "Процент побед",
+  "soundEffects": "Звуковые эффекты",
+  "music": "Музыка",
+  "editUsername": "Сменить имя пользователя",
+  "newUsernameHint": "Новое имя",
+  "logout": "Выйти",
+  "deleteAccount": "Удалить аккаунт",
+  "deleteAccountConfirm": "Вы уверены, что хотите навсегда удалить свой аккаунт?",
+  "cancel": "Отмена",
+  "confirm": "Подтвердить",
+  "save": "Сохранить",
+  "modeLocal": "Локально",
+  "modeMulti": "Онлайн",
+  "modeMonde": "Мир",
+  "searchGame": "Поиск игры...",
+  "filterAll": "Все игры",
+  "createLounge": "Создать комнату",
+  "joinLounge": "Войти в комнату",
+  "loungeCode": "Код комнаты",
+  "publicLounges": "Публичные комнаты",
+  "noLoungesAvailable": "В данный момент нет доступных публичных комнат.",
+  "playersCount": "Игроки",
+  "howToPlay": "Как играть?",
+  "copiedToClipboard": "Скопировано в буфер обмена!",
+  "connectionError": "Ошибка подключения. Попробуйте снова.",
+  "loading": "Загрузка...",
+  "success": "Успешно!",
   "pasAssezDeSymbolesUniques1": "Не хватает уникальных символов для 0 символов карты. Требуется: 1 , Доступно: 2 . {symbolsPerCard} {totalSymbols} {dobbleSymbolslength}",
+  "@pasAssezDeSymbolesUniques1": {
+    "placeholders": {
+      "symbolsPerCard": {
+        "type": "Object"
+      },
+      "totalSymbols": {
+        "type": "Object"
+      },
+      "dobbleSymbolslength": {
+        "type": "Object"
+      }
+    }
+  },
   "melangeEquilibreDesThemesSuivants1": "Сбалансированное сочетание следующих тем: 0 {combinedTheme}",
+  "@melangeEquilibreDesThemesSuivants1": {
+    "placeholders": {
+      "combinedTheme": {
+        "type": "Object"
+      }
+    }
+  },
   "ambianceTonImpose": "[Атмосфера / Заданный тон: {style}]",
+  "@ambianceTonImpose": {
+    "placeholders": {
+      "style": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPairesDeMots1": "Генерирует пары похожих слов в формате MotCivil:MotInfilted. Тема: 0 {finalPrompt}",
+  "@genereDesPairesDeMots1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesCartesTabooAu1": "Создает табу-карты в формате «Targetword:Forbidd1,Forbidd2,Forbidd3,Forbidd4,Forbidd5». Тема: 0 {finalPrompt}",
+  "@genereDesCartesTabooAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesCategoriesOriginalesEt1": "Создает оригинальные и забавные категории для угадывания. Тема: 0 {finalPrompt}",
+  "@genereDesCategoriesOriginalesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesCourtesVisuelles1": "Создает короткие, визуальные и сбитые с толку предложения для рисования (например, «динозавр, поедающий лед»). Тема: 0 {finalPrompt}",
+  "@genereDesPhrasesCourtesVisuelles1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesDAccroche1": "Создает оригинальные фразы или вселенную письма. Тема: 0 {finalPrompt}",
+  "@genereDesPhrasesDAccroche1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesDilemmesCorneliensAu1": "Генерирует дилеммы роговицы в формате «OptionA или OptionB» (например, «Может летать или быть невидимым»). Тема: 0 {finalPrompt}",
+  "@genereDesDilemmesCorneliensAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereUnMelangeDeDefis1": "Создает смесь проблем (действий) и нескромных вопросов (истины). Тема: 0 {finalPrompt}",
+  "@genereUnMelangeDeDefis1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesQuestionsDirectesAmusantes1": "Генерирует прямые, веселые и острые вопросы. Тема: 0 {finalPrompt}",
+  "@genereDesQuestionsDirectesAmusantes1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesCourtesA1": "Создает короткие предложения (содержащие '') для игры. Тема: 0 {finalPrompt}",
+  "@genereDesPhrasesCourtesA1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesSituationsHumoristiquesEt1": "Генерирует юмористические ситуации и зачатки легенд о мемах. Тема: 0 {finalPrompt}",
+  "@genereDesSituationsHumoristiquesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereUneListeDeMots1": "Составьте список слов/выражений для игры 0 на тему: 1 {gameType} {finalPrompt}",
+  "@genereUneListeDeMots1": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      },
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "theme": "Тема {gameType}",
+  "@theme": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      }
+    }
+  },
   "passeSonTour2": "⏱️ {playerName} пропускает ход.",
+  "@passeSonTour2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "finDuCompteARebours1": "⏱️ Fin du compte à rebours : Partie relancée pour tous les {playerslength} joueurs !",
+  "@finDuCompteARebours1": {
+    "placeholders": {
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
   "aOuvertAvec": "⏱️ {playerName} пошёл(-ла) с {cardToPlay}.",
+  "@aOuvertAvec": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
   "sEstDeconnecteVictoireDe": "{removedPlayerName} отключился(-лась). Победа {remainingName} из-за выхода соперника!",
+  "@sEstDeconnecteVictoireDe": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      },
+      "remainingName": {
+        "type": "Object"
+      }
+    }
+  },
   "aManque3ToursSans": "0 пропустил 3 круга без игры. Администратора попросили принять решение о его замене на компьютер. {playerName}",
+  "@aManque3ToursSans": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "neRepondPlusLAdministrateur": "⚠️ {playerName} не отвечает ({reason}). Администратору предложено заменить игрока компьютером.",
+  "@neRepondPlusLAdministrateur": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "reason": {
+        "type": "Object"
+      }
+    }
+  },
   "aEteRemplaceParL": "🤖 {playerName} заменён(-а) компьютером (ИИ активен - 5 сек на ход).",
+  "@aEteRemplaceParL": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasDonneD": "⚠️ {playerName} не дал(а) подсказку (Игра мнений). Ход пропущен.",
+  "@nAPasDonneD": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasReponduJeu": "⚠️ {playerName} не ответил(а) (Игра мнений). Ход пропущен без автодействий.",
+  "@nAPasReponduJeu": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA3": "{playerName} не сыграл(а) вовремя. Ход пропущен.",
+  "@nAPasJoueA3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteParfaiteLorsDuVote2": "Идеальное равенство при голосовании (0 игроков) Ни один игрок не выбыл. {tiedPlayerslength}",
+  "@egaliteParfaiteLorsDuVote2": {
+    "placeholders": {
+      "tiedPlayerslength": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue": "⏱️ {playerName} сыграл(а) {lastDrawn}.",
+  "@aJoue": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "lastDrawn": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue1": "⏱️ {playerName} сыграл(а) {playable}.",
+  "@aJoue1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "playable": {
+        "type": "Object"
+      }
+    }
+  },
   "piocheEtPasseSonTour": "⏱️ {playerName} берёт карту и пропускает ход.",
+  "@piocheEtPasseSonTour": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA4": "⏱️ {playerName} не успел(а). Карта сброшена, ячейка открыта.",
+  "@nAPasJoueA4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "laPartieEstTermineeVictoire1": "Игра окончена. Победа {winner}!",
+  "@laPartieEstTermineeVictoire1": {
+    "placeholders": {
+      "winner": {
+        "type": "Object"
+      }
+    }
+  },
   "joueursContaminesParLaMaladie1": "Игроки, заражённые чумой: {contaminatedNames}.",
+  "@joueursContaminesParLaMaladie1": {
+    "placeholders": {
+      "contaminatedNames": {
+        "type": "Object"
+      }
+    }
+  },
   "vousAvezEspionneEtDecouvert": "Вы шпионили за {targetName} и узнали роль: {targetRole}.",
+  "@vousAvezEspionneEtDecouvert": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "votreMotDuJourPrononcez": "Ваше слово дня: «{newWord}». Напишите его в чате до захода солнца!",
+  "@votreMotDuJourPrononcez": {
+    "placeholders": {
+      "newWord": {
+        "type": "Object"
+      }
+    }
+  },
   "declareUnCoupDEtat": "{dictateurName} объявляет государственный переворот!",
+  "@declareUnCoupDEtat": {
+    "placeholders": {
+      "dictateurName": {
+        "type": "Object"
+      }
+    }
+  },
   "leChasseurTireEtTue1": "Охотник стреляет и убивает {targetName}!",
+  "@leChasseurTireEtTue1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "aDesigneCommeNouveauCapitaine": "{formerCaptainName} назначил(а) {newCaptainName} новым Капитаном!",
+  "@aDesigneCommeNouveauCapitaine": {
+    "placeholders": {
+      "formerCaptainName": {
+        "type": "Object"
+      },
+      "newCaptainName": {
+        "type": "Object"
+      }
+    }
+  },
   "cupidonADesigneEtComme": "Купидон соединил {lover1Name} и {lover2Name} узами любви!",
+  "@cupidonADesigneEtComme": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      },
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "votreAmoureuxSe": "❤️ Ваша пара: {amoureux2Name}",
+  "@votreAmoureuxSe": {
+    "placeholders": {
+      "amoureux2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "votreAmoureuxSe1": "❤️ Ваша пара: {amoureux1Name}",
+  "@votreAmoureuxSe1": {
+    "placeholders": {
+      "amoureux1Name": {
+        "type": "Object"
+      }
+    }
+  },
   "cEstAuTourDe4": "Теперь очередь команды! {currentTeamIndex1}",
+  "@cEstAuTourDe4": {
+    "placeholders": {
+      "currentTeamIndex1": {
+        "type": "Object"
+      }
+    }
+  },
   "aFaitUnMaisAucun": "Повернись автоматически! {playerName} {dice}",
+  "@aFaitUnMaisAucun": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
   "lancerTropElevePourAtteindre": "Проходите! {dice}",
+  "@lancerTropElevePourAtteindre": {
+    "placeholders": {
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
   "extremiteNonDisponibleSurLe1": "Край недоступен на доске ({openEnds}).",
+  "@extremiteNonDisponibleSurLe1": {
+    "placeholders": {
+      "openEnds": {
+        "type": "Object"
+      }
+    }
+  },
   "laTuileNePossedePas": "Кость {tile} не имеет необходимого значения {matchEnd}.",
+  "@laTuileNePossedePas": {
+    "placeholders": {
+      "tile": {
+        "type": "Object"
+      },
+      "matchEnd": {
+        "type": "Object"
+      }
+    }
+  },
   "leBotAJoueAutomatiquement": "⏱️ Бот автоматически сыграл {tileToPlay}.",
+  "@leBotAJoueAutomatiquement": {
+    "placeholders": {
+      "tileToPlay": {
+        "type": "Object"
+      }
+    }
+  },
   "aEteContraintDePasser": "⏱️ {playerName} был(а) вынужден(а) пропустить ход.",
+  "@aEteContraintDePasser": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "laRouletteADesigne": "Рулетка имеет обозначение 0! {selectedName}",
+  "@laRouletteADesigne": {
+    "placeholders": {
+      "selectedName": {
+        "type": "Object"
+      }
+    }
+  },
   "doitEcrireLeDefi": "0 нужно написать вызов... {authorName}",
+  "@doitEcrireLeDefi": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
   "leDefiAEteEnvoye1": "Вызов был направлен на 0! {currentPlayerName}",
+  "@leDefiAEteEnvoye1": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
   "resultatDeValidation": "Результат: 0 % проверка! {percentage}",
+  "@resultatDeValidation": {
+    "placeholders": {
+      "percentage": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneXp": "0 побед 1 XP! {currentPlayerName} {earnedXp}",
+  "@gagneXp": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      },
+      "earnedXp": {
+        "type": "Object"
+      }
+    }
+  },
   "tourSuivantQuiSeraLe1": "Следующий поворот! Кто будет следующим?",
   "passeSonTour3": "0 Пройдет свой черед! {playerOrderinitialIn}",
+  "@passeSonTour3": {
+    "placeholders": {
+      "playerOrderinitialIn": {
+        "type": "Object"
+      }
+    }
+  },
   "vousDevezPiocherCartesOu": "Вы должны взять {pendingDraw} карт или ответить картой +2/+4.",
+  "@vousDevezPiocherCartesOu": {
+    "placeholders": {
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteParfaite1": "Идеальное равенство! {names}",
+  "@egaliteParfaite1": {
+    "placeholders": {
+      "names": {
+        "type": "Object"
+      }
+    }
+  },
   "priseMultipleObligatoireAvecLe1": "Обязательное взятие нескольких шашек фигурой на {mandatoryPiece}.",
+  "@priseMultipleObligatoireAvecLe1": {
+    "placeholders": {
+      "mandatoryPiece": {
+        "type": "Object"
+      }
+    }
+  },
   "motsDevines": "0/1 слова угаданы! {guessedCount} {collectiveWordslengt}",
+  "@motsDevines": {
+    "placeholders": {
+      "guessedCount": {
+        "type": "Object"
+      },
+      "collectiveWordslengt": {
+        "type": "Object"
+      }
+    }
+  },
   "quiPourraitLePlus3": "Кто вероятнее всего {questionsrandomnextI}",
+  "@quiPourraitLePlus3": {
+    "placeholders": {
+      "questionsrandomnextI": {
+        "type": "Object"
+      }
+    }
+  },
   "decrivezVotreMotSecretEn": "Опишите свое тайное слово одним словом. Обманщики, блеф!",
   "trouvezLeMeilleurSynonymePour1": "Найдите лучший синоним слова: 0 {word}",
+  "@trouvezLeMeilleurSynonymePour1": {
+    "placeholders": {
+      "word": {
+        "type": "Object"
+      }
+    }
+  },
   "interdictionFormelleDeVoterPour": "Категорически запрещено голосовать за себя!",
   "remporteLaManche": "0 выигрывает ручку! {winnerName}",
+  "@remporteLaManche": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteADevineLe1": "Мистер Уайт угадал секретное слово: 0! {civilianWord}",
+  "@mrWhiteADevineLe1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteAEchoueA1": "Мистер Уайт не смог угадать слово (это было 0). {civilianWord}",
+  "@mrWhiteAEchoueA1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
   "aucuneDescriptionNAEte1": "Ни одно описание не было выбрано.",
   "ceNEstPasLe3": "Это не поворот на 0. {playerId}",
+  "@ceNEstPasLe3": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
   "donneesDuJoueurIntrouvables": "Данные игрока 0 не найдены. {playerId}",
+  "@donneesDuJoueurIntrouvables": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
   "vousDevezFournirLaCouleur1": "Вы должны указать запрашиваемый цвет (0). {ledSuit}",
+  "@vousDevezFournirLaCouleur1": {
+    "placeholders": {
+      "ledSuit": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagneAvecSaDescription1": "{winnerName} победил с подписью:",
+  "@aGagneAvecSaDescription1": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "leLoupBlancFrappeEn": "Белый Волк охотится один",
   "etaitUnCivilLesImposteurs": "{player} был(а) мирным жителем! Самозванцы побеждают!",
+  "@etaitUnCivilLesImposteurs": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      }
+    }
+  },
   "etaitLLesCivilsGagnent": "{player} был(а) {role}! Мирные жители побеждают!",
+  "@etaitLLesCivilsGagnent": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
   "question2": "вопрос",
   "mrWhiteSecretWordPrompt": "Вас разоблачили! Если вы отгадаете секретное слово Мирных жителей, вы победите в одиночку!",
   "codenamesRed": "Красный",
@@ -1963,79 +3947,683 @@
   "lanterne": "lanterne",
   "parchemin": "parchemin",
   "aGagne2": "{gameDataplayerswin} победил(а)!",
+  "@aGagne2": {
+    "placeholders": {
+      "gameDataplayerswin": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue2": "⏱️ {playerName} сыграл(а) {cardsToPlayjoin}.",
+  "@aJoue2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardsToPlayjoin": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue3": "⏱️ {playerName} сыграл(а) {winningCombojoin}.",
+  "@aJoue3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "winningCombojoin": {
+        "type": "Object"
+      }
+    }
+  },
   "pliTermineAuTourDe2": "⏱️ Взятка завершена. Ход {gameDataplayerspla}!",
+  "@pliTermineAuTourDe2": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "stop": "СТОП",
   "coupFourrePareLAttaque1": "⚡ COUP-FOURRÉ ! {playerstargetIdnam} pare l''attaque avec {matchingSafety} et prend la main !",
+  "@coupFourrePareLAttaque1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      },
+      "matchingSafety": {
+        "type": "Object"
+      }
+    }
+  },
   "aAtteintKm": "{playersplayerIdnam} набрал(а) {targetDist} км!",
+  "@aAtteintKm": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "targetDist": {
+        "type": "Object"
+      }
+    }
+  },
   "aCouleTouteLaFlotte1": "{shooterDataname} потопил(а) весь вражеский флот!",
+  "@aCouleTouteLaFlotte1": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "aTireAutomatiquementEn": "⏱️ {shooterDataname} a tiré automatiquement en {targetIndex101}-{targetIndex1011} ({result}).",
+  "@aTireAutomatiquementEn": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      },
+      "targetIndex101": {
+        "type": "Object"
+      },
+      "targetIndex1011": {
+        "type": "Object"
+      },
+      "result": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue4": "⏱️ {playerName} сыграл(а) {candidateCardsjoin}.",
+  "@aJoue4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "candidateCardsjoin": {
+        "type": "Object"
+      }
+    }
+  },
   "pliTermineAuTourDe3": "⏱️ Pli terminé. Au tour de {gameDataplayerspla}.",
+  "@pliTermineAuTourDe3": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "estLeNouvelHote1": "{playersplayerOrder} становится новым организатором.",
+  "@estLeNouvelHote1": {
+    "placeholders": {
+      "playersplayerOrder": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersistanteLeDestinDepartage1": "Égalité persistante ! Le destin départage au hasard : {playerDatarandomEl} est éliminé.",
+  "@egalitePersistanteLeDestinDepartage1": {
+    "placeholders": {
+      "playerDatarandomEl": {
+        "type": "Object"
+      }
+    }
+  },
   "estMortEDeChagrin1": "{playerDataotherLov} умер(ла) от горя по своей любви!",
+  "@estMortEDeChagrin1": {
+    "placeholders": {
+      "playerDataotherLov": {
+        "type": "Object"
+      }
+    }
+  },
   "lHeritierHeriteDuRole2": "{playerDataheritier} (Наследник) наследует роль {playerDatatestateu}: {newRole}!",
+  "@lHeritierHeriteDuRole2": {
+    "placeholders": {
+      "playerDataheritier": {
+        "type": "Object"
+      },
+      "playerDatatestateu": {
+        "type": "Object"
+      },
+      "newRole": {
+        "type": "Object"
+      }
+    }
+  },
   "heriteEgalementDuStatutDe1": "{playerDataheritier} также наследует статус Капитана!",
+  "@heriteEgalementDuStatutDe1": {
+    "placeholders": {
+      "playerDataheritier": {
+        "type": "Object"
+      }
+    }
+  },
   "leVillageDecouvreAvecEffroi1": "Le village découvre avec effroi le(s) corps de : {deadThisNightNames}.",
+  "@leVillageDecouvreAvecEffroi1": {
+    "placeholders": {
+      "deadThisNightNames": {
+        "type": "Object"
+      }
+    }
+  },
   "leFossoyeurReveleEtaitUn1": "{playerDatafossoyeu} (Могильщик) раскрывает: {playerDatatargetPl} был(а) {targetRole}!",
+  "@leFossoyeurReveleEtaitUn1": {
+    "placeholders": {
+      "playerDatafossoyeu": {
+        "type": "Object"
+      },
+      "playerDatatargetPl": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "etEtaitUnE": "Et {playerDataotherRev} était un(e) {otherRevealedRole} !",
+  "@etEtaitUnE": {
+    "placeholders": {
+      "playerDataotherRev": {
+        "type": "Object"
+      },
+      "otherRevealedRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leDictateurAExecuteUn1": "Диктатор {playerDatadictator} казнил самозванца ({playerDatatargetId} - {targetRole}) и становится Капитаном!",
+  "@leDictateurAExecuteUn1": {
+    "placeholders": {
+      "playerDatadictator": {
+        "type": "Object"
+      },
+      "playerDatatargetId": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leLoupBavardNA1": "Болтливый волк ({playerDataloupBava}) не назвал тайное слово и умер на закате!",
+  "@leLoupBavardNA1": {
+    "placeholders": {
+      "playerDataloupBava": {
+        "type": "Object"
+      }
+    }
+  },
   "leVillageAVoteEt1": "Деревня проголосовала и исключает {playerDataeliminat}.",
+  "@leVillageAVoteEt1": {
+    "placeholders": {
+      "playerDataeliminat": {
+        "type": "Object"
+      }
+    }
+  },
   "leMercenaireAFaitEliminer1": "Наёмник {playerDatamercenai} устранил цель в День 1! Он побеждает в одиночку!",
+  "@leMercenaireAFaitEliminer1": {
+    "placeholders": {
+      "playerDatamercenai": {
+        "type": "Object"
+      }
+    }
+  },
   "meurtDeChagrinPourSon1": "{playerDataotherLov} умирает от разбитого сердца!",
+  "@meurtDeChagrinPourSon1": {
+    "placeholders": {
+      "playerDataotherLov": {
+        "type": "Object"
+      }
+    }
+  },
   "lAncienCapitaine1": "L''ancien Capitaine",
   "aDit": "{playerDataplayerId} a dit : ''{cleanClue}''",
+  "@aDit": {
+    "placeholders": {
+      "playerDataplayerId": {
+        "type": "Object"
+      },
+      "cleanClue": {
+        "type": "Object"
+      }
+    }
+  },
   "aDevineLeMotCivil1": "{gameDataplayerData} a deviné le mot civil (''{civilWord}'') !",
+  "@aDevineLeMotCivil1": {
+    "placeholders": {
+      "gameDataplayerData": {
+        "type": "Object"
+      },
+      "civilWord": {
+        "type": "Object"
+      }
+    }
+  },
   "aProposeMaisCeN": "{gameDataplayerData} a proposé ''{guessedWord}'', mais ce n''était pas le mot civil (''{civilWord}'') !",
+  "@aProposeMaisCeN": {
+    "placeholders": {
+      "gameDataplayerData": {
+        "type": "Object"
+      },
+      "guessedWord": {
+        "type": "Object"
+      },
+      "civilWord": {
+        "type": "Object"
+      }
+    }
+  },
   "flottesPlaceesCommenceATirer1": "Flottes placées ! {playerDatafirstPla} commence à tirer.",
+  "@flottesPlaceesCommenceATirer1": {
+    "placeholders": {
+      "playerDatafirstPla": {
+        "type": "Object"
+      }
+    }
+  },
   "tousLesJoueursSontPrets1": "Tous les joueurs sont prêts ! {playerDatafirstPla} commence à tirer.",
+  "@tousLesJoueursSontPrets1": {
+    "placeholders": {
+      "playerDatafirstPla": {
+        "type": "Object"
+      }
+    }
+  },
   "laMancheDeRamiCommence1": "La manche de Rami commence ! C''est au tour de {playersplayerIdsfi}.",
+  "@laMancheDeRamiCommence1": {
+    "placeholders": {
+      "playersplayerIdsfi": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagneLaManche1": "{playersplayerIdnam} выиграл(а) раунд!",
+  "@aGagneLaManche1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "k3SixConsecutifsLePion1": "⚠️ 3 six consécutifs ! Le pion de {playersplayerIdnam} retourne à l''écurie et son tour passe.",
+  "@k3SixConsecutifsLePion1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagne3": "{playersplayerIdnam} победил(а)!",
+  "@aGagne3": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "atteintPoints": "{playersplayerIdnam} atteint {targetScore} points !",
+  "@atteintPoints": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "atteintPoints1": "{playerswinnerIdnam} atteint {targetScore} points !",
+  "@atteintPoints1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "mancheTermineeGagneAvecXp": "Manche terminée ! {playerswinnerIdnam} gagne avec {maxXp} XP !",
+  "@mancheTermineeGagneAvecXp": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      },
+      "maxXp": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUneInversionEt1": "{playersplayerIdnam} сыграл(а) Смену направления и ходит снова!",
+  "@aJoueUneInversionEt1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aInverseLeSensDe1": "{playersplayerIdnam} изменил(а) направление игры!",
+  "@aInverseLeSensDe1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aSauteLeTourDe1": "{playersplayerIdnam} пропустил(а) ход игрока {skippedPlayerName}!",
+  "@aSauteLeTourDe1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "skippedPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
   "aEmpileUn2Cumul1": "{playersplayerIdnam} сложил(а) +2. Всего: {pendingDraw2} карт!",
+  "@aEmpileUn2Cumul1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw2": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUn21": "{playersplayerIdnam} сыграл(а) +2!",
+  "@aJoueUn21": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUnJokerEt1": "{playersplayerIdnam} сыграл(а) Джокер и выбрал(а) цвет {chosenColor}!",
+  "@aJoueUnJokerEt1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "chosenColor": {
+        "type": "Object"
+      }
+    }
+  },
   "aEmpileUn4Cumul1": "{playersplayerIdnam} сложил(а) +4. Всего: {pendingDraw4} карт!",
+  "@aEmpileUn4Cumul1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw4": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUnSuperJoker1": "{playersplayerIdnam} сыграл(а) Супер-Джокер +4!",
+  "@aJoueUnSuperJoker1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aPoseSaDerniereCarte1": "{playersplayerIdnam} выложил(а) последнюю карту и выигрывает раунд!",
+  "@aPoseSaDerniereCarte1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneLaMancheAvecPoints": "{playersplayerIdnam} выигрывает раунд с +{roundScore} очками!",
+  "@gagneLaMancheAvecPoints": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "roundScore": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPlusQuUne1": "У {playersplayerIdnam} осталась только одна карта!",
+  "@nAPlusQuUne1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "passeSonTour4": "{playersplayerIdnam} passe son tour.",
+  "@passeSonTour4": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA5": "{gameDataplayerspla} не сыграл(а) вовремя, берёт карту и пропускает ход.",
+  "@nAPasJoueA5": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "votreCibleEstEliminezLe1": "Votre cible est {playerDatamercenai}. Éliminez-le(la) au Jour 1 !",
+  "@votreCibleEstEliminezLe1": {
+    "placeholders": {
+      "playerDatamercenai": {
+        "type": "Object"
+      }
+    }
+  },
   "aReponduEtPasseLa": "{gameDataplayerspla} ответил(а) ''{cleanAnswer}'' и передал(а) бомбу!",
+  "@aReponduEtPasseLa": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      },
+      "cleanAnswer": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheCarteS": "{playersplayerIdnam} взял(а) {pendingDraw} карт(ы).",
+  "@aPiocheCarteS": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheUneCarteEt2": "{playersplayerIdnam} взял(а) карту и может её сыграть.",
+  "@aPiocheUneCarteEt2": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheUneCarteEt3": "{playersplayerIdnam} взял(а) карту и пропускает ход.",
+  "@aPiocheUneCarteEt3": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPas1Carte1": "У {playerstargetIdnam} не 1 карта, вызов УНО недействителен.",
+  "@nAPas1Carte1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aCrieContreUnoPioche1": "{playerscallerIdnam} крикнул(а) Контр-УНО! {playerstargetIdnam} берёт 2 карты.",
+  "@aCrieContreUnoPioche1": {
+    "placeholders": {
+      "playerscallerIdnam": {
+        "type": "Object"
+      },
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aDitUno1": "{playerstargetIdnam} объявил(а) УНО!",
+  "@aDitUno1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "appelUnoInvalide": "Недействительный вызов УНО.",
   "aChoisiLaCouleur": "{playersplayerIdnam} a choisi la couleur {chosenColor} !",
+  "@aChoisiLaCouleur": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "chosenColor": {
+        "type": "Object"
+      }
+    }
+  },
   "estLeDernierSurvivantEt": "{playerswinnerIdnam} est le dernier survivant et remporte Skull !",
+  "@estLeDernierSurvivantEt": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aRemporte2DefisEt": "{playerschallengerI} a remporté 2 défis et gagne la partie !",
+  "@aRemporte2DefisEt": {
+    "placeholders": {
+      "playerschallengerI": {
+        "type": "Object"
+      }
+    }
+  },
   "nouvelleMainEstLeDonneur1": "Новая раздача! {playersplayerIdsde} — раздающий.",
+  "@nouvelleMainEstLeDonneur1": {
+    "placeholders": {
+      "playersplayerIdsde": {
+        "type": "Object"
+      }
+    }
+  },
   "poseLaPetiteBlindDe1": "{playerssmallBlindI} ставит малый блайнд {smallBlindActual}.",
+  "@poseLaPetiteBlindDe1": {
+    "placeholders": {
+      "playerssmallBlindI": {
+        "type": "Object"
+      },
+      "smallBlindActual": {
+        "type": "Object"
+      }
+    }
+  },
   "poseLaGrosseBlindDe1": "{playersbigBlindIdn} ставит большой блайнд {bigBlindActual}.",
+  "@poseLaGrosseBlindDe1": {
+    "placeholders": {
+      "playersbigBlindIdn": {
+        "type": "Object"
+      },
+      "bigBlindActual": {
+        "type": "Object"
+      }
+    }
+  },
   "seCouche1": "{myDataname} сбрасывает карты (Fold).",
+  "@seCouche1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "faitTapisAllIn1": "{myDataname} идёт ва-банк (All-in)!",
+  "@faitTapisAllIn1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "suitPour": "{myDataname} уравнивает {callAmount} (Call).",
+  "@suitPour": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "callAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "faitTapisAllInEn1": "{myDataname} fait tapis (all-in) en relançant à {totalBetAmount} !",
+  "@faitTapisAllInEn1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "totalBetAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "relanceA": "{myDataname} поднимает до {totalBetAmount} (Raise).",
+  "@relanceA": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "totalBetAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "abattageShowdown": "--- ВСКРЫТИЕ (SHOWDOWN) ---",
   "gagneLePotParForfait1": "{playerDatawinnersf} забирает банк из-за сброса карт соперниками!",
+  "@gagneLePotParForfait1": {
+    "placeholders": {
+      "playerDatawinnersf": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneNtLePotAvec": "{winnerNames} выигрывает(-ют) банк с {bestHandranknamel1}!",
+  "@gagneNtLePotAvec": {
+    "placeholders": {
+      "winnerNames": {
+        "type": "Object"
+      },
+      "bestHandranknamel1": {
+        "type": "Object"
+      }
+    }
+  },
   "aPrisA": "{playerDataplayerId} a pris à {suit} !",
+  "@aPrisA": {
+    "placeholders": {
+      "playerDataplayerId": {
+        "type": "Object"
+      },
+      "suit": {
+        "type": "Object"
+      }
+    }
+  },
   "histoireCollective": "КОЛЛЕКТИВНАЯ ИСТОРИЯ",
   "distance": "ДИСТАНЦИЯ",
   "botte": "ЗАЩИТА",
@@ -2051,7 +4639,118 @@
   "plein": "ПОЛНЫЙ",
   "rejouer1": "Заменить",
   "infecter1": "Заразить {targetName}?",
+  "@infecter1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "action1": "действие",
   "action2": "🔥 ДЕЙСТВИЕ",
-  "aRelanceLesDes2": "0 перезапустил кости (1/3). {pName} {val}"
+  "aRelanceLesDes2": "0 перезапустил кости (1/3). {pName} {val}",
+  "@aRelanceLesDes2": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "val": {
+        "type": "Object"
+      }
+    }
+  },
+  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "@jAiLanceUnePartie3": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "@rolesJoueurs1": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "@dessineCettePhrase1": {
+    "placeholders": {
+      "stepToProcessconte": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "@aEteBanniPourSa1": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "@aTrouveLeMot2": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "@personneNATrouveLe1": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "@aTrouveLeMot3": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "revolution1": "(Révolution !)",
+  "tonMotEst2": "Твое слово: {_wordCivil}",
+  "@tonMotEst2": {
+    "placeholders": {
+      "_wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
+  "tonMotEst3": "Твое слово: {_wordUndercover}",
+  "@tonMotEst3": {
+    "placeholders": {
+      "_wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
+  "egalite1": "Ничья!",
+  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "@jAiLanceUnePartie4": {
+    "placeholders": {
+      "datagameTypeGribou": {
+        "type": "Object"
+      }
+    }
+  }
 }

@@ -30,7 +30,25 @@ class AppLocalizationsBg extends AppLocalizations {
   String get confirmerLesEquipes => 'Потвърди отборите';
 
   @override
+  String get jeuDeSoiree => 'Игра за купон';
+
+  @override
+  String get multijoueurEnLigne => 'Мултиплейър (Онлайн)';
+
+  @override
+  String get modeLocalHorsLigne => 'Локален режим (Офлайн)';
+
+  @override
+  String get modeMultijoueur => 'Мултиплейър режим';
+
+  @override
   String get entrezVotrePseudo => 'Въведете прякора си';
+
+  @override
+  String get pseudo => 'Псевдоним';
+
+  @override
+  String get creerUnePartie => 'Създай игра';
 
   @override
   String get veuillezEntrerUnPseudo => 'Моля, въведете прякор.';
@@ -979,6 +997,9 @@ class AppLocalizationsBg extends AppLocalizations {
       '⚠️ Верижно вземане! Трябва да играете с мигащата пешка.';
 
   @override
+  String get aSelectionneSonPionEt => '{0} е избрал пешката си и мисли...';
+
+  @override
   String get vousDevezSelectionnerLePion =>
       'Трябва да изберете пешката с оранжев контур.';
 
@@ -996,10 +1017,10 @@ class AppLocalizationsBg extends AppLocalizations {
       'Очаква се домакинът да стартира следващия ход...';
 
   @override
-  String get equipeAPts => 'Отбор А: {точки} точки';
+  String get equipeAPts => 'Отбор А: {точки} точки {pts}';
 
   @override
-  String get equipeBPts => 'Б отбор: {точки}';
+  String get equipeBPts => 'Б отбор: {точки} {pts}';
 
   @override
   String get cEstAToiDe => 'Твой ред е да познаваш!';
@@ -1087,7 +1108,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get couche => 'Фолд';
 
   @override
-  String get miseActuelle => 'Текущ залог: {сума}';
+  String get miseActuelle => 'Текущ залог: {сума} {amount}';
 
   @override
   String get enAttente => 'Изчакване...';
@@ -1395,7 +1416,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get classementFinal1 => 'Крайно класиране';
 
   @override
-  String pt(Object eValueKey, Object eValueValue, Object p, Object p2) {
+  String pt(Object p, Object eValueKey, Object eValueValue, Object p2) {
     return '$p. $eValueKey: $eValueValue т.$p2';
   }
 
@@ -1451,6 +1472,9 @@ class AppLocalizationsBg extends AppLocalizations {
   String get cloturerLeVote => 'Приключи гласуването';
 
   @override
+  String get k0S => '0 с';
+
+  @override
   String get tempsRestantS => 'Оставащо време: {0} с';
 
   @override
@@ -1460,10 +1484,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String get lancerLeDe => 'ХВЪРЛИ ЗАР';
 
   @override
-  String get scorePoints => 'Резултат: {} точки';
+  String get scorePoints => 'Резултат: {} точки {score}';
 
   @override
-  String get dominosRestants => 'Останали домино: {броят}';
+  String get dominosRestants => 'Останали домино: {броят} {count}';
 
   @override
   String get impossibleDeJouerCeDomino =>
@@ -1479,7 +1503,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get extremites => 'Краища: ';
 
   @override
-  String get pioche2 => 'Теглене: {Брой}';
+  String get pioche2 => 'Теглене: {Брой} {count}';
 
   @override
   String get piocher => 'Изтегли';
@@ -1496,7 +1520,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get clic => 'КЛИК';
 
   @override
-  String get lancersRestants => 'Останали хвърляния: {броят}';
+  String get lancersRestants => 'Останали хвърляния: {броят} {count}';
 
   @override
   String get combinaison => 'КОМБИНАЦИЯ';
@@ -1505,7 +1529,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get grilleDePts => 'МРЕЖА ОТ {0} ({1} точки)';
 
   @override
-  String pts3(Object myTotal, Object p) {
+  String pts3(Object p, Object myTotal) {
     return '$p ($myTotal точки)';
   }
 
@@ -1536,7 +1560,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get carteAPrendre => 'КАРТА ЗА ВЗЕМАНЕ';
 
   @override
-  String get votreMain => 'Ръката ти ({брои})';
+  String get votreMain => 'Ръката ти ({брои}) {count}';
 
   @override
   String get touchezUneCartePourLa => 'Докоснете карта, за да я изиграете';
@@ -1546,7 +1570,7 @@ class AppLocalizationsBg extends AppLocalizations {
       'Все още няма комбинации на масата';
 
   @override
-  String get etaler => 'Спред ({броят})';
+  String get etaler => 'Спред ({броят}) {count}';
 
   @override
   String get defausserFin => 'Изчистване и край';
@@ -2625,7 +2649,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String get tapisVide => 'Празно поле';
 
   @override
-  String get reflechit => '{име} мисли...';
+  String get ecrireAu => 'Пиши на {0}...';
+
+  @override
+  String get reflechit => '{име} мисли... {name}';
 
   @override
   String get faceAFaceCoteA => 'Един срещу друг (рамо до рамо)';
@@ -2637,7 +2664,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get prendreLAtoutOuPasser => 'ВЗЕМИ КОЗА ИЛИ ПАСУВАЙ:';
 
   @override
-  String get combinaisonsDe => 'Комбинации от {имена}';
+  String get combinaisonsDe => 'Комбинации от {имена} {name}';
 
   @override
   String get ilDevraDonnerLePremier => 'Той ще трябва да даде първата улика';
@@ -2661,17 +2688,12 @@ class AppLocalizationsBg extends AppLocalizations {
   String get understoodButton => 'Разбирам';
 
   @override
-  String skyjoRoundEnderNotice(Object name, Object roundEnderName) {
+  String skyjoRoundEnderNotice(Object name) {
     return '$name разкри всичките си карти първи.';
   }
 
   @override
-  String skyjoRoundScoreNotice(
-    Object roundScore,
-    Object totalScore,
-    Object rScore,
-    Object tScore,
-  ) {
+  String skyjoRoundScoreNotice(Object roundScore, Object totalScore) {
     return '+$roundScore този рунд  •  Общо: $totalScore т.';
   }
 
@@ -2695,37 +2717,32 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
-  String skyjoCardsRevealedCount(Object count, Object revealedCount) {
+  String skyjoCardsRevealedCount(Object count) {
     return '$count / 2 обърнати карти';
   }
 
   @override
-  String ceTurnOfPlayer(Object name, Object currentPlayerName) {
+  String ceTurnOfPlayer(Object name) {
     return 'РЕД НА $name';
   }
 
   @override
-  String ceStepOfTotal(
-    Object step,
-    Object total,
-    Object currentRound,
-    Object totalSteps,
-  ) {
+  String ceStepOfTotal(Object step, Object total) {
     return 'Стъпка $step / $total';
   }
 
   @override
-  String ceVisibleSnippetOf(Object name, Object previousAuthorName) {
+  String ceVisibleSnippetOf(Object name) {
     return 'Видим откъс от $name:';
   }
 
   @override
-  String cePlayerWriting(Object name, Object currentPlayerName) {
+  String cePlayerWriting(Object name) {
     return '$name пише...';
   }
 
   @override
-  String ceStoryNumber(Object index, Object paperIndex) {
+  String ceStoryNumber(Object index) {
     return 'ИСТОРИЯ #$index';
   }
 
@@ -2745,10 +2762,21 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
+  String get dobbleAllCardsFound => 'Всички карти бяха намерени!';
+
+  @override
   String get dobbleDealingCards => 'Раздаване на карти...';
 
   @override
   String get dobbleCenterCard => 'ЦЕНТРАЛНА КАРТА';
+
+  @override
+  String dobbleDeckCards(Object count) {
+    return 'ТЕГЛИ ($count карти)';
+  }
+
+  @override
+  String get dobbleTapSameSymbol => 'Намерете същия символ!';
 
   @override
   String dobbleMyCardsCount(Object count) {
@@ -2762,6 +2790,12 @@ class AppLocalizationsBg extends AppLocalizations {
   String get dobbleTooManyErrors => 'Твърде много бързи грешки.';
 
   @override
+  String get dobblePenaltyWait => 'Чакай наказанието!';
+
+  @override
+  String get dobbleWrongSymbolWarning => 'Лош символ! Внимавайте за запушване.';
+
+  @override
   String dobbleFoundSymbol(Object name) {
     return '$name намери символа!';
   }
@@ -2770,37 +2804,32 @@ class AppLocalizationsBg extends AppLocalizations {
   String get dobbleSymbolWas => 'Символът беше:';
 
   @override
-  String pokerPot(Object amount, Object pot) {
+  String pokerPot(Object amount) {
     return 'Пот: $amount \\\$';
   }
 
   @override
-  String pokerRaiseAlert(
-    Object name,
-    Object amount,
-    Object previewAmount,
-    Object previewPlayerName,
-  ) {
+  String pokerRaiseAlert(Object name, Object amount) {
     return '⚠️ $name подготвя рейз до $amount \\\$!';
   }
 
   @override
-  String pokerCall(Object amount, Object callAmount) {
+  String pokerCall(Object amount) {
     return 'Плати ($amount)';
   }
 
   @override
-  String unoYouMustDraw(Object count, Object pendingDraw) {
+  String unoYouMustDraw(Object count) {
     return 'Трябва да изтеглите $count карти!';
   }
 
   @override
-  String unoMustDraw(Object count, Object name, Object pendingDraw) {
+  String unoMustDraw(Object count) {
     return 'Трябва да изтегли $count карти!';
   }
 
   @override
-  String unoDrawCountCards(Object count, Object pendingDraw) {
+  String unoDrawCountCards(Object count) {
     return 'Изтеглете $count карти';
   }
 
@@ -2814,9 +2843,21 @@ class AppLocalizationsBg extends AppLocalizations {
   String get codenamesBlueTeam => 'Син отбор';
 
   @override
+  String get codenamesSpectator => 'Зрител';
+
+  @override
+  String get codenamesMasterSpy => 'Главен шпионин';
+
+  @override
+  String get codenamesAgent => 'Агент';
+
+  @override
   String codenamesTeamTurn(Object team) {
     return 'Ред е на отбор: $team';
   }
+
+  @override
+  String get codenamesYouAre => 'Вие сте: ';
 
   @override
   String get codenamesMasterSpyView => 'Изглед Главен шпионин (Ключова карта)';
@@ -2857,12 +2898,12 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
-  String timesUpTeamAScore(Object score, Object scoreA, Object teamA) {
+  String timesUpTeamAScore(Object score) {
     return 'Отбор А: $score';
   }
 
   @override
-  String timesUpTeamBScore(Object score, Object scoreB, Object teamB) {
+  String timesUpTeamBScore(Object score) {
     return 'Отбор Б: $score';
   }
 
@@ -2988,6 +3029,9 @@ class AppLocalizationsBg extends AppLocalizations {
   String get petitBacAddCategory => 'Добави категория';
 
   @override
+  String get petitBacMinOneCategory => 'Трябва ти поне една категория!';
+
+  @override
   String get petitBacValidateCategories => 'Потвърди категориите';
 
   @override
@@ -2996,10 +3040,16 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
+  String get petitBacWaitingForBell => 'Листът върнат! Чакам звънеца...';
+
+  @override
   String get petitBacIFinished => 'Свърших! (Спри)';
 
   @override
   String get petitBacCorrection => 'ПРОВЕРКА';
+
+  @override
+  String get petitBacGameOverReason => 'Little Bac край на играта!';
 
   @override
   String presidentGivesTo(Object from, Object to) {
@@ -3015,8 +3065,15 @@ class AppLocalizationsBg extends AppLocalizations {
   String get actionPendingMsg => 'Действието ви се записва...';
 
   @override
+  String get monAnimalPrefere => 'Любимото ми животно';
+
+  @override
   String get unJoueurEstDesigneComme =>
       'Играчът се определя като \"цел\". Останалите играчи анонимно отговарят на въпрос за него. Целта избира предпочитания си отговор, а авторът на този отговор печели една точка.';
+
+  @override
+  String get uneSituationEstPresenteeTous =>
+      ': \r\n        \"Представя се ситуация. Всички играчи гласуват за човека, който най-вероятно ще направи това. Играчът, който получи най-много гласове, печели една точка (съмнителна чест!).\",    ';
 
   @override
   String get modeClassiqueUneQuestionEst =>
@@ -3143,6 +3200,9 @@ class AppLocalizationsBg extends AppLocalizations {
       'Целта му е да победи върколаците, докато не получи нова роля. В първата нощ той назначава завещател, който ще му завещае ролята му след смъртта му. Наследникът възстановява само силите, които не са били изразходвани от неговия завещател (отварата на вещицата, завземането на властта от диктатора и др.), с изключение на Ловеца и Гробаря. Той не възстановява инфекцията (Черен вълк) или замърсяването (Болен плъх) от завещателя си. Той запазва инфекцията или замърсяването, което е имал в базата. Ако наследи силите на върколак, другите вълци са информирани, че се присъединява към глутницата. Ако наследи силите на диктатор, който умре в нощта на преврата си, наследникът ще поеме последствията и ще извърши държавния преврат веднага щом се събуди.';
 
   @override
+  String get touche => 'Тъчдаун';
+
+  @override
   String get unVillageoisSansPouvoirSpecial => 'Селянин без специални сили.';
 
   @override
@@ -3223,7 +3283,22 @@ class AppLocalizationsBg extends AppLocalizations {
   String get themeIa => 'AI тема';
 
   @override
+  String get caseLabel => ': \r\n      кутия ';
+
+  @override
   String get generalEtVarie => 'Общо и разнообразно';
+
+  @override
+  String get unDinosaureQuiMangeUne => 'Динозавър, който яде сладолед';
+
+  @override
+  String get pouvoirVolerOuEtreInvisible =>
+      'Да можеш да летиш или да бъдеш невидим';
+
+  @override
+  String returnGenereDesSituationsCourtes(Object finalPrompt) {
+    return ': \r\n        return \"Генерира кратки ситуации, започващи с действие. Тема: $finalPrompt\"; \r\n      кутия ';
+  }
 
   @override
   String get abandonTousLesJoueursDeconnectes =>
@@ -3233,7 +3308,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get tousLesJoueursSeSont => 'Всички играчи са прекъснали връзката';
 
   @override
-  String nAPasJoueA(Object actionDetails, Object playerName) {
+  String nAPasJoueA(Object playerName, Object actionDetails) {
     return '⏱️ $playerName не играе навреме. Компютърът свири вместо него ($actionDetails).';
   }
 
@@ -3257,7 +3332,7 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
-  String aTireDansLEau(Object opponentDataname, Object shooterDataname) {
+  String aTireDansLEau(Object shooterDataname, Object opponentDataname) {
     return '🌊 $shooterDataname стреля във водата. Ред е на $opponentDataname.';
   }
 
@@ -3277,12 +3352,16 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
-  String aGardeLeDeDe(Object dieVal, Object index1, Object pName) {
+  String get aRelanceLesDes3 =>
+      '{pName} хвърли заровете отново ({3rollsLeft1}/3)!';
+
+  @override
+  String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return '$pName запази зара със стойност $dieVal (зар #$index1) 🔒';
   }
 
   @override
-  String aDebloqueLeDe(Object index1, Object pName) {
+  String aDebloqueLeDe(Object pName, Object index1) {
     return '$pName отключи зар #$index1';
   }
 
@@ -3326,6 +3405,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String get pioche3 => 'Кирка';
 
   @override
+  String get wordcivilParts0TrimWordundercover =>
+      '); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    \'\'}\' друго \'\'{\' \r\n      Анти-дублирана сигурност: ако';
+
+  @override
   String get vousNAvezPasDe => 'Нямаш думи';
 
   @override
@@ -3363,15 +3446,19 @@ class AppLocalizationsBg extends AppLocalizations {
   String get verite1 => 'ИСТИНА';
 
   @override
-  String aLePlusDXp(Object maxXp, Object playerswinnerIdnameJoueur) {
+  String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur има най-много XP ($maxXp XP) и става администратор!';
   }
+
+  @override
+  String get finDeMancheBoutonAdmin =>
+      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  Край на ръкава (админ бутон)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async \'\'{\' \r\n    wait _db.runTransaction((transaction) async\'\'{\' \r\n      финална играRef = _db.collection(\'games\').doc(gameCode); \r\n      финален snap = waitit transaction.get(gameRef); \r\n      ако (!snap.exists) се върне; \r\n\r\n      финална играДата = snap.data() като Map<String, динамично>; \r\n      финални играчи = Карта<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Определете победителя (повече XP)\r\n      Победител по струнаId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        краен xp = (pData[\'xp\'] като num?)?. toInt() ?? 0; \r\n        ако (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': победителId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Някой';
 
   @override
-  String aAtteintPointsEtRemporte(Object targetScore, Object winnerName) {
+  String aAtteintPointsEtRemporte(Object winnerName, Object targetScore) {
     return '$winnerName достигна $targetScore точки и спечели мача!';
   }
 
@@ -3388,7 +3475,7 @@ class AppLocalizationsBg extends AppLocalizations {
       'Всички рундове на Time\'s Up приключиха!';
 
   @override
-  String gagneAvecPoints(Object maxScore, Object playerswinnerIdnameUnjoueur) {
+  String gagneAvecPoints(Object playerswinnerIdnameUnjoueur, Object maxScore) {
     return '$playerswinnerIdnameUnjoueur печели с $maxScore точки!';
   }
 
@@ -3420,7 +3507,18 @@ class AppLocalizationsBg extends AppLocalizations {
   String get leJoueur => 'Играчът';
 
   @override
+  String get listStringQuestionsAiwordpoolGamewords =>
+      ') \'\'{\' \r\n      Въпроси за списък<Низ> =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[трудност] ?? \r\n          GameWords.койНай-Вероятно[';
+
+  @override
   String get honnete => 'Честно';
+
+  @override
+  String get pairSplit => ') ? pair.split(';
+
+  @override
+  String get pairPairListStringShuffledroles =>
+      '): [четни, четни]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = разбърканРоли[1]; \r\n\r\n        Въпрос =\r\n            \"Опиши тайната си дума с една дума. Самозванци, блъф!\"; \r\n        за (var pId в players.keys) \'\'{\' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3440,6 +3538,22 @@ class AppLocalizationsBg extends AppLocalizations {
   String get passeLEnchere => 'пасува наддаването';
 
   @override
+  String get elseIfGametype =>
+      ') \'\'{\' \r\n        ако (voterId == votedForId) \'\'{\' \r\n          throw Exception(\"Формална забрана да гласуваш за себе си!\"); \r\n        \'\'}\'\'}\' друго, ако (gameType ==\r\n      ';
+
+  @override
+  String get intRequiredvotesPlayersLengthIf =>
+      ') { \r\n        creditPlayerXp( \r\n          транзакция, \r\n          gameRef, \r\n          gameData, \r\n          избирател, \r\n          5, \r\n          applySpeedBonus: вярно, \r\n        ); \r\n      } \r\n\r\n      int requiredГласове = играчи.Дължина; \r\n\r\n      ако (gameType == ';
+
+  @override
+  String get forFinalTargetInVotes =>
+      ') \'\'{\' \r\n          крайна Карта<Низ, int> гласовеБроя = {}; \r\n          за (крайна цел в гласове.стойности) { \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          } \r\n\r\n          int maxГласове = 0; \r\n          Списък<Низ> топ Гласувано = []; \r\n          voteCounts.forEach((цел, броене) \'\'{\' \r\n            ако (брои > maxVotes) { \r\n              maxVotes = брой; \r\n              topVoted = [цел]; \r\n            } друго, ако (брой == maxVotes) { \r\n              topVoted.add(целева); \r\n            }\'\'}\'); \r\n\r\n          Актуализации[\r\n          ';
+
+  @override
+  String get forFinalTargetInVotes1 =>
+      ') \'\'{\' \r\n        крайна Карта<Низ, int> гласовеБроя = {}; \r\n        за (крайна цел в гласове.стойности) { \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        } \r\n\r\n        int maxГласове = 0; \r\n        Списък<Низ> топ Гласувано = []; \r\n        voteCounts.forEach((цел, броене) \'\'{\' \r\n          ако (брои > maxVotes) { \r\n            maxVotes = брой; \r\n            topVoted = [цел]; \r\n          } друго, ако (брой == maxVotes) { \r\n            topVoted.add(целева); \r\n          }\'\'}\'); \r\n\r\n        ако (topVoted.length == 1) \'\'{\' \r\n          краен победител = най-резултатен. Първи в гласуванията; \r\n          Актуализации[\r\n        ';
+
+  @override
   String aRemporteTousLesJetons(Object winnerName) {
     return '$winnerName спечели всички чипове на масата!';
   }
@@ -3451,6 +3565,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String carte1(Object cardToPlay) {
     return 'карта $cardToPlay';
   }
+
+  @override
+  String get quipourraitvotemode =>
+      '? _quiPourraitVoteMode\r\n                      : ';
 
   @override
   String get localIndisponibleVideoAudioActif =>
@@ -3522,7 +3640,7 @@ class AppLocalizationsBg extends AppLocalizations {
   String get completerAvecLIa15 => 'Допълни с AI (+15 думи)';
 
   @override
-  String completeCetteListeSurLe(Object join, Object text) {
+  String completeCetteListeSurLe(Object text, Object join) {
     return 'Попълнете този списък по тема $text. Съществуващи думи: $join';
   }
 
@@ -3818,10 +3936,15 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
+  String printEtatDeIsactionpendingAu(Object _isActionPending) {
+    return ' ---\", \r\n    ); \r\n    print(\"Първоначален _isActionPending статус: $_isActionPending\"); \r\n\r\n    финални играчи = (gameData[';
+  }
+
+  @override
   String get erreurQuestionNonTrouvee => 'Грешка: Въпросът не е намерен.';
 
   @override
-  String str95d36e(Object key0, Object valuename) {
+  String str95d36e(Object valuename, Object key0) {
     return '$valuename: $key0';
   }
 
@@ -3892,10 +4015,18 @@ class AppLocalizationsBg extends AppLocalizations {
   String get uneDescriptionHilarante => 'хитроумно и смешно описание';
 
   @override
+  String get extrainfoColumnChildrenText =>
+      '; \r\n          extraInfo = Колона( \r\n            Деца: [ \r\n              Текст( \r\n                \'';
+
+  @override
   String get unProblemeEstSurvenu => 'Възникна проблем.';
 
   @override
-  String str98e212(Object count, Object isFull, Object length, Object pName) {
+  String get defaultFinalRoundwinneridGamedata =>
+      ': \r\n      По подразбиране: \r\n        финален кръгWinnerId = gameData[';
+
+  @override
+  String str98e212(Object pName, Object count, Object length, Object isFull) {
     return '$pName: $count/$length$isFull';
   }
 
@@ -3940,6 +4071,10 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
+  String get styleConstTextstyleColorColors =>
+      ', \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox (височина: 20), \r\n                Wrap( \r\n                  подравняване: WrapAlignment.center, \r\n                  Деца: \r\n                      justOneFilteredClues\r\n                          .map((подсказка) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (височина: 20), \r\n                ако (justOneFilteredClues.isEmpty)\r\n                  Текст( \r\n                    AppLocalizations.of(context)!. всички уликиСа били, \r\n                    стил: const TextStyle(цвят: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        \'\'}\' друго \'\'{\' \r\n          Гадателят решава да играе\r\n          Return Column( \r\n            Деца: [ \r\n              Текст(                ';
+
+  @override
   String strf0868c(Object length0, Object valuescore0) {
     return '$length0: $valuescore0';
   }
@@ -3969,8 +4104,16 @@ class AppLocalizationsBg extends AppLocalizations {
   String get laVictime => 'Жертвата';
 
   @override
+  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
+      '; \r\n            centerActionWidget = Ред( \r\n              mainAxisSize: MainAxisSize.min, \r\n              Деца: [ \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. infect, \r\n                  Икона: Icons.auto_fix_high, \r\n                  цвят: Цветове. ЛилавоАкцент, \r\n                  onPressed: () \'\'{\' \r\n                    Provider.of<PlayerState>( \r\n                      контекст, \r\n                      слушай: невярно, \r\n                    ).recordBadgeEvent(\'lg_loup_noir_infect\'); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      вярно, \r\n                    ); \r\n                  \'\'}\', \r\n                ), \r\n                конст SizedBox (ширина: 8), \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. поглъщане, \r\n                  икона: Icons.close, \r\n                  цвят: Цветове.червен акцент, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        невярно, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          \'\'}\' \r\n          комби; \r\n        Кутия \'loup_blanc_turn\': \r\n          promptТекст = ';
+
+  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Нямаше жертви снощи (защитени или пощадени)';
+
+  @override
+  String get styleTextstyleFontweightFontweightBold =>
+      ', \r\n                              стил: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Цвят: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == \'вълк\' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(текст: съобщение), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  \'\'}\', \r\n                ); \r\n              \'\'}\', \r\n            ), \r\n          ), \r\n\r\n          Компактна лента за изпращане\r\n          ако (canSendMessage)\r\n            Row( \r\n              Деца: [ \r\n                Разширено( \r\n                  дете: SizedBox( \r\n                    височина: 32, \r\n                    дете: TextField( \r\n                      Контролер: _chatController, \r\n                      style: const TextStyle(fontSize: 12, цвят: Colors.white), \r\n                      декорация: ВходДекорация ( \r\n                        ПодсказкаТекст: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          цвят: Цветове. бяло30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        граница: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        Запълнено: Вярно, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          хоризонтално: 10, \r\n                          вертикален: 0, \r\n                        ), \r\n                      ), \r\n                      onПодадено: (текст) \'\'{\' \r\n                        if (text.trim().isNotEmpty) { \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        }\'\'}\', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (ширина: 4), \r\n                IconButton( \r\n                  икона: const Icon( \r\n                    Icons.send_rounded, \r\n                    размер: 18, \r\n                    цвят: Colors.cyanAccent, \r\n                  ), \r\n                  подпълване: EdgeInsets.zero, \r\n                  ограничения: const BoxConstraints(), \r\n                  onPressed: () \'\'{\' \r\n                    ако (_chatController.text.trim().isNotEmpty) { \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    }\'\'}\', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  \'\'}\' \r\n\r\n  Widget _buildChatTab(Етикет на низ, тип стринг, цвят activeColor) { \r\n    краен bool isSelected = _selectedChatType == тип; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = тип), \r\n      дете: Контейнер( \r\n        подплата: const EdgeInsets.симетрично (хоризонтално: 8, вертикално: 3), \r\n        декорация: КутияДекорация ( \r\n          Цвят: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Цвят: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        дете: Текст( \r\n          лейбъл, \r\n          стил: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor: Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  } \r\n\r\n  --- ОБНОВИХ АВАТАРА, ЗА ДА СТАНЕ ИНТЕРАКТИВЕН--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'{\' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder позволява изключително плавен визуален таймер без блокиране на таймера и ръчното setState, което значително улеснява темата (Точка 4)\r\n    финален endTime = startTime.toDate().add( \r\n      Продължителност(секунди: продължителност Всекунди), \r\n    ); \r\n    окончателно оставено = крайВреме.разлика (DateTime.now()); \r\n\r\n    ако (оставащо.isNegative)\r\n      Отговор Текст( \r\n        AppLocalizations.of(context)!. k0S, \r\n        стил: Theme.of( \r\n          контекст, \r\n        ).textTheme.headlineМалък?. copyWith(цвят: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Продължителност>( \r\n      Продължителност: остава, \r\n      tween: Tween (начало: останал, край: Продължителност.нула), \r\n      builder: (БилдКонтекст контекст, стойност на продължителност, widget? child) { \r\n        последни секунди = стойност.всекунди; \r\n        Отговор Текст( \r\n          AppLocalizations.of(context)!. оставащо време, \r\n          стил: Тема.на(context).textТема.заглавиеМалко?. copyWith( \r\n            цвят: секунди < 20 ? Цветове. червен Акцент: Цветове. Кехлибарен акцент, \r\n          ), \r\n        ); \r\n      }, \r\n    ); \r\n  \'\'}\' \r\n\r\n  _buildPetitsChevauxUI( \r\n    Контекст на BuildContext, \r\n    Map<String, dynamic> gameData, \r\n    СтрунникId, \r\n  ) \'\'{\' \r\n    финални играчи = Карта<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n    финален играчРед = Списък<Низ>.от( \r\n      gameData[\'littleHorsesPlayerOrder\'] ?? [], \r\n    ); \r\n    крайни позиции = Map<String, dynamic>.from( \r\n      gameData[\'littleHorsesPositions\'] ?? {}, \r\n    ); \r\n    final int currentIndex = gameData[\'smallHorsesCurrentIndex\'] ?? 0; \r\n    финален струн currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: \'; \r\n    крайният bool isMyTurn = текущPlayerId == playerId; \r\n    финален int dice = (gameData[\'littleHorsesDice\'] като num?)?. toInt() ?? 0; \r\n    финален bool hasRoll = gameData[\'littleHorsesHasRolled\'] ?? false; \r\n    крайният bool isTeamMode = gameData[\'smallTeamHorses\'] ?? false; \r\n    крайно Map<String, dynamic> secutiveSixes = Map<String, dynamic>.from( \r\n      gameData[\'малки конеПоследователниШестици\'] ?? {}, \r\n    ); \r\n    финален int mySixStreak = последователниШести[playerId] ?? 0; \r\n\r\n    Neon Modern палитра / Аркада на тъмен фон\r\n    краен списък<Цвят> играчЦветове = [ \r\n      Конст Цвят(0xFFEF4444), // Неоново червено\r\n      конст Цвят(0xFF38BDF8), // Неоново небесносиньо\r\n      конст Цвят(0xFF10B981), // Изумрудено зелено\r\n      Конст Колор(0xFFF59E0B), // Златен кехлибар\r\n    ]; \r\n\r\n    --- ЕКРАН НА ПОБЕДАТА--- \r\n    ако (gameData[\'gameState\'] == \'gameOver\') \'\'{\' \r\n      return UniversalGameEndScreen( \r\n        играЗаглавие:\r\n                      \r\n                  ';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Достигане до центъра на дъската!';
@@ -3986,7 +4129,7 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get chevalSelectionneNtouchezPourAvancer =>
-      'Кон {пешка} избрана!\\nДокоснете, за да продължите напред';
+      'Кон {пешка} избрана!\\nДокоснете, за да продължите напред {pawn}';
 
   @override
   String get touchezUnPion => 'Докоснете пионка';
@@ -4005,12 +4148,12 @@ class AppLocalizationsBg extends AppLocalizations {
   String get lancerLesDes => 'Хвърли заровете';
 
   @override
-  String k1663(Object oppBonus035, Object oppUpper) {
+  String k1663(Object oppUpper, Object oppBonus035) {
     return '1-6: $oppUpper/63 $oppBonus035';
   }
 
   @override
-  String k16631(Object myBonus035, Object myUpper) {
+  String k16631(Object myUpper, Object myBonus035) {
     return '1-6: $myUpper/63 $myBonus035';
   }
 
@@ -4043,6 +4186,10 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get choisirUnJeu => 'Изберете игра';
+
+  @override
+  String get screenWhoismostlikelylocalscreenPlayersPlayersBreak =>
+      ': \r\n        screen = КойЕНай-ВероятноЛокаленЕкран(играчи: _players); \r\n        комби; \r\n      кутия ';
 
   @override
   String get generation => 'Генериране...';
@@ -4091,6 +4238,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String get gagneTonSecretEstPreserve => 'ПОБЕДА! Тайната ти е запазена.';
 
   @override
+  String get wordcivilParts0TrimWordundercover1 =>
+      '); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = части[1].trim(); \r\n    \'\'}\' друго \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (Вариант)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    за (играч на VAR в _activePlayers) \'\'{\' \r\n      ако (играч == под прикритие) \'\'{\' \r\n        _playerRoles[играч] = \"Инфилтратор\"; \r\n      \'\'}\' друго, ако (играч == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[играч] = \"Г-н Уайт\"; \r\n      \'\'}\' друго \'\'{\' \r\n        _playerRoles[играч] = \"Граждански\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  Void _nextPlayerReveal() \'\'{\' \r\n    ако (_currentPlayerRevealIndex < _activePlayers.дължина - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } друго { \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(струнна музикантка) \'\'{\' \r\n    String role = _playerRoles[player]!; \r\n    bool impostorsWin = роля == \"Граждански\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.result; \r\n      ако (импосториПобедят) \'\'{\' \r\n        _resultMessage = \"{player} беше цивилен! Импостърите печелят!\"; \r\n      \'\'}\' друго \'\'{\' \r\n        _resultMessage = \"{player} беше\r\n    \r\n  ';
+
+  @override
   String get requiert4Joueurs => 'Изисква 4+ играчи';
 
   @override
@@ -4100,6 +4251,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String genereDesCategoriesAmusantesPour(Object trim) {
     return 'Генерирайте забавни категории за горещия картоф. Тема: $trim';
   }
+
+  @override
+  String get bodyPaddingPaddingConstEdgeinsets =>
+      '), \r\n          ), \r\n        ], \r\n      ), \r\n      Тяло: Подплата ( \r\n        подпълване: конст EdgeInsets.all(16.0), \r\n        дете: Колона( \r\n          Деца: [ \r\n            ако (_phase != LocalWhoIsPhase.results) ... [ \r\n              ФИЛТЪР ЗА ТРУДНОСТ\r\n              СегментиранБутон<Низ>( \r\n                Сегменти: [ \r\n                  ButtonSegment( \r\n                    Стойност: ';
 
   @override
   String get egalite1PtChacun => 'Равенство! (+1 т. за всеки)';
@@ -4277,8 +4432,8 @@ class AppLocalizationsBg extends AppLocalizations {
   String get auMoins5JoueursRequis => 'Трябват поне 5 играча.';
 
   @override
-  String rolesJoueurs(Object playersLength, Object selectedRolesCount) {
-    return 'Роли ( $selectedRolesCount )';
+  String rolesJoueurs(Object selectedRolesCount, Object playersLength) {
+    return 'Роли ( $selectedRolesCount ) $playersLength';
   }
 
   @override
@@ -4537,8 +4692,8 @@ class AppLocalizationsBg extends AppLocalizations {
   String get leTourEstTermine => 'Свърши се!';
 
   @override
-  String aEteBanniPourSa(Object loserAnswer, Object loserName) {
-    return '$loserName беше забранен за предложението му \" $loserAnswer 9\"!';
+  String aEteBanniPourSa(Object loserName, Object loserAnswer) {
+    return '$loserName беше забранен за предложението му \"  9\"! $loserAnswer';
   }
 
   @override
@@ -4556,17 +4711,17 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String aTrouveLeMot(Object winnerName) {
-    return '$winnerName намери думата: \'99999\'!';
+    return '$winnerName намери думата: \'99999\'! ';
   }
 
   @override
   String personneNATrouveLe(Object currentWord) {
-    return 'Никой не намери думата: \" $currentWord .\"';
+    return 'Никой не намери думата: \" {currentWord} .\"';
   }
 
   @override
   String aTrouveLeMot1(Object guesserName) {
-    return '$guesserName намери думата: \'99999\'!';
+    return '$guesserName намери думата: \'99999\'! ';
   }
 
   @override
@@ -4593,12 +4748,17 @@ class AppLocalizationsBg extends AppLocalizations {
   String get leTourEstTermine1 => 'Ходът приключи.';
 
   @override
+  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
+    return '$winnerName спечели с описанието си:AppLocalizations.of(context)!. extrainfoColumnChildText 99999 $winningDescription';
+  }
+
+  @override
   String get personneNAGagneCe =>
       'Никой не спечели този рунд. Равенство или липса на описания.';
 
   @override
-  String aTrouveLeSymboleIl(Object commonSym, Object winnerName) {
-    return '$winnerName намери символа 99999! Той печели картата.';
+  String aTrouveLeSymboleIl(Object winnerName, Object commonSym) {
+    return '$winnerName намери символа 99999! Той печели картата. $commonSym';
   }
 
   @override
@@ -4638,6 +4798,19 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get score => 'Резултат';
+
+  @override
+  String applocalizationsOfContextStyleconsttextstylecolorcolors(
+    Object value,
+    Object guesserName,
+    Object value2,
+    Object deckIndex,
+    Object deckTotal,
+    Object value3,
+    Object totalScore,
+  ) {
+    return '$value $guesserName :appLocalizations.of(context)! .styleConstTextstyleЦвятЦвятЦвят $value2 $deckIndex / $deckTotal . ... $value3 : $totalScore';
+  }
 
   @override
   String get laNuitTombeSurLe => 'Нощта пада върху селото...\n\nЗатвори очи.';
@@ -4705,6 +4878,14 @@ class AppLocalizationsBg extends AppLocalizations {
   String get leLoupNoirDecideDu => 'Черният Вълк решава съдбата на плячката';
 
   @override
+  String
+  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
+    Object targetName,
+  ) {
+    return 'Инфект $targetName ?appLocalizations.of(context)!.centeractionwidgetRowMainaxisizeMainaxiszeMinThe White Wolf shaks solo';
+  }
+
+  @override
   String get choisissezUneVictimeADevorer => 'Избери жертва за разкъсване';
 
   @override
@@ -4760,6 +4941,14 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get amoureux => 'Влюбени';
+
+  @override
+  String
+  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
+    Object senderName,
+  ) {
+    return '$senderName : Applocalizations.of(context) ..styleTextstyleFontweightFontweightBoldSmall Horses';
+  }
 
   @override
   String get courseIndividuelle => 'Индивидуално състезание';
@@ -4892,6 +5081,10 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
+  String get quiPourraitLePlusApplocalizations =>
+      'Кой може повече?AppLocalizations.of(context)!.bodyPaddingPaddingPaddingConstEdgeinssoft';
+
+  @override
   String get votePar => 'Гласувано от: \"{\'0\'\'}\"';
 
   @override
@@ -4984,6 +5177,12 @@ class AppLocalizationsBg extends AppLocalizations {
   String get partieDeEnAttente => 'Част от чакащата \"{\'0\'\'}\"';
 
   @override
+  String get termine => 'Терминиран: {0}';
+
+  @override
+  String get vainqueur2 => 'Победител:';
+
+  @override
   String get joueurSPretS => 'Играч(s) готов';
 
   @override
@@ -5023,6 +5222,25 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get indicesMontresA => 'Индекси';
+
+  @override
+  String get playersWinneridname => 'Име на победителя';
+
+  @override
+  String get packageSensorsPlusSensorsPlus =>
+      'пакет:сензори плюс/сензори плюс.дарт';
+
+  @override
+  String get supabaseUploadEchecDefinitif => 'Дефинит...';
+
+  @override
+  String get erreurSupabaseStorageexception => '--- SUPBASE ГРЕШКА';
+
+  @override
+  String get erreurInattendueLorsDeL => '--- Неуравновесена злоба в upload --';
+
+  @override
+  String get timeSUp1 => 'Времето изтече.';
 
   @override
   String get marquesDeVoiture => 'Марки автомобили';
@@ -5085,10 +5303,68 @@ class AppLocalizationsBg extends AppLocalizations {
   String get marquesDeVetements => 'Марки дрехи';
 
   @override
+  String get butDuJeuEtreLe =>
+      '**Игра гол **\nБъдете играч с най-много точки в края на играта.\n\n**Draft **\n1. Всеки играч получава **7 карти с отговор ** в ръка.\n2. Играчът се нарича **Juge** (Ролята се обръща на всеки рунд).\n3. Съдията чете ** въпросната карта ** на глас.\n4. Всички ** други играчи ** тайно изберете **1 отговор карта ** от ръката си и да го представи.\n5. Съдията чете всички отговори и определя **най-смешните **.\n6. Победителят в резултата **1 точка **.\n7. Всеки играч **poche ** нова карта да се върне на 7.\n8. Ролята на съдия преминава към следващия играч.\n\n** Важни правила **\n- Съдията не играе карти по време на неговия ред.\n- Отговорите са ** анонимни **: Съдията не знае кой какво е написал.\n- Можем да играем само по една карта.';
+
+  @override
+  String get objectifPrenezDesCartesPour =>
+      '** Цел **\nВземете карти, за да се създаде съвпадение двойки. Избягвайте да бъде играч, който държи Zombie карта в края на играта.\n**Draft **\n1. Играта започва с 33 карти (16 двойки + 1 зомби карта).\n2. Картите се разпределят на 4 играчи.\n3. Всеки завой играч взема карта от следващия играч.\n4. Ако картата създава двойка, тя автоматично се побеждава.\n5. Ръката на играча е смесена.\n6. Първият играч, който вече няма спечелени карти.\n7. Останалият играч със зомби картата загуби!';
+
+  @override
+  String get butDuJeuObtenirLe =>
+      '**Игра гол **\nВземи най-високия резултат, като попълните 13 категории с 5 зарове.\n\n*Бягане на кула**\n1. *** Ланс **: Можете да хвърлите 5 зара до 3 пъти на завой.\n2. ** Keep **: След първото или второто хвърляне, можете да запазите някои зарове и да рестартирате други.\n3. *****: След поне едно хвърляне, трябва да изберете категория, за да вкара. Всяка категория може да се използва само веднъж на част.\n\n**Категория **\n- ** Що се отнася до Six **: Сума от съответните зарове. (Към 35 точки, ако горната част е 63 или повече точки).\n- ** Брелан ** (3 или повече идентични зарове): Сборът от всички зарове.\n- ** Квадрат ** (4 или повече идентични зарове): Сборът от всички зарове.\n- ** Full ** (3 зарове идентични + 1 чифт): 25 точки.\n- *** Small Suite ** (4 последователни зарове): 30 точки.\n- **Large Suite ** (5 последователни зарове): 40 точки.\n- ** Yams ** (5 еднакви зарове): 50 точки.\n- **Chance **: Сума от всички зарове.';
+
+  @override
+  String get objectifNePasAvoirL =>
+      '** Цел **\nНямате устройството в ръцете си, когато картофът експлодира!\n\n**Draft **\n1. На екрана се появява тема.\n2. Играчът, държащ устройството, трябва да даде отговор, съответстващ на темата.\n3. Веднага щом отговорил, бързо предал самолета на съседа си.\n4. Съседът от своя страна трябва да намери нов отговор и да подаде устройството.\n5. Времето е скрито и случайно: картофът може да експлодира по всяко време!\n6. Играчът, който държи устройството по време на експлозията губи дръжката и получава залог.';
+
+  @override
+  String get principeGeneralGribouillisEstUn =>
+      '** Общ принцип **\nГрибуилис е игра на рисуване, вдъхновена от \"Арабски телефон,\" където идеите се променят на всеки етап. Има 3 режима на игра:\n\n**1. Нормален режим (арабски илюстрован телефон) **\nВсеки играч пише изречение.\n- **Drawing **: Всеки играч получава друго изречение и го тегли.\nВсеки играч получава рисунка и познай какво представлява.\n- ** Alternance **: Играта се редува рисува и предполагам, докато всеки \"албум\" е около всички играчи.\n- Но... Забавлявайте се, виждайки как едно просто изречение се превръща в нещо съвсем различно!\n\n**2. Режим на допълване (Колаборативен чертеж) **\n- **Croquis **: Всеки играч започва една проста рисунка.\n- **Пълен **: Всеки играч получава друг рисунка и трябва да го обогати, без да изтрива това, което вече съществува.\n- ** Alternance **: Рисунката отива от играч на играч, всеки добавя своето докосване.\n- **Параметър \"Добави 1\" **:\n- *Ако сте деактивирани (по подразбиране) *: Това е връв. Рисунката се развива на всеки етап (Player A - > Player B - > Player C...).\n*Ако е активиран*: Първоначалната рисунка на всеки играч е завършена от всички останали играчи, създавайки няколко колективни произведения паралелно.\n- *** Но **: Създаване на изненадващи и забавни колективни произведения на изкуството.\n\n**3. Brise- Glace Mode (Creative Interactions) **\n- **Писане **: Всеки играч пише лична тема (ex: Applocalizations.of(context)!.myPreference).\n- **Drawing **: Всеки играч получава темите от ** всички останали играчи ** и трябва да ги нарисува.\n- **But **: Идеално е да се разчупи леда, да се открият вкусовете на другите и да започне креативност в сътрудничество и светлина начин.';
+
+  @override
+  String get yzObjectifAvoirLeMoins =>
+      'Цел\n\nИмате възможно най-малко точки в края на играта.\nИграта спира, когато играчът достигне 100 или повече точки, а победителят е този с най-нисък общ резултат.\n\nОборудване\n\n150 карти, номерирани от 2 до +12\n\nИзпълнение\n\nРазбъркай всички карти.\nВсеки играч получава 12 карти, поставени с лицето надолу пред него, в 4 колони × 3 реда.\nДругите карти образуват акции. Върнете първата карта, за да формирате отпадъците.\nВсеки играч връща 2 карти по свой избор от своите 12.\n\nКурс на обиколка\n\nНа свой ред, имате ** 30 секунди ** да изберете между две действия:\n\n1. Вземете картата за отпадъци\nТрябва да го размените с една от 12-те си карти (видима или скрита страна).\nСменената карта отива на боклука.\n\n2. Piocher карта с лице надолу\nПогледни картата:\n- или го запазвате и заменяте една от Вашите карти (както по- горе),\n- или го отказвате → го поставяте директно върху отпадъците, и в този случай трябва да върнете една от картите си все още скрита.\n\nСпециални правила\n\nТри еднакви карти в колона → са незабавно победени (стойност 0).\n\nКрай на дръжката:\n\nДръжката свършва, когато играчът разкрие всичките си карти.\nВсички останали играчи след това разкриват останалите си карти. Дръжката свърши.\nВсички играчи броят сумата на картите си.\n\nМоля, имайте предвид: ако играчът, който завършва, няма най-ниския резултат в кръга, той взема наказание от +10 точки (скорът на дръжката му се удвоява в оригиналната версия, ще използваме +10 за опростяване).\n\nКрай на играта\n\nИграем колкото си искаме ръкави.\nСлед като играч достигне 100 точки или повече, играта спира.\nИграчът с най-нисък кумулативен резултат печели.';
+
+  @override
+  String get iAReglesDuPoker =>
+      'Цел\n\nСпечелете чиповете от други играчи, като:\n- най-добрата ръка от 5 карти по време на клане,\n- или като ги накараш да се откажат от залозите.\n\nРъчна класификация (от най-силната до най-слабата)\n\n1. Роял флъш: 10 год.\n2. Quint флъш: 5 карти, които следват помежду си, същия цвят\n3. Площад: 4 еднакви карти\n4. Пълен: 3 еднакви карти + 1 чифт\n5. Цвят (флуш): 5 карти от един и същи цвят (неконститутивен)\n6. Следваща (пети): 5 карти, които следват един друг (различни цветове)\n7. Брелан: 3 еднакви карти\n8. Двойна двойка\n9. Двойка\n10. Висока карта (най-висока карта, ако никой не се подобри)\n\nð\n\n1. Блиндове\nИграчът отляво на дилъра поставя малкия блинд.\nСледващият играч прави големия блинд.\n\n2. Разпределение\nВсеки играч получава 2 затворени карти (частните карти).\n\n3. Търгови кули и общи карти\n- Предфлоп: заложи трик с частни карти.\n3 общи карти. Нови залози.\nЧетвърта обща карта разкрита. Нови залози.\nПета и последна обща карта. Последен залог.\n\n4. Стрелба (показване)\nАко няколко играчи останат, всеки показва играта си.\nНай-добрата комбинация от 5 карти (между двете частни карти + 5 общини) печели пота.\n\nВъзможни действия\n\nНа свой ред играчът има **30 секунди ** за:\nНе залагай нищо, само ако никой не залага отново.\nСложи чипс в тенджерата.\n- Следвайте го.\nУвеличи залога.\n- Върви да си лягаш.\n\nКрай на играта\n\nИграта продължава толкова дълго, колкото остават най-малко 2 играчи с чипове.\nПоследният победител е този, който взима всички чипове.';
+
+  @override
+  String get butDuJeuGagnerLe =>
+      '**Игра гол **\nСпечелете най-XP чрез извършване на действия и отговор на истини!\n\n**Draft **\n1. Рулетката е играчът, чийто ред е.\n2. Играчът снима \"Action\" или \"Verity.\"\n3. Класически режим: Показва се случайно предизвикателство/въпрос.\n4. Съдия режим: случаен играч пише предизвикателството, след което играчът го осъзнава.\n5. Други играчи утвърждават с гласуване Да/Не.\n6. Процентът на валидиране определя спечеления XP.\n\n** Специални правила **\n- 100% валидиране = максимум XP\n- Играч с най-много XP става администратор на играта\n- Бутонът \"Край на дръжката\" позволява затваряне на частта';
+
+  @override
+  String get butDuJeuLeBut =>
+      '**Игра гол **\nЦелта е да бъде първият, който се отърве от всичките си карти, за да стане президент. Последният играч с карти в ръка става задник.\n\n**Материал и играчи **\n- ******: 52 карти.\n- ** Players **: 3 до 6 играчи.\n\n** Стойност на картата **\nРедът на картите, от най-слабите до най-силните, е:\n**3, 4, 5, 6, 7, 8, 9, 10, Вале, Лейди, Кинг, Ас, 2. **\n**2** е най-силната карта и може да победи всяка друга карта или комбинация.\n\n**ръководство*\n1. ** Дистрибуция **: Всички карти се разпределят еднакво между играчите.\n2. ** Първи кръг **:\n- За първата игра играчът, който притежава **3 на Trèfle (Той трябва да играе тази карта (само или с други 3).\n- За следващите ръкави започва колелото ** Assess ** на предишния ръкав.\n3. ** Играй карти **: Първият играч поставя на масата:\n- Само една карта (напр. една 7).\n- Един чифт (предишен: два 8).\n- Чадър (бивш: три валета).\n- Един квадрат (предишен: четири 5).\n4. ** Продължение от кръг **: Следващият играч (в посока по часовниковата стрелка) има **30 секунди ** да играе същия брой карти **, но ** по-висока стойност **.\n- Пример: Ако играч позира на чифт от 6, следващият трябва да позира на чифт от 7, Дами, As и др.\n5. ** Skip your turn **: Ако играчът не може или не иска да играе, той трябва да премине своя ред. След като играчът премине, той не може да играе отново до края на текущата гънка.\n6. ** Край на сгъването **: Сгъването свършва, когато всички играчи са преминали своя завой. Последният играч, който е поставил карти, печели гънката, взима картите от масата (остави ги настрана) и започва следващата гънка, като играе това, което иска.\n7. ** Силата на 2 ***: Възпроизвеждане на един или повече ** 2 *** бие всяка комбинация и завършва сгъването мигновено. Човекът, който играе на 2 печели сгъването и започва да играе отново.\nЗа да победиш двойка, трябва да играеш двойка!\n\n**Край на английския канал и роли **\n- Щом играчът няма карти, край. Играта продължава докато не остане само един играч.\n- Редът на края определя ролите за следващия кръг:\n- **1st*: Президент\n- **2nd **: Заместник-председател\n- ** ** Последни **: Задник\n- ** Преди края **: Vice-Ass-Trou\n- **Други ** (ако има): Неутрални\n\n** Следващия месец: Card Exchange! **\nПреди да започнете новия кръг, играчите разменят карти:\n- Задник** дава най-добрите си карти *** на президента ****.\n- Председателят *** му дава в замяна ** две карти по негов избор ** (обикновено най-лошото).\n- Ако има 4 играча или повече, **Vice-Cut ** дава най-добрата си карта *** на ** Vice-председател **.\nВицепрезидентът му дава карта по свой избор.\n\n** Специални правила **\n- â ›â € ** Не може да завърши с 2 **: Играчът няма право да се отърве от последната си карта, ако е 2. Този удар се счита за невалиден.\n**Вариантна революция (по избор) **: Ако играч постави квадрат (4 еднакви карти), той може да обяви \"Революция!\" Редът на стойност на картите се обръща след това до края на ръкава (трите стават най-силните, а двете най-слабите).';
+
+  @override
+  String get butDuJeuReussirDeux =>
+      '**Игра гол **\nУспех две предизвикателства пред другите играчи.\n\n**На място **\n- Всеки играч започва с 4 карти: 3 рози и 1 Череп.\n- Всяка карта на килима остава вързана за собственика си.\n\n**Draft **\n1. На свой ред играчът може да постави карта с лице на килима си.\n2. Когато вече не иска да позира, той предизвиква, като обявява броя карти, които смята, че може да върне.\n3. Други играчи могат да наддават или да преминат.\n4. Най-високата оферта става претендент и връща рекламираните карти.\n5. Първо той връща собствените си карти, след това тези на други играчи, ако е необходимо.\n\n** Resolution **\n- Ако череп се появи, предизвикателството е загубено.\n- Ако състезанието е спечелено, играчът отбелязва точка. Първият в 2 точки печели играта.\n- Ако се загуби предизвикателство, играчът губи карта на случаен принцип от останалата си ръка. Ако загуби Черепа си, трябва да отмени още един веднага.';
+
+  @override
+  String get butDuJeuFaireDeviner =>
+      '**Игра гол **\nДа отгатнем дума по рисунка, преди края на определеното време.\n\n**Draft **\n1. **Drawer/word selection **: Играчът е определен да рисува и дума тайно му се приписва.\n2.******: На черновецът има ограничено време да познае думата чрез рисуване. Той не може нито да говори, нито да имитира, нито да пише писма или цифри.\n3. ** Devinettes **: Други играчи предлагат думи в чат.\n4. ** Validation**: Карикатуриста вижда предложенията в чата и кликва върху бутон \"Намери!\" до доброто съобщение, за да посочи победителя.\n5. **Points **: Играчът, който намери и черновецът печели точка.\n6. ** Следваща кула**: Назначен е нов черновец.\n\n**Опции **\n- ** Само 30 удара **: Той е ограничен до максимум 30 черти.';
+
+  @override
+  String get butDuJeuFaireDeviner1 =>
+      '**Игра гол **\nНека партньорът ви познае колкото се може повече мистериозни думи, всяка от които пише една единствена улика. Същите или невалидни индекси се премахват.\n\n**Draft **\n1. **Избор на Девин***: Играчът е определен за \"Девин\" за кръга. Той не вижда думата мистерия.\n2. **Изборът на думата Мистерия **: Девин избира дума от списък (или господарят на играта избира такава).\n3. **Индия Писане **: Всички други играчи (\"Индии\") тайно напишете One една дума индекс, който ще помогне на Девин намерите думата мистерия.\n4. **Индустриален филтър **: Всички индекси са разкрити. Същите индекси (дори ако се пише различно, например \"чат\" и \"чат\") или невалидни (много близо до думата мистерия, изобретен и др.) се елиминират. Само уникалните и валидни улики са показани в Девин.\n5. ** Devinette**: Девин гледа към останалите улики и се опитва да познае думата \"загадка.\" Има само един опит.\n6. **Покриване **:\n- Ако Девин открие думата загадка: отборът печели 1 точка.\n- Ако Девин не намери думата мистерия: 0 точка.\n- Ако Девин не отговори: 0 точка.\n\n**Примери на невалидните индекси: **\n- Мистериозна дума: \"Чат.\" Невалидни индекси: \"chaton,\" \"feel,\" \"miayou,\" \"minou.\"\n- Идентични индекси: Ако двама играчи напишат \"животно\" за \"чат,\" \"животно\" се елиминира.';
+
+  @override
+  String get butDuJeuPourLes =>
+      '**Игра гол **\n-********************************************************\n- За **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Елиминирай всички селяни.\n- За ** Solitaires**: Цел, специфична за всеки човек (бяла лупа: да бъде сам; Наемник: Убий целта си в J1; Рат болен: замърсете всички).\n- За ** Lovers ** (ако Wolf + Village) : Да бъдат единствените двама оцелели.\n\n**Draft **\nИграта се променя между фазите на ** нощ ** и ** ден **.\n\n* Night **\n1. Водачът на играта (приложението) обявява, че селото спи.\n2. Различни герои се събуждат на свой ред, за да използват силите си:\n- **Cupidon ** (само за първата нощ): Назовава двама играчи, които ще се влюбят. Ако са вълк и селянин, целта им се променя.\n- The*Heritage ** (само за първата нощ): Отнася се за тестер.\n- The ** Seeing ** се събужда и определя играч, за да открие истинската си роля. (Не засичайте инфекция на черния вълк).\n- The **Mentalist ** (пасивно) възприема резултата от гласуването на селото.\n- The **Rat Malade **: Замърсители двама играчи (които ще знаят другите заразени).\n- The ** Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - vote together) Събуди се, концерт и определи жертва да яде.\n- The **Black Loup ** веднъж може да превърне жертвата в инфектиран Loup-Garou (който запазва силите си и става вълк). Менталистът и Фосойер могат да засекат заразените, Воянте не.\n- The **White Loup ** (една нощ от две): Отказва се от играча по свой избор (отменя защитата).\n- Магьосничеството се събужда. Тя вижда жертвата на вълка и може да използва една от двете си отвари (само веднъж на част): отвара ** за да спаси жертвата, или отвара от **отрова ** за да убие някого.\n- The **Pyroman **: Избира да съхранява варел на гръцки огън или детонира тези, които вече са поставени (трябва да бъде жив сутринта).\nМоже да общува с мъртвите.\n\n* Ден*\n1. Селото се събужда. Приложението обявява кой е умрял за една нощ.\n2. Мъртвите играчи разкриват своята роля и се елиминират (те вече не могат да общуват, освен Некроманк с мъртвите).\n- Le ** Loup Bavard **: Трябва да се каже тайна дума или да умре по залез слънце (освен ако Диктатора не вземе властта).\n3. Оцелелите спорят да се опитат да изобличат измамниците.\n4. След дискусиите всички играчи гласуват за премахване на заподозрян.\nМога да гласувам. Ако елиминира вълк, става кмет, иначе умира.\n- Капитане, гласът му се брои двойно. Ако бъде елиминиран, той трябва да назначи наследник преди да умре.\n- The ** Mercenary **: Ако целта му бъде елиминирана на първия ден, печели сам. Иначе ще стане селянин.\n5. Играчът, който получава най-много гласове, се елиминира, разкрива ролята си и е вън от играта.\n- **Chasser **: Ако той е елиминиран (ден и нощ), той има силата да доведе друг играч със себе си.\n- The ** Fossoyeur **: Когато той почина, той идентифицира двама играчи (един от противоположния лагер, един от неговия лагер).\n- Любовниците **: Ако единият умре, другият го следва с мъка.\n- The*Heritage **: Ако тестаторът му умре, той поема ролята си (освен ако не е мъртъв или заразен).\n6. Започва нова нощ.\n\n**Условия на победата **\n- *****************************************************\n- ** Loups-Garous ** (moute): Да бъде равен или по-голям брой на селяните.\nБелият Луп е единственият оцелял.\nУбива мишената си на първия ден.\nРат Маладе, замърсете всички живи играчи.\n- ** Lovers ** (Loup + Village) : Да бъдат единствените двама оцелели.\n\n*Важни бележки**\n\"Чаперон Руж\" е защитен от ловеца срещу Вълчата гарба, докато ловецът е жив.\n- ** Garde ** защитава вълча гарова мишена (не може да защити два пъти един и същи човек).\n- Силите на Белия вълк не знаят защитите.\nПироманът трябва да е жив сутринта, за да се взривят варелите му.';
+
+  @override
   String get loupNoir => 'Черен вълк';
 
   @override
+  String get loupBavard => 'Бъбрив вълк';
+
+  @override
   String get loupBlanc => 'Бял вълк';
+
+  @override
+  String get mercenaire => 'Наемник';
 
   @override
   String get ratMalade => 'Болен плъх';
@@ -5100,6 +5376,9 @@ class AppLocalizationsBg extends AppLocalizations {
   String get petiteFille => 'Момиченце';
 
   @override
+  String get chasseur => 'Ловец';
+
+  @override
   String get garde => 'Телохранител';
 
   @override
@@ -5109,10 +5388,68 @@ class AppLocalizationsBg extends AppLocalizations {
   String get mentaliste => 'Менталист';
 
   @override
+  String get fossoyeur => 'Гробар';
+
+  @override
   String get dictateur => 'Диктатор';
 
   @override
+  String get chaperonRouge => 'Червената шапчица';
+
+  @override
   String get pyromancien => 'Пиромант';
+
+  @override
+  String get butDuJeuEtreLe1 =>
+      '**Игра гол **\nБъдете най-бързи да забележите единствения идентичен символ между картата в центъра и собствената си карта.\n\n**Draft (Mode \'Andernal Tower\') **\n1. Всеки играч получава карта с лицето надолу. Останалата част от картите образуват Сток в центъра, лицето видимо.\n2. В началото всеки си връща картата.\n3. Всеки играч трябва да намери възможно най-бързо единствения символ, който присъства както на картата си, така и на Stock Card.\n4. Първият играч, който намери символа, съобщението на глас, взема картата Stock и я поставя на собствената си карта.\n5. Тази нова карта става негова карта за следващия кръг. Тогава в центъра на Стока се разкрива нова карта.\n6. Играта продължава до изчерпване на запаса. Играчът, който събира най-много карти в края печели!';
+
+  @override
+  String get butDuJeuSeDebarrasser =>
+      '**Игра гол **\nОтърви се от всичките му карти, като си първият!\n\n**Draft **\n1. ** Дистрибуция **: Всеки играч получава 7 карти. Останалите формират запаса. Връща се карта, за да започне купчината отпадъци.\n2. ** Play a card **: Играчът, чийто ред е **30 секунди ** да сложи карта в ръката си на купчината отпадъци. Изиграната карта трябва да съответства на горната карта на стека от:\n* **Color ** (ex: Red on Red)\n* ** Номер ** (ex: one 7 Blue on one 7 Green)\n* ** Symbol ** (ex: жълто \"+2\" върху червено \"+2\")\n* *** Special Card ** (Joker, +4 и т.н.)\n3. ** Piocher **: Ако играчът не може да играе карта в определеното време, той трябва да избере карта от пакета. Ако може да изиграе тази карта, може да го направи веднага. В противен случай, неговият ред свършва.\n4. ** Специални карти **:\n* **+2 (две карти) **: Следващият играч избира 2 карти и преминава своя ред.\n♪ ***Sens Forbidden ♪ Следващият играч преминава своя ред.\n* **Инверсия (Промяна на смисъла) **: Чувството за игра е обърнато.\n* ** Joker (Colour Change) **: Играчът избира цвета на следващата карта за игра. Може да се играе на всяка карта.\n* *** Super Joker +4 (Colour Change and Four Cards) **: Играчът избира цвета. Следващият играч избира 4 карти и преминава своя ред. Тази карта може да се играе само ако играчът няма друга карта на цвят, заявена върху купчината отпадъци (освен ако не блъфира).\n5. ** Announce \"UNO\" **: Когато играчът има само една карта в ръка, той трябва да обяви \"UNO!\" Ако той не направи това и е взето от друг играч (преди следващия играч играе или взима), той трябва да вземе 2 карти.\n6. ** Край на канал **: Дръжката свършва, когато играчът се отърве от последната си карта. Точките се броят. Играчът, който достигне 500 точки (или определена сума) печели играта.\n\n**Карта точки: **\n* Цифрови карти (0-9): Тяхната лицева стойност.\n* +2, Sens Забранено, Инверсия: 20 точки.\n* Joker, Super Joker +4: 50 точки.';
+
+  @override
+  String get principeDuJeuLeJeu =>
+      '§ Принцип на играта\n* Играта се играе между **3 и 10 играчи **.\n* Всеки играч дава достъп до част от своята фото библиотека и избира снимки за споделяне.\n* По време на игра, снимка се избира ** randomly ** от всички играчи, след което се показва за няколко секунди.\n* Играчите трябва да се досетят кой притежава снимката ** показва.\n* Играчът, който правилно познае най-много снимки печели играта.\n\n§ Процедура\n1. ** Избор на снимки **: Всеки играч избира няколко снимки от галерията си.\n2. ** Начало на играта **: Когато всички са готови, домакинът започва играта.\n3. ** Play Tower **:\n- Една случайна снимка се показва за 5 секунди.\nВсички играчи гласуват за собственика.\n4. ** Results **: Резултатите се актуализират след всеки рунд.\n5. ** Край на играта **: След определен брой рундове играчът с най-много точки печели.';
+
+  @override
+  String get butDuJeuCoulerTous =>
+      '**Игра гол **\nЗаби корабите на противника, преди да потопи твоите.\n\n**Draft **\n1. ** Място **: Всеки играч тайно поставя флота си на 10x10 мрежа.\n- Самолетоносачи (5 кутии)\n- Cruiser (4 кутии)\n- Субмарин (3 клетки)\n- Унищожител (3 кутии)\n- Патрул (2 кутии)\n2. ** Tir **: На свой ред играчите докосват кутия, за да стрелят.\n3. ** Result**: Applocalizations.of(context)!.touche, \"Coulated\" или \"To water.\"\n4. ** Виктория **: Първият играч, който потопи целия противников флот печели.';
+
+  @override
+  String get butDuJeuEtreLe2 =>
+      '**Игра гол **\nБъдете първите, които достигат желаното разстояние (1000 км по подразбиране).\n**Draft **\nВсеки играч получава шест карти.\n- От своя страна, изиграйте карта (Разстояние, Атака, Защита, Сигурност) или се отървете от нея.\n- **Attacks ** карти (Спри, Ред, Есънс, Крейвисън, Лимит) блокират противника.\n- Карта **Защитници* (Зелен, Екстра Танк, Ремонт, Краен Лимит) контраатаки.\n- ** Сигурност ** картите отменят атака и предотвратяват нейното повторение.\n- Карти **Разстояние ** (25, 50, 75, 100, 200 km) движете автомобила си напред.\nИзбери една карта в края на реда си.';
+
+  @override
+  String get butDuJeuEtreLe3 =>
+      '**Игра гол **\nБъдете първи, за да се отървете от всичките си карти чрез формиране на валидни комбинации (мелди).\n\n*Бягане на кула**\n1. ** Piocher **: Вземете картата от върха на отпадъците OR Stock.\n2. ** Продажба (опционално) **: Поставете валидни комбинации на масата.\n- **Последица (Run) **: 3 или повече карти от същия цвят, които следват (напр. 5) Асото може да бъде високо или ниско.\n- **Група (Set) ***: 3 или 4 карти със същата стойност, но с различни цветове (напр. 8... 8...\n3. ** ** Понижение **: Отърви се от карта от ръката му върху отпадъците.\n\n**Край на дръжката **\nПървият играч, който вече няма карти след поражението печели. Другите броят точките на останалите си карти (фигури = 10, As = 15, други = лицева стойност). Играта спира на 100 точки.';
+
+  @override
+  String get butDuJeuFaireDeviner2 =>
+      '**Игра гол **\nНакарай екипа си да отгатне най-много думи преди края на времето, без да използваш забранените думи!\n\n**Draft **\n1. На всеки завой играчът се опитва да накара екипа си да отгатне дума.\n2. Говорителят никога не трябва да произнася думата, за да гадае, нито някоя от думите \"Taboo\" (без думи), показани под целевата дума. Нито може да използва преводи или думи от едно и също семейство.\n3. Ако говорителят използва дума на Табу, противниковият отбор (или съдия) докладва за грешката, картата се отменя и говорителят се премества към следващата.\n4. Всяка отгатната дума връща точка към екипа.\n5. Завоят свършва, когато времето изтече.\n\n** Краят на част **\nОтборът с най-много точки след броя на обиколки определени печели!';
+
+  @override
+  String get butDuJeuAmenerVos =>
+      '**Игра гол **\nДоведете конете си в центъра на платото, като заобиколите опонентите си.\n\n** Класически правила **\n1. *** Basic изход **: Трябва да направите **1 *** или **6 **, за да извадите пешка.\n2. ** Bonus Tour**: Правенето на **6**, улавянето на пешка или завършване на курса позволява повторно възпроизвеждане. (Внимание: 3 пъти по 6 последователни отменя вашия ред!).\n3. ** Capture **: Падането върху противникова пешка я връща в базата си (невъзможно на защитените кутии \"Звезди\" или в началната кутия на този играч).\n4. ** Пристигнал **: Нужен е точен резултат, за да стигнем до последното стълбище.\n\n** Режим на екипа (2v2) **\nИзисква точно 4 играчи. Ти си съюзник с играча пред теб.\n- ** Shared Victory **: Първият отбор, който носи общо 4 парчета в центъра печели играта (ex: 3 парчета за вас и 1 за вашия съюзник).\n- **Entraide **: Можете да използвате хвърлянето си, за да преместите пешката на съюзника си, но * само*, за да го извадите от базата му (с 1 или 6) или да го преместите на финалното стълбище.\n- ** Allied блокиране **: Невъзможно е да хванеш пешката на партньора си. Ако вашето движение ви кара да се приземите върху него, ударът е невалиден.';
+
+  @override
+  String get principeJeuSurrealisteDEcriture =>
+      '**Principle **\nСюрреалистична колективна игра за писане.\n**Variant **\n- Класика: Всеки пише елемент от изречението (значителен, прилагателен, Verb и т.н.) без да вижда прецедентите.\n- Продължение: Всеки вижда последните 3 думи и завършва изречението.\n**Draft **\nЛистата се сменят, докато всички участват.';
+
+  @override
+  String get butDuJeuPlacerLe =>
+      '**Игра гол **\nПоставете по-голямата част от неговите парчета на снимачната площадка.\nЗлатно правило**\nВсяко ново парче трябва да докосва поне още едно парче от същия цвят с ъгъл, но никога от едната страна.\n**Draft **\n1. Първият кръг се играе в ъгъла на поднос на вашия цвят.\n2. Следните кули уважават златното правило.\n3. Ако не можете да играете повече, минавате през вашия ред.\n**Ratting **\n-1 точка на квадрат не е поставен.\n+15 точки, ако всички части са поставени.\n+5 бонус точки, ако последното парче е един квадрат (1x1).';
+
+  @override
+  String get objectifEtreLePremierA =>
+      '** Цел **\nБъдете първите, които постигат таргетния резултат (20, 50 или 100 точки).\n\n**Draft **\nВсеки играч получава 7 домино. На свой ред, той трябва да постави домино, съответстващ на един от краищата на веригата. Двойните се играят на кръстове.\n\n** Режим на игра **\n- **Pike **: Ако не можеш да играеш, избираш докато не играеш.\n- **Blocked **: Без кирки. Ако не можеш да играеш, минаваш през твоя ред.\n- ** All Five ** : Първият двоен игра е \"Spiner\" (игра се от 4 страни). Вкарвате точки при всеки удар, ако сумата на краищата е кратно на 5.\n\n** Краят на завоя **\nАко никой не може да играе, номерът е блокиран. Играчите разкриват ръцете си. Играчът с най-малко точки печели кръг и отбелязва сумата от точките на противоположните ръце.';
+
+  @override
+  String get objectifEtreLePremierJoueur =>
+      '** Цел **\nБъди първият играч, който се отърве от всичките си карти.\n\n**Правила **\nИграта се играе с 52 карти.\n- Поръчка на карти (от най-ниската до най-високата): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Ред на цветовете (от най-слабите до най-силните): плочки ♦ (D), Trèfles\n- Играчът, който има 3 плочки започва играта.\n\n** Комбинация **\n- ** Просто **: 1 карта.\n- ** чифт **: 2 карти от един ранг.\n- **Triple**: 3 карти от един и същ ранг.\n- ** Продължение **: 5 последователни карти (смесени цветове).\n- **Цвят **: 5 карти от един и същ цвят.\n** Full **: 3 карти от един ред + 2 карти от друг ред.\n- ** Квадрат **: 4 карти от един ранг + 1 карта от всякакъв вид.\n- ** Quinte Flash **: 5 последователни карти от един и същи цвят.\n\n**Наследство от комбинации от 5 карти **\nFlash Quinte > Square > Full > Color > Suite.\nКомбинацията може да бъде победена само от комбинация от същия размер и по-висока стойност.';
+
+  @override
+  String get objectifCapturerToutesLesPieces =>
+      '** Цел **\nХванете всички монети на противника си или блокирайте всичките му монети.\n**Правила **\n- Играе на чек 8x8, изключително на тъмни кутии.\nПарчетата се движат диагонално в кутия.\n- Уловът е **mandatory ** и са направени чрез прескачане на вражеско парче.\n- Няколко улова могат да бъдат оковани в един кръг.\n- Когато една стая достигне противоположния ред, тя се повишава в \"Dame\" и може да се движи и да залови обратно.';
 
   @override
   String get unSubstantifExLeChat => 'съществително (напр. котката)';
@@ -5128,6 +5465,21 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get unAdjectifExMort => 'прилагателно (напр. мъртъв)';
+
+  @override
+  String get petit1 => 'Малък 1';
+
+  @override
+  String get petit2 => 'Малка 2';
+
+  @override
+  String get grand => 'Големи';
+
+  @override
+  String get tresGrand => 'Много голям';
+
+  @override
+  String get superGrand => 'Супер голям';
 
   @override
   String get potionDeVieEtDe => 'Отвара за живот и смърт.';
@@ -5177,8 +5529,17 @@ class AppLocalizationsBg extends AppLocalizations {
       'Грешка при генерирането: неправилен брой карти.';
 
   @override
+  String get blancMangerCocon => 'White Eat Cocon';
+
+  @override
+  String get leRoiDesMemes => 'Кралят на меметата';
+
+  @override
   String get laPartieEstTermineeTous =>
       'Играта свърши: всички играчи са изключени.';
+
+  @override
+  String get aucun => 'Няма';
 
   @override
   String get nonAuthentifie => 'Не сте удостоверени.';
@@ -5208,6 +5569,9 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get vousDevezJouerUneCarte => 'Трябва да изиграете по-силна карта.';
+
+  @override
+  String get aGagne1 => 'Той спечели!';
 
   @override
   String get ceNEstPasVotre => 'Не е вашият ред.';
@@ -5243,6 +5607,9 @@ class AppLocalizationsBg extends AppLocalizations {
   String get caseDejaCiblee => 'Полето вече е прицелено.';
 
   @override
+  String get aCouleTouteLaFlotte => 'Потъна цялата вражеска флота!';
+
+  @override
   String get placementAutomatiqueEffectue =>
       '⏱️ Автоматичното поставяне е завършено.';
 
@@ -5259,6 +5626,12 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get egaliteLorsDuVoteLa =>
       'Равенство при гласуването! Богинята на справедливостта трябва да управлява.';
+
+  @override
+  String get leTempsDeVoteEst => 'Времето за гласуване изтече!';
+
+  @override
+  String get laPartieDeYamsCommence => 'Играта на Ямс започва!';
 
   @override
   String get plusDeLancersDisponibles => 'Няма повече налични хвърляния.';
@@ -5306,6 +5679,9 @@ class AppLocalizationsBg extends AppLocalizations {
       'Разискването приключи. Селото трябва да гласува!';
 
   @override
+  String get lesAmoureux => 'Влюбените';
+
+  @override
   String get seulsLesDeuxAmoureuxSont =>
       'Само двамата влюбени са още живи. Тяхната любов побеждава всичко!';
 
@@ -5314,8 +5690,14 @@ class AppLocalizationsBg extends AppLocalizations {
       'Белият вълк е последният оцелял! Той изяде всички.';
 
   @override
+  String get loupsGarous => 'Върколаци';
+
+  @override
   String get lesLoupsGarousSontDevenus =>
       'Върколаците станаха мнозинство и не могат да загубят. Те спечелиха!';
+
+  @override
+  String get villageois => 'Селяни';
 
   @override
   String get toutesLesMenacesOntEte =>
@@ -5364,6 +5746,12 @@ class AppLocalizationsBg extends AppLocalizations {
       'Малкото момиченце беше твърде любопитно! Вълците го изяждат на мига!';
 
   @override
+  String get infecte1 => 'заразен';
+
+  @override
+  String get contamine => 'заразен';
+
+  @override
   String get vousVousSentezObserveE => 'Чувствате се наблюдавани тази нощ...';
 
   @override
@@ -5381,8 +5769,14 @@ class AppLocalizationsBg extends AppLocalizations {
       'Пиромантът запалва фитила на своите бурета!';
 
   @override
+  String get leSoleilSeLeveSur => 'Слънцето изгрява над Thiercelieux...';
+
+  @override
   String get miraculeusementPersonneNAPeri =>
       'По чудо тази нощ никой не загина!';
+
+  @override
+  String get motDuJour => 'дума на деня';
 
   @override
   String get leDictateurSEstTrompe =>
@@ -5394,6 +5788,43 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get egaliteParfaiteLorsDuVote1 =>
       'Равенство при гласуването. Днес никой не е екзекутиран.';
+
+  @override
+  String get lAncienCapitaine => 'Бившият капитан.';
+
+  @override
+  String get amoureux1 => 'Любовници 1';
+
+  @override
+  String get amoureux2 => 'Любовници 2';
+
+  @override
+  String get debugJoingameDemarrageDeLa => '. Започнете сделката.';
+
+  @override
+  String get debugJoingamePartieTrouveeEt =>
+      '. Част намерена и във фоайето. Отчитане на данни...';
+
+  @override
+  String get debugJoingameTransactionUpdateAppelee =>
+      '[DEBUG се присъедини към играта] Transaction.update() called with the new player list.';
+
+  @override
+  String get debugJoingameTransactionReussieRetourne =>
+      'Успешна сделка. Върни назад.';
+
+  @override
+  String get debugJoingameLaPartieN =>
+      '. Играта не съществува или вече не е във фоайето. Върни се към лъжата.';
+
+  @override
+  String get erreurCritiqueDansJoingame =>
+      '--- Critical ГРЕШКА В Присъединяване Game --';
+
+  @override
+  String
+  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
+      ':AppLocalizations.of(context)! . word civilParts0TrimWord undercoverIA връща отделни прости думи';
 
   @override
   String get infiltre => 'Инфилтратор';
@@ -5411,6 +5842,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String get duellistes => 'Двойници';
 
   @override
+  String get laPartieCommenceDonnezVotre =>
+      'Играта започва! Дайте своята улика...';
+
+  @override
   String get laPhaseDeVoteCommence => 'Започва фазата на гласуване!';
 
   @override
@@ -5421,10 +5856,34 @@ class AppLocalizationsBg extends AppLocalizations {
       'Богинята на справедливостта произнесе присъдата си!';
 
   @override
+  String get unNouveauTourCommence => 'Започва нов ход.';
+
+  @override
   String get laVengeuseEmporteQuelquUn => 'Отмъстителят взима някого с нея!';
 
   @override
+  String get civils => 'Граждани';
+
+  @override
+  String get imposteurs => 'Самозванци';
+
+  @override
+  String get paris => 'Париж';
+
+  @override
+  String get france => 'Франция';
+
+  @override
+  String get capitale => 'Капитал';
+
+  @override
   String get tourEiffel => 'Айфелова кула';
+
+  @override
+  String get seine => 'Сена';
+
+  @override
+  String get ville => 'Град';
 
   @override
   String get vousNePouvezPasBuzzer =>
@@ -5489,6 +5948,9 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'Картата не е намерена.';
+
+  @override
+  String get aGagneLaManche => 'Той спечели рунда!';
 
   @override
   String get desDejaLancesPourCe =>
@@ -5606,6 +6068,9 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get unoNecessiteEntre2Et => 'Едно изисква между 2 и 10 играчи.';
+
+  @override
+  String get laPartieDeUnoCommence => 'Играта на Uno започва!';
 
   @override
   String get inversionA2JoueursLe =>
@@ -5779,7 +6244,20 @@ class AppLocalizationsBg extends AppLocalizations {
   String get partieNonTrouvee1 => 'Частта не е намерена';
 
   @override
+  String get trouDuCul => 'Глупак';
+
+  @override
   String get vicePresident => 'Вицепрезидент';
+
+  @override
+  String get viceTrouDuCul => 'Вице-глупак';
+
+  @override
+  String get neutre => 'Неутрален';
+
+  @override
+  String get debugPictionaryConditionRoundstateDrawing =>
+      '---- debug pictionary -- състоянието \"roundState\" или \"guessing drawing\" е вярно. Обновяване на базата данни...';
 
   @override
   String get dessinateurIntrouvable => 'Дроуър не е намерен.';
@@ -5803,6 +6281,9 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get leDevineurNePeutPas => 'Предположителят не може да ни подскаже.';
+
+  @override
+  String get aaaaaaceeeeiiiinooooouuuuyy => 'Не, не, не.';
 
   @override
   String get ceNEstPasLe => 'Сега не е време за отгатване.';
@@ -5838,7 +6319,18 @@ class AppLocalizationsBg extends AppLocalizations {
   String get vousNePouvezPasChoisir => 'Не можете да избирате цвят в момента.';
 
   @override
+  String get erreurCritiquePlayerorderEstVide =>
+      'Играчът е празен в следващия кръг. Не мога да продължа.';
+
+  @override
   String get questionNonTrouvee => 'Въпросът не е намерен';
+
+  @override
+  String get quiPourraitLePlusApplocalizations1 =>
+      'Кой би могъл повече?appLocalizations.of(context)!.listStringquestsAiwordpoolGamewordssoft';
+
+  @override
+  String get menteur => 'Лъжец.';
 
   @override
   String get pasAssezDeJoueursPour => 'Няма достатъчно играчи за тази мода.';
@@ -5865,6 +6357,18 @@ class AppLocalizationsBg extends AppLocalizations {
       'Наддаването трябва да е по-високо.';
 
   @override
+  String get applocalizationsOfContextUnjoueurEst =>
+      'AppLocalizations.of(context)!.aPlayer}е последният оцелял и печели Череп!';
+
+  @override
+  String get applocalizationsOfContextUnjoueurA =>
+      'AppLocalizations.of(context)!.aPlayer} спечели 2 предизвикателства и спечели играта!';
+
+  @override
+  String get applocalizationsOfContextUnjoueurRemporte =>
+      '? Applocalizations.of [context] !.aPlayer wins Skull!';
+
+  @override
   String get reponseVide => 'Празен отговор.';
 
   @override
@@ -5888,6 +6392,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Целта не е открита.';
 
   @override
+  String get quiPourraitLePlusApplocalizations2 =>
+      'Кой би могъл повече?appLocalizations.of(context)!.elseIfGametypeSynonym или Banni';
+
+  @override
   String get vousNePouvezPasBannir =>
       'Не можете да забраните собствения си синоним!';
 
@@ -5899,6 +6407,14 @@ class AppLocalizationsBg extends AppLocalizations {
   String get ceJoueurNAPas1 => 'Този играч не изпрати отговор.';
 
   @override
+  String get quiPourraitLePlusApplocalizations3 =>
+      'Кой би могъл повече?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIf Съдията';
+
+  @override
+  String get quiPourraitLePlusApplocalizations4 =>
+      'Кой би могъл повече?Приложение Локализации.на(контекст)!.заФиналенТаджетВот околодържавна';
+
+  @override
   String get egaliteParfaiteAucunPointAttribue =>
       'Пълно равенство! Не се присъждат точки.';
 
@@ -5908,6 +6424,13 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get laDescriptionLaPlusDrole => 'Беше избрано най-забавното описание!';
+
+  @override
+  String get aucuneDescriptionNAEte => 'Не беше гласувано описание.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations5 =>
+      'Кой би могъл повече?appLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId';
 
   @override
   String get jugeIntrouvable => 'Съдията не е намерен.';
@@ -5952,6 +6475,9 @@ class AppLocalizationsBg extends AppLocalizations {
       'Рейзът трябва да е поне двойно по-голям от предишния залог (или ол-ин).';
 
   @override
+  String get laPartieDeBeloteCommence => 'Играта на Белот започва!';
+
+  @override
   String get passeGeneraleAu1erTour =>
       'Генералът подава на първия кръг от търговете. Начало на втория рунд!';
 
@@ -5966,6 +6492,9 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get passeLAnnonce => 'пасува съобщението';
+
+  @override
+  String get laPartieDeBlokusCommence => 'Играта на Blokus започва!';
 
   @override
   String get pieceDejaUtilisee => 'Фигурата вече е използвана.';
@@ -6036,7 +6565,14 @@ class AppLocalizationsBg extends AppLocalizations {
   String get piquantInsolite => '🌶️ Пикантно и Необичайно';
 
   @override
+  String get quiPourraitLePlusApplocalizations6 =>
+      'Кой би могъл повече?Приложение Локализации.на=контекст)! ..кой може да бъде вашата модерна група';
+
+  @override
   String get devineT => 'Познай.';
+
+  @override
+  String get presidente => 'Председател';
 
   @override
   String get chargement => 'Зареждане...';
@@ -6046,6 +6582,10 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get exception => 'Изключение:';
+
+  @override
+  String get debutDeLaConstructionDe =>
+      '---- Конструкцията на него на VOTE \"Кой би могъл да е най-много?appLocations.of(context)!.printIsactioning StateTo( isActionPending) players\'] as Map < String, dynamic>?)? {};';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -6066,6 +6606,10 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get attentionLeWidgetNEst =>
       '- \"Уиджет\" го няма, \"СетСтейт\" е отменен.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations7 =>
+      'Кой би могъл повече?appLocalizations.of(context)!.по подразбиранеFinalRoundwinnerid GamedataroundWinnerId';
 
   @override
   String get phaseDePose => 'ПОЗИЦИЯ ФАЗА';
@@ -6103,6 +6647,9 @@ class AppLocalizationsBg extends AppLocalizations {
   }
 
   @override
+  String get undercoverLocal => 'Местен под прикритие';
+
+  @override
   String get toiMeme => 'себе си';
 
   @override
@@ -6130,6 +6677,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String get enCours => 'CURRENT: {0}';
 
   @override
+  String get gamemessagelocalizationTrContextReason =>
+      ': \"\"}: GameMessageLocalization.tr(context, reason),';
+
+  @override
   String get jAiLanceUnePartie2 => 'Стартирах игра';
 
   @override
@@ -6139,7 +6690,255 @@ class AppLocalizationsBg extends AppLocalizations {
   String get appTitle => 'Игра за купон';
 
   @override
+  String get loginTitle => 'Добре дошли!';
+
+  @override
+  String get registerTitle => 'Присъединете се!';
+
+  @override
+  String get email => 'Имейл';
+
+  @override
+  String get password => 'Парола';
+
+  @override
+  String get username => 'Потребителско име';
+
+  @override
+  String get loginButton => 'Вход';
+
+  @override
+  String get registerButton => 'Създаване на профил';
+
+  @override
+  String get termsAcceptance =>
+      'Прочетох и приемам Условията за ползване и Политиката за поверителност.';
+
+  @override
+  String get gamesTab => 'Игри';
+
+  @override
+  String get friendsTab => 'Приятели';
+
+  @override
+  String get statsTab => 'Профил';
+
+  @override
+  String get loungesTab => 'Салони';
+
+  @override
   String get createGame => 'Създай игра';
+
+  @override
+  String get joinGame => 'Присъединяване';
+
+  @override
+  String get gameCode => 'Код на играта (6 цифри)';
+
+  @override
+  String get startGame => 'Стартирай играта';
+
+  @override
+  String get leaveGame => 'Напусни играта';
+
+  @override
+  String get rules => 'Правила';
+
+  @override
+  String get level => 'Ниво';
+
+  @override
+  String get coins => 'Монети';
+
+  @override
+  String get gameOver => 'Край на играта!';
+
+  @override
+  String get victory => 'Победа!';
+
+  @override
+  String get defeat => 'Загуба';
+
+  @override
+  String get nextRound => 'Следващ рунд';
+
+  @override
+  String get onboardingWelcome => 'Добре дошли';
+
+  @override
+  String get onboardingSkip => 'Пас';
+
+  @override
+  String get onboardingNext => 'Напред';
+
+  @override
+  String get onboardingStart => 'Да започваме! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Играйте с приятели';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Изберете от над 30 парти, настолни и игри с карти.';
+
+  @override
+  String get onboardingSlide2Title => 'Печелете монети и значки';
+
+  @override
+  String get onboardingSlide2Subtitle => 'Вдигайте нивото си с всяка победа.';
+
+  @override
+  String get onboardingSlide3Title => 'Създайте или влезте за секунди';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      '6-цифрен код е достатъчен за събиране на приятели.';
+
+  @override
+  String get vipPass => 'VIP Паспорт';
+
+  @override
+  String get vipActive => 'Вашият VIP паспорт е активен!';
+
+  @override
+  String get vipActiveDesc => 'Всички функции са неограничени.';
+
+  @override
+  String get choosePlan => 'Изберете абонамент:';
+
+  @override
+  String get restorePurchases => 'Възстановяване на покупки';
+
+  @override
+  String get purchasesRestored => 'Покупките са възстановени успешно!';
+
+  @override
+  String get noPurchasesFound => 'Няма намерени активни покупки.';
+
+  @override
+  String get monthlySubscription => 'Месечен абонамент';
+
+  @override
+  String get annualSubscription => 'Годишен абонамент';
+
+  @override
+  String get lifetimeAccess => 'Доживотен достъп';
+
+  @override
+  String get popularTag => 'ПОПУЛЯРНО';
+
+  @override
+  String get chooseButton => 'Избери';
+
+  @override
+  String get vipCongratulations => 'Поздравления, вие сте VIP!';
+
+  @override
+  String get purchaseFailed => 'Покупката не беше завършена.';
+
+  @override
+  String get profileTitle => 'Профил и Настройки';
+
+  @override
+  String get profileNotFound =>
+      'Профилът не е намерен или играчът не съществува.';
+
+  @override
+  String get tabStats => 'Статистика';
+
+  @override
+  String get tabBadges => 'Значки и Постижения';
+
+  @override
+  String get tabSettings => 'Настройки';
+
+  @override
+  String get gamesPlayed => 'Изиграни игри';
+
+  @override
+  String get gamesWon => 'Победи';
+
+  @override
+  String get winRate => 'Процент победи';
+
+  @override
+  String get soundEffects => 'Звукови ефекти';
+
+  @override
+  String get music => 'Музика';
+
+  @override
+  String get editUsername => 'Промяна на име';
+
+  @override
+  String get newUsernameHint => 'Ново име';
+
+  @override
+  String get logout => 'Изход';
+
+  @override
+  String get deleteAccount => 'Изтриване на акаунт';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Сигурни ли сте, че искате да изтриете акаунта си завинаги?';
+
+  @override
+  String get cancel => 'Отказ';
+
+  @override
+  String get confirm => 'Потвърди';
+
+  @override
+  String get save => 'Запази';
+
+  @override
+  String get modeLocal => 'Локално';
+
+  @override
+  String get modeMulti => 'Онлайн';
+
+  @override
+  String get modeMonde => 'Свят';
+
+  @override
+  String get searchGame => 'Търсене на игра...';
+
+  @override
+  String get filterAll => 'Всички игри';
+
+  @override
+  String get createLounge => 'Създай стая';
+
+  @override
+  String get joinLounge => 'Влез в стая';
+
+  @override
+  String get loungeCode => 'Код на стаята';
+
+  @override
+  String get publicLounges => 'Публични стаи';
+
+  @override
+  String get noLoungesAvailable => 'В момента няма налични публични стаи.';
+
+  @override
+  String get playersCount => 'Играчи';
+
+  @override
+  String get howToPlay => 'Как се играе?';
+
+  @override
+  String get copiedToClipboard => 'Копирано в клипборда!';
+
+  @override
+  String get connectionError => 'Грешка при свързване. Опитайте отново.';
+
+  @override
+  String get loading => 'Зареждане...';
+
+  @override
+  String get success => 'Успех!';
 
   @override
   String pasAssezDeSymbolesUniques1(
@@ -7181,5 +7980,61 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String aRelanceLesDes2(Object pName, Object val) {
     return '0 рестартират заровете (1/3). $pName $val';
+  }
+
+  @override
+  String jAiLanceUnePartie3(Object _selectedGame) {
+    return 'J\'ai lancé une partie de $_selectedGame !';
+  }
+
+  @override
+  String rolesJoueurs1(Object selectedRolesCount, Object playerslength) {
+    return 'Rôles ($selectedRolesCount) ≠ Joueurs ($playerslength).';
+  }
+
+  @override
+  String dessineCettePhrase1(Object stepToProcessconte) {
+    return 'Dessine cette phrase :\n\"$stepToProcessconte\"';
+  }
+
+  @override
+  String aEteBanniPourSa1(Object loserName, Object loserAnswer) {
+    return '$loserName a été banni pour sa proposition \'$loserAnswer\' !';
+  }
+
+  @override
+  String aTrouveLeMot2(Object winnerName, Object currentWord) {
+    return '$winnerName a trouvé le mot : \'$currentWord\' !';
+  }
+
+  @override
+  String personneNATrouveLe1(Object currentWord) {
+    return 'Personne n\'a trouvé le mot : \'$currentWord\'.';
+  }
+
+  @override
+  String aTrouveLeMot3(Object guesserName, Object currentWord) {
+    return '$guesserName a trouvé le mot : \'$currentWord\' !';
+  }
+
+  @override
+  String get revolution1 => '(Révolution !)';
+
+  @override
+  String tonMotEst2(Object _wordCivil) {
+    return 'Твоята дума е: $_wordCivil';
+  }
+
+  @override
+  String tonMotEst3(Object _wordUndercover) {
+    return 'Твоята дума е: $_wordUndercover';
+  }
+
+  @override
+  String get egalite1 => 'Равенство!';
+
+  @override
+  String jAiLanceUnePartie4(Object datagameTypeGribou) {
+    return 'J\'ai lancé une partie de $datagameTypeGribou !';
   }
 }

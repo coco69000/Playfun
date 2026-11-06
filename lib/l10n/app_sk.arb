@@ -7,7 +7,13 @@
   "joueursNonAssignes": "Nepriradení hráči ('{0}')",
   "annuler": "Zrušiť",
   "confirmerLesEquipes": "Potvrdiť tímy",
+  "jeuDeSoiree": "Párty hra",
+  "multijoueurEnLigne": "Hra pre viacerých hráčów (Online)",
+  "modeLocalHorsLigne": "Lokálny režim (Offline)",
+  "modeMultijoueur": "Režim pre viacerých hráčov",
   "entrezVotrePseudo": "Zadajte svoju prezývku",
+  "pseudo": "Prezývka",
+  "creerUnePartie": "Vytvoriť hru",
   "veuillezEntrerUnPseudo": "Zadajte prosím prezývku.",
   "rejoindreUnePartie": "Pripojiť sa k hre",
   "vousAvezAtteintVotreLimite": "Dosiahli ste denný limit 20 hier pre viacerých hráčov.",
@@ -48,6 +54,16 @@
   "elementsGeneresEtSauvegardes": "✨ '{0}' predmety generované a uložené!",
   "erreurIa": "Chyba AI: '{0}'",
   "packActifElements": "Aktívny balík: {p} ({p2} predmetov)",
+  "@packActifElements": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "p2": {
+        "type": "Object"
+      }
+    }
+  },
   "desactiverCePack": "Zakázať tento balíček",
   "modeDeJeu": "Herný režim",
   "normal": "Normálny",
@@ -254,7 +270,24 @@
   "vousAvezEteExcluDe": "Boli ste vyradení pre neaktivitu. Počítač hrá za vás (žiadne odmeny).",
   "s": "'{0}' s",
   "pts1": "{pName}: {pScore} bodov",
+  "@pts1": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "pScore": {
+        "type": "Object"
+      }
+    }
+  },
   "xp": "{pXp} XP",
+  "@xp": {
+    "placeholders": {
+      "pXp": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPlusDeCartes": "Nemá žiadne karty",
   "cartesRestantes": "'{zostávajúcich 0}' kariet",
   "jetonsMise": "Žetóny: '{$0,}' | Stávka: '{$1,}'",
@@ -302,13 +335,14 @@
   "aucuneCarteEnJeuJouez": "Žiadna karta v hre. Zahrajte, čo chcete!",
   "jouer": "Hra ('{0}')",
   "priseEnChaineVousDevez": "⚠️ Viacnásobné branie! Musíte pokračovať s blikajúcou figúrkou.",
+  "aSelectionneSonPionEt": "'{0}' si vybral pešiaka a myslí si...",
   "vousDevezSelectionnerLePion": "Musíte vybrať figúrku zvýraznenú na oranžovo.",
   "jeuNonImplemente": "Neimplementovaná hra: '{0}'",
   "tempsEcoule": "Čas vypršal!",
   "tourSuivant": "Ďalší ťah",
   "enAttenteDeLHote3": "Čaká sa na hostiteľa pre začatie ďalšieho ťahu...",
-  "equipeAPts": "Tím A: '{bodov}' bodov",
-  "equipeBPts": "B tím: '{bodov}' bodov",
+  "equipeAPts": "Tím A: '{pts}' bodov",
+  "equipeBPts": "B tím: '{pts}' bodov",
   "cEstAToiDe": "Ty si na rade hádať!",
   "passer1": "PRESKOČIŤ",
   "motsTrouves": "Nájdené slová: '{0}'",
@@ -319,7 +353,24 @@
   "voiciLesUvresCollectivesNees": "Tu sú kolektívne diela zrodené z vašej predstavivosti:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' pripravuje útok ('{1}') proti hráčovi!",
   "km": "{oppDist} km",
+  "@km": {
+    "placeholders": {
+      "oppDist": {
+        "type": "Object"
+      }
+    }
+  },
   "km1": "{myDistance} / {targetDist} km",
+  "@km1": {
+    "placeholders": {
+      "myDistance": {
+        "type": "Object"
+      },
+      "targetDist": {
+        "type": "Object"
+      }
+    }
+  },
   "aucuneBotte": "Žiadne bezpečnostné karty",
   "limite50": "LIMIT 50",
   "crevaison": "DEFEKT PNEUMATIKY",
@@ -335,7 +386,7 @@
   "distribuerLaSuite": "Rozdať ďalšie",
   "attenteDuDonneur": "Čakanie na rozdávajúceho...",
   "couche": "Položené",
-  "miseActuelle": "Aktuálna stávka: '{suma}'",
+  "miseActuelle": "Aktuálna stávka: '{amount}'",
   "enAttente": "Čakanie...",
   "seCoucher": "Zložiť",
   "checker": "Check",
@@ -350,6 +401,13 @@
   "uno": "UNO!",
   "contreUno": "Proti-UNO!",
   "erreur1": "Chyba: {p}",
+  "@erreur1": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezUneCouleur": "Vyberte farbu",
   "votezPourUnJoueur": "Hlasujte za hráča:",
   "derniereChanceMrWhite": "Posledná šanca Mr. White!",
@@ -435,6 +493,22 @@
   "jeValide": "Potvrdzujem to!",
   "classementFinal1": "Konečné poradie",
   "pt": "{p}. {eValueKey}: {eValueValue} b{p2}",
+  "@pt": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "eValueKey": {
+        "type": "Object"
+      },
+      "eValueValue": {
+        "type": "Object"
+      },
+      "p2": {
+        "type": "Object"
+      }
+    }
+  },
   "categorie": "Kategória",
   "viteUnMot": "Rýchlo! Jedno slovo!",
   "validerPasser": "POTVRDIŤ A PODAŤ",
@@ -442,6 +516,19 @@
   "boom": "BUM!",
   "scoresMoinsMieux": "Skóre (menej = lepšie)",
   "pt1": "{eKey}: {eValue} b{p}",
+  "@pt1": {
+    "placeholders": {
+      "eKey": {
+        "type": "Object"
+      },
+      "eValue": {
+        "type": "Object"
+      },
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "nouvelleManche": "Nové kolo",
   "infecter": "Infikovať",
   "devorer": "Zožrať",
@@ -451,36 +538,95 @@
   "coupDEtat": "Štátny prevrat",
   "ouvrirLesVotes": "Otvoriť hlasovanie",
   "cloturerLeVote": "Uzavrieť hlasovanie",
+  "k0S": "0 s",
   "tempsRestantS": "Zostávajúci čas: '{0}' s",
   "k6Consecutifs3": "6 za sebou: '{streak}'/3",
   "lancerLeDe": "HODIŤ KOCKOU",
-  "scorePoints": "Skóre: '{skóre}' body",
-  "dominosRestants": "Zvyšné domino: '{počítajú}'",
+  "scorePoints": "Skóre: '{skóre}' body '{score}'",
+  "dominosRestants": "Zvyšné domino: '{počítajú}' '{count}'",
   "impossibleDeJouerCeDomino": "Túto kocku sem nemožno priložiť.",
   "mancheTerminee": "Kolo skončilo! ",
   "dominos": "Domino",
   "extremites": "Konce: ",
-  "pioche2": "Remíza: '{Počítaj}'",
+  "pioche2": "Remíza: '{Počítaj}' '{count}'",
   "piocher": "Líznuť",
   "ficheDePts": "'{0}' rekord ('{1}' bodov)",
   "pts2": "{otherName} ({otherTotal} bodov)",
+  "@pts2": {
+    "placeholders": {
+      "otherName": {
+        "type": "Object"
+      },
+      "otherTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "clic": "KLIK",
-  "lancersRestants": "Zostávajúce hody: '{Count}'",
+  "lancersRestants": "Zostávajúce hody: '{count}'",
   "combinaison": "KOMBINÁCIA",
   "grilleDePts": "MRIEŽKA '{0}' ('{1}' bodov)",
   "pts3": "{p} ({myTotal} bodov)",
+  "@pts3": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "myTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "pts4": "{oppName} ({oppTotal} bodov)",
+  "@pts4": {
+    "placeholders": {
+      "oppName": {
+        "type": "Object"
+      },
+      "oppTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "pts5": "{oppCellScore} pacientov",
+  "@pts5": {
+    "placeholders": {
+      "oppCellScore": {
+        "type": "Object"
+      }
+    }
+  },
   "pts6": "{oppTotal} pacientov",
+  "@pts6": {
+    "placeholders": {
+      "oppTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "total": "CELKOVO",
   "pts7": "{myTotal} pacientov",
+  "@pts7": {
+    "placeholders": {
+      "myTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "carteAPrendre": "KARTA NA VZATIE",
-  "votreMain": "Tvoja ruka ('{počítaj}')",
+  "votreMain": "Tvoja ruka ('{počítaj}') '{count}'",
   "touchezUneCartePourLa": "Klepnite na kartu pre jej zahranie",
   "aucuneCombinaisonEtaleeSurLa": "Na stole zatiaľ nie sú žiadne kombinácie",
-  "etaler": "Spread ('{počet}')",
+  "etaler": "Spread ('{počet}') '{count}'",
   "defausserFin": "Zahodiť a ukončiť",
   "pts8": "{eValue} pacientov",
+  "@pts8": {
+    "placeholders": {
+      "eValue": {
+        "type": "Object"
+      }
+    }
+  },
   "placezDansVotreCoin": "Umiestnite do svojho rohu!",
   "retourner": "Prevrátiť",
   "validerLePlacement": "Potvrdiť umiestnenie",
@@ -699,6 +845,13 @@
   "validerLesEquipes": "Potvrdiť tímy",
   "placezLeTelephoneSurVotre": "PRILOŽTE SI TELEFÓN NA ČELO!",
   "s1": "⏱️ {secondsLeft} s",
+  "@s1": {
+    "placeholders": {
+      "secondsLeft": {
+        "type": "Object"
+      }
+    }
+  },
   "basTrouve": "Dole = Nájdené",
   "arreter": "Zastaviť",
   "hautPasser": "Hore = Pas",
@@ -706,7 +859,21 @@
   "pointsMarques": "+'{0}' bodov!",
   "touchezUnMotPourModifier": "Klepnutím na slovo upravíte výsledok v prípade chyby senzora:",
   "pts10": "{teamAScore} pacientov",
+  "@pts10": {
+    "placeholders": {
+      "teamAScore": {
+        "type": "Object"
+      }
+    }
+  },
   "pts11": "{teamBScore} pacientov",
+  "@pts11": {
+    "placeholders": {
+      "teamBScore": {
+        "type": "Object"
+      }
+    }
+  },
   "continuerLaPartie": "Pokračovať v hre",
   "mauvaisSymbole": "'{0}' : Zlý symbol!",
   "dobbleLocal": "Lokálne Dobble",
@@ -717,6 +884,16 @@
   "commencer2": "ŠTART",
   "piocheBut": "REMÍZA ('{0}') • GÓL : '{1}'",
   "pts12": "{player} ({score} bodov)",
+  "@pts12": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "partieTerminee2": "KONIEC HRY!",
   "victoireDe": "Víťazstvo '{0}' !",
   "cartes": "'{0}' kariet",
@@ -803,6 +980,13 @@
   "prets": "'{0}' / '{1}' pripravený",
   "scoresConservesDeLaSession": "ULOŽENÉ SKÓRE RELÁCIE:",
   "pts13": "{pScore} pacientov",
+  "@pts13": {
+    "placeholders": {
+      "pScore": {
+        "type": "Object"
+      }
+    }
+  },
   "adminLancerMaintenantAvecLes": "Admin: Spustiť teraz s pripravenými hráčmi",
   "leCompagnonDeVosMeilleures": "Spoločník vašich najlepších večerov",
   "desactivezLaRecherchePubliquePour": "Vypnite ''Verejné vyhľadávanie'', aby ste mohli hrať lokálne.",
@@ -817,11 +1001,12 @@
   "votreFlotteTirsEnnemisRecus": "Vaša flotila (Prijaté nepriateľské výstrely)",
   "elimine": "Vyradený",
   "tapisVide": "Prázdny stôl",
-  "reflechit": "'{meno si}' myslí...",
+  "ecrireAu": "Napíš '{0}'...",
+  "reflechit": "'{meno si}' myslí... '{name}'",
   "faceAFaceCoteA": "Súboj (vedľa seba)",
   "totalAdversaire": "CELKOVO SÚPER",
   "prendreLAtoutOuPasser": "VZIAŤ TRUMF ALEBO PASOVAŤ:",
-  "combinaisonsDe": "Kombinácie '{mena}'",
+  "combinaisonsDe": "Kombinácie '{name}'",
   "ilDevraDonnerLePremier": "Bude musieť dať prvú nápovedu",
   "cetteReponseADejaEte": "Táto odpoveď už zaznela!",
   "themePourLes25Mots": "Téma pre 25 slov",
@@ -830,51 +1015,299 @@
   "rulesTitle": "Pravidlá hry",
   "understoodButton": "Chápem",
   "skyjoRoundEnderNotice": "{name} odhalil všetky svoje karty ako prvý.",
+  "@skyjoRoundEnderNotice": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoRoundScoreNotice": "+{roundScore} toto kolo  •  Celkovo: {totalScore} b.",
+  "@skyjoRoundScoreNotice": {
+    "placeholders": {
+      "roundScore": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoReplaceWithDrawn": "Ťuknite na kartu pre NAHRADENIE kartou {card}.",
+  "@skyjoReplaceWithDrawn": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoTapHiddenToReveal": "Ťuknite na SKRYTÚ kartu pre jej ODHALENIE.",
   "skyjoChooseActionForDrawn": "Zvoľte akciu pre {card}:",
+  "@skyjoChooseActionForDrawn": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoReplaceWithDiscard": "Ťuknite na kartu pre NAHRADENIE z odkladacieho balíčka ({card}).",
+  "@skyjoReplaceWithDiscard": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoCardsRevealedCount": "{count} / 2 otočené karty",
+  "@skyjoCardsRevealedCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "ceTurnOfPlayer": "ŤAH HRÁČA {name}",
+  "@ceTurnOfPlayer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "ceStepOfTotal": "Krok {step} / {total}",
+  "@ceStepOfTotal": {
+    "placeholders": {
+      "step": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
   "ceVisibleSnippetOf": "Viditeľný úryvok od {name}:",
+  "@ceVisibleSnippetOf": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "cePlayerWriting": "{name} práve píše...",
+  "@cePlayerWriting": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "ceStoryNumber": "PRÍBEH #{index}",
+  "@ceStoryNumber": {
+    "placeholders": {
+      "index": {
+        "type": "Object"
+      }
+    }
+  },
   "mbTurnOf": "ŤAH HRÁČA {name}",
+  "@mbTurnOf": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "mbHandCount": "Ruka: {count} kariet",
+  "@mbHandCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "mbCardsInHand": "Karty v ruke ({count})",
+  "@mbCardsInHand": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "dobbleAllCardsFound": "Všetky karty boli nájdené!",
   "dobbleDealingCards": "Rozdávanie kariet...",
   "dobbleCenterCard": "STREDOVÁ KARTA",
+  "dobbleDeckCards": "DRAW ({count} kariet)",
+  "@dobbleDeckCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "dobbleTapSameSymbol": "Nájdite rovnaký symbol!",
   "dobbleMyCardsCount": "Moje Karty: {count}",
+  "@dobbleMyCardsCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "dobbleBlocked": "ZABLOKOVANÉ!",
   "dobbleTooManyErrors": "Príliš veľa rýchlych chýb.",
+  "dobblePenaltyWait": "Počkajte na trest!",
+  "dobbleWrongSymbolWarning": "Zlý symbol! Dávajte pozor na blokovanie.",
   "dobbleFoundSymbol": "{name} našiel symbol!",
+  "@dobbleFoundSymbol": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "dobbleSymbolWas": "Symbol bol:",
   "pokerPot": "Bank: {amount} \\$",
+  "@pokerPot": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "pokerRaiseAlert": "⚠️ {name} pripravuje navýšenie na {amount} \\$!",
+  "@pokerRaiseAlert": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      },
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "pokerCall": "Dorovnať ({amount})",
+  "@pokerCall": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "unoYouMustDraw": "Musíte si líznuť {count} kariet!",
+  "@unoYouMustDraw": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "unoMustDraw": "Musí si líznuť {count} kariet!",
+  "@unoMustDraw": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "unoDrawCountCards": "Líznuť {count} kariet",
+  "@unoDrawCountCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesMissionEnd": "Koniec misie!",
   "codenamesRedTeam": "Červený tím",
   "codenamesBlueTeam": "Modrý tím",
+  "codenamesSpectator": "Divák",
+  "codenamesMasterSpy": "Hlavný špión",
+  "codenamesAgent": "Agent",
   "codenamesTeamTurn": "Na rade je tím: {team}",
+  "@codenamesTeamTurn": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
+  "codenamesYouAre": "Ste: ",
   "codenamesMasterSpyView": "Pohľad Hlavného špióna (Kľúčová karta)",
   "codenamesClueLabel": "Vaša nápoveda (jedno slovo)",
   "codenamesWordCountLabel": "Počet slov",
   "codenamesGiveClue": "Dať nápovedu",
   "codenamesClueGiven": "Dali ste nápovedu: ''{clue} {count}''",
+  "@codenamesClueGiven": {
+    "placeholders": {
+      "clue": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesAgentView": "Pohľad Agenta",
   "codenamesClueFromSpy": "Nápoveda od {spy}:",
+  "@codenamesClueFromSpy": {
+    "placeholders": {
+      "spy": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesGuessesLeft": "Zostávajúce pokusy: {count}",
+  "@codenamesGuessesLeft": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesPassTurn": "Ukončiť ťah",
   "codenamesWaitingForClue": "Čakanie na nápovedu {team} Hlavného špióna...",
+  "@codenamesWaitingForClue": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamAScore": "Tím A: {score}",
+  "@timesUpTeamAScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamBScore": "Tím B: {score}",
+  "@timesUpTeamBScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpYouAreInTeam": "Ste v {team}",
+  "@timesUpYouAreInTeam": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpRoundMode": "Kolo {round}: {mode}",
+  "@timesUpRoundMode": {
+    "placeholders": {
+      "round": {
+        "type": "Object"
+      },
+      "mode": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpYourTurnToMakeGuess": "Je TVOJ rad dávať nápovedy!",
   "timesUpRoundEnd": "KONIEC KOLA!",
   "timesUpFound": "Uhádnuté!",
@@ -883,36 +1316,144 @@
   "timesUpSomeone": "Niekto",
   "timesUpSeconds": "sekúnd",
   "timesUpCardsLeft": "Zostávajúce karty: {count}",
+  "@timesUpCardsLeft": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpForceNextPlayer": "Vynútiť ďalšieho hráča (Hostiteľ)",
   "timesUpGameOverReason": "Koniec 3 kôl! Tím A: {scoreA} b | Tím B: {scoreB} b",
+  "@timesUpGameOverReason": {
+    "placeholders": {
+      "scoreA": {
+        "type": "Object"
+      },
+      "scoreB": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamA": "Tím A",
   "timesUpTeamB": "Tím B",
   "timesUpDraw": "Remíza",
   "timesUpWaitingForWords": "Čaká sa, kým všetci hráči odošlú svoje slová...",
   "timesUpAddWordsCount": "Pridajte {count} slov alebo výrazov",
+  "@timesUpAddWordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpWordsSubtitle": "(ľudia, predmety, filmy, miesta...)",
   "timesUpWordInputLabel": "Slovo na uhádnutie ({current}/{target})",
+  "@timesUpWordInputLabel": {
+    "placeholders": {
+      "current": {
+        "type": "Object"
+      },
+      "target": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpAddWordTooltip": "Pridať toto slovo",
   "timesUpYourWords": "Vaše slová:",
   "timesUpSubmitWords": "Odoslať mojich {count} slov",
+  "@timesUpSubmitWords": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpModeFree": "Voľný opis",
   "timesUpModeOneWord": "Iba jedno slovo",
   "timesUpModeMime": "Pantomíma",
   "dtGuessedWords": "{name} uhádol {count} slov!",
+  "@dtGuessedWords": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "dtMakeGuessWordTo": "Pomôžte hráčovi {name} uhádnuť toto slovo:",
+  "@dtMakeGuessWordTo": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "undercoverEliminatePlayer": "Vyradiť hráča {name}",
+  "@undercoverEliminatePlayer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "undercoverVoteCount": "{count} hlas(ov)",
+  "@undercoverVoteCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "petitBacRound": "Kolo {round}",
+  "@petitBacRound": {
+    "placeholders": {
+      "round": {
+        "type": "Object"
+      }
+    }
+  },
   "petitBacChooseCategories": "Vyberte kategórie:",
   "petitBacAddCategory": "Pridať kategóriu",
+  "petitBacMinOneCategory": "Potrebujete aspoň jednu kategóriu!",
   "petitBacValidateCategories": "Potvrdiť kategórie",
   "petitBacLetter": "Písmeno: {letter}",
+  "@petitBacLetter": {
+    "placeholders": {
+      "letter": {
+        "type": "Object"
+      }
+    }
+  },
+  "petitBacWaitingForBell": "Plachta vrátená! Čakáme na zvonček...",
   "petitBacIFinished": "Končím! (Stop)",
   "petitBacCorrection": "OPRAVA",
+  "petitBacGameOverReason": "Malý Bac koniec hry!",
   "presidentGivesTo": "{from} dáva hráčovi {to}:",
+  "@presidentGivesTo": {
+    "placeholders": {
+      "from": {
+        "type": "Object"
+      },
+      "to": {
+        "type": "Object"
+      }
+    }
+  },
   "presidentPlayCards": "HRAŤ ({count})",
+  "@presidentPlayCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "actionPendingMsg": "Vaša akcia sa zaznamenáva...",
+  "monAnimalPrefere": "Moje obľúbené zviera",
   "unJoueurEstDesigneComme": "Hráč je označený ako ''cieľ''. Ostatní hráči anonymne odpovedajú na otázku o ňom. Cieľ si vyberie svoju preferovanú odpoveď a autor tejto odpovede získa jeden bod.",
+  "uneSituationEstPresenteeTous": ": \r\n        \"Situácia je predstavená. Všetci hráči hlasujú za osobu, ktorá je najpravdepodobnejšia na vykonanie danej veci. Hráč, ktorý získa najviac hlasov, získava jeden bod (pochybná pocta!).\"    ",
   "modeClassiqueUneQuestionEst": "Klasický režim: Položí sa otázka. Jeden hráč je tajne označený za \"klamára\" a musí vymyslieť odpoveď. Ostatní hovoria pravdu. Hlasujte za odhalenie klamára. \\n\\nZjednodušený režim: Každý povie anekdotu (pravdivú alebo nepravdivú) ako odpoveď na tému a potom tajne vyhlási svoju pravdivosť. Potom každý hlasuje za ''Pravdu'' alebo ''Lož'' pre každý príbeh. Body získavate za správne hádanie a klamanie ostatných.",
   "laPlupartDesJoueursCivils": "Väčšina hráčov (civilistov) dostane slovo. \"Infiltrátor\" dostane podobné slovo. A \"pán Biely\" nedostane ŽIADNE slovo. Každý hráč dostane slovo s nápovedou do **30 sekúnd**. Cieľom je odhaliť podvodníkov hlasovaním. Ak je civilista vyradený, vyhrávajú podvodníci.",
   "unMotEstAfficheChaque": "Zobrazí sa slovo. Každý hráč musí tajne predložiť synonymum. Všetky odpovede sú odhalené a potom hráči hlasujú za \"ban\" najmenej relevantnej ponuky. Vylúčený hráč prehráva kolo.",
@@ -944,6 +1485,7 @@
   "sonObjectifEstDeVaincre8": "Jeho cieľom je poraziť vlkolakov. Pokým je Lovec nažive, je chránený pred útokmi vlkolakov. Keď Vlci zaútočia na Červenú čiapočku, kým je Lovec nažive, ich hlas neznamená smrť. Ak Lovec zomrie, Červená čiapočka sa stane podobnou Jednoduchému dedinčanovi. ",
   "sonObjectifEstDeVaincre9": "Jeho cieľom je poraziť vlkolakov. Každú noc má pyromancer na výber, či uskladní grécky ohnivý sud u hráča doma, alebo odpáli jeho výbuch. Môže zabíjať členov svojej vlastnej strany, takže musí konať strategicky. Počet sudov nie je obmedzený, ale ak pyromancer zomrie bez vyvolania výbuchu, hráči zostávajú nažive. Buďte opatrní, na rozdiel od čarodejnice musí byť pyromancer ráno nažive, aby sa výbuch spustil.",
   "sonObjectifEstDeVaincre10": "Jeho cieľom je poraziť vlkolakov, kým nezíska novú rolu. Prvú noc určí testátora, ktorý mu po smrti odkáže jeho úlohu. Dedič získava späť len sily, ktoré jeho testátor nespotreboval (čarodejnícky elixír, diktátorovo uchopenie moci atď.), okrem lovca a hrobára. Infekciu (Čierny vlk) ani kontamináciu (chorý potkan) nezíska od svojho testátora. Infekciu alebo kontamináciu, ktorú mal, si ponechá na základni. Ak zdedí schopnosti vlkolaka, ostatní vlci sú informovaní, že sa pridáva k svorke. Ak zdedí schopnosti diktátora, ktorý zomrie v noci jeho prevratu, bude na dedičovi, aby prevzal následky a vykonal prevrat hneď, ako sa prebudí.",
+  "touche": "Pristátie",
   "unVillageoisSansPouvoirSpecial": "Dedinčan bez zvláštnych schopností.",
   "devoreUnVillageoisLaNuit": "V noci zožerie dedinčana.",
   "decouvreUnRoleParNuit": "Odhalí jednu rolu za noc.",
@@ -968,49 +1510,219 @@
   "heritier": "Dedič",
   "heriteDuRoleDeSon": "Po smrti poručiteľa zdedí jeho rolu.",
   "themeIa": "Téma AI",
+  "caseLabel": ": \r\n      box ",
   "generalEtVarie": "Všeobecné a rôznorodé",
+  "unDinosaureQuiMangeUne": "Dinosaurus žerie zmrzlinu",
+  "pouvoirVolerOuEtreInvisible": "Byť schopný lietať alebo byť neviditeľný",
+  "returnGenereDesSituationsCourtes": ": \r\n        return \"Generuje krátke situácie začínajúce akciou. Téma: {finalPrompt}\"; \r\n      box ",
+  "@returnGenereDesSituationsCourtes": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "abandonTousLesJoueursDeconnectes": "Kapitulácia (všetci hráči odpojení)",
   "tousLesJoueursSeSont": "Všetci hráči sa odpojili",
   "nAPasJoueA": "⏱️ {playerName} nehral včas. Počítač hral za neho ({actionDetails}).",
+  "@nAPasJoueA": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "actionDetails": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA1": "⏱️ {playerName} nehral včas. Počítač zahral za neho náhodne.",
+  "@nAPasJoueA1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "joueur": "Hráč",
   "tempsEcoule1": "(Čas uplynul)",
   "tempsEcoule2": "Uplynutý čas",
   "aToucheUneCibleIl": "🎯 {shooterDataname} zasiahol(a) cieľ! Hrá znovu.",
+  "@aToucheUneCibleIl": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "aTireDansLEau": "🌊 {shooterDataname} vystrelil(a) do vody. Na rade je {opponentDataname}.",
+  "@aTireDansLEau": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      },
+      "opponentDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "unJoueur": "Hráč",
   "inactif3ToursSansReponse": "neaktívny (3 ťahy bez odpovede)",
   "leJugeNAPas": "Rozhodca neurčil víťaza včas. Body neboli udelené.",
   "aLanceLesDes": "{pName} hodil(a) kockkami!",
+  "@aLanceLesDes": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aRelanceLesDes3": "'{'pName'}' hodil kockou znova ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "{pName} si nechal(a) kocku s hodnotou {dieVal} (kocka #{index1}) 🔒",
+  "@aGardeLeDeDe": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "dieVal": {
+        "type": "Object"
+      },
+      "index1": {
+        "type": "Object"
+      }
+    }
+  },
   "aDebloqueLeDe": "{pName} odomkol(a) kocku #{index1}",
+  "@aDebloqueLeDe": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "index1": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagne": "{playerName} vyhral(a)!",
+  "@aGagne": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneAvecLeScoreLe": "{playersgameWinnerIdnameJoueur} vyhrať s najnižším skóre!",
+  "@gagneAvecLeScoreLe": {
+    "placeholders": {
+      "playersgameWinnerIdnameJoueur": {
+        "type": "Object"
+      }
+    }
+  },
   "leRatMaladeEstLe": "Chorý potkan je jediným preživším! Všetkých otrávil!",
   "tousLesAutresSurvivantsSont": "Všetci ostatní preživší sú nakazení Chorým potkanom. Vyhral!",
   "leRoleDeEst": "Rola hráča {targetName} je: {targetRole}.",
+  "@leRoleDeEst": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leDictateur": "Diktátor",
   "vousEtesAmoureuxDe": "Si zaľúbený/á do hráča {lover2Name}!",
+  "@vousEtesAmoureuxDe": {
+    "placeholders": {
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "vousEtesAmoureuxDe1": "Si zaľúbený/á do hráča {lover1Name}!",
+  "@vousEtesAmoureuxDe1": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      }
+    }
+  },
   "pioche3": "Krumpáč",
+  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    '''}''' ešte '''{''' \r\n      Bezpečnosť proti duplikátom: ak",
   "vousNAvezPasDe": "Nemáš slová",
   "equipe12": "Tím 1",
   "equipe21": "Tím 2",
   "finDesManchesVictoireDe": "Koniec kôl! Víťazstvo hráča {winnerName}!",
+  "@finDesManchesVictoireDe": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "scoreCibleAtteint": "Cieľové skóre dosiahnuté!",
   "laPartie2v2Commence": "Hra 2v2 sa začína!",
   "laPartieCommence1": "Hra sa začína!",
   "aGardeLeZombie": "{playersloserIdnameUnjoueur} si nechal zombíka!",
+  "@aGardeLeZombie": {
+    "placeholders": {
+      "playersloserIdnameUnjoueur": {
+        "type": "Object"
+      }
+    }
+  },
   "chaqueJoueurADevineUne": "Každý hráč hádal raz!",
   "toutLeMondeEstPasse": "Všetci pasovali!",
   "verite1": "PRAVDA",
   "aLePlusDXp": "{playerswinnerIdnameJoueur} má najviac XP ({maxXp} XP) a stáva sa adminom!",
+  "@aLePlusDXp": {
+    "placeholders": {
+      "playerswinnerIdnameJoueur": {
+        "type": "Object"
+      },
+      "maxXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  Koniec obalu (admin tlačidlo)\r\n  Future<void> aoVEndRound (String gameCode, String playerId) async '''{''' \r\n    await _db.runTransaction((transaction) async'''{''' \r\n      final gameRef = _db.collection(''games'').doc(gameCode); \r\n      final snap = čakať na transaction.get(gameRef); \r\n      ak (!snap.exists) return; \r\n\r\n      final gameData = snap.data() ako Map<String, dynamic>; \r\n      final players = Map<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Určte víťaza (viac XP)\r\n      String winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        konečné xp = (pData[''xp''] ako číslo?)?. toInt() ?? 0; \r\n        ak (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Niekto",
   "aAtteintPointsEtRemporte": "{winnerName} dosiahol {targetScore} bodov a vyhral zápas!",
+  "@aAtteintPointsEtRemporte": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "motManquant": "Chýbajúce slovo",
   "erreurLeNombreDeRoles": "Chyba: Počet rolí ({length}) nezodpovedá počtu hráčov ({playerCount}).",
+  "@erreurLeNombreDeRoles": {
+    "placeholders": {
+      "length": {
+        "type": "Object"
+      },
+      "playerCount": {
+        "type": "Object"
+      }
+    }
+  },
   "toutesLesManchesDeTime": "Všetky kolá Time''s Up skončili!",
   "gagneAvecPoints": "{playerswinnerIdnameUnjoueur} vyhráva s {maxScore} bodmi!",
+  "@gagneAvecPoints": {
+    "placeholders": {
+      "playerswinnerIdnameUnjoueur": {
+        "type": "Object"
+      },
+      "maxScore": {
+        "type": "Object"
+      }
+    }
+  },
   "finDeLaPartie": "Koniec hry!",
   "leDessinateurNAPas": "Kresliar neodoslal kresbu včas.",
   "leTempsEstEcoulePersonne": "Čas vypršal! Nikto slovo nenašiel.",
@@ -1018,15 +1730,54 @@
   "motNonDevine": "Slovo neuhádnuté.",
   "les13CartesOntEte": "Všetkých 13 kariet bolo zahraných!",
   "laBombeAExploseDans": "Bomba vybuchla v rukách hráča {loserName}!",
+  "@laBombeAExploseDans": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "leJoueur": "Hráč",
+  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Zoznam<String> otázky =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[obtiažnosť] ?? \r\n          GameWords.ktoJeNajpravdepodobnejšie[",
   "honnete": "Úprimne",
+  "pairSplit": ") ? pair.split(",
+  "pairPairListStringShuffledroles": "): [párne, párne]; \r\n\r\n        List<String> shuffledRoles = Zoznam.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Otázka =\r\n            \"Opíš svoje tajné slovo jedným slovom. Podvodníci, blaf!\"; \r\n        pre (var pId v players.keys) '''{''' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} dosiahol {updatedScoresoverallWinnerId} bodov a vyhral zápas!",
+  "@aAtteintPointsEtGagne": {
+    "placeholders": {
+      "playersoverallWinnerIdname": {
+        "type": "Object"
+      },
+      "updatedScoresoverallWinnerId": {
+        "type": "Object"
+      }
+    }
+  },
   "poseDeCarte": "vyloženie karty",
   "enchereAutomatique": "automatické prihodenie",
   "passeLEnchere": "pasuje prihadzovanie",
+  "elseIfGametype": ") '''{''' \r\n        ak (voterId == votedForId) '''{''' \r\n          vyhodiť výnimku (\"Formálny zákaz hlasovať sám za seba!\"); \r\n        '''}''''}''' inak, ak (gameType ==\r\n      ",
+  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          transakcia, \r\n          gameRef, \r\n          gameData, \r\n          volič, \r\n          5, \r\n          applySpeedBonus: pravda, \r\n        ); \r\n      }' \r\n\r\n      int requiredVotes = hráči.dĺžka; \r\n\r\n      ak (gameType == ",
+  "forFinalTargetInVotes": ") '''{''' \r\n          konečná Mapa<Reťazec, int> hlasovaniePočty = '{}'; \r\n          pre (konečný cieľ v votes.values) '{' \r\n            voteCounts[target ako reťazec] = (voteCounts[target] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxHlasov = 0; \r\n          Zoznam<String> topVote = []; \r\n          voteCounts.forEach((target, count) '''{''' \r\n            ak (count > maxVotes) '{' \r\n              maxVotes = sčítanie; \r\n              topVoted = [cieľ]; \r\n            '}' inak, ak (count == maxHlasov) '{' \r\n              topVoted.add(target); \r\n            '}''''}'''); \r\n\r\n          Aktualizácie[\r\n          ",
+  "forFinalTargetInVotes1": ") '''{''' \r\n        konečná Mapa<Reťazec, int> hlasovaniePočty = '{}'; \r\n        pre (konečný cieľ v votes.values) '{' \r\n          voteCounts[target ako reťazec] = (voteCounts[target] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxHlasov = 0; \r\n        Zoznam<String> topVote = []; \r\n        voteCounts.forEach((target, count) '''{''' \r\n          ak (count > maxVotes) '{' \r\n            maxVotes = sčítanie; \r\n            topVoted = [cieľ]; \r\n          '}' inak, ak (count == maxHlasov) '{' \r\n            topVoted.add(target); \r\n          '}''''}'''); \r\n\r\n        ak (topVoted.length == 1) '''{''' \r\n          konečný víťaz = topVoted.first; \r\n          Aktualizácie[\r\n        ",
   "aRemporteTousLesJetons": "{winnerName} vyhral všetky žetóny na stole!",
+  "@aRemporteTousLesJetons": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "uneMain": "Jedna ruka",
   "carte1": "karta {cardToPlay}",
+  "@carte1": {
+    "placeholders": {
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "quipourraitvotemode": "? _quiPourraitVoteMode\r\n                      : ",
   "localIndisponibleVideoAudioActif": "Lokálna hra nedostupná (video/zvuk aktívne)",
   "jouerEnLocalSurCet": "Hrať lokálne (Na tomto zariadení)",
   "laVideoEstObligatoirePour": "Pre online hru Hádaj, kto som je potrebné video.",
@@ -1048,9 +1799,26 @@
   "generationEnCours": "Generovanie...",
   "completerAvecLIa15": "Doplniť pomocou AI (+15 slov)",
   "completeCetteListeSurLe": "Doplňte tento zoznam na tému {text}. Existujúce slová: {join}",
+  "@completeCetteListeSurLe": {
+    "placeholders": {
+      "text": {
+        "type": "Object"
+      },
+      "join": {
+        "type": "Object"
+      }
+    }
+  },
   "exMythologieGrecqueObjetsInsolites": "napr.: Grécka mytológia, neobvyklé predmety, piráti...",
   "exPasDAnimauxDangereux": "napr.: Žiadne nebezpečné zvieratá, iba kultové filmy...",
   "genererAvecLIaElements": "Generujte pomocou AI ({currentCount} prvkov)",
+  "@genererAvecLIaElements": {
+    "placeholders": {
+      "currentCount": {
+        "type": "Object"
+      }
+    }
+  },
   "themePersonnalise": "Vlastná téma",
   "cameraIndispensablePourCeJeu": "Kamera je pre túto hru nevyhnutná.",
   "microCameraDesactiveLeMode": "Mikrofón + Kamera (Vypína lokálny režim)",
@@ -1079,6 +1847,16 @@
   "coupAutomatiqueJouePourCause": "Automatický ťah sa odohral kvôli nečinnosti.",
   "inactivite": "Nečinnosť",
   "str8f522b": "{cat}: {hasScorescoreVal}",
+  "@str8f522b": {
+    "placeholders": {
+      "cat": {
+        "type": "Object"
+      },
+      "hasScorescoreVal": {
+        "type": "Object"
+      }
+    }
+  },
   "zeroPointe": "Skyjo (Nula bodov)",
   "partieTermineeAvecLeScore": "Koniec hry s najnižším skóre!",
   "cEstVotreTour": "Si na ťahu!",
@@ -1100,6 +1878,13 @@
   "enAttenteDeLaPioche": "Čakanie na líznutie...",
   "laPartieDeBigTwo": "Hra Veľká dvojka sa skončila!",
   "auTourDe2": "Na rade je {resolvePlayerNamecurrentPlayerId}",
+  "@auTourDe2": {
+    "placeholders": {
+      "resolvePlayerNamecurrentPlayerId": {
+        "type": "Object"
+      }
+    }
+  },
   "laPartieEstTerminee": "Hra sa skončila!",
   "plusAucunCoupPossiblePour": "Súper už nemá žiadne možné ťahy!",
   "cEstVotreTour1": "Si na rade ty! ('{0}')",
@@ -1112,7 +1897,21 @@
   "surrealismeClassique": "Klasický surrealizmus",
   "suiteDe3Mots": "Nadväznosť 3 slov",
   "strb74c15": "\" {fullText} \"",
+  "@strb74c15": {
+    "placeholders": {
+      "fullText": {
+        "type": "Object"
+      }
+    }
+  },
   "str1e0607": "{authorName} : ",
+  "@str1e0607": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
   "objectif1000BornesAtteint": "Cieľ 1000 km dosiahnutý!",
   "aVousDeRouler": "STE NA RADE ŠOFÉROVAŤ!",
   "arrete": "ZASTAVENÉ",
@@ -1133,8 +1932,36 @@
   "derniereCartePosee": "Posledná zahraná karta!",
   "cEstTonTour": "Si NA RADE!",
   "str422faa": "{valuename}: {valuescore0} 🃏",
+  "@str422faa": {
+    "placeholders": {
+      "valuename": {
+        "type": "Object"
+      },
+      "valuescore0": {
+        "type": "Object"
+      }
+    }
+  },
+  "printEtatDeIsactionpendingAu": " ---\", \r\n    ); \r\n    tlač (\"Počiatočný _isActionPending stav: {_isActionPending}\"); \r\n\r\n    koneční hráči = (gameData[",
+  "@printEtatDeIsactionpendingAu": {
+    "placeholders": {
+      "_isActionPending": {
+        "type": "Object"
+      }
+    }
+  },
   "erreurQuestionNonTrouvee": "Chyba: Otázka sa nenašla.",
   "str95d36e": "{valuename}: {key0}",
+  "@str95d36e": {
+    "placeholders": {
+      "valuename": {
+        "type": "Object"
+      },
+      "key0": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezLaMeilleureReponse": "Vyberte najlepšiu odpoveď!",
   "leJugeChoisit": "Sudca vyberá...",
   "votez": "Hlasujte!",
@@ -1156,8 +1983,26 @@
   "leChallenger": "Vyzývateľ",
   "stre93cb0": "'{0}' : '{1}'",
   "uneDescriptionHilarante": "neuveriteľne vtipný popis",
+  "extrainfoColumnChildrenText": "; \r\n          extraInfo = Stĺpec( \r\n            Deti: [ \r\n              Text( \r\n                ''",
   "unProblemeEstSurvenu": "Nastal problém.",
+  "defaultFinalRoundwinneridGamedata": ": \r\n      Predvolené: \r\n        finálne koloWinnerId = gameData[",
   "str98e212": "{pName}: {count}/{length}{isFull}",
+  "@str98e212": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      },
+      "length": {
+        "type": "Object"
+      },
+      "isFull": {
+        "type": "Object"
+      }
+    }
+  },
   "aVousDeJouer": "Ste na rade!",
   "trieParCouleur": "Zotriedené podľa farby",
   "trierLaMain": "Zotriediť karty",
@@ -1166,9 +2011,49 @@
   "touchezPourPoser": "Ťuknutím položte",
   "encherissezOuPassez": "Stavte alebo pasujte",
   "str4c885c": "{motdessiner}: {p}",
+  "@str4c885c": {
+    "placeholders": {
+      "motdessiner": {
+        "type": "Object"
+      },
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "voirLeScoreFinal": "Zobraziť konečné skóre",
   "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "@str6bd6b6": {
+    "placeholders": {
+      "carte": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "score": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
+  "styleConstTextstyleColorColors": ", \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox (výška: 20), \r\n                Wrap( \r\n                  zarovnanie: WrapAlignment.center, \r\n                  Deti: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox (výška: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Text( \r\n                    AppLocalizations.of(context)!. všetky stopyBoli, \r\n                    style: const TextStyle(color: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' ešte '''{''' \r\n          Je na veštcovi, aby hral\r\n          return Column( \r\n            Deti: [ \r\n              Text(                ",
   "strf0868c": "{length0}: {valuescore0}",
+  "@strf0868c": {
+    "placeholders": {
+      "length0": {
+        "type": "Object"
+      },
+      "valuescore0": {
+        "type": "Object"
+      }
+    }
+  },
   "cEstAToi": "SI NA RADE!",
   "laPatateAExplose": "Zemiak vybuchol!",
   "finDeLaPartie1": "Koniec hry",
@@ -1177,19 +2062,41 @@
   "designez2Amoureux": "Vyberte 2 zamilovaných",
   "amoureuxUnis": "Zamilovaní spojení!",
   "laVictime": "Obeť",
+  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Riadok( \r\n              mainAxisSize: MainAxisSize.min, \r\n              Deti: [ \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. infect, \r\n                  Ikona: Icons.auto_fix_high, \r\n                  farba: Farby.fialovýAkcent, \r\n                  onPressed: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      kontext, \r\n                      Počúvaj: nepravda, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      Pravda, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox (šírka: 8), \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. pohltiť, \r\n                  ikona: Icons.close, \r\n                  farba: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        nepravda, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          kombi; \r\n        Box ''loup_blanc_turn'': \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Včera v noci žiadne obete (chránené ani ušetrené)",
+  "styleTextstyleFontweightFontweightBold": ", \r\n                              štýl: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Farba: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == ''vlk'' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(text: správa), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Kompaktná vysielacia tyč\r\n          ak (canSendMessage)\r\n            Row( \r\n              Deti: [ \r\n                Rozšírené( \r\n                  dieťa: SizedBox( \r\n                    Výška: 32, \r\n                    dieťa: TextField( \r\n                      RIADIACI: _chatController, \r\n                      style: const TextStyle(fontSize: 12, farba: Colors.white), \r\n                      dekorácia: InputDecoration( \r\n                        nápovedaText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          farba: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        border: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        Naplnené: pravda, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          horizontálne: 10, \r\n                          vertikálne: 0, \r\n                        ), \r\n                      ), \r\n                      Odoslané: (text) '''{''' \r\n                        ak (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (šírka: 4), \r\n                IconButton( \r\n                  ikona: const Icon( \r\n                    Icons.send_rounded, \r\n                    Veľkosť: 18, \r\n                    farba: Colors.cyanAccent, \r\n                  ), \r\n                  vypĺňanie: EdgeInsets.zero, \r\n                  constraints: const BoxConstraints(), \r\n                  naPressed: () '''{''' \r\n                    ak (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(String label, String type, Color activeColor) '{' \r\n    konečný bool isSelected = _selectedChatType == typ; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      dieťa: Kontajner( \r\n        výplň: const EdgeInsets.symmetric (horizontálne: 8, vertikálne: 3), \r\n        dekorácia: BoxDecoration( \r\n          Farba: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Farba: \r\n                isSelected? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        dieťa: Text( \r\n          vydavateľstvo, \r\n          štýl: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- AKTUALIZOVAL AVATAR, ABY BOL INTERAKTÍVNY--- \r\n\r\n  Widget _buildSyncTimer(Časová značka? ŠtartTime, int trvanieInSeconds) '''{''' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder umožňuje super plynulý vizuálny časovač bez blokovania časovača a manuálneho setState, čo výrazne odľahčuje vlákno (bod 4)\r\n    final endTime = startTime.toDate().add( \r\n      Trvanie (sekundy: trvanieInSeconds), \r\n    ); \r\n    final remaining = endTime.difference(DateTime.now()); \r\n\r\n    ak (remaining.isNegative)\r\n      vrátiť Text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        štýl: Theme.of( \r\n          kontext, \r\n        ).textTheme.headlineSmall?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      trvanie: zostávajúce, \r\n      Tínedžer: Tínedžer (začiatok: zostávajúci, koniec: Dĺžka.nula), \r\n      builder: (BuildContext kontext, hodnota trvania, widget? potomok) '{' \r\n        posledné sekundy = hodnota.vSekundy; \r\n        vrátiť Text( \r\n          AppLocalizations.of(context)!. timeRemaining, \r\n          štýl: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            farba: sekundy < 20? Farby.redAccent : Farby.amberAccent, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext kontext, \r\n    Map<String, dynamic> gameData, \r\n    String playerId, \r\n  ) '''{''' \r\n    final players = Map<String, dynamic>.from(gameData[''players''] ?? '{}'); \r\n    final playerOrder = List<String>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    konečné pozície = Map<String, dynamické>.from( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    konečný reťazec currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    posledný bool isMyTurn = currentPlayerId == playerId; \r\n    konečná int kocka = (gameData[''littleHorsesDice''] ako číslo?)?. toInt() ?? 0; \r\n    final bool hasRoll = gameData[''littleHorsesHasRolled''] ?? nepravda; \r\n    posledný bool isTeamMode = gameData[''smallTeamHorses''] ?? nepravda; \r\n    final Map<String, dynamic> consequenceSixes = Map<String, dynamic>.from( \r\n      gameData[''smallHorsesConsequenceSixes''] ?? '{}', \r\n    ); \r\n    final int mySixStreak = po sebe idúceSixes[playerId] ?? 0; \r\n\r\n    Neon Modern Palette / Arcade na tmavom pozadí\r\n    konečný zoznam<Farba> hráčFarby = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neónovo nebesky modrá\r\n      const Color(0xFF10B981), // Emerald Green\r\n      const Color(0xFFF59E0B), // Golden Amber\r\n    ]; \r\n\r\n    --- VÍŤAZNÁ OBRAZOVKA--- \r\n    ak (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      return UniversalGameEndScreen( \r\n        Názov hry:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Dosiahnutie stredu hracej dosky!",
   "deplacezUnCheval": "POHNITE KONÍKOM!",
   "aVousDeLancer": "STE NA RADE HÁDZAŤ!",
   "mode2v2Allies": "Režim spojencov 2v2",
-  "chevalSelectionneNtouchezPourAvancer": "Kôň '{pešiak}' vybraný!\\nŤukni na postup vpred",
+  "chevalSelectionneNtouchezPourAvancer": "Kôň '{pešiak}' vybraný!\\nŤukni na postup vpred '{pawn}'",
   "touchezUnPion": "Klepnite na figúrku",
   "scoreLimiteAtteint": "Dosiahnuté cieľové skóre!",
   "toutesLesGrillesSontCompletees": "Všetky tabuľky sú vyplnené!",
   "cEstVotreTourTouchez": "Si na ťahu! Ťuknutím na kocku ju zafixuješ (zlatá 🔒)",
   "lancerLesDes": "Hodiť kockami",
   "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "@k1663": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "oppBonus035": {
+        "type": "Object"
+      }
+    }
+  },
   "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "@k16631": {
+    "placeholders": {
+      "myUpper": {
+        "type": "Object"
+      },
+      "myBonus035": {
+        "type": "Object"
+      }
+    }
+  },
   "scoreFinal": "Konečné skóre: '{scoreA}' - '{scoreB}'",
   "encheresEnCours": "PREBIEHA DRAŽBA",
   "aVousDOuvrirLe": "STE NA RADE OTVORIŤ ZDVIH!",
@@ -1200,9 +2107,17 @@
   "plusAucunCoupPossible": "Žiadne ďalšie ťahy nie sú možné!",
   "lancer1": "Hoď '{0}'",
   "choisirUnJeu": "Vybrať hru",
+  "screenWhoismostlikelylocalscreenPlayersPlayersBreak": ": \r\n        screen = KtoJeNejpravdepodobnejšíMiestnyScreen(hráči: _players); \r\n        kombi; \r\n      box ",
   "generation": "Generovanie...",
   "genererLesDefisParIa": "Generovať úlohy cez AI",
   "genereUnMelangeDActions": "Vytvára zmes zábavnej pravdy a odvahy. Téma: {trim}",
+  "@genereUnMelangeDActions": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
   "genererLesDilemmesParIa": "Generovať dilemy pomocou AI",
   "egalite": "Remíza",
   "choixEnregistre": "Voľba uložená!",
@@ -1212,11 +2127,27 @@
   "lancerLeDilemme": "Roztočiť dilemu",
   "genererLesQuestionsIa": "Generovať otázky cez AI",
   "genereDesQuestionsIndiscretesEt": "Generuje nediskrétne a zábavné otázky. Téma: {trim}",
+  "@genereDesQuestionsIndiscretesEt": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
   "perduReveleLaQuestionEt": "PREHRAL(A) SI! Odhaľ otázku a odpovedz!",
   "gagneTonSecretEstPreserve": "VÝHRA! Tvoje tajomstvo je v bezpečí.",
+  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    '''}''' ešte '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"'{'trim'}' (variant)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    pre (VAR hráč v _activePlayers) '''{''' \r\n      ak (hráč == v utajení) '''{''' \r\n        _playerRoles[hráč] = \"Infiltrátor\"; \r\n      '''}''' inak, ak (hráč == _mrWhitePlayer) '''{''' \r\n        _playerRoles[hráč] = \"pán White\"; \r\n      '''}''' ešte '''{''' \r\n        _playerRoles[hráč] = \"Civilné\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.odhaľujúce; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  void _nextPlayerReveal() '''{''' \r\n    ak (_currentPlayerRevealIndex < _activePlayers. dĺžka - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' ešte '{' \r\n      setState(() => _gameState = UndercoverGameState.discussionussing); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(hráč na sláčikové nástroje) '''{''' \r\n    Rola reťazca = _playerRoles[hráč]!; \r\n    bool impostorsWin = rola == \"Civil\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.result; \r\n      ak (podvodníciVýhra) '''{''' \r\n        _resultMessage = \"'{'player'}' bol civilista! Podvodníci vyhrávajú!\"; \r\n      '''}''' ešte '''{''' \r\n        _resultMessage = \"'{'player'}' bol\r\n    \r\n  ",
   "requiert4Joueurs": "Vyžaduje 4+ hráčov",
   "requiert3Joueurs": "Vyžaduje 3+ hráčov",
   "genereDesCategoriesAmusantesPour": "Vytvorte zábavné kategórie pre horúci zemiak. Téma: {trim}",
+  "@genereDesCategoriesAmusantesPour": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
+  "bodyPaddingPaddingConstEdgeinsets": "), \r\n          ), \r\n        ], \r\n      ), \r\n      Telo: Výplň ( \r\n        výplň: const EdgeInsets.all(16.0), \r\n        dieťa: Stĺpec( \r\n          Deti: [ \r\n            ak (_phase != LocalWhoIsPhase.results) ... [ \r\n              FILTER OBTIAŽNOSTI\r\n              SegmentovanýTlačidlo<Reťazec>( \r\n                Segmenty: [ \r\n                  ButtonSegment( \r\n                    Hodnota: ",
   "egalite1PtChacun": "Remíza! (+1 b pre každého)",
   "designeParLeGroupe1": "Zvolený skupinou (+1 b):",
   "onSePasseUnObjet": "Navzájom si odovzdávame objekt",
@@ -1227,6 +2158,13 @@
   "k2EquipesSAffrontent": "2 tímy súťažia proti sebe",
   "chacunPourSoi": "Každý za seba",
   "stre786cb": "{sender} : ",
+  "@stre786cb": {
+    "placeholders": {
+      "sender": {
+        "type": "Object"
+      }
+    }
+  },
   "afficherLesSalonsPleins": "Zobraziť plné salóniky",
   "masquerLesSalonsPleins": "Skryť plné salóniky",
   "aucunSalonNeCorrespondA": "Žiadna miestnosť nezodpovedá vašim filtrom.",
@@ -1237,6 +2175,13 @@
   "partie": "Časť",
   "lancerUnStream": "Spustiť Stream",
   "rejoindreLeStream": "Pridaj sa k prúdu ({length})",
+  "@rejoindreLeStream": {
+    "placeholders": {
+      "length": {
+        "type": "Object"
+      }
+    }
+  },
   "enAttenteDuLancement": "Čakanie na spustenie...",
   "voler": "UKRADNÚŤ!",
   "ciblee": "CIEĽ",
@@ -1245,7 +2190,21 @@
   "exQuelEstTonPire": "Napr.: Aký bol tvoj najväčší trapas?",
   "verite2": "🔮 PRAVDA",
   "strc1ea47": "\" {p} \"",
+  "@strc1ea47": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "str5dd9e1": "\" {currentChallenge} \"",
+  "@str5dd9e1": {
+    "placeholders": {
+      "currentChallenge": {
+        "type": "Object"
+      }
+    }
+  },
   "defiValide": "VÝZVA SPLNENÁ!",
   "defiNonValide": "VÝZVA NESPLNENÁ",
   "partieTerminee3": "Hra dokončená",
@@ -1253,6 +2212,13 @@
   "finDeLaManche2": "KONIEC KOLA",
   "pret4": "✓ Pripravený",
   "jAiLanceUnePartie": "Hodil som {selectedGame} zápas!",
+  "@jAiLanceUnePartie": {
+    "placeholders": {
+      "selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
   "ia": "IA",
   "localIndisponibleRechercheActive": "Miestne nedostupné (Hľadanie aktívne)",
   "rechercheRapideMonde": "Rýchle vyhľadávanie (svet)",
@@ -1261,6 +2227,13 @@
   "simpleVillageois": "Dedinčan",
   "capitaine": "Kapitán",
   "s2": "{hotPotatoGlobalDuration} s",
+  "@s2": {
+    "placeholders": {
+      "hotPotatoGlobalDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "nombreDeJoueursRecherches": "Počet vyhľadaných hráčov: '{0}'",
   "laBeloteRequiertExactement4": "Belote vyžaduje presne 4 hráči.",
   "formez2EquipesDe2": "Form 2 tímy z 2 hráčov v ''Komponovať tímy''.",
@@ -1269,7 +2242,17 @@
   "tousLesJoueursDoiventEtre": "Všetci hráči musia byť pridelení do tímu.",
   "chaqueEquipeDoitPossederAu": "Každý tím musí mať aspoň 2 hráčov.",
   "auMoins5JoueursRequis": "Požaduje sa najmenej 5 hráčov.",
-  "rolesJoueurs": "Úlohy ( {selectedRolesCount} )",
+  "rolesJoueurs": "Úlohy ( {selectedRolesCount} ) {playersLength}",
+  "@rolesJoueurs": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playersLength": {
+        "type": "Object"
+      }
+    }
+  },
   "ceJeuRequiertExactement4": "Táto hra vyžaduje presne 4 hráčov.",
   "auMoins3JoueursRequis": "Minimálne 3 hráči požadované.",
   "auMoins2JoueursRequis": "Minimálne 2 hráči požadované.",
@@ -1292,9 +2275,33 @@
   "six": "Šestky",
   "sectionSup": "Sekcia: '{ 0}'",
   "k63Pts": "{oppUpper} /63 ppts {value}",
+  "@k63Pts": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "prenezLaDefausseVisibleOu": "Zoberte viditeľnú odhodenú kartu alebo potiahnite skrytú",
   "aa": "- {value}",
+  "@aa": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "dessineCettePhrase": "Nakreslite túto vetu:\n\" {value} \"",
+  "@dessineCettePhrase": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "completeCeDessin": "Dokonči túto kresbu!",
   "commenceParUnDessin": "Začni kresbou!",
   "orateur": "Nápoveda",
@@ -1305,6 +2312,13 @@
   "jouePar": "Hral '{0}'",
   "lAdversaire": "Súper",
   "ecrivez": "Napíš {promptItem}",
+  "@ecrivez": {
+    "placeholders": {
+      "promptItem": {
+        "type": "Object"
+      }
+    }
+  },
   "completezLaPhrase1A": "Dokonči vetu (1 až 8 slov)",
   "auteur": "Autor",
   "adversaire": "Súper",
@@ -1330,6 +2344,13 @@
   "laPartieVaBientotCommencer": "Hra začne čoskoro...",
   "mrWhite": "Mr. White",
   "aEteDemasqueIlTente": "{mrWhiteName} bolo odhalené! Snaží sa odhadnúť tajné slovo civilistov...",
+  "@aEteDemasqueIlTente": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
   "voteDecisifEnregistreEnAttente": "Rozhodujúci hlas zaznamenaný. Čaká sa na ostatných...",
   "egaliteParfaiteLaDeesseDe": "Dokonalá rovnosť! Bohyňa spravodlivosti rozhoduje...",
   "vousEtesLeJugeAttendez": "Vy ste sudca. Počkajte na odpovede...",
@@ -1343,26 +2364,141 @@
   "aEteChoisiPourSa": "Bol vybraný pre jeho odpoveď a vyhral 1 bod!",
   "resultatsDesVotes": "Výsledky hlasovania",
   "leMenteurEtait": "Klamárom bol... {liarName}!",
+  "@leMenteurEtait": {
+    "placeholders": {
+      "liarName": {
+        "type": "Object"
+      }
+    }
+  },
   "lesImposteursOntGagneUn": "Podvodníci vyhrali! Civil bol odstránený.",
   "lInfiltreAEteDemasque": "Infiltrovaný ( {undercoverName} ) bol odhalený!",
-  "mrWhiteAEteDemasque": "Pán White (9999) bol odhalený!",
+  "@lInfiltreAEteDemasque": {
+    "placeholders": {
+      "undercoverName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mrWhiteAEteDemasque": "Pán White (9999) bol odhalený! {mrWhiteName}",
+  "@mrWhiteAEteDemasque": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTermine": "Je koniec!",
-  "aEteBanniPourSa": "{loserName} bolo pre jej návrh zakázané \" {loserAnswer} \"!",
+  "aEteBanniPourSa": "{loserName} bolo pre jej návrh zakázané \"  \"! {loserAnswer}",
+  "@aEteBanniPourSa": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteDansLesVotesPersonne": "Rovnosť vo voľbách! Nikto nie je zakázaný.",
   "nAPasReponduA": "{loserName} neodpovedal včas a vyhral 1 bod!",
+  "@nAPasReponduA": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersonneNePrendDe": "Rovnosť! Nikto nevezme tento obrat.",
-  "aTrouveLeMot": "{winnerName} našla slovo: '' 99999''!",
-  "personneNATrouveLe": "Nikto nenašiel slovo: \" {currentWord} .\"",
-  "aTrouveLeMot1": "{guesserName} našla slovo: '' 99999''!",
+  "aTrouveLeMot": "{winnerName} našla slovo: '' 99999''! ",
+  "@aTrouveLeMot": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe": "Nikto nenašiel slovo: \" '{currentWord}' .\"",
+  "@personneNATrouveLe": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot1": "{guesserName} našla slovo: '' 99999''! ",
+  "@aTrouveLeMot1": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasTrouveLe": "{guesserName} nenašlo slovo.",
+  "@nAPasTrouveLe": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
   "remporteSkull": "{value} vyhrá lebku!",
+  "@remporteSkull": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "defiGagneCarteSRevelee": "Výzva vyhraná: odhalených {challengeBid} kariet!",
+  "@defiGagneCarteSRevelee": {
+    "placeholders": {
+      "challengeBid": {
+        "type": "Object"
+      }
+    }
+  },
   "aPerduLeDefi": "{loserName} prehral výzvu.",
+  "@aPerduLeDefi": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTermine1": "Ťah sa skončil.",
+  "aGagneAvecSaDescription": "{winnerName} won with its description:AppLokalizácia.of (context)!. extrainfoColumnChildText 99999 {winningDescription}",
+  "@aGagneAvecSaDescription": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "winningDescription": {
+        "type": "Object"
+      }
+    }
+  },
   "personneNAGagneCe": "Nikto toto kolo nevyhral. Remíza alebo žiadne popisy.",
-  "aTrouveLeSymboleIl": "{winnerName} našiel symbol 99999! Vyhral kartu.",
+  "aTrouveLeSymboleIl": "{winnerName} našiel symbol 99999! Vyhral kartu. {commonSym}",
+  "@aTrouveLeSymboleIl": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "commonSym": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTerminePersonne": "Kolo sa skončilo. Nikto nenašiel spoločný symbol.",
   "aEteDesigneEEt": "{winnerName} bol pomenovaný a vyhral 1 bod!",
+  "@aEteDesigneEEt": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersonneNeMarqueDe": "Remíza! V tomto kole nikto nezískava body.",
   "espion": "Špión",
   "revolution": " (Revolúcia!)",
@@ -1372,6 +2508,32 @@
   "indiceEnvoyeEnAttenteDes1": "Nápoveda odoslaná! Čaká sa na ostatných...",
   "carte3": "Mapa",
   "score": "Skóre",
+  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :AppLokalizácia.of (kontext)! .styleConstTextstyleColorColors {value2} {deckIndex} / {deckTotal} {value3} {totalScore}",
+  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "guesserName": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "value3": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
   "laNuitTombeSurLe": "Noc padá na dedinu...\n\nZavri oči.",
   "leMomentEstVenuLe": "Nastal čas...\n\nDedina musí voliť.",
   "victoireDesVillageois": "Víťazstvo Dedinčanov!",
@@ -1393,9 +2555,24 @@
   "votezPourDevorerUneProie": "Hlasujte o zožraní koristi",
   "espionnezUnJoueur": "Špehujte hráča...",
   "leLoupNoirDecideDu": "Čierny vlk rozhoduje o osude obete",
+  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Infect {targetName} ?AppLokalizácie.of (kontext)!.centračné widgetRowMainosisizeMainosizeMinThe White Wolf strikes sólo",
+  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezUneVictimeADevorer": "Vyberte obeť na zožratie",
   "laSorcierePrepareSesPotions": "Čarodejnica mieša lektvary",
   "cibleDesLoups": "Cieľ vlkov: {victimeName}",
+  "@cibleDesLoups": {
+    "placeholders": {
+      "victimeName": {
+        "type": "Object"
+      }
+    }
+  },
   "touchezLeJoueurAEliminer": "Dotknite sa hráča odstrániť s jedom",
   "empoisonner": "Otráviť",
   "lePyromancienPrepareSesExplosifs": "Pyromant chystá svoje výbušniny",
@@ -1411,9 +2588,37 @@
   "loups": "Vlci",
   "outreTombe": "Záhrobie",
   "amoureux": "Zamilovaní",
+  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : AppLokalizácia.of (context)!.styleTextstyleFontweightFontweightBoldMalé kone",
+  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
+    "placeholders": {
+      "senderName": {
+        "type": "Object"
+      }
+    }
+  },
   "courseIndividuelle": "Individuálny závod",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 hodov)",
+  "@k3Lancers": {
+    "placeholders": {
+      "lastHoldAction": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "joueEnDirect3Lancers": "👉 {value} hrá naživo... ({value2}/3 hodov)",
+  "@joueEnDirect3Lancers": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      }
+    }
+  },
   "gardeS": "'''{'0'''}''' uchovávané",
   "cur": "♥ Srdce",
   "carreau": "♦ Káry",
@@ -1442,11 +2647,47 @@
   "pile": "Orol",
   "face": "Panna",
   "pasAssezDeJoueursIl": "Nedostatok hráčov! Pre túto konfiguráciu je potrebných aspoň {minPlayers} hráčov.",
+  "@pasAssezDeJoueursIl": {
+    "placeholders": {
+      "minPlayers": {
+        "type": "Object"
+      }
+    }
+  },
   "tuEs": "Ste: {role}",
+  "@tuEs": {
+    "placeholders": {
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
   "tonMotEst": "Tvoje slovo je: {wordCivil}",
+  "@tonMotEst": {
+    "placeholders": {
+      "wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
   "tonMotEst1": "Tvoje slovo je: {wordUndercover}",
+  "@tonMotEst1": {
+    "placeholders": {
+      "wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
   "tuNAsPasDe": "Nemáš slovo. Blufuj!",
   "commeConvenuTuCommences": "{mrWhitePlayer} , ako bolo dohodnuté, začnete!",
+  "@commeConvenuTuCommences": {
+    "placeholders": {
+      "mrWhitePlayer": {
+        "type": "Object"
+      }
+    }
+  },
+  "quiPourraitLePlusApplocalizations": "Kto by mohol viac?AppLokalizácie.of (context)!.bodyPaddingPaddingConstEdgeinsetssoft",
   "votePar": "Vodal: '{0}'",
   "decisionUnanimeDuGroupePour": "Jednomyseľné rozhodnutie skupiny pre '{0}'!",
   "ilFautAuMoins41": "Pre hru Codenames sú potrební aspoň 4 hráči (2 na tím)!",
@@ -1463,7 +2704,21 @@
   "cEstAuTourDe2": "Je rad na '' '{' '' 0 '''}' '' ('' '{' '' 1 '''}' '')",
   "genereDesQuestionsAmusantesEt": "Generuje zábavu a rýchle otázky kladené. Téma: '{0}'",
   "s3": "{minDuration} s",
+  "@s3": {
+    "placeholders": {
+      "minDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "s4": "{maxDuration} s",
+  "@s4": {
+    "placeholders": {
+      "maxDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "fin1": "KONIEC",
   "trouves": "Nájdené: '{ 0}'",
   "ecurie1": "Stajňa 1",
@@ -1472,10 +2727,26 @@
   "ecurie4": "Stajňa 4",
   "nombreMaxDeJoueurs": "Maximálny počet hráčov: '{0}'",
   "jAiLanceUnePartie1": "Hodil som {value} zápas!",
+  "@jAiLanceUnePartie1": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "jeu1": "Hra",
   "partieDeEnAttente": "Časť '{0}' čaká",
+  "termine": "Ukončené: '{0}'",
+  "vainqueur2": "Víťaz:",
   "joueurSPretS": "Hráč pripravený",
   "code": "Kód: {value}",
+  "@code": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "lampe": "Baterka",
   "trousseSoin": "Lekárnička",
   "hache": "Sekera",
@@ -1487,6 +2758,12 @@
   "redigezLPour": "Napíšte '' '{' '' 0 '''}' '' pre '' '{' '' 1 '''}' ''",
   "rejouerGarderPts": "HRAŤ ZNOVA (PONECHAŤ B)",
   "indicesMontresA": "Indexy uvedené v",
+  "playersWinneridname": "Víťazný názov hráča",
+  "packageSensorsPlusSensorsPlus": "balenie:senzory plus/senzory plus.dart",
+  "supabaseUploadEchecDefinitif": "--- [Upload] CONFIDENTIELE",
+  "erreurSupabaseStorageexception": "--- SUPBASE ERROR (StorageOffice) ---",
+  "erreurInattendueLorsDeL": "--- INATTENDED ERROR AT UPLOAD ---",
+  "timeSUp1": "Čas vypršal",
   "marquesDeVoiture": "Značky áut",
   "paysDuMonde": "Krajiny sveta",
   "fruitsLegumes": "Ovocie a zelenina",
@@ -1507,21 +2784,57 @@
   "chosesRondes": "Okrúhle veci",
   "chosesRouges": "Červené veci",
   "marquesDeVetements": "Značky oblečenia",
+  "butDuJeuEtreLe": "**Game gól**\nByť hráč s najviac bodov na konci hry.\n\n** Draft **\n1. Každý hráč dostane ** 7 reakčných kariet** v ruke.\n2. Hráč sa volá ** Juge** (úloha sa otočí v každom kole).\n3. Sudca prečíta ** otáznik** nahlas.\n4. Všetci ** ostatní hráči** tajne zvoľte ** 1 odpovednú kartu** a odošlite ju.\n5. Sudca číta všetky odpovede a označuje ** najzábavnejšie***.\n6. Víťaz skóre kola ** 1 bod **.\n7. Každý hráč ** poche*** novú kartu vrátiť na 7.\n8. Úloha sudcu prechádza na ďalšieho hráča.\n\n** Dôležité pravidlá\n- Sudca nehrá na kartách.\nOdpoveď je anonym. Sudca nevie, kto čo napísal.\n- Môžeme hrať len jednu kartu** na rukoväť.",
+  "objectifPrenezDesCartesPour": "** Cieľ **\nVezmite karty vytvoriť zodpovedajúce páry. Vyhnite sa byť hráčom, ktorý drží zombie kartu na konci hry.\n** Draft **\n1. Hra začína 33 kartami (16 párov + 1 Zombie karta).\n2. Karty sú distribuované 4 hráčom.\n3. Každé otočenie hráč berie kartu od ďalšieho hráča.\n4. Ak karta vytvorí pár, je automaticky porazený.\n5. Hráčova ruka je zmiešaná.\n6. Prvý hráč, ktorý už nemá karty vyhral.\n7. Zostávajúci hráč s zombie karta stratil!",
+  "butDuJeuObtenirLe": "**Game gól**\nZískajte najvyššie skóre vyplnením 13 kategórií s 5 kockami.\n\n* Spustenie veže*\n1. * Lance**: Môžete hodiť 5 kocky až 3 krát za otočku.\n2. ** Uchovávajte**: Po 1. alebo 2. hode si môžete nechať kocky a reštartovať ostatné.\n3. **Score**: Po aspoň jednom hode si musíte vybrať kategóriu, v ktorej môžete skóre. Každá kategória sa môže používať len raz za jednu časť.\n\n** Kategória\n- * Až na šesť** *: Súčet zodpovedajúcich kockou. (Bound 35 bodov, ak horná časť predstavuje 63 bodov alebo viac).\n- ** Brelan ** (3 alebo viac rovnakých kociek): Všetky kocky.\n- ** Square ** (4 alebo viac rovnakých kociek): Všetky kocky.\n- ** Full** (3 kocky identické + 1 pár): 25 bodov.\n- **Mall Suite** (4 po sebe idúce kocky): 30 bodov.\n- **Veľký apartmán** (5 po sebe idúcich kocky): 40 bodov.\n- **Yams** (5 kociek identických): 50 bodov.\n- Sčítaj všetky kocky.",
+  "objectifNePasAvoirL": "** Cieľ **\nNemáte zariadenie v rukách, keď zemiak exploduje!\n\n** Draft **\n1. Na obrazovke sa objaví téma.\n2. Hráč drží zariadenie musí dať odpoveď zodpovedajúcu téme.\n3. Akonáhle odpovedal, rýchlo prešiel lietadlo k svojmu blížnemu.\n4. Sused musí zase nájsť novú odpoveď a odovzdať zariadenie.\n5. Čas je skrytý a náhodný: zemiak môže explodovať kedykoľvek!\n6. Hráč drží zariadenie v čase výbuchu stratí rukoväť a dostane prísľub.",
+  "principeGeneralGribouillisEstUn": "** Všeobecná zásada\nGribouillis je kresba hra inšpirovaná \"Arab telefón,\" kde nápady sa menia v každej fáze. Existujú 3 režimy hry:\n\n**1. Normálny režim (Arabský Ilustrovaný telefón)\nKaždý hráč napíše vetu.\nKaždý hráč dostane ďalšiu vetu a nakreslí ju.\nKaždý hráč dostane kresbu a háda, čo predstavuje.\n- ** Alternatíva**: Hra strieda kreslenie a hádať, kým každý \"album\" išiel okolo všetkých hráčov.\n- ** But**: Bavte sa vidieť, ako sa jednoduchá veta zmení na niečo úplne iné!\n\n**2. Doplnkový režim (Collaborative Drawing)\nKaždý hráč spustí jednoduchú kresbu.\n- **Complete**: Každý hráč dostane kresbu iného hráča a musí ju obohatiť bez vymazania toho, čo už existuje.\n- ** Alternatíva**: Kresba ide od hráča k hráčovi, každý pridá svoj dotyk.\n- **Parameter \"Pridať 1\"**:\n- * Ak je vypnuté (predvolené)*: Je to šnúra. Kresba sa vyvíja v každej fáze (Hráč A -> Hráč B -> Hráč C...).\n- *Ak je aktivovaná*: Počiatočný kresba každého hráča je dokončená všetkými ostatnými hráčmi, vytvára niekoľko kolektívnych diel paralelne.\n- ** But **: Vytvorte prekvapivé a zábavné kolektívne umelecké diela.\n\n**3. Brise-Glace Mode (Kreatívna interakcia)\n- ** Písanie**: Každý hráč píše osobnú tému (ex: AppLocalizations.of (context)!.myPreference).\n- **Kreslenie**: Každý hráč dostane témy od ** všetkých ostatných hráčov*** a musí ich nakresliť.\n- ** But**: Ideálne na prelomenie ľadu, objavovanie chutí druhých a spustenie tvorivosti v spolupráci a ľahkým spôsobom.",
+  "yzObjectifAvoirLeMoins": "Cieľ\n\nMať čo najmenej bodov, ako je to možné na konci hry.\nHra sa zastaví, keď hráč dosiahne 100 alebo viac bodov, a víťazom je ten s najnižším celkovým skóre.\n\nVybavenie\n\n150 kariet číslovaných od 2 do +12\n\nVykonávanie\n\nZmiešajte všetky karty.\nKaždý hráč dostane 12 kariet, umiestnených tvárou dole pred ním, v 4 stĺpcoch × 3 riadkoch.\nOstatné karty tvoria akcie. Vráťte prvú kartu do formy odpadu.\nKaždý hráč vracia 2 karty podľa vlastného výberu z jeho 12.\n\nKurz prehliadky\n\nNa druhej strane máte na výber 30 sekúnd:\n\n1. Vezmite kartu odpadu\nMusíte ho vymeniť s jednou z vašich 12 kariet (viditeľné alebo skryté strany).\nNahradená karta ide na odpad.\n\n2. Piocher karta lícom nadol\nPozrite sa na mapu:\n- buď si ho necháte a nahradíte jednu z vašich kariet (ako je uvedené vyššie),\n- buď ho odmietnete → umiestnite ho priamo na odpad, a v tomto prípade musíte vrátiť jednu z kariet stále skrytú.\n\nOsobitné pravidlá\n\nTri identické karty v stĺpci → sú okamžite porazené (hodnota 0).\n\nKoniec držadla:\n\nRukoväť končí, keď hráč odhalil všetky svoje karty.\nVšetci ostatní hráči potom odhaliť svoje zostávajúce karty. Rukoväť skončila.\nVšetci hráči počítajú súčet svojich kariet.\n\nUpozorňujeme: ak hráč, ktorý skončí nemá najnižšie skóre v kole, berie pokutu +10 bodov (jeho rukoväťové skóre je zdvojnásobené v pôvodnej verzii, použijeme +10 na zjednodušenie).\n\nKoniec hry\n\nHráme toľko rukávov, koľko potrebujeme.\nKeď hráč dosiahne 100 bodov alebo viac, hra sa zastaví.\nHráč s najnižším kumulatívnym skóre vyhráva.",
+  "iAReglesDuPoker": "Cieľ\n\nVyhrať čipy z iných hráčov tým, že:\n- najlepší list z 5 kariet počas zabitia,\n- alebo tým, že vzdá (spí) vďaka stávkam.\n\nRučná klasifikácia (od najsilnejších po najslabších)\n\n1. Kráľovská flush: 10 \n2. Quint flush: 5 kariet, ktoré nasledujú po sebe, rovnakej farby\n3. Námestie: 4 rovnaké karty\n4. Plné: 3 rovnaké karty + 1 pár\n5. Farba (kvapkanie): 5 kariet rovnakej farby (non-konsekutívne)\n6. Ďalej (piata): 5 kariet, ktoré nasledujú po sebe (rôzne farby)\n7. Brelan: 3 identické karty\n8. Dvojité páry\n9. pár\n10. Vysoká karta (najvyššia karta, ak sa nikto nezlepší)\n\nð\n\n1. Slepé oči\nHráč vľavo od predajcu nastaví malú slepú.\nĎalší hráč nastaví big blind.\n\n2. Distribúcia\nKaždý hráč dostane 2 uzavreté karty (\"súkromné karty\").\n\n3. Aukčné veže a spoločné karty\n- Preflop: stávkový trik so súkromnými kartami.\n- Flop: 3 bežné mapy odhalené. Nové stávky.\n- Veža: 4. spoločná mapa odhalená. Nové stávky.\n- River: 5. a posledná spoločná mapa odhalená. Posledná stávka.\n\n4. Streľba (showdown)\nAk zostane niekoľko hráčov, každý ukáže svoju hru.\nNajlepšia kombinácia 5 kariet (spomedzi svojich 2 súkromných kariet + 5 obcí) vyhráva v hrnci.\n\nMožné opatrenia\n\nNa oplátku má hráč ** 30 sekúnd** pre:\n- Dáma: nestavajte nič, len ak už nikto nikdy nevsadí.\nDaj nejaké žetóny do hrnca.\n- Sledujte (Call): rovnaký beh.\n- Obnoviť (Rise): zvýšiť stávku.\n- Choď do postele a vypadni.\n\nKoniec hry\n\nHra pokračuje tak dlho, ako tam zostať aspoň 2 hráči s čipmi.\nPosledný víťaz je ten, kto berie všetky žetóny.",
+  "butDuJeuGagnerLe": "**Game gól**\nVyhrajte najviac XP vykonaním akcií a reagovať na pravdy!\n\n** Draft **\n1. Ruleta je hráč, ktorý je na rade.\n2. Hráč strieľa \"Akcia\" alebo \"Verity.\"\n3. Klasický režim: Zobrazí sa náhodná výzva/otázka.\n4. Režim sudcu: Náhodný hráč píše výzvu, potom hráč si to uvedomuje.\n5. Ostatní hráči potvrdzujú hlasom Áno/Nie.\n6. Validačné percento určuje XP won.\n\n**Osobitné pravidlá\n- 100% validácia = maximum XP\n- Hráč s najväčšou XP sa stáva Admin hry\n- Tlačidlo \"Koniec rukoväte\" umožňuje zatvoriť časť",
+  "butDuJeuLeBut": "**Game gól**\nCieľom je byť prvý, kto sa zbaviť všetkých jeho kariet, aby sa stal prezidentom. Posledný hráč s kartami v ruke sa stáva idiotom.\n\n* Materiál a hráči *\n- Maps**: 52 kariet.\n- Hráči**: 3 až 6 hráčov.\n\n**Card hodnota **\nPoradie kariet, od najslabších po najsilnejších, je:\n*3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2.**\n** 2 ** je najsilnejšia karta a môže poraziť akúkoľvek inú kartu alebo kombináciu.\n\n* Manuálna operácia **\n1. **Distribution**: Všetky karty sú rozdelené rovnomerne medzi hráčov.\n2. ** Prvé kolo **:\n- Pre prvý zápas, hráč, ktorý vlastní **3 Trèfle (Musí hrať túto kartu (iba alebo s ostatnými 3).\n- Pre ďalšie rukávy, ** Assess wheel** predchádzajúceho rukáva začína.\n3. ** Hracie karty**: Prvý hráč kladie na stôl:\n- Iba jedna karta (napr. jedna 7).\n- Jeden pár (ex: dva 8).\n- Enbrel (ex: tri Valety).\n- Jeden štvorec (ex: štyri 5).\n4. ** Pokračovanie z kola **: Nasledujúci hráč (v smere hodinových ručičiek) má ** 30 sekúnd**, aby prehral rovnaký počet kariet**, ale ** vyššiu hodnotu**.\n- Príklad: Ak hráč pózuje pár 6, ďalší musí pózovať pár 7, Dámy, Ako, atď.\n5. Ak hráč nemôže alebo nechce hrať, musí prejsť svojou premenou. Akonáhle hráč prejde, nemôže hrať znova až do konca aktuálneho záhybu.\n6. ** Koniec záhybu **: Fold končí, keď všetci hráči prešli svoju otočku. Posledný hráč, ktorý umiestnil karty vyhráva záhyb, vyzdvihne karty z tabuľky (nastaví ich bokom) a začne ďalší záhyb hraním toho, čo chce.\n7. ** Sila 2**: Hrať jednu alebo viac ** 2** porazí akúkoľvek kombináciu a končí záhyb okamžite. Osoba, ktorá hral 2 vyhrá záhyb a začne hrať znova.\nAk chcete poraziť pár, musíte hrať pár 2!\n\n**Koniec Lamanšského prielivu a rolí\n- Akonáhle hráč nemá žiadne karty, skončil. Hra pokračuje, kým nezostane len jeden hráč.\n- Poradie konca určuje úlohy pre ďalšie kolo:\n- ** 1.**: predseda\n- ** 2.**: podpredseda\n- * Posledná* * **\n- ** Before-last**: Vice-ass-Trou\n- ** Iné*** (ak existujú): Neutrálne\n\nĎalší mesiac: výmena kariet!\nPred začiatkom nového kola si hráči vymenia karty:\n- Debil dal dve najlepšie karty prezidentovi.\n- ** Predseda** mu na oplátku dáva ** dve karty podľa vlastného výberu** (zvyčajne jeho najhoršie).\n- Ak sú tu 4 hráči alebo viac hráčov, ** Vice- Cut*** dá svoju ** najlepšiu kartu** ** Vice- President***.\n- Vice-Prezident** mu dáva mapu svojho výberu**.\n\n**Osobitné pravidlá\n- âTMŞ âTMŞ ** Cannot end with a 2 **: Hráč nemá právo zbaviť sa svojej poslednej karty, ak je to 2. Tento úder sa považuje za neplatný.\n** Variánska revolúcia (voliteľné) **: Ak hráč nastaví štvorec (4 rovnaké karty), môže oznámiť \"Revolúcia!\" Poradie hodnoty kariet je potom obrátený až do konca rukáva (tri sa stáva najsilnejšie, a 2 najslabšie).",
+  "butDuJeuReussirDeux": "**Game gól**\nÚspech dvoch výziev pred ostatnými hráčmi.\n\n* Na mieste *\n- Každý hráč začína 4 karty: 3 ruže a 1 lebka.\n- Každá karta na koberci zostáva viazaná na majiteľa.\n\n** Draft **\n1. Na druhej strane, hráč môže dať kartu tvárou dole na koberec.\n2. Keď už nechce pózovať, vyzýva tým, že oznámi počet kariet, ktoré si myslí, že sa môže vrátiť.\n3. Ostatní hráči môžu ponúknuť alebo prejsť.\n4. Najvyšší uchádzač sa stáva vyzývateľom a vracia reklamné karty.\n5. Najprv vráti svoje vlastné karty, potom tie ostatných hráčov v prípade potreby.\n\n** Resolution **\n- Ak sa objaví Skull, výzva je stratená.\n- Ak je výzva vyhral, hráč skóruje bod. Prvý na 2 body vyhrá hru.\n- Ak je výzva stratená, hráč stratí kartu náhodne zo svojho zostávajúceho listu. Ak stratí svoju lebku, musí okamžite odčiniť ďalšiu.",
+  "butDuJeuFaireDeviner": "**Game gól**\nHádať slovo kreslením, pred koncom prideleného času.\n\n** Draft **\n1. ** Selection Drawer/word**: Hráč je určený kresliť, a slovo je mu tajne pripisované.\n2. **Kreslenie**: Remeselník má obmedzený čas na odhadnutie slova kresbou. Nemôže ani hovoriť, ani napodobňovať, ani písať listy alebo čísla.\n3. **Devinettes**: Ostatní hráči ponúkajú slová v chate.\n4. **Overenie**: Karikaturista vidí návrhy v chate a kliká na tlačidlo \"Nájsť!\" vedľa dobrého posolstva pre určenie víťaza.\n5. ** Body***: Hráč, ktorý našiel a remeselník vyhrať bod.\n6. *Ďalšia veža**: Je vymenovaný nový remeselník.\n\n**Možnosti\n- ** Iba 30 úderov**: Remeselník je obmedzený maximálne na 30 znakov.",
+  "butDuJeuFaireDeviner1": "**Game gól**\nNechajte svojho partnera hádať čo najviac tajomných slov, ako je to možné, každý píše jediné slovo stopy. Odstránia sa rovnaké alebo neplatné indexy.\n\n** Draft **\n1. **Výber Devín**: Hráč je určený ako \"Devin\" pre kolo. Nevidí slovo záhada.\n2. ** Škola Slovo tajomstvo***: Devin si vyberá slovo zo zoznamu (alebo majster hry si vyberie).\n3. **Indice Writing**: Všetci ostatní hráči (\"Indices\") tajne napísať jedno slovo index, ktorý pomôže Devin nájsť slovo tajomstvo.\n4. **Indices Filter***: Všetky indexy sú odhalené. Rovnaké indexy (aj keď sú hláskované inak, napr. \"chat\" a \"chats\") alebo neplatné (veľmi blízko slova tajomstvo, vynájdené atď) sú odstránené. Iba unikátne a platné stopy sú uvedené v Devíne.\n5. **Devinette**: Devin sa pozerá na zostávajúce stopy a snaží sa uhádnuť slovo tajomstvo. Má len jeden pokus.\n6. ** Rating **:\n- Ak Devin nájde slovo tajomstvo: tím vyhrá 1 bod.\n- Ak Devin nenájde slovo tajomstvo: 0 bod.\n- Ak Devin neodpovie: 0 bodov.\n\n**Príklady neplatných indexov:\n- Záhadné slovo: \"Chat.\" Neplatné indexy: \"chaton,\" \" feel,\" \"miaou,\" \"minou.\"\n- Identické indexy: Ak 2 hráči napísať \"zviera\" pre \"chat,\" \"zviera\" je eliminovaný.",
+  "butDuJeuPourLes": "**Game gól**\n- Pre **Village**: Eliminovať všetky vlkolak-Garous, White Wolf, Malade Rat (okrem žoldnier ak vyhrá).\n- Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Eliminovať všetkých dedinčanov.\n- Pre ** Solitaires**: Cieľ špecifický pre každú osobu (Biela Loup: byť sám; Žoldnier: Zabite jeho cieľ na J1; Rat Cick: kontaminovať všetky).\n- Pre milencov ** (ak Wolf + Village): Byť jediný dvaja prežijúci.\n\n** Draft **\nHra sa strieda medzi fázami ** noci ** a ** dňa **.\n\n# Noc #\n1. Vedúci hry (app) oznamuje, že dedina spí.\n2. Rôzne postavy sa prebudiť na oplátku použiť svoje sily:\n- ** Kupidon** (iba prvá noc): Mená dvoch hráčov, ktorí sa zamilujú. Ak sú vlk a dedinčan, ich cieľ sa mení.\n- Heritage** (iba prvá noc): Vzťahuje sa na testera.\n- The ** Seeing** sa prebudí a určí hráča, aby objavil jeho skutočnú úlohu. (Nedetekujte infekciu Čierneho Vlka).\n- Mentalista** (pasívny) vníma výsledok dedinského hlasovania.\n- Rat Malade**: Kontaminanty dva hráči (kto bude poznať ostatné kontaminované).\n- Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - hlas spoločne) prebudiť, koncert a určiť obeť jesť.\n- ** Black Loup*** môže raz zmeniť obeť na infikovanú Loup-Garou (ktorá si udržiava svoje schopnosti a stáva sa Wolfom). Mentalista a Fossoyer môžu detekovať infikované, Voyante nie.\n- Biely Loup** (jeden večer z dvoch): Sklame hráča podľa vlastného výberu (prevracia ochranu).\n- Sorcery** sa prebudí. Vidí obeť vlka a môže použiť jeden zo svojich dvoch lektvarov (len raz za časť): elixír * hojaceho** na záchranu obete, alebo elixír jedenia*** na zabitie niekoho.\n- **Pyroman**: Vyberte si uložiť sud gréckeho ohňa alebo odpáliť tie, ktoré už boli umiestnené (musí byť nažive ráno).\nMôže komunikovať s mŕtvymi.\n\n* Day **\n1. Dedina sa prebúdza. Aplikácia oznamuje, kto zomrel cez noc.\n2. Mŕtvi hráči odhaľujú svoju úlohu a sú odstránené (už nemôžu komunikovať, s výnimkou Necromank s mŕtvymi).\n- Le **Loup Bavard**: Musí vyslovovať tajné slovo alebo zomrieť pri západe slnka (ak Dictator nemá moc).\n3. Prežijúci sa hádajú, aby sa pokúsili odhaliť podvodníkov.\n4. Po diskusii hlasujú všetci aktéri, aby vylúčili podozrivého.\nMôžete hlasovať. Ak odstráni vlka, stane sa starostom, inak zomrie.\nJeho hlas sa počíta dvakrát. Ak je vylúčený, musí vymenovať nástupcu skôr, ako zomrie.\n- Mercenary**: Ak je jeho cieľ odstránený v prvý deň, vyhrá sám. Inak sa stane dedinčanom.\n5. Hráč, ktorý dostane najviac hlasov je eliminovaný, odhaľuje svoju úlohu, a je mimo hry.\n- **Chasseur**: Ak je eliminovaný (deň a noc), má moc priniesť ďalší hráč so sebou.\nKeď zomrel, identifikoval dvoch hráčov (jeden z opačného tábora, jeden z jeho tábora).\n- Milenci**: Ak jeden zomrie, druhý ho nasleduje so žiaľom.\n- The**Heritage**: Ak jeho testátor zomrie, prevezme svoju úlohu (pokiaľ nie je mŕtvy alebo kontaminovaný).\n6. Nová noc začína.\n\n**Podmienky víťazstva\nEliminujte všetkých vlčích, bielych vlkov, chorých potkanov.\n- **Loups-Garous** (múte): Ak chcete byť rovné alebo vyššie v počte obyvateľov.\n- Bola to jediná, kto prežil.\nZabite jeho cieľ v prvý deň.\nKontaminujte všetkých živých hráčov.\n- * Milovníci*** (Loup + Village): Byť jediný dvaja prežijúci.\n\n**Dôležité poznámky\n- Chaperon Rouge** je chránený lovcom proti Vlčím vlkom, kým lovec žije.\n- Garde** chráni cieľ vlkolaka (nemôže chrániť dvakrát rovnakú osobu).\n- Sila Bieleho Vlka nepozná ochranu.\n- Pyroman musí byť ráno nažive, aby jeho sudy vybuchli.",
   "loupNoir": "Čierny vlk",
+  "loupBavard": "Táravý vlk",
   "loupBlanc": "Biely vlk",
+  "mercenaire": "Žoldnier",
   "ratMalade": "Chorá krysa",
   "voyante": "Veštkyňa",
   "petiteFille": "Dievčatko",
+  "chasseur": "Lovec",
   "garde": "Bodyguard",
   "cupidon": "Amor",
   "mentaliste": "Mentalista",
+  "fossoyeur": "Hrobár",
   "dictateur": "Diktátor",
+  "chaperonRouge": "Červená Čiapočka",
   "pyromancien": "Pyromant",
+  "butDuJeuEtreLe1": "**Game gól**\nByť najrýchlejší na mieste jediný identický symbol medzi kartou v centre a jeho vlastnou kartou.\n\n**Draft (Mode ''Infernal Tower'')\n1. Každý hráč dostane kartu lícom nadol. Zvyšok kariet tvorí sklad v strede, tvár viditeľná.\n2. Najprv každý vráti svoju kartu.\n3. Každý hráč musí nájsť čo najrýchlejšie jediný symbol, ktorý je prítomný na karte aj na skladovej karte.\n4. Prvý hráč, ktorý nájde symbol, oznámenie nahlas, vezme Stock kartu a umiestni ju na vlastnú kartu.\n5. Táto nová karta sa stáva jeho vizitkou pre ďalšie kolo. V centre Stocku sa potom objaví nová mapa.\n6. Hra pokračuje až do vyčerpania zásob. Hráč, ktorý získal najviac kariet na konci vyhráva!",
+  "butDuJeuSeDebarrasser": "**Game gól**\nZbavte sa všetkých jeho kariet tým, že bude prvý!\n\n** Draft **\n1. **Distribution**: Každý hráč dostane 7 kariet. Zvyšok tvorí zásoby. Karta je vrátená začať odpad hromadu.\n2. ** Prehrajte kartu**: Hráč, ktorého obrat je má **30 sekúnd*** dať kartu v ruke na hromadu odpadu. Hraná karta musí zodpovedať hornej karte stohu podľa:\n* **Color** (ex: Red on Red)\n* ** Number** (ex: one 7 Blue on one 7 Green)\n* ** Symbol** (ex: žlté \"+2\" na červenom \"+2\")\n* ** Špeciálna karta** (Joker, +4, atď.)\n3. ** Piocher **: Ak hráč nemôže hrať kartu v pridelenom čase, musí si vybrať kartu z balíka. Ak môže hrať túto kartu, môže to urobiť okamžite. Inak skončí.\n4. ** Špeciálne karty**:\n* **+2 (dve karty) **: Ďalší hráč vyberie 2 karty a prejde na rade.\n* ** Sens Forbidden (Pass your turn) **: Ďalší hráč prejde na rad.\n* ** Inverzia (zmena významu) **: Zmysel pre hru je obrátený.\n* ** Joker (zmena farby) **: Hráč vyberá farbu ďalšej karty hrať. Môže sa hrať na ľubovoľnej karte.\n* ** Super Joker +4 (farebná zmena a štyri karty) **: Hráč vyberá farbu. Ďalší hráč si vyberie 4 karty a prejde na rade. Táto karta môže byť hraná len vtedy, ak hráč nemá inú kartu farby požadovanú na hromadu odpadu (pokiaľ neblufuje).\n5. Keď má hráč len jednu kartu v ruke, musí oznámiť \"UNO!\". Ak to neurobí a je prijaté iným hráčom (pred ďalším hráčom hrá alebo vyzdvihne), musí vybrať 2 karty.\n6. ** Koniec kanála **: Rukoväť končí, keď sa hráč zbaví svojej poslednej karty. Počítajú sa body. Hráč, ktorý dosiahne 500 bodov (alebo definovaný celkový počet), vyhrá hru.\n\n** Mapové body: **\n* Digitálne karty (0-9): Ich hodnota tváre.\n* +2, Sens Forbidden, Inverzia: 20 bodov.\n* Joker, Super Joker +4: 50 bodov.",
+  "principeDuJeuLeJeu": "## Princíp hry ##\n* Hra sa hrá medzi 3 a 10 hráčmi**.\n* Každý hráč dáva prístup k časti jeho / jej foto knižnice a vyberá fotografie zdieľať.\n* Počas hry je vybraná fotografia*** zo všetkých hráčov a potom sa zobrazí niekoľko sekúnd.\n* Hráči musia hádať, kto vlastní fotku** zobrazenú.\n* Hráč, ktorý správne háda najviac fotografií vyhrá hru.\n\n##\n1. ** Výber fotografií**: Každý hráč si z galérie vyberie niekoľko fotografií.\n2. ** Začiatok hry**: Akonáhle sú všetci pripravení, hostiteľ začne hru.\n3. ** Play Tower **:\n- Náhodná fotka je zobrazená na 5 sekúnd.\n- Všetci hráči hlasujú hádať majiteľa.\n4. **Výsledky***: Skóre sa aktualizuje po každom kole.\n5. ** Koniec hry **: Po set počet kôl, hráč s najviac bodov vyhráva.",
+  "butDuJeuCoulerTous": "**Game gól**\nUviazol všetky súperove lode predtým, než potopil vaše.\n\n** Draft **\n1. ** Miesto**: Každý hráč tajne umiestni svoju flotilu na sieť 10x10.\n- Lietadlá (5 boxov)\n- Cruiser (4 krabice)\n- Ponorka (3 bunky)\n- Ničiteľ (3 krabice)\n- Hliadka (2 škatule)\n2. ** Tir **: Hráči sa zase dotknú krabice strieľať.\n3. **Výsledok**: AppLokalizácia.of (context)!.tuche, \"Kumulované\" alebo \"K vode.\"\n4. **Victoire**: Prvý hráč, ktorý potopí celú nepriateľskú flotilu vyhráva.",
+  "butDuJeuEtreLe2": "**Game gól**\nBuďte prvý, kto dosiahne cieľovú vzdialenosť (predvolene 1000 km).\n** Draft **\n- Každý hráč dostane šesť kariet.\n- Na druhej strane, zahrajte si kartu (vzdialenosť, útok, obrana, bezpečnosť) alebo sa jej zbavte.\n- Karty ** Útoky*** (Stop, Red, Essence, Crevaison, Limit) blokujú súpera.\n- Mapy... Defenses** (zelený, extra tank, oprava, koncový limit) protiútok.\n- Bezpečné** karty zrušia útok a zabránia jeho opakovaniu.\n- Mapy **Vzdialenosť** (25, 50, 75, 100, 200 km) posuňte vozidlo dopredu.\n- Vyber si jednu kartu na konci.",
+  "butDuJeuEtreLe3": "**Game gól**\nBuďte prvý, kto sa zbaviť všetkých svojich kariet tým, že vytvorí platné kombinácie (meldy).\n\n* Spustenie veže*\n1. ** Piocher**: Vezmite mapu z hornej časti odpadu OR zásob.\n2. ** Sale (nepovinné) **: Umiestnite platné kombinácie na stôl.\n- **Sekvencia (Run)**: 3 alebo viac kariet rovnakej farby, ktoré nasledujú (napr. 5) Eso môže byť vysoké alebo nízke.\n- **Skupina (Set) **: 3 alebo 4 karty rovnakej hodnoty, ale rôznych farieb (napr. 8\n3. ** Default**: Zbavte sa karty z ruky na odpad.\n\n** Koniec rukoväte\nPrvý hráč, ktorý už nemá karty po porážke vyhrá. Ostatné počítajú body zostávajúcich kariet (obrázky = 10, As = 15, iné = nominálna hodnota). Hra končí na 100 bodov.",
+  "butDuJeuFaireDeviner2": "**Game gól**\nUrobte váš tím hádať maximum slov pred koncom času, bez použitia zakázané slová!\n\n** Draft **\n1. Každý obrat, hráč (\"rečník\") sa snaží, aby jeho tím hádať slovo.\n2. Rečník by nemal nikdy vyslovovať slovo hádať, ani žiadne zo slov \"Taboo\" (žiadne slová) zobrazené pod cieľovým slovom. Ani nemôže používať preklady ani slová z tej istej rodiny.\n3. Ak rečník používa slovo Taboo, súperiaci tím (alebo sudca) hlási chybu, karta je zrušená a reproduktor sa presunie do ďalšieho.\n4. Každý hádal slovo vráti bod do tímu.\n5. Odbočka končí, keď čas vypršal.\n\n** Koniec časti **\nTím s najviac bodov po počte kôl definovaných výhier!",
+  "butDuJeuAmenerVos": "**Game gól**\nPrineste svoje kone do stredu plošiny tým, že obíde svojich súperov.\n\n**Klasické pravidlá\n1. ** Basic exit***: Musíte urobiť ** 1** alebo ** 6** aby ste vytiahli pešiaka.\n2. ** Bonus Tour***: Making a ** 6**, capting a pešiak alebo dokončenie kurzu umožňuje opakovaný záznam. (Upozornenie: 3 krát 6 po sebe idúcich zruší váš rad!).\n3. **Capture**: Padanie na protiľahlého pešiaka ho vracia do svojej základne (nemožné na chránených políčkach \"Stars\" alebo na štartovom boxe tohto hráča).\n4. ** Dorazil **: Na dosiahnutie konečného schodiska treba presné skóre.\n\n** Režim timu (2v2) **\nVyžaduje presne 4 hráčov. Ste spojení s hráčom pred vami.\n- ** Zdieľané víťazstvo**: Prvý tím, ktorý prinesie celkom 4 kusy do centra vyhrá hru (ex: 3 kusy pre vás a 1 pre vášho spojenca).\n- **Entraide**: Môžete použiť svoj hádzanie presunúť svojho spojenca je pešiaka, ale * len * dostať ho z jeho základne (s 1 alebo 6) alebo presunúť do jeho cieľovej schodisko.\n- ** Blokovanie spojencov **: Je nemožné zajať pešiaka tvojho partnera. Ak vás váš pohyb prinúti pristáť na ňom, rana je neplatná.",
+  "principeJeuSurrealisteDEcriture": "** Princíp\nSurrealistické kolektívne písanie hra.\n** Variant **\n- Classic: Každý píše prvok vety (substantial, prídavné meno, sloveso, atď) bez toho, aby videl precedensy.\n- Pokračovanie: Každý vidí posledné 3 slová a dokončí vetu.\n** Draft **\nListy sa otáčajú, kým sa všetci nezúčastnia.",
+  "butDuJeuPlacerLe": "**Game gól**\nUmiestnite väčšinu jeho kusov na scénu.\n**Zlaté pravidlo\nKaždý nový kus sa musí dotknúť aspoň ďalšieho kusa rovnakej farby za rohom, ale nikdy po jednej strane.\n** Draft **\n1. Prvé kolo sa hrá v rohu podnosu vašej farby.\n2. Nasledujúce veže rešpektujú zlaté pravidlo.\n3. Ak nemôžete hrať viac, prejdete radom.\n* Rating **\n-1 bod na štvorec nie je umiestnený.\n+15 bodov, ak sú umiestnené všetky časti.\n+5 bonusových bodov, ak je posledný kus jediným štvorcom (1x1).",
+  "objectifEtreLePremierA": "** Cieľ **\nBuďte prvý, kto dosiahne cieľové skóre (20, 50 alebo 100 bodov).\n\n** Draft **\nKaždý hráč dostane 7 domino. Na druhej strane musí umiestniť domino zodpovedajúce jednému z končekov reťaze. Dvojky sa hrajú v krížoch.\n\n** Režim hry **\n- ** Pike **: Ak nemôžete hrať, vyberiete si, kým nemáte hratelnú hru.\n- Bez tipov. Ak nemôžeš hrať, prejdeš cez rad.\n- ** All Five**: Prvá dvojhra je \"Spinner\" (prehráva sa na 4 stranách). Ak súčet koncov je násobok 5.\n\n**Koniec otáčania **\nAk nikto nemôže hrať, trik je blokovaný. Hráči odhaľujú svoje ruky. Hráč s najmenšími bodmi vyhráva kolo a označuje súčet bodov protikladných rúk.",
+  "objectifEtreLePremierJoueur": "** Cieľ **\nBuďte prvý hráč, ktorý sa zbaviť všetkých svojich kariet.\n\n**Pravidlá\n- Hra sa hrá s kartou 52.\n- Poradie kariet (od najnižšej po najvyššiu): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Poradie farieb (od najslabších až po najsilnejších): dlaždice (D), Trèfles\n- Hráč, ktorý má 3 dlaždice začína hru.\n\n** Kombinácie\n- Simple**: 1 mapa.\n2 karty rovnakej hodnoty.\n- Tri karty rovnakej hodnoty.\n- ** Pokračovanie**: 5 po sebe nasledujúcich riadkových kariet (kombinovaných farieb).\n- Farba**: 5 kariet rovnakej farby.\n- ** Full**: 3 karty jedného riadku + 2 karty druhého riadku.\n- ** Square**: 4 karty rovnakej hodnoty + 1 karta akéhokoľvek druhu.\n- **Quinte Flush**: 5 po sebe nasledujúcich kariet rovnakej farby.\n\n** Hierarchia kombinácií 5 kariet\nFlush Quinte > Square > Full > Color > Suite.\nKombináciu možno poraziť len kombináciou rovnakej veľkosti a vyššej hodnoty.",
+  "objectifCapturerToutesLesPieces": "** Cieľ **\nZajmite všetky súperove mince alebo zablokujte všetky jeho mince.\n**Pravidlá\n- Hrá na checkeri 8x8, výhradne na tmavých krabiciach.\n- Časti sa pohybujú diagonálne v krabici.\n- Úlovky sú povinné a sú spôsobené skákaním cez nepriateľský kúsok.\n- Niekoľko úlovkov môže byť reťaz v jednom kole.\n- Keď izba dosiahne opačný rad, je povýšená v \"Dame\" a môže sa pohybovať a zachytiť späť.",
   "unSubstantifExLeChat": "podstatné meno (napr. mačka)",
   "unAdjectifExMignon": "prídavné meno (napr. milý)",
   "unVerbeExMange": "sloveso (napr. je)",
   "unSubstantifExLaSouris": "podstatné meno (napr. myš)",
   "unAdjectifExMort": "prídavné meno (napr. mŕtvy)",
+  "petit1": "Malé 1",
+  "petit2": "Malé 2",
+  "grand": "Veľké",
+  "tresGrand": "Veľmi veľké",
+  "superGrand": "Super veľký",
   "potionDeVieEtDe": "Elixír života a smrti.",
   "legende": "legenda",
   "mystere": "záhada",
@@ -1537,7 +2850,10 @@
   "crepuscule": "súmrak",
   "leNombreDeSymbolesPar": "Počet symbolov na kartu je najmenej 3.",
   "laGenerationAEchoueNombre": "Generácia zlyhala: nesprávny počet kariet.",
+  "blancMangerCocon": "Biela kokona",
+  "leRoiDesMemes": "Kráľ memov",
   "laPartieEstTermineeTous": "Hra sa skončila: všetci hráči odpojili.",
+  "aucun": "Žiadne",
   "nonAuthentifie": "Neoverené.",
   "actionNonAutorisee": "Akcia nie je povolená.",
   "vousDevezJouerAuMoins": "Musíte zahrať aspoň jednu kartu.",
@@ -1547,6 +2863,7 @@
   "vousDevezJouerLeMeme": "Musíte zahrať rovnaký počet kariet.",
   "combinaisonDe5CartesTrop": "Kombinácia 5 kariet je príliš slabá.",
   "vousDevezJouerUneCarte": "Musíte zahrať vyššiu kartu.",
+  "aGagne1": "Vyhral!",
   "ceNEstPasVotre": "Nie si na rade.",
   "carteIntrouvableDansLaMain": "Karta sa nenašla v ruke.",
   "coupInvalideSelonLesRegles": "Neplatný ťah podľa pravidiel Mille Bornes!",
@@ -1557,11 +2874,14 @@
   "leTempsEstEcoulePour": "Čas na vyhlásenie pravdy vypršal!",
   "cibleHorsDeLaGrille": "Cieľ mimo mriežky.",
   "caseDejaCiblee": "Pole už bolo zamerané.",
+  "aCouleTouteLaFlotte": "Potopil celú nepriateľskú flotilu!",
   "placementAutomatiqueEffectue": "⏱️ Automatické rozmiestnenie dokončené.",
   "tempsEcoulePourLaSaisie": "⏰ Čas na zadávanie slov vypršal. Hra sa začína so zadanými slovami!",
   "laPhaseDeVoteA": "Fáza hlasovania sa začala!",
   "personneNAVoteAucun": "Nikto nehlasoval. Nikto nebol vyradený.",
   "egaliteLorsDuVoteLa": "Rovnosť vo voľbách! Bohyňa spravodlivosti musí vládnuť.",
+  "leTempsDeVoteEst": "Čas hlasovania vypršal!",
+  "laPartieDeYamsCommence": "Hra Vrhcáby sa začína!",
   "plusDeLancersDisponibles": "Žiadne ďalšie hody nie sú k dispozícii.",
   "vousDevezLancerLesDes": "Pred zapísaním bodov musíte hodiť kockami.",
   "categorieDejaCompletee": "Kategória je už vyplnená.",
@@ -1576,9 +2896,12 @@
   "ceNEstPasVotre1": "Nie si na rade s písaním.",
   "nonAuthentifie1": "Nie autentický.",
   "leTempsDesDebatsEst": "Rozprava sa skončila. Dedina musí teraz hlasovať!",
+  "lesAmoureux": "Zaľúbenci",
   "seulsLesDeuxAmoureuxSont": "Iba dvaja zaľúbenci zostali nažive. Ich láska víťazí nad všetkým!",
   "leLoupBlancEstLe": "Biely vlk je posledným preživším! Všetkých zožral.",
+  "loupsGarous": "Vlkodlaci",
   "lesLoupsGarousSontDevenus": "Vlkodlaci majú väčšinu a nemôžu prehrať. Zvíťazili!",
+  "villageois": "Dedinčania",
   "toutesLesMenacesOntEte": "Všetky hrozby boli zneškodnené! Dedina zvíťazila!",
   "laVoyanteASondeUne": "Seer tú noc sondoval dušu...",
   "lHeritierAChoisiSon": "Dedič si vybral svojho poručiteľa...",
@@ -1592,25 +2915,48 @@
   "leLoupNoirAUtilise": "Čierny vlk použil svoju moc nákazy!",
   "leLoupNoirNA": "Čierny vlk nepoužil nákazu.",
   "laPetiteFilleAEte": "Dievčatko bolo príliš zvedavé! Vlci ho okamžite zožerú!",
+  "infecte1": "infikovaný",
+  "contamine": "kontaminovaný",
   "vousVousSentezObserveE": "Cítiš, že ťa túto noc niekto sleduje...",
   "laSorciereAUtiliseSa": "Čarodejnica použila svoj liečivý lektvar.",
   "laSorciereAConcocteUn": "Čarodejnica namiešala smrtiaci jed...",
   "lePyromancienAEntreposeUn": "Pyromant umiestnil sud gréckeho ohňa...",
   "lePyromancienAllumeLaMeche": "Pyromant zapaľuje zápalnú šnúru svojich sudov!",
+  "leSoleilSeLeveSur": "Slnko vychádza nad Thiercelieux...",
   "miraculeusementPersonneNAPeri": "Zázrakom dnes v noci nikto nezomrel!",
+  "motDuJour": "slovo dňa",
   "leDictateurSEstTrompe": "Diktátor sa pomýlil a popravil nevinného! Čaká ho trest smrti.",
   "tentativeDUsurpationDIdentite": "Pokus o krádež identity odhalil!",
   "egaliteParfaiteLorsDuVote1": "Pri hlasovaní nastala remíza. Dnes nikto nebude popravený.",
+  "lAncienCapitaine": "Bývalý kapitán",
+  "amoureux1": "Milovníci 1",
+  "amoureux2": "Milovníci 2",
+  "debugJoingameDemarrageDeLa": "[ Začnite s transakciou.",
+  "debugJoingamePartieTrouveeEt": "[ Časť nájdená a v hale. Čítanie dát...",
+  "debugJoingameTransactionUpdateAppelee": "Transaction.update () called with the new player list.",
+  "debugJoingameTransactionReussieRetourne": "Úspešná transakcia. Vráť sa pravdivo.",
+  "debugJoingameLaPartieN": "[ Hra neexistuje alebo už nie je v lobby. Vráť sa k falzifikátu.",
+  "erreurCritiqueDansJoingame": "--- KRITICKÁ ERROR IN jointGame ---",
+  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":AppLokalizácia.of (context)! .wordcivilParts0TrimWordundercoverIA vracia samostatné jednoduché slová",
   "infiltre": "Votrelec",
   "civil": "Civilista",
   "vendeurDeFalafels": "Predajca falafels",
   "vengeuse": "Pomstiteľ",
   "duellistes": "Duelisty",
+  "laPartieCommenceDonnezVotre": "Hra sa začína! Dajte svoju nápovedu...",
   "laPhaseDeVoteCommence": "Začína fáza hlasovania!",
   "seulMrWhitePeutDeviner": "Iba Mr. White smie hádať.",
   "laDeesseDeLaJustice": "Bohyňa spravodlivosti vyniesla rozsudok!",
+  "unNouveauTourCommence": "Začína nové kolo.",
   "laVengeuseEmporteQuelquUn": "Avenger berie niekoho so sebou!",
+  "civils": "Civilisti",
+  "imposteurs": "Podvodníci",
+  "paris": "Paríž",
+  "france": "Francúzsko",
+  "capitale": "Kapitál",
   "tourEiffel": "Eiffelová veža",
+  "seine": "Seina",
+  "ville": "Mesto",
   "vousNePouvezPasBuzzer": "Nemôžete zabuzzerovať svoj vlastný tím.",
   "seuleLEquipeActivePeut": "Iba aktívny tím môže potvrdiť.",
   "seuleLEquipeActivePeut1": "Iba aktívny tím môže pasovať.",
@@ -1630,6 +2976,7 @@
   "combinaisonInvalideSelonLesRegles": "Neplatná kombinácia podľa pravidiel Rummy!",
   "defaussezExactement1Carte": "Odhoďte presne 1 kartu.",
   "carteNonTrouvee": "Karta sa nenašla.",
+  "aGagneLaManche": "Vyhral kolo!",
   "desDejaLancesPourCe": "Dice už spustil túto prehliadku.",
   "vousDevezDAbordLancer": "Najprv musíte hodiť kockou.",
   "vousNePouvezPasDeplacer": "Nemôžete hýbať figúrkou súpera!",
@@ -1663,6 +3010,7 @@
   "vosPointsSontConservesEn": "Vaše body sú zachované! Čakám, kým hráči začnú ďalšie sedenie.",
   "synonymeOuBanniNecessiteAu": "Synonymum alebo Banni vyžaduje najmenej 3 hráčov!",
   "unoNecessiteEntre2Et": "Uno vyžaduje medzi 2 a 10 hráčov.",
+  "laPartieDeUnoCommence": "Hra Uno sa začína!",
   "inversionA2JoueursLe": "Inverzia k 2 hráčom: prvý hráč začína hru!",
   "directionInverseeDesLeDepart": "Smer otočený hneď od začiatku!",
   "laPremiereCarteEstUn": "Prvá karta je +2! Prvý hráč musí lízať alebo priložiť.",
@@ -1713,7 +3061,11 @@
   "vousDevezJouerUneCombinaison": "Musíte hrať silnejšiu kombináciu.",
   "lePremierCoupDeLa": "Prvý záber hry musí obsahovať 3. Clover.",
   "partieNonTrouvee1": "Časť nenájdená",
+  "trouDuCul": "Podrazák",
   "vicePresident": "Viceprezident",
+  "viceTrouDuCul": "Vice-Podrazák",
+  "neutre": "Neutrál",
+  "debugPictionaryConditionRoundstateDrawing": "--- PICNÍK DEBUG --- Podmienkou \"okrúhly štát\" alebo \"názorový výkres\" je pravdivý. Aktualizovať databázu...",
   "dessinateurIntrouvable": "Zásuvka nebola nájdená.",
   "seulLeDessinateurActifPeut": "Iba kresliar môže potvrdiť odpoveď.",
   "usurpationDIdentiteDuDessinateur": "Draughtsmanova identita je ohromujúca.",
@@ -1721,6 +3073,7 @@
   "motTrouveAvecSucces": "Slovo nájdené úspešne!",
   "ceNEstPasLa2": "Toto nie je navrhovaná fáza indexu.",
   "leDevineurNePeutPas": "Hádateľ nevie nič o tom.",
+  "aaaaaaceeeeiiiinooooouuuuyy": "Ináâãäçéêëìíïñóôôõöùúüý ÿ",
   "ceNEstPasLe": "Teraz nie je čas hádať.",
   "seulLeDevineurPeutFaire": "Iba hádač môže podať návrh.",
   "reponseInvalide": "Neplatná odpoveď.",
@@ -1731,7 +3084,10 @@
   "impossibleDePiocherIlN": "Nemožno lízať, nie sú k dispozícii žiadne karty.",
   "ceNEstPasVotre6": "Nie ste na rade s voľbou farby.",
   "vousNePouvezPasChoisir": "Teraz nemôžete voliť farbu.",
+  "erreurCritiquePlayerorderEstVide": "CRITICKÁ ERROR: poradie hráčov je prázdne v ďalšom poradí. Nemôžem pokračovať.",
   "questionNonTrouvee": "Otázka sa nenašla",
+  "quiPourraitLePlusApplocalizations1": "Kto by mohol viac?AppLokalizácia.of (context)!.listStringOtázkyAiwordpoolHrawssoft",
+  "menteur": "Klamár",
   "pasAssezDeJoueursPour": "Nie je dosť hráčov na túto módu.",
   "ajouteLaDescriptionLaPlus": "Pridať najzábavnejší popis do tejto meme!",
   "uneNouvelleMancheDeUno": "Začína nové kolo Uno!",
@@ -1739,6 +3095,9 @@
   "chaqueJoueurActifDoitPoser": "Každý aktívny hráč musí pred začatím dražby položiť aspoň jednu kartu.",
   "enchereInvalide": "Neplatná ponuka.",
   "laSurenchereDoitEtreSuperieure": "Prihodenie musí byť vyššie.",
+  "applocalizationsOfContextUnjoueurEst": "AppLocalizations.of (context)!.aPlayer'}' je posledný preživší a vyhrá Skull!",
+  "applocalizationsOfContextUnjoueurA": "AppLocalizations.of (context)!.aPlayer'}' vyhral 2 výzvy a vyhral hru!",
+  "applocalizationsOfContextUnjoueurRemporte": "AppLocalisations.of (context)!.Hráč vyhráva Skull!",
   "reponseVide": "Prázdna odpoveď.",
   "leJugeNePeutPas1": "Sudca nemôže odoslať odpoveď.",
   "toutLeMondeARepondu": "Všetci odpovedali! Otvorme dvere.",
@@ -1746,12 +3105,17 @@
   "toutLeMondeARepondu1": "Všetci odpovedali! Hlasujte.",
   "toutesLesReponsesSontRecues": "Všetky odpovede sú doručené! Sudca musí rozhodnúť.",
   "joueurCibleIntrouvable": "Cieľový hráč nenájdený.",
+  "quiPourraitLePlusApplocalizations2": "Kto by mohol viac?AppLokalizácie. of (context)!.elseIf GametypeSynonym alebo Banni",
   "vousNePouvezPasBannir": "Nemôžete zakázať svoje vlastné synonymum!",
   "seulLeJugeEnTitre": "Iba úradujúci Sudca môže určiť víťaza.",
   "ceJoueurNAPas1": "Tento hráč neodoslal odpoveď.",
+  "quiPourraitLePlusApplocalizations3": "Kto by mohol viac?AppLokalizácie.of (kontext)!.intPožadované hlasyHráčiDĺžkaIf Sudca",
+  "quiPourraitLePlusApplocalizations4": "Kto by mohol viac?AppLokalizácia.of (kontext)!. pre finalCieľVoľný štát",
   "egaliteParfaiteAucunPointAttribue": "Dokonalá remíza! Žiadne body neboli udelené.",
   "egaliteDansLesVotesAucun": "Remíza v hlasovaní: tento ťah nie je nikto vyhnaný.",
   "laDescriptionLaPlusDrole": "Bol vybraný najvtipnejší popis!",
+  "aucuneDescriptionNAEte": "Nebol zvolený žiadny popis.",
+  "quiPourraitLePlusApplocalizations5": "Kto by mohol viac?AppLokalizácia (kontextu)!.prekonečnýcieľvovolení1roundVíťazId",
   "jugeIntrouvable": "Sudca nenájdený.",
   "laPartieDeZeroPointe": "Hra Nula Bodov sa začína! Každý hráč musí odhaliť 2 karty.",
   "toutLeMondeARevele": "Všetci odhalili svoje karty. Hra sa začína!",
@@ -1764,11 +3128,13 @@
   "laRelanceDoitEtreStrictement": "Navýšenie musí byť vyššie ako aktuálna stávka.",
   "vousNAvezPasAssez": "Nemáte dostatok žetónov na toto navýšenie.",
   "laRelanceDoitEtreD": "Navýšenie musí byť aspoň dvojnásobkom predchádzajúcej stávky (alebo all-in).",
+  "laPartieDeBeloteCommence": "Hra Belote začína!",
   "passeGeneraleAu1erTour": "Všeobecné prejsť na prvé kolo aukcií. Začiatok druhého kola!",
   "carteNonPossedee": "Karta nie je posadnutá.",
   "vousDevezMonterAL": "Musíte vyliezť do výhody (prekročenie)!",
   "vousDevezCouperAL": "Musíš to odrezať!",
   "passeLAnnonce": "pasuje hlásenie",
+  "laPartieDeBlokusCommence": "Hra Blokus sa začína!",
   "pieceDejaUtilisee": "Dielik je už použitý.",
   "horsLimites": "Mimo hracej plochy!",
   "caseDejaOccupee": "Pole je už obsadené!",
@@ -1791,15 +3157,19 @@
   "cultureDefi": "🧠 Vedomosti a výzva",
   "familleToutPublic": "👨‍👩‍👧‍👦 Rodina a pre všetkých",
   "piquantInsolite": "🌶️ Pikantné a nezvyčajné",
+  "quiPourraitLePlusApplocalizations6": "Kto by mohol viac?AppLokalizácie. of (context)! .who could your modegroup",
   "devineT": "Hádaj T",
+  "presidente": "predseda",
   "chargement": "Načítava sa...",
   "cursive": "Kurzívne",
   "exception": "Výnimka:",
+  "debutDeLaConstructionDe": "--- KONŠTRUKCIA HIM VOTE ''Kto by mohol najviac?AppLocations.of (context)!.printJe akcia závislá od štátu [je ActionPending) players''] ako mapa <String, dynamic>? ? '{}';",
   "clicSurLeJoueurPname": ">> > CLIC on player ''$pName'' (ID: $pId)!",
   "passageDeIsactionpendingATrue": "- Prechod z ActionPending k pravde.",
   "erreurFirebaseLorsDuVote": "!! ERREUR Firebase počas hlasovania: $e",
   "appelFirebaseTerminePassageDe": "- Firebase volanie skončilo. Prechod z ActionPending na falošné.",
   "attentionLeWidgetNEst": "Widget je preč, setState zrušené.",
+  "quiPourraitLePlusApplocalizations7": "Kto by mohol viac?AppLokalizácia.of (context)!.defaultFinalRoundwinneridGame dataroundWinnerId",
   "phaseDePose": "FÁZA POLOŽKY",
   "stre9f4a5": "🏆 Legendárne!",
   "str21f597": "⭐ Výborne!",
@@ -1811,6 +3181,14 @@
   "str487ca1": "Chut! Zavri oči.",
   "leSoleilSeLeve": "Slnko vychádza",
   "atout": "TRUMF: {suit}",
+  "@atout": {
+    "placeholders": {
+      "suit": {
+        "type": "Object"
+      }
+    }
+  },
+  "undercoverLocal": "Miestne utajenie",
   "toiMeme": "seba",
   "unAutreJoueur": "iný hráč",
   "tous": "Všetky",
@@ -1820,83 +3198,689 @@
   "soiree": "Párty",
   "competition": "Súťaž",
   "enCours": "CURRENT: '{'0'}'",
+  "gamemessagelocalizationTrContextReason": ": \"\"'}'\": GameMessageLocalization.tr(context, dôvod),",
   "jAiLanceUnePartie2": "Spustil som hru",
   "piedDeBiche": "Páčidlo",
   "appTitle": "Párty hra",
+  "loginTitle": "Vitajte!",
+  "registerTitle": "Pridajte sa k nám!",
+  "email": "E-mail",
+  "password": "Heslo",
+  "username": "Používateľské meno",
+  "loginButton": "Prihlásiť sa",
+  "registerButton": "Vytvoriť účet",
+  "termsAcceptance": "Prečítal(a) som si a súhlasím s podmienkami používania a zásadami ochrany osobných údajov.",
+  "gamesTab": "Hry",
+  "friendsTab": "Priatelia",
+  "statsTab": "Profil",
+  "loungesTab": "Salóny",
   "createGame": "Vytvoriť hru",
+  "joinGame": "Pripojiť sa",
+  "gameCode": "Kód hry (6 číslic)",
+  "startGame": "Začať hru",
+  "leaveGame": "Opustiť hru",
+  "rules": "Pravidlá",
+  "level": "Úroveň",
+  "coins": "Mince",
+  "gameOver": "Koniec hry!",
+  "victory": "Víťazstvo!",
+  "defeat": "Prehra",
+  "nextRound": "Ďalšie Kolo",
+  "onboardingWelcome": "Vitajte",
+  "onboardingSkip": "Pas",
+  "onboardingNext": "Ďalej",
+  "onboardingStart": "Poďme na to! 🚀",
+  "onboardingSlide1Title": "Hrajte s priateľmi",
+  "onboardingSlide1Subtitle": "Vyberte si z viac ako 30 párty, kartových a stolových hier. Hrajte lokálne, s priateľmi alebo online!",
+  "onboardingSlide2Title": "Získavajte mince a odznaky",
+  "onboardingSlide2Subtitle": "Zbierajte XP za každé víťazstvo a odomykajte exkluzívne úspechy.",
+  "onboardingSlide3Title": "Vytvorte alebo sa pripojte za sekundy",
+  "onboardingSlide3Subtitle": "6-miestny kód stačí na zozbieranie priateľov.",
+  "vipPass": "VIP Pas",
+  "vipActive": "Váš VIP Pas je aktívny!",
+  "vipActiveDesc": "Všetky funkcie sú neobmedzené.",
+  "choosePlan": "Vyberte si predplatné:",
+  "restorePurchases": "Obnoviť nákupy",
+  "purchasesRestored": "Nákupy boli úspešne obnovené!",
+  "noPurchasesFound": "Nenašli sa žiadne aktívne nákupy.",
+  "monthlySubscription": "Mesačné predplatné",
+  "annualSubscription": "Ročné predplatné",
+  "lifetimeAccess": "Doživotný prístup",
+  "popularTag": "POPULÁRNE",
+  "chooseButton": "Vybrať",
+  "vipCongratulations": "Gratulujeme, ste VIP!",
+  "purchaseFailed": "Nákup sa nepodaril.",
+  "profileTitle": "Profil a Nastavenia",
+  "profileNotFound": "Profil sa nenašiel alebo hráč neexistuje.",
+  "tabStats": "Štatistiky",
+  "tabBadges": "Odznaky a Úspechy",
+  "tabSettings": "Nastavenia",
+  "gamesPlayed": "Odohrané hry",
+  "gamesWon": "Výhry",
+  "winRate": "Úspešnosť výhier",
+  "soundEffects": "Zvukové efekty",
+  "music": "Hudba",
+  "editUsername": "Zmeniť meno",
+  "newUsernameHint": "Nové meno",
+  "logout": "Odhlásiť sa",
+  "deleteAccount": "Zmazať účet",
+  "deleteAccountConfirm": "Naozaj chcete natrvalo zmazať svoj účet?",
+  "cancel": "Zrušiť",
+  "confirm": "Potvrdiť",
+  "save": "Uložiť",
+  "modeLocal": "Lokálne",
+  "modeMulti": "Online",
+  "modeMonde": "Svet",
+  "searchGame": "Hľadať hru...",
+  "filterAll": "Všetky hry",
+  "createLounge": "Vytvoriť miestnosť",
+  "joinLounge": "Pripojiť sa k miestnosti",
+  "loungeCode": "Kód miestnosti",
+  "publicLounges": "Verejné miestnosti",
+  "noLoungesAvailable": "Momentálne nie sú dostupné žiadne verejné miestnosti.",
+  "playersCount": "Hráči",
+  "howToPlay": "Ako hrať?",
+  "copiedToClipboard": "Skopírované do schránky!",
+  "connectionError": "Chyba pripojenia. Skúste to znova.",
+  "loading": "Načítava sa...",
+  "success": "Úspech!",
   "pasAssezDeSymbolesUniques1": "Nedostatok jedinečných symbolov pre 0 symbolov karty. Požadované: 1 , K dispozícii: 2 . {symbolsPerCard} {totalSymbols} {dobbleSymbolslength}",
+  "@pasAssezDeSymbolesUniques1": {
+    "placeholders": {
+      "symbolsPerCard": {
+        "type": "Object"
+      },
+      "totalSymbols": {
+        "type": "Object"
+      },
+      "dobbleSymbolslength": {
+        "type": "Object"
+      }
+    }
+  },
   "melangeEquilibreDesThemesSuivants1": "Vyvážená zmes týchto tém: 0 {combinedTheme}",
+  "@melangeEquilibreDesThemesSuivants1": {
+    "placeholders": {
+      "combinedTheme": {
+        "type": "Object"
+      }
+    }
+  },
   "ambianceTonImpose": "[Atmosféra / Zadaný tón: {style}]",
+  "@ambianceTonImpose": {
+    "placeholders": {
+      "style": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPairesDeMots1": "Generuje páry podobných slov vo formáte ''MotCivil:MotInfilated''. Téma: 0 {finalPrompt}",
+  "@genereDesPairesDeMots1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesCartesTabooAu1": "Generuje Taboo karty vo formáte ''Cieľové slovo:Zakázané1,Zakázané2,Zakázané3,Zakázané4,Zakázané5''. Téma: 0 {finalPrompt}",
+  "@genereDesCartesTabooAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesCategoriesOriginalesEt1": "Generuje originálne a zábavné kategórie hádať. Téma: 0 {finalPrompt}",
+  "@genereDesCategoriesOriginalesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesCourtesVisuelles1": "Vytvára krátke, vizuálne a zmätené vety kresliť (napr, \"dinosaurus jesť ľad\"). Téma: 0 {finalPrompt}",
+  "@genereDesPhrasesCourtesVisuelles1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesDAccroche1": "Generuje originálne catch frázy alebo písanie vesmíru. Téma: 0 {finalPrompt}",
+  "@genereDesPhrasesDAccroche1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesDilemmesCorneliensAu1": "Generuje dilemy rohovky vo formáte \"MožnosťA alebo možnosťB\" (napr. \"Môže lietať alebo byť neviditeľný\"). Téma: 0 {finalPrompt}",
+  "@genereDesDilemmesCorneliensAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereUnMelangeDeDefis1": "Vytvára kombináciu výziev (činnosti) a nerozvážnych otázok (pravdy). Téma: 0 {finalPrompt}",
+  "@genereUnMelangeDeDefis1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesQuestionsDirectesAmusantes1": "Generuje priame, zábavné a pikantné otázky. Téma: 0 {finalPrompt}",
+  "@genereDesQuestionsDirectesAmusantes1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesCourtesA1": "Generuje krátke vety (obsahujúce '' '') pre hru. Téma: 0 {finalPrompt}",
+  "@genereDesPhrasesCourtesA1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesSituationsHumoristiquesEt1": "Vytvára humorné situácie a začiatky legiend mém. Téma: 0 {finalPrompt}",
+  "@genereDesSituationsHumoristiquesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereUneListeDeMots1": "Generovať zoznam slov / výrazov pre hru 0 na tému: 1 {gameType} {finalPrompt}",
+  "@genereUneListeDeMots1": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      },
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "theme": "Téma {gameType}",
+  "@theme": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      }
+    }
+  },
   "passeSonTour2": "⏱️ {playerName} vynecháva ťah.",
+  "@passeSonTour2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "finDuCompteARebours1": "⏱️ Fin du compte à rebours : Partie relancée pour tous les {playerslength} joueurs !",
+  "@finDuCompteARebours1": {
+    "placeholders": {
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
   "aOuvertAvec": "⏱️ {playerName} vyniesol(a) {cardToPlay}.",
+  "@aOuvertAvec": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
   "sEstDeconnecteVictoireDe": "{removedPlayerName} sa odpojil(a). Víťazstvo hráča {remainingName} skrečom!",
+  "@sEstDeconnecteVictoireDe": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      },
+      "remainingName": {
+        "type": "Object"
+      }
+    }
+  },
   "aManque3ToursSans": "0 zmeškalo 3 kolá bez hrania. Správca bol požiadaný, aby rozhodol o jeho nahradení počítačom. {playerName}",
+  "@aManque3ToursSans": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "neRepondPlusLAdministrateur": "⚠️ {playerName} neodpovedá ({reason}). Správca bol vyzvaný rozhodnúť o nahradení počítačom.",
+  "@neRepondPlusLAdministrateur": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "reason": {
+        "type": "Object"
+      }
+    }
+  },
   "aEteRemplaceParL": "🤖 {playerName} bol(a) nahradený(-á) počítačom (AI aktívna - 5s na ťah).",
+  "@aEteRemplaceParL": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasDonneD": "⚠️ {playerName} nedal(a) nápovedu (Názorová hra). Ťah preskočený.",
+  "@nAPasDonneD": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasReponduJeu": "⚠️ {playerName} neodpovedal(a) (Názorová hra). Ťah preskočený bez akcie.",
+  "@nAPasReponduJeu": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA3": "{playerName} nehral(a) včas. Ťah prepadol.",
+  "@nAPasJoueA3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteParfaiteLorsDuVote2": "Dokonalá rovnosť pri hlasovaní (0 hráčov ex-aequo)! Žiadny hráč eliminovaný. {tiedPlayerslength}",
+  "@egaliteParfaiteLorsDuVote2": {
+    "placeholders": {
+      "tiedPlayerslength": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue": "⏱️ {playerName} zahral(a) {lastDrawn}.",
+  "@aJoue": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "lastDrawn": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue1": "⏱️ {playerName} zahral(a) {playable}.",
+  "@aJoue1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "playable": {
+        "type": "Object"
+      }
+    }
+  },
   "piocheEtPasseSonTour": "⏱️ {playerName} líže a vynecháva ťah.",
+  "@piocheEtPasseSonTour": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA4": "⏱️ {playerName} nestihol(a) čas. Karta bola odhodená a pole odhalené.",
+  "@nAPasJoueA4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "laPartieEstTermineeVictoire1": "Hra sa skončila. Víťazstvo tímu {winner}!",
+  "@laPartieEstTermineeVictoire1": {
+    "placeholders": {
+      "winner": {
+        "type": "Object"
+      }
+    }
+  },
   "joueursContaminesParLaMaladie1": "Hráči nakazení morom: {contaminatedNames}.",
+  "@joueursContaminesParLaMaladie1": {
+    "placeholders": {
+      "contaminatedNames": {
+        "type": "Object"
+      }
+    }
+  },
   "vousAvezEspionneEtDecouvert": "Špehoval(a) si hráča {targetName} a zistil(a) jeho rolu: {targetRole}.",
+  "@vousAvezEspionneEtDecouvert": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "votreMotDuJourPrononcez": "Tvoje slovo dňa: ''{newWord}''. Povedz ho v chate pred západom slnka!",
+  "@votreMotDuJourPrononcez": {
+    "placeholders": {
+      "newWord": {
+        "type": "Object"
+      }
+    }
+  },
   "declareUnCoupDEtat": "{dictateurName} vyhlasuje štátny prevrat!",
+  "@declareUnCoupDEtat": {
+    "placeholders": {
+      "dictateurName": {
+        "type": "Object"
+      }
+    }
+  },
   "leChasseurTireEtTue1": "Lovec strieľa a zabíja hráča {targetName}!",
+  "@leChasseurTireEtTue1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "aDesigneCommeNouveauCapitaine": "{formerCaptainName} vymenoval(a) hráča {newCaptainName} za nového Kapitána!",
+  "@aDesigneCommeNouveauCapitaine": {
+    "placeholders": {
+      "formerCaptainName": {
+        "type": "Object"
+      },
+      "newCaptainName": {
+        "type": "Object"
+      }
+    }
+  },
   "cupidonADesigneEtComme": "Amor určil hráčov {lover1Name} a {lover2Name} ako zaľúbencov!",
+  "@cupidonADesigneEtComme": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      },
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "votreAmoureuxSe": "❤️ Tvoj milenec/milenka: {amoureux2Name}",
+  "@votreAmoureuxSe": {
+    "placeholders": {
+      "amoureux2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "votreAmoureuxSe1": "❤️ Tvoj milenec/milenka: {amoureux1Name}",
+  "@votreAmoureuxSe1": {
+    "placeholders": {
+      "amoureux1Name": {
+        "type": "Object"
+      }
+    }
+  },
   "cEstAuTourDe4": "Je na rade tím! {currentTeamIndex1}",
+  "@cEstAuTourDe4": {
+    "placeholders": {
+      "currentTeamIndex1": {
+        "type": "Object"
+      }
+    }
+  },
   "aFaitUnMaisAucun": "Otočte sa automaticky! {playerName} {dice}",
+  "@aFaitUnMaisAucun": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
   "lancerTropElevePourAtteindre": "Otoč sa! {dice}",
+  "@lancerTropElevePourAtteindre": {
+    "placeholders": {
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
   "extremiteNonDisponibleSurLe1": "Koniec nie je na doske k dispozícii ({openEnds}).",
+  "@extremiteNonDisponibleSurLe1": {
+    "placeholders": {
+      "openEnds": {
+        "type": "Object"
+      }
+    }
+  },
   "laTuileNePossedePas": "Kameň {tile} nemá požadovanú hodnotu {matchEnd}.",
+  "@laTuileNePossedePas": {
+    "placeholders": {
+      "tile": {
+        "type": "Object"
+      },
+      "matchEnd": {
+        "type": "Object"
+      }
+    }
+  },
   "leBotAJoueAutomatiquement": "⏱️ Bot automaticky zahral {tileToPlay}.",
+  "@leBotAJoueAutomatiquement": {
+    "placeholders": {
+      "tileToPlay": {
+        "type": "Object"
+      }
+    }
+  },
   "aEteContraintDePasser": "⏱️ {playerName} musel(a) vynechať ťah.",
+  "@aEteContraintDePasser": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "laRouletteADesigne": "Ruleta označila 0 ! {selectedName}",
+  "@laRouletteADesigne": {
+    "placeholders": {
+      "selectedName": {
+        "type": "Object"
+      }
+    }
+  },
   "doitEcrireLeDefi": "0 musí napísať výzvu... {authorName}",
+  "@doitEcrireLeDefi": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
   "leDefiAEteEnvoye1": "Výzva bola poslaná na 0. {currentPlayerName}",
+  "@leDefiAEteEnvoye1": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
   "resultatDeValidation": "Výsledok: 0 % validácia! {percentage}",
+  "@resultatDeValidation": {
+    "placeholders": {
+      "percentage": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneXp": "0 vyhrá 1 XP! {currentPlayerName} {earnedXp}",
+  "@gagneXp": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      },
+      "earnedXp": {
+        "type": "Object"
+      }
+    }
+  },
   "tourSuivantQuiSeraLe1": "Nabudúce! Kto bude ďalší?",
   "passeSonTour3": "0 Už je na rade! {playerOrderinitialIn}",
+  "@passeSonTour3": {
+    "placeholders": {
+      "playerOrderinitialIn": {
+        "type": "Object"
+      }
+    }
+  },
   "vousDevezPiocherCartesOu": "Musíte si líznuť {pendingDraw} kariet, alebo kontrovať kartou +2/+4.",
+  "@vousDevezPiocherCartesOu": {
+    "placeholders": {
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteParfaite1": "Dokonalá rovnosť! {names}",
+  "@egaliteParfaite1": {
+    "placeholders": {
+      "names": {
+        "type": "Object"
+      }
+    }
+  },
   "priseMultipleObligatoireAvecLe1": "Povinný viacnásobný skok figúrkou na {mandatoryPiece}.",
+  "@priseMultipleObligatoireAvecLe1": {
+    "placeholders": {
+      "mandatoryPiece": {
+        "type": "Object"
+      }
+    }
+  },
   "motsDevines": "0 / 1 slová hádal! {guessedCount} {collectiveWordslengt}",
+  "@motsDevines": {
+    "placeholders": {
+      "guessedCount": {
+        "type": "Object"
+      },
+      "collectiveWordslengt": {
+        "type": "Object"
+      }
+    }
+  },
   "quiPourraitLePlus3": "Kto by najskôr {questionsrandomnextI}",
+  "@quiPourraitLePlus3": {
+    "placeholders": {
+      "questionsrandomnextI": {
+        "type": "Object"
+      }
+    }
+  },
   "decrivezVotreMotSecretEn": "Opíšte svoje tajné slovo jedným slovom. Impostori, blafujte!",
   "trouvezLeMeilleurSynonymePour1": "Nájdite najlepšie synonymum pre slovo: 0 {word}",
+  "@trouvezLeMeilleurSynonymePour1": {
+    "placeholders": {
+      "word": {
+        "type": "Object"
+      }
+    }
+  },
   "interdictionFormelleDeVoterPour": "Je prísne zakázané hlasovať za seba!",
   "remporteLaManche": "0 vyhrá rukoväť! {winnerName}",
+  "@remporteLaManche": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteADevineLe1": "Pán White hádal tajné slovo: \"0\"! {civilianWord}",
+  "@mrWhiteADevineLe1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteAEchoueA1": "Pán White neuhádol slovo (to bolo \"0\"). {civilianWord}",
+  "@mrWhiteAEchoueA1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
   "aucuneDescriptionNAEte1": "Nebol hlasovaný žiadny popis.",
   "ceNEstPasLe3": "Nie je na rade 0. {playerId}",
+  "@ceNEstPasLe3": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
   "donneesDuJoueurIntrouvables": "Hráčove dáta 0 nenájdené. {playerId}",
+  "@donneesDuJoueurIntrouvables": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
   "vousDevezFournirLaCouleur1": "Musíte poskytnúť požadovanú farbu (0). {ledSuit}",
+  "@vousDevezFournirLaCouleur1": {
+    "placeholders": {
+      "ledSuit": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagneAvecSaDescription1": "{winnerName} vyhral so svojím popisom:",
+  "@aGagneAvecSaDescription1": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "leLoupBlancFrappeEn": "Biely vlk útočí sám",
   "etaitUnCivilLesImposteurs": "{player} bol(a) Civil! Podvodníci vyhrávajú!",
+  "@etaitUnCivilLesImposteurs": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      }
+    }
+  },
   "etaitLLesCivilsGagnent": "{player} bol(a) {role}! Civilisti vyhrávajú!",
+  "@etaitLLesCivilsGagnent": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
   "question2": "otázka",
   "mrWhiteSecretWordPrompt": "Boli ste odhalený! Ak uhádnete tajné slovo Civilov, vyhráte sólo!",
   "codenamesRed": "Červená",
@@ -1963,79 +3947,683 @@
   "lanterne": "lampáš",
   "parchemin": "pergamen",
   "aGagne2": "{gameDataplayerswin} vyhral(a)!",
+  "@aGagne2": {
+    "placeholders": {
+      "gameDataplayerswin": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue2": "⏱️ {playerName} zahral(a) {cardsToPlayjoin}.",
+  "@aJoue2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardsToPlayjoin": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue3": "⏱️ {playerName} zahral(a) {winningCombojoin}.",
+  "@aJoue3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "winningCombojoin": {
+        "type": "Object"
+      }
+    }
+  },
   "pliTermineAuTourDe2": "⏱️ Zdvih ukončený. Na rade je {gameDataplayerspla}!",
+  "@pliTermineAuTourDe2": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "stop": "STOP",
   "coupFourrePareLAttaque1": "- Čo? 0 pripraviť útok s 1 a chyťte sa za ruku! {playerstargetIdnam} {matchingSafety}",
+  "@coupFourrePareLAttaque1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      },
+      "matchingSafety": {
+        "type": "Object"
+      }
+    }
+  },
   "aAtteintKm": "{playersplayerIdnam} dosiahol(a) {targetDist} km!",
+  "@aAtteintKm": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "targetDist": {
+        "type": "Object"
+      }
+    }
+  },
   "aCouleTouteLaFlotte1": "{shooterDataname} potopil(a) celú nepriateľskú flotilu!",
+  "@aCouleTouteLaFlotte1": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "aTireAutomatiquementEn": "0 automaticky vystrelil v 1 - 2 (3). {shooterDataname} {targetIndex101} {targetIndex1011} {result}",
+  "@aTireAutomatiquementEn": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      },
+      "targetIndex101": {
+        "type": "Object"
+      },
+      "targetIndex1011": {
+        "type": "Object"
+      },
+      "result": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue4": "⏱️ {playerName} zahral(a) {candidateCardsjoin}.",
+  "@aJoue4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "candidateCardsjoin": {
+        "type": "Object"
+      }
+    }
+  },
   "pliTermineAuTourDe3": "Skončil som. Na prelome 0 . {gameDataplayerspla}",
+  "@pliTermineAuTourDe3": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "estLeNouvelHote1": "{playersplayerOrder} je nový hostiteľ.",
+  "@estLeNouvelHote1": {
+    "placeholders": {
+      "playersplayerOrder": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersistanteLeDestinDepartage1": "Trvalá rovnosť! Osud začína náhodne: 0 je eliminovaný. {playerDatarandomEl}",
+  "@egalitePersistanteLeDestinDepartage1": {
+    "placeholders": {
+      "playerDatarandomEl": {
+        "type": "Object"
+      }
+    }
+  },
   "estMortEDeChagrin1": "{playerDataotherLov} zomrel(a) od žiaľu za svojou láskou!",
+  "@estMortEDeChagrin1": {
+    "placeholders": {
+      "playerDataotherLov": {
+        "type": "Object"
+      }
+    }
+  },
   "lHeritierHeriteDuRole2": "{playerDataheritier} (Dedič) dedí rolu hráča {playerDatatestateu}: {newRole}!",
+  "@lHeritierHeriteDuRole2": {
+    "placeholders": {
+      "playerDataheritier": {
+        "type": "Object"
+      },
+      "playerDatatestateu": {
+        "type": "Object"
+      },
+      "newRole": {
+        "type": "Object"
+      }
+    }
+  },
   "heriteEgalementDuStatutDe1": "{playerDataheritier} tiež dedí status Kapitána!",
+  "@heriteEgalementDuStatutDe1": {
+    "placeholders": {
+      "playerDataheritier": {
+        "type": "Object"
+      }
+    }
+  },
   "leVillageDecouvreAvecEffroi1": "Obec s hrôzou objavuje telo (s) z: 0 . {deadThisNightNames}",
+  "@leVillageDecouvreAvecEffroi1": {
+    "placeholders": {
+      "deadThisNightNames": {
+        "type": "Object"
+      }
+    }
+  },
   "leFossoyeurReveleEtaitUn1": "{playerDatafossoyeu} (Hrobár) odhaľuje: {playerDatatargetPl} bol(a) {targetRole}!",
+  "@leFossoyeurReveleEtaitUn1": {
+    "placeholders": {
+      "playerDatafossoyeu": {
+        "type": "Object"
+      },
+      "playerDatatargetPl": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "etEtaitUnE": "A 0 bolo 1! {playerDataotherRev} {otherRevealedRole}",
+  "@etEtaitUnE": {
+    "placeholders": {
+      "playerDataotherRev": {
+        "type": "Object"
+      },
+      "otherRevealedRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leDictateurAExecuteUn1": "Diktátor {playerDatadictator} popravil podvodníka ({playerDatatargetId} - {targetRole}) a stáva sa Kapitánom!",
+  "@leDictateurAExecuteUn1": {
+    "placeholders": {
+      "playerDatadictator": {
+        "type": "Object"
+      },
+      "playerDatatargetId": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leLoupBavardNA1": "Urozprávanný vlk ({playerDataloupBava}) nepovedal svoje slovo a pri západe slnka zomrel!",
+  "@leLoupBavardNA1": {
+    "placeholders": {
+      "playerDataloupBava": {
+        "type": "Object"
+      }
+    }
+  },
   "leVillageAVoteEt1": "Dedina hlasovala a vyraďuje hráča {playerDataeliminat}.",
+  "@leVillageAVoteEt1": {
+    "placeholders": {
+      "playerDataeliminat": {
+        "type": "Object"
+      }
+    }
+  },
   "leMercenaireAFaitEliminer1": "Žoldnier {playerDatamercenai} vyradil svoj cieľ v Deň 1! Vyhráva hru sám!",
+  "@leMercenaireAFaitEliminer1": {
+    "placeholders": {
+      "playerDatamercenai": {
+        "type": "Object"
+      }
+    }
+  },
   "meurtDeChagrinPourSon1": "{playerDataotherLov} umiera so zlomeným srdcom!",
+  "@meurtDeChagrinPourSon1": {
+    "placeholders": {
+      "playerDataotherLov": {
+        "type": "Object"
+      }
+    }
+  },
   "lAncienCapitaine1": "Bývalý kapitán",
   "aDit": "0 povedal: \"1\" {playerDataplayerId} {cleanClue}",
+  "@aDit": {
+    "placeholders": {
+      "playerDataplayerId": {
+        "type": "Object"
+      },
+      "cleanClue": {
+        "type": "Object"
+      }
+    }
+  },
   "aDevineLeMotCivil1": "0 hádal občianske slovo (1 \")! {gameDataplayerData} {civilWord}",
+  "@aDevineLeMotCivil1": {
+    "placeholders": {
+      "gameDataplayerData": {
+        "type": "Object"
+      },
+      "civilWord": {
+        "type": "Object"
+      }
+    }
+  },
   "aProposeMaisCeN": "0 navrhol \"1,\" ale nebolo to občianske slovo (\"2\")! {gameDataplayerData} {guessedWord} {civilWord}",
+  "@aProposeMaisCeN": {
+    "placeholders": {
+      "gameDataplayerData": {
+        "type": "Object"
+      },
+      "guessedWord": {
+        "type": "Object"
+      },
+      "civilWord": {
+        "type": "Object"
+      }
+    }
+  },
   "flottesPlaceesCommenceATirer1": "Plávajú umiestnené! 0 začne strieľať. {playerDatafirstPla}",
+  "@flottesPlaceesCommenceATirer1": {
+    "placeholders": {
+      "playerDatafirstPla": {
+        "type": "Object"
+      }
+    }
+  },
   "tousLesJoueursSontPrets1": "Všetci hráči sú pripravení! 0 začne strieľať. {playerDatafirstPla}",
+  "@tousLesJoueursSontPrets1": {
+    "placeholders": {
+      "playerDatafirstPla": {
+        "type": "Object"
+      }
+    }
+  },
   "laMancheDeRamiCommence1": "Ramiho rukáv začína! Je na rade 0. {playersplayerIdsfi}",
+  "@laMancheDeRamiCommence1": {
+    "placeholders": {
+      "playersplayerIdsfi": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagneLaManche1": "{playersplayerIdnam} vyhral(a) kolo!",
+  "@aGagneLaManche1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "k3SixConsecutifsLePion1": "Tri šesť po sebe idúcich! Pešiak 0 sa vráti do stajne a jeho obrat prejde. {playersplayerIdnam}",
+  "@k3SixConsecutifsLePion1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagne3": "{playersplayerIdnam} vyhral(a)!",
+  "@aGagne3": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "atteintPoints": "0 bodov! {playersplayerIdnam} {targetScore}",
+  "@atteintPoints": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "atteintPoints1": "0 bodov! {playerswinnerIdnam} {targetScore}",
+  "@atteintPoints1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "mancheTermineeGagneAvecXp": "Ustúpte! 0 víťazstiev s 1 XP! {playerswinnerIdnam} {maxXp}",
+  "@mancheTermineeGagneAvecXp": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      },
+      "maxXp": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUneInversionEt1": "{playersplayerIdnam} zahral(a) Zmenu smeru a hrá znova!",
+  "@aJoueUneInversionEt1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aInverseLeSensDe1": "{playersplayerIdnam} otočil(a) smer hry!",
+  "@aInverseLeSensDe1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aSauteLeTourDe1": "{playersplayerIdnam} preskočil(a) ťah hráča {skippedPlayerName}!",
+  "@aSauteLeTourDe1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "skippedPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
   "aEmpileUn2Cumul1": "{playersplayerIdnam} priložil(a) +2. Celkovo: {pendingDraw2} kariet!",
+  "@aEmpileUn2Cumul1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw2": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUn21": "{playersplayerIdnam} zahral(a) +2!",
+  "@aJoueUn21": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUnJokerEt1": "{playersplayerIdnam} zahral(a) Divokú kartu a vybral(a) farbu {chosenColor}!",
+  "@aJoueUnJokerEt1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "chosenColor": {
+        "type": "Object"
+      }
+    }
+  },
   "aEmpileUn4Cumul1": "{playersplayerIdnam} priložil(a) +4. Celkovo: {pendingDraw4} kariet!",
+  "@aEmpileUn4Cumul1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw4": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUnSuperJoker1": "{playersplayerIdnam} zahral(a) Divokú kartu +4!",
+  "@aJoueUnSuperJoker1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aPoseSaDerniereCarte1": "{playersplayerIdnam} položil(a) poslednú kartu a vyhráva kolo!",
+  "@aPoseSaDerniereCarte1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneLaMancheAvecPoints": "{playersplayerIdnam} vyhráva kolo s +{roundScore} bodmi!",
+  "@gagneLaMancheAvecPoints": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "roundScore": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPlusQuUne1": "{playersplayerIdnam} má už len jednu kartu!",
+  "@nAPlusQuUne1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "passeSonTour4": "0 je na rade. {playersplayerIdnam}",
+  "@passeSonTour4": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA5": "{gameDataplayerspla} nehral(a) včas, líže a vynecháva ťah.",
+  "@nAPasJoueA5": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "votreCibleEstEliminezLe1": "Váš cieľ je 0 . Eliminujte ho na 1. deň! {playerDatamercenai}",
+  "@votreCibleEstEliminezLe1": {
+    "placeholders": {
+      "playerDatamercenai": {
+        "type": "Object"
+      }
+    }
+  },
   "aReponduEtPasseLa": "{gameDataplayerspla} odpovedal(a) „{cleanAnswer}“ a posunul(a) bombu!",
+  "@aReponduEtPasseLa": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      },
+      "cleanAnswer": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheCarteS": "{playersplayerIdnam} lízol(a) {pendingDraw} kariet/karty.",
+  "@aPiocheCarteS": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheUneCarteEt2": "{playersplayerIdnam} lízol(a) kartu a môže ju zahrať.",
+  "@aPiocheUneCarteEt2": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheUneCarteEt3": "{playersplayerIdnam} lízol(a) kartu a vynecháva ťah.",
+  "@aPiocheUneCarteEt3": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPas1Carte1": "{playerstargetIdnam} nemá 1 kartu, hlásenie UNO je neplatné.",
+  "@nAPas1Carte1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aCrieContreUnoPioche1": "{playerscallerIdnam} zakričal(a) Kontra UNO! {playerstargetIdnam} líže 2 karty.",
+  "@aCrieContreUnoPioche1": {
+    "placeholders": {
+      "playerscallerIdnam": {
+        "type": "Object"
+      },
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aDitUno1": "{playerstargetIdnam} povedal(a) UNO!",
+  "@aDitUno1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "appelUnoInvalide": "Neplatné hlásenie UNO.",
   "aChoisiLaCouleur": "0 vybrala farbu 1 ! {playersplayerIdnam} {chosenColor}",
+  "@aChoisiLaCouleur": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "chosenColor": {
+        "type": "Object"
+      }
+    }
+  },
   "estLeDernierSurvivantEt": "0 je posledný prežil a vyhrá lebku! {playerswinnerIdnam}",
+  "@estLeDernierSurvivantEt": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aRemporte2DefisEt": "0 vyhral 2 výzvy a vyhral hru! {playerschallengerI}",
+  "@aRemporte2DefisEt": {
+    "placeholders": {
+      "playerschallengerI": {
+        "type": "Object"
+      }
+    }
+  },
   "nouvelleMainEstLeDonneur1": "Nové rozdanie! {playersplayerIdsde} je rozdávajúci.",
+  "@nouvelleMainEstLeDonneur1": {
+    "placeholders": {
+      "playersplayerIdsde": {
+        "type": "Object"
+      }
+    }
+  },
   "poseLaPetiteBlindDe1": "{playerssmallBlindI} vsádza malý blind {smallBlindActual}.",
+  "@poseLaPetiteBlindDe1": {
+    "placeholders": {
+      "playerssmallBlindI": {
+        "type": "Object"
+      },
+      "smallBlindActual": {
+        "type": "Object"
+      }
+    }
+  },
   "poseLaGrosseBlindDe1": "{playersbigBlindIdn} vsádza veľký blind {bigBlindActual}.",
+  "@poseLaGrosseBlindDe1": {
+    "placeholders": {
+      "playersbigBlindIdn": {
+        "type": "Object"
+      },
+      "bigBlindActual": {
+        "type": "Object"
+      }
+    }
+  },
   "seCouche1": "{myDataname} skladá karty (Fold).",
+  "@seCouche1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "faitTapisAllIn1": "{myDataname} ide all-in!",
+  "@faitTapisAllIn1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "suitPour": "{myDataname} dorovnáva {callAmount} (Call).",
+  "@suitPour": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "callAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "faitTapisAllInEn1": "0 robí koberec (all-in) opätovným spustením na 1 ! {myDataname} {totalBetAmount}",
+  "@faitTapisAllInEn1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "totalBetAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "relanceA": "{myDataname} navyšuje na {totalBetAmount} (Raise).",
+  "@relanceA": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "totalBetAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "abattageShowdown": "--- VYLOŽENIE KARIET (SHOWDOWN) ---",
   "gagneLePotParForfait1": "{playerDatawinnersf} vyhráva bank skrečom!",
+  "@gagneLePotParForfait1": {
+    "placeholders": {
+      "playerDatawinnersf": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneNtLePotAvec": "{winnerNames} vyhráva/vyhrávajú bank s {bestHandranknamel1}!",
+  "@gagneNtLePotAvec": {
+    "placeholders": {
+      "winnerNames": {
+        "type": "Object"
+      },
+      "bestHandranknamel1": {
+        "type": "Object"
+      }
+    }
+  },
   "aPrisA": "0 vzalo 1! {playerDataplayerId} {suit}",
+  "@aPrisA": {
+    "placeholders": {
+      "playerDataplayerId": {
+        "type": "Object"
+      },
+      "suit": {
+        "type": "Object"
+      }
+    }
+  },
   "histoireCollective": "SPOLOČNÝ PRÍBEH",
   "distance": "VZDIALENOSŤ",
   "botte": "BEZPEČNOSŤ",
@@ -2051,7 +4639,118 @@
   "plein": "PLNÁ",
   "rejouer1": "REPLAY",
   "infecter1": "Nakaziť {targetName}?",
+  "@infecter1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "action1": "AKCIA",
   "action2": "🔥 AKCIA",
-  "aRelanceLesDes2": "0 znovu nasadiť kocky (1/3). {pName} {val}"
+  "aRelanceLesDes2": "0 znovu nasadiť kocky (1/3). {pName} {val}",
+  "@aRelanceLesDes2": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "val": {
+        "type": "Object"
+      }
+    }
+  },
+  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "@jAiLanceUnePartie3": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "@rolesJoueurs1": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "@dessineCettePhrase1": {
+    "placeholders": {
+      "stepToProcessconte": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "@aEteBanniPourSa1": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "@aTrouveLeMot2": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "@personneNATrouveLe1": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "@aTrouveLeMot3": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "revolution1": "(Révolution !)",
+  "tonMotEst2": "Tvoje slovo je: {_wordCivil}",
+  "@tonMotEst2": {
+    "placeholders": {
+      "_wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
+  "tonMotEst3": "Tvoje slovo je: {_wordUndercover}",
+  "@tonMotEst3": {
+    "placeholders": {
+      "_wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
+  "egalite1": "Remíza!",
+  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "@jAiLanceUnePartie4": {
+    "placeholders": {
+      "datagameTypeGribou": {
+        "type": "Object"
+      }
+    }
+  }
 }

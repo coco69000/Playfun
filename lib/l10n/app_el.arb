@@ -7,7 +7,13 @@
   "joueursNonAssignes": "Μη Ανατεθειμένοι Παίκτες ('{0}')",
   "annuler": "Άκυρο",
   "confirmerLesEquipes": "Επιβεβαίωση ομάδων",
+  "jeuDeSoiree": "Παιχνίδι πάρτι",
+  "multijoueurEnLigne": "Πολλαπλοί παίκτες (Online)",
+  "modeLocalHorsLigne": "Τοπική λειτουργία (Εκτός σύνδεσης)",
+  "modeMultijoueur": "Λειτουργία για πολλούς παίκτες",
   "entrezVotrePseudo": "Εισάγετε το ψευδώνυμό σας",
+  "pseudo": "Ψευδώνυμο",
+  "creerUnePartie": "Δημιουργία παιχνιδιού",
   "veuillezEntrerUnPseudo": "Παρακαλώ εισάγετε ένα ψευδώνυμο.",
   "rejoindreUnePartie": "Συμμετοχή σε παιχνίδι",
   "vousAvezAtteintVotreLimite": "Έχεις φτάσει το όριο των 20 παιχνιδιών πολλών παικτών για σήμερα.",
@@ -48,6 +54,16 @@
   "elementsGeneresEtSauvegardes": "✨ '{0}' στοιχεία που δημιουργήθηκαν και αποθηκεύτηκαν!",
   "erreurIa": "Σφάλμα AI: '{0}'",
   "packActifElements": "Ενεργό πακέτο: {p} ({p2} τεμάχια)",
+  "@packActifElements": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "p2": {
+        "type": "Object"
+      }
+    }
+  },
   "desactiverCePack": "Απενεργοποίηση αυτού του πακέτου",
   "modeDeJeu": "Λειτουργία παιχνιδιού",
   "normal": "Κανονικό",
@@ -254,7 +270,24 @@
   "vousAvezEteExcluDe": "Αποβληθήκατε λόγω αδράνειας. Ο υπολογιστής παίζει για εσάς (καμία ανταμοιβή).",
   "s": "'{0}' δευτ",
   "pts1": "{pName}: {pScore} πόντοι",
+  "@pts1": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "pScore": {
+        "type": "Object"
+      }
+    }
+  },
   "xp": "{pXp} XP",
+  "@xp": {
+    "placeholders": {
+      "pXp": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPlusDeCartes": "Δεν έχει άλλες κάρτες",
   "cartesRestantes": "'{0.}' κάρτες που απομένουν",
   "jetonsMise": "Μάρκες: '{0,}' $ | Ποντάρισμα: '{1,}' $",
@@ -302,13 +335,14 @@
   "aucuneCarteEnJeuJouez": "Καμία κάρτα στο παιχνίδι. Παίξτε ό,τι θέλετε!",
   "jouer": "Αναπαραγωγή ('{0}')",
   "priseEnChaineVousDevez": "⚠️ Αλυσιδωτό φάγωμα! Πρέπει να παίξετε το πιόνι που αναβοσβήνει.",
+  "aSelectionneSonPionEt": "'{0}' έχει επιλέξει το πιόνι του και σκέφτεται...",
   "vousDevezSelectionnerLePion": "Πρέπει να επιλέξετε το πιόνι με την πορτοκαλί επισήμανση.",
   "jeuNonImplemente": "Μη υλοποιημένο παιχνίδι: '{0}'",
   "tempsEcoule": "Ο χρόνος έληξε!",
   "tourSuivant": "Επόμενος γύρος",
   "enAttenteDeLHote3": "Αναμονή οικοδεσπότη για έναρξη επόμενου γύρου...",
-  "equipeAPts": "Ομάδα Α: '{βαθμοί}' βαθμοί",
-  "equipeBPts": "Ομάδα Β: '{βαθμοί}' βαθμοί",
+  "equipeAPts": "Ομάδα Α: '{βαθμοί}' βαθμοί '{pts}'",
+  "equipeBPts": "Ομάδα Β: '{βαθμοί}' βαθμοί '{pts}'",
   "cEstAToiDe": "Είναι η σειρά ΣΟΥ να μαντέψεις!",
   "passer1": "ΠΑΡΑΛΕΙΠΩ",
   "motsTrouves": "Λέξεις που βρέθηκαν: '{0}'",
@@ -319,7 +353,24 @@
   "voiciLesUvresCollectivesNees": "Εδώ είναι τα συλλογικά έργα της φαντασίας σας:",
   "prepareUneAttaqueContreUn": "⚠️ '{0}' προετοιμάζει μια επίθεση ('{1}') εναντίον ενός παίκτη!",
   "km": "{oppDist} χλμ",
+  "@km": {
+    "placeholders": {
+      "oppDist": {
+        "type": "Object"
+      }
+    }
+  },
   "km1": "{myDistance} / {targetDist} χλμ",
+  "@km1": {
+    "placeholders": {
+      "myDistance": {
+        "type": "Object"
+      },
+      "targetDist": {
+        "type": "Object"
+      }
+    }
+  },
   "aucuneBotte": "Χωρίς κάρτες ασφαλείας",
   "limite50": "ΟΡΙΟ 50",
   "crevaison": "ΣΚΑΣΜΕΝΟ ΛΑΣΤΙΧΟ",
@@ -335,7 +386,7 @@
   "distribuerLaSuite": "Μοίρασε επόμενο",
   "attenteDuDonneur": "Αναμονή ντίλερ...",
   "couche": "Πήγε πάσο",
-  "miseActuelle": "Τρέχον ποντάρισμα: '{ποσό}'",
+  "miseActuelle": "Τρέχον ποντάρισμα: '{ποσό}' '{amount}'",
   "enAttente": "Σε αναμονή...",
   "seCoucher": "Πάσο",
   "checker": "Τσεκ",
@@ -350,6 +401,13 @@
   "uno": "UNO!",
   "contreUno": "Αντί-UNO!",
   "erreur1": "Σφάλμα: {p}",
+  "@erreur1": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezUneCouleur": "Διάλεξε ένα χρώμα",
   "votezPourUnJoueur": "Ψηφίστε έναν παίκτη:",
   "derniereChanceMrWhite": "Τελευταία ευκαιρία Mr. White!",
@@ -435,6 +493,22 @@
   "jeValide": "Επικυρώνω!",
   "classementFinal1": "Τελική κατάταξη",
   "pt": "{p}. {eValueKey}: {eValueValue} π.{p2}",
+  "@pt": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "eValueKey": {
+        "type": "Object"
+      },
+      "eValueValue": {
+        "type": "Object"
+      },
+      "p2": {
+        "type": "Object"
+      }
+    }
+  },
   "categorie": "Κατηγορία",
   "viteUnMot": "Γρήγορα! Μια λέξη!",
   "validerPasser": "ΕΠΙΚΥΡΩΣΗ & ΠΑΣΟ",
@@ -442,6 +516,19 @@
   "boom": "ΜΠΟΥΜ!",
   "scoresMoinsMieux": "Σκορ (λιγότεροι = καλύτερα)",
   "pt1": "{eKey}: {eValue} π.{p}",
+  "@pt1": {
+    "placeholders": {
+      "eKey": {
+        "type": "Object"
+      },
+      "eValue": {
+        "type": "Object"
+      },
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "nouvelleManche": "Νέος Γύρος",
   "infecter": "Μόλυνση",
   "devorer": "Κατασπάραξη",
@@ -451,36 +538,95 @@
   "coupDEtat": "Πραξικόπημα",
   "ouvrirLesVotes": "Άνοιγμα ψηφοφορίας",
   "cloturerLeVote": "Κλείσιμο ψηφοφορίας",
+  "k0S": "0 δευτ",
   "tempsRestantS": "Χρόνος που απομένει: '{0}' s",
   "k6Consecutifs3": "6 στη σειρά: '{streak}'/3",
   "lancerLeDe": "ΡΙΞΤΕ ΤΟ ΖΑΡΙ",
-  "scorePoints": "Σκορ: '{σκορ}' πόντους",
-  "dominosRestants": "Εναπομείναντα ντόμινο: '{μέτρηση}'",
+  "scorePoints": "Σκορ: '{σκορ}' πόντους '{score}'",
+  "dominosRestants": "Εναπομείναντα ντόμινο: '{μέτρηση}' '{count}'",
   "impossibleDeJouerCeDomino": "Δεν μπορεί να παιχτεί αυτό το ντόμινο εδώ.",
   "mancheTerminee": "Ο γύρος τελείωσε! ",
   "dominos": "Ντόμινο",
   "extremites": "Άκρα: ",
-  "pioche2": "Ισοπαλία : '{Count}'",
+  "pioche2": "Ισοπαλία : '{count}'",
   "piocher": "Τράβηξε",
   "ficheDePts": "'{0}' ρεκόρ ('{1}' βαθμοί)",
   "pts2": "{otherName} ({otherTotal} πόντοι)",
+  "@pts2": {
+    "placeholders": {
+      "otherName": {
+        "type": "Object"
+      },
+      "otherTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "clic": "ΚΛΙΚ",
-  "lancersRestants": "Εναπομείνασες ρίψεις: '{Μετρήστε}'",
+  "lancersRestants": "Εναπομείνασες ρίψεις: '{Μετρήστε}' '{count}'",
   "combinaison": "ΣΥΝΔΥΑΣΜΟΣ",
   "grilleDePts": "ΠΛΕΓΜΑ '{0}' ('{1}' πόντοι)",
   "pts3": "{p} ({myTotal} πόντοι)",
+  "@pts3": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      },
+      "myTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "pts4": "{oppName} ({oppTotal} πόντοι)",
+  "@pts4": {
+    "placeholders": {
+      "oppName": {
+        "type": "Object"
+      },
+      "oppTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "pts5": "{oppCellScore} πόντοι",
+  "@pts5": {
+    "placeholders": {
+      "oppCellScore": {
+        "type": "Object"
+      }
+    }
+  },
   "pts6": "{oppTotal} πόντοι",
+  "@pts6": {
+    "placeholders": {
+      "oppTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "total": "ΣΥΝΟΛΟ",
   "pts7": "{myTotal} πόντοι",
+  "@pts7": {
+    "placeholders": {
+      "myTotal": {
+        "type": "Object"
+      }
+    }
+  },
   "carteAPrendre": "ΚΑΡΤΑ ΠΡΟΣ ΛΗΨΗ",
-  "votreMain": "Το χέρι σας ('{μετράει}')",
+  "votreMain": "Το χέρι σας ('{μετράει}') '{count}'",
   "touchezUneCartePourLa": "Αγγίξτε μια κάρτα για να την παίξετε",
   "aucuneCombinaisonEtaleeSurLa": "Δεν υπάρχουν συνδυασμοί στο τραπέζι ακόμα",
-  "etaler": "Εξάπλωση ('{μετράει}')",
+  "etaler": "Εξάπλωση ('{μετράει}') '{count}'",
   "defausserFin": "Απόρριψη & Τέλος",
   "pts8": "{eValue} πόντοι",
+  "@pts8": {
+    "placeholders": {
+      "eValue": {
+        "type": "Object"
+      }
+    }
+  },
   "placezDansVotreCoin": "Τοποθετήστε στη γωνία σας!",
   "retourner": "Αναστροφή",
   "validerLePlacement": "Επικύρωση τοποθέτησης",
@@ -699,6 +845,13 @@
   "validerLesEquipes": "Επιβεβαίωση ομάδων",
   "placezLeTelephoneSurVotre": "ΤΟΠΟΘΕΤΗΣΤΕ ΤΟ ΤΗΛΕΦΩΝΟ ΣΤΟ ΜΕΤΩΠΟ ΣΑΣ!",
   "s1": "⏱️ {secondsLeft} μικρό",
+  "@s1": {
+    "placeholders": {
+      "secondsLeft": {
+        "type": "Object"
+      }
+    }
+  },
   "basTrouve": "Κάτω = Βρέθηκε",
   "arreter": "Διακοπή",
   "hautPasser": "Πάνω = Πάσο",
@@ -706,7 +859,21 @@
   "pointsMarques": "+'{0,}' πόντους!",
   "touchezUnMotPourModifier": "Πατήστε μια λέξη για να επεξεργαστείτε το αποτέλεσμα σε περίπτωση σφάλματος αισθητήρα:",
   "pts10": "{teamAScore} πόντοι",
+  "@pts10": {
+    "placeholders": {
+      "teamAScore": {
+        "type": "Object"
+      }
+    }
+  },
   "pts11": "{teamBScore} πόντοι",
+  "@pts11": {
+    "placeholders": {
+      "teamBScore": {
+        "type": "Object"
+      }
+    }
+  },
   "continuerLaPartie": "Συνέχεια παιχνιδιού",
   "mauvaisSymbole": "'{0}' : Κακό σύμβολο!",
   "dobbleLocal": "Τοπικό Dobble",
@@ -717,6 +884,16 @@
   "commencer2": "ΕΝΑΡΞΗ",
   "piocheBut": "ΙΣΟΠΑΛΊΑ ('{0}') • ΓΚΟΛ : '{1}'",
   "pts12": "{player} ({score} πόντοι)",
+  "@pts12": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "partieTerminee2": "ΤΕΛΟΣ ΠΑΙΧΝΙΔΙΟΥ!",
   "victoireDe": "Νίκη του '{0}' !",
   "cartes": "'{0,}' κάρτες",
@@ -803,6 +980,13 @@
   "prets": "'{0}' / '{1}' έτοιμο",
   "scoresConservesDeLaSession": "ΑΠΟΘΗΚΕΥΜΕΝΑ ΣΚΟΡ ΣΥΝΕΔΡΙΑΣ:",
   "pts13": "{pScore} πόντοι",
+  "@pts13": {
+    "placeholders": {
+      "pScore": {
+        "type": "Object"
+      }
+    }
+  },
   "adminLancerMaintenantAvecLes": "Διαχειριστής: Έναρξη τώρα με τους έτοιμους παίκτες",
   "leCompagnonDeVosMeilleures": "Ο σύντροφος των καλύτερων βραδιών σου",
   "desactivezLaRecherchePubliquePour": "Απενεργοποίησε την ''Δημόσια αναζήτηση'' για να παίξεις τοπικά.",
@@ -817,11 +1001,12 @@
   "votreFlotteTirsEnnemisRecus": "Ο Στόλος σας (Εισερχόμενα εχθρικά πυρά)",
   "elimine": "Αποκλείστηκε",
   "tapisVide": "Άδειο ταμπλό",
-  "reflechit": "'{όνομα}' σκέφτεται...",
+  "ecrireAu": "Γράψτε στο '{0}'...",
+  "reflechit": "'{όνομα}' σκέφτεται... '{name}'",
   "faceAFaceCoteA": "Πρόσωπο με πρόσωπο (δίπλα-δίπλα)",
   "totalAdversaire": "ΣΥΝΟΛΟ ΑΝΤΙΠΑΛΟΥ",
   "prendreLAtoutOuPasser": "ΠΑΡΤΕ ΤΟ ΑΤΟΥ Η ΠΑΣΟ:",
-  "combinaisonsDe": "Συνδυασμοί '{ονόματος}'",
+  "combinaisonsDe": "Συνδυασμοί '{ονόματος}' '{name}'",
   "ilDevraDonnerLePremier": "Θα πρέπει να δώσει το πρώτο στοιχείο",
   "cetteReponseADejaEte": "Αυτή η απάντηση έχει ήδη δοθεί!",
   "themePourLes25Mots": "Θέμα για τις 25 λέξεις",
@@ -830,51 +1015,299 @@
   "rulesTitle": "Οι κανόνες του παιχνιδιού",
   "understoodButton": "Καταλαβαίνω",
   "skyjoRoundEnderNotice": "Ο/Η {name} αποκάλυψε πρώτος/η όλες τις κάρτες του/της.",
+  "@skyjoRoundEnderNotice": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoRoundScoreNotice": "+{roundScore} αυτόν τον γύρο  •  Σύνολο: {totalScore} πόντοι",
+  "@skyjoRoundScoreNotice": {
+    "placeholders": {
+      "roundScore": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoReplaceWithDrawn": "Πατήστε μια κάρτα για να την ΑΝΤΙΚΑΤΑΣΤΗΣΕΤΕ με το {card}.",
+  "@skyjoReplaceWithDrawn": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoTapHiddenToReveal": "Πατήστε μια ΚΛΕΙΣΤΗ κάρτα για να την ΑΠΟΚΑΛΥΨΕΤΕ.",
   "skyjoChooseActionForDrawn": "Επιλέξτε ενέργεια για το {card}:",
+  "@skyjoChooseActionForDrawn": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoReplaceWithDiscard": "Πατήστε μια κάρτα για να την ΑΝΤΙΚΑΤΑΣΤΗΣΕΤΕ με τα απορρίμματα ({card}).",
+  "@skyjoReplaceWithDiscard": {
+    "placeholders": {
+      "card": {
+        "type": "Object"
+      }
+    }
+  },
   "skyjoCardsRevealedCount": "{count} / 2 κάρτες γυρισμένες",
+  "@skyjoCardsRevealedCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "ceTurnOfPlayer": "ΣΕΙΡΑ ΤΟΥ/ΤΗΣ {name}",
+  "@ceTurnOfPlayer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "ceStepOfTotal": "Βήμα {step} / {total}",
+  "@ceStepOfTotal": {
+    "placeholders": {
+      "step": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
   "ceVisibleSnippetOf": "Ορατό απόσπασμα από {name}:",
+  "@ceVisibleSnippetOf": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "cePlayerWriting": "Ο/Η {name} γράφει...",
+  "@cePlayerWriting": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "ceStoryNumber": "ΙΣΤΟΡΙΑ #{index}",
+  "@ceStoryNumber": {
+    "placeholders": {
+      "index": {
+        "type": "Object"
+      }
+    }
+  },
   "mbTurnOf": "ΣΕΙΡΑ ΤΟΥ {name}",
+  "@mbTurnOf": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "mbHandCount": "Χέρι: {count} κάρτες",
+  "@mbHandCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "mbCardsInHand": "Κάρτες στο χέρι ({count})",
+  "@mbCardsInHand": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "dobbleAllCardsFound": "Όλες οι κάρτες βρέθηκαν!",
   "dobbleDealingCards": "Μοίρασμα καρτών...",
   "dobbleCenterCard": "ΚΕΝΤΡΙΚΗ ΚΑΡΤΑ",
+  "dobbleDeckCards": "ΙΣΟΠΑΛΙΑ ({count} κάρτες)",
+  "@dobbleDeckCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "dobbleTapSameSymbol": "Βρείτε το ίδιο σύμβολο!",
   "dobbleMyCardsCount": "Οι Κάρτες Μου: {count}",
+  "@dobbleMyCardsCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "dobbleBlocked": "ΜΠΛΟΚΑΡΙΣΜΕΝΟΣ!",
   "dobbleTooManyErrors": "Πολλά γρήγορα λάθη.",
+  "dobblePenaltyWait": "Περιμένετε το πέναλτι!",
+  "dobbleWrongSymbolWarning": "Κακό σύμβολο! Προσοχή στο μπλοκάρισμα.",
   "dobbleFoundSymbol": "Ο/Η {name} βρήκε το σύμβολο!",
+  "@dobbleFoundSymbol": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "dobbleSymbolWas": "Το σύμβολο ήταν:",
   "pokerPot": "Ποτ: {amount} \\$",
+  "@pokerPot": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "pokerRaiseAlert": "⚠️ Ο/Η {name} ετοιμάζει αύξηση στα {amount} \\$!",
+  "@pokerRaiseAlert": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      },
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "pokerCall": "Call ({amount})",
+  "@pokerCall": {
+    "placeholders": {
+      "amount": {
+        "type": "Object"
+      }
+    }
+  },
   "unoYouMustDraw": "Πρέπει να τραβήξετε {count} κάρτες!",
+  "@unoYouMustDraw": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "unoMustDraw": "Πρέπει να τραβήξει {count} κάρτες!",
+  "@unoMustDraw": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "unoDrawCountCards": "Τραβήξτε {count} κάρτες",
+  "@unoDrawCountCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesMissionEnd": "Τέλος αποστολής!",
   "codenamesRedTeam": "Κόκκινη Ομάδα",
   "codenamesBlueTeam": "Μπλε Ομάδα",
+  "codenamesSpectator": "Θεατής",
+  "codenamesMasterSpy": "Αρχικατάσκοπος",
+  "codenamesAgent": "Πράκτορας",
   "codenamesTeamTurn": "Είναι η σειρά της ομάδας: {team}",
+  "@codenamesTeamTurn": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
+  "codenamesYouAre": "Είστε: ",
   "codenamesMasterSpyView": "Προβολή Αρχικατασκόπου (Κάρτα-Κλειδί)",
   "codenamesClueLabel": "Το στοιχείο σας (μία λέξη)",
   "codenamesWordCountLabel": "Αριθμός λέξεων",
   "codenamesGiveClue": "Δώσε το στοιχείο",
   "codenamesClueGiven": "Δώσατε το στοιχείο: ''{clue} {count}''",
+  "@codenamesClueGiven": {
+    "placeholders": {
+      "clue": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesAgentView": "Προβολή Πράκτορα",
   "codenamesClueFromSpy": "Στοιχείο από {spy}:",
+  "@codenamesClueFromSpy": {
+    "placeholders": {
+      "spy": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesGuessesLeft": "Προσπάθειες που απομένουν: {count}",
+  "@codenamesGuessesLeft": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "codenamesPassTurn": "Τέλος γύρου",
   "codenamesWaitingForClue": "Αναμονή για το στοιχείο του {team} Αρχικατασκόπου...",
+  "@codenamesWaitingForClue": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamAScore": "Ομάδα Α: {score}",
+  "@timesUpTeamAScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamBScore": "Ομάδα Β: {score}",
+  "@timesUpTeamBScore": {
+    "placeholders": {
+      "score": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpYouAreInTeam": "Είστε στην {team}",
+  "@timesUpYouAreInTeam": {
+    "placeholders": {
+      "team": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpRoundMode": "Γύρος {round}: {mode}",
+  "@timesUpRoundMode": {
+    "placeholders": {
+      "round": {
+        "type": "Object"
+      },
+      "mode": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpYourTurnToMakeGuess": "Είναι η σειρά ΣΟΥ να περιγράψεις!",
   "timesUpRoundEnd": "ΤΕΛΟΣ ΓΥΡΟΥ!",
   "timesUpFound": "Βρέθηκε!",
@@ -883,36 +1316,144 @@
   "timesUpSomeone": "Κάποιος",
   "timesUpSeconds": "δευτερόλεπτα",
   "timesUpCardsLeft": "Υπολειπόμενες κάρτες: {count}",
+  "@timesUpCardsLeft": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpForceNextPlayer": "Επόμενος παίκτης αναγκαστικά (Διοργανωτής)",
   "timesUpGameOverReason": "Τέλος των 3 γύρων! Ομάδα Α: {scoreA} πόντοι | Ομάδα Β: {scoreB} πόντοι",
+  "@timesUpGameOverReason": {
+    "placeholders": {
+      "scoreA": {
+        "type": "Object"
+      },
+      "scoreB": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpTeamA": "Ομάδα Α",
   "timesUpTeamB": "Ομάδα Β",
   "timesUpDraw": "Ισοπαλία",
   "timesUpWaitingForWords": "Αναμονή για την υποβολή των λέξεων από όλους τους παίκτες...",
   "timesUpAddWordsCount": "Προσθέστε {count} λέξεις ή φράσεις",
+  "@timesUpAddWordsCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpWordsSubtitle": "(πρόσωπα, αντικείμενα, ταινίες, μέρη...)",
   "timesUpWordInputLabel": "Λέξη για μάντεμα ({current}/{target})",
+  "@timesUpWordInputLabel": {
+    "placeholders": {
+      "current": {
+        "type": "Object"
+      },
+      "target": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpAddWordTooltip": "Προσθήκη αυτής της λέξης",
   "timesUpYourWords": "Οι λέξεις σας:",
   "timesUpSubmitWords": "Υποβολή των {count} λέξεών μου",
+  "@timesUpSubmitWords": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "timesUpModeFree": "Ελεύθερη περιγραφή",
   "timesUpModeOneWord": "Μία μόνο λέξη",
   "timesUpModeMime": "Παντομίμα",
   "dtGuessedWords": "Ο/Η {name} βρήκε {count} λέξη/εις!",
+  "@dtGuessedWords": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "dtMakeGuessWordTo": "Κάντε τον/την {name} να μαντέψει αυτή τη λέξη:",
+  "@dtMakeGuessWordTo": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "undercoverEliminatePlayer": "Αποκλείστε τον/την {name}",
+  "@undercoverEliminatePlayer": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
   "undercoverVoteCount": "{count} ψήφος/οι",
+  "@undercoverVoteCount": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "petitBacRound": "Γύρος {round}",
+  "@petitBacRound": {
+    "placeholders": {
+      "round": {
+        "type": "Object"
+      }
+    }
+  },
   "petitBacChooseCategories": "Επιλέξτε κατηγορίες:",
   "petitBacAddCategory": "Προσθήκη κατηγορίας",
+  "petitBacMinOneCategory": "Χρειάζεστε τουλάχιστον μία κατηγορία!",
   "petitBacValidateCategories": "Επιβεβαίωση κατηγοριών",
   "petitBacLetter": "Γράμμα: {letter}",
+  "@petitBacLetter": {
+    "placeholders": {
+      "letter": {
+        "type": "Object"
+      }
+    }
+  },
+  "petitBacWaitingForBell": "Το σεντόνι επέστρεψε! Περιμένοντας το κουδούνι...",
   "petitBacIFinished": "Τελείωσα! (Να σταματήσει)",
   "petitBacCorrection": "ΔΙΟΡΘΩΣΗ",
+  "petitBacGameOverReason": "Το παιχνίδι του Little Bac τελείωσε!",
   "presidentGivesTo": "Ο/Η {from} δίνει στον/στην {to}:",
+  "@presidentGivesTo": {
+    "placeholders": {
+      "from": {
+        "type": "Object"
+      },
+      "to": {
+        "type": "Object"
+      }
+    }
+  },
   "presidentPlayCards": "ΠΑΙΞΤΕ ({count})",
+  "@presidentPlayCards": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
   "actionPendingMsg": "Η ενέργειά σας καταγράφεται...",
+  "monAnimalPrefere": "Το αγαπημένο μου ζώο",
   "unJoueurEstDesigneComme": "Ένας παίκτης ορίζεται ως «στόχος». Οι άλλοι παίκτες απαντούν ανώνυμα σε μια ερώτηση σχετικά με αυτούς. Ο στόχος επιλέγει την απάντηση που προτιμά και ο συντάκτης αυτής της απάντησης κερδίζει έναν πόντο.",
+  "uneSituationEstPresenteeTous": ": \r\n        «Παρουσιάζεται μια κατάσταση. Όλοι οι παίκτες ψηφίζουν το άτομο που είναι πιο πιθανό να κάνει αυτό το πράγμα. Ο παίκτης που λαμβάνει τις περισσότερες ψήφους κερδίζει έναν πόντο (αμφίβολη τιμή!).»,    ",
   "modeClassiqueUneQuestionEst": "Κλασική λειτουργία: Τίθεται μια ερώτηση. Ένας παίκτης χαρακτηρίζεται κρυφά ως \"ψεύτης\" και πρέπει να εφεύρει μια απάντηση. Οι άλλοι λένε την αλήθεια. Ψηφίστε για να ξεσκεπάσετε τον ψεύτη.\\n\\nΑπλοποιημένη λειτουργία: Όλοι λένε ένα ανέκδοτο (σωστό ή λάθος) ως απάντηση σε ένα θέμα και στη συνέχεια δηλώνουν κρυφά την αλήθεια τους. Στη συνέχεια, όλοι ψηφίζουν \"Σωστό\" ή \"Λάθος\" για κάθε ιστορία. Κερδίζετε πόντους μαντεύοντας σωστά και εξαπατώντας τους άλλους.",
   "laPlupartDesJoueursCivils": "Οι περισσότεροι παίκτες (Πολίτες) θα λάβουν μια λέξη. Ένας «Εισβολέας» λαμβάνει μια παρόμοια λέξη. Και ένας «Κύριος Λευκός» δεν λαμβάνει ΚΑΜΙΑ λέξη. Κάθε παίκτης λαμβάνει μια λέξη ένδειξης σε **30 δευτερόλεπτα**. Ο στόχος είναι να ξεσκεπαστούν οι απατεώνες ψηφίζοντας. Εάν ένας πολίτης εξαλειφθεί, οι απατεώνες κερδίζουν.",
   "unMotEstAfficheChaque": "Εμφανίζεται μια λέξη. Κάθε παίκτης πρέπει να υποβάλει κρυφά ένα συνώνυμο. Όλες οι απαντήσεις αποκαλύπτονται και στη συνέχεια οι παίκτες ψηφίζουν για να «αποκλείσουν» τη λιγότερο σχετική πρόταση. Ο αποκλεισμένος παίκτης χάνει τον γύρο.",
@@ -944,6 +1485,7 @@
   "sonObjectifEstDeVaincre8": "Στόχος του είναι να νικήσει τους Λυκάνθρωπους. Όσο ο Κυνηγός είναι ζωντανός, προστατεύεται από επιθέσεις Λυκανθρώπων. Όταν οι Λύκοι στοχεύουν την Κοκκινοσκουφίτσα ενώ ο Κυνηγός είναι ζωντανός, η ψήφος τους δεν οδηγεί σε θάνατο. Αν ο Κυνηγός πεθάνει, τότε η Κοκκινοσκουφίτσα γίνεται παρόμοια με έναν Απλό Χωρικό. ",
   "sonObjectifEstDeVaincre9": "Στόχος του είναι να νικήσει τους Λυκάνθρωπους. Κάθε βράδυ, ο Πυρομάντης έχει την επιλογή να αποθηκεύσει ένα ελληνικό βαρέλι φωτιάς στο σπίτι ενός παίκτη ή να πυροδοτήσει την έκρηξή του. Μπορεί να σκοτώσει μέλη της δικής του πλευράς, επομένως πρέπει να ενεργήσει στρατηγικά. Δεν υπάρχει όριο στον αριθμό των βαρελιών που θα τοποθετηθούν, αλλά αν ο Πυρομάντης πεθάνει χωρίς να προκαλέσει έκρηξη, οι παίκτες παραμένουν ζωντανοί. Προσοχή, σε αντίθεση με τη Μάγισσα, ο Πυρομάντης πρέπει να είναι ζωντανός το πρωί για να πυροδοτηθεί η έκρηξη.",
   "sonObjectifEstDeVaincre10": "Στόχος του είναι να νικήσει τους Λυκάνθρωπους μέχρι να λάβει έναν νέο ρόλο. Την πρώτη νύχτα, ορίζει έναν διαθέτη που θα του κληροδοτήσει τον ρόλο του μετά το θάνατό του. Ο Κληρονόμος ανακτά μόνο τις δυνάμεις που δεν καταναλώθηκαν από τον διαθέτη του (το φίλτρο της μάγισσας, η κατάληψη της εξουσίας από τον Δικτάτορα κ.λπ.), εκτός από τον Κυνηγό και τον Νεκροθάφτη. Δεν ανακτά τη μόλυνση (Μαύρος Λύκος) ή τη μόλυνση (Άρρωστος Αρουραίος) από τον διαθέτη του. Διατηρεί τη μόλυνση ή τη μόλυνση που είχε στη βάση. Εάν κληρονομήσει τις δυνάμεις ενός Λυκάνθρωπου, οι άλλοι λύκοι ενημερώνονται ότι εντάσσεται στην αγέλη. Εάν κληρονομήσει τις δυνάμεις ενός Δικτάτορα που πεθαίνει τη νύχτα του πραξικοπήματος του, θα εναπόκειται στον Κληρονόμο να αναλάβει τις συνέπειες και να πραγματοποιήσει το πραξικόπημα μόλις ξυπνήσει.",
+  "touche": "Προσγείωση",
   "unVillageoisSansPouvoirSpecial": "Ένας χωρικός χωρίς ειδική δύναμη.",
   "devoreUnVillageoisLaNuit": "Καταβροχθίζει έναν χωρικό τη νύχτα.",
   "decouvreUnRoleParNuit": "Ανακαλύπτει έναν ρόλο ανά νύχτα.",
@@ -968,49 +1510,219 @@
   "heritier": "Κληρονόμος",
   "heriteDuRoleDeSon": "Κληρονομεί τον ρόλο του διαθέτη κατά τον θάνατό του.",
   "themeIa": "Θέμα AI",
+  "caseLabel": ": \r\n      Κουτί ",
   "generalEtVarie": "Γενικά και ποικίλα",
+  "unDinosaureQuiMangeUne": "Ένας δεινόσαυρος τρώει ένα παγωτό",
+  "pouvoirVolerOuEtreInvisible": "Να μπορείς να πετάς ή να είσαι αόρατος",
+  "returnGenereDesSituationsCourtes": ": \r\n        επιστροφή \"Δημιουργεί σύντομες καταστάσεις ξεκινώντας με μια ενέργεια. Θέμα: {finalPrompt}\"; \r\n      Κουτί ",
+  "@returnGenereDesSituationsCourtes": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "abandonTousLesJoueursDeconnectes": "Εγκατάλειψη (όλοι οι παίκτες αποσυνδέθηκαν)",
   "tousLesJoueursSeSont": "Όλοι οι παίκτες έχουν αποσυνδεθεί",
   "nAPasJoueA": "⏱️ {playerName} δεν έπαιξε εγκαίρως. Ο υπολογιστής έπαιξε για αυτόν ({actionDetails}).",
+  "@nAPasJoueA": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "actionDetails": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA1": "⏱️ {playerName} δεν έπαιξε εγκαίρως. Ο υπολογιστής έπαιξε τυχαία για λογαριασμό του.",
+  "@nAPasJoueA1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "joueur": "Παίκτης",
   "tempsEcoule1": "(Χρόνος που πέρασε)",
   "tempsEcoule2": "Χρόνος που πέρασε",
   "aToucheUneCibleIl": "🎯 Ο/Η {shooterDataname} πέτυχε στόχο! Παίζει ξανά.",
+  "@aToucheUneCibleIl": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "aTireDansLEau": "🌊 Ο/Η {shooterDataname} πυροβόλησε στο νερό. Σειρά του/της {opponentDataname}.",
+  "@aTireDansLEau": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      },
+      "opponentDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "unJoueur": "Ένας παίκτης",
   "inactif3ToursSansReponse": "ανενεργός (3 γύροι χωρίς απάντηση)",
   "leJugeNAPas": "Ο Κριτής δεν καθόρισε έγκαιρα τον νικητή. Δεν απονεμήθηκαν βαθμοί.",
   "aLanceLesDes": "Ο/Η {pName} έριξε τα ζάρια!",
+  "@aLanceLesDes": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aRelanceLesDes3": "'{'pName'}' ξαναέριξαν τα ζάρια ('{'3rollsLeft1'}'/3)!",
   "aGardeLeDeDe": "Ο/Η {pName} κράτησε το ζάρι αξίας {dieVal} (ζάρι #{index1}) 🔒",
+  "@aGardeLeDeDe": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "dieVal": {
+        "type": "Object"
+      },
+      "index1": {
+        "type": "Object"
+      }
+    }
+  },
   "aDebloqueLeDe": "Ο/Η {pName} ξεκλείδωσε το ζάρι #{index1}",
+  "@aDebloqueLeDe": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "index1": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagne": "Ο/Η {playerName} κέρδισε!",
+  "@aGagne": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneAvecLeScoreLe": "{playersgameWinnerIdnameJoueur} νίκη με τη χαμηλότερη βαθμολογία!",
+  "@gagneAvecLeScoreLe": {
+    "placeholders": {
+      "playersgameWinnerIdnameJoueur": {
+        "type": "Object"
+      }
+    }
+  },
   "leRatMaladeEstLe": "Ο Άρρωστος Αρουραίος είναι ο μόνος επιζών! Τους δηλητηρίασε όλους!",
   "tousLesAutresSurvivantsSont": "Όλοι οι άλλοι επιζώντες έχουν μολυνθεί από τον Άρρωστο Αρουραίο. Κέρδισε!",
   "leRoleDeEst": "Ο ρόλος του/της {targetName} είναι: {targetRole}.",
+  "@leRoleDeEst": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leDictateur": "Ο Δικτάτορας",
   "vousEtesAmoureuxDe": "Είσαι ερωτευμένος/η με τον/την {lover2Name}!",
+  "@vousEtesAmoureuxDe": {
+    "placeholders": {
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "vousEtesAmoureuxDe1": "Είσαι ερωτευμένος/η με τον/την {lover1Name}!",
+  "@vousEtesAmoureuxDe1": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      }
+    }
+  },
   "pioche3": "Αξίνα",
+  "wordcivilParts0TrimWordundercover": "); \r\n      wordCivil = μέρη[0].trim(); \r\n      wordUndercover = μέρη[1].trim(); \r\n    '''}''' άλλο '''{''' \r\n      Ασφάλεια κατά των διπλότυπων: εάν το",
   "vousNAvezPasDe": "Δεν έχεις λόγια",
   "equipe12": "Ομάδα 1",
   "equipe21": "Ομάδα 2",
   "finDesManchesVictoireDe": "Τέλος γύρων! Νίκη του {winnerName}!",
+  "@finDesManchesVictoireDe": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "scoreCibleAtteint": "Επιτεύχθηκε το σκορ-στόχος!",
   "laPartie2v2Commence": "Το παιχνίδι 2v2 ξεκινά!",
   "laPartieCommence1": "Το παιχνίδι ξεκινά!",
   "aGardeLeZombie": "{playersloserIdnameUnjoueur} κράτησε το Zombie!",
+  "@aGardeLeZombie": {
+    "placeholders": {
+      "playersloserIdnameUnjoueur": {
+        "type": "Object"
+      }
+    }
+  },
   "chaqueJoueurADevineUne": "Κάθε παίκτης μάντεψε μία φορά!",
   "toutLeMondeEstPasse": "Όλοι πήγαν πάσο!",
   "verite1": "ΑΛΗΘΕΙΑ",
   "aLePlusDXp": "{playerswinnerIdnameJoueur} έχει τα περισσότερα XP ({maxXp} XP) και γίνεται Διαχειριστής!",
+  "@aLePlusDXp": {
+    "placeholders": {
+      "playerswinnerIdnameJoueur": {
+        "type": "Object"
+      },
+      "maxXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "finDeMancheBoutonAdmin": ", \r\n          ]), \r\n        '''}'''); \r\n      '''}''''}'''); \r\n  '''}''' \r\n\r\n  End of Sleeve (κουμπί διαχειριστή)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async '''{''' \r\n    περιμένετε _db.runTransaction((συναλλαγή) async'''{''' \r\n      τελικό gameRef = _db.collection(''games'').doc(gameCode); \r\n      τελικό snap = αναμονή συναλλαγής.get(gameRef); \r\n      αν (!snap.exists) επιστροφή; \r\n\r\n      final gameData = snap.data() ως Map<String, dynamic>; \r\n      τελικοί παίκτες = Χάρτης<Συμβολοσειρά, dynamic>.from(gameData[''players''] ?? '{}'); \r\n\r\n      Καθορίστε τον νικητή (περισσότερα XP)\r\n      Συμβολοσειρά winnerId = ''; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) '''{''' \r\n        τελικό xp = (pData[''xp''] ως αριθμός?)?. toInt() ?? 0; \r\n        αν (xp > maxXp) '{' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        '}''''}'''); \r\n\r\n      transaction.update(gameRef, '''{''' \r\n        ''gameState'': ''gameOver'', \r\n        ''gameWinner'': winnerId, \r\n        ''gameEndReason'':\r\n    \r\n      ",
   "quelquUn": "Κάποιος",
   "aAtteintPointsEtRemporte": "{winnerName} έφτασε τους {targetScore} πόντους και κέρδισε το παιχνίδι!",
+  "@aAtteintPointsEtRemporte": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "motManquant": "Λέξη που λείπει",
   "erreurLeNombreDeRoles": "Σφάλμα: Ο αριθμός των ρόλων ({length}) δεν ταιριάζει με τον αριθμό των παικτών ({playerCount}).",
+  "@erreurLeNombreDeRoles": {
+    "placeholders": {
+      "length": {
+        "type": "Object"
+      },
+      "playerCount": {
+        "type": "Object"
+      }
+    }
+  },
   "toutesLesManchesDeTime": "Όλοι οι γύροι του Time''s Up ολοκληρώθηκαν!",
   "gagneAvecPoints": "Ο/Η {playerswinnerIdnameUnjoueur} κερδίζει με {maxScore} πόντους!",
+  "@gagneAvecPoints": {
+    "placeholders": {
+      "playerswinnerIdnameUnjoueur": {
+        "type": "Object"
+      },
+      "maxScore": {
+        "type": "Object"
+      }
+    }
+  },
   "finDeLaPartie": "Τέλος παιχνιδιού!",
   "leDessinateurNAPas": "Ο σχεδιαστής δεν υπέβαλε το σχέδιο εγκαίρως.",
   "leTempsEstEcoulePersonne": "Ο χρόνος τελείωσε! Κανείς δεν βρήκε τη λέξη.",
@@ -1018,15 +1730,54 @@
   "motNonDevine": "Η λέξη δεν βρέθηκε.",
   "les13CartesOntEte": "Και τα 13 φύλλα έχουν παιχτεί!",
   "laBombeAExploseDans": "Η βόμβα εξερράγη στα χέρια του/της {loserName}!",
+  "@laBombeAExploseDans": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "leJoueur": "Ο παίκτης",
+  "listStringQuestionsAiwordpoolGamewords": ") '''{''' \r\n      Λίστα <Συμβολοσειρά> ερωτήσεις =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[δυσκολία] ?? \r\n          GameWords.whoIsMostLikely[",
   "honnete": "Τίμιος",
+  "pairSplit": ") ? pair.split(",
+  "pairPairListStringShuffledroles": "): [ζυγός, ζυγός]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        Συμβολοσειρά secUndercoverId = shuffledRoles[0]; \r\n        Συμβολοσειρά secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Ερώτηση =\r\n            «Περιγράψτε τη μυστική σας λέξη με μια λέξη. Απατεώνες, μπλόφα!». \r\n        for (var pId στο players.keys) '''{''' \r\n          Συμβολοσειρά pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ",
   "aAtteintPointsEtGagne": "{playersoverallWinnerIdname} έφτασε τους {updatedScoresoverallWinnerId} πόντους και κέρδισε το παιχνίδι!",
+  "@aAtteintPointsEtGagne": {
+    "placeholders": {
+      "playersoverallWinnerIdname": {
+        "type": "Object"
+      },
+      "updatedScoresoverallWinnerId": {
+        "type": "Object"
+      }
+    }
+  },
   "poseDeCarte": "τοποθέτηση φύλλου",
   "enchereAutomatique": "αυτόματη προσφορά",
   "passeLEnchere": "πάσο στην προσφορά",
+  "elseIfGametype": ") '''{''' \r\n        if (voterId == votedForId) '{' \r\n          ρίζω Εξαίρεση(«Επίσημη απαγόρευση να ψηφίζει κανείς τον εαυτό του!»); \r\n        '}''''}''' αλλιώς αν (gameType ==\r\n      ",
+  "intRequiredvotesPlayersLengthIf": ") '{ \r\n        creditPlayerXp( \r\n          συναλλαγή, \r\n          gameRef, \r\n          gameData, \r\n          εκλογέας, \r\n          5, \r\n          applySpeedBonus: true, \r\n        ); \r\n      }' \r\n\r\n      int requiredVotes = παίκτες.μήκος; \r\n\r\n      αν (gameType == ",
+  "forFinalTargetInVotes": ") '''{''' \r\n          τελικός χάρτης<συμβολοσειρά, int> voteCounts = '{}'; \r\n          για (τελικός στόχος σε ψήφους.τιμές) '{' \r\n            voteCounts[στόχος ως συμβολοσειρά] = (voteCounts[στόχος] ?? 0) + 1; \r\n          '}' \r\n\r\n          int maxΨήφοι = 0; \r\n          Λίστα<Συμβολοσειρά> topVote = []; \r\n          voteCounts.forEach((στόχος, καταμέτρηση) '''{''' \r\n            if (καταμέτρηση > maxVotes) '{' \r\n              maxVotes = καταμέτρηση; \r\n              topVote = [στόχος]; \r\n            '}' αλλιώς αν (count == maxVotes) '{' \r\n              topVoted.add(στόχος); \r\n            '}''''}'''); \r\n\r\n          ενημερώσεις[\r\n          ",
+  "forFinalTargetInVotes1": ") '''{''' \r\n        τελικός χάρτης<συμβολοσειρά, int> voteCounts = '{}'; \r\n        για (τελικός στόχος σε ψήφους.τιμές) '{' \r\n          voteCounts[στόχος ως συμβολοσειρά] = (voteCounts[στόχος] ?? 0) + 1; \r\n        '}' \r\n\r\n        int maxΨήφοι = 0; \r\n        Λίστα<Συμβολοσειρά> topVote = []; \r\n        voteCounts.forEach((στόχος, καταμέτρηση) '''{''' \r\n          if (καταμέτρηση > maxVotes) '{' \r\n            maxVotes = καταμέτρηση; \r\n            topVote = [στόχος]; \r\n          '}' αλλιώς αν (count == maxVotes) '{' \r\n            topVoted.add(στόχος); \r\n          '}''''}'''); \r\n\r\n        αν (topVoted.length == 1) '''{''' \r\n          τελικός νικητής = topVoted.first; \r\n          ενημερώσεις[\r\n        ",
   "aRemporteTousLesJetons": "{winnerName} κερδίσει όλες τις μάρκες στο τραπέζι!",
+  "@aRemporteTousLesJetons": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "uneMain": "Ένα χέρι",
   "carte1": "φύλλο {cardToPlay}",
+  "@carte1": {
+    "placeholders": {
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "quipourraitvotemode": "? _quiPourraitVoteMode\r\n                      : ",
   "localIndisponibleVideoAudioActif": "Τοπικό μη διαθέσιμο (βίντεο/ήχος ενεργό)",
   "jouerEnLocalSurCet": "Τοπικό παιχνίδι (Σε αυτή τη συσκευή)",
   "laVideoEstObligatoirePour": "Το βίντεο είναι υποχρεωτικό για να παίξεις Μάντεψε ποιος είμαι online.",
@@ -1048,9 +1799,26 @@
   "generationEnCours": "Δημιουργία σε εξέλιξη...",
   "completerAvecLIa15": "Συμπλήρωση με AI (+15 λέξεις)",
   "completeCetteListeSurLe": "Συμπληρώστε αυτήν τη λίστα για το θέμα {text}. Υπάρχουσες λέξεις: {join}",
+  "@completeCetteListeSurLe": {
+    "placeholders": {
+      "text": {
+        "type": "Object"
+      },
+      "join": {
+        "type": "Object"
+      }
+    }
+  },
   "exMythologieGrecqueObjetsInsolites": "π.χ.: Ελληνική μυθολογία, ασυνήθιστα αντικείμενα, πειρατές...",
   "exPasDAnimauxDangereux": "π.χ.: Όχι επικίνδυνα ζώα, μόνο καλτ ταινίες...",
   "genererAvecLIaElements": "Δημιουργία με AI ({currentCount} στοιχεία)",
+  "@genererAvecLIaElements": {
+    "placeholders": {
+      "currentCount": {
+        "type": "Object"
+      }
+    }
+  },
   "themePersonnalise": "Προσαρμοσμένο θέμα",
   "cameraIndispensablePourCeJeu": "Η κάμερα είναι απαραίτητη για αυτό το παιχνίδι.",
   "microCameraDesactiveLeMode": "Μικρόφωνο + Κάμερα (Απενεργοποιεί το τοπικό παιχνίδι)",
@@ -1079,6 +1847,16 @@
   "coupAutomatiqueJouePourCause": "Αυτόματη κίνηση που παίζεται λόγω αδράνειας.",
   "inactivite": "Αδράνεια",
   "str8f522b": "{cat}: {hasScorescoreVal}",
+  "@str8f522b": {
+    "placeholders": {
+      "cat": {
+        "type": "Object"
+      },
+      "hasScorescoreVal": {
+        "type": "Object"
+      }
+    }
+  },
   "zeroPointe": "Skyjo (Μηδέν Πόντοι)",
   "partieTermineeAvecLeScore": "Το παιχνίδι ολοκληρώθηκε με τη χαμηλότερη βαθμολογία!",
   "cEstVotreTour": "Είναι η σειρά σου!",
@@ -1100,6 +1878,13 @@
   "enAttenteDeLaPioche": "Αναμονή για τράβηγμα...",
   "laPartieDeBigTwo": "Το παιχνίδι Big Two τελείωσε!",
   "auTourDe2": "Σειρά του/της {resolvePlayerNamecurrentPlayerId}",
+  "@auTourDe2": {
+    "placeholders": {
+      "resolvePlayerNamecurrentPlayerId": {
+        "type": "Object"
+      }
+    }
+  },
   "laPartieEstTerminee": "Το παιχνίδι τελείωσε!",
   "plusAucunCoupPossiblePour": "Δεν υπάρχουν άλλες δυνατές κινήσεις για τον αντίπαλο!",
   "cEstVotreTour1": "Είναι η σειρά σου! ('{0}')",
@@ -1112,7 +1897,21 @@
   "surrealismeClassique": "Κλασικός σουρεαλισμός",
   "suiteDe3Mots": "Συνέχεια 3 λέξεων",
   "strb74c15": "\" {fullText} \"",
+  "@strb74c15": {
+    "placeholders": {
+      "fullText": {
+        "type": "Object"
+      }
+    }
+  },
   "str1e0607": "{authorName} : ",
+  "@str1e0607": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
   "objectif1000BornesAtteint": "Ο στόχος των 1000 χλμ επιτεύχθηκε!",
   "aVousDeRouler": "ΣΕΙΡΑ ΣΑΣ ΝΑ ΟΔΗΓΗΣΕΤΕ!",
   "arrete": "ΣΤΑΜΑΤΗΜΕΝΟΣ",
@@ -1133,8 +1932,36 @@
   "derniereCartePosee": "Τελευταίο φύλλο που παίχτηκε!",
   "cEstTonTour": "Είναι η σειρά ΣΟΥ!",
   "str422faa": "{valuename}: {valuescore0} 🃏",
+  "@str422faa": {
+    "placeholders": {
+      "valuename": {
+        "type": "Object"
+      },
+      "valuescore0": {
+        "type": "Object"
+      }
+    }
+  },
+  "printEtatDeIsactionpendingAu": " ---\", \r\n    ); \r\n    print(\"Αρχική _isActionPending κατάσταση: {_isActionPending}\"); \r\n\r\n    τελικοί παίκτες = (gameData[",
+  "@printEtatDeIsactionpendingAu": {
+    "placeholders": {
+      "_isActionPending": {
+        "type": "Object"
+      }
+    }
+  },
   "erreurQuestionNonTrouvee": "Σφάλμα: Η ερώτηση δεν βρέθηκε.",
   "str95d36e": "{valuename}: {key0}",
+  "@str95d36e": {
+    "placeholders": {
+      "valuename": {
+        "type": "Object"
+      },
+      "key0": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezLaMeilleureReponse": "Επιλέξτε την καλύτερη απάντηση!",
   "leJugeChoisit": "Ο Δικαστής επιλέγει...",
   "votez": "Ψηφίστε!",
@@ -1156,8 +1983,26 @@
   "leChallenger": "Ο Διεκδικητής",
   "stre93cb0": "'{0}' : '{1}'",
   "uneDescriptionHilarante": "μια ξεκαρδιστική λεζάντα",
+  "extrainfoColumnChildrenText": "; \r\n          extraInfo = Στήλη( \r\n            Παιδιά: [ \r\n              Κείμενο( \r\n                ''",
   "unProblemeEstSurvenu": "Παρουσιάστηκε πρόβλημα.",
+  "defaultFinalRoundwinneridGamedata": ": \r\n      Προεπιλογή: \r\n        τελικός γύροςWinnerId = gameData[",
   "str98e212": "{pName}: {count}/{length}{isFull}",
+  "@str98e212": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      },
+      "length": {
+        "type": "Object"
+      },
+      "isFull": {
+        "type": "Object"
+      }
+    }
+  },
   "aVousDeJouer": "Η σειρά σας να παίξετε!",
   "trieParCouleur": "Ταξινομημένο κατά χρώμα",
   "trierLaMain": "Ταξινόμηση φύλλων",
@@ -1166,9 +2011,49 @@
   "touchezPourPoser": "Πάτησε για τοποθέτηση",
   "encherissezOuPassez": "Πόνταρε ή πάσο",
   "str4c885c": "{motdessiner}: {p}",
+  "@str4c885c": {
+    "placeholders": {
+      "motdessiner": {
+        "type": "Object"
+      },
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "voirLeScoreFinal": "Δες την τελική βαθμολογία",
   "str6bd6b6": "{carte} {deckIndex} / {deckTotal} — {score} : {totalScore}",
+  "@str6bd6b6": {
+    "placeholders": {
+      "carte": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "score": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
+  "styleConstTextstyleColorColors": ", \r\n                  στυλ: const TextStyle(χρώμα: Colors.white70), \r\n                ), \r\n                ΜέγεθοςΚουτί (ύψος: 20), \r\n                Wrap( \r\n                  στοίχιση: WrapAlignment.center, \r\n                  Παιδιά: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                ΜέγεθοςΚουτί (ύψος: 20), \r\n                αν (justOneFilteredClues.isEmpty)\r\n                  Κείμενο( \r\n                    AppLocalizations.of(πλαίσιο)!. allCluesHave Been, \r\n                    στυλ: const TextStyle(χρώμα: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        '''}''' άλλο '''{''' \r\n          Είναι στο χέρι του μάντη να παίξει\r\n          return Column( \r\n            Παιδιά: [ \r\n              Κείμενο(                ",
   "strf0868c": "{length0}: {valuescore0}",
+  "@strf0868c": {
+    "placeholders": {
+      "length0": {
+        "type": "Object"
+      },
+      "valuescore0": {
+        "type": "Object"
+      }
+    }
+  },
   "cEstAToi": "ΣΕΙΡΑ ΣΟΥ!",
   "laPatateAExplose": "Η πατάτα εξερράγη!",
   "finDeLaPartie1": "Τέλος παιχνιδιού",
@@ -1177,19 +2062,41 @@
   "designez2Amoureux": "Επίλεξε 2 ερωτευμένους",
   "amoureuxUnis": "Ερωτευμένοι ενωμένοι!",
   "laVictime": "Το θύμα",
+  "centeractionwidgetRowMainaxissizeMainaxissizeMin": "; \r\n            centerActionWidget = Σειρά( \r\n              mainAxisSize: MainAxisSize.min, \r\n              Παιδιά: [ \r\n                _buildActionButton( \r\n                  ετικέτα: AppLocalizations.of(context)!. μολύνω, \r\n                  εικονίδιο: Icons.auto_fix_high, \r\n                  χρώμα: Colors.purpleAccent, \r\n                  onΠατημένο: () '''{''' \r\n                    Provider.of<PlayerState>( \r\n                      πλαίσιο, \r\n                      ακούω: λάθος, \r\n                    ).recordBadgeEvent(''lg_loup_noir_infect''); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameΚώδικας, \r\n                      αναγνωριστικό παίκτη, \r\n                      Αλήθεια, \r\n                    ); \r\n                  '''}''', \r\n                ), \r\n                const SizedBox (πλάτος: 8), \r\n                _buildActionButton( \r\n                  ετικέτα: AppLocalizations.of(context)!. καταβροχθίζω, \r\n                  εικονίδιο: Icons.close, \r\n                  χρώμα: Colors.redAccent, \r\n                  onΠατήθηκε: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameΚώδικας, \r\n                        αναγνωριστικό παίκτη, \r\n                        ψευδής, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          '''}''' \r\n          στέισον βάγκον; \r\n        θέση «loup_blanc_turn»: \r\n          promptText = ",
   "aucuneVictimeCetteNuitProtegee": "Κανένα θύμα χθες το βράδυ (προστατευμένο ή γλίτωσε)",
+  "styleTextstyleFontweightFontweightBold": ", \r\n                              style: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Χρώμα: \r\n                                    isMine\r\n                                        ? Χρώματα.κυανόΈμφαση\r\n                                        : (_selectedChatType == ''λύκος'' \r\n                                            ? Χρώματα.κόκκινοΈμφαση.απόχρωση100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(κείμενο: μήνυμα), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  '''}''', \r\n                ); \r\n              '''}''', \r\n            ), \r\n          ), \r\n\r\n          Συμπαγής μπάρα αποστολής\r\n          αν (canSendMessage)\r\n            Σειρά( \r\n              Παιδιά: [ \r\n                Expanded( \r\n                  παιδί: SizedBox( \r\n                    ύψος: 32, \r\n                    child: TextField( \r\n                      ελεγκτής: _chatController, \r\n                      στυλ: const TextStyle(fontSize: 12, χρώμα: Colors.white), \r\n                      διακόσμηση: InputDecoration( \r\n                        hintΚείμενο: \r\n                            AppLocalizations.of(πλαίσιο)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          χρώμα: Colors.white30, \r\n                          μέγεθος γραμματοσειράς: 11, \r\n                        ), \r\n                        border: ΠερίγραμμαInputBorder( \r\n                          borderRadius: Ακτίνα περιγράμματος.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        συμπληρώθηκε: αληθές, \r\n                        fillColor: Χρώματα.λευκό.μεΑδιαφάνεια(0,08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          οριζόντια: 10, \r\n                          κάθετη: 0, \r\n                        ), \r\n                      ), \r\n                      στιςΥποβλήθηκε: (κείμενο) '''{''' \r\n                        αν (text.trim().isNotEmpty) '{' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameΚώδικας, \r\n                            αναγνωριστικό παίκτη, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        '}''''}''', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (πλάτος: 4), \r\n                IconButton( \r\n                  icon: const Icon( \r\n                    Icons.send_rounded, \r\n                    μέγεθος: 18, \r\n                    χρώμα: Colors.cyanAccent, \r\n                  ), \r\n                  συμπλήρωση: EdgeInsets.zero, \r\n                  constraints: const BoxConstraints(), \r\n                  onΠατημένο: () '''{''' \r\n                    αν (_chatController.text.trim().isNotEmpty) '{' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameΚώδικας, \r\n                        αναγνωριστικό παίκτη, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    '}''''}''', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  '''}''' \r\n\r\n  Widget _buildChatTab(Ετικέτα συμβολοσειράς, Τύπος συμβολοσειράς, Χρώμα activeColor) '{' \r\n    τελικός bool isSelected = _selectedChatType == τύπος; \r\n    επιστροφή GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = τύπος), \r\n      παιδί: Δοχείο( \r\n        padding: const EdgeInsets.symmetric(οριζόντια: 8, κάθετη: 3), \r\n        διακόσμηση: BoxDecoration( \r\n          Χρώμα: \r\n              ΕπιλέχθηκεΕπιλέχθηκε\r\n                  ? activeColor.withOpacity(0,25)\r\n                  : Χρώματα.λευκό.μεΑδιαφάνεια(0,04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Χρώμα: \r\n                isSelected ? activeColor.withOpacity(0.6) : Χρώματα.διαφανές, \r\n          ), \r\n        ), \r\n        child: Κείμενο( \r\n          ετικέτα, \r\n          style: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: είναι επιλεγμένο; FontWeight.bold: FontWeight.normal, \r\n            color: είναι επιλεγμένο ? activeColor : Χρώματα.λευκό60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  '}' \r\n\r\n  --- ΕΝΗΜΕΡΩΜΈΝΟ AVATAR ΓΙΑ ΝΑ ΤΟ ΚΆΝΕΤΕ ΔΙΑΔΡΑΣΤΙΚΌ--- \r\n\r\n  Γραφικό στοιχείο _buildSyncTimer(Timestamp? startTime, int durationInSeconds) '''{''' \r\n    αν (startTime == null) return const SizedBox.shrink(); \r\n\r\n    Το TweenAnimationBuilder επιτρέπει ένα εξαιρετικά ομαλό οπτικό χρονόμετρο χωρίς να μπλοκάρει το χρονόμετρο και τη χειροκίνητη ρύθμισηΚατάσταση, που ελαφρύνει πολύ το νήμα (Σημείο 4)\r\n    final endTime = startTime.toDate().add( \r\n      Διάρκεια(δευτερόλεπτα: durationInSeconds), \r\n    ); \r\n    τελικό υπόλοιπο = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(πλαίσιο)!. k0S, \r\n        στυλ: Theme.of( \r\n          πλαίσιο, \r\n        ).textTheme.headlineSmall?. copyWith(χρώμα: Colors.redAccent), \r\n      ); \r\n\r\n    επιστροφή TweenAnimationBuilder<Διάρκεια>( \r\n      διάρκεια: υπολειπόμενη, \r\n      tween: Tween(αρχή: υπόλοιπο, τέλος: Διάρκεια.μηδέν), \r\n      builder: (Περιβάλλον BuildContext, Τιμή διάρκειας, Γραφικό στοιχείο; παιδί) '{' \r\n        τελικά δευτερόλεπτα = value.inSeconds; \r\n        return Text( \r\n          AppLocalizations.of(πλαίσιο)!. timeRemaining, \r\n          style: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            Χρώμα: δευτερόλεπτα < 20 ? Χρώματα.κόκκινοΈμφαση: Χρώματα.κεχριμπάριΈμφαση, \r\n          ), \r\n        ); \r\n      '}', \r\n    ); \r\n  '''}''' \r\n\r\n  _buildPetitsChevauxUI( \r\n    Περιβάλλον BuildContext, \r\n    Χάρτης<Συμβολοσειρά, δυναμική> gameData, \r\n    Συμβολοσειρά playerId, \r\n  ) '''{''' \r\n    τελικοί παίκτες = Χάρτης<Συμβολοσειρά, dynamic>.from(gameData[''players''] ?? '{}'); \r\n    τελικός παίκτηςOrder = Λίστα<Συμβολοσειρά>.from( \r\n      gameData[''littleHorsesPlayerOrder''] ?? [], \r\n    ); \r\n    τελικές θέσεις = Map<String, dynamic>.from( \r\n      gameData[''littleHorsesPositions''] ?? '{}', \r\n    ); \r\n    final int currentIndex = gameData[''smallHorsesCurrentIndex''] ?? 0; \r\n    τελική συμβολοσειρά currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: ''; \r\n    τελικό bool isMyTurn = currentPlayerId == playerId; \r\n    final int ζάρια = (gameData[''littleHorsesDice''] ως αριθμός?)?. toInt() ?? 0; \r\n    τελικός bool hasRoll = gameData[''littleHorsesHasRolled''] ?? ψευδής; \r\n    τελικό bool isTeamMode = gameData[''smallTeamHorses''] ?? ψευδής; \r\n    τελικός χάρτης<συμβολοσειρά, δυναμική> διαδοχικήSixes = Χάρτης<Συμβολοσειρά, δυναμική>.from( \r\n      gameData[''smallHorsesConsecutiveSixes''] ?? '{}', \r\n    ); \r\n    final int mySixStreak = διαδοχικάSixes[playerId] ?? 0; \r\n\r\n    Μοντέρνα παλέτα νέον / Arcade σε σκούρο φόντο\r\n    τελική λίστα<χρώμα> playerColors = [ \r\n      const Color(0xFFEF4444), // Νέον Κόκκινο\r\n      const Color(0xFF38BDF8), // Νέον μπλε του ουρανού\r\n      const Color(0xFF10B981), // Σμαραγδένιο Πράσινο\r\n      const Color(0xFFF59E0B), // Χρυσό Κεχριμπάρι\r\n    ]; \r\n\r\n    --- ΟΘΌΝΗ ΝΊΚΗΣ--- \r\n    if (gameData[''gameState''] == ''gameOver'') '''{''' \r\n      επιστροφή UniversalGameEndScreen( \r\n        gameTitle:\r\n                      \r\n                  ",
   "arriveeAuCentreDuPlateau": "Άφιξη στο κέντρο του ταμπλό!",
   "deplacezUnCheval": "ΜΕΤΑΚΙΝΗΣΤΕ ΕΝΑ ΑΛΟΓΟ!",
   "aVousDeLancer": "ΣΕΙΡΑ ΣΑΣ ΝΑ ΡΙΞΕΤΕ!",
   "mode2v2Allies": "Λειτουργία 2v2 Συμμάχων",
-  "chevalSelectionneNtouchezPourAvancer": "Άλογο '{πιόνι}' επιλεγεί!\\nΠατήστε για να προχωρήσετε",
+  "chevalSelectionneNtouchezPourAvancer": "Άλογο '{πιόνι}' επιλεγεί!\\nΠατήστε για να προχωρήσετε '{pawn}'",
   "touchezUnPion": "Αγγίξτε ένα πιόνι",
   "scoreLimiteAtteint": "Το όριο σκορ επιτεύχθηκε!",
   "toutesLesGrillesSontCompletees": "Όλοι οι πίνακες βαθμολογίας συμπληρώθηκαν!",
   "cEstVotreTourTouchez": "Είναι η σειρά σου! Πάτησε ένα ζάρι για να το κρατήσεις (χρυσό 🔒)",
   "lancerLesDes": "Ρίξε τα ζάρια",
   "k1663": "1-6: {oppUpper}/63 {oppBonus035}",
+  "@k1663": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "oppBonus035": {
+        "type": "Object"
+      }
+    }
+  },
   "k16631": "1-6: {myUpper}/63 {myBonus035}",
+  "@k16631": {
+    "placeholders": {
+      "myUpper": {
+        "type": "Object"
+      },
+      "myBonus035": {
+        "type": "Object"
+      }
+    }
+  },
   "scoreFinal": "Τελικό σκορ: '{scoreA}' - '{scoreB}'",
   "encheresEnCours": "ΔΗΜΟΠΡΑΣΙΑ ΣΕ ΕΞΕΛΙΞΗ",
   "aVousDOuvrirLe": "ΣΕΙΡΑ ΣΑΣ ΝΑ ΑΝΟΙΞΕΤΕ ΤΗ ΜΠΑΖΑ!",
@@ -1200,9 +2107,17 @@
   "plusAucunCoupPossible": "Δεν υπάρχουν άλλες κινήσεις!",
   "lancer1": "Ρίξτε '{0}'",
   "choisirUnJeu": "Επιλέξτε παιχνίδι",
+  "screenWhoismostlikelylocalscreenPlayersPlayersBreak": ": \r\n        screen = WhoIsMostLikelyLocalScreen(παίκτες: _players); \r\n        στέισον βάγκον; \r\n      Κουτί ",
   "generation": "Δημιουργία...",
   "genererLesDefisParIa": "Δημιουργία προκλήσεων με AI",
   "genereUnMelangeDActions": "Δημιουργεί ένα μείγμα διασκεδαστικής αλήθειας και τόλμης. Θέμα: {trim}",
+  "@genereUnMelangeDActions": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
   "genererLesDilemmesParIa": "Δημιουργία διλημμάτων με AI",
   "egalite": "Ισοπαλία",
   "choixEnregistre": "Η επιλογή καταγράφηκε!",
@@ -1212,11 +2127,27 @@
   "lancerLeDilemme": "Έναρξη διλήμματος",
   "genererLesQuestionsIa": "Δημιουργία ερωτήσεων με AI",
   "genereDesQuestionsIndiscretesEt": "Δημιουργεί αδιάκριτες και διασκεδαστικές ερωτήσεις. Θέμα: {trim}",
+  "@genereDesQuestionsIndiscretesEt": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
   "perduReveleLaQuestionEt": "ΕΧΑΣΕΣ! Αποκάλυψε την ερώτηση και απάντησε!",
   "gagneTonSecretEstPreserve": "ΚΕΡΔΙΣΕΣ! Το μυστικό σου είναι ασφαλές.",
+  "wordcivilParts0TrimWordundercover1": "); \r\n      _wordCivil = μέρη[0].trim(); \r\n      _wordUndercover = μέρη[1].trim(); \r\n    '''}''' άλλο '''{''' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? ζεύγη λέξεων[idx + 1].trim()\r\n              : \"'{'trim'}' (Παραλλαγή)\"; \r\n    '''}''' \r\n\r\n    _playerRoles.clear(); \r\n    για (παίκτης VAR στο _activePlayers) '''{''' \r\n      αν (παίκτης == μυστικός) '''{''' \r\n        _playerRoles[παίκτης] = \"Εισβολέας\"; \r\n      '''}''' αλλιώς αν (παίκτης == _mrWhitePlayer) '''{''' \r\n        _playerRoles[παίκτης] = \"Mr. White\"; \r\n      '''}''' άλλο '''{''' \r\n        _playerRoles[παίκτης] = \"Εμφύλιος\"; \r\n      '''}''''}''' \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    '''}'''); \r\n  '''}''' \r\n\r\n  άκυρο _nextPlayerReveal '''{''' \r\n    αν (_currentPlayerRevealIndex < _activePlayers.μήκος - 1) '{' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    '}' άλλο '{' \r\n      setState(() => _gameState = UndercoverGameState.συζητώντας); \r\n    '}''''}''' \r\n\r\n  void _eliminatePlayer(String player) '''{''' \r\n    Ρόλος συμβολοσειράς = _playerRoles[παίκτης]!; \r\n    bool impostorsWin = ρόλος == \"Εμφύλιος\"; \r\n\r\n    setState(() '''{''' \r\n      _gameState = UndercoverGameState.αποτέλεσμα; \r\n      if (impostorsWin) '''{''' \r\n        _resultMessage = \"'{'player'}' ήταν Πολίτης! Οι Απατεώνες κερδίζουν!\"; \r\n      '''}''' άλλο '''{''' \r\n        _resultMessage = \"'{'player'}' ήταν το\r\n    \r\n  ",
   "requiert4Joueurs": "Απαιτούνται 4+ παίκτες",
   "requiert3Joueurs": "Απαιτούνται 3+ παίκτες",
   "genereDesCategoriesAmusantesPour": "Δημιουργήστε διασκεδαστικές κατηγορίες για την καυτή πατάτα. Θέμα: {trim}",
+  "@genereDesCategoriesAmusantesPour": {
+    "placeholders": {
+      "trim": {
+        "type": "Object"
+      }
+    }
+  },
+  "bodyPaddingPaddingConstEdgeinsets": "), \r\n          ), \r\n        ], \r\n      ), \r\n      σώμα: Padding( \r\n        συμπλήρωση: const EdgeInsets.all(16.0), \r\n        child: Στήλη( \r\n          Παιδιά: [ \r\n            αν (_phase != LocalWhoIsPhase.results) ... [ \r\n              ΦΙΛΤΡΟ ΔΥΣΚΟΛΙΑΣ\r\n              SegmentedButton<String>( \r\n                Τμήματα: [ \r\n                  ButtonSegment( \r\n                    αξία: ",
   "egalite1PtChacun": "Ισοπαλία! (+1 πόντος στον καθένα)",
   "designeParLeGroupe1": "Επιλέχθηκε από την ομάδα (+1 πόντος):",
   "onSePasseUnObjet": "Περνάμε ένα αντικείμενο ο ένας στον άλλο",
@@ -1227,6 +2158,13 @@
   "k2EquipesSAffrontent": "2 ομάδες αναμετρώνται",
   "chacunPourSoi": "Καθένας για τον εαυτό του",
   "stre786cb": "{sender} : ",
+  "@stre786cb": {
+    "placeholders": {
+      "sender": {
+        "type": "Object"
+      }
+    }
+  },
   "afficherLesSalonsPleins": "Εμφάνιση γεμάτων σαλονιών",
   "masquerLesSalonsPleins": "Απόκρυψη γεμάτων σαλονιών",
   "aucunSalonNeCorrespondA": "Κανένα δωμάτιο δεν ταιριάζει με τα φίλτρα σας.",
@@ -1237,6 +2175,13 @@
   "partie": "Μέρος",
   "lancerUnStream": "Έναρξη Stream",
   "rejoindreLeStream": "Συμμετοχή στη ροή ({length})",
+  "@rejoindreLeStream": {
+    "placeholders": {
+      "length": {
+        "type": "Object"
+      }
+    }
+  },
   "enAttenteDuLancement": "Αναμονή για εκκίνηση...",
   "voler": "ΚΛΕΨΕ!",
   "ciblee": "ΣΤΟΧΕΥΜΕΝΗ",
@@ -1245,7 +2190,21 @@
   "exQuelEstTonPire": "Π.χ.: Ποια ήταν η πιο ντροπιαστική σου στιγμή;",
   "verite2": "🔮 ΑΛΗΘΕΙΑ",
   "strc1ea47": "\" {p} \"",
+  "@strc1ea47": {
+    "placeholders": {
+      "p": {
+        "type": "Object"
+      }
+    }
+  },
   "str5dd9e1": "\" {currentChallenge} \"",
+  "@str5dd9e1": {
+    "placeholders": {
+      "currentChallenge": {
+        "type": "Object"
+      }
+    }
+  },
   "defiValide": "Η ΠΡΟΚΛΗΣΗ ΕΠΙΚΥΡΩΘΗΚΕ!",
   "defiNonValide": "Η ΠΡΟΚΛΗΣΗ ΑΠΕΤΥΧΕ",
   "partieTerminee3": "Το παιχνίδι ολοκληρώθηκε",
@@ -1253,6 +2212,13 @@
   "finDeLaManche2": "ΤΕΛΟΣ ΤΟΥ ΓΥΡΟΥ",
   "pret4": "✓ Έτοιμος",
   "jAiLanceUnePartie": "Έκανα ένα παιχνίδι {selectedGame} !",
+  "@jAiLanceUnePartie": {
+    "placeholders": {
+      "selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
   "ia": "ΙΑ",
   "localIndisponibleRechercheActive": "Τοπικό μη διαθέσιμο (Αναζήτηση ενεργή)",
   "rechercheRapideMonde": "Γρήγορη αναζήτηση (κόσμος)",
@@ -1261,6 +2227,13 @@
   "simpleVillageois": "Χωρικός",
   "capitaine": "Καπετάνιος",
   "s2": "{hotPotatoGlobalDuration} δ",
+  "@s2": {
+    "placeholders": {
+      "hotPotatoGlobalDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "nombreDeJoueursRecherches": "Αριθμός παικτών που αναζητήθηκαν: '{0}'",
   "laBeloteRequiertExactement4": "Το Belote απαιτεί ακριβώς 4 παίκτες.",
   "formez2EquipesDe2": "Σχηματίστε 2 ομάδες των 2 παικτών στο «Compose teams».",
@@ -1269,7 +2242,17 @@
   "tousLesJoueursDoiventEtre": "Όλοι οι παίκτες πρέπει να έχουν ανατεθεί σε μια ομάδα.",
   "chaqueEquipeDoitPossederAu": "Κάθε ομάδα πρέπει να έχει τουλάχιστον 2 παίκτες.",
   "auMoins5JoueursRequis": "Απαιτούνται τουλάχιστον 5 παίκτες.",
-  "rolesJoueurs": "Ρόλοι ( {selectedRolesCount} )",
+  "rolesJoueurs": "Ρόλοι ( {selectedRolesCount} ) {playersLength}",
+  "@rolesJoueurs": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playersLength": {
+        "type": "Object"
+      }
+    }
+  },
   "ceJeuRequiertExactement4": "Αυτό το παιχνίδι απαιτεί ακριβώς 4 παίκτες.",
   "auMoins3JoueursRequis": "Απαιτούνται τουλάχιστον 3 παίκτες.",
   "auMoins2JoueursRequis": "Απαιτούνται τουλάχιστον 2 παίκτες.",
@@ -1292,9 +2275,33 @@
   "six": "Εξάρια",
   "sectionSup": "Τμήμα: \\\"'{'''0'''}'",
   "k63Pts": "{oppUpper} /63 σελ. {value}",
+  "@k63Pts": {
+    "placeholders": {
+      "oppUpper": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "prenezLaDefausseVisibleOu": "Πάρε το ορατό φύλλο ή τράβα κρυφό φύλλο",
   "aa": "- {value} â € В €",
+  "@aa": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "dessineCettePhrase": "Σχεδίαση αυτής της πρότασης:\n\" {value} \"",
+  "@dessineCettePhrase": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "completeCeDessin": "Ολοκλήρωσε αυτό το σχέδιο!",
   "commenceParUnDessin": "Ξεκίνα με ένα σχέδιο!",
   "orateur": "Ομιλητής",
@@ -1305,6 +2312,13 @@
   "jouePar": "Παίζεται από το '{0}'",
   "lAdversaire": "Ο αντίπαλος",
   "ecrivez": "Γράψε {promptItem}",
+  "@ecrivez": {
+    "placeholders": {
+      "promptItem": {
+        "type": "Object"
+      }
+    }
+  },
   "completezLaPhrase1A": "Συμπλήρωσε την πρόταση (1 έως 8 λέξεις)",
   "auteur": "Συγγραφέας",
   "adversaire": "Αντίπαλος",
@@ -1330,6 +2344,13 @@
   "laPartieVaBientotCommencer": "Το παιχνίδι θα ξεκινήσει σύντομα...",
   "mrWhite": "Mr. White",
   "aEteDemasqueIlTente": "Το {mrWhiteName} αποκαλύφθηκε! Προσπαθεί να μαντέψει την μυστική λέξη των πολιτών...",
+  "@aEteDemasqueIlTente": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
   "voteDecisifEnregistreEnAttente": "Η καθοριστική ψήφος καταγράφηκε. Αναμονή...",
   "egaliteParfaiteLaDeesseDe": "Τέλεια ισότητα! Η Θεά της Δικαιοσύνης αποφασίζει...",
   "vousEtesLeJugeAttendez": "Εσύ είσαι ο δικαστής. Περίμενε τις απαντήσεις...",
@@ -1343,26 +2364,141 @@
   "aEteChoisiPourSa": "\\\"'{'''0'''}'\\\" επιλέχθηκε για την απάντησή του και κέρδισε 1 βαθμό!",
   "resultatsDesVotes": "Αποτελέσματα ψηφοφορίας",
   "leMenteurEtait": "Ο ψεύτης ήταν ο/η {liarName}!",
+  "@leMenteurEtait": {
+    "placeholders": {
+      "liarName": {
+        "type": "Object"
+      }
+    }
+  },
   "lesImposteursOntGagneUn": "Οι απατεώνες νίκησαν! Ένας πολίτης εξοντώθηκε.",
   "lInfiltreAEteDemasque": "Το Inbiltrated ( {undercoverName} ) αποκαλύφθηκε!",
+  "@lInfiltreAEteDemasque": {
+    "placeholders": {
+      "undercoverName": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteAEteDemasque": "Ο κ. White ( {mrWhiteName} ) έχει εκτεθεί!",
+  "@mrWhiteAEteDemasque": {
+    "placeholders": {
+      "mrWhiteName": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTermine": "Τελείωσε!",
-  "aEteBanniPourSa": "Το {loserName} απαγορεύτηκε για την πρότασή του '' {loserAnswer} ''!",
+  "aEteBanniPourSa": "Το {loserName} απαγορεύτηκε για την πρότασή του ''  ''! {loserAnswer}",
+  "@aEteBanniPourSa": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteDansLesVotesPersonne": "Ισότητα στις ψήφους! Κανείς δεν έχει απαγορευτεί.",
   "nAPasReponduA": "Το {loserName} δεν απάντησε στην ώρα του και κέρδισε 1 βαθμό!",
+  "@nAPasReponduA": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersonneNePrendDe": "Ισότητα! Κανείς δεν παίρνει αυτή τη στροφή.",
-  "aTrouveLeMot": "{winnerName} βρήκε τη λέξη: '' 99999''!",
-  "personneNATrouveLe": "Κανείς δεν βρήκε τη λέξη: '' {currentWord} ''.",
-  "aTrouveLeMot1": "{guesserName} βρήκε τη λέξη: '' 99999''!",
+  "aTrouveLeMot": "{winnerName} βρήκε τη λέξη: '' 99999''! ",
+  "@aTrouveLeMot": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe": "Κανείς δεν βρήκε τη λέξη: '' '{currentWord}' ''.",
+  "@personneNATrouveLe": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot1": "{guesserName} βρήκε τη λέξη: '' 99999''! ",
+  "@aTrouveLeMot1": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasTrouveLe": "Το {guesserName} δεν βρήκε τη λέξη.",
+  "@nAPasTrouveLe": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      }
+    }
+  },
   "remporteSkull": "{value} κερδίζει το Κρανίο!",
+  "@remporteSkull": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "defiGagneCarteSRevelee": "Η πρόκληση κερδήθηκε: {challengeBid} φύλλο(α) αποκαλύφθηκαν!",
+  "@defiGagneCarteSRevelee": {
+    "placeholders": {
+      "challengeBid": {
+        "type": "Object"
+      }
+    }
+  },
   "aPerduLeDefi": "Το {loserName} έχασε την πρόκληση.",
+  "@aPerduLeDefi": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTermine1": "Ο γύρος ολοκληρώθηκε.",
+  "aGagneAvecSaDescription": "{winnerName} κέρδισε με την περιγραφή του:App Localizations.of(context)!. extrainfoColumnChildText 99999 {winningDescription}",
+  "@aGagneAvecSaDescription": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "winningDescription": {
+        "type": "Object"
+      }
+    }
+  },
   "personneNAGagneCe": "Κανείς δεν κέρδισε αυτόν τον γύρο. Ισοπαλία ή καμία λεζάντα.",
-  "aTrouveLeSymboleIl": "Το {winnerName} 9 βρήκε το σύμβολο 99999! Κερδίζει την κάρτα.",
+  "aTrouveLeSymboleIl": "Το {winnerName} 9 βρήκε το σύμβολο 99999! Κερδίζει την κάρτα. {commonSym}",
+  "@aTrouveLeSymboleIl": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "commonSym": {
+        "type": "Object"
+      }
+    }
+  },
   "leTourEstTerminePersonne": "Ο γύρος τελείωσε. Κανείς δεν βρήκε το κοινό σύμβολο.",
   "aEteDesigneEEt": "{winnerName} ονομάστηκε και κέρδισε 1 βαθμό!",
+  "@aEteDesigneEEt": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersonneNeMarqueDe": "Ισοπαλία! Κανείς δεν κερδίζει πόντο σε αυτόν τον γύρο.",
   "espion": "Κατάσκοπος",
   "revolution": " (Επανάσταση!)",
@@ -1372,6 +2508,32 @@
   "indiceEnvoyeEnAttenteDes1": "Το στοιχείο στάλθηκε! Αναμονή για τους άλλους...",
   "carte3": "Χάρτης",
   "score": "Βαθμολογία",
+  "applocalizationsOfContextStyleconsttextstylecolorcolors": "{value} {guesserName} :Εφαρμογή Τοπικοποιήσεων.του(κείμενο)! .styleConstTextstyleΧρώμα χρώμα {value2} {deckIndex} / {deckTotal} — {value3} : {totalScore}",
+  "@applocalizationsOfContextStyleconsttextstylecolorcolors": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "guesserName": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      },
+      "deckIndex": {
+        "type": "Object"
+      },
+      "deckTotal": {
+        "type": "Object"
+      },
+      "value3": {
+        "type": "Object"
+      },
+      "totalScore": {
+        "type": "Object"
+      }
+    }
+  },
   "laNuitTombeSurLe": "Η νύχτα πέφτει στο χωριό...\n\nΚλείσε τα μάτια σου.",
   "leMomentEstVenuLe": "Ήρθε η ώρα...\n\nΤο χωριό πρέπει να ψηφίσει.",
   "victoireDesVillageois": "Νίκη των Χωρικών!",
@@ -1393,9 +2555,24 @@
   "votezPourDevorerUneProie": "Ψηφίστε για να κατασπαράξετε θήραμα",
   "espionnezUnJoueur": "Κατασκόπευσε έναν παίκτη...",
   "leLoupNoirDecideDu": "Ο Μαύρος Λύκος αποφασίζει για το θήραμα",
+  "infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": "Μόλυνση {targetName} ?App Localizations.of(context)!.centeractionwidgetRowMainaxisizeMainaxisizeMinThe White Wolf strikes solo",
+  "@infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "choisissezUneVictimeADevorer": "Διάλεξε ένα θύμα για κατασπάραξη",
   "laSorcierePrepareSesPotions": "Η Μάγισσα ετοιμάζει τα φίλτρα της",
   "cibleDesLoups": "Στόχος των λύκων: {victimeName}",
+  "@cibleDesLoups": {
+    "placeholders": {
+      "victimeName": {
+        "type": "Object"
+      }
+    }
+  },
   "touchezLeJoueurAEliminer": "Αγγίξτε τον παίκτη για να εξαλείψει με το δηλητήριο",
   "empoisonner": "Δηλητηρίασε",
   "lePyromancienPrepareSesExplosifs": "Ο Πυρομάντης ετοιμάζει τα εκρηκτικά",
@@ -1411,9 +2588,37 @@
   "loups": "Λύκοι",
   "outreTombe": "Υπερπέραν",
   "amoureux": "Ερωτευμένοι",
+  "applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": "{senderName} : Applocalizations.of(context)!.styleTextstyleFontweightFontweightBoldΜικρά άλογα",
+  "@applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux": {
+    "placeholders": {
+      "senderName": {
+        "type": "Object"
+      }
+    }
+  },
   "courseIndividuelle": "Ατομικός αγώνας",
   "k3Lancers": "👉 {lastHoldAction} ({value}/3 ρίψεις)",
+  "@k3Lancers": {
+    "placeholders": {
+      "lastHoldAction": {
+        "type": "Object"
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "joueEnDirect3Lancers": "👉 {value} παίζει ζωντανά... ({value2}/3 ρίψεις)",
+  "@joueEnDirect3Lancers": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      },
+      "value2": {
+        "type": "Object"
+      }
+    }
+  },
   "gardeS": "Διατηρήθηκε το '{0}'",
   "cur": "♥ Κούπα",
   "carreau": "♦ Καρό",
@@ -1442,11 +2647,47 @@
   "pile": "Γράμματα",
   "face": "Κορώνα",
   "pasAssezDeJoueursIl": "Δεν υπάρχουν αρκετοί παίκτες! Απαιτούνται τουλάχιστον {minPlayers} παίκτες.",
-  "tuEs": "Είστε: 99999",
+  "@pasAssezDeJoueursIl": {
+    "placeholders": {
+      "minPlayers": {
+        "type": "Object"
+      }
+    }
+  },
+  "tuEs": "Είστε: 99999 {role}",
+  "@tuEs": {
+    "placeholders": {
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
   "tonMotEst": "Η λέξη σου είναι: {wordCivil}",
+  "@tonMotEst": {
+    "placeholders": {
+      "wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
   "tonMotEst1": "Η λέξη σου είναι: {wordUndercover}",
+  "@tonMotEst1": {
+    "placeholders": {
+      "wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
   "tuNAsPasDe": "Δεν έχεις λέξη. Μπλόφαρε!",
   "commeConvenuTuCommences": "{mrWhitePlayer} , όπως συμφωνήσαμε, ξεκινάς!",
+  "@commeConvenuTuCommences": {
+    "placeholders": {
+      "mrWhitePlayer": {
+        "type": "Object"
+      }
+    }
+  },
+  "quiPourraitLePlusApplocalizations": "Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft",
   "votePar": "Ψηφίστηκε από: '{0}'",
   "decisionUnanimeDuGroupePour": "Ομόφωνη απόφαση της ομάδας για '{0}'!",
   "ilFautAuMoins41": "Χρειάζονται τουλάχιστον 4 παίκτες για Codenames (2 ανά ομάδα)!",
@@ -1463,7 +2704,21 @@
   "cEstAuTourDe2": "Είναι η σειρά του '{0}' ('{1}')",
   "genereDesQuestionsAmusantesEt": "Δημιουργεί διασκεδαστικές και γρήγορες ερωτήσεις. Θέμα: '{0}'",
   "s3": "{minDuration} δ",
+  "@s3": {
+    "placeholders": {
+      "minDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "s4": "{maxDuration} δ",
+  "@s4": {
+    "placeholders": {
+      "maxDuration": {
+        "type": "Object"
+      }
+    }
+  },
   "fin1": "ΤΕΛΟΣ",
   "trouves": "Βρέθηκε: '{0}'",
   "ecurie1": "Στάβλος 1",
@@ -1472,10 +2727,26 @@
   "ecurie4": "Στάβλος 4",
   "nombreMaxDeJoueurs": "Μέγιστος αριθμός παικτών: '{0}'",
   "jAiLanceUnePartie1": "Έκανα ένα παιχνίδι {value} !",
+  "@jAiLanceUnePartie1": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "jeu1": "Παιχνίδι",
   "partieDeEnAttente": "Μέρος του '{0}'",
+  "termine": "Τερμάτισε: '{0}'",
+  "vainqueur2": "Νικητής:",
   "joueurSPretS": "Έτοιμο(-α) παίκτη(-ων)",
-  "code": "Κωδικός: 99999",
+  "code": "Κωδικός: 99999 {value}",
+  "@code": {
+    "placeholders": {
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "lampe": "Φακός",
   "trousseSoin": "Κουτί Πρώτων Βοηθειών",
   "hache": "Τσεκούρι",
@@ -1487,6 +2758,12 @@
   "redigezLPour": "Γράψτε το '{0}' για το '{1}'",
   "rejouerGarderPts": "ΕΠΑΝΑΛΗΨΗ (ΔΙΑΤΗΡΗΣΗ ΒΑΘ)",
   "indicesMontresA": "Δείκτες που εμφανίζονται στο",
+  "playersWinneridname": "Νικητής παικτώνidname",
+  "packageSensorsPlusSensorsPlus": "πακέτο:αισθητήρες συν/αισθητήρες συν.dart",
+  "supabaseUploadEchecDefinitif": "--- [Ανέβασμα βάσης] ΟΡΙΣΤΙΚΟ ---",
+  "erreurSupabaseStorageexception": "--- ΣΦΑΛΜΑ ΥΠΟΣΤΗΡΙΞΗΣ (αποθήκευση) ---",
+  "erreurInattendueLorsDeL": "--- ΠΡΟΣΑTTΜΟΓΗ ΣΦΑΛΜΑΤΟΣ ΣΤΟ ΠΛΑΙΣΙΟ ---",
+  "timeSUp1": "Τέλος χρόνου.",
   "marquesDeVoiture": "Μάρκες αυτοκινήτων",
   "paysDuMonde": "Χώρες του κόσμου",
   "fruitsLegumes": "Φρούτα & λαχανικά",
@@ -1507,21 +2784,57 @@
   "chosesRondes": "Στρογγυλά πράγματα",
   "chosesRouges": "Κόκκινα πράγματα",
   "marquesDeVetements": "Μάρκες ρούχων",
+  "butDuJeuEtreLe": "** Γκολ παιχνιδιού **\nΓίνε ο παίκτης με τους περισσότερους πόντους στο τέλος του παιχνιδιού.\n\n**Σχέδιο **\n1. Κάθε παίκτης λαμβάνει **7 κάρτες απάντησης ** στο χέρι.\n2. Ένας παίκτης ονομάζεται **Juge ** (ο ρόλος γυρίζει σε κάθε γύρο).\n3. Ο Δικαστής διαβάζει το ** ερωτηματικό ** δυνατά.\n4. Όλοι οι ** άλλοι παίκτες ** επιλέγουν κρυφά **1 κάρτα απάντησης ** από το χέρι τους και την υποβάλλουν.\n5. Ο δικαστής διαβάζει όλες τις απαντήσεις και ορίζει ** το πιο αστείο **.\n6. Ο νικητής του γύρου σκορ **1 βαθμός**.\n7. Κάθε παίκτης ** Poche ** μια νέα κάρτα για να επιστρέψει στο 7.\n8. Ο ρόλος του δικαστή περνά στον επόμενο παίκτη.\n\n** Σημαντικοί κανόνες **\n- Ο δικαστής δεν παίζει χαρτιά στη σειρά του.\n- Οι απαντήσεις είναι **ανώνυμο **: ο δικαστής δεν ξέρει ποιος έγραψε τι.\n- Μπορούμε να παίξουμε μόνο ένα χαρτί** ανά λαβή.",
+  "objectifPrenezDesCartesPour": "** Στόχος **\nΠάρτε τα χαρτιά για να δημιουργήσετε ζευγάρια που ταιριάζουν. Αποφύγετε να είστε ο παίκτης που κρατά την κάρτα Zombie στο τέλος του παιχνιδιού.\n**Σχέδιο **\n1. Το παιχνίδι ξεκινά με 33 κάρτες (16 ζεύγη + 1 κάρτα ζόμπι).\n2. Οι κάρτες διανέμονται στους 4 παίκτες.\n3. Κάθε στροφή ένας παίκτης παίρνει ένα χαρτί από τον επόμενο παίκτη.\n4. Αν η κάρτα δημιουργήσει ένα ζευγάρι, αυτόματα ηττάται.\n5. Το χέρι του παίκτη είναι μικτό.\n6. Ο πρώτος παίκτης που δεν έχει πλέον κερδίσει τα χαρτιά.\n7. Ο υπόλοιπος παίκτης με την κάρτα ζόμπι έχασε!",
+  "butDuJeuObtenirLe": "** Γκολ παιχνιδιού **\nΠάρτε την υψηλότερη βαθμολογία συμπληρώνοντας 13 κατηγορίες με 5 ζάρια.\n\n**Τρέξιμο ενός πύργου **\n1. **Lance**: Μπορείτε να πετάξετε τα 5 ζάρια μέχρι 3 φορές ανά στροφή.\n2. ** Κρατήστε **: Μετά την 1η ή 2η throwψη, μπορείτε να κρατήσετε μερικά ζάρια και να επανεκκινήσετε άλλα.\n3. **Score**: Μετά από τουλάχιστον μία throwψη, θα πρέπει να επιλέξετε μια κατηγορία για να σκοράρετε. Κάθε κατηγορία μπορεί να χρησιμοποιηθεί μόνο μία φορά ανά μέρος.\n\n**Κατηγορία **\n- **Όσον αφορά το Έξι **: Άθροισμα των αντίστοιχων ζάρια. (Βαθμός 35 βαθμοί εάν το ανώτερο τμήμα ανέρχεται σε 63 βαθμούς ή περισσότερο).\n- **Brelan ** (3 ή περισσότερα πανομοιότυπα ζάρια): Το άθροισμα όλων των ζαριών.\n- ** Πλατεία ** (4 ή περισσότερα πανομοιότυπα ζάρια): Το άθροισμα όλων των ζαριών.\n- **Full** (3 ζάρια πανομοιότυπα + 1 ζεύγος): 25 πόντοι.\n- ** Μικρή Σουίτα ** (4 συνεχόμενα ζάρια): 30 πόντοι.\n- **Large Suite ** (5 συνεχόμενα ζάρια): 40 πόντοι.\n- **Yams ** (5 ζάρια πανομοιότυπα): 50 πόντοι.\nΤο άθροισμα όλων των ζαριών.",
+  "objectifNePasAvoirL": "** Στόχος **\nΜην έχετε τη συσκευή στα χέρια σας όταν η πατάτα εκραγεί!\n\n**Σχέδιο **\n1. Ένα θέμα εμφανίζεται στην οθόνη.\n2. Ο παίκτης που κρατά τη συσκευή πρέπει να δώσει μια απάντηση που αντιστοιχεί στο θέμα.\n3. Μόλις απάντησε, πέρασε γρήγορα το αεροπλάνο στον πλησίον του.\n4. Ο γείτονας πρέπει με τη σειρά του να βρει μια νέα απάντηση και να περάσει τη συσκευή.\n5. Ο χρόνος είναι κρυμμένος και τυχαίος: η πατάτα μπορεί να εκραγεί ανά πάσα στιγμή!\n6. Ο παίκτης που κρατά τη συσκευή κατά τη στιγμή της έκρηξης χάνει τη λαβή και λαμβάνει μια υπόσχεση.",
+  "principeGeneralGribouillisEstUn": "** Γενική αρχή **\nΤο Gribouillis είναι ένα παιχνίδι ζωγραφικής εμπνευσμένο από το \"αραβικό τηλέφωνο\", όπου οι ιδέες αλλάζουν σε κάθε στάδιο. Υπάρχουν 3 τρόποι παιχνιδιού:\n\n**1. Κανονική λειτουργία (Αραβικό Εικονογραφημένο Τηλέφωνο) **\nΚάθε παίκτης γράφει μια πρόταση.\n- **Drawing**: Κάθε παίκτης λαμβάνει άλλη πρόταση και την τραβάει.\n- **Devinette ** : Κάθε παίκτης λαμβάνει ένα σχέδιο και μαντεύει τι αντιπροσωπεύει.\n- Εντάξει. Το παιχνίδι εναλλάσσει το σχέδιο και την εικασία μέχρι ο καθένας \"album\" έχει πάει γύρω από όλους τους παίκτες.\n- Ναι, αλλά... Διασκεδάστε βλέποντας πώς μια απλή πρόταση μετατρέπεται σε κάτι εντελώς διαφορετικό!\n\n**2. Τρόπος συμπλήρωσης (συνεργατικό σχέδιο) **\n- **Κρόκις **: Κάθε παίκτης ξεκινά ένα απλό σχέδιο.\n- **Πλήρης**: Κάθε παίκτης λαμβάνει το σχέδιο του άλλου και πρέπει να το εμπλουτίσει, χωρίς να διαγράφει ό,τι υπάρχει ήδη.\n- ** Εναλλακτική **: Το σχέδιο πηγαίνει από παίκτη σε παίκτη, ο καθένας προσθέτει το άγγιγμα του.\n- **Παράμετρο \"Προσθέστε 1\"*:\n- * Αν απενεργοποιηθεί (προκαθορισμένο) *: Είναι μια χορδή. Το σχέδιο εξελίσσεται σε κάθε στάδιο (Player A -> Player B -> Player C...).\n- * Αν ενεργοποιηθεί *: Το αρχικό σχέδιο του κάθε παίκτη ολοκληρώνεται από όλους τους άλλους παίκτες, δημιουργώντας αρκετά συλλογικά έργα παράλληλα.\n- ** Αλλά **: Δημιουργήστε εκπληκτικά και διασκεδαστικά συλλογικά έργα τέχνης.\n\n**3. Brise-Glace Mode (Δημιουργική αλληλεπίδραση) **\n- ** Writing**: Κάθε παίκτης γράφει ένα προσωπικό θέμα (ex: Applocalizations.of(context)!.myPreference).\n- **Drawing**: Κάθε παίκτης λαμβάνει τα θέματα από ** όλους τους άλλους παίκτες ** και πρέπει να τα σχεδιάσει.\n- **But** : Ιδανικό για να σπάσει ο πάγος, να ανακαλύψει τα γούστα των άλλων και να ξεκινήσει τη δημιουργικότητα με ένα συνεργατικό και ελαφρύ τρόπο.",
+  "yzObjectifAvoirLeMoins": "Στόχος\n\nΈχετε όσο το δυνατόν λίγους πόντους στο τέλος του παιχνιδιού.\nΤο παιχνίδι σταματά όταν ένας παίκτης φτάσει τους 100 πόντους ή περισσότερο, και ο νικητής είναι αυτός με το χαμηλότερο συνολικό σκορ.\n\nΕξοπλισμός\n\n150 κάρτες αριθμημένες από –2 έως +12\n\nΕφαρμογή\n\nΑνακατέψτε όλα τα χαρτιά.\nΚάθε παίκτης λαμβάνει 12 φύλλα, τοποθετούνται ανοιχτά μπροστά του, σε 4 στήλες × 3 σειρές.\nΤα άλλα φύλλα σχηματίζουν μια στοίβα. Επιστρέψτε το πρώτο φύλλο για να σχηματίσετε το σωρό.\nΚάθε παίκτης επιστρέφει 2 φύλλα της επιλογής του από τα 12 του.\n\nΗ πορεία μιας ξενάγησης\n\nΜε τη σειρά σας, έχετε **30 δευτερόλεπτα ** για να επιλέξετε μεταξύ δύο ενεργειών:\n\n1. Πάρτε το φύλλο απορριμμάτων\nΠρέπει να το ανταλλάξετε με μία από τις 12 κάρτες σας (ορατή ή κρυφή πλευρά).\nΗ αντικαταστάτρια κάρτα πάει στα σκουπίδια.\n\n2. Piocher ένα φύλλο ανοιχτό προς τα κάτω\nΚοίτα το χάρτη:\n- είτε να το κρατήσετε και να αντικαταστήσετε μία από τις κάρτες σας (όπως παραπάνω),\n- είτε το αρνείστε → το τοποθετείτε απευθείας στο σωρό, και σε αυτή την περίπτωση πρέπει να επιστρέψετε ένα από τα φύλλα σας ακόμα κρυμμένα.\n\nΕιδικοί κανόνες\n\nΤρία όμοια φύλλα σε μια στήλη → ηττώνται αμέσως (τιμή 0).\n\nΤέλος λαβής:\n\nΗ λαβή τελειώνει όταν ένας παίκτης έχει αποκαλύψει όλα τα χαρτιά του.\nΣτη συνέχεια, όλοι οι άλλοι παίκτες αποκαλύπτουν τα υπόλοιπα χαρτιά τους. Το χερούλι τελείωσε.\nΌλοι οι παίκτες μετρούν το άθροισμα των καρτών τους.\n\nΠαρακαλείστε να σημειώσετε: αν ο παίκτης που τερματίζει δεν έχει το χαμηλότερο σκορ στον γύρο, παίρνει πέναλτι +10 πόντους (το χερούλι του διπλασιάζεται στην αρχική έκδοση, θα χρησιμοποιήσουμε +10 για να απλοποιήσουμε).\n\nΤέλος του παιχνιδιού\n\nΠαίζουμε όσα μανίκια χρειαζόμαστε.\nΜόλις ένας παίκτης φτάσει τους 100 πόντους ή περισσότερο, το παιχνίδι σταματά.\nΟ παίκτης με το χαμηλότερο σωρευτικό σκορ κερδίζει.",
+  "iAReglesDuPoker": "Στόχος\n\nΚερδίστε τις μάρκες από άλλους παίκτες έχοντας:\n- το καλύτερο φύλλο 5 φύλλων κατά τη σφαγή,\n- ή κάνοντάς τους να εγκαταλείψουν (να κοιμηθούν) χάρη στα στοιχήματα.\n\nΤαξινόμηση χεριών (από δυνατότερο σε ασθενέστερο)\n\n1. Ρουαγιάλ: 10 – V – D – R – A του ίδιου χρώματος\n2. Μπουτιά: 5 κάρτες που ακολουθούν το ένα το άλλο, ίδιο χρώμα\n3. Τετράγωνο: 4 πανομοιότυπες κάρτες\n4. Πλήρης: 3 πανομοιότυπες κάρτες + 1 ζεύγος\n5. Χρώμα (χρώμα): 5 φύλλα του ίδιου χρώματος (μη συνεχές)\n6. Επόμενο (πέμπτο): 5 κάρτες που ακολουθούν το ένα το άλλο (διαφορετικά χρώματα)\n7. Brelan: 3 ίδιες κάρτες\n8. Διπλό ζευγάρι\n9. Ζευγάρι\n10. Υψηλότερη κάρτα (υψηλότερη κάρτα αν κανείς δεν παίρνει καλύτερα)\n\nð\n\n1. Τυφλοί\nΟ παίκτης στα αριστερά του ντίλερ βάζει το μικρό τυφλό.\nΟ επόμενος παίκτης βάζει το μεγάλο τυφλό.\n\n2. Διανομή\nΚάθε παίκτης λαμβάνει 2 κλειστά φύλλα (το \"ιδιωτικές κάρτες\").\n\n3. Πύργοι πλειστηριασμού και κοινές κάρτες\n- Προκαταρκτικό: κόλπο στοιχήματος με ιδιωτικές κάρτες.\n- 3 κοινοί χάρτες αποκαλύφθηκαν. Καινούρια στοιχήματα.\n- Ο 4ος κοινός χάρτης αποκαλύφθηκε. Καινούρια στοιχήματα.\n- Ο 5ος και τελευταίος κοινός χάρτης αποκαλύφθηκε. Τελευταίο στοίχημα.\n\n4. Σκοποβολή (showdown)\nΑν μείνουν αρκετοί παίκτες, ο καθένας δείχνει το παιχνίδι του.\nΟ καλύτερος συνδυασμός των 5 καρτών (μεταξύ των 2 ιδιωτικών καρτών + των 5 κοινοτήτων) κερδίζει το pot.\n\nΠιθανές ενέργειες\n\nΜε τη σειρά του, ένας παίκτης έχει **30 δευτερόλεπτα ** για:\nΜην στοιχηματίσεις τίποτα, μόνο αν κανείς δεν ποντάρει ξανά.\nΒάλε μερικά πατατάκια στην κατσαρόλα.\n- Ακολουθείστε (Call): ίσο με το τρέξιμο.\n- Επανεκκίνηση (Raise): αύξηση του στοιχήματος.\n- Πήγαινε για ύπνο, άσε τα χαρτιά του και φύγε.\n\nΤέλος του παιχνιδιού\n\nΤο παιχνίδι συνεχίζεται όσο παραμένουν τουλάχιστον 2 παίκτες με μάρκες.\nΟ τελικός νικητής είναι αυτός που παίρνει όλες τις μάρκες.",
+  "butDuJeuGagnerLe": "** Γκολ παιχνιδιού **\nΚερδίστε τα περισσότερα XP με την εκτέλεση δράσεων και την απάντηση στις αλήθειες!\n\n**Σχέδιο **\n1. Η ρουλέτα είναι ο παίκτης του οποίου η σειρά είναι.\n2. Ο παίκτης πυροβολεί \" Δράση\" ή \"Βεωρικότητα\".\n3. Κλασική λειτουργία: Εμφανίζεται μια τυχαία πρόκληση/ερώτηση.\n4. Λειτουργία δικαστή: Ένας τυχαίος παίκτης γράφει την πρόκληση, τότε ο παίκτης το συνειδητοποιεί.\n5. Άλλοι παίκτες επικυρώνουν με ψηφοφορία Ναι/Όχι.\n6. Το ποσοστό επικύρωσης καθορίζει το XP που κέρδισε.\n\n** Ειδικοί κανόνες **\n- 100% επικύρωση = μέγιστη XP\n- Ο παίκτης με τα περισσότερα XP γίνεται διαχειριστής του παιχνιδιού\n- Το κουμπί \" Τέλος της λαβής\" επιτρέπει το κλείσιμο του τμήματος",
+  "butDuJeuLeBut": "** Γκολ παιχνιδιού **\nΟ στόχος είναι να είναι ο πρώτος που θα ξεφορτωθεί όλες τις κάρτες του για να γίνει Πρόεδρος. Ο τελευταίος παίκτης με τα χαρτιά στο χέρι γίνεται ο Μαλάκας.\n\n**Υλικό και Παίκτες **\n- **Χάρτης **: 52 κάρτες.\n3-6 παίκτες.\n\n** Αξία κάρτας **\nΗ σειρά των χαρτιών, από τους πιο αδύναμους μέχρι τους πιο δυνατούς, είναι:\n**3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2.**\nΤο **2 ** είναι το ισχυρότερο φύλλο και μπορεί να νικήσει οποιαδήποτε άλλη κάρτα ή συνδυασμό.\n\n** Χειρουργική λειτουργία **\n1. **Διανομή **: Όλες οι κάρτες κατανέμονται εξίσου μεταξύ των παικτών.\n2. ** Πρώτος γύρος **:\n- Για το πρώτο παιχνίδι, ο παίκτης που κατέχει το **3 του Trèfle (Πρέπει να παίξει αυτό το χαρτί (μόνο ή με άλλους 3).\n- Για τα επόμενα μανίκια, ξεκινά ο τροχός **Αξιολόγηση ** του προηγούμενου μανίκι.\n3. ** Παίξτε κάρτες **: Ο πρώτος παίκτης βάζει στο τραπέζι:\n- Μόνο ένα φύλλο (π.χ. ένα 7).\n- Ένα ζευγάρι (πρώην: δύο 8).\n- Ένα brelan (πρώην: τρεις Valets).\n- Ένα τετράγωνο (πρώην: τέσσερα 5).\n4. **Συνεχίζεται από τον γύρο **: Ο επόμενος παίκτης (σε δεξιόστροφη κατεύθυνση) έχει **30 δευτερόλεπτα ** για να παίξει τον ίδιο αριθμό καρτών ** αλλά ** υψηλότερη αξία **.\n- Παράδειγμα: Αν ένας παίκτης ποζάρει ένα ζευγάρι των 6, ο επόμενος πρέπει να ποζάρει ένα ζευγάρι των 7, Κυρίες, όπως, κλπ.\n5. **Δώσε τη σειρά σου **: Αν ένας παίκτης δεν μπορεί ή δεν θέλει να παίξει, πρέπει να περάσει τη σειρά του. Μόλις περάσει ένας παίκτης, δεν μπορεί να παίξει ξανά μέχρι το τέλος της τρέχουσας πτύχωσης.\n6. ** Τέλος μιας πτυχής **: Το πάσο τελειώνει όταν όλοι οι παίκτες έχουν περάσει τη σειρά τους. Ο τελευταίος παίκτης που θα έχει τοποθετήσει τα φύλλα κερδίζει τη φορά, μαζεύει τα φύλλα από το τραπέζι (αφήστε τα στην άκρη) και ξεκινά την επόμενη φορά παίζοντας αυτό που θέλει.\n7. **Η δύναμη του 2**: Παίξτε ένα ή περισσότερα **2** κτυπά κάθε συνδυασμό και τελειώνει αμέσως την πτυχή. Το άτομο που έπαιξε το 2 κερδίζει το πάσο και αρχίζει να παίζει ξανά.\nΓια να νικήσεις ένα ζευγάρι, πρέπει να παίξεις δύο!\n\n** Τέλος της Μάγχης και των Ρόλων**\n- Μόλις ένας παίκτης δεν έχει χαρτιά, τελείωσε. Το παιχνίδι συνεχίζεται μέχρι να μείνει μόνο ένας παίκτης.\n- Η σειρά του τέλους καθορίζει τους ρόλους για τον επόμενο γύρο:\n- **1η**: Πρόεδρος\n- **2η**: Αντιπρόεδρος\n- **Τελευταία**\n- **Πριν-τελευταία **: Αντι-Κώλος-Trou\n- **Άλλο ** (αν υπάρχει): Ουδέτερο\n\n** Τον επόμενο μήνα: Ανταλλαγή καρτών! **\nΠριν από την έναρξη του νέου γύρου, οι παίκτες ανταλλάσσουν κάρτες:\n- Η κωλοτρυπίδα δίνει δύο καλύτερες κάρτες στον Πρόεδρο.\n- Το **Chair** του δίνει σε αντάλλαγμα τα ** δύο φύλλα της επιλογής του ** (συνήθως τα χειρότερα του).\n- Εάν υπάρχουν 4 ή περισσότεροι παίκτες, το **Vice-Cut ** δίνει την καλύτερη κάρτα ** στον **Vice-Πρόεδρο **.\n- Το **Vice-Πρόεδρος ** του δίνει τον χάρτη ** της επιλογής του **.\n\n** Ειδικοί κανόνες **\n- â›â € **Δεν μπορεί να τελειώσει με ένα 2 **: Ένας παίκτης δεν έχει δικαίωμα να ξεφορτωθεί το τελευταίο του φύλλο αν είναι 2. Αυτό το χτύπημα θεωρείται άκυρο.\n**Παραλλαγή Επανάσταση (προαιρετικό) **: Εάν ένας παίκτης θέτει ένα τετράγωνο (4 πανομοιότυπα φύλλα), μπορεί να ανακοινώσει \"Επανάσταση!\". Η σειρά της αξίας των φύλλων στη συνέχεια αντιστρέφεται μέχρι το τέλος του μανίκι (το 3 γίνεται το ισχυρότερο, και το 2 το πιο αδύναμο).",
+  "butDuJeuReussirDeux": "** Γκολ παιχνιδιού **\nΕπιτυχία δύο προκλήσεις πριν από τους άλλους παίκτες.\n\n** Στη θέση του **\n- Κάθε παίκτης ξεκινά με 4 φύλλα: 3 τριαντάφυλλα και 1 κρανίο.\nΚάθε κάρτα στο χαλί παραμένει δεμένη με τον ιδιοκτήτη του.\n\n**Σχέδιο **\n1. Με τη σειρά του, ένας παίκτης μπορεί να βάλει μια κάρτα προς τα κάτω στο χαλί του.\n2. Όταν δεν θέλει πλέον να ποζάρει, προκαλεί ανακοινώνοντας τον αριθμό των καρτών που νομίζει ότι μπορεί να επιστρέψει.\n3. Άλλοι παίκτες μπορούν να υποβάλουν προσφορά ή να περάσουν.\n4. Ο μεγαλύτερος πλειοδότης γίνεται ο διεκδικητής και επιστρέφει τις διαφημιζόμενες κάρτες.\n5. Πρώτα επιστρέφει τις δικές του κάρτες, μετά αυτές άλλων παικτών αν χρειαστεί.\n\n** Λύση **\n- Αν εμφανιστεί ένα Κρανίο, η πρόκληση χάνεται.\n- Αν κερδίσει η πρόκληση, ο παίκτης σκοράρει ένα βαθμό. Ο πρώτος στους 2 πόντους κερδίζει το παιχνίδι.\n- Αν χαθεί μια πρόκληση, ο παίκτης χάνει ένα χαρτί τυχαία από το υπόλοιπο χέρι του. Αν χάσει το Κρανίο του, πρέπει να αναιρέσει άλλο αμέσως.",
+  "butDuJeuFaireDeviner": "** Γκολ παιχνιδιού **\nΓια να μαντέψει μια λέξη με το σχέδιο, πριν από το τέλος του καθορισμένου χρόνου.\n\n**Σχέδιο **\n1. ** Drawer/επιλογή λέξης **: Ένας παίκτης ορίζεται για να τραβήξει, και μια λέξη αποδίδεται κρυφά σε αυτόν.\n2. **Drawing**: Ο συντάκτης έχει περιορισμένο χρόνο για να μαντέψει τη λέξη με το σχέδιο. Δεν μπορεί ούτε να μιλήσει ούτε να μιμηθεί ούτε να γράψει γράμματα ή φιγούρες.\n3. ** Devinettes **: Άλλοι παίκτες προσφέρουν λέξεις σε μια συνομιλία.\n4. **Validation**: Ο γελοιογράφος βλέπει τις προτάσεις στη συνομιλία και κάνει κλικ στο κουμπί a \"Find!\" δίπλα στο καλό μήνυμα για να ορίσει τον νικητή.\n5. **Σημεία**: Ο παίκτης που βρήκε και ο συντάκτης κερδίζει ένα βαθμό.\n6. ** Επόμενος πύργος **: Ένας νέος συντάκτης ορίζεται.\n\n** Επιλογές **\n- ** Μόνο 30 εγκεφαλικά επεισόδια **: Ο συντάκτης περιορίζεται σε 30 το πολύ χαρακτηριστικά.",
+  "butDuJeuFaireDeviner1": "** Γκολ παιχνιδιού **\nΑφήστε το σύντροφό σας να μαντέψει όσο το δυνατόν περισσότερες μυστηριώδεις λέξεις, κάθε γράφοντας μια μόνο λέξη στοιχείο. Οι ίδιοι ή άκυροι δείκτες εξαλείφονται.\n\n**Σχέδιο **\n1. ** Επιλογή του Devin**: Ένας παίκτης ορίζεται ως ο \"Devin\" για τον γύρο. Δεν βλέπει τη λέξη μυστήριο.\n2. **Επιλογή του Word Mystery**: Το Devin επιλέγει μια λέξη από μια λίστα (ή ο κύριος του παιχνιδιού επιλέγει μία).\n3. **Indice Writing **: Όλοι οι άλλοι παίκτες (\" Δείκτες\") γράψτε κρυφά ένα μόνο δείκτη λέξη που θα βοηθήσει το Devin βρείτε τη λέξη μυστήριο.\n4. ** Δείκτης Φίλτρο **: Όλοι οι δείκτες αποκαλύπτονται. Οι ίδιοι δείκτες (ακόμα και αν γράφεται διαφορετικά, π.χ. \"chat\" και \"chats\") ή άκυροι (πολύ κοντά στη λέξη μυστήριο, εφευρέθηκε, κ.λπ.) εξαλείφονται. Μόνο τα μοναδικά και έγκυρα στοιχεία εμφανίζονται στο Devin.\n5. **Devinette ** : Το Devin κοιτάζει τις υπόλοιπες ενδείξεις και προσπαθεί να μαντέψει τη λέξη μυστήριο. Έχει μόνο μια προσπάθεια.\n6. **Κατάρτιση **:\n- Αν το Ντέβιν βρει τη λέξη μυστήριο: η ομάδα κερδίζει 1 βαθμό.\n- Αν το Ντέβιν δεν βρει τη λέξη μυστήριο: 0 βαθμός.\n- Αν το Ντέβιν δεν απαντήσει: 0 βαθμός.\n\n**Παράδειγμα άκυρων δεικτών: **\nΜυστηριώδης λέξη: Μη έγκυροι δείκτες:\n- Ίδιοι δείκτες: Αν 2 παίκτες γράφουν \"ζωικό\" για \"Chat\", \"ζωικό\" εξαλείφεται.",
+  "butDuJeuPourLes": "** Γκολ παιχνιδιού **\n- Για **Χωριό**: Εξάλειψη όλων Wolf-Garous, White Wolf, Malade Rat (εκτός Mercenary αν κερδίσει).\n- Για το Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Εξάλειψη όλων των χωρικών.\n- Για τις ** Πασιέντζες**: Στόχος συγκεκριμένος για κάθε άτομο (Λευκό Λουπ: να είναι μόνος, Μισθοφόρος: Σκότωσε το στόχο του στο J1, Αρρώστης: μολύνει όλα).\n- Για τους Εραστές ** (αν Wolf + Village): Να είναι οι μόνοι δύο επιζώντες.\n\n**Σχέδιο **\nΤο παιχνίδι εναλλάσσεται μεταξύ φάσεων ** νύχτα ** και ** ημέρα **.\n\n* Καληνύχτα **\n1. Ο αρχηγός του παιχνιδιού (η εφαρμογή) ανακοινώνει ότι το χωριό κοιμάται.\n2. Διαφορετικοί χαρακτήρες ξυπνούν με τη σειρά τους για να χρησιμοποιήσουν τις δυνάμεις τους:\n- * * Cupidon ** (μόνο πρώτη νύχτα): Ονόματα δύο παίκτες που θα ερωτευτούν. Αν είναι Λύκος και Χωρικός, ο στόχος τους αλλάζει.\n- Το Heritage** (μόνο την πρώτη νύχτα): Αναφέρεται σε έναν δοκιμαστή.\n- Το **Seeing ** ξυπνά και ορίζει έναν παίκτη για να ανακαλύψει τον πραγματικό του ρόλο. (Μην ανιχνεύετε μόλυνση Black Wolf).\n- Το **Mentalist** (παθητικό) αντιλαμβάνεται το αποτέλεσμα της ψηφοφορίας του χωριού.\n- Το **Rat Malade**: Μολύνει δύο παίκτες (που θα γνωρίζουν τους άλλους μολυσμένους).\n- Το **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - ψήφοι μαζί) ξυπνούν, συναυλιών και ορίζουν ένα θύμα για να φάει.\n- Το μαύρο λουπ ** μπορεί κάποτε να μετατρέψει το θύμα σε μολυσμένο Loup-Garou (που διατηρεί τις δυνάμεις του και γίνεται Wolf). Ο Mentalist και ο Fossoyer μπορούν να εντοπίσουν τους μολυσμένους, το Voyante όχι.\n- Το λευκό λουπ. Απελπίζει έναν παίκτη της επιλογής του (ανατρέπει τις προστασίες).\n- Η μαγεία ξυπνάει. Βλέπει το θύμα του λύκου και μπορεί να χρησιμοποιήσει ένα από τα δύο φίλτρα της (μόνο μία φορά ανά μέρος): ένα φίλτρο της ** θεραπείας ** για να σώσει το θύμα, ή ένα φίλτρο της **δηλητηρίαση ** για να σκοτώσει κάποιον.\n- Το Pyroman **: Επιλέγει να αποθηκεύσει ένα βαρέλι ελληνικής φωτιάς ή να πυροδοτήσει αυτά που έχουν ήδη τοποθετηθεί (πρέπει να είναι ζωντανά το πρωί).\nΜπορεί να επικοινωνήσει με τους νεκρούς.\n\n* Ημέρα **\n1. Το χωριό ξυπνάει. Η εφαρμογή ανακοινώνει ποιος πέθανε σε μια νύχτα.\n2. Νεκροί παίκτες αποκαλύπτουν το ρόλο τους και εξοντώνονται (δεν μπορούν πλέον να επικοινωνήσουν, εκτός από το Necromank με τους νεκρούς).\n- Le **Loup Bavard ** : Πρέπει να προφέρει μια μυστική λέξη ή να πεθάνει στο ηλιοβασίλεμα (εκτός αν ο Δικτάτορας παίρνει την εξουσία).\n3. Οι επιζώντες υποστηρίζουν ότι προσπαθούν να εκθέσουν απατεώνες.\n4. Μετά τις συζητήσεις, όλοι οι παίκτες ψηφίζουν για την εξάλειψη ενός υπόπτου.\n- Ο Δικτάτορας ** (μία φορά): μπορεί να ψηφίσει. Αν εξαλείψει έναν λύκο, γίνεται Δήμαρχος· διαφορετικά, πεθαίνει.\nΗ ψήφος του μετράει διπλά. Αν εξαλειφθεί, πρέπει να ορίσει διάδοχο πριν πεθάνει.\n- Το **Mercenary**: Αν ο στόχος του εξαλειφθεί την πρώτη μέρα, κερδίζει μόνος του. Διαφορετικά, γίνεται Χωρικός.\n5. Ο παίκτης που λαμβάνει τις περισσότερες ψήφους εξαλείφεται, αποκαλύπτει το ρόλο του, και είναι εκτός παιχνιδιού.\nΑν εξαλειφθεί (ημέρα και νύχτα), έχει τη δύναμη να φέρει έναν άλλο παίκτη μαζί του.\n- Το **Fossoyeur** : Όταν πέθανε, αναγνώρισε δύο παίκτες (ένας από το αντίθετο στρατόπεδο, ένας από το στρατόπεδο του).\n- Οι Εραστές**: Αν ο ένας πεθάνει, ο άλλος τον ακολουθεί με θλίψη.\n- Το \\\"Κεριτάζ\\\". Αν ο δοκιμαστής του πεθάνει, αναλαμβάνει το ρόλο του (εκτός αν είναι νεκρός ή μολυσμένος).\n6. Αρχίζει μια νέα νύχτα.\n\n**Συνθήκες Νίκης **\nΕξαλείψτε όλους τους λύκους, τον λευκό λύκο, τον άρρωστο αρουραίο.\n- **Loups-Garous ** (Σύντομο): Να είναι ίσος ή μεγαλύτερος σε αριθμό με τους Χωρικούς.\nΌντας ο μόνος επιζών.\nΣκότωσε τον στόχο του την πρώτη μέρα.\nΜόλυνε όλους τους παίκτες.\nΓια να είναι οι μόνοι δύο επιζώντες.\n\n**Σημαντικές σημειώσεις **\n- Το Chaperon Rouge ** προστατεύεται από τον Κυνηγό κατά του Wolf-Garous ενώ ο Κυνηγός είναι ζωντανός.\n- Το **Garde ** προστατεύει έναν στόχο Wolf-Garous (δεν μπορεί να προστατεύσει δύο φορές το ίδιο άτομο).\nΟι δυνάμεις του Λευκού Λύκου δεν ξέρουν τις προφυλάξεις.\n- Ο Πύρομαν πρέπει να είναι ζωντανός το πρωί για να εκραγούν τα βαρέλια του.",
   "loupNoir": "Μαύρος Λύκος",
+  "loupBavard": "Λύκος Φλύαρος",
   "loupBlanc": "Λευκός Λύκος",
+  "mercenaire": "Μισθοφόρος",
   "ratMalade": "Άρρωστος Αρουραίος",
   "voyante": "Μάντισσα",
   "petiteFille": "Κοριτσάκι",
+  "chasseur": "Κυνηγός",
   "garde": "Σωματοφύλακας",
   "cupidon": "Έρωτας",
   "mentaliste": "Μέντιουμ",
+  "fossoyeur": "Νεκροθάφτης",
   "dictateur": "Δικτάτορας",
+  "chaperonRouge": "Κοκκινοσκουφίτσα",
   "pyromancien": "Πυρομάντης",
+  "butDuJeuEtreLe1": "** Γκολ παιχνιδιού **\nΝα είστε ο ταχύτερος που θα εντοπίσει το μοναδικό πανομοιότυπο σύμβολο μεταξύ της κάρτας στο κέντρο και της κάρτας της.\n\n**Σχέδιο (Mode ''The Infernal Tower'') **\n1. Κάθε παίκτης λαμβάνει ένα φύλλο ανοιχτό προς τα κάτω. Τα υπόλοιπα φύλλα σχηματίζουν στο κέντρο της μάνας, με το πρόσωπο ορατό.\n2. Αρχικά, όλοι επιστρέφουν την κάρτα τους.\n3. Κάθε παίκτης πρέπει να βρει το συντομότερο δυνατό το μοναδικό σύμβολο που υπάρχει τόσο στο φύλλο του όσο και στο φύλλο του σωρού.\n4. Ο πρώτος παίκτης που βρίσκει το σύμβολο, την ανακοίνωση δυνατά, παίρνει το φύλλο της μάνας και το τοποθετεί στο δικό του φύλλο.\n5. Αυτή η νέα κάρτα γίνεται η κάρτα του για τον επόμενο γύρο. Στη συνέχεια αποκαλύπτεται ένας νέος χάρτης στο κέντρο της Αποθήκης.\n6. Το παιχνίδι συνεχίζεται μέχρι να εξαντληθεί η μάνα. Ο παίκτης που μάζεψε τα περισσότερα χαρτιά στο τέλος κερδίζει!",
+  "butDuJeuSeDebarrasser": "** Γκολ παιχνιδιού **\nΞεφορτώσου όλες τις κάρτες του με το να είσαι ο πρώτος!\n\n**Σχέδιο **\n1. **Διανομή **: Κάθε παίκτης λαμβάνει 7 φύλλα. Τα υπόλοιπα αποτελούν το απόθεμα. Επιστρέφεται ένα φύλλο για να ξεκινήσει η στοίβα του σωρού.\n2. ** Παίξτε ένα χαρτί **: Ο παίκτης του οποίου η σειρά έχει ** 30 δευτερόλεπτα ** για να βάλει ένα χαρτί στο χέρι του στο σωρό του σωρού. Το φύλλο που παίζεται πρέπει να ταιριάζει με το πάνω φύλλο της στοίβας με:\n* **Χρώμα ** (πρώην: Κόκκινο στο κόκκινο)\n* ** Αριθμός ** (πρώην: ένα 7 μπλε σε ένα 7 πράσινο)\n* **Συμβολικό ** (π.χ. κίτρινο \"+2\" σε κόκκινο \"+2\")\n* ** Ειδική κάρτα ** (Joker, +4, κ.λπ.)\n3. ** Piocher **: Εάν ένας παίκτης δεν μπορεί να παίξει ένα χαρτί στον χρόνο που έχει οριστεί, πρέπει να επιλέξει ένα χαρτί από το πακέτο. Αν μπορεί να παίξει αυτό το χαρτί, μπορεί να το κάνει αμέσως. Διαφορετικά, η σειρά του τελειώνει.\n4. **Ειδικές κάρτες **:\n* **+2 (Δύο κάρτες) **: Ο επόμενος παίκτης διαλέγει 2 φύλλα και περνάει τη σειρά του.\n* **Sens Απαγορευμένο (Πέρασε τη σειρά σου) **: Ο επόμενος παίκτης περνάει τη σειρά του.\n* ** Αντιστροφή (Αλλαγή νοήματος) **: Η αίσθηση του παιχνιδιού αντιστρέφεται.\n**Joker (Αλλαγή χρώματος) **: Ο παίκτης επιλέγει το χρώμα του επόμενου φύλλου για να παίξει. Μπορεί να παιχτεί σε οποιοδήποτε χαρτί.\n* ** Super Joker +4 (Χρώμα Αλλαγή και τέσσερις κάρτες) **: Ο παίκτης επιλέγει το χρώμα. Ο επόμενος παίκτης διαλέγει 4 φύλλα ΚΑΙ περνάει τη σειρά του. Αυτή η κάρτα μπορεί να παιχτεί μόνο αν ο παίκτης δεν έχει άλλη κάρτα του χρώματος που ζητείται στο σωρό του σωρού (εκτός αν μπλοφάρει).\n5. **Ανακοίνωση \"UNO\"**: Όταν ένας παίκτης έχει μόνο ένα φύλλο στο χέρι, πρέπει να ανακοινώσει \"UNO!\". Αν δεν το κάνει αυτό και το πάρει άλλος παίκτης (πριν ο επόμενος παίκτης παίξει ή πάρει), πρέπει να πάρει 2 φύλλα.\n6. ** Τέλος καναλιού **: Η λαβή τελειώνει όταν ένας παίκτης ξεφορτώνεται το τελευταίο του φύλλο. Οι βαθμοί μετριούνται. Ο παίκτης που φτάνει τους 500 πόντους (ή ένα καθορισμένο σύνολο) κερδίζει το παιχνίδι.\n\n** Σημεία χάρτη: **\n* Ψηφιακές κάρτες (0-9): Η αξία του προσώπου τους.\n* +2, Sens Απαγορευμένο, Αντιστροφή: 20 πόντοι.\n* Joker, Super Joker +4 : 50 πόντοι.",
+  "principeDuJeuLeJeu": "Αρχή παιχνιδιού\n* Το παιχνίδι παίζεται μεταξύ **3 και 10 παικτών **.\n* Κάθε παίκτης δίνει πρόσβαση σε ένα μέρος της βιβλιοθήκης φωτογραφίας του και επιλέγει φωτογραφίες για να μοιραστεί.\n* Κατά τη διάρκεια ενός παιχνιδιού, μια φωτογραφία επιλέγεται ** τυχαία ** μεταξύ όλων των παικτών, και στη συνέχεια εμφανίζεται για μερικά δευτερόλεπτα.\n* Οι παίκτες πρέπει να μαντέψουν ** σε ποιον ανήκει η φωτογραφία ** που εμφανίζεται.\n* Ο παίκτης που σωστά μαντέψει τις περισσότερες φωτογραφίες κερδίζει το παιχνίδι.\n\nΔιαδικασία . . .\n1. ** Επιλογή φωτογραφιών **: Κάθε παίκτης επιλέγει έναν αριθμό φωτογραφιών από τη γκαλερί του.\n2. **Ξεκίνησε το παιχνίδι **: Μόλις όλοι είναι έτοιμοι, ο οικοδεσπότης ξεκινά το παιχνίδι.\n3. **Πύργος αναπαραγωγής **:\n- Μια τυχαία φωτογραφία εμφανίζεται για 5 δευτερόλεπτα.\nΌλοι οι παίκτες ψηφίζουν να μαντέψουν τον ιδιοκτήτη.\n4. **Αποτελέσματα**: Οι βαθμολογίες ενημερώνονται μετά από κάθε γύρο.\n5. ** Τέλος παιχνιδιού **: Μετά από έναν καθορισμένο αριθμό γύρων, ο παίκτης με τους περισσότερους πόντους κερδίζει.",
+  "butDuJeuCoulerTous": "** Γκολ παιχνιδιού **\nΚόλλησε όλα τα πλοία του αντιπάλου πριν βυθίσει τα δικά σου.\n\n**Σχέδιο **\n1. **Τοποθέτηση **: Κάθε παίκτης βάζει κρυφά τον στόλο του σε πλέγμα 10x10.\n- Αερομεταφορείς (5 κουτιά)\n- Κρουαζιέρα (4 κουτιά)\n- Υποβρύχιο (3 κύτταρα)\n- Καταστροφέας (3 κουτιά)\n- Περίπολος (2 κουτιά)\n2. **Τίρ **: Με τη σειρά τους, οι παίκτες αγγίζουν ένα κουτί για να πυροβολήσουν.\n3. **Αποτελέσματα **: Applocalizations.of(context)!.touche, \"Coulated\" ή \"Για το νερό\".\n4. **Victoire**: Ο πρώτος παίκτης που θα βυθίσει ολόκληρο τον αντίπαλο στόλο κερδίζει.",
+  "butDuJeuEtreLe2": "** Γκολ παιχνιδιού **\nΓίνετε ο πρώτος που θα φτάσει την απόσταση στόχου (1000 χλμ εξ ορισμού).\n**Σχέδιο **\n- Κάθε παίκτης παίρνει έξι φύλλα.\n- Με τη σειρά του, παίξτε ένα χαρτί (Απόσταση, Επίθεση, Άμυνα, Ασφάλεια) ή να απαλλαγούμε από αυτό.\n- Οι ** Επιθέσεις ** κάρτες (Σταματήστε, Red, Essence, Crevaison, Limit) μπλοκάρουν τον αντίπαλο.\n- Χάρτες ** Defenses ** (Πράσινη, Έξτρα Δεξαμενή, Επισκευή, Όριο Τέλος) επιθέσεις.\n- Οι κάρτες **Security** ακυρώνουν μια επίθεση και εμποδίζουν την επανάληψη της.\n- Χάρτες **Απόσταση ** (25, 50, 75, 100, 200 km) μετακινήστε το όχημά σας προς τα εμπρός.\n- Διάλεξε ένα χαρτί στο τέλος της σειράς σου.",
+  "butDuJeuEtreLe3": "** Γκολ παιχνιδιού **\nΓίνετε ο πρώτος που θα ξεφορτωθεί όλες τις κάρτες του σχηματίζοντας έγκυρους συνδυασμούς (μελάδες).\n\n**Τρέξιμο ενός πύργου **\n1. **Piocher**: Πάρτε το χάρτη από την κορυφή των αποβλήτων ή Stock.\n2. ** Πώληση (προαιρετικό) **: Τοποθετήστε έγκυρους συνδυασμούς στο τραπέζι.\n3 ή περισσότερα φύλλα του ίδιου χρώματος που ακολουθούν (π.χ. 5) Ο Άσσος μπορεί να είναι υψηλός ή χαμηλός.\n3 ή 4 φύλλα της ίδιας αξίας αλλά διαφόρων χρωμάτων (π.χ. 8♥, 8\n3. **Προκαθορισμένο**: Ξεφορτωθείτε μια κάρτα από το χέρι του στα σκουπίδια.\n\n** Τέλος της λαβής **\nΟ πρώτος παίκτης που δεν έχει πια χαρτιά μετά την ήττα κερδίζει. Οι άλλοι μετρούν τα σημεία των υπολοίπων φύλλων τους (Σχήματα = 10, Ως = 15, άλλοι = ονομαστική αξία). Το παιχνίδι σταματά στους 100 πόντους.",
+  "butDuJeuFaireDeviner2": "** Γκολ παιχνιδιού **\nΚάντε την ομάδα σας να μαντέψει το μέγιστο των λέξεων πριν από το τέλος του χρόνου, χωρίς να χρησιμοποιεί τις απαγορευμένες λέξεις!\n\n**Σχέδιο **\n1. Κάθε στροφή, ένας παίκτης (\" ο ομιλητής\") προσπαθεί να κάνει την ομάδα του να μαντέψει μια λέξη.\n2. Ο ομιλητής δεν πρέπει να ** ποτέ ** να προφέρει τη λέξη για να μαντέψει, ούτε οποιαδήποτε από τις λέξεις \"Ταμπού\" (όχι λέξεις) που εμφανίζονται κάτω από τη λέξη-στόχο. Ούτε μπορεί να χρησιμοποιήσει μεταφράσεις ή λέξεις από την ίδια οικογένεια.\n3. Αν ο ομιλητής χρησιμοποιήσει μια λέξη Taboo, η αντίπαλη ομάδα (ή δικαστής) αναφέρει το σφάλμα, η κάρτα ακυρώνεται και ο ομιλητής μετακινείται στην επόμενη.\n4. Κάθε μαντεμένη λέξη επιστρέφει ένα βαθμό στην ομάδα.\n5. Η στροφή τελειώνει όταν τελειώσει ο χρόνος.\n\n** Τέλος μέρους **\nΗ ομάδα με τους περισσότερους πόντους μετά τον αριθμό των γύρων ορίζεται νίκες!",
+  "butDuJeuAmenerVos": "** Γκολ παιχνιδιού **\nΦέρτε τα άλογά σας στο κέντρο του οροπεδίου παρακάμπτοντας τους αντιπάλους σας.\n\n**Κλασικοί κανόνες **\n1. **Βασική έξοδος**: Πρέπει να κάνετε ένα **1** ή ένα **6** για να τραβήξετε ένα πιόνι.\n2. ** Bonus Tour**: Κάνοντας ένα **6 **, συλλαμβάνοντας ένα πιόνι ή τελειώνοντας το μάθημα επιτρέπει την επανάληψη. (Προσοχή: 3 φορές το 6 συνεχόμενα ακυρώνει τη σειρά σας!).\n3. **Capture** : Πέφτοντας σε ένα αντίπαλο πιόνι το επιστρέφει στη βάση του (αδύνατο στα προστατευμένα \"Stars\" κουτιά ή στο πλαίσιο εκκίνησης αυτού του παίκτη).\n4. ** Έφτασε **: Χρειάζεται ένα ακριβές σκορ για να φτάσεις στην τελική σκάλα.\n\n** Λειτουργία ομάδας (2v2) **\nΑπαιτεί ακριβώς 4 παίκτες. Είσαι σύμμαχος με τον παίκτη μπροστά σου.\n- ** Κοινή νίκη **: Η πρώτη ομάδα που φέρνει συνολικά 4 κομμάτια στο κέντρο κερδίζει το παιχνίδι (ex: 3 κομμάτια για σένα και 1 για τον σύμμαχό σου).\n- **Entraide**: Μπορείτε να χρησιμοποιήσετε τη throwψη σας για να μετακινήσετε το πιόνι του συμμάχου σας, αλλά * μόνο * για να το πάρετε από τη βάση του (με 1 ή 6) ή να το μετακινήσετε στη σκάλα τερματισμού του.\n- ** Σύμμαχοι μπλοκάρισμα **: Είναι αδύνατο να πιάσεις το πιόνι του συνεργάτη σου. Αν η κίνησή σου σε κάνει να προσγειωθείς πάνω του, το χτύπημα είναι άκυρο.",
+  "principeJeuSurrealisteDEcriture": "**Αρχή **\nΣουρεαλιστικό συλλογικό παιχνίδι γραφής.\n**Παραλλαγή **\n- Κλασσικό: Ο καθένας γράφει ένα στοιχείο της πρότασης (Αυθεντικό, Επιθετικό, Στίγμα, κλπ.) χωρίς να δει τα προηγούμενα.\n- Συνέχεια: Όλοι βλέπουν τις τελευταίες 3 λέξεις και ολοκληρώνουν την πρόταση.\n**Σχέδιο **\nΤα φύλλα περιστρέφονται μέχρι να συμμετάσχουν όλοι.",
+  "butDuJeuPlacerLe": "** Γκολ παιχνιδιού **\nΤοποθετήστε τα περισσότερα κομμάτια του στο σετ.\n**Χρυσός κανόνας **\nΚάθε νέο κομμάτι πρέπει να αγγίξει τουλάχιστον ένα άλλο κομμάτι του ίδιου χρώματος από μια γωνία, αλλά ποτέ από τη μια πλευρά.\n**Σχέδιο **\n1. Ο πρώτος γύρος παίζεται στη γωνία της πιατέλας του χρώματος σας.\n2. Οι παρακάτω πύργοι σέβονται τον χρυσό κανόνα.\n3. Αν δεν μπορείτε να παίξετε πια, περνάτε τη σειρά σας.\n**Τρέξιμο **\n-1 βαθμός ανά τετράγωνο δεν τοποθετείται.\n+15 βαθμοί εάν όλα τα μέρη είναι τοποθετημένα.\n+5 πόντους μπόνους αν το τελευταίο κομμάτι είναι το μονό τετράγωνο (1x1).",
+  "objectifEtreLePremierA": "** Στόχος **\nΓίνε ο πρώτος που θα πετύχει το γκολ (20, 50 ή 100 πόντοι).\n\n**Σχέδιο **\nΚάθε παίκτης λαμβάνει 7 ντόμινο. Με τη σειρά του, πρέπει να τοποθετήσει ένα ντόμινο που αντιστοιχεί σε ένα από τα άκρα της αλυσίδας. Τα διπλά παίζονται σε σταυρούς.\n\n** Λειτουργία αναπαραγωγής **\n- Ναι. Αν δεν μπορείς να παίξεις, διάλεξε μέχρι να παίξεις.\nΧωρίς επιλογές. Αν δεν μπορείς να παίξεις, περνάς τη σειρά σου.\n- **All Five** : Το πρώτο διπλό παιχνίδι είναι το \"Spinner\" (παίξιμο σε 4 πλευρές). Βαθμολογείτε πόντους σε κάθε εγκεφαλικό επεισόδιο αν το άθροισμα των τερμάτων είναι πολλαπλάσιο των 5.\n\n** Τέλος της στροφής **\nΑν κανείς δεν μπορεί να παίξει, το κόλπο είναι μπλοκαρισμένο. Οι παίκτες αποκαλύπτουν τα χέρια τους. Ο παίκτης με τους λιγότερους πόντους κερδίζει τον γύρο και σημειώνει το άθροισμα των πόντων των αντίπαλων χεριών.",
+  "objectifEtreLePremierJoueur": "** Στόχος **\nΓίνε ο πρώτος παίκτης που θα ξεφορτωθεί όλες τις κάρτες του.\n\n** Κανόνες **\n- Το παιχνίδι παίζεται με 52 χαρτιά.\n- Σειρά των καρτών (από το χαμηλότερο στο υψηλότερο): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Σειρά χρωμάτων (από το πιο αδύναμο στο ισχυρότερο): πλακάκια ♦ (D), Trèfles\n- Ο παίκτης που έχει τα 3 πλακάκια ξεκινά το παιχνίδι.\n\n** Συνδυασμοί **\n1 χάρτης.\nΔύο φύλλα της ίδιας αξίας.\n3 φύλλα της ίδιας αξίας.\n- **Συνέχεια**: 5 συνεχόμενες κάρτες γραμμής (μεικτά χρώματα).\n- **Χρώμα **: 5 φύλλα του ίδιου χρώματος.\n3 φύλλα της μιας γραμμής + 2 φύλλα της άλλης γραμμής.\n- ** Τετράγωνο **: 4 φύλλα της ίδιας αξίας + 1 φύλλο οποιουδήποτε είδους.\n- **Quinte Flush **: 5 συνεχόμενα φύλλα του ίδιου χρώματος.\n\n**Ιεραρχία συνδυασμών 5 καρτών **\nFlush Quinte > Πλατεία > Πλήρης > Χρώμα > Σουίτα.\nΈνας συνδυασμός μπορεί να νικηθεί μόνο με συνδυασμό του ίδιου μεγέθους και υψηλότερης αξίας.",
+  "objectifCapturerToutesLesPieces": "** Στόχος **\nΣυλλάβετε όλα τα νομίσματα του αντιπάλου σας ή μπλοκάρετε όλα τα νομίσματα του.\n** Κανόνες **\n- Παίζει σε ένα 8x8 ντάμα, αποκλειστικά σε σκούρα κουτιά.\n- Τα κομμάτια κινούνται διαγώνια σε ένα κουτί.\n- Τα αλιεύματα είναι υποθετικά και γίνονται πηδώντας πάνω από ένα εχθρικό κομμάτι.\n- Αρκετά αλιεύματα μπορούν να αλυσοδεθούν σε ένα γύρο.\n- Όταν ένα δωμάτιο φτάσει στην αντίθετη σειρά, προάγεται σε \"Dame\" και μπορεί να κινηθεί και να συλλάβει πίσω.",
   "unSubstantifExLeChat": "ένα ουσιαστικό (π.χ. η γάτα)",
   "unAdjectifExMignon": "ένα επίθετο (π.χ. χαριτωμένος)",
   "unVerbeExMange": "ένα ρήμα (π.χ. τρώει)",
   "unSubstantifExLaSouris": "ένα ουσιαστικό (π.χ. το ποντίκι)",
   "unAdjectifExMort": "ένα επίθετο (π.χ. νεκρός)",
+  "petit1": "Μικρό 1",
+  "petit2": "Μικρό 2",
+  "grand": "Μεγάλο",
+  "tresGrand": "Πολύ μεγάλο",
+  "superGrand": "Σούπερ μεγάλο",
   "potionDeVieEtDe": "Φίλτρο ζωής και θανάτου.",
   "legende": "θρύλος",
   "mystere": "μυστήριο",
@@ -1537,7 +2850,10 @@
   "crepuscule": "σούρουπο",
   "leNombreDeSymbolesPar": "Ο αριθμός των συμβόλων ανά κάρτα είναι τουλάχιστον 3.",
   "laGenerationAEchoueNombre": "Η δημιουργία απέτυχε: λάθος αριθμός καρτών.",
+  "blancMangerCocon": "Λευκό Φάε Κόκον",
+  "leRoiDesMemes": "Ο Βασιλιάς των Memes",
   "laPartieEstTermineeTous": "Το παιχνίδι τελείωσε: όλοι οι παίκτες έχουν αποσυνδεθεί.",
+  "aucun": "Καμία",
   "nonAuthentifie": "Δεν έχει γίνει έλεγχος ταυτότητας.",
   "actionNonAutorisee": "Μη επιτρεπτή ενέργεια.",
   "vousDevezJouerAuMoins": "Πρέπει να παίξεις τουλάχιστον ένα φύλλο.",
@@ -1547,6 +2863,7 @@
   "vousDevezJouerLeMeme": "Πρέπει να παίξεις τον ίδιο αριθμό φύλλων.",
   "combinaisonDe5CartesTrop": "Ο συνδυασμός 5 φύλλων είναι πολύ αδύναμος.",
   "vousDevezJouerUneCarte": "Πρέπει να παίξεις υψηλότερο φύλλο.",
+  "aGagne1": "Κέρδισε!",
   "ceNEstPasVotre": "Δεν είναι η σειρά σου.",
   "carteIntrouvableDansLaMain": "Το φύλλο δεν βρέθηκε στο χέρι.",
   "coupInvalideSelonLesRegles": "Μη έγκυρη κίνηση σύμφωνα με τους κανόνες Mille Bornes!",
@@ -1557,11 +2874,14 @@
   "leTempsEstEcoulePour": "Ο χρόνος έληξε για να δηλώσετε την αλήθεια!",
   "cibleHorsDeLaGrille": "Στόχος εκτός πλέγματος.",
   "caseDejaCiblee": "Το τετράγωνο έχει ήδη στοχοποιηθεί.",
+  "aCouleTouteLaFlotte": "Βούλιαξε όλο τον εχθρικό στόλο!",
   "placementAutomatiqueEffectue": "⏱️ Η αυτόματη τοποθέτηση ολοκληρώθηκε.",
   "tempsEcoulePourLaSaisie": "⏰ Ο χρόνος καταχώρισης λέξεων έληξε. Το παιχνίδι ξεκινά με όσες μπήκαν!",
   "laPhaseDeVoteA": "Η φάση της ψηφοφορίας ξεκίνησε!",
   "personneNAVoteAucun": "Κανείς δεν ψήφισε. Κανένας παίκτης δεν αποβλήθηκε.",
   "egaliteLorsDuVoteLa": "Ισότητα στην ψηφοφορία! Η Θεά της Δικαιοσύνης πρέπει να κυβερνήσει.",
+  "leTempsDeVoteEst": "Ο χρόνος ψηφοφορίας τελείωσε!",
+  "laPartieDeYamsCommence": "Το παιχνίδι Yams ξεκινά!",
   "plusDeLancersDisponibles": "Δεν υπάρχουν άλλες διαθέσιμες ζαριές.",
   "vousDevezLancerLesDes": "Πρέπει να ρίξεις τα ζάρια πριν σκοράρεις.",
   "categorieDejaCompletee": "Η κατηγορία έχει ήδη συμπληρωθεί.",
@@ -1576,9 +2896,12 @@
   "ceNEstPasVotre1": "Δεν είναι η σειρά σου να γράψεις.",
   "nonAuthentifie1": "Δεν πιστοποιείται.",
   "leTempsDesDebatsEst": "Η συζήτηση τελείωσε. Το χωριό πρέπει να ψηφίσει τώρα!",
+  "lesAmoureux": "Οι Ερωτευμένοι",
   "seulsLesDeuxAmoureuxSont": "Μόνο οι δύο ερωτευμένοι είναι ζωντανοί. Η αγάπη τους νικά τα πάντα!",
   "leLoupBlancEstLe": "Ο Λευκός Λύκος είναι ο τελευταίος επιζών! Τους κατασπάραξε όλους.",
+  "loupsGarous": "Λυκάνθρωποι",
   "lesLoupsGarousSontDevenus": "Οι Λυκάνθρωποι απέκτησαν την πλειοψηφία και δεν χάνουν. Κέρδισαν!",
+  "villageois": "Χωρικοί",
   "toutesLesMenacesOntEte": "Όλες οι απειλές εξαλείφθηκαν! Το χωριό κέρδισε!",
   "laVoyanteASondeUne": "Ο Μάντης ερεύνησε μια ψυχή εκείνο το βράδυ...",
   "lHeritierAChoisiSon": "Ο Κληρονόμος επέλεξε τον διαθέτη του...",
@@ -1592,25 +2915,48 @@
   "leLoupNoirAUtilise": "Ο Μαύρος Λύκος χρησιμοποίησε τη δύναμη μόλυνσης!",
   "leLoupNoirNA": "Ο Μαύρος Λύκος δεν χρησιμοποίησε τη μόλυνση.",
   "laPetiteFilleAEte": "Το Κοριτσάκι ήταν υπερβολικά περίεργο! Οι Λύκοι το κατασπαράζουν επί τόπου!",
+  "infecte1": "μολυσμένος",
+  "contamine": "μολυσμένος",
   "vousVousSentezObserveE": "Νιώθεις ότι σε παρακολουθούν απόψε...",
   "laSorciereAUtiliseSa": "Η Μάγισσα χρησιμοποίησε το φίλτρο θεραπείας.",
   "laSorciereAConcocteUn": "Η Μάγισσα ετοίμασε ένα θανατηφόρο δηλητήριο...",
   "lePyromancienAEntreposeUn": "Ο Πυρομάντης τοποθέτησε ένα βαρέλι υγρού πυρός...",
   "lePyromancienAllumeLaMeche": "Ο Πυρομάντης ανάβει το φυτίλι των βαρελιών του!",
+  "leSoleilSeLeveSur": "Ο ήλιος ανατέλλει πάνω από το Thiercelieux...",
   "miraculeusementPersonneNAPeri": "Από θαύμα, κανείς δεν πέθανε απόψε!",
+  "motDuJour": "λέξη της ημέρας",
   "leDictateurSEstTrompe": "Ο Δικτάτορας εκτέλεσε έναν αθώο κατά λάθος! Υφίσταται τη θανατική ποινή.",
   "tentativeDUsurpationDIdentite": "Εντοπίστηκε απόπειρα κλοπής ταυτότητας!",
   "egaliteParfaiteLorsDuVote1": "Απόλυτη ισοπαλία στην ψηφοφορία. Σήμερα δεν εκτελείται κανείς.",
+  "lAncienCapitaine": "Ο πρώην Κυβερνήτης.",
+  "amoureux1": "Εραστές 1",
+  "amoureux2": "Εραστές 2",
+  "debugJoingameDemarrageDeLa": "[Debug ενταχθούνGame] Ξεκίνα τη συναλλαγή.",
+  "debugJoingamePartieTrouveeEt": "[Debug ενταχθούνGame] Μέρος βρέθηκε και στο λόμπι. Ανάγνωση δεδομένων...",
+  "debugJoingameTransactionUpdateAppelee": "[DEBUG joinGame] Συναλλαγή.update () ονομάζεται με τη νέα λίστα παικτών.",
+  "debugJoingameTransactionReussieRetourne": "Επιτυχημένη συναλλαγή. Γύρνα πίσω αληθινά.",
+  "debugJoingameLaPartieN": "[Debug ενταχθούνGame] Το παιχνίδι δεν υπάρχει ή δεν είναι πλέον στο λόμπι. Γύρνα πίσω στο ψεύτικο.",
+  "erreurCritiqueDansJoingame": "--- ΚΡΙΤΙΚΗ ΣΦΑΛΜΑ ΣΤΟ ΠΑΙΧΝΙΔΙ ---",
+  "applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie": ":App Localizations. of(context)! .wordcivilParts0TrimWordundercoverIA επιστρέφει ξεχωριστές απλές λέξεις",
   "infiltre": "Διεισδυτής",
   "civil": "Πολίτης",
   "vendeurDeFalafels": "Πωλητής Falafels",
   "vengeuse": "Εκδικητής",
   "duellistes": "Δίκτυα",
+  "laPartieCommenceDonnezVotre": "Το παιχνίδι ξεκινά! Δώστε το στοιχείο σας...",
   "laPhaseDeVoteCommence": "Ξεκινά η φάση ψηφοφορίας!",
   "seulMrWhitePeutDeviner": "Μόνο ο Mr. White μπορεί να μαντέψει.",
   "laDeesseDeLaJustice": "Η Θεά της Δικαιοσύνης έβγαλε την ετυμηγορία της!",
+  "unNouveauTourCommence": "Ξεκινά νέος γύρος.",
   "laVengeuseEmporteQuelquUn": "Ο Εκδικητής παίρνει κάποιον μαζί της!",
+  "civils": "Πολίτες",
+  "imposteurs": "Απατεώνες",
+  "paris": "Παρίσι",
+  "france": "Γαλλία",
+  "capitale": "Κεφάλαιο",
   "tourEiffel": "Πύργος του Άιφελ",
+  "seine": "Γρι-γρι",
+  "ville": "Πόλη",
   "vousNePouvezPasBuzzer": "Δεν μπορείς να πατήσεις το μπάζερ για τη δική σου ομάδα.",
   "seuleLEquipeActivePeut": "Μόνο η ενεργή ομάδα μπορεί να επικυρώσει.",
   "seuleLEquipeActivePeut1": "Μόνο η ενεργή ομάδα μπορεί να πάει πάσο.",
@@ -1630,6 +2976,7 @@
   "combinaisonInvalideSelonLesRegles": "Μη έγκυρος συνδυασμός κατά τους κανόνες του Ράμι!",
   "defaussezExactement1Carte": "Απόρριψε ακριβώς 1 φύλλο.",
   "carteNonTrouvee": "Το φύλλο δεν βρέθηκε.",
+  "aGagneLaManche": "Κέρδισε τον γύρο!",
   "desDejaLancesPourCe": "Ζάρια ήδη ξεκίνησε για αυτή την περιοδεία.",
   "vousDevezDAbordLancer": "Πρέπει πρώτα να ρίξεις το ζάρι.",
   "vousNePouvezPasDeplacer": "Δεν μπορείς να μετακινήσεις πιόνι αντιπάλου!",
@@ -1663,6 +3010,7 @@
   "vosPointsSontConservesEn": "Οι πόντοι σου κρατούνται! Περιμένοντας τους παίκτες να ξεκινήσουν την επόμενη συνεδρία.",
   "synonymeOuBanniNecessiteAu": "Συνώνυμο ή Banni απαιτεί τουλάχιστον 3 παίκτες!",
   "unoNecessiteEntre2Et": "Το Uno απαιτεί μεταξύ 2 και 10 παικτών.",
+  "laPartieDeUnoCommence": "Το παιχνίδι Uno ξεκινά!",
   "inversionA2JoueursLe": "Αντιστροφή σε 2 παίκτες: ο πρώτος παίκτης ξεκινά το παιχνίδι!",
   "directionInverseeDesLeDepart": "Αντίστροφη φορά από την αρχή!",
   "laPremiereCarteEstUn": "Το πρώτο φύλλο είναι ένα +2! Ο πρώτος παίκτης πρέπει να τραβήξει ή να στοιβάξει.",
@@ -1713,7 +3061,11 @@
   "vousDevezJouerUneCombinaison": "Πρέπει να παίξεις δυνατότερο συνδυασμό.",
   "lePremierCoupDeLa": "Το πρώτο σουτ του παιχνιδιού πρέπει να περιέχει το 3ο του Κλόβερ.",
   "partieNonTrouvee1": "Το τμήμα δε βρέθηκε",
+  "trouDuCul": "Τελευταίος",
   "vicePresident": "Αντιπρόεδρος",
+  "viceTrouDuCul": "Υπο-τελευταίος",
+  "neutre": "Ουδέτερος",
+  "debugPictionaryConditionRoundstateDrawing": "--- DEBUG PICTIONARY --- Condition ''roundState'' ή ''dessing drawing'' είναι ΑΛΗΘΕΙΑ. Ενημέρωση βάσης δεδομένων...",
   "dessinateurIntrouvable": "Το Συρτάρι δε βρέθηκε.",
   "seulLeDessinateurActifPeut": "Μόνο ο παίκτης που σχεδιάζει μπορεί να επικυρώσει την απάντηση.",
   "usurpationDIdentiteDuDessinateur": "Η ταυτότητα του Ντράτσμαν είναι συντριπτική.",
@@ -1721,6 +3073,7 @@
   "motTrouveAvecSucces": "Τα νέα βρέθηκαν με επιτυχία!",
   "ceNEstPasLa2": "Αυτή δεν είναι η προτεινόμενη φάση του δείκτη.",
   "leDevineurNePeutPas": "Η μαντεψιά δεν δίνει ιδέα.",
+  "aaaaaaceeeeiiiinooooouuuuyy": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .",
   "ceNEstPasLe": "Δεν είναι η ώρα για μαντεψιά.",
   "seulLeDevineurPeutFaire": "Μόνο αυτός που μαντεύει μπορεί να κάνει πρόταση.",
   "reponseInvalide": "Μη έγκυρη απάντηση.",
@@ -1731,7 +3084,10 @@
   "impossibleDePiocherIlN": "Αδύνατο να τραβήξετε, δεν υπάρχουν άλλα διαθέσιμα φύλλα.",
   "ceNEstPasVotre6": "Δεν είναι η σειρά σου να διαλέξεις χρώμα.",
   "vousNePouvezPasChoisir": "Δεν μπορείς να διαλέξεις χρώμα τώρα.",
+  "erreurCritiquePlayerorderEstVide": "ΚΡΙΤΙΚΗ ΣΦΑΛΜΑ: Η εντολή του παίκτη είναι άδεια στο επόμενο δρόμο. Δεν μπορώ να συνεχίσω.",
   "questionNonTrouvee": "Η ερώτηση δεν βρέθηκε",
+  "quiPourraitLePlusApplocalizations1": "Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.list String ΕρωτήσειςAwordpool Λέξεις παιχνιδιούsoft",
+  "menteur": "Ψεύτη!",
   "pasAssezDeJoueursPour": "Δεν είναι αρκετοί οι παίκτες για αυτή τη μόδα.",
   "ajouteLaDescriptionLaPlus": "Προσθέστε την πιο αστεία περιγραφή σε αυτό το meme!",
   "uneNouvelleMancheDeUno": "Ξεκινά ένας νέος γύρος Uno!",
@@ -1739,6 +3095,9 @@
   "chaqueJoueurActifDoitPoser": "Κάθε ενεργός παίκτης πρέπει να βάλει τουλάχιστον ένα φύλλο πριν ποντάρει.",
   "enchereInvalide": "Μη έγκυρη προσφορά.",
   "laSurenchereDoitEtreSuperieure": "Η προσφορά πρέπει να είναι υψηλότερη.",
+  "applocalizationsOfContextUnjoueurEst": "Οι Applocalizations.of(context)!.aPlayer'}' είναι ο τελευταίος επιζών και κερδίζει Skull!",
+  "applocalizationsOfContextUnjoueurA": "] ?? Applocalizations.of(context)!.aPlayer'}' κέρδισε 2 προκλήσεις και κέρδισε το παιχνίδι!",
+  "applocalizationsOfContextUnjoueurRemporte": "Ο applocalizations.of(context)!.aPlayer] κερδίζει το Skull!",
   "reponseVide": "Κενή απάντηση.",
   "leJugeNePeutPas1": "Ο Δικαστής δεν μπορεί να υποβάλει απάντηση.",
   "toutLeMondeARepondu": "Απάντησαν όλοι! Ας ανοίξουμε την πόρτα.",
@@ -1746,12 +3105,17 @@
   "toutLeMondeARepondu1": "Απάντησαν όλοι! Ψηφίστε.",
   "toutesLesReponsesSontRecues": "Όλες οι απαντήσεις λαμβάνονται! Ο δικαστής πρέπει να αποφασίσει.",
   "joueurCibleIntrouvable": "Ο στοχευμένος παίκτης δε βρέθηκε.",
+  "quiPourraitLePlusApplocalizations2": "Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.elseIf Τύπος παιχνιδιούΣυνώνυμο ή Banni",
   "vousNePouvezPasBannir": "Δεν μπορείς να απαγορεύσεις το δικό σου συνώνυμο!",
   "seulLeJugeEnTitre": "Μόνο ο εν ενεργεία Δικαστής μπορεί να ορίσει τον νικητή.",
   "ceJoueurNAPas1": "Αυτός ο παίκτης δεν υπέβαλε απάντηση.",
+  "quiPourraitLePlusApplocalizations3": "Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.intΑπαιτούμενες ψήφοιPlayersΜήκοςΑν Ο δικαστής",
+  "quiPourraitLePlusApplocalizations4": "Ποιος θα μπορούσε να το περισσότερο; App Localizations. of(context)!. for FinalTargetInVotesroundState",
   "egaliteParfaiteAucunPointAttribue": "Απόλυτη ισοπαλία! Δεν απονέμονται πόντοι.",
   "egaliteDansLesVotesAucun": "Ισοπαλία στις ψήφους: κανένας παίκτης δεν εξορίστηκε.",
   "laDescriptionLaPlusDrole": "Επιλέχθηκε η πιο αστεία περιγραφή!",
+  "aucuneDescriptionNAEte": "Δεν ψηφίστηκε καμία περιγραφή.",
+  "quiPourraitLePlusApplocalizations5": "Ποιος θα μπορούσε περισσότερα; App Localizations. of(context)!. for FinalTargetInVotes1roundWinnerId",
   "jugeIntrouvable": "Ο δικαστής δεν βρέθηκε.",
   "laPartieDeZeroPointe": "Το παιχνίδι Μηδέν Πόντοι ξεκινά! Κάθε παίκτης πρέπει να αποκαλύψει 2 φύλλα.",
   "toutLeMondeARevele": "Όλοι αποκάλυψαν τα φύλλα τους. Το παιχνίδι ξεκινά!",
@@ -1764,11 +3128,13 @@
   "laRelanceDoitEtreStrictement": "Το raise πρέπει να υπερβαίνει το τρέχον στοίχημα.",
   "vousNAvezPasAssez": "Δεν έχεις αρκετές μάρκες για αυτό το raise.",
   "laRelanceDoitEtreD": "Το raise πρέπει να είναι τουλάχιστον διπλάσιο του προηγούμενου πονταρίσματος (ή all-in).",
+  "laPartieDeBeloteCommence": "Το παιχνίδι Μπελότε αρχίζει!",
   "passeGeneraleAu1erTour": "Γενικά περνούν στον πρώτο γύρο των δημοπρασιών. Έναρξη του 2ου γύρου!",
   "carteNonPossedee": "Η κάρτα δεν είναι δαιμονισμένη.",
   "vousDevezMonterAL": "Πρέπει να ανεβείτε προς το πλεονέκτημα (overcut)!",
   "vousDevezCouperAL": "Πρέπει να το κόψεις!",
   "passeLAnnonce": "πάσο στην ανακοίνωση",
+  "laPartieDeBlokusCommence": "Το παιχνίδι Blokus ξεκινά!",
   "pieceDejaUtilisee": "Το κομμάτι έχει ήδη χρησιμοποιηθεί.",
   "horsLimites": "Εκτός ορίων!",
   "caseDejaOccupee": "Το τετράγωνο είναι ήδη κατειλημμένο!",
@@ -1791,15 +3157,19 @@
   "cultureDefi": "🧠 Γνώσεις & Πρόκληση",
   "familleToutPublic": "👨‍👩‍👧‍👦 Οικογένεια & Για όλους",
   "piquantInsolite": "🌶️ Πικάντικο & Ασυνήθιστο",
+  "quiPourraitLePlusApplocalizations6": "Ποιος θα μπορούσε να το περισσότερο; App Localizations.of(context)! . who θα μπορούσε modegroup σας",
   "devineT": "Μαντέψτε Τ",
+  "presidente": "Πρόεδρος",
   "chargement": "Φόρτωση...",
   "cursive": "Λεπτό",
   "exception": "Εξαίρεση:",
+  "debutDeLaConstructionDe": "--- Η ΚΑΤΑΣΚΕΥΗ ΤΟΥ ΨΗΦΟΥ ΤΟΥ ΨΗΦΟΥ «Ποιος θα μπορούσε να το κάνει περισσότερο; AppLocations.of(context)!.printIsactiondependingStateTo( isActionPending)players''] as Map<String, dynamic>???? '{}'?",
   "clicSurLeJoueurPname": ">>> ΚΛΙΚ στον παίκτη ''$pName'' (ID: $pId)!",
   "passageDeIsactionpendingATrue": "- Η μετάβαση από το ActionPending είναι αληθινή.",
   "erreurFirebaseLorsDuVote": "!!! ΣΦΑΛΜΑ Βάση πυρός κατά την ψηφοφορία: $ ε",
   "appelFirebaseTerminePassageDe": "- Η Πυροσβεστική τελείωσε. Μετάβαση από το isActionPending σε ψευδή.",
   "attentionLeWidgetNEst": "Το Widget έφυγε, το set State ακυρώθηκε.",
+  "quiPourraitLePlusApplocalizations7": "Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId",
   "phaseDePose": "ΦΑΣΗ ΘΕΣΗΣ",
   "stre9f4a5": "🏆 Θρυλικό!",
   "str21f597": "⭐ Εξαιρετικά!",
@@ -1811,6 +3181,14 @@
   "str487ca1": "Τσατ! Κλείσε τα μάτια σου.",
   "leSoleilSeLeve": "Ο ήλιος ανατέλλει",
   "atout": "ΑΤΟΥ: {suit}",
+  "@atout": {
+    "placeholders": {
+      "suit": {
+        "type": "Object"
+      }
+    }
+  },
+  "undercoverLocal": "Μυστικό τοπικό",
   "toiMeme": "τον εαυτό σου",
   "unAutreJoueur": "άλλος παίκτης",
   "tous": "Όλα",
@@ -1820,83 +3198,689 @@
   "soiree": "Πάρτι",
   "competition": "Ανταγωνισμός",
   "enCours": "ΤΡΕΧΟΥΣΑ: '{'0'}'",
+  "gamemessagelocalizationTrContextReason": ": \"\"'}'\" : GameMessagelocalization.tr(context, λόγος),",
   "jAiLanceUnePartie2": "Ξεκίνησα ένα παιχνίδι",
   "piedDeBiche": "Λοστός",
   "appTitle": "Παιχνίδι πάρτι",
+  "loginTitle": "Καλώς ήρθατε!",
+  "registerTitle": "Ελάτε μαζί μας!",
+  "email": "Email",
+  "password": "Κωδικός πρόσβασης",
+  "username": "Όνομα χρήστη",
+  "loginButton": "Σύνδεση",
+  "registerButton": "Δημιουργία λογαριασμού",
+  "termsAcceptance": "Έχω διαβάσει και αποδέχομαι τους Όρους Χρήσης και την Πολιτική Απορρήτου.",
+  "gamesTab": "Παιχνίδια",
+  "friendsTab": "Φίλοι",
+  "statsTab": "Προφίλ",
+  "loungesTab": "Σαλόνια",
   "createGame": "Δημιουργία παιχνιδιού",
+  "joinGame": "Συμμετοχή",
+  "gameCode": "Κωδικός παιχνιδιού (6 ψηφία)",
+  "startGame": "Έναρξη παιχνιδιού",
+  "leaveGame": "Έξοδος από το παιχνίδι",
+  "rules": "Κανόνες",
+  "level": "Επίπεδο",
+  "coins": "Νομίσματα",
+  "gameOver": "Τέλος παιχνιδιού!",
+  "victory": "Νίκη!",
+  "defeat": "Ήττα",
+  "nextRound": "Επόμενος Γύρος",
+  "onboardingWelcome": "Καλώς ήρθατε",
+  "onboardingSkip": "Πάσο",
+  "onboardingNext": "Επόμενο",
+  "onboardingStart": "Πάμε! 🚀",
+  "onboardingSlide1Title": "Παίξτε με φίλους",
+  "onboardingSlide1Subtitle": "Επιλέξτε ανάμεσα σε πάνω από 30 παιχνίδια παρέας, καρτών και επιτραπέζια. Παίξτε τοπικά, με φίλους ή παγκοσμίως!",
+  "onboardingSlide2Title": "Κερδίστε νομίσματα & κονκάρδες",
+  "onboardingSlide2Subtitle": "Κερδίστε XP με κάθε νίκη, ανεβείτε επίπεδο και ξεκλειδώστε μοναδικά επιτεύγματα.",
+  "onboardingSlide3Title": "Δημιουργήστε ή μπείτε σε δευτερόλεπτα",
+  "onboardingSlide3Subtitle": "Ένας 6ψήφιος κωδικός αρκεί για να μαζέψετε την παρέα σας, ή ξεκινήστε γρήγορο παιχνίδι.",
+  "vipPass": "Πάσο VIP",
+  "vipActive": "Το Πάσο VIP σας είναι ενεργό!",
+  "vipActiveDesc": "Όλες οι λειτουργίες (AI, Αίθουσες, Βίντεο, Matchmaking) είναι απεριόριστες.",
+  "choosePlan": "Επιλέξτε το πρόγραμμά σας:",
+  "restorePurchases": "Επαναφορά αγορών",
+  "purchasesRestored": "Οι αγορές επαναφέρθηκαν με επιτυχία!",
+  "noPurchasesFound": "Δεν βρέθηκαν ενεργές αγορές.",
+  "monthlySubscription": "Μηνιαία Συνδρομή",
+  "annualSubscription": "Ετήσια Συνδρομή",
+  "lifetimeAccess": "Ισόβια Πρόσβαση",
+  "popularTag": "ΔΗΜΟΦΙΛΕΣ",
+  "chooseButton": "Επιλογή",
+  "vipCongratulations": "Συγχαρητήρια, είστε VIP!",
+  "purchaseFailed": "Η αγορά δεν ολοκληρώθηκε.",
+  "profileTitle": "Προφίλ & Ρυθμίσεις",
+  "profileNotFound": "Το προφίλ δεν βρέθηκε ή ο παίκτης δεν υπάρχει.",
+  "tabStats": "Στατιστικά",
+  "tabBadges": "Κονκάρδες & Επιτεύγματα",
+  "tabSettings": "Ρυθμίσεις",
+  "gamesPlayed": "Παιχνίδια",
+  "gamesWon": "Νίκες",
+  "winRate": "Ποσοστό νικών",
+  "soundEffects": "Ηχητικά εφέ",
+  "music": "Μουσική",
+  "editUsername": "Αλλαγή ονόματος χρήστη",
+  "newUsernameHint": "Νέο όνομα",
+  "logout": "Αποσύνδεση",
+  "deleteAccount": "Διαγραφή λογαριασμού",
+  "deleteAccountConfirm": "Είστε βέβαιοι ότι θέλετε να διαγράψετε οριστικά τον λογαριασμό σας;",
+  "cancel": "Άκυρο",
+  "confirm": "Επιβεβαίωση",
+  "save": "Αποθήκευση",
+  "modeLocal": "Τοπικά",
+  "modeMulti": "Online",
+  "modeMonde": "Κόσμος",
+  "searchGame": "Αναζήτηση παιχνιδιού...",
+  "filterAll": "Όλα τα παιχνίδια",
+  "createLounge": "Δημιουργία αίθουσας",
+  "joinLounge": "Συμμετοχή σε αίθουσα",
+  "loungeCode": "Κωδικός αίθουσας",
+  "publicLounges": "Δημόσιες αίθουσες",
+  "noLoungesAvailable": "Δεν υπάρχουν διαθέσιμες δημόσιες αίθουσες αυτή τη στιγμή.",
+  "playersCount": "Παίκτες",
+  "howToPlay": "Πώς παίζεται;",
+  "copiedToClipboard": "Αντιγράφηκε στο πρόχειρο!",
+  "connectionError": "Σφάλμα σύνδεσης. Παρακαλώ δοκιμάστε ξανά.",
+  "loading": "Φόρτωση...",
+  "success": "Επιτυχία!",
   "pasAssezDeSymbolesUniques1": "Δεν υπάρχουν αρκετά μοναδικά σύμβολα για 0 σύμβολα καρτών. Απαιτούνται: 1, Διαθέσιμο: 2 . {symbolsPerCard} {totalSymbols} {dobbleSymbolslength}",
+  "@pasAssezDeSymbolesUniques1": {
+    "placeholders": {
+      "symbolsPerCard": {
+        "type": "Object"
+      },
+      "totalSymbols": {
+        "type": "Object"
+      },
+      "dobbleSymbolslength": {
+        "type": "Object"
+      }
+    }
+  },
   "melangeEquilibreDesThemesSuivants1": "Ισορροπημένο μείγμα από τα ακόλουθα θέματα: 0 {combinedTheme}",
+  "@melangeEquilibreDesThemesSuivants1": {
+    "placeholders": {
+      "combinedTheme": {
+        "type": "Object"
+      }
+    }
+  },
   "ambianceTonImpose": "[Ατμόσφαιρα / Επιβεβλημένος τόνος: {style}]",
+  "@ambianceTonImpose": {
+    "placeholders": {
+      "style": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPairesDeMots1": "Δημιουργεί ζεύγη παρόμοιων λέξεων σε μορφή ''MotCivil:MotInfilted''. Θέμα: 0 {finalPrompt}",
+  "@genereDesPairesDeMots1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesCartesTabooAu1": "Δημιουργεί κάρτες Taboo στη μορφή ''Targetword:Forbidd1,Forbidd2,Forbidd3,Forbidd4,Forbidd5''. Θέμα: 0 {finalPrompt}",
+  "@genereDesCartesTabooAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesCategoriesOriginalesEt1": "Δημιουργεί πρωτότυπες και διασκεδαστικές κατηγορίες για να μαντέψετε. Θέμα: 0 {finalPrompt}",
+  "@genereDesCategoriesOriginalesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesCourtesVisuelles1": "Δημιουργεί σύντομες, οπτικές και μπερδεμένες προτάσεις για την κατάρτιση (π.χ. «Ένας δεινόσαυρος που τρώει πάγο»). Θέμα: 0 {finalPrompt}",
+  "@genereDesPhrasesCourtesVisuelles1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesDAccroche1": "Δημιουργεί πρωτότυπες φράσεις αλιευμάτων ή γράφει σύμπαν. Θέμα: 0 {finalPrompt}",
+  "@genereDesPhrasesDAccroche1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesDilemmesCorneliensAu1": "Δημιουργεί διλήμματα κερατοειδούς με τη μορφή «OptionA ή OptionB» (π.χ. «Μπορεί να πετάξει ή να είναι αόρατο»). Θέμα: 0 {finalPrompt}",
+  "@genereDesDilemmesCorneliensAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereUnMelangeDeDefis1": "Δημιουργεί ένα μείγμα προκλήσεων (δράσεις) και αδιάκριτων ερωτήσεων (αλήθειες). Θέμα: 0 {finalPrompt}",
+  "@genereUnMelangeDeDefis1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesQuestionsDirectesAmusantes1": "Δημιουργεί άμεσες, διασκεδαστικές και πικάντικες ερωτήσεις. Θέμα: 0 {finalPrompt}",
+  "@genereDesQuestionsDirectesAmusantes1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesPhrasesCourtesA1": "Δημιουργεί σύντομες προτάσεις οπής (που περιέχουν '') για το παιχνίδι. Θέμα: 0 {finalPrompt}",
+  "@genereDesPhrasesCourtesA1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesSituationsHumoristiquesEt1": "Δημιουργεί χιουμοριστικές καταστάσεις και αρχές θρύλων μιμιδίων. Θέμα: 0 {finalPrompt}",
+  "@genereDesSituationsHumoristiquesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "genereUneListeDeMots1": "Δημιουργία μιας λίστας λέξεων/εκφράσεων για το παιχνίδι 0 στο θέμα: 1 {gameType} {finalPrompt}",
+  "@genereUneListeDeMots1": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      },
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
   "theme": "Θέμα {gameType}",
+  "@theme": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      }
+    }
+  },
   "passeSonTour2": "⏱️ {playerName} περνάει τη σειρά του.",
+  "@passeSonTour2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "finDuCompteARebours1": "⏱️ Fin du compte à rebours : Partie relancée pour tous les {playerslength} joueurs !",
+  "@finDuCompteARebours1": {
+    "placeholders": {
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
   "aOuvertAvec": "⏱️ Ο/Η {playerName} άνοιξε με {cardToPlay}.",
+  "@aOuvertAvec": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
   "sEstDeconnecteVictoireDe": "Ο/Η {removedPlayerName} αποσυνδέθηκε. Νίκη του/της {remainingName} λόγω εγκατάλειψης!",
+  "@sEstDeconnecteVictoireDe": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      },
+      "remainingName": {
+        "type": "Object"
+      }
+    }
+  },
   "aManque3ToursSans": "0 έχασε 3 γύρους χωρίς να παίξει. Ο διαχειριστής κλήθηκε να αποφασίσει για την αντικατάστασή του με τον υπολογιστή. {playerName}",
+  "@aManque3ToursSans": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "neRepondPlusLAdministrateur": "⚠️ Ο/Η {playerName} δεν ανταποκρίνεται ({reason}). Ο διαχειριστής κλήθηκε να αποφασίσει αντικατάσταση από υπολογιστή.",
+  "@neRepondPlusLAdministrateur": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "reason": {
+        "type": "Object"
+      }
+    }
+  },
   "aEteRemplaceParL": "🤖 Ο/Η {playerName} αντικαταστάθηκε από τον υπολογιστή (Ενεργό AI - 5δ ανά γύρο).",
+  "@aEteRemplaceParL": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasDonneD": "⚠️ Ο/Η {playerName} δεν έδωσε στοιχείο (Παιχνίδι γνώμης). Η σειρά πέρασε.",
+  "@nAPasDonneD": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasReponduJeu": "⚠️ Ο/Η {playerName} δεν απάντησε (Παιχνίδι γνώμης). Ο γύρος προσπεράστηκε.",
+  "@nAPasReponduJeu": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA3": "Ο/Η {playerName} δεν έπαιξε εγκαίρως. Η σειρά χάθηκε.",
+  "@nAPasJoueA3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteParfaiteLorsDuVote2": "Τέλεια ισότητα κατά την ψηφοφορία ( 0 παίκτες πρώην aequo)! Κανένας παίκτης δεν εξοντώθηκε. {tiedPlayerslength}",
+  "@egaliteParfaiteLorsDuVote2": {
+    "placeholders": {
+      "tiedPlayerslength": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue": "⏱️ Ο/Η {playerName} έπαιξε {lastDrawn}.",
+  "@aJoue": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "lastDrawn": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue1": "⏱️ Ο/Η {playerName} έπαιξε {playable}.",
+  "@aJoue1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "playable": {
+        "type": "Object"
+      }
+    }
+  },
   "piocheEtPasseSonTour": "⏱️ Ο/Η {playerName} τραβάει και πάει πάσο.",
+  "@piocheEtPasseSonTour": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA4": "⏱️ Ο χρόνος του/της {playerName} έληξε. Ένα φύλλο απορρίφθηκε και αποκαλύφθηκε τετράγωνο.",
+  "@nAPasJoueA4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "laPartieEstTermineeVictoire1": "Το παιχνίδι τελείωσε. Νίκη της ομάδας {winner}!",
+  "@laPartieEstTermineeVictoire1": {
+    "placeholders": {
+      "winner": {
+        "type": "Object"
+      }
+    }
+  },
   "joueursContaminesParLaMaladie1": "Παίκτες μολυσμένοι από την πανούκλα: {contaminatedNames}.",
+  "@joueursContaminesParLaMaladie1": {
+    "placeholders": {
+      "contaminatedNames": {
+        "type": "Object"
+      }
+    }
+  },
   "vousAvezEspionneEtDecouvert": "Κατασκόπευσες τον/την {targetName} και ανακάλυψες τον ρόλο: {targetRole}.",
+  "@vousAvezEspionneEtDecouvert": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "votreMotDuJourPrononcez": "Η λέξη της ημέρας σου: ''{newWord}''. Πες την στο chat πριν τη δύση του ηλίου!",
+  "@votreMotDuJourPrononcez": {
+    "placeholders": {
+      "newWord": {
+        "type": "Object"
+      }
+    }
+  },
   "declareUnCoupDEtat": "Ο/Η {dictateurName} κηρύσσει Πραξικόπημα!",
+  "@declareUnCoupDEtat": {
+    "placeholders": {
+      "dictateurName": {
+        "type": "Object"
+      }
+    }
+  },
   "leChasseurTireEtTue1": "Ο Κυνηγός πυροβολεί και σκοτώνει τον/την {targetName}!",
+  "@leChasseurTireEtTue1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "aDesigneCommeNouveauCapitaine": "Ο/Η {formerCaptainName} όρισε τον/την {newCaptainName} νέο Καπετάνιο!",
+  "@aDesigneCommeNouveauCapitaine": {
+    "placeholders": {
+      "formerCaptainName": {
+        "type": "Object"
+      },
+      "newCaptainName": {
+        "type": "Object"
+      }
+    }
+  },
   "cupidonADesigneEtComme": "Ο Έρωτας όρισε τους {lover1Name} και {lover2Name} ως ερωτευμένους!",
+  "@cupidonADesigneEtComme": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      },
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "votreAmoureuxSe": "❤️ Ο/Η αγαπημένος/η σας: {amoureux2Name}",
+  "@votreAmoureuxSe": {
+    "placeholders": {
+      "amoureux2Name": {
+        "type": "Object"
+      }
+    }
+  },
   "votreAmoureuxSe1": "❤️ Ο/Η αγαπημένος/η σας: {amoureux1Name}",
+  "@votreAmoureuxSe1": {
+    "placeholders": {
+      "amoureux1Name": {
+        "type": "Object"
+      }
+    }
+  },
   "cEstAuTourDe4": "Είναι η σειρά της ομάδας! {currentTeamIndex1}",
+  "@cEstAuTourDe4": {
+    "placeholders": {
+      "currentTeamIndex1": {
+        "type": "Object"
+      }
+    }
+  },
   "aFaitUnMaisAucun": "Γυρίστε αυτόματα! {playerName} {dice}",
+  "@aFaitUnMaisAucun": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
   "lancerTropElevePourAtteindre": "Γύρνα πίσω! {dice}",
+  "@lancerTropElevePourAtteindre": {
+    "placeholders": {
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
   "extremiteNonDisponibleSurLe1": "Το άκρο δεν είναι διαθέσιμο στο ταμπλό ({openEnds}).",
+  "@extremiteNonDisponibleSurLe1": {
+    "placeholders": {
+      "openEnds": {
+        "type": "Object"
+      }
+    }
+  },
   "laTuileNePossedePas": "Το πλακίδιο {tile} δεν έχει την απαιτούμενη αξία {matchEnd}.",
+  "@laTuileNePossedePas": {
+    "placeholders": {
+      "tile": {
+        "type": "Object"
+      },
+      "matchEnd": {
+        "type": "Object"
+      }
+    }
+  },
   "leBotAJoueAutomatiquement": "⏱️ Το bot έπαιξε αυτόματα {tileToPlay}.",
+  "@leBotAJoueAutomatiquement": {
+    "placeholders": {
+      "tileToPlay": {
+        "type": "Object"
+      }
+    }
+  },
   "aEteContraintDePasser": "⏱️ Ο/Η {playerName} αναγκάστηκε να πάει πάσο.",
+  "@aEteContraintDePasser": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
   "laRouletteADesigne": "Η ρουλέτα έχει οριστεί 0 ! {selectedName}",
+  "@laRouletteADesigne": {
+    "placeholders": {
+      "selectedName": {
+        "type": "Object"
+      }
+    }
+  },
   "doitEcrireLeDefi": "0 πρέπει να γράψει την πρόκληση... {authorName}",
+  "@doitEcrireLeDefi": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
   "leDefiAEteEnvoye1": "Η πρόκληση στάλθηκε στο 0 ! {currentPlayerName}",
+  "@leDefiAEteEnvoye1": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
   "resultatDeValidation": "Αποτέλεσμα: 0 % επικύρωση! {percentage}",
+  "@resultatDeValidation": {
+    "placeholders": {
+      "percentage": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneXp": "0 κερδίζει 1 XP! {currentPlayerName} {earnedXp}",
+  "@gagneXp": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      },
+      "earnedXp": {
+        "type": "Object"
+      }
+    }
+  },
   "tourSuivantQuiSeraLe1": "Επόμενη στροφή! Ποιος θα είναι ο επόμενος;",
   "passeSonTour3": "0 Περνάει η σειρά του! {playerOrderinitialIn}",
+  "@passeSonTour3": {
+    "placeholders": {
+      "playerOrderinitialIn": {
+        "type": "Object"
+      }
+    }
+  },
   "vousDevezPiocherCartesOu": "Πρέπει να τραβήξεις {pendingDraw} φύλλα ή να απαντήσεις με +2/+4.",
+  "@vousDevezPiocherCartesOu": {
+    "placeholders": {
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
   "egaliteParfaite1": "Τέλεια ισότητα! {names}",
+  "@egaliteParfaite1": {
+    "placeholders": {
+      "names": {
+        "type": "Object"
+      }
+    }
+  },
   "priseMultipleObligatoireAvecLe1": "Υποχρεωτικό πολλαπλό πιάσιμο με το πιόνι στο {mandatoryPiece}.",
+  "@priseMultipleObligatoireAvecLe1": {
+    "placeholders": {
+      "mandatoryPiece": {
+        "type": "Object"
+      }
+    }
+  },
   "motsDevines": "0 / 1 λέξεις μαντεμένες! {guessedCount} {collectiveWordslengt}",
+  "@motsDevines": {
+    "placeholders": {
+      "guessedCount": {
+        "type": "Object"
+      },
+      "collectiveWordslengt": {
+        "type": "Object"
+      }
+    }
+  },
   "quiPourraitLePlus3": "Ποιος είναι πιο πιθανό να {questionsrandomnextI}",
+  "@quiPourraitLePlus3": {
+    "placeholders": {
+      "questionsrandomnextI": {
+        "type": "Object"
+      }
+    }
+  },
   "decrivezVotreMotSecretEn": "Περιγράψτε τη μυστική σας λέξη με μια λέξη. Εισβολείς, μπλόφα!",
   "trouvezLeMeilleurSynonymePour1": "Βρείτε το καλύτερο συνώνυμο της λέξης: 0 {word}",
+  "@trouvezLeMeilleurSynonymePour1": {
+    "placeholders": {
+      "word": {
+        "type": "Object"
+      }
+    }
+  },
   "interdictionFormelleDeVoterPour": "Απαγορεύεται αυστηρά να ψηφίσεις τον εαυτό σου!",
   "remporteLaManche": "Το 0 κερδίζει το χερούλι! {winnerName}",
+  "@remporteLaManche": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteADevineLe1": "Ο κ. Γουάιτ μάντεψε την μυστική λέξη: \\\"0\\\"! {civilianWord}",
+  "@mrWhiteADevineLe1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
   "mrWhiteAEchoueA1": "Ο κ. White απέτυχε να μαντέψει τη λέξη (ήταν '' 0''). {civilianWord}",
+  "@mrWhiteAEchoueA1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
   "aucuneDescriptionNAEte1": "Δεν ψηφίστηκε καμία περιγραφή.",
   "ceNEstPasLe3": "Δεν είναι η σειρά του 0. {playerId}",
+  "@ceNEstPasLe3": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
   "donneesDuJoueurIntrouvables": "Δε βρέθηκαν δεδομένα παίκτη 0. {playerId}",
+  "@donneesDuJoueurIntrouvables": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
   "vousDevezFournirLaCouleur1": "Πρέπει να δώσετε το ζητούμενο χρώμα ( 0 ). {ledSuit}",
+  "@vousDevezFournirLaCouleur1": {
+    "placeholders": {
+      "ledSuit": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagneAvecSaDescription1": "Ο/Η {winnerName} κέρδισε με τη λεζάντα:",
+  "@aGagneAvecSaDescription1": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
   "leLoupBlancFrappeEn": "Ο Λευκός Λύκος χτυπά μόνος",
   "etaitUnCivilLesImposteurs": "Ο/Η {player} ήταν Πολίτης! Οι Απατεώνες κερδίζουν!",
+  "@etaitUnCivilLesImposteurs": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      }
+    }
+  },
   "etaitLLesCivilsGagnent": "Ο/Η {player} ήταν {role}! Οι Πολίτες κερδίζουν!",
+  "@etaitLLesCivilsGagnent": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
   "question2": "Ερώτηση",
   "mrWhiteSecretWordPrompt": "Ξεσκεπαστήκατε! Αν μαντέψετε τη μυστική λέξη των Πολιτών, κερδίζετε σόλο!",
   "codenamesRed": "Κόκκινο",
@@ -1963,79 +3947,683 @@
   "lanterne": "φανός",
   "parchemin": "περγαμηνή",
   "aGagne2": "Ο/Η {gameDataplayerswin} κέρδισε!",
+  "@aGagne2": {
+    "placeholders": {
+      "gameDataplayerswin": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue2": "⏱️ Ο/Η {playerName} έπαιξε {cardsToPlayjoin}.",
+  "@aJoue2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardsToPlayjoin": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue3": "⏱️ Ο/Η {playerName} έπαιξε {winningCombojoin}.",
+  "@aJoue3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "winningCombojoin": {
+        "type": "Object"
+      }
+    }
+  },
   "pliTermineAuTourDe2": "⏱️ Η μπάζα τελείωσε. Σειρά του/της {gameDataplayerspla}!",
+  "@pliTermineAuTourDe2": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "stop": "ΣΤΟΠ",
   "coupFourrePareLAttaque1": "- Τι; 0 Ετοίμασε την επίθεση με 1 και πιάσε το χέρι! {playerstargetIdnam} {matchingSafety}",
+  "@coupFourrePareLAttaque1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      },
+      "matchingSafety": {
+        "type": "Object"
+      }
+    }
+  },
   "aAtteintKm": "Ο/Η {playersplayerIdnam} έφτασε τα {targetDist} χλμ!",
+  "@aAtteintKm": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "targetDist": {
+        "type": "Object"
+      }
+    }
+  },
   "aCouleTouteLaFlotte1": "Ο/Η {shooterDataname} βύθισε ολόκληρο τον εχθρικό στόλο!",
+  "@aCouleTouteLaFlotte1": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "aTireAutomatiquementEn": "0 ενεργοποιείται αυτόματα σε 1 - 2 ( 3 ). {shooterDataname} {targetIndex101} {targetIndex1011} {result}",
+  "@aTireAutomatiquementEn": {
+    "placeholders": {
+      "shooterDataname": {
+        "type": "Object"
+      },
+      "targetIndex101": {
+        "type": "Object"
+      },
+      "targetIndex1011": {
+        "type": "Object"
+      },
+      "result": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoue4": "⏱️ Ο/Η {playerName} έπαιξε {candidateCardsjoin}.",
+  "@aJoue4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "candidateCardsjoin": {
+        "type": "Object"
+      }
+    }
+  },
   "pliTermineAuTourDe3": "Τελείωσα. Στη στροφή του 0 . {gameDataplayerspla}",
+  "@pliTermineAuTourDe3": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "estLeNouvelHote1": "Ο/Η {playersplayerOrder} είναι ο νέος οικοδεσπότης.",
+  "@estLeNouvelHote1": {
+    "placeholders": {
+      "playersplayerOrder": {
+        "type": "Object"
+      }
+    }
+  },
   "egalitePersistanteLeDestinDepartage1": "Επίμονη ισότητα! Το πεπρωμένο ξεκινά τυχαία: 0 εξαλείφεται. {playerDatarandomEl}",
+  "@egalitePersistanteLeDestinDepartage1": {
+    "placeholders": {
+      "playerDatarandomEl": {
+        "type": "Object"
+      }
+    }
+  },
   "estMortEDeChagrin1": "Ο/Η {playerDataotherLov} πέθανε από θλίψη για την αγάπη του/της!",
+  "@estMortEDeChagrin1": {
+    "placeholders": {
+      "playerDataotherLov": {
+        "type": "Object"
+      }
+    }
+  },
   "lHeritierHeriteDuRole2": "Ο/Η {playerDataheritier} (Κληρονόμος) κληρονομεί τον ρόλο του/της {playerDatatestateu}: {newRole}!",
+  "@lHeritierHeriteDuRole2": {
+    "placeholders": {
+      "playerDataheritier": {
+        "type": "Object"
+      },
+      "playerDatatestateu": {
+        "type": "Object"
+      },
+      "newRole": {
+        "type": "Object"
+      }
+    }
+  },
   "heriteEgalementDuStatutDe1": "Ο/Η {playerDataheritier} κληρονομεί επίσης τον τίτλο του Καπετάνιου!",
+  "@heriteEgalementDuStatutDe1": {
+    "placeholders": {
+      "playerDataheritier": {
+        "type": "Object"
+      }
+    }
+  },
   "leVillageDecouvreAvecEffroi1": "Το χωριό ανακαλύπτει με τρόμο το σώμα(τα) του: 0 . {deadThisNightNames}",
+  "@leVillageDecouvreAvecEffroi1": {
+    "placeholders": {
+      "deadThisNightNames": {
+        "type": "Object"
+      }
+    }
+  },
   "leFossoyeurReveleEtaitUn1": "Ο/Η {playerDatafossoyeu} (Νεκροθάφτης) αποκαλύπτει: Ο/Η {playerDatatargetPl} ήταν {targetRole}!",
+  "@leFossoyeurReveleEtaitUn1": {
+    "placeholders": {
+      "playerDatafossoyeu": {
+        "type": "Object"
+      },
+      "playerDatatargetPl": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "etEtaitUnE": "Και το 0 ήταν 1! {playerDataotherRev} {otherRevealedRole}",
+  "@etEtaitUnE": {
+    "placeholders": {
+      "playerDataotherRev": {
+        "type": "Object"
+      },
+      "otherRevealedRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leDictateurAExecuteUn1": "Ο Δικτάτορας {playerDatadictator} εκτέλεσε έναν απατεώνα ({playerDatatargetId} - {targetRole}) και γίνεται Καπετάνιος!",
+  "@leDictateurAExecuteUn1": {
+    "placeholders": {
+      "playerDatadictator": {
+        "type": "Object"
+      },
+      "playerDatatargetId": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
   "leLoupBavardNA1": "Ο Φλύαρος Λύκος ({playerDataloupBava}) δεν είπε τη λέξη του και πέθανε στο ηλιοβασίλεμα!",
+  "@leLoupBavardNA1": {
+    "placeholders": {
+      "playerDataloupBava": {
+        "type": "Object"
+      }
+    }
+  },
   "leVillageAVoteEt1": "Το χωριό ψήφισε και αποβάλλει τον/την {playerDataeliminat}.",
+  "@leVillageAVoteEt1": {
+    "placeholders": {
+      "playerDataeliminat": {
+        "type": "Object"
+      }
+    }
+  },
   "leMercenaireAFaitEliminer1": "Ο Μισθοφόρος {playerDatamercenai} εξόντωσε τον στόχο του την 1η Μέρα! Κερδίζει μόνος!",
+  "@leMercenaireAFaitEliminer1": {
+    "placeholders": {
+      "playerDatamercenai": {
+        "type": "Object"
+      }
+    }
+  },
   "meurtDeChagrinPourSon1": "Ο/Η {playerDataotherLov} πεθαίνει από ραγισμένη καρδιά!",
+  "@meurtDeChagrinPourSon1": {
+    "placeholders": {
+      "playerDataotherLov": {
+        "type": "Object"
+      }
+    }
+  },
   "lAncienCapitaine1": "Ο πρώην Κυβερνήτης.",
   "aDit": "0 είπε: '' 1'' {playerDataplayerId} {cleanClue}",
+  "@aDit": {
+    "placeholders": {
+      "playerDataplayerId": {
+        "type": "Object"
+      },
+      "cleanClue": {
+        "type": "Object"
+      }
+    }
+  },
   "aDevineLeMotCivil1": "0 μάντεψε την πολιτική λέξη ('' 1 '')! {gameDataplayerData} {civilWord}",
+  "@aDevineLeMotCivil1": {
+    "placeholders": {
+      "gameDataplayerData": {
+        "type": "Object"
+      },
+      "civilWord": {
+        "type": "Object"
+      }
+    }
+  },
   "aProposeMaisCeN": "0 πρότεινε « 1», αλλά δεν ήταν η πολιτική λέξη ('' 2 '')! {gameDataplayerData} {guessedWord} {civilWord}",
+  "@aProposeMaisCeN": {
+    "placeholders": {
+      "gameDataplayerData": {
+        "type": "Object"
+      },
+      "guessedWord": {
+        "type": "Object"
+      },
+      "civilWord": {
+        "type": "Object"
+      }
+    }
+  },
   "flottesPlaceesCommenceATirer1": "Επιπλέει! 0 αρχίζει να πυροβολεί. {playerDatafirstPla}",
+  "@flottesPlaceesCommenceATirer1": {
+    "placeholders": {
+      "playerDatafirstPla": {
+        "type": "Object"
+      }
+    }
+  },
   "tousLesJoueursSontPrets1": "Όλοι οι παίκτες είναι έτοιμοι! 0 αρχίζει να πυροβολεί. {playerDatafirstPla}",
+  "@tousLesJoueursSontPrets1": {
+    "placeholders": {
+      "playerDatafirstPla": {
+        "type": "Object"
+      }
+    }
+  },
   "laMancheDeRamiCommence1": "Το μανίκι του Ραμί ξεκινάει! Είναι η σειρά του 0. {playersplayerIdsfi}",
+  "@laMancheDeRamiCommence1": {
+    "placeholders": {
+      "playersplayerIdsfi": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagneLaManche1": "Ο/Η {playersplayerIdnam} κέρδισε τον γύρο!",
+  "@aGagneLaManche1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "k3SixConsecutifsLePion1": "Τρεις έξι συνεχόμενες! Το πιόνι του 0 επιστρέφει στον στάβλο και η σειρά του περνά. {playersplayerIdnam}",
+  "@k3SixConsecutifsLePion1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aGagne3": "Ο/Η {playersplayerIdnam} κέρδισε!",
+  "@aGagne3": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "atteintPoints": "0 έφτασε 1 πόντους! {playersplayerIdnam} {targetScore}",
+  "@atteintPoints": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "atteintPoints1": "0 έφτασε 1 πόντους! {playerswinnerIdnam} {targetScore}",
+  "@atteintPoints1": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      },
+      "targetScore": {
+        "type": "Object"
+      }
+    }
+  },
   "mancheTermineeGagneAvecXp": "Κάνε στην άκρη! 0 νίκες με 1 XP! {playerswinnerIdnam} {maxXp}",
+  "@mancheTermineeGagneAvecXp": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      },
+      "maxXp": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUneInversionEt1": "Ο/Η {playersplayerIdnam} έπαιξε Αναστροφή και ξαναπαίζει!",
+  "@aJoueUneInversionEt1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aInverseLeSensDe1": "Ο/Η {playersplayerIdnam} αντέστρεψε τη φορά του παιχνιδιού!",
+  "@aInverseLeSensDe1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aSauteLeTourDe1": "Ο/Η {playersplayerIdnam} προσπέρασε τη σειρά του/της {skippedPlayerName}!",
+  "@aSauteLeTourDe1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "skippedPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
   "aEmpileUn2Cumul1": "Ο/Η {playersplayerIdnam} στοίβαξε ένα +2. Σύνολο: {pendingDraw2} κάρτες!",
+  "@aEmpileUn2Cumul1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw2": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUn21": "Ο/Η {playersplayerIdnam} έπαιξε ένα +2!",
+  "@aJoueUn21": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUnJokerEt1": "Ο/Η {playersplayerIdnam} έπαιξε Μπαλαντέρ και διάλεξε το χρώμα {chosenColor}!",
+  "@aJoueUnJokerEt1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "chosenColor": {
+        "type": "Object"
+      }
+    }
+  },
   "aEmpileUn4Cumul1": "Ο/Η {playersplayerIdnam} στοίβαξε ένα +4. Σύνολο: {pendingDraw4} κάρτες!",
+  "@aEmpileUn4Cumul1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw4": {
+        "type": "Object"
+      }
+    }
+  },
   "aJoueUnSuperJoker1": "Ο/Η {playersplayerIdnam} έπαιξε Μπαλαντέρ +4!",
+  "@aJoueUnSuperJoker1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aPoseSaDerniereCarte1": "Ο/Η {playersplayerIdnam} έπαιξε το τελευταίο φύλλο και κερδίζει τον γύρο!",
+  "@aPoseSaDerniereCarte1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneLaMancheAvecPoints": "Ο/Η {playersplayerIdnam} κερδίζει τον γύρο με +{roundScore} πόντους!",
+  "@gagneLaMancheAvecPoints": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "roundScore": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPlusQuUne1": "Στον/Στην {playersplayerIdnam} έχει απομείνει μόνο μία κάρτα!",
+  "@nAPlusQuUne1": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "passeSonTour4": "Το 0 περνάει τη σειρά του. {playersplayerIdnam}",
+  "@passeSonTour4": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPasJoueA5": "Ο/Η {gameDataplayerspla} δεν έπαιξε εγκαίρως, τραβάει και πάει πάσο.",
+  "@nAPasJoueA5": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      }
+    }
+  },
   "votreCibleEstEliminezLe1": "Ο στόχος σας είναι 0. {playerDatamercenai}",
+  "@votreCibleEstEliminezLe1": {
+    "placeholders": {
+      "playerDatamercenai": {
+        "type": "Object"
+      }
+    }
+  },
   "aReponduEtPasseLa": "Ο/Η {gameDataplayerspla} απάντησε ''{cleanAnswer}'' και έδωσε τη βόμβα!",
+  "@aReponduEtPasseLa": {
+    "placeholders": {
+      "gameDataplayerspla": {
+        "type": "Object"
+      },
+      "cleanAnswer": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheCarteS": "Ο/Η {playersplayerIdnam} τράβηξε {pendingDraw} κάρτα/ες.",
+  "@aPiocheCarteS": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheUneCarteEt2": "Ο/Η {playersplayerIdnam} τράβηξε ένα φύλλο και μπορεί να το παίξει.",
+  "@aPiocheUneCarteEt2": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aPiocheUneCarteEt3": "Ο/Η {playersplayerIdnam} τράβηξε ένα φύλλο και πάει πάσο.",
+  "@aPiocheUneCarteEt3": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "nAPas1Carte1": "Ο/Η {playerstargetIdnam} δεν έχει 1 φύλλο, η κλήση UNO είναι άκυρη.",
+  "@nAPas1Carte1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aCrieContreUnoPioche1": "Ο/Η {playerscallerIdnam} φώναξε Κόντρα UNO! Ο/Η {playerstargetIdnam} τραβάει 2 φύλλα.",
+  "@aCrieContreUnoPioche1": {
+    "placeholders": {
+      "playerscallerIdnam": {
+        "type": "Object"
+      },
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aDitUno1": "Ο/Η {playerstargetIdnam} είπε UNO!",
+  "@aDitUno1": {
+    "placeholders": {
+      "playerstargetIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "appelUnoInvalide": "Άκυρη κλήση UNO.",
   "aChoisiLaCouleur": "0 έχει επιλέξει το χρώμα 1 ! {playersplayerIdnam} {chosenColor}",
+  "@aChoisiLaCouleur": {
+    "placeholders": {
+      "playersplayerIdnam": {
+        "type": "Object"
+      },
+      "chosenColor": {
+        "type": "Object"
+      }
+    }
+  },
   "estLeDernierSurvivantEt": "0 είναι ο τελευταίος επιζών και κερδίζει Κρανίο! {playerswinnerIdnam}",
+  "@estLeDernierSurvivantEt": {
+    "placeholders": {
+      "playerswinnerIdnam": {
+        "type": "Object"
+      }
+    }
+  },
   "aRemporte2DefisEt": "0 κέρδισε 2 προκλήσεις και κέρδισε το παιχνίδι! {playerschallengerI}",
+  "@aRemporte2DefisEt": {
+    "placeholders": {
+      "playerschallengerI": {
+        "type": "Object"
+      }
+    }
+  },
   "nouvelleMainEstLeDonneur1": "Νέο χέρι! Ο/Η {playersplayerIdsde} είναι ο ντίλερ.",
+  "@nouvelleMainEstLeDonneur1": {
+    "placeholders": {
+      "playersplayerIdsde": {
+        "type": "Object"
+      }
+    }
+  },
   "poseLaPetiteBlindDe1": "Ο/Η {playerssmallBlindI} βάζει το small blind αξίας {smallBlindActual}.",
+  "@poseLaPetiteBlindDe1": {
+    "placeholders": {
+      "playerssmallBlindI": {
+        "type": "Object"
+      },
+      "smallBlindActual": {
+        "type": "Object"
+      }
+    }
+  },
   "poseLaGrosseBlindDe1": "Ο/Η {playersbigBlindIdn} βάζει το big blind αξίας {bigBlindActual}.",
+  "@poseLaGrosseBlindDe1": {
+    "placeholders": {
+      "playersbigBlindIdn": {
+        "type": "Object"
+      },
+      "bigBlindActual": {
+        "type": "Object"
+      }
+    }
+  },
   "seCouche1": "Ο/Η {myDataname} πάει πάσο (Fold).",
+  "@seCouche1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "faitTapisAllIn1": "Ο/Η {myDataname} πάει all-in!",
+  "@faitTapisAllIn1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      }
+    }
+  },
   "suitPour": "Ο/Η {myDataname} κάνει call για {callAmount}.",
+  "@suitPour": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "callAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "faitTapisAllInEn1": "0 κάνει χαλί (all-in) με εκ νέου εκκίνηση σε 1 ! {myDataname} {totalBetAmount}",
+  "@faitTapisAllInEn1": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "totalBetAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "relanceA": "Ο/Η {myDataname} κάνει raise σε {totalBetAmount}.",
+  "@relanceA": {
+    "placeholders": {
+      "myDataname": {
+        "type": "Object"
+      },
+      "totalBetAmount": {
+        "type": "Object"
+      }
+    }
+  },
   "abattageShowdown": "--- SHOWDOWN ---",
   "gagneLePotParForfait1": "Ο/Η {playerDatawinnersf} κερδίζει το ποτ λόγω παραίτησης!",
+  "@gagneLePotParForfait1": {
+    "placeholders": {
+      "playerDatawinnersf": {
+        "type": "Object"
+      }
+    }
+  },
   "gagneNtLePotAvec": "Ο/Η {winnerNames} κερδίζει το ποτ με {bestHandranknamel1}!",
+  "@gagneNtLePotAvec": {
+    "placeholders": {
+      "winnerNames": {
+        "type": "Object"
+      },
+      "bestHandranknamel1": {
+        "type": "Object"
+      }
+    }
+  },
   "aPrisA": "0 πήρε 1! {playerDataplayerId} {suit}",
+  "@aPrisA": {
+    "placeholders": {
+      "playerDataplayerId": {
+        "type": "Object"
+      },
+      "suit": {
+        "type": "Object"
+      }
+    }
+  },
   "histoireCollective": "ΣΥΛΛΟΓΙΚΗ ΙΣΤΟΡΙΑ",
   "distance": "ΑΠΟΣΤΑΣΗ",
   "botte": "ΑΣΦΑΛΕΙΑ",
@@ -2051,7 +4639,118 @@
   "plein": "ΓΕΜΑΤΟ",
   "rejouer1": "REPΠΛΑΙΑ",
   "infecter1": "Μόλυνση του {targetName};",
+  "@infecter1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
   "action1": "ΔΡΑΣΗ",
   "action2": "🔥 ΔΡΑΣΗ",
-  "aRelanceLesDes2": "0 επανεκκίνησε τα ζάρια (1/3). {pName} {val}"
+  "aRelanceLesDes2": "0 επανεκκίνησε τα ζάρια (1/3). {pName} {val}",
+  "@aRelanceLesDes2": {
+    "placeholders": {
+      "pName": {
+        "type": "Object"
+      },
+      "val": {
+        "type": "Object"
+      }
+    }
+  },
+  "jAiLanceUnePartie3": "J''ai lancé une partie de {_selectedGame} !",
+  "@jAiLanceUnePartie3": {
+    "placeholders": {
+      "_selectedGame": {
+        "type": "Object"
+      }
+    }
+  },
+  "rolesJoueurs1": "Rôles ({selectedRolesCount}) ≠ Joueurs ({playerslength}).",
+  "@rolesJoueurs1": {
+    "placeholders": {
+      "selectedRolesCount": {
+        "type": "Object"
+      },
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "dessineCettePhrase1": "Dessine cette phrase :\n\"{stepToProcessconte}\"",
+  "@dessineCettePhrase1": {
+    "placeholders": {
+      "stepToProcessconte": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteBanniPourSa1": "{loserName} a été banni pour sa proposition ''{loserAnswer}'' !",
+  "@aEteBanniPourSa1": {
+    "placeholders": {
+      "loserName": {
+        "type": "Object"
+      },
+      "loserAnswer": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot2": "{winnerName} a trouvé le mot : ''{currentWord}'' !",
+  "@aTrouveLeMot2": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "personneNATrouveLe1": "Personne n''a trouvé le mot : ''{currentWord}''.",
+  "@personneNATrouveLe1": {
+    "placeholders": {
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aTrouveLeMot3": "{guesserName} a trouvé le mot : ''{currentWord}'' !",
+  "@aTrouveLeMot3": {
+    "placeholders": {
+      "guesserName": {
+        "type": "Object"
+      },
+      "currentWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "revolution1": "(Révolution !)",
+  "tonMotEst2": "Η λέξη σου είναι: {_wordCivil}",
+  "@tonMotEst2": {
+    "placeholders": {
+      "_wordCivil": {
+        "type": "Object"
+      }
+    }
+  },
+  "tonMotEst3": "Η λέξη σου είναι: {_wordUndercover}",
+  "@tonMotEst3": {
+    "placeholders": {
+      "_wordUndercover": {
+        "type": "Object"
+      }
+    }
+  },
+  "egalite1": "Ισοπαλία!",
+  "jAiLanceUnePartie4": "J''ai lancé une partie de {datagameTypeGribou} !",
+  "@jAiLanceUnePartie4": {
+    "placeholders": {
+      "datagameTypeGribou": {
+        "type": "Object"
+      }
+    }
+  }
 }

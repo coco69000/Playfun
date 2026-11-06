@@ -30,7 +30,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmerLesEquipes => 'Confirm teams';
 
   @override
+  String get jeuDeSoiree => 'Party Game';
+
+  @override
+  String get multijoueurEnLigne => 'Multiplayer (Online)';
+
+  @override
+  String get modeLocalHorsLigne => 'Local Mode (Offline)';
+
+  @override
+  String get modeMultijoueur => 'Multiplayer Mode';
+
+  @override
   String get entrezVotrePseudo => 'Enter your nickname';
+
+  @override
+  String get pseudo => 'Nickname';
+
+  @override
+  String get creerUnePartie => 'Create a game';
 
   @override
   String get veuillezEntrerUnPseudo => 'Please enter a nickname.';
@@ -969,6 +987,9 @@ class AppLocalizationsEn extends AppLocalizations {
       '⚠️ Chain capture! You must play the blinking piece.';
 
   @override
+  String get aSelectionneSonPionEt => '{0} has selected his pawn and thinks...';
+
+  @override
   String get vousDevezSelectionnerLePion =>
       'You must select the orange-highlighted piece.';
 
@@ -1386,7 +1407,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get classementFinal1 => 'Final ranking';
 
   @override
-  String pt(Object eValueKey, Object eValueValue, Object p, Object p2) {
+  String pt(Object p, Object eValueKey, Object eValueValue, Object p2) {
     return '$p. $eValueKey: $eValueValue pt$p2';
   }
 
@@ -1442,6 +1463,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cloturerLeVote => 'Close voting';
 
   @override
+  String get k0S => '0 s';
+
+  @override
   String get tempsRestantS => 'Time remaining: {0} s';
 
   @override
@@ -1469,7 +1493,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get extremites => 'Ends: ';
 
   @override
-  String get pioche2 => 'Draw : {Count}';
+  String get pioche2 => 'Draw : {count}';
 
   @override
   String get piocher => 'Draw';
@@ -1486,7 +1510,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clic => 'CLICK';
 
   @override
-  String get lancersRestants => 'Remaining Throws: {Count}';
+  String get lancersRestants => 'Remaining Throws: {count}';
 
   @override
   String get combinaison => 'COMBINATION';
@@ -1495,7 +1519,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get grilleDePts => 'GRID OF {0} ({1} pts)';
 
   @override
-  String pts3(Object myTotal, Object p) {
+  String pts3(Object p, Object myTotal) {
     return '$p ($myTotal pts)';
   }
 
@@ -2600,6 +2624,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tapisVide => 'Empty play area';
 
   @override
+  String get ecrireAu => 'Write to {0}...';
+
+  @override
   String get reflechit => '{name} thinks...';
 
   @override
@@ -2636,17 +2663,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get understoodButton => 'I understand';
 
   @override
-  String skyjoRoundEnderNotice(Object name, Object roundEnderName) {
+  String skyjoRoundEnderNotice(Object name) {
     return '$name revealed all their cards first.';
   }
 
   @override
-  String skyjoRoundScoreNotice(
-    Object roundScore,
-    Object totalScore,
-    Object rScore,
-    Object tScore,
-  ) {
+  String skyjoRoundScoreNotice(Object roundScore, Object totalScore) {
     return '+$roundScore this round  •  Total: $totalScore pts';
   }
 
@@ -2669,37 +2691,32 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String skyjoCardsRevealedCount(Object count, Object revealedCount) {
+  String skyjoCardsRevealedCount(Object count) {
     return '$count / 2 cards flipped';
   }
 
   @override
-  String ceTurnOfPlayer(Object name, Object currentPlayerName) {
+  String ceTurnOfPlayer(Object name) {
     return '$name\'S TURN';
   }
 
   @override
-  String ceStepOfTotal(
-    Object step,
-    Object total,
-    Object currentRound,
-    Object totalSteps,
-  ) {
+  String ceStepOfTotal(Object step, Object total) {
     return 'Step $step / $total';
   }
 
   @override
-  String ceVisibleSnippetOf(Object name, Object previousAuthorName) {
+  String ceVisibleSnippetOf(Object name) {
     return 'Visible snippet of $name:';
   }
 
   @override
-  String cePlayerWriting(Object name, Object currentPlayerName) {
+  String cePlayerWriting(Object name) {
     return '$name is writing...';
   }
 
   @override
-  String ceStoryNumber(Object index, Object paperIndex) {
+  String ceStoryNumber(Object index) {
     return 'STORY #$index';
   }
 
@@ -2719,10 +2736,21 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get dobbleAllCardsFound => 'All cards have been matched!';
+
+  @override
   String get dobbleDealingCards => 'Dealing cards...';
 
   @override
   String get dobbleCenterCard => 'CENTER CARD';
+
+  @override
+  String dobbleDeckCards(Object count) {
+    return 'DRAW ($count cards)';
+  }
+
+  @override
+  String get dobbleTapSameSymbol => 'Find the identical symbol!';
 
   @override
   String dobbleMyCardsCount(Object count) {
@@ -2736,6 +2764,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dobbleTooManyErrors => 'Too many rapid mistakes.';
 
   @override
+  String get dobblePenaltyWait => 'Wait for the penalty!';
+
+  @override
+  String get dobbleWrongSymbolWarning => 'Bad symbol! Beware of blockage.';
+
+  @override
   String dobbleFoundSymbol(Object name) {
     return '$name found the symbol!';
   }
@@ -2744,37 +2778,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dobbleSymbolWas => 'The symbol was:';
 
   @override
-  String pokerPot(Object amount, Object pot) {
+  String pokerPot(Object amount) {
     return 'Pot: $amount \\\$';
   }
 
   @override
-  String pokerRaiseAlert(
-    Object name,
-    Object amount,
-    Object previewAmount,
-    Object previewPlayerName,
-  ) {
+  String pokerRaiseAlert(Object name, Object amount) {
     return '⚠️ $name is preparing a raise to $amount \\\$!';
   }
 
   @override
-  String pokerCall(Object amount, Object callAmount) {
+  String pokerCall(Object amount) {
     return 'Call ($amount)';
   }
 
   @override
-  String unoYouMustDraw(Object count, Object pendingDraw) {
+  String unoYouMustDraw(Object count) {
     return 'You must draw $count cards!';
   }
 
   @override
-  String unoMustDraw(Object count, Object name, Object pendingDraw) {
+  String unoMustDraw(Object count) {
     return 'Must draw $count cards!';
   }
 
   @override
-  String unoDrawCountCards(Object count, Object pendingDraw) {
+  String unoDrawCountCards(Object count) {
     return 'Draw $count cards';
   }
 
@@ -2788,9 +2817,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get codenamesBlueTeam => 'Blue Team';
 
   @override
+  String get codenamesSpectator => 'Spectator';
+
+  @override
+  String get codenamesMasterSpy => 'Spymaster';
+
+  @override
+  String get codenamesAgent => 'Agent';
+
+  @override
   String codenamesTeamTurn(Object team) {
     return 'It\'s the turn of the team: $team';
   }
+
+  @override
+  String get codenamesYouAre => 'You are: ';
 
   @override
   String get codenamesMasterSpyView => 'Spymaster View (Key Card)';
@@ -2831,12 +2872,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String timesUpTeamAScore(Object score, Object scoreA, Object teamA) {
+  String timesUpTeamAScore(Object score) {
     return 'Team A: $score';
   }
 
   @override
-  String timesUpTeamBScore(Object score, Object scoreB, Object teamB) {
+  String timesUpTeamBScore(Object score) {
     return 'Team B: $score';
   }
 
@@ -2962,6 +3003,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get petitBacAddCategory => 'Add a category';
 
   @override
+  String get petitBacMinOneCategory => 'You need at least one category!';
+
+  @override
   String get petitBacValidateCategories => 'Confirm categories';
 
   @override
@@ -2970,10 +3014,17 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get petitBacWaitingForBell =>
+      'Sheet returned! Waiting for the bell...';
+
+  @override
   String get petitBacIFinished => 'I\'m done! (Stop)';
 
   @override
   String get petitBacCorrection => 'SCORING';
+
+  @override
+  String get petitBacGameOverReason => 'Little Bac game over!';
 
   @override
   String presidentGivesTo(Object from, Object to) {
@@ -2989,8 +3040,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionPendingMsg => 'Your action is being recorded...';
 
   @override
+  String get monAnimalPrefere => 'My favorite animal';
+
+  @override
   String get unJoueurEstDesigneComme =>
       'A player is designated as a \'target\'. The other players anonymously answer a question about them. The target chooses their preferred answer, and the author of that answer earns one point.';
+
+  @override
+  String get uneSituationEstPresenteeTous =>
+      ': \r\n        \"A situation is presented. All players vote for the person most likely to do this thing. The player who receives the most votes earns one point (a dubious honor!).\",    ';
 
   @override
   String get modeClassiqueUneQuestionEst =>
@@ -3117,6 +3175,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'His objective is to defeat the Werewolves until he receives a new role. On the first night, he designates a testator who will bequeath his role to him upon his death. The Heir only recovers the powers not consumed by his testator (Witch\'s potion, the Dictator\'s seizure of power, etc.), except for the Hunter and the Gravedigger. He does not recover the infection (Black Wolf) or the contamination (Sick Rat) from his testator. He keeps the infection or contamination he had at the base. If he inherits the powers of a Werewolf, the other wolves are informed that he is joining the pack. If he inherits the powers of a Dictator who dies on the night of his coup d\'état, it will be up to the Heir to assume the consequences and carry out the coup d\'état as soon as he wakes up.';
 
   @override
+  String get touche => 'Touchdown';
+
+  @override
   String get unVillageoisSansPouvoirSpecial =>
       'A villager with no special power.';
 
@@ -3196,7 +3257,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeIa => 'AI Theme';
 
   @override
+  String get caseLabel => ':\nbox';
+
+  @override
   String get generalEtVarie => 'General & Varied';
+
+  @override
+  String get unDinosaureQuiMangeUne => 'A dinosaur eating ice cream';
+
+  @override
+  String get pouvoirVolerOuEtreInvisible => 'Ability to fly or To be invisible';
+
+  @override
+  String returnGenereDesSituationsCourtes(Object finalPrompt) {
+    return ':\nreturns \"Generates short situations starting with an action. Theme: $finalPrompt \" ;\nbox';
+  }
 
   @override
   String get abandonTousLesJoueursDeconnectes =>
@@ -3206,7 +3281,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tousLesJoueursSeSont => 'All players disconnected';
 
   @override
-  String nAPasJoueA(Object actionDetails, Object playerName) {
+  String nAPasJoueA(Object playerName, Object actionDetails) {
     return '$playerName didn\'t play in time. The computer played for him ( $actionDetails ).';
   }
 
@@ -3230,7 +3305,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String aTireDansLEau(Object opponentDataname, Object shooterDataname) {
+  String aTireDansLEau(Object shooterDataname, Object opponentDataname) {
     return '🌊 $shooterDataname shot into the water. Turn of $opponentDataname.';
   }
 
@@ -3250,12 +3325,15 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String aGardeLeDeDe(Object dieVal, Object index1, Object pName) {
+  String get aRelanceLesDes3 => '{pName} rerolled the dice ({3rollsLeft1}/3)!';
+
+  @override
+  String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return '$pName kept die value $dieVal (die #$index1) 🔒';
   }
 
   @override
-  String aDebloqueLeDe(Object index1, Object pName) {
+  String aDebloqueLeDe(Object pName, Object index1) {
     return '$pName unlocked die #$index1';
   }
 
@@ -3299,6 +3377,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pioche3 => 'Pickaxe';
 
   @override
+  String get wordcivilParts0TrimWordundercover =>
+      '); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    \'\'}\' else \'\'{\' \r\n      Anti-duplicate security: if the';
+
+  @override
   String get vousNAvezPasDe => 'You have no words';
 
   @override
@@ -3336,15 +3418,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verite1 => 'TRUTH';
 
   @override
-  String aLePlusDXp(Object maxXp, Object playerswinnerIdnameJoueur) {
+  String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur has the most XP ($maxXp XP) and becomes an Admin!';
   }
+
+  @override
+  String get finDeMancheBoutonAdmin =>
+      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  End of Sleeve (admin button)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async \'\'{\' \r\n    await _db.runTransaction((transaction) async\'\'{\' \r\n      final gameRef = _db.collection(\'games\').doc(gameCode); \r\n      final snap = await transaction.get(gameRef); \r\n      if (!snap.exists) return; \r\n\r\n      final gameData = snap.data() as Map<String, dynamic>; \r\n      final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Determine the winner (more XP)\r\n      String winnerId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        final xp = (pData[\'xp\'] as num?)?. toInt() ?? 0; \r\n        if (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Someone';
 
   @override
-  String aAtteintPointsEtRemporte(Object targetScore, Object winnerName) {
+  String aAtteintPointsEtRemporte(Object winnerName, Object targetScore) {
     return '$winnerName reached $targetScore points and won the game!';
   }
 
@@ -3360,7 +3446,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get toutesLesManchesDeTime => 'All Time\'s Up rounds are over!';
 
   @override
-  String gagneAvecPoints(Object maxScore, Object playerswinnerIdnameUnjoueur) {
+  String gagneAvecPoints(Object playerswinnerIdnameUnjoueur, Object maxScore) {
     return '$playerswinnerIdnameUnjoueur wins with $maxScore points!';
   }
 
@@ -3391,7 +3477,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leJoueur => 'The player';
 
   @override
+  String get listStringQuestionsAiwordpoolGamewords =>
+      ') \'\'{\' \r\n      List<String> questions =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[difficulty] ?? \r\n          GameWords.whoIsMostLikely[';
+
+  @override
   String get honnete => 'Honest';
+
+  @override
+  String get pairSplit => ') ? pair.split(';
+
+  @override
+  String get pairPairListStringShuffledroles =>
+      '): [even, even]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Question =\r\n            \"Describe your secret word in one word. Impostors, bluff!\"; \r\n        for (var pId in players.keys) \'\'{\' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3411,6 +3508,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passeLEnchere => 'passes bid';
 
   @override
+  String get elseIfGametype =>
+      ') \'\'{\' \r\n        if (voterId == votedForId) \'\'{\' \r\n          throw Exception(\"Formal prohibition to vote for oneself!\"); \r\n        \'\'}\'\'}\' else if (gameType ==\r\n      ';
+
+  @override
+  String get intRequiredvotesPlayersLengthIf =>
+      ') { \r\n        creditPlayerXp( \r\n          transaction, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: true, \r\n        ); \r\n      } \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == ';
+
+  @override
+  String get forFinalTargetInVotes =>
+      ') \'\'{\' \r\n          final Map<String, int> voteCounts = {}; \r\n          for (final target in votes.values) { \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          } \r\n\r\n          int maxVotes = 0; \r\n          List<String> topVoted = []; \r\n          voteCounts.forEach((target, count) \'\'{\' \r\n            if (count > maxVotes) { \r\n              maxVotes = count; \r\n              topVoted = [target]; \r\n            } else if (count == maxVotes) { \r\n              topVoted.add(target); \r\n            }\'\'}\'); \r\n\r\n          updates[\r\n          ';
+
+  @override
+  String get forFinalTargetInVotes1 =>
+      ') \'\'{\' \r\n        final Map<String, int> voteCounts = {}; \r\n        for (final target in votes.values) { \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        } \r\n\r\n        int maxVotes = 0; \r\n        List<String> topVoted = []; \r\n        voteCounts.forEach((target, count) \'\'{\' \r\n          if (count > maxVotes) { \r\n            maxVotes = count; \r\n            topVoted = [target]; \r\n          } else if (count == maxVotes) { \r\n            topVoted.add(target); \r\n          }\'\'}\'); \r\n\r\n        if (topVoted.length == 1) \'\'{\' \r\n          final winner = topVoted.first; \r\n          updates[\r\n        ';
+
+  @override
   String aRemporteTousLesJetons(Object winnerName) {
     return '$winnerName won all the chips on the table!';
   }
@@ -3422,6 +3535,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String carte1(Object cardToPlay) {
     return 'card $cardToPlay';
   }
+
+  @override
+  String get quipourraitvotemode =>
+      '? _quiPourraitVoteMode\r\n                      : ';
 
   @override
   String get localIndisponibleVideoAudioActif =>
@@ -3492,7 +3609,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get completerAvecLIa15 => 'Complete with AI (+15 words)';
 
   @override
-  String completeCetteListeSurLe(Object join, Object text) {
+  String completeCetteListeSurLe(Object text, Object join) {
     return 'Complete this list on the theme $text. Existing words: $join';
   }
 
@@ -3783,10 +3900,15 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String printEtatDeIsactionpendingAu(Object _isActionPending) {
+    return ' ---\", \r\n    ); \r\n    print(\"Initial _isActionPending status: $_isActionPending\"); \r\n\r\n    final players = (gameData[';
+  }
+
+  @override
   String get erreurQuestionNonTrouvee => 'Error: Question not found.';
 
   @override
-  String str95d36e(Object key0, Object valuename) {
+  String str95d36e(Object valuename, Object key0) {
     return '$valuename: $key0';
   }
 
@@ -3855,10 +3977,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get uneDescriptionHilarante => 'a hilarious caption';
 
   @override
+  String get extrainfoColumnChildrenText =>
+      '; \r\n          extraInfo = Column( \r\n            children: [ \r\n              Text( \r\n                \'';
+
+  @override
   String get unProblemeEstSurvenu => 'A problem has occurred.';
 
   @override
-  String str98e212(Object count, Object isFull, Object length, Object pName) {
+  String get defaultFinalRoundwinneridGamedata =>
+      ': \r\n      default: \r\n        final roundWinnerId = gameData[';
+
+  @override
+  String str98e212(Object pName, Object count, Object length, Object isFull) {
     return '$pName: $count/$length$isFull';
   }
 
@@ -3903,6 +4033,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get styleConstTextstyleColorColors =>
+      ', \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox(height: 20), \r\n                Wrap( \r\n                  alignment: WrapAlignment.center, \r\n                  children: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox(height: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Text( \r\n                    AppLocalizations.of(context)!. allCluesHave Been, \r\n                    style: const TextStyle(color: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        \'\'}\' else \'\'{\' \r\n          It\'s up to the soothsayer to play\r\n          return Column( \r\n            children: [ \r\n              Text(                ';
+
+  @override
   String strf0868c(Object length0, Object valuescore0) {
     return '$length0: $valuescore0';
   }
@@ -3932,8 +4066,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get laVictime => 'The victim';
 
   @override
+  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
+      '; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              children: [ \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. infect, \r\n                  icon: Icons.auto_fix_high, \r\n                  color: Colors.purpleAccent, \r\n                  onPressed: () \'\'{\' \r\n                    Provider.of<PlayerState>( \r\n                      context, \r\n                      listen: false, \r\n                    ).recordBadgeEvent(\'lg_loup_noir_infect\'); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      true, \r\n                    ); \r\n                  \'\'}\', \r\n                ), \r\n                const SizedBox(width: 8), \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. devour, \r\n                  icon: Icons.close, \r\n                  color: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        false, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          \'\'}\' \r\n          station wagon; \r\n        box \'loup_blanc_turn\': \r\n          promptText = ';
+
+  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'No casualties last night (protected or spared)';
+
+  @override
+  String get styleTextstyleFontweightFontweightBold =>
+      ', \r\n                              style: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                color: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == \'wolf\' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(text: message), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  \'\'}\', \r\n                ); \r\n              \'\'}\', \r\n            ), \r\n          ), \r\n\r\n          Compact sending bar\r\n          if (canSendMessage)\r\n            Row( \r\n              children: [ \r\n                Expanded( \r\n                  child: SizedBox( \r\n                    height: 32, \r\n                    child: TextField( \r\n                      controller: _chatController, \r\n                      style: const TextStyle(fontSize: 12, color: Colors.white), \r\n                      decoration: InputDecoration( \r\n                        hintText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          color: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        border: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        filled: true, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          horizontal: 10, \r\n                          vertical: 0, \r\n                        ), \r\n                      ), \r\n                      onSubmitted: (text) \'\'{\' \r\n                        if (text.trim().isNotEmpty) { \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        }\'\'}\', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox(width: 4), \r\n                IconButton( \r\n                  icon: const Icon( \r\n                    Icons.send_rounded, \r\n                    size: 18, \r\n                    color: Colors.cyanAccent, \r\n                  ), \r\n                  padding: EdgeInsets.zero, \r\n                  constraints: const BoxConstraints(), \r\n                  onPressed: () \'\'{\' \r\n                    if (_chatController.text.trim().isNotEmpty) { \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    }\'\'}\', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  \'\'}\' \r\n\r\n  Widget _buildChatTab(String label, String type, Color activeColor) { \r\n    final bool isSelected = _selectedChatType == type; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      child: Container( \r\n        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3), \r\n        decoration: BoxDecoration( \r\n          color: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            color: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        child: Text( \r\n          label, \r\n          style: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  } \r\n\r\n  --- UPDATED AVATAR TO MAKE IT INTERACTIVE--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'{\' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder allows for a super-smooth visual timer without blocking timer and manual setState, which greatly lightens the thread (Point 4)\r\n    final endTime = startTime.toDate().add( \r\n      Duration(seconds: durationInSeconds), \r\n    ); \r\n    final remaining = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        style: Theme.of( \r\n          context, \r\n        ).textTheme.headlineSmall?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      duration: remaining, \r\n      tween: Tween(begin: remaining, end: Duration.zero), \r\n      builder: (BuildContext context, Duration value, Widget? child) { \r\n        final seconds = value.inSeconds; \r\n        return Text( \r\n          AppLocalizations.of(context)!. timeRemaining, \r\n          style: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            color: seconds < 20 ? Colors.redAccent : Colors.amberAccent, \r\n          ), \r\n        ); \r\n      }, \r\n    ); \r\n  \'\'}\' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext context, \r\n    Map<String, dynamic> gameData, \r\n    String playerId, \r\n  ) \'\'{\' \r\n    final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n    final playerOrder = List<String>.from( \r\n      gameData[\'littleHorsesPlayerOrder\'] ?? [], \r\n    ); \r\n    final positions = Map<String, dynamic>.from( \r\n      gameData[\'littleHorsesPositions\'] ?? {}, \r\n    ); \r\n    final int currentIndex = gameData[\'smallHorsesCurrentIndex\'] ?? 0; \r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: \'; \r\n    final bool isMyTurn = currentPlayerId == playerId; \r\n    final int dice = (gameData[\'littleHorsesDice\'] as num?)?. toInt() ?? 0; \r\n    final bool hasRolled = gameData[\'littleHorsesHasRolled\'] ?? false; \r\n    final bool isTeamMode = gameData[\'smallTeamHorses\'] ?? false; \r\n    final Map<String, dynamic> consecutiveSixes = Map<String, dynamic>.from( \r\n      gameData[\'smallHorsesConsecutiveSixes\'] ?? {}, \r\n    ); \r\n    final int mySixStreak = consecutiveSixes[playerId] ?? 0; \r\n\r\n    Neon Modern Palette / Arcade on Dark Background\r\n    final List<Color> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon sky blue\r\n      const Color(0xFF10B981), // Emerald Green\r\n      const Color(0xFFF59E0B), // Golden Amber\r\n    ]; \r\n\r\n    --- VICTORY SCREEN--- \r\n    if (gameData[\'gameState\'] == \'gameOver\') \'\'{\' \r\n      return UniversalGameEndScreen( \r\n        gameTitle:\r\n                      \r\n                  ';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Reached the center of the board!';
@@ -3968,12 +4110,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lancerLesDes => 'Roll dice';
 
   @override
-  String k1663(Object oppBonus035, Object oppUpper) {
+  String k1663(Object oppUpper, Object oppBonus035) {
     return '1-6: $oppUpper/63 $oppBonus035';
   }
 
   @override
-  String k16631(Object myBonus035, Object myUpper) {
+  String k16631(Object myUpper, Object myBonus035) {
     return '1-6: $myUpper/63 $myBonus035';
   }
 
@@ -4006,6 +4148,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get choisirUnJeu => 'Choose a game';
+
+  @override
+  String get screenWhoismostlikelylocalscreenPlayersPlayersBreak =>
+      ': \r\n        screen = WhoIsMostLikelyLocalScreen(players: _players); \r\n        station wagon; \r\n      box ';
 
   @override
   String get generation => 'Generating...';
@@ -4055,6 +4201,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gagneTonSecretEstPreserve => 'WON! Your secret is safe.';
 
   @override
+  String get wordcivilParts0TrimWordundercover1 =>
+      '); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    \'\'}\' else \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (Variant)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    for (var player in _activePlayers) \'\'{\' \r\n      if (player == undercover) \'\'{\' \r\n        _playerRoles[player] = \"Infiltrator\"; \r\n      \'\'}\' else if (player == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[player] = \"Mr. White\"; \r\n      \'\'}\' else \'\'{\' \r\n        _playerRoles[player] = \"Civil\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  void _nextPlayerReveal() \'\'{\' \r\n    if (_currentPlayerRevealIndex < _activePlayers.length - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } else { \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(String player) \'\'{\' \r\n    String role = _playerRoles[player]!; \r\n    bool impostorsWin = role == \"Civil\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.result; \r\n      if (impostorsWin) \'\'{\' \r\n        _resultMessage = \"{player} was a Civilian! The Impostors win!\"; \r\n      \'\'}\' else \'\'{\' \r\n        _resultMessage = \"{player} was the\r\n    \r\n  ';
+
+  @override
   String get requiert4Joueurs => 'Requires 4+ players';
 
   @override
@@ -4064,6 +4214,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String genereDesCategoriesAmusantesPour(Object trim) {
     return 'Generate fun categories for the hot potato. Theme: $trim';
   }
+
+  @override
+  String get bodyPaddingPaddingConstEdgeinsets =>
+      '), \r\n          ), \r\n        ], \r\n      ), \r\n      body: Padding( \r\n        padding: const EdgeInsets.all(16.0), \r\n        child: Column( \r\n          children: [ \r\n            if (_phase != LocalWhoIsPhase.results) ... [ \r\n              DIFFICULTY FILTER\r\n              SegmentedButton<String>( \r\n                Segments: [ \r\n                  ButtonSegment( \r\n                    value: ';
 
   @override
   String get egalite1PtChacun => 'Tie! (+1 pt each)';
@@ -4240,8 +4394,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auMoins5JoueursRequis => 'At least 5 players required.';
 
   @override
-  String rolesJoueurs(Object playersLength, Object selectedRolesCount) {
-    return 'Roles ( $selectedRolesCount )';
+  String rolesJoueurs(Object selectedRolesCount, Object playersLength) {
+    return 'Roles ( $selectedRolesCount ) $playersLength';
   }
 
   @override
@@ -4500,8 +4654,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leTourEstTermine => 'It\'s over!';
 
   @override
-  String aEteBanniPourSa(Object loserAnswer, Object loserName) {
-    return '$loserName was banned for its proposal \' $loserAnswer \'!';
+  String aEteBanniPourSa(Object loserName, Object loserAnswer) {
+    return '$loserName was banned for its proposal \'  \'! $loserAnswer';
   }
 
   @override
@@ -4518,17 +4672,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String aTrouveLeMot(Object winnerName) {
-    return '$winnerName found the word: \' 99999\'!';
+    return '$winnerName found the word: \' 99999\'! ';
   }
 
   @override
   String personneNATrouveLe(Object currentWord) {
-    return 'No one found the word: \' $currentWord \'.';
+    return 'No one found the word: \' {currentWord} \'.';
   }
 
   @override
   String aTrouveLeMot1(Object guesserName) {
-    return '$guesserName found the word: \' 99999\'!';
+    return '$guesserName found the word: \' 99999\'! ';
   }
 
   @override
@@ -4555,12 +4709,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leTourEstTermine1 => 'The turn is over.';
 
   @override
+  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
+    return '$winnerName won with its description:AppLocalizations.of(context)!. extrainfoColumnChildText 99999 $winningDescription';
+  }
+
+  @override
   String get personneNAGagneCe =>
       'Nobody won this round. Tie vote or no captions.';
 
   @override
-  String aTrouveLeSymboleIl(Object commonSym, Object winnerName) {
-    return '$winnerName found the symbol 99999! He wins the card.';
+  String aTrouveLeSymboleIl(Object winnerName, Object commonSym) {
+    return '$winnerName found the symbol 99999! He wins the card. $commonSym';
   }
 
   @override
@@ -4599,6 +4758,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get score => 'Score';
+
+  @override
+  String applocalizationsOfContextStyleconsttextstylecolorcolors(
+    Object value,
+    Object guesserName,
+    Object value2,
+    Object deckIndex,
+    Object deckTotal,
+    Object value3,
+    Object totalScore,
+  ) {
+    return '$value $guesserName :AppLocalizations.of(context)! .styleConstTextstyleColorColors $value2 $deckIndex / $deckTotal — $value3 : $totalScore';
+  }
 
   @override
   String get laNuitTombeSurLe =>
@@ -4666,6 +4838,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leLoupNoirDecideDu => 'The Black Wolf decides prey\'s fate';
 
   @override
+  String
+  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
+    Object targetName,
+  ) {
+    return 'Infect $targetName ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinThe White Wolf strikes solo';
+  }
+
+  @override
   String get choisissezUneVictimeADevorer => 'Choose a victim to devour';
 
   @override
@@ -4722,6 +4902,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get amoureux => 'Lovers';
+
+  @override
+  String
+  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
+    Object senderName,
+  ) {
+    return '$senderName : AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldSmall Horses';
+  }
 
   @override
   String get courseIndividuelle => 'Individual Race';
@@ -4853,6 +5041,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get quiPourraitLePlusApplocalizations =>
+      'Who Could More?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft';
+
+  @override
   String get votePar => 'Voted by: {0}';
 
   @override
@@ -4945,6 +5137,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get partieDeEnAttente => 'Part of {0} pending';
 
   @override
+  String get termine => 'Terminated: {0}';
+
+  @override
+  String get vainqueur2 => 'Winner:';
+
+  @override
   String get joueurSPretS => 'Player(s) ready';
 
   @override
@@ -4984,6 +5182,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get indicesMontresA => 'Clues shown to';
+
+  @override
+  String get playersWinneridname => 'Players winneridname';
+
+  @override
+  String get packageSensorsPlusSensorsPlus =>
+      'package:sensors plus/sensors plus.dart';
+
+  @override
+  String get supabaseUploadEchecDefinitif =>
+      '--- [Supabase Upload] DEFINITE ---';
+
+  @override
+  String get erreurSupabaseStorageexception =>
+      '--- SUPBASE ERROR (StorageException) ---';
+
+  @override
+  String get erreurInattendueLorsDeL => '--- INATTENDED ERROR AT UPLOAD ---';
+
+  @override
+  String get timeSUp1 => 'Time\\\'s Up';
 
   @override
   String get marquesDeVoiture => 'Car brands';
@@ -5046,10 +5265,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String get marquesDeVetements => 'Clothing brands';
 
   @override
+  String get butDuJeuEtreLe =>
+      '**Game goal**\nBe the player with the most points at the end of the game.\n\n**Draft**\n1. Each player receives **7 response cards** in hand.\n2. A player is named **Juge** (the role turns at each round).\n3. The Judge reads the **question card** aloud.\n4. All **other players** secretly choose **1 reply card** from their hand and submit it.\n5. The judge reads all the answers and designates **the funniest**.\n6. The winner of the round score **1 point**.\n7. Each player **poche** a new card to return to 7.\n8. The role of Judge passes to the next player.\n\n** Important rules**\n- Judge ** doesn\'t play** card during his turn.\n- The answers are **anonymous**: the Judge does not know who wrote what.\n- We can only play one card** per handle.';
+
+  @override
+  String get objectifPrenezDesCartesPour =>
+      '** Objective**\nTake cards to create matching pairs. Avoid being the player who holds the Zombie card at the end of the game.\n**Draft**\n1. The game starts with 33 cards (16 pairs + 1 Zombie card).\n2. The cards are distributed to the 4 players.\n3. Each turn a player takes a card from the next player.\n4. If the card creates a pair, it is automatically defeated.\n5. The player\'s hand is mixed.\n6. The first player to no longer have cards won.\n7. The remaining player with the Zombie card lost!';
+
+  @override
+  String get butDuJeuObtenirLe =>
+      '**Game goal**\nGet the highest score by filling 13 categories with 5 dice.\n\n**Running of a tower**\n1. **Lance** : You can throw the 5 dice up to 3 times per turn.\n2. **Keep** : After the 1st or 2nd throw, you can keep some dice and restart others.\n3. **Score**: After at least one throw, you have to choose a category to score. Each category can only be used once per part.\n\n**Category**\n- **As to Six** : Sum of the corresponding dice. (Bound 35 points if the upper section totals 63 points or more).\n- **Brelan** (3 or more identical dice): Sum of all the dice.\n- ** Square** (4 or more identical dice): Sum of all the dice.\n- **Full** (3 dice identical + 1 pair): 25 points.\n- **Small Suite** (4 consecutive dice): 30 points.\n- **Large Suite** (5 consecutive dice): 40 points.\n- **Yams** (5 dice identical): 50 points.\n- **Chance** : Sum of all the dice.';
+
+  @override
+  String get objectifNePasAvoirL =>
+      '** Objective**\nDo not have the device in your hands when the potato explodes!\n\n**Draft**\n1. A theme appears on the screen.\n2. The player holding the device must give an answer corresponding to the theme.\n3. As soon as he answered, he quickly passed the plane to his neighbor.\n4. The neighbour must in turn find a new answer and pass the device.\n5. Time is hidden and random: the potato can explode at any time!\n6. The player holding the device at the time of the explosion loses the handle and receives a pledge.';
+
+  @override
+  String get principeGeneralGribouillisEstUn =>
+      '**General principle**\nGribouillis is a drawing game inspired by the \"Arab phone\", where ideas change at each stage. There are 3 game modes:\n\n**1. Normal Mode (Arabic Illustrated Phone)**\n- **Writing**: Each player writes a sentence.\n- **Drawing**: Each player receives another sentence and draws it.\n- **Devinette** : Each player receives a drawing and guesses what it represents.\n- **Alternance** : The game alternates drawing and guess until each \"album\" has gone around all the players.\n- **But** : Have fun seeing how a simple sentence turns into something completely different!\n\n**2. Complement Mode (Collaborative Drawing)**\n- **Croquis**: Each player starts a simple drawing.\n- **Complete**: Each player receives another\'s drawing and must enrich it, without deleting what already exists.\n- **Alternance**: The drawing goes from player to player, each adding its touch.\n- **Parameter \"Add 1\"**:\n- *If disabled (default)*: It is a string. The drawing evolves at each stage (Player A -> Player B -> Player C...).\n- *If activated*: The initial drawing of each player is completed by all other players, creating several collective works in parallel.\n- **But**: Create surprising and fun collective works of art.\n\n**3. Brise-Glace Mode (Creative Interaction)**\n- **Writing**: Each player writes a personal theme (ex: AppLocalizations.of(context)!.myPreference).\n- **Drawing**: Each player receives the themes from **all other players** and must draw them.\n- **But** : Ideal to break the ice, discover the tastes of others and launch creativity in a collaborative and light way.';
+
+  @override
+  String get yzObjectifAvoirLeMoins =>
+      'Objective\n\nHave as few points as possible at the end of the game.\nThe game stops when a player reaches 100 points or more, and the winner is the one with the lowest total score.\n\nEquipment\n\n150 cards numbered from –2 to +12\n\nImplementation\n\nMix all the cards.\nEach player receives 12 cards, placed face down in front of him, in 4 columns × 3 rows.\nThe other cards form a stock. Return the first card to form the waste.\nEach player returns 2 cards of his choice from his 12.\n\nThe course of a tour\n\nIn turn, you have **30 seconds** to choose between two actions:\n\n1. Take the waste card\nYou must exchange it with one of your 12 cards (visible or hidden side).\nThe replaced card goes on the waste.\n\n2. Piocher a card face down\nYou look at the map:\n- either you keep it and replace one of your cards (as above),\n- either you refuse it → you place it directly on the waste, and in this case you must return one of your cards still hidden.\n\nSpecial rules\n\nThree identical cards in a column → are immediately defeated (value 0).\n\nEnd of handle:\n\nThe handle ends when a player has revealed all his cards.\nAll other players then reveal their remaining cards. The handle\'s over.\nAll players count the sum of their cards.\n\nPlease note: if the player who finishes does not have the lowest score in the round, he takes a penalty of +10 points (his handle score is doubled in the original version, we will use +10 to simplify).\n\nEnd of game\n\nWe play as many sleeves as we need.\nOnce a player reaches 100 points or more, the game stops.\nThe player with the lowest cumulative score wins.';
+
+  @override
+  String get iAReglesDuPoker =>
+      'Objective\n\nWin the chips from other players by having:\n- the best hand of 5 cards during slaughter,\n- or by making them give up (to sleep) thanks to the bets.\n\nHand classification (from strongest to weakest)\n\n1. Royal flush : 10 – V – D – R – A of the same colour\n2. Quint flush: 5 cards that follow each other, same color\n3. Square: 4 identical cards\n4. Full: 3 identical cards + 1 pair\n5. Colour (flush): 5 cards of the same color (non-consecutive)\n6. Next (Fifth): 5 cards that follow each other (different colors)\n7. Brelan: 3 identical cards\n8. Double pair\n9. Pair\n10. High card (highest card if no one gets better)\n\nð\n\n1. Blinds\nThe player to the left of the dealer sets the small blind.\nThe next player sets the big blind.\n\n2. Distribution\nEach player receives 2 closed cards (the \"private cards\").\n\n3. Auction towers and common cards\n- Preflop: bet trick with private cards.\n- Flop: 3 common maps revealed. New bets.\n- Tower: 4th common map revealed. New bets.\n- River: 5th and last common map revealed. Last bet.\n\n4. Shooting (showdown)\nIf several players stay, each shows their game.\nThe best combination of 5 cards (among its 2 private cards + the 5 communes) wins the pot.\n\nPossible actions\n\nIn turn, a player has **30 seconds** for:\n- Checker: don\'t bet anything, only if nobody\'s ever bet again.\nPut some chips in the pot.\n- Follow (Call): equal the running.\n- Relaunch (Raise): increase the bet.\n- Go to bed (Fold): drop his cards and get out of it.\n\nEnd of game\n\nThe game continues as long as there remain at least 2 players with chips.\nThe final winner is the one who takes all the chips.';
+
+  @override
+  String get butDuJeuGagnerLe =>
+      '**Game goal**\nWin the most XP by carrying out actions and responding to truths!\n\n**Draft**\n1. The roulette is the player whose turn it is.\n2. The player shoots \"Action\" or \"Verity\".\n3. Classic mode: A random challenge/question is displayed.\n4. Judge Mode: A random player writes the challenge, then the player realizes it.\n5. Other players validate with a vote Yes/No.\n6. The validation percentage determines the XP won.\n\n**Special rules**\n- 100% validation = maximum XP\n- Player with the most XP becomes Admin of the game\n- The button \"End of handle\" allows to close the part';
+
+  @override
+  String get butDuJeuLeBut =>
+      '**Game goal**\nThe goal is to be the first to get rid of all his cards to become President. The last player with cards in hand becomes the Asshole.\n\n**Material and Players**\n- **Maps** : 52 cards.\n- **Players**: 3 to 6 players.\n\n**Card Value**\nThe order of the cards, from the weakest to the strongest, is:\n**3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2.**\nThe **2** is the strongest card and can beat any other card or combination.\n\n**Manual operation**\n1. **Distribution**: All cards are distributed equally among players.\n2. **First round**:\n- For the very first game, the player who owns the **3 of Trèfle ( He must play this card (only or with others 3).\n- For the next sleeves, the **Assess wheel** of the previous sleeve starts.\n3. **Play cards**: The first player puts on the table:\n- Only one card (e.g. one 7).\n- One pair (ex: two 8).\n- A brelan (ex: three Valets).\n- One square (ex: four 5).\n4. **Continued from round**: The next player (in a clockwise direction) has **30 seconds** to play the same number of cards** but a **higher value**.\n- Example: If a player poses a pair of 6, the next one must pose a pair of 7, Ladies, As, etc. \n5. **Skip your turn**: If a player cannot or does not want to play, he must pass his turn. Once a player has passed, he cannot play again until the end of the current fold.\n6. **End of a fold**: The fold ends when all players have passed their turn. The last player to have placed cards wins the fold, picks up the cards from the table (set them aside) and starts the next fold by playing what he wants.\n7. **The power of 2**: Play one or more **2** beats any combination and ends the fold instantly. The person who played the 2 wins the fold and starts playing again.\nTo beat a pair, you have to play a pair of 2! \n\n**End of the English Channel and Roles**\n- As soon as a player has no cards, he\'s done. The game continues until there is only one player left.\n- The order of the end determines the roles for the next round:\n- **1st**: President\n- **2nd**: Vice-President\n- **Last** : Asshole\n- **Before-last** : Vice-Ass-Trou\n- **Other** (if any): Neutral\n\n**Next month: Card Exchange! **\nBefore starting the new round, players exchange cards:\n- The **Asshole** gives his **two best cards** to the **President**.\n- The **Chair** gives him in return the **two cards of his choice** (usually his worst).\n- If there are 4 players or more, the **Vice-Cut** gives its **best card** to the **Vice-President**.\n- The **Vice-President** gives him the **map of his choice**.\n\n**Special rules**\n- â›â€ **Cannot end with a 2**: A player has no right to get rid of his last card if it is a 2. This blow is considered invalid.\n**Variant Revolution (optional)**: If a player sets a square (4 identical cards), he can announce \"Revolution!\". The order of value of the cards is then reversed until the end of the sleeve (the 3 becomes the strongest, and the 2 the weakest).';
+
+  @override
+  String get butDuJeuReussirDeux =>
+      '**Game goal**\nSuccess two challenges before the other players.\n\n**In place**\n- Each player starts with 4 cards: 3 Roses and 1 Skull.\n- Every card on the carpet remains tied to its owner.\n\n**Draft**\n1. In turn, a player can put a card face down on his carpet.\n2. When he no longer wants to pose, he challenges by announcing the number of cards he thinks he can return.\n3. Other players can bid or pass.\n4. The highest bidder becomes the challenger and returns the advertised cards.\n5. First he returns his own cards, then those of other players if necessary.\n\n**Resolution**\n- If a Skull appears, the challenge is lost.\n- If the challenge is won, the player scores a point. The first at 2 points wins the game.\n- If a challenge is lost, the player loses a card at random from his remaining hand. If he loses his Skull, he has to undo another one immediately.';
+
+  @override
+  String get butDuJeuFaireDeviner =>
+      '**Game goal**\nTo guess a word by drawing, before the end of the allotted time.\n\n**Draft**\n1. **Drawer/word selection**: A player is designated to draw, and a word is secretly attributed to him.\n2. **Drawing**: The draftsman has a limited time to guess the word by drawing. He can neither speak nor mimic nor write letters or figures.\n3. **Devinettes**: Other players offer words in a chat.\n4. **Validation**: The cartoonist sees the proposals in the chat and clicks on a \"Find!\" button next to the good message to designate the winner.\n5. **Points**: The player who found and the draftsman win a point.\n6. **Next Tower**: A new draftsman is appointed.\n\n**Options**\n- **Only 30 strokes**: The draftsman is limited to a maximum of 30 traits.';
+
+  @override
+  String get butDuJeuFaireDeviner1 =>
+      '**Game goal**\nLet your partner guess as many mysterious words as possible, each writing a single word clue. The same or invalid indices shall be eliminated.\n\n**Draft**\n1. **Selection of the Devin**: A player is designated as the \"Devin\" for the round. He doesn\'t see the word mystery.\n2. **Choice of the Word Mystery**: The Devin chooses a word from a list (or the master of the game chooses one).\n3. **Indice Writing**: All other players (\"Indices\") secretly write ONE single word index that will help the Devin find the word mystery.\n4. **Indices Filter**: All indices are revealed. The same indices (even if spelled differently, e.g. \"chat\" and \"chats\") or invalid (very close to the word mystery, invented, etc.) are eliminated. Only the unique and valid clues are shown in the Devin.\n5. **Devinette** : The Devin looks at the remaining clues and tries to guess the word mystery. He only has one attempt.\n6. **Rating**:\n- If the Devin finds the word mystery: The team wins 1 point.\n- If the Devin doesn\'t find the word mystery: 0 point.\n- If the Devin doesn\'t answer: 0 point.\n\n**Examples of invalid indices:**\n- Mystery word: \"Chat.\" Invalid indices: \"chaton\", \"feel\", \"miaou\", \"minou\".\n- Identical indices: If 2 players write \"animal\" for \"Chat\", \"animal\" is eliminated.';
+
+  @override
+  String get butDuJeuPourLes =>
+      '**Game goal**\n- For **Village**: Eliminate all Wolf-Garous, White Wolf, Malade Rat (except Mercenary if it wins).\n- For the **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Eliminate all Villagers.\n- For the **Solitaires** : Objective specific to each person (White Loup: being alone; Mercenary: Kill his target at J1; Rat Sick: contaminate all).\n- For the ** Lovers** (if Wolf + Village) : To be the only two survivors.\n\n**Draft**\nThe game alternates between phases of **night** and **day**.\n\n* Night**\n1. The game leader (the app) announces that the village is asleep.\n2. Different characters wake up in turn to use their powers:\n- **Cupidon** (first night only): Names two players who will fall in love. If they are a Wolf and a Villager, their goal changes.\n- The**Heritage** (first night only): Refers to a tester.\n- The **Seeing** wakes up and designates a player to discover his true role. (Do not detect Black Wolf infection).\n- The **Mentalist** (passive) perceives the outcome of the village vote.\n- The **Rat Malade**: Contaminates two players (who will know the others contaminated).\n- The **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - vote together) wake up, concert and designate a victim to eat.\n- The **Black Loup** can once turn the victim into an infected Loup-Garou (who keeps his powers and becomes Wolf). The Mentalist and Fossoyer can detect the infected, the Voyante no.\n- The **White Loup** (one night out of two): Despouses a player of his choice (overturns the protections).\n- Sorcery** wakes up. She sees the wolf victim and can use one of her two potions (only once per part): a potion of **healing** to save the victim, or a potion of**poisoning** to kill someone.\n- The **Pyroman** : Chooses to store a barrel of Greek fire or detonate those already placed (must be alive in the morning).\n- The **Necromancer**: May communicate with the dead.\n\n* Day**\n1. The village is waking up. The app announces who died overnight.\n2. Dead players reveal their role and are eliminated (they can no longer communicate, except the Necromank with the dead).\n- Le **Loup Bavard** : Must utter a secret word or die at sunset (unless Dictator takes power).\n3. Survivors are arguing to try to expose impostors.\n4. After the discussions, all players vote to eliminate a suspect.\n- The **Dictator** (once): Can take the vote. If he eliminates a wolf, he becomes Mayor; Otherwise, he dies.\n- The **Captain** : His vote counts double. If eliminated, he must appoint a successor before he dies.\n- The **Mercenary**: If his target is eliminated on the first day, he wins alone. Otherwise, he becomes a Villager.\n5. The player who receives the most votes is eliminated, reveals his role, and is out of the game.\n- The **Chasseur** : If he is eliminated (day and night), he has the power to bring another player with him.\n- The **Fossoyeur** : When he died, he identified two players (one from the opposite camp, one from his camp).\n- The Lovers**: If one dies, the other follows him with grief.\n- The**Heritage**: If his testator dies, he takes up his role (unless dead or contaminated).\n6. A new night begins.\n\n**Conditions of Victory**\n- **Village**: Eliminate all Wolf-Garous, White Wolf, Sick Rat.\n- **Loups-Garous** (moute): To be equal or higher in number to the Villagers.\n- **White Loup**: Being the only survivor.\n**Mercenary**: Kill his target on the first day.\n- **Rat Malade**: Contaminate all live players.\n- ** Lovers** (Loup + Village) : To be the only two survivors.\n\n**Important notes**\n- The **Chaperon Rouge** is protected by the Hunter against the Wolf-Garous while the Hunter is alive.\n- The **Garde** protects a Wolf-Garous target (cannot protect twice the same person).\n- The White Wolf\'s powers don\'t know the protections.\n- The Pyroman must be alive in the morning for its barrels to explode.';
+
+  @override
   String get loupNoir => 'Black Wolf';
 
   @override
+  String get loupBavard => 'Chatty Wolf';
+
+  @override
   String get loupBlanc => 'White Wolf';
+
+  @override
+  String get mercenaire => 'Mercenary';
 
   @override
   String get ratMalade => 'Plague Rat';
@@ -5061,6 +5338,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get petiteFille => 'Little Girl';
 
   @override
+  String get chasseur => 'Hunter';
+
+  @override
   String get garde => 'Bodyguard';
 
   @override
@@ -5070,10 +5350,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mentaliste => 'Mentalist';
 
   @override
+  String get fossoyeur => 'Gravedigger';
+
+  @override
   String get dictateur => 'Dictator';
 
   @override
+  String get chaperonRouge => 'Red Riding Hood';
+
+  @override
   String get pyromancien => 'Pyromancer';
+
+  @override
+  String get butDuJeuEtreLe1 =>
+      '**Game goal**\nBe the fastest to spot the only identical symbol between the card in the centre and its own card.\n\n**Draft (Mode \'The Infernal Tower\')**\n1. Each player receives a card face down. The rest of the cards form a Stock in the center, face visible.\n2. At first, everyone returns their card.\n3. Each player must find as quickly as possible the only symbol that is present both on his card and on the Stock Card.\n4. The first player who finds the symbol, the announcement aloud, takes the Stock card and places it on his own card.\n5. This new card becomes his card for the next round. A new map is then revealed in the centre of the Stock.\n6. The game continues until the Stock is exhausted. The player who collected the most cards at the end wins!';
+
+  @override
+  String get butDuJeuSeDebarrasser =>
+      '**Game goal**\nGet rid of all his cards by being the first!\n\n**Draft**\n1. **Distribution**: Each player receives 7 cards. The rest forms the stock. A card is returned to start the waste pile.\n2. **Play a card**: The player whose turn it is has **30 seconds** to put a card in his hand on the waste pile. The card played must match the top card of the stack by:\n* **Color** (ex: Red on Red)\n* **Number** (ex: one 7 Blue on one 7 Green)\n* **Symbol** (ex: a yellow \"+2\" on a red \"+2\")\n* **Special Card** (Joker, +4, etc.)\n3. **Piocher**: If a player cannot play a card in the allotted time, he must pick a card from the package. If he can play this card, he can do it immediately. Otherwise, his turn ends.\n4. **Special cards**:\n* **+2 (Two cards)**: The next player picks 2 cards and passes his turn.\n* **Sens Forbidden (Pass your turn)** : The next player passes his turn.\n* **Inversion (Change of meaning)**: The sense of play is reversed.\n* **Joker (Colour Change)**: The player chooses the color of the next card to play. Can be played on any card.\n* **Super Joker +4 (Colour Change and Four Cards)**: Player chooses color. Next player picks 4 cards AND passes his turn. This card can only be played if the player has NO other card of the color requested on the waste pile (unless it bluffs).\n5. **Announce \"UNO\"**: When a player has only one card in hand, he must announce \"UNO!\". If he does not do so and is taken by another player (before the next player plays or picks up), he must pick 2 cards.\n6. **End of Channel**: The handle ends when a player gets rid of his last card. Points are counted. The player who reaches 500 points (or a defined total) wins the game.\n\n**Map Points:**\n* Digital cards (0-9): Their facial value.\n* +2, Sens Forbidden, Inversion: 20 points.\n* Joker, Super Joker +4 : 50 points.';
+
+  @override
+  String get principeDuJeuLeJeu =>
+      '## Game principle\n* The game is played between **3 and 10 players**.\n* Each player gives access to a part of his/her photo library and chooses photos to share.\n* During a game, a photo is selected **randomly** from among all players, then displayed for a few seconds.\n* Players must guess **who owns the photo** displayed.\n* The player who correctly guesses the most photos wins the game.\n\n## Procedure\n1. **Selection of photos**: Each player chooses a number of photos from their gallery.\n2. **Start of the game**: Once everyone is ready, the host launches the game.\n3. **Play Tower**:\n- A random photo is shown for 5 seconds.\n- All players vote to guess the owner.\n4. **Results**: The scores are updated after each round.\n5. **End of game**: After a set number of rounds, the player with the most points wins.';
+
+  @override
+  String get butDuJeuCoulerTous =>
+      '**Game goal**\nStuck all the opponent\'s ships before he sinks yours.\n\n**Draft**\n1. **Placement**: Each player secretly places his fleet on a 10x10 grid.\n- Aircraft carriers (5 boxes)\n- Cruiser (4 boxes)\n- Submarine (3 cells)\n- Destroyer (3 boxes)\n- Patrol (2 boxes)\n2. **Tir**: In turn, players touch a box to shoot.\n3. **Result**: AppLocalizations.of(context)!.touche, \"Coulated\" or \"To water\".\n4. **Victoire**: The first player to sink the entire opposing fleet wins.';
+
+  @override
+  String get butDuJeuEtreLe2 =>
+      '**Game goal**\nBe the first to reach the target distance (1000 km by default).\n**Draft**\n- Every player gets six cards.\n- In turn, play a card (Distance, Attack, Defense, Security) or get rid of it.\n- The **Attacks** cards (Stop, Red, Essence, Crevaison, Limit) block the opponent.\n- Maps **Defenses** (Green, Extra Tank, Repair, End Limit) counter attacks.\n- The **Security** cards cancel an attack and prevent its recurrence.\n- Maps **Distance** (25, 50, 75, 100, 200 km) move your vehicle forward.\n- Pick one card at the end of your turn.';
+
+  @override
+  String get butDuJeuEtreLe3 =>
+      '**Game goal**\nBe the first to get rid of all his cards by forming valid combinations (melds).\n\n**Running of a tower**\n1. **Piocher** : Take the map from the top of the waste OR Stock.\n2. **Sale (Optional)**: Place valid combinations on the table.\n- **Sequence (Run)**: 3 or more cards of the same colour that follow (e.g. 5) The Ace can be high or low.\n- **Group (Set)**: 3 or 4 cards of the same value but of different colours (e.g. 8♥, 8\n3. **Default**: Get rid of a card from his hand on the waste.\n\n**End of handle**\nThe first player who no longer has cards after defeat wins. The others count the points of their remaining cards (Figures = 10, As = 15, others = face value). The game stops at 100 points.';
+
+  @override
+  String get butDuJeuFaireDeviner2 =>
+      '**Game goal**\nMake your team guess a maximum of words before the end of time, without using the forbidden words!\n\n**Draft**\n1. Each turn, a player (\"the speaker\") tries to make his team guess a word.\n2. The speaker should not **never** utter the word to guess, nor any of the words \"Taboo\" (no words) displayed under the target word. Nor can he use translations or words from the same family.\n3. If the speaker uses a Taboo word, the opposing team (or judge) reports the fault, the card is cancelled and the speaker moves to the next one.\n4. Each guessed word returns a point to the team.\n5. The turn ends when the time is up.\n\n**End of part**\nThe team with the most points after the number of laps defined wins!';
+
+  @override
+  String get butDuJeuAmenerVos =>
+      '**Game goal**\nBring your horses to the centre of the plateau by bypassing your opponents.\n\n**Classic rules**\n1. **Basic exit**: You have to make a **1** or a **6** to pull out a pawn.\n2. ** Bonus Tour**: Making a **6**, capturing a pawn or finishing the course allows to replay. (Warning: 3 times a 6 consecutive cancels your turn!).\n3. **Capture** : Falling on an opposing pawn returns it to its base (impossible on the protected \"Stars\" boxes or on the starting box of this player).\n4. **Arrived**: It takes an exact score to get to the final stairwell.\n\n**Team mode (2v2) **\nRequires exactly 4 players. You are allied with the player in front of you.\n- **Shared Victory**: The first team that brings a total of 4 pieces to the center wins the game (ex: 3 pieces for you and 1 for your ally).\n- **Entraide**: You can use your throw to move your ally\'s pawn, but *only* to get it out of its base (with a 1 or 6) or move it into its finish staircase.\n- **Allied blocking**: It\'s impossible to capture your partner\'s pawn. If your movement makes you land on him, the blow is invalid.';
+
+  @override
+  String get principeJeuSurrealisteDEcriture =>
+      '**Principle**\nSurrealistic collective writing game.\n**Variant**\n- Classic: Everyone writes an element of the sentence (Substantial, Adjective, Verb, etc.) without seeing the precedents.\n- Continuation: Everyone sees the last 3 words and completes the sentence.\n**Draft**\nThe leaves rotate until everyone has participated.';
+
+  @override
+  String get butDuJeuPlacerLe =>
+      '**Game goal**\nPlace most of his pieces on the set.\n**Gold rule**\nEach new piece must touch at least another piece of the same color by a corner, but never by one side.\n**Draft**\n1. The first round is played in the corner of the platter of your color.\n2. The following towers respect the golden rule.\n3. If you can\'t play anymore, you pass your turn.\n**Rating**\n-1 point per square not placed.\n+15 points if all parts are placed.\n+5 bonus points if the last piece is the single square (1x1).';
+
+  @override
+  String get objectifEtreLePremierA =>
+      '** Objective**\nBe the first to achieve the target score (20, 50 or 100 points).\n\n**Draft**\nEach player receives 7 dominoes. In turn, he must place a domino corresponding to one of the ends of the chain. Doubles are played in crosses.\n\n**Play mode**\n- **Pike**: If you can\'t play, you pick until you have a playable play.\n- **Blocked**: No picks. If you can\'t play, you pass your turn.\n- **All Five** : The first double played is the \"Spinner\" (playable on 4 sides). You score points at each stroke if the sum of the ends is a multiple of 5.\n\n**End of turn**\nIf no one can play, the trick is blocked. Players reveal their hands. The player with the least points wins the round and marks the sum of the points of the opposing hands.';
+
+  @override
+  String get objectifEtreLePremierJoueur =>
+      '** Objective**\nBe the first player to get rid of all his cards.\n\n**Rules**\n- The game is played with a 52 card game.\n- Order of cards (from lowest to highest): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Order of colours (from the weakest to the strongest): Tiles ♦ (D), Trèfles \n- The player who has the 3 of Tiles starts the game.\n\n** Combinations**\n- **Simple**: 1 map.\n- **Pair**: 2 cards of the same rank.\n- **Triple**: 3 cards of the same rank.\n- **Continued**: 5 consecutive row cards (mixed colours).\n- **Color**: 5 cards of the same color.\n- **Full**: 3 cards of one row + 2 cards of another row.\n- ** Square**: 4 cards of the same rank + 1 card of any kind.\n- **Quinte Flush**: 5 consecutive cards of the same color.\n\n**Hierarchy of combinations of 5 cards**\nFlush Quinte > Square > Full > Color > Suite.\nA combination can only be defeated by a combination of the same size and higher value.';
+
+  @override
+  String get objectifCapturerToutesLesPieces =>
+      '** Objective**\nCapture all your opponent\'s coins or block all his coins.\n**Rules**\n- Plays on an 8x8 checker, exclusively on dark boxes.\n- The pieces move diagonally in a box.\n- The catches are **mandatory** and are made by jumping over an enemy piece.\n- Several catches can be chained in one round.\n- When a room reaches the opposite row, it is promoted in \"Dame\" and can move and capture back.';
 
   @override
   String get unSubstantifExLeChat => 'a noun (e.g. the cat)';
@@ -5089,6 +5427,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unAdjectifExMort => 'an adjective (e.g. dead)';
+
+  @override
+  String get petit1 => 'Small 1';
+
+  @override
+  String get petit2 => 'Small 2';
+
+  @override
+  String get grand => 'Large';
+
+  @override
+  String get tresGrand => 'Very large';
+
+  @override
+  String get superGrand => 'Super Big';
 
   @override
   String get potionDeVieEtDe => 'Potion of life and death.';
@@ -5138,8 +5491,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Generation failed: incorrect number of cards.';
 
   @override
+  String get blancMangerCocon => 'White Eat Cocon';
+
+  @override
+  String get leRoiDesMemes => 'Meme King';
+
+  @override
   String get laPartieEstTermineeTous =>
       'The game is over: all players have disconnected.';
+
+  @override
+  String get aucun => 'None';
 
   @override
   String get nonAuthentifie => 'Not authenticated.';
@@ -5168,6 +5530,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vousDevezJouerUneCarte => 'You must play a higher card.';
+
+  @override
+  String get aGagne1 => 'He won!';
 
   @override
   String get ceNEstPasVotre => 'It\'s not your turn.';
@@ -5204,6 +5569,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get caseDejaCiblee => 'Square already targeted.';
 
   @override
+  String get aCouleTouteLaFlotte => ']} sank the entire enemy fleet!';
+
+  @override
   String get placementAutomatiqueEffectue => '⏱️ Auto-placement completed.';
 
   @override
@@ -5219,6 +5587,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get egaliteLorsDuVoteLa =>
       'Equality in voting! The Goddess of Justice must rule.';
+
+  @override
+  String get leTempsDeVoteEst => 'Voting time is over!';
+
+  @override
+  String get laPartieDeYamsCommence => 'Yahtzee game begins!';
 
   @override
   String get plusDeLancersDisponibles => 'No more rolls available.';
@@ -5264,6 +5638,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'The debate is over. The village must now vote!';
 
   @override
+  String get lesAmoureux => 'The Lovers';
+
+  @override
   String get seulsLesDeuxAmoureuxSont =>
       'Only the two lovers remain alive. Their love triumphs over all!';
 
@@ -5272,8 +5649,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'White Wolf is the last survivor! He devoured everyone.';
 
   @override
+  String get loupsGarous => 'Werewolves';
+
+  @override
   String get lesLoupsGarousSontDevenus =>
       'Werewolves are now majority and cannot lose. They won!';
+
+  @override
+  String get villageois => 'Villagers';
 
   @override
   String get toutesLesMenacesOntEte => 'All threats eliminated! Village won!';
@@ -5321,6 +5704,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'Little Girl was too curious! Wolves devour her instantly!';
 
   @override
+  String get infecte1 => 'infected';
+
+  @override
+  String get contamine => 'contaminated';
+
+  @override
   String get vousVousSentezObserveE => 'You feel watched tonight...';
 
   @override
@@ -5337,8 +5726,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lePyromancienAllumeLaMeche => 'Pyromancer ignites barrels\' fuse!';
 
   @override
+  String get leSoleilSeLeveSur => 'The sun rises over Thiercelieux...';
+
+  @override
   String get miraculeusementPersonneNAPeri =>
       'Miraculously, nobody died tonight!';
+
+  @override
+  String get motDuJour => 'word of the day';
 
   @override
   String get leDictateurSEstTrompe =>
@@ -5351,6 +5746,43 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get egaliteParfaiteLorsDuVote1 =>
       'Perfect tie in the vote. Nobody is executed today.';
+
+  @override
+  String get lAncienCapitaine => 'The former Captain';
+
+  @override
+  String get amoureux1 => 'Lovers 1';
+
+  @override
+  String get amoureux2 => 'Lovers 2';
+
+  @override
+  String get debugJoingameDemarrageDeLa =>
+      '[DEBUG joinGame] Start the transaction.';
+
+  @override
+  String get debugJoingamePartieTrouveeEt =>
+      '[DEBUG joinGame] Part found and in lobby. Data reading...';
+
+  @override
+  String get debugJoingameTransactionUpdateAppelee =>
+      '[DEBUG joinGame] Transaction.update() called with the new player list.';
+
+  @override
+  String get debugJoingameTransactionReussieRetourne =>
+      '[DEBUG joinGame] Successful transaction. Go back true.';
+
+  @override
+  String get debugJoingameLaPartieN =>
+      '[DEBUG joinGame] The game does not exist or is no longer in the lobby. Go back to false.';
+
+  @override
+  String get erreurCritiqueDansJoingame => '--- CRITICAL ERROR IN joinGame ---';
+
+  @override
+  String
+  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
+      ':AppLocalizations.of(context)! .wordcivilParts0TrimWordundercoverIA returns separate simple words';
 
   @override
   String get infiltre => 'Undercover';
@@ -5368,6 +5800,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get duellistes => 'Duelists';
 
   @override
+  String get laPartieCommenceDonnezVotre => 'Game starts! Give your clue...';
+
+  @override
   String get laPhaseDeVoteCommence => 'The voting phase begins!';
 
   @override
@@ -5378,10 +5813,34 @@ class AppLocalizationsEn extends AppLocalizations {
       'The Goddess of Justice has rendered its verdict!';
 
   @override
+  String get unNouveauTourCommence => 'A new turn begins.';
+
+  @override
   String get laVengeuseEmporteQuelquUn => 'The Avenger takes someone with her!';
 
   @override
+  String get civils => 'Civilians';
+
+  @override
+  String get imposteurs => 'Impostors';
+
+  @override
+  String get paris => 'Paris';
+
+  @override
+  String get france => 'France';
+
+  @override
+  String get capitale => 'Capital';
+
+  @override
   String get tourEiffel => 'Eiffel Tower';
+
+  @override
+  String get seine => 'Seine';
+
+  @override
+  String get ville => 'City';
 
   @override
   String get vousNePouvezPasBuzzer => 'Cannot buzz your own team.';
@@ -5444,6 +5903,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'Card not found.';
+
+  @override
+  String get aGagneLaManche => 'He won the round!';
 
   @override
   String get desDejaLancesPourCe => 'Dice already launched for this tour.';
@@ -5555,6 +6017,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unoNecessiteEntre2Et => 'Uno requires between 2 and 10 players.';
+
+  @override
+  String get laPartieDeUnoCommence => 'Uno game begins!';
 
   @override
   String get inversionA2JoueursLe =>
@@ -5723,7 +6188,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get partieNonTrouvee1 => 'Part not found';
 
   @override
+  String get trouDuCul => 'Asshole';
+
+  @override
   String get vicePresident => 'Vice President';
+
+  @override
+  String get viceTrouDuCul => 'Vice-Asshole';
+
+  @override
+  String get neutre => 'Neutral';
+
+  @override
+  String get debugPictionaryConditionRoundstateDrawing =>
+      '--- DEBUG PICTIONARY --- Condition \'roundState\' or \'guessing drawing\' is TRUE. Update database...';
 
   @override
   String get dessinateurIntrouvable => 'Drawr not found.';
@@ -5747,6 +6225,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get leDevineurNePeutPas => 'The guesser can\'t give a clue.';
+
+  @override
+  String get aaaaaaceeeeiiiinooooouuuuyy => 'ináâãäåçéêëìíïñòóôõöùúûüý ÿ';
 
   @override
   String get ceNEstPasLe => 'It\'s not time to guess.';
@@ -5779,7 +6260,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vousNePouvezPasChoisir => 'Cannot pick a color right now.';
 
   @override
+  String get erreurCritiquePlayerorderEstVide =>
+      'CRITICAL ERROR: playerorder is empty in nextRound. I can\'t go on.';
+
+  @override
   String get questionNonTrouvee => 'Question not found';
+
+  @override
+  String get quiPourraitLePlusApplocalizations1 =>
+      'Who Could More?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft';
+
+  @override
+  String get menteur => 'Liar';
 
   @override
   String get pasAssezDeJoueursPour => 'Not enough players for this fashion.';
@@ -5805,6 +6297,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get laSurenchereDoitEtreSuperieure => 'Higher bid required.';
 
   @override
+  String get applocalizationsOfContextUnjoueurEst =>
+      '] ?? AppLocalizations.of(context)!.aPlayer} is the last survivor and wins Skull!';
+
+  @override
+  String get applocalizationsOfContextUnjoueurA =>
+      '] ?? AppLocalizations.of(context)!.aPlayer} won 2 challenges and won the game!';
+
+  @override
+  String get applocalizationsOfContextUnjoueurRemporte =>
+      '] ?? AppLocalizations.of(context)!.aPlayer} wins Skull!';
+
+  @override
   String get reponseVide => 'Empty answer.';
 
   @override
@@ -5828,6 +6332,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Targeted player not found.';
 
   @override
+  String get quiPourraitLePlusApplocalizations2 =>
+      'Who Could More?AppLocalizations.of(context)!.elseIfGametypeSynonym or Banni';
+
+  @override
   String get vousNePouvezPasBannir => 'Cannot ban your own synonym!';
 
   @override
@@ -5835,6 +6343,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ceJoueurNAPas1 => 'This player did not submit an answer.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations3 =>
+      'Who Could More?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIfThe Judge';
+
+  @override
+  String get quiPourraitLePlusApplocalizations4 =>
+      'Who Could the More?AppLocalizations.of(context)!.forFinalTargetInVotesroundState';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
@@ -5846,6 +6362,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get laDescriptionLaPlusDrole => 'The funniest description was chosen!';
+
+  @override
+  String get aucuneDescriptionNAEte => 'No description was voted.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations5 =>
+      'Who Could More?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId';
 
   @override
   String get jugeIntrouvable => 'Judge not found.';
@@ -5889,6 +6412,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Raise must be at least double previous bet (or all-in).';
 
   @override
+  String get laPartieDeBeloteCommence => 'The Belote game begins!';
+
+  @override
   String get passeGeneraleAu1erTour =>
       'General pass to the first round of auctions. Start of the 2nd round!';
 
@@ -5904,6 +6430,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get passeLAnnonce => 'passes bid';
+
+  @override
+  String get laPartieDeBlokusCommence => 'Blokus game begins!';
 
   @override
   String get pieceDejaUtilisee => 'Piece already used.';
@@ -5974,7 +6503,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get piquantInsolite => '🌶️ Spicy & Quirky';
 
   @override
+  String get quiPourraitLePlusApplocalizations6 =>
+      'Who Could the More?AppLocalizations.of(context)! .who could your modegroup';
+
+  @override
   String get devineT => 'Guess T';
+
+  @override
+  String get presidente => 'President';
 
   @override
   String get chargement => 'Loading...';
@@ -5984,6 +6520,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exception => 'Exception:';
+
+  @override
+  String get debutDeLaConstructionDe =>
+      '--- THE CONSTRUCTION OF THE HIM OF VOTE \'Who Could the Most?AppLocations.of(context)!.printIsactiondependingStateTo( isActionPending)players\'] as Map<String, dynamic>?) ?? {};';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -6004,6 +6544,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get attentionLeWidgetNEst =>
       '- ATTENTION: Widget\'s gone, setState canceled.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations7 =>
+      'Who Could More?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId';
 
   @override
   String get phaseDePose => 'PLACING PHASE';
@@ -6041,6 +6585,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get undercoverLocal => 'Undercover Local';
+
+  @override
   String get toiMeme => 'yourself';
 
   @override
@@ -6068,6 +6615,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enCours => 'CURRENT: {0}';
 
   @override
+  String get gamemessagelocalizationTrContextReason =>
+      ': \"\"}\" : GameMessageLocalization.tr(context, reason),';
+
+  @override
   String get jAiLanceUnePartie2 => 'I started a game';
 
   @override
@@ -6077,7 +6628,256 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Party Game';
 
   @override
+  String get loginTitle => 'Welcome!';
+
+  @override
+  String get registerTitle => 'Join us!';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get username => 'Unique username';
+
+  @override
+  String get loginButton => 'Log In';
+
+  @override
+  String get registerButton => 'Create account';
+
+  @override
+  String get termsAcceptance =>
+      'I have read and agree to the Terms of Service and Privacy Policy.';
+
+  @override
+  String get gamesTab => 'Games';
+
+  @override
+  String get friendsTab => 'Friends';
+
+  @override
+  String get statsTab => 'Stats';
+
+  @override
+  String get loungesTab => 'Lounges';
+
+  @override
   String get createGame => 'Create a game';
+
+  @override
+  String get joinGame => 'Join';
+
+  @override
+  String get gameCode => 'Game code (6 digits)';
+
+  @override
+  String get startGame => 'Start game';
+
+  @override
+  String get leaveGame => 'Leave game';
+
+  @override
+  String get rules => 'Rules';
+
+  @override
+  String get level => 'Level';
+
+  @override
+  String get coins => 'Coins';
+
+  @override
+  String get gameOver => 'Game Over!';
+
+  @override
+  String get victory => 'Victory!';
+
+  @override
+  String get defeat => 'Defeat';
+
+  @override
+  String get nextRound => 'Next Round';
+
+  @override
+  String get onboardingWelcome => 'Welcome';
+
+  @override
+  String get onboardingSkip => 'Pass';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingStart => 'Let\'s Go! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Play with Friends';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Choose from over 30 party, card and board games. Play locally, with friends, or worldwide!';
+
+  @override
+  String get onboardingSlide2Title => 'Earn Coins & Unlock Badges';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Earn XP with every win, level up, and unlock exclusive achievements to customize your profile.';
+
+  @override
+  String get onboardingSlide3Title => 'Create or Join in Seconds';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'A 6-digit code is all it takes to gather your friends, or jump into fast matchmaking with live players.';
+
+  @override
+  String get vipPass => 'VIP Pass';
+
+  @override
+  String get vipActive => 'Your VIP Pass is active!';
+
+  @override
+  String get vipActiveDesc =>
+      'All features (AI, Lounges, Video, Matchmaking) are unlimited.';
+
+  @override
+  String get choosePlan => 'Choose your plan:';
+
+  @override
+  String get restorePurchases => 'Restore purchases';
+
+  @override
+  String get purchasesRestored => 'Purchases restored successfully!';
+
+  @override
+  String get noPurchasesFound => 'No active purchases found.';
+
+  @override
+  String get monthlySubscription => 'Monthly Subscription';
+
+  @override
+  String get annualSubscription => 'Annual Subscription';
+
+  @override
+  String get lifetimeAccess => 'Lifetime Access';
+
+  @override
+  String get popularTag => 'POPULAR';
+
+  @override
+  String get chooseButton => 'Choose';
+
+  @override
+  String get vipCongratulations => 'Congratulations, you are VIP!';
+
+  @override
+  String get purchaseFailed => 'Purchase not completed.';
+
+  @override
+  String get profileTitle => 'Profile & Settings';
+
+  @override
+  String get profileNotFound => 'Profile not found or player does not exist.';
+
+  @override
+  String get tabStats => 'Statistics';
+
+  @override
+  String get tabBadges => 'Badges & Achievements';
+
+  @override
+  String get tabSettings => 'Settings';
+
+  @override
+  String get gamesPlayed => 'Games played';
+
+  @override
+  String get gamesWon => 'Wins';
+
+  @override
+  String get winRate => 'Win rate';
+
+  @override
+  String get soundEffects => 'Sound effects';
+
+  @override
+  String get music => 'Music';
+
+  @override
+  String get editUsername => 'Change username';
+
+  @override
+  String get newUsernameHint => 'New username';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
+  String get deleteAccount => 'Delete account';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Are you sure you want to permanently delete your account?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get modeLocal => 'Local';
+
+  @override
+  String get modeMulti => 'Online';
+
+  @override
+  String get modeMonde => 'World';
+
+  @override
+  String get searchGame => 'Search for a game...';
+
+  @override
+  String get filterAll => 'All games';
+
+  @override
+  String get createLounge => 'Create a lounge';
+
+  @override
+  String get joinLounge => 'Join a lounge';
+
+  @override
+  String get loungeCode => 'Lounge code';
+
+  @override
+  String get publicLounges => 'Public lounges';
+
+  @override
+  String get noLoungesAvailable => 'No public lounges available at the moment.';
+
+  @override
+  String get playersCount => 'Players';
+
+  @override
+  String get howToPlay => 'How to play?';
+
+  @override
+  String get copiedToClipboard => 'Copied to clipboard!';
+
+  @override
+  String get connectionError => 'Connection error. Please try again.';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get success => 'Success!';
 
   @override
   String pasAssezDeSymbolesUniques1(
@@ -7119,5 +7919,61 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String aRelanceLesDes2(Object pName, Object val) {
     return '0  restarted the dice (  1  /3). $pName $val';
+  }
+
+  @override
+  String jAiLanceUnePartie3(Object _selectedGame) {
+    return 'J\'ai lancé une partie de $_selectedGame !';
+  }
+
+  @override
+  String rolesJoueurs1(Object selectedRolesCount, Object playerslength) {
+    return 'Rôles ($selectedRolesCount) ≠ Joueurs ($playerslength).';
+  }
+
+  @override
+  String dessineCettePhrase1(Object stepToProcessconte) {
+    return 'Dessine cette phrase :\n\"$stepToProcessconte\"';
+  }
+
+  @override
+  String aEteBanniPourSa1(Object loserName, Object loserAnswer) {
+    return '$loserName a été banni pour sa proposition \'$loserAnswer\' !';
+  }
+
+  @override
+  String aTrouveLeMot2(Object winnerName, Object currentWord) {
+    return '$winnerName a trouvé le mot : \'$currentWord\' !';
+  }
+
+  @override
+  String personneNATrouveLe1(Object currentWord) {
+    return 'Personne n\'a trouvé le mot : \'$currentWord\'.';
+  }
+
+  @override
+  String aTrouveLeMot3(Object guesserName, Object currentWord) {
+    return '$guesserName a trouvé le mot : \'$currentWord\' !';
+  }
+
+  @override
+  String get revolution1 => '(Révolution !)';
+
+  @override
+  String tonMotEst2(Object _wordCivil) {
+    return 'Your word is: $_wordCivil';
+  }
+
+  @override
+  String tonMotEst3(Object _wordUndercover) {
+    return 'Your word is: $_wordUndercover';
+  }
+
+  @override
+  String get egalite1 => 'Tie!';
+
+  @override
+  String jAiLanceUnePartie4(Object datagameTypeGribou) {
+    return 'J\'ai lancé une partie de $datagameTypeGribou !';
   }
 }

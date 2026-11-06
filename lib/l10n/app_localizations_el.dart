@@ -30,7 +30,25 @@ class AppLocalizationsEl extends AppLocalizations {
   String get confirmerLesEquipes => 'Επιβεβαίωση ομάδων';
 
   @override
+  String get jeuDeSoiree => 'Παιχνίδι πάρτι';
+
+  @override
+  String get multijoueurEnLigne => 'Πολλαπλοί παίκτες (Online)';
+
+  @override
+  String get modeLocalHorsLigne => 'Τοπική λειτουργία (Εκτός σύνδεσης)';
+
+  @override
+  String get modeMultijoueur => 'Λειτουργία για πολλούς παίκτες';
+
+  @override
   String get entrezVotrePseudo => 'Εισάγετε το ψευδώνυμό σας';
+
+  @override
+  String get pseudo => 'Ψευδώνυμο';
+
+  @override
+  String get creerUnePartie => 'Δημιουργία παιχνιδιού';
 
   @override
   String get veuillezEntrerUnPseudo => 'Παρακαλώ εισάγετε ένα ψευδώνυμο.';
@@ -985,6 +1003,10 @@ class AppLocalizationsEl extends AppLocalizations {
       '⚠️ Αλυσιδωτό φάγωμα! Πρέπει να παίξετε το πιόνι που αναβοσβήνει.';
 
   @override
+  String get aSelectionneSonPionEt =>
+      '{0} έχει επιλέξει το πιόνι του και σκέφτεται...';
+
+  @override
   String get vousDevezSelectionnerLePion =>
       'Πρέπει να επιλέξετε το πιόνι με την πορτοκαλί επισήμανση.';
 
@@ -1002,10 +1024,10 @@ class AppLocalizationsEl extends AppLocalizations {
       'Αναμονή οικοδεσπότη για έναρξη επόμενου γύρου...';
 
   @override
-  String get equipeAPts => 'Ομάδα Α: {βαθμοί} βαθμοί';
+  String get equipeAPts => 'Ομάδα Α: {βαθμοί} βαθμοί {pts}';
 
   @override
-  String get equipeBPts => 'Ομάδα Β: {βαθμοί} βαθμοί';
+  String get equipeBPts => 'Ομάδα Β: {βαθμοί} βαθμοί {pts}';
 
   @override
   String get cEstAToiDe => 'Είναι η σειρά ΣΟΥ να μαντέψεις!';
@@ -1093,7 +1115,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get couche => 'Πήγε πάσο';
 
   @override
-  String get miseActuelle => 'Τρέχον ποντάρισμα: {ποσό}';
+  String get miseActuelle => 'Τρέχον ποντάρισμα: {ποσό} {amount}';
 
   @override
   String get enAttente => 'Σε αναμονή...';
@@ -1404,7 +1426,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get classementFinal1 => 'Τελική κατάταξη';
 
   @override
-  String pt(Object eValueKey, Object eValueValue, Object p, Object p2) {
+  String pt(Object p, Object eValueKey, Object eValueValue, Object p2) {
     return '$p. $eValueKey: $eValueValue π.$p2';
   }
 
@@ -1460,6 +1482,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get cloturerLeVote => 'Κλείσιμο ψηφοφορίας';
 
   @override
+  String get k0S => '0 δευτ';
+
+  @override
   String get tempsRestantS => 'Χρόνος που απομένει: {0} s';
 
   @override
@@ -1469,10 +1494,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get lancerLeDe => 'ΡΙΞΤΕ ΤΟ ΖΑΡΙ';
 
   @override
-  String get scorePoints => 'Σκορ: {σκορ} πόντους';
+  String get scorePoints => 'Σκορ: {σκορ} πόντους {score}';
 
   @override
-  String get dominosRestants => 'Εναπομείναντα ντόμινο: {μέτρηση}';
+  String get dominosRestants => 'Εναπομείναντα ντόμινο: {μέτρηση} {count}';
 
   @override
   String get impossibleDeJouerCeDomino =>
@@ -1488,7 +1513,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get extremites => 'Άκρα: ';
 
   @override
-  String get pioche2 => 'Ισοπαλία : {Count}';
+  String get pioche2 => 'Ισοπαλία : {count}';
 
   @override
   String get piocher => 'Τράβηξε';
@@ -1505,7 +1530,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get clic => 'ΚΛΙΚ';
 
   @override
-  String get lancersRestants => 'Εναπομείνασες ρίψεις: {Μετρήστε}';
+  String get lancersRestants => 'Εναπομείνασες ρίψεις: {Μετρήστε} {count}';
 
   @override
   String get combinaison => 'ΣΥΝΔΥΑΣΜΟΣ';
@@ -1514,7 +1539,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get grilleDePts => 'ΠΛΕΓΜΑ {0} ({1} πόντοι)';
 
   @override
-  String pts3(Object myTotal, Object p) {
+  String pts3(Object p, Object myTotal) {
     return '$p ($myTotal πόντοι)';
   }
 
@@ -1545,7 +1570,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get carteAPrendre => 'ΚΑΡΤΑ ΠΡΟΣ ΛΗΨΗ';
 
   @override
-  String get votreMain => 'Το χέρι σας ({μετράει})';
+  String get votreMain => 'Το χέρι σας ({μετράει}) {count}';
 
   @override
   String get touchezUneCartePourLa => 'Αγγίξτε μια κάρτα για να την παίξετε';
@@ -1555,7 +1580,7 @@ class AppLocalizationsEl extends AppLocalizations {
       'Δεν υπάρχουν συνδυασμοί στο τραπέζι ακόμα';
 
   @override
-  String get etaler => 'Εξάπλωση ({μετράει})';
+  String get etaler => 'Εξάπλωση ({μετράει}) {count}';
 
   @override
   String get defausserFin => 'Απόρριψη & Τέλος';
@@ -2643,7 +2668,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get tapisVide => 'Άδειο ταμπλό';
 
   @override
-  String get reflechit => '{όνομα} σκέφτεται...';
+  String get ecrireAu => 'Γράψτε στο {0}...';
+
+  @override
+  String get reflechit => '{όνομα} σκέφτεται... {name}';
 
   @override
   String get faceAFaceCoteA => 'Πρόσωπο με πρόσωπο (δίπλα-δίπλα)';
@@ -2655,7 +2683,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get prendreLAtoutOuPasser => 'ΠΑΡΤΕ ΤΟ ΑΤΟΥ Η ΠΑΣΟ:';
 
   @override
-  String get combinaisonsDe => 'Συνδυασμοί {ονόματος}';
+  String get combinaisonsDe => 'Συνδυασμοί {ονόματος} {name}';
 
   @override
   String get ilDevraDonnerLePremier => 'Θα πρέπει να δώσει το πρώτο στοιχείο';
@@ -2679,17 +2707,12 @@ class AppLocalizationsEl extends AppLocalizations {
   String get understoodButton => 'Καταλαβαίνω';
 
   @override
-  String skyjoRoundEnderNotice(Object name, Object roundEnderName) {
+  String skyjoRoundEnderNotice(Object name) {
     return 'Ο/Η $name αποκάλυψε πρώτος/η όλες τις κάρτες του/της.';
   }
 
   @override
-  String skyjoRoundScoreNotice(
-    Object roundScore,
-    Object totalScore,
-    Object rScore,
-    Object tScore,
-  ) {
+  String skyjoRoundScoreNotice(Object roundScore, Object totalScore) {
     return '+$roundScore αυτόν τον γύρο  •  Σύνολο: $totalScore πόντοι';
   }
 
@@ -2713,37 +2736,32 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String skyjoCardsRevealedCount(Object count, Object revealedCount) {
+  String skyjoCardsRevealedCount(Object count) {
     return '$count / 2 κάρτες γυρισμένες';
   }
 
   @override
-  String ceTurnOfPlayer(Object name, Object currentPlayerName) {
+  String ceTurnOfPlayer(Object name) {
     return 'ΣΕΙΡΑ ΤΟΥ/ΤΗΣ $name';
   }
 
   @override
-  String ceStepOfTotal(
-    Object step,
-    Object total,
-    Object currentRound,
-    Object totalSteps,
-  ) {
+  String ceStepOfTotal(Object step, Object total) {
     return 'Βήμα $step / $total';
   }
 
   @override
-  String ceVisibleSnippetOf(Object name, Object previousAuthorName) {
+  String ceVisibleSnippetOf(Object name) {
     return 'Ορατό απόσπασμα από $name:';
   }
 
   @override
-  String cePlayerWriting(Object name, Object currentPlayerName) {
+  String cePlayerWriting(Object name) {
     return 'Ο/Η $name γράφει...';
   }
 
   @override
-  String ceStoryNumber(Object index, Object paperIndex) {
+  String ceStoryNumber(Object index) {
     return 'ΙΣΤΟΡΙΑ #$index';
   }
 
@@ -2763,10 +2781,21 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String get dobbleAllCardsFound => 'Όλες οι κάρτες βρέθηκαν!';
+
+  @override
   String get dobbleDealingCards => 'Μοίρασμα καρτών...';
 
   @override
   String get dobbleCenterCard => 'ΚΕΝΤΡΙΚΗ ΚΑΡΤΑ';
+
+  @override
+  String dobbleDeckCards(Object count) {
+    return 'ΙΣΟΠΑΛΙΑ ($count κάρτες)';
+  }
+
+  @override
+  String get dobbleTapSameSymbol => 'Βρείτε το ίδιο σύμβολο!';
 
   @override
   String dobbleMyCardsCount(Object count) {
@@ -2780,6 +2809,13 @@ class AppLocalizationsEl extends AppLocalizations {
   String get dobbleTooManyErrors => 'Πολλά γρήγορα λάθη.';
 
   @override
+  String get dobblePenaltyWait => 'Περιμένετε το πέναλτι!';
+
+  @override
+  String get dobbleWrongSymbolWarning =>
+      'Κακό σύμβολο! Προσοχή στο μπλοκάρισμα.';
+
+  @override
   String dobbleFoundSymbol(Object name) {
     return 'Ο/Η $name βρήκε το σύμβολο!';
   }
@@ -2788,37 +2824,32 @@ class AppLocalizationsEl extends AppLocalizations {
   String get dobbleSymbolWas => 'Το σύμβολο ήταν:';
 
   @override
-  String pokerPot(Object amount, Object pot) {
+  String pokerPot(Object amount) {
     return 'Ποτ: $amount \\\$';
   }
 
   @override
-  String pokerRaiseAlert(
-    Object name,
-    Object amount,
-    Object previewAmount,
-    Object previewPlayerName,
-  ) {
+  String pokerRaiseAlert(Object name, Object amount) {
     return '⚠️ Ο/Η $name ετοιμάζει αύξηση στα $amount \\\$!';
   }
 
   @override
-  String pokerCall(Object amount, Object callAmount) {
+  String pokerCall(Object amount) {
     return 'Call ($amount)';
   }
 
   @override
-  String unoYouMustDraw(Object count, Object pendingDraw) {
+  String unoYouMustDraw(Object count) {
     return 'Πρέπει να τραβήξετε $count κάρτες!';
   }
 
   @override
-  String unoMustDraw(Object count, Object name, Object pendingDraw) {
+  String unoMustDraw(Object count) {
     return 'Πρέπει να τραβήξει $count κάρτες!';
   }
 
   @override
-  String unoDrawCountCards(Object count, Object pendingDraw) {
+  String unoDrawCountCards(Object count) {
     return 'Τραβήξτε $count κάρτες';
   }
 
@@ -2832,9 +2863,21 @@ class AppLocalizationsEl extends AppLocalizations {
   String get codenamesBlueTeam => 'Μπλε Ομάδα';
 
   @override
+  String get codenamesSpectator => 'Θεατής';
+
+  @override
+  String get codenamesMasterSpy => 'Αρχικατάσκοπος';
+
+  @override
+  String get codenamesAgent => 'Πράκτορας';
+
+  @override
   String codenamesTeamTurn(Object team) {
     return 'Είναι η σειρά της ομάδας: $team';
   }
+
+  @override
+  String get codenamesYouAre => 'Είστε: ';
 
   @override
   String get codenamesMasterSpyView => 'Προβολή Αρχικατασκόπου (Κάρτα-Κλειδί)';
@@ -2875,12 +2918,12 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String timesUpTeamAScore(Object score, Object scoreA, Object teamA) {
+  String timesUpTeamAScore(Object score) {
     return 'Ομάδα Α: $score';
   }
 
   @override
-  String timesUpTeamBScore(Object score, Object scoreB, Object teamB) {
+  String timesUpTeamBScore(Object score) {
     return 'Ομάδα Β: $score';
   }
 
@@ -3007,6 +3050,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get petitBacAddCategory => 'Προσθήκη κατηγορίας';
 
   @override
+  String get petitBacMinOneCategory => 'Χρειάζεστε τουλάχιστον μία κατηγορία!';
+
+  @override
   String get petitBacValidateCategories => 'Επιβεβαίωση κατηγοριών';
 
   @override
@@ -3015,10 +3061,17 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String get petitBacWaitingForBell =>
+      'Το σεντόνι επέστρεψε! Περιμένοντας το κουδούνι...';
+
+  @override
   String get petitBacIFinished => 'Τελείωσα! (Να σταματήσει)';
 
   @override
   String get petitBacCorrection => 'ΔΙΟΡΘΩΣΗ';
+
+  @override
+  String get petitBacGameOverReason => 'Το παιχνίδι του Little Bac τελείωσε!';
 
   @override
   String presidentGivesTo(Object from, Object to) {
@@ -3034,8 +3087,15 @@ class AppLocalizationsEl extends AppLocalizations {
   String get actionPendingMsg => 'Η ενέργειά σας καταγράφεται...';
 
   @override
+  String get monAnimalPrefere => 'Το αγαπημένο μου ζώο';
+
+  @override
   String get unJoueurEstDesigneComme =>
       'Ένας παίκτης ορίζεται ως «στόχος». Οι άλλοι παίκτες απαντούν ανώνυμα σε μια ερώτηση σχετικά με αυτούς. Ο στόχος επιλέγει την απάντηση που προτιμά και ο συντάκτης αυτής της απάντησης κερδίζει έναν πόντο.';
+
+  @override
+  String get uneSituationEstPresenteeTous =>
+      ': \r\n        «Παρουσιάζεται μια κατάσταση. Όλοι οι παίκτες ψηφίζουν το άτομο που είναι πιο πιθανό να κάνει αυτό το πράγμα. Ο παίκτης που λαμβάνει τις περισσότερες ψήφους κερδίζει έναν πόντο (αμφίβολη τιμή!).»,    ';
 
   @override
   String get modeClassiqueUneQuestionEst =>
@@ -3162,6 +3222,9 @@ class AppLocalizationsEl extends AppLocalizations {
       'Στόχος του είναι να νικήσει τους Λυκάνθρωπους μέχρι να λάβει έναν νέο ρόλο. Την πρώτη νύχτα, ορίζει έναν διαθέτη που θα του κληροδοτήσει τον ρόλο του μετά το θάνατό του. Ο Κληρονόμος ανακτά μόνο τις δυνάμεις που δεν καταναλώθηκαν από τον διαθέτη του (το φίλτρο της μάγισσας, η κατάληψη της εξουσίας από τον Δικτάτορα κ.λπ.), εκτός από τον Κυνηγό και τον Νεκροθάφτη. Δεν ανακτά τη μόλυνση (Μαύρος Λύκος) ή τη μόλυνση (Άρρωστος Αρουραίος) από τον διαθέτη του. Διατηρεί τη μόλυνση ή τη μόλυνση που είχε στη βάση. Εάν κληρονομήσει τις δυνάμεις ενός Λυκάνθρωπου, οι άλλοι λύκοι ενημερώνονται ότι εντάσσεται στην αγέλη. Εάν κληρονομήσει τις δυνάμεις ενός Δικτάτορα που πεθαίνει τη νύχτα του πραξικοπήματος του, θα εναπόκειται στον Κληρονόμο να αναλάβει τις συνέπειες και να πραγματοποιήσει το πραξικόπημα μόλις ξυπνήσει.';
 
   @override
+  String get touche => 'Προσγείωση';
+
+  @override
   String get unVillageoisSansPouvoirSpecial =>
       'Ένας χωρικός χωρίς ειδική δύναμη.';
 
@@ -3247,7 +3310,22 @@ class AppLocalizationsEl extends AppLocalizations {
   String get themeIa => 'Θέμα AI';
 
   @override
+  String get caseLabel => ': \r\n      Κουτί ';
+
+  @override
   String get generalEtVarie => 'Γενικά και ποικίλα';
+
+  @override
+  String get unDinosaureQuiMangeUne => 'Ένας δεινόσαυρος τρώει ένα παγωτό';
+
+  @override
+  String get pouvoirVolerOuEtreInvisible =>
+      'Να μπορείς να πετάς ή να είσαι αόρατος';
+
+  @override
+  String returnGenereDesSituationsCourtes(Object finalPrompt) {
+    return ': \r\n        επιστροφή \"Δημιουργεί σύντομες καταστάσεις ξεκινώντας με μια ενέργεια. Θέμα: $finalPrompt\"; \r\n      Κουτί ';
+  }
 
   @override
   String get abandonTousLesJoueursDeconnectes =>
@@ -3257,7 +3335,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get tousLesJoueursSeSont => 'Όλοι οι παίκτες έχουν αποσυνδεθεί';
 
   @override
-  String nAPasJoueA(Object actionDetails, Object playerName) {
+  String nAPasJoueA(Object playerName, Object actionDetails) {
     return '⏱️ $playerName δεν έπαιξε εγκαίρως. Ο υπολογιστής έπαιξε για αυτόν ($actionDetails).';
   }
 
@@ -3281,7 +3359,7 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String aTireDansLEau(Object opponentDataname, Object shooterDataname) {
+  String aTireDansLEau(Object shooterDataname, Object opponentDataname) {
     return '🌊 Ο/Η $shooterDataname πυροβόλησε στο νερό. Σειρά του/της $opponentDataname.';
   }
 
@@ -3301,12 +3379,16 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String aGardeLeDeDe(Object dieVal, Object index1, Object pName) {
+  String get aRelanceLesDes3 =>
+      '{pName} ξαναέριξαν τα ζάρια ({3rollsLeft1}/3)!';
+
+  @override
+  String aGardeLeDeDe(Object pName, Object dieVal, Object index1) {
     return 'Ο/Η $pName κράτησε το ζάρι αξίας $dieVal (ζάρι #$index1) 🔒';
   }
 
   @override
-  String aDebloqueLeDe(Object index1, Object pName) {
+  String aDebloqueLeDe(Object pName, Object index1) {
     return 'Ο/Η $pName ξεκλείδωσε το ζάρι #$index1';
   }
 
@@ -3350,6 +3432,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get pioche3 => 'Αξίνα';
 
   @override
+  String get wordcivilParts0TrimWordundercover =>
+      '); \r\n      wordCivil = μέρη[0].trim(); \r\n      wordUndercover = μέρη[1].trim(); \r\n    \'\'}\' άλλο \'\'{\' \r\n      Ασφάλεια κατά των διπλότυπων: εάν το';
+
+  @override
   String get vousNAvezPasDe => 'Δεν έχεις λόγια';
 
   @override
@@ -3387,15 +3473,19 @@ class AppLocalizationsEl extends AppLocalizations {
   String get verite1 => 'ΑΛΗΘΕΙΑ';
 
   @override
-  String aLePlusDXp(Object maxXp, Object playerswinnerIdnameJoueur) {
+  String aLePlusDXp(Object playerswinnerIdnameJoueur, Object maxXp) {
     return '$playerswinnerIdnameJoueur έχει τα περισσότερα XP ($maxXp XP) και γίνεται Διαχειριστής!';
   }
+
+  @override
+  String get finDeMancheBoutonAdmin =>
+      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  End of Sleeve (κουμπί διαχειριστή)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async \'\'{\' \r\n    περιμένετε _db.runTransaction((συναλλαγή) async\'\'{\' \r\n      τελικό gameRef = _db.collection(\'games\').doc(gameCode); \r\n      τελικό snap = αναμονή συναλλαγής.get(gameRef); \r\n      αν (!snap.exists) επιστροφή; \r\n\r\n      final gameData = snap.data() ως Map<String, dynamic>; \r\n      τελικοί παίκτες = Χάρτης<Συμβολοσειρά, dynamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Καθορίστε τον νικητή (περισσότερα XP)\r\n      Συμβολοσειρά winnerId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        τελικό xp = (pData[\'xp\'] ως αριθμός?)?. toInt() ?? 0; \r\n        αν (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Κάποιος';
 
   @override
-  String aAtteintPointsEtRemporte(Object targetScore, Object winnerName) {
+  String aAtteintPointsEtRemporte(Object winnerName, Object targetScore) {
     return '$winnerName έφτασε τους $targetScore πόντους και κέρδισε το παιχνίδι!';
   }
 
@@ -3412,7 +3502,7 @@ class AppLocalizationsEl extends AppLocalizations {
       'Όλοι οι γύροι του Time\'s Up ολοκληρώθηκαν!';
 
   @override
-  String gagneAvecPoints(Object maxScore, Object playerswinnerIdnameUnjoueur) {
+  String gagneAvecPoints(Object playerswinnerIdnameUnjoueur, Object maxScore) {
     return 'Ο/Η $playerswinnerIdnameUnjoueur κερδίζει με $maxScore πόντους!';
   }
 
@@ -3445,7 +3535,18 @@ class AppLocalizationsEl extends AppLocalizations {
   String get leJoueur => 'Ο παίκτης';
 
   @override
+  String get listStringQuestionsAiwordpoolGamewords =>
+      ') \'\'{\' \r\n      Λίστα <Συμβολοσειρά> ερωτήσεις =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[δυσκολία] ?? \r\n          GameWords.whoIsMostLikely[';
+
+  @override
   String get honnete => 'Τίμιος';
+
+  @override
+  String get pairSplit => ') ? pair.split(';
+
+  @override
+  String get pairPairListStringShuffledroles =>
+      '): [ζυγός, ζυγός]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        Συμβολοσειρά secUndercoverId = shuffledRoles[0]; \r\n        Συμβολοσειρά secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Ερώτηση =\r\n            «Περιγράψτε τη μυστική σας λέξη με μια λέξη. Απατεώνες, μπλόφα!». \r\n        for (var pId στο players.keys) \'\'{\' \r\n          Συμβολοσειρά pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3465,6 +3566,22 @@ class AppLocalizationsEl extends AppLocalizations {
   String get passeLEnchere => 'πάσο στην προσφορά';
 
   @override
+  String get elseIfGametype =>
+      ') \'\'{\' \r\n        if (voterId == votedForId) { \r\n          ρίζω Εξαίρεση(«Επίσημη απαγόρευση να ψηφίζει κανείς τον εαυτό του!»); \r\n        }\'\'}\' αλλιώς αν (gameType ==\r\n      ';
+
+  @override
+  String get intRequiredvotesPlayersLengthIf =>
+      ') { \r\n        creditPlayerXp( \r\n          συναλλαγή, \r\n          gameRef, \r\n          gameData, \r\n          εκλογέας, \r\n          5, \r\n          applySpeedBonus: true, \r\n        ); \r\n      } \r\n\r\n      int requiredVotes = παίκτες.μήκος; \r\n\r\n      αν (gameType == ';
+
+  @override
+  String get forFinalTargetInVotes =>
+      ') \'\'{\' \r\n          τελικός χάρτης<συμβολοσειρά, int> voteCounts = {}; \r\n          για (τελικός στόχος σε ψήφους.τιμές) { \r\n            voteCounts[στόχος ως συμβολοσειρά] = (voteCounts[στόχος] ?? 0) + 1; \r\n          } \r\n\r\n          int maxΨήφοι = 0; \r\n          Λίστα<Συμβολοσειρά> topVote = []; \r\n          voteCounts.forEach((στόχος, καταμέτρηση) \'\'{\' \r\n            if (καταμέτρηση > maxVotes) { \r\n              maxVotes = καταμέτρηση; \r\n              topVote = [στόχος]; \r\n            } αλλιώς αν (count == maxVotes) { \r\n              topVoted.add(στόχος); \r\n            }\'\'}\'); \r\n\r\n          ενημερώσεις[\r\n          ';
+
+  @override
+  String get forFinalTargetInVotes1 =>
+      ') \'\'{\' \r\n        τελικός χάρτης<συμβολοσειρά, int> voteCounts = {}; \r\n        για (τελικός στόχος σε ψήφους.τιμές) { \r\n          voteCounts[στόχος ως συμβολοσειρά] = (voteCounts[στόχος] ?? 0) + 1; \r\n        } \r\n\r\n        int maxΨήφοι = 0; \r\n        Λίστα<Συμβολοσειρά> topVote = []; \r\n        voteCounts.forEach((στόχος, καταμέτρηση) \'\'{\' \r\n          if (καταμέτρηση > maxVotes) { \r\n            maxVotes = καταμέτρηση; \r\n            topVote = [στόχος]; \r\n          } αλλιώς αν (count == maxVotes) { \r\n            topVoted.add(στόχος); \r\n          }\'\'}\'); \r\n\r\n        αν (topVoted.length == 1) \'\'{\' \r\n          τελικός νικητής = topVoted.first; \r\n          ενημερώσεις[\r\n        ';
+
+  @override
   String aRemporteTousLesJetons(Object winnerName) {
     return '$winnerName κερδίσει όλες τις μάρκες στο τραπέζι!';
   }
@@ -3476,6 +3593,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String carte1(Object cardToPlay) {
     return 'φύλλο $cardToPlay';
   }
+
+  @override
+  String get quipourraitvotemode =>
+      '? _quiPourraitVoteMode\r\n                      : ';
 
   @override
   String get localIndisponibleVideoAudioActif =>
@@ -3551,7 +3672,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get completerAvecLIa15 => 'Συμπλήρωση με AI (+15 λέξεις)';
 
   @override
-  String completeCetteListeSurLe(Object join, Object text) {
+  String completeCetteListeSurLe(Object text, Object join) {
     return 'Συμπληρώστε αυτήν τη λίστα για το θέμα $text. Υπάρχουσες λέξεις: $join';
   }
 
@@ -3847,10 +3968,15 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String printEtatDeIsactionpendingAu(Object _isActionPending) {
+    return ' ---\", \r\n    ); \r\n    print(\"Αρχική _isActionPending κατάσταση: $_isActionPending\"); \r\n\r\n    τελικοί παίκτες = (gameData[';
+  }
+
+  @override
   String get erreurQuestionNonTrouvee => 'Σφάλμα: Η ερώτηση δεν βρέθηκε.';
 
   @override
-  String str95d36e(Object key0, Object valuename) {
+  String str95d36e(Object valuename, Object key0) {
     return '$valuename: $key0';
   }
 
@@ -3921,10 +4047,18 @@ class AppLocalizationsEl extends AppLocalizations {
   String get uneDescriptionHilarante => 'μια ξεκαρδιστική λεζάντα';
 
   @override
+  String get extrainfoColumnChildrenText =>
+      '; \r\n          extraInfo = Στήλη( \r\n            Παιδιά: [ \r\n              Κείμενο( \r\n                \'';
+
+  @override
   String get unProblemeEstSurvenu => 'Παρουσιάστηκε πρόβλημα.';
 
   @override
-  String str98e212(Object count, Object isFull, Object length, Object pName) {
+  String get defaultFinalRoundwinneridGamedata =>
+      ': \r\n      Προεπιλογή: \r\n        τελικός γύροςWinnerId = gameData[';
+
+  @override
+  String str98e212(Object pName, Object count, Object length, Object isFull) {
     return '$pName: $count/$length$isFull';
   }
 
@@ -3969,6 +4103,10 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String get styleConstTextstyleColorColors =>
+      ', \r\n                  στυλ: const TextStyle(χρώμα: Colors.white70), \r\n                ), \r\n                ΜέγεθοςΚουτί (ύψος: 20), \r\n                Wrap( \r\n                  στοίχιση: WrapAlignment.center, \r\n                  Παιδιά: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                ΜέγεθοςΚουτί (ύψος: 20), \r\n                αν (justOneFilteredClues.isEmpty)\r\n                  Κείμενο( \r\n                    AppLocalizations.of(πλαίσιο)!. allCluesHave Been, \r\n                    στυλ: const TextStyle(χρώμα: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        \'\'}\' άλλο \'\'{\' \r\n          Είναι στο χέρι του μάντη να παίξει\r\n          return Column( \r\n            Παιδιά: [ \r\n              Κείμενο(                ';
+
+  @override
   String strf0868c(Object length0, Object valuescore0) {
     return '$length0: $valuescore0';
   }
@@ -3998,8 +4136,16 @@ class AppLocalizationsEl extends AppLocalizations {
   String get laVictime => 'Το θύμα';
 
   @override
+  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
+      '; \r\n            centerActionWidget = Σειρά( \r\n              mainAxisSize: MainAxisSize.min, \r\n              Παιδιά: [ \r\n                _buildActionButton( \r\n                  ετικέτα: AppLocalizations.of(context)!. μολύνω, \r\n                  εικονίδιο: Icons.auto_fix_high, \r\n                  χρώμα: Colors.purpleAccent, \r\n                  onΠατημένο: () \'\'{\' \r\n                    Provider.of<PlayerState>( \r\n                      πλαίσιο, \r\n                      ακούω: λάθος, \r\n                    ).recordBadgeEvent(\'lg_loup_noir_infect\'); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameΚώδικας, \r\n                      αναγνωριστικό παίκτη, \r\n                      Αλήθεια, \r\n                    ); \r\n                  \'\'}\', \r\n                ), \r\n                const SizedBox (πλάτος: 8), \r\n                _buildActionButton( \r\n                  ετικέτα: AppLocalizations.of(context)!. καταβροχθίζω, \r\n                  εικονίδιο: Icons.close, \r\n                  χρώμα: Colors.redAccent, \r\n                  onΠατήθηκε: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameΚώδικας, \r\n                        αναγνωριστικό παίκτη, \r\n                        ψευδής, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          \'\'}\' \r\n          στέισον βάγκον; \r\n        θέση «loup_blanc_turn»: \r\n          promptText = ';
+
+  @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Κανένα θύμα χθες το βράδυ (προστατευμένο ή γλίτωσε)';
+
+  @override
+  String get styleTextstyleFontweightFontweightBold =>
+      ', \r\n                              style: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                Χρώμα: \r\n                                    isMine\r\n                                        ? Χρώματα.κυανόΈμφαση\r\n                                        : (_selectedChatType == \'λύκος\' \r\n                                            ? Χρώματα.κόκκινοΈμφαση.απόχρωση100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(κείμενο: μήνυμα), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  \'\'}\', \r\n                ); \r\n              \'\'}\', \r\n            ), \r\n          ), \r\n\r\n          Συμπαγής μπάρα αποστολής\r\n          αν (canSendMessage)\r\n            Σειρά( \r\n              Παιδιά: [ \r\n                Expanded( \r\n                  παιδί: SizedBox( \r\n                    ύψος: 32, \r\n                    child: TextField( \r\n                      ελεγκτής: _chatController, \r\n                      στυλ: const TextStyle(fontSize: 12, χρώμα: Colors.white), \r\n                      διακόσμηση: InputDecoration( \r\n                        hintΚείμενο: \r\n                            AppLocalizations.of(πλαίσιο)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          χρώμα: Colors.white30, \r\n                          μέγεθος γραμματοσειράς: 11, \r\n                        ), \r\n                        border: ΠερίγραμμαInputBorder( \r\n                          borderRadius: Ακτίνα περιγράμματος.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        συμπληρώθηκε: αληθές, \r\n                        fillColor: Χρώματα.λευκό.μεΑδιαφάνεια(0,08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          οριζόντια: 10, \r\n                          κάθετη: 0, \r\n                        ), \r\n                      ), \r\n                      στιςΥποβλήθηκε: (κείμενο) \'\'{\' \r\n                        αν (text.trim().isNotEmpty) { \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameΚώδικας, \r\n                            αναγνωριστικό παίκτη, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        }\'\'}\', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox (πλάτος: 4), \r\n                IconButton( \r\n                  icon: const Icon( \r\n                    Icons.send_rounded, \r\n                    μέγεθος: 18, \r\n                    χρώμα: Colors.cyanAccent, \r\n                  ), \r\n                  συμπλήρωση: EdgeInsets.zero, \r\n                  constraints: const BoxConstraints(), \r\n                  onΠατημένο: () \'\'{\' \r\n                    αν (_chatController.text.trim().isNotEmpty) { \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameΚώδικας, \r\n                        αναγνωριστικό παίκτη, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    }\'\'}\', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  \'\'}\' \r\n\r\n  Widget _buildChatTab(Ετικέτα συμβολοσειράς, Τύπος συμβολοσειράς, Χρώμα activeColor) { \r\n    τελικός bool isSelected = _selectedChatType == τύπος; \r\n    επιστροφή GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = τύπος), \r\n      παιδί: Δοχείο( \r\n        padding: const EdgeInsets.symmetric(οριζόντια: 8, κάθετη: 3), \r\n        διακόσμηση: BoxDecoration( \r\n          Χρώμα: \r\n              ΕπιλέχθηκεΕπιλέχθηκε\r\n                  ? activeColor.withOpacity(0,25)\r\n                  : Χρώματα.λευκό.μεΑδιαφάνεια(0,04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            Χρώμα: \r\n                isSelected ? activeColor.withOpacity(0.6) : Χρώματα.διαφανές, \r\n          ), \r\n        ), \r\n        child: Κείμενο( \r\n          ετικέτα, \r\n          style: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: είναι επιλεγμένο; FontWeight.bold: FontWeight.normal, \r\n            color: είναι επιλεγμένο ? activeColor : Χρώματα.λευκό60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  } \r\n\r\n  --- ΕΝΗΜΕΡΩΜΈΝΟ AVATAR ΓΙΑ ΝΑ ΤΟ ΚΆΝΕΤΕ ΔΙΑΔΡΑΣΤΙΚΌ--- \r\n\r\n  Γραφικό στοιχείο _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'{\' \r\n    αν (startTime == null) return const SizedBox.shrink(); \r\n\r\n    Το TweenAnimationBuilder επιτρέπει ένα εξαιρετικά ομαλό οπτικό χρονόμετρο χωρίς να μπλοκάρει το χρονόμετρο και τη χειροκίνητη ρύθμισηΚατάσταση, που ελαφρύνει πολύ το νήμα (Σημείο 4)\r\n    final endTime = startTime.toDate().add( \r\n      Διάρκεια(δευτερόλεπτα: durationInSeconds), \r\n    ); \r\n    τελικό υπόλοιπο = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(πλαίσιο)!. k0S, \r\n        στυλ: Theme.of( \r\n          πλαίσιο, \r\n        ).textTheme.headlineSmall?. copyWith(χρώμα: Colors.redAccent), \r\n      ); \r\n\r\n    επιστροφή TweenAnimationBuilder<Διάρκεια>( \r\n      διάρκεια: υπολειπόμενη, \r\n      tween: Tween(αρχή: υπόλοιπο, τέλος: Διάρκεια.μηδέν), \r\n      builder: (Περιβάλλον BuildContext, Τιμή διάρκειας, Γραφικό στοιχείο; παιδί) { \r\n        τελικά δευτερόλεπτα = value.inSeconds; \r\n        return Text( \r\n          AppLocalizations.of(πλαίσιο)!. timeRemaining, \r\n          style: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            Χρώμα: δευτερόλεπτα < 20 ? Χρώματα.κόκκινοΈμφαση: Χρώματα.κεχριμπάριΈμφαση, \r\n          ), \r\n        ); \r\n      }, \r\n    ); \r\n  \'\'}\' \r\n\r\n  _buildPetitsChevauxUI( \r\n    Περιβάλλον BuildContext, \r\n    Χάρτης<Συμβολοσειρά, δυναμική> gameData, \r\n    Συμβολοσειρά playerId, \r\n  ) \'\'{\' \r\n    τελικοί παίκτες = Χάρτης<Συμβολοσειρά, dynamic>.from(gameData[\'players\'] ?? {}); \r\n    τελικός παίκτηςOrder = Λίστα<Συμβολοσειρά>.from( \r\n      gameData[\'littleHorsesPlayerOrder\'] ?? [], \r\n    ); \r\n    τελικές θέσεις = Map<String, dynamic>.from( \r\n      gameData[\'littleHorsesPositions\'] ?? {}, \r\n    ); \r\n    final int currentIndex = gameData[\'smallHorsesCurrentIndex\'] ?? 0; \r\n    τελική συμβολοσειρά currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: \'; \r\n    τελικό bool isMyTurn = currentPlayerId == playerId; \r\n    final int ζάρια = (gameData[\'littleHorsesDice\'] ως αριθμός?)?. toInt() ?? 0; \r\n    τελικός bool hasRoll = gameData[\'littleHorsesHasRolled\'] ?? ψευδής; \r\n    τελικό bool isTeamMode = gameData[\'smallTeamHorses\'] ?? ψευδής; \r\n    τελικός χάρτης<συμβολοσειρά, δυναμική> διαδοχικήSixes = Χάρτης<Συμβολοσειρά, δυναμική>.from( \r\n      gameData[\'smallHorsesConsecutiveSixes\'] ?? {}, \r\n    ); \r\n    final int mySixStreak = διαδοχικάSixes[playerId] ?? 0; \r\n\r\n    Μοντέρνα παλέτα νέον / Arcade σε σκούρο φόντο\r\n    τελική λίστα<χρώμα> playerColors = [ \r\n      const Color(0xFFEF4444), // Νέον Κόκκινο\r\n      const Color(0xFF38BDF8), // Νέον μπλε του ουρανού\r\n      const Color(0xFF10B981), // Σμαραγδένιο Πράσινο\r\n      const Color(0xFFF59E0B), // Χρυσό Κεχριμπάρι\r\n    ]; \r\n\r\n    --- ΟΘΌΝΗ ΝΊΚΗΣ--- \r\n    if (gameData[\'gameState\'] == \'gameOver\') \'\'{\' \r\n      επιστροφή UniversalGameEndScreen( \r\n        gameTitle:\r\n                      \r\n                  ';
 
   @override
   String get arriveeAuCentreDuPlateau => 'Άφιξη στο κέντρο του ταμπλό!';
@@ -4015,7 +4161,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get chevalSelectionneNtouchezPourAvancer =>
-      'Άλογο {πιόνι} επιλεγεί!\\nΠατήστε για να προχωρήσετε';
+      'Άλογο {πιόνι} επιλεγεί!\\nΠατήστε για να προχωρήσετε {pawn}';
 
   @override
   String get touchezUnPion => 'Αγγίξτε ένα πιόνι';
@@ -4035,12 +4181,12 @@ class AppLocalizationsEl extends AppLocalizations {
   String get lancerLesDes => 'Ρίξε τα ζάρια';
 
   @override
-  String k1663(Object oppBonus035, Object oppUpper) {
+  String k1663(Object oppUpper, Object oppBonus035) {
     return '1-6: $oppUpper/63 $oppBonus035';
   }
 
   @override
-  String k16631(Object myBonus035, Object myUpper) {
+  String k16631(Object myUpper, Object myBonus035) {
     return '1-6: $myUpper/63 $myBonus035';
   }
 
@@ -4073,6 +4219,10 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get choisirUnJeu => 'Επιλέξτε παιχνίδι';
+
+  @override
+  String get screenWhoismostlikelylocalscreenPlayersPlayersBreak =>
+      ': \r\n        screen = WhoIsMostLikelyLocalScreen(παίκτες: _players); \r\n        στέισον βάγκον; \r\n      Κουτί ';
 
   @override
   String get generation => 'Δημιουργία...';
@@ -4123,6 +4273,10 @@ class AppLocalizationsEl extends AppLocalizations {
       'ΚΕΡΔΙΣΕΣ! Το μυστικό σου είναι ασφαλές.';
 
   @override
+  String get wordcivilParts0TrimWordundercover1 =>
+      '); \r\n      _wordCivil = μέρη[0].trim(); \r\n      _wordUndercover = μέρη[1].trim(); \r\n    \'\'}\' άλλο \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? ζεύγη λέξεων[idx + 1].trim()\r\n              : \"{trim} (Παραλλαγή)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    για (παίκτης VAR στο _activePlayers) \'\'{\' \r\n      αν (παίκτης == μυστικός) \'\'{\' \r\n        _playerRoles[παίκτης] = \"Εισβολέας\"; \r\n      \'\'}\' αλλιώς αν (παίκτης == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[παίκτης] = \"Mr. White\"; \r\n      \'\'}\' άλλο \'\'{\' \r\n        _playerRoles[παίκτης] = \"Εμφύλιος\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  άκυρο _nextPlayerReveal \'\'{\' \r\n    αν (_currentPlayerRevealIndex < _activePlayers.μήκος - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } άλλο { \r\n      setState(() => _gameState = UndercoverGameState.συζητώντας); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(String player) \'\'{\' \r\n    Ρόλος συμβολοσειράς = _playerRoles[παίκτης]!; \r\n    bool impostorsWin = ρόλος == \"Εμφύλιος\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.αποτέλεσμα; \r\n      if (impostorsWin) \'\'{\' \r\n        _resultMessage = \"{player} ήταν Πολίτης! Οι Απατεώνες κερδίζουν!\"; \r\n      \'\'}\' άλλο \'\'{\' \r\n        _resultMessage = \"{player} ήταν το\r\n    \r\n  ';
+
+  @override
   String get requiert4Joueurs => 'Απαιτούνται 4+ παίκτες';
 
   @override
@@ -4132,6 +4286,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String genereDesCategoriesAmusantesPour(Object trim) {
     return 'Δημιουργήστε διασκεδαστικές κατηγορίες για την καυτή πατάτα. Θέμα: $trim';
   }
+
+  @override
+  String get bodyPaddingPaddingConstEdgeinsets =>
+      '), \r\n          ), \r\n        ], \r\n      ), \r\n      σώμα: Padding( \r\n        συμπλήρωση: const EdgeInsets.all(16.0), \r\n        child: Στήλη( \r\n          Παιδιά: [ \r\n            αν (_phase != LocalWhoIsPhase.results) ... [ \r\n              ΦΙΛΤΡΟ ΔΥΣΚΟΛΙΑΣ\r\n              SegmentedButton<String>( \r\n                Τμήματα: [ \r\n                  ButtonSegment( \r\n                    αξία: ';
 
   @override
   String get egalite1PtChacun => 'Ισοπαλία! (+1 πόντος στον καθένα)';
@@ -4313,8 +4471,8 @@ class AppLocalizationsEl extends AppLocalizations {
   String get auMoins5JoueursRequis => 'Απαιτούνται τουλάχιστον 5 παίκτες.';
 
   @override
-  String rolesJoueurs(Object playersLength, Object selectedRolesCount) {
-    return 'Ρόλοι ( $selectedRolesCount )';
+  String rolesJoueurs(Object selectedRolesCount, Object playersLength) {
+    return 'Ρόλοι ( $selectedRolesCount ) $playersLength';
   }
 
   @override
@@ -4577,8 +4735,8 @@ class AppLocalizationsEl extends AppLocalizations {
   String get leTourEstTermine => 'Τελείωσε!';
 
   @override
-  String aEteBanniPourSa(Object loserAnswer, Object loserName) {
-    return 'Το $loserName απαγορεύτηκε για την πρότασή του \' $loserAnswer \'!';
+  String aEteBanniPourSa(Object loserName, Object loserAnswer) {
+    return 'Το $loserName απαγορεύτηκε για την πρότασή του \'  \'! $loserAnswer';
   }
 
   @override
@@ -4596,17 +4754,17 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String aTrouveLeMot(Object winnerName) {
-    return '$winnerName βρήκε τη λέξη: \' 99999\'!';
+    return '$winnerName βρήκε τη λέξη: \' 99999\'! ';
   }
 
   @override
   String personneNATrouveLe(Object currentWord) {
-    return 'Κανείς δεν βρήκε τη λέξη: \' $currentWord \'.';
+    return 'Κανείς δεν βρήκε τη λέξη: \' {currentWord} \'.';
   }
 
   @override
   String aTrouveLeMot1(Object guesserName) {
-    return '$guesserName βρήκε τη λέξη: \' 99999\'!';
+    return '$guesserName βρήκε τη λέξη: \' 99999\'! ';
   }
 
   @override
@@ -4633,12 +4791,17 @@ class AppLocalizationsEl extends AppLocalizations {
   String get leTourEstTermine1 => 'Ο γύρος ολοκληρώθηκε.';
 
   @override
+  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
+    return '$winnerName κέρδισε με την περιγραφή του:App Localizations.of(context)!. extrainfoColumnChildText 99999 $winningDescription';
+  }
+
+  @override
   String get personneNAGagneCe =>
       'Κανείς δεν κέρδισε αυτόν τον γύρο. Ισοπαλία ή καμία λεζάντα.';
 
   @override
-  String aTrouveLeSymboleIl(Object commonSym, Object winnerName) {
-    return 'Το $winnerName 9 βρήκε το σύμβολο 99999! Κερδίζει την κάρτα.';
+  String aTrouveLeSymboleIl(Object winnerName, Object commonSym) {
+    return 'Το $winnerName 9 βρήκε το σύμβολο 99999! Κερδίζει την κάρτα. $commonSym';
   }
 
   @override
@@ -4678,6 +4841,19 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get score => 'Βαθμολογία';
+
+  @override
+  String applocalizationsOfContextStyleconsttextstylecolorcolors(
+    Object value,
+    Object guesserName,
+    Object value2,
+    Object deckIndex,
+    Object deckTotal,
+    Object value3,
+    Object totalScore,
+  ) {
+    return '$value $guesserName :Εφαρμογή Τοπικοποιήσεων.του(κείμενο)! .styleConstTextstyleΧρώμα χρώμα $value2 $deckIndex / $deckTotal — $value3 : $totalScore';
+  }
 
   @override
   String get laNuitTombeSurLe =>
@@ -4746,6 +4922,14 @@ class AppLocalizationsEl extends AppLocalizations {
   String get leLoupNoirDecideDu => 'Ο Μαύρος Λύκος αποφασίζει για το θήραμα';
 
   @override
+  String
+  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
+    Object targetName,
+  ) {
+    return 'Μόλυνση $targetName ?App Localizations.of(context)!.centeractionwidgetRowMainaxisizeMainaxisizeMinThe White Wolf strikes solo';
+  }
+
+  @override
   String get choisissezUneVictimeADevorer => 'Διάλεξε ένα θύμα για κατασπάραξη';
 
   @override
@@ -4802,6 +4986,14 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get amoureux => 'Ερωτευμένοι';
+
+  @override
+  String
+  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
+    Object senderName,
+  ) {
+    return '$senderName : Applocalizations.of(context)!.styleTextstyleFontweightFontweightBoldΜικρά άλογα';
+  }
 
   @override
   String get courseIndividuelle => 'Ατομικός αγώνας';
@@ -4915,7 +5107,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String tuEs(Object role) {
-    return 'Είστε: 99999';
+    return 'Είστε: 99999 $role';
   }
 
   @override
@@ -4935,6 +5127,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String commeConvenuTuCommences(Object mrWhitePlayer) {
     return '$mrWhitePlayer , όπως συμφωνήσαμε, ξεκινάς!';
   }
+
+  @override
+  String get quiPourraitLePlusApplocalizations =>
+      'Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft';
 
   @override
   String get votePar => 'Ψηφίστηκε από: {0}';
@@ -5031,11 +5227,17 @@ class AppLocalizationsEl extends AppLocalizations {
   String get partieDeEnAttente => 'Μέρος του {0}';
 
   @override
+  String get termine => 'Τερμάτισε: {0}';
+
+  @override
+  String get vainqueur2 => 'Νικητής:';
+
+  @override
   String get joueurSPretS => 'Έτοιμο(-α) παίκτη(-ων)';
 
   @override
   String code(Object value) {
-    return 'Κωδικός: 99999';
+    return 'Κωδικός: 99999 $value';
   }
 
   @override
@@ -5070,6 +5272,28 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get indicesMontresA => 'Δείκτες που εμφανίζονται στο';
+
+  @override
+  String get playersWinneridname => 'Νικητής παικτώνidname';
+
+  @override
+  String get packageSensorsPlusSensorsPlus =>
+      'πακέτο:αισθητήρες συν/αισθητήρες συν.dart';
+
+  @override
+  String get supabaseUploadEchecDefinitif =>
+      '--- [Ανέβασμα βάσης] ΟΡΙΣΤΙΚΟ ---';
+
+  @override
+  String get erreurSupabaseStorageexception =>
+      '--- ΣΦΑΛΜΑ ΥΠΟΣΤΗΡΙΞΗΣ (αποθήκευση) ---';
+
+  @override
+  String get erreurInattendueLorsDeL =>
+      '--- ΠΡΟΣΑTTΜΟΓΗ ΣΦΑΛΜΑΤΟΣ ΣΤΟ ΠΛΑΙΣΙΟ ---';
+
+  @override
+  String get timeSUp1 => 'Τέλος χρόνου.';
 
   @override
   String get marquesDeVoiture => 'Μάρκες αυτοκινήτων';
@@ -5132,10 +5356,68 @@ class AppLocalizationsEl extends AppLocalizations {
   String get marquesDeVetements => 'Μάρκες ρούχων';
 
   @override
+  String get butDuJeuEtreLe =>
+      '** Γκολ παιχνιδιού **\nΓίνε ο παίκτης με τους περισσότερους πόντους στο τέλος του παιχνιδιού.\n\n**Σχέδιο **\n1. Κάθε παίκτης λαμβάνει **7 κάρτες απάντησης ** στο χέρι.\n2. Ένας παίκτης ονομάζεται **Juge ** (ο ρόλος γυρίζει σε κάθε γύρο).\n3. Ο Δικαστής διαβάζει το ** ερωτηματικό ** δυνατά.\n4. Όλοι οι ** άλλοι παίκτες ** επιλέγουν κρυφά **1 κάρτα απάντησης ** από το χέρι τους και την υποβάλλουν.\n5. Ο δικαστής διαβάζει όλες τις απαντήσεις και ορίζει ** το πιο αστείο **.\n6. Ο νικητής του γύρου σκορ **1 βαθμός**.\n7. Κάθε παίκτης ** Poche ** μια νέα κάρτα για να επιστρέψει στο 7.\n8. Ο ρόλος του δικαστή περνά στον επόμενο παίκτη.\n\n** Σημαντικοί κανόνες **\n- Ο δικαστής δεν παίζει χαρτιά στη σειρά του.\n- Οι απαντήσεις είναι **ανώνυμο **: ο δικαστής δεν ξέρει ποιος έγραψε τι.\n- Μπορούμε να παίξουμε μόνο ένα χαρτί** ανά λαβή.';
+
+  @override
+  String get objectifPrenezDesCartesPour =>
+      '** Στόχος **\nΠάρτε τα χαρτιά για να δημιουργήσετε ζευγάρια που ταιριάζουν. Αποφύγετε να είστε ο παίκτης που κρατά την κάρτα Zombie στο τέλος του παιχνιδιού.\n**Σχέδιο **\n1. Το παιχνίδι ξεκινά με 33 κάρτες (16 ζεύγη + 1 κάρτα ζόμπι).\n2. Οι κάρτες διανέμονται στους 4 παίκτες.\n3. Κάθε στροφή ένας παίκτης παίρνει ένα χαρτί από τον επόμενο παίκτη.\n4. Αν η κάρτα δημιουργήσει ένα ζευγάρι, αυτόματα ηττάται.\n5. Το χέρι του παίκτη είναι μικτό.\n6. Ο πρώτος παίκτης που δεν έχει πλέον κερδίσει τα χαρτιά.\n7. Ο υπόλοιπος παίκτης με την κάρτα ζόμπι έχασε!';
+
+  @override
+  String get butDuJeuObtenirLe =>
+      '** Γκολ παιχνιδιού **\nΠάρτε την υψηλότερη βαθμολογία συμπληρώνοντας 13 κατηγορίες με 5 ζάρια.\n\n**Τρέξιμο ενός πύργου **\n1. **Lance**: Μπορείτε να πετάξετε τα 5 ζάρια μέχρι 3 φορές ανά στροφή.\n2. ** Κρατήστε **: Μετά την 1η ή 2η throwψη, μπορείτε να κρατήσετε μερικά ζάρια και να επανεκκινήσετε άλλα.\n3. **Score**: Μετά από τουλάχιστον μία throwψη, θα πρέπει να επιλέξετε μια κατηγορία για να σκοράρετε. Κάθε κατηγορία μπορεί να χρησιμοποιηθεί μόνο μία φορά ανά μέρος.\n\n**Κατηγορία **\n- **Όσον αφορά το Έξι **: Άθροισμα των αντίστοιχων ζάρια. (Βαθμός 35 βαθμοί εάν το ανώτερο τμήμα ανέρχεται σε 63 βαθμούς ή περισσότερο).\n- **Brelan ** (3 ή περισσότερα πανομοιότυπα ζάρια): Το άθροισμα όλων των ζαριών.\n- ** Πλατεία ** (4 ή περισσότερα πανομοιότυπα ζάρια): Το άθροισμα όλων των ζαριών.\n- **Full** (3 ζάρια πανομοιότυπα + 1 ζεύγος): 25 πόντοι.\n- ** Μικρή Σουίτα ** (4 συνεχόμενα ζάρια): 30 πόντοι.\n- **Large Suite ** (5 συνεχόμενα ζάρια): 40 πόντοι.\n- **Yams ** (5 ζάρια πανομοιότυπα): 50 πόντοι.\nΤο άθροισμα όλων των ζαριών.';
+
+  @override
+  String get objectifNePasAvoirL =>
+      '** Στόχος **\nΜην έχετε τη συσκευή στα χέρια σας όταν η πατάτα εκραγεί!\n\n**Σχέδιο **\n1. Ένα θέμα εμφανίζεται στην οθόνη.\n2. Ο παίκτης που κρατά τη συσκευή πρέπει να δώσει μια απάντηση που αντιστοιχεί στο θέμα.\n3. Μόλις απάντησε, πέρασε γρήγορα το αεροπλάνο στον πλησίον του.\n4. Ο γείτονας πρέπει με τη σειρά του να βρει μια νέα απάντηση και να περάσει τη συσκευή.\n5. Ο χρόνος είναι κρυμμένος και τυχαίος: η πατάτα μπορεί να εκραγεί ανά πάσα στιγμή!\n6. Ο παίκτης που κρατά τη συσκευή κατά τη στιγμή της έκρηξης χάνει τη λαβή και λαμβάνει μια υπόσχεση.';
+
+  @override
+  String get principeGeneralGribouillisEstUn =>
+      '** Γενική αρχή **\nΤο Gribouillis είναι ένα παιχνίδι ζωγραφικής εμπνευσμένο από το \"αραβικό τηλέφωνο\", όπου οι ιδέες αλλάζουν σε κάθε στάδιο. Υπάρχουν 3 τρόποι παιχνιδιού:\n\n**1. Κανονική λειτουργία (Αραβικό Εικονογραφημένο Τηλέφωνο) **\nΚάθε παίκτης γράφει μια πρόταση.\n- **Drawing**: Κάθε παίκτης λαμβάνει άλλη πρόταση και την τραβάει.\n- **Devinette ** : Κάθε παίκτης λαμβάνει ένα σχέδιο και μαντεύει τι αντιπροσωπεύει.\n- Εντάξει. Το παιχνίδι εναλλάσσει το σχέδιο και την εικασία μέχρι ο καθένας \"album\" έχει πάει γύρω από όλους τους παίκτες.\n- Ναι, αλλά... Διασκεδάστε βλέποντας πώς μια απλή πρόταση μετατρέπεται σε κάτι εντελώς διαφορετικό!\n\n**2. Τρόπος συμπλήρωσης (συνεργατικό σχέδιο) **\n- **Κρόκις **: Κάθε παίκτης ξεκινά ένα απλό σχέδιο.\n- **Πλήρης**: Κάθε παίκτης λαμβάνει το σχέδιο του άλλου και πρέπει να το εμπλουτίσει, χωρίς να διαγράφει ό,τι υπάρχει ήδη.\n- ** Εναλλακτική **: Το σχέδιο πηγαίνει από παίκτη σε παίκτη, ο καθένας προσθέτει το άγγιγμα του.\n- **Παράμετρο \"Προσθέστε 1\"*:\n- * Αν απενεργοποιηθεί (προκαθορισμένο) *: Είναι μια χορδή. Το σχέδιο εξελίσσεται σε κάθε στάδιο (Player A -> Player B -> Player C...).\n- * Αν ενεργοποιηθεί *: Το αρχικό σχέδιο του κάθε παίκτη ολοκληρώνεται από όλους τους άλλους παίκτες, δημιουργώντας αρκετά συλλογικά έργα παράλληλα.\n- ** Αλλά **: Δημιουργήστε εκπληκτικά και διασκεδαστικά συλλογικά έργα τέχνης.\n\n**3. Brise-Glace Mode (Δημιουργική αλληλεπίδραση) **\n- ** Writing**: Κάθε παίκτης γράφει ένα προσωπικό θέμα (ex: Applocalizations.of(context)!.myPreference).\n- **Drawing**: Κάθε παίκτης λαμβάνει τα θέματα από ** όλους τους άλλους παίκτες ** και πρέπει να τα σχεδιάσει.\n- **But** : Ιδανικό για να σπάσει ο πάγος, να ανακαλύψει τα γούστα των άλλων και να ξεκινήσει τη δημιουργικότητα με ένα συνεργατικό και ελαφρύ τρόπο.';
+
+  @override
+  String get yzObjectifAvoirLeMoins =>
+      'Στόχος\n\nΈχετε όσο το δυνατόν λίγους πόντους στο τέλος του παιχνιδιού.\nΤο παιχνίδι σταματά όταν ένας παίκτης φτάσει τους 100 πόντους ή περισσότερο, και ο νικητής είναι αυτός με το χαμηλότερο συνολικό σκορ.\n\nΕξοπλισμός\n\n150 κάρτες αριθμημένες από –2 έως +12\n\nΕφαρμογή\n\nΑνακατέψτε όλα τα χαρτιά.\nΚάθε παίκτης λαμβάνει 12 φύλλα, τοποθετούνται ανοιχτά μπροστά του, σε 4 στήλες × 3 σειρές.\nΤα άλλα φύλλα σχηματίζουν μια στοίβα. Επιστρέψτε το πρώτο φύλλο για να σχηματίσετε το σωρό.\nΚάθε παίκτης επιστρέφει 2 φύλλα της επιλογής του από τα 12 του.\n\nΗ πορεία μιας ξενάγησης\n\nΜε τη σειρά σας, έχετε **30 δευτερόλεπτα ** για να επιλέξετε μεταξύ δύο ενεργειών:\n\n1. Πάρτε το φύλλο απορριμμάτων\nΠρέπει να το ανταλλάξετε με μία από τις 12 κάρτες σας (ορατή ή κρυφή πλευρά).\nΗ αντικαταστάτρια κάρτα πάει στα σκουπίδια.\n\n2. Piocher ένα φύλλο ανοιχτό προς τα κάτω\nΚοίτα το χάρτη:\n- είτε να το κρατήσετε και να αντικαταστήσετε μία από τις κάρτες σας (όπως παραπάνω),\n- είτε το αρνείστε → το τοποθετείτε απευθείας στο σωρό, και σε αυτή την περίπτωση πρέπει να επιστρέψετε ένα από τα φύλλα σας ακόμα κρυμμένα.\n\nΕιδικοί κανόνες\n\nΤρία όμοια φύλλα σε μια στήλη → ηττώνται αμέσως (τιμή 0).\n\nΤέλος λαβής:\n\nΗ λαβή τελειώνει όταν ένας παίκτης έχει αποκαλύψει όλα τα χαρτιά του.\nΣτη συνέχεια, όλοι οι άλλοι παίκτες αποκαλύπτουν τα υπόλοιπα χαρτιά τους. Το χερούλι τελείωσε.\nΌλοι οι παίκτες μετρούν το άθροισμα των καρτών τους.\n\nΠαρακαλείστε να σημειώσετε: αν ο παίκτης που τερματίζει δεν έχει το χαμηλότερο σκορ στον γύρο, παίρνει πέναλτι +10 πόντους (το χερούλι του διπλασιάζεται στην αρχική έκδοση, θα χρησιμοποιήσουμε +10 για να απλοποιήσουμε).\n\nΤέλος του παιχνιδιού\n\nΠαίζουμε όσα μανίκια χρειαζόμαστε.\nΜόλις ένας παίκτης φτάσει τους 100 πόντους ή περισσότερο, το παιχνίδι σταματά.\nΟ παίκτης με το χαμηλότερο σωρευτικό σκορ κερδίζει.';
+
+  @override
+  String get iAReglesDuPoker =>
+      'Στόχος\n\nΚερδίστε τις μάρκες από άλλους παίκτες έχοντας:\n- το καλύτερο φύλλο 5 φύλλων κατά τη σφαγή,\n- ή κάνοντάς τους να εγκαταλείψουν (να κοιμηθούν) χάρη στα στοιχήματα.\n\nΤαξινόμηση χεριών (από δυνατότερο σε ασθενέστερο)\n\n1. Ρουαγιάλ: 10 – V – D – R – A του ίδιου χρώματος\n2. Μπουτιά: 5 κάρτες που ακολουθούν το ένα το άλλο, ίδιο χρώμα\n3. Τετράγωνο: 4 πανομοιότυπες κάρτες\n4. Πλήρης: 3 πανομοιότυπες κάρτες + 1 ζεύγος\n5. Χρώμα (χρώμα): 5 φύλλα του ίδιου χρώματος (μη συνεχές)\n6. Επόμενο (πέμπτο): 5 κάρτες που ακολουθούν το ένα το άλλο (διαφορετικά χρώματα)\n7. Brelan: 3 ίδιες κάρτες\n8. Διπλό ζευγάρι\n9. Ζευγάρι\n10. Υψηλότερη κάρτα (υψηλότερη κάρτα αν κανείς δεν παίρνει καλύτερα)\n\nð\n\n1. Τυφλοί\nΟ παίκτης στα αριστερά του ντίλερ βάζει το μικρό τυφλό.\nΟ επόμενος παίκτης βάζει το μεγάλο τυφλό.\n\n2. Διανομή\nΚάθε παίκτης λαμβάνει 2 κλειστά φύλλα (το \"ιδιωτικές κάρτες\").\n\n3. Πύργοι πλειστηριασμού και κοινές κάρτες\n- Προκαταρκτικό: κόλπο στοιχήματος με ιδιωτικές κάρτες.\n- 3 κοινοί χάρτες αποκαλύφθηκαν. Καινούρια στοιχήματα.\n- Ο 4ος κοινός χάρτης αποκαλύφθηκε. Καινούρια στοιχήματα.\n- Ο 5ος και τελευταίος κοινός χάρτης αποκαλύφθηκε. Τελευταίο στοίχημα.\n\n4. Σκοποβολή (showdown)\nΑν μείνουν αρκετοί παίκτες, ο καθένας δείχνει το παιχνίδι του.\nΟ καλύτερος συνδυασμός των 5 καρτών (μεταξύ των 2 ιδιωτικών καρτών + των 5 κοινοτήτων) κερδίζει το pot.\n\nΠιθανές ενέργειες\n\nΜε τη σειρά του, ένας παίκτης έχει **30 δευτερόλεπτα ** για:\nΜην στοιχηματίσεις τίποτα, μόνο αν κανείς δεν ποντάρει ξανά.\nΒάλε μερικά πατατάκια στην κατσαρόλα.\n- Ακολουθείστε (Call): ίσο με το τρέξιμο.\n- Επανεκκίνηση (Raise): αύξηση του στοιχήματος.\n- Πήγαινε για ύπνο, άσε τα χαρτιά του και φύγε.\n\nΤέλος του παιχνιδιού\n\nΤο παιχνίδι συνεχίζεται όσο παραμένουν τουλάχιστον 2 παίκτες με μάρκες.\nΟ τελικός νικητής είναι αυτός που παίρνει όλες τις μάρκες.';
+
+  @override
+  String get butDuJeuGagnerLe =>
+      '** Γκολ παιχνιδιού **\nΚερδίστε τα περισσότερα XP με την εκτέλεση δράσεων και την απάντηση στις αλήθειες!\n\n**Σχέδιο **\n1. Η ρουλέτα είναι ο παίκτης του οποίου η σειρά είναι.\n2. Ο παίκτης πυροβολεί \" Δράση\" ή \"Βεωρικότητα\".\n3. Κλασική λειτουργία: Εμφανίζεται μια τυχαία πρόκληση/ερώτηση.\n4. Λειτουργία δικαστή: Ένας τυχαίος παίκτης γράφει την πρόκληση, τότε ο παίκτης το συνειδητοποιεί.\n5. Άλλοι παίκτες επικυρώνουν με ψηφοφορία Ναι/Όχι.\n6. Το ποσοστό επικύρωσης καθορίζει το XP που κέρδισε.\n\n** Ειδικοί κανόνες **\n- 100% επικύρωση = μέγιστη XP\n- Ο παίκτης με τα περισσότερα XP γίνεται διαχειριστής του παιχνιδιού\n- Το κουμπί \" Τέλος της λαβής\" επιτρέπει το κλείσιμο του τμήματος';
+
+  @override
+  String get butDuJeuLeBut =>
+      '** Γκολ παιχνιδιού **\nΟ στόχος είναι να είναι ο πρώτος που θα ξεφορτωθεί όλες τις κάρτες του για να γίνει Πρόεδρος. Ο τελευταίος παίκτης με τα χαρτιά στο χέρι γίνεται ο Μαλάκας.\n\n**Υλικό και Παίκτες **\n- **Χάρτης **: 52 κάρτες.\n3-6 παίκτες.\n\n** Αξία κάρτας **\nΗ σειρά των χαρτιών, από τους πιο αδύναμους μέχρι τους πιο δυνατούς, είναι:\n**3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2.**\nΤο **2 ** είναι το ισχυρότερο φύλλο και μπορεί να νικήσει οποιαδήποτε άλλη κάρτα ή συνδυασμό.\n\n** Χειρουργική λειτουργία **\n1. **Διανομή **: Όλες οι κάρτες κατανέμονται εξίσου μεταξύ των παικτών.\n2. ** Πρώτος γύρος **:\n- Για το πρώτο παιχνίδι, ο παίκτης που κατέχει το **3 του Trèfle (Πρέπει να παίξει αυτό το χαρτί (μόνο ή με άλλους 3).\n- Για τα επόμενα μανίκια, ξεκινά ο τροχός **Αξιολόγηση ** του προηγούμενου μανίκι.\n3. ** Παίξτε κάρτες **: Ο πρώτος παίκτης βάζει στο τραπέζι:\n- Μόνο ένα φύλλο (π.χ. ένα 7).\n- Ένα ζευγάρι (πρώην: δύο 8).\n- Ένα brelan (πρώην: τρεις Valets).\n- Ένα τετράγωνο (πρώην: τέσσερα 5).\n4. **Συνεχίζεται από τον γύρο **: Ο επόμενος παίκτης (σε δεξιόστροφη κατεύθυνση) έχει **30 δευτερόλεπτα ** για να παίξει τον ίδιο αριθμό καρτών ** αλλά ** υψηλότερη αξία **.\n- Παράδειγμα: Αν ένας παίκτης ποζάρει ένα ζευγάρι των 6, ο επόμενος πρέπει να ποζάρει ένα ζευγάρι των 7, Κυρίες, όπως, κλπ.\n5. **Δώσε τη σειρά σου **: Αν ένας παίκτης δεν μπορεί ή δεν θέλει να παίξει, πρέπει να περάσει τη σειρά του. Μόλις περάσει ένας παίκτης, δεν μπορεί να παίξει ξανά μέχρι το τέλος της τρέχουσας πτύχωσης.\n6. ** Τέλος μιας πτυχής **: Το πάσο τελειώνει όταν όλοι οι παίκτες έχουν περάσει τη σειρά τους. Ο τελευταίος παίκτης που θα έχει τοποθετήσει τα φύλλα κερδίζει τη φορά, μαζεύει τα φύλλα από το τραπέζι (αφήστε τα στην άκρη) και ξεκινά την επόμενη φορά παίζοντας αυτό που θέλει.\n7. **Η δύναμη του 2**: Παίξτε ένα ή περισσότερα **2** κτυπά κάθε συνδυασμό και τελειώνει αμέσως την πτυχή. Το άτομο που έπαιξε το 2 κερδίζει το πάσο και αρχίζει να παίζει ξανά.\nΓια να νικήσεις ένα ζευγάρι, πρέπει να παίξεις δύο!\n\n** Τέλος της Μάγχης και των Ρόλων**\n- Μόλις ένας παίκτης δεν έχει χαρτιά, τελείωσε. Το παιχνίδι συνεχίζεται μέχρι να μείνει μόνο ένας παίκτης.\n- Η σειρά του τέλους καθορίζει τους ρόλους για τον επόμενο γύρο:\n- **1η**: Πρόεδρος\n- **2η**: Αντιπρόεδρος\n- **Τελευταία**\n- **Πριν-τελευταία **: Αντι-Κώλος-Trou\n- **Άλλο ** (αν υπάρχει): Ουδέτερο\n\n** Τον επόμενο μήνα: Ανταλλαγή καρτών! **\nΠριν από την έναρξη του νέου γύρου, οι παίκτες ανταλλάσσουν κάρτες:\n- Η κωλοτρυπίδα δίνει δύο καλύτερες κάρτες στον Πρόεδρο.\n- Το **Chair** του δίνει σε αντάλλαγμα τα ** δύο φύλλα της επιλογής του ** (συνήθως τα χειρότερα του).\n- Εάν υπάρχουν 4 ή περισσότεροι παίκτες, το **Vice-Cut ** δίνει την καλύτερη κάρτα ** στον **Vice-Πρόεδρο **.\n- Το **Vice-Πρόεδρος ** του δίνει τον χάρτη ** της επιλογής του **.\n\n** Ειδικοί κανόνες **\n- â›â € **Δεν μπορεί να τελειώσει με ένα 2 **: Ένας παίκτης δεν έχει δικαίωμα να ξεφορτωθεί το τελευταίο του φύλλο αν είναι 2. Αυτό το χτύπημα θεωρείται άκυρο.\n**Παραλλαγή Επανάσταση (προαιρετικό) **: Εάν ένας παίκτης θέτει ένα τετράγωνο (4 πανομοιότυπα φύλλα), μπορεί να ανακοινώσει \"Επανάσταση!\". Η σειρά της αξίας των φύλλων στη συνέχεια αντιστρέφεται μέχρι το τέλος του μανίκι (το 3 γίνεται το ισχυρότερο, και το 2 το πιο αδύναμο).';
+
+  @override
+  String get butDuJeuReussirDeux =>
+      '** Γκολ παιχνιδιού **\nΕπιτυχία δύο προκλήσεις πριν από τους άλλους παίκτες.\n\n** Στη θέση του **\n- Κάθε παίκτης ξεκινά με 4 φύλλα: 3 τριαντάφυλλα και 1 κρανίο.\nΚάθε κάρτα στο χαλί παραμένει δεμένη με τον ιδιοκτήτη του.\n\n**Σχέδιο **\n1. Με τη σειρά του, ένας παίκτης μπορεί να βάλει μια κάρτα προς τα κάτω στο χαλί του.\n2. Όταν δεν θέλει πλέον να ποζάρει, προκαλεί ανακοινώνοντας τον αριθμό των καρτών που νομίζει ότι μπορεί να επιστρέψει.\n3. Άλλοι παίκτες μπορούν να υποβάλουν προσφορά ή να περάσουν.\n4. Ο μεγαλύτερος πλειοδότης γίνεται ο διεκδικητής και επιστρέφει τις διαφημιζόμενες κάρτες.\n5. Πρώτα επιστρέφει τις δικές του κάρτες, μετά αυτές άλλων παικτών αν χρειαστεί.\n\n** Λύση **\n- Αν εμφανιστεί ένα Κρανίο, η πρόκληση χάνεται.\n- Αν κερδίσει η πρόκληση, ο παίκτης σκοράρει ένα βαθμό. Ο πρώτος στους 2 πόντους κερδίζει το παιχνίδι.\n- Αν χαθεί μια πρόκληση, ο παίκτης χάνει ένα χαρτί τυχαία από το υπόλοιπο χέρι του. Αν χάσει το Κρανίο του, πρέπει να αναιρέσει άλλο αμέσως.';
+
+  @override
+  String get butDuJeuFaireDeviner =>
+      '** Γκολ παιχνιδιού **\nΓια να μαντέψει μια λέξη με το σχέδιο, πριν από το τέλος του καθορισμένου χρόνου.\n\n**Σχέδιο **\n1. ** Drawer/επιλογή λέξης **: Ένας παίκτης ορίζεται για να τραβήξει, και μια λέξη αποδίδεται κρυφά σε αυτόν.\n2. **Drawing**: Ο συντάκτης έχει περιορισμένο χρόνο για να μαντέψει τη λέξη με το σχέδιο. Δεν μπορεί ούτε να μιλήσει ούτε να μιμηθεί ούτε να γράψει γράμματα ή φιγούρες.\n3. ** Devinettes **: Άλλοι παίκτες προσφέρουν λέξεις σε μια συνομιλία.\n4. **Validation**: Ο γελοιογράφος βλέπει τις προτάσεις στη συνομιλία και κάνει κλικ στο κουμπί a \"Find!\" δίπλα στο καλό μήνυμα για να ορίσει τον νικητή.\n5. **Σημεία**: Ο παίκτης που βρήκε και ο συντάκτης κερδίζει ένα βαθμό.\n6. ** Επόμενος πύργος **: Ένας νέος συντάκτης ορίζεται.\n\n** Επιλογές **\n- ** Μόνο 30 εγκεφαλικά επεισόδια **: Ο συντάκτης περιορίζεται σε 30 το πολύ χαρακτηριστικά.';
+
+  @override
+  String get butDuJeuFaireDeviner1 =>
+      '** Γκολ παιχνιδιού **\nΑφήστε το σύντροφό σας να μαντέψει όσο το δυνατόν περισσότερες μυστηριώδεις λέξεις, κάθε γράφοντας μια μόνο λέξη στοιχείο. Οι ίδιοι ή άκυροι δείκτες εξαλείφονται.\n\n**Σχέδιο **\n1. ** Επιλογή του Devin**: Ένας παίκτης ορίζεται ως ο \"Devin\" για τον γύρο. Δεν βλέπει τη λέξη μυστήριο.\n2. **Επιλογή του Word Mystery**: Το Devin επιλέγει μια λέξη από μια λίστα (ή ο κύριος του παιχνιδιού επιλέγει μία).\n3. **Indice Writing **: Όλοι οι άλλοι παίκτες (\" Δείκτες\") γράψτε κρυφά ένα μόνο δείκτη λέξη που θα βοηθήσει το Devin βρείτε τη λέξη μυστήριο.\n4. ** Δείκτης Φίλτρο **: Όλοι οι δείκτες αποκαλύπτονται. Οι ίδιοι δείκτες (ακόμα και αν γράφεται διαφορετικά, π.χ. \"chat\" και \"chats\") ή άκυροι (πολύ κοντά στη λέξη μυστήριο, εφευρέθηκε, κ.λπ.) εξαλείφονται. Μόνο τα μοναδικά και έγκυρα στοιχεία εμφανίζονται στο Devin.\n5. **Devinette ** : Το Devin κοιτάζει τις υπόλοιπες ενδείξεις και προσπαθεί να μαντέψει τη λέξη μυστήριο. Έχει μόνο μια προσπάθεια.\n6. **Κατάρτιση **:\n- Αν το Ντέβιν βρει τη λέξη μυστήριο: η ομάδα κερδίζει 1 βαθμό.\n- Αν το Ντέβιν δεν βρει τη λέξη μυστήριο: 0 βαθμός.\n- Αν το Ντέβιν δεν απαντήσει: 0 βαθμός.\n\n**Παράδειγμα άκυρων δεικτών: **\nΜυστηριώδης λέξη: Μη έγκυροι δείκτες:\n- Ίδιοι δείκτες: Αν 2 παίκτες γράφουν \"ζωικό\" για \"Chat\", \"ζωικό\" εξαλείφεται.';
+
+  @override
+  String get butDuJeuPourLes =>
+      '** Γκολ παιχνιδιού **\n- Για **Χωριό**: Εξάλειψη όλων Wolf-Garous, White Wolf, Malade Rat (εκτός Mercenary αν κερδίσει).\n- Για το Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Εξάλειψη όλων των χωρικών.\n- Για τις ** Πασιέντζες**: Στόχος συγκεκριμένος για κάθε άτομο (Λευκό Λουπ: να είναι μόνος, Μισθοφόρος: Σκότωσε το στόχο του στο J1, Αρρώστης: μολύνει όλα).\n- Για τους Εραστές ** (αν Wolf + Village): Να είναι οι μόνοι δύο επιζώντες.\n\n**Σχέδιο **\nΤο παιχνίδι εναλλάσσεται μεταξύ φάσεων ** νύχτα ** και ** ημέρα **.\n\n* Καληνύχτα **\n1. Ο αρχηγός του παιχνιδιού (η εφαρμογή) ανακοινώνει ότι το χωριό κοιμάται.\n2. Διαφορετικοί χαρακτήρες ξυπνούν με τη σειρά τους για να χρησιμοποιήσουν τις δυνάμεις τους:\n- * * Cupidon ** (μόνο πρώτη νύχτα): Ονόματα δύο παίκτες που θα ερωτευτούν. Αν είναι Λύκος και Χωρικός, ο στόχος τους αλλάζει.\n- Το Heritage** (μόνο την πρώτη νύχτα): Αναφέρεται σε έναν δοκιμαστή.\n- Το **Seeing ** ξυπνά και ορίζει έναν παίκτη για να ανακαλύψει τον πραγματικό του ρόλο. (Μην ανιχνεύετε μόλυνση Black Wolf).\n- Το **Mentalist** (παθητικό) αντιλαμβάνεται το αποτέλεσμα της ψηφοφορίας του χωριού.\n- Το **Rat Malade**: Μολύνει δύο παίκτες (που θα γνωρίζουν τους άλλους μολυσμένους).\n- Το **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - ψήφοι μαζί) ξυπνούν, συναυλιών και ορίζουν ένα θύμα για να φάει.\n- Το μαύρο λουπ ** μπορεί κάποτε να μετατρέψει το θύμα σε μολυσμένο Loup-Garou (που διατηρεί τις δυνάμεις του και γίνεται Wolf). Ο Mentalist και ο Fossoyer μπορούν να εντοπίσουν τους μολυσμένους, το Voyante όχι.\n- Το λευκό λουπ. Απελπίζει έναν παίκτη της επιλογής του (ανατρέπει τις προστασίες).\n- Η μαγεία ξυπνάει. Βλέπει το θύμα του λύκου και μπορεί να χρησιμοποιήσει ένα από τα δύο φίλτρα της (μόνο μία φορά ανά μέρος): ένα φίλτρο της ** θεραπείας ** για να σώσει το θύμα, ή ένα φίλτρο της **δηλητηρίαση ** για να σκοτώσει κάποιον.\n- Το Pyroman **: Επιλέγει να αποθηκεύσει ένα βαρέλι ελληνικής φωτιάς ή να πυροδοτήσει αυτά που έχουν ήδη τοποθετηθεί (πρέπει να είναι ζωντανά το πρωί).\nΜπορεί να επικοινωνήσει με τους νεκρούς.\n\n* Ημέρα **\n1. Το χωριό ξυπνάει. Η εφαρμογή ανακοινώνει ποιος πέθανε σε μια νύχτα.\n2. Νεκροί παίκτες αποκαλύπτουν το ρόλο τους και εξοντώνονται (δεν μπορούν πλέον να επικοινωνήσουν, εκτός από το Necromank με τους νεκρούς).\n- Le **Loup Bavard ** : Πρέπει να προφέρει μια μυστική λέξη ή να πεθάνει στο ηλιοβασίλεμα (εκτός αν ο Δικτάτορας παίρνει την εξουσία).\n3. Οι επιζώντες υποστηρίζουν ότι προσπαθούν να εκθέσουν απατεώνες.\n4. Μετά τις συζητήσεις, όλοι οι παίκτες ψηφίζουν για την εξάλειψη ενός υπόπτου.\n- Ο Δικτάτορας ** (μία φορά): μπορεί να ψηφίσει. Αν εξαλείψει έναν λύκο, γίνεται Δήμαρχος· διαφορετικά, πεθαίνει.\nΗ ψήφος του μετράει διπλά. Αν εξαλειφθεί, πρέπει να ορίσει διάδοχο πριν πεθάνει.\n- Το **Mercenary**: Αν ο στόχος του εξαλειφθεί την πρώτη μέρα, κερδίζει μόνος του. Διαφορετικά, γίνεται Χωρικός.\n5. Ο παίκτης που λαμβάνει τις περισσότερες ψήφους εξαλείφεται, αποκαλύπτει το ρόλο του, και είναι εκτός παιχνιδιού.\nΑν εξαλειφθεί (ημέρα και νύχτα), έχει τη δύναμη να φέρει έναν άλλο παίκτη μαζί του.\n- Το **Fossoyeur** : Όταν πέθανε, αναγνώρισε δύο παίκτες (ένας από το αντίθετο στρατόπεδο, ένας από το στρατόπεδο του).\n- Οι Εραστές**: Αν ο ένας πεθάνει, ο άλλος τον ακολουθεί με θλίψη.\n- Το \\\"Κεριτάζ\\\". Αν ο δοκιμαστής του πεθάνει, αναλαμβάνει το ρόλο του (εκτός αν είναι νεκρός ή μολυσμένος).\n6. Αρχίζει μια νέα νύχτα.\n\n**Συνθήκες Νίκης **\nΕξαλείψτε όλους τους λύκους, τον λευκό λύκο, τον άρρωστο αρουραίο.\n- **Loups-Garous ** (Σύντομο): Να είναι ίσος ή μεγαλύτερος σε αριθμό με τους Χωρικούς.\nΌντας ο μόνος επιζών.\nΣκότωσε τον στόχο του την πρώτη μέρα.\nΜόλυνε όλους τους παίκτες.\nΓια να είναι οι μόνοι δύο επιζώντες.\n\n**Σημαντικές σημειώσεις **\n- Το Chaperon Rouge ** προστατεύεται από τον Κυνηγό κατά του Wolf-Garous ενώ ο Κυνηγός είναι ζωντανός.\n- Το **Garde ** προστατεύει έναν στόχο Wolf-Garous (δεν μπορεί να προστατεύσει δύο φορές το ίδιο άτομο).\nΟι δυνάμεις του Λευκού Λύκου δεν ξέρουν τις προφυλάξεις.\n- Ο Πύρομαν πρέπει να είναι ζωντανός το πρωί για να εκραγούν τα βαρέλια του.';
+
+  @override
   String get loupNoir => 'Μαύρος Λύκος';
 
   @override
+  String get loupBavard => 'Λύκος Φλύαρος';
+
+  @override
   String get loupBlanc => 'Λευκός Λύκος';
+
+  @override
+  String get mercenaire => 'Μισθοφόρος';
 
   @override
   String get ratMalade => 'Άρρωστος Αρουραίος';
@@ -5147,6 +5429,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get petiteFille => 'Κοριτσάκι';
 
   @override
+  String get chasseur => 'Κυνηγός';
+
+  @override
   String get garde => 'Σωματοφύλακας';
 
   @override
@@ -5156,10 +5441,68 @@ class AppLocalizationsEl extends AppLocalizations {
   String get mentaliste => 'Μέντιουμ';
 
   @override
+  String get fossoyeur => 'Νεκροθάφτης';
+
+  @override
   String get dictateur => 'Δικτάτορας';
 
   @override
+  String get chaperonRouge => 'Κοκκινοσκουφίτσα';
+
+  @override
   String get pyromancien => 'Πυρομάντης';
+
+  @override
+  String get butDuJeuEtreLe1 =>
+      '** Γκολ παιχνιδιού **\nΝα είστε ο ταχύτερος που θα εντοπίσει το μοναδικό πανομοιότυπο σύμβολο μεταξύ της κάρτας στο κέντρο και της κάρτας της.\n\n**Σχέδιο (Mode \'The Infernal Tower\') **\n1. Κάθε παίκτης λαμβάνει ένα φύλλο ανοιχτό προς τα κάτω. Τα υπόλοιπα φύλλα σχηματίζουν στο κέντρο της μάνας, με το πρόσωπο ορατό.\n2. Αρχικά, όλοι επιστρέφουν την κάρτα τους.\n3. Κάθε παίκτης πρέπει να βρει το συντομότερο δυνατό το μοναδικό σύμβολο που υπάρχει τόσο στο φύλλο του όσο και στο φύλλο του σωρού.\n4. Ο πρώτος παίκτης που βρίσκει το σύμβολο, την ανακοίνωση δυνατά, παίρνει το φύλλο της μάνας και το τοποθετεί στο δικό του φύλλο.\n5. Αυτή η νέα κάρτα γίνεται η κάρτα του για τον επόμενο γύρο. Στη συνέχεια αποκαλύπτεται ένας νέος χάρτης στο κέντρο της Αποθήκης.\n6. Το παιχνίδι συνεχίζεται μέχρι να εξαντληθεί η μάνα. Ο παίκτης που μάζεψε τα περισσότερα χαρτιά στο τέλος κερδίζει!';
+
+  @override
+  String get butDuJeuSeDebarrasser =>
+      '** Γκολ παιχνιδιού **\nΞεφορτώσου όλες τις κάρτες του με το να είσαι ο πρώτος!\n\n**Σχέδιο **\n1. **Διανομή **: Κάθε παίκτης λαμβάνει 7 φύλλα. Τα υπόλοιπα αποτελούν το απόθεμα. Επιστρέφεται ένα φύλλο για να ξεκινήσει η στοίβα του σωρού.\n2. ** Παίξτε ένα χαρτί **: Ο παίκτης του οποίου η σειρά έχει ** 30 δευτερόλεπτα ** για να βάλει ένα χαρτί στο χέρι του στο σωρό του σωρού. Το φύλλο που παίζεται πρέπει να ταιριάζει με το πάνω φύλλο της στοίβας με:\n* **Χρώμα ** (πρώην: Κόκκινο στο κόκκινο)\n* ** Αριθμός ** (πρώην: ένα 7 μπλε σε ένα 7 πράσινο)\n* **Συμβολικό ** (π.χ. κίτρινο \"+2\" σε κόκκινο \"+2\")\n* ** Ειδική κάρτα ** (Joker, +4, κ.λπ.)\n3. ** Piocher **: Εάν ένας παίκτης δεν μπορεί να παίξει ένα χαρτί στον χρόνο που έχει οριστεί, πρέπει να επιλέξει ένα χαρτί από το πακέτο. Αν μπορεί να παίξει αυτό το χαρτί, μπορεί να το κάνει αμέσως. Διαφορετικά, η σειρά του τελειώνει.\n4. **Ειδικές κάρτες **:\n* **+2 (Δύο κάρτες) **: Ο επόμενος παίκτης διαλέγει 2 φύλλα και περνάει τη σειρά του.\n* **Sens Απαγορευμένο (Πέρασε τη σειρά σου) **: Ο επόμενος παίκτης περνάει τη σειρά του.\n* ** Αντιστροφή (Αλλαγή νοήματος) **: Η αίσθηση του παιχνιδιού αντιστρέφεται.\n**Joker (Αλλαγή χρώματος) **: Ο παίκτης επιλέγει το χρώμα του επόμενου φύλλου για να παίξει. Μπορεί να παιχτεί σε οποιοδήποτε χαρτί.\n* ** Super Joker +4 (Χρώμα Αλλαγή και τέσσερις κάρτες) **: Ο παίκτης επιλέγει το χρώμα. Ο επόμενος παίκτης διαλέγει 4 φύλλα ΚΑΙ περνάει τη σειρά του. Αυτή η κάρτα μπορεί να παιχτεί μόνο αν ο παίκτης δεν έχει άλλη κάρτα του χρώματος που ζητείται στο σωρό του σωρού (εκτός αν μπλοφάρει).\n5. **Ανακοίνωση \"UNO\"**: Όταν ένας παίκτης έχει μόνο ένα φύλλο στο χέρι, πρέπει να ανακοινώσει \"UNO!\". Αν δεν το κάνει αυτό και το πάρει άλλος παίκτης (πριν ο επόμενος παίκτης παίξει ή πάρει), πρέπει να πάρει 2 φύλλα.\n6. ** Τέλος καναλιού **: Η λαβή τελειώνει όταν ένας παίκτης ξεφορτώνεται το τελευταίο του φύλλο. Οι βαθμοί μετριούνται. Ο παίκτης που φτάνει τους 500 πόντους (ή ένα καθορισμένο σύνολο) κερδίζει το παιχνίδι.\n\n** Σημεία χάρτη: **\n* Ψηφιακές κάρτες (0-9): Η αξία του προσώπου τους.\n* +2, Sens Απαγορευμένο, Αντιστροφή: 20 πόντοι.\n* Joker, Super Joker +4 : 50 πόντοι.';
+
+  @override
+  String get principeDuJeuLeJeu =>
+      'Αρχή παιχνιδιού\n* Το παιχνίδι παίζεται μεταξύ **3 και 10 παικτών **.\n* Κάθε παίκτης δίνει πρόσβαση σε ένα μέρος της βιβλιοθήκης φωτογραφίας του και επιλέγει φωτογραφίες για να μοιραστεί.\n* Κατά τη διάρκεια ενός παιχνιδιού, μια φωτογραφία επιλέγεται ** τυχαία ** μεταξύ όλων των παικτών, και στη συνέχεια εμφανίζεται για μερικά δευτερόλεπτα.\n* Οι παίκτες πρέπει να μαντέψουν ** σε ποιον ανήκει η φωτογραφία ** που εμφανίζεται.\n* Ο παίκτης που σωστά μαντέψει τις περισσότερες φωτογραφίες κερδίζει το παιχνίδι.\n\nΔιαδικασία . . .\n1. ** Επιλογή φωτογραφιών **: Κάθε παίκτης επιλέγει έναν αριθμό φωτογραφιών από τη γκαλερί του.\n2. **Ξεκίνησε το παιχνίδι **: Μόλις όλοι είναι έτοιμοι, ο οικοδεσπότης ξεκινά το παιχνίδι.\n3. **Πύργος αναπαραγωγής **:\n- Μια τυχαία φωτογραφία εμφανίζεται για 5 δευτερόλεπτα.\nΌλοι οι παίκτες ψηφίζουν να μαντέψουν τον ιδιοκτήτη.\n4. **Αποτελέσματα**: Οι βαθμολογίες ενημερώνονται μετά από κάθε γύρο.\n5. ** Τέλος παιχνιδιού **: Μετά από έναν καθορισμένο αριθμό γύρων, ο παίκτης με τους περισσότερους πόντους κερδίζει.';
+
+  @override
+  String get butDuJeuCoulerTous =>
+      '** Γκολ παιχνιδιού **\nΚόλλησε όλα τα πλοία του αντιπάλου πριν βυθίσει τα δικά σου.\n\n**Σχέδιο **\n1. **Τοποθέτηση **: Κάθε παίκτης βάζει κρυφά τον στόλο του σε πλέγμα 10x10.\n- Αερομεταφορείς (5 κουτιά)\n- Κρουαζιέρα (4 κουτιά)\n- Υποβρύχιο (3 κύτταρα)\n- Καταστροφέας (3 κουτιά)\n- Περίπολος (2 κουτιά)\n2. **Τίρ **: Με τη σειρά τους, οι παίκτες αγγίζουν ένα κουτί για να πυροβολήσουν.\n3. **Αποτελέσματα **: Applocalizations.of(context)!.touche, \"Coulated\" ή \"Για το νερό\".\n4. **Victoire**: Ο πρώτος παίκτης που θα βυθίσει ολόκληρο τον αντίπαλο στόλο κερδίζει.';
+
+  @override
+  String get butDuJeuEtreLe2 =>
+      '** Γκολ παιχνιδιού **\nΓίνετε ο πρώτος που θα φτάσει την απόσταση στόχου (1000 χλμ εξ ορισμού).\n**Σχέδιο **\n- Κάθε παίκτης παίρνει έξι φύλλα.\n- Με τη σειρά του, παίξτε ένα χαρτί (Απόσταση, Επίθεση, Άμυνα, Ασφάλεια) ή να απαλλαγούμε από αυτό.\n- Οι ** Επιθέσεις ** κάρτες (Σταματήστε, Red, Essence, Crevaison, Limit) μπλοκάρουν τον αντίπαλο.\n- Χάρτες ** Defenses ** (Πράσινη, Έξτρα Δεξαμενή, Επισκευή, Όριο Τέλος) επιθέσεις.\n- Οι κάρτες **Security** ακυρώνουν μια επίθεση και εμποδίζουν την επανάληψη της.\n- Χάρτες **Απόσταση ** (25, 50, 75, 100, 200 km) μετακινήστε το όχημά σας προς τα εμπρός.\n- Διάλεξε ένα χαρτί στο τέλος της σειράς σου.';
+
+  @override
+  String get butDuJeuEtreLe3 =>
+      '** Γκολ παιχνιδιού **\nΓίνετε ο πρώτος που θα ξεφορτωθεί όλες τις κάρτες του σχηματίζοντας έγκυρους συνδυασμούς (μελάδες).\n\n**Τρέξιμο ενός πύργου **\n1. **Piocher**: Πάρτε το χάρτη από την κορυφή των αποβλήτων ή Stock.\n2. ** Πώληση (προαιρετικό) **: Τοποθετήστε έγκυρους συνδυασμούς στο τραπέζι.\n3 ή περισσότερα φύλλα του ίδιου χρώματος που ακολουθούν (π.χ. 5) Ο Άσσος μπορεί να είναι υψηλός ή χαμηλός.\n3 ή 4 φύλλα της ίδιας αξίας αλλά διαφόρων χρωμάτων (π.χ. 8♥, 8\n3. **Προκαθορισμένο**: Ξεφορτωθείτε μια κάρτα από το χέρι του στα σκουπίδια.\n\n** Τέλος της λαβής **\nΟ πρώτος παίκτης που δεν έχει πια χαρτιά μετά την ήττα κερδίζει. Οι άλλοι μετρούν τα σημεία των υπολοίπων φύλλων τους (Σχήματα = 10, Ως = 15, άλλοι = ονομαστική αξία). Το παιχνίδι σταματά στους 100 πόντους.';
+
+  @override
+  String get butDuJeuFaireDeviner2 =>
+      '** Γκολ παιχνιδιού **\nΚάντε την ομάδα σας να μαντέψει το μέγιστο των λέξεων πριν από το τέλος του χρόνου, χωρίς να χρησιμοποιεί τις απαγορευμένες λέξεις!\n\n**Σχέδιο **\n1. Κάθε στροφή, ένας παίκτης (\" ο ομιλητής\") προσπαθεί να κάνει την ομάδα του να μαντέψει μια λέξη.\n2. Ο ομιλητής δεν πρέπει να ** ποτέ ** να προφέρει τη λέξη για να μαντέψει, ούτε οποιαδήποτε από τις λέξεις \"Ταμπού\" (όχι λέξεις) που εμφανίζονται κάτω από τη λέξη-στόχο. Ούτε μπορεί να χρησιμοποιήσει μεταφράσεις ή λέξεις από την ίδια οικογένεια.\n3. Αν ο ομιλητής χρησιμοποιήσει μια λέξη Taboo, η αντίπαλη ομάδα (ή δικαστής) αναφέρει το σφάλμα, η κάρτα ακυρώνεται και ο ομιλητής μετακινείται στην επόμενη.\n4. Κάθε μαντεμένη λέξη επιστρέφει ένα βαθμό στην ομάδα.\n5. Η στροφή τελειώνει όταν τελειώσει ο χρόνος.\n\n** Τέλος μέρους **\nΗ ομάδα με τους περισσότερους πόντους μετά τον αριθμό των γύρων ορίζεται νίκες!';
+
+  @override
+  String get butDuJeuAmenerVos =>
+      '** Γκολ παιχνιδιού **\nΦέρτε τα άλογά σας στο κέντρο του οροπεδίου παρακάμπτοντας τους αντιπάλους σας.\n\n**Κλασικοί κανόνες **\n1. **Βασική έξοδος**: Πρέπει να κάνετε ένα **1** ή ένα **6** για να τραβήξετε ένα πιόνι.\n2. ** Bonus Tour**: Κάνοντας ένα **6 **, συλλαμβάνοντας ένα πιόνι ή τελειώνοντας το μάθημα επιτρέπει την επανάληψη. (Προσοχή: 3 φορές το 6 συνεχόμενα ακυρώνει τη σειρά σας!).\n3. **Capture** : Πέφτοντας σε ένα αντίπαλο πιόνι το επιστρέφει στη βάση του (αδύνατο στα προστατευμένα \"Stars\" κουτιά ή στο πλαίσιο εκκίνησης αυτού του παίκτη).\n4. ** Έφτασε **: Χρειάζεται ένα ακριβές σκορ για να φτάσεις στην τελική σκάλα.\n\n** Λειτουργία ομάδας (2v2) **\nΑπαιτεί ακριβώς 4 παίκτες. Είσαι σύμμαχος με τον παίκτη μπροστά σου.\n- ** Κοινή νίκη **: Η πρώτη ομάδα που φέρνει συνολικά 4 κομμάτια στο κέντρο κερδίζει το παιχνίδι (ex: 3 κομμάτια για σένα και 1 για τον σύμμαχό σου).\n- **Entraide**: Μπορείτε να χρησιμοποιήσετε τη throwψη σας για να μετακινήσετε το πιόνι του συμμάχου σας, αλλά * μόνο * για να το πάρετε από τη βάση του (με 1 ή 6) ή να το μετακινήσετε στη σκάλα τερματισμού του.\n- ** Σύμμαχοι μπλοκάρισμα **: Είναι αδύνατο να πιάσεις το πιόνι του συνεργάτη σου. Αν η κίνησή σου σε κάνει να προσγειωθείς πάνω του, το χτύπημα είναι άκυρο.';
+
+  @override
+  String get principeJeuSurrealisteDEcriture =>
+      '**Αρχή **\nΣουρεαλιστικό συλλογικό παιχνίδι γραφής.\n**Παραλλαγή **\n- Κλασσικό: Ο καθένας γράφει ένα στοιχείο της πρότασης (Αυθεντικό, Επιθετικό, Στίγμα, κλπ.) χωρίς να δει τα προηγούμενα.\n- Συνέχεια: Όλοι βλέπουν τις τελευταίες 3 λέξεις και ολοκληρώνουν την πρόταση.\n**Σχέδιο **\nΤα φύλλα περιστρέφονται μέχρι να συμμετάσχουν όλοι.';
+
+  @override
+  String get butDuJeuPlacerLe =>
+      '** Γκολ παιχνιδιού **\nΤοποθετήστε τα περισσότερα κομμάτια του στο σετ.\n**Χρυσός κανόνας **\nΚάθε νέο κομμάτι πρέπει να αγγίξει τουλάχιστον ένα άλλο κομμάτι του ίδιου χρώματος από μια γωνία, αλλά ποτέ από τη μια πλευρά.\n**Σχέδιο **\n1. Ο πρώτος γύρος παίζεται στη γωνία της πιατέλας του χρώματος σας.\n2. Οι παρακάτω πύργοι σέβονται τον χρυσό κανόνα.\n3. Αν δεν μπορείτε να παίξετε πια, περνάτε τη σειρά σας.\n**Τρέξιμο **\n-1 βαθμός ανά τετράγωνο δεν τοποθετείται.\n+15 βαθμοί εάν όλα τα μέρη είναι τοποθετημένα.\n+5 πόντους μπόνους αν το τελευταίο κομμάτι είναι το μονό τετράγωνο (1x1).';
+
+  @override
+  String get objectifEtreLePremierA =>
+      '** Στόχος **\nΓίνε ο πρώτος που θα πετύχει το γκολ (20, 50 ή 100 πόντοι).\n\n**Σχέδιο **\nΚάθε παίκτης λαμβάνει 7 ντόμινο. Με τη σειρά του, πρέπει να τοποθετήσει ένα ντόμινο που αντιστοιχεί σε ένα από τα άκρα της αλυσίδας. Τα διπλά παίζονται σε σταυρούς.\n\n** Λειτουργία αναπαραγωγής **\n- Ναι. Αν δεν μπορείς να παίξεις, διάλεξε μέχρι να παίξεις.\nΧωρίς επιλογές. Αν δεν μπορείς να παίξεις, περνάς τη σειρά σου.\n- **All Five** : Το πρώτο διπλό παιχνίδι είναι το \"Spinner\" (παίξιμο σε 4 πλευρές). Βαθμολογείτε πόντους σε κάθε εγκεφαλικό επεισόδιο αν το άθροισμα των τερμάτων είναι πολλαπλάσιο των 5.\n\n** Τέλος της στροφής **\nΑν κανείς δεν μπορεί να παίξει, το κόλπο είναι μπλοκαρισμένο. Οι παίκτες αποκαλύπτουν τα χέρια τους. Ο παίκτης με τους λιγότερους πόντους κερδίζει τον γύρο και σημειώνει το άθροισμα των πόντων των αντίπαλων χεριών.';
+
+  @override
+  String get objectifEtreLePremierJoueur =>
+      '** Στόχος **\nΓίνε ο πρώτος παίκτης που θα ξεφορτωθεί όλες τις κάρτες του.\n\n** Κανόνες **\n- Το παιχνίδι παίζεται με 52 χαρτιά.\n- Σειρά των καρτών (από το χαμηλότερο στο υψηλότερο): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Σειρά χρωμάτων (από το πιο αδύναμο στο ισχυρότερο): πλακάκια ♦ (D), Trèfles\n- Ο παίκτης που έχει τα 3 πλακάκια ξεκινά το παιχνίδι.\n\n** Συνδυασμοί **\n1 χάρτης.\nΔύο φύλλα της ίδιας αξίας.\n3 φύλλα της ίδιας αξίας.\n- **Συνέχεια**: 5 συνεχόμενες κάρτες γραμμής (μεικτά χρώματα).\n- **Χρώμα **: 5 φύλλα του ίδιου χρώματος.\n3 φύλλα της μιας γραμμής + 2 φύλλα της άλλης γραμμής.\n- ** Τετράγωνο **: 4 φύλλα της ίδιας αξίας + 1 φύλλο οποιουδήποτε είδους.\n- **Quinte Flush **: 5 συνεχόμενα φύλλα του ίδιου χρώματος.\n\n**Ιεραρχία συνδυασμών 5 καρτών **\nFlush Quinte > Πλατεία > Πλήρης > Χρώμα > Σουίτα.\nΈνας συνδυασμός μπορεί να νικηθεί μόνο με συνδυασμό του ίδιου μεγέθους και υψηλότερης αξίας.';
+
+  @override
+  String get objectifCapturerToutesLesPieces =>
+      '** Στόχος **\nΣυλλάβετε όλα τα νομίσματα του αντιπάλου σας ή μπλοκάρετε όλα τα νομίσματα του.\n** Κανόνες **\n- Παίζει σε ένα 8x8 ντάμα, αποκλειστικά σε σκούρα κουτιά.\n- Τα κομμάτια κινούνται διαγώνια σε ένα κουτί.\n- Τα αλιεύματα είναι υποθετικά και γίνονται πηδώντας πάνω από ένα εχθρικό κομμάτι.\n- Αρκετά αλιεύματα μπορούν να αλυσοδεθούν σε ένα γύρο.\n- Όταν ένα δωμάτιο φτάσει στην αντίθετη σειρά, προάγεται σε \"Dame\" και μπορεί να κινηθεί και να συλλάβει πίσω.';
 
   @override
   String get unSubstantifExLeChat => 'ένα ουσιαστικό (π.χ. η γάτα)';
@@ -5175,6 +5518,21 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get unAdjectifExMort => 'ένα επίθετο (π.χ. νεκρός)';
+
+  @override
+  String get petit1 => 'Μικρό 1';
+
+  @override
+  String get petit2 => 'Μικρό 2';
+
+  @override
+  String get grand => 'Μεγάλο';
+
+  @override
+  String get tresGrand => 'Πολύ μεγάλο';
+
+  @override
+  String get superGrand => 'Σούπερ μεγάλο';
 
   @override
   String get potionDeVieEtDe => 'Φίλτρο ζωής και θανάτου.';
@@ -5224,8 +5582,17 @@ class AppLocalizationsEl extends AppLocalizations {
       'Η δημιουργία απέτυχε: λάθος αριθμός καρτών.';
 
   @override
+  String get blancMangerCocon => 'Λευκό Φάε Κόκον';
+
+  @override
+  String get leRoiDesMemes => 'Ο Βασιλιάς των Memes';
+
+  @override
   String get laPartieEstTermineeTous =>
       'Το παιχνίδι τελείωσε: όλοι οι παίκτες έχουν αποσυνδεθεί.';
+
+  @override
+  String get aucun => 'Καμία';
 
   @override
   String get nonAuthentifie => 'Δεν έχει γίνει έλεγχος ταυτότητας.';
@@ -5256,6 +5623,9 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get vousDevezJouerUneCarte => 'Πρέπει να παίξεις υψηλότερο φύλλο.';
+
+  @override
+  String get aGagne1 => 'Κέρδισε!';
 
   @override
   String get ceNEstPasVotre => 'Δεν είναι η σειρά σου.';
@@ -5292,6 +5662,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get caseDejaCiblee => 'Το τετράγωνο έχει ήδη στοχοποιηθεί.';
 
   @override
+  String get aCouleTouteLaFlotte => 'Βούλιαξε όλο τον εχθρικό στόλο!';
+
+  @override
   String get placementAutomatiqueEffectue =>
       '⏱️ Η αυτόματη τοποθέτηση ολοκληρώθηκε.';
 
@@ -5309,6 +5682,12 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get egaliteLorsDuVoteLa =>
       'Ισότητα στην ψηφοφορία! Η Θεά της Δικαιοσύνης πρέπει να κυβερνήσει.';
+
+  @override
+  String get leTempsDeVoteEst => 'Ο χρόνος ψηφοφορίας τελείωσε!';
+
+  @override
+  String get laPartieDeYamsCommence => 'Το παιχνίδι Yams ξεκινά!';
 
   @override
   String get plusDeLancersDisponibles =>
@@ -5357,6 +5736,9 @@ class AppLocalizationsEl extends AppLocalizations {
       'Η συζήτηση τελείωσε. Το χωριό πρέπει να ψηφίσει τώρα!';
 
   @override
+  String get lesAmoureux => 'Οι Ερωτευμένοι';
+
+  @override
   String get seulsLesDeuxAmoureuxSont =>
       'Μόνο οι δύο ερωτευμένοι είναι ζωντανοί. Η αγάπη τους νικά τα πάντα!';
 
@@ -5365,8 +5747,14 @@ class AppLocalizationsEl extends AppLocalizations {
       'Ο Λευκός Λύκος είναι ο τελευταίος επιζών! Τους κατασπάραξε όλους.';
 
   @override
+  String get loupsGarous => 'Λυκάνθρωποι';
+
+  @override
   String get lesLoupsGarousSontDevenus =>
       'Οι Λυκάνθρωποι απέκτησαν την πλειοψηφία και δεν χάνουν. Κέρδισαν!';
+
+  @override
+  String get villageois => 'Χωρικοί';
 
   @override
   String get toutesLesMenacesOntEte =>
@@ -5417,6 +5805,12 @@ class AppLocalizationsEl extends AppLocalizations {
       'Το Κοριτσάκι ήταν υπερβολικά περίεργο! Οι Λύκοι το κατασπαράζουν επί τόπου!';
 
   @override
+  String get infecte1 => 'μολυσμένος';
+
+  @override
+  String get contamine => 'μολυσμένος';
+
+  @override
   String get vousVousSentezObserveE => 'Νιώθεις ότι σε παρακολουθούν απόψε...';
 
   @override
@@ -5436,8 +5830,15 @@ class AppLocalizationsEl extends AppLocalizations {
       'Ο Πυρομάντης ανάβει το φυτίλι των βαρελιών του!';
 
   @override
+  String get leSoleilSeLeveSur =>
+      'Ο ήλιος ανατέλλει πάνω από το Thiercelieux...';
+
+  @override
   String get miraculeusementPersonneNAPeri =>
       'Από θαύμα, κανείς δεν πέθανε απόψε!';
+
+  @override
+  String get motDuJour => 'λέξη της ημέρας';
 
   @override
   String get leDictateurSEstTrompe =>
@@ -5450,6 +5851,44 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get egaliteParfaiteLorsDuVote1 =>
       'Απόλυτη ισοπαλία στην ψηφοφορία. Σήμερα δεν εκτελείται κανείς.';
+
+  @override
+  String get lAncienCapitaine => 'Ο πρώην Κυβερνήτης.';
+
+  @override
+  String get amoureux1 => 'Εραστές 1';
+
+  @override
+  String get amoureux2 => 'Εραστές 2';
+
+  @override
+  String get debugJoingameDemarrageDeLa =>
+      '[Debug ενταχθούνGame] Ξεκίνα τη συναλλαγή.';
+
+  @override
+  String get debugJoingamePartieTrouveeEt =>
+      '[Debug ενταχθούνGame] Μέρος βρέθηκε και στο λόμπι. Ανάγνωση δεδομένων...';
+
+  @override
+  String get debugJoingameTransactionUpdateAppelee =>
+      '[DEBUG joinGame] Συναλλαγή.update () ονομάζεται με τη νέα λίστα παικτών.';
+
+  @override
+  String get debugJoingameTransactionReussieRetourne =>
+      'Επιτυχημένη συναλλαγή. Γύρνα πίσω αληθινά.';
+
+  @override
+  String get debugJoingameLaPartieN =>
+      '[Debug ενταχθούνGame] Το παιχνίδι δεν υπάρχει ή δεν είναι πλέον στο λόμπι. Γύρνα πίσω στο ψεύτικο.';
+
+  @override
+  String get erreurCritiqueDansJoingame =>
+      '--- ΚΡΙΤΙΚΗ ΣΦΑΛΜΑ ΣΤΟ ΠΑΙΧΝΙΔΙ ---';
+
+  @override
+  String
+  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
+      ':App Localizations. of(context)! .wordcivilParts0TrimWordundercoverIA επιστρέφει ξεχωριστές απλές λέξεις';
 
   @override
   String get infiltre => 'Διεισδυτής';
@@ -5467,6 +5906,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get duellistes => 'Δίκτυα';
 
   @override
+  String get laPartieCommenceDonnezVotre =>
+      'Το παιχνίδι ξεκινά! Δώστε το στοιχείο σας...';
+
+  @override
   String get laPhaseDeVoteCommence => 'Ξεκινά η φάση ψηφοφορίας!';
 
   @override
@@ -5477,11 +5920,35 @@ class AppLocalizationsEl extends AppLocalizations {
       'Η Θεά της Δικαιοσύνης έβγαλε την ετυμηγορία της!';
 
   @override
+  String get unNouveauTourCommence => 'Ξεκινά νέος γύρος.';
+
+  @override
   String get laVengeuseEmporteQuelquUn =>
       'Ο Εκδικητής παίρνει κάποιον μαζί της!';
 
   @override
+  String get civils => 'Πολίτες';
+
+  @override
+  String get imposteurs => 'Απατεώνες';
+
+  @override
+  String get paris => 'Παρίσι';
+
+  @override
+  String get france => 'Γαλλία';
+
+  @override
+  String get capitale => 'Κεφάλαιο';
+
+  @override
   String get tourEiffel => 'Πύργος του Άιφελ';
+
+  @override
+  String get seine => 'Γρι-γρι';
+
+  @override
+  String get ville => 'Πόλη';
 
   @override
   String get vousNePouvezPasBuzzer =>
@@ -5549,6 +6016,9 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get carteNonTrouvee => 'Το φύλλο δεν βρέθηκε.';
+
+  @override
+  String get aGagneLaManche => 'Κέρδισε τον γύρο!';
 
   @override
   String get desDejaLancesPourCe =>
@@ -5668,6 +6138,9 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get unoNecessiteEntre2Et => 'Το Uno απαιτεί μεταξύ 2 και 10 παικτών.';
+
+  @override
+  String get laPartieDeUnoCommence => 'Το παιχνίδι Uno ξεκινά!';
 
   @override
   String get inversionA2JoueursLe =>
@@ -5845,7 +6318,20 @@ class AppLocalizationsEl extends AppLocalizations {
   String get partieNonTrouvee1 => 'Το τμήμα δε βρέθηκε';
 
   @override
+  String get trouDuCul => 'Τελευταίος';
+
+  @override
   String get vicePresident => 'Αντιπρόεδρος';
+
+  @override
+  String get viceTrouDuCul => 'Υπο-τελευταίος';
+
+  @override
+  String get neutre => 'Ουδέτερος';
+
+  @override
+  String get debugPictionaryConditionRoundstateDrawing =>
+      '--- DEBUG PICTIONARY --- Condition \'roundState\' ή \'dessing drawing\' είναι ΑΛΗΘΕΙΑ. Ενημέρωση βάσης δεδομένων...';
 
   @override
   String get dessinateurIntrouvable => 'Το Συρτάρι δε βρέθηκε.';
@@ -5869,6 +6355,10 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get leDevineurNePeutPas => 'Η μαντεψιά δεν δίνει ιδέα.';
+
+  @override
+  String get aaaaaaceeeeiiiinooooouuuuyy =>
+      '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .';
 
   @override
   String get ceNEstPasLe => 'Δεν είναι η ώρα για μαντεψιά.';
@@ -5904,7 +6394,18 @@ class AppLocalizationsEl extends AppLocalizations {
   String get vousNePouvezPasChoisir => 'Δεν μπορείς να διαλέξεις χρώμα τώρα.';
 
   @override
+  String get erreurCritiquePlayerorderEstVide =>
+      'ΚΡΙΤΙΚΗ ΣΦΑΛΜΑ: Η εντολή του παίκτη είναι άδεια στο επόμενο δρόμο. Δεν μπορώ να συνεχίσω.';
+
+  @override
   String get questionNonTrouvee => 'Η ερώτηση δεν βρέθηκε';
+
+  @override
+  String get quiPourraitLePlusApplocalizations1 =>
+      'Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.list String ΕρωτήσειςAwordpool Λέξεις παιχνιδιούsoft';
+
+  @override
+  String get menteur => 'Ψεύτη!';
 
   @override
   String get pasAssezDeJoueursPour =>
@@ -5932,6 +6433,18 @@ class AppLocalizationsEl extends AppLocalizations {
       'Η προσφορά πρέπει να είναι υψηλότερη.';
 
   @override
+  String get applocalizationsOfContextUnjoueurEst =>
+      'Οι Applocalizations.of(context)!.aPlayer} είναι ο τελευταίος επιζών και κερδίζει Skull!';
+
+  @override
+  String get applocalizationsOfContextUnjoueurA =>
+      '] ?? Applocalizations.of(context)!.aPlayer} κέρδισε 2 προκλήσεις και κέρδισε το παιχνίδι!';
+
+  @override
+  String get applocalizationsOfContextUnjoueurRemporte =>
+      'Ο applocalizations.of(context)!.aPlayer] κερδίζει το Skull!';
+
+  @override
   String get reponseVide => 'Κενή απάντηση.';
 
   @override
@@ -5955,6 +6468,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Ο στοχευμένος παίκτης δε βρέθηκε.';
 
   @override
+  String get quiPourraitLePlusApplocalizations2 =>
+      'Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.elseIf Τύπος παιχνιδιούΣυνώνυμο ή Banni';
+
+  @override
   String get vousNePouvezPasBannir =>
       'Δεν μπορείς να απαγορεύσεις το δικό σου συνώνυμο!';
 
@@ -5966,6 +6483,14 @@ class AppLocalizationsEl extends AppLocalizations {
   String get ceJoueurNAPas1 => 'Αυτός ο παίκτης δεν υπέβαλε απάντηση.';
 
   @override
+  String get quiPourraitLePlusApplocalizations3 =>
+      'Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.intΑπαιτούμενες ψήφοιPlayersΜήκοςΑν Ο δικαστής';
+
+  @override
+  String get quiPourraitLePlusApplocalizations4 =>
+      'Ποιος θα μπορούσε να το περισσότερο; App Localizations. of(context)!. for FinalTargetInVotesroundState';
+
+  @override
   String get egaliteParfaiteAucunPointAttribue =>
       'Απόλυτη ισοπαλία! Δεν απονέμονται πόντοι.';
 
@@ -5975,6 +6500,13 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get laDescriptionLaPlusDrole => 'Επιλέχθηκε η πιο αστεία περιγραφή!';
+
+  @override
+  String get aucuneDescriptionNAEte => 'Δεν ψηφίστηκε καμία περιγραφή.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations5 =>
+      'Ποιος θα μπορούσε περισσότερα; App Localizations. of(context)!. for FinalTargetInVotes1roundWinnerId';
 
   @override
   String get jugeIntrouvable => 'Ο δικαστής δεν βρέθηκε.';
@@ -6021,6 +6553,9 @@ class AppLocalizationsEl extends AppLocalizations {
       'Το raise πρέπει να είναι τουλάχιστον διπλάσιο του προηγούμενου πονταρίσματος (ή all-in).';
 
   @override
+  String get laPartieDeBeloteCommence => 'Το παιχνίδι Μπελότε αρχίζει!';
+
+  @override
   String get passeGeneraleAu1erTour =>
       'Γενικά περνούν στον πρώτο γύρο των δημοπρασιών. Έναρξη του 2ου γύρου!';
 
@@ -6036,6 +6571,9 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get passeLAnnonce => 'πάσο στην ανακοίνωση';
+
+  @override
+  String get laPartieDeBlokusCommence => 'Το παιχνίδι Blokus ξεκινά!';
 
   @override
   String get pieceDejaUtilisee => 'Το κομμάτι έχει ήδη χρησιμοποιηθεί.';
@@ -6106,7 +6644,14 @@ class AppLocalizationsEl extends AppLocalizations {
   String get piquantInsolite => '🌶️ Πικάντικο & Ασυνήθιστο';
 
   @override
+  String get quiPourraitLePlusApplocalizations6 =>
+      'Ποιος θα μπορούσε να το περισσότερο; App Localizations.of(context)! . who θα μπορούσε modegroup σας';
+
+  @override
   String get devineT => 'Μαντέψτε Τ';
+
+  @override
+  String get presidente => 'Πρόεδρος';
 
   @override
   String get chargement => 'Φόρτωση...';
@@ -6116,6 +6661,10 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get exception => 'Εξαίρεση:';
+
+  @override
+  String get debutDeLaConstructionDe =>
+      '--- Η ΚΑΤΑΣΚΕΥΗ ΤΟΥ ΨΗΦΟΥ ΤΟΥ ΨΗΦΟΥ «Ποιος θα μπορούσε να το κάνει περισσότερο; AppLocations.of(context)!.printIsactiondependingStateTo( isActionPending)players\'] as Map<String, dynamic>???? {}?';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -6136,6 +6685,10 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get attentionLeWidgetNEst =>
       'Το Widget έφυγε, το set State ακυρώθηκε.';
+
+  @override
+  String get quiPourraitLePlusApplocalizations7 =>
+      'Ποιος θα μπορούσε περισσότερα; App Localizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId';
 
   @override
   String get phaseDePose => 'ΦΑΣΗ ΘΕΣΗΣ';
@@ -6173,6 +6726,9 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String get undercoverLocal => 'Μυστικό τοπικό';
+
+  @override
   String get toiMeme => 'τον εαυτό σου';
 
   @override
@@ -6200,6 +6756,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get enCours => 'ΤΡΕΧΟΥΣΑ: {0}';
 
   @override
+  String get gamemessagelocalizationTrContextReason =>
+      ': \"\"}\" : GameMessagelocalization.tr(context, λόγος),';
+
+  @override
   String get jAiLanceUnePartie2 => 'Ξεκίνησα ένα παιχνίδι';
 
   @override
@@ -6209,7 +6769,258 @@ class AppLocalizationsEl extends AppLocalizations {
   String get appTitle => 'Παιχνίδι πάρτι';
 
   @override
+  String get loginTitle => 'Καλώς ήρθατε!';
+
+  @override
+  String get registerTitle => 'Ελάτε μαζί μας!';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Κωδικός πρόσβασης';
+
+  @override
+  String get username => 'Όνομα χρήστη';
+
+  @override
+  String get loginButton => 'Σύνδεση';
+
+  @override
+  String get registerButton => 'Δημιουργία λογαριασμού';
+
+  @override
+  String get termsAcceptance =>
+      'Έχω διαβάσει και αποδέχομαι τους Όρους Χρήσης και την Πολιτική Απορρήτου.';
+
+  @override
+  String get gamesTab => 'Παιχνίδια';
+
+  @override
+  String get friendsTab => 'Φίλοι';
+
+  @override
+  String get statsTab => 'Προφίλ';
+
+  @override
+  String get loungesTab => 'Σαλόνια';
+
+  @override
   String get createGame => 'Δημιουργία παιχνιδιού';
+
+  @override
+  String get joinGame => 'Συμμετοχή';
+
+  @override
+  String get gameCode => 'Κωδικός παιχνιδιού (6 ψηφία)';
+
+  @override
+  String get startGame => 'Έναρξη παιχνιδιού';
+
+  @override
+  String get leaveGame => 'Έξοδος από το παιχνίδι';
+
+  @override
+  String get rules => 'Κανόνες';
+
+  @override
+  String get level => 'Επίπεδο';
+
+  @override
+  String get coins => 'Νομίσματα';
+
+  @override
+  String get gameOver => 'Τέλος παιχνιδιού!';
+
+  @override
+  String get victory => 'Νίκη!';
+
+  @override
+  String get defeat => 'Ήττα';
+
+  @override
+  String get nextRound => 'Επόμενος Γύρος';
+
+  @override
+  String get onboardingWelcome => 'Καλώς ήρθατε';
+
+  @override
+  String get onboardingSkip => 'Πάσο';
+
+  @override
+  String get onboardingNext => 'Επόμενο';
+
+  @override
+  String get onboardingStart => 'Πάμε! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Παίξτε με φίλους';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Επιλέξτε ανάμεσα σε πάνω από 30 παιχνίδια παρέας, καρτών και επιτραπέζια. Παίξτε τοπικά, με φίλους ή παγκοσμίως!';
+
+  @override
+  String get onboardingSlide2Title => 'Κερδίστε νομίσματα & κονκάρδες';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Κερδίστε XP με κάθε νίκη, ανεβείτε επίπεδο και ξεκλειδώστε μοναδικά επιτεύγματα.';
+
+  @override
+  String get onboardingSlide3Title => 'Δημιουργήστε ή μπείτε σε δευτερόλεπτα';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'Ένας 6ψήφιος κωδικός αρκεί για να μαζέψετε την παρέα σας, ή ξεκινήστε γρήγορο παιχνίδι.';
+
+  @override
+  String get vipPass => 'Πάσο VIP';
+
+  @override
+  String get vipActive => 'Το Πάσο VIP σας είναι ενεργό!';
+
+  @override
+  String get vipActiveDesc =>
+      'Όλες οι λειτουργίες (AI, Αίθουσες, Βίντεο, Matchmaking) είναι απεριόριστες.';
+
+  @override
+  String get choosePlan => 'Επιλέξτε το πρόγραμμά σας:';
+
+  @override
+  String get restorePurchases => 'Επαναφορά αγορών';
+
+  @override
+  String get purchasesRestored => 'Οι αγορές επαναφέρθηκαν με επιτυχία!';
+
+  @override
+  String get noPurchasesFound => 'Δεν βρέθηκαν ενεργές αγορές.';
+
+  @override
+  String get monthlySubscription => 'Μηνιαία Συνδρομή';
+
+  @override
+  String get annualSubscription => 'Ετήσια Συνδρομή';
+
+  @override
+  String get lifetimeAccess => 'Ισόβια Πρόσβαση';
+
+  @override
+  String get popularTag => 'ΔΗΜΟΦΙΛΕΣ';
+
+  @override
+  String get chooseButton => 'Επιλογή';
+
+  @override
+  String get vipCongratulations => 'Συγχαρητήρια, είστε VIP!';
+
+  @override
+  String get purchaseFailed => 'Η αγορά δεν ολοκληρώθηκε.';
+
+  @override
+  String get profileTitle => 'Προφίλ & Ρυθμίσεις';
+
+  @override
+  String get profileNotFound =>
+      'Το προφίλ δεν βρέθηκε ή ο παίκτης δεν υπάρχει.';
+
+  @override
+  String get tabStats => 'Στατιστικά';
+
+  @override
+  String get tabBadges => 'Κονκάρδες & Επιτεύγματα';
+
+  @override
+  String get tabSettings => 'Ρυθμίσεις';
+
+  @override
+  String get gamesPlayed => 'Παιχνίδια';
+
+  @override
+  String get gamesWon => 'Νίκες';
+
+  @override
+  String get winRate => 'Ποσοστό νικών';
+
+  @override
+  String get soundEffects => 'Ηχητικά εφέ';
+
+  @override
+  String get music => 'Μουσική';
+
+  @override
+  String get editUsername => 'Αλλαγή ονόματος χρήστη';
+
+  @override
+  String get newUsernameHint => 'Νέο όνομα';
+
+  @override
+  String get logout => 'Αποσύνδεση';
+
+  @override
+  String get deleteAccount => 'Διαγραφή λογαριασμού';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Είστε βέβαιοι ότι θέλετε να διαγράψετε οριστικά τον λογαριασμό σας;';
+
+  @override
+  String get cancel => 'Άκυρο';
+
+  @override
+  String get confirm => 'Επιβεβαίωση';
+
+  @override
+  String get save => 'Αποθήκευση';
+
+  @override
+  String get modeLocal => 'Τοπικά';
+
+  @override
+  String get modeMulti => 'Online';
+
+  @override
+  String get modeMonde => 'Κόσμος';
+
+  @override
+  String get searchGame => 'Αναζήτηση παιχνιδιού...';
+
+  @override
+  String get filterAll => 'Όλα τα παιχνίδια';
+
+  @override
+  String get createLounge => 'Δημιουργία αίθουσας';
+
+  @override
+  String get joinLounge => 'Συμμετοχή σε αίθουσα';
+
+  @override
+  String get loungeCode => 'Κωδικός αίθουσας';
+
+  @override
+  String get publicLounges => 'Δημόσιες αίθουσες';
+
+  @override
+  String get noLoungesAvailable =>
+      'Δεν υπάρχουν διαθέσιμες δημόσιες αίθουσες αυτή τη στιγμή.';
+
+  @override
+  String get playersCount => 'Παίκτες';
+
+  @override
+  String get howToPlay => 'Πώς παίζεται;';
+
+  @override
+  String get copiedToClipboard => 'Αντιγράφηκε στο πρόχειρο!';
+
+  @override
+  String get connectionError => 'Σφάλμα σύνδεσης. Παρακαλώ δοκιμάστε ξανά.';
+
+  @override
+  String get loading => 'Φόρτωση...';
+
+  @override
+  String get success => 'Επιτυχία!';
 
   @override
   String pasAssezDeSymbolesUniques1(
@@ -7252,5 +8063,61 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String aRelanceLesDes2(Object pName, Object val) {
     return '0 επανεκκίνησε τα ζάρια (1/3). $pName $val';
+  }
+
+  @override
+  String jAiLanceUnePartie3(Object _selectedGame) {
+    return 'J\'ai lancé une partie de $_selectedGame !';
+  }
+
+  @override
+  String rolesJoueurs1(Object selectedRolesCount, Object playerslength) {
+    return 'Rôles ($selectedRolesCount) ≠ Joueurs ($playerslength).';
+  }
+
+  @override
+  String dessineCettePhrase1(Object stepToProcessconte) {
+    return 'Dessine cette phrase :\n\"$stepToProcessconte\"';
+  }
+
+  @override
+  String aEteBanniPourSa1(Object loserName, Object loserAnswer) {
+    return '$loserName a été banni pour sa proposition \'$loserAnswer\' !';
+  }
+
+  @override
+  String aTrouveLeMot2(Object winnerName, Object currentWord) {
+    return '$winnerName a trouvé le mot : \'$currentWord\' !';
+  }
+
+  @override
+  String personneNATrouveLe1(Object currentWord) {
+    return 'Personne n\'a trouvé le mot : \'$currentWord\'.';
+  }
+
+  @override
+  String aTrouveLeMot3(Object guesserName, Object currentWord) {
+    return '$guesserName a trouvé le mot : \'$currentWord\' !';
+  }
+
+  @override
+  String get revolution1 => '(Révolution !)';
+
+  @override
+  String tonMotEst2(Object _wordCivil) {
+    return 'Η λέξη σου είναι: $_wordCivil';
+  }
+
+  @override
+  String tonMotEst3(Object _wordUndercover) {
+    return 'Η λέξη σου είναι: $_wordUndercover';
+  }
+
+  @override
+  String get egalite1 => 'Ισοπαλία!';
+
+  @override
+  String jAiLanceUnePartie4(Object datagameTypeGribou) {
+    return 'J\'ai lancé une partie de $datagameTypeGribou !';
   }
 }

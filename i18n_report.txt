@@ -82,7 +82,7 @@ REPLACED: _l10n.lHeritierHeriteDuRole2(playerData[heritierId]['name'], playerDat
 REPLACED: _l10n.heriteEgalementDuStatutDe1(playerData[heritierId]['name']) -> "${playerData[heritierId]['name']} hérite également du statut de Capitaine !"
 REPLACED: _l10n.leVillageDecouvreAvecEffroi1(deadThisNightNames.toSet().join(', ')) -> "Le village découvre avec effroi le(s) corps de : ${deadThisNightNames.toSet().join(', ')}."
 REPLACED: _l10n.leFossoyeurReveleEtaitUn1(playerData[fossoyeurId]['name'], playerData[targetPlayerId]['name'], targetRole) -> "${playerData[fossoyeurId]['name']} (le Fossoyeur) révèle : ${playerData[targetPlayerId]['name']} était un(e) $targetRole !"
-REPLACED: _l10n.etEtaitUnE(playerData[otherRevealedPlayerId]['name'], otherRevealedRole) -> " Et ${playerData[otherRevealedPlayerId]['name']} était un(e) $otherRevealedRole !"
+REPLACED: _l10n.etEtaitUnE(playerData[otherRevealedPlayerId]['name'], otherRevealedRole ?? '') -> " Et ${playerData[otherRevealedPlayerId]['name']} était un(e) $otherRevealedRole !"
 REPLACED: _l10n.leDictateurAExecuteUn1(playerData[dictatorId]['name'], playerData[targetId]['name'], targetRole) -> "Le Dictateur ${playerData[dictatorId]['name']} a exécuté un imposteur (${playerData[targetId]['name']} - $targetRole) et devient Capitaine !"
 REPLACED: _l10n.leLoupBavardNA1(playerData[loupBavardId]['name']) -> "Le Loup Bavard (${playerData[loupBavardId]['name']}) n'a pas dit son mot et est mort au coucher du soleil !"
 REPLACED: _l10n.estMortEDeChagrin1(playerData[otherLoverId]['name']) -> "${playerData[otherLoverId]['name']} est mort(e) de chagrin pour son amour !"
