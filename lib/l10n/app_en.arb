@@ -1666,6 +1666,13 @@
   "genereDesQuestionsDirectesAmusantes": "Generates direct, fun and spicy questions. Theme: $finalPrompt",
   "genereDesPhrasesCourtesA": "Generates short hole sentences (containing ''   '') for the game. Theme: $finalPrompt",
   "genereDesQuestionsAmusantesSur": "Generates fun questions about a player (use the tag '' {player} ''). Theme: $finalPrompt",
+  "@genereDesQuestionsAmusantesSur": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      }
+    }
+  },
   "genereDesSituationsHumoristiquesEt": "Generates humorous situations and beginnings of legends of memes. Theme: $finalPrompt",
   "genereUneListeDeMots": "Generates a list of words/expressions for the game $gameType on theme: $finalPrompt",
   "strc64264": "$'{'autoTitle.substring(0, 28)'}'...",
@@ -1697,6 +1704,13 @@
   "coupInvalideSelonLesRegles": "Invalid coup according to the Mille Bornes rules!",
   "cibleAdverseValideObligatoirePour": "Mandatory opposing target for attack.",
   "coupFourrePareLAttaque": "$'{'players[targetId]?[''name'']'}' prep the attack with $ '{'matchingSafety'}' and take over!",
+  "@coupFourrePareLAttaque": {
+    "placeholders": {
+      "matchingSafety": {
+        "type": "Object"
+      }
+    }
+  },
   "playersPlayeridScore": "players.$playerId.score",
   "aAtteintTargetdistKm": "Has reached $targetDist km!",
   "nonAutoriseUsurpationDIdentite": "Unauthorized: identity fraud detected.",
@@ -1767,6 +1781,13 @@
   "toutesLesMenacesOntEte": "All threats have been eliminated! The village won!",
   "playersPidScore": "players.$pId.score",
   "laPartieEstTermineeVictoire": "The game''s over. Victory of $ {winner} !",
+  "@laPartieEstTermineeVictoire": {
+    "placeholders": {
+      "winner": {
+        "type": "Object"
+      }
+    }
+  },
   "laVoyanteASondeUne": "The Seer probed a soul that night...",
   "lHeritierAChoisiSon": "The heir chose his testator...",
   "vousNePouvezPasProteger": "You can''t protect the same person two nights in a row.",
@@ -2224,5 +2245,686 @@
   "piedDeBiche": "Bishfoot",
   "str128675": "$'{'playerNames[i].substring(0, 7)'}'..",
   "pname": "$pName ($'{'''Me'''}')",
-  "readycountTotalplayers": "$'{'''FAST'}' ($readyCount/$totalPlayers)"
+  "readycountTotalplayers": "$'{'''FAST'}' ($readyCount/$totalPlayers)",
+  "appTitle": "Party Game",
+  "loginTitle": "Welcome!",
+  "registerTitle": "Join us!",
+  "email": "Email",
+  "password": "Password",
+  "username": "Unique username",
+  "loginButton": "Log In",
+  "registerButton": "Create account",
+  "termsAcceptance": "I have read and agree to the Terms of Service and Privacy Policy.",
+  "gamesTab": "Games",
+  "friendsTab": "Friends",
+  "statsTab": "Stats",
+  "loungesTab": "Lounges",
+  "createGame": "Create Game",
+  "joinGame": "Join Game",
+  "gameCode": "Game Code (6 digits)",
+  "startGame": "Start Game",
+  "leaveGame": "Leave Game",
+  "rules": "Rules",
+  "level": "Level",
+  "coins": "Coins",
+  "gameOver": "Game Over!",
+  "victory": "Victory!",
+  "defeat": "Defeat",
+  "nextRound": "Next Round",
+  "onboardingWelcome": "Welcome",
+  "onboardingSkip": "Skip",
+  "onboardingNext": "Next",
+  "onboardingStart": "Let''s Go! 🚀",
+  "onboardingSlide1Title": "Play with Friends",
+  "onboardingSlide1Subtitle": "Choose from over 30 party, card and board games. Play locally, with friends, or worldwide!",
+  "onboardingSlide2Title": "Earn Coins & Unlock Badges",
+  "onboardingSlide2Subtitle": "Earn XP with every win, level up, and unlock exclusive achievements to customize your profile.",
+  "onboardingSlide3Title": "Create or Join in Seconds",
+  "onboardingSlide3Subtitle": "A 6-digit code is all it takes to gather your friends, or jump into fast matchmaking with live players.",
+  "vipPass": "VIP Pass",
+  "vipActive": "Your VIP Pass is active!",
+  "vipActiveDesc": "All features (AI, Lounges, Video, Matchmaking) are unlimited.",
+  "choosePlan": "Choose your plan:",
+  "restorePurchases": "Restore purchases",
+  "purchasesRestored": "Purchases restored successfully!",
+  "noPurchasesFound": "No active purchases found.",
+  "monthlySubscription": "Monthly Subscription",
+  "annualSubscription": "Annual Subscription",
+  "lifetimeAccess": "Lifetime Access",
+  "popularTag": "POPULAR",
+  "chooseButton": "Choose",
+  "vipCongratulations": "Congratulations, you are VIP!",
+  "purchaseFailed": "Purchase not completed.",
+  "profileTitle": "Profile & Settings",
+  "profileNotFound": "Profile not found or non-existent player.",
+  "tabStats": "Statistics",
+  "tabBadges": "Badges & Achievements",
+  "tabSettings": "Settings",
+  "gamesPlayed": "Games played",
+  "gamesWon": "Wins",
+  "winRate": "Win rate",
+  "soundEffects": "Sound effects",
+  "music": "Music",
+  "editUsername": "Change username",
+  "newUsernameHint": "New username",
+  "logout": "Log out",
+  "deleteAccount": "Delete account",
+  "deleteAccountConfirm": "Are you sure you want to permanently delete your account?",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "save": "Save",
+  "modeLocal": "Local",
+  "modeMulti": "Online",
+  "modeMonde": "World",
+  "searchGame": "Search for a game...",
+  "filterAll": "All games",
+  "createLounge": "Create a lounge",
+  "joinLounge": "Join a lounge",
+  "loungeCode": "Lounge code",
+  "publicLounges": "Public lounges",
+  "noLoungesAvailable": "No public lounges available at the moment.",
+  "playersCount": "Players",
+  "howToPlay": "How to play?",
+  "copiedToClipboard": "Copied to clipboard!",
+  "connectionError": "Connection error. Please try again.",
+  "loading": "Loading...",
+  "success": "Success!",
+  "pasAssezDeSymbolesUniques1": "Not enough unique symbols for  0  card symbols. Required:  1  , Available:  2  . {symbolsPerCard} {totalSymbols} {dobbleSymbolslength}",
+  "@pasAssezDeSymbolesUniques1": {
+    "placeholders": {
+      "symbolsPerCard": {
+        "type": "Object"
+      },
+      "totalSymbols": {
+        "type": "Object"
+      },
+      "dobbleSymbolslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "melangeEquilibreDesThemesSuivants1": "Balanced mix of the following themes:  0  {combinedTheme}",
+  "@melangeEquilibreDesThemesSuivants1": {
+    "placeholders": {
+      "combinedTheme": {
+        "type": "Object"
+      }
+    }
+  },
+  "ambianceTonImpose": "[Ambiance / Tone imposed:  0  ] {style}",
+  "@ambianceTonImpose": {
+    "placeholders": {
+      "style": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesPairesDeMots1": "Generates pairs of similar words in ''MotCivil:MotInfilted'' format. Theme:  0  {finalPrompt}",
+  "@genereDesPairesDeMots1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesCartesTabooAu1": "Generates Taboo cards in the format ''Targetword:Forbidd1,Forbidd2,Forbidd3,Forbidd4,Forbidd5''. Theme:  0  {finalPrompt}",
+  "@genereDesCartesTabooAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesCategoriesOriginalesEt1": "Generates original and fun categories to guess. Theme:  0  {finalPrompt}",
+  "@genereDesCategoriesOriginalesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesPhrasesCourtesVisuelles1": "Generates short, visual and baffled sentences to draw (e.g., ''A dinosaur eating ice''). Theme:  0  {finalPrompt}",
+  "@genereDesPhrasesCourtesVisuelles1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesPhrasesDAccroche1": "Generates original catch phrases or writing universe. Theme:  0  {finalPrompt}",
+  "@genereDesPhrasesDAccroche1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesDilemmesCorneliensAu1": "Generates corneal dilemmas in the format ''OptionA or OptionB'' (e.g. ''Can fly or be invisible''). Theme:  0  {finalPrompt}",
+  "@genereDesDilemmesCorneliensAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereUnMelangeDeDefis1": "Generates a mix of challenges (actions) and indiscreet questions (truths). Theme:  0  {finalPrompt}",
+  "@genereUnMelangeDeDefis1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesQuestionsDirectesAmusantes1": "Generates direct, fun and spicy questions. Theme:  0  {finalPrompt}",
+  "@genereDesQuestionsDirectesAmusantes1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesPhrasesCourtesA1": "Generates short hole sentences (containing ''   '') for the game. Theme:  0  {finalPrompt}",
+  "@genereDesPhrasesCourtesA1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesSituationsHumoristiquesEt1": "Generates humorous situations and beginnings of legends of memes. Theme:  0  {finalPrompt}",
+  "@genereDesSituationsHumoristiquesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereUneListeDeMots1": "Generate a list of words/expressions for the game  0  on the theme:  1  {gameType} {finalPrompt}",
+  "@genereUneListeDeMots1": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      },
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "theme": "Theme  0  {gameType}",
+  "@theme": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      }
+    }
+  },
+  "passeSonTour2": "It''s over. {playerName}",
+  "@passeSonTour2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "finDuCompteARebours1": "⏱️ Fin du compte à rebours : Partie relancée pour tous les {playerslength} joueurs !",
+  "@finDuCompteARebours1": {
+    "placeholders": {
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "aOuvertAvec": "0  has opened with  1  . {playerName} {cardToPlay}",
+  "@aOuvertAvec": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "sEstDeconnecteVictoireDe": "0 has disconnected. Win  1  per package! {removedPlayerName} {remainingName}",
+  "@sEstDeconnecteVictoireDe": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      },
+      "remainingName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aManque3ToursSans": "0  missed 3 laps without playing. The administrator was asked to decide on its replacement with the computer. {playerName}",
+  "@aManque3ToursSans": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "neRepondPlusLAdministrateur": "0  no longer responds (  1  ). The administrator was asked to decide on its replacement with the computer. {playerName} {reason}",
+  "@neRepondPlusLAdministrateur": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "reason": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteRemplaceParL": "It was replaced by the computer (AI active - 5s per turn). {playerName}",
+  "@aEteRemplaceParL": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasDonneD": "0  has not given an index (Jeu d''opinion). Turn past. {playerName}",
+  "@nAPasDonneD": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasReponduJeu": "Tour skipped without automatic action. {playerName}",
+  "@nAPasReponduJeu": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasJoueA3": "0 has not played in time. His turn has passed. {playerName}",
+  "@nAPasJoueA3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "egaliteParfaiteLorsDuVote2": "Perfect equality when voting ( 0  players ex-aequo)! No player eliminated. {tiedPlayerslength}",
+  "@egaliteParfaiteLorsDuVote2": {
+    "placeholders": {
+      "tiedPlayerslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "aJoue": "0 has played  1  . {playerName} {lastDrawn}",
+  "@aJoue": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "lastDrawn": {
+        "type": "Object"
+      }
+    }
+  },
+  "aJoue1": "0 has played  1  . {playerName} {playable}",
+  "@aJoue1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "playable": {
+        "type": "Object"
+      }
+    }
+  },
+  "piocheEtPasseSonTour": "0  picks up and passes its turn. {playerName}",
+  "@piocheEtPasseSonTour": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasJoueA4": "0  did not play on time. One card was defeated and one box revealed. {playerName}",
+  "@nAPasJoueA4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "laPartieEstTermineeVictoire1": "The game''s over. Victory of  0 ! {winner}",
+  "@laPartieEstTermineeVictoire1": {
+    "placeholders": {
+      "winner": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursContaminesParLaMaladie1": "Players infected with the disease:  0  . {contaminatedNames}",
+  "@joueursContaminesParLaMaladie1": {
+    "placeholders": {
+      "contaminatedNames": {
+        "type": "Object"
+      }
+    }
+  },
+  "vousAvezEspionneEtDecouvert": "You spied on  0  and discovered his role:  1  . {targetName} {targetRole}",
+  "@vousAvezEspionneEtDecouvert": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreMotDuJourPrononcez": "Your word of the day: '' 0 ''. Pronounce it in the cat before sunset! {newWord}",
+  "@votreMotDuJourPrononcez": {
+    "placeholders": {
+      "newWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "declareUnCoupDEtat": "0  declares a Coup! {dictateurName}",
+  "@declareUnCoupDEtat": {
+    "placeholders": {
+      "dictateurName": {
+        "type": "Object"
+      }
+    }
+  },
+  "leChasseurTireEtTue1": "The Hunter shoots and kills  0 ! {targetName}",
+  "@leChasseurTireEtTue1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aDesigneCommeNouveauCapitaine": "0  has designated  1  as a new Captain! {formerCaptainName} {newCaptainName}",
+  "@aDesigneCommeNouveauCapitaine": {
+    "placeholders": {
+      "formerCaptainName": {
+        "type": "Object"
+      },
+      "newCaptainName": {
+        "type": "Object"
+      }
+    }
+  },
+  "cupidonADesigneEtComme": "Cupid has designated  0  and  1  as lovers! {lover1Name} {lover2Name}",
+  "@cupidonADesigneEtComme": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      },
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreAmoureuxSe": "Your lover:  0 {amoureux2Name}",
+  "@votreAmoureuxSe": {
+    "placeholders": {
+      "amoureux2Name": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreAmoureuxSe1": "Your lover:  0 {amoureux1Name}",
+  "@votreAmoureuxSe1": {
+    "placeholders": {
+      "amoureux1Name": {
+        "type": "Object"
+      }
+    }
+  },
+  "cEstAuTourDe4": "It''s the team''s turn! {currentTeamIndex1}",
+  "@cEstAuTourDe4": {
+    "placeholders": {
+      "currentTeamIndex1": {
+        "type": "Object"
+      }
+    }
+  },
+  "aFaitUnMaisAucun": "Turn automatically! {playerName} {dice}",
+  "@aFaitUnMaisAucun": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
+  "lancerTropElevePourAtteindre": "Turn past! {dice}",
+  "@lancerTropElevePourAtteindre": {
+    "placeholders": {
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
+  "extremiteNonDisponibleSurLe1": "Extremity not available on set (  0  ). {openEnds}",
+  "@extremiteNonDisponibleSurLe1": {
+    "placeholders": {
+      "openEnds": {
+        "type": "Object"
+      }
+    }
+  },
+  "laTuileNePossedePas": "The tile  0  does not have the required value  1 . {tile} {matchEnd}",
+  "@laTuileNePossedePas": {
+    "placeholders": {
+      "tile": {
+        "type": "Object"
+      },
+      "matchEnd": {
+        "type": "Object"
+      }
+    }
+  },
+  "leBotAJoueAutomatiquement": "The bot played  0  automatically. {tileToPlay}",
+  "@leBotAJoueAutomatiquement": {
+    "placeholders": {
+      "tileToPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteContraintDePasser": "⏱️ {playerName} a été contraint de passer son tour.",
+  "@aEteContraintDePasser": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "laRouletteADesigne": "The roulette has designated  0 ! {selectedName}",
+  "@laRouletteADesigne": {
+    "placeholders": {
+      "selectedName": {
+        "type": "Object"
+      }
+    }
+  },
+  "doitEcrireLeDefi": "0  must write the challenge... {authorName}",
+  "@doitEcrireLeDefi": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
+  "leDefiAEteEnvoye1": "The challenge was sent to  0 ! {currentPlayerName}",
+  "@leDefiAEteEnvoye1": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "resultatDeValidation": "Result:  0  % validation! {percentage}",
+  "@resultatDeValidation": {
+    "placeholders": {
+      "percentage": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneXp": "0  wins  1  XP! {currentPlayerName} {earnedXp}",
+  "@gagneXp": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      },
+      "earnedXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "tourSuivantQuiSeraLe1": "Next turn! Who will be next?",
+  "passeSonTour3": "0  Passes its turn! {playerOrderinitialIn}",
+  "@passeSonTour3": {
+    "placeholders": {
+      "playerOrderinitialIn": {
+        "type": "Object"
+      }
+    }
+  },
+  "vousDevezPiocherCartesOu": "You must pick  0  cards, or counter with a +2/+4. {pendingDraw}",
+  "@vousDevezPiocherCartesOu": {
+    "placeholders": {
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
+  "egaliteParfaite1": "Perfect equality! {names}",
+  "@egaliteParfaite1": {
+    "placeholders": {
+      "names": {
+        "type": "Object"
+      }
+    }
+  },
+  "priseMultipleObligatoireAvecLe1": "Mandatory multiple socket with the pawn in  0  . {mandatoryPiece}",
+  "@priseMultipleObligatoireAvecLe1": {
+    "placeholders": {
+      "mandatoryPiece": {
+        "type": "Object"
+      }
+    }
+  },
+  "motsDevines": "0  /  1  words guessed! {guessedCount} {collectiveWordslengt}",
+  "@motsDevines": {
+    "placeholders": {
+      "guessedCount": {
+        "type": "Object"
+      },
+      "collectiveWordslengt": {
+        "type": "Object"
+      }
+    }
+  },
+  "quiPourraitLePlus3": "Which could be the most  0 {questionsrandomnextI}",
+  "@quiPourraitLePlus3": {
+    "placeholders": {
+      "questionsrandomnextI": {
+        "type": "Object"
+      }
+    }
+  },
+  "decrivezVotreMotSecretEn": "Describe your secret word in one word. Impostors, bluff!",
+  "trouvezLeMeilleurSynonymePour1": "Find the best synonym for the word:  0  {word}",
+  "@trouvezLeMeilleurSynonymePour1": {
+    "placeholders": {
+      "word": {
+        "type": "Object"
+      }
+    }
+  },
+  "interdictionFormelleDeVoterPour": "Formal ban on voting for oneself!",
+  "remporteLaManche": "0  wins the handle! {winnerName}",
+  "@remporteLaManche": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mrWhiteADevineLe1": "Mr. White guessed the secret word: '' 0  ''! {civilianWord}",
+  "@mrWhiteADevineLe1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "mrWhiteAEchoueA1": "Mr. White failed to guess the word (it was ''  0 ''). {civilianWord}",
+  "@mrWhiteAEchoueA1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aucuneDescriptionNAEte1": "No description was voted.",
+  "ceNEstPasLe3": "It''s not the turn of  0  . {playerId}",
+  "@ceNEstPasLe3": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
+  "donneesDuJoueurIntrouvables": "Player data  0  not found. {playerId}",
+  "@donneesDuJoueurIntrouvables": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
+  "vousDevezFournirLaCouleur1": "You must provide the requested color (  0  ). {ledSuit}",
+  "@vousDevezFournirLaCouleur1": {
+    "placeholders": {
+      "ledSuit": {
+        "type": "Object"
+      }
+    }
+  },
+  "aGagneAvecSaDescription1": "0  won with his description: {winnerName}",
+  "@aGagneAvecSaDescription1": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "leLoupBlancFrappeEn": "The White Wolf strikes alone",
+  "etaitUnCivilLesImposteurs": "0  was a civilian! The Impostors win! {player}",
+  "@etaitUnCivilLesImposteurs": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      }
+    }
+  },
+  "etaitLLesCivilsGagnent": "0  was the  1 ! The Civils win! {player} {role}",
+  "@etaitLLesCivilsGagnent": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
+  "question2": "question"
 }

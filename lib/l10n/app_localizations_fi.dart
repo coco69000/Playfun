@@ -7542,4 +7542,631 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get readycountTotalplayers => '\$ (\$readyCount/\$totalPlayers)';
+
+  @override
+  String get appTitle => 'Bilepeli';
+
+  @override
+  String get loginTitle => 'Tervetuloa!';
+
+  @override
+  String get registerTitle => 'Liity mukaan!';
+
+  @override
+  String get email => 'Sähköposti';
+
+  @override
+  String get password => 'Salasana';
+
+  @override
+  String get username => 'Käyttäjätunnus';
+
+  @override
+  String get loginButton => 'Kirjaudu sisään';
+
+  @override
+  String get registerButton => 'Luo tili';
+
+  @override
+  String get termsAcceptance =>
+      'Olen lukenut ja hyväksyn käyttöehdot ja tietosuojaselosteen.';
+
+  @override
+  String get gamesTab => 'Pelit';
+
+  @override
+  String get friendsTab => 'Ystävät';
+
+  @override
+  String get statsTab => 'Profiili';
+
+  @override
+  String get loungesTab => 'Huoneet';
+
+  @override
+  String get createGame => 'Luo peli';
+
+  @override
+  String get joinGame => 'Liity';
+
+  @override
+  String get gameCode => 'Pelikoodi (6 numeroa)';
+
+  @override
+  String get startGame => 'Aloita peli';
+
+  @override
+  String get leaveGame => 'Poistu pelistä';
+
+  @override
+  String get rules => 'Säännöt';
+
+  @override
+  String get level => 'Taso';
+
+  @override
+  String get coins => 'Kolikot';
+
+  @override
+  String get gameOver => 'Peli päättyi!';
+
+  @override
+  String get victory => 'Voitto!';
+
+  @override
+  String get defeat => 'Häviö';
+
+  @override
+  String get nextRound => 'Seuraava kierros';
+
+  @override
+  String get onboardingWelcome => 'Tervetuloa';
+
+  @override
+  String get onboardingSkip => 'Ohita';
+
+  @override
+  String get onboardingNext => 'Seuraava';
+
+  @override
+  String get onboardingStart => 'Aloitetaan! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Pelaa ystävien kanssa';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Valitse yli 30 bile-, kortti- ja lautapelin joukosta. Pelaa paikallisesti, ystävien kanssa tai maailmanlaajuisesti!';
+
+  @override
+  String get onboardingSlide2Title => 'Ansaitse kolikoita ja merkkejä';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Ansaitse XP:tä jokaisesta voitosta, nouse tasoilla ja avaa ainutlaatuisia saavutuksia.';
+
+  @override
+  String get onboardingSlide3Title => 'Luo tai liity sekunneissa';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      '6-numeroinen koodi riittää ystävien kokoamiseen, tai käynnistä nopea otteluhaku.';
+
+  @override
+  String get vipPass => 'VIP-Passi';
+
+  @override
+  String get vipActive => 'VIP-passisi on aktiivinen!';
+
+  @override
+  String get vipActiveDesc =>
+      'Kaikki ominaisuudet (tekoäly, huoneet, video, ottelunhaku) ovat rajattomia.';
+
+  @override
+  String get choosePlan => 'Valitse tilauksesi:';
+
+  @override
+  String get restorePurchases => 'Palauta ostokset';
+
+  @override
+  String get purchasesRestored => 'Ostokset palautettu onnistuneesti!';
+
+  @override
+  String get noPurchasesFound => 'Aktiivisia ostoksia ei löytynyt.';
+
+  @override
+  String get monthlySubscription => 'Kuukausitilaus';
+
+  @override
+  String get annualSubscription => 'Vuositilaus';
+
+  @override
+  String get lifetimeAccess => 'Elinikäinen pääsy';
+
+  @override
+  String get popularTag => 'SUOSITTU';
+
+  @override
+  String get chooseButton => 'Valitse';
+
+  @override
+  String get vipCongratulations => 'Onnittelut, olet VIP!';
+
+  @override
+  String get purchaseFailed => 'Ostosta ei suoritettu loppuun.';
+
+  @override
+  String get profileTitle => 'Profiili ja asetukset';
+
+  @override
+  String get profileNotFound =>
+      'Profiilia ei löytynyt tai pelaajaa ei ole olemassa.';
+
+  @override
+  String get tabStats => 'Tilastot';
+
+  @override
+  String get tabBadges => 'Merkit ja saavutukset';
+
+  @override
+  String get tabSettings => 'Asetukset';
+
+  @override
+  String get gamesPlayed => 'Pelatut pelit';
+
+  @override
+  String get gamesWon => 'Voitot';
+
+  @override
+  String get winRate => 'Voittoprosentti';
+
+  @override
+  String get soundEffects => 'Äänitehosteet';
+
+  @override
+  String get music => 'Musiikki';
+
+  @override
+  String get editUsername => 'Vaihda käyttäjätunnus';
+
+  @override
+  String get newUsernameHint => 'Uusi käyttäjätunnus';
+
+  @override
+  String get logout => 'Kirjaudu ulos';
+
+  @override
+  String get deleteAccount => 'Poista tili';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Haluatko varmasti poistaa tilisi pysyvästi?';
+
+  @override
+  String get cancel => 'Peruuta';
+
+  @override
+  String get confirm => 'Vahvista';
+
+  @override
+  String get save => 'Tallenna';
+
+  @override
+  String get modeLocal => 'Paikallinen';
+
+  @override
+  String get modeMulti => 'Verkossa';
+
+  @override
+  String get modeMonde => 'Maailma';
+
+  @override
+  String get searchGame => 'Etsi peliä...';
+
+  @override
+  String get filterAll => 'Kaikki pelit';
+
+  @override
+  String get createLounge => 'Luo huone';
+
+  @override
+  String get joinLounge => 'Liity huoneeseen';
+
+  @override
+  String get loungeCode => 'Huonekoodi';
+
+  @override
+  String get publicLounges => 'Julkiset huoneet';
+
+  @override
+  String get noLoungesAvailable =>
+      'Julkisia huoneita ei ole tällä hetkellä saatavilla.';
+
+  @override
+  String get playersCount => 'Pelaajat';
+
+  @override
+  String get howToPlay => 'Kuinka pelata?';
+
+  @override
+  String get copiedToClipboard => 'Kopioitu leikepöydälle!';
+
+  @override
+  String get connectionError => 'Yhteysvirhe. Yritä uudelleen.';
+
+  @override
+  String get loading => 'Ladataan...';
+
+  @override
+  String get success => 'Onnistui!';
+
+  @override
+  String pasAssezDeSymbolesUniques1(
+    Object symbolsPerCard,
+    Object totalSymbols,
+    Object dobbleSymbolslength,
+  ) {
+    return 'Ei tarpeeksi ainutlaatuisia symboleja 0 kortin symboleja. Vaaditaan: 1 , Saatavana: 2 . $symbolsPerCard $totalSymbols $dobbleSymbolslength';
+  }
+
+  @override
+  String melangeEquilibreDesThemesSuivants1(Object combinedTheme) {
+    return 'Tasapainotettu yhdistelmä seuraavia teemoja: 0 $combinedTheme';
+  }
+
+  @override
+  String ambianceTonImpose(Object style) {
+    return '[Ambiance / Tone asetettu: 0 ] $style';
+  }
+
+  @override
+  String genereDesPairesDeMots1(Object finalPrompt) {
+    return 'Luo paria samanlaisia sanoja \"MotCivil:MotInfilted\" muodossa. Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCartesTabooAu1(Object finalPrompt) {
+    return 'Luo Taboo-kortit muodossa \"kohdesana:Kielletty1,Kielletty2,Kielletty3,Kielletty4,Kielletty5.\" Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCategoriesOriginalesEt1(Object finalPrompt) {
+    return 'Luo alkuperäisen ja hauska kategoriat arvata. Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesVisuelles1(Object finalPrompt) {
+    return 'Luo lyhyitä, visuaalisia ja hämmentyneitä lauseita piirtää (esim. \'Dinosaurus syö jäätä\'). Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesDAccroche1(Object finalPrompt) {
+    return 'Luo alkuperäisiä saalislauseita tai kirjoittaa universumia. Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesDilemmesCorneliensAu1(Object finalPrompt) {
+    return 'Luo sarveiskalvon pulmia muodossa \"OptionA tai vaihtoehtoB\" (esim. \"Voi lentää tai olla näkymätön\"). Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUnMelangeDeDefis1(Object finalPrompt) {
+    return 'Aiheuttaa joukon haasteita (toimia) ja epätahdikkaita kysymyksiä (totuuksia). Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesQuestionsDirectesAmusantes1(Object finalPrompt) {
+    return 'Luo suoria, hauskoja ja mausteisia kysymyksiä. Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesA1(Object finalPrompt) {
+    return 'Luo lyhyt reikä lauseita (sisältää \') peli. Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesSituationsHumoristiquesEt1(Object finalPrompt) {
+    return 'Luo humoristisia tilanteita ja alkaa legendoja memes. Teema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUneListeDeMots1(Object gameType, Object finalPrompt) {
+    return 'Luo lista sanoista / ilmeistä peli 0 teemalla: 1 $gameType $finalPrompt';
+  }
+
+  @override
+  String theme(Object gameType) {
+    return 'Teema 0 $gameType';
+  }
+
+  @override
+  String passeSonTour2(Object playerName) {
+    return 'Se on ohi. $playerName';
+  }
+
+  @override
+  String finDuCompteARebours1(Object playerslength) {
+    return '⏱️ Fin du compte à rebours : Partie relancée pour tous les $playerslength joueurs !';
+  }
+
+  @override
+  String aOuvertAvec(Object playerName, Object cardToPlay) {
+    return '0 on avattu 1 . $playerName $cardToPlay';
+  }
+
+  @override
+  String sEstDeconnecteVictoireDe(
+    Object removedPlayerName,
+    Object remainingName,
+  ) {
+    return '0 on kytketty irti. Voita yksi per paketti! $removedPlayerName $remainingName';
+  }
+
+  @override
+  String aManque3ToursSans(Object playerName) {
+    return '0 jäi 3 kierrosta pelaamatta. Valvojaa pyydettiin päättämään sen korvaamisesta tietokoneella. $playerName';
+  }
+
+  @override
+  String neRepondPlusLAdministrateur(Object playerName, Object reason) {
+    return '0 ei enää vastaa (1 . Valvojaa pyydettiin päättämään sen korvaamisesta tietokoneella. $playerName $reason';
+  }
+
+  @override
+  String aEteRemplaceParL(Object playerName) {
+    return 'Sen korvasi tietokone (AI aktiivinen - 5s per kierros). $playerName';
+  }
+
+  @override
+  String nAPasDonneD(Object playerName) {
+    return '0 ei ole antanut hakemistoa (Jeu d\'anion). Käänny ohi. $playerName';
+  }
+
+  @override
+  String nAPasReponduJeu(Object playerName) {
+    return 'Kiertue hyppäsi ilman automaattista toimintaa. $playerName';
+  }
+
+  @override
+  String nAPasJoueA3(Object playerName) {
+    return '0 ei ole pelannut ajoissa. Hänen vuoronsa on ohi. $playerName';
+  }
+
+  @override
+  String egaliteParfaiteLorsDuVote2(Object tiedPlayerslength) {
+    return 'Täydellinen tasa-arvo äänestyksessä (0 pelaajaa ex-aequo)! Yksikään pelaaja ei ole eliminoitu. $tiedPlayerslength';
+  }
+
+  @override
+  String aJoue(Object playerName, Object lastDrawn) {
+    return '0 on pelannut 1 . $playerName $lastDrawn';
+  }
+
+  @override
+  String aJoue1(Object playerName, Object playable) {
+    return '0 on pelannut 1 . $playerName $playable';
+  }
+
+  @override
+  String piocheEtPasseSonTour(Object playerName) {
+    return 'Nostaa ja kulkee sen vuoro. $playerName';
+  }
+
+  @override
+  String nAPasJoueA4(Object playerName) {
+    return '0 ei pelannut ajoissa. Yksi kortti kukistettiin ja yksi laatikko paljastettiin. $playerName';
+  }
+
+  @override
+  String laPartieEstTermineeVictoire1(Object winner) {
+    return 'Peli on ohi. Nollan voitto! $winner';
+  }
+
+  @override
+  String joueursContaminesParLaMaladie1(Object contaminatedNames) {
+    return 'Pelaajat tartunnan tauti: 0 . $contaminatedNames';
+  }
+
+  @override
+  String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
+    return 'Vakoilit nollaa ja löysit hänen roolinsa. $targetName $targetRole';
+  }
+
+  @override
+  String votreMotDuJourPrononcez(Object newWord) {
+    return 'Päivän sanasi: \' 0\'. Anna se kissalle ennen auringonlaskua! $newWord';
+  }
+
+  @override
+  String declareUnCoupDEtat(Object dictateurName) {
+    return '0 julistaa parin! $dictateurName';
+  }
+
+  @override
+  String leChasseurTireEtTue1(Object targetName) {
+    return 'Metsästäjä ampuu ja tappaa 0! $targetName';
+  }
+
+  @override
+  String aDesigneCommeNouveauCapitaine(
+    Object formerCaptainName,
+    Object newCaptainName,
+  ) {
+    return '0 on nimennyt yhden uudeksi kapteeniksi! $formerCaptainName $newCaptainName';
+  }
+
+  @override
+  String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
+    return 'Cupido on nimennyt 0 ja 1 rakastavaiset! $lover1Name $lover2Name';
+  }
+
+  @override
+  String votreAmoureuxSe(Object amoureux2Name) {
+    return 'Rakastajasi: 0 $amoureux2Name';
+  }
+
+  @override
+  String votreAmoureuxSe1(Object amoureux1Name) {
+    return 'Rakastajasi: 0 $amoureux1Name';
+  }
+
+  @override
+  String cEstAuTourDe4(Object currentTeamIndex1) {
+    return 'On joukkueen vuoro! $currentTeamIndex1';
+  }
+
+  @override
+  String aFaitUnMaisAucun(Object playerName, Object dice) {
+    return 'Käänny automaattisesti! $playerName $dice';
+  }
+
+  @override
+  String lancerTropElevePourAtteindre(Object dice) {
+    return 'Käänny ohi! $dice';
+  }
+
+  @override
+  String extremiteNonDisponibleSurLe1(Object openEnds) {
+    return 'Äärimmäisyyttä ei ole saatavilla (0). $openEnds';
+  }
+
+  @override
+  String laTuileNePossedePas(Object tile, Object matchEnd) {
+    return 'Tiili 0 ei ole vaadittu arvo 1 . $tile $matchEnd';
+  }
+
+  @override
+  String leBotAJoueAutomatiquement(Object tileToPlay) {
+    return 'Robotti pelasi 0 automaattisesti. $tileToPlay';
+  }
+
+  @override
+  String aEteContraintDePasser(Object playerName) {
+    return '⏱️ $playerName a été contraint de passer son tour.';
+  }
+
+  @override
+  String laRouletteADesigne(Object selectedName) {
+    return 'Ruletti on nimennyt 0! $selectedName';
+  }
+
+  @override
+  String doitEcrireLeDefi(Object authorName) {
+    return 'Nollan täytyy kirjoittaa haaste... $authorName';
+  }
+
+  @override
+  String leDefiAEteEnvoye1(Object currentPlayerName) {
+    return 'Haaste lähetettiin 0! $currentPlayerName';
+  }
+
+  @override
+  String resultatDeValidation(Object percentage) {
+    return 'Tulos: 0 % validointi! $percentage';
+  }
+
+  @override
+  String gagneXp(Object currentPlayerName, Object earnedXp) {
+    return '0 voittaa 1 XP! $currentPlayerName $earnedXp';
+  }
+
+  @override
+  String get tourSuivantQuiSeraLe1 => 'Seuraava käännös! Kuka on seuraava?';
+
+  @override
+  String passeSonTour3(Object playerOrderinitialIn) {
+    return '-Sen vuoro! $playerOrderinitialIn';
+  }
+
+  @override
+  String vousDevezPiocherCartesOu(Object pendingDraw) {
+    return 'Sinun täytyy valita 0 korttia tai laskuri +2/+4. $pendingDraw';
+  }
+
+  @override
+  String egaliteParfaite1(Object names) {
+    return 'Täydellinen tasa-arvo! $names';
+  }
+
+  @override
+  String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
+    return 'Pakollinen useita pistorasia kanssa pelinappula 0 . $mandatoryPiece';
+  }
+
+  @override
+  String motsDevines(Object guessedCount, Object collectiveWordslengt) {
+    return '0 / 1 sana arvattu! $guessedCount $collectiveWordslengt';
+  }
+
+  @override
+  String quiPourraitLePlus3(Object questionsrandomnextI) {
+    return 'Joka voisi olla eniten 0 $questionsrandomnextI';
+  }
+
+  @override
+  String get decrivezVotreMotSecretEn =>
+      'Kuvaile salainen sana yhdellä sanalla. Hämäystä!';
+
+  @override
+  String trouvezLeMeilleurSynonymePour1(Object word) {
+    return 'Etsi paras synonyymi sanalle: 0 $word';
+  }
+
+  @override
+  String get interdictionFormelleDeVoterPour =>
+      'Muodollinen kielto äänestää itseään!';
+
+  @override
+  String remporteLaManche(Object winnerName) {
+    return 'Nolla voittaa kahvan! $winnerName';
+  }
+
+  @override
+  String mrWhiteADevineLe1(Object civilianWord) {
+    return 'Herra White arvasi salasanan: \"0.\" $civilianWord';
+  }
+
+  @override
+  String mrWhiteAEchoueA1(Object civilianWord) {
+    return 'Herra White ei arvannut sanaa (se oli \' 0 \'). $civilianWord';
+  }
+
+  @override
+  String get aucuneDescriptionNAEte1 => 'Kuvauksesta ei äänestetty.';
+
+  @override
+  String ceNEstPasLe3(Object playerId) {
+    return 'Nyt ei ole nollan vuoro. $playerId';
+  }
+
+  @override
+  String donneesDuJoueurIntrouvables(Object playerId) {
+    return 'Pelaajan tietoja 0 ei löytynyt. $playerId';
+  }
+
+  @override
+  String vousDevezFournirLaCouleur1(Object ledSuit) {
+    return 'Sinun täytyy antaa pyydetty väri (0). $ledSuit';
+  }
+
+  @override
+  String aGagneAvecSaDescription1(Object winnerName) {
+    return '0 voitti hänen kuvaus: $winnerName';
+  }
+
+  @override
+  String get leLoupBlancFrappeEn => 'Valkoinen susi iskee yksin';
+
+  @override
+  String etaitUnCivilLesImposteurs(Object player) {
+    return '0 oli siviili! Impostorit voittavat! $player';
+  }
+
+  @override
+  String etaitLLesCivilsGagnent(Object player, Object role) {
+    return 'Siviilit voittivat! $player $role';
+  }
+
+  @override
+  String get question2 => 'kysymys';
 }

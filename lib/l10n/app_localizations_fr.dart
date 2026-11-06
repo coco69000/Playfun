@@ -7642,4 +7642,631 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get readycountTotalplayers =>
       '\${\'PRÊT\'\'} (\$readyCount/\$totalPlayers)';
+
+  @override
+  String get appTitle => 'Jeu de Soirée';
+
+  @override
+  String get loginTitle => 'Bienvenue !';
+
+  @override
+  String get registerTitle => 'Rejoignez-nous !';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Mot de passe';
+
+  @override
+  String get username => 'Pseudo unique';
+
+  @override
+  String get loginButton => 'Connexion';
+
+  @override
+  String get registerButton => 'Créer mon compte';
+
+  @override
+  String get termsAcceptance =>
+      'J\'ai lu et j\'accepte les CGU et la Politique de Confidentialité.';
+
+  @override
+  String get gamesTab => 'Jeux';
+
+  @override
+  String get friendsTab => 'Amis';
+
+  @override
+  String get statsTab => 'Étoile';
+
+  @override
+  String get loungesTab => 'Salons';
+
+  @override
+  String get createGame => 'Créer une partie';
+
+  @override
+  String get joinGame => 'Rejoindre';
+
+  @override
+  String get gameCode => 'Code de la partie (6 chiffres)';
+
+  @override
+  String get startGame => 'Démarrer la partie';
+
+  @override
+  String get leaveGame => 'Quitter la partie';
+
+  @override
+  String get rules => 'Règles';
+
+  @override
+  String get level => 'Niveau';
+
+  @override
+  String get coins => 'Pièces';
+
+  @override
+  String get gameOver => 'Partie Terminée !';
+
+  @override
+  String get victory => 'Victoire !';
+
+  @override
+  String get defeat => 'Défaite';
+
+  @override
+  String get nextRound => 'Manche suivante';
+
+  @override
+  String get onboardingWelcome => 'Bienvenue';
+
+  @override
+  String get onboardingSkip => 'Passer';
+
+  @override
+  String get onboardingNext => 'Suivant';
+
+  @override
+  String get onboardingStart => 'C\'est parti ! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Joue avec tes potes';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Choisis parmi plus de 30 jeux d\'ambiance, de cartes et de plateau. Joue en Local, entre Amis ou avec le Monde entier !';
+
+  @override
+  String get onboardingSlide2Title => 'Gagne des pièces & Débloque des Badges';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Gagne de l\'expérience à chaque victoire, grimpe les niveaux et débloque des succès exclusifs pour personnaliser ton profil.';
+
+  @override
+  String get onboardingSlide3Title => 'Crée ou rejoins en 2 secondes';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'Un code à 6 chiffres suffit pour réunir tes amis, ou lance le Matchmaking rapide pour trouver des joueurs en direct.';
+
+  @override
+  String get vipPass => 'Pass VIP';
+
+  @override
+  String get vipActive => 'Votre Pass VIP est actif !';
+
+  @override
+  String get vipActiveDesc =>
+      'Toutes les fonctionnalités (IA, Salons, Vidéo, Matchmaking) sont illimitées.';
+
+  @override
+  String get choosePlan => 'Choisissez votre formule :';
+
+  @override
+  String get restorePurchases => 'Restaurer mes achats';
+
+  @override
+  String get purchasesRestored => 'Achats restaurés avec succès !';
+
+  @override
+  String get noPurchasesFound => 'Aucun achat actif trouvé.';
+
+  @override
+  String get monthlySubscription => 'Abonnement Mensuel';
+
+  @override
+  String get annualSubscription => 'Abonnement Annuel';
+
+  @override
+  String get lifetimeAccess => 'Accès à Vie';
+
+  @override
+  String get popularTag => 'POPULAIRE';
+
+  @override
+  String get chooseButton => 'Choisir';
+
+  @override
+  String get vipCongratulations => 'Félicitations, vous êtes VIP !';
+
+  @override
+  String get purchaseFailed => 'Achat non finalisé.';
+
+  @override
+  String get profileTitle => 'Profil & Paramètres';
+
+  @override
+  String get profileNotFound => 'Profil introuvable ou joueur inexistant.';
+
+  @override
+  String get tabStats => 'Statistiques';
+
+  @override
+  String get tabBadges => 'Badges & Succès';
+
+  @override
+  String get tabSettings => 'Paramètres';
+
+  @override
+  String get gamesPlayed => 'Parties jouées';
+
+  @override
+  String get gamesWon => 'Victoires';
+
+  @override
+  String get winRate => 'Taux de victoire';
+
+  @override
+  String get soundEffects => 'Effets sonores';
+
+  @override
+  String get music => 'Musique';
+
+  @override
+  String get editUsername => 'Changer de pseudo';
+
+  @override
+  String get newUsernameHint => 'Nouveau pseudo';
+
+  @override
+  String get logout => 'Se déconnecter';
+
+  @override
+  String get deleteAccount => 'Supprimer mon compte';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Êtes-vous sûr de vouloir supprimer définitivement votre compte ?';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get confirm => 'Confirmer';
+
+  @override
+  String get save => 'Enregistrer';
+
+  @override
+  String get modeLocal => 'Local';
+
+  @override
+  String get modeMulti => 'En Ligne';
+
+  @override
+  String get modeMonde => 'Monde';
+
+  @override
+  String get searchGame => 'Rechercher un jeu...';
+
+  @override
+  String get filterAll => 'Tous les jeux';
+
+  @override
+  String get createLounge => 'Créer un salon';
+
+  @override
+  String get joinLounge => 'Rejoindre un salon';
+
+  @override
+  String get loungeCode => 'Code du salon';
+
+  @override
+  String get publicLounges => 'Salons publics';
+
+  @override
+  String get noLoungesAvailable =>
+      'Aucun salon public disponible pour le moment.';
+
+  @override
+  String get playersCount => 'Joueurs';
+
+  @override
+  String get howToPlay => 'Comment jouer ?';
+
+  @override
+  String get copiedToClipboard => 'Copié dans le presse-papier !';
+
+  @override
+  String get connectionError => 'Erreur de connexion. Veuillez réessayer.';
+
+  @override
+  String get loading => 'Chargement...';
+
+  @override
+  String get success => 'Succès !';
+
+  @override
+  String pasAssezDeSymbolesUniques1(
+    Object symbolsPerCard,
+    Object totalSymbols,
+    Object dobbleSymbolslength,
+  ) {
+    return 'Pas assez de symboles uniques pour $symbolsPerCard symboles par carte. Requis: $totalSymbols, Disponibles: $dobbleSymbolslength.';
+  }
+
+  @override
+  String melangeEquilibreDesThemesSuivants1(Object combinedTheme) {
+    return 'Mélange équilibré des thèmes suivants : $combinedTheme';
+  }
+
+  @override
+  String ambianceTonImpose(Object style) {
+    return '[Ambiance / Ton imposé : $style]';
+  }
+
+  @override
+  String genereDesPairesDeMots1(Object finalPrompt) {
+    return 'Génère des paires de mots proches au format \'MotCivil:MotInfiltré\'. Thème : $finalPrompt';
+  }
+
+  @override
+  String genereDesCartesTabooAu1(Object finalPrompt) {
+    return 'Génère des cartes Taboo au format \'MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5\'. Thème : $finalPrompt';
+  }
+
+  @override
+  String genereDesCategoriesOriginalesEt1(Object finalPrompt) {
+    return 'Génère des catégories originales et amusantes à faire deviner. Thème : $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesVisuelles1(Object finalPrompt) {
+    return 'Génère des phrases courtes, visuelles et loufoques à faire dessiner (ex: \'Un dinosaure qui mange une glace\'). Thème : $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesDAccroche1(Object finalPrompt) {
+    return 'Génère des phrases d\'accroche ou univers d\'écriture originaux. Thème : $finalPrompt';
+  }
+
+  @override
+  String genereDesDilemmesCorneliensAu1(Object finalPrompt) {
+    return 'Génère des dilemmes cornéliens au format \'OptionA ou OptionB\' (ex: \'Pouvoir voler ou Être invisible\'). Thème : $finalPrompt';
+  }
+
+  @override
+  String genereUnMelangeDeDefis1(Object finalPrompt) {
+    return 'Génère un mélange de défis (actions) et questions indiscrètes (vérités). Thème : $finalPrompt';
+  }
+
+  @override
+  String genereDesQuestionsDirectesAmusantes1(Object finalPrompt) {
+    return 'Génère des questions directes, amusantes et piquantes. Thème : $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesA1(Object finalPrompt) {
+    return 'Génère des phrases courtes à trou (contenant \'_____\') pour le jeu. Thème : $finalPrompt';
+  }
+
+  @override
+  String genereDesSituationsHumoristiquesEt1(Object finalPrompt) {
+    return 'Génère des situations humoristiques et amorces de légendes de mèmes. Thème : $finalPrompt';
+  }
+
+  @override
+  String genereUneListeDeMots1(Object gameType, Object finalPrompt) {
+    return 'Génère une liste de mots/expressions pour le jeu $gameType sur le thème : $finalPrompt';
+  }
+
+  @override
+  String theme(Object gameType) {
+    return 'Thème $gameType';
+  }
+
+  @override
+  String passeSonTour2(Object playerName) {
+    return '⏱️ $playerName passe son tour.';
+  }
+
+  @override
+  String finDuCompteARebours1(Object playerslength) {
+    return '⏱️ Fin du compte à rebours : Partie relancée pour tous les $playerslength joueurs !';
+  }
+
+  @override
+  String aOuvertAvec(Object playerName, Object cardToPlay) {
+    return '⏱️ $playerName a ouvert avec $cardToPlay.';
+  }
+
+  @override
+  String sEstDeconnecteVictoireDe(
+    Object removedPlayerName,
+    Object remainingName,
+  ) {
+    return '$removedPlayerName s\'est déconnecté. Victoire de $remainingName par forfait !';
+  }
+
+  @override
+  String aManque3ToursSans(Object playerName) {
+    return '⚠️ $playerName a manqué 3 tours sans jouer. L\'administrateur a été invité à décider de son remplacement par l\'ordinateur.';
+  }
+
+  @override
+  String neRepondPlusLAdministrateur(Object playerName, Object reason) {
+    return '⚠️ $playerName ne répond plus ($reason). L\'administrateur a été invité à décider de son remplacement par l\'ordinateur.';
+  }
+
+  @override
+  String aEteRemplaceParL(Object playerName) {
+    return '🤖 $playerName a été remplacé par l\'ordinateur (IA active - 5s par tour).';
+  }
+
+  @override
+  String nAPasDonneD(Object playerName) {
+    return '⚠️ $playerName n\'a pas donné d\'indice (Jeu d\'opinion). Tour passé.';
+  }
+
+  @override
+  String nAPasReponduJeu(Object playerName) {
+    return '⚠️ $playerName n\'a pas répondu (Jeu d\'opinion). Tour sauté sans action automatique.';
+  }
+
+  @override
+  String nAPasJoueA3(Object playerName) {
+    return '$playerName n\'a pas joué à temps. Son tour est passé.';
+  }
+
+  @override
+  String egaliteParfaiteLorsDuVote2(Object tiedPlayerslength) {
+    return 'Égalité parfaite lors du vote ($tiedPlayerslength joueurs ex-aequo) ! Aucun joueur éliminé.';
+  }
+
+  @override
+  String aJoue(Object playerName, Object lastDrawn) {
+    return '⏱️ $playerName a joué $lastDrawn.';
+  }
+
+  @override
+  String aJoue1(Object playerName, Object playable) {
+    return '⏱️ $playerName a joué $playable.';
+  }
+
+  @override
+  String piocheEtPasseSonTour(Object playerName) {
+    return '⏱️ $playerName pioche et passe son tour.';
+  }
+
+  @override
+  String nAPasJoueA4(Object playerName) {
+    return '⏱️ $playerName n\'a pas joué à temps. Une carte a été défaussée et une case révélée.';
+  }
+
+  @override
+  String laPartieEstTermineeVictoire1(Object winner) {
+    return 'La partie est terminée. Victoire des $winner !';
+  }
+
+  @override
+  String joueursContaminesParLaMaladie1(Object contaminatedNames) {
+    return 'Joueurs contaminés par la maladie : $contaminatedNames.';
+  }
+
+  @override
+  String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
+    return 'Vous avez espionné $targetName et découvert son rôle : $targetRole.';
+  }
+
+  @override
+  String votreMotDuJourPrononcez(Object newWord) {
+    return 'Votre mot du jour : \'$newWord\'. Prononcez-le dans le chat avant le coucher du soleil !';
+  }
+
+  @override
+  String declareUnCoupDEtat(Object dictateurName) {
+    return '$dictateurName déclare un Coup d\'État !';
+  }
+
+  @override
+  String leChasseurTireEtTue1(Object targetName) {
+    return 'Le Chasseur tire et tue $targetName !';
+  }
+
+  @override
+  String aDesigneCommeNouveauCapitaine(
+    Object formerCaptainName,
+    Object newCaptainName,
+  ) {
+    return '$formerCaptainName a désigné $newCaptainName comme nouveau Capitaine !';
+  }
+
+  @override
+  String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
+    return 'Cupidon a désigné $lover1Name et $lover2Name comme amoureux !';
+  }
+
+  @override
+  String votreAmoureuxSe(Object amoureux2Name) {
+    return '❤️ Votre amoureux(se) : $amoureux2Name';
+  }
+
+  @override
+  String votreAmoureuxSe1(Object amoureux1Name) {
+    return '❤️ Votre amoureux(se) : $amoureux1Name';
+  }
+
+  @override
+  String cEstAuTourDe4(Object currentTeamIndex1) {
+    return 'C\'est au tour de l\'équipe $currentTeamIndex1 !';
+  }
+
+  @override
+  String aFaitUnMaisAucun(Object playerName, Object dice) {
+    return '🎲 $playerName a fait un $dice mais aucun pion ne peut avancer. Tour passé automatiquement !';
+  }
+
+  @override
+  String lancerTropElevePourAtteindre(Object dice) {
+    return '🎲 Lancer trop élevé ($dice) pour atteindre le centre. Tour passé !';
+  }
+
+  @override
+  String extremiteNonDisponibleSurLe1(Object openEnds) {
+    return 'Extrémité non disponible sur le plateau ($openEnds).';
+  }
+
+  @override
+  String laTuileNePossedePas(Object tile, Object matchEnd) {
+    return 'La tuile $tile ne possède pas la valeur $matchEnd requise.';
+  }
+
+  @override
+  String leBotAJoueAutomatiquement(Object tileToPlay) {
+    return '⏱️ Le bot a joué $tileToPlay automatiquement.';
+  }
+
+  @override
+  String aEteContraintDePasser(Object playerName) {
+    return '⏱️ $playerName a été contraint de passer son tour.';
+  }
+
+  @override
+  String laRouletteADesigne(Object selectedName) {
+    return '🎲 La roulette a désigné $selectedName !';
+  }
+
+  @override
+  String doitEcrireLeDefi(Object authorName) {
+    return '✍️ $authorName doit écrire le défi...';
+  }
+
+  @override
+  String leDefiAEteEnvoye1(Object currentPlayerName) {
+    return '📝 Le défi a été envoyé à $currentPlayerName !';
+  }
+
+  @override
+  String resultatDeValidation(Object percentage) {
+    return '📊 Résultat : $percentage% de validation !';
+  }
+
+  @override
+  String gagneXp(Object currentPlayerName, Object earnedXp) {
+    return '⭐ $currentPlayerName gagne $earnedXp XP !';
+  }
+
+  @override
+  String get tourSuivantQuiSeraLe1 =>
+      '🔄 Tour suivant ! Qui sera le prochain ?';
+
+  @override
+  String passeSonTour3(Object playerOrderinitialIn) {
+    return '$playerOrderinitialIn passe son tour !';
+  }
+
+  @override
+  String vousDevezPiocherCartesOu(Object pendingDraw) {
+    return 'Vous devez piocher $pendingDraw cartes, ou contrer avec un +2/+4.';
+  }
+
+  @override
+  String egaliteParfaite1(Object names) {
+    return 'Égalité parfaite ($names) !';
+  }
+
+  @override
+  String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
+    return 'Prise multiple obligatoire avec le pion en $mandatoryPiece.';
+  }
+
+  @override
+  String motsDevines(Object guessedCount, Object collectiveWordslengt) {
+    return '$guessedCount/$collectiveWordslengt mots devinés !';
+  }
+
+  @override
+  String quiPourraitLePlus3(Object questionsrandomnextI) {
+    return 'Qui pourrait le plus $questionsrandomnextI';
+  }
+
+  @override
+  String get decrivezVotreMotSecretEn =>
+      'Décrivez votre mot secret en un seul mot. Imposteurs, bluffez !';
+
+  @override
+  String trouvezLeMeilleurSynonymePour1(Object word) {
+    return 'Trouvez le meilleur synonyme pour le mot : $word';
+  }
+
+  @override
+  String get interdictionFormelleDeVoterPour =>
+      'Interdiction formelle de voter pour soi-même !';
+
+  @override
+  String remporteLaManche(Object winnerName) {
+    return '$winnerName remporte la manche !';
+  }
+
+  @override
+  String mrWhiteADevineLe1(Object civilianWord) {
+    return 'Mr. White a deviné le mot secret : \'$civilianWord\' !';
+  }
+
+  @override
+  String mrWhiteAEchoueA1(Object civilianWord) {
+    return 'Mr. White a échoué à deviner le mot (c\'était \'$civilianWord\').';
+  }
+
+  @override
+  String get aucuneDescriptionNAEte1 => 'Aucune description n\'a été votée.';
+
+  @override
+  String ceNEstPasLe3(Object playerId) {
+    return 'Ce n\'est pas le tour de $playerId.';
+  }
+
+  @override
+  String donneesDuJoueurIntrouvables(Object playerId) {
+    return 'Données du joueur $playerId introuvables.';
+  }
+
+  @override
+  String vousDevezFournirLaCouleur1(Object ledSuit) {
+    return 'Vous devez fournir la couleur demandée ($ledSuit).';
+  }
+
+  @override
+  String aGagneAvecSaDescription1(Object winnerName) {
+    return '$winnerName a gagné avec sa description :';
+  }
+
+  @override
+  String get leLoupBlancFrappeEn => 'Le Loup Blanc frappe en solitaire';
+
+  @override
+  String etaitUnCivilLesImposteurs(Object player) {
+    return '$player était un Civil ! Les Imposteurs gagnent !';
+  }
+
+  @override
+  String etaitLLesCivilsGagnent(Object player, Object role) {
+    return '$player était l\'$role ! Les Civils gagnent !';
+  }
+
+  @override
+  String get question2 => 'question';
 }

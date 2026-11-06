@@ -7573,4 +7573,632 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get readycountTotalplayers => '\${\'FAST} (\$Count/\$total Players)';
+
+  @override
+  String get appTitle => 'Joc de Petrecere';
+
+  @override
+  String get loginTitle => 'Bine ați venit!';
+
+  @override
+  String get registerTitle => 'Alătură-te nouă!';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Parolă';
+
+  @override
+  String get username => 'Nume de utilizator';
+
+  @override
+  String get loginButton => 'Autentificare';
+
+  @override
+  String get registerButton => 'Creează cont';
+
+  @override
+  String get termsAcceptance =>
+      'Am citit și sunt de acord cu Termenii și Politica de Confidențialitate.';
+
+  @override
+  String get gamesTab => 'Jocuri';
+
+  @override
+  String get friendsTab => 'Prieteni';
+
+  @override
+  String get statsTab => 'Profil';
+
+  @override
+  String get loungesTab => 'Camere';
+
+  @override
+  String get createGame => 'Creează joc';
+
+  @override
+  String get joinGame => 'Alătură-te';
+
+  @override
+  String get gameCode => 'Cod joc (6 cifre)';
+
+  @override
+  String get startGame => 'Începe jocul';
+
+  @override
+  String get leaveGame => 'Părăsește jocul';
+
+  @override
+  String get rules => 'Reguli';
+
+  @override
+  String get level => 'Nivel';
+
+  @override
+  String get coins => 'Monede';
+
+  @override
+  String get gameOver => 'Joc terminat!';
+
+  @override
+  String get victory => 'Victorie!';
+
+  @override
+  String get defeat => 'Înfrângere';
+
+  @override
+  String get nextRound => 'Runda următoare';
+
+  @override
+  String get onboardingWelcome => 'Bine ați venit';
+
+  @override
+  String get onboardingSkip => 'Omite';
+
+  @override
+  String get onboardingNext => 'Următorul';
+
+  @override
+  String get onboardingStart => 'Să începem! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Joacă cu prietenii';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Alege din peste 30 de jocuri de petrecere, cărți și masă. Joacă local, cu prietenii sau din întreaga lume!';
+
+  @override
+  String get onboardingSlide2Title => 'Câștigă monede și insigne';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Câștigă XP la fiecare victorie, crește în nivel și deblochează realizări exclusive.';
+
+  @override
+  String get onboardingSlide3Title => 'Creează sau alătură-te în secunde';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'Un cod de 6 cifre este suficient pentru a-ți reuni prietenii sau pornește potrivirea rapidă.';
+
+  @override
+  String get vipPass => 'Permis VIP';
+
+  @override
+  String get vipActive => 'Permisul tău VIP este activ!';
+
+  @override
+  String get vipActiveDesc =>
+      'Toate funcțiile (IA, Camere, Video, Matchmaking) sunt nelimitate.';
+
+  @override
+  String get choosePlan => 'Alege planul tău:';
+
+  @override
+  String get restorePurchases => 'Restaurează achizițiile';
+
+  @override
+  String get purchasesRestored => 'Achiziții restaurate cu succes!';
+
+  @override
+  String get noPurchasesFound => 'Nu s-au găsit achiziții active.';
+
+  @override
+  String get monthlySubscription => 'Abonament Lunar';
+
+  @override
+  String get annualSubscription => 'Abonament Anual';
+
+  @override
+  String get lifetimeAccess => 'Acces pe Viață';
+
+  @override
+  String get popularTag => 'POPULAR';
+
+  @override
+  String get chooseButton => 'Alege';
+
+  @override
+  String get vipCongratulations => 'Felicitări, ești VIP!';
+
+  @override
+  String get purchaseFailed => 'Achiziție nefinalizată.';
+
+  @override
+  String get profileTitle => 'Profil și Setări';
+
+  @override
+  String get profileNotFound =>
+      'Profilul nu a fost găsit sau jucătorul nu există.';
+
+  @override
+  String get tabStats => 'Statistici';
+
+  @override
+  String get tabBadges => 'Insigne și Realizări';
+
+  @override
+  String get tabSettings => 'Setări';
+
+  @override
+  String get gamesPlayed => 'Jocuri jucate';
+
+  @override
+  String get gamesWon => 'Victorii';
+
+  @override
+  String get winRate => 'Rată de victorie';
+
+  @override
+  String get soundEffects => 'Efecte sonore';
+
+  @override
+  String get music => 'Muzică';
+
+  @override
+  String get editUsername => 'Schimbă numele de utilizator';
+
+  @override
+  String get newUsernameHint => 'Nume nou';
+
+  @override
+  String get logout => 'Deconectare';
+
+  @override
+  String get deleteAccount => 'Șterge contul';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Sigur doriți să vă ștergeți definitiv contul?';
+
+  @override
+  String get cancel => 'Anulare';
+
+  @override
+  String get confirm => 'Confirmă';
+
+  @override
+  String get save => 'Salvează';
+
+  @override
+  String get modeLocal => 'Local';
+
+  @override
+  String get modeMulti => 'Online';
+
+  @override
+  String get modeMonde => 'Lume';
+
+  @override
+  String get searchGame => 'Caută un joc...';
+
+  @override
+  String get filterAll => 'Toate jocurile';
+
+  @override
+  String get createLounge => 'Creează o cameră';
+
+  @override
+  String get joinLounge => 'Alătură-te unei camere';
+
+  @override
+  String get loungeCode => 'Codul camerei';
+
+  @override
+  String get publicLounges => 'Camere publice';
+
+  @override
+  String get noLoungesAvailable =>
+      'Momentan nu sunt camere publice disponibile.';
+
+  @override
+  String get playersCount => 'Jucători';
+
+  @override
+  String get howToPlay => 'Cum se joacă?';
+
+  @override
+  String get copiedToClipboard => 'Copiat în clipboard!';
+
+  @override
+  String get connectionError =>
+      'Eroare de conexiune. Vă rugăm să încercați din nou.';
+
+  @override
+  String get loading => 'Se încarcă...';
+
+  @override
+  String get success => 'Succes!';
+
+  @override
+  String pasAssezDeSymbolesUniques1(
+    Object symbolsPerCard,
+    Object totalSymbols,
+    Object dobbleSymbolslength,
+  ) {
+    return 'Nu sunt suficiente simboluri unice pentru 0 simboluri card. Necesar: 1 , Disponibil: 2 . $symbolsPerCard $totalSymbols $dobbleSymbolslength';
+  }
+
+  @override
+  String melangeEquilibreDesThemesSuivants1(Object combinedTheme) {
+    return 'Mix echilibrat al următoarelor teme: 0 $combinedTheme';
+  }
+
+  @override
+  String ambianceTonImpose(Object style) {
+    return '[Ambiance / Tone impuse: 0] $style';
+  }
+
+  @override
+  String genereDesPairesDeMots1(Object finalPrompt) {
+    return 'Generează perechi de cuvinte similare în format \'MotCivil:MotInfilted\'. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCartesTabooAu1(Object finalPrompt) {
+    return 'Generează carduri Taboo în format \'Targetword: Forbidd1, Forbidd2, Forbidd3, Forbidd4, Forbidd5\'. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCategoriesOriginalesEt1(Object finalPrompt) {
+    return 'Generează categorii originale și distractive pentru a ghici. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesVisuelles1(Object finalPrompt) {
+    return 'Generează propoziții scurte, vizuale și derutante de desenat (de exemplu, \"Un dinozaur mâncând gheață\"). Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesDAccroche1(Object finalPrompt) {
+    return 'Generează fraze de captură originale sau univers scris. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesDilemmesCorneliensAu1(Object finalPrompt) {
+    return 'Generează dileme corneene în formatul \"Opțiunea A sau opțiunea B\" (de exemplu, \"Poate zbura sau poate fi invizibil\"). Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUnMelangeDeDefis1(Object finalPrompt) {
+    return 'Generează o combinație de provocări (acțiuni) și întrebări indiscrete (adevăruri). Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesQuestionsDirectesAmusantes1(Object finalPrompt) {
+    return 'Generează întrebări directe, distractive și picante. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesA1(Object finalPrompt) {
+    return 'Generează propoziții scurte (conținând \") pentru joc. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesSituationsHumoristiquesEt1(Object finalPrompt) {
+    return 'Generează situații amuzante și începuturi de legende ale memelor. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUneListeDeMots1(Object gameType, Object finalPrompt) {
+    return 'Generează o listă de cuvinte/expresii pentru jocul 0 pe tema: 1 $gameType $finalPrompt';
+  }
+
+  @override
+  String theme(Object gameType) {
+    return 'Tema 0 $gameType';
+  }
+
+  @override
+  String passeSonTour2(Object playerName) {
+    return 'S-a terminat. $playerName';
+  }
+
+  @override
+  String finDuCompteARebours1(Object playerslength) {
+    return '⏱️ Fin du compte à rebours : Partie relancée pour tous les $playerslength joueurs !';
+  }
+
+  @override
+  String aOuvertAvec(Object playerName, Object cardToPlay) {
+    return '0 a deschis cu 1. $playerName $cardToPlay';
+  }
+
+  @override
+  String sEstDeconnecteVictoireDe(
+    Object removedPlayerName,
+    Object remainingName,
+  ) {
+    return '0 a deconectat. Câştigă 1 pe pachet! $removedPlayerName $remainingName';
+  }
+
+  @override
+  String aManque3ToursSans(Object playerName) {
+    return '0 ratat 3 tururi fără a juca. Administratorul a fost rugat să decidă înlocuirea acestuia cu calculatorul. $playerName';
+  }
+
+  @override
+  String neRepondPlusLAdministrateur(Object playerName, Object reason) {
+    return '0 nu mai răspunde (1). Administratorul a fost rugat să decidă înlocuirea acestuia cu calculatorul. $playerName $reason';
+  }
+
+  @override
+  String aEteRemplaceParL(Object playerName) {
+    return 'A fost înlocuit de computer (AI activ - 5s per turn). $playerName';
+  }
+
+  @override
+  String nAPasDonneD(Object playerName) {
+    return '0 nu a dat un indice (Jeu d\'opinion). Întoarce-te. $playerName';
+  }
+
+  @override
+  String nAPasReponduJeu(Object playerName) {
+    return 'Turul a sărit fără acţiune automată. $playerName';
+  }
+
+  @override
+  String nAPasJoueA3(Object playerName) {
+    return '0 nu a jucat în timp. Rândul lui a trecut. $playerName';
+  }
+
+  @override
+  String egaliteParfaiteLorsDuVote2(Object tiedPlayerslength) {
+    return 'Egalitate perfectă atunci când votează (0 jucători ex-aequo)! Niciun jucător eliminat. $tiedPlayerslength';
+  }
+
+  @override
+  String aJoue(Object playerName, Object lastDrawn) {
+    return '0 a jucat 1. $playerName $lastDrawn';
+  }
+
+  @override
+  String aJoue1(Object playerName, Object playable) {
+    return '0 a jucat 1. $playerName $playable';
+  }
+
+  @override
+  String piocheEtPasseSonTour(Object playerName) {
+    return '0 ridică și trece rândul său. $playerName';
+  }
+
+  @override
+  String nAPasJoueA4(Object playerName) {
+    return '0 nu a jucat la timp. O carte a fost învinsă şi o cutie a fost dezvăluită. $playerName';
+  }
+
+  @override
+  String laPartieEstTermineeVictoire1(Object winner) {
+    return 'Jocul s-a terminat. Victorie de 0! $winner';
+  }
+
+  @override
+  String joueursContaminesParLaMaladie1(Object contaminatedNames) {
+    return 'Jucătorii infectați cu boala: 0 . $contaminatedNames';
+  }
+
+  @override
+  String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
+    return 'Ai spionat pe 0 şi i-ai descoperit rolul: 1. $targetName $targetRole';
+  }
+
+  @override
+  String votreMotDuJourPrononcez(Object newWord) {
+    return 'Cuvântul zilei: \"0.\" Pronunţă-l în pisică înainte de apus! $newWord';
+  }
+
+  @override
+  String declareUnCoupDEtat(Object dictateurName) {
+    return '0 declară o Cupă! $dictateurName';
+  }
+
+  @override
+  String leChasseurTireEtTue1(Object targetName) {
+    return 'Vânătorul trage şi ucide 0! $targetName';
+  }
+
+  @override
+  String aDesigneCommeNouveauCapitaine(
+    Object formerCaptainName,
+    Object newCaptainName,
+  ) {
+    return '0 a desemnat 1 ca pe un nou căpitan! $formerCaptainName $newCaptainName';
+  }
+
+  @override
+  String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
+    return 'Cupidon a desemnat 0 și 1 ca iubitori! $lover1Name $lover2Name';
+  }
+
+  @override
+  String votreAmoureuxSe(Object amoureux2Name) {
+    return 'Iubitul tău: 0 $amoureux2Name';
+  }
+
+  @override
+  String votreAmoureuxSe1(Object amoureux1Name) {
+    return 'Iubitul tău: 0 $amoureux1Name';
+  }
+
+  @override
+  String cEstAuTourDe4(Object currentTeamIndex1) {
+    return 'E rândul echipei! $currentTeamIndex1';
+  }
+
+  @override
+  String aFaitUnMaisAucun(Object playerName, Object dice) {
+    return 'Întoarce automat! $playerName $dice';
+  }
+
+  @override
+  String lancerTropElevePourAtteindre(Object dice) {
+    return 'Întoarce-te! $dice';
+  }
+
+  @override
+  String extremiteNonDisponibleSurLe1(Object openEnds) {
+    return 'Extremitatea nu este disponibilă pe set (0 ). $openEnds';
+  }
+
+  @override
+  String laTuileNePossedePas(Object tile, Object matchEnd) {
+    return 'Tigla 0 nu are valoarea necesară 1. $tile $matchEnd';
+  }
+
+  @override
+  String leBotAJoueAutomatiquement(Object tileToPlay) {
+    return 'Robotul a jucat 0 automat. $tileToPlay';
+  }
+
+  @override
+  String aEteContraintDePasser(Object playerName) {
+    return '⏱️ $playerName a été contraint de passer son tour.';
+  }
+
+  @override
+  String laRouletteADesigne(Object selectedName) {
+    return 'Ruleta a desemnat 0 ! $selectedName';
+  }
+
+  @override
+  String doitEcrireLeDefi(Object authorName) {
+    return '0 trebuie să scrie provocarea... $authorName';
+  }
+
+  @override
+  String leDefiAEteEnvoye1(Object currentPlayerName) {
+    return 'Proba a fost trimisă la 0 ! $currentPlayerName';
+  }
+
+  @override
+  String resultatDeValidation(Object percentage) {
+    return 'Rezultat: 0 % validare! $percentage';
+  }
+
+  @override
+  String gagneXp(Object currentPlayerName, Object earnedXp) {
+    return '0 câştigă 1 XP! $currentPlayerName $earnedXp';
+  }
+
+  @override
+  String get tourSuivantQuiSeraLe1 => 'Următorul rând! Cine va urma?';
+
+  @override
+  String passeSonTour3(Object playerOrderinitialIn) {
+    return '0 trece rândul ei! $playerOrderinitialIn';
+  }
+
+  @override
+  String vousDevezPiocherCartesOu(Object pendingDraw) {
+    return 'Trebuie să alegi 0 cărți sau să contorizezi cu +2/+4. $pendingDraw';
+  }
+
+  @override
+  String egaliteParfaite1(Object names) {
+    return 'Egalitate perfectă! $names';
+  }
+
+  @override
+  String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
+    return 'Priză multiplă obligatorie cu pionul în 0. $mandatoryPiece';
+  }
+
+  @override
+  String motsDevines(Object guessedCount, Object collectiveWordslengt) {
+    return '1 / 1 $guessedCount $collectiveWordslengt';
+  }
+
+  @override
+  String quiPourraitLePlus3(Object questionsrandomnextI) {
+    return 'Care ar putea fi cel mai 0 $questionsrandomnextI';
+  }
+
+  @override
+  String get decrivezVotreMotSecretEn =>
+      'Descrie cuvântul tău secret într-un singur cuvânt. Impostorii, cacealma!';
+
+  @override
+  String trouvezLeMeilleurSynonymePour1(Object word) {
+    return 'Găsiți cel mai bun sinonim pentru cuvântul: 0 $word';
+  }
+
+  @override
+  String get interdictionFormelleDeVoterPour =>
+      'Interdicţie formală privind votarea pentru sine!';
+
+  @override
+  String remporteLaManche(Object winnerName) {
+    return '0 câştigă mânerul! $winnerName';
+  }
+
+  @override
+  String mrWhiteADevineLe1(Object civilianWord) {
+    return 'Dl White a ghicit cuvântul secret: \"0\"! $civilianWord';
+  }
+
+  @override
+  String mrWhiteAEchoueA1(Object civilianWord) {
+    return 'Dl White nu a ghicit cuvântul (a fost \'0\'). $civilianWord';
+  }
+
+  @override
+  String get aucuneDescriptionNAEte1 => 'Nu s-a votat nicio descriere.';
+
+  @override
+  String ceNEstPasLe3(Object playerId) {
+    return 'Nu e rândul lui 0. $playerId';
+  }
+
+  @override
+  String donneesDuJoueurIntrouvables(Object playerId) {
+    return 'Datele jucătorilor 0 nu au fost găsite. $playerId';
+  }
+
+  @override
+  String vousDevezFournirLaCouleur1(Object ledSuit) {
+    return 'Trebuie să furnizați culoarea solicitată (0). $ledSuit';
+  }
+
+  @override
+  String aGagneAvecSaDescription1(Object winnerName) {
+    return '0 won cu descrierea sa: $winnerName';
+  }
+
+  @override
+  String get leLoupBlancFrappeEn => 'Lupul Alb loveşte singur.';
+
+  @override
+  String etaitUnCivilLesImposteurs(Object player) {
+    return '0 era un civil! Impostorii câştigă! $player';
+  }
+
+  @override
+  String etaitLLesCivilsGagnent(Object player, Object role) {
+    return 'Civilii câştigă! $player $role';
+  }
+
+  @override
+  String get question2 => 'întrebare';
 }

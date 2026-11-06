@@ -13513,6 +13513,958 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'\$\'{\'\'\'FAST\'}\' (\$readyCount/\$totalPlayers)'**
   String get readycountTotalplayers;
+
+  /// No description provided for @appTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Party Game'**
+  String get appTitle;
+
+  /// No description provided for @loginTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome!'**
+  String get loginTitle;
+
+  /// No description provided for @registerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join us!'**
+  String get registerTitle;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @username.
+  ///
+  /// In en, this message translates to:
+  /// **'Unique username'**
+  String get username;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Log In'**
+  String get loginButton;
+
+  /// No description provided for @registerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get registerButton;
+
+  /// No description provided for @termsAcceptance.
+  ///
+  /// In en, this message translates to:
+  /// **'I have read and agree to the Terms of Service and Privacy Policy.'**
+  String get termsAcceptance;
+
+  /// No description provided for @gamesTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Games'**
+  String get gamesTab;
+
+  /// No description provided for @friendsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Friends'**
+  String get friendsTab;
+
+  /// No description provided for @statsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Stats'**
+  String get statsTab;
+
+  /// No description provided for @loungesTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Lounges'**
+  String get loungesTab;
+
+  /// No description provided for @createGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Game'**
+  String get createGame;
+
+  /// No description provided for @joinGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Game'**
+  String get joinGame;
+
+  /// No description provided for @gameCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Code (6 digits)'**
+  String get gameCode;
+
+  /// No description provided for @startGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Game'**
+  String get startGame;
+
+  /// No description provided for @leaveGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave Game'**
+  String get leaveGame;
+
+  /// No description provided for @rules.
+  ///
+  /// In en, this message translates to:
+  /// **'Rules'**
+  String get rules;
+
+  /// No description provided for @level.
+  ///
+  /// In en, this message translates to:
+  /// **'Level'**
+  String get level;
+
+  /// No description provided for @coins.
+  ///
+  /// In en, this message translates to:
+  /// **'Coins'**
+  String get coins;
+
+  /// No description provided for @gameOver.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over!'**
+  String get gameOver;
+
+  /// No description provided for @victory.
+  ///
+  /// In en, this message translates to:
+  /// **'Victory!'**
+  String get victory;
+
+  /// No description provided for @defeat.
+  ///
+  /// In en, this message translates to:
+  /// **'Defeat'**
+  String get defeat;
+
+  /// No description provided for @nextRound.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Round'**
+  String get nextRound;
+
+  /// No description provided for @onboardingWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get onboardingWelcome;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardingSkip;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'\'s Go! 🚀'**
+  String get onboardingStart;
+
+  /// No description provided for @onboardingSlide1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Play with Friends'**
+  String get onboardingSlide1Title;
+
+  /// No description provided for @onboardingSlide1Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from over 30 party, card and board games. Play locally, with friends, or worldwide!'**
+  String get onboardingSlide1Subtitle;
+
+  /// No description provided for @onboardingSlide2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn Coins & Unlock Badges'**
+  String get onboardingSlide2Title;
+
+  /// No description provided for @onboardingSlide2Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn XP with every win, level up, and unlock exclusive achievements to customize your profile.'**
+  String get onboardingSlide2Subtitle;
+
+  /// No description provided for @onboardingSlide3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Create or Join in Seconds'**
+  String get onboardingSlide3Title;
+
+  /// No description provided for @onboardingSlide3Subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A 6-digit code is all it takes to gather your friends, or jump into fast matchmaking with live players.'**
+  String get onboardingSlide3Subtitle;
+
+  /// No description provided for @vipPass.
+  ///
+  /// In en, this message translates to:
+  /// **'VIP Pass'**
+  String get vipPass;
+
+  /// No description provided for @vipActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Your VIP Pass is active!'**
+  String get vipActive;
+
+  /// No description provided for @vipActiveDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'All features (AI, Lounges, Video, Matchmaking) are unlimited.'**
+  String get vipActiveDesc;
+
+  /// No description provided for @choosePlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your plan:'**
+  String get choosePlan;
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchases'**
+  String get restorePurchases;
+
+  /// No description provided for @purchasesRestored.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases restored successfully!'**
+  String get purchasesRestored;
+
+  /// No description provided for @noPurchasesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No active purchases found.'**
+  String get noPurchasesFound;
+
+  /// No description provided for @monthlySubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Subscription'**
+  String get monthlySubscription;
+
+  /// No description provided for @annualSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Annual Subscription'**
+  String get annualSubscription;
+
+  /// No description provided for @lifetimeAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Lifetime Access'**
+  String get lifetimeAccess;
+
+  /// No description provided for @popularTag.
+  ///
+  /// In en, this message translates to:
+  /// **'POPULAR'**
+  String get popularTag;
+
+  /// No description provided for @chooseButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose'**
+  String get chooseButton;
+
+  /// No description provided for @vipCongratulations.
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations, you are VIP!'**
+  String get vipCongratulations;
+
+  /// No description provided for @purchaseFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase not completed.'**
+  String get purchaseFailed;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile & Settings'**
+  String get profileTitle;
+
+  /// No description provided for @profileNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile not found or non-existent player.'**
+  String get profileNotFound;
+
+  /// No description provided for @tabStats.
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get tabStats;
+
+  /// No description provided for @tabBadges.
+  ///
+  /// In en, this message translates to:
+  /// **'Badges & Achievements'**
+  String get tabBadges;
+
+  /// No description provided for @tabSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get tabSettings;
+
+  /// No description provided for @gamesPlayed.
+  ///
+  /// In en, this message translates to:
+  /// **'Games played'**
+  String get gamesPlayed;
+
+  /// No description provided for @gamesWon.
+  ///
+  /// In en, this message translates to:
+  /// **'Wins'**
+  String get gamesWon;
+
+  /// No description provided for @winRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Win rate'**
+  String get winRate;
+
+  /// No description provided for @soundEffects.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound effects'**
+  String get soundEffects;
+
+  /// No description provided for @music.
+  ///
+  /// In en, this message translates to:
+  /// **'Music'**
+  String get music;
+
+  /// No description provided for @editUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'Change username'**
+  String get editUsername;
+
+  /// No description provided for @newUsernameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'New username'**
+  String get newUsernameHint;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logout;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to permanently delete your account?'**
+  String get deleteAccountConfirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @modeLocal.
+  ///
+  /// In en, this message translates to:
+  /// **'Local'**
+  String get modeLocal;
+
+  /// No description provided for @modeMulti.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get modeMulti;
+
+  /// No description provided for @modeMonde.
+  ///
+  /// In en, this message translates to:
+  /// **'World'**
+  String get modeMonde;
+
+  /// No description provided for @searchGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a game...'**
+  String get searchGame;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All games'**
+  String get filterAll;
+
+  /// No description provided for @createLounge.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a lounge'**
+  String get createLounge;
+
+  /// No description provided for @joinLounge.
+  ///
+  /// In en, this message translates to:
+  /// **'Join a lounge'**
+  String get joinLounge;
+
+  /// No description provided for @loungeCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Lounge code'**
+  String get loungeCode;
+
+  /// No description provided for @publicLounges.
+  ///
+  /// In en, this message translates to:
+  /// **'Public lounges'**
+  String get publicLounges;
+
+  /// No description provided for @noLoungesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No public lounges available at the moment.'**
+  String get noLoungesAvailable;
+
+  /// No description provided for @playersCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Players'**
+  String get playersCount;
+
+  /// No description provided for @howToPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'How to play?'**
+  String get howToPlay;
+
+  /// No description provided for @copiedToClipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard!'**
+  String get copiedToClipboard;
+
+  /// No description provided for @connectionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection error. Please try again.'**
+  String get connectionError;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success!'**
+  String get success;
+
+  /// No description provided for @pasAssezDeSymbolesUniques1.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough unique symbols for  0  card symbols. Required:  1  , Available:  2  . {symbolsPerCard} {totalSymbols} {dobbleSymbolslength}'**
+  String pasAssezDeSymbolesUniques1(
+    Object symbolsPerCard,
+    Object totalSymbols,
+    Object dobbleSymbolslength,
+  );
+
+  /// No description provided for @melangeEquilibreDesThemesSuivants1.
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced mix of the following themes:  0  {combinedTheme}'**
+  String melangeEquilibreDesThemesSuivants1(Object combinedTheme);
+
+  /// No description provided for @ambianceTonImpose.
+  ///
+  /// In en, this message translates to:
+  /// **'[Ambiance / Tone imposed:  0  ] {style}'**
+  String ambianceTonImpose(Object style);
+
+  /// No description provided for @genereDesPairesDeMots1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates pairs of similar words in \'\'MotCivil:MotInfilted\'\' format. Theme:  0  {finalPrompt}'**
+  String genereDesPairesDeMots1(Object finalPrompt);
+
+  /// No description provided for @genereDesCartesTabooAu1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates Taboo cards in the format \'\'Targetword:Forbidd1,Forbidd2,Forbidd3,Forbidd4,Forbidd5\'\'. Theme:  0  {finalPrompt}'**
+  String genereDesCartesTabooAu1(Object finalPrompt);
+
+  /// No description provided for @genereDesCategoriesOriginalesEt1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates original and fun categories to guess. Theme:  0  {finalPrompt}'**
+  String genereDesCategoriesOriginalesEt1(Object finalPrompt);
+
+  /// No description provided for @genereDesPhrasesCourtesVisuelles1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates short, visual and baffled sentences to draw (e.g., \'\'A dinosaur eating ice\'\'). Theme:  0  {finalPrompt}'**
+  String genereDesPhrasesCourtesVisuelles1(Object finalPrompt);
+
+  /// No description provided for @genereDesPhrasesDAccroche1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates original catch phrases or writing universe. Theme:  0  {finalPrompt}'**
+  String genereDesPhrasesDAccroche1(Object finalPrompt);
+
+  /// No description provided for @genereDesDilemmesCorneliensAu1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates corneal dilemmas in the format \'\'OptionA or OptionB\'\' (e.g. \'\'Can fly or be invisible\'\'). Theme:  0  {finalPrompt}'**
+  String genereDesDilemmesCorneliensAu1(Object finalPrompt);
+
+  /// No description provided for @genereUnMelangeDeDefis1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates a mix of challenges (actions) and indiscreet questions (truths). Theme:  0  {finalPrompt}'**
+  String genereUnMelangeDeDefis1(Object finalPrompt);
+
+  /// No description provided for @genereDesQuestionsDirectesAmusantes1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates direct, fun and spicy questions. Theme:  0  {finalPrompt}'**
+  String genereDesQuestionsDirectesAmusantes1(Object finalPrompt);
+
+  /// No description provided for @genereDesPhrasesCourtesA1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates short hole sentences (containing \'\'   \'\') for the game. Theme:  0  {finalPrompt}'**
+  String genereDesPhrasesCourtesA1(Object finalPrompt);
+
+  /// No description provided for @genereDesSituationsHumoristiquesEt1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates humorous situations and beginnings of legends of memes. Theme:  0  {finalPrompt}'**
+  String genereDesSituationsHumoristiquesEt1(Object finalPrompt);
+
+  /// No description provided for @genereUneListeDeMots1.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate a list of words/expressions for the game  0  on the theme:  1  {gameType} {finalPrompt}'**
+  String genereUneListeDeMots1(Object gameType, Object finalPrompt);
+
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme  0  {gameType}'**
+  String theme(Object gameType);
+
+  /// No description provided for @passeSonTour2.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'\'s over. {playerName}'**
+  String passeSonTour2(Object playerName);
+
+  /// No description provided for @finDuCompteARebours1.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ Fin du compte à rebours : Partie relancée pour tous les {playerslength} joueurs !'**
+  String finDuCompteARebours1(Object playerslength);
+
+  /// No description provided for @aOuvertAvec.
+  ///
+  /// In en, this message translates to:
+  /// **'0  has opened with  1  . {playerName} {cardToPlay}'**
+  String aOuvertAvec(Object playerName, Object cardToPlay);
+
+  /// No description provided for @sEstDeconnecteVictoireDe.
+  ///
+  /// In en, this message translates to:
+  /// **'0 has disconnected. Win  1  per package! {removedPlayerName} {remainingName}'**
+  String sEstDeconnecteVictoireDe(
+    Object removedPlayerName,
+    Object remainingName,
+  );
+
+  /// No description provided for @aManque3ToursSans.
+  ///
+  /// In en, this message translates to:
+  /// **'0  missed 3 laps without playing. The administrator was asked to decide on its replacement with the computer. {playerName}'**
+  String aManque3ToursSans(Object playerName);
+
+  /// No description provided for @neRepondPlusLAdministrateur.
+  ///
+  /// In en, this message translates to:
+  /// **'0  no longer responds (  1  ). The administrator was asked to decide on its replacement with the computer. {playerName} {reason}'**
+  String neRepondPlusLAdministrateur(Object playerName, Object reason);
+
+  /// No description provided for @aEteRemplaceParL.
+  ///
+  /// In en, this message translates to:
+  /// **'It was replaced by the computer (AI active - 5s per turn). {playerName}'**
+  String aEteRemplaceParL(Object playerName);
+
+  /// No description provided for @nAPasDonneD.
+  ///
+  /// In en, this message translates to:
+  /// **'0  has not given an index (Jeu d\'\'opinion). Turn past. {playerName}'**
+  String nAPasDonneD(Object playerName);
+
+  /// No description provided for @nAPasReponduJeu.
+  ///
+  /// In en, this message translates to:
+  /// **'Tour skipped without automatic action. {playerName}'**
+  String nAPasReponduJeu(Object playerName);
+
+  /// No description provided for @nAPasJoueA3.
+  ///
+  /// In en, this message translates to:
+  /// **'0 has not played in time. His turn has passed. {playerName}'**
+  String nAPasJoueA3(Object playerName);
+
+  /// No description provided for @egaliteParfaiteLorsDuVote2.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect equality when voting ( 0  players ex-aequo)! No player eliminated. {tiedPlayerslength}'**
+  String egaliteParfaiteLorsDuVote2(Object tiedPlayerslength);
+
+  /// No description provided for @aJoue.
+  ///
+  /// In en, this message translates to:
+  /// **'0 has played  1  . {playerName} {lastDrawn}'**
+  String aJoue(Object playerName, Object lastDrawn);
+
+  /// No description provided for @aJoue1.
+  ///
+  /// In en, this message translates to:
+  /// **'0 has played  1  . {playerName} {playable}'**
+  String aJoue1(Object playerName, Object playable);
+
+  /// No description provided for @piocheEtPasseSonTour.
+  ///
+  /// In en, this message translates to:
+  /// **'0  picks up and passes its turn. {playerName}'**
+  String piocheEtPasseSonTour(Object playerName);
+
+  /// No description provided for @nAPasJoueA4.
+  ///
+  /// In en, this message translates to:
+  /// **'0  did not play on time. One card was defeated and one box revealed. {playerName}'**
+  String nAPasJoueA4(Object playerName);
+
+  /// No description provided for @laPartieEstTermineeVictoire1.
+  ///
+  /// In en, this message translates to:
+  /// **'The game\'\'s over. Victory of  0 ! {winner}'**
+  String laPartieEstTermineeVictoire1(Object winner);
+
+  /// No description provided for @joueursContaminesParLaMaladie1.
+  ///
+  /// In en, this message translates to:
+  /// **'Players infected with the disease:  0  . {contaminatedNames}'**
+  String joueursContaminesParLaMaladie1(Object contaminatedNames);
+
+  /// No description provided for @vousAvezEspionneEtDecouvert.
+  ///
+  /// In en, this message translates to:
+  /// **'You spied on  0  and discovered his role:  1  . {targetName} {targetRole}'**
+  String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole);
+
+  /// No description provided for @votreMotDuJourPrononcez.
+  ///
+  /// In en, this message translates to:
+  /// **'Your word of the day: \'\' 0 \'\'. Pronounce it in the cat before sunset! {newWord}'**
+  String votreMotDuJourPrononcez(Object newWord);
+
+  /// No description provided for @declareUnCoupDEtat.
+  ///
+  /// In en, this message translates to:
+  /// **'0  declares a Coup! {dictateurName}'**
+  String declareUnCoupDEtat(Object dictateurName);
+
+  /// No description provided for @leChasseurTireEtTue1.
+  ///
+  /// In en, this message translates to:
+  /// **'The Hunter shoots and kills  0 ! {targetName}'**
+  String leChasseurTireEtTue1(Object targetName);
+
+  /// No description provided for @aDesigneCommeNouveauCapitaine.
+  ///
+  /// In en, this message translates to:
+  /// **'0  has designated  1  as a new Captain! {formerCaptainName} {newCaptainName}'**
+  String aDesigneCommeNouveauCapitaine(
+    Object formerCaptainName,
+    Object newCaptainName,
+  );
+
+  /// No description provided for @cupidonADesigneEtComme.
+  ///
+  /// In en, this message translates to:
+  /// **'Cupid has designated  0  and  1  as lovers! {lover1Name} {lover2Name}'**
+  String cupidonADesigneEtComme(Object lover1Name, Object lover2Name);
+
+  /// No description provided for @votreAmoureuxSe.
+  ///
+  /// In en, this message translates to:
+  /// **'Your lover:  0 {amoureux2Name}'**
+  String votreAmoureuxSe(Object amoureux2Name);
+
+  /// No description provided for @votreAmoureuxSe1.
+  ///
+  /// In en, this message translates to:
+  /// **'Your lover:  0 {amoureux1Name}'**
+  String votreAmoureuxSe1(Object amoureux1Name);
+
+  /// No description provided for @cEstAuTourDe4.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'\'s the team\'\'s turn! {currentTeamIndex1}'**
+  String cEstAuTourDe4(Object currentTeamIndex1);
+
+  /// No description provided for @aFaitUnMaisAucun.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn automatically! {playerName} {dice}'**
+  String aFaitUnMaisAucun(Object playerName, Object dice);
+
+  /// No description provided for @lancerTropElevePourAtteindre.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn past! {dice}'**
+  String lancerTropElevePourAtteindre(Object dice);
+
+  /// No description provided for @extremiteNonDisponibleSurLe1.
+  ///
+  /// In en, this message translates to:
+  /// **'Extremity not available on set (  0  ). {openEnds}'**
+  String extremiteNonDisponibleSurLe1(Object openEnds);
+
+  /// No description provided for @laTuileNePossedePas.
+  ///
+  /// In en, this message translates to:
+  /// **'The tile  0  does not have the required value  1 . {tile} {matchEnd}'**
+  String laTuileNePossedePas(Object tile, Object matchEnd);
+
+  /// No description provided for @leBotAJoueAutomatiquement.
+  ///
+  /// In en, this message translates to:
+  /// **'The bot played  0  automatically. {tileToPlay}'**
+  String leBotAJoueAutomatiquement(Object tileToPlay);
+
+  /// No description provided for @aEteContraintDePasser.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ {playerName} a été contraint de passer son tour.'**
+  String aEteContraintDePasser(Object playerName);
+
+  /// No description provided for @laRouletteADesigne.
+  ///
+  /// In en, this message translates to:
+  /// **'The roulette has designated  0 ! {selectedName}'**
+  String laRouletteADesigne(Object selectedName);
+
+  /// No description provided for @doitEcrireLeDefi.
+  ///
+  /// In en, this message translates to:
+  /// **'0  must write the challenge... {authorName}'**
+  String doitEcrireLeDefi(Object authorName);
+
+  /// No description provided for @leDefiAEteEnvoye1.
+  ///
+  /// In en, this message translates to:
+  /// **'The challenge was sent to  0 ! {currentPlayerName}'**
+  String leDefiAEteEnvoye1(Object currentPlayerName);
+
+  /// No description provided for @resultatDeValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Result:  0  % validation! {percentage}'**
+  String resultatDeValidation(Object percentage);
+
+  /// No description provided for @gagneXp.
+  ///
+  /// In en, this message translates to:
+  /// **'0  wins  1  XP! {currentPlayerName} {earnedXp}'**
+  String gagneXp(Object currentPlayerName, Object earnedXp);
+
+  /// No description provided for @tourSuivantQuiSeraLe1.
+  ///
+  /// In en, this message translates to:
+  /// **'Next turn! Who will be next?'**
+  String get tourSuivantQuiSeraLe1;
+
+  /// No description provided for @passeSonTour3.
+  ///
+  /// In en, this message translates to:
+  /// **'0  Passes its turn! {playerOrderinitialIn}'**
+  String passeSonTour3(Object playerOrderinitialIn);
+
+  /// No description provided for @vousDevezPiocherCartesOu.
+  ///
+  /// In en, this message translates to:
+  /// **'You must pick  0  cards, or counter with a +2/+4. {pendingDraw}'**
+  String vousDevezPiocherCartesOu(Object pendingDraw);
+
+  /// No description provided for @egaliteParfaite1.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect equality! {names}'**
+  String egaliteParfaite1(Object names);
+
+  /// No description provided for @priseMultipleObligatoireAvecLe1.
+  ///
+  /// In en, this message translates to:
+  /// **'Mandatory multiple socket with the pawn in  0  . {mandatoryPiece}'**
+  String priseMultipleObligatoireAvecLe1(Object mandatoryPiece);
+
+  /// No description provided for @motsDevines.
+  ///
+  /// In en, this message translates to:
+  /// **'0  /  1  words guessed! {guessedCount} {collectiveWordslengt}'**
+  String motsDevines(Object guessedCount, Object collectiveWordslengt);
+
+  /// No description provided for @quiPourraitLePlus3.
+  ///
+  /// In en, this message translates to:
+  /// **'Which could be the most  0 {questionsrandomnextI}'**
+  String quiPourraitLePlus3(Object questionsrandomnextI);
+
+  /// No description provided for @decrivezVotreMotSecretEn.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe your secret word in one word. Impostors, bluff!'**
+  String get decrivezVotreMotSecretEn;
+
+  /// No description provided for @trouvezLeMeilleurSynonymePour1.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the best synonym for the word:  0  {word}'**
+  String trouvezLeMeilleurSynonymePour1(Object word);
+
+  /// No description provided for @interdictionFormelleDeVoterPour.
+  ///
+  /// In en, this message translates to:
+  /// **'Formal ban on voting for oneself!'**
+  String get interdictionFormelleDeVoterPour;
+
+  /// No description provided for @remporteLaManche.
+  ///
+  /// In en, this message translates to:
+  /// **'0  wins the handle! {winnerName}'**
+  String remporteLaManche(Object winnerName);
+
+  /// No description provided for @mrWhiteADevineLe1.
+  ///
+  /// In en, this message translates to:
+  /// **'Mr. White guessed the secret word: \'\' 0  \'\'! {civilianWord}'**
+  String mrWhiteADevineLe1(Object civilianWord);
+
+  /// No description provided for @mrWhiteAEchoueA1.
+  ///
+  /// In en, this message translates to:
+  /// **'Mr. White failed to guess the word (it was \'\'  0 \'\'). {civilianWord}'**
+  String mrWhiteAEchoueA1(Object civilianWord);
+
+  /// No description provided for @aucuneDescriptionNAEte1.
+  ///
+  /// In en, this message translates to:
+  /// **'No description was voted.'**
+  String get aucuneDescriptionNAEte1;
+
+  /// No description provided for @ceNEstPasLe3.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'\'s not the turn of  0  . {playerId}'**
+  String ceNEstPasLe3(Object playerId);
+
+  /// No description provided for @donneesDuJoueurIntrouvables.
+  ///
+  /// In en, this message translates to:
+  /// **'Player data  0  not found. {playerId}'**
+  String donneesDuJoueurIntrouvables(Object playerId);
+
+  /// No description provided for @vousDevezFournirLaCouleur1.
+  ///
+  /// In en, this message translates to:
+  /// **'You must provide the requested color (  0  ). {ledSuit}'**
+  String vousDevezFournirLaCouleur1(Object ledSuit);
+
+  /// No description provided for @aGagneAvecSaDescription1.
+  ///
+  /// In en, this message translates to:
+  /// **'0  won with his description: {winnerName}'**
+  String aGagneAvecSaDescription1(Object winnerName);
+
+  /// No description provided for @leLoupBlancFrappeEn.
+  ///
+  /// In en, this message translates to:
+  /// **'The White Wolf strikes alone'**
+  String get leLoupBlancFrappeEn;
+
+  /// No description provided for @etaitUnCivilLesImposteurs.
+  ///
+  /// In en, this message translates to:
+  /// **'0  was a civilian! The Impostors win! {player}'**
+  String etaitUnCivilLesImposteurs(Object player);
+
+  /// No description provided for @etaitLLesCivilsGagnent.
+  ///
+  /// In en, this message translates to:
+  /// **'0  was the  1 ! The Civils win! {player} {role}'**
+  String etaitLLesCivilsGagnent(Object player, Object role);
+
+  /// No description provided for @question2.
+  ///
+  /// In en, this message translates to:
+  /// **'question'**
+  String get question2;
 }
 
 class _AppLocalizationsDelegate

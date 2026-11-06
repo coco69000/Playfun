@@ -7584,4 +7584,632 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get readycountTotalplayers =>
       '\${\'FAST} (\$readyCount / \$totalPlayers)';
+
+  @override
+  String get appTitle => 'Partijáték';
+
+  @override
+  String get loginTitle => 'Üdvözöljük!';
+
+  @override
+  String get registerTitle => 'Csatlakozz hozzánk!';
+
+  @override
+  String get email => 'E-mail';
+
+  @override
+  String get password => 'Jelszó';
+
+  @override
+  String get username => 'Felhasználónév';
+
+  @override
+  String get loginButton => 'Bejelentkezés';
+
+  @override
+  String get registerButton => 'Fiók létrehozása';
+
+  @override
+  String get termsAcceptance =>
+      'Elolvastam és elfogadom az Általános Szerződési Feltételeket és az Adatvédelmi Irányelveket.';
+
+  @override
+  String get gamesTab => 'Játékok';
+
+  @override
+  String get friendsTab => 'Barátok';
+
+  @override
+  String get statsTab => 'Profil';
+
+  @override
+  String get loungesTab => 'Szobák';
+
+  @override
+  String get createGame => 'Játék létrehozása';
+
+  @override
+  String get joinGame => 'Csatlakozás';
+
+  @override
+  String get gameCode => 'Játékkód (6 számjegy)';
+
+  @override
+  String get startGame => 'Játék indítása';
+
+  @override
+  String get leaveGame => 'Kilépés a játékból';
+
+  @override
+  String get rules => 'Szabályok';
+
+  @override
+  String get level => 'Szint';
+
+  @override
+  String get coins => 'Érmék';
+
+  @override
+  String get gameOver => 'Játék vége!';
+
+  @override
+  String get victory => 'Győzelem!';
+
+  @override
+  String get defeat => 'Vereség';
+
+  @override
+  String get nextRound => 'Következő kör';
+
+  @override
+  String get onboardingWelcome => 'Üdvözöljük';
+
+  @override
+  String get onboardingSkip => 'Kihagyás';
+
+  @override
+  String get onboardingNext => 'Tovább';
+
+  @override
+  String get onboardingStart => 'Kezdjük! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Játssz a barátaiddal';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Válassz több mint 30 parti-, kártya- és társasjáték közül. Játssz helyben, barátokkal vagy a világgal!';
+
+  @override
+  String get onboardingSlide2Title => 'Gyűjts érméket és jelvényeket';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Szerezz XP-t minden győzelemmel, lépj szintet és oldj fel exkluzív eredményeket.';
+
+  @override
+  String get onboardingSlide3Title =>
+      'Hozz létre vagy csatlakozz másodpercek alatt';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'Egy 6 számjegyű kód elég a barátok összegyűjtéséhez, vagy indíts gyors meccskeresést.';
+
+  @override
+  String get vipPass => 'VIP Bérlet';
+
+  @override
+  String get vipActive => 'A VIP bérleted aktív!';
+
+  @override
+  String get vipActiveDesc =>
+      'Minden funkció (MI, Szobák, Videó, Meccskeresés) korlátlan.';
+
+  @override
+  String get choosePlan => 'Válassz csomagot:';
+
+  @override
+  String get restorePurchases => 'Vásárlások visszaállítása';
+
+  @override
+  String get purchasesRestored => 'A vásárlások sikeresen visszaállítva!';
+
+  @override
+  String get noPurchasesFound => 'Nem található aktív vásárlás.';
+
+  @override
+  String get monthlySubscription => 'Havi előfizetés';
+
+  @override
+  String get annualSubscription => 'Éves előfizetés';
+
+  @override
+  String get lifetimeAccess => 'Örökös hozzáférés';
+
+  @override
+  String get popularTag => 'NÉPSZERŰ';
+
+  @override
+  String get chooseButton => 'Kiválasztás';
+
+  @override
+  String get vipCongratulations => 'Gratulálunk, VIP lettél!';
+
+  @override
+  String get purchaseFailed => 'A vásárlás nem fejeződött be.';
+
+  @override
+  String get profileTitle => 'Profil és Beállítások';
+
+  @override
+  String get profileNotFound =>
+      'A profil nem található vagy a játékos nem létezik.';
+
+  @override
+  String get tabStats => 'Statisztikák';
+
+  @override
+  String get tabBadges => 'Jelvények és Eredmények';
+
+  @override
+  String get tabSettings => 'Beállítások';
+
+  @override
+  String get gamesPlayed => 'Lejátszott játékok';
+
+  @override
+  String get gamesWon => 'Győzelmek';
+
+  @override
+  String get winRate => 'Győzelmi arány';
+
+  @override
+  String get soundEffects => 'Hangeffektek';
+
+  @override
+  String get music => 'Zene';
+
+  @override
+  String get editUsername => 'Felhasználónév módosítása';
+
+  @override
+  String get newUsernameHint => 'Új felhasználónév';
+
+  @override
+  String get logout => 'Kijelentkezés';
+
+  @override
+  String get deleteAccount => 'Fiók törlése';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Biztosan véglegesen törölni szeretnéd a fiókodat?';
+
+  @override
+  String get cancel => 'Mégse';
+
+  @override
+  String get confirm => 'Megerősítés';
+
+  @override
+  String get save => 'Mentés';
+
+  @override
+  String get modeLocal => 'Helyi';
+
+  @override
+  String get modeMulti => 'Online';
+
+  @override
+  String get modeMonde => 'Világ';
+
+  @override
+  String get searchGame => 'Játék keresése...';
+
+  @override
+  String get filterAll => 'Összes játék';
+
+  @override
+  String get createLounge => 'Szoba létrehozása';
+
+  @override
+  String get joinLounge => 'Csatlakozás szobához';
+
+  @override
+  String get loungeCode => 'Szobakód';
+
+  @override
+  String get publicLounges => 'Nyilvános szobák';
+
+  @override
+  String get noLoungesAvailable =>
+      'Jelenleg nincsenek elérhető nyilvános szobák.';
+
+  @override
+  String get playersCount => 'Játékosok';
+
+  @override
+  String get howToPlay => 'Hogyan kell játszani?';
+
+  @override
+  String get copiedToClipboard => 'Vágólapra másolva!';
+
+  @override
+  String get connectionError => 'Csatlakozási hiba. Kérjük, próbáld újra.';
+
+  @override
+  String get loading => 'Betöltés...';
+
+  @override
+  String get success => 'Sikeres!';
+
+  @override
+  String pasAssezDeSymbolesUniques1(
+    Object symbolsPerCard,
+    Object totalSymbols,
+    Object dobbleSymbolslength,
+  ) {
+    return 'Nincs elég egyedi szimbólum 0 kártya szimbólumokhoz. Kötelező: 1, Elérhető: 2. $symbolsPerCard $totalSymbols $dobbleSymbolslength';
+  }
+
+  @override
+  String melangeEquilibreDesThemesSuivants1(Object combinedTheme) {
+    return 'A következő témák kiegyensúlyozott keveréke: 0 $combinedTheme';
+  }
+
+  @override
+  String ambianceTonImpose(Object style) {
+    return '[Környezeti viszonyok / tone: 0] $style';
+  }
+
+  @override
+  String genereDesPairesDeMots1(Object finalPrompt) {
+    return 'Hasonló szavakat generál \"MotCivil: MotInfilted\" formátumban. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCartesTabooAu1(Object finalPrompt) {
+    return 'Taboo kártyákat generál \"Targetword: Forbidd1, Forbidd2, Forbidd3, Forbidd4, Forbidd5\" formátumban. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCategoriesOriginalesEt1(Object finalPrompt) {
+    return 'Eredeti és szórakoztató kategóriákat generál. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesVisuelles1(Object finalPrompt) {
+    return 'Rövid, vizuális és zavaros mondatokat (pl. \"Egy dinoszaurusz eszik jeget\") generál. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesDAccroche1(Object finalPrompt) {
+    return 'Eredeti fogási mondatokat generál, vagy világegyetemet ír. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesDilemmesCorneliensAu1(Object finalPrompt) {
+    return 'A szaruhártya dilemmáit az \"OptionA vagy OptionB\" formátumban állítja elő (pl. \"Lehet repülni vagy láthatatlan\"). Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUnMelangeDeDefis1(Object finalPrompt) {
+    return 'Kihívások (cselekvések) és indiszkrét kérdések (igazságok) kombinációját generálja. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesQuestionsDirectesAmusantes1(Object finalPrompt) {
+    return 'Közvetlen, szórakoztató és fűszeres kérdéseket generál. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesA1(Object finalPrompt) {
+    return 'Rövid lyukmondatokat generál (\") a játékhoz. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesSituationsHumoristiquesEt1(Object finalPrompt) {
+    return 'Humoros helyzeteket és a mémek legendáinak kezdetét generálja. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUneListeDeMots1(Object gameType, Object finalPrompt) {
+    return 'A 0-ás játék szavak / kifejezések listájának létrehozása a témában: 1 $gameType $finalPrompt';
+  }
+
+  @override
+  String theme(Object gameType) {
+    return 'téma $gameType';
+  }
+
+  @override
+  String passeSonTour2(Object playerName) {
+    return 'Vége van. $playerName';
+  }
+
+  @override
+  String finDuCompteARebours1(Object playerslength) {
+    return '⏱️ Fin du compte à rebours : Partie relancée pour tous les $playerslength joueurs !';
+  }
+
+  @override
+  String aOuvertAvec(Object playerName, Object cardToPlay) {
+    return '0 1-gyel nyitott. $playerName $cardToPlay';
+  }
+
+  @override
+  String sEstDeconnecteVictoireDe(
+    Object removedPlayerName,
+    Object remainingName,
+  ) {
+    return 'A 0 megszakadt. Nyerj 1-et csomagonként! $removedPlayerName $remainingName';
+  }
+
+  @override
+  String aManque3ToursSans(Object playerName) {
+    return '0 kihagyott 3 kört játék nélkül. Az adminisztrátort felkérték, hogy döntsön a számítógép helyettesítéséről. $playerName';
+  }
+
+  @override
+  String neRepondPlusLAdministrateur(Object playerName, Object reason) {
+    return '0 már nem reagál (1). Az adminisztrátort felkérték, hogy döntsön a számítógép helyettesítéséről. $playerName $reason';
+  }
+
+  @override
+  String aEteRemplaceParL(Object playerName) {
+    return 'Helyettesítette a számítógép (MI aktív - 5 s per turn). $playerName';
+  }
+
+  @override
+  String nAPasDonneD(Object playerName) {
+    return '0 nem adott indexet (Jeu d \'opinion). Fordulj el. $playerName';
+  }
+
+  @override
+  String nAPasReponduJeu(Object playerName) {
+    return 'A túra automatikus akció nélkül kimaradt. $playerName';
+  }
+
+  @override
+  String nAPasJoueA3(Object playerName) {
+    return '0 nem játszott időben. Elmúlt a sora. $playerName';
+  }
+
+  @override
+  String egaliteParfaiteLorsDuVote2(Object tiedPlayerslength) {
+    return 'Tökéletes egyenlőség szavazáskor (0 játékos ex- aequo)! Egyetlen játékos sem esett ki. $tiedPlayerslength';
+  }
+
+  @override
+  String aJoue(Object playerName, Object lastDrawn) {
+    return '0 játszott 1-et. $playerName $lastDrawn';
+  }
+
+  @override
+  String aJoue1(Object playerName, Object playable) {
+    return '0 játszott 1-et. $playerName $playable';
+  }
+
+  @override
+  String piocheEtPasseSonTour(Object playerName) {
+    return '0 felveszi és átmegy a kanyaron. $playerName';
+  }
+
+  @override
+  String nAPasJoueA4(Object playerName) {
+    return '0 nem játszott időben. Egy lapot legyőztek, és egy dobozt felfedtek. $playerName';
+  }
+
+  @override
+  String laPartieEstTermineeVictoire1(Object winner) {
+    return 'A játéknak vége. A 0 győzelme! $winner';
+  }
+
+  @override
+  String joueursContaminesParLaMaladie1(Object contaminatedNames) {
+    return 'A betegséggel fertőzött játékosok száma: 0. $contaminatedNames';
+  }
+
+  @override
+  String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
+    return 'Kémkedtél a 0-on és felfedezted a szerepét: 1. $targetName $targetRole';
+  }
+
+  @override
+  String votreMotDuJourPrononcez(Object newWord) {
+    return 'A te szavad: \"0\". Naplemente előtt a macskában! $newWord';
+  }
+
+  @override
+  String declareUnCoupDEtat(Object dictateurName) {
+    return '0 deklarálja a Coupot! $dictateurName';
+  }
+
+  @override
+  String leChasseurTireEtTue1(Object targetName) {
+    return 'A vadász lő és öl 0-t! $targetName';
+  }
+
+  @override
+  String aDesigneCommeNouveauCapitaine(
+    Object formerCaptainName,
+    Object newCaptainName,
+  ) {
+    return '0 kinevezett egy új kapitányt! $formerCaptainName $newCaptainName';
+  }
+
+  @override
+  String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
+    return 'Cupido 0-1-et jelölt szeretőnek! $lover1Name $lover2Name';
+  }
+
+  @override
+  String votreAmoureuxSe(Object amoureux2Name) {
+    return 'Szeretőd: 0 $amoureux2Name';
+  }
+
+  @override
+  String votreAmoureuxSe1(Object amoureux1Name) {
+    return 'Szeretőd: 0 $amoureux1Name';
+  }
+
+  @override
+  String cEstAuTourDe4(Object currentTeamIndex1) {
+    return 'Most a csapat jön! $currentTeamIndex1';
+  }
+
+  @override
+  String aFaitUnMaisAucun(Object playerName, Object dice) {
+    return 'Fordulj automatikusan! $playerName $dice';
+  }
+
+  @override
+  String lancerTropElevePourAtteindre(Object dice) {
+    return 'Fordulj el! $dice';
+  }
+
+  @override
+  String extremiteNonDisponibleSurLe1(Object openEnds) {
+    return 'Szélesség nem áll rendelkezésre a készletben (0). $openEnds';
+  }
+
+  @override
+  String laTuileNePossedePas(Object tile, Object matchEnd) {
+    return 'A 0. cserép nem rendelkezik az előírt értékkel 1. $tile $matchEnd';
+  }
+
+  @override
+  String leBotAJoueAutomatiquement(Object tileToPlay) {
+    return 'A bot automatikusan 0-t játszott. $tileToPlay';
+  }
+
+  @override
+  String aEteContraintDePasser(Object playerName) {
+    return '⏱️ $playerName a été contraint de passer son tour.';
+  }
+
+  @override
+  String laRouletteADesigne(Object selectedName) {
+    return 'A rulett 0! $selectedName';
+  }
+
+  @override
+  String doitEcrireLeDefi(Object authorName) {
+    return '0 kell írni a kihívást... $authorName';
+  }
+
+  @override
+  String leDefiAEteEnvoye1(Object currentPlayerName) {
+    return 'A kihívást a 0-ra küldték! $currentPlayerName';
+  }
+
+  @override
+  String resultatDeValidation(Object percentage) {
+    return 'Eredmény: 0% érvényesítés! $percentage';
+  }
+
+  @override
+  String gagneXp(Object currentPlayerName, Object earnedXp) {
+    return '0 nyer 1 XP-t! $currentPlayerName $earnedXp';
+  }
+
+  @override
+  String get tourSuivantQuiSeraLe1 => 'Következő! Ki lesz a következő?';
+
+  @override
+  String passeSonTour3(Object playerOrderinitialIn) {
+    return '0 a sor! $playerOrderinitialIn';
+  }
+
+  @override
+  String vousDevezPiocherCartesOu(Object pendingDraw) {
+    return '0 lapot kell választanod, vagy a + 2 / + 4-el kell számolnod. $pendingDraw';
+  }
+
+  @override
+  String egaliteParfaite1(Object names) {
+    return 'Tökéletes egyenlőség! $names';
+  }
+
+  @override
+  String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
+    return 'Kötelező többszörös aljzat a gyaloggal 0-ban. $mandatoryPiece';
+  }
+
+  @override
+  String motsDevines(Object guessedCount, Object collectiveWordslengt) {
+    return '0 / 1 szó találgatás! $guessedCount $collectiveWordslengt';
+  }
+
+  @override
+  String quiPourraitLePlus3(Object questionsrandomnextI) {
+    return 'Ami lehet a legtöbb 0 $questionsrandomnextI';
+  }
+
+  @override
+  String get decrivezVotreMotSecretEn =>
+      'Írd le a titkos szavadat egy szóval. Becsapók, blöff!';
+
+  @override
+  String trouvezLeMeilleurSynonymePour1(Object word) {
+    return 'Találja meg a legjobb szinonimáját a szónak: 0 $word';
+  }
+
+  @override
+  String get interdictionFormelleDeVoterPour =>
+      'Hivatalos tilalom a szavazáshoz!';
+
+  @override
+  String remporteLaManche(Object winnerName) {
+    return '0 megnyeri a fogantyút! $winnerName';
+  }
+
+  @override
+  String mrWhiteADevineLe1(Object civilianWord) {
+    return 'Mr. White kitalálta a titkos szót: \"0\"! $civilianWord';
+  }
+
+  @override
+  String mrWhiteAEchoueA1(Object civilianWord) {
+    return 'Mr. White nem találta ki a szót (0 volt). $civilianWord';
+  }
+
+  @override
+  String get aucuneDescriptionNAEte1 => 'Nem szavaztak meg leírást.';
+
+  @override
+  String ceNEstPasLe3(Object playerId) {
+    return 'Ez nem a 0. $playerId';
+  }
+
+  @override
+  String donneesDuJoueurIntrouvables(Object playerId) {
+    return 'A játékos adatai 0 nem találhatóak. $playerId';
+  }
+
+  @override
+  String vousDevezFournirLaCouleur1(Object ledSuit) {
+    return 'Meg kell adni a kért színt (0). $ledSuit';
+  }
+
+  @override
+  String aGagneAvecSaDescription1(Object winnerName) {
+    return '0 won a leírásával: $winnerName';
+  }
+
+  @override
+  String get leLoupBlancFrappeEn => 'A Fehér Farkas egyedül támad.';
+
+  @override
+  String etaitUnCivilLesImposteurs(Object player) {
+    return '0 civil volt! Az Impostorok győztek! $player';
+  }
+
+  @override
+  String etaitLLesCivilsGagnent(Object player, Object role) {
+    return 'A Civils győzött! $player $role';
+  }
+
+  @override
+  String get question2 => 'kérdés';
 }

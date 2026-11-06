@@ -7534,4 +7534,629 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get readycountTotalplayers => '\${\'GER} (readyCount/\$ totalPlayers)';
+
+  @override
+  String get appTitle => 'Parti Oyunu';
+
+  @override
+  String get loginTitle => 'Hoş Geldiniz!';
+
+  @override
+  String get registerTitle => 'Bize Katılın!';
+
+  @override
+  String get email => 'E-posta';
+
+  @override
+  String get password => 'Şifre';
+
+  @override
+  String get username => 'Kullanıcı adı';
+
+  @override
+  String get loginButton => 'Giriş Yap';
+
+  @override
+  String get registerButton => 'Hesap Oluştur';
+
+  @override
+  String get termsAcceptance =>
+      'Kullanım Koşulları ve Gizlilik Politikasını okudum ve kabul ediyorum.';
+
+  @override
+  String get gamesTab => 'Oyunlar';
+
+  @override
+  String get friendsTab => 'Arkadaşlar';
+
+  @override
+  String get statsTab => 'Profil';
+
+  @override
+  String get loungesTab => 'Odalar';
+
+  @override
+  String get createGame => 'Oyun Kur';
+
+  @override
+  String get joinGame => 'Katıl';
+
+  @override
+  String get gameCode => 'Oyun Kodu (6 haneli)';
+
+  @override
+  String get startGame => 'Oyunu Başlat';
+
+  @override
+  String get leaveGame => 'Oyundan Ayrıl';
+
+  @override
+  String get rules => 'Kurallar';
+
+  @override
+  String get level => 'Seviye';
+
+  @override
+  String get coins => 'Jetonlar';
+
+  @override
+  String get gameOver => 'Oyun Bitti!';
+
+  @override
+  String get victory => 'Zafer!';
+
+  @override
+  String get defeat => 'Yenilgi';
+
+  @override
+  String get nextRound => 'Sonraki Tur';
+
+  @override
+  String get onboardingWelcome => 'Hoş Geldiniz';
+
+  @override
+  String get onboardingSkip => 'Atla';
+
+  @override
+  String get onboardingNext => 'İleri';
+
+  @override
+  String get onboardingStart => 'Başlayalım! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Arkadaşlarınla Oyna';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      '30\'dan fazla parti, kart ve masa oyunu arasından seçim yapın.';
+
+  @override
+  String get onboardingSlide2Title => 'Jeton Kazan & Rozet Aç';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Her galibiyette XP kazanın, seviye atlayın ve özel başarıların kilidini açın.';
+
+  @override
+  String get onboardingSlide3Title => 'Saniyeler İçinde Katıl';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'Arkadaşlarını toplamak için 6 haneli kod yeterli.';
+
+  @override
+  String get vipPass => 'VIP Kartı';
+
+  @override
+  String get vipActive => 'VIP Kartınız aktif!';
+
+  @override
+  String get vipActiveDesc =>
+      'Tüm özellikler (Yapay Zeka, Odalar, Video, Eşleştirme) sınırsızdır.';
+
+  @override
+  String get choosePlan => 'Planınızı seçin:';
+
+  @override
+  String get restorePurchases => 'Satın alımları geri yükle';
+
+  @override
+  String get purchasesRestored => 'Satın alımlar başarıyla geri yüklendi!';
+
+  @override
+  String get noPurchasesFound => 'Aktif satın alım bulunamadı.';
+
+  @override
+  String get monthlySubscription => 'Aylık Abonelik';
+
+  @override
+  String get annualSubscription => 'Yıllık Abonelik';
+
+  @override
+  String get lifetimeAccess => 'Ömür Boyu Erişim';
+
+  @override
+  String get popularTag => 'POPÜLER';
+
+  @override
+  String get chooseButton => 'Seç';
+
+  @override
+  String get vipCongratulations => 'Tebrikler, artık VIP\'siniz!';
+
+  @override
+  String get purchaseFailed => 'Satın alma tamamlanamadı.';
+
+  @override
+  String get profileTitle => 'Profil & Ayarlar';
+
+  @override
+  String get profileNotFound => 'Profil bulunamadı.';
+
+  @override
+  String get tabStats => 'İstatistikler';
+
+  @override
+  String get tabBadges => 'Rozetler & Başarılar';
+
+  @override
+  String get tabSettings => 'Ayarlar';
+
+  @override
+  String get gamesPlayed => 'Oynanan oyunlar';
+
+  @override
+  String get gamesWon => 'Galibiyetler';
+
+  @override
+  String get winRate => 'Kazanma oranı';
+
+  @override
+  String get soundEffects => 'Ses efektleri';
+
+  @override
+  String get music => 'Müzik';
+
+  @override
+  String get editUsername => 'Kullanıcı adını değiştir';
+
+  @override
+  String get newUsernameHint => 'Yeni kullanıcı adı';
+
+  @override
+  String get logout => 'Çıkış Yap';
+
+  @override
+  String get deleteAccount => 'Hesabı Sil';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Hesabınızı kalıcı olarak silmek istediğinizden emin misiniz?';
+
+  @override
+  String get cancel => 'İptal';
+
+  @override
+  String get confirm => 'Onayla';
+
+  @override
+  String get save => 'Kaydet';
+
+  @override
+  String get modeLocal => 'Yerel';
+
+  @override
+  String get modeMulti => 'Çevrim İçi';
+
+  @override
+  String get modeMonde => 'Dünya';
+
+  @override
+  String get searchGame => 'Oyun ara...';
+
+  @override
+  String get filterAll => 'Tüm oyunlar';
+
+  @override
+  String get createLounge => 'Oda oluştur';
+
+  @override
+  String get joinLounge => 'Odaya katıl';
+
+  @override
+  String get loungeCode => 'Oda kodu';
+
+  @override
+  String get publicLounges => 'Herkese açık odalar';
+
+  @override
+  String get noLoungesAvailable => 'Şu anda herkese açık oda bulunmuyor.';
+
+  @override
+  String get playersCount => 'Oyuncular';
+
+  @override
+  String get howToPlay => 'Nasıl oynanır?';
+
+  @override
+  String get copiedToClipboard => 'Panoya kopyalandı!';
+
+  @override
+  String get connectionError => 'Bağlantı hatası. Lütfen tekrar deneyin.';
+
+  @override
+  String get loading => 'Yükleniyor...';
+
+  @override
+  String get success => 'Başarılı!';
+
+  @override
+  String pasAssezDeSymbolesUniques1(
+    Object symbolsPerCard,
+    Object totalSymbols,
+    Object dobbleSymbolslength,
+  ) {
+    return '0 kart sembolü için yeterli eşsiz semboller değil. Gerekli: 1 , kullanılabilir: 2 . $symbolsPerCard $totalSymbols $dobbleSymbolslength';
+  }
+
+  @override
+  String melangeEquilibreDesThemesSuivants1(Object combinedTheme) {
+    return 'Aşağıdaki temaların dengesi: 0 $combinedTheme';
+  }
+
+  @override
+  String ambianceTonImpose(Object style) {
+    return '[Ambiance / Tone Uygulandı: 0 ] $style';
+  }
+
+  @override
+  String genereDesPairesDeMots1(Object finalPrompt) {
+    return '\"MotCivil\'de benzer kelimelerin çiftleri:MotInfilted\" formatı. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCartesTabooAu1(Object finalPrompt) {
+    return 'Genrates Taboo kartları \"Targetword:Forbidd1,Forbidd2,Forbidd3,Forbidd4,Forbidd5\" şeklinde. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCategoriesOriginalesEt1(Object finalPrompt) {
+    return 'Tahmin etmek için orijinal ve eğlenceli kategoriler. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesVisuelles1(Object finalPrompt) {
+    return 'Genrates kısa, görsel ve çizilen cümleler çizilir (e.g., \'A dinozor eat ice\'). Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesDAccroche1(Object finalPrompt) {
+    return 'Genrates orijinal yakalama cümleleri veya evren yazmak. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesDilemmesCorneliensAu1(Object finalPrompt) {
+    return 'Genrates koreal ikilemler formatta \'Oto veya SeçenekB\' (e.g. \' uçabilir veya görünmez olabilir\'). Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUnMelangeDeDefis1(Object finalPrompt) {
+    return 'Genrates bir zorluk karışımı (actions) ve indiscreet soruları (gerçekler). Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesQuestionsDirectesAmusantes1(Object finalPrompt) {
+    return 'Genrates doğrudan, eğlenceli ve baharatlı sorular. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesA1(Object finalPrompt) {
+    return 'Genrates kısa delik cümleleri (oyun için \") ile ilgilidir. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesSituationsHumoristiquesEt1(Object finalPrompt) {
+    return 'Genrates mizahi durumlar ve efsanelerin mitlerinin başlangıcı. Tema: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUneListeDeMots1(Object gameType, Object finalPrompt) {
+    return 'Oyun için kelimeler / ifadeler listesi 0 tema üzerinde: 1 $gameType $finalPrompt';
+  }
+
+  @override
+  String theme(Object gameType) {
+    return 'Tema 0 $gameType';
+  }
+
+  @override
+  String passeSonTour2(Object playerName) {
+    return 'Bu bitti. $playerName';
+  }
+
+  @override
+  String finDuCompteARebours1(Object playerslength) {
+    return '⏱️ Fin du compte à rebours : Partie relancée pour tous les $playerslength joueurs !';
+  }
+
+  @override
+  String aOuvertAvec(Object playerName, Object cardToPlay) {
+    return '0 1 ile açıldı. $playerName $cardToPlay';
+  }
+
+  @override
+  String sEstDeconnecteVictoireDe(
+    Object removedPlayerName,
+    Object remainingName,
+  ) {
+    return '0 kopmuştu. Paket başına 1 kazanmak! $removedPlayerName $remainingName';
+  }
+
+  @override
+  String aManque3ToursSans(Object playerName) {
+    return '0 oynamadan 3 tur kaçırdı. Yönetici bilgisayarla değiştirilmesine karar vermek istedi. $playerName';
+  }
+
+  @override
+  String neRepondPlusLAdministrateur(Object playerName, Object reason) {
+    return '0 artık yanıt vermez ( 1 ). Yönetici bilgisayarla değiştirilmesine karar vermek istedi. $playerName $reason';
+  }
+
+  @override
+  String aEteRemplaceParL(Object playerName) {
+    return 'Bilgisayar tarafından değiştirildi (AI aktif - 5s per turn). $playerName';
+  }
+
+  @override
+  String nAPasDonneD(Object playerName) {
+    return '0 bir indeks vermedi (Jeu d\'opinion). Geçmişe dön. $playerName';
+  }
+
+  @override
+  String nAPasReponduJeu(Object playerName) {
+    return 'Tour otomatik eylem olmadan atladı. $playerName';
+  }
+
+  @override
+  String nAPasJoueA3(Object playerName) {
+    return '0 zamanında oynamadı. Onun dönüşü geçti. $playerName';
+  }
+
+  @override
+  String egaliteParfaiteLorsDuVote2(Object tiedPlayerslength) {
+    return 'Oy verirken mükemmel eşitlik ( 0 oyuncu ex-aequo)! Hiçbir oyuncu yok. $tiedPlayerslength';
+  }
+
+  @override
+  String aJoue(Object playerName, Object lastDrawn) {
+    return '0 1 oynadı. $playerName $lastDrawn';
+  }
+
+  @override
+  String aJoue1(Object playerName, Object playable) {
+    return '0 1 oynadı. $playerName $playable';
+  }
+
+  @override
+  String piocheEtPasseSonTour(Object playerName) {
+    return '0 picks up and pass its turn. $playerName';
+  }
+
+  @override
+  String nAPasJoueA4(Object playerName) {
+    return '0 zamanında oynamadı. Bir kart yenildi ve bir kutu ortaya çıktı. $playerName';
+  }
+
+  @override
+  String laPartieEstTermineeVictoire1(Object winner) {
+    return 'Oyun bitti. Zafer 0! $winner';
+  }
+
+  @override
+  String joueursContaminesParLaMaladie1(Object contaminatedNames) {
+    return 'Oyuncular hastalıkla enfekte: 0 . $contaminatedNames';
+  }
+
+  @override
+  String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
+    return '0\'a tükürdün ve rolünü keşfettin: 1 . $targetName $targetRole';
+  }
+
+  @override
+  String votreMotDuJourPrononcez(Object newWord) {
+    return 'Günün sözü: \' 0 \'. Onu gün batıdan önce kedide hayal edin! $newWord';
+  }
+
+  @override
+  String declareUnCoupDEtat(Object dictateurName) {
+    return '0 Bir Coup! $dictateurName';
+  }
+
+  @override
+  String leChasseurTireEtTue1(Object targetName) {
+    return 'Hunter ateş eder ve öldürür 0! $targetName';
+  }
+
+  @override
+  String aDesigneCommeNouveauCapitaine(
+    Object formerCaptainName,
+    Object newCaptainName,
+  ) {
+    return '0, 1\'i yeni bir Kaptan olarak belirledi! $formerCaptainName $newCaptainName';
+  }
+
+  @override
+  String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
+    return 'Cupid, 0 ve 1\'i sevgililer olarak belirledi! $lover1Name $lover2Name';
+  }
+
+  @override
+  String votreAmoureuxSe(Object amoureux2Name) {
+    return 'Sevgilin: 0 $amoureux2Name';
+  }
+
+  @override
+  String votreAmoureuxSe1(Object amoureux1Name) {
+    return 'Sevgilin: 0 $amoureux1Name';
+  }
+
+  @override
+  String cEstAuTourDe4(Object currentTeamIndex1) {
+    return 'Takımın dönüşü! $currentTeamIndex1';
+  }
+
+  @override
+  String aFaitUnMaisAucun(Object playerName, Object dice) {
+    return 'Otomatik olarak dön! $playerName $dice';
+  }
+
+  @override
+  String lancerTropElevePourAtteindre(Object dice) {
+    return 'Geçmişe dön! $dice';
+  }
+
+  @override
+  String extremiteNonDisponibleSurLe1(Object openEnds) {
+    return 'Extremity sette mevcut değildir ( 0 ). $openEnds';
+  }
+
+  @override
+  String laTuileNePossedePas(Object tile, Object matchEnd) {
+    return 'Karo 0 gerekli değeri 1\'e sahip değildir. $tile $matchEnd';
+  }
+
+  @override
+  String leBotAJoueAutomatiquement(Object tileToPlay) {
+    return 'Bot 0 otomatik olarak oynadı. $tileToPlay';
+  }
+
+  @override
+  String aEteContraintDePasser(Object playerName) {
+    return '⏱️ $playerName a été contraint de passer son tour.';
+  }
+
+  @override
+  String laRouletteADesigne(Object selectedName) {
+    return 'rulet 0 belirledi! $selectedName';
+  }
+
+  @override
+  String doitEcrireLeDefi(Object authorName) {
+    return '0 meydan okumalı... $authorName';
+  }
+
+  @override
+  String leDefiAEteEnvoye1(Object currentPlayerName) {
+    return 'Zorluk 0\'a gönderildi! $currentPlayerName';
+  }
+
+  @override
+  String resultatDeValidation(Object percentage) {
+    return 'Sonuç:% 0 geçerlilik! $percentage';
+  }
+
+  @override
+  String gagneXp(Object currentPlayerName, Object earnedXp) {
+    return '0 1 XP kazanır! $currentPlayerName $earnedXp';
+  }
+
+  @override
+  String get tourSuivantQuiSeraLe1 => 'Sonraki dönüş! Kim gelecek olacak?';
+
+  @override
+  String passeSonTour3(Object playerOrderinitialIn) {
+    return '0 Dönüşünü Geçin! $playerOrderinitialIn';
+  }
+
+  @override
+  String vousDevezPiocherCartesOu(Object pendingDraw) {
+    return '0 kart veya +2/+4 ile karşı çıkmak zorundasınız. $pendingDraw';
+  }
+
+  @override
+  String egaliteParfaite1(Object names) {
+    return 'Mükemmel eşitlik! $names';
+  }
+
+  @override
+  String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
+    return '0\'da piyon ile birden çok soket. $mandatoryPiece';
+  }
+
+  @override
+  String motsDevines(Object guessedCount, Object collectiveWordslengt) {
+    return '0 / 1 kelime tahmin edildi! $guessedCount $collectiveWordslengt';
+  }
+
+  @override
+  String quiPourraitLePlus3(Object questionsrandomnextI) {
+    return 'Hangisi en fazla 0 olabilir $questionsrandomnextI';
+  }
+
+  @override
+  String get decrivezVotreMotSecretEn =>
+      'Gizli kelimeyi tek bir kelimeyle açıklayın. Impostors, bluff!';
+
+  @override
+  String trouvezLeMeilleurSynonymePour1(Object word) {
+    return 'Kelime için en iyi sinonym bulun: 0 $word';
+  }
+
+  @override
+  String get interdictionFormelleDeVoterPour =>
+      'Kendi için oy kullanma yasağı!';
+
+  @override
+  String remporteLaManche(Object winnerName) {
+    return '0 işi kazanır! $winnerName';
+  }
+
+  @override
+  String mrWhiteADevineLe1(Object civilianWord) {
+    return 'Bay White gizli kelimeyi tahmin etti: \' 0 \'! $civilianWord';
+  }
+
+  @override
+  String mrWhiteAEchoueA1(Object civilianWord) {
+    return 'Bay White sözcüğü tahmin edemiyordu ( 0 \'dı). $civilianWord';
+  }
+
+  @override
+  String get aucuneDescriptionNAEte1 => 'Hiçbir açıklama oy kullanmadı.';
+
+  @override
+  String ceNEstPasLe3(Object playerId) {
+    return '0\'ın dönüşü değil. $playerId';
+  }
+
+  @override
+  String donneesDuJoueurIntrouvables(Object playerId) {
+    return 'Oyuncu verileri 0 bulunamadı. $playerId';
+  }
+
+  @override
+  String vousDevezFournirLaCouleur1(Object ledSuit) {
+    return 'Talep edilen rengi ( 0) sağlamalıdır. $ledSuit';
+  }
+
+  @override
+  String aGagneAvecSaDescription1(Object winnerName) {
+    return '0 onun açıklamasıyla kazandı: $winnerName';
+  }
+
+  @override
+  String get leLoupBlancFrappeEn => 'Beyaz Kurt tek başına tek başına vuruyor';
+
+  @override
+  String etaitUnCivilLesImposteurs(Object player) {
+    return '0 sivildi! Impostors kazanır! $player';
+  }
+
+  @override
+  String etaitLLesCivilsGagnent(Object player, Object role) {
+    return '0 1 oldu! Siviller kazandı! $player $role';
+  }
+
+  @override
+  String get question2 => 'Soru Soru Soru Soru Soru';
 }

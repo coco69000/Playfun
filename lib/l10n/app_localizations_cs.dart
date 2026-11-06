@@ -7515,4 +7515,629 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get readycountTotalplayers =>
       '\${\'FAST} (\$readyCount / \$totalPlayers)';
+
+  @override
+  String get appTitle => 'Párty Hra';
+
+  @override
+  String get loginTitle => 'Vítejte!';
+
+  @override
+  String get registerTitle => 'Připojte se k nám!';
+
+  @override
+  String get email => 'E-mail';
+
+  @override
+  String get password => 'Heslo';
+
+  @override
+  String get username => 'Uživatelské jméno';
+
+  @override
+  String get loginButton => 'Přihlásit se';
+
+  @override
+  String get registerButton => 'Vytvořit účet';
+
+  @override
+  String get termsAcceptance =>
+      'Přečetl(a) jsem si podmínky služby a zásady ochrany osobních údajů a souhlasím s nimi.';
+
+  @override
+  String get gamesTab => 'Hry';
+
+  @override
+  String get friendsTab => 'Přátelé';
+
+  @override
+  String get statsTab => 'Profil';
+
+  @override
+  String get loungesTab => 'Místnosti';
+
+  @override
+  String get createGame => 'Vytvořit hru';
+
+  @override
+  String get joinGame => 'Připojit se';
+
+  @override
+  String get gameCode => 'Kód hry (6 číslic)';
+
+  @override
+  String get startGame => 'Spustit hru';
+
+  @override
+  String get leaveGame => 'Opustit hru';
+
+  @override
+  String get rules => 'Pravidla';
+
+  @override
+  String get level => 'Úroveň';
+
+  @override
+  String get coins => 'Mince';
+
+  @override
+  String get gameOver => 'Konec hry!';
+
+  @override
+  String get victory => 'Vítězství!';
+
+  @override
+  String get defeat => 'Porážka';
+
+  @override
+  String get nextRound => 'Další kolo';
+
+  @override
+  String get onboardingWelcome => 'Vítejte';
+
+  @override
+  String get onboardingSkip => 'Přeskočit';
+
+  @override
+  String get onboardingNext => 'Další';
+
+  @override
+  String get onboardingStart => 'Jdeme na to! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Hrajte s přáteli';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Vyberte si z více než 30 párty, karetních a deskových her. Hrajte lokálně, s přáteli nebo z celého světa!';
+
+  @override
+  String get onboardingSlide2Title => 'Získávejte mince a odznaky';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Získávejte XP za každé vítězství, posouvejte se na vyšší úrovně a odemykejte jedinečné úspěchy.';
+
+  @override
+  String get onboardingSlide3Title => 'Vytvořte nebo se připojte za pár sekund';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'K sehnání přátel stačí 6místný kód, nebo spusťte rychlé dohazování online.';
+
+  @override
+  String get vipPass => 'VIP Pas';
+
+  @override
+  String get vipActive => 'Váš VIP Pas je aktivní!';
+
+  @override
+  String get vipActiveDesc =>
+      'Všechny funkce (AI, Místnosti, Video, Dohazování) jsou neomezené.';
+
+  @override
+  String get choosePlan => 'Vyberte si předplatné:';
+
+  @override
+  String get restorePurchases => 'Obnovit nákupy';
+
+  @override
+  String get purchasesRestored => 'Nákupy byly úspěšně obnoveny!';
+
+  @override
+  String get noPurchasesFound => 'Nebyly nalezeny žádné aktivní nákupy.';
+
+  @override
+  String get monthlySubscription => 'Měsíční předplatné';
+
+  @override
+  String get annualSubscription => 'Roční předplatné';
+
+  @override
+  String get lifetimeAccess => 'Doživotní přístup';
+
+  @override
+  String get popularTag => 'OBLÍBENÉ';
+
+  @override
+  String get chooseButton => 'Vybrat';
+
+  @override
+  String get vipCongratulations => 'Gratulujeme, jste VIP!';
+
+  @override
+  String get purchaseFailed => 'Nákup nebyl dokončen.';
+
+  @override
+  String get profileTitle => 'Profil a Nastavení';
+
+  @override
+  String get profileNotFound => 'Profil nebyl nalezen nebo hráč neexistuje.';
+
+  @override
+  String get tabStats => 'Statistiky';
+
+  @override
+  String get tabBadges => 'Odznaky a Úspěchy';
+
+  @override
+  String get tabSettings => 'Nastavení';
+
+  @override
+  String get gamesPlayed => 'Odehrané hry';
+
+  @override
+  String get gamesWon => 'Vítězství';
+
+  @override
+  String get winRate => 'Úspěšnost výher';
+
+  @override
+  String get soundEffects => 'Zvukové efekty';
+
+  @override
+  String get music => 'Hudba';
+
+  @override
+  String get editUsername => 'Změnit uživatelské jméno';
+
+  @override
+  String get newUsernameHint => 'Nové jméno';
+
+  @override
+  String get logout => 'Odhlásit se';
+
+  @override
+  String get deleteAccount => 'Smazat účet';
+
+  @override
+  String get deleteAccountConfirm => 'Opravdu chcete trvale smazat svůj účet?';
+
+  @override
+  String get cancel => 'Zrušit';
+
+  @override
+  String get confirm => 'Potvrdit';
+
+  @override
+  String get save => 'Uložit';
+
+  @override
+  String get modeLocal => 'Lokálně';
+
+  @override
+  String get modeMulti => 'Online';
+
+  @override
+  String get modeMonde => 'Svět';
+
+  @override
+  String get searchGame => 'Hledat hru...';
+
+  @override
+  String get filterAll => 'Všechny hry';
+
+  @override
+  String get createLounge => 'Vytvořit místnost';
+
+  @override
+  String get joinLounge => 'Připojit se k místnosti';
+
+  @override
+  String get loungeCode => 'Kód místnosti';
+
+  @override
+  String get publicLounges => 'Veřejné místnosti';
+
+  @override
+  String get noLoungesAvailable =>
+      'V tuto chvíli nejsou k dispozici žádné veřejné místnosti.';
+
+  @override
+  String get playersCount => 'Hráči';
+
+  @override
+  String get howToPlay => 'Jak hrát?';
+
+  @override
+  String get copiedToClipboard => 'Zkopírováno do schránky!';
+
+  @override
+  String get connectionError => 'Chyba připojení. Zkuste to prosím znovu.';
+
+  @override
+  String get loading => 'Načítání...';
+
+  @override
+  String get success => 'Úspěch!';
+
+  @override
+  String pasAssezDeSymbolesUniques1(
+    Object symbolsPerCard,
+    Object totalSymbols,
+    Object dobbleSymbolslength,
+  ) {
+    return 'Nedostatek jedinečných symbolů pro0 karet. Požadováno:1, K dispozici:2. $symbolsPerCard $totalSymbols $dobbleSymbolslength';
+  }
+
+  @override
+  String melangeEquilibreDesThemesSuivants1(Object combinedTheme) {
+    return 'Vyvážený mix následujících témat: 0 $combinedTheme';
+  }
+
+  @override
+  String ambianceTonImpose(Object style) {
+    return '[Ambiance / Tone uvaleno: 0] $style';
+  }
+
+  @override
+  String genereDesPairesDeMots1(Object finalPrompt) {
+    return 'Vytváří dvojice podobných slov ve formátu \'MotCivil: MotInfilted\'. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCartesTabooAu1(Object finalPrompt) {
+    return 'Vytváří karty Taboo ve formátu \"Cílové slovo: Forbidd1, Forbidd2, Forbidd3, Forbidd4, Forbidd5\". Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCategoriesOriginalesEt1(Object finalPrompt) {
+    return 'Vytváří originální a zábavné kategorie hádat. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesVisuelles1(Object finalPrompt) {
+    return 'Vytváří krátké, vizuální a matoucí věty k kreslení (např. \"dinosauří jedí led\"). Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesDAccroche1(Object finalPrompt) {
+    return 'Vytváří originální fráze nebo psaní vesmíru. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesDilemmesCorneliensAu1(Object finalPrompt) {
+    return 'Vytváří dilemata rohovky ve formátu \"OptionA nebo optionB\" (např. \"Může létat nebo být neviditelný\"). Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUnMelangeDeDefis1(Object finalPrompt) {
+    return 'Vytváří směs výzev (akcí) a indiskrétních otázek (pravd). Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesQuestionsDirectesAmusantes1(Object finalPrompt) {
+    return 'Vytváří přímé, zábavné a pikantní otázky. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesA1(Object finalPrompt) {
+    return 'Vytváří krátké věty (obsahující \' \') pro hru. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesSituationsHumoristiquesEt1(Object finalPrompt) {
+    return 'Vytváří vtipné situace a počátky legend memů. Téma: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUneListeDeMots1(Object gameType, Object finalPrompt) {
+    return 'Vytvořit seznam slov / výrazů pro hru 0 na téma: 1 $gameType $finalPrompt';
+  }
+
+  @override
+  String theme(Object gameType) {
+    return 'Téma 0 $gameType';
+  }
+
+  @override
+  String passeSonTour2(Object playerName) {
+    return 'Je konec. $playerName';
+  }
+
+  @override
+  String finDuCompteARebours1(Object playerslength) {
+    return '⏱️ Fin du compte à rebours : Partie relancée pour tous les $playerslength joueurs !';
+  }
+
+  @override
+  String aOuvertAvec(Object playerName, Object cardToPlay) {
+    return '0 bylo otevřeno1. $playerName $cardToPlay';
+  }
+
+  @override
+  String sEstDeconnecteVictoireDe(
+    Object removedPlayerName,
+    Object remainingName,
+  ) {
+    return '0 je odpojeno. Vyhrajte 1 za balíček! $removedPlayerName $remainingName';
+  }
+
+  @override
+  String aManque3ToursSans(Object playerName) {
+    return '0 minul 3 kola bez hraní. Správce byl požádán, aby rozhodl o jeho nahrazení počítačem. $playerName';
+  }
+
+  @override
+  String neRepondPlusLAdministrateur(Object playerName, Object reason) {
+    return '0 již neodpovídá (1). Správce byl požádán, aby rozhodl o jeho nahrazení počítačem. $playerName $reason';
+  }
+
+  @override
+  String aEteRemplaceParL(Object playerName) {
+    return 'Byl nahrazen počítačem (AI aktivní - 5s za otočku). $playerName';
+  }
+
+  @override
+  String nAPasDonneD(Object playerName) {
+    return '0 neuvedl žádný index (Jeu d \'opinion). Otoč se. $playerName';
+  }
+
+  @override
+  String nAPasReponduJeu(Object playerName) {
+    return 'Tour přeskočil bez automatické akce. $playerName';
+  }
+
+  @override
+  String nAPasJoueA3(Object playerName) {
+    return '0 nehrál v čase. Jeho řada skončila. $playerName';
+  }
+
+  @override
+  String egaliteParfaiteLorsDuVote2(Object tiedPlayerslength) {
+    return 'Perfektní rovnost při hlasování (0 hráčů ex-aequo)! Žádný hráč vyřazen. $tiedPlayerslength';
+  }
+
+  @override
+  String aJoue(Object playerName, Object lastDrawn) {
+    return '1. $playerName $lastDrawn';
+  }
+
+  @override
+  String aJoue1(Object playerName, Object playable) {
+    return '1. $playerName $playable';
+  }
+
+  @override
+  String piocheEtPasseSonTour(Object playerName) {
+    return '0 zvedne a projde zatáčkou. $playerName';
+  }
+
+  @override
+  String nAPasJoueA4(Object playerName) {
+    return '0 nehrál včas. Jedna karta byla poražena a jedna krabice odhalena. $playerName';
+  }
+
+  @override
+  String laPartieEstTermineeVictoire1(Object winner) {
+    return 'Hra skončila. Vítězství 0! $winner';
+  }
+
+  @override
+  String joueursContaminesParLaMaladie1(Object contaminatedNames) {
+    return 'Hráči infikovaní nemocí:0. $contaminatedNames';
+  }
+
+  @override
+  String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
+    return 'Sledovali jste0 a objevili jste jeho roli:1. $targetName $targetRole';
+  }
+
+  @override
+  String votreMotDuJourPrononcez(Object newWord) {
+    return 'Vaše slovo dne: \"0\". Vyslovte to v kočce před západem slunce! $newWord';
+  }
+
+  @override
+  String declareUnCoupDEtat(Object dictateurName) {
+    return '0 prohlásí Coup! $dictateurName';
+  }
+
+  @override
+  String leChasseurTireEtTue1(Object targetName) {
+    return 'Lovec střílí a zabíjí 0! $targetName';
+  }
+
+  @override
+  String aDesigneCommeNouveauCapitaine(
+    Object formerCaptainName,
+    Object newCaptainName,
+  ) {
+    return '0 označil 1 za nového kapitána! $formerCaptainName $newCaptainName';
+  }
+
+  @override
+  String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
+    return 'Amor označil 0 a 1 za milence! $lover1Name $lover2Name';
+  }
+
+  @override
+  String votreAmoureuxSe(Object amoureux2Name) {
+    return 'Tvůj milenec: 0 $amoureux2Name';
+  }
+
+  @override
+  String votreAmoureuxSe1(Object amoureux1Name) {
+    return 'Tvůj milenec: 0 $amoureux1Name';
+  }
+
+  @override
+  String cEstAuTourDe4(Object currentTeamIndex1) {
+    return 'Je řada na týmu! $currentTeamIndex1';
+  }
+
+  @override
+  String aFaitUnMaisAucun(Object playerName, Object dice) {
+    return 'Automaticky otočit! $playerName $dice';
+  }
+
+  @override
+  String lancerTropElevePourAtteindre(Object dice) {
+    return 'Otoč se! $dice';
+  }
+
+  @override
+  String extremiteNonDisponibleSurLe1(Object openEnds) {
+    return 'Extrémita není dostupná na sadě (0). $openEnds';
+  }
+
+  @override
+  String laTuileNePossedePas(Object tile, Object matchEnd) {
+    return 'Taška 0 nemá požadovanou hodnotu1. $tile $matchEnd';
+  }
+
+  @override
+  String leBotAJoueAutomatiquement(Object tileToPlay) {
+    return 'Robot hrál automaticky0. $tileToPlay';
+  }
+
+  @override
+  String aEteContraintDePasser(Object playerName) {
+    return '⏱️ $playerName a été contraint de passer son tour.';
+  }
+
+  @override
+  String laRouletteADesigne(Object selectedName) {
+    return 'Ruleta určila 0! $selectedName';
+  }
+
+  @override
+  String doitEcrireLeDefi(Object authorName) {
+    return '0 musí napsat výzvu... $authorName';
+  }
+
+  @override
+  String leDefiAEteEnvoye1(Object currentPlayerName) {
+    return 'Výzva byla poslána na 0! $currentPlayerName';
+  }
+
+  @override
+  String resultatDeValidation(Object percentage) {
+    return 'Výsledek: 0% validace! $percentage';
+  }
+
+  @override
+  String gagneXp(Object currentPlayerName, Object earnedXp) {
+    return '0 vyhrává 1 XP! $currentPlayerName $earnedXp';
+  }
+
+  @override
+  String get tourSuivantQuiSeraLe1 => 'Další zatáčka! Kdo bude další?';
+
+  @override
+  String passeSonTour3(Object playerOrderinitialIn) {
+    return '0 Prochází zatáčkou! $playerOrderinitialIn';
+  }
+
+  @override
+  String vousDevezPiocherCartesOu(Object pendingDraw) {
+    return 'Musíte vybrat0 karet, nebo čítač s +2 / +4. $pendingDraw';
+  }
+
+  @override
+  String egaliteParfaite1(Object names) {
+    return 'Dokonalá rovnost! $names';
+  }
+
+  @override
+  String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
+    return 'Povinná vícenásobná zásuvka s pěšákem v0. $mandatoryPiece';
+  }
+
+  @override
+  String motsDevines(Object guessedCount, Object collectiveWordslengt) {
+    return '0 / 1 uhodla slova! $guessedCount $collectiveWordslengt';
+  }
+
+  @override
+  String quiPourraitLePlus3(Object questionsrandomnextI) {
+    return 'Což může být nejvíce 0 $questionsrandomnextI';
+  }
+
+  @override
+  String get decrivezVotreMotSecretEn =>
+      'Popiš své tajné slovo jedním slovem. Podvodníci, blafujte!';
+
+  @override
+  String trouvezLeMeilleurSynonymePour1(Object word) {
+    return 'Najděte nejlepší synonymum pro slovo: 0 $word';
+  }
+
+  @override
+  String get interdictionFormelleDeVoterPour =>
+      'Formální zákaz hlasovat pro sebe!';
+
+  @override
+  String remporteLaManche(Object winnerName) {
+    return '0 vyhrává rukojeť! $winnerName';
+  }
+
+  @override
+  String mrWhiteADevineLe1(Object civilianWord) {
+    return 'Pan White uhodl tajné slovo: \"0\"! $civilianWord';
+  }
+
+  @override
+  String mrWhiteAEchoueA1(Object civilianWord) {
+    return 'Pan White neuhodl slovo (bylo to \"0\"). $civilianWord';
+  }
+
+  @override
+  String get aucuneDescriptionNAEte1 => 'Nebyl zvolen žádný popis.';
+
+  @override
+  String ceNEstPasLe3(Object playerId) {
+    return 'Není řada na0. $playerId';
+  }
+
+  @override
+  String donneesDuJoueurIntrouvables(Object playerId) {
+    return 'Data hráčů 0 nenalezena. $playerId';
+  }
+
+  @override
+  String vousDevezFournirLaCouleur1(Object ledSuit) {
+    return 'Musíte poskytnout požadovanou barvu (0). $ledSuit';
+  }
+
+  @override
+  String aGagneAvecSaDescription1(Object winnerName) {
+    return '0 wonů s jeho popisem: $winnerName';
+  }
+
+  @override
+  String get leLoupBlancFrappeEn => 'Bílý vlk útočí sám.';
+
+  @override
+  String etaitUnCivilLesImposteurs(Object player) {
+    return '0 byl civilista! Podvodníci vyhráli! $player';
+  }
+
+  @override
+  String etaitLLesCivilsGagnent(Object player, Object role) {
+    return 'Civilové vyhráli! $player $role';
+  }
+
+  @override
+  String get question2 => 'otázka';
 }

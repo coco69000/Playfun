@@ -2245,5 +2245,686 @@
   "piedDeBiche": "Pied-de-biche",
   "str128675": "$'{'playerNames[i].substring(0, 7)'}'..",
   "pname": "$pName ($'{'''Moi'''}')",
-  "readycountTotalplayers": "$'{'''PRÊT'''}' ($readyCount/$totalPlayers)"
+  "readycountTotalplayers": "$'{'''PRÊT'''}' ($readyCount/$totalPlayers)",
+  "appTitle": "Jeu de Soirée",
+  "loginTitle": "Bienvenue !",
+  "registerTitle": "Rejoignez-nous !",
+  "email": "Email",
+  "password": "Mot de passe",
+  "username": "Pseudo unique",
+  "loginButton": "Connexion",
+  "registerButton": "Créer mon compte",
+  "termsAcceptance": "J''ai lu et j''accepte les CGU et la Politique de Confidentialité.",
+  "gamesTab": "Jeux",
+  "friendsTab": "Amis",
+  "statsTab": "Étoile",
+  "loungesTab": "Salons",
+  "createGame": "Créer une partie",
+  "joinGame": "Rejoindre",
+  "gameCode": "Code de la partie (6 chiffres)",
+  "startGame": "Démarrer la partie",
+  "leaveGame": "Quitter la partie",
+  "rules": "Règles",
+  "level": "Niveau",
+  "coins": "Pièces",
+  "gameOver": "Partie Terminée !",
+  "victory": "Victoire !",
+  "defeat": "Défaite",
+  "nextRound": "Manche suivante",
+  "onboardingWelcome": "Bienvenue",
+  "onboardingSkip": "Passer",
+  "onboardingNext": "Suivant",
+  "onboardingStart": "C''est parti ! 🚀",
+  "onboardingSlide1Title": "Joue avec tes potes",
+  "onboardingSlide1Subtitle": "Choisis parmi plus de 30 jeux d''ambiance, de cartes et de plateau. Joue en Local, entre Amis ou avec le Monde entier !",
+  "onboardingSlide2Title": "Gagne des pièces & Débloque des Badges",
+  "onboardingSlide2Subtitle": "Gagne de l''expérience à chaque victoire, grimpe les niveaux et débloque des succès exclusifs pour personnaliser ton profil.",
+  "onboardingSlide3Title": "Crée ou rejoins en 2 secondes",
+  "onboardingSlide3Subtitle": "Un code à 6 chiffres suffit pour réunir tes amis, ou lance le Matchmaking rapide pour trouver des joueurs en direct.",
+  "vipPass": "Pass VIP",
+  "vipActive": "Votre Pass VIP est actif !",
+  "vipActiveDesc": "Toutes les fonctionnalités (IA, Salons, Vidéo, Matchmaking) sont illimitées.",
+  "choosePlan": "Choisissez votre formule :",
+  "restorePurchases": "Restaurer mes achats",
+  "purchasesRestored": "Achats restaurés avec succès !",
+  "noPurchasesFound": "Aucun achat actif trouvé.",
+  "monthlySubscription": "Abonnement Mensuel",
+  "annualSubscription": "Abonnement Annuel",
+  "lifetimeAccess": "Accès à Vie",
+  "popularTag": "POPULAIRE",
+  "chooseButton": "Choisir",
+  "vipCongratulations": "Félicitations, vous êtes VIP !",
+  "purchaseFailed": "Achat non finalisé.",
+  "profileTitle": "Profil & Paramètres",
+  "profileNotFound": "Profil introuvable ou joueur inexistant.",
+  "tabStats": "Statistiques",
+  "tabBadges": "Badges & Succès",
+  "tabSettings": "Paramètres",
+  "gamesPlayed": "Parties jouées",
+  "gamesWon": "Victoires",
+  "winRate": "Taux de victoire",
+  "soundEffects": "Effets sonores",
+  "music": "Musique",
+  "editUsername": "Changer de pseudo",
+  "newUsernameHint": "Nouveau pseudo",
+  "logout": "Se déconnecter",
+  "deleteAccount": "Supprimer mon compte",
+  "deleteAccountConfirm": "Êtes-vous sûr de vouloir supprimer définitivement votre compte ?",
+  "cancel": "Annuler",
+  "confirm": "Confirmer",
+  "save": "Enregistrer",
+  "modeLocal": "Local",
+  "modeMulti": "En Ligne",
+  "modeMonde": "Monde",
+  "searchGame": "Rechercher un jeu...",
+  "filterAll": "Tous les jeux",
+  "createLounge": "Créer un salon",
+  "joinLounge": "Rejoindre un salon",
+  "loungeCode": "Code du salon",
+  "publicLounges": "Salons publics",
+  "noLoungesAvailable": "Aucun salon public disponible pour le moment.",
+  "playersCount": "Joueurs",
+  "howToPlay": "Comment jouer ?",
+  "copiedToClipboard": "Copié dans le presse-papier !",
+  "connectionError": "Erreur de connexion. Veuillez réessayer.",
+  "loading": "Chargement...",
+  "success": "Succès !",
+  "pasAssezDeSymbolesUniques1": "Pas assez de symboles uniques pour {symbolsPerCard} symboles par carte. Requis: {totalSymbols}, Disponibles: {dobbleSymbolslength}.",
+  "@pasAssezDeSymbolesUniques1": {
+    "placeholders": {
+      "symbolsPerCard": {
+        "type": "Object"
+      },
+      "totalSymbols": {
+        "type": "Object"
+      },
+      "dobbleSymbolslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "melangeEquilibreDesThemesSuivants1": "Mélange équilibré des thèmes suivants : {combinedTheme}",
+  "@melangeEquilibreDesThemesSuivants1": {
+    "placeholders": {
+      "combinedTheme": {
+        "type": "Object"
+      }
+    }
+  },
+  "ambianceTonImpose": "[Ambiance / Ton imposé : {style}]",
+  "@ambianceTonImpose": {
+    "placeholders": {
+      "style": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesPairesDeMots1": "Génère des paires de mots proches au format ''MotCivil:MotInfiltré''. Thème : {finalPrompt}",
+  "@genereDesPairesDeMots1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesCartesTabooAu1": "Génère des cartes Taboo au format ''MotCible:Interdit1,Interdit2,Interdit3,Interdit4,Interdit5''. Thème : {finalPrompt}",
+  "@genereDesCartesTabooAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesCategoriesOriginalesEt1": "Génère des catégories originales et amusantes à faire deviner. Thème : {finalPrompt}",
+  "@genereDesCategoriesOriginalesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesPhrasesCourtesVisuelles1": "Génère des phrases courtes, visuelles et loufoques à faire dessiner (ex: ''Un dinosaure qui mange une glace''). Thème : {finalPrompt}",
+  "@genereDesPhrasesCourtesVisuelles1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesPhrasesDAccroche1": "Génère des phrases d''accroche ou univers d''écriture originaux. Thème : {finalPrompt}",
+  "@genereDesPhrasesDAccroche1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesDilemmesCorneliensAu1": "Génère des dilemmes cornéliens au format ''OptionA ou OptionB'' (ex: ''Pouvoir voler ou Être invisible''). Thème : {finalPrompt}",
+  "@genereDesDilemmesCorneliensAu1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereUnMelangeDeDefis1": "Génère un mélange de défis (actions) et questions indiscrètes (vérités). Thème : {finalPrompt}",
+  "@genereUnMelangeDeDefis1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesQuestionsDirectesAmusantes1": "Génère des questions directes, amusantes et piquantes. Thème : {finalPrompt}",
+  "@genereDesQuestionsDirectesAmusantes1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesPhrasesCourtesA1": "Génère des phrases courtes à trou (contenant ''_____'') pour le jeu. Thème : {finalPrompt}",
+  "@genereDesPhrasesCourtesA1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereDesSituationsHumoristiquesEt1": "Génère des situations humoristiques et amorces de légendes de mèmes. Thème : {finalPrompt}",
+  "@genereDesSituationsHumoristiquesEt1": {
+    "placeholders": {
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "genereUneListeDeMots1": "Génère une liste de mots/expressions pour le jeu {gameType} sur le thème : {finalPrompt}",
+  "@genereUneListeDeMots1": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      },
+      "finalPrompt": {
+        "type": "Object"
+      }
+    }
+  },
+  "theme": "Thème {gameType}",
+  "@theme": {
+    "placeholders": {
+      "gameType": {
+        "type": "Object"
+      }
+    }
+  },
+  "passeSonTour2": "⏱️ {playerName} passe son tour.",
+  "@passeSonTour2": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "finDuCompteARebours1": "⏱️ Fin du compte à rebours : Partie relancée pour tous les {playerslength} joueurs !",
+  "@finDuCompteARebours1": {
+    "placeholders": {
+      "playerslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "aOuvertAvec": "⏱️ {playerName} a ouvert avec {cardToPlay}.",
+  "@aOuvertAvec": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "cardToPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "sEstDeconnecteVictoireDe": "{removedPlayerName} s''est déconnecté. Victoire de {remainingName} par forfait !",
+  "@sEstDeconnecteVictoireDe": {
+    "placeholders": {
+      "removedPlayerName": {
+        "type": "Object"
+      },
+      "remainingName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aManque3ToursSans": "⚠️ {playerName} a manqué 3 tours sans jouer. L''administrateur a été invité à décider de son remplacement par l''ordinateur.",
+  "@aManque3ToursSans": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "neRepondPlusLAdministrateur": "⚠️ {playerName} ne répond plus ({reason}). L''administrateur a été invité à décider de son remplacement par l''ordinateur.",
+  "@neRepondPlusLAdministrateur": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "reason": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteRemplaceParL": "🤖 {playerName} a été remplacé par l''ordinateur (IA active - 5s par tour).",
+  "@aEteRemplaceParL": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasDonneD": "⚠️ {playerName} n''a pas donné d''indice (Jeu d''opinion). Tour passé.",
+  "@nAPasDonneD": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasReponduJeu": "⚠️ {playerName} n''a pas répondu (Jeu d''opinion). Tour sauté sans action automatique.",
+  "@nAPasReponduJeu": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasJoueA3": "{playerName} n''a pas joué à temps. Son tour est passé.",
+  "@nAPasJoueA3": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "egaliteParfaiteLorsDuVote2": "Égalité parfaite lors du vote ({tiedPlayerslength} joueurs ex-aequo) ! Aucun joueur éliminé.",
+  "@egaliteParfaiteLorsDuVote2": {
+    "placeholders": {
+      "tiedPlayerslength": {
+        "type": "Object"
+      }
+    }
+  },
+  "aJoue": "⏱️ {playerName} a joué {lastDrawn}.",
+  "@aJoue": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "lastDrawn": {
+        "type": "Object"
+      }
+    }
+  },
+  "aJoue1": "⏱️ {playerName} a joué {playable}.",
+  "@aJoue1": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "playable": {
+        "type": "Object"
+      }
+    }
+  },
+  "piocheEtPasseSonTour": "⏱️ {playerName} pioche et passe son tour.",
+  "@piocheEtPasseSonTour": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "nAPasJoueA4": "⏱️ {playerName} n''a pas joué à temps. Une carte a été défaussée et une case révélée.",
+  "@nAPasJoueA4": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "laPartieEstTermineeVictoire1": "La partie est terminée. Victoire des {winner} !",
+  "@laPartieEstTermineeVictoire1": {
+    "placeholders": {
+      "winner": {
+        "type": "Object"
+      }
+    }
+  },
+  "joueursContaminesParLaMaladie1": "Joueurs contaminés par la maladie : {contaminatedNames}.",
+  "@joueursContaminesParLaMaladie1": {
+    "placeholders": {
+      "contaminatedNames": {
+        "type": "Object"
+      }
+    }
+  },
+  "vousAvezEspionneEtDecouvert": "Vous avez espionné {targetName} et découvert son rôle : {targetRole}.",
+  "@vousAvezEspionneEtDecouvert": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      },
+      "targetRole": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreMotDuJourPrononcez": "Votre mot du jour : ''{newWord}''. Prononcez-le dans le chat avant le coucher du soleil !",
+  "@votreMotDuJourPrononcez": {
+    "placeholders": {
+      "newWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "declareUnCoupDEtat": "{dictateurName} déclare un Coup d''État !",
+  "@declareUnCoupDEtat": {
+    "placeholders": {
+      "dictateurName": {
+        "type": "Object"
+      }
+    }
+  },
+  "leChasseurTireEtTue1": "Le Chasseur tire et tue {targetName} !",
+  "@leChasseurTireEtTue1": {
+    "placeholders": {
+      "targetName": {
+        "type": "Object"
+      }
+    }
+  },
+  "aDesigneCommeNouveauCapitaine": "{formerCaptainName} a désigné {newCaptainName} comme nouveau Capitaine !",
+  "@aDesigneCommeNouveauCapitaine": {
+    "placeholders": {
+      "formerCaptainName": {
+        "type": "Object"
+      },
+      "newCaptainName": {
+        "type": "Object"
+      }
+    }
+  },
+  "cupidonADesigneEtComme": "Cupidon a désigné {lover1Name} et {lover2Name} comme amoureux !",
+  "@cupidonADesigneEtComme": {
+    "placeholders": {
+      "lover1Name": {
+        "type": "Object"
+      },
+      "lover2Name": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreAmoureuxSe": "❤️ Votre amoureux(se) : {amoureux2Name}",
+  "@votreAmoureuxSe": {
+    "placeholders": {
+      "amoureux2Name": {
+        "type": "Object"
+      }
+    }
+  },
+  "votreAmoureuxSe1": "❤️ Votre amoureux(se) : {amoureux1Name}",
+  "@votreAmoureuxSe1": {
+    "placeholders": {
+      "amoureux1Name": {
+        "type": "Object"
+      }
+    }
+  },
+  "cEstAuTourDe4": "C''est au tour de l''équipe {currentTeamIndex1} !",
+  "@cEstAuTourDe4": {
+    "placeholders": {
+      "currentTeamIndex1": {
+        "type": "Object"
+      }
+    }
+  },
+  "aFaitUnMaisAucun": "🎲 {playerName} a fait un {dice} mais aucun pion ne peut avancer. Tour passé automatiquement !",
+  "@aFaitUnMaisAucun": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      },
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
+  "lancerTropElevePourAtteindre": "🎲 Lancer trop élevé ({dice}) pour atteindre le centre. Tour passé !",
+  "@lancerTropElevePourAtteindre": {
+    "placeholders": {
+      "dice": {
+        "type": "Object"
+      }
+    }
+  },
+  "extremiteNonDisponibleSurLe1": "Extrémité non disponible sur le plateau ({openEnds}).",
+  "@extremiteNonDisponibleSurLe1": {
+    "placeholders": {
+      "openEnds": {
+        "type": "Object"
+      }
+    }
+  },
+  "laTuileNePossedePas": "La tuile {tile} ne possède pas la valeur {matchEnd} requise.",
+  "@laTuileNePossedePas": {
+    "placeholders": {
+      "tile": {
+        "type": "Object"
+      },
+      "matchEnd": {
+        "type": "Object"
+      }
+    }
+  },
+  "leBotAJoueAutomatiquement": "⏱️ Le bot a joué {tileToPlay} automatiquement.",
+  "@leBotAJoueAutomatiquement": {
+    "placeholders": {
+      "tileToPlay": {
+        "type": "Object"
+      }
+    }
+  },
+  "aEteContraintDePasser": "⏱️ {playerName} a été contraint de passer son tour.",
+  "@aEteContraintDePasser": {
+    "placeholders": {
+      "playerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "laRouletteADesigne": "🎲 La roulette a désigné {selectedName} !",
+  "@laRouletteADesigne": {
+    "placeholders": {
+      "selectedName": {
+        "type": "Object"
+      }
+    }
+  },
+  "doitEcrireLeDefi": "✍️ {authorName} doit écrire le défi...",
+  "@doitEcrireLeDefi": {
+    "placeholders": {
+      "authorName": {
+        "type": "Object"
+      }
+    }
+  },
+  "leDefiAEteEnvoye1": "📝 Le défi a été envoyé à {currentPlayerName} !",
+  "@leDefiAEteEnvoye1": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "resultatDeValidation": "📊 Résultat : {percentage}% de validation !",
+  "@resultatDeValidation": {
+    "placeholders": {
+      "percentage": {
+        "type": "Object"
+      }
+    }
+  },
+  "gagneXp": "⭐ {currentPlayerName} gagne {earnedXp} XP !",
+  "@gagneXp": {
+    "placeholders": {
+      "currentPlayerName": {
+        "type": "Object"
+      },
+      "earnedXp": {
+        "type": "Object"
+      }
+    }
+  },
+  "tourSuivantQuiSeraLe1": "🔄 Tour suivant ! Qui sera le prochain ?",
+  "passeSonTour3": "{playerOrderinitialIn} passe son tour !",
+  "@passeSonTour3": {
+    "placeholders": {
+      "playerOrderinitialIn": {
+        "type": "Object"
+      }
+    }
+  },
+  "vousDevezPiocherCartesOu": "Vous devez piocher {pendingDraw} cartes, ou contrer avec un +2/+4.",
+  "@vousDevezPiocherCartesOu": {
+    "placeholders": {
+      "pendingDraw": {
+        "type": "Object"
+      }
+    }
+  },
+  "egaliteParfaite1": "Égalité parfaite ({names}) !",
+  "@egaliteParfaite1": {
+    "placeholders": {
+      "names": {
+        "type": "Object"
+      }
+    }
+  },
+  "priseMultipleObligatoireAvecLe1": "Prise multiple obligatoire avec le pion en {mandatoryPiece}.",
+  "@priseMultipleObligatoireAvecLe1": {
+    "placeholders": {
+      "mandatoryPiece": {
+        "type": "Object"
+      }
+    }
+  },
+  "motsDevines": "{guessedCount}/{collectiveWordslengt} mots devinés !",
+  "@motsDevines": {
+    "placeholders": {
+      "guessedCount": {
+        "type": "Object"
+      },
+      "collectiveWordslengt": {
+        "type": "Object"
+      }
+    }
+  },
+  "quiPourraitLePlus3": "Qui pourrait le plus {questionsrandomnextI}",
+  "@quiPourraitLePlus3": {
+    "placeholders": {
+      "questionsrandomnextI": {
+        "type": "Object"
+      }
+    }
+  },
+  "decrivezVotreMotSecretEn": "Décrivez votre mot secret en un seul mot. Imposteurs, bluffez !",
+  "trouvezLeMeilleurSynonymePour1": "Trouvez le meilleur synonyme pour le mot : {word}",
+  "@trouvezLeMeilleurSynonymePour1": {
+    "placeholders": {
+      "word": {
+        "type": "Object"
+      }
+    }
+  },
+  "interdictionFormelleDeVoterPour": "Interdiction formelle de voter pour soi-même !",
+  "remporteLaManche": "{winnerName} remporte la manche !",
+  "@remporteLaManche": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "mrWhiteADevineLe1": "Mr. White a deviné le mot secret : ''{civilianWord}'' !",
+  "@mrWhiteADevineLe1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "mrWhiteAEchoueA1": "Mr. White a échoué à deviner le mot (c''était ''{civilianWord}'').",
+  "@mrWhiteAEchoueA1": {
+    "placeholders": {
+      "civilianWord": {
+        "type": "Object"
+      }
+    }
+  },
+  "aucuneDescriptionNAEte1": "Aucune description n''a été votée.",
+  "ceNEstPasLe3": "Ce n''est pas le tour de {playerId}.",
+  "@ceNEstPasLe3": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
+  "donneesDuJoueurIntrouvables": "Données du joueur {playerId} introuvables.",
+  "@donneesDuJoueurIntrouvables": {
+    "placeholders": {
+      "playerId": {
+        "type": "Object"
+      }
+    }
+  },
+  "vousDevezFournirLaCouleur1": "Vous devez fournir la couleur demandée ({ledSuit}).",
+  "@vousDevezFournirLaCouleur1": {
+    "placeholders": {
+      "ledSuit": {
+        "type": "Object"
+      }
+    }
+  },
+  "aGagneAvecSaDescription1": "{winnerName} a gagné avec sa description :",
+  "@aGagneAvecSaDescription1": {
+    "placeholders": {
+      "winnerName": {
+        "type": "Object"
+      }
+    }
+  },
+  "leLoupBlancFrappeEn": "Le Loup Blanc frappe en solitaire",
+  "etaitUnCivilLesImposteurs": "{player} était un Civil ! Les Imposteurs gagnent !",
+  "@etaitUnCivilLesImposteurs": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      }
+    }
+  },
+  "etaitLLesCivilsGagnent": "{player} était l''{role} ! Les Civils gagnent !",
+  "@etaitLLesCivilsGagnent": {
+    "placeholders": {
+      "player": {
+        "type": "Object"
+      },
+      "role": {
+        "type": "Object"
+      }
+    }
+  },
+  "question2": "question"
 }

@@ -7673,4 +7673,631 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get readycountTotalplayers =>
       '\$ {\'FAST} (\$readyCount/\$totalPlayers)';
+
+  @override
+  String get appTitle => 'Παιχνίδι Παρέας';
+
+  @override
+  String get loginTitle => 'Καλώς ήρθατε!';
+
+  @override
+  String get registerTitle => 'Ελάτε μαζί μας!';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Κωδικός πρόσβασης';
+
+  @override
+  String get username => 'Όνομα χρήστη';
+
+  @override
+  String get loginButton => 'Σύνδεση';
+
+  @override
+  String get registerButton => 'Δημιουργία λογαριασμού';
+
+  @override
+  String get termsAcceptance =>
+      'Έχω διαβάσει και αποδέχομαι τους Όρους Χρήσης και την Πολιτική Απορρήτου.';
+
+  @override
+  String get gamesTab => 'Παιχνίδια';
+
+  @override
+  String get friendsTab => 'Φίλοι';
+
+  @override
+  String get statsTab => 'Προφίλ';
+
+  @override
+  String get loungesTab => 'Αίθουσες';
+
+  @override
+  String get createGame => 'Δημιουργία παιχνιδιού';
+
+  @override
+  String get joinGame => 'Συμμετοχή';
+
+  @override
+  String get gameCode => 'Κωδικός παιχνιδιού (6 ψηφία)';
+
+  @override
+  String get startGame => 'Έναρξη παιχνιδιού';
+
+  @override
+  String get leaveGame => 'Έξοδος από το παιχνίδι';
+
+  @override
+  String get rules => 'Κανόνες';
+
+  @override
+  String get level => 'Επίπεδο';
+
+  @override
+  String get coins => 'Νομίσματα';
+
+  @override
+  String get gameOver => 'Τέλος παιχνιδιού!';
+
+  @override
+  String get victory => 'Νίκη!';
+
+  @override
+  String get defeat => 'Ήττα';
+
+  @override
+  String get nextRound => 'Επόμενος γύρος';
+
+  @override
+  String get onboardingWelcome => 'Καλώς ήρθατε';
+
+  @override
+  String get onboardingSkip => 'Παράλειψη';
+
+  @override
+  String get onboardingNext => 'Επόμενο';
+
+  @override
+  String get onboardingStart => 'Πάμε! 🚀';
+
+  @override
+  String get onboardingSlide1Title => 'Παίξτε με φίλους';
+
+  @override
+  String get onboardingSlide1Subtitle =>
+      'Επιλέξτε ανάμεσα σε πάνω από 30 παιχνίδια παρέας, καρτών και επιτραπέζια. Παίξτε τοπικά, με φίλους ή παγκοσμίως!';
+
+  @override
+  String get onboardingSlide2Title => 'Κερδίστε νομίσματα & κονκάρδες';
+
+  @override
+  String get onboardingSlide2Subtitle =>
+      'Κερδίστε XP με κάθε νίκη, ανεβείτε επίπεδο και ξεκλειδώστε μοναδικά επιτεύγματα.';
+
+  @override
+  String get onboardingSlide3Title => 'Δημιουργήστε ή μπείτε σε δευτερόλεπτα';
+
+  @override
+  String get onboardingSlide3Subtitle =>
+      'Ένας 6ψήφιος κωδικός αρκεί για να μαζέψετε την παρέα σας, ή ξεκινήστε γρήγορο παιχνίδι.';
+
+  @override
+  String get vipPass => 'Πάσο VIP';
+
+  @override
+  String get vipActive => 'Το Πάσο VIP σας είναι ενεργό!';
+
+  @override
+  String get vipActiveDesc =>
+      'Όλες οι λειτουργίες (AI, Αίθουσες, Βίντεο, Matchmaking) είναι απεριόριστες.';
+
+  @override
+  String get choosePlan => 'Επιλέξτε το πρόγραμμά σας:';
+
+  @override
+  String get restorePurchases => 'Επαναφορά αγορών';
+
+  @override
+  String get purchasesRestored => 'Οι αγορές επαναφέρθηκαν με επιτυχία!';
+
+  @override
+  String get noPurchasesFound => 'Δεν βρέθηκαν ενεργές αγορές.';
+
+  @override
+  String get monthlySubscription => 'Μηνιαία Συνδρομή';
+
+  @override
+  String get annualSubscription => 'Ετήσια Συνδρομή';
+
+  @override
+  String get lifetimeAccess => 'Ισόβια Πρόσβαση';
+
+  @override
+  String get popularTag => 'ΔΗΜΟΦΙΛΕΣ';
+
+  @override
+  String get chooseButton => 'Επιλογή';
+
+  @override
+  String get vipCongratulations => 'Συγχαρητήρια, είστε VIP!';
+
+  @override
+  String get purchaseFailed => 'Η αγορά δεν ολοκληρώθηκε.';
+
+  @override
+  String get profileTitle => 'Προφίλ & Ρυθμίσεις';
+
+  @override
+  String get profileNotFound => 'Το προφίλ δεν βρέθηκε.';
+
+  @override
+  String get tabStats => 'Στατιστικά';
+
+  @override
+  String get tabBadges => 'Κονκάρδες & Επιτεύγματα';
+
+  @override
+  String get tabSettings => 'Ρυθμίσεις';
+
+  @override
+  String get gamesPlayed => 'Παιχνίδια';
+
+  @override
+  String get gamesWon => 'Νίκες';
+
+  @override
+  String get winRate => 'Ποσοστό νικών';
+
+  @override
+  String get soundEffects => 'Ηχητικά εφέ';
+
+  @override
+  String get music => 'Μουσική';
+
+  @override
+  String get editUsername => 'Αλλαγή ονόματος χρήστη';
+
+  @override
+  String get newUsernameHint => 'Νέο όνομα';
+
+  @override
+  String get logout => 'Αποσύνδεση';
+
+  @override
+  String get deleteAccount => 'Διαγραφή λογαριασμού';
+
+  @override
+  String get deleteAccountConfirm =>
+      'Είστε βέβαιοι ότι θέλετε να διαγράψετε οριστικά τον λογαριασμό σας;';
+
+  @override
+  String get cancel => 'Ακύρωση';
+
+  @override
+  String get confirm => 'Επιβεβαίωση';
+
+  @override
+  String get save => 'Αποθήκευση';
+
+  @override
+  String get modeLocal => 'Τοπικά';
+
+  @override
+  String get modeMulti => 'Online';
+
+  @override
+  String get modeMonde => 'Κόσμος';
+
+  @override
+  String get searchGame => 'Αναζήτηση παιχνιδιού...';
+
+  @override
+  String get filterAll => 'Όλα τα παιχνίδια';
+
+  @override
+  String get createLounge => 'Δημιουργία αίθουσας';
+
+  @override
+  String get joinLounge => 'Συμμετοχή σε αίθουσα';
+
+  @override
+  String get loungeCode => 'Κωδικός αίθουσας';
+
+  @override
+  String get publicLounges => 'Δημόσιες αίθουσες';
+
+  @override
+  String get noLoungesAvailable =>
+      'Δεν υπάρχουν διαθέσιμες δημόσιες αίθουσες αυτή τη στιγμή.';
+
+  @override
+  String get playersCount => 'Παίκτες';
+
+  @override
+  String get howToPlay => 'Πώς παίζεται;';
+
+  @override
+  String get copiedToClipboard => 'Αντιγράφηκε στο πρόχειρο!';
+
+  @override
+  String get connectionError => 'Σφάλμα σύνδεσης. Παρακαλώ δοκιμάστε ξανά.';
+
+  @override
+  String get loading => 'Φόρτωση...';
+
+  @override
+  String get success => 'Επιτυχία!';
+
+  @override
+  String pasAssezDeSymbolesUniques1(
+    Object symbolsPerCard,
+    Object totalSymbols,
+    Object dobbleSymbolslength,
+  ) {
+    return 'Δεν υπάρχουν αρκετά μοναδικά σύμβολα για 0 σύμβολα καρτών. Απαιτούνται: 1, Διαθέσιμο: 2 . $symbolsPerCard $totalSymbols $dobbleSymbolslength';
+  }
+
+  @override
+  String melangeEquilibreDesThemesSuivants1(Object combinedTheme) {
+    return 'Ισορροπημένο μείγμα από τα ακόλουθα θέματα: 0 $combinedTheme';
+  }
+
+  @override
+  String ambianceTonImpose(Object style) {
+    return '[Η ατμόσφαιρα / ο τόνος επιβάλλεται: 0 ] $style';
+  }
+
+  @override
+  String genereDesPairesDeMots1(Object finalPrompt) {
+    return 'Δημιουργεί ζεύγη παρόμοιων λέξεων σε μορφή \'MotCivil:MotInfilted\'. Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCartesTabooAu1(Object finalPrompt) {
+    return 'Δημιουργεί κάρτες Taboo στη μορφή \'Targetword:Forbidd1,Forbidd2,Forbidd3,Forbidd4,Forbidd5\'. Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesCategoriesOriginalesEt1(Object finalPrompt) {
+    return 'Δημιουργεί πρωτότυπες και διασκεδαστικές κατηγορίες για να μαντέψετε. Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesVisuelles1(Object finalPrompt) {
+    return 'Δημιουργεί σύντομες, οπτικές και μπερδεμένες προτάσεις για την κατάρτιση (π.χ. «Ένας δεινόσαυρος που τρώει πάγο»). Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesDAccroche1(Object finalPrompt) {
+    return 'Δημιουργεί πρωτότυπες φράσεις αλιευμάτων ή γράφει σύμπαν. Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesDilemmesCorneliensAu1(Object finalPrompt) {
+    return 'Δημιουργεί διλήμματα κερατοειδούς με τη μορφή «OptionA ή OptionB» (π.χ. «Μπορεί να πετάξει ή να είναι αόρατο»). Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUnMelangeDeDefis1(Object finalPrompt) {
+    return 'Δημιουργεί ένα μείγμα προκλήσεων (δράσεις) και αδιάκριτων ερωτήσεων (αλήθειες). Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesQuestionsDirectesAmusantes1(Object finalPrompt) {
+    return 'Δημιουργεί άμεσες, διασκεδαστικές και πικάντικες ερωτήσεις. Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesPhrasesCourtesA1(Object finalPrompt) {
+    return 'Δημιουργεί σύντομες προτάσεις οπής (που περιέχουν \') για το παιχνίδι. Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereDesSituationsHumoristiquesEt1(Object finalPrompt) {
+    return 'Δημιουργεί χιουμοριστικές καταστάσεις και αρχές θρύλων μιμιδίων. Θέμα: 0 $finalPrompt';
+  }
+
+  @override
+  String genereUneListeDeMots1(Object gameType, Object finalPrompt) {
+    return 'Δημιουργία μιας λίστας λέξεων/εκφράσεων για το παιχνίδι 0 στο θέμα: 1 $gameType $finalPrompt';
+  }
+
+  @override
+  String theme(Object gameType) {
+    return 'Θέμα 0 $gameType';
+  }
+
+  @override
+  String passeSonTour2(Object playerName) {
+    return 'Τελείωσε. $playerName';
+  }
+
+  @override
+  String finDuCompteARebours1(Object playerslength) {
+    return '⏱️ Fin du compte à rebours : Partie relancée pour tous les $playerslength joueurs !';
+  }
+
+  @override
+  String aOuvertAvec(Object playerName, Object cardToPlay) {
+    return '0 έχει ανοίξει με 1 . $playerName $cardToPlay';
+  }
+
+  @override
+  String sEstDeconnecteVictoireDe(
+    Object removedPlayerName,
+    Object remainingName,
+  ) {
+    return 'Το 0 έχει αποσυνδεθεί. Κερδίστε 1 ανά πακέτο! $removedPlayerName $remainingName';
+  }
+
+  @override
+  String aManque3ToursSans(Object playerName) {
+    return '0 έχασε 3 γύρους χωρίς να παίξει. Ο διαχειριστής κλήθηκε να αποφασίσει για την αντικατάστασή του με τον υπολογιστή. $playerName';
+  }
+
+  @override
+  String neRepondPlusLAdministrateur(Object playerName, Object reason) {
+    return '0 δεν απαντά πλέον ( 1). Ο διαχειριστής κλήθηκε να αποφασίσει για την αντικατάστασή του με τον υπολογιστή. $playerName $reason';
+  }
+
+  @override
+  String aEteRemplaceParL(Object playerName) {
+    return 'Αντικαταστάθηκε από τον υπολογιστή (AI ενεργό - 5s ανά στροφή). $playerName';
+  }
+
+  @override
+  String nAPasDonneD(Object playerName) {
+    return '0 δεν έχει δώσει δείκτη (Jeu d\'opinion). Γύρνα πίσω. $playerName';
+  }
+
+  @override
+  String nAPasReponduJeu(Object playerName) {
+    return 'Περιήγηση παραλείψει χωρίς αυτόματη δράση. $playerName';
+  }
+
+  @override
+  String nAPasJoueA3(Object playerName) {
+    return '0 δεν έχει παίξει εγκαίρως. Η σειρά του πέρασε. $playerName';
+  }
+
+  @override
+  String egaliteParfaiteLorsDuVote2(Object tiedPlayerslength) {
+    return 'Τέλεια ισότητα κατά την ψηφοφορία ( 0 παίκτες πρώην aequo)! Κανένας παίκτης δεν εξοντώθηκε. $tiedPlayerslength';
+  }
+
+  @override
+  String aJoue(Object playerName, Object lastDrawn) {
+    return '0 έχει παίξει 1 . $playerName $lastDrawn';
+  }
+
+  @override
+  String aJoue1(Object playerName, Object playable) {
+    return '0 έχει παίξει 1 . $playerName $playable';
+  }
+
+  @override
+  String piocheEtPasseSonTour(Object playerName) {
+    return 'Το 0 σηκώνεται και περνάει τη σειρά του. $playerName';
+  }
+
+  @override
+  String nAPasJoueA4(Object playerName) {
+    return '0 δεν έπαιξε στην ώρα του. Ένα χαρτί ηττήθηκε και ένα κουτί αποκαλύφθηκε. $playerName';
+  }
+
+  @override
+  String laPartieEstTermineeVictoire1(Object winner) {
+    return 'Το παιχνίδι τελείωσε. Νίκη του 0! $winner';
+  }
+
+  @override
+  String joueursContaminesParLaMaladie1(Object contaminatedNames) {
+    return 'Παίκτες μολυσμένοι με την ασθένεια: 0 . $contaminatedNames';
+  }
+
+  @override
+  String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
+    return 'Κατασκόπευες το 0 και ανακάλυψες το ρόλο του: 1 . $targetName $targetRole';
+  }
+
+  @override
+  String votreMotDuJourPrononcez(Object newWord) {
+    return 'Ο λόγος της ημέρας: \\\"0\\\". Πες το στη γάτα πριν το ηλιοβασίλεμα! $newWord';
+  }
+
+  @override
+  String declareUnCoupDEtat(Object dictateurName) {
+    return '0 δηλώνει Coup! $dictateurName';
+  }
+
+  @override
+  String leChasseurTireEtTue1(Object targetName) {
+    return 'Ο Κυνηγός πυροβολεί και σκοτώνει 0! $targetName';
+  }
+
+  @override
+  String aDesigneCommeNouveauCapitaine(
+    Object formerCaptainName,
+    Object newCaptainName,
+  ) {
+    return 'Το 0 όρισε νέο Κυβερνήτη! $formerCaptainName $newCaptainName';
+  }
+
+  @override
+  String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
+    return 'Ο Έρωτας έχει ορίσει 0 και 1 ως εραστές! $lover1Name $lover2Name';
+  }
+
+  @override
+  String votreAmoureuxSe(Object amoureux2Name) {
+    return 'Ο εραστής σου: 0 $amoureux2Name';
+  }
+
+  @override
+  String votreAmoureuxSe1(Object amoureux1Name) {
+    return 'Ο εραστής σου: 0 $amoureux1Name';
+  }
+
+  @override
+  String cEstAuTourDe4(Object currentTeamIndex1) {
+    return 'Είναι η σειρά της ομάδας! $currentTeamIndex1';
+  }
+
+  @override
+  String aFaitUnMaisAucun(Object playerName, Object dice) {
+    return 'Γυρίστε αυτόματα! $playerName $dice';
+  }
+
+  @override
+  String lancerTropElevePourAtteindre(Object dice) {
+    return 'Γύρνα πίσω! $dice';
+  }
+
+  @override
+  String extremiteNonDisponibleSurLe1(Object openEnds) {
+    return 'Το άκρο δεν διατίθεται στο σύνολο ( 0 ). $openEnds';
+  }
+
+  @override
+  String laTuileNePossedePas(Object tile, Object matchEnd) {
+    return 'Το πλακίδιο 0 δεν έχει την απαιτούμενη τιμή 1 . $tile $matchEnd';
+  }
+
+  @override
+  String leBotAJoueAutomatiquement(Object tileToPlay) {
+    return 'Το bot έπαιξε 0 αυτόματα. $tileToPlay';
+  }
+
+  @override
+  String aEteContraintDePasser(Object playerName) {
+    return '⏱️ $playerName a été contraint de passer son tour.';
+  }
+
+  @override
+  String laRouletteADesigne(Object selectedName) {
+    return 'Η ρουλέτα έχει οριστεί 0 ! $selectedName';
+  }
+
+  @override
+  String doitEcrireLeDefi(Object authorName) {
+    return '0 πρέπει να γράψει την πρόκληση... $authorName';
+  }
+
+  @override
+  String leDefiAEteEnvoye1(Object currentPlayerName) {
+    return 'Η πρόκληση στάλθηκε στο 0 ! $currentPlayerName';
+  }
+
+  @override
+  String resultatDeValidation(Object percentage) {
+    return 'Αποτέλεσμα: 0 % επικύρωση! $percentage';
+  }
+
+  @override
+  String gagneXp(Object currentPlayerName, Object earnedXp) {
+    return '0 κερδίζει 1 XP! $currentPlayerName $earnedXp';
+  }
+
+  @override
+  String get tourSuivantQuiSeraLe1 =>
+      'Επόμενη στροφή! Ποιος θα είναι ο επόμενος;';
+
+  @override
+  String passeSonTour3(Object playerOrderinitialIn) {
+    return '0 Περνάει η σειρά του! $playerOrderinitialIn';
+  }
+
+  @override
+  String vousDevezPiocherCartesOu(Object pendingDraw) {
+    return 'Πρέπει να επιλέξετε 0 κάρτες, ή μετρητή με +2/+4. $pendingDraw';
+  }
+
+  @override
+  String egaliteParfaite1(Object names) {
+    return 'Τέλεια ισότητα! $names';
+  }
+
+  @override
+  String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
+    return 'Υποχρεωτική πολλαπλή υποδοχή με το πιόνι σε 0 . $mandatoryPiece';
+  }
+
+  @override
+  String motsDevines(Object guessedCount, Object collectiveWordslengt) {
+    return '0 / 1 λέξεις μαντεμένες! $guessedCount $collectiveWordslengt';
+  }
+
+  @override
+  String quiPourraitLePlus3(Object questionsrandomnextI) {
+    return 'Που θα μπορούσε να είναι το πιο 0 $questionsrandomnextI';
+  }
+
+  @override
+  String get decrivezVotreMotSecretEn =>
+      'Περιγράψτε τη μυστική σας λέξη με μια λέξη. Εισβολείς, μπλόφα!';
+
+  @override
+  String trouvezLeMeilleurSynonymePour1(Object word) {
+    return 'Βρείτε το καλύτερο συνώνυμο της λέξης: 0 $word';
+  }
+
+  @override
+  String get interdictionFormelleDeVoterPour =>
+      'Τυπική απαγόρευση της ψηφοφορίας για τον εαυτό του!';
+
+  @override
+  String remporteLaManche(Object winnerName) {
+    return 'Το 0 κερδίζει το χερούλι! $winnerName';
+  }
+
+  @override
+  String mrWhiteADevineLe1(Object civilianWord) {
+    return 'Ο κ. Γουάιτ μάντεψε την μυστική λέξη: \\\"0\\\"! $civilianWord';
+  }
+
+  @override
+  String mrWhiteAEchoueA1(Object civilianWord) {
+    return 'Ο κ. White απέτυχε να μαντέψει τη λέξη (ήταν \' 0\'). $civilianWord';
+  }
+
+  @override
+  String get aucuneDescriptionNAEte1 => 'Δεν ψηφίστηκε καμία περιγραφή.';
+
+  @override
+  String ceNEstPasLe3(Object playerId) {
+    return 'Δεν είναι η σειρά του 0. $playerId';
+  }
+
+  @override
+  String donneesDuJoueurIntrouvables(Object playerId) {
+    return 'Δε βρέθηκαν δεδομένα παίκτη 0. $playerId';
+  }
+
+  @override
+  String vousDevezFournirLaCouleur1(Object ledSuit) {
+    return 'Πρέπει να δώσετε το ζητούμενο χρώμα ( 0 ). $ledSuit';
+  }
+
+  @override
+  String aGagneAvecSaDescription1(Object winnerName) {
+    return '0 κέρδισε με την περιγραφή του: $winnerName';
+  }
+
+  @override
+  String get leLoupBlancFrappeEn => 'Ο Λευκός Λύκος χτυπά μόνος του.';
+
+  @override
+  String etaitUnCivilLesImposteurs(Object player) {
+    return 'Ο 0 ήταν πολίτης! Οι Ιπτάμενοι κερδίζουν! $player';
+  }
+
+  @override
+  String etaitLLesCivilsGagnent(Object player, Object role) {
+    return 'Το 0 ήταν το 1! $player $role';
+  }
+
+  @override
+  String get question2 => 'Ερώτηση';
 }
