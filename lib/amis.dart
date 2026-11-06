@@ -122,7 +122,7 @@ class SupabaseService {
         print(
           '--- [Supabase Upload] Tentative $attempt/$maxRetries pour la partie $gameCode ---',
         );
-        final String fileName = '${const Uuid().v4()}.jpg';
+        final String fileName = '${Uuid().v4()}.jpg';
         final String path = '$gameCode/$fileName';
 
         await _client.storage
@@ -130,7 +130,7 @@ class SupabaseService {
             .uploadBinary(
               path,
               imageBytes,
-              fileOptions: const FileOptions(
+              fileOptions: FileOptions(
                 cacheControl: '3600',
                 upsert: false,
               ),
@@ -162,7 +162,7 @@ class SupabaseService {
 
   Future<String?> uploadImage(File imageFile, String gameCode) async {
     try {
-      final String fileName = '${const Uuid().v4()}.jpg';
+      final String fileName = '${Uuid().v4()}.jpg';
       final String path = '$gameCode/$fileName';
 
       await _client.storage
@@ -170,7 +170,7 @@ class SupabaseService {
           .upload(
             path,
             imageFile,
-            fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
+            fileOptions: FileOptions(cacheControl: '3600', upsert: false),
           );
 
       final String publicUrl = _client.storage
@@ -443,7 +443,7 @@ Le gagnant final est celui qui prend tous les jetons.
 """,
     'Le Juge':
         AppLocalizations.of(context)!.unJoueurEstDesigneComme,
-    'Qui Pourrait le Plus ?AppLocalizations.of(context)!.uneSituationEstPresenteeTousLe Menteur':
+    'Qui Pourrait le Plus ?':
         AppLocalizations.of(context)!.modeClassiqueUneQuestionEst,
     'Infiltré & Mr. White':
         AppLocalizations.of(context)!.laPlupartDesJoueursCivils,
@@ -1923,7 +1923,7 @@ class MultiplayerTeamSelectionDialog extends StatefulWidget {
   final String gameName;
   final int minTeams;
 
-  const MultiplayerTeamSelectionDialog({
+  MultiplayerTeamSelectionDialog({
     Key? key,
     required this.gameCode,
     required this.players,
@@ -2254,7 +2254,7 @@ class FirebaseService {
       case 'Blanc Manger Coco':
       case 'Le Juge':
       case 'Le Menteur':
-      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.caseLabelSynonyme ou Banni':
+      case 'Qui Pourrait le Plus ?':
       case 'Le Roi des Mèmes':
         return 25;
       default:
@@ -2357,7 +2357,7 @@ class FirebaseService {
         return "Génère des phrases courtes à trou (contenant '_____') pour le jeu. Thème : $finalPrompt";
       case 'Le Juge':
         return "Génère des questions amusantes sur un joueur (utilise le tag '{player}'). Thème : $finalPrompt";
-      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.returnGenereDesSituationsCourtes(finalPrompt)Le Roi des Mèmes':
+      case 'Qui Pourrait le Plus ?':
         return "Génère des situations humoristiques et amorces de légendes de mèmes. Thème : $finalPrompt";
       default:
         return "Génère une liste de mots/expressions pour le jeu $gameType sur le thème : $finalPrompt";
@@ -2706,7 +2706,7 @@ class FirebaseService {
       case 'Dominoes':
       case 'Zombie!':
       case 'Blanc Manger Coco':
-      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.caseLabelLe Juge':
+      case 'Qui Pourrait le Plus ?':
       case 'Le Menteur':
       case 'Synonyme ou Banni':
       case 'Le Roi des Mêmes':
@@ -3019,7 +3019,7 @@ class FirebaseService {
         'timestamp': ServerValue.timestamp,
       });
       if (tappedDieIndex != null) {
-        Future.delayed(const Duration(milliseconds: 1400), () {
+        Future.delayed(Duration(milliseconds: 1400), () {
           ref.child('tappedDieIndex').remove();
         });
       }
@@ -9187,7 +9187,7 @@ class FirebaseService {
       case 'heritier_turn':
         var heritier = playerData.entries.firstWhere(
           (e) => e.value['role'] == 'Héritier' && e.value['status'] == 'vivant',
-          orElse: () => const MapEntry('', {}),
+          orElse: () => MapEntry('', {}),
         );
         return nightNumber == 0 &&
             heritier.key.isNotEmpty &&
@@ -9219,7 +9219,7 @@ class FirebaseService {
       case 'sorciere_turn':
         var sorciere = playerData.entries.firstWhere(
           (e) => e.value['role'] == 'Sorcière' && e.value['status'] == 'vivant',
-          orElse: () => const MapEntry('', {}),
+          orElse: () => MapEntry('', {}),
         );
         if (sorciere.key.isEmpty) return false;
         return nightActions['sorciereActed'] != true;
@@ -9341,7 +9341,7 @@ class FirebaseService {
     });
 
     if (shouldAdvance) {
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 2));
       await startNextNightPhase(gameCode);
     }
   }
@@ -9433,7 +9433,7 @@ class FirebaseService {
     });
 
     if (shouldAdvance) {
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 2));
       await startNextNightPhase(gameCode);
     }
   }
@@ -9504,7 +9504,7 @@ class FirebaseService {
         if (finalData['phase'] == 'gameOver') return;
       }
     }
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 2));
     await startNextNightPhase(gameCode);
   }
 
@@ -9578,7 +9578,7 @@ class FirebaseService {
                   (e) =>
                       e.value['role'] == 'Loup Noir' &&
                       e.value['status'] == 'vivant',
-                  orElse: () => const MapEntry('', {}),
+                  orElse: () => MapEntry('', {}),
                 )
                 .key;
 
@@ -9653,7 +9653,7 @@ class FirebaseService {
     });
 
     if (shouldAdvance) {
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 2));
       await startNextNightPhase(gameCode);
     }
   }
@@ -9881,7 +9881,7 @@ class FirebaseService {
     });
 
     if (shouldAdvance) {
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 2));
       await startNextNightPhase(gameCode);
     }
   }
@@ -9940,7 +9940,7 @@ class FirebaseService {
     });
 
     if (shouldAdvance) {
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 2));
       await startNextNightPhase(gameCode);
     }
   }
@@ -9985,14 +9985,14 @@ class FirebaseService {
           playerData.entries
               .firstWhere(
                 (e) => e.value['role'] == 'Chasseur',
-                orElse: () => const MapEntry('', {}),
+                orElse: () => MapEntry('', {}),
               )
               .key;
       String? chaperonRougeId =
           playerData.entries
               .firstWhere(
                 (e) => e.value['role'] == 'Chaperon Rouge',
-                orElse: () => const MapEntry('', {}),
+                orElse: () => MapEntry('', {}),
               )
               .key;
 
@@ -10008,7 +10008,7 @@ class FirebaseService {
       if (isGardeProtected) {
         final gardeEntry = playerData.entries.firstWhere(
           (e) => e.value['role'] == 'Garde',
-          orElse: () => const MapEntry('', {}),
+          orElse: () => MapEntry('', {}),
         );
         if (gardeEntry.key.isNotEmpty) {
           final players = Map<String, dynamic>.from(gameData['players'] ?? {});
@@ -10031,7 +10031,7 @@ class FirebaseService {
         playerData.entries
             .firstWhere(
               (e) => e.value['role'] == 'Pyromancien',
-              orElse: () => const MapEntry('', {}),
+              orElse: () => MapEntry('', {}),
             )
             .key;
 
@@ -10115,7 +10115,7 @@ class FirebaseService {
               (e) =>
                   e.value['role'] == 'Héritier' &&
                   e.value['status'] == 'vivant',
-              orElse: () => const MapEntry('', {}),
+              orElse: () => MapEntry('', {}),
             )
             .key;
 
@@ -10158,7 +10158,7 @@ class FirebaseService {
               (e) =>
                   e.value['role'] == 'Loup Bavard' &&
                   e.value['status'] == 'vivant',
-              orElse: () => const MapEntry('', {}),
+              orElse: () => MapEntry('', {}),
             )
             .key;
 
@@ -10191,7 +10191,7 @@ class FirebaseService {
     final String? dictatorId = playerData.entries
         .firstWhere(
           (e) => e.value['role'] == 'Dictateur',
-          orElse: () => const MapEntry('', {}),
+          orElse: () => MapEntry('', {}),
         )
         .key;
     final bool dictatorValid = dictatorId != null &&
@@ -10780,7 +10780,7 @@ class FirebaseService {
                   (e) =>
                       e.value['role'] == 'Mercenaire' &&
                       e.value['status'] == 'vivant',
-                  orElse: () => const MapEntry('', {}),
+                  orElse: () => MapEntry('', {}),
                 )
                 .key;
 
@@ -10859,7 +10859,7 @@ class FirebaseService {
                 (e) =>
                     e.value['role'] == 'Héritier' &&
                     e.value['status'] == 'vivant',
-                orElse: () => const MapEntry('', {}),
+                orElse: () => MapEntry('', {}),
               )
               .key;
       if (heritierId.isNotEmpty) {
@@ -11040,7 +11040,7 @@ class FirebaseService {
                 (e) =>
                     e.value['role'] == 'Héritier' &&
                     e.value['status'] == 'vivant',
-                orElse: () => const MapEntry('', {}),
+                orElse: () => MapEntry('', {}),
               )
               .key;
       if (heritierIdCheck.isNotEmpty) {
@@ -11387,7 +11387,7 @@ class FirebaseService {
       if (subPhase == 'loup_noir_action') {
         final loupNoirEntry = playerData.entries.firstWhere(
           (e) => e.value['role'] == 'Loup Noir' && e.value['status'] == 'vivant',
-          orElse: () => const MapEntry('', {}),
+          orElse: () => MapEntry('', {}),
         );
         if (loupNoirEntry.key.isNotEmpty) {
           await loupNoirInfect(gameCode, loupNoirEntry.key, false, isAuto: true);
@@ -17456,7 +17456,7 @@ class FirebaseService {
       } else if (myHand.length == 1) {
         updates['unoCalledUno.$playerId'] = false;
         updates['unoContraDeadline'] = Timestamp.fromDate(
-          DateTime.now().add(const Duration(seconds: 3)),
+          DateTime.now().add(Duration(seconds: 3)),
         );
         updates['unoLog'] = FieldValue.arrayUnion([
           "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} n'a plus qu'une seule carte !",
@@ -18307,7 +18307,7 @@ class FirebaseService {
                 (e) =>
                     e.value['authUid'] == currentAuthUid ||
                     e.key == currentAuthUid,
-                orElse: () => const MapEntry('', {}),
+                orElse: () => MapEntry('', {}),
               )
               .key;
 
@@ -19759,7 +19759,7 @@ class FirebaseService {
         'turnStartTime': FieldValue.serverTimestamp(),
         'pictionaryStartTime': FieldValue.serverTimestamp(),
       });
-      Future.delayed(const Duration(seconds: 3), () async {
+      Future.delayed(Duration(seconds: 3), () async {
         await nextPictionaryRound(gameCode);
       });
     } else if (gameData['roundState'] == 'result') {
@@ -20248,7 +20248,7 @@ class FirebaseService {
         await gameRef.update({
           'gameState': 'gameOver',
           'gameEndReason':
-              AppLocalizations.of(context)!.gagneAvecPointLowestscore1(winnerName, lowestScore)s' : ''} !',
+              ': ''} !',
         });
         return;
       }
@@ -20699,8 +20699,7 @@ class FirebaseService {
             GameWords.undercoverData['soft']!['wordPairs']!;
         String pair = wordPairs[random.nextInt(wordPairs.length)];
         List<String> words =
-            pair.contains(':AppLocalizations.of(context)!.pairSplit:AppLocalizations.of(context)!.pairPairListStringShuffledrolesInfiltré'
-                  : (pId == secMrWhiteId ? 'Mr. White' : 'Civil');
+            pair.contains(':': (pId == secMrWhiteId ? 'Mr. White' : 'Civil');
           String pWord =
               (pId == secUndercoverId)
                   ? words[1]
@@ -24332,25 +24331,25 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   String? _selectedAiStyle;
 
   static const List<String> _popularAiThemes = [
-    "🎬 Cinéma & Séries",
-    "🎮 Gaming & Jeux",
-    "🍕 Cuisine & Food",
-    "🌍 Voyage & Pays",
-    "🦸 Super-héros & Comics",
-    "🐾 Animaux & Nature",
-    "🚀 Science-Fiction",
-    "📚 Histoire & Mythes",
-    "🎭 Humour & Absurde",
-    "🎵 Musique & Pop",
-    "🎉 Années 80 / 90",
-    "🧙 Fantasy & Magie",
+    AppLocalizations.of(context)!.cinemaSeries,
+    AppLocalizations.of(context)!.gamingJeux,
+    AppLocalizations.of(context)!.cuisineFood,
+    AppLocalizations.of(context)!.voyagePays,
+    AppLocalizations.of(context)!.superHerosComics,
+    AppLocalizations.of(context)!.animauxNature,
+    AppLocalizations.of(context)!.scienceFiction,
+    AppLocalizations.of(context)!.histoireMythes,
+    AppLocalizations.of(context)!.humourAbsurde,
+    AppLocalizations.of(context)!.musiquePop,
+    AppLocalizations.of(context)!.annees8090,
+    AppLocalizations.of(context)!.fantasyMagie,
   ];
 
   static const List<String> _aiStylesList = [
-    "🎉 Fun & Soirée",
-    "🧠 Culture & Défi",
-    "👨‍👩‍👧‍👦 Famille & Tout Public",
-    "🌶️ Piquant & Insolite",
+    AppLocalizations.of(context)!.funSoiree,
+    AppLocalizations.of(context)!.cultureDefi,
+    AppLocalizations.of(context)!.familleToutPublic,
+    AppLocalizations.of(context)!.piquantInsolite,
   ];
   int _infiltreCount = 1;
   int _mrWhiteCount = 1;
@@ -24371,7 +24370,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   bool _enablePublicSearch = false; // <--- NOUVELLE VARIABLE
 
   bool _hotPotatoUseGlobalTimer = false;
-  String _photoRouletteMediaType = 'Photos';
+  String _photoRouletteMediaType = AppLocalizations.of(context)!.photos;
   bool _dobbleSymbolsPerCard = true;
   bool _isSimplifiedLiar = false;
   String _liarVoteMode = 'simultaneous';
@@ -24387,14 +24386,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   int _unoStartingCards = 7;
   bool _unoStackDraws = true;
   int _timesUpTotalRounds = 3;
-  String _dominoesMode = 'pioche';
+  String _dominoesMode = AppLocalizations.of(context)!.pioche3;
   int _dominoesTargetScore = 50;
   int _zeroPointeTargetScore = 100;
   int _pokerStartChips = 1000;
   List<String> _selectedGameCategories = [];
   int _pokerSmallBlind = 10;
   int _pokerBigBlind = 20;
-  String _gribouillisMode = 'Normal';
+  String _gribouillisMode = AppLocalizations.of(context)!.normal;
   bool _gribouillisAjouter1 = false;
   int _hotPotatoGlobalDuration =
       60; // NOUVEAU: Chrono global pour La Patate Chaude
@@ -24404,15 +24403,15 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   int _aoVMaxRounds = 10;
   int _aoVVoteThreshold = 100;
   Map<String, bool> _undercoverRoleSettings = {
-    'Fou de Joie': false,
-    'Boomerang': false,
-    'Déesse de la Justice': false,
-    'Fantôme': false,
-    'Amoureux': false,
-    'Mr. Meme': false,
-    'Vendeur de Falafels': false,
-    'Vengeuse': false,
-    'Duellistes': false,
+    AppLocalizations.of(context)!.fouDeJoie: false,
+    AppLocalizations.of(context)!.boomerang: false,
+    AppLocalizations.of(context)!.deesseDeLaJustice: false,
+    AppLocalizations.of(context)!.fantome: false,
+    AppLocalizations.of(context)!.amoureux: false,
+    AppLocalizations.of(context)!.mrMeme: false,
+    AppLocalizations.of(context)!.vendeurDeFalafels: false,
+    AppLocalizations.of(context)!.vengeuse: false,
+    AppLocalizations.of(context)!.duellistes: false,
   };
 
   @override
@@ -24438,8 +24437,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     }
     if (_selectedGame == 'Loup-Garou') {
       _selectedLoupGarouRoles['Loup-Garou'] = 1;
-      _selectedLoupGarouRoles['Simple Villageois'] = 1;
-      _selectedLoupGarouRoles['Capitaine'] = 1;
+      _selectedLoupGarouRoles[AppLocalizations.of(context)!.simpleVillageois] = 1;
+      _selectedLoupGarouRoles[AppLocalizations.of(context)!.capitaine] = 1;
     }
   }
 
@@ -24490,7 +24489,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           gameType: _selectedGame,
         );
       } catch (e) {
-        print("Erreur génération IA: $e");
+        print(AppLocalizations.of(context)!.erreurGenerationIaE);
       } finally {
         if (mounted) setState(() => _isAiLoading = false);
       }
@@ -24772,7 +24771,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           gameType: _selectedGame,
         );
       } catch (e) {
-        print("Erreur génération IA: $e");
+        print(AppLocalizations.of(context)!.erreurGenerationIaE);
       } finally {
         if (mounted) setState(() => _isAiLoading = false);
       }
@@ -24841,7 +24840,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ? _liarVoteMode
                       : 'simultaneous',
               quiPourraitVoteMode:
-                  _selectedGame == 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.quipourraitvotemodegrouper',
+                  _selectedGame == AppLocalizations.of(context)!.quiPourraitLePlusApplocalizations6,
               petitBacCategories:
                   _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
               petitBacTime:
@@ -24921,7 +24920,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     final bool isCommunicationEnabled = _videoEnabled || _audioEnabled;
     // Vérifie si la recherche publique est activée pour griser Local et Privé
     final bool isPublicSearchEnabled = _enablePublicSearch;
-    final bool isDevineTete = _selectedGame.contains('Devine T');
+    final bool isDevineTete = _selectedGame.contains(AppLocalizations.of(context)!.devineT);
     final bool blockOnlineForDevineTete = isDevineTete && !_videoEnabled;
 
     showModalBottomSheet(
@@ -25127,8 +25126,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: const Color(0xFF141422),
-      shape: const RoundedRectangleBorder(
+      backgroundColor: Color(0xFF141422),
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (ctx) {
@@ -25148,7 +25147,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(24),
                       ),
-                      border: const Border(
+                      border: Border(
                         bottom: BorderSide(color: Colors.white12),
                       ),
                     ),
@@ -25159,7 +25158,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           children: [
                             Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.history_rounded,
                                   color: Colors.cyanAccent,
                                   size: 22,
@@ -25176,7 +25175,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               ],
                             ),
                             IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.close,
                                 color: Colors.white70,
                               ),
@@ -25184,7 +25183,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: 10),
                         // Filtres : AppLocalizations.of(context)!.ceJeu vs "Tous les jeux"
                         Row(
                           children: [
@@ -25227,7 +25226,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Expanded(
                               child: GestureDetector(
                                 onTap:
@@ -25292,17 +25291,17 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.auto_awesome,
                                     size: 48,
                                     color: Colors.white24,
                                   ),
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: 12),
                                   Text(
                                     historyFilter == 'all'
                                         ? AppLocalizations.of(context)!.aucunThemeIaSauvegardeSur
                                         : AppLocalizations.of(context)!.aucunThemeSauvegardePour,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.white54,
                                       fontSize: 14,
                                     ),
@@ -25328,7 +25327,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 color:
                                     isSelected
                                         ? Colors.deepPurple.withOpacity(0.35)
-                                        : const Color(0xFF1E1E2E),
+                                        : Color(0xFF1E1E2E),
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(
                                   color:
@@ -25352,14 +25351,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           children: [
                                             Text(
                                               item.title,
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 15,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
-                                            const SizedBox(height: 4),
+                                            SizedBox(height: 4),
                                             Row(
                                               children: [
                                                 Container(
@@ -25378,7 +25377,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                   ),
                                                   child: Text(
                                                     item.gameType,
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       color: Colors.cyanAccent,
                                                       fontSize: 10,
                                                       fontWeight:
@@ -25386,7 +25385,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 6),
+                                                SizedBox(width: 6),
                                                 Container(
                                                   padding:
                                                       const EdgeInsets.symmetric(
@@ -25403,7 +25402,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                   ),
                                                   child: Text(
                                                     AppLocalizations.of(context)!.elements,
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       color: Colors.amberAccent,
                                                       fontSize: 10,
                                                       fontWeight:
@@ -25417,7 +25416,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                         ),
                                       ),
                                       IconButton(
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.delete_outline,
                                           size: 20,
                                           color: Colors.redAccent,
@@ -25433,10 +25432,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     ],
                                   ),
                                   if (item.prompt.isNotEmpty) ...[
-                                    const SizedBox(height: 6),
+                                    SizedBox(height: 6),
                                     Text(
                                       AppLocalizations.of(context)!.prompt,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         color: Colors.white54,
                                         fontSize: 12,
                                         fontStyle: FontStyle.italic,
@@ -25465,7 +25464,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             ),
                                             child: Text(
                                               w,
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 color: Colors.white70,
                                                 fontSize: 11,
                                               ),
@@ -25473,12 +25472,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           );
                                         }).toList(),
                                   ),
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: 12),
                                   Row(
                                     children: [
                                       Expanded(
                                         child: ElevatedButton.icon(
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.check_circle_rounded,
                                             size: 16,
                                           ),
@@ -25516,7 +25515,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                 ),
                                                 backgroundColor:
                                                     Colors.green[800],
-                                                duration: const Duration(
+                                                duration: Duration(
                                                   seconds: 2,
                                                 ),
                                               ),
@@ -25527,7 +25526,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                       SizedBox(width: 6),
                                       Expanded(
                                         child: ElevatedButton.icon(
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.merge_type_rounded,
                                             size: 16,
                                           ),
@@ -25557,7 +25556,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                   merged.toList();
                                               _activeAiThemeTitle =
                                                   _activeAiThemeTitle != null
-                                                      ? "$_activeAiThemeTitle + ${item.title}"
+                                                      ? AppLocalizations.of(context)!.activeaithemetitle
                                                       : item.title;
                                             });
                                             Navigator.pop(ctx);
@@ -25570,7 +25569,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                 ),
                                                 backgroundColor:
                                                     Colors.deepPurple,
-                                                duration: const Duration(
+                                                duration: Duration(
                                                   seconds: 3,
                                                 ),
                                               ),
@@ -25578,9 +25577,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           },
                                         ),
                                       ),
-                                      const SizedBox(width: 6),
+                                      SizedBox(width: 6),
                                       IconButton(
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.edit_note,
                                           size: 22,
                                           color: Colors.cyanAccent,
@@ -25630,7 +25629,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         return StatefulBuilder(
           builder: (context, setDState) {
             return AlertDialog(
-              backgroundColor: const Color(0xFF1B1B2A),
+              backgroundColor: Color(0xFF1B1B2A),
               title: Text(
                 AppLocalizations.of(context)!.modifierLeTheme,
                 style: TextStyle(color: Colors.white, fontSize: 18),
@@ -25645,12 +25644,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.titreDuThemeIaPersonnalise,
                       ),
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     Row(
                       children: [
                         Expanded(
@@ -25670,7 +25669,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.add_circle,
                             color: Colors.greenAccent,
                           ),
@@ -25685,14 +25684,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     // Bouton IA pour compléter la liste
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton.icon(
                         icon:
                             isGeneratingMore
-                                ? const SizedBox(
+                                ? SizedBox(
                                   width: 14,
                                   height: 14,
                                   child: CircularProgressIndicator(
@@ -25700,7 +25699,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     color: Colors.amberAccent,
                                   ),
                                 )
-                                : const Icon(
+                                : Icon(
                                   Icons.auto_awesome,
                                   size: 16,
                                   color: Colors.amberAccent,
@@ -25709,7 +25708,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           isGeneratingMore
                               ? AppLocalizations.of(context)!.generationEnCours
                               : AppLocalizations.of(context)!.completerAvecLIa15,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.amberAccent,
                             fontSize: 12,
                           ),
@@ -25741,7 +25740,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 },
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.all(8),
@@ -25758,7 +25757,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   return Chip(
                                     label: Text(
                                       w,
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                     onDeleted:
                                         () => setDState(
@@ -25833,7 +25832,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     );
     final modes = gameDataInfo['modes'] as List<String>;
     final bool canLocal = modes.contains('local');
-    bool isDevineTete = _selectedGame.contains('Devine T');
+    bool isDevineTete = _selectedGame.contains(AppLocalizations.of(context)!.devineT);
     bool forceVideo = false;
     final bool isAiActive =
         (_selectedAiWords != null && _selectedAiWords!.isNotEmpty) ||
@@ -25996,8 +25995,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
-                                  const Color(0xFF1E1B4B).withOpacity(0.85),
-                                  const Color(0xFF14142B).withOpacity(0.95),
+                                  Color(0xFF1E1B4B).withOpacity(0.85),
+                                  Color(0xFF14142B).withOpacity(0.95),
                                 ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
@@ -26011,7 +26010,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 BoxShadow(
                                   color: Colors.amber.withOpacity(0.12),
                                   blurRadius: 12,
-                                  offset: const Offset(0, 4),
+                                  offset: Offset(0, 4),
                                 ),
                               ],
                             ),
@@ -26035,7 +26034,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                               8,
                                             ),
                                           ),
-                                          child: const Icon(
+                                          child: Icon(
                                             Icons.auto_awesome,
                                             color: Colors.amberAccent,
                                             size: 20,
@@ -26044,7 +26043,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                         SizedBox(width: 10),
                                         Text(
                                           AppLocalizations.of(context)!.generationIa,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Colors.amberAccent,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15,
@@ -26053,7 +26052,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                       ],
                                     ),
                                     TextButton.icon(
-                                      icon: const Icon(
+                                      icon: Icon(
                                         Icons.history_rounded,
                                         size: 18,
                                         color: Colors.cyanAccent,
@@ -26110,7 +26109,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                         ),
                                         child: Text(
 AppLocalizations.of(context)!.combineS,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Colors.amberAccent,
                                             fontSize: 11,
                                             fontWeight: FontWeight.bold,
@@ -26119,7 +26118,7 @@ AppLocalizations.of(context)!.combineS,
                                       ),
                                   ],
                                 ),
-                                const SizedBox(height: 6),
+                                SizedBox(height: 6),
                                 SizedBox(
                                   height: 38,
                                   child: ListView.builder(
@@ -26195,7 +26194,7 @@ AppLocalizations.of(context)!.combineS,
                                         ),
                                         Text(
                                           AppLocalizations.of(context)!.minRequisRecommande,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Colors.white38,
                                             fontSize: 10,
                                           ),
@@ -26205,7 +26204,7 @@ AppLocalizations.of(context)!.combineS,
                                     Row(
                                       children: [
                                         IconButton(
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.remove_circle_outline,
                                             color: Colors.amberAccent,
                                             size: 20,
@@ -26243,7 +26242,7 @@ AppLocalizations.of(context)!.combineS,
                                           ),
                                           child: Text(
                                             "$currentCount",
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               color: Colors.amberAccent,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14,
@@ -26251,7 +26250,7 @@ AppLocalizations.of(context)!.combineS,
                                           ),
                                         ),
                                         IconButton(
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.add_circle_outline,
                                             color: Colors.amberAccent,
                                             size: 20,
@@ -26300,7 +26299,7 @@ AppLocalizations.of(context)!.combineS,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                const SizedBox(height: 6),
+                                SizedBox(height: 6),
                                 Wrap(
                                   spacing: 6,
                                   runSpacing: 6,
@@ -26344,18 +26343,18 @@ AppLocalizations.of(context)!.combineS,
                                 // CHAMP DE TEXTE LIBRE
                                 TextField(
                                   controller: _aiInstructionsController,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,
                                   ),
                                   decoration: InputDecoration(
                                     labelText: AppLocalizations.of(context)!.precisionsOuIdeesSupplementairesOptionnel,
-                                    labelStyle: const TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 12),
                                     hintText:
                                         _selectedAiThemes.isEmpty
                                             ? AppLocalizations.of(context)!.exMythologieGrecqueObjetsInsolites
                                             : AppLocalizations.of(context)!.exPasDAnimauxDangereux,
-                                    hintStyle: const TextStyle(
+                                    hintStyle: TextStyle(
                                       color: Colors.white30,
                                       fontSize: 12,
                                     ),
@@ -26369,7 +26368,7 @@ AppLocalizations.of(context)!.combineS,
                                                 .text
                                                 .isNotEmpty
                                             ? IconButton(
-                                              icon: const Icon(
+                                              icon: Icon(
                                                 Icons.clear,
                                                 size: 16,
                                               ),
@@ -26385,7 +26384,7 @@ AppLocalizations.of(context)!.combineS,
                                   maxLines: 2,
                                   onChanged: (_) => setState(() {}),
                                 ),
-                                const SizedBox(height: 12),
+                                SizedBox(height: 12),
 
                                 // BOUTON DE GÉNÉRATION DIRECTE
                                 Row(
@@ -26394,7 +26393,7 @@ AppLocalizations.of(context)!.combineS,
                                       child: ElevatedButton.icon(
                                         icon:
                                             _isAiLoading
-                                                ? const SizedBox(
+                                                ? SizedBox(
                                                   width: 16,
                                                   height: 16,
                                                   child:
@@ -26403,7 +26402,7 @@ AppLocalizations.of(context)!.combineS,
                                                         color: Colors.black,
                                                       ),
                                                 )
-                                                : const Icon(
+                                                : Icon(
                                                   Icons.bolt_rounded,
                                                   color: Colors.black,
                                                 ),
@@ -26411,7 +26410,7 @@ AppLocalizations.of(context)!.combineS,
                                           _isAiLoading
                                               ? AppLocalizations.of(context)!.generationEnCours
                                               : AppLocalizations.of(context)!.genererAvecLIaElements(currentCount),
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -26478,7 +26477,7 @@ AppLocalizations.of(context)!.combineS,
                                                       if (autoTitle.length >
                                                           25) {
                                                         autoTitle =
-                                                            "${autoTitle.substring(0, 25)}...";
+                                                            AppLocalizations.of(context)!.str7fab82;
                                                       }
 
                                                       final docId = await _firebaseService
@@ -26552,7 +26551,7 @@ AppLocalizations.of(context)!.combineS,
                                 // INDICATEUR DU PACK ACTUELLEMENT ACTIF
                                 if (_selectedAiWords != null &&
                                     _selectedAiWords!.isNotEmpty) ...[
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: 12),
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
@@ -26566,16 +26565,16 @@ AppLocalizations.of(context)!.combineS,
                                     ),
                                     child: Row(
                                       children: [
-                                        const Icon(
+                                        Icon(
                                           Icons.check_circle,
                                           color: Colors.greenAccent,
                                           size: 20,
                                         ),
-                                        const SizedBox(width: 8),
+                                        SizedBox(width: 8),
                                         Expanded(
                                           child: Text(
                                             AppLocalizations.of(context)!.packActifElements(_activeAiThemeTitle ?? AppLocalizations.of(context)!.themePersonnalise, _selectedAiWords!.length),
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 13,
@@ -26584,13 +26583,13 @@ AppLocalizations.of(context)!.combineS,
                                           ),
                                         ),
                                         IconButton(
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.close,
                                             color: Colors.white54,
                                             size: 18,
                                           ),
                                           padding: EdgeInsets.zero,
-                                          constraints: const BoxConstraints(),
+                                          constraints: BoxConstraints(),
                                           tooltip: AppLocalizations.of(context)!.desactiverCePack,
                                           onPressed: () {
                                             setState(() {
@@ -26642,7 +26641,7 @@ AppLocalizations.of(context)!.combineS,
                           setState(() => _gribouillisMode = newSelection.first);
                         },
                       ),
-                      if (_gribouillisMode == 'Complément') ...[
+                      if (_gribouillisMode == AppLocalizations.of(context)!.complement) ...[
                         SizedBox(height: 10),
                         SwitchListTile.adaptive(
                           title: Text(
@@ -27507,11 +27506,11 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.gagne4PointsSIl,
                         ),
-                        value: _undercoverRoleSettings['Fou de Joie']!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.fouDeJoie]!,
                         onChanged:
                             (val) => setState(
                               () =>
-                                  _undercoverRoleSettings['Fou de Joie'] = val,
+                                  _undercoverRoleSettings[AppLocalizations.of(context)!.fouDeJoie] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -27521,10 +27520,10 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.la1ereFoisQuIl,
                         ),
-                        value: _undercoverRoleSettings['Boomerang']!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.boomerang]!,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings['Boomerang'] = val,
+                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.boomerang] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -27534,11 +27533,11 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.trancheEnCasDEgalite,
                         ),
-                        value: _undercoverRoleSettings['Déesse de la Justice']!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.deesseDeLaJustice]!,
                         onChanged:
                             (val) => setState(
                               () =>
-                                  _undercoverRoleSettings['Déesse de la Justice'] =
+                                  _undercoverRoleSettings[AppLocalizations.of(context)!.deesseDeLaJustice] =
                                       val,
                             ),
                       ),
@@ -27549,10 +27548,10 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.peutToujoursVoterApresSon,
                         ),
-                        value: _undercoverRoleSettings['Fantôme']!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.fantome]!,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings['Fantôme'] = val,
+                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.fantome] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -27562,10 +27561,10 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.siLUnEstElimine,
                         ),
-                        value: _undercoverRoleSettings["Amoureux"]!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.amoureux]!,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings["Amoureux"] = val,
+                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.amoureux] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -27575,10 +27574,10 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.unJoueurDevraMimerSon,
                         ),
-                        value: _undercoverRoleSettings['Mr. Meme']!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.mrMeme]!,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings['Mr. Meme'] = val,
+                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.mrMeme] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -27588,11 +27587,11 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.recoitUnPouvoirSpecialAleatoire,
                         ),
-                        value: _undercoverRoleSettings['Vendeur de Falafels']!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.vendeurDeFalafels]!,
                         onChanged:
                             (val) => setState(
                               () =>
-                                  _undercoverRoleSettings['Vendeur de Falafels'] =
+                                  _undercoverRoleSettings[AppLocalizations.of(context)!.vendeurDeFalafels] =
                                       val,
                             ),
                       ),
@@ -27603,10 +27602,10 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.elimineQuelquUnEnEtant,
                         ),
-                        value: _undercoverRoleSettings['Vengeuse']!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.vengeuse]!,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings['Vengeuse'] = val,
+                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.vengeuse] = val,
                             ),
                       ),
                       SwitchListTile.adaptive(
@@ -27616,10 +27615,10 @@ AppLocalizations.of(context)!.combineS,
                         subtitle: Text(
                           AppLocalizations.of(context)!.duelSecretPourDesPoints,
                         ),
-                        value: _undercoverRoleSettings['Duellistes']!,
+                        value: _undercoverRoleSettings[AppLocalizations.of(context)!.duellistes]!,
                         onChanged:
                             (val) => setState(
-                              () => _undercoverRoleSettings['Duellistes'] = val,
+                              () => _undercoverRoleSettings[AppLocalizations.of(context)!.duellistes] = val,
                             ),
                       ),
                     ],
@@ -27699,7 +27698,7 @@ AppLocalizations.of(context)!.communicationEnLigne,
                             children: [
                               SwitchListTile.adaptive(
                                 title: Text(
-"${"Activer la Vidéo"} ${forceVideo ? '(${"Obligatoire"})' : ''}",
+"${"Activer la VidéoAppLocalizations.of(context)!.forcevideoObligatoire"})' : ''}",
 ),
                                 subtitle: Text(
                                   forceVideo
@@ -28094,7 +28093,7 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
 class GameLobbyScreen extends StatefulWidget {
   final String gameCode;
   final String playerId;
-  const GameLobbyScreen({required this.gameCode, required this.playerId});
+  GameLobbyScreen({required this.gameCode, required this.playerId});
   @override
   _GameLobbyScreenState createState() => _GameLobbyScreenState();
 }
@@ -28113,7 +28112,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
     _livekitService = Provider.of<LivekitService>(context, listen: false);
     _sendHeartbeat();
     _heartbeatTimer = Timer.periodic(
-      const Duration(seconds: 15),
+      Duration(seconds: 15),
       (_) => _sendHeartbeat(),
     );
   }
@@ -28148,7 +28147,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
         audioEnabled: audioEnabled,
       );
     } catch (e) {
-      print("Erreur init Livekit au salon : $e");
+      print(AppLocalizations.of(context)!.erreurInitLivekitAuSalon);
     }
   }
 
@@ -28335,7 +28334,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                     color: Colors.deepPurple[950]?.withOpacity(0.3),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
-                      side: const BorderSide(
+                      side: BorderSide(
                         color: Colors.deepPurpleAccent,
                         width: 1,
                       ),
@@ -28353,7 +28352,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                               letterSpacing: 1,
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -28370,7 +28369,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                               ),
                               SizedBox(width: 12),
                               IconButton(
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.copy,
                                   color: Colors.amberAccent,
                                 ),
@@ -28393,10 +28392,10 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   Card(
                     child: ListTile(
-                      leading: const Icon(
+                      leading: Icon(
                         Icons.games,
                         color: Colors.cyanAccent,
                       ),
@@ -28406,22 +28405,22 @@ context,
 AppLocalizations.of(context)!.jeu,
 [GameRulesLocalization.getGameTitle(context, gameType)],
 ),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
                         AppLocalizations.of(context)!.difficulte1,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   Text(
 AppLocalizations.of(context)!.joueursPresents,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   ListView.builder(
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: players.length,
                     itemBuilder: (context, idx) {
                       String pId = players.keys.elementAt(idx);
@@ -28482,20 +28481,20 @@ AppLocalizations.of(context)!.joueursPresents,
                             title: Text(
                               pData['name'] ??
                                   AppLocalizations.of(context)!.joueur,
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             subtitle: (pData['score'] != null &&
                                     (pData['score'] as num) > 0)
                                 ? Text(
                                   AppLocalizations.of(context)!.scoreDeSessionVictoires,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.amberAccent,
                                     fontSize: 12,
                                   ),
                                 )
                                 : Text(
                                   isPlayerHost ? AppLocalizations.of(context)!.hoteDuSalon : AppLocalizations.of(context)!.appuyerPourVoirProfil,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.white38,
                                     fontSize: 11,
                                   ),
@@ -28506,7 +28505,7 @@ AppLocalizations.of(context)!.joueursPresents,
                                 Chip(
                                   label: Text(
                                     AppLocalizations.of(context)!.pret,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 11,
                                       fontWeight: FontWeight.bold,
@@ -28517,9 +28516,9 @@ AppLocalizations.of(context)!.joueursPresents,
                                   visualDensity: VisualDensity.compact,
                                 ),
                                 if (pId != currentPlayerId) ...[
-                                  const SizedBox(width: 4),
+                                  SizedBox(width: 4),
                                   IconButton(
-                                    icon: const Icon(
+                                    icon: Icon(
                                       Icons.more_vert,
                                       size: 18,
                                       color: Colors.white54,
@@ -28541,21 +28540,21 @@ AppLocalizations.of(context)!.joueursPresents,
                       );
                     },
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   // BOUTON INVITER MES AMIS (MODERNE, DYNAMIQUE & ACCESSIBLE)
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF2575FC).withValues(alpha: 0.35),
+                          color: Color(0xFF2575FC).withValues(alpha: 0.35),
                           blurRadius: 12,
-                          offset: const Offset(0, 4),
+                          offset: Offset(0, 4),
                         ),
                       ],
                     ),
@@ -28566,10 +28565,10 @@ AppLocalizations.of(context)!.joueursPresents,
                         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       ),
-                      icon: const Icon(Icons.person_add_alt_1_rounded, color: Colors.white, size: 22),
+                      icon: Icon(Icons.person_add_alt_1_rounded, color: Colors.white, size: 22),
                       label: Text(
                         AppLocalizations.of(context)!.inviterMesAmis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.5,
@@ -28662,18 +28661,18 @@ AppLocalizations.of(context)!.joueursPresents,
                   ),
 
                   if (isHost && isTeamGame) ...[
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     OutlinedButton.icon(
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 13),
-                        side: const BorderSide(color: Colors.cyanAccent, width: 1.5),
+                        side: BorderSide(color: Colors.cyanAccent, width: 1.5),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         foregroundColor: Colors.cyanAccent,
                       ),
-                      icon: const Icon(Icons.groups_rounded, size: 22),
+                      icon: Icon(Icons.groups_rounded, size: 22),
                       label: Text(
                         AppLocalizations.of(context)!.composerLesEquipes,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       onPressed: () {
                         showDialog(
@@ -28689,14 +28688,14 @@ AppLocalizations.of(context)!.joueursPresents,
                       },
                     ),
                   ],
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   // BOUTON DÉMARRER LA PARTIE (MODERNE, ÉLÉGANT AVEC GRADIENT & GLOW)
                   if (isHost)
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         gradient: canStart
-                            ? const LinearGradient(
+                            ? LinearGradient(
                                 colors: [Color(0xFF00B09B), Color(0xFF96C93D)],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
@@ -28706,9 +28705,9 @@ AppLocalizations.of(context)!.joueursPresents,
                         boxShadow: canStart
                             ? [
                                 BoxShadow(
-                                  color: const Color(0xFF00B09B).withValues(alpha: 0.45),
+                                  color: Color(0xFF00B09B).withValues(alpha: 0.45),
                                   blurRadius: 14,
-                                  offset: const Offset(0, 4),
+                                  offset: Offset(0, 4),
                                 ),
                               ]
                             : [],
@@ -28768,15 +28767,15 @@ AppLocalizations.of(context)!.joueursPresents,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(
+                          SizedBox(
                             width: 16,
                             height: 16,
                             child: CircularProgressIndicator(strokeWidth: 2, color: Colors.amberAccent),
                           ),
-                          const SizedBox(width: 12),
+                          SizedBox(width: 12),
                           Text(
                             AppLocalizations.of(context)!.enAttenteDeLHote,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontStyle: FontStyle.italic,
                               color: Colors.white70,
                               fontSize: 14,
@@ -28925,7 +28924,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       try {
         await _livekitService.leaveChannel();
       } catch (e) {
-        print("Erreur leaveChannel safePop: $e");
+        print(AppLocalizations.of(context)!.erreurLeavechannelSafepopE);
       }
     }
     if (mounted) {
@@ -28940,7 +28939,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       try {
         await _livekitService.leaveChannel();
       } catch (e) {
-        print("Erreur lors de la déconnexion LiveKit : $e");
+        print(AppLocalizations.of(context)!.erreurLorsDeLaDeconnexion);
       }
     }
 
@@ -28967,7 +28966,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           }
         }
       } catch (e) {
-        print("Erreur lors du nettoyage du salon de jeu : $e");
+        print(AppLocalizations.of(context)!.erreurLorsDuNettoyageDu);
       }
 
       if (mounted) {
@@ -29163,7 +29162,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         audioEnabled: audioEnabled,
       );
     } catch (e) {
-      print("Erreur init Livekit: $e");
+      print(AppLocalizations.of(context)!.erreurInitLivekitE);
     }
   }
 
@@ -29210,7 +29209,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     if (state == AppLifecycleState.paused) {
       // L'app est en arrière-plan â€â€ si pas de retour dans 60s, retirer le joueur
       _pauseRemovalTimer?.cancel();
-      _pauseRemovalTimer = Timer(const Duration(seconds: 60), () {
+      _pauseRemovalTimer = Timer(Duration(seconds: 60), () {
         _firebaseService.removePlayerFromGame(widget.gameCode, widget.playerId);
       });
     } else if (state == AppLifecycleState.resumed) {
@@ -29235,7 +29234,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
 
   void _startHeartbeat() {
     _sendHeartbeat();
-    _heartbeatTimer = Timer.periodic(const Duration(seconds: 30), (_) {
+    _heartbeatTimer = Timer.periodic(Duration(seconds: 30), (_) {
       _sendHeartbeat();
     });
   }
@@ -29245,7 +29244,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   void _startStalePlayerCheck() {
-    _stalePlayerCheckTimer = Timer.periodic(const Duration(seconds: 30), (
+    _stalePlayerCheckTimer = Timer.periodic(Duration(seconds: 30), (
       _,
     ) async {
       // Seul l'hôte vérifie les joueurs inactifs
@@ -29322,7 +29321,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         _livekitService.leaveChannel();
       }
     } catch (e) {
-      print("Erreur dispose LivekitService: $e");
+      print(AppLocalizations.of(context)!.erreurDisposeLivekitserviceE);
     }
     super.dispose();
   }
@@ -29485,7 +29484,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         _firebaseService.handleUnoTimeout(widget.gameCode);
         break;
       case 'Président':
-      case 'Présidente':
+      case AppLocalizations.of(context)!.presidente:
         _firebaseService.handlePresidentTimeout(widget.gameCode);
         break;
       case 'Poker':
@@ -29568,7 +29567,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       case 'Action ou Vérité':
         _firebaseService.handleActionOuVeriteTimeout(widget.gameCode);
         break;
-      case 'Blanc Manger Cocon':
+      case AppLocalizations.of(context)!.blancMangerCocon:
       case 'Blanc Manger Coco':
       case 'BMC':
         _firebaseService.handleBMCTimeout(widget.gameCode);
@@ -29617,11 +29616,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         );
         final myData = playerData[playerId] ?? {};
 
-        final myRole = privateData['role'] ?? myData['role'] ?? 'Chargement...';
+        final myRole = privateData['role'] ?? myData['role'] ?? AppLocalizations.of(context)!.chargement;
         final mySecretWord =
             privateData['secretWord'] ??
             myData['secretWord'] ??
-            'Chargement...';
+            AppLocalizations.of(context)!.chargement;
         final List<dynamic> mySpecialAbilities =
             (privateData['specialAbilities'] as List<dynamic>?) ??
             (myData['specialAbilities'] as List<dynamic>?) ??
@@ -29648,11 +29647,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Divider(color: Colors.white30),
+                Divider(color: Colors.white30),
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                     children: [
                       TextSpan(
                         text: "${"Rôle:"} ",
@@ -29660,7 +29659,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       ),
                       TextSpan(
                         text: "$myRole",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.amberAccent,
                         ),
@@ -29671,15 +29670,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                     children: [
                       TextSpan(
                         text: "${"Mot:"} ",
-                        style: const TextStyle(color: Colors.white70),
+                        style: TextStyle(color: Colors.white70),
                       ),
                       TextSpan(
                         text: "$mySecretWord",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.cyanAccent,
                           fontSize: 16,
@@ -29695,7 +29694,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       children: [
                         Text(
                           AppLocalizations.of(context)!.capacites,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white70,
                             fontSize: 14,
                           ),
@@ -29715,7 +29714,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                                             ability.toString(),
                                           ),
                                       backgroundColor: Colors.deepPurple[800],
-                                      labelStyle: const TextStyle(
+                                      labelStyle: TextStyle(
                                         color: Colors.white,
                                       ),
                                     ),
@@ -29862,7 +29861,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             );
             final String roleDisplay =
                 specialAbilities.isNotEmpty
-                    ? "$pRole (${specialAbilities.join(', ')})"
+                    ? AppLocalizations.of(context)!.prole
                     : pRole;
             return Text(
               AppLocalizations.of(context)!.aEteElimineSonRole,
@@ -29897,7 +29896,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     final playerData = gameData['playerData'];
     String? avengerId;
     playerData.forEach((pId, data) {
-      if ((data['specialAbilities'] as List?)?.contains('Vengeuse') ?? false)
+      if ((data['specialAbilities'] as List?)?.contains(AppLocalizations.of(context)!.vengeuse) ?? false)
         avengerId = pId;
     });
 
@@ -29947,23 +29946,23 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   static const Map<String, String> _undercoverRoleDescriptions = {
-    'Fou de Joie':
+    AppLocalizations.of(context)!.fouDeJoie:
         AppLocalizations.of(context)!.siVousEtesLePremier,
-    'Boomerang':
+    AppLocalizations.of(context)!.boomerang:
         AppLocalizations.of(context)!.laPremiereFoisQueLa,
-    'Déesse de la Justice':
+    AppLocalizations.of(context)!.deesseDeLaJustice:
         AppLocalizations.of(context)!.enCasDEgaliteLors,
-    'Fantôme':
+    AppLocalizations.of(context)!.fantome:
         AppLocalizations.of(context)!.memeApresVotreEliminationVous,
-    'Amoureux':
+    AppLocalizations.of(context)!.amoureux:
         AppLocalizations.of(context)!.unAutreJoueurEstSecretement,
-    'Mr. Meme':
+    AppLocalizations.of(context)!.mrMeme:
         AppLocalizations.of(context)!.auLieuDeDonnerUn,
-    'Vendeur de Falafels':
+    AppLocalizations.of(context)!.vendeurDeFalafels:
         AppLocalizations.of(context)!.vousNAvezPasDe1,
-    'Vengeuse':
+    AppLocalizations.of(context)!.vengeuse:
         AppLocalizations.of(context)!.siVousEtesElimineeVous,
-    'Duellistes':
+    AppLocalizations.of(context)!.duellistes:
         AppLocalizations.of(context)!.unAutreJoueurEstVotre,
   };
 
@@ -30164,7 +30163,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     AppLocalizations.of(context)!.phaseDeDiscussion,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Wrap(
                     spacing: 6,
                     children: suspects.entries.map((entry) {
@@ -30179,7 +30178,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                         ),
                         child: Text(
 AppLocalizations.of(context)!.soupconne,
-                          style: const TextStyle(color: Colors.amberAccent, fontSize: 11),
+                          style: TextStyle(color: Colors.amberAccent, fontSize: 11),
                         ),
                       );
                     }).toList(),
@@ -30266,14 +30265,14 @@ AppLocalizations.of(context)!.soupconne,
     });
 
     final Map<String, IconData> roleIcons = {
-      'Boomerang': Icons.autorenew,
-      'Vengeuse': Icons.whatshot,
-      'Déesse de la Justice': Icons.gavel,
-      'Fantôme': Icons.visibility,
-      "Amoureux": Icons.favorite,
-      'Mr. Meme': Icons.gesture,
-      'Vendeur de Falafels': Icons.fastfood,
-      'Duellistes': Icons.compare_arrows,
+      AppLocalizations.of(context)!.boomerang: Icons.autorenew,
+      AppLocalizations.of(context)!.vengeuse: Icons.whatshot,
+      AppLocalizations.of(context)!.deesseDeLaJustice: Icons.gavel,
+      AppLocalizations.of(context)!.fantome: Icons.visibility,
+      AppLocalizations.of(context)!.amoureux: Icons.favorite,
+      AppLocalizations.of(context)!.mrMeme: Icons.gesture,
+      AppLocalizations.of(context)!.vendeurDeFalafels: Icons.fastfood,
+      AppLocalizations.of(context)!.duellistes: Icons.compare_arrows,
     };
 
     return SingleChildScrollView(
@@ -30451,8 +30450,8 @@ AppLocalizations.of(context)!.soupconne,
           gameData['photoRouletteSettings']?['mediaType'] ?? AppLocalizations.of(context)!.photos;
 
       RequestType requestType = RequestType.image;
-      if (mediaType == 'Vidéos') requestType = RequestType.video;
-      if (mediaType == 'Mixte') requestType = RequestType.common;
+      if (mediaType == AppLocalizations.of(context)!.videos) requestType = RequestType.video;
+      if (mediaType == AppLocalizations.of(context)!.mixte) requestType = RequestType.common;
 
       List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(
         type: requestType,
@@ -30499,7 +30498,7 @@ AppLocalizations.of(context)!.soupconne,
       for (final asset in selectedAssets) {
         // Optimisation : thumbnail haute qualité (1080x1080) au lieu de l'image brute 4K
         final Uint8List? bytes = await asset.thumbnailDataWithSize(
-          const ThumbnailSize(1080, 1080),
+          ThumbnailSize(1080, 1080),
           quality: 85,
         );
 
@@ -30796,7 +30795,7 @@ AppLocalizations.of(context)!.soupconne,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             StreamBuilder(
-              stream: Stream.periodic(const Duration(milliseconds: 100)),
+              stream: Stream.periodic(Duration(milliseconds: 100)),
               builder: (context, snapshot) {
                 int elapsed = DateTime.now().difference(startTime).inSeconds;
                 int remaining = 5 - elapsed;
@@ -31288,7 +31287,7 @@ AppLocalizations.of(context)!.points,
                 Widget scaffold = Scaffold(
                   appBar: AppBar(
                     leading: IconButton(
-                      icon: const Icon(Icons.arrow_back),
+                      icon: Icon(Icons.arrow_back),
                       tooltip: AppLocalizations.of(context)!.quitterLaPartie1,
                       onPressed: _confirmAndExitGame,
                     ),
@@ -31299,7 +31298,7 @@ AppLocalizations.of(context)!.points,
                     ),
                     actions: [
                       IconButton(
-                        icon: const Icon(Icons.info_outline),
+                        icon: Icon(Icons.info_outline),
                         onPressed:
                             () => showGameRules(context, currentGameType),
                       ),
@@ -31367,7 +31366,7 @@ AppLocalizations.of(context)!.points,
 
                               // MODIFICATION : Zone d'affichage de la main adverse intégrée ici
                               AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 300),
+                                duration: Duration(milliseconds: 300),
                                 transitionBuilder:
                                     (child, animation) => SizeTransition(
                                       sizeFactor: animation,
@@ -31857,7 +31856,7 @@ AppLocalizations.of(context)!.enAttenteDesAutresJoueurs1,
               ),
             ),
             if (inspectedCard != null && !amIJudge) ...[
-              const SizedBox(height: 6),
+              SizedBox(height: 6),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
@@ -31867,7 +31866,7 @@ AppLocalizations.of(context)!.enAttenteDesAutresJoueurs1,
                 ),
                 child: Text(
 AppLocalizations.of(context)!.leJugeHesiteSur,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.amberAccent,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -31916,7 +31915,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                             }
                             : null,
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
+                      duration: Duration(milliseconds: 200),
                       padding: EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -31957,7 +31956,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               if (isInspected)
-                                const Icon(
+                                Icon(
                                   Icons.visibility,
                                   color: Colors.amber,
                                   size: 18,
@@ -32102,18 +32101,18 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
           BoxShadow(
             color: Colors.deepOrange.withOpacity(0.3),
             blurRadius: 6,
-            offset: const Offset(0, 2),
+            offset: Offset(0, 2),
           ),
         ],
       ),
       child: Row(
         children: [
-          const Icon(Icons.flash_on, color: Colors.yellowAccent, size: 20),
-          const SizedBox(width: 8),
+          Icon(Icons.flash_on, color: Colors.yellowAccent, size: 20),
+          SizedBox(width: 8),
           Expanded(
             child: Text(
               "$message",
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 12.5,
@@ -32145,14 +32144,14 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       padding: const EdgeInsets.all(14.0),
       decoration: BoxDecoration(
-        color: const Color(0xFF2A1B0E),
+        color: Color(0xFF2A1B0E),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.amber.shade700, width: 1.5),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.4),
             blurRadius: 8,
-            offset: const Offset(0, 3),
+            offset: Offset(0, 3),
           ),
         ],
       ),
@@ -32180,7 +32179,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
           SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.neJouePlusVoulezVous,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 13,
               height: 1.3,
@@ -32203,7 +32202,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.smart_toy, size: 18),
+                  icon: Icon(Icons.smart_toy, size: 18),
                   label: Text(
                     AppLocalizations.of(context)!.conserverAvecLIa,
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
@@ -32227,7 +32226,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
               SizedBox(width: 10),
               Expanded(
                 child: OutlinedButton.icon(
-                  icon: const Icon(Icons.person_remove, size: 18),
+                  icon: Icon(Icons.person_remove, size: 18),
                   label: Text(
                     AppLocalizations.of(context)!.expulser,
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
@@ -32505,7 +32504,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                       entry.value is Map ? entry.value['name'] : null;
                   if (rawName != null &&
                       rawName.toString().trim().isNotEmpty &&
-                      rawName != 'Inconnu') {
+                      rawName != AppLocalizations.of(context)!.inconnu) {
                     pName = rawName.toString();
                   } else {
                     final profileMap =
@@ -32513,7 +32512,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                     final profName = profileMap?[pId]?['name'];
                     if (profName != null &&
                         profName.toString().trim().isNotEmpty &&
-                        profName != 'Inconnu') {
+                        profName != AppLocalizations.of(context)!.inconnu) {
                       pName = profName.toString();
                     } else if (isMe) {
                       final authName =
@@ -32575,7 +32574,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                         color:
                             isSelected
                                 ? Colors.deepPurple.withOpacity(0.6)
-                                : const Color(0xFF1E1E28),
+                                : Color(0xFF1E1E28),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color:
@@ -32598,7 +32597,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                                     : Colors.grey[800],
                             child:
                                 isBot
-                                    ? const Icon(
+                                    ? Icon(
                                       Icons.smart_toy,
                                       size: 12,
                                       color: Colors.cyanAccent,
@@ -32607,14 +32606,14 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                                       pName.isNotEmpty
                                           ? pName[0].toUpperCase()
                                           : "?",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                           ),
-                          const SizedBox(width: 6),
+                          SizedBox(width: 6),
                           Text(
                             AppLocalizations.of(context)!.pts1(pName, pScore),
                             style: TextStyle(
@@ -32624,7 +32623,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                               fontSize: 12,
                             ),
                           ),
-                          const SizedBox(width: 5),
+                          SizedBox(width: 5),
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 4,
@@ -32636,7 +32635,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                             ),
                             child: Text(
                               AppLocalizations.of(context)!.xp(pXp),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Color(0xFF67E8F9),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 9.5,
@@ -32727,10 +32726,10 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                                         size: 9,
                                         color: Colors.amberAccent,
                                       ),
-                                      const SizedBox(width: 2),
+                                      SizedBox(width: 2),
                                       Text(
                                         "$cCount",
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           color: Colors.amberAccent,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 9.5,
@@ -32743,7 +32742,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                             }(),
                           ],
                           if (canViewHands && !isMe) ...[
-                            const SizedBox(width: 4),
+                            SizedBox(width: 4),
                             GestureDetector(
                               onTap: toggleOpponentHand,
                               child: Icon(
@@ -32779,7 +32778,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
       width: 32,
       height: 48,
       decoration: BoxDecoration(
-        color: const Color(0xFF1E293B),
+        color: Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(4),
         border: Border.all(color: Colors.white24),
         boxShadow: [
@@ -32802,7 +32801,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
         height: 52,
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           child: Row(
             children: [
               ...List.generate(count, (index) {
@@ -32823,7 +32822,7 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
                   child: cardWidget,
                 );
               }),
-              const SizedBox(width: 24),
+              SizedBox(width: 24),
             ],
           ),
         ),
@@ -32840,9 +32839,9 @@ AppLocalizations.of(context)!.leJugeHesiteSur,
           children: [
             Text(
 AppLocalizations.of(context)!.cartesRestantes,
-              style: const TextStyle(color: Colors.white70, fontSize: 11),
+              style: TextStyle(color: Colors.white70, fontSize: 11),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             buildFannedCards(hand.length),
           ],
         );
@@ -32855,9 +32854,9 @@ AppLocalizations.of(context)!.cartesRestantes,
           children: [
             Text(
 AppLocalizations.of(context)!.cartesRestantes,
-              style: const TextStyle(color: Colors.white70, fontSize: 11),
+              style: TextStyle(color: Colors.white70, fontSize: 11),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             buildFannedCards(count),
           ],
         );
@@ -32871,9 +32870,9 @@ AppLocalizations.of(context)!.cartesRestantes,
           children: [
             Text(
 AppLocalizations.of(context)!.cartesRestantes,
-              style: const TextStyle(color: Colors.white70, fontSize: 11),
+              style: TextStyle(color: Colors.white70, fontSize: 11),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             buildFannedCards(handUno.length),
           ],
         );
@@ -32889,9 +32888,9 @@ AppLocalizations.of(context)!.cartesRestantes,
           children: [
             Text(
 AppLocalizations.of(context)!.jetonsMise,
-              style: const TextStyle(color: Colors.amberAccent, fontSize: 11),
+              style: TextStyle(color: Colors.amberAccent, fontSize: 11),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             (gameData['phase'] == 'showdown' || status == 'all-in')
                 ? buildFannedCards(hand.length, visibleCards: hand)
                 : buildFannedCards(hand.length),
@@ -32900,7 +32899,7 @@ AppLocalizations.of(context)!.jetonsMise,
 
       case 'Zéro Pointé':
         return Container(
-          constraints: const BoxConstraints(maxHeight: 120),
+          constraints: BoxConstraints(maxHeight: 120),
           child: SingleChildScrollView(
             child: _buildZeroPointeGrid(
               List<Map<String, dynamic>>.from(
@@ -32920,9 +32919,9 @@ AppLocalizations.of(context)!.jetonsMise,
           children: [
             Text(
 AppLocalizations.of(context)!.cartesRestantes,
-              style: const TextStyle(color: Colors.white70, fontSize: 11),
+              style: TextStyle(color: Colors.white70, fontSize: 11),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             buildFannedCards(ramiHand.length),
           ],
         );
@@ -32954,23 +32953,23 @@ AppLocalizations.of(context)!.cartesRestantes,
             oppBonus;
 
         const List<String> categories = [
-          'As',
-          'Deux',
-          'Trois',
-          'Quatre',
-          'Cinq',
-          'Six',
-          'Brelan',
-          'Carré',
-          'Full',
-          'Petite Suite',
-          'Grande Suite',
+          AppLocalizations.of(context)!.asLabel,
+          AppLocalizations.of(context)!.deux,
+          AppLocalizations.of(context)!.trois,
+          AppLocalizations.of(context)!.quatre,
+          AppLocalizations.of(context)!.cinq,
+          AppLocalizations.of(context)!.six,
+          AppLocalizations.of(context)!.brelan,
+          AppLocalizations.of(context)!.carre,
+          AppLocalizations.of(context)!.full,
+          AppLocalizations.of(context)!.petiteSuite,
+          AppLocalizations.of(context)!.grandeSuite,
           'Yams',
-          'Chance',
+          AppLocalizations.of(context)!.chance,
         ];
 
         return Container(
-          constraints: const BoxConstraints(maxHeight: 180),
+          constraints: BoxConstraints(maxHeight: 180),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -32981,7 +32980,7 @@ AppLocalizations.of(context)!.cartesRestantes,
                   children: [
                     Text(
 AppLocalizations.of(context)!.totalPts,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.amberAccent,
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
@@ -33001,7 +33000,7 @@ AppLocalizations.of(context)!.sectionSup,
                     ),
                     Text(
 AppLocalizations.of(context)!.k13Remplies,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white54,
                         fontSize: 11,
                       ),
@@ -33132,19 +33131,19 @@ AppLocalizations.of(context)!.k13Remplies,
           margin: const EdgeInsets.all(16),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E1E2E),
+            color: Color(0xFF1E1E2E),
             borderRadius: BorderRadius.circular(24),
             border: Border.all(color: Colors.white12),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+              Icon(
                 Icons.flag_rounded,
                 size: 48,
                 color: Colors.cyanAccent,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 AppLocalizations.of(context)!.finDeLaManche,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -33152,15 +33151,15 @@ AppLocalizations.of(context)!.k13Remplies,
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               Text(
                 "skyjoRoundEnderNotice",
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white70, fontSize: 13),
+                style: TextStyle(color: Colors.white70, fontSize: 13),
               ),
-              const SizedBox(height: 14),
-              const Divider(color: Colors.white24),
-              const SizedBox(height: 6),
+              SizedBox(height: 14),
+              Divider(color: Colors.white24),
+              SizedBox(height: 6),
               ...sortedPlayersByTotal.map((entry) {
                 final pName = players[entry.key]?['name'] ?? AppLocalizations.of(context)!.joueur;
                 final rScore = roundScores[entry.key] ?? 0;
@@ -33180,14 +33179,14 @@ AppLocalizations.of(context)!.k13Remplies,
                     children: [
                       Text(
                         pName,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
                       Text(
                         "skyjoRoundScoreNotice",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white70,
                           fontSize: 12,
                         ),
@@ -33196,13 +33195,13 @@ AppLocalizations.of(context)!.k13Remplies,
                   ),
                 );
               }),
-              const SizedBox(height: 18),
+              SizedBox(height: 18),
               if (isHost)
                 ElevatedButton.icon(
-                  icon: const Icon(Icons.arrow_forward_rounded),
+                  icon: Icon(Icons.arrow_forward_rounded),
                   label:
                       _isActionPending
-                          ? const SizedBox(
+                          ? SizedBox(
                             width: 16,
                             height: 16,
                             child: CircularProgressIndicator(
@@ -33239,7 +33238,7 @@ AppLocalizations.of(context)!.k13Remplies,
               else
                 Text(
                   AppLocalizations.of(context)!.enAttenteDeLHote2,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontStyle: FontStyle.italic,
                     color: Colors.white54,
                     fontSize: 12,
@@ -33268,7 +33267,7 @@ AppLocalizations.of(context)!.k13Remplies,
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.deepPurple.shade900, const Color(0xFF1E1B4B)],
+                colors: [Colors.deepPurple.shade900, Color(0xFF1E1B4B)],
               ),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
@@ -33278,12 +33277,12 @@ AppLocalizations.of(context)!.k13Remplies,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.touch_app_rounded,
                   color: Colors.amberAccent,
                   size: 24,
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -33298,7 +33297,7 @@ AppLocalizations.of(context)!.k13Remplies,
                     ),
                     Text(
                       "skyjoCardsRevealedCount",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
                       ),
@@ -33380,7 +33379,7 @@ AppLocalizations.of(context)!.k13Remplies,
                 size: 18,
                 color: instructionColor,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Expanded(
                 child: Text(
                   instructions,
@@ -33401,7 +33400,7 @@ AppLocalizations.of(context)!.k13Remplies,
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.annuler,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.redAccent,
                       fontSize: 11,
                     ),
@@ -33416,7 +33415,7 @@ AppLocalizations.of(context)!.k13Remplies,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           decoration: BoxDecoration(
-            color: const Color(0xFF14141E).withOpacity(0.85),
+            color: Color(0xFF14141E).withOpacity(0.85),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.white10),
           ),
@@ -33483,7 +33482,7 @@ AppLocalizations.of(context)!.k13Remplies,
                             ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       AppLocalizations.of(context)!.defausse,
                       style: TextStyle(
@@ -33524,7 +33523,7 @@ AppLocalizations.of(context)!.k13Remplies,
                       isSelected: isMyTurn && drawnCard == null,
                       scale: 0.9,
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       AppLocalizations.of(context)!.pioche1,
                       style: TextStyle(
@@ -33549,7 +33548,7 @@ AppLocalizations.of(context)!.k13Remplies,
                       isSelected: true,
                       scale: 0.9,
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       AppLocalizations.of(context)!.piochee,
                       style: TextStyle(
@@ -33576,7 +33575,7 @@ AppLocalizations.of(context)!.k13Remplies,
               children: [
                 Expanded(
                   child: ElevatedButton.icon(
-                    icon: const Icon(Icons.swap_horiz_rounded, size: 16),
+                    icon: Icon(Icons.swap_horiz_rounded, size: 16),
                     label: Text(
                       AppLocalizations.of(context)!.garderRemplacer,
                       style: TextStyle(
@@ -33588,7 +33587,7 @@ AppLocalizations.of(context)!.k13Remplies,
                       backgroundColor:
                           _zeroPointeAction == 'use_drawn'
                               ? Colors.green[700]
-                              : const Color(0xFF10B981),
+                              : Color(0xFF10B981),
                       foregroundColor: Colors.white,
                       elevation: _zeroPointeAction == 'use_drawn' ? 6 : 2,
                       shape: RoundedRectangleBorder(
@@ -33601,10 +33600,10 @@ AppLocalizations.of(context)!.k13Remplies,
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
-                    icon: const Icon(Icons.delete_outline_rounded, size: 16),
+                    icon: Icon(Icons.delete_outline_rounded, size: 16),
                     label: Text(
                       AppLocalizations.of(context)!.jeterDevoiler,
                       style: TextStyle(
@@ -33635,7 +33634,7 @@ AppLocalizations.of(context)!.k13Remplies,
             ),
           ),
 
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
 
         // GRILLE DU JOUEUR (4 COLONNES x 3 RANGÉES)
         Expanded(
@@ -33699,7 +33698,7 @@ AppLocalizations.of(context)!.k13Remplies,
     Function(int)? onCardTap,
   ) {
     if (gridData.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator());
     }
 
     return LayoutBuilder(
@@ -33719,8 +33718,8 @@ AppLocalizations.of(context)!.k13Remplies,
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           child: GridView.builder(
-            physics: const BouncingScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            physics: BouncingScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               mainAxisSpacing: 6,
               crossAxisSpacing: 6,
@@ -33764,13 +33763,13 @@ AppLocalizations.of(context)!.k13Remplies,
       context: context,
       builder:
           (dContext) => AlertDialog(
-            backgroundColor: const Color(0xFF1E1B2E),
+            backgroundColor: Color(0xFF1E1B2E),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
             title: Text(
               title,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             content: SizedBox(
               width: double.maxFinite,
@@ -33884,7 +33883,7 @@ AppLocalizations.of(context)!.k13Remplies,
                             color: Colors.brown[800],
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'Cursive',
+                            fontFamily: AppLocalizations.of(context)!.cursive,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -34052,8 +34051,8 @@ AppLocalizations.of(context)!.k13Remplies,
     if (currentStep > 0) {
       String sourceAlbumOwnerId;
 
-      if ((gribouillisMode == 'Complément' && ajouter1) ||
-          gribouillisMode == 'Brise-Glace') {
+      if ((gribouillisMode == AppLocalizations.of(context)!.complement && ajouter1) ||
+          gribouillisMode == AppLocalizations.of(context)!.briseGlace) {
         sourceAlbumOwnerId = playerOrder[(myIndex + currentStep) % playerCount];
       } else {
         sourceAlbumOwnerId =
@@ -34064,8 +34063,8 @@ AppLocalizations.of(context)!.k13Remplies,
         gameData['albums'][sourceAlbumOwnerId] ?? [],
       );
       if (sourceAlbum.isNotEmpty) {
-        if ((gribouillisMode == 'Complément' && ajouter1) ||
-            gribouillisMode == 'Brise-Glace') {
+        if ((gribouillisMode == AppLocalizations.of(context)!.complement && ajouter1) ||
+            gribouillisMode == AppLocalizations.of(context)!.briseGlace) {
           stepToProcess = Map<String, dynamic>.from(sourceAlbum[0]);
         } else {
           stepToProcess = Map<String, dynamic>.from(sourceAlbum.last);
@@ -34115,7 +34114,7 @@ AppLocalizations.of(context)!.k13Remplies,
           else
             Text(
               gribouillisMode ==
-                      'Brise-Glace'
+                      AppLocalizations.of(context)!.briseGlace
                   ? AppLocalizations.of(context)!.ecrisUnThemeOuUne
                   : AppLocalizations.of(context)!.imagineUnePhrase,
               style: Theme.of(context).textTheme.headlineSmall,
@@ -34152,14 +34151,14 @@ AppLocalizations.of(context)!.k13Remplies,
       String promptText;
       if (stepToProcess != null && stepToProcess['type'] == 'text') {
         promptText = AppLocalizations.of(context)!.dessineCettePhrase(stepToProcess['content']);
-      } else if (gribouillisMode == 'Complément') {
+      } else if (gribouillisMode == AppLocalizations.of(context)!.complement) {
         promptText = AppLocalizations.of(context)!.completeCeDessin;
       } else {
         promptText = AppLocalizations.of(context)!.commenceParUnDessin;
       }
 
       final String? backgroundDrawingData =
-          (gribouillisMode == 'Complément' &&
+          (gribouillisMode == AppLocalizations.of(context)!.complement &&
                   stepToProcess != null &&
                   stepToProcess['type'] == 'drawing')
               ? stepToProcess['content'] as String?
@@ -34311,12 +34310,12 @@ AppLocalizations.of(context)!.k13Remplies,
                             : Container(
                               color:
                                   isSameTeam
-                                      ? const Color(0xFF1E3A8A)
-                                      : const Color(0xFF881337),
+                                      ? Color(0xFF1E3A8A)
+                                      : Color(0xFF881337),
                               child: Center(
                                 child: Text(
                                   name.isNotEmpty ? name[0].toUpperCase() : '?',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                     fontSize: 16,
@@ -34332,11 +34331,11 @@ AppLocalizations.of(context)!.k13Remplies,
                     right: -2,
                     child: Container(
                       padding: const EdgeInsets.all(3),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.amber,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.mic,
                         size: 10,
                         color: Colors.black,
@@ -34392,7 +34391,7 @@ AppLocalizations.of(context)!.k13Remplies,
                                   : Colors.white24,
                         ),
                       ),
-                      const SizedBox(width: 6),
+                      SizedBox(width: 6),
                       Text(
                         AppLocalizations.of(context)!.eq1Pts,
                         style: TextStyle(
@@ -34406,7 +34405,7 @@ AppLocalizations.of(context)!.k13Remplies,
                       ),
                     ],
                   ),
-                  const SizedBox(height: 3),
+                  SizedBox(height: 3),
                   Row(
                     children: [
                       Container(
@@ -34420,7 +34419,7 @@ AppLocalizations.of(context)!.k13Remplies,
                                   : Colors.white24,
                         ),
                       ),
-                      const SizedBox(width: 6),
+                      SizedBox(width: 6),
                       Text(
                         AppLocalizations.of(context)!.eq2Pts,
                         style: TextStyle(
@@ -34436,12 +34435,12 @@ AppLocalizations.of(context)!.k13Remplies,
                   ),
                 ],
               ),
-              const SizedBox(width: 12),
-              const SizedBox(
+              SizedBox(width: 12),
+              SizedBox(
                 height: 36,
                 child: VerticalDivider(color: Colors.white24, thickness: 1),
               ),
-              const Spacer(),
+              Spacer(),
               // Statut manche
               Text(
 GameContentLocalization.format(
@@ -34449,7 +34448,7 @@ context,
 AppLocalizations.of(context)!.manche1,
 [(gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1, (gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4],
 ),
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white54,
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -34459,7 +34458,7 @@ AppLocalizations.of(context)!.manche1,
           ),
         ),
 
-        const SizedBox(height: 10),
+        SizedBox(height: 10),
 
         // 2. BANDEAU DE STATUT DE RÔLE CONTEXTUEL
         Container(
@@ -34497,7 +34496,7 @@ AppLocalizations.of(context)!.manche1,
                         ? Colors.amberAccent
                         : (isMyTeamTurn ? Colors.cyanAccent : Colors.redAccent),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Flexible(
                 child: Text(
                   amIClueGiver
@@ -34522,7 +34521,7 @@ AppLocalizations.of(context)!.manche1,
           ),
         ),
 
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
 
         // Détection live du buzzer pour avertir l'orateur
         StreamBuilder<DatabaseEvent>(
@@ -34556,11 +34555,11 @@ AppLocalizations.of(context)!.manche1,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.touch_app, color: Colors.redAccent, size: 16),
-                    const SizedBox(width: 8),
+                    Icon(Icons.touch_app, color: Colors.redAccent, size: 16),
+                    SizedBox(width: 8),
                     Text(
                       AppLocalizations.of(context)!.aLeDoigtSurLe,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -34578,12 +34577,12 @@ AppLocalizations.of(context)!.manche1,
         Expanded(
           child: Center(
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               child: Container(
                 width: double.infinity,
-                constraints: const BoxConstraints(maxWidth: 360),
+                constraints: BoxConstraints(maxWidth: 360),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1E1E2E),
+                  color: Color(0xFF1E1E2E),
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
                     color:
@@ -34600,7 +34599,7 @@ AppLocalizations.of(context)!.manche1,
                           .withOpacity(0.18),
                       blurRadius: 20,
                       spreadRadius: 2,
-                      offset: const Offset(0, 8),
+                      offset: Offset(0, 8),
                     ),
                   ],
                 ),
@@ -34619,12 +34618,12 @@ AppLocalizations.of(context)!.manche1,
                           colors:
                               amIOpponent
                                   ? [
-                                    const Color(0xFF4A1020),
-                                    const Color(0xFF2A0812),
+                                    Color(0xFF4A1020),
+                                    Color(0xFF2A0812),
                                   ]
                                   : [
-                                    const Color(0xFF3B1366),
-                                    const Color(0xFF1D0933),
+                                    Color(0xFF3B1366),
+                                    Color(0xFF1D0933),
                                   ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -34647,10 +34646,10 @@ AppLocalizations.of(context)!.manche1,
                                       : Colors.amberAccent.shade100,
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6),
                           Text(
                             currentWord.toUpperCase(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w900,
                               color: Colors.white,
@@ -34687,7 +34686,7 @@ AppLocalizations.of(context)!.manche1,
                               ),
                             ],
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           Wrap(
                             spacing: 8,
                             runSpacing: 8,
@@ -34700,7 +34699,7 @@ AppLocalizations.of(context)!.manche1,
                                       vertical: 8,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFF2A1520),
+                                      color: Color(0xFF2A1520),
                                       borderRadius: BorderRadius.circular(12),
                                       border: Border.all(
                                         color: Colors.redAccent.withOpacity(
@@ -34711,7 +34710,7 @@ AppLocalizations.of(context)!.manche1,
                                     ),
                                     child: Text(
                                       word,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         color: Color(0xFFFCA5A5),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 15,
@@ -34744,14 +34743,14 @@ AppLocalizations.of(context)!.manche1,
                     child: SizedBox(
                       height: 52,
                       child: OutlinedButton.icon(
-                        icon: const Icon(Icons.skip_next_rounded),
+                        icon: Icon(Icons.skip_next_rounded),
                         label: Text(
                           AppLocalizations.of(context)!.passer,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.orangeAccent,
-                          side: const BorderSide(
+                          side: BorderSide(
                             color: Colors.orangeAccent,
                             width: 1.5,
                           ),
@@ -34776,7 +34775,7 @@ AppLocalizations.of(context)!.manche1,
                     child: SizedBox(
                       height: 52,
                       child: ElevatedButton.icon(
-                        icon: const Icon(Icons.check_circle_rounded, size: 22),
+                        icon: Icon(Icons.check_circle_rounded, size: 22),
                         label: Text(
                           AppLocalizations.of(context)!.trouve,
                           style: TextStyle(
@@ -34786,7 +34785,7 @@ AppLocalizations.of(context)!.manche1,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF10B981),
+                          backgroundColor: Color(0xFF10B981),
                           foregroundColor: Colors.white,
                           elevation: 6,
                           shape: RoundedRectangleBorder(
@@ -34824,7 +34823,7 @@ AppLocalizations.of(context)!.manche1,
                     _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, false);
                   },
                   child: ElevatedButton.icon(
-                    icon: const Icon(Icons.warning_amber_rounded, size: 26),
+                    icon: Icon(Icons.warning_amber_rounded, size: 26),
                     label: Text(
                       AppLocalizations.of(context)!.buzzMotInterdit,
                       style: TextStyle(
@@ -34834,7 +34833,7 @@ AppLocalizations.of(context)!.manche1,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFDC2626),
+                      backgroundColor: Color(0xFFDC2626),
                       foregroundColor: Colors.white,
                       elevation: 6,
                       shape: RoundedRectangleBorder(
@@ -34881,7 +34880,7 @@ AppLocalizations.of(context)!.manche1,
             ),
           ),
         ],
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
       ],
     );
   }
@@ -34918,11 +34917,11 @@ AppLocalizations.of(context)!.manche1,
           margin: const EdgeInsets.all(24),
           padding: const EdgeInsets.all(28),
           decoration: BoxDecoration(
-            color: const Color(0xFF1B0F1E),
+            color: Color(0xFF1B0F1E),
             borderRadius: BorderRadius.circular(28),
             border: Border.all(
               color:
-                  amILoser ? const Color(0xFFEF4444) : const Color(0xFF10B981),
+                  amILoser ? Color(0xFFEF4444) : Color(0xFF10B981),
               width: 2.5,
             ),
             boxShadow: [
@@ -34942,10 +34941,10 @@ AppLocalizations.of(context)!.manche1,
                 size: 72,
                 color:
                     amILoser
-                        ? const Color(0xFFEF4444)
-                        : const Color(0xFF10B981),
+                        ? Color(0xFFEF4444)
+                        : Color(0xFF10B981),
               ),
-              const SizedBox(height: 14),
+              SizedBox(height: 14),
               Text(
                 amILoser
                     ? AppLocalizations.of(context)!.vousAvezEteInfecte
@@ -34956,23 +34955,23 @@ AppLocalizations.of(context)!.manche1,
                   letterSpacing: 1.2,
                   color:
                       amILoser
-                          ? const Color(0xFFFCA5A5)
-                          : const Color(0xFF6EE7B7),
+                          ? Color(0xFFFCA5A5)
+                          : Color(0xFF6EE7B7),
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 AppLocalizations.of(context)!.estResteAvecLeZombie,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white70, fontSize: 14),
+                style: TextStyle(color: Colors.white70, fontSize: 14),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               ElevatedButton.icon(
-                icon: const Icon(Icons.home_rounded),
+                icon: Icon(Icons.home_rounded),
                 label: Text(AppLocalizations.of(context)!.retourAuSalon),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4C1D95),
+                  backgroundColor: Color(0xFF4C1D95),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
                     vertical: 12,
@@ -35002,10 +35001,10 @@ AppLocalizations.of(context)!.manche1,
     List<String> targetHand = List<String>.from(hands[targetPlayerId] ?? []);
     final targetName = players[targetPlayerId]?['name'] ?? AppLocalizations.of(context)!.voisin;
 
-    final bool hasZombieInHand = myHand.contains('Zombie');
+    final bool hasZombieInHand = myHand.contains(AppLocalizations.of(context)!.zombie1);
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: RadialGradient(
           center: Alignment.topCenter,
           radius: 1.3,
@@ -35021,20 +35020,20 @@ AppLocalizations.of(context)!.manche1,
             decoration: BoxDecoration(
               color:
                   isMyTurn
-                      ? const Color(0xFF2E1065).withOpacity(0.8)
-                      : const Color(0xFF140F1E).withOpacity(0.8),
+                      ? Color(0xFF2E1065).withOpacity(0.8)
+                      : Color(0xFF140F1E).withOpacity(0.8),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
                 color:
                     isMyTurn
-                        ? const Color(0xFFA855F7)
+                        ? Color(0xFFA855F7)
                         : Colors.white.withOpacity(0.1),
                 width: 1.5,
               ),
               boxShadow: [
                 if (isMyTurn)
                   BoxShadow(
-                    color: const Color(0xFFA855F7).withOpacity(0.3),
+                    color: Color(0xFFA855F7).withOpacity(0.3),
                     blurRadius: 12,
                   ),
               ],
@@ -35050,7 +35049,7 @@ AppLocalizations.of(context)!.manche1,
                         shape: BoxShape.circle,
                         color:
                             isMyTurn
-                                ? const Color(0xFFA855F7).withOpacity(0.3)
+                                ? Color(0xFFA855F7).withOpacity(0.3)
                                 : Colors.white10,
                       ),
                       child: Icon(
@@ -35059,10 +35058,10 @@ AppLocalizations.of(context)!.manche1,
                             : Icons.hourglass_top_rounded,
                         size: 16,
                         color:
-                            isMyTurn ? const Color(0xFFC084FC) : Colors.white60,
+                            isMyTurn ? Color(0xFFC084FC) : Colors.white60,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -35077,7 +35076,7 @@ AppLocalizations.of(context)!.manche1,
                             letterSpacing: 0.8,
                             color:
                                 isMyTurn
-                                    ? const Color(0xFFFDE047)
+                                    ? Color(0xFFFDE047)
                                     : Colors.white70,
                           ),
                         ),
@@ -35085,7 +35084,7 @@ AppLocalizations.of(context)!.manche1,
                           isMyTurn
                               ? AppLocalizations.of(context)!.choisissezUneCarteFaceCachee
                               : AppLocalizations.of(context)!.enAttenteDeLaPioche,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
                             color: Colors.white38,
                           ),
@@ -35102,9 +35101,9 @@ AppLocalizations.of(context)!.manche1,
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF7F1D1D),
+                      color: Color(0xFF7F1D1D),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: const Color(0xFFEF4444)),
+                      border: Border.all(color: Color(0xFFEF4444)),
                     ),
                     child: Row(
                       children: [
@@ -35136,7 +35135,7 @@ AppLocalizations.of(context)!.manche1,
               margin: const EdgeInsets.only(bottom: 6),
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 children:
                     eliminated.map((pId) {
@@ -35147,7 +35146,7 @@ AppLocalizations.of(context)!.manche1,
                           vertical: 3,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF065F46),
+                          color: Color(0xFF065F46),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: Color(0xFF34D399)),
                         ),
@@ -35158,10 +35157,10 @@ AppLocalizations.of(context)!.manche1,
                               color: Colors.greenAccent,
                               size: 12,
                             ),
-                            const SizedBox(width: 4),
+                            SizedBox(width: 4),
                             Text(
 AppLocalizations.of(context)!.sauve,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
@@ -35181,7 +35180,7 @@ AppLocalizations.of(context)!.sauve,
               margin: const EdgeInsets.symmetric(horizontal: 10),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFF13091B).withOpacity(0.85),
+                color: Color(0xFF13091B).withOpacity(0.85),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.white10),
               ),
@@ -35203,18 +35202,18 @@ AppLocalizations.of(context)!.sauve,
                     children: [
                       Text(
 AppLocalizations.of(context)!.mainDeCartes,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white70,
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       Expanded(
                         child: Center(
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(),
+                            physics: BouncingScrollPhysics(),
                             child: Row(
                               children:
                                   targetHand.asMap().entries.map((entry) {
@@ -35292,7 +35291,7 @@ AppLocalizations.of(context)!.mainDeCartes,
             ),
           ),
 
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
 
           // 3. MA MAIN DE CARTES DE SURVIE (SURVIVORS & ZOMBIE)
           Expanded(
@@ -35301,7 +35300,7 @@ AppLocalizations.of(context)!.mainDeCartes,
               margin: const EdgeInsets.symmetric(horizontal: 10),
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
               decoration: BoxDecoration(
-                color: const Color(0xFF100918),
+                color: Color(0xFF100918),
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(24),
                 ),
@@ -35310,7 +35309,7 @@ AppLocalizations.of(context)!.mainDeCartes,
                   BoxShadow(
                     color: Colors.black.withOpacity(0.6),
                     blurRadius: 16,
-                    offset: const Offset(0, -4),
+                    offset: Offset(0, -4),
                   ),
                 ],
               ),
@@ -35322,7 +35321,7 @@ AppLocalizations.of(context)!.mainDeCartes,
                     children: [
                       Text(
                         AppLocalizations.of(context)!.votreMainDeSurvieCartes,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white60,
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -35335,12 +35334,12 @@ AppLocalizations.of(context)!.mainDeCartes,
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Expanded(
                     child: Center(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
+                        physics: BouncingScrollPhysics(),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:
@@ -35375,14 +35374,14 @@ AppLocalizations.of(context)!.mainDeCartes,
       final rawName = pMap?['name'];
       if (rawName != null &&
           rawName.toString().trim().isNotEmpty &&
-          rawName != 'Inconnu') {
+          rawName != AppLocalizations.of(context)!.inconnu) {
         return rawName.toString();
       }
       final profName =
           playerProfiles[pId] is Map ? playerProfiles[pId]['name'] : null;
       if (profName != null &&
           profName.toString().trim().isNotEmpty &&
-          profName != 'Inconnu') {
+          profName != AppLocalizations.of(context)!.inconnu) {
         return profName.toString();
       }
       if (pId == playerId) {
@@ -35404,7 +35403,7 @@ AppLocalizations.of(context)!.mainDeCartes,
       if (!players.containsKey(pId) || players[pId] is! Map) {
         players[pId] = {'name': resolvePlayerName(pId), 'score': 0};
       } else if (players[pId]['name'] == null ||
-          players[pId]['name'] == 'Inconnu') {
+          players[pId]['name'] == AppLocalizations.of(context)!.inconnu) {
         players[pId]['name'] = resolvePlayerName(pId);
       }
     }
@@ -35490,7 +35489,7 @@ AppLocalizations.of(context)!.mainDeCartes,
                           ),
                         ),
                         if (showThinking) ...[
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6),
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
@@ -35506,19 +35505,19 @@ AppLocalizations.of(context)!.mainDeCartes,
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.style,
                                   color: Colors.amberAccent,
                                   size: 14,
                                 ),
-                                const SizedBox(width: 6),
+                                SizedBox(width: 6),
                                 Text(
 GameContentLocalization.format(
 context,
 AppLocalizations.of(context)!.aSelectionneCarte,
 [resolvePlayerName(currentPlayerId), liveCount, liveCount > 1 ? 's' : ''],
 ),
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.amberAccent,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
@@ -35553,7 +35552,7 @@ context,
 AppLocalizations.of(context)!.jouePar,
 [resolvePlayerName(lastPlay['playedBy'] ?? '')],
 ),
-                    style: const TextStyle(fontSize: 12, color: Colors.white70),
+                    style: TextStyle(fontSize: 12, color: Colors.white70),
                   ),
                 ] else
                   Text(
@@ -35648,7 +35647,7 @@ AppLocalizations.of(context)!.jouePar,
 
     final bool isRed = (suitKey == 'H' || suitKey == 'D');
     final Color textColor =
-        isRed ? const Color(0xFFE11D48) : const Color(0xFF0F172A);
+        isRed ? Color(0xFFE11D48) : Color(0xFF0F172A);
 
     Widget buildSuitIcon(double size) {
       if (suitKey == 'H') {
@@ -35689,7 +35688,7 @@ AppLocalizations.of(context)!.jouePar,
                     ? Colors.greenAccent.withOpacity(0.5)
                     : Colors.black26,
             blurRadius: isSelected ? 8 : 4,
-            offset: const Offset(1, 3),
+            offset: Offset(1, 3),
           ),
         ],
       ),
@@ -35709,7 +35708,7 @@ AppLocalizations.of(context)!.jouePar,
                     height: 1.0,
                   ),
                 ),
-                const SizedBox(height: 3),
+                SizedBox(height: 3),
                 buildSuitIcon(22),
               ],
             ),
@@ -35730,7 +35729,7 @@ AppLocalizations.of(context)!.jouePar,
                     height: 1.0,
                   ),
                 ),
-                const SizedBox(height: 1),
+                SizedBox(height: 1),
                 buildSuitIcon(10),
               ],
             ),
@@ -35753,7 +35752,7 @@ AppLocalizations.of(context)!.jouePar,
                       height: 1.0,
                     ),
                   ),
-                  const SizedBox(height: 1),
+                  SizedBox(height: 1),
                   buildSuitIcon(10),
                 ],
               ),
@@ -35781,7 +35780,7 @@ AppLocalizations.of(context)!.jouePar,
           content: Text(
             GameMessageLocalization.tr(
               context,
-              e.toString().replaceAll('Exception: ', ''),
+              e.toString().replaceAll(AppLocalizations.of(context)!.exception, ''),
             ),
           ),
         ),
@@ -35806,7 +35805,7 @@ AppLocalizations.of(context)!.jouePar,
           content: Text(
             GameMessageLocalization.tr(
               context,
-              e.toString().replaceAll('Exception: ', ''),
+              e.toString().replaceAll(AppLocalizations.of(context)!.exception, ''),
             ),
           ),
         ),
@@ -35952,11 +35951,11 @@ AppLocalizations.of(context)!.jouePar,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.touch_app, color: Colors.amberAccent, size: 14),
-                            const SizedBox(width: 6),
+                            Icon(Icons.touch_app, color: Colors.amberAccent, size: 14),
+                            SizedBox(width: 6),
                             Text(
                               AppLocalizations.of(context)!.aSelectionneSonPionEt, [players[currentPlayerId]?['name'] ?? GameContentLocalization.ui(context, AppLocalizations.of(context)!.lAdversaire]),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
@@ -35980,7 +35979,7 @@ AppLocalizations.of(context)!.jouePar,
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.brown[900]!, width: 6),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
                     color: Colors.black45,
                     blurRadius: 10,
@@ -36004,9 +36003,9 @@ AppLocalizations.of(context)!.jouePar,
                   }
 
                   return GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                        SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 8,
                         ),
                     itemCount: 64,
@@ -36020,7 +36019,7 @@ AppLocalizations.of(context)!.jouePar,
                       bool isSelected = key == liveSelectedPiece;
                       bool isMandatory = key == mandatoryPiece;
                       Color bgColor =
-                          isDark ? Colors.brown[700]! : const Color(0xFFF5F5DC);
+                          isDark ? Colors.brown[700]! : Color(0xFFF5F5DC);
 
                       return GestureDetector(
                         onTap:
@@ -36107,7 +36106,7 @@ AppLocalizations.of(context)!.jouePar,
                               piece != null
                                   ? Center(
                                     child: AnimatedContainer(
-                                      duration: const Duration(
+                                      duration: Duration(
                                         milliseconds: 200,
                                       ),
                                       width: 35,
@@ -36148,7 +36147,7 @@ AppLocalizations.of(context)!.jouePar,
                                       ),
                                       child:
                                           piece.endsWith('_king')
-                                              ? const Icon(
+                                              ? Icon(
                                                 Icons.star,
                                                 color: Colors.amber,
                                                 size: 20,
@@ -36256,10 +36255,10 @@ AppLocalizations.of(context)!.jouePar,
         return _buildDominoesUI(context, gameData, playerId);
       case 'Blanc Manger Coco':
         return _buildBlancMangerCocoUI(context, gameData, playerId);
-      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.caseLabelSynonyme ou Banni':
+      case 'Qui Pourrait le Plus ?':
       case 'Le Juge':
       case 'Le Menteur':
-      case 'Le Roi des Mêmes':
+      case AppLocalizations.of(context)!.leRoiDesMemes:
         return _getWidgetForRoundState(context, gameData, playerId);
       default:
         return Center(
@@ -36321,7 +36320,7 @@ AppLocalizations.of(context)!.jouePar,
           margin: const EdgeInsets.all(24),
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E1B4B),
+            color: Color(0xFF1E1B4B),
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
               color: Colors.amberAccent.withOpacity(0.6),
@@ -36334,12 +36333,12 @@ AppLocalizations.of(context)!.jouePar,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+              Icon(
                 Icons.timer_off_rounded,
                 size: 54,
                 color: Colors.amberAccent,
               ),
-              const SizedBox(height: 14),
+              SizedBox(height: 14),
               Text(
                 AppLocalizations.of(context)!.tempsEcoule,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -36347,19 +36346,19 @@ AppLocalizations.of(context)!.jouePar,
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 "dtGuessedWords",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 20,
                   color: Colors.greenAccent,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               if (gameData['hostId'] == playerId)
                 ElevatedButton.icon(
-                  icon: const Icon(Icons.arrow_forward_rounded),
+                  icon: Icon(Icons.arrow_forward_rounded),
                   label: Text(AppLocalizations.of(context)!.tourSuivant),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green[700],
@@ -36475,21 +36474,21 @@ AppLocalizations.of(context)!.jouePar,
         if (isMyTurn) ...[
           Text(
             AppLocalizations.of(context)!.cEstAToiDe,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.greenAccent,
               fontSize: 22,
               fontWeight: FontWeight.w900,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             useTeams
                 ? AppLocalizations.of(context)!.ecoutezLesIndicesDeVotre
                 : AppLocalizations.of(context)!.regardezVosAmisAL,
-            style: const TextStyle(color: Colors.white70, fontSize: 13),
+            style: TextStyle(color: Colors.white70, fontSize: 13),
             textAlign: TextAlign.center,
           ),
-          const Spacer(),
+          Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -36516,7 +36515,7 @@ AppLocalizations.of(context)!.jouePar,
                 icon: Icon(Icons.skip_next_rounded, size: 24),
                 label: Text(
                   AppLocalizations.of(context)!.passer1,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -36524,7 +36523,7 @@ AppLocalizations.of(context)!.jouePar,
               ),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF16A34A),
+                  backgroundColor: Color(0xFF16A34A),
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 28,
@@ -36543,10 +36542,10 @@ AppLocalizations.of(context)!.jouePar,
                     true, // Trouvé -> mot suivant immédiat
                   );
                 },
-                icon: const Icon(Icons.check_circle_rounded, size: 24),
+                icon: Icon(Icons.check_circle_rounded, size: 24),
                 label: Text(
                   AppLocalizations.of(context)!.trouve,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -36554,7 +36553,7 @@ AppLocalizations.of(context)!.jouePar,
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
         ] else ...[
           Text(
             useTeams && !isMyTeamTurn
@@ -36570,7 +36569,7 @@ AppLocalizations.of(context)!.jouePar,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
@@ -36596,7 +36595,7 @@ AppLocalizations.of(context)!.jouePar,
               textAlign: TextAlign.center,
             ),
           ),
-          const Spacer(),
+          Spacer(),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             decoration: BoxDecoration(
@@ -36605,14 +36604,14 @@ AppLocalizations.of(context)!.jouePar,
             ),
             child: Text(
               AppLocalizations.of(context)!.motsTrouves,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.greenAccent,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
         ],
       ],
     );
@@ -36702,16 +36701,16 @@ AppLocalizations.of(context)!.jouePar,
             margin: const EdgeInsets.fromLTRB(12, 4, 12, 8),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              color: const Color(0xFF241A12).withOpacity(0.9),
+              color: Color(0xFF241A12).withOpacity(0.9),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: isMyTurn ? const Color(0xFFE0A96D) : Colors.white12,
+                color: isMyTurn ? Color(0xFFE0A96D) : Colors.white12,
                 width: isMyTurn ? 1.5 : 1,
               ),
               boxShadow: [
                 if (isMyTurn)
                   BoxShadow(
-                    color: const Color(0xFFE0A96D).withOpacity(0.2),
+                    color: Color(0xFFE0A96D).withOpacity(0.2),
                     blurRadius: 10,
                   ),
               ],
@@ -36727,17 +36726,17 @@ AppLocalizations.of(context)!.jouePar,
                         shape: BoxShape.circle,
                         color:
                             isMyTurn
-                                ? const Color(0xFFE0A96D).withOpacity(0.2)
+                                ? Color(0xFFE0A96D).withOpacity(0.2)
                                 : Colors.white10,
                       ),
                       child: Icon(
                         Icons.history_edu_rounded,
                         size: 16,
                         color:
-                            isMyTurn ? const Color(0xFFF3C68F) : Colors.white60,
+                            isMyTurn ? Color(0xFFF3C68F) : Colors.white60,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -36751,7 +36750,7 @@ AppLocalizations.of(context)!.jouePar,
                             letterSpacing: 1,
                             color:
                                 isMyTurn
-                                    ? const Color(0xFFF3C68F)
+                                    ? Color(0xFFF3C68F)
                                     : Colors.white70,
                           ),
                         ),
@@ -36759,7 +36758,7 @@ AppLocalizations.of(context)!.jouePar,
                           variant == 'classic'
                               ? AppLocalizations.of(context)!.surrealismeClassique
                               : AppLocalizations.of(context)!.suiteDe3Mots,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
                             color: Colors.white38,
                           ),
@@ -36780,7 +36779,7 @@ AppLocalizations.of(context)!.jouePar,
                   ),
                   child: Text(
                     "ceStepOfTotal",
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Color(0xFFE0A96D),
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
@@ -36795,7 +36794,7 @@ AppLocalizations.of(context)!.jouePar,
           Expanded(
             child: Center(
               child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 4,
@@ -36835,9 +36834,9 @@ AppLocalizations.of(context)!.jouePar,
   }) {
     return Container(
       width: double.infinity,
-      constraints: const BoxConstraints(maxWidth: 380),
+      constraints: BoxConstraints(maxWidth: 380),
       decoration: BoxDecoration(
-        color: const Color(0xFFFBF7EE), // Papier ivoire
+        color: Color(0xFFFBF7EE), // Papier ivoire
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -36860,7 +36859,7 @@ AppLocalizations.of(context)!.jouePar,
                   horizontal: 16,
                   vertical: 12,
                 ),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Color(0xFFEFE6D5),
                   border: Border(
                     bottom: BorderSide(color: Color(0xFFD6C8B2), width: 1.5),
@@ -36878,7 +36877,7 @@ AppLocalizations.of(context)!.jouePar,
                   children: [
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.bookmark_border_rounded,
                           size: 14,
                           color: Color(0xFF8C7355),
@@ -36886,7 +36885,7 @@ AppLocalizations.of(context)!.jouePar,
                         SizedBox(width: 4),
                         Text(
                           "ceVisibleSnippetOf",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF8C7355),
@@ -36895,10 +36894,10 @@ AppLocalizations.of(context)!.jouePar,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       "... $peekingSnippet",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'serif',
                         fontStyle: FontStyle.italic,
                         fontSize: 18,
@@ -36930,10 +36929,10 @@ AppLocalizations.of(context)!.jouePar,
                   horizontal: 16,
                   vertical: 8,
                 ),
-                color: const Color(0xFFEFE6D5),
+                color: Color(0xFFEFE6D5),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.edit_note_rounded,
                       size: 16,
                       color: Color(0xFF8C7355),
@@ -36971,12 +36970,12 @@ AppLocalizations.of(context)!.jouePar,
                         color: Color(0xFF78350F).withOpacity(0.12),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: const Color(0xFF78350F).withOpacity(0.3),
+                          color: Color(0xFF78350F).withOpacity(0.3),
                         ),
                       ),
                       child: Text(
                         grammaticalPrompt.toUpperCase(),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w900,
                           color: Color(0xFF78350F),
@@ -36984,7 +36983,7 @@ AppLocalizations.of(context)!.jouePar,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    SizedBox(height: 14),
 
                     // Champ de texte à encre bleue/noire sur les lignes
                     TextField(
@@ -37001,14 +37000,14 @@ AppLocalizations.of(context)!.jouePar,
                           wordCount,
                         );
                       },
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'serif',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF0F172A), // Encre profonde
                         height: 1.5,
                       ),
-                      cursorColor: const Color(0xFF78350F),
+                      cursorColor: Color(0xFF78350F),
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context)!.ecrivezIci,
                         hintStyle: TextStyle(
@@ -37025,13 +37024,13 @@ AppLocalizations.of(context)!.jouePar,
                       maxLength: variant == 'continuation' ? 60 : 35,
                     ),
 
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
 
                     // Bouton de validation type "Pliage & Sceau de cire"
                     Align(
                       alignment: Alignment.centerRight,
                       child: ElevatedButton.icon(
-                        icon: const Icon(Icons.send_rounded, size: 16),
+                        icon: Icon(Icons.send_rounded, size: 16),
                         label: Text(
                           AppLocalizations.of(context)!.plierPasser,
                           style: TextStyle(
@@ -37041,7 +37040,7 @@ AppLocalizations.of(context)!.jouePar,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(
+                          backgroundColor: Color(
                             0xFF881337,
                           ), // Rouge bordeaux / Sceau
                           foregroundColor: Colors.white,
@@ -37080,7 +37079,7 @@ AppLocalizations.of(context)!.jouePar,
             // 3. PLI INFÉRIEUR OMBRÉ (BAS DE LA FEUILLE PLIÉE)
             Container(
               height: 14,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Color(0xFFEAE0CF),
                 border: Border(top: BorderSide(color: Color(0xFFD6C8B2))),
               ),
@@ -37100,12 +37099,12 @@ AppLocalizations.of(context)!.jouePar,
   }) {
     return Container(
       width: double.infinity,
-      constraints: const BoxConstraints(maxWidth: 360),
+      constraints: BoxConstraints(maxWidth: 360),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1610),
+        color: Color(0xFF1E1610),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE0A96D).withOpacity(0.3)),
+        border: Border.all(color: Color(0xFFE0A96D).withOpacity(0.3)),
       ),
       child: StreamBuilder<DatabaseEvent>(
         stream: _firebaseService.getCadavreTypingStream(widget.gameCode),
@@ -37123,22 +37122,22 @@ AppLocalizations.of(context)!.jouePar,
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+              Icon(
                 Icons.history_edu_rounded,
                 size: 54,
                 color: Color(0xFFE0A96D),
               ),
-              const SizedBox(height: 14),
+              SizedBox(height: 14),
               Text(
                 "cePlayerWriting",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               if (count > 0)
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -37154,7 +37153,7 @@ AppLocalizations.of(context)!.jouePar,
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.motsRediges,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.amberAccent,
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
@@ -37164,11 +37163,11 @@ AppLocalizations.of(context)!.jouePar,
               else
                 Text(
                   AppLocalizations.of(context)!.laFeuilleEstPlieePour,
-                  style: const TextStyle(color: Colors.white60, fontSize: 12),
+                  style: TextStyle(color: Colors.white60, fontSize: 12),
                   textAlign: TextAlign.center,
                 ),
-              const SizedBox(height: 20),
-              const CircularProgressIndicator(
+              SizedBox(height: 20),
+              CircularProgressIndicator(
                 color: Color(0xFFE0A96D),
                 strokeWidth: 2.5,
               ),
@@ -37187,16 +37186,16 @@ AppLocalizations.of(context)!.jouePar,
     String passingMode,
   ) {
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          const Icon(
+          Icon(
             Icons.auto_stories_rounded,
             size: 54,
             color: Color(0xFFE0A96D),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.leGrandDepliage,
             style: TextStyle(
@@ -37206,13 +37205,13 @@ AppLocalizations.of(context)!.jouePar,
               letterSpacing: 1,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             AppLocalizations.of(context)!.voiciLesUvresCollectivesNees,
             style: TextStyle(color: Colors.white60, fontSize: 13),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           ...papers.entries.map((entry) {
             int paperIndex = int.parse(entry.key);
@@ -37222,14 +37221,14 @@ AppLocalizations.of(context)!.jouePar,
             return Container(
               margin: const EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
-                color: const Color(0xFFFDFBF7),
+                color: Color(0xFFFDFBF7),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: const Color(0xFFD8C7B0), width: 1.5),
+                border: Border.all(color: Color(0xFFD8C7B0), width: 1.5),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.4),
                     blurRadius: 14,
-                    offset: const Offset(0, 6),
+                    offset: Offset(0, 6),
                   ),
                 ],
               ),
@@ -37244,7 +37243,7 @@ AppLocalizations.of(context)!.jouePar,
                         horizontal: 16,
                         vertical: 10,
                       ),
-                      color: const Color(0xFFEFE6D5),
+                      color: Color(0xFFEFE6D5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -37252,14 +37251,14 @@ AppLocalizations.of(context)!.jouePar,
                             passingMode == 'multiple'
                                 ? "ceStoryNumber"
                                 : "HISTOIRE COLLECTIVE",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1.5,
                               color: Color(0xFF78350F),
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.bookmark_added_rounded,
                             size: 16,
                             color: Color(0xFF78350F),
@@ -37273,7 +37272,7 @@ AppLocalizations.of(context)!.jouePar,
                       padding: const EdgeInsets.all(20),
                       child: Text(
                         AppLocalizations.of(context)!.strb74c15(fullText),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'serif',
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -37284,12 +37283,12 @@ AppLocalizations.of(context)!.jouePar,
                       ),
                     ),
 
-                    const Divider(color: Color(0xFFE2D6C3), height: 1),
+                    Divider(color: Color(0xFFE2D6C3), height: 1),
 
                     // Signatures des co-auteurs
                     Container(
                       padding: const EdgeInsets.all(12),
-                      color: const Color(0xFFF7F2E7),
+                      color: Color(0xFFF7F2E7),
                       child: Wrap(
                         spacing: 6,
                         runSpacing: 6,
@@ -37307,26 +37306,26 @@ AppLocalizations.of(context)!.jouePar,
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
-                                    color: const Color(0xFFD6C8B2),
+                                    color: Color(0xFFD6C8B2),
                                   ),
                                 ),
                                 child: RichText(
                                   text: TextSpan(
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 11,
                                       color: Colors.black87,
                                     ),
                                     children: [
                                       TextSpan(
                                         text: AppLocalizations.of(context)!.str1e0607(authorName),
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xFF78350F),
                                         ),
                                       ),
                                       TextSpan(
                                         text: s['text'],
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'serif',
                                         ),
@@ -37344,12 +37343,12 @@ AppLocalizations.of(context)!.jouePar,
             );
           }).toList(),
 
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           ElevatedButton.icon(
-            icon: const Icon(Icons.home_rounded),
+            icon: Icon(Icons.home_rounded),
             label: Text(AppLocalizations.of(context)!.retourAuSalon),
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF78350F),
+              backgroundColor: Color(0xFF78350F),
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(14),
@@ -37357,7 +37356,7 @@ AppLocalizations.of(context)!.jouePar,
             ),
             onPressed: () => _exitGame(),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
         ],
       ),
     );
@@ -37445,11 +37444,11 @@ AppLocalizations.of(context)!.jouePar,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.warning_amber_rounded, color: Colors.redAccent, size: 16),
+                    Icon(Icons.warning_amber_rounded, color: Colors.redAccent, size: 16),
                     SizedBox(width: 8),
                     Text(
                       AppLocalizations.of(context)!.prepareUneAttaqueContreUn,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -37470,7 +37469,7 @@ AppLocalizations.of(context)!.jouePar,
           height: 58,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             children:
                 playerOrder.where((pId) => pId != playerId).map((pId) {
@@ -37493,8 +37492,8 @@ AppLocalizations.of(context)!.jouePar,
                     decoration: BoxDecoration(
                       color:
                           isOppTurn
-                              ? const Color(0xFF2A2045)
-                              : const Color(0xFF1E1E28),
+                              ? Color(0xFF2A2045)
+                              : Color(0xFF1E1E28),
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(
                         color: isOppTurn ? Colors.amberAccent : Colors.white10,
@@ -37523,7 +37522,7 @@ AppLocalizations.of(context)!.jouePar,
                             ),
                             Text(
                               AppLocalizations.of(context)!.km(oppDist),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.cyanAccent,
@@ -37531,7 +37530,7 @@ AppLocalizations.of(context)!.jouePar,
                             ),
                           ],
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(4),
                           child: LinearProgressIndicator(
@@ -37545,7 +37544,7 @@ AppLocalizations.of(context)!.jouePar,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Row(
                           children: [
                             // Statuts négatifs subis
@@ -37557,12 +37556,12 @@ AppLocalizations.of(context)!.jouePar,
                               _buildMiniStatusChip('🛞', Colors.redAccent),
                             if (oppData['isOutOfGas'] == true)
                               _buildMiniStatusChip('⛽', Colors.redAccent),
-                            const Spacer(),
+                            Spacer(),
                             // Bottes / Immunités permanentes
                             if (oppSafeties.isNotEmpty)
                               Text(
-                                "🛡️ ${oppSafeties.length}",
-                                style: const TextStyle(
+                                AppLocalizations.of(context)!.stra26129,
+                                style: TextStyle(
                                   fontSize: 10,
                                   color: Colors.cyanAccent,
                                   fontWeight: FontWeight.bold,
@@ -37577,7 +37576,7 @@ AppLocalizations.of(context)!.jouePar,
           ),
         ),
 
-        const SizedBox(height: 6),
+        SizedBox(height: 6),
 
         // ---------------------------------------------------------------------
         // 2. MON COCKPIT : VITESSE, PROGRESSION & BOTTES ACTIVES
@@ -37588,8 +37587,8 @@ AppLocalizations.of(context)!.jouePar,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                isMyTurn ? const Color(0xFF261D42) : const Color(0xFF1B1B26),
-                const Color(0xFF14141E),
+                isMyTurn ? Color(0xFF261D42) : Color(0xFF1B1B26),
+                Color(0xFF14141E),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -37633,7 +37632,7 @@ AppLocalizations.of(context)!.jouePar,
                           color: isMyTurn ? Colors.greenAccent : Colors.white60,
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -37653,7 +37652,7 @@ AppLocalizations.of(context)!.jouePar,
                           ),
                           Text(
                             AppLocalizations.of(context)!.km1(myDistance, targetDist),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w900,
                               color: Colors.white,
@@ -37702,10 +37701,10 @@ AppLocalizations.of(context)!.jouePar,
                                         size: 12,
                                         color: Colors.cyanAccent,
                                       ),
-                                      const SizedBox(width: 3),
+                                      SizedBox(width: 3),
                                       Text(
                                         info.name,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 9,
                                           color: Colors.cyanAccent,
                                           fontWeight: FontWeight.bold,
@@ -37721,7 +37720,7 @@ AppLocalizations.of(context)!.jouePar,
                 ],
               ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
 
               // Barre de distance continue
               ClipRRect(
@@ -37736,7 +37735,7 @@ AppLocalizations.of(context)!.jouePar,
                 ),
               ),
 
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
 
               // État actuel du véhicule (Alertes / Feux)
               Row(
@@ -37755,7 +37754,7 @@ AppLocalizations.of(context)!.jouePar,
                             ? Colors.redAccent
                             : Colors.greenAccent,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   if (myData['isSpeedLimited'] == true)
                     _buildStateIndicator(
                       label: AppLocalizations.of(context)!.limite50,
@@ -37763,7 +37762,7 @@ AppLocalizations.of(context)!.jouePar,
                       color: Colors.orangeAccent,
                     ),
                   if (myData['isFlatTire'] == true) ...[
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     _buildStateIndicator(
                       label: AppLocalizations.of(context)!.crevaison,
                       icon: Icons.tire_repair_rounded,
@@ -37771,7 +37770,7 @@ AppLocalizations.of(context)!.jouePar,
                     ),
                   ],
                   if (myData['isOutOfGas'] == true) ...[
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     _buildStateIndicator(
                       label: AppLocalizations.of(context)!.panneEssence,
                       icon: Icons.local_gas_station_rounded,
@@ -37784,7 +37783,7 @@ AppLocalizations.of(context)!.jouePar,
           ),
         ),
 
-        const SizedBox(height: 6),
+        SizedBox(height: 6),
 
         // Zone Centrale : Pioche & Infos
         Container(
@@ -37806,7 +37805,7 @@ AppLocalizations.of(context)!.jouePar,
                     width: 58,
                     height: 76,
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [Color(0xFF1E3A8A), Color(0xFF0F172A)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -37826,15 +37825,15 @@ AppLocalizations.of(context)!.jouePar,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.style_rounded,
                           color: Colors.amberAccent,
                           size: 24,
                         ),
-                        const SizedBox(height: 2),
+                        SizedBox(height: 2),
                         Text(
-                          "${(gameData['milleBornesDeck'] as List?)?.length ?? 0}",
-                          style: const TextStyle(
+                          AppLocalizations.of(context)!.str84889d,
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
                             color: Colors.white,
@@ -37843,10 +37842,10 @@ AppLocalizations.of(context)!.jouePar,
                       ],
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     AppLocalizations.of(context)!.pioche1,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
                       color: Colors.white60,
@@ -37870,13 +37869,13 @@ AppLocalizations.of(context)!.jouePar,
                       fontSize: 12,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     isMyTurn
                         ? AppLocalizations.of(context)!.touchezPourJouerNmaintenezPour
                         : AppLocalizations.of(context)!.enAttente,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 10, color: Colors.white38),
+                    style: TextStyle(fontSize: 10, color: Colors.white38),
                   ),
                 ],
               ),
@@ -37892,7 +37891,7 @@ AppLocalizations.of(context)!.jouePar,
             margin: const EdgeInsets.symmetric(horizontal: 8),
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 4),
             decoration: BoxDecoration(
-              color: const Color(0xFF14141E),
+              color: Color(0xFF14141E),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: Colors.white10),
             ),
@@ -37903,7 +37902,7 @@ AppLocalizations.of(context)!.jouePar,
                   children: [
                     Text(
                       "mbCardsInHand",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -37912,19 +37911,19 @@ AppLocalizations.of(context)!.jouePar,
                     if (isMyTurn)
                       Text(
                         AppLocalizations.of(context)!.touchezPourJouerRestezAppuye,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white38,
                           fontSize: 10,
                         ),
                       ),
                   ],
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6),
                 Expanded(
                   child: GridView.builder(
-                    physics: const BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                        SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           childAspectRatio: 1.05,
                           crossAxisSpacing: 6,
@@ -37970,7 +37969,7 @@ AppLocalizations.of(context)!.jouePar,
                                     SnackBar(
                                       content: Text(
                                         e.toString().replaceAll(
-                                          "Exception: ",
+                                          AppLocalizations.of(context)!.exception,
                                           "",
                                         ),
                                       ),
@@ -38001,13 +38000,13 @@ AppLocalizations.of(context)!.jouePar,
                       width: double.infinity,
                       height: 38,
                       child: OutlinedButton.icon(
-                        icon: const Icon(Icons.skip_next_rounded, size: 18),
+                        icon: Icon(Icons.skip_next_rounded, size: 18),
                         label: Text(
                           AppLocalizations.of(context)!.defausserLa1ereCartePasser,
                         ),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white60,
-                          side: const BorderSide(color: Colors.white24),
+                          side: BorderSide(color: Colors.white24),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -38044,7 +38043,7 @@ AppLocalizations.of(context)!.jouePar,
       onLongPress: isMyTurn ? onDiscard : null,
       borderRadius: BorderRadius.circular(16),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 200),
         decoration: BoxDecoration(
           color: Color(0xFF1A1A24),
           borderRadius: BorderRadius.circular(16),
@@ -38052,9 +38051,9 @@ AppLocalizations.of(context)!.jouePar,
             colors:
                 info.isSafety
                     ? [
-                      const Color(0xFF422006),
-                      const Color(0xFF1F1206),
-                      const Color(0xFF0F0B05),
+                      Color(0xFF422006),
+                      Color(0xFF1F1206),
+                      Color(0xFF0F0B05),
                     ]
                     : [
                       info.secondaryColor.withOpacity(0.4),
@@ -38081,7 +38080,7 @@ AppLocalizations.of(context)!.jouePar,
               BoxShadow(
                 color: info.primaryColor.withOpacity(0.25),
                 blurRadius: 8,
-                offset: const Offset(0, 3),
+                offset: Offset(0, 3),
               ),
           ],
         ),
@@ -38212,7 +38211,7 @@ AppLocalizations.of(context)!.jouePar,
                     if (!info.isDistance)
                       Text(
                         GameContentLocalization.ui(context, info.name.replaceAll('\n', ' ')),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -38240,7 +38239,7 @@ AppLocalizations.of(context)!.jouePar,
         color: color.withOpacity(0.2),
         borderRadius: BorderRadius.circular(4),
       ),
-      child: Text(emoji, style: const TextStyle(fontSize: 9)),
+      child: Text(emoji, style: TextStyle(fontSize: 9)),
     );
   }
 
@@ -38260,7 +38259,7 @@ AppLocalizations.of(context)!.jouePar,
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 13, color: color),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           Text(
             label,
             style: TextStyle(
@@ -38285,29 +38284,29 @@ AppLocalizations.of(context)!.jouePar,
       switch (km) {
         case '25':
           distIcon = Icons.slow_motion_video_rounded;
-          cardColor = const Color(0xFF38BDF8); // Cyan doux
-          darkColor = const Color(0xFF0369A1);
+          cardColor = Color(0xFF38BDF8); // Cyan doux
+          darkColor = Color(0xFF0369A1);
           break;
         case '50':
           distIcon = Icons.electric_car_rounded;
-          cardColor = const Color(0xFF34D399); // Vert menthe
-          darkColor = const Color(0xFF047857);
+          cardColor = Color(0xFF34D399); // Vert menthe
+          darkColor = Color(0xFF047857);
           break;
         case '75':
           distIcon = Icons.directions_car_filled_rounded;
-          cardColor = const Color(0xFF4ADE80); // Vert printemps
-          darkColor = const Color(0xFF15803D);
+          cardColor = Color(0xFF4ADE80); // Vert printemps
+          darkColor = Color(0xFF15803D);
           break;
         case '100':
           distIcon = Icons.speed_rounded;
-          cardColor = const Color(0xFFA3E635); // Vert lime
-          darkColor = const Color(0xFF4D7C0F);
+          cardColor = Color(0xFFA3E635); // Vert lime
+          darkColor = Color(0xFF4D7C0F);
           break;
         case '200':
         default:
           distIcon = Icons.rocket_launch_rounded;
-          cardColor = const Color(0xFFFACC15); // Or / Turbo
-          darkColor = const Color(0xFFA16207);
+          cardColor = Color(0xFFFACC15); // Or / Turbo
+          darkColor = Color(0xFFA16207);
           break;
       }
 
@@ -38460,17 +38459,17 @@ AppLocalizations.of(context)!.jouePar,
       context: context,
       builder:
           (ctx) => AlertDialog(
-            backgroundColor: const Color(0xFF1E1E2C),
+            backgroundColor: Color(0xFF1E1E2C),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
             title: Row(
               children: [
-                const Icon(Icons.gps_fixed_rounded, color: Colors.redAccent),
-                const SizedBox(width: 10),
+                Icon(Icons.gps_fixed_rounded, color: Colors.redAccent),
+                SizedBox(width: 10),
                 Text(
                   AppLocalizations.of(context)!.choisirLaCible,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                 ),
               ],
             ),
@@ -38563,7 +38562,7 @@ AppLocalizations.of(context)!.jouePar,
                                   SnackBar(
                                     content: Text(
                                       e.toString().replaceAll(
-                                        "Exception: ",
+                                        AppLocalizations.of(context)!.exception,
                                         "",
                                       ),
                                     ),
@@ -38580,7 +38579,7 @@ AppLocalizations.of(context)!.jouePar,
                 onPressed: () => Navigator.pop(ctx),
                 child: Text(
                   AppLocalizations.of(context)!.annuler,
-                  style: const TextStyle(color: Colors.white54),
+                  style: TextStyle(color: Colors.white54),
                 ),
               ),
             ],
@@ -39234,7 +39233,7 @@ AppLocalizations.of(context)!.jouePar,
                 color: isMyTurn ? Colors.greenAccent : Colors.white70,
                 size: 13,
               ),
-              const SizedBox(width: 6),
+              SizedBox(width: 6),
               Text(
                 isMyTurn
                     ? AppLocalizations.of(context)!.aVotreTour
@@ -39249,7 +39248,7 @@ AppLocalizations.of(context)!.jouePar,
           ),
         ),
 
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
 
         // GRILLE ADVERSE (ZONE DE TIR) AVEC VISEUR LIVE
         Expanded(
@@ -39258,13 +39257,13 @@ AppLocalizations.of(context)!.jouePar,
             children: [
               Text(
                 AppLocalizations.of(context)!.territoireEnnemiTouchezPourViser,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.redAccent,
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               Expanded(
                 child: _buildBatailleNavaleGridGame(
                   gridData: enemyGrid,
@@ -39309,7 +39308,7 @@ AppLocalizations.of(context)!.jouePar,
           ),
         ),
 
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
 
         // VOTRE FLOTTE AVEC DÉTECTION DU RADAR ADVERSE EN DIRECT
         Expanded(
@@ -39335,14 +39334,14 @@ AppLocalizations.of(context)!.jouePar,
                     children: [
                       Text(
                         AppLocalizations.of(context)!.votreFlotteTirsEnnemisRecus,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.cyanAccent,
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
                         ),
                       ),
                       if (enemyAimedIndex != null) ...[
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
@@ -39353,11 +39352,11 @@ AppLocalizations.of(context)!.jouePar,
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.gps_fixed, color: Colors.redAccent, size: 12),
-                              const SizedBox(width: 4),
+                              Icon(Icons.gps_fixed, color: Colors.redAccent, size: 12),
+                              SizedBox(width: 4),
                               Text(
-                                "🚨 " + GameContentLocalization.format(context, AppLocalizations.of(context)!.radarCaseCiblee, ["${String.fromCharCode(65 + enemyAimedIndex ~/ 10)}${enemyAimedIndex % 10 + 1}"]),
-                                style: const TextStyle(
+                                "🚨 " + GameContentLocalization.format(context, AppLocalizations.of(context)!.radarCaseCiblee, [AppLocalizations.of(context)!.str58f25a]),
+                                style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 10,
@@ -39369,7 +39368,7 @@ AppLocalizations.of(context)!.jouePar,
                       ],
                     ],
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Expanded(
                     child: _buildBatailleNavaleGridGame(
                       gridData: incomingGrid,
@@ -39457,8 +39456,8 @@ AppLocalizations.of(context)!.jouePar,
 
                 // 3. Grille des tirs, explosions et flammes (PAR-DESSUS LES BATEAUX)
                 GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 10,
                   ),
                   itemCount: 100,
@@ -39472,14 +39471,14 @@ AppLocalizations.of(context)!.jouePar,
                         overlay = Container(
                           width: 8,
                           height: 8,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.white54,
                           ),
                         );
                       } else if (status == 'hit') {
                         cellBgColor = Colors.red.withOpacity(0.35);
-                        overlay = const Icon(
+                        overlay = Icon(
                           Icons.local_fire_department_rounded,
                           color: Color(0xFFFF5722),
                           size: 22,
@@ -39489,7 +39488,7 @@ AppLocalizations.of(context)!.jouePar,
                         );
                       } else if (status == 'sunk') {
                         cellBgColor = Colors.black.withOpacity(0.5);
-                        overlay = const Icon(
+                        overlay = Icon(
                           Icons.close_rounded,
                           color: Colors.redAccent,
                           size: 24,
@@ -39513,7 +39512,7 @@ AppLocalizations.of(context)!.jouePar,
                             color: Colors.red.withOpacity(0.3),
                             shape: BoxShape.circle,
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Icon(
                               Icons.local_fire_department_rounded,
                               color: Color(0xFFFF3D00), // Flamme ardente
@@ -39547,7 +39546,7 @@ AppLocalizations.of(context)!.jouePar,
                             ),
                           ],
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Icon(Icons.gps_fixed_rounded, color: Colors.cyanAccent, size: 20),
                         ),
                       );
@@ -39565,7 +39564,7 @@ AppLocalizations.of(context)!.jouePar,
                             ),
                           ],
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Icon(Icons.gps_fixed_rounded, color: Colors.redAccent, size: 22),
                         ),
                       );
@@ -39759,15 +39758,15 @@ AppLocalizations.of(context)!.jouePar,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.monetization_on,
                               color: Colors.amber,
                               size: 20,
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Text(
                               "pokerPot",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -39790,7 +39789,7 @@ AppLocalizations.of(context)!.jouePar,
                           ),
                           child: Text(
                             "pokerRaiseAlert",
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 12,
@@ -39890,7 +39889,7 @@ AppLocalizations.of(context)!.jouePar,
                     ),
                     SizedBox(width: 5),
                     Text(
-                      "${myData['chips']} \$",
+                      AppLocalizations.of(context)!.stree98fd,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -40183,7 +40182,7 @@ AppLocalizations.of(context)!.jouePar,
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: constraints.maxHeight),
             child: IntrinsicHeight(
@@ -40224,11 +40223,11 @@ AppLocalizations.of(context)!.jouePar,
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.palette_rounded, color: Colors.amberAccent, size: 16),
-                              const SizedBox(width: 8),
+                              Icon(Icons.palette_rounded, color: Colors.amberAccent, size: 16),
+                              SizedBox(width: 8),
                               Text(
                                 AppLocalizations.of(context)!.hesiteEtChoisitLaCouleur,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
@@ -40242,7 +40241,7 @@ AppLocalizations.of(context)!.jouePar,
                     },
                   ),
 
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
 
                   // 2. TAPIS DE JEU : PIOCHE ET DÉFAUSSE GLOW
                   Container(
@@ -40274,7 +40273,7 @@ AppLocalizations.of(context)!.jouePar,
                             width: 68,
                             height: 102,
                             decoration: BoxDecoration(
-                              gradient: const LinearGradient(
+                              gradient: LinearGradient(
                                 colors: [Color(0xFF232526), Color(0xFF414345)],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
@@ -40298,7 +40297,7 @@ AppLocalizations.of(context)!.jouePar,
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.6),
                                   blurRadius: 8,
-                                  offset: const Offset(2, 4),
+                                  offset: Offset(2, 4),
                                 ),
                               ],
                             ),
@@ -40325,7 +40324,7 @@ AppLocalizations.of(context)!.jouePar,
                           ),
                         ),
 
-                        const SizedBox(width: 32),
+                        SizedBox(width: 32),
 
                         // DÉFAUSSE ACTIVE AVEC HALO COLORÉ
                         Stack(
@@ -40366,7 +40365,7 @@ AppLocalizations.of(context)!.jouePar,
                                       width: 2,
                                     ),
                                   ),
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.color_lens_rounded,
                                     size: 14,
                                     color: Colors.white,
@@ -40379,7 +40378,7 @@ AppLocalizations.of(context)!.jouePar,
                     ),
                   ),
 
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
 
                   // 3. MAIN DU JOUEUR (ÉVENTAIL DYNAMIQUE)
                   _buildHandFan(
@@ -40388,7 +40387,7 @@ AppLocalizations.of(context)!.jouePar,
                     onCardTap: (card) => _onUnoCardTapped(card),
                   ),
 
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
 
                   // 4. BOUTONS D'ACTION (UNO, CONTRE-UNO, PIOCHE FORCÉE)
                   _buildUnoActionButtons(
@@ -40399,7 +40398,7 @@ AppLocalizations.of(context)!.jouePar,
                     myHand,
                     pendingDraw,
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                 ],
               ),
             ),
@@ -40454,7 +40453,7 @@ AppLocalizations.of(context)!.jouePar,
             ),
           if (wildColorChosen != null)
             Text(
-              "${"Couleur choisie :"} ${GameUiLocalization.tr(context, wildColorChosen).toUpperCase()}",
+              "${"Couleur choisie :AppLocalizations.of(context)!.str0d434e,
               style: TextStyle(
                 color: currentColor,
                 fontWeight: FontWeight.bold,
@@ -40623,7 +40622,7 @@ AppLocalizations.of(context)!.jouePar,
       children: [
         if (isMyTurn && pendingDraw > 0)
           ElevatedButton.icon(
-            icon: const Icon(Icons.download_for_offline_rounded),
+            icon: Icon(Icons.download_for_offline_rounded),
             label: Text(
               "unoDrawCountCards",
             ),
@@ -40632,7 +40631,7 @@ AppLocalizations.of(context)!.jouePar,
           ),
         if (isMyTurn && hasDrawnPlayable)
           ElevatedButton.icon(
-            icon: const Icon(Icons.skip_next_rounded),
+            icon: Icon(Icons.skip_next_rounded),
             label: Text(AppLocalizations.of(context)!.garderPasser),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
             onPressed:
@@ -40651,7 +40650,7 @@ AppLocalizations.of(context)!.jouePar,
                     },
           ),
         ElevatedButton.icon(
-          icon: const Icon(Icons.flash_on),
+          icon: Icon(Icons.flash_on),
           label: Text(AppLocalizations.of(context)!.uno),
           onPressed:
               canSayUno && !_isUnoCalling && !_isActionPending
@@ -40667,7 +40666,7 @@ AppLocalizations.of(context)!.jouePar,
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e.toString().replaceAll('Exception: ', '')]),
+                            GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')]),
                           ),
                         ),
                       );
@@ -40680,7 +40679,7 @@ AppLocalizations.of(context)!.jouePar,
         ),
         if (canContraUno)
           ElevatedButton.icon(
-            icon: const Icon(Icons.warning_amber_rounded),
+            icon: Icon(Icons.warning_amber_rounded),
             label: Text(AppLocalizations.of(context)!.contreUno),
             onPressed:
                 _isActionPending
@@ -40703,7 +40702,7 @@ AppLocalizations.of(context)!.jouePar,
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              AppLocalizations.of(context)!.erreur1(e.toString().replaceAll('Exception: ', '')),
+                              AppLocalizations.of(context)!.erreur1(e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')),
                             ),
                           ),
                         );
@@ -40845,7 +40844,7 @@ AppLocalizations.of(context)!.jouePar,
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                AppLocalizations.of(context)!.erreur1(e.toString().replaceAll('Exception: ', '')),
+                AppLocalizations.of(context)!.erreur1(e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')),
               ),
             ),
           );
@@ -40934,7 +40933,7 @@ AppLocalizations.of(context)!.jouePar,
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              AppLocalizations.of(context)!.erreur1(e.toString().replaceAll('Exception: ', '')),
+              AppLocalizations.of(context)!.erreur1(e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')),
             ),
           ),
         );
@@ -41000,7 +40999,7 @@ AppLocalizations.of(context)!.jouePar,
                                     ).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          AppLocalizations.of(context)!.erreur1(e.toString().replaceAll('Exception: ', '')),
+                                          AppLocalizations.of(context)!.erreur1(e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')),
                                         ),
                                       ),
                                     );
@@ -41140,7 +41139,7 @@ AppLocalizations.of(context)!.jouePar,
               margin: const EdgeInsets.only(bottom: 4),
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 children:
                     players.entries
                         .where((e) => e.key != playerId)
@@ -41153,7 +41152,7 @@ AppLocalizations.of(context)!.jouePar,
                               backgroundColor: Colors.black.withOpacity(0.45),
                               label: Text(
                                 AppLocalizations.of(context)!.str422faa(e.value['name'], e.value['score'] ?? 0),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white70,
                                   fontSize: 11,
                                 ),
@@ -41181,7 +41180,7 @@ AppLocalizations.of(context)!.jouePar,
                         isLarge: true,
                         isInteractable: false,
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 12,
@@ -41194,7 +41193,7 @@ AppLocalizations.of(context)!.jouePar,
                         ),
                         child: Text(
                           'dobbleCenterCard',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white70,
                             fontWeight: FontWeight.bold,
                             fontSize: 11,
@@ -41213,7 +41212,7 @@ AppLocalizations.of(context)!.jouePar,
               margin: const EdgeInsets.symmetric(vertical: 4),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
+                gradient: LinearGradient(
                   colors: [Color(0xFF6B21A8), Color(0xFF3B0764)],
                 ),
                 borderRadius: BorderRadius.circular(20),
@@ -41225,22 +41224,22 @@ AppLocalizations.of(context)!.jouePar,
                   BoxShadow(
                     color: Colors.purple.withOpacity(0.35),
                     blurRadius: 8,
-                    offset: const Offset(0, 2),
+                    offset: Offset(0, 2),
                   ),
                 ],
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.style_rounded,
                     color: Colors.amberAccent,
                     size: 16,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text(
                     'dobbleDeckCards',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -41274,15 +41273,15 @@ AppLocalizations.of(context)!.jouePar,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.touch_app_rounded,
                           color: Colors.greenAccent,
                           size: 16,
                         ),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         Text(
                           'dobbleTapSameSymbol',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -41316,9 +41315,9 @@ AppLocalizations.of(context)!.jouePar,
                       ),
                       margin: const EdgeInsets.only(bottom: 4),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF10B981),
+                        color: Color(0xFF10B981),
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
                             color: Colors.black26,
                             blurRadius: 4,
@@ -41351,30 +41350,30 @@ AppLocalizations.of(context)!.jouePar,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.lock_clock_rounded,
                       size: 70,
                       color: Colors.redAccent,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Text(
                       'dobbleBlocked',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.redAccent,
                         fontSize: 36,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 2,
                       ),
                     ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: 6),
                     Text(
                       'dobbleTooManyErrors',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white70,
                         fontSize: 14,
                       ),
                     ),
-                    const SizedBox(height: 18),
+                    SizedBox(height: 18),
                     Container(
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
@@ -41383,7 +41382,7 @@ AppLocalizations.of(context)!.jouePar,
                       ),
                       child: Text(
                         "$_dobbleBlockCountdown",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 34,
                           fontWeight: FontWeight.bold,
@@ -41413,7 +41412,7 @@ AppLocalizations.of(context)!.jouePar,
       return Container(
         width: cardSize,
         height: cardSize,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
         ),
@@ -41428,23 +41427,23 @@ AppLocalizations.of(context)!.jouePar,
 
     // Positions de dispersion organique pour 6 ou 8 symboles (Normalisées entre -1.0 et 1.0)
     final List<Offset> organicSlots8 = [
-      const Offset(-0.22, -0.20), // Zone intérieure haute-gauche
-      const Offset(0.24, 0.18), // Zone intérieure basse-droite
-      const Offset(0.02, -0.62), // Périphérie Nord
-      const Offset(0.58, -0.32), // Périphérie Nord-Est
-      const Offset(0.60, 0.35), // Périphérie Sud-Est
-      const Offset(-0.05, 0.64), // Périphérie Sud
-      const Offset(-0.62, 0.32), // Périphérie Sud-Ouest
-      const Offset(-0.58, -0.38), // Périphérie Nord-Ouest
+      Offset(-0.22, -0.20), // Zone intérieure haute-gauche
+      Offset(0.24, 0.18), // Zone intérieure basse-droite
+      Offset(0.02, -0.62), // Périphérie Nord
+      Offset(0.58, -0.32), // Périphérie Nord-Est
+      Offset(0.60, 0.35), // Périphérie Sud-Est
+      Offset(-0.05, 0.64), // Périphérie Sud
+      Offset(-0.62, 0.32), // Périphérie Sud-Ouest
+      Offset(-0.58, -0.38), // Périphérie Nord-Ouest
     ];
 
     final List<Offset> organicSlots6 = [
-      const Offset(0.0, 0.0), // Centre
-      const Offset(0.0, -0.60), // Nord
-      const Offset(0.56, -0.22), // Est
-      const Offset(0.38, 0.52), // Sud-Est
-      const Offset(-0.42, 0.50), // Sud-Ouest
-      const Offset(-0.54, -0.20), // Ouest
+      Offset(0.0, 0.0), // Centre
+      Offset(0.0, -0.60), // Nord
+      Offset(0.56, -0.22), // Est
+      Offset(0.38, 0.52), // Sud-Est
+      Offset(-0.42, 0.50), // Sud-Ouest
+      Offset(-0.54, -0.20), // Ouest
     ];
 
     final List<Offset> baseSlots =
@@ -41461,8 +41460,8 @@ AppLocalizations.of(context)!.jouePar,
         border: Border.all(
           color:
               isInteractable
-                  ? const Color(0xFFE2E8F0)
-                  : const Color(0xFFCBD5E1),
+                  ? Color(0xFFE2E8F0)
+                  : Color(0xFFCBD5E1),
           width: isLarge ? 5 : 3,
         ),
         boxShadow: [
@@ -41470,7 +41469,7 @@ AppLocalizations.of(context)!.jouePar,
             color: Colors.black.withOpacity(0.35),
             blurRadius: 16,
             spreadRadius: 2,
-            offset: const Offset(0, 6),
+            offset: Offset(0, 6),
           ),
         ],
       ),
@@ -41730,12 +41729,12 @@ AppLocalizations.of(context)!.jouePar,
     String voterId,
   ) {
     print(
-      "--- DÉBUT DE LA CONSTRUCTION DE L'UI DE VOTE 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.printEtatDeIsactionpendingAu(_isActionPending)players'] as Map<String, dynamic>?) ?? {};
+      AppLocalizations.of(context)!.debutDeLaConstructionDe
     final String question =
         gameData['currentQuestion'] ?? AppLocalizations.of(context)!.erreurQuestionNonTrouvee;
 
-    print("Question à afficher: $question");
-    print("Nombre de joueurs à afficher: ${players.length}");
+    print(AppLocalizations.of(context)!.questionAAfficherQuestion);
+    print(AppLocalizations.of(context)!.nombreDeJoueursAAfficher);
 
     return Column(
       children: [
@@ -41776,10 +41775,10 @@ AppLocalizations.of(context)!.jouePar,
                               ? null
                               : () {
                                 print(
-                                  ">>> CLIC sur le joueur '$pName' (ID: $pId) !",
+                                  AppLocalizations.of(context)!.clicSurLeJoueurPname,
                                 );
                                 print(
-                                  "   - Passage de _isActionPending à true.",
+                                  AppLocalizations.of(context)!.passageDeIsactionpendingATrue,
                                 );
                                 setState(() => _isActionPending = true);
 
@@ -41787,12 +41786,12 @@ AppLocalizations.of(context)!.jouePar,
                                     .submitVote(widget.gameCode, voterId, pId)
                                     .catchError((e) {
                                       print(
-                                        "!!! ERREUR Firebase lors du vote: $e",
+                                        AppLocalizations.of(context)!.erreurFirebaseLorsDuVote,
                                       );
                                     })
                                     .whenComplete(() {
                                       print(
-                                        "   - Appel Firebase terminé. Passage de _isActionPending à false.",
+                                        AppLocalizations.of(context)!.appelFirebaseTerminePassageDe,
                                       );
                                       if (mounted) {
                                         setState(
@@ -41800,7 +41799,7 @@ AppLocalizations.of(context)!.jouePar,
                                         );
                                       } else {
                                         print(
-                                          "   - ATTENTION: Le widget n'est plus monté, setState annulé.",
+                                          AppLocalizations.of(context)!.attentionLeWidgetNEst,
                                         );
                                       }
                                     });
@@ -42859,7 +42858,7 @@ AppLocalizations.of(context)!.jouePar,
                         isVoted
                             ? Border.all(
                               color:
-                                  myVote == 'Vrai' ? Colors.green : Colors.red,
+                                  myVote == AppLocalizations.of(context)!.vrai1 ? Colors.green : Colors.red,
                               width: 2,
                             )
                             : null,
@@ -42916,7 +42915,7 @@ AppLocalizations.of(context)!.jouePar,
                             padding: EdgeInsets.symmetric(vertical: 8),
                             decoration: BoxDecoration(
                               color:
-                                  myVote == 'Vrai'
+                                  myVote == AppLocalizations.of(context)!.vrai1
                                       ? Colors.green.withOpacity(0.2)
                                       : Colors.red.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(8),
@@ -42931,7 +42930,7 @@ AppLocalizations.of(context)!.tuAsVote,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color:
-                                      myVote == 'Vrai'
+                                      myVote == AppLocalizations.of(context)!.vrai1
                                           ? Colors.greenAccent
                                           : Colors.redAccent,
                                 ),
@@ -43163,7 +43162,7 @@ AppLocalizations.of(context)!.tuAsVote,
               fontSize: 16,
             ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Expanded(
             child: Builder(
               builder: (context) {
@@ -43320,7 +43319,7 @@ AppLocalizations.of(context)!.tuAsVote,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 if (inspectedAnswer != null && !isTarget) ...[
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
@@ -43330,7 +43329,7 @@ AppLocalizations.of(context)!.tuAsVote,
                     ),
                     child: Text(
 AppLocalizations.of(context)!.leJugeLit,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.amberAccent,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -43425,7 +43424,7 @@ AppLocalizations.of(context)!.leJugeLit,
                             ),
                           ),
                           if (isInspected)
-                            const Icon(Icons.visibility, color: Colors.amber, size: 20)
+                            Icon(Icons.visibility, color: Colors.amber, size: 20)
                           else if (isTarget)
                             Icon(Icons.touch_app, color: Colors.deepPurple),
                         ],
@@ -43560,7 +43559,7 @@ AppLocalizations.of(context)!.leJugeLit,
         final rawName = sortedPlayers.first.value['name'];
         if (rawName != null &&
             rawName.toString().trim().isNotEmpty &&
-            rawName != 'Inconnu') {
+            rawName != AppLocalizations.of(context)!.inconnu) {
           winnerName = rawName.toString();
         } else if (playerProfiles[topPId]?['name'] != null) {
           winnerName = playerProfiles[topPId]['name'].toString();
@@ -43662,7 +43661,7 @@ AppLocalizations.of(context)!.leJugeLit,
                         if (_livekitInitialized) {
                           await _livekitService.leaveChannel();
                           await Future.delayed(
-                            const Duration(milliseconds: 300),
+                            Duration(milliseconds: 300),
                           );
                         }
                         _firebaseService.removePlayerFromGame(
@@ -43777,9 +43776,9 @@ AppLocalizations.of(context)!.leJugeLit,
                                   players[voteEntry.key]?['name'] ?? '...';
                               final voteValue = voteEntry.value;
                               final bool wasCorrect =
-                                  (voteValue == "Vrai" &&
+                                  (voteValue == AppLocalizations.of(context)!.vrai1 &&
                                       actualTruth == "VRAIE") ||
-                                  (voteValue == "Faux" &&
+                                  (voteValue == AppLocalizations.of(context)!.faux1 &&
                                       actualTruth == "FAUSSE");
                               return Row(
                                 children: [
@@ -43944,7 +43943,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
             players[gameData['justOneGuesserId']]?['name'] ?? AppLocalizations.of(context)!.leDevin;
         final guesserAnswer =
             gameData['justOneGuesserAnswer'] ?? AppLocalizations.of(context)!.pasDeReponse;
-        if (gameEndReason == "Mot deviné !") {
+        if (gameEndReason == AppLocalizations.of(context)!.motDevine) {
           resultText = AppLocalizations.of(context)!.aTrouveLeMot1(guesserName, currentWord);
           extraInfo = Text(
             AppLocalizations.of(context)!.saReponseEtait,
@@ -44032,7 +44031,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
 AppLocalizations.of(context)!.stre93cb0,
 ),
                         backgroundColor:
-                            card['type'] == 'Crane'
+                            card['type'] == AppLocalizations.of(context)!.crane1
                                 ? Colors.redAccent.withOpacity(0.3)
                                 : Colors.greenAccent.withOpacity(0.2),
                       );
@@ -44111,7 +44110,7 @@ AppLocalizations.of(context)!.stre93cb0,
         }
         break;
 
-      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId'];
+      case AppLocalizations.of(context)!.quiPourraitLePlusApplocalizations7];
         if (roundWinnerId != null) {
           final winnerName = players[roundWinnerId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
           resultText = AppLocalizations.of(context)!.aEteDesigneEEt(winnerName);
@@ -44251,7 +44250,7 @@ AppLocalizations.of(context)!.stre93cb0,
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "$currentCount / $totalExpected",
+              AppLocalizations.of(context)!.currentcountTotalexpected,
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
           ),
@@ -44370,8 +44369,8 @@ AppLocalizations.of(context)!.stre93cb0,
               ),
               SizedBox(height: 5),
               Text(
-                "${'codenamesYouAre'}${redTeam.contains(playerId) ? 'codenamesRedTeam' : (blueTeam.contains(playerId) ? 'codenamesBlueTeam' : 'codenamesSpectator')}"
-                "${(playerId == masterSpyRed || playerId == masterSpyBlue) ? ' (${'codenamesMasterSpy'})' : ' (${'codenamesAgent'})'}",
+                AppLocalizations.of(context)!.str38ce0b
+                AppLocalizations.of(context)!.str735713,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
@@ -44487,8 +44486,8 @@ AppLocalizations.of(context)!.stre93cb0,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Text(
-                                  "👆 ${pointers.first}",
-                                  style: const TextStyle(
+                                  AppLocalizations.of(context)!.strb8097d,
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 9,
                                     fontWeight: FontWeight.bold,
@@ -44701,7 +44700,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
-                "'$currentClue $clueCount'",
+                AppLocalizations.of(context)!.currentclueCluecount,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   color:
                       activeTeam == 'red'
@@ -45887,11 +45886,11 @@ AppLocalizations.of(context)!.stre93cb0,
                           )
                           : Text(AppLocalizations.of(context)!.prochainTour),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.redAccent,
-                    side: const BorderSide(color: Colors.redAccent),
+                    side: BorderSide(color: Colors.redAccent),
                   ),
                   onPressed:
                       _isActionPending
@@ -45912,7 +45911,7 @@ AppLocalizations.of(context)!.stre93cb0,
         ],
       );
     }
-    return _buildWaitingWidget("Chargement...", players, 0, 0);
+    return _buildWaitingWidget(AppLocalizations.of(context)!.chargement, players, 0, 0);
   }
 
   Widget _buildPresidentUI(
@@ -45962,7 +45961,7 @@ AppLocalizations.of(context)!.stre93cb0,
                     itemBuilder: (context, index) {
                       var rankEntry = sortedRanks[index];
                       return ListTile(
-                        leading: CircleAvatar(child: Text("#${index + 1}")),
+                        leading: CircleAvatar(child: Text(AppLocalizations.of(context)!.str51cc0a)),
                         title: Text(
                           players[rankEntry.key]?['name'] ?? AppLocalizations.of(context)!.inconnu,
                         ),
@@ -46453,7 +46452,7 @@ AppLocalizations.of(context)!.stre93cb0,
           height: 125,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -46515,19 +46514,19 @@ AppLocalizations.of(context)!.stre93cb0,
     if (isUno) {
       switch (suit) {
         case 'red':
-          cardBaseColor = const Color(0xFFE53935);
+          cardBaseColor = Color(0xFFE53935);
           break;
         case 'yellow':
-          cardBaseColor = const Color(0xFFFDD835);
+          cardBaseColor = Color(0xFFFDD835);
           break;
         case 'green':
-          cardBaseColor = const Color(0xFF43A047);
+          cardBaseColor = Color(0xFF43A047);
           break;
         case 'blue':
-          cardBaseColor = const Color(0xFF1E88E5);
+          cardBaseColor = Color(0xFF1E88E5);
           break;
         case 'wild':
-          cardBaseColor = const Color(0xFF212121);
+          cardBaseColor = Color(0xFF212121);
           break;
       }
       textColor = (suit == 'yellow') ? Colors.black87 : Colors.white;
@@ -46552,9 +46551,9 @@ AppLocalizations.of(context)!.stre93cb0,
       }
     } else {
       if (suit == 'D' || suit == 'H') {
-        textColor = const Color(0xFFD32F2F);
+        textColor = Color(0xFFD32F2F);
       } else {
-        textColor = const Color(0xFF212121);
+        textColor = Color(0xFF212121);
       }
 
       switch (suit) {
@@ -46578,7 +46577,7 @@ AppLocalizations.of(context)!.stre93cb0,
       child: Transform.rotate(
         angle: rotation,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
+          duration: Duration(milliseconds: 180),
           curve: Curves.easeOutBack,
           transform:
               Matrix4.identity()
@@ -46601,7 +46600,7 @@ AppLocalizations.of(context)!.stre93cb0,
                         ? Colors.greenAccent.withOpacity(0.5)
                         : Colors.black38,
                 blurRadius: isSelected ? 10 : 4,
-                offset: isSelected ? const Offset(0, 6) : const Offset(1, 2),
+                offset: isSelected ? Offset(0, 6) : Offset(1, 2),
               ),
             ],
           ),
@@ -46706,7 +46705,7 @@ AppLocalizations.of(context)!.stre93cb0,
           builder: (context, setStateModal) {
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Color(0xFF13131E),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
                 border: Border(
@@ -46724,7 +46723,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   Text(
                     AppLocalizations.of(context)!.annoncerUnDefi,
                     style: TextStyle(
@@ -46734,7 +46733,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       color: Colors.amberAccent,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                   Text(
                     AppLocalizations.of(context)!.combienDeCartesPensezVous,
                     textAlign: TextAlign.center,
@@ -46743,7 +46742,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       fontSize: 13,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -46759,7 +46758,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                   );
                                 }
                                 : null,
-                        icon: const Icon(Icons.remove_circle_outline, size: 36),
+                        icon: Icon(Icons.remove_circle_outline, size: 36),
                         color: Colors.white70,
                       ),
                       Container(
@@ -46768,7 +46767,7 @@ AppLocalizations.of(context)!.stre93cb0,
                         height: 80,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: const Color(0xFF1E1E2E),
+                          color: Color(0xFF1E1E2E),
                           border: Border.all(
                             color: Colors.amberAccent,
                             width: 2,
@@ -46784,7 +46783,7 @@ AppLocalizations.of(context)!.stre93cb0,
                         child: Center(
                           child: Text(
                             "$selectedBid",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 34,
                               fontWeight: FontWeight.w900,
                               color: Colors.white,
@@ -46804,25 +46803,25 @@ AppLocalizations.of(context)!.stre93cb0,
                                   );
                                 }
                                 : null,
-                        icon: const Icon(Icons.add_circle_outline, size: 36),
+                        icon: Icon(Icons.add_circle_outline, size: 36),
                         color: Colors.white70,
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Text(
-                    "${"Maximum possible"} : $maximumBid ${"cartes"}",
-                    style: const TextStyle(color: Colors.white38, fontSize: 11),
+                    "${"Maximum possibleAppLocalizations.of(context)!.maximumbidcartes"}",
+                    style: TextStyle(color: Colors.white38, fontSize: 11),
                   ),
-                  const SizedBox(height: 28),
+                  SizedBox(height: 28),
                   SizedBox(
                     width: double.infinity,
                     height: 52,
                     child: ElevatedButton.icon(
-                      icon: const Icon(Icons.flash_on_rounded, size: 20),
+                      icon: Icon(Icons.flash_on_rounded, size: 20),
                       label: Text(
-                        "${"LANCER LE DÉFI"} ($selectedBid)",
-                        style: const TextStyle(
+                        "${"LANCER LE DÉFIAppLocalizations.of(context)!.selectedbid,
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
@@ -46908,7 +46907,7 @@ AppLocalizations.of(context)!.stre93cb0,
     }
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: RadialGradient(
           center: Alignment.topCenter,
           radius: 1.2,
@@ -46922,14 +46921,14 @@ AppLocalizations.of(context)!.stre93cb0,
             margin: const EdgeInsets.fromLTRB(12, 6, 12, 4),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
-              color: const Color(0xFF14141E).withOpacity(0.85),
+              color: Color(0xFF14141E).withOpacity(0.85),
               borderRadius: BorderRadius.circular(18),
               border: Border.all(color: Colors.white12),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.35),
                   blurRadius: 10,
-                  offset: const Offset(0, 4),
+                  offset: Offset(0, 4),
                 ),
               ],
             ),
@@ -46955,15 +46954,15 @@ AppLocalizations.of(context)!.stre93cb0,
                         color: isMyTurn ? Colors.amberAccent : Colors.white70,
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           roundState == 'bidding'
-                              ? "${"ENCHÈRE"} : $currentBid / $totalCardsOnTables"
-                              : "PHASE DE POSE",
+                              ? "${"ENCHÈREAppLocalizations.of(context)!.currentbidTotalcardsontables
+                              : AppLocalizations.of(context)!.phaseDePose,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w900,
@@ -46977,7 +46976,7 @@ AppLocalizations.of(context)!.stre93cb0,
                         Text(
                           isMyTurn
                               ? AppLocalizations.of(context)!.cEstAVotreTour1
-                              : "${"Tour de"} ${players[currentPlayerId]?['name'] ?? '...'}",
+                              : "${"Tour deAppLocalizations.of(context)!.strb75c84,
                           style: TextStyle(
                             fontSize: 11,
                             color:
@@ -47005,7 +47004,7 @@ AppLocalizations.of(context)!.stre93cb0,
                     ),
                     child: Text(
                       players[highestBidderId]?['name'] ?? '',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 11,
                         color: Colors.amberAccent,
                         fontWeight: FontWeight.bold,
@@ -47051,15 +47050,15 @@ AppLocalizations.of(context)!.stre93cb0,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.flash_on_rounded,
                         size: 16,
                         color: Colors.amberAccent,
                       ),
-                      const SizedBox(width: 6),
+                      SizedBox(width: 6),
                       Text(
-                        "$bidderName ${"réfléchit à un défi de"} $liveAmount ${"cartes"}...",
-                        style: const TextStyle(
+                        AppLocalizations.of(context)!.biddernameréfléchit à un défi deAppLocalizations.of(context)!.liveamountcartes"}...",
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -47078,7 +47077,7 @@ AppLocalizations.of(context)!.stre93cb0,
           Expanded(
             flex: 5,
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Wrap(
                 spacing: 10,
@@ -47101,8 +47100,8 @@ AppLocalizations.of(context)!.stre93cb0,
                         decoration: BoxDecoration(
                           color:
                               isMe
-                                  ? const Color(0xFF1A1A2E)
-                                  : const Color(0xFF13131C),
+                                  ? Color(0xFF1A1A2E)
+                                  : Color(0xFF13131C),
                           borderRadius: BorderRadius.circular(18),
                           border: Border.all(
                             color:
@@ -47140,18 +47139,18 @@ AppLocalizations.of(context)!.stre93cb0,
                                     name.isNotEmpty
                                         ? name[0].toUpperCase()
                                         : '?',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 10,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 8),
+                                SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
                                     isMe
-                                        ? "${"Moi"} ($name)"
+                                        ? "${"MoiAppLocalizations.of(context)!.name
                                         : name,
                                     style: TextStyle(
                                       fontSize: 12,
@@ -47185,7 +47184,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 10),
                             // Tapis de sous-bocks empilés
                             Container(
                               height: 48,
@@ -47220,10 +47219,10 @@ AppLocalizations.of(context)!.stre93cb0,
                                               decoration: BoxDecoration(
                                                 color:
                                                     isMe
-                                                        ? const Color(
+                                                        ? Color(
                                                           0xFF2E1C44,
                                                         )
-                                                        : const Color(
+                                                        : Color(
                                                           0xFF1E1E28,
                                                         ),
                                                 borderRadius:
@@ -47235,7 +47234,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                                               .withOpacity(0.5)
                                                           : Colors.white24,
                                                 ),
-                                                boxShadow: const [
+                                                boxShadow: [
                                                   BoxShadow(
                                                     color: Colors.black45,
                                                     blurRadius: 4,
@@ -47247,7 +47246,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                                 child: Text(
                                                   isMe
                                                       ? (matCards[i]['type'] ==
-                                                              'Crane'
+                                                              AppLocalizations.of(context)!.crane1
                                                           ? '💀'
                                                           : '🌸')
                                                       : "•",
@@ -47268,7 +47267,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                   padding: const EdgeInsets.only(top: 4.0),
                                   child: Text(
                                     AppLocalizations.of(context)!.aPasse,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 9,
                                       color: Colors.redAccent,
                                       fontWeight: FontWeight.bold,
@@ -47289,7 +47288,7 @@ AppLocalizations.of(context)!.stre93cb0,
           Container(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
             decoration: BoxDecoration(
-              color: const Color(0xFF101018),
+              color: Color(0xFF101018),
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(24),
               ),
@@ -47298,7 +47297,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 BoxShadow(
                   color: Colors.black.withOpacity(0.5),
                   blurRadius: 16,
-                  offset: const Offset(0, -4),
+                  offset: Offset(0, -4),
                 ),
               ],
             ),
@@ -47311,8 +47310,8 @@ AppLocalizations.of(context)!.stre93cb0,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${"VOTRE MAIN"} (${myHand.length} ${"cartes"})",
-                        style: const TextStyle(
+                        "${"VOTRE MAINAppLocalizations.of(context)!.str35ecf5cartes"})",
+                        style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1.5,
@@ -47324,14 +47323,14 @@ AppLocalizations.of(context)!.stre93cb0,
                           roundState == 'placing'
                               ? AppLocalizations.of(context)!.touchezPourPoser
                               : AppLocalizations.of(context)!.encherissezOuPassez,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 11,
                             color: Colors.amberAccent,
                           ),
                         ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
 
                   // Affichage des disques en main (Rose vs Crâne)
                   if (roundState == 'placing') ...[
@@ -47342,8 +47341,8 @@ AppLocalizations.of(context)!.stre93cb0,
                           type: AppLocalizations.of(context)!.rose1,
                           label: AppLocalizations.of(context)!.rose,
                           icon: Icons.filter_vintage_rounded,
-                          color: const Color(0xFFF472B6), // Rose doux
-                          count: myHand.where((c) => c == 'Rose').length,
+                          color: Color(0xFFF472B6), // Rose doux
+                          count: myHand.where((c) => c == AppLocalizations.of(context)!.rose1).length,
                           isMyTurn: isMyTurn,
                           onTap: () {
                             HapticFeedback.lightImpact();
@@ -47360,13 +47359,13 @@ AppLocalizations.of(context)!.stre93cb0,
                                 });
                           },
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16),
                         _buildSkullDiscCard(
                           type: AppLocalizations.of(context)!.crane1,
                           label: AppLocalizations.of(context)!.crane,
                           icon: Icons.coronavirus_rounded,
-                          color: const Color(0xFFEF4444), // Rouge crâne
-                          count: myHand.where((c) => c == 'Crane').length,
+                          color: Color(0xFFEF4444), // Rouge crâne
+                          count: myHand.where((c) => c == AppLocalizations.of(context)!.crane1).length,
                           isMyTurn: isMyTurn,
                           onTap: () {
                             HapticFeedback.mediumImpact();
@@ -47386,18 +47385,18 @@ AppLocalizations.of(context)!.stre93cb0,
                       ],
                     ),
                     if (isMyTurn && totalCardsOnTables > 0) ...[
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       SizedBox(
                         width: double.infinity,
                         height: 48,
                         child: OutlinedButton.icon(
-                          icon: const Icon(Icons.flash_on_rounded, size: 18),
+                          icon: Icon(Icons.flash_on_rounded, size: 18),
                           label: Text(
                             AppLocalizations.of(context)!.lancerLeDefiEnchere,
                           ),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.amberAccent,
-                            side: const BorderSide(
+                            side: BorderSide(
                               color: Colors.amberAccent,
                               width: 1.5,
                             ),
@@ -47433,13 +47432,13 @@ AppLocalizations.of(context)!.stre93cb0,
                             child: SizedBox(
                               height: 50,
                               child: OutlinedButton.icon(
-                                icon: const Icon(Icons.close_rounded),
+                                icon: Icon(Icons.close_rounded),
                                 label: Text(
                                   AppLocalizations.of(context)!.passer1,
                                 ),
                                 style: OutlinedButton.styleFrom(
                                   foregroundColor: Colors.redAccent,
-                                  side: const BorderSide(
+                                  side: BorderSide(
                                     color: Colors.redAccent,
                                     width: 1.5,
                                   ),
@@ -47462,12 +47461,12 @@ AppLocalizations.of(context)!.stre93cb0,
                               ),
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          SizedBox(width: 12),
                           Expanded(
                             child: SizedBox(
                               height: 50,
                               child: ElevatedButton.icon(
-                                icon: const Icon(Icons.trending_up_rounded),
+                                icon: Icon(Icons.trending_up_rounded),
                                 label: Text(
                                   AppLocalizations.of(context)!.surencherir,
                                 ),
@@ -47554,7 +47553,7 @@ AppLocalizations.of(context)!.stre93cb0,
       child: GestureDetector(
         onTap: canInteract ? onTap : null,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -47580,7 +47579,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       BoxShadow(
                         color: color.withOpacity(0.2),
                         blurRadius: 10,
-                        offset: const Offset(0, 4),
+                        offset: Offset(0, 4),
                       ),
                     ]
                     : [],
@@ -47620,7 +47619,7 @@ AppLocalizations.of(context)!.stre93cb0,
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Icon(icon, size: 38, color: hasCard ? color : Colors.white24),
             ],
           ),
@@ -47691,7 +47690,7 @@ AppLocalizations.of(context)!.stre93cb0,
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
               AppLocalizations.of(context)!.str4c885c(AppLocalizations.of(context)!.motADessiner, currentPictionaryWord != null ? GameUiLocalization.tr(context, currentPictionaryWord) : "..."),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.amberAccent,
@@ -47914,7 +47913,7 @@ AppLocalizations.of(context)!.stre93cb0,
                         if (pictionaryOnly30Strokes && amIDrawingPlayer) ...[
                           SizedBox(width: 8),
                           Text(
-                            "$_pictionaryStrokeCount/30 ${"traits"}",
+                            AppLocalizations.of(context)!.pictionarystrokecount30traits"}",
                             style: TextStyle(
                               color:
                                   drawingBlocked ? Colors.red : Colors.black54,
@@ -48074,14 +48073,14 @@ AppLocalizations.of(context)!.stre93cb0,
     if (gameData['gameState'] == 'gameOver') {
       String rating =
           totalScore >= 12
-              ? '🏆 ${"Légendaire !"}'
+              ? AppLocalizations.of(context)!.stre9f4a5
               : totalScore >= 10
-              ? '⭐ ${"Excellent !"}'
+              ? AppLocalizations.of(context)!.str21f597
               : totalScore >= 7
-              ? '👍 ${"Bien joué !"}'
+              ? AppLocalizations.of(context)!.str59ee4e
               : totalScore >= 4
-              ? '😅 ${"Pas mal !"}'
-              : '💪 ${"On peut mieux faire !"}';
+              ? AppLocalizations.of(context)!.strb6f91d
+              : AppLocalizations.of(context)!.strc0046c;
       bool isHost = gameData['hostId'] == playerId;
       return Center(
         child: Card(
@@ -48103,7 +48102,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "$totalScore / $deckTotal",
+                  AppLocalizations.of(context)!.totalscoreDecktotal,
                   style: TextStyle(
                     fontSize: 64,
                     fontWeight: FontWeight.bold,
@@ -48158,14 +48157,14 @@ AppLocalizations.of(context)!.stre93cb0,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "${"Carte"} $deckIndex / $deckTotal",
+                  "${"CarteAppLocalizations.of(context)!.deckindexDecktotal,
                   style: TextStyle(color: Colors.white54, fontSize: 14),
                 ),
                 SizedBox(height: 12),
                 Text(
                   wasCorrect
-                      ? "✅ ${'Bravo !'}"
-                      : "❌ ${'Raté !'}",
+                      ? AppLocalizations.of(context)!.str85bff7
+                      : AppLocalizations.of(context)!.strfa1b8c,
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -48175,14 +48174,14 @@ AppLocalizations.of(context)!.stre93cb0,
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "${"Le mot était :"} ${justOneCurrentWord ?? ''}",
+                  "${"Le mot était :AppLocalizations.of(context)!.strf150cd,
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
                 if (answer.isNotEmpty)
                   Text(
-                    "${"Réponse de"} $guesserName : \"$answer\"",
-                    style: const TextStyle(color: Colors.white70),
+                    "${"Réponse deAppLocalizations.of(context)!.guessernameAnswer,
+                    style: TextStyle(color: Colors.white70),
                     textAlign: TextAlign.center,
                   ),
                 SizedBox(height: 16),
@@ -48193,7 +48192,7 @@ AppLocalizations.of(context)!.stre93cb0,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    "${"Score"} : $totalScore / $deckIndex",
+                    "${"ScoreAppLocalizations.of(context)!.totalscoreDeckindex,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -48228,7 +48227,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 if (!isHost)
                   Text(
                     AppLocalizations.of(context)!.enAttenteDeLHote5,
-                    style: const TextStyle(color: Colors.white54),
+                    style: TextStyle(color: Colors.white54),
                   ),
               ],
             ),
@@ -48245,7 +48244,7 @@ AppLocalizations.of(context)!.stre93cb0,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "🤫 ${'Chut ! Ferme les yeux'} 🙈",
+                AppLocalizations.of(context)!.str487ca1,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               SizedBox(height: 8),
@@ -48260,7 +48259,7 @@ AppLocalizations.of(context)!.stre93cb0,
               ),
               SizedBox(height: 30),
               _buildWaitingWidget(
-                "${"Indices soumis"} : ${justOneClues.length} / ${players.length - 1}",
+                "${"Indices soumisAppLocalizations.of(context)!.strf4cf64,
                 players,
                 justOneClues.length,
                 players.length - 1,
@@ -48378,7 +48377,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "${"Le mot est :"} ${justOneCurrentWord}",
+                  "${"Le mot est :AppLocalizations.of(context)!.strd25123,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(height: 20),
@@ -48402,7 +48401,7 @@ AppLocalizations.of(context)!.stre93cb0,
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.aieTousLesIndicesEtaient,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -48455,7 +48454,7 @@ AppLocalizations.of(context)!.stre93cb0,
         }
 
       default:
-        return _buildWaitingWidget("Chargement...", players, 0, 0);
+        return _buildWaitingWidget(AppLocalizations.of(context)!.chargement, players, 0, 0);
     }
   }
 
@@ -48585,7 +48584,7 @@ AppLocalizations.of(context)!.stre93cb0,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${"Manche"} $currentRound",
+                "${"MancheAppLocalizations.of(context)!.currentround,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
               Row(
@@ -48628,7 +48627,7 @@ AppLocalizations.of(context)!.stre93cb0,
               Text(
                 isMyTurn
                     ? AppLocalizations.of(context)!.cEstAToi
-                    : "${"Au tour de"} $currentPotatoPlayerName",
+                    : "${"Au tour deAppLocalizations.of(context)!.currentpotatoplayername,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: isMyTurn ? Colors.redAccent : Colors.white,
@@ -48699,7 +48698,7 @@ AppLocalizations.of(context)!.stre93cb0,
               children: [
                 Text(
                   AppLocalizations.of(context)!.categorie,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white70,
                     letterSpacing: 2,
                   ),
@@ -48761,7 +48760,7 @@ AppLocalizations.of(context)!.stre93cb0,
             padding: const EdgeInsets.all(16.0),
             child: Text(
               AppLocalizations.of(context)!.prepareTaReponsePendantQue,
-              style: const TextStyle(
+              style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white38,
               ),
@@ -48820,7 +48819,7 @@ AppLocalizations.of(context)!.stre93cb0,
           content: Text(
             GameMessageLocalization.tr(
               context,
-              e.toString().replaceAll('Exception: ', ''),
+              e.toString().replaceAll(AppLocalizations.of(context)!.exception, ''),
             ),
           ),
         ),
@@ -48880,7 +48879,7 @@ AppLocalizations.of(context)!.stre93cb0,
         ),
         SizedBox(height: 20),
         Text(
-          "$loserName ${"a perdu !"}",
+          AppLocalizations.of(context)!.losernamea perdu !"}",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 10),
@@ -48892,7 +48891,7 @@ AppLocalizations.of(context)!.stre93cb0,
           SizedBox(height: 20),
           Text(
             AppLocalizations.of(context)!.scoresMoinsMieux,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           SizedBox(height: 8),
           ...sortedScores.map(
@@ -48932,7 +48931,7 @@ AppLocalizations.of(context)!.stre93cb0,
         else
           Text(
             AppLocalizations.of(context)!.enAttenteDeLHote2,
-            style: const TextStyle(
+            style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
             ),
@@ -48954,7 +48953,7 @@ AppLocalizations.of(context)!.stre93cb0,
       for (int i = logs.length - 1; i >= 0; i--) {
         String log = logs[i].toString();
         morningLogs.insert(0, log);
-        if (log.contains("Le soleil se lève")) break;
+        if (log.contains(AppLocalizations.of(context)!.leSoleilSeLeve)) break;
       }
       return morningLogs.join("\n\n");
     } else if (phase == 'jour_vote') {
@@ -49042,7 +49041,7 @@ AppLocalizations.of(context)!.stre93cb0,
             _lgTransitionText = _getLgTransitionLogs(phase, subPhase, gameLog);
             if (_lgTransitionText.isNotEmpty) {
               _showLgTransition = true;
-              Timer(const Duration(seconds: 3), () {
+              Timer(Duration(seconds: 3), () {
                 if (mounted) setState(() => _showLgTransition = false);
               });
             }
@@ -49063,7 +49062,7 @@ AppLocalizations.of(context)!.stre93cb0,
         votesReceived.putIfAbsent(targetId, () => []).add(voterName);
       });
 
-      if (myRole == 'Mentaliste' && myStatus == 'vivant') {
+      if (myRole == AppLocalizations.of(context)!.mentaliste && myStatus == 'vivant') {
         String? topTarget;
         int topVotes = 0;
         votesReceived.forEach((target, voters) {
@@ -49111,25 +49110,25 @@ AppLocalizations.of(context)!.stre93cb0,
       if (phase == 'nuit') {
         switch (subPhase) {
           case 'cupidon_turn':
-            return myRole == 'Cupidon' &&
+            return myRole == AppLocalizations.of(context)!.cupidon &&
                 myStatus == 'vivant' &&
                 lovers.isEmpty &&
                 !lovers.contains(targetId);
           case 'heritier_turn':
-            return myRole == 'Héritier' &&
+            return myRole == AppLocalizations.of(context)!.heritier &&
                 myStatus == 'vivant' &&
                 myData['testateurId'] == null;
           case 'garde_turn':
-            return myRole == 'Garde' &&
+            return myRole == AppLocalizations.of(context)!.garde &&
                 myStatus == 'vivant' &&
                 nightActions['gardeActed'] != true &&
                 myData['lastProtectedId'] != targetId;
           case 'voyante_turn':
-            return myRole == 'Voyante' &&
+            return myRole == AppLocalizations.of(context)!.voyante &&
                 myStatus == 'vivant' &&
                 nightActions['voyanteActed'] != true;
           case 'rat_malade_turn':
-            return myRole == 'Rat Malade' &&
+            return myRole == AppLocalizations.of(context)!.ratMalade &&
                 myStatus == 'vivant' &&
                 !contaminatedPlayers.contains(targetId);
           case 'loups_turn':
@@ -49137,21 +49136,21 @@ AppLocalizations.of(context)!.stre93cb0,
                 GameData.roleCamps[playerData[targetId]?['role']] == 'loups' ||
                 playerData[targetId]?['infectionStatus'] == 'infecte';
             if (amILoup && myStatus == 'vivant') return !targetIsLoup;
-            if (myRole == 'Petite Fille' && myStatus == 'vivant' && !amILoup)
+            if (myRole == AppLocalizations.of(context)!.petiteFille && myStatus == 'vivant' && !amILoup)
               return true;
             return false;
           case 'loup_blanc_turn':
-            return myRole == 'Loup Blanc' &&
+            return myRole == AppLocalizations.of(context)!.loupBlanc &&
                 myStatus == 'vivant' &&
                 nightNumber % 2 != 0 &&
                 nightActions['loupBlancActed'] != true;
           case 'sorciere_turn':
-            return myRole == 'Sorcière' &&
+            return myRole == AppLocalizations.of(context)!.sorciere &&
                 myStatus == 'vivant' &&
                 _lgActionMode == 'poison' &&
                 myData['potions']?['poison'] == true;
           case 'pyromancien_turn':
-            return myRole == 'Pyromancien' &&
+            return myRole == AppLocalizations.of(context)!.pyromancien &&
                 myStatus == 'vivant' &&
                 _lgActionMode == 'placer_tonneau';
         }
@@ -49221,7 +49220,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 targetId,
               );
             }
-            if (myRole == 'Petite Fille')
+            if (myRole == AppLocalizations.of(context)!.petiteFille)
               await _firebaseService.petiteFilleSpy(
                 widget.gameCode,
                 playerId,
@@ -49329,7 +49328,7 @@ AppLocalizations.of(context)!.stre93cb0,
         case 'cupidon_turn':
           promptText =
               lovers.isEmpty ? AppLocalizations.of(context)!.designez2Amoureux : AppLocalizations.of(context)!.amoureuxUnis;
-          if (myRole == 'Cupidon' && myStatus == 'vivant' && lovers.isEmpty) {
+          if (myRole == AppLocalizations.of(context)!.cupidon && myStatus == 'vivant' && lovers.isEmpty) {
             centerActionWidget = _buildActionButton(
               label: GameContentLocalization.format(context, AppLocalizations.of(context)!.validerLeCouple2, [_lgLocalSelection.length.toString()]),
               icon: Icons.favorite,
@@ -49356,7 +49355,7 @@ AppLocalizations.of(context)!.stre93cb0,
           break;
         case 'heritier_turn':
           promptText = AppLocalizations.of(context)!.lHeritierChoisitSonTestament;
-          if (myRole == 'Héritier' &&
+          if (myRole == AppLocalizations.of(context)!.heritier &&
               myStatus == 'vivant' &&
               myData['testateurId'] == null) {
             promptText = AppLocalizations.of(context)!.selectionnezVotreTestateur;
@@ -49364,7 +49363,7 @@ AppLocalizations.of(context)!.stre93cb0,
           break;
         case 'garde_turn':
           promptText = AppLocalizations.of(context)!.leGardeProtegeUnVillageois;
-          if (myRole == 'Garde' &&
+          if (myRole == AppLocalizations.of(context)!.garde &&
               myStatus == 'vivant' &&
               nightActions['gardeActed'] != true) {
             promptText = AppLocalizations.of(context)!.selectionnezQuiProteger;
@@ -49372,7 +49371,7 @@ AppLocalizations.of(context)!.stre93cb0,
           break;
         case 'voyante_turn':
           promptText = AppLocalizations.of(context)!.laVoyanteConsulteLesAstres;
-          if (myRole == 'Voyante' &&
+          if (myRole == AppLocalizations.of(context)!.voyante &&
               myStatus == 'vivant' &&
               nightActions['voyanteActed'] != true) {
             promptText = AppLocalizations.of(context)!.touchezUnJoueurPourSonder;
@@ -49380,7 +49379,7 @@ AppLocalizations.of(context)!.stre93cb0,
           break;
         case 'rat_malade_turn':
           promptText = AppLocalizations.of(context)!.leRatMaladeRode;
-          if (myRole == 'Rat Malade' && myStatus == 'vivant') {
+          if (myRole == AppLocalizations.of(context)!.ratMalade && myStatus == 'vivant') {
             promptText = AppLocalizations.of(context)!.contaminezJusquA2Joueurs;
             centerActionWidget = _buildActionButton(
               label: GameContentLocalization.format(context, AppLocalizations.of(context)!.contaminer, [_lgLocalSelection.length.toString()]),
@@ -49408,7 +49407,7 @@ AppLocalizations.of(context)!.stre93cb0,
           promptText = AppLocalizations.of(context)!.lesLoupsChassentEnMeute;
           if (amILoup && myStatus == 'vivant')
             promptText = AppLocalizations.of(context)!.votezPourDevorerUneProie;
-          if (myRole == 'Petite Fille' && myStatus == 'vivant' && !amILoup)
+          if (myRole == AppLocalizations.of(context)!.petiteFille && myStatus == 'vivant' && !amILoup)
             promptText = AppLocalizations.of(context)!.espionnezUnJoueur;
           break;
         case 'loup_noir_action':
@@ -49417,9 +49416,9 @@ AppLocalizations.of(context)!.stre93cb0,
               playerData.entries
                   .firstWhere(
                     (e) =>
-                        e.value['role'] == 'Loup Noir' &&
+                        e.value['role'] == AppLocalizations.of(context)!.loupNoir &&
                         e.value['status'] == 'vivant',
-                    orElse: () => const MapEntry('', {}),
+                    orElse: () => MapEntry('', {}),
                   )
                   .key;
           if (loupNoirId == playerId &&
@@ -49429,7 +49428,7 @@ AppLocalizations.of(context)!.stre93cb0,
             String targetName =
                 playerData[nightActions['loupTarget']]?['name'] ?? AppLocalizations.of(context)!.laVictime;
             promptText = AppLocalizations.of(context)!.infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(targetName);
-          if (myRole == 'Loup Blanc' &&
+          if (myRole == AppLocalizations.of(context)!.loupBlanc &&
               myStatus == 'vivant' &&
               nightNumber % 2 != 0 &&
               nightActions['loupBlancActed'] != true) {
@@ -49438,7 +49437,7 @@ AppLocalizations.of(context)!.stre93cb0,
           break;
         case 'sorciere_turn':
           promptText = AppLocalizations.of(context)!.laSorcierePrepareSesPotions;
-          if (myRole == 'Sorcière' &&
+          if (myRole == AppLocalizations.of(context)!.sorciere &&
               myStatus == 'vivant' &&
               nightActions['sorciereActed'] != true) {
             final victimeId = nightActions['loupTarget'];
@@ -49503,7 +49502,7 @@ AppLocalizations.of(context)!.stre93cb0,
           break;
         case 'pyromancien_turn':
           promptText = AppLocalizations.of(context)!.lePyromancienPrepareSesExplosifs;
-          if (myRole == 'Pyromancien' && myStatus == 'vivant') {
+          if (myRole == AppLocalizations.of(context)!.pyromancien && myStatus == 'vivant') {
             centerActionWidget = Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -49523,7 +49522,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                     : 'placer_tonneau',
                       ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 _buildActionButton(
                   label: AppLocalizations.of(context)!.faireExploser,
                   icon: Icons.local_fire_department,
@@ -49552,7 +49551,7 @@ AppLocalizations.of(context)!.stre93cb0,
       } else if (subPhase == 'dictateur_coup') {
         promptText = AppLocalizations.of(context)!.coupDEtatDuDictateur;
       } else {
-        if (myRole == 'Dictateur' &&
+        if (myRole == AppLocalizations.of(context)!.dictateur &&
             myStatus == 'vivant' &&
             !(myData['powerUsed'] ?? false) &&
             !(gameData['dictatorUsed'] ?? false)) {
@@ -49598,14 +49597,14 @@ AppLocalizations.of(context)!.stre93cb0,
             gameLog.isNotEmpty
                 ? GameMessageLocalization.tr(context, gameLog.last.toString())
                 : AppLocalizations.of(context)!.finDuJeu,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 13,
               fontWeight: FontWeight.w600,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -49616,7 +49615,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 onPressed: () => _exitGame(),
               ),
               if (isHost) ...[
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 _buildActionButton(
                   label: AppLocalizations.of(context)!.rejouer,
                   icon: Icons.replay,
@@ -49632,7 +49631,7 @@ AppLocalizations.of(context)!.stre93cb0,
       );
     }
 
-    final bool canSeeLovers = lovers.contains(playerId) || myRole == 'Cupidon';
+    final bool canSeeLovers = lovers.contains(playerId) || myRole == AppLocalizations.of(context)!.cupidon;
 
     return Container(
       decoration: BoxDecoration(
@@ -49641,8 +49640,8 @@ AppLocalizations.of(context)!.stre93cb0,
           radius: 1.1,
           colors:
               isNight
-                  ? [Color(0xFF0F172A), const Color(0xFF020617)]
-                  : [const Color(0xFF1E293B), const Color(0xFF0F172A)],
+                  ? [Color(0xFF0F172A), Color(0xFF020617)]
+                  : [Color(0xFF1E293B), Color(0xFF0F172A)],
         ),
       ),
       child: Stack(
@@ -49761,11 +49760,11 @@ AppLocalizations.of(context)!.stre93cb0,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          const Text("🐺", style: TextStyle(fontSize: 10)),
-                                          const SizedBox(width: 2),
+                                          Text("🐺", style: TextStyle(fontSize: 10)),
+                                          SizedBox(width: 2),
                                           Text(
                                             targetingWolves.first,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 9,
                                               fontWeight: FontWeight.bold,
@@ -49795,14 +49794,14 @@ AppLocalizations.of(context)!.stre93cb0,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFF0F172A).withOpacity(0.8),
+                color: Color(0xFF0F172A).withOpacity(0.8),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: Colors.white.withOpacity(0.08)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 10,
-                    offset: const Offset(0, 4),
+                    offset: Offset(0, 4),
                   ),
                 ],
               ),
@@ -49826,7 +49825,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       color: isNight ? Colors.cyanAccent : Colors.amberAccent,
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  SizedBox(width: 10),
 
                   // Texte de consigne & rôle
                   Expanded(
@@ -49836,7 +49835,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       children: [
                         Text(
                           promptText,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -49848,7 +49847,7 @@ AppLocalizations.of(context)!.stre93cb0,
                             myPrivateInfo.toString().trim().isNotEmpty)
                           Text(
                             myPrivateInfo.toString(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.lightBlueAccent,
                               fontSize: 10,
                             ),
@@ -49883,8 +49882,8 @@ AppLocalizations.of(context)!.stre93cb0,
                       style: TextStyle(
                         color:
                             amILoup
-                                ? const Color(0xFFFCA5A5)
-                                : const Color(0xFFDDD6FE),
+                                ? Color(0xFFFCA5A5)
+                                : Color(0xFFDDD6FE),
                         fontWeight: FontWeight.bold,
                         fontSize: 11,
                       ),
@@ -49909,7 +49908,7 @@ AppLocalizations.of(context)!.stre93cb0,
             Positioned.fill(
               child: AnimatedOpacity(
                 opacity: _showLgTransition ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 400),
+                duration: Duration(milliseconds: 400),
                 child: Container(
                   color: Colors.black.withOpacity(0.85),
                   child: Center(
@@ -49950,7 +49949,7 @@ AppLocalizations.of(context)!.stre93cb0,
       icon: Icon(icon, size: 14, color: Colors.white),
       label: Text(
         label,
-        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
       ),
       style: ElevatedButton.styleFrom(
         backgroundColor: color.withOpacity(0.85),
@@ -49995,7 +49994,7 @@ AppLocalizations.of(context)!.stre93cb0,
         (isLoupRole || isInfected);
 
     Color borderColor = Colors.white.withOpacity(0.15);
-    Color bgColor = const Color(0xFF1E293B);
+    Color bgColor = Color(0xFF1E293B);
 
     if (isDead) {
       bgColor = Colors.black.withOpacity(0.6);
@@ -50006,7 +50005,7 @@ AppLocalizations.of(context)!.stre93cb0,
       borderColor = Colors.cyanAccent;
     } else if (showWolfGlow) {
       borderColor = Colors.redAccent.withOpacity(0.8);
-      bgColor = const Color(0xFF450A0A);
+      bgColor = Color(0xFF450A0A);
     } else if (isMe) {
       borderColor = Colors.deepPurpleAccent.withOpacity(0.8);
     }
@@ -50022,7 +50021,7 @@ AppLocalizations.of(context)!.stre93cb0,
             children: [
               // Avatar Circle
               AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
+                duration: Duration(milliseconds: 200),
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
@@ -50049,7 +50048,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 child: Center(
                   child:
                       isDead
-                          ? const Icon(
+                          ? Icon(
                             Icons.close_rounded,
                             size: 20,
                             color: Colors.white38,
@@ -50072,11 +50071,11 @@ AppLocalizations.of(context)!.stre93cb0,
                   right: -4,
                   child: Container(
                     padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.amber,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.star_rounded,
                       size: 10,
                       color: Colors.black,
@@ -50091,11 +50090,11 @@ AppLocalizations.of(context)!.stre93cb0,
                   right: -4,
                   child: Container(
                     padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.pinkAccent,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.favorite_rounded,
                       size: 10,
                       color: Colors.white,
@@ -50110,11 +50109,11 @@ AppLocalizations.of(context)!.stre93cb0,
                   left: -4,
                   child: Container(
                     padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.purpleAccent,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.coronavirus_rounded,
                       size: 10,
                       color: Colors.white,
@@ -50129,11 +50128,11 @@ AppLocalizations.of(context)!.stre93cb0,
                   left: -4,
                   child: Container(
                     padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.lightGreenAccent,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.bubble_chart_rounded,
                       size: 10,
                       color: Colors.black,
@@ -50142,7 +50141,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 ),
             ],
           ),
-          const SizedBox(height: 3),
+          SizedBox(height: 3),
 
           // Nom du joueur
           SizedBox(
@@ -50171,7 +50170,7 @@ AppLocalizations.of(context)!.stre93cb0,
               ),
               child: Text(
                 "${voters.length}",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 9,
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
@@ -50200,7 +50199,7 @@ AppLocalizations.of(context)!.stre93cb0,
         myData['infectionStatus'] == 'infecte';
     final bool amIDead = myStatus == 'mort';
     final bool amILover = (gameData['lovers'] ?? []).contains(playerId);
-    final bool amINecromancer = myRole == 'Nécromancien';
+    final bool amINecromancer = myRole == AppLocalizations.of(context)!.necromancien;
     final List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
     List<dynamic> currentChatMessages = [];
     bool canSendMessage = false;
@@ -50223,7 +50222,7 @@ AppLocalizations.of(context)!.stre93cb0,
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: const Color(0xFF0B1120).withOpacity(0.75),
+        color: Color(0xFF0B1120).withOpacity(0.75),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.white.withOpacity(0.08)),
       ),
@@ -50237,21 +50236,21 @@ AppLocalizations.of(context)!.stre93cb0,
               children: [
                 _buildChatTab(AppLocalizations.of(context)!.village, 'global', Colors.blueAccent),
                 if (amILoup || (amIDead && amILoup)) ...[
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4),
                   _buildChatTab(AppLocalizations.of(context)!.loups, 'wolf', Colors.redAccent),
                 ],
                 if (amIDead || amINecromancer) ...[
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4),
                   _buildChatTab(AppLocalizations.of(context)!.outreTombe, 'dead', Colors.purpleAccent),
                 ],
                 if (amILover && lovers.length == 2) ...[
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4),
                   _buildChatTab(AppLocalizations.of(context)!.amoureux, 'lover', Colors.pinkAccent),
                 ],
               ],
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
 
           // Messages
           Expanded(
@@ -50261,7 +50260,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 final docs = snapshot.hasData ? snapshot.data!.docs : [];
                 return ListView.builder(
                   reverse: false,
-                  physics: const BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
                     final messageData =
@@ -50275,7 +50274,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       padding: const EdgeInsets.symmetric(vertical: 1.5),
                       child: RichText(
                         text: TextSpan(
-                          style: const TextStyle(fontSize: 11, color: Colors.white),
+                          style: TextStyle(fontSize: 11, color: Colors.white),
                           children: [
                             TextSpan(
                               text: isMine ? "${"Moi"}: " : AppLocalizations.of(context)!.applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(senderName),
@@ -50298,7 +50297,7 @@ AppLocalizations.of(context)!.stre93cb0,
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
-            color: isMyTurn ? const Color(0xFF261E3E) : const Color(0xFF14141E),
+            color: isMyTurn ? Color(0xFF261E3E) : Color(0xFF14141E),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color:
@@ -50335,7 +50334,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       color: isMyTurn ? Colors.greenAccent : Colors.white60,
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -50357,7 +50356,7 @@ AppLocalizations.of(context)!.stre93cb0,
                         isTeamMode
                             ? AppLocalizations.of(context)!.mode2v2Allies
                             : AppLocalizations.of(context)!.courseIndividuelle,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 10,
                           color: Colors.white38,
                         ),
@@ -50381,15 +50380,15 @@ AppLocalizations.of(context)!.stre93cb0,
                   ),
                   child: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.bolt_rounded,
                         size: 13,
                         color: Colors.amberAccent,
                       ),
-                      const SizedBox(width: 2),
+                      SizedBox(width: 2),
                       Text(
                         AppLocalizations.of(context)!.k6Consecutifs3,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                           color: Colors.amberAccent,
@@ -50469,7 +50468,7 @@ AppLocalizations.of(context)!.stre93cb0,
                           BoxShadow(
                             color: Colors.black.withOpacity(0.7),
                             blurRadius: 20,
-                            offset: const Offset(0, 8),
+                            offset: Offset(0, 8),
                           ),
                         ],
                       ),
@@ -50506,7 +50505,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                       ),
                                     ],
                                   ),
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.gps_fixed,
                                     color: Colors.amberAccent,
                                     size: 16,
@@ -50585,7 +50584,7 @@ AppLocalizations.of(context)!.stre93cb0,
         Container(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
           decoration: BoxDecoration(
-            color: const Color(0xFF101018),
+            color: Color(0xFF101018),
             borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
             border: Border.all(color: Colors.white10),
           ),
@@ -50679,7 +50678,7 @@ AppLocalizations.of(context)!.stre93cb0,
                           label: Text(AppLocalizations.of(context)!.passer),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.white60,
-                            side: const BorderSide(color: Colors.white24),
+                            side: BorderSide(color: Colors.white24),
                             padding: const EdgeInsets.symmetric(
                               horizontal: 14,
                               vertical: 8,
@@ -50710,7 +50709,7 @@ AppLocalizations.of(context)!.stre93cb0,
                   else
                     Row(
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 14,
                           height: 14,
                           child: CircularProgressIndicator(
@@ -50718,10 +50717,10 @@ AppLocalizations.of(context)!.stre93cb0,
                             color: Colors.white38,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.reflechit,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white54,
                             fontSize: 12,
                             fontStyle: FontStyle.italic,
@@ -50793,7 +50792,7 @@ AppLocalizations.of(context)!.stre93cb0,
         builder:
             (ctx) => Container(
               padding: const EdgeInsets.all(24),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Color(0xFF1E1E2C),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
               ),
@@ -50802,26 +50801,26 @@ AppLocalizations.of(context)!.stre93cb0,
                 children: [
                   Text(
                     oppName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Text(
                     AppLocalizations.of(context)!.scorePoints,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       color: Colors.amberAccent,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Text(
                     AppLocalizations.of(context)!.dominosRestants,
-                    style: const TextStyle(color: Colors.white70),
+                    style: TextStyle(color: Colors.white70),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   Wrap(
                     spacing: 4,
                     runSpacing: 4,
@@ -50838,7 +50837,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                 ],
               ),
             ),
@@ -50924,13 +50923,13 @@ AppLocalizations.of(context)!.stre93cb0,
               children: [
                 Text(
                   AppLocalizations.of(context)!.mancheTerminee,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.amberAccent,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 if (isHost)
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -50948,7 +50947,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 else
                   Text(
                     AppLocalizations.of(context)!.enAttenteDeLHote1,
-                    style: const TextStyle(color: Colors.white70, fontSize: 13),
+                    style: TextStyle(color: Colors.white70, fontSize: 13),
                   ),
               ],
             ),
@@ -51010,12 +51009,12 @@ AppLocalizations.of(context)!.stre93cb0,
                                 style: TextStyle(
                                   color:
                                       isActive
-                                          ? const Color(0xFF6ee7b7)
+                                          ? Color(0xFF6ee7b7)
                                           : Colors.white70,
                                   fontSize: 12,
                                 ),
                               ),
-                              const SizedBox(width: 6),
+                              SizedBox(width: 6),
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 4,
@@ -51026,7 +51025,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text(
-                                  '${(hands[pId] as List?)?.length ?? 0}',
+                                  AppLocalizations.of(context)!.strd83364,
                                   style: TextStyle(
                                     fontSize: 10,
                                     color: Colors.amber,
@@ -51052,10 +51051,10 @@ AppLocalizations.of(context)!.stre93cb0,
             children: [
               Text(
                 AppLocalizations.of(context)!.extremites,
-                style: const TextStyle(color: Colors.white38, fontSize: 11),
+                style: TextStyle(color: Colors.white38, fontSize: 11),
               ),
               if (openEnds.isEmpty)
-                const Text(
+                Text(
                   "—",
                   style: TextStyle(color: Colors.white24, fontSize: 11),
                 )
@@ -51068,15 +51067,15 @@ AppLocalizations.of(context)!.stre93cb0,
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF34d399).withOpacity(0.15),
+                      color: Color(0xFF34d399).withOpacity(0.15),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: const Color(0xFF34d399).withOpacity(0.35),
+                        color: Color(0xFF34d399).withOpacity(0.35),
                       ),
                     ),
                     child: Text(
                       '$e',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Color(0xFF6ee7b7),
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
@@ -51084,8 +51083,8 @@ AppLocalizations.of(context)!.stre93cb0,
                     ),
                   ),
                 ),
-              const Spacer(),
-              if (mode == 'pioche')
+              Spacer(),
+              if (mode == AppLocalizations.of(context)!.pioche3)
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 10,
@@ -51097,7 +51096,7 @@ AppLocalizations.of(context)!.stre93cb0,
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.pioche2,
-                    style: const TextStyle(color: Colors.white38, fontSize: 11),
+                    style: TextStyle(color: Colors.white38, fontSize: 11),
                   ),
                 ),
             ],
@@ -51110,7 +51109,7 @@ AppLocalizations.of(context)!.stre93cb0,
           child: Container(
             margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFF3a7bd5),
+              color: Color(0xFF3a7bd5),
               borderRadius: BorderRadius.circular(16),
             ),
             child: ClipRRect(
@@ -51177,22 +51176,22 @@ AppLocalizations.of(context)!.stre93cb0,
                         child: Text(
                           isMyTurn
                               ? AppLocalizations.of(context)!.cEstVotreTour
-                              : "${'Tour de'} ${players[currentPlayerId]?['name'] ?? '...'}",
+                              : AppLocalizations.of(context)!.streabdaf,
                           style: TextStyle(
                             color:
                                 isMyTurn
-                                    ? const Color(0xFF34d399)
+                                    ? Color(0xFF34d399)
                                     : Colors.white38,
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
-                      const Spacer(),
+                      Spacer(),
                       // Bouton pioche
                       if (isMyTurn &&
                           !roundOver &&
-                          mode == 'pioche' &&
+                          mode == AppLocalizations.of(context)!.pioche3 &&
                           boneyard.isNotEmpty &&
                           !hasPlayableTile())
                         TextButton(
@@ -51208,7 +51207,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                   ),
                           child: Text(
                             AppLocalizations.of(context)!.piocher,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white70,
                               fontSize: 12,
                             ),
@@ -51217,7 +51216,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       // Bouton passer
                       if (isMyTurn &&
                           !roundOver &&
-                          (boneyard.isEmpty || mode != 'pioche') &&
+                          (boneyard.isEmpty || mode != AppLocalizations.of(context)!.pioche3) &&
                           !hasPlayableTile())
                         TextButton(
                           onPressed:
@@ -51232,7 +51231,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                   ),
                           child: Text(
                             AppLocalizations.of(context)!.passer,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.redAccent,
                               fontSize: 12,
                             ),
@@ -51300,14 +51299,14 @@ AppLocalizations.of(context)!.stre93cb0,
       final rawName = pMap?['name'];
       if (rawName != null &&
           rawName.toString().trim().isNotEmpty &&
-          rawName != 'Inconnu') {
+          rawName != AppLocalizations.of(context)!.inconnu) {
         return rawName.toString();
       }
       final profName =
           playerProfiles[pId] is Map ? playerProfiles[pId]['name'] : null;
       if (profName != null &&
           profName.toString().trim().isNotEmpty &&
-          profName != 'Inconnu') {
+          profName != AppLocalizations.of(context)!.inconnu) {
         return profName.toString();
       }
       if (pId == playerId) {
@@ -51321,7 +51320,7 @@ AppLocalizations.of(context)!.stre93cb0,
       if (!players.containsKey(pId) || players[pId] is! Map) {
         players[pId] = {'name': getPlayerName(pId), 'score': 0};
       } else if (players[pId]['name'] == null ||
-          players[pId]['name'] == 'Inconnu') {
+          players[pId]['name'] == AppLocalizations.of(context)!.inconnu) {
         players[pId]['name'] = getPlayerName(pId);
       }
     }
@@ -51352,19 +51351,19 @@ AppLocalizations.of(context)!.stre93cb0,
         calcBonus(s);
 
     const List<String> categories = [
-      'As',
-      'Deux',
-      'Trois',
-      'Quatre',
-      'Cinq',
-      'Six',
-      'Brelan',
-      'Carré',
-      'Full',
-      'Petite Suite',
-      'Grande Suite',
+      AppLocalizations.of(context)!.asLabel,
+      AppLocalizations.of(context)!.deux,
+      AppLocalizations.of(context)!.trois,
+      AppLocalizations.of(context)!.quatre,
+      AppLocalizations.of(context)!.cinq,
+      AppLocalizations.of(context)!.six,
+      AppLocalizations.of(context)!.brelan,
+      AppLocalizations.of(context)!.carre,
+      AppLocalizations.of(context)!.full,
+      AppLocalizations.of(context)!.petiteSuite,
+      AppLocalizations.of(context)!.grandeSuite,
       'Yams',
-      'Chance',
+      AppLocalizations.of(context)!.chance,
     ];
 
     if (gameData['gameState'] == 'gameOver') {
@@ -51446,7 +51445,7 @@ AppLocalizations.of(context)!.stre93cb0,
                 child: Row(
                   children: [
                     ChoiceChip(
-                      avatar: const Icon(
+                      avatar: Icon(
                         Icons.compare_arrows_rounded,
                         size: 14,
                       ),
@@ -51462,12 +51461,12 @@ AppLocalizations.of(context)!.stre93cb0,
                       backgroundColor: Colors.white10,
                     ),
                     if (primaryOpponentId != null) ...[
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       ChoiceChip(
-                        avatar: const Icon(Icons.visibility_rounded, size: 14),
+                        avatar: Icon(Icons.visibility_rounded, size: 14),
                         label: Text(
                           AppLocalizations.of(context)!.ficheDePts,
-                          style: const TextStyle(fontSize: 11),
+                          style: TextStyle(fontSize: 11),
                         ),
                         selected: isInspectingOpponentOnly,
                         onSelected: (_) {
@@ -51478,7 +51477,7 @@ AppLocalizations.of(context)!.stre93cb0,
                       ),
                     ],
                     if (opponentIds.length > 1) ...[
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       ...opponentIds.where((id) => id != primaryOpponentId).map(
                         (otherId) {
                           final otherName = getPlayerName(otherId);
@@ -51488,10 +51487,10 @@ AppLocalizations.of(context)!.stre93cb0,
                           return Padding(
                             padding: const EdgeInsets.only(left: 6),
                             child: ActionChip(
-                              avatar: const Icon(Icons.person, size: 13),
+                              avatar: Icon(Icons.person, size: 13),
                               label: Text(
                                 AppLocalizations.of(context)!.pts2(otherName, otherTotal),
-                                style: const TextStyle(fontSize: 11),
+                                style: TextStyle(fontSize: 11),
                               ),
                               onPressed: () {
                                 setState(() => _viewedOpponentId = otherId);
@@ -51510,7 +51509,7 @@ AppLocalizations.of(context)!.stre93cb0,
             // --- ZONE DE DÉS EN DIRECT & STATUT TEMPS RÉEL ---
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.black38,
                 border: Border(bottom: BorderSide(color: Colors.white12)),
               ),
@@ -51549,7 +51548,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                   ? Colors.greenAccent
                                   : Colors.amberAccent,
                         ),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         Flexible(
                           child: Text(
                             isMyTurn
@@ -51598,14 +51597,14 @@ AppLocalizations.of(context)!.stre93cb0,
                                 }
                                 : null,
                         child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
+                          duration: Duration(milliseconds: 200),
                           margin: const EdgeInsets.symmetric(horizontal: 4),
                           width: 56,
                           height: 56,
                           decoration: BoxDecoration(
                             gradient:
                                 isHeld
-                                    ? const LinearGradient(
+                                    ? LinearGradient(
                                       colors: [
                                         Color(0xFFFFDF00),
                                         Color(0xFFD4AF37),
@@ -51613,7 +51612,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                     )
-                                    : const LinearGradient(
+                                    : LinearGradient(
                                       colors: [
                                         Color(0xFFFFFFFF),
                                         Color(0xFFF1F5F9),
@@ -51627,8 +51626,8 @@ AppLocalizations.of(context)!.stre93cb0,
                                   isOpponentInteracting
                                       ? Colors.cyanAccent
                                       : (isHeld
-                                          ? const Color(0xFFB45309)
-                                          : const Color(0xFF0F172A)),
+                                          ? Color(0xFFB45309)
+                                          : Color(0xFF0F172A)),
                               width:
                                   isOpponentInteracting
                                       ? 3.5
@@ -51648,7 +51647,7 @@ AppLocalizations.of(context)!.stre93cb0,
                                     isOpponentInteracting
                                         ? 12
                                         : (isHeld ? 8 : 4),
-                                offset: const Offset(1, 2),
+                                offset: Offset(1, 2),
                               ),
                             ],
                           ),
@@ -51662,13 +51661,13 @@ AppLocalizations.of(context)!.stre93cb0,
                                     fontWeight: FontWeight.w900,
                                     color:
                                         isHeld
-                                            ? const Color(0xFF78350F)
-                                            : const Color(0xFF0F172A),
+                                            ? Color(0xFF78350F)
+                                            : Color(0xFF0F172A),
                                   ),
                                 ),
                               ),
                               if (isHeld)
-                                const Positioned(
+                                Positioned(
                                   top: 3,
                                   right: 3,
                                   child: Icon(
@@ -51708,20 +51707,20 @@ AppLocalizations.of(context)!.stre93cb0,
                       );
                     }),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         AppLocalizations.of(context)!.lancersRestants,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 13,
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       if (heldDice.where((h) => h).isNotEmpty) ...[
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 6,
@@ -51733,7 +51732,7 @@ AppLocalizations.of(context)!.stre93cb0,
                           ),
                           child: Text(
                             GameContentLocalization.format(context, AppLocalizations.of(context)!.gardeS, [heldDice.where((h) => h).length]),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 11,
                               color: Colors.amberAccent,
                               fontWeight: FontWeight.bold,
@@ -51744,14 +51743,14 @@ AppLocalizations.of(context)!.stre93cb0,
                     ],
                   ),
                   if (isMyTurn && rollsLeft > 0) ...[
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     ElevatedButton.icon(
-                      icon: const Icon(Icons.casino, size: 18),
+                      icon: Icon(Icons.casino, size: 18),
                       label: Text(
                         rollsLeft == 3
                             ? AppLocalizations.of(context)!.lancerLesDes
                             : AppLocalizations.of(context)!.relancer,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
                         HapticFeedback.mediumImpact();
@@ -51797,7 +51796,7 @@ AppLocalizations.of(context)!.stre93cb0,
                           ),
                           Text(
 AppLocalizations.of(context)!.grilleDePts,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: Colors.amberAccent,
@@ -51824,7 +51823,7 @@ AppLocalizations.of(context)!.grilleDePts,
                             child: Center(
                               child: Text(
                                 AppLocalizations.of(context)!.pts3(AppLocalizations.of(context)!.moi, myTotal),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.greenAccent,
@@ -51839,7 +51838,7 @@ AppLocalizations.of(context)!.grilleDePts,
                               child: Center(
                                 child: Text(
                                   AppLocalizations.of(context)!.pts4(oppName, oppTotal),
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.amberAccent,
@@ -51878,7 +51877,7 @@ AppLocalizations.of(context)!.grilleDePts,
                             index % 2 == 0
                                 ? Colors.white.withOpacity(0.03)
                                 : Colors.transparent,
-                        border: const Border(
+                        border: Border(
                           bottom: BorderSide(color: Colors.white10, width: 0.5),
                         ),
                       ),
@@ -51891,7 +51890,7 @@ AppLocalizations.of(context)!.grilleDePts,
                         children: [
                           Text(
                             GameUiLocalization.tr(context, cat),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 13,
                               color: Colors.white,
@@ -51942,7 +51941,7 @@ AppLocalizations.of(context)!.grilleDePts,
                           index % 2 == 0
                               ? Colors.white.withOpacity(0.03)
                               : Colors.transparent,
-                      border: const Border(
+                      border: Border(
                         bottom: BorderSide(color: Colors.white10, width: 0.5),
                       ),
                     ),
@@ -51993,11 +51992,11 @@ AppLocalizations.of(context)!.grilleDePts,
                                               horizontal: 6,
                                               vertical: 2,
                                             ),
-                                            minimumSize: const Size(60, 26),
+                                            minimumSize: Size(60, 26),
                                           ),
                                           child: Text(
-                                            "+${potentialScore ?? 0}",
-                                            style: const TextStyle(
+                                            AppLocalizations.of(context)!.str4f745a,
+                                            style: TextStyle(
                                               fontSize: 11,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -52020,7 +52019,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                             );
                                           },
                                         )
-                                        : const Text(
+                                        : Text(
                                           "-",
                                           style: TextStyle(
                                             color: Colors.white24,
@@ -52069,12 +52068,12 @@ AppLocalizations.of(context)!.grilleDePts,
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 color: Colors.black87,
-                border: const Border(top: BorderSide(color: Colors.white24)),
+                border: Border(top: BorderSide(color: Colors.white24)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.5),
                     blurRadius: 4,
-                    offset: const Offset(0, -2),
+                    offset: Offset(0, -2),
                   ),
                 ],
               ),
@@ -52098,7 +52097,7 @@ AppLocalizations.of(context)!.grilleDePts,
                             children: [
                               Text(
                                 AppLocalizations.of(context)!.pts6(oppTotal),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w900,
                                   color: Colors.amberAccent,
@@ -52106,7 +52105,7 @@ AppLocalizations.of(context)!.grilleDePts,
                               ),
                               Text(
                                 AppLocalizations.of(context)!.k1663(oppUpper, oppBonus > 0 ? '(+35)' : ''),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 10,
                                   color: Colors.white54,
                                 ),
@@ -52136,7 +52135,7 @@ AppLocalizations.of(context)!.grilleDePts,
                               children: [
                                 Text(
                                   AppLocalizations.of(context)!.pts7(myTotal),
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
                                     color: Colors.greenAccent,
@@ -52144,7 +52143,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                 ),
                                 Text(
                                   AppLocalizations.of(context)!.k16631(myUpper, myBonus > 0 ? '(+35)' : ''),
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 9.5,
                                     color: Colors.white54,
                                   ),
@@ -52160,7 +52159,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                 children: [
                                   Text(
                                     AppLocalizations.of(context)!.pts6(oppTotal),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w900,
                                       color: Colors.amberAccent,
@@ -52168,7 +52167,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                   ),
                                   Text(
                                     AppLocalizations.of(context)!.k1663(oppUpper, oppBonus > 0 ? '(+35)' : ''),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 9.5,
                                       color: Colors.white54,
                                     ),
@@ -52237,7 +52236,7 @@ AppLocalizations.of(context)!.grilleDePts,
     }
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: RadialGradient(
           center: Alignment.center,
           radius: 1.2,
@@ -52295,7 +52294,7 @@ AppLocalizations.of(context)!.grilleDePts,
                   decoration: BoxDecoration(
                     color:
                         trumpSuit != null
-                            ? const Color(0xFF2E6F58)
+                            ? Color(0xFF2E6F58)
                             : Colors.amber.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
@@ -52307,7 +52306,7 @@ AppLocalizations.of(context)!.grilleDePts,
                     children: [
                       Text(
                         trumpSuit != null
-                            ? GameUiLocalization.tr(context, 'ATOUT : {suit}', {
+                            ? GameUiLocalization.tr(context, AppLocalizations.of(context)!.atout, {
                               'suit': _getSuitSymbol(context, trumpSuit),
                             })
                             : AppLocalizations.of(context)!.encheresEnCours,
@@ -52369,14 +52368,14 @@ AppLocalizations.of(context)!.grilleDePts,
                     children: [
                       Text(
                         AppLocalizations.of(context)!.carteAPrendre,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.amberAccent,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1,
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      SizedBox(height: 6),
                       _buildCard(
                         card: turnedCard,
                         isSelected: false,
@@ -52411,10 +52410,10 @@ AppLocalizations.of(context)!.grilleDePts,
                           isSelected: false,
                           scale: 0.85,
                         ),
-                        const SizedBox(height: 2),
+                        SizedBox(height: 2),
                         Text(
                           players[pId]?['name'] ?? '',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white70,
                             fontSize: 9,
                             fontWeight: FontWeight.bold,
@@ -52434,7 +52433,7 @@ AppLocalizations.of(context)!.grilleDePts,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 6),
               decoration: BoxDecoration(
-                color: const Color(0xFF14141E),
+                color: Color(0xFF14141E),
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
               ),
@@ -52443,7 +52442,7 @@ AppLocalizations.of(context)!.grilleDePts,
                 children: [
                   Text(
                     AppLocalizations.of(context)!.prendreLAtoutOuPasser,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white70,
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
@@ -52459,8 +52458,8 @@ AppLocalizations.of(context)!.grilleDePts,
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 isRed
-                                    ? const Color(0xFF991B1B)
-                                    : const Color(0xFF1E293B),
+                                    ? Color(0xFF991B1B)
+                                    : Color(0xFF1E293B),
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -52481,7 +52480,7 @@ AppLocalizations.of(context)!.grilleDePts,
                           },
                           child: Text(
                             _getSuitSymbol(context, suit),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -52491,7 +52490,7 @@ AppLocalizations.of(context)!.grilleDePts,
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white70,
-                          side: const BorderSide(color: Colors.white24),
+                          side: BorderSide(color: Colors.white24),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -52529,7 +52528,7 @@ AppLocalizations.of(context)!.grilleDePts,
                   children: [
                     Text(
                       AppLocalizations.of(context)!.votreMain,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white60,
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
@@ -52538,7 +52537,7 @@ AppLocalizations.of(context)!.grilleDePts,
                     if (isMyTurn && roundState == 'playing_trick')
                       Text(
                         AppLocalizations.of(context)!.touchezUneCartePourLa,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.greenAccent,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
@@ -52546,10 +52545,10 @@ AppLocalizations.of(context)!.grilleDePts,
                       ),
                   ],
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:
@@ -52575,7 +52574,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                               SnackBar(
                                                 content: Text(
                                                   e.toString().replaceAll(
-                                                    'Exception: ',
+                                                    AppLocalizations.of(context)!.exception,
                                                     '',
                                                   ),
                                                 ),
@@ -52706,7 +52705,7 @@ AppLocalizations.of(context)!.grilleDePts,
                       ? Center(
                         child: Text(
                           AppLocalizations.of(context)!.aucuneCombinaisonEtaleeSurLa,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white38,
                             fontSize: 12,
                             fontStyle: FontStyle.italic,
@@ -52714,7 +52713,7 @@ AppLocalizations.of(context)!.grilleDePts,
                         ),
                       )
                       : ListView(
-                        physics: const BouncingScrollPhysics(),
+                        physics: BouncingScrollPhysics(),
                         children:
                             melds.entries.map((entry) {
                               final String pId = entry.key;
@@ -52726,7 +52725,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                 margin: const EdgeInsets.only(bottom: 8),
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
+                                  gradient: LinearGradient(
                                     colors: [
                                       Color(0xFF3B2317),
                                       Color(0xFF26150D),
@@ -52736,10 +52735,10 @@ AppLocalizations.of(context)!.grilleDePts,
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
-                                    color: const Color(0xFF8D5B4C),
+                                    color: Color(0xFF8D5B4C),
                                     width: 1.2,
                                   ),
-                                  boxShadow: const [
+                                  boxShadow: [
                                     BoxShadow(
                                       color: Colors.black38,
                                       blurRadius: 4,
@@ -52752,13 +52751,13 @@ AppLocalizations.of(context)!.grilleDePts,
                                   children: [
                                     Text(
                                       AppLocalizations.of(context)!.combinaisonsDe,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
                                         color: Color(0xFFFFD1A9),
                                       ),
                                     ),
-                                    const SizedBox(height: 6),
+                                    SizedBox(height: 6),
                                     Wrap(
                                       spacing: 10,
                                       runSpacing: 6,
@@ -52807,7 +52806,7 @@ AppLocalizations.of(context)!.grilleDePts,
             ),
           ),
 
-          const SizedBox(height: 6),
+          SizedBox(height: 6),
 
           // 3. TABLE CENTRALE : PIOCHE ET DÉFAUSSE TACTILES
           Container(
@@ -52845,7 +52844,7 @@ AppLocalizations.of(context)!.grilleDePts,
                         width: 58,
                         height: 84,
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
+                          gradient: LinearGradient(
                             colors: [Color(0xFF1E3A8A), Color(0xFF0F172A)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -52869,15 +52868,15 @@ AppLocalizations.of(context)!.grilleDePts,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.style_rounded,
                               color: Colors.amberAccent,
                               size: 24,
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(height: 4),
                             Text(
                               "${stock.length}",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13,
                                 color: Colors.white,
@@ -52886,7 +52885,7 @@ AppLocalizations.of(context)!.grilleDePts,
                           ],
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Text(
                         AppLocalizations.of(context)!.pioche1,
                         style: TextStyle(
@@ -52970,14 +52969,14 @@ AppLocalizations.of(context)!.grilleDePts,
                             child: Center(
                               child: Text(
                                 AppLocalizations.of(context)!.vide,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white38,
                                   fontSize: 10,
                                 ),
                               ),
                             ),
                           ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Text(
                         AppLocalizations.of(context)!.defausse,
                         style: TextStyle(
@@ -52997,7 +52996,7 @@ AppLocalizations.of(context)!.grilleDePts,
             ),
           ),
 
-          const SizedBox(height: 6),
+          SizedBox(height: 6),
 
           // 4. MAIN DU JOUEUR & BOUTONS D'ACTION
           Expanded(
@@ -53005,7 +53004,7 @@ AppLocalizations.of(context)!.grilleDePts,
             child: Container(
               padding: const EdgeInsets.fromLTRB(12, 6, 12, 8),
               decoration: BoxDecoration(
-                color: const Color(0xFF0A1813),
+                color: Color(0xFF0A1813),
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(22),
                 ),
@@ -53017,7 +53016,7 @@ AppLocalizations.of(context)!.grilleDePts,
                     child: Center(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
+                        physics: BouncingScrollPhysics(),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:
@@ -53062,7 +53061,7 @@ AppLocalizations.of(context)!.grilleDePts,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton.icon(
-                            icon: const Icon(Icons.layers_rounded, size: 16),
+                            icon: Icon(Icons.layers_rounded, size: 16),
                             label: Text(
                               AppLocalizations.of(context)!.etaler,
                             ),
@@ -53095,7 +53094,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                               SnackBar(
                                                 content: Text(
                                                   e.toString().replaceAll(
-                                                    'Exception: ',
+                                                    AppLocalizations.of(context)!.exception,
                                                     '',
                                                   ),
                                                 ),
@@ -53108,7 +53107,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                     : null,
                           ),
                           ElevatedButton.icon(
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.arrow_downward_rounded,
                               size: 16,
                             ),
@@ -53144,7 +53143,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                               SnackBar(
                                                 content: Text(
                                                   e.toString().replaceAll(
-                                                    'Exception: ',
+                                                    AppLocalizations.of(context)!.exception,
                                                     '',
                                                   ),
                                                 ),
@@ -53179,7 +53178,7 @@ AppLocalizations.of(context)!.grilleDePts,
     final String suit = cleanC.substring(cleanC.length - 1);
     final bool isRed = (suit == 'H' || suit == 'D');
     final Color textColor =
-        isRed ? const Color(0xFFD32F2F) : const Color(0xFF212121);
+        isRed ? Color(0xFFD32F2F) : Color(0xFF212121);
     final String suitSymbol =
         {'H': '♥', 'D': '♦', 'C': '♣', 'S': '♠'}[suit] ?? '?';
 
@@ -53188,7 +53187,7 @@ AppLocalizations.of(context)!.grilleDePts,
       height: 88 * scale,
       margin: const EdgeInsets.symmetric(horizontal: 3),
       decoration: BoxDecoration(
-        color: faceUp ? Colors.white : const Color(0xFF1E3A8A),
+        color: faceUp ? Colors.white : Color(0xFF1E3A8A),
         borderRadius: BorderRadius.circular(8 * scale),
         border: Border.all(
           color: borderColor ?? Colors.grey.shade300,
@@ -53201,7 +53200,7 @@ AppLocalizations.of(context)!.grilleDePts,
                     ? borderColor.withOpacity(0.4)
                     : Colors.black26,
             blurRadius: borderColor != null ? 8 : 3,
-            offset: const Offset(1, 2),
+            offset: Offset(1, 2),
           ),
         ],
       ),
@@ -53260,7 +53259,7 @@ AppLocalizations.of(context)!.grilleDePts,
                   ),
                 ],
               )
-              : const Center(
+              : Center(
                 child: Icon(Icons.style_rounded, color: Colors.white54),
               ),
     );
@@ -53306,7 +53305,7 @@ AppLocalizations.of(context)!.grilleDePts,
         margin: const EdgeInsets.all(20),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: const Color(0xFF1E1E2E),
+          color: Color(0xFF1E1E2E),
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: Colors.amberAccent.withOpacity(0.5),
@@ -53327,7 +53326,7 @@ AppLocalizations.of(context)!.grilleDePts,
               size: 54,
               color: Colors.amberAccent,
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               isGameOver
                   ? AppLocalizations.of(context)!.partieTerminee
@@ -53337,7 +53336,7 @@ AppLocalizations.of(context)!.grilleDePts,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 14),
+            SizedBox(height: 14),
             ...sortedScores.map((e) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
@@ -53347,14 +53346,14 @@ AppLocalizations.of(context)!.grilleDePts,
                     Text(
                       players[e.key]?['name'] ??
                           AppLocalizations.of(context)!.joueur,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white70,
                         fontSize: 15,
                       ),
                     ),
                     Text(
                       AppLocalizations.of(context)!.pts8(e.value),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.amberAccent,
                         fontSize: 15,
@@ -53364,10 +53363,10 @@ AppLocalizations.of(context)!.grilleDePts,
                 ),
               );
             }),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             if (isHost && !isGameOver)
               ElevatedButton.icon(
-                icon: const Icon(Icons.arrow_forward_rounded),
+                icon: Icon(Icons.arrow_forward_rounded),
                 label: Text(AppLocalizations.of(context)!.mancheSuivante),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[700],
@@ -53376,7 +53375,7 @@ AppLocalizations.of(context)!.grilleDePts,
               )
             else if (isGameOver)
               ElevatedButton.icon(
-                icon: const Icon(Icons.home_rounded),
+                icon: Icon(Icons.home_rounded),
                 label: Text(
                   AppLocalizations.of(context)!.retourALAccueil,
                 ),
@@ -53388,7 +53387,7 @@ AppLocalizations.of(context)!.grilleDePts,
             else
               Text(
                 AppLocalizations.of(context)!.enAttenteDeLHote1,
-                style: const TextStyle(color: Colors.white54),
+                style: TextStyle(color: Colors.white54),
               ),
           ],
         ),
@@ -53557,7 +53556,7 @@ AppLocalizations.of(context)!.grilleDePts,
                             Text(
                               isMyTurn
                                   ? AppLocalizations.of(context)!.aVotreTour
-                                  : "${'Tour de'} ${players[currentPlayerId]?['name'] ?? '...'}",
+                                  : AppLocalizations.of(context)!.streabdaf,
                               style: TextStyle(
                                 color:
                                     isMyTurn ? getColor(myColor) : Colors.white,
@@ -53569,7 +53568,7 @@ AppLocalizations.of(context)!.grilleDePts,
                             if (isFirstPiece && isMyTurn)
                               Text(
                                 AppLocalizations.of(context)!.placezDansVotreCoin,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 11,
                                 ),
@@ -53709,7 +53708,7 @@ AppLocalizations.of(context)!.grilleDePts,
                                         SnackBar(
                                           content: Text(
                                             e.toString().replaceAll(
-                                              'Exception: ',
+                                              AppLocalizations.of(context)!.exception,
                                               '',
                                             ),
                                           ),
@@ -53756,7 +53755,7 @@ AppLocalizations.of(context)!.grilleDePts,
                           },
                           child: Text(
                             AppLocalizations.of(context)!.passer,
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 12),
                           ),
                         ),
                     ],
@@ -53905,7 +53904,7 @@ AppLocalizations.of(context)!.grilleDePts,
                           children: [
                             Text(
                               AppLocalizations.of(context)!.vosPieces,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
@@ -54373,7 +54372,7 @@ class DrawingScreen extends StatefulWidget {
   final SignatureController? initialController;
   final String? backgroundDrawingData;
 
-  const DrawingScreen({
+  DrawingScreen({
     Key? key,
     required this.prompt,
     this.limitStrokes = false,
@@ -54440,7 +54439,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
 
       return byteData?.buffer.asUint8List();
     } catch (e) {
-      print("Erreur lors de la capture: $e");
+      print(AppLocalizations.of(context)!.erreurLorsDeLaCapture);
       return null;
     }
   }
@@ -54750,8 +54749,8 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
 
     // Assignation des jeux classiques
     switch (gameName) {
-      case 'Qui Pourrait le Plus ?AppLocalizations.of(context)!.screenWhoismostlikelylocalscreenPlayersPlayersBreakInfiltré & Mr. White':
-      case 'Undercover Local':
+      case 'Qui Pourrait le Plus ?':
+      case AppLocalizations.of(context)!.undercoverLocal:
         screen = UndercoverLocalGameScreen(players: _players);
         break;
       case 'La Patate Chaude':
@@ -54797,7 +54796,7 @@ class TeamSelectionDialog extends StatefulWidget {
   final int minPlayersPerTeam;
   final String gameName;
 
-  const TeamSelectionDialog({
+  TeamSelectionDialog({
     Key? key,
     required this.allPlayers,
     required this.onTeamsConfirmed,
@@ -54877,13 +54876,13 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
         child: Column(
           children: [
             ElevatedButton.icon(
-              icon: const Icon(Icons.sync),
+              icon: Icon(Icons.sync),
               label: Text(
                 AppLocalizations.of(context)!.equilibrerAleatoirement,
               ),
               onPressed: _autoBalance,
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54903,7 +54902,7 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
                 ],
               ),
             ),
-            const Divider(),
+            Divider(),
             Text(AppLocalizations.of(context)!.joueursNonAssignes1),
             Expanded(
               child: SingleChildScrollView(
@@ -54975,7 +54974,7 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
                         (p) => ListTile(
                           title: Text(p),
                           trailing: IconButton(
-                            icon: const Icon(Icons.undo, size: 18),
+                            icon: Icon(Icons.undo, size: 18),
                             onPressed: () => _unassignPlayer(p),
                           ),
                         ),
@@ -54992,7 +54991,7 @@ class _TeamSelectionDialogState extends State<TeamSelectionDialog> {
 class OfflineMenuScreen extends StatelessWidget {
   final List<String> players;
 
-  const OfflineMenuScreen({required this.players});
+  OfflineMenuScreen({required this.players});
 
   @override
   Widget build(BuildContext context) {
@@ -55193,7 +55192,7 @@ class OfflineMenuScreen extends StatelessWidget {
 // =============================================================================
 class TruthOrDareLocalSetupScreen extends StatefulWidget {
   final List<String> players;
-  const TruthOrDareLocalSetupScreen({Key? key, required this.players})
+  TruthOrDareLocalSetupScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -55239,7 +55238,7 @@ class _TruthOrDareLocalSetupScreenState
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Action ou Vérité'),
           ),
         ],
@@ -55256,7 +55255,7 @@ class _TruthOrDareLocalSetupScreenState
                   shape: BoxShape.circle,
                   color: Colors.deepPurple.withOpacity(0.15),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.sync_problem,
                   size: 54,
                   color: Colors.deepPurpleAccent,
@@ -55301,7 +55300,7 @@ class _TruthOrDareLocalSetupScreenState
               selected: {_difficulty},
               onSelectionChanged: (s) => setState(() => _difficulty = s.first),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             // IA Génératrice
             Consumer<PlayerState>(
@@ -55310,7 +55309,7 @@ class _TruthOrDareLocalSetupScreenState
                 return Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E1E2E),
+                    color: Color(0xFF1E1E2E),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: Colors.amberAccent.withOpacity(0.5),
@@ -55341,7 +55340,7 @@ class _TruthOrDareLocalSetupScreenState
                         controller: _aiController,
                         decoration: InputDecoration(
                           hintText: AppLocalizations.of(context)!.exSoireePyjamaSecretsDe,
-                          hintStyle: const TextStyle(color: Colors.white38),
+                          hintStyle: TextStyle(color: Colors.white38),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.3),
                           border: OutlineInputBorder(
@@ -55361,7 +55360,7 @@ class _TruthOrDareLocalSetupScreenState
                                     color: Colors.black,
                                   ),
                                 )
-                                : const Icon(Icons.bolt, color: Colors.black),
+                                : Icon(Icons.bolt, color: Colors.black),
                         label: Text(
                           _isAiLoading
                               ? AppLocalizations.of(context)!.generation
@@ -55415,10 +55414,10 @@ class _TruthOrDareLocalSetupScreenState
                                 },
                       ),
                       if (_aiTruths.isNotEmpty || _aiDares.isNotEmpty) ...[
-                        const SizedBox(height: 6),
+                        SizedBox(height: 6),
                         Text(
                           AppLocalizations.of(context)!.defisPrets,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -55433,7 +55432,7 @@ class _TruthOrDareLocalSetupScreenState
             SizedBox(height: 30),
 
             ElevatedButton.icon(
-              icon: const Icon(Icons.play_arrow_rounded, size: 28),
+              icon: Icon(Icons.play_arrow_rounded, size: 28),
               label: Text(
                 AppLocalizations.of(context)!.commencerLaPartie,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -55460,12 +55459,12 @@ class TruthOrDareLocalGameScreen extends StatefulWidget {
   final List<String> customTruths;
   final List<String> customDares;
 
-  const TruthOrDareLocalGameScreen({
+  TruthOrDareLocalGameScreen({
     Key? key,
     required this.players,
     this.difficulty = 'soft',
-    this.customTruths = const [],
-    this.customDares = const [],
+    this.customTruths = [],
+    this.customDares = [],
   }) : super(key: key);
 
   @override
@@ -55528,7 +55527,7 @@ class _TruthOrDareLocalGameScreenState
           otherPlayers[Random().nextInt(otherPlayers.length)],
         );
       } else {
-        content = content.replaceAll('{player}', 'toi-même');
+        content = content.replaceAll('{player}', AppLocalizations.of(context)!.toiMeme);
       }
     }
 
@@ -55562,7 +55561,7 @@ class _TruthOrDareLocalGameScreenState
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Action ou Vérité'),
           ),
         ],
@@ -55574,14 +55573,14 @@ class _TruthOrDareLocalGameScreenState
             Expanded(
               child: Center(
                 child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
+                  duration: Duration(milliseconds: 500),
                   child: _buildMainContent(currentPlayer),
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             _buildGameControls(),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             _buildPlayerChips(),
           ],
         ),
@@ -55592,14 +55591,14 @@ class _TruthOrDareLocalGameScreenState
   Widget _buildMainContent(String currentPlayer) {
     if (_isSpinning) {
       return SpinTheWheelWidget(
-        key: const ValueKey('wheel'),
+        key: ValueKey('wheel'),
         players: widget.players,
         onSpinEnd: _onWheelStopped,
       );
     }
     if (_playerHasToChoose) {
       return Card(
-        key: const ValueKey('choice'),
+        key: ValueKey('choice'),
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -55715,7 +55714,7 @@ class _TruthOrDareLocalGameScreenState
             AppLocalizations.of(context)!.pts9,
           ),
           backgroundColor:
-              isCurrent ? Colors.deepPurple : const Color(0xFF333333),
+              isCurrent ? Colors.deepPurple : Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
@@ -55729,7 +55728,7 @@ class _TruthOrDareLocalGameScreenState
 // Compatibilité
 class OfflineTruthOrDareScreen extends StatelessWidget {
   final List<String> players;
-  const OfflineTruthOrDareScreen({Key? key, required this.players})
+  OfflineTruthOrDareScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -55743,7 +55742,7 @@ class OfflineTruthOrDareScreen extends StatelessWidget {
 // =============================================================================
 class DilemmaLocalSetupScreen extends StatefulWidget {
   final List<String> players;
-  const DilemmaLocalSetupScreen({Key? key, required this.players})
+  DilemmaLocalSetupScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -55788,7 +55787,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Le Dilemme'),
           ),
         ],
@@ -55882,7 +55881,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
               selected: {_useWheel},
               onSelectionChanged: (s) => setState(() => _useWheel = s.first),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             // 3. IA Génératrice
             Consumer<PlayerState>(
@@ -55891,7 +55890,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                 return Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E1E2E),
+                    color: Color(0xFF1E1E2E),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: Colors.amberAccent.withOpacity(0.5),
@@ -55902,7 +55901,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                     children: [
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.auto_awesome,
                             color: Colors.amberAccent,
                             size: 20,
@@ -55922,7 +55921,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                         controller: _aiController,
                         decoration: InputDecoration(
                           hintText: AppLocalizations.of(context)!.exSuperPouvoirsVieQuotidienne,
-                          hintStyle: const TextStyle(color: Colors.white38),
+                          hintStyle: TextStyle(color: Colors.white38),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.3),
                           border: OutlineInputBorder(
@@ -55942,7 +55941,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                                     color: Colors.black,
                                   ),
                                 )
-                                : const Icon(Icons.bolt, color: Colors.black),
+                                : Icon(Icons.bolt, color: Colors.black),
                         label: Text(
                           _isAiLoading
                               ? AppLocalizations.of(context)!.generation
@@ -55995,7 +55994,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                         SizedBox(height: 6),
                         Text(
                           AppLocalizations.of(context)!.dilemmesPrets,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -56010,10 +56009,10 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
             SizedBox(height: 30),
 
             ElevatedButton.icon(
-              icon: const Icon(Icons.play_arrow_rounded, size: 28),
+              icon: Icon(Icons.play_arrow_rounded, size: 28),
               label: Text(
                 AppLocalizations.of(context)!.commencerLesDilemmes,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -56040,12 +56039,12 @@ class DilemmaLocalGameScreen extends StatefulWidget {
   final bool useWheel;
   final List<String> customDilemmas;
 
-  const DilemmaLocalGameScreen({
+  DilemmaLocalGameScreen({
     Key? key,
     required this.players,
     this.difficulty = 'soft',
     this.useWheel = true,
-    this.customDilemmas = const [],
+    this.customDilemmas = [],
   }) : super(key: key);
 
   @override
@@ -56107,7 +56106,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.remove_circle_outline,
                                 color: Colors.redAccent,
                               ),
@@ -56121,13 +56120,13 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                             ),
                             Text(
                               "${_globalScores[p]}",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.add_circle_outline,
                                 color: Colors.greenAccent,
                               ),
@@ -56182,7 +56181,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
       } else {
         return content.replaceAll(
           '{player}',
-          'toi-même',
+          AppLocalizations.of(context)!.toiMeme,
         );
       }
     }
@@ -56271,7 +56270,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                 ? null
                 : () => _submitDilemmaVote(_activeVoterOrCurrent(), optionKey),
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
+          duration: Duration(milliseconds: 250),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color:
@@ -56309,7 +56308,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                 voteCount <= 1
                     ? AppLocalizations.of(context)!.vote
                     : AppLocalizations.of(context)!.votes1,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white70,
                   fontWeight: FontWeight.w600,
                 ),
@@ -56394,7 +56393,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         Text(
                           _currentContent,
                           textAlign: TextAlign.center,
@@ -56406,7 +56405,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
                   _getInstructionText(),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -56415,7 +56414,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 if (!_useWheelForDilemma && _activeDilemmaVoterId != null)
                   Wrap(
                     spacing: 8,
@@ -56443,7 +56442,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                           );
                         }).toList(),
                   ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Row(
                   children: [
                     _buildDilemmaOptionCard(
@@ -56452,7 +56451,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                       optionText: _dilemmaOptionA,
                       color: Colors.deepPurpleAccent,
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     _buildDilemmaOptionCard(
                       context: context,
                       optionKey: 'B',
@@ -56461,10 +56460,10 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 if (allVotesCast)
                   ElevatedButton.icon(
-                    icon: const Icon(Icons.arrow_forward),
+                    icon: Icon(Icons.arrow_forward),
                     label: Text(
                       AppLocalizations.of(context)!.dilemmeSuivant,
                     ),
@@ -56489,7 +56488,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                 else if (_useWheelForDilemma)
                   Text(
                     AppLocalizations.of(context)!.leJoueurDesigneDoitFaire,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white38,
                       fontStyle: FontStyle.italic,
                     ),
@@ -56497,7 +56496,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                 else
                   Text(
                     AppLocalizations.of(context)!.enAttenteDuVoteDe,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white54,
                       fontStyle: FontStyle.italic,
                     ),
@@ -56559,7 +56558,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
         title: Text(AppLocalizations.of(context)!.leDilemme1),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Le Dilemme'),
           ),
         ],
@@ -56571,7 +56570,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
             Expanded(
               child: Center(
                 child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
+                  duration: Duration(milliseconds: 500),
                   transitionBuilder:
                       (child, animation) =>
                           ScaleTransition(scale: animation, child: child),
@@ -56580,7 +56579,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                           ? _buildDilemmaVoteUI(context)
                           : _isSpinning
                           ? SpinTheWheelWidget(
-                            key: const ValueKey('wheel_spin'),
+                            key: ValueKey('wheel_spin'),
                             players: widget.players,
                             onSpinEnd: _onWheelStopped,
                           )
@@ -56616,7 +56615,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                       : AppLocalizations.of(context)!.lancerLaRoue,
                 ),
               ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             if (_currentContent.isEmpty || _isSpinning) _buildPlayerChips(),
           ],
         ),
@@ -56637,13 +56636,13 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
             backgroundColor: Colors.white24,
             child: Text(
               pName[0],
-              style: const TextStyle(fontSize: 10, color: Colors.white),
+              style: TextStyle(fontSize: 10, color: Colors.white),
             ),
           ),
           label: Text(
             AppLocalizations.of(context)!.pts9,
           ),
-          backgroundColor: isCurrent ? Colors.teal : const Color(0xFF333333),
+          backgroundColor: isCurrent ? Colors.teal : Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
@@ -56660,7 +56659,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
 // =============================================================================
 class CoinFlipLocalSetupScreen extends StatefulWidget {
   final List<String> players;
-  const CoinFlipLocalSetupScreen({Key? key, required this.players})
+  CoinFlipLocalSetupScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -56703,7 +56702,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Jeu de la Pièce'),
           ),
         ],
@@ -56765,7 +56764,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
               selected: {_difficulty},
               onSelectionChanged: (s) => setState(() => _difficulty = s.first),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             // IA Questions
             Consumer<PlayerState>(
@@ -56774,7 +56773,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                 return Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E1E2E),
+                    color: Color(0xFF1E1E2E),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: Colors.amberAccent.withOpacity(0.5),
@@ -56805,7 +56804,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                         controller: _aiController,
                         decoration: InputDecoration(
                           hintText: AppLocalizations.of(context)!.exAmourSeductionTravailAnecdotes,
-                          hintStyle: const TextStyle(color: Colors.white38),
+                          hintStyle: TextStyle(color: Colors.white38),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.3),
                           border: OutlineInputBorder(
@@ -56825,7 +56824,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                                     color: Colors.black,
                                   ),
                                 )
-                                : const Icon(Icons.bolt, color: Colors.black),
+                                : Icon(Icons.bolt, color: Colors.black),
                         label: Text(
                           _isAiLoading
                               ? AppLocalizations.of(context)!.generation
@@ -56871,10 +56870,10 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                                 },
                       ),
                       if (_aiQuestions.isNotEmpty) ...[
-                        const SizedBox(height: 6),
+                        SizedBox(height: 6),
                         Text(
                           AppLocalizations.of(context)!.questionsPretes,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -56889,7 +56888,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
             SizedBox(height: 30),
 
             ElevatedButton.icon(
-              icon: const Icon(Icons.play_arrow_rounded, size: 28),
+              icon: Icon(Icons.play_arrow_rounded, size: 28),
               label: Text(
                 AppLocalizations.of(context)!.lancerLaPiece,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -56915,11 +56914,11 @@ class CoinFlipLocalGameScreen extends StatefulWidget {
   final String difficulty;
   final List<String> customQuestions;
 
-  const CoinFlipLocalGameScreen({
+  CoinFlipLocalGameScreen({
     Key? key,
     required this.players,
     this.difficulty = 'soft',
-    this.customQuestions = const [],
+    this.customQuestions = [],
   }) : super(key: key);
 
   @override
@@ -56977,7 +56976,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.remove_circle_outline,
                                 color: Colors.redAccent,
                               ),
@@ -56991,13 +56990,13 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
                             ),
                             Text(
                               "${_globalScores[p]}",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.add_circle_outline,
                                 color: Colors.greenAccent,
                               ),
@@ -57049,7 +57048,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
       } else {
         return content.replaceAll(
           '{player}',
-          'toi-même',
+          AppLocalizations.of(context)!.toiMeme,
         );
       }
     }
@@ -57113,7 +57112,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Jeu de la Pièce'),
           ),
         ],
@@ -57125,14 +57124,14 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
             Expanded(
               child: Center(
                 child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
+                  duration: Duration(milliseconds: 500),
                   transitionBuilder:
                       (child, animation) =>
                           ScaleTransition(scale: animation, child: child),
                   child:
                       _isSpinning
                           ? SpinTheWheelWidget(
-                            key: const ValueKey('wheel_spin'),
+                            key: ValueKey('wheel_spin'),
                             players: widget.players,
                             onSpinEnd: _onWheelStopped,
                           )
@@ -57170,7 +57169,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
                                           color: Colors.amberAccent,
                                         ),
                                       ),
-                                      const SizedBox(height: 20),
+                                      SizedBox(height: 20),
                                       Text(
                                         _currentContent,
                                         textAlign: TextAlign.center,
@@ -57188,9 +57187,9 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             _buildGameControls(),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             _buildPlayerChips(),
           ],
         ),
@@ -57211,14 +57210,14 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
             backgroundColor: Colors.white24,
             child: Text(
               pName[0],
-              style: const TextStyle(fontSize: 10, color: Colors.white),
+              style: TextStyle(fontSize: 10, color: Colors.white),
             ),
           ),
           label: Text(
             AppLocalizations.of(context)!.pts9,
           ),
           backgroundColor:
-              isCurrent ? Colors.amber[800] : const Color(0xFF333333),
+              isCurrent ? Colors.amber[800] : Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
@@ -57237,7 +57236,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
         children: [
           Text(
             AppLocalizations.of(context)!.tuAsChoisiLaPiece,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
           Text(
@@ -57328,7 +57327,7 @@ class OfflineGameScreen extends StatelessWidget {
   final String gameType;
   final List<String> players;
 
-  const OfflineGameScreen({
+  OfflineGameScreen({
     Key? key,
     required this.gameType,
     required this.players,
@@ -57349,7 +57348,7 @@ class SpinTheWheelWidget extends StatefulWidget {
   final List<String> players;
   final Function(int) onSpinEnd;
 
-  const SpinTheWheelWidget({
+  SpinTheWheelWidget({
     Key? key,
     required this.players,
     required this.onSpinEnd,
@@ -57552,7 +57551,7 @@ enum UndercoverGameState { setup, revealing, discussing, voting, result }
 
 class UndercoverLocalGameScreen extends StatefulWidget {
   final List<String> players;
-  const UndercoverLocalGameScreen({Key? key, required this.players})
+  UndercoverLocalGameScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -57612,7 +57611,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                 GameWords.undercoverData['soft']!['wordPairs']!);
     final rawPair = wordPairs[random.nextInt(wordPairs.length)];
     if (rawPair.contains(':')) {
-      final parts = rawPair.split(':AppLocalizations.of(context)!.wordcivilParts0TrimWordundercover1(rawPair.trim(), player)${role} ! Les Civils gagnent !";
+      final parts = rawPair.split(AppLocalizations.of(context)!.applocalizationsOfContextWordcivilparts0trimwordundercover1Rawpair
       }
     });
   }
@@ -57782,7 +57781,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                                   );
                               _aiWordPairs = words;
                             } catch (e) {
-                              print('AI error: $e');
+                              print(AppLocalizations.of(context)!.aiErrorE);
                             } finally {
                               if (mounted) setState(() => _isAiLoading = false);
                             }
@@ -57862,9 +57861,9 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
   void _showRoleDialog(String player) {
     String role = _playerRoles[player]!;
     String content = AppLocalizations.of(context)!.tuEs(role);
-    if (role == "Civil") content += AppLocalizations.of(context)!.tonMotEst(_wordCivil);
-    if (role == "Infiltré") content += AppLocalizations.of(context)!.tonMotEst1(_wordUndercover);
-    if (role == "Mr. White") content += AppLocalizations.of(context)!.tuNAsPasDe;
+    if (role == AppLocalizations.of(context)!.civil) content += AppLocalizations.of(context)!.tonMotEst(_wordCivil);
+    if (role == AppLocalizations.of(context)!.infiltre) content += AppLocalizations.of(context)!.tonMotEst1(_wordUndercover);
+    if (role == AppLocalizations.of(context)!.mrWhite) content += AppLocalizations.of(context)!.tuNAsPasDe;
 
     showDialog(
       context: context,
@@ -58013,7 +58012,7 @@ enum HotPotatoState { setup, playing, exploded }
 
 class HotPotatoLocalScreen extends StatefulWidget {
   final List<String> players;
-  const HotPotatoLocalScreen({Key? key, required this.players})
+  HotPotatoLocalScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -58313,7 +58312,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                             border: OutlineInputBorder(),
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.amber[800],
@@ -58495,7 +58494,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
             child: Text(
               gage.replaceAll(
                 '{player}',
-                'un autre joueur',
+                AppLocalizations.of(context)!.unAutreJoueur,
               ),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
@@ -58516,7 +58515,7 @@ enum GamePhase { setup, input, voting, result }
 
 class SynonymOrBannedLocalScreen extends StatefulWidget {
   final List<String> players;
-  const SynonymOrBannedLocalScreen({Key? key, required this.players})
+  SynonymOrBannedLocalScreen({Key? key, required this.players})
     : super(key: key);
   @override
   _SynonymOrBannedLocalScreenState createState() =>
@@ -58713,7 +58712,7 @@ class _SynonymOrBannedLocalScreenState
                           gameType: 'Synonyme ou Banni',
                         );
                       } catch (e) {
-                        print('AI error: $e');
+                        print(AppLocalizations.of(context)!.aiErrorE);
                       } finally {
                         if (mounted) setState(() => _isAiLoading = false);
                       }
@@ -58852,7 +58851,7 @@ enum LocalWhoIsPhase { question, voting, results }
 
 class WhoIsMostLikelyLocalScreen extends StatefulWidget {
   final List<String> players;
-  const WhoIsMostLikelyLocalScreen({Key? key, required this.players})
+  WhoIsMostLikelyLocalScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -58990,7 +58989,7 @@ class _WhoIsMostLikelyLocalScreenState
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.remove_circle_outline,
                                 color: Colors.redAccent,
                               ),
@@ -59004,13 +59003,13 @@ class _WhoIsMostLikelyLocalScreenState
                             ),
                             Text(
                               "${_globalScores[p]}",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.add_circle_outline,
                                 color: Colors.greenAccent,
                               ),
@@ -59049,7 +59048,7 @@ class _WhoIsMostLikelyLocalScreenState
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, AppLocalizations.of(context)!.quiPourraitLePlusApplocalizations,
                     label: Text(AppLocalizations.of(context)!.soft),
                   ),
@@ -59101,15 +59100,15 @@ class _WhoIsMostLikelyLocalScreenState
                       }
                     }),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
             ],
             Expanded(
               child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
+                duration: Duration(milliseconds: 300),
                 child: _buildContent(),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             _buildPlayerChips(), // Affichage permanent des scores en bas
           ],
         ),
@@ -59133,14 +59132,14 @@ class _WhoIsMostLikelyLocalScreenState
             backgroundColor: Colors.white24,
             child: Text(
               pName[0],
-              style: const TextStyle(fontSize: 10, color: Colors.white),
+              style: TextStyle(fontSize: 10, color: Colors.white),
             ),
           ),
           label: Text(
             AppLocalizations.of(context)!.pts9,
           ),
           backgroundColor:
-              isCurrentVoter ? Colors.deepPurple : const Color(0xFF333333),
+              isCurrentVoter ? Colors.deepPurple : Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrentVoter ? FontWeight.bold : FontWeight.normal,
@@ -59164,7 +59163,7 @@ class _WhoIsMostLikelyLocalScreenState
 
   Widget _buildQuestionStep() {
     return Column(
-      key: const ValueKey('question_step'),
+      key: ValueKey('question_step'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Consumer<PlayerState>(
@@ -59189,7 +59188,7 @@ class _WhoIsMostLikelyLocalScreenState
                   ),
                   SizedBox(height: 8),
                   ElevatedButton.icon(
-                    icon: const Icon(Icons.auto_awesome),
+                    icon: Icon(Icons.auto_awesome),
                     label:
                         _isAiLoading
                             ? SizedBox(
@@ -59263,7 +59262,7 @@ class _WhoIsMostLikelyLocalScreenState
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         ElevatedButton(
           onPressed: _startVoting,
           style: ElevatedButton.styleFrom(
@@ -59279,7 +59278,7 @@ class _WhoIsMostLikelyLocalScreenState
   Widget _buildVotingStep() {
     if (_votingMode == 'grouper') {
       return Column(
-        key: const ValueKey('voting_step_grouped'),
+        key: ValueKey('voting_step_grouped'),
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Card(
@@ -59294,7 +59293,7 @@ class _WhoIsMostLikelyLocalScreenState
                   ),
                   Text(
                     AppLocalizations.of(context)!.quiPourraitLePlus1,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
@@ -59320,7 +59319,7 @@ class _WhoIsMostLikelyLocalScreenState
             style: TextStyle(color: Colors.white70),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
               itemCount: widget.players.length,
@@ -59331,10 +59330,10 @@ class _WhoIsMostLikelyLocalScreenState
                   child: ListTile(
                     title: Text(
                       target,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     leading: CircleAvatar(child: Text(target[0].toUpperCase())),
-                    trailing: const Icon(
+                    trailing: Icon(
                       Icons.check_circle_outline,
                       color: Colors.greenAccent,
                     ),
@@ -59374,7 +59373,7 @@ class _WhoIsMostLikelyLocalScreenState
                 ),
                 Text(
                   AppLocalizations.of(context)!.quiPourraitLePlus1,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -59404,7 +59403,7 @@ class _WhoIsMostLikelyLocalScreenState
           style: TextStyle(color: Colors.white70),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Expanded(
           child: ListView.builder(
             itemCount: widget.players.length,
@@ -59415,10 +59414,10 @@ class _WhoIsMostLikelyLocalScreenState
                 child: ListTile(
                   title: Text(
                     target,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   leading: CircleAvatar(child: Text(target[0].toUpperCase())),
-                  trailing: const Icon(
+                  trailing: Icon(
                     Icons.touch_app,
                     color: Colors.deepPurpleAccent,
                   ),
@@ -59437,7 +59436,7 @@ class _WhoIsMostLikelyLocalScreenState
     final winners = _getWinners(tally);
 
     return Column(
-      key: const ValueKey('results_step'),
+      key: ValueKey('results_step'),
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Card(
@@ -59471,7 +59470,7 @@ class _WhoIsMostLikelyLocalScreenState
           style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Wrap(
           alignment: WrapAlignment.center,
           spacing: 8,
@@ -59482,10 +59481,10 @@ class _WhoIsMostLikelyLocalScreenState
                       avatar: CircleAvatar(child: Text(w[0])),
                       label: Text(
                         w,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       backgroundColor: Colors.amber,
-                      labelStyle: const TextStyle(color: Colors.black),
+                      labelStyle: TextStyle(color: Colors.black),
                     ),
                   )
                   .toList(),
@@ -59496,7 +59495,7 @@ class _WhoIsMostLikelyLocalScreenState
             AppLocalizations.of(context)!.detailDesVotes,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Expanded(
             child: ListView.builder(
               itemCount: widget.players.length,
@@ -59515,7 +59514,7 @@ class _WhoIsMostLikelyLocalScreenState
                     leading: CircleAvatar(child: Text(player[0])),
                     title: Text(
                       player,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle:
                         votersList.isNotEmpty
@@ -59525,7 +59524,7 @@ class _WhoIsMostLikelyLocalScreenState
                                 AppLocalizations.of(context)!.votePar,
                                 [votersList.join(", ")],
                               ),
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 12),
                             )
                             : Text(
                               AppLocalizations.of(context)!.aucunVote,
@@ -59548,7 +59547,7 @@ class _WhoIsMostLikelyLocalScreenState
                       ),
                       child: Text(
 "{0} {1}",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -59560,7 +59559,7 @@ class _WhoIsMostLikelyLocalScreenState
             ),
           ),
         ] else ...[
-          const Spacer(),
+          Spacer(),
           Center(
             child: Text(
 GameContentLocalization.format(
@@ -59568,15 +59567,15 @@ context,
 AppLocalizations.of(context)!.decisionUnanimeDuGroupePour,
 [winners.join(', ')],
 ),
-              style: const TextStyle(
+              style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white70,
               ),
             ),
           ),
-          const Spacer(),
+          Spacer(),
         ],
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         ElevatedButton(
           onPressed: _getNewQuestion,
           style: ElevatedButton.styleFrom(
@@ -59604,7 +59603,7 @@ class CodenamesLocalGameScreen extends StatefulWidget {
   final List<String>? redTeam; // Équipes optionnelles
   final List<String>? blueTeam;
 
-  const CodenamesLocalGameScreen({
+  CodenamesLocalGameScreen({
     Key? key,
     required this.players,
     this.redTeam,
@@ -60106,7 +60105,7 @@ AppLocalizations.of(context)!.essaisDisponibles,
                                     gameType: 'Codenames',
                                   );
                             } catch (e) {
-                              print('AI error: $e');
+                              print(AppLocalizations.of(context)!.aiErrorE);
                             } finally {
                               if (mounted) setState(() => _isAiLoading = false);
                             }
@@ -60357,7 +60356,7 @@ AppLocalizations.of(context)!.essaisDisponibles,
                 ),
                 Text(
                   AppLocalizations.of(context)!.mots,
-                  style: const TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
@@ -60377,7 +60376,7 @@ AppLocalizations.of(context)!.essaisDisponibles,
                 ),
                 Text(
                   AppLocalizations.of(context)!.mots,
-                  style: const TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
@@ -60528,7 +60527,7 @@ class TimesUpLocalGameScreen extends StatefulWidget {
   final List<String>? teamA; // Équipes optionnelles
   final List<String>? teamB;
 
-  const TimesUpLocalGameScreen({
+  TimesUpLocalGameScreen({
     Key? key,
     required this.players,
     this.teamA,
@@ -60889,7 +60888,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                                   return;
                                 }
                               } catch (e) {
-                                print('AI error: $e');
+                                print(AppLocalizations.of(context)!.aiErrorE);
                               } finally {
                                 if (mounted)
                                   setState(() => _isAiLoading = false);
@@ -61169,7 +61168,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                 AppLocalizations.of(context)!.lEquipeAGagne,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color:
-                      winnerTeam == 'Rouge'
+                      winnerTeam == AppLocalizations.of(context)!.rouge
                           ? Colors.redAccent
                           : Colors.blueAccent,
                 ),
@@ -61244,7 +61243,7 @@ enum PassTheObjectGameState { setup, playing, questionPhase }
 
 class PassTheObjectGameScreen extends StatefulWidget {
   final List<String> players;
-  const PassTheObjectGameScreen({Key? key, required this.players})
+  PassTheObjectGameScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -61302,7 +61301,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
     _passedSequence.add(_loserIndex);
     _nextPlayerToPass = null; // Réinitialiser au début
 
-    _gameTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _gameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
         return;
@@ -61351,7 +61350,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
 
   void _startFlashing() {
     _flashTimer?.cancel();
-    _flashTimer = Timer.periodic(const Duration(milliseconds: 300), (timer) {
+    _flashTimer = Timer.periodic(Duration(milliseconds: 300), (timer) {
       if (!mounted) {
         timer.cancel();
         return;
@@ -61403,14 +61402,14 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
         title: Text(AppLocalizations.of(context)!.passeLObjet),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed:
                 () => showGameRules(context, 'On se passe un objet rapidement'),
           ),
         ],
       ),
       body: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
+        duration: Duration(milliseconds: 150),
         color:
             _isFlashing
                 ? Colors.red.withOpacity(0.5)
@@ -61418,7 +61417,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
+            duration: Duration(milliseconds: 300),
             child: _buildContentForState(),
           ),
         ),
@@ -61439,7 +61438,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
 
   Widget _buildSetupScreen() {
     return SingleChildScrollView(
-      key: const ValueKey('setup'),
+      key: ValueKey('setup'),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -61447,7 +61446,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Icon(
+              Icon(
                 Icons.directions_run,
                 size: 80,
                 color: Colors.deepPurpleAccent,
@@ -61473,7 +61472,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                   labelText: AppLocalizations.of(context)!.difficulteDesQuestions,
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
 
               // Module IA
               Consumer<PlayerState>(
@@ -61483,7 +61482,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                     margin: const EdgeInsets.only(bottom: 16),
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1E1E2E),
+                      color: Color(0xFF1E1E2E),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: Colors.amberAccent.withOpacity(0.5),
@@ -61514,7 +61513,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                           controller: _aiController,
                           decoration: InputDecoration(
                             hintText: AppLocalizations.of(context)!.exCultureGeneraleGagesDroles,
-                            hintStyle: const TextStyle(color: Colors.white38),
+                            hintStyle: TextStyle(color: Colors.white38),
                             filled: true,
                             fillColor: Colors.black.withOpacity(0.3),
                             border: OutlineInputBorder(
@@ -61534,7 +61533,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                                       color: Colors.black,
                                     ),
                                   )
-                                  : const Icon(Icons.bolt, color: Colors.black),
+                                  : Icon(Icons.bolt, color: Colors.black),
                           label: Text(
                             _isAiLoading
                                 ? AppLocalizations.of(context)!.generation
@@ -61607,7 +61606,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                 value: _showTimer,
                 onChanged: (val) => setState(() => _showTimer = val),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Text(
                 AppLocalizations.of(context)!.intervalleDuChronoDeA,
                 style: Theme.of(context).textTheme.bodyMedium,
@@ -61628,7 +61627,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                   });
                 },
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _startGame,
                 child: Text(
@@ -61735,7 +61734,7 @@ enum GuessTheWordGameState {
 
 class GuessTheWordLocalScreen extends StatefulWidget {
   final List<String> players;
-  const GuessTheWordLocalScreen({Key? key, required this.players})
+  GuessTheWordLocalScreen({Key? key, required this.players})
     : super(key: key);
 
   @override
@@ -61755,8 +61754,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
   int _totalRounds = 3; // Nombre de passages par joueur / équipe
 
   // Équipes
-  String _teamAName = "Équipe Rouge";
-  String _teamBName = "Équipe Bleue";
+  String _teamAName = AppLocalizations.of(context)!.codenamesRedTeam;
+  String _teamBName = AppLocalizations.of(context)!.codenamesBlueTeam;
   List<String> _teamAPlayers = [];
   List<String> _teamBPlayers = [];
   int _teamAScore = 0;
@@ -61861,7 +61860,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
     });
 
     _countdownTimer?.cancel();
-    _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _countdownTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
         return;
@@ -61887,7 +61886,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
 
     if (_roundDuration > 0) {
       _gameTimer?.cancel();
-      _gameTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _gameTimer = Timer.periodic(Duration(seconds: 1), (timer) {
         if (!mounted) return;
         setState(() {
           if (_secondsLeft > 0) {
@@ -61947,7 +61946,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
     });
 
     _flashTimer?.cancel();
-    _flashTimer = Timer(const Duration(milliseconds: 300), () {
+    _flashTimer = Timer(Duration(milliseconds: 300), () {
       if (mounted) setState(() => _tiltFlash = null);
     });
 
@@ -62069,12 +62068,12 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
         title: Text(AppLocalizations.of(context)!.devineTete),
         actions: [
           IconButton(
-            icon: const Icon(Icons.leaderboard_rounded),
+            icon: Icon(Icons.leaderboard_rounded),
             onPressed:
                 () => setState(() => _gameState = GuessTheWordGameState.score),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Devine Tête'),
           ),
         ],
@@ -62109,7 +62108,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                   SizedBox(height: 6),
                   Text(
                     currentGuesser,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.amberAccent,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -62133,7 +62132,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                     : AppLocalizations.of(context)!.chacunPourSoi,
               ),
               value: _useTeams,
-              secondary: const Icon(
+              secondary: Icon(
                 Icons.groups_rounded,
                 color: Colors.cyanAccent,
               ),
@@ -62144,7 +62143,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
 
             if (_useTeams) ...[
               OutlinedButton.icon(
-                icon: const Icon(Icons.edit),
+                icon: Icon(Icons.edit),
                 label: Text(
                   AppLocalizations.of(context)!.modifierLesEquipesEtLes,
                 ),
@@ -62161,7 +62160,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
               AppLocalizations.of(context)!.difficulteDesMots,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             SegmentedButton<String>(
               segments: [
                 ButtonSegment(
@@ -62209,7 +62208,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
 
             // Thème IA ou mots personnalisés
             ExpansionTile(
-              leading: const Icon(
+              leading: Icon(
                 Icons.auto_awesome,
                 color: Colors.amberAccent,
               ),
@@ -62234,11 +62233,11 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                     controller: _aiThemeCtrl,
                                     decoration: InputDecoration(
                                       labelText: AppLocalizations.of(context)!.themeIaExAnimauxMarins,
-                                      border: const OutlineInputBorder(),
+                                      border: OutlineInputBorder(),
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 8),
+                                SizedBox(width: 8),
                                 ElevatedButton(
                                   onPressed:
                                       _isAiLoading
@@ -62275,14 +62274,14 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                           },
                                   child:
                                       _isAiLoading
-                                          ? const SizedBox(
+                                          ? SizedBox(
                                             width: 16,
                                             height: 16,
                                             child: CircularProgressIndicator(
                                               strokeWidth: 2,
                                             ),
                                           )
-                                          : const Icon(Icons.auto_awesome),
+                                          : Icon(Icons.auto_awesome),
                                 ),
                               ],
                             ),
@@ -62309,7 +62308,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.add_circle,
                               color: Colors.greenAccent,
                             ),
@@ -62325,7 +62324,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                         ],
                       ),
                       if (_customWords.isNotEmpty) ...[
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Wrap(
                           spacing: 6,
                           children:
@@ -62347,17 +62346,17 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             ElevatedButton.icon(
-              icon: const Icon(Icons.phone_android),
+              icon: Icon(Icons.phone_android),
               label: Text(
                 AppLocalizations.of(context)!.lancerSurLeFront,
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[700],
                 padding: const EdgeInsets.symmetric(vertical: 18),
-                textStyle: const TextStyle(
+                textStyle: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -62380,7 +62379,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
           AppLocalizations.of(context)!.compositionDesEquipes,
         ),
         leading: IconButton(
-          icon: const Icon(Icons.check),
+          icon: Icon(Icons.check),
           onPressed:
               () => setState(() => _gameState = GuessTheWordGameState.setup),
         ),
@@ -62390,7 +62389,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
         child: Column(
           children: [
             ElevatedButton.icon(
-              icon: const Icon(Icons.shuffle),
+              icon: Icon(Icons.shuffle),
               label: Text(
                 AppLocalizations.of(context)!.equilibrerAleatoirement,
               ),
@@ -62418,7 +62417,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Divider(color: Colors.redAccent),
+                          Divider(color: Colors.redAccent),
                           Expanded(
                             child: ListView(
                               children:
@@ -62427,12 +62426,12 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                         (p) => ListTile(
                                           title: Text(
                                             p,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontSize: 14,
                                             ),
                                           ),
                                           trailing: IconButton(
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.arrow_forward,
                                               size: 18,
                                             ),
@@ -62471,7 +62470,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Divider(color: Colors.blueAccent),
+                          Divider(color: Colors.blueAccent),
                           Expanded(
                             child: ListView(
                               children:
@@ -62480,12 +62479,12 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                         (p) => ListTile(
                                           title: Text(
                                             p,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontSize: 14,
                                             ),
                                           ),
                                           leading: IconButton(
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.arrow_back,
                                               size: 18,
                                             ),
@@ -62508,7 +62507,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ElevatedButton(
               onPressed:
                   () =>
@@ -62535,7 +62534,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.phone_android,
               size: 80,
               color: Colors.amberAccent,
@@ -62550,10 +62549,10 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             Text(
               "$_countdownValue",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 90,
                 fontWeight: FontWeight.w900,
                 color: Colors.greenAccent,
@@ -62569,12 +62568,12 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
   // 4. JEU ACTIF SUR LE FRONT (PAYSAGE)
   // ===========================================================================
   Widget _buildPlayingScreen() {
-    Color bg = const Color(0xFF121212);
-    if (_tiltFlash == "TROUVÉ !") bg = const Color(0xFF1B5E20);
-    if (_tiltFlash == "PASSÉ") bg = const Color(0xFFE65100);
+    Color bg = Color(0xFF121212);
+    if (_tiltFlash == AppLocalizations.of(context)!.trouve) bg = Color(0xFF1B5E20);
+    if (_tiltFlash == AppLocalizations.of(context)!.passe) bg = Color(0xFFE65100);
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 150),
+      duration: Duration(milliseconds: 150),
       color: bg,
       width: double.infinity,
       height: double.infinity,
@@ -62643,7 +62642,7 @@ AppLocalizations.of(context)!.trouves,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton.icon(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_downward,
                       color: Colors.greenAccent,
                     ),
@@ -62654,7 +62653,7 @@ AppLocalizations.of(context)!.trouves,
                     onPressed: () => _onWordResult(true),
                   ),
                   TextButton.icon(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.stop_circle,
                       color: Colors.redAccent,
                     ),
@@ -62665,7 +62664,7 @@ AppLocalizations.of(context)!.trouves,
                     onPressed: _endTurn,
                   ),
                   TextButton.icon(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_upward,
                       color: Colors.orangeAccent,
                     ),
@@ -62710,7 +62709,7 @@ AppLocalizations.of(context)!.trouves,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.check_circle,
                     color: Colors.greenAccent,
                     size: 30,
@@ -62718,7 +62717,7 @@ AppLocalizations.of(context)!.trouves,
                   SizedBox(width: 10),
                   Text(
                     AppLocalizations.of(context)!.pointsMarques,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -62733,7 +62732,7 @@ AppLocalizations.of(context)!.trouves,
               style: TextStyle(color: Colors.white70, fontSize: 13),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Expanded(
               child: ListView.builder(
                 itemCount: _roundHistory.length,
@@ -62791,7 +62790,7 @@ AppLocalizations.of(context)!.trouves,
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.tableauDesScores),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed:
               () => setState(() => _gameState = GuessTheWordGameState.setup),
         ),
@@ -62807,7 +62806,7 @@ AppLocalizations.of(context)!.trouves,
                 child: ListTile(
                   title: Text(
                     _teamAName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
@@ -62815,7 +62814,7 @@ AppLocalizations.of(context)!.trouves,
                   subtitle: Text(_teamAPlayers.join(", ")),
                   trailing: Text(
                     AppLocalizations.of(context)!.pts10(_teamAScore),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.redAccent,
@@ -62823,13 +62822,13 @@ AppLocalizations.of(context)!.trouves,
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Card(
                 color: Colors.blue.withOpacity(0.2),
                 child: ListTile(
                   title: Text(
                     _teamBName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
@@ -62837,7 +62836,7 @@ AppLocalizations.of(context)!.trouves,
                   subtitle: Text(_teamBPlayers.join(", ")),
                   trailing: Text(
                     AppLocalizations.of(context)!.pts11(_teamBScore),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.blueAccent,
@@ -62854,13 +62853,13 @@ AppLocalizations.of(context)!.trouves,
                           child: ListTile(
                             title: Text(
                               e.key,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             trailing: Text(
                               AppLocalizations.of(context)!.pts8(e.value),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.greenAccent,
                               ),
@@ -62871,7 +62870,7 @@ AppLocalizations.of(context)!.trouves,
                 ),
               ),
             ],
-            const Spacer(),
+            Spacer(),
             ElevatedButton(
               onPressed:
                   () =>
@@ -62896,7 +62895,7 @@ AppLocalizations.of(context)!.trouves,
 // =============================================================================
 class DobbleLocalScreen extends StatefulWidget {
   final List<String> players;
-  const DobbleLocalScreen({Key? key, required this.players}) : super(key: key);
+  DobbleLocalScreen({Key? key, required this.players}) : super(key: key);
 
   @override
   _DobbleLocalScreenState createState() => _DobbleLocalScreenState();
@@ -62915,12 +62914,12 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
   String? _gameWinner;
 
   final List<Color> _playerColors = [
-    const Color(0xFF38BDF8), // Bleu ciel
-    const Color(0xFFF43F5E), // Rose néon
-    const Color(0xFF10B981), // Émeraude
-    const Color(0xFFF59E0B), // Ambre doré
-    const Color(0xFFA855F7), // Violet
-    const Color(0xFF06B6D4), // Cyan
+    Color(0xFF38BDF8), // Bleu ciel
+    Color(0xFFF43F5E), // Rose néon
+    Color(0xFF10B981), // Émeraude
+    Color(0xFFF59E0B), // Ambre doré
+    Color(0xFFA855F7), // Violet
+    Color(0xFF06B6D4), // Cyan
   ];
 
   void _startNewGame() {
@@ -62995,7 +62994,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
           content: Text(
             AppLocalizations.of(context)!.mauvaisSymbole,
           ),
-          duration: const Duration(milliseconds: 600),
+          duration: Duration(milliseconds: 600),
           backgroundColor: Colors.red[800],
         ),
       );
@@ -63016,14 +63015,14 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D1117),
+      backgroundColor: Color(0xFF0D1117),
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.dobbleLocal),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => showGameRules(context, 'Dobble'),
           ),
         ],
@@ -63043,10 +63042,10 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 420),
+          constraints: BoxConstraints(maxWidth: 420),
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               colors: [Color(0xFF1E1B4B), Color(0xFF0F172A)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -63064,7 +63063,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Icon(
+              Icon(
                 Icons.remove_red_eye_rounded,
                 size: 64,
                 color: Colors.amberAccent,
@@ -63084,7 +63083,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
                 AppLocalizations.of(context)!.symbolesParCarte,
                 style: TextStyle(color: Colors.white70),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               SegmentedButton<int>(
                 segments: [
                   ButtonSegment(
@@ -63107,7 +63106,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
               SizedBox(height: 20),
               Text(
                 AppLocalizations.of(context)!.scoreCibleCartes,
-                style: const TextStyle(color: Colors.white70),
+                style: TextStyle(color: Colors.white70),
               ),
               Slider(
                 value: _targetScore.toDouble(),
@@ -63119,7 +63118,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
               ),
               SizedBox(height: 24),
               ElevatedButton.icon(
-                icon: const Icon(Icons.play_arrow_rounded, size: 24),
+                icon: Icon(Icons.play_arrow_rounded, size: 24),
                 label: Text(
                   AppLocalizations.of(context)!.commencer2,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -63301,7 +63300,7 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
           ),
           child: Text(
 AppLocalizations.of(context)!.piocheBut,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w900,
               color: Colors.amberAccent,
@@ -63398,22 +63397,22 @@ AppLocalizations.of(context)!.piocheBut,
     final List<Offset> slots =
         symbols.length <= 6
             ? [
-              const Offset(0.0, 0.0),
-              const Offset(0.0, -0.58),
-              const Offset(0.55, -0.20),
-              const Offset(0.35, 0.52),
-              const Offset(-0.35, 0.52),
-              const Offset(-0.55, -0.20),
+              Offset(0.0, 0.0),
+              Offset(0.0, -0.58),
+              Offset(0.55, -0.20),
+              Offset(0.35, 0.52),
+              Offset(-0.35, 0.52),
+              Offset(-0.55, -0.20),
             ]
             : [
-              const Offset(-0.20, -0.20),
-              const Offset(0.22, 0.20),
-              const Offset(0.0, -0.62),
-              const Offset(0.58, -0.30),
-              const Offset(0.58, 0.35),
-              const Offset(0.0, 0.62),
-              const Offset(-0.58, 0.35),
-              const Offset(-0.58, -0.30),
+              Offset(-0.20, -0.20),
+              Offset(0.22, 0.20),
+              Offset(0.0, -0.62),
+              Offset(0.58, -0.30),
+              Offset(0.58, 0.35),
+              Offset(0.0, 0.62),
+              Offset(-0.58, 0.35),
+              Offset(-0.58, -0.30),
             ];
 
     return Container(
@@ -63426,7 +63425,7 @@ AppLocalizations.of(context)!.piocheBut,
           color:
               isCenter
                   ? Colors.amberAccent
-                  : (borderColor ?? const Color(0xFFCBD5E1)),
+                  : (borderColor ?? Color(0xFFCBD5E1)),
           width: isCenter ? 3.5 : 2.5,
         ),
         boxShadow: [
@@ -63435,7 +63434,7 @@ AppLocalizations.of(context)!.piocheBut,
               isCenter ? 0.35 : 0.4,
             ),
             blurRadius: isCenter ? 14 : 8,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -63460,7 +63459,7 @@ AppLocalizations.of(context)!.piocheBut,
                       symbol,
                       style: TextStyle(
                         fontSize: baseSymbolSize,
-                        shadows: const [
+                        shadows: [
                           Shadow(
                             color: Colors.black26,
                             blurRadius: 2,
@@ -63488,14 +63487,14 @@ AppLocalizations.of(context)!.piocheBut,
         margin: const EdgeInsets.all(24),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: const Color(0xFF1E1B4B),
+          color: Color(0xFF1E1B4B),
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: Colors.amberAccent, width: 2),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.emoji_events_rounded,
               size: 72,
               color: Colors.amberAccent,
@@ -63509,17 +63508,17 @@ AppLocalizations.of(context)!.piocheBut,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.victoireDe,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 color: Colors.amberAccent,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
-            const Divider(color: Colors.white24),
+            SizedBox(height: 16),
+            Divider(color: Colors.white24),
             ..._playerScores.entries.map((e) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3.0),
@@ -63528,14 +63527,14 @@ AppLocalizations.of(context)!.piocheBut,
                   children: [
                     Text(
                       e.key,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white70,
                         fontSize: 14,
                       ),
                     ),
                     Text(
                       AppLocalizations.of(context)!.cartes,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -63545,9 +63544,9 @@ AppLocalizations.of(context)!.piocheBut,
                 ),
               );
             }),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             ElevatedButton.icon(
-              icon: const Icon(Icons.replay_rounded),
+              icon: Icon(Icons.replay_rounded),
               label: Text(AppLocalizations.of(context)!.rejouer),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurpleAccent,
@@ -63663,7 +63662,7 @@ class _LudoBoardPainter extends CustomPainter {
     // 1. Fond Boisé / Feutrine Sombre
     final bgPaint =
         Paint()
-          ..shader = const RadialGradient(
+          ..shader = RadialGradient(
             center: Alignment.center,
             radius: 1.0,
             colors: [Color(0xFF1E1F2C), Color(0xFF0F1018)],
@@ -63674,13 +63673,13 @@ class _LudoBoardPainter extends CustomPainter {
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.width, size.height),
       Paint()
-        ..color = const Color(0xFF3B2D20)
+        ..color = Color(0xFF3B2D20)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 6,
     );
 
     // 3. Écuries / Bases des 4 coins
-    _drawHomeBase(canvas, const Offset(0, 0), colors[0], cellSize, AppLocalizations.of(context)!.ecurie1);
+    _drawHomeBase(canvas, Offset(0, 0), colors[0], cellSize, AppLocalizations.of(context)!.ecurie1);
     _drawHomeBase(
       canvas,
       Offset(9 * cellSize, 0),
@@ -63745,7 +63744,7 @@ class _LudoBoardPainter extends CustomPainter {
         canvas.drawCircle(
           slotCenter,
           cellSize * 0.7,
-          Paint()..color = const Color(0xFF0F1018),
+          Paint()..color = Color(0xFF0F1018),
         );
         canvas.drawCircle(
           slotCenter,
@@ -63777,7 +63776,7 @@ class _LudoBoardPainter extends CustomPainter {
       // Fond de case
       canvas.drawRRect(
         RRect.fromRectAndRadius(rect.deflate(1.2), const Radius.circular(5)),
-        Paint()..color = fillColor ?? const Color(0xFF161724),
+        Paint()..color = fillColor ?? Color(0xFF161724),
       );
       // Contour
       canvas.drawRRect(
@@ -63887,7 +63886,7 @@ class _LudoBoardPainter extends CustomPainter {
     canvas.drawCircle(
       center,
       cellSize * 0.6,
-      Paint()..color = const Color(0xFF0F1018),
+      Paint()..color = Color(0xFF0F1018),
     );
     canvas.drawCircle(
       center,
@@ -63971,28 +63970,28 @@ List<Widget> _buildLudoPawns(
 
   final Map<int, List<Offset>> homePositions = {
     0: [
-      const Offset(1.5, 1.5),
-      const Offset(4.5, 1.5),
-      const Offset(1.5, 4.5),
-      const Offset(4.5, 4.5),
+      Offset(1.5, 1.5),
+      Offset(4.5, 1.5),
+      Offset(1.5, 4.5),
+      Offset(4.5, 4.5),
     ],
     1: [
-      const Offset(10.5, 1.5),
-      const Offset(13.5, 1.5),
-      const Offset(10.5, 4.5),
-      const Offset(13.5, 4.5),
+      Offset(10.5, 1.5),
+      Offset(13.5, 1.5),
+      Offset(10.5, 4.5),
+      Offset(13.5, 4.5),
     ],
     2: [
-      const Offset(1.5, 10.5),
-      const Offset(4.5, 10.5),
-      const Offset(1.5, 13.5),
-      const Offset(4.5, 13.5),
+      Offset(1.5, 10.5),
+      Offset(4.5, 10.5),
+      Offset(1.5, 13.5),
+      Offset(4.5, 13.5),
     ],
     3: [
-      const Offset(10.5, 10.5),
-      const Offset(13.5, 10.5),
-      const Offset(10.5, 13.5),
-      const Offset(13.5, 13.5),
+      Offset(10.5, 10.5),
+      Offset(13.5, 10.5),
+      Offset(10.5, 13.5),
+      Offset(13.5, 13.5),
     ],
   };
 
@@ -64045,7 +64044,7 @@ List<Widget> _buildLudoPawns(
       pawns.add(
         AnimatedPositioned(
           key: ValueKey("pawn_${ownerId}_$pawnIdx"),
-          duration: const Duration(milliseconds: 320),
+          duration: Duration(milliseconds: 320),
           curve: Curves.easeOutBack,
           left: x - pawnRadius,
           top: y - pawnRadius,
@@ -64075,7 +64074,7 @@ class PlacedTile {
   final TileOrientation orientation;
   final bool flipped;
 
-  const PlacedTile({
+  PlacedTile({
     required this.tile,
     required this.matchEnd,
     required this.position,
@@ -64111,7 +64110,7 @@ class ChainLayoutEngine {
 
   LayoutResult computeLayout(List<Map<String, dynamic>> chain) {
     List<PlacedTile> result = [];
-    if (chain.isEmpty) return LayoutResult([], const Size(300, 200));
+    if (chain.isEmpty) return LayoutResult([], Size(300, 200));
 
     int leftVal = -1, rightVal = -1;
     double leftX = 0.0, rightX = 0.0;
@@ -64136,7 +64135,7 @@ class ChainLayoutEngine {
           PlacedTile(
             tile: tileStr,
             matchEnd: -1,
-            position: const Offset(0, 0),
+            position: Offset(0, 0),
             orientation:
                 isDouble
                     ? TileOrientation.vertical
@@ -64201,7 +64200,7 @@ class ChainLayoutEngine {
     }
 
     // Centrer le tout pour que toutes les coordonnées soient positives
-    if (result.isEmpty) return LayoutResult([], const Size(300, 200));
+    if (result.isEmpty) return LayoutResult([], Size(300, 200));
 
     double minX = result
         .map(
@@ -64257,7 +64256,7 @@ class DominoesBoardWidget extends StatefulWidget {
   final String? selectedTile;
   final ValueChanged<int>? onEndTap;
 
-  const DominoesBoardWidget({
+  DominoesBoardWidget({
     super.key,
     required this.chain,
     this.selectedTile,
@@ -64280,7 +64279,7 @@ class _DominoesBoardWidgetState extends State<DominoesBoardWidget>
     super.initState();
     _glowAnimController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 900),
+      duration: Duration(milliseconds: 900),
     )..repeat(reverse: true);
   }
 
@@ -64407,7 +64406,7 @@ class _DominoesBoardWidgetState extends State<DominoesBoardWidget>
                                     vertical: 2,
                                   ),
                                   decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
+                                    gradient: LinearGradient(
                                       colors: [Colors.amber, Colors.orangeAccent],
                                     ),
                                     borderRadius: BorderRadius.circular(10),
@@ -64421,15 +64420,15 @@ class _DominoesBoardWidgetState extends State<DominoesBoardWidget>
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.touch_app,
                                         size: 11,
                                         color: Colors.black,
                                       ),
-                                      const SizedBox(width: 3),
+                                      SizedBox(width: 3),
                                       Text(
                                         "$endValue",
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w900,
                                           fontSize: 11,
@@ -64488,7 +64487,7 @@ class _BoardTile extends StatelessWidget {
               : (isDouble ? Colors.amber.withOpacity(0.8) : Colors.grey.shade400),
           width: isHighlighted ? 2.5 : 1.5,
         ),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(2, 2)),
         ],
       ),
@@ -64545,7 +64544,7 @@ class HandTileWidgetSimple extends StatefulWidget {
   final bool isSelected;
   final VoidCallback? onTap;
 
-  const HandTileWidgetSimple({
+  HandTileWidgetSimple({
     super.key,
     required this.tile,
     required this.isPlayable,
@@ -64587,14 +64586,14 @@ class _HandTileWidgetSimpleState extends State<HandTileWidgetSimple> {
           offset: Offset(0, dy),
           child: Container(
             decoration: BoxDecoration(
-              color: const Color(0xFFF5F0E8),
+              color: Color(0xFFF5F0E8),
               borderRadius: BorderRadius.circular(6),
               border: Border.all(
                 color:
                     widget.isSelected
                         ? Colors.amberAccent
                         : widget.isPlayable
-                        ? const Color(0xFF4ade80)
+                        ? Color(0xFF4ade80)
                         : Colors.grey.shade400,
                 width:
                     widget.isSelected
@@ -64610,18 +64609,18 @@ class _HandTileWidgetSimpleState extends State<HandTileWidgetSimple> {
                           color: Colors.amberAccent.withOpacity(0.8),
                           blurRadius: 12,
                           spreadRadius: 2,
-                          offset: const Offset(0, 4),
+                          offset: Offset(0, 4),
                         ),
                       ]
                       : widget.isPlayable
                       ? [
                         BoxShadow(
-                          color: const Color(0xFF4ade80).withOpacity(0.5),
+                          color: Color(0xFF4ade80).withOpacity(0.5),
                           blurRadius: 8,
-                          offset: const Offset(0, 4),
+                          offset: Offset(0, 4),
                         ),
                       ]
-                      : const [
+                      : [
                         BoxShadow(
                           color: Colors.black26,
                           blurRadius: 4,
@@ -64670,7 +64669,7 @@ class _PipPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = const Color(0xFF111111);
+    final paint = Paint()..color = Color(0xFF111111);
     final double r = size.width * 0.11; // Rayon du point
     final double padX = size.width * 0.28;
     final double padY = size.height * 0.28;
@@ -64705,7 +64704,7 @@ class FloatingChatOverlay extends StatefulWidget {
   final String playerName;
   final Map<String, dynamic> gameData;
 
-  const FloatingChatOverlay({
+  FloatingChatOverlay({
     Key? key,
     required this.gameCode,
     required this.playerId,
@@ -64825,7 +64824,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                         controller: _scrollCtrl,
                         shrinkWrap: true,
                         padding: EdgeInsets.zero,
-                        physics: const BouncingScrollPhysics(),
+                        physics: BouncingScrollPhysics(),
                         itemCount: displayMessages.length,
                         itemBuilder: (context, index) {
                           final msg = displayMessages[index];
@@ -64864,7 +64863,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                                 ),
                                 child: RichText(
                                   text: TextSpan(
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 11.5,
                                       color: Colors.white,
                                     ),
@@ -64892,7 +64891,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                   ),
                 ),
 
-              const SizedBox(height: 6),
+              SizedBox(height: 6),
 
               // ── LONGUE BARRE DE TCHAT EN BAS ──
               Container(
@@ -64909,22 +64908,22 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.3),
                       blurRadius: 8,
-                      offset: const Offset(0, 2),
+                      offset: Offset(0, 2),
                     ),
                   ],
                 ),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.chat_bubble_outline_rounded,
                       size: 16,
                       color: Colors.cyanAccent,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: TextField(
                         controller: _textCtrl,
-                        style: const TextStyle(color: Colors.white, fontSize: 13),
+                        style: TextStyle(color: Colors.white, fontSize: 13),
                         decoration: InputDecoration(
                           isDense: true,
                           contentPadding: const EdgeInsets.symmetric(vertical: 10),
@@ -64943,7 +64942,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                     ),
                     IconButton(
                       icon: _isSending
-                          ? const SizedBox(
+                          ? SizedBox(
                               width: 14,
                               height: 14,
                               child: CircularProgressIndicator(
@@ -64951,13 +64950,13 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                                 color: Colors.cyanAccent,
                               ),
                             )
-                          : const Icon(
+                          : Icon(
                               Icons.send_rounded,
                               size: 18,
                               color: Colors.cyanAccent,
                             ),
                       padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         minWidth: 32,
                         minHeight: 32,
                       ),
@@ -64979,7 +64978,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
 
 class LoungeListScreen extends StatefulWidget {
   final String playerId;
-  const LoungeListScreen({Key? key, required this.playerId}) : super(key: key);
+  LoungeListScreen({Key? key, required this.playerId}) : super(key: key);
 
   @override
   State<LoungeListScreen> createState() => _LoungeListScreenState();
@@ -64992,18 +64991,18 @@ class _LoungeListScreenState extends State<LoungeListScreen>
   final TextEditingController _privateCodeCtrl = TextEditingController();
   bool _isJoiningPrivate = false;
 
-  String _selectedTheme = 'Tous';
+  String _selectedTheme = AppLocalizations.of(context)!.tous;
   String _sortBy = 'recent'; // 'recent', 'players', 'slots'
   bool _hideFull = false;
 
   final List<String> _themes = [
-    'Tous',
-    'Général',
-    'Fun',
-    'Gaming',
-    'Chill',
-    'Soirée',
-    'Compétition',
+    AppLocalizations.of(context)!.tous,
+    AppLocalizations.of(context)!.general,
+    AppLocalizations.of(context)!.fun,
+    AppLocalizations.of(context)!.gaming,
+    AppLocalizations.of(context)!.chill,
+    AppLocalizations.of(context)!.soiree,
+    AppLocalizations.of(context)!.competition,
   ];
 
   @override
@@ -65108,7 +65107,7 @@ backgroundColor: Colors.redAccent,
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
                           gradient: _selectedTabIndex == 0
-                              ? const LinearGradient(
+                              ? LinearGradient(
                                   colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
                                 )
                               : null,
@@ -65122,7 +65121,7 @@ backgroundColor: Colors.redAccent,
                               size: 18,
                               color: _selectedTabIndex == 0 ? Colors.white : Colors.white60,
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Text(
                               AppLocalizations.of(context)!.salonsPublics,
                               style: TextStyle(
@@ -65143,7 +65142,7 @@ backgroundColor: Colors.redAccent,
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
                           gradient: _selectedTabIndex == 1
-                              ? const LinearGradient(
+                              ? LinearGradient(
                                   colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
                                 )
                               : null,
@@ -65157,7 +65156,7 @@ backgroundColor: Colors.redAccent,
                               size: 18,
                               color: _selectedTabIndex == 1 ? Colors.white : Colors.white60,
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Text(
                               AppLocalizations.of(context)!.rejoindrePrive,
                               style: TextStyle(
@@ -65184,7 +65183,7 @@ backgroundColor: Colors.redAccent,
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.add_rounded),
+        icon: Icon(Icons.add_rounded),
         label: Text(AppLocalizations.of(context)!.creerUnSalon),
         backgroundColor: Colors.deepPurpleAccent,
         onPressed: () {
@@ -65206,14 +65205,14 @@ backgroundColor: Colors.redAccent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Colors.deepPurple.shade900.withValues(alpha: 0.5),
-                  const Color(0xFF1E1E2C),
+                  Color(0xFF1E1E2C),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -65224,7 +65223,7 @@ backgroundColor: Colors.redAccent,
                 BoxShadow(
                   color: Colors.deepPurple.withValues(alpha: 0.2),
                   blurRadius: 18,
-                  offset: const Offset(0, 6),
+                  offset: Offset(0, 6),
                 ),
               ],
             ),
@@ -65236,20 +65235,20 @@ backgroundColor: Colors.redAccent,
                     shape: BoxShape.circle,
                     color: Colors.amberAccent.withValues(alpha: 0.15),
                   ),
-                  child: const Icon(Icons.lock_rounded, size: 44, color: Colors.amberAccent),
+                  child: Icon(Icons.lock_rounded, size: 44, color: Colors.amberAccent),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.rejoindreUnSalonPrive,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(context)!.entrezLeCodeA6,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white60, fontSize: 13, height: 1.4),
+                  style: TextStyle(color: Colors.white60, fontSize: 13, height: 1.4),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 TextField(
                   controller: _privateCodeCtrl,
                   textAlign: TextAlign.center,
@@ -65271,14 +65270,14 @@ backgroundColor: Colors.redAccent,
                     fillColor: Colors.black26,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(color: Colors.white24),
+                      borderSide: BorderSide(color: Colors.white24),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(color: Colors.amberAccent, width: 2),
+                      borderSide: BorderSide(color: Colors.amberAccent, width: 2),
                     ),
                     suffixIcon: IconButton(
-                      icon: const Icon(Icons.paste_rounded, color: Colors.amberAccent),
+                      icon: Icon(Icons.paste_rounded, color: Colors.amberAccent),
                       tooltip: AppLocalizations.of(context)!.coller,
                       onPressed: () async {
                         final clip = await Clipboard.getData('text/plain');
@@ -65290,7 +65289,7 @@ backgroundColor: Colors.redAccent,
                   ),
                   onSubmitted: _joinWithCode,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 50,
@@ -65305,7 +65304,7 @@ backgroundColor: Colors.redAccent,
                         ? null
                         : () => _joinWithCode(_privateCodeCtrl.text),
                     child: _isJoiningPrivate
-                        ? const SizedBox(
+                        ? SizedBox(
                             width: 22,
                             height: 22,
                             child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
@@ -65313,11 +65312,11 @@ backgroundColor: Colors.redAccent,
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.login_rounded, size: 20),
-                              const SizedBox(width: 8),
+                              Icon(Icons.login_rounded, size: 20),
+                              SizedBox(width: 8),
                               Text(
                                 AppLocalizations.of(context)!.rejoindreLeSalon,
-                                style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
+                                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
                               ),
                             ],
                           ),
@@ -65344,16 +65343,16 @@ backgroundColor: Colors.redAccent,
                 child: TextField(
                   controller: _searchCtrl,
                   onChanged: (_) => setState(() {}),
-                  style: const TextStyle(fontSize: 13, color: Colors.white),
+                  style: TextStyle(fontSize: 13, color: Colors.white),
                   decoration: InputDecoration(
                     isDense: true,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                     hintText: AppLocalizations.of(context)!.rechercherUnSalon,
-                    hintStyle: const TextStyle(color: Colors.white38, fontSize: 12),
-                    prefixIcon: const Icon(Icons.search, size: 18, color: Colors.cyanAccent),
+                    hintStyle: TextStyle(color: Colors.white38, fontSize: 12),
+                    prefixIcon: Icon(Icons.search, size: 18, color: Colors.cyanAccent),
                     suffixIcon: _searchCtrl.text.isNotEmpty
                         ? IconButton(
-                            icon: const Icon(Icons.clear, size: 16, color: Colors.white54),
+                            icon: Icon(Icons.clear, size: 16, color: Colors.white54),
                             onPressed: () => setState(() => _searchCtrl.clear()),
                           )
                         : null,
@@ -65361,16 +65360,16 @@ backgroundColor: Colors.redAccent,
                     fillColor: Colors.white.withValues(alpha: 0.05),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: const BorderSide(color: Colors.white12),
+                      borderSide: BorderSide(color: Colors.white12),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: const BorderSide(color: Colors.white10),
+                      borderSide: BorderSide(color: Colors.white10),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               PopupMenuButton<String>(
                 tooltip: AppLocalizations.of(context)!.trier,
                 icon: Container(
@@ -65380,7 +65379,7 @@ backgroundColor: Colors.redAccent,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: Colors.white12),
                   ),
-                  child: const Icon(Icons.sort_rounded, size: 18, color: Colors.cyanAccent),
+                  child: Icon(Icons.sort_rounded, size: 18, color: Colors.cyanAccent),
                 ),
                 onSelected: (val) => setState(() => _sortBy = val),
                 itemBuilder: (ctx) => [
@@ -65399,7 +65398,7 @@ backgroundColor: Colors.redAccent,
                     child: Row(
                       children: [
                         Icon(Icons.people, size: 16, color: _sortBy == 'players' ? Colors.amber : Colors.white70),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(AppLocalizations.of(context)!.plusActifs, style: TextStyle(color: _sortBy == 'players' ? Colors.amber : Colors.white)),
                       ],
                     ),
@@ -65409,14 +65408,14 @@ backgroundColor: Colors.redAccent,
                     child: Row(
                       children: [
                         Icon(Icons.event_seat, size: 16, color: _sortBy == 'slots' ? Colors.amber : Colors.white70),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(AppLocalizations.of(context)!.placesDisponibles, style: TextStyle(color: _sortBy == 'slots' ? Colors.amber : Colors.white)),
                       ],
                     ),
                   ),
                 ],
               ),
-              const SizedBox(width: 4),
+              SizedBox(width: 4),
               IconButton(
                 tooltip: _hideFull ? AppLocalizations.of(context)!.afficherLesSalonsPleins : AppLocalizations.of(context)!.masquerLesSalonsPleins,
                 icon: Icon(
@@ -65462,7 +65461,7 @@ backgroundColor: Colors.redAccent,
             },
           ),
         ),
-        const SizedBox(height: 6),
+        SizedBox(height: 6),
 
         // LISTE STREAMÉE DE TOUS LES SALONS PUBLICS SANS RISQUE DE DISPARITION
         Expanded(
@@ -65470,7 +65469,7 @@ backgroundColor: Colors.redAccent,
             stream: FirebaseFirestore.instance.collection('lounges').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator());
               }
 
               final now = DateTime.now();
@@ -65494,7 +65493,7 @@ backgroundColor: Colors.redAccent,
                 }
 
                 // Filtre de thème
-                if (_selectedTheme != 'Tous') {
+                if (_selectedTheme != AppLocalizations.of(context)!.tous) {
                   final theme = (d['theme'] ?? '').toString().toLowerCase();
                   if (theme != _selectedTheme.toLowerCase()) {
                     return false;
@@ -65570,13 +65569,13 @@ backgroundColor: Colors.redAccent,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.search_off_rounded, size: 50, color: Colors.white24),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         Text(
-                          _searchCtrl.text.isNotEmpty || _selectedTheme != 'Tous'
+                          _searchCtrl.text.isNotEmpty || _selectedTheme != AppLocalizations.of(context)!.tous
                               ? AppLocalizations.of(context)!.aucunSalonNeCorrespondA
                               : AppLocalizations.of(context)!.aucunSalonPublicDisponibleNcreez,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.white54, height: 1.4, fontSize: 14),
+                          style: TextStyle(color: Colors.white54, height: 1.4, fontSize: 14),
                         ),
                       ],
                     ),
@@ -65602,7 +65601,7 @@ backgroundColor: Colors.redAccent,
                     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                     color: amIHost
                         ? Colors.deepPurple[900]?.withValues(alpha: 0.5)
-                        : const Color(0xFF1C1D2A),
+                        : Color(0xFF1C1D2A),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                       side: BorderSide(
@@ -65631,12 +65630,12 @@ backgroundColor: Colors.redAccent,
                           Flexible(
                             child: Text(
                               data['name'] ?? AppLocalizations.of(context)!.salon,
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           if (amIHost) ...[
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
@@ -65663,10 +65662,10 @@ backgroundColor: Colors.redAccent,
                               ),
                               child: Text(
                                 theme,
-                                style: const TextStyle(color: Colors.white70, fontSize: 10),
+                                style: TextStyle(color: Colors.white70, fontSize: 10),
                               ),
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             // INDICATEUR EN LIGNE
                             Row(
                               children: [
@@ -65678,7 +65677,7 @@ backgroundColor: Colors.redAccent,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
-                                const SizedBox(width: 4),
+                                SizedBox(width: 4),
                                 Text(
                                   AppLocalizations.of(context)!.enLigne,
                                   style: TextStyle(
@@ -65696,7 +65695,7 @@ backgroundColor: Colors.redAccent,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.people, size: 16, color: isFull ? Colors.redAccent : Colors.white70),
-                          const SizedBox(height: 2),
+                          SizedBox(height: 2),
                           Text(
 "{0} / {1}",
                             style: TextStyle(
@@ -65913,7 +65912,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     WidgetsBinding.instance.addObserver(this);
     _sendHeartbeat();
     _heartbeatTimer = Timer.periodic(
-      const Duration(seconds: 10),
+      Duration(seconds: 10),
       (_) {
         _sendHeartbeat();
         _sweepCounter++;
@@ -66150,7 +66149,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       return Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
-          icon: const Icon(Icons.videogame_asset, size: 18),
+          icon: Icon(Icons.videogame_asset, size: 18),
           label: Text(AppLocalizations.of(context)!.jouer1),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
@@ -66167,8 +66166,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       return Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
-          icon: const Icon(Icons.hourglass_top, size: 18),
-          label: Text("${"En attente"} (${joined.length})"),
+          icon: Icon(Icons.hourglass_top, size: 18),
+          label: Text("${"En attenteAppLocalizations.of(context)!.strd659f5),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.deepPurple,
             foregroundColor: Colors.white,
@@ -66187,7 +66186,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
           icon: Icon(Icons.play_circle_fill, size: 18),
-          label: Text("${"En cours"} ($gameName)"),
+          label: Text("${"En coursAppLocalizations.of(context)!.gamename),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.orange[800],
             foregroundColor: Colors.white,
@@ -66242,20 +66241,20 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
             Container(
               width: 10,
               height: 10,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.greenAccent,
                 shape: BoxShape.circle,
               ),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    GameContentLocalization.format(context, "EN COURS : {0}", [GameContentLocalization.ui(context, gameName)]),
-                    style: const TextStyle(
+                    GameContentLocalization.format(context, AppLocalizations.of(context)!.enCours, [GameContentLocalization.ui(context, gameName)]),
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 13,
@@ -66263,7 +66262,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                   ),
                   Text(
                     AppLocalizations.of(context)!.joueurSEnJeu,
-                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                    style: TextStyle(color: Colors.white70, fontSize: 11),
                   ),
                 ],
               ),
@@ -66287,12 +66286,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     ),
                   );
                 },
-                child: Text(AppLocalizations.of(context)!.rejoindre, style: const TextStyle(fontSize: 12)),
+                child: Text(AppLocalizations.of(context)!.rejoindre, style: TextStyle(fontSize: 12)),
               ),
             if (isHost) ...[
-              const SizedBox(width: 6),
+              SizedBox(width: 6),
               IconButton(
-                icon: const Icon(Icons.close, color: Colors.white70, size: 20),
+                icon: Icon(Icons.close, color: Colors.white70, size: 20),
                 tooltip: AppLocalizations.of(context)!.cloturerLaPartie,
                 onPressed: () async {
                   await FirebaseFirestore.instance
@@ -66327,7 +66326,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         child: Row(
           children: [
             Icon(Icons.hourglass_empty, color: Colors.amberAccent, size: 20),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -66335,7 +66334,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 children: [
                   Text(
                     GameContentLocalization.format(context, AppLocalizations.of(context)!.partieDeEnAttente, [GameContentLocalization.ui(context, gameName)]),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 13,
@@ -66343,7 +66342,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                   ),
                   Text(
                     AppLocalizations.of(context)!.pretS,
-                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                    style: TextStyle(color: Colors.white70, fontSize: 11),
                   ),
                 ],
               ),
@@ -66367,7 +66366,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 },
                 child: Text(AppLocalizations.of(context)!.commencer, style: TextStyle(fontSize: 12)),
               ),
-              const SizedBox(width: 6),
+              SizedBox(width: 6),
               TextButton(
                 onPressed: () async {
                   await FirebaseFirestore.instance
@@ -66375,7 +66374,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                       .doc(widget.loungeId)
                       .update({'pendingGame': FieldValue.delete()});
                 },
-                child: Text(AppLocalizations.of(context)!.annuler, style: const TextStyle(color: Colors.redAccent, fontSize: 12)),
+                child: Text(AppLocalizations.of(context)!.annuler, style: TextStyle(color: Colors.redAccent, fontSize: 12)),
               ),
             ] else ...[
               ElevatedButton(
@@ -66403,7 +66402,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     await _firebaseService.joinGame(gameCode, ps.userName ?? AppLocalizations.of(context)!.joueur, widget.playerId);
                   }
                 },
-                child: Text(hasJoined ? AppLocalizations.of(context)!.pret3 : AppLocalizations.of(context)!.rejoindre, style: const TextStyle(fontSize: 12)),
+                child: Text(hasJoined ? AppLocalizations.of(context)!.pret3 : AppLocalizations.of(context)!.rejoindre, style: TextStyle(fontSize: 12)),
               ),
             ],
           ],
@@ -66427,24 +66426,16 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         ),
         child: Row(
           children: [
-            const Icon(Icons.emoji_events, color: Colors.amberAccent, size: 20),
-            const SizedBox(width: 8),
+            Icon(Icons.emoji_events, color: Colors.amberAccent, size: 20),
+            SizedBox(width: 8),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.termine, [GameContentLocalization.ui(context, gName)]),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 13,
-                    ),
-                  ),
-                  Text(
-                    winner.isNotEmpty ? AppLocalizations.of(context)!.reasonIsnotempty(AppLocalizations.of(context)!.vainqueur2, winner)(${GameMessageLocalization.tr(context, reason)})" : ""}" : GameMessageLocalization.tr(context, reason),
-                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                    GameContentLocalization.format(context, AppLocalizations.of(context)!.gamemessagelocalizationTrContextReason
+                    style: TextStyle(color: Colors.white70, fontSize: 11),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -66452,7 +66443,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.close, color: Colors.white70, size: 18),
+              icon: Icon(Icons.close, color: Colors.white70, size: 18),
               onPressed: () async {
                 await FirebaseFirestore.instance
                     .collection('lounges')
@@ -66484,7 +66475,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     .doc(widget.loungeId)
                     .update({'pendingGame': FieldValue.delete()});
               },
-              child: Text(AppLocalizations.of(context)!.annulerLaPartie, style: const TextStyle(color: Colors.redAccent)),
+              child: Text(AppLocalizations.of(context)!.annulerLaPartie, style: TextStyle(color: Colors.redAccent)),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -66601,7 +66592,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
               actions: [
                 if (isHost)
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.delete_forever,
                       color: Colors.redAccent,
                     ),
@@ -66680,7 +66671,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           .snapshots(),
                   builder: (context, presenceSnap) {
                     if (!presenceSnap.hasData)
-                      return const SizedBox(height: 65);
+                      return SizedBox(height: 65);
                     final now = DateTime.now();
                     List<String> onlineIds = [];
                     for (var doc in presenceSnap.data!.docs) {
@@ -66696,7 +66687,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                       }
                     }
 
-                    if (onlineIds.isEmpty) return const SizedBox(height: 65);
+                    if (onlineIds.isEmpty) return SizedBox(height: 65);
 
                     return Container(
                       height: 65,
@@ -66751,7 +66742,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                       ),
                                       Text(
                                         name,
-                                        style: const TextStyle(fontSize: 10),
+                                        style: TextStyle(fontSize: 10),
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ],
@@ -66822,7 +66813,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           if (msg['type'] == 'game_invite' ||
                               (msg['text'] != null &&
                                   msg['text'].toString().contains(
-                                    "J'ai lancé une partie",
+                                    AppLocalizations.of(context)!.jAiLanceUnePartie2,
                                   ))) {
                             String gameCode =
                                 msg['extraData']?['gameCode'] ??
@@ -67121,7 +67112,7 @@ AppLocalizations.of(context)!.joueurSPrets,
                                           ? AppLocalizations.of(context)!.moi
                                           : (msg['senderName'] ??
                                               AppLocalizations.of(context)!.joueur),
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 10,
                                         color: Colors.white70,
                                         decoration: TextDecoration.underline,
@@ -67405,7 +67396,7 @@ class _LoungeStreamingScreenState extends State<LoungeStreamingScreen> {
 
 class LoungeFloatingChatOverlay extends StatelessWidget {
   final String loungeId;
-  const LoungeFloatingChatOverlay({Key? key, required this.loungeId})
+  LoungeFloatingChatOverlay({Key? key, required this.loungeId})
     : super(key: key);
 
   @override
@@ -67488,7 +67479,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
       return AnimatedContainer(
         duration: Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [Color(0xFF2E1065), Color(0xFF1E1B4B), Color(0xFF0F172A)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -67505,7 +67496,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
                       ? Colors.amberAccent.withOpacity(0.4)
                       : Colors.black45,
               blurRadius: isSelected ? 8 : 4,
-              offset: const Offset(1, 2),
+              offset: Offset(1, 2),
             ),
           ],
         ),
@@ -67539,7 +67530,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
     final _SkyjoCardTheme theme = _getSkyjoCardTheme(value);
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 200),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: theme.gradient,
@@ -67556,7 +67547,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
             color:
                 isSelected ? Colors.white.withOpacity(0.5) : theme.shadowColor,
             blurRadius: isSelected ? 10 : 4,
-            offset: const Offset(1, 2),
+            offset: Offset(1, 2),
           ),
         ],
       ),
@@ -67574,7 +67565,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
                   Shadow(
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 3,
-                    offset: const Offset(1, 1),
+                    offset: Offset(1, 1),
                   ),
                 ],
               ),
@@ -67621,62 +67612,62 @@ class _ZeroPointeCardWidget extends StatelessWidget {
     if (val < 0) {
       // -2 et -1 : Bleu nuit / Violet (très avantageux)
       return _SkyjoCardTheme(
-        gradient: const [
+        gradient: [
           Color(0xFF6B21A8),
           Color(0xFF4C1D95),
           Color(0xFF2E1065),
         ],
-        borderColor: const Color(0xFFA855F7),
+        borderColor: Color(0xFFA855F7),
         textColor: Colors.white,
-        shadowColor: const Color(0xFF6B21A8).withOpacity(0.4),
+        shadowColor: Color(0xFF6B21A8).withOpacity(0.4),
       );
     } else if (val == 0) {
       // 0 : Cyan / Turquoise
       return _SkyjoCardTheme(
-        gradient: const [
+        gradient: [
           Color(0xFF06B6D4),
           Color(0xFF0891B2),
           Color(0xFF0E7490),
         ],
-        borderColor: const Color(0xFF67E8F9),
+        borderColor: Color(0xFF67E8F9),
         textColor: Colors.white,
-        shadowColor: const Color(0xFF06B6D4).withOpacity(0.4),
+        shadowColor: Color(0xFF06B6D4).withOpacity(0.4),
       );
     } else if (val >= 1 && val <= 4) {
       // 1 à 4 : Vert franc
       return _SkyjoCardTheme(
-        gradient: const [
+        gradient: [
           Color(0xFF10B981),
           Color(0xFF059669),
           Color(0xFF047857),
         ],
-        borderColor: const Color(0xFF6EE7B7),
+        borderColor: Color(0xFF6EE7B7),
         textColor: Colors.white,
-        shadowColor: const Color(0xFF10B981).withOpacity(0.4),
+        shadowColor: Color(0xFF10B981).withOpacity(0.4),
       );
     } else if (val >= 5 && val <= 8) {
       // 5 à 8 : Jaune / Orange chaud
       return _SkyjoCardTheme(
-        gradient: const [
+        gradient: [
           Color(0xFFF59E0B),
           Color(0xFFD97706),
           Color(0xFFB45309),
         ],
-        borderColor: const Color(0xFFFCD34D),
+        borderColor: Color(0xFFFCD34D),
         textColor: Colors.white,
-        shadowColor: const Color(0xFFF59E0B).withOpacity(0.4),
+        shadowColor: Color(0xFFF59E0B).withOpacity(0.4),
       );
     } else {
       // 9 à 12 : Rouge vif (danger)
       return _SkyjoCardTheme(
-        gradient: const [
+        gradient: [
           Color(0xFFEF4444),
           Color(0xFFDC2626),
           Color(0xFF991B1B),
         ],
-        borderColor: const Color(0xFFFCA5A5),
+        borderColor: Color(0xFFFCA5A5),
         textColor: Colors.white,
-        shadowColor: const Color(0xFFEF4444).withOpacity(0.4),
+        shadowColor: Color(0xFFEF4444).withOpacity(0.4),
       );
     }
   }
@@ -67708,15 +67699,15 @@ class _ZeroPointeClearedColumnSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF59E0B).withOpacity(0.06),
+        color: Color(0xFFF59E0B).withOpacity(0.06),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: const Color(0xFFF59E0B).withOpacity(0.4),
+          color: Color(0xFFF59E0B).withOpacity(0.4),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFF59E0B).withOpacity(0.15),
+            color: Color(0xFFF59E0B).withOpacity(0.15),
             blurRadius: 8,
             spreadRadius: 1,
           ),
@@ -67727,12 +67718,12 @@ class _ZeroPointeClearedColumnSlot extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (rowIndex == 1) ...[
-              const Icon(
+              Icon(
                 Icons.auto_awesome,
                 color: Colors.amberAccent,
                 size: 20,
               ),
-              const SizedBox(height: 2),
+              SizedBox(height: 2),
               Text(
                 AppLocalizations.of(context)!.k0Pts,
                 style: TextStyle(
@@ -67777,7 +67768,7 @@ class _Pawn3DWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double targetScale = isSelected ? 1.35 : (canMove ? 1.15 : 1.0);
     return AnimatedScale(
-      duration: const Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 200),
       scale: targetScale,
       child: Container(
         width: size,
@@ -67785,7 +67776,7 @@ class _Pawn3DWidget extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: RadialGradient(
-            center: const Alignment(-0.3, -0.3),
+            center: Alignment(-0.3, -0.3),
             radius: 0.8,
             colors: [
               Color.lerp(color, Colors.white, isSelected ? 0.6 : 0.45)!,
@@ -67808,7 +67799,7 @@ class _Pawn3DWidget extends StatelessWidget {
                       : (canMove ? color.withOpacity(0.65) : Colors.black54),
               blurRadius: isSelected ? 14 : (canMove ? 10 : 4),
               spreadRadius: isSelected ? 3 : (canMove ? 2 : 0),
-              offset: const Offset(1, 3),
+              offset: Offset(1, 3),
             ),
           ],
         ),
@@ -67832,7 +67823,7 @@ class _Pawn3DWidget extends StatelessWidget {
                   fontSize: size * 0.42,
                   fontWeight: FontWeight.w900,
                   color: isSelected ? Colors.amberAccent : Colors.white,
-                  shadows: const [Shadow(color: Colors.black, blurRadius: 3)],
+                  shadows: [Shadow(color: Colors.black, blurRadius: 3)],
                 ),
               ),
             ],
@@ -67864,13 +67855,13 @@ class _Ludo3DDice extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 200),
         width: 58,
         height: 58,
         decoration: BoxDecoration(
-          color: const Color(0xFFF8FAFC),
+          color: Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(14),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [Colors.white, Color(0xFFE2E8F0)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -67886,14 +67877,14 @@ class _Ludo3DDice extends StatelessWidget {
                       ? Colors.greenAccent.withOpacity(0.4)
                       : Colors.black45,
               blurRadius: isMyTurn ? 12 : 6,
-              offset: const Offset(2, 4),
+              offset: Offset(2, 4),
             ),
           ],
         ),
         child: Center(
           child:
               value == 0
-                  ? const Icon(
+                  ? Icon(
                     Icons.casino_rounded,
                     size: 28,
                     color: Colors.deepPurple,
@@ -67906,10 +67897,10 @@ class _Ludo3DDice extends StatelessWidget {
 
   Widget _buildDicePips(int val) {
     Color pipColor = Colors.black87;
-    if (val == 6) pipColor = const Color(0xFFDC2626); // Rouge pour le 6
+    if (val == 6) pipColor = Color(0xFFDC2626); // Rouge pour le 6
 
     return CustomPaint(
-      size: const Size(40, 40),
+      size: Size(40, 40),
       painter: _DicePipPainter(val, pipColor),
     );
   }
@@ -67973,7 +67964,7 @@ class _SpookyTargetCardBack extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 200),
         curve: Curves.easeOutBack,
         width: 68,
         height: isHoveredLive ? 116 : 98,
@@ -67984,12 +67975,12 @@ class _SpookyTargetCardBack extends StatelessWidget {
             colors:
                 isHoveredLive
                     ? (isSelectedLocal
-                        ? [const Color(0xFFDC2626), const Color(0xFF7F1D1D)]
-                        : [const Color(0xFFB91C1C), const Color(0xFF450A0A)])
+                        ? [Color(0xFFDC2626), Color(0xFF7F1D1D)]
+                        : [Color(0xFFB91C1C), Color(0xFF450A0A)])
                     : [
-                      const Color(0xFF3B0764),
-                      const Color(0xFF1E1028),
-                      const Color(0xFF0F051D),
+                      Color(0xFF3B0764),
+                      Color(0xFF1E1028),
+                      Color(0xFF0F051D),
                     ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -67999,7 +67990,7 @@ class _SpookyTargetCardBack extends StatelessWidget {
             color:
                 isHoveredLive
                     ? (isSelectedLocal ? Colors.amberAccent : Colors.redAccent)
-                    : (isMyTurn ? const Color(0xFFC084FC) : Colors.white24),
+                    : (isMyTurn ? Color(0xFFC084FC) : Colors.white24),
             width: isHoveredLive ? 2.5 : 1.0,
           ),
           boxShadow: [
@@ -68010,11 +68001,11 @@ class _SpookyTargetCardBack extends StatelessWidget {
                           ? Colors.amberAccent.withOpacity(0.8)
                           : Colors.red.withOpacity(0.7))
                       : (isMyTurn
-                          ? const Color(0xFFA855F7).withOpacity(0.4)
+                          ? Color(0xFFA855F7).withOpacity(0.4)
                           : Colors.black54),
               blurRadius: isHoveredLive ? 18 : 4,
               spreadRadius: isHoveredLive ? 2 : 0,
-              offset: const Offset(1, 3),
+              offset: Offset(1, 3),
             ),
           ],
         ),
@@ -68024,7 +68015,7 @@ class _SpookyTargetCardBack extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               CustomPaint(
-                size: const Size(68, 116),
+                size: Size(68, 116),
                 painter: _SpiderwebCardPainter(),
               ),
               Column(
@@ -68043,10 +68034,10 @@ class _SpookyTargetCardBack extends StatelessWidget {
                         isHoveredLive
                             ? Colors.white
                             : (isMyTurn
-                                ? const Color(0xFFFDE047)
+                                ? Color(0xFFFDE047)
                                 : Colors.white30),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     isSelectedLocal
                         ? AppLocalizations.of(context)!.voler
@@ -68064,7 +68055,7 @@ class _SpookyTargetCardBack extends StatelessWidget {
                           isHoveredLive
                               ? Colors.white
                               : (isMyTurn
-                                  ? const Color(0xFFFDE047)
+                                  ? Color(0xFFFDE047)
                                   : Colors.white38),
                     ),
                   ),
@@ -68111,7 +68102,7 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isZombie = card == 'Zombie';
+    final bool isZombie = card == AppLocalizations.of(context)!.zombie1;
 
     // --- 1. CARTE ZOMBIE TOXIQUE ET MENAÇANTE ---
     if (isZombie) {
@@ -68120,16 +68111,16 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
         height: 104,
         margin: const EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [Color(0xFF881337), Color(0xFF4C0519), Color(0xFF1A0208)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFEF4444), width: 2.2),
+          border: Border.all(color: Color(0xFFEF4444), width: 2.2),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFFEF4444).withOpacity(0.55),
+              color: Color(0xFFEF4444).withOpacity(0.55),
               blurRadius: 14,
               spreadRadius: 2,
             ),
@@ -68162,7 +68153,7 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: Colors.red.withOpacity(0.2),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.coronavirus_rounded,
                       color: Color(0xFFEF4444),
                       size: 32,
@@ -68191,7 +68182,7 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
     final String suit = card.substring(card.length - 1);
     final bool isRed = (suit == 'H' || suit == 'D');
     final Color suitColor =
-        isRed ? const Color(0xFFE11D48) : const Color(0xFF0F172A);
+        isRed ? Color(0xFFE11D48) : Color(0xFF0F172A);
     final String suitSymbol =
         {'H': '♥', 'D': '♦', 'C': '♣', 'S': '♠'}[suit] ?? '?';
 
@@ -68203,10 +68194,10 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
       height: 102,
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
+        color: Color(0xFFF8FAFC),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFCBD5E1), width: 1.2),
-        boxShadow: const [
+        border: Border.all(color: Color(0xFFCBD5E1), width: 1.2),
+        boxShadow: [
           BoxShadow(color: Colors.black38, blurRadius: 5, offset: Offset(1, 3)),
         ],
       ),
@@ -68249,7 +68240,7 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
                   size: 24,
                   color: suitColor.withOpacity(0.85),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2),
                 Text(
                   GameContentLocalization.ui(context, itemLabel),
                   style: TextStyle(
@@ -68302,7 +68293,7 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
       case 'A':
         return AppLocalizations.of(context)!.lampe;
       case '2':
-        return "Pied-de-biche";
+        return AppLocalizations.of(context)!.piedDeBiche;
       case '3':
         return AppLocalizations.of(context)!.trousseSoin;
       case '4':
@@ -68353,14 +68344,14 @@ class _LinedParchmentPainter extends CustomPainter {
     // 1. Marge rouge verticale à gauche
     final marginPaint =
         Paint()
-          ..color = const Color(0xFFEF4444).withOpacity(0.28)
+          ..color = Color(0xFFEF4444).withOpacity(0.28)
           ..strokeWidth = 1.2;
-    canvas.drawLine(const Offset(22, 0), Offset(22, size.height), marginPaint);
+    canvas.drawLine(Offset(22, 0), Offset(22, size.height), marginPaint);
 
     // 2. Lignes horizontales bleues pâles
     final linePaint =
         Paint()
-          ..color = const Color(0xFF64748B).withOpacity(0.18)
+          ..color = Color(0xFF64748B).withOpacity(0.18)
           ..strokeWidth = 1.0;
 
     const double lineSpacing = 30.0;
@@ -68383,7 +68374,7 @@ class ActionOuVeriteGameView extends StatefulWidget {
   final String gameCode;
   final FirebaseService firebaseService;
 
-  const ActionOuVeriteGameView({
+  ActionOuVeriteGameView({
     Key? key,
     required this.gameData,
     required this.playerId,
@@ -68423,7 +68414,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     super.initState();
     _wheelController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2500),
+      duration: Duration(milliseconds: 2500),
     );
     _wheelAnimation = CurvedAnimation(
       parent: _wheelController,
@@ -68734,22 +68725,22 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         BoxShadow(
                           color: Colors.pink.withOpacity(0.3),
                           blurRadius: 8,
-                          offset: const Offset(0, 2),
+                          offset: Offset(0, 2),
                         ),
                       ],
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.flash_on,
                           color: Colors.amber,
                           size: 18,
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           AppLocalizations.of(context)!.tour,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
@@ -68758,7 +68749,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       ],
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10,
@@ -68771,19 +68762,19 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                     ),
                     child: Text(
                       AppLocalizations.of(context)!.toursRestants,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   if (isHost)
                     OutlinedButton.icon(
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.redAccent,
-                        side: const BorderSide(color: Colors.redAccent),
+                        side: BorderSide(color: Colors.redAccent),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
                           vertical: 4,
@@ -68793,7 +68784,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      icon: const Icon(Icons.flag, size: 14),
+                      icon: Icon(Icons.flag, size: 14),
                       label: Text(
                         AppLocalizations.of(context)!.finManche,
                         style: TextStyle(
@@ -68813,7 +68804,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 padding: const EdgeInsets.all(16),
                 child: Center(
                   child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 500),
+                    constraints: BoxConstraints(maxWidth: 500),
                     child: _buildPhaseContent(
                       context,
                       phase: phase,
@@ -68881,9 +68872,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
               style: TextStyle(color: Colors.white70, fontSize: 13),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             _buildRouletteWidget(playerNames),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
@@ -68897,10 +68888,10 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 ),
               ),
               onPressed: _isSubmitting ? null : _handleSpinWheel,
-              icon: const Icon(Icons.refresh, color: Colors.white, size: 24),
+              icon: Icon(Icons.refresh, color: Colors.white, size: 24),
               label: Ink(
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
+                  gradient: LinearGradient(
                     colors: [Color(0xFFFF007A), Color(0xFF7928CA)],
                   ),
                   borderRadius: BorderRadius.circular(30),
@@ -68930,7 +68921,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildRouletteWidget(playerNames),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
@@ -68964,7 +68955,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                   SizedBox(height: 8),
                   Text(
                     currentPlayerName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 26,
                       fontWeight: FontWeight.w900,
@@ -68980,7 +68971,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                     SizedBox(height: 18),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFF4081),
+                        backgroundColor: Color(0xFFFF4081),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 28,
                           vertical: 14,
@@ -68991,7 +68982,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         elevation: 8,
                       ),
                       onPressed: _isSubmitting ? null : _handleDrawChallenge,
-                      icon: const Icon(Icons.casino, color: Colors.white),
+                      icon: Icon(Icons.casino, color: Colors.white),
                       label: Text(
                         AppLocalizations.of(context)!.tirerActionOuVerite,
                         style: TextStyle(
@@ -69005,7 +68996,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 18,
                           height: 18,
                           child: CircularProgressIndicator(
@@ -69013,10 +69004,10 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                             color: Colors.amber,
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         Text(
                           AppLocalizations.of(context)!.enAttenteDuTirageDe,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white70,
                             fontStyle: FontStyle.italic,
                           ),
@@ -69054,7 +69045,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             if (isAuthor) ...[
               Container(
                 padding: const EdgeInsets.all(20),
@@ -69068,15 +69059,15 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.edit, color: Colors.amber, size: 20),
-                        const SizedBox(width: 8),
+                        Icon(Icons.edit, color: Colors.amber, size: 20),
+                        SizedBox(width: 8),
                         Text(
 GameContentLocalization.format(
 context,
 AppLocalizations.of(context)!.redigezLPour,
 [typeLabel.toLowerCase(), currentPlayerName],
 ),
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -69084,18 +69075,18 @@ AppLocalizations.of(context)!.redigezLPour,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 14),
+                    SizedBox(height: 14),
                     TextField(
                       controller: _challengeInputController,
                       maxLength: 180,
                       maxLines: 3,
-                      style: const TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText:
                             isAction
                                 ? AppLocalizations.of(context)!.exFais10PompesEn
                                 : AppLocalizations.of(context)!.exQuelEstTonPire,
-                        hintStyle: const TextStyle(color: Colors.white38),
+                        hintStyle: TextStyle(color: Colors.white38),
                         filled: true,
                         fillColor: Colors.black26,
                         border: OutlineInputBorder(
@@ -69123,7 +69114,7 @@ AppLocalizations.of(context)!.redigezLPour,
                             _isSubmitting
                                 ? null
                                 : _handleSubmitWrittenChallenge,
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.send_rounded,
                           color: Colors.white,
                         ),
@@ -69150,23 +69141,23 @@ AppLocalizations.of(context)!.redigezLPour,
                 ),
                 child: Column(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.history_edu,
                       color: Colors.amber,
                       size: 48,
                     ),
-                    const SizedBox(height: 14),
+                    SizedBox(height: 14),
                     Text(
                       AppLocalizations.of(context)!.estEnTrainDEcrire,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 16),
-                    const LinearProgressIndicator(color: Colors.amber),
+                    SizedBox(height: 16),
+                    LinearProgressIndicator(color: Colors.amber),
                   ],
                 ),
               ),
@@ -69178,8 +69169,8 @@ AppLocalizations.of(context)!.redigezLPour,
         final isAction = (challengeType == 'action');
         final gradientColors =
             isAction
-                ? [const Color(0xFFFF512F), const Color(0xFFDD2476)]
-                : [const Color(0xFF8A2387), const Color(0xFFE94057)];
+                ? [Color(0xFFFF512F), Color(0xFFDD2476)]
+                : [Color(0xFF8A2387), Color(0xFFE94057)];
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -69217,7 +69208,7 @@ AppLocalizations.of(context)!.redigezLPour,
                       isAction
                           ? "🔥 ACTION"
                           : AppLocalizations.of(context)!.verite2,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.w900,
@@ -69225,10 +69216,10 @@ AppLocalizations.of(context)!.redigezLPour,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Text(
                     AppLocalizations.of(context)!.defiPour,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white70,
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -69237,7 +69228,7 @@ AppLocalizations.of(context)!.redigezLPour,
                   SizedBox(height: 12),
                   Text(
                     AppLocalizations.of(context)!.strc1ea47(currentChallenge ?? '...'),
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -69257,7 +69248,7 @@ AppLocalizations.of(context)!.redigezLPour,
               SizedBox(height: 16),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00E676),
+                  backgroundColor: Color(0xFF00E676),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
                     vertical: 16,
@@ -69268,7 +69259,7 @@ AppLocalizations.of(context)!.redigezLPour,
                   elevation: 8,
                 ),
                 onPressed: _isSubmitting ? null : _handleConfirmPerformed,
-                icon: const Icon(
+                icon: Icon(
                   Icons.check_circle,
                   color: Colors.black,
                   size: 24,
@@ -69295,15 +69286,15 @@ AppLocalizations.of(context)!.redigezLPour,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.visibility,
                       color: Colors.cyanAccent,
                       size: 20,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(
                       AppLocalizations.of(context)!.regardezRealiserLeDefi,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 13,
                         fontStyle: FontStyle.italic,
@@ -69337,27 +69328,27 @@ AppLocalizations.of(context)!.redigezLPour,
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.estCeQueAReleve,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             Text(
               AppLocalizations.of(context)!.str5dd9e1(currentChallenge ?? ''),
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white70,
                 fontSize: 13,
                 fontStyle: FontStyle.italic,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
@@ -69366,7 +69357,7 @@ AppLocalizations.of(context)!.redigezLPour,
               ),
               child: Text(
                 AppLocalizations.of(context)!.votesRecus,
-                style: const TextStyle(color: Colors.white70, fontSize: 12),
+                style: TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ),
             SizedBox(height: 24),
@@ -69428,7 +69419,7 @@ AppLocalizations.of(context)!.redigezLPour,
                   Expanded(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00C853),
+                        backgroundColor: Color(0xFF00C853),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -69451,7 +69442,7 @@ AppLocalizations.of(context)!.redigezLPour,
                   Expanded(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFD50000),
+                        backgroundColor: Color(0xFFD50000),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -69460,7 +69451,7 @@ AppLocalizations.of(context)!.redigezLPour,
                       ),
                       onPressed:
                           _isSubmitting ? null : () => _handleVote(false),
-                      icon: const Icon(Icons.thumb_down, color: Colors.white),
+                      icon: Icon(Icons.thumb_down, color: Colors.white),
                       label: Text(
                         AppLocalizations.of(context)!.nonRate,
                         style: TextStyle(
@@ -69493,8 +69484,8 @@ AppLocalizations.of(context)!.redigezLPour,
                 gradient: LinearGradient(
                   colors:
                       isSuccess
-                          ? [const Color(0xFF00B0FF), const Color(0xFF00E676)]
-                          : [const Color(0xFFFF5252), const Color(0xFFFF7A00)],
+                          ? [Color(0xFF00B0FF), Color(0xFF00E676)]
+                          : [Color(0xFFFF5252), Color(0xFFFF7A00)],
                 ),
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
@@ -69504,7 +69495,7 @@ AppLocalizations.of(context)!.redigezLPour,
                             ? Colors.green.withOpacity(0.4)
                             : Colors.red.withOpacity(0.4),
                     blurRadius: 18,
-                    offset: const Offset(0, 4),
+                    offset: Offset(0, 4),
                   ),
                 ],
               ),
@@ -69512,7 +69503,7 @@ AppLocalizations.of(context)!.redigezLPour,
                 children: [
                   Text(
                     "$percentage%",
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 48,
                       fontWeight: FontWeight.w900,
@@ -69522,14 +69513,14 @@ AppLocalizations.of(context)!.redigezLPour,
                     isSuccess
                         ? AppLocalizations.of(context)!.defiValide
                         : AppLocalizations.of(context)!.defiNonValide,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.5,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 14,
@@ -69542,11 +69533,11 @@ AppLocalizations.of(context)!.redigezLPour,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.star, color: Colors.amber, size: 18),
-                        const SizedBox(width: 4),
+                        Icon(Icons.star, color: Colors.amber, size: 18),
+                        SizedBox(width: 4),
                         Text(
                           AppLocalizations.of(context)!.xpPour,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -69573,7 +69564,7 @@ AppLocalizations.of(context)!.redigezLPour,
                 elevation: 6,
               ),
               onPressed: _isSubmitting ? null : _handleNextTurn,
-              icon: const Icon(Icons.arrow_forward_rounded, size: 22),
+              icon: Icon(Icons.arrow_forward_rounded, size: 22),
               label: Text(
                 AppLocalizations.of(context)!.tourSuivant2,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -69595,7 +69586,7 @@ AppLocalizations.of(context)!.redigezLPour,
         alignment: Alignment.center,
         children: [
           CustomPaint(
-            size: const Size(240, 240),
+            size: Size(240, 240),
             painter: _RoulettePainter(
               playerNames: playerNames,
               colors: _sliceColors,
@@ -69611,11 +69602,11 @@ AppLocalizations.of(context)!.redigezLPour,
                   BoxShadow(
                     color: Colors.amber.withOpacity(0.6),
                     blurRadius: 8,
-                    offset: const Offset(0, 2),
+                    offset: Offset(0, 2),
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_drop_down,
                 size: 40,
                 color: Colors.amber,
@@ -69688,11 +69679,11 @@ class _RoulettePainter extends CustomPainter {
 
       final name =
           playerNames[i].length > 9
-              ? '${playerNames[i].substring(0, 7)}..'
+              ? AppLocalizations.of(context)!.str128675
               : playerNames[i];
       textPainter.text = TextSpan(
         text: name,
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.white,
           fontSize: 12,
           fontWeight: FontWeight.bold,
@@ -69722,13 +69713,13 @@ class _RoulettePainter extends CustomPainter {
     // Moyeu central
     final hubPaint =
         Paint()
-          ..color = const Color(0xFF1E1E2C)
+          ..color = Color(0xFF1E1E2C)
           ..style = PaintingStyle.fill;
     canvas.drawCircle(Offset.zero, radius * 0.22, hubPaint);
 
     final hubBorder =
         Paint()
-          ..color = const Color(0xFFFFD700)
+          ..color = Color(0xFFFFD700)
           ..style = PaintingStyle.stroke
           ..strokeWidth = 3.0;
     canvas.drawCircle(Offset.zero, radius * 0.22, hubBorder);
@@ -69759,7 +69750,7 @@ class UniversalGameEndScreen extends StatefulWidget {
   final Map<String, int>? customScores;
   final bool lowerScoreWins;
 
-  const UniversalGameEndScreen({
+  UniversalGameEndScreen({
     Key? key,
     required this.gameTitle,
     this.winnerId,
@@ -69793,7 +69784,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
   void _startCountdown() {
     _countdownTimer?.cancel();
     _secondsLeft = 30;
-    _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _countdownTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
         return;
@@ -69919,21 +69910,21 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
               currentPlayers[pId] is Map ? currentPlayers[pId]['name'] : null;
           if (fromPlayers != null &&
               fromPlayers.toString().trim().isNotEmpty &&
-              fromPlayers != 'Inconnu') {
+              fromPlayers != AppLocalizations.of(context)!.inconnu) {
             return fromPlayers.toString();
           }
           final fromProfiles =
               playerProfiles[pId] is Map ? playerProfiles[pId]['name'] : null;
           if (fromProfiles != null &&
               fromProfiles.toString().trim().isNotEmpty &&
-              fromProfiles != 'Inconnu') {
+              fromProfiles != AppLocalizations.of(context)!.inconnu) {
             return fromProfiles.toString();
           }
           final fromWidget =
               widget.players[pId] is Map ? widget.players[pId]['name'] : null;
           if (fromWidget != null &&
               fromWidget.toString().trim().isNotEmpty &&
-              fromWidget != 'Inconnu') {
+              fromWidget != AppLocalizations.of(context)!.inconnu) {
             return fromWidget.toString();
           }
           if (pId == widget.currentPlayerId) {
@@ -69979,10 +69970,10 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
             child: Container(
               width: double.infinity,
-              constraints: const BoxConstraints(maxWidth: 460),
+              constraints: BoxConstraints(maxWidth: 460),
               padding: const EdgeInsets.all(22),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
+                gradient: LinearGradient(
                   colors: [Color(0xFF241438), Color(0xFF130E22)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -70018,17 +70009,17 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                             ? Colors.amberAccent
                             : Colors.deepPurpleAccent,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     widget.gameTitle.toUpperCase(),
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white54,
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     amIWinner
                         ? AppLocalizations.of(context)!.victoire
@@ -70040,10 +70031,10 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                       letterSpacing: 1.2,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     AppLocalizations.of(context)!.aGagneCetteManche,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
                       color: Colors.white70,
                       fontWeight: FontWeight.w600,
@@ -70051,7 +70042,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                     textAlign: TextAlign.center,
                   ),
 
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
 
                   // BARRE D'ÉTAT : COMPTEUR JOUEURS PRÊTS + CHRONO 30S
                   Container(
@@ -70074,15 +70065,15 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                       children: [
                         Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.people_alt_rounded,
                               color: Colors.greenAccent,
                               size: 18,
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Text(
                               AppLocalizations.of(context)!.prets,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 fontSize: 13,
@@ -70112,7 +70103,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                         ? Colors.redAccent
                                         : Colors.amberAccent,
                               ),
-                              const SizedBox(width: 4),
+                              SizedBox(width: 4),
                               Text(
                                 AppLocalizations.of(context)!.s,
                                 style: TextStyle(
@@ -70132,7 +70123,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                   ),
 
                   SizedBox(height: 14),
-                  const Divider(color: Colors.white12, thickness: 1),
+                  Divider(color: Colors.white12, thickness: 1),
                   SizedBox(height: 8),
 
                   Align(
@@ -70147,7 +70138,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
 
                   // TABLEAU DU CLASSEMENT CUMULÉ
                   ...leaderboard.asMap().entries.map((entry) {
@@ -70161,8 +70152,8 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
 
                     Color medalColor = Colors.white60;
                     if (rank == 1) medalColor = Colors.amberAccent;
-                    if (rank == 2) medalColor = const Color(0xFFCBD5E1);
-                    if (rank == 3) medalColor = const Color(0xFFCD7F32);
+                    if (rank == 2) medalColor = Color(0xFFCBD5E1);
+                    if (rank == 3) medalColor = Color(0xFFCD7F32);
 
                     return Container(
                       margin: const EdgeInsets.symmetric(vertical: 3),
@@ -70192,13 +70183,13 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               fontSize: 13,
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 10),
                           Expanded(
                             child: Row(
                               children: [
                                 Flexible(
                                   child: Text(
-                                    isMe ? "$pName (${'Moi'})" : pName,
+                                    isMe ? AppLocalizations.of(context)!.pname : pName,
                                     style: TextStyle(
                                       fontWeight:
                                           isMe
@@ -70214,8 +70205,8 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                   ),
                                 ),
                                 if (isPlayerAdmin) ...[
-                                  const SizedBox(width: 4),
-                                  const Icon(
+                                  SizedBox(width: 4),
+                                  Icon(
                                     Icons.admin_panel_settings,
                                     size: 14,
                                     color: Colors.amberAccent,
@@ -70251,7 +70242,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 10),
                           Text(
                             AppLocalizations.of(context)!.pts13(pScore),
                             style: TextStyle(
@@ -70268,7 +70259,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                     );
                   }).toList(),
 
-                  const SizedBox(height: 22),
+                  SizedBox(height: 22),
 
                   // BOUTONS D'ACTION : REJOUER / QUITTER / FORCE ADMIN
                   Column(
@@ -70277,7 +70268,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                         children: [
                           Expanded(
                             child: OutlinedButton.icon(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.exit_to_app_rounded,
                                 size: 16,
                               ),
@@ -70286,7 +70277,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               ),
                               style: OutlinedButton.styleFrom(
                                 foregroundColor: Colors.redAccent,
-                                side: const BorderSide(color: Colors.redAccent),
+                                side: BorderSide(color: Colors.redAccent),
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 13,
                                 ),
@@ -70297,7 +70288,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               onPressed: widget.onExit,
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 10),
                           Expanded(
                             flex: 2,
                             child: ElevatedButton.icon(
@@ -70309,9 +70300,9 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               ),
                               label: Text(
                                 hasVoted
-                                    ? "${'PRÊT'} ($readyCount/$totalPlayers)"
+                                    ? AppLocalizations.of(context)!.readycountTotalplayers
                                     : AppLocalizations.of(context)!.rejouerGarderPts,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12.5,
                                 ),
@@ -70320,7 +70311,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                 backgroundColor:
                                     hasVoted
                                         ? Colors.grey[700]
-                                        : const Color(0xFF10B981),
+                                        : Color(0xFF10B981),
                                 foregroundColor: Colors.white,
                                 elevation: 5,
                                 padding: EdgeInsets.symmetric(
@@ -70351,7 +70342,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: TextButton.icon(
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.flash_on,
                               size: 16,
                               color: Colors.amberAccent,
