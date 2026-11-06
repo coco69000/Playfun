@@ -1,0 +1,190 @@
+REPLACED: _l10n.marquesDeVoiture -> 'Marques de voiture'
+REPLACED: _l10n.paysDuMonde -> 'Pays du monde'
+REPLACED: _l10n.fruitsLegumes -> 'Fruits & Légumes'
+REPLACED: _l10n.animaux -> 'Animaux'
+REPLACED: _l10n.metiers -> 'Métiers'
+REPLACED: _l10n.objetsDeLaCuisine -> 'Objets de la cuisine'
+REPLACED: _l10n.villes -> 'Villes'
+REPLACED: _l10n.sports -> 'Sports'
+REPLACED: _l10n.couleurs -> 'Couleurs'
+REPLACED: _l10n.partiesDuCorps -> 'Parties du corps'
+REPLACED: _l10n.instrumentsDeMusique -> 'Instruments de musique'
+REPLACED: _l10n.fleursArbres -> 'Fleurs & Arbres'
+REPLACED: _l10n.filmsDisney -> 'Films Disney'
+REPLACED: _l10n.verbesDu1erGroupe -> 'Verbes du 1er groupe'
+REPLACED: _l10n.chosesRondes -> 'Choses rondes'
+REPLACED: _l10n.chosesRouges -> 'Choses rouges'
+REPLACED: _l10n.unSubstantifExLeChat -> 'un substantif (ex: le chat)'
+REPLACED: _l10n.unAdjectifExMignon -> 'un adjectif (ex: mignon)'
+REPLACED: _l10n.unVerbeExMange -> 'un verbe (ex: mange)'
+REPLACED: _l10n.unSubstantifExLaSouris -> 'un substantif (ex: la souris)'
+REPLACED: _l10n.unAdjectifExMort -> 'un adjectif (ex: mort)'
+REPLACED: _l10n.potionDeVieEtDe -> 'Potion de vie et de mort.'
+REPLACED: _l10n.chocolat -> 'chocolat'
+REPLACED: _l10n.ordinateur -> 'ordinateur'
+REPLACED: _l10n.licorne -> 'licorne'
+REPLACED: _l10n.legende -> 'légende'
+REPLACED: _l10n.mystere -> 'mystère'
+REPLACED: _l10n.fantome1 -> 'fantôme'
+REPLACED: _l10n.minuit -> 'minuit'
+REPLACED: _l10n.ombre -> 'ombre'
+REPLACED: _l10n.lune -> 'lune'
+REPLACED: _l10n.feuille -> 'feuille'
+REPLACED: _l10n.silence -> 'silence'
+REPLACED: _l10n.murmure -> 'murmure'
+REPLACED: _l10n.potion -> 'potion'
+REPLACED: _l10n.miroir -> 'miroir'
+REPLACED: _l10n.magie -> 'magie'
+REPLACED: _l10n.cascade -> 'cascade'
+REPLACED: _l10n.dragon -> 'dragon'
+REPLACED: _l10n.boussole -> 'boussole'
+REPLACED: _l10n.diamant -> 'diamant'
+REPLACED: _l10n.flamme -> 'flamme'
+REPLACED: _l10n.horloge -> 'horloge'
+REPLACED: _l10n.pirate -> 'pirate'
+REPLACED: _l10n.vortex -> 'vortex'
+REPLACED: _l10n.aurore -> 'aurore'
+REPLACED: _l10n.papillon -> 'papillon'
+REPLACED: _l10n.bouclier -> 'bouclier'
+REPLACED: _l10n.labyrinthe -> 'labyrinthe'
+REPLACED: _l10n.cristal -> 'cristal'
+REPLACED: _l10n.volcan -> 'volcan'
+REPLACED: _l10n.mirage -> 'mirage'
+REPLACED: _l10n.sentinelle -> 'sentinelle'
+REPLACED: _l10n.cloche -> 'cloche'
+REPLACED: _l10n.lanterne -> 'lanterne'
+REPLACED: _l10n.parchemin -> 'parchemin'
+REPLACED: _l10n.combinaisonInvalide -> 'Combinaison invalide.'
+REPLACED: _l10n.aGagne2(gameData['players'][winnerId]['name']) -> "${gameData['players'][winnerId]['name']} a gagné !"
+REPLACED: _l10n.aGagne2(gameData['players'][winnerId]['name']) -> "${gameData['players'][winnerId]['name']} a gagné !"
+REPLACED: _l10n.aJoue2(playerName, cardsToPlay.join(', ')) -> "⏱️ $playerName a joué ${cardsToPlay.join(', ')}."
+REPLACED: _l10n.aGagne2(gameData['players'][winnerId]['name']) -> "${gameData['players'][winnerId]['name']} a gagné !"
+REPLACED: _l10n.aJoue3(playerName, winningCombo.join(', ')) -> "⏱️ $playerName a joué ${winningCombo.join(', ')}."
+REPLACED: _l10n.pliTermineAuTourDe2(gameData['players']?[playerOrder[nextIndex]]?['name']) -> "⏱️ Pli terminé. Au tour de ${gameData['players']?[playerOrder[nextIndex]]?['name']} !"
+REPLACED: _l10n.stop -> 'STOP'
+REPLACED: _l10n.stop -> 'STOP'
+REPLACED: _l10n.coupFourrePareLAttaque1(players[targetId]?['name'], matchingSafety) -> "⚡ COUP-FOURRÉ ! ${players[targetId]?['name']} pare l'attaque avec ${matchingSafety} et prend la main !"
+REPLACED: _l10n.stop -> 'STOP'
+REPLACED: _l10n.aAtteintKm(players[playerId]['name'], targetDist) -> "${players[playerId]['name']} a atteint $targetDist km !"
+REPLACED: _l10n.stop -> 'STOP'
+REPLACED: _l10n.stop -> 'STOP'
+REPLACED: _l10n.stop -> 'STOP'
+REPLACED: _l10n.aCouleTouteLaFlotte1(shooterData['name']) -> "${shooterData['name']} a coulé toute la flotte adverse !"
+REPLACED: _l10n.aCouleTouteLaFlotte1(shooterData['name']) -> "${shooterData['name']} a coulé toute la flotte adverse !"
+REPLACED: _l10n.aTireAutomatiquementEn(shooterData['name'], (targetIndex ~/ 10) + 1, (targetIndex % 10) + 1, result) -> "⏱️ ${shooterData['name']} a tiré automatiquement en ${(targetIndex ~/ 10) + 1}-${(targetIndex % 10) + 1} ($result)."
+REPLACED: _l10n.aJoue4(playerName, candidateCards.join(', ')) -> "⏱️ $playerName a joué ${candidateCards.join(', ')}."
+REPLACED: _l10n.pliTermineAuTourDe3(gameData['players']?[playerOrder[nextIndex]]?['name']) -> "⏱️ Pli terminé. Au tour de ${gameData['players']?[playerOrder[nextIndex]]?['name']}."
+REPLACED: _l10n.estLeNouvelHote1(players[playerOrder[0]]?['name']) -> "${players[playerOrder[0]]?['name']} est le nouvel hôte."
+REPLACED: _l10n.egalitePersistanteLeDestinDepartage1(playerData[randomEliminated]?['name']) -> "Égalité persistante ! Le destin départage au hasard : ${playerData[randomEliminated]?['name']} est éliminé."
+REPLACED: _l10n.texteRequis -> 'Texte requis.'
+REPLACED: _l10n.estMortEDeChagrin1(playerData[otherLoverId]['name']) -> "${playerData[otherLoverId]['name']} est mort(e) de chagrin pour son amour !"
+REPLACED: _l10n.lHeritierHeriteDuRole2(playerData[heritierId]['name'], playerData[testateurId]['name'], newRole) -> "${playerData[heritierId]['name']} (l'Héritier) hérite du rôle de ${playerData[testateurId]['name']} : $newRole !"
+REPLACED: _l10n.heriteEgalementDuStatutDe1(playerData[heritierId]['name']) -> "${playerData[heritierId]['name']} hérite également du statut de Capitaine !"
+REPLACED: _l10n.leVillageDecouvreAvecEffroi1(deadThisNightNames.toSet().join(', ')) -> "Le village découvre avec effroi le(s) corps de : ${deadThisNightNames.toSet().join(', ')}."
+REPLACED: _l10n.leFossoyeurReveleEtaitUn1(playerData[fossoyeurId]['name'], playerData[targetPlayerId]['name'], targetRole) -> "${playerData[fossoyeurId]['name']} (le Fossoyeur) révèle : ${playerData[targetPlayerId]['name']} était un(e) $targetRole !"
+REPLACED: _l10n.etEtaitUnE(playerData[otherRevealedPlayerId]['name'], otherRevealedRole) -> " Et ${playerData[otherRevealedPlayerId]['name']} était un(e) $otherRevealedRole !"
+REPLACED: _l10n.leDictateurAExecuteUn1(playerData[dictatorId]['name'], playerData[targetId]['name'], targetRole) -> "Le Dictateur ${playerData[dictatorId]['name']} a exécuté un imposteur (${playerData[targetId]['name']} - $targetRole) et devient Capitaine !"
+REPLACED: _l10n.leLoupBavardNA1(playerData[loupBavardId]['name']) -> "Le Loup Bavard (${playerData[loupBavardId]['name']}) n'a pas dit son mot et est mort au coucher du soleil !"
+REPLACED: _l10n.estMortEDeChagrin1(playerData[otherLoverId]['name']) -> "${playerData[otherLoverId]['name']} est mort(e) de chagrin pour son amour !"
+REPLACED: _l10n.leVillageAVoteEt1(playerData[eliminatedId]['name']) -> "Le village a voté et élimine ${playerData[eliminatedId]['name']}."
+REPLACED: _l10n.leMercenaireAFaitEliminer1(playerData[mercenaireId]['name']) -> "Le Mercenaire ${playerData[mercenaireId]['name']} a fait éliminer sa cible au Jour 1 ! Il remporte la partie seul !"
+REPLACED: _l10n.meurtDeChagrinPourSon1(playerData[otherLoverId]['name']) -> "${playerData[otherLoverId]['name']} meurt de chagrin pour son amour !"
+REPLACED: _l10n.lHeritierHeriteDuRole2(playerData[heritierId]['name'], playerData[testateurId]['name'], newRole) -> "${playerData[heritierId]['name']} (l'Héritier) hérite du rôle de ${playerData[testateurId]['name']} : $newRole !"
+REPLACED: _l10n.heriteEgalementDuStatutDe1(playerData[heritierId]['name']) -> "${playerData[heritierId]['name']} hérite également du statut de Capitaine !"
+REPLACED: _l10n.estMortEDeChagrin1(playerData[otherLoverId]['name']) -> "${playerData[otherLoverId]['name']} est mort(e) de chagrin pour son amour !"
+REPLACED: _l10n.lHeritierHeriteDuRole2(playerData[heritierIdCheck]['name'], playerData[testateurId]['name'], newRole) -> "${playerData[heritierIdCheck]['name']} (l'Héritier) hérite du rôle de ${playerData[testateurId]['name']} : $newRole !"
+REPLACED: _l10n.lAncienCapitaine1 -> "L\\'ancien Capitaine"
+REPLACED: _l10n.aDit(playerData[playerId]?['name'] ?? _l10n.joueur, cleanClue) -> "${playerData[playerId]?['name'] ?? _l10n.joueur} a dit : '$cleanClue'"
+REPLACED: _l10n.seulMrWhitePeutDeviner -> 'Seul Mr. White peut deviner.'
+REPLACED: _l10n.aDevineLeMotCivil1(gameData['playerData']?[playerId]?['name'] ?? 'Mr. White', civilWord) -> "${gameData['playerData']?[playerId]?['name'] ?? 'Mr. White'} a deviné le mot civil ('$civilWord') !"
+REPLACED: _l10n.aProposeMaisCeN(gameData['playerData']?[playerId]?['name'] ?? 'Mr. White', guessedWord, civilWord) -> "${gameData['playerData']?[playerId]?['name'] ?? 'Mr. White'} a proposé '$guessedWord', mais ce n'était pas le mot civil ('$civilWord') !"
+REPLACED: _l10n.typeDeNavireInvalideOu -> 'Type de navire invalide ou inconnu.'
+REPLACED: _l10n.flottesPlaceesCommenceATirer1(playerData[firstPlayer]['name']) -> "Flottes placées ! ${playerData[firstPlayer]['name']} commence à tirer."
+REPLACED: _l10n.tousLesJoueursSontPrets1(playerData[firstPlayer]?['name'] ?? _l10n.joueur) -> "Tous les joueurs sont prêts ! ${playerData[firstPlayer]?['name'] ?? _l10n.joueur} commence à tirer."
+REPLACED: _l10n.laMancheDeRamiCommence1(players[playerIds.first]?['name'] ?? _l10n.joueur) -> "La manche de Rami commence ! C'est au tour de ${players[playerIds.first]?['name'] ?? _l10n.joueur}."
+REPLACED: _l10n.aGagneLaManche1(players[playerId]["name"]) -> '${players[playerId]["name"]} a gagné la manche !'
+REPLACED: _l10n.k3SixConsecutifsLePion1(players[playerId]?['name'] ?? _l10n.joueur) -> "⚠️ 3 six consécutifs ! Le pion de ${players[playerId]?['name'] ?? _l10n.joueur} retourne à l'écurie et son tour passe."
+REPLACED: _l10n.aGagne3(players[playerId]["name"]) -> '${players[playerId]["name"]} a gagné !'
+REPLACED: _l10n.atteintPoints(players[playerId]['name'], targetScore) -> "${players[playerId]['name']} atteint $targetScore points !"
+REPLACED: _l10n.atteintPoints(players[playerId]['name'], targetScore) -> "${players[playerId]['name']} atteint $targetScore points !"
+REPLACED: _l10n.atteintPoints1(players[winnerId]['name'], targetScore) -> "${players[winnerId]['name']} atteint $targetScore points !"
+REPLACED: _l10n.mancheTermineeGagneAvecXp(players[winnerId]?['name'] ?? _l10n.joueur, maxXp) -> "Manche terminée ! ${players[winnerId]?['name'] ?? _l10n.joueur} gagne avec $maxXp XP !"
+REPLACED: _l10n.aJoueUneInversionEt1(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} a joué une Inversion et rejoue !"
+REPLACED: _l10n.aInverseLeSensDe1(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} a inversé le sens de jeu !"
+REPLACED: _l10n.aSauteLeTourDe1(players[playerId]?['name'] ?? _l10n.joueur, skippedPlayerName) -> "${players[playerId]?['name'] ?? _l10n.joueur} a sauté le tour de $skippedPlayerName !"
+REPLACED: _l10n.aEmpileUn2Cumul1(players[playerId]?['name'] ?? _l10n.joueur, pendingDraw + 2) -> "${players[playerId]?['name'] ?? _l10n.joueur} a empilé un +2. Cumul : ${pendingDraw + 2} cartes !"
+REPLACED: _l10n.aJoueUn21(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} a joué un +2 !"
+REPLACED: _l10n.aJoueUnJokerEt1(players[playerId]?['name'] ?? _l10n.joueur, chosenColor) -> "${players[playerId]?['name'] ?? _l10n.joueur} a joué un Joker et choisi la couleur $chosenColor !"
+REPLACED: _l10n.aEmpileUn4Cumul1(players[playerId]?['name'] ?? _l10n.joueur, pendingDraw + 4) -> "${players[playerId]?['name'] ?? _l10n.joueur} a empilé un +4. Cumul : ${pendingDraw + 4} cartes !"
+REPLACED: _l10n.aJoueUnSuperJoker1(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} a joué un Super Joker +4 !"
+REPLACED: _l10n.aPoseSaDerniereCarte1(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} a posé sa dernière carte et remporte la manche !"
+REPLACED: _l10n.gagneLaMancheAvecPoints(players[playerId]?['name'] ?? _l10n.joueur, roundScore) -> "${players[playerId]?['name'] ?? _l10n.joueur} gagne la manche avec +$roundScore points !"
+REPLACED: _l10n.nAPlusQuUne1(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} n'a plus qu'une seule carte !"
+REPLACED: _l10n.passeSonTour4(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} passe son tour."
+REPLACED: _l10n.nAPasJoueA5(gameData['players']?[playerId]?['name'] ?? _l10n.joueur) -> "${gameData['players']?[playerId]?['name'] ?? _l10n.joueur} n'a pas joué à temps, pioche et passe son tour."
+REPLACED: _l10n.symboleIncorrect -> 'Symbole incorrect !'
+REPLACED: _l10n.destinationHorsDuDamier -> 'Destination hors du damier.'
+REPLACED: _l10n.votreCibleEstEliminezLe1(playerData[mercenaireTargetId]?['name'] ?? 'Inconnu') -> "Votre cible est ${playerData[mercenaireTargetId]?['name'] ?? 'Inconnu'}. Éliminez-le(la) au Jour 1 !"
+REPLACED: _l10n.dessinateurIntrouvable -> 'Dessinateur introuvable.'
+REPLACED: _l10n.gagnantInvalide -> 'Gagnant invalide.'
+REPLACED: _l10n.aReponduEtPasseLa(gameData['players'][playerId]['name'], cleanAnswer) -> "${gameData['players'][playerId]['name']} a répondu '$cleanAnswer' et passe la bombe !"
+REPLACED: _l10n.aPiocheCarteS(players[playerId]?['name'] ?? _l10n.joueur, pendingDraw) -> "${players[playerId]?['name'] ?? _l10n.joueur} a pioché $pendingDraw carte(s)."
+REPLACED: _l10n.aPiocheUneCarteEt2(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} a pioché une carte et peut la jouer."
+REPLACED: _l10n.aPiocheUneCarteEt3(players[playerId]?['name'] ?? _l10n.joueur) -> "${players[playerId]?['name'] ?? _l10n.joueur} a pioché une carte et passe son tour."
+REPLACED: _l10n.nAPas1Carte1(players[targetId]?['name'] ?? _l10n.leJoueur) -> "${players[targetId]?['name'] ?? _l10n.leJoueur} n'a pas 1 carte, l'appel UNO est invalide."
+REPLACED: _l10n.aCrieContreUnoPioche1(players[callerId]?['name'] ?? _l10n.joueur, players[targetId]?['name'] ?? _l10n.joueur) -> "${players[callerId]?['name'] ?? _l10n.joueur} a crié Contre UNO ! ${players[targetId]?['name'] ?? _l10n.joueur} pioche 2 cartes."
+REPLACED: _l10n.aDitUno1(players[targetId]?['name'] ?? _l10n.joueur) -> "${players[targetId]?['name'] ?? _l10n.joueur} a dit UNO !"
+REPLACED: _l10n.appelUnoInvalide -> 'Appel UNO invalide.'
+REPLACED: _l10n.aChoisiLaCouleur(players[playerId]?['name'] ?? _l10n.joueur, chosenColor) -> "${players[playerId]?['name'] ?? _l10n.joueur} a choisi la couleur $chosenColor !"
+REPLACED: _l10n.estLeDernierSurvivantEt(players[winnerId]?['name'] ?? _l10n.unJoueur) -> "${players[winnerId]?['name'] ?? _l10n.unJoueur} est le dernier survivant et remporte Skull !"
+REPLACED: _l10n.aRemporte2DefisEt(players[challengerId]?['name'] ?? _l10n.unJoueur) -> "${players[challengerId]?['name'] ?? _l10n.unJoueur} a remporté 2 défis et gagne la partie !"
+REPLACED: _l10n.jugeIntrouvable -> 'Juge introuvable.'
+REPLACED: _l10n.nouvelleMainEstLeDonneur1(players[playerIds[dealerIndex]]['name']) -> "Nouvelle main ! ${players[playerIds[dealerIndex]]['name']} est le donneur."
+REPLACED: _l10n.poseLaPetiteBlindDe1(players[smallBlindId]['name'], smallBlindActual) -> "${players[smallBlindId]['name']} pose la petite blind de $smallBlindActual."
+REPLACED: _l10n.poseLaGrosseBlindDe1(players[bigBlindId]['name'], bigBlindActual) -> "${players[bigBlindId]['name']} pose la grosse blind de $bigBlindActual."
+REPLACED: _l10n.seCouche1(myData['name']) -> "${myData['name']} se couche."
+REPLACED: _l10n.faitTapisAllIn1(myData['name']) -> "${myData['name']} fait tapis (all-in) !"
+REPLACED: _l10n.suitPour(myData['name'], callAmount) -> "${myData['name']} suit pour $callAmount."
+REPLACED: _l10n.montantDeRelanceRequis -> 'Montant de relance requis.'
+REPLACED: _l10n.faitTapisAllInEn1(myData['name'], totalBetAmount) -> "${myData['name']} fait tapis (all-in) en relançant à $totalBetAmount !"
+REPLACED: _l10n.relanceA(myData['name'], totalBetAmount) -> "${myData['name']} relance à $totalBetAmount."
+REPLACED: _l10n.abattageShowdown -> '--- ABATTAGE (SHOWDOWN) ---'
+REPLACED: _l10n.gagneLePotParForfait1(playerData[winners.first]['name']) -> "${playerData[winners.first]['name']} gagne le pot par forfait !"
+REPLACED: _l10n.gagneNtLePotAvec(winnerNames, bestHand?.rank.name ?? _l10n.uneMain) -> '$winnerNames gagne(nt) le pot avec ${bestHand?.rank.name ?? _l10n.uneMain} !'
+REPLACED: _l10n.aPrisA(playerData[playerId]['name'], suit) -> "${playerData[playerId]['name']} a pris à $suit !"
+REPLACED: _l10n.passeLAnnonce -> "passe l'annonce"
+REPLACED: _l10n.horsLimites -> 'Hors limites !'
+REPLACED: AppLocalizations.of(context)!.lAdversaire -> "L\\'adversaire"
+REPLACED: AppLocalizations.of(context)!.histoireCollective -> 'HISTOIRE COLLECTIVE'
+REPLACED: AppLocalizations.of(context)!.lAdversaire -> "L\\'adversaire"
+REPLACED: AppLocalizations.of(context)!.distance -> 'DISTANCE'
+REPLACED: AppLocalizations.of(context)!.botte -> 'BOTTE'
+REPLACED: AppLocalizations.of(context)!.pneuIncrevable -> 'Pneu\\nIncrevable'
+REPLACED: AppLocalizations.of(context)!.botte -> 'BOTTE'
+REPLACED: AppLocalizations.of(context)!.increvable -> 'INCREVABLE'
+REPLACED: AppLocalizations.of(context)!.botte -> 'BOTTE'
+REPLACED: AppLocalizations.of(context)!.citerne -> 'CITERNE'
+REPLACED: AppLocalizations.of(context)!.attaque -> 'ATTAQUE'
+REPLACED: AppLocalizations.of(context)!.stop -> 'STOP'
+REPLACED: AppLocalizations.of(context)!.attaque -> 'ATTAQUE'
+REPLACED: AppLocalizations.of(context)!.k50Max -> '50 MAX'
+REPLACED: AppLocalizations.of(context)!.panneDEssence -> "Panne\\nd'essence"
+REPLACED: AppLocalizations.of(context)!.attaque -> 'ATTAQUE'
+REPLACED: AppLocalizations.of(context)!.vide1 -> 'VIDE'
+REPLACED: AppLocalizations.of(context)!.attaque -> 'ATTAQUE'
+REPLACED: AppLocalizations.of(context)!.crevaison -> 'CREVAISON'
+REPLACED: AppLocalizations.of(context)!.parade -> 'PARADE'
+REPLACED: AppLocalizations.of(context)!.roulez -> 'ROULEZ'
+REPLACED: AppLocalizations.of(context)!.parade -> 'PARADE'
+REPLACED: AppLocalizations.of(context)!.parade -> 'PARADE'
+REPLACED: AppLocalizations.of(context)!.plein -> 'PLEIN'
+REPLACED: AppLocalizations.of(context)!.parade -> 'PARADE'
+REPLACED: AppLocalizations.of(context)!.lAdversaire -> "L\\'adversaire"
+REPLACED: AppLocalizations.of(context)!.rejouer1 -> 'REJOUER'
+REPLACED: AppLocalizations.of(context)!.vraie -> 'VRAIE'
+REPLACED: AppLocalizations.of(context)!.fausse -> 'FAUSSE'
+REPLACED: AppLocalizations.of(context)!.infecter1(targetName) -> 'Infecter $targetName ?'
+REPLACED: AppLocalizations.of(context)!.codenamesRedTeam -> 'Équipe Rouge'
+REPLACED: AppLocalizations.of(context)!.codenamesBlueTeam -> 'Équipe Bleue'
+REPLACED: AppLocalizations.of(context)!.action1 -> 'ACTION'
+REPLACED: AppLocalizations.of(context)!.action2 -> '🔥 ACTION'

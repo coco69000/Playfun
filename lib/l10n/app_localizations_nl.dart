@@ -12,13 +12,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get equipesPour => 'Teams voor {0}';
 
   @override
-  String get equilibrer => 'Balans';
+  String get equilibrer => 'Verdelen';
 
   @override
   String get equipe => 'Team';
 
   @override
-  String get retirer => 'Verwijder';
+  String get retirer => 'Verwijderen';
 
   @override
   String get joueursNonAssignes => 'Niet-toegewezen spelers ({0})';
@@ -27,38 +27,20 @@ class AppLocalizationsNl extends AppLocalizations {
   String get annuler => 'Annuleren';
 
   @override
-  String get confirmerLesEquipes => 'Bevestig teams';
+  String get confirmerLesEquipes => 'Teams bevestigen';
 
   @override
-  String get jeuDeSoiree => 'Avondwedstrijd';
+  String get entrezVotrePseudo => 'Voer je bijnaam in';
 
   @override
-  String get multijoueurEnLigne => 'Multiplayer (Online)';
+  String get veuillezEntrerUnPseudo => 'Voer een bijnaam in.';
 
   @override
-  String get modeLocalHorsLigne => 'Lokale modus (offline)';
-
-  @override
-  String get modeMultijoueur => 'Multiplayermodus';
-
-  @override
-  String get entrezVotrePseudo => 'Voer je gebruikersnaam in';
-
-  @override
-  String get pseudo => 'Gebruikers-ID';
-
-  @override
-  String get creerUnePartie => 'Maak een spel';
-
-  @override
-  String get veuillezEntrerUnPseudo => 'Voer alstublieft een bijnaam in.';
-
-  @override
-  String get rejoindreUnePartie => 'Doe mee aan een spel';
+  String get rejoindreUnePartie => 'Deelnemen aan een spel';
 
   @override
   String get vousAvezAtteintVotreLimite =>
-      'Je hebt vandaag je limiet van 20 multiplayer-games bereikt.';
+      'Je hebt je limiet van 20 multiplayerspellen voor vandaag bereikt.';
 
   @override
   String get pasAssezDePiecesPour =>
@@ -70,23 +52,23 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get pasAssezDePiecesPour1 =>
-      'Niet genoeg munten om een zoektocht te starten! Kosten: 1 munt.';
+      'Niet genoeg munten om te zoeken! Kosten: 1 munt.';
 
   @override
   String get commentVoulezVousJouer => 'Hoe wil je spelen?';
 
   @override
   String get ceJeuRequiertDeConnaitre =>
-      'Dit spel vereist dat je andere spelers kent en is niet beschikbaar in openbare matchmaking.';
+      'Dit spel vereist dat je de andere spelers kent en is niet beschikbaar in openbare matchmaking.';
 
   @override
-  String get historiqueDesThemesIa => 'Geschiedenis van AI-thema\'s';
+  String get historiqueDesThemesIa => 'AI-thema geschiedenis';
 
   @override
   String get pour => 'Voor {0}';
 
   @override
-  String get tousLesJeux => 'Alle wedstrijden';
+  String get tousLesJeux => 'Alle spellen';
 
   @override
   String get elements => '{0} items';
@@ -108,25 +90,25 @@ class AppLocalizationsNl extends AppLocalizations {
       '✨ Samengevoegde thema\'s! Het actieve pakket bevat nu {0} items.';
 
   @override
-  String get modifierCompleter => 'Bewerking / Voltooid';
+  String get modifierCompleter => 'Bewerken / Aanvullen';
 
   @override
-  String get modifierLeTheme => 'Themawijziging';
+  String get modifierLeTheme => 'Thema bewerken';
 
   @override
-  String get titreDuThemeIaPersonnalise => 'Thematitel (AI / Custom)';
+  String get titreDuThemeIaPersonnalise => 'Thematitel (AI / Aangepast)';
 
   @override
   String get ajouterUnMot => 'Voeg een woord toe...';
 
   @override
-  String get enregistrerSurFirebase => 'Sla op naar Firebase';
+  String get enregistrerSurFirebase => 'Opslaan op Firebase';
 
   @override
-  String get creerUnePartie1 => 'Maak een spel';
+  String get creerUnePartie1 => 'Spel maken';
 
   @override
-  String get jeuSelectionne => 'Geselecteerde wedstrijd';
+  String get jeuSelectionne => 'Geselecteerd spel';
 
   @override
   String get difficulte => 'Moeilijkheidsgraad';
@@ -135,10 +117,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get remplaceParLeThemeIa => 'Vervangen door AI-thema';
 
   @override
-  String get soft => 'Zacht';
+  String get soft => 'Milt';
 
   @override
-  String get hard => 'Hard';
+  String get hard => 'Pittig';
 
   @override
   String get hardcore => 'Hardcore';
@@ -150,7 +132,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get historique => 'Geschiedenis';
 
   @override
-  String get melangerPlusieursThemes => 'Mix verschillende thema\'s:';
+  String get melangerPlusieursThemes => 'Meerdere thema\'s mengen:';
 
   @override
   String get combineS => '✨ {0 gecombineerd}';
@@ -162,11 +144,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get minRequisRecommande => 'Minimaal vereist: {0} | Aanbevolen: {1}';
 
   @override
-  String get ambianceTonaliteDeJeu => 'Stemming / Speeltoon:';
+  String get ambianceTonaliteDeJeu => 'Sfeer / Toon van het spel:';
 
   @override
   String get precisionsOuIdeesSupplementairesOptionnel =>
-      'Aanvullende verduidelijkingen of ideeën (optioneel)';
+      'Details of extra ideeën (optioneel)';
 
   @override
   String get elementsGeneresEtSauvegardes =>
@@ -181,7 +163,7 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get desactiverCePack => 'Deactiveer dit pakket';
+  String get desactiverCePack => 'Schakel dit pakket uit';
 
   @override
   String get modeDeJeu => 'Spelmodus';
@@ -190,20 +172,20 @@ class AppLocalizationsNl extends AppLocalizations {
   String get normal => 'Normaal';
 
   @override
-  String get complement => 'Complement';
+  String get complement => 'Aanvulling';
 
   @override
   String get briseGlace => 'IJsbreker';
 
   @override
-  String get parametreAjouter1 => '\'Voeg 1\' parameter toe';
+  String get parametreAjouter1 => '\'Voeg 1 toe\' instelling';
 
   @override
   String get chacunCompleteLeMemeDessin =>
-      'Elk maakt dezelfde begintekening in plaats van de warp.';
+      'Iedereen vult dezelfde begintekening aan in plaats van een keten.';
 
   @override
-  String get scoreCible => 'Streefscore';
+  String get scoreCible => 'Doelscore';
 
   @override
   String get jetonsDeDepart => 'Startchips: {0}';
@@ -220,40 +202,40 @@ class AppLocalizationsNl extends AppLocalizations {
       'Complexer, meer kaarten, meer symbolen.';
 
   @override
-  String get jeuSimplifieVraiFaux => 'Vereenvoudigd spel (waar/onwaar)';
+  String get jeuSimplifieVraiFaux => 'Vereenvoudigd spel (Waar/Onwaar)';
 
   @override
   String get chacunRaconteUneHistoireLes =>
-      'Elk vertelt een verhaal, de anderen stemmen op Waar of Onwaar.';
+      'Iedereen vertelt een verhaal, de anderen stemmen Waar of Niet waar.';
 
   @override
-  String get modeDeVote => 'Stemmethode';
+  String get modeDeVote => 'Stemmodus';
 
   @override
   String get simultane => 'Gelijktijdig';
 
   @override
-  String get tourParTour => 'Beurt voor beurt';
+  String get tourParTour => 'Om beurten';
 
   @override
-  String get categoriesDuPetitBac => 'Categorieën van de Petit Bac';
+  String get categoriesDuPetitBac => 'Pim Pam Pet Categorieën';
 
   @override
-  String get ajouterUneCategorie => 'Voeg een categorie toe';
+  String get ajouterUneCategorie => 'Categorie toevoegen';
 
   @override
-  String get varianteRevolution => 'Revolution-variant';
+  String get varianteRevolution => 'Revolutie-variant';
 
   @override
   String get siUnJoueurPoseUn =>
-      'Als een speler een viertal legt, wordt de volgorde van de kaarten voor de rest van de ronde omgedraaid.';
+      'Als een speler een carré speelt, wordt de kaartvolgorde voor de rest van de ronde omgedraaid.';
 
   @override
-  String get seulement30Traits => 'Slechts 30 slagen';
+  String get seulement30Traits => 'Slechts 30 streken';
 
   @override
   String get leDessinateurEstLimiteA =>
-      'De cartoonist mag maximaal 30 streken per tekening maken.';
+      'De tekenaar is beperkt tot maximaal 30 lijnen per tekening.';
 
   @override
   String get variante => 'Variant';
@@ -262,27 +244,27 @@ class AppLocalizationsNl extends AppLocalizations {
   String get classiqueSurrealiste => 'Klassiek (Surrealistisch)';
 
   @override
-  String get suite3DerniersMots => 'Vervolg (laatste 3 woorden)';
+  String get suite3DerniersMots => 'Vervolg (Laatste 3 woorden)';
 
   @override
-  String get modeDeTransmission => 'Uitzendwijze';
+  String get modeDeTransmission => 'Verzendingsmodus';
 
   @override
-  String get k1FeuillePartagee => '1 gedeeld blad';
+  String get k1FeuillePartagee => '1 gedeeld vel';
 
   @override
   String get k1FeuilleParJoueur => '1 vel per speler';
 
   @override
   String get autoriserLesIndicesInvalidesSimplifie =>
-      'Ongeldige indices toestaan (vereenvoudigd)';
+      'Ongeldige hints toestaan (vereenvoudigd)';
 
   @override
   String get lesIndicesIdentiquesSerontToujours =>
-      'Identieke aanwijzingen worden altijd geëlimineerd, maar niet die die te dicht bij het woord liggen.';
+      'Identieke hints worden nog steeds geëlimineerd, maar niet degene die te dicht bij het woord liggen.';
 
   @override
-  String get configurationDesRoles => 'Rolconfiguratie';
+  String get configurationDesRoles => 'Rollenconfiguratie';
 
   @override
   String get totalDesRolesSelectionnesMinimum =>
@@ -292,17 +274,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get parametresDuJeu => 'Spelinstellingen';
 
   @override
-  String get chronoGlobalBombe => 'Globale Timer (Bom)';
+  String get chronoGlobalBombe => 'Globale timer (Bom)';
 
   @override
   String get leTempsNeSeReinitialise =>
-      'De tijd wordt niet voor elke speler gereset en wordt gesetteld. De aardappel explodeert aan het einde!';
+      'De tijd wordt niet per speler gereset. De aardappel ontploft op het einde!';
 
   @override
   String get dureeDeLaBombeS => 'Bomduur: {0} s';
 
   @override
-  String get parametresTimeSUp => 'Instellingen van Time\'s Up';
+  String get parametresTimeSUp => 'Time\'s Up Instellingen';
 
   @override
   String get nombreDeManches => 'Aantal rondes: {0}';
@@ -311,24 +293,24 @@ class AppLocalizationsNl extends AppLocalizations {
   String get k1Description => '1 (Beschrijving)';
 
   @override
-  String get k21Mot => '2 (+ 1 woord)';
+  String get k21Mot => '2 (+ 1 Woord)';
 
   @override
   String get k3Mime => '3 (+ Mime)';
 
   @override
-  String get jouerParEquipesMode2v2 => 'Teamspel (2v2+ Modus)';
+  String get jouerParEquipesMode2v2 => 'In teams spelen (2v2+ modus)';
 
   @override
   String get unJoueurDevineSonEquipe =>
-      'Een speler raadt, zijn team helpt hem, het andere team checkt.';
+      'Eén speler raadt, zijn team helpt, het tegenstandersteam controleert.';
 
   @override
-  String get equipes2v2 => '2v2 teams';
+  String get equipes2v2 => '2v2 Teams';
 
   @override
   String get necessiteExactement4JoueursVous =>
-      'Vereist precies 4 spelers. Je helpt de speler voor je.';
+      'Vereist precies 4 spelers. Je helpt de speler tegenover je.';
 
   @override
   String get parametresDominos => 'Domino-instellingen';
@@ -337,32 +319,32 @@ class AppLocalizationsNl extends AppLocalizations {
   String get modeDeJeu1 => 'Spelmodus:';
 
   @override
-  String get pioche => 'Gelijkspel';
+  String get pioche => 'Trekken';
 
   @override
   String get bloque => 'Geblokkeerd';
 
   @override
-  String get allFives => 'Alle vijven';
+  String get allFives => 'All Fives';
 
   @override
   String get scoreCible1 => 'Streefscore: {0}';
 
   @override
-  String get parametresUno => 'Uno-parameters';
+  String get parametresUno => 'Uno-instellingen';
 
   @override
   String get cartesDeDepart => 'Startkaarten:';
 
   @override
-  String get empilementDesCartes24 => 'Kaartstapeling +2/+4';
+  String get empilementDesCartes24 => '+2/+4 kaarten stapelen';
 
   @override
   String get permetDeJouerUn2 =>
-      'Hiermee kun je een +2 op een +2 spelen (of +4 op +2/+4) om meer te trekken.';
+      'Laat toe een +2 op een +2 (of +4 op +2/+4) te spelen om meer te laten trekken.';
 
   @override
-  String get parametresPhotoRoulette => 'Foto-roulette-instellingen';
+  String get parametresPhotoRoulette => 'Photo Roulette Instellingen';
 
   @override
   String get typeDeMedia => 'Mediatype';
@@ -383,15 +365,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get photosPiocheesParJoueur => 'Foto\'s genomen door speler: {0}';
 
   @override
-  String get parametresActionOuVerite => 'Waarheid of durven instellingen';
+  String get parametresActionOuVerite => 'Doen, Durf of Waarheid Instellingen';
 
   @override
-  String get lesJoueursEcriventLesDefis =>
-      'Spelers schrijven de uitdagingen op';
+  String get lesJoueursEcriventLesDefis => 'Spelers schrijven de uitdagingen';
 
   @override
   String get unJoueurAleatoireEcritLe =>
-      'Een willekeurige speler schrijft de uitdaging in plaats van een vooraf bepaalde uitdaging.';
+      'Een willekeurige speler schrijft de uitdaging in plaats van een vooraf gedefinieerde.';
 
   @override
   String get nombreDeTours => 'Aantal ronden: {0}';
@@ -406,79 +387,78 @@ class AppLocalizationsNl extends AppLocalizations {
   String get rolesDeBase => 'Basisrollen';
 
   @override
-  String get nombreDInfiltres => 'Aantal infiltranten';
+  String get nombreDInfiltres => 'Aantal Infiltranten';
 
   @override
-  String get nombreDeMrWhite => 'Het nummer van meneer White';
+  String get nombreDeMrWhite => 'Aantal Mr. Whites';
 
   @override
   String get totalImposteursLaRepartitionFinale =>
       'Totaal aantal bedriegers: {0}. De uiteindelijke verdeling wordt indien nodig aangepast om ten minste 1 burger te garanderen.';
 
   @override
-  String get rolesSpeciauxOptionnel => 'Speciale rollen (optioneel)';
+  String get rolesSpeciauxOptionnel => 'Speciale rollen (Optioneel)';
 
   @override
-  String get fouDeJoie => 'Gek van vreugde';
+  String get fouDeJoie => 'Vreugdedwaas';
 
   @override
-  String get gagne4PointsSIl =>
-      'Krijgt +4 punten als hij als eerste wordt uitgeschakeld.';
+  String get gagne4PointsSIl => 'Krijgt +4 punten als hij als eerste afvalt.';
 
   @override
   String get boomerang => 'Boemerang';
 
   @override
   String get la1ereFoisQuIl =>
-      'De eerste keer dat het wordt gestemd, komen de stemmen terug.';
+      'De 1e keer dat er op hem gestemd wordt, kaatsen stemmen terug.';
 
   @override
-  String get deesseDeLaJustice => 'Godin van Gerechtigheid';
+  String get deesseDeLaJustice => 'Godin van de Gerechtigheid';
 
   @override
   String get trancheEnCasDEgalite =>
-      'Beslis in het geval van een gelijkspel, zelfs als het dood is.';
+      'Breekt gelijke stand, zelfs als ze dood is.';
 
   @override
-  String get fantome => 'Ghost';
+  String get fantome => 'Geest';
 
   @override
   String get peutToujoursVoterApresSon =>
-      'Je kunt nog steeds stemmen na eliminatie.';
+      'Mag na eliminatie nog steeds stemmen.';
 
   @override
-  String get amoureux5Joueurs => 'Lovers (5+ spelers)';
+  String get amoureux5Joueurs => 'Geliefden (5+ spelers)';
 
   @override
-  String get siLUnEstElimine =>
-      'Als de een wordt geëlimineerd, valt de ander ook uit.';
+  String get siLUnEstElimine => 'Als de een afvalt, valt de ander ook af.';
 
   @override
   String get mrMeme => 'Mr. Meme';
 
   @override
   String get unJoueurDevraMimerSon =>
-      'Een speler moet elke beurt zijn aanwijzing mimeren.';
+      'Eén speler moet zijn hint elke beurt mimen.';
 
   @override
-  String get vendeurDeFalafels4Joueurs => 'Falafel Vendor (4+ spelers)';
+  String get vendeurDeFalafels4Joueurs => 'Falafelverkoper (4+ spelers)';
 
   @override
   String get recoitUnPouvoirSpecialAleatoire =>
-      'Ontvangt een willekeurige speciale kracht.';
+      'Krijgt een willekeurige speciale kracht.';
 
   @override
-  String get vengeuse5Joueurs => 'Avenger (5+ spelers)';
+  String get vengeuse5Joueurs => 'Wreker (5+ spelers)';
 
   @override
   String get elimineQuelquUnEnEtant =>
-      'Elimineer iemand door geëlimineerd te worden.';
+      'Elimineert iemand wanneer zij geëlimineerd wordt.';
 
   @override
-  String get duellistes5Joueurs => 'Duelisten (5+ spelers)';
+  String get duellistes5Joueurs => 'Duellisten (5+ spelers)';
 
   @override
-  String get duelSecretPourDesPoints => 'Geheime duel voor bonus-/strafpunten.';
+  String get duelSecretPourDesPoints =>
+      'Geheim duel voor bonus- of strafpunten.';
 
   @override
   String get parametresGeneraux => 'Algemene instellingen';
@@ -488,7 +468,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get siDesactiveLeJeuN =>
-      'Als het is uitgeschakeld, gaat het spel niet automatisch verder';
+      'Indien uitgeschakeld, gaat het spel niet automatisch verder';
 
   @override
   String get dureeDeReponseParJoueur => 'Reactietijd per speler: {0}s';
@@ -501,31 +481,32 @@ class AppLocalizationsNl extends AppLocalizations {
   String get communicationEnLigne => 'Communicatie (Online)';
 
   @override
-  String get voixUniquementAudio => 'Alleen Voice (Audio)';
+  String get voixUniquementAudio => 'Alleen spraak (Audio)';
 
   @override
   String get activeLeMicroSansLa =>
-      'Dempen zonder camera (Lokale Modus uitschakelen)';
+      'Schakelt microfoon in zonder camera (Schakelt lokale modus uit)';
 
   @override
-  String get parametresDeRecherchePublique => 'Openbare zoekinstellingen';
+  String get parametresDeRecherchePublique =>
+      'Instellingen openbare matchmaking';
 
   @override
   String get autoriserLaRechercheRapideClassee =>
-      'Sta snelle en gerangschikte zoekopdrachten toe';
+      'Snel & Gerankt zoeken toestaan';
 
   @override
   String get activeLesBoutonsDeRecherche =>
-      'Activeer de globale zoekknoppen om met vreemden te spelen.';
+      'Schakelt wereldwijde zoekknoppen in om met vreemden te spelen.';
 
   @override
   String get monPays => 'Mijn Land';
 
   @override
-  String get leMonde => 'De wereld';
+  String get leMonde => 'Wereldwijd';
 
   @override
-  String get peuImporte => 'Het maakt niet uit';
+  String get peuImporte => 'Maakt niet uit';
 
   @override
   String get avecVideo => 'Met video';
@@ -534,18 +515,18 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sansVideo => 'Zonder video';
 
   @override
-  String get lancerLeJeu => 'START HET SPEL';
+  String get lancerLeJeu => 'START SPEL';
 
   @override
-  String get leCodeDoitComporter6 => 'De code moet 6 cijfers lang zijn.';
+  String get leCodeDoitComporter6 => 'De code moet uit 6 cijfers bestaan.';
 
   @override
   String get codeDePartieInvalideOu =>
-      'Ongeldige spelcode of spel is al begonnen.';
+      'Ongeldige spelcode of spel al begonnen.';
 
   @override
   String get pasAssezDePiecesPour2 =>
-      'Niet genoeg munten om mee te doen aan dit spel! Kosten: 1 munt.';
+      'Niet genoeg munten om mee te doen! Kosten: 1 munt.';
 
   @override
   String get vousRejoignezUnePartieVip =>
@@ -553,26 +534,25 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get impossibleDeRejoindreLaPartie =>
-      'Het is onmogelijk om mee te doen aan het spel.';
+      'Kan niet deelnemen aan het spel.';
 
   @override
   String get erreurDeConnexion => 'Verbindingsfout.';
 
   @override
-  String get rejoindreUnePartie1 => 'Doe mee aan een spel';
+  String get rejoindreUnePartie1 => 'Deelnemen aan een spel';
 
   @override
-  String get codeDeLaPartie6 => 'Onderdelen code (6 cijfers)';
+  String get codeDeLaPartie6 => 'Spelcode (6 cijfers)';
 
   @override
-  String get rejoindre => 'Word lid';
+  String get rejoindre => 'Deelnemen';
 
   @override
-  String get salonPrive => 'Privéruimte';
+  String get salonPrive => 'Privélounge';
 
   @override
-  String get erreurDeConnexionAuSalon =>
-      'Foutmelding verbinding met de woonkamer.';
+  String get erreurDeConnexionAuSalon => 'Fout bij verbinden met lounge.';
 
   @override
   String get laPartieNExistePlus => 'Het spel bestaat niet meer.';
@@ -584,7 +564,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get partagezCeCodeAvecVos => 'DEEL DEZE CODE MET JE VRIENDEN';
 
   @override
-  String get codeDeSalonCopie => 'Gekopieerde handelskamercode!';
+  String get codeDeSalonCopie => 'Loungecode gekopieerd!';
 
   @override
   String get difficulte1 => 'Moeilijkheidsgraad: {0}';
@@ -602,13 +582,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get profilOptions => 'Profiel & Opties';
 
   @override
-  String get inviterMesAmis => 'Nodig mijn vrienden uit';
+  String get inviterMesAmis => 'Vrienden uitnodigen';
 
   @override
   String get vousNAvezPasEncore => 'Je hebt nog geen vrienden!';
 
   @override
-  String get inviterAuSalon => 'Uitnodiging voor de show';
+  String get inviterAuSalon => 'Uitnodigen voor lounge';
 
   @override
   String get inviter => 'Uitnodigen';
@@ -620,7 +600,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get erreur => 'Fout: {0}';
 
   @override
-  String get demarrerLaPartie => 'Begin het spel';
+  String get demarrerLaPartie => 'Spel starten';
 
   @override
   String get enAttenteDeLHote => 'Wachten tot de gastheer lanceert...';
@@ -632,46 +612,46 @@ class AppLocalizationsNl extends AppLocalizations {
   String get siVousQuittezVotrePlace => 'Als je vertrekt, komt je plek vrij.';
 
   @override
-  String get rester => 'Blijf';
+  String get rester => 'Blijven';
 
   @override
-  String get quitter => 'Exit';
+  String get quitter => 'Verlaten';
 
   @override
   String get votreIdentite => 'JOUW IDENTITEIT';
 
   @override
-  String get capacites => 'Capaciteiten:';
+  String get capacites => 'Vaardigheden:';
 
   @override
   String get phaseDeJeuInconnue => 'Onbekende speelfase: {0}';
 
   @override
-  String get partieTerminee => 'Wedstrijd voorbij!';
+  String get partieTerminee => 'Spel afgelopen!';
 
   @override
   String get victoireDes => 'Overwinning voor de {0} !';
 
   @override
-  String get rejouer => 'Herhaling';
+  String get rejouer => 'Opnieuw spelen';
 
   @override
-  String get resultatDuVote => 'Uitslag van de stemming';
+  String get resultatDuVote => 'Stemuitslag';
 
   @override
-  String get personneNAEteElimine => 'Niemand werd uitgeschakeld (gelijkspel).';
+  String get personneNAEteElimine => 'Niemand geëlimineerd (gelijkspel).';
 
   @override
   String get aEteElimineSonRole => '{0} werd geëlimineerd! Zijn rol was: {1}';
 
   @override
-  String get continuer => 'Ga verder';
+  String get continuer => 'Doorgaan';
 
   @override
-  String get enAttenteDeLHote1 => 'Wachtend op de gastheer...';
+  String get enAttenteDeLHote1 => 'Wachten op de host...';
 
   @override
-  String get laVengeuseChoisitSaCible => 'De Avenger kiest haar doelwit...';
+  String get laVengeuseChoisitSaCible => 'De Wreekster kiest haar doelwit...';
 
   @override
   String get vengeance => 'Wraak!';
@@ -680,17 +660,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get tuAsEteElimineE => 'Je bent geëlimineerd. Neem iemand mee!';
 
   @override
-  String get fermer => 'Sluit';
+  String get fermer => 'Sluiten';
 
   @override
   String get tonIndiceUnMot => 'Jouw aanwijzing (één woord)';
 
   @override
-  String get valider => 'Valideren';
+  String get valider => 'Bevestigen';
 
   @override
   String get indiceEnvoyeEnAttenteDes =>
-      '✅ Aanwijzing verzonden! Wachten op andere spelers...';
+      '✅ Hint verzonden! Wachten op andere spelers...';
 
   @override
   String get phaseDeDiscussion => 'Discussiefase';
@@ -699,18 +679,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get soupconne => '👀 {0} verdachten {1}';
 
   @override
-  String get lancerLeVote => 'Begin de stemming';
+  String get lancerLeVote => 'Start stemming';
 
   @override
-  String get debattezLHoteLanceraLe =>
-      'Debat! De presentator begint met de stemming.';
+  String get debattezLHoteLanceraLe => 'Overleg! De host start de stemming.';
 
   @override
-  String get aQuiLaSentence => 'Aan wie is de straf?';
+  String get aQuiLaSentence => 'Wie krijgt het oordeel?';
 
   @override
-  String get voteEnregistreEnAttente =>
-      'Geregistreerde stemming. In behandeling...';
+  String get voteEnregistreEnAttente => 'Stem geregistreerd. Wachten...';
 
   @override
   String get vousNePouvezPasVoter => 'Je kunt niet stemmen.';
@@ -721,10 +699,10 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get permissionRefuseeImpossibleDAcceder =>
-      'Toestemming geweigerd. Geen toegang tot de galerie.';
+      'Toestemming geweigerd. Geen toegang tot galerij.';
 
   @override
-  String get aucunAlbumMediaTrouve => 'Geen mediaalbums gevonden.';
+  String get aucunAlbumMediaTrouve => 'Geen media-album gevonden.';
 
   @override
   String get votreGalerieEstVide => 'Je galerij is leeg.';
@@ -734,7 +712,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Fout bij het selecteren van foto\'s: {0}';
 
   @override
-  String get preparationDeLaPartie => 'Voorbereiding op de wedstrijd';
+  String get preparationDeLaPartie => 'Spelvoorbereiding';
 
   @override
   String get lApplicationVaSelectionnerPhotos =>
@@ -744,10 +722,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get vousEtesPret => 'Je bent er klaar voor!';
 
   @override
-  String get enAttenteDesAutresJoueurs => 'Wachten op de andere spelers...';
+  String get enAttenteDesAutresJoueurs => 'Wachten op andere spelers...';
 
   @override
-  String get autoriserEtLancerLaSelection => 'Toestaan en Start Selectie';
+  String get autoriserEtLancerLaSelection => 'Toestaan en selectie starten';
 
   @override
   String get joueursPrets => 'Ready players: {0} / {1}';
@@ -759,7 +737,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get aQuiEstCettePhoto => 'Van wie is deze foto?';
 
   @override
-  String get calculDesResultats => 'De resultaten berekenen...';
+  String get calculDesResultats => 'Resultaten berekenen...';
 
   @override
   String get laPhotoEtaitA => 'De foto was... {0} !';
@@ -777,14 +755,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get points => '{0}. {1}: {2,} punten';
 
   @override
-  String get retourALAccueil => 'Terug naar huis';
+  String get retourALAccueil => 'Terug naar start';
 
   @override
   String get laPartieAEteTerminee =>
-      'Het spel is voltooid of bestaat niet meer.';
+      'Het spel is beëindigd of bestaat niet meer.';
 
   @override
-  String get quitterLaPartie1 => 'Het spel verlaten';
+  String get quitterLaPartie1 => 'Verlaat spel';
 
   @override
   String get jeuDe => 'Game of {0}';
@@ -793,7 +771,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get objectifPts => 'Doelpunt: {0} punten';
 
   @override
-  String get blancMangerCoco => 'WIT EET KOKOS';
+  String get blancMangerCoco => 'BLANC MANGER COCO';
 
   @override
   String get enAttenteDesCartesDes => 'Wachten op de kaarten van de spelers...';
@@ -802,7 +780,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get joueursOntRepondu => '{0} / {1} spelers reageerden';
 
   @override
-  String get carteEnvoyee => 'Kaart verzonden!';
+  String get carteEnvoyee => 'Kaart ingediend!';
 
   @override
   String get enAttenteDesAutresJoueurs1 =>
@@ -819,7 +797,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Stuur een bericht of stel een woord voor...';
 
   @override
-  String get alerteAdministrateur => 'Beheerdersalert';
+  String get alerteAdministrateur => 'Beheerderswaarschuwing';
 
   @override
   String get neJouePlusVoulezVous =>
@@ -827,17 +805,17 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get noteCeJeuNecessiteUn =>
-      '⚠️ Opmerking: Dit spel vereist persoonlijk advies. De computer zal zijn beurt overslaan als deze behouden blijft.';
+      'Opmerking: Dit spel vereist een persoonlijke mening. De computer slaat zijn beurt over.';
 
   @override
-  String get conserverAvecLIa => 'Conserveren met AI';
+  String get conserverAvecLIa => 'Behouden met AI';
 
   @override
-  String get expulser => 'Deportatie';
+  String get expulser => 'Verwijderen';
 
   @override
   String get vousAvezEteExcluDe =>
-      'Je bent uitgesloten van het spel wegens inactiviteit. De computer speelt voor je (je krijgt geen winst).';
+      'Je bent verwijderd wegens inactiviteit. De computer speelt voor jou (geen beloningen).';
 
   @override
   String get s => '{0} s';
@@ -868,67 +846,66 @@ class AppLocalizationsNl extends AppLocalizations {
   String get k13Remplies => '{0}/13 gevuld';
 
   @override
-  String get finDeLaManche => 'Einde van het kanaal!';
+  String get finDeLaManche => 'Ronde voorbij!';
 
   @override
   String get mancheSuivante => 'Volgende ronde';
 
   @override
   String get enAttenteDeLHote2 =>
-      'Wachten op de gastheer voor de volgende ronde...';
+      'Wachten op de host voor de volgende ronde...';
 
   @override
-  String get revelezVos2PremieresCartes => 'ONTHUL JE EERSTE 2 KAARTEN';
+  String get revelezVos2PremieresCartes => 'DRAAI JE EERSTE 2 KAARTEN OM';
 
   @override
   String get vide => 'Leeg';
 
   @override
-  String get defausse => 'AFWERPEN';
+  String get defausse => 'AFLEGSTAPEL';
 
   @override
-  String get pioche1 => 'HOUWEEL';
+  String get pioche1 => 'PAKKEN';
 
   @override
-  String get piochee => 'HOUWEEL';
+  String get piochee => 'GETROKKEN';
 
   @override
-  String get garderRemplacer => 'BEHOUDEN EN VERVANGEN';
+  String get garderRemplacer => 'BEHOUDEN & VERVANGEN';
 
   @override
-  String get jeterDevoiler => 'GOOIEN EN ONTHULLEN';
+  String get jeterDevoiler => 'AFLEGGEN & ONTHULLEN';
 
   @override
   String get cetteCarteEstDejaVisible =>
-      'Deze kaart is al zichtbaar! Kies een verborgen kaart.';
+      'Deze kaart is al zichtbaar! Kies een gedekte kaart.';
 
   @override
-  String get aucunAlbumAAfficher => 'Geen albums om te tonen.';
+  String get aucunAlbumAAfficher => 'Geen albums om weer te geven.';
 
   @override
-  String get vernissage => 'Open!';
+  String get vernissage => 'Vernissage!';
 
   @override
   String get albumDe => 'Album van {0}';
 
   @override
-  String get prec => 'Vorige.';
+  String get prec => 'Vorige';
 
   @override
   String get album => 'Album {0} / {1}';
 
   @override
-  String get suiv => 'Volgende.';
+  String get suiv => 'Volgende';
 
   @override
-  String get devineCeQueRepresenteCe =>
-      'Raad eens wat deze tekening voorstelt:';
+  String get devineCeQueRepresenteCe => 'Raad wat deze tekening voorstelt:';
 
   @override
-  String get ecrisTaPhrase => 'Schrijf je zin op...';
+  String get ecrisTaPhrase => 'Schrijf je zin...';
 
   @override
-  String get ouvrirLaZoneDeDessin => 'Open het tekengebied';
+  String get ouvrirLaZoneDeDessin => 'Tekenruimte openen';
 
   @override
   String get etatGribouillisInconnu => 'Onbekende Krabbelstatus: {0}';
@@ -946,33 +923,33 @@ class AppLocalizationsNl extends AppLocalizations {
   String get motCible => 'DOELWOORD';
 
   @override
-  String get interdits => 'VERBODEN';
+  String get interdits => 'VERBODEN WOORDEN';
 
   @override
-  String get passer => 'Skip';
+  String get passer => 'Passen';
 
   @override
-  String get trouve => 'GEVONDEN!';
+  String get trouve => 'GERADEN!';
 
   @override
   String get buzzMotInterdit => 'BUZZ! (VERBODEN WOORD)';
 
   @override
   String get ecoutezAttentivementEtProposezVos =>
-      '💬 Luister goed en geef je antwoorden!';
+      '💬 Luister aandachtig en raad mee!';
 
   @override
-  String get finDuTour => '⏳ Einde van de rondleiding...';
+  String get finDuTour => '⏳ Einde beurt...';
 
   @override
   String get estResteAvecLeZombie =>
       '{0} bleef achter met de Zombie in zijn handen!';
 
   @override
-  String get retourAuSalon => 'Terug naar de show';
+  String get retourAuSalon => 'Terug naar Lobby';
 
   @override
-  String get zombieEnMain => 'ZOMBIE IN HAND';
+  String get zombieEnMain => 'ZOMBIE IN DE HAND';
 
   @override
   String get sauve => '{0} (Gered!)';
@@ -988,7 +965,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Paren worden automatisch afgelegd';
 
   @override
-  String get carteSEnJeu => 'Kaart(en) in gebruik:';
+  String get carteSEnJeu => 'Kaart(en) in het spel:';
 
   @override
   String get aucuneCarteEnJeuJouez =>
@@ -999,27 +976,24 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get priseEnChaineVousDevez =>
-      '⚠️ Ketting Vasthouden! Je moet de knipperende pion opnieuw spelen.';
-
-  @override
-  String get aSelectionneSonPionEt => '{0} zijn pion heeft gekozen en denkt...';
+      '⚠️ Meervoudige slag! Je moet het knipperende stuk spelen.';
 
   @override
   String get vousDevezSelectionnerLePion =>
-      'Je moet het oranje gemarkeerde token selecteren.';
+      'Je moet het oranje gemarkeerde stuk selecteren.';
 
   @override
   String get jeuNonImplemente => 'Niet-geïmplementeerd spel: {0}';
 
   @override
-  String get tempsEcoule => 'Tijd verstreken!';
+  String get tempsEcoule => 'Tijd is om!';
 
   @override
-  String get tourSuivant => 'Volgende ronde';
+  String get tourSuivant => 'Volgende beurt';
 
   @override
   String get enAttenteDeLHote3 =>
-      'Wachten tot de presentator aan de volgende ronde begint...';
+      'Wachten op de host om de volgende beurt te starten...';
 
   @override
   String get equipeAPts => 'Team A: {punten} punten';
@@ -1028,7 +1002,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get equipeBPts => 'B-team: {punten} punten';
 
   @override
-  String get cEstAToiDe => 'Het is aan JOU om te raden!';
+  String get cEstAToiDe => 'Jij bent aan de beurt om te raden!';
 
   @override
   String get passer1 => 'SKIP';
@@ -1040,17 +1014,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ecrivezIci => 'Schrijf hier...';
 
   @override
-  String get plierPasser => 'FOLD & PASS';
+  String get plierPasser => 'VOUWEN & DOORGEVEN';
 
   @override
   String get motsRediges => '✏️ {0.} woorden geschreven...';
 
   @override
-  String get leGrandDepliage => 'De Grote Ontvouwing!';
+  String get leGrandDepliage => 'De Grote Onthulling!';
 
   @override
   String get voiciLesUvresCollectivesNees =>
-      'Hier zijn de collectieve werken die uit je verbeelding zijn ontstaan:';
+      'Hier zijn de collectieve creaties geboren uit jullie verbeelding:';
 
   @override
   String get prepareUneAttaqueContreUn =>
@@ -1067,26 +1041,26 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get aucuneBotte => 'Geen laarzen';
+  String get aucuneBotte => 'Geen veiligheidskaarten';
 
   @override
   String get limite50 => 'LIMIET 50';
 
   @override
-  String get crevaison => 'PLATTE BUIZEN';
+  String get crevaison => 'LEKKE BAND';
 
   @override
   String get panneEssence => 'ZONDER BENZINE';
 
   @override
   String get touchezPourJouerRestezAppuye =>
-      'Tik om te spelen • Druk en houd ingedrukt om af te leggen';
+      'Tik om te spelen • Houd vast om af te leggen';
 
   @override
   String get km2 => 'KM';
 
   @override
-  String get choisirLaCible => 'Het kiezen van het doel';
+  String get choisirLaCible => 'Doel kiezen';
 
   @override
   String get placezVotreFlotte => 'Plaats je vloot!';
@@ -1095,46 +1069,46 @@ class AppLocalizationsNl extends AppLocalizations {
   String get flotteDeployee => 'Vloot ingezet!';
 
   @override
-  String get tourner => 'Roteer';
+  String get tourner => 'Draaien';
 
   @override
   String get aleatoire => 'Willekeurig';
 
   @override
-  String get mainTerminee => 'Voltooide Hand';
+  String get mainTerminee => 'Hand Afgelopen';
 
   @override
-  String get distribuerLaSuite => 'Verdeel de rest';
+  String get distribuerLaSuite => 'Volgende delen';
 
   @override
-  String get attenteDuDonneur => 'Wachten op de donor...';
+  String get attenteDuDonneur => 'Wachten op de deler...';
 
   @override
-  String get couche => 'Liggend';
+  String get couche => 'Gepast';
 
   @override
   String get miseActuelle => 'Huidige inzet: {bedrag}';
 
   @override
-  String get enAttente => 'In behandeling...';
+  String get enAttente => 'Wachten...';
 
   @override
-  String get seCoucher => 'Naar bed gaan';
+  String get seCoucher => 'Passen';
 
   @override
-  String get checker => 'Dam';
+  String get checker => 'Checken';
 
   @override
-  String get relancer => 'Verhoog';
+  String get relancer => 'Opnieuw gooien';
 
   @override
-  String get choisirLeMontantDeLa => 'Kies het bedrag van de dunning';
+  String get choisirLeMontantDeLa => 'Kies verhogingsbedrag';
 
   @override
   String get x2 => 'x2';
 
   @override
-  String get pot => 'Potty';
+  String get pot => 'Pot';
 
   @override
   String get allIn => 'All-in';
@@ -1147,13 +1121,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get vousNAvezPlusDe => 'Je hebt geen kaarten meer!';
 
   @override
-  String get garderPasser => 'Keep & Pass';
+  String get garderPasser => 'Houden & Passen';
 
   @override
   String get uno => 'UNO!';
 
   @override
-  String get contreUno => 'Tegen UNO!';
+  String get contreUno => 'Contra UNO!';
 
   @override
   String erreur1(Object p) {
@@ -1167,20 +1141,20 @@ class AppLocalizationsNl extends AppLocalizations {
   String get votezPourUnJoueur => 'Stem op een speler:';
 
   @override
-  String get derniereChanceMrWhite => 'Laatste kans, meneer White!';
+  String get derniereChanceMrWhite => 'Laatste kans Mr. White!';
 
   @override
-  String get quelEtaitLeMotDes => 'Wat was het woord van de burgers?';
+  String get quelEtaitLeMotDes => 'Wat was het woord van de Burgers?';
 
   @override
-  String get validerMonChoix => 'Bevestig mijn keuze';
+  String get validerMonChoix => 'Mijn keuze bevestigen';
 
   @override
-  String get egaliteParfaite => 'Perfecte gelijkheid!';
+  String get egaliteParfaite => 'Volkomen gelijkspel!';
 
   @override
   String get votezUniquementParmiLesSuspects =>
-      'Stem alleen onder de onderstaande gelijke verdachten:';
+      'Stem alleen op de gelijkgeëindigde verdachten hieronder:';
 
   @override
   String get vous => '(Jij)';
@@ -1189,16 +1163,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get question => 'VRAAG';
 
   @override
-  String get choisissezUneCarteAJouer => 'Kies een speelkaart:';
+  String get choisissezUneCarteAJouer => 'Kies een kaart om te spelen:';
 
   @override
-  String get enAttenteDuChoixDu => 'Wachtend op de keuze van de rechter...';
+  String get enAttenteDuChoixDu => 'Wachten op de keuze van de rechter...';
 
   @override
-  String get choisir => 'Kies';
+  String get choisir => 'Kiezen';
 
   @override
-  String get impossibleDeChargerLImage => 'Kan geen afbeelding laden';
+  String get impossibleDeChargerLImage => 'Kan afbeelding niet laden';
 
   @override
   String get votreReponse => 'Jouw antwoord...';
@@ -1210,13 +1184,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get momentDeVerite => 'Moment van de waarheid...';
 
   @override
-  String get tonHistoireEtaitElle => 'Was jouw verhaal ...';
+  String get tonHistoireEtaitElle => 'Was jouw verhaal...';
 
   @override
   String get vraie => 'WAAR';
 
   @override
-  String get fausse => 'FALSE';
+  String get fausse => 'ONWAAR';
 
   @override
   String get ceChoixResteraSecretJusqu =>
@@ -1229,32 +1203,31 @@ class AppLocalizationsNl extends AppLocalizations {
   String get vrai => 'WAAR';
 
   @override
-  String get faux => 'FALSE';
+  String get faux => 'ONWAAR';
 
   @override
   String get detecteurDeMensonges => 'Leugendetector';
 
   @override
-  String get pointezQuelquUn => 'Wijs iemand aan!';
+  String get pointezQuelquUn => 'Wijs naar iemand!';
 
   @override
   String get leJugeLit => 'De rechter luidt: \" {0} \"';
 
   @override
-  String get unJoueurAQuitte => 'Er is nog één speler over...';
+  String get unJoueurAQuitte => 'Een speler is vertrokken...';
 
   @override
-  String get rechercheDeRemplacantsEnCours =>
-      'Er wordt naar vervangers gezocht...';
+  String get rechercheDeRemplacantsEnCours => 'Zoeken naar vervangers...';
 
   @override
-  String get demarrageAutomatiqueDans => 'Auto-start in';
+  String get demarrageAutomatiqueDans => 'Automatische start over';
 
   @override
   String get joueursConnectes => 'Verbonden spelers: {0}';
 
   @override
-  String get partieTerminee1 => 'Wedstrijd voorbij!';
+  String get partieTerminee1 => 'Spel afgelopen!';
 
   @override
   String get vainqueur => 'Winnaar: {0}';
@@ -1264,7 +1237,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get siUnJoueurNeRepond =>
-      'Als een speler niet reageert of vertrekt, zoekt het spel naar een vervanger.';
+      'Als een speler niet reageert of weggaat, zoekt het spel een vervanger.';
 
   @override
   String get histoireDeEtait => 'Geschiedenis van {0} (was {1})';
@@ -1277,7 +1250,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get lesPointsOntEteDistribues =>
-      'Punten zijn verdeeld op basis van je stemmen.';
+      'Punten zijn toegekend op basis van jullie stemmen.';
 
   @override
   String get leMotDesCivilsEtait => 'Het woord van de burgers was: \'\'{0}\'';
@@ -1304,47 +1277,47 @@ class AppLocalizationsNl extends AppLocalizations {
   String get leMotEtait => 'Het woord was: \'\'{0}\'.';
 
   @override
-  String get cartesRevelees => 'Kaarten onthuld:';
+  String get cartesRevelees => 'Onthulde kaarten:';
 
   @override
-  String get erreurDeChargementDuMeme => 'Fout laadt de meme.';
+  String get erreurDeChargementDuMeme => 'Fout bij laden van meme.';
 
   @override
   String get scoreActuelDeCartes => 'Huidige score van {0}: {1.} kaarten.';
 
   @override
-  String get finDuTour1 => 'Einde van de tour';
+  String get finDuTour1 => 'Einde beurt';
 
   @override
-  String get tourSuivant1 => 'Volgende ronde';
+  String get tourSuivant1 => 'Volgende beurt';
 
   @override
   String get enAttenteDeLHote4 =>
-      'Wachten op de gastheer voor de volgende ronde...';
+      'Wachten op de host voor de volgende ronde...';
 
   @override
-  String get prochainTour => 'Volgende ronde';
+  String get prochainTour => 'Volgende Ronde';
 
   @override
   String get terminerLaPartie => 'Beëindig het spel';
 
   @override
-  String get finDeLaManche1 => 'Einde van het Kanaal';
+  String get finDeLaManche1 => 'Einde van de Ronde';
 
   @override
-  String get suite => 'Meer';
+  String get suite => 'Volgende';
 
   @override
-  String get echangeDesCartes => 'Kaartruil';
+  String get echangeDesCartes => 'Kaartuitwisseling';
 
   @override
-  String get commencer => 'Begin';
+  String get commencer => 'Starten';
 
   @override
   String get vousAvezFini => 'Je bent klaar!';
 
   @override
-  String get coupInvalide => 'Ongeldige klap!';
+  String get coupInvalide => 'Ongeldige zet!';
 
   @override
   String get plusDeCartes => 'Meer kaarten!';
@@ -1366,14 +1339,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get crane => 'SCHEDEL';
 
   @override
-  String get lancerLeDefiEnchere => 'START DE UITDAGING (VEILING)';
+  String get lancerLeDefiEnchere => 'START UITDAGING (BOD)';
 
   @override
   String get surencherir => 'OVERBOD';
 
   @override
   String get enAttenteDeLaDecision =>
-      'Wachten op de beslissing van de speler die in wording is...';
+      'Wachten op beslissing van huidige speler...';
 
   @override
   String get enAttenteDuDessin => 'Wachten op de tekening...';
@@ -1385,20 +1358,20 @@ class AppLocalizationsNl extends AppLocalizations {
   String get retourAuSalon1 => 'Terug naar de show';
 
   @override
-  String get enAttenteDeLHote5 => 'Wachtend op de gastheer voor de rest...';
+  String get enAttenteDeLHote5 => 'Wachten op de host om door te gaan...';
 
   @override
   String get carte => 'Map {0} / {1}';
 
   @override
   String get lesAutresEcriventDesIndices =>
-      'Anderen schrijven aanwijzingen voor je...';
+      'De anderen schrijven hints voor jou...';
 
   @override
   String get faitesDevinerLeMot => 'Raad het woord:';
 
   @override
-  String get tonIndiceUnSeulMot => 'Jouw aanwijzing (ÉÉN woord)';
+  String get tonIndiceUnSeulMot => 'Jouw hint (SLECHTS ÉÉN woord)';
 
   @override
   String get unSeulMotAutorise => 'Slechts één woord toegestaan!';
@@ -1407,17 +1380,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get envoyerLIndice => 'Stuur hint';
 
   @override
-  String get tousLesIndicesOntEte => 'Alle aanwijzingen zijn geannuleerd!';
+  String get tousLesIndicesOntEte => 'Alle hints zijn geannuleerd!';
 
   @override
-  String get voiciTesIndices => 'Hier zijn je aanwijzingen!';
+  String get voiciTesIndices => 'Hier zijn je hints!';
 
   @override
   String get aieTousLesIndicesEtaient =>
-      'Au! Alle aanwijzingen waren hetzelfde of ongeldig. Ze zijn uitgewist!';
+      'Ai! Alle hints waren identiek of ongeldig. Ze zijn gewist!';
 
   @override
-  String get taProposition => 'Je voorstel...';
+  String get taProposition => 'Jouw gok...';
 
   @override
   String get jeValide => 'Ik bevestig dit!';
@@ -1427,7 +1400,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String pt(Object eValueKey, Object eValueValue, Object p, Object p2) {
-    return '$p. $eValueKey: $eValueValue PT$p2';
+    return '$p. $eValueKey: $eValueValue pt$p2';
   }
 
   @override
@@ -1437,11 +1410,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get viteUnMot => 'Snel! Eén woord!';
 
   @override
-  String get validerPasser => 'VALIDEREN & DOORLOPEN';
+  String get validerPasser => 'BEVESTIGEN & DOORGEVEN';
 
   @override
   String get prepareTaReponsePendantQue =>
-      'Bereid je antwoord voor terwijl anderen in paniek raken...';
+      'Bereid je antwoord voor terwijl de anderen in paniek raken...';
 
   @override
   String get boom => 'BOEM!';
@@ -1455,34 +1428,31 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get nouvelleManche => 'Nieuw Kanaal';
+  String get nouvelleManche => 'Nieuwe ronde';
 
   @override
-  String get infecter => 'Infect';
+  String get infecter => 'Besmetten';
 
   @override
-  String get devorer => 'Verorberen';
+  String get devorer => 'Verslinden';
 
   @override
-  String get sauver => 'Sla op';
+  String get sauver => 'Redden';
 
   @override
-  String get neRienFaire => 'Doe niets';
+  String get neRienFaire => 'Niets doen';
 
   @override
-  String get faireExploser => 'Ontploffen';
+  String get faireExploser => 'Laat ontploffen';
 
   @override
-  String get coupDEtat => 'Staatskoup';
+  String get coupDEtat => 'Staatsgreep';
 
   @override
-  String get ouvrirLesVotes => 'Open Stemming';
+  String get ouvrirLesVotes => 'Stemming openen';
 
   @override
-  String get cloturerLeVote => 'Stemming afsluiten';
-
-  @override
-  String get k0S => '0 s';
+  String get cloturerLeVote => 'Stemming sluiten';
 
   @override
   String get tempsRestantS => 'Resterende tijd: {0} s';
@@ -1491,7 +1461,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get k6Consecutifs3 => '6 op rij: {streak}/3';
 
   @override
-  String get lancerLeDe => 'GOOI DE DOBBELSTENEN';
+  String get lancerLeDe => 'DOBBELSTEEN ROLLEN';
 
   @override
   String get scorePoints => 'Score: {} punten';
@@ -1501,22 +1471,22 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get impossibleDeJouerCeDomino =>
-      'Het is onmogelijk om hier domino te spelen.';
+      'Kan deze steen hier niet neerleggen.';
 
   @override
-  String get mancheTerminee => 'Ronde over! ';
+  String get mancheTerminee => 'Ronde afgelopen! ';
 
   @override
-  String get dominos => 'Dominostenen';
+  String get dominos => 'Domino\'s';
 
   @override
-  String get extremites => 'Ledematen: ';
+  String get extremites => 'Uiteinden: ';
 
   @override
   String get pioche2 => 'Gelijkspel: {Tel}';
 
   @override
-  String get piocher => 'Gelijkspel';
+  String get piocher => 'Trekken';
 
   @override
   String get ficheDePts => '{0} record ({1} punten)';
@@ -1567,17 +1537,16 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get carteAPrendre => 'KAART OM MEE TE NEMEN';
+  String get carteAPrendre => 'KAART OM TE PAKKEN';
 
   @override
   String get votreMain => 'Je hand ({tel})';
 
   @override
-  String get touchezUneCartePourLa => 'Tik op een kaart om hem neer te leggen';
+  String get touchezUneCartePourLa => 'Tik op een kaart om te spelen';
 
   @override
-  String get aucuneCombinaisonEtaleeSurLa =>
-      'Geen combinaties verspreid op tafel';
+  String get aucuneCombinaisonEtaleeSurLa => 'Nog geen combinaties op tafel';
 
   @override
   String get etaler => 'Spread ({tellen})';
@@ -1591,25 +1560,25 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get placezDansVotreCoin => 'Zet hem in je hoek!';
+  String get placezDansVotreCoin => 'Plaats in jouw hoek!';
 
   @override
-  String get retourner => 'Terugkeer';
+  String get retourner => 'Omdraaien';
 
   @override
-  String get validerLePlacement => 'Valideer de plaatsing';
+  String get validerLePlacement => 'Plaatsing bevestigen';
 
   @override
-  String get vosPieces => 'Jouw delen';
+  String get vosPieces => 'Jouw stenen';
 
   @override
-  String get dessine => 'Trek!';
+  String get dessine => 'Teken!';
 
   @override
   String get vousDevezDessinerQuelqueChose => 'Je moet iets tekenen!';
 
   @override
-  String get erreurLorsDeLaSauvegarde => 'Fout die de tekening opslaat.';
+  String get erreurLorsDeLaSauvegarde => 'Fout bij opslaan van tekening.';
 
   @override
   String get jAiFini => 'Ik ben klaar!';
@@ -1621,26 +1590,26 @@ class AppLocalizationsNl extends AppLocalizations {
   String get participantsModeLocal => 'Deelnemers (Lokale Modus)';
 
   @override
-  String get ajoutezLesJoueurs => 'Spelers toevoegen';
+  String get ajoutezLesJoueurs => 'Voeg spelers toe';
 
   @override
-  String get prenomDuJoueur => 'Voornaam van de speler';
+  String get prenomDuJoueur => 'Voornaam van speler';
 
   @override
   String get ajoutezAuMoins2Joueurs =>
       'Voeg minstens 2 spelers toe om te beginnen.';
 
   @override
-  String get equilibrerAleatoirement => 'Balans Willekeurig';
+  String get equilibrerAleatoirement => 'Willekeurig verdelen';
 
   @override
   String get joueursNonAssignes1 => 'Niet-toegewezen spelers';
 
   @override
-  String get confirmerLancer => 'Bevestigen & Lanceren';
+  String get confirmerLancer => 'Bevestigen & Starten';
 
   @override
-  String get choisirUnJeuLocal => 'Een lokaal spel kiezen';
+  String get choisirUnJeuLocal => 'Kies een Lokaal Spel';
 
   @override
   String get ilFautAuMoinsJoueurs =>
@@ -1657,14 +1626,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get parametresDeLaPartie => 'Spelinstellingen';
 
   @override
-  String get k1IntensiteDesDefis => '1. Intensiteit van de uitdagingen';
+  String get k1IntensiteDesDefis => '1. Intensiteit van opdrachten';
 
   @override
   String get generationIaPersonnalisee => 'Aangepaste AI-generatie';
 
   @override
   String get exSoireePyjamaSecretsDe =>
-      'bijvoorbeeld logeerpartijtjes, geheimen van koppels, anekdotes op het werk...';
+      'bijv. Slaapfeestje, Relatiegeheimen, Werkverhalen...';
 
   @override
   String get defisIaGeneres => '✨ {0} AI-uitdagingen gegenereerd!';
@@ -1673,10 +1642,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get defisPrets => '✅ {0} uitdagingen klaar!';
 
   @override
-  String get commencerLaPartie => 'BEGIN HET SPEL';
+  String get commencerLaPartie => 'SPEL STARTEN';
 
   @override
-  String get actionOuVerite => 'Waarheid of durven';
+  String get actionOuVerite => 'Waarheid of Durven';
 
   @override
   String get choisisTonDestin => 'Kies je lot...';
@@ -1685,34 +1654,35 @@ class AppLocalizationsNl extends AppLocalizations {
   String get cEstAuTourDe => 'Het is de beurt aan';
 
   @override
-  String get appuyezSurLancerLaRoue => 'Druk op \'Spin Wheel\' om te beginnen!';
+  String get appuyezSurLancerLaRoue =>
+      'Druk op \'Aan het rad draaien\' om te beginnen!';
 
   @override
   String get verite => 'Waarheid';
 
   @override
-  String get action => 'Actie';
+  String get action => 'Durven';
 
   @override
   String get pts9 => '{0} : {1.} punten';
 
   @override
-  String get parametresLeDilemme => 'Settings: The Dilemma';
+  String get parametresLeDilemme => 'Instellingen: Het Dilemma';
 
   @override
-  String get parametresDuDilemme => 'Dilemmaparameters';
+  String get parametresDuDilemme => 'Dilemma-instellingen';
 
   @override
-  String get k1DifficulteDesChoix => '1. Moeilijkheid van keuzes';
+  String get k1DifficulteDesChoix => '1. Moeilijkheidsgraad van keuzes';
 
   @override
   String get k2ModeDeJeu => '2. Spelmodus';
 
   @override
-  String get avecRoue1Joueur => 'Met Wiel (1 speler)';
+  String get avecRoue1Joueur => 'Met rad (1 speler)';
 
   @override
-  String get toutLeGroupe => 'De hele groep';
+  String get toutLeGroupe => 'Hele groep';
 
   @override
   String get generationIaDeDilemmesPersonnalises =>
@@ -1720,7 +1690,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get exSuperPouvoirsVieQuotidienne =>
-      'bijvoorbeeld superkrachten, dagelijks leven, morele keuzes...';
+      'bijv: Superkrachten, Dagelijks leven, Morele keuzes...';
 
   @override
   String get dilemmesIaGeneres => '✨ {0} AI-dilemma\'s gegenereerd!';
@@ -1729,16 +1699,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dilemmesPrets => '✅ {0} dilemma\'s klaar';
 
   @override
-  String get commencerLesDilemmes => 'BEGINDILEMMA\'S';
+  String get commencerLesDilemmes => 'START DE DILEMMA\'S';
 
   @override
-  String get gererLesScores => 'Beheer Scores';
+  String get gererLesScores => 'Scores beheren';
 
   @override
   String get leDilemme => 'HET DILEMMA';
 
   @override
-  String get dilemmeSuivant => 'Volgend Dilemma';
+  String get dilemmeSuivant => 'Volgend dilemma';
 
   @override
   String get leJoueurDesigneDoitFaire =>
@@ -1752,17 +1722,17 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get appuyezSurLancerPourCommencer =>
-      'Druk op \'Launch\' om te beginnen!';
+      'Druk op \'Draaien\' om te beginnen!';
 
   @override
-  String get parametresJeuDeLaPiece => 'Instellingen: Muntspel';
+  String get parametresJeuDeLaPiece => 'Instellingen: Muntgooi-dilemma';
 
   @override
-  String get configurationDeLaPartie => 'Spelopstelling';
+  String get configurationDeLaPartie => 'Spelinstellingen';
 
   @override
   String get difficulteDesQuestionsSecretes =>
-      'Moeilijkheid van geheime vragen';
+      'Moeilijkheidsgraad geheime vragen';
 
   @override
   String get generationIaDeQuestionsSecretes =>
@@ -1770,7 +1740,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get exAmourSeductionTravailAnecdotes =>
-      'bijvoorbeeld Liefde & Verleiding, Werk, Gênante Anekdotes...';
+      'bijv. Liefde & Romantiek, Werk, Gênante momenten...';
 
   @override
   String get questionsIaGenerees => '✨ {0} AI-vragen gegenereerd!';
@@ -1779,37 +1749,37 @@ class AppLocalizationsNl extends AppLocalizations {
   String get questionsPretes => '✅ {0} vragen klaar';
 
   @override
-  String get lancerLaPiece => 'GOOI DE MUNT OP';
+  String get lancerLaPiece => 'MUNT OPGOOIEN';
 
   @override
-  String get jeuDeLaPiece => 'Speel Spel';
+  String get jeuDeLaPiece => 'Muntgooi-dilemma';
 
   @override
   String get tuAsChoisiLaPiece => 'Je koos {0}. De munt viel op... {1} !';
 
   @override
-  String get lancerLaRoue => 'Draai het wiel';
+  String get lancerLaRoue => 'Draai aan het rad';
 
   @override
-  String get jeChoisisPile => 'Ik kies voor PILE';
+  String get jeChoisisPile => 'Ik kies KOP';
 
   @override
-  String get jeChoisisFace => 'Ik kies FACE';
+  String get jeChoisisFace => 'Ik kies MUNT';
 
   @override
-  String get laRoueTourne => 'Het wiel draait...';
+  String get laRoueTourne => 'Het rad draait...';
 
   @override
   String get infiltreMrWhite => 'Undercover & Mr. White';
 
   @override
-  String get configuration => 'Configuratie';
+  String get configuration => 'Instellingen';
 
   @override
-  String get inclureMrWhite => 'Meneer White erbij betrekken?';
+  String get inclureMrWhite => 'Mr. White toevoegen?';
 
   @override
-  String get mrWhiteCommence => 'Meneer White begint?';
+  String get mrWhiteCommence => 'Begint Mr. White?';
 
   @override
   String get iaPremium => 'Premium AI';
@@ -1819,45 +1789,45 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get exAnimauxObjetsCuisineFormat =>
-      'Bijv. dieren: objecten, keuken... (burgerformaat: infiltrator)';
+      'bijv: dieren:voorwerpen, koken... (formaat burger:infiltrant)';
 
   @override
-  String get generationIa1 => 'Generatie-AI...';
+  String get generationIa1 => 'AI genereert...';
 
   @override
-  String get commencerLaManche => 'Start de ronde';
+  String get commencerLaManche => 'Ronde starten';
 
   @override
-  String get passeLeTelephoneA => 'Geef de telefoon aan';
+  String get passeLeTelephoneA => 'Geef de telefoon door aan';
 
   @override
   String get regardeTonRoleEtNe =>
-      'Kijk naar je rol en laat die aan niemand zien!';
+      'Bekijk je rol en laat hem aan niemand zien!';
 
   @override
-  String get voirMonRole => 'Zie mijn rol';
+  String get voirMonRole => 'Bekijk mijn rol';
 
   @override
   String get tonRole => 'Jouw rol {0}';
 
   @override
-  String get jAiCompris => 'Ik snap het!';
+  String get jAiCompris => 'Begrepen!';
 
   @override
-  String get aVosDiscussions => 'Op naar jullie discussies!';
+  String get aVosDiscussions => 'Tijd om te overleggen!';
 
   @override
   String get toutLeMondeConnaitSon =>
       'Iedereen kent zijn rol. Neem om de beurt een hintwoord te geven. Als je er klaar voor bent, stem dan om iemand te elimineren.{0}';
 
   @override
-  String get passerAuVote => 'Ga door met stemmen';
+  String get passerAuVote => 'Naar de stemming';
 
   @override
   String get quiEliminer => 'Wie elimineren?';
 
   @override
-  String get resultatDuTour => 'Uitslag van de ronde';
+  String get resultatDuTour => 'Ronderesultaat';
 
   @override
   String get leMotDesCivilsEtait1 => 'Het woord van de burgers was: {0}';
@@ -1866,13 +1836,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get leMotDeLInfiltre1 => 'Het woord van de infiltrant was: {0}';
 
   @override
-  String get tuDoisEcrireUneReponse => 'Je moet een reactie schrijven!';
+  String get tuDoisEcrireUneReponse => 'Je moet een antwoord invoeren!';
 
   @override
-  String get laPatateChaude => 'De Hete Aardappel';
+  String get laPatateChaude => 'Hete Aardappel';
 
   @override
-  String get dureeDuTourParJoueur => 'Rondeduur (per speler)';
+  String get dureeDuTourParJoueur => 'Beurtduur (per speler)';
 
   @override
   String get k10s => '10s';
@@ -1881,13 +1851,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get k15s => '15s';
 
   @override
-  String get compteAReboursGlobal => 'Globale Afteltimer';
+  String get compteAReboursGlobal => 'Globale aftelling';
 
   @override
   String get leChronoNeSeReinitialise => 'De timer wordt niet gereset.';
 
   @override
-  String get dureeDuChronoGlobal => 'Totale tijdsduur van de timer';
+  String get dureeDuChronoGlobal => 'Duur globale timer';
 
   @override
   String get k30s => 'Jaren dertig';
@@ -1903,16 +1873,16 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get exMarquesDeLuxeObjets =>
-      'bijvoorbeeld luxemerken, zolderobjecten, horrorfilms...';
+      'bijv. Luxemerken, Zolderspullen, Horrorfilms...';
 
   @override
   String get categoriesIaChargees => 'AI-categorieën geladen!';
 
   @override
-  String get genererLesCategoriesParIa => 'Genereer categorieën door AI';
+  String get genererLesCategoriesParIa => 'Categorieën genereren met AI';
 
   @override
-  String get commencer1 => 'Begin maar!';
+  String get commencer1 => 'Starten!';
 
   @override
   String get cEstA => 'Hij staat op {0} !';
@@ -1921,10 +1891,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get categorie1 => 'Categorie:';
 
   @override
-  String get taReponseRapide => 'Je snelle antwoord!';
+  String get taReponseRapide => 'Jouw snelle antwoord!';
 
   @override
-  String get faitJePasse => 'Klaar! Ik pas!';
+  String get faitJePasse => 'Klaar! Doorgeven!';
 
   @override
   String get motsDejaUtilises => 'Reeds gebruikte woorden:';
@@ -1933,16 +1903,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get aPerdu => '{0} verloren!';
 
   @override
-  String get sonGage => 'Zijn belofte:';
+  String get sonGage => 'De straf:';
 
   @override
-  String get synonymeOuBanni => 'Synoniem of Verboden';
+  String get synonymeOuBanni => 'Synoniem of Verbannen';
 
   @override
   String get themePourLesMots => 'Thema voor woorden';
 
   @override
-  String get exAnimauxCuisineFilm => 'bijvoorbeeld dieren, koken, film...';
+  String get exAnimauxCuisineFilm => 'bijv.: dieren, koken, films...';
 
   @override
   String get passeLeTelephoneA1 => 'Zet de telefoon op {0}';
@@ -1951,14 +1921,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get leMotEst => 'Het woord is:';
 
   @override
-  String get tonSynonyme => 'Je synoniem...';
+  String get tonSynonyme => 'Jouw synoniem...';
 
   @override
-  String get validerEtPasser => 'Valideer en slaag';
+  String get validerEtPasser => 'Bevestigen en doorgeven';
 
   @override
   String get votezPourBannirLaPire =>
-      'Stem om het slechtste voorstel te verbieden!';
+      'Stem om het slechtste voorstel te verbannen!';
 
   @override
   String get leMotEtait1 => 'Het woord was: {0}';
@@ -1976,17 +1946,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get tableauDesScores => 'Scorebord';
 
   @override
-  String get quiPourraitLePlus => 'Wie kon het meest doen?';
+  String get quiPourraitLePlus => 'Wie zou het meest…?';
 
   @override
-  String get groupeEnsemble => 'Groep (Ensemble)';
+  String get groupeEnsemble => 'Groep (Samen)';
 
   @override
   String get themeIaExSoireeArrosee =>
-      'AI-thema (bijv. Drankavond, Werk, Feestdagen...)';
+      'AI-thema (bijv. Wild feest, Werk, Vakantie...)';
 
   @override
-  String get genererDesSituationsIa => 'AI-situaties genereren';
+  String get genererDesSituationsIa => 'AI-scenario\'s genereren';
 
   @override
   String get quiDansLeGroupe => 'Wie in de groep...';
@@ -1995,7 +1965,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get pourraitLePlus => '... Kunnen de meesten {0}';
 
   @override
-  String get lancerLesVotes => 'Begin met stemmen!';
+  String get lancerLesVotes => 'Stemmen starten!';
 
   @override
   String get situation => 'Situatie:';
@@ -2004,24 +1974,24 @@ class AppLocalizationsNl extends AppLocalizations {
   String get quiPourraitLePlus1 => 'Wie zou er 0 {}';
 
   @override
-  String get votezTousEnsemble => 'Stem samen!';
+  String get votezTousEnsemble => 'Stem allemaal samen!';
 
   @override
   String get designezLaPersonneChoisiePar =>
-      'Wijs de door de groep gekozen persoon aan:';
+      'Kies de persoon die door de groep is gekozen:';
 
   @override
-  String get passezLAppareilA => 'Geef het apparaat aan de volgende kant:';
+  String get passezLAppareilA => 'Geef het toestel door aan:';
 
   @override
   String get votezSecretementPourLeJoueur =>
-      'Stem stiekem op de speler van jouw keuze:';
+      'Stem stiekem op de speler van je keuze:';
 
   @override
-  String get situation1 => 'LOCATIE:';
+  String get situation1 => 'SITUATIE:';
 
   @override
-  String get detailDesVotes => 'Details van de stemmen:';
+  String get detailDesVotes => 'Stemverdeling:';
 
   @override
   String get aucunVote => 'Geen stemmen';
@@ -2030,7 +2000,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get situationSuivante => 'Volgende situatie';
 
   @override
-  String get codenames => 'Codenamen';
+  String get codenames => 'Codenames';
 
   @override
   String get passezLeTelephoneA => 'Geef de telefoon aan';
@@ -2043,7 +2013,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get cEstFait => 'Klaar';
 
   @override
-  String get passezLeTelephoneAuxAgents => 'Geef de telefoon aan agenten';
+  String get passezLeTelephoneAuxAgents => 'Geef de telefoon aan de agenten';
 
   @override
   String get equipe1 => 'Team {0}';
@@ -2058,36 +2028,36 @@ class AppLocalizationsNl extends AppLocalizations {
   String get cEstParti => 'Laten we beginnen!';
 
   @override
-  String get codenamesLocal => 'Codenamen Lokaal';
+  String get codenamesLocal => 'Codenames Lokaal';
 
   @override
   String get exAnimauxCuisineHarryPotter =>
-      'bijvoorbeeld dieren, koken, Harry Potter...';
+      'bijv.: dieren, koken, Harry Potter...';
 
   @override
-  String get commencerLaPartie1 => 'Begin het spel';
+  String get commencerLaPartie1 => 'Spel starten';
 
   @override
   String get tuEsLeMaitreEspion =>
-      'Jij bent de Spymaster. Zorg dat jij de enige bent die het scherm ziet.';
+      'Jij bent de Spionnenmeester. Zorg ervoor dat alleen jij naar het scherm kijkt.';
 
   @override
-  String get voirLaCarteCle => 'Bekijk Key Map';
+  String get voirLaCarteCle => 'Bekijk de sleutelkaart';
 
   @override
-  String get nombreDeMots => 'Woordenaantal';
+  String get nombreDeMots => 'Aantal woorden';
 
   @override
-  String get donnerLIndice => 'Geef de hint';
+  String get donnerLIndice => 'Geef aanwijzing';
 
   @override
   String get essaisRestants => 'Overgaande treden: {0}';
 
   @override
-  String get passerSonTour => 'Sla je beurt over';
+  String get passerSonTour => 'Beurt overslaan';
 
   @override
-  String get nouvellePartie => 'Nieuw deel';
+  String get nouvellePartie => 'Nieuw spel';
 
   @override
   String get rouge => 'Rood';
@@ -2105,41 +2075,41 @@ class AppLocalizationsNl extends AppLocalizations {
   String get motAjoutePourTotal => 'Woord toegevoegd voor {0} ! Totaal: {1}';
 
   @override
-  String get timeSUp => 'Tijd is om';
+  String get timeSUp => 'Time\'s Up';
 
   @override
   String get timeSUpLocal => 'Time\'s Up Lokaal';
 
   @override
   String get besoinDAuMoins4 =>
-      'Je hebt minstens 4 spelers nodig (2 per team) om te spelen!';
+      'Minimaal 4 spelers (2 per team) nodig om te spelen!';
 
   @override
   String get lesEquipesSerontFormeesAleatoirement =>
-      'Teams worden willekeurig gevormd.';
+      'Teams worden willekeurig samengesteld.';
 
   @override
-  String get themePourLesMotsA => 'Thema voor Woorden om te Raden';
+  String get themePourLesMotsA => 'Thema voor te raden woorden';
 
   @override
   String get exCelebritesAnimauxCuisine =>
-      'bijvoorbeeld beroemdheden, dieren, koken...';
+      'bijv: beroemdheden, dieren, koken...';
 
   @override
   String get lIaGenereraLesMots =>
-      'De AI genereert de woorden automatisch (de handmatige invoerfase wordt overgeslagen).';
+      'AI genereert de woorden automatisch (handmatige invoer wordt overgeslagen).';
 
   @override
-  String get ajoute5MotsQueTu => 'Voeg 5 woorden toe die je wilt raden.';
+  String get ajoute5MotsQueTu => 'Voeg 5 woorden toe die je wilt laten raden.';
 
   @override
   String get mot5 => 'Woord {0} / 5';
 
   @override
-  String get ajouterCeMot => 'Voeg dit woord toe';
+  String get ajouterCeMot => 'Dit woord toevoegen';
 
   @override
-  String get jAiFiniDAjouter => 'Ik heb mijn woorden afgemaakt';
+  String get jAiFiniDAjouter => 'Ik ben klaar met woorden toevoegen';
 
   @override
   String get motsRestantsAAjouterPour =>
@@ -2162,15 +2132,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get devine => 'Geraden!';
 
   @override
-  String get erreurNombreDeJoueursInsuffisant =>
-      'Fout: Onvoldoende aantal spelers';
+  String get erreurNombreDeJoueursInsuffisant => 'Fout: Onvoldoende spelers';
 
   @override
   String get veuillezRevenirALEcran =>
-      'Ga alstublieft terug naar het scherm Spelerinstellingen.';
+      'Ga terug naar het spelersinstellingenscherm.';
 
   @override
-  String get retour => 'Achteruit';
+  String get retour => 'Terug';
 
   @override
   String get lEquipeAGagne => 'Het team {0} gewonnen!';
@@ -2179,37 +2148,37 @@ class AppLocalizationsNl extends AppLocalizations {
   String get points1 => '{0,} punten';
 
   @override
-  String get passeLObjet => 'Slag-item';
+  String get passeLObjet => 'Geef het Voorwerp door';
 
   @override
-  String get passeLObjetRapidement => 'Geeft het object snel door';
+  String get passeLObjetRapidement => 'Geef het Voorwerp snel door';
 
   @override
-  String get generationIaDeQuestions => 'AI-vraaggeneratie';
+  String get generationIaDeQuestions => 'AI-generatie van vragen';
 
   @override
   String get exCultureGeneraleGagesDroles =>
-      'bijvoorbeeld algemene kennis, grappige lonen, vrienden...';
+      'bijv: Algemene kennis, Grappige opdrachten, Vrienden...';
 
   @override
   String get questionsIaPretes => '✨ {0} AI-vragen klaar!';
 
   @override
   String get designerUnJoueurAleatoireA =>
-      'Wijs een willekeurige speler aan om naar over te schakelen';
+      'Willekeurige speler kiezen om door te geven';
 
   @override
   String get sinonPassezPhysiquementAQui =>
-      'Zo niet, wissel dan fysiek over naar wie je maar wilt';
+      'Geef anders fysiek door aan wie je maar wilt';
 
   @override
-  String get afficherLeChronometre => 'Showstopwatch';
+  String get afficherLeChronometre => 'Timer weergeven';
 
   @override
   String get intervalleDuChronoDeA => 'Tijdinterval: van {0} tot {1} seconden';
 
   @override
-  String get passezVite => 'Schiet op!';
+  String get passezVite => 'Snel doorgeven!';
 
   @override
   String get jePasseLObjet => 'Ik geef het voorwerp door!';
@@ -2218,31 +2187,31 @@ class AppLocalizationsNl extends AppLocalizations {
   String get passeA => 'Gaat naar {0} !';
 
   @override
-  String get devineTete => 'Guess Head';
+  String get devineTete => 'Wie ben ik?';
 
   @override
   String get prochainJoueurEquipe => 'VOLGENDE SPELER / TEAM:';
 
   @override
-  String get jouerParEquipes => 'Spel per Team';
+  String get jouerParEquipes => 'In teams spelen';
 
   @override
-  String get modifierLesEquipesEtLes => 'Bewerkingsteams en leden';
+  String get modifierLesEquipesEtLes => 'Teams en leden bewerken';
 
   @override
-  String get difficulteDesMots => 'Moeilijkheid van woorden:';
+  String get difficulteDesMots => 'Moeilijkheid van de woorden:';
 
   @override
-  String get facile => 'Rustig aan';
+  String get facile => 'Makkelijk';
 
   @override
-  String get moyen => 'Medium';
+  String get moyen => 'Gemiddeld';
 
   @override
   String get expert => 'Expert';
 
   @override
-  String get dureeDuChrono => 'Tijdsduur van de timer:';
+  String get dureeDuChrono => 'Timerduur:';
 
   @override
   String get k90s => 'Jaren 90';
@@ -2255,10 +2224,10 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get themeIaExAnimauxMarins =>
-      'AI-thema (bijv. zeedieren, superhelden...)';
+      'AI-thema (bijv: Zeedieren, Superhelden...)';
 
   @override
-  String get lancerSurLeFront => 'GOOI OP HET VOORHOOFD!';
+  String get lancerSurLeFront => 'START OP HET VOORHOOFD!';
 
   @override
   String get compositionDesEquipes => 'Teamsamenstelling';
@@ -2270,10 +2239,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get equipe2 => 'TEAM 2';
 
   @override
-  String get validerLesEquipes => 'Teams valideren';
+  String get validerLesEquipes => 'Teams bevestigen';
 
   @override
-  String get placezLeTelephoneSurVotre => 'LEG DE TELEFOON OP JE VOORHOOFD!';
+  String get placezLeTelephoneSurVotre => 'PLAATS DE TELEFOON OP JE VOORHOOFD!';
 
   @override
   String s1(Object secondsLeft) {
@@ -2281,23 +2250,23 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get basTrouve => 'Laag = Gevonden';
+  String get basTrouve => 'Omlaag = Gevonden';
 
   @override
-  String get arreter => 'Stop';
+  String get arreter => 'Stoppen';
 
   @override
-  String get hautPasser => 'Top = Pas';
+  String get hautPasser => 'Omhoog = Passen';
 
   @override
-  String get resultatsDuPassage => 'Resultaten van de passage';
+  String get resultatsDuPassage => 'Ronderesultaten';
 
   @override
   String get pointsMarques => '+{0,} punten gescoord!';
 
   @override
   String get touchezUnMotPourModifier =>
-      'Tik op een woord om het resultaat te wijzigen in geval van een sensorfout:';
+      'Tik op een woord om het resultaat aan te passen bij een sensorfout:';
 
   @override
   String pts10(Object teamAScore) {
@@ -2310,13 +2279,13 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get continuerLaPartie => 'Ga verder met het spel';
+  String get continuerLaPartie => 'Spel hervatten';
 
   @override
   String get mauvaisSymbole => '{0} : Slecht symbool!';
 
   @override
-  String get dobbleLocal => 'Dobble Local';
+  String get dobbleLocal => 'Dobble Lokaal';
 
   @override
   String get symbolesParCarte => 'Symbolen per kaart:';
@@ -2331,7 +2300,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get scoreCibleCartes => 'Streefscore: {0} kaarten';
 
   @override
-  String get commencer2 => 'BEGIN';
+  String get commencer2 => 'STARTEN';
 
   @override
   String get piocheBut => 'GELIJKSPEL ({0}) • DOELPUNT: {1}';
@@ -2342,7 +2311,7 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get partieTerminee2 => 'SPEL VOORBIJ!';
+  String get partieTerminee2 => 'SPEL AFGELOPEN!';
 
   @override
   String get victoireDe => 'Overwinning van {0} !';
@@ -2366,7 +2335,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get rejoindrePrive => 'Word lid van de Privé';
 
   @override
-  String get creerUnSalon => 'Maak een kamer';
+  String get creerUnSalon => 'Lounge maken';
 
   @override
   String get rejoindreUnSalonPrive => 'Sluit je aan bij een privékamer';
@@ -2376,92 +2345,91 @@ class AppLocalizationsNl extends AppLocalizations {
       'Voer de 6-cijferige code of de gedeelde identificatie in die door de host wordt gedeeld.';
 
   @override
-  String get coller => 'Lijm';
+  String get coller => 'Plakken';
 
   @override
   String get rejoindreLeSalon => 'Doe mee aan de show';
 
   @override
-  String get rechercherUnSalon => 'Zoek een salon...';
+  String get rechercherUnSalon => 'Zoek een lounge...';
 
   @override
-  String get trier => 'Sorteer';
+  String get trier => 'Sorteren';
 
   @override
   String get plusRecents => 'Meest recent';
 
   @override
-  String get plusActifs => 'Actiever';
+  String get plusActifs => 'Meest actief';
 
   @override
   String get placesDisponibles => 'Beschikbare plaatsen';
 
   @override
-  String get monSalon => 'MIJN WOONKAMER';
+  String get monSalon => 'MIJN LOUNGE';
 
   @override
   String get enLigne => '{0} online';
 
   @override
   String get vousAvezBesoinDe5 =>
-      'Je hebt 5 stukken nodig om een woonkamer te creëren.';
+      'Je hebt 5 munten nodig om een lounge te maken.';
 
   @override
-  String get nomDuSalon => 'Lounge Naam';
+  String get nomDuSalon => 'Loungenaam';
 
   @override
-  String get themeExFunTryhardChill => 'Thema (bijv. Fun, Tryhard, Chill)';
+  String get themeExFunTryhardChill => 'Thema (bijv: Fun, Tryhard, Chill)';
 
   @override
   String get description => 'Beschrijving';
 
   @override
-  String get nApparaitraPasDansLa =>
-      'Zal niet in de openbare lijst verschijnen.';
+  String get nApparaitraPasDansLa => 'Verschijnt niet in de openbare lijst.';
 
   @override
-  String get creerLeSalonCout5 => 'Creëer de woonkamer (Kosten: 5 stuks)';
+  String get creerLeSalonCout5 => 'Lounge maken (Kosten: 5 munten)';
 
   @override
-  String get lancerUnJeuPourLe => 'Start een spel voor de woonkamer';
+  String get lancerUnJeuPourLe => 'Start een spel voor de lounge';
 
   @override
-  String get jouer1 => 'Spel';
+  String get jouer1 => 'Spelen';
 
   @override
   String get joueurSEnJeu => '{0,} speler(s) in het spel';
 
   @override
-  String get cloturerLaPartie => 'Afsluiting van het spel';
+  String get cloturerLaPartie => 'Spel sluiten';
 
   @override
   String get pretS => '{0} lening(en)';
 
   @override
-  String get annulerLaPartie => 'Annuleer het spel';
+  String get annulerLaPartie => 'Spel annuleren';
 
   @override
-  String get lancer => 'Lancering';
+  String get lancer => 'Starten';
 
   @override
-  String get ceSalonAEteFerme => 'Deze show is gesloten.';
+  String get ceSalonAEteFerme => 'Deze lounge is gesloten.';
 
   @override
   String get veuillezCommencerOuAnnulerLa =>
-      'Begin alstublieft met of annuleer het spel voordat u de show verlaat.';
+      'Start of annuleer het spel voordat je de lounge verlaat.';
 
   @override
-  String get salon => 'Woonkamer';
+  String get salon => 'Lounge';
 
   @override
-  String get fermerLeSalon => 'Sluit de show af';
+  String get fermerLeSalon => 'Lounge sluiten';
 
   @override
-  String get fermerLeSalon1 => 'De salon sluiten?';
+  String get fermerLeSalon1 => 'Lounge sluiten?';
 
   @override
   String get leSalonSeraDefinitivementSupprime =>
-      'De kamer zal permanent worden verwijderd voor alle deelnemers.';
+      'De lounge wordt definitief verwijderd voor alle deelnemers.';
 
   @override
   String get aCreeUnePartieDe => '{0} een spel gemaakt van {1} !';
@@ -2471,10 +2439,10 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get cettePartieEstTermineeOu =>
-      'Dit spel is ofwel voorbij of geannuleerd.';
+      'Dit spel is beëindigd of geannuleerd.';
 
   @override
-  String get enPartie => 'GEDEELTELIJK';
+  String get enPartie => 'IN SPEL';
 
   @override
   String get partieDeTerminee => 'Game of {0} voorbij!';
@@ -2486,13 +2454,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get vainqueur1 => 'Winnaar: {0}\'{1}\n';
 
   @override
-  String get voirLesStats => 'Bekijk de statistieken';
+  String get voirLesStats => 'Bekijk statistieken';
 
   @override
   String get message => 'Bericht...';
 
   @override
-  String get k0Pts => '0 punten';
+  String get k0Pts => '0 PT';
 
   @override
   String get infecte => 'GEÏNFECTEERD';
@@ -2504,21 +2472,20 @@ class AppLocalizationsNl extends AppLocalizations {
   String get erreur2 => 'Fout: {0}';
 
   @override
-  String get veuillezSaisirUnDefiOu =>
-      'Dien alsjeblieft een uitdaging of vraag in.';
+  String get veuillezSaisirUnDefiOu => 'Voer een opdracht of vraag in.';
 
   @override
   String get erreurDeVote => 'Stemfout: {0}';
 
   @override
-  String get terminerLaManche => 'De ronde afmaken?';
+  String get terminerLaManche => 'Ronde beëindigen?';
 
   @override
   String get voulezVousCloturerLaManche =>
-      'Wil je de ronde meteen afsluiten? De speler met de meeste XP wordt de Admin.';
+      'Wil je de ronde direct beëindigen? De speler met de meeste XP wordt Admin.';
 
   @override
-  String get terminer => 'Fins';
+  String get terminer => 'Beëindigen';
 
   @override
   String get tour => 'Ronde {0}';
@@ -2527,26 +2494,26 @@ class AppLocalizationsNl extends AppLocalizations {
   String get toursRestants => '{0} ronden te gaan';
 
   @override
-  String get finManche => 'Einde van het handvat';
+  String get finManche => 'Ronde einde';
 
   @override
   String get quiVaReleverLeDefi => '🎰 Wie gaat de uitdaging aan?';
 
   @override
   String get faitesTournerLaRoulettePour =>
-      'Draai aan het wiel om de volgende speler te bepalen.';
+      'Draai aan het rad om de volgende speler te kiezen.';
 
   @override
-  String get tournerLaRoulette => 'HET WIEL DRAAIEN';
+  String get tournerLaRoulette => 'DRAAI HET RAD';
 
   @override
   String get joueurSelectionne => '🎯 GESELECTEERDE SPELER';
 
   @override
-  String get cEstAVotreTour => 'Jij bent aan de beurt! Kies je bestemming:';
+  String get cEstAVotreTour => 'Het is jouw beurt! Kies je lot:';
 
   @override
-  String get tirerActionOuVerite => '🎲 Schieten op WAARHEID of DURVEN';
+  String get tirerActionOuVerite => '🎲 Trek DOEN of WAARHEID';
 
   @override
   String get enAttenteDuTirageDe => 'Wachten op de trekking van {0}...';
@@ -2562,16 +2529,16 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get realisezVotreDefiEnVideo =>
-      'Voltooi je uitdaging via video of microfoon!';
+      'Voltooi je uitdaging op video of microfoon!';
 
   @override
-  String get jAiRealiseMonDefi => 'Ik heb mijn uitdaging bereikt! ✅';
+  String get jAiRealiseMonDefi => 'Ik heb mijn uitdaging voltooid! ✅';
 
   @override
   String get regardezRealiserLeDefi => 'Kijk {0} de uitdaging voltooien...';
 
   @override
-  String get voteDeValidation => '🗳️ VALIDATIESTEM';
+  String get voteDeValidation => '🗳️ GOEDKEURINGSSTEMMING';
 
   @override
   String get estCeQueAReleve => 'Ging {0} de uitdaging aan?';
@@ -2581,22 +2548,22 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get vosAmisVotentPourEvaluer =>
-      'Je vrienden stemmen om je prestaties te evalueren...';
+      'Je vrienden stemmen om je prestatie te beoordelen...';
 
   @override
-  String get votreVoteABienEte => 'Uw stem is geregistreerd!';
+  String get votreVoteABienEte => 'Je stem is geregistreerd!';
 
   @override
-  String get ouiValide => 'JA, bevestigd! 👍';
+  String get ouiValide => 'JA, Goedgekeurd! 👍';
 
   @override
-  String get nonRate => 'NEE, gezakt! 👎';
+  String get nonRate => 'NEE, Gemist! 👎';
 
   @override
   String get xpPour => '+{0} XP voor {1}';
 
   @override
-  String get tourSuivant2 => 'Volgende ➡️ ronde';
+  String get tourSuivant2 => 'Volgende Beurt ➡️';
 
   @override
   String get aGagneCetteManche => '{0} deze ronde gewonnen!';
@@ -2605,7 +2572,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get prets => '{0} / {1} klaar';
 
   @override
-  String get scoresConservesDeLaSession => 'BEHOUDEN SCORES UIT DE SESSIE:';
+  String get scoresConservesDeLaSession => 'OPGESLAGEN SESSIESCORES:';
 
   @override
   String pts13(Object pScore) {
@@ -2614,75 +2581,71 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get adminLancerMaintenantAvecLes =>
-      'Admin: Lancering nu met spelers klaar';
+      'Admin: Nu starten met gereedstaande spelers';
 
   @override
-  String get leCompagnonDeVosMeilleures => 'De metgezel voor je beste avonden';
+  String get leCompagnonDeVosMeilleures => 'De metgezel van je beste avonden';
 
   @override
   String get desactivezLaRecherchePubliquePour =>
-      'Schakel de \'Public Search\' uit om lokaal te kunnen spelen.';
+      'Schakel \'Openbaar zoeken\' uit om lokaal te spelen.';
 
   @override
   String get desactivezLaVideoOuL =>
-      'Schakel Video of Audio uit om lokaal af te spelen.';
+      'Schakel video of audio uit om lokaal te spelen.';
 
   @override
   String get selectionnezAuMoins3Categories =>
-      'Selecteer ten minste 3 categorieën:';
+      'Selecteer minimaal 3 categorieën:';
 
   @override
-  String get composerLesEquipes => 'Stel de teams samen';
+  String get composerLesEquipes => 'Teams samenstellen';
 
   @override
   String get premiereLigneDuManuscrit => 'EERSTE REGEL VAN HET MANUSCRIPT';
 
   @override
   String get laFeuilleEstPlieePour =>
-      'Het laken is gevouwen om geheimhouding te bewaren.';
+      'Het vel is gevouwen om het geheim te bewaren.';
 
   @override
-  String get defausserLa1ereCartePasser => 'Gooi de eerste kaart weg en pas';
+  String get defausserLa1ereCartePasser => '1e kaart afleggen & Passen';
 
   @override
   String get placementInvalideChevauchementOuHors =>
-      'Ongeldige plaatsing (overlap of off-grid)!';
+      'Ongeldige plaatsing (overlapping of buiten raster)!';
 
   @override
   String get territoireEnnemiTouchezPourViser =>
-      'Vijandelijk gebied (tik om te richten, bevestig het schieten)';
+      'Vijandelijk gebied (Tik om te richten, bevestig om te vuren)';
 
   @override
   String get votreFlotteTirsEnnemisRecus =>
-      'Je vloot (Vijandelijke Schoten ontvangen)';
+      'Jouw Vloot (Vijandelijke schoten ontvangen)';
 
   @override
   String get elimine => 'Geëlimineerd';
 
   @override
-  String get tapisVide => 'Leeg tapijt';
-
-  @override
-  String get ecrireAu => 'Schrijf naar {0}...';
+  String get tapisVide => 'Leeg speelveld';
 
   @override
   String get reflechit => '{naam denkt} ...';
 
   @override
-  String get faceAFaceCoteA => 'Face-to-face (naast elkaar)';
+  String get faceAFaceCoteA => 'Onderling (naast elkaar)';
 
   @override
-  String get totalAdversaire => 'TOTALE TEGENSTANDER';
+  String get totalAdversaire => 'TEGENSTANDER TOTAAL';
 
   @override
-  String get prendreLAtoutOuPasser => 'NEEM DE TROEFKAART OF PAS:';
+  String get prendreLAtoutOuPasser => 'TROEF NEMEN OF PASSEN:';
 
   @override
   String get combinaisonsDe => 'Combinaties van {naam}';
 
   @override
-  String get ilDevraDonnerLePremier =>
-      'Hij zal de eerste aanwijzing moeten geven';
+  String get ilDevraDonnerLePremier => 'Hij moet de eerste hint geven';
 
   @override
   String get cetteReponseADejaEte => 'Dit antwoord is al gegeven!';
@@ -2691,10 +2654,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get themePourLes25Mots => 'Thema voor de 25 woorden';
 
   @override
-  String get difficulteDesQuestions => 'Moeilijkheidsgraad van de vragen';
+  String get difficulteDesQuestions => 'Moeilijkheidsgraad van vragen';
 
   @override
-  String get envoyerLeDefi => 'Stuur Uitdaging 🚀';
+  String get envoyerLeDefi => 'Stuur uitdaging 🚀';
 
   @override
   String get rulesTitle => 'Spelregels';
@@ -2703,265 +2666,255 @@ class AppLocalizationsNl extends AppLocalizations {
   String get understoodButton => 'Ik begrijp het';
 
   @override
-  String skyjoRoundEnderNotice(Object roundEnderName) {
-    return '$roundEnderName de ronde afgerond!';
+  String skyjoRoundEnderNotice(Object name, Object roundEnderName) {
+    return '$name heeft als eerste alle kaarten onthuld.';
   }
 
   @override
-  String skyjoRoundScoreNotice(Object rScore, Object tScore) {
-    return '$tScore punten ($rScore punten deze ronde)';
+  String skyjoRoundScoreNotice(
+    Object roundScore,
+    Object totalScore,
+    Object rScore,
+    Object tScore,
+  ) {
+    return '+$roundScore deze ronde  •  Totaal: $totalScore ptn';
   }
 
   @override
-  String get skyjoReplaceWithDrawn =>
-      'Tik een kaart op je raster om deze te vervangen door de getrokken kaart';
+  String skyjoReplaceWithDrawn(Object card) {
+    return 'Tik op een kaart om deze te VERVANGEN door $card.';
+  }
 
   @override
   String get skyjoTapHiddenToReveal =>
-      'Tik op een verborgen kaart op je raster om deze te onthullen';
+      'Tik op een GEDEKTE kaart om deze te ONTHULLEN.';
 
   @override
-  String get skyjoChooseActionForDrawn =>
-      'Kiezen: de kaart houden of weggooien';
-
-  @override
-  String get skyjoReplaceWithDiscard =>
-      'Tik een kaart op je raster om deze te vervangen door de aflegstapel';
-
-  @override
-  String skyjoCardsRevealedCount(Object revealedCount) {
-    return '$revealedCount / 2 kaarten onthuld';
+  String skyjoChooseActionForDrawn(Object card) {
+    return 'Kies actie voor $card:';
   }
 
   @override
-  String ceTurnOfPlayer(Object currentPlayerName) {
-    return 'Tour de $currentPlayerName';
+  String skyjoReplaceWithDiscard(Object card) {
+    return 'Tik op een kaart om deze te VERVANGEN door de aflegstapel ($card).';
   }
 
   @override
-  String ceStepOfTotal(Object currentRound, Object totalSteps) {
-    return 'Stap $currentRound / $totalSteps';
+  String skyjoCardsRevealedCount(Object count, Object revealedCount) {
+    return '$count / 2 kaarten omgedraaid';
   }
 
   @override
-  String ceVisibleSnippetOf(Object previousAuthorName) {
-    return 'Laatste woorden van $previousAuthorName :';
+  String ceTurnOfPlayer(Object name, Object currentPlayerName) {
+    return 'BEURT VAN $name';
   }
 
   @override
-  String cePlayerWriting(Object currentPlayerName) {
-    return '$currentPlayerName schrijft...';
+  String ceStepOfTotal(
+    Object step,
+    Object total,
+    Object currentRound,
+    Object totalSteps,
+  ) {
+    return 'Stap $step / $total';
   }
 
   @override
-  String ceStoryNumber(Object paperIndex) {
-    return 'VERHAAL #$paperIndex';
+  String ceVisibleSnippetOf(Object name, Object previousAuthorName) {
+    return 'Zichtbaar stukje van $name:';
+  }
+
+  @override
+  String cePlayerWriting(Object name, Object currentPlayerName) {
+    return '$name is aan het schrijven...';
+  }
+
+  @override
+  String ceStoryNumber(Object index, Object paperIndex) {
+    return 'VERHAAL #$index';
   }
 
   @override
   String mbTurnOf(Object name) {
-    return 'Tour de $name';
+    return 'BEURT VAN $name';
   }
 
   @override
   String mbHandCount(Object count) {
-    return '$count kaarten in de hand';
+    return 'Hand: $count kaarten';
   }
 
   @override
-  String get mbCardsInHand => 'Je kaarten in de hand';
-
-  @override
-  String get dobbleAllCardsFound => 'Alle kaarten zijn gevonden!';
-
-  @override
-  String get dobbleDealingCards => 'Kaartenverdeling...';
-
-  @override
-  String get dobbleCenterCard => 'KAART VAN HET CENTRUM';
-
-  @override
-  String dobbleDeckCards(Object count) {
-    return 'TREK ($count kaarten)';
+  String mbCardsInHand(Object count) {
+    return 'Kaarten in hand ($count)';
   }
 
   @override
-  String get dobbleTapSameSymbol => 'Zoek hetzelfde symbool!';
+  String get dobbleDealingCards => 'Kaarten delen...';
+
+  @override
+  String get dobbleCenterCard => 'MIDDENKAART';
 
   @override
   String dobbleMyCardsCount(Object count) {
-    return 'Mijn kaarten: $count';
+    return 'Mijn Kaarten: $count';
   }
 
   @override
   String get dobbleBlocked => 'GEBLOKKEERD!';
 
   @override
-  String get dobbleTooManyErrors =>
-      'Te veel fouten achter elkaar! Wees geduldig...';
-
-  @override
-  String get dobblePenaltyWait => 'Wacht op de straf!';
-
-  @override
-  String get dobbleWrongSymbolWarning =>
-      'Slecht symbool! Wees voorzichtig met blokkeren.';
+  String get dobbleTooManyErrors => 'Te veel snelle fouten.';
 
   @override
   String dobbleFoundSymbol(Object name) {
-    return '$name vond het symbool!';
+    return '$name heeft het symbool gevonden!';
   }
 
   @override
-  String get dobbleSymbolWas => 'Het gemeenschappelijke symbool was:';
+  String get dobbleSymbolWas => 'Het symbool was:';
 
   @override
-  String pokerPot(Object pot) {
-    return 'Pot: \$ $pot \\\$';
+  String pokerPot(Object amount, Object pot) {
+    return 'Pot: $amount \\\$';
   }
 
   @override
-  String pokerRaiseAlert(Object previewAmount, Object previewPlayerName) {
-    return '$previewPlayerName bereidt een herstel voor \$ $previewAmount \\\$';
+  String pokerRaiseAlert(
+    Object name,
+    Object amount,
+    Object previewAmount,
+    Object previewPlayerName,
+  ) {
+    return '⚠️ $name bereidt een verhoging voor naar $amount \\\$!';
   }
 
   @override
-  String pokerCall(Object callAmount) {
-    return 'Follow ( $callAmount )';
+  String pokerCall(Object amount, Object callAmount) {
+    return 'Callen ($amount)';
   }
 
   @override
-  String pokerRaiseTo(Object amount) {
-    return 'Herstart op $amount \\\$';
+  String unoYouMustDraw(Object count, Object pendingDraw) {
+    return 'Je moet $count kaarten trekken!';
   }
 
   @override
-  String unoYouMustDraw(Object pendingDraw) {
-    return 'U moet kiezen $pendingDraw kaarten!';
+  String unoMustDraw(Object count, Object name, Object pendingDraw) {
+    return 'Moet $count kaarten trekken!';
   }
 
   @override
-  String unoMustDraw(Object name, Object pendingDraw) {
-    return '$name moet kiezen 99999 kaarten!';
+  String unoDrawCountCards(Object count, Object pendingDraw) {
+    return 'Trek $count kaarten';
   }
 
   @override
-  String unoDrawCountCards(Object pendingDraw) {
-    return 'Piocher $pendingDraw kaarten';
-  }
+  String get codenamesMissionEnd => 'Missie voltooid!';
 
   @override
-  String get codenamesMissionEnd => 'Einde missie.';
+  String get codenamesRedTeam => 'Rood Team';
 
   @override
-  String get codenamesRedTeam => 'Rood team';
-
-  @override
-  String get codenamesBlueTeam => 'Blauw team';
-
-  @override
-  String get codenamesSpectator => 'Spectator';
-
-  @override
-  String get codenamesMasterSpy => 'Meester Spion';
-
-  @override
-  String get codenamesAgent => 'Agent';
+  String get codenamesBlueTeam => 'Blauw Team';
 
   @override
   String codenamesTeamTurn(Object team) {
-    return 'Ronde van Team $team';
+    return 'Het is de beurt van team: $team';
   }
 
   @override
-  String get codenamesYouAre => 'U bent:';
+  String get codenamesMasterSpyView => 'Spionnenleider Weergave (Sleutelkaart)';
 
   @override
-  String get codenamesMasterSpyView =>
-      'Meester Spion weergave (geheime sleutelkaart)';
+  String get codenamesClueLabel => 'Je aanwijzing (één woord)';
 
   @override
-  String get codenamesClueLabel => 'Index (alleen één woord)';
+  String get codenamesWordCountLabel => 'Aantal woorden';
 
   @override
-  String get codenamesWordCountLabel => 'Aantal gerichte woorden';
-
-  @override
-  String get codenamesGiveClue => 'Index geven';
+  String get codenamesGiveClue => 'Geef aanwijzing';
 
   @override
   String codenamesClueGiven(Object clue, Object count) {
-    return 'Index: 99999 voor 99999 woorden';
+    return 'Je gaf de aanwijzing: \'$clue $count\'';
   }
 
   @override
-  String get codenamesAgentView => 'Veldofficieren weergeven';
+  String get codenamesAgentView => 'Agent Weergave';
 
   @override
-  String get codenamesClueFromSpy => 'Aanwijzing van de Spionmeester:';
+  String codenamesClueFromSpy(Object spy) {
+    return 'Aanwijzing van $spy:';
+  }
 
   @override
   String codenamesGuessesLeft(Object count) {
-    return 'Resterende beproevingen: $count';
+    return 'Resterende pogingen: $count';
   }
 
   @override
-  String get codenamesPassTurn => 'Sla je beurt over';
+  String get codenamesPassTurn => 'Beurt overslaan';
 
   @override
-  String get codenamesWaitingForClue =>
-      'Wachtend op de aanwijzing van de Spionmeester...';
-
-  @override
-  String timesUpTeamAScore(Object scoreA, Object teamA) {
-    return '$teamA : $scoreA patiënten';
+  String codenamesWaitingForClue(Object team) {
+    return 'Wachten op de aanwijzing van de $team Spionnenleider...';
   }
 
   @override
-  String timesUpTeamBScore(Object scoreB, Object teamB) {
-    return '$teamB : $scoreB patiënten';
+  String timesUpTeamAScore(Object score, Object scoreA, Object teamA) {
+    return 'Team A: $score';
+  }
+
+  @override
+  String timesUpTeamBScore(Object score, Object scoreB, Object teamB) {
+    return 'Team B: $score';
   }
 
   @override
   String timesUpYouAreInTeam(Object team) {
-    return 'Je zit in het team: $team';
+    return 'Je zit in $team';
   }
 
   @override
-  String timesUpRoundMode(Object mode, Object round) {
-    return 'Ronde $round : $mode';
+  String timesUpRoundMode(Object round, Object mode) {
+    return 'Ronde $round: $mode';
   }
 
   @override
   String get timesUpYourTurnToMakeGuess =>
-      'Het is jouw beurt om mensen te laten raden!';
+      'Het is JOUW beurt om te laten raden!';
 
   @override
   String get timesUpRoundEnd => 'EINDE VAN DE RONDE!';
 
   @override
-  String get timesUpFound => 'Gevonden!';
+  String get timesUpFound => 'Geraden!';
 
   @override
-  String get timesUpEndMyTurn => 'Einde van mijn beurt';
+  String get timesUpEndMyTurn => 'Mijn beurt beëindigen';
 
   @override
-  String get timesUpTurnOf => 'Rondleiding van:';
+  String get timesUpTurnOf => 'Het is de beurt aan';
 
   @override
   String get timesUpSomeone => 'Iemand';
 
   @override
-  String get timesUpSeconds => 'Seconden';
+  String get timesUpSeconds => 'seconden';
 
   @override
-  String get timesUpCardsLeft => 'Kaarten die nog in het deck zitten';
+  String timesUpCardsLeft(Object count) {
+    return 'Resterende kaarten: $count';
+  }
 
   @override
-  String get timesUpForceNextPlayer => 'Volgende speler';
+  String get timesUpForceNextPlayer => 'Volgende speler forceren (Host)';
 
   @override
-  String get timesUpGameOverReason => 'Alle rondes zijn voorbij!';
+  String timesUpGameOverReason(Object scoreA, Object scoreB) {
+    return 'Einde van de 3 rondes! Team A: $scoreA pt | Team B: $scoreB pt';
+  }
 
   @override
   String get timesUpTeamA => 'Team A';
@@ -2970,118 +2923,106 @@ class AppLocalizationsNl extends AppLocalizations {
   String get timesUpTeamB => 'Team B';
 
   @override
-  String get timesUpDraw => 'Gelijkheid!';
+  String get timesUpDraw => 'Gelijkspel';
 
   @override
   String get timesUpWaitingForWords =>
-      'Woorden ingediend! Wachtend op anderen...';
+      'Wachten tot alle spelers hun woorden hebben ingediend...';
 
   @override
   String timesUpAddWordsCount(Object count) {
-    return 'Voeg $count woorden toe om te raden';
+    return 'Voeg $count woorden of zinnen toe';
   }
 
   @override
-  String get timesUpWordsSubtitle => 'Personages, objecten, beroemdheden...';
+  String get timesUpWordsSubtitle => '(mensen, voorwerpen, films, plaatsen...)';
 
   @override
-  String get timesUpWordInputLabel => 'Woord of uitdrukking';
+  String timesUpWordInputLabel(Object current, Object target) {
+    return 'Te raden woord ($current/$target)';
+  }
 
   @override
-  String get timesUpAddWordTooltip => 'Voeg dit woord toe';
+  String get timesUpAddWordTooltip => 'Dit woord toevoegen';
 
   @override
-  String get timesUpYourWords => 'Uw woorden:';
+  String get timesUpYourWords => 'Jouw woorden:';
 
   @override
-  String get timesUpSubmitWords => 'Bevestig mijn woorden';
+  String timesUpSubmitWords(Object count) {
+    return 'Dien mijn $count woorden in';
+  }
 
   @override
-  String get timesUpModeFree => 'Gratis beschrijving';
+  String get timesUpModeFree => 'Vrije beschrijving';
 
   @override
-  String get timesUpModeOneWord => 'Eén woord';
+  String get timesUpModeOneWord => 'Slechts één woord';
 
   @override
-  String get timesUpModeMime => 'Mime & Onomatopoea';
+  String get timesUpModeMime => 'Mime';
 
   @override
-  String dtGuessedWords(Object count) {
-    return '$count woord(en) gevonden!';
+  String dtGuessedWords(Object name, Object count) {
+    return '$name vond $count woord(en)!';
   }
 
   @override
   String dtMakeGuessWordTo(Object name) {
-    return 'Laat $name het woord raden!';
+    return 'Laat $name dit woord raden:';
   }
 
   @override
   String undercoverEliminatePlayer(Object name) {
-    return 'Elimineer $name';
+    return '$name uitschakelen';
   }
 
   @override
   String undercoverVoteCount(Object count) {
-    return '$count stem(s)';
+    return '$count stem(men)';
   }
 
   @override
   String petitBacRound(Object round) {
-    return 'Mouw $round';
+    return 'Ronde $round';
   }
 
   @override
-  String get petitBacChooseCategories => 'Kies de categorieën voor deze tour';
+  String get petitBacChooseCategories => 'Kies de categorieën:';
 
   @override
-  String get petitBacAddCategory => 'Voeg een aangepaste categorie toe';
+  String get petitBacAddCategory => 'Categorie toevoegen';
 
   @override
-  String get petitBacMinOneCategory => 'Je hebt minstens één categorie nodig!';
-
-  @override
-  String get petitBacValidateCategories => 'Valideer categorieën';
+  String get petitBacValidateCategories => 'Categorieën bevestigen';
 
   @override
   String petitBacLetter(Object letter) {
-    return 'Brief: $letter';
+    return 'Letter: $letter';
   }
-
-  @override
-  String get petitBacWaitingForBell => 'Laken terug! Wachten op de bel...';
 
   @override
   String get petitBacIFinished => 'Ik ben klaar! (Stop)';
 
   @override
-  String get petitBacCorrection => 'Mouwcorrectie';
-
-  @override
-  String get petitBacGameOverReason => 'Little Bac game over!';
+  String get petitBacCorrection => 'BEOORDELING';
 
   @override
   String presidentGivesTo(Object from, Object to) {
-    return '$from geeft $to :';
+    return '$from geeft aan $to:';
   }
 
   @override
   String presidentPlayCards(Object count) {
-    return 'Pose ($count)';
+    return 'SPELEN ($count)';
   }
 
   @override
-  String get actionPendingMsg => 'Actie in uitvoering...';
-
-  @override
-  String get monAnimalPrefere => 'Mijn favoriete dier';
+  String get actionPendingMsg => 'Je actie wordt geregistreerd...';
 
   @override
   String get unJoueurEstDesigneComme =>
       'Een speler wordt aangewezen als \'doelwit\'. De andere spelers beantwoorden anoniem een vraag over hen. Het doelwit kiest zijn of haar favoriete antwoord, en de auteur van dat antwoord verdient één punt.';
-
-  @override
-  String get uneSituationEstPresenteeTous =>
-      ': \r\n        \"Er wordt een situatie gepresenteerd. Alle spelers stemmen op degene die dit het meest waarschijnlijk zal doen. De speler die de meeste stemmen ontvangt verdient één punt (een twijfelachtige eer!).\"    ';
 
   @override
   String get modeClassiqueUneQuestionEst =>
@@ -3208,50 +3149,46 @@ class AppLocalizationsNl extends AppLocalizations {
       'Zijn doel is de Weerwolven te verslaan totdat hij een nieuwe rol krijgt. Op de eerste nacht wijst hij een testator aan die zijn rol aan hem zal nalaten bij zijn dood. De erfgenaam krijgt alleen de krachten terug die niet door zijn testator zijn verbruikt (Heksendrank, de machtsovername van de Dictator, enz.), behalve de Jager en de Grafdelver. Hij herstelt de infectie (Zwarte Wolf) of de besmetting (Zieke Rat) van zijn testator niet. Hij bewaart de infectie of besmetting die hij had op de basis. Als hij de krachten van een weerwolf erft, worden de andere wolven geïnformeerd dat hij zich bij de roedel voegt. Als hij de krachten erft van een dictator die sterft op de nacht van zijn staatsgreep, is het aan de erfgenaam om de gevolgen te dragen en de staatsgreep uit te voeren zodra hij wakker wordt.';
 
   @override
-  String get touche => 'Touchdown';
-
-  @override
   String get unVillageoisSansPouvoirSpecial =>
       'Een dorpeling zonder speciale krachten.';
 
   @override
-  String get devoreUnVillageoisLaNuit =>
-      'Verorbert \'s nachts een dorpsbewoner.';
+  String get devoreUnVillageoisLaNuit => 'Verslindt \'s nachts een dorpeling.';
 
   @override
-  String get decouvreUnRoleParNuit => 'Ontdek één rol per avond.';
+  String get decouvreUnRoleParNuit => 'Ontdekt één rol per nacht.';
 
   @override
-  String get sorciere => 'Witch';
+  String get sorciere => 'Heks';
 
   @override
   String get tireSurQuelquUnEn => 'Schiet iemand neer terwijl je sterft.';
 
   @override
-  String get espionneLesLoupsLaNuit => 'Spioneren op de wolven \'s nachts.';
+  String get espionneLesLoupsLaNuit => 'Bespioneert \'s nachts de wolven.';
 
   @override
   String get creeDeuxAmoureuxLaPremiere =>
-      'Creëer twee geliefden op de eerste avond.';
+      'Creëert twee geliefden in de eerste nacht.';
 
   @override
   String get protegeUnJoueurParNuit => 'Beschermt één speler per nacht.';
 
   @override
   String get sonVoteCompteDoubleDesigne =>
-      'Zijn stem telt dubbel. Noemt zijn opvolger.';
+      'Stem telt dubbel. Wijst opvolger aan.';
 
   @override
   String get peutTransformerSaVictimeEn =>
-      'Kan zijn slachtoffer één keer veranderen in een geïnfecteerde weerwolf.';
+      'Kan slachtoffer eenmalig in een geïnfecteerde weerwolf veranderen.';
 
   @override
   String get doitPrononcerUnMotSecret =>
-      'Moet elke dag een geheim woord zeggen.';
+      'Moet elke dag een geheim woord uitspreken.';
 
   @override
   String get objectifEtreSeulSurvivantDevore =>
-      'Doel om de enige overlevende te zijn. Verorbert elke andere nacht.';
+      'Doel: enige overlevende zijn. Verslindt om de nacht.';
 
   @override
   String get gagneSeulSIlTue =>
@@ -3272,1050 +3209,13 @@ class AppLocalizationsNl extends AppLocalizations {
       'Communiceert \'s nachts met de doden.';
 
   @override
-  String get aRelanceLesDes3 =>
-      '{pName} de dobbelstenen opnieuw gegooid ({3rollsLeft1}/3)!';
+  String get reveleDeuxCampsASa => 'Onthult twee kampen bij overlijden.';
 
   @override
-  String aGardeLeDeDe(Object dieVal, Object index1, Object pName) {
-    return '$pName hield de waardedobbelsteen $dieVal (#${index1}dobbelsteen) 🔒';
-  }
+  String get prendLePouvoirDuVote => 'Grijpt eenmalig de stemmacht.';
 
   @override
-  String aDebloqueLeDe(Object index1, Object pName) {
-    return '$pName ontgrendelde de dobbelsteen #$index1';
-  }
-
-  @override
-  String aGagne(Object playerName) {
-    return '$playerName won!';
-  }
-
-  @override
-  String gagneAvecLeScoreLe(Object playersgameWinnerIdnameJoueur) {
-    return '$playersgameWinnerIdnameJoueur winnen met de laagste score!';
-  }
-
-  @override
-  String get leRatMaladeEstLe =>
-      'De Zieke Rat is de enige overlevende! Hij heeft iedereen vergiftigd!';
-
-  @override
-  String get tousLesAutresSurvivantsSont =>
-      'Alle andere overlevenden zijn besmet door de Zieke Rat. Hij heeft gewonnen!';
-
-  @override
-  String leRoleDeEst(Object targetName, Object targetRole) {
-    return 'De rol van $targetName is: $targetRole.';
-  }
-
-  @override
-  String get leDictateur => 'De Dictator';
-
-  @override
-  String vousEtesAmoureuxDe(Object lover2Name) {
-    return 'Je bent verliefd op $lover2Name !';
-  }
-
-  @override
-  String vousEtesAmoureuxDe1(Object lover1Name) {
-    return 'Je bent verliefd op $lover1Name !';
-  }
-
-  @override
-  String get pioche3 => 'Pikhouweel';
-
-  @override
-  String get wordcivilParts0TrimWordundercover =>
-      '); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    \'\'}\' nog meer \'\'{\' \r\n      Anti-duplicate beveiliging: als de';
-
-  @override
-  String get vousNAvezPasDe => 'Je hebt geen woorden';
-
-  @override
-  String get equipe12 => 'Team 1';
-
-  @override
-  String get equipe21 => 'Team 2';
-
-  @override
-  String finDesManchesVictoireDe(Object winnerName) {
-    return 'Einde van de rondes! Overwinning van $winnerName !';
-  }
-
-  @override
-  String get scoreCibleAtteint => 'Streefscore behaald!';
-
-  @override
-  String get laPartie2v2Commence => 'Het 2v2-spel begint!';
-
-  @override
-  String get laPartieCommence1 => 'Het spel begint!';
-
-  @override
-  String aGardeLeZombie(Object playersloserIdnameUnjoueur) {
-    return '$playersloserIdnameUnjoueur hield de Zombie!';
-  }
-
-  @override
-  String get chaqueJoueurADevineUne => 'Elke speler raadde één keer!';
-
-  @override
-  String get toutLeMondeEstPasse => 'Iedereen is geslaagd!';
-
-  @override
-  String get verite1 => 'WAARHEID';
-
-  @override
-  String aLePlusDXp(Object maxXp, Object playerswinnerIdnameJoueur) {
-    return '$playerswinnerIdnameJoueur heeft de meeste XP ($maxXp XP) en wordt Admin!';
-  }
-
-  @override
-  String get finDeMancheBoutonAdmin =>
-      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  Einde van de mouw (admin-knop)\r\n  Future<void> aoVEndRound (String gameCode, String playerId) asynchroon \'\'{\' \r\n    await _db.runTransaction((transaction) async\'\'{\' \r\n      final gameRef = _db.collection(\'games\').doc(gameCode); \r\n      final snap = await transaction.get(gameRef); \r\n      als (!snap.exists) terugkeert; \r\n\r\n      final gameData = snap.data() als Map<String, dynamisch>; \r\n      laatste spelers = Map<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Bepaal de winnaar (meer XP)\r\n      String winnerId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        Final xp = (pData[\'xp\'] als num?)?. toInt() ?? 0; \r\n        als (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnaarId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
-
-  @override
-  String get quelquUn => 'Iemand';
-
-  @override
-  String aAtteintPointsEtRemporte(Object targetScore, Object winnerName) {
-    return '$winnerName bereikte $targetScore punten en won de wedstrijd!';
-  }
-
-  @override
-  String get motManquant => 'Ontbrekend Woord';
-
-  @override
-  String erreurLeNombreDeRoles(Object length, Object playerCount) {
-    return 'Fout: Het aantal rollen ($length) komt niet overeen met het aantal spelers ($playerCount).';
-  }
-
-  @override
-  String get toutesLesManchesDeTime =>
-      'Alle rondes van Time\'s Up zijn voorbij!';
-
-  @override
-  String gagneAvecPoints(Object maxScore, Object playerswinnerIdnameUnjoueur) {
-    return '$playerswinnerIdnameUnjoueur winnen met $maxScore punten!';
-  }
-
-  @override
-  String get finDeLaPartie => 'Einde van het spel!';
-
-  @override
-  String get leDessinateurNAPas =>
-      'De cartoonist leverde de tekening niet op tijd in.';
-
-  @override
-  String get leTempsEstEcoulePersonne =>
-      'De tijd is om! Niemand heeft het woord gevonden.';
-
-  @override
-  String get motDevine => 'Woord geraden!';
-
-  @override
-  String get motNonDevine => 'Een woord dat niet geraden is.';
-
-  @override
-  String get les13CartesOntEte => 'Alle 13 kaarten zijn gespeeld!';
-
-  @override
-  String laBombeAExploseDans(Object loserName) {
-    return 'De bom ontplofte in de handen van $loserName !';
-  }
-
-  @override
-  String get gagneAvecPointLowestscore1 =>
-      '{winnerName} winnen met {lowestScore} punt\$\$\'\'{\'laagste score > 1? ';
-
-  @override
-  String get leJoueur => 'De speler';
-
-  @override
-  String get listStringQuestionsAiwordpoolGamewords =>
-      ') \'\'{\' \r\n      Lijst<String> vragen =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[moeilijkheidsgraad] ?? \r\n          GameWords.whoIsMostLikely [';
-
-  @override
-  String get honnete => 'Eerlijk';
-
-  @override
-  String get pairSplit => ') ? pair.split(';
-
-  @override
-  String get pairPairListStringShuffledroles =>
-      '): [even, even]; \r\n\r\n        Lijst<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Vraag =\r\n            \"Beschrijf je geheime woord in één woord. Bedriegers, bluf!\"; \r\n        voor (varP in players.keys) \'\'{\' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
-
-  @override
-  String aAtteintPointsEtGagne(
-    Object playersoverallWinnerIdname,
-    Object updatedScoresoverallWinnerId,
-  ) {
-    return '$playersoverallWinnerIdname bereikte $updatedScoresoverallWinnerId punten en won de wedstrijd!';
-  }
-
-  @override
-  String get playersWinnerid => '\$\'\'{\'spelers[winnerId]? [';
-
-  @override
-  String get poseDeCarte => 'Kaartplaatsing';
-
-  @override
-  String get enchereAutomatique => 'Automatisch bieden';
-
-  @override
-  String get passeLEnchere => 'Slaagt voor de veiling';
-
-  @override
-  String get elseIfGametype =>
-      ') \'\'{\' \r\n        als (kiezerId == gestemdVoorId) \'\'{\' \r\n          throw Exception (\"Formeel verbod om op jezelf te stemmen!\"); \r\n        \'\'}\'\'}\' anders als (gameType ==\r\n      ';
-
-  @override
-  String get intRequiredvotesPlayersLengthIf =>
-      ') { \r\n        creditPlayerXp( \r\n          transactie, \r\n          gameRef, \r\n          gameData, \r\n          kiezerslid, \r\n          5, \r\n          applySpeedBonus: waar, \r\n        ); \r\n      } \r\n\r\n      int requiredStemmen = spelers.lengte; \r\n\r\n      als (gameType == ';
-
-  @override
-  String get forFinalTargetInVotes =>
-      ') \'\'{\' \r\n          definitieve Map<String, int> stemTellingen = {}; \r\n          voor (einddoel in votes.values) { \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          } \r\n\r\n          int maxVotes = 0; \r\n          Lijst<String> topVoted = []; \r\n          voteCounts.forEach((target, count) \'\'{\' \r\n            als (tellen > maxVotes) { \r\n              maxVotes = tellen; \r\n              topVoted = [target]; \r\n            } anders als (aantal == maxStemmen) { \r\n              topVoted.add (target); \r\n            }\'\'}\'); \r\n\r\n          Updates[\r\n          ';
-
-  @override
-  String get forFinalTargetInVotes1 =>
-      ') \'\'{\' \r\n        definitieve Map<String, int> stemTellingen = {}; \r\n        voor (einddoel in votes.values) { \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        } \r\n\r\n        int maxVotes = 0; \r\n        Lijst<String> topVoted = []; \r\n        voteCounts.forEach((target, count) \'\'{\' \r\n          als (tellen > maxVotes) { \r\n            maxVotes = tellen; \r\n            topVoted = [target]; \r\n          } anders als (aantal == maxStemmen) { \r\n            topVoted.add (target); \r\n          }\'\'}\'); \r\n\r\n        als (topVoted.length == 1) \'\'{\' \r\n          eindwinnaar = topStemt.eent; \r\n          Updates[\r\n        ';
-
-  @override
-  String aRemporteTousLesJetons(Object winnerName) {
-    return '$winnerName alle fiches op tafel gewonnen!';
-  }
-
-  @override
-  String get uneMain => 'Eén hand';
-
-  @override
-  String carte1(Object cardToPlay) {
-    return '$cardToPlay Kaart';
-  }
-
-  @override
-  String get quipourraitvotemode =>
-      '? _quiPourraitVoteMode\r\n                      : ';
-
-  @override
-  String get localIndisponibleVideoAudioActif =>
-      'Lokaal niet beschikbaar (Actief Video/Audio)';
-
-  @override
-  String get jouerEnLocalSurCet => 'Speel lokaal (op dit apparaat)';
-
-  @override
-  String get laVideoEstObligatoirePour =>
-      'Video is vereist om Guess Head online te spelen.';
-
-  @override
-  String get desactivezLaRecherchePubliquePour1 =>
-      'Schakel de \'Openbare Zoek\' uit om een privéspel te maken.';
-
-  @override
-  String get priveIndisponibleRechercheActive =>
-      'Privé niet beschikbaar (actieve zoek)';
-
-  @override
-  String get priveIndisponibleVideoRequise =>
-      'Privé niet beschikbaar (Video vereist)';
-
-  @override
-  String get creerUnePartiePriveeAvec => 'Maak een privéspel (met code)';
-
-  @override
-  String get activezLeBoutonRecherchePublique =>
-      'Activeer de knop \'Publieke Zoek\' in de instellingen om met de wereld te spelen.';
-
-  @override
-  String get rechercheRapideVideoRequise =>
-      'Snelle zoekopdracht (Video vereist)';
-
-  @override
-  String get rechercheMondeDesactivee => 'World Search (Uit)';
-
-  @override
-  String get laVideoEstObligatoirePour1 =>
-      'Video is vereist om Guess Head te spelen in Ranked.';
-
-  @override
-  String get activezLeBoutonRecherchePublique1 =>
-      'Zet de knop \'Public Search\' in de instellingen aan om Ranked te spelen.';
-
-  @override
-  String get partieClasseeRanked => 'Gerangschikt';
-
-  @override
-  String get partieClasseeVideoRequise => 'Ranked Play (Video vereist)';
-
-  @override
-  String get partieClasseeDesactivee => 'Ranked Play (Uitgeschakeld)';
-
-  @override
-  String get ceJeu => 'Dit spel';
-
-  @override
-  String get aucunThemeIaSauvegardeSur =>
-      'Geen AI-thema\'s opgeslagen op je account.';
-
-  @override
-  String get aucunThemeSauvegardePour => 'Geen thema opgeslagen voor {0}.';
-
-  @override
-  String get generationEnCours => 'Huidige generatie...';
-
-  @override
-  String get completerAvecLIa15 => 'Afronden met AI (+15 woorden)';
-
-  @override
-  String completeCetteListeSurLe(Object join, Object text) {
-    return 'Voltooi deze lijst met het thema $text. Bestaande woorden: $join';
-  }
-
-  @override
-  String get exMythologieGrecqueObjetsInsolites =>
-      'bijvoorbeeld Griekse mythologie, ongewone voorwerpen, piraten...';
-
-  @override
-  String get exPasDAnimauxDangereux =>
-      'bijvoorbeeld Geen gevaarlijke dieren, alleen cultfilms...';
-
-  @override
-  String genererAvecLIaElements(Object currentCount) {
-    return 'Genereer met AI ($currentCount elementen)';
-  }
-
-  @override
-  String get themePersonnalise => 'Aangepast thema';
-
-  @override
-  String get cameraIndispensablePourCeJeu => 'Essentiële camera voor dit spel.';
-
-  @override
-  String get microCameraDesactiveLeMode =>
-      'Microfoon + camera (schakelt lokale modus uit)';
-
-  @override
-  String get reserveVipOuLimiteAtteinte => 'Geboekt VIP of limiet bereikt';
-
-  @override
-  String get hoteDuSalon => 'Presentator van de show';
-
-  @override
-  String get appuyerPourVoirProfil => 'Tik om profiel te bekijken';
-
-  @override
-  String get siVousEtesLePremier =>
-      'Als je de eerste speler bent die uit het spel wordt geëlimineerd (levend of dood), verdien je aan het einde 4 bonuspunten.';
-
-  @override
-  String get laPremiereFoisQueLa =>
-      'De eerste keer dat de meerderheid tegen jou stemt, wordt iedereen die tegen jou stemde in jouw plaats geëlimineerd. Deze macht werkt maar één keer.';
-
-  @override
-  String get enCasDEgaliteLors =>
-      'Bij een gelijke stand in een stemming bepaal jij wie wordt geëlimineerd uit de gelijke spelers. Deze macht blijft bestaan, zelfs nadat je bent overleden.';
-
-  @override
-  String get memeApresVotreEliminationVous =>
-      'Zelfs nadat je bent geëlimineerd, blijf je deelnemen aan stemmen om spelers te elimineren.';
-
-  @override
-  String get unAutreJoueurEstSecretement =>
-      'Een andere speler wordt stiekem aangewezen als je geliefde. Als een van jullie wordt geëlimineerd, sterft de ander van verdriet en wordt hij ook uitgeschakeld.';
-
-  @override
-  String get auLieuDeDonnerUn =>
-      'In plaats van een mondelinge aanwijzing te geven, moet je je aanwijzingswoord elke ronde uitbeelden.';
-
-  @override
-  String get vousNAvezPasDe1 =>
-      'Je hebt geen woord, zoals meneer White, maar je wint als de bedriegers winnen. Je kunt liegen en doen alsof je een woord hebt om erbij te horen.';
-
-  @override
-  String get siVousEtesElimineeVous =>
-      'Als je wordt uitgeschakeld, kun je ervoor kiezen om een andere speler (die nog leeft) mee te nemen naar het graf.';
-
-  @override
-  String get unAutreJoueurEstVotre =>
-      'Een andere speler is je geheime duellist. Als je langer overleeft dan hij, verdien je 2 bonuspunten. Als hij langer overleeft dan jij, verlies je 2 punten.';
-
-  @override
-  String get aucuneDescriptionTrouveePourCe =>
-      'Er is geen beschrijving gevonden voor deze functie.';
-
-  @override
-  String get cEstAToiDe1 => '🎯 Het is aan jou om een hint te geven!';
-
-  @override
-  String get auTourDe => 'Nu is het {0}...';
-
-  @override
-  String get echecDeLUploadDes => 'Niet uploaden van foto\'s naar Supabase.';
-
-  @override
-  String get ilFautAuMoins3 =>
-      'Je hebt minstens 3 foto\'s nodig om Photo Roulette te spelen.';
-
-  @override
-  String get vousEtesLeJuge => 'Jij bent de rechter!';
-
-  @override
-  String get jugeCeTour => 'Jurylid deze ronde: {0}';
-
-  @override
-  String get cliquezSurLaCarteGagnante => 'Klik op de winnende kaart!';
-
-  @override
-  String get leJugeLitUneCarte =>
-      '👀 De rechter leest een kaart hardop voor...';
-
-  @override
-  String get leJugeEstEnTrain => 'De rechter kiest...';
-
-  @override
-  String get coupAutomatiqueJouePourCause =>
-      'Automatische zet gespeeld vanwege inactiviteit.';
-
-  @override
-  String get inactivite => 'Inactiviteit';
-
-  @override
-  String str8f522b(Object cat, Object hasScorescoreVal) {
-    return '$cat: $hasScorescoreVal';
-  }
-
-  @override
-  String get zeroPointe => 'Nul stippen';
-
-  @override
-  String get partieTermineeAvecLeScore =>
-      'Het spel eindigde met de laagste score!';
-
-  @override
-  String get cEstVotreTour => 'Jij bent aan de beurt!';
-
-  @override
-  String get auTourDe1 => 'Het is {name}';
-
-  @override
-  String get departPar => 'Vertrek uiterlijk {0}';
-
-  @override
-  String get dessinePar => 'Ontworpen door {0}';
-
-  @override
-  String get devinePar => 'Geraden door {0}';
-
-  @override
-  String get ecrisUnThemeOuUne => 'Schrijf een thema of een zin!';
-
-  @override
-  String get imagineUnePhrase => 'Stel je een zin voor!';
-
-  @override
-  String get vousEtesLOrateurFaites =>
-      'Jij bent de spreker: maak het woord raad!';
-
-  @override
-  String get faitDevinerAVotreEquipe => '{0} laat je team raden!';
-
-  @override
-  String get surveillezEtBuzzezEnCas =>
-      'Kijk {0} en buzz in geval van een ban!';
-
-  @override
-  String get unSurvivant => 'Een overlevende';
-
-  @override
-  String get vousAvezEteInfecte => 'JE BENT BESMET!';
-
-  @override
-  String get survivantsEchappes => 'ONTSNAPTE OVERLEVENDEN!';
-
-  @override
-  String get piochezChez => 'KIES UIT {0} !';
-
-  @override
-  String get tourDe => 'RONDE VAN {0}';
-
-  @override
-  String get choisissezUneCarteFaceCachee =>
-      'Kies willekeurig een kaart met de beeldzijde naar beneden';
-
-  @override
-  String get enAttenteDeLaPioche => 'Wachten op de houweel...';
-
-  @override
-  String get laPartieDeBigTwo => 'De Big Two-wedstrijd is voorbij!';
-
-  @override
-  String auTourDe2(Object resolvePlayerNamecurrentPlayerId) {
-    return 'Nu is het $resolvePlayerNamecurrentPlayerId';
-  }
-
-  @override
-  String get laPartieEstTerminee => 'Het spel is voorbij!';
-
-  @override
-  String get plusAucunCoupPossiblePour =>
-      'Geen mogelijke zetten meer voor de tegenstander!';
-
-  @override
-  String get cEstVotreTour1 => 'Jij bent aan de beurt! ({0})';
-
-  @override
-  String get ecoutezLesIndicesDeVotre =>
-      'Luister naar de aanwijzingen van je team!';
-
-  @override
-  String get regardezVosAmisAL =>
-      'Kijk naar je vrienden op het scherm, zij helpen je!';
-
-  @override
-  String get lEquipeAdverseJoueSurveillez =>
-      'Het andere team speelt (let op fouten):';
-
-  @override
-  String get laSuiteDeLHistoire => 'De rest van het verhaal...';
-
-  @override
-  String get auteurPrecedent => 'Vorige auteur';
-
-  @override
-  String get aVousDEcrire => 'HET IS AAN JOU OM TE SCHRIJVEN!';
-
-  @override
-  String get surrealismeClassique => 'Klassiek surrealisme';
-
-  @override
-  String get suiteDe3Mots => '3-woordenreeks';
-
-  @override
-  String strb74c15(Object fullText) {
-    return '\" $fullText \"';
-  }
-
-  @override
-  String str1e0607(Object authorName) {
-    return '$authorName : ';
-  }
-
-  @override
-  String get objectif1000BornesAtteint => 'Doel 1000 Bornes behaald!';
-
-  @override
-  String get aVousDeRouler => 'HET IS AAN JOU OM TE RIJDEN!';
-
-  @override
-  String get arrete => 'DECREET';
-
-  @override
-  String get tourDeLAdversaire => 'De beurt van de tegenstander';
-
-  @override
-  String get touchezPourJouerNmaintenezPour =>
-      'Tik om te spelen\\Hou ingedrukt om af te leggen';
-
-  @override
-  String get vehiculeNprioritaire => 'Voertuig\\nPrioriteit';
-
-  @override
-  String get priorite => 'PRIORITEIT';
-
-  @override
-  String get citerneNinepuisable => 'Tank\\nOnuitputtelijk.';
-
-  @override
-  String get repare => 'GEREPAREERD';
-
-  @override
-  String get carte2 => 'KAART';
-
-  @override
-  String get protegeParUneBotte => '🛡️ Beschermd door een laars';
-
-  @override
-  String get distanceKm => 'Afstand: {0} km';
-
-  @override
-  String get touteLaFlotteAdverseA =>
-      'De hele vijandelijke vloot is tot zinken gebracht!';
-
-  @override
-  String get pret1 => 'Klaar!';
-
-  @override
-  String get pret2 => 'KLAAR';
-
-  @override
-  String get aVotreTour => 'Jij bent aan de beurt';
-
-  @override
-  String get tourAdverse => 'Toren van de tegenstander';
-
-  @override
-  String get derniereCartePosee => 'Laatste kaart gelegd!';
-
-  @override
-  String get cEstTonTour => 'Het is JOUW beurt!';
-
-  @override
-  String str422faa(Object valuename, Object valuescore0) {
-    return '$valuename: $valuescore0 🃏';
-  }
-
-  @override
-  String printEtatDeIsactionpendingAu(Object _isActionPending) {
-    return ' ---\", \r\n    ); \r\n    druk (\"Initiële _isActionPending status: $_isActionPending\"); \r\n\r\n    laatste spelers = (gameData[';
-  }
-
-  @override
-  String get erreurQuestionNonTrouvee => 'Fout: Vraag niet gevonden.';
-
-  @override
-  String str95d36e(Object key0, Object valuename) {
-    return '$valuename: $key0';
-  }
-
-  @override
-  String get choisissezLaMeilleureReponse => 'Kies het beste antwoord!';
-
-  @override
-  String get leJugeChoisit => 'De Rechter kiest...';
-
-  @override
-  String get votez => 'Stem!';
-
-  @override
-  String get votezPourLaDescriptionLa => 'Stem op de grappigste beschrijving!';
-
-  @override
-  String get bannissezUneReponse => 'Verbied een antwoord!';
-
-  @override
-  String get leJuge => 'De rechter';
-
-  @override
-  String get choisisTaReponsePreferee => '👑 Kies het gewenste antwoord:';
-
-  @override
-  String get leJugeExamineAttentivementUne =>
-      '👑 De rechter onderzoekt zorgvuldig een antwoord...';
-
-  @override
-  String get enAttenteDuChoixDe => '⏳ Wachtend op de keuze van {0}...';
-
-  @override
-  String get enAttente1 => 'In behandeling ({0}/{1})';
-
-  @override
-  String get aucuneReponse => 'Geen reactie';
-
-  @override
-  String get leMenteur => 'De Leugenaar';
-
-  @override
-  String get mot => 'Woord';
-
-  @override
-  String get leDessinateur => 'De cartoonist';
-
-  @override
-  String get leTempsEstEcouleOu =>
-      'De tijd is om of de tekening was te ingewikkeld!';
-
-  @override
-  String get leDevin => 'De waarzegger';
-
-  @override
-  String get pasDeReponse => '(geen antwoord)';
-
-  @override
-  String get deuxDefisReussis => 'Twee uitdagingen zijn geslaagd.';
-
-  @override
-  String get leChallenger => 'De uitdager';
-
-  @override
-  String get stre93cb0 => '{0} : {1}';
-
-  @override
-  String get uneDescriptionHilarante => 'Een hilarische beschrijving';
-
-  @override
-  String get extrainfoColumnChildrenText =>
-      '; \r\n          extraInfo = Kolom( \r\n            kinderen: [ \r\n              Text( \r\n                \'';
-
-  @override
-  String get unProblemeEstSurvenu => 'Er is een probleem ontstaan.';
-
-  @override
-  String get defaultFinalRoundwinneridGamedata =>
-      ': \r\n      Standaard: \r\n        laatste rondeWinnerId = gameData[';
-
-  @override
-  String str98e212(Object count, Object isFull, Object length, Object pName) {
-    return '$pName: $count/$length$isFull';
-  }
-
-  @override
-  String get aVousDeJouer => 'Het is aan jou!';
-
-  @override
-  String get trieParCouleur => 'Gesorteerd op kleur';
-
-  @override
-  String get trierLaMain => 'Sorteer de hand';
-
-  @override
-  String get deuxDefisReussis1 => 'Twee succesvolle uitdagingen!';
-
-  @override
-  String get cEstAVotreTour1 => 'Jij bent aan de beurt!';
-
-  @override
-  String get touchezPourPoser => 'Tik om te poseren';
-
-  @override
-  String get encherissezOuPassez => 'Bieden of Besteden';
-
-  @override
-  String str4c885c(Object motdessiner, Object p) {
-    return '$motdessiner : $p';
-  }
-
-  @override
-  String get voirLeScoreFinal => 'Zie eindscore';
-
-  @override
-  String str6bd6b6(
-    Object carte,
-    Object deckIndex,
-    Object deckTotal,
-    Object score,
-    Object totalScore,
-  ) {
-    return '$carte $deckIndex $deckTotal $score $totalScore';
-  }
-
-  @override
-  String get styleConstTextstyleColorColors =>
-      ',\nstijl: const TextStyle(kleur: kleuren.white70),\n),\nSizedBox(hoogte: 20),\nWrap(\nregel: WrapAlignment.center,\nkinderen:\nJustOneFilteredClues\n.map((clue) => buildEasel(clue.toString()))\n.toList(),\n),\nSizedBox(hoogte: 20),\nif (justOneFilteredClues.isleeg)\nTekst(\nToepassingen.ofcontext!.allIndicesOntEte,\nstijl: const TextStyle(kleur: kleuren.red),\n),\n],\n),\n);\n\'\'}\' anders \'\'{\'\n# Het is de gok om te spelen\nkolom (-)\nkinderen: [\nTekst(';
-
-  @override
-  String strf0868c(Object length0, Object valuescore0) {
-    return '$length0 : 99999';
-  }
-
-  @override
-  String get cEstAToi => 'Het is jouw beurt!';
-
-  @override
-  String get laPatateAExplose => 'De aardappel is ontploft.';
-
-  @override
-  String get finDeLaPartie1 => 'Einde spel';
-
-  @override
-  String get leVillageSEndort => 'Het dorp valt in slaap...';
-
-  @override
-  String get leVillageDelibere => 'Het dorp overlegt...';
-
-  @override
-  String get designez2Amoureux => 'Naam 2 minnaars';
-
-  @override
-  String get amoureuxUnis => 'Geliefden verenigd!';
-
-  @override
-  String get laVictime => 'het slachtoffer';
-
-  @override
-  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
-      ';\nMiddenactie Widget = Rij(\nmainAxisSize: MainAxisSize.min,\nkinderen: [\nbouwenActionButton(\nlabel: AppLocalisaties.of(context)!.infect,\npictogram: Icons.auto fix high,\nkleur: kleuren.paarsAccess,\nonPressed: () \"{\"\nProvider.of<PlayerState>(\ncontext,\nlistn: onwaar,\n) recordBadgeEvent(\'lg loup noir infect\');\nfirebaseService.loupNoirInfect(\nwidget.gameCode,\nspelerId,\nWaar,\n);\n\"},\"\n),\nconst SizedBox(breedte: 8),\nbouwenActionButton(\nlabel: AppLocalisaties.of(context)! .devorer,\npictogram: Icons.close,\nkleur: kleuren.redAccess,\nOnPressed:\n() => firebaseService.loupNoirInfect(\nwidget.gameCode,\nspelerId,\nvals,\n),\n),\n],\n);\n\'\'}\'\nBreak;\ndoos \'loup blanc turn\':\npromptText =';
-
-  @override
-  String get aucuneVictimeCetteNuitProtegee =>
-      'Geen slachtoffers vanavond (beschermd of gespaard)';
-
-  @override
-  String get styleTextstyleFontweightFontweightBold =>
-      ',\nstijl: tekststijl(\nlettertypeGewicht: FontGewicht.bold,\nkleur:\nisMine\n? Colors.cyanAccess\n: (selectedChatType == \'wolf\'\n? Colors.redAccess.shade100\n: Colors.white60),\n),\n),\nTekstspan(tekst: bericht),\n],\n),\n),\n);\n\"},\"\n);\n\"},\"\n),\n),\n\n// Compacte transmissiebalk\nindien (kan bericht versturen)\nRij(\nkinderen: [\nUitgevouwen(\nkind: SizedBox(\nhoogte: 32,\nkind: Tekstveld(\ncontroller: chatController,\nstijl: const TextStyle(fontMaat: 12, kleur: kleur.wit),\ndecoratie: InvoerDecoratie(\nhintTekst:\nAppLocalisaties.of(context)!.writeTo,\nhintStijl: const TextStyle(\nkleur: kleuren.white30,\nlettertypegrootte: 11,\n),\nrand: OutlineInputBorder(\ngrensRadius: BorderRadius.circulal(16),\ngrenszijde: grenszijde.geen;\n),\ndochter: waar,\nfillColor: Colors.white.withOpacity(0.08),\ncontentPadding: const RandInsets.symmetrisch(\nhorizontaal: 10,\nverticaal: 0,\n),\n),\nopOpgestuurd: (tekst) \"{\"\nals (text.trim().isNotEmpty) \"{\'\nfirebaseService.sendChatMessage(\nwidget.gameCode,\nspelerId,\ntext.trim(),\nGeselecteerd Chattype,\n);\nchatController.clear();\n\'\'}\'\n\"},\"\n),\n),\n),\nconst SizedBox(breedte: 4),\nIconButton(\npictogram: const pictogram(\nIconen.send afgerond,\nGrootte: 18,\nkleur: Colors.cyanAccent,\n),\nopvulling: EdgeInsets.zero,\nRestricties: Const BoxConstraints(),\nonPressed: () \"{\"\nals (chatController.text.trim().isNotEmpty) \"{\'\nfirebaseService.sendChatMessage(\nwidget.gameCode,\nspelerId,\nchatController.text.trim(),\nGeselecteerd Chattype,\n);\nchatController.clear();\n\'\'}\'\n\"},\"\n),\n],\n),\n],\n),\n);\n\'\'}\'\n\nWidget buildChatTab(String label, String type, Color activeColor) {\nlaatste bool isSelected = selectedChatType == type;\nretour Gesturedetector(\nonTap: () => setState(() => selectedChatType = type),\nkind: container(\nopvulling: const EdgeInsets.symmetrisch(horizontaal: 8, verticaal: 3),\ndecoratie: BoxDecoration(\nkleur:\nisselected\n? actieve kleur.withOpacity(0.5)\n: Colors.white.withOpacity(0,04),\ngrensRadius: BorderRadius.circulal(10),\ngrens: Rand.all(\nkleur:\nIs geselecteerd? actiefColor.withOpacity(0.6) : Kleuren.transparant,\n),\n),\nkind: Tekst(\netiket,\nstijl: tekststijl(\nlettertype: 10,\nlettertypeGewicht: is geselecteerd? FontWeight.bold : FontWeight.normal,\nkleur: is geselecteerd? actieve kleur: kleuren.white60,\n),\n),\n),\n);\n}\n\n/ / --- UPDATE OF THE AVAAR FOR THE INTERACTIEF ---\n\nWidget buildSyncTimer(Timestamp?startTime, integratieInSeconds) \'\'{\'\nals (startTime) null return const SizedBox.shrink();\n\n// TweenAnimationBuilder laat een super vloeibare visuele tijd zonder blokkeer timer en handmatige setState, die sterk verlicht de draad (punt 4)\neindeindeTijd = startTime.toDate().add(\nDuur(seconden: duurInSeconds),\n);\nlaatste restant = endTime.difference(DateTime.now()).\n\nals (resterend.isNegatief)\nretourtekst(\nApplocalisaties.of(context)!.k0S,\nstijl: Thema.of(\ncontext,\n)textTheme.headlineKlein?.copyWith(color: Colors.redAccess),\n);\n\ntweeenanimatiebouwer <duur>(\nduur: resterende;\ntussen: Tween(begin: resterend, einde: Duur.zero),\nbouwer: (BuildContext context, Duurwaarde, Widget? kind) \'\'{\'\nlaatste seconden = waarde.inseconden;\nretourtekst(\nAppLocalisaties.of(context)!.timeRestantS\nstijl: Theme.of(context).textTheme.headlineSmall?.copyWith(\nkleur: tweede < 20 ? Colors.redAccess : Colors.amberAccess ,\n),\n);\n\"},\"\n);\n\'\'}\'\n\nWidget buildSmallChevauxUI(\nBuildContext context,\nKaart<String, dynamic> gameGegevens,\nTekenreeksspeler-ID,\n) \"{\"\neindspelers = Kaart<String, dynamic>.from(gameData[\'players\'] ?? \'\'{\'\'}\';\neindspelerorde = lijst<string>.van(\ngameData[\'littleChevauxPlayerOrder\'] ?? [],\n);\neindposities = Kaart<String, dynamic>.from(\ngameData[\'smallChevauxPositions\'] ?? \'\'{\'\'}\',\n);\nfinal int currentIndex = gameData[\'smallChevauxCurrentIndex\'] ?? 0;\nlaatste tekenreeks huidige spelerId =\nplayerOrder.isNotEmpty ? playerOrder[currentIndex] : \'\";\nFinal bool isMyTurn = currentPlayerId ==playerId;\nFinal intice = (gameData[\'smallChevauxDice\'] as number??.toInt() ?? 0;\nlaatste bool hasRold = gameData[\'littleChevauxHasRolded\']?? vals;\nlaatste bool isTeamMode = spelData[\'smallChevauxTeamMode\']?? vals;\nFinal Map<String, dynamic> sequencedSixes = Map<String, dynamic>.from(\ngameData[\'smallChevauxConsecutiveSixes\']?? {},\n);\nfinal int mySixStreak = sequencySixes[playerId] ?? 0;\n\n# Moderne fluo pallet # arcade on dark background\nFinale lijst <kleur> spelerkleuren = [\nconst Color(0xFFEF4444), // Neon rood\nconst Color(0xFF38BDF8), // Neon hemelsblauw\nconst Color(0xFF10B981), // Emerald green\nconst Color(0xFFF59E0B), // Golden amber\n];\n\n/ / --- VICTORY SCREEN ---\nif (gameData[\'gameState\'] == \'gameOver\') \'\'{\'\nretourneren UniversalGameEndScreen(\nspeltitel:';
-
-  @override
-  String get arriveeAuCentreDuPlateau => 'Ga naar het midden van het plateau!';
-
-  @override
-  String get deplacezUnCheval => 'Verplaats een CHEVAL!';
-
-  @override
-  String get aVousDeLancer => 'Het is aan jou!';
-
-  @override
-  String get mode2v2Allies => 'Modus 2v2 gelegeerd';
-
-  @override
-  String get chevalSelectionneNtouchezPourAvancer =>
-      'Paard geselecteerd! Schakel om vooruit te gaan';
-
-  @override
-  String get touchezUnPion => 'Raak een pion aan';
-
-  @override
-  String get scoreLimiteAtteint => 'Limit score bereikt!';
-
-  @override
-  String get toutesLesGrillesSontCompletees => 'Alle roosters zijn klaar!';
-
-  @override
-  String get cEstVotreTourTouchez =>
-      'Het is jouw beurt! Raak een dobbelsteen aan om het te houden (doored )';
-
-  @override
-  String get lancerLesDes => 'Doe de dobbelstenen.';
-
-  @override
-  String k1663(Object oppBonus035, Object oppUpper) {
-    return '1-6: $oppUpper/63 $oppBonus035';
-  }
-
-  @override
-  String k16631(Object myBonus035, Object myUpper) {
-    return '1-6: $myUpper/63 $myBonus035';
-  }
-
-  @override
-  String get scoreFinal => 'Eindstand: {scoreA} - {scoreB}';
-
-  @override
-  String get encheresEnCours => 'HUIDIGE VEILINGEN';
-
-  @override
-  String get aVousDOuvrirLe => 'HET IS AAN JOU OM DE VOUW TE OPENEN!';
-
-  @override
-  String get tourDe1 => 'Ronde van {0}';
-
-  @override
-  String get aVotreTourDeJouer => 'Het is jouw beurt om te spelen';
-
-  @override
-  String get etaleOuDefausse => 'Stall of Gooi af';
-
-  @override
-  String get piocheUneCarte => 'Trek een kaart';
-
-  @override
-  String get plusAucunCoupPossible => 'Geen injecties meer mogelijk!';
-
-  @override
-  String get lancer1 => 'Gooi {0}';
-
-  @override
-  String get choisirUnJeu => 'Kies een spel';
-
-  @override
-  String get screenWhoismostlikelylocalscreenPlayersPlayersBreak =>
-      ': \r\n        scherm = WieIsMeestWaarschijnlijkPlaatsScherm(spelers: _players); \r\n        stationwagen; \r\n      Doos ';
-
-  @override
-  String get generation => 'Generatie...';
-
-  @override
-  String get genererLesDefisParIa => 'Genereer uitdagingen door AI';
-
-  @override
-  String genereUnMelangeDActions(Object trim) {
-    return 'Genereert een mix van vermakelijke waarheid en durf. Thema: $trim';
-  }
-
-  @override
-  String get genererLesDilemmesParIa => 'Genererende dilemma\'s door AI';
-
-  @override
-  String get egalite => 'Gelijkheid';
-
-  @override
-  String get choixEnregistre => 'Keuze gered!';
-
-  @override
-  String get dilemmePourFaisTonChoix => 'Dilemma voor {0} : kies maar!';
-
-  @override
-  String get tousLesVotesSontEnregistres =>
-      'Alle stemmen worden geregistreerd!';
-
-  @override
-  String get cEstAuTourDe1 => 'Het is de beurt van {0} om te stemmen!';
-
-  @override
-  String get lancerLeDilemme => 'Het Dilemma starten';
-
-  @override
-  String get genererLesQuestionsIa => 'AI-vragen genereren';
-
-  @override
-  String genereDesQuestionsIndiscretesEt(Object trim) {
-    return 'Roept onvoorzichtige en grappige vragen op. Thema: $trim';
-  }
-
-  @override
-  String get perduReveleLaQuestionEt =>
-      'VERLOREN! Onthul de vraag en beantwoord hem!';
-
-  @override
-  String get gagneTonSecretEstPreserve => 'WON! Je geheim is bewaard.';
-
-  @override
-  String get wordcivilParts0TrimWordundercover1 =>
-      '); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    \'\'}\' nog meer \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < woordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (variant)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    voor (VAR-speler in _activePlayers) \'\'{\' \r\n      als (speler == undercover) \'\'{\' \r\n        _playerRoles[speler] = \"Infiltrator\"; \r\n      \'\'}\' anders als (speler == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[speler] = \"Meneer Wit\"; \r\n      \'\'}\' anders \'\'{\' \r\n        _playerRoles[speler] = \"Burgerlijk\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.onthullend; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  Leeg _nextPlayerReveal() \'\'{\' \r\n    als (_currentPlayerRevealIndex < _activePlayers.lengte - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } nog meer { \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(Strijker) \'\'{\' \r\n    Snaarrol = _playerRoles[speler]!; \r\n    bool bedriegersWin = rol == \"Beschaafd\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.result; \r\n      als (impostorsWin) \'\'{\' \r\n        _resultMessage = \"{player} was een burger! De bedriegers winnen!\"; \r\n      \'\'}\' nog meer \'\'{\' \r\n        _resultMessage = \"{player} was de\r\n    \r\n  ';
-
-  @override
-  String get requiert4Joueurs => 'Vereist 4+ spelers';
-
-  @override
-  String get requiert3Joueurs => 'Vereist 3+ spelers';
-
-  @override
-  String genereDesCategoriesAmusantesPour(Object trim) {
-    return 'Genereer leuke categorieën voor de hete aardappel. Thema: $trim';
-  }
-
-  @override
-  String get bodyPaddingPaddingConstEdgeinsets =>
-      '), \r\n          ), \r\n        ], \r\n      ), \r\n      lichaam: Vulling( \r\n        padding: const EdgeInsets.all(16.0), \r\n        kind: Kolom( \r\n          kinderen: [ \r\n            als (_phase != LocalWhoIsPhase.results) ... [ \r\n              MOEILIJKHEIDSFILTER\r\n              SegmentedButton<String>( \r\n                Segmenten: [ \r\n                  ButtonSegment( \r\n                    Waarde: ';
-
-  @override
-  String get egalite1PtChacun => 'Gelijkspel! (+1 punt elk)';
-
-  @override
-  String get designeParLeGroupe1 => 'Genomineerd door de groep (+1 p):';
-
-  @override
-  String get onSePasseUnObjet => 'We geven een object aan elkaar door';
-
-  @override
-  String get ilElleDoitRepondreA => 'Hij/zij moet de vraag beantwoorden:';
-
-  @override
-  String get passe => 'VERLEDEN';
-
-  @override
-  String get equipeRouge => '{0} (Rood Team)';
-
-  @override
-  String get equipeBleue => '{0} (Team Blauw)';
-
-  @override
-  String get k2EquipesSAffrontent => '2 teams strijden';
-
-  @override
-  String get chacunPourSoi => 'Ieder voor zichzelf';
-
-  @override
-  String stre786cb(Object sender) {
-    return '$sender : ';
-  }
-
-  @override
-  String get afficherLesSalonsPleins => 'Showvolle lounges';
-
-  @override
-  String get masquerLesSalonsPleins => 'Verstop volle lounges';
-
-  @override
-  String get aucunSalonNeCorrespondA => 'Geen kamer past bij je filters.';
-
-  @override
-  String get aucunSalonPublicDisponibleNcreez =>
-      'Geen openbare lounge beschikbaar.\\nMaak hieronder je eigen lounge!';
-
-  @override
-  String get general => 'Algemeen';
-
-  @override
-  String get hote => 'Presentator';
-
-  @override
-  String get pret3 => 'Klaar ✓';
-
-  @override
-  String get reasonIsnotempty =>
-      '\${vainqueur} {winner}\'\'{\'reden.isNotEmpty?';
-
-  @override
-  String get partie => 'Deel';
-
-  @override
-  String get lancerUnStream => 'Start een stream';
-
-  @override
-  String rejoindreLeStream(Object length) {
-    return 'Doe mee met de stroom ($length)';
-  }
-
-  @override
-  String get enAttenteDuLancement => 'Wachtend op de lancering...';
-
-  @override
-  String get voler => 'VLIEG!';
-
-  @override
-  String get ciblee => 'GERICHT';
-
-  @override
-  String get visee => 'RICHT!';
-
-  @override
-  String get exFais10PompesEn =>
-      'Bijvoorbeeld: Doe 10 push-ups terwijl je zingt...';
-
-  @override
-  String get exQuelEstTonPire =>
-      'Voorbeeld: Wat is je ergste moment van schaamte?';
-
-  @override
-  String get verite2 => '🔮 WAARHEID';
-
-  @override
-  String strc1ea47(Object p) {
-    return '\" $p \"';
-  }
-
-  @override
-  String str5dd9e1(Object currentChallenge) {
-    return '\" $currentChallenge \"';
-  }
-
-  @override
-  String get defiValide => 'UITDAGING GEVALIDEERD!';
-
-  @override
-  String get defiNonValide => 'UITDAGING NIET GEVALIDEERD';
-
-  @override
-  String get partieTerminee3 => 'Spel voltooid';
-
-  @override
-  String get victoire => 'OVERWINNING!';
-
-  @override
-  String get finDeLaManche2 => 'EINDE VAN DE RONDE';
-
-  @override
-  String get pret4 => '✓ Klaar';
-
-  @override
-  String get reveleDeuxCampsASa => 'Onthult twee kanten bij zijn dood.';
-
-  @override
-  String get prendLePouvoirDuVote => 'Neemt één keer de macht van de stem.';
-
-  @override
-  String get protegeeParLeChasseur => 'Beschermd door de Hunter.';
+  String get protegeeParLeChasseur => 'Beschermd door de Jager.';
 
   @override
   String get placeDesTonneauxQuiExplosent =>
@@ -4325,29 +3225,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get heritier => 'Erfgenaam';
 
   @override
-  String get heriteDuRoleDeSon =>
-      'Erft de rol van zijn testateur bij diens overlijden.';
+  String get heriteDuRoleDeSon => 'Erft de rol van de erflater bij overlijden.';
 
   @override
   String get themeIa => 'AI-thema';
 
   @override
-  String get caseLabel => ': \r\n      Doos ';
-
-  @override
   String get generalEtVarie => 'Algemeen en gevarieerd';
-
-  @override
-  String get unDinosaureQuiMangeUne => 'Een dinosaurus die een ijsje eet';
-
-  @override
-  String get pouvoirVolerOuEtreInvisible =>
-      'Kunnen vliegen of onzichtbaar zijn';
-
-  @override
-  String returnGenereDesSituationsCourtes(Object finalPrompt) {
-    return ': \r\n        return \"Genereert korte situaties die beginnen met een actie. Thema: $finalPrompt\"; \r\n      Doos ';
-  }
 
   @override
   String get abandonTousLesJoueursDeconnectes =>
@@ -4377,19 +3261,19 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String aToucheUneCibleIl(Object shooterDataname) {
-    return '🎯 $shooterDataname een doel geraakt! Hij speelt weer.';
+    return '🎯 $shooterDataname heeft een doel geraakt! Mag nog eens.';
   }
 
   @override
   String aTireDansLEau(Object opponentDataname, Object shooterDataname) {
-    return '🌊 $shooterDataname schoot het water in. Het was ${opponentDataname}beurt om .';
+    return '🌊 $shooterDataname schoot in het water. Beurt aan $opponentDataname.';
   }
 
   @override
-  String get unJoueur => 'Eén speler';
+  String get unJoueur => 'Een speler';
 
   @override
-  String get inactif3ToursSansReponse => 'Stationair (3 onbeantwoorde beurten)';
+  String get inactif3ToursSansReponse => 'inactief (3 beurten geen reactie)';
 
   @override
   String get leJugeNAPas =>
@@ -4397,8 +3281,952 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String aLanceLesDes(Object pName) {
-    return '$pName hebt het erop gegooid!';
+    return '$pName heeft de dobbelstenen geworpen!';
   }
+
+  @override
+  String aGardeLeDeDe(Object dieVal, Object index1, Object pName) {
+    return '$pName behield dobbelsteen met waarde $dieVal (steen #$index1) 🔒';
+  }
+
+  @override
+  String aDebloqueLeDe(Object index1, Object pName) {
+    return '$pName heeft dobbelsteen #$index1 ontgrendeld';
+  }
+
+  @override
+  String aGagne(Object playerName) {
+    return '$playerName heeft gewonnen!';
+  }
+
+  @override
+  String gagneAvecLeScoreLe(Object playersgameWinnerIdnameJoueur) {
+    return '$playersgameWinnerIdnameJoueur winnen met de laagste score!';
+  }
+
+  @override
+  String get leRatMaladeEstLe =>
+      'De Zieke Rat is de enige overlevende! Heeft iedereen vergiftigd!';
+
+  @override
+  String get tousLesAutresSurvivantsSont =>
+      'Alle andere overlevenden zijn besmet door de Zieke Rat. Hij heeft gewonnen!';
+
+  @override
+  String leRoleDeEst(Object targetName, Object targetRole) {
+    return 'De rol van $targetName is: $targetRole.';
+  }
+
+  @override
+  String get leDictateur => 'De Dictator';
+
+  @override
+  String vousEtesAmoureuxDe(Object lover2Name) {
+    return 'Je bent verliefd op $lover2Name!';
+  }
+
+  @override
+  String vousEtesAmoureuxDe1(Object lover1Name) {
+    return 'Je bent verliefd op $lover1Name!';
+  }
+
+  @override
+  String get pioche3 => 'Pikhouweel';
+
+  @override
+  String get vousNAvezPasDe => 'Je hebt geen woorden';
+
+  @override
+  String get equipe12 => 'Team 1';
+
+  @override
+  String get equipe21 => 'Team 2';
+
+  @override
+  String finDesManchesVictoireDe(Object winnerName) {
+    return 'Einde van de rondes! Overwinning van $winnerName!';
+  }
+
+  @override
+  String get scoreCibleAtteint => 'Doelscore bereikt!';
+
+  @override
+  String get laPartie2v2Commence => 'Het 2v2-spel begint!';
+
+  @override
+  String get laPartieCommence1 => 'Het spel begint!';
+
+  @override
+  String aGardeLeZombie(Object playersloserIdnameUnjoueur) {
+    return '$playersloserIdnameUnjoueur hield de Zombie!';
+  }
+
+  @override
+  String get chaqueJoueurADevineUne => 'Elke speler heeft een keer geraden!';
+
+  @override
+  String get toutLeMondeEstPasse => 'Iedereen heeft gepast!';
+
+  @override
+  String get verite1 => 'WAARHEID';
+
+  @override
+  String aLePlusDXp(Object maxXp, Object playerswinnerIdnameJoueur) {
+    return '$playerswinnerIdnameJoueur heeft de meeste XP ($maxXp XP) en wordt Admin!';
+  }
+
+  @override
+  String get quelquUn => 'Iemand';
+
+  @override
+  String aAtteintPointsEtRemporte(Object targetScore, Object winnerName) {
+    return '$winnerName bereikte $targetScore punten en won de wedstrijd!';
+  }
+
+  @override
+  String get motManquant => 'Ontbrekend Woord';
+
+  @override
+  String erreurLeNombreDeRoles(Object length, Object playerCount) {
+    return 'Fout: Het aantal rollen ($length) komt niet overeen met het aantal spelers ($playerCount).';
+  }
+
+  @override
+  String get toutesLesManchesDeTime =>
+      'Alle rondes van Time\'s Up zijn afgelopen!';
+
+  @override
+  String gagneAvecPoints(Object maxScore, Object playerswinnerIdnameUnjoueur) {
+    return '$playerswinnerIdnameUnjoueur wint met $maxScore punten!';
+  }
+
+  @override
+  String get finDeLaPartie => 'Einde van het spel!';
+
+  @override
+  String get leDessinateurNAPas =>
+      'De tekenaar heeft de tekening niet op tijd ingediend.';
+
+  @override
+  String get leTempsEstEcoulePersonne =>
+      'De tijd is om! Niemand heeft het woord gevonden.';
+
+  @override
+  String get motDevine => 'Woord geraden!';
+
+  @override
+  String get motNonDevine => 'Woord niet geraden.';
+
+  @override
+  String get les13CartesOntEte => 'Alle 13 kaarten zijn gespeeld!';
+
+  @override
+  String laBombeAExploseDans(Object loserName) {
+    return 'De bom is ontploft in de handen van $loserName!';
+  }
+
+  @override
+  String get leJoueur => 'De speler';
+
+  @override
+  String get honnete => 'Eerlijk';
+
+  @override
+  String aAtteintPointsEtGagne(
+    Object playersoverallWinnerIdname,
+    Object updatedScoresoverallWinnerId,
+  ) {
+    return '$playersoverallWinnerIdname bereikte $updatedScoresoverallWinnerId punten en won de wedstrijd!';
+  }
+
+  @override
+  String get poseDeCarte => 'kaart spelen';
+
+  @override
+  String get enchereAutomatique => 'automatisch bod';
+
+  @override
+  String get passeLEnchere => 'past het bod';
+
+  @override
+  String aRemporteTousLesJetons(Object winnerName) {
+    return '$winnerName alle fiches op tafel gewonnen!';
+  }
+
+  @override
+  String get uneMain => 'Eén hand';
+
+  @override
+  String carte1(Object cardToPlay) {
+    return 'kaart $cardToPlay';
+  }
+
+  @override
+  String get localIndisponibleVideoAudioActif =>
+      'Lokaal niet beschikbaar (video/audio actief)';
+
+  @override
+  String get jouerEnLocalSurCet => 'Lokaal spelen (Op dit apparaat)';
+
+  @override
+  String get laVideoEstObligatoirePour =>
+      'Video is verplicht om Wie ben ik? online te spelen.';
+
+  @override
+  String get desactivezLaRecherchePubliquePour1 =>
+      'Schakel \'Openbaar zoeken\' uit om een privéspel te maken.';
+
+  @override
+  String get priveIndisponibleRechercheActive =>
+      'Privé niet beschikbaar (zoeken actief)';
+
+  @override
+  String get priveIndisponibleVideoRequise =>
+      'Privé niet beschikbaar (video vereist)';
+
+  @override
+  String get creerUnePartiePriveeAvec => 'Privéspel maken (Met code)';
+
+  @override
+  String get activezLeBoutonRecherchePublique =>
+      'Zet \'Openbaar zoeken\' aan in de instellingen om met de wereld te spelen.';
+
+  @override
+  String get rechercheRapideVideoRequise => 'Snel zoeken (video vereist)';
+
+  @override
+  String get rechercheMondeDesactivee => 'Wereldwijd zoeken (Uitgeschakeld)';
+
+  @override
+  String get laVideoEstObligatoirePour1 =>
+      'Video is verplicht om Wie ben ik? in Ranked te spelen.';
+
+  @override
+  String get activezLeBoutonRecherchePublique1 =>
+      'Zet \'Openbaar zoeken\' aan in de instellingen om Ranked te spelen.';
+
+  @override
+  String get partieClasseeRanked => 'Rankedspel';
+
+  @override
+  String get partieClasseeVideoRequise => 'Rankedspel (video vereist)';
+
+  @override
+  String get partieClasseeDesactivee => 'Rankedspel (Uitgeschakeld)';
+
+  @override
+  String get ceJeu => 'Dit spel';
+
+  @override
+  String get aucunThemeIaSauvegardeSur =>
+      'Geen AI-thema\'s opgeslagen op je account.';
+
+  @override
+  String get aucunThemeSauvegardePour => 'Geen thema opgeslagen voor {0}.';
+
+  @override
+  String get generationEnCours => 'Genereren...';
+
+  @override
+  String get completerAvecLIa15 => 'Aanvullen met AI (+15 woorden)';
+
+  @override
+  String completeCetteListeSurLe(Object join, Object text) {
+    return 'Voltooi deze lijst met het thema $text. Bestaande woorden: $join';
+  }
+
+  @override
+  String get exMythologieGrecqueObjetsInsolites =>
+      'bijv.: Griekse mythologie, ongewone voorwerpen, piraten...';
+
+  @override
+  String get exPasDAnimauxDangereux =>
+      'bijv.: Geen gevaarlijke dieren, alleen cultfilms...';
+
+  @override
+  String genererAvecLIaElements(Object currentCount) {
+    return 'Genereer met AI ($currentCount elementen)';
+  }
+
+  @override
+  String get themePersonnalise => 'Aangepast thema';
+
+  @override
+  String get cameraIndispensablePourCeJeu =>
+      'Camera is verplicht voor dit spel.';
+
+  @override
+  String get microCameraDesactiveLeMode =>
+      'Microfoon + Camera (Schakelt lokale modus uit)';
+
+  @override
+  String get reserveVipOuLimiteAtteinte =>
+      'Alleen voor VIP of dagelijkse limiet bereikt';
+
+  @override
+  String get hoteDuSalon => 'Host van de kamer';
+
+  @override
+  String get appuyerPourVoirProfil => 'Tik om profiel te bekijken';
+
+  @override
+  String get siVousEtesLePremier =>
+      'Val je als allereerste af, dan krijg je 4 bonuspunten aan het einde.';
+
+  @override
+  String get laPremiereFoisQueLa =>
+      'De eerste keer dat de meerderheid tegen je stemt, vallen al je tegenstemmers af in jouw plaats. Werkt eenmalig.';
+
+  @override
+  String get enCasDEgaliteLors =>
+      'Bij een gelijke stand beslis jij wie er afvalt. Deze kracht blijft gelden, zelfs na je dood.';
+
+  @override
+  String get memeApresVotreEliminationVous =>
+      'Zelfs na uitschakeling blijf je meestemmen bij eliminaties.';
+
+  @override
+  String get unAutreJoueurEstSecretement =>
+      'Een andere speler is stiekem je geliefde. Valt een van jullie af, dan sterft de ander aan liefdesverdriet.';
+
+  @override
+  String get auLieuDeDonnerUn =>
+      'In plaats van een gesproken hint moet je jouw hint elke beurt uitbeelden.';
+
+  @override
+  String get vousNAvezPasDe1 =>
+      'Je hebt geen woord, net als Mr. White, maar wint als de bedriegers winnen. Je mag bluffen.';
+
+  @override
+  String get siVousEtesElimineeVous =>
+      'Word je geëlimineerd, dan mag je een levende speler meenemen in je val.';
+
+  @override
+  String get unAutreJoueurEstVotre =>
+      'Een andere speler is je geheime rivaal. Overleef hem voor +2 punten; leef je korter, dan verlies je 2 punten.';
+
+  @override
+  String get aucuneDescriptionTrouveePourCe =>
+      'Geen beschrijving gevonden voor deze rol.';
+
+  @override
+  String get cEstAToiDe1 => '🎯 Het is jouw beurt om een hint te geven!';
+
+  @override
+  String get auTourDe => 'Nu is het {0}...';
+
+  @override
+  String get echecDeLUploadDes => 'Uploaden van foto\'s naar Supabase mislukt.';
+
+  @override
+  String get ilFautAuMoins3 =>
+      'Je hebt minstens 3 foto\'s nodig om Photo Roulette te spelen.';
+
+  @override
+  String get vousEtesLeJuge => 'Jij bent de Rechter!';
+
+  @override
+  String get jugeCeTour => 'Jurylid deze ronde: {0}';
+
+  @override
+  String get cliquezSurLaCarteGagnante => 'Klik op de winnende kaart!';
+
+  @override
+  String get leJugeLitUneCarte =>
+      '👀 De rechter leest een kaart hardop voor...';
+
+  @override
+  String get leJugeEstEnTrain => 'De Rechter is aan het kiezen...';
+
+  @override
+  String get coupAutomatiqueJouePourCause =>
+      'Automatische zet gespeeld vanwege inactiviteit.';
+
+  @override
+  String get inactivite => 'Inactiviteit';
+
+  @override
+  String str8f522b(Object cat, Object hasScorescoreVal) {
+    return '$cat: $hasScorescoreVal';
+  }
+
+  @override
+  String get zeroPointe => 'Skyjo (Nul Punten)';
+
+  @override
+  String get partieTermineeAvecLeScore =>
+      'Spel afgelopen met de laagste score!';
+
+  @override
+  String get cEstVotreTour => 'Het is jouw beurt!';
+
+  @override
+  String get auTourDe1 => 'Het is {name}';
+
+  @override
+  String get departPar => 'Vertrek uiterlijk {0}';
+
+  @override
+  String get dessinePar => 'Ontworpen door {0}';
+
+  @override
+  String get devinePar => 'Geraden door {0}';
+
+  @override
+  String get ecrisUnThemeOuUne => 'Schrijf een thema of een zin!';
+
+  @override
+  String get imagineUnePhrase => 'Bedenk een zin!';
+
+  @override
+  String get vousEtesLOrateurFaites =>
+      'Jij bent de spreker: laat het woord raden!';
+
+  @override
+  String get faitDevinerAVotreEquipe => '{0} laat je team raden!';
+
+  @override
+  String get surveillezEtBuzzezEnCas =>
+      'Kijk {0} en buzz in geval van een ban!';
+
+  @override
+  String get unSurvivant => 'Een overlevende';
+
+  @override
+  String get vousAvezEteInfecte => 'JE BENT GEÏNFECTEERD!';
+
+  @override
+  String get survivantsEchappes => 'OVERLEVENDEN ONTSNAPT!';
+
+  @override
+  String get piochezChez => 'KIES UIT {0} !';
+
+  @override
+  String get tourDe => 'RONDE VAN {0}';
+
+  @override
+  String get choisissezUneCarteFaceCachee =>
+      'Kies een willekeurige gedekte kaart';
+
+  @override
+  String get enAttenteDeLaPioche => 'Wachten op trekken...';
+
+  @override
+  String get laPartieDeBigTwo => 'Het spel Big Two is afgelopen!';
+
+  @override
+  String auTourDe2(Object resolvePlayerNamecurrentPlayerId) {
+    return 'Beurt van $resolvePlayerNamecurrentPlayerId';
+  }
+
+  @override
+  String get laPartieEstTerminee => 'Het spel is afgelopen!';
+
+  @override
+  String get plusAucunCoupPossiblePour =>
+      'Geen zetten meer mogelijk voor de tegenstander!';
+
+  @override
+  String get cEstVotreTour1 => 'Jij bent aan de beurt! ({0})';
+
+  @override
+  String get ecoutezLesIndicesDeVotre => 'Luister naar de hints van je team!';
+
+  @override
+  String get regardezVosAmisAL =>
+      'Kijk naar je vrienden op het scherm, ze helpen je!';
+
+  @override
+  String get lEquipeAdverseJoueSurveillez =>
+      'Tegenstander speelt (let op fouten):';
+
+  @override
+  String get laSuiteDeLHistoire => 'De rest van het verhaal...';
+
+  @override
+  String get auteurPrecedent => 'Vorige auteur';
+
+  @override
+  String get aVousDEcrire => 'JOUW BEURT OM TE SCHRIJVEN!';
+
+  @override
+  String get surrealismeClassique => 'Klassiek surrealisme';
+
+  @override
+  String get suiteDe3Mots => 'Vervolg van 3 woorden';
+
+  @override
+  String strb74c15(Object fullText) {
+    return '\" $fullText \"';
+  }
+
+  @override
+  String str1e0607(Object authorName) {
+    return '$authorName : ';
+  }
+
+  @override
+  String get objectif1000BornesAtteint => 'Doel van 1000 km bereikt!';
+
+  @override
+  String get aVousDeRouler => 'JOUW BEURT OM TE RIJDEN!';
+
+  @override
+  String get arrete => 'GESTOPT';
+
+  @override
+  String get tourDeLAdversaire => 'Beurt van tegenstander';
+
+  @override
+  String get touchezPourJouerNmaintenezPour =>
+      'Tik om te spelen\\nHoud vast om af te leggen';
+
+  @override
+  String get vehiculeNprioritaire => 'Voorrangs\\nvoertuig';
+
+  @override
+  String get priorite => 'VOORRANG';
+
+  @override
+  String get citerneNinepuisable => 'Onuitputtelijke\\nTank';
+
+  @override
+  String get repare => 'GEREPAREERD';
+
+  @override
+  String get carte2 => 'KAART';
+
+  @override
+  String get protegeParUneBotte => '🛡️ Beschermd door een Veiligheidskaart';
+
+  @override
+  String get distanceKm => 'Afstand: {0} km';
+
+  @override
+  String get touteLaFlotteAdverseA => 'De hele vijandelijke vloot is gezonken!';
+
+  @override
+  String get pret1 => 'Klaar!';
+
+  @override
+  String get pret2 => 'KLAAR';
+
+  @override
+  String get aVotreTour => 'Jouw beurt';
+
+  @override
+  String get tourAdverse => 'Beurt van tegenstander';
+
+  @override
+  String get derniereCartePosee => 'Laatste kaart gespeeld!';
+
+  @override
+  String get cEstTonTour => 'Het is JOUW beurt!';
+
+  @override
+  String str422faa(Object valuename, Object valuescore0) {
+    return '$valuename: $valuescore0 🃏';
+  }
+
+  @override
+  String get erreurQuestionNonTrouvee => 'Fout: Vraag niet gevonden.';
+
+  @override
+  String str95d36e(Object key0, Object valuename) {
+    return '$valuename: $key0';
+  }
+
+  @override
+  String get choisissezLaMeilleureReponse => 'Kies het beste antwoord!';
+
+  @override
+  String get leJugeChoisit => 'De Rechter kiest...';
+
+  @override
+  String get votez => 'Stem!';
+
+  @override
+  String get votezPourLaDescriptionLa => 'Stem op de grappigste beschrijving!';
+
+  @override
+  String get bannissezUneReponse => 'Verban een antwoord!';
+
+  @override
+  String get leJuge => 'De rechter';
+
+  @override
+  String get choisisTaReponsePreferee => '👑 Kies je favoriete antwoord:';
+
+  @override
+  String get leJugeExamineAttentivementUne =>
+      '👑 De rechter onderzoekt zorgvuldig een antwoord...';
+
+  @override
+  String get enAttenteDuChoixDe => '⏳ Wachtend op de keuze van {0}...';
+
+  @override
+  String get enAttente1 => 'In behandeling ({0}/{1})';
+
+  @override
+  String get aucuneReponse => 'geen antwoord';
+
+  @override
+  String get leMenteur => 'De Leugenaar';
+
+  @override
+  String get mot => 'Woord';
+
+  @override
+  String get leDessinateur => 'De tekenaar';
+
+  @override
+  String get leTempsEstEcouleOu =>
+      'De tijd is om of de tekening was te complex!';
+
+  @override
+  String get leDevin => 'De rader';
+
+  @override
+  String get pasDeReponse => '(geen antwoord)';
+
+  @override
+  String get deuxDefisReussis => 'Twee uitdagingen voltooid.';
+
+  @override
+  String get leChallenger => 'De Uitdager';
+
+  @override
+  String get stre93cb0 => '{0} : {1}';
+
+  @override
+  String get uneDescriptionHilarante => 'een hilarisch bijschrift';
+
+  @override
+  String get unProblemeEstSurvenu => 'Er is een probleem ontstaan.';
+
+  @override
+  String str98e212(Object count, Object isFull, Object length, Object pName) {
+    return '$pName: $count/$length$isFull';
+  }
+
+  @override
+  String get aVousDeJouer => 'Jouw beurt om te spelen!';
+
+  @override
+  String get trieParCouleur => 'Gesorteerd op kleur';
+
+  @override
+  String get trierLaMain => 'Hand sorteren';
+
+  @override
+  String get deuxDefisReussis1 => 'Twee succesvolle uitdagingen!';
+
+  @override
+  String get cEstAVotreTour1 => 'Jij bent aan de beurt!';
+
+  @override
+  String get touchezPourPoser => 'Tik om te leggen';
+
+  @override
+  String get encherissezOuPassez => 'Bied of pas';
+
+  @override
+  String str4c885c(Object motdessiner, Object p) {
+    return '$motdessiner: $p';
+  }
+
+  @override
+  String get voirLeScoreFinal => 'Bekijk eindscore';
+
+  @override
+  String str6bd6b6(
+    Object carte,
+    Object deckIndex,
+    Object deckTotal,
+    Object score,
+    Object totalScore,
+  ) {
+    return '$carte $deckIndex $deckTotal $score $totalScore';
+  }
+
+  @override
+  String strf0868c(Object length0, Object valuescore0) {
+    return '$length0 : 99999';
+  }
+
+  @override
+  String get cEstAToi => 'JIJ BENT AAN DE BEURT!';
+
+  @override
+  String get laPatateAExplose => 'De aardappel is ontploft!';
+
+  @override
+  String get finDeLaPartie1 => 'Einde van het spel';
+
+  @override
+  String get leVillageSEndort => 'Het dorp valt in slaap...';
+
+  @override
+  String get leVillageDelibere => 'Het dorp overlegt...';
+
+  @override
+  String get designez2Amoureux => 'Kies 2 geliefden';
+
+  @override
+  String get amoureuxUnis => 'Geliefden verenigd!';
+
+  @override
+  String get laVictime => 'het slachtoffer';
+
+  @override
+  String get aucuneVictimeCetteNuitProtegee =>
+      'Geen slachtoffers vanavond (beschermd of gespaard)';
+
+  @override
+  String get arriveeAuCentreDuPlateau => 'Aankomst in het midden van het bord!';
+
+  @override
+  String get deplacezUnCheval => 'VERPLAATS EEN PAARD!';
+
+  @override
+  String get aVousDeLancer => 'JOUW BEURT OM TE GOOIEN!';
+
+  @override
+  String get mode2v2Allies => '2v2 Bondgenoten Modus';
+
+  @override
+  String get chevalSelectionneNtouchezPourAvancer =>
+      'Paard geselecteerd! Schakel om vooruit te gaan';
+
+  @override
+  String get touchezUnPion => 'Tik op een pion';
+
+  @override
+  String get scoreLimiteAtteint => 'Doelscore bereikt!';
+
+  @override
+  String get toutesLesGrillesSontCompletees =>
+      'Alle scorebladen zijn ingevuld!';
+
+  @override
+  String get cEstVotreTourTouchez =>
+      'Jouw beurt! Tik op een dobbelsteen om vast te houden (goud 🔒)';
+
+  @override
+  String get lancerLesDes => 'Gooi dobbelstenen';
+
+  @override
+  String k1663(Object oppBonus035, Object oppUpper) {
+    return '1-6: $oppUpper/63 $oppBonus035';
+  }
+
+  @override
+  String k16631(Object myBonus035, Object myUpper) {
+    return '1-6: $myUpper/63 $myBonus035';
+  }
+
+  @override
+  String get scoreFinal => 'Eindstand: {scoreA} - {scoreB}';
+
+  @override
+  String get encheresEnCours => 'BIEDEN BEZIG';
+
+  @override
+  String get aVousDOuvrirLe => 'JOUW BEURT OM TE LEIDEN!';
+
+  @override
+  String get tourDe1 => 'Ronde van {0}';
+
+  @override
+  String get aVotreTourDeJouer => 'Jouw beurt om te spelen';
+
+  @override
+  String get etaleOuDefausse => 'Uitleggen of afleggen';
+
+  @override
+  String get piocheUneCarte => 'Pak een kaart';
+
+  @override
+  String get plusAucunCoupPossible => 'Geen zetten meer mogelijk!';
+
+  @override
+  String get lancer1 => 'Gooi {0}';
+
+  @override
+  String get choisirUnJeu => 'Kies een spel';
+
+  @override
+  String get generation => 'Genereren...';
+
+  @override
+  String get genererLesDefisParIa => 'Opdrachten genereren met AI';
+
+  @override
+  String genereUnMelangeDActions(Object trim) {
+    return 'Genereert een mix van vermakelijke waarheid en durf. Thema: $trim';
+  }
+
+  @override
+  String get genererLesDilemmesParIa => 'Dilemma\'s genereren met AI';
+
+  @override
+  String get egalite => 'Gelijkspel';
+
+  @override
+  String get choixEnregistre => 'Keuze opgeslagen!';
+
+  @override
+  String get dilemmePourFaisTonChoix => 'Dilemma voor {0} : kies maar!';
+
+  @override
+  String get tousLesVotesSontEnregistres => 'Alle stemmen zijn binnen!';
+
+  @override
+  String get cEstAuTourDe1 => 'Het is de beurt van {0} om te stemmen!';
+
+  @override
+  String get lancerLeDilemme => 'Draai het dilemma';
+
+  @override
+  String get genererLesQuestionsIa => 'AI-vragen genereren';
+
+  @override
+  String genereDesQuestionsIndiscretesEt(Object trim) {
+    return 'Roept onvoorzichtige en grappige vragen op. Thema: $trim';
+  }
+
+  @override
+  String get perduReveleLaQuestionEt =>
+      'VERLOREN! Onthul de vraag en geef antwoord!';
+
+  @override
+  String get gagneTonSecretEstPreserve => 'GEWONNEN! Je geheim is veilig.';
+
+  @override
+  String get requiert4Joueurs => 'Vereist 4+ spelers';
+
+  @override
+  String get requiert3Joueurs => 'Vereist 3+ spelers';
+
+  @override
+  String genereDesCategoriesAmusantesPour(Object trim) {
+    return 'Genereer leuke categorieën voor de hete aardappel. Thema: $trim';
+  }
+
+  @override
+  String get egalite1PtChacun => 'Gelijkspel! (+1 pt elk)';
+
+  @override
+  String get designeParLeGroupe1 => 'Gekozen door de groep (+1 pt):';
+
+  @override
+  String get onSePasseUnObjet => 'We geven een object aan elkaar door';
+
+  @override
+  String get ilElleDoitRepondreA => 'Hij/Zij moet de vraag beantwoorden:';
+
+  @override
+  String get passe => 'PAS';
+
+  @override
+  String get equipeRouge => '{0} (Rood Team)';
+
+  @override
+  String get equipeBleue => '{0} (Team Blauw)';
+
+  @override
+  String get k2EquipesSAffrontent => '2 teams strijden tegen elkaar';
+
+  @override
+  String get chacunPourSoi => 'Ieder voor zich';
+
+  @override
+  String stre786cb(Object sender) {
+    return '$sender : ';
+  }
+
+  @override
+  String get afficherLesSalonsPleins => 'Volle lounges tonen';
+
+  @override
+  String get masquerLesSalonsPleins => 'Volle lounges verbergen';
+
+  @override
+  String get aucunSalonNeCorrespondA =>
+      'Geen enkele kamer komt overeen met je filters.';
+
+  @override
+  String get aucunSalonPublicDisponibleNcreez =>
+      'Geen openbare lounges beschikbaar.\\nMaak de jouwe hieronder!';
+
+  @override
+  String get general => 'Algemeen';
+
+  @override
+  String get hote => 'Gastheer';
+
+  @override
+  String get pret3 => 'Klaar ✓';
+
+  @override
+  String get partie => 'Deel';
+
+  @override
+  String get lancerUnStream => 'Start een Stream';
+
+  @override
+  String rejoindreLeStream(Object length) {
+    return 'Doe mee met de stroom ($length)';
+  }
+
+  @override
+  String get enAttenteDuLancement => 'Wachten op de start...';
+
+  @override
+  String get voler => 'STELEN!';
+
+  @override
+  String get ciblee => 'DOELWIT';
+
+  @override
+  String get visee => 'IN HET VIZIER!';
+
+  @override
+  String get exFais10PompesEn => 'Bijv: Doe 10 push-ups al zingend...';
+
+  @override
+  String get exQuelEstTonPire => 'Bijv: Wat is je meest beschamende moment?';
+
+  @override
+  String get verite2 => '🔮 WAARHEID';
+
+  @override
+  String strc1ea47(Object p) {
+    return '\" $p \"';
+  }
+
+  @override
+  String str5dd9e1(Object currentChallenge) {
+    return '\" $currentChallenge \"';
+  }
+
+  @override
+  String get defiValide => 'UITDAGING GOEDGEKEURD!';
+
+  @override
+  String get defiNonValide => 'UITDAGING AFGEKEURD';
+
+  @override
+  String get partieTerminee3 => 'Spel voltooid';
+
+  @override
+  String get victoire => 'OVERWINNING!';
+
+  @override
+  String get finDeLaManche2 => 'EINDE VAN DE RONDE';
+
+  @override
+  String get pret4 => '✓ Gereed';
 
   @override
   String jAiLanceUnePartie(Object selectedGame) {
@@ -4410,7 +4238,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get localIndisponibleRechercheActive =>
-      'Lokaal niet beschikbaar (Actief zoeken)';
+      'Lokaal niet beschikbaar (Zoeken actief)';
 
   @override
   String get rechercheRapideMonde => 'Snel zoeken (Wereld)';
@@ -4423,10 +4251,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get petiteBlind => 'Klein blind: {0}';
 
   @override
-  String get simpleVillageois => 'Eenvoudige dorpelingen';
+  String get simpleVillageois => 'Dorpeling';
 
   @override
-  String get capitaine => 'Kapitein.';
+  String get capitaine => 'Kapitein';
 
   @override
   String s2(Object hotPotatoGlobalDuration) {
@@ -4492,40 +4320,40 @@ class AppLocalizationsNl extends AppLocalizations {
   String get anonyme => 'Anoniem';
 
   @override
-  String get vousAvezVote => 'Je hebt gestemd.';
+  String get vousAvezVote => 'Je hebt gestemd!';
 
   @override
   String get inconnu => 'Onbekend';
 
   @override
-  String get personne => 'Persoon';
+  String get personne => 'Niemand';
 
   @override
-  String get chargementDeLaPartie => 'Deel laden...';
+  String get chargementDeLaPartie => 'Spel laden...';
 
   @override
   String get systeme => 'Systeem';
 
   @override
-  String get jeuEnCours => 'Spel aan de gang';
+  String get jeuEnCours => 'Spel bezig';
 
   @override
-  String get asLabel => 'Als';
+  String get asLabel => 'Enen';
 
   @override
-  String get deux => 'Twee';
+  String get deux => 'Tweeën';
 
   @override
-  String get trois => 'Drie';
+  String get trois => 'Drieën';
 
   @override
-  String get quatre => 'Vier';
+  String get quatre => 'Vieren';
 
   @override
-  String get cinq => 'Vijf';
+  String get cinq => 'Vijven';
 
   @override
-  String get six => 'Zes';
+  String get six => 'Zessen';
 
   @override
   String get sectionSup => 'Sup-sectie: \"{\'0\'\'}\'';
@@ -4537,7 +4365,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get prenezLaDefausseVisibleOu =>
-      'Neem het zichtbare defect of kies een verborgen kaart';
+      'Neem de open aflegkaart of trek een gedekte kaart';
 
   @override
   String aa(Object value) {
@@ -4550,16 +4378,16 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get completeCeDessin => 'Maak die tekening af.';
+  String get completeCeDessin => 'Maak deze tekening af!';
 
   @override
   String get commenceParUnDessin => 'Begin met een tekening!';
 
   @override
-  String get orateur => 'Speaker';
+  String get orateur => 'Spreker';
 
   @override
-  String get moi => 'Ge';
+  String get moi => 'Ik';
 
   @override
   String get manche1 => 'Kanaal \"{\'0\'\'}\' / \"{\'1\'\'}\'';
@@ -4583,34 +4411,34 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get completezLaPhrase1A => 'Voltooi de zin (1 tot 8 woorden)';
+  String get completezLaPhrase1A => 'Maak de zin af (1 tot 8 woorden)';
 
   @override
   String get auteur => 'Auteur';
 
   @override
-  String get adversaire => 'Tegenpartij';
+  String get adversaire => 'Tegenstander';
 
   @override
-  String get feuVert => 'GREEN';
+  String get feuVert => 'GROEN LICHT';
 
   @override
-  String get feuRouge => 'Rood licht';
+  String get feuRouge => 'Rood Licht';
 
   @override
-  String get limite501 => 'Maximum 50';
+  String get limite501 => 'Limiet 50';
 
   @override
-  String get crevaison1 => 'Crevaison';
+  String get crevaison1 => 'Lekke Band';
 
   @override
-  String get feuVert1 => 'Groen licht';
+  String get feuVert1 => 'Groen Licht';
 
   @override
   String get finDeLimite => 'Einde\nMaximumhoeveelheid';
 
   @override
-  String get fin50 => 'END 50';
+  String get fin50 => 'EINDE 50';
 
   @override
   String get essence => 'Benzine';
@@ -4638,7 +4466,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get enAttenteDesAutres => 'Wachten op anderen...';
 
   @override
-  String get lesAutresJoueursRepondent => 'De andere spelers antwoorden...';
+  String get lesAutresJoueursRepondent => 'Andere spelers antwoorden...';
 
   @override
   String get enAttenteDesDeclarations => 'Wachten op verklaringen...';
@@ -4654,7 +4482,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Het spel zal binnenkort beginnen...';
 
   @override
-  String get mrWhite => 'Mr White.';
+  String get mrWhite => 'Mr. White';
 
   @override
   String aEteDemasqueIlTente(Object mrWhiteName) {
@@ -4663,7 +4491,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get voteDecisifEnregistreEnAttente =>
-      'Een beslissende stem. Wachten op anderen...';
+      'Beslissende stem geregistreerd. Wachten...';
 
   @override
   String get egaliteParfaiteLaDeesseDe =>
@@ -4681,17 +4509,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get question1 => 'Vraag...';
 
   @override
-  String get voteEnregistre => 'Opgenomen stem...';
+  String get voteEnregistre => 'Stem opgeslagen...';
 
   @override
-  String get lesAutresJugentTonHistoire =>
-      'De anderen oordelen over je verhaal...';
+  String get lesAutresJugentTonHistoire => 'Anderen beoordelen jouw verhaal...';
 
   @override
   String get vrai1 => 'Waar';
 
   @override
-  String get faux1 => 'Vals';
+  String get faux1 => 'Onwaar';
 
   @override
   String get tuAsVote => 'U hebt gestemd: \"{\'0\'\'}';
@@ -4701,11 +4528,11 @@ class AppLocalizationsNl extends AppLocalizations {
       '{0} werd gekozen voor zijn antwoord en won 1 punt!';
 
   @override
-  String get resultatsDesVotes => 'Stemuitslag';
+  String get resultatsDesVotes => 'Stemresultaten';
 
   @override
   String leMenteurEtait(Object liarName) {
-    return 'De leugenaar was $liarName !';
+    return 'De leugenaar was... $liarName!';
   }
 
   @override
@@ -4770,7 +4597,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String defiGagneCarteSRevelee(Object challengeBid) {
-    return 'Uitdaging gewonnen: $challengeBid onthuld kaart(s)!';
+    return 'Uitdaging gewonnen: $challengeBid kaart(en) onthuld!';
   }
 
   @override
@@ -4779,16 +4606,11 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get leTourEstTermine1 => 'Het is voorbij.';
-
-  @override
-  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
-    return '$winnerName won met zijn beschrijving:AppLocalisaties.of(context)!. extrainfoColumnChildText 99999';
-  }
+  String get leTourEstTermine1 => 'De beurt is voorbij.';
 
   @override
   String get personneNAGagneCe =>
-      'Niemand heeft deze ronde gewonnen. Gelijkheid van stemmen of geen beschrijving.';
+      'Niemand heeft deze ronde gewonnen. Gelijkspel of geen bijschriften.';
 
   @override
   String aTrouveLeSymboleIl(Object commonSym, Object winnerName) {
@@ -4797,7 +4619,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get leTourEstTerminePersonne =>
-      'Het is voorbij. Niemand vond het gemeenschappelijke symbool.';
+      'Beurt voorbij. Niemand vond het gemeenschappelijke symbool.';
 
   @override
   String aEteDesigneEEt(Object winnerName) {
@@ -4806,13 +4628,13 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get egalitePersonneNeMarqueDe =>
-      'Gelijkheid! Niemand markeert deze bocht.';
+      'Gelijkspel! Niemand scoort een punt deze beurt.';
 
   @override
-  String get espion => 'Espion';
+  String get espion => 'Spion';
 
   @override
-  String get revolution => 'Revolution!';
+  String get revolution => ' (Revolutie!)';
 
   @override
   String get rose1 => 'Rozen';
@@ -4825,26 +4647,13 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get indiceEnvoyeEnAttenteDes1 =>
-      'Index verzonden! Wachten op anderen...';
+      'Hint verzonden! Wachten op de anderen...';
 
   @override
   String get carte3 => 'Kaart';
 
   @override
   String get score => 'Score';
-
-  @override
-  String applocalizationsOfContextStyleconsttextstylecolorcolors(
-    Object deckIndex,
-    Object deckTotal,
-    Object guesserName,
-    Object totalScore,
-    Object value,
-    Object value2,
-    Object value3,
-  ) {
-    return '$value $guesserName :AppLocalisaties.of(context)! .styleConstTextstyleColorColors $value2 $deckIndex / $deckTotal';
-  }
 
   @override
   String get laNuitTombeSurLe =>
@@ -4855,13 +4664,13 @@ class AppLocalizationsNl extends AppLocalizations {
       'De tijd is gekomen...\n\nHet dorp moet stemmen.';
 
   @override
-  String get victoireDesVillageois => 'Victoire des Villageois!';
+  String get victoireDesVillageois => 'Dorpsbewoners winnen!';
 
   @override
-  String get victoireDesLoupsGarous => 'Overwinning van de Wolf Garous!';
+  String get victoireDesLoupsGarous => 'Weerwolven winnen!';
 
   @override
-  String get victoireDesAmoureux => 'Victory of Lovers!';
+  String get victoireDesAmoureux => 'Geliefden winnen!';
 
   @override
   String get finDuJeu => 'Einde spel';
@@ -4873,64 +4682,55 @@ class AppLocalizationsNl extends AppLocalizations {
   String get validerLeCouple2 => 'Validatiekoppel ({0}/2)';
 
   @override
-  String get lHeritierChoisitSonTestament => 'De erfgenaam kiest zijn wil';
+  String get lHeritierChoisitSonTestament =>
+      'De Erfgenaam kiest zijn voorbeeld';
 
   @override
-  String get selectionnezVotreTestateur => 'Selecteer uw tester';
+  String get selectionnezVotreTestateur => 'Selecteer je voorbeeld';
 
   @override
-  String get leGardeProtegeUnVillageois => 'De wacht beschermt een dorpeling.';
+  String get leGardeProtegeUnVillageois => 'De Bewaker beschermt iemand';
 
   @override
-  String get selectionnezQuiProteger => 'Selecteer wie te beschermen';
+  String get selectionnezQuiProteger => 'Kies wie je wilt beschermen';
 
   @override
-  String get laVoyanteConsulteLesAstres => 'De Ziener raadpleegt de sterren';
+  String get laVoyanteConsulteLesAstres => 'De Zieneres raadpleegt de sterren';
 
   @override
-  String get touchezUnJoueurPourSonder =>
-      'Raak een speler aan om zijn rol te onderzoeken';
+  String get touchezUnJoueurPourSonder => 'Tik op een speler om rol te zien';
 
   @override
-  String get leRatMaladeRode => 'De zieke rat rommelt...';
+  String get leRatMaladeRode => 'De Zieke Rat zwerft rond...';
 
   @override
-  String get contaminezJusquA2Joueurs => 'Besmetten tot 2 spelers';
+  String get contaminezJusquA2Joueurs => 'Besmet tot 2 spelers';
 
   @override
   String get contaminer => 'Contaminaat ({0})';
 
   @override
-  String get lesLoupsChassentEnMeute => 'Wolven jagen in groep';
+  String get lesLoupsChassentEnMeute => 'De Wolven jagen in een roedel';
 
   @override
-  String get votezPourDevorerUneProie => 'Stem om prooi te eten';
+  String get votezPourDevorerUneProie => 'Stem om een prooi te verslinden';
 
   @override
-  String get espionnezUnJoueur => 'Hoop een speler...';
+  String get espionnezUnJoueur => 'Bespioneer een speler...';
 
   @override
-  String get leLoupNoirDecideDu =>
-      'De Zwarte Wolf beslist het lot van de prooi';
+  String get leLoupNoirDecideDu => 'De Zwarte Wolf beslist over de prooi';
 
   @override
-  String
-  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
-    Object targetName,
-  ) {
-    return 'Infecteert $targetName ?AppLocalisaties.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinDe Witte Wolf slaat solo toe';
-  }
+  String get choisissezUneVictimeADevorer =>
+      'Kies een slachtoffer om te verslinden';
 
   @override
-  String get choisissezUneVictimeADevorer => 'Kies een slachtoffer om te eten';
-
-  @override
-  String get laSorcierePrepareSesPotions =>
-      'De heks bereidt haar drankjes voor';
+  String get laSorcierePrepareSesPotions => 'De Heks brouwt haar toverdrankjes';
 
   @override
   String cibleDesLoups(Object victimeName) {
-    return 'Doelstelling Wolf: $victimeName';
+    return 'Doelwit van de wolven: $victimeName';
   }
 
   @override
@@ -4938,36 +4738,35 @@ class AppLocalizationsNl extends AppLocalizations {
       'Raak de speler te elimineren met het gif';
 
   @override
-  String get empoisonner => 'Gif';
+  String get empoisonner => 'Vergiftigen';
 
   @override
   String get lePyromancienPrepareSesExplosifs =>
-      'Pyroman bereidt explosieven voor';
+      'De Pyromaan bereidt explosieven voor';
 
   @override
-  String get poserTonneau => 'Legton';
+  String get poserTonneau => 'Vat plaatsen';
 
   @override
-  String get debatsDuVillage => 'Debatten van het dorp';
+  String get debatsDuVillage => 'Dorpsdebat';
 
   @override
-  String get leCapitaineDesigneSonSuccesseur => 'Kapitein Appoints Successor';
+  String get leCapitaineDesigneSonSuccesseur => 'De Kapitein benoemt opvolger';
 
   @override
-  String get dernierTirDuChasseur => 'Laatste schot door de Hunter...';
+  String get dernierTirDuChasseur => 'Laatste schot van de Jager...';
 
   @override
-  String get leFossoyeurReveleUneSepulture => 'De Fossoyeur onthult een graf';
+  String get leFossoyeurReveleUneSepulture => 'De Doodgraver onthult een graf';
 
   @override
-  String get coupDEtatDuDictateur => 'Dictators staatsgreep.';
+  String get coupDEtatDuDictateur => 'Staatsgreep van de Dictator!';
 
   @override
-  String get voteDuTribunalPopulaire => 'Stemming';
+  String get voteDuTribunalPopulaire => 'Volkstribunaal stemming';
 
   @override
-  String get touchezUnSuspectPourVoter =>
-      'Raak een verdachte aan om te stemmen';
+  String get touchezUnSuspectPourVoter => 'Tik op verdachte om te stemmen';
 
   @override
   String get village => 'Dorp';
@@ -4976,103 +4775,95 @@ class AppLocalizationsNl extends AppLocalizations {
   String get loups => 'Wolven';
 
   @override
-  String get outreTombe => 'Overzees';
+  String get outreTombe => 'Dodenrijk';
 
   @override
   String get amoureux => 'Geliefden';
 
   @override
-  String
-  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
-    Object senderName,
-  ) {
-    return '$senderName : AppLocalisaties.of(context)!.styleTextstyleFontgewichtFontgewichtBoldSmall Horses';
-  }
-
-  @override
-  String get courseIndividuelle => 'Individuele rassen';
+  String get courseIndividuelle => 'Individuele race';
 
   @override
   String k3Lancers(Object lastHoldAction, Object value) {
-    return '$lastHoldAction ( $value /3 gegoten)';
+    return '👉 $lastHoldAction ($value/3 worpen)';
   }
 
   @override
   String joueEnDirect3Lancers(Object value, Object value2) {
-    return '$value toneelstukken live... (99999/3 shots)';
+    return '👉 $value speelt live... ($value2/3 worpen)';
   }
 
   @override
   String get gardeS => '\"{\'0\'\'}\' bewaard';
 
   @override
-  String get cur => 'Hart';
+  String get cur => '♥ Harten';
 
   @override
-  String get carreau => '♦ Carrel';
+  String get carreau => '♦ Ruiten';
 
   @override
-  String get trefle => '♣ Trèfle';
+  String get trefle => '♣ Klaveren';
 
   @override
-  String get pique => '♠ Pique';
+  String get pique => '♠ Schoppen';
 
   @override
   String get equipeARouge => 'Team A (Rood)';
 
   @override
-  String get equipeBBleue => 'Team B (blauw)';
+  String get equipeBBleue => 'Team B (Blauw)';
 
   @override
   String get votezPourLaPersonneLa =>
       'Stem op de persoon die het meest waarschijnlijk...';
 
   @override
-  String get demasquezLInfiltreEtMr =>
-      'Ontmaskeren van de geïnfiltreerde en Mr White!';
+  String get demasquezLInfiltreEtMr => 'Ontmasker de Infiltrant en Mr. White!';
 
   @override
   String get passeLeTelephoneAvantQu =>
-      'Geef de telefoon door voordat hij ontploft!';
+      'Geef de telefoon door voor hij ontploft!';
 
   @override
   String get proposezLeMeilleurSynonymeEt =>
       'Stel het beste synoniem voor en stem!';
 
   @override
-  String get leClassiqueAvecChoixEt => 'Klassiek, met keuze en aangepaste AI!';
+  String get leClassiqueAvecChoixEt =>
+      'De klassieker, met keuzes en aangepaste AI!';
 
   @override
   String get repondezALaQuestionSecrete =>
-      'Beantwoord de geheime vraag... Als je verliest!';
+      'Beantwoord de geheime vraag... als je verliest!';
 
   @override
   String get faitesDesChoixImpossiblesAvec =>
-      'Maak onmogelijke keuzes met IA opties en stemmen.';
+      'Maak onmogelijke keuzes met AI-opties en stemmingen.';
 
   @override
   String get retrouvezVosMotsSecretsPar => 'Vind je geheime woorden in teams!';
 
   @override
-  String get faitesDevinerDesNomsEn => 'Laat namen raden in 3 mouwen!';
+  String get faitesDevinerDesNomsEn => 'Laat namen raden in 3 rondes!';
 
   @override
   String get uneQuestionDrolePourLa =>
-      'Een grappige vraag voor de persoon die het object zal hebben!';
+      'Een grappige vraag voor degene die het voorwerp heeft!';
 
   @override
-  String get devinezLeMotAvecL => 'Raad het woord met de hulp van anderen!';
+  String get devinezLeMotAvecL => 'Raad het woord met hulp van de anderen!';
 
   @override
   String get reperezLeSymboleCommunLe =>
-      'Vind het gemeenschappelijke symbool sneller!';
+      'Vind het gemeenschappelijke symbool het snelst!';
 
   @override
   String get genereDesDilemmesAuFormat =>
       'Genereert dilemma\'s in \'OptionA of OptieB\' formaat. Thema: {0}';
 
   @override
-  String get jePasse => 'Ik passeer.';
+  String get jePasse => 'Ik pas';
 
   @override
   String get vote => '\"{\'0\'\'} stemmen';
@@ -5087,14 +4878,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get fin => 'Einde';
 
   @override
-  String get pile => 'Cel';
+  String get pile => 'Munt';
 
   @override
-  String get face => 'Gezicht';
+  String get face => 'Kop';
 
   @override
   String pasAssezDeJoueursIl(Object minPlayers) {
-    return 'Niet genoeg spelers! Deze configuratie vereist minstens $minPlayers spelers.';
+    return 'Niet genoeg spelers! Minimaal $minPlayers spelers nodig voor deze configuratie.';
   }
 
   @override
@@ -5104,25 +4895,21 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String tonMotEst(Object wordCivil) {
-    return 'Uw woord is $wordCivil';
+    return 'Jouw woord is: $wordCivil';
   }
 
   @override
   String tonMotEst1(Object wordUndercover) {
-    return 'Uw woord is $wordUndercover';
+    return 'Jouw woord is: $wordUndercover';
   }
 
   @override
-  String get tuNAsPasDe => 'Je hebt geen woord. Blaffe!';
+  String get tuNAsPasDe => 'Je hebt geen woord. Bluf!';
 
   @override
   String commeConvenuTuCommences(Object mrWhitePlayer) {
     return '$mrWhitePlayer , zoals afgesproken, jij begint!';
   }
-
-  @override
-  String get quiPourraitLePlusApplocalizations =>
-      'Wie kan meer?AppLocalisaties.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft';
 
   @override
   String get votePar => 'Gekozen door: \"{\'0\'\'}\'';
@@ -5133,11 +4920,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ilFautAuMoins41 =>
-      'Er zijn minstens 4 spelers nodig voor Codenamen (2 per team)!';
+      'Minimaal 4 spelers nodig voor Codenames (2 per team)!';
 
   @override
   String get impossibleDeFormerLesEquipes =>
-      'Kan geen teams vormen (minimumgrootte niet bereikt). Herstarten met minstens 4 spelers.';
+      'Kan geen teams vormen (minimale grootte niet bereikt). Herstart met minimaal 4 spelers.';
 
   @override
   String get lEquipeAReveleL =>
@@ -5192,16 +4979,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get trouves => 'Gevonden: {0}';
 
   @override
-  String get ecurie1 => 'Chirurgie 1';
+  String get ecurie1 => 'Stal 1';
 
   @override
-  String get ecurie2 => 'Chirurgie 2';
+  String get ecurie2 => 'Stal 2';
 
   @override
-  String get ecurie3 => 'Operatie 3';
+  String get ecurie3 => 'Stal 3';
 
   @override
-  String get ecurie4 => 'Operatie 4';
+  String get ecurie4 => 'Stal 4';
 
   @override
   String get nombreMaxDeJoueurs => 'Max. aantal spelers: \"{\'0\'\'}\'';
@@ -5218,12 +5005,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get partieDeEnAttente => 'Deel van \"{\'0\'\'}\' in behandeling';
 
   @override
-  String get termine => 'Beëindigd: \"{\'0\'\'}\'';
-
-  @override
-  String get vainqueur2 => 'Winnaar:';
-
-  @override
   String get joueurSPretS => 'Speler(s) klaar';
 
   @override
@@ -5232,25 +5013,25 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get lampe => 'Lamp';
+  String get lampe => 'Zaklamp';
 
   @override
-  String get trousseSoin => 'Zorgpakket';
+  String get trousseSoin => 'EHBO-doos';
 
   @override
   String get hache => 'Bijl';
 
   @override
-  String get arbalete => 'Arbalet';
+  String get arbalete => 'Kruisboog';
 
   @override
-  String get fusil => 'Fusil';
+  String get fusil => 'Geweer';
 
   @override
-  String get talkie => 'Talkie.';
+  String get talkie => 'Walkietalkie';
 
   @override
-  String get tronconneuse => 'Transformator';
+  String get tronconneuse => 'Kettingzaag';
 
   @override
   String get survie => 'Overleving';
@@ -5259,105 +5040,40 @@ class AppLocalizationsNl extends AppLocalizations {
   String get redigezLPour => 'Schrijf de {0} voor {1}';
 
   @override
-  String get rejouerGarderPts => 'JOIN (GUARD PTS)';
+  String get rejouerGarderPts => 'OPNIEUW (PUNTEN BEHOUDEN)';
 
   @override
   String get indicesMontresA => 'Indexen';
 
   @override
-  String get playersWinneridname => 'Spelers winnaarsnaam';
+  String get marquesDeVoiture => 'Automerken';
 
   @override
-  String get packageSensorsPlusSensorsPlus =>
-      'pakket:sensoren plus/sensoren plus.dart';
+  String get paysDuMonde => 'Landen van de wereld';
 
   @override
-  String get dossierDeJeuGamecodeSupprime =>
-      'Spelmap \$gameCode is succesvol verwijderd.';
-
-  @override
-  String get erreurLorsDuNettoyageSupabase =>
-      'Fout bij schoonmaken Supabase: \$e';
-
-  @override
-  String get supabaseUploadTentativeAttemptMaxretries =>
-      '--- [Supabase Upload] Poging tot \$attempt/\$maxRetrievals voor deel \$gameCode ---';
-
-  @override
-  String get jpg => '\${const Uuid().v4()}.jpg';
-
-  @override
-  String get supabaseUploadSuccesTentativeAttempt =>
-      '--- [Supabase Upload] Succes (Tentative \$attempt): \$publicUrl ---';
-
-  @override
-  String get supabaseUploadErreurTentativeAttempt =>
-      '--- [Supabase Upload] ERREUR (Tentative \$attempt/\$maxRetries) ---';
-
-  @override
-  String get erreurE => 'Fout: \$e';
-
-  @override
-  String get supabaseUploadEchecDefinitif =>
-      '--- [Supabase Upload] DEFINITIEVE ---';
-
-  @override
-  String get uploadReussiPublicurl => 'Upload succesvol: \$publicUrl';
-
-  @override
-  String get erreurSupabaseStorageexception =>
-      '--- SUPBASE FOUT (StorageException) ---';
-
-  @override
-  String get message1 => 'Bericht: \${e.message}';
-
-  @override
-  String get statuscode => 'StatusCode: \${e.statusCode}';
-
-  @override
-  String get error => 'Fout: \${e.error}';
-
-  @override
-  String get erreurInattendueLorsDeL => '--- Ontoereikende fout bij UPLOAD ---';
-
-  @override
-  String get typeDErreur => 'Fout type: \${e.runtimeType}';
-
-  @override
-  String get stacktraceStacktrace => 'StackTrace: \$stackTrace';
-
-  @override
-  String get timeSUp1 => 'Tijd\\\'s omhoog';
-
-  @override
-  String get marquesDeVoiture => 'Automerk';
-
-  @override
-  String get paysDuMonde => 'Wereldlanden';
-
-  @override
-  String get fruitsLegumes => 'Groenten en fruit';
+  String get fruitsLegumes => 'Fruit & groenten';
 
   @override
   String get animaux => 'Dieren';
 
   @override
-  String get metiers => 'Handel';
+  String get metiers => 'Beroepen';
 
   @override
-  String get objetsDeLaCuisine => 'Keukengerei';
+  String get objetsDeLaCuisine => 'Keukenvoorwerpen';
 
   @override
   String get villes => 'Steden';
 
   @override
-  String get sports => 'Sport';
+  String get sports => 'Sporten';
 
   @override
   String get couleurs => 'Kleuren';
 
   @override
-  String get partiesDuCorps => 'Delen van het lichaam';
+  String get partiesDuCorps => 'Lichaamsdelen';
 
   @override
   String get vetements => 'Kleding';
@@ -5369,10 +5085,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get celebrites => 'Beroemdheden';
 
   @override
-  String get fleursArbres => 'Bloemen en bomen';
+  String get fleursArbres => 'Bloemen & bomen';
 
   @override
-  String get filmsDisney => 'Disney Films';
+  String get filmsDisney => 'Disney-films';
 
   @override
   String get superHeros => 'Superhelden';
@@ -5387,86 +5103,25 @@ class AppLocalizationsNl extends AppLocalizations {
   String get chosesRouges => 'Rode dingen';
 
   @override
-  String get marquesDeVetements => 'Kledingmarkeringen';
+  String get marquesDeVetements => 'Kledingmerken';
 
   @override
-  String get butDuJeuEtreLe =>
-      '**Game goal**\nWees de speler met de meeste punten aan het eind van het spel.\n\n**Draft**\n1. Elke speler ontvangt **7 responskaarten** in de hand.\n2. Een speler wordt genoemd ** Juge** (de rol draait bij elke ronde).\n3. De rechter leest de **vraagkaart** hardop.\n4. Alle ** andere spelers** stiekem kiezen **1 antwoordkaart** uit hun hand en verzenden.\n5. De rechter leest alle antwoorden en wijst de grappigste** aan.\n6. De winnaar van de rondescore **1 punt**.\n7. Elke speler **poche** een nieuwe kaart om terug te keren naar 7.\n8. De rol van rechter gaat over naar de volgende speler.\n\n** Belangrijke regels**\nRechter ** speelt geen kaart tijdens zijn beurt.\n- De antwoorden zijn ** anoniem**: de rechter weet niet wie wat schreef.\n- We kunnen maar één kaart** per handgreep spelen.';
+  String get loupNoir => 'Zwarte Wolf';
 
   @override
-  String get objectifPrenezDesCartesPour =>
-      '** Doelstelling**\nNeem kaarten om passende paren te maken. Vermijd de speler die de Zombie kaart aan het einde van het spel.\n**Draft**\n1. Het spel begint met 33 kaarten (16 paar + 1 Zombie kaart).\n2. De kaarten worden verdeeld onder de 4 spelers.\n3. Elke beurt neemt een speler een kaart van de volgende speler.\n4. Als de kaart een paar maakt, wordt deze automatisch verslagen.\n5. De hand van de speler is gemengd.\n6. De eerste speler die geen kaarten meer heeft gewonnen.\n7. De overgebleven speler met de Zombie kaart verloren!';
+  String get loupBlanc => 'Witte Wolf';
 
   @override
-  String get butDuJeuObtenirLe =>
-      '**Game goal**\nKrijg de hoogste score door 13 categorieën te vullen met 5 dobbelstenen.\n\n**Running of a tower**\n1. **Lance**: U kunt de 5 dobbelstenen tot 3 keer per beurt gooien.\n2. Na de 1e of 2e worp kunt u een aantal dobbelstenen bewaren en anderen opnieuw starten.\n3. **Score**: Na minstens één worp moet je een categorie kiezen om te scoren. Elke categorie kan slechts eenmaal per onderdeel worden gebruikt.\n\n** Categorie**\n- **As to Six** : Som van de overeenkomstige dobbelstenen. (Bond 35 punten indien het bovenste gedeelte 63 punten of meer bedraagt).\n- **Brelan** (3 of meer identieke dobbelstenen): Een som van alle dobbelstenen.\n- ** Vierkant** (4 of meer identieke dobbelstenen): Een som van alle dobbelstenen.\n- **Volledig** (3 dobbelstenen identiek + 1 paar): 25 punten.\n- ** Kleine Suite** (4 opeenvolgende dobbelstenen): 30 punten.\n- **Large Suite** (5 opeenvolgende dobbelstenen): 40 punten.\n- **Yams** (5 dobbelstenen identiek): 50 punten.\n- **Chance** : Som van alle dobbelstenen.';
+  String get ratMalade => 'Pestrat';
 
   @override
-  String get objectifNePasAvoirL =>
-      '** Doelstelling**\nHeb het apparaat niet in je handen als de aardappel ontploft!\n\n**Draft**\n1. Een thema verschijnt op het scherm.\n2. De speler die het apparaat vasthoudt moet een antwoord geven dat overeenkomt met het thema.\n3. Zodra hij antwoordde, ging hij snel het vliegtuig naar zijn buurman.\n4. De buurman moet op zijn beurt een nieuw antwoord vinden en het apparaat doorgeven.\n5. Tijd is verborgen en willekeurig: de aardappel kan exploderen op elk moment!\n6. De speler die het apparaat vasthoudt op het moment van de explosie verliest het handvat en ontvangt een belofte.';
+  String get voyante => 'Ziener';
 
   @override
-  String get principeGeneralGribouillisEstUn =>
-      '** Algemeen beginsel**\nGribouillis is een tekenspel geïnspireerd door de \"Arabische telefoon,\" waar ideeën veranderen in elk stadium. Er zijn 3 spelmodi:\n\n**1. Normale modus (Arabische Illustrated Phone) *\n- **Schrijven**: Elke speler schrijft een zin.\n- **Drawing**: Elke speler krijgt een nieuwe zin en tekent die.\n- **Devinette**: Elke speler ontvangt een tekening en raadt wat hij voorstelt.\n- **Alternance** : Het spel wisselt tekenen en raden totdat elke \"album\" is rond alle spelers.\n- **Maar** : Veel plezier zien hoe een eenvoudige zin verandert in iets totaal anders!\n\n**2. Aanvullingsmodus (collaboratieve tekening)**\n- **Croquis**: Elke speler start een eenvoudige tekening.\n- **Complete**: Elke speler ontvangt de tekening van een ander en moet het verrijken, zonder te verwijderen wat er al bestaat.\n- **Alternance**: De tekening gaat van speler naar speler, elk voegt zijn touch.\n- **Parameter \"Toevoegen 1\"**:\n- *Indien uitgeschakeld (standaard)*: Het is een touw. De tekening evolueert in elke fase (speler A -> Speler B -> Speler C...).\n- *Indien geactiveerd*: De eerste tekening van elke speler wordt voltooid door alle andere spelers, het creëren van verschillende collectieve werken parallel.\n- **Maar**: Maak verrassende en leuke collectieve kunstwerken.\n\n**3. Brise-Glace-modus (creatieve interactie) * *\n- **Schrijven**: Elke speler schrijft een persoonlijk thema (ex: AppLocalisaties.of(context)!.myPreference).\n- **Drawing**: Elke speler ontvangt de thema\'s van **alle andere spelers** en moet ze tekenen.\n- **But**: Ideaal om het ijs te breken, de smaak van anderen te ontdekken en creativiteit in samenwerking en licht te lanceren.';
+  String get petiteFille => 'Klein Meisje';
 
   @override
-  String get yzObjectifAvoirLeMoins =>
-      'Doel\n\nHebben zo weinig mogelijk punten aan het einde van het spel.\nHet spel stopt wanneer een speler 100 punten of meer bereikt, en de winnaar is degene met de laagste totale score.\n\nUitrusting\n\n150 kaarten genummerd van 2 tot +12\n\nUitvoering\n\nMeng alle kaarten.\nElke speler ontvangt 12 kaarten, recht voor zich geplaatst, in 4 kolommen × 3 rijen.\nDe andere kaarten vormen een voorraad. Geef de eerste kaart terug om het afval te vormen.\nElke speler geeft 2 kaarten van zijn keuze terug uit zijn 12.\n\nDe loop van een rondleiding\n\nOp je beurt heb je **30 seconden** om te kiezen tussen twee acties:\n\n1. Neem de afvalkaart\nU moet het ruilen met een van uw 12 kaarten (zichtbaar of verborgen zijde).\nDe vervangen kaart gaat op het afval.\n\n2. Piocher een kaart naar beneden\nJe kijkt op de kaart:\n- of u houdt het en vervangt een van uw kaarten (zoals hierboven),\n- of u weigert het → u plaatst het direct op het afval, en in dit geval moet u een van uw kaarten nog steeds verborgen.\n\nBijzondere voorschriften\n\nDrie identieke kaarten in een kolom → worden onmiddellijk verslagen (waarde 0).\n\nEinde handvat:\n\nDe handgreep eindigt wanneer een speler al zijn kaarten heeft onthuld.\nAlle andere spelers dan onthullen hun resterende kaarten. De hendel is voorbij.\nAlle spelers tellen de som van hun kaarten.\n\nLet op: als de speler die eindigt niet de laagste score in de ronde heeft, neemt hij een boete van +10 punten (zijn handgreep score wordt verdubbeld in de oorspronkelijke versie, zullen we gebruiken +10 om te vereenvoudigen).\n\nEinde spel\n\nWe spelen zoveel mouwen als we nodig hebben.\nZodra een speler 100 punten of meer bereikt, stopt het spel.\nDe speler met de laagste cumulatieve score wint.';
-
-  @override
-  String get iAReglesDuPoker =>
-      'Doel\n\nWin de chips van andere spelers door:\n- de beste hand van 5 kaarten tijdens het slachten,\n- of door ze op te geven (om te slapen) dankzij de inzet.\n\nHandclassificatie (van sterkste tot zwakste)\n\n1. Royal flush : 10 \n2. Quint flush: 5 kaarten die elkaar volgen, dezelfde kleur\n3. Vierkant: 4 identieke kaarten\n4. Vol: 3 identieke kaarten + 1 paar\n5. Kleur (doorstroming): 5 kaarten van dezelfde kleur (niet-doorlopend)\n6. Volgende (vijfde): 5 kaarten die elkaar volgen (verschillende kleuren)\n7. Brelan: 3 identieke kaarten\n8. Dubbel paar\n9. Paar\n10. Hoge kaart (hoogste kaart als niemand beter wordt)\n\nð\n\n1. Blinden\nDe speler links van de dealer zet de kleine blind.\nDe volgende speler zet de grote blind.\n\n2. Distributie\nElke speler ontvangt 2 gesloten kaarten (de \"privékaarten\").\n\n3. Veilingtorens en gemeenschappelijke kaarten\n- Preflop: weddenschapstruc met privékaarten.\n- Drie kaarten. Nieuwe inzetten.\n- De vierde gemeenschappelijke kaart. Nieuwe inzetten.\n- River: 5e en laatste gemeenschappelijke kaart onthuld. Laatste weddenschap.\n\n4. Schieten (showdown)\nAls meerdere spelers blijven, elk toont hun spel.\nDe beste combinatie van 5 kaarten (onder de 2 privékaarten + de 5 gemeenten) wint de pot.\n\nMogelijke acties\n\nOp zijn beurt heeft een speler **30 seconden** voor:\nWed niets, alleen als niemand ooit nog inzet.\nDoe wat chips in de pot.\n- Volgen: gelijk aan rennen.\n- Relaunch (Raise): Verhoog de inzet.\n- Ga naar bed. Laat z\'n kaarten vallen.\n\nEinde spel\n\nHet spel gaat door zolang er tenminste 2 spelers met chips overblijven.\nDe laatste winnaar is degene die alle chips pakt.';
-
-  @override
-  String get butDuJeuGagnerLe =>
-      '**Game goal**\nWin de meeste XP door acties uit te voeren en te reageren op waarheden!\n\n**Draft**\n1. De roulette is de speler wiens beurt het is.\n2. De speler schiet \"Actie\" of \"Verity.\"\n3. Klassieke modus: Een willekeurige uitdaging / vraag wordt weergegeven.\n4. Rechter Modus: Een willekeurige speler schrijft de uitdaging, dan realiseert de speler het.\n5. Andere spelers valideren met een stem Ja/Neen.\n6. Het validatiepercentage bepaalt de XP gewonnen.\n\n**Bijzondere regels**\n- 100% validatie = maximum XP\n- Speler met de meeste XP wordt Beheerder van het spel\n- De knop \"End of handle\" laat toe om het onderdeel te sluiten';
-
-  @override
-  String get butDuJeuLeBut =>
-      '**Game goal**\nHet doel is om als eerste al zijn kaarten kwijt te raken om president te worden. De laatste speler met kaarten in de hand wordt de Klootzak.\n\n**Materiaal en Spelers**\n- **Maps**: 52 kaarten.\n- ** Spelers**: 3 tot 6 spelers.\n\n**Cardwaarde**\nDe volgorde van de kaarten, van de zwakste tot de sterkste, is:\n*3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2.**\nDe **2** is de sterkste kaart en kan elke andere kaart of combinatie verslaan.\n\n**Handmatig gebruik**\n1. **Distributie**: Alle kaarten worden gelijk verdeeld over spelers.\n2. ** Eerste ronde**:\n- Voor het allereerste spel, de speler die eigenaar is van de **3 van Trèfle (Hij moet deze kaart spelen (alleen of met anderen 3).\n- Voor de volgende mouwen begint het **Assess wiel** van de vorige mouw.\n3. ** Speelkaarten**: De eerste speler zet op de tafel:\n- Slechts één kaart (bv. één 7).\n- Eén paar (ex: twee 8).\n- Een brelaan (ex: drie Valets).\n- Eén vierkant (ex vier 5).\n4. ** Voortzetting van de ronde**: De volgende speler (met de klok mee) heeft **30 seconden** om hetzelfde aantal kaarten** maar een ** hogere waarde** te spelen.\n- Voorbeeld: Als een speler een paar van 6 poseert, moet de volgende een paar van 7, dames, as, enz.\n5. **Skip your turn**: Als een speler niet kan of wil spelen, moet hij zijn beurt passeren. Zodra een speler voorbij is, kan hij niet meer spelen tot het einde van de huidige vouw.\n6. **Einde van een vouw**: De vouw eindigt wanneer alle spelers hun beurt voorbij zijn. De laatste speler die kaarten heeft geplaatst wint de vouw, haalt de kaarten van de tafel (zet ze opzij) en begint de volgende vouw door te spelen wat hij wil.\n7. **De kracht van 2**: Speel één of meer **2** slaat elke combinatie en eindigt de vouw onmiddellijk. De persoon die de 2 speelde wint de vouw en begint weer te spelen.\nOm een paar te verslaan, moet je een paar spelen!\n\n**End of the English Channel and Roles\nZodra een speler geen kaarten heeft, is hij klaar. Het spel gaat door tot er nog maar één speler over is.\n- De volgorde van het einde bepaalt de rollen voor de volgende ronde:\n- **1e**: Voorzitter\n- **2e**: vicevoorzitter\nKlootzak.\n- **Voor-laatste** : Vice-Ass-Trou\n- **Andere** (indien van toepassing): Neutraal\n\nVolgende maand: Card Exchange!\nVoordat de nieuwe ronde begint, wisselen spelers kaarten uit:\n- De **Asshole** geeft zijn **twee beste kaarten** aan de **President**.\n- De **voorzitter** geeft hem in ruil de ** twee kaarten van zijn keuze** (meestal zijn slechtste).\n- Als er 4 spelers of meer zijn, geeft de **Vice-Cut** zijn ** beste kaart** aan de **Vice-President**.\n- De **Vice-President** geeft hem de ** kaart van zijn keuze**.\n\n**Bijzondere regels**\nKan niet eindigen met een 2**: Een speler heeft het recht niet om zijn laatste kaart kwijt te raken als het een 2. Deze klap wordt als ongeldig beschouwd.\n**Variante revolutie (facultatief)**: Als een speler een vierkant (4 identieke kaarten) zet, kan hij \"Revolution!\" aankondigen. De volgorde van waarde van de kaarten wordt dan omgekeerd tot het einde van de mouw (de 3 wordt de sterkste, en de 2 de zwakste).';
-
-  @override
-  String get butDuJeuReussirDeux =>
-      '**Game goal**\nSucces twee uitdagingen voor de andere spelers.\n\n**Op zijn plaats**\n- Elke speler begint met 4 kaarten: 3 rozen en 1 schedel.\n- Elke kaart op het tapijt blijft gebonden aan de eigenaar.\n\n**Draft**\n1. Op zijn beurt kan een speler een kaart op zijn tapijt leggen.\n2. Wanneer hij niet meer wil poseren, daagt hij uit door het aantal kaarten aan te kondigen dat hij denkt terug te kunnen keren.\n3. Andere spelers kunnen bieden of passeren.\n4. De hoogste bieder wordt de uitdager en geeft de geadverteerde kaarten terug.\n5. Eerst geeft hij zijn eigen kaarten terug, dan die van andere spelers indien nodig.\n\n**Resolution**\n- Als er een schedel verschijnt, is de uitdaging verloren.\n- Als de uitdaging wordt gewonnen, scoort de speler een punt. De eerste op 2 punten wint het spel.\n- Als een uitdaging verloren gaat, verliest de speler willekeurig een kaart uit zijn resterende hand. Als hij z\'n schedel kwijtraakt, moet hij er meteen weer één ongedaan maken.';
-
-  @override
-  String get butDuJeuFaireDeviner =>
-      '**Game goal**\nEen woord raden door te tekenen, voor het einde van de toegewezen tijd.\n\n**Draft**\n1. **Drawer/wordselectie**: Een speler is aangewezen om te tekenen, en een woord wordt stiekem toegeschreven aan hem.\n2. **Tekening**: De tekenaar heeft een beperkte tijd om het woord te raden door te tekenen. Hij kan noch spreken, noch nabootsen, noch brieven of cijfers schrijven.\n3. **Devinettes**: Andere spelers bieden woorden in een chat.\n4. **Validatie**: De cartoonist ziet de voorstellen in de chat en klikt op een \"Find!\" knop naast het goede bericht om de winnaar aan te wijzen.\n5. **Points**: De speler die vond en de tekenaar wint een punt.\n6. **Volgende Toren**: Er wordt een nieuwe tekenaar benoemd.\n\n**Opties**\n- ** Slechts 30 slagen**: De rapporteur is beperkt tot maximaal 30 kenmerken.';
-
-  @override
-  String get butDuJeuFaireDeviner1 =>
-      '**Game goal**\nLaat je partner zo veel mogelijk mysterieuze woorden raden, elk een woord aanwijzing schrijven. Dezelfde of ongeldige indexen worden geschrapt.\n\n**Draft**\n1. **Selectie van de Devin**: Een speler wordt aangewezen als de \"Devin\" voor de ronde. Hij ziet het woord mysterie niet.\n2. **Keuze van het Woord Mysterie**: De Devin kiest een woord uit een lijst (of de meester van het spel kiest er een).\n3. **Indice Writing**: Alle andere spelers (\"Indices\") stiekem één woord index schrijven die de Devin zal helpen het woord mysterie te vinden.\n4. **Indices Filter**: Alle indices worden onthuld. Dezelfde indexen (zelfs indien verschillend gespeld, bijvoorbeeld \"chat\" en \"chats\") of ongeldig (zeer dicht bij het woord mysterie, uitgevonden, enz.) worden geëlimineerd. Alleen de unieke en geldige aanwijzingen worden getoond in de Devin.\n5. **Devinette**: De Devin kijkt naar de resterende aanwijzingen en probeert het woord mysterie te raden. Hij heeft maar één poging.\n6. **Rating**:\nHet team wint 1 punt.\n- Als de Devin het woord mysterie niet vindt: 0 punt.\n- Als de Devin niet antwoordt: 0 punt.\n\n**Voorbeelden van ongeldige indexen:**\n- Mysteriewoord: \"Chat.\" Ongeldige indices: \"chaton,\" \"gevoel,\" \"miou,\" \"minou.\"\n- Identieke indexen: Als 2 spelers \"dier\" schrijven voor \"Chat,\" wordt \"dier\" geëlimineerd.';
-
-  @override
-  String get butDuJeuPourLes =>
-      '**Game goal**\n- Voor **Village**: Elimineer alle Wolf-Garous, White Wolf, Malade Rat (behalve Mercenary als het wint).\n- Voor de Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Elimineer alle Villagers.\n- Voor de **Solitaires** : Doel specifiek voor elke persoon (White Loup: alleen zijn; Mercenary: Dood zijn doel op J1; Rat Ziek: besmet alles).\n- Voor de ** Lovers** (als Wolf + Village) : De enige twee overlevenden zijn.\n\n**Draft**\nHet spel wisselt af tussen fasen van **nacht** en **dag**.\n\n* Night *\n1. De spelleider (de app) kondigt aan dat het dorp slaapt.\n2. Verschillende personages worden op hun beurt wakker om hun krachten te gebruiken:\n- **Cupidon** (alleen eerste nacht): Namen twee spelers die verliefd zullen worden. Als ze een Wolf en een Villager, hun doel verandert.\n- Het**Heritage** (alleen eerste nacht): Verwijst naar een tester.\n- De **Seeing** wordt wakker en wijst een speler aan om zijn ware rol te ontdekken. (Detecteer Black Wolf infectie niet).\n- De **Mentalist** (passief) ziet het resultaat van de dorpsstemming.\n- De **Rat Malade**: Contamineert twee spelers (die weten dat de anderen besmet zijn).\n- De **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - stem samen) wordt wakker, concert en wijst een slachtoffer aan om te eten.\n- De Black Loup** kan het slachtoffer ooit veranderen in een geïnfecteerde Loup-Garou (die zijn krachten behoudt en Wolf wordt). De Mentalist en Fossoyer kunnen de geïnfecteerden detecteren, de Voyante nee.\n- The **White Loup** (een van de twee nachten): Ondersteunt een speler van zijn keuze (omdraait de beschermingen).\nTovenarij** wordt wakker. Ze ziet het wolfsslachtoffer en kan één van haar twee drankjes (slechts één keer per deel) gebruiken: een drankje van **genezing** om het slachtoffer te redden, of een drankje van**gift** om iemand te doden.\n- De ** Pyroman** : Kiest voor het opslaan van een vat Griekse brand of detoneren die al geplaatst (moet leven in de ochtend).\nMay communiceert met de doden.\n\n* Dag * *\n1. Het dorp wordt wakker. De app kondigt aan wie stierf vannacht.\n2. Dode spelers onthullen hun rol en worden geëlimineerd (ze kunnen niet meer communiceren, behalve de Necromank met de doden).\n- Le **Loup Bavard** : Moet een geheim woord uitspreken of sterven bij zonsondergang (tenzij Dictator macht neemt).\n3. Overlevenden ruziën om te proberen bedriegers bloot te stellen.\n4. Na de discussies stemmen alle spelers om een verdachte te elimineren.\n- De **Dictator** (eenmaal): kan de stemming houden. Als hij een wolf uitschakelt, wordt hij burgemeester, anders sterft hij.\n- De **Kapitein** : Zijn stem telt dubbel. Als hij wordt uitgeschakeld, moet hij een opvolger benoemen voordat hij sterft.\n- De Mercenary**: Als zijn doelwit op de eerste dag wordt geëlimineerd, wint hij alleen. Anders wordt hij een Villager.\n5. De speler die de meeste stemmen ontvangt wordt geëlimineerd, onthult zijn rol, en is uit het spel.\n- De **Chasseur**: Als hij wordt uitgeschakeld (dag en nacht), heeft hij de macht om een andere speler mee te nemen.\n- De **Fossoyeur** : Toen hij stierf, identificeerde hij twee spelers (één uit het tegenoverliggende kamp, één uit zijn kamp).\n- The Lovers**: Als de een sterft, volgt de ander hem met verdriet.\n- The** Heritage**: Als zijn testator sterft, neemt hij zijn rol op zich (tenzij dood of besmet).\n6. Een nieuwe nacht begint.\n\n**Voorwaarden van de overwinning**\n- **Village**: Elimineer alle Wolf-Garous, White Wolf, Sick Rat.\n- **Loups-Garous** (moute): Om gelijk of hoger te zijn aan de Villagers.\n- **White Loup**: De enige overlevende zijn.\n**Mercenary**: Dood zijn doelwit op de eerste dag.\n- **Rat Malade**: Besmet alle live spelers.\n- ** Lovers** (Loup + Village) : De enige twee overlevenden zijn.\n\n**Belangrijke notities**\n- De Chaperon Rouge** wordt beschermd door de Hunter tegen de Wolf-Garous terwijl de Hunter leeft.\n- De **Garde** beschermt een Wolf-Garous doelwit (kan niet tweemaal dezelfde persoon beschermen).\nDe krachten van de Witte Wolf kennen de bescherming niet.\nDe Pyroman moet morgen in leven zijn om zijn vaten te laten ontploffen.';
-
-  @override
-  String get loupNoir => 'Zwarte wolf';
-
-  @override
-  String get loupBavard => 'Loup Bavard';
-
-  @override
-  String get loupBlanc => 'Witte wolf';
-
-  @override
-  String get mercenaire => 'Huurder';
-
-  @override
-  String get ratMalade => 'Zieke rat';
-
-  @override
-  String get voyante => 'Voyante';
-
-  @override
-  String get petiteFille => 'Meisje';
-
-  @override
-  String get chasseur => 'Hunter';
-
-  @override
-  String get garde => 'Bewaker';
+  String get garde => 'Lijfwacht';
 
   @override
   String get cupidon => 'Cupido';
@@ -5475,106 +5130,29 @@ class AppLocalizationsNl extends AppLocalizations {
   String get mentaliste => 'Mentalist';
 
   @override
-  String get fossoyeur => 'Fossen';
-
-  @override
   String get dictateur => 'Dictator';
 
   @override
-  String get chaperonRouge => 'Rode hoed';
+  String get pyromancien => 'Pyromancer';
 
   @override
-  String get pyromancien => 'Pyroman';
+  String get unSubstantifExLeChat => 'een zelfstandig naamwoord (bijv. de kat)';
 
   @override
-  String get butDuJeuEtreLe1 =>
-      '**Game goal**\nWees het snelst om het enige identieke symbool te zien tussen de kaart in het midden en zijn eigen kaart.\n\n**Draft (Mode \'The Infernal Tower\')**\n1. Elke speler ontvangt een kaart naar beneden. De rest van de kaarten vormen een Stock in het centrum, gezicht zichtbaar.\n2. Eerst geeft iedereen zijn kaart terug.\n3. Elke speler moet zo snel mogelijk het enige symbool vinden dat zowel op zijn kaart als op de Stock Card aanwezig is.\n4. De eerste speler die het symbool vindt, de aankondiging hardop, neemt de Stock kaart en plaatst het op zijn eigen kaart.\n5. Deze nieuwe kaart wordt zijn kaart voor de volgende ronde. Een nieuwe kaart wordt vervolgens onthuld in het centrum van de Voorraad.\n6. Het spel gaat door tot de Voorraad uitgeput is. De speler die aan het eind de meeste kaarten heeft verzameld wint!';
+  String get unAdjectifExMignon => 'een bijvoeglijk naamwoord (bijv. schattig)';
 
   @override
-  String get butDuJeuSeDebarrasser =>
-      '**Game goal**\nWeg met al zijn kaarten door de eerste te zijn!\n\n**Draft**\n1. **Distributie**: Elke speler ontvangt 7 kaarten. De rest vormt de voorraad. Een kaart wordt teruggegeven om de afvalstapel te starten.\n2. **Speel een kaart**: De speler wiens beurt het is heeft **30 seconden** om een kaart in zijn hand te leggen op de afvalstapel. De gespeelde kaart moet overeenkomen met de bovenste kaart van de stack door:\n* **Color** (ex: Red on Red)\n* **Nummer** (ex: 1 7 Blue on on one 7 Green)\n* **Symbol** (ex: een gele \"+2\" op een rode \"+2\")\n* **Special Card** (Joker, +4, enz.)\n3. **Piocher**: Als een speler geen kaart kan afspelen in de toegewezen tijd, moet hij een kaart uit het pakket kiezen. Als hij deze kaart kan spelen, kan hij het meteen doen. Anders eindigt zijn beurt.\n4. **Speciale kaarten**:\n* **+2 (Twee kaarten)**: De volgende speler kiest 2 kaarten en passeert zijn beurt.\n* **Sens Forbidden (Pass your turn) * **: De volgende speler passeert zijn beurt.\n* **Inversie (verandering van betekenis)**: Het gevoel van spel is omgekeerd.\n* **Joker (Kleurverandering)**: De speler kiest de kleur van de volgende kaart om te spelen. Kan op elke kaart gespeeld worden.\n* ** Super Joker +4 (Kleurverandering en Vier Kaarten)**: Speler kiest kleur. De volgende speler kiest 4 kaarten EN passeert zijn beurt. Deze kaart kan alleen worden afgespeeld als de speler GEEN andere kaart van de gewenste kleur op de afvalstapel heeft (tenzij hij bluft).\n5. * Announce \"UNO\"**: Wanneer een speler slechts één kaart in de hand heeft, moet hij \"UNO!\" aankondigen. Als hij dat niet doet en wordt meegenomen door een andere speler (voordat de volgende speler speelt of oppakt), moet hij 2 kaarten kiezen.\n6. **Eind van het Kanaal**: De handgreep eindigt wanneer een speler zijn laatste kaart kwijtraakt. De punten worden geteld. De speler die 500 punten bereikt (of een bepaald totaal) wint het spel.\n\n**Kaartpunten:**\n* Digitale kaarten (0-9): hun gezichtswaarde.\n* +2, Sens Verboden, Inversie: 20 punten.\n* Joker, Super Joker +4: 50 punten.';
+  String get unVerbeExMange => 'een werkwoord (bijv. eet)';
 
   @override
-  String get principeDuJeuLeJeu =>
-      '## Spelprincipe\n* Het spel wordt gespeeld tussen **3 en 10 spelers**.\n* Elke speler geeft toegang tot een deel van zijn/haar fotobibliotheek en kiest foto\'s om te delen.\n* Tijdens een spel wordt een foto geselecteerd **randomly** uit alle spelers, vervolgens een paar seconden weergegeven.\n* Spelers moeten raden **wie de eigenaar is van de foto** weergegeven.\n* De speler die correct raadt de meeste foto\'s wint het spel.\n\nProcedure\n1. **Selectie van foto\'s**: Elke speler kiest een aantal foto\'s uit zijn galerij.\n2. **Start van het spel**: Zodra iedereen klaar is, lanceert de gastheer het spel.\n3. ** Speeltoren**:\n- Een willekeurige foto wordt gedurende 5 seconden getoond.\nAlle spelers stemmen om de eigenaar te raden.\n4. **Resultaten**: De scores worden na elke ronde bijgewerkt.\n5. **Einde van het spel**: Na een bepaald aantal rondes wint de speler met de meeste punten.';
+  String get unSubstantifExLaSouris =>
+      'een zelfstandig naamwoord (bijv. de muis)';
 
   @override
-  String get butDuJeuCoulerTous =>
-      '**Game goal**\nVerborg alle schepen van de tegenstander voordat hij de jouwe zinkt.\n\n**Draft**\n1. **Plaats**: Elke speler plaatst stiekem zijn vloot op een 10x10 raster.\n- Luchtvaartmaatschappijen (5 dozen)\n- Cruiser (4 dozen)\n- Onderzeeër (3 cellen)\n- Vernietiger (3 dozen)\n- Patrouille (2 dozen)\n2. **Tir**: Op zijn beurt raken spelers een doos aan om te schieten.\n3. **Result**: AppLocalisaties.of(context)!.touche, \"Coulated\" of \"To water.\"\n4. **Victoire**: De eerste speler die de hele vloot van de tegenstander laat zinken wint.';
+  String get unAdjectifExMort => 'een bijvoeglijk naamwoord (bijv. dood)';
 
   @override
-  String get butDuJeuEtreLe2 =>
-      '**Game goal**\nWees de eerste die de doelafstand bereikt (standaard 1000 km).\n**Draft**\nElke speler krijgt zes kaarten.\n- Speel op zijn beurt een kaart (Afstand, Aanval, Verdediging, Veiligheid) of doe het weg.\n- De **Attacks** kaarten (Stop, Red, Essence, Crevaison, Limit) blokkeren de tegenstander.\n- Kaarten **Defenses** (Green, Extra Tank, Reparatie, End Limit) tegenaanvallen.\n- De **Security** kaarten annuleren een aanval en voorkomen dat het zich herhaalt.\n- Kaarten **Afstand** (25, 50, 75, 100, 200 km) rijden uw voertuig vooruit.\nKies één kaart aan het eind van je beurt.';
-
-  @override
-  String get butDuJeuEtreLe3 =>
-      '**Game goal**\nWees de eerste om zich te ontdoen van al zijn kaarten door het vormen van geldige combinaties (smelten).\n\n**Running of a tower**\n1. **Piocher**: Neem de kaart van de bovenkant van het afval OR Stock.\n2. **Verkoop (facultatief)**: Plaats geldige combinaties op de tafel.\n- **Sequence (Run)**: 3 of meer kaarten van dezelfde kleur die volgen (bijv. 5) De aas kan hoog of laag zijn.\n- **Group (Set)**: 3 of 4 kaarten van dezelfde waarde maar van verschillende kleuren (bijv.\n3. **Standaard**: Verwijder een kaart van zijn hand op het afval.\n\n**End of handle**\nDe eerste speler die geen kaarten meer heeft na nederlaag wint. De anderen tellen de punten van hun resterende kaarten (figuren = 10, As = 15, anderen = nominale waarde). Het spel stopt op 100 punten.';
-
-  @override
-  String get butDuJeuFaireDeviner2 =>
-      '**Game goal**\nLaat je team maximale woorden raden voor het einde van de tijd, zonder de verboden woorden te gebruiken!\n\n**Draft**\n1. Elke beurt probeert een speler (\"de spreker\") zijn team een woord te laten raden.\n2. De spreker mag niet **nooit** het woord te raden, noch een van de woorden \"Taboo\" (geen woorden) weergegeven onder het doelwoord. Hij kan ook geen vertalingen of woorden van dezelfde familie gebruiken.\n3. Als de spreker een Taboo-woord gebruikt, meldt het tegenovergestelde team (of rechter) de fout, wordt de kaart geannuleerd en gaat de spreker naar de volgende.\n4. Elk geraden woord geeft een punt terug aan het team.\n5. De bocht eindigt wanneer de tijd om is.\n\n**Einde deel**\nHet team met de meeste punten na het aantal ronden bepaald wint!';
-
-  @override
-  String get butDuJeuAmenerVos =>
-      '**Game goal**\nBreng uw paarden naar het centrum van het plateau door uw tegenstanders te omzeilen.\n\n**Klassieke regels**\n1. **Basisuitgang**: Je moet een **1** of **6** maken om een pion eruit te trekken.\n2. ** Bonus Tour**: Het maken van een **6**, het vastleggen van een pion of het afronden van de cursus maakt het mogelijk om te herhalen. (Waarschuwing: 3 keer een 6 opeenvolgende annuleert uw beurt!).\n3. **Capture** : Vallen op een tegenoverliggende pion geeft het terug naar zijn basis (onmogelijk op de beschermde \"Stars\" dozen of op het startvak van deze speler).\n4. **Aangekomen**: Je hebt een exacte score nodig om naar de laatste trap te komen.\n\n**Teammodus (2v2) **\nVereist precies 4 spelers. Je bent verbonden met de speler voor je.\n- **Shared Victory**: Het eerste team dat in totaal 4 stuks naar het centrum brengt wint het spel (ex: 3 stuks voor jou en 1 voor je bondgenoot).\n- **Entraide**: U kunt uw worp gebruiken om de pion van uw bondgenoot te verplaatsen, maar *alleen* om het uit zijn basis te krijgen (met een 1 of 6) of verplaatsen naar de finishtrap.\n- **Geallieerd blokkeren**: Het is onmogelijk om de pion van je partner te vangen. Als je beweging je op hem laat landen, is de klap ongeldig.';
-
-  @override
-  String get principeJeuSurrealisteDEcriture =>
-      '**Principel**\nSurrealistisch collectief schrijfspel.\n**Variant**\n- Klassiek: Iedereen schrijft een element van de zin (subjectief, bijvoeglijk naamwoord, werkwoord, enz.) zonder de precedenten te zien.\n- Continuation: Iedereen ziet de laatste 3 woorden en voltooit de zin.\n**Draft**\nDe bladeren draaien totdat iedereen heeft deelgenomen.';
-
-  @override
-  String get butDuJeuPlacerLe =>
-      '**Game goal**\nLeg de meeste van zijn stukken op de set.\n**Gouden regel**\nElk nieuw stuk moet minstens een ander stuk van dezelfde kleur aanraken door een hoek, maar nooit door één kant.\n**Draft**\n1. De eerste ronde wordt gespeeld in de hoek van de schotel van uw kleur.\n2. De volgende torens respecteren de gouden regel.\n3. Als je niet meer kunt spelen, pas je je beurt.\n**Rating**\n-1 punt per vierkant niet geplaatst.\n+15 punten als alle onderdelen zijn geplaatst.\n+5 bonuspunten als het laatste stuk het enkele vierkant is (1x1).';
-
-  @override
-  String get objectifEtreLePremierA =>
-      '** Doelstelling**\nWees de eerste die de doelscore (20, 50 of 100 punten) bereikt.\n\n**Draft**\nElke speler krijgt 7 dominostenen. Op zijn beurt moet hij een domino plaatsen die overeenkomt met een van de uiteinden van de ketting. Doubles worden gespeeld in kruisen.\n\n**Speelmodus**\n- **Pike**: Als je niet kunt spelen, kies je totdat je een speelbaar spel hebt.\nGeen picks. Als je niet kunt spelen, sla je je beurt over.\n- **All Five**: De eerste dubbel gespeeld is de \"Spinner\" (speelbaar aan 4 kanten). Je scoort punten bij elke slag als de som van de uiteinden een veelvoud van 5 is.\n\n**End of turn**\nAls niemand kan spelen, is de truc geblokkeerd. Spelers onthullen hun handen. De speler met de minste punten wint de ronde en markeert de som van de punten van de tegengestelde handen.';
-
-  @override
-  String get objectifEtreLePremierJoueur =>
-      '** Doelstelling**\nWees de eerste speler die van al zijn kaarten afkomt.\n\n**Regels**\nHet spel wordt gespeeld met een 52 kaartspel.\n- Orde van kaarten (van laagste naar hoogste): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Orde van kleuren (van de zwakste tot de sterkste): tegels ♦ (D), trèfles\n- De speler die de 3 van Tegels heeft begint het spel.\n\n** Combinaties**\n- **Eenvoudig**: 1 kaart.\n- **Pair**: 2 kaarten van dezelfde rang.\n- **Triple**: 3 kaarten van dezelfde rang.\n- ** Voortgezet**: 5 opeenvolgende rijkaarten (gemengde kleuren).\n- **Kleur**: 5 kaarten van dezelfde kleur.\n- **Volledig**: 3 kaarten van één rij + 2 kaarten van een andere rij.\n- ** Vierkant**: 4 kaarten van dezelfde rang + 1 kaart van welke aard dan ook.\n- **Quinte Flush**: 5 opeenvolgende kaarten van dezelfde kleur.\n\n**Hierarchie van combinaties van 5 kaarten**\nFlush Quinte > Vierkant > Volledige > Kleur > Suite.\nEen combinatie kan alleen worden verslagen door een combinatie van dezelfde grootte en hogere waarde.';
-
-  @override
-  String get objectifCapturerToutesLesPieces =>
-      '** Doelstelling**\nNeem alle munten van je tegenstander of blokkeer al zijn munten.\n**Regels**\n- Speelt op een 8x8 controle, uitsluitend op donkere dozen.\nDe stukken bewegen diagonaal in een doos.\n- De vangsten zijn ** verplicht** en worden gemaakt door te springen over een vijandelijk stuk.\n- Verschillende vangsten kunnen in één ronde worden geketend.\n- Wanneer een kamer de andere rij bereikt, wordt het gepromoot in \"Dame\" en kan bewegen en vangen terug.';
-
-  @override
-  String get unSubstantifExLeChat => 'een inhoudelijke (bv. kat)';
-
-  @override
-  String get unAdjectifExMignon => 'een bijvoeglijk naamwoord (bv. schattig)';
-
-  @override
-  String get unVerbeExMange => 'een werkwoord (ex: eten)';
-
-  @override
-  String get unSubstantifExLaSouris => 'een inhoudelijke (bv. muis)';
-
-  @override
-  String get unAdjectifExMort => 'een bijvoeglijk naamwoord (bv. overlijden)';
-
-  @override
-  String rankSuitD0(Object d) {
-    return '\$rank\$suit\${d > 0?';
-  }
-
-  @override
-  String get petit1 => 'Klein 1';
-
-  @override
-  String get petit2 => 'Klein 2';
-
-  @override
-  String get grand => 'Groot';
-
-  @override
-  String get tresGrand => 'Zeer groot';
-
-  @override
-  String get superGrand => 'Super groot';
-
-  @override
-  String get potionDeVieEtDe => 'De drank van leven en dood.';
+  String get potionDeVieEtDe => 'Drank van leven en dood.';
 
   @override
   String get legende => 'legende';
@@ -5583,7 +5161,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get mystere => 'mysterie';
 
   @override
-  String get fantome1 => 'geest';
+  String get fantome1 => 'spook';
 
   @override
   String get echo => 'echo';
@@ -5617,114 +5195,25 @@ class AppLocalizationsNl extends AppLocalizations {
       'Het aantal symbolen per kaart bedraagt ten minste 3.';
 
   @override
-  String get pasAssezDeSymbolesUniques =>
-      'Niet genoeg unieke symbolen voor \$PerCard symbolen per kaart. Vereist: \$totalSymbols, Beschikbaar: \${dobbleSymbols.length}.';
-
-  @override
   String get laGenerationAEchoueNombre =>
       'Generatie mislukt: onjuist aantal kaarten.';
-
-  @override
-  String get withKickersKickervalues =>
-      '\${rank.name} met kickers: \$kickerValues';
-
-  @override
-  String get melangeEquilibreDesThemesSuivants =>
-      'Gebalanceerde mix van de volgende thema\'s: \$gecombineerd Thema';
-
-  @override
-  String get ambianceTonImposeStyle => '[Ambiance / Taxed tone: \$style]';
-
-  @override
-  String get genereDesPairesDeMots =>
-      'Genereert paren van vergelijkbare woorden in \'MotCivil:MotInfilted\' formaat. Thema: \$finalprompt';
-
-  @override
-  String get genereDesCartesTabooAu =>
-      'Genereert Taboo kaarten in het formaat \'Targetword:Forbidd1,Forbidd2,Forbidd3,Forbidd4,Forbidd5\'. Thema: \$finalprompt';
-
-  @override
-  String get genereDesCategoriesOriginalesEt =>
-      'Genereert originele en leuke categorieën om te raden. Thema: \$finalprompt';
-
-  @override
-  String get genereDesPhrasesCourtesVisuelles =>
-      'Genereert korte, visuele en verbijsterde zinnen om te tekenen (ex: AppLocalisaties.of(context)!.unDinosaureQuiMangeUne). Thema: \$finalprompt';
-
-  @override
-  String get genereDesPhrasesDAccroche =>
-      'Genereert originele vangstzinnen of het schrijven van universum. Thema: \$finalprompt';
-
-  @override
-  String get genereDesDilemmesCorneliensAu =>
-      'Genereert corneale dilemma\'s in het \'OptionA or OptieB\'-formaat (bv. AppLocalisaties.of(context)!.power toVolerOuEtreInvisible). Thema: \$finalprompt';
-
-  @override
-  String get genereUnMelangeDeDefis =>
-      'Genereert een mix van uitdagingen (acties) en indiscrete vragen (waarheden). Thema: \$finalprompt';
-
-  @override
-  String get genereDesQuestionsDirectesAmusantes =>
-      'Genereert directe, leuke en pittige vragen. Thema: \$finalprompt';
-
-  @override
-  String get genereDesPhrasesCourtesA =>
-      'Genereert korte gat zinnen (met \' \') voor het spel. Thema: \$finalprompt';
-
-  @override
-  String genereDesQuestionsAmusantesSur(Object player) {
-    return 'Genereert leuke vragen over een speler (gebruik de tag \' $player \'). Thema: \$finalprompt';
-  }
-
-  @override
-  String get genereDesSituationsHumoristiquesEt =>
-      'Genereert humoristische situaties en begin van legendes van memes. Thema: \$finalprompt';
-
-  @override
-  String get genereUneListeDeMots =>
-      'Genereert een lijst van woorden/expressies voor het spel \$gameType op thema: \$finalPrompt';
-
-  @override
-  String get strc64264 => '\${autotitel.subtekenreeks(0, 28)}...';
-
-  @override
-  String get pack => 'Pak \${words.take(2).join(\', \')}';
-
-  @override
-  String get themeGametype => 'Thema \$gameType';
-
-  @override
-  String get errorReportingBlockingPlayerE =>
-      'Fout bij rapporteren/blokkeren speler: \$e';
-
-  @override
-  String get errorUnblockingPlayerE =>
-      'Fout bij het deblokkeren van de speler: \$e';
-
-  @override
-  String get blancMangerCocon => 'White Eat Cocon';
-
-  @override
-  String get leRoiDesMemes => 'De Koning van het Zelfde';
 
   @override
   String get laPartieEstTermineeTous =>
       'Het spel is voorbij: alle spelers hebben de verbinding verbroken.';
 
   @override
-  String get aucun => 'Geen';
-
-  @override
   String get nonAuthentifie => 'Niet geauthenticeerd.';
 
   @override
-  String get actionNonAutorisee => 'Ongeautoriseerde actie.';
+  String get actionNonAutorisee => 'Actie niet toegestaan.';
 
   @override
-  String get vousDevezJouerAuMoins => 'Je moet minstens één kaart spelen.';
+  String get vousDevezJouerAuMoins => 'Je moet ten minste één kaart spelen.';
 
   @override
-  String get tentativeDeTricheDoublonsDe => 'Bedriegen: dubbele kaarten.';
+  String get tentativeDeTricheDoublonsDe =>
+      'Valsspelen gedetecteerd: dubbele kaarten.';
 
   @override
   String get carteNonTrouveeDansVotre => 'Kaart niet gevonden in je hand.';
@@ -5736,32 +5225,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get vousDevezJouerLeMeme => 'Je moet hetzelfde aantal kaarten spelen.';
 
   @override
-  String get combinaisonDe5CartesTrop => 'Combinatie van 5 kaarten te zwak.';
+  String get combinaisonDe5CartesTrop => '5-kaartencombinatie te zwak.';
 
   @override
-  String get vousDevezJouerUneCarte => 'Je moet een sterkere kaart spelen.';
-
-  @override
-  String get playersWinneridScore => 'spelers.\$winnerId.score';
-
-  @override
-  String get aGagne1 => 'Hij heeft gewonnen.';
-
-  @override
-  String get playernameAJoue =>
-      '\$playerName speelde \${cardsToPlay.join(, \')}.';
-
-  @override
-  String get playernameAJoue1 =>
-      '\$playerName speelde \${winnendeCombo.join(, \')}.';
-
-  @override
-  String get pliTermineAuTourDe =>
-      'Ik ben klaar. Op zijn beurt \${gameData[\'players\']?[playerOrder[volgendeIndex]]?[\'name\']}!';
-
-  @override
-  String get playernamePasseSonTour =>
-      '\$Player De naam gaat zijn beurt voorbij.';
+  String get vousDevezJouerUneCarte => 'Je moet een hogere kaart spelen.';
 
   @override
   String get ceNEstPasVotre => 'Het is niet jouw beurt.';
@@ -5771,176 +5238,75 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get coupInvalideSelonLesRegles =>
-      'Ongeldige staatsgreep volgens de Mille Bornes regels!';
+      'Ongeldige zet volgens de Mille Bornes-regels!';
 
   @override
   String get cibleAdverseValideObligatoirePour =>
-      'Verplicht doelwit voor aanval.';
-
-  @override
-  String coupFourrePareLAttaque(Object matchingSafety) {
-    return '\${spelers[targetId]?[\'name\']} Bereid de aanval voor met \$ {matchingSafety} en neem het over!';
-  }
-
-  @override
-  String get playersPlayeridScore => 'spelers.\$playerId.score';
-
-  @override
-  String get aAtteintTargetdistKm => 'Heeft \$target bereikt Dist km!';
+      'Geldig doelwit van de tegenstander vereist voor een aanval.';
 
   @override
   String get nonAutoriseUsurpationDIdentite =>
-      'Ongeautoriseerd: identiteitsfraude ontdekt.';
-
-  @override
-  String get erreurGenerateaiwordsSecuriseE =>
-      'Fout bij genererenAiWords veilig: \$e';
-
-  @override
-  String get erreurValidatejustoneclueaiE => 'Valideer foutJustOneClueAi: \$e';
-
-  @override
-  String get finDuCompteARebours =>
-      'Einde aftellen: Spel herstart voor alle \${players.length} spelers!';
+      'Niet toegestaan: identiteitsfraude gedetecteerd.';
 
   @override
   String get scoresConservesEnAttenteDans =>
       'Gered Scores! Ik wacht in de woonkamer.';
 
   @override
-  String get playernameARejointLaPartie => '\$player De naam kwam in het spel!';
-
-  @override
-  String get leTempsEstEcouleOn => 'De tijd is om, we gaan!';
+  String get leTempsEstEcouleOn => 'De tijd is om, we gaan verder!';
 
   @override
   String get leTempsEstEcoulePour =>
-      'De tijd is voorbij om de waarheid te vertellen!';
+      'De tijd is om om de waarheid te verklaren!';
 
   @override
-  String get cibleHorsDeLaGrille => 'Doelwit onvindbaar.';
+  String get cibleHorsDeLaGrille => 'Doelwit buiten het raster.';
 
   @override
-  String get caseDejaCiblee => 'Doos al gericht.';
-
-  @override
-  String get aCouleTouteLaFlotte => 'De hele vijandelijke vloot zonk.';
+  String get caseDejaCiblee => 'Vak al eerder aangevallen.';
 
   @override
   String get placementAutomatiqueEffectue =>
-      '⏱️ Placement automatique effectué.';
-
-  @override
-  String get playersCurrentplayeridScore => 'spelers. \$currentPlayerId.score';
-
-  @override
-  String get aTireAutomatiquementEnResult =>
-      '\${targetIndex ~/10) + 1}-\${(targetIndex % 10) + 1} (\$result).';
-
-  @override
-  String get playernameAOuvertAvecCardtoplay =>
-      '⏱️ \$playerName a ouvert avec \$cardToPlay.';
-
-  @override
-  String get playernameAJoue2 =>
-      '\$playerName speelde \${candidatecards.join(, \')}.';
-
-  @override
-  String get pliTermineAuTourDe1 =>
-      'Ik ben klaar. Op zijn beurt \${gameData[\'players\']?[playerOrder[volgendeIndex]]?[\'name\']}.';
+      '⏱️ Automatische plaatsing voltooid.';
 
   @override
   String get tempsEcoulePourLaSaisie =>
-      'Tijd om woorden in te voeren. Het spel begint met de woorden in beslag genomen!';
-
-  @override
-  String get removedplayernameAQuitteLaPartie =>
-      '\$removedPlayer Naam verliet het spel.';
-
-  @override
-  String get removedplayernameSEstDeconnecteVictoire =>
-      '\$removedPlayer Naam verbroken. Win voor \$ resterend Naam per verpakking!';
-
-  @override
-  String get playersRemainingplayeridScore =>
-      'spelers. \$ resterendPlayerId.score';
-
-  @override
-  String get estLeNouvelHote =>
-      '\${players[playerOrder[0]]?[\'name\']} is de nieuwe host.';
-
-  @override
-  String get playernameAManque3Tours =>
-      '\$player Naam gemist 3 ronden zonder te spelen. De beheerder werd gevraagd te beslissen over de vervanging ervan door de computer.';
-
-  @override
-  String get playernameNeRepondPlusReason =>
-      'De beheerder werd gevraagd te beslissen over de vervanging ervan door de computer.';
-
-  @override
-  String get playernameAEteRemplacePar =>
-      '\$\$playerName is vervangen door de computer (AI actief - 5s per beurt).';
-
-  @override
-  String get playernameNAPasDonne => 'Draai je om.';
+      '⏰ Tijd voor invoeren van woorden verstreken. Het spel start met de ingevoerde woorden!';
 
   @override
   String get laPhaseDeVoteA => 'De stemfase is begonnen!';
 
   @override
-  String get playernameNAPasRepondu =>
-      'Tour overgeslagen zonder automatische actie.';
-
-  @override
-  String get playernameNAPasJoue =>
-      '\$player Naam speelde niet op tijd. Zijn beurt is voorbij.';
-
-  @override
   String get personneNAVoteAucun =>
-      'Niemand heeft gestemd. Geen speler uitgeschakeld.';
+      'Niemand heeft gestemd. Geen speler geëlimineerd.';
 
   @override
   String get egaliteLorsDuVoteLa =>
       'Gelijkheid in stemmen! De Godin van Justitie moet heersen.';
 
   @override
-  String get egalitePersistanteLeDestinDepartage =>
-      'Permanente gelijkheid! Destiny willekeurig ingesteld: \${playerData[randomEliminated]?[\'name\']} wordt geëlimineerd.';
+  String get plusDeLancersDisponibles => 'Geen worpen meer beschikbaar.';
 
   @override
-  String get egaliteParfaiteLorsDuVote =>
-      'Perfecte gelijkheid bij stemmen (\${tiedPlayers.length} spelers ex-aequo)! Geen speler uitgeschakeld.';
+  String get vousDevezLancerLesDes => 'Je moet dobbelen voordat je scoort.';
 
   @override
-  String get leTempsDeVoteEst => 'De stemmingen zijn afgelopen!';
+  String get categorieDejaCompletee => 'Categorie al ingevuld.';
 
   @override
-  String get laPartieDeYamsCommence => 'Yams wedstrijd begint!';
+  String get grandeSuite => 'Grote Straat';
 
   @override
-  String get plusDeLancersDisponibles => 'Meer schoten beschikbaar.';
+  String get petiteSuite => 'Kleine Straat';
 
   @override
-  String get vousDevezLancerLesDes =>
-      'Je moet de dobbelstenen gooien voordat je scoort.';
+  String get full => 'Full House';
 
   @override
-  String get categorieDejaCompletee => 'Categorie is al voltooid.';
+  String get brelan => 'Drie dezelfde';
 
   @override
-  String get grandeSuite => 'Grote Suite';
-
-  @override
-  String get petiteSuite => 'Kleine Suite';
-
-  @override
-  String get full => 'Vol';
-
-  @override
-  String get brelan => 'Brelan';
-
-  @override
-  String get carre => 'Vierkant';
+  String get carre => 'Carre';
 
   @override
   String get grilleDeYamsCompleteePar =>
@@ -5956,300 +5322,112 @@ class AppLocalizationsNl extends AppLocalizations {
   String get ceNEstPasVotre1 => 'Het is niet jouw beurt om te schrijven.';
 
   @override
-  String get playernameAJoueLastdrawn => '\$playerName speelde \$lastDrawn.';
-
-  @override
-  String get playernameAJouePlayable => '\$Player Naam gespeeld \$playable.';
-
-  @override
-  String get playernamePiocheEtPasseSon =>
-      '⏱️ \$playerName pioche et passe son tour.';
-
-  @override
-  String get playernameNAPasJoue1 =>
-      '\$player Naam speelde niet op tijd. Eén kaart werd verslagen en één doos onthuld.';
-
-  @override
-  String get playersGamewinneridScore => 'spelers. \$gameWinnerId.score';
-
-  @override
-  String get playersVidScore => 'spelers.\$vId.score';
-
-  @override
-  String get playersVoteridScore => 'spelers.\$voterId.score';
-
-  @override
   String get nonAuthentifie1 => 'Niet authentiek.';
-
-  @override
-  String get erreurUpdatepictionarydrawingRtdbE =>
-      'Fout bij updateFototekening RTDB: \$e';
 
   @override
   String get leTempsDesDebatsEst =>
       'Het debat is voorbij. Het dorp moet nu stemmen!';
 
   @override
-  String get failedToLoadMeme => 'Kon zelfs niet laden: \${respons.statusCode}';
-
-  @override
-  String get errorFetchingMemeE => 'Fout bij fetisjen: \$e';
-
-  @override
-  String get lesAmoureux => 'Geliefden';
-
-  @override
   String get seulsLesDeuxAmoureuxSont =>
-      'Alleen de twee geliefden leven nog. Hun liefde triomfeert over alles!';
+      'Alleen de twee geliefden zijn nog in leven. Hun liefde overwint alles!';
 
   @override
   String get leLoupBlancEstLe =>
-      'De Witte Wolf is de laatste overlevende! Hij at iedereen op.';
-
-  @override
-  String get loupsGarous => 'Wolf Garous';
+      'De Witte Wolf is de laatste overlevende! Hij heeft iedereen verslonden.';
 
   @override
   String get lesLoupsGarousSontDevenus =>
-      'De Wolf-Garous zijn de meerderheid geworden, ze kunnen niet langer verliezen. Ze hebben gewonnen!';
-
-  @override
-  String get villageois => 'Dorp';
+      'De Weerwolven hebben de meerderheid en kunnen niet meer verliezen. Ze hebben gewonnen!';
 
   @override
   String get toutesLesMenacesOntEte =>
-      'Alle bedreigingen zijn geëlimineerd! Het dorp heeft gewonnen!';
-
-  @override
-  String get playersPidScore => 'spelers.\$pId.score';
-
-  @override
-  String laPartieEstTermineeVictoire(Object winner) {
-    return 'Het spel is voorbij. Overwinning van \$ $winner !';
-  }
+      'Alle dreigingen zijn uitgeschakeld! Het dorp heeft gewonnen!';
 
   @override
   String get laVoyanteASondeUne => 'De Ziener onderzocht een ziel die nacht...';
 
   @override
-  String get lHeritierAChoisiSon => 'De erfgenaam koos zijn testator...';
+  String get lHeritierAChoisiSon =>
+      'De Erfgenaam heeft zijn erflater gekozen...';
 
   @override
   String get vousNePouvezPasProteger =>
       'Je kunt niet dezelfde persoon twee nachten achter elkaar beschermen.';
 
   @override
-  String get leGardeMonteLaGarde => 'De wacht is vanavond...';
-
-  @override
-  String get joueursContaminesParLaMaladie =>
-      'Spelers geïnfecteerd met de ziekte: \$contensedNames.';
+  String get leGardeMonteLaGarde => 'De Bewaker houdt vannacht de wacht...';
 
   @override
   String get uneOdeurPestilentielleSEst =>
-      'Een pestlucht verspreid in het dorp...';
+      'Een vieze stank heeft zich door het dorp verspreid...';
 
   @override
   String get lesLoupsGarousOntDesigne =>
-      'De Wolf Garous hebben hun prooi aangewezen. De Zwarte Wolf denkt...';
+      'De Weerwolven hebben hun prooi gekozen. De Zwarte Wolf denkt na...';
 
   @override
   String get lesLoupsGarousOntChoisi =>
-      'De Wolf Garous kozen hun slachtoffer...';
+      'De Weerwolven hebben hun slachtoffer gekozen...';
 
   @override
-  String get leLoupBlancARode => 'De Witte Wolf zwierf alleen vanavond...';
+  String get leLoupBlancARode => 'De Witte Wolf zwierf vannacht alleen rond...';
 
   @override
   String get vousAvezEteInfectePar =>
-      'Je bent besmet met de Zwarte Wolf! Je wordt een Wolf-Garou.';
+      'Je bent besmet door de Zwarte Wolf! Je wordt een Weerwolf.';
 
   @override
   String get leLoupNoirAUtilise =>
-      'De Zwarte Wolf gebruikte zijn kracht van infectie!';
+      'De Zwarte Wolf heeft zijn besmettingskracht gebruikt!';
 
   @override
-  String get leLoupNoirNA => 'Zwart Wolf gebruikte zijn infectie niet.';
+  String get leLoupNoirNA =>
+      'De Zwarte Wolf heeft zijn besmetting niet gebruikt.';
 
   @override
   String get laPetiteFilleAEte =>
-      'Kleine meid was te nieuwsgierig! De Wolven eten het onmiddellijk op!';
+      'Het kleine meisje was te nieuwsgierig! De Wolven verslinden haar meteen!';
 
   @override
-  String get infecte1 => 'geïnfecteerd';
+  String get vousVousSentezObserveE => 'Je voelt je vannacht bekeken...';
 
   @override
-  String get contamine => 'besmet';
+  String get laSorciereAUtiliseSa =>
+      'De Heks heeft haar genezingsdrankje gebruikt.';
 
   @override
-  String get vousAvezEspionneTargetnameEt =>
-      'Je bespioneerde \$targetName en ontdekte zijn rol: \$targetRole.';
-
-  @override
-  String get vousVousSentezObserveE => 'Je voelt je bekeken vanavond...';
-
-  @override
-  String get laSorciereAUtiliseSa => 'De heks gebruikte haar genezend drankje.';
-
-  @override
-  String get laSorciereAConcocteUn => 'De heks bedacht een dodelijk gif...';
+  String get laSorciereAConcocteUn => 'De Heks brouwde een dodelijk vergif...';
 
   @override
   String get lePyromancienAEntreposeUn =>
-      'De Pyroman heeft een vat Griekse brand opgeslagen...';
+      'De Pyromaan heeft een vat Grieks vuur geplaatst...';
 
   @override
   String get lePyromancienAllumeLaMeche =>
-      'De Pyroman steekt de lont van zijn vaten aan!';
-
-  @override
-  String get leSoleilSeLeveSur => 'De zon komt op op Thiercelieux...';
-
-  @override
-  String get estMortEDeChagrin =>
-      '\$ [spelerData [andere geliefde] [\'naam\']] stierf van verdriet voor zijn liefde!';
-
-  @override
-  String get lHeritierHeriteDuRole =>
-      '\${playerData[heritierId][\'name\']} (de erfgenaam) erft de rol van \${spelerData[testatorId][\'naam\']}: \$newRole!';
-
-  @override
-  String get heriteEgalementDuStatutDe =>
-      '\${spelerGegeven[erfgoed] Id][\'name\']} erft ook kapitein status!';
-
-  @override
-  String get votreMotDuJourNewword =>
-      'Uw woord van de dag: \'\$newWord\'. Zeg het tegen de kat voor zonsondergang.';
+      'De Pyromaan ontsteekt het lont van zijn vaten!';
 
   @override
   String get miraculeusementPersonneNAPeri =>
-      'Wonderlijk genoeg is er gisteravond niemand gestorven.';
-
-  @override
-  String get leVillageDecouvreAvecEffroi =>
-      'Het dorp ontdekt met horror het lichaam(s) van: \${deadThisNightNames.toSet().join(, \')}.';
-
-  @override
-  String get motDuJour => 'Woord van de dag';
-
-  @override
-  String get leFossoyeurReveleEtaitUn =>
-      '\${playerData[fossoyeurId][\'name\']} (de Fossoyeur) onthult: \${spelerData[doelspeler Id][\'name\']} was een \$ targetRole!';
-
-  @override
-  String get etEtaitUnEOtherrevealedrole =>
-      'En \${playerData[andere onthulde speler Id] [\'naam\'] was een \$ andere Onthulde Role!';
-
-  @override
-  String get dictateurnameDeclareUnCoupD =>
-      '\$dictatorName verklaart een staatsgreep!';
-
-  @override
-  String get leDictateurAExecuteUn =>
-      'De dictator \${spelerData[dictator Id][\'name\']} executeerde een bedrieger (\${playerData[targetId][\'name\']} - \$targetRole) en werd kapitein!';
+      'Wonderbaarlijk genoeg is er vannacht niemand gestorven!';
 
   @override
   String get leDictateurSEstTrompe =>
-      'De Dictator had het mis een onschuldige te executeren. Hij staat voor de doodstraf.';
-
-  @override
-  String get leLoupBavardNA =>
-      'The Loup Bavard (\${playerData[loupBavardId][\'name\']}) zei zijn woord niet en stierf bij zonsondergang!';
+      'De Dictator executeerde per ongeluk een onschuldige! Krijgt de doodstraf.';
 
   @override
   String get tentativeDUsurpationDIdentite =>
       'Poging tot identiteitsdiefstal gedetecteerd!';
 
   @override
-  String get leVillageAVoteEt =>
-      'Het dorp stemde en elimineerde \${spelerData[eliminatedId][\'name\']}.';
-
-  @override
   String get egaliteParfaiteLorsDuVote1 =>
-      'Perfecte gelijkheid bij de stemming. Er wordt vandaag geen inwoner geëxecuteerd.';
+      'Perfecte gelijkstand bij de stemming. Vandaag wordt niemand geëxecuteerd.';
 
   @override
-  String get leMercenaireAFaitEliminer =>
-      'Mercenary \${playerData[mercenary Id] [\'naam\']} liet zijn doelwit elimineren op dag 1! Hij wint het spel alleen!';
+  String get infiltre => 'Infiltrant';
 
   @override
-  String get meurtDeChagrinPourSon =>
-      '\$ [spelerData [andere geliefde] [\'naam\']] sterft van verdriet voor zijn liefde!';
-
-  @override
-  String get leChasseurTireEtTue => 'De Hunter schiet en doodt \$ targetName!';
-
-  @override
-  String get lHeritierHeriteDuRole1 =>
-      '\${playerData[heritierIdCheck][\'name\']} (de erfgenaam) erft de rol van \${spelerData[testatorId][\'naam\']}: \$newRole!';
-
-  @override
-  String get lAncienCapitaine => 'De voormalige kapitein.';
-
-  @override
-  String get formercaptainnameADesigneNewcaptainnameComme =>
-      '\$ voormalige kapitein Naam heeft aangewezen \$newCaptainName als nieuwe kapitein!';
-
-  @override
-  String get amoureux1 => 'Geliefden 1';
-
-  @override
-  String get amoureux2 => 'Geliefden 2';
-
-  @override
-  String get cupidonADesigneLover1nameEt =>
-      'Cupido genaamd \$lover1 Naam en \$lover2 Naam als minnaars!';
-
-  @override
-  String get debugJoingameTentativeDeRejoindre =>
-      '[DEBUG joinGame] Poging om deel te nemen aan het spel \'\$gameCode\' door \'\$playerName\' (ID: \$playerId).';
-
-  @override
-  String get debugJoingameDemarrageDeLa =>
-      '[DEBUG joingame] Start de transactie.';
-
-  @override
-  String get debugJoingamePartieTrouveeEt =>
-      '[DEBUG joingame] Deel gevonden en in de lobby. Gegevens lezen...';
-
-  @override
-  String get debugJoingameJoueursActuelsAvant => '\$players';
-
-  @override
-  String get debugJoingameJoueursMisA => '\$players';
-
-  @override
-  String get debugJoingameTransactionUpdateAppelee =>
-      '[DEBUG joinGame] Transaction.update() aangeroepen met de nieuwe spelerslijst.';
-
-  @override
-  String get debugJoingameTransactionReussieRetourne =>
-      'Succesvolle transactie. Ga terug waar.';
-
-  @override
-  String get debugJoingameLaPartieN =>
-      '[DEBUG joingame] Het spel bestaat niet of is niet langer in de lobby. Ga terug naar onwaar.';
-
-  @override
-  String get erreurCritiqueDansJoingame => '--- KRITISCHE FOUT IN joinGame ---';
-
-  @override
-  String get erreurLorsDeLaTransaction =>
-      'Fout tijdens transactie om mee te doen: \$e';
-
-  @override
-  String
-  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
-      ':AppLocalisaties.of(context)! .wordcivilParts0TrimWordundercoverIA geeft afzonderlijke eenvoudige woorden terug';
-
-  @override
-  String get variante1 => '\${rawPair.trim()} (Variant)';
-
-  @override
-  String get infiltre => 'geïnfiltreerd';
-
-  @override
-  String get civil => 'Civiel';
+  String get civil => 'Burger';
 
   @override
   String get vendeurDeFalafels => 'Falafels verkoper';
@@ -6261,299 +5439,156 @@ class AppLocalizationsNl extends AppLocalizations {
   String get duellistes => 'Duelists';
 
   @override
-  String get votreAmoureuxSeAmoureux2name => 'Je minnaar: \$amourous2';
-
-  @override
-  String get votreAmoureuxSeAmoureux1name => 'Je minnaar: \$amourous1';
-
-  @override
-  String get laPartieCommenceDonnezVotre =>
-      'Het spel begint! Geef je aanwijzing...';
-
-  @override
-  String get aDitCleanclue =>
-      '\${playerData[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} zei: \'\$cleanClue\'';
-
-  @override
   String get laPhaseDeVoteCommence => 'De stemfase begint!';
 
   @override
-  String get seulMrWhitePeutDeviner => 'Alleen Mr White kan raden.';
-
-  @override
-  String get aDevineLeMotCivil =>
-      '\${gameData[\'playerData\']?[spelerId]?[\'name\'] ?? \"Mr White\" raadde het burgerlijke woord (\$civilWord)!';
-
-  @override
-  String get aProposeGuessedwordMaisCe =>
-      '\${gameData[\'playerData\']?[spelerId]?[\'name\'] ?? \'Mr White\' stelde \'\$guessedWord\' voor, maar het was niet het burgerlijke woord (\'\$civilWord\')!';
+  String get seulMrWhitePeutDeviner => 'Alleen Mr. White mag raden.';
 
   @override
   String get laDeesseDeLaJustice =>
       'De Godin van Justitie heeft zich uitgesproken.';
 
   @override
-  String get unNouveauTourCommence => 'Een nieuwe tour begint.';
-
-  @override
   String get laVengeuseEmporteQuelquUn => 'De Wreker neemt iemand mee.';
-
-  @override
-  String get civils => 'Civiel';
-
-  @override
-  String get imposteurs => 'Impostors';
-
-  @override
-  String get paris => 'Parijs';
-
-  @override
-  String get france => 'Frankrijk';
-
-  @override
-  String get capitale => 'Kapitaal';
 
   @override
   String get tourEiffel => 'Eiffeltoren';
 
   @override
-  String get seine => 'Seine';
-
-  @override
-  String get ville => 'Stad';
-
-  @override
-  String get cEstAuTourDe3 =>
-      'Het is de beurt aan Team \${currentTeamIndex + 1}!';
-
-  @override
-  String get vousNePouvezPasBuzzer => 'Je kunt je eigen team niet bellen.';
+  String get vousNePouvezPasBuzzer =>
+      'Je kunt niet zoemen tegen je eigen team.';
 
   @override
   String get seuleLEquipeActivePeut =>
-      'Alleen het actieve team kan het valideren.';
+      'Alleen het actieve team kan goedkeuren.';
 
   @override
-  String get seuleLEquipeActivePeut1 => 'Alleen het actieve team kan slagen.';
+  String get seuleLEquipeActivePeut1 => 'Alleen het actieve team kan passen.';
 
   @override
-  String get tempsEcoulePassageAL =>
-      'De tijd is om. Transfer naar het volgende team.';
+  String get tempsEcoulePassageAL => 'Tijd is om! Door naar het volgende team.';
 
   @override
-  String get typeDeNavireInvalideOu => 'Type schip ongeldig of onbekend.';
+  String get typeDeNavireInvalideOu => 'Ongeldig of onbekend scheepstype.';
 
   @override
   String get ceNavireADejaEte => 'Dit schip is al geplaatst.';
 
   @override
-  String get leNavireDepasseDeLa => 'Het schip is uit het net.';
+  String get leNavireDepasseDeLa => 'Het schip steekt buiten het raster.';
 
   @override
   String get emplacementDejaOccupeParUn =>
-      'Locatie al bezet door een ander schip.';
-
-  @override
-  String get flottesPlaceesCommenceATirer =>
-      'Drijven geplaatst! \${playerData[firstplayer][\'name\']} Begin met schieten.';
+      'Plek al bezet door een ander schip.';
 
   @override
   String get veuillezPlacerTousVosNavires =>
-      'Plaats uw schepen voordat u klaar bent.';
+      'Plaats alle schepen voordat je jezelf gereed meldt.';
 
   @override
-  String get tousLesJoueursSontPrets =>
-      'Alle spelers zijn klaar! \${playerData[firstplayer]?[\'name\'] ?? AppLocalisaties.of(context)!.player} begint te schieten.';
-
-  @override
-  String get laMancheDeRamiCommence =>
-      'Rami\'s mouw begint! Het is de beurt aan \${players[playerIds.first]?[\'name\'] ?? AppLocalisaties.of(context)!.player}.';
-
-  @override
-  String get vousAvezDejaPioche => 'Je hebt al opgenomen.';
+  String get vousAvezDejaPioche => 'Je hebt al getrokken.';
 
   @override
   String get piocheEtDefausseEpuiseesFin =>
-      'Kies en verspil uitgeput. Einde van de mouw!';
+      'Trek- en aflegstapel leeg. Einde van de ronde!';
 
   @override
-  String get playersScore =>
-      'spelers.\${totalScores.entrys.reduced(a, b) => a.waarde < b.waarde ? a: b).key}.score';
+  String get defausseVide => 'Aflegstapel leeg.';
 
   @override
-  String get defausseVide => 'Lege fout.';
+  String get vousDevezDAbordPiocher => 'Je moet eerst een kaart trekken.';
 
   @override
-  String get vousDevezDAbordPiocher => 'Je moet eerst een kaart kiezen.';
-
-  @override
-  String get ilFautAuMoins31 => 'Er zijn minstens drie kaarten voor nodig.';
+  String get ilFautAuMoins31 => 'Minstens 3 kaarten nodig om uit te leggen.';
 
   @override
   String get tentativeDeTricheVousNe =>
-      'Probeer bedriegen: u kunt dezelfde kaart niet tweemaal gebruiken in een combinatie.';
+      'Valsspelen: je kunt dezelfde kaart niet tweemaal gebruiken.';
 
   @override
   String get carteManquanteDansVotreMain => 'Ontbrekende kaart in je hand.';
 
   @override
   String get combinaisonInvalideSelonLesRegles =>
-      'Combinatie ongeldig volgens Rami\'s regels!';
+      'Ongeldige combinatie volgens de Rummy-regels!';
 
   @override
-  String get defaussezExactement1Carte => 'Versla precies 1 kaart.';
+  String get defaussezExactement1Carte => 'Leg precies 1 kaart af.';
 
   @override
   String get carteNonTrouvee => 'Kaart niet gevonden.';
 
   @override
-  String get aGagneLaManche => 'Hij won de ronde!';
-
-  @override
   String get desDejaLancesPourCe => 'Dice is al gelanceerd voor deze tour.';
 
   @override
-  String get playernameAFaitUnDice =>
-      '\$\$player Naam maakte een \$ dice maar geen pion kan vooruit. Draai automatisch!';
-
-  @override
-  String get vousDevezDAbordLancer =>
-      'Je moet eerst met de dobbelstenen beginnen.';
+  String get vousDevezDAbordLancer => 'Je moet eerst de dobbelsteen gooien.';
 
   @override
   String get vousNePouvezPasDeplacer =>
-      'Je kunt de pion van een tegenstander niet verplaatsen!';
+      'Je kunt het stuk van een tegenstander niet verplaatsen!';
 
   @override
-  String get k3SixConsecutifsLePion =>
-      'Drie zes opeenvolgenden! De pion van \${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} keert terug naar de stal en zijn beurt gaat voorbij.';
-
-  @override
-  String get ilFautUn1Ou =>
-      'Er is 1 of 6 nodig om de pion uit een bondgenoot te krijgen.';
+  String get ilFautUn1Ou => 'Een 1 of 6 nodig om bondgenoot vrij te laten.';
 
   @override
   String get vousNePouvezAiderUn =>
-      'Je kunt alleen een bondgenoot helpen om naar buiten te komen of de laatste trap in te gaan.';
+      'Je kunt een bondgenoot alleen helpen bij de start of op de eindtrap.';
 
   @override
-  String get ilFautUn6Ou => 'Er is een 6 of 1 nodig om uit de stal te komen.';
+  String get ilFautUn6Ou => 'Een 6 of 1 nodig om de stal te verlaten.';
 
   @override
-  String get caseDeDepartOccupeePar => 'Start box bezet door uw team.';
+  String get caseDeDepartOccupeePar => 'Startvak bezet door jouw team.';
 
   @override
-  String get lancerTropElevePourEntrer => 'Gooi te hoog om de trap op te gaan.';
+  String get lancerTropElevePourEntrer => 'Worp te hoog om de trap op te gaan.';
 
   @override
-  String get lancerTropEleveDicePour =>
-      'Begin te hoog (\$dice) om het centrum te bereiken. Draai je om!';
-
-  @override
-  String get caseOccupeeParVotreEquipe => 'Doos bezet door je team.';
+  String get caseOccupeeParVotreEquipe => 'Vak bezet door jouw team.';
 
   @override
   String get caseRefugeProtegeeCaptureImpossible =>
-      'Veilige haven. Onmogelijk gevangen te nemen.';
+      'Veilig vak beschermd. Slaan niet mogelijk.';
 
   @override
-  String get playersAllyidScore => 'spelers. \$allyId.score';
-
-  @override
-  String get laPartieNEstPas => 'Het spel is niet in uitvoering.';
+  String get laPartieNEstPas => 'Spel is niet bezig.';
 
   @override
   String get ceNEstPasVotre2 => 'Het is niet jouw beurt!';
 
   @override
-  String get ceDominoNEstPas => 'Deze domino is niet in je hand.';
-
-  @override
-  String get extremiteNonDisponibleSurLe =>
-      'Extremity niet beschikbaar op de set (\$openEnds).';
-
-  @override
-  String get laTuileTileNePossede =>
-      'De \$tile tegel heeft niet de \$matchEnd waarde vereist.';
-
-  @override
-  String get atteintTargetscorePoints =>
-      '\${spelers[spelerId][\'naam\']} bereikt \$targetScore punten!';
+  String get ceDominoNEstPas => 'Deze dominosteen is niet in je hand.';
 
   @override
   String get vousDevezPiocherUneTuile =>
-      'Je moet een tegel kiezen voordat je je beurt kunt passeren.';
-
-  @override
-  String get atteintTargetscorePoints1 =>
-      '\${spelers[winnaar] Id][\'name\']} bereikt \$targetscorepunten!';
+      'Je moet een steen trekken voordat je kunt passen.';
 
   @override
   String get seulLHotePeutLancer =>
-      'Alleen de gastheer kan het volgende handvat starten.';
-
-  @override
-  String get leBotAJoueTiletoplay => 'De bot speelde \$tileToPlay automatisch.';
-
-  @override
-  String get playernameAEteContraintDe =>
-      '\$playerName werd gedwongen om zijn beurt te passeren.';
+      'Alleen de host kan de volgende ronde starten.';
 
   @override
   String get zombie1 => 'Zombie';
 
   @override
   String get laPartieDeZombieCommence =>
-      'Zombie\'s spel! Start! Eerste paar verslagen.';
+      'Zombie! begint! Eerste paren afgelegd.';
 
   @override
   String get indexDeCarteInvalide => 'Ongeldige kaartindex.';
-
-  @override
-  String get playersWidScore => 'spelers.\$wId.score';
-
-  @override
-  String get playersBestplayerScore => 'spelers. \$bestPlayer.score';
 
   @override
   String get laPartieDActionOu =>
       'Het Actie of Waarheid spel begint! De roulette zal de eerste speler aanwijzen.';
 
   @override
-  String get laRouletteADesigneSelectedname =>
-      'De roulette genaamd \$selectedName!';
-
-  @override
-  String get targetplayernameATire =>
-      '\"Actie\" : Applocalisaties.of(context)!.verite1} !';
-
-  @override
   String get iAucunAutreJoueurDisponible =>
       'i Automatisch geselecteerde uitdaging.';
 
   @override
-  String get authornameDoitEcrireLeDefi =>
-      '\$authorName moet de uitdaging schrijven...';
-
-  @override
-  String get leDefiAEteEnvoye =>
-      'De uitdaging werd verzonden naar \$currentPlayerName!';
-
-  @override
   String get leJoueurARealiseLe =>
       'De speler besefte de uitdaging! Stem om te bevestigen.';
-
-  @override
-  String get resultatPercentageDeValidation =>
-      'Het resultaat: \$percentage% validatie!';
-
-  @override
-  String get currentplayernameGagneEarnedxpXp =>
-      '\$currentPlayerName wint \$earnedXp XP!';
-
-  @override
-  String get tourSuivantQuiSeraLe =>
-      'Volgende bocht. Wie is de volgende? AppLocalisaties.of(context)!.finDeMancheBoutonAdminManage over! \${spelers[winnaarId]?[\'name\'] ?? AppLocalisaties.of(context)! .player} wint met \$maxXp XP!';
 
   @override
   String get tempsEcoulePourChoisirTour =>
@@ -6571,7 +5606,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get leJugeNePeutPas => 'De rechter kan geen kaart spelen.';
 
   @override
-  String get carteNonTrouveeDansLa => 'Kaart niet gevonden in de hand.';
+  String get carteNonTrouveeDansLa => 'Kaart niet gevonden in hand.';
 
   @override
   String get seulLeJugePeutDesigner =>
@@ -6579,9 +5614,6 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ceJoueurNAPas => 'Deze speler heeft geen kaart ingediend.';
-
-  @override
-  String get playersWinnerplayeridScore => 'spelers.\$winnerPlayerId.score';
 
   @override
   String get tempsEcouleAucuneCarteSoumise =>
@@ -6603,104 +5635,42 @@ class AppLocalizationsNl extends AppLocalizations {
   String get unoNecessiteEntre2Et => 'Uno vereist tussen de 2 en 10 spelers.';
 
   @override
-  String get laPartieDeUnoCommence => 'Uno\'s spel begint!';
-
-  @override
   String get inversionA2JoueursLe =>
       'Inversie tot 2 spelers: de eerste speler start het spel!';
 
   @override
-  String get directionInverseeDesLeDepart => 'Achteruit vanaf het begin.';
-
-  @override
-  String get passeSonTour => '\${playerOrder[initialIndex]} Pass zijn beurt!';
+  String get directionInverseeDesLeDepart => 'Richting meteen omgedraaid!';
 
   @override
   String get laPremiereCarteEstUn =>
-      'De eerste kaart is een +2! De eerste speler moet kiezen of stapelen.';
+      'Eerste kaart is een +2! Eerste speler moet trekken of stapelen.';
 
   @override
-  String get partieNonTrouvee => 'Deel niet gevonden.';
+  String get partieNonTrouvee => 'Spel niet gevonden.';
 
   @override
-  String get laPileDeDefausseEst => 'De afvalhoop is leeg.';
+  String get laPileDeDefausseEst => 'De aflegstapel is leeg.';
 
   @override
   String get ceNEstPasVotre3 => 'Het is niet jouw beurt om te spelen.';
 
   @override
-  String get vousNAvezPasCette => 'Je hebt die kaart niet in je hand.';
+  String get vousNAvezPasCette => 'Je hebt deze kaart niet in je hand.';
 
   @override
-  String get vousDevezPiocherPendingdrawCartes =>
-      'U moet kiezen \$afhankelijkDraw kaarten, of teller met een +2/+4.';
-
-  @override
-  String get vousDevezJouerLaCarte =>
-      'Je moet de kaart spelen die je net gekozen hebt of je beurt overslaan.';
+  String get vousDevezJouerLaCarte => 'Speel getrokken kaart of pas.';
 
   @override
   String get cetteCarteNePeutPas =>
-      'Deze kaart kan niet worden afgespeeld. De kleur of symbool komt niet overeen.';
+      'Kaart kan niet worden gespeeld. Kleur of symbool komt niet overeen.';
 
   @override
-  String get aJoueUneInversionEt =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} speelde een Inversie en replay!';
-
-  @override
-  String get aInverseLeSensDe =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} draaide de spelzin om!';
-
-  @override
-  String get aSauteLeTourDe =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} sprong de spin van \$skippedPlayerName!';
-
-  @override
-  String get aEmpileUn2Cumul =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} stapelde een +2. Cumulatie: \${afhankelijkDraw + 2} kaarten!';
-
-  @override
-  String get aJoueUn2 =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} speelde een +2!';
-
-  @override
-  String get veuillezChoisirUneCouleurPour => 'Kies een kleur voor de Joker.';
-
-  @override
-  String get aJoueUnJokerEt =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} speelde een Joker en koos voor de kleur \$thinColor!';
+  String get veuillezChoisirUneCouleurPour =>
+      'Kies een kleur voor de Keuzekaart.';
 
   @override
   String get veuillezChoisirUneCouleurPour1 =>
-      'Kies een kleur voor Super Joker +4.';
-
-  @override
-  String get aEmpileUn4Cumul =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} stapelde een +4. Cumulatie: \${afhankelijkDraw + 4} kaarten!';
-
-  @override
-  String get aJoueUnSuperJoker =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} speelde een Super Joker +4!';
-
-  @override
-  String get aPoseSaDerniereCarte =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} plaatste zijn laatste kaart en won de ronde!';
-
-  @override
-  String get gagneLaMancheAvecRoundscore =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} wint de ronde met +\$roundScore punten!';
-
-  @override
-  String get nAPlusQuUne =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} heeft slechts één kaart!';
-
-  @override
-  String get passeSonTour1 =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} passeert zijn beurt.';
-
-  @override
-  String get nAPasJoueA2 =>
-      '\${gameData[\'players\']?[playerId]?[\'name\'] ?? Applications.of(context)! .player} speelde niet op tijd, nam op en passeerde zijn beurt.';
+      'Kies een kleur voor de Keuzekaart +4.';
 
   @override
   String get partieIntrouvable => 'Deel niet gevonden.';
@@ -6712,68 +5682,54 @@ class AppLocalizationsNl extends AppLocalizations {
   String get symboleIncorrect => 'Verkeerd symbool!';
 
   @override
-  String get toutesLesCartesOntEte => 'Alle kaarten zijn uitgespeeld!';
+  String get toutesLesCartesOntEte => 'Alle kaarten zijn gespeeld!';
 
   @override
-  String get egaliteParfaiteNames => 'Perfecte gelijkheid (\$namen)!';
+  String get laPartieDeJeuDe => 'Het Damspel begint! Rood speelt eerst.';
 
   @override
-  String get laPartieDeJeuDe => 'Het vrouwenspel begint! De Reds spelen eerst.';
-
-  @override
-  String get aucunPionSurCetteCase => 'Geen pionnen op deze doos.';
+  String get aucunPionSurCetteCase => 'Geen stuk op dit vak.';
 
   @override
   String get vousNePouvezDeplacerQue =>
-      'Je kunt alleen je eigen stukjes verplaatsen.';
+      'Je kunt alleen je eigen stukken verplaatsen.';
 
   @override
-  String get priseMultipleObligatoireAvecLe =>
-      'Verplichte meerdere socket met \$ verplichte Piece pion.';
+  String get deplacementDiagonalInvalide => 'Ongeldige diagonale zet.';
 
   @override
-  String get deplacementDiagonalInvalide => 'Ongeldige diagonale verplaatsing.';
+  String get destinationHorsDuDamier => 'Bestemming buiten het bord.';
 
   @override
-  String get destinationHorsDuDamier => 'Bestemming uit de controlekamer.';
-
-  @override
-  String get caseDeDestinationOccupee => 'Drukke bestemmingsdoos.';
-
-  @override
-  String get str58921f => '\${fromR + (stepR * i)},\${fromC + (stepC * i)}';
+  String get caseDeDestinationOccupee => 'Bestemmingsvak bezet.';
 
   @override
   String get impossibleDeSauterParDessus =>
-      'Kon niet over je eigen delen springen.';
+      'Kan niet over eigen stukken springen.';
 
   @override
   String get impossibleDeSauterParDessus1 =>
-      'Kon niet over meerdere stukken tegelijk springen.';
+      'Kan niet over meerdere stukken tegelijk springen.';
 
   @override
-  String get unPionSimpleNePeut =>
-      'Een enkele pion kan maar met één doos vooruit.';
+  String get unPionSimpleNePeut => 'Een gewone pion kan slechts 1 vak vooruit.';
 
   @override
-  String get lesPionsRougesAvancentVers => 'Rode pionnen omhoog.';
+  String get lesPionsRougesAvancentVers => 'Rode stukken bewegen omhoog.';
 
   @override
-  String get lesPionsNoirsAvancentVers => 'Zwarte pionnen gaan naar beneden.';
+  String get lesPionsNoirsAvancentVers => 'Zwarte stukken bewegen omlaag.';
 
   @override
   String get distanceDeSautInvalidePour =>
-      'Ongeldige sprongafstand voor een eenvoudige pion.';
+      'Ongeldige sprongafstand voor een gewone pion.';
 
   @override
   String get priseObligatoireVousDevezCapturer =>
-      'Verplichte vangst! Je moet een kamer vangen.';
+      'Slag verplicht! Je moet een stuk slaan.';
 
   @override
   String get lAdversaireNAPlus => 'De tegenstander heeft geen kans meer!';
-
-  @override
-  String get playersWinidScore => 'spelers.\$winId.score';
 
   @override
   String get lesRougesNOntPlus => 'De Reds hebben geen munten meer.';
@@ -6782,41 +5738,33 @@ class AppLocalizationsNl extends AppLocalizations {
   String get lesNoirsNOntPlus => 'Zwarte mensen hebben geen munten meer!';
 
   @override
-  String get votreCibleEstEliminezLe =>
-      'Je doel is \${playerData[mercenaryTargetId]?[\'name\'] ?? \'Onbekend\'\'}. Elimineer hem op dag 1!';
+  String get laNuitTombeSurLe1 => 'De nacht valt over het dorp Thiercelieux...';
 
   @override
-  String get laNuitTombeSurLe1 => 'De nacht valt op het dorp Thiercelieux...';
-
-  @override
-  String get chacunARecuSonRole => 'Iedereen kreeg zijn geheime rol.';
+  String get chacunARecuSonRole => 'Iedereen heeft zijn geheime rol ontvangen.';
 
   @override
   String get indiceInvalide => 'Ongeldige index.';
 
   @override
   String get seulLeMaitreEspionDe =>
-      'Alleen de Master Espion van het actieve team kan de aanwijzing geven.';
+      'Alleen de Spionnenmeester van het actieve team mag de hint geven.';
 
   @override
-  String get ceNEstPasLa => 'Dit is niet de voorgestelde indexfase.';
+  String get ceNEstPasLa => 'Geen fase voor het voorstellen van hints.';
 
   @override
   String get seulUnAgentDeL =>
-      'Alleen een actieve teamagent kan een woord raden.';
+      'Alleen een Agent van het actieve team mag een woord raden.';
 
   @override
-  String get ceNEstPasLa1 => 'Het is niet de gokfase.';
+  String get ceNEstPasLa1 => 'Niet de raadfase.';
 
   @override
   String get aucunEssaiRestantPourCe => 'Geen test meer voor deze ronde.';
 
   @override
   String get ceMotEstDejaRevele => 'Dit woord is al onthuld.';
-
-  @override
-  String get lEquipeAReveleL1 =>
-      'Team \${activeTeam== \'rood\'? \'Rood\': \'Blauw\'\'} onthulde de Assassin!';
 
   @override
   String get tousLesMotsOntEte => 'Alle woorden zijn ontdekt!';
@@ -6830,7 +5778,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get seulLeDevineurActifPeut =>
-      'Alleen de actieve gokker kan de woorden valideren.';
+      'Alleen de actieve rader kan woorden bevestigen.';
 
   @override
   String get vousNAvezPasCes => 'Je hebt deze kaarten niet.';
@@ -6855,35 +5803,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get partieNonTrouvee1 => 'Deel niet gevonden';
 
   @override
-  String get trouDuCul => 'Klootzak';
-
-  @override
-  String get vicePresident => 'Vicevoorzitter';
-
-  @override
-  String get viceTrouDuCul => 'Vice-kont';
-
-  @override
-  String get neutre => 'Neutraal';
-
-  @override
-  String get playersPresidentwinneridScore =>
-      'spelers.\$ presidentWinnerId.score';
-
-  @override
-  String get debugPictionaryConditionRoundstateDrawing =>
-      '--- DEBUG PICTIEAAR --- Voorwaarde \'ronde Staat\' of \'raadseltekening\' is WAAR. Database bijwerken...';
-
-  @override
-  String get debugPictionaryConditionRoundstateDrawing1 =>
-      '--- DEBUG PICTIEAAR --- Voorwaarde \'ronde Staat==tekening\' is FAUSSE. De huidige status is \'\${gameSnap.get(\'roundState\'\'}\'';
+  String get vicePresident => 'Vicepresident';
 
   @override
   String get dessinateurIntrouvable => 'Lawr niet gevonden.';
 
   @override
   String get seulLeDessinateurActifPeut =>
-      'Alleen de actieve cartoonist kan het antwoord valideren.';
+      'Alleen de actieve tekenaar kan het antwoord bevestigen.';
 
   @override
   String get usurpationDIdentiteDuDessinateur =>
@@ -6891,13 +5818,6 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get gagnantInvalide => 'Ongeldige winnaar.';
-
-  @override
-  String get guessedcountMotsDevines =>
-      '\$guessedCount/\${collectiveWords.length} woorden geraden!';
-
-  @override
-  String get playersExpecteddraweridScore => 'spelers.\$verwachtDrawerId.score';
 
   @override
   String get motTrouveAvecSucces => 'Woord succesvol gevonden!';
@@ -6909,137 +5829,68 @@ class AppLocalizationsNl extends AppLocalizations {
   String get leDevineurNePeutPas => 'De gokker kan geen idee geven.';
 
   @override
-  String get aaaaaaceeeeiiiinooooouuuuyy => 'ináâãäåçéêëìíïñòóôõöùúûüý ÿ';
-
-  @override
-  String get ceNEstPasLe => 'Dit is geen tijd om te raden.';
+  String get ceNEstPasLe => 'Het is geen tijd om te raden.';
 
   @override
   String get seulLeDevineurPeutFaire =>
-      'Alleen de gokker kan een voorstel doen.';
+      'Alleen de rader kan een voorstel doen.';
 
   @override
   String get reponseInvalide => 'Ongeldig antwoord.';
 
   @override
-  String get ceNEstPasLe1 => 'Dit is niet het moment om te antwoorden.';
+  String get ceNEstPasLe1 => 'Het is geen tijd om te antwoorden.';
 
   @override
   String get ceNEstPasVotre4 => 'Het is niet jouw beurt om de bom te hebben!';
 
   @override
-  String get aReponduCleananswerEtPasse =>
-      '\${gameData[\'players\'][playerId][\'name\']} antwoordde \'\$cleanAnswer\' en passeerde de bom!';
+  String get ceNEstPasVotre5 => 'Niet jouw beurt om te trekken.';
 
   @override
-  String get playersLoseridScore => 'spelers.\$loserId.score';
+  String get laPiocheEstVideLa => 'Trekstapel leeg. Aflegstapel wordt geschud.';
 
   @override
-  String get ceNEstPasVotre5 => 'Het is niet jouw beurt om te kiezen.';
+  String get impossibleDePiocherIlN =>
+      'Kan niet trekken, geen kaarten meer beschikbaar.';
 
   @override
-  String get laPiocheEstVideLa =>
-      'De voorraad is leeg. Het afval wordt gemengd om een nieuwe voorraad te vormen.';
-
-  @override
-  String get impossibleDePiocherIlN => 'Er zijn geen kaarten meer beschikbaar.';
-
-  @override
-  String get aPiochePendingdrawCarteS =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} heeft gekozen voor \$afhankelijkDraw-kaart(s).';
-
-  @override
-  String get aPiocheUneCarteEt =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} pakte een kaart op en kan deze afspelen.';
-
-  @override
-  String get aPiocheUneCarteEt1 =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} pakte een kaart en passeerde zijn beurt.';
-
-  @override
-  String get nAPas1Carte =>
-      '\${spelers[targetId]?[\'name\'] ?? AppLocalisaties.of(context)!.thePlayer} heeft geen 1 kaart, de UNO oproep is ongeldig.';
-
-  @override
-  String get aCrieContreUnoPioche =>
-      '\${players[callerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} riepen tegen UNO! \${spelers[targetId]?[\'name\'] ??appLocalisaties.of(context)!.player} kiest 2 kaarten.';
-
-  @override
-  String get aDitUno =>
-      '\${spelers[targetId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} zei UNO!';
-
-  @override
-  String get ceNEstPasVotre6 => 'Het is niet jouw beurt om de kleur te kiezen.';
-
-  @override
-  String get aChoisiLaCouleurChosencolor =>
-      '\${players[playerId]?[\'name\'] ?? AppLocalisaties.of(context)!.player} koos de kleur \$thinColor!';
+  String get ceNEstPasVotre6 => 'Niet jouw beurt om de kleur te kiezen.';
 
   @override
   String get vousNePouvezPasChoisir => 'Je kunt nu geen kleur kiezen.';
 
   @override
-  String get erreurCritiquePlayerorderEstVide =>
-      'KRITISCHE FOUT: playerorder is leeg in volgendeRound. Ik kan niet meer.';
-
-  @override
   String get questionNonTrouvee => 'Vraag niet gevonden';
 
   @override
-  String get quiPourraitLePlusApplocalizations1 =>
-      'Wie kan er meer?AppLocalisaties.of(context)!.listStringVragenAiwordpoolGamewordssoft';
-
-  @override
-  String get quiPourraitLePlus2 =>
-      'Wie kan de meeste \${vragen[random.nextInt(vragen.length)] }';
-
-  @override
-  String get menteur => 'Leugenaar';
-
-  @override
   String get pasAssezDeJoueursPour => 'Niet genoeg spelers voor deze mode.';
-
-  @override
-  String get trouvezLeMeilleurSynonymePour =>
-      'Vind het beste synoniem voor het woord: \$word';
 
   @override
   String get ajouteLaDescriptionLaPlus =>
       'Voeg de grappigste beschrijving toe aan deze meme!';
 
   @override
-  String get uneNouvelleMancheDeUno => 'Een nieuwe Uno ronde begint!';
+  String get uneNouvelleMancheDeUno => 'Een nieuwe ronde Uno begint!';
 
   @override
   String get plusAucunJoueurActif => 'Geen actieve spelers meer.';
 
   @override
   String get chaqueJoueurActifDoitPoser =>
-      'Elke actieve speler moet minstens één kaart plaatsen voordat hij een veiling lanceert.';
+      'Elke actieve speler moet minstens 1 kaart neerleggen voor het bieden.';
 
   @override
-  String get enchereInvalide => 'Ongeldige veiling.';
+  String get enchereInvalide => 'Ongeldig bod.';
 
   @override
-  String get laSurenchereDoitEtreSuperieure => 'De veiling moet hoger zijn.';
+  String get laSurenchereDoitEtreSuperieure => 'Hoger bod vereist.';
 
   @override
-  String get applocalizationsOfContextUnjoueurEst =>
-      '] ?? AppLocalisaties.of(context)!.aPlayer} is de laatste overlevende en wint Skull!';
+  String get reponseVide => 'Leeg antwoord.';
 
   @override
-  String get applocalizationsOfContextUnjoueurA =>
-      '] ?? AppLocalisaties.of(context)!.aPlayer} won 2 uitdagingen en won het spel!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurRemporte =>
-      '] ?? AppLocalisaties.of(context)!.aPlayer} wint Skull!';
-
-  @override
-  String get reponseVide => 'Duidelijk antwoord.';
-
-  @override
-  String get leJugeNePeutPas1 => 'De rechter kan geen antwoord geven.';
+  String get leJugeNePeutPas1 => 'De Rechter kan geen antwoord indienen.';
 
   @override
   String get toutLeMondeARepondu => 'Iedereen nam op. Laten we de deur openen.';
@@ -7059,103 +5910,45 @@ class AppLocalizationsNl extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Doelspeler niet gevonden.';
 
   @override
-  String get quiPourraitLePlusApplocalizations2 =>
-      'Wie kan meer?AppLocalisaties.of(context)!.elseIfGametypeSynonym of Banni';
-
-  @override
   String get vousNePouvezPasBannir =>
       'Je kunt je eigen synoniem niet verbannen!';
 
   @override
-  String get seulLeJugeEnTitre => 'Alleen de rechter kan de winnaar aanwijzen.';
+  String get seulLeJugeEnTitre =>
+      'Alleen de huidige Rechter kan de winnaar aanwijzen.';
 
   @override
-  String get ceJoueurNAPas1 => 'Deze speler heeft geen antwoord gegeven.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations3 =>
-      'Wie kan meer?AppLocalisaties.of(context)!.intVereist stemmenPlayersLengteIf De rechter';
-
-  @override
-  String get quiPourraitLePlusApplocalizations4 =>
-      'Wie kon de Meer?AppLocalisaties.of(context)!.forFinalTargetInVotesroundState';
-
-  @override
-  String get playersWinnerScore => 'spelers. \$winner.score';
+  String get ceJoueurNAPas1 => 'Deze speler heeft geen antwoord ingediend.';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
-      'Perfecte gelijkheid! Geen punten toegewezen.';
+      'Volledig gelijkspel! Geen punten toegekend.';
 
   @override
   String get egaliteDansLesVotesAucun =>
-      'Gelijkheid in stemmen: Geen speler verbannen deze ronde.';
-
-  @override
-  String get winnernameRemporteLaManche => '\$winnerName wint de ronde!';
-
-  @override
-  String get playersMostvotedplayeridScore =>
-      'spelers. \$mostVotedPlayerId.score';
-
-  @override
-  String get mrWhiteADevineLe =>
-      'Mr White raadde het geheime woord: \'CivialWord\'!';
-
-  @override
-  String get playersMrwhiteidScore => 'spelers.\$mrWhiteId.score';
-
-  @override
-  String get mrWhiteAEchoueA =>
-      'De heer White heeft het woord niet geraden (het was \"\$civilWord\").';
+      'Gelijkspel bij stemming: geen speler verbannen.';
 
   @override
   String get laDescriptionLaPlusDrole =>
-      'De grappigste beschrijving werd gekozen!';
-
-  @override
-  String get aucuneDescriptionNAEte =>
-      'Er is niet gestemd over een beschrijving.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations5 =>
-      'Wie kan meer?AppLocalisaties.of(context)!.forFinalTargetInVotes1roundWinnerId';
-
-  @override
-  String get playersActualliaridScore => 'spelers.\$actualLiarId.score';
-
-  @override
-  String get playersUndercoveridScore => 'spelers.\$undercoverId.score';
+      'De grappigste beschrijving is gekozen!';
 
   @override
   String get jugeIntrouvable => 'Rechter niet gevonden.';
 
   @override
   String get laPartieDeZeroPointe =>
-      'Zero Pointe\'s spel begint! Elke speler moet 2 kaarten onthullen.';
+      'Het spel Nul Punten begint! Elke speler moet 2 kaarten onthullen.';
 
   @override
   String get toutLeMondeARevele =>
-      'Iedereen onthulde zijn kaarten. Het spel begint!';
+      'Iedereen heeft de kaarten onthuld. Het spel begint!';
 
   @override
   String get plusAucuneCarteDisponible => 'Geen kaarten meer beschikbaar.';
 
   @override
   String get vousDevezChoisirUneCarte =>
-      'U moet kiezen voor een verborgen gezichtskaart niet geëlimineerd.';
-
-  @override
-  String get nouvelleMainEstLeDonneur =>
-      'Nieuwe hand! \${players[playerIds[dealerindex][\'name\']} is de donor.';
-
-  @override
-  String get poseLaPetiteBlindDe =>
-      '\${spelers[klein blind] Id] [\'name\']} zet de kleine blind van \$smallBlindActual.';
-
-  @override
-  String get poseLaGrosseBlindDe =>
-      '\${spelers[bigBlindId][\'name\']} zet de grote blind van \$bigBlindActual.';
+      'Kies een gedekte kaart die niet is geëlimineerd.';
 
   @override
   String get laPartieNExistePas => 'Er is geen deel.';
@@ -7165,65 +5958,22 @@ class AppLocalizationsNl extends AppLocalizations {
       'Ongeldige spelgegevens (spelerOrder/currentPlayerIndex).';
 
   @override
-  String get ceNEstPasLe2 => 'Het is geen \$player Id\'s beurt.';
-
-  @override
-  String get donneesDuJoueurPlayeridIntrouvables =>
-      'Spelergegevens \$playerId niet gevonden.';
-
-  @override
-  String get seCouche => 'Ik ga naar bed.';
-
-  @override
   String get vousNePouvezPasChecker =>
       'Je kunt het niet controleren, iemand wedden.';
 
   @override
-  String get check => '\${myData[\'name\']} Check.';
-
-  @override
-  String get faitTapisAllIn => 'Ik heb tapijt gemaakt.';
-
-  @override
-  String get suitPourCallamount =>
-      '\$ {myData[\'name\']} volgt voor \$callAmount.';
-
-  @override
-  String get montantDeRelanceRequis => 'Terugvorderingsbedrag vereist.';
+  String get montantDeRelanceRequis => 'Verhogingsbedrag vereist.';
 
   @override
   String get laRelanceDoitEtreStrictement =>
-      'Het herstel moet strikt superieur zijn aan het huidige.';
+      'Verhoging moet hoger zijn dan de huidige inzet.';
 
   @override
-  String get vousNAvezPasAssez => 'Je hebt niet genoeg chips voor dit herstel.';
+  String get vousNAvezPasAssez => 'Niet genoeg fiches voor deze verhoging.';
 
   @override
   String get laRelanceDoitEtreD =>
-      'De herstart moet ten minste tweemaal de vorige inzet (of tapijt) bedragen.';
-
-  @override
-  String get faitTapisAllInEn =>
-      '\${myData[\'name\']} maakt tapijt (all-in) door opnieuw te starten tot \$totalBetAmount!';
-
-  @override
-  String get relanceATotalbetamount =>
-      '\${myData[\'name\']} verhoogt tot \$totalBetAmount.';
-
-  @override
-  String get gagneLePotParForfait =>
-      '\${spelerData[winnaars.eerste][\'naam\']} wint de pot per pakket!';
-
-  @override
-  String get winnernamesGagneNtLePot =>
-      '\$winnerNames wint de pot met \${bestHand?.rank.name ?? AppLocalisaties.of(context)!.aMain}!';
-
-  @override
-  String get laPartieDeBeloteCommence => 'Het Belote spel begint!';
-
-  @override
-  String get aPrisASuit =>
-      '\${playerData[playerId][\'name\']} Ik pakte \$suit.';
+      'Verhoging moet minstens het dubbele zijn van de vorige inzet (of all-in).';
 
   @override
   String get passeGeneraleAu1erTour =>
@@ -7233,10 +5983,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get carteNonPossedee => 'Kaart niet bezeten.';
 
   @override
-  String get vousDevezFournirLaCouleur =>
-      'U moet de gewenste kleur (\$ledSuit) opgeven.';
-
-  @override
   String get vousDevezMonterAL =>
       'Je moet klimmen in het voordeel (overgesneden)!';
 
@@ -7244,163 +5990,87 @@ class AppLocalizationsNl extends AppLocalizations {
   String get vousDevezCouperAL => 'Je moet het afsnijden!';
 
   @override
-  String get passeLAnnonce => 'Geef de advertentie door';
+  String get passeLAnnonce => 'past de melding';
 
   @override
-  String get laPartieDeBlokusCommence => 'Blokus wedstrijd begint!';
+  String get pieceDejaUtilisee => 'Stuk al gebruikt.';
 
   @override
-  String get pieceDejaUtilisee => 'Munt is al gebruikt.';
+  String get horsLimites => 'Buiten het bord!';
 
   @override
-  String get horsLimites => 'Uit de weg.';
+  String get caseDejaOccupee => 'Vak al bezet!';
 
   @override
-  String get caseDejaOccupee => 'Drukke zaak!';
-
-  @override
-  String get contactParLeCoteInterdit => 'Contact van de verboden kant!';
+  String get contactParLeCoteInterdit => 'Zijdelings contact verboden!';
 
   @override
   String get lePremierCoupDoitCouvrir =>
-      'Het eerste schot moet je startpunt bedekken!';
+      'De eerste zet moet jouw starthoek bedekken!';
 
   @override
   String get votrePieceDoitToucherUne =>
-      'Uw kamer moet een van uw kamers aanraken bij een hoek!';
+      'Je stuk moet een eigen stuk aan een hoek raken!';
 
   @override
-  String get cinemaSeries => 'Cinema & Series';
+  String get cinemaSeries => '🎬 Films & Series';
 
   @override
-  String get gamingJeux => 'Spel & Gaming';
+  String get gamingJeux => '🎮 Gaming & Games';
 
   @override
-  String get cuisineFood => 'Voedsel & keuken';
+  String get cuisineFood => '🍕 Koken & Eten';
 
   @override
-  String get voyagePays => 'Reizen & Land';
+  String get voyagePays => '🌍 Reizen & Landen';
 
   @override
-  String get superHerosComics => 'Superheld & strips';
+  String get superHerosComics => '🦸 Superhelden & Strips';
 
   @override
-  String get animauxNature => 'Dieren & Natuur';
+  String get animauxNature => '🐾 Dieren & Natuur';
 
   @override
-  String get scienceFiction => 'Wetenschap-Fictie';
+  String get scienceFiction => '🚀 Sciencefiction';
 
   @override
-  String get histoireMythes => 'Geschiedenis & mythes';
+  String get histoireMythes => '📚 Geschiedenis & Mythen';
 
   @override
-  String get humourAbsurde => '🎭 Humour & Absurde';
+  String get humourAbsurde => '🎭 Humor & Absurd';
 
   @override
-  String get musiquePop => 'Muziek & Pop';
+  String get musiquePop => '🎵 Muziek & Pop';
 
   @override
-  String get annees8090 => '8 / 90';
+  String get annees8090 => '🎉 Jaren 80 / 90';
 
   @override
-  String get fantasyMagie => 'Fantasie & magie';
+  String get fantasyMagie => '🧙 Fantasy & Magie';
 
   @override
-  String get funSoiree => 'Plezier & avond';
+  String get funSoiree => '🎉 Plezier & Feest';
 
   @override
-  String get cultureDefi => 'Cultuur & Uitdaging';
+  String get cultureDefi => '🧠 Kennis & Uitdaging';
 
   @override
-  String get familleToutPublic => 'Familie & alle publiek';
+  String get familleToutPublic => '👨‍👩‍👧‍👦 Familie & Iedereen';
 
   @override
-  String get piquantInsolite => 'Spicy & Unusual';
-
-  @override
-  String get erreurGenerationIaE => 'IA-generatiefout: \$e';
-
-  @override
-  String get quiPourraitLePlusApplocalizations6 =>
-      'Wie zou de Meer?AppLocalisaties.of(context)! .wie kan uw modegroep';
+  String get piquantInsolite => '🌶️ Pittig & Bizar';
 
   @override
   String get devineT => 'Raad eens T';
 
   @override
-  String get activeaithemetitle => '\$ activeAiThemeTitle + \${item.title}';
-
-  @override
-  String get str7fab82 => '\${autotitel.subtekenreeks(0, 25)}...';
-
-  @override
-  String forcevideo(Object forceVideo) {
-    return '\${forceVideo?';
-  }
-
-  @override
-  String get erreurInitLivekitAuSalon => 'Livekit init-fout bij de show: \$e';
-
-  @override
-  String get erreurLeavechannelSafepopE => 'LeaveChannel safePop-fout: \$e';
-
-  @override
-  String get erreurLorsDeLaDeconnexion =>
-      'Fout bij het verbreken van LiveKit: \$e';
-
-  @override
-  String get erreurLorsDuNettoyageDu =>
-      'Fout bij het schoonmaken van de speelkamer: \$e';
-
-  @override
-  String get erreurInitLivekitE => 'Fout init Livekit: \$e';
-
-  @override
-  String get erreurDisposeLivekitserviceE => 'Fout bij LivekitService: \$e';
-
-  @override
-  String get presidente => 'Voorzitter';
-
-  @override
   String get chargement => 'Laden...';
-
-  @override
-  String get prole => '\$pole (\${specialabilities.join(, \')})';
 
   @override
   String get cursive => 'Cursief';
 
   @override
   String get exception => 'Uitzondering:';
-
-  @override
-  String get stra26129 => '\${oppSafeties.length}';
-
-  @override
-  String get str84889d =>
-      '\${(gameData[\'mileBornesDeck\'] als List???.length ?? 0}';
-
-  @override
-  String get str58f25a =>
-      '\${String.fromCharCode(65+vijandAimedIndex~/10)}\${enemyAimedIndex% 10 + 1}';
-
-  @override
-  String get stree98fd => '\${myData[\'chips\']';
-
-  @override
-  String get str0d434e =>
-      '} \${GameUiLocalisatie.tr(context, wildColorCosen).ToUpperCase()}';
-
-  @override
-  String get debutDeLaConstructionDe =>
-      '--- DE CONSTRUCTIE VAN HET HEM VAN STEMMING \'Who Could the Most?AppLocations.of(context)!.printIsactiondependingStateTo(isActionPending) players\'] as Map<String, dynamic>?) ?? {};';
-
-  @override
-  String get questionAAfficherQuestion => 'Te tonen vraag: \$vraag';
-
-  @override
-  String get nombreDeJoueursAAfficher =>
-      'Aantal te tonen spelers: \${spelers.length}';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -7422,80 +6092,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get attentionLeWidgetNEst => 'Widget is weg, zetState af.';
 
   @override
-  String get quiPourraitLePlusApplocalizations7 =>
-      'Wie kon meer?AppLocalisaties.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId';
-
-  @override
-  String get currentcountTotalexpected => '\$currentCount / \$totalVerwacht';
-
-  @override
-  String get str38ce0b =>
-      '\${\'codenamenYouAre\'\'}\${redTeam.bevat(playerId) ? \'codenamenRedTeam\': (blueTeam.bevat(playerId)? \'codenamenBlueTeam\': \'codenamenSpectator\'\'}';
-
-  @override
-  String get str735713 => '\${(playerId== masterSpyRed}';
-
-  @override
-  String get strb8097d => '\$ (pointers. eerst';
-
-  @override
-  String get currentclueCluecount => '\'\$currentClue \$clueCount\'';
-
-  @override
-  String get str51cc0a => '#\${index + 1}';
-
-  @override
-  String get maximumbid => '\$maximumBid \${';
-
-  @override
-  String get selectedbid => '} (\$selectedBid)';
-
-  @override
-  String get currentbidTotalcardsontables =>
-      '} : \$currentBid / \$totalCardsOnTables';
-
-  @override
   String get phaseDePose => 'POSITIEFASE';
 
   @override
-  String get strb75c84 =>
-      '\${players[currentPlayerId]?[\'name\'] ?? \'...\'\'}';
+  String get stre9f4a5 => '🏆 Legendarisch!';
 
   @override
-  String get biddername => '\$bidderName \${';
+  String get str21f597 => '⭐ Uitstekend!';
 
   @override
-  String get liveamount => '\$liveAmount \${';
+  String get str59ee4e => '👍 Goed gespeeld!';
 
   @override
-  String get name => '} (\$naam)';
+  String get strb6f91d => '😅 Niet slecht!';
 
   @override
-  String get str35ecf5 => 'Vertaling:';
-
-  @override
-  String get pictionarystrokecount30 => '\$ pictionaryStrokeCount/30 \${';
-
-  @override
-  String get stre9f4a5 => '\${\"Legendary!\" }';
-
-  @override
-  String get str21f597 => '\"Uitstekend!\"';
-
-  @override
-  String get str59ee4e => '\"Goed gedaan!\"';
-
-  @override
-  String get strb6f91d => 'Niet slecht.';
-
-  @override
-  String get strc0046c => '\"We kunnen beter krijgen!\"';
-
-  @override
-  String get totalscoreDecktotal => 'TotaalRating / \$deckTotal';
-
-  @override
-  String get deckindexDecktotal => '\$deckIndex / \$deckTotal';
+  String get strc0046c => '💪 We kunnen beter!';
 
   @override
   String get str85bff7 => '\'Bravo!\'';
@@ -7504,376 +6116,54 @@ class AppLocalizationsNl extends AppLocalizations {
   String get strfa1b8c => '\${\'Rate!\' }';
 
   @override
-  String get strf150cd => 'Vertaling:';
-
-  @override
-  String get guessernameAnswer => '} \$guesserNaam: \\\"\$answer\\\"';
-
-  @override
-  String get totalscoreDeckindex => '} : \$totalRating / \$deckIndex';
-
-  @override
   String get str487ca1 => 'Chut! Doe je ogen dicht.';
 
   @override
-  String get strf4cf64 => '\${justOneClues.length} / \${players.length - 1}';
-
-  @override
-  String strd25123(Object justOneCurrentWord) {
-    return '\$ $justOneCurrentWord';
-  }
-
-  @override
-  String get currentround => '\$currentRound';
-
-  @override
-  String get currentpotatoplayername => '\$currentPotatoPlayer';
-
-  @override
-  String get losername => '\$loserName\${';
-
-  @override
-  String get leSoleilSeLeve => 'De zon komt op.';
-
-  @override
-  String get strd83364 => '\${(hands[pId] als List??.length ?? 0}';
-
-  @override
-  String get streabdaf =>
-      '\${\'Tour de\'\'} \${spelers[currentPlayerId]?[\'name\'] ?? \'...\'\'}';
-
-  @override
-  String get str4f745a => '+\${potentiële score ?? 0}';
+  String get leSoleilSeLeve => 'De zon komt op';
 
   @override
   String atout(Object suit) {
-    return 'UIT: $suit';
+    return 'TROEF: $suit';
   }
-
-  @override
-  String get erreurLorsDeLaCapture => 'Fout bij het vastleggen: \$e';
-
-  @override
-  String get undercoverLocal => 'Undercover lokaal';
 
   @override
   String get toiMeme => 'jezelf';
 
   @override
-  String applocalizationsOfContextWordcivilparts0trimwordundercover1Rawpair(
-    Object role,
-  ) {
-    return ':AppLocalisaties.of(context)!.wordcivilParts0TrimWordcover1(rawPair.trim(), speler)\$ $role ! Burgers winnen!\"';
-  }
-
-  @override
-  String get aiErrorE => 'AI-fout: \$e';
-
-  @override
   String get unAutreJoueur => 'een andere speler';
 
   @override
-  String get tous => 'Alles';
+  String get tous => 'Alle';
 
   @override
-  String get fun => 'Leuk';
+  String get fun => 'Plezier';
 
   @override
   String get gaming => 'Gaming';
 
   @override
-  String get chill => 'Rustig.';
+  String get chill => 'Chillen';
 
   @override
-  String get soiree => 'Avond';
+  String get soiree => 'Feestje';
 
   @override
-  String get competition => 'Mededinging';
-
-  @override
-  String get strd659f5 => '} (\${joned.length})';
-
-  @override
-  String get gamename => '} (\$gameNaam)';
+  String get competition => 'Competitie';
 
   @override
   String get enCours => 'LOPEND: {0}';
 
   @override
-  String get gamemessagelocalizationTrContextReason =>
-      ': \"\"}\": GameMessageLocalisatie.tr(context, rede),';
+  String get jAiLanceUnePartie2 => 'Ik ben een spel gestart';
 
   @override
-  String get jAiLanceUnePartie2 => 'Ik gooide een spel';
+  String get piedDeBiche => 'Koevoet';
 
   @override
-  String get piedDeBiche => 'Bishfoot';
-
-  @override
-  String get str128675 => '\${playerNames[i].substring(0, 7)}..';
-
-  @override
-  String get pname => '\$pName (\${\'Me\'\'})';
-
-  @override
-  String get readycountTotalplayers =>
-      '\${\'FAST} (\$readyCount/\$TotalPlayers)';
-
-  @override
-  String get appTitle => 'Party Spel';
-
-  @override
-  String get loginTitle => 'Welkom!';
-
-  @override
-  String get registerTitle => 'Doe mee!';
-
-  @override
-  String get email => 'E-mail';
-
-  @override
-  String get password => 'Wachtwoord';
-
-  @override
-  String get username => 'Gebruikersnaam';
-
-  @override
-  String get loginButton => 'Inloggen';
-
-  @override
-  String get registerButton => 'Account aanmaken';
-
-  @override
-  String get termsAcceptance =>
-      'Ik ga akkoord met de Voorwaarden en het Privacybeleid.';
-
-  @override
-  String get gamesTab => 'Spellen';
-
-  @override
-  String get friendsTab => 'Vrienden';
-
-  @override
-  String get statsTab => 'Profiel';
-
-  @override
-  String get loungesTab => 'Lounges';
+  String get appTitle => 'Feestspel';
 
   @override
   String get createGame => 'Spel maken';
-
-  @override
-  String get joinGame => 'Deelnemen';
-
-  @override
-  String get gameCode => 'Spelcode (6 cijfers)';
-
-  @override
-  String get startGame => 'Start spel';
-
-  @override
-  String get leaveGame => 'Spel verlaten';
-
-  @override
-  String get rules => 'Regels';
-
-  @override
-  String get level => 'Niveau';
-
-  @override
-  String get coins => 'Munten';
-
-  @override
-  String get gameOver => 'Spel afgelopen!';
-
-  @override
-  String get victory => 'Gewonnen!';
-
-  @override
-  String get defeat => 'Verloren';
-
-  @override
-  String get nextRound => 'Volgende ronde';
-
-  @override
-  String get onboardingWelcome => 'Welkom';
-
-  @override
-  String get onboardingSkip => 'Overslaan';
-
-  @override
-  String get onboardingNext => 'Volgende';
-
-  @override
-  String get onboardingStart => 'Aan de slag! 🚀';
-
-  @override
-  String get onboardingSlide1Title => 'Speel met vrienden';
-
-  @override
-  String get onboardingSlide1Subtitle =>
-      'Kies uit meer dan 30 party-, kaart- en bordspellen. Speel lokaal, met vrienden of wereldwijd!';
-
-  @override
-  String get onboardingSlide2Title => 'Verdien munten & ontgrendel badges';
-
-  @override
-  String get onboardingSlide2Subtitle =>
-      'Verdien XP bij elke overwinning, stijg in niveau en ontgrendel exclusieve prestaties.';
-
-  @override
-  String get onboardingSlide3Title => 'Maak of neem deel in seconden';
-
-  @override
-  String get onboardingSlide3Subtitle =>
-      'Een 6-cijferige code is genoeg om je vrienden te verzamelen, of start snelle matchmaking.';
-
-  @override
-  String get vipPass => 'VIP-Pas';
-
-  @override
-  String get vipActive => 'Je VIP-Pas is actief!';
-
-  @override
-  String get vipActiveDesc =>
-      'Alle functies (AI, Lounges, Video, Matchmaking) zijn onbeperkt.';
-
-  @override
-  String get choosePlan => 'Kies je abonnement:';
-
-  @override
-  String get restorePurchases => 'Aankopen herstellen';
-
-  @override
-  String get purchasesRestored => 'Aankopen succesvol hersteld!';
-
-  @override
-  String get noPurchasesFound => 'Geen actieve aankopen gevonden.';
-
-  @override
-  String get monthlySubscription => 'Maandabonnement';
-
-  @override
-  String get annualSubscription => 'Jaarabonnement';
-
-  @override
-  String get lifetimeAccess => 'Levenslange Toegang';
-
-  @override
-  String get popularTag => 'POPULAIR';
-
-  @override
-  String get chooseButton => 'Kiezen';
-
-  @override
-  String get vipCongratulations => 'Gefeliciteerd, je bent VIP!';
-
-  @override
-  String get purchaseFailed => 'Aankoop niet voltooid.';
-
-  @override
-  String get profileTitle => 'Profiel & Instellingen';
-
-  @override
-  String get profileNotFound => 'Profiel niet gevonden of speler bestaat niet.';
-
-  @override
-  String get tabStats => 'Statistieken';
-
-  @override
-  String get tabBadges => 'Badges & Prestaties';
-
-  @override
-  String get tabSettings => 'Instellingen';
-
-  @override
-  String get gamesPlayed => 'Gespeelde spellen';
-
-  @override
-  String get gamesWon => 'Overwinningen';
-
-  @override
-  String get winRate => 'Winstpercentage';
-
-  @override
-  String get soundEffects => 'Geluidseffecten';
-
-  @override
-  String get music => 'Muziek';
-
-  @override
-  String get editUsername => 'Gebruikersnaam wijzigen';
-
-  @override
-  String get newUsernameHint => 'Nieuwe gebruikersnaam';
-
-  @override
-  String get logout => 'Uitloggen';
-
-  @override
-  String get deleteAccount => 'Account verwijderen';
-
-  @override
-  String get deleteAccountConfirm =>
-      'Weet je zeker dat je je account definitief wilt verwijderen?';
-
-  @override
-  String get cancel => 'Annuleren';
-
-  @override
-  String get confirm => 'Bevestigen';
-
-  @override
-  String get save => 'Opslaan';
-
-  @override
-  String get modeLocal => 'Lokaal';
-
-  @override
-  String get modeMulti => 'Online';
-
-  @override
-  String get modeMonde => 'Wereld';
-
-  @override
-  String get searchGame => 'Zoek een spel...';
-
-  @override
-  String get filterAll => 'Alle spellen';
-
-  @override
-  String get createLounge => 'Lounge maken';
-
-  @override
-  String get joinLounge => 'Deelnemen aan lounge';
-
-  @override
-  String get loungeCode => 'Loungecode';
-
-  @override
-  String get publicLounges => 'Openbare lounges';
-
-  @override
-  String get noLoungesAvailable =>
-      'Momenteel geen openbare lounges beschikbaar.';
-
-  @override
-  String get playersCount => 'Spelers';
-
-  @override
-  String get howToPlay => 'Hoe speel je?';
-
-  @override
-  String get copiedToClipboard => 'Gekopieerd naar klembord!';
-
-  @override
-  String get connectionError => 'Verbindingsfout. Probeer het opnieuw.';
-
-  @override
-  String get loading => 'Laden...';
-
-  @override
-  String get success => 'Succes!';
 
   @override
   String pasAssezDeSymbolesUniques1(
@@ -7891,7 +6181,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String ambianceTonImpose(Object style) {
-    return '[Ambiance / Toon opgelegd: 0] $style';
+    return '[Sfeer / Verplichte toon: $style]';
   }
 
   @override
@@ -7951,12 +6241,12 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String theme(Object gameType) {
-    return 'Onderwerp 0 $gameType';
+    return 'Thema $gameType';
   }
 
   @override
   String passeSonTour2(Object playerName) {
-    return 'Het is voorbij. $playerName';
+    return '⏱️ $playerName slaat een beurt over.';
   }
 
   @override
@@ -7966,7 +6256,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String aOuvertAvec(Object playerName, Object cardToPlay) {
-    return '0 is geopend met 1 . $playerName $cardToPlay';
+    return '⏱️ $playerName opende met $cardToPlay.';
   }
 
   @override
@@ -7974,7 +6264,7 @@ class AppLocalizationsNl extends AppLocalizations {
     Object removedPlayerName,
     Object remainingName,
   ) {
-    return '0 heeft de verbinding verbroken. Win 1 per pakket! $removedPlayerName $remainingName';
+    return '$removedPlayerName heeft de verbinding verbroken. Overwinning voor $remainingName door opgave!';
   }
 
   @override
@@ -7984,27 +6274,27 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String neRepondPlusLAdministrateur(Object playerName, Object reason) {
-    return '0 reageert niet langer (1 ). De beheerder werd gevraagd te beslissen over de vervanging ervan door de computer. $playerName $reason';
+    return '⚠️ $playerName reageert niet meer ($reason). De beheerder is gevraagd over vervanging door de computer.';
   }
 
   @override
   String aEteRemplaceParL(Object playerName) {
-    return 'Het werd vervangen door de computer (AI actief - 5s per beurt). $playerName';
+    return '🤖 $playerName is vervangen door de computer (AI actief - 5s per beurt).';
   }
 
   @override
   String nAPasDonneD(Object playerName) {
-    return '0 heeft geen index gegeven (Jeu d\' opinion). Draai je om. $playerName';
+    return '⚠️ $playerName gaf geen hint (Meningen-spel). Beurt overgeslagen.';
   }
 
   @override
   String nAPasReponduJeu(Object playerName) {
-    return 'Tour overgeslagen zonder automatische actie. $playerName';
+    return '⚠️ $playerName heeft niet geantwoord (Meningen-spel). Beurt overgeslagen zonder actie.';
   }
 
   @override
   String nAPasJoueA3(Object playerName) {
-    return '0 heeft niet op tijd gespeeld. Zijn beurt is voorbij. $playerName';
+    return '$playerName speelde niet op tijd. Beurt voorbij.';
   }
 
   @override
@@ -8014,52 +6304,52 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String aJoue(Object playerName, Object lastDrawn) {
-    return '0 heeft 1 gespeeld. $playerName $lastDrawn';
+    return '⏱️ $playerName speelde $lastDrawn.';
   }
 
   @override
   String aJoue1(Object playerName, Object playable) {
-    return '0 heeft 1 gespeeld. $playerName $playable';
+    return '⏱️ $playerName speelde $playable.';
   }
 
   @override
   String piocheEtPasseSonTour(Object playerName) {
-    return '0 neemt op en passeert zijn beurt. $playerName';
+    return '⏱️ $playerName trekt en slaat beurt over.';
   }
 
   @override
   String nAPasJoueA4(Object playerName) {
-    return '0 speelde niet op tijd. Eén kaart werd verslagen en één doos onthuld. $playerName';
+    return '⏱️ $playerName was te laat. Een kaart is afgelegd en een vakje onthuld.';
   }
 
   @override
   String laPartieEstTermineeVictoire1(Object winner) {
-    return 'Het spel is voorbij. Overwinning van 0! $winner';
+    return 'Het spel is afgelopen. Overwinning voor $winner!';
   }
 
   @override
   String joueursContaminesParLaMaladie1(Object contaminatedNames) {
-    return 'Spelers geïnfecteerd met de ziekte: 0 . $contaminatedNames';
+    return 'Spelers besmet door de ziekte: $contaminatedNames.';
   }
 
   @override
   String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
-    return 'Je bespioneerde 0 en ontdekte zijn rol: 1 . $targetName $targetRole';
+    return 'Je hebt $targetName bespioneerd en de rol ontdekt: $targetRole.';
   }
 
   @override
   String votreMotDuJourPrononcez(Object newWord) {
-    return 'Je woord van de dag: \'0\'. Zeg het tegen de kat voor zonsondergang. $newWord';
+    return 'Je woord van de dag: \'$newWord\'. Zeg het in de chat voor zonsondergang!';
   }
 
   @override
   String declareUnCoupDEtat(Object dictateurName) {
-    return '0 verklaart een Coup! $dictateurName';
+    return '$dictateurName pleegt een staatsgreep!';
   }
 
   @override
   String leChasseurTireEtTue1(Object targetName) {
-    return 'De Hunter schiet en doodt 0! $targetName';
+    return 'De Jager schiet en doodt $targetName!';
   }
 
   @override
@@ -8067,22 +6357,22 @@ class AppLocalizationsNl extends AppLocalizations {
     Object formerCaptainName,
     Object newCaptainName,
   ) {
-    return '0 heeft 1 aangewezen als nieuwe kapitein! $formerCaptainName $newCaptainName';
+    return '$formerCaptainName wees $newCaptainName aan als nieuwe Kapitein!';
   }
 
   @override
   String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
-    return 'Cupido heeft 0 en 1 aangewezen als minnaars! $lover1Name $lover2Name';
+    return 'Cupido heeft $lover1Name en $lover2Name als geliefden aangewezen!';
   }
 
   @override
   String votreAmoureuxSe(Object amoureux2Name) {
-    return 'Je minnaar: 0 $amoureux2Name';
+    return '❤️ Jouw geliefde: $amoureux2Name';
   }
 
   @override
   String votreAmoureuxSe1(Object amoureux1Name) {
-    return 'Je minnaar: 0 $amoureux1Name';
+    return '❤️ Jouw geliefde: $amoureux1Name';
   }
 
   @override
@@ -8102,22 +6392,22 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String extremiteNonDisponibleSurLe1(Object openEnds) {
-    return 'Extremiteit niet beschikbaar op set (0 ). $openEnds';
+    return 'Uiteinde niet beschikbaar op bord ($openEnds).';
   }
 
   @override
   String laTuileNePossedePas(Object tile, Object matchEnd) {
-    return 'De tegel 0 heeft niet de vereiste waarde 1 . $tile $matchEnd';
+    return 'Steen $tile heeft niet de vereiste waarde $matchEnd.';
   }
 
   @override
   String leBotAJoueAutomatiquement(Object tileToPlay) {
-    return 'De bot speelde 0 automatisch. $tileToPlay';
+    return '⏱️ De bot speelde $tileToPlay automatisch.';
   }
 
   @override
   String aEteContraintDePasser(Object playerName) {
-    return '⏱️ $playerName a été contraint de passer son tour.';
+    return '⏱️ $playerName werd gedwongen een beurt over te slaan.';
   }
 
   @override
@@ -8155,7 +6445,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String vousDevezPiocherCartesOu(Object pendingDraw) {
-    return 'U moet 0 kaarten kiezen, of teller met een +2/+4. $pendingDraw';
+    return 'Je moet $pendingDraw kaarten trekken, of counteren met +2/+4.';
   }
 
   @override
@@ -8165,7 +6455,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
-    return 'Verplichte meervoudige socket met de pion in 0 . $mandatoryPiece';
+    return 'Meervoudige slag verplicht met het stuk op $mandatoryPiece.';
   }
 
   @override
@@ -8175,7 +6465,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String quiPourraitLePlus3(Object questionsrandomnextI) {
-    return 'Wat de meeste 0 kan zijn $questionsrandomnextI';
+    return 'Wie zou het meest waarschijnlijk $questionsrandomnextI';
   }
 
   @override
@@ -8189,7 +6479,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get interdictionFormelleDeVoterPour =>
-      'Formeel verbod om voor zichzelf te stemmen!';
+      'Strikt verboden om op jezelf te stemmen!';
 
   @override
   String remporteLaManche(Object winnerName) {
@@ -8208,7 +6498,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get aucuneDescriptionNAEte1 =>
-      'Er is niet gestemd over een beschrijving.';
+      'Er is op geen enkele beschrijving gestemd.';
 
   @override
   String ceNEstPasLe3(Object playerId) {
@@ -8227,22 +6517,694 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String aGagneAvecSaDescription1(Object winnerName) {
-    return '0 won met zijn beschrijving: $winnerName';
+    return '$winnerName heeft gewonnen met het bijschrift:';
   }
 
   @override
-  String get leLoupBlancFrappeEn => 'De Witte Wolf slaat alleen toe.';
+  String get leLoupBlancFrappeEn => 'De Witte Wolf slaat alleen toe';
 
   @override
   String etaitUnCivilLesImposteurs(Object player) {
-    return '0 was een burger! De Impostors winnen! $player';
+    return '$player was een Burger! De Bedriegers winnen!';
   }
 
   @override
   String etaitLLesCivilsGagnent(Object player, Object role) {
-    return 'De burgers winnen. $player $role';
+    return '$player was de $role! De Burgers winnen!';
   }
 
   @override
   String get question2 => 'Vraag';
+
+  @override
+  String get mrWhiteSecretWordPrompt =>
+      'Je bent ontmaskerd! Als je het geheime woord van de Burgers raadt, win je solo!';
+
+  @override
+  String get codenamesRed => 'Rood';
+
+  @override
+  String get codenamesBlue => 'Blauw';
+
+  @override
+  String get codenamesYourMasterSpyRed => 'je rode spionnenleider';
+
+  @override
+  String get codenamesYourMasterSpyBlue => 'je blauwe spionnenleider';
+
+  @override
+  String get codenamesRedLower => 'rode';
+
+  @override
+  String get codenamesBlueLower => 'blauwe';
+
+  @override
+  String get rulesBlancMangerCoco =>
+      '**Objective**\nBe the player with the most points at the end of the game!\n\n**How to Play**\n1. Each player receives **7 answer cards**.\n2. One player is chosen as the **Judge** (rotates each round).\n3. The Judge reads the **question card** aloud.\n4. All other players secretly choose and submit **1 answer card** from their hand.\n5. The Judge reads all responses aloud and picks the **funniest one**.\n6. The winner of the round scores **1 point**.\n7. Everyone draws back up to 7 cards.\n8. The Judge role passes to the next player.\n\n**Key Rules**\n- The Judge does not play a card on their turn.\n- Submissions are **anonymous**.\n- You may only play **one card** per round.';
+
+  @override
+  String get rulesZombie =>
+      '**Objective**\nDraw cards to make matching pairs. Avoid holding the Zombie card when the game ends!\n\n**How to Play**\n1. The deck has 33 cards (16 pairs + 1 Zombie card).\n2. Cards are dealt to players.\n3. On your turn, take a card from the next player.\n4. Matching pairs are automatically discarded.\n5. Your hand is shuffled.\n6. The first player to run out of cards wins.\n7. The last player stuck with the Zombie card loses!';
+
+  @override
+  String get rulesYams =>
+      '**Objective**\nScore the most points by filling 13 scoring categories with 5 dice.\n\n**Turn Structure**\n1. **Roll**: You can roll the 5 dice up to 3 times per turn.\n2. **Keep**: After roll 1 or 2, keep whichever dice you like and re-roll the rest.\n3. **Score**: Choose an available scoring category. Each can only be used once per game.\n\n**Categories**\n- **Aces to Sixes**: Sum of matching dice (35-point bonus if Upper Section totals 63+).\n- **Three of a Kind**: Sum of all 5 dice.\n- **Four of a Kind**: Sum of all 5 dice.\n- **Full House**: 3 of a kind + pair (25 pts).\n- **Small Straight**: 4 sequential dice (30 pts).\n- **Large Straight**: 5 sequential dice (40 pts).\n- **Yams (Yahtzee)**: 5 identical dice (50 pts).\n- **Chance**: Sum of all dice.';
+
+  @override
+  String get rulesLaPatateChaude =>
+      '**Objective**\nDon\'t be holding the device when the hot potato explodes!\n\n**How to Play**\n1. A topic appears on screen.\n2. The player holding the device must name a valid answer matching the topic.\n3. As soon as answered, pass the phone quickly to the next player.\n4. The next player must give a new unique answer and pass it along.\n5. The countdown timer is secret and random: it can blow up at any second!\n6. Whoever holds the phone when it explodes loses the round and takes a penalty!';
+
+  @override
+  String get rulesGribouillis =>
+      '**Overview**\nA hilarious drawing game inspired by the \'Telephone game\', where prompts morph across rounds:\n- **Write**: Each player writes a quirky sentence or prompt.\n- **Draw**: You receive another player\'s prompt and illustrate it.\n- **Guess**: You view a sketch and guess what it depicts.\n- **Alternate**: Keeps cycling until albums return to their creator.\n- **Goal**: Laugh together discovering how simple ideas turn into crazy masterpieces!';
+
+  @override
+  String get rulesZeroPointe =>
+      '**Objective**\nHave the lowest cumulative score. The game ends when a player hits 100 points; the player with the lowest score wins!\n\n**Setup**\nEach player has a 3x4 grid of 12 cards face down. Reveal 2 cards of your choice at start.\n\n**Turn Actions**\n1. **Take from Discard pile**: Swap it with any of your 12 cards (face up or face down).\n2. **Draw from Draw pile**: Keep it and swap with one of your cards, or discard it and reveal one of your hidden cards.\n\n**Column Rule**\nThree identical cards in the same vertical column cancel out (worth 0 points).';
+
+  @override
+  String get rulesPoker =>
+      '**Texas Hold\'em - Objective**\nWin your opponents\' chips by building the strongest 5-card poker hand or by bluffing them into folding.\n\n**Hand Rankings (High to Low)**\n1. Royal Flush\n2. Straight Flush\n3. Four of a Kind\n4. Full House\n5. Flush\n6. Straight\n7. Three of a Kind\n8. Two Pair\n9. One Pair\n10. High Card\n\n**Rounds**\nEach player receives 2 private hole cards. 5 community cards are revealed in phases: Flop (3), Turn (1), River (1). Betting rounds allow you to Check, Bet, Call, Raise, or Fold.';
+
+  @override
+  String get rulesActionOuVerite =>
+      '**Objective**\nEarn the most XP by taking on bold dares or answering revealing truths!\n\n**How to Play**\n1. The roulette picks the active player.\n2. Choose \'Truth\' or \'Dare\'.\n3. Complete the prompt. Other players vote Yes or No to validate.\n4. Your approval rating determines how much XP you gain!';
+
+  @override
+  String get rulesPresident =>
+      '**Objective**\nShed all your cards first to become President. The last player holding cards becomes the Asshole!\n\n**Card Rank (Low to High)**\n3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace, **2** (highest).\n\n**Rules**\n- Play single cards, pairs, triples, or 4-of-a-kinds of equal or higher value.\n- Playing a **2** clears the pile immediately and gives you the lead.\n- Next round, the Asshole must trade their 2 best cards to the President!';
+
+  @override
+  String get rulesSkull =>
+      '**Objective**\nWin 2 bid challenges without ever flipping a Skull!\n\n**How to Play**\n1. Each player holds 4 cards: 3 Roses and 1 Skull.\n2. Players take turns playing cards face down.\n3. Any player can start a bid declaring how many cards they can flip safely.\n4. Highest bidder must flip their own cards first, then rivals\' cards.\n5. Hit a skull and you lose a card permanently; succeed twice and you win!';
+
+  @override
+  String get rulesPictionary =>
+      '**Objective**\nDraw and have your friends guess the secret word before time runs out!\n- No letters, numbers, or spoken clues allowed.\n- Players type their guesses in the chat. The artist approves the winner!';
+
+  @override
+  String get rulesJustOne =>
+      '**Objective**\nCooperative word game where everyone helps one guesser discover a mystery word.\n\n**How to Play**\n1. The guesser cannot see the mystery word.\n2. All teammates secretly write a one-word clue.\n3. **The catch**: Identical clues are removed before the guesser sees them!\n4. The guesser views the remaining clues and gets one shot to guess the word.';
+
+  @override
+  String get rulesLoupGarou =>
+      '**Objective**\n- **Villagers**: Identify and eliminate all Werewolves.\n- **Werewolves**: Eliminate all villagers without getting caught.\n\n**Cycle**\nThe game alternates between Night (special roles and werewolves strike in secret) and Day (village debate and public vote to execute a suspect).';
+
+  @override
+  String get rulesDobble =>
+      'Spot the single matching symbol between your card and the center deck card as fast as you can!';
+
+  @override
+  String get rulesUno =>
+      '**Objective**\nBe the first player to empty your hand of all cards!\n- Match the top discard card by color, number, or action symbol.\n- Use Action cards (+2, Skip, Reverse, Wild, Wild Draw 4) to hinder opponents.\n- Never forget to hit \'UNO\' when down to your last card!';
+
+  @override
+  String get rulesPhotoRoulette =>
+      'A random picture from a player\'s camera roll flashes on screen. Guess whose photo it is as fast as you can!';
+
+  @override
+  String get rulesBatailleNavale =>
+      '**Objective**\nSink the entire enemy naval fleet before they destroy yours!\nCall out coordinates each turn: \'Hit\', \'Sunk\', or \'Miss\'!';
+
+  @override
+  String get rulesMilleBornes =>
+      '**Objective**\nRace across the board to be the first driver to reach 1000 Kilometers!\n- Play Distance cards (25, 50, 75, 100, 200 km) to progress.\n- Attack rivals with Hazards (Red Light, Flat Tire, Out of Gas, Accident).\n- Defend with Remedies or achieve permanent immunity with the 4 Safety cards!';
+
+  @override
+  String get rulesRami =>
+      'Meld your cards into runs (same suit in sequence) or sets (same rank, different suits) to be the first to empty your hand and win the round!';
+
+  @override
+  String get rulesTaboo =>
+      'Describe the target word to your teammates without uttering the word itself or any of the 5 forbidden Taboo buzzwords on the card!';
+
+  @override
+  String get rulesPetitsChevaux =>
+      'Roll the dice (roll a 6 to exit your stable), circle the board, and climb all four of your pawns up the final home stretch staircase!';
+
+  @override
+  String get rulesCadavreExquis =>
+      'Collaborative surrealist writing where each player writes part of a sentence without seeing earlier words, creating hilarious surprise stories!';
+
+  @override
+  String get rulesBlokus =>
+      'Place geometric polyomino pieces on the board. Each new piece must touch at least one of your own pieces corner-to-corner, but never edge-to-edge!';
+
+  @override
+  String get rulesDominoes =>
+      'Match open domino ends with equal pip values. The first player to play all their dominoes takes the round!';
+
+  @override
+  String get rulesBigTwo =>
+      'Popular climbing card game where 2 is highest. Discard combinations (singles, pairs, full houses, flushes) to beat the current trick and empty your hand!';
+
+  @override
+  String get rulesJeuDeDames =>
+      'Move diagonally across dark squares. Jumping over enemy pieces to capture them is mandatory. Reach the opposite side to crown a King!';
+
+  @override
+  String get chocolat => 'chocolade';
+
+  @override
+  String get ordinateur => 'computer';
+
+  @override
+  String get licorne => 'eenhoorn';
+
+  @override
+  String get minuit => 'middernacht';
+
+  @override
+  String get ombre => 'schaduw';
+
+  @override
+  String get lune => 'maan';
+
+  @override
+  String get feuille => 'blad';
+
+  @override
+  String get silence => 'stilte';
+
+  @override
+  String get murmure => 'gefluister';
+
+  @override
+  String get potion => 'drankje';
+
+  @override
+  String get miroir => 'spiegel';
+
+  @override
+  String get magie => 'magie';
+
+  @override
+  String get cascade => 'waterval';
+
+  @override
+  String get dragon => 'dragon';
+
+  @override
+  String get boussole => 'boussole';
+
+  @override
+  String get diamant => 'diamant';
+
+  @override
+  String get flamme => 'flamme';
+
+  @override
+  String get horloge => 'horloge';
+
+  @override
+  String get pirate => 'pirate';
+
+  @override
+  String get vortex => 'vortex';
+
+  @override
+  String get aurore => 'aurore';
+
+  @override
+  String get papillon => 'papillon';
+
+  @override
+  String get bouclier => 'bouclier';
+
+  @override
+  String get labyrinthe => 'labyrinthe';
+
+  @override
+  String get cristal => 'cristal';
+
+  @override
+  String get volcan => 'volcan';
+
+  @override
+  String get mirage => 'mirage';
+
+  @override
+  String get sentinelle => 'sentinelle';
+
+  @override
+  String get cloche => 'cloche';
+
+  @override
+  String get lanterne => 'lanterne';
+
+  @override
+  String get parchemin => 'parchemin';
+
+  @override
+  String aGagne2(Object gameDataplayerswin) {
+    return '$gameDataplayerswin heeft gewonnen!';
+  }
+
+  @override
+  String aJoue2(Object playerName, Object cardsToPlayjoin) {
+    return '⏱️ $playerName speelde $cardsToPlayjoin.';
+  }
+
+  @override
+  String aJoue3(Object playerName, Object winningCombojoin) {
+    return '⏱️ $playerName speelde $winningCombojoin.';
+  }
+
+  @override
+  String pliTermineAuTourDe2(Object gameDataplayerspla) {
+    return '⏱️ Slag afgelopen. Beurt aan $gameDataplayerspla!';
+  }
+
+  @override
+  String get stop => 'STOP';
+
+  @override
+  String coupFourrePareLAttaque1(
+    Object playerstargetIdnam,
+    Object matchingSafety,
+  ) {
+    return '⚡ COUP-FOURRÉ ! $playerstargetIdnam pare l\'attaque avec $matchingSafety et prend la main !';
+  }
+
+  @override
+  String aAtteintKm(Object playersplayerIdnam, Object targetDist) {
+    return '$playersplayerIdnam heeft $targetDist km bereikt!';
+  }
+
+  @override
+  String aCouleTouteLaFlotte1(Object shooterDataname) {
+    return '$shooterDataname heeft de hele vijandelijke vloot tot zinken gebracht!';
+  }
+
+  @override
+  String aTireAutomatiquementEn(
+    Object shooterDataname,
+    Object targetIndex101,
+    Object targetIndex1011,
+    Object result,
+  ) {
+    return '⏱️ $shooterDataname a tiré automatiquement en $targetIndex101-$targetIndex1011 ($result).';
+  }
+
+  @override
+  String aJoue4(Object playerName, Object candidateCardsjoin) {
+    return '⏱️ $playerName speelde $candidateCardsjoin.';
+  }
+
+  @override
+  String pliTermineAuTourDe3(Object gameDataplayerspla) {
+    return '⏱️ Pli terminé. Au tour de $gameDataplayerspla.';
+  }
+
+  @override
+  String estLeNouvelHote1(Object playersplayerOrder) {
+    return '$playersplayerOrder is de nieuwe host.';
+  }
+
+  @override
+  String egalitePersistanteLeDestinDepartage1(Object playerDatarandomEl) {
+    return 'Égalité persistante ! Le destin départage au hasard : $playerDatarandomEl est éliminé.';
+  }
+
+  @override
+  String estMortEDeChagrin1(Object playerDataotherLov) {
+    return '$playerDataotherLov stierf van verdriet om de geliefde!';
+  }
+
+  @override
+  String lHeritierHeriteDuRole2(
+    Object playerDataheritier,
+    Object playerDatatestateu,
+    Object newRole,
+  ) {
+    return '$playerDataheritier (Erfgenaam) erft de rol van $playerDatatestateu: $newRole!';
+  }
+
+  @override
+  String heriteEgalementDuStatutDe1(Object playerDataheritier) {
+    return '$playerDataheritier erft ook de Kapiteinstatus!';
+  }
+
+  @override
+  String leVillageDecouvreAvecEffroi1(Object deadThisNightNames) {
+    return 'Le village découvre avec effroi le(s) corps de : $deadThisNightNames.';
+  }
+
+  @override
+  String leFossoyeurReveleEtaitUn1(
+    Object playerDatafossoyeu,
+    Object playerDatatargetPl,
+    Object targetRole,
+  ) {
+    return '$playerDatafossoyeu (Doodgraver) onthult: $playerDatatargetPl was een $targetRole!';
+  }
+
+  @override
+  String etEtaitUnE(Object playerDataotherRev, Object otherRevealedRole) {
+    return 'Et $playerDataotherRev était un(e) $otherRevealedRole !';
+  }
+
+  @override
+  String leDictateurAExecuteUn1(
+    Object playerDatadictator,
+    Object playerDatatargetId,
+    Object targetRole,
+  ) {
+    return 'Dictator $playerDatadictator executeerde een bedrieger ($playerDatatargetId - $targetRole) en wordt Kapitein!';
+  }
+
+  @override
+  String leLoupBavardNA1(Object playerDataloupBava) {
+    return 'De Kwebbelwolf ($playerDataloupBava) zei zijn woord niet en stierf bij zonsondergang!';
+  }
+
+  @override
+  String leVillageAVoteEt1(Object playerDataeliminat) {
+    return 'Het dorp heeft gestemd en elimineert $playerDataeliminat.';
+  }
+
+  @override
+  String leMercenaireAFaitEliminer1(Object playerDatamercenai) {
+    return 'Huurling $playerDatamercenai schakelde zijn doelwit uit op Dag 1! Wint het spel alleen!';
+  }
+
+  @override
+  String meurtDeChagrinPourSon1(Object playerDataotherLov) {
+    return '$playerDataotherLov sterft aan een gebroken hart!';
+  }
+
+  @override
+  String get lAncienCapitaine1 => 'L\'ancien Capitaine';
+
+  @override
+  String aDit(Object playerDataplayerId, Object cleanClue) {
+    return '$playerDataplayerId a dit : \'$cleanClue\'';
+  }
+
+  @override
+  String aDevineLeMotCivil1(Object gameDataplayerData, Object civilWord) {
+    return '$gameDataplayerData a deviné le mot civil (\'$civilWord\') !';
+  }
+
+  @override
+  String aProposeMaisCeN(
+    Object gameDataplayerData,
+    Object guessedWord,
+    Object civilWord,
+  ) {
+    return '$gameDataplayerData a proposé \'$guessedWord\', mais ce n\'était pas le mot civil (\'$civilWord\') !';
+  }
+
+  @override
+  String flottesPlaceesCommenceATirer1(Object playerDatafirstPla) {
+    return 'Flottes placées ! $playerDatafirstPla commence à tirer.';
+  }
+
+  @override
+  String tousLesJoueursSontPrets1(Object playerDatafirstPla) {
+    return 'Tous les joueurs sont prêts ! $playerDatafirstPla commence à tirer.';
+  }
+
+  @override
+  String laMancheDeRamiCommence1(Object playersplayerIdsfi) {
+    return 'La manche de Rami commence ! C\'est au tour de $playersplayerIdsfi.';
+  }
+
+  @override
+  String aGagneLaManche1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam heeft de ronde gewonnen!';
+  }
+
+  @override
+  String k3SixConsecutifsLePion1(Object playersplayerIdnam) {
+    return '⚠️ 3 six consécutifs ! Le pion de $playersplayerIdnam retourne à l\'écurie et son tour passe.';
+  }
+
+  @override
+  String aGagne3(Object playersplayerIdnam) {
+    return '$playersplayerIdnam heeft gewonnen!';
+  }
+
+  @override
+  String atteintPoints(Object playersplayerIdnam, Object targetScore) {
+    return '$playersplayerIdnam atteint $targetScore points !';
+  }
+
+  @override
+  String atteintPoints1(Object playerswinnerIdnam, Object targetScore) {
+    return '$playerswinnerIdnam atteint $targetScore points !';
+  }
+
+  @override
+  String mancheTermineeGagneAvecXp(Object playerswinnerIdnam, Object maxXp) {
+    return 'Manche terminée ! $playerswinnerIdnam gagne avec $maxXp XP !';
+  }
+
+  @override
+  String aJoueUneInversionEt1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam speelde een Richtingwissel en mag nog eens!';
+  }
+
+  @override
+  String aInverseLeSensDe1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam heeft de speelrichting omgekeerd!';
+  }
+
+  @override
+  String aSauteLeTourDe1(Object playersplayerIdnam, Object skippedPlayerName) {
+    return '$playersplayerIdnam sloeg de beurt van $skippedPlayerName over!';
+  }
+
+  @override
+  String aEmpileUn2Cumul1(Object playersplayerIdnam, Object pendingDraw2) {
+    return '$playersplayerIdnam stapelde een +2. Totaal: $pendingDraw2 kaarten!';
+  }
+
+  @override
+  String aJoueUn21(Object playersplayerIdnam) {
+    return '$playersplayerIdnam speelde een +2!';
+  }
+
+  @override
+  String aJoueUnJokerEt1(Object playersplayerIdnam, Object chosenColor) {
+    return '$playersplayerIdnam speelde een Keuzekaart en koos de kleur $chosenColor!';
+  }
+
+  @override
+  String aEmpileUn4Cumul1(Object playersplayerIdnam, Object pendingDraw4) {
+    return '$playersplayerIdnam stapelde een +4. Totaal: $pendingDraw4 kaarten!';
+  }
+
+  @override
+  String aJoueUnSuperJoker1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam speelde een Keuzekaart +4!';
+  }
+
+  @override
+  String aPoseSaDerniereCarte1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam speelde de laatste kaart en wint de ronde!';
+  }
+
+  @override
+  String gagneLaMancheAvecPoints(Object playersplayerIdnam, Object roundScore) {
+    return '$playersplayerIdnam wint de ronde met +$roundScore punten!';
+  }
+
+  @override
+  String nAPlusQuUne1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam heeft nog maar één kaart!';
+  }
+
+  @override
+  String passeSonTour4(Object playersplayerIdnam) {
+    return '$playersplayerIdnam passe son tour.';
+  }
+
+  @override
+  String nAPasJoueA5(Object gameDataplayerspla) {
+    return '$gameDataplayerspla speelde niet op tijd, trekt en slaat beurt over.';
+  }
+
+  @override
+  String votreCibleEstEliminezLe1(Object playerDatamercenai) {
+    return 'Votre cible est $playerDatamercenai. Éliminez-le(la) au Jour 1 !';
+  }
+
+  @override
+  String aReponduEtPasseLa(Object gameDataplayerspla, Object cleanAnswer) {
+    return '$gameDataplayerspla antwoordde \'$cleanAnswer\' en gaf de bom door!';
+  }
+
+  @override
+  String aPiocheCarteS(Object playersplayerIdnam, Object pendingDraw) {
+    return '$playersplayerIdnam heeft $pendingDraw kaart(en) getrokken.';
+  }
+
+  @override
+  String aPiocheUneCarteEt2(Object playersplayerIdnam) {
+    return '$playersplayerIdnam heeft een kaart getrokken en kan deze spelen.';
+  }
+
+  @override
+  String aPiocheUneCarteEt3(Object playersplayerIdnam) {
+    return '$playersplayerIdnam heeft een kaart getrokken en slaat beurt over.';
+  }
+
+  @override
+  String nAPas1Carte1(Object playerstargetIdnam) {
+    return '$playerstargetIdnam heeft geen 1 kaart, UNO-oproep ongeldig.';
+  }
+
+  @override
+  String aCrieContreUnoPioche1(
+    Object playerscallerIdnam,
+    Object playerstargetIdnam,
+  ) {
+    return '$playerscallerIdnam riep Tegen-UNO! $playerstargetIdnam trekt 2 kaarten.';
+  }
+
+  @override
+  String aDitUno1(Object playerstargetIdnam) {
+    return '$playerstargetIdnam riep UNO!';
+  }
+
+  @override
+  String get appelUnoInvalide => 'Ongeldige UNO-oproep.';
+
+  @override
+  String aChoisiLaCouleur(Object playersplayerIdnam, Object chosenColor) {
+    return '$playersplayerIdnam a choisi la couleur $chosenColor !';
+  }
+
+  @override
+  String estLeDernierSurvivantEt(Object playerswinnerIdnam) {
+    return '$playerswinnerIdnam est le dernier survivant et remporte Skull !';
+  }
+
+  @override
+  String aRemporte2DefisEt(Object playerschallengerI) {
+    return '$playerschallengerI a remporté 2 défis et gagne la partie !';
+  }
+
+  @override
+  String nouvelleMainEstLeDonneur1(Object playersplayerIdsde) {
+    return 'Nieuwe hand! $playersplayerIdsde is de deler.';
+  }
+
+  @override
+  String poseLaPetiteBlindDe1(
+    Object playerssmallBlindI,
+    Object smallBlindActual,
+  ) {
+    return '$playerssmallBlindI plaatst de small blind van $smallBlindActual.';
+  }
+
+  @override
+  String poseLaGrosseBlindDe1(
+    Object playersbigBlindIdn,
+    Object bigBlindActual,
+  ) {
+    return '$playersbigBlindIdn plaatst de big blind van $bigBlindActual.';
+  }
+
+  @override
+  String seCouche1(Object myDataname) {
+    return '$myDataname past (Fold).';
+  }
+
+  @override
+  String faitTapisAllIn1(Object myDataname) {
+    return '$myDataname gaat all-in!';
+  }
+
+  @override
+  String suitPour(Object myDataname, Object callAmount) {
+    return '$myDataname callt voor $callAmount.';
+  }
+
+  @override
+  String faitTapisAllInEn1(Object myDataname, Object totalBetAmount) {
+    return '$myDataname fait tapis (all-in) en relançant à $totalBetAmount !';
+  }
+
+  @override
+  String relanceA(Object myDataname, Object totalBetAmount) {
+    return '$myDataname verhoogt naar $totalBetAmount.';
+  }
+
+  @override
+  String get abattageShowdown => '--- SHOWDOWN ---';
+
+  @override
+  String gagneLePotParForfait1(Object playerDatawinnersf) {
+    return '$playerDatawinnersf wint de pot door opgave!';
+  }
+
+  @override
+  String gagneNtLePotAvec(Object winnerNames, Object bestHandranknamel1) {
+    return '$winnerNames wint/winnen de pot met $bestHandranknamel1!';
+  }
+
+  @override
+  String aPrisA(Object playerDataplayerId, Object suit) {
+    return '$playerDataplayerId a pris à $suit !';
+  }
+
+  @override
+  String get histoireCollective => 'COLLECTIEF VERHAAL';
+
+  @override
+  String get distance => 'AFSTAND';
+
+  @override
+  String get botte => 'VEILIGHEID';
+
+  @override
+  String get pneuIncrevable => 'Pneu\nIncrevable';
+
+  @override
+  String get increvable => 'LEKVRIJ';
+
+  @override
+  String get citerne => 'TANKER';
+
+  @override
+  String get attaque => 'AANVAL';
+
+  @override
+  String get k50Max => '50 MAX';
+
+  @override
+  String get panneDEssence => 'Fout\nBenzine';
+
+  @override
+  String get vide1 => 'LEEG';
+
+  @override
+  String get parade => 'HERSTEL';
+
+  @override
+  String get roulez => 'RIJDEN';
+
+  @override
+  String get plein => 'VOL';
+
+  @override
+  String get rejouer1 => 'ANTWOORD';
+
+  @override
+  String infecter1(Object targetName) {
+    return '$targetName besmetten?';
+  }
+
+  @override
+  String get action1 => 'ACTIE';
+
+  @override
+  String get action2 => '🔥 ACTIE';
+
+  @override
+  String aRelanceLesDes2(Object pName, Object val) {
+    return '0 herstartte de dobbelstenen (1 /3). $pName $val';
+  }
 }

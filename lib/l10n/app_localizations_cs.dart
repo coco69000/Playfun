@@ -12,13 +12,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get equipesPour => 'Týmy pro {0}';
 
   @override
-  String get equilibrer => 'Rovnováha';
+  String get equilibrer => 'Vyvážit';
 
   @override
   String get equipe => 'Tým';
 
   @override
-  String get retirer => 'Odstranit';
+  String get retirer => 'Odebrat';
 
   @override
   String get joueursNonAssignes => 'Nepřiřazení hráči ({0})';
@@ -30,35 +30,17 @@ class AppLocalizationsCs extends AppLocalizations {
   String get confirmerLesEquipes => 'Potvrdit týmy';
 
   @override
-  String get jeuDeSoiree => 'Večerní zápas';
-
-  @override
-  String get multijoueurEnLigne => 'Multiplayer (online)';
-
-  @override
-  String get modeLocalHorsLigne => 'Lokální režim (offline)';
-
-  @override
-  String get modeMultijoueur => 'Multiplayerový režim';
-
-  @override
-  String get entrezVotrePseudo => 'Zadejte své uživatelské jméno';
-
-  @override
-  String get pseudo => 'Uživatelské ID';
-
-  @override
-  String get creerUnePartie => 'Vytvořte hru';
+  String get entrezVotrePseudo => 'Zadejte svou přezdívku';
 
   @override
   String get veuillezEntrerUnPseudo => 'Zadejte prosím přezdívku.';
 
   @override
-  String get rejoindreUnePartie => 'Připojte se ke hře';
+  String get rejoindreUnePartie => 'Připojit se ke hře';
 
   @override
   String get vousAvezAtteintVotreLimite =>
-      'Dnes jste dosáhli limitu 20 multiplayerových her.';
+      'Dosáhli jste denního limitu 20 hr pro více hráčů.';
 
   @override
   String get pasAssezDePiecesPour =>
@@ -69,14 +51,14 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get pasAssezDePiecesPour1 =>
-      'Není dost mincí na zahájení hledání! Cena: 1 mince.';
+      'Nemáte dost mincí na zahájení hledání! Cena: 1 mince.';
 
   @override
-  String get commentVoulezVousJouer => 'Jak chceš hrát?';
+  String get commentVoulezVousJouer => 'Jak chcete hrát?';
 
   @override
   String get ceJeuRequiertDeConnaitre =>
-      'Tato hra vyžaduje, abyste znali ostatní hráče a není dostupná v veřejném matchmakingu.';
+      'Tato hra vyžaduje znalost ostatních hráčů a není k dispozici ve veřejném vyhledávání.';
 
   @override
   String get historiqueDesThemesIa => 'Historie AI témat';
@@ -85,7 +67,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get pour => 'Za {0}';
 
   @override
-  String get tousLesJeux => 'Všechny zápasy';
+  String get tousLesJeux => 'Všechny hry';
 
   @override
   String get elements => '{0} předmětů';
@@ -94,54 +76,54 @@ class AppLocalizationsCs extends AppLocalizations {
   String get prompt => 'Zadání: \"{0}\"';
 
   @override
-  String get utiliser => 'VYUŽITÍ';
+  String get utiliser => 'POUŽÍT';
 
   @override
   String get packActiveElements =>
       '✨ Balíček \'\'{0}\' aktivován ({1} předmětů)!';
 
   @override
-  String get fusionner => 'SLOUČENÍ';
+  String get fusionner => 'SLOUČIT';
 
   @override
   String get themesFusionnesLePackActif =>
       '✨ Sloučená témata! Aktivní balíček nyní obsahuje {0} předměty.';
 
   @override
-  String get modifierCompleter => 'Edit / Kompletně';
+  String get modifierCompleter => 'Upravit / Dokončit';
 
   @override
-  String get modifierLeTheme => 'Změna tématu';
+  String get modifierLeTheme => 'Změnit téma';
 
   @override
   String get titreDuThemeIaPersonnalise => 'Název tématu (AI / Vlastní)';
 
   @override
-  String get ajouterUnMot => 'Přidejte slovo...';
+  String get ajouterUnMot => 'Přidat slovo...';
 
   @override
-  String get enregistrerSurFirebase => 'Uložit na Firebase';
+  String get enregistrerSurFirebase => 'Uložit do Firebase';
 
   @override
-  String get creerUnePartie1 => 'Vytvořte hru';
+  String get creerUnePartie1 => 'Vytvořit hru';
 
   @override
-  String get jeuSelectionne => 'Vybraný zápas';
+  String get jeuSelectionne => 'Vybraná hra';
 
   @override
   String get difficulte => 'Obtížnost';
 
   @override
-  String get remplaceParLeThemeIa => 'Nahrazeno AI tématem';
+  String get remplaceParLeThemeIa => 'Nahrazeno tématem AI';
 
   @override
-  String get soft => 'Měkké';
+  String get soft => 'Mírný';
 
   @override
-  String get hard => 'Tvrdě';
+  String get hard => 'Drsný';
 
   @override
-  String get hardcore => 'Hardcore';
+  String get hardcore => 'Extrém';
 
   @override
   String get generationIa => 'Generování AI: {0}';
@@ -150,7 +132,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get historique => 'Historie';
 
   @override
-  String get melangerPlusieursThemes => 'Smíchejte několik témat:';
+  String get melangerPlusieursThemes => 'Smíchat více témat:';
 
   @override
   String get combineS => '✨ {0 dohromady}';
@@ -162,11 +144,11 @@ class AppLocalizationsCs extends AppLocalizations {
   String get minRequisRecommande => 'Požadovaná minuta: {0} | Doporučeno: {1}';
 
   @override
-  String get ambianceTonaliteDeJeu => 'Nálada / Tón hraní:';
+  String get ambianceTonaliteDeJeu => 'Atmosféra / Tón hry:';
 
   @override
   String get precisionsOuIdeesSupplementairesOptionnel =>
-      'Další upřesnění nebo nápady (volitelné)';
+      'Podrobnosti nebo další nápady (volitelné)';
 
   @override
   String get elementsGeneresEtSauvegardes =>
@@ -181,7 +163,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get desactiverCePack => 'Deaktivujte tento balíček';
+  String get desactiverCePack => 'Zakázat tento balíček';
 
   @override
   String get modeDeJeu => 'Herní režim';
@@ -190,17 +172,17 @@ class AppLocalizationsCs extends AppLocalizations {
   String get normal => 'Normální';
 
   @override
-  String get complement => 'Komplement';
+  String get complement => 'Doplněk';
 
   @override
-  String get briseGlace => 'Ledoborec';
+  String get briseGlace => 'Prolomení ledů';
 
   @override
-  String get parametreAjouter1 => 'Parametr \'Add 1\'';
+  String get parametreAjouter1 => 'Nastavení \'Přidat 1\'';
 
   @override
   String get chacunCompleteLeMemeDessin =>
-      'Každý z nich dokončuje stejný počáteční nákres místo osnovy.';
+      'Každý dokončuje stejnou počáteční kresbu místo řetězce.';
 
   @override
   String get scoreCible => 'Cílové skóre';
@@ -223,48 +205,48 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get chacunRaconteUneHistoireLes =>
-      'Každý vypráví příběh, ostatní hlasují pro pravdu nebo lež.';
+      'Každý vypráví příběh, ostatní hlasují Pravda nebo Lež.';
 
   @override
-  String get modeDeVote => 'Způsob hlasování';
+  String get modeDeVote => 'Režim hlasování';
 
   @override
-  String get simultane => 'Současně';
+  String get simultane => 'Současné';
 
   @override
-  String get tourParTour => 'Tah za krokem';
+  String get tourParTour => 'Na střídačku';
 
   @override
-  String get categoriesDuPetitBac => 'Kategorie Petit Bac';
+  String get categoriesDuPetitBac => 'Kategorie Jméno, město, zvíře';
 
   @override
   String get ajouterUneCategorie => 'Přidat kategorii';
 
   @override
-  String get varianteRevolution => 'Revoluce varianta';
+  String get varianteRevolution => 'Varianta Revoluce';
 
   @override
   String get siUnJoueurPoseUn =>
-      'Pokud hráč položí čtyřku stejného pořádku, pořadí karet se po zbytek kola obrátí.';
+      'Pokud hráč zahraje poker (čtveřici), pořadí karet se po zbytek kola obrátí.';
 
   @override
-  String get seulement30Traits => 'Pouze 30 úderů';
+  String get seulement30Traits => 'Pouze 30 tahů';
 
   @override
   String get leDessinateurEstLimiteA =>
-      'Karikaturista je omezen na maximálně 30 tahů na kresbu.';
+      'Kreslíř je omezen na maximálně 30 tahů na kresbu.';
 
   @override
   String get variante => 'Varianta';
 
   @override
-  String get classiqueSurrealiste => 'Klasika (surrealistická)';
+  String get classiqueSurrealiste => 'Klasický (Surrealistický)';
 
   @override
-  String get suite3DerniersMots => 'Pokračování (poslední 3 slova)';
+  String get suite3DerniersMots => 'Pokračování (Poslední 3 slova)';
 
   @override
-  String get modeDeTransmission => 'Způsob přenosu';
+  String get modeDeTransmission => 'Režim přenosu';
 
   @override
   String get k1FeuillePartagee => '1 sdílený list';
@@ -274,14 +256,14 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get autoriserLesIndicesInvalidesSimplifie =>
-      'Povolit neplatné indexy (zjednodušeně)';
+      'Povolit neplatné nápovědy (zjednodušené)';
 
   @override
   String get lesIndicesIdentiquesSerontToujours =>
-      'Identické stopy budou vždy odstraněny, ale ne ty, které jsou příliš blízké slovu.';
+      'Identické nápovědy budou vyřazeny, ale ne ty příliš blízké slovu.';
 
   @override
-  String get configurationDesRoles => 'Konfigurace role';
+  String get configurationDesRoles => 'Nastavení rolí';
 
   @override
   String get totalDesRolesSelectionnesMinimum =>
@@ -291,11 +273,11 @@ class AppLocalizationsCs extends AppLocalizations {
   String get parametresDuJeu => 'Nastavení hry';
 
   @override
-  String get chronoGlobalBombe => 'Globální časovač (bomba)';
+  String get chronoGlobalBombe => 'Globální časovač (Bomba)';
 
   @override
   String get leTempsNeSeReinitialise =>
-      'Čas se pro každého hráče neresetuje. Brambora na konci exploduje!';
+      'Čas se neresetuje pro každého hráče. Brambora na konci vybouchne!';
 
   @override
   String get dureeDeLaBombeS => 'Doba trvání bomby: {0} s';
@@ -310,33 +292,33 @@ class AppLocalizationsCs extends AppLocalizations {
   String get k1Description => '1 (Popis)';
 
   @override
-  String get k21Mot => '2 (+ 1 slovo)';
+  String get k21Mot => '2 (+ 1 Slovo)';
 
   @override
-  String get k3Mime => '3 (+ mím)';
+  String get k3Mime => '3 (+ Pantomima)';
 
   @override
-  String get jouerParEquipesMode2v2 => 'Týmová hra (režim 2v2+)';
+  String get jouerParEquipesMode2v2 => 'Hrát v týmech (Režim 2v2+)';
 
   @override
   String get unJoueurDevineSonEquipe =>
-      'Hráč hádá, jeho tým mu pomůže, soupeř kontroluje.';
+      'Jeden hráč hádá, jeho tým pomáhá, soupeřící tým kontroluje.';
 
   @override
   String get equipes2v2 => 'Týmy 2v2';
 
   @override
   String get necessiteExactement4JoueursVous =>
-      'Vyžaduje přesně 4 hráče. Pomáháte hráči před sebou.';
+      'Vyžaduje přesně 4 hráče. Pomáháte hráči naproti vám.';
 
   @override
-  String get parametresDominos => 'Domino Settings';
+  String get parametresDominos => 'Nastavení domina';
 
   @override
-  String get modeDeJeu1 => 'Herní režim:';
+  String get modeDeJeu1 => 'Herní mód:';
 
   @override
-  String get pioche => 'Draw';
+  String get pioche => 'Tahání';
 
   @override
   String get bloque => 'Blokováno';
@@ -348,26 +330,26 @@ class AppLocalizationsCs extends AppLocalizations {
   String get scoreCible1 => 'Cílové skóre: {0}';
 
   @override
-  String get parametresUno => 'Parametry Uno';
+  String get parametresUno => 'Nastavení Uno';
 
   @override
-  String get cartesDeDepart => 'Startovní karty:';
+  String get cartesDeDepart => 'Počáteční karty:';
 
   @override
-  String get empilementDesCartes24 => 'Skládání karet +2/+4';
+  String get empilementDesCartes24 => 'Sčítání karet +2/+4';
 
   @override
   String get permetDeJouerUn2 =>
-      'Umožňuje vám zahrát +2 na +2 (nebo +4 na +2/+4) pro další tah.';
+      'Umožňuje zahrát +2 na +2 (nebo +4 na +2/+4), aby soupeř táhl více karet.';
 
   @override
-  String get parametresPhotoRoulette => 'Nastavení foto rulety';
+  String get parametresPhotoRoulette => 'Nastavení Photo Roulette';
 
   @override
-  String get typeDeMedia => 'Typ média';
+  String get typeDeMedia => 'Typ médií';
 
   @override
-  String get photos => 'Fotografie';
+  String get photos => 'Fotky';
 
   @override
   String get videos => 'Videa';
@@ -382,14 +364,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String get photosPiocheesParJoueur => 'Fotografie pořízené hráčem: {0}';
 
   @override
-  String get parametresActionOuVerite => 'Svět Pravda nebo Výzva';
+  String get parametresActionOuVerite => 'Nastavení Vadí nevadí';
 
   @override
-  String get lesJoueursEcriventLesDefis => 'Hráči si zapisují výzvy';
+  String get lesJoueursEcriventLesDefis => 'Hráči píší výzvy';
 
   @override
   String get unJoueurAleatoireEcritLe =>
-      'Náhodný hráč napíše výzvu místo předem dané výzvy.';
+      'Náhodný hráč napíše úkol místo předdefinovaného.';
 
   @override
   String get nombreDeTours => 'Počet kol: {0}';
@@ -404,86 +386,85 @@ class AppLocalizationsCs extends AppLocalizations {
   String get rolesDeBase => 'Základní role';
 
   @override
-  String get nombreDInfiltres => 'Počet infiltrátorů';
+  String get nombreDInfiltres => 'Počet Špiónů';
 
   @override
-  String get nombreDeMrWhite => 'Číslo pana Whitea';
+  String get nombreDeMrWhite => 'Počet Mr. White';
 
   @override
   String get totalImposteursLaRepartitionFinale =>
       'Celkový počet podvodníků: {0}. Konečné rozdělení bude v případě potřeby upraveno tak, aby bylo zaručeno alespoň 1 civilisty.';
 
   @override
-  String get rolesSpeciauxOptionnel => 'Speciální role (volitelné)';
+  String get rolesSpeciauxOptionnel => 'Speciální role (Volitelné)';
 
   @override
-  String get fouDeJoie => 'Blázen radostí';
+  String get fouDeJoie => 'Blázen radosti';
 
   @override
-  String get gagne4PointsSIl => 'Získává +4 body, pokud je vyřazen jako první.';
+  String get gagne4PointsSIl => 'Získá +4 body, pokud je vyřazen jako první.';
 
   @override
   String get boomerang => 'Bumerang';
 
   @override
-  String get la1ereFoisQuIl => 'Při prvním hlasování se hlasy vrátí.';
+  String get la1ereFoisQuIl => 'Při 1. hlasování proti němu se hlasy odrazí.';
 
   @override
   String get deesseDeLaJustice => 'Bohyně spravedlnosti';
 
   @override
-  String get trancheEnCasDEgalite =>
-      'Rozhodněte v případě remízy, i když je to mrtvé.';
+  String get trancheEnCasDEgalite => 'Rozhoduje v případě remízy, i po smrti.';
 
   @override
   String get fantome => 'Duch';
 
   @override
-  String get peutToujoursVoterApresSon => 'Po vyřazení můžete stále hlasovat.';
+  String get peutToujoursVoterApresSon =>
+      'Může stále hlasovat i po svém vyřazení.';
 
   @override
-  String get amoureux5Joueurs => 'Lovers (5+ hráčů)';
+  String get amoureux5Joueurs => 'Zamilovaní (5+ hráčů)';
 
   @override
-  String get siLUnEstElimine => 'Pokud je jeden odstraněn, je vyřazen i druhý.';
+  String get siLUnEstElimine => 'Pokud je jeden vyřazen, druhý také.';
 
   @override
-  String get mrMeme => 'Pan Meme';
+  String get mrMeme => 'Mr. Meme';
 
   @override
   String get unJoueurDevraMimerSon =>
-      'Hráč musí každý tah předvádět nápovědu pantomímou.';
+      'Jeden hráč musí v každém kole předvést nápovědu pantomimou.';
 
   @override
-  String get vendeurDeFalafels4Joueurs => 'Prodejce falafelu (4+ hráčů)';
+  String get vendeurDeFalafels4Joueurs => 'Prodejce Falafelu (4+ hráčů)';
 
   @override
   String get recoitUnPouvoirSpecialAleatoire =>
-      'Získá náhodnou speciální schopnost.';
+      'Získá náhodnou zvláštní schopnost.';
 
   @override
-  String get vengeuse5Joueurs => 'Avenger (5+ hráčů)';
+  String get vengeuse5Joueurs => 'Mstitelka (5+ hráčů)';
 
   @override
-  String get elimineQuelquUnEnEtant =>
-      'Vyřadit někoho tím, že budete vyřazeni.';
+  String get elimineQuelquUnEnEtant => 'Vyřadí někoho, když je vyřazena.';
 
   @override
-  String get duellistes5Joueurs => 'Duelanti (5+ hráčů)';
+  String get duellistes5Joueurs => 'Duelisté (5+ hráčů)';
 
   @override
   String get duelSecretPourDesPoints =>
-      'Tajný duel pro bonusové/penalizační body.';
+      'Tajný souboj o bonusové či trestné body.';
 
   @override
-  String get parametresGeneraux => 'Obecné prostředí';
+  String get parametresGeneraux => 'Obecná nastavení';
 
   @override
   String get activerLeTimer => 'Zapnout časovač';
 
   @override
   String get siDesactiveLeJeuN =>
-      'Pokud je hra vypnutá, automaticky se neposune dál';
+      'Pokud je zakázáno, hra nepokračuje automaticky';
 
   @override
   String get dureeDeReponseParJoueur => 'Reakční doba na hráče: {0}s';
@@ -493,14 +474,14 @@ class AppLocalizationsCs extends AppLocalizations {
       'Doba trvání zobrazených výsledků: {0}s';
 
   @override
-  String get communicationEnLigne => 'Komunikace (online)';
+  String get communicationEnLigne => 'Komunikace (Online)';
 
   @override
-  String get voixUniquementAudio => 'Pouze hlas (audio)';
+  String get voixUniquementAudio => 'Pouze hlas (Zvuk)';
 
   @override
   String get activeLeMicroSansLa =>
-      'Ztlumit bez kamery (vypnout lokální režim)';
+      'Zapne mikrofon bez kamery (Vypíná lokální režim)';
 
   @override
   String get parametresDeRecherchePublique => 'Nastavení veřejného vyhledávání';
@@ -511,16 +492,16 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get activeLesBoutonsDeRecherche =>
-      'Aktivujte globální tlačítka vyhledávání, abyste si mohli hrát s cizími lidmi.';
+      'Aktivuje globální vyhledávání pro hru s cizími hráči.';
 
   @override
   String get monPays => 'Moje země';
 
   @override
-  String get leMonde => 'Svět';
+  String get leMonde => 'Celý svět';
 
   @override
-  String get peuImporte => 'Na tom nezáleží';
+  String get peuImporte => 'Cokoli';
 
   @override
   String get avecVideo => 'S videem';
@@ -529,56 +510,54 @@ class AppLocalizationsCs extends AppLocalizations {
   String get sansVideo => 'Bez videa';
 
   @override
-  String get lancerLeJeu => 'SPUSŤTE HRU';
+  String get lancerLeJeu => 'SPUSTIT HRU';
 
   @override
   String get leCodeDoitComporter6 => 'Kód musí mít 6 číslic.';
 
   @override
-  String get codeDePartieInvalideOu =>
-      'Neplatný kód hry nebo hra už byla spuštěna.';
+  String get codeDePartieInvalideOu => 'Neplatný kód nebo hra již začala.';
 
   @override
   String get pasAssezDePiecesPour2 =>
-      'Není dost mincí na vstup do hry! Cena: 1 mince.';
+      'Nedostatek mincí pro připojení k této hře! Cena: 1 mince.';
 
   @override
   String get vousRejoignezUnePartieVip =>
-      'Připojíte se do VIP hry, je to zdarma!';
+      'Připojujete se k VIP hře, je to zdarma!';
 
   @override
-  String get impossibleDeRejoindreLaPartie => 'Není možné se do hry připojit.';
+  String get impossibleDeRejoindreLaPartie => 'Nelze se připojit ke hře.';
 
   @override
   String get erreurDeConnexion => 'Chyba připojení.';
 
   @override
-  String get rejoindreUnePartie1 => 'Připojte se ke hře';
+  String get rejoindreUnePartie1 => 'Připojit se ke hře';
 
   @override
-  String get codeDeLaPartie6 => 'Kód části (6 číslic)';
+  String get codeDeLaPartie6 => 'Kód hry (6 číslic)';
 
   @override
-  String get rejoindre => 'Přidejte se';
+  String get rejoindre => 'Připojit se';
 
   @override
-  String get salonPrive => 'Soukromý pokoj';
+  String get salonPrive => 'Soukromý salón';
 
   @override
-  String get erreurDeConnexionAuSalon =>
-      'Chyba při připojení do obývacího pokoje.';
+  String get erreurDeConnexionAuSalon => 'Chyba při připojování k salónu.';
 
   @override
-  String get laPartieNExistePlus => 'Hra už neexistuje.';
+  String get laPartieNExistePlus => 'Hra již neexistuje.';
 
   @override
   String get laPartieCommence => 'Hra začíná...';
 
   @override
-  String get partagezCeCodeAvecVos => 'SDÍLEJTE TENTO KÓD SE SVÝMI PŘÁTELI';
+  String get partagezCeCodeAvecVos => 'SDÍLEJTE TENTO KÓD S PŘÁTELI';
 
   @override
-  String get codeDeSalonCopie => 'Zkopírovaný kód obchodní místnosti!';
+  String get codeDeSalonCopie => 'Kód salónu zkopírován!';
 
   @override
   String get difficulte1 => 'Obtížnost: {0}';
@@ -590,22 +569,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get scoreDeSessionVictoires => 'Skóre sezení: {0} výhry';
 
   @override
-  String get pret => 'Připraveno';
+  String get pret => 'Připraven';
 
   @override
-  String get profilOptions => 'Profil a možnosti';
+  String get profilOptions => 'Profil a Možnosti';
 
   @override
-  String get inviterMesAmis => 'Pozvěte mé přátele';
+  String get inviterMesAmis => 'Pozvat přátele';
 
   @override
-  String get vousNAvezPasEncore => 'Ještě nemáš žádné přátele!';
+  String get vousNAvezPasEncore => 'Zatím nemáte žádné přátele!';
 
   @override
-  String get inviterAuSalon => 'Pozvánka na pořad';
+  String get inviterAuSalon => 'Pozvat do salónu';
 
   @override
-  String get inviter => 'Pozvánka';
+  String get inviter => 'Pozvat';
 
   @override
   String get invitationEnvoyeeA => 'Pozvánka odeslána na {0} !';
@@ -614,29 +593,28 @@ class AppLocalizationsCs extends AppLocalizations {
   String get erreur => 'Chyba: {0}';
 
   @override
-  String get demarrerLaPartie => 'Začněte hru';
+  String get demarrerLaPartie => 'Zahájit hru';
 
   @override
   String get enAttenteDeLHote => 'Čekám, až se host spustí...';
 
   @override
-  String get quitterLaPartie => 'Odejít ze hry?';
+  String get quitterLaPartie => 'Opustit hru?';
 
   @override
-  String get siVousQuittezVotrePlace =>
-      'Pokud odejdete, vaše místo bude uvolněné.';
+  String get siVousQuittezVotrePlace => 'Pokud odejdete, vaše místo se uvolní.';
 
   @override
-  String get rester => 'Zůstaň';
+  String get rester => 'Zůstat';
 
   @override
-  String get quitter => 'Východ';
+  String get quitter => 'Odejít';
 
   @override
-  String get votreIdentite => 'VAŠE IDENTITA';
+  String get votreIdentite => 'TVOJE IDENTITA';
 
   @override
-  String get capacites => 'Kapacity:';
+  String get capacites => 'Schopnosti:';
 
   @override
   String get phaseDeJeuInconnue => 'Neznámá fáze hry: {0}';
@@ -648,7 +626,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get victoireDes => 'Vítězství pro {0} !';
 
   @override
-  String get rejouer => 'Opakovaný záběr';
+  String get rejouer => 'Hrát znovu';
 
   @override
   String get resultatDuVote => 'Výsledek hlasování';
@@ -663,29 +641,29 @@ class AppLocalizationsCs extends AppLocalizations {
   String get continuer => 'Pokračovat';
 
   @override
-  String get enAttenteDeLHote1 => 'Čekám na hostitele...';
+  String get enAttenteDeLHote1 => 'Čekání na hostitele...';
 
   @override
-  String get laVengeuseChoisitSaCible => 'Avenger si vybírá svůj cíl...';
+  String get laVengeuseChoisitSaCible => 'Mstitelka si vybírá cíl...';
 
   @override
   String get vengeance => 'Pomsta!';
 
   @override
-  String get tuAsEteElimineE => 'Byl jsi vyřazen. Vezmi si někoho s sebou!';
+  String get tuAsEteElimineE => 'Byl jsi vyřazen. Vezmi někoho s sebou!';
 
   @override
   String get fermer => 'Zavřít';
 
   @override
-  String get tonIndiceUnMot => 'Tvůj vodítko (jedno slovo)';
+  String get tonIndiceUnMot => 'Tvoje nápověda (jedno slovo)';
 
   @override
-  String get valider => 'Validovat';
+  String get valider => 'Potvrdit';
 
   @override
   String get indiceEnvoyeEnAttenteDes =>
-      '✅ Nápověda odeslána! Čekám na ostatní hráče...';
+      '✅ Nápověda odeslána! Čeká se na ostatní...';
 
   @override
   String get phaseDeDiscussion => 'Fáze diskuse';
@@ -694,29 +672,30 @@ class AppLocalizationsCs extends AppLocalizations {
   String get soupconne => '👀 {0} podezřelých {1}';
 
   @override
-  String get lancerLeVote => 'Začněte hlasování';
+  String get lancerLeVote => 'Zahájit hlasování';
 
   @override
-  String get debattezLHoteLanceraLe => 'Debata! Moderátor začne hlasování.';
+  String get debattezLHoteLanceraLe => 'Diskutujte! Hostitel zahájí hlasování.';
 
   @override
-  String get aQuiLaSentence => 'Komu ten trest?';
+  String get aQuiLaSentence => 'Komu patří rozsudek?';
 
   @override
-  String get voteEnregistreEnAttente => 'Zaznamenané hlasování. Čeká na to...';
+  String get voteEnregistreEnAttente => 'Hlas zaznamenán. Čeká se...';
 
   @override
-  String get vousNePouvezPasVoter => 'Nemůžete volit.';
+  String get vousNePouvezPasVoter => 'Nemůžeš hlasovat.';
 
   @override
-  String get appuieSurLaBulleD => 'Klepněte na bublinu hráče a hlasujete.';
+  String get appuieSurLaBulleD => 'Klepnutím na bublinu hráče zahlasuješ.';
 
   @override
   String get permissionRefuseeImpossibleDAcceder =>
-      'Povolení zamítnuto. Nemohu se dostat do galerie.';
+      'Oprávnění odepřeno. Nelze získat přístup ke galerii.';
 
   @override
-  String get aucunAlbumMediaTrouve => 'Žádná mediální alba nebyla nalezena.';
+  String get aucunAlbumMediaTrouve =>
+      'Nebyl nalezen žádný multimediální album.';
 
   @override
   String get votreGalerieEstVide => 'Vaše galerie je prázdná.';
@@ -725,32 +704,32 @@ class AppLocalizationsCs extends AppLocalizations {
   String get erreurLorsDeLaSelection => 'Chyba při výběru fotografií: {0}';
 
   @override
-  String get preparationDeLaPartie => 'Příprava na zápas';
+  String get preparationDeLaPartie => 'Příprava hry';
 
   @override
   String get lApplicationVaSelectionnerPhotos =>
       'Aplikace vybere {0} náhodné fotografie z vaší galerie.';
 
   @override
-  String get vousEtesPret => 'Jsi připravený!';
+  String get vousEtesPret => 'Jste připraveni!';
 
   @override
-  String get enAttenteDesAutresJoueurs => 'Čeká na ostatní hráče...';
+  String get enAttenteDesAutresJoueurs => 'Čekání na ostatní hráče...';
 
   @override
-  String get autoriserEtLancerLaSelection => 'Výběr Povolit a Startovat';
+  String get autoriserEtLancerLaSelection => 'Povolit a spustit výběr';
 
   @override
   String get joueursPrets => 'Připravení hráči: {0} / {1}';
 
   @override
-  String get chargementDeLaPhoto => 'Načítání fotografie...';
+  String get chargementDeLaPhoto => 'Načítání fotky...';
 
   @override
-  String get aQuiEstCettePhoto => 'Čí je ta fotka?';
+  String get aQuiEstCettePhoto => 'Čí je to fotka?';
 
   @override
-  String get calculDesResultats => 'Počítám výsledky...';
+  String get calculDesResultats => 'Počítání výsledků...';
 
   @override
   String get laPhotoEtaitA => 'Ta fotka byla... {0} !';
@@ -768,13 +747,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get points => '{0}. {1}: {2} bodů';
 
   @override
-  String get retourALAccueil => 'Zpět domů';
+  String get retourALAccueil => 'Zpět na domů';
 
   @override
-  String get laPartieAEteTerminee => 'Hra byla dokončena nebo už neexistuje.';
+  String get laPartieAEteTerminee => 'Hra byla ukončena nebo již neexistuje.';
 
   @override
-  String get quitterLaPartie1 => 'Odchod ze hry';
+  String get quitterLaPartie1 => 'Odejít ze hry';
 
   @override
   String get jeuDe => 'Hra {0}';
@@ -783,7 +762,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get objectifPts => 'Gól: {0} bodů';
 
   @override
-  String get blancMangerCoco => 'BÍLÁ JEZÍ KOKOS';
+  String get blancMangerCoco => 'BLANC MANGER COCO';
 
   @override
   String get enAttenteDesCartesDes => 'Čekání na karty hráčů...';
@@ -799,16 +778,18 @@ class AppLocalizationsCs extends AppLocalizations {
       'Čekání na ostatní hráče ({0} / {1})...';
 
   @override
-  String get choisissezVotreMeilleureReponse => 'Vyberte si nejlepší odpověď:';
+  String get choisissezVotreMeilleureReponse =>
+      'Vyberte svou nejlepší odpověď:';
 
   @override
   String get leJugeHesiteSur => 'Soudce váhá na: \" {0} \"';
 
   @override
-  String get envoyerUnMessageOuProposer => 'Pošli zprávu nebo navrhni slovo...';
+  String get envoyerUnMessageOuProposer =>
+      'Odeslat zprávu nebo navrhnout slovo...';
 
   @override
-  String get alerteAdministrateur => 'Upozornění na administrátora';
+  String get alerteAdministrateur => 'Upozornění administrátora';
 
   @override
   String get neJouePlusVoulezVous =>
@@ -816,17 +797,17 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get noteCeJeuNecessiteUn =>
-      '⚠️ Poznámka: Tato hra vyžaduje osobní radu. Počítač přeskočí svůj tah, pokud si ho ponechá.';
+      'Poznámka: Tato hra vyžaduje osobní názor. Počítač přeskočí svůj tah.';
 
   @override
-  String get conserverAvecLIa => 'Šetření pomocí AI';
+  String get conserverAvecLIa => 'Ponechat s AI';
 
   @override
-  String get expulser => 'Deportace';
+  String get expulser => 'Vyhodit';
 
   @override
   String get vousAvezEteExcluDe =>
-      'Byli jste vyloučeni ze hry kvůli neaktivitě. Počítač hraje za vás (výhra vám nebude přidělena).';
+      'Byli jste vyřazeni pro neaktivitu. Počítač hraje za vás (žádné odměny).';
 
   @override
   String get s => '{0} s';
@@ -842,7 +823,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get nAPlusDeCartes => 'Už nemá žádné karty';
+  String get nAPlusDeCartes => 'Nemá žádné karty';
 
   @override
   String get cartesRestantes => '{zbývá 0} karet';
@@ -857,66 +838,65 @@ class AppLocalizationsCs extends AppLocalizations {
   String get k13Remplies => '{0}/13 vyplněno';
 
   @override
-  String get finDeLaManche => 'Konec kanálu!';
+  String get finDeLaManche => 'Konec kola!';
 
   @override
   String get mancheSuivante => 'Další kolo';
 
   @override
-  String get enAttenteDeLHote2 => 'Čekáme na moderátora dalšího kola...';
+  String get enAttenteDeLHote2 => 'Čekání na hostitele pro další kolo...';
 
   @override
-  String get revelezVos2PremieresCartes => 'ODHALTE SVÉ PRVNÍ 2 KARTY';
+  String get revelezVos2PremieresCartes => 'OTOČTE SVÉ PRVNÍ 2 KARTY';
 
   @override
   String get vide => 'Prázdné';
 
   @override
-  String get defausse => 'ODHOZENÍ';
+  String get defausse => 'ODKLÁDACÍ BALÍČEK';
 
   @override
-  String get pioche1 => 'KRUMPÁČ';
+  String get pioche1 => 'LÍZAT';
 
   @override
-  String get piochee => 'KRUMPÁČ';
+  String get piochee => 'LÍZNUTÁ';
 
   @override
-  String get garderRemplacer => 'ZACHOVAT & NAHRAZOVAT';
+  String get garderRemplacer => 'PONECHAT A VYMĚNIT';
 
   @override
-  String get jeterDevoiler => 'HOĎ & ODHALUJ';
+  String get jeterDevoiler => 'ODLOŽIT A ODHALIT';
 
   @override
   String get cetteCarteEstDejaVisible =>
-      'Tato karta je už viditelná! Vyberte skrytou kartu.';
+      'Tato karta je již otočená! Zvolte skrytou kartu.';
 
   @override
-  String get aucunAlbumAAfficher => 'Žádná alba k vystavení.';
+  String get aucunAlbumAAfficher => 'Žádná alba k zobrazení.';
 
   @override
-  String get vernissage => 'Otevírám!';
+  String get vernissage => 'Vernisáž!';
 
   @override
   String get albumDe => 'Album {0}';
 
   @override
-  String get prec => 'Předchozí';
+  String get prec => 'Předch.';
 
   @override
   String get album => 'Album {0} / {1}';
 
   @override
-  String get suiv => 'Další.';
+  String get suiv => 'Další';
 
   @override
-  String get devineCeQueRepresenteCe =>
-      'Hádejte, co tento obrázek představuje:';
+  String get devineCeQueRepresenteCe => 'Uhodni, co tato kresba znázorňuje:';
 
   @override
-  String get ecrisTaPhrase => 'Napiš si větu...';
+  String get ecrisTaPhrase => 'Napiš svou větu...';
 
   @override
-  String get ouvrirLaZoneDeDessin => 'Otevřete kreslící plochu';
+  String get ouvrirLaZoneDeDessin => 'Otevřít kreslicí plochu';
 
   @override
   String get etatGribouillisInconnu => 'Neznámý stav čmáranice: {0}';
@@ -934,29 +914,29 @@ class AppLocalizationsCs extends AppLocalizations {
   String get motCible => 'CÍLOVÉ SLOVO';
 
   @override
-  String get interdits => 'ZAKÁZÁNO';
+  String get interdits => 'ZAKÁZANÁ SLOVA';
 
   @override
-  String get passer => 'Přeskočit';
+  String get passer => 'Pas';
 
   @override
-  String get trouve => 'NALEZENO!';
+  String get trouve => 'UHODNUTO!';
 
   @override
-  String get buzzMotInterdit => 'BZUČENÍ! (ZAKÁZANÉ SLOVO)';
+  String get buzzMotInterdit => 'BZZZ! (ZAKÁZANÉ SLOVO)';
 
   @override
   String get ecoutezAttentivementEtProposezVos =>
-      '💬 Poslouchejte pozorně a nabídněte své odpovědi!';
+      '💬 Poslouchejte pozorně a hádejte!';
 
   @override
-  String get finDuTour => '⏳ Konec prohlídky...';
+  String get finDuTour => '⏳ Konec kola...';
 
   @override
   String get estResteAvecLeZombie => '{0} zůstal se Zombie v rukou!';
 
   @override
-  String get retourAuSalon => 'Zpět k pořadu';
+  String get retourAuSalon => 'Zpět do lobby';
 
   @override
   String get zombieEnMain => 'ZOMBIE V RUCE';
@@ -972,39 +952,38 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get lesPairesSontDefausseesAutomatiquement =>
-      'Páry jsou automaticky odhazovány';
+      'Páry se automaticky odhazují';
 
   @override
-  String get carteSEnJeu => 'Map(y) ve hře:';
+  String get carteSEnJeu => 'Karta/karty ve hře:';
 
   @override
-  String get aucuneCarteEnJeuJouez => 'Žádné karty ve hře. Hrajte, co chcete!';
+  String get aucuneCarteEnJeuJouez =>
+      'Žádná karta ve hře. Zahrajte, co chcete!';
 
   @override
   String get jouer => 'Hrát ({0})';
 
   @override
   String get priseEnChaineVousDevez =>
-      '⚠️ Chain Hold! Musíš znovu přehrát blikajícího pěšce.';
-
-  @override
-  String get aSelectionneSonPionEt => '{0} si vybral pěšce a myslí si...';
+      '⚠️ Vícenásobné braní! Musíte pokračovat s blikající figurkou.';
 
   @override
   String get vousDevezSelectionnerLePion =>
-      'Musíte vybrat oranžově zvýrazněný žeton.';
+      'Musíte vybrat figurku zvýrazněnou oranžově.';
 
   @override
   String get jeuNonImplemente => 'Neimplementovaná hra: {0}';
 
   @override
-  String get tempsEcoule => 'Čas uplynul!';
+  String get tempsEcoule => 'Čas vypršel!';
 
   @override
-  String get tourSuivant => 'Další kolo';
+  String get tourSuivant => 'Další tah';
 
   @override
-  String get enAttenteDeLHote3 => 'Čekám, až moderátor začne další kolo...';
+  String get enAttenteDeLHote3 =>
+      'Čeká se na hostitele pro zahájení dalšího tahu...';
 
   @override
   String get equipeAPts => 'Tým A: {bodů} bodů';
@@ -1013,7 +992,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get equipeBPts => 'B tým: {bodů} bodů';
 
   @override
-  String get cEstAToiDe => 'Je na VÁS, abyste uhodli!';
+  String get cEstAToiDe => 'Ty jsi na řadě hádat!';
 
   @override
   String get passer1 => 'PŘESKOČIT';
@@ -1022,16 +1001,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get motsTrouves => 'Nalezená slova: {0}';
 
   @override
-  String get ecrivezIci => 'Piš sem...';
+  String get ecrivezIci => 'Pište sem...';
 
   @override
-  String get plierPasser => 'FOLD & PASS';
+  String get plierPasser => 'SLOŽIT A PŘEDAT';
 
   @override
   String get motsRediges => '✏️ {0} slov napsaných...';
 
   @override
-  String get leGrandDepliage => 'Velké rozvíjení!';
+  String get leGrandDepliage => 'Velké rozbalení!';
 
   @override
   String get voiciLesUvresCollectivesNees =>
@@ -1052,74 +1031,74 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get aucuneBotte => 'Bez bot';
+  String get aucuneBotte => 'Žádné bezpečnostní karty';
 
   @override
   String get limite50 => 'LIMIT 50';
 
   @override
-  String get crevaison => 'PLOCHÉ TRUBKY';
+  String get crevaison => 'DEFEKT PNEUMATIKY';
 
   @override
   String get panneEssence => 'BEZ BENZÍNU';
 
   @override
   String get touchezPourJouerRestezAppuye =>
-      'Klepněte pro přehrávání • Stiskněte a podržte pro odhození';
+      'Klepnutím zahrajete • Podržením odhodíte';
 
   @override
   String get km2 => 'KM';
 
   @override
-  String get choisirLaCible => 'Volba cíle';
+  String get choisirLaCible => 'Vyberte cíl';
 
   @override
   String get placezVotreFlotte => 'Rozmístěte svou flotilu!';
 
   @override
-  String get flotteDeployee => 'Flotila nasazena!';
+  String get flotteDeployee => 'Flotila rozmístěna!';
 
   @override
-  String get tourner => 'Rotace';
+  String get tourner => 'Otočit';
 
   @override
-  String get aleatoire => 'Náhodné';
+  String get aleatoire => 'Náhodně';
 
   @override
-  String get mainTerminee => 'Dokončená ruka';
+  String get mainTerminee => 'Hra ukončena';
 
   @override
-  String get distribuerLaSuite => 'Rozdělte zbytek';
+  String get distribuerLaSuite => 'Rozdat další';
 
   @override
-  String get attenteDuDonneur => 'Čekáme na dárce...';
+  String get attenteDuDonneur => 'Čekání na rozdávajícího...';
 
   @override
-  String get couche => 'Ležení';
+  String get couche => 'Složeno';
 
   @override
   String get miseActuelle => 'Aktuální sázka: {částka}';
 
   @override
-  String get enAttente => 'Čeká na to...';
+  String get enAttente => 'Čekání...';
 
   @override
-  String get seCoucher => 'Jdu spát';
+  String get seCoucher => 'Složit';
 
   @override
-  String get checker => 'Dáma';
+  String get checker => 'Check';
 
   @override
-  String get relancer => 'Raise';
+  String get relancer => 'Přehodit';
 
   @override
-  String get choisirLeMontantDeLa => 'Vyberte množství dunningu';
+  String get choisirLeMontantDeLa => 'Vyberte částku navýšení';
 
   @override
   String get x2 => 'x2';
 
   @override
-  String get pot => 'Nočník';
+  String get pot => 'Bank';
 
   @override
   String get allIn => 'All-in';
@@ -1128,16 +1107,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get hesiteEtChoisitLaCouleur => '🌈 {0} váhat a vybrat barvu...';
 
   @override
-  String get vousNAvezPlusDe => 'Už žádné karty nemáš!';
+  String get vousNAvezPlusDe => 'Už nemáte žádné karty!';
 
   @override
-  String get garderPasser => 'Drž a propouštěj';
+  String get garderPasser => 'Ponechat a pasovat';
 
   @override
   String get uno => 'UNO!';
 
   @override
-  String get contreUno => 'Proti UNO!';
+  String get contreUno => 'Proti-UNO!';
 
   @override
   String erreur1(Object p) {
@@ -1145,44 +1124,44 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get choisissezUneCouleur => 'Vyberte si barvu';
+  String get choisissezUneCouleur => 'Vyberte barvu';
 
   @override
   String get votezPourUnJoueur => 'Hlasujte pro hráče:';
 
   @override
-  String get derniereChanceMrWhite => 'Poslední šance, pane White!';
+  String get derniereChanceMrWhite => 'Poslední šance Mr. White!';
 
   @override
-  String get quelEtaitLeMotDes => 'Jaké byly slova civilistů?';
+  String get quelEtaitLeMotDes => 'Jaké bylo slovo Civilistů?';
 
   @override
-  String get validerMonChoix => 'Potvrď mou volbu';
+  String get validerMonChoix => 'Potvrdit mou volbu';
 
   @override
-  String get egaliteParfaite => 'Dokonalá rovnost!';
+  String get egaliteParfaite => 'Naprostá remíza!';
 
   @override
   String get votezUniquementParmiLesSuspects =>
-      'Hlasujte pouze mezi níže uvedenými podezřelými:';
+      'Hlasujte pouze mezi podezřelými se shodným počtem hlasů:';
 
   @override
-  String get vous => '(Ty)';
+  String get vous => '(Vy)';
 
   @override
   String get question => 'OTÁZKA';
 
   @override
-  String get choisissezUneCarteAJouer => 'Vyberte si hrací kartu:';
+  String get choisissezUneCarteAJouer => 'Vyberte kartu k zahrání:';
 
   @override
   String get enAttenteDuChoixDu => 'Čekání na rozhodnutí soudce...';
 
   @override
-  String get choisir => 'Vyberte';
+  String get choisir => 'Vybrat';
 
   @override
-  String get impossibleDeChargerLImage => 'Nelze načíst obraz';
+  String get impossibleDeChargerLImage => 'Obrázek se nepodařilo načíst';
 
   @override
   String get votreReponse => 'Vaše odpověď...';
@@ -1194,13 +1173,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get momentDeVerite => 'Okamžik pravdy...';
 
   @override
-  String get tonHistoireEtaitElle => 'Byl tvůj příběh ...';
+  String get tonHistoireEtaitElle => 'Byl tvůj příběh...';
 
   @override
-  String get vraie => 'PRAVDA';
+  String get vraie => 'PRAVDIVÝ';
 
   @override
-  String get fausse => 'FALSE';
+  String get fausse => 'LŽIVÝ';
 
   @override
   String get ceChoixResteraSecretJusqu =>
@@ -1213,25 +1192,25 @@ class AppLocalizationsCs extends AppLocalizations {
   String get vrai => 'PRAVDA';
 
   @override
-  String get faux => 'FALSE';
+  String get faux => 'LEŽ';
 
   @override
   String get detecteurDeMensonges => 'Detektor lži';
 
   @override
-  String get pointezQuelquUn => 'Ukaž na někoho!';
+  String get pointezQuelquUn => 'Ukažte na někoho!';
 
   @override
   String get leJugeLit => 'Soudce čte: \" {0} \"';
 
   @override
-  String get unJoueurAQuitte => 'Jeden hráč odešel...';
+  String get unJoueurAQuitte => 'Hráč odešel...';
 
   @override
-  String get rechercheDeRemplacantsEnCours => 'Pátrání po náhradách probíhá...';
+  String get rechercheDeRemplacantsEnCours => 'Hledání náhradníků...';
 
   @override
-  String get demarrageAutomatiqueDans => 'Automatické spuštění v';
+  String get demarrageAutomatiqueDans => 'Automatické spuštění za';
 
   @override
   String get joueursConnectes => 'Propojení hráči: {0}';
@@ -1243,11 +1222,11 @@ class AppLocalizationsCs extends AppLocalizations {
   String get vainqueur => 'Vítěz: {0}';
 
   @override
-  String get voulezVousRejouer => 'Chceš si zase zahrát?';
+  String get voulezVousRejouer => 'Chcete hrát znovu?';
 
   @override
   String get siUnJoueurNeRepond =>
-      'Pokud hráč neodpoví nebo odejde, hra bude hledat náhradu.';
+      'Pokud hráč neodpovídá nebo odejde, hra vyhledá náhradníka.';
 
   @override
   String get histoireDeEtait => 'Historie {0} (byla {1})';
@@ -1260,7 +1239,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get lesPointsOntEteDistribues =>
-      'Body byly rozděleny podle vašich hlasů.';
+      'Body byly rozděleny na základě vašich hlasů.';
 
   @override
   String get leMotDesCivilsEtait => 'Slovo civilistů bylo: \'\'{0}\'';
@@ -1289,19 +1268,19 @@ class AppLocalizationsCs extends AppLocalizations {
   String get cartesRevelees => 'Odhalené karty:';
 
   @override
-  String get erreurDeChargementDuMeme => 'Chyba načítá meme.';
+  String get erreurDeChargementDuMeme => 'Chyba při načítání memu.';
 
   @override
   String get scoreActuelDeCartes => 'Aktuální skóre {0}: {1} karet.';
 
   @override
-  String get finDuTour1 => 'Konec turné';
+  String get finDuTour1 => 'Konec tahu';
 
   @override
-  String get tourSuivant1 => 'Další kolo';
+  String get tourSuivant1 => 'Další tah';
 
   @override
-  String get enAttenteDeLHote4 => 'Čekáme na moderátora dalšího kola...';
+  String get enAttenteDeLHote4 => 'Čekání na hostitele pro další kolo...';
 
   @override
   String get prochainTour => 'Další kolo';
@@ -1310,22 +1289,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get terminerLaPartie => 'Ukončit hru';
 
   @override
-  String get finDeLaManche1 => 'Konec kanálu';
+  String get finDeLaManche1 => 'Konec Kola';
 
   @override
-  String get suite => 'Více';
+  String get suite => 'Další';
 
   @override
   String get echangeDesCartes => 'Výměna karet';
 
   @override
-  String get commencer => 'Začněte';
+  String get commencer => 'Začít';
 
   @override
-  String get vousAvezFini => 'Jsi hotov!';
+  String get vousAvezFini => 'Dokončili jste!';
 
   @override
-  String get coupInvalide => 'Neplatný úder!';
+  String get coupInvalide => 'Neplatný tah!';
 
   @override
   String get plusDeCartes => 'Více karet!';
@@ -1347,16 +1326,17 @@ class AppLocalizationsCs extends AppLocalizations {
   String get crane => 'Lebka';
 
   @override
-  String get lancerLeDefiEnchere => 'ZAČNĚTE VÝZVU (AUKCE)';
+  String get lancerLeDefiEnchere => 'ZAHÁJIT VÝZVU (SÁZKA)';
 
   @override
   String get surencherir => 'PŘEVÝŠEN';
 
   @override
-  String get enAttenteDeLaDecision => 'Čekání na rozhodnutí hráče v procesu...';
+  String get enAttenteDeLaDecision =>
+      'Čeká se na rozhodnutí aktuálního hráče...';
 
   @override
-  String get enAttenteDuDessin => 'Čekání na kresbu...';
+  String get enAttenteDuDessin => 'Čeká se na kresbu...';
 
   @override
   String get scoreCollectif => 'Souhrnné skóre';
@@ -1365,22 +1345,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get retourAuSalon1 => 'Zpět k pořadu';
 
   @override
-  String get enAttenteDeLHote5 => 'Čekám na hostitele pro zbytek...';
+  String get enAttenteDeLHote5 => 'Čeká se na hostitele...';
 
   @override
   String get carte => 'Map {0} / {1}';
 
   @override
-  String get lesAutresEcriventDesIndices => 'Jiní ti píší nápovědy...';
+  String get lesAutresEcriventDesIndices => 'Ostatní píší nápovědy pro tebe...';
 
   @override
   String get faitesDevinerLeMot => 'Hádej slovo:';
 
   @override
-  String get tonIndiceUnSeulMot => 'Tvůj vodítko (JEDNO slovo)';
+  String get tonIndiceUnSeulMot => 'Tvoje nápověda (POUZE JEDNO slovo)';
 
   @override
-  String get unSeulMotAutorise => 'Povoleno jen jedno slovo!';
+  String get unSeulMotAutorise => 'Povoleno pouze jedno slovo!';
 
   @override
   String get envoyerLIndice => 'Pošlete nápovědu';
@@ -1389,14 +1369,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String get tousLesIndicesOntEte => 'Všechny nápovědy byly zrušeny!';
 
   @override
-  String get voiciTesIndices => 'Tady jsou vaše nápovědy!';
+  String get voiciTesIndices => 'Zde jsou vaše nápovědy!';
 
   @override
   String get aieTousLesIndicesEtaient =>
-      'Au! Všechny stopy byly stejné nebo neplatné. Byly vymazány!';
+      'Jejda! Všechny nápovědy byly stejné nebo neplatné. Byly smazány!';
 
   @override
-  String get taProposition => 'Tvůj návrh...';
+  String get taProposition => 'Tvůj tip...';
 
   @override
   String get jeValide => 'Potvrzuji!';
@@ -1406,7 +1386,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String pt(Object eValueKey, Object eValueValue, Object p, Object p2) {
-    return '$p. $eValueKey: $eValueValue pt$p2';
+    return '$p. $eValueKey: $eValueValue b$p2';
   }
 
   @override
@@ -1416,7 +1396,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get viteUnMot => 'Rychle! Jedno slovo!';
 
   @override
-  String get validerPasser => 'VALIDOVAT & PROJÍT';
+  String get validerPasser => 'POTVRDIT A PŘEDAT';
 
   @override
   String get prepareTaReponsePendantQue =>
@@ -1426,42 +1406,39 @@ class AppLocalizationsCs extends AppLocalizations {
   String get boom => 'BUM!';
 
   @override
-  String get scoresMoinsMieux => 'Skóre (méně = lepší)';
+  String get scoresMoinsMieux => 'Skóre (méně = lépe)';
 
   @override
   String pt1(Object eKey, Object eValue, Object p) {
-    return '$eKey: $eValue pt$p';
+    return '$eKey: $eValue b$p';
   }
 
   @override
-  String get nouvelleManche => 'Nový kanál';
+  String get nouvelleManche => 'Nové kolo';
 
   @override
-  String get infecter => 'Infect';
+  String get infecter => 'Infikovat';
 
   @override
-  String get devorer => 'Pohltit';
+  String get devorer => 'Sežrat';
 
   @override
-  String get sauver => 'Uložit';
+  String get sauver => 'Zachránit';
 
   @override
-  String get neRienFaire => 'Nedělej nic';
+  String get neRienFaire => 'Nedělat nic';
 
   @override
-  String get faireExploser => 'Vybuchnout';
+  String get faireExploser => 'Odpálit';
 
   @override
   String get coupDEtat => 'Státní převrat';
 
   @override
-  String get ouvrirLesVotes => 'Otevřené hlasování';
+  String get ouvrirLesVotes => 'Otevřít hlasování';
 
   @override
-  String get cloturerLeVote => 'Uzavření hlasování';
-
-  @override
-  String get k0S => '0 s';
+  String get cloturerLeVote => 'Uzavřít hlasování';
 
   @override
   String get tempsRestantS => 'Zbývající čas: {0} s';
@@ -1470,7 +1447,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get k6Consecutifs3 => '6 za sebou: {streak}/3';
 
   @override
-  String get lancerLeDe => 'HOD KOSTKOU';
+  String get lancerLeDe => 'HODIT KOSTKOU';
 
   @override
   String get scorePoints => 'Skóre: {skóre} body';
@@ -1479,23 +1456,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get dominosRestants => 'Zbývající domino: {počítat}';
 
   @override
-  String get impossibleDeJouerCeDomino =>
-      'Tady je nemožné zahrát na tento domino.';
+  String get impossibleDeJouerCeDomino => 'Tento kámen zde nelze přiložit.';
 
   @override
-  String get mancheTerminee => 'Otočte se! ';
+  String get mancheTerminee => 'Kolo ukončeno! ';
 
   @override
   String get dominos => 'Domino';
 
   @override
-  String get extremites => 'Končetiny: ';
+  String get extremites => 'Konce: ';
 
   @override
   String get pioche2 => 'Losování: {Počet}';
 
   @override
-  String get piocher => 'Draw';
+  String get piocher => 'Líznout';
 
   @override
   String get ficheDePts => '{0} rekord ({1} bodů)';
@@ -1546,23 +1522,23 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get carteAPrendre => 'MAPA K ZÍSKÁNÍ';
+  String get carteAPrendre => 'KARTA K VZETÍ';
 
   @override
   String get votreMain => 'Tvoje ruka ({počítá})';
 
   @override
-  String get touchezUneCartePourLa => 'Klepněte na kartu, abyste ji položili';
+  String get touchezUneCartePourLa => 'Klepnutím na kartu ji zahrajete';
 
   @override
   String get aucuneCombinaisonEtaleeSurLa =>
-      'Žádné kombinace rozložené na stole';
+      'Na stole zatím nejsou žádné kombinace';
 
   @override
   String get etaler => 'Spread ({počet})';
 
   @override
-  String get defausserFin => 'Vyřazení a konec';
+  String get defausserFin => 'Odhodit a konec';
 
   @override
   String pts8(Object eValue) {
@@ -1570,46 +1546,46 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get placezDansVotreCoin => 'Umístěte se do svého kouta!';
+  String get placezDansVotreCoin => 'Umístěte do svého rohu!';
 
   @override
-  String get retourner => 'Návrat';
+  String get retourner => 'Převrátit';
 
   @override
-  String get validerLePlacement => 'Ověřte umístění';
+  String get validerLePlacement => 'Potvrdit umístění';
 
   @override
-  String get vosPieces => 'Tvé části';
+  String get vosPieces => 'Tvoje dílky';
 
   @override
-  String get dessine => 'Tas!';
+  String get dessine => 'Kresli!';
 
   @override
-  String get vousDevezDessinerQuelqueChose => 'Musíš něco nakreslit!';
+  String get vousDevezDessinerQuelqueChose => 'Musíte něco nakreslit!';
 
   @override
   String get erreurLorsDeLaSauvegarde => 'Chyba při ukládání kresby.';
 
   @override
-  String get jAiFini => 'Končím!';
+  String get jAiFini => 'Mám hotovo!';
 
   @override
-  String get ceJoueurExisteDeja => 'Tento hráč už existuje!';
+  String get ceJoueurExisteDeja => 'Tento hráč již existuje!';
 
   @override
-  String get participantsModeLocal => 'Účastníci (místní režim)';
+  String get participantsModeLocal => 'Účastníci (Místní režim)';
 
   @override
-  String get ajoutezLesJoueurs => 'Přidat hráče';
+  String get ajoutezLesJoueurs => 'Přidejte hráče';
 
   @override
-  String get prenomDuJoueur => 'Křestní jméno hráče';
+  String get prenomDuJoueur => 'Jméno hráče';
 
   @override
-  String get ajoutezAuMoins2Joueurs => 'Přidejte alespoň 2 hráče a začněte.';
+  String get ajoutezAuMoins2Joueurs => 'Přidejte alespoň 2 hráče pro zahájení.';
 
   @override
-  String get equilibrerAleatoirement => 'Náhodná rovnováha';
+  String get equilibrerAleatoirement => 'Náhodně vyvážit';
 
   @override
   String get joueursNonAssignes1 => 'Nepřiřazení hráči';
@@ -1618,7 +1594,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get confirmerLancer => 'Potvrdit a spustit';
 
   @override
-  String get choisirUnJeuLocal => 'Výběr místní hry';
+  String get choisirUnJeuLocal => 'Vybrat místní hru';
 
   @override
   String get ilFautAuMoinsJoueurs =>
@@ -1629,20 +1605,20 @@ class AppLocalizationsCs extends AppLocalizations {
       'Tento režim podporuje maximálně {0} hráčů!';
 
   @override
-  String get parametresActionOuVerite1 => 'Prostředí: Pravda nebo odvaz';
+  String get parametresActionOuVerite1 => 'Nastavení: Pravda nebo úkol';
 
   @override
   String get parametresDeLaPartie => 'Nastavení hry';
 
   @override
-  String get k1IntensiteDesDefis => '1. Intenzita výzev';
+  String get k1IntensiteDesDefis => '1. Intenzita úkolů';
 
   @override
-  String get generationIaPersonnalisee => 'Generování vlastní AI';
+  String get generationIaPersonnalisee => 'Vlastní generování AI';
 
   @override
   String get exSoireePyjamaSecretsDe =>
-      'např. přespání, tajemství párů, anekdoty v práci...';
+      'např. Pyžamová párty, Tajemství párů, Historky z práce...';
 
   @override
   String get defisIaGeneres => '✨ {0} AI výzvy generovány!';
@@ -1651,34 +1627,34 @@ class AppLocalizationsCs extends AppLocalizations {
   String get defisPrets => '✅ {0} výzvy připravené!';
 
   @override
-  String get commencerLaPartie => 'ZAČNĚTE HRU';
+  String get commencerLaPartie => 'ZAČÍT HRU';
 
   @override
-  String get actionOuVerite => 'Pravda nebo odvaha';
+  String get actionOuVerite => 'Pravda nebo úkol';
 
   @override
-  String get choisisTonDestin => 'Vyber si svůj osud...';
+  String get choisisTonDestin => 'Zvol si svůj osud...';
 
   @override
-  String get cEstAuTourDe => 'Teď je řada';
+  String get cEstAuTourDe => 'Na řadě je';
 
   @override
-  String get appuyezSurLancerLaRoue => 'Stiskněte \'Otočné kolo\' a začněte!';
+  String get appuyezSurLancerLaRoue => 'Stiskni \'Roztočit kolo\' a začni!';
 
   @override
   String get verite => 'Pravda';
 
   @override
-  String get action => 'Akce';
+  String get action => 'Úkol';
 
   @override
   String get pts9 => '{0} : {1} bodů';
 
   @override
-  String get parametresLeDilemme => 'Prostředí: Dilema';
+  String get parametresLeDilemme => 'Nastavení: Dilema';
 
   @override
-  String get parametresDuDilemme => 'Parametry dilematu';
+  String get parametresDuDilemme => 'Nastavení dilematu';
 
   @override
   String get k1DifficulteDesChoix => '1. Obtížnost voleb';
@@ -1687,18 +1663,18 @@ class AppLocalizationsCs extends AppLocalizations {
   String get k2ModeDeJeu => '2. Herní režim';
 
   @override
-  String get avecRoue1Joueur => 'S Wheel (1 hráč)';
+  String get avecRoue1Joueur => 'S kolem (1 hráč)';
 
   @override
   String get toutLeGroupe => 'Celá skupina';
 
   @override
   String get generationIaDeDilemmesPersonnalises =>
-      'Generování vlastních dilemat AI';
+      'AI generování vlastních dilemat';
 
   @override
   String get exSuperPouvoirsVieQuotidienne =>
-      'např. superschopnosti, každodenní život, morální volby...';
+      'např.: Superschopnosti, Každodenní život, Morální volby...';
 
   @override
   String get dilemmesIaGeneres => '✨ {0} generované dilemata AI!';
@@ -1707,10 +1683,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get dilemmesPrets => '✅ {0} dilemata připravena';
 
   @override
-  String get commencerLesDilemmes => 'ZAČÁTEK DILEMAT';
+  String get commencerLesDilemmes => 'ZAČÍT DILEMATA';
 
   @override
-  String get gererLesScores => 'Spravujte skóre';
+  String get gererLesScores => 'Spravovat skóre';
 
   @override
   String get leDilemme => 'DILEMA';
@@ -1719,7 +1695,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get dilemmeSuivant => 'Další dilema';
 
   @override
-  String get leJoueurDesigneDoitFaire => 'Určený hráč musí učinit svou volbu.';
+  String get leJoueurDesigneDoitFaire => 'Určený hráč musí provést svou volbu.';
 
   @override
   String get enAttenteDuVoteDe => 'Čekání na hlasování: {0} ({1} / {2})';
@@ -1729,10 +1705,10 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get appuyezSurLancerPourCommencer =>
-      'Stiskněte \'Spustit\' a začněte!';
+      'Stiskni \'Roztočit\' pro začátek!';
 
   @override
-  String get parametresJeuDeLaPiece => 'Prostředí: Hra mincí';
+  String get parametresJeuDeLaPiece => 'Nastavení: Hra s mincí';
 
   @override
   String get configurationDeLaPartie => 'Nastavení hry';
@@ -1742,11 +1718,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get generationIaDeQuestionsSecretes =>
-      'Generování tajných otázek pomocí AI';
+      'Generování tajných otázek přes AI';
 
   @override
   String get exAmourSeductionTravailAnecdotes =>
-      'např. Láska a svádění, Práce, trapné historky...';
+      'např. Láska a vztahy, Práce, Trapné okamžiky...';
 
   @override
   String get questionsIaGenerees => '✨ {0} AI otázky generovány!';
@@ -1755,79 +1731,79 @@ class AppLocalizationsCs extends AppLocalizations {
   String get questionsPretes => '✅ {0} otázek připravených';
 
   @override
-  String get lancerLaPiece => 'HOĎ MINCÍ';
+  String get lancerLaPiece => 'HODIT MINCÍ';
 
   @override
-  String get jeuDeLaPiece => 'Hrát hru';
+  String get jeuDeLaPiece => 'Hra s mincí';
 
   @override
   String get tuAsChoisiLaPiece => 'Vybral jsi {0}. Mince spadla na... {1} !';
 
   @override
-  String get lancerLaRoue => 'Roztoč kolo';
+  String get lancerLaRoue => 'Roztočit kolo';
 
   @override
-  String get jeChoisisPile => 'Volím PILE';
+  String get jeChoisisPile => 'Vybírám PANU';
 
   @override
-  String get jeChoisisFace => 'Volím FACE';
+  String get jeChoisisFace => 'Vybírám OREL';
 
   @override
-  String get laRoueTourne => 'Kolo se otáčí...';
+  String get laRoueTourne => 'Kolo se točí...';
 
   @override
-  String get infiltreMrWhite => 'Undercover & Mr. White';
+  String get infiltreMrWhite => 'Infiltrátor a Mr. White';
 
   @override
-  String get configuration => 'Konfigurace';
+  String get configuration => 'Nastavení';
 
   @override
-  String get inclureMrWhite => 'Zahrnout pana Whitea?';
+  String get inclureMrWhite => 'Zahrnout Mr. Whitea?';
 
   @override
-  String get mrWhiteCommence => 'Pan White začíná?';
+  String get mrWhiteCommence => 'Začíná Mr. White?';
 
   @override
-  String get iaPremium => 'Premium AI';
+  String get iaPremium => 'Prémiová AI';
 
   @override
-  String get themePourLesPairesDe => 'Téma pro páry slov';
+  String get themePourLesPairesDe => 'Téma pro dvojice slov';
 
   @override
   String get exAnimauxObjetsCuisineFormat =>
-      'např. zvířata: předměty, kuchyně... (civilní formát: infiltrátor)';
+      'např.: zvířata:předměty, kuchyně... (formát civilista:vetřelec)';
 
   @override
-  String get generationIa1 => 'Generace AI...';
+  String get generationIa1 => 'Generování AI...';
 
   @override
-  String get commencerLaManche => 'Začni kolo';
+  String get commencerLaManche => 'Začít kolo';
 
   @override
-  String get passeLeTelephoneA => 'Předej telefon';
+  String get passeLeTelephoneA => 'Předat telefon hráči';
 
   @override
   String get regardeTonRoleEtNe =>
       'Podívej se na svou roli a nikomu ji neukazuj!';
 
   @override
-  String get voirMonRole => 'Viz moje role';
+  String get voirMonRole => 'Zobrazit moji roli';
 
   @override
   String get tonRole => 'Tvoje role {0}';
 
   @override
-  String get jAiCompris => 'Chápu to!';
+  String get jAiCompris => 'Rozumím!';
 
   @override
-  String get aVosDiscussions => 'Na vaše diskuze!';
+  String get aVosDiscussions => 'Čas na diskuzi!';
 
   @override
   String get toutLeMondeConnaitSon =>
       'Každý zná svou roli. Střídejte se v nápovědě. Až budete připraveni, hlasujte pro vyřazení někoho.{0}';
 
   @override
-  String get passerAuVote => 'Pokračujte v hlasování';
+  String get passerAuVote => 'Přejít k hlasování';
 
   @override
   String get quiEliminer => 'Koho vyřadit?';
@@ -1848,7 +1824,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get laPatateChaude => 'Horký brambor';
 
   @override
-  String get dureeDuTourParJoueur => 'Délka kola (na hráče)';
+  String get dureeDuTourParJoueur => 'Délka tahu (na hráče)';
 
   @override
   String get k10s => '10s';
@@ -1857,13 +1833,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get k15s => '15s';
 
   @override
-  String get compteAReboursGlobal => 'Globální odpočítávací časovač';
+  String get compteAReboursGlobal => 'Globální odpočet';
 
   @override
   String get leChronoNeSeReinitialise => 'Časovač se neresetuje.';
 
   @override
-  String get dureeDuChronoGlobal => 'Celková doba trvání časovače';
+  String get dureeDuChronoGlobal => 'Délka globálního časovače';
 
   @override
   String get k30s => '30. léta';
@@ -1875,20 +1851,20 @@ class AppLocalizationsCs extends AppLocalizations {
   String get k60s => '60. léta';
 
   @override
-  String get categoriesIaPersonnalisees => 'Vlastní AI kategorie';
+  String get categoriesIaPersonnalisees => 'Vlastní kategorie AI';
 
   @override
   String get exMarquesDeLuxeObjets =>
-      'např. luxusní značky, podkrovní předměty, horory...';
+      'např. Luxusní značky, Věci z půdy, Horory...';
 
   @override
-  String get categoriesIaChargees => 'AI kategorie načteny!';
+  String get categoriesIaChargees => 'Kategorie AI načteny!';
 
   @override
-  String get genererLesCategoriesParIa => 'Generujte kategorie pomocí AI';
+  String get genererLesCategoriesParIa => 'Generovat kategorie přes AI';
 
   @override
-  String get commencer1 => 'Začněte!';
+  String get commencer1 => 'Začít!';
 
   @override
   String get cEstA => 'Je to {0} !';
@@ -1897,10 +1873,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get categorie1 => 'Kategorie:';
 
   @override
-  String get taReponseRapide => 'Vaše rychlá odpověď!';
+  String get taReponseRapide => 'Tvoje rychlá odpověď!';
 
   @override
-  String get faitJePasse => 'Hotovo! Procházím!';
+  String get faitJePasse => 'Hotovo! Předávám!';
 
   @override
   String get motsDejaUtilises => 'Již použitá slova:';
@@ -1909,7 +1885,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get aPerdu => '{0} ztraceno!';
 
   @override
-  String get sonGage => 'Jeho slib:';
+  String get sonGage => 'Trest:';
 
   @override
   String get synonymeOuBanni => 'Synonymum nebo zakázáno';
@@ -1918,7 +1894,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get themePourLesMots => 'Téma pro slova';
 
   @override
-  String get exAnimauxCuisineFilm => 'např. zvířata, vaření, film...';
+  String get exAnimauxCuisineFilm => 'např.: zvířata, vaření, filmy...';
 
   @override
   String get passeLeTelephoneA1 => 'Přepněte telefon na {0}';
@@ -1927,13 +1903,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String get leMotEst => 'Slovo je:';
 
   @override
-  String get tonSynonyme => 'Tvé synonymum...';
+  String get tonSynonyme => 'Tvoje synonymum...';
 
   @override
-  String get validerEtPasser => 'Validujte a projděte';
+  String get validerEtPasser => 'Potvrdit a předat';
 
   @override
-  String get votezPourBannirLaPire => 'Hlasujte pro zákaz nejhoršího návrhu!';
+  String get votezPourBannirLaPire =>
+      'Hlasujte pro vyloučení nejhoršího návrhu!';
 
   @override
   String get leMotEtait1 => 'Slovo bylo: {0}';
@@ -1948,29 +1925,29 @@ class AppLocalizationsCs extends AppLocalizations {
   String get nouvelleManche1 => 'Nové kolo';
 
   @override
-  String get tableauDesScores => 'Skóre';
+  String get tableauDesScores => 'Tabulka skóre';
 
   @override
-  String get quiPourraitLePlus => 'Kdo by mohl udělat nejvíc?';
+  String get quiPourraitLePlus => 'Kdo by nejspíš…?';
 
   @override
-  String get groupeEnsemble => 'Skupina (soubor)';
+  String get groupeEnsemble => 'Skupina (Společně)';
 
   @override
   String get themeIaExSoireeArrosee =>
-      'Téma AI (např. opilý večer, práce, svátky...)';
+      'Téma AI (např. Divoká párty, Práce, Prázdniny...)';
 
   @override
-  String get genererDesSituationsIa => 'Generujte AI situace';
+  String get genererDesSituationsIa => 'Generovat scénáře AI';
 
   @override
-  String get quiDansLeGroupe => 'Kdo ze skupiny...';
+  String get quiDansLeGroupe => 'Kdo ve skupině...';
 
   @override
   String get pourraitLePlus => '... Většina {0}';
 
   @override
-  String get lancerLesVotes => 'Začněte hlasovat!';
+  String get lancerLesVotes => 'Zahájit hlasování!';
 
   @override
   String get situation => 'Situace:';
@@ -1979,35 +1956,35 @@ class AppLocalizationsCs extends AppLocalizations {
   String get quiPourraitLePlus1 => 'Kdo by mohl {0}';
 
   @override
-  String get votezTousEnsemble => 'Hlasujte společně!';
+  String get votezTousEnsemble => 'Hlasujte všichni společně!';
 
   @override
-  String get designezLaPersonneChoisiePar => 'Určete osobu vybranou skupinou:';
+  String get designezLaPersonneChoisiePar => 'Označte osobu zvolenou skupinou:';
 
   @override
-  String get passezLAppareilA => 'Předat zařízení na:';
+  String get passezLAppareilA => 'Předat zařízení pro:';
 
   @override
   String get votezSecretementPourLeJoueur =>
-      'Tajně hlasujte pro hráče dle vlastního výběru:';
+      'Hlasuj tajně pro hráče podle své volby:';
 
   @override
-  String get situation1 => 'LOKALITA:';
+  String get situation1 => 'SITUACE:';
 
   @override
-  String get detailDesVotes => 'Podrobnosti o hlasování:';
+  String get detailDesVotes => 'Podrobnosti hlasování:';
 
   @override
-  String get aucunVote => 'Hlasy bez';
+  String get aucunVote => 'Žádné hlasy';
 
   @override
   String get situationSuivante => 'Další situace';
 
   @override
-  String get codenames => 'Kódová jména';
+  String get codenames => 'Krycí jména';
 
   @override
-  String get passezLeTelephoneA => 'Předej telefon';
+  String get passezLeTelephoneA => 'Předat telefon hráči';
 
   @override
   String get passezLeTelephoneAPuis =>
@@ -2017,7 +1994,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get cEstFait => 'Hotovo';
 
   @override
-  String get passezLeTelephoneAuxAgents => 'Předejte telefon agentům';
+  String get passezLeTelephoneAuxAgents => 'Předej telefon agentům';
 
   @override
   String get equipe1 => 'Tým {0}';
@@ -2029,39 +2006,39 @@ class AppLocalizationsCs extends AppLocalizations {
   String get essaisDisponibles => '{0} dostupných zkušebních verzí';
 
   @override
-  String get cEstParti => 'Pojďme začít!';
+  String get cEstParti => 'Jdeme na to!';
 
   @override
-  String get codenamesLocal => 'Kódová jména Local';
+  String get codenamesLocal => 'Místní Codenames';
 
   @override
   String get exAnimauxCuisineHarryPotter =>
-      'např. zvířata, vaření, Harry Potter...';
+      'např.: zvířata, vaření, Harry Potter...';
 
   @override
-  String get commencerLaPartie1 => 'Začněte hru';
+  String get commencerLaPartie1 => 'Začít hru';
 
   @override
   String get tuEsLeMaitreEspion =>
-      'Jsi špionmistr. Ujisti se, že jsi jediný, kdo vidí obrazovku.';
+      'Jsi hlavní špion. Ujisti se, že obrazovku vidíš pouze ty.';
 
   @override
-  String get voirLaCarteCle => 'Zobrazit klíčovou mapu';
+  String get voirLaCarteCle => 'Zobrazit klíčovou kartu';
 
   @override
   String get nombreDeMots => 'Počet slov';
 
   @override
-  String get donnerLIndice => 'Dej nápovědu';
+  String get donnerLIndice => 'Dát nápovědu';
 
   @override
   String get essaisRestants => 'Počet pokusů: {0}';
 
   @override
-  String get passerSonTour => 'Přeskočte svůj tah';
+  String get passerSonTour => 'Ukončit tah';
 
   @override
-  String get nouvellePartie => 'Nová část';
+  String get nouvellePartie => 'Nová hra';
 
   @override
   String get rouge => 'Červená';
@@ -2082,38 +2059,39 @@ class AppLocalizationsCs extends AppLocalizations {
   String get timeSUp => 'Čas vypršel';
 
   @override
-  String get timeSUpLocal => 'Čas vypršel, místní';
+  String get timeSUpLocal => 'Místní Time\'s Up';
 
   @override
   String get besoinDAuMoins4 =>
-      'K hraní potřebuješ alespoň 4 hráče (2 na tým)!';
+      'Ke hře jsou potřeba alespoň 4 hráči (2 na tým)!';
 
   @override
   String get lesEquipesSerontFormeesAleatoirement =>
-      'Týmy budou tvořeny náhodně.';
+      'Týmy budou sestaveny náhodně.';
 
   @override
-  String get themePourLesMotsA => 'Téma pro slova k hádání';
+  String get themePourLesMotsA => 'Téma pro hádaná slova';
 
   @override
   String get exCelebritesAnimauxCuisine =>
-      'např. celebrity, zvířata, vaření...';
+      'např.: celebrity, zvířata, vaření...';
 
   @override
   String get lIaGenereraLesMots =>
-      'AI automaticky vygeneruje slova (manuální vstupní fáze bude přeskočena).';
+      'AI vygeneruje slova automaticky (fáze ručního zadávání bude přeskočena).';
 
   @override
-  String get ajoute5MotsQueTu => 'Přidejte 5 slov, která chcete uhodnout.';
+  String get ajoute5MotsQueTu =>
+      'Přidej 5 slov, která bys chtěl(a) nechat hádat.';
 
   @override
   String get mot5 => 'Slovo {0} / 5';
 
   @override
-  String get ajouterCeMot => 'Přidejte toto slovo';
+  String get ajouterCeMot => 'Přidat toto slovo';
 
   @override
-  String get jAiFiniDAjouter => 'Domluvil jsem svá slova';
+  String get jAiFiniDAjouter => 'Mám hotovo přidávání slov';
 
   @override
   String get motsRestantsAAjouterPour =>
@@ -2132,7 +2110,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get motsRestantsDansLePaquet => 'Slova, která zůstala v balíčku: {0}';
 
   @override
-  String get devine => 'Uhodl jsem!';
+  String get devine => 'Uhodnuto!';
 
   @override
   String get erreurNombreDeJoueursInsuffisant =>
@@ -2140,7 +2118,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get veuillezRevenirALEcran =>
-      'Vraťte se prosím na obrazovku nastavení hráče.';
+      'Vraťte se prosím na obrazovku nastavení hráčů.';
 
   @override
   String get retour => 'Zpět';
@@ -2152,37 +2130,36 @@ class AppLocalizationsCs extends AppLocalizations {
   String get points1 => '{0} bodů';
 
   @override
-  String get passeLObjet => 'Položka Pass';
+  String get passeLObjet => 'Podej předmět';
 
   @override
-  String get passeLObjetRapidement => 'Rychle předává předmět';
+  String get passeLObjetRapidement => 'Rychle podej předmět';
 
   @override
-  String get generationIaDeQuestions => 'Generování otázek pomocí AI';
+  String get generationIaDeQuestions => 'AI generování otázek';
 
   @override
   String get exCultureGeneraleGagesDroles =>
-      'např. všeobecné znalosti, vtipné mzdy, přátelé...';
+      'např.: Všeobecný přehled, Vtipné úkoly, Přátelé...';
 
   @override
   String get questionsIaPretes => '✨ {0} AI otázek připravených!';
 
   @override
-  String get designerUnJoueurAleatoireA =>
-      'Určete náhodného hráče, na kterého se přepne';
+  String get designerUnJoueurAleatoireA => 'Vybrat náhodného hráče k předání';
 
   @override
   String get sinonPassezPhysiquementAQui =>
-      'Pokud ne, fyzicky přepněte na kohokoliv chcete';
+      'Jinak předej fyzicky komukoliv chceš';
 
   @override
-  String get afficherLeChronometre => 'Ukázat stopky';
+  String get afficherLeChronometre => 'Zobrazit odpočet';
 
   @override
   String get intervalleDuChronoDeA => 'Časový interval: od {0} do {1} sekundy';
 
   @override
-  String get passezVite => 'Pospěš si!';
+  String get passezVite => 'Rychle podejte!';
 
   @override
   String get jePasseLObjet => 'Předávám předmět!';
@@ -2191,50 +2168,50 @@ class AppLocalizationsCs extends AppLocalizations {
   String get passeA => 'Jde to na {0} !';
 
   @override
-  String get devineTete => 'Hádej hlavu';
+  String get devineTete => 'Hádej, kdo jsem';
 
   @override
   String get prochainJoueurEquipe => 'DALŠÍ HRÁČ / TÝM:';
 
   @override
-  String get jouerParEquipes => 'Hra podle týmů';
+  String get jouerParEquipes => 'Hrát v týmech';
 
   @override
-  String get modifierLesEquipesEtLes => 'Editační týmy a členové';
+  String get modifierLesEquipesEtLes => 'Upravit týmy a členy';
 
   @override
   String get difficulteDesMots => 'Obtížnost slov:';
 
   @override
-  String get facile => 'Klid';
+  String get facile => 'Snadné';
 
   @override
-  String get moyen => 'Medium';
+  String get moyen => 'Střední';
 
   @override
   String get expert => 'Expert';
 
   @override
-  String get dureeDuChrono => 'Doba trvání časovače:';
+  String get dureeDuChrono => 'Délka časovače:';
 
   @override
   String get k90s => '90. léta';
 
   @override
-  String get illimite => 'Neomezené';
+  String get illimite => 'Neomezeně';
 
   @override
   String get motsPersonnalisesIa => 'Vlastní slova / AI';
 
   @override
   String get themeIaExAnimauxMarins =>
-      'Téma AI (např. mořští živočichové, superhrdinové...)';
+      'Téma AI (např.: Mořští živočichové, Superhrdinové...)';
 
   @override
-  String get lancerSurLeFront => 'HOĎ TO NA ČELO!';
+  String get lancerSurLeFront => 'START NA ČELE!';
 
   @override
-  String get compositionDesEquipes => 'Složení týmu';
+  String get compositionDesEquipes => 'Složení týmů';
 
   @override
   String get equipe11 => 'TÝM 1';
@@ -2243,10 +2220,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get equipe2 => 'TÝM 2';
 
   @override
-  String get validerLesEquipes => 'Ověřte týmy';
+  String get validerLesEquipes => 'Potvrdit týmy';
 
   @override
-  String get placezLeTelephoneSurVotre => 'PŘILOŽ SI TELEFON NA ČELO!';
+  String get placezLeTelephoneSurVotre => 'PŘILOŽTE SI TELEFON NA ČELO!';
 
   @override
   String s1(Object secondsLeft) {
@@ -2254,23 +2231,23 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get basTrouve => 'Low = Nalezeno';
+  String get basTrouve => 'Dolů = Nalezeno';
 
   @override
-  String get arreter => 'Zastav';
+  String get arreter => 'Zastavit';
 
   @override
-  String get hautPasser => 'Top = Přicházení';
+  String get hautPasser => 'Nahoru = Pas';
 
   @override
-  String get resultatsDuPassage => 'Výsledky pasáže';
+  String get resultatsDuPassage => 'Výsledky kola';
 
   @override
   String get pointsMarques => '+{0} bodů!';
 
   @override
   String get touchezUnMotPourModifier =>
-      'Klepněte na slovo pro změnu výsledku v případě chyby senzoru:';
+      'Klepnutím na slovo upravíte výsledek v případě chyby senzoru:';
 
   @override
   String pts10(Object teamAScore) {
@@ -2283,16 +2260,16 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get continuerLaPartie => 'Pokračujte ve hře';
+  String get continuerLaPartie => 'Pokračovat ve hře';
 
   @override
   String get mauvaisSymbole => '{0} : Špatný symbol!';
 
   @override
-  String get dobbleLocal => 'Dobble Local';
+  String get dobbleLocal => 'Místní Dobble';
 
   @override
-  String get symbolesParCarte => 'Symboly na kartě:';
+  String get symbolesParCarte => 'Symbolů na kartu:';
 
   @override
   String get k6Facile => '6 (Snadné)';
@@ -2304,7 +2281,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get scoreCibleCartes => 'Cílové skóre: {0} karet';
 
   @override
-  String get commencer2 => 'ZAČNĚTE';
+  String get commencer2 => 'START';
 
   @override
   String get piocheBut => 'REMÍZA ({0}) • GÓL: {1}';
@@ -2324,7 +2301,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get cartes => '{0} karet';
 
   @override
-  String get ecrireUnMessage => 'Napiš zprávu...';
+  String get ecrireUnMessage => 'Napište zprávu...';
 
   @override
   String get codeDeSalonPriveIntrouvable => 'Kód soukromého pokoje nenalezen.';
@@ -2339,7 +2316,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get rejoindrePrive => 'Připojte se k soukromému';
 
   @override
-  String get creerUnSalon => 'Vytvořte místnost';
+  String get creerUnSalon => 'Vytvořit salón';
 
   @override
   String get rejoindreUnSalonPrive => 'Připojte se k soukromé místnosti';
@@ -2349,62 +2326,61 @@ class AppLocalizationsCs extends AppLocalizations {
       'Zadejte 6místný kód nebo identifikátor sdílený hostitelem.';
 
   @override
-  String get coller => 'Lepidlo';
+  String get coller => 'Vložit';
 
   @override
   String get rejoindreLeSalon => 'Připojte se k pořadu';
 
   @override
-  String get rechercherUnSalon => 'Hledej salon...';
+  String get rechercherUnSalon => 'Hledat salónek...';
 
   @override
-  String get trier => 'Sort';
+  String get trier => 'Seřadit';
 
   @override
   String get plusRecents => 'Nejnovější';
 
   @override
-  String get plusActifs => 'Aktivnější';
+  String get plusActifs => 'Nejaktivnější';
 
   @override
-  String get placesDisponibles => 'Dostupná místa';
+  String get placesDisponibles => 'Volná místa';
 
   @override
-  String get monSalon => 'MŮJ OBÝVACÍ POKOJ';
+  String get monSalon => 'MŮJ SALÓNEK';
 
   @override
   String get enLigne => '{0} online';
 
   @override
-  String get vousAvezBesoinDe5 =>
-      'Na vytvoření obývacího pokoje potřebujete 5 dílů.';
+  String get vousAvezBesoinDe5 => 'K vytvoření salónu potřebujete 5 mincí.';
 
   @override
-  String get nomDuSalon => 'Název salonku';
+  String get nomDuSalon => 'Název salónu';
 
   @override
-  String get themeExFunTryhardChill => 'Téma (např.: Fun, Tryhard, Chill)';
+  String get themeExFunTryhardChill => 'Téma (např. Zábava, Tryhard, Pohoda)';
 
   @override
   String get description => 'Popis';
 
   @override
-  String get nApparaitraPasDansLa => 'Neobjeví se v veřejném seznamu.';
+  String get nApparaitraPasDansLa => 'Neobjeví se ve veřejném seznamu.';
 
   @override
-  String get creerLeSalonCout5 => 'Vytvořte obývací pokoj (cena: 5 dílů)';
+  String get creerLeSalonCout5 => 'Vytvořit salón (Cena: 5 mincí)';
 
   @override
-  String get lancerUnJeuPourLe => 'Spusť hru do obýváku';
+  String get lancerUnJeuPourLe => 'Spustit hru pro salón';
 
   @override
-  String get jouer1 => 'Hra';
+  String get jouer1 => 'Hrát';
 
   @override
   String get joueurSEnJeu => '{0} hráčů ve hře';
 
   @override
-  String get cloturerLaPartie => 'Uzavření hry';
+  String get cloturerLaPartie => 'Ukončit hru';
 
   @override
   String get pretS => '{0} půjčky.';
@@ -2413,27 +2389,27 @@ class AppLocalizationsCs extends AppLocalizations {
   String get annulerLaPartie => 'Zrušit hru';
 
   @override
-  String get lancer => 'Spuštění';
+  String get lancer => 'Spustit';
 
   @override
-  String get ceSalonAEteFerme => 'Tato show byla uzavřena.';
+  String get ceSalonAEteFerme => 'Tento salón byl uzavřen.';
 
   @override
   String get veuillezCommencerOuAnnulerLa =>
-      'Prosím, před odchodem ze show hru spusťte nebo zrušte.';
+      'Před opuštěním salónu hru spusťte nebo zrušte.';
 
   @override
-  String get salon => 'Obývací pokoj';
+  String get salon => 'Salón';
 
   @override
-  String get fermerLeSalon => 'Ukončit show';
+  String get fermerLeSalon => 'Zavřít salón';
 
   @override
-  String get fermerLeSalon1 => 'Zavřít salon?';
+  String get fermerLeSalon1 => 'Zavřít salón?';
 
   @override
   String get leSalonSeraDefinitivementSupprime =>
-      'Místnost bude trvale odstraněna pro všechny účastníky.';
+      'Salón bude trvale smazán pro všechny účastníky.';
 
   @override
   String get aCreeUnePartieDe => '{0} vytvořil hru {1} !';
@@ -2442,11 +2418,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get joueurSPrets => '{0} hráčů připraveno';
 
   @override
-  String get cettePartieEstTermineeOu =>
-      'Tato hra je buď u konce, nebo zrušena.';
+  String get cettePartieEstTermineeOu => 'Tato hra skončila nebo byla zrušena.';
 
   @override
-  String get enPartie => 'ČÁSTEČNĚ';
+  String get enPartie => 'VE HŘE';
 
   @override
   String get partieDeTerminee => 'Hra {0} u konce!';
@@ -2458,16 +2433,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get vainqueur1 => 'Vítěz: {0}\'{1}\n';
 
   @override
-  String get voirLesStats => 'Podívejte se na statistiky';
+  String get voirLesStats => 'Zobrazit statistiky';
 
   @override
   String get message => 'Zpráva...';
 
   @override
-  String get k0Pts => '0 bodů';
+  String get k0Pts => '0 B';
 
   @override
-  String get infecte => 'INFIKOVANÍ';
+  String get infecte => 'INFIKOVÁN';
 
   @override
   String get zombie => 'ZOMBIE';
@@ -2476,20 +2451,20 @@ class AppLocalizationsCs extends AppLocalizations {
   String get erreur2 => 'Chyba: {0}';
 
   @override
-  String get veuillezSaisirUnDefiOu => 'Prosím, zadejte výzvu nebo otázku.';
+  String get veuillezSaisirUnDefiOu => 'Zadejte prosím úkol nebo otázku.';
 
   @override
   String get erreurDeVote => 'Chyba při hlasování: {0}';
 
   @override
-  String get terminerLaManche => 'Dokončit kolo?';
+  String get terminerLaManche => 'Ukončit kolo?';
 
   @override
   String get voulezVousCloturerLaManche =>
-      'Chceš kolo hned uzavřít? Hráč s největším počtem zkušeností se stane adminem.';
+      'Chcete okamžitě ukončit kolo? Hráč s nejvíce XP se stane Administrátorem.';
 
   @override
-  String get terminer => 'Konec';
+  String get terminer => 'Dokončit';
 
   @override
   String get tour => 'Kolo {0}';
@@ -2498,26 +2473,26 @@ class AppLocalizationsCs extends AppLocalizations {
   String get toursRestants => '{0} kol do konce';
 
   @override
-  String get finManche => 'Konec rukojeti';
+  String get finManche => 'Konec kola';
 
   @override
   String get quiVaReleverLeDefi => '🎰 Kdo přijme výzvu?';
 
   @override
   String get faitesTournerLaRoulettePour =>
-      'Otočte kolem, abyste určili dalšího hráče.';
+      'Roztočte kolo a vyberte dalšího hráče.';
 
   @override
-  String get tournerLaRoulette => 'TOČENÍ KOLA';
+  String get tournerLaRoulette => 'ROZTOČIT KOLO';
 
   @override
   String get joueurSelectionne => '🎯 VYBRANÝ HRÁČ';
 
   @override
-  String get cEstAVotreTour => 'Teď jsi na řadě ty! Vyber si svůj osud:';
+  String get cEstAVotreTour => 'Jste na řadě! Zvolte svůj osud:';
 
   @override
-  String get tirerActionOuVerite => '🎲 Střílení PRAVDA nebo ODVAHA';
+  String get tirerActionOuVerite => '🎲 Vylosovat VADÍ NEVADÍ';
 
   @override
   String get enAttenteDuTirageDe => 'Čekání na losování {0}...';
@@ -2533,16 +2508,16 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get realisezVotreDefiEnVideo =>
-      'Splňte svou výzvu na videu nebo mikrofonu!';
+      'Splňte svůj úkol na videu nebo mikrofonu!';
 
   @override
-  String get jAiRealiseMonDefi => 'Splnil jsem svou výzvu! ✅';
+  String get jAiRealiseMonDefi => 'Splnil(a) jsem svůj úkol! ✅';
 
   @override
   String get regardezRealiserLeDefi => 'Sledujte {0} dokončit výzvu...';
 
   @override
-  String get voteDeValidation => '🗳️ VALIDAČNÍ HLASOVÁNÍ';
+  String get voteDeValidation => '🗳️ HLASOVÁNÍ O SCHVÁLENÍ';
 
   @override
   String get estCeQueAReleve => 'Dokázal {0} výzvu zvládnout?';
@@ -2552,22 +2527,22 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get vosAmisVotentPourEvaluer =>
-      'Tvoji přátelé hlasují o hodnocení tvého výkonu...';
+      'Vaši přátelé hlasují a hodnotí váš výkon...';
 
   @override
-  String get votreVoteABienEte => 'Váš hlas byl zapsán!';
+  String get votreVoteABienEte => 'Váš hlas byl zaznamenán!';
 
   @override
-  String get ouiValide => 'ANO, ověřeno! 👍';
+  String get ouiValide => 'ANO, Uznáno! 👍';
 
   @override
-  String get nonRate => 'NE, neuspěl! 👎';
+  String get nonRate => 'NE, Vedle! 👎';
 
   @override
   String get xpPour => '+{0} XP za {1}';
 
   @override
-  String get tourSuivant2 => '➡️ Další kolo';
+  String get tourSuivant2 => 'Další tah ➡️';
 
   @override
   String get aGagneCetteManche => '{0} vyhráli toto kolo!';
@@ -2576,7 +2551,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get prets => '{0} / {1} připraven';
 
   @override
-  String get scoresConservesDeLaSession => 'ZACHOVANÉ SKÓRE Z TÉTO ČÁSTI:';
+  String get scoresConservesDeLaSession => 'ULOŽENÉ SKÓRE RELACE:';
 
   @override
   String pts13(Object pScore) {
@@ -2585,10 +2560,10 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get adminLancerMaintenantAvecLes =>
-      'Admin: Spusť nyní s připravenými hráči';
+      'Admin: Spustit nyní s připravenými hráči';
 
   @override
-  String get leCompagnonDeVosMeilleures => 'Společník pro tvé nejlepší večery';
+  String get leCompagnonDeVosMeilleures => 'Společník vašich nejlepších večerů';
 
   @override
   String get desactivezLaRecherchePubliquePour =>
@@ -2596,56 +2571,53 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get desactivezLaVideoOuL =>
-      'Vypněte video nebo zvuk pro lokální přehrávání.';
+      'Vypněte video nebo zvuk, abyste mohli hrát lokálně.';
 
   @override
   String get selectionnezAuMoins3Categories => 'Vyberte alespoň 3 kategorie:';
 
   @override
-  String get composerLesEquipes => 'Sestavte týmy';
+  String get composerLesEquipes => 'Sestavit týmy';
 
   @override
   String get premiereLigneDuManuscrit => 'PRVNÍ ŘÁDEK RUKOPISU';
 
   @override
   String get laFeuilleEstPlieePour =>
-      'Papír je složen, aby byla zachována tajnost.';
+      'Papír je složený, aby se uchovalo tajemství.';
 
   @override
-  String get defausserLa1ereCartePasser => 'Odhoďte první kartu a přejděte';
+  String get defausserLa1ereCartePasser => 'Odhodit 1. kartu a pasovat';
 
   @override
   String get placementInvalideChevauchementOuHors =>
-      'Neplatné umístění (překryv nebo mimo síť)!';
+      'Neplatné umístění (překrývání nebo mimo mřížku)!';
 
   @override
   String get territoireEnnemiTouchezPourViser =>
-      'Nepřátelské území (Klepněte pro zamíření, potvrďte pro střelbu)';
+      'Nepřátelské území (Klepněte pro zamíření, potvrďte pro výstřel)';
 
   @override
   String get votreFlotteTirsEnnemisRecus =>
-      'Vaše flotila (Přijaté nepřátelské střely)';
+      'Vaše flotila (Příchozí nepřátelské zásahy)';
 
   @override
-  String get elimine => 'Vyřazena';
+  String get elimine => 'Vyřazen';
 
   @override
-  String get tapisVide => 'Prázdný koberec';
-
-  @override
-  String get ecrireAu => 'Piš {0}...';
+  String get tapisVide => 'Prázdný stůl';
 
   @override
   String get reflechit => '{jméno} myslí...';
 
   @override
-  String get faceAFaceCoteA => 'Tváří v tvář (bok po boku)';
+  String get faceAFaceCoteA => 'Souboj (vedle sebe)';
 
   @override
-  String get totalAdversaire => 'CELKOVÝ PROTIVNÍK';
+  String get totalAdversaire => 'CELKEM SOUPEŘ';
 
   @override
-  String get prendreLAtoutOuPasser => 'VEZMĚTE TRUMF NEBO PŘESKOČITE:';
+  String get prendreLAtoutOuPasser => 'VZÍT TRUMF NEBO PASOVAT:';
 
   @override
   String get combinaisonsDe => 'Kombinace {jména}';
@@ -2654,7 +2626,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get ilDevraDonnerLePremier => 'Bude muset dát první nápovědu';
 
   @override
-  String get cetteReponseADejaEte => 'Tato odpověď už byla dána!';
+  String get cetteReponseADejaEte => 'Tato odpověď již byla zadána!';
 
   @override
   String get themePourLes25Mots => 'Téma pro 25 slov';
@@ -2663,7 +2635,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get difficulteDesQuestions => 'Obtížnost otázek';
 
   @override
-  String get envoyerLeDefi => 'Výzva 🚀 Send';
+  String get envoyerLeDefi => 'Odeslat úkol 🚀';
 
   @override
   String get rulesTitle => 'Pravidla hry';
@@ -2672,149 +2644,147 @@ class AppLocalizationsCs extends AppLocalizations {
   String get understoodButton => 'Chápu to.';
 
   @override
-  String skyjoRoundEnderNotice(Object roundEnderName) {
-    return '$roundEnderName dokončil rukojeť!';
+  String skyjoRoundEnderNotice(Object name, Object roundEnderName) {
+    return '$name odhalil všechny své karty jako první.';
   }
 
   @override
-  String skyjoRoundScoreNotice(Object rScore, Object tScore) {
-    return '$tScore bodů (99999 bodů tohoto rukávu)';
+  String skyjoRoundScoreNotice(
+    Object roundScore,
+    Object totalScore,
+    Object rScore,
+    Object tScore,
+  ) {
+    return '+$roundScore toto kolo  •  Celkem: $totalScore b.';
   }
 
   @override
-  String get skyjoReplaceWithDrawn =>
-      'Dotkněte se mapy vaší mřížky a nahraďte ji kapsářskou kartou';
+  String skyjoReplaceWithDrawn(Object card) {
+    return 'Klepněte na kartu pro NAHRAZENÍ kartou $card.';
+  }
 
   @override
   String get skyjoTapHiddenToReveal =>
-      'Dotkněte se skryté mapy své mřížky odhalit';
+      'Klepněte na SKRYTOU kartu pro její ODHALENÍ.';
 
   @override
-  String get skyjoChooseActionForDrawn =>
-      'Vyberte si: Ponechat kartu nebo Jeter';
-
-  @override
-  String get skyjoReplaceWithDiscard =>
-      'Dotkněte se mapy vaší mřížky a nahraďte ji odpadem';
-
-  @override
-  String skyjoCardsRevealedCount(Object revealedCount) {
-    return '$revealedCount / 2 karty odhaleny';
+  String skyjoChooseActionForDrawn(Object card) {
+    return 'Zvolte akci pro $card:';
   }
 
   @override
-  String ceTurnOfPlayer(Object currentPlayerName) {
-    return 'Věž $currentPlayerName';
+  String skyjoReplaceWithDiscard(Object card) {
+    return 'Klepněte na kartu pro NAHRAZENÍ z odkládacího balíčku ($card).';
   }
 
   @override
-  String ceStepOfTotal(Object currentRound, Object totalSteps) {
-    return 'Krok $currentRound / 99999';
+  String skyjoCardsRevealedCount(Object count, Object revealedCount) {
+    return '$count / 2 otočené karty';
   }
 
   @override
-  String ceVisibleSnippetOf(Object previousAuthorName) {
-    return 'Poslední slova $previousAuthorName :';
+  String ceTurnOfPlayer(Object name, Object currentPlayerName) {
+    return 'TAH HRÁČE $name';
   }
 
   @override
-  String cePlayerWriting(Object currentPlayerName) {
-    return '$currentPlayerName píše...';
+  String ceStepOfTotal(
+    Object step,
+    Object total,
+    Object currentRound,
+    Object totalSteps,
+  ) {
+    return 'Krok $step / $total';
   }
 
   @override
-  String ceStoryNumber(Object paperIndex) {
-    return 'HISTORY # $paperIndex';
+  String ceVisibleSnippetOf(Object name, Object previousAuthorName) {
+    return 'Viditelný úryvek od $name:';
+  }
+
+  @override
+  String cePlayerWriting(Object name, Object currentPlayerName) {
+    return '$name právě píše...';
+  }
+
+  @override
+  String ceStoryNumber(Object index, Object paperIndex) {
+    return 'PŘÍBĚH #$index';
   }
 
   @override
   String mbTurnOf(Object name) {
-    return 'Věž $name';
+    return 'TAH HRÁČE $name';
   }
 
   @override
   String mbHandCount(Object count) {
-    return '$count karty v ruce';
+    return 'Ruka: $count karet';
   }
 
   @override
-  String get mbCardsInHand => 'Vaše karty v ruce';
-
-  @override
-  String get dobbleAllCardsFound => 'Všechny karty byly nalezeny!';
-
-  @override
-  String get dobbleDealingCards => 'Distribuce karet...';
-
-  @override
-  String get dobbleCenterCard => 'MAP CENTRE';
-
-  @override
-  String dobbleDeckCards(Object count) {
-    return 'PIOCHE ( $count karet)';
+  String mbCardsInHand(Object count) {
+    return 'Karty v ruce ($count)';
   }
 
   @override
-  String get dobbleTapSameSymbol => 'Najděte ten samý symbol!';
+  String get dobbleDealingCards => 'Rozdávání karet...';
+
+  @override
+  String get dobbleCenterCard => 'STŘEDOVÁ KARTA';
 
   @override
   String dobbleMyCardsCount(Object count) {
-    return 'Moje karty: $count';
+    return 'Moje Karty: $count';
   }
 
   @override
-  String get dobbleBlocked => 'Block!';
+  String get dobbleBlocked => 'BLOKOVÁNO!';
 
   @override
-  String get dobbleTooManyErrors => 'Příliš mnoho chyb v řadě! Počkej...';
-
-  @override
-  String get dobblePenaltyWait => 'Počkejte na penalizaci!';
-
-  @override
-  String get dobbleWrongSymbolWarning => 'Špatný symbol! Pozor na ucpání.';
+  String get dobbleTooManyErrors => 'Příliš mnoho rychlých chyb.';
 
   @override
   String dobbleFoundSymbol(Object name) {
-    return '$name našel symbol!';
+    return '$name našel/našla symbol!';
   }
 
   @override
-  String get dobbleSymbolWas => 'Běžným symbolem bylo:';
+  String get dobbleSymbolWas => 'Symbol byl:';
 
   @override
-  String pokerPot(Object pot) {
-    return 'Hrnc: $pot \\\$';
+  String pokerPot(Object amount, Object pot) {
+    return 'Bank: $amount \\\$';
   }
 
   @override
-  String pokerRaiseAlert(Object previewAmount, Object previewPlayerName) {
-    return '$previewPlayerName připravuje $previewAmount stimul \\\$';
+  String pokerRaiseAlert(
+    Object name,
+    Object amount,
+    Object previewAmount,
+    Object previewPlayerName,
+  ) {
+    return '⚠️ $name připravuje navýšení na $amount \\\$!';
   }
 
   @override
-  String pokerCall(Object callAmount) {
-    return 'Sledujte ($callAmount)';
+  String pokerCall(Object amount, Object callAmount) {
+    return 'Dorovnat ($amount)';
   }
 
   @override
-  String pokerRaiseTo(Object amount) {
-    return 'Zvýšit na $amount \\\$';
+  String unoYouMustDraw(Object count, Object pendingDraw) {
+    return 'Musíte si líznout $count karet!';
   }
 
   @override
-  String unoYouMustDraw(Object pendingDraw) {
-    return 'Musíš líznout $pendingDraw karty!';
+  String unoMustDraw(Object count, Object name, Object pendingDraw) {
+    return 'Musí si líznout $count karet!';
   }
 
   @override
-  String unoMustDraw(Object name, Object pendingDraw) {
-    return '$name musí líznout $pendingDraw karty!';
-  }
-
-  @override
-  String unoDrawCountCards(Object pendingDraw) {
-    return 'Lízejte $pendingDraw karty';
+  String unoDrawCountCards(Object count, Object pendingDraw) {
+    return 'Líznout $count karet';
   }
 
   @override
@@ -2824,109 +2794,104 @@ class AppLocalizationsCs extends AppLocalizations {
   String get codenamesRedTeam => 'Červený tým';
 
   @override
-  String get codenamesBlueTeam => 'Tým Modrých';
-
-  @override
-  String get codenamesSpectator => 'Divák';
-
-  @override
-  String get codenamesMasterSpy => 'Špion';
-
-  @override
-  String get codenamesAgent => 'Agent';
+  String get codenamesBlueTeam => 'Modrý tým';
 
   @override
   String codenamesTeamTurn(Object team) {
-    return 'Tým Tour $team';
+    return 'Na řadě je tým: $team';
   }
 
   @override
-  String get codenamesYouAre => 'Jste: ';
+  String get codenamesMasterSpyView => 'Pohled Hlavního špiona (Klíčová karta)';
 
   @override
-  String get codenamesMasterSpyView => 'Spymaster View (Tajná klíčová karta)';
+  String get codenamesClueLabel => 'Vaše nápověda (jedno slovo)';
 
   @override
-  String get codenamesClueLabel => 'Stopa (jedno slovo)';
+  String get codenamesWordCountLabel => 'Počet slov';
 
   @override
-  String get codenamesWordCountLabel => 'Počet cílových slov';
-
-  @override
-  String get codenamesGiveClue => 'Dej nápovědu';
+  String get codenamesGiveClue => 'Dát nápovědu';
 
   @override
   String codenamesClueGiven(Object clue, Object count) {
-    return 'Nápověda uvedena: {clue} pro $count slovo';
+    return 'Dali jste nápovědu: \'$clue $count\'';
   }
 
   @override
-  String get codenamesAgentView => 'Pohled terénních pracovníků';
+  String get codenamesAgentView => 'Pohled Agenta';
 
   @override
-  String get codenamesClueFromSpy => 'Stopa špionážního mistra:';
+  String codenamesClueFromSpy(Object spy) {
+    return 'Nápověda od $spy:';
+  }
 
   @override
   String codenamesGuessesLeft(Object count) {
-    return 'Zbývající zkoušky: $count';
+    return 'Zbývající pokusy: $count';
   }
 
   @override
-  String get codenamesPassTurn => 'Přeskočte svůj tah';
+  String get codenamesPassTurn => 'Ukončit tah';
 
   @override
-  String get codenamesWaitingForClue => 'Čekal jsem na stopu od špiona...';
-
-  @override
-  String timesUpTeamAScore(Object scoreA, Object teamA) {
-    return '$teamA : $scoreA bodů';
+  String codenamesWaitingForClue(Object team) {
+    return 'Čekání na nápovědu $team Hlavního špiona...';
   }
 
   @override
-  String timesUpTeamBScore(Object scoreB, Object teamB) {
-    return '$teamB : $scoreB bodů';
+  String timesUpTeamAScore(Object score, Object scoreA, Object teamA) {
+    return 'Tým A: $score';
+  }
+
+  @override
+  String timesUpTeamBScore(Object score, Object scoreB, Object teamB) {
+    return 'Tým B: $score';
   }
 
   @override
   String timesUpYouAreInTeam(Object team) {
-    return 'Jste v týmu: $team';
+    return 'Jste v $team';
   }
 
   @override
-  String timesUpRoundMode(Object mode, Object round) {
-    return '$round. kolo: $mode';
+  String timesUpRoundMode(Object round, Object mode) {
+    return 'Kolo $round: $mode';
   }
 
   @override
-  String get timesUpYourTurnToMakeGuess =>
-      'Teď je řada na vás, abyste lidi nechali hádat!';
+  String get timesUpYourTurnToMakeGuess => 'Je TVÁ řada dávat nápovědy!';
 
   @override
   String get timesUpRoundEnd => 'KONEC KOLA!';
 
   @override
-  String get timesUpFound => 'Nalezeno!';
+  String get timesUpFound => 'Uhodnuto!';
 
   @override
-  String get timesUpEndMyTurn => 'Konec mého tahu';
+  String get timesUpEndMyTurn => 'Ukončit můj tah';
 
   @override
-  String get timesUpTurnOf => 'Prohlídka:';
+  String get timesUpTurnOf => 'Na řadě je';
 
   @override
   String get timesUpSomeone => 'Někdo';
 
   @override
-  String get timesUpSeconds => 'sekundy';
+  String get timesUpSeconds => 'sekund';
 
   @override
-  String get timesUpCardsLeft => 'Karty zbývající v balíčku';
+  String timesUpCardsLeft(Object count) {
+    return 'Zbývající karty: $count';
+  }
 
   @override
-  String get timesUpForceNextPlayer => 'Další hráč';
+  String get timesUpForceNextPlayer => 'Vynutit dalšího hráče (Hostitel)';
 
   @override
-  String get timesUpGameOverReason => 'Všechny kola jsou u konce!';
+  String timesUpGameOverReason(Object scoreA, Object scoreB) {
+    return 'Konec 3 kol! Tým A: $scoreA b | Tým B: $scoreB b';
+  }
 
   @override
   String get timesUpTeamA => 'Tým A';
@@ -2935,118 +2900,106 @@ class AppLocalizationsCs extends AppLocalizations {
   String get timesUpTeamB => 'Tým B';
 
   @override
-  String get timesUpDraw => 'Rovnost!';
+  String get timesUpDraw => 'Remíza';
 
   @override
-  String get timesUpWaitingForWords => 'Slova odevzdána! Čekání na ostatní...';
+  String get timesUpWaitingForWords =>
+      'Čeká se, až všichni hráči odešlou svá slova...';
 
   @override
   String timesUpAddWordsCount(Object count) {
-    return 'Přidejte $count slov k hádání';
+    return 'Přidejte $count slov nebo výrazů';
   }
 
   @override
-  String get timesUpWordsSubtitle => 'Postavy, předměty, celebrity...';
+  String get timesUpWordsSubtitle => '(lidé, předměty, filmy, místa...)';
 
   @override
-  String get timesUpWordInputLabel => 'Slovo nebo fráze';
+  String timesUpWordInputLabel(Object current, Object target) {
+    return 'Slovo k uhodnutí ($current/$target)';
+  }
 
   @override
-  String get timesUpAddWordTooltip => 'Přidejte toto slovo';
+  String get timesUpAddWordTooltip => 'Přidat toto slovo';
 
   @override
   String get timesUpYourWords => 'Vaše slova:';
 
   @override
-  String get timesUpSubmitWords => 'Potvrď mé slova';
+  String timesUpSubmitWords(Object count) {
+    return 'Odeslat mých $count slov';
+  }
 
   @override
   String get timesUpModeFree => 'Volný popis';
 
   @override
-  String get timesUpModeOneWord => 'Jedno slovo';
+  String get timesUpModeOneWord => 'Pouze jedno slovo';
 
   @override
-  String get timesUpModeMime => 'Mim a onomatopoia';
+  String get timesUpModeMime => 'Pantomima';
 
   @override
-  String dtGuessedWords(Object count) {
-    return '$count slovo(a) nalezeno!';
+  String dtGuessedWords(Object name, Object count) {
+    return '$name uhodl $count slov!';
   }
 
   @override
   String dtMakeGuessWordTo(Object name) {
-    return 'Nech $name hádat slovo!';
+    return 'Pomozte hráči $name uhodnout toto slovo:';
   }
 
   @override
   String undercoverEliminatePlayer(Object name) {
-    return 'Odstraňte $name';
+    return 'Vyřadit hráče $name';
   }
 
   @override
   String undercoverVoteCount(Object count) {
-    return '$count hlas(y)';
+    return '$count hlas(ů)';
   }
 
   @override
   String petitBacRound(Object round) {
-    return 'Sleeve $round';
+    return 'Kolo $round';
   }
 
   @override
-  String get petitBacChooseCategories => 'Vyberte kategorie pro toto turné';
+  String get petitBacChooseCategories => 'Vyberte kategorie:';
 
   @override
-  String get petitBacAddCategory => 'Přidejte vlastní kategorii';
+  String get petitBacAddCategory => 'Přidat kategorii';
 
   @override
-  String get petitBacMinOneCategory => 'Potřebujete alespoň jednu kategorii!';
-
-  @override
-  String get petitBacValidateCategories => 'Validační kategorie';
+  String get petitBacValidateCategories => 'Potvrdit kategorie';
 
   @override
   String petitBacLetter(Object letter) {
-    return 'Dopis: $letter';
+    return 'Písmeno: $letter';
   }
-
-  @override
-  String get petitBacWaitingForBell =>
-      'Prostěradlo vráceno! Čekám na zvonek...';
 
   @override
   String get petitBacIFinished => 'Končím! (Stop)';
 
   @override
-  String get petitBacCorrection => 'Korekce návleku';
-
-  @override
-  String get petitBacGameOverReason => 'Malý Bac skončil hry!';
+  String get petitBacCorrection => 'OPRAVA';
 
   @override
   String presidentGivesTo(Object from, Object to) {
-    return '$from uvádí $to :';
+    return '$from dává hráči $to:';
   }
 
   @override
   String presidentPlayCards(Object count) {
-    return 'Póza ($count)';
+    return 'HRÁT ($count)';
   }
 
   @override
-  String get actionPendingMsg => 'Akce v procesu...';
-
-  @override
-  String get monAnimalPrefere => 'Moje oblíbené zvíře';
+  String get actionPendingMsg => 'Vaše akce se zaznamenává...';
 
   @override
   String get unJoueurEstDesigneComme =>
       'Hráč je označen jako \'cíl\'. Ostatní hráči anonymně odpovídají na otázku o sobě. Cíl si vybere svou preferovanou odpověď a autor této odpovědi získává jeden bod.';
-
-  @override
-  String get uneSituationEstPresenteeTous =>
-      ': \r\n        \"Je předložena situace. Všichni hráči hlasují pro osobu, která je nejpravděpodobnější, že tuto věc udělá. Hráč, který získá nejvíce hlasů, získává jeden bod (pochybná pocta!).\"    ';
 
   @override
   String get modeClassiqueUneQuestionEst =>
@@ -3173,17 +3126,14 @@ class AppLocalizationsCs extends AppLocalizations {
       'Jeho cílem je porazit vlkodlaky, dokud nezíská novou roli. První noc určí zůstavitele, který mu po jeho smrti odkáže jeho roli. Dědic získává zpět pouze síly, které jeho zůstavitel nekonzumoval (čarodějnický lektvar, diktátorovo uchopení moci atd.), kromě Lovce a Hrobníka. Nezíská od svého zůstavitele infekci (Černý vlk) ani kontaminaci (Nemocná krysa). Infekci nebo kontaminaci, kterou měl, si ponechává u základny. Pokud zdědí schopnosti vlkodlaka, ostatní vlci jsou informováni, že se připojuje ke smečce. Pokud zdědí schopnosti diktátora, který zemře v noci svého státního převratu, bude na dědici, aby převzal následky a provedl státní převrat hned po probuzení.';
 
   @override
-  String get touche => 'Přistání';
-
-  @override
   String get unVillageoisSansPouvoirSpecial =>
       'Vesničan bez zvláštních schopností.';
 
   @override
-  String get devoreUnVillageoisLaNuit => 'V noci požírá vesničana.';
+  String get devoreUnVillageoisLaNuit => 'V noci sežere vesničana.';
 
   @override
-  String get decouvreUnRoleParNuit => 'Objevte jednu roli za každou noc.';
+  String get decouvreUnRoleParNuit => 'Odhalí jednu roli za noc.';
 
   @override
   String get sorciere => 'Čarodějnice';
@@ -3192,65 +3142,135 @@ class AppLocalizationsCs extends AppLocalizations {
   String get tireSurQuelquUnEn => 'Zastřel někoho při umírání.';
 
   @override
-  String get espionneLesLoupsLaNuit => 'Špehovat vlky v noci.';
+  String get espionneLesLoupsLaNuit => 'V noci špehuje vlky.';
 
   @override
-  String get creeDeuxAmoureuxLaPremiere =>
-      'Vytvořte si dva milence hned první noc.';
+  String get creeDeuxAmoureuxLaPremiere => 'Vytvoří dva zamilované první noc.';
 
   @override
   String get protegeUnJoueurParNuit => 'Chrání jednoho hráče za noc.';
 
   @override
   String get sonVoteCompteDoubleDesigne =>
-      'Jeho hlas se počítá dvojnásobně. Jmenuje jeho nástupce.';
+      'Hlas se počítá dvakrát. Určí svého nástupce.';
 
   @override
   String get peutTransformerSaVictimeEn =>
-      'Jednou může proměnit oběť v nakaženého vlkodlaka.';
+      'Může jednou přeměnit svou oběť v infikovaného vlkodlaka.';
 
   @override
-  String get doitPrononcerUnMotSecret => 'Musí každý den říct tajné slovo.';
+  String get doitPrononcerUnMotSecret => 'Musí každý den vyslovit tajné slovo.';
 
   @override
   String get objectifEtreSeulSurvivantDevore =>
-      'Cílem je být jediným přeživším. Pohlcuje každou druhou noc.';
+      'Cíl: být jediný přeživší. Žere každou druhou noc.';
 
   @override
   String get gagneSeulSIlTue =>
       'Vyhraje sám o sobě, pokud zabije cíl hned první den.';
 
   @override
-  String get contamineTousLesJoueursPour =>
-      'Kontaminuje všechny hráče, aby vyhrál.';
+  String get contamineTousLesJoueursPour => 'Nakazte všechny hráče a vyhrajte.';
 
   @override
   String get connaitLIssueDuVote =>
       'Zná výsledek hlasování a rozpozná nakažené.';
 
   @override
-  String get necromancien => 'Nekromant';
+  String get necromancien => 'Nekromanc';
 
   @override
-  String get communiqueAvecLesMortsLa => 'Komunikuje s mrtvými v noci.';
+  String get communiqueAvecLesMortsLa => 'V noci komunikuje s mrtvými.';
 
   @override
-  String get aRelanceLesDes3 =>
-      '{pName} znovu hodil kostkou ({3rollsLeft1}/3)!';
+  String get reveleDeuxCampsASa => 'Při smrti odhalí dva tábory.';
+
+  @override
+  String get prendLePouvoirDuVote => 'Jednou převezme hlasovací pravomoc.';
+
+  @override
+  String get protegeeParLeChasseur => 'Chráněna Lovcem.';
+
+  @override
+  String get placeDesTonneauxQuiExplosent =>
+      'Ráno umístit sudy, které vybuchnou, pokud bude živý.';
+
+  @override
+  String get heritier => 'Dědic';
+
+  @override
+  String get heriteDuRoleDeSon => 'Po smrti zůstavitele zdědí jeho roli.';
+
+  @override
+  String get themeIa => 'Téma AI';
+
+  @override
+  String get generalEtVarie => 'Obecné a různorodé';
+
+  @override
+  String get abandonTousLesJoueursDeconnectes =>
+      'Surrender (všichni hráči odpojeni)';
+
+  @override
+  String get tousLesJoueursSeSont => 'Všichni hráči se odpojili';
+
+  @override
+  String nAPasJoueA(Object actionDetails, Object playerName) {
+    return '⏱️ $playerName nehrál včas. Počítač za něj hrál ($actionDetails).';
+  }
+
+  @override
+  String nAPasJoueA1(Object playerName) {
+    return '⏱️ $playerName nehrál včas. Počítač zahrál za něj náhodně.';
+  }
+
+  @override
+  String get joueur => 'Hráč';
+
+  @override
+  String get tempsEcoule1 => '(Čas uplynul)';
+
+  @override
+  String get tempsEcoule2 => 'Uplynulý čas';
+
+  @override
+  String aToucheUneCibleIl(Object shooterDataname) {
+    return '🎯 $shooterDataname zasáhl(a) cíl! Hraje znovu.';
+  }
+
+  @override
+  String aTireDansLEau(Object opponentDataname, Object shooterDataname) {
+    return '🌊 $shooterDataname vystřelil(a) do vody. Na řadě je $opponentDataname.';
+  }
+
+  @override
+  String get unJoueur => 'Hráč';
+
+  @override
+  String get inactif3ToursSansReponse => 'neaktivní (3 tahy bez odpovědi)';
+
+  @override
+  String get leJugeNAPas =>
+      'Rozhodčí neurčil vítěze včas. Body nebyly uděleny.';
+
+  @override
+  String aLanceLesDes(Object pName) {
+    return '$pName hodil(a) kostkami!';
+  }
 
   @override
   String aGardeLeDeDe(Object dieVal, Object index1, Object pName) {
-    return '$pName zachoval hodnotovou kostku $dieVal (#${index1}kostka) 🔒';
+    return '$pName si nechal(a) kostku s hodnotou $dieVal (kostka #$index1) 🔒';
   }
 
   @override
   String aDebloqueLeDe(Object index1, Object pName) {
-    return '$pName odemkl kostku #$index1';
+    return '$pName odemkl(a) kostku #$index1';
   }
 
   @override
   String aGagne(Object playerName) {
-    return '$playerName vyhrál!';
+    return '$playerName vyhrál(a)!';
   }
 
   @override
@@ -3260,15 +3280,15 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get leRatMaladeEstLe =>
-      'Nemocná krysa je jediný, kdo přežil! Otrávil všechny!';
+      'Nemocná krysa je jediným přeživším! Všechny otrávil!';
 
   @override
   String get tousLesAutresSurvivantsSont =>
-      'Všichni ostatní přeživší jsou kontaminováni Nemocnou krysou. Vyhrál!';
+      'Všichni ostatní přeživší jsou nakaženi Nemocnou krysou. Vyhrál!';
 
   @override
   String leRoleDeEst(Object targetName, Object targetRole) {
-    return 'Role $targetName je: $targetRole.';
+    return 'Role hráče $targetName je: $targetRole.';
   }
 
   @override
@@ -3276,20 +3296,16 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String vousEtesAmoureuxDe(Object lover2Name) {
-    return 'Jsi do $lover2Name zamilovaný!';
+    return 'Jsi zamilovaný/á do hráče $lover2Name!';
   }
 
   @override
   String vousEtesAmoureuxDe1(Object lover1Name) {
-    return 'Jsi do $lover1Name zamilovaný!';
+    return 'Jsi zamilovaný/á do hráče $lover1Name!';
   }
 
   @override
   String get pioche3 => 'Krumpáč';
-
-  @override
-  String get wordcivilParts0TrimWordundercover =>
-      '); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    \'\'}\' ještě \'\'{\' \r\n      Bezpečnost proti duplikátům: pokud';
 
   @override
   String get vousNAvezPasDe => 'Nemáš slova';
@@ -3302,14 +3318,14 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String finDesManchesVictoireDe(Object winnerName) {
-    return 'Konec kol! Vítězství $winnerName !';
+    return 'Konec kol! Vítězství hráče $winnerName!';
   }
 
   @override
-  String get scoreCibleAtteint => 'Cílové skóre dosaženo!';
+  String get scoreCibleAtteint => 'Cílového skóre bylo dosaženo!';
 
   @override
-  String get laPartie2v2Commence => 'Začíná hra 2v2!';
+  String get laPartie2v2Commence => 'Hra 2v2 začíná!';
 
   @override
   String get laPartieCommence1 => 'Hra začíná!';
@@ -3320,10 +3336,10 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get chaqueJoueurADevineUne => 'Každý hráč uhodl jednou!';
+  String get chaqueJoueurADevineUne => 'Každý hráč hádal jednou!';
 
   @override
-  String get toutLeMondeEstPasse => 'Všichni už prošli!';
+  String get toutLeMondeEstPasse => 'Všichni pasovali!';
 
   @override
   String get verite1 => 'PRAVDA';
@@ -3332,10 +3348,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String aLePlusDXp(Object maxXp, Object playerswinnerIdnameJoueur) {
     return '$playerswinnerIdnameJoueur má nejvíce XP ($maxXp XP) a stává se adminem!';
   }
-
-  @override
-  String get finDeMancheBoutonAdmin =>
-      ', \r\n          ]), \r\n        \'\'}\'); \r\n      \'\'}\'\'}\'); \r\n  \'\'}\' \r\n\r\n  Konec obalu (admin tlačítko)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) asynchronní \'\'{\' \r\n    await _db.runTransaction((transaction) async\'\'{\' \r\n      final gameRef = _db.collection(\'games\').doc(gameCode); \r\n      final snap = čekat na transaction.get(gameRef); \r\n      pokud (!snap.exists) return; \r\n\r\n      final gameData = snap.data() jako Map<String, dynamic>; \r\n      final players = Map<String, dynamic>.from(gameData[\'players\'] ?? {}); \r\n\r\n      Určte vítěze (více XP)\r\n      String winnerId = \'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'{\' \r\n        konečné xp = (pData[\'xp\'] jako číslo?)?. toInt() ?? 0; \r\n        pokud (xp > maxXp) { \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        }\'\'}\'); \r\n\r\n      transaction.update(gameRef, \'\'{\' \r\n        \'gameState\': \'gameOver\', \r\n        \'gameWinner\': winnerId, \r\n        \'gameEndReason\':\r\n    \r\n      ';
 
   @override
   String get quelquUn => 'Někdo';
@@ -3354,56 +3366,41 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get toutesLesManchesDeTime => 'Všechny kola Time\'s Up jsou u konce!';
+  String get toutesLesManchesDeTime => 'Všechna kola Time\'s Up skončila!';
 
   @override
   String gagneAvecPoints(Object maxScore, Object playerswinnerIdnameUnjoueur) {
-    return '$playerswinnerIdnameUnjoueur vyhrát s $maxScore body!';
+    return '$playerswinnerIdnameUnjoueur vyhrává s $maxScore body!';
   }
 
   @override
   String get finDeLaPartie => 'Konec hry!';
 
   @override
-  String get leDessinateurNAPas => 'Karikaturista kresbu neodevzdal včas.';
+  String get leDessinateurNAPas => 'Kreslíř neodeslal kresbu včas.';
 
   @override
-  String get leTempsEstEcoulePersonne => 'Čas vypršel! Nikdo nenašel to slovo.';
+  String get leTempsEstEcoulePersonne => 'Čas vypršel! Nikdo slovo nenašel.';
 
   @override
-  String get motDevine => 'Slovo uhádnuto!';
+  String get motDevine => 'Slovo uhodnuto!';
 
   @override
-  String get motNonDevine => 'Slovo, které nelze uhodnout.';
+  String get motNonDevine => 'Slovo neuhodnuto.';
 
   @override
   String get les13CartesOntEte => 'Všechny 13 karet bylo zahráno!';
 
   @override
   String laBombeAExploseDans(Object loserName) {
-    return 'Bomba explodovala v rukou $loserName !';
+    return 'Bomba explodovala v rukou hráče $loserName!';
   }
-
-  @override
-  String get gagneAvecPointLowestscore1 =>
-      '{winnerName} vyhrát s {lowestScore} bodem\'\'{\'nejnižším skóre > 1? ';
 
   @override
   String get leJoueur => 'Hráč';
 
   @override
-  String get listStringQuestionsAiwordpoolGamewords =>
-      ') \'\'{\' \r\n      Seznam<String> otázek =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[obtížnost] ?? \r\n          GameWords.whoIsMostLikely[';
-
-  @override
   String get honnete => 'Upřímně';
-
-  @override
-  String get pairSplit => ') ? pair.split(';
-
-  @override
-  String get pairPairListStringShuffledroles =>
-      '): [sudé, sudé]; \r\n\r\n        Seznam<String> shuffledRoles = Seznam.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Otázka =\r\n            \"Popište své tajné slovo jedním slovem. Podvodníci, blaf!\"; \r\n        pro (var pId v players.keys) \'\'{\' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? ';
 
   @override
   String aAtteintPointsEtGagne(
@@ -3414,32 +3411,13 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get playersWinnerid => 'Hráči za \$\'\'{\'[winnerId]? [';
+  String get poseDeCarte => 'vyložení karty';
 
   @override
-  String get poseDeCarte => 'Umístění karet';
+  String get enchereAutomatique => 'automatické přihození';
 
   @override
-  String get enchereAutomatique => 'Automatické dražení';
-
-  @override
-  String get passeLEnchere => 'Prochází aukcí';
-
-  @override
-  String get elseIfGametype =>
-      ') \'\'{\' \r\n        pokud (voterId == votedForId) \'\'{\' \r\n          vyhodit výjimku (\"Formální zákaz hlasovat pro sebe!\"); \r\n        \'\'}\'\'}\' jinak, pokud (gameType ==\r\n      ';
-
-  @override
-  String get intRequiredvotesPlayersLengthIf =>
-      ') { \r\n        creditPlayerXp( \r\n          transakci, \r\n          gameRef, \r\n          gameData, \r\n          volič, \r\n          5, \r\n          applySpeedBonus: pravda, \r\n        ); \r\n      } \r\n\r\n      int requiredVotes = hráči.délka; \r\n\r\n      pokud (gameType == ';
-
-  @override
-  String get forFinalTargetInVotes =>
-      ') \'\'{\' \r\n          konečná Mapa<Řetězec, int> hlasováníPočet = {}; \r\n          pro (konečný cíl v votes.values) { \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          } \r\n\r\n          int maxHlasů = 0; \r\n          Seznam<String> topVotevoted = []; \r\n          voteCounts.forEach((target, count) \'\'{\' \r\n            pokud (počet > maxHlasů) { \r\n              maxVotes = sčítání; \r\n              topVoted = [cíl]; \r\n            } jinak, pokud (count == maxVotes) { \r\n              topVoted.add(target); \r\n            }\'\'}\'); \r\n\r\n          Aktualizace[\r\n          ';
-
-  @override
-  String get forFinalTargetInVotes1 =>
-      ') \'\'{\' \r\n        konečná Mapa<Řetězec, int> hlasováníPočet = {}; \r\n        pro (konečný cíl v votes.values) { \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        } \r\n\r\n        int maxHlasů = 0; \r\n        Seznam<String> topVotevoted = []; \r\n        voteCounts.forEach((target, count) \'\'{\' \r\n          pokud (počet > maxHlasů) { \r\n            maxVotes = sčítání; \r\n            topVoted = [cíl]; \r\n          } jinak, pokud (count == maxVotes) { \r\n            topVoted.add(target); \r\n          }\'\'}\'); \r\n\r\n        pokud (topVoted.length == 1) \'\'{\' \r\n          konečný vítěz = topVoted.first; \r\n          Aktualizace[\r\n        ';
+  String get passeLEnchere => 'pasuje přihození';
 
   @override
   String aRemporteTousLesJetons(Object winnerName) {
@@ -3451,82 +3429,77 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String carte1(Object cardToPlay) {
-    return '$cardToPlay Mapa';
+    return 'karta $cardToPlay';
   }
 
   @override
-  String get quipourraitvotemode =>
-      '? _quiPourraitVoteMode\r\n                      : ';
-
-  @override
   String get localIndisponibleVideoAudioActif =>
-      'Lokální nedostupnost (aktivní video/audio)';
+      'Lokální hra nedostupná (video/zvuk aktivní)';
 
   @override
-  String get jouerEnLocalSurCet => 'Play Local (na tomto zařízení)';
+  String get jouerEnLocalSurCet => 'Hrát lokálně (Na tomto zařízení)';
 
   @override
   String get laVideoEstObligatoirePour =>
-      'Pro hraní Guess Head online je vyžadováno video.';
+      'Pro online hru Hádej, kdo jsem je nutné video.';
 
   @override
   String get desactivezLaRecherchePubliquePour1 =>
-      'Vypněte \'Veřejné vyhledávání\' pro vytvoření soukromé hry.';
+      'Vypněte \'Veřejné vyhledávání\', abyste mohli vytvořit soukromou hru.';
 
   @override
   String get priveIndisponibleRechercheActive =>
-      'Soukromé nedostupné (aktivní vyhledávání)';
+      'Soukromá hra nedostupná (vyhledávání aktivní)';
 
   @override
   String get priveIndisponibleVideoRequise =>
-      'Soukromé nedostupné (vyžaduje video)';
+      'Soukromá hra nedostupná (vyžaduje video)';
 
   @override
-  String get creerUnePartiePriveeAvec => 'Vytvořte soukromou hru (s kódem)';
+  String get creerUnePartiePriveeAvec => 'Vytvořit soukromou hru (S kódem)';
 
   @override
   String get activezLeBoutonRecherchePublique =>
-      'Aktivujte tlačítko \'Veřejné vyhledávání\' v nastavení, abyste si mohli pohrát se světem.';
+      'Zapněte v nastavení \'Veřejné vyhledávání\', abyste mohli hrát se světem.';
 
   @override
-  String get rechercheRapideVideoRequise =>
-      'Rychlé vyhledávání (vyžaduje video)';
+  String get rechercheRapideVideoRequise => 'Rychlé hledání (vyžaduje video)';
 
   @override
-  String get rechercheMondeDesactivee => 'Hledání světa (vypnuto)';
+  String get rechercheMondeDesactivee => 'Světové hledání (Vypnuto)';
 
   @override
   String get laVideoEstObligatoirePour1 =>
-      'Pro hraní Guess Head v Ranked je vyžadováno video.';
+      'Pro hru Hádej, kdo jsem v žebříčku je nutné video.';
 
   @override
   String get activezLeBoutonRecherchePublique1 =>
-      'Zapněte tlačítko \'Veřejné vyhledávání\' v nastavení, abyste mohli hrát Ranked.';
+      'Zapněte v nastavení \'Veřejné vyhledávání\', abyste mohli hrát v žebříčku.';
 
   @override
-  String get partieClasseeRanked => 'Hodnocené';
+  String get partieClasseeRanked => 'Žebříčková hra (Ranked)';
 
   @override
-  String get partieClasseeVideoRequise => 'Ranked Play (vyžaduje video)';
+  String get partieClasseeVideoRequise => 'Žebříčková hra (vyžaduje video)';
 
   @override
-  String get partieClasseeDesactivee => 'Hodnocené hry (postižené)';
+  String get partieClasseeDesactivee => 'Žebříčková hra (Vypnuto)';
 
   @override
   String get ceJeu => 'Tento zápas';
 
   @override
   String get aucunThemeIaSauvegardeSur =>
-      'Na vašem účtu nejsou uložena žádná AI témata.';
+      'Na vašem účtu nejsou uložena žádná témata AI.';
 
   @override
   String get aucunThemeSauvegardePour => 'Žádné téma neuloženo {0}.';
 
   @override
-  String get generationEnCours => 'Současná generace...';
+  String get generationEnCours => 'Generování...';
 
   @override
-  String get completerAvecLIa15 => 'Dokončení pomocí AI (+15 slov)';
+  String get completerAvecLIa15 => 'Doplnit pomocí AI (+15 slov)';
 
   @override
   String completeCetteListeSurLe(Object join, Object text) {
@@ -3535,11 +3508,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get exMythologieGrecqueObjetsInsolites =>
-      'např. řecká mytologie, neobvyklé předměty, piráti...';
+      'např.: Řecká mytologie, neobvyklé předměty, piráti...';
 
   @override
   String get exPasDAnimauxDangereux =>
-      'například žádná nebezpečná zvířata, jen kultovní filmy...';
+      'např.: Žádná nebezpečná zvířata, pouze kultovní filmy...';
 
   @override
   String genererAvecLIaElements(Object currentCount) {
@@ -3550,76 +3523,77 @@ class AppLocalizationsCs extends AppLocalizations {
   String get themePersonnalise => 'Vlastní téma';
 
   @override
-  String get cameraIndispensablePourCeJeu => 'Nezbytná kamera pro tuto hru.';
+  String get cameraIndispensablePourCeJeu => 'Pro tuto hru je nutná kamera.';
 
   @override
   String get microCameraDesactiveLeMode =>
-      'Mikrofon + kamera (vypíná lokální režim)';
+      'Mikrofon + Kamera (Vypíná lokální režim)';
 
   @override
-  String get reserveVipOuLimiteAtteinte => 'Rezervováno VIP nebo limit dosažen';
+  String get reserveVipOuLimiteAtteinte => 'Pouze pro VIP nebo dosažen limit';
 
   @override
-  String get hoteDuSalon => 'Moderátor pořadu';
+  String get hoteDuSalon => 'Hostitel místnosti';
 
   @override
   String get appuyerPourVoirProfil => 'Klepněte pro zobrazení profilu';
 
   @override
   String get siVousEtesLePremier =>
-      'Pokud jste první vyřazený hráč ze hry (mrtvý nebo živý), získáte na konci 4 bonusové body.';
+      'Pokud jsi vůbec prvním vyřazeným hráčem, získáš na konci 4 bonusové body.';
 
   @override
   String get laPremiereFoisQueLa =>
-      'Poprvé, když většina hlasuje proti tobě, jsou všichni, kdo hlasovali proti tobě, odstraněni místo tebe. Tato moc funguje jen jednou.';
+      'Poprvé, kdy většina hlasuje proti tobě, všichni hlasující jsou vyřazeni místo tebe. Funguje pouze jednou.';
 
   @override
   String get enCasDEgaliteLors =>
-      'V případě remízy v hlasování rozhodnete, kdo bude vyřazen z nerozhodných hráčů. Tato síla přetrvává i po vaší smrti.';
+      'Při rovnosti hlasů rozhoduješ o vyřazení ty. Tato schopnost přetrvává i po tvém vyřazení.';
 
   @override
   String get memeApresVotreEliminationVous =>
-      'I po vyřazení pokračujete v hlasování o vyřazení hráčů.';
+      'I po svém vyřazení se nadále účastníš hlasování o vyřazení hráčů.';
 
   @override
   String get unAutreJoueurEstSecretement =>
-      'Další hráč je tajně určen jako váš milenec. Pokud je jeden z vás vyřazen, druhý zemře žalem a je také vyřazen.';
+      'Jiný hráč je tvým tajným milencem. Pokud jeden z vás vypadne, druhý zemře žalem.';
 
   @override
   String get auLieuDeDonnerUn =>
-      'Místo ústní nápovědy musíte každé kolo předvést slovo nápovědy.';
+      'Místo slovní nápovědy musíš své slovo v každém tahu pantomimicky předvést.';
 
   @override
   String get vousNAvezPasDe1 =>
-      'Nemáš slovo, jako pan White, ale vyhraješ, když vyhrají podvodníci. Můžeš lhát a předstírat, že máš slovo, které zapadá.';
+      'Nemáš slovo, stejně jako Mr. White, ale vítězíš s podvodníky. Můžeš blafovat, abys zapadl.';
 
   @override
   String get siVousEtesElimineeVous =>
-      'Pokud jste vyřazeni, můžete si vybrat vzít s sebou do hrobu dalšího hráče (stále naživu).';
+      'Při vyřazení můžeš s sebou do hrobu stáhnout dalšího živého hráče.';
 
   @override
   String get unAutreJoueurEstVotre =>
-      'Další hráč je váš tajný duelant. Pokud přežijete déle než on, získáte 2 bonusové body. Pokud přežije déle než vy, ztratíte 2 body.';
+      'Jiný hráč je tvým tajným sokem. Přežij ho pro zisk +2 bodů; pokud přežije on tebe, ztrácíš 2 body.';
 
   @override
-  String get aucuneDescriptionTrouveePourCe => 'Popis této role nebyl nalezen.';
+  String get aucuneDescriptionTrouveePourCe =>
+      'Pro tuto roli nebyl nalezen žádný popis.';
 
   @override
-  String get cEstAToiDe1 => '🎯 Je na tobě, abys dal nápovědu!';
+  String get cEstAToiDe1 => '🎯 Jsi na řadě s nápovědou!';
 
   @override
   String get auTourDe => 'Teď je to {0}...';
 
   @override
   String get echecDeLUploadDes =>
-      'Nepodařilo se nahrát fotografie na Supabase.';
+      'Nahrávání fotografií na Supabase se nezdařilo.';
 
   @override
   String get ilFautAuMoins3 =>
       'K hraní Photo Roulette potřebujete alespoň 3 fotografie.';
 
   @override
-  String get vousEtesLeJuge => 'Ty jsi soudce!';
+  String get vousEtesLeJuge => 'Jste Soudce!';
 
   @override
   String get jugeCeTour => 'Rozhodčí v tomto kole: {0}';
@@ -3631,7 +3605,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get leJugeLitUneCarte => '👀 Soudce nahlas čte kartu...';
 
   @override
-  String get leJugeEstEnTrain => 'Soudce vybírá...';
+  String get leJugeEstEnTrain => 'Soudce právě vybírá...';
 
   @override
   String get coupAutomatiqueJouePourCause =>
@@ -3646,13 +3620,13 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get zeroPointe => 'Zero Dotted';
+  String get zeroPointe => 'Skyjo (Nula bodů)';
 
   @override
-  String get partieTermineeAvecLeScore => 'Hra skončila s nejnižším skóre!';
+  String get partieTermineeAvecLeScore => 'Konec hry s nejnižším skóre!';
 
   @override
-  String get cEstVotreTour => 'Jsi na řadě ty!';
+  String get cEstVotreTour => 'Jsi na tahu!';
 
   @override
   String get auTourDe1 => 'Je to {name}';
@@ -3670,10 +3644,11 @@ class AppLocalizationsCs extends AppLocalizations {
   String get ecrisUnThemeOuUne => 'Napiš téma nebo větu!';
 
   @override
-  String get imagineUnePhrase => 'Představte si větu!';
+  String get imagineUnePhrase => 'Vymysli větu!';
 
   @override
-  String get vousEtesLOrateurFaites => 'Jste mluvčí: nechte slovo hádat!';
+  String get vousEtesLOrateurFaites =>
+      'Jste nápověda: nechte svůj tým uhodnout slovo!';
 
   @override
   String get faitDevinerAVotreEquipe => '{0} donutí váš tým hádat!';
@@ -3686,10 +3661,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get unSurvivant => 'Přeživší';
 
   @override
-  String get vousAvezEteInfecte => 'JSTE NAKAŽENI!';
+  String get vousAvezEteInfecte => 'BYL JSTE INFIKOVÁN!';
 
   @override
-  String get survivantsEchappes => 'UPRCHLÍ PŘEŽIVŠÍ!';
+  String get survivantsEchappes => 'PŘEŽIVŠÍ UNIKLI!';
 
   @override
   String get piochezChez => 'VYBERTE Z {0} !';
@@ -3698,24 +3673,25 @@ class AppLocalizationsCs extends AppLocalizations {
   String get tourDe => 'KOLO {0}';
 
   @override
-  String get choisissezUneCarteFaceCachee => 'Vyberte kartu lícem dolů náhodně';
+  String get choisissezUneCarteFaceCachee =>
+      'Vyberte náhodnou lícem dolů otočenou kartu';
 
   @override
-  String get enAttenteDeLaPioche => 'Čekám na krumpáč...';
+  String get enAttenteDeLaPioche => 'Čekání na líznutí...';
 
   @override
-  String get laPartieDeBigTwo => 'Zápas Velké dvojice je u konce!';
+  String get laPartieDeBigTwo => 'Hra Velká dvojka skončila!';
 
   @override
   String auTourDe2(Object resolvePlayerNamecurrentPlayerId) {
-    return 'Teď je to $resolvePlayerNamecurrentPlayerId';
+    return 'Na řadě je $resolvePlayerNamecurrentPlayerId';
   }
 
   @override
   String get laPartieEstTerminee => 'Hra skončila!';
 
   @override
-  String get plusAucunCoupPossiblePour => 'Žádné další možné tahy pro soupeře!';
+  String get plusAucunCoupPossiblePour => 'Soupeř již nemá žádné možné tahy!';
 
   @override
   String get cEstVotreTour1 => 'Jsi na řadě ty! ({0})';
@@ -3725,11 +3701,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get regardezVosAmisAL =>
-      'Sledujte své přátele na obrazovce, pomáhají vám!';
+      'Dívejte se na přátele na obrazovce, pomáhají vám!';
 
   @override
   String get lEquipeAdverseJoueSurveillez =>
-      'Soupeřův tým hraje (pozor na fauly):';
+      'Hraje soupeřův tým (hlídejte fauly):';
 
   @override
   String get laSuiteDeLHistoire => 'Zbytek příběhu...';
@@ -3738,13 +3714,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get auteurPrecedent => 'Předchozí autor';
 
   @override
-  String get aVousDEcrire => 'JE NA TOBĚ, ABYS NAPSAL!';
+  String get aVousDEcrire => 'JSTE NA ŘADĚ PSÁT!';
 
   @override
   String get surrealismeClassique => 'Klasický surrealismus';
 
   @override
-  String get suiteDe3Mots => 'Tříslovná sekvence';
+  String get suiteDe3Mots => 'Návaznost 3 slov';
 
   @override
   String strb74c15(Object fullText) {
@@ -3757,38 +3733,38 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get objectif1000BornesAtteint => 'Cíl 1000 Bornes splněn!';
+  String get objectif1000BornesAtteint => 'Cíl 1000 km dosažen!';
 
   @override
-  String get aVousDeRouler => 'JE NA TOBĚ, ABYS JEL!';
+  String get aVousDeRouler => 'JSTE NA ŘADĚ ŘÍDIT!';
 
   @override
-  String get arrete => 'DEKRET';
+  String get arrete => 'ZASTAVENO';
 
   @override
   String get tourDeLAdversaire => 'Tah soupeře';
 
   @override
   String get touchezPourJouerNmaintenezPour =>
-      'Klepněte pro přehrávání\\nPodržte pro odhození';
+      'Klepnutím zahrajete\\nPodržením odhodíte';
 
   @override
-  String get vehiculeNprioritaire => 'Vehicle\\nPriority';
+  String get vehiculeNprioritaire => 'Vozidlo s\\nPředností';
 
   @override
-  String get priorite => 'PRIORITA';
+  String get priorite => 'PŘEDNOST';
 
   @override
-  String get citerneNinepuisable => 'Nádrž\\nNevyčerpatelný';
+  String get citerneNinepuisable => 'Nevyčerpatelná\\nNádrž';
 
   @override
-  String get repare => 'ZNOVU PÁROVANÉ';
+  String get repare => 'OPRAVENO';
 
   @override
-  String get carte2 => 'MAPA';
+  String get carte2 => 'KARTA';
 
   @override
-  String get protegeParUneBotte => '🛡️ Chráněno botou';
+  String get protegeParUneBotte => '🛡️ Chráněno kartou Bezpečnosti';
 
   @override
   String get distanceKm => 'Vzdálenost: {0} km';
@@ -3800,19 +3776,19 @@ class AppLocalizationsCs extends AppLocalizations {
   String get pret1 => 'Připraven!';
 
   @override
-  String get pret2 => 'PŘIPRAVENO';
+  String get pret2 => 'PŘIPRAVEN';
 
   @override
-  String get aVotreTour => 'Teď jsi na řadě ty.';
+  String get aVotreTour => 'Jsi na tahu';
 
   @override
-  String get tourAdverse => 'Soupeřova věž';
+  String get tourAdverse => 'Tah soupeře';
 
   @override
-  String get derniereCartePosee => 'Poslední karta položená!';
+  String get derniereCartePosee => 'Poslední zahraná karta!';
 
   @override
-  String get cEstTonTour => 'Teď jsi na řadě TY!';
+  String get cEstTonTour => 'Jsi NA ŘADĚ!';
 
   @override
   String str422faa(Object valuename, Object valuescore0) {
@@ -3820,12 +3796,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String printEtatDeIsactionpendingAu(Object _isActionPending) {
-    return ' ---\", \r\n    ); \r\n    tisk (\"Počáteční _isActionPending stav: $_isActionPending\"); \r\n\r\n    koneční hráči = (gameData[';
-  }
-
-  @override
-  String get erreurQuestionNonTrouvee => 'Chyba: Otázka nenalezena.';
+  String get erreurQuestionNonTrouvee => 'Chyba: Otázka nebyla nalezena.';
 
   @override
   String str95d36e(Object key0, Object valuename) {
@@ -3833,7 +3804,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get choisissezLaMeilleureReponse => 'Vyberte si nejlepší odpověď!';
+  String get choisissezLaMeilleureReponse => 'Vyberte nejlepší odpověď!';
 
   @override
   String get leJugeChoisit => 'Soudce vybírá...';
@@ -3845,13 +3816,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get votezPourLaDescriptionLa => 'Hlasujte pro nejvtipnější popis!';
 
   @override
-  String get bannissezUneReponse => 'Zakázat odpověď!';
+  String get bannissezUneReponse => 'Zakažte odpověď!';
 
   @override
   String get leJuge => 'Soudce';
 
   @override
-  String get choisisTaReponsePreferee => '👑 Vyberte si preferovanou odpověď:';
+  String get choisisTaReponsePreferee => '👑 Vyberte svou oblíbenou odpověď:';
 
   @override
   String get leJugeExamineAttentivementUne =>
@@ -3864,29 +3835,29 @@ class AppLocalizationsCs extends AppLocalizations {
   String get enAttente1 => 'Čekající ({0}/{1})';
 
   @override
-  String get aucuneReponse => 'Žádná odpověď';
+  String get aucuneReponse => 'žádná odpověď';
 
   @override
   String get leMenteur => 'Lhář';
 
   @override
-  String get mot => 'Word';
+  String get mot => 'Slovo';
 
   @override
-  String get leDessinateur => 'Karikaturista';
+  String get leDessinateur => 'Kreslíř';
 
   @override
   String get leTempsEstEcouleOu =>
-      'Čas vypršel, nebo byl obrázek příliš složitý!';
+      'Čas vypršel nebo byla kresba příliš složitá!';
 
   @override
-  String get leDevin => 'Věštec';
+  String get leDevin => 'Hádající';
 
   @override
   String get pasDeReponse => '(žádná odpověď)';
 
   @override
-  String get deuxDefisReussis => 'Dvě výzvy byly úspěšné.';
+  String get deuxDefisReussis => 'Dvě výzvy splněny.';
 
   @override
   String get leChallenger => 'Vyzyvatel';
@@ -3895,18 +3866,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get stre93cb0 => '{0} : {1}';
 
   @override
-  String get uneDescriptionHilarante => 'Vtipný popis';
-
-  @override
-  String get extrainfoColumnChildrenText =>
-      '; \r\n          extraInfo = sloupec( \r\n            děti: [ \r\n              Text( \r\n                \'';
+  String get uneDescriptionHilarante => 'k popukání vtipný popisek';
 
   @override
   String get unProblemeEstSurvenu => 'Nastal problém.';
-
-  @override
-  String get defaultFinalRoundwinneridGamedata =>
-      ': \r\n      Výchozí: \r\n        finální koloWinnerId = gameData[';
 
   @override
   String str98e212(Object count, Object isFull, Object length, Object pName) {
@@ -3914,13 +3877,13 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get aVousDeJouer => 'Je to na tobě!';
+  String get aVousDeJouer => 'Jste na řadě!';
 
   @override
-  String get trieParCouleur => 'Seřazené podle barvy';
+  String get trieParCouleur => 'Seřazeno podle barvy';
 
   @override
-  String get trierLaMain => 'Roztřídit ruku';
+  String get trierLaMain => 'Seřadit karty';
 
   @override
   String get deuxDefisReussis1 => 'Dvě úspěšné výzvy!';
@@ -3929,18 +3892,18 @@ class AppLocalizationsCs extends AppLocalizations {
   String get cEstAVotreTour1 => 'Jsi na řadě ty!';
 
   @override
-  String get touchezPourPoser => 'Klepněte pro pózování';
+  String get touchezPourPoser => 'Klepnutím položte';
 
   @override
-  String get encherissezOuPassez => 'Nabídnout nebo utratit';
+  String get encherissezOuPassez => 'Sázejte nebo pasujte';
 
   @override
   String str4c885c(Object motdessiner, Object p) {
-    return '$motdessiner : $p';
+    return '$motdessiner: $p';
   }
 
   @override
-  String get voirLeScoreFinal => 'Viz konečné skóre';
+  String get voirLeScoreFinal => 'Zobrazit konečné skóre';
 
   @override
   String str6bd6b6(
@@ -3954,19 +3917,15 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get styleConstTextstyleColorColors =>
-      ',\nstyl: const TextStyle (barva: colors.white70),\n),\nSizedBox (výška: 20),\nZabaleno (\nřádek: WrapAlignment.center,\nděti:\nJust OneFilteredClues\n.map ((nápověda) = > buildEasel (clue.toString ())\n.toList (),\n),\nSizedBox (výška: 20),\nif (just OneFilteredClues.isEmpty)\nText (\nAppLocalizations.of (context)!. allIndiesOntEte,\nstyl: const TextStyle (barva: barevná),\n),\n],\n),\n);\n\'\'}\' jinak \'\'{\'\n/ / Je to odhad hrát\nvrácený sloupec (\nděti: [\nText (';
-
-  @override
   String strf0868c(Object length0, Object valuescore0) {
     return '$length0 : 99999';
   }
 
   @override
-  String get cEstAToi => 'Jsi na řadě!';
+  String get cEstAToi => 'JSI NA ŘADĚ!';
 
   @override
-  String get laPatateAExplose => 'Brambory explodovaly!';
+  String get laPatateAExplose => 'Brambor vybuchl!';
 
   @override
   String get finDeLaPartie1 => 'Konec hry';
@@ -3975,60 +3934,52 @@ class AppLocalizationsCs extends AppLocalizations {
   String get leVillageSEndort => 'Vesnice usíná...';
 
   @override
-  String get leVillageDelibere => 'Vesnice zvažuje...';
+  String get leVillageDelibere => 'Vesnice debatuje...';
 
   @override
-  String get designez2Amoureux => 'Jméno 2 milenci';
+  String get designez2Amoureux => 'Vyberte 2 zamilované';
 
   @override
-  String get amoureuxUnis => 'Milenci sjednoceni!';
+  String get amoureuxUnis => 'Zamilovaní spojeni!';
 
   @override
   String get laVictime => 'oběť';
-
-  @override
-  String get centeractionwidgetRowMainaxissizeMainaxissizeMin =>
-      ';\nCenterAction Widget = řádek (\nmainAxisSize: MainAxisSize.min,\nděti: [\nBuildActionButton (\nštítek: AppLocalizations.of (kontext)! .infikovat,\nikona: Icons.auto opravit vysoké,\nbarva: colors.purpleAccess,\nonPressed: () \'\'{\'\nProvider.of < PlayerState > (\nkontext,\nseznam: false,\n) Record BadgeEvent (\"lg loup noir infict\");\nfirebaseService.loupNoirInfekce (\nwidget.gameCode,\nplayerId,\nPravda.\n);\n\'\'}\',\n),\nconst SizedBox (šířka: 8),\nBuildActionButton (\nštítek: AppLocalizations.of (kontext)! .devoor,\nikona: Icons.close,\nbarva: colors.redAccess,\nOnPressed:\n() = > firebaseService.loupNoirInfekce (\nwidget.gameCode,\nplayerId,\nfalse,\n),\n),\n],\n);\n\'\'}\'\nPřestávka.\nbox \'loup blanc turn\':\npromptText =';
 
   @override
   String get aucuneVictimeCetteNuitProtegee =>
       'Dnes žádné oběti (chráněné nebo ušetřené)';
 
   @override
-  String get styleTextstyleFontweightFontweightBold =>
-      ',\nStyl: TextStyle (\nfontVáha: FontWeight.bold,\nbarva:\nisMine\n? Colors.kyanAccess\n: (zvolený ChatType = = \'wolf\'\n? Colors.redance.shade100\n: colors.white60),\n),\n),\nTextSpan (text: zpráva),\n],\n),\n),\n);\n\'\'}\',\n);\n\'\'}\',\n),\n),\n\n/ / Kompaktní převodová lišta\npokud (canSendMessage)\nŘádek (\nděti: [\nRozšířené (\ndítě: SizedBox (\nvýška:32,\ndítě: TextField (\nregulátor: chatController,\nstyl: const TextStyle (fontSize: 12, barva: colors.white),\ndekorace: InputDecoration (\nhintText:\nAppLocalizations.of (context)! .writeTo,\nhintStyle: const TextStyle (\nbarva: colors.white30,\nfontSize:11,\n),\nhranice: vnější hranice (\nhraniční poloměr: BorderRadius.circle (16),\nHranice: BorderSide.none,\n),\ndcera: pravda,\npllColor: colors.white.with Opacity (0.08),\ncontentPadding: const EdgeInsets.symetric (\nvodorovně:10,\nsvisle:0,\n),\n),\nonOdeslat: (text) \"{\"\npokud (text.trim () .isNotEmpty) {\nfirebaseService.sendChatMessage (\nwidget.gameCode,\nplayerId,\ntext.trim (),\nVybrané ChatType,\n);\nchatroller.clear ();\n}\n\'\'}\',\n),\n),\n),\nconst SizedBox (šířka: 4),\nIconButton (\nicon: const Icon (\nIcons.send zaokrouhleno,\nvelikost:18,\nbarva: colors.kyanAccent,\n),\npolting: EdgeInsets.zero,\nOmezení: Const BoxConstraints (),\nonPressed: () \'\'{\'\npokud (chattralller.text.trim () .isNotEmpty) {\nfirebaseService.sendChatMessage (\nwidget.gameCode,\nplayerId,\nchatroneller.text.trim (),\nVybrané ChatType,\n);\nchatroller.clear ();\n}\n\'\'}\',\n),\n],\n),\n],\n),\n);\n\'\'}\'\n\nWidget buildChatTab (štítek String, typ String, Barevná activeColor) {\nfinal bool isSelected = selectedChatType = = type;\nvrátit Gesturedetektor (\nonTap: () = > setState (() = > selectedChatType = type),\ndítě: kontejner (\npolstrování: const EdgeInsets.symetric (horizontální: 8, vertikální: 3),\ndekorace: BoxDekorace (\nbarva:\nVybraný\n? activeColor.with Opacity (0.25)\n: Colors.white.withOpacity (0.04),\nhraniční poloměr: BorderRadius.circle (10),\nhranice: Border.all (\nbarva:\nJe vybrán? ActiveColor.with Opacity (0.6): Colors.transparentní,\n),\n),\ndítě: text (\noznačení,\nStyl: TextStyle (\nfontSize:10,\nfontWeight: je vybrán? FontWeight.bold: FontWeight.normal,\nbarva: je vybrán? ActiveColor: Colors.white60,\n),\n),\n),\n);\n}\n\n/ / --- UPDATE AVATAR PRO MEZINÁRODNÍ LÉČIVÉ LÁTKY ---\n\nWidget buildSyncTimer (Časový údaj? startTime, integrationInSeconds) \'\'{\'\npokud (startTime) null return const SizedBox.scraster ();\n\n/ / TweenAnimationBuilder umožňuje super tekutý vizuální čas bez blokovacího časovače a manuálního setState, který značně osvětluje nit (bod 4)\nfinal endTime = startTime.toDate () .add (\nDoba trvání (sekundy: trvanlivost),\n);\nposlední zbývající = endTime.diference (DateTime.now ()).\n\npokud (zbývající .isNegative)\nReturn Text (\nApplications.of (context)! .k0S,\nstyl: Téme.of (\nkontext,\n) textTheme.headlineSmall? .copyWith (barva: colors.redAccess),\n);\n\nvrátit TweenAnimationBuilder < Trvání > (\ndoba trvání: zbývající,\nTween: Tween (začátek: zbývající, konec: Duration.zero),\nstavitel: (Kontext BuildContext, hodnota trvání, Widget? dítě) {\nposlední sekundy = hodnota.\nReturn Text (\nAppLocalizations.of (context)! .timeRestantS,\nstyl: Téme.of (kontext) .textTheme.headlineSmall? .copyWith (\nbarva: druhá < 20? Colors.redAccess: colors.amberAccess,\n),\n);\n},\n);\n\'\'}\'\n\nWidget buildSmallChevauI (\nKontext BuildContext,\nMapa < String, dynamická > GameData,\nString playerId,\n) \'\'{\'\nfinální hráči = Mapa < String, dynamická > .from (gameData [\'hráči\']? \'\'{\"}\');\nfinální playerorder = List < String > .from (\nGameData [\'littleChevauxPlayerOrder\']? [],\n);\nKonečné pozice = Mapa < String, dynamické > .from (\nGameData [\'Small ChevauxPositions\']? \'\'{\"}\',\n);\nfinal int currentIndex = gameData [\'small ChevauxCurrentIndex\']? 0;\nfinal String currentPlayerId =\nplayerOrder.isNotEmpty? playerOrder [currentIndex]: \";\nFinal bool isMyTurn = currentPlayerId = = playerId;\nKonečná intice = (gameData [\'small ChevauxDice\') jako číslo??. toInt ()?? 0;\nfinal bool hasRolled = gameData [\'littleChevauxHasrolled\']?? false;\nfinal bool isTeamMode = gameData [\'small Chevaux TeamMode\']?? false;\nKonečná mapa < String, dynamická > convenutiveSixes = Mapa < String, dynamická > .from (\nGameData [\'small ChevauxConsecutiveSixes\']? \'\'{\"}\',\n);\nfinal int mySixStreak = convenutiveSixes [playerId]? 0;\n\n/ / Moderní fluo paleta / arkáda na tmavém pozadí\nKonečný seznam < Color > playerColors = [\nconst Color (0xFFEF4444), / / Neon red\nconst Color (0xFF38BDF8), / / Neon sky blue\nconst Color (0xFF10B981), / / Emerald green\nconst Color (0xFFF59E0B), / / Zlatá oranžová\n];\n\n/ / --- VICTORY SCREEN ---\npokud (gameData [\'gameState\'] = = \'gameOver\') \'\'{\'\nvrátit UniversalGameEndScreen (\ngameTitle:';
+  String get arriveeAuCentreDuPlateau => 'Dosažení středu herního plánu!';
 
   @override
-  String get arriveeAuCentreDuPlateau => 'Jděte do středu plošiny!';
+  String get deplacezUnCheval => 'POHNĚTE KONÍKEM!';
 
   @override
-  String get deplacezUnCheval => 'Hni sebou!';
+  String get aVousDeLancer => 'JSTE NA ŘADĚ HÁZET!';
 
   @override
-  String get aVousDeLancer => 'Je to na tobě!';
-
-  @override
-  String get mode2v2Allies => 'Povolený režim 2v2';
+  String get mode2v2Allies => 'Režim spojenců 2v2';
 
   @override
   String get chevalSelectionneNtouchezPourAvancer =>
       'Vybraný kůň! Přepnout vpřed';
 
   @override
-  String get touchezUnPion => 'Dotkni se pěšáka.';
+  String get touchezUnPion => 'Klepněte na figurku';
 
   @override
-  String get scoreLimiteAtteint => 'Limit skóre dosaženo!';
+  String get scoreLimiteAtteint => 'Dosaženo cílového skóre!';
 
   @override
-  String get toutesLesGrillesSontCompletees => 'Všechny sítě jsou dokončeny!';
+  String get toutesLesGrillesSontCompletees => 'Všechny tabulky jsou vyplněny!';
 
   @override
   String get cEstVotreTourTouchez =>
-      'Jsi na řadě! Dotkněte se kostkou, aby se udržel (doored)';
+      'Jsi na tahu! Klepnutím na kostku ji zafixuješ (zlatá 🔒)';
 
   @override
-  String get lancerLesDes => 'Spustit kostky';
+  String get lancerLesDes => 'Hodit kostkami';
 
   @override
   String k1663(Object oppBonus035, Object oppUpper) {
@@ -4044,41 +3995,37 @@ class AppLocalizationsCs extends AppLocalizations {
   String get scoreFinal => 'Konečné skóre: {scoreA} - {scoreB}';
 
   @override
-  String get encheresEnCours => 'SOUČASNÉ AUKCE';
+  String get encheresEnCours => 'PROBÍHÁ DRAŽBA';
 
   @override
-  String get aVousDOuvrirLe => 'JE NA TOBĚ, ABYS ROZBALIL ZÁHYB!';
+  String get aVousDOuvrirLe => 'JSTE NA ŘADĚ VYNÉST ZDVIH!';
 
   @override
   String get tourDe1 => 'Kolo {0}';
 
   @override
-  String get aVotreTourDeJouer => 'Teď jsi na řadě ty, abys hrál';
+  String get aVotreTourDeJouer => 'Jste na řadě hrát';
 
   @override
-  String get etaleOuDefausse => 'Zdržení nebo odhození';
+  String get etaleOuDefausse => 'Vyložte nebo odhoďte';
 
   @override
-  String get piocheUneCarte => 'Lízni kartu';
+  String get piocheUneCarte => 'Lízněte si kartu';
 
   @override
-  String get plusAucunCoupPossible => 'Žádné další injekce nemožné!';
+  String get plusAucunCoupPossible => 'Žádné další tahy nejsou možné!';
 
   @override
   String get lancer1 => 'Hoď {0}';
 
   @override
-  String get choisirUnJeu => 'Vyberte si hru';
+  String get choisirUnJeu => 'Vybrat hru';
 
   @override
-  String get screenWhoismostlikelylocalscreenPlayersPlayersBreak =>
-      ': \r\n        screen = KdoJeNejpravděpodobnějšíMístníScreen(hráči: _players); \r\n        kombi; \r\n      Box ';
+  String get generation => 'Generování...';
 
   @override
-  String get generation => 'Generace...';
-
-  @override
-  String get genererLesDefisParIa => 'Generování výzev pomocí AI';
+  String get genererLesDefisParIa => 'Generovat úkoly přes AI';
 
   @override
   String genereUnMelangeDActions(Object trim) {
@@ -4086,28 +4033,28 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get genererLesDilemmesParIa => 'Generování dilemat pomocí AI';
+  String get genererLesDilemmesParIa => 'Generovat dilemata pomocí AI';
 
   @override
-  String get egalite => 'Rovnost';
+  String get egalite => 'Remíza';
 
   @override
-  String get choixEnregistre => 'Volba zachráněna!';
+  String get choixEnregistre => 'Volba uložena!';
 
   @override
   String get dilemmePourFaisTonChoix => 'Dilema pro {0} : vyberte si!';
 
   @override
-  String get tousLesVotesSontEnregistres => 'Všechny hlasy jsou zaznamenány!';
+  String get tousLesVotesSontEnregistres => 'Všechny hlasy byly zaznamenány!';
 
   @override
   String get cEstAuTourDe1 => 'Teď je řada na {0} hlasovat!';
 
   @override
-  String get lancerLeDilemme => 'Spuštění dilematu';
+  String get lancerLeDilemme => 'Roztočit dilema';
 
   @override
-  String get genererLesQuestionsIa => 'Generujte otázky ohledně AI';
+  String get genererLesQuestionsIa => 'Generovat otázky přes AI';
 
   @override
   String genereDesQuestionsIndiscretesEt(Object trim) {
@@ -4116,17 +4063,14 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get perduReveleLaQuestionEt =>
-      'ZTRACENI! Odhalte otázku a odpovězte na ni!';
+      'PROHRÁL(A) JSI! Odhal otázku a odpověz!';
 
   @override
-  String get gagneTonSecretEstPreserve => 'WON! Tvé tajemství je zachováno.';
+  String get gagneTonSecretEstPreserve =>
+      'VÝHRA! Tvoje tajemství je v bezpečí.';
 
   @override
-  String get wordcivilParts0TrimWordundercover1 =>
-      '); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    \'\'}\' ještě \'\'{\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"{trim} (varianta)\"; \r\n    \'\'}\' \r\n\r\n    _playerRoles.clear(); \r\n    pro (VAR hráč v _activePlayers) \'\'{\' \r\n      pokud (hráč == v utajení) \'\'{\' \r\n        _playerRoles[hráč] = \"Infiltrátor\"; \r\n      \'\'}\' jinak, pokud (hráč == _mrWhitePlayer) \'\'{\' \r\n        _playerRoles[hráč] = \"Pan Bílý\"; \r\n      \'\'}\' ještě \'\'{\' \r\n        _playerRoles[hráč] = \"Civil\"; \r\n      \'\'}\'\'}\' \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.odhalující; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'}\'); \r\n  \'\'}\' \r\n\r\n  void _nextPlayerReveal() \'\'{\' \r\n    pokud (_currentPlayerRevealIndex < _activePlayers.délka - 1) { \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    } ještě { \r\n      setState(() => _gameState = UndercoverGameState.diskusující); \r\n    }\'\'}\' \r\n\r\n  void _eliminatePlayer(hráč na smyčce) \'\'{\' \r\n    String role = _playerRoles[player]!; \r\n    bool impostorsWin = role == \"Civil\"; \r\n\r\n    setState(() \'\'{\' \r\n      _gameState = UndercoverGameState.result; \r\n      pokud (podvodníci Vítězí) \'\'{\' \r\n        _resultMessage = \"{player} byl civilista! Podvodníci vyhráli!\"; \r\n      \'\'}\' ještě \'\'{\' \r\n        _resultMessage = \"{player} byl\r\n    \r\n  ';
-
-  @override
-  String get requiert4Joueurs => 'Vyžaduje hráče 4+';
+  String get requiert4Joueurs => 'Vyžaduje 4+ hráče';
 
   @override
   String get requiert3Joueurs => 'Vyžaduje 3+ hráče';
@@ -4137,14 +4081,10 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get bodyPaddingPaddingConstEdgeinsets =>
-      '), \r\n          ), \r\n        ], \r\n      ), \r\n      Tělo: Výplň ( \r\n        polstrování: const EdgeInsets.all(16.0), \r\n        dítě: Sloupec( \r\n          děti: [ \r\n            if (_phase != LocalWhoIsPhase.results) ... [ \r\n              FILTR OBTÍŽNOSTI\r\n              SegmentedButton<String>( \r\n                Segmenty: [ \r\n                  ButtonSegment( \r\n                    Hodnota: ';
+  String get egalite1PtChacun => 'Remíza! (+1 b pro každého)';
 
   @override
-  String get egalite1PtChacun => 'Remíza! (+1 bod každý)';
-
-  @override
-  String get designeParLeGroupe1 => 'Nominováno skupinou (+1 bod):';
+  String get designeParLeGroupe1 => 'Zvolen skupinou (+1 b):';
 
   @override
   String get onSePasseUnObjet => 'Předáme si navzájem objekt';
@@ -4153,7 +4093,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get ilElleDoitRepondreA => 'Musí odpovědět na otázku:';
 
   @override
-  String get passe => 'MINULOST';
+  String get passe => 'PAS';
 
   @override
   String get equipeRouge => '{0} (Červený tým)';
@@ -4162,7 +4102,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get equipeBleue => '{0} (Tým Modří)';
 
   @override
-  String get k2EquipesSAffrontent => 'Soutěží 2 týmy';
+  String get k2EquipesSAffrontent => '2 týmy soupeří proti sobě';
 
   @override
   String get chacunPourSoi => 'Každý sám za sebe';
@@ -4173,37 +4113,33 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get afficherLesSalonsPleins => 'Ukázejte plné salonky';
+  String get afficherLesSalonsPleins => 'Zobrazit plné salónky';
 
   @override
-  String get masquerLesSalonsPleins => 'Schovejte plné salonky';
+  String get masquerLesSalonsPleins => 'Skrýt plné salónky';
 
   @override
   String get aucunSalonNeCorrespondA =>
-      'Žádná místnost neodpovídá tvým filtrům.';
+      'Žádná místnost neodpovídá vašim filtrům.';
 
   @override
   String get aucunSalonPublicDisponibleNcreez =>
-      'Veřejný salonek není k dispozici.\\nVytvořte si vlastní níže!';
+      'Žádné veřejné salónky nejsou k dispozici.\\nVytvořte si vlastní níže!';
 
   @override
   String get general => 'Obecné';
 
   @override
-  String get hote => 'Moderátor';
+  String get hote => 'Hostitel';
 
   @override
-  String get pret3 => 'Připraveni ✓';
-
-  @override
-  String get reasonIsnotempty =>
-      '{vainqueur} {winner}\'\'{\'důvod.IsNotEmpty? ';
+  String get pret3 => 'Připraven ✓';
 
   @override
   String get partie => 'Část';
 
   @override
-  String get lancerUnStream => 'Začněte stream';
+  String get lancerUnStream => 'Spustit Stream';
 
   @override
   String rejoindreLeStream(Object length) {
@@ -4211,22 +4147,22 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get enAttenteDuLancement => 'Čekání na start...';
+  String get enAttenteDuLancement => 'Čekání na spuštění...';
 
   @override
-  String get voler => 'LEŤ!';
+  String get voler => 'UKRÁST!';
 
   @override
-  String get ciblee => 'CÍLENĚ';
+  String get ciblee => 'CÍL';
 
   @override
-  String get visee => 'ZAMĚŘ!';
+  String get visee => 'ZAMĚŘENO!';
 
   @override
-  String get exFais10PompesEn => 'Například: Udělejte 10 kliků při zpěvu...';
+  String get exFais10PompesEn => 'Např.: Udělej 10 kliků a zpívej...';
 
   @override
-  String get exQuelEstTonPire => 'Ex: Jaký je váš nejhorší moment hanby?';
+  String get exQuelEstTonPire => 'Např.: Jaký byl tvůj největší trapas?';
 
   @override
   String get verite2 => '🔮 PRAVDA';
@@ -4242,10 +4178,10 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get defiValide => 'VÝZVA POTVRZENA!';
+  String get defiValide => 'ÚKOL SPLNĚN!';
 
   @override
-  String get defiNonValide => 'VÝZVA NEUZNÁNA';
+  String get defiNonValide => 'ÚKOL NESPLNĚN';
 
   @override
   String get partieTerminee3 => 'Hra dokončena';
@@ -4260,97 +4196,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get pret4 => '✓ Připraven';
 
   @override
-  String get reveleDeuxCampsASa => 'Odhaluje dvě stránky své smrti.';
-
-  @override
-  String get prendLePouvoirDuVote => 'Jednou převezme sílu hlasování.';
-
-  @override
-  String get protegeeParLeChasseur => 'Chráněn Lovcem.';
-
-  @override
-  String get placeDesTonneauxQuiExplosent =>
-      'Ráno umístit sudy, které vybuchnou, pokud bude živý.';
-
-  @override
-  String get heritier => 'Dědic';
-
-  @override
-  String get heriteDuRoleDeSon => 'Po jeho smrti dědí roli svého zůstavitele.';
-
-  @override
-  String get themeIa => 'AI téma';
-
-  @override
-  String get caseLabel => ': \r\n      Box ';
-
-  @override
-  String get generalEtVarie => 'Obecné a rozmanité';
-
-  @override
-  String get unDinosaureQuiMangeUne => 'Dinosaurus jí zmrzlinu';
-
-  @override
-  String get pouvoirVolerOuEtreInvisible =>
-      'Schopnost létat nebo být neviditelný';
-
-  @override
-  String returnGenereDesSituationsCourtes(Object finalPrompt) {
-    return ': \r\n        return \"Generuje krátké situace začínající akcí. Téma: $finalPrompt\"; \r\n      Box ';
-  }
-
-  @override
-  String get abandonTousLesJoueursDeconnectes =>
-      'Surrender (všichni hráči odpojeni)';
-
-  @override
-  String get tousLesJoueursSeSont => 'Všichni hráči se odpojili';
-
-  @override
-  String nAPasJoueA(Object actionDetails, Object playerName) {
-    return '⏱️ $playerName nehrál včas. Počítač za něj hrál ($actionDetails).';
-  }
-
-  @override
-  String nAPasJoueA1(Object playerName) {
-    return '⏱️ $playerName nehrál včas. Počítač za něj hrál náhodně.';
-  }
-
-  @override
-  String get joueur => 'Hráč';
-
-  @override
-  String get tempsEcoule1 => '(Čas uplynul)';
-
-  @override
-  String get tempsEcoule2 => 'Uplynulý čas';
-
-  @override
-  String aToucheUneCibleIl(Object shooterDataname) {
-    return '🎯 $shooterDataname trefil terč! Hraje znovu.';
-  }
-
-  @override
-  String aTireDansLEau(Object opponentDataname, Object shooterDataname) {
-    return '🌊 $shooterDataname vystřelil do vody. Byla řada na $opponentDataname.';
-  }
-
-  @override
-  String get unJoueur => 'Jeden hráč';
-
-  @override
-  String get inactif3ToursSansReponse => 'Nečinnost (3 neodpovězené tahy)';
-
-  @override
-  String get leJugeNAPas =>
-      'Rozhodčí neurčil vítěze včas. Body nebyly uděleny.';
-
-  @override
-  String aLanceLesDes(Object pName) {
-    return '$pName hodil kostkou!';
-  }
-
-  @override
   String jAiLanceUnePartie(Object selectedGame) {
     return 'Hodil jsem $selectedGame hru!';
   }
@@ -4360,7 +4205,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get localIndisponibleRechercheActive =>
-      'Místní není k dispozici (Aktivní vyhledávání)';
+      'Místní nedostupné (Hledání aktivní)';
 
   @override
   String get rechercheRapideMonde => 'Rychlé vyhledávání (svět)';
@@ -4373,10 +4218,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get petiteBlind => 'Malé nevidomé: \'\'{\' 0} \'';
 
   @override
-  String get simpleVillageois => 'Jednoduché vesnice';
+  String get simpleVillageois => 'Vesničan';
 
   @override
-  String get capitaine => 'Kapitáne.';
+  String get capitaine => 'Kapitán';
 
   @override
   String s2(Object hotPotatoGlobalDuration) {
@@ -4441,40 +4286,40 @@ class AppLocalizationsCs extends AppLocalizations {
   String get anonyme => 'Anonymní';
 
   @override
-  String get vousAvezVote => 'Hlasovala jsi!';
+  String get vousAvezVote => 'Hlasovali jste!';
 
   @override
-  String get inconnu => 'Neznámé';
+  String get inconnu => 'Neznámý';
 
   @override
-  String get personne => 'Osoba';
+  String get personne => 'Nikdo';
 
   @override
-  String get chargementDeLaPartie => 'Nahrávám část...';
+  String get chargementDeLaPartie => 'Načítání hry...';
 
   @override
   String get systeme => 'Systém';
 
   @override
-  String get jeuEnCours => 'Probíhá hra';
+  String get jeuEnCours => 'Probíhající hra';
 
   @override
-  String get asLabel => 'Jako';
+  String get asLabel => 'Jedničky';
 
   @override
-  String get deux => 'Dva.';
+  String get deux => 'Dvojky';
 
   @override
-  String get trois => 'Tři';
+  String get trois => 'Trojky';
 
   @override
-  String get quatre => 'Čtyři';
+  String get quatre => 'Čtyřky';
 
   @override
-  String get cinq => 'Pět.';
+  String get cinq => 'Pětky';
 
   @override
-  String get six => 'Šest.';
+  String get six => 'Šestky';
 
   @override
   String get sectionSup => 'Sekce \"{\'0}\"';
@@ -4486,7 +4331,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get prenezLaDefausseVisibleOu =>
-      'Vezměte viditelné vady nebo vyberte skrytou kartu';
+      'Vezměte viditelnou odhozenou kartu nebo lízněte skrytou';
 
   @override
   String aa(Object value) {
@@ -4499,16 +4344,16 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get completeCeDessin => 'Dokonči tu kresbu!';
+  String get completeCeDessin => 'Dokonči tuto kresbu!';
 
   @override
-  String get commenceParUnDessin => 'Začněte s kresbou!';
+  String get commenceParUnDessin => 'Začni kresbou!';
 
   @override
-  String get orateur => 'Mluvčí';
+  String get orateur => 'Nápověda';
 
   @override
-  String get moi => 'Př';
+  String get moi => 'Já';
 
   @override
   String get manche1 => 'Channel { 0} / { 1} \'';
@@ -4524,45 +4369,45 @@ class AppLocalizationsCs extends AppLocalizations {
   String get jouePar => 'Hrál { 0 }';
 
   @override
-  String get lAdversaire => 'Nepřítel';
+  String get lAdversaire => 'Protivník';
 
   @override
   String ecrivez(Object promptItem) {
-    return 'Napsat $promptItem';
+    return 'Napiš $promptItem';
   }
 
   @override
-  String get completezLaPhrase1A => 'Vyplňte větu (1 až 8 slov)';
+  String get completezLaPhrase1A => 'Dokonči větu (1 až 8 slov)';
 
   @override
   String get auteur => 'Autor';
 
   @override
-  String get adversaire => 'Odpůrce';
+  String get adversaire => 'Soupeř';
 
   @override
-  String get feuVert => 'ŘECKO';
+  String get feuVert => 'ZELENÁ';
 
   @override
-  String get feuRouge => 'Červené světlo';
+  String get feuRouge => 'Červená';
 
   @override
-  String get limite501 => 'Mezní hodnota 50';
+  String get limite501 => 'Limit 50';
 
   @override
-  String get crevaison1 => 'Krevaison';
+  String get crevaison1 => 'Defekt Pneumatiky';
 
   @override
-  String get feuVert1 => 'Zelené světlo';
+  String get feuVert1 => 'Zelená';
 
   @override
   String get finDeLimite => 'Konec\nOmezení';
 
   @override
-  String get fin50 => 'Konec 50';
+  String get fin50 => 'KONEC 50';
 
   @override
-  String get essence => 'Benzin';
+  String get essence => 'Benzín';
 
   @override
   String get roueDeSecours => 'Kolo\nÚleva';
@@ -4602,7 +4447,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get laPartieVaBientotCommencer => 'Hra začne brzy...';
 
   @override
-  String get mrWhite => 'Pane White.';
+  String get mrWhite => 'Mr. White';
 
   @override
   String aEteDemasqueIlTente(Object mrWhiteName) {
@@ -4611,7 +4456,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get voteDecisifEnregistreEnAttente =>
-      'Rozhodující zaznamenané hlasování. Čekání na ostatní...';
+      'Rozhodující hlas zaznamenán. Čeká se na ostatní...';
 
   @override
   String get egaliteParfaiteLaDeesseDe =>
@@ -4627,16 +4472,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get question1 => 'Otázka...';
 
   @override
-  String get voteEnregistre => 'Nahráno hlasování...';
+  String get voteEnregistre => 'Hlas zaznamenán...';
 
   @override
-  String get lesAutresJugentTonHistoire => 'Ostatní soudí váš příběh...';
+  String get lesAutresJugentTonHistoire => 'Ostatní hodnotí tvůj příběh...';
 
   @override
-  String get vrai1 => 'Pravda.';
+  String get vrai1 => 'Pravda';
 
   @override
-  String get faux1 => 'Falešné';
+  String get faux1 => 'Lež';
 
   @override
   String get tuAsVote => 'Hlasovala jsi:';
@@ -4650,7 +4495,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String leMenteurEtait(Object liarName) {
-    return 'Ten lhář byl $liarName !';
+    return 'Lhářem byl... $liarName!';
   }
 
   @override
@@ -4714,7 +4559,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String defiGagneCarteSRevelee(Object challengeBid) {
-    return 'Výzva vyhrála: $challengeBid odhalil karty (karty)!';
+    return 'Výzva vyhrána: odhaleno $challengeBid karet!';
   }
 
   @override
@@ -4723,16 +4568,11 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get leTourEstTermine1 => 'Je konec.';
-
-  @override
-  String aGagneAvecSaDescription(Object winnerName, Object winningDescription) {
-    return '$winnerName vyhrál s popisem: AppLocalizations.of (kontext)!. extrainfoColumnChildText 99999';
-  }
+  String get leTourEstTermine1 => 'Tah skončil.';
 
   @override
   String get personneNAGagneCe =>
-      'Tohle kolo nikdo nevyhrál. Rovnost hlasů nebo žádný popis.';
+      'Nikdo toto kolo nevyhrál. Remíza nebo žádné popisky.';
 
   @override
   String aTrouveLeSymboleIl(Object commonSym, Object winnerName) {
@@ -4741,7 +4581,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get leTourEstTerminePersonne =>
-      'Je konec. Nikdo nenašel společný symbol.';
+      'Kolo skončilo. Nikdo nenašel společný symbol.';
 
   @override
   String aEteDesigneEEt(Object winnerName) {
@@ -4749,13 +4589,14 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get egalitePersonneNeMarqueDe => 'Rovnost! Nikdo to nepozná.';
+  String get egalitePersonneNeMarqueDe =>
+      'Remíza! V tomto kole nikdo nezískává body.';
 
   @override
-  String get espion => 'Espion';
+  String get espion => 'Špión';
 
   @override
-  String get revolution => 'Revoluce!';
+  String get revolution => ' (Revoluce!)';
 
   @override
   String get rose1 => 'Růže';
@@ -4767,7 +4608,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get motADessiner => 'Slovo k nakreslení';
 
   @override
-  String get indiceEnvoyeEnAttenteDes1 => 'Zápis odeslán! Čekání na ostatní...';
+  String get indiceEnvoyeEnAttenteDes1 =>
+      'Nápověda odeslána! Čeká se na ostatní...';
 
   @override
   String get carte3 => 'Mapa';
@@ -4776,32 +4618,19 @@ class AppLocalizationsCs extends AppLocalizations {
   String get score => 'Bod';
 
   @override
-  String applocalizationsOfContextStyleconsttextstylecolorcolors(
-    Object deckIndex,
-    Object deckTotal,
-    Object guesserName,
-    Object totalScore,
-    Object value,
-    Object value2,
-    Object value3,
-  ) {
-    return '$value $guesserName : Applications.of (kontext)! .styleConstTextstyleColors $value2 $deckIndex / $deckTotal - $value3 : $totalScore';
-  }
-
-  @override
   String get laNuitTombeSurLe => 'Noc padá na vesnici...\n\nZavři oči.';
 
   @override
   String get leMomentEstVenuLe => 'Nadešel čas...\n\nVesnice musí hlasovat.';
 
   @override
-  String get victoireDesVillageois => 'Victoire des Villageois!';
+  String get victoireDesVillageois => 'Vítězství Vesničanů!';
 
   @override
-  String get victoireDesLoupsGarous => 'Vítězství Wolf- Garous!';
+  String get victoireDesLoupsGarous => 'Vítězství Vlkodlaků!';
 
   @override
-  String get victoireDesAmoureux => 'Vítězství milenců!';
+  String get victoireDesAmoureux => 'Vítězství Zamilovaných!';
 
   @override
   String get finDuJeu => 'Konec hry';
@@ -4813,201 +4642,184 @@ class AppLocalizationsCs extends AppLocalizations {
   String get validerLeCouple2 => 'Potvrdit točivý moment ({ 0} \'/ 2)';
 
   @override
-  String get lHeritierChoisitSonTestament => 'Dědic si vybírá svou vůli.';
+  String get lHeritierChoisitSonTestament => 'Dědic volí svůj vzor';
 
   @override
-  String get selectionnezVotreTestateur => 'Vyberte tester';
+  String get selectionnezVotreTestateur => 'Vyberte svého předchůdce';
 
   @override
-  String get leGardeProtegeUnVillageois => 'Stráž chrání vesničany.';
+  String get leGardeProtegeUnVillageois => 'Strážce chrání vesničana';
 
   @override
-  String get selectionnezQuiProteger => 'Vybrat, koho chránit';
+  String get selectionnezQuiProteger => 'Vyberte koho chránit';
 
   @override
-  String get laVoyanteConsulteLesAstres => 'Věštec konzultuje hvězdy';
+  String get laVoyanteConsulteLesAstres => 'Vědma hledí do hvězd';
 
   @override
   String get touchezUnJoueurPourSonder =>
-      'Dotkněte se hráče, abyste prozkoumali jeho roli.';
+      'Klepnutím na hráče zjistíte jeho roli';
 
   @override
-  String get leRatMaladeRode => 'Ta nemocná krysa duní...';
+  String get leRatMaladeRode => 'Nakažená krysa obchází...';
 
   @override
-  String get contaminezJusquA2Joueurs => 'Kontaminovat až 2 hráče';
+  String get contaminezJusquA2Joueurs => 'Infikujte až 2 hráče';
 
   @override
   String get contaminer => 'Kontaminát (\'\'{\' 0} \')';
 
   @override
-  String get lesLoupsChassentEnMeute => 'Vlci loví ve smečce.';
+  String get lesLoupsChassentEnMeute => 'Vlci loví ve smečce';
 
   @override
-  String get votezPourDevorerUneProie => 'Hlasujte pro kořist.';
+  String get votezPourDevorerUneProie => 'Hlasujte o sežrání kořisti';
 
   @override
-  String get espionnezUnJoueur => 'Doufám, že hráč...';
+  String get espionnezUnJoueur => 'Špehujte hráče...';
 
   @override
-  String get leLoupNoirDecideDu => 'Černý vlk rozhoduje o osudu kořisti.';
+  String get leLoupNoirDecideDu => 'Černý vlk rozhoduje o osudu oběti';
 
   @override
-  String
-  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
-    Object targetName,
-  ) {
-    return 'Infekce $targetName ? ApLocalizations.of (context)!. centeractionwidgetRowMainaxissizeMainaxissizeMinThe White Wolf stávkuje sólo';
-  }
+  String get choisissezUneVictimeADevorer => 'Vyberte oběť k sežrání';
 
   @override
-  String get choisissezUneVictimeADevorer => 'Vyberte si oběť k jídlu';
-
-  @override
-  String get laSorcierePrepareSesPotions =>
-      'Čarodějnice připravuje své lektvary';
+  String get laSorcierePrepareSesPotions => 'Čarodějnice míchá lektvary';
 
   @override
   String cibleDesLoups(Object victimeName) {
-    return 'Vlk cíl: $victimeName';
+    return 'Cíl vlků: $victimeName';
   }
 
   @override
   String get touchezLeJoueurAEliminer => 'Dotkněte se hráče odstranit s jedem';
 
   @override
-  String get empoisonner => 'Jed';
+  String get empoisonner => 'Otrávit';
 
   @override
   String get lePyromancienPrepareSesExplosifs =>
-      'Pyroman připravuje výbušniny.';
+      'Pyromant chystá své výbušniny';
 
   @override
-  String get poserTonneau => 'Hlaveň';
+  String get poserTonneau => 'Umístit sud';
 
   @override
-  String get debatsDuVillage => 'Rozpravy obce';
+  String get debatsDuVillage => 'Debata vesnice';
 
   @override
   String get leCapitaineDesigneSonSuccesseur => 'Kapitán jmenuje nástupce';
 
   @override
-  String get dernierTirDuChasseur => 'Poslední záběr Huntera...';
+  String get dernierTirDuChasseur => 'Poslední výstřel Lovce...';
 
   @override
-  String get leFossoyeurReveleUneSepulture => 'Fosoyeur odhaluje hrob.';
+  String get leFossoyeurReveleUneSepulture => 'Hrobník odhaluje hrob';
 
   @override
-  String get coupDEtatDuDictateur => 'Diktátorův převrat!';
+  String get coupDEtatDuDictateur => 'Převrat Diktátora!';
 
   @override
-  String get voteDuTribunalPopulaire => 'Hlasování u lidového soudu';
+  String get voteDuTribunalPopulaire => 'Hlasování lidového soudu';
 
   @override
-  String get touchezUnSuspectPourVoter =>
-      'Dotkněte se podezřelého k hlasování.';
+  String get touchezUnSuspectPourVoter => 'Klepnutím na podezřelého hlasujte';
 
   @override
   String get village => 'Vesnice';
 
   @override
-  String get loups => 'vlci';
+  String get loups => 'Vlci';
 
   @override
-  String get outreTombe => 'Zámoří';
+  String get outreTombe => 'Záhrobí';
 
   @override
-  String get amoureux => 'Milenci';
-
-  @override
-  String
-  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
-    Object senderName,
-  ) {
-    return '$senderName : AppleLocalizations.of (context)!. StyleTextstyleFontwirtFontwirtFondBoldSmall Horses';
-  }
+  String get amoureux => 'Zamilovaní';
 
   @override
   String get courseIndividuelle => 'Individuální závod';
 
   @override
   String k3Lancers(Object lastHoldAction, Object value) {
-    return '$lastHoldAction ( $value / 3 odlitky)';
+    return '👉 $lastHoldAction ($value/3 hodů)';
   }
 
   @override
   String joueEnDirect3Lancers(Object value, Object value2) {
-    return '$value hraje živě... (99999 / 3 záběry)';
+    return '👉 $value hraje živě... ($value2/3 hodů)';
   }
 
   @override
   String get gardeS => '\'\'{\' 0} \'uchováván';
 
   @override
-  String get cur => 'Ú íp';
+  String get cur => '♥ Srdce';
 
   @override
-  String get carreau => 'Name';
+  String get carreau => '♦ Káry';
 
   @override
-  String get trefle => '♣ Trèfle';
+  String get trefle => '♣ Kříže';
 
   @override
-  String get pique => '♠ Pique';
+  String get pique => '♠ Piky';
 
   @override
-  String get equipeARouge => 'Tým A (červená)';
+  String get equipeARouge => 'Tým A (Červený)';
 
   @override
-  String get equipeBBleue => 'Tým B (modrý)';
+  String get equipeBBleue => 'Tým B (Modrý)';
 
   @override
   String get votezPourLaPersonneLa =>
-      'Hlasujte pro osobu s největší pravděpodobností...';
+      'Hlasujte pro osobu, u které je největší pravděpodobnost, že...';
 
   @override
-  String get demasquezLInfiltreEtMr => 'Odmaskovat Infiltrované a pana Whitea!';
+  String get demasquezLInfiltreEtMr => 'Odmaskujte Špióna a Mr. Whitea!';
 
   @override
-  String get passeLeTelephoneAvantQu => 'Podej mi telefon, než vybuchne!';
+  String get passeLeTelephoneAvantQu => 'Předávej telefon, než vybuchne!';
 
   @override
   String get proposezLeMeilleurSynonymeEt =>
-      'Navrhnout nejlepší synonymum a hlasovat!';
+      'Navrhněte nejlepší synonymum a hlasujte!';
 
   @override
-  String get leClassiqueAvecChoixEt => 'Klasika, s výběrem a upravenou AI!';
+  String get leClassiqueAvecChoixEt => 'Klasika s možnostmi a vlastní AI!';
 
   @override
   String get repondezALaQuestionSecrete =>
-      'Odpovězte na tajnou otázku... Když prohraješ!';
+      'Odpovězte na tajnou otázku... pokud prohrajete!';
 
   @override
   String get faitesDesChoixImpossiblesAvec =>
-      'Nemožné volby s možnostmi a hlasy.';
+      'Dělejte nemožné volby s možnostmi AI a hlasováním.';
 
   @override
   String get retrouvezVosMotsSecretsPar => 'Najděte svá tajná slova v týmech!';
 
   @override
-  String get faitesDevinerDesNomsEn => 'Ať jména hádají ve třech rukávech!';
+  String get faitesDevinerDesNomsEn => 'Hádejte jména ve 3 kolech!';
 
   @override
   String get uneQuestionDrolePourLa =>
-      'Zábavná otázka pro osobu, která bude mít objekt!';
+      'Vtipná otázka pro osobu, která drží předmět!';
 
   @override
-  String get devinezLeMotAvecL => 'Hádejte slovo s pomocí ostatních!';
+  String get devinezLeMotAvecL => 'Uhodněte slovo s pomocí ostatních!';
 
   @override
-  String get reperezLeSymboleCommunLe => 'Najděte společný symbol rychleji!';
+  String get reperezLeSymboleCommunLe =>
+      'Najděte společný symbol co nejrychleji!';
 
   @override
   String get genereDesDilemmesAuFormat =>
       'Vytváří dilemata ve formátu \'OptionA nebo OptionB\'. Téma: \'\'{\' 0} \'';
 
   @override
-  String get jePasse => 'Jdu kolem.';
+  String get jePasse => 'Pasuji';
 
   @override
   String get vote => 'Hlasujte.';
@@ -5022,14 +4834,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String get fin => 'Konec';
 
   @override
-  String get pile => 'Buňka';
+  String get pile => 'Orel';
 
   @override
-  String get face => 'Tvář';
+  String get face => 'Panna';
 
   @override
   String pasAssezDeJoueursIl(Object minPlayers) {
-    return 'Není dost hráčů! Tato konfigurace vyžaduje minimálně $minPlayers hráčů.';
+    return 'Nedostatek hráčů! Pro tuto konfiguraci je potřeba alespoň $minPlayers hráčů.';
   }
 
   @override
@@ -5039,25 +4851,21 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String tonMotEst(Object wordCivil) {
-    return 'Vaše slovo je $wordCivil .';
+    return 'Tvoje slovo je: $wordCivil';
   }
 
   @override
   String tonMotEst1(Object wordUndercover) {
-    return 'Vaše slovo je $wordUndercover .';
+    return 'Tvoje slovo je: $wordUndercover';
   }
 
   @override
-  String get tuNAsPasDe => 'Nemáš ani slovo. Bluffe!';
+  String get tuNAsPasDe => 'Nemáš slovo. Blufuj!';
 
   @override
   String commeConvenuTuCommences(Object mrWhitePlayer) {
     return '$mrWhitePlayer , jak jsme se dohodli, můžete začít!';
   }
-
-  @override
-  String get quiPourraitLePlusApplocalizations =>
-      'Kdo by mohl více? ApPLocalizations.of (kontext)! .body PaddingPaddingConstEdgeinsetssoft';
 
   @override
   String get votePar => 'Hlasováno: \'\'{\' 0} \'';
@@ -5068,11 +4876,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get ilFautAuMoins41 =>
-      'To trvá nejméně 4 hráči pro Codenames (2 za tým)!';
+      'Pro hru Codenames jsou potřeba alespoň 4 hráči (2 na tým)!';
 
   @override
   String get impossibleDeFormerLesEquipes =>
-      'Nelze vytvořit týmy (minimální velikost nedosažena). Restartovat s nejméně 4 hráči.';
+      'Nelze vytvořit týmy (nedosažen minimální počet). Restartujte s alespoň 4 hráči.';
 
   @override
   String get lEquipeAReveleL => 'Tým odhalil zabijáka! Tým vyhrává!';
@@ -5099,7 +4907,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get passeLeTelephoneAuxAgents => 'Předej telefon agentům týmu.';
 
   @override
-  String get mime => 'Mime';
+  String get mime => 'Pantomima';
 
   @override
   String get cEstAuTourDe2 => 'Je řada na \'\'{\' 0} \'(\' {\'1\'\'}\')';
@@ -5125,16 +4933,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get trouves => 'Nalezeno: \'\'{\' 0} \'';
 
   @override
-  String get ecurie1 => 'Operace 1';
+  String get ecurie1 => 'Stáj 1';
 
   @override
-  String get ecurie2 => 'Přepětí 2';
+  String get ecurie2 => 'Stáj 2';
 
   @override
-  String get ecurie3 => 'Operace 3';
+  String get ecurie3 => 'Stáj 3';
 
   @override
-  String get ecurie4 => 'Operace 4';
+  String get ecurie4 => 'Stáj 4';
 
   @override
   String get nombreMaxDeJoueurs => 'Maximální počet hráčů: \'\'{\' 0} \'';
@@ -5151,12 +4959,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get partieDeEnAttente => 'Část \'\'{\' 0} \'čeká';
 
   @override
-  String get termine => 'Ukončeno: \'\'{\' 0} \'';
-
-  @override
-  String get vainqueur2 => 'Vítěz:';
-
-  @override
   String get joueurSPretS => 'Hráči připraveni';
 
   @override
@@ -5165,25 +4967,25 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get lampe => 'Světlomet';
+  String get lampe => 'Svítilna';
 
   @override
-  String get trousseSoin => 'Balení péče';
+  String get trousseSoin => 'Lékárnička';
 
   @override
-  String get hache => 'Axe';
+  String get hache => 'Sekera';
 
   @override
-  String get arbalete => 'Arbalet';
+  String get arbalete => 'Kuše';
 
   @override
-  String get fusil => 'Fusil';
+  String get fusil => 'Brokovnice';
 
   @override
-  String get talkie => 'Talkie';
+  String get talkie => 'Vysílačka';
 
   @override
-  String get tronconneuse => 'Transformátor';
+  String get tronconneuse => 'Motorová pila';
 
   @override
   String get survie => 'Přežití';
@@ -5192,77 +4994,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get redigezLPour => 'Napiš \'\'{\' 0} \'pro\' {\'1\'\'}\'';
 
   @override
-  String get rejouerGarderPts => 'JOIN (GUARD PTS)';
+  String get rejouerGarderPts => 'HRÁT ZNOVU (PONECHAT B)';
 
   @override
   String get indicesMontresA => 'Indexy zobrazené na';
 
   @override
-  String get playersWinneridname => 'Hráči winneridname';
-
-  @override
-  String get packageSensorsPlusSensorsPlus =>
-      'balíček: čidla plus / čidla plus.dart';
-
-  @override
-  String get dossierDeJeuGamecodeSupprime =>
-      'Složka hry \$gameCode úspěšně vymazán.';
-
-  @override
-  String get erreurLorsDuNettoyageSupabase => 'Chyba při čištění Supabase: \$e';
-
-  @override
-  String get supabaseUploadTentativeAttemptMaxretries =>
-      '--- [Supabase nahrávání] Pokus \$pokus / \$maxRetrievals pro část \$GameCode ---';
-
-  @override
-  String get jpg => '\${const Uuid () .v4 ()} .jpg';
-
-  @override
-  String get supabaseUploadSuccesTentativeAttempt =>
-      '--- [Supabase Upload] Úspěch (Tentative \$pokus): \$publicUrl ---';
-
-  @override
-  String get supabaseUploadErreurTentativeAttempt =>
-      '--- [Supabase Upload] ERREUR (Tentative \$pokus / \$maxRetries) ---';
-
-  @override
-  String get erreurE => 'Chyba: \$e';
-
-  @override
-  String get supabaseUploadEchecDefinitif =>
-      '-- [Supabase Upload] DEFINITE ---';
-
-  @override
-  String get uploadReussiPublicurl => 'Upload úspěšný: \$publicUrl';
-
-  @override
-  String get erreurSupabaseStorageexception =>
-      '--- SUBBASE error (StorageException) ---';
-
-  @override
-  String get message1 => 'Zpráva: \${e.message}';
-
-  @override
-  String get statuscode => 'StatusCode: \${e.statusCode}';
-
-  @override
-  String get error => 'Chyba: \${e.error}';
-
-  @override
-  String get erreurInattendueLorsDeL => '--- Úmyslný error na vrcholu ---';
-
-  @override
-  String get typeDErreur => 'Chyba: \${e.runtimeType}';
-
-  @override
-  String get stacktraceStacktrace => 'StackTrace: \$stackTrace';
-
-  @override
-  String get timeSUp1 => 'Čas\\ \'s Up';
-
-  @override
-  String get marquesDeVoiture => 'Značka auta';
+  String get marquesDeVoiture => 'Značky aut';
 
   @override
   String get paysDuMonde => 'Země světa';
@@ -5274,16 +5012,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get animaux => 'Zvířata';
 
   @override
-  String get metiers => 'Obchod';
+  String get metiers => 'Povolání';
 
   @override
-  String get objetsDeLaCuisine => 'Kuchyňské a stolní nádobí';
+  String get objetsDeLaCuisine => 'Kuchyňské předměty';
 
   @override
   String get villes => 'Města';
 
   @override
-  String get sports => 'Sport';
+  String get sports => 'Sporty';
 
   @override
   String get couleurs => 'Barvy';
@@ -5304,13 +5042,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get fleursArbres => 'Květiny a stromy';
 
   @override
-  String get filmsDisney => 'Disney Films';
+  String get filmsDisney => 'Disneyho filmy';
 
   @override
   String get superHeros => 'Superhrdinové';
 
   @override
-  String get verbesDu1erGroupe => 'První skupinová slovesa';
+  String get verbesDu1erGroupe => 'Slovesa první skupiny';
 
   @override
   String get chosesRondes => 'Kulaté věci';
@@ -5319,86 +5057,25 @@ class AppLocalizationsCs extends AppLocalizations {
   String get chosesRouges => 'Červené věci';
 
   @override
-  String get marquesDeVetements => 'Oděvy';
-
-  @override
-  String get butDuJeuEtreLe =>
-      '* * Game goal * *\nBýt hráč s nejvíce bodů na konci hry.\n\n* * Draft * *\n1. Každý hráč obdrží * * 7 karet odpovědi * * v ruce.\n2. Hráč se jmenuje * * Juge * * (role se otáčí v každém kole).\n3. Soudce čte otazník * * nahlas.\n4. Všechny * * * ostatní hráči * * tajně vybrat * * 1 odpověď kartu * * z jejich ruky a předložit.\n5. Soudce čte všechny odpovědi a označuje * * nejvtipnější * *.\n6. Vítěz kola skóre * * 1 bod * *.\n7. Každý hráč * * poche * * novou kartu vrátit na7.\n8. Role soudce přechází na dalšího hráče.\n\n* * Důležité pravidla * *\n- Soudce nehraje při svém obratu.\n- Odpovědi jsou anonymní: soudce neví, kdo co napsal.\n- Můžeme hrát jen jednu kartu * * na rukojeť.';
-
-  @override
-  String get objectifPrenezDesCartesPour =>
-      '* * Cíl * *\nVezměte karty vytvořit odpovídající páry. Vyhněte se hráčům, kteří drží Zombie kartu na konci hry.\n* * Draft * *\n1. Hra začíná 33 kartami (16 párů + 1 Zombie karta).\n2. Karty jsou distribuovány 4 hráčům.\n3. Každý obrat hráč bere kartu od dalšího hráče.\n4. Pokud karta vytvoří pár, je automaticky poražen.\n5. Hráčova ruka je smíchána.\n6. První hráč, který již nemá karty vyhrál.\n7. Zbývající hráč se Zombie kartu ztratil!';
-
-  @override
-  String get butDuJeuObtenirLe =>
-      '* * Game goal * *\nZískejte nejvyšší skóre vyplněním 13 kategorií s 5 kostkami.\n\n* * Running of a tower * *\n1. * * Lance * *: Můžete hodit 5 kostkami až 3 krát za otočku.\n2. * * Keep * *: Po prvním nebo druhém hodu si můžete nechat kostky a restartovat další.\n3. * * Skóre * *: Po alespoň jednom hodu si musíte vybrat kategorii pro skóre. Každá kategorie může být použita pouze jednou za část.\n\n* * Kategorie * *\n- * * As to Six * *: Suma odpovídajících kostek. (Vazba 35 bodů, pokud horní část představuje 63 bodů nebo více).\n- * * Brelan * * (3 nebo více identických kostek): Suma všech kostek.\n- * * Square * * (4 nebo více stejných kostek): Suma všech kostek.\n- * * Full * * (3 kostky identické + 1 pár): 25 bodů.\n- * * Small Suite * * (4 po sobě jdoucí kostky): 30 body.\n- * * Large Suite * * (5 po sobě jdoucích kostek): 40 bodů.\n- * * Yams * * (5 kostek identické): 50 bodů.\n- * * Chance * *: Součet všech kostek.';
-
-  @override
-  String get objectifNePasAvoirL =>
-      '* * Cíl * *\nKdyž ta brambora exploduje, neměj to v rukou!\n\n* * Draft * *\n1. Na obrazovce se objeví téma.\n2. Hráč držící zařízení musí dát odpověď odpovídající tématu.\n3. Když odpověděl, rychle přešel letadlo k bližnímu svému.\n4. Soused musí zase najít novou odpověď a předat zařízení.\n5. Čas je skrytý a náhodný: brambora může explodovat kdykoliv!\n6. Hráč držící zařízení v době výbuchu ztratí rukojeť a obdrží zástavu.';
-
-  @override
-  String get principeGeneralGribouillisEstUn =>
-      '* * General principle * *\nGribouillis je kreslící hra inspirovaná \"arabským telefonem\", kde se myšlenky mění v každé fázi. Existují 3 herní režimy:\n\n* * 1. Normální režim (Arabský ilustrovaný telefon) * *\nKaždý hráč napíše větu.\n- * * Kreslení * *: Každý hráč obdrží další větu a nakreslí ji.\n- * * Devinette * *: Každý hráč obdrží obrázek a uhodne, co představuje.\n- * * Alternance * *: Hra střídá kreslení a hádat, dokud každé \"album\" se kolem všech hráčů.\n- Ale... Bavte se vidět, jak jednoduchá věta změní v něco úplně jiného!\n\n* * 2. Režim doplňování (Collaborative Drawing) * *\nKaždý hráč začne jednoduchou kresbu.\n- * * Complete * *: Každý hráč obdrží kresbu jiného hráče a musí ji obohatit, aniž by vymazal to, co již existuje.\n- * * Alternance * *: Kresba jde od hráče k hráči, každý přidává svůj dotek.\n- * * Parametr \"Přidat 1\" * *:\n- * If disabled (default) *: Je to provázek. Kresba se vyvíjí v každé fázi (hráč A - > hráč B - > hráč C...).\n- * Pokud se aktivuje *: Počáteční výkres každého hráče je doplněn všemi ostatními hráči, což vytváří několik kolektivních děl paralelně.\n- Ale... Vytvořit překvapivé a zábavné kolektivní umělecká díla.\n\n* * 3. Brise- Glace Mode (Creative Interaction) * *\n- * * Psaní * *: Každý hráč napíše osobní téma (ex: AppLocalizations.of (kontext)! .myPreference).\n- * * Kreslení * *: Každý hráč přijímá témata od * * všech ostatních hráčů * * a musí je kreslit.\n- * * But * *: Ideální prolomit led, objevit chutě ostatních a zahájit kreativitu ve spolupráci a lehkým způsobem.';
-
-  @override
-  String get yzObjectifAvoirLeMoins =>
-      'Cíl\n\nMít co nejvíce bodů, jak je to možné na konci hry.\nHra končí, když hráč dosáhne 100 bodů nebo více, a vítěz je ten s nejnižší celkové skóre.\n\nZařízení\n\n150 karet očíslovaných od -2 do + 12\n\nProvádění\n\nSmíchejte všechny karty.\nKaždý hráč obdrží 12 karet, umístěných tváří před ním, ve 4 sloupcích × 3 řady.\nOstatní karty tvoří akcie. Vrátit první kartu tvořit odpad.\nKaždý hráč vrací2 karty dle svého výběru z12.\n\nPrůběh turné\n\nNa druhou stranu máte * * 30 sekund * * na výběr mezi dvěma akcemi:\n\n1. Vezměte kartu odpadu\nMusíte ji vyměnit za jednu z vašich 12 karet (viditelná nebo skrytá strana).\nNahrazená karta jde na odpad.\n\n2. Piocher karty lícem dolů\nPodívejte se na mapu:\n- buď si ji necháte a vyměníte jednu ze svých karet (jak je uvedeno výše),\n- buď to odmítnete → umístíte to přímo na odpad, a v tomto případě musíte vrátit jednu z vašich karet ještě skryté.\n\nZvláštní pravidla\n\nTři identické karty ve sloupci → jsou okamžitě poraženy (hodnota 0).\n\nKonec rukojeti:\n\nRukojeť končí, když hráč odhalí všechny své karty.\nVšichni ostatní hráči pak odhalí své zbývající karty. Rukojeť je pryč.\nVšichni hráči počítají součet jejich karet.\n\nVezměte prosím na vědomí, že pokud hráč, který dokončí, nemá nejnižší skóre v kole, vybere trest + 10 bodů (jeho skóre rukojeti je zdvojnásobeno v původní verzi, použijeme + 10 pro zjednodušení).\n\nKonec hry\n\nHrajeme tolik rukávů, kolik potřebujeme.\nJakmile hráč dosáhne 100 nebo více bodů, hra končí.\nHráč s nejnižší kumulativní skóre vyhrává.';
-
-  @override
-  String get iAReglesDuPoker =>
-      'Cíl\n\nVyhrajte žetony od ostatních hráčů tím, že:\n- nejlepší kombinace pěti karet během porážky,\n- nebo tím, že se vzdají (spát) díky sázkám.\n\nRuční klasifikace (od nejsilnějších po nejslabší)\n\n1. Královská flush: 10 - V - D - R - A stejné barvy\n2. Quint flush: 5 karet, které následují navzájem, stejná barva\n3. Náměstí: 4 totožné karty\n4. Plný: 3 identické karty + 1 pár\n5. Barva (flush): 5 karet stejné barvy (non-po sobě jdoucí)\n6. Další (Pátý): 5 karet, které následují navzájem (různé barvy)\n7. Brelan: 3 identické karty\n8. Dvojitý pár\n9. Pár\n10. Vysoká karta (nejvyšší karta, pokud se nikdo nezlepší)\n\n{\\ cHFFFFFF}\n\n1. Blindy\nHráč vlevo od krupiéra nastaví malý blind.\nDalší hráč nastaví velký blind.\n\n2. Distribuce\nKaždý hráč obdrží 2 uzavřené karty (\"soukromé karty\").\n\n3. Aukční věže a společné karty\n- Preflop: sázkový trik se soukromými kartami.\n- Tři společné mapy odhaleny. Nové sázky.\n- Čtvrtá společná mapa odhalena. Nové sázky.\n- Řeka: Pátá a poslední společná mapa odhalena. Poslední sázka.\n\n4. Střelba (showdown)\nPokud několik hráčů zůstane, každý ukazuje svou hru.\nNejlepší kombinace 5 karet (mezi jeho 2 soukromé karty + 5 obcí) vyhrává pot.\n\nMožné účinky\n\nNa druhou stranu, hráč má * * 30 sekund * * pro:\n- Checker: Nesázej nic, jen pokud už se nikdy nevsadí.\nDej nějaké žetony do hrnce.\n- Následujte (volání): rovná běh.\n- Relaunch (Raise): zvýší sázku.\n- Jdi do postele (Přeložit): Drop jeho karty a dostat se z toho.\n\nKonec hry\n\nHra pokračuje tak dlouho, jak tam zůstane alespoň 2 hráči s žetony.\nPoslední vítěz je ten, kdo bere všechny žetony.';
-
-  @override
-  String get butDuJeuGagnerLe =>
-      '* * Game goal * *\nVyhrát nejvíce XP provedením akcí a reagovat na pravdy!\n\n* * Draft * *\n1. Ruleta je hráč, který je na řadě.\n2. Hráč natáčí \"Akce\" nebo \"Verity\".\n3. Klasický režim: Zobrazí se náhodná výzva / otázka.\n4. Soudce Mode: Náhodný hráč napíše výzvu, pak si to hráč uvědomí.\n5. Ostatní hráči potvrdit hlasováním Ano / Ne.\n6. Procento validace určuje výherní XP.\n\n* * Zvláštní pravidla * *\n- 100% validace = maximální XP\n- Hráč s nejvíce XP se stává admin hry\n- Tlačítko \"Konec rukojeti\" umožňuje zavřít část';
-
-  @override
-  String get butDuJeuLeBut =>
-      '* * Game goal * *\nCílem je být první, kdo se zbaví všech karet, aby se stal prezidentem. Poslední hráč s kartami v ruce se stává Kretén.\n\n* * Materiál a hráči * *\n- * * Maps * *: 52 karet.\n- * * Hráči * *: 3 až 6 hráčů.\n\n* * Card Value * *\nPořadí karet, od nejslabších k nejsilnějším, je:\n* * 3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2. * *\n* * 2 * * je nejsilnější karta a může porazit jakoukoli jinou kartu nebo kombinaci.\n\n* * Ruční provoz * *\n1. * * Distribuce * *: Všechny karty jsou rovnoměrně rozděleny mezi hráče.\n2.\n- Pro úplně první hru, hráč, který vlastní * * 3 Trèfle (Musí hrát tuto kartu (pouze nebo s ostatními 3).\n- Pro další rukávy začíná kolo * * Assess * * předchozího rukávu.\n3. * * Hrací karty * *: První hráč položí na stůl:\n- Pouze jedna karta (např. jedna 7).\n- Jeden pár (ex: dva 8).\n- Brelan (ex: tři Valeti).\n- Jeden čtverec (ex: čtyři 5).\n4. * * Pokračování v kole * *: Další hráč (ve směru hodinových ručiček) má * * 30 sekund * *, aby hrál stejný počet karet * * ale * * vyšší hodnotu * *.\n- Příklad: Pokud hráč představuje pár 6, další musí představovat pár 7, Dámy, As, atd.\n5. Pokud hráč nemůže nebo nechce hrát, musí projít jeho řada. Jakmile hráč projde, nemůže hrát znovu až do konce aktuálního fold.\n6. * * Konec fold * *: Skládka končí, když všichni hráči prošli jejich řada. Poslední hráč, který umístil karty, vyhrává fold, zvedne karty ze stolu (odloží je) a začne další fold tím, že hraje to, co chce.\n7. * * Síla 2 * *: Hrajte jeden nebo více * * 2 * * převyšuje jakoukoli kombinaci a končí záhyb okamžitě. Osoba, která hrála 2 vyhrává fold a začne hrát znovu.\nChcete-li porazit pár, musíte hrát pár dvou!\n\n* * End of the English Channel and Roles * *\n- Jakmile hráč nemá karty, je konec. Hra pokračuje, dokud nezbude jen jeden hráč.\n- Pořadí konce určuje role pro další kolo:\n- * * 1st * *: Prezident\n- * * 2nd * *: Viceprezident\n- * * Last * *: Debile\n- * * Before- last * *: Vice- Ass- Trou\n- * * Ostatní * * (pokud existují): Neutrální\n\n* * Příští měsíc: Burza karet! * *\nPřed startem nového kola si hráči vyměňují karty:\n- Ten sráč dává dvě nejlepší karty prezidentovi.\n- * * Židle * * mu dává na oplátku * * dvě karty jeho výběru * * (obvykle jeho nejhorší).\n- Pokud jsou čtyři hráči nebo více, * * Vice- Cut * * dává své * * nejlepší karty * * * na * * Vice- President * *.\nViceprezident mu dá mapu podle jeho výběru.\n\n* * Zvláštní pravidla * *\n- â › €€* Nelze skončit s 2 * *: Hráč nemá právo zbavit se své poslední karty, pokud je to 2. Tato rána je považována za neplatnou.\n* * Variantní revoluce (nepovinné) * *: Pokud hráč nastaví čtverec (4 identické karty), může oznámit \"Revolution!\". Pořadí hodnoty karet je pak obráceno až do konce rukávu (3 se stává nejsilnější, a 2 nejslabší).';
-
-  @override
-  String get butDuJeuReussirDeux =>
-      '* * Game goal * *\nÚspěch dvě výzvy před ostatními hráči.\n\n* * In place * *\n- Každý hráč začíná se 4 kartami: 3 Růže a 1 Lebka.\n- Každá karta na koberci zůstane přivázaná k majiteli.\n\n* * Draft * *\n1. Na druhou stranu, hráč může dát kartu tvář dolů na koberec.\n2. Když už nechce pózovat, vyzývá oznámením počtu karet, které si myslí, že může vrátit.\n3. Ostatní hráči mohou nabídnout nebo projít.\n4. Nejvyšší nabídka se stává vyzyvatelem a vrací inzerované karty.\n5. Nejprve vrátí své vlastní karty, pak ty ostatních hráčů v případě potřeby.\n\n* * Resolution * *\n- Pokud se objeví Skull, výzva je ztracena.\n- Pokud je soutěž vyhrána, hráč skóruje. První na 2 body vyhrává hru.\n- Pokud je soutěž ztracena, hráč ztratí kartu náhodně ze své zbývající ruky. Pokud ztratí Skulla, musí okamžitě změnit další.';
-
-  @override
-  String get butDuJeuFaireDeviner =>
-      '* * Game goal * *\nHádat slovo kreslením, před koncem přiděleného času.\n\n* * Draft * *\n1. * * Výběr losování / slov * *: Hráč je určen kreslit, a slovo je tajně připisován k němu.\n2. * * Kreslení * *: Draftsman má omezený čas na odhad slova kresbou. Nemůže ani mluvit, ani napodobovat, ani psát dopisy nebo čísla.\n3. * * Devinettes * *: Ostatní hráči nabízejí slova v chatu.\n4. * * Validace * *: Kartoonista vidí návrhy v chatu a klikne na tlačítko \"Najít!\" vedle dobré zprávy určit vítěze.\n5. * * Body * *: Hráč, který našel a draftsman vyhrát bod.\n6. * * Next Tower * *: Nový navrhovatel je jmenován.\n\n* * Možnosti * *\n- * * Pouze 30 tahů * *: Navrhovatel je omezen na maximálně 30 znaků.';
-
-  @override
-  String get butDuJeuFaireDeviner1 =>
-      '* * Game goal * *\nNechte svého partnera hádat tolik tajemných slov, jak je to možné, každý psaní jediné slovo nápovědu. Stejné nebo neplatné indexy se odstraní.\n\n* * Draft * *\n1. * * Výběr Devin * *: Hráč je určen jako \"Devin\" pro kolo. Nevidí slovo záhada.\n2. * * Volba slovní záhady * *: Devin vybere slovo ze seznamu (nebo mistr hry vybere jedno).\n3. * * Indice Writing * *: Všichni ostatní hráči (\"Indices\") tajně napište One single word index, který pomůže Devin najít slovo tajemství.\n4. * * Indexy Filter * *: Všechny indexy jsou odhaleny. Stejné indexy (i když se zapisují jinak, např. \"chat\" a \"chat\") nebo neplatné (velmi blízko slova záhada, vynalezl, atd.) jsou odstraněny. V Devinu jsou zobrazeny pouze jedinečné a platné stopy.\n5. * * Devinette * *: Devin se dívá na zbývající stopy a snaží se odhadnout slovo záhada. Má jen jeden pokus.\n6. * * Hodnocení * *:\n- Pokud Devin najde slovo záhada: Tým vyhraje 1 bod.\n- Pokud Devin nenajde slovo záhada: 0 bod.\n- Pokud Devin neodpoví: 0 bodů.\n\n* * Příklady neplatných indexů: * *\n- Záhadné slovo: \"Chat.\" Neplatné indexy: \"chaton\", \"feel\", \"miaou\", \"minou\".\n- Identické indexy: Pokud 2 hráči napsat \"zvíře\" pro \"Chat\", \"zvíře\" je eliminován.';
-
-  @override
-  String get butDuJeuPourLes =>
-      '* * Game goal * *\n- For * * Village * *: Eliminate all Wolf- Garous, White Wolf, Malade Rat (kromě žoldnéře, pokud vyhraje).\n- For the * * Loups- Garous * * (Loup- Garou, Loup Noir, Loup Bavard): Eliminate all Villagers.\n- Pro * * Solitaires * *: Cíl specifický pro každou osobu (White Loup: je sám; Žoldnéř: Zabít svůj cíl na J1; Krysa nemoc: kontaminovat všechny).\nPro milovníky, kteří přežili jen dva.\n\n* * Draft * *\nHra se střídá mezi fází * * noc * * a * * den * *.\n\n* Night * *\n1. Vedoucí hry (aplikace) oznamuje, že vesnice spí.\n2. Různé znaky se probudí na oplátku použít své schopnosti:\n- * * Cupidon * * (pouze první noc): Jmenují dva hráče, kteří se zamilují. Pokud jsou vlk a vesničan, jejich cíl se změní.\n- The * * Heritage * * (pouze první noc): Odkazuje na testera.\n- * * Vidění * * se probudí a určí hráče, aby objevil svou pravou roli. (Nedetekujte infekci Černého vlka).\nMentalista vnímá výsledek hlasování.\n- The * * Rat Malade * *: Contaminates two player (who will know the other containted).\n- The * * Loups- Garous * * (Loup- Garou, Loup Noir, Loup Bavard - hlasování společně) probudit, koncert a určit oběť k jídlu.\n- * * Black Loup * * může jednou proměnit oběť v infikovaného Loup-Garou (který si uchovává své schopnosti a stává se vlkem). Mentalista a Fossoyer mohou odhalit nakažené, Voyante ne.\n- White Loup (jedna noc ze dvou): Zoufá hráče podle jeho výběru (převrátí ochranu).\n- Čaroděj se probudí. Vidí vlčí oběť a může použít jeden ze svých dvou lektvarů (pouze jednou za část): lektvar * * léčení * * * k záchraně oběti, nebo lektvar otravy * * * k zabití někoho.\n- * * Pyroman * *: Výběr pro uložení sudu řeckého ohně nebo odpálit ty, které již byly umístěny (musí být živé ráno).\nMůže komunikovat s mrtvými.\n\n* Den * *\n1. Vesnice se probouzí. Aplikace oznamuje, kdo zemřel přes noc.\n2. Mrtví hráči odhalí svou roli a jsou eliminováni (nemohou již komunikovat, kromě Necromank s mrtvými).\nLoup Bavard musí vyslovit tajné slovo nebo zemřít při západu slunce (pokud Dictator nepřevezme moc).\n3. Přeživší se hádají, aby odhalili podvodníky.\n4. Po diskusích, všichni hráči hlasovat pro odstranění podezřelého.\n- Diktátor * * (jednou): Když eliminuje vlka, stane se starostou, jinak zemře.\nJeho hlas se počítá dvakrát. Pokud bude vyřazen, musí jmenovat nástupce, než zemře.\n- Žoldák: Pokud bude jeho cíl odstraněn první den, vyhraje sám. Jinak se z něj stane vesničan.\n5. Hráč, který obdrží nejvíce hlasů je eliminován, odhalí svou roli, a je ze hry.\n- The * * Chasseur * *: Pokud je eliminován (den a noc), má moc přivést s sebou dalšího hráče.\n- The * * Fossoyeur * *: Když zemřel, identifikoval dva hráče (jeden z opačného tábora, jeden z jeho tábora).\n- The Lovers * *: Když jeden zemře, druhý ho bude následovat se zármutkem.\n- * * Heritage * *: Pokud jeho testovač zemře, převezme svou roli (pokud není mrtvý nebo kontaminovaný).\n6. Začíná nová noc.\n\n* * Conditions of Victory * *\n- * * Village * *: Eliminate all Wolf- Garous, White Wolf, Sick Rat.\n- * * Loups- Garous * * (moute): Být stejný nebo vyšší v počtu na Vesničany.\n- Jsem jediný, kdo přežil.\nZabijte jeho cíl první den.\n- * * Rat Malade * *: Kontaminovat všechny živé hráče.\nJen dva přeživší.\n\n* * Důležité poznámky * *\nChaperon Rouge je chráněn Lovcem proti Wolf- Garousovi, dokud je Hunter naživu.\n- * * Garde * * chrání Wolf- Garous cíl (nemůže chránit dvakrát stejnou osobu).\n- Síla Bílého vlka nezná ochranu.\n- Pyroman musí být ráno naživu, aby jeho barely explodovaly.';
+  String get marquesDeVetements => 'Značky oblečení';
 
   @override
   String get loupNoir => 'Černý vlk';
 
   @override
-  String get loupBavard => 'Loup Bavard';
-
-  @override
   String get loupBlanc => 'Bílý vlk';
 
   @override
-  String get mercenaire => 'Žoldák';
+  String get ratMalade => 'Nemocný krysa';
 
   @override
-  String get ratMalade => 'krysa';
+  String get voyante => 'Věštkyně';
 
   @override
-  String get voyante => 'Voyante';
+  String get petiteFille => 'Holčička';
 
   @override
-  String get petiteFille => 'Dívka';
-
-  @override
-  String get chasseur => 'Hunter';
-
-  @override
-  String get garde => 'Stráž';
+  String get garde => 'Bodyguard';
 
   @override
   String get cupidon => 'Amor';
@@ -5407,106 +5084,28 @@ class AppLocalizationsCs extends AppLocalizations {
   String get mentaliste => 'Mentalista';
 
   @override
-  String get fossoyeur => 'Růže';
-
-  @override
   String get dictateur => 'Diktátor';
 
   @override
-  String get chaperonRouge => 'Červená čepice';
+  String get pyromancien => 'Pyromant';
 
   @override
-  String get pyromancien => 'Pyroman';
+  String get unSubstantifExLeChat => 'podstatné jméno (např. kočka)';
 
   @override
-  String get butDuJeuEtreLe1 =>
-      '* * Game goal * *\nBýt nejrychlejší rozpoznat jediný identický symbol mezi kartou uprostřed a vlastní kartou.\n\n* * Draft (Mode \'The Infernal Tower\') * *\n1. Každý hráč obdrží kartu lícem dolů. Zbytek karet tvoří akcie ve středu, tvář viditelná.\n2. Nejprve každý vrátí svou kartu.\n3. Každý hráč musí najít co nejrychleji jediný symbol, který je přítomen jak na jeho kartě, tak na kartě.\n4. První hráč, který najde symbol, oznámení nahlas, vezme akciovou kartu a umístí ji na vlastní kartu.\n5. Tato nová karta se stává jeho kartou pro další kolo. Nová mapa je pak odhalena ve středu akcie.\n6. Hra pokračuje až do vyčerpání zásob. Hráč, který nasbíral nejvíce karet na konci vyhrává!';
+  String get unAdjectifExMignon => 'přídavné jméno (např. roztomilý)';
 
   @override
-  String get butDuJeuSeDebarrasser =>
-      '* * Game goal * *\nZbav se všech jeho karet tím, že budeš první!\n\n* * Draft * *\n1. * * Distribuce * *: Každý hráč obdrží 7 karet. Zbytek tvoří zásoby. Karta je vrácena pro spuštění hromady odpadu.\n2. * * Zahrajte kartu * *: Hráč, který je na řadě má * * 30 sekund * * dát kartu do ruky na hromadu odpadu. Hraná karta musí odpovídat horní kartě zásobníku:\n* * * Color * * (ex: Red on Red)\n* * * Number * * (ex: one 7 Blue on one 7 Green)\n* * * Symbol * * (ex: žlutá \"+ 2\" na červené \"+ 2\")\n* * * Speciální karta * * (Joker, + 4, atd.)\n3. Pokud hráč nemůže hrát karty v přiděleném čase, musí si vybrat kartu z balíčku. Jestli umí hrát na tuhle kartu, může to udělat okamžitě. Jinak jeho řada končí.\n* * Speciální karty * *:\n* * * + 2 (dvě karty) * *: Další hráč vybere 2 karty a projde zatáčkou.\n* * * Sens Forbidden (Pass your turn) * * *: Další hráč prohraje.\n* * * Inverze (změna významu) * *: Smysl pro hru je obrácený.\n* * * Joker (Colour Change) * *: Hráč vybere barvu další karty hrát. Lze hrát na libovolné kartě.\n* * * Super Joker + 4 (změna barvy a čtyři karty) * *: Hráč si vybere barvu. Další hráč vybere 4 karty a projde zatáčkou. Tuto kartu lze přehrávat pouze v případě, že hráč nemá jinou kartu požadované barvy na hromadě odpadu (pokud nemá blafy).\n5. Když má hráč pouze jednu kartu v ruce, musí oznámit \"UNO!\". Pokud tak neučiní a je přijata jiným hráčem (před dalším hráčem hraje nebo zvedne), musí vybrat 2 karty.\n6. * * Konec kanálu * *: Rukojeť končí, když se hráč zbaví své poslední karty. Počítají se body. Hráč, který dosáhne 500 bodů (nebo definovaných celkem), vyhrává hru.\n\n* * Map points: * *\n* Digitální karty (0-9): Jejich hodnota obličeje.\n* + 2, Sens Forbidden, Inversion: 20 body.\n* Joker, Super Joker + 4: 50 body.';
+  String get unVerbeExMange => 'sloveso (např. jí)';
 
   @override
-  String get principeDuJeuLeJeu =>
-      '# # Game principle\n* Hra se hraje mezi * * 3 a 10 hráči * *.\n* Každý hráč dává přístup do části své / její fotografické knihovny a vybere fotografie sdílet.\n* Během hry, fotografie je vybrán * * náhodně * * ze všech hráčů, pak zobrazí na několik sekund.\n* Hráči musí hádat * * kdo vlastní fotografii * * zobrazen.\n* Hráč, který správně odhadne většinu fotografií vyhrává hru.\n\n# # Postup\n1. * * Výběr fotografií * *: Každý hráč si vybere několik fotografií ze své galerie.\n2. * * Zahájení hry * *: Jakmile budou všichni připraveni, hostitel spustí hru.\n3. * * Hrací věž * *:\n- Náhodná fotka je 5 sekund.\n- Všichni hráči hlasují, aby uhodli majitele.\n4. * * Výsledky * *: Skóre jsou aktualizovány po každém kole.\n5. * * Konec hry * *: Po nastaveném počtu kol vyhrává hráč s nejvíce body.';
+  String get unSubstantifExLaSouris => 'podstatné jméno (např. myš)';
 
   @override
-  String get butDuJeuCoulerTous =>
-      '* * Game goal * *\nZaseknul všechny soupeřovy lodě, než potopil ty tvoje.\n\n* * Draft * *\n1. * * Umístění * *: Každý hráč tajně umístí svou flotilu na síť 10x10.\n- Letouny (5 krabic)\n- Cruiser (4 krabičky)\n- Podmořský (3 buňky)\n- Ničitel (3 krabice)\n- Hlídka (2 krabice)\n2. Na druhou stranu, hráči se dotknou krabice střílet.\n3. * * Výsledek * *: AppLocalizations.of (context)! .touche, \"Coulated\" nebo \"To water\".\n4. * * Victoire * *: První hráč, který potopí celou protilehlou flotilu, vyhrává.';
+  String get unAdjectifExMort => 'přídavné jméno (např. mrtvý)';
 
   @override
-  String get butDuJeuEtreLe2 =>
-      '* * Game goal * *\nBýt první, kdo dosáhne cílové vzdálenosti (1000 km standardně).\n* * Draft * *\n- Každý hráč dostane šest karet.\n- Na oplátku, hrát karty (Vzdálenost, útok, obrana, bezpečnost) nebo zbavit.\n- The * * Attacks * * cards (Stop, Red, Essence, Crevaison, Limit) blokovat soupeře.\n- Maps * * Defenses * * (Green, Extra Tank, Opravy, End Limit) counter atackes.\n- Karty * * Security * * zruší útok a zabrání jeho opakování.\n- Mapy * * Vzdálenost * * (25, 50, 75, 100, 200 km) posuňte vozidlo dopředu.\n- Vyber si jednu kartu na konci zatáčky.';
-
-  @override
-  String get butDuJeuEtreLe3 =>
-      '* * Game goal * *\nBuďte první, kdo se zbaví všech karet tím, že vytvoří platné kombinace (melds).\n\n* * Running of a tower * *\n1. * * Piocher * *: Take the map from the top of the waste OR Stock.\n2. * * Prodej (nepovinné) * *: Na stůl umístěte platné kombinace.\n- * * Sekvence (Run) * *: 3 nebo více karet stejné barvy, které následují (např. 5) Eso může být vysoké nebo nízké.\n- * * Skupina (Set) * *: 3 nebo 4 karty stejné hodnoty, ale různých barev (např. 8 μg, 8\n3. * * Výchozí * *: Zbavte se karty z jeho ruky na odpadu.\n\n* * End of handle * *\nPrvní hráč, který už nemá karty po porážce, vyhrává. Ostatní počítají body zbývajících karet (obrázky = 10, As = 15, ostatní = nominální hodnota). Hra končí na 100 bodech.';
-
-  @override
-  String get butDuJeuFaireDeviner2 =>
-      '* * Game goal * *\nAby váš tým hádat maximální slova před koncem času, bez použití zakázaných slov!\n\n* * Draft * *\n1. Každý obrat, hráč (\"reproduktor\") se snaží, aby jeho tým hádat slovo.\n2. Řečník by neměl * * nikdy * * vyslovit slovo hádat, ani žádné ze slov \"Tabu\" (bez slov) zobrazených pod cílovým slovem. Ani nemůže používat překlady nebo slova ze stejné rodiny.\n3. Pokud reproduktor použije Taboo slovo, soupeř tým (nebo soudce) hlásí chybu, karta se zruší a reproduktor se přesune na další.\n4. Každé uhodnuté slovo vrací bod do týmu.\n5. Turn končí, když je čas.\n\n* * End of part * *\nTým s nejvíce bodů po počtu definovaných kol vyhrává!';
-
-  @override
-  String get butDuJeuAmenerVos =>
-      '* * Game goal * *\nPřivezte koně do centra náhorní plošiny tím, že obejdete soupeře.\n\n* * Klasická pravidla * *\n1. * * Základní východ * *: Musíte udělat * * 1 * * * nebo * * 6 * * *, abyste vytáhli pěšáka.\n2. * * Bonus Tour * *: Tvorba * * 6 * *, zachycení pěšáka nebo dokončení kurzu umožňuje přehrávat. (Varování: 3 krát 6 po sobě jdoucích ruší váš tah!).\n3. * * Capture * *: Padání na opačného pěšáka jej vrací na jeho základnu (nemožné na chráněných \"Stars\" krabicích nebo na startovní pole tohoto hráče).\n4. * * Dorazil * *: K dosažení finálního schodiště je potřeba přesné skóre.\n\n* * Team mode (2v2) * *\nVyžaduje přesně 4 hráče. Jste spojenci s hráčem před vámi.\n- * * Sdílené vítězství * *: První tým, který přinese celkem 4 kusy do středu vyhrává hru (ex: 3 kusy pro vás a 1 pro vašeho spojence).\n- * * Entraide * *: Můžete použít svůj hod přesunout svého spojence pěšáka, ale * pouze * dostat ho ze své základny (s 1 nebo 6) nebo přesunout do svého konečného schodiště.\n- * * Spojenecké blokování * *: Je nemožné chytit pěšáka vašeho partnera. Pokud vás váš pohyb donutí přistát na něm, úder je neplatný.';
-
-  @override
-  String get principeJeuSurrealisteDEcriture =>
-      '* * Principle * *\nSurrealistická kolektivní psaní hry.\n* * Variant * *\n- Classic: Každý píše prvek věty (Podstatné, přídavné, Verb, atd.), aniž by viděl precedenty.\nKaždý vidí poslední tři slova a dokončí větu.\n* * Draft * *\nListy se otáčejí, dokud se jich všichni nezúčastní.';
-
-  @override
-  String get butDuJeuPlacerLe =>
-      '* * Game goal * *\nUmístěte většinu jeho kousků na plac.\n* * Gold rule * *\nKaždý nový kus se musí dotknout alespoň dalšího kousku stejné barvy na rohu, ale nikdy na jedné straně.\n* * Draft * *\n1. První kolo se hraje v rohu talíře vaší barvy.\n2. Následující věže respektují zlaté pravidlo.\n3. Pokud už nemůžete hrát, jste na řadě.\n* * Hodnocení * *\n-1 bod na čtverec není umístěn.\n+ 15 bodů, pokud jsou všechny části umístěny.\n+ 5 bonusových bodů, pokud poslední kus je jediný čtverec (1x1).';
-
-  @override
-  String get objectifEtreLePremierA =>
-      '* * Cíl * *\nBuďte první, kdo dosáhne cílové skóre (20, 50 nebo 100 bodů).\n\n* * Draft * *\nKaždý hráč obdrží 7 domino. Na druhou stranu musí umístit domino odpovídající jednomu z konců řetězu. Dvojčata se hrají v křížích.\n\n* * Play mode * *\n- Pike: Pokud nemůžete hrát, vyberte si, dokud nemáte hratelnou hru.\n- Žádné výběry. Když neumíš hrát, tak jsi na řadě.\n- * * All Five * *: The first double played is the \"Spinner\" (playable on4 side). Skórujete body v každém tahu, pokud součet konců je násobek5.\n\n* * end of turn * *\nKdyž nikdo neumí hrát, trik je zablokovaný. Hráči odhalují své ruce. Hráč s nejmenšími body vyhrává kolo a označuje součet bodů na opačných rukou.';
-
-  @override
-  String get objectifEtreLePremierJoueur =>
-      '* * Cíl * *\nBuďte první hráč, který se zbaví všech karet.\n\n* * Pravidla * *\n- Hra se hraje s 52 kartami.\n- Objednávka karet (od nejnižší po nejvyšší):3,4,5,6,7,8,9,10, J, Q, K, A,2.\n- Objednávka barev (od nejslabších k nejsilnějším): dlaždice (D), Trèfles\n- Hráč, který má 3 dlaždice začíná hru.\n\n* * Kombinace * *\n- * * Jednoduchá * *: 1 mapa.\n- * * Pair * *: 2 karty stejné hodnoty.\n- * * Triple * *: 3 karty stejné hodnoty.\n- * * Continued * *: 5 po sobě jdoucích řádkových karet (smíšené barvy).\n- * * Color * *: 5 karet stejné barvy.\n- * * Full * *: 3 karty jedné řady + 2 karty druhé řady.\n- * * Square * *: 4 karty stejné hodnoty + 1 karta jakéhokoliv druhu.\n- * * Quinte Flush * *: 5 karet stejné barvy.\n\n* * Hierarchie kombinací 5 karet * *\nFlush Quinte > Square > Full > Color > Suite.\nKombinaci lze porazit pouze kombinací stejné velikosti a vyšší hodnoty.';
-
-  @override
-  String get objectifCapturerToutesLesPieces =>
-      '* * Cíl * *\nZajměte všechny mince soupeře nebo zablokujte všechny jeho mince.\n* * Pravidla * *\n- Hraje na 8x8 checker, výhradně na tmavé skříňky.\n- Kousky se pohybují v krabici.\n- Úlovky jsou * * povinné * * a jsou provedeny skokem přes nepřátelský kus.\n- Několik úlovků může být spoutáno v jednom kole.\n- Když pokoj dosáhne opačné řady, je povýšen v \"Dame\" a může se pohybovat a zachytit zpět.';
-
-  @override
-  String get unSubstantifExLeChat => 'hmotné (např. kočka)';
-
-  @override
-  String get unAdjectifExMignon => 'přídavné jméno (např. roztomilé)';
-
-  @override
-  String get unVerbeExMange => 'sloveso (ex: jíst)';
-
-  @override
-  String get unSubstantifExLaSouris => 'podstatné (např. myš)';
-
-  @override
-  String get unAdjectifExMort => 'přídavné jméno (např. smrt)';
-
-  @override
-  String rankSuitD0(Object d) {
-    return '\$rank \$oblek \${d > 0?';
-  }
-
-  @override
-  String get petit1 => 'Malý 1';
-
-  @override
-  String get petit2 => 'Malé 2';
-
-  @override
-  String get grand => 'Velké';
-
-  @override
-  String get tresGrand => 'Velmi velké';
-
-  @override
-  String get superGrand => 'Super velký';
-
-  @override
-  String get potionDeVieEtDe => 'Pití života a smrti.';
+  String get potionDeVieEtDe => 'Lektvar života a smrti.';
 
   @override
   String get legende => 'legenda';
@@ -5518,7 +5117,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get fantome1 => 'duch';
 
   @override
-  String get echo => 'echo';
+  String get echo => 'ozvěna';
 
   @override
   String get reve => 'sen';
@@ -5549,323 +5148,115 @@ class AppLocalizationsCs extends AppLocalizations {
       'Počet symbolů na jednu kartu musí být nejméně3.';
 
   @override
-  String get pasAssezDeSymbolesUniques =>
-      'Nedostatek jedinečných symbolů pro symboly PerCard \$na kartu. Požadováno: \$totalSymbols, Dostupné: \${dobbleSymbols.length}.';
-
-  @override
   String get laGenerationAEchoueNombre =>
       'Generace selhala: nesprávný počet karet.';
-
-  @override
-  String get withKickersKickervalues => '{rank.name} s kickers: \$kickerValues';
-
-  @override
-  String get melangeEquilibreDesThemesSuivants =>
-      'Vyvážený mix následujících témat: \$combined Téma';
-
-  @override
-  String get ambianceTonImposeStyle => '[Ambiance / Taxed tón: \$styl]';
-
-  @override
-  String get genereDesPairesDeMots =>
-      'Vytváří dvojice podobných slov ve formátu \'MotCivil: MotInfilted\'. Téma: \$finalPrompt';
-
-  @override
-  String get genereDesCartesTabooAu =>
-      'Vytváří karty Taboo ve formátu \"Cílové slovo: Forbidd1, Forbidd2, Forbidd3, Forbidd4, Forbidd5\". Téma: \$finalPrompt';
-
-  @override
-  String get genereDesCategoriesOriginalesEt =>
-      'Vytváří originální a zábavné kategorie hádat. Téma: \$finalPrompt';
-
-  @override
-  String get genereDesPhrasesCourtesVisuelles =>
-      'Vytváří krátké, vizuální a zmatené věty k kreslení (ex: AppLocalizations.of (context)!. unDinosaureQuiMangeUne). Téma: \$finalPrompt';
-
-  @override
-  String get genereDesPhrasesDAccroche =>
-      'Vytváří originální fráze nebo psaní vesmíru. Téma: \$finalPrompt';
-
-  @override
-  String get genereDesDilemmesCorneliensAu =>
-      'Vytváří dilemata rohovky ve formátu \"OptionA nebo OptionB\" (např. AppLocalizations.of (context)! .power toVolerouEtreInvisible). Téma: \$finalPrompt';
-
-  @override
-  String get genereUnMelangeDeDefis =>
-      'Vytváří směs výzev (akcí) a indiskrétních otázek (pravd). Téma: \$finalPrompt';
-
-  @override
-  String get genereDesQuestionsDirectesAmusantes =>
-      'Vytváří přímé, zábavné a pikantní otázky. Téma: \$finalPrompt';
-
-  @override
-  String get genereDesPhrasesCourtesA =>
-      'Vytváří krátké věty (obsahující \' \') pro hru. Téma: \$finalPrompt';
-
-  @override
-  String genereDesQuestionsAmusantesSur(Object player) {
-    return 'Vytváří zábavné otázky o hráči (použijte tag \' $player \'). Téma: \$finalPrompt';
-  }
-
-  @override
-  String get genereDesSituationsHumoristiquesEt =>
-      'Vytváří vtipné situace a počátky legend memů. Téma: \$finalPrompt';
-
-  @override
-  String get genereUneListeDeMots =>
-      'Vytvoří seznam slov / výrazů pro hru \$gameType na téma: \$finalPrompt';
-
-  @override
-  String get strc64264 => '\${autoTitle.substring (0, 28)}...';
-
-  @override
-  String get pack => 'Zabalte \${words.take (2) .join (\',\')}';
-
-  @override
-  String get themeGametype => 'Téma \$gameType';
-
-  @override
-  String get errorReportingBlockingPlayerE =>
-      'Chyba při hlášení / blokování přehrávače: \$e';
-
-  @override
-  String get errorUnblockingPlayerE => 'Chyba při odblokování přehrávače: \$e';
-
-  @override
-  String get blancMangerCocon => 'Bílá Kokon.';
-
-  @override
-  String get leRoiDesMemes => 'Král toho samého';
 
   @override
   String get laPartieEstTermineeTous => 'Hra skončila: všichni hráči odpojili.';
 
   @override
-  String get aucun => 'Žádné';
-
-  @override
   String get nonAuthentifie => 'Neověřeno.';
 
   @override
-  String get actionNonAutorisee => 'Neoprávněná akce.';
+  String get actionNonAutorisee => 'Akce není povolena.';
 
   @override
-  String get vousDevezJouerAuMoins => 'Musíš zahrát alespoň jednu kartu.';
+  String get vousDevezJouerAuMoins => 'Musíte zahrát alespoň jednu kartu.';
 
   @override
-  String get tentativeDeTricheDoublonsDe =>
-      'Snažím se podvádět: duplikovat karty.';
+  String get tentativeDeTricheDoublonsDe => 'Pokus o podvod: duplicitní karty.';
 
   @override
-  String get carteNonTrouveeDansVotre => 'Karta není nalezena v ruce.';
+  String get carteNonTrouveeDansVotre => 'Karta nebyla nalezena ve vaší ruce.';
 
   @override
   String get combinaisonInvalide => 'Neplatná kombinace.';
 
   @override
-  String get vousDevezJouerLeMeme => 'Musíte hrát stejný počet karet.';
+  String get vousDevezJouerLeMeme => 'Musíte zahrát stejný počet karet.';
 
   @override
   String get combinaisonDe5CartesTrop => 'Kombinace 5 karet je příliš slabá.';
 
   @override
-  String get vousDevezJouerUneCarte => 'Musíš hrát silnější karty.';
-
-  @override
-  String get playersWinneridScore => 'hráči. \$winnerId.score';
-
-  @override
-  String get aGagne1 => 'Vyhrál!';
-
-  @override
-  String get playernameAJoue =>
-      '\$playerName hrál \${cardsToPlay.join (\',\')}.';
-
-  @override
-  String get playernameAJoue1 =>
-      '\$playerName hrál \${winningCombo.join (\',\')}.';
-
-  @override
-  String get pliTermineAuTourDe =>
-      'Skončil jsem. Na oplátku \${gameData [\'hráči\']? [playerOrder [nextIndex]]? [\'jméno\']}!';
-
-  @override
-  String get playernamePasseSonTour => '\$Player Jméno přechází.';
+  String get vousDevezJouerUneCarte => 'Musíte zahrát vyšší kartu.';
 
   @override
   String get ceNEstPasVotre => 'Nejsi na řadě.';
 
   @override
-  String get carteIntrouvableDansLaMain => 'Mapa není nalezena v ruce.';
+  String get carteIntrouvableDansLaMain => 'Karta nebyla nalezena v ruce.';
 
   @override
   String get coupInvalideSelonLesRegles =>
-      'Neplatný převrat podle pravidel Mille Bornes!';
+      'Neplatný tah podle pravidel Mille Bornes!';
 
   @override
   String get cibleAdverseValideObligatoirePour =>
-      'Povinný nepřátelský cíl pro útok.';
-
-  @override
-  String coupFourrePareLAttaque(Object matchingSafety) {
-    return '\${hráči [targetId]? Připravte útok s {matchingSafety} dolary a převzít!';
-  }
-
-  @override
-  String get playersPlayeridScore => 'hráči. \$playerId.score';
-
-  @override
-  String get aAtteintTargetdistKm => 'Dosáhl cíle \$Dist km!';
+      'Pro útok je vyžadován platný cíl soupeře.';
 
   @override
   String get nonAutoriseUsurpationDIdentite =>
-      'Nepovolený: odhalený podvod s identitou.';
-
-  @override
-  String get erreurGenerateaiwordsSecuriseE =>
-      'Chyba generateAiWords bezpečné: \$e';
-
-  @override
-  String get erreurValidatejustoneclueaiE =>
-      'Potvrdit chybu JustOneClueAi: \$e';
-
-  @override
-  String get finDuCompteARebours =>
-      'Konec odpočítávání: Hra restartována pro všechny hráče \${players.length}!';
+      'Neoprávněno: zjištěno zneužití identity.';
 
   @override
   String get scoresConservesEnAttenteDans =>
       'Zachráněné skóre! Čekám v obýváku.';
 
   @override
-  String get playernameARejointLaPartie => '\$player Jméno vstoupilo do hry!';
+  String get leTempsEstEcouleOn => 'Čas vypršel, jdeme dál!';
 
   @override
-  String get leTempsEstEcouleOn => 'Čas vypršel, jdeme!';
+  String get leTempsEstEcoulePour => 'Čas na prohlášení pravdy vypršel!';
 
   @override
-  String get leTempsEstEcoulePour => 'Čas uplynul, aby řekl pravdu!';
+  String get cibleHorsDeLaGrille => 'Cíl mimo mřížku.';
 
   @override
-  String get cibleHorsDeLaGrille => 'Cíl mimo síť.';
-
-  @override
-  String get caseDejaCiblee => 'Box je už cílený.';
-
-  @override
-  String get aCouleTouteLaFlotte => 'Potopil celou nepřátelskou flotilu!';
+  String get caseDejaCiblee => 'Pole již bylo zaměřeno.';
 
   @override
   String get placementAutomatiqueEffectue =>
-      '⏱️ Placement automatique effectué.';
-
-  @override
-  String get playersCurrentplayeridScore => 'hráči. \$currentPlayerId.score';
-
-  @override
-  String get aTireAutomatiquementEnResult =>
-      '\${targetIndex ~ / 10) + 1} - \${(targetIndex% 10) + 1} (\$výsledek).';
-
-  @override
-  String get playernameAOuvertAvecCardtoplay =>
-      '⏱️ \$playerName a ouvert avec \$cardToPlay.';
-
-  @override
-  String get playernameAJoue2 =>
-      '\$playerName hrál \${candidateCards.note (\',\')}.';
-
-  @override
-  String get pliTermineAuTourDe1 =>
-      'Skončil jsem. Na oplátku \${gameData [\'hráči\']? [playerOrder [nextIndex]]? [\'jméno\']}.';
+      '⏱️ Automatické rozmístění dokončeno.';
 
   @override
   String get tempsEcoulePourLaSaisie =>
-      'Čas zadat slova. Hra začíná slovy zabavenými!';
-
-  @override
-  String get removedplayernameAQuitteLaPartie =>
-      '\$demovedPlayer Jméno opustilo hru.';
-
-  @override
-  String get removedplayernameSEstDeconnecteVictoire =>
-      '\$demovedPlayer Jméno odpojeno. Vyhrát za \$zbývající Jméno na balíček!';
-
-  @override
-  String get playersRemainingplayeridScore => 'hráči. \$liberingPlayerId.score';
-
-  @override
-  String get estLeNouvelHote =>
-      '\${hráči [playerOrder [0]]? [\'jméno\'\'} je nový hostitel.';
-
-  @override
-  String get playernameAManque3Tours =>
-      '\$player Jméno minulo 3 kola bez hraní. Správce byl požádán, aby rozhodl o jeho nahrazení počítačem.';
-
-  @override
-  String get playernameNeRepondPlusReason =>
-      'Správce byl požádán, aby rozhodl o jeho nahrazení počítačem.';
-
-  @override
-  String get playernameAEteRemplacePar =>
-      '\$\$playerName byl nahrazen počítačem (AI aktivní - 5s za otočku).';
-
-  @override
-  String get playernameNAPasDonne => 'Otoč se.';
+      '⏰ Čas pro zadávání slov vypršel. Hra začíná se zadanými slovy!';
 
   @override
   String get laPhaseDeVoteA => 'Fáze hlasování začala!';
 
   @override
-  String get playernameNAPasRepondu => 'Tour přeskočil bez automatické akce.';
-
-  @override
-  String get playernameNAPasJoue =>
-      '\$player Jméno nefungovalo včas. Jeho řada skončila.';
-
-  @override
-  String get personneNAVoteAucun => 'Nikdo nehlasoval. Žádný hráč vyřazen.';
+  String get personneNAVoteAucun => 'Nikdo nehlasoval. Nikdo nebyl vyřazen.';
 
   @override
   String get egaliteLorsDuVoteLa =>
       'Rovnost při hlasování! Bohyně spravedlnosti musí vládnout.';
 
   @override
-  String get egalitePersistanteLeDestinDepartage =>
-      'Trvalá rovnost! Destiny náhodně nastavena: \${playerData [randomizované Eliminated]? [\'name\']} je eliminována.';
+  String get plusDeLancersDisponibles => 'Žádné další hody nejsou k dispozici.';
 
   @override
-  String get egaliteParfaiteLorsDuVote =>
-      'Perfektní rovnost při hlasování (\${tiedPlayers.length} hráči ex-aequo)! Žádný hráč vyřazen.';
+  String get vousDevezLancerLesDes =>
+      'Před zapsáním bodů musíte hodit kostkami.';
 
   @override
-  String get leTempsDeVoteEst => 'Hlasování skončilo!';
+  String get categorieDejaCompletee => 'Kategorie je již vyplněna.';
 
   @override
-  String get laPartieDeYamsCommence => 'Hra s jamy začíná!';
+  String get grandeSuite => 'Velká postupka';
 
   @override
-  String get plusDeLancersDisponibles => 'Další záběry k dispozici.';
+  String get petiteSuite => 'Malá postupka';
 
   @override
-  String get vousDevezLancerLesDes => 'Musíte hodit kostkou, než zabodujete.';
+  String get full => 'Full House';
 
   @override
-  String get categorieDejaCompletee => 'Kategorie již dokončena.';
+  String get brelan => 'Trojice';
 
   @override
-  String get grandeSuite => 'Grand Suite';
-
-  @override
-  String get petiteSuite => 'Malé apartmá';
-
-  @override
-  String get full => 'Plná';
-
-  @override
-  String get brelan => 'Brelan';
-
-  @override
-  String get carre => 'Náměstí';
+  String get carre => 'Čtveřice (Poker)';
 
   @override
   String get grilleDeYamsCompleteePar => 'Yams mřížka dokončena všemi hráči!';
@@ -5874,303 +5265,112 @@ class AppLocalizationsCs extends AppLocalizations {
   String get chance => 'Šance';
 
   @override
-  String get texteRequis => 'Požadovaný text.';
+  String get texteRequis => 'Text je povinný.';
 
   @override
   String get ceNEstPasVotre1 => 'Nejsi na řadě s psaním.';
 
   @override
-  String get playernameAJoueLastdrawn => '\$playerName hrál \$last Drawn.';
-
-  @override
-  String get playernameAJouePlayable => '\$Player Jméno hrálo \$playable.';
-
-  @override
-  String get playernamePiocheEtPasseSon =>
-      '⏱️ \$playerName pioche et passe son tour.';
-
-  @override
-  String get playernameNAPasJoue1 =>
-      '\$player Jméno nefungovalo včas. Jedna karta byla poražena a jedna krabice odhalena.';
-
-  @override
-  String get playersGamewinneridScore => 'hráči. \$gameWinnerId.score';
-
-  @override
-  String get playersVidScore => 'hráči. \$vId.score';
-
-  @override
-  String get playersVoteridScore => 'hráči.';
-
-  @override
   String get nonAuthentifie1 => 'Neověřeno.';
-
-  @override
-  String get erreurUpdatepictionarydrawingRtdbE =>
-      'Chyba při updatePictionarydrawing RTDB: \$e';
 
   @override
   String get leTempsDesDebatsEst => 'Rozprava skončila. Vesnice musí hlasovat!';
 
   @override
-  String get failedToLoadMeme => 'Selhalo načtení i: \${response.statusCode}';
-
-  @override
-  String get errorFetchingMemeE => 'Chyba fetišizace i: \$e';
-
-  @override
-  String get lesAmoureux => 'Milenci';
-
-  @override
   String get seulsLesDeuxAmoureuxSont =>
-      'Jen dva milenci jsou stále naživu. Jejich láska vítězí nad vším!';
+      'Pouze dva milenci zůstali naživu. Jejich láska vítězí nade vším!';
 
   @override
   String get leLoupBlancEstLe =>
-      'Bílý vlk je poslední, kdo přežil! Snědl všechny.';
-
-  @override
-  String get loupsGarous => 'Wolf- Garous';
+      'Bílý vlk je posledním přeživším! Všechny sežral.';
 
   @override
   String get lesLoupsGarousSontDevenus =>
-      'Wolf- Garous se stali většinou, už nemohou prohrát. Vyhráli!';
-
-  @override
-  String get villageois => 'Vesnice';
+      'Vlkodlaci mají většinu a nemohou prohrát. Zvítězili!';
 
   @override
   String get toutesLesMenacesOntEte =>
-      'Všechny hrozby byly odstraněny! Vesnice vyhrála!';
-
-  @override
-  String get playersPidScore => 'hráči. \$PId.score';
-
-  @override
-  String laPartieEstTermineeVictoire(Object winner) {
-    return 'Hra skončila. Vítězství $winner dolarů!';
-  }
+      'Všechny hrozby byly zneškodněny! Vesnice zvítězila!';
 
   @override
   String get laVoyanteASondeUne => 'Věštkyně tu noc zkoumala duši...';
 
   @override
-  String get lHeritierAChoisiSon => 'Dědic si vybral svého testatora...';
+  String get lHeritierAChoisiSon => 'Dědic si vybral svého zůstavitele...';
 
   @override
   String get vousNePouvezPasProteger =>
-      'Nemůžeš chránit stejnou osobu dvě noci po sobě.';
+      'Nemůžete chránit stejnou osobu dvě noci za sebou.';
 
   @override
-  String get leGardeMonteLaGarde => 'Stráž je dnes na stráži...';
-
-  @override
-  String get joueursContaminesParLaMaladie =>
-      'Hráči infikovaní nemocí: \$consigned Names.';
+  String get leGardeMonteLaGarde => 'Strážce drží tuto noc hlídku...';
 
   @override
   String get uneOdeurPestilentielleSEst =>
-      'Ve vesnici se rozšířil zápach moru...';
+      'Vesnicí se rozšířil odporný zápach...';
 
   @override
   String get lesLoupsGarousOntDesigne =>
-      'Wolf- Garous určili svou kořist. Černý vlk si myslí...';
+      'Vlkodlaci si vybrali kořist. Černý vlk přemýšlí...';
 
   @override
-  String get lesLoupsGarousOntChoisi => 'Wolf- Garous si vybral jejich oběť...';
+  String get lesLoupsGarousOntChoisi => 'Vlkodlaci si vybrali svou oběť...';
 
   @override
-  String get leLoupBlancARode => 'Bílý vlk se dnes toulal sám...';
+  String get leLoupBlancARode => 'Bílý vlk se tuto noc toulal sám...';
 
   @override
   String get vousAvezEteInfectePar =>
-      'Nakazil ses Černým vlkem! Staneš se Wolfem-Garou.';
+      'Byl jsi nakažen Černým vlkem! Stáváš se Vlkodlakem.';
 
   @override
-  String get leLoupNoirAUtilise => 'Černý vlk použil svou sílu infekce!';
+  String get leLoupNoirAUtilise => 'Černý vlk použil svou moc nákazy!';
 
   @override
-  String get leLoupNoirNA => 'Černá Wolf nepoužil svou infekci.';
+  String get leLoupNoirNA => 'Černý vlk nepoužil nákazu.';
 
   @override
   String get laPetiteFilleAEte =>
-      'Malá holka byla moc zvědavá! Vlci to snědí okamžitě!';
+      'Holčička byla příliš zvědavá! Vlci ji okamžitě sežerou!';
 
   @override
-  String get infecte1 => 'infikovaný';
+  String get vousVousSentezObserveE => 'Cítíš, že tě tuto noc někdo sleduje...';
 
   @override
-  String get contamine => 'kontaminované';
+  String get laSorciereAUtiliseSa => 'Čarodějnice použila svůj léčivý lektvar.';
 
   @override
-  String get vousAvezEspionneTargetnameEt =>
-      'Špehoval jste na \$targetName a objevil jste jeho roli: \$targetRole.';
+  String get laSorciereAConcocteUn => 'Čarodějnice namíchala smrtící jed...';
 
   @override
-  String get vousVousSentezObserveE => 'Cítíš se dnes večer sledovaná...';
+  String get lePyromancienAEntreposeUn =>
+      'Pyromant umístil sud řeckého ohně...';
 
   @override
-  String get laSorciereAUtiliseSa => 'Čarodějnice použila svůj léčící lektvar.';
-
-  @override
-  String get laSorciereAConcocteUn => 'Čarodějnice vymyslela smrtící jed...';
-
-  @override
-  String get lePyromancienAEntreposeUn => 'Pyroman uložil sud řeckého ohně...';
-
-  @override
-  String get lePyromancienAllumeLaMeche => 'Pyroman zapálí knot svých sudů!';
-
-  @override
-  String get leSoleilSeLeveSur => 'Slunce vychází na Thiercelieux...';
-
-  @override
-  String get estMortEDeChagrin =>
-      '\${playerData [OtherLoverId] [\'jméno\'\'} zemřel žalem pro svou lásku!';
-
-  @override
-  String get lHeritierHeriteDuRole =>
-      '\${playerData [heritierId] [\'name\']} (dědic) zdědí roli \${playerData [testatorId] [\'jméno\'\'}: \$newRole!';
-
-  @override
-  String get heriteEgalementDuStatutDe =>
-      '\${playerData [heritier Id] [\'jméno\'\'}} také zdědí status kapitána!';
-
-  @override
-  String get votreMotDuJourNewword =>
-      'Vaše slovo dne: \"New Word \$\". Vyslovte to v kočce před západem slunce!';
+  String get lePyromancienAllumeLaMeche =>
+      'Pyromant zapaluje doutnák svých sudů!';
 
   @override
   String get miraculeusementPersonneNAPeri =>
-      'Zázračně, minulou noc nikdo neumřel!';
-
-  @override
-  String get leVillageDecouvreAvecEffroi =>
-      'Obec s hrůzou objeví tělo (těla): \${deatThisNightNames.toSet () .join (\',\')}.';
-
-  @override
-  String get motDuJour => 'slovo dne';
-
-  @override
-  String get leFossoyeurReveleEtaitUn =>
-      '\${playerData [fosoyeurId] [\'jméno\']} (The Fossoyeur) odhaluje: \${playerData [targetPlayer Id] [\'name\'\'}} byl \$targetRole!';
-
-  @override
-  String get etEtaitUnEOtherrevealedrole =>
-      'A \${playerData [OtherRevealedPlayer Id] [\'name\'\'}} byl \$other RevealedRole!';
-
-  @override
-  String get dictateurnameDeclareUnCoupD =>
-      '\$diktatura Název vyhlásí převrat d \'état!';
-
-  @override
-  String get leDictateurAExecuteUn =>
-      'Diktátor \${playerData [diktátor Id] [\'name\']} provedl podvodníka (\${playerData [targetId] [\'name\'\'} - \$targetRole) a stal se kapitánem!';
+      'Zázrakem dnes v noci nikdo nezemřel!';
 
   @override
   String get leDictateurSEstTrompe =>
-      'Diktátor se mýlil v popravě nevinného! Čeká ho trest smrti.';
-
-  @override
-  String get leLoupBavardNA =>
-      'Loup Bavard (\${playerData [loupBavardId] [\'jméno\'\'}) neřekl své slovo a zemřel při západu slunce!';
+      'Diktátor se zmýlil a popravil nevinného! Čeká ho trest smrti.';
 
   @override
   String get tentativeDUsurpationDIdentite =>
       'Pokus o krádež identity detekován!';
 
   @override
-  String get leVillageAVoteEt =>
-      'Obec hlasovala a eliminovala \${playerData [eliminatedId] [\'jméno\']}.';
-
-  @override
   String get egaliteParfaiteLorsDuVote1 =>
-      'Dokonalá rovnost při hlasování. Dnes není popraven žádný obyvatel.';
+      'Při hlasování nastala remíza. Dnes nikdo nebude popraven.';
 
   @override
-  String get leMercenaireAFaitEliminer =>
-      'Žoldák \${playerData [žoldák Id] [\'jméno\'\'}} nechal svůj cíl odstranit 1. den! Vyhrál hru sám!';
+  String get infiltre => 'Vetřelec';
 
   @override
-  String get meurtDeChagrinPourSon =>
-      '\${playerData [OtherLoverId] [\'jméno\'\'} umírá žalem pro svou lásku!';
-
-  @override
-  String get leChasseurTireEtTue => 'Lovec střílí a zabíjí cílový jméno!';
-
-  @override
-  String get lHeritierHeriteDuRole1 =>
-      '\${playerData [heritierIdCheck] [\'name\']} (dědic) zdědí roli \${playerData [testatorId] [\'jméno\'\'}: \$newRole!';
-
-  @override
-  String get lAncienCapitaine => 'Bývalý kapitán';
-
-  @override
-  String get formercaptainnameADesigneNewcaptainnameComme =>
-      '\$formerCaptain Jméno označilo \$newCaptainName za nového kapitána!';
-
-  @override
-  String get amoureux1 => 'Milenci 1';
-
-  @override
-  String get amoureux2 => 'Milenci 2';
-
-  @override
-  String get cupidonADesigneLover1nameEt =>
-      'Amor jménem \$lover1 Název a \$lover2 Jmenujte se milenci!';
-
-  @override
-  String get debugJoingameTentativeDeRejoindre =>
-      '[DEBUG joinGame] Pokus připojit se do hry \'\$gameCode\' by \'\$playerName\' (ID: \$playerId).';
-
-  @override
-  String get debugJoingameDemarrageDeLa =>
-      '[DEBUG joinGame] Začněte s transakcí.';
-
-  @override
-  String get debugJoingamePartieTrouveeEt =>
-      '[DEBUG joinGame] Část nalezena a v hale. Čtení dat...';
-
-  @override
-  String get debugJoingameJoueursActuelsAvant =>
-      '[DEBUG joinGame] CURRENT PLAYERS (k dispozici): \$hráči';
-
-  @override
-  String get debugJoingameJoueursMisA =>
-      '[Debug joinGame] Všichni UPDATED (Přidáno): \$hráči';
-
-  @override
-  String get debugJoingameTransactionUpdateAppelee =>
-      '[DEBUG joinGame] Transaktion.update () volal s novým seznamem hráčů.';
-
-  @override
-  String get debugJoingameTransactionReussieRetourne =>
-      'Úspěšná transakce. Vrať se zpátky.';
-
-  @override
-  String get debugJoingameLaPartieN =>
-      '[DEBUG joinGame] Hra neexistuje nebo už není v hale. Vrať se k falešnému.';
-
-  @override
-  String get erreurCritiqueDansJoingame => '--- Kritický error v joinGame ---';
-
-  @override
-  String get erreurLorsDeLaTransaction =>
-      'Chyba při transakci při připojení do hry: \$e';
-
-  @override
-  String
-  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie =>
-      ': AppLocalizations.of (kontext)!. Word Civility Parts0TrimWordundercoveria vrací samostatná jednoduchá slova';
-
-  @override
-  String get variante1 => '\${rawPair.trim ()} (Variant)';
-
-  @override
-  String get infiltre => 'Infiltrované';
-
-  @override
-  String get civil => 'Civilní';
+  String get civil => 'Civilista';
 
   @override
   String get vendeurDeFalafels => 'Prodávající Falafels';
@@ -6182,287 +5382,150 @@ class AppLocalizationsCs extends AppLocalizations {
   String get duellistes => 'Duelisté';
 
   @override
-  String get votreAmoureuxSeAmoureux2name => 'Tvůj milenec: \$amouus2';
+  String get laPhaseDeVoteCommence => 'Začíná fáze hlasování!';
 
   @override
-  String get votreAmoureuxSeAmoureux1name => 'Váš milenec: \$amouus1';
-
-  @override
-  String get laPartieCommenceDonnezVotre => 'Hra začíná! Dej mi nápovědu...';
-
-  @override
-  String get aDitCleanclue => '\${playerData [playerId]?';
-
-  @override
-  String get laPhaseDeVoteCommence => 'Začíná volební fáze!';
-
-  @override
-  String get seulMrWhitePeutDeviner => 'Jen pan White může hádat.';
-
-  @override
-  String get aDevineLeMotCivil =>
-      '\${gameData [\'playerData\']? \"Pan White\" uhodl civilní slovo (\$civilizované slovo)!';
-
-  @override
-  String get aProposeGuessedwordMaisCe =>
-      '\${gameData [\'playerData\']? \'Pan White\'\'} navrhl \'\$guessedWord\', ale nebylo to civilní slovo (\'\$Civilní slovo\')!';
+  String get seulMrWhitePeutDeviner => 'Pouze Mr. White smí hádat.';
 
   @override
   String get laDeesseDeLaJustice => 'Bohyně spravedlnosti vynesla verdikt!';
 
   @override
-  String get unNouveauTourCommence => 'Začíná nové turné.';
-
-  @override
   String get laVengeuseEmporteQuelquUn => 'Avenger si někoho vezme s sebou!';
-
-  @override
-  String get civils => 'Civilní';
-
-  @override
-  String get imposteurs => 'Podvodníci';
-
-  @override
-  String get paris => 'Paříž';
-
-  @override
-  String get france => 'Francie';
-
-  @override
-  String get capitale => 'Kapitál';
 
   @override
   String get tourEiffel => 'Eiffelova věž';
 
   @override
-  String get seine => 'Seina';
+  String get vousNePouvezPasBuzzer => 'Nemůžete zabuzzerovat svůj vlastní tým.';
 
   @override
-  String get ville => 'Město';
+  String get seuleLEquipeActivePeut => 'Pouze aktivní tým může potvrdit.';
 
   @override
-  String get cEstAuTourDe3 => 'Je to obrat týmu \${currentTeamIndex + 1}!';
+  String get seuleLEquipeActivePeut1 => 'Pouze aktivní tým může pasovat.';
 
   @override
-  String get vousNePouvezPasBuzzer => 'Nemůžeš zvonit na vlastní tým.';
+  String get tempsEcoulePassageAL => 'Čas vypršel! Přechod na další tým.';
 
   @override
-  String get seuleLEquipeActivePeut => 'Jen aktivní tým to může potvrdit.';
+  String get typeDeNavireInvalideOu => 'Neplatný nebo neznámý typ lodi.';
 
   @override
-  String get seuleLEquipeActivePeut1 => 'Jen aktivní tým může projít.';
+  String get ceNavireADejaEte => 'Tato loď již byla umístěna.';
 
   @override
-  String get tempsEcoulePassageAL => 'Čas vypršel! Přesun do dalšího týmu.';
+  String get leNavireDepasseDeLa => 'Loď přesahuje mřížku.';
 
   @override
-  String get typeDeNavireInvalideOu => 'Typ lodi neplatný nebo neznámý.';
-
-  @override
-  String get ceNavireADejaEte => 'Tato loď už byla umístěna.';
-
-  @override
-  String get leNavireDepasseDeLa => 'Loď je mimo síť.';
-
-  @override
-  String get emplacementDejaOccupeParUn =>
-      'Místo již obsazené jiným plavidlem.';
-
-  @override
-  String get flottesPlaceesCommenceATirer =>
-      'Vznáší se! \${playerData [first Player] [\'name\']} začne střílet.';
+  String get emplacementDejaOccupeParUn => 'Místo je již obsazeno jinou lodí.';
 
   @override
   String get veuillezPlacerTousVosNavires =>
-      'Prosím, umístěte všechny své lodě, než vás prohlásíme za připravené.';
+      'Umístěte prosím všechny lodě, než potvrdíte připravenost.';
 
   @override
-  String get tousLesJoueursSontPrets =>
-      'Všichni hráči jsou připraveni! \${playerData [first Player]? [\'name\']?? AppLocalizations.of (context)! .player} začíná střílet.';
-
-  @override
-  String get laMancheDeRamiCommence =>
-      'Ramiho rukáv začíná! Je to zase \${hráči [playerIds.first]? [\'name\']?? AppleLocalizations.of (kontext)! .player}.';
-
-  @override
-  String get vousAvezDejaPioche => 'Už jsi to zvedl.';
+  String get vousAvezDejaPioche => 'Už jste lízal(a).';
 
   @override
   String get piocheEtDefausseEpuiseesFin =>
-      'Vybírání a plýtvání. Konec rukávu!';
+      'Dobírací i odkládací balíček vyčerpány. Konec kola!';
 
   @override
-  String get playersScore =>
-      'hráči. \${totalScores.entries.reduced ((a, b) = > a.value < b.value? a: b) .key} .score';
+  String get defausseVide => 'Odkládací balíček je prázdný.';
 
   @override
-  String get defausseVide => 'Prázdná chyba.';
+  String get vousDevezDAbordPiocher => 'Nejprve si musíte líznout kartu.';
 
   @override
-  String get vousDevezDAbordPiocher => 'Nejdřív si musíš vybrat kartu.';
-
-  @override
-  String get ilFautAuMoins31 => 'Chce to alespoň tři karty.';
+  String get ilFautAuMoins31 => 'K vyložení jsou potřeba alespoň 3 karty.';
 
   @override
   String get tentativeDeTricheVousNe =>
-      'Zkuste podvádění: nelze použít stejnou kartu dvakrát v kombinaci.';
+      'Pokus o podvod: nelze použít stejnou kartu dvakrát.';
 
   @override
-  String get carteManquanteDansVotreMain => 'Chybějící karta v ruce.';
+  String get carteManquanteDansVotreMain => 'Chybějící karta ve vaší ruce.';
 
   @override
   String get combinaisonInvalideSelonLesRegles =>
-      'Kombinace je neplatná podle Ramiho pravidel!';
+      'Neplatná kombinace podle pravidel Rummy!';
 
   @override
-  String get defaussezExactement1Carte => 'Porazit přesně 1 kartu.';
+  String get defaussezExactement1Carte => 'Odhoďte přesně 1 kartu.';
 
   @override
-  String get carteNonTrouvee => 'Mapa nenalezena.';
-
-  @override
-  String get aGagneLaManche => 'Vyhrál kolo!';
+  String get carteNonTrouvee => 'Karta nenalezena.';
 
   @override
   String get desDejaLancesPourCe => 'Kostky už jsou na turné.';
 
   @override
-  String get playernameAFaitUnDice =>
-      'Hráč \$\$Jméno vydělalo kostky, ale žádný pěšák se nemůže pohnout dopředu. Automaticky otočit!';
+  String get vousDevezDAbordLancer => 'Nejprve musíte hodit kostkou.';
 
   @override
-  String get vousDevezDAbordLancer => 'Nejdřív musíš začít s kostkami.';
+  String get vousNePouvezPasDeplacer => 'Nemůžete hýbat figurkou soupeře!';
 
   @override
-  String get vousNePouvezPasDeplacer => 'Nemůžeš hýbat soupeřovým pěšákem!';
-
-  @override
-  String get k3SixConsecutifsLePion =>
-      'Tři šest svěcení! Pěšák \${hráčů [playerId]? [\'jméno\']?? Applelocalizations.of (kontext)! .player} se vrací do stáje a jeho otočka prochází.';
-
-  @override
-  String get ilFautUn1Ou => 'K získání pěšáka ze spojence je potřeba1 nebo6.';
+  String get ilFautUn1Ou => 'Je potřeba 1 nebo 6 k vyvedení figurky spojence.';
 
   @override
   String get vousNePouvezAiderUn =>
-      'Můžete jen pomoci spojenci se dostat ven nebo do finálního schodiště.';
+      'Spojenci můžete pomoci jen při startu nebo na cílovém schodišti.';
 
   @override
-  String get ilFautUn6Ou => 'Chce to 6 nebo 1 dostat ze stáje.';
+  String get ilFautUn6Ou => 'K opuštění stáje je potřeba 6 nebo 1.';
 
   @override
-  String get caseDeDepartOccupeePar =>
-      'Začněte s krabicí obsazenou vaším týmem.';
+  String get caseDeDepartOccupeePar => 'Startovní pole obsazeno vaším týmem.';
 
   @override
   String get lancerTropElevePourEntrer =>
-      'Hodit příliš vysoko na vstup do schodů.';
+      'Hod příliš vysoký pro vstup na schodiště.';
 
   @override
-  String get lancerTropEleveDicePour =>
-      'Zahajte příliš vysoké (\$dice) dosáhnout centra. Otoč se!';
-
-  @override
-  String get caseOccupeeParVotreEquipe => 'Krabice obsazená vaším týmem.';
+  String get caseOccupeeParVotreEquipe => 'Pole obsazeno vaším týmem.';
 
   @override
   String get caseRefugeProtegeeCaptureImpossible =>
-      'Bezpečné útočiště. Nemožné zajetí.';
+      'Chráněné bezpečné pole. Vyhození nemožné.';
 
   @override
-  String get playersAllyidScore => 'hráči. \$allyId.score';
-
-  @override
-  String get laPartieNEstPas => 'Hra ještě neskončila.';
+  String get laPartieNEstPas => 'Hra neprobíhá.';
 
   @override
   String get ceNEstPasVotre2 => 'Nejsi na řadě!';
 
   @override
-  String get ceDominoNEstPas => 'To domino není v tvé ruce.';
-
-  @override
-  String get extremiteNonDisponibleSurLe =>
-      'Extrémita není k dispozici na sadě (\$open Ends).';
-
-  @override
-  String get laTuileTileNePossede =>
-      'Dlaždice \$nemá hodnotu \$matchEnd požadovanou.';
-
-  @override
-  String get atteintTargetscorePoints =>
-      '\${hráči [playerId] [\'name\']} dosáhne \$targetScore bodů!';
+  String get ceDominoNEstPas => 'Toto domino nemáte v ruce.';
 
   @override
   String get vousDevezPiocherUneTuile =>
-      'Musíte si vybrat dlaždice, než můžete projít na řadě.';
+      'Než budete moci pasovat, musíte si líznout kámen.';
 
   @override
-  String get atteintTargetscorePoints1 =>
-      '\${hráči [vítěz Id] [\'jméno\']} dosáhne \$targetScore bodů!';
-
-  @override
-  String get seulLHotePeutLancer => 'Jen hostitel může spustit další kliku.';
-
-  @override
-  String get leBotAJoueTiletoplay => 'Ten robot hrál \$tileToPlay automaticky.';
-
-  @override
-  String get playernameAEteContraintDe =>
-      'Hráčské jméno bylo donuceno projít zatáčkou.';
+  String get seulLHotePeutLancer => 'Pouze hostitel může spustit další kolo.';
 
   @override
   String get zombie1 => 'Zombie';
 
   @override
   String get laPartieDeZombieCommence =>
-      'Zombie hra! Start! První dvojice poražena.';
+      'Zombie! začíná! Počáteční dvojice odhozeny.';
 
   @override
   String get indexDeCarteInvalide => 'Neplatný kartový index.';
-
-  @override
-  String get playersWidScore => 'hráči. \$wId.score';
-
-  @override
-  String get playersBestplayerScore => 'hráči. \$bestPlayer.score';
 
   @override
   String get laPartieDActionOu =>
       'Akce nebo pravda hra začíná! Ruleta určí prvního hráče.';
 
   @override
-  String get laRouletteADesigneSelectedname =>
-      'Ruleta s názvem \$selekted Name!';
-
-  @override
-  String get targetplayernameATire =>
-      '\"Akce\": AppLocalizations.of (context)! .verite1}!';
-
-  @override
   String get iAucunAutreJoueurDisponible => 'i Automaticky vybraný úkol.';
-
-  @override
-  String get authornameDoitEcrireLeDefi => 'AutorName \$musí napsat výzvu...';
-
-  @override
-  String get leDefiAEteEnvoye => 'Výzva byla odeslána na \$currentPlayerName!';
 
   @override
   String get leJoueurARealiseLe =>
       'Hráč si uvědomil výzvu! Hlasujte pro potvrzení.';
-
-  @override
-  String get resultatPercentageDeValidation => 'Výsledek: \$% validace!';
-
-  @override
-  String get currentplayernameGagneEarnedxpXp =>
-      'Â \$currentPlayerName vyhraje \$earnedXp XP!';
-
-  @override
-  String get tourSuivantQuiSeraLe =>
-      'Další zatáčka! Kdo bude další? ApPLocalizations.of (context)!. finDeMancheBoutonAdministration Manage over! \${hráči [winnerId]? [\'name\']?? ApPLocalizations.of (context)! .player} vyhraje s \$maxXp XP!';
 
   @override
   String get tempsEcoulePourChoisirTour =>
@@ -6476,19 +5539,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get tempsEcouleDefiEchoue0 => 'Čas vypršel! Selhala výzva (0 XP).';
 
   @override
-  String get leJugeNePeutPas => 'Soudce nemůže hrát karty.';
+  String get leJugeNePeutPas => 'Soudce nemůže hrát kartu.';
 
   @override
-  String get carteNonTrouveeDansLa => 'Karta není nalezena v ruce.';
+  String get carteNonTrouveeDansLa => 'Karta nebyla nalezena v ruce.';
 
   @override
   String get seulLeJugePeutDesigner => 'Pouze soudce může jmenovat vítěze.';
 
   @override
-  String get ceJoueurNAPas => 'Tento hráč nepodal kartu.';
-
-  @override
-  String get playersWinnerplayeridScore => 'hráči. \$winnerPlayerId.score';
+  String get ceJoueurNAPas => 'Tento hráč neodeslal kartu.';
 
   @override
   String get tempsEcouleAucuneCarteSoumise =>
@@ -6509,105 +5569,43 @@ class AppLocalizationsCs extends AppLocalizations {
   String get unoNecessiteEntre2Et => 'Uno vyžaduje mezi 2 a 10 hráči.';
 
   @override
-  String get laPartieDeUnoCommence => 'Unova hra začíná!';
-
-  @override
   String get inversionA2JoueursLe =>
       'Inverze na 2 hráče: první hráč spustí hru!';
 
   @override
-  String get directionInverseeDesLeDepart => 'Zpětný směr od začátku!';
-
-  @override
-  String get passeSonTour => '\${playerOrder [initialIndex]} Přejděte na řadu!';
+  String get directionInverseeDesLeDepart => 'Směr otočen hned od začátku!';
 
   @override
   String get laPremiereCarteEstUn =>
-      'První karta je + 2! První hráč musí vybrat nebo stack.';
+      'První karta je +2! První hráč musí lízat nebo přiložit.';
 
   @override
-  String get partieNonTrouvee => 'Část nenalezena.';
+  String get partieNonTrouvee => 'Hra nenalezena.';
 
   @override
-  String get laPileDeDefausseEst => 'Odpadní hromada je prázdná.';
+  String get laPileDeDefausseEst => 'Odkládací balíček je prázdný.';
 
   @override
-  String get ceNEstPasVotre3 => 'Nejsi na řadě.';
+  String get ceNEstPasVotre3 => 'Nejsi na řadě s hraním.';
 
   @override
-  String get vousNAvezPasCette => 'Nemáš tu kartu v ruce.';
-
-  @override
-  String get vousDevezPiocherPendingdrawCartes =>
-      'Musíte vybrat \$dependingDraw karty, nebo počítadlo s +2 / +4.';
+  String get vousNAvezPasCette => 'Tuto kartu nemáte v ruce.';
 
   @override
   String get vousDevezJouerLaCarte =>
-      'Musíte zahrát kartu, kterou jste právě vybrali, nebo projít.';
+      'Zahrajte líznutou kartu, nebo vynechejte tah.';
 
   @override
   String get cetteCarteNePeutPas =>
-      'Tuto kartu nelze přehrát. Barva nebo symbol neodpovídá.';
-
-  @override
-  String get aJoueUneInversionEt =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} hrál inverzi a replay!';
-
-  @override
-  String get aInverseLeSensDe =>
-      '\${hráči [playerId]? [\'jméno\']?? Applelocalizations.of (kontext)! .player} obrátil herní smysl!';
-
-  @override
-  String get aSauteLeTourDe =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} přeskočil roztočení \$skippedPlayerName!';
-
-  @override
-  String get aEmpileUn2Cumul =>
-      '\${hráči [playerId]? [\'jméno\']?? AppleLocalizations.of (kontext)! .player} stacked a + 2. Kumulace: \${dependingDraw + 2} karty!';
-
-  @override
-  String get aJoueUn2 =>
-      '\${hráči [playerId]? [\'jméno\']?? AppleLocalizations.of (kontext)! .player} hrál a + 2!';
+      'Tuto kartu nelze zahrát. Barva nebo symbol se neshodují.';
 
   @override
   String get veuillezChoisirUneCouleurPour =>
-      'Prosím, vyberte barvu pro Joker.';
-
-  @override
-  String get aJoueUnJokerEt =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} hrál Joker a vybral barvu \$thinColor!';
+      'Zvolte prosím barvu pro Divokou kartu.';
 
   @override
   String get veuillezChoisirUneCouleurPour1 =>
-      'Prosím vyberte barvu pro Super Joker +4.';
-
-  @override
-  String get aEmpileUn4Cumul =>
-      '\${player [playerId]? [\'name\']?? AppleLocalizations.of (context)! .player} stacked a + 4. Kumulace: \${dependingDraw + 4} karty!';
-
-  @override
-  String get aJoueUnSuperJoker =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} hrál Super Joker + 4!';
-
-  @override
-  String get aPoseSaDerniereCarte =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} umístil svou poslední kartu a vyhrál kolo!';
-
-  @override
-  String get gagneLaMancheAvecRoundscore =>
-      '\${hráči [playerId]? [\'jméno\']?? Applelocalizations.of (kontext)! .player} vyhraje kolo s + \$round Score body!';
-
-  @override
-  String get nAPlusQuUne =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} má pouze jednu kartu!';
-
-  @override
-  String get passeSonTour1 =>
-      '\${hráči [playerId]? [\'jméno\']?? Applelocalizations.of (kontext)! .player} prohrává svůj obrat.';
-
-  @override
-  String get nAPasJoueA2 =>
-      '\${gameData [\'hráči\']? [playerId]? (\'jméno\')?? AppLocalizations.of (kontext)! .player} nehrál včas, zvednout a projít jeho řada.';
+      'Zvolte prosím barvu pro Divokou kartu +4.';
 
   @override
   String get partieIntrouvable => 'Část nenalezena.';
@@ -6619,68 +5617,57 @@ class AppLocalizationsCs extends AppLocalizations {
   String get symboleIncorrect => 'Špatný symbol!';
 
   @override
-  String get toutesLesCartesOntEte => 'Všechny karty byly přehrány!';
+  String get toutesLesCartesOntEte => 'Všechny karty byly odehrány!';
 
   @override
-  String get egaliteParfaiteNames => 'Dokonalá rovnost (\$names)!';
+  String get laPartieDeJeuDe => 'Hra Dáma začíná! Červení hrají první.';
 
   @override
-  String get laPartieDeJeuDe => 'Dámská hra začíná! Rudí hrají první.';
+  String get aucunPionSurCetteCase => 'Na tomto poli není žádná figurka.';
 
   @override
-  String get aucunPionSurCetteCase => 'Na téhle krabici nejsou pěšáci.';
+  String get vousNePouvezDeplacerQue =>
+      'Můžete pohybovat pouze svými figurkami.';
 
   @override
-  String get vousNePouvezDeplacerQue => 'Můžete hýbat jen vlastními kousky.';
+  String get deplacementDiagonalInvalide => 'Neplatný diagonální pohyb.';
 
   @override
-  String get priseMultipleObligatoireAvecLe =>
-      'Povinné více zásuvka s \$mandatoryPick pěšák.';
+  String get destinationHorsDuDamier => 'Cíl mimo šachovnici.';
 
   @override
-  String get deplacementDiagonalInvalide => 'Neplatné diagonální posunutí.';
-
-  @override
-  String get destinationHorsDuDamier => 'Cíl mimo kontrolu.';
-
-  @override
-  String get caseDeDestinationOccupee => 'Rušný cílový box.';
-
-  @override
-  String get str58921f =>
-      '\${from R + (step R * i)}, \${from C + (step C * i)}';
+  String get caseDeDestinationOccupee => 'Cílové pole je obsazeno.';
 
   @override
   String get impossibleDeSauterParDessus =>
-      'Nemůžeš přeskakovat vlastní části.';
+      'Nelze přeskakovat vlastní figurky.';
 
   @override
   String get impossibleDeSauterParDessus1 =>
-      'Nemohl přeskočit několik kusů najednou.';
+      'Nelze přeskočit více figurek najednou.';
 
   @override
   String get unPionSimpleNePeut =>
-      'Jediný pěšák se může pohybovat vpřed pouze jednou krabicí.';
+      'Obyčejná figurka může postoupit pouze o 1 pole.';
 
   @override
-  String get lesPionsRougesAvancentVers => 'Červené pěšáky nahoru.';
+  String get lesPionsRougesAvancentVers =>
+      'Červené figurky postupují směrem nahoru.';
 
   @override
-  String get lesPionsNoirsAvancentVers => 'Černí pěšáci se pohybují dolů.';
+  String get lesPionsNoirsAvancentVers =>
+      'Černé figurky postupují směrem dolů.';
 
   @override
   String get distanceDeSautInvalidePour =>
-      'Neplatná vzdálenost skoku pro jednoduchého pěšáka.';
+      'Neplatná vzdálenost skoku pro obyčejnou figurku.';
 
   @override
   String get priseObligatoireVousDevezCapturer =>
-      'Povinný úlovek! Musíte zajmout místnost.';
+      'Povinné skákání! Musíte sebrat figurku.';
 
   @override
   String get lAdversaireNAPlus => 'Oponent nemá žádnou další možnou ránu!';
-
-  @override
-  String get playersWinidScore => 'hráči. \$winId.score';
 
   @override
   String get lesRougesNOntPlus => 'Rudí už nemají žádné mince!';
@@ -6689,40 +5676,32 @@ class AppLocalizationsCs extends AppLocalizations {
   String get lesNoirsNOntPlus => 'Černoši už nemají mince!';
 
   @override
-  String get votreCibleEstEliminezLe =>
-      'Váš cíl je \${playerData [žoldácký cíl]? \'Neznámý\'\'}. Eliminuj ho první den!';
-
-  @override
   String get laNuitTombeSurLe1 => 'Noc padá na vesnici Thiercelieux...';
 
   @override
-  String get chacunARecuSonRole => 'Každý dostal svou tajnou roli.';
+  String get chacunARecuSonRole => 'Každý obdržel svou tajnou roli.';
 
   @override
   String get indiceInvalide => 'Neplatný index.';
 
   @override
   String get seulLeMaitreEspionDe =>
-      'Pouze Master Espion aktivního týmu může dát nápovědu.';
+      'Pouze Hlavní špion aktivního týmu může dát nápovědu.';
 
   @override
-  String get ceNEstPasLa => 'Toto není navrhovaná indexová fáze.';
+  String get ceNEstPasLa => 'Nyní není fáze podávání nápověd.';
 
   @override
-  String get seulUnAgentDeL => 'Jen aktivní týmový agent může uhodnout slovo.';
+  String get seulUnAgentDeL => 'Pouze Agent aktivního týmu smí hádat slovo.';
 
   @override
-  String get ceNEstPasLa1 => 'Není to jen odhad.';
+  String get ceNEstPasLa1 => 'Není fáze hádání.';
 
   @override
   String get aucunEssaiRestantPourCe => 'Na tohle kolo už žádný test nezbyl.';
 
   @override
   String get ceMotEstDejaRevele => 'Toto slovo je již odhaleno.';
-
-  @override
-  String get lEquipeAReveleL1 =>
-      'Tým \${activeTeam = = \'červená\': \'modrá\'\'} odhalil Assassin!';
 
   @override
   String get tousLesMotsOntEte => 'Všechna slova byla objevena!';
@@ -6736,7 +5715,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get seulLeDevineurActifPeut =>
-      'Pouze aktivní odhadce může potvrdit slova.';
+      'Pouze hádající hráč může potvrdit slova.';
 
   @override
   String get vousNAvezPasCes => 'Ty karty nemáš.';
@@ -6760,35 +5739,14 @@ class AppLocalizationsCs extends AppLocalizations {
   String get partieNonTrouvee1 => 'Část nenalezena';
 
   @override
-  String get trouDuCul => 'Debile.';
-
-  @override
-  String get vicePresident => 'Vicepředseda';
-
-  @override
-  String get viceTrouDuCul => 'Vice- Debile.';
-
-  @override
-  String get neutre => 'Neutrální';
-
-  @override
-  String get playersPresidentwinneridScore =>
-      'hráči. \$presidentWinnerId.score';
-
-  @override
-  String get debugPictionaryConditionRoundstateDrawing =>
-      '--- DEBUG PICTIONAR --- Stav \"kulatý stát\" nebo \"odhad výkresu\" je pravda. Aktualizovat databázi...';
-
-  @override
-  String get debugPictionaryConditionRoundstateDrawing1 =>
-      '--- DEBUG PICTIONARY --- Stav \'kruhový stát = = výkres\' je FOSSE. Současný stav je \'\${gamesnap.get (\' round State \')}\'';
+  String get vicePresident => 'Viceprezident';
 
   @override
   String get dessinateurIntrouvable => 'Drawr nenalezen.';
 
   @override
   String get seulLeDessinateurActifPeut =>
-      'Odpověď může potvrdit pouze aktivní karikaturista.';
+      'Pouze kreslící hráč může potvrdit odpověď.';
 
   @override
   String get usurpationDIdentiteDuDessinateur =>
@@ -6796,13 +5754,6 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get gagnantInvalide => 'Neplatný vítěz.';
-
-  @override
-  String get guessedcountMotsDevines =>
-      '\$guessedCount / \${collectiveWords.length} slova hádal!';
-
-  @override
-  String get playersExpecteddraweridScore => 'hráči.';
 
   @override
   String get motTrouveAvecSucces => 'Slovo nalezené úspěšně!';
@@ -6814,137 +5765,68 @@ class AppLocalizationsCs extends AppLocalizations {
   String get leDevineurNePeutPas => 'Tipuju, že o tom nikdo neví.';
 
   @override
-  String get aaaaaaceeeeiiiinooooouuuuyy =>
-      'áááááááááááááááááááááááááááááááááá';
-
-  @override
   String get ceNEstPasLe => 'Teď není čas hádat.';
 
   @override
-  String get seulLeDevineurPeutFaire => 'Pouze odhadce může podat návrh.';
+  String get seulLeDevineurPeutFaire => 'Pouze hádající hráč může podat návrh.';
 
   @override
   String get reponseInvalide => 'Neplatná odpověď.';
 
   @override
-  String get ceNEstPasLe1 => 'Teď není čas na odpověď.';
+  String get ceNEstPasLe1 => 'Teď není čas odpovídat.';
 
   @override
-  String get ceNEstPasVotre4 => 'Není na tobě, abys měl tu bombu!';
+  String get ceNEstPasVotre4 => 'Nejsi na řadě s bombou!';
 
   @override
-  String get aReponduCleananswerEtPasse =>
-      '\${gameData [\'hráči\'] [playerId] [\'jméno\']} odpověděl \'\$clean Answer\' a prošel bombou!';
-
-  @override
-  String get playersLoseridScore => 'hráči. \$loserId.score';
-
-  @override
-  String get ceNEstPasVotre5 => 'Není řada na tobě.';
+  String get ceNEstPasVotre5 => 'Nejste na řadě s lízáním.';
 
   @override
   String get laPiocheEstVideLa =>
-      'Akcie jsou prázdné. Odpad je smíchán s novou zásobou.';
+      'Dobírací balíček je prázdný. Odhozené karty byly zamíchány.';
 
   @override
-  String get impossibleDePiocherIlN => 'Žádné další karty nejsou k dispozici.';
+  String get impossibleDePiocherIlN =>
+      'Nelze lízat, nejsou k dispozici žádné karty.';
 
   @override
-  String get aPiochePendingdrawCarteS =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} vybral \$dependingDraw kartu (karty).';
+  String get ceNEstPasVotre6 => 'Nejste na řadě s volbou barvy.';
 
   @override
-  String get aPiocheUneCarteEt =>
-      '\${hráči [playerId]? [\'jméno\']?? AppleLocalizations.of (kontext)! .player} zvedl kartu a může ji zahrát.';
+  String get vousNePouvezPasChoisir => 'Nyní nemůžete volit barvu.';
 
   @override
-  String get aPiocheUneCarteEt1 =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} zvedl kartu a složil svůj tah.';
-
-  @override
-  String get nAPas1Carte =>
-      '\${players [targetId]? [\'name\']?? AppLocalizations.of (context)! .the Player} nemá 1 kartu, volání UNO je neplatné.';
-
-  @override
-  String get aCrieContreUnoPioche =>
-      '\${players [callerId]? [\'name\']?? AppLocalizations.of (context)! .player} křičel proti UNO! \${players [targetId]? [\'name\']? AppLocalizations.of (context)! .player} vybere 2 karty.';
-
-  @override
-  String get aDitUno =>
-      '\${hráči [targetId]? [\'jméno\']?? Applelocalizations.of (kontext)! .player} řekl UNO!';
-
-  @override
-  String get ceNEstPasVotre6 => 'Není na tobě, aby sis vybral barvu.';
-
-  @override
-  String get aChoisiLaCouleurChosencolor =>
-      '\${hráči [playerId]? [\'jméno\']?? AppLocalizations.of (kontext)! .player} vybral barvu \$thinColor!';
-
-  @override
-  String get vousNePouvezPasChoisir => 'Teď si nemůžeš vybrat barvu.';
-
-  @override
-  String get erreurCritiquePlayerorderEstVide =>
-      'Kritický error: playerorder je prázdný v dalším kole. Nemůžu pokračovat.';
-
-  @override
-  String get questionNonTrouvee => 'Otázka nenalezena';
-
-  @override
-  String get quiPourraitLePlusApplocalizations1 =>
-      'Kdo by mohl více? ApPLocalizations.of (context)! .listStringDotazy AiwordpoolGamewordssoft';
-
-  @override
-  String get quiPourraitLePlus2 =>
-      'Kdo by mohl být nejvíce \${otázky [náhodně.nextInt (questions.length)]}';
-
-  @override
-  String get menteur => 'Lháři.';
+  String get questionNonTrouvee => 'Otázka nebyla nalezena';
 
   @override
   String get pasAssezDeJoueursPour => 'Na tuhle módu není dost hráčů.';
-
-  @override
-  String get trouvezLeMeilleurSynonymePour =>
-      'Najít nejlepší synonymum pro slovo: \$word';
 
   @override
   String get ajouteLaDescriptionLaPlus =>
       'Přidejte k tomu memu ten nejvtipnější popis!';
 
   @override
-  String get uneNouvelleMancheDeUno => 'Nové kolo Uno začíná!';
+  String get uneNouvelleMancheDeUno => 'Začíná nové kolo Uno!';
 
   @override
   String get plusAucunJoueurActif => 'Už žádní aktivní hráči.';
 
   @override
   String get chaqueJoueurActifDoitPoser =>
-      'Každý aktivní hráč musí před zahájením aukce umístit alespoň jednu kartu.';
+      'Každý aktivní hráč musí před zahájením dražby položit alespoň jednu kartu.';
 
   @override
-  String get enchereInvalide => 'Neplatná aukce.';
+  String get enchereInvalide => 'Neplatná nabídka.';
 
   @override
-  String get laSurenchereDoitEtreSuperieure => 'Aukce musí být vyšší.';
+  String get laSurenchereDoitEtreSuperieure => 'Příhoz musí být vyšší.';
 
   @override
-  String get applocalizationsOfContextUnjoueurEst =>
-      ']?? AppLocalizations.of (kontext)! .aPlayer} je poslední přeživší a vyhrává Skull!';
+  String get reponseVide => 'Prázdná odpověď.';
 
   @override
-  String get applocalizationsOfContextUnjoueurA =>
-      ']?? AppLocalizations.of (kontext)! .aPlayer} vyhrál 2 výzvy a vyhrál hru!';
-
-  @override
-  String get applocalizationsOfContextUnjoueurRemporte =>
-      ']?? AppLocalizations.of (kontext)!.';
-
-  @override
-  String get reponseVide => 'Jasná odpověď.';
-
-  @override
-  String get leJugeNePeutPas1 => 'Soudce nemůže odpovědět.';
+  String get leJugeNePeutPas1 => 'Soudce nemůže odeslat odpověď.';
 
   @override
   String get toutLeMondeARepondu => 'Všichni odpovídali! Otevřeme dveře.';
@@ -6964,99 +5846,41 @@ class AppLocalizationsCs extends AppLocalizations {
   String get joueurCibleIntrouvable => 'Cílený hráč nenalezen.';
 
   @override
-  String get quiPourraitLePlusApplocalizations2 =>
-      'Kdo by mohl více? AppLocalizations.of (kontext)!. If GametypeSynonym nebo Banni';
+  String get vousNePouvezPasBannir => 'Nemůžete zakázat své vlastní synonymum!';
 
   @override
-  String get vousNePouvezPasBannir => 'Nemůžeš vyhnat vlastní synonymum!';
+  String get seulLeJugeEnTitre => 'Pouze úřadující Soudce může určit vítěze.';
 
   @override
-  String get seulLeJugeEnTitre => 'Pouze soudce může jmenovat vítěze.';
-
-  @override
-  String get ceJoueurNAPas1 => 'Tento hráč nepředložil odpověď.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations3 =>
-      'Kdo by mohl více? AppLocalizations.of (kontext)!. inRequiredvelesPlayersLengthIf soudce';
-
-  @override
-  String get quiPourraitLePlusApplocalizations4 =>
-      'Kdo by mohl více? ApLocalizations.of (kontext)!. pro FinalTargetInVotesround State';
-
-  @override
-  String get playersWinnerScore => 'hráči. \$winner.score';
+  String get ceJoueurNAPas1 => 'Tento hráč neodeslal odpověď.';
 
   @override
   String get egaliteParfaiteAucunPointAttribue =>
-      'Dokonalá rovnost! Žádné body.';
+      'Naprostá remíza! Žádné body nebyly uděleny.';
 
   @override
   String get egaliteDansLesVotesAucun =>
-      'Rovnost hlasů: Žádný hráč toto kolo nevykázal.';
+      'Remíza v hlasování: tento tah není nikdo vyhnán.';
 
   @override
-  String get winnernameRemporteLaManche => '\$winnerName vyhrává kolo!';
-
-  @override
-  String get playersMostvotedplayeridScore =>
-      'hráči. \$mostVotedPlayerId.score';
-
-  @override
-  String get mrWhiteADevineLe =>
-      'Pan White uhodl tajné slovo: \'\$civilianWord\'!';
-
-  @override
-  String get playersMrwhiteidScore => 'hráči. \$mrWhiteId.score';
-
-  @override
-  String get mrWhiteAEchoueA =>
-      'Pan White neuhodl slovo (bylo to \'\$civilianWord\').';
-
-  @override
-  String get laDescriptionLaPlusDrole => 'Byl vybrán ten nejvtipnější popis!';
-
-  @override
-  String get aucuneDescriptionNAEte => 'Nebyl zvolen žádný popis.';
-
-  @override
-  String get quiPourraitLePlusApplocalizations5 =>
-      'Kdo by mohl více? ApLocalizations.of (kontext)!. pro FinalTargetInVotes1round WinnerId';
-
-  @override
-  String get playersActualliaridScore => 'hráči. \$actualLiarId.score';
-
-  @override
-  String get playersUndercoveridScore => 'hráči. \$undercoverId.score';
+  String get laDescriptionLaPlusDrole => 'Byl vybrán nejvtipnější popis!';
 
   @override
   String get jugeIntrouvable => 'Soudce nebyl nalezen.';
 
   @override
   String get laPartieDeZeroPointe =>
-      'Hra Zero Pointe začíná! Každý hráč musí odhalit 2 karty.';
+      'Hra Nula Bodů začíná! Každý hráč musí odhalit 2 karty.';
 
   @override
-  String get toutLeMondeARevele => 'Každý odhalil své karty. Hra začíná!';
+  String get toutLeMondeARevele => 'Všichni odhalili své karty. Hra začíná!';
 
   @override
   String get plusAucuneCarteDisponible => 'Žádné další karty.';
 
   @override
   String get vousDevezChoisirUneCarte =>
-      'Musíte si vybrat skrytou kartu, která není eliminována.';
-
-  @override
-  String get nouvelleMainEstLeDonneur =>
-      'Nová ruka! \${hráči [playerIds [dealerindex] [\'name\']} je dárce.';
-
-  @override
-  String get poseLaPetiteBlindDe =>
-      '\${hráči [SmallBlind Id] [\'name\']} nastavuje malé blind \$small BlindActual.';
-
-  @override
-  String get poseLaGrosseBlindDe =>
-      '\${hráči [bigBlindId] [\'name\']} nastavuje velký blind \$bigBlindActual.';
+      'Vyberte lícem dolů otočenou nevyřazenou kartu.';
 
   @override
   String get laPartieNExistePas => 'Žádná část není.';
@@ -7066,66 +5890,22 @@ class AppLocalizationsCs extends AppLocalizations {
       'Neplatná herní data (playerOrder / currentPlayerIndex).';
 
   @override
-  String get ceNEstPasLe2 => 'Není to \$player Jsem na řadě.';
-
-  @override
-  String get donneesDuJoueurPlayeridIntrouvables =>
-      'Přehrávač data \$playerId nenalezen.';
-
-  @override
-  String get seCouche => '\${myData [\'jméno\'\'}} jde do postele.';
-
-  @override
   String get vousNePouvezPasChecker =>
       'Nemůžeš to zkontrolovat, někdo se vsadil.';
 
   @override
-  String get check => '\${myData [\'name\']} Šach.';
-
-  @override
-  String get faitTapisAllIn =>
-      '\${myData [\'jméno\'\'} vyrobený koberec (all- in)!';
-
-  @override
-  String get suitPourCallamount =>
-      '\${myData [\'jméno\']} následuje pro \$callSupport.';
-
-  @override
-  String get montantDeRelanceRequis => 'Částka, která má být navrácena.';
+  String get montantDeRelanceRequis => 'Částka navýšení je povinná.';
 
   @override
   String get laRelanceDoitEtreStrictement =>
-      'Zotavení musí být naprosto lepší než to současné.';
+      'Navýšení musí být vyšší než aktuální sázka.';
 
   @override
-  String get vousNAvezPasAssez => 'Na tohle zotavení nemáte dost žetonů.';
+  String get vousNAvezPasAssez => 'Nemáte dostatek žetonů pro toto navýšení.';
 
   @override
   String get laRelanceDoitEtreD =>
-      'Restart musí být nejméně dvojnásobek předchozí sázky (nebo koberce).';
-
-  @override
-  String get faitTapisAllInEn =>
-      '\${myData [\'name\']} dělá koberec (all- in) tím, že restartuje na \$total BetSupport!';
-
-  @override
-  String get relanceATotalbetamount =>
-      '\${myData [\'name\']} zvyšuje na \$total BetSupport.';
-
-  @override
-  String get gagneLePotParForfait =>
-      '\${playerData [winners.first] [\'name\']} vyhraje banku podle balíčku!';
-
-  @override
-  String get winnernamesGagneNtLePot =>
-      '\$winnerNames vyhrává pot s \${bestHand? .rank.name?? AppLocalizations.of (kontext)! .aMain}!';
-
-  @override
-  String get laPartieDeBeloteCommence => 'Hra Belote začíná!';
-
-  @override
-  String get aPrisASuit =>
-      '\${playerData [playerId] [\'jméno\']} Vzal si oblek za \$\$!';
+      'Navýšení musí být alespoň dvojnásobkem předchozí sázky (nebo all-in).';
 
   @override
   String get passeGeneraleAu1erTour =>
@@ -7135,170 +5915,93 @@ class AppLocalizationsCs extends AppLocalizations {
   String get carteNonPossedee => 'Karta není posedlá.';
 
   @override
-  String get vousDevezFournirLaCouleur =>
-      'Musíte poskytnout požadované barvy (\$ledSuit).';
-
-  @override
   String get vousDevezMonterAL => 'Musíte vyšplhat na výhodu (overcut)!';
 
   @override
   String get vousDevezCouperAL => 'Musíš to uříznout!';
 
   @override
-  String get passeLAnnonce => 'Podej mi ten inzerát.';
+  String get passeLAnnonce => 'pasuje hlášení';
 
   @override
-  String get laPartieDeBlokusCommence => 'Blokus hra začíná!';
+  String get pieceDejaUtilisee => 'Dílek je již použitý.';
 
   @override
-  String get pieceDejaUtilisee => 'Mince už byla použita.';
+  String get horsLimites => 'Mimo hrací plochu!';
 
   @override
-  String get horsLimites => 'Mimo!';
+  String get caseDejaOccupee => 'Pole je již obsazeno!';
 
   @override
-  String get caseDejaOccupee => 'Rušný případ!';
-
-  @override
-  String get contactParLeCoteInterdit => 'Kontakt ze zakázané strany!';
+  String get contactParLeCoteInterdit => 'Dotyk stranou je zakázán!';
 
   @override
   String get lePremierCoupDoitCouvrir =>
-      'První výstřel musí pokrýt váš výchozí bod!';
+      'První tah musí pokrýt váš startovní roh!';
 
   @override
   String get votrePieceDoitToucherUne =>
-      'Váš pokoj se musí dotknout jednoho z vašich pokojů za rohem!';
+      'Váš dílek se musí dotýkat vašeho dílku rohem!';
 
   @override
-  String get cinemaSeries => 'Kino & série';
+  String get cinemaSeries => '🎬 Filmy a seriály';
 
   @override
-  String get gamingJeux => 'Hra a hraní';
+  String get gamingJeux => '🎮 Gaming a hry';
 
   @override
-  String get cuisineFood => 'Potraviny a kuchyně';
+  String get cuisineFood => '🍕 Vaření a jídlo';
 
   @override
-  String get voyagePays => 'Cestování a země';
+  String get voyagePays => '🌍 Cestování a země';
 
   @override
-  String get superHerosComics => 'Superhrdina a komiksy';
+  String get superHerosComics => '🦸 Superhrdinové a komiksy';
 
   @override
-  String get animauxNature => 'Zvířata a příroda';
+  String get animauxNature => '🐾 Zvířata a příroda';
 
   @override
-  String get scienceFiction => 'Science-Fiction';
+  String get scienceFiction => '🚀 Vědeckofantastické';
 
   @override
-  String get histoireMythes => 'Historie a mýty';
+  String get histoireMythes => '📚 Historie a mýty';
 
   @override
-  String get humourAbsurde => '🎭 Humour & Absurde';
+  String get humourAbsurde => '🎭 Humor a absurdno';
 
   @override
-  String get musiquePop => 'Music & Pop';
+  String get musiquePop => '🎵 Hudba a pop';
 
   @override
-  String get annees8090 => '8 / 90';
+  String get annees8090 => '🎉 80. a 90. léta';
 
   @override
-  String get fantasyMagie => '\"Fantasy & Magic';
+  String get fantasyMagie => '🧙 Fantasy a magie';
 
   @override
-  String get funSoiree => 'Zábava & večer';
+  String get funSoiree => '🎉 Zábava a párty';
 
   @override
-  String get cultureDefi => 'Kultura a výzva';
+  String get cultureDefi => '🧠 Znalosti a výzva';
 
   @override
-  String get familleToutPublic => 'Rodina a všechny veřejné';
+  String get familleToutPublic => '👨‍👩‍👧‍👦 Rodina a pro všechny';
 
   @override
-  String get piquantInsolite => 'Pikantní a nezvyklé';
-
-  @override
-  String get erreurGenerationIaE => 'Chyba v výrobě IA: \$e';
-
-  @override
-  String get quiPourraitLePlusApplocalizations6 =>
-      'Kdo by mohl více? ApLocalizations.of (kontext)! - Kdo by mohl být tvým modelem?';
+  String get piquantInsolite => '🌶️ Pikantní a neobvyklé';
 
   @override
   String get devineT => 'Hádej...';
 
   @override
-  String get activeaithemetitle => '\$activeAiThemeTitle + \${item.title}';
-
-  @override
-  String get str7fab82 => '\${autoTitle.substring (0, 25)}...';
-
-  @override
-  String forcevideo(Object forceVideo) {
-    return '\${forceVideo? \'(\${\$';
-  }
-
-  @override
-  String get erreurInitLivekitAuSalon => 'Chyba Livekit init na výstavě: \$e';
-
-  @override
-  String get erreurLeavechannelSafepopE => 'Chyba SafePop LeaveChannel: \$e';
-
-  @override
-  String get erreurLorsDeLaDeconnexion => 'Chyba při odpojení LiveKit: \$e';
-
-  @override
-  String get erreurLorsDuNettoyageDu => 'Chyba při čištění herny: \$e';
-
-  @override
-  String get erreurInitLivekitE => 'Chyba v Livektu: \$e';
-
-  @override
-  String get erreurDisposeLivekitserviceE => 'Chyba má LivekitService: \$e';
-
-  @override
-  String get presidente => 'předseda';
-
-  @override
   String get chargement => 'Načítám...';
-
-  @override
-  String get prole => '\$plole (\${specialAbilities.continue (\',\')}';
 
   @override
   String get cursive => 'Kurzíva';
 
   @override
   String get exception => 'Výjimka:';
-
-  @override
-  String get stra26129 => '{oppSafeties.length}';
-
-  @override
-  String get str84889d => '\${(gameData [\'mileBornesDeck\') jako seznam?? 0}';
-
-  @override
-  String get str58f25a =>
-      '\${String.from CharCode (65 + enemyAimedIndex ~ / 10)} \${enemyAimedIndex% 10 + 1}';
-
-  @override
-  String get stree98fd => '\${myData [\'čipy\'\'}\\ \$';
-
-  @override
-  String get str0d434e =>
-      '} \${GameUiLocalization.tr (kontext, wildColorChosen) .toUpperCase ()}';
-
-  @override
-  String get debutDeLaConstructionDe =>
-      '--- KONSTRUKCE HEHO OF VOTE \"Kdo by mohl nejvíce? AppLocations.of (kontext)!. printIsactiondependingStateTo (isActionWill) player \'] as Map < String, dynamic >?? {};';
-
-  @override
-  String get questionAAfficherQuestion => 'Otázka k zobrazení: \$otázka';
-
-  @override
-  String get nombreDeJoueursAAfficher =>
-      'Počet hráčů k zobrazení: \${players.length}';
 
   @override
   String get clicSurLeJoueurPname =>
@@ -7320,79 +6023,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get attentionLeWidgetNEst => 'Widget je pryč, setState zrušeno.';
 
   @override
-  String get quiPourraitLePlusApplocalizations7 =>
-      'Kdo by mohl více? AppLocalizations.of (context)!. defaultFinalRoundwinneridGamedataroundWinnerId';
-
-  @override
-  String get currentcountTotalexpected => '\$currentCount / \$totalDected';
-
-  @override
-  String get str38ce0b =>
-      '\${\'codenamesYouAre\'\'} \${redTeam.contains (playerId)? \'codenamesRedTeam\': (blueTeam.contains (playerId)? \'CodenamesBlue Team\': \'CodenamesSpectator\')}';
-
-  @override
-  String get str735713 => '\${(playerId = = masterSpyRed}';
-
-  @override
-  String get strb8097d => 'Ukazatele za \${. První:';
-
-  @override
-  String get currentclueCluecount => '\'\$currentClue \$clueCount\'';
-
-  @override
-  String get str51cc0a => '# \${index + 1}';
-
-  @override
-  String get maximumbid => '}: \$maximum Bid \${';
-
-  @override
-  String get selectedbid => '} (\$selectedBid)';
-
-  @override
-  String get currentbidTotalcardsontables =>
-      '}: \$currentBid / \$totalCardsOnTables';
-
-  @override
   String get phaseDePose => 'POLOHA FÁZE';
 
   @override
-  String get strb75c84 => '\${hráči [currentPlayerId]?';
+  String get stre9f4a5 => '🏆 Legendární!';
 
   @override
-  String get biddername => '\$biderName \${';
+  String get str21f597 => '⭐ Výborně!';
 
   @override
-  String get liveamount => '\$liveAmount \${';
+  String get str59ee4e => '👍 Dobrá hra!';
 
   @override
-  String get name => '} (\$name)';
+  String get strb6f91d => '😅 Docela dobré!';
 
   @override
-  String get str35ecf5 => '{\${myHand.length} \${';
-
-  @override
-  String get pictionarystrokecount30 => '\$pictionaryStrokeCount / 30 \${';
-
-  @override
-  String get stre9f4a5 => '\"Legendární!\"';
-
-  @override
-  String get str21f597 => '\"Výborně!\"';
-
-  @override
-  String get str59ee4e => '\"Výborně!\"';
-
-  @override
-  String get strb6f91d => '\"To není špatné!\"';
-
-  @override
-  String get strc0046c => '\"Můžeme to udělat lépe!\"';
-
-  @override
-  String get totalscoreDecktotal => 'TotalRating / \$deckTotal';
-
-  @override
-  String get deckindexDecktotal => '\$deckIndex / \$deckTotal';
+  String get strc0046c => '💪 Můžeme to zlepšit!';
 
   @override
   String get str85bff7 => 'Bravo!';
@@ -7401,76 +6047,24 @@ class AppLocalizationsCs extends AppLocalizations {
   String get strfa1b8c => '\${\'Rate!';
 
   @override
-  String get strf150cd => '? \"';
-
-  @override
-  String get guessernameAnswer => '} \$guesserName:\\ \"\$odpověď\\\"';
-
-  @override
-  String get totalscoreDeckindex => '}: \$totalRating / \$deckIndex';
-
-  @override
   String get str487ca1 => '\${\'Chut! Zavři oči.';
-
-  @override
-  String get strf4cf64 =>
-      '}: \${just OneClues.length} / \${players.length - 1}';
-
-  @override
-  String strd25123(Object justOneCurrentWord) {
-    return '$justOneCurrentWord dolarů.';
-  }
-
-  @override
-  String get currentround => '\$currentRound';
-
-  @override
-  String get currentpotatoplayername => '\$currentPotoplayer';
-
-  @override
-  String get losername => '\$loserName';
 
   @override
   String get leSoleilSeLeve => 'Slunce vychází';
 
   @override
-  String get strd83364 => '\$\$(hands [pId] as List? 0';
-
-  @override
-  String get streabdaf => '\${\'Tour de\'\'} \${hráči [currentPlayerId]?';
-
-  @override
-  String get str4f745a => '+ \${potencialScore? 0}';
-
-  @override
   String atout(Object suit) {
-    return 'OUT: $suit';
+    return 'TRUMF: $suit';
   }
 
   @override
-  String get erreurLorsDeLaCapture => 'Chyba při zachycování: \$e';
-
-  @override
-  String get undercoverLocal => 'Místní utajení';
-
-  @override
-  String get toiMeme => 'Ty sám.';
-
-  @override
-  String applocalizationsOfContextWordcivilparts0trimwordundercover1Rawpair(
-    Object role,
-  ) {
-    return ': AppLocalizations.of (kontext)!. wordCivision Parts0TrimWordundercover1 (rawPair.trim (), hráč) \$ $role ! Civilisté vyhrávají! \"';
-  }
-
-  @override
-  String get aiErrorE => 'Chyba AI: \$e';
+  String get toiMeme => 'sebe';
 
   @override
   String get unAutreJoueur => 'jiný hráč';
 
   @override
-  String get tous => 'Všechny';
+  String get tous => 'Vše';
 
   @override
   String get fun => 'Zábava';
@@ -7479,297 +6073,28 @@ class AppLocalizationsCs extends AppLocalizations {
   String get gaming => 'Gaming';
 
   @override
-  String get chill => 'Klídek.';
+  String get chill => 'Klídek';
 
   @override
-  String get soiree => 'Večer.';
+  String get soiree => 'Párty';
 
   @override
-  String get competition => 'Hospodářská soutěž';
-
-  @override
-  String get strd659f5 => '} (\${joned.length})';
-
-  @override
-  String get gamename => '} (\$gameName)';
+  String get competition => 'Soutěž';
 
   @override
   String get enCours => 'CURRENT: {0}';
 
   @override
-  String get gamemessagelocalizationTrContextReason =>
-      ': \"}\": GameMessageLocalization.tr (kontext, důvod),';
+  String get jAiLanceUnePartie2 => 'Zahájil jsem hru';
 
   @override
-  String get jAiLanceUnePartie2 => 'Hodil jsem hru';
+  String get piedDeBiche => 'Páčidlo';
 
   @override
-  String get piedDeBiche => 'Bishfoot';
-
-  @override
-  String get str128675 => '\${playerName [i] .substring (0, 7)}..';
-
-  @override
-  String get pname => '\$pName (\${\'Me\'\'})';
-
-  @override
-  String get readycountTotalplayers =>
-      '\${\'FAST} (\$readyCount / \$totalPlayers)';
-
-  @override
-  String get appTitle => 'Párty Hra';
-
-  @override
-  String get loginTitle => 'Vítejte!';
-
-  @override
-  String get registerTitle => 'Připojte se k nám!';
-
-  @override
-  String get email => 'E-mail';
-
-  @override
-  String get password => 'Heslo';
-
-  @override
-  String get username => 'Uživatelské jméno';
-
-  @override
-  String get loginButton => 'Přihlásit se';
-
-  @override
-  String get registerButton => 'Vytvořit účet';
-
-  @override
-  String get termsAcceptance =>
-      'Přečetl(a) jsem si podmínky služby a zásady ochrany osobních údajů a souhlasím s nimi.';
-
-  @override
-  String get gamesTab => 'Hry';
-
-  @override
-  String get friendsTab => 'Přátelé';
-
-  @override
-  String get statsTab => 'Profil';
-
-  @override
-  String get loungesTab => 'Místnosti';
+  String get appTitle => 'Párty hra';
 
   @override
   String get createGame => 'Vytvořit hru';
-
-  @override
-  String get joinGame => 'Připojit se';
-
-  @override
-  String get gameCode => 'Kód hry (6 číslic)';
-
-  @override
-  String get startGame => 'Spustit hru';
-
-  @override
-  String get leaveGame => 'Opustit hru';
-
-  @override
-  String get rules => 'Pravidla';
-
-  @override
-  String get level => 'Úroveň';
-
-  @override
-  String get coins => 'Mince';
-
-  @override
-  String get gameOver => 'Konec hry!';
-
-  @override
-  String get victory => 'Vítězství!';
-
-  @override
-  String get defeat => 'Porážka';
-
-  @override
-  String get nextRound => 'Další kolo';
-
-  @override
-  String get onboardingWelcome => 'Vítejte';
-
-  @override
-  String get onboardingSkip => 'Přeskočit';
-
-  @override
-  String get onboardingNext => 'Další';
-
-  @override
-  String get onboardingStart => 'Jdeme na to! 🚀';
-
-  @override
-  String get onboardingSlide1Title => 'Hrajte s přáteli';
-
-  @override
-  String get onboardingSlide1Subtitle =>
-      'Vyberte si z více než 30 párty, karetních a deskových her. Hrajte lokálně, s přáteli nebo z celého světa!';
-
-  @override
-  String get onboardingSlide2Title => 'Získávejte mince a odznaky';
-
-  @override
-  String get onboardingSlide2Subtitle =>
-      'Získávejte XP za každé vítězství, posouvejte se na vyšší úrovně a odemykejte jedinečné úspěchy.';
-
-  @override
-  String get onboardingSlide3Title => 'Vytvořte nebo se připojte za pár sekund';
-
-  @override
-  String get onboardingSlide3Subtitle =>
-      'K sehnání přátel stačí 6místný kód, nebo spusťte rychlé dohazování online.';
-
-  @override
-  String get vipPass => 'VIP Pas';
-
-  @override
-  String get vipActive => 'Váš VIP Pas je aktivní!';
-
-  @override
-  String get vipActiveDesc =>
-      'Všechny funkce (AI, Místnosti, Video, Dohazování) jsou neomezené.';
-
-  @override
-  String get choosePlan => 'Vyberte si předplatné:';
-
-  @override
-  String get restorePurchases => 'Obnovit nákupy';
-
-  @override
-  String get purchasesRestored => 'Nákupy byly úspěšně obnoveny!';
-
-  @override
-  String get noPurchasesFound => 'Nebyly nalezeny žádné aktivní nákupy.';
-
-  @override
-  String get monthlySubscription => 'Měsíční předplatné';
-
-  @override
-  String get annualSubscription => 'Roční předplatné';
-
-  @override
-  String get lifetimeAccess => 'Doživotní přístup';
-
-  @override
-  String get popularTag => 'OBLÍBENÉ';
-
-  @override
-  String get chooseButton => 'Vybrat';
-
-  @override
-  String get vipCongratulations => 'Gratulujeme, jste VIP!';
-
-  @override
-  String get purchaseFailed => 'Nákup nebyl dokončen.';
-
-  @override
-  String get profileTitle => 'Profil a Nastavení';
-
-  @override
-  String get profileNotFound => 'Profil nebyl nalezen nebo hráč neexistuje.';
-
-  @override
-  String get tabStats => 'Statistiky';
-
-  @override
-  String get tabBadges => 'Odznaky a Úspěchy';
-
-  @override
-  String get tabSettings => 'Nastavení';
-
-  @override
-  String get gamesPlayed => 'Odehrané hry';
-
-  @override
-  String get gamesWon => 'Vítězství';
-
-  @override
-  String get winRate => 'Úspěšnost výher';
-
-  @override
-  String get soundEffects => 'Zvukové efekty';
-
-  @override
-  String get music => 'Hudba';
-
-  @override
-  String get editUsername => 'Změnit uživatelské jméno';
-
-  @override
-  String get newUsernameHint => 'Nové jméno';
-
-  @override
-  String get logout => 'Odhlásit se';
-
-  @override
-  String get deleteAccount => 'Smazat účet';
-
-  @override
-  String get deleteAccountConfirm => 'Opravdu chcete trvale smazat svůj účet?';
-
-  @override
-  String get cancel => 'Zrušit';
-
-  @override
-  String get confirm => 'Potvrdit';
-
-  @override
-  String get save => 'Uložit';
-
-  @override
-  String get modeLocal => 'Lokálně';
-
-  @override
-  String get modeMulti => 'Online';
-
-  @override
-  String get modeMonde => 'Svět';
-
-  @override
-  String get searchGame => 'Hledat hru...';
-
-  @override
-  String get filterAll => 'Všechny hry';
-
-  @override
-  String get createLounge => 'Vytvořit místnost';
-
-  @override
-  String get joinLounge => 'Připojit se k místnosti';
-
-  @override
-  String get loungeCode => 'Kód místnosti';
-
-  @override
-  String get publicLounges => 'Veřejné místnosti';
-
-  @override
-  String get noLoungesAvailable =>
-      'V tuto chvíli nejsou k dispozici žádné veřejné místnosti.';
-
-  @override
-  String get playersCount => 'Hráči';
-
-  @override
-  String get howToPlay => 'Jak hrát?';
-
-  @override
-  String get copiedToClipboard => 'Zkopírováno do schránky!';
-
-  @override
-  String get connectionError => 'Chyba připojení. Zkuste to prosím znovu.';
-
-  @override
-  String get loading => 'Načítání...';
-
-  @override
-  String get success => 'Úspěch!';
 
   @override
   String pasAssezDeSymbolesUniques1(
@@ -7787,7 +6112,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String ambianceTonImpose(Object style) {
-    return '[Ambiance / Tone uvaleno: 0] $style';
+    return '[Atmosféra / Zadaný tón: $style]';
   }
 
   @override
@@ -7847,12 +6172,12 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String theme(Object gameType) {
-    return 'Téma 0 $gameType';
+    return 'Téma $gameType';
   }
 
   @override
   String passeSonTour2(Object playerName) {
-    return 'Je konec. $playerName';
+    return '⏱️ $playerName vynechává tah.';
   }
 
   @override
@@ -7862,7 +6187,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String aOuvertAvec(Object playerName, Object cardToPlay) {
-    return '0 bylo otevřeno1. $playerName $cardToPlay';
+    return '⏱️ $playerName vynesl(a) $cardToPlay.';
   }
 
   @override
@@ -7870,7 +6195,7 @@ class AppLocalizationsCs extends AppLocalizations {
     Object removedPlayerName,
     Object remainingName,
   ) {
-    return '0 je odpojeno. Vyhrajte 1 za balíček! $removedPlayerName $remainingName';
+    return '$removedPlayerName se odpojil(a). Vítězství hráče $remainingName skrečí!';
   }
 
   @override
@@ -7880,27 +6205,27 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String neRepondPlusLAdministrateur(Object playerName, Object reason) {
-    return '0 již neodpovídá (1). Správce byl požádán, aby rozhodl o jeho nahrazení počítačem. $playerName $reason';
+    return '⚠️ $playerName neodpovídá ($reason). Správce byl vyzván k rozhodnutí o nahrazení počítačem.';
   }
 
   @override
   String aEteRemplaceParL(Object playerName) {
-    return 'Byl nahrazen počítačem (AI aktivní - 5s za otočku). $playerName';
+    return '🤖 $playerName byl(a) nahrazen(a) počítačem (AI aktivní - 5s na tah).';
   }
 
   @override
   String nAPasDonneD(Object playerName) {
-    return '0 neuvedl žádný index (Jeu d \'opinion). Otoč se. $playerName';
+    return '⚠️ $playerName nedal(a) nápovědu (Názorová hra). Tah přeskočen.';
   }
 
   @override
   String nAPasReponduJeu(Object playerName) {
-    return 'Tour přeskočil bez automatické akce. $playerName';
+    return '⚠️ $playerName neodpověděl(a) (Názorová hra). Tah přeskočen bez akce.';
   }
 
   @override
   String nAPasJoueA3(Object playerName) {
-    return '0 nehrál v čase. Jeho řada skončila. $playerName';
+    return '$playerName nehrál(a) včas. Tah propadl.';
   }
 
   @override
@@ -7910,52 +6235,52 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String aJoue(Object playerName, Object lastDrawn) {
-    return '1. $playerName $lastDrawn';
+    return '⏱️ $playerName zahrál(a) $lastDrawn.';
   }
 
   @override
   String aJoue1(Object playerName, Object playable) {
-    return '1. $playerName $playable';
+    return '⏱️ $playerName zahrál(a) $playable.';
   }
 
   @override
   String piocheEtPasseSonTour(Object playerName) {
-    return '0 zvedne a projde zatáčkou. $playerName';
+    return '⏱️ $playerName líže a vynechává tah.';
   }
 
   @override
   String nAPasJoueA4(Object playerName) {
-    return '0 nehrál včas. Jedna karta byla poražena a jedna krabice odhalena. $playerName';
+    return '⏱️ $playerName nestihl(a) čas. Karta byla odhozena a pole odhaleno.';
   }
 
   @override
   String laPartieEstTermineeVictoire1(Object winner) {
-    return 'Hra skončila. Vítězství 0! $winner';
+    return 'Hra skončila. Vítězství týmu $winner!';
   }
 
   @override
   String joueursContaminesParLaMaladie1(Object contaminatedNames) {
-    return 'Hráči infikovaní nemocí:0. $contaminatedNames';
+    return 'Hráči nakažení morem: $contaminatedNames.';
   }
 
   @override
   String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole) {
-    return 'Sledovali jste0 a objevili jste jeho roli:1. $targetName $targetRole';
+    return 'Špehoval(a) jsi hráče $targetName a zjistil(a) jeho roli: $targetRole.';
   }
 
   @override
   String votreMotDuJourPrononcez(Object newWord) {
-    return 'Vaše slovo dne: \"0\". Vyslovte to v kočce před západem slunce! $newWord';
+    return 'Tvoje slovo dne: \'$newWord\'. Řekni ho v chatu před západem slunce!';
   }
 
   @override
   String declareUnCoupDEtat(Object dictateurName) {
-    return '0 prohlásí Coup! $dictateurName';
+    return '$dictateurName vyhlašuje státní převrat!';
   }
 
   @override
   String leChasseurTireEtTue1(Object targetName) {
-    return 'Lovec střílí a zabíjí 0! $targetName';
+    return 'Lovec střílí a zabíjí hráče $targetName!';
   }
 
   @override
@@ -7963,22 +6288,22 @@ class AppLocalizationsCs extends AppLocalizations {
     Object formerCaptainName,
     Object newCaptainName,
   ) {
-    return '0 označil 1 za nového kapitána! $formerCaptainName $newCaptainName';
+    return '$formerCaptainName jmenoval(a) hráče $newCaptainName novým Kapitánem!';
   }
 
   @override
   String cupidonADesigneEtComme(Object lover1Name, Object lover2Name) {
-    return 'Amor označil 0 a 1 za milence! $lover1Name $lover2Name';
+    return 'Amor určil hráče $lover1Name a $lover2Name jako milence!';
   }
 
   @override
   String votreAmoureuxSe(Object amoureux2Name) {
-    return 'Tvůj milenec: 0 $amoureux2Name';
+    return '❤️ Tvůj milenec/milenka: $amoureux2Name';
   }
 
   @override
   String votreAmoureuxSe1(Object amoureux1Name) {
-    return 'Tvůj milenec: 0 $amoureux1Name';
+    return '❤️ Tvůj milenec/milenka: $amoureux1Name';
   }
 
   @override
@@ -7998,22 +6323,22 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String extremiteNonDisponibleSurLe1(Object openEnds) {
-    return 'Extrémita není dostupná na sadě (0). $openEnds';
+    return 'Konec není na desce k dispozici ($openEnds).';
   }
 
   @override
   String laTuileNePossedePas(Object tile, Object matchEnd) {
-    return 'Taška 0 nemá požadovanou hodnotu1. $tile $matchEnd';
+    return 'Kámen $tile nemá požadovanou hodnotu $matchEnd.';
   }
 
   @override
   String leBotAJoueAutomatiquement(Object tileToPlay) {
-    return 'Robot hrál automaticky0. $tileToPlay';
+    return '⏱️ Bot automaticky zahrál $tileToPlay.';
   }
 
   @override
   String aEteContraintDePasser(Object playerName) {
-    return '⏱️ $playerName a été contraint de passer son tour.';
+    return '⏱️ $playerName musel(a) vynechat tah.';
   }
 
   @override
@@ -8051,7 +6376,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String vousDevezPiocherCartesOu(Object pendingDraw) {
-    return 'Musíte vybrat0 karet, nebo čítač s +2 / +4. $pendingDraw';
+    return 'Musíte si líznout $pendingDraw karet, nebo kontrovat kartou +2/+4.';
   }
 
   @override
@@ -8061,7 +6386,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String priseMultipleObligatoireAvecLe1(Object mandatoryPiece) {
-    return 'Povinná vícenásobná zásuvka s pěšákem v0. $mandatoryPiece';
+    return 'Povinný vícenásobný skok figurkou na $mandatoryPiece.';
   }
 
   @override
@@ -8071,7 +6396,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String quiPourraitLePlus3(Object questionsrandomnextI) {
-    return 'Což může být nejvíce 0 $questionsrandomnextI';
+    return 'Kdo by nejspíše $questionsrandomnextI';
   }
 
   @override
@@ -8085,7 +6410,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get interdictionFormelleDeVoterPour =>
-      'Formální zákaz hlasovat pro sebe!';
+      'Je přísně zakázáno hlasovat pro sebe!';
 
   @override
   String remporteLaManche(Object winnerName) {
@@ -8103,7 +6428,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get aucuneDescriptionNAEte1 => 'Nebyl zvolen žádný popis.';
+  String get aucuneDescriptionNAEte1 => 'Nebyl hlasován žádný popis.';
 
   @override
   String ceNEstPasLe3(Object playerId) {
@@ -8122,22 +6447,694 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String aGagneAvecSaDescription1(Object winnerName) {
-    return '0 wonů s jeho popisem: $winnerName';
+    return '$winnerName vyhrál se svým popiskem:';
   }
 
   @override
-  String get leLoupBlancFrappeEn => 'Bílý vlk útočí sám.';
+  String get leLoupBlancFrappeEn => 'Bílý vlk útočí sám';
 
   @override
   String etaitUnCivilLesImposteurs(Object player) {
-    return '0 byl civilista! Podvodníci vyhráli! $player';
+    return '$player byl(a) Civil! Podvodníci vyhrávají!';
   }
 
   @override
   String etaitLLesCivilsGagnent(Object player, Object role) {
-    return 'Civilové vyhráli! $player $role';
+    return '$player byl(a) $role! Civilové vyhrávají!';
   }
 
   @override
   String get question2 => 'otázka';
+
+  @override
+  String get mrWhiteSecretWordPrompt =>
+      'Byl jste odhalen! Pokud uhodnete tajné slovo Civilů, vyhrajete sólo!';
+
+  @override
+  String get codenamesRed => 'Červená';
+
+  @override
+  String get codenamesBlue => 'Modrá';
+
+  @override
+  String get codenamesYourMasterSpyRed => 'vašeho červeného hlavního špiona';
+
+  @override
+  String get codenamesYourMasterSpyBlue => 'vašeho modrého hlavního špiona';
+
+  @override
+  String get codenamesRedLower => 'červeného';
+
+  @override
+  String get codenamesBlueLower => 'modrého';
+
+  @override
+  String get rulesBlancMangerCoco =>
+      '**Objective**\nBe the player with the most points at the end of the game!\n\n**How to Play**\n1. Each player receives **7 answer cards**.\n2. One player is chosen as the **Judge** (rotates each round).\n3. The Judge reads the **question card** aloud.\n4. All other players secretly choose and submit **1 answer card** from their hand.\n5. The Judge reads all responses aloud and picks the **funniest one**.\n6. The winner of the round scores **1 point**.\n7. Everyone draws back up to 7 cards.\n8. The Judge role passes to the next player.\n\n**Key Rules**\n- The Judge does not play a card on their turn.\n- Submissions are **anonymous**.\n- You may only play **one card** per round.';
+
+  @override
+  String get rulesZombie =>
+      '**Objective**\nDraw cards to make matching pairs. Avoid holding the Zombie card when the game ends!\n\n**How to Play**\n1. The deck has 33 cards (16 pairs + 1 Zombie card).\n2. Cards are dealt to players.\n3. On your turn, take a card from the next player.\n4. Matching pairs are automatically discarded.\n5. Your hand is shuffled.\n6. The first player to run out of cards wins.\n7. The last player stuck with the Zombie card loses!';
+
+  @override
+  String get rulesYams =>
+      '**Objective**\nScore the most points by filling 13 scoring categories with 5 dice.\n\n**Turn Structure**\n1. **Roll**: You can roll the 5 dice up to 3 times per turn.\n2. **Keep**: After roll 1 or 2, keep whichever dice you like and re-roll the rest.\n3. **Score**: Choose an available scoring category. Each can only be used once per game.\n\n**Categories**\n- **Aces to Sixes**: Sum of matching dice (35-point bonus if Upper Section totals 63+).\n- **Three of a Kind**: Sum of all 5 dice.\n- **Four of a Kind**: Sum of all 5 dice.\n- **Full House**: 3 of a kind + pair (25 pts).\n- **Small Straight**: 4 sequential dice (30 pts).\n- **Large Straight**: 5 sequential dice (40 pts).\n- **Yams (Yahtzee)**: 5 identical dice (50 pts).\n- **Chance**: Sum of all dice.';
+
+  @override
+  String get rulesLaPatateChaude =>
+      '**Objective**\nDon\'t be holding the device when the hot potato explodes!\n\n**How to Play**\n1. A topic appears on screen.\n2. The player holding the device must name a valid answer matching the topic.\n3. As soon as answered, pass the phone quickly to the next player.\n4. The next player must give a new unique answer and pass it along.\n5. The countdown timer is secret and random: it can blow up at any second!\n6. Whoever holds the phone when it explodes loses the round and takes a penalty!';
+
+  @override
+  String get rulesGribouillis =>
+      '**Overview**\nA hilarious drawing game inspired by the \'Telephone game\', where prompts morph across rounds:\n- **Write**: Each player writes a quirky sentence or prompt.\n- **Draw**: You receive another player\'s prompt and illustrate it.\n- **Guess**: You view a sketch and guess what it depicts.\n- **Alternate**: Keeps cycling until albums return to their creator.\n- **Goal**: Laugh together discovering how simple ideas turn into crazy masterpieces!';
+
+  @override
+  String get rulesZeroPointe =>
+      '**Objective**\nHave the lowest cumulative score. The game ends when a player hits 100 points; the player with the lowest score wins!\n\n**Setup**\nEach player has a 3x4 grid of 12 cards face down. Reveal 2 cards of your choice at start.\n\n**Turn Actions**\n1. **Take from Discard pile**: Swap it with any of your 12 cards (face up or face down).\n2. **Draw from Draw pile**: Keep it and swap with one of your cards, or discard it and reveal one of your hidden cards.\n\n**Column Rule**\nThree identical cards in the same vertical column cancel out (worth 0 points).';
+
+  @override
+  String get rulesPoker =>
+      '**Texas Hold\'em - Objective**\nWin your opponents\' chips by building the strongest 5-card poker hand or by bluffing them into folding.\n\n**Hand Rankings (High to Low)**\n1. Royal Flush\n2. Straight Flush\n3. Four of a Kind\n4. Full House\n5. Flush\n6. Straight\n7. Three of a Kind\n8. Two Pair\n9. One Pair\n10. High Card\n\n**Rounds**\nEach player receives 2 private hole cards. 5 community cards are revealed in phases: Flop (3), Turn (1), River (1). Betting rounds allow you to Check, Bet, Call, Raise, or Fold.';
+
+  @override
+  String get rulesActionOuVerite =>
+      '**Objective**\nEarn the most XP by taking on bold dares or answering revealing truths!\n\n**How to Play**\n1. The roulette picks the active player.\n2. Choose \'Truth\' or \'Dare\'.\n3. Complete the prompt. Other players vote Yes or No to validate.\n4. Your approval rating determines how much XP you gain!';
+
+  @override
+  String get rulesPresident =>
+      '**Objective**\nShed all your cards first to become President. The last player holding cards becomes the Asshole!\n\n**Card Rank (Low to High)**\n3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace, **2** (highest).\n\n**Rules**\n- Play single cards, pairs, triples, or 4-of-a-kinds of equal or higher value.\n- Playing a **2** clears the pile immediately and gives you the lead.\n- Next round, the Asshole must trade their 2 best cards to the President!';
+
+  @override
+  String get rulesSkull =>
+      '**Objective**\nWin 2 bid challenges without ever flipping a Skull!\n\n**How to Play**\n1. Each player holds 4 cards: 3 Roses and 1 Skull.\n2. Players take turns playing cards face down.\n3. Any player can start a bid declaring how many cards they can flip safely.\n4. Highest bidder must flip their own cards first, then rivals\' cards.\n5. Hit a skull and you lose a card permanently; succeed twice and you win!';
+
+  @override
+  String get rulesPictionary =>
+      '**Objective**\nDraw and have your friends guess the secret word before time runs out!\n- No letters, numbers, or spoken clues allowed.\n- Players type their guesses in the chat. The artist approves the winner!';
+
+  @override
+  String get rulesJustOne =>
+      '**Objective**\nCooperative word game where everyone helps one guesser discover a mystery word.\n\n**How to Play**\n1. The guesser cannot see the mystery word.\n2. All teammates secretly write a one-word clue.\n3. **The catch**: Identical clues are removed before the guesser sees them!\n4. The guesser views the remaining clues and gets one shot to guess the word.';
+
+  @override
+  String get rulesLoupGarou =>
+      '**Objective**\n- **Villagers**: Identify and eliminate all Werewolves.\n- **Werewolves**: Eliminate all villagers without getting caught.\n\n**Cycle**\nThe game alternates between Night (special roles and werewolves strike in secret) and Day (village debate and public vote to execute a suspect).';
+
+  @override
+  String get rulesDobble =>
+      'Spot the single matching symbol between your card and the center deck card as fast as you can!';
+
+  @override
+  String get rulesUno =>
+      '**Objective**\nBe the first player to empty your hand of all cards!\n- Match the top discard card by color, number, or action symbol.\n- Use Action cards (+2, Skip, Reverse, Wild, Wild Draw 4) to hinder opponents.\n- Never forget to hit \'UNO\' when down to your last card!';
+
+  @override
+  String get rulesPhotoRoulette =>
+      'A random picture from a player\'s camera roll flashes on screen. Guess whose photo it is as fast as you can!';
+
+  @override
+  String get rulesBatailleNavale =>
+      '**Objective**\nSink the entire enemy naval fleet before they destroy yours!\nCall out coordinates each turn: \'Hit\', \'Sunk\', or \'Miss\'!';
+
+  @override
+  String get rulesMilleBornes =>
+      '**Objective**\nRace across the board to be the first driver to reach 1000 Kilometers!\n- Play Distance cards (25, 50, 75, 100, 200 km) to progress.\n- Attack rivals with Hazards (Red Light, Flat Tire, Out of Gas, Accident).\n- Defend with Remedies or achieve permanent immunity with the 4 Safety cards!';
+
+  @override
+  String get rulesRami =>
+      'Meld your cards into runs (same suit in sequence) or sets (same rank, different suits) to be the first to empty your hand and win the round!';
+
+  @override
+  String get rulesTaboo =>
+      'Describe the target word to your teammates without uttering the word itself or any of the 5 forbidden Taboo buzzwords on the card!';
+
+  @override
+  String get rulesPetitsChevaux =>
+      'Roll the dice (roll a 6 to exit your stable), circle the board, and climb all four of your pawns up the final home stretch staircase!';
+
+  @override
+  String get rulesCadavreExquis =>
+      'Collaborative surrealist writing where each player writes part of a sentence without seeing earlier words, creating hilarious surprise stories!';
+
+  @override
+  String get rulesBlokus =>
+      'Place geometric polyomino pieces on the board. Each new piece must touch at least one of your own pieces corner-to-corner, but never edge-to-edge!';
+
+  @override
+  String get rulesDominoes =>
+      'Match open domino ends with equal pip values. The first player to play all their dominoes takes the round!';
+
+  @override
+  String get rulesBigTwo =>
+      'Popular climbing card game where 2 is highest. Discard combinations (singles, pairs, full houses, flushes) to beat the current trick and empty your hand!';
+
+  @override
+  String get rulesJeuDeDames =>
+      'Move diagonally across dark squares. Jumping over enemy pieces to capture them is mandatory. Reach the opposite side to crown a King!';
+
+  @override
+  String get chocolat => 'čokoláda';
+
+  @override
+  String get ordinateur => 'počítač';
+
+  @override
+  String get licorne => 'jednorožec';
+
+  @override
+  String get minuit => 'půlnoc';
+
+  @override
+  String get ombre => 'stín';
+
+  @override
+  String get lune => 'měsíc';
+
+  @override
+  String get feuille => 'list';
+
+  @override
+  String get silence => 'ticho';
+
+  @override
+  String get murmure => 'šepot';
+
+  @override
+  String get potion => 'lektvar';
+
+  @override
+  String get miroir => 'zrcadlo';
+
+  @override
+  String get magie => 'magie';
+
+  @override
+  String get cascade => 'vodopád';
+
+  @override
+  String get dragon => 'dragon';
+
+  @override
+  String get boussole => 'boussole';
+
+  @override
+  String get diamant => 'diamant';
+
+  @override
+  String get flamme => 'flamme';
+
+  @override
+  String get horloge => 'horloge';
+
+  @override
+  String get pirate => 'pirate';
+
+  @override
+  String get vortex => 'vortex';
+
+  @override
+  String get aurore => 'aurore';
+
+  @override
+  String get papillon => 'papillon';
+
+  @override
+  String get bouclier => 'bouclier';
+
+  @override
+  String get labyrinthe => 'labyrinthe';
+
+  @override
+  String get cristal => 'cristal';
+
+  @override
+  String get volcan => 'volcan';
+
+  @override
+  String get mirage => 'mirage';
+
+  @override
+  String get sentinelle => 'sentinelle';
+
+  @override
+  String get cloche => 'cloche';
+
+  @override
+  String get lanterne => 'lanterne';
+
+  @override
+  String get parchemin => 'parchemin';
+
+  @override
+  String aGagne2(Object gameDataplayerswin) {
+    return '$gameDataplayerswin vyhrál(a)!';
+  }
+
+  @override
+  String aJoue2(Object playerName, Object cardsToPlayjoin) {
+    return '⏱️ $playerName zahrál(a) $cardsToPlayjoin.';
+  }
+
+  @override
+  String aJoue3(Object playerName, Object winningCombojoin) {
+    return '⏱️ $playerName zahrál(a) $winningCombojoin.';
+  }
+
+  @override
+  String pliTermineAuTourDe2(Object gameDataplayerspla) {
+    return '⏱️ Štych ukončen. Na řadě je $gameDataplayerspla!';
+  }
+
+  @override
+  String get stop => 'STOP';
+
+  @override
+  String coupFourrePareLAttaque1(
+    Object playerstargetIdnam,
+    Object matchingSafety,
+  ) {
+    return '⚡ COUP-FOURRÉ ! $playerstargetIdnam pare l\'attaque avec $matchingSafety et prend la main !';
+  }
+
+  @override
+  String aAtteintKm(Object playersplayerIdnam, Object targetDist) {
+    return '$playersplayerIdnam dosáhl(a) $targetDist km!';
+  }
+
+  @override
+  String aCouleTouteLaFlotte1(Object shooterDataname) {
+    return '$shooterDataname potopil(a) celou nepřátelskou flotilu!';
+  }
+
+  @override
+  String aTireAutomatiquementEn(
+    Object shooterDataname,
+    Object targetIndex101,
+    Object targetIndex1011,
+    Object result,
+  ) {
+    return '⏱️ $shooterDataname a tiré automatiquement en $targetIndex101-$targetIndex1011 ($result).';
+  }
+
+  @override
+  String aJoue4(Object playerName, Object candidateCardsjoin) {
+    return '⏱️ $playerName zahrál(a) $candidateCardsjoin.';
+  }
+
+  @override
+  String pliTermineAuTourDe3(Object gameDataplayerspla) {
+    return '⏱️ Pli terminé. Au tour de $gameDataplayerspla.';
+  }
+
+  @override
+  String estLeNouvelHote1(Object playersplayerOrder) {
+    return '$playersplayerOrder je nový hostitel.';
+  }
+
+  @override
+  String egalitePersistanteLeDestinDepartage1(Object playerDatarandomEl) {
+    return 'Égalité persistante ! Le destin départage au hasard : $playerDatarandomEl est éliminé.';
+  }
+
+  @override
+  String estMortEDeChagrin1(Object playerDataotherLov) {
+    return '$playerDataotherLov zemřel(a) žalem pro svou lásku!';
+  }
+
+  @override
+  String lHeritierHeriteDuRole2(
+    Object playerDataheritier,
+    Object playerDatatestateu,
+    Object newRole,
+  ) {
+    return '$playerDataheritier (Dědic) dědí roli hráče $playerDatatestateu: $newRole!';
+  }
+
+  @override
+  String heriteEgalementDuStatutDe1(Object playerDataheritier) {
+    return '$playerDataheritier také dědí status Kapitána!';
+  }
+
+  @override
+  String leVillageDecouvreAvecEffroi1(Object deadThisNightNames) {
+    return 'Le village découvre avec effroi le(s) corps de : $deadThisNightNames.';
+  }
+
+  @override
+  String leFossoyeurReveleEtaitUn1(
+    Object playerDatafossoyeu,
+    Object playerDatatargetPl,
+    Object targetRole,
+  ) {
+    return '$playerDatafossoyeu (Hrobník) odhaluje: $playerDatatargetPl byl(a) $targetRole!';
+  }
+
+  @override
+  String etEtaitUnE(Object playerDataotherRev, Object otherRevealedRole) {
+    return 'Et $playerDataotherRev était un(e) $otherRevealedRole !';
+  }
+
+  @override
+  String leDictateurAExecuteUn1(
+    Object playerDatadictator,
+    Object playerDatatargetId,
+    Object targetRole,
+  ) {
+    return 'Diktátor $playerDatadictator popravil podvodníka ($playerDatatargetId - $targetRole) a stává se Kapitánem!';
+  }
+
+  @override
+  String leLoupBavardNA1(Object playerDataloupBava) {
+    return 'Uvaný vlk ($playerDataloupBava) neřekl své slovo a při západu slunce zemřel!';
+  }
+
+  @override
+  String leVillageAVoteEt1(Object playerDataeliminat) {
+    return 'Vesnice hlasovala a vyřazuje hráče $playerDataeliminat.';
+  }
+
+  @override
+  String leMercenaireAFaitEliminer1(Object playerDatamercenai) {
+    return 'Žoldák $playerDatamercenai vyřadil svůj cíl v Den 1! Vyhrává hru sám!';
+  }
+
+  @override
+  String meurtDeChagrinPourSon1(Object playerDataotherLov) {
+    return '$playerDataotherLov umírá se zlomeným srdcem!';
+  }
+
+  @override
+  String get lAncienCapitaine1 => 'L\'ancien Capitaine';
+
+  @override
+  String aDit(Object playerDataplayerId, Object cleanClue) {
+    return '$playerDataplayerId a dit : \'$cleanClue\'';
+  }
+
+  @override
+  String aDevineLeMotCivil1(Object gameDataplayerData, Object civilWord) {
+    return '$gameDataplayerData a deviné le mot civil (\'$civilWord\') !';
+  }
+
+  @override
+  String aProposeMaisCeN(
+    Object gameDataplayerData,
+    Object guessedWord,
+    Object civilWord,
+  ) {
+    return '$gameDataplayerData a proposé \'$guessedWord\', mais ce n\'était pas le mot civil (\'$civilWord\') !';
+  }
+
+  @override
+  String flottesPlaceesCommenceATirer1(Object playerDatafirstPla) {
+    return 'Flottes placées ! $playerDatafirstPla commence à tirer.';
+  }
+
+  @override
+  String tousLesJoueursSontPrets1(Object playerDatafirstPla) {
+    return 'Tous les joueurs sont prêts ! $playerDatafirstPla commence à tirer.';
+  }
+
+  @override
+  String laMancheDeRamiCommence1(Object playersplayerIdsfi) {
+    return 'La manche de Rami commence ! C\'est au tour de $playersplayerIdsfi.';
+  }
+
+  @override
+  String aGagneLaManche1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam vyhrál(a) kolo!';
+  }
+
+  @override
+  String k3SixConsecutifsLePion1(Object playersplayerIdnam) {
+    return '⚠️ 3 six consécutifs ! Le pion de $playersplayerIdnam retourne à l\'écurie et son tour passe.';
+  }
+
+  @override
+  String aGagne3(Object playersplayerIdnam) {
+    return '$playersplayerIdnam vyhrál(a)!';
+  }
+
+  @override
+  String atteintPoints(Object playersplayerIdnam, Object targetScore) {
+    return '$playersplayerIdnam atteint $targetScore points !';
+  }
+
+  @override
+  String atteintPoints1(Object playerswinnerIdnam, Object targetScore) {
+    return '$playerswinnerIdnam atteint $targetScore points !';
+  }
+
+  @override
+  String mancheTermineeGagneAvecXp(Object playerswinnerIdnam, Object maxXp) {
+    return 'Manche terminée ! $playerswinnerIdnam gagne avec $maxXp XP !';
+  }
+
+  @override
+  String aJoueUneInversionEt1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam zahrál(a) Změnu směru a hraje znovu!';
+  }
+
+  @override
+  String aInverseLeSensDe1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam otočil(a) směr hry!';
+  }
+
+  @override
+  String aSauteLeTourDe1(Object playersplayerIdnam, Object skippedPlayerName) {
+    return '$playersplayerIdnam přeskočil(a) tah hráče $skippedPlayerName!';
+  }
+
+  @override
+  String aEmpileUn2Cumul1(Object playersplayerIdnam, Object pendingDraw2) {
+    return '$playersplayerIdnam přidal(a) +2. Celkem: $pendingDraw2 karet!';
+  }
+
+  @override
+  String aJoueUn21(Object playersplayerIdnam) {
+    return '$playersplayerIdnam zahrál(a) +2!';
+  }
+
+  @override
+  String aJoueUnJokerEt1(Object playersplayerIdnam, Object chosenColor) {
+    return '$playersplayerIdnam zahrál(a) Divokou kartu a vybral(a) barvu $chosenColor!';
+  }
+
+  @override
+  String aEmpileUn4Cumul1(Object playersplayerIdnam, Object pendingDraw4) {
+    return '$playersplayerIdnam přidal(a) +4. Celkem: $pendingDraw4 karet!';
+  }
+
+  @override
+  String aJoueUnSuperJoker1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam zahrál(a) Divokou kartu +4!';
+  }
+
+  @override
+  String aPoseSaDerniereCarte1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam položil(a) poslední kartu a vyhrává kolo!';
+  }
+
+  @override
+  String gagneLaMancheAvecPoints(Object playersplayerIdnam, Object roundScore) {
+    return '$playersplayerIdnam vyhrává kolo s +$roundScore body!';
+  }
+
+  @override
+  String nAPlusQuUne1(Object playersplayerIdnam) {
+    return '$playersplayerIdnam má už jen jednu kartu!';
+  }
+
+  @override
+  String passeSonTour4(Object playersplayerIdnam) {
+    return '$playersplayerIdnam passe son tour.';
+  }
+
+  @override
+  String nAPasJoueA5(Object gameDataplayerspla) {
+    return '$gameDataplayerspla nehrál(a) včas, líže a vynechává tah.';
+  }
+
+  @override
+  String votreCibleEstEliminezLe1(Object playerDatamercenai) {
+    return 'Votre cible est $playerDatamercenai. Éliminez-le(la) au Jour 1 !';
+  }
+
+  @override
+  String aReponduEtPasseLa(Object gameDataplayerspla, Object cleanAnswer) {
+    return '$gameDataplayerspla odpověděl(a) „$cleanAnswer“ a předal(a) bombu!';
+  }
+
+  @override
+  String aPiocheCarteS(Object playersplayerIdnam, Object pendingDraw) {
+    return '$playersplayerIdnam lízl(a) $pendingDraw karet/karty.';
+  }
+
+  @override
+  String aPiocheUneCarteEt2(Object playersplayerIdnam) {
+    return '$playersplayerIdnam lízl(a) kartu a může ji zahrát.';
+  }
+
+  @override
+  String aPiocheUneCarteEt3(Object playersplayerIdnam) {
+    return '$playersplayerIdnam lízl(a) kartu a vynechává tah.';
+  }
+
+  @override
+  String nAPas1Carte1(Object playerstargetIdnam) {
+    return '$playerstargetIdnam nemá 1 kartu, hlášení UNO je neplatné.';
+  }
+
+  @override
+  String aCrieContreUnoPioche1(
+    Object playerscallerIdnam,
+    Object playerstargetIdnam,
+  ) {
+    return '$playerscallerIdnam vykřikl(a) Kontra UNO! $playerstargetIdnam líže 2 karty.';
+  }
+
+  @override
+  String aDitUno1(Object playerstargetIdnam) {
+    return '$playerstargetIdnam řekl(a) UNO!';
+  }
+
+  @override
+  String get appelUnoInvalide => 'Neplatné hlášení UNO.';
+
+  @override
+  String aChoisiLaCouleur(Object playersplayerIdnam, Object chosenColor) {
+    return '$playersplayerIdnam a choisi la couleur $chosenColor !';
+  }
+
+  @override
+  String estLeDernierSurvivantEt(Object playerswinnerIdnam) {
+    return '$playerswinnerIdnam est le dernier survivant et remporte Skull !';
+  }
+
+  @override
+  String aRemporte2DefisEt(Object playerschallengerI) {
+    return '$playerschallengerI a remporté 2 défis et gagne la partie !';
+  }
+
+  @override
+  String nouvelleMainEstLeDonneur1(Object playersplayerIdsde) {
+    return 'Nové rozdání! $playersplayerIdsde je rozdávající.';
+  }
+
+  @override
+  String poseLaPetiteBlindDe1(
+    Object playerssmallBlindI,
+    Object smallBlindActual,
+  ) {
+    return '$playerssmallBlindI sází malý blind $smallBlindActual.';
+  }
+
+  @override
+  String poseLaGrosseBlindDe1(
+    Object playersbigBlindIdn,
+    Object bigBlindActual,
+  ) {
+    return '$playersbigBlindIdn sází velký blind $bigBlindActual.';
+  }
+
+  @override
+  String seCouche1(Object myDataname) {
+    return '$myDataname skládá karty (Fold).';
+  }
+
+  @override
+  String faitTapisAllIn1(Object myDataname) {
+    return '$myDataname jde all-in!';
+  }
+
+  @override
+  String suitPour(Object myDataname, Object callAmount) {
+    return '$myDataname dorovnává $callAmount (Call).';
+  }
+
+  @override
+  String faitTapisAllInEn1(Object myDataname, Object totalBetAmount) {
+    return '$myDataname fait tapis (all-in) en relançant à $totalBetAmount !';
+  }
+
+  @override
+  String relanceA(Object myDataname, Object totalBetAmount) {
+    return '$myDataname navyšuje na $totalBetAmount (Raise).';
+  }
+
+  @override
+  String get abattageShowdown => '--- VYLOŽENÍ KARET (SHOWDOWN) ---';
+
+  @override
+  String gagneLePotParForfait1(Object playerDatawinnersf) {
+    return '$playerDatawinnersf vyhrává bank skrečí!';
+  }
+
+  @override
+  String gagneNtLePotAvec(Object winnerNames, Object bestHandranknamel1) {
+    return '$winnerNames vyhrává/vyhrávají bank s $bestHandranknamel1!';
+  }
+
+  @override
+  String aPrisA(Object playerDataplayerId, Object suit) {
+    return '$playerDataplayerId a pris à $suit !';
+  }
+
+  @override
+  String get histoireCollective => 'SPOLEČNÝ PŘÍBĚH';
+
+  @override
+  String get distance => 'VZDÁLENOST';
+
+  @override
+  String get botte => 'BEZPEČNOST';
+
+  @override
+  String get pneuIncrevable => 'Pneu\nIncrevable';
+
+  @override
+  String get increvable => 'NEPRORAZITELNÉ';
+
+  @override
+  String get citerne => 'CISTERNA';
+
+  @override
+  String get attaque => 'ÚTOK';
+
+  @override
+  String get k50Max => '50 MAX';
+
+  @override
+  String get panneDEssence => 'Selhání\nBenzin';
+
+  @override
+  String get vide1 => 'PRÁZDNÉ';
+
+  @override
+  String get parade => 'NÁPRAVA';
+
+  @override
+  String get roulez => 'JEĎTE';
+
+  @override
+  String get plein => 'PLNÁ';
+
+  @override
+  String get rejouer1 => 'REPLAY';
+
+  @override
+  String infecter1(Object targetName) {
+    return 'Nakazit $targetName?';
+  }
+
+  @override
+  String get action1 => 'AKCE';
+
+  @override
+  String get action2 => '🔥 AKCE';
+
+  @override
+  String aRelanceLesDes2(Object pName, Object val) {
+    return '0 restartoval kostky (1 / 3). $pName $val';
+  }
 }

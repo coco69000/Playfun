@@ -180,47 +180,11 @@ abstract class AppLocalizations {
   /// **'Confirm teams'**
   String get confirmerLesEquipes;
 
-  /// No description provided for @jeuDeSoiree.
-  ///
-  /// In en, this message translates to:
-  /// **'Evening Game'**
-  String get jeuDeSoiree;
-
-  /// No description provided for @multijoueurEnLigne.
-  ///
-  /// In en, this message translates to:
-  /// **'Multiplayer (Online)'**
-  String get multijoueurEnLigne;
-
-  /// No description provided for @modeLocalHorsLigne.
-  ///
-  /// In en, this message translates to:
-  /// **'Local Mode (Offline)'**
-  String get modeLocalHorsLigne;
-
-  /// No description provided for @modeMultijoueur.
-  ///
-  /// In en, this message translates to:
-  /// **'Multiplayer mode'**
-  String get modeMultijoueur;
-
   /// No description provided for @entrezVotrePseudo.
   ///
   /// In en, this message translates to:
-  /// **'Enter your username'**
+  /// **'Enter your nickname'**
   String get entrezVotrePseudo;
-
-  /// No description provided for @pseudo.
-  ///
-  /// In en, this message translates to:
-  /// **'User ID'**
-  String get pseudo;
-
-  /// No description provided for @creerUnePartie.
-  ///
-  /// In en, this message translates to:
-  /// **'Create a game'**
-  String get creerUnePartie;
 
   /// No description provided for @veuillezEntrerUnPseudo.
   ///
@@ -237,7 +201,7 @@ abstract class AppLocalizations {
   /// No description provided for @vousAvezAtteintVotreLimite.
   ///
   /// In en, this message translates to:
-  /// **'You\'\'ve reached your limit of 20 multiplayer games for today.'**
+  /// **'You have reached your limit of 20 multiplayer games for today.'**
   String get vousAvezAtteintVotreLimite;
 
   /// No description provided for @pasAssezDePiecesPour.
@@ -267,13 +231,13 @@ abstract class AppLocalizations {
   /// No description provided for @ceJeuRequiertDeConnaitre.
   ///
   /// In en, this message translates to:
-  /// **'This game requires you to know other players and is not available in public matchmaking.'**
+  /// **'This game requires knowing the other players and is not available in public matchmaking.'**
   String get ceJeuRequiertDeConnaitre;
 
   /// No description provided for @historiqueDesThemesIa.
   ///
   /// In en, this message translates to:
-  /// **'History of AI themes'**
+  /// **'AI theme history'**
   String get historiqueDesThemesIa;
 
   /// No description provided for @pour.
@@ -285,7 +249,7 @@ abstract class AppLocalizations {
   /// No description provided for @tousLesJeux.
   ///
   /// In en, this message translates to:
-  /// **'All Games'**
+  /// **'All games'**
   String get tousLesJeux;
 
   /// No description provided for @elements.
@@ -339,7 +303,7 @@ abstract class AppLocalizations {
   /// No description provided for @titreDuThemeIaPersonnalise.
   ///
   /// In en, this message translates to:
-  /// **'Theme Title (AI / Custom)'**
+  /// **'Theme title (AI / Custom)'**
   String get titreDuThemeIaPersonnalise;
 
   /// No description provided for @ajouterUnMot.
@@ -357,7 +321,7 @@ abstract class AppLocalizations {
   /// No description provided for @creerUnePartie1.
   ///
   /// In en, this message translates to:
-  /// **'Create a Game'**
+  /// **'Create Game'**
   String get creerUnePartie1;
 
   /// No description provided for @jeuSelectionne.
@@ -375,7 +339,7 @@ abstract class AppLocalizations {
   /// No description provided for @remplaceParLeThemeIa.
   ///
   /// In en, this message translates to:
-  /// **'Replaced by AI Theme'**
+  /// **'Replaced by AI theme'**
   String get remplaceParLeThemeIa;
 
   /// No description provided for @soft.
@@ -411,7 +375,7 @@ abstract class AppLocalizations {
   /// No description provided for @melangerPlusieursThemes.
   ///
   /// In en, this message translates to:
-  /// **'Mix several themes:'**
+  /// **'Mix multiple themes:'**
   String get melangerPlusieursThemes;
 
   /// No description provided for @combineS.
@@ -435,13 +399,13 @@ abstract class AppLocalizations {
   /// No description provided for @ambianceTonaliteDeJeu.
   ///
   /// In en, this message translates to:
-  /// **'Mood / Playing Tone:'**
+  /// **'Mood / Game tone:'**
   String get ambianceTonaliteDeJeu;
 
   /// No description provided for @precisionsOuIdeesSupplementairesOptionnel.
   ///
   /// In en, this message translates to:
-  /// **'Additional clarifications or ideas (optional)'**
+  /// **'Details or extra ideas (optional)'**
   String get precisionsOuIdeesSupplementairesOptionnel;
 
   /// No description provided for @elementsGeneresEtSauvegardes.
@@ -465,13 +429,13 @@ abstract class AppLocalizations {
   /// No description provided for @desactiverCePack.
   ///
   /// In en, this message translates to:
-  /// **'Deactivate this pack'**
+  /// **'Disable this pack'**
   String get desactiverCePack;
 
   /// No description provided for @modeDeJeu.
   ///
   /// In en, this message translates to:
-  /// **'Game Mode'**
+  /// **'Game mode'**
   String get modeDeJeu;
 
   /// No description provided for @normal.
@@ -483,7 +447,7 @@ abstract class AppLocalizations {
   /// No description provided for @complement.
   ///
   /// In en, this message translates to:
-  /// **'Complement'**
+  /// **'Addition'**
   String get complement;
 
   /// No description provided for @briseGlace.
@@ -495,13 +459,13 @@ abstract class AppLocalizations {
   /// No description provided for @parametreAjouter1.
   ///
   /// In en, this message translates to:
-  /// **'\'\'Add 1\'\' parameter'**
+  /// **'\'\'Add 1\'\' Setting'**
   String get parametreAjouter1;
 
   /// No description provided for @chacunCompleteLeMemeDessin.
   ///
   /// In en, this message translates to:
-  /// **'Each one completes the same initial drawing instead of the warp.'**
+  /// **'Everyone completes the same initial drawing instead of a chain.'**
   String get chacunCompleteLeMemeDessin;
 
   /// No description provided for @scoreCible.
@@ -543,13 +507,13 @@ abstract class AppLocalizations {
   /// No description provided for @chacunRaconteUneHistoireLes.
   ///
   /// In en, this message translates to:
-  /// **'Each one tells a story, the others vote True or False.'**
+  /// **'Everyone tells a story, the others vote True or False.'**
   String get chacunRaconteUneHistoireLes;
 
   /// No description provided for @modeDeVote.
   ///
   /// In en, this message translates to:
-  /// **'Voting method'**
+  /// **'Voting mode'**
   String get modeDeVote;
 
   /// No description provided for @simultane.
@@ -561,13 +525,13 @@ abstract class AppLocalizations {
   /// No description provided for @tourParTour.
   ///
   /// In en, this message translates to:
-  /// **'Turn-by-turn'**
+  /// **'Turn by turn'**
   String get tourParTour;
 
   /// No description provided for @categoriesDuPetitBac.
   ///
   /// In en, this message translates to:
-  /// **'Categories of the Petit Bac'**
+  /// **'Categories of Petit Bac'**
   String get categoriesDuPetitBac;
 
   /// No description provided for @ajouterUneCategorie.
@@ -585,19 +549,19 @@ abstract class AppLocalizations {
   /// No description provided for @siUnJoueurPoseUn.
   ///
   /// In en, this message translates to:
-  /// **'If a player places a four-of-a-kind, the order of the cards is reversed for the rest of the round.'**
+  /// **'If a player plays four-of-a-kind, card order reverses for the rest of the round.'**
   String get siUnJoueurPoseUn;
 
   /// No description provided for @seulement30Traits.
   ///
   /// In en, this message translates to:
-  /// **'Only 30 Strokes'**
+  /// **'Only 30 strokes'**
   String get seulement30Traits;
 
   /// No description provided for @leDessinateurEstLimiteA.
   ///
   /// In en, this message translates to:
-  /// **'The cartoonist is limited to a maximum of 30 strokes per drawing.'**
+  /// **'The drawer is limited to 30 strokes per drawing.'**
   String get leDessinateurEstLimiteA;
 
   /// No description provided for @variante.
@@ -609,19 +573,19 @@ abstract class AppLocalizations {
   /// No description provided for @classiqueSurrealiste.
   ///
   /// In en, this message translates to:
-  /// **'Classic (Surreal)'**
+  /// **'Classic (Surrealist)'**
   String get classiqueSurrealiste;
 
   /// No description provided for @suite3DerniersMots.
   ///
   /// In en, this message translates to:
-  /// **'Continued (last 3 words)'**
+  /// **'Continuation (Last 3 words)'**
   String get suite3DerniersMots;
 
   /// No description provided for @modeDeTransmission.
   ///
   /// In en, this message translates to:
-  /// **'Mode of transmission'**
+  /// **'Transmission mode'**
   String get modeDeTransmission;
 
   /// No description provided for @k1FeuillePartagee.
@@ -639,13 +603,13 @@ abstract class AppLocalizations {
   /// No description provided for @autoriserLesIndicesInvalidesSimplifie.
   ///
   /// In en, this message translates to:
-  /// **'Allow invalid indices (simplified)'**
+  /// **'Allow invalid clues (simplified)'**
   String get autoriserLesIndicesInvalidesSimplifie;
 
   /// No description provided for @lesIndicesIdentiquesSerontToujours.
   ///
   /// In en, this message translates to:
-  /// **'Identical clues will always be eliminated, but not those that are too close to the word.'**
+  /// **'Identical clues will still be eliminated, but not those too close to the word.'**
   String get lesIndicesIdentiquesSerontToujours;
 
   /// No description provided for @configurationDesRoles.
@@ -675,7 +639,7 @@ abstract class AppLocalizations {
   /// No description provided for @leTempsNeSeReinitialise.
   ///
   /// In en, this message translates to:
-  /// **'Time does not reset for each player. The potato explodes at the end!'**
+  /// **'Time does not reset each turn. The potato explodes at the end!'**
   String get leTempsNeSeReinitialise;
 
   /// No description provided for @dureeDeLaBombeS.
@@ -705,25 +669,25 @@ abstract class AppLocalizations {
   /// No description provided for @k21Mot.
   ///
   /// In en, this message translates to:
-  /// **'2 (+ 1 word)'**
+  /// **'2 (+ 1 Word)'**
   String get k21Mot;
 
   /// No description provided for @k3Mime.
   ///
   /// In en, this message translates to:
-  /// **'3 (+ Mime)'**
+  /// **'3 (+ Miming)'**
   String get k3Mime;
 
   /// No description provided for @jouerParEquipesMode2v2.
   ///
   /// In en, this message translates to:
-  /// **'Team Play (2v2+ Mode)'**
+  /// **'Play in teams (2v2+ mode)'**
   String get jouerParEquipesMode2v2;
 
   /// No description provided for @unJoueurDevineSonEquipe.
   ///
   /// In en, this message translates to:
-  /// **'A player guesses, his team helps him, the opposing team checks.'**
+  /// **'One player guesses, their team helps, the opposing team verifies.'**
   String get unJoueurDevineSonEquipe;
 
   /// No description provided for @equipes2v2.
@@ -735,19 +699,19 @@ abstract class AppLocalizations {
   /// No description provided for @necessiteExactement4JoueursVous.
   ///
   /// In en, this message translates to:
-  /// **'Requires exactly 4 players. You help the player in front of you.'**
+  /// **'Requires exactly 4 players. You assist the player opposite you.'**
   String get necessiteExactement4JoueursVous;
 
   /// No description provided for @parametresDominos.
   ///
   /// In en, this message translates to:
-  /// **'Domino Settings'**
+  /// **'Dominoes Settings'**
   String get parametresDominos;
 
   /// No description provided for @modeDeJeu1.
   ///
   /// In en, this message translates to:
-  /// **'Game Mode:'**
+  /// **'Game mode:'**
   String get modeDeJeu1;
 
   /// No description provided for @pioche.
@@ -777,7 +741,7 @@ abstract class AppLocalizations {
   /// No description provided for @parametresUno.
   ///
   /// In en, this message translates to:
-  /// **'Uno Parameters'**
+  /// **'Uno Settings'**
   String get parametresUno;
 
   /// No description provided for @cartesDeDepart.
@@ -789,13 +753,13 @@ abstract class AppLocalizations {
   /// No description provided for @empilementDesCartes24.
   ///
   /// In en, this message translates to:
-  /// **'Card Stacking +2/+4'**
+  /// **'Stacking +2/+4 Cards'**
   String get empilementDesCartes24;
 
   /// No description provided for @permetDeJouerUn2.
   ///
   /// In en, this message translates to:
-  /// **'Allows you to play a +2 on a +2 (or +4 on +2/+4) to draw more.'**
+  /// **'Allows playing a +2 on a +2 (or +4 on +2/+4) to force bigger draws.'**
   String get permetDeJouerUn2;
 
   /// No description provided for @parametresPhotoRoulette.
@@ -849,13 +813,13 @@ abstract class AppLocalizations {
   /// No description provided for @lesJoueursEcriventLesDefis.
   ///
   /// In en, this message translates to:
-  /// **'Players write down the challenges'**
+  /// **'Players write the challenges'**
   String get lesJoueursEcriventLesDefis;
 
   /// No description provided for @unJoueurAleatoireEcritLe.
   ///
   /// In en, this message translates to:
-  /// **'A random player writes the challenge instead of a predefined challenge.'**
+  /// **'A random player writes the dare instead of a predefined one.'**
   String get unJoueurAleatoireEcritLe;
 
   /// No description provided for @nombreDeTours.
@@ -879,19 +843,19 @@ abstract class AppLocalizations {
   /// No description provided for @rolesDeBase.
   ///
   /// In en, this message translates to:
-  /// **'Basic Roles'**
+  /// **'Core Roles'**
   String get rolesDeBase;
 
   /// No description provided for @nombreDInfiltres.
   ///
   /// In en, this message translates to:
-  /// **'Number of Infiltrators'**
+  /// **'Number of Undercovers'**
   String get nombreDInfiltres;
 
   /// No description provided for @nombreDeMrWhite.
   ///
   /// In en, this message translates to:
-  /// **'Mr. White\'\'s Number'**
+  /// **'Number of Mr. Whites'**
   String get nombreDeMrWhite;
 
   /// No description provided for @totalImposteursLaRepartitionFinale.
@@ -909,7 +873,7 @@ abstract class AppLocalizations {
   /// No description provided for @fouDeJoie.
   ///
   /// In en, this message translates to:
-  /// **'Crazy with Joy'**
+  /// **'Fool of Joy'**
   String get fouDeJoie;
 
   /// No description provided for @gagne4PointsSIl.
@@ -927,7 +891,7 @@ abstract class AppLocalizations {
   /// No description provided for @la1ereFoisQuIl.
   ///
   /// In en, this message translates to:
-  /// **'The 1st time it is voted, the votes bounce back.'**
+  /// **'The 1st time voted against, votes bounce back.'**
   String get la1ereFoisQuIl;
 
   /// No description provided for @deesseDeLaJustice.
@@ -939,7 +903,7 @@ abstract class AppLocalizations {
   /// No description provided for @trancheEnCasDEgalite.
   ///
   /// In en, this message translates to:
-  /// **'Decide in the event of a tie, even if it is dead.'**
+  /// **'Breaks ties, even if dead.'**
   String get trancheEnCasDEgalite;
 
   /// No description provided for @fantome.
@@ -951,7 +915,7 @@ abstract class AppLocalizations {
   /// No description provided for @peutToujoursVoterApresSon.
   ///
   /// In en, this message translates to:
-  /// **'Can still vote after elimination.'**
+  /// **'Can still vote even after elimination.'**
   String get peutToujoursVoterApresSon;
 
   /// No description provided for @amoureux5Joueurs.
@@ -975,7 +939,7 @@ abstract class AppLocalizations {
   /// No description provided for @unJoueurDevraMimerSon.
   ///
   /// In en, this message translates to:
-  /// **'A player will have to mime his clue each turn.'**
+  /// **'One player must mime their clue every turn.'**
   String get unJoueurDevraMimerSon;
 
   /// No description provided for @vendeurDeFalafels4Joueurs.
@@ -999,7 +963,7 @@ abstract class AppLocalizations {
   /// No description provided for @elimineQuelquUnEnEtant.
   ///
   /// In en, this message translates to:
-  /// **'Eliminate someone by being eliminated.'**
+  /// **'Eliminates someone upon being eliminated.'**
   String get elimineQuelquUnEnEtant;
 
   /// No description provided for @duellistes5Joueurs.
@@ -1011,7 +975,7 @@ abstract class AppLocalizations {
   /// No description provided for @duelSecretPourDesPoints.
   ///
   /// In en, this message translates to:
-  /// **'Secret duel for bonus/penalty points.'**
+  /// **'Secret duel for bonus or penalty points.'**
   String get duelSecretPourDesPoints;
 
   /// No description provided for @parametresGeneraux.
@@ -1053,19 +1017,19 @@ abstract class AppLocalizations {
   /// No description provided for @voixUniquementAudio.
   ///
   /// In en, this message translates to:
-  /// **'Voice Only (Audio)'**
+  /// **'Voice only (Audio)'**
   String get voixUniquementAudio;
 
   /// No description provided for @activeLeMicroSansLa.
   ///
   /// In en, this message translates to:
-  /// **'Mute without the camera (Disables Local Mode)'**
+  /// **'Enables microphone without camera (Disables Local mode)'**
   String get activeLeMicroSansLa;
 
   /// No description provided for @parametresDeRecherchePublique.
   ///
   /// In en, this message translates to:
-  /// **'Public Search Settings'**
+  /// **'Public Matchmaking Settings'**
   String get parametresDeRecherchePublique;
 
   /// No description provided for @autoriserLaRechercheRapideClassee.
@@ -1077,7 +1041,7 @@ abstract class AppLocalizations {
   /// No description provided for @activeLesBoutonsDeRecherche.
   ///
   /// In en, this message translates to:
-  /// **'Activate the global search buttons to play with strangers.'**
+  /// **'Enables worldwide search buttons to play with strangers.'**
   String get activeLesBoutonsDeRecherche;
 
   /// No description provided for @monPays.
@@ -1089,37 +1053,37 @@ abstract class AppLocalizations {
   /// No description provided for @leMonde.
   ///
   /// In en, this message translates to:
-  /// **'The World'**
+  /// **'Worldwide'**
   String get leMonde;
 
   /// No description provided for @peuImporte.
   ///
   /// In en, this message translates to:
-  /// **'It doesn\'\'t matter'**
+  /// **'Any'**
   String get peuImporte;
 
   /// No description provided for @avecVideo.
   ///
   /// In en, this message translates to:
-  /// **'With video'**
+  /// **'With Video'**
   String get avecVideo;
 
   /// No description provided for @sansVideo.
   ///
   /// In en, this message translates to:
-  /// **'Without video'**
+  /// **'Without Video'**
   String get sansVideo;
 
   /// No description provided for @lancerLeJeu.
   ///
   /// In en, this message translates to:
-  /// **'LAUNCH THE GAME'**
+  /// **'START GAME'**
   String get lancerLeJeu;
 
   /// No description provided for @leCodeDoitComporter6.
   ///
   /// In en, this message translates to:
-  /// **'The code must be 6 digits long.'**
+  /// **'Code must be 6 digits.'**
   String get leCodeDoitComporter6;
 
   /// No description provided for @codeDePartieInvalideOu.
@@ -1137,13 +1101,13 @@ abstract class AppLocalizations {
   /// No description provided for @vousRejoignezUnePartieVip.
   ///
   /// In en, this message translates to:
-  /// **'You join a VIP game, it\'\'s free!'**
+  /// **'You are joining a VIP game, it\'\'s free!'**
   String get vousRejoignezUnePartieVip;
 
   /// No description provided for @impossibleDeRejoindreLaPartie.
   ///
   /// In en, this message translates to:
-  /// **'Impossible to join the game.'**
+  /// **'Unable to join the game.'**
   String get impossibleDeRejoindreLaPartie;
 
   /// No description provided for @erreurDeConnexion.
@@ -1161,7 +1125,7 @@ abstract class AppLocalizations {
   /// No description provided for @codeDeLaPartie6.
   ///
   /// In en, this message translates to:
-  /// **'Part Code (6 digits)'**
+  /// **'Game code (6 digits)'**
   String get codeDeLaPartie6;
 
   /// No description provided for @rejoindre.
@@ -1173,13 +1137,13 @@ abstract class AppLocalizations {
   /// No description provided for @salonPrive.
   ///
   /// In en, this message translates to:
-  /// **'Private Room'**
+  /// **'Private Lounge'**
   String get salonPrive;
 
   /// No description provided for @erreurDeConnexionAuSalon.
   ///
   /// In en, this message translates to:
-  /// **'Error connecting to the living room.'**
+  /// **'Error connecting to lounge.'**
   String get erreurDeConnexionAuSalon;
 
   /// No description provided for @laPartieNExistePlus.
@@ -1191,7 +1155,7 @@ abstract class AppLocalizations {
   /// No description provided for @laPartieCommence.
   ///
   /// In en, this message translates to:
-  /// **'The game begins...'**
+  /// **'Game starting...'**
   String get laPartieCommence;
 
   /// No description provided for @partagezCeCodeAvecVos.
@@ -1203,7 +1167,7 @@ abstract class AppLocalizations {
   /// No description provided for @codeDeSalonCopie.
   ///
   /// In en, this message translates to:
-  /// **'Copied trade room code!'**
+  /// **'Lounge code copied!'**
   String get codeDeSalonCopie;
 
   /// No description provided for @difficulte1.
@@ -1239,7 +1203,7 @@ abstract class AppLocalizations {
   /// No description provided for @inviterMesAmis.
   ///
   /// In en, this message translates to:
-  /// **'Invite My Friends'**
+  /// **'Invite Friends'**
   String get inviterMesAmis;
 
   /// No description provided for @vousNAvezPasEncore.
@@ -1251,7 +1215,7 @@ abstract class AppLocalizations {
   /// No description provided for @inviterAuSalon.
   ///
   /// In en, this message translates to:
-  /// **'Invite to the show'**
+  /// **'Invite to lounge'**
   String get inviterAuSalon;
 
   /// No description provided for @inviter.
@@ -1275,7 +1239,7 @@ abstract class AppLocalizations {
   /// No description provided for @demarrerLaPartie.
   ///
   /// In en, this message translates to:
-  /// **'Start the game'**
+  /// **'Start game'**
   String get demarrerLaPartie;
 
   /// No description provided for @enAttenteDeLHote.
@@ -1293,7 +1257,7 @@ abstract class AppLocalizations {
   /// No description provided for @siVousQuittezVotrePlace.
   ///
   /// In en, this message translates to:
-  /// **'If you leave, your place will be vacated.'**
+  /// **'If you leave, your spot will be freed.'**
   String get siVousQuittezVotrePlace;
 
   /// No description provided for @rester.
@@ -1305,7 +1269,7 @@ abstract class AppLocalizations {
   /// No description provided for @quitter.
   ///
   /// In en, this message translates to:
-  /// **'Exit'**
+  /// **'Leave'**
   String get quitter;
 
   /// No description provided for @votreIdentite.
@@ -1317,7 +1281,7 @@ abstract class AppLocalizations {
   /// No description provided for @capacites.
   ///
   /// In en, this message translates to:
-  /// **'Capacities:'**
+  /// **'Abilities:'**
   String get capacites;
 
   /// No description provided for @phaseDeJeuInconnue.
@@ -1329,7 +1293,7 @@ abstract class AppLocalizations {
   /// No description provided for @partieTerminee.
   ///
   /// In en, this message translates to:
-  /// **'Game over!'**
+  /// **'Game Over!'**
   String get partieTerminee;
 
   /// No description provided for @victoireDes.
@@ -1341,19 +1305,19 @@ abstract class AppLocalizations {
   /// No description provided for @rejouer.
   ///
   /// In en, this message translates to:
-  /// **'Replay'**
+  /// **'Play Again'**
   String get rejouer;
 
   /// No description provided for @resultatDuVote.
   ///
   /// In en, this message translates to:
-  /// **'Result of the vote'**
+  /// **'Vote Result'**
   String get resultatDuVote;
 
   /// No description provided for @personneNAEteElimine.
   ///
   /// In en, this message translates to:
-  /// **'No one was eliminated (tie).'**
+  /// **'Nobody was eliminated (tie).'**
   String get personneNAEteElimine;
 
   /// No description provided for @aEteElimineSonRole.
@@ -1389,7 +1353,7 @@ abstract class AppLocalizations {
   /// No description provided for @tuAsEteElimineE.
   ///
   /// In en, this message translates to:
-  /// **'You\'\'ve been eliminated. Take someone with you!'**
+  /// **'You\'\'ve been eliminated. Take someone down with you!'**
   String get tuAsEteElimineE;
 
   /// No description provided for @fermer.
@@ -1407,7 +1371,7 @@ abstract class AppLocalizations {
   /// No description provided for @valider.
   ///
   /// In en, this message translates to:
-  /// **'Validate'**
+  /// **'Submit'**
   String get valider;
 
   /// No description provided for @indiceEnvoyeEnAttenteDes.
@@ -1431,7 +1395,7 @@ abstract class AppLocalizations {
   /// No description provided for @lancerLeVote.
   ///
   /// In en, this message translates to:
-  /// **'Start the vote'**
+  /// **'Start Vote'**
   String get lancerLeVote;
 
   /// No description provided for @debattezLHoteLanceraLe.
@@ -1443,13 +1407,13 @@ abstract class AppLocalizations {
   /// No description provided for @aQuiLaSentence.
   ///
   /// In en, this message translates to:
-  /// **'To whom the sentence?'**
+  /// **'Who receives the judgment?'**
   String get aQuiLaSentence;
 
   /// No description provided for @voteEnregistreEnAttente.
   ///
   /// In en, this message translates to:
-  /// **'Recorded vote. Pending...'**
+  /// **'Vote recorded. Waiting...'**
   String get voteEnregistreEnAttente;
 
   /// No description provided for @vousNePouvezPasVoter.
@@ -1461,19 +1425,19 @@ abstract class AppLocalizations {
   /// No description provided for @appuieSurLaBulleD.
   ///
   /// In en, this message translates to:
-  /// **'Tap on a player\'\'s bubble to vote.'**
+  /// **'Tap a player\'\'s bubble to vote.'**
   String get appuieSurLaBulleD;
 
   /// No description provided for @permissionRefuseeImpossibleDAcceder.
   ///
   /// In en, this message translates to:
-  /// **'Permission denied. Unable to access the gallery.'**
+  /// **'Permission denied. Unable to access gallery.'**
   String get permissionRefuseeImpossibleDAcceder;
 
   /// No description provided for @aucunAlbumMediaTrouve.
   ///
   /// In en, this message translates to:
-  /// **'No media albums found.'**
+  /// **'No media album found.'**
   String get aucunAlbumMediaTrouve;
 
   /// No description provided for @votreGalerieEstVide.
@@ -1491,7 +1455,7 @@ abstract class AppLocalizations {
   /// No description provided for @preparationDeLaPartie.
   ///
   /// In en, this message translates to:
-  /// **'Preparing for the game'**
+  /// **'Preparing the game'**
   String get preparationDeLaPartie;
 
   /// No description provided for @lApplicationVaSelectionnerPhotos.
@@ -1503,13 +1467,13 @@ abstract class AppLocalizations {
   /// No description provided for @vousEtesPret.
   ///
   /// In en, this message translates to:
-  /// **'You\'\'re all set!'**
+  /// **'You are ready!'**
   String get vousEtesPret;
 
   /// No description provided for @enAttenteDesAutresJoueurs.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the other players...'**
+  /// **'Waiting for other players...'**
   String get enAttenteDesAutresJoueurs;
 
   /// No description provided for @autoriserEtLancerLaSelection.
@@ -1533,13 +1497,13 @@ abstract class AppLocalizations {
   /// No description provided for @aQuiEstCettePhoto.
   ///
   /// In en, this message translates to:
-  /// **'Who is this photo of?'**
+  /// **'Whose photo is this?'**
   String get aQuiEstCettePhoto;
 
   /// No description provided for @calculDesResultats.
   ///
   /// In en, this message translates to:
-  /// **'Calculating the results...'**
+  /// **'Calculating results...'**
   String get calculDesResultats;
 
   /// No description provided for @laPhotoEtaitA.
@@ -1563,7 +1527,7 @@ abstract class AppLocalizations {
   /// No description provided for @classementFinal.
   ///
   /// In en, this message translates to:
-  /// **'Final standings:'**
+  /// **'Final Ranking:'**
   String get classementFinal;
 
   /// No description provided for @points.
@@ -1575,19 +1539,19 @@ abstract class AppLocalizations {
   /// No description provided for @retourALAccueil.
   ///
   /// In en, this message translates to:
-  /// **'Back to home'**
+  /// **'Back to Home'**
   String get retourALAccueil;
 
   /// No description provided for @laPartieAEteTerminee.
   ///
   /// In en, this message translates to:
-  /// **'The game has been completed or no longer exists.'**
+  /// **'The game has ended or no longer exists.'**
   String get laPartieAEteTerminee;
 
   /// No description provided for @quitterLaPartie1.
   ///
   /// In en, this message translates to:
-  /// **'Leaving the game'**
+  /// **'Leave game'**
   String get quitterLaPartie1;
 
   /// No description provided for @jeuDe.
@@ -1605,13 +1569,13 @@ abstract class AppLocalizations {
   /// No description provided for @blancMangerCoco.
   ///
   /// In en, this message translates to:
-  /// **'WHITE EAT COCONUT'**
+  /// **'BLANC MANGER COCO'**
   String get blancMangerCoco;
 
   /// No description provided for @enAttenteDesCartesDes.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the players\'\' cards...'**
+  /// **'Waiting for players\'\' cards...'**
   String get enAttenteDesCartesDes;
 
   /// No description provided for @joueursOntRepondu.
@@ -1623,7 +1587,7 @@ abstract class AppLocalizations {
   /// No description provided for @carteEnvoyee.
   ///
   /// In en, this message translates to:
-  /// **'Card sent!'**
+  /// **'Card submitted!'**
   String get carteEnvoyee;
 
   /// No description provided for @enAttenteDesAutresJoueurs1.
@@ -1653,7 +1617,7 @@ abstract class AppLocalizations {
   /// No description provided for @alerteAdministrateur.
   ///
   /// In en, this message translates to:
-  /// **'Admin Alert'**
+  /// **'Administrator Alert'**
   String get alerteAdministrateur;
 
   /// No description provided for @neJouePlusVoulezVous.
@@ -1665,25 +1629,25 @@ abstract class AppLocalizations {
   /// No description provided for @noteCeJeuNecessiteUn.
   ///
   /// In en, this message translates to:
-  /// **'⚠️ Note: This game requires personal advice. The computer will skip its turn if it is kept.'**
+  /// **'Note: This game requires personal opinion. Computer will skip turn if kept.'**
   String get noteCeJeuNecessiteUn;
 
   /// No description provided for @conserverAvecLIa.
   ///
   /// In en, this message translates to:
-  /// **'Conserving with AI'**
+  /// **'Keep with AI'**
   String get conserverAvecLIa;
 
   /// No description provided for @expulser.
   ///
   /// In en, this message translates to:
-  /// **'Deport'**
+  /// **'Kick'**
   String get expulser;
 
   /// No description provided for @vousAvezEteExcluDe.
   ///
   /// In en, this message translates to:
-  /// **'You have been excluded from the game for inactivity. The computer is playing for you (no winnings will be awarded to you).'**
+  /// **'You were kicked for inactivity. The computer is playing for you (no rewards will be granted).'**
   String get vousAvezEteExcluDe;
 
   /// No description provided for @s.
@@ -1737,7 +1701,7 @@ abstract class AppLocalizations {
   /// No description provided for @finDeLaManche.
   ///
   /// In en, this message translates to:
-  /// **'End of the Channel!'**
+  /// **'Round Over!'**
   String get finDeLaManche;
 
   /// No description provided for @mancheSuivante.
@@ -1749,7 +1713,7 @@ abstract class AppLocalizations {
   /// No description provided for @enAttenteDeLHote2.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the host for the next round...'**
+  /// **'Waiting for host for next round...'**
   String get enAttenteDeLHote2;
 
   /// No description provided for @revelezVos2PremieresCartes.
@@ -1767,19 +1731,19 @@ abstract class AppLocalizations {
   /// No description provided for @defausse.
   ///
   /// In en, this message translates to:
-  /// **'DISCARD'**
+  /// **'DISCARD PILE'**
   String get defausse;
 
   /// No description provided for @pioche1.
   ///
   /// In en, this message translates to:
-  /// **'PICKAXE'**
+  /// **'DRAW'**
   String get pioche1;
 
   /// No description provided for @piochee.
   ///
   /// In en, this message translates to:
-  /// **'PICKAXE'**
+  /// **'DRAWN'**
   String get piochee;
 
   /// No description provided for @garderRemplacer.
@@ -1791,13 +1755,13 @@ abstract class AppLocalizations {
   /// No description provided for @jeterDevoiler.
   ///
   /// In en, this message translates to:
-  /// **'THROW & REVEAL'**
+  /// **'DISCARD & REVEAL'**
   String get jeterDevoiler;
 
   /// No description provided for @cetteCarteEstDejaVisible.
   ///
   /// In en, this message translates to:
-  /// **'This card is already visible! Choose a hidden card.'**
+  /// **'This card is already face up! Choose a hidden card.'**
   String get cetteCarteEstDejaVisible;
 
   /// No description provided for @aucunAlbumAAfficher.
@@ -1809,7 +1773,7 @@ abstract class AppLocalizations {
   /// No description provided for @vernissage.
   ///
   /// In en, this message translates to:
-  /// **'Opening!'**
+  /// **'Gallery Opening!'**
   String get vernissage;
 
   /// No description provided for @albumDe.
@@ -1833,7 +1797,7 @@ abstract class AppLocalizations {
   /// No description provided for @suiv.
   ///
   /// In en, this message translates to:
-  /// **'Next.'**
+  /// **'Next'**
   String get suiv;
 
   /// No description provided for @devineCeQueRepresenteCe.
@@ -1851,7 +1815,7 @@ abstract class AppLocalizations {
   /// No description provided for @ouvrirLaZoneDeDessin.
   ///
   /// In en, this message translates to:
-  /// **'Open the drawing area'**
+  /// **'Open drawing area'**
   String get ouvrirLaZoneDeDessin;
 
   /// No description provided for @etatGribouillisInconnu.
@@ -1887,19 +1851,19 @@ abstract class AppLocalizations {
   /// No description provided for @interdits.
   ///
   /// In en, this message translates to:
-  /// **'PROHIBITED'**
+  /// **'FORBIDDEN'**
   String get interdits;
 
   /// No description provided for @passer.
   ///
   /// In en, this message translates to:
-  /// **'Skip'**
+  /// **'Pass'**
   String get passer;
 
   /// No description provided for @trouve.
   ///
   /// In en, this message translates to:
-  /// **'FOUND!'**
+  /// **'CORRECT!'**
   String get trouve;
 
   /// No description provided for @buzzMotInterdit.
@@ -1911,13 +1875,13 @@ abstract class AppLocalizations {
   /// No description provided for @ecoutezAttentivementEtProposezVos.
   ///
   /// In en, this message translates to:
-  /// **'💬 Listen carefully and offer your answers!'**
+  /// **'💬 Listen carefully and shout your guesses!'**
   String get ecoutezAttentivementEtProposezVos;
 
   /// No description provided for @finDuTour.
   ///
   /// In en, this message translates to:
-  /// **'⏳ End of the tour...'**
+  /// **'⏳ End of turn...'**
   String get finDuTour;
 
   /// No description provided for @estResteAvecLeZombie.
@@ -1929,7 +1893,7 @@ abstract class AppLocalizations {
   /// No description provided for @retourAuSalon.
   ///
   /// In en, this message translates to:
-  /// **'Back to the Show'**
+  /// **'Back to Lobby'**
   String get retourAuSalon;
 
   /// No description provided for @zombieEnMain.
@@ -1965,13 +1929,13 @@ abstract class AppLocalizations {
   /// No description provided for @carteSEnJeu.
   ///
   /// In en, this message translates to:
-  /// **'Map(s) in play:'**
+  /// **'Card(s) in play:'**
   String get carteSEnJeu;
 
   /// No description provided for @aucuneCarteEnJeuJouez.
   ///
   /// In en, this message translates to:
-  /// **'No cards in play. Play what you want!'**
+  /// **'No cards in play. Play whatever you want!'**
   String get aucuneCarteEnJeuJouez;
 
   /// No description provided for @jouer.
@@ -1983,19 +1947,13 @@ abstract class AppLocalizations {
   /// No description provided for @priseEnChaineVousDevez.
   ///
   /// In en, this message translates to:
-  /// **'⚠️ Chain Hold! You must replay the flashing pawn.'**
+  /// **'⚠️ Chain capture! You must play the blinking piece.'**
   String get priseEnChaineVousDevez;
-
-  /// No description provided for @aSelectionneSonPionEt.
-  ///
-  /// In en, this message translates to:
-  /// **'\'{0}\' has selected his pawn and thinks...'**
-  String get aSelectionneSonPionEt;
 
   /// No description provided for @vousDevezSelectionnerLePion.
   ///
   /// In en, this message translates to:
-  /// **'You must select the orange highlighted token.'**
+  /// **'You must select the orange-highlighted piece.'**
   String get vousDevezSelectionnerLePion;
 
   /// No description provided for @jeuNonImplemente.
@@ -2007,19 +1965,19 @@ abstract class AppLocalizations {
   /// No description provided for @tempsEcoule.
   ///
   /// In en, this message translates to:
-  /// **'Time elapsed!'**
+  /// **'Time\'\'s up!'**
   String get tempsEcoule;
 
   /// No description provided for @tourSuivant.
   ///
   /// In en, this message translates to:
-  /// **'Next Round'**
+  /// **'Next Turn'**
   String get tourSuivant;
 
   /// No description provided for @enAttenteDeLHote3.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the host to start the next round...'**
+  /// **'Waiting for host to start next turn...'**
   String get enAttenteDeLHote3;
 
   /// No description provided for @equipeAPts.
@@ -2037,13 +1995,13 @@ abstract class AppLocalizations {
   /// No description provided for @cEstAToiDe.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s up to YOU to guess!'**
+  /// **'It\'\'s YOUR TURN to guess!'**
   String get cEstAToiDe;
 
   /// No description provided for @passer1.
   ///
   /// In en, this message translates to:
-  /// **'SKIP'**
+  /// **'PASS'**
   String get passer1;
 
   /// No description provided for @motsTrouves.
@@ -2073,13 +2031,13 @@ abstract class AppLocalizations {
   /// No description provided for @leGrandDepliage.
   ///
   /// In en, this message translates to:
-  /// **'The Great Unfolding!'**
+  /// **'The Big Unfolding!'**
   String get leGrandDepliage;
 
   /// No description provided for @voiciLesUvresCollectivesNees.
   ///
   /// In en, this message translates to:
-  /// **'Here are the collective works born from your imagination:'**
+  /// **'Here are the collective creations born of your imagination:'**
   String get voiciLesUvresCollectivesNees;
 
   /// No description provided for @prepareUneAttaqueContreUn.
@@ -2103,31 +2061,31 @@ abstract class AppLocalizations {
   /// No description provided for @aucuneBotte.
   ///
   /// In en, this message translates to:
-  /// **'No boots'**
+  /// **'No safety cards'**
   String get aucuneBotte;
 
   /// No description provided for @limite50.
   ///
   /// In en, this message translates to:
-  /// **'LIMIT 50'**
+  /// **'SPEED LIMIT 50'**
   String get limite50;
 
   /// No description provided for @crevaison.
   ///
   /// In en, this message translates to:
-  /// **'FLAT TUBING'**
+  /// **'FLAT TIRE'**
   String get crevaison;
 
   /// No description provided for @panneEssence.
   ///
   /// In en, this message translates to:
-  /// **'OUT OF PETROL'**
+  /// **'OUT OF GAS'**
   String get panneEssence;
 
   /// No description provided for @touchezPourJouerRestezAppuye.
   ///
   /// In en, this message translates to:
-  /// **'Tap to play • Press and hold to discard'**
+  /// **'Tap to play • Hold to discard'**
   String get touchezPourJouerRestezAppuye;
 
   /// No description provided for @km2.
@@ -2139,7 +2097,7 @@ abstract class AppLocalizations {
   /// No description provided for @choisirLaCible.
   ///
   /// In en, this message translates to:
-  /// **'Choosing the target'**
+  /// **'Choose target'**
   String get choisirLaCible;
 
   /// No description provided for @placezVotreFlotte.
@@ -2169,25 +2127,25 @@ abstract class AppLocalizations {
   /// No description provided for @mainTerminee.
   ///
   /// In en, this message translates to:
-  /// **'Completed Hand'**
+  /// **'Hand Over'**
   String get mainTerminee;
 
   /// No description provided for @distribuerLaSuite.
   ///
   /// In en, this message translates to:
-  /// **'Distribute the rest'**
+  /// **'Deal Next'**
   String get distribuerLaSuite;
 
   /// No description provided for @attenteDuDonneur.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the donor...'**
+  /// **'Waiting for the dealer...'**
   String get attenteDuDonneur;
 
   /// No description provided for @couche.
   ///
   /// In en, this message translates to:
-  /// **'Lying down'**
+  /// **'Folded'**
   String get couche;
 
   /// No description provided for @miseActuelle.
@@ -2199,31 +2157,31 @@ abstract class AppLocalizations {
   /// No description provided for @enAttente.
   ///
   /// In en, this message translates to:
-  /// **'Pending...'**
+  /// **'Waiting...'**
   String get enAttente;
 
   /// No description provided for @seCoucher.
   ///
   /// In en, this message translates to:
-  /// **'Going to bed'**
+  /// **'Fold'**
   String get seCoucher;
 
   /// No description provided for @checker.
   ///
   /// In en, this message translates to:
-  /// **'Checker'**
+  /// **'Check'**
   String get checker;
 
   /// No description provided for @relancer.
   ///
   /// In en, this message translates to:
-  /// **'Raise'**
+  /// **'Reroll'**
   String get relancer;
 
   /// No description provided for @choisirLeMontantDeLa.
   ///
   /// In en, this message translates to:
-  /// **'Choose the amount of the dunning'**
+  /// **'Choose raise amount'**
   String get choisirLeMontantDeLa;
 
   /// No description provided for @x2.
@@ -2235,7 +2193,7 @@ abstract class AppLocalizations {
   /// No description provided for @pot.
   ///
   /// In en, this message translates to:
-  /// **'Potty'**
+  /// **'Pot'**
   String get pot;
 
   /// No description provided for @allIn.
@@ -2253,7 +2211,7 @@ abstract class AppLocalizations {
   /// No description provided for @vousNAvezPlusDe.
   ///
   /// In en, this message translates to:
-  /// **'You have no more cards!'**
+  /// **'You have no cards left!'**
   String get vousNAvezPlusDe;
 
   /// No description provided for @garderPasser.
@@ -2271,7 +2229,7 @@ abstract class AppLocalizations {
   /// No description provided for @contreUno.
   ///
   /// In en, this message translates to:
-  /// **'Against UNO!'**
+  /// **'Counter UNO!'**
   String get contreUno;
 
   /// No description provided for @erreur1.
@@ -2301,7 +2259,7 @@ abstract class AppLocalizations {
   /// No description provided for @quelEtaitLeMotDes.
   ///
   /// In en, this message translates to:
-  /// **'What was the word of the Civilians?'**
+  /// **'What was the Civilians\'\' word?'**
   String get quelEtaitLeMotDes;
 
   /// No description provided for @validerMonChoix.
@@ -2313,7 +2271,7 @@ abstract class AppLocalizations {
   /// No description provided for @egaliteParfaite.
   ///
   /// In en, this message translates to:
-  /// **'Perfect equality!'**
+  /// **'Complete tie!'**
   String get egaliteParfaite;
 
   /// No description provided for @votezUniquementParmiLesSuspects.
@@ -2337,13 +2295,13 @@ abstract class AppLocalizations {
   /// No description provided for @choisissezUneCarteAJouer.
   ///
   /// In en, this message translates to:
-  /// **'Choose a playing card:'**
+  /// **'Choose a card to play:'**
   String get choisissezUneCarteAJouer;
 
   /// No description provided for @enAttenteDuChoixDu.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the judge\'\'s choice...'**
+  /// **'Waiting for the judge\'\'s pick...'**
   String get enAttenteDuChoixDu;
 
   /// No description provided for @choisir.
@@ -2355,7 +2313,7 @@ abstract class AppLocalizations {
   /// No description provided for @impossibleDeChargerLImage.
   ///
   /// In en, this message translates to:
-  /// **'Unable to load image'**
+  /// **'Failed to load image'**
   String get impossibleDeChargerLImage;
 
   /// No description provided for @votreReponse.
@@ -2379,7 +2337,7 @@ abstract class AppLocalizations {
   /// No description provided for @tonHistoireEtaitElle.
   ///
   /// In en, this message translates to:
-  /// **'Was your story ...'**
+  /// **'Was your story...'**
   String get tonHistoireEtaitElle;
 
   /// No description provided for @vraie.
@@ -2397,7 +2355,7 @@ abstract class AppLocalizations {
   /// No description provided for @ceChoixResteraSecretJusqu.
   ///
   /// In en, this message translates to:
-  /// **'(This choice will remain secret until the end)'**
+  /// **'(This choice stays secret until the end)'**
   String get ceChoixResteraSecretJusqu;
 
   /// No description provided for @lHistoireDe.
@@ -2427,7 +2385,7 @@ abstract class AppLocalizations {
   /// No description provided for @pointezQuelquUn.
   ///
   /// In en, this message translates to:
-  /// **'Point someone!'**
+  /// **'Point at someone!'**
   String get pointezQuelquUn;
 
   /// No description provided for @leJugeLit.
@@ -2439,19 +2397,19 @@ abstract class AppLocalizations {
   /// No description provided for @unJoueurAQuitte.
   ///
   /// In en, this message translates to:
-  /// **'One player has left...'**
+  /// **'A player left...'**
   String get unJoueurAQuitte;
 
   /// No description provided for @rechercheDeRemplacantsEnCours.
   ///
   /// In en, this message translates to:
-  /// **'Search for replacements underway...'**
+  /// **'Searching for replacements...'**
   String get rechercheDeRemplacantsEnCours;
 
   /// No description provided for @demarrageAutomatiqueDans.
   ///
   /// In en, this message translates to:
-  /// **'Auto-start in'**
+  /// **'Auto start in'**
   String get demarrageAutomatiqueDans;
 
   /// No description provided for @joueursConnectes.
@@ -2463,7 +2421,7 @@ abstract class AppLocalizations {
   /// No description provided for @partieTerminee1.
   ///
   /// In en, this message translates to:
-  /// **'Game over!'**
+  /// **'Game Over!'**
   String get partieTerminee1;
 
   /// No description provided for @vainqueur.
@@ -2481,7 +2439,7 @@ abstract class AppLocalizations {
   /// No description provided for @siUnJoueurNeRepond.
   ///
   /// In en, this message translates to:
-  /// **'If a player does not respond or leaves, the game will look for a replacement.'**
+  /// **'If a player does not respond or leaves, the game will search for a replacement.'**
   String get siUnJoueurNeRepond;
 
   /// No description provided for @histoireDeEtait.
@@ -2505,7 +2463,7 @@ abstract class AppLocalizations {
   /// No description provided for @lesPointsOntEteDistribues.
   ///
   /// In en, this message translates to:
-  /// **'Points have been distributed based on your votes.'**
+  /// **'Points were awarded based on your votes.'**
   String get lesPointsOntEteDistribues;
 
   /// No description provided for @leMotDesCivilsEtait.
@@ -2553,13 +2511,13 @@ abstract class AppLocalizations {
   /// No description provided for @cartesRevelees.
   ///
   /// In en, this message translates to:
-  /// **'Cards Revealed:'**
+  /// **'Revealed cards:'**
   String get cartesRevelees;
 
   /// No description provided for @erreurDeChargementDuMeme.
   ///
   /// In en, this message translates to:
-  /// **'Error loading the meme.'**
+  /// **'Error loading meme.'**
   String get erreurDeChargementDuMeme;
 
   /// No description provided for @scoreActuelDeCartes.
@@ -2571,19 +2529,19 @@ abstract class AppLocalizations {
   /// No description provided for @finDuTour1.
   ///
   /// In en, this message translates to:
-  /// **'End of the tour'**
+  /// **'End of turn'**
   String get finDuTour1;
 
   /// No description provided for @tourSuivant1.
   ///
   /// In en, this message translates to:
-  /// **'Next round'**
+  /// **'Next turn'**
   String get tourSuivant1;
 
   /// No description provided for @enAttenteDeLHote4.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the host for the next round...'**
+  /// **'Waiting for host for next turn...'**
   String get enAttenteDeLHote4;
 
   /// No description provided for @prochainTour.
@@ -2601,37 +2559,37 @@ abstract class AppLocalizations {
   /// No description provided for @finDeLaManche1.
   ///
   /// In en, this message translates to:
-  /// **'End of the Channel'**
+  /// **'End of Round'**
   String get finDeLaManche1;
 
   /// No description provided for @suite.
   ///
   /// In en, this message translates to:
-  /// **'More'**
+  /// **'Next'**
   String get suite;
 
   /// No description provided for @echangeDesCartes.
   ///
   /// In en, this message translates to:
-  /// **'Card exchange'**
+  /// **'Card Exchange'**
   String get echangeDesCartes;
 
   /// No description provided for @commencer.
   ///
   /// In en, this message translates to:
-  /// **'Get Started'**
+  /// **'Start'**
   String get commencer;
 
   /// No description provided for @vousAvezFini.
   ///
   /// In en, this message translates to:
-  /// **'You\'\'re done!'**
+  /// **'You have finished!'**
   String get vousAvezFini;
 
   /// No description provided for @coupInvalide.
   ///
   /// In en, this message translates to:
-  /// **'Invalid blow!'**
+  /// **'Invalid move!'**
   String get coupInvalide;
 
   /// No description provided for @plusDeCartes.
@@ -2649,7 +2607,7 @@ abstract class AppLocalizations {
   /// No description provided for @combienDeCartesPensezVous.
   ///
   /// In en, this message translates to:
-  /// **'How many cards do you think you will turn over without finding a Skull?'**
+  /// **'How many cards can you flip without finding a Skull?'**
   String get combienDeCartesPensezVous;
 
   /// No description provided for @aPasse.
@@ -2661,7 +2619,7 @@ abstract class AppLocalizations {
   /// No description provided for @rose.
   ///
   /// In en, this message translates to:
-  /// **'PINK'**
+  /// **'ROSE'**
   String get rose;
 
   /// No description provided for @crane.
@@ -2673,19 +2631,19 @@ abstract class AppLocalizations {
   /// No description provided for @lancerLeDefiEnchere.
   ///
   /// In en, this message translates to:
-  /// **'START THE CHALLENGE (AUCTION)'**
+  /// **'START CHALLENGE (BID)'**
   String get lancerLeDefiEnchere;
 
   /// No description provided for @surencherir.
   ///
   /// In en, this message translates to:
-  /// **'OUTBID'**
+  /// **'RAISE BID'**
   String get surencherir;
 
   /// No description provided for @enAttenteDeLaDecision.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the player\'\'s decision in progress...'**
+  /// **'Waiting for current player\'\'s decision...'**
   String get enAttenteDeLaDecision;
 
   /// No description provided for @enAttenteDuDessin.
@@ -2703,13 +2661,13 @@ abstract class AppLocalizations {
   /// No description provided for @retourAuSalon1.
   ///
   /// In en, this message translates to:
-  /// **'Back to the show'**
+  /// **'Return to lounge'**
   String get retourAuSalon1;
 
   /// No description provided for @enAttenteDeLHote5.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the host for the rest...'**
+  /// **'Waiting for the host to continue...'**
   String get enAttenteDeLHote5;
 
   /// No description provided for @carte.
@@ -2721,37 +2679,37 @@ abstract class AppLocalizations {
   /// No description provided for @lesAutresEcriventDesIndices.
   ///
   /// In en, this message translates to:
-  /// **'Others write clues for you...'**
+  /// **'Others are writing clues for you...'**
   String get lesAutresEcriventDesIndices;
 
   /// No description provided for @faitesDevinerLeMot.
   ///
   /// In en, this message translates to:
-  /// **'Guess the word:'**
+  /// **'Help guess the word:'**
   String get faitesDevinerLeMot;
 
   /// No description provided for @tonIndiceUnSeulMot.
   ///
   /// In en, this message translates to:
-  /// **'Your clue (ONE word)'**
+  /// **'Your clue (ONE SINGLE word)'**
   String get tonIndiceUnSeulMot;
 
   /// No description provided for @unSeulMotAutorise.
   ///
   /// In en, this message translates to:
-  /// **'Only one word allowed!'**
+  /// **'Only one single word allowed!'**
   String get unSeulMotAutorise;
 
   /// No description provided for @envoyerLIndice.
   ///
   /// In en, this message translates to:
-  /// **'Send hint'**
+  /// **'Send clue'**
   String get envoyerLIndice;
 
   /// No description provided for @tousLesIndicesOntEte.
   ///
   /// In en, this message translates to:
-  /// **'All clues have been cancelled!'**
+  /// **'All clues were cancelled!'**
   String get tousLesIndicesOntEte;
 
   /// No description provided for @voiciTesIndices.
@@ -2763,25 +2721,25 @@ abstract class AppLocalizations {
   /// No description provided for @aieTousLesIndicesEtaient.
   ///
   /// In en, this message translates to:
-  /// **'Ouch! All the clues were the same or invalid. They were erased!'**
+  /// **'Ouch! All clues were identical or invalid. They have been erased!'**
   String get aieTousLesIndicesEtaient;
 
   /// No description provided for @taProposition.
   ///
   /// In en, this message translates to:
-  /// **'Your proposal...'**
+  /// **'Your guess...'**
   String get taProposition;
 
   /// No description provided for @jeValide.
   ///
   /// In en, this message translates to:
-  /// **'I validate!'**
+  /// **'Submit guess!'**
   String get jeValide;
 
   /// No description provided for @classementFinal1.
   ///
   /// In en, this message translates to:
-  /// **'Final standings'**
+  /// **'Final ranking'**
   String get classementFinal1;
 
   /// No description provided for @pt.
@@ -2799,13 +2757,13 @@ abstract class AppLocalizations {
   /// No description provided for @viteUnMot.
   ///
   /// In en, this message translates to:
-  /// **'Quick! One word!'**
+  /// **'Quick! A word!'**
   String get viteUnMot;
 
   /// No description provided for @validerPasser.
   ///
   /// In en, this message translates to:
-  /// **'VALIDATE & PASS'**
+  /// **'SUBMIT & PASS'**
   String get validerPasser;
 
   /// No description provided for @prepareTaReponsePendantQue.
@@ -2823,7 +2781,7 @@ abstract class AppLocalizations {
   /// No description provided for @scoresMoinsMieux.
   ///
   /// In en, this message translates to:
-  /// **'Scores (less = better)'**
+  /// **'Scores (lower = better)'**
   String get scoresMoinsMieux;
 
   /// No description provided for @pt1.
@@ -2835,7 +2793,7 @@ abstract class AppLocalizations {
   /// No description provided for @nouvelleManche.
   ///
   /// In en, this message translates to:
-  /// **'New Channel'**
+  /// **'New Round'**
   String get nouvelleManche;
 
   /// No description provided for @infecter.
@@ -2865,32 +2823,26 @@ abstract class AppLocalizations {
   /// No description provided for @faireExploser.
   ///
   /// In en, this message translates to:
-  /// **'Blow up'**
+  /// **'Detonate'**
   String get faireExploser;
 
   /// No description provided for @coupDEtat.
   ///
   /// In en, this message translates to:
-  /// **'Coup d\'\'état'**
+  /// **'Coup d\'\'État'**
   String get coupDEtat;
 
   /// No description provided for @ouvrirLesVotes.
   ///
   /// In en, this message translates to:
-  /// **'Open Voting'**
+  /// **'Open voting'**
   String get ouvrirLesVotes;
 
   /// No description provided for @cloturerLeVote.
   ///
   /// In en, this message translates to:
-  /// **'Closing the vote'**
+  /// **'Close voting'**
   String get cloturerLeVote;
-
-  /// No description provided for @k0S.
-  ///
-  /// In en, this message translates to:
-  /// **'0 s'**
-  String get k0S;
 
   /// No description provided for @tempsRestantS.
   ///
@@ -2907,7 +2859,7 @@ abstract class AppLocalizations {
   /// No description provided for @lancerLeDe.
   ///
   /// In en, this message translates to:
-  /// **'ROLL THE DICE'**
+  /// **'ROLL DICE'**
   String get lancerLeDe;
 
   /// No description provided for @scorePoints.
@@ -2925,7 +2877,7 @@ abstract class AppLocalizations {
   /// No description provided for @impossibleDeJouerCeDomino.
   ///
   /// In en, this message translates to:
-  /// **'It is impossible to play this domino here.'**
+  /// **'Cannot play this domino here.'**
   String get impossibleDeJouerCeDomino;
 
   /// No description provided for @mancheTerminee.
@@ -2943,7 +2895,7 @@ abstract class AppLocalizations {
   /// No description provided for @extremites.
   ///
   /// In en, this message translates to:
-  /// **'Extremities: '**
+  /// **'Ends: '**
   String get extremites;
 
   /// No description provided for @pioche2.
@@ -3033,7 +2985,7 @@ abstract class AppLocalizations {
   /// No description provided for @carteAPrendre.
   ///
   /// In en, this message translates to:
-  /// **'MAP TO TAKE'**
+  /// **'CARD TO TAKE'**
   String get carteAPrendre;
 
   /// No description provided for @votreMain.
@@ -3045,13 +2997,13 @@ abstract class AppLocalizations {
   /// No description provided for @touchezUneCartePourLa.
   ///
   /// In en, this message translates to:
-  /// **'Tap a card to put it down'**
+  /// **'Tap a card to play it'**
   String get touchezUneCartePourLa;
 
   /// No description provided for @aucuneCombinaisonEtaleeSurLa.
   ///
   /// In en, this message translates to:
-  /// **'No combinations spread out on the table'**
+  /// **'No melds on the table yet'**
   String get aucuneCombinaisonEtaleeSurLa;
 
   /// No description provided for @etaler.
@@ -3081,19 +3033,19 @@ abstract class AppLocalizations {
   /// No description provided for @retourner.
   ///
   /// In en, this message translates to:
-  /// **'Return'**
+  /// **'Flip'**
   String get retourner;
 
   /// No description provided for @validerLePlacement.
   ///
   /// In en, this message translates to:
-  /// **'Validate the placement'**
+  /// **'Confirm placement'**
   String get validerLePlacement;
 
   /// No description provided for @vosPieces.
   ///
   /// In en, this message translates to:
-  /// **'Your parts'**
+  /// **'Your pieces'**
   String get vosPieces;
 
   /// No description provided for @dessine.
@@ -3105,13 +3057,13 @@ abstract class AppLocalizations {
   /// No description provided for @vousDevezDessinerQuelqueChose.
   ///
   /// In en, this message translates to:
-  /// **'You have to draw something!'**
+  /// **'You must draw something!'**
   String get vousDevezDessinerQuelqueChose;
 
   /// No description provided for @erreurLorsDeLaSauvegarde.
   ///
   /// In en, this message translates to:
-  /// **'Error saving the drawing.'**
+  /// **'Error saving drawing.'**
   String get erreurLorsDeLaSauvegarde;
 
   /// No description provided for @jAiFini.
@@ -3129,13 +3081,13 @@ abstract class AppLocalizations {
   /// No description provided for @participantsModeLocal.
   ///
   /// In en, this message translates to:
-  /// **'Participants (Local Mode)'**
+  /// **'Players (Local Mode)'**
   String get participantsModeLocal;
 
   /// No description provided for @ajoutezLesJoueurs.
   ///
   /// In en, this message translates to:
-  /// **'Add Players'**
+  /// **'Add players'**
   String get ajoutezLesJoueurs;
 
   /// No description provided for @prenomDuJoueur.
@@ -3147,31 +3099,31 @@ abstract class AppLocalizations {
   /// No description provided for @ajoutezAuMoins2Joueurs.
   ///
   /// In en, this message translates to:
-  /// **'Add at least 2 players to get started.'**
+  /// **'Add at least 2 players to start.'**
   String get ajoutezAuMoins2Joueurs;
 
   /// No description provided for @equilibrerAleatoirement.
   ///
   /// In en, this message translates to:
-  /// **'Balance Randomly'**
+  /// **'Random Balance'**
   String get equilibrerAleatoirement;
 
   /// No description provided for @joueursNonAssignes1.
   ///
   /// In en, this message translates to:
-  /// **'Unassigned Players'**
+  /// **'Unassigned players'**
   String get joueursNonAssignes1;
 
   /// No description provided for @confirmerLancer.
   ///
   /// In en, this message translates to:
-  /// **'Confirm & Launch'**
+  /// **'Confirm & Start'**
   String get confirmerLancer;
 
   /// No description provided for @choisirUnJeuLocal.
   ///
   /// In en, this message translates to:
-  /// **'Choosing a Local Game'**
+  /// **'Choose a Local Game'**
   String get choisirUnJeuLocal;
 
   /// No description provided for @ilFautAuMoinsJoueurs.
@@ -3201,7 +3153,7 @@ abstract class AppLocalizations {
   /// No description provided for @k1IntensiteDesDefis.
   ///
   /// In en, this message translates to:
-  /// **'1. Intensity of the challenges'**
+  /// **'1. Challenge intensity'**
   String get k1IntensiteDesDefis;
 
   /// No description provided for @generationIaPersonnalisee.
@@ -3213,7 +3165,7 @@ abstract class AppLocalizations {
   /// No description provided for @exSoireePyjamaSecretsDe.
   ///
   /// In en, this message translates to:
-  /// **'e.g. Sleepovers, Couples\'\' secrets, Anecdotes at work...'**
+  /// **'e.g. Slumber party, Couple secrets, Work anecdotes...'**
   String get exSoireePyjamaSecretsDe;
 
   /// No description provided for @defisIaGeneres.
@@ -3231,7 +3183,7 @@ abstract class AppLocalizations {
   /// No description provided for @commencerLaPartie.
   ///
   /// In en, this message translates to:
-  /// **'START THE GAME'**
+  /// **'START GAME'**
   String get commencerLaPartie;
 
   /// No description provided for @actionOuVerite.
@@ -3255,7 +3207,7 @@ abstract class AppLocalizations {
   /// No description provided for @appuyezSurLancerLaRoue.
   ///
   /// In en, this message translates to:
-  /// **'Press \'\'Spin Wheel\'\' to get started!'**
+  /// **'Press \'\'Spin the wheel\'\' to start!'**
   String get appuyezSurLancerLaRoue;
 
   /// No description provided for @verite.
@@ -3267,7 +3219,7 @@ abstract class AppLocalizations {
   /// No description provided for @action.
   ///
   /// In en, this message translates to:
-  /// **'Action'**
+  /// **'Dare'**
   String get action;
 
   /// No description provided for @pts9.
@@ -3285,19 +3237,19 @@ abstract class AppLocalizations {
   /// No description provided for @parametresDuDilemme.
   ///
   /// In en, this message translates to:
-  /// **'Dilemma Parameters'**
+  /// **'Dilemma Settings'**
   String get parametresDuDilemme;
 
   /// No description provided for @k1DifficulteDesChoix.
   ///
   /// In en, this message translates to:
-  /// **'1. Difficulty of choices'**
+  /// **'1. Choice difficulty'**
   String get k1DifficulteDesChoix;
 
   /// No description provided for @k2ModeDeJeu.
   ///
   /// In en, this message translates to:
-  /// **'2. Game Mode'**
+  /// **'2. Game mode'**
   String get k2ModeDeJeu;
 
   /// No description provided for @avecRoue1Joueur.
@@ -3309,19 +3261,19 @@ abstract class AppLocalizations {
   /// No description provided for @toutLeGroupe.
   ///
   /// In en, this message translates to:
-  /// **'The whole group'**
+  /// **'Whole group'**
   String get toutLeGroupe;
 
   /// No description provided for @generationIaDeDilemmesPersonnalises.
   ///
   /// In en, this message translates to:
-  /// **'AI Generation of Custom Dilemmas'**
+  /// **'AI generation of custom dilemmas'**
   String get generationIaDeDilemmesPersonnalises;
 
   /// No description provided for @exSuperPouvoirsVieQuotidienne.
   ///
   /// In en, this message translates to:
-  /// **'e.g. Superpowers, Daily life, Moral choices...'**
+  /// **'ex: Superpowers, Daily life, Moral choices...'**
   String get exSuperPouvoirsVieQuotidienne;
 
   /// No description provided for @dilemmesIaGeneres.
@@ -3339,7 +3291,7 @@ abstract class AppLocalizations {
   /// No description provided for @commencerLesDilemmes.
   ///
   /// In en, this message translates to:
-  /// **'START DILEMMAS'**
+  /// **'START THE DILEMMAS'**
   String get commencerLesDilemmes;
 
   /// No description provided for @gererLesScores.
@@ -3363,7 +3315,7 @@ abstract class AppLocalizations {
   /// No description provided for @leJoueurDesigneDoitFaire.
   ///
   /// In en, this message translates to:
-  /// **'The designated player must make his choice.'**
+  /// **'The designated player must make their choice.'**
   String get leJoueurDesigneDoitFaire;
 
   /// No description provided for @enAttenteDuVoteDe.
@@ -3381,13 +3333,13 @@ abstract class AppLocalizations {
   /// No description provided for @appuyezSurLancerPourCommencer.
   ///
   /// In en, this message translates to:
-  /// **'Press \'\'Launch\'\' to get started!'**
+  /// **'Press \'\'Spin\'\' to begin!'**
   String get appuyezSurLancerPourCommencer;
 
   /// No description provided for @parametresJeuDeLaPiece.
   ///
   /// In en, this message translates to:
-  /// **'Settings: Play of the Coin'**
+  /// **'Settings: Coin Flip Dilemma'**
   String get parametresJeuDeLaPiece;
 
   /// No description provided for @configurationDeLaPartie.
@@ -3405,13 +3357,13 @@ abstract class AppLocalizations {
   /// No description provided for @generationIaDeQuestionsSecretes.
   ///
   /// In en, this message translates to:
-  /// **'AI Generation of Secret Questions'**
+  /// **'AI Generation of secret questions'**
   String get generationIaDeQuestionsSecretes;
 
   /// No description provided for @exAmourSeductionTravailAnecdotes.
   ///
   /// In en, this message translates to:
-  /// **'e.g. Love & Seduction, Work, Embarrassing Anecdotes...'**
+  /// **'e.g. Love & Romance, Work, Embarrassing moments...'**
   String get exAmourSeductionTravailAnecdotes;
 
   /// No description provided for @questionsIaGenerees.
@@ -3429,13 +3381,13 @@ abstract class AppLocalizations {
   /// No description provided for @lancerLaPiece.
   ///
   /// In en, this message translates to:
-  /// **'TOSS THE COIN'**
+  /// **'FLIP THE COIN'**
   String get lancerLaPiece;
 
   /// No description provided for @jeuDeLaPiece.
   ///
   /// In en, this message translates to:
-  /// **'Play Game'**
+  /// **'Coin Flip Dilemma'**
   String get jeuDeLaPiece;
 
   /// No description provided for @tuAsChoisiLaPiece.
@@ -3453,19 +3405,19 @@ abstract class AppLocalizations {
   /// No description provided for @jeChoisisPile.
   ///
   /// In en, this message translates to:
-  /// **'I choose PILE'**
+  /// **'I choose HEADS'**
   String get jeChoisisPile;
 
   /// No description provided for @jeChoisisFace.
   ///
   /// In en, this message translates to:
-  /// **'I choose FACE'**
+  /// **'I choose TAILS'**
   String get jeChoisisFace;
 
   /// No description provided for @laRoueTourne.
   ///
   /// In en, this message translates to:
-  /// **'The wheel turns...'**
+  /// **'The wheel is spinning...'**
   String get laRoueTourne;
 
   /// No description provided for @infiltreMrWhite.
@@ -3477,7 +3429,7 @@ abstract class AppLocalizations {
   /// No description provided for @configuration.
   ///
   /// In en, this message translates to:
-  /// **'Configuration'**
+  /// **'Setup'**
   String get configuration;
 
   /// No description provided for @inclureMrWhite.
@@ -3489,7 +3441,7 @@ abstract class AppLocalizations {
   /// No description provided for @mrWhiteCommence.
   ///
   /// In en, this message translates to:
-  /// **'Mr. White is starting?'**
+  /// **'Mr. White starts?'**
   String get mrWhiteCommence;
 
   /// No description provided for @iaPremium.
@@ -3507,19 +3459,19 @@ abstract class AppLocalizations {
   /// No description provided for @exAnimauxObjetsCuisineFormat.
   ///
   /// In en, this message translates to:
-  /// **'e.g. animals:objects, kitchen... (civilian format:infiltrator)'**
+  /// **'ex: animals:objects, food... (format civil:undercover)'**
   String get exAnimauxObjetsCuisineFormat;
 
   /// No description provided for @generationIa1.
   ///
   /// In en, this message translates to:
-  /// **'Generation AI...'**
+  /// **'AI Generating...'**
   String get generationIa1;
 
   /// No description provided for @commencerLaManche.
   ///
   /// In en, this message translates to:
-  /// **'Start the round'**
+  /// **'Start round'**
   String get commencerLaManche;
 
   /// No description provided for @passeLeTelephoneA.
@@ -3531,13 +3483,13 @@ abstract class AppLocalizations {
   /// No description provided for @regardeTonRoleEtNe.
   ///
   /// In en, this message translates to:
-  /// **'Look at your role and don\'\'t show it to anyone!'**
+  /// **'Check your role and keep it secret!'**
   String get regardeTonRoleEtNe;
 
   /// No description provided for @voirMonRole.
   ///
   /// In en, this message translates to:
-  /// **'See my role'**
+  /// **'Reveal my role'**
   String get voirMonRole;
 
   /// No description provided for @tonRole.
@@ -3549,13 +3501,13 @@ abstract class AppLocalizations {
   /// No description provided for @jAiCompris.
   ///
   /// In en, this message translates to:
-  /// **'I get it!'**
+  /// **'Got it!'**
   String get jAiCompris;
 
   /// No description provided for @aVosDiscussions.
   ///
   /// In en, this message translates to:
-  /// **'To your discussions!'**
+  /// **'Time to discuss!'**
   String get aVosDiscussions;
 
   /// No description provided for @toutLeMondeConnaitSon.
@@ -3579,7 +3531,7 @@ abstract class AppLocalizations {
   /// No description provided for @resultatDuTour.
   ///
   /// In en, this message translates to:
-  /// **'Round result'**
+  /// **'Round Result'**
   String get resultatDuTour;
 
   /// No description provided for @leMotDesCivilsEtait1.
@@ -3597,19 +3549,19 @@ abstract class AppLocalizations {
   /// No description provided for @tuDoisEcrireUneReponse.
   ///
   /// In en, this message translates to:
-  /// **'You need to write a reply!'**
+  /// **'You must enter an answer!'**
   String get tuDoisEcrireUneReponse;
 
   /// No description provided for @laPatateChaude.
   ///
   /// In en, this message translates to:
-  /// **'The Hot Potato'**
+  /// **'Hot Potato'**
   String get laPatateChaude;
 
   /// No description provided for @dureeDuTourParJoueur.
   ///
   /// In en, this message translates to:
-  /// **'Round Duration (per player)'**
+  /// **'Turn duration (per player)'**
   String get dureeDuTourParJoueur;
 
   /// No description provided for @k10s.
@@ -3627,7 +3579,7 @@ abstract class AppLocalizations {
   /// No description provided for @compteAReboursGlobal.
   ///
   /// In en, this message translates to:
-  /// **'Global Countdown Timer'**
+  /// **'Global countdown'**
   String get compteAReboursGlobal;
 
   /// No description provided for @leChronoNeSeReinitialise.
@@ -3639,7 +3591,7 @@ abstract class AppLocalizations {
   /// No description provided for @dureeDuChronoGlobal.
   ///
   /// In en, this message translates to:
-  /// **'Overall timer duration'**
+  /// **'Global timer duration'**
   String get dureeDuChronoGlobal;
 
   /// No description provided for @k30s.
@@ -3669,25 +3621,25 @@ abstract class AppLocalizations {
   /// No description provided for @exMarquesDeLuxeObjets.
   ///
   /// In en, this message translates to:
-  /// **'e.g. Luxury brands, Attic objects, Horror movies...'**
+  /// **'e.g. Luxury brands, Attic items, Horror movies...'**
   String get exMarquesDeLuxeObjets;
 
   /// No description provided for @categoriesIaChargees.
   ///
   /// In en, this message translates to:
-  /// **'AI categories loaded!'**
+  /// **'AI Categories loaded!'**
   String get categoriesIaChargees;
 
   /// No description provided for @genererLesCategoriesParIa.
   ///
   /// In en, this message translates to:
-  /// **'Generate categories by AI'**
+  /// **'Generate AI categories'**
   String get genererLesCategoriesParIa;
 
   /// No description provided for @commencer1.
   ///
   /// In en, this message translates to:
-  /// **'Get started!'**
+  /// **'Start!'**
   String get commencer1;
 
   /// No description provided for @cEstA.
@@ -3711,7 +3663,7 @@ abstract class AppLocalizations {
   /// No description provided for @faitJePasse.
   ///
   /// In en, this message translates to:
-  /// **'Done! I\'\'m passing!'**
+  /// **'Done! Passing!'**
   String get faitJePasse;
 
   /// No description provided for @motsDejaUtilises.
@@ -3729,7 +3681,7 @@ abstract class AppLocalizations {
   /// No description provided for @sonGage.
   ///
   /// In en, this message translates to:
-  /// **'His pledge:'**
+  /// **'Their penalty:'**
   String get sonGage;
 
   /// No description provided for @synonymeOuBanni.
@@ -3747,7 +3699,7 @@ abstract class AppLocalizations {
   /// No description provided for @exAnimauxCuisineFilm.
   ///
   /// In en, this message translates to:
-  /// **'e.g. animals, cooking, film...'**
+  /// **'e.g.: animals, food, movies...'**
   String get exAnimauxCuisineFilm;
 
   /// No description provided for @passeLeTelephoneA1.
@@ -3771,13 +3723,13 @@ abstract class AppLocalizations {
   /// No description provided for @validerEtPasser.
   ///
   /// In en, this message translates to:
-  /// **'Validate and pass'**
+  /// **'Submit and pass'**
   String get validerEtPasser;
 
   /// No description provided for @votezPourBannirLaPire.
   ///
   /// In en, this message translates to:
-  /// **'Vote to ban the worst proposal!'**
+  /// **'Vote to banish the worst suggestion!'**
   String get votezPourBannirLaPire;
 
   /// No description provided for @leMotEtait1.
@@ -3813,25 +3765,25 @@ abstract class AppLocalizations {
   /// No description provided for @quiPourraitLePlus.
   ///
   /// In en, this message translates to:
-  /// **'Who Could Do The Most?'**
+  /// **'Who\'\'s Most Likely To?'**
   String get quiPourraitLePlus;
 
   /// No description provided for @groupeEnsemble.
   ///
   /// In en, this message translates to:
-  /// **'Group (Ensemble)'**
+  /// **'Group (Together)'**
   String get groupeEnsemble;
 
   /// No description provided for @themeIaExSoireeArrosee.
   ///
   /// In en, this message translates to:
-  /// **'AI theme (e.g. Drunken evening, Work, Holidays...)'**
+  /// **'AI Topic (e.g. Wild Party, Work, Vacation...)'**
   String get themeIaExSoireeArrosee;
 
   /// No description provided for @genererDesSituationsIa.
   ///
   /// In en, this message translates to:
-  /// **'Generate AI situations'**
+  /// **'Generate AI scenarios'**
   String get genererDesSituationsIa;
 
   /// No description provided for @quiDansLeGroupe.
@@ -3855,7 +3807,7 @@ abstract class AppLocalizations {
   /// No description provided for @situation.
   ///
   /// In en, this message translates to:
-  /// **'Situation:'**
+  /// **'Scenario:'**
   String get situation;
 
   /// No description provided for @quiPourraitLePlus1.
@@ -3867,13 +3819,13 @@ abstract class AppLocalizations {
   /// No description provided for @votezTousEnsemble.
   ///
   /// In en, this message translates to:
-  /// **'Vote together!'**
+  /// **'Vote all together!'**
   String get votezTousEnsemble;
 
   /// No description provided for @designezLaPersonneChoisiePar.
   ///
   /// In en, this message translates to:
-  /// **'Designate the person chosen by the group:'**
+  /// **'Pick the person chosen by the group:'**
   String get designezLaPersonneChoisiePar;
 
   /// No description provided for @passezLAppareilA.
@@ -3891,13 +3843,13 @@ abstract class AppLocalizations {
   /// No description provided for @situation1.
   ///
   /// In en, this message translates to:
-  /// **'LOCATION:'**
+  /// **'SCENARIO:'**
   String get situation1;
 
   /// No description provided for @detailDesVotes.
   ///
   /// In en, this message translates to:
-  /// **'Details of the votes:'**
+  /// **'Vote breakdown:'**
   String get detailDesVotes;
 
   /// No description provided for @aucunVote.
@@ -3909,7 +3861,7 @@ abstract class AppLocalizations {
   /// No description provided for @situationSuivante.
   ///
   /// In en, this message translates to:
-  /// **'Next situation'**
+  /// **'Next scenario'**
   String get situationSuivante;
 
   /// No description provided for @codenames.
@@ -3939,7 +3891,7 @@ abstract class AppLocalizations {
   /// No description provided for @passezLeTelephoneAuxAgents.
   ///
   /// In en, this message translates to:
-  /// **'Pass the phone to agents'**
+  /// **'Pass the phone to the field operatives'**
   String get passezLeTelephoneAuxAgents;
 
   /// No description provided for @equipe1.
@@ -3963,49 +3915,49 @@ abstract class AppLocalizations {
   /// No description provided for @cEstParti.
   ///
   /// In en, this message translates to:
-  /// **'Let\'\'s get started!'**
+  /// **'Let\'\'s go!'**
   String get cEstParti;
 
   /// No description provided for @codenamesLocal.
   ///
   /// In en, this message translates to:
-  /// **'Codenames Local'**
+  /// **'Local Codenames'**
   String get codenamesLocal;
 
   /// No description provided for @exAnimauxCuisineHarryPotter.
   ///
   /// In en, this message translates to:
-  /// **'e.g. animals, cooking, Harry Potter...'**
+  /// **'e.g.: animals, food, Harry Potter...'**
   String get exAnimauxCuisineHarryPotter;
 
   /// No description provided for @commencerLaPartie1.
   ///
   /// In en, this message translates to:
-  /// **'Start the game'**
+  /// **'Start game'**
   String get commencerLaPartie1;
 
   /// No description provided for @tuEsLeMaitreEspion.
   ///
   /// In en, this message translates to:
-  /// **'You\'\'re the Spymaster. Make sure you\'\'re the only one to see the screen.'**
+  /// **'You are the Spymaster. Make sure you are the only one looking at the screen.'**
   String get tuEsLeMaitreEspion;
 
   /// No description provided for @voirLaCarteCle.
   ///
   /// In en, this message translates to:
-  /// **'View Key Map'**
+  /// **'View keycard'**
   String get voirLaCarteCle;
 
   /// No description provided for @nombreDeMots.
   ///
   /// In en, this message translates to:
-  /// **'Word count'**
+  /// **'Number of words'**
   String get nombreDeMots;
 
   /// No description provided for @donnerLIndice.
   ///
   /// In en, this message translates to:
-  /// **'Give the hint'**
+  /// **'Give clue'**
   String get donnerLIndice;
 
   /// No description provided for @essaisRestants.
@@ -4017,13 +3969,13 @@ abstract class AppLocalizations {
   /// No description provided for @passerSonTour.
   ///
   /// In en, this message translates to:
-  /// **'Skip your turn'**
+  /// **'End turn'**
   String get passerSonTour;
 
   /// No description provided for @nouvellePartie.
   ///
   /// In en, this message translates to:
-  /// **'New Part'**
+  /// **'New Game'**
   String get nouvellePartie;
 
   /// No description provided for @rouge.
@@ -4065,13 +4017,13 @@ abstract class AppLocalizations {
   /// No description provided for @timeSUpLocal.
   ///
   /// In en, this message translates to:
-  /// **'Time\'\'s Up Local'**
+  /// **'Local Time\'\'s Up'**
   String get timeSUpLocal;
 
   /// No description provided for @besoinDAuMoins4.
   ///
   /// In en, this message translates to:
-  /// **'Need at least 4 players (2 per team) to play!'**
+  /// **'At least 4 players (2 per team) needed to play!'**
   String get besoinDAuMoins4;
 
   /// No description provided for @lesEquipesSerontFormeesAleatoirement.
@@ -4083,25 +4035,25 @@ abstract class AppLocalizations {
   /// No description provided for @themePourLesMotsA.
   ///
   /// In en, this message translates to:
-  /// **'Theme for Words to Guess'**
+  /// **'Theme for words to guess'**
   String get themePourLesMotsA;
 
   /// No description provided for @exCelebritesAnimauxCuisine.
   ///
   /// In en, this message translates to:
-  /// **'e.g. celebrities, animals, cooking...'**
+  /// **'ex: celebrities, animals, cooking...'**
   String get exCelebritesAnimauxCuisine;
 
   /// No description provided for @lIaGenereraLesMots.
   ///
   /// In en, this message translates to:
-  /// **'The AI will generate the words automatically (the manual input phase will be skipped).'**
+  /// **'AI will generate words automatically (manual entry phase will be skipped).'**
   String get lIaGenereraLesMots;
 
   /// No description provided for @ajoute5MotsQueTu.
   ///
   /// In en, this message translates to:
-  /// **'Add 5 words you\'\'d like to guess.'**
+  /// **'Add 5 words you would like others to guess.'**
   String get ajoute5MotsQueTu;
 
   /// No description provided for @mot5.
@@ -4119,7 +4071,7 @@ abstract class AppLocalizations {
   /// No description provided for @jAiFiniDAjouter.
   ///
   /// In en, this message translates to:
-  /// **'I finished adding my words'**
+  /// **'I\'\'m done adding my words'**
   String get jAiFiniDAjouter;
 
   /// No description provided for @motsRestantsAAjouterPour.
@@ -4161,13 +4113,13 @@ abstract class AppLocalizations {
   /// No description provided for @erreurNombreDeJoueursInsuffisant.
   ///
   /// In en, this message translates to:
-  /// **'Error: Insufficient number of players'**
+  /// **'Error: Not enough players'**
   String get erreurNombreDeJoueursInsuffisant;
 
   /// No description provided for @veuillezRevenirALEcran.
   ///
   /// In en, this message translates to:
-  /// **'Please return to the Player Setup screen.'**
+  /// **'Please return to player setup screen.'**
   String get veuillezRevenirALEcran;
 
   /// No description provided for @retour.
@@ -4191,25 +4143,25 @@ abstract class AppLocalizations {
   /// No description provided for @passeLObjet.
   ///
   /// In en, this message translates to:
-  /// **'Pass Item'**
+  /// **'Pass the Object'**
   String get passeLObjet;
 
   /// No description provided for @passeLObjetRapidement.
   ///
   /// In en, this message translates to:
-  /// **'Passes the object quickly'**
+  /// **'Pass the Object Quickly'**
   String get passeLObjetRapidement;
 
   /// No description provided for @generationIaDeQuestions.
   ///
   /// In en, this message translates to:
-  /// **'AI question generation'**
+  /// **'AI generation of questions'**
   String get generationIaDeQuestions;
 
   /// No description provided for @exCultureGeneraleGagesDroles.
   ///
   /// In en, this message translates to:
-  /// **'e.g. General Knowledge, Funny Wages, Friends...'**
+  /// **'ex: Trivia, Funny dares, Friends...'**
   String get exCultureGeneraleGagesDroles;
 
   /// No description provided for @questionsIaPretes.
@@ -4221,19 +4173,19 @@ abstract class AppLocalizations {
   /// No description provided for @designerUnJoueurAleatoireA.
   ///
   /// In en, this message translates to:
-  /// **'Designate a random player to switch to'**
+  /// **'Pick a random player to pass to'**
   String get designerUnJoueurAleatoireA;
 
   /// No description provided for @sinonPassezPhysiquementAQui.
   ///
   /// In en, this message translates to:
-  /// **'If not, physically switch to whomever you want'**
+  /// **'Otherwise, physically pass to anyone you want'**
   String get sinonPassezPhysiquementAQui;
 
   /// No description provided for @afficherLeChronometre.
   ///
   /// In en, this message translates to:
-  /// **'Show stopwatch'**
+  /// **'Show countdown timer'**
   String get afficherLeChronometre;
 
   /// No description provided for @intervalleDuChronoDeA.
@@ -4245,13 +4197,13 @@ abstract class AppLocalizations {
   /// No description provided for @passezVite.
   ///
   /// In en, this message translates to:
-  /// **'Hurry up!'**
+  /// **'Pass quickly!'**
   String get passezVite;
 
   /// No description provided for @jePasseLObjet.
   ///
   /// In en, this message translates to:
-  /// **'I pass the object!'**
+  /// **'I\'\'m passing the object!'**
   String get jePasseLObjet;
 
   /// No description provided for @passeA.
@@ -4263,7 +4215,7 @@ abstract class AppLocalizations {
   /// No description provided for @devineTete.
   ///
   /// In en, this message translates to:
-  /// **'Guess Head'**
+  /// **'Heads Up'**
   String get devineTete;
 
   /// No description provided for @prochainJoueurEquipe.
@@ -4275,7 +4227,7 @@ abstract class AppLocalizations {
   /// No description provided for @jouerParEquipes.
   ///
   /// In en, this message translates to:
-  /// **'Play by Teams'**
+  /// **'Play in Teams'**
   String get jouerParEquipes;
 
   /// No description provided for @modifierLesEquipesEtLes.
@@ -4287,7 +4239,7 @@ abstract class AppLocalizations {
   /// No description provided for @difficulteDesMots.
   ///
   /// In en, this message translates to:
-  /// **'Difficulty of words:'**
+  /// **'Word difficulty:'**
   String get difficulteDesMots;
 
   /// No description provided for @facile.
@@ -4311,7 +4263,7 @@ abstract class AppLocalizations {
   /// No description provided for @dureeDuChrono.
   ///
   /// In en, this message translates to:
-  /// **'Timer Duration:'**
+  /// **'Timer duration:'**
   String get dureeDuChrono;
 
   /// No description provided for @k90s.
@@ -4329,25 +4281,25 @@ abstract class AppLocalizations {
   /// No description provided for @motsPersonnalisesIa.
   ///
   /// In en, this message translates to:
-  /// **'Custom Words / AI'**
+  /// **'Custom words / AI'**
   String get motsPersonnalisesIa;
 
   /// No description provided for @themeIaExAnimauxMarins.
   ///
   /// In en, this message translates to:
-  /// **'AI theme (e.g. Sea animals, Superheroes...)'**
+  /// **'AI theme (ex: Sea animals, Superheroes...)'**
   String get themeIaExAnimauxMarins;
 
   /// No description provided for @lancerSurLeFront.
   ///
   /// In en, this message translates to:
-  /// **'THROW ON THE FOREHEAD!'**
+  /// **'START ON FOREHEAD!'**
   String get lancerSurLeFront;
 
   /// No description provided for @compositionDesEquipes.
   ///
   /// In en, this message translates to:
-  /// **'Team Composition'**
+  /// **'Team Roster'**
   String get compositionDesEquipes;
 
   /// No description provided for @equipe11.
@@ -4365,7 +4317,7 @@ abstract class AppLocalizations {
   /// No description provided for @validerLesEquipes.
   ///
   /// In en, this message translates to:
-  /// **'Validate teams'**
+  /// **'Confirm teams'**
   String get validerLesEquipes;
 
   /// No description provided for @placezLeTelephoneSurVotre.
@@ -4383,7 +4335,7 @@ abstract class AppLocalizations {
   /// No description provided for @basTrouve.
   ///
   /// In en, this message translates to:
-  /// **'Low = Found'**
+  /// **'Down = Found'**
   String get basTrouve;
 
   /// No description provided for @arreter.
@@ -4395,13 +4347,13 @@ abstract class AppLocalizations {
   /// No description provided for @hautPasser.
   ///
   /// In en, this message translates to:
-  /// **'Top = Pass'**
+  /// **'Up = Pass'**
   String get hautPasser;
 
   /// No description provided for @resultatsDuPassage.
   ///
   /// In en, this message translates to:
-  /// **'Results of the passage'**
+  /// **'Turn Results'**
   String get resultatsDuPassage;
 
   /// No description provided for @pointsMarques.
@@ -4413,7 +4365,7 @@ abstract class AppLocalizations {
   /// No description provided for @touchezUnMotPourModifier.
   ///
   /// In en, this message translates to:
-  /// **'Tap a word to change the result in case of a sensor error:'**
+  /// **'Tap a word to edit result in case of sensor error:'**
   String get touchezUnMotPourModifier;
 
   /// No description provided for @pts10.
@@ -4431,7 +4383,7 @@ abstract class AppLocalizations {
   /// No description provided for @continuerLaPartie.
   ///
   /// In en, this message translates to:
-  /// **'Continue the game'**
+  /// **'Continue game'**
   String get continuerLaPartie;
 
   /// No description provided for @mauvaisSymbole.
@@ -4443,7 +4395,7 @@ abstract class AppLocalizations {
   /// No description provided for @dobbleLocal.
   ///
   /// In en, this message translates to:
-  /// **'Dobble Local'**
+  /// **'Local Dobble'**
   String get dobbleLocal;
 
   /// No description provided for @symbolesParCarte.
@@ -4473,7 +4425,7 @@ abstract class AppLocalizations {
   /// No description provided for @commencer2.
   ///
   /// In en, this message translates to:
-  /// **'GET STARTED'**
+  /// **'START'**
   String get commencer2;
 
   /// No description provided for @piocheBut.
@@ -4539,7 +4491,7 @@ abstract class AppLocalizations {
   /// No description provided for @creerUnSalon.
   ///
   /// In en, this message translates to:
-  /// **'Create a Room'**
+  /// **'Create a Lounge'**
   String get creerUnSalon;
 
   /// No description provided for @rejoindreUnSalonPrive.
@@ -4557,7 +4509,7 @@ abstract class AppLocalizations {
   /// No description provided for @coller.
   ///
   /// In en, this message translates to:
-  /// **'Glue'**
+  /// **'Paste'**
   String get coller;
 
   /// No description provided for @rejoindreLeSalon.
@@ -4569,7 +4521,7 @@ abstract class AppLocalizations {
   /// No description provided for @rechercherUnSalon.
   ///
   /// In en, this message translates to:
-  /// **'Search for a salon...'**
+  /// **'Search a lounge...'**
   String get rechercherUnSalon;
 
   /// No description provided for @trier.
@@ -4587,19 +4539,19 @@ abstract class AppLocalizations {
   /// No description provided for @plusActifs.
   ///
   /// In en, this message translates to:
-  /// **'More active'**
+  /// **'Most active'**
   String get plusActifs;
 
   /// No description provided for @placesDisponibles.
   ///
   /// In en, this message translates to:
-  /// **'Places available'**
+  /// **'Available slots'**
   String get placesDisponibles;
 
   /// No description provided for @monSalon.
   ///
   /// In en, this message translates to:
-  /// **'MY LIVING ROOM'**
+  /// **'MY LOUNGE'**
   String get monSalon;
 
   /// No description provided for @enLigne.
@@ -4611,19 +4563,19 @@ abstract class AppLocalizations {
   /// No description provided for @vousAvezBesoinDe5.
   ///
   /// In en, this message translates to:
-  /// **'You need 5 pieces to create a living room.'**
+  /// **'You need 5 coins to create a lounge.'**
   String get vousAvezBesoinDe5;
 
   /// No description provided for @nomDuSalon.
   ///
   /// In en, this message translates to:
-  /// **'Lounge Name'**
+  /// **'Lounge name'**
   String get nomDuSalon;
 
   /// No description provided for @themeExFunTryhardChill.
   ///
   /// In en, this message translates to:
-  /// **'Theme (ex: Fun, Tryhard, Chill)'**
+  /// **'Theme (e.g. Fun, Tryhard, Chill)'**
   String get themeExFunTryhardChill;
 
   /// No description provided for @description.
@@ -4641,13 +4593,13 @@ abstract class AppLocalizations {
   /// No description provided for @creerLeSalonCout5.
   ///
   /// In en, this message translates to:
-  /// **'Create the Living Room (Cost: 5 pieces)'**
+  /// **'Create Lounge (Cost: 5 coins)'**
   String get creerLeSalonCout5;
 
   /// No description provided for @lancerUnJeuPourLe.
   ///
   /// In en, this message translates to:
-  /// **'Launch a game for the living room'**
+  /// **'Launch a game for the lounge'**
   String get lancerUnJeuPourLe;
 
   /// No description provided for @jouer1.
@@ -4665,7 +4617,7 @@ abstract class AppLocalizations {
   /// No description provided for @cloturerLaPartie.
   ///
   /// In en, this message translates to:
-  /// **'Closing the game'**
+  /// **'Close game'**
   String get cloturerLaPartie;
 
   /// No description provided for @pretS.
@@ -4689,37 +4641,37 @@ abstract class AppLocalizations {
   /// No description provided for @ceSalonAEteFerme.
   ///
   /// In en, this message translates to:
-  /// **'This show has been closed.'**
+  /// **'This lounge has been closed.'**
   String get ceSalonAEteFerme;
 
   /// No description provided for @veuillezCommencerOuAnnulerLa.
   ///
   /// In en, this message translates to:
-  /// **'Please start or cancel the game before leaving the show.'**
+  /// **'Please start or cancel the game before leaving the lounge.'**
   String get veuillezCommencerOuAnnulerLa;
 
   /// No description provided for @salon.
   ///
   /// In en, this message translates to:
-  /// **'Living room'**
+  /// **'Lounge'**
   String get salon;
 
   /// No description provided for @fermerLeSalon.
   ///
   /// In en, this message translates to:
-  /// **'Close the show'**
+  /// **'Close lounge'**
   String get fermerLeSalon;
 
   /// No description provided for @fermerLeSalon1.
   ///
   /// In en, this message translates to:
-  /// **'Close the salon?'**
+  /// **'Close lounge?'**
   String get fermerLeSalon1;
 
   /// No description provided for @leSalonSeraDefinitivementSupprime.
   ///
   /// In en, this message translates to:
-  /// **'The room will be permanently removed for all participants.'**
+  /// **'The lounge will be permanently deleted for all participants.'**
   String get leSalonSeraDefinitivementSupprime;
 
   /// No description provided for @aCreeUnePartieDe.
@@ -4737,13 +4689,13 @@ abstract class AppLocalizations {
   /// No description provided for @cettePartieEstTermineeOu.
   ///
   /// In en, this message translates to:
-  /// **'This game is either over or cancelled.'**
+  /// **'This game is finished or cancelled.'**
   String get cettePartieEstTermineeOu;
 
   /// No description provided for @enPartie.
   ///
   /// In en, this message translates to:
-  /// **'IN PART'**
+  /// **'IN GAME'**
   String get enPartie;
 
   /// No description provided for @partieDeTerminee.
@@ -4767,7 +4719,7 @@ abstract class AppLocalizations {
   /// No description provided for @voirLesStats.
   ///
   /// In en, this message translates to:
-  /// **'See the stats'**
+  /// **'View stats'**
   String get voirLesStats;
 
   /// No description provided for @message.
@@ -4803,7 +4755,7 @@ abstract class AppLocalizations {
   /// No description provided for @veuillezSaisirUnDefiOu.
   ///
   /// In en, this message translates to:
-  /// **'Please enter a challenge or question.'**
+  /// **'Please enter a dare or question.'**
   String get veuillezSaisirUnDefiOu;
 
   /// No description provided for @erreurDeVote.
@@ -4815,13 +4767,13 @@ abstract class AppLocalizations {
   /// No description provided for @terminerLaManche.
   ///
   /// In en, this message translates to:
-  /// **'Finish the round?'**
+  /// **'End this round?'**
   String get terminerLaManche;
 
   /// No description provided for @voulezVousCloturerLaManche.
   ///
   /// In en, this message translates to:
-  /// **'Do you want to close the round immediately? The player with the most XP will become the Admin.'**
+  /// **'Do you want to end round immediately? Player with highest XP becomes Admin.'**
   String get voulezVousCloturerLaManche;
 
   /// No description provided for @terminer.
@@ -4845,25 +4797,25 @@ abstract class AppLocalizations {
   /// No description provided for @finManche.
   ///
   /// In en, this message translates to:
-  /// **'End of the handle'**
+  /// **'Round End'**
   String get finManche;
 
   /// No description provided for @quiVaReleverLeDefi.
   ///
   /// In en, this message translates to:
-  /// **'🎰 Who will take up the challenge?'**
+  /// **'🎰 Who will take the challenge?'**
   String get quiVaReleverLeDefi;
 
   /// No description provided for @faitesTournerLaRoulettePour.
   ///
   /// In en, this message translates to:
-  /// **'Spin the wheel to determine the next player.'**
+  /// **'Spin the wheel to pick the next player.'**
   String get faitesTournerLaRoulettePour;
 
   /// No description provided for @tournerLaRoulette.
   ///
   /// In en, this message translates to:
-  /// **'SPINNING THE WHEEL'**
+  /// **'SPIN THE WHEEL'**
   String get tournerLaRoulette;
 
   /// No description provided for @joueurSelectionne.
@@ -4881,7 +4833,7 @@ abstract class AppLocalizations {
   /// No description provided for @tirerActionOuVerite.
   ///
   /// In en, this message translates to:
-  /// **'🎲 Shooting TRUTH or DARE'**
+  /// **'🎲 Draw TRUTH or DARE'**
   String get tirerActionOuVerite;
 
   /// No description provided for @enAttenteDuTirageDe.
@@ -4911,13 +4863,13 @@ abstract class AppLocalizations {
   /// No description provided for @realisezVotreDefiEnVideo.
   ///
   /// In en, this message translates to:
-  /// **'Complete your challenge on video or microphone!'**
+  /// **'Complete your dare on video or mic!'**
   String get realisezVotreDefiEnVideo;
 
   /// No description provided for @jAiRealiseMonDefi.
   ///
   /// In en, this message translates to:
-  /// **'I have achieved my challenge! ✅'**
+  /// **'I completed my dare! ✅'**
   String get jAiRealiseMonDefi;
 
   /// No description provided for @regardezRealiserLeDefi.
@@ -4947,25 +4899,25 @@ abstract class AppLocalizations {
   /// No description provided for @vosAmisVotentPourEvaluer.
   ///
   /// In en, this message translates to:
-  /// **'Your friends vote to evaluate your performance...'**
+  /// **'Your friends are voting to rate your performance...'**
   String get vosAmisVotentPourEvaluer;
 
   /// No description provided for @votreVoteABienEte.
   ///
   /// In en, this message translates to:
-  /// **'Your vote has been registered!'**
+  /// **'Your vote has been recorded!'**
   String get votreVoteABienEte;
 
   /// No description provided for @ouiValide.
   ///
   /// In en, this message translates to:
-  /// **'YES, validated! 👍'**
+  /// **'YES, Validated! 👍'**
   String get ouiValide;
 
   /// No description provided for @nonRate.
   ///
   /// In en, this message translates to:
-  /// **'NO, failed! 👎'**
+  /// **'NO, Missed! 👎'**
   String get nonRate;
 
   /// No description provided for @xpPour.
@@ -4977,7 +4929,7 @@ abstract class AppLocalizations {
   /// No description provided for @tourSuivant2.
   ///
   /// In en, this message translates to:
-  /// **'Next ➡️ Round'**
+  /// **'Next Turn ➡️'**
   String get tourSuivant2;
 
   /// No description provided for @aGagneCetteManche.
@@ -4995,7 +4947,7 @@ abstract class AppLocalizations {
   /// No description provided for @scoresConservesDeLaSession.
   ///
   /// In en, this message translates to:
-  /// **'RETAINED SCORES FROM THE SESSION:'**
+  /// **'SAVED SESSION SCORES:'**
   String get scoresConservesDeLaSession;
 
   /// No description provided for @pts13.
@@ -5007,25 +4959,25 @@ abstract class AppLocalizations {
   /// No description provided for @adminLancerMaintenantAvecLes.
   ///
   /// In en, this message translates to:
-  /// **'Admin: Launch Now with Players Ready'**
+  /// **'Admin: Start now with ready players'**
   String get adminLancerMaintenantAvecLes;
 
   /// No description provided for @leCompagnonDeVosMeilleures.
   ///
   /// In en, this message translates to:
-  /// **'The companion for your best evenings'**
+  /// **'The companion for your best nights'**
   String get leCompagnonDeVosMeilleures;
 
   /// No description provided for @desactivezLaRecherchePubliquePour.
   ///
   /// In en, this message translates to:
-  /// **'Disable the \'\'Public Search\'\' to be able to play locally.'**
+  /// **'Turn off \'\'Public Search\'\' to play Local.'**
   String get desactivezLaRecherchePubliquePour;
 
   /// No description provided for @desactivezLaVideoOuL.
   ///
   /// In en, this message translates to:
-  /// **'Turn off Video or Audio to play locally.'**
+  /// **'Turn off Video or Audio to play Local.'**
   String get desactivezLaVideoOuL;
 
   /// No description provided for @selectionnezAuMoins3Categories.
@@ -5037,7 +4989,7 @@ abstract class AppLocalizations {
   /// No description provided for @composerLesEquipes.
   ///
   /// In en, this message translates to:
-  /// **'Compose the teams'**
+  /// **'Form teams'**
   String get composerLesEquipes;
 
   /// No description provided for @premiereLigneDuManuscrit.
@@ -5049,31 +5001,31 @@ abstract class AppLocalizations {
   /// No description provided for @laFeuilleEstPlieePour.
   ///
   /// In en, this message translates to:
-  /// **'The sheet is folded to preserve secrecy.'**
+  /// **'The sheet is folded to keep the secret.'**
   String get laFeuilleEstPlieePour;
 
   /// No description provided for @defausserLa1ereCartePasser.
   ///
   /// In en, this message translates to:
-  /// **'Discard the 1st card & Pass'**
+  /// **'Discard 1st card & Pass'**
   String get defausserLa1ereCartePasser;
 
   /// No description provided for @placementInvalideChevauchementOuHors.
   ///
   /// In en, this message translates to:
-  /// **'Invalid placement (overlap or off-grid)!'**
+  /// **'Invalid placement (overlapping or off-grid)!'**
   String get placementInvalideChevauchementOuHors;
 
   /// No description provided for @territoireEnnemiTouchezPourViser.
   ///
   /// In en, this message translates to:
-  /// **'Enemy Territory (Tap to aim, confirm to shoot)'**
+  /// **'Enemy Territory (Tap to aim, confirm to fire)'**
   String get territoireEnnemiTouchezPourViser;
 
   /// No description provided for @votreFlotteTirsEnnemisRecus.
   ///
   /// In en, this message translates to:
-  /// **'Your Fleet (Enemy Shots Received)'**
+  /// **'Your Fleet (Enemy shots received)'**
   String get votreFlotteTirsEnnemisRecus;
 
   /// No description provided for @elimine.
@@ -5085,14 +5037,8 @@ abstract class AppLocalizations {
   /// No description provided for @tapisVide.
   ///
   /// In en, this message translates to:
-  /// **'Empty carpet'**
+  /// **'Empty play area'**
   String get tapisVide;
-
-  /// No description provided for @ecrireAu.
-  ///
-  /// In en, this message translates to:
-  /// **'Write to \'{0}\'...'**
-  String get ecrireAu;
 
   /// No description provided for @reflechit.
   ///
@@ -5103,19 +5049,19 @@ abstract class AppLocalizations {
   /// No description provided for @faceAFaceCoteA.
   ///
   /// In en, this message translates to:
-  /// **'Face-to-face (side-by-side)'**
+  /// **'Head-to-head (side by side)'**
   String get faceAFaceCoteA;
 
   /// No description provided for @totalAdversaire.
   ///
   /// In en, this message translates to:
-  /// **'TOTAL OPPONENT'**
+  /// **'OPPONENT TOTAL'**
   String get totalAdversaire;
 
   /// No description provided for @prendreLAtoutOuPasser.
   ///
   /// In en, this message translates to:
-  /// **'TAKE THE TRUMP CARD OR PASS:'**
+  /// **'TAKE TRUMP OR PASS:'**
   String get prendreLAtoutOuPasser;
 
   /// No description provided for @combinaisonsDe.
@@ -5145,13 +5091,13 @@ abstract class AppLocalizations {
   /// No description provided for @difficulteDesQuestions.
   ///
   /// In en, this message translates to:
-  /// **'Difficulty of the questions'**
+  /// **'Question difficulty'**
   String get difficulteDesQuestions;
 
   /// No description provided for @envoyerLeDefi.
   ///
   /// In en, this message translates to:
-  /// **'Send Challenge 🚀'**
+  /// **'Send dare 🚀'**
   String get envoyerLeDefi;
 
   /// No description provided for @rulesTitle.
@@ -5169,152 +5115,132 @@ abstract class AppLocalizations {
   /// No description provided for @skyjoRoundEnderNotice.
   ///
   /// In en, this message translates to:
-  /// **'{roundEnderName} finished the round!'**
-  String skyjoRoundEnderNotice(Object roundEnderName);
+  /// **'{name} revealed all their cards first.'**
+  String skyjoRoundEnderNotice(Object name, Object roundEnderName);
 
   /// No description provided for @skyjoRoundScoreNotice.
   ///
   /// In en, this message translates to:
-  /// **'{tScore} pts ({rScore} pts this round)'**
-  String skyjoRoundScoreNotice(Object rScore, Object tScore);
+  /// **'+{roundScore} this round  •  Total: {totalScore} pts'**
+  String skyjoRoundScoreNotice(
+    Object roundScore,
+    Object totalScore,
+    Object rScore,
+    Object tScore,
+  );
 
   /// No description provided for @skyjoReplaceWithDrawn.
   ///
   /// In en, this message translates to:
-  /// **'Tap a card on your grid to replace it with the drawn card'**
-  String get skyjoReplaceWithDrawn;
+  /// **'Tap a card to REPLACE it with {card}.'**
+  String skyjoReplaceWithDrawn(Object card);
 
   /// No description provided for @skyjoTapHiddenToReveal.
   ///
   /// In en, this message translates to:
-  /// **'Tap a hidden card on your grid to reveal it'**
+  /// **'Tap a FACE-DOWN card to REVEAL it.'**
   String get skyjoTapHiddenToReveal;
 
   /// No description provided for @skyjoChooseActionForDrawn.
   ///
   /// In en, this message translates to:
-  /// **'Choose: Keep the card or Throw it away'**
-  String get skyjoChooseActionForDrawn;
+  /// **'Choose action for {card}:'**
+  String skyjoChooseActionForDrawn(Object card);
 
   /// No description provided for @skyjoReplaceWithDiscard.
   ///
   /// In en, this message translates to:
-  /// **'Tap a card on your grid to replace it with the discard pile'**
-  String get skyjoReplaceWithDiscard;
+  /// **'Tap a card to REPLACE it with discard ({card}).'**
+  String skyjoReplaceWithDiscard(Object card);
 
   /// No description provided for @skyjoCardsRevealedCount.
   ///
   /// In en, this message translates to:
-  /// **'{revealedCount} / 2 cards revealed'**
-  String skyjoCardsRevealedCount(Object revealedCount);
+  /// **'{count} / 2 cards flipped'**
+  String skyjoCardsRevealedCount(Object count, Object revealedCount);
 
   /// No description provided for @ceTurnOfPlayer.
   ///
   /// In en, this message translates to:
-  /// **'Tour de {currentPlayerName}'**
-  String ceTurnOfPlayer(Object currentPlayerName);
+  /// **'{name}\'\'S TURN'**
+  String ceTurnOfPlayer(Object name, Object currentPlayerName);
 
   /// No description provided for @ceStepOfTotal.
   ///
   /// In en, this message translates to:
-  /// **'Step {currentRound} / {totalSteps}'**
-  String ceStepOfTotal(Object currentRound, Object totalSteps);
+  /// **'Step {step} / {total}'**
+  String ceStepOfTotal(
+    Object step,
+    Object total,
+    Object currentRound,
+    Object totalSteps,
+  );
 
   /// No description provided for @ceVisibleSnippetOf.
   ///
   /// In en, this message translates to:
-  /// **'Final words from {previousAuthorName} :'**
-  String ceVisibleSnippetOf(Object previousAuthorName);
+  /// **'Visible snippet of {name}:'**
+  String ceVisibleSnippetOf(Object name, Object previousAuthorName);
 
   /// No description provided for @cePlayerWriting.
   ///
   /// In en, this message translates to:
-  /// **'{currentPlayerName} is writing...'**
-  String cePlayerWriting(Object currentPlayerName);
+  /// **'{name} is writing...'**
+  String cePlayerWriting(Object name, Object currentPlayerName);
 
   /// No description provided for @ceStoryNumber.
   ///
   /// In en, this message translates to:
-  /// **'STORY #{paperIndex}'**
-  String ceStoryNumber(Object paperIndex);
+  /// **'STORY #{index}'**
+  String ceStoryNumber(Object index, Object paperIndex);
 
   /// No description provided for @mbTurnOf.
   ///
   /// In en, this message translates to:
-  /// **'Tour de {name}'**
+  /// **'{name}\'\'S TURN'**
   String mbTurnOf(Object name);
 
   /// No description provided for @mbHandCount.
   ///
   /// In en, this message translates to:
-  /// **'{count} cards in hand'**
+  /// **'Hand: {count} cards'**
   String mbHandCount(Object count);
 
   /// No description provided for @mbCardsInHand.
   ///
   /// In en, this message translates to:
-  /// **'Your cards in hand'**
-  String get mbCardsInHand;
-
-  /// No description provided for @dobbleAllCardsFound.
-  ///
-  /// In en, this message translates to:
-  /// **'All the cards have been found!'**
-  String get dobbleAllCardsFound;
+  /// **'Cards in hand ({count})'**
+  String mbCardsInHand(Object count);
 
   /// No description provided for @dobbleDealingCards.
   ///
   /// In en, this message translates to:
-  /// **'Distribution of cards...'**
+  /// **'Dealing cards...'**
   String get dobbleDealingCards;
 
   /// No description provided for @dobbleCenterCard.
   ///
   /// In en, this message translates to:
-  /// **'MAP OF THE CENTRE'**
+  /// **'CENTER CARD'**
   String get dobbleCenterCard;
-
-  /// No description provided for @dobbleDeckCards.
-  ///
-  /// In en, this message translates to:
-  /// **'DRAW ({count} cards)'**
-  String dobbleDeckCards(Object count);
-
-  /// No description provided for @dobbleTapSameSymbol.
-  ///
-  /// In en, this message translates to:
-  /// **'Find the identical symbol!'**
-  String get dobbleTapSameSymbol;
 
   /// No description provided for @dobbleMyCardsCount.
   ///
   /// In en, this message translates to:
-  /// **'My cards: {count}'**
+  /// **'My Cards: {count}'**
   String dobbleMyCardsCount(Object count);
 
   /// No description provided for @dobbleBlocked.
   ///
   /// In en, this message translates to:
-  /// **'BLOCKED!'**
+  /// **'LOCKED!'**
   String get dobbleBlocked;
 
   /// No description provided for @dobbleTooManyErrors.
   ///
   /// In en, this message translates to:
-  /// **'Too many mistakes in a row! Be patient...'**
+  /// **'Too many rapid mistakes.'**
   String get dobbleTooManyErrors;
-
-  /// No description provided for @dobblePenaltyWait.
-  ///
-  /// In en, this message translates to:
-  /// **'Wait for the penalty!'**
-  String get dobblePenaltyWait;
-
-  /// No description provided for @dobbleWrongSymbolWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Bad symbol! Beware of blockage.'**
-  String get dobbleWrongSymbolWarning;
 
   /// No description provided for @dobbleFoundSymbol.
   ///
@@ -5325,55 +5251,54 @@ abstract class AppLocalizations {
   /// No description provided for @dobbleSymbolWas.
   ///
   /// In en, this message translates to:
-  /// **'The common symbol was:'**
+  /// **'The symbol was:'**
   String get dobbleSymbolWas;
 
   /// No description provided for @pokerPot.
   ///
   /// In en, this message translates to:
-  /// **'Pot: {pot} \\\$'**
-  String pokerPot(Object pot);
+  /// **'Pot: {amount} \\\$'**
+  String pokerPot(Object amount, Object pot);
 
   /// No description provided for @pokerRaiseAlert.
   ///
   /// In en, this message translates to:
-  /// **'{previewPlayerName} prepares a {previewAmount} stimulus \\\$'**
-  String pokerRaiseAlert(Object previewAmount, Object previewPlayerName);
+  /// **'⚠️ {name} is preparing a raise to {amount} \\\$!'**
+  String pokerRaiseAlert(
+    Object name,
+    Object amount,
+    Object previewAmount,
+    Object previewPlayerName,
+  );
 
   /// No description provided for @pokerCall.
   ///
   /// In en, this message translates to:
-  /// **'Follow ({callAmount})'**
-  String pokerCall(Object callAmount);
-
-  /// No description provided for @pokerRaiseTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Raise to {amount} \\\$'**
-  String pokerRaiseTo(Object amount);
+  /// **'Call ({amount})'**
+  String pokerCall(Object amount, Object callAmount);
 
   /// No description provided for @unoYouMustDraw.
   ///
   /// In en, this message translates to:
-  /// **'You have to draw {pendingDraw} cards!'**
-  String unoYouMustDraw(Object pendingDraw);
+  /// **'You must draw {count} cards!'**
+  String unoYouMustDraw(Object count, Object pendingDraw);
 
   /// No description provided for @unoMustDraw.
   ///
   /// In en, this message translates to:
-  /// **'{name} must draw {pendingDraw} cards!'**
-  String unoMustDraw(Object name, Object pendingDraw);
+  /// **'Must draw {count} cards!'**
+  String unoMustDraw(Object count, Object name, Object pendingDraw);
 
   /// No description provided for @unoDrawCountCards.
   ///
   /// In en, this message translates to:
-  /// **'Draw {pendingDraw} cards'**
-  String unoDrawCountCards(Object pendingDraw);
+  /// **'Draw {count} cards'**
+  String unoDrawCountCards(Object count, Object pendingDraw);
 
   /// No description provided for @codenamesMissionEnd.
   ///
   /// In en, this message translates to:
-  /// **'End of the mission!'**
+  /// **'Mission complete!'**
   String get codenamesMissionEnd;
 
   /// No description provided for @codenamesRedTeam.
@@ -5385,133 +5310,109 @@ abstract class AppLocalizations {
   /// No description provided for @codenamesBlueTeam.
   ///
   /// In en, this message translates to:
-  /// **'Team Blue'**
+  /// **'Blue Team'**
   String get codenamesBlueTeam;
-
-  /// No description provided for @codenamesSpectator.
-  ///
-  /// In en, this message translates to:
-  /// **'Spectator'**
-  String get codenamesSpectator;
-
-  /// No description provided for @codenamesMasterSpy.
-  ///
-  /// In en, this message translates to:
-  /// **'Spymaster'**
-  String get codenamesMasterSpy;
-
-  /// No description provided for @codenamesAgent.
-  ///
-  /// In en, this message translates to:
-  /// **'Agent'**
-  String get codenamesAgent;
 
   /// No description provided for @codenamesTeamTurn.
   ///
   /// In en, this message translates to:
-  /// **'Team Tour {team}'**
+  /// **'It\'\'s the turn of the team: {team}'**
   String codenamesTeamTurn(Object team);
-
-  /// No description provided for @codenamesYouAre.
-  ///
-  /// In en, this message translates to:
-  /// **'You are: '**
-  String get codenamesYouAre;
 
   /// No description provided for @codenamesMasterSpyView.
   ///
   /// In en, this message translates to:
-  /// **'Spymaster View (Secret Key Card)'**
+  /// **'Spymaster View (Key Card)'**
   String get codenamesMasterSpyView;
 
   /// No description provided for @codenamesClueLabel.
   ///
   /// In en, this message translates to:
-  /// **'Clue (one word)'**
+  /// **'Your clue (one word)'**
   String get codenamesClueLabel;
 
   /// No description provided for @codenamesWordCountLabel.
   ///
   /// In en, this message translates to:
-  /// **'Number of targeted words'**
+  /// **'Number of words'**
   String get codenamesWordCountLabel;
 
   /// No description provided for @codenamesGiveClue.
   ///
   /// In en, this message translates to:
-  /// **'Give the hint'**
+  /// **'Give clue'**
   String get codenamesGiveClue;
 
   /// No description provided for @codenamesClueGiven.
   ///
   /// In en, this message translates to:
-  /// **'Clue given: \'{clue}\' for {count} word(s)'**
+  /// **'You gave the clue: \'\'{clue} {count}\'\''**
   String codenamesClueGiven(Object clue, Object count);
 
   /// No description provided for @codenamesAgentView.
   ///
   /// In en, this message translates to:
-  /// **'Field Workers View'**
+  /// **'Agent View'**
   String get codenamesAgentView;
 
   /// No description provided for @codenamesClueFromSpy.
   ///
   /// In en, this message translates to:
-  /// **'Spymaster\'\'s Clue:'**
-  String get codenamesClueFromSpy;
+  /// **'Clue from {spy}:'**
+  String codenamesClueFromSpy(Object spy);
 
   /// No description provided for @codenamesGuessesLeft.
   ///
   /// In en, this message translates to:
-  /// **'Remaining Trials: {count}'**
+  /// **'Attempts left: {count}'**
   String codenamesGuessesLeft(Object count);
 
   /// No description provided for @codenamesPassTurn.
   ///
   /// In en, this message translates to:
-  /// **'Skip your turn'**
+  /// **'End turn'**
   String get codenamesPassTurn;
 
   /// No description provided for @codenamesWaitingForClue.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the Spymaster\'\'s clue...'**
-  String get codenamesWaitingForClue;
+  /// **'Waiting for the {team} Spymaster\'\'s clue...'**
+  String codenamesWaitingForClue(Object team);
 
   /// No description provided for @timesUpTeamAScore.
   ///
   /// In en, this message translates to:
-  /// **'{teamA} : {scoreA} pts'**
-  String timesUpTeamAScore(Object scoreA, Object teamA);
+  /// **'Team A: {score}'**
+  String timesUpTeamAScore(Object score, Object scoreA, Object teamA);
 
   /// No description provided for @timesUpTeamBScore.
   ///
   /// In en, this message translates to:
-  /// **'{teamB} : {scoreB} pts'**
-  String timesUpTeamBScore(Object scoreB, Object teamB);
+  /// **'Team B: {score}'**
+  String timesUpTeamBScore(Object score, Object scoreB, Object teamB);
 
   /// No description provided for @timesUpYouAreInTeam.
   ///
   /// In en, this message translates to:
-  /// **'You are in the team: {team}'**
+  /// **'You are in {team}'**
   String timesUpYouAreInTeam(Object team);
 
   /// No description provided for @timesUpRoundMode.
   ///
   /// In en, this message translates to:
-  /// **'Round {round} : {mode}'**
-  String timesUpRoundMode(Object mode, Object round);
+  /// **'Round {round}: {mode}'**
+  String timesUpRoundMode(Object round, Object mode);
 
   /// No description provided for @timesUpYourTurnToMakeGuess.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s your turn to make people guess!'**
+  /// **'It\'\'s YOUR turn to give clues!'**
   String get timesUpYourTurnToMakeGuess;
 
   /// No description provided for @timesUpRoundEnd.
   ///
   /// In en, this message translates to:
-  /// **'END OF THE ROUND!'**
+  /// **'END OF ROUND!'**
   String get timesUpRoundEnd;
 
   /// No description provided for @timesUpFound.
@@ -5523,13 +5424,13 @@ abstract class AppLocalizations {
   /// No description provided for @timesUpEndMyTurn.
   ///
   /// In en, this message translates to:
-  /// **'End of my turn'**
+  /// **'End my turn'**
   String get timesUpEndMyTurn;
 
   /// No description provided for @timesUpTurnOf.
   ///
   /// In en, this message translates to:
-  /// **'Tour of:'**
+  /// **'It is the turn of'**
   String get timesUpTurnOf;
 
   /// No description provided for @timesUpSomeone.
@@ -5547,20 +5448,20 @@ abstract class AppLocalizations {
   /// No description provided for @timesUpCardsLeft.
   ///
   /// In en, this message translates to:
-  /// **'Cards Remaining in the Deck'**
-  String get timesUpCardsLeft;
+  /// **'Cards remaining: {count}'**
+  String timesUpCardsLeft(Object count);
 
   /// No description provided for @timesUpForceNextPlayer.
   ///
   /// In en, this message translates to:
-  /// **'Next player'**
+  /// **'Force next player (Host)'**
   String get timesUpForceNextPlayer;
 
   /// No description provided for @timesUpGameOverReason.
   ///
   /// In en, this message translates to:
-  /// **'All rounds are over!'**
-  String get timesUpGameOverReason;
+  /// **'End of 3 rounds! Team A: {scoreA} pts | Team B: {scoreB} pts'**
+  String timesUpGameOverReason(Object scoreA, Object scoreB);
 
   /// No description provided for @timesUpTeamA.
   ///
@@ -5577,32 +5478,32 @@ abstract class AppLocalizations {
   /// No description provided for @timesUpDraw.
   ///
   /// In en, this message translates to:
-  /// **'Equality!'**
+  /// **'Tie'**
   String get timesUpDraw;
 
   /// No description provided for @timesUpWaitingForWords.
   ///
   /// In en, this message translates to:
-  /// **'Words submitted! Waiting for others...'**
+  /// **'Waiting for all players to submit their words...'**
   String get timesUpWaitingForWords;
 
   /// No description provided for @timesUpAddWordsCount.
   ///
   /// In en, this message translates to:
-  /// **'Add {count} words to guess'**
+  /// **'Add {count} words or phrases'**
   String timesUpAddWordsCount(Object count);
 
   /// No description provided for @timesUpWordsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Characters, objects, celebrities...'**
+  /// **'(people, objects, movies, places...)'**
   String get timesUpWordsSubtitle;
 
   /// No description provided for @timesUpWordInputLabel.
   ///
   /// In en, this message translates to:
-  /// **'Word or phrase'**
-  String get timesUpWordInputLabel;
+  /// **'Word to guess ({current}/{target})'**
+  String timesUpWordInputLabel(Object current, Object target);
 
   /// No description provided for @timesUpAddWordTooltip.
   ///
@@ -5619,8 +5520,8 @@ abstract class AppLocalizations {
   /// No description provided for @timesUpSubmitWords.
   ///
   /// In en, this message translates to:
-  /// **'Validate my words'**
-  String get timesUpSubmitWords;
+  /// **'Submit my {count} words'**
+  String timesUpSubmitWords(Object count);
 
   /// No description provided for @timesUpModeFree.
   ///
@@ -5631,25 +5532,25 @@ abstract class AppLocalizations {
   /// No description provided for @timesUpModeOneWord.
   ///
   /// In en, this message translates to:
-  /// **'One word'**
+  /// **'One word only'**
   String get timesUpModeOneWord;
 
   /// No description provided for @timesUpModeMime.
   ///
   /// In en, this message translates to:
-  /// **'Mime & Onomatopoeia'**
+  /// **'Mime'**
   String get timesUpModeMime;
 
   /// No description provided for @dtGuessedWords.
   ///
   /// In en, this message translates to:
-  /// **'{count} word(s) found!'**
-  String dtGuessedWords(Object count);
+  /// **'{name} found {count} word(s)!'**
+  String dtGuessedWords(Object name, Object count);
 
   /// No description provided for @dtMakeGuessWordTo.
   ///
   /// In en, this message translates to:
-  /// **'Let {name} guess the word!'**
+  /// **'Make {name} guess this word:'**
   String dtMakeGuessWordTo(Object name);
 
   /// No description provided for @undercoverEliminatePlayer.
@@ -5667,31 +5568,25 @@ abstract class AppLocalizations {
   /// No description provided for @petitBacRound.
   ///
   /// In en, this message translates to:
-  /// **'Sleeve {round}'**
+  /// **'Round {round}'**
   String petitBacRound(Object round);
 
   /// No description provided for @petitBacChooseCategories.
   ///
   /// In en, this message translates to:
-  /// **'Choose the categories for this tour'**
+  /// **'Choose categories:'**
   String get petitBacChooseCategories;
 
   /// No description provided for @petitBacAddCategory.
   ///
   /// In en, this message translates to:
-  /// **'Add a custom category'**
+  /// **'Add a category'**
   String get petitBacAddCategory;
-
-  /// No description provided for @petitBacMinOneCategory.
-  ///
-  /// In en, this message translates to:
-  /// **'You need at least one category!'**
-  String get petitBacMinOneCategory;
 
   /// No description provided for @petitBacValidateCategories.
   ///
   /// In en, this message translates to:
-  /// **'Validate categories'**
+  /// **'Confirm categories'**
   String get petitBacValidateCategories;
 
   /// No description provided for @petitBacLetter.
@@ -5699,12 +5594,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Letter: {letter}'**
   String petitBacLetter(Object letter);
-
-  /// No description provided for @petitBacWaitingForBell.
-  ///
-  /// In en, this message translates to:
-  /// **'Sheet returned! Waiting for the bell...'**
-  String get petitBacWaitingForBell;
 
   /// No description provided for @petitBacIFinished.
   ///
@@ -5715,50 +5604,32 @@ abstract class AppLocalizations {
   /// No description provided for @petitBacCorrection.
   ///
   /// In en, this message translates to:
-  /// **'Sleeve Correction'**
+  /// **'SCORING'**
   String get petitBacCorrection;
-
-  /// No description provided for @petitBacGameOverReason.
-  ///
-  /// In en, this message translates to:
-  /// **'Little Bac game over!'**
-  String get petitBacGameOverReason;
 
   /// No description provided for @presidentGivesTo.
   ///
   /// In en, this message translates to:
-  /// **'{from} gives {to} :'**
+  /// **'{from} gives to {to}:'**
   String presidentGivesTo(Object from, Object to);
 
   /// No description provided for @presidentPlayCards.
   ///
   /// In en, this message translates to:
-  /// **'Pose ({count})'**
+  /// **'PLAY ({count})'**
   String presidentPlayCards(Object count);
 
   /// No description provided for @actionPendingMsg.
   ///
   /// In en, this message translates to:
-  /// **'Action in progress...'**
+  /// **'Your action is being recorded...'**
   String get actionPendingMsg;
-
-  /// No description provided for @monAnimalPrefere.
-  ///
-  /// In en, this message translates to:
-  /// **'My favorite animal'**
-  String get monAnimalPrefere;
 
   /// No description provided for @unJoueurEstDesigneComme.
   ///
   /// In en, this message translates to:
   /// **'A player is designated as a \'\'target\'\'. The other players anonymously answer a question about them. The target chooses their preferred answer, and the author of that answer earns one point.'**
   String get unJoueurEstDesigneComme;
-
-  /// No description provided for @uneSituationEstPresenteeTous.
-  ///
-  /// In en, this message translates to:
-  /// **': \r\n        \"A situation is presented. All players vote for the person most likely to do this thing. The player who receives the most votes earns one point (a dubious honor!).\",    '**
-  String get uneSituationEstPresenteeTous;
 
   /// No description provided for @modeClassiqueUneQuestionEst.
   ///
@@ -5946,16 +5817,10 @@ abstract class AppLocalizations {
   /// **'His objective is to defeat the Werewolves until he receives a new role. On the first night, he designates a testator who will bequeath his role to him upon his death. The Heir only recovers the powers not consumed by his testator (Witch\'\'s potion, the Dictator\'\'s seizure of power, etc.), except for the Hunter and the Gravedigger. He does not recover the infection (Black Wolf) or the contamination (Sick Rat) from his testator. He keeps the infection or contamination he had at the base. If he inherits the powers of a Werewolf, the other wolves are informed that he is joining the pack. If he inherits the powers of a Dictator who dies on the night of his coup d\'\'état, it will be up to the Heir to assume the consequences and carry out the coup d\'\'état as soon as he wakes up.'**
   String get sonObjectifEstDeVaincre10;
 
-  /// No description provided for @touche.
-  ///
-  /// In en, this message translates to:
-  /// **'Touchdown'**
-  String get touche;
-
   /// No description provided for @unVillageoisSansPouvoirSpecial.
   ///
   /// In en, this message translates to:
-  /// **'A villager with no special powers.'**
+  /// **'A villager with no special power.'**
   String get unVillageoisSansPouvoirSpecial;
 
   /// No description provided for @devoreUnVillageoisLaNuit.
@@ -5967,7 +5832,7 @@ abstract class AppLocalizations {
   /// No description provided for @decouvreUnRoleParNuit.
   ///
   /// In en, this message translates to:
-  /// **'Discover one role per night.'**
+  /// **'Discovers one role per night.'**
   String get decouvreUnRoleParNuit;
 
   /// No description provided for @sorciere.
@@ -5985,13 +5850,13 @@ abstract class AppLocalizations {
   /// No description provided for @espionneLesLoupsLaNuit.
   ///
   /// In en, this message translates to:
-  /// **'Spy on the wolves at night.'**
+  /// **'Spies on the wolves at night.'**
   String get espionneLesLoupsLaNuit;
 
   /// No description provided for @creeDeuxAmoureuxLaPremiere.
   ///
   /// In en, this message translates to:
-  /// **'Create two lovers on the first night.'**
+  /// **'Creates two lovers on the first night.'**
   String get creeDeuxAmoureuxLaPremiere;
 
   /// No description provided for @protegeUnJoueurParNuit.
@@ -6003,25 +5868,25 @@ abstract class AppLocalizations {
   /// No description provided for @sonVoteCompteDoubleDesigne.
   ///
   /// In en, this message translates to:
-  /// **'His vote counts double. Names his successor.'**
+  /// **'Vote counts double. Names successor.'**
   String get sonVoteCompteDoubleDesigne;
 
   /// No description provided for @peutTransformerSaVictimeEn.
   ///
   /// In en, this message translates to:
-  /// **'Can turn its victim into an infected werewolf once.'**
+  /// **'Can turn their victim into an infected werewolf once.'**
   String get peutTransformerSaVictimeEn;
 
   /// No description provided for @doitPrononcerUnMotSecret.
   ///
   /// In en, this message translates to:
-  /// **'Must say a secret word every day.'**
+  /// **'Must speak a secret word every day.'**
   String get doitPrononcerUnMotSecret;
 
   /// No description provided for @objectifEtreSeulSurvivantDevore.
   ///
   /// In en, this message translates to:
-  /// **'Objective to be the only survivor. Devours every other night.'**
+  /// **'Goal: be sole survivor. Devours every other night.'**
   String get objectifEtreSeulSurvivantDevore;
 
   /// No description provided for @gagneSeulSIlTue.
@@ -6033,7 +5898,7 @@ abstract class AppLocalizations {
   /// No description provided for @contamineTousLesJoueursPour.
   ///
   /// In en, this message translates to:
-  /// **'Contaminates all players to win.'**
+  /// **'Infect all players to win.'**
   String get contamineTousLesJoueursPour;
 
   /// No description provided for @connaitLIssueDuVote.
@@ -6054,22 +5919,142 @@ abstract class AppLocalizations {
   /// **'Communicates with the dead at night.'**
   String get communiqueAvecLesMortsLa;
 
-  /// No description provided for @aRelanceLesDes3.
+  /// No description provided for @reveleDeuxCampsASa.
   ///
   /// In en, this message translates to:
-  /// **'\'{\'pName\'}\' rerolled the dice (\'{\'3rollsLeft1\'}\'/3)!'**
-  String get aRelanceLesDes3;
+  /// **'Reveals two factions upon death.'**
+  String get reveleDeuxCampsASa;
+
+  /// No description provided for @prendLePouvoirDuVote.
+  ///
+  /// In en, this message translates to:
+  /// **'Seizes vote power once.'**
+  String get prendLePouvoirDuVote;
+
+  /// No description provided for @protegeeParLeChasseur.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected by the Hunter.'**
+  String get protegeeParLeChasseur;
+
+  /// No description provided for @placeDesTonneauxQuiExplosent.
+  ///
+  /// In en, this message translates to:
+  /// **'Place of barrels that explode if he is alive in the morning.'**
+  String get placeDesTonneauxQuiExplosent;
+
+  /// No description provided for @heritier.
+  ///
+  /// In en, this message translates to:
+  /// **'Heir'**
+  String get heritier;
+
+  /// No description provided for @heriteDuRoleDeSon.
+  ///
+  /// In en, this message translates to:
+  /// **'Inherits testator\'\'s role upon their death.'**
+  String get heriteDuRoleDeSon;
+
+  /// No description provided for @themeIa.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Theme'**
+  String get themeIa;
+
+  /// No description provided for @generalEtVarie.
+  ///
+  /// In en, this message translates to:
+  /// **'General & Varied'**
+  String get generalEtVarie;
+
+  /// No description provided for @abandonTousLesJoueursDeconnectes.
+  ///
+  /// In en, this message translates to:
+  /// **'Abandon (all players disconnected)'**
+  String get abandonTousLesJoueursDeconnectes;
+
+  /// No description provided for @tousLesJoueursSeSont.
+  ///
+  /// In en, this message translates to:
+  /// **'All players disconnected'**
+  String get tousLesJoueursSeSont;
+
+  /// No description provided for @nAPasJoueA.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerName} didn\'\'t play in time. The computer played for him ( {actionDetails} ).'**
+  String nAPasJoueA(Object actionDetails, Object playerName);
+
+  /// No description provided for @nAPasJoueA1.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ {playerName} didn\'\'t play in time. The computer played for them at random.'**
+  String nAPasJoueA1(Object playerName);
+
+  /// No description provided for @joueur.
+  ///
+  /// In en, this message translates to:
+  /// **'Player'**
+  String get joueur;
+
+  /// No description provided for @tempsEcoule1.
+  ///
+  /// In en, this message translates to:
+  /// **'(Time elapsed)'**
+  String get tempsEcoule1;
+
+  /// No description provided for @tempsEcoule2.
+  ///
+  /// In en, this message translates to:
+  /// **'Time elapsed'**
+  String get tempsEcoule2;
+
+  /// No description provided for @aToucheUneCibleIl.
+  ///
+  /// In en, this message translates to:
+  /// **'🎯 {shooterDataname} hit a target! Playing again.'**
+  String aToucheUneCibleIl(Object shooterDataname);
+
+  /// No description provided for @aTireDansLEau.
+  ///
+  /// In en, this message translates to:
+  /// **'🌊 {shooterDataname} shot into the water. Turn of {opponentDataname}.'**
+  String aTireDansLEau(Object opponentDataname, Object shooterDataname);
+
+  /// No description provided for @unJoueur.
+  ///
+  /// In en, this message translates to:
+  /// **'A player'**
+  String get unJoueur;
+
+  /// No description provided for @inactif3ToursSansReponse.
+  ///
+  /// In en, this message translates to:
+  /// **'inactive (3 turns no response)'**
+  String get inactif3ToursSansReponse;
+
+  /// No description provided for @leJugeNAPas.
+  ///
+  /// In en, this message translates to:
+  /// **'The judge didn\'\'t choose a winner in time. No points assigned.'**
+  String get leJugeNAPas;
+
+  /// No description provided for @aLanceLesDes.
+  ///
+  /// In en, this message translates to:
+  /// **'{pName} rolled the dice!'**
+  String aLanceLesDes(Object pName);
 
   /// No description provided for @aGardeLeDeDe.
   ///
   /// In en, this message translates to:
-  /// **'{pName} kept the value die {dieVal} (#{index1}die) 🔒'**
+  /// **'{pName} kept die value {dieVal} (die #{index1}) 🔒'**
   String aGardeLeDeDe(Object dieVal, Object index1, Object pName);
 
   /// No description provided for @aDebloqueLeDe.
   ///
   /// In en, this message translates to:
-  /// **'{pName} unlocked the die #{index1}'**
+  /// **'{pName} unlocked die #{index1}'**
   String aDebloqueLeDe(Object index1, Object pName);
 
   /// No description provided for @aGagne.
@@ -6087,19 +6072,19 @@ abstract class AppLocalizations {
   /// No description provided for @leRatMaladeEstLe.
   ///
   /// In en, this message translates to:
-  /// **'The Sick Rat is the only survivor! He poisoned everyone!'**
+  /// **'Sick Rat is the only survivor! Poisoned everyone!'**
   String get leRatMaladeEstLe;
 
   /// No description provided for @tousLesAutresSurvivantsSont.
   ///
   /// In en, this message translates to:
-  /// **'All the other survivors are contaminated by the Sick Rat. He won!'**
+  /// **'All survivors infected by Sick Rat. He won!'**
   String get tousLesAutresSurvivantsSont;
 
   /// No description provided for @leRoleDeEst.
   ///
   /// In en, this message translates to:
-  /// **'The role of {targetName} is: {targetRole}.'**
+  /// **'{targetName}\'\'s role is: {targetRole}.'**
   String leRoleDeEst(Object targetName, Object targetRole);
 
   /// No description provided for @leDictateur.
@@ -6111,13 +6096,13 @@ abstract class AppLocalizations {
   /// No description provided for @vousEtesAmoureuxDe.
   ///
   /// In en, this message translates to:
-  /// **'You are in love with {lover2Name} !'**
+  /// **'You are in love with {lover2Name}!'**
   String vousEtesAmoureuxDe(Object lover2Name);
 
   /// No description provided for @vousEtesAmoureuxDe1.
   ///
   /// In en, this message translates to:
-  /// **'You are in love with {lover1Name} !'**
+  /// **'You are in love with {lover1Name}!'**
   String vousEtesAmoureuxDe1(Object lover1Name);
 
   /// No description provided for @pioche3.
@@ -6125,12 +6110,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pickaxe'**
   String get pioche3;
-
-  /// No description provided for @wordcivilParts0TrimWordundercover.
-  ///
-  /// In en, this message translates to:
-  /// **'); \r\n      wordCivil = parts[0].trim(); \r\n      wordUndercover = parts[1].trim(); \r\n    \'\'\'}\'\'\' else \'\'\'{\'\'\' \r\n      Anti-duplicate security: if the'**
-  String get wordcivilParts0TrimWordundercover;
 
   /// No description provided for @vousNAvezPasDe.
   ///
@@ -6153,19 +6132,19 @@ abstract class AppLocalizations {
   /// No description provided for @finDesManchesVictoireDe.
   ///
   /// In en, this message translates to:
-  /// **'End of the rounds! Victory of {winnerName} !'**
+  /// **'End of rounds! Victory for {winnerName}!'**
   String finDesManchesVictoireDe(Object winnerName);
 
   /// No description provided for @scoreCibleAtteint.
   ///
   /// In en, this message translates to:
-  /// **'Target score achieved!'**
+  /// **'Target score reached!'**
   String get scoreCibleAtteint;
 
   /// No description provided for @laPartie2v2Commence.
   ///
   /// In en, this message translates to:
-  /// **'The 2v2 game begins!'**
+  /// **'2v2 game begins!'**
   String get laPartie2v2Commence;
 
   /// No description provided for @laPartieCommence1.
@@ -6183,13 +6162,13 @@ abstract class AppLocalizations {
   /// No description provided for @chaqueJoueurADevineUne.
   ///
   /// In en, this message translates to:
-  /// **'Each player guessed once!'**
+  /// **'Every player guessed once!'**
   String get chaqueJoueurADevineUne;
 
   /// No description provided for @toutLeMondeEstPasse.
   ///
   /// In en, this message translates to:
-  /// **'Everyone has passed!'**
+  /// **'Everyone passed!'**
   String get toutLeMondeEstPasse;
 
   /// No description provided for @verite1.
@@ -6203,12 +6182,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{playerswinnerIdnameJoueur} has the most XP ({maxXp} XP) and becomes an Admin!'**
   String aLePlusDXp(Object maxXp, Object playerswinnerIdnameJoueur);
-
-  /// No description provided for @finDeMancheBoutonAdmin.
-  ///
-  /// In en, this message translates to:
-  /// **', \r\n          ]), \r\n        \'\'\'}\'\'\'); \r\n      \'\'\'}\'\'\'\'}\'\'\'); \r\n  \'\'\'}\'\'\' \r\n\r\n  End of Sleeve (admin button)\r\n  Future<void> aoVEndRound(String gameCode, String playerId) async \'\'\'{\'\'\' \r\n    await _db.runTransaction((transaction) async\'\'\'{\'\'\' \r\n      final gameRef = _db.collection(\'\'games\'\').doc(gameCode); \r\n      final snap = await transaction.get(gameRef); \r\n      if (!snap.exists) return; \r\n\r\n      final gameData = snap.data() as Map<String, dynamic>; \r\n      final players = Map<String, dynamic>.from(gameData[\'\'players\'\'] ?? \'{}\'); \r\n\r\n      Determine the winner (more XP)\r\n      String winnerId = \'\'; \r\n      int maxXp = -1; \r\n      players.forEach((pId, pData) \'\'\'{\'\'\' \r\n        final xp = (pData[\'\'xp\'\'] as num?)?. toInt() ?? 0; \r\n        if (xp > maxXp) \'{\' \r\n          maxXp = xp; \r\n          winnerId = pId; \r\n        \'}\'\'\'\'}\'\'\'); \r\n\r\n      transaction.update(gameRef, \'\'\'{\'\'\' \r\n        \'\'gameState\'\': \'\'gameOver\'\', \r\n        \'\'gameWinner\'\': winnerId, \r\n        \'\'gameEndReason\'\':\r\n    \r\n      '**
-  String get finDeMancheBoutonAdmin;
 
   /// No description provided for @quelquUn.
   ///
@@ -6237,31 +6210,31 @@ abstract class AppLocalizations {
   /// No description provided for @toutesLesManchesDeTime.
   ///
   /// In en, this message translates to:
-  /// **'All rounds of Time\'\'s Up are over!'**
+  /// **'All Time\'\'s Up rounds are over!'**
   String get toutesLesManchesDeTime;
 
   /// No description provided for @gagneAvecPoints.
   ///
   /// In en, this message translates to:
-  /// **'{playerswinnerIdnameUnjoueur} win with {maxScore} points!'**
+  /// **'{playerswinnerIdnameUnjoueur} wins with {maxScore} points!'**
   String gagneAvecPoints(Object maxScore, Object playerswinnerIdnameUnjoueur);
 
   /// No description provided for @finDeLaPartie.
   ///
   /// In en, this message translates to:
-  /// **'End of the game!'**
+  /// **'Game over!'**
   String get finDeLaPartie;
 
   /// No description provided for @leDessinateurNAPas.
   ///
   /// In en, this message translates to:
-  /// **'The cartoonist did not submit the drawing on time.'**
+  /// **'The drawer did not submit drawing in time.'**
   String get leDessinateurNAPas;
 
   /// No description provided for @leTempsEstEcoulePersonne.
   ///
   /// In en, this message translates to:
-  /// **'Time is up! No one has found the word.'**
+  /// **'Time\'\'s up! Nobody found the word.'**
   String get leTempsEstEcoulePersonne;
 
   /// No description provided for @motDevine.
@@ -6273,7 +6246,7 @@ abstract class AppLocalizations {
   /// No description provided for @motNonDevine.
   ///
   /// In en, this message translates to:
-  /// **'A word not guessed.'**
+  /// **'Word not guessed.'**
   String get motNonDevine;
 
   /// No description provided for @les13CartesOntEte.
@@ -6285,14 +6258,8 @@ abstract class AppLocalizations {
   /// No description provided for @laBombeAExploseDans.
   ///
   /// In en, this message translates to:
-  /// **'The bomb exploded in the hands of {loserName} !'**
+  /// **'The bomb exploded in {loserName}\'\'s hands!'**
   String laBombeAExploseDans(Object loserName);
-
-  /// No description provided for @gagneAvecPointLowestscore1.
-  ///
-  /// In en, this message translates to:
-  /// **'\'{\'winnerName\'}\' win with \'{\'lowestScore\'}\' point\$\'\'\'{\'\'\'lowestScore > 1? '**
-  String get gagneAvecPointLowestscore1;
 
   /// No description provided for @leJoueur.
   ///
@@ -6300,29 +6267,11 @@ abstract class AppLocalizations {
   /// **'The player'**
   String get leJoueur;
 
-  /// No description provided for @listStringQuestionsAiwordpoolGamewords.
-  ///
-  /// In en, this message translates to:
-  /// **') \'\'\'{\'\'\' \r\n      List<String> questions =\r\n          _aiWordPool?? \r\n          GameWords.whoIsMostLikely[difficulty] ?? \r\n          GameWords.whoIsMostLikely['**
-  String get listStringQuestionsAiwordpoolGamewords;
-
   /// No description provided for @honnete.
   ///
   /// In en, this message translates to:
   /// **'Honest'**
   String get honnete;
-
-  /// No description provided for @pairSplit.
-  ///
-  /// In en, this message translates to:
-  /// **') ? pair.split('**
-  String get pairSplit;
-
-  /// No description provided for @pairPairListStringShuffledroles.
-  ///
-  /// In en, this message translates to:
-  /// **'): [even, even]; \r\n\r\n        List<String> shuffledRoles = List.from(playerOrder).. shuffle(); \r\n        String secUndercoverId = shuffledRoles[0]; \r\n        String secMrWhiteId = shuffledRoles[1]; \r\n\r\n        Question =\r\n            \"Describe your secret word in one word. Impostors, bluff!\"; \r\n        for (var pId in players.keys) \'\'\'{\'\'\' \r\n          String pRole =\r\n              (pId == secUndercoverId)\r\n                  ? '**
-  String get pairPairListStringShuffledroles;
 
   /// No description provided for @aAtteintPointsEtGagne.
   ///
@@ -6333,53 +6282,23 @@ abstract class AppLocalizations {
     Object updatedScoresoverallWinnerId,
   );
 
-  /// No description provided for @playersWinnerid.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'\'\'{\'\'\'players[winnerId]? ['**
-  String get playersWinnerid;
-
   /// No description provided for @poseDeCarte.
   ///
   /// In en, this message translates to:
-  /// **'Card Placement'**
+  /// **'play a card'**
   String get poseDeCarte;
 
   /// No description provided for @enchereAutomatique.
   ///
   /// In en, this message translates to:
-  /// **'Automatic bidding'**
+  /// **'auto-bid'**
   String get enchereAutomatique;
 
   /// No description provided for @passeLEnchere.
   ///
   /// In en, this message translates to:
-  /// **'Passes the auction'**
+  /// **'passes bid'**
   String get passeLEnchere;
-
-  /// No description provided for @elseIfGametype.
-  ///
-  /// In en, this message translates to:
-  /// **') \'\'\'{\'\'\' \r\n        if (voterId == votedForId) \'\'\'{\'\'\' \r\n          throw Exception(\"Formal prohibition to vote for oneself!\"); \r\n        \'\'\'}\'\'\'\'}\'\'\' else if (gameType ==\r\n      '**
-  String get elseIfGametype;
-
-  /// No description provided for @intRequiredvotesPlayersLengthIf.
-  ///
-  /// In en, this message translates to:
-  /// **') \'{ \r\n        creditPlayerXp( \r\n          transaction, \r\n          gameRef, \r\n          gameData, \r\n          voterId, \r\n          5, \r\n          applySpeedBonus: true, \r\n        ); \r\n      }\' \r\n\r\n      int requiredVotes = players.length; \r\n\r\n      if (gameType == '**
-  String get intRequiredvotesPlayersLengthIf;
-
-  /// No description provided for @forFinalTargetInVotes.
-  ///
-  /// In en, this message translates to:
-  /// **') \'\'\'{\'\'\' \r\n          final Map<String, int> voteCounts = \'{}\'; \r\n          for (final target in votes.values) \'{\' \r\n            voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n          \'}\' \r\n\r\n          int maxVotes = 0; \r\n          List<String> topVoted = []; \r\n          voteCounts.forEach((target, count) \'\'\'{\'\'\' \r\n            if (count > maxVotes) \'{\' \r\n              maxVotes = count; \r\n              topVoted = [target]; \r\n            \'}\' else if (count == maxVotes) \'{\' \r\n              topVoted.add(target); \r\n            \'}\'\'\'\'}\'\'\'); \r\n\r\n          updates[\r\n          '**
-  String get forFinalTargetInVotes;
-
-  /// No description provided for @forFinalTargetInVotes1.
-  ///
-  /// In en, this message translates to:
-  /// **') \'\'\'{\'\'\' \r\n        final Map<String, int> voteCounts = \'{}\'; \r\n        for (final target in votes.values) \'{\' \r\n          voteCounts[target as String] = (voteCounts[target] ?? 0) + 1; \r\n        \'}\' \r\n\r\n        int maxVotes = 0; \r\n        List<String> topVoted = []; \r\n        voteCounts.forEach((target, count) \'\'\'{\'\'\' \r\n          if (count > maxVotes) \'{\' \r\n            maxVotes = count; \r\n            topVoted = [target]; \r\n          \'}\' else if (count == maxVotes) \'{\' \r\n            topVoted.add(target); \r\n          \'}\'\'\'\'}\'\'\'); \r\n\r\n        if (topVoted.length == 1) \'\'\'{\'\'\' \r\n          final winner = topVoted.first; \r\n          updates[\r\n        '**
-  String get forFinalTargetInVotes1;
 
   /// No description provided for @aRemporteTousLesJetons.
   ///
@@ -6396,103 +6315,97 @@ abstract class AppLocalizations {
   /// No description provided for @carte1.
   ///
   /// In en, this message translates to:
-  /// **'{cardToPlay} Map'**
+  /// **'card {cardToPlay}'**
   String carte1(Object cardToPlay);
-
-  /// No description provided for @quipourraitvotemode.
-  ///
-  /// In en, this message translates to:
-  /// **'? _quiPourraitVoteMode\r\n                      : '**
-  String get quipourraitvotemode;
 
   /// No description provided for @localIndisponibleVideoAudioActif.
   ///
   /// In en, this message translates to:
-  /// **'Local unavailable (Active Video/Audio)'**
+  /// **'Local unavailable (Video/Audio on)'**
   String get localIndisponibleVideoAudioActif;
 
   /// No description provided for @jouerEnLocalSurCet.
   ///
   /// In en, this message translates to:
-  /// **'Play Local (On This Device)'**
+  /// **'Play Local (On this device)'**
   String get jouerEnLocalSurCet;
 
   /// No description provided for @laVideoEstObligatoirePour.
   ///
   /// In en, this message translates to:
-  /// **'Video is required to play Guess Head online.'**
+  /// **'Video is required to play Heads Up online.'**
   String get laVideoEstObligatoirePour;
 
   /// No description provided for @desactivezLaRecherchePubliquePour1.
   ///
   /// In en, this message translates to:
-  /// **'Disable the \'\'Public Search\'\' to create a private game.'**
+  /// **'Turn off \'\'Public Search\'\' to create a private game.'**
   String get desactivezLaRecherchePubliquePour1;
 
   /// No description provided for @priveIndisponibleRechercheActive.
   ///
   /// In en, this message translates to:
-  /// **'Private Unavailable (Active Search)'**
+  /// **'Private unavailable (Search on)'**
   String get priveIndisponibleRechercheActive;
 
   /// No description provided for @priveIndisponibleVideoRequise.
   ///
   /// In en, this message translates to:
-  /// **'Private Unavailable (Video Required)'**
+  /// **'Private unavailable (Video required)'**
   String get priveIndisponibleVideoRequise;
 
   /// No description provided for @creerUnePartiePriveeAvec.
   ///
   /// In en, this message translates to:
-  /// **'Create a Private Game (With Code)'**
+  /// **'Create a private game (With code)'**
   String get creerUnePartiePriveeAvec;
 
   /// No description provided for @activezLeBoutonRecherchePublique.
   ///
   /// In en, this message translates to:
-  /// **'Activate the \'\'Public Search\'\' button in the settings to play with the world.'**
+  /// **'Turn on \'\'Public Search\'\' in settings to play with the world.'**
   String get activezLeBoutonRecherchePublique;
 
   /// No description provided for @rechercheRapideVideoRequise.
   ///
   /// In en, this message translates to:
-  /// **'Quick Search (Video required)'**
+  /// **'Quick search (Video required)'**
   String get rechercheRapideVideoRequise;
 
   /// No description provided for @rechercheMondeDesactivee.
   ///
   /// In en, this message translates to:
-  /// **'World Search (Off)'**
+  /// **'World search (Disabled)'**
   String get rechercheMondeDesactivee;
 
   /// No description provided for @laVideoEstObligatoirePour1.
   ///
   /// In en, this message translates to:
-  /// **'Video is required to play Guess Head in Ranked.'**
+  /// **'Video is required to play Heads Up in Ranked.'**
   String get laVideoEstObligatoirePour1;
 
   /// No description provided for @activezLeBoutonRecherchePublique1.
   ///
   /// In en, this message translates to:
-  /// **'Turn on the \'\'Public Search\'\' button in the settings to play Ranked.'**
+  /// **'Turn on \'\'Public Search\'\' in settings to play Ranked.'**
   String get activezLeBoutonRecherchePublique1;
 
   /// No description provided for @partieClasseeRanked.
   ///
   /// In en, this message translates to:
-  /// **'Ranked'**
+  /// **'Ranked Game'**
   String get partieClasseeRanked;
 
   /// No description provided for @partieClasseeVideoRequise.
   ///
   /// In en, this message translates to:
-  /// **'Ranked Play (Video required)'**
+  /// **'Ranked Game (Video required)'**
   String get partieClasseeVideoRequise;
 
   /// No description provided for @partieClasseeDesactivee.
   ///
   /// In en, this message translates to:
-  /// **'Ranked Play (Disabled)'**
+  /// **'Ranked Game (Disabled)'**
   String get partieClasseeDesactivee;
 
   /// No description provided for @ceJeu.
@@ -6516,13 +6429,13 @@ abstract class AppLocalizations {
   /// No description provided for @generationEnCours.
   ///
   /// In en, this message translates to:
-  /// **'Current generation...'**
+  /// **'Generating...'**
   String get generationEnCours;
 
   /// No description provided for @completerAvecLIa15.
   ///
   /// In en, this message translates to:
-  /// **'Completing with AI (+15 words)'**
+  /// **'Complete with AI (+15 words)'**
   String get completerAvecLIa15;
 
   /// No description provided for @completeCetteListeSurLe.
@@ -6534,13 +6447,13 @@ abstract class AppLocalizations {
   /// No description provided for @exMythologieGrecqueObjetsInsolites.
   ///
   /// In en, this message translates to:
-  /// **'e.g. Greek mythology, Unusual objects, Pirates...'**
+  /// **'e.g.: Greek mythology, unusual objects, pirates...'**
   String get exMythologieGrecqueObjetsInsolites;
 
   /// No description provided for @exPasDAnimauxDangereux.
   ///
   /// In en, this message translates to:
-  /// **'e.g. No dangerous animals, only cult films...'**
+  /// **'e.g.: No dangerous animals, cult movies only...'**
   String get exPasDAnimauxDangereux;
 
   /// No description provided for @genererAvecLIaElements.
@@ -6552,31 +6465,31 @@ abstract class AppLocalizations {
   /// No description provided for @themePersonnalise.
   ///
   /// In en, this message translates to:
-  /// **'Custom Theme'**
+  /// **'Custom theme'**
   String get themePersonnalise;
 
   /// No description provided for @cameraIndispensablePourCeJeu.
   ///
   /// In en, this message translates to:
-  /// **'Essential camera for this game.'**
+  /// **'Camera is required for this game.'**
   String get cameraIndispensablePourCeJeu;
 
   /// No description provided for @microCameraDesactiveLeMode.
   ///
   /// In en, this message translates to:
-  /// **'Mic + Camera (Disables Local Mode)'**
+  /// **'Mic + Camera (Disables Local mode)'**
   String get microCameraDesactiveLeMode;
 
   /// No description provided for @reserveVipOuLimiteAtteinte.
   ///
   /// In en, this message translates to:
-  /// **'Booked VIP or limit reached'**
+  /// **'VIP only or daily limit reached'**
   String get reserveVipOuLimiteAtteinte;
 
   /// No description provided for @hoteDuSalon.
   ///
   /// In en, this message translates to:
-  /// **'Host of the show'**
+  /// **'Room host'**
   String get hoteDuSalon;
 
   /// No description provided for @appuyerPourVoirProfil.
@@ -6588,55 +6501,55 @@ abstract class AppLocalizations {
   /// No description provided for @siVousEtesLePremier.
   ///
   /// In en, this message translates to:
-  /// **'If you are the first player eliminated from the game (dead or alive), you earn 4 bonus points at the end.'**
+  /// **'If you are the very first player eliminated, you gain 4 bonus points at game end.'**
   String get siVousEtesLePremier;
 
   /// No description provided for @laPremiereFoisQueLa.
   ///
   /// In en, this message translates to:
-  /// **'The first time the majority votes against you, everyone who voted against you is eliminated in your place. This power only works once.'**
+  /// **'The first time the majority votes against you, everyone who voted for you is eliminated instead. Works once.'**
   String get laPremiereFoisQueLa;
 
   /// No description provided for @enCasDEgaliteLors.
   ///
   /// In en, this message translates to:
-  /// **'In the event of a tie in a vote, you decide who is eliminated from the tied players. This power persists even after you die.'**
+  /// **'In case of a tie vote, you decide who is eliminated. This power persists even after your death.'**
   String get enCasDEgaliteLors;
 
   /// No description provided for @memeApresVotreEliminationVous.
   ///
   /// In en, this message translates to:
-  /// **'Even after you are eliminated, you continue to participate in votes to eliminate players.'**
+  /// **'Even after being eliminated, you still get to vote on eliminations.'**
   String get memeApresVotreEliminationVous;
 
   /// No description provided for @unAutreJoueurEstSecretement.
   ///
   /// In en, this message translates to:
-  /// **'Another player is secretly designated as your lover. If one of you is eliminated, the other dies of grief and is eliminated as well.'**
+  /// **'Another player is your secret lover. If either of you is eliminated, the other dies of heartbreak.'**
   String get unAutreJoueurEstSecretement;
 
   /// No description provided for @auLieuDeDonnerUn.
   ///
   /// In en, this message translates to:
-  /// **'Instead of giving an oral clue, you have to act out your clue word each round.'**
+  /// **'Instead of a spoken clue, you must act out your clue each round.'**
   String get auLieuDeDonnerUn;
 
   /// No description provided for @vousNAvezPasDe1.
   ///
   /// In en, this message translates to:
-  /// **'You don\'\'t have a word, like Mr. White, but you win if the impostors win. You can lie and pretend you have a word to fit in.'**
+  /// **'You have no word, like Mr. White, but win if impostors win. You can bluff having a word to blend in.'**
   String get vousNAvezPasDe1;
 
   /// No description provided for @siVousEtesElimineeVous.
   ///
   /// In en, this message translates to:
-  /// **'If you are eliminated, you can choose to take another player (still alive) with you to the grave.'**
+  /// **'If eliminated, you can take another living player down into the grave with you.'**
   String get siVousEtesElimineeVous;
 
   /// No description provided for @unAutreJoueurEstVotre.
   ///
   /// In en, this message translates to:
-  /// **'Another player is your secret duelist. If you survive longer than him, you earn 2 bonus points. If he survives longer than you, you lose 2 points.'**
+  /// **'Another player is your secret rival. Outlast them for +2 bonus points; lose -2 if they outlive you.'**
   String get unAutreJoueurEstVotre;
 
   /// No description provided for @aucuneDescriptionTrouveePourCe.
@@ -6648,7 +6561,7 @@ abstract class AppLocalizations {
   /// No description provided for @cEstAToiDe1.
   ///
   /// In en, this message translates to:
-  /// **'🎯 It\'\'s up to you to give a hint!'**
+  /// **'🎯 It\'\'s your turn to give a clue!'**
   String get cEstAToiDe1;
 
   /// No description provided for @auTourDe.
@@ -6660,7 +6573,7 @@ abstract class AppLocalizations {
   /// No description provided for @echecDeLUploadDes.
   ///
   /// In en, this message translates to:
-  /// **'Failure to upload photos to Supabase.'**
+  /// **'Failed to upload photos to Supabase.'**
   String get echecDeLUploadDes;
 
   /// No description provided for @ilFautAuMoins3.
@@ -6684,7 +6597,7 @@ abstract class AppLocalizations {
   /// No description provided for @cliquezSurLaCarteGagnante.
   ///
   /// In en, this message translates to:
-  /// **'Click on the winning card!'**
+  /// **'Click the winning card!'**
   String get cliquezSurLaCarteGagnante;
 
   /// No description provided for @leJugeLitUneCarte.
@@ -6696,7 +6609,7 @@ abstract class AppLocalizations {
   /// No description provided for @leJugeEstEnTrain.
   ///
   /// In en, this message translates to:
-  /// **'The Judge is choosing...'**
+  /// **'The Judge is currently choosing...'**
   String get leJugeEstEnTrain;
 
   /// No description provided for @coupAutomatiqueJouePourCause.
@@ -6720,13 +6633,13 @@ abstract class AppLocalizations {
   /// No description provided for @zeroPointe.
   ///
   /// In en, this message translates to:
-  /// **'Zero Dotted'**
+  /// **'Skyjo (Zero Point)'**
   String get zeroPointe;
 
   /// No description provided for @partieTermineeAvecLeScore.
   ///
   /// In en, this message translates to:
-  /// **'Game ended with the lowest score!'**
+  /// **'Game over with the lowest score!'**
   String get partieTermineeAvecLeScore;
 
   /// No description provided for @cEstVotreTour.
@@ -6762,19 +6675,19 @@ abstract class AppLocalizations {
   /// No description provided for @ecrisUnThemeOuUne.
   ///
   /// In en, this message translates to:
-  /// **'Write a theme or a sentence!'**
+  /// **'Write a prompt or sentence!'**
   String get ecrisUnThemeOuUne;
 
   /// No description provided for @imagineUnePhrase.
   ///
   /// In en, this message translates to:
-  /// **'Imagine a sentence!'**
+  /// **'Imagine a phrase!'**
   String get imagineUnePhrase;
 
   /// No description provided for @vousEtesLOrateurFaites.
   ///
   /// In en, this message translates to:
-  /// **'You are the speaker: make the word guess!'**
+  /// **'You are the clue giver: describe the word!'**
   String get vousEtesLOrateurFaites;
 
   /// No description provided for @faitDevinerAVotreEquipe.
@@ -6804,7 +6717,7 @@ abstract class AppLocalizations {
   /// No description provided for @survivantsEchappes.
   ///
   /// In en, this message translates to:
-  /// **'ESCAPED SURVIVORS!'**
+  /// **'SURVIVORS ESCAPED!'**
   String get survivantsEchappes;
 
   /// No description provided for @piochezChez.
@@ -6822,13 +6735,13 @@ abstract class AppLocalizations {
   /// No description provided for @choisissezUneCarteFaceCachee.
   ///
   /// In en, this message translates to:
-  /// **'Choose a card face down at random'**
+  /// **'Pick a random face-down card'**
   String get choisissezUneCarteFaceCachee;
 
   /// No description provided for @enAttenteDeLaPioche.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the pickaxe...'**
+  /// **'Waiting for draw...'**
   String get enAttenteDeLaPioche;
 
   /// No description provided for @laPartieDeBigTwo.
@@ -6840,19 +6753,19 @@ abstract class AppLocalizations {
   /// No description provided for @auTourDe2.
   ///
   /// In en, this message translates to:
-  /// **'Now it\'\'s {resolvePlayerNamecurrentPlayerId}'**
+  /// **'{resolvePlayerNamecurrentPlayerId}\'\'s turn'**
   String auTourDe2(Object resolvePlayerNamecurrentPlayerId);
 
   /// No description provided for @laPartieEstTerminee.
   ///
   /// In en, this message translates to:
-  /// **'Game is over!'**
+  /// **'The game is over!'**
   String get laPartieEstTerminee;
 
   /// No description provided for @plusAucunCoupPossiblePour.
   ///
   /// In en, this message translates to:
-  /// **'No more possible moves for the opponent!'**
+  /// **'No more moves possible for the opponent!'**
   String get plusAucunCoupPossiblePour;
 
   /// No description provided for @cEstVotreTour1.
@@ -6870,13 +6783,13 @@ abstract class AppLocalizations {
   /// No description provided for @regardezVosAmisAL.
   ///
   /// In en, this message translates to:
-  /// **'Watch your friends on the screen, they help you!'**
+  /// **'Look at your friends on screen, they are helping you!'**
   String get regardezVosAmisAL;
 
   /// No description provided for @lEquipeAdverseJoueSurveillez.
   ///
   /// In en, this message translates to:
-  /// **'The opposing team plays (watch for fouls):'**
+  /// **'Opponent team is playing (watch for fouls):'**
   String get lEquipeAdverseJoueSurveillez;
 
   /// No description provided for @laSuiteDeLHistoire.
@@ -6894,19 +6807,19 @@ abstract class AppLocalizations {
   /// No description provided for @aVousDEcrire.
   ///
   /// In en, this message translates to:
-  /// **'IT\'\'S UP TO YOU TO WRITE!'**
+  /// **'YOUR TURN TO WRITE!'**
   String get aVousDEcrire;
 
   /// No description provided for @surrealismeClassique.
   ///
   /// In en, this message translates to:
-  /// **'Classical Surrealism'**
+  /// **'Classic surrealism'**
   String get surrealismeClassique;
 
   /// No description provided for @suiteDe3Mots.
   ///
   /// In en, this message translates to:
-  /// **'3-word sequence'**
+  /// **'3 words follow-up'**
   String get suiteDe3Mots;
 
   /// No description provided for @strb74c15.
@@ -6924,19 +6837,19 @@ abstract class AppLocalizations {
   /// No description provided for @objectif1000BornesAtteint.
   ///
   /// In en, this message translates to:
-  /// **'Objective 1000 Bornes achieved!'**
+  /// **'1000 km target reached!'**
   String get objectif1000BornesAtteint;
 
   /// No description provided for @aVousDeRouler.
   ///
   /// In en, this message translates to:
-  /// **'IT\'\'S UP TO YOU TO RIDE!'**
+  /// **'YOUR TURN TO DRIVE!'**
   String get aVousDeRouler;
 
   /// No description provided for @arrete.
   ///
   /// In en, this message translates to:
-  /// **'DECREE'**
+  /// **'STOPPED'**
   String get arrete;
 
   /// No description provided for @tourDeLAdversaire.
@@ -6954,19 +6867,19 @@ abstract class AppLocalizations {
   /// No description provided for @vehiculeNprioritaire.
   ///
   /// In en, this message translates to:
-  /// **'Vehicle\\nPriority'**
+  /// **'Emergency\\nVehicle'**
   String get vehiculeNprioritaire;
 
   /// No description provided for @priorite.
   ///
   /// In en, this message translates to:
-  /// **'PRIORITY'**
+  /// **'RIGHT OF WAY'**
   String get priorite;
 
   /// No description provided for @citerneNinepuisable.
   ///
   /// In en, this message translates to:
-  /// **'Tank\\nInexhaustible'**
+  /// **'Extra\\nTank'**
   String get citerneNinepuisable;
 
   /// No description provided for @repare.
@@ -6978,13 +6891,13 @@ abstract class AppLocalizations {
   /// No description provided for @carte2.
   ///
   /// In en, this message translates to:
-  /// **'MAP'**
+  /// **'CARD'**
   String get carte2;
 
   /// No description provided for @protegeParUneBotte.
   ///
   /// In en, this message translates to:
-  /// **'🛡️ Protected by a Boot'**
+  /// **'🛡️ Protected by a Safety card'**
   String get protegeParUneBotte;
 
   /// No description provided for @distanceKm.
@@ -7020,13 +6933,13 @@ abstract class AppLocalizations {
   /// No description provided for @tourAdverse.
   ///
   /// In en, this message translates to:
-  /// **'Opponent\'\'s Tower'**
+  /// **'Opponent\'\'s turn'**
   String get tourAdverse;
 
   /// No description provided for @derniereCartePosee.
   ///
   /// In en, this message translates to:
-  /// **'Last card laid!'**
+  /// **'Last card played!'**
   String get derniereCartePosee;
 
   /// No description provided for @cEstTonTour.
@@ -7040,12 +6953,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{valuename}: {valuescore0} 🃏'**
   String str422faa(Object valuename, Object valuescore0);
-
-  /// No description provided for @printEtatDeIsactionpendingAu.
-  ///
-  /// In en, this message translates to:
-  /// **' ---\", \r\n    ); \r\n    print(\"Initial _isActionPending status: {_isActionPending}\"); \r\n\r\n    final players = (gameData['**
-  String printEtatDeIsactionpendingAu(Object _isActionPending);
 
   /// No description provided for @erreurQuestionNonTrouvee.
   ///
@@ -7068,7 +6975,7 @@ abstract class AppLocalizations {
   /// No description provided for @leJugeChoisit.
   ///
   /// In en, this message translates to:
-  /// **'The Judge chooses...'**
+  /// **'The Judge is choosing...'**
   String get leJugeChoisit;
 
   /// No description provided for @votez.
@@ -7098,7 +7005,7 @@ abstract class AppLocalizations {
   /// No description provided for @choisisTaReponsePreferee.
   ///
   /// In en, this message translates to:
-  /// **'👑 Choose your preferred answer:'**
+  /// **'👑 Choose your favorite answer:'**
   String get choisisTaReponsePreferee;
 
   /// No description provided for @leJugeExamineAttentivementUne.
@@ -7122,7 +7029,7 @@ abstract class AppLocalizations {
   /// No description provided for @aucuneReponse.
   ///
   /// In en, this message translates to:
-  /// **'No response'**
+  /// **'no answer'**
   String get aucuneReponse;
 
   /// No description provided for @leMenteur.
@@ -7140,19 +7047,19 @@ abstract class AppLocalizations {
   /// No description provided for @leDessinateur.
   ///
   /// In en, this message translates to:
-  /// **'The cartoonist'**
+  /// **'The Drawer'**
   String get leDessinateur;
 
   /// No description provided for @leTempsEstEcouleOu.
   ///
   /// In en, this message translates to:
-  /// **'Time has run out or the drawing was too complex!'**
+  /// **'Time is up or the drawing was too complex!'**
   String get leTempsEstEcouleOu;
 
   /// No description provided for @leDevin.
   ///
   /// In en, this message translates to:
-  /// **'The soothsayer'**
+  /// **'The Guesser'**
   String get leDevin;
 
   /// No description provided for @pasDeReponse.
@@ -7164,13 +7071,13 @@ abstract class AppLocalizations {
   /// No description provided for @deuxDefisReussis.
   ///
   /// In en, this message translates to:
-  /// **'Two challenges succeeded.'**
+  /// **'Two challenges completed.'**
   String get deuxDefisReussis;
 
   /// No description provided for @leChallenger.
   ///
   /// In en, this message translates to:
-  /// **'The challenger'**
+  /// **'The Challenger'**
   String get leChallenger;
 
   /// No description provided for @stre93cb0.
@@ -7182,26 +7089,14 @@ abstract class AppLocalizations {
   /// No description provided for @uneDescriptionHilarante.
   ///
   /// In en, this message translates to:
-  /// **'A hilarious description'**
+  /// **'a hilarious caption'**
   String get uneDescriptionHilarante;
-
-  /// No description provided for @extrainfoColumnChildrenText.
-  ///
-  /// In en, this message translates to:
-  /// **'; \r\n          extraInfo = Column( \r\n            children: [ \r\n              Text( \r\n                \'\''**
-  String get extrainfoColumnChildrenText;
 
   /// No description provided for @unProblemeEstSurvenu.
   ///
   /// In en, this message translates to:
   /// **'A problem has occurred.'**
   String get unProblemeEstSurvenu;
-
-  /// No description provided for @defaultFinalRoundwinneridGamedata.
-  ///
-  /// In en, this message translates to:
-  /// **': \r\n      default: \r\n        final roundWinnerId = gameData['**
-  String get defaultFinalRoundwinneridGamedata;
 
   /// No description provided for @str98e212.
   ///
@@ -7212,19 +7107,19 @@ abstract class AppLocalizations {
   /// No description provided for @aVousDeJouer.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s up to you!'**
+  /// **'Your turn to play!'**
   String get aVousDeJouer;
 
   /// No description provided for @trieParCouleur.
   ///
   /// In en, this message translates to:
-  /// **'Sorted by Color'**
+  /// **'Sorted by suit'**
   String get trieParCouleur;
 
   /// No description provided for @trierLaMain.
   ///
   /// In en, this message translates to:
-  /// **'Sort the hand'**
+  /// **'Sort hand'**
   String get trierLaMain;
 
   /// No description provided for @deuxDefisReussis1.
@@ -7242,25 +7137,25 @@ abstract class AppLocalizations {
   /// No description provided for @touchezPourPoser.
   ///
   /// In en, this message translates to:
-  /// **'Tap to Pose'**
+  /// **'Tap to place'**
   String get touchezPourPoser;
 
   /// No description provided for @encherissezOuPassez.
   ///
   /// In en, this message translates to:
-  /// **'Bid or Spend'**
+  /// **'Bid or pass'**
   String get encherissezOuPassez;
 
   /// No description provided for @str4c885c.
   ///
   /// In en, this message translates to:
-  /// **'{motdessiner} : {p}'**
+  /// **'{motdessiner}: {p}'**
   String str4c885c(Object motdessiner, Object p);
 
   /// No description provided for @voirLeScoreFinal.
   ///
   /// In en, this message translates to:
-  /// **'See the final score'**
+  /// **'View final score'**
   String get voirLeScoreFinal;
 
   /// No description provided for @str6bd6b6.
@@ -7275,12 +7170,6 @@ abstract class AppLocalizations {
     Object totalScore,
   );
 
-  /// No description provided for @styleConstTextstyleColorColors.
-  ///
-  /// In en, this message translates to:
-  /// **', \r\n                  style: const TextStyle(color: Colors.white70), \r\n                ), \r\n                SizedBox(height: 20), \r\n                Wrap( \r\n                  alignment: WrapAlignment.center, \r\n                  children: \r\n                      justOneFilteredClues\r\n                          .map((clue) => _buildEasel(clue.toString()))\r\n                          .toList(), \r\n                ), \r\n                SizedBox(height: 20), \r\n                if (justOneFilteredClues.isEmpty)\r\n                  Text( \r\n                    AppLocalizations.of(context)!. allCluesHave Been, \r\n                    style: const TextStyle(color: Colors.red), \r\n                  ), \r\n              ], \r\n            ), \r\n          ); \r\n        \'\'\'}\'\'\' else \'\'\'{\'\'\' \r\n          It\'\'s up to the soothsayer to play\r\n          return Column( \r\n            children: [ \r\n              Text(                '**
-  String get styleConstTextstyleColorColors;
-
   /// No description provided for @strf0868c.
   ///
   /// In en, this message translates to:
@@ -7290,19 +7179,19 @@ abstract class AppLocalizations {
   /// No description provided for @cEstAToi.
   ///
   /// In en, this message translates to:
-  /// **'IT\'\'S UP TO YOU!'**
+  /// **'IT\'\'S YOUR TURN!'**
   String get cEstAToi;
 
   /// No description provided for @laPatateAExplose.
   ///
   /// In en, this message translates to:
-  /// **'The potato has exploded!'**
+  /// **'The potato exploded!'**
   String get laPatateAExplose;
 
   /// No description provided for @finDeLaPartie1.
   ///
   /// In en, this message translates to:
-  /// **'End of the game'**
+  /// **'Game Over'**
   String get finDeLaPartie1;
 
   /// No description provided for @leVillageSEndort.
@@ -7320,7 +7209,7 @@ abstract class AppLocalizations {
   /// No description provided for @designez2Amoureux.
   ///
   /// In en, this message translates to:
-  /// **'Designate 2 lovers'**
+  /// **'Pick 2 lovers'**
   String get designez2Amoureux;
 
   /// No description provided for @amoureuxUnis.
@@ -7335,28 +7224,16 @@ abstract class AppLocalizations {
   /// **'The victim'**
   String get laVictime;
 
-  /// No description provided for @centeractionwidgetRowMainaxissizeMainaxissizeMin.
-  ///
-  /// In en, this message translates to:
-  /// **'; \r\n            centerActionWidget = Row( \r\n              mainAxisSize: MainAxisSize.min, \r\n              children: [ \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. infect, \r\n                  icon: Icons.auto_fix_high, \r\n                  color: Colors.purpleAccent, \r\n                  onPressed: () \'\'\'{\'\'\' \r\n                    Provider.of<PlayerState>( \r\n                      context, \r\n                      listen: false, \r\n                    ).recordBadgeEvent(\'\'lg_loup_noir_infect\'\'); \r\n                    _firebaseService.BlackWolfInfect( \r\n                      widget.gameCode, \r\n                      playerId, \r\n                      true, \r\n                    ); \r\n                  \'\'\'}\'\'\', \r\n                ), \r\n                const SizedBox(width: 8), \r\n                _buildActionButton( \r\n                  label: AppLocalizations.of(context)!. devour, \r\n                  icon: Icons.close, \r\n                  color: Colors.redAccent, \r\n                  onPressed: \r\n                      () => _firebaseService.BlackWolfInfect( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        false, \r\n                      ), \r\n                ), \r\n              ], \r\n            ); \r\n          \'\'\'}\'\'\' \r\n          station wagon; \r\n        box \'\'loup_blanc_turn\'\': \r\n          promptText = '**
-  String get centeractionwidgetRowMainaxissizeMainaxissizeMin;
-
   /// No description provided for @aucuneVictimeCetteNuitProtegee.
   ///
   /// In en, this message translates to:
   /// **'No casualties last night (protected or spared)'**
   String get aucuneVictimeCetteNuitProtegee;
 
-  /// No description provided for @styleTextstyleFontweightFontweightBold.
-  ///
-  /// In en, this message translates to:
-  /// **', \r\n                              style: TextStyle( \r\n                                fontWeight: FontWeight.bold, \r\n                                color: \r\n                                    isMine\r\n                                        ? Colors.cyanAccent\r\n                                        : (_selectedChatType == \'\'wolf\'\' \r\n                                            ? Colors.redAccent.shade100\r\n                                            : Colors.white60), \r\n                              ), \r\n                            ), \r\n                            TextSpan(text: message), \r\n                          ], \r\n                        ), \r\n                      ), \r\n                    ); \r\n                  \'\'\'}\'\'\', \r\n                ); \r\n              \'\'\'}\'\'\', \r\n            ), \r\n          ), \r\n\r\n          Compact sending bar\r\n          if (canSendMessage)\r\n            Row( \r\n              children: [ \r\n                Expanded( \r\n                  child: SizedBox( \r\n                    height: 32, \r\n                    child: TextField( \r\n                      controller: _chatController, \r\n                      style: const TextStyle(fontSize: 12, color: Colors.white), \r\n                      decoration: InputDecoration( \r\n                        hintText: \r\n                            AppLocalizations.of(context)!. writeAu, \r\n                        hintStyle: const TextStyle( \r\n                          color: Colors.white30, \r\n                          fontSize: 11, \r\n                        ), \r\n                        border: OutlineInputBorder( \r\n                          borderRadius: BorderRadius.circular(16), \r\n                          borderSide: BorderSide.none, \r\n                        ), \r\n                        filled: true, \r\n                        fillColor: Colors.white.withOpacity(0.08), \r\n                        contentPadding: const EdgeInsets.symmetric( \r\n                          horizontal: 10, \r\n                          vertical: 0, \r\n                        ), \r\n                      ), \r\n                      onSubmitted: (text) \'\'\'{\'\'\' \r\n                        if (text.trim().isNotEmpty) \'{\' \r\n                          _firebaseService.sendChatMessage( \r\n                            widget.gameCode, \r\n                            playerId, \r\n                            text.trim(), \r\n                            _selectedChatType, \r\n                          ); \r\n                          _chatController.clear(); \r\n                        \'}\'\'\'\'}\'\'\', \r\n                    ), \r\n                  ), \r\n                ), \r\n                const SizedBox(width: 4), \r\n                IconButton( \r\n                  icon: const Icon( \r\n                    Icons.send_rounded, \r\n                    size: 18, \r\n                    color: Colors.cyanAccent, \r\n                  ), \r\n                  padding: EdgeInsets.zero, \r\n                  constraints: const BoxConstraints(), \r\n                  onPressed: () \'\'\'{\'\'\' \r\n                    if (_chatController.text.trim().isNotEmpty) \'{\' \r\n                      _firebaseService.sendChatMessage( \r\n                        widget.gameCode, \r\n                        playerId, \r\n                        _chatController.text.trim(), \r\n                        _selectedChatType, \r\n                      ); \r\n                      _chatController.clear(); \r\n                    \'}\'\'\'\'}\'\'\', \r\n                ), \r\n              ], \r\n            ), \r\n        ], \r\n      ), \r\n    ); \r\n  \'\'\'}\'\'\' \r\n\r\n  Widget _buildChatTab(String label, String type, Color activeColor) \'{\' \r\n    final bool isSelected = _selectedChatType == type; \r\n    return GestureDetector( \r\n      onTap: () => setState(() => _selectedChatType = type), \r\n      child: Container( \r\n        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3), \r\n        decoration: BoxDecoration( \r\n          color: \r\n              isSelected\r\n                  ? activeColor.withOpacity(0.25)\r\n                  : Colors.white.withOpacity(0.04), \r\n          borderRadius: BorderRadius.circular(10), \r\n          border: Border.all( \r\n            color: \r\n                isSelected ? activeColor.withOpacity(0.6) : Colors.transparent, \r\n          ), \r\n        ), \r\n        child: Text( \r\n          label, \r\n          style: TextStyle( \r\n            fontSize: 10, \r\n            fontWeight: isSelected? FontWeight.bold: FontWeight.normal, \r\n            color: isSelected ? activeColor : Colors.white60, \r\n          ), \r\n        ), \r\n      ), \r\n    ); \r\n  \'}\' \r\n\r\n  --- UPDATED AVATAR TO MAKE IT INTERACTIVE--- \r\n\r\n  Widget _buildSyncTimer(Timestamp? startTime, int durationInSeconds) \'\'\'{\'\'\' \r\n    if (startTime == null) return const SizedBox.shrink(); \r\n\r\n    TweenAnimationBuilder allows for a super-smooth visual timer without blocking timer and manual setState, which greatly lightens the thread (Point 4)\r\n    final endTime = startTime.toDate().add( \r\n      Duration(seconds: durationInSeconds), \r\n    ); \r\n    final remaining = endTime.difference(DateTime.now()); \r\n\r\n    if (remaining.isNegative)\r\n      return Text( \r\n        AppLocalizations.of(context)!. k0S, \r\n        style: Theme.of( \r\n          context, \r\n        ).textTheme.headlineSmall?. copyWith(color: Colors.redAccent), \r\n      ); \r\n\r\n    return TweenAnimationBuilder<Duration>( \r\n      duration: remaining, \r\n      tween: Tween(begin: remaining, end: Duration.zero), \r\n      builder: (BuildContext context, Duration value, Widget? child) \'{\' \r\n        final seconds = value.inSeconds; \r\n        return Text( \r\n          AppLocalizations.of(context)!. timeRemaining, \r\n          style: Theme.of(context).textTheme.headlineSmall?. copyWith( \r\n            color: seconds < 20 ? Colors.redAccent : Colors.amberAccent, \r\n          ), \r\n        ); \r\n      \'}\', \r\n    ); \r\n  \'\'\'}\'\'\' \r\n\r\n  _buildPetitsChevauxUI( \r\n    BuildContext context, \r\n    Map<String, dynamic> gameData, \r\n    String playerId, \r\n  ) \'\'\'{\'\'\' \r\n    final players = Map<String, dynamic>.from(gameData[\'\'players\'\'] ?? \'{}\'); \r\n    final playerOrder = List<String>.from( \r\n      gameData[\'\'littleHorsesPlayerOrder\'\'] ?? [], \r\n    ); \r\n    final positions = Map<String, dynamic>.from( \r\n      gameData[\'\'littleHorsesPositions\'\'] ?? \'{}\', \r\n    ); \r\n    final int currentIndex = gameData[\'\'smallHorsesCurrentIndex\'\'] ?? 0; \r\n    final String currentPlayerId =\r\n        playerOrder.isNotEmpty? playerOrder[currentIndex]: \'\'; \r\n    final bool isMyTurn = currentPlayerId == playerId; \r\n    final int dice = (gameData[\'\'littleHorsesDice\'\'] as num?)?. toInt() ?? 0; \r\n    final bool hasRolled = gameData[\'\'littleHorsesHasRolled\'\'] ?? false; \r\n    final bool isTeamMode = gameData[\'\'smallTeamHorses\'\'] ?? false; \r\n    final Map<String, dynamic> consecutiveSixes = Map<String, dynamic>.from( \r\n      gameData[\'\'smallHorsesConsecutiveSixes\'\'] ?? \'{}\', \r\n    ); \r\n    final int mySixStreak = consecutiveSixes[playerId] ?? 0; \r\n\r\n    Neon Modern Palette / Arcade on Dark Background\r\n    final List<Color> playerColors = [ \r\n      const Color(0xFFEF4444), // Neon Red\r\n      const Color(0xFF38BDF8), // Neon sky blue\r\n      const Color(0xFF10B981), // Emerald Green\r\n      const Color(0xFFF59E0B), // Golden Amber\r\n    ]; \r\n\r\n    --- VICTORY SCREEN--- \r\n    if (gameData[\'\'gameState\'\'] == \'\'gameOver\'\') \'\'\'{\'\'\' \r\n      return UniversalGameEndScreen( \r\n        gameTitle:\r\n                      \r\n                  '**
-  String get styleTextstyleFontweightFontweightBold;
-
   /// No description provided for @arriveeAuCentreDuPlateau.
   ///
   /// In en, this message translates to:
-  /// **'Arrival in the center of the board!'**
+  /// **'Reached the center of the board!'**
   String get arriveeAuCentreDuPlateau;
 
   /// No description provided for @deplacezUnCheval.
@@ -7368,7 +7245,7 @@ abstract class AppLocalizations {
   /// No description provided for @aVousDeLancer.
   ///
   /// In en, this message translates to:
-  /// **'IT\'\'S UP TO YOU TO LAUNCH!'**
+  /// **'YOUR TURN TO ROLL!'**
   String get aVousDeLancer;
 
   /// No description provided for @mode2v2Allies.
@@ -7386,31 +7263,31 @@ abstract class AppLocalizations {
   /// No description provided for @touchezUnPion.
   ///
   /// In en, this message translates to:
-  /// **'Hit a Token'**
+  /// **'Tap a piece'**
   String get touchezUnPion;
 
   /// No description provided for @scoreLimiteAtteint.
   ///
   /// In en, this message translates to:
-  /// **'Limit score reached!'**
+  /// **'Target score reached!'**
   String get scoreLimiteAtteint;
 
   /// No description provided for @toutesLesGrillesSontCompletees.
   ///
   /// In en, this message translates to:
-  /// **'All the grids are complete!'**
+  /// **'All score sheets completed!'**
   String get toutesLesGrillesSontCompletees;
 
   /// No description provided for @cEstVotreTourTouchez.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s your turn! Touch a die to keep it (golden 🔒)'**
+  /// **'It\'\'s your turn! Tap a die to hold it (gold 🔒)'**
   String get cEstVotreTourTouchez;
 
   /// No description provided for @lancerLesDes.
   ///
   /// In en, this message translates to:
-  /// **'Roll the dice'**
+  /// **'Roll dice'**
   String get lancerLesDes;
 
   /// No description provided for @k1663.
@@ -7434,13 +7311,13 @@ abstract class AppLocalizations {
   /// No description provided for @encheresEnCours.
   ///
   /// In en, this message translates to:
-  /// **'CURRENT AUCTIONS'**
+  /// **'BIDDING IN PROGRESS'**
   String get encheresEnCours;
 
   /// No description provided for @aVousDOuvrirLe.
   ///
   /// In en, this message translates to:
-  /// **'IT\'\'S UP TO YOU TO OPEN THE FOLD!'**
+  /// **'YOUR TURN TO LEAD THE TRICK!'**
   String get aVousDOuvrirLe;
 
   /// No description provided for @tourDe1.
@@ -7452,13 +7329,13 @@ abstract class AppLocalizations {
   /// No description provided for @aVotreTourDeJouer.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s your turn to play'**
+  /// **'Your turn to play'**
   String get aVotreTourDeJouer;
 
   /// No description provided for @etaleOuDefausse.
   ///
   /// In en, this message translates to:
-  /// **'Stall or Discard'**
+  /// **'Meld or Discard'**
   String get etaleOuDefausse;
 
   /// No description provided for @piocheUneCarte.
@@ -7470,7 +7347,7 @@ abstract class AppLocalizations {
   /// No description provided for @plusAucunCoupPossible.
   ///
   /// In en, this message translates to:
-  /// **'No more shots possible!'**
+  /// **'No more moves possible!'**
   String get plusAucunCoupPossible;
 
   /// No description provided for @lancer1.
@@ -7485,22 +7362,16 @@ abstract class AppLocalizations {
   /// **'Choose a game'**
   String get choisirUnJeu;
 
-  /// No description provided for @screenWhoismostlikelylocalscreenPlayersPlayersBreak.
-  ///
-  /// In en, this message translates to:
-  /// **': \r\n        screen = WhoIsMostLikelyLocalScreen(players: _players); \r\n        station wagon; \r\n      box '**
-  String get screenWhoismostlikelylocalscreenPlayersPlayersBreak;
-
   /// No description provided for @generation.
   ///
   /// In en, this message translates to:
-  /// **'Generation...'**
+  /// **'Generating...'**
   String get generation;
 
   /// No description provided for @genererLesDefisParIa.
   ///
   /// In en, this message translates to:
-  /// **'Generate challenges by AI'**
+  /// **'Generate challenges with AI'**
   String get genererLesDefisParIa;
 
   /// No description provided for @genereUnMelangeDActions.
@@ -7512,19 +7383,19 @@ abstract class AppLocalizations {
   /// No description provided for @genererLesDilemmesParIa.
   ///
   /// In en, this message translates to:
-  /// **'Generating dilemmas by AI'**
+  /// **'Generate dilemmas with AI'**
   String get genererLesDilemmesParIa;
 
   /// No description provided for @egalite.
   ///
   /// In en, this message translates to:
-  /// **'Equality'**
+  /// **'Tie'**
   String get egalite;
 
   /// No description provided for @choixEnregistre.
   ///
   /// In en, this message translates to:
-  /// **'Choice saved!'**
+  /// **'Choice recorded!'**
   String get choixEnregistre;
 
   /// No description provided for @dilemmePourFaisTonChoix.
@@ -7536,7 +7407,7 @@ abstract class AppLocalizations {
   /// No description provided for @tousLesVotesSontEnregistres.
   ///
   /// In en, this message translates to:
-  /// **'All votes are recorded!'**
+  /// **'All votes recorded!'**
   String get tousLesVotesSontEnregistres;
 
   /// No description provided for @cEstAuTourDe1.
@@ -7548,7 +7419,7 @@ abstract class AppLocalizations {
   /// No description provided for @lancerLeDilemme.
   ///
   /// In en, this message translates to:
-  /// **'Launching the Dilemma'**
+  /// **'Spin the Dilemma'**
   String get lancerLeDilemme;
 
   /// No description provided for @genererLesQuestionsIa.
@@ -7572,14 +7443,8 @@ abstract class AppLocalizations {
   /// No description provided for @gagneTonSecretEstPreserve.
   ///
   /// In en, this message translates to:
-  /// **'WON! Your secret is preserved.'**
+  /// **'WON! Your secret is safe.'**
   String get gagneTonSecretEstPreserve;
-
-  /// No description provided for @wordcivilParts0TrimWordundercover1.
-  ///
-  /// In en, this message translates to:
-  /// **'); \r\n      _wordCivil = parts[0].trim(); \r\n      _wordUndercover = parts[1].trim(); \r\n    \'\'\'}\'\'\' else \'\'\'{\'\'\' \r\n      int idx = wordPairs.indexOf(rawPair); \r\n      _wordCivil = rawPair.trim(); \r\n      _wordUndercover =\r\n          (idx + 1 < wordPairs.length)\r\n              ? wordPairs[idx + 1].trim()\r\n              : \"\'{\'trim\'}\' (Variant)\"; \r\n    \'\'\'}\'\'\' \r\n\r\n    _playerRoles.clear(); \r\n    for (var player in _activePlayers) \'\'\'{\'\'\' \r\n      if (player == undercover) \'\'\'{\'\'\' \r\n        _playerRoles[player] = \"Infiltrator\"; \r\n      \'\'\'}\'\'\' else if (player == _mrWhitePlayer) \'\'\'{\'\'\' \r\n        _playerRoles[player] = \"Mr. White\"; \r\n      \'\'\'}\'\'\' else \'\'\'{\'\'\' \r\n        _playerRoles[player] = \"Civil\"; \r\n      \'\'\'}\'\'\'\'}\'\'\' \r\n\r\n    setState(() \'\'\'{\'\'\' \r\n      _gameState = UndercoverGameState.revealing; \r\n      _currentPlayerRevealIndex = 0; \r\n      _resultMessage = \"\"; \r\n    \'\'\'}\'\'\'); \r\n  \'\'\'}\'\'\' \r\n\r\n  void _nextPlayerReveal() \'\'\'{\'\'\' \r\n    if (_currentPlayerRevealIndex < _activePlayers.length - 1) \'{\' \r\n      setState(() => _currentPlayerRevealIndex++); \r\n    \'}\' else \'{\' \r\n      setState(() => _gameState = UndercoverGameState.discussing); \r\n    \'}\'\'\'\'}\'\'\' \r\n\r\n  void _eliminatePlayer(String player) \'\'\'{\'\'\' \r\n    String role = _playerRoles[player]!; \r\n    bool impostorsWin = role == \"Civil\"; \r\n\r\n    setState(() \'\'\'{\'\'\' \r\n      _gameState = UndercoverGameState.result; \r\n      if (impostorsWin) \'\'\'{\'\'\' \r\n        _resultMessage = \"\'{\'player\'}\' was a Civilian! The Impostors win!\"; \r\n      \'\'\'}\'\'\' else \'\'\'{\'\'\' \r\n        _resultMessage = \"\'{\'player\'}\' was the\r\n    \r\n  '**
-  String get wordcivilParts0TrimWordundercover1;
 
   /// No description provided for @requiert4Joueurs.
   ///
@@ -7599,12 +7464,6 @@ abstract class AppLocalizations {
   /// **'Generate fun categories for the hot potato. Theme: {trim}'**
   String genereDesCategoriesAmusantesPour(Object trim);
 
-  /// No description provided for @bodyPaddingPaddingConstEdgeinsets.
-  ///
-  /// In en, this message translates to:
-  /// **'), \r\n          ), \r\n        ], \r\n      ), \r\n      body: Padding( \r\n        padding: const EdgeInsets.all(16.0), \r\n        child: Column( \r\n          children: [ \r\n            if (_phase != LocalWhoIsPhase.results) ... [ \r\n              DIFFICULTY FILTER\r\n              SegmentedButton<String>( \r\n                Segments: [ \r\n                  ButtonSegment( \r\n                    value: '**
-  String get bodyPaddingPaddingConstEdgeinsets;
-
   /// No description provided for @egalite1PtChacun.
   ///
   /// In en, this message translates to:
@@ -7614,7 +7473,7 @@ abstract class AppLocalizations {
   /// No description provided for @designeParLeGroupe1.
   ///
   /// In en, this message translates to:
-  /// **'Nominated by the group (+1 pt):'**
+  /// **'Chosen by the group (+1 pt):'**
   String get designeParLeGroupe1;
 
   /// No description provided for @onSePasseUnObjet.
@@ -7626,13 +7485,13 @@ abstract class AppLocalizations {
   /// No description provided for @ilElleDoitRepondreA.
   ///
   /// In en, this message translates to:
-  /// **'He/She must answer the question:'**
+  /// **'They must answer the question:'**
   String get ilElleDoitRepondreA;
 
   /// No description provided for @passe.
   ///
   /// In en, this message translates to:
-  /// **'PAST'**
+  /// **'PASS'**
   String get passe;
 
   /// No description provided for @equipeRouge.
@@ -7650,7 +7509,7 @@ abstract class AppLocalizations {
   /// No description provided for @k2EquipesSAffrontent.
   ///
   /// In en, this message translates to:
-  /// **'2 teams compete'**
+  /// **'2 teams face off'**
   String get k2EquipesSAffrontent;
 
   /// No description provided for @chacunPourSoi.
@@ -7680,13 +7539,13 @@ abstract class AppLocalizations {
   /// No description provided for @aucunSalonNeCorrespondA.
   ///
   /// In en, this message translates to:
-  /// **'No room matches your filters.'**
+  /// **'No rooms match your filters.'**
   String get aucunSalonNeCorrespondA;
 
   /// No description provided for @aucunSalonPublicDisponibleNcreez.
   ///
   /// In en, this message translates to:
-  /// **'No public lounge available.\\nCreate your own below!'**
+  /// **'No public lounges available.\\nCreate yours below!'**
   String get aucunSalonPublicDisponibleNcreez;
 
   /// No description provided for @general.
@@ -7706,12 +7565,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ready ✓'**
   String get pret3;
-
-  /// No description provided for @reasonIsnotempty.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'vainqueur\'}\' \'{\'winner\'}\'\'\'\'{\'\'\'reason.isNotEmpty?'**
-  String get reasonIsnotempty;
 
   /// No description provided for @partie.
   ///
@@ -7734,13 +7587,13 @@ abstract class AppLocalizations {
   /// No description provided for @enAttenteDuLancement.
   ///
   /// In en, this message translates to:
-  /// **'Waiting for the launch...'**
+  /// **'Waiting for launch...'**
   String get enAttenteDuLancement;
 
   /// No description provided for @voler.
   ///
   /// In en, this message translates to:
-  /// **'FLY!'**
+  /// **'STEAL!'**
   String get voler;
 
   /// No description provided for @ciblee.
@@ -7752,19 +7605,19 @@ abstract class AppLocalizations {
   /// No description provided for @visee.
   ///
   /// In en, this message translates to:
-  /// **'AIM!'**
+  /// **'TARGET ACQUIRED!'**
   String get visee;
 
   /// No description provided for @exFais10PompesEn.
   ///
   /// In en, this message translates to:
-  /// **'Ex: Do 10 push-ups while singing...'**
+  /// **'E.g.: Do 10 pushups while singing...'**
   String get exFais10PompesEn;
 
   /// No description provided for @exQuelEstTonPire.
   ///
   /// In en, this message translates to:
-  /// **'Ex: What\'\'s your worst moment of shame?'**
+  /// **'E.g.: What is your most embarrassing moment?'**
   String get exQuelEstTonPire;
 
   /// No description provided for @verite2.
@@ -7788,13 +7641,13 @@ abstract class AppLocalizations {
   /// No description provided for @defiValide.
   ///
   /// In en, this message translates to:
-  /// **'CHALLENGE VALIDATED!'**
+  /// **'DARE VALIDATED!'**
   String get defiValide;
 
   /// No description provided for @defiNonValide.
   ///
   /// In en, this message translates to:
-  /// **'CHALLENGE NOT VALIDATED'**
+  /// **'DARE FAILED'**
   String get defiNonValide;
 
   /// No description provided for @partieTerminee3.
@@ -7812,7 +7665,7 @@ abstract class AppLocalizations {
   /// No description provided for @finDeLaManche2.
   ///
   /// In en, this message translates to:
-  /// **'END OF THE ROUND'**
+  /// **'END OF ROUND'**
   String get finDeLaManche2;
 
   /// No description provided for @pret4.
@@ -7820,156 +7673,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'✓ Ready'**
   String get pret4;
-
-  /// No description provided for @reveleDeuxCampsASa.
-  ///
-  /// In en, this message translates to:
-  /// **'Révèle deux camps à sa mort.'**
-  String get reveleDeuxCampsASa;
-
-  /// No description provided for @prendLePouvoirDuVote.
-  ///
-  /// In en, this message translates to:
-  /// **'Take the power of the vote once.'**
-  String get prendLePouvoirDuVote;
-
-  /// No description provided for @protegeeParLeChasseur.
-  ///
-  /// In en, this message translates to:
-  /// **'Protected by the Hunter.'**
-  String get protegeeParLeChasseur;
-
-  /// No description provided for @placeDesTonneauxQuiExplosent.
-  ///
-  /// In en, this message translates to:
-  /// **'Place of barrels that explode if he is alive in the morning.'**
-  String get placeDesTonneauxQuiExplosent;
-
-  /// No description provided for @heritier.
-  ///
-  /// In en, this message translates to:
-  /// **'Heir'**
-  String get heritier;
-
-  /// No description provided for @heriteDuRoleDeSon.
-  ///
-  /// In en, this message translates to:
-  /// **'Inherited the role of his testator at his death.'**
-  String get heriteDuRoleDeSon;
-
-  /// No description provided for @themeIa.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme IA'**
-  String get themeIa;
-
-  /// No description provided for @caseLabel.
-  ///
-  /// In en, this message translates to:
-  /// **':\nbox'**
-  String get caseLabel;
-
-  /// No description provided for @generalEtVarie.
-  ///
-  /// In en, this message translates to:
-  /// **'General and varied'**
-  String get generalEtVarie;
-
-  /// No description provided for @unDinosaureQuiMangeUne.
-  ///
-  /// In en, this message translates to:
-  /// **'A dinosaur eating ice cream'**
-  String get unDinosaureQuiMangeUne;
-
-  /// No description provided for @pouvoirVolerOuEtreInvisible.
-  ///
-  /// In en, this message translates to:
-  /// **'Ability to fly or To be invisible'**
-  String get pouvoirVolerOuEtreInvisible;
-
-  /// No description provided for @returnGenereDesSituationsCourtes.
-  ///
-  /// In en, this message translates to:
-  /// **':\nreturns \"Generates short situations starting with an action. Theme: {finalPrompt} \" ;\nbox'**
-  String returnGenereDesSituationsCourtes(Object finalPrompt);
-
-  /// No description provided for @abandonTousLesJoueursDeconnectes.
-  ///
-  /// In en, this message translates to:
-  /// **'Abandon (all players disconnected)'**
-  String get abandonTousLesJoueursDeconnectes;
-
-  /// No description provided for @tousLesJoueursSeSont.
-  ///
-  /// In en, this message translates to:
-  /// **'All players disconnected'**
-  String get tousLesJoueursSeSont;
-
-  /// No description provided for @nAPasJoueA.
-  ///
-  /// In en, this message translates to:
-  /// **'{playerName} didn\'\'t play in time. The computer played for him ( {actionDetails} ).'**
-  String nAPasJoueA(Object actionDetails, Object playerName);
-
-  /// No description provided for @nAPasJoueA1.
-  ///
-  /// In en, this message translates to:
-  /// **'{playerName} didn\'\'t play in time. The computer played for him randomly.'**
-  String nAPasJoueA1(Object playerName);
-
-  /// No description provided for @joueur.
-  ///
-  /// In en, this message translates to:
-  /// **'Player'**
-  String get joueur;
-
-  /// No description provided for @tempsEcoule1.
-  ///
-  /// In en, this message translates to:
-  /// **'(Time elapsed)'**
-  String get tempsEcoule1;
-
-  /// No description provided for @tempsEcoule2.
-  ///
-  /// In en, this message translates to:
-  /// **'Time elapsed'**
-  String get tempsEcoule2;
-
-  /// No description provided for @aToucheUneCibleIl.
-  ///
-  /// In en, this message translates to:
-  /// **'{shooterDataname} hit a target! He\'\'s playing again.'**
-  String aToucheUneCibleIl(Object shooterDataname);
-
-  /// No description provided for @aTireDansLEau.
-  ///
-  /// In en, this message translates to:
-  /// **'{shooterDataname} fired into the water. In the turn of {opponentDataname} .'**
-  String aTireDansLEau(Object opponentDataname, Object shooterDataname);
-
-  /// No description provided for @unJoueur.
-  ///
-  /// In en, this message translates to:
-  /// **'A player'**
-  String get unJoueur;
-
-  /// No description provided for @inactif3ToursSansReponse.
-  ///
-  /// In en, this message translates to:
-  /// **'inactive (3 laps without response)'**
-  String get inactif3ToursSansReponse;
-
-  /// No description provided for @leJugeNAPas.
-  ///
-  /// In en, this message translates to:
-  /// **'The judge didn\'\'t choose a winner in time. No points assigned.'**
-  String get leJugeNAPas;
-
-  /// No description provided for @aLanceLesDes.
-  ///
-  /// In en, this message translates to:
-  /// **'{pName} threw the dice!'**
-  String aLanceLesDes(Object pName);
 
   /// No description provided for @jAiLanceUnePartie.
   ///
@@ -7986,7 +7689,7 @@ abstract class AppLocalizations {
   /// No description provided for @localIndisponibleRechercheActive.
   ///
   /// In en, this message translates to:
-  /// **'Local not available (Active Search)'**
+  /// **'Local unavailable (Search active)'**
   String get localIndisponibleRechercheActive;
 
   /// No description provided for @rechercheRapideMonde.
@@ -8010,7 +7713,7 @@ abstract class AppLocalizations {
   /// No description provided for @simpleVillageois.
   ///
   /// In en, this message translates to:
-  /// **'Simple Villagers'**
+  /// **'Villager'**
   String get simpleVillageois;
 
   /// No description provided for @capitaine.
@@ -8130,7 +7833,7 @@ abstract class AppLocalizations {
   /// No description provided for @vousAvezVote.
   ///
   /// In en, this message translates to:
-  /// **'You voted!'**
+  /// **'You have voted!'**
   String get vousAvezVote;
 
   /// No description provided for @inconnu.
@@ -8142,13 +7845,13 @@ abstract class AppLocalizations {
   /// No description provided for @personne.
   ///
   /// In en, this message translates to:
-  /// **'Person'**
+  /// **'Nobody'**
   String get personne;
 
   /// No description provided for @chargementDeLaPartie.
   ///
   /// In en, this message translates to:
-  /// **'Loading part...'**
+  /// **'Loading game...'**
   String get chargementDeLaPartie;
 
   /// No description provided for @systeme.
@@ -8166,37 +7869,37 @@ abstract class AppLocalizations {
   /// No description provided for @asLabel.
   ///
   /// In en, this message translates to:
-  /// **'As'**
+  /// **'Ones'**
   String get asLabel;
 
   /// No description provided for @deux.
   ///
   /// In en, this message translates to:
-  /// **'Two'**
+  /// **'Twos'**
   String get deux;
 
   /// No description provided for @trois.
   ///
   /// In en, this message translates to:
-  /// **'Three'**
+  /// **'Threes'**
   String get trois;
 
   /// No description provided for @quatre.
   ///
   /// In en, this message translates to:
-  /// **'Four'**
+  /// **'Fours'**
   String get quatre;
 
   /// No description provided for @cinq.
   ///
   /// In en, this message translates to:
-  /// **'Five'**
+  /// **'Fives'**
   String get cinq;
 
   /// No description provided for @six.
   ///
   /// In en, this message translates to:
-  /// **'Six'**
+  /// **'Sixes'**
   String get six;
 
   /// No description provided for @sectionSup.
@@ -8214,7 +7917,7 @@ abstract class AppLocalizations {
   /// No description provided for @prenezLaDefausseVisibleOu.
   ///
   /// In en, this message translates to:
-  /// **'Take the visible defect or Pick a hidden card'**
+  /// **'Take visible discard or draw a hidden card'**
   String get prenezLaDefausseVisibleOu;
 
   /// No description provided for @aa.
@@ -8232,7 +7935,7 @@ abstract class AppLocalizations {
   /// No description provided for @completeCeDessin.
   ///
   /// In en, this message translates to:
-  /// **'Complete that drawing!'**
+  /// **'Complete this drawing!'**
   String get completeCeDessin;
 
   /// No description provided for @commenceParUnDessin.
@@ -8244,7 +7947,7 @@ abstract class AppLocalizations {
   /// No description provided for @orateur.
   ///
   /// In en, this message translates to:
-  /// **'Speaker'**
+  /// **'Clue Giver'**
   String get orateur;
 
   /// No description provided for @moi.
@@ -8280,7 +7983,7 @@ abstract class AppLocalizations {
   /// No description provided for @lAdversaire.
   ///
   /// In en, this message translates to:
-  /// **'The adversary'**
+  /// **'The opponent'**
   String get lAdversaire;
 
   /// No description provided for @ecrivez.
@@ -8304,37 +8007,37 @@ abstract class AppLocalizations {
   /// No description provided for @adversaire.
   ///
   /// In en, this message translates to:
-  /// **'Adversary'**
+  /// **'Opponent'**
   String get adversaire;
 
   /// No description provided for @feuVert.
   ///
   /// In en, this message translates to:
-  /// **'GREEN'**
+  /// **'GREEN LIGHT'**
   String get feuVert;
 
   /// No description provided for @feuRouge.
   ///
   /// In en, this message translates to:
-  /// **'Red light'**
+  /// **'Red Light'**
   String get feuRouge;
 
   /// No description provided for @limite501.
   ///
   /// In en, this message translates to:
-  /// **'Limit 50'**
+  /// **'Speed Limit 50'**
   String get limite501;
 
   /// No description provided for @crevaison1.
   ///
   /// In en, this message translates to:
-  /// **'Crevaison'**
+  /// **'Flat Tire'**
   String get crevaison1;
 
   /// No description provided for @feuVert1.
   ///
   /// In en, this message translates to:
-  /// **'Green light'**
+  /// **'Green Light'**
   String get feuVert1;
 
   /// No description provided for @finDeLimite.
@@ -8400,7 +8103,7 @@ abstract class AppLocalizations {
   /// No description provided for @lesAutresJoueursRepondent.
   ///
   /// In en, this message translates to:
-  /// **'The other players answer...'**
+  /// **'Other players are answering...'**
   String get lesAutresJoueursRepondent;
 
   /// No description provided for @enAttenteDesDeclarations.
@@ -8442,7 +8145,7 @@ abstract class AppLocalizations {
   /// No description provided for @voteDecisifEnregistreEnAttente.
   ///
   /// In en, this message translates to:
-  /// **'A decisive recorded vote. Waiting for others...'**
+  /// **'Decisive vote recorded. Waiting for others...'**
   String get voteDecisifEnregistreEnAttente;
 
   /// No description provided for @egaliteParfaiteLaDeesseDe.
@@ -8472,13 +8175,13 @@ abstract class AppLocalizations {
   /// No description provided for @voteEnregistre.
   ///
   /// In en, this message translates to:
-  /// **'Recorded vote...'**
+  /// **'Vote recorded...'**
   String get voteEnregistre;
 
   /// No description provided for @lesAutresJugentTonHistoire.
   ///
   /// In en, this message translates to:
-  /// **'The others judge your story...'**
+  /// **'Others are rating your story...'**
   String get lesAutresJugentTonHistoire;
 
   /// No description provided for @vrai1.
@@ -8508,13 +8211,13 @@ abstract class AppLocalizations {
   /// No description provided for @resultatsDesVotes.
   ///
   /// In en, this message translates to:
-  /// **'Voting results'**
+  /// **'Vote results'**
   String get resultatsDesVotes;
 
   /// No description provided for @leMenteurEtait.
   ///
   /// In en, this message translates to:
-  /// **'The liar was {liarName} !'**
+  /// **'The liar was... {liarName}!'**
   String leMenteurEtait(Object liarName);
 
   /// No description provided for @lesImposteursOntGagneUn.
@@ -8598,7 +8301,7 @@ abstract class AppLocalizations {
   /// No description provided for @defiGagneCarteSRevelee.
   ///
   /// In en, this message translates to:
-  /// **'Challenge won: {challengeBid} revealed card(s)!'**
+  /// **'Challenge won: {challengeBid} card(s) revealed!'**
   String defiGagneCarteSRevelee(Object challengeBid);
 
   /// No description provided for @aPerduLeDefi.
@@ -8610,19 +8313,13 @@ abstract class AppLocalizations {
   /// No description provided for @leTourEstTermine1.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s over.'**
+  /// **'The turn is over.'**
   String get leTourEstTermine1;
-
-  /// No description provided for @aGagneAvecSaDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'{winnerName} won with its description:AppLocalizations.of(context)!. extrainfoColumnChildText 99999'**
-  String aGagneAvecSaDescription(Object winnerName, Object winningDescription);
 
   /// No description provided for @personneNAGagneCe.
   ///
   /// In en, this message translates to:
-  /// **'Nobody won this round. Equality of votes or no description.'**
+  /// **'Nobody won this round. Tie vote or no captions.'**
   String get personneNAGagneCe;
 
   /// No description provided for @aTrouveLeSymboleIl.
@@ -8634,7 +8331,7 @@ abstract class AppLocalizations {
   /// No description provided for @leTourEstTerminePersonne.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s over. Nobody found the common symbol.'**
+  /// **'Turn over. Nobody found the common symbol.'**
   String get leTourEstTerminePersonne;
 
   /// No description provided for @aEteDesigneEEt.
@@ -8646,19 +8343,19 @@ abstract class AppLocalizations {
   /// No description provided for @egalitePersonneNeMarqueDe.
   ///
   /// In en, this message translates to:
-  /// **'Equality! No one marks this turn.'**
+  /// **'Tie! Nobody scores a point this turn.'**
   String get egalitePersonneNeMarqueDe;
 
   /// No description provided for @espion.
   ///
   /// In en, this message translates to:
-  /// **'Espion'**
+  /// **'Spy'**
   String get espion;
 
   /// No description provided for @revolution.
   ///
   /// In en, this message translates to:
-  /// **'(Revolution!)'**
+  /// **' (Revolution!)'**
   String get revolution;
 
   /// No description provided for @rose1.
@@ -8682,13 +8379,13 @@ abstract class AppLocalizations {
   /// No description provided for @indiceEnvoyeEnAttenteDes1.
   ///
   /// In en, this message translates to:
-  /// **'Index sent! Waiting for others...'**
+  /// **'Clue sent! Waiting for others...'**
   String get indiceEnvoyeEnAttenteDes1;
 
   /// No description provided for @carte3.
   ///
   /// In en, this message translates to:
-  /// **'Map'**
+  /// **'Card'**
   String get carte3;
 
   /// No description provided for @score.
@@ -8696,20 +8393,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Score'**
   String get score;
-
-  /// No description provided for @applocalizationsOfContextStyleconsttextstylecolorcolors.
-  ///
-  /// In en, this message translates to:
-  /// **'{value} {guesserName} :AppLocalizations.of(context)! .styleConstTextstyleColorColors {value2} {deckIndex} / {deckTotal} — {value3} : {totalScore}'**
-  String applocalizationsOfContextStyleconsttextstylecolorcolors(
-    Object deckIndex,
-    Object deckTotal,
-    Object guesserName,
-    Object totalScore,
-    Object value,
-    Object value2,
-    Object value3,
-  );
 
   /// No description provided for @laNuitTombeSurLe.
   ///
@@ -8726,19 +8409,19 @@ abstract class AppLocalizations {
   /// No description provided for @victoireDesVillageois.
   ///
   /// In en, this message translates to:
-  /// **'Victoire des Villageois!'**
+  /// **'Villagers Win!'**
   String get victoireDesVillageois;
 
   /// No description provided for @victoireDesLoupsGarous.
   ///
   /// In en, this message translates to:
-  /// **'Victory of the Wolf-Garous!'**
+  /// **'Werewolves Win!'**
   String get victoireDesLoupsGarous;
 
   /// No description provided for @victoireDesAmoureux.
   ///
   /// In en, this message translates to:
-  /// **'Victory of Lovers!'**
+  /// **'Lovers Win!'**
   String get victoireDesAmoureux;
 
   /// No description provided for @finDuJeu.
@@ -8762,19 +8445,19 @@ abstract class AppLocalizations {
   /// No description provided for @lHeritierChoisitSonTestament.
   ///
   /// In en, this message translates to:
-  /// **'The Heir chooses his will'**
+  /// **'The Heir chooses a role model'**
   String get lHeritierChoisitSonTestament;
 
   /// No description provided for @selectionnezVotreTestateur.
   ///
   /// In en, this message translates to:
-  /// **'Select your tester'**
+  /// **'Select your role model'**
   String get selectionnezVotreTestateur;
 
   /// No description provided for @leGardeProtegeUnVillageois.
   ///
   /// In en, this message translates to:
-  /// **'The Guard Protects a Villager'**
+  /// **'The Guard protects a villager'**
   String get leGardeProtegeUnVillageois;
 
   /// No description provided for @selectionnezQuiProteger.
@@ -8792,19 +8475,19 @@ abstract class AppLocalizations {
   /// No description provided for @touchezUnJoueurPourSonder.
   ///
   /// In en, this message translates to:
-  /// **'Touch a player to probe his role'**
+  /// **'Tap a player to reveal their role'**
   String get touchezUnJoueurPourSonder;
 
   /// No description provided for @leRatMaladeRode.
   ///
   /// In en, this message translates to:
-  /// **'The sick rat is rumbling...'**
+  /// **'The Sick Rat prowls...'**
   String get leRatMaladeRode;
 
   /// No description provided for @contaminezJusquA2Joueurs.
   ///
   /// In en, this message translates to:
-  /// **'Contaminate up to 2 players'**
+  /// **'Infect up to 2 players'**
   String get contaminezJusquA2Joueurs;
 
   /// No description provided for @contaminer.
@@ -8816,52 +8499,43 @@ abstract class AppLocalizations {
   /// No description provided for @lesLoupsChassentEnMeute.
   ///
   /// In en, this message translates to:
-  /// **'Wolves hunt in pack'**
+  /// **'The Wolves hunt in a pack'**
   String get lesLoupsChassentEnMeute;
 
   /// No description provided for @votezPourDevorerUneProie.
   ///
   /// In en, this message translates to:
-  /// **'Vote to eat prey'**
+  /// **'Vote to devour a prey'**
   String get votezPourDevorerUneProie;
 
   /// No description provided for @espionnezUnJoueur.
   ///
   /// In en, this message translates to:
-  /// **'Hope a player...'**
+  /// **'Spy on a player...'**
   String get espionnezUnJoueur;
 
   /// No description provided for @leLoupNoirDecideDu.
   ///
   /// In en, this message translates to:
-  /// **'The Black Wolf decides the fate of the prey'**
+  /// **'The Black Wolf decides prey\'\'s fate'**
   String get leLoupNoirDecideDu;
-
-  /// No description provided for @infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle.
-  ///
-  /// In en, this message translates to:
-  /// **'Infect {targetName} ?AppLocalizations.of(context)!.centeractionwidgetRowMainaxissizeMainaxissizeMinThe White Wolf strikes solo'**
-  String
-  infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(
-    Object targetName,
-  );
 
   /// No description provided for @choisissezUneVictimeADevorer.
   ///
   /// In en, this message translates to:
-  /// **'Choose a victim to eat'**
+  /// **'Choose a victim to devour'**
   String get choisissezUneVictimeADevorer;
 
   /// No description provided for @laSorcierePrepareSesPotions.
   ///
   /// In en, this message translates to:
-  /// **'The Witch Prepares Her Potions'**
+  /// **'The Witch brews her potions'**
   String get laSorcierePrepareSesPotions;
 
   /// No description provided for @cibleDesLoups.
   ///
   /// In en, this message translates to:
-  /// **'Wolf target: {victimeName}'**
+  /// **'Wolves\'\' target: {victimeName}'**
   String cibleDesLoups(Object victimeName);
 
   /// No description provided for @touchezLeJoueurAEliminer.
@@ -8879,55 +8553,55 @@ abstract class AppLocalizations {
   /// No description provided for @lePyromancienPrepareSesExplosifs.
   ///
   /// In en, this message translates to:
-  /// **'Pyroman prepares explosives'**
+  /// **'The Pyromancer arms his explosives'**
   String get lePyromancienPrepareSesExplosifs;
 
   /// No description provided for @poserTonneau.
   ///
   /// In en, this message translates to:
-  /// **'Lay barrel'**
+  /// **'Place barrel'**
   String get poserTonneau;
 
   /// No description provided for @debatsDuVillage.
   ///
   /// In en, this message translates to:
-  /// **'Debates of the village'**
+  /// **'Village Debates'**
   String get debatsDuVillage;
 
   /// No description provided for @leCapitaineDesigneSonSuccesseur.
   ///
   /// In en, this message translates to:
-  /// **'Captain Appoints Successor'**
+  /// **'The Captain names a successor'**
   String get leCapitaineDesigneSonSuccesseur;
 
   /// No description provided for @dernierTirDuChasseur.
   ///
   /// In en, this message translates to:
-  /// **'Last shot by the Hunter...'**
+  /// **'Hunter\'\'s last shot...'**
   String get dernierTirDuChasseur;
 
   /// No description provided for @leFossoyeurReveleUneSepulture.
   ///
   /// In en, this message translates to:
-  /// **'The Fossoyeur reveals a grave'**
+  /// **'The Gravedigger reveals a grave'**
   String get leFossoyeurReveleUneSepulture;
 
   /// No description provided for @coupDEtatDuDictateur.
   ///
   /// In en, this message translates to:
-  /// **'Dictator\'\'s coup d\'\'état!'**
+  /// **'Dictator\'\'s Coup!'**
   String get coupDEtatDuDictateur;
 
   /// No description provided for @voteDuTribunalPopulaire.
   ///
   /// In en, this message translates to:
-  /// **'Vote of the People\'\'s Court'**
+  /// **'People\'\'s Court Vote'**
   String get voteDuTribunalPopulaire;
 
   /// No description provided for @touchezUnSuspectPourVoter.
   ///
   /// In en, this message translates to:
-  /// **'Touch a suspect to vote'**
+  /// **'Tap a suspect to vote'**
   String get touchezUnSuspectPourVoter;
 
   /// No description provided for @village.
@@ -8945,7 +8619,7 @@ abstract class AppLocalizations {
   /// No description provided for @outreTombe.
   ///
   /// In en, this message translates to:
-  /// **'Overseas'**
+  /// **'Graveyard'**
   String get outreTombe;
 
   /// No description provided for @amoureux.
@@ -8954,31 +8628,22 @@ abstract class AppLocalizations {
   /// **'Lovers'**
   String get amoureux;
 
-  /// No description provided for @applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux.
-  ///
-  /// In en, this message translates to:
-  /// **'{senderName} : AppLocalizations.of(context)!.styleTextstyleFontweightFontweightBoldSmall Horses'**
-  String
-  applocalizationsOfContextStyletextstylefontweightfontweightboldpetitsChevaux(
-    Object senderName,
-  );
-
   /// No description provided for @courseIndividuelle.
   ///
   /// In en, this message translates to:
-  /// **'Individual race'**
+  /// **'Individual Race'**
   String get courseIndividuelle;
 
   /// No description provided for @k3Lancers.
   ///
   /// In en, this message translates to:
-  /// **'{lastHoldAction} ( {value} /3 casts)'**
+  /// **'👉 {lastHoldAction} ({value}/3 rolls)'**
   String k3Lancers(Object lastHoldAction, Object value);
 
   /// No description provided for @joueEnDirect3Lancers.
   ///
   /// In en, this message translates to:
-  /// **'{value} plays live... ( 99999 / 3 shots)'**
+  /// **'👉 {value} is rolling live... ({value2}/3 rolls)'**
   String joueEnDirect3Lancers(Object value, Object value2);
 
   /// No description provided for @gardeS.
@@ -8990,25 +8655,25 @@ abstract class AppLocalizations {
   /// No description provided for @cur.
   ///
   /// In en, this message translates to:
-  /// **'♥ Heart'**
+  /// **'♥ Hearts'**
   String get cur;
 
   /// No description provided for @carreau.
   ///
   /// In en, this message translates to:
-  /// **'♦ Carrel'**
+  /// **'♦ Diamonds'**
   String get carreau;
 
   /// No description provided for @trefle.
   ///
   /// In en, this message translates to:
-  /// **'♣ Trèfle'**
+  /// **'♣ Clubs'**
   String get trefle;
 
   /// No description provided for @pique.
   ///
   /// In en, this message translates to:
-  /// **'♠ Pique'**
+  /// **'♠ Spades'**
   String get pique;
 
   /// No description provided for @equipeARouge.
@@ -9032,7 +8697,7 @@ abstract class AppLocalizations {
   /// No description provided for @demasquezLInfiltreEtMr.
   ///
   /// In en, this message translates to:
-  /// **'Unmasking the Infiltrated and Mr. White!'**
+  /// **'Unmask the Undercover and Mr. White!'**
   String get demasquezLInfiltreEtMr;
 
   /// No description provided for @passeLeTelephoneAvantQu.
@@ -9044,25 +8709,25 @@ abstract class AppLocalizations {
   /// No description provided for @proposezLeMeilleurSynonymeEt.
   ///
   /// In en, this message translates to:
-  /// **'Propose the best synonym and vote!'**
+  /// **'Suggest the best synonym and vote!'**
   String get proposezLeMeilleurSynonymeEt;
 
   /// No description provided for @leClassiqueAvecChoixEt.
   ///
   /// In en, this message translates to:
-  /// **'Classic, with choice and customized AI!'**
+  /// **'The classic, with choices and custom AI!'**
   String get leClassiqueAvecChoixEt;
 
   /// No description provided for @repondezALaQuestionSecrete.
   ///
   /// In en, this message translates to:
-  /// **'Answer the secret question... If you lose!'**
+  /// **'Answer the secret question... if you lose!'**
   String get repondezALaQuestionSecrete;
 
   /// No description provided for @faitesDesChoixImpossiblesAvec.
   ///
   /// In en, this message translates to:
-  /// **'Make impossible choices with IA options and votes.'**
+  /// **'Make impossible choices with AI options and voting.'**
   String get faitesDesChoixImpossiblesAvec;
 
   /// No description provided for @retrouvezVosMotsSecretsPar.
@@ -9074,13 +8739,13 @@ abstract class AppLocalizations {
   /// No description provided for @faitesDevinerDesNomsEn.
   ///
   /// In en, this message translates to:
-  /// **'Make names guess in 3 sleeves!'**
+  /// **'Make players guess names across 3 rounds!'**
   String get faitesDevinerDesNomsEn;
 
   /// No description provided for @uneQuestionDrolePourLa.
   ///
   /// In en, this message translates to:
-  /// **'A funny question for the person who will have the object!'**
+  /// **'A funny question for the person holding the object!'**
   String get uneQuestionDrolePourLa;
 
   /// No description provided for @devinezLeMotAvecL.
@@ -9092,7 +8757,7 @@ abstract class AppLocalizations {
   /// No description provided for @reperezLeSymboleCommunLe.
   ///
   /// In en, this message translates to:
-  /// **'Find the common symbol faster!'**
+  /// **'Spot the common symbol the fastest!'**
   String get reperezLeSymboleCommunLe;
 
   /// No description provided for @genereDesDilemmesAuFormat.
@@ -9104,7 +8769,7 @@ abstract class AppLocalizations {
   /// No description provided for @jePasse.
   ///
   /// In en, this message translates to:
-  /// **'I\'\'m passing'**
+  /// **'I pass'**
   String get jePasse;
 
   /// No description provided for @vote.
@@ -9134,19 +8799,19 @@ abstract class AppLocalizations {
   /// No description provided for @pile.
   ///
   /// In en, this message translates to:
-  /// **'Cell'**
+  /// **'Tails'**
   String get pile;
 
   /// No description provided for @face.
   ///
   /// In en, this message translates to:
-  /// **'Face'**
+  /// **'Heads'**
   String get face;
 
   /// No description provided for @pasAssezDeJoueursIl.
   ///
   /// In en, this message translates to:
-  /// **'Not enough players! This configuration requires at least {minPlayers} players.'**
+  /// **'Not enough players! At least {minPlayers} players required for this setup.'**
   String pasAssezDeJoueursIl(Object minPlayers);
 
   /// No description provided for @tuEs.
@@ -9158,19 +8823,19 @@ abstract class AppLocalizations {
   /// No description provided for @tonMotEst.
   ///
   /// In en, this message translates to:
-  /// **'Your word is {wordCivil}'**
+  /// **'Your word is: {wordCivil}'**
   String tonMotEst(Object wordCivil);
 
   /// No description provided for @tonMotEst1.
   ///
   /// In en, this message translates to:
-  /// **'Your word is {wordUndercover}'**
+  /// **'Your word is: {wordUndercover}'**
   String tonMotEst1(Object wordUndercover);
 
   /// No description provided for @tuNAsPasDe.
   ///
   /// In en, this message translates to:
-  /// **'You don\'\'t have a word. Bluffe!'**
+  /// **'You don\'\'t have a word. Bluff!'**
   String get tuNAsPasDe;
 
   /// No description provided for @commeConvenuTuCommences.
@@ -9178,12 +8843,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{mrWhitePlayer} , as agreed, you start!'**
   String commeConvenuTuCommences(Object mrWhitePlayer);
-
-  /// No description provided for @quiPourraitLePlusApplocalizations.
-  ///
-  /// In en, this message translates to:
-  /// **'Who Could More?AppLocalizations.of(context)!.bodyPaddingPaddingConstEdgeinsetssoft'**
-  String get quiPourraitLePlusApplocalizations;
 
   /// No description provided for @votePar.
   ///
@@ -9200,13 +8859,13 @@ abstract class AppLocalizations {
   /// No description provided for @ilFautAuMoins41.
   ///
   /// In en, this message translates to:
-  /// **'It takes at least 4 players for Codenames (2 per team)!'**
+  /// **'At least 4 players required for Codenames (2 per team)!'**
   String get ilFautAuMoins41;
 
   /// No description provided for @impossibleDeFormerLesEquipes.
   ///
   /// In en, this message translates to:
-  /// **'Cannot form teams (minimum size not reached). Restart with at least 4 players.'**
+  /// **'Unable to form teams (minimum size not reached). Restart with at least 4 players.'**
   String get impossibleDeFormerLesEquipes;
 
   /// No description provided for @lEquipeAReveleL.
@@ -9302,25 +8961,25 @@ abstract class AppLocalizations {
   /// No description provided for @ecurie1.
   ///
   /// In en, this message translates to:
-  /// **'Surgery 1'**
+  /// **'Stable 1'**
   String get ecurie1;
 
   /// No description provided for @ecurie2.
   ///
   /// In en, this message translates to:
-  /// **'Surge 2'**
+  /// **'Stable 2'**
   String get ecurie2;
 
   /// No description provided for @ecurie3.
   ///
   /// In en, this message translates to:
-  /// **'Surgery 3'**
+  /// **'Stable 3'**
   String get ecurie3;
 
   /// No description provided for @ecurie4.
   ///
   /// In en, this message translates to:
-  /// **'Surgery 4'**
+  /// **'Stable 4'**
   String get ecurie4;
 
   /// No description provided for @nombreMaxDeJoueurs.
@@ -9347,18 +9006,6 @@ abstract class AppLocalizations {
   /// **'Part of \'{0}\' pending'**
   String get partieDeEnAttente;
 
-  /// No description provided for @termine.
-  ///
-  /// In en, this message translates to:
-  /// **'Terminated: \'{0}\''**
-  String get termine;
-
-  /// No description provided for @vainqueur2.
-  ///
-  /// In en, this message translates to:
-  /// **'Winner:'**
-  String get vainqueur2;
-
   /// No description provided for @joueurSPretS.
   ///
   /// In en, this message translates to:
@@ -9374,13 +9021,13 @@ abstract class AppLocalizations {
   /// No description provided for @lampe.
   ///
   /// In en, this message translates to:
-  /// **'Lamp'**
+  /// **'Flashlight'**
   String get lampe;
 
   /// No description provided for @trousseSoin.
   ///
   /// In en, this message translates to:
-  /// **'Care package'**
+  /// **'Medkit'**
   String get trousseSoin;
 
   /// No description provided for @hache.
@@ -9392,25 +9039,25 @@ abstract class AppLocalizations {
   /// No description provided for @arbalete.
   ///
   /// In en, this message translates to:
-  /// **'Arbalet'**
+  /// **'Crossbow'**
   String get arbalete;
 
   /// No description provided for @fusil.
   ///
   /// In en, this message translates to:
-  /// **'Fusil'**
+  /// **'Shotgun'**
   String get fusil;
 
   /// No description provided for @talkie.
   ///
   /// In en, this message translates to:
-  /// **'Talkie'**
+  /// **'Walkie-Talkie'**
   String get talkie;
 
   /// No description provided for @tronconneuse.
   ///
   /// In en, this message translates to:
-  /// **'Transformer'**
+  /// **'Chainsaw'**
   String get tronconneuse;
 
   /// No description provided for @survie.
@@ -9428,145 +9075,31 @@ abstract class AppLocalizations {
   /// No description provided for @rejouerGarderPts.
   ///
   /// In en, this message translates to:
-  /// **'JOIN (GUARD PTS)'**
+  /// **'REPLAY (KEEP PTS)'**
   String get rejouerGarderPts;
 
   /// No description provided for @indicesMontresA.
   ///
   /// In en, this message translates to:
-  /// **'Indices shown at'**
+  /// **'Clues shown to'**
   String get indicesMontresA;
-
-  /// No description provided for @playersWinneridname.
-  ///
-  /// In en, this message translates to:
-  /// **'Players winneridname'**
-  String get playersWinneridname;
-
-  /// No description provided for @packageSensorsPlusSensorsPlus.
-  ///
-  /// In en, this message translates to:
-  /// **'package:sensors plus/sensors plus.dart'**
-  String get packageSensorsPlusSensorsPlus;
-
-  /// No description provided for @dossierDeJeuGamecodeSupprime.
-  ///
-  /// In en, this message translates to:
-  /// **'Game Folder \$gameCode deleted successfully.'**
-  String get dossierDeJeuGamecodeSupprime;
-
-  /// No description provided for @erreurLorsDuNettoyageSupabase.
-  ///
-  /// In en, this message translates to:
-  /// **'Error cleaning Supabase: \$e'**
-  String get erreurLorsDuNettoyageSupabase;
-
-  /// No description provided for @supabaseUploadTentativeAttemptMaxretries.
-  ///
-  /// In en, this message translates to:
-  /// **'--- [Supabase Upload] Attempted \$attempt/\$maxRetrievals for part \$gameCode ---'**
-  String get supabaseUploadTentativeAttemptMaxretries;
-
-  /// No description provided for @jpg.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'const Uuid().v4()\'}\'.jpg'**
-  String get jpg;
-
-  /// No description provided for @supabaseUploadSuccesTentativeAttempt.
-  ///
-  /// In en, this message translates to:
-  /// **'--- [Supabase Upload] Success (Tentative \$attempt): \$publicUrl ---'**
-  String get supabaseUploadSuccesTentativeAttempt;
-
-  /// No description provided for @supabaseUploadErreurTentativeAttempt.
-  ///
-  /// In en, this message translates to:
-  /// **'--- [Supabase Upload] ERREUR (Tentative \$attempt/\$maxRetries) ---'**
-  String get supabaseUploadErreurTentativeAttempt;
-
-  /// No description provided for @erreurE.
-  ///
-  /// In en, this message translates to:
-  /// **'Error: \$e'**
-  String get erreurE;
-
-  /// No description provided for @supabaseUploadEchecDefinitif.
-  ///
-  /// In en, this message translates to:
-  /// **'--- [Supabase Upload] DEFINITE ---'**
-  String get supabaseUploadEchecDefinitif;
-
-  /// No description provided for @uploadReussiPublicurl.
-  ///
-  /// In en, this message translates to:
-  /// **'Upload successful: \$publicUrl'**
-  String get uploadReussiPublicurl;
-
-  /// No description provided for @erreurSupabaseStorageexception.
-  ///
-  /// In en, this message translates to:
-  /// **'--- SUPBASE ERROR (StorageException) ---'**
-  String get erreurSupabaseStorageexception;
-
-  /// No description provided for @message1.
-  ///
-  /// In en, this message translates to:
-  /// **'Message: \$\'{\'e.message \'}\''**
-  String get message1;
-
-  /// No description provided for @statuscode.
-  ///
-  /// In en, this message translates to:
-  /// **'StatusCode: \$\'{\'e.statusCode\'}\''**
-  String get statuscode;
-
-  /// No description provided for @error.
-  ///
-  /// In en, this message translates to:
-  /// **'Error: \$\'{\'e.error\'}\''**
-  String get error;
-
-  /// No description provided for @erreurInattendueLorsDeL.
-  ///
-  /// In en, this message translates to:
-  /// **'--- INATTENDED ERROR AT UPLOAD ---'**
-  String get erreurInattendueLorsDeL;
-
-  /// No description provided for @typeDErreur.
-  ///
-  /// In en, this message translates to:
-  /// **'Error type: \$\'{\'e.runtimeType\'}\''**
-  String get typeDErreur;
-
-  /// No description provided for @stacktraceStacktrace.
-  ///
-  /// In en, this message translates to:
-  /// **'StackTrace: \$stackTrace'**
-  String get stacktraceStacktrace;
-
-  /// No description provided for @timeSUp1.
-  ///
-  /// In en, this message translates to:
-  /// **'Time\\\'\'s Up'**
-  String get timeSUp1;
 
   /// No description provided for @marquesDeVoiture.
   ///
   /// In en, this message translates to:
-  /// **'Car make'**
+  /// **'Car brands'**
   String get marquesDeVoiture;
 
   /// No description provided for @paysDuMonde.
   ///
   /// In en, this message translates to:
-  /// **'World countries'**
+  /// **'Countries of the world'**
   String get paysDuMonde;
 
   /// No description provided for @fruitsLegumes.
   ///
   /// In en, this message translates to:
-  /// **'Fruit & Vegetables'**
+  /// **'Fruits & Vegetables'**
   String get fruitsLegumes;
 
   /// No description provided for @animaux.
@@ -9578,13 +9111,13 @@ abstract class AppLocalizations {
   /// No description provided for @metiers.
   ///
   /// In en, this message translates to:
-  /// **'Trade'**
+  /// **'Professions'**
   String get metiers;
 
   /// No description provided for @objetsDeLaCuisine.
   ///
   /// In en, this message translates to:
-  /// **'Kitchenware'**
+  /// **'Kitchen items'**
   String get objetsDeLaCuisine;
 
   /// No description provided for @villes.
@@ -9608,13 +9141,13 @@ abstract class AppLocalizations {
   /// No description provided for @partiesDuCorps.
   ///
   /// In en, this message translates to:
-  /// **'Parts of the body'**
+  /// **'Body parts'**
   String get partiesDuCorps;
 
   /// No description provided for @vetements.
   ///
   /// In en, this message translates to:
-  /// **'Clothing'**
+  /// **'Clothes'**
   String get vetements;
 
   /// No description provided for @instrumentsDeMusique.
@@ -9638,7 +9171,7 @@ abstract class AppLocalizations {
   /// No description provided for @filmsDisney.
   ///
   /// In en, this message translates to:
-  /// **'Disney Films'**
+  /// **'Disney movies'**
   String get filmsDisney;
 
   /// No description provided for @superHeros.
@@ -9650,7 +9183,7 @@ abstract class AppLocalizations {
   /// No description provided for @verbesDu1erGroupe.
   ///
   /// In en, this message translates to:
-  /// **'First group verbs'**
+  /// **'First-group verbs (-er)'**
   String get verbesDu1erGroupe;
 
   /// No description provided for @chosesRondes.
@@ -9668,86 +9201,8 @@ abstract class AppLocalizations {
   /// No description provided for @marquesDeVetements.
   ///
   /// In en, this message translates to:
-  /// **'Clothing markings'**
+  /// **'Clothing brands'**
   String get marquesDeVetements;
-
-  /// No description provided for @butDuJeuEtreLe.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nBe the player with the most points at the end of the game.\n\n**Draft**\n1. Each player receives **7 response cards** in hand.\n2. A player is named **Juge** (the role turns at each round).\n3. The Judge reads the **question card** aloud.\n4. All **other players** secretly choose **1 reply card** from their hand and submit it.\n5. The judge reads all the answers and designates **the funniest**.\n6. The winner of the round score **1 point**.\n7. Each player **poche** a new card to return to 7.\n8. The role of Judge passes to the next player.\n\n** Important rules**\n- Judge ** doesn\'\'t play** card during his turn.\n- The answers are **anonymous**: the Judge does not know who wrote what.\n- We can only play one card** per handle.'**
-  String get butDuJeuEtreLe;
-
-  /// No description provided for @objectifPrenezDesCartesPour.
-  ///
-  /// In en, this message translates to:
-  /// **'** Objective**\nTake cards to create matching pairs. Avoid being the player who holds the Zombie card at the end of the game.\n**Draft**\n1. The game starts with 33 cards (16 pairs + 1 Zombie card).\n2. The cards are distributed to the 4 players.\n3. Each turn a player takes a card from the next player.\n4. If the card creates a pair, it is automatically defeated.\n5. The player\'\'s hand is mixed.\n6. The first player to no longer have cards won.\n7. The remaining player with the Zombie card lost!'**
-  String get objectifPrenezDesCartesPour;
-
-  /// No description provided for @butDuJeuObtenirLe.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nGet the highest score by filling 13 categories with 5 dice.\n\n**Running of a tower**\n1. **Lance** : You can throw the 5 dice up to 3 times per turn.\n2. **Keep** : After the 1st or 2nd throw, you can keep some dice and restart others.\n3. **Score**: After at least one throw, you have to choose a category to score. Each category can only be used once per part.\n\n**Category**\n- **As to Six** : Sum of the corresponding dice. (Bound 35 points if the upper section totals 63 points or more).\n- **Brelan** (3 or more identical dice): Sum of all the dice.\n- ** Square** (4 or more identical dice): Sum of all the dice.\n- **Full** (3 dice identical + 1 pair): 25 points.\n- **Small Suite** (4 consecutive dice): 30 points.\n- **Large Suite** (5 consecutive dice): 40 points.\n- **Yams** (5 dice identical): 50 points.\n- **Chance** : Sum of all the dice.'**
-  String get butDuJeuObtenirLe;
-
-  /// No description provided for @objectifNePasAvoirL.
-  ///
-  /// In en, this message translates to:
-  /// **'** Objective**\nDo not have the device in your hands when the potato explodes!\n\n**Draft**\n1. A theme appears on the screen.\n2. The player holding the device must give an answer corresponding to the theme.\n3. As soon as he answered, he quickly passed the plane to his neighbor.\n4. The neighbour must in turn find a new answer and pass the device.\n5. Time is hidden and random: the potato can explode at any time!\n6. The player holding the device at the time of the explosion loses the handle and receives a pledge.'**
-  String get objectifNePasAvoirL;
-
-  /// No description provided for @principeGeneralGribouillisEstUn.
-  ///
-  /// In en, this message translates to:
-  /// **'**General principle**\nGribouillis is a drawing game inspired by the \"Arab phone\", where ideas change at each stage. There are 3 game modes:\n\n**1. Normal Mode (Arabic Illustrated Phone)**\n- **Writing**: Each player writes a sentence.\n- **Drawing**: Each player receives another sentence and draws it.\n- **Devinette** : Each player receives a drawing and guesses what it represents.\n- **Alternance** : The game alternates drawing and guess until each \"album\" has gone around all the players.\n- **But** : Have fun seeing how a simple sentence turns into something completely different!\n\n**2. Complement Mode (Collaborative Drawing)**\n- **Croquis**: Each player starts a simple drawing.\n- **Complete**: Each player receives another\'\'s drawing and must enrich it, without deleting what already exists.\n- **Alternance**: The drawing goes from player to player, each adding its touch.\n- **Parameter \"Add 1\"**:\n- *If disabled (default)*: It is a string. The drawing evolves at each stage (Player A -> Player B -> Player C...).\n- *If activated*: The initial drawing of each player is completed by all other players, creating several collective works in parallel.\n- **But**: Create surprising and fun collective works of art.\n\n**3. Brise-Glace Mode (Creative Interaction)**\n- **Writing**: Each player writes a personal theme (ex: AppLocalizations.of(context)!.myPreference).\n- **Drawing**: Each player receives the themes from **all other players** and must draw them.\n- **But** : Ideal to break the ice, discover the tastes of others and launch creativity in a collaborative and light way.'**
-  String get principeGeneralGribouillisEstUn;
-
-  /// No description provided for @yzObjectifAvoirLeMoins.
-  ///
-  /// In en, this message translates to:
-  /// **'Objective\n\nHave as few points as possible at the end of the game.\nThe game stops when a player reaches 100 points or more, and the winner is the one with the lowest total score.\n\nEquipment\n\n150 cards numbered from –2 to +12\n\nImplementation\n\nMix all the cards.\nEach player receives 12 cards, placed face down in front of him, in 4 columns × 3 rows.\nThe other cards form a stock. Return the first card to form the waste.\nEach player returns 2 cards of his choice from his 12.\n\nThe course of a tour\n\nIn turn, you have **30 seconds** to choose between two actions:\n\n1. Take the waste card\nYou must exchange it with one of your 12 cards (visible or hidden side).\nThe replaced card goes on the waste.\n\n2. Piocher a card face down\nYou look at the map:\n- either you keep it and replace one of your cards (as above),\n- either you refuse it → you place it directly on the waste, and in this case you must return one of your cards still hidden.\n\nSpecial rules\n\nThree identical cards in a column → are immediately defeated (value 0).\n\nEnd of handle:\n\nThe handle ends when a player has revealed all his cards.\nAll other players then reveal their remaining cards. The handle\'\'s over.\nAll players count the sum of their cards.\n\nPlease note: if the player who finishes does not have the lowest score in the round, he takes a penalty of +10 points (his handle score is doubled in the original version, we will use +10 to simplify).\n\nEnd of game\n\nWe play as many sleeves as we need.\nOnce a player reaches 100 points or more, the game stops.\nThe player with the lowest cumulative score wins.'**
-  String get yzObjectifAvoirLeMoins;
-
-  /// No description provided for @iAReglesDuPoker.
-  ///
-  /// In en, this message translates to:
-  /// **'Objective\n\nWin the chips from other players by having:\n- the best hand of 5 cards during slaughter,\n- or by making them give up (to sleep) thanks to the bets.\n\nHand classification (from strongest to weakest)\n\n1. Royal flush : 10 – V – D – R – A of the same colour\n2. Quint flush: 5 cards that follow each other, same color\n3. Square: 4 identical cards\n4. Full: 3 identical cards + 1 pair\n5. Colour (flush): 5 cards of the same color (non-consecutive)\n6. Next (Fifth): 5 cards that follow each other (different colors)\n7. Brelan: 3 identical cards\n8. Double pair\n9. Pair\n10. High card (highest card if no one gets better)\n\nð\n\n1. Blinds\nThe player to the left of the dealer sets the small blind.\nThe next player sets the big blind.\n\n2. Distribution\nEach player receives 2 closed cards (the \"private cards\").\n\n3. Auction towers and common cards\n- Preflop: bet trick with private cards.\n- Flop: 3 common maps revealed. New bets.\n- Tower: 4th common map revealed. New bets.\n- River: 5th and last common map revealed. Last bet.\n\n4. Shooting (showdown)\nIf several players stay, each shows their game.\nThe best combination of 5 cards (among its 2 private cards + the 5 communes) wins the pot.\n\nPossible actions\n\nIn turn, a player has **30 seconds** for:\n- Checker: don\'\'t bet anything, only if nobody\'\'s ever bet again.\nPut some chips in the pot.\n- Follow (Call): equal the running.\n- Relaunch (Raise): increase the bet.\n- Go to bed (Fold): drop his cards and get out of it.\n\nEnd of game\n\nThe game continues as long as there remain at least 2 players with chips.\nThe final winner is the one who takes all the chips.'**
-  String get iAReglesDuPoker;
-
-  /// No description provided for @butDuJeuGagnerLe.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nWin the most XP by carrying out actions and responding to truths!\n\n**Draft**\n1. The roulette is the player whose turn it is.\n2. The player shoots \"Action\" or \"Verity\".\n3. Classic mode: A random challenge/question is displayed.\n4. Judge Mode: A random player writes the challenge, then the player realizes it.\n5. Other players validate with a vote Yes/No.\n6. The validation percentage determines the XP won.\n\n**Special rules**\n- 100% validation = maximum XP\n- Player with the most XP becomes Admin of the game\n- The button \"End of handle\" allows to close the part'**
-  String get butDuJeuGagnerLe;
-
-  /// No description provided for @butDuJeuLeBut.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nThe goal is to be the first to get rid of all his cards to become President. The last player with cards in hand becomes the Asshole.\n\n**Material and Players**\n- **Maps** : 52 cards.\n- **Players**: 3 to 6 players.\n\n**Card Value**\nThe order of the cards, from the weakest to the strongest, is:\n**3, 4, 5, 6, 7, 8, 9, 10, Valet, Lady, King, As, 2.**\nThe **2** is the strongest card and can beat any other card or combination.\n\n**Manual operation**\n1. **Distribution**: All cards are distributed equally among players.\n2. **First round**:\n- For the very first game, the player who owns the **3 of Trèfle ( He must play this card (only or with others 3).\n- For the next sleeves, the **Assess wheel** of the previous sleeve starts.\n3. **Play cards**: The first player puts on the table:\n- Only one card (e.g. one 7).\n- One pair (ex: two 8).\n- A brelan (ex: three Valets).\n- One square (ex: four 5).\n4. **Continued from round**: The next player (in a clockwise direction) has **30 seconds** to play the same number of cards** but a **higher value**.\n- Example: If a player poses a pair of 6, the next one must pose a pair of 7, Ladies, As, etc. \n5. **Skip your turn**: If a player cannot or does not want to play, he must pass his turn. Once a player has passed, he cannot play again until the end of the current fold.\n6. **End of a fold**: The fold ends when all players have passed their turn. The last player to have placed cards wins the fold, picks up the cards from the table (set them aside) and starts the next fold by playing what he wants.\n7. **The power of 2**: Play one or more **2** beats any combination and ends the fold instantly. The person who played the 2 wins the fold and starts playing again.\nTo beat a pair, you have to play a pair of 2! \n\n**End of the English Channel and Roles**\n- As soon as a player has no cards, he\'\'s done. The game continues until there is only one player left.\n- The order of the end determines the roles for the next round:\n- **1st**: President\n- **2nd**: Vice-President\n- **Last** : Asshole\n- **Before-last** : Vice-Ass-Trou\n- **Other** (if any): Neutral\n\n**Next month: Card Exchange! **\nBefore starting the new round, players exchange cards:\n- The **Asshole** gives his **two best cards** to the **President**.\n- The **Chair** gives him in return the **two cards of his choice** (usually his worst).\n- If there are 4 players or more, the **Vice-Cut** gives its **best card** to the **Vice-President**.\n- The **Vice-President** gives him the **map of his choice**.\n\n**Special rules**\n- â›â€ **Cannot end with a 2**: A player has no right to get rid of his last card if it is a 2. This blow is considered invalid.\n**Variant Revolution (optional)**: If a player sets a square (4 identical cards), he can announce \"Revolution!\". The order of value of the cards is then reversed until the end of the sleeve (the 3 becomes the strongest, and the 2 the weakest).'**
-  String get butDuJeuLeBut;
-
-  /// No description provided for @butDuJeuReussirDeux.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nSuccess two challenges before the other players.\n\n**In place**\n- Each player starts with 4 cards: 3 Roses and 1 Skull.\n- Every card on the carpet remains tied to its owner.\n\n**Draft**\n1. In turn, a player can put a card face down on his carpet.\n2. When he no longer wants to pose, he challenges by announcing the number of cards he thinks he can return.\n3. Other players can bid or pass.\n4. The highest bidder becomes the challenger and returns the advertised cards.\n5. First he returns his own cards, then those of other players if necessary.\n\n**Resolution**\n- If a Skull appears, the challenge is lost.\n- If the challenge is won, the player scores a point. The first at 2 points wins the game.\n- If a challenge is lost, the player loses a card at random from his remaining hand. If he loses his Skull, he has to undo another one immediately.'**
-  String get butDuJeuReussirDeux;
-
-  /// No description provided for @butDuJeuFaireDeviner.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nTo guess a word by drawing, before the end of the allotted time.\n\n**Draft**\n1. **Drawer/word selection**: A player is designated to draw, and a word is secretly attributed to him.\n2. **Drawing**: The draftsman has a limited time to guess the word by drawing. He can neither speak nor mimic nor write letters or figures.\n3. **Devinettes**: Other players offer words in a chat.\n4. **Validation**: The cartoonist sees the proposals in the chat and clicks on a \"Find!\" button next to the good message to designate the winner.\n5. **Points**: The player who found and the draftsman win a point.\n6. **Next Tower**: A new draftsman is appointed.\n\n**Options**\n- **Only 30 strokes**: The draftsman is limited to a maximum of 30 traits.'**
-  String get butDuJeuFaireDeviner;
-
-  /// No description provided for @butDuJeuFaireDeviner1.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nLet your partner guess as many mysterious words as possible, each writing a single word clue. The same or invalid indices shall be eliminated.\n\n**Draft**\n1. **Selection of the Devin**: A player is designated as the \"Devin\" for the round. He doesn\'\'t see the word mystery.\n2. **Choice of the Word Mystery**: The Devin chooses a word from a list (or the master of the game chooses one).\n3. **Indice Writing**: All other players (\"Indices\") secretly write ONE single word index that will help the Devin find the word mystery.\n4. **Indices Filter**: All indices are revealed. The same indices (even if spelled differently, e.g. \"chat\" and \"chats\") or invalid (very close to the word mystery, invented, etc.) are eliminated. Only the unique and valid clues are shown in the Devin.\n5. **Devinette** : The Devin looks at the remaining clues and tries to guess the word mystery. He only has one attempt.\n6. **Rating**:\n- If the Devin finds the word mystery: The team wins 1 point.\n- If the Devin doesn\'\'t find the word mystery: 0 point.\n- If the Devin doesn\'\'t answer: 0 point.\n\n**Examples of invalid indices:**\n- Mystery word: \"Chat.\" Invalid indices: \"chaton\", \"feel\", \"miaou\", \"minou\".\n- Identical indices: If 2 players write \"animal\" for \"Chat\", \"animal\" is eliminated.'**
-  String get butDuJeuFaireDeviner1;
-
-  /// No description provided for @butDuJeuPourLes.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\n- For **Village**: Eliminate all Wolf-Garous, White Wolf, Malade Rat (except Mercenary if it wins).\n- For the **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard): Eliminate all Villagers.\n- For the **Solitaires** : Objective specific to each person (White Loup: being alone; Mercenary: Kill his target at J1; Rat Sick: contaminate all).\n- For the ** Lovers** (if Wolf + Village) : To be the only two survivors.\n\n**Draft**\nThe game alternates between phases of **night** and **day**.\n\n* Night**\n1. The game leader (the app) announces that the village is asleep.\n2. Different characters wake up in turn to use their powers:\n- **Cupidon** (first night only): Names two players who will fall in love. If they are a Wolf and a Villager, their goal changes.\n- The**Heritage** (first night only): Refers to a tester.\n- The **Seeing** wakes up and designates a player to discover his true role. (Do not detect Black Wolf infection).\n- The **Mentalist** (passive) perceives the outcome of the village vote.\n- The **Rat Malade**: Contaminates two players (who will know the others contaminated).\n- The **Loups-Garous** (Loup-Garou, Loup Noir, Loup Bavard - vote together) wake up, concert and designate a victim to eat.\n- The **Black Loup** can once turn the victim into an infected Loup-Garou (who keeps his powers and becomes Wolf). The Mentalist and Fossoyer can detect the infected, the Voyante no.\n- The **White Loup** (one night out of two): Despouses a player of his choice (overturns the protections).\n- Sorcery** wakes up. She sees the wolf victim and can use one of her two potions (only once per part): a potion of **healing** to save the victim, or a potion of**poisoning** to kill someone.\n- The **Pyroman** : Chooses to store a barrel of Greek fire or detonate those already placed (must be alive in the morning).\n- The **Necromancer**: May communicate with the dead.\n\n* Day**\n1. The village is waking up. The app announces who died overnight.\n2. Dead players reveal their role and are eliminated (they can no longer communicate, except the Necromank with the dead).\n- Le **Loup Bavard** : Must utter a secret word or die at sunset (unless Dictator takes power).\n3. Survivors are arguing to try to expose impostors.\n4. After the discussions, all players vote to eliminate a suspect.\n- The **Dictator** (once): Can take the vote. If he eliminates a wolf, he becomes Mayor; Otherwise, he dies.\n- The **Captain** : His vote counts double. If eliminated, he must appoint a successor before he dies.\n- The **Mercenary**: If his target is eliminated on the first day, he wins alone. Otherwise, he becomes a Villager.\n5. The player who receives the most votes is eliminated, reveals his role, and is out of the game.\n- The **Chasseur** : If he is eliminated (day and night), he has the power to bring another player with him.\n- The **Fossoyeur** : When he died, he identified two players (one from the opposite camp, one from his camp).\n- The Lovers**: If one dies, the other follows him with grief.\n- The**Heritage**: If his testator dies, he takes up his role (unless dead or contaminated).\n6. A new night begins.\n\n**Conditions of Victory**\n- **Village**: Eliminate all Wolf-Garous, White Wolf, Sick Rat.\n- **Loups-Garous** (moute): To be equal or higher in number to the Villagers.\n- **White Loup**: Being the only survivor.\n**Mercenary**: Kill his target on the first day.\n- **Rat Malade**: Contaminate all live players.\n- ** Lovers** (Loup + Village) : To be the only two survivors.\n\n**Important notes**\n- The **Chaperon Rouge** is protected by the Hunter against the Wolf-Garous while the Hunter is alive.\n- The **Garde** protects a Wolf-Garous target (cannot protect twice the same person).\n- The White Wolf\'\'s powers don\'\'t know the protections.\n- The Pyroman must be alive in the morning for its barrels to explode.'**
-  String get butDuJeuPourLes;
 
   /// No description provided for @loupNoir.
   ///
@@ -9755,52 +9210,34 @@ abstract class AppLocalizations {
   /// **'Black Wolf'**
   String get loupNoir;
 
-  /// No description provided for @loupBavard.
-  ///
-  /// In en, this message translates to:
-  /// **'Loup Bavard'**
-  String get loupBavard;
-
   /// No description provided for @loupBlanc.
   ///
   /// In en, this message translates to:
   /// **'White Wolf'**
   String get loupBlanc;
 
-  /// No description provided for @mercenaire.
-  ///
-  /// In en, this message translates to:
-  /// **'Mercenary'**
-  String get mercenaire;
-
   /// No description provided for @ratMalade.
   ///
   /// In en, this message translates to:
-  /// **'Sick rat'**
+  /// **'Plague Rat'**
   String get ratMalade;
 
   /// No description provided for @voyante.
   ///
   /// In en, this message translates to:
-  /// **'Voyante'**
+  /// **'Seer'**
   String get voyante;
 
   /// No description provided for @petiteFille.
   ///
   /// In en, this message translates to:
-  /// **'Girl'**
+  /// **'Little Girl'**
   String get petiteFille;
-
-  /// No description provided for @chasseur.
-  ///
-  /// In en, this message translates to:
-  /// **'Hunter'**
-  String get chasseur;
 
   /// No description provided for @garde.
   ///
   /// In en, this message translates to:
-  /// **'Guard'**
+  /// **'Bodyguard'**
   String get garde;
 
   /// No description provided for @cupidon.
@@ -9815,112 +9252,22 @@ abstract class AppLocalizations {
   /// **'Mentalist'**
   String get mentaliste;
 
-  /// No description provided for @fossoyeur.
-  ///
-  /// In en, this message translates to:
-  /// **'Foses'**
-  String get fossoyeur;
-
   /// No description provided for @dictateur.
   ///
   /// In en, this message translates to:
   /// **'Dictator'**
   String get dictateur;
 
-  /// No description provided for @chaperonRouge.
-  ///
-  /// In en, this message translates to:
-  /// **'Red hat'**
-  String get chaperonRouge;
-
   /// No description provided for @pyromancien.
   ///
   /// In en, this message translates to:
-  /// **'Pyroman'**
+  /// **'Pyromancer'**
   String get pyromancien;
-
-  /// No description provided for @butDuJeuEtreLe1.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nBe the fastest to spot the only identical symbol between the card in the centre and its own card.\n\n**Draft (Mode \'\'The Infernal Tower\'\')**\n1. Each player receives a card face down. The rest of the cards form a Stock in the center, face visible.\n2. At first, everyone returns their card.\n3. Each player must find as quickly as possible the only symbol that is present both on his card and on the Stock Card.\n4. The first player who finds the symbol, the announcement aloud, takes the Stock card and places it on his own card.\n5. This new card becomes his card for the next round. A new map is then revealed in the centre of the Stock.\n6. The game continues until the Stock is exhausted. The player who collected the most cards at the end wins!'**
-  String get butDuJeuEtreLe1;
-
-  /// No description provided for @butDuJeuSeDebarrasser.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nGet rid of all his cards by being the first!\n\n**Draft**\n1. **Distribution**: Each player receives 7 cards. The rest forms the stock. A card is returned to start the waste pile.\n2. **Play a card**: The player whose turn it is has **30 seconds** to put a card in his hand on the waste pile. The card played must match the top card of the stack by:\n* **Color** (ex: Red on Red)\n* **Number** (ex: one 7 Blue on one 7 Green)\n* **Symbol** (ex: a yellow \"+2\" on a red \"+2\")\n* **Special Card** (Joker, +4, etc.)\n3. **Piocher**: If a player cannot play a card in the allotted time, he must pick a card from the package. If he can play this card, he can do it immediately. Otherwise, his turn ends.\n4. **Special cards**:\n* **+2 (Two cards)**: The next player picks 2 cards and passes his turn.\n* **Sens Forbidden (Pass your turn)** : The next player passes his turn.\n* **Inversion (Change of meaning)**: The sense of play is reversed.\n* **Joker (Colour Change)**: The player chooses the color of the next card to play. Can be played on any card.\n* **Super Joker +4 (Colour Change and Four Cards)**: Player chooses color. Next player picks 4 cards AND passes his turn. This card can only be played if the player has NO other card of the color requested on the waste pile (unless it bluffs).\n5. **Announce \"UNO\"**: When a player has only one card in hand, he must announce \"UNO!\". If he does not do so and is taken by another player (before the next player plays or picks up), he must pick 2 cards.\n6. **End of Channel**: The handle ends when a player gets rid of his last card. Points are counted. The player who reaches 500 points (or a defined total) wins the game.\n\n**Map Points:**\n* Digital cards (0-9): Their facial value.\n* +2, Sens Forbidden, Inversion: 20 points.\n* Joker, Super Joker +4 : 50 points.'**
-  String get butDuJeuSeDebarrasser;
-
-  /// No description provided for @principeDuJeuLeJeu.
-  ///
-  /// In en, this message translates to:
-  /// **'## Game principle\n* The game is played between **3 and 10 players**.\n* Each player gives access to a part of his/her photo library and chooses photos to share.\n* During a game, a photo is selected **randomly** from among all players, then displayed for a few seconds.\n* Players must guess **who owns the photo** displayed.\n* The player who correctly guesses the most photos wins the game.\n\n## Procedure\n1. **Selection of photos**: Each player chooses a number of photos from their gallery.\n2. **Start of the game**: Once everyone is ready, the host launches the game.\n3. **Play Tower**:\n- A random photo is shown for 5 seconds.\n- All players vote to guess the owner.\n4. **Results**: The scores are updated after each round.\n5. **End of game**: After a set number of rounds, the player with the most points wins.'**
-  String get principeDuJeuLeJeu;
-
-  /// No description provided for @butDuJeuCoulerTous.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nStuck all the opponent\'\'s ships before he sinks yours.\n\n**Draft**\n1. **Placement**: Each player secretly places his fleet on a 10x10 grid.\n- Aircraft carriers (5 boxes)\n- Cruiser (4 boxes)\n- Submarine (3 cells)\n- Destroyer (3 boxes)\n- Patrol (2 boxes)\n2. **Tir**: In turn, players touch a box to shoot.\n3. **Result**: AppLocalizations.of(context)!.touche, \"Coulated\" or \"To water\".\n4. **Victoire**: The first player to sink the entire opposing fleet wins.'**
-  String get butDuJeuCoulerTous;
-
-  /// No description provided for @butDuJeuEtreLe2.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nBe the first to reach the target distance (1000 km by default).\n**Draft**\n- Every player gets six cards.\n- In turn, play a card (Distance, Attack, Defense, Security) or get rid of it.\n- The **Attacks** cards (Stop, Red, Essence, Crevaison, Limit) block the opponent.\n- Maps **Defenses** (Green, Extra Tank, Repair, End Limit) counter attacks.\n- The **Security** cards cancel an attack and prevent its recurrence.\n- Maps **Distance** (25, 50, 75, 100, 200 km) move your vehicle forward.\n- Pick one card at the end of your turn.'**
-  String get butDuJeuEtreLe2;
-
-  /// No description provided for @butDuJeuEtreLe3.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nBe the first to get rid of all his cards by forming valid combinations (melds).\n\n**Running of a tower**\n1. **Piocher** : Take the map from the top of the waste OR Stock.\n2. **Sale (Optional)**: Place valid combinations on the table.\n- **Sequence (Run)**: 3 or more cards of the same colour that follow (e.g. 5) The Ace can be high or low.\n- **Group (Set)**: 3 or 4 cards of the same value but of different colours (e.g. 8♥, 8\n3. **Default**: Get rid of a card from his hand on the waste.\n\n**End of handle**\nThe first player who no longer has cards after defeat wins. The others count the points of their remaining cards (Figures = 10, As = 15, others = face value). The game stops at 100 points.'**
-  String get butDuJeuEtreLe3;
-
-  /// No description provided for @butDuJeuFaireDeviner2.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nMake your team guess a maximum of words before the end of time, without using the forbidden words!\n\n**Draft**\n1. Each turn, a player (\"the speaker\") tries to make his team guess a word.\n2. The speaker should not **never** utter the word to guess, nor any of the words \"Taboo\" (no words) displayed under the target word. Nor can he use translations or words from the same family.\n3. If the speaker uses a Taboo word, the opposing team (or judge) reports the fault, the card is cancelled and the speaker moves to the next one.\n4. Each guessed word returns a point to the team.\n5. The turn ends when the time is up.\n\n**End of part**\nThe team with the most points after the number of laps defined wins!'**
-  String get butDuJeuFaireDeviner2;
-
-  /// No description provided for @butDuJeuAmenerVos.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nBring your horses to the centre of the plateau by bypassing your opponents.\n\n**Classic rules**\n1. **Basic exit**: You have to make a **1** or a **6** to pull out a pawn.\n2. ** Bonus Tour**: Making a **6**, capturing a pawn or finishing the course allows to replay. (Warning: 3 times a 6 consecutive cancels your turn!).\n3. **Capture** : Falling on an opposing pawn returns it to its base (impossible on the protected \"Stars\" boxes or on the starting box of this player).\n4. **Arrived**: It takes an exact score to get to the final stairwell.\n\n**Team mode (2v2) **\nRequires exactly 4 players. You are allied with the player in front of you.\n- **Shared Victory**: The first team that brings a total of 4 pieces to the center wins the game (ex: 3 pieces for you and 1 for your ally).\n- **Entraide**: You can use your throw to move your ally\'\'s pawn, but *only* to get it out of its base (with a 1 or 6) or move it into its finish staircase.\n- **Allied blocking**: It\'\'s impossible to capture your partner\'\'s pawn. If your movement makes you land on him, the blow is invalid.'**
-  String get butDuJeuAmenerVos;
-
-  /// No description provided for @principeJeuSurrealisteDEcriture.
-  ///
-  /// In en, this message translates to:
-  /// **'**Principle**\nSurrealistic collective writing game.\n**Variant**\n- Classic: Everyone writes an element of the sentence (Substantial, Adjective, Verb, etc.) without seeing the precedents.\n- Continuation: Everyone sees the last 3 words and completes the sentence.\n**Draft**\nThe leaves rotate until everyone has participated.'**
-  String get principeJeuSurrealisteDEcriture;
-
-  /// No description provided for @butDuJeuPlacerLe.
-  ///
-  /// In en, this message translates to:
-  /// **'**Game goal**\nPlace most of his pieces on the set.\n**Gold rule**\nEach new piece must touch at least another piece of the same color by a corner, but never by one side.\n**Draft**\n1. The first round is played in the corner of the platter of your color.\n2. The following towers respect the golden rule.\n3. If you can\'\'t play anymore, you pass your turn.\n**Rating**\n-1 point per square not placed.\n+15 points if all parts are placed.\n+5 bonus points if the last piece is the single square (1x1).'**
-  String get butDuJeuPlacerLe;
-
-  /// No description provided for @objectifEtreLePremierA.
-  ///
-  /// In en, this message translates to:
-  /// **'** Objective**\nBe the first to achieve the target score (20, 50 or 100 points).\n\n**Draft**\nEach player receives 7 dominoes. In turn, he must place a domino corresponding to one of the ends of the chain. Doubles are played in crosses.\n\n**Play mode**\n- **Pike**: If you can\'\'t play, you pick until you have a playable play.\n- **Blocked**: No picks. If you can\'\'t play, you pass your turn.\n- **All Five** : The first double played is the \"Spinner\" (playable on 4 sides). You score points at each stroke if the sum of the ends is a multiple of 5.\n\n**End of turn**\nIf no one can play, the trick is blocked. Players reveal their hands. The player with the least points wins the round and marks the sum of the points of the opposing hands.'**
-  String get objectifEtreLePremierA;
-
-  /// No description provided for @objectifEtreLePremierJoueur.
-  ///
-  /// In en, this message translates to:
-  /// **'** Objective**\nBe the first player to get rid of all his cards.\n\n**Rules**\n- The game is played with a 52 card game.\n- Order of cards (from lowest to highest): 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A, 2.\n- Order of colours (from the weakest to the strongest): Tiles ♦ (D), Trèfles \n- The player who has the 3 of Tiles starts the game.\n\n** Combinations**\n- **Simple**: 1 map.\n- **Pair**: 2 cards of the same rank.\n- **Triple**: 3 cards of the same rank.\n- **Continued**: 5 consecutive row cards (mixed colours).\n- **Color**: 5 cards of the same color.\n- **Full**: 3 cards of one row + 2 cards of another row.\n- ** Square**: 4 cards of the same rank + 1 card of any kind.\n- **Quinte Flush**: 5 consecutive cards of the same color.\n\n**Hierarchy of combinations of 5 cards**\nFlush Quinte > Square > Full > Color > Suite.\nA combination can only be defeated by a combination of the same size and higher value.'**
-  String get objectifEtreLePremierJoueur;
-
-  /// No description provided for @objectifCapturerToutesLesPieces.
-  ///
-  /// In en, this message translates to:
-  /// **'** Objective**\nCapture all your opponent\'\'s coins or block all his coins.\n**Rules**\n- Plays on an 8x8 checker, exclusively on dark boxes.\n- The pieces move diagonally in a box.\n- The catches are **mandatory** and are made by jumping over an enemy piece.\n- Several catches can be chained in one round.\n- When a room reaches the opposite row, it is promoted in \"Dame\" and can move and capture back.'**
-  String get objectifCapturerToutesLesPieces;
 
   /// No description provided for @unSubstantifExLeChat.
   ///
   /// In en, this message translates to:
-  /// **'a substantive (e.g. cat)'**
+  /// **'a noun (e.g. the cat)'**
   String get unSubstantifExLeChat;
 
   /// No description provided for @unAdjectifExMignon.
@@ -9932,56 +9279,20 @@ abstract class AppLocalizations {
   /// No description provided for @unVerbeExMange.
   ///
   /// In en, this message translates to:
-  /// **'a verb (ex: eat)'**
+  /// **'a verb (e.g. eats)'**
   String get unVerbeExMange;
 
   /// No description provided for @unSubstantifExLaSouris.
   ///
   /// In en, this message translates to:
-  /// **'a substantive (e.g. mouse)'**
+  /// **'a noun (e.g. the mouse)'**
   String get unSubstantifExLaSouris;
 
   /// No description provided for @unAdjectifExMort.
   ///
   /// In en, this message translates to:
-  /// **'an adjective (e.g. death)'**
+  /// **'an adjective (e.g. dead)'**
   String get unAdjectifExMort;
-
-  /// No description provided for @rankSuitD0.
-  ///
-  /// In en, this message translates to:
-  /// **'\$rank\$suit\$\'{\'d > 0 ?'**
-  String rankSuitD0(Object d);
-
-  /// No description provided for @petit1.
-  ///
-  /// In en, this message translates to:
-  /// **'Small 1'**
-  String get petit1;
-
-  /// No description provided for @petit2.
-  ///
-  /// In en, this message translates to:
-  /// **'Small 2'**
-  String get petit2;
-
-  /// No description provided for @grand.
-  ///
-  /// In en, this message translates to:
-  /// **'Large'**
-  String get grand;
-
-  /// No description provided for @tresGrand.
-  ///
-  /// In en, this message translates to:
-  /// **'Very large'**
-  String get tresGrand;
-
-  /// No description provided for @superGrand.
-  ///
-  /// In en, this message translates to:
-  /// **'Super Big'**
-  String get superGrand;
 
   /// No description provided for @potionDeVieEtDe.
   ///
@@ -10067,161 +9378,17 @@ abstract class AppLocalizations {
   /// **'The number of symbols per card shall be at least 3.'**
   String get leNombreDeSymbolesPar;
 
-  /// No description provided for @pasAssezDeSymbolesUniques.
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough unique symbols for \$PerCard symbols per card. Required: \$totalSymbols, Available: \$\'{\'dobbleSymbols.length\'}\'.'**
-  String get pasAssezDeSymbolesUniques;
-
   /// No description provided for @laGenerationAEchoueNombre.
   ///
   /// In en, this message translates to:
   /// **'Generation failed: incorrect number of cards.'**
   String get laGenerationAEchoueNombre;
 
-  /// No description provided for @withKickersKickervalues.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'rank.name\'}\' with kickers: \$kickerValues'**
-  String get withKickersKickervalues;
-
-  /// No description provided for @melangeEquilibreDesThemesSuivants.
-  ///
-  /// In en, this message translates to:
-  /// **'Balanced mix of the following themes: \$combinedTheme'**
-  String get melangeEquilibreDesThemesSuivants;
-
-  /// No description provided for @ambianceTonImposeStyle.
-  ///
-  /// In en, this message translates to:
-  /// **'[Ambiance / Taxed tone: \$style]'**
-  String get ambianceTonImposeStyle;
-
-  /// No description provided for @genereDesPairesDeMots.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates pairs of similar words in \'\'MotCivil:MotInfilted\'\' format. Theme: \$finalPrompt'**
-  String get genereDesPairesDeMots;
-
-  /// No description provided for @genereDesCartesTabooAu.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates Taboo cards in the format \'\'Targetword:Forbidd1,Forbidd2,Forbidd3,Forbidd4,Forbidd5\'\'. Theme: \$finalPrompt'**
-  String get genereDesCartesTabooAu;
-
-  /// No description provided for @genereDesCategoriesOriginalesEt.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates original and fun categories to guess. Theme: \$finalPrompt'**
-  String get genereDesCategoriesOriginalesEt;
-
-  /// No description provided for @genereDesPhrasesCourtesVisuelles.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates short, visual and baffled sentences to draw (ex: AppLocalizations.of(context)!.unDinosaureQuiMangeUne). Theme: \$finalPrompt'**
-  String get genereDesPhrasesCourtesVisuelles;
-
-  /// No description provided for @genereDesPhrasesDAccroche.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates original catch phrases or writing universe. Theme: \$finalPrompt'**
-  String get genereDesPhrasesDAccroche;
-
-  /// No description provided for @genereDesDilemmesCorneliensAu.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates corneal dilemmas in the \'\'OptionA or OptionB\'\' format (e.g. AppLocalizations.of(context)!.power toVolerOuEtreInvisible). Theme: \$finalPrompt'**
-  String get genereDesDilemmesCorneliensAu;
-
-  /// No description provided for @genereUnMelangeDeDefis.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates a mix of challenges (actions) and indiscreet questions (truths). Theme: \$finalPrompt'**
-  String get genereUnMelangeDeDefis;
-
-  /// No description provided for @genereDesQuestionsDirectesAmusantes.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates direct, fun and spicy questions. Theme: \$finalPrompt'**
-  String get genereDesQuestionsDirectesAmusantes;
-
-  /// No description provided for @genereDesPhrasesCourtesA.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates short hole sentences (containing \'\'   \'\') for the game. Theme: \$finalPrompt'**
-  String get genereDesPhrasesCourtesA;
-
-  /// No description provided for @genereDesQuestionsAmusantesSur.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates fun questions about a player (use the tag \'\' {player} \'\'). Theme: \$finalPrompt'**
-  String genereDesQuestionsAmusantesSur(Object player);
-
-  /// No description provided for @genereDesSituationsHumoristiquesEt.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates humorous situations and beginnings of legends of memes. Theme: \$finalPrompt'**
-  String get genereDesSituationsHumoristiquesEt;
-
-  /// No description provided for @genereUneListeDeMots.
-  ///
-  /// In en, this message translates to:
-  /// **'Generates a list of words/expressions for the game \$gameType on theme: \$finalPrompt'**
-  String get genereUneListeDeMots;
-
-  /// No description provided for @strc64264.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'autoTitle.substring(0, 28)\'}\'...'**
-  String get strc64264;
-
-  /// No description provided for @pack.
-  ///
-  /// In en, this message translates to:
-  /// **'Pack \$\'{\'words.take(2).join(\'\', \'\')\'}\''**
-  String get pack;
-
-  /// No description provided for @themeGametype.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme \$gameType'**
-  String get themeGametype;
-
-  /// No description provided for @errorReportingBlockingPlayerE.
-  ///
-  /// In en, this message translates to:
-  /// **'Error reporting/blocking player: \$e'**
-  String get errorReportingBlockingPlayerE;
-
-  /// No description provided for @errorUnblockingPlayerE.
-  ///
-  /// In en, this message translates to:
-  /// **'Error unblocking player: \$e'**
-  String get errorUnblockingPlayerE;
-
-  /// No description provided for @blancMangerCocon.
-  ///
-  /// In en, this message translates to:
-  /// **'White Eat Cocon'**
-  String get blancMangerCocon;
-
-  /// No description provided for @leRoiDesMemes.
-  ///
-  /// In en, this message translates to:
-  /// **'The King of the Same'**
-  String get leRoiDesMemes;
-
   /// No description provided for @laPartieEstTermineeTous.
   ///
   /// In en, this message translates to:
   /// **'The game is over: all players have disconnected.'**
   String get laPartieEstTermineeTous;
-
-  /// No description provided for @aucun.
-  ///
-  /// In en, this message translates to:
-  /// **'None'**
-  String get aucun;
 
   /// No description provided for @nonAuthentifie.
   ///
@@ -10232,19 +9399,19 @@ abstract class AppLocalizations {
   /// No description provided for @actionNonAutorisee.
   ///
   /// In en, this message translates to:
-  /// **'Unauthorized action.'**
+  /// **'Action not allowed.'**
   String get actionNonAutorisee;
 
   /// No description provided for @vousDevezJouerAuMoins.
   ///
   /// In en, this message translates to:
-  /// **'You have to play at least one card.'**
+  /// **'You must play at least one card.'**
   String get vousDevezJouerAuMoins;
 
   /// No description provided for @tentativeDeTricheDoublonsDe.
   ///
   /// In en, this message translates to:
-  /// **'Trying to cheat: duplicate cards.'**
+  /// **'Cheating attempt: duplicate cards.'**
   String get tentativeDeTricheDoublonsDe;
 
   /// No description provided for @carteNonTrouveeDansVotre.
@@ -10268,50 +9435,14 @@ abstract class AppLocalizations {
   /// No description provided for @combinaisonDe5CartesTrop.
   ///
   /// In en, this message translates to:
-  /// **'Combination of 5 cards too weak.'**
+  /// **'5-card combination too weak.'**
   String get combinaisonDe5CartesTrop;
 
   /// No description provided for @vousDevezJouerUneCarte.
   ///
   /// In en, this message translates to:
-  /// **'You have to play a stronger card.'**
+  /// **'You must play a higher card.'**
   String get vousDevezJouerUneCarte;
-
-  /// No description provided for @playersWinneridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$winnerId.score'**
-  String get playersWinneridScore;
-
-  /// No description provided for @aGagne1.
-  ///
-  /// In en, this message translates to:
-  /// **'He won!'**
-  String get aGagne1;
-
-  /// No description provided for @playernameAJoue.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName played \$\'{\'cardsToPlay.join(\'\', \'\')\'}\'.'**
-  String get playernameAJoue;
-
-  /// No description provided for @playernameAJoue1.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName played \$\'{\'winningCombo.join(\'\', \'\')\'}\'.'**
-  String get playernameAJoue1;
-
-  /// No description provided for @pliTermineAuTourDe.
-  ///
-  /// In en, this message translates to:
-  /// **'I\'\'m done. In turn of \$\'{\'gameData[\'\'players\'\']?[playerOrder[nextIndex]]?[\'\'name\'\']\'}\'!'**
-  String get pliTermineAuTourDe;
-
-  /// No description provided for @playernamePasseSonTour.
-  ///
-  /// In en, this message translates to:
-  /// **'\$PlayerName passes its turn.'**
-  String get playernamePasseSonTour;
 
   /// No description provided for @ceNEstPasVotre.
   ///
@@ -10322,62 +9453,26 @@ abstract class AppLocalizations {
   /// No description provided for @carteIntrouvableDansLaMain.
   ///
   /// In en, this message translates to:
-  /// **'Map not found in the hand.'**
+  /// **'Card not found in hand.'**
   String get carteIntrouvableDansLaMain;
 
   /// No description provided for @coupInvalideSelonLesRegles.
   ///
   /// In en, this message translates to:
-  /// **'Invalid coup according to the Mille Bornes rules!'**
+  /// **'Invalid move per Mille Bornes rules!'**
   String get coupInvalideSelonLesRegles;
 
   /// No description provided for @cibleAdverseValideObligatoirePour.
   ///
   /// In en, this message translates to:
-  /// **'Mandatory opposing target for attack.'**
+  /// **'Valid opponent target required for attack.'**
   String get cibleAdverseValideObligatoirePour;
-
-  /// No description provided for @coupFourrePareLAttaque.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[targetId]?[\'\'name\'\']\'}\' prep the attack with \$ \'{\'matchingSafety\'}\' and take over!'**
-  String coupFourrePareLAttaque(Object matchingSafety);
-
-  /// No description provided for @playersPlayeridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$playerId.score'**
-  String get playersPlayeridScore;
-
-  /// No description provided for @aAtteintTargetdistKm.
-  ///
-  /// In en, this message translates to:
-  /// **'Has reached \$targetDist km!'**
-  String get aAtteintTargetdistKm;
 
   /// No description provided for @nonAutoriseUsurpationDIdentite.
   ///
   /// In en, this message translates to:
-  /// **'Unauthorized: identity fraud detected.'**
+  /// **'Unauthorized: identity spoofing detected.'**
   String get nonAutoriseUsurpationDIdentite;
-
-  /// No description provided for @erreurGenerateaiwordsSecuriseE.
-  ///
-  /// In en, this message translates to:
-  /// **'Error generateAiWords secure: \$e'**
-  String get erreurGenerateaiwordsSecuriseE;
-
-  /// No description provided for @erreurValidatejustoneclueaiE.
-  ///
-  /// In en, this message translates to:
-  /// **'Validate errorJustOneClueAi: \$e'**
-  String get erreurValidatejustoneclueaiE;
-
-  /// No description provided for @finDuCompteARebours.
-  ///
-  /// In en, this message translates to:
-  /// **'End of countdown: Game restarted for all \$\'{\'players.length\'}\' players!'**
-  String get finDuCompteARebours;
 
   /// No description provided for @scoresConservesEnAttenteDans.
   ///
@@ -10385,149 +9480,47 @@ abstract class AppLocalizations {
   /// **'Saved Scores! Waiting in the living room.'**
   String get scoresConservesEnAttenteDans;
 
-  /// No description provided for @playernameARejointLaPartie.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName joined the game!'**
-  String get playernameARejointLaPartie;
-
   /// No description provided for @leTempsEstEcouleOn.
   ///
   /// In en, this message translates to:
-  /// **'Time\'\'s up, we\'\'re moving!'**
+  /// **'Time\'\'s up, let\'\'s move on!'**
   String get leTempsEstEcouleOn;
 
   /// No description provided for @leTempsEstEcoulePour.
   ///
   /// In en, this message translates to:
-  /// **'Time has passed to tell the truth!'**
+  /// **'Time is up to declare the truth!'**
   String get leTempsEstEcoulePour;
 
   /// No description provided for @cibleHorsDeLaGrille.
   ///
   /// In en, this message translates to:
-  /// **'Target off the grid.'**
+  /// **'Target outside the grid.'**
   String get cibleHorsDeLaGrille;
 
   /// No description provided for @caseDejaCiblee.
   ///
   /// In en, this message translates to:
-  /// **'Box already targeted.'**
+  /// **'Square already targeted.'**
   String get caseDejaCiblee;
-
-  /// No description provided for @aCouleTouteLaFlotte.
-  ///
-  /// In en, this message translates to:
-  /// **']\'}\' sank the entire enemy fleet!'**
-  String get aCouleTouteLaFlotte;
 
   /// No description provided for @placementAutomatiqueEffectue.
   ///
   /// In en, this message translates to:
-  /// **'⏱️ Placement automatique effectué.'**
+  /// **'⏱️ Auto-placement completed.'**
   String get placementAutomatiqueEffectue;
-
-  /// No description provided for @playersCurrentplayeridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players. \$currentPlayerId.score'**
-  String get playersCurrentplayeridScore;
-
-  /// No description provided for @aTireAutomatiquementEnResult.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'targetIndex ~/ 10) + 1\'}\'-\$\'{\'(targetIndex % 10) + 1\'}\' (\$result).'**
-  String get aTireAutomatiquementEnResult;
-
-  /// No description provided for @playernameAOuvertAvecCardtoplay.
-  ///
-  /// In en, this message translates to:
-  /// **'⏱️ \$playerName a ouvert avec \$cardToPlay.'**
-  String get playernameAOuvertAvecCardtoplay;
-
-  /// No description provided for @playernameAJoue2.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName played \$\'{\'candidateCards.join(\'\', \'\')\'}\'.'**
-  String get playernameAJoue2;
-
-  /// No description provided for @pliTermineAuTourDe1.
-  ///
-  /// In en, this message translates to:
-  /// **'I\'\'m done. In turn of \$\'{\'gameData[\'\'players\'\']?[playerOrder[nextIndex]]?[\'\'name\'\']\'}\'.'**
-  String get pliTermineAuTourDe1;
 
   /// No description provided for @tempsEcoulePourLaSaisie.
   ///
   /// In en, this message translates to:
-  /// **'Time to enter words. The game starts with the words seized!'**
+  /// **'⏰ Time\'\'s up for entering words. Game starts with entered words!'**
   String get tempsEcoulePourLaSaisie;
-
-  /// No description provided for @removedplayernameAQuitteLaPartie.
-  ///
-  /// In en, this message translates to:
-  /// **'\$removedPlayerName left the game.'**
-  String get removedplayernameAQuitteLaPartie;
-
-  /// No description provided for @removedplayernameSEstDeconnecteVictoire.
-  ///
-  /// In en, this message translates to:
-  /// **'\$removedPlayerName disconnected. Win for \$remainingName per package!'**
-  String get removedplayernameSEstDeconnecteVictoire;
-
-  /// No description provided for @playersRemainingplayeridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players. \$remainingPlayerId.score'**
-  String get playersRemainingplayeridScore;
-
-  /// No description provided for @estLeNouvelHote.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerOrder[0]]?[\'\'name\'\']\'}\' is the new host.'**
-  String get estLeNouvelHote;
-
-  /// No description provided for @playernameAManque3Tours.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName missed 3 laps without playing. The administrator was asked to decide on its replacement with the computer.'**
-  String get playernameAManque3Tours;
-
-  /// No description provided for @playernameNeRepondPlusReason.
-  ///
-  /// In en, this message translates to:
-  /// **'The administrator was asked to decide on its replacement with the computer.'**
-  String get playernameNeRepondPlusReason;
-
-  /// No description provided for @playernameAEteRemplacePar.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\$playerName has been replaced by the computer (AI active - 5s per turn).'**
-  String get playernameAEteRemplacePar;
-
-  /// No description provided for @playernameNAPasDonne.
-  ///
-  /// In en, this message translates to:
-  /// **'Turn past.'**
-  String get playernameNAPasDonne;
 
   /// No description provided for @laPhaseDeVoteA.
   ///
   /// In en, this message translates to:
   /// **'The voting phase has begun!'**
   String get laPhaseDeVoteA;
-
-  /// No description provided for @playernameNAPasRepondu.
-  ///
-  /// In en, this message translates to:
-  /// **'Tour skipped without automatic action.'**
-  String get playernameNAPasRepondu;
-
-  /// No description provided for @playernameNAPasJoue.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName didn\'\'t play in time. His turn has passed.'**
-  String get playernameNAPasJoue;
 
   /// No description provided for @personneNAVoteAucun.
   ///
@@ -10541,40 +9534,16 @@ abstract class AppLocalizations {
   /// **'Equality in voting! The Goddess of Justice must rule.'**
   String get egaliteLorsDuVoteLa;
 
-  /// No description provided for @egalitePersistanteLeDestinDepartage.
-  ///
-  /// In en, this message translates to:
-  /// **'Persistent equality! Destiny randomly set: \$\'{\'playerData[randomEliminated]?[\'\'name\'\']\'}\' is eliminated.'**
-  String get egalitePersistanteLeDestinDepartage;
-
-  /// No description provided for @egaliteParfaiteLorsDuVote.
-  ///
-  /// In en, this message translates to:
-  /// **'Perfect equality when voting (\$\'{\'tiedPlayers.length\'}\' players ex-aequo)! No player eliminated.'**
-  String get egaliteParfaiteLorsDuVote;
-
-  /// No description provided for @leTempsDeVoteEst.
-  ///
-  /// In en, this message translates to:
-  /// **'The voting time is up!'**
-  String get leTempsDeVoteEst;
-
-  /// No description provided for @laPartieDeYamsCommence.
-  ///
-  /// In en, this message translates to:
-  /// **'Yams game starts!'**
-  String get laPartieDeYamsCommence;
-
   /// No description provided for @plusDeLancersDisponibles.
   ///
   /// In en, this message translates to:
-  /// **'More shots available.'**
+  /// **'No more rolls available.'**
   String get plusDeLancersDisponibles;
 
   /// No description provided for @vousDevezLancerLesDes.
   ///
   /// In en, this message translates to:
-  /// **'You have to throw the dice before you score.'**
+  /// **'Must roll dice before scoring.'**
   String get vousDevezLancerLesDes;
 
   /// No description provided for @categorieDejaCompletee.
@@ -10586,31 +9555,31 @@ abstract class AppLocalizations {
   /// No description provided for @grandeSuite.
   ///
   /// In en, this message translates to:
-  /// **'Grand Suite'**
+  /// **'Large Straight'**
   String get grandeSuite;
 
   /// No description provided for @petiteSuite.
   ///
   /// In en, this message translates to:
-  /// **'Small Suite'**
+  /// **'Small Straight'**
   String get petiteSuite;
 
   /// No description provided for @full.
   ///
   /// In en, this message translates to:
-  /// **'Full'**
+  /// **'Full House'**
   String get full;
 
   /// No description provided for @brelan.
   ///
   /// In en, this message translates to:
-  /// **'Brelan'**
+  /// **'Three of a Kind'**
   String get brelan;
 
   /// No description provided for @carre.
   ///
   /// In en, this message translates to:
-  /// **'Square'**
+  /// **'Four of a Kind'**
   String get carre;
 
   /// No description provided for @grilleDeYamsCompleteePar.
@@ -10637,59 +9606,11 @@ abstract class AppLocalizations {
   /// **'It\'\'s not your turn to write.'**
   String get ceNEstPasVotre1;
 
-  /// No description provided for @playernameAJoueLastdrawn.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName played \$lastDrawn.'**
-  String get playernameAJoueLastdrawn;
-
-  /// No description provided for @playernameAJouePlayable.
-  ///
-  /// In en, this message translates to:
-  /// **'\$PlayerName played \$playable.'**
-  String get playernameAJouePlayable;
-
-  /// No description provided for @playernamePiocheEtPasseSon.
-  ///
-  /// In en, this message translates to:
-  /// **'⏱️ \$playerName pioche et passe son tour.'**
-  String get playernamePiocheEtPasseSon;
-
-  /// No description provided for @playernameNAPasJoue1.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName didn\'\'t play in time. One card was defeated and one box revealed.'**
-  String get playernameNAPasJoue1;
-
-  /// No description provided for @playersGamewinneridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players. \$gameWinnerId.score'**
-  String get playersGamewinneridScore;
-
-  /// No description provided for @playersVidScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$vId.score'**
-  String get playersVidScore;
-
-  /// No description provided for @playersVoteridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$voterId.score'**
-  String get playersVoteridScore;
-
   /// No description provided for @nonAuthentifie1.
   ///
   /// In en, this message translates to:
   /// **'Not authenticate.'**
   String get nonAuthentifie1;
-
-  /// No description provided for @erreurUpdatepictionarydrawingRtdbE.
-  ///
-  /// In en, this message translates to:
-  /// **'Error updatePictionarydrawing RTDB: \$e'**
-  String get erreurUpdatepictionarydrawingRtdbE;
 
   /// No description provided for @leTempsDesDebatsEst.
   ///
@@ -10697,71 +9618,29 @@ abstract class AppLocalizations {
   /// **'The debate is over. The village must now vote!'**
   String get leTempsDesDebatsEst;
 
-  /// No description provided for @failedToLoadMeme.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to load even: \$\'{\'response.statusCode\'}\''**
-  String get failedToLoadMeme;
-
-  /// No description provided for @errorFetchingMemeE.
-  ///
-  /// In en, this message translates to:
-  /// **'Error fetishing even: \$e'**
-  String get errorFetchingMemeE;
-
-  /// No description provided for @lesAmoureux.
-  ///
-  /// In en, this message translates to:
-  /// **'Lovers'**
-  String get lesAmoureux;
-
   /// No description provided for @seulsLesDeuxAmoureuxSont.
   ///
   /// In en, this message translates to:
-  /// **'Only the two lovers are still alive. Their love triumphs over everything!'**
+  /// **'Only the two lovers remain alive. Their love triumphs over all!'**
   String get seulsLesDeuxAmoureuxSont;
 
   /// No description provided for @leLoupBlancEstLe.
   ///
   /// In en, this message translates to:
-  /// **'The White Wolf is the last survivor! He ate everyone.'**
+  /// **'White Wolf is the last survivor! He devoured everyone.'**
   String get leLoupBlancEstLe;
-
-  /// No description provided for @loupsGarous.
-  ///
-  /// In en, this message translates to:
-  /// **'Wolf-Garous'**
-  String get loupsGarous;
 
   /// No description provided for @lesLoupsGarousSontDevenus.
   ///
   /// In en, this message translates to:
-  /// **'The Wolf-Garous have become the majority, they can no longer lose. They won!'**
+  /// **'Werewolves are now majority and cannot lose. They won!'**
   String get lesLoupsGarousSontDevenus;
-
-  /// No description provided for @villageois.
-  ///
-  /// In en, this message translates to:
-  /// **'Village'**
-  String get villageois;
 
   /// No description provided for @toutesLesMenacesOntEte.
   ///
   /// In en, this message translates to:
-  /// **'All threats have been eliminated! The village won!'**
+  /// **'All threats eliminated! Village won!'**
   String get toutesLesMenacesOntEte;
-
-  /// No description provided for @playersPidScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$pId.score'**
-  String get playersPidScore;
-
-  /// No description provided for @laPartieEstTermineeVictoire.
-  ///
-  /// In en, this message translates to:
-  /// **'The game\'\'s over. Victory of \$ {winner} !'**
-  String laPartieEstTermineeVictoire(Object winner);
 
   /// No description provided for @laVoyanteASondeUne.
   ///
@@ -10772,92 +9651,68 @@ abstract class AppLocalizations {
   /// No description provided for @lHeritierAChoisiSon.
   ///
   /// In en, this message translates to:
-  /// **'The heir chose his testator...'**
+  /// **'The Heir has chosen their testator...'**
   String get lHeritierAChoisiSon;
 
   /// No description provided for @vousNePouvezPasProteger.
   ///
   /// In en, this message translates to:
-  /// **'You can\'\'t protect the same person two nights in a row.'**
+  /// **'Cannot protect same person 2 nights in a row.'**
   String get vousNePouvezPasProteger;
 
   /// No description provided for @leGardeMonteLaGarde.
   ///
   /// In en, this message translates to:
-  /// **'The Guard is on guard tonight...'**
+  /// **'The Guard is on watch tonight...'**
   String get leGardeMonteLaGarde;
-
-  /// No description provided for @joueursContaminesParLaMaladie.
-  ///
-  /// In en, this message translates to:
-  /// **'Players infected with the disease: \$containedNames.'**
-  String get joueursContaminesParLaMaladie;
 
   /// No description provided for @uneOdeurPestilentielleSEst.
   ///
   /// In en, this message translates to:
-  /// **'A pestilential smell spread in the village...'**
+  /// **'A foul smell has spread through the village...'**
   String get uneOdeurPestilentielleSEst;
 
   /// No description provided for @lesLoupsGarousOntDesigne.
   ///
   /// In en, this message translates to:
-  /// **'The Wolf-Garous have designated their prey. The Black Wolf is thinking...'**
+  /// **'Werewolves picked their prey. Black Wolf is deciding...'**
   String get lesLoupsGarousOntDesigne;
 
   /// No description provided for @lesLoupsGarousOntChoisi.
   ///
   /// In en, this message translates to:
-  /// **'The Wolf-Garous chose their victim...'**
+  /// **'Werewolves have chosen their victim...'**
   String get lesLoupsGarousOntChoisi;
 
   /// No description provided for @leLoupBlancARode.
   ///
   /// In en, this message translates to:
-  /// **'The White Wolf roamed alone tonight...'**
+  /// **'White Wolf prowled alone tonight...'**
   String get leLoupBlancARode;
 
   /// No description provided for @vousAvezEteInfectePar.
   ///
   /// In en, this message translates to:
-  /// **'You got infected with the Black Wolf! You become a Wolf-Garou.'**
+  /// **'You were infected by Black Wolf! You become a Werewolf.'**
   String get vousAvezEteInfectePar;
 
   /// No description provided for @leLoupNoirAUtilise.
   ///
   /// In en, this message translates to:
-  /// **'The Black Wolf used its power of infection!'**
+  /// **'Black Wolf used infection power!'**
   String get leLoupNoirAUtilise;
 
   /// No description provided for @leLoupNoirNA.
   ///
   /// In en, this message translates to:
-  /// **'Black Wolf didn\'\'t use his infection.'**
+  /// **'Black Wolf did not use infection.'**
   String get leLoupNoirNA;
 
   /// No description provided for @laPetiteFilleAEte.
   ///
   /// In en, this message translates to:
-  /// **'Little Girl was too curious! The Wolves eat it immediately!'**
+  /// **'Little Girl was too curious! Wolves devour her instantly!'**
   String get laPetiteFilleAEte;
-
-  /// No description provided for @infecte1.
-  ///
-  /// In en, this message translates to:
-  /// **'infected'**
-  String get infecte1;
-
-  /// No description provided for @contamine.
-  ///
-  /// In en, this message translates to:
-  /// **'contaminated'**
-  String get contamine;
-
-  /// No description provided for @vousAvezEspionneTargetnameEt.
-  ///
-  /// In en, this message translates to:
-  /// **'You spied on \$targetName and discovered its role: \$targetRole.'**
-  String get vousAvezEspionneTargetnameEt;
 
   /// No description provided for @vousVousSentezObserveE.
   ///
@@ -10874,104 +9729,32 @@ abstract class AppLocalizations {
   /// No description provided for @laSorciereAConcocteUn.
   ///
   /// In en, this message translates to:
-  /// **'The Witch concocted a deadly poison...'**
+  /// **'The Witch brewed a deadly poison...'**
   String get laSorciereAConcocteUn;
 
   /// No description provided for @lePyromancienAEntreposeUn.
   ///
   /// In en, this message translates to:
-  /// **'The Pyroman has stored a barrel of Greek fire...'**
+  /// **'Pyromancer placed a barrel of wildfire...'**
   String get lePyromancienAEntreposeUn;
 
   /// No description provided for @lePyromancienAllumeLaMeche.
   ///
   /// In en, this message translates to:
-  /// **'The Pyroman lights the wick of its barrels!'**
+  /// **'Pyromancer ignites barrels\'\' fuse!'**
   String get lePyromancienAllumeLaMeche;
-
-  /// No description provided for @leSoleilSeLeveSur.
-  ///
-  /// In en, this message translates to:
-  /// **'The sun rises on Thiercelieux...'**
-  String get leSoleilSeLeveSur;
-
-  /// No description provided for @estMortEDeChagrin.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[otherLoverId][\'\'name\'\']\'}\' died of grief for his love!'**
-  String get estMortEDeChagrin;
-
-  /// No description provided for @lHeritierHeriteDuRole.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[heritierId][\'\'name\'\']\'}\' (the heir) inherits the role of \$\'{\'playerData[testatorId][\'\'name\'\']\'}\': \$newRole!'**
-  String get lHeritierHeriteDuRole;
-
-  /// No description provided for @heriteEgalementDuStatutDe.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[heritierId][\'\'name\'\']\'}\' also inherits captain status!'**
-  String get heriteEgalementDuStatutDe;
-
-  /// No description provided for @votreMotDuJourNewword.
-  ///
-  /// In en, this message translates to:
-  /// **'Your word of the day: \'\'\$newWord\'\'. Pronounce it in the cat before sunset!'**
-  String get votreMotDuJourNewword;
 
   /// No description provided for @miraculeusementPersonneNAPeri.
   ///
   /// In en, this message translates to:
-  /// **'Miraculously, no one died last night!'**
+  /// **'Miraculously, nobody died tonight!'**
   String get miraculeusementPersonneNAPeri;
-
-  /// No description provided for @leVillageDecouvreAvecEffroi.
-  ///
-  /// In en, this message translates to:
-  /// **'The village discovers with horror the body(s) of: \$\'{\'deadThisNightNames.toSet().join(\'\', \'\')\'}\'.'**
-  String get leVillageDecouvreAvecEffroi;
-
-  /// No description provided for @motDuJour.
-  ///
-  /// In en, this message translates to:
-  /// **'word of the day'**
-  String get motDuJour;
-
-  /// No description provided for @leFossoyeurReveleEtaitUn.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[fossoyeurId][\'\'name\'\']\'}\' (the Fossoyeur) reveals: \$\'{\'playerData[targetPlayerId][\'\'name\'\']\'}\' was a \$targetRole!'**
-  String get leFossoyeurReveleEtaitUn;
-
-  /// No description provided for @etEtaitUnEOtherrevealedrole.
-  ///
-  /// In en, this message translates to:
-  /// **'And \$\'{\'playerData[otherRevealedPlayerId][\'\'name\'\']\'}\' was a \$otherRevealedRole!'**
-  String get etEtaitUnEOtherrevealedrole;
-
-  /// No description provided for @dictateurnameDeclareUnCoupD.
-  ///
-  /// In en, this message translates to:
-  /// **'\$dictatorName declares a coup d\'\'état!'**
-  String get dictateurnameDeclareUnCoupD;
-
-  /// No description provided for @leDictateurAExecuteUn.
-  ///
-  /// In en, this message translates to:
-  /// **'The dictator \$\'{\'playerData[dictatorId][\'\'name\'\']\'}\' executed an impostor (\$\'{\'playerData[targetId][\'\'name\'\']\'}\' - \$targetRole) and became Captain!'**
-  String get leDictateurAExecuteUn;
 
   /// No description provided for @leDictateurSEstTrompe.
   ///
   /// In en, this message translates to:
-  /// **'The Dictator was wrong in executing an innocent! He\'\'s facing capital punishment.'**
+  /// **'Dictator executed innocent by mistake! Suffers capital punishment.'**
   String get leDictateurSEstTrompe;
-
-  /// No description provided for @leLoupBavardNA.
-  ///
-  /// In en, this message translates to:
-  /// **'The Loup Bavard (\$\'{\'playerData[loupBavardId][\'\'name\'\']\'}\') didn\'\'t say his word and died at sunset!'**
-  String get leLoupBavardNA;
 
   /// No description provided for @tentativeDUsurpationDIdentite.
   ///
@@ -10979,149 +9762,16 @@ abstract class AppLocalizations {
   /// **'Attempted identity theft detected!'**
   String get tentativeDUsurpationDIdentite;
 
-  /// No description provided for @leVillageAVoteEt.
-  ///
-  /// In en, this message translates to:
-  /// **'The village voted and eliminated \$\'{\'playerData[eliminatedId][\'\'name\'\']\'}\'.'**
-  String get leVillageAVoteEt;
-
   /// No description provided for @egaliteParfaiteLorsDuVote1.
   ///
   /// In en, this message translates to:
-  /// **'Perfect equality when voting. No inhabitant is executed today.'**
+  /// **'Perfect tie in the vote. Nobody is executed today.'**
   String get egaliteParfaiteLorsDuVote1;
-
-  /// No description provided for @leMercenaireAFaitEliminer.
-  ///
-  /// In en, this message translates to:
-  /// **'Mercenary \$\'{\'playerData[mercenaryId][\'\'name\'\']\'}\' had his target eliminated on Day 1! He wins the game alone!'**
-  String get leMercenaireAFaitEliminer;
-
-  /// No description provided for @meurtDeChagrinPourSon.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[otherLoverId][\'\'name\'\']\'}\' dies of grief for his love!'**
-  String get meurtDeChagrinPourSon;
-
-  /// No description provided for @leChasseurTireEtTue.
-  ///
-  /// In en, this message translates to:
-  /// **'The Hunter shoots and kills \$targetName!'**
-  String get leChasseurTireEtTue;
-
-  /// No description provided for @lHeritierHeriteDuRole1.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[heritierIdCheck][\'\'name\'\']\'}\' (the heir) inherits the role of \$\'{\'playerData[testatorId][\'\'name\'\']\'}\': \$newRole!'**
-  String get lHeritierHeriteDuRole1;
-
-  /// No description provided for @lAncienCapitaine.
-  ///
-  /// In en, this message translates to:
-  /// **'The former Captain'**
-  String get lAncienCapitaine;
-
-  /// No description provided for @formercaptainnameADesigneNewcaptainnameComme.
-  ///
-  /// In en, this message translates to:
-  /// **'\$formerCaptainName has designated \$newCaptainName as new Captain!'**
-  String get formercaptainnameADesigneNewcaptainnameComme;
-
-  /// No description provided for @amoureux1.
-  ///
-  /// In en, this message translates to:
-  /// **'Lovers 1'**
-  String get amoureux1;
-
-  /// No description provided for @amoureux2.
-  ///
-  /// In en, this message translates to:
-  /// **'Lovers 2'**
-  String get amoureux2;
-
-  /// No description provided for @cupidonADesigneLover1nameEt.
-  ///
-  /// In en, this message translates to:
-  /// **'Cupid named \$lover1Name and \$lover2Name as lovers!'**
-  String get cupidonADesigneLover1nameEt;
-
-  /// No description provided for @debugJoingameTentativeDeRejoindre.
-  ///
-  /// In en, this message translates to:
-  /// **'[DEBUG joinGame] Attempt to join the game \'\'\$gameCode\'\' by \'\'\$playerName\'\' (ID: \$playerId).'**
-  String get debugJoingameTentativeDeRejoindre;
-
-  /// No description provided for @debugJoingameDemarrageDeLa.
-  ///
-  /// In en, this message translates to:
-  /// **'[DEBUG joinGame] Start the transaction.'**
-  String get debugJoingameDemarrageDeLa;
-
-  /// No description provided for @debugJoingamePartieTrouveeEt.
-  ///
-  /// In en, this message translates to:
-  /// **'[DEBUG joinGame] Part found and in lobby. Data reading...'**
-  String get debugJoingamePartieTrouveeEt;
-
-  /// No description provided for @debugJoingameJoueursActuelsAvant.
-  ///
-  /// In en, this message translates to:
-  /// **'[DEBUG joinGame] CURRENT PLAYERS (AVAILABLE): \$players'**
-  String get debugJoingameJoueursActuelsAvant;
-
-  /// No description provided for @debugJoingameJoueursMisA.
-  ///
-  /// In en, this message translates to:
-  /// **'[DEBUG joinGame] EVERYONE UPDATED (ADDED): \$players'**
-  String get debugJoingameJoueursMisA;
-
-  /// No description provided for @debugJoingameTransactionUpdateAppelee.
-  ///
-  /// In en, this message translates to:
-  /// **'[DEBUG joinGame] Transaction.update() called with the new player list.'**
-  String get debugJoingameTransactionUpdateAppelee;
-
-  /// No description provided for @debugJoingameTransactionReussieRetourne.
-  ///
-  /// In en, this message translates to:
-  /// **'[DEBUG joinGame] Successful transaction. Go back true.'**
-  String get debugJoingameTransactionReussieRetourne;
-
-  /// No description provided for @debugJoingameLaPartieN.
-  ///
-  /// In en, this message translates to:
-  /// **'[DEBUG joinGame] The game does not exist or is no longer in the lobby. Go back to false.'**
-  String get debugJoingameLaPartieN;
-
-  /// No description provided for @erreurCritiqueDansJoingame.
-  ///
-  /// In en, this message translates to:
-  /// **'--- CRITICAL ERROR IN joinGame ---'**
-  String get erreurCritiqueDansJoingame;
-
-  /// No description provided for @erreurLorsDeLaTransaction.
-  ///
-  /// In en, this message translates to:
-  /// **'Error during transaction to join game: \$e'**
-  String get erreurLorsDeLaTransaction;
-
-  /// No description provided for @applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie.
-  ///
-  /// In en, this message translates to:
-  /// **':AppLocalizations.of(context)! .wordcivilParts0TrimWordundercoverIA returns separate simple words'**
-  String
-  get applocalizationsOfContextWordcivilparts0trimwordundercoveriaRenvoie;
-
-  /// No description provided for @variante1.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'rawPair.trim()\'}\' (Variant)'**
-  String get variante1;
 
   /// No description provided for @infiltre.
   ///
   /// In en, this message translates to:
-  /// **'Infiltrated'**
+  /// **'Undercover'**
   String get infiltre;
 
   /// No description provided for @civil.
@@ -11148,30 +9798,6 @@ abstract class AppLocalizations {
   /// **'Duelists'**
   String get duellistes;
 
-  /// No description provided for @votreAmoureuxSeAmoureux2name.
-  ///
-  /// In en, this message translates to:
-  /// **'Your lover: \$amourous2'**
-  String get votreAmoureuxSeAmoureux2name;
-
-  /// No description provided for @votreAmoureuxSeAmoureux1name.
-  ///
-  /// In en, this message translates to:
-  /// **'Your lover: \$amourous1'**
-  String get votreAmoureuxSeAmoureux1name;
-
-  /// No description provided for @laPartieCommenceDonnezVotre.
-  ///
-  /// In en, this message translates to:
-  /// **'The game starts! Give your clue...'**
-  String get laPartieCommenceDonnezVotre;
-
-  /// No description provided for @aDitCleanclue.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' said: \'\'\$cleanClue\'\''**
-  String get aDitCleanclue;
-
   /// No description provided for @laPhaseDeVoteCommence.
   ///
   /// In en, this message translates to:
@@ -11184,29 +9810,11 @@ abstract class AppLocalizations {
   /// **'Only Mr. White can guess.'**
   String get seulMrWhitePeutDeviner;
 
-  /// No description provided for @aDevineLeMotCivil.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'gameData[\'\'playerData\'\']?[playerId]?[\'\'name\'\'] ?? \"Mr. White\" guessed the civil word (\$civilWord)!'**
-  String get aDevineLeMotCivil;
-
-  /// No description provided for @aProposeGuessedwordMaisCe.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'gameData[\'\'playerData\'\']?[playerId]?[\'\'name\'\'] ?? \'\'Mr. White\'\'\'}\' proposed \'\'\$guessedWord\'\', but it was not the civil word (\'\'\$civilWord\'\')!'**
-  String get aProposeGuessedwordMaisCe;
-
   /// No description provided for @laDeesseDeLaJustice.
   ///
   /// In en, this message translates to:
   /// **'The Goddess of Justice has rendered its verdict!'**
   String get laDeesseDeLaJustice;
-
-  /// No description provided for @unNouveauTourCommence.
-  ///
-  /// In en, this message translates to:
-  /// **'A new tour begins.'**
-  String get unNouveauTourCommence;
 
   /// No description provided for @laVengeuseEmporteQuelquUn.
   ///
@@ -11214,88 +9822,40 @@ abstract class AppLocalizations {
   /// **'The Avenger takes someone with her!'**
   String get laVengeuseEmporteQuelquUn;
 
-  /// No description provided for @civils.
-  ///
-  /// In en, this message translates to:
-  /// **'Civilian'**
-  String get civils;
-
-  /// No description provided for @imposteurs.
-  ///
-  /// In en, this message translates to:
-  /// **'Impostors'**
-  String get imposteurs;
-
-  /// No description provided for @paris.
-  ///
-  /// In en, this message translates to:
-  /// **'Paris'**
-  String get paris;
-
-  /// No description provided for @france.
-  ///
-  /// In en, this message translates to:
-  /// **'France'**
-  String get france;
-
-  /// No description provided for @capitale.
-  ///
-  /// In en, this message translates to:
-  /// **'Capital'**
-  String get capitale;
-
   /// No description provided for @tourEiffel.
   ///
   /// In en, this message translates to:
   /// **'Eiffel Tower'**
   String get tourEiffel;
 
-  /// No description provided for @seine.
-  ///
-  /// In en, this message translates to:
-  /// **'Seine'**
-  String get seine;
-
-  /// No description provided for @ville.
-  ///
-  /// In en, this message translates to:
-  /// **'City'**
-  String get ville;
-
-  /// No description provided for @cEstAuTourDe3.
-  ///
-  /// In en, this message translates to:
-  /// **'It\'\'s the turn of Team \$\'{\'currentTeamIndex + 1\'}\'!'**
-  String get cEstAuTourDe3;
-
   /// No description provided for @vousNePouvezPasBuzzer.
   ///
   /// In en, this message translates to:
-  /// **'You can\'\'t buzz your own team.'**
+  /// **'Cannot buzz your own team.'**
   String get vousNePouvezPasBuzzer;
 
   /// No description provided for @seuleLEquipeActivePeut.
   ///
   /// In en, this message translates to:
-  /// **'Only the active team can validate.'**
+  /// **'Only active team can validate.'**
   String get seuleLEquipeActivePeut;
 
   /// No description provided for @seuleLEquipeActivePeut1.
   ///
   /// In en, this message translates to:
-  /// **'Only the active team can pass.'**
+  /// **'Only active team can pass.'**
   String get seuleLEquipeActivePeut1;
 
   /// No description provided for @tempsEcoulePassageAL.
   ///
   /// In en, this message translates to:
-  /// **'Time\'\'s up! Transfer to the next team.'**
+  /// **'Time\'\'s up! Passing to the next team.'**
   String get tempsEcoulePassageAL;
 
   /// No description provided for @typeDeNavireInvalideOu.
   ///
   /// In en, this message translates to:
-  /// **'Type of ship invalid or unknown.'**
+  /// **'Invalid or unknown ship type.'**
   String get typeDeNavireInvalideOu;
 
   /// No description provided for @ceNavireADejaEte.
@@ -11307,79 +9867,55 @@ abstract class AppLocalizations {
   /// No description provided for @leNavireDepasseDeLa.
   ///
   /// In en, this message translates to:
-  /// **'The ship is out of the grid.'**
+  /// **'Ship exceeds the grid.'**
   String get leNavireDepasseDeLa;
 
   /// No description provided for @emplacementDejaOccupeParUn.
   ///
   /// In en, this message translates to:
-  /// **'Location already occupied by another vessel.'**
+  /// **'Slot already occupied by another ship.'**
   String get emplacementDejaOccupeParUn;
-
-  /// No description provided for @flottesPlaceesCommenceATirer.
-  ///
-  /// In en, this message translates to:
-  /// **'Floats placed! \$\'{\'playerData[firstPlayer][\'\'name\'\']\'}\' starts shooting.'**
-  String get flottesPlaceesCommenceATirer;
 
   /// No description provided for @veuillezPlacerTousVosNavires.
   ///
   /// In en, this message translates to:
-  /// **'Please place all your ships before declaring you ready.'**
+  /// **'Please place all ships before declaring ready.'**
   String get veuillezPlacerTousVosNavires;
-
-  /// No description provided for @tousLesJoueursSontPrets.
-  ///
-  /// In en, this message translates to:
-  /// **'All players are ready! \$\'{\'playerData[firstPlayer]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' starts shooting.'**
-  String get tousLesJoueursSontPrets;
-
-  /// No description provided for @laMancheDeRamiCommence.
-  ///
-  /// In en, this message translates to:
-  /// **'Rami\'\'s sleeve starts! It\'\'s the turn of \$\'{\'players[playerIds.first]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\'.'**
-  String get laMancheDeRamiCommence;
 
   /// No description provided for @vousAvezDejaPioche.
   ///
   /// In en, this message translates to:
-  /// **'You\'\'ve already picked up.'**
+  /// **'You already drew.'**
   String get vousAvezDejaPioche;
 
   /// No description provided for @piocheEtDefausseEpuiseesFin.
   ///
   /// In en, this message translates to:
-  /// **'Pick and waste exhausted. End of the sleeve!'**
+  /// **'Draw and discard piles exhausted. End of round!'**
   String get piocheEtDefausseEpuiseesFin;
-
-  /// No description provided for @playersScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$\'{\'totalScores.entries.reduced((a, b) => a.value < b.value ? a : b).key\'}\'.score'**
-  String get playersScore;
 
   /// No description provided for @defausseVide.
   ///
   /// In en, this message translates to:
-  /// **'Empty mistake.'**
+  /// **'Discard pile empty.'**
   String get defausseVide;
 
   /// No description provided for @vousDevezDAbordPiocher.
   ///
   /// In en, this message translates to:
-  /// **'You must pick a card first.'**
+  /// **'You must draw a card first.'**
   String get vousDevezDAbordPiocher;
 
   /// No description provided for @ilFautAuMoins31.
   ///
   /// In en, this message translates to:
-  /// **'It takes at least three cards to spread.'**
+  /// **'Need at least 3 cards to meld.'**
   String get ilFautAuMoins31;
 
   /// No description provided for @tentativeDeTricheVousNe.
   ///
   /// In en, this message translates to:
-  /// **'Try cheating: you cannot use the same card twice in a combination.'**
+  /// **'Cheating attempt: same card used twice in a meld.'**
   String get tentativeDeTricheVousNe;
 
   /// No description provided for @carteManquanteDansVotreMain.
@@ -11391,26 +9927,20 @@ abstract class AppLocalizations {
   /// No description provided for @combinaisonInvalideSelonLesRegles.
   ///
   /// In en, this message translates to:
-  /// **'Combination invalid according to Rami\'\'s rules!'**
+  /// **'Invalid meld per Rummy rules!'**
   String get combinaisonInvalideSelonLesRegles;
 
   /// No description provided for @defaussezExactement1Carte.
   ///
   /// In en, this message translates to:
-  /// **'Defeat exactly 1 card.'**
+  /// **'Discard exactly 1 card.'**
   String get defaussezExactement1Carte;
 
   /// No description provided for @carteNonTrouvee.
   ///
   /// In en, this message translates to:
-  /// **'Map not found.'**
+  /// **'Card not found.'**
   String get carteNonTrouvee;
-
-  /// No description provided for @aGagneLaManche.
-  ///
-  /// In en, this message translates to:
-  /// **'He won the round!'**
-  String get aGagneLaManche;
 
   /// No description provided for @desDejaLancesPourCe.
   ///
@@ -11418,88 +9948,64 @@ abstract class AppLocalizations {
   /// **'Dice already launched for this tour.'**
   String get desDejaLancesPourCe;
 
-  /// No description provided for @playernameAFaitUnDice.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\$playerName made a \$dice but no pawn can move forward. Turn automatically!'**
-  String get playernameAFaitUnDice;
-
   /// No description provided for @vousDevezDAbordLancer.
   ///
   /// In en, this message translates to:
-  /// **'You have to start the dice first.'**
+  /// **'You must roll the die first.'**
   String get vousDevezDAbordLancer;
 
   /// No description provided for @vousNePouvezPasDeplacer.
   ///
   /// In en, this message translates to:
-  /// **'You can\'\'t move an opponent\'\'s pawn!'**
+  /// **'Cannot move an opponent\'\'s piece!'**
   String get vousNePouvezPasDeplacer;
-
-  /// No description provided for @k3SixConsecutifsLePion.
-  ///
-  /// In en, this message translates to:
-  /// **'Three six consecutives! The pawn of \$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' returns to the stable and its turn passes.'**
-  String get k3SixConsecutifsLePion;
 
   /// No description provided for @ilFautUn1Ou.
   ///
   /// In en, this message translates to:
-  /// **'It takes a 1 or 6 to get the pawn out of an ally.'**
+  /// **'Need a 1 or 6 to release ally piece.'**
   String get ilFautUn1Ou;
 
   /// No description provided for @vousNePouvezAiderUn.
   ///
   /// In en, this message translates to:
-  /// **'You can only help an ally to get out or into the final staircase.'**
+  /// **'Can only help ally to exit or on final staircase.'**
   String get vousNePouvezAiderUn;
 
   /// No description provided for @ilFautUn6Ou.
   ///
   /// In en, this message translates to:
-  /// **'It takes a 6 or 1 to get out of the stable.'**
+  /// **'Need a 6 or 1 to leave the stable.'**
   String get ilFautUn6Ou;
 
   /// No description provided for @caseDeDepartOccupeePar.
   ///
   /// In en, this message translates to:
-  /// **'Start box occupied by your team.'**
+  /// **'Starting square occupied by your team.'**
   String get caseDeDepartOccupeePar;
 
   /// No description provided for @lancerTropElevePourEntrer.
   ///
   /// In en, this message translates to:
-  /// **'Throw too high to enter the stairs.'**
+  /// **'Roll too high to enter staircase.'**
   String get lancerTropElevePourEntrer;
-
-  /// No description provided for @lancerTropEleveDicePour.
-  ///
-  /// In en, this message translates to:
-  /// **'Initiate too high (\$dice) to reach the center. Turn past!'**
-  String get lancerTropEleveDicePour;
 
   /// No description provided for @caseOccupeeParVotreEquipe.
   ///
   /// In en, this message translates to:
-  /// **'Box occupied by your team.'**
+  /// **'Square occupied by your team.'**
   String get caseOccupeeParVotreEquipe;
 
   /// No description provided for @caseRefugeProtegeeCaptureImpossible.
   ///
   /// In en, this message translates to:
-  /// **'Safe haven. Impossible capture.'**
+  /// **'Shelter square protected. Capture impossible.'**
   String get caseRefugeProtegeeCaptureImpossible;
-
-  /// No description provided for @playersAllyidScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players. \$allyId.score'**
-  String get playersAllyidScore;
 
   /// No description provided for @laPartieNEstPas.
   ///
   /// In en, this message translates to:
-  /// **'The game is not in progress.'**
+  /// **'Game is not in progress.'**
   String get laPartieNEstPas;
 
   /// No description provided for @ceNEstPasVotre2.
@@ -11511,56 +10017,20 @@ abstract class AppLocalizations {
   /// No description provided for @ceDominoNEstPas.
   ///
   /// In en, this message translates to:
-  /// **'This domino isn\'\'t in your hand.'**
+  /// **'This domino is not in your hand.'**
   String get ceDominoNEstPas;
-
-  /// No description provided for @extremiteNonDisponibleSurLe.
-  ///
-  /// In en, this message translates to:
-  /// **'Extremity not available on the set (\$openEnds).'**
-  String get extremiteNonDisponibleSurLe;
-
-  /// No description provided for @laTuileTileNePossede.
-  ///
-  /// In en, this message translates to:
-  /// **'The \$tile tile does not have the \$matchEnd value required.'**
-  String get laTuileTileNePossede;
-
-  /// No description provided for @atteintTargetscorePoints.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId][\'\'name\'\']\'}\' reaches \$targetScore points!'**
-  String get atteintTargetscorePoints;
 
   /// No description provided for @vousDevezPiocherUneTuile.
   ///
   /// In en, this message translates to:
-  /// **'You have to pick a tile before you can pass your turn.'**
+  /// **'Must draw a tile before you can pass.'**
   String get vousDevezPiocherUneTuile;
-
-  /// No description provided for @atteintTargetscorePoints1.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[winnerId][\'\'name\'\']\'}\' reaches \$targetScore points!'**
-  String get atteintTargetscorePoints1;
 
   /// No description provided for @seulLHotePeutLancer.
   ///
   /// In en, this message translates to:
-  /// **'Only the host can launch the next handle.'**
+  /// **'Only the host can start the next round.'**
   String get seulLHotePeutLancer;
-
-  /// No description provided for @leBotAJoueTiletoplay.
-  ///
-  /// In en, this message translates to:
-  /// **'The bot played \$tileToPlay automatically.'**
-  String get leBotAJoueTiletoplay;
-
-  /// No description provided for @playernameAEteContraintDe.
-  ///
-  /// In en, this message translates to:
-  /// **'\$playerName was forced to pass its turn.'**
-  String get playernameAEteContraintDe;
 
   /// No description provided for @zombie1.
   ///
@@ -11571,7 +10041,7 @@ abstract class AppLocalizations {
   /// No description provided for @laPartieDeZombieCommence.
   ///
   /// In en, this message translates to:
-  /// **'Zombie\'\'s game! Start! Initial pairs defeated.'**
+  /// **'Zombie! begins! Initial pairs discarded.'**
   String get laPartieDeZombieCommence;
 
   /// No description provided for @indexDeCarteInvalide.
@@ -11580,35 +10050,11 @@ abstract class AppLocalizations {
   /// **'Invalid card index.'**
   String get indexDeCarteInvalide;
 
-  /// No description provided for @playersWidScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$wId.score'**
-  String get playersWidScore;
-
-  /// No description provided for @playersBestplayerScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players. \$bestPlayer.score'**
-  String get playersBestplayerScore;
-
   /// No description provided for @laPartieDActionOu.
   ///
   /// In en, this message translates to:
   /// **'The Action or Truth game begins! The roulette will designate the first player.'**
   String get laPartieDActionOu;
-
-  /// No description provided for @laRouletteADesigneSelectedname.
-  ///
-  /// In en, this message translates to:
-  /// **'The roulette named \$selectedName!'**
-  String get laRouletteADesigneSelectedname;
-
-  /// No description provided for @targetplayernameATire.
-  ///
-  /// In en, this message translates to:
-  /// **'\'\'Action\'\' : AppLocalizations.of(context)!.verite1\'}\' !'**
-  String get targetplayernameATire;
 
   /// No description provided for @iAucunAutreJoueurDisponible.
   ///
@@ -11616,41 +10062,11 @@ abstract class AppLocalizations {
   /// **'i Automatically selected challenge.'**
   String get iAucunAutreJoueurDisponible;
 
-  /// No description provided for @authornameDoitEcrireLeDefi.
-  ///
-  /// In en, this message translates to:
-  /// **'\$authorName must write the challenge...'**
-  String get authornameDoitEcrireLeDefi;
-
-  /// No description provided for @leDefiAEteEnvoye.
-  ///
-  /// In en, this message translates to:
-  /// **'The challenge was sent to \$currentPlayerName!'**
-  String get leDefiAEteEnvoye;
-
   /// No description provided for @leJoueurARealiseLe.
   ///
   /// In en, this message translates to:
   /// **'The player realized the challenge! Vote to validate.'**
   String get leJoueurARealiseLe;
-
-  /// No description provided for @resultatPercentageDeValidation.
-  ///
-  /// In en, this message translates to:
-  /// **'The result: \$percent% validation!'**
-  String get resultatPercentageDeValidation;
-
-  /// No description provided for @currentplayernameGagneEarnedxpXp.
-  ///
-  /// In en, this message translates to:
-  /// **'的 \$currentPlayerName wins \$earnedXp XP!'**
-  String get currentplayernameGagneEarnedxpXp;
-
-  /// No description provided for @tourSuivantQuiSeraLe.
-  ///
-  /// In en, this message translates to:
-  /// **'Next turn! Who will be next?AppLocalizations.of(context)!.finDeMancheBoutonAdminManage over! \$\'{\'players[winnerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)! .player\'}\' wins with \$maxXp XP!'**
-  String get tourSuivantQuiSeraLe;
 
   /// No description provided for @tempsEcoulePourChoisirTour.
   ///
@@ -11673,13 +10089,13 @@ abstract class AppLocalizations {
   /// No description provided for @leJugeNePeutPas.
   ///
   /// In en, this message translates to:
-  /// **'The judge can\'\'t play a card.'**
+  /// **'Judge cannot play a card.'**
   String get leJugeNePeutPas;
 
   /// No description provided for @carteNonTrouveeDansLa.
   ///
   /// In en, this message translates to:
-  /// **'Card not found in the hand.'**
+  /// **'Card not found in hand.'**
   String get carteNonTrouveeDansLa;
 
   /// No description provided for @seulLeJugePeutDesigner.
@@ -11693,12 +10109,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This player did not submit a card.'**
   String get ceJoueurNAPas;
-
-  /// No description provided for @playersWinnerplayeridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$winnerPlayerId.score'**
-  String get playersWinnerplayeridScore;
 
   /// No description provided for @tempsEcouleAucuneCarteSoumise.
   ///
@@ -11730,12 +10140,6 @@ abstract class AppLocalizations {
   /// **'Uno requires between 2 and 10 players.'**
   String get unoNecessiteEntre2Et;
 
-  /// No description provided for @laPartieDeUnoCommence.
-  ///
-  /// In en, this message translates to:
-  /// **'Uno\'\'s game starts!'**
-  String get laPartieDeUnoCommence;
-
   /// No description provided for @inversionA2JoueursLe.
   ///
   /// In en, this message translates to:
@@ -11745,31 +10149,25 @@ abstract class AppLocalizations {
   /// No description provided for @directionInverseeDesLeDepart.
   ///
   /// In en, this message translates to:
-  /// **'Reverse direction from the start!'**
+  /// **'Reversed direction from the start!'**
   String get directionInverseeDesLeDepart;
-
-  /// No description provided for @passeSonTour.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerOrder[initialIndex]\'}\' pass its turn!'**
-  String get passeSonTour;
 
   /// No description provided for @laPremiereCarteEstUn.
   ///
   /// In en, this message translates to:
-  /// **'The first card is a +2! The first player must pick or stack.'**
+  /// **'First card is a +2! First player must draw or stack.'**
   String get laPremiereCarteEstUn;
 
   /// No description provided for @partieNonTrouvee.
   ///
   /// In en, this message translates to:
-  /// **'Part not found.'**
+  /// **'Game not found.'**
   String get partieNonTrouvee;
 
   /// No description provided for @laPileDeDefausseEst.
   ///
   /// In en, this message translates to:
-  /// **'The waste pile is empty.'**
+  /// **'Discard pile is empty.'**
   String get laPileDeDefausseEst;
 
   /// No description provided for @ceNEstPasVotre3.
@@ -11781,116 +10179,32 @@ abstract class AppLocalizations {
   /// No description provided for @vousNAvezPasCette.
   ///
   /// In en, this message translates to:
-  /// **'You don\'\'t have that card in your hand.'**
+  /// **'You do not have this card.'**
   String get vousNAvezPasCette;
-
-  /// No description provided for @vousDevezPiocherPendingdrawCartes.
-  ///
-  /// In en, this message translates to:
-  /// **'You must pick \$dependingDraw cards, or counter with a +2/+4.'**
-  String get vousDevezPiocherPendingdrawCartes;
 
   /// No description provided for @vousDevezJouerLaCarte.
   ///
   /// In en, this message translates to:
-  /// **'You have to play the card you just picked or pass your turn.'**
+  /// **'Must play drawn card or pass.'**
   String get vousDevezJouerLaCarte;
 
   /// No description provided for @cetteCarteNePeutPas.
   ///
   /// In en, this message translates to:
-  /// **'This card cannot be played. The color or symbol does not match.'**
+  /// **'Card cannot be played. Color or symbol mismatch.'**
   String get cetteCarteNePeutPas;
-
-  /// No description provided for @aJoueUneInversionEt.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' played an Inversion and replay!'**
-  String get aJoueUneInversionEt;
-
-  /// No description provided for @aInverseLeSensDe.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' reversed the game sense!'**
-  String get aInverseLeSensDe;
-
-  /// No description provided for @aSauteLeTourDe.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' jumped the spin of \$skippedPlayerName!'**
-  String get aSauteLeTourDe;
-
-  /// No description provided for @aEmpileUn2Cumul.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' stacked a +2. Cumulation: \$\'{\'dependingDraw + 2\'}\' cards!'**
-  String get aEmpileUn2Cumul;
-
-  /// No description provided for @aJoueUn2.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' played a +2!'**
-  String get aJoueUn2;
 
   /// No description provided for @veuillezChoisirUneCouleurPour.
   ///
   /// In en, this message translates to:
-  /// **'Please choose a color for the Joker.'**
+  /// **'Please choose a color for the Wild.'**
   String get veuillezChoisirUneCouleurPour;
-
-  /// No description provided for @aJoueUnJokerEt.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' played a Joker and chose the color \$thinColor!'**
-  String get aJoueUnJokerEt;
 
   /// No description provided for @veuillezChoisirUneCouleurPour1.
   ///
   /// In en, this message translates to:
-  /// **'Please choose a color for Super Joker +4.'**
+  /// **'Please choose a color for the Wild Draw 4.'**
   String get veuillezChoisirUneCouleurPour1;
-
-  /// No description provided for @aEmpileUn4Cumul.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' stacked a +4. Cumulation: \$\'{\'dependingDraw + 4\'}\' cards!'**
-  String get aEmpileUn4Cumul;
-
-  /// No description provided for @aJoueUnSuperJoker.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' played a Super Joker +4!'**
-  String get aJoueUnSuperJoker;
-
-  /// No description provided for @aPoseSaDerniereCarte.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' placed his last card and won the round!'**
-  String get aPoseSaDerniereCarte;
-
-  /// No description provided for @gagneLaMancheAvecRoundscore.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' wins the round with +\$roundScore points!'**
-  String get gagneLaMancheAvecRoundscore;
-
-  /// No description provided for @nAPlusQuUne.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' has only one card!'**
-  String get nAPlusQuUne;
-
-  /// No description provided for @passeSonTour1.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' passes its turn.'**
-  String get passeSonTour1;
-
-  /// No description provided for @nAPasJoueA2.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'gameData[\'\'players\'\']?[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)! .player\'}\' didn\'\'t play in time, pick up and pass his turn.'**
-  String get nAPasJoueA2;
 
   /// No description provided for @partieIntrouvable.
   ///
@@ -11913,25 +10227,19 @@ abstract class AppLocalizations {
   /// No description provided for @toutesLesCartesOntEte.
   ///
   /// In en, this message translates to:
-  /// **'All the cards have been played!'**
+  /// **'All cards have been played!'**
   String get toutesLesCartesOntEte;
-
-  /// No description provided for @egaliteParfaiteNames.
-  ///
-  /// In en, this message translates to:
-  /// **'Perfect equality (\$names)!'**
-  String get egaliteParfaiteNames;
 
   /// No description provided for @laPartieDeJeuDe.
   ///
   /// In en, this message translates to:
-  /// **'The Women\'\'s Game game starts! The Reds play first.'**
+  /// **'Checkers game begins! Red plays first.'**
   String get laPartieDeJeuDe;
 
   /// No description provided for @aucunPionSurCetteCase.
   ///
   /// In en, this message translates to:
-  /// **'No pawns on this box.'**
+  /// **'No piece on this square.'**
   String get aucunPionSurCetteCase;
 
   /// No description provided for @vousNePouvezDeplacerQue.
@@ -11940,76 +10248,64 @@ abstract class AppLocalizations {
   /// **'You can only move your own pieces.'**
   String get vousNePouvezDeplacerQue;
 
-  /// No description provided for @priseMultipleObligatoireAvecLe.
-  ///
-  /// In en, this message translates to:
-  /// **'Mandatory multiple socket with \$mandatoryPiece pawn.'**
-  String get priseMultipleObligatoireAvecLe;
-
   /// No description provided for @deplacementDiagonalInvalide.
   ///
   /// In en, this message translates to:
-  /// **'Invalid diagonal displacement.'**
+  /// **'Invalid diagonal move.'**
   String get deplacementDiagonalInvalide;
 
   /// No description provided for @destinationHorsDuDamier.
   ///
   /// In en, this message translates to:
-  /// **'Destination out of the checker.'**
+  /// **'Destination outside the board.'**
   String get destinationHorsDuDamier;
 
   /// No description provided for @caseDeDestinationOccupee.
   ///
   /// In en, this message translates to:
-  /// **'Busy destination box.'**
+  /// **'Destination square occupied.'**
   String get caseDeDestinationOccupee;
-
-  /// No description provided for @str58921f.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'fromR + (stepR * i)\'}\',\$\'{\'fromC + (stepC * i)\'}\''**
-  String get str58921f;
 
   /// No description provided for @impossibleDeSauterParDessus.
   ///
   /// In en, this message translates to:
-  /// **'Could not jump over your own parts.'**
+  /// **'Cannot jump over your own pieces.'**
   String get impossibleDeSauterParDessus;
 
   /// No description provided for @impossibleDeSauterParDessus1.
   ///
   /// In en, this message translates to:
-  /// **'Could not jump over several pieces at once.'**
+  /// **'Cannot jump multiple pieces at once.'**
   String get impossibleDeSauterParDessus1;
 
   /// No description provided for @unPionSimpleNePeut.
   ///
   /// In en, this message translates to:
-  /// **'A single pawn can only move forward by one box.'**
+  /// **'A regular pawn can only advance 1 square.'**
   String get unPionSimpleNePeut;
 
   /// No description provided for @lesPionsRougesAvancentVers.
   ///
   /// In en, this message translates to:
-  /// **'Red pawns move up.'**
+  /// **'Red pieces move upwards.'**
   String get lesPionsRougesAvancentVers;
 
   /// No description provided for @lesPionsNoirsAvancentVers.
   ///
   /// In en, this message translates to:
-  /// **'Black pawns move down.'**
+  /// **'Black pieces move downwards.'**
   String get lesPionsNoirsAvancentVers;
 
   /// No description provided for @distanceDeSautInvalidePour.
   ///
   /// In en, this message translates to:
-  /// **'Invalid jump distance for a simple pawn.'**
+  /// **'Invalid jump distance for regular pawn.'**
   String get distanceDeSautInvalidePour;
 
   /// No description provided for @priseObligatoireVousDevezCapturer.
   ///
   /// In en, this message translates to:
-  /// **'Mandatory catch! You have to capture a room.'**
+  /// **'Mandatory capture! You must take a piece.'**
   String get priseObligatoireVousDevezCapturer;
 
   /// No description provided for @lAdversaireNAPlus.
@@ -12017,12 +10313,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The opponent has no more possible blow!'**
   String get lAdversaireNAPlus;
-
-  /// No description provided for @playersWinidScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$winId.score'**
-  String get playersWinidScore;
 
   /// No description provided for @lesRougesNOntPlus.
   ///
@@ -12036,22 +10326,16 @@ abstract class AppLocalizations {
   /// **'Black people don\'\'t have coins anymore!'**
   String get lesNoirsNOntPlus;
 
-  /// No description provided for @votreCibleEstEliminezLe.
-  ///
-  /// In en, this message translates to:
-  /// **'Your target is \$\'{\'playerData[mercenaryTargetId]?[\'\'name\'\'] ?? \'\'Unknown\'\'\'}\'. Eliminate him on Day 1!'**
-  String get votreCibleEstEliminezLe;
-
   /// No description provided for @laNuitTombeSurLe1.
   ///
   /// In en, this message translates to:
-  /// **'The night falls on the village of Thiercelieux...'**
+  /// **'Night falls on the village of Thiercelieux...'**
   String get laNuitTombeSurLe1;
 
   /// No description provided for @chacunARecuSonRole.
   ///
   /// In en, this message translates to:
-  /// **'Everyone received their secret role.'**
+  /// **'Everyone has received their secret role.'**
   String get chacunARecuSonRole;
 
   /// No description provided for @indiceInvalide.
@@ -12063,25 +10347,25 @@ abstract class AppLocalizations {
   /// No description provided for @seulLeMaitreEspionDe.
   ///
   /// In en, this message translates to:
-  /// **'Only the Master Espion of the active team can give the clue.'**
+  /// **'Only active Spymaster can give clue.'**
   String get seulLeMaitreEspionDe;
 
   /// No description provided for @ceNEstPasLa.
   ///
   /// In en, this message translates to:
-  /// **'This is not the proposed index phase.'**
+  /// **'Not the clue proposal phase.'**
   String get ceNEstPasLa;
 
   /// No description provided for @seulUnAgentDeL.
   ///
   /// In en, this message translates to:
-  /// **'Only an active team agent can guess a word.'**
+  /// **'Only an Agent of active team can guess a word.'**
   String get seulUnAgentDeL;
 
   /// No description provided for @ceNEstPasLa1.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s not the guess phase.'**
+  /// **'Not the guessing phase.'**
   String get ceNEstPasLa1;
 
   /// No description provided for @aucunEssaiRestantPourCe.
@@ -12093,14 +10377,8 @@ abstract class AppLocalizations {
   /// No description provided for @ceMotEstDejaRevele.
   ///
   /// In en, this message translates to:
-  /// **'This word is already revealed.'**
+  /// **'Word already revealed.'**
   String get ceMotEstDejaRevele;
-
-  /// No description provided for @lEquipeAReveleL1.
-  ///
-  /// In en, this message translates to:
-  /// **'Team \$\'{\'activeTeam == \'\'red\'\'? \'\'Red\'\': \'\'Blue\'\'\'}\' revealed the Assassin!'**
-  String get lEquipeAReveleL1;
 
   /// No description provided for @tousLesMotsOntEte.
   ///
@@ -12123,7 +10401,7 @@ abstract class AppLocalizations {
   /// No description provided for @seulLeDevineurActifPeut.
   ///
   /// In en, this message translates to:
-  /// **'Only the active guesser can validate the words.'**
+  /// **'Only the active guesser can validate words.'**
   String get seulLeDevineurActifPeut;
 
   /// No description provided for @vousNAvezPasCes.
@@ -12162,47 +10440,11 @@ abstract class AppLocalizations {
   /// **'Part not found'**
   String get partieNonTrouvee1;
 
-  /// No description provided for @trouDuCul.
-  ///
-  /// In en, this message translates to:
-  /// **'Asshole'**
-  String get trouDuCul;
-
   /// No description provided for @vicePresident.
   ///
   /// In en, this message translates to:
-  /// **'Vice-President'**
+  /// **'Vice President'**
   String get vicePresident;
-
-  /// No description provided for @viceTrouDuCul.
-  ///
-  /// In en, this message translates to:
-  /// **'Vice-Asshole'**
-  String get viceTrouDuCul;
-
-  /// No description provided for @neutre.
-  ///
-  /// In en, this message translates to:
-  /// **'Neutral'**
-  String get neutre;
-
-  /// No description provided for @playersPresidentwinneridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$presidentWinnerId.score'**
-  String get playersPresidentwinneridScore;
-
-  /// No description provided for @debugPictionaryConditionRoundstateDrawing.
-  ///
-  /// In en, this message translates to:
-  /// **'--- DEBUG PICTIONARY --- Condition \'\'roundState\'\' or \'\'guessing drawing\'\' is TRUE. Update database...'**
-  String get debugPictionaryConditionRoundstateDrawing;
-
-  /// No description provided for @debugPictionaryConditionRoundstateDrawing1.
-  ///
-  /// In en, this message translates to:
-  /// **'--- DEBUG PICTIONARY --- Condition \'\'roundState==drawing\'\' is FAUSSE. The current status is \'\'\$\'{\'gameSnap.get(\'\'roundState\'\')\'}\'\'\''**
-  String get debugPictionaryConditionRoundstateDrawing1;
 
   /// No description provided for @dessinateurIntrouvable.
   ///
@@ -12213,7 +10455,7 @@ abstract class AppLocalizations {
   /// No description provided for @seulLeDessinateurActifPeut.
   ///
   /// In en, this message translates to:
-  /// **'Only the active cartoonist can validate the answer.'**
+  /// **'Only the active drawer can validate the answer.'**
   String get seulLeDessinateurActifPeut;
 
   /// No description provided for @usurpationDIdentiteDuDessinateur.
@@ -12227,18 +10469,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid winner.'**
   String get gagnantInvalide;
-
-  /// No description provided for @guessedcountMotsDevines.
-  ///
-  /// In en, this message translates to:
-  /// **'\$guessedCount/\$\'{\'collectiveWords.length\'}\' words guessed!'**
-  String get guessedcountMotsDevines;
-
-  /// No description provided for @playersExpecteddraweridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$expectedDrawerId.score'**
-  String get playersExpecteddraweridScore;
 
   /// No description provided for @motTrouveAvecSucces.
   ///
@@ -12258,22 +10488,16 @@ abstract class AppLocalizations {
   /// **'The guesser can\'\'t give a clue.'**
   String get leDevineurNePeutPas;
 
-  /// No description provided for @aaaaaaceeeeiiiinooooouuuuyy.
-  ///
-  /// In en, this message translates to:
-  /// **'ináâãäåçéêëìíïñòóôõöùúûüý ÿ'**
-  String get aaaaaaceeeeiiiinooooouuuuyy;
-
   /// No description provided for @ceNEstPasLe.
   ///
   /// In en, this message translates to:
-  /// **'This is no time to guess.'**
+  /// **'It\'\'s not time to guess.'**
   String get ceNEstPasLe;
 
   /// No description provided for @seulLeDevineurPeutFaire.
   ///
   /// In en, this message translates to:
-  /// **'Only the guesser can make a proposal.'**
+  /// **'Only the guesser can make a guess.'**
   String get seulLeDevineurPeutFaire;
 
   /// No description provided for @reponseInvalide.
@@ -12285,7 +10509,7 @@ abstract class AppLocalizations {
   /// No description provided for @ceNEstPasLe1.
   ///
   /// In en, this message translates to:
-  /// **'This is not the time to answer.'**
+  /// **'It\'\'s not time to answer.'**
   String get ceNEstPasLe1;
 
   /// No description provided for @ceNEstPasVotre4.
@@ -12294,95 +10518,35 @@ abstract class AppLocalizations {
   /// **'It\'\'s not your turn to have the bomb!'**
   String get ceNEstPasVotre4;
 
-  /// No description provided for @aReponduCleananswerEtPasse.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'gameData[\'\'players\'\'][playerId][\'\'name\'\']\'}\' replied \'\'\$cleanAnswer\'\' and passed the bomb!'**
-  String get aReponduCleananswerEtPasse;
-
-  /// No description provided for @playersLoseridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$loserId.score'**
-  String get playersLoseridScore;
-
   /// No description provided for @ceNEstPasVotre5.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s not your turn to pick.'**
+  /// **'Not your turn to draw.'**
   String get ceNEstPasVotre5;
 
   /// No description provided for @laPiocheEstVideLa.
   ///
   /// In en, this message translates to:
-  /// **'Stock is empty. The waste is mixed to form a new stock.'**
+  /// **'Draw pile empty. Discard reshuffled.'**
   String get laPiocheEstVideLa;
 
   /// No description provided for @impossibleDePiocherIlN.
   ///
   /// In en, this message translates to:
-  /// **'There are no more cards available.'**
+  /// **'Cannot draw, no cards available.'**
   String get impossibleDePiocherIlN;
-
-  /// No description provided for @aPiochePendingdrawCarteS.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' has picked \$dependingDraw card(s).'**
-  String get aPiochePendingdrawCarteS;
-
-  /// No description provided for @aPiocheUneCarteEt.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' picked up a card and can play it.'**
-  String get aPiocheUneCarteEt;
-
-  /// No description provided for @aPiocheUneCarteEt1.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' picked up a card and passed his turn.'**
-  String get aPiocheUneCarteEt1;
-
-  /// No description provided for @nAPas1Carte.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[targetId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.thePlayer\'}\' does not have 1 card, the UNO call is invalid.'**
-  String get nAPas1Carte;
-
-  /// No description provided for @aCrieContreUnoPioche.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[callerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' shouted against UNO! \$\'{\'players[targetId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' picks 2 cards.'**
-  String get aCrieContreUnoPioche;
-
-  /// No description provided for @aDitUno.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[targetId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' said UNO!'**
-  String get aDitUno;
 
   /// No description provided for @ceNEstPasVotre6.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s not your turn to choose the color.'**
+  /// **'Not your turn to pick color.'**
   String get ceNEstPasVotre6;
-
-  /// No description provided for @aChoisiLaCouleurChosencolor.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[playerId]?[\'\'name\'\'] ?? AppLocalizations.of(context)!.player\'}\' chose the color \$thinColor!'**
-  String get aChoisiLaCouleurChosencolor;
 
   /// No description provided for @vousNePouvezPasChoisir.
   ///
   /// In en, this message translates to:
-  /// **'You can\'\'t choose a color now.'**
+  /// **'Cannot pick a color right now.'**
   String get vousNePouvezPasChoisir;
-
-  /// No description provided for @erreurCritiquePlayerorderEstVide.
-  ///
-  /// In en, this message translates to:
-  /// **'CRITICAL ERROR: playerorder is empty in nextRound. I can\'\'t go on.'**
-  String get erreurCritiquePlayerorderEstVide;
 
   /// No description provided for @questionNonTrouvee.
   ///
@@ -12390,35 +10554,11 @@ abstract class AppLocalizations {
   /// **'Question not found'**
   String get questionNonTrouvee;
 
-  /// No description provided for @quiPourraitLePlusApplocalizations1.
-  ///
-  /// In en, this message translates to:
-  /// **'Who Could More?AppLocalizations.of(context)!.listStringQuestionsAiwordpoolGamewordssoft'**
-  String get quiPourraitLePlusApplocalizations1;
-
-  /// No description provided for @quiPourraitLePlus2.
-  ///
-  /// In en, this message translates to:
-  /// **'Who could be the most \$\'{\'questions[random.nextInt(questions.length)] \'}\''**
-  String get quiPourraitLePlus2;
-
-  /// No description provided for @menteur.
-  ///
-  /// In en, this message translates to:
-  /// **'Liar'**
-  String get menteur;
-
   /// No description provided for @pasAssezDeJoueursPour.
   ///
   /// In en, this message translates to:
   /// **'Not enough players for this fashion.'**
   String get pasAssezDeJoueursPour;
-
-  /// No description provided for @trouvezLeMeilleurSynonymePour.
-  ///
-  /// In en, this message translates to:
-  /// **'Find the best synonym for the word: \$word'**
-  String get trouvezLeMeilleurSynonymePour;
 
   /// No description provided for @ajouteLaDescriptionLaPlus.
   ///
@@ -12429,7 +10569,7 @@ abstract class AppLocalizations {
   /// No description provided for @uneNouvelleMancheDeUno.
   ///
   /// In en, this message translates to:
-  /// **'A new Uno round starts!'**
+  /// **'A new round of Uno begins!'**
   String get uneNouvelleMancheDeUno;
 
   /// No description provided for @plusAucunJoueurActif.
@@ -12441,49 +10581,31 @@ abstract class AppLocalizations {
   /// No description provided for @chaqueJoueurActifDoitPoser.
   ///
   /// In en, this message translates to:
-  /// **'Each active player must place at least one card before launching an auction.'**
+  /// **'Each active player must lay at least 1 card before bidding.'**
   String get chaqueJoueurActifDoitPoser;
 
   /// No description provided for @enchereInvalide.
   ///
   /// In en, this message translates to:
-  /// **'Invalid auction.'**
+  /// **'Invalid bid.'**
   String get enchereInvalide;
 
   /// No description provided for @laSurenchereDoitEtreSuperieure.
   ///
   /// In en, this message translates to:
-  /// **'The auction must be higher.'**
+  /// **'Higher bid required.'**
   String get laSurenchereDoitEtreSuperieure;
-
-  /// No description provided for @applocalizationsOfContextUnjoueurEst.
-  ///
-  /// In en, this message translates to:
-  /// **'] ?? AppLocalizations.of(context)!.aPlayer\'}\' is the last survivor and wins Skull!'**
-  String get applocalizationsOfContextUnjoueurEst;
-
-  /// No description provided for @applocalizationsOfContextUnjoueurA.
-  ///
-  /// In en, this message translates to:
-  /// **'] ?? AppLocalizations.of(context)!.aPlayer\'}\' won 2 challenges and won the game!'**
-  String get applocalizationsOfContextUnjoueurA;
-
-  /// No description provided for @applocalizationsOfContextUnjoueurRemporte.
-  ///
-  /// In en, this message translates to:
-  /// **'] ?? AppLocalizations.of(context)!.aPlayer\'}\' wins Skull!'**
-  String get applocalizationsOfContextUnjoueurRemporte;
 
   /// No description provided for @reponseVide.
   ///
   /// In en, this message translates to:
-  /// **'Clear answer.'**
+  /// **'Empty answer.'**
   String get reponseVide;
 
   /// No description provided for @leJugeNePeutPas1.
   ///
   /// In en, this message translates to:
-  /// **'The judge cannot submit a reply.'**
+  /// **'The Judge cannot submit an answer.'**
   String get leJugeNePeutPas1;
 
   /// No description provided for @toutLeMondeARepondu.
@@ -12516,22 +10638,16 @@ abstract class AppLocalizations {
   /// **'Targeted player not found.'**
   String get joueurCibleIntrouvable;
 
-  /// No description provided for @quiPourraitLePlusApplocalizations2.
-  ///
-  /// In en, this message translates to:
-  /// **'Who Could More?AppLocalizations.of(context)!.elseIfGametypeSynonym or Banni'**
-  String get quiPourraitLePlusApplocalizations2;
-
   /// No description provided for @vousNePouvezPasBannir.
   ///
   /// In en, this message translates to:
-  /// **'You cannot banish your own synonym!'**
+  /// **'Cannot ban your own synonym!'**
   String get vousNePouvezPasBannir;
 
   /// No description provided for @seulLeJugeEnTitre.
   ///
   /// In en, this message translates to:
-  /// **'Only the ruling judge can appoint the winner.'**
+  /// **'Only the current Judge can pick the winner.'**
   String get seulLeJugeEnTitre;
 
   /// No description provided for @ceJoueurNAPas1.
@@ -12540,95 +10656,23 @@ abstract class AppLocalizations {
   /// **'This player did not submit an answer.'**
   String get ceJoueurNAPas1;
 
-  /// No description provided for @quiPourraitLePlusApplocalizations3.
-  ///
-  /// In en, this message translates to:
-  /// **'Who Could More?AppLocalizations.of(context)!.intRequiredvotesPlayersLengthIfThe Judge'**
-  String get quiPourraitLePlusApplocalizations3;
-
-  /// No description provided for @quiPourraitLePlusApplocalizations4.
-  ///
-  /// In en, this message translates to:
-  /// **'Who Could the More?AppLocalizations.of(context)!.forFinalTargetInVotesroundState'**
-  String get quiPourraitLePlusApplocalizations4;
-
-  /// No description provided for @playersWinnerScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players. \$winner.score'**
-  String get playersWinnerScore;
-
   /// No description provided for @egaliteParfaiteAucunPointAttribue.
   ///
   /// In en, this message translates to:
-  /// **'Perfect equality! No points assigned.'**
+  /// **'Perfect tie! No points awarded.'**
   String get egaliteParfaiteAucunPointAttribue;
 
   /// No description provided for @egaliteDansLesVotesAucun.
   ///
   /// In en, this message translates to:
-  /// **'Equality in votes: No player banished this round.'**
+  /// **'Tie in votes: no player banished this turn.'**
   String get egaliteDansLesVotesAucun;
-
-  /// No description provided for @winnernameRemporteLaManche.
-  ///
-  /// In en, this message translates to:
-  /// **'\$winnerName wins the round!'**
-  String get winnernameRemporteLaManche;
-
-  /// No description provided for @playersMostvotedplayeridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players. \$mostVotedPlayerId.score'**
-  String get playersMostvotedplayeridScore;
-
-  /// No description provided for @mrWhiteADevineLe.
-  ///
-  /// In en, this message translates to:
-  /// **'Mr. White guessed the secret word: \'\'\$civilianWord\'\'!'**
-  String get mrWhiteADevineLe;
-
-  /// No description provided for @playersMrwhiteidScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$mrWhiteId.score'**
-  String get playersMrwhiteidScore;
-
-  /// No description provided for @mrWhiteAEchoueA.
-  ///
-  /// In en, this message translates to:
-  /// **'Mr. White failed to guess the word (it was \'\'\$civilianWord\'\').'**
-  String get mrWhiteAEchoueA;
 
   /// No description provided for @laDescriptionLaPlusDrole.
   ///
   /// In en, this message translates to:
   /// **'The funniest description was chosen!'**
   String get laDescriptionLaPlusDrole;
-
-  /// No description provided for @aucuneDescriptionNAEte.
-  ///
-  /// In en, this message translates to:
-  /// **'No description was voted.'**
-  String get aucuneDescriptionNAEte;
-
-  /// No description provided for @quiPourraitLePlusApplocalizations5.
-  ///
-  /// In en, this message translates to:
-  /// **'Who Could More?AppLocalizations.of(context)!.forFinalTargetInVotes1roundWinnerId'**
-  String get quiPourraitLePlusApplocalizations5;
-
-  /// No description provided for @playersActualliaridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$actualLiarId.score'**
-  String get playersActualliaridScore;
-
-  /// No description provided for @playersUndercoveridScore.
-  ///
-  /// In en, this message translates to:
-  /// **'players.\$undercoverId.score'**
-  String get playersUndercoveridScore;
 
   /// No description provided for @jugeIntrouvable.
   ///
@@ -12639,13 +10683,13 @@ abstract class AppLocalizations {
   /// No description provided for @laPartieDeZeroPointe.
   ///
   /// In en, this message translates to:
-  /// **'Zero Pointe\'\'s game starts! Each player must reveal 2 cards.'**
+  /// **'Zero Point game begins! Each player must reveal 2 cards.'**
   String get laPartieDeZeroPointe;
 
   /// No description provided for @toutLeMondeARevele.
   ///
   /// In en, this message translates to:
-  /// **'Everyone revealed their cards. The game starts!'**
+  /// **'Everyone revealed their cards. Game begins!'**
   String get toutLeMondeARevele;
 
   /// No description provided for @plusAucuneCarteDisponible.
@@ -12657,26 +10701,8 @@ abstract class AppLocalizations {
   /// No description provided for @vousDevezChoisirUneCarte.
   ///
   /// In en, this message translates to:
-  /// **'You must choose a hidden face card not eliminated.'**
+  /// **'Must pick face-down uneliminated card.'**
   String get vousDevezChoisirUneCarte;
-
-  /// No description provided for @nouvelleMainEstLeDonneur.
-  ///
-  /// In en, this message translates to:
-  /// **'New hand! \$\'{\'players[playerIds[dealerindex][\'\'name\'\']\'}\' is the donor.'**
-  String get nouvelleMainEstLeDonneur;
-
-  /// No description provided for @poseLaPetiteBlindDe.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[smallBlindId][\'\'name\'\']\'}\' sets up the small blind of \$smallBlindActual.'**
-  String get poseLaPetiteBlindDe;
-
-  /// No description provided for @poseLaGrosseBlindDe.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'players[bigBlindId][\'\'name\'\']\'}\' sets up the big blind of \$bigBlindActual.'**
-  String get poseLaGrosseBlindDe;
 
   /// No description provided for @laPartieNExistePas.
   ///
@@ -12690,107 +10716,35 @@ abstract class AppLocalizations {
   /// **'Invalid game data (playerOrder/currentPlayerIndex).'**
   String get donneesDeJeuInvalidesPlayerorder;
 
-  /// No description provided for @ceNEstPasLe2.
-  ///
-  /// In en, this message translates to:
-  /// **'It\'\'s not \$playerId\'\'s turn.'**
-  String get ceNEstPasLe2;
-
-  /// No description provided for @donneesDuJoueurPlayeridIntrouvables.
-  ///
-  /// In en, this message translates to:
-  /// **'Player data \$playerId not found.'**
-  String get donneesDuJoueurPlayeridIntrouvables;
-
-  /// No description provided for @seCouche.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'myData[\'\'name\'\']\'}\' goes to bed.'**
-  String get seCouche;
-
   /// No description provided for @vousNePouvezPasChecker.
   ///
   /// In en, this message translates to:
   /// **'You can\'\'t check, someone bet.'**
   String get vousNePouvezPasChecker;
 
-  /// No description provided for @check.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'myData[\'\'name\'\']\'}\' check.'**
-  String get check;
-
-  /// No description provided for @faitTapisAllIn.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'myData[\'\'name\'\']\'}\' made carpet (all-in)!'**
-  String get faitTapisAllIn;
-
-  /// No description provided for @suitPourCallamount.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'myData[\'\'name\'\']\'}\' follows for \$callAmount.'**
-  String get suitPourCallamount;
-
   /// No description provided for @montantDeRelanceRequis.
   ///
   /// In en, this message translates to:
-  /// **'Recovery amount required.'**
+  /// **'Raise amount required.'**
   String get montantDeRelanceRequis;
 
   /// No description provided for @laRelanceDoitEtreStrictement.
   ///
   /// In en, this message translates to:
-  /// **'The recovery must be strictly superior to the current one.'**
+  /// **'Raise must exceed current bet.'**
   String get laRelanceDoitEtreStrictement;
 
   /// No description provided for @vousNAvezPasAssez.
   ///
   /// In en, this message translates to:
-  /// **'You don\'\'t have enough chips for this recovery.'**
+  /// **'Not enough chips for this raise.'**
   String get vousNAvezPasAssez;
 
   /// No description provided for @laRelanceDoitEtreD.
   ///
   /// In en, this message translates to:
-  /// **'The restart must be at least twice the previous bet (or carpet).'**
+  /// **'Raise must be at least double previous bet (or all-in).'**
   String get laRelanceDoitEtreD;
-
-  /// No description provided for @faitTapisAllInEn.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'myData[\'\'name\'\']\'}\' makes carpet (all-in) by re-launching to \$totalBetAmount!'**
-  String get faitTapisAllInEn;
-
-  /// No description provided for @relanceATotalbetamount.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'myData[\'\'name\'\']\'}\' raises to \$totalBetAmount.'**
-  String get relanceATotalbetamount;
-
-  /// No description provided for @gagneLePotParForfait.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[winners.first][\'\'name\'\']\'}\' wins the pot by package!'**
-  String get gagneLePotParForfait;
-
-  /// No description provided for @winnernamesGagneNtLePot.
-  ///
-  /// In en, this message translates to:
-  /// **'\$winnerNames wins the pot with \$\'{\'bestHand?.rank.name ?? AppLocalizations.of(context)!.aMain\'}\'!'**
-  String get winnernamesGagneNtLePot;
-
-  /// No description provided for @laPartieDeBeloteCommence.
-  ///
-  /// In en, this message translates to:
-  /// **'The Belote game begins!'**
-  String get laPartieDeBeloteCommence;
-
-  /// No description provided for @aPrisASuit.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerData[playerId][\'\'name\'\']\'}\' took \$suit!'**
-  String get aPrisASuit;
 
   /// No description provided for @passeGeneraleAu1erTour.
   ///
@@ -12803,12 +10757,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Card not possessed.'**
   String get carteNonPossedee;
-
-  /// No description provided for @vousDevezFournirLaCouleur.
-  ///
-  /// In en, this message translates to:
-  /// **'You must provide the requested color (\$ledSuit).'**
-  String get vousDevezFournirLaCouleur;
 
   /// No description provided for @vousDevezMonterAL.
   ///
@@ -12825,19 +10773,13 @@ abstract class AppLocalizations {
   /// No description provided for @passeLAnnonce.
   ///
   /// In en, this message translates to:
-  /// **'Pass the ad'**
+  /// **'passes bid'**
   String get passeLAnnonce;
-
-  /// No description provided for @laPartieDeBlokusCommence.
-  ///
-  /// In en, this message translates to:
-  /// **'Blokus game starts!'**
-  String get laPartieDeBlokusCommence;
 
   /// No description provided for @pieceDejaUtilisee.
   ///
   /// In en, this message translates to:
-  /// **'Coin already used.'**
+  /// **'Piece already used.'**
   String get pieceDejaUtilisee;
 
   /// No description provided for @horsLimites.
@@ -12849,134 +10791,122 @@ abstract class AppLocalizations {
   /// No description provided for @caseDejaOccupee.
   ///
   /// In en, this message translates to:
-  /// **'Busy case!'**
+  /// **'Square already occupied!'**
   String get caseDejaOccupee;
 
   /// No description provided for @contactParLeCoteInterdit.
   ///
   /// In en, this message translates to:
-  /// **'Contact from the forbidden side!'**
+  /// **'Side contact forbidden!'**
   String get contactParLeCoteInterdit;
 
   /// No description provided for @lePremierCoupDoitCouvrir.
   ///
   /// In en, this message translates to:
-  /// **'The first shot must cover your starting point!'**
+  /// **'First move must cover your starting corner!'**
   String get lePremierCoupDoitCouvrir;
 
   /// No description provided for @votrePieceDoitToucherUne.
   ///
   /// In en, this message translates to:
-  /// **'Your room must touch one of your rooms by a corner!'**
+  /// **'Your piece must touch one of yours by a corner!'**
   String get votrePieceDoitToucherUne;
 
   /// No description provided for @cinemaSeries.
   ///
   /// In en, this message translates to:
-  /// **'Cinema & Series'**
+  /// **'🎬 Movies & TV Shows'**
   String get cinemaSeries;
 
   /// No description provided for @gamingJeux.
   ///
   /// In en, this message translates to:
-  /// **'Game & Gaming'**
+  /// **'🎮 Gaming & Games'**
   String get gamingJeux;
 
   /// No description provided for @cuisineFood.
   ///
   /// In en, this message translates to:
-  /// **'Food & Kitchen'**
+  /// **'🍕 Cooking & Food'**
   String get cuisineFood;
 
   /// No description provided for @voyagePays.
   ///
   /// In en, this message translates to:
-  /// **'Travel & Country'**
+  /// **'🌍 Travel & Countries'**
   String get voyagePays;
 
   /// No description provided for @superHerosComics.
   ///
   /// In en, this message translates to:
-  /// **'Superhero & Comics'**
+  /// **'🦸 Superheroes & Comics'**
   String get superHerosComics;
 
   /// No description provided for @animauxNature.
   ///
   /// In en, this message translates to:
-  /// **'Animals & Nature'**
+  /// **'🐾 Animals & Nature'**
   String get animauxNature;
 
   /// No description provided for @scienceFiction.
   ///
   /// In en, this message translates to:
-  /// **'Science-Fiction'**
+  /// **'🚀 Science Fiction'**
   String get scienceFiction;
 
   /// No description provided for @histoireMythes.
   ///
   /// In en, this message translates to:
-  /// **'History & Myths'**
+  /// **'📚 History & Myths'**
   String get histoireMythes;
 
   /// No description provided for @humourAbsurde.
   ///
   /// In en, this message translates to:
-  /// **'🎭 Humour & Absurde'**
+  /// **'🎭 Humor & Absurd'**
   String get humourAbsurde;
 
   /// No description provided for @musiquePop.
   ///
   /// In en, this message translates to:
-  /// **'Music & Pop'**
+  /// **'🎵 Music & Pop'**
   String get musiquePop;
 
   /// No description provided for @annees8090.
   ///
   /// In en, this message translates to:
-  /// **'8 / 90'**
+  /// **'🎉 80s & 90s'**
   String get annees8090;
 
   /// No description provided for @fantasyMagie.
   ///
   /// In en, this message translates to:
-  /// **'» Fantasy & Magic'**
+  /// **'🧙 Fantasy & Magic'**
   String get fantasyMagie;
 
   /// No description provided for @funSoiree.
   ///
   /// In en, this message translates to:
-  /// **'Fun & Evening'**
+  /// **'🎉 Fun & Party'**
   String get funSoiree;
 
   /// No description provided for @cultureDefi.
   ///
   /// In en, this message translates to:
-  /// **'Culture & Challenge'**
+  /// **'🧠 Trivia & Challenge'**
   String get cultureDefi;
 
   /// No description provided for @familleToutPublic.
   ///
   /// In en, this message translates to:
-  /// **'Family & All Public'**
+  /// **'👨‍👩‍👧‍👦 Family & All Ages'**
   String get familleToutPublic;
 
   /// No description provided for @piquantInsolite.
   ///
   /// In en, this message translates to:
-  /// **'Spicy & Unusual'**
+  /// **'🌶️ Spicy & Quirky'**
   String get piquantInsolite;
-
-  /// No description provided for @erreurGenerationIaE.
-  ///
-  /// In en, this message translates to:
-  /// **'IA generation error: \$e'**
-  String get erreurGenerationIaE;
-
-  /// No description provided for @quiPourraitLePlusApplocalizations6.
-  ///
-  /// In en, this message translates to:
-  /// **'Who Could the More?AppLocalizations.of(context)! .who could your modegroup'**
-  String get quiPourraitLePlusApplocalizations6;
 
   /// No description provided for @devineT.
   ///
@@ -12984,77 +10914,11 @@ abstract class AppLocalizations {
   /// **'Guess T'**
   String get devineT;
 
-  /// No description provided for @activeaithemetitle.
-  ///
-  /// In en, this message translates to:
-  /// **'\$ activeAiThemeTitle + \$\'{\'item.title \'}\''**
-  String get activeaithemetitle;
-
-  /// No description provided for @str7fab82.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'autoTitle.substring(0, 25)\'}\'...'**
-  String get str7fab82;
-
-  /// No description provided for @forcevideo.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'forceVideo? \'\'(\$\'{\''**
-  String forcevideo(Object forceVideo);
-
-  /// No description provided for @erreurInitLivekitAuSalon.
-  ///
-  /// In en, this message translates to:
-  /// **'Livekit init error at the show: \$e'**
-  String get erreurInitLivekitAuSalon;
-
-  /// No description provided for @erreurLeavechannelSafepopE.
-  ///
-  /// In en, this message translates to:
-  /// **'LeaveChannel safePop error: \$e'**
-  String get erreurLeavechannelSafepopE;
-
-  /// No description provided for @erreurLorsDeLaDeconnexion.
-  ///
-  /// In en, this message translates to:
-  /// **'Error disconnecting LiveKit: \$e'**
-  String get erreurLorsDeLaDeconnexion;
-
-  /// No description provided for @erreurLorsDuNettoyageDu.
-  ///
-  /// In en, this message translates to:
-  /// **'Error cleaning the playroom: \$e'**
-  String get erreurLorsDuNettoyageDu;
-
-  /// No description provided for @erreurInitLivekitE.
-  ///
-  /// In en, this message translates to:
-  /// **'Error init Livekit: \$e'**
-  String get erreurInitLivekitE;
-
-  /// No description provided for @erreurDisposeLivekitserviceE.
-  ///
-  /// In en, this message translates to:
-  /// **'Error has LivekitService: \$e'**
-  String get erreurDisposeLivekitserviceE;
-
-  /// No description provided for @presidente.
-  ///
-  /// In en, this message translates to:
-  /// **'President'**
-  String get presidente;
-
   /// No description provided for @chargement.
   ///
   /// In en, this message translates to:
   /// **'Loading...'**
   String get chargement;
-
-  /// No description provided for @prole.
-  ///
-  /// In en, this message translates to:
-  /// **'\$pRole (\$\'{\'specialAbilities.join(\'\', \'\')\'}\')'**
-  String get prole;
 
   /// No description provided for @cursive.
   ///
@@ -13067,54 +10931,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exception:'**
   String get exception;
-
-  /// No description provided for @stra26129.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'oppSafeties.length\'}\''**
-  String get stra26129;
-
-  /// No description provided for @str84889d.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'(gameData[\'\'mileBornesDeck\'\'] as List??.length ?? 0\'}\''**
-  String get str84889d;
-
-  /// No description provided for @str58f25a.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'String.fromCharCode(65 + enemyAimedIndex ~/ 10)\'}\'\$\'{\'enemyAimedIndex % 10 + 1\'}\''**
-  String get str58f25a;
-
-  /// No description provided for @stree98fd.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'myData[\'\'chips\'\']\'}\' \\\$'**
-  String get stree98fd;
-
-  /// No description provided for @str0d434e.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' \$\'{\'GameUiLocalization.tr(context, wildColorChosen).toUpperCase()\'}\''**
-  String get str0d434e;
-
-  /// No description provided for @debutDeLaConstructionDe.
-  ///
-  /// In en, this message translates to:
-  /// **'--- THE CONSTRUCTION OF THE HIM OF VOTE \'\'Who Could the Most?AppLocations.of(context)!.printIsactiondependingStateTo( isActionPending)players\'\'] as Map<String, dynamic>?) ?? \'{}\';'**
-  String get debutDeLaConstructionDe;
-
-  /// No description provided for @questionAAfficherQuestion.
-  ///
-  /// In en, this message translates to:
-  /// **'Question to display: \$question'**
-  String get questionAAfficherQuestion;
-
-  /// No description provided for @nombreDeJoueursAAfficher.
-  ///
-  /// In en, this message translates to:
-  /// **'Number of players to display: \$\'{\'players.length\'}\''**
-  String get nombreDeJoueursAAfficher;
 
   /// No description provided for @clicSurLeJoueurPname.
   ///
@@ -13146,149 +10962,41 @@ abstract class AppLocalizations {
   /// **'- ATTENTION: Widget\'\'s gone, setState canceled.'**
   String get attentionLeWidgetNEst;
 
-  /// No description provided for @quiPourraitLePlusApplocalizations7.
-  ///
-  /// In en, this message translates to:
-  /// **'Who Could More?AppLocalizations.of(context)!.defaultFinalRoundwinneridGamedataroundWinnerId'**
-  String get quiPourraitLePlusApplocalizations7;
-
-  /// No description provided for @currentcountTotalexpected.
-  ///
-  /// In en, this message translates to:
-  /// **'\$currentCount / \$totalExpected'**
-  String get currentcountTotalexpected;
-
-  /// No description provided for @str38ce0b.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'\'\'codenamesYouAre\'\'\'}\'\$\'{\'redTeam.contains(playerId) ? \'\'codenamesRedTeam\'\': (blueTeam.contains(playerId)? \'\'codenamesBlueTeam\'\': \'\'codenamesSpectator\'\')\'}\''**
-  String get str38ce0b;
-
-  /// No description provided for @str735713.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'(playerId == masterSpyRed \'}\''**
-  String get str735713;
-
-  /// No description provided for @strb8097d.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'pointers.first\'}\''**
-  String get strb8097d;
-
-  /// No description provided for @currentclueCluecount.
-  ///
-  /// In en, this message translates to:
-  /// **'\'\'\$currentClue \$clueCount\'\''**
-  String get currentclueCluecount;
-
-  /// No description provided for @str51cc0a.
-  ///
-  /// In en, this message translates to:
-  /// **'#\$\'{\'index + 1\'}\''**
-  String get str51cc0a;
-
-  /// No description provided for @maximumbid.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' : \$maximumBid \$\'{\''**
-  String get maximumbid;
-
-  /// No description provided for @selectedbid.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' (\$selectedBid)'**
-  String get selectedbid;
-
-  /// No description provided for @currentbidTotalcardsontables.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' : \$currentBid / \$totalCardsOnTables'**
-  String get currentbidTotalcardsontables;
-
   /// No description provided for @phaseDePose.
   ///
   /// In en, this message translates to:
-  /// **'POSITION PHASE'**
+  /// **'PLACING PHASE'**
   String get phaseDePose;
-
-  /// No description provided for @strb75c84.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' \$\'{\'players[currentPlayerId]?[\'\'name\'\'] ?? \'\'...\'\'\'}\''**
-  String get strb75c84;
-
-  /// No description provided for @biddername.
-  ///
-  /// In en, this message translates to:
-  /// **'\$bidderName \$\'{\''**
-  String get biddername;
-
-  /// No description provided for @liveamount.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' \$liveAmount \$\'{\''**
-  String get liveamount;
-
-  /// No description provided for @name.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' (\$name)'**
-  String get name;
-
-  /// No description provided for @str35ecf5.
-  ///
-  /// In en, this message translates to:
-  /// **'\'{\'\$\'{\'myHand.length\'}\' \$\'{\''**
-  String get str35ecf5;
-
-  /// No description provided for @pictionarystrokecount30.
-  ///
-  /// In en, this message translates to:
-  /// **'\$ pictionaryStrokeCount/30 \$\'{\''**
-  String get pictionarystrokecount30;
 
   /// No description provided for @stre9f4a5.
   ///
   /// In en, this message translates to:
-  /// **'\$\'{\'\"Legendary!\" \'}\''**
+  /// **'🏆 Legendary!'**
   String get stre9f4a5;
 
   /// No description provided for @str21f597.
   ///
   /// In en, this message translates to:
-  /// **'\"Excellent!\" }'**
+  /// **'⭐ Excellent!'**
   String get str21f597;
 
   /// No description provided for @str59ee4e.
   ///
   /// In en, this message translates to:
-  /// **'\"Well done!\" }'**
+  /// **'👍 Well played!'**
   String get str59ee4e;
 
   /// No description provided for @strb6f91d.
   ///
   /// In en, this message translates to:
-  /// **'\"Not bad!\" }'**
+  /// **'😅 Not bad!'**
   String get strb6f91d;
 
   /// No description provided for @strc0046c.
   ///
   /// In en, this message translates to:
-  /// **'\"We can do better!\" }'**
+  /// **'💪 We can do better!'**
   String get strc0046c;
-
-  /// No description provided for @totalscoreDecktotal.
-  ///
-  /// In en, this message translates to:
-  /// **'TotalRating / \$deckTotal'**
-  String get totalscoreDecktotal;
-
-  /// No description provided for @deckindexDecktotal.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' \$deckIndex / \$deckTotal'**
-  String get deckindexDecktotal;
 
   /// No description provided for @str85bff7.
   ///
@@ -13302,59 +11010,11 @@ abstract class AppLocalizations {
   /// **'\$\'{\'\'\'Rate!\'\' \'}\''**
   String get strfa1b8c;
 
-  /// No description provided for @strf150cd.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' \$\'{\'justOneCurrentWord ?? \'\'\'}\''**
-  String get strf150cd;
-
-  /// No description provided for @guessernameAnswer.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' \$guesserName: \\\"\$answer\\\"'**
-  String get guessernameAnswer;
-
-  /// No description provided for @totalscoreDeckindex.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' : \$totalRating / \$deckIndex'**
-  String get totalscoreDeckindex;
-
   /// No description provided for @str487ca1.
   ///
   /// In en, this message translates to:
   /// **'\$\'{\'\'\'Chut! Close your eyes.'**
   String get str487ca1;
-
-  /// No description provided for @strf4cf64.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' : \$\'{\'justOneClues.length\'}\' / \$\'{\'players.length - 1\'}\''**
-  String get strf4cf64;
-
-  /// No description provided for @strd25123.
-  ///
-  /// In en, this message translates to:
-  /// **'\$ {justOneCurrentWord}'**
-  String strd25123(Object justOneCurrentWord);
-
-  /// No description provided for @currentround.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' \$currentRound'**
-  String get currentround;
-
-  /// No description provided for @currentpotatoplayername.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' \$currentPotatoPlayer'**
-  String get currentpotatoplayername;
-
-  /// No description provided for @losername.
-  ///
-  /// In en, this message translates to:
-  /// **'\$loserName\$\'{\''**
-  String get losername;
 
   /// No description provided for @leSoleilSeLeve.
   ///
@@ -13362,61 +11022,17 @@ abstract class AppLocalizations {
   /// **'The sun rises'**
   String get leSoleilSeLeve;
 
-  /// No description provided for @strd83364.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'(hands[pId] as List??.length ?? 0\'}\''**
-  String get strd83364;
-
-  /// No description provided for @streabdaf.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'\'\'Tour de\'\'\'}\' \$\'{\'players[currentPlayerId]?[\'\'name\'\'] ?? \'\'...\'\'\'}\''**
-  String get streabdaf;
-
-  /// No description provided for @str4f745a.
-  ///
-  /// In en, this message translates to:
-  /// **'+\$\'{\'potentialScore ?? 0\'}\''**
-  String get str4f745a;
-
   /// No description provided for @atout.
   ///
   /// In en, this message translates to:
-  /// **'OUT: {suit}'**
+  /// **'TRUMP: {suit}'**
   String atout(Object suit);
-
-  /// No description provided for @erreurLorsDeLaCapture.
-  ///
-  /// In en, this message translates to:
-  /// **'Error capturing: \$e'**
-  String get erreurLorsDeLaCapture;
-
-  /// No description provided for @undercoverLocal.
-  ///
-  /// In en, this message translates to:
-  /// **'Undercover Local'**
-  String get undercoverLocal;
 
   /// No description provided for @toiMeme.
   ///
   /// In en, this message translates to:
   /// **'yourself'**
   String get toiMeme;
-
-  /// No description provided for @applocalizationsOfContextWordcivilparts0trimwordundercover1Rawpair.
-  ///
-  /// In en, this message translates to:
-  /// **':AppLocalizations.of(context)!.wordcivilParts0TrimWordundercover1(rawPair.trim(), player)\$ {role} ! Civilians win!\";'**
-  String applocalizationsOfContextWordcivilparts0trimwordundercover1Rawpair(
-    Object role,
-  );
-
-  /// No description provided for @aiErrorE.
-  ///
-  /// In en, this message translates to:
-  /// **'AI error: \$e'**
-  String get aiErrorE;
 
   /// No description provided for @unAutreJoueur.
   ///
@@ -13451,7 +11067,7 @@ abstract class AppLocalizations {
   /// No description provided for @soiree.
   ///
   /// In en, this message translates to:
-  /// **'Evening'**
+  /// **'Party'**
   String get soiree;
 
   /// No description provided for @competition.
@@ -13460,59 +11076,23 @@ abstract class AppLocalizations {
   /// **'Competition'**
   String get competition;
 
-  /// No description provided for @strd659f5.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' (\$\'{\'joned.length\'}\')'**
-  String get strd659f5;
-
-  /// No description provided for @gamename.
-  ///
-  /// In en, this message translates to:
-  /// **'\'}\' (\$gameName)'**
-  String get gamename;
-
   /// No description provided for @enCours.
   ///
   /// In en, this message translates to:
   /// **'CURRENT: \'{\'0\'}\''**
   String get enCours;
 
-  /// No description provided for @gamemessagelocalizationTrContextReason.
-  ///
-  /// In en, this message translates to:
-  /// **': \"\"\'}\'\" : GameMessageLocalization.tr(context, reason),'**
-  String get gamemessagelocalizationTrContextReason;
-
   /// No description provided for @jAiLanceUnePartie2.
   ///
   /// In en, this message translates to:
-  /// **'I threw a game'**
+  /// **'I started a game'**
   String get jAiLanceUnePartie2;
 
   /// No description provided for @piedDeBiche.
   ///
   /// In en, this message translates to:
-  /// **'Bishfoot'**
+  /// **'Crowbar'**
   String get piedDeBiche;
-
-  /// No description provided for @str128675.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'playerNames[i].substring(0, 7)\'}\'..'**
-  String get str128675;
-
-  /// No description provided for @pname.
-  ///
-  /// In en, this message translates to:
-  /// **'\$pName (\$\'{\'\'\'Me\'\'\'}\')'**
-  String get pname;
-
-  /// No description provided for @readycountTotalplayers.
-  ///
-  /// In en, this message translates to:
-  /// **'\$\'{\'\'\'FAST\'}\' (\$readyCount/\$totalPlayers)'**
-  String get readycountTotalplayers;
 
   /// No description provided for @appTitle.
   ///
@@ -13520,497 +11100,11 @@ abstract class AppLocalizations {
   /// **'Party Game'**
   String get appTitle;
 
-  /// No description provided for @loginTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome!'**
-  String get loginTitle;
-
-  /// No description provided for @registerTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Join us!'**
-  String get registerTitle;
-
-  /// No description provided for @email.
-  ///
-  /// In en, this message translates to:
-  /// **'Email'**
-  String get email;
-
-  /// No description provided for @password.
-  ///
-  /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
-
-  /// No description provided for @username.
-  ///
-  /// In en, this message translates to:
-  /// **'Unique username'**
-  String get username;
-
-  /// No description provided for @loginButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Log In'**
-  String get loginButton;
-
-  /// No description provided for @registerButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Create account'**
-  String get registerButton;
-
-  /// No description provided for @termsAcceptance.
-  ///
-  /// In en, this message translates to:
-  /// **'I have read and agree to the Terms of Service and Privacy Policy.'**
-  String get termsAcceptance;
-
-  /// No description provided for @gamesTab.
-  ///
-  /// In en, this message translates to:
-  /// **'Games'**
-  String get gamesTab;
-
-  /// No description provided for @friendsTab.
-  ///
-  /// In en, this message translates to:
-  /// **'Friends'**
-  String get friendsTab;
-
-  /// No description provided for @statsTab.
-  ///
-  /// In en, this message translates to:
-  /// **'Stats'**
-  String get statsTab;
-
-  /// No description provided for @loungesTab.
-  ///
-  /// In en, this message translates to:
-  /// **'Lounges'**
-  String get loungesTab;
-
   /// No description provided for @createGame.
   ///
   /// In en, this message translates to:
-  /// **'Create Game'**
+  /// **'Create a game'**
   String get createGame;
-
-  /// No description provided for @joinGame.
-  ///
-  /// In en, this message translates to:
-  /// **'Join Game'**
-  String get joinGame;
-
-  /// No description provided for @gameCode.
-  ///
-  /// In en, this message translates to:
-  /// **'Game Code (6 digits)'**
-  String get gameCode;
-
-  /// No description provided for @startGame.
-  ///
-  /// In en, this message translates to:
-  /// **'Start Game'**
-  String get startGame;
-
-  /// No description provided for @leaveGame.
-  ///
-  /// In en, this message translates to:
-  /// **'Leave Game'**
-  String get leaveGame;
-
-  /// No description provided for @rules.
-  ///
-  /// In en, this message translates to:
-  /// **'Rules'**
-  String get rules;
-
-  /// No description provided for @level.
-  ///
-  /// In en, this message translates to:
-  /// **'Level'**
-  String get level;
-
-  /// No description provided for @coins.
-  ///
-  /// In en, this message translates to:
-  /// **'Coins'**
-  String get coins;
-
-  /// No description provided for @gameOver.
-  ///
-  /// In en, this message translates to:
-  /// **'Game Over!'**
-  String get gameOver;
-
-  /// No description provided for @victory.
-  ///
-  /// In en, this message translates to:
-  /// **'Victory!'**
-  String get victory;
-
-  /// No description provided for @defeat.
-  ///
-  /// In en, this message translates to:
-  /// **'Defeat'**
-  String get defeat;
-
-  /// No description provided for @nextRound.
-  ///
-  /// In en, this message translates to:
-  /// **'Next Round'**
-  String get nextRound;
-
-  /// No description provided for @onboardingWelcome.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome'**
-  String get onboardingWelcome;
-
-  /// No description provided for @onboardingSkip.
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get onboardingSkip;
-
-  /// No description provided for @onboardingNext.
-  ///
-  /// In en, this message translates to:
-  /// **'Next'**
-  String get onboardingNext;
-
-  /// No description provided for @onboardingStart.
-  ///
-  /// In en, this message translates to:
-  /// **'Let\'\'s Go! 🚀'**
-  String get onboardingStart;
-
-  /// No description provided for @onboardingSlide1Title.
-  ///
-  /// In en, this message translates to:
-  /// **'Play with Friends'**
-  String get onboardingSlide1Title;
-
-  /// No description provided for @onboardingSlide1Subtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose from over 30 party, card and board games. Play locally, with friends, or worldwide!'**
-  String get onboardingSlide1Subtitle;
-
-  /// No description provided for @onboardingSlide2Title.
-  ///
-  /// In en, this message translates to:
-  /// **'Earn Coins & Unlock Badges'**
-  String get onboardingSlide2Title;
-
-  /// No description provided for @onboardingSlide2Subtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Earn XP with every win, level up, and unlock exclusive achievements to customize your profile.'**
-  String get onboardingSlide2Subtitle;
-
-  /// No description provided for @onboardingSlide3Title.
-  ///
-  /// In en, this message translates to:
-  /// **'Create or Join in Seconds'**
-  String get onboardingSlide3Title;
-
-  /// No description provided for @onboardingSlide3Subtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'A 6-digit code is all it takes to gather your friends, or jump into fast matchmaking with live players.'**
-  String get onboardingSlide3Subtitle;
-
-  /// No description provided for @vipPass.
-  ///
-  /// In en, this message translates to:
-  /// **'VIP Pass'**
-  String get vipPass;
-
-  /// No description provided for @vipActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Your VIP Pass is active!'**
-  String get vipActive;
-
-  /// No description provided for @vipActiveDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'All features (AI, Lounges, Video, Matchmaking) are unlimited.'**
-  String get vipActiveDesc;
-
-  /// No description provided for @choosePlan.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose your plan:'**
-  String get choosePlan;
-
-  /// No description provided for @restorePurchases.
-  ///
-  /// In en, this message translates to:
-  /// **'Restore purchases'**
-  String get restorePurchases;
-
-  /// No description provided for @purchasesRestored.
-  ///
-  /// In en, this message translates to:
-  /// **'Purchases restored successfully!'**
-  String get purchasesRestored;
-
-  /// No description provided for @noPurchasesFound.
-  ///
-  /// In en, this message translates to:
-  /// **'No active purchases found.'**
-  String get noPurchasesFound;
-
-  /// No description provided for @monthlySubscription.
-  ///
-  /// In en, this message translates to:
-  /// **'Monthly Subscription'**
-  String get monthlySubscription;
-
-  /// No description provided for @annualSubscription.
-  ///
-  /// In en, this message translates to:
-  /// **'Annual Subscription'**
-  String get annualSubscription;
-
-  /// No description provided for @lifetimeAccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Lifetime Access'**
-  String get lifetimeAccess;
-
-  /// No description provided for @popularTag.
-  ///
-  /// In en, this message translates to:
-  /// **'POPULAR'**
-  String get popularTag;
-
-  /// No description provided for @chooseButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose'**
-  String get chooseButton;
-
-  /// No description provided for @vipCongratulations.
-  ///
-  /// In en, this message translates to:
-  /// **'Congratulations, you are VIP!'**
-  String get vipCongratulations;
-
-  /// No description provided for @purchaseFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Purchase not completed.'**
-  String get purchaseFailed;
-
-  /// No description provided for @profileTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile & Settings'**
-  String get profileTitle;
-
-  /// No description provided for @profileNotFound.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile not found or non-existent player.'**
-  String get profileNotFound;
-
-  /// No description provided for @tabStats.
-  ///
-  /// In en, this message translates to:
-  /// **'Statistics'**
-  String get tabStats;
-
-  /// No description provided for @tabBadges.
-  ///
-  /// In en, this message translates to:
-  /// **'Badges & Achievements'**
-  String get tabBadges;
-
-  /// No description provided for @tabSettings.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings'**
-  String get tabSettings;
-
-  /// No description provided for @gamesPlayed.
-  ///
-  /// In en, this message translates to:
-  /// **'Games played'**
-  String get gamesPlayed;
-
-  /// No description provided for @gamesWon.
-  ///
-  /// In en, this message translates to:
-  /// **'Wins'**
-  String get gamesWon;
-
-  /// No description provided for @winRate.
-  ///
-  /// In en, this message translates to:
-  /// **'Win rate'**
-  String get winRate;
-
-  /// No description provided for @soundEffects.
-  ///
-  /// In en, this message translates to:
-  /// **'Sound effects'**
-  String get soundEffects;
-
-  /// No description provided for @music.
-  ///
-  /// In en, this message translates to:
-  /// **'Music'**
-  String get music;
-
-  /// No description provided for @editUsername.
-  ///
-  /// In en, this message translates to:
-  /// **'Change username'**
-  String get editUsername;
-
-  /// No description provided for @newUsernameHint.
-  ///
-  /// In en, this message translates to:
-  /// **'New username'**
-  String get newUsernameHint;
-
-  /// No description provided for @logout.
-  ///
-  /// In en, this message translates to:
-  /// **'Log out'**
-  String get logout;
-
-  /// No description provided for @deleteAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete account'**
-  String get deleteAccount;
-
-  /// No description provided for @deleteAccountConfirm.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to permanently delete your account?'**
-  String get deleteAccountConfirm;
-
-  /// No description provided for @cancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
-
-  /// No description provided for @confirm.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm'**
-  String get confirm;
-
-  /// No description provided for @save.
-  ///
-  /// In en, this message translates to:
-  /// **'Save'**
-  String get save;
-
-  /// No description provided for @modeLocal.
-  ///
-  /// In en, this message translates to:
-  /// **'Local'**
-  String get modeLocal;
-
-  /// No description provided for @modeMulti.
-  ///
-  /// In en, this message translates to:
-  /// **'Online'**
-  String get modeMulti;
-
-  /// No description provided for @modeMonde.
-  ///
-  /// In en, this message translates to:
-  /// **'World'**
-  String get modeMonde;
-
-  /// No description provided for @searchGame.
-  ///
-  /// In en, this message translates to:
-  /// **'Search for a game...'**
-  String get searchGame;
-
-  /// No description provided for @filterAll.
-  ///
-  /// In en, this message translates to:
-  /// **'All games'**
-  String get filterAll;
-
-  /// No description provided for @createLounge.
-  ///
-  /// In en, this message translates to:
-  /// **'Create a lounge'**
-  String get createLounge;
-
-  /// No description provided for @joinLounge.
-  ///
-  /// In en, this message translates to:
-  /// **'Join a lounge'**
-  String get joinLounge;
-
-  /// No description provided for @loungeCode.
-  ///
-  /// In en, this message translates to:
-  /// **'Lounge code'**
-  String get loungeCode;
-
-  /// No description provided for @publicLounges.
-  ///
-  /// In en, this message translates to:
-  /// **'Public lounges'**
-  String get publicLounges;
-
-  /// No description provided for @noLoungesAvailable.
-  ///
-  /// In en, this message translates to:
-  /// **'No public lounges available at the moment.'**
-  String get noLoungesAvailable;
-
-  /// No description provided for @playersCount.
-  ///
-  /// In en, this message translates to:
-  /// **'Players'**
-  String get playersCount;
-
-  /// No description provided for @howToPlay.
-  ///
-  /// In en, this message translates to:
-  /// **'How to play?'**
-  String get howToPlay;
-
-  /// No description provided for @copiedToClipboard.
-  ///
-  /// In en, this message translates to:
-  /// **'Copied to clipboard!'**
-  String get copiedToClipboard;
-
-  /// No description provided for @connectionError.
-  ///
-  /// In en, this message translates to:
-  /// **'Connection error. Please try again.'**
-  String get connectionError;
-
-  /// No description provided for @loading.
-  ///
-  /// In en, this message translates to:
-  /// **'Loading...'**
-  String get loading;
-
-  /// No description provided for @success.
-  ///
-  /// In en, this message translates to:
-  /// **'Success!'**
-  String get success;
 
   /// No description provided for @pasAssezDeSymbolesUniques1.
   ///
@@ -14031,7 +11125,7 @@ abstract class AppLocalizations {
   /// No description provided for @ambianceTonImpose.
   ///
   /// In en, this message translates to:
-  /// **'[Ambiance / Tone imposed:  0  ] {style}'**
+  /// **'[Atmosphere / Tone required: {style}]'**
   String ambianceTonImpose(Object style);
 
   /// No description provided for @genereDesPairesDeMots1.
@@ -14103,13 +11197,13 @@ abstract class AppLocalizations {
   /// No description provided for @theme.
   ///
   /// In en, this message translates to:
-  /// **'Theme  0  {gameType}'**
+  /// **'Theme {gameType}'**
   String theme(Object gameType);
 
   /// No description provided for @passeSonTour2.
   ///
   /// In en, this message translates to:
-  /// **'It\'\'s over. {playerName}'**
+  /// **'⏱️ {playerName} passes their turn.'**
   String passeSonTour2(Object playerName);
 
   /// No description provided for @finDuCompteARebours1.
@@ -14121,13 +11215,13 @@ abstract class AppLocalizations {
   /// No description provided for @aOuvertAvec.
   ///
   /// In en, this message translates to:
-  /// **'0  has opened with  1  . {playerName} {cardToPlay}'**
+  /// **'⏱️ {playerName} opened with {cardToPlay}.'**
   String aOuvertAvec(Object playerName, Object cardToPlay);
 
   /// No description provided for @sEstDeconnecteVictoireDe.
   ///
   /// In en, this message translates to:
-  /// **'0 has disconnected. Win  1  per package! {removedPlayerName} {remainingName}'**
+  /// **'{removedPlayerName} disconnected. {remainingName} wins by forfeit!'**
   String sEstDeconnecteVictoireDe(
     Object removedPlayerName,
     Object remainingName,
@@ -14142,31 +11236,31 @@ abstract class AppLocalizations {
   /// No description provided for @neRepondPlusLAdministrateur.
   ///
   /// In en, this message translates to:
-  /// **'0  no longer responds (  1  ). The administrator was asked to decide on its replacement with the computer. {playerName} {reason}'**
+  /// **'⚠️ {playerName} is unresponsive ({reason}). Admin was prompted to replace with computer.'**
   String neRepondPlusLAdministrateur(Object playerName, Object reason);
 
   /// No description provided for @aEteRemplaceParL.
   ///
   /// In en, this message translates to:
-  /// **'It was replaced by the computer (AI active - 5s per turn). {playerName}'**
+  /// **'🤖 {playerName} was replaced by the computer (AI active - 5s per turn).'**
   String aEteRemplaceParL(Object playerName);
 
   /// No description provided for @nAPasDonneD.
   ///
   /// In en, this message translates to:
-  /// **'0  has not given an index (Jeu d\'\'opinion). Turn past. {playerName}'**
+  /// **'⚠️ {playerName} gave no clue (Opinion game). Turn passed.'**
   String nAPasDonneD(Object playerName);
 
   /// No description provided for @nAPasReponduJeu.
   ///
   /// In en, this message translates to:
-  /// **'Tour skipped without automatic action. {playerName}'**
+  /// **'⚠️ {playerName} didn\'\'t answer (Opinion game). Turn skipped with no action.'**
   String nAPasReponduJeu(Object playerName);
 
   /// No description provided for @nAPasJoueA3.
   ///
   /// In en, this message translates to:
-  /// **'0 has not played in time. His turn has passed. {playerName}'**
+  /// **'{playerName} didn\'\'t play in time. Turn skipped.'**
   String nAPasJoueA3(Object playerName);
 
   /// No description provided for @egaliteParfaiteLorsDuVote2.
@@ -14178,67 +11272,67 @@ abstract class AppLocalizations {
   /// No description provided for @aJoue.
   ///
   /// In en, this message translates to:
-  /// **'0 has played  1  . {playerName} {lastDrawn}'**
+  /// **'⏱️ {playerName} played {lastDrawn}.'**
   String aJoue(Object playerName, Object lastDrawn);
 
   /// No description provided for @aJoue1.
   ///
   /// In en, this message translates to:
-  /// **'0 has played  1  . {playerName} {playable}'**
+  /// **'⏱️ {playerName} played {playable}.'**
   String aJoue1(Object playerName, Object playable);
 
   /// No description provided for @piocheEtPasseSonTour.
   ///
   /// In en, this message translates to:
-  /// **'0  picks up and passes its turn. {playerName}'**
+  /// **'⏱️ {playerName} draws and passes their turn.'**
   String piocheEtPasseSonTour(Object playerName);
 
   /// No description provided for @nAPasJoueA4.
   ///
   /// In en, this message translates to:
-  /// **'0  did not play on time. One card was defeated and one box revealed. {playerName}'**
+  /// **'⏱️ {playerName} timed out. A card was discarded and a square revealed.'**
   String nAPasJoueA4(Object playerName);
 
   /// No description provided for @laPartieEstTermineeVictoire1.
   ///
   /// In en, this message translates to:
-  /// **'The game\'\'s over. Victory of  0 ! {winner}'**
+  /// **'Game over. Victory for {winner}!'**
   String laPartieEstTermineeVictoire1(Object winner);
 
   /// No description provided for @joueursContaminesParLaMaladie1.
   ///
   /// In en, this message translates to:
-  /// **'Players infected with the disease:  0  . {contaminatedNames}'**
+  /// **'Players contaminated by plague: {contaminatedNames}.'**
   String joueursContaminesParLaMaladie1(Object contaminatedNames);
 
   /// No description provided for @vousAvezEspionneEtDecouvert.
   ///
   /// In en, this message translates to:
-  /// **'You spied on  0  and discovered his role:  1  . {targetName} {targetRole}'**
+  /// **'You spied on {targetName} and discovered their role: {targetRole}.'**
   String vousAvezEspionneEtDecouvert(Object targetName, Object targetRole);
 
   /// No description provided for @votreMotDuJourPrononcez.
   ///
   /// In en, this message translates to:
-  /// **'Your word of the day: \'\' 0 \'\'. Pronounce it in the cat before sunset! {newWord}'**
+  /// **'Your word of the day: \'\'{newWord}\'\'. Say it in chat before sunset!'**
   String votreMotDuJourPrononcez(Object newWord);
 
   /// No description provided for @declareUnCoupDEtat.
   ///
   /// In en, this message translates to:
-  /// **'0  declares a Coup! {dictateurName}'**
+  /// **'{dictateurName} declares a Coup d\'\'État!'**
   String declareUnCoupDEtat(Object dictateurName);
 
   /// No description provided for @leChasseurTireEtTue1.
   ///
   /// In en, this message translates to:
-  /// **'The Hunter shoots and kills  0 ! {targetName}'**
+  /// **'Hunter shoots and kills {targetName}!'**
   String leChasseurTireEtTue1(Object targetName);
 
   /// No description provided for @aDesigneCommeNouveauCapitaine.
   ///
   /// In en, this message translates to:
-  /// **'0  has designated  1  as a new Captain! {formerCaptainName} {newCaptainName}'**
+  /// **'{formerCaptainName} appointed {newCaptainName} as new Captain!'**
   String aDesigneCommeNouveauCapitaine(
     Object formerCaptainName,
     Object newCaptainName,
@@ -14247,19 +11341,19 @@ abstract class AppLocalizations {
   /// No description provided for @cupidonADesigneEtComme.
   ///
   /// In en, this message translates to:
-  /// **'Cupid has designated  0  and  1  as lovers! {lover1Name} {lover2Name}'**
+  /// **'Cupid matched {lover1Name} and {lover2Name} as lovers!'**
   String cupidonADesigneEtComme(Object lover1Name, Object lover2Name);
 
   /// No description provided for @votreAmoureuxSe.
   ///
   /// In en, this message translates to:
-  /// **'Your lover:  0 {amoureux2Name}'**
+  /// **'❤️ Your lover: {amoureux2Name}'**
   String votreAmoureuxSe(Object amoureux2Name);
 
   /// No description provided for @votreAmoureuxSe1.
   ///
   /// In en, this message translates to:
-  /// **'Your lover:  0 {amoureux1Name}'**
+  /// **'❤️ Your lover: {amoureux1Name}'**
   String votreAmoureuxSe1(Object amoureux1Name);
 
   /// No description provided for @cEstAuTourDe4.
@@ -14283,25 +11377,25 @@ abstract class AppLocalizations {
   /// No description provided for @extremiteNonDisponibleSurLe1.
   ///
   /// In en, this message translates to:
-  /// **'Extremity not available on set (  0  ). {openEnds}'**
+  /// **'End not available on board ({openEnds}).'**
   String extremiteNonDisponibleSurLe1(Object openEnds);
 
   /// No description provided for @laTuileNePossedePas.
   ///
   /// In en, this message translates to:
-  /// **'The tile  0  does not have the required value  1 . {tile} {matchEnd}'**
+  /// **'Tile {tile} does not have required value {matchEnd}.'**
   String laTuileNePossedePas(Object tile, Object matchEnd);
 
   /// No description provided for @leBotAJoueAutomatiquement.
   ///
   /// In en, this message translates to:
-  /// **'The bot played  0  automatically. {tileToPlay}'**
+  /// **'⏱️ The bot auto-played {tileToPlay}.'**
   String leBotAJoueAutomatiquement(Object tileToPlay);
 
   /// No description provided for @aEteContraintDePasser.
   ///
   /// In en, this message translates to:
-  /// **'⏱️ {playerName} a été contraint de passer son tour.'**
+  /// **'⏱️ {playerName} was forced to pass their turn.'**
   String aEteContraintDePasser(Object playerName);
 
   /// No description provided for @laRouletteADesigne.
@@ -14349,7 +11443,7 @@ abstract class AppLocalizations {
   /// No description provided for @vousDevezPiocherCartesOu.
   ///
   /// In en, this message translates to:
-  /// **'You must pick  0  cards, or counter with a +2/+4. {pendingDraw}'**
+  /// **'Must draw {pendingDraw} cards, or counter with +2/+4.'**
   String vousDevezPiocherCartesOu(Object pendingDraw);
 
   /// No description provided for @egaliteParfaite1.
@@ -14361,7 +11455,7 @@ abstract class AppLocalizations {
   /// No description provided for @priseMultipleObligatoireAvecLe1.
   ///
   /// In en, this message translates to:
-  /// **'Mandatory multiple socket with the pawn in  0  . {mandatoryPiece}'**
+  /// **'Mandatory multiple jump with piece at {mandatoryPiece}.'**
   String priseMultipleObligatoireAvecLe1(Object mandatoryPiece);
 
   /// No description provided for @motsDevines.
@@ -14373,7 +11467,7 @@ abstract class AppLocalizations {
   /// No description provided for @quiPourraitLePlus3.
   ///
   /// In en, this message translates to:
-  /// **'Which could be the most  0 {questionsrandomnextI}'**
+  /// **'Who is most likely to {questionsrandomnextI}'**
   String quiPourraitLePlus3(Object questionsrandomnextI);
 
   /// No description provided for @decrivezVotreMotSecretEn.
@@ -14391,7 +11485,7 @@ abstract class AppLocalizations {
   /// No description provided for @interdictionFormelleDeVoterPour.
   ///
   /// In en, this message translates to:
-  /// **'Formal ban on voting for oneself!'**
+  /// **'Strictly forbidden to vote for yourself!'**
   String get interdictionFormelleDeVoterPour;
 
   /// No description provided for @remporteLaManche.
@@ -14415,7 +11509,7 @@ abstract class AppLocalizations {
   /// No description provided for @aucuneDescriptionNAEte1.
   ///
   /// In en, this message translates to:
-  /// **'No description was voted.'**
+  /// **'No description was voted for.'**
   String get aucuneDescriptionNAEte1;
 
   /// No description provided for @ceNEstPasLe3.
@@ -14439,7 +11533,7 @@ abstract class AppLocalizations {
   /// No description provided for @aGagneAvecSaDescription1.
   ///
   /// In en, this message translates to:
-  /// **'0  won with his description: {winnerName}'**
+  /// **'{winnerName} won with their caption:'**
   String aGagneAvecSaDescription1(Object winnerName);
 
   /// No description provided for @leLoupBlancFrappeEn.
@@ -14451,13 +11545,13 @@ abstract class AppLocalizations {
   /// No description provided for @etaitUnCivilLesImposteurs.
   ///
   /// In en, this message translates to:
-  /// **'0  was a civilian! The Impostors win! {player}'**
+  /// **'{player} was a Civilian! The Impostors win!'**
   String etaitUnCivilLesImposteurs(Object player);
 
   /// No description provided for @etaitLLesCivilsGagnent.
   ///
   /// In en, this message translates to:
-  /// **'0  was the  1 ! The Civils win! {player} {role}'**
+  /// **'{player} was the {role}! Civilians win!'**
   String etaitLLesCivilsGagnent(Object player, Object role);
 
   /// No description provided for @question2.
@@ -14465,6 +11559,972 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'question'**
   String get question2;
+
+  /// No description provided for @mrWhiteSecretWordPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'You have been unmasked! If you guess the Civilians\'\' secret word, you win solo!'**
+  String get mrWhiteSecretWordPrompt;
+
+  /// No description provided for @codenamesRed.
+  ///
+  /// In en, this message translates to:
+  /// **'Red'**
+  String get codenamesRed;
+
+  /// No description provided for @codenamesBlue.
+  ///
+  /// In en, this message translates to:
+  /// **'Blue'**
+  String get codenamesBlue;
+
+  /// No description provided for @codenamesYourMasterSpyRed.
+  ///
+  /// In en, this message translates to:
+  /// **'your red spymaster'**
+  String get codenamesYourMasterSpyRed;
+
+  /// No description provided for @codenamesYourMasterSpyBlue.
+  ///
+  /// In en, this message translates to:
+  /// **'your blue spymaster'**
+  String get codenamesYourMasterSpyBlue;
+
+  /// No description provided for @codenamesRedLower.
+  ///
+  /// In en, this message translates to:
+  /// **'red'**
+  String get codenamesRedLower;
+
+  /// No description provided for @codenamesBlueLower.
+  ///
+  /// In en, this message translates to:
+  /// **'blue'**
+  String get codenamesBlueLower;
+
+  /// No description provided for @rulesBlancMangerCoco.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nBe the player with the most points at the end of the game!\n\n**How to Play**\n1. Each player receives **7 answer cards**.\n2. One player is chosen as the **Judge** (rotates each round).\n3. The Judge reads the **question card** aloud.\n4. All other players secretly choose and submit **1 answer card** from their hand.\n5. The Judge reads all responses aloud and picks the **funniest one**.\n6. The winner of the round scores **1 point**.\n7. Everyone draws back up to 7 cards.\n8. The Judge role passes to the next player.\n\n**Key Rules**\n- The Judge does not play a card on their turn.\n- Submissions are **anonymous**.\n- You may only play **one card** per round.'**
+  String get rulesBlancMangerCoco;
+
+  /// No description provided for @rulesZombie.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nDraw cards to make matching pairs. Avoid holding the Zombie card when the game ends!\n\n**How to Play**\n1. The deck has 33 cards (16 pairs + 1 Zombie card).\n2. Cards are dealt to players.\n3. On your turn, take a card from the next player.\n4. Matching pairs are automatically discarded.\n5. Your hand is shuffled.\n6. The first player to run out of cards wins.\n7. The last player stuck with the Zombie card loses!'**
+  String get rulesZombie;
+
+  /// No description provided for @rulesYams.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nScore the most points by filling 13 scoring categories with 5 dice.\n\n**Turn Structure**\n1. **Roll**: You can roll the 5 dice up to 3 times per turn.\n2. **Keep**: After roll 1 or 2, keep whichever dice you like and re-roll the rest.\n3. **Score**: Choose an available scoring category. Each can only be used once per game.\n\n**Categories**\n- **Aces to Sixes**: Sum of matching dice (35-point bonus if Upper Section totals 63+).\n- **Three of a Kind**: Sum of all 5 dice.\n- **Four of a Kind**: Sum of all 5 dice.\n- **Full House**: 3 of a kind + pair (25 pts).\n- **Small Straight**: 4 sequential dice (30 pts).\n- **Large Straight**: 5 sequential dice (40 pts).\n- **Yams (Yahtzee)**: 5 identical dice (50 pts).\n- **Chance**: Sum of all dice.'**
+  String get rulesYams;
+
+  /// No description provided for @rulesLaPatateChaude.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nDon\'\'t be holding the device when the hot potato explodes!\n\n**How to Play**\n1. A topic appears on screen.\n2. The player holding the device must name a valid answer matching the topic.\n3. As soon as answered, pass the phone quickly to the next player.\n4. The next player must give a new unique answer and pass it along.\n5. The countdown timer is secret and random: it can blow up at any second!\n6. Whoever holds the phone when it explodes loses the round and takes a penalty!'**
+  String get rulesLaPatateChaude;
+
+  /// No description provided for @rulesGribouillis.
+  ///
+  /// In en, this message translates to:
+  /// **'**Overview**\nA hilarious drawing game inspired by the \'\'Telephone game\'\', where prompts morph across rounds:\n- **Write**: Each player writes a quirky sentence or prompt.\n- **Draw**: You receive another player\'\'s prompt and illustrate it.\n- **Guess**: You view a sketch and guess what it depicts.\n- **Alternate**: Keeps cycling until albums return to their creator.\n- **Goal**: Laugh together discovering how simple ideas turn into crazy masterpieces!'**
+  String get rulesGribouillis;
+
+  /// No description provided for @rulesZeroPointe.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nHave the lowest cumulative score. The game ends when a player hits 100 points; the player with the lowest score wins!\n\n**Setup**\nEach player has a 3x4 grid of 12 cards face down. Reveal 2 cards of your choice at start.\n\n**Turn Actions**\n1. **Take from Discard pile**: Swap it with any of your 12 cards (face up or face down).\n2. **Draw from Draw pile**: Keep it and swap with one of your cards, or discard it and reveal one of your hidden cards.\n\n**Column Rule**\nThree identical cards in the same vertical column cancel out (worth 0 points).'**
+  String get rulesZeroPointe;
+
+  /// No description provided for @rulesPoker.
+  ///
+  /// In en, this message translates to:
+  /// **'**Texas Hold\'\'em - Objective**\nWin your opponents\'\' chips by building the strongest 5-card poker hand or by bluffing them into folding.\n\n**Hand Rankings (High to Low)**\n1. Royal Flush\n2. Straight Flush\n3. Four of a Kind\n4. Full House\n5. Flush\n6. Straight\n7. Three of a Kind\n8. Two Pair\n9. One Pair\n10. High Card\n\n**Rounds**\nEach player receives 2 private hole cards. 5 community cards are revealed in phases: Flop (3), Turn (1), River (1). Betting rounds allow you to Check, Bet, Call, Raise, or Fold.'**
+  String get rulesPoker;
+
+  /// No description provided for @rulesActionOuVerite.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nEarn the most XP by taking on bold dares or answering revealing truths!\n\n**How to Play**\n1. The roulette picks the active player.\n2. Choose \'\'Truth\'\' or \'\'Dare\'\'.\n3. Complete the prompt. Other players vote Yes or No to validate.\n4. Your approval rating determines how much XP you gain!'**
+  String get rulesActionOuVerite;
+
+  /// No description provided for @rulesPresident.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nShed all your cards first to become President. The last player holding cards becomes the Asshole!\n\n**Card Rank (Low to High)**\n3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace, **2** (highest).\n\n**Rules**\n- Play single cards, pairs, triples, or 4-of-a-kinds of equal or higher value.\n- Playing a **2** clears the pile immediately and gives you the lead.\n- Next round, the Asshole must trade their 2 best cards to the President!'**
+  String get rulesPresident;
+
+  /// No description provided for @rulesSkull.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nWin 2 bid challenges without ever flipping a Skull!\n\n**How to Play**\n1. Each player holds 4 cards: 3 Roses and 1 Skull.\n2. Players take turns playing cards face down.\n3. Any player can start a bid declaring how many cards they can flip safely.\n4. Highest bidder must flip their own cards first, then rivals\'\' cards.\n5. Hit a skull and you lose a card permanently; succeed twice and you win!'**
+  String get rulesSkull;
+
+  /// No description provided for @rulesPictionary.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nDraw and have your friends guess the secret word before time runs out!\n- No letters, numbers, or spoken clues allowed.\n- Players type their guesses in the chat. The artist approves the winner!'**
+  String get rulesPictionary;
+
+  /// No description provided for @rulesJustOne.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nCooperative word game where everyone helps one guesser discover a mystery word.\n\n**How to Play**\n1. The guesser cannot see the mystery word.\n2. All teammates secretly write a one-word clue.\n3. **The catch**: Identical clues are removed before the guesser sees them!\n4. The guesser views the remaining clues and gets one shot to guess the word.'**
+  String get rulesJustOne;
+
+  /// No description provided for @rulesLoupGarou.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\n- **Villagers**: Identify and eliminate all Werewolves.\n- **Werewolves**: Eliminate all villagers without getting caught.\n\n**Cycle**\nThe game alternates between Night (special roles and werewolves strike in secret) and Day (village debate and public vote to execute a suspect).'**
+  String get rulesLoupGarou;
+
+  /// No description provided for @rulesDobble.
+  ///
+  /// In en, this message translates to:
+  /// **'Spot the single matching symbol between your card and the center deck card as fast as you can!'**
+  String get rulesDobble;
+
+  /// No description provided for @rulesUno.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nBe the first player to empty your hand of all cards!\n- Match the top discard card by color, number, or action symbol.\n- Use Action cards (+2, Skip, Reverse, Wild, Wild Draw 4) to hinder opponents.\n- Never forget to hit \'\'UNO\'\' when down to your last card!'**
+  String get rulesUno;
+
+  /// No description provided for @rulesPhotoRoulette.
+  ///
+  /// In en, this message translates to:
+  /// **'A random picture from a player\'\'s camera roll flashes on screen. Guess whose photo it is as fast as you can!'**
+  String get rulesPhotoRoulette;
+
+  /// No description provided for @rulesBatailleNavale.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nSink the entire enemy naval fleet before they destroy yours!\nCall out coordinates each turn: \'\'Hit\'\', \'\'Sunk\'\', or \'\'Miss\'\'!'**
+  String get rulesBatailleNavale;
+
+  /// No description provided for @rulesMilleBornes.
+  ///
+  /// In en, this message translates to:
+  /// **'**Objective**\nRace across the board to be the first driver to reach 1000 Kilometers!\n- Play Distance cards (25, 50, 75, 100, 200 km) to progress.\n- Attack rivals with Hazards (Red Light, Flat Tire, Out of Gas, Accident).\n- Defend with Remedies or achieve permanent immunity with the 4 Safety cards!'**
+  String get rulesMilleBornes;
+
+  /// No description provided for @rulesRami.
+  ///
+  /// In en, this message translates to:
+  /// **'Meld your cards into runs (same suit in sequence) or sets (same rank, different suits) to be the first to empty your hand and win the round!'**
+  String get rulesRami;
+
+  /// No description provided for @rulesTaboo.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the target word to your teammates without uttering the word itself or any of the 5 forbidden Taboo buzzwords on the card!'**
+  String get rulesTaboo;
+
+  /// No description provided for @rulesPetitsChevaux.
+  ///
+  /// In en, this message translates to:
+  /// **'Roll the dice (roll a 6 to exit your stable), circle the board, and climb all four of your pawns up the final home stretch staircase!'**
+  String get rulesPetitsChevaux;
+
+  /// No description provided for @rulesCadavreExquis.
+  ///
+  /// In en, this message translates to:
+  /// **'Collaborative surrealist writing where each player writes part of a sentence without seeing earlier words, creating hilarious surprise stories!'**
+  String get rulesCadavreExquis;
+
+  /// No description provided for @rulesBlokus.
+  ///
+  /// In en, this message translates to:
+  /// **'Place geometric polyomino pieces on the board. Each new piece must touch at least one of your own pieces corner-to-corner, but never edge-to-edge!'**
+  String get rulesBlokus;
+
+  /// No description provided for @rulesDominoes.
+  ///
+  /// In en, this message translates to:
+  /// **'Match open domino ends with equal pip values. The first player to play all their dominoes takes the round!'**
+  String get rulesDominoes;
+
+  /// No description provided for @rulesBigTwo.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular climbing card game where 2 is highest. Discard combinations (singles, pairs, full houses, flushes) to beat the current trick and empty your hand!'**
+  String get rulesBigTwo;
+
+  /// No description provided for @rulesJeuDeDames.
+  ///
+  /// In en, this message translates to:
+  /// **'Move diagonally across dark squares. Jumping over enemy pieces to capture them is mandatory. Reach the opposite side to crown a King!'**
+  String get rulesJeuDeDames;
+
+  /// No description provided for @chocolat.
+  ///
+  /// In en, this message translates to:
+  /// **'chocolate'**
+  String get chocolat;
+
+  /// No description provided for @ordinateur.
+  ///
+  /// In en, this message translates to:
+  /// **'computer'**
+  String get ordinateur;
+
+  /// No description provided for @licorne.
+  ///
+  /// In en, this message translates to:
+  /// **'unicorn'**
+  String get licorne;
+
+  /// No description provided for @minuit.
+  ///
+  /// In en, this message translates to:
+  /// **'midnight'**
+  String get minuit;
+
+  /// No description provided for @ombre.
+  ///
+  /// In en, this message translates to:
+  /// **'shadow'**
+  String get ombre;
+
+  /// No description provided for @lune.
+  ///
+  /// In en, this message translates to:
+  /// **'moon'**
+  String get lune;
+
+  /// No description provided for @feuille.
+  ///
+  /// In en, this message translates to:
+  /// **'sheet'**
+  String get feuille;
+
+  /// No description provided for @silence.
+  ///
+  /// In en, this message translates to:
+  /// **'silence'**
+  String get silence;
+
+  /// No description provided for @murmure.
+  ///
+  /// In en, this message translates to:
+  /// **'whisper'**
+  String get murmure;
+
+  /// No description provided for @potion.
+  ///
+  /// In en, this message translates to:
+  /// **'potion'**
+  String get potion;
+
+  /// No description provided for @miroir.
+  ///
+  /// In en, this message translates to:
+  /// **'mirror'**
+  String get miroir;
+
+  /// No description provided for @magie.
+  ///
+  /// In en, this message translates to:
+  /// **'magic'**
+  String get magie;
+
+  /// No description provided for @cascade.
+  ///
+  /// In en, this message translates to:
+  /// **'waterfall'**
+  String get cascade;
+
+  /// No description provided for @dragon.
+  ///
+  /// In en, this message translates to:
+  /// **'dragon'**
+  String get dragon;
+
+  /// No description provided for @boussole.
+  ///
+  /// In en, this message translates to:
+  /// **'boussole'**
+  String get boussole;
+
+  /// No description provided for @diamant.
+  ///
+  /// In en, this message translates to:
+  /// **'diamant'**
+  String get diamant;
+
+  /// No description provided for @flamme.
+  ///
+  /// In en, this message translates to:
+  /// **'flamme'**
+  String get flamme;
+
+  /// No description provided for @horloge.
+  ///
+  /// In en, this message translates to:
+  /// **'horloge'**
+  String get horloge;
+
+  /// No description provided for @pirate.
+  ///
+  /// In en, this message translates to:
+  /// **'pirate'**
+  String get pirate;
+
+  /// No description provided for @vortex.
+  ///
+  /// In en, this message translates to:
+  /// **'vortex'**
+  String get vortex;
+
+  /// No description provided for @aurore.
+  ///
+  /// In en, this message translates to:
+  /// **'aurore'**
+  String get aurore;
+
+  /// No description provided for @papillon.
+  ///
+  /// In en, this message translates to:
+  /// **'papillon'**
+  String get papillon;
+
+  /// No description provided for @bouclier.
+  ///
+  /// In en, this message translates to:
+  /// **'bouclier'**
+  String get bouclier;
+
+  /// No description provided for @labyrinthe.
+  ///
+  /// In en, this message translates to:
+  /// **'labyrinthe'**
+  String get labyrinthe;
+
+  /// No description provided for @cristal.
+  ///
+  /// In en, this message translates to:
+  /// **'cristal'**
+  String get cristal;
+
+  /// No description provided for @volcan.
+  ///
+  /// In en, this message translates to:
+  /// **'volcan'**
+  String get volcan;
+
+  /// No description provided for @mirage.
+  ///
+  /// In en, this message translates to:
+  /// **'mirage'**
+  String get mirage;
+
+  /// No description provided for @sentinelle.
+  ///
+  /// In en, this message translates to:
+  /// **'sentinelle'**
+  String get sentinelle;
+
+  /// No description provided for @cloche.
+  ///
+  /// In en, this message translates to:
+  /// **'cloche'**
+  String get cloche;
+
+  /// No description provided for @lanterne.
+  ///
+  /// In en, this message translates to:
+  /// **'lanterne'**
+  String get lanterne;
+
+  /// No description provided for @parchemin.
+  ///
+  /// In en, this message translates to:
+  /// **'parchemin'**
+  String get parchemin;
+
+  /// No description provided for @aGagne2.
+  ///
+  /// In en, this message translates to:
+  /// **'{gameDataplayerswin} won!'**
+  String aGagne2(Object gameDataplayerswin);
+
+  /// No description provided for @aJoue2.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ {playerName} played {cardsToPlayjoin}.'**
+  String aJoue2(Object playerName, Object cardsToPlayjoin);
+
+  /// No description provided for @aJoue3.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ {playerName} played {winningCombojoin}.'**
+  String aJoue3(Object playerName, Object winningCombojoin);
+
+  /// No description provided for @pliTermineAuTourDe2.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ Trick finished. {gameDataplayerspla}\'\'s turn!'**
+  String pliTermineAuTourDe2(Object gameDataplayerspla);
+
+  /// No description provided for @stop.
+  ///
+  /// In en, this message translates to:
+  /// **'STOP'**
+  String get stop;
+
+  /// No description provided for @coupFourrePareLAttaque1.
+  ///
+  /// In en, this message translates to:
+  /// **'⚡ COUP-FOURRÉ ! {playerstargetIdnam} pare l\'\'attaque avec {matchingSafety} et prend la main !'**
+  String coupFourrePareLAttaque1(
+    Object playerstargetIdnam,
+    Object matchingSafety,
+  );
+
+  /// No description provided for @aAtteintKm.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} reached {targetDist} km!'**
+  String aAtteintKm(Object playersplayerIdnam, Object targetDist);
+
+  /// No description provided for @aCouleTouteLaFlotte1.
+  ///
+  /// In en, this message translates to:
+  /// **'{shooterDataname} sank the entire enemy fleet!'**
+  String aCouleTouteLaFlotte1(Object shooterDataname);
+
+  /// No description provided for @aTireAutomatiquementEn.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ {shooterDataname} a tiré automatiquement en {targetIndex101}-{targetIndex1011} ({result}).'**
+  String aTireAutomatiquementEn(
+    Object shooterDataname,
+    Object targetIndex101,
+    Object targetIndex1011,
+    Object result,
+  );
+
+  /// No description provided for @aJoue4.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ {playerName} played {candidateCardsjoin}.'**
+  String aJoue4(Object playerName, Object candidateCardsjoin);
+
+  /// No description provided for @pliTermineAuTourDe3.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ Pli terminé. Au tour de {gameDataplayerspla}.'**
+  String pliTermineAuTourDe3(Object gameDataplayerspla);
+
+  /// No description provided for @estLeNouvelHote1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerOrder} is the new host.'**
+  String estLeNouvelHote1(Object playersplayerOrder);
+
+  /// No description provided for @egalitePersistanteLeDestinDepartage1.
+  ///
+  /// In en, this message translates to:
+  /// **'Égalité persistante ! Le destin départage au hasard : {playerDatarandomEl} est éliminé.'**
+  String egalitePersistanteLeDestinDepartage1(Object playerDatarandomEl);
+
+  /// No description provided for @estMortEDeChagrin1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerDataotherLov} died of grief for their love!'**
+  String estMortEDeChagrin1(Object playerDataotherLov);
+
+  /// No description provided for @lHeritierHeriteDuRole2.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerDataheritier} (Heir) inherits {playerDatatestateu}\'\'s role: {newRole}!'**
+  String lHeritierHeriteDuRole2(
+    Object playerDataheritier,
+    Object playerDatatestateu,
+    Object newRole,
+  );
+
+  /// No description provided for @heriteEgalementDuStatutDe1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerDataheritier} also inherits Captain status!'**
+  String heriteEgalementDuStatutDe1(Object playerDataheritier);
+
+  /// No description provided for @leVillageDecouvreAvecEffroi1.
+  ///
+  /// In en, this message translates to:
+  /// **'Le village découvre avec effroi le(s) corps de : {deadThisNightNames}.'**
+  String leVillageDecouvreAvecEffroi1(Object deadThisNightNames);
+
+  /// No description provided for @leFossoyeurReveleEtaitUn1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerDatafossoyeu} (Gravedigger) reveals: {playerDatatargetPl} was {targetRole}!'**
+  String leFossoyeurReveleEtaitUn1(
+    Object playerDatafossoyeu,
+    Object playerDatatargetPl,
+    Object targetRole,
+  );
+
+  /// No description provided for @etEtaitUnE.
+  ///
+  /// In en, this message translates to:
+  /// **'Et {playerDataotherRev} était un(e) {otherRevealedRole} !'**
+  String etEtaitUnE(Object playerDataotherRev, Object otherRevealedRole);
+
+  /// No description provided for @leDictateurAExecuteUn1.
+  ///
+  /// In en, this message translates to:
+  /// **'Dictator {playerDatadictator} executed impostor ({playerDatatargetId} - {targetRole}) and becomes Captain!'**
+  String leDictateurAExecuteUn1(
+    Object playerDatadictator,
+    Object playerDatatargetId,
+    Object targetRole,
+  );
+
+  /// No description provided for @leLoupBavardNA1.
+  ///
+  /// In en, this message translates to:
+  /// **'Chatterbox Wolf ({playerDataloupBava}) missed secret word and died at sunset!'**
+  String leLoupBavardNA1(Object playerDataloupBava);
+
+  /// No description provided for @leVillageAVoteEt1.
+  ///
+  /// In en, this message translates to:
+  /// **'The village voted and eliminates {playerDataeliminat}.'**
+  String leVillageAVoteEt1(Object playerDataeliminat);
+
+  /// No description provided for @leMercenaireAFaitEliminer1.
+  ///
+  /// In en, this message translates to:
+  /// **'Mercenary {playerDatamercenai} eliminated target on Day 1! Wins game alone!'**
+  String leMercenaireAFaitEliminer1(Object playerDatamercenai);
+
+  /// No description provided for @meurtDeChagrinPourSon1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerDataotherLov} dies of heartbreak for their love!'**
+  String meurtDeChagrinPourSon1(Object playerDataotherLov);
+
+  /// No description provided for @lAncienCapitaine1.
+  ///
+  /// In en, this message translates to:
+  /// **'L\'\'ancien Capitaine'**
+  String get lAncienCapitaine1;
+
+  /// No description provided for @aDit.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerDataplayerId} a dit : \'\'{cleanClue}\'\''**
+  String aDit(Object playerDataplayerId, Object cleanClue);
+
+  /// No description provided for @aDevineLeMotCivil1.
+  ///
+  /// In en, this message translates to:
+  /// **'{gameDataplayerData} a deviné le mot civil (\'\'{civilWord}\'\') !'**
+  String aDevineLeMotCivil1(Object gameDataplayerData, Object civilWord);
+
+  /// No description provided for @aProposeMaisCeN.
+  ///
+  /// In en, this message translates to:
+  /// **'{gameDataplayerData} a proposé \'\'{guessedWord}\'\', mais ce n\'\'était pas le mot civil (\'\'{civilWord}\'\') !'**
+  String aProposeMaisCeN(
+    Object gameDataplayerData,
+    Object guessedWord,
+    Object civilWord,
+  );
+
+  /// No description provided for @flottesPlaceesCommenceATirer1.
+  ///
+  /// In en, this message translates to:
+  /// **'Flottes placées ! {playerDatafirstPla} commence à tirer.'**
+  String flottesPlaceesCommenceATirer1(Object playerDatafirstPla);
+
+  /// No description provided for @tousLesJoueursSontPrets1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tous les joueurs sont prêts ! {playerDatafirstPla} commence à tirer.'**
+  String tousLesJoueursSontPrets1(Object playerDatafirstPla);
+
+  /// No description provided for @laMancheDeRamiCommence1.
+  ///
+  /// In en, this message translates to:
+  /// **'La manche de Rami commence ! C\'\'est au tour de {playersplayerIdsfi}.'**
+  String laMancheDeRamiCommence1(Object playersplayerIdsfi);
+
+  /// No description provided for @aGagneLaManche1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} won the round!'**
+  String aGagneLaManche1(Object playersplayerIdnam);
+
+  /// No description provided for @k3SixConsecutifsLePion1.
+  ///
+  /// In en, this message translates to:
+  /// **'⚠️ 3 six consécutifs ! Le pion de {playersplayerIdnam} retourne à l\'\'écurie et son tour passe.'**
+  String k3SixConsecutifsLePion1(Object playersplayerIdnam);
+
+  /// No description provided for @aGagne3.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} won!'**
+  String aGagne3(Object playersplayerIdnam);
+
+  /// No description provided for @atteintPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} atteint {targetScore} points !'**
+  String atteintPoints(Object playersplayerIdnam, Object targetScore);
+
+  /// No description provided for @atteintPoints1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerswinnerIdnam} atteint {targetScore} points !'**
+  String atteintPoints1(Object playerswinnerIdnam, Object targetScore);
+
+  /// No description provided for @mancheTermineeGagneAvecXp.
+  ///
+  /// In en, this message translates to:
+  /// **'Manche terminée ! {playerswinnerIdnam} gagne avec {maxXp} XP !'**
+  String mancheTermineeGagneAvecXp(Object playerswinnerIdnam, Object maxXp);
+
+  /// No description provided for @aJoueUneInversionEt1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} played a Reverse and plays again!'**
+  String aJoueUneInversionEt1(Object playersplayerIdnam);
+
+  /// No description provided for @aInverseLeSensDe1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} reversed the turn order!'**
+  String aInverseLeSensDe1(Object playersplayerIdnam);
+
+  /// No description provided for @aSauteLeTourDe1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} skipped {skippedPlayerName}\'\'s turn!'**
+  String aSauteLeTourDe1(Object playersplayerIdnam, Object skippedPlayerName);
+
+  /// No description provided for @aEmpileUn2Cumul1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} stacked a +2. Total: {pendingDraw2} cards!'**
+  String aEmpileUn2Cumul1(Object playersplayerIdnam, Object pendingDraw2);
+
+  /// No description provided for @aJoueUn21.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} played a +2!'**
+  String aJoueUn21(Object playersplayerIdnam);
+
+  /// No description provided for @aJoueUnJokerEt1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} played a Wild and picked color {chosenColor}!'**
+  String aJoueUnJokerEt1(Object playersplayerIdnam, Object chosenColor);
+
+  /// No description provided for @aEmpileUn4Cumul1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} stacked a +4. Total: {pendingDraw4} cards!'**
+  String aEmpileUn4Cumul1(Object playersplayerIdnam, Object pendingDraw4);
+
+  /// No description provided for @aJoueUnSuperJoker1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} played a Wild Draw 4!'**
+  String aJoueUnSuperJoker1(Object playersplayerIdnam);
+
+  /// No description provided for @aPoseSaDerniereCarte1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} played their last card and wins the round!'**
+  String aPoseSaDerniereCarte1(Object playersplayerIdnam);
+
+  /// No description provided for @gagneLaMancheAvecPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} wins the round with +{roundScore} points!'**
+  String gagneLaMancheAvecPoints(Object playersplayerIdnam, Object roundScore);
+
+  /// No description provided for @nAPlusQuUne1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} has only one card left!'**
+  String nAPlusQuUne1(Object playersplayerIdnam);
+
+  /// No description provided for @passeSonTour4.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} passe son tour.'**
+  String passeSonTour4(Object playersplayerIdnam);
+
+  /// No description provided for @nAPasJoueA5.
+  ///
+  /// In en, this message translates to:
+  /// **'{gameDataplayerspla} didn\'\'t play in time, draws and passes.'**
+  String nAPasJoueA5(Object gameDataplayerspla);
+
+  /// No description provided for @votreCibleEstEliminezLe1.
+  ///
+  /// In en, this message translates to:
+  /// **'Votre cible est {playerDatamercenai}. Éliminez-le(la) au Jour 1 !'**
+  String votreCibleEstEliminezLe1(Object playerDatamercenai);
+
+  /// No description provided for @aReponduEtPasseLa.
+  ///
+  /// In en, this message translates to:
+  /// **'{gameDataplayerspla} answered \'\'{cleanAnswer}\'\' and passed the bomb!'**
+  String aReponduEtPasseLa(Object gameDataplayerspla, Object cleanAnswer);
+
+  /// No description provided for @aPiocheCarteS.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} drew {pendingDraw} card(s).'**
+  String aPiocheCarteS(Object playersplayerIdnam, Object pendingDraw);
+
+  /// No description provided for @aPiocheUneCarteEt2.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} drew a card and can play it.'**
+  String aPiocheUneCarteEt2(Object playersplayerIdnam);
+
+  /// No description provided for @aPiocheUneCarteEt3.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} drew a card and passes their turn.'**
+  String aPiocheUneCarteEt3(Object playersplayerIdnam);
+
+  /// No description provided for @nAPas1Carte1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerstargetIdnam} does not have 1 card, UNO call invalid.'**
+  String nAPas1Carte1(Object playerstargetIdnam);
+
+  /// No description provided for @aCrieContreUnoPioche1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerscallerIdnam} called Counter UNO! {playerstargetIdnam} draws 2 cards.'**
+  String aCrieContreUnoPioche1(
+    Object playerscallerIdnam,
+    Object playerstargetIdnam,
+  );
+
+  /// No description provided for @aDitUno1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerstargetIdnam} called UNO!'**
+  String aDitUno1(Object playerstargetIdnam);
+
+  /// No description provided for @appelUnoInvalide.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid UNO call.'**
+  String get appelUnoInvalide;
+
+  /// No description provided for @aChoisiLaCouleur.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersplayerIdnam} a choisi la couleur {chosenColor} !'**
+  String aChoisiLaCouleur(Object playersplayerIdnam, Object chosenColor);
+
+  /// No description provided for @estLeDernierSurvivantEt.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerswinnerIdnam} est le dernier survivant et remporte Skull !'**
+  String estLeDernierSurvivantEt(Object playerswinnerIdnam);
+
+  /// No description provided for @aRemporte2DefisEt.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerschallengerI} a remporté 2 défis et gagne la partie !'**
+  String aRemporte2DefisEt(Object playerschallengerI);
+
+  /// No description provided for @nouvelleMainEstLeDonneur1.
+  ///
+  /// In en, this message translates to:
+  /// **'New hand! {playersplayerIdsde} is the dealer.'**
+  String nouvelleMainEstLeDonneur1(Object playersplayerIdsde);
+
+  /// No description provided for @poseLaPetiteBlindDe1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerssmallBlindI} posts small blind of {smallBlindActual}.'**
+  String poseLaPetiteBlindDe1(
+    Object playerssmallBlindI,
+    Object smallBlindActual,
+  );
+
+  /// No description provided for @poseLaGrosseBlindDe1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playersbigBlindIdn} posts big blind of {bigBlindActual}.'**
+  String poseLaGrosseBlindDe1(Object playersbigBlindIdn, Object bigBlindActual);
+
+  /// No description provided for @seCouche1.
+  ///
+  /// In en, this message translates to:
+  /// **'{myDataname} folds.'**
+  String seCouche1(Object myDataname);
+
+  /// No description provided for @faitTapisAllIn1.
+  ///
+  /// In en, this message translates to:
+  /// **'{myDataname} goes all-in!'**
+  String faitTapisAllIn1(Object myDataname);
+
+  /// No description provided for @suitPour.
+  ///
+  /// In en, this message translates to:
+  /// **'{myDataname} calls {callAmount}.'**
+  String suitPour(Object myDataname, Object callAmount);
+
+  /// No description provided for @faitTapisAllInEn1.
+  ///
+  /// In en, this message translates to:
+  /// **'{myDataname} fait tapis (all-in) en relançant à {totalBetAmount} !'**
+  String faitTapisAllInEn1(Object myDataname, Object totalBetAmount);
+
+  /// No description provided for @relanceA.
+  ///
+  /// In en, this message translates to:
+  /// **'{myDataname} raises to {totalBetAmount}.'**
+  String relanceA(Object myDataname, Object totalBetAmount);
+
+  /// No description provided for @abattageShowdown.
+  ///
+  /// In en, this message translates to:
+  /// **'--- SHOWDOWN ---'**
+  String get abattageShowdown;
+
+  /// No description provided for @gagneLePotParForfait1.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerDatawinnersf} wins the pot by default!'**
+  String gagneLePotParForfait1(Object playerDatawinnersf);
+
+  /// No description provided for @gagneNtLePotAvec.
+  ///
+  /// In en, this message translates to:
+  /// **'{winnerNames} win(s) the pot with {bestHandranknamel1}!'**
+  String gagneNtLePotAvec(Object winnerNames, Object bestHandranknamel1);
+
+  /// No description provided for @aPrisA.
+  ///
+  /// In en, this message translates to:
+  /// **'{playerDataplayerId} a pris à {suit} !'**
+  String aPrisA(Object playerDataplayerId, Object suit);
+
+  /// No description provided for @histoireCollective.
+  ///
+  /// In en, this message translates to:
+  /// **'COLLECTIVE STORY'**
+  String get histoireCollective;
+
+  /// No description provided for @distance.
+  ///
+  /// In en, this message translates to:
+  /// **'DISTANCE'**
+  String get distance;
+
+  /// No description provided for @botte.
+  ///
+  /// In en, this message translates to:
+  /// **'SAFETY'**
+  String get botte;
+
+  /// No description provided for @pneuIncrevable.
+  ///
+  /// In en, this message translates to:
+  /// **'Pneu\nIncrevable'**
+  String get pneuIncrevable;
+
+  /// No description provided for @increvable.
+  ///
+  /// In en, this message translates to:
+  /// **'PUNCTURE-PROOF'**
+  String get increvable;
+
+  /// No description provided for @citerne.
+  ///
+  /// In en, this message translates to:
+  /// **'EXTRA TANK'**
+  String get citerne;
+
+  /// No description provided for @attaque.
+  ///
+  /// In en, this message translates to:
+  /// **'HAZARD'**
+  String get attaque;
+
+  /// No description provided for @k50Max.
+  ///
+  /// In en, this message translates to:
+  /// **'50 MAX'**
+  String get k50Max;
+
+  /// No description provided for @panneDEssence.
+  ///
+  /// In en, this message translates to:
+  /// **'Failure\nGasoline'**
+  String get panneDEssence;
+
+  /// No description provided for @vide1.
+  ///
+  /// In en, this message translates to:
+  /// **'EMPTY'**
+  String get vide1;
+
+  /// No description provided for @parade.
+  ///
+  /// In en, this message translates to:
+  /// **'REMEDY'**
+  String get parade;
+
+  /// No description provided for @roulez.
+  ///
+  /// In en, this message translates to:
+  /// **'ROLL'**
+  String get roulez;
+
+  /// No description provided for @plein.
+  ///
+  /// In en, this message translates to:
+  /// **'FULL TANK'**
+  String get plein;
+
+  /// No description provided for @rejouer1.
+  ///
+  /// In en, this message translates to:
+  /// **'REPLAY'**
+  String get rejouer1;
+
+  /// No description provided for @infecter1.
+  ///
+  /// In en, this message translates to:
+  /// **'Infect {targetName}?'**
+  String infecter1(Object targetName);
+
+  /// No description provided for @action1.
+  ///
+  /// In en, this message translates to:
+  /// **'ACTION'**
+  String get action1;
+
+  /// No description provided for @action2.
+  ///
+  /// In en, this message translates to:
+  /// **'🔥 ACTION'**
+  String get action2;
+
+  /// No description provided for @aRelanceLesDes2.
+  ///
+  /// In en, this message translates to:
+  /// **'0  restarted the dice (  1  /3). {pName} {val}'**
+  String aRelanceLesDes2(Object pName, Object val);
 }
 
 class _AppLocalizationsDelegate
