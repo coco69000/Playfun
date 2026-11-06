@@ -34,6 +34,20 @@ import 'services/force_update_service.dart';
 import 'game_video_overlay.dart';
 import 'widgets/xp_gain_overlay.dart';
 
+AppLocalizations get _l10n {
+  try {
+    final code = GameWords.currentLanguage;
+    return lookupAppLocalizations(Locale(code));
+  } catch (_) {
+    try {
+      final code = ui.PlatformDispatcher.instance.locale.languageCode;
+      return lookupAppLocalizations(Locale(code));
+    } catch (_) {
+      return lookupAppLocalizations(const Locale('fr'));
+    }
+  }
+}
+
 final ThemeData appTheme = ThemeData(
   primarySwatch: Colors.deepPurple,
   brightness: Brightness.dark,
@@ -251,7 +265,7 @@ class GameData {
     "Choses rouges",
     "Marques de vêtements",
   ];
-  static const Map<String, String> gameRules = {
+  static Map<String, String> get gameRules => {
     'Blanc Manger Coco': """
 **But du jeu**
 Être le joueur avec le plus de points en fin de partie.
@@ -442,15 +456,15 @@ Le jeu continue tant qu’il reste au moins 2 joueurs avec des jetons.
 Le gagnant final est celui qui prend tous les jetons.
 """,
     'Le Juge':
-        AppLocalizations.of(context)!.unJoueurEstDesigneComme,
+        _l10n.unJoueurEstDesigneComme,
     'Qui Pourrait le Plus ?':
-        AppLocalizations.of(context)!.modeClassiqueUneQuestionEst,
+        _l10n.modeClassiqueUneQuestionEst,
     'Infiltré & Mr. White':
-        AppLocalizations.of(context)!.laPlupartDesJoueursCivils,
+        _l10n.laPlupartDesJoueursCivils,
     'Synonyme ou Banni':
-        AppLocalizations.of(context)!.unMotEstAfficheChaque,
+        _l10n.unMotEstAfficheChaque,
     'Le Jeu des Catégories':
-        AppLocalizations.of(context)!.plusieursCategoriesSontSelectionnees3,
+        _l10n.plusieursCategoriesSontSelectionnees3,
     'Action ou Vérité': """
 **But du jeu**
 Gagner le plus d'XP en réalisant des actions et en répondant à des vérités !
@@ -469,19 +483,19 @@ Gagner le plus d'XP en réalisant des actions et en répondant à des vérités 
 - Le bouton "Fin de manche" permet de clôturer la partie
 """,
     'Jeu de la Pièce':
-        AppLocalizations.of(context)!.uneQuestionSecreteEstAffichee,
+        _l10n.uneQuestionSecreteEstAffichee,
     'Le Dilemme':
-        AppLocalizations.of(context)!.leJoueurDesigneDoitRepondre,
+        _l10n.leJoueurDesigneDoitRepondre,
     'Codenames':
-        AppLocalizations.of(context)!.deuxEquipesSaffrontentChaqueEquipe,
+        _l10n.deuxEquipesSaffrontentChaqueEquipe,
     'Time\'s Up':
-        AppLocalizations.of(context)!.faireDevinerUnMaximumDe,
+        _l10n.faireDevinerUnMaximumDe,
     'On se passe un objet rapidement':
-        AppLocalizations.of(context)!.passezLeTelephoneDeMain,
+        _l10n.passezLeTelephoneDeMain,
     'Devine Tête':
-        AppLocalizations.of(context)!.unJoueurTientLeTelephone,
+        _l10n.unJoueurTientLeTelephone,
     'Petit Bac':
-        AppLocalizations.of(context)!.trouvezDesMotsCorrespondantA,
+        _l10n.trouvezDesMotsCorrespondantA,
     'Président': """
 **But du jeu**
 Le but est d’être le premier à se débarrasser de toutes ses cartes pour devenir Président. Le dernier joueur avec des cartes en main devient le Trou du cul.
@@ -587,7 +601,7 @@ Faire deviner un maximum de mots mystères à votre coéquipier, en écrivant ch
 -   Indices identiques: Si 2 joueurs écrivent "animal" pour "Chat", "animal" est éliminé.
 """,
     'Le Roi des Mèmes':
-        AppLocalizations.of(context)!.chaqueJoueurRecoitLeMeme,
+        _l10n.chaqueJoueurRecoitLeMeme,
 
     'Loup-Garou': """
 **But du jeu**
@@ -645,43 +659,43 @@ Le jeu alterne entre des phases de **nuit** et de **jour**.
 -   Le Pyromancien doit être vivant au matin pour que ses tonneaux explosent.
 """,
     'Loup Noir':
-        AppLocalizations.of(context)!.vaincreLesVillageoisEstSon,
+        _l10n.vaincreLesVillageoisEstSon,
     'Loup Bavard':
-        AppLocalizations.of(context)!.vaincreLesVillageoisEstSon1,
+        _l10n.vaincreLesVillageoisEstSon1,
     'Loup Blanc':
-        AppLocalizations.of(context)!.finirSeulSurvivantEstSon,
+        _l10n.finirSeulSurvivantEstSon,
     'Mercenaire':
-        AppLocalizations.of(context)!.lePremierJourLObjectif,
+        _l10n.lePremierJourLObjectif,
     'Rat Malade':
-        AppLocalizations.of(context)!.sonObjectifEstDeContaminer,
+        _l10n.sonObjectifEstDeContaminer,
     'Simple Villageois':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre,
+        _l10n.sonObjectifEstDeVaincre,
     'Voyante':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre1,
+        _l10n.sonObjectifEstDeVaincre1,
     'Sorcière':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre2,
+        _l10n.sonObjectifEstDeVaincre2,
     'Petite Fille':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre3,
+        _l10n.sonObjectifEstDeVaincre3,
     'Chasseur':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre4,
+        _l10n.sonObjectifEstDeVaincre4,
     'Garde':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre5,
+        _l10n.sonObjectifEstDeVaincre5,
     'Cupidon':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre6,
+        _l10n.sonObjectifEstDeVaincre6,
     'Mentaliste':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre7,
+        _l10n.sonObjectifEstDeVaincre7,
     'Nécromancien':
-        AppLocalizations.of(context)!.vaincreLesLoupsGarousEst,
+        _l10n.vaincreLesLoupsGarousEst,
     'Fossoyeur':
-        AppLocalizations.of(context)!.vaincreLesLoupsGarousEst1,
+        _l10n.vaincreLesLoupsGarousEst1,
     'Dictateur':
-        AppLocalizations.of(context)!.vaincreLesLoupsGarousEst2,
+        _l10n.vaincreLesLoupsGarousEst2,
     'Chaperon Rouge':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre8,
+        _l10n.sonObjectifEstDeVaincre8,
     'Pyromancien':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre9,
+        _l10n.sonObjectifEstDeVaincre9,
     'Héritier':
-        AppLocalizations.of(context)!.sonObjectifEstDeVaincre10,
+        _l10n.sonObjectifEstDeVaincre10,
     'Dobble': """
 **But du jeu**
 Être le plus rapide à repérer l'unique symbole identique entre la carte au centre et sa propre carte.
@@ -1063,27 +1077,27 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
     'Action ou Vérité',
   ];
 
-  static const List<Map<String, dynamic>> allLoupGarouRoles = [
+  static List<Map<String, dynamic>> get allLoupGarouRoles => [
     {
       'name': 'Simple Villageois',
       'camp': 'villageois',
       'minPlayers': 0,
-      'description': AppLocalizations.of(context)!.unVillageoisSansPouvoirSpecial,
+      'description': _l10n.unVillageoisSansPouvoirSpecial,
     },
     {
       'name': 'Loup-Garou',
       'camp': 'loups',
       'minPlayers': 0,
-      'description': AppLocalizations.of(context)!.devoreUnVillageoisLaNuit,
+      'description': _l10n.devoreUnVillageoisLaNuit,
     },
     {
       'name': 'Voyante',
       'camp': 'villageois',
       'minPlayers': 8,
-      'description': AppLocalizations.of(context)!.decouvreUnRoleParNuit,
+      'description': _l10n.decouvreUnRoleParNuit,
     },
     {
-      'name': AppLocalizations.of(context)!.sorciere,
+      'name': _l10n.sorciere,
       'camp': 'villageois',
       'minPlayers': 8,
       'description': 'Potion de vie et de mort.',
@@ -1092,105 +1106,105 @@ Capturer toutes les pièces de votre adversaire ou bloquer toutes ses pièces.
       'name': 'Chasseur',
       'camp': 'villageois',
       'minPlayers': 9,
-      'description': AppLocalizations.of(context)!.tireSurQuelquUnEn,
+      'description': _l10n.tireSurQuelquUnEn,
     },
     {
       'name': 'Petite Fille',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': AppLocalizations.of(context)!.espionneLesLoupsLaNuit,
+      'description': _l10n.espionneLesLoupsLaNuit,
     },
     {
       'name': 'Cupidon',
       'camp': 'villageois',
       'minPlayers': 7,
-      'description': AppLocalizations.of(context)!.creeDeuxAmoureuxLaPremiere,
+      'description': _l10n.creeDeuxAmoureuxLaPremiere,
     },
     {
       'name': 'Garde',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': AppLocalizations.of(context)!.protegeUnJoueurParNuit,
+      'description': _l10n.protegeUnJoueurParNuit,
     },
     {
       'name': 'Capitaine',
       'camp': 'special',
       'minPlayers': 0,
-      'description': AppLocalizations.of(context)!.sonVoteCompteDoubleDesigne,
+      'description': _l10n.sonVoteCompteDoubleDesigne,
     },
     {
       'name': 'Loup Noir',
       'camp': 'loups',
       'minPlayers': 12,
       'description':
-          AppLocalizations.of(context)!.peutTransformerSaVictimeEn,
+          _l10n.peutTransformerSaVictimeEn,
     },
     {
       'name': 'Loup Bavard',
       'camp': 'loups',
       'minPlayers': 10,
-      'description': AppLocalizations.of(context)!.doitPrononcerUnMotSecret,
+      'description': _l10n.doitPrononcerUnMotSecret,
     },
     {
       'name': 'Loup Blanc',
       'camp': 'solitaire',
       'minPlayers': 12,
-      'description': AppLocalizations.of(context)!.objectifEtreSeulSurvivantDevore,
+      'description': _l10n.objectifEtreSeulSurvivantDevore,
     },
     {
       'name': 'Mercenaire',
       'camp': 'solitaire',
       'minPlayers': 8,
-      'description': AppLocalizations.of(context)!.gagneSeulSIlTue,
+      'description': _l10n.gagneSeulSIlTue,
     },
     {
       'name': 'Rat Malade',
       'camp': 'solitaire',
       'minPlayers': 15,
-      'description': AppLocalizations.of(context)!.contamineTousLesJoueursPour,
+      'description': _l10n.contamineTousLesJoueursPour,
     },
     {
       'name': 'Mentaliste',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': AppLocalizations.of(context)!.connaitLIssueDuVote,
+      'description': _l10n.connaitLIssueDuVote,
     },
     {
-      'name': AppLocalizations.of(context)!.necromancien,
+      'name': _l10n.necromancien,
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': AppLocalizations.of(context)!.communiqueAvecLesMortsLa,
+      'description': _l10n.communiqueAvecLesMortsLa,
     },
     {
       'name': 'Fossoyeur',
       'camp': 'villageois',
       'minPlayers': 12,
-      'description': AppLocalizations.of(context)!.reveleDeuxCampsASa,
+      'description': _l10n.reveleDeuxCampsASa,
     },
     {
       'name': 'Dictateur',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': AppLocalizations.of(context)!.prendLePouvoirDuVote,
+      'description': _l10n.prendLePouvoirDuVote,
     },
     {
       'name': 'Chaperon Rouge',
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': AppLocalizations.of(context)!.protegeeParLeChasseur,
+      'description': _l10n.protegeeParLeChasseur,
     },
     {
       'name': 'Pyromancien',
       'camp': 'villageois',
       'minPlayers': 15,
       'description':
-          AppLocalizations.of(context)!.placeDesTonneauxQuiExplosent,
+          _l10n.placeDesTonneauxQuiExplosent,
     },
     {
-      'name': AppLocalizations.of(context)!.heritier,
+      'name': _l10n.heritier,
       'camp': 'villageois',
       'minPlayers': 10,
-      'description': AppLocalizations.of(context)!.heriteDuRoleDeSon,
+      'description': _l10n.heriteDuRoleDeSon,
     },
   ];
 
@@ -2211,7 +2225,7 @@ class AiThemeHistoryItem {
     final data = doc.data() as Map<String, dynamic>? ?? {};
     return AiThemeHistoryItem(
       id: doc.id,
-      title: data['title'] ?? AppLocalizations.of(context)!.themeIa,
+      title: data['title'] ?? _l10n.themeIa,
       prompt: data['prompt'] ?? '',
       gameType: data['gameType'] ?? '',
       words: List<String>.from(data['words'] ?? []),
@@ -2321,7 +2335,7 @@ class FirebaseService {
     }
 
     String combinedTheme =
-        themeParts.isEmpty ? AppLocalizations.of(context)!.generalEtVarie : themeParts.join(" + ");
+        themeParts.isEmpty ? _l10n.generalEtVarie : themeParts.join(" + ");
     if (themeParts.length > 1) {
       combinedTheme = "Mélange équilibré des thèmes suivants : $combinedTheme";
     }
@@ -3375,7 +3389,7 @@ class FirebaseService {
         if (!hasActivePlayer && presencesSnap.docs.isNotEmpty) {
           await _db.collection('games').doc(gameCode).update({
             'gameState': 'gameOver',
-            'gameEndReason': AppLocalizations.of(context)!.abandonTousLesJoueursDeconnectes,
+            'gameEndReason': _l10n.abandonTousLesJoueursDeconnectes,
           });
           await sendLoungeMessage(
             loungeId,
@@ -3386,7 +3400,7 @@ class FirebaseService {
             extraData: {
               'gameName': gData['gameType'] ?? pendingGame['gameName'],
               'winnerName': 'Aucun',
-              'reason': AppLocalizations.of(context)!.tousLesJoueursSeSont,
+              'reason': _l10n.tousLesJoueursSeSont,
               'oldGameCode': gameCode,
             },
           );
@@ -3395,7 +3409,7 @@ class FirebaseService {
             'lastGameResult': {
               'gameName': gData['gameType'] ?? pendingGame['gameName'],
               'winnerName': 'Aucun',
-              'reason': AppLocalizations.of(context)!.tousLesJoueursSeSont,
+              'reason': _l10n.tousLesJoueursSeSont,
               'timestamp': FieldValue.serverTimestamp(),
             },
           });
@@ -3861,8 +3875,8 @@ class FirebaseService {
   }) async {
     final String text =
         actionDetails != null
-            ? AppLocalizations.of(context)!.nAPasJoueA(playerName, actionDetails)
-            : AppLocalizations.of(context)!.nAPasJoueA1(playerName);
+            ? _l10n.nAPasJoueA(playerName, actionDetails)
+            : _l10n.nAPasJoueA1(playerName);
 
     await gameRef.update({
       'lastTimeoutEvent': {
@@ -4101,7 +4115,7 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
       final hands = Map<String, dynamic>.from(
         gameData['bigTwoPlayerHands'] ?? {},
       );
@@ -5132,7 +5146,7 @@ class FirebaseService {
                   ? Map<String, dynamic>.from(playerProfiles[pId])
                   : {};
           players[pId] = {
-            'name': profile['name'] ?? AppLocalizations.of(context)!.joueur,
+            'name': profile['name'] ?? _l10n.joueur,
             'score': profile['score'] ?? 0,
             'xp': profile['xp'] ?? 0,
             'authUid': profile['authUid'] ?? pId,
@@ -5262,7 +5276,7 @@ class FirebaseService {
                   ? Map<String, dynamic>.from(playerProfiles[pId])
                   : {};
           players[pId] = {
-            'name': profile['name'] ?? AppLocalizations.of(context)!.joueur,
+            'name': profile['name'] ?? _l10n.joueur,
             'score': profile['score'] ?? 0,
             'xp': profile['xp'] ?? 0,
             'authUid': profile['authUid'] ?? pId,
@@ -5473,9 +5487,9 @@ class FirebaseService {
         });
       } else if (roundState == 'reveal_clues') {
         transaction.update(gameRef, {
-          'justOneGuesserAnswer': AppLocalizations.of(context)!.tempsEcoule1,
+          'justOneGuesserAnswer': _l10n.tempsEcoule1,
           'roundState': 'result',
-          'gameEndReason': AppLocalizations.of(context)!.tempsEcoule,
+          'gameEndReason': _l10n.tempsEcoule,
           'turnStartTime': FieldValue.serverTimestamp(),
         });
       }
@@ -5520,7 +5534,7 @@ class FirebaseService {
           if (pId == judgeId) continue;
           if (!answers.containsKey(pId)) {
             // Sur jeu social / opinion : marquer comme inactif sans réponse arbitraire
-            answers[pId] = isSocial ? "[INACTIF]" : AppLocalizations.of(context)!.tempsEcoule2;
+            answers[pId] = isSocial ? "[INACTIF]" : _l10n.tempsEcoule2;
             updatesMade = true;
             await _incrementInactiveCountAndCheckExpulsion(
               transaction,
@@ -5738,8 +5752,8 @@ class FirebaseService {
             (result == 'hit' || result == 'sunk') ? playerId : opponentId;
         String logMessage =
             (result == 'hit' || result == 'sunk')
-                ? AppLocalizations.of(context)!.aToucheUneCibleIl(shooterData['name'])
-                : AppLocalizations.of(context)!.aTireDansLEau(shooterData['name'], opponentData['name']);
+                ? _l10n.aToucheUneCibleIl(shooterData['name'])
+                : _l10n.aTireDansLEau(shooterData['name'], opponentData['name']);
 
         updates.addAll({
           'currentPlayerId': nextPlayerId,
@@ -5973,7 +5987,7 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
       final hands = Map<String, dynamic>.from(gameData['playerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
       final lastPlay =
@@ -6720,7 +6734,7 @@ class FirebaseService {
           }
 
           String removedPlayerName =
-              players[playerIdToRemove]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
+              players[playerIdToRemove]?['name'] ?? _l10n.unJoueur;
           players.remove(playerIdToRemove);
           playerOrder.remove(playerIdToRemove);
           teams.forEach((key, playerList) {
@@ -6742,7 +6756,7 @@ class FirebaseService {
                 players.keys.isNotEmpty ? players.keys.first : null;
             final String remainingName =
                 remainingPlayerId != null
-                    ? (players[remainingPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur)
+                    ? (players[remainingPlayerId]?['name'] ?? _l10n.joueur)
                     : 'Inconnu';
 
             updates['gameState'] = 'gameOver';
@@ -6845,7 +6859,7 @@ class FirebaseService {
     if (newInactiveCount >= 3) {
       var players = Map<String, dynamic>.from(gameData['players'] ?? {});
       var playerOrder = List<String>.from(gameData['playerOrder'] ?? []);
-      String playerName = players[timedOutPlayerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
+      String playerName = players[timedOutPlayerId]?['name'] ?? _l10n.unJoueur;
       final gameType = gameData['gameType'] ?? '';
       final isSocial = GameData.isSocialOpinionGame(gameType);
 
@@ -6854,7 +6868,7 @@ class FirebaseService {
         'pendingBotReplacement': {
           'playerId': timedOutPlayerId,
           'playerName': playerName,
-          'reason': AppLocalizations.of(context)!.inactif3ToursSansReponse,
+          'reason': _l10n.inactif3ToursSansReponse,
           'isSocial': isSocial,
           'timestamp': FieldValue.serverTimestamp(),
         },
@@ -6917,7 +6931,7 @@ class FirebaseService {
       final gameData = snap.data() as Map<String, dynamic>;
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       if (!players.containsKey(playerId)) return;
-      final playerName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final playerName = players[playerId]?['name'] ?? _l10n.joueur;
 
       Map<String, dynamic> updates = {
         'players.$playerId.isBot': true,
@@ -6968,7 +6982,7 @@ class FirebaseService {
       }
 
       String playerName =
-          gameData['players'][timedOutPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+          gameData['players'][timedOutPlayerId]?['name'] ?? _l10n.joueur;
 
       // 2. Si c'est un jeu social / opinion / créatif : PAS DE COUP AUTOMATIQUE !
       if (isSocialGame) {
@@ -7102,7 +7116,7 @@ class FirebaseService {
         'roundState': 'result',
         'roundWinnerId': null,
         'gameEndReason':
-            AppLocalizations.of(context)!.leJugeNAPas,
+            _l10n.leJugeNAPas,
         'turnStartTime': FieldValue.serverTimestamp(),
       });
       return;
@@ -7378,11 +7392,11 @@ class FirebaseService {
       );
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final pName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final pName = players[playerId]?['name'] ?? _l10n.joueur;
       final String rollMsg =
           (rollsLeft == 3)
-              ? AppLocalizations.of(context)!.aLanceLesDes(pName)
-              : AppLocalizations.of(context)!.aRelanceLesDes3(pName, 3 - rollsLeft + 1);
+              ? _l10n.aLanceLesDes(pName)
+              : _l10n.aRelanceLesDes3;
 
       transaction.update(gameRef, {
         'yamsDice': currentDice,
@@ -7414,14 +7428,14 @@ class FirebaseService {
     if (index >= 0 && index < heldDice.length) {
       heldDice[index] = !heldDice[index];
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      final pName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final pName = players[playerId]?['name'] ?? _l10n.joueur;
       final isNowHeld = heldDice[index];
       final currentDice = List<int>.from(gameData['yamsDice'] ?? []);
       final dieVal = (index < currentDice.length) ? currentDice[index] : 0;
       final actionText =
           isNowHeld
-              ? AppLocalizations.of(context)!.aGardeLeDeDe(pName, dieVal, index + 1)
-              : AppLocalizations.of(context)!.aDebloqueLeDe(pName, index + 1);
+              ? _l10n.aGardeLeDeDe(pName, dieVal, index + 1)
+              : _l10n.aDebloqueLeDe(pName, index + 1);
 
       await gameRef.update({
         'yamsHeldDice': heldDice,
@@ -7886,7 +7900,7 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
       final hands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
       List<String> discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
@@ -7945,7 +7959,7 @@ class FirebaseService {
               'unoPlayerHands': hands,
               'unoDiscardPile': discardPile,
               'unoWildColorChosen': autoWild,
-              'gameEndReason': AppLocalizations.of(context)!.aGagne(playerName),
+              'gameEndReason': _l10n.aGagne(playerName),
             });
             return;
           }
@@ -7997,7 +8011,7 @@ class FirebaseService {
             'unoPlayerHands': hands,
             'unoDiscardPile': discardPile,
             'unoWildColorChosen': autoWild,
-            'gameEndReason': AppLocalizations.of(context)!.aGagne(playerName),
+            'gameEndReason': _l10n.aGagne(playerName),
           });
           return;
         }
@@ -8199,7 +8213,7 @@ class FirebaseService {
     gameData['drawnCard'] = null;
 
     final String playerName =
-        gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
+        gameData['players']?[playerId]?['name'] ?? _l10n.unJoueur;
 
     transaction.update(gameRef, {
       'drawnCard': null,
@@ -8337,7 +8351,7 @@ class FirebaseService {
           if (gameWinnerId != null)
             'players.$gameWinnerId.score': FieldValue.increment(1),
           'gameEndReason':
-              AppLocalizations.of(context)!.gagneAvecLeScoreLe(players[gameWinnerId]?['name'] ?? 'Joueur'),
+              _l10n.gagneAvecLeScoreLe(players[gameWinnerId]?['name'] ?? 'Joueur'),
         });
       }
 
@@ -9016,8 +9030,8 @@ class FirebaseService {
       winner = "Rat Malade";
       reason =
           vivants.length == ratMaladeVivant
-              ? AppLocalizations.of(context)!.leRatMaladeEstLe
-              : AppLocalizations.of(context)!.tousLesAutresSurvivantsSont;
+              ? _l10n.leRatMaladeEstLe
+              : _l10n.tousLesAutresSurvivantsSont;
     }
 
     if (winner == null &&
@@ -9334,7 +9348,7 @@ class FirebaseService {
           "La Voyante a sondé une âme cette nuit...",
         ]),
         'playerData.$voyanteId.privateInfo':
-            AppLocalizations.of(context)!.leRoleDeEst(targetName, targetRole),
+            _l10n.leRoleDeEst(targetName, targetRole),
         'nightActions.voyanteActed': true,
       });
       shouldAdvance = true;
@@ -10382,7 +10396,7 @@ class FirebaseService {
         playerData[dictateurId]?['status'] != 'vivant')
       return;
 
-    final dictateurName = playerData[dictateurId]?['name'] ?? AppLocalizations.of(context)!.leDictateur;
+    final dictateurName = playerData[dictateurId]?['name'] ?? _l10n.leDictateur;
     await gameRef.update({
       'subPhase': 'dictateur_coup',
       'activePlayerId': dictateurId,
@@ -11243,9 +11257,9 @@ class FirebaseService {
           'lovers': currentLovers,
           'nightActions.cupidonActed': true,
           'playerData.${currentLovers[0]}.privateInfo':
-              AppLocalizations.of(context)!.vousEtesAmoureuxDe(lover2Name),
+              _l10n.vousEtesAmoureuxDe(lover2Name),
           'playerData.${currentLovers[1]}.privateInfo':
-              AppLocalizations.of(context)!.vousEtesAmoureuxDe1(lover1Name),
+              _l10n.vousEtesAmoureuxDe1(lover1Name),
           'gameLog': FieldValue.arrayUnion([
             "Cupidon a désigné $lover1Name et $lover2Name comme amoureux !",
           ]),
@@ -11624,7 +11638,7 @@ class FirebaseService {
         'phase': 'placement',
       },
       if (gameType == 'Dominoes') ...{
-        'dominoesMode': dominoesMode ?? AppLocalizations.of(context)!.pioche3,
+        'dominoesMode': dominoesMode ?? _l10n.pioche3,
         'dominoesTargetScore': dominoesTargetScore ?? 50,
         'dominoesBoneyard': [],
         'dominoesPlayerHands': {},
@@ -11971,7 +11985,7 @@ class FirebaseService {
         'phase': 'placement',
       },
       if (gameType == 'Dominoes') ...{
-        'dominoesMode': dominoesMode ?? AppLocalizations.of(context)!.pioche3,
+        'dominoesMode': dominoesMode ?? _l10n.pioche3,
         'dominoesTargetScore': dominoesTargetScore ?? 50,
         'dominoesBoneyard': [],
         'dominoesPlayerHands': {},
@@ -12373,7 +12387,7 @@ class FirebaseService {
           (baseRole == 'Infiltré')
               ? wordUndercover
               : (baseRole == 'Mr. White' || baseRole == 'Vendeur de Falafels')
-              ? AppLocalizations.of(context)!.vousNAvezPasDe
+              ? _l10n.vousNAvezPasDe
               : wordCivil;
       if (baseRole == 'Vendeur de Falafels') baseRole = 'Civil';
 
@@ -12552,7 +12566,7 @@ class FirebaseService {
       Map<String, dynamic> updates = {
         'playerClues.$playerId': cleanClue,
         'turnLog': FieldValue.arrayUnion([
-          "${playerData[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a dit : '$cleanClue'",
+          "${playerData[playerId]?['name'] ?? _l10n.joueur} a dit : '$cleanClue'",
         ]),
         'turnStartTime': FieldValue.serverTimestamp(),
       };
@@ -13333,7 +13347,7 @@ class FirebaseService {
                 : 'team_1';
         String winnerName =
             tabooTeams[winnerTeam]?['name'] ??
-            (winnerTeam == 'team_0' ? AppLocalizations.of(context)!.equipe12 : AppLocalizations.of(context)!.equipe21);
+            (winnerTeam == 'team_0' ? _l10n.equipe12 : _l10n.equipe21);
         Map<String, dynamic> scoreUpdates = {};
         if (tabooTeams[winnerTeam] is List) {
           for (var pId in (tabooTeams[winnerTeam] as List)) {
@@ -13343,7 +13357,7 @@ class FirebaseService {
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': winnerTeam,
-          'gameEndReason': AppLocalizations.of(context)!.finDesManchesVictoireDe(winnerName),
+          'gameEndReason': _l10n.finDesManchesVictoireDe(winnerName),
           ...scoreUpdates,
         });
         return;
@@ -13692,7 +13706,7 @@ class FirebaseService {
           'currentPlayerId': firstPlayer,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "Tous les joueurs sont prêts ! ${playerData[firstPlayer]?['name'] ?? AppLocalizations.of(context)!.joueur} commence à tirer.",
+            "Tous les joueurs sont prêts ! ${playerData[firstPlayer]?['name'] ?? _l10n.joueur} commence à tirer.",
           ]),
         });
       }
@@ -13744,7 +13758,7 @@ class FirebaseService {
       'ramiHasDrawn': false,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': FieldValue.arrayUnion([
-        "La manche de Rami commence ! C'est au tour de ${players[playerIds.first]?['name'] ?? AppLocalizations.of(context)!.joueur}.",
+        "La manche de Rami commence ! C'est au tour de ${players[playerIds.first]?['name'] ?? _l10n.joueur}.",
       ]),
     });
   }
@@ -13835,7 +13849,7 @@ class FirebaseService {
                           .key,
                   'players.${totalScores.entries.reduce((a, b) => a.value < b.value ? a : b).key}.score':
                       FieldValue.increment(1),
-                  'gameEndReason': AppLocalizations.of(context)!.scoreCibleAtteint,
+                  'gameEndReason': _l10n.scoreCibleAtteint,
                 },
               });
               return;
@@ -13971,7 +13985,7 @@ class FirebaseService {
                       .key,
               'players.${totalScores.entries.reduce((a, b) => a.value < b.value ? a : b).key}.score':
                   FieldValue.increment(1),
-              'gameEndReason': AppLocalizations.of(context)!.scoreCibleAtteint,
+              'gameEndReason': _l10n.scoreCibleAtteint,
             },
           });
           return;
@@ -14163,7 +14177,7 @@ class FirebaseService {
       'petitsChevauxConsecutiveSixes': consecutiveSixes,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': [
-        isTeamMode ? AppLocalizations.of(context)!.laPartie2v2Commence : AppLocalizations.of(context)!.laPartieCommence1,
+        isTeamMode ? _l10n.laPartie2v2Commence : _l10n.laPartieCommence1,
       ],
     });
   }
@@ -14272,7 +14286,7 @@ class FirebaseService {
         }
       }
 
-      final playerName = gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
 
       if (!hasValidMove) {
         // Aucun coup possible -> Passage automatique immédiat au joueur suivant
@@ -14377,7 +14391,7 @@ class FirebaseService {
           'petitsChevauxDice': 0,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "⚠️ 3 six consécutifs ! Le pion de ${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} retourne à l'écurie et son tour passe.",
+            "⚠️ 3 six consécutifs ! Le pion de ${players[playerId]?['name'] ?? _l10n.joueur} retourne à l'écurie et son tour passe.",
           ]),
         });
         return;
@@ -14654,7 +14668,7 @@ class FirebaseService {
       }
     }
 
-    String mode = gameData['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
+    String mode = gameData['dominoesMode'] ?? _l10n.pioche3;
     List<String> boneyard = (mode == 'pioche') ? fullDeck : [];
 
     // Trouver qui commence : le double le plus élevé
@@ -14773,7 +14787,7 @@ class FirebaseService {
       }
 
       bool spinnerPlayed = gameData['dominoesSpinnerPlayed'] ?? false;
-      final String mode = gameData['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
+      final String mode = gameData['dominoesMode'] ?? _l10n.pioche3;
 
       if (boardChain.isEmpty) {
         openEnds = [a, b];
@@ -15093,13 +15107,13 @@ class FirebaseService {
       final playerOrder = List<String>.from(data['dominoesPlayerOrder']);
       final int currentIndex = data['dominoesCurrentPlayerIndex'];
       final playerId = playerOrder[currentIndex];
-      final playerName = data['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
+      final playerName = data['players']?[playerId]?['name'] ?? _l10n.unJoueur;
 
       var hands = Map<String, dynamic>.from(data['dominoesPlayerHands'] ?? {});
       var myHand = List<String>.from(hands[playerId] ?? []);
       var openEnds = List<int>.from(data['dominoesOpenEnds'] ?? []);
       var boneyard = List<String>.from(data['dominoesBoneyard'] ?? []);
-      String mode = data['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
+      String mode = data['dominoesMode'] ?? _l10n.pioche3;
       var boardChain = List<dynamic>.from(data['dominoesBoardChain'] ?? []);
 
       bool canPlay(String t) {
@@ -15354,7 +15368,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'zombieLoserId': loserId,
           'gameEndReason':
-              AppLocalizations.of(context)!.aGardeLeZombie(players[loserId]?['name'] ?? 'Un joueur'),
+              _l10n.aGardeLeZombie(players[loserId]?['name'] ?? 'Un joueur'),
           ...scoreUpdates,
         });
       } else {
@@ -15610,7 +15624,7 @@ class FirebaseService {
             'gameWinner': winnerTeam,
             for (String wId in winningPlayers)
               'players.$wId.score': FieldValue.increment(1),
-            'gameEndReason': AppLocalizations.of(context)!.chaqueJoueurADevineUne,
+            'gameEndReason': _l10n.chaqueJoueurADevineUne,
           });
           return;
         }
@@ -15661,7 +15675,7 @@ class FirebaseService {
             'gameWinner': bestPlayer,
             if (bestPlayer.isNotEmpty)
               'players.$bestPlayer.score': FieldValue.increment(1),
-            'gameEndReason': AppLocalizations.of(context)!.toutLeMondeEstPasse,
+            'gameEndReason': _l10n.toutLeMondeEstPasse,
           });
           return;
         }
@@ -15725,7 +15739,7 @@ class FirebaseService {
 
       final randomIndex = Random().nextInt(playerOrder.length);
       final selectedPlayerId = playerOrder[randomIndex];
-      final selectedName = players[selectedPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final selectedName = players[selectedPlayerId]?['name'] ?? _l10n.joueur;
 
       transaction.update(gameRef, {
         'aoVCurrentPlayerIndex': randomIndex,
@@ -15771,7 +15785,7 @@ class FirebaseService {
               : (GameWords.truths[difficulty] ?? GameWords.truths['soft']!);
           final chosenChallenge =
               fallbackChallenges[Random().nextInt(fallbackChallenges.length)];
-          final targetPlayerName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+          final targetPlayerName = players[playerId]?['name'] ?? _l10n.joueur;
 
           transaction.update(gameRef, {
             'aoVChallengeType': challengeType,
@@ -15779,7 +15793,7 @@ class FirebaseService {
             'aoVPhase': 'performing',
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : AppLocalizations.of(context)!.verite1} !",
+              "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : _l10n.verite1} !",
               "ℹ️ Aucun autre joueur disponible pour écrire le défi. Défi sélectionné automatiquement.",
             ]),
           });
@@ -15787,8 +15801,8 @@ class FirebaseService {
         }
 
         final authorId = otherPlayers[Random().nextInt(otherPlayers.length)];
-        final authorName = players[authorId]?['name'] ?? AppLocalizations.of(context)!.joueur;
-        final targetPlayerName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+        final authorName = players[authorId]?['name'] ?? _l10n.joueur;
+        final targetPlayerName = players[playerId]?['name'] ?? _l10n.joueur;
 
         transaction.update(gameRef, {
           'aoVChallengeType': challengeType,
@@ -15797,7 +15811,7 @@ class FirebaseService {
           'aoVCurrentChallenge': null,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : AppLocalizations.of(context)!.verite1} !",
+            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : _l10n.verite1} !",
             "✍️ $authorName doit écrire le défi...",
           ]),
         });
@@ -15812,7 +15826,7 @@ class FirebaseService {
               GameWords.truths[difficulty] ?? GameWords.truths['soft']!;
         }
         final challenge = challenges[Random().nextInt(challenges.length)];
-        final targetPlayerName = players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+        final targetPlayerName = players[playerId]?['name'] ?? _l10n.joueur;
 
         transaction.update(gameRef, {
           'aoVChallengeType': challengeType,
@@ -15820,7 +15834,7 @@ class FirebaseService {
           'aoVPhase': 'performing',
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : AppLocalizations.of(context)!.verite1} !",
+            "🎲 $targetPlayerName a tiré : ${challengeType == 'action' ? 'ACTION' : _l10n.verite1} !",
           ]),
         });
       }
@@ -15850,7 +15864,7 @@ class FirebaseService {
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final currentPlayerId = gameData['aoVCurrentPlayerId'];
-      final currentPlayerName = players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final currentPlayerName = players[currentPlayerId]?['name'] ?? _l10n.joueur;
 
       transaction.update(gameRef, {
         'aoVCurrentChallenge': cleanChallenge,
@@ -15922,7 +15936,7 @@ class FirebaseService {
         final baseXp = gameData['aoVChallengeType'] == 'action' ? 30 : 20;
         final earnedXp = (baseXp * percentage / 100).round();
 
-        final currentPlayerName = players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+        final currentPlayerName = players[currentPlayerId]?['name'] ?? _l10n.joueur;
 
         // Créditer l'XP
         transaction.update(gameRef, {
@@ -15985,7 +15999,7 @@ class FirebaseService {
           if (winnerId.isNotEmpty)
             'players.$winnerId.score': FieldValue.increment(1),
           'gameEndReason':
-              AppLocalizations.of(context)!.aLePlusDXp(players[winnerId]?['name'] ?? 'Joueur', maxXp),
+              _l10n.aLePlusDXp(players[winnerId]?['name'] ?? 'Joueur', maxXp),
         });
       } else {
         transaction.update(gameRef, {
@@ -16032,7 +16046,7 @@ class FirebaseService {
         'gameState': 'gameOver',
         'gameWinner': winnerId,
         'gameEndReason':
-            "Manche terminée ! ${players[winnerId]?['name'] ?? AppLocalizations.of(context)!.joueur} gagne avec $maxXp XP !",
+            "Manche terminée ! ${players[winnerId]?['name'] ?? _l10n.joueur} gagne avec $maxXp XP !",
       });
     });
   }
@@ -16168,7 +16182,7 @@ class FirebaseService {
     String currentQuestion = questions[Random().nextInt(questions.length)];
     if (currentQuestion.contains('{player}')) {
       String targetId = playerIds[Random().nextInt(playerIds.length)];
-      String targetName = players[targetId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+      String targetName = players[targetId]?['name'] ?? _l10n.quelquUn;
       currentQuestion = currentQuestion.replaceAll('{player}', targetName);
     }
 
@@ -16354,7 +16368,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'gameWinner': winnerPlayerId,
           'gameEndReason':
-              AppLocalizations.of(context)!.aAtteintPointsEtRemporte(winnerName, targetScore),
+              _l10n.aAtteintPointsEtRemporte(winnerName, targetScore),
         });
         return;
       }
@@ -16381,7 +16395,7 @@ class FirebaseService {
         nextQuestion = questions[Random().nextInt(questions.length)];
         if (nextQuestion.contains('{player}')) {
           String randomP = playerOrder[Random().nextInt(playerOrder.length)];
-          String randomName = players[randomP]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+          String randomName = players[randomP]?['name'] ?? _l10n.quelquUn;
           nextQuestion = nextQuestion.replaceAll('{player}', randomName);
         }
       }
@@ -17045,7 +17059,7 @@ class FirebaseService {
         'currentPictionaryWord':
             isCollective
                 ? collectiveWords[0]
-                : (words.isNotEmpty ? words[0] : AppLocalizations.of(context)!.motManquant),
+                : (words.isNotEmpty ? words[0] : _l10n.motManquant),
         'pictionaryDrawing': null,
         'pictionaryGuesses': [],
         'pictionaryStrokeCount': 0,
@@ -17163,7 +17177,7 @@ class FirebaseService {
       for (final pId in playerIds) {
         final existingData = players[pId] is Map ? players[pId] as Map : {};
         skullPlayers[pId] = {
-          'name': existingData['name'] ?? AppLocalizations.of(context)!.joueur,
+          'name': existingData['name'] ?? _l10n.joueur,
           'score': existingData['score'] ?? 0,
           'xp': existingData['xp'] ?? 0,
           'authUid': existingData['authUid'] ?? pId,
@@ -17397,7 +17411,7 @@ class FirebaseService {
           if (playerOrder.length == 2) {
             nextPlayerIdx = currentPlayerIndex; // Rejoue à 2 joueurs
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a joué une Inversion et rejoue !",
+              "${players[playerId]?['name'] ?? _l10n.joueur} a joué une Inversion et rejoue !",
             ]);
           } else {
             unoDirection *= -1;
@@ -17406,7 +17420,7 @@ class FirebaseService {
                 (currentPlayerIndex + unoDirection + playerOrder.length) %
                 playerOrder.length;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a inversé le sens de jeu !",
+              "${players[playerId]?['name'] ?? _l10n.joueur} a inversé le sens de jeu !",
             ]);
           }
           break;
@@ -17417,21 +17431,21 @@ class FirebaseService {
               playerOrder.length;
           final skippedPlayerName =
               players[playerOrder[skippedPlayerIndex]]?['name'] ??
-              AppLocalizations.of(context)!.timesUpForceNextPlayer;
+              _l10n.timesUpForceNextPlayer;
           updates['unoLog'] = FieldValue.arrayUnion([
-            "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a sauté le tour de $skippedPlayerName !",
+            "${players[playerId]?['name'] ?? _l10n.joueur} a sauté le tour de $skippedPlayerName !",
           ]);
           break;
         case 'draw2':
           if (stackDraws && pendingDraw > 0) {
             updates['unoPendingDraw'] = pendingDraw + 2;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a empilé un +2. Cumul : ${pendingDraw + 2} cartes !",
+              "${players[playerId]?['name'] ?? _l10n.joueur} a empilé un +2. Cumul : ${pendingDraw + 2} cartes !",
             ]);
           } else {
             updates['unoPendingDraw'] = 2;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a joué un +2 !",
+              "${players[playerId]?['name'] ?? _l10n.joueur} a joué un +2 !",
             ]);
           }
           break;
@@ -17441,7 +17455,7 @@ class FirebaseService {
           }
           updates['unoWildColorChosen'] = chosenColor;
           updates['unoLog'] = FieldValue.arrayUnion([
-            "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a joué un Joker et choisi la couleur $chosenColor !",
+            "${players[playerId]?['name'] ?? _l10n.joueur} a joué un Joker et choisi la couleur $chosenColor !",
           ]);
           break;
         case 'wild_draw4':
@@ -17454,12 +17468,12 @@ class FirebaseService {
           if (stackDraws && pendingDraw > 0) {
             updates['unoPendingDraw'] = pendingDraw + 4;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a empilé un +4. Cumul : ${pendingDraw + 4} cartes !",
+              "${players[playerId]?['name'] ?? _l10n.joueur} a empilé un +4. Cumul : ${pendingDraw + 4} cartes !",
             ]);
           } else {
             updates['unoPendingDraw'] = 4;
             updates['unoLog'] = FieldValue.arrayUnion([
-              "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a joué un Super Joker +4 !",
+              "${players[playerId]?['name'] ?? _l10n.joueur} a joué un Super Joker +4 !",
             ]);
           }
           break;
@@ -17472,7 +17486,7 @@ class FirebaseService {
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = playerId;
         updates['gameEndReason'] =
-            "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a posé sa dernière carte et remporte la manche !";
+            "${players[playerId]?['name'] ?? _l10n.joueur} a posé sa dernière carte et remporte la manche !";
 
         int roundScore = 0;
         final handsMap = Map<String, dynamic>.from(
@@ -17487,7 +17501,7 @@ class FirebaseService {
         });
         updates['players.$playerId.score'] = FieldValue.increment(roundScore);
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} gagne la manche avec +$roundScore points !",
+          "${players[playerId]?['name'] ?? _l10n.joueur} gagne la manche avec +$roundScore points !",
         ]);
       } else if (myHand.length == 1) {
         updates['unoCalledUno.$playerId'] = false;
@@ -17495,7 +17509,7 @@ class FirebaseService {
           DateTime.now().add(Duration(seconds: 3)),
         );
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} n'a plus qu'une seule carte !",
+          "${players[playerId]?['name'] ?? _l10n.joueur} n'a plus qu'une seule carte !",
         ]);
       }
       transaction.update(gameRef, updates);
@@ -17534,7 +17548,7 @@ class FirebaseService {
         'unoLastDrawnCard': null,
         'turnStartTime': FieldValue.serverTimestamp(),
         'gameLog': FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} passe son tour.",
+          "${players[playerId]?['name'] ?? _l10n.joueur} passe son tour.",
         ]),
       });
     });
@@ -17595,7 +17609,7 @@ class FirebaseService {
       'unoCurrentPlayerIndex': nextPlayerIndex,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': FieldValue.arrayUnion([
-        "${gameData['players']?[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} n'a pas joué à temps, pioche et passe son tour.",
+        "${gameData['players']?[playerId]?['name'] ?? _l10n.joueur} n'a pas joué à temps, pioche et passe son tour.",
       ]),
     });
   }
@@ -17736,7 +17750,7 @@ class FirebaseService {
               applySpeedBonus: false,
             );
           }
-          final names = topScorers.map((id) => playersMap[id]?['name'] ?? AppLocalizations.of(context)!.joueur).join(', ');
+          final names = topScorers.map((id) => playersMap[id]?['name'] ?? _l10n.joueur).join(', ');
           updates['gameWinner'] = topScorers.contains(playerId) ? playerId : topScorers.first;
           updates['isTie'] = true;
           updates['tiedWinners'] = topScorers;
@@ -18153,7 +18167,7 @@ class FirebaseService {
       await gameRef.update({
         'gameState': 'lobby',
         'error_message':
-            AppLocalizations.of(context)!.erreurLeNombreDeRoles(assignedRoles.length, playerCount),
+            _l10n.erreurLeNombreDeRoles(assignedRoles.length, playerCount),
       });
 
       return;
@@ -18609,7 +18623,7 @@ class FirebaseService {
               scoreA > scoreB
                   ? 'teamA'
                   : (scoreB > scoreA ? 'teamB' : 'equality'),
-          'gameEndReason': AppLocalizations.of(context)!.toutesLesManchesDeTime,
+          'gameEndReason': _l10n.toutesLesManchesDeTime,
           ...scoreUpdates,
         });
       }
@@ -19019,8 +19033,8 @@ class FirebaseService {
       'gameWinner': winnerId,
       'gameEndReason':
           winnerId != null
-              ? AppLocalizations.of(context)!.gagneAvecPoints(players[winnerId]?['name'] ?? 'Un joueur', maxScore)
-              : AppLocalizations.of(context)!.finDeLaPartie,
+              ? _l10n.gagneAvecPoints(players[winnerId]?['name'] ?? 'Un joueur', maxScore)
+              : _l10n.finDeLaPartie,
       if (winnerId != null) 'players.$winnerId.score': FieldValue.increment(1),
     });
   }
@@ -19787,8 +19801,8 @@ class FirebaseService {
         gameData['roundState'] == 'guessing_drawing') {
       String reason =
           (gameData['roundState'] == 'drawing')
-              ? AppLocalizations.of(context)!.leDessinateurNAPas
-              : AppLocalizations.of(context)!.leTempsEstEcoulePersonne;
+              ? _l10n.leDessinateurNAPas
+              : _l10n.leTempsEstEcoulePersonne;
       await gameRef.update({
         'roundState': 'result',
         'gameEndReason': reason,
@@ -20024,7 +20038,7 @@ class FirebaseService {
       Map<String, dynamic> updates = {
         'justOneGuesserAnswer': cleanGuess,
         'roundState': 'result',
-        'gameEndReason': isCorrect ? AppLocalizations.of(context)!.motDevine : AppLocalizations.of(context)!.motNonDevine,
+        'gameEndReason': isCorrect ? _l10n.motDevine : _l10n.motNonDevine,
         'turnStartTime': FieldValue.serverTimestamp(),
       };
 
@@ -20090,7 +20104,7 @@ class FirebaseService {
 
         transaction.update(gameRef, {
           'gameState': 'gameOver',
-          'gameEndReason': AppLocalizations.of(context)!.les13CartesOntEte,
+          'gameEndReason': _l10n.les13CartesOntEte,
           'turnStartTime': FieldValue.serverTimestamp(),
         });
         return;
@@ -20231,13 +20245,13 @@ class FirebaseService {
     final loserId = gameData['hotPotatoCurrentPlayerId'];
     if (loserId == null) return;
 
-    final loserName = gameData['players']?[loserId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+    final loserName = gameData['players']?[loserId]?['name'] ?? _l10n.joueur;
 
     await gameRef.update({
       'roundState': 'result',
       'roundLoserId': loserId,
       'players.$loserId.score': FieldValue.increment(1),
-      'gameEndReason': AppLocalizations.of(context)!.laBombeAExploseDans(loserName),
+      'gameEndReason': _l10n.laBombeAExploseDans(loserName),
       'turnStartTime': FieldValue.serverTimestamp(),
     });
   }
@@ -20284,7 +20298,7 @@ class FirebaseService {
         await gameRef.update({
           'gameState': 'gameOver',
           'gameEndReason':
-              ': ''} !',
+              '$winnerName gagne avec $lowestScore point${lowestScore > 1 ? 's' : ''} !',
         });
         return;
       }
@@ -20420,7 +20434,7 @@ class FirebaseService {
         updates['unoDeck'] = deck;
         updates['unoPendingDraw'] = 0; // La pénalité est purgée
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a pioché $pendingDraw carte(s).",
+          "${players[playerId]?['name'] ?? _l10n.joueur} a pioché $pendingDraw carte(s).",
         ]);
 
         int nextPlayerIdx =
@@ -20453,14 +20467,14 @@ class FirebaseService {
 
       if (canPlayDrawnCard) {
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a pioché une carte et peut la jouer.",
+          "${players[playerId]?['name'] ?? _l10n.joueur} a pioché une carte et peut la jouer.",
         ]);
         updates['unoDrawActionDone'] =
             true; // Indique à l'UI de permettre de jouer la carte
         updates['unoLastDrawnCard'] = drawnCard;
       } else {
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a pioché une carte et passe son tour.",
+          "${players[playerId]?['name'] ?? _l10n.joueur} a pioché une carte et passe son tour.",
         ]);
         int nextPlayerIdx =
             (currentPlayerIndex + unoDirection + playerOrder.length) %
@@ -20509,7 +20523,7 @@ class FirebaseService {
 
       if (targetHand.length != 1) {
         throw Exception(
-          "${players[targetId]?['name'] ?? AppLocalizations.of(context)!.leJoueur} n'a pas 1 carte, l'appel UNO est invalide.",
+          "${players[targetId]?['name'] ?? _l10n.leJoueur} n'a pas 1 carte, l'appel UNO est invalide.",
         );
       }
       Map<String, dynamic> updates = {};
@@ -20542,7 +20556,7 @@ class FirebaseService {
         updates['unoDeck'] = deck;
         updates['unoContraDeadline'] = null;
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[callerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a crié Contre UNO ! ${players[targetId]?['name'] ?? AppLocalizations.of(context)!.joueur} pioche 2 cartes.",
+          "${players[callerId]?['name'] ?? _l10n.joueur} a crié Contre UNO ! ${players[targetId]?['name'] ?? _l10n.joueur} pioche 2 cartes.",
         ]);
 
         updates['unoCalledUno.$targetId'] = true;
@@ -20558,7 +20572,7 @@ class FirebaseService {
         updates['unoCalledUno.$targetId'] = true;
         updates['unoContraDeadline'] = null;
         updates['unoLog'] = FieldValue.arrayUnion([
-          "${players[targetId]?['name'] ?? AppLocalizations.of(context)!.joueur} a dit UNO !",
+          "${players[targetId]?['name'] ?? _l10n.joueur} a dit UNO !",
         ]);
       } else {
         throw Exception("Appel UNO invalide.");
@@ -20610,7 +20624,7 @@ class FirebaseService {
         transaction.update(gameRef, {
           'unoWildColorChosen': chosenColor,
           'unoLog': FieldValue.arrayUnion([
-            "${players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur} a choisi la couleur $chosenColor !",
+            "${players[playerId]?['name'] ?? _l10n.joueur} a choisi la couleur $chosenColor !",
           ]),
         });
       } else {
@@ -20726,7 +20740,7 @@ class FirebaseService {
         for (var pId in players.keys) {
           await gameRef.collection('private_data').doc(pId).set({
             'isLiar': (pId == secretLiarId),
-            'role': (pId == secretLiarId) ? 'Menteur' : AppLocalizations.of(context)!.honnete,
+            'role': (pId == secretLiarId) ? 'Menteur' : _l10n.honnete,
           });
         }
         liarId = null;
@@ -20755,7 +20769,7 @@ class FirebaseService {
           String pWord =
               (pId == secUndercoverId)
                   ? words[1]
-                  : (pId == secMrWhiteId ? AppLocalizations.of(context)!.vousNAvezPasDe : words[0]);
+                  : (pId == secMrWhiteId ? _l10n.vousNAvezPasDe : words[0]);
 
           await gameRef.collection('private_data').doc(pId).set({
             'role': pRole,
@@ -20814,7 +20828,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'gameWinner': overallWinnerId,
           'gameEndReason':
-              AppLocalizations.of(context)!.aAtteintPointsEtGagne(players[overallWinnerId]?['name'], updatedScores[overallWinnerId]),
+              _l10n.aAtteintPointsEtGagne(players[overallWinnerId]?['name'] ?? '', updatedScores[overallWinnerId] ?? 0),
         });
         return;
       }
@@ -21437,7 +21451,7 @@ class FirebaseService {
         updates['gameWinner'] = winnerId;
         updates['players.$winnerId.score'] = FieldValue.increment(1);
         updates['gameEndReason'] =
-            '${players[winnerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur} est le dernier survivant et remporte Skull !';
+            '${players[winnerId]?['name'] ?? _l10n.unJoueur} est le dernier survivant et remporte Skull !';
       } else {
         updates['roundState'] = 'result';
       }
@@ -21481,7 +21495,7 @@ class FirebaseService {
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = challengerId;
         updates['gameEndReason'] =
-            '${players[challengerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur} a remporté 2 défis et gagne la partie !';
+            '${players[challengerId]?['name'] ?? _l10n.unJoueur} a remporté 2 défis et gagne la partie !';
       } else {
         updates['roundState'] = 'result';
       }
@@ -21552,7 +21566,7 @@ class FirebaseService {
           'gameState': 'gameOver',
           'gameWinner': winnerId,
           'gameEndReason':
-              '${players[winnerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur} remporte Skull !',
+              '${players[winnerId]?['name'] ?? _l10n.unJoueur} remporte Skull !',
         });
         return;
       }
@@ -21597,7 +21611,7 @@ class FirebaseService {
 
     final String currentPlayerId = playerOrder[currentPlayerIndex];
     final String playerName =
-        gameData['players']?[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
+        gameData['players']?[currentPlayerId]?['name'] ?? _l10n.unJoueur;
     final Map<String, dynamic> skullHands = Map<String, dynamic>.from(
       gameData['skullHands'] ?? {},
     );
@@ -21610,7 +21624,7 @@ class FirebaseService {
         await notifyAutoPlay(
           gameRef,
           playerName,
-          actionDetails: AppLocalizations.of(context)!.poseDeCarte,
+          actionDetails: _l10n.poseDeCarte,
         );
         final String randomCard = myHand[Random().nextInt(myHand.length)];
         await placeSkullCard(
@@ -21632,7 +21646,7 @@ class FirebaseService {
         await notifyAutoPlay(
           gameRef,
           playerName,
-          actionDetails: AppLocalizations.of(context)!.enchereAutomatique,
+          actionDetails: _l10n.enchereAutomatique,
         );
         await startSkullBid(
           gameCode,
@@ -21648,7 +21662,7 @@ class FirebaseService {
       await notifyAutoPlay(
         gameRef,
         playerName,
-        actionDetails: AppLocalizations.of(context)!.passeLEnchere,
+        actionDetails: _l10n.passeLEnchere,
       );
       await passSkullBid(gameCode, currentPlayerId, isAuto: true);
     }
@@ -21939,7 +21953,7 @@ class FirebaseService {
           }
         } else if (gameType == 'Le Juge') {
           final winnerPlayerId = votedForId;
-          final winnerName = players[winnerPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+          final winnerName = players[winnerPlayerId]?['name'] ?? _l10n.joueur;
           updates['roundState'] = 'result';
           updates['roundWinnerId'] = winnerPlayerId;
           updates['players.$winnerPlayerId.score'] = FieldValue.increment(1);
@@ -22505,7 +22519,7 @@ class FirebaseService {
         throw Exception("Ce joueur n'a pas soumis de réponse.");
       }
 
-      final winnerName = players[winnerPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final winnerName = players[winnerPlayerId]?['name'] ?? _l10n.joueur;
 
       creditPlayerXp(
         transaction,
@@ -22957,13 +22971,13 @@ class FirebaseService {
                 ? playersWithChips.first
                 : playerIds.first;
         String winnerName =
-            playerData[winner]?['name'] ?? players[winner]?['name'] ?? AppLocalizations.of(context)!.joueur;
+            playerData[winner]?['name'] ?? players[winner]?['name'] ?? _l10n.joueur;
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': winner,
           'players.$winner.score': FieldValue.increment(1),
           'gameEndReason':
-              AppLocalizations.of(context)!.aRemporteTousLesJetons(winnerName),
+              _l10n.aRemporteTousLesJetons(winnerName),
         });
         return;
       }
@@ -23432,7 +23446,7 @@ class FirebaseService {
           .map((id) => playerData[id]?['name'] ?? 'Inconnu')
           .join(' et ');
       winnerAnnouncement =
-          "$winnerNames gagne(nt) le pot avec ${bestHand?.rank.name ?? AppLocalizations.of(context)!.uneMain} !";
+          "$winnerNames gagne(nt) le pot avec ${bestHand?.rank.name ?? _l10n.uneMain} !";
     }
 
     Map<String, dynamic> scoreUpdates = {};
@@ -24000,7 +24014,7 @@ class FirebaseService {
       String timedOutPlayerId = playerOrder[currentIndex];
       String roundState = gameData['roundState'];
       final playerName =
-          gameData['players']?[timedOutPlayerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
+          gameData['players']?[timedOutPlayerId]?['name'] ?? _l10n.unJoueur;
 
       if (roundState == 'bidding') {
         await notifyAutoPlay(
@@ -24035,7 +24049,7 @@ class FirebaseService {
           await notifyAutoPlay(
             gameRef,
             playerName,
-            actionDetails: AppLocalizations.of(context)!.carte1(cardToPlay),
+            actionDetails: _l10n.carte1(cardToPlay),
           );
           await beloteAction(
             gameCode,
@@ -24268,7 +24282,7 @@ class FirebaseService {
           'gameWinner': winnerId,
           'players.$winnerId.score': FieldValue.increment(1),
           'blokusScores': scores,
-          'gameEndReason': AppLocalizations.of(context)!.finDeLaPartie,
+          'gameEndReason': _l10n.finDeLaPartie,
         });
       } else {
         int nextIndex =
@@ -24359,7 +24373,7 @@ class FirebaseService {
           'gameWinner': winnerId,
           'players.$winnerId.score': FieldValue.increment(1),
           'blokusScores': scores,
-          'gameEndReason': AppLocalizations.of(context)!.finDeLaPartie,
+          'gameEndReason': _l10n.finDeLaPartie,
         });
       } else {
         updates['blokusCurrentPlayerIndex'] = nextIndex;
@@ -24632,26 +24646,26 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   final Set<String> _selectedAiThemes = {};
   String? _selectedAiStyle;
 
-  static const List<String> _popularAiThemes = [
-    AppLocalizations.of(context)!.cinemaSeries,
-    AppLocalizations.of(context)!.gamingJeux,
-    AppLocalizations.of(context)!.cuisineFood,
-    AppLocalizations.of(context)!.voyagePays,
-    AppLocalizations.of(context)!.superHerosComics,
-    AppLocalizations.of(context)!.animauxNature,
-    AppLocalizations.of(context)!.scienceFiction,
-    AppLocalizations.of(context)!.histoireMythes,
-    AppLocalizations.of(context)!.humourAbsurde,
-    AppLocalizations.of(context)!.musiquePop,
-    AppLocalizations.of(context)!.annees8090,
-    AppLocalizations.of(context)!.fantasyMagie,
+  static List<String> get _popularAiThemes => [
+    _l10n.cinemaSeries,
+    _l10n.gamingJeux,
+    _l10n.cuisineFood,
+    _l10n.voyagePays,
+    _l10n.superHerosComics,
+    _l10n.animauxNature,
+    _l10n.scienceFiction,
+    _l10n.histoireMythes,
+    _l10n.humourAbsurde,
+    _l10n.musiquePop,
+    _l10n.annees8090,
+    _l10n.fantasyMagie,
   ];
 
-  static const List<String> _aiStylesList = [
-    AppLocalizations.of(context)!.funSoiree,
-    AppLocalizations.of(context)!.cultureDefi,
-    AppLocalizations.of(context)!.familleToutPublic,
-    AppLocalizations.of(context)!.piquantInsolite,
+  static List<String> get _aiStylesList => [
+    _l10n.funSoiree,
+    _l10n.cultureDefi,
+    _l10n.familleToutPublic,
+    _l10n.piquantInsolite,
   ];
   int _infiltreCount = 1;
   int _mrWhiteCount = 1;
@@ -24672,7 +24686,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   bool _enablePublicSearch = false; // <--- NOUVELLE VARIABLE
 
   bool _hotPotatoUseGlobalTimer = false;
-  String _photoRouletteMediaType = AppLocalizations.of(context)!.photos;
+  String _photoRouletteMediaType = _l10n.photos;
   bool _dobbleSymbolsPerCard = true;
   bool _isSimplifiedLiar = false;
   String _liarVoteMode = 'simultaneous';
@@ -24688,14 +24702,14 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   int _unoStartingCards = 7;
   bool _unoStackDraws = true;
   int _timesUpTotalRounds = 3;
-  String _dominoesMode = AppLocalizations.of(context)!.pioche3;
+  String _dominoesMode = _l10n.pioche3;
   int _dominoesTargetScore = 50;
   int _zeroPointeTargetScore = 100;
   int _pokerStartChips = 1000;
   List<String> _selectedGameCategories = [];
   int _pokerSmallBlind = 10;
   int _pokerBigBlind = 20;
-  String _gribouillisMode = AppLocalizations.of(context)!.normal;
+  String _gribouillisMode = _l10n.normal;
   bool _gribouillisAjouter1 = false;
   int _hotPotatoGlobalDuration =
       60; // NOUVEAU: Chrono global pour La Patate Chaude
@@ -24705,15 +24719,15 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   int _aoVMaxRounds = 10;
   int _aoVVoteThreshold = 100;
   Map<String, bool> _undercoverRoleSettings = {
-    AppLocalizations.of(context)!.fouDeJoie: false,
-    AppLocalizations.of(context)!.boomerang: false,
-    AppLocalizations.of(context)!.deesseDeLaJustice: false,
-    AppLocalizations.of(context)!.fantome: false,
-    AppLocalizations.of(context)!.amoureux: false,
-    AppLocalizations.of(context)!.mrMeme: false,
-    AppLocalizations.of(context)!.vendeurDeFalafels: false,
-    AppLocalizations.of(context)!.vengeuse: false,
-    AppLocalizations.of(context)!.duellistes: false,
+    _l10n.fouDeJoie: false,
+    _l10n.boomerang: false,
+    _l10n.deesseDeLaJustice: false,
+    _l10n.fantome: false,
+    _l10n.amoureux: false,
+    _l10n.mrMeme: false,
+    _l10n.vendeurDeFalafels: false,
+    _l10n.vengeuse: false,
+    _l10n.duellistes: false,
   };
 
   @override
@@ -24747,7 +24761,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   final Map<String, int> _gameCosts = {'Loup-Garou': 3, 'Gribouillis': 2};
 
   bool _gameHasDifficulty(String gameName) {
-    const gamesWithDifficulty = {
+    final gamesWithDifficulty = {
       'Qui Pourrait le Plus ?',
       'Synonyme ou Banni',
       'Codenames',
@@ -25142,7 +25156,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ? _liarVoteMode
                       : 'simultaneous',
               quiPourraitVoteMode:
-                  _selectedGame == AppLocalizations.of(context)!.quiPourraitLePlusApplocalizations6,
+                  _selectedGame == 'Qui Pourrait le Plus ?'
+                      ? _quiPourraitVoteMode
+                      : 'simultaneous',
               petitBacCategories:
                   _selectedGame == 'Petit Bac' ? _petitBacCategories : null,
               petitBacTime:
@@ -30247,25 +30263,25 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
     );
   }
 
-  static const Map<String, String> _undercoverRoleDescriptions = {
-    AppLocalizations.of(context)!.fouDeJoie:
-        AppLocalizations.of(context)!.siVousEtesLePremier,
-    AppLocalizations.of(context)!.boomerang:
-        AppLocalizations.of(context)!.laPremiereFoisQueLa,
-    AppLocalizations.of(context)!.deesseDeLaJustice:
-        AppLocalizations.of(context)!.enCasDEgaliteLors,
-    AppLocalizations.of(context)!.fantome:
-        AppLocalizations.of(context)!.memeApresVotreEliminationVous,
-    AppLocalizations.of(context)!.amoureux:
-        AppLocalizations.of(context)!.unAutreJoueurEstSecretement,
-    AppLocalizations.of(context)!.mrMeme:
-        AppLocalizations.of(context)!.auLieuDeDonnerUn,
-    AppLocalizations.of(context)!.vendeurDeFalafels:
-        AppLocalizations.of(context)!.vousNAvezPasDe1,
-    AppLocalizations.of(context)!.vengeuse:
-        AppLocalizations.of(context)!.siVousEtesElimineeVous,
-    AppLocalizations.of(context)!.duellistes:
-        AppLocalizations.of(context)!.unAutreJoueurEstVotre,
+  static Map<String, String> get _undercoverRoleDescriptions => {
+    _l10n.fouDeJoie:
+        _l10n.siVousEtesLePremier,
+    _l10n.boomerang:
+        _l10n.laPremiereFoisQueLa,
+    _l10n.deesseDeLaJustice:
+        _l10n.enCasDEgaliteLors,
+    _l10n.fantome:
+        _l10n.memeApresVotreEliminationVous,
+    _l10n.amoureux:
+        _l10n.unAutreJoueurEstSecretement,
+    _l10n.mrMeme:
+        _l10n.auLieuDeDonnerUn,
+    _l10n.vendeurDeFalafels:
+        _l10n.vousNAvezPasDe1,
+    _l10n.vengeuse:
+        _l10n.siVousEtesElimineeVous,
+    _l10n.duellistes:
+        _l10n.unAutreJoueurEstVotre,
   };
 
   void _showRoleDescriptionDialog(BuildContext context, String roleName) {
@@ -33254,7 +33270,7 @@ AppLocalizations.of(context)!.cartesRestantes,
             ) +
             oppBonus;
 
-        const List<String> categories = [
+        final List<String> categories = [
           AppLocalizations.of(context)!.asLabel,
           AppLocalizations.of(context)!.deux,
           AppLocalizations.of(context)!.trois,
@@ -38626,7 +38642,7 @@ AppLocalizations.of(context)!.jouePar,
     switch (card) {
       // 🛡️ BOTTES (Sécurités permanentes)
       case 'SAFETY_RIGHT_OF_WAY':
-        return const _MilleBornesCardInfo(
+        return _MilleBornesCardInfo(
           name: AppLocalizations.of(context)!.vehiculeNprioritaire,
           category: "BOTTE",
           badgeText: AppLocalizations.of(context)!.priorite,
@@ -38647,7 +38663,7 @@ AppLocalizations.of(context)!.jouePar,
         );
       case 'SAFETY_EXTRA_TANK':
       case 'SAFETY_EMERGENCY':
-        return const _MilleBornesCardInfo(
+        return _MilleBornesCardInfo(
           name: AppLocalizations.of(context)!.citerneNinepuisable,
           category: "BOTTE",
           badgeText: "CITERNE",
@@ -44220,7 +44236,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
             AppLocalizations.of(context)!.leDessinateur;
         if (winnerId != null) {
           final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
-          resultText = AppLocalizations.of(context)!.aTrouveLeMot(winnerName, currentWord);
+          resultText = AppLocalizations.of(context)!.aTrouveLeMot(winnerName);
           extraInfo = Text(
             AppLocalizations.of(context)!.felicitationsAuDessinateurEtA,
             textAlign: TextAlign.center,
@@ -44250,7 +44266,7 @@ AppLocalizations.of(context)!.mrWhiteNAvaitPas,
         final guesserAnswer =
             gameData['justOneGuesserAnswer'] ?? AppLocalizations.of(context)!.pasDeReponse;
         if (gameEndReason == AppLocalizations.of(context)!.motDevine) {
-          resultText = AppLocalizations.of(context)!.aTrouveLeMot1(guesserName, currentWord);
+          resultText = AppLocalizations.of(context)!.aTrouveLeMot1(guesserName);
           extraInfo = Text(
             AppLocalizations.of(context)!.saReponseEtait,
             textAlign: TextAlign.center,
@@ -48694,7 +48710,32 @@ AppLocalizations.of(context)!.stre93cb0,
                 ),
                 SizedBox(height: 20),
                 Text(
-                  AppLocalizations.of(context)!.applocalizationsOfContextStyleconsttextstylecolorcolors(AppLocalizations.of(context)!.indicesMontresA, guesserName, AppLocalizations.of(context)!.carte3, deckIndex, deckTotal, AppLocalizations.of(context)!.score, totalScore),
+                  "${AppLocalizations.of(context)!.indicesMontresA} $guesserName :",
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                SizedBox(height: 20),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  children:
+                      justOneFilteredClues
+                          .map((clue) => _buildEasel(clue.toString()))
+                          .toList(),
+                ),
+                SizedBox(height: 20),
+                if (justOneFilteredClues.isEmpty)
+                  Text(
+                    AppLocalizations.of(context)!.tousLesIndicesOntEte,
+                    style: const TextStyle(color: Colors.red),
+                  ),
+              ],
+            ),
+          );
+        } else {
+          // C'est au devin de jouer
+          return Column(
+            children: [
+              Text(
+                "${AppLocalizations.of(context)!.carte} $deckIndex / $deckTotal — ${AppLocalizations.of(context)!.score} : $totalScore",
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 8),
@@ -48908,7 +48949,7 @@ AppLocalizations.of(context)!.stre93cb0,
                             padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: Chip(
                               label: Text(
-                                AppLocalizations.of(context)!.strf0868c(e.value['name']?.toString().substring(0, min(4, (e.value['name']?.toString().length ?? 0))), e.value['score'] ?? 0),
+                                AppLocalizations.of(context)!.strf0868c(e.value['name']?.toString().substring(0, min(4, (e.value['name']?.toString().length ?? 0))) ?? '', e.value['score'] ?? 0),
                                 style: TextStyle(fontSize: 11),
                               ),
                               padding: EdgeInsets.zero,
@@ -49739,7 +49780,44 @@ AppLocalizations.of(context)!.stre93cb0,
               nightActions['loupTarget'] != null) {
             String targetName =
                 playerData[nightActions['loupTarget']]?['name'] ?? AppLocalizations.of(context)!.laVictime;
-            promptText = AppLocalizations.of(context)!.infecterApplocalizationsOfContextCenteractionwidgetrowmainaxissizemainaxissizeminle(targetName);
+            promptText = "Infecter $targetName ?";
+            centerActionWidget = Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildActionButton(
+                  label: AppLocalizations.of(context)!.infecter,
+                  icon: Icons.auto_fix_high,
+                  color: Colors.purpleAccent,
+                  onPressed: () {
+                    Provider.of<PlayerState>(
+                      context,
+                      listen: false,
+                    ).recordBadgeEvent('lg_loup_noir_infect');
+                    _firebaseService.loupNoirInfect(
+                      widget.gameCode,
+                      playerId,
+                      true,
+                    );
+                  },
+                ),
+                const SizedBox(width: 8),
+                _buildActionButton(
+                  label: AppLocalizations.of(context)!.devorer,
+                  icon: Icons.close,
+                  color: Colors.redAccent,
+                  onPressed:
+                      () => _firebaseService.loupNoirInfect(
+                        widget.gameCode,
+                        playerId,
+                        false,
+                      ),
+                ),
+              ],
+            );
+          }
+          break;
+        case 'loup_blanc_turn':
+          promptText = "Le Loup Blanc frappe en solitaire";
           if (myRole == AppLocalizations.of(context)!.loupBlanc &&
               myStatus == 'vivant' &&
               nightNumber % 2 != 0 &&
@@ -51858,7 +51936,7 @@ AppLocalizations.of(context)!.stre93cb0,
         ) +
         calcBonus(s);
 
-    const List<String> categories = [
+    final List<String> categories = [
       AppLocalizations.of(context)!.asLabel,
       AppLocalizations.of(context)!.deux,
       AppLocalizations.of(context)!.trois,
@@ -52814,9 +52892,7 @@ AppLocalizations.of(context)!.grilleDePts,
                     children: [
                       Text(
                         trumpSuit != null
-                            ? GameUiLocalization.tr(context, AppLocalizations.of(context)!.atout, {
-                              'suit': _getSuitSymbol(context, trumpSuit),
-                            })
+                            ? AppLocalizations.of(context)!.atout(_getSuitSymbol(context, trumpSuit))
                             : AppLocalizations.of(context)!.encheresEnCours,
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
@@ -55971,8 +56047,8 @@ class TruthOrDareLocalGameScreen extends StatefulWidget {
     Key? key,
     required this.players,
     this.difficulty = 'soft',
-    this.customTruths = [],
-    this.customDares = [],
+    this.customTruths = const [],
+    this.customDares = const [],
   }) : super(key: key);
 
   @override
@@ -56552,7 +56628,7 @@ class DilemmaLocalGameScreen extends StatefulWidget {
     required this.players,
     this.difficulty = 'soft',
     this.useWheel = true,
-    this.customDilemmas = [],
+    this.customDilemmas = const [],
   }) : super(key: key);
 
   @override
@@ -57426,7 +57502,7 @@ class CoinFlipLocalGameScreen extends StatefulWidget {
     Key? key,
     required this.players,
     this.difficulty = 'soft',
-    this.customQuestions = [],
+    this.customQuestions = const [],
   }) : super(key: key);
 
   @override
@@ -58119,7 +58195,54 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                 GameWords.undercoverData['soft']!['wordPairs']!);
     final rawPair = wordPairs[random.nextInt(wordPairs.length)];
     if (rawPair.contains(':')) {
-      final parts = rawPair.split(AppLocalizations.of(context)!.applocalizationsOfContextWordcivilparts0trimwordundercover1Rawpair
+      final parts = rawPair.split(':');
+      _wordCivil = parts[0].trim();
+      _wordUndercover = parts[1].trim();
+    } else {
+      int idx = wordPairs.indexOf(rawPair);
+      _wordCivil = rawPair.trim();
+      _wordUndercover =
+          (idx + 1 < wordPairs.length)
+              ? wordPairs[idx + 1].trim()
+              : "${rawPair.trim()} (${AppLocalizations.of(context)!.variante})";
+    }
+
+    _playerRoles.clear();
+    for (var player in _activePlayers) {
+      if (player == undercover) {
+        _playerRoles[player] = AppLocalizations.of(context)!.infiltre;
+      } else if (player == _mrWhitePlayer) {
+        _playerRoles[player] = "Mr. White";
+      } else {
+        _playerRoles[player] = AppLocalizations.of(context)!.civil;
+      }
+    }
+
+    setState(() {
+      _gameState = UndercoverGameState.revealing;
+      _currentPlayerRevealIndex = 0;
+      _resultMessage = "";
+    });
+  }
+
+  void _nextPlayerReveal() {
+    if (_currentPlayerRevealIndex < _activePlayers.length - 1) {
+      setState(() => _currentPlayerRevealIndex++);
+    } else {
+      setState(() => _gameState = UndercoverGameState.discussing);
+    }
+  }
+
+  void _eliminatePlayer(String player) {
+    String role = _playerRoles[player]!;
+    bool impostorsWin = role == AppLocalizations.of(context)!.civil || role == "Civil";
+
+    setState(() {
+      _gameState = UndercoverGameState.result;
+      if (impostorsWin) {
+        _resultMessage = "$player était un Civil ! Les Imposteurs gagnent !";
+      } else {
+        _resultMessage = "$player était l'${role} ! Les Civils gagnent !";
       }
     });
   }
@@ -58402,7 +58525,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
     String startingPlayerInstruction = "";
     if (_includeMrWhite && _mrWhiteStarts && _mrWhitePlayer != null) {
       startingPlayerInstruction =
-          AppLocalizations.of(context)!.commeConvenuTuCommences(_mrWhitePlayer);
+          AppLocalizations.of(context)!.commeConvenuTuCommences(_mrWhitePlayer!);
     }
 
     return Center(
@@ -59557,7 +59680,20 @@ class _WhoIsMostLikelyLocalScreenState
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
-            onPressed: () => showGameRules(context, AppLocalizations.of(context)!.quiPourraitLePlusApplocalizations,
+            onPressed: () => showGameRules(context, 'Qui Pourrait le Plus ?'),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            if (_phase != LocalWhoIsPhase.results) ...[
+              // FILTRE DIFFICULTE
+              SegmentedButton<String>(
+                segments: [
+                  ButtonSegment(
+                    value: 'soft',
                     label: Text(AppLocalizations.of(context)!.soft),
                   ),
                   ButtonSegment(
@@ -62262,8 +62398,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
   int _totalRounds = 3; // Nombre de passages par joueur / équipe
 
   // Équipes
-  String _teamAName = AppLocalizations.of(context)!.codenamesRedTeam;
-  String _teamBName = AppLocalizations.of(context)!.codenamesBlueTeam;
+  String _teamAName = _l10n.codenamesRedTeam;
+  String _teamBName = _l10n.codenamesBlueTeam;
   List<String> _teamAPlayers = [];
   List<String> _teamBPlayers = [];
   int _teamAScore = 0;
@@ -64187,27 +64323,27 @@ class _LudoBoardPainter extends CustomPainter {
     );
 
     // 3. Écuries / Bases des 4 coins
-    _drawHomeBase(canvas, Offset(0, 0), colors[0], cellSize, AppLocalizations.of(context)!.ecurie1);
+    _drawHomeBase(canvas, Offset(0, 0), colors[0], cellSize, _l10n.ecurie1);
     _drawHomeBase(
       canvas,
       Offset(9 * cellSize, 0),
       colors[1],
       cellSize,
-      AppLocalizations.of(context)!.ecurie2,
+      _l10n.ecurie2,
     );
     _drawHomeBase(
       canvas,
       Offset(0, 9 * cellSize),
       colors[2],
       cellSize,
-      AppLocalizations.of(context)!.ecurie3,
+      _l10n.ecurie3,
     );
     _drawHomeBase(
       canvas,
       Offset(9 * cellSize, 9 * cellSize),
       colors[3],
       cellSize,
-      AppLocalizations.of(context)!.ecurie4,
+      _l10n.ecurie4,
     );
 
     // 4. Circuit de cases et escaliers
@@ -65499,18 +65635,18 @@ class _LoungeListScreenState extends State<LoungeListScreen>
   final TextEditingController _privateCodeCtrl = TextEditingController();
   bool _isJoiningPrivate = false;
 
-  String _selectedTheme = AppLocalizations.of(context)!.tous;
+  String _selectedTheme = _l10n.tous;
   String _sortBy = 'recent'; // 'recent', 'players', 'slots'
   bool _hideFull = false;
 
   final List<String> _themes = [
-    AppLocalizations.of(context)!.tous,
-    AppLocalizations.of(context)!.general,
-    AppLocalizations.of(context)!.fun,
-    AppLocalizations.of(context)!.gaming,
-    AppLocalizations.of(context)!.chill,
-    AppLocalizations.of(context)!.soiree,
-    AppLocalizations.of(context)!.competition,
+    _l10n.tous,
+    _l10n.general,
+    _l10n.fun,
+    _l10n.gaming,
+    _l10n.chill,
+    _l10n.soiree,
+    _l10n.competition,
   ];
 
   @override
@@ -66942,7 +67078,15 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.gamemessagelocalizationTrContextReason
+                    GameContentLocalization.format(context, "TERMINÉ : {0}", [GameContentLocalization.ui(context, gName)]),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 13,
+                    ),
+                  ),
+                  Text(
+                    winner.isNotEmpty ? "${AppLocalizations.of(context)!.vainqueur} $winner ${reason.isNotEmpty ? "(${GameMessageLocalization.tr(context, reason)})" : ""}" : GameMessageLocalization.tr(context, reason),
                     style: TextStyle(color: Colors.white70, fontSize: 11),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -68799,23 +68943,23 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
   String _getSurvivorEquipment(String rank) {
     switch (rank) {
       case 'A':
-        return AppLocalizations.of(context)!.lampe;
+        return _l10n.lampe;
       case '2':
-        return AppLocalizations.of(context)!.piedDeBiche;
+        return _l10n.piedDeBiche;
       case '3':
-        return AppLocalizations.of(context)!.trousseSoin;
+        return _l10n.trousseSoin;
       case '4':
-        return AppLocalizations.of(context)!.hache;
+        return _l10n.hache;
       case '5':
-        return AppLocalizations.of(context)!.arbalete;
+        return _l10n.arbalete;
       case '6':
-        return AppLocalizations.of(context)!.fusil;
+        return _l10n.fusil;
       case '7':
-        return AppLocalizations.of(context)!.talkie;
+        return _l10n.talkie;
       case '8':
-        return AppLocalizations.of(context)!.tronconneuse;
+        return _l10n.tronconneuse;
       default:
-        return AppLocalizations.of(context)!.survie;
+        return _l10n.survie;
     }
   }
 
@@ -70187,7 +70331,7 @@ class _RoulettePainter extends CustomPainter {
 
       final name =
           playerNames[i].length > 9
-              ? AppLocalizations.of(context)!.str128675
+              ? _l10n.str128675
               : playerNames[i];
       textPainter.text = TextSpan(
         text: name,
