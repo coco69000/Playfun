@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'player_state.dart';
 import 'badges_data.dart';
 import 'badges_localization.dart';
-import 'game_content_localization.dart';
 import 'game_rules_localization.dart';
 import 'l10n/app_localizations.dart';
 import 'matchmaking_localization.dart';

@@ -512,10 +512,8 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
           // On suppose ici que l'utilisateur veut n'importe quelle partie LG ou que vous avez ajouté loupGarouRolesHash dans 'games'.
           // Si vous l'avez ajouté dans createGame :
           if (widget.selectedLoupGarouRoles != null) {
-            final rolesHash = _generateLoupGarouRolesHash(
-              widget.selectedLoupGarouRoles!,
-            );
             // Assurez-vous d'ajouter ce champ lors de la création de la partie dans FirebaseService
+            // final rolesHash = _generateLoupGarouRolesHash(widget.selectedLoupGarouRoles!);
             // refillingQuery = refillingQuery.where('loupGarouRolesHash', isEqualTo: rolesHash);
           }
           break;
@@ -1052,7 +1050,6 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
 
   Future<void> _handleFinalTimeout() async {
     if (_isDisposed) return;
-    final playerId = widget.playerId; // <--- ET ICI
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

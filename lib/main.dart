@@ -8,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'l10n/app_localizations.dart';
 import 'matchmaking_localization.dart';
-import 'game_content_localization.dart';
 
 import 'auth/auth_gate.dart';
 import 'auth/auth_service.dart';
