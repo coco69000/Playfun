@@ -735,12 +735,16 @@ exports.generateAiWords = onCall(
     let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 100));
 
     const safeInstructions = String(instructions)
+      .slice(0, 350)
       .slice(0, 600)
       .replace(/[\r\n"`]/g, " ")
+      .replace(/[^a-zA-Z0-9À-ÿ\s,.\-':/&?+!()]/g, "")
       .replace(/[^\p{L}\p{N}\s,.\-':/&?+!()_{}]/gu, "")
       .trim();
 
     const safeGameType = String(gameType)
+      .slice(0, 50)
+      .replace(/[^a-zA-Z0-9À-ÿ\s,-]/g, "")
       .slice(0, 60)
       .replace(/[^\p{L}\p{N}\s,'\-&!?.]/gu, "")
       .trim();
@@ -773,6 +777,7 @@ exports.generateAiWords = onCall(
       userPrompt = `Génère exactement ${parsedCount} mots simples et variés en français (un seul mot par élément, en lettres majuscules). Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["ESPION", "PLAGE", "CHÂTEAU", "SOLEIL", "PIRATE"]`;
     } else if (normalizedGame.includes("synonyme") || normalizedGame.includes("banni")) {
       userPrompt = `Génère exactement ${parsedCount} mots ou adjectifs riches en français ayant de multiples synonymes. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Rapide", "Colère", "Magnifique", "Difficile", "Courageux"]`;
+    } else if (normalizedGame.includes("pictionary") || normalizedGame.includes("gribouillis")) {
     } else if (normalizedGame.includes("gribouillis")) {
       systemPrompt = "Tu es un générateur d'expressions et situations visuelles amusantes à dessiner pour le jeu Gribouillis. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} expressions courtes, objets ou actions drôles et visuelles faciles à dessiner en français. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Un chat qui fait du surf", "Un astronaute au supermarché", "Un dragon qui éternue", "Château de sable"]`;
@@ -799,6 +804,7 @@ exports.generateAiWords = onCall(
       systemPrompt = "Tu es un générateur de dilemmes cornéliens au format 'Option A ou Option B'. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} dilemmes cornéliens au format "Option A ou Option B". Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Pouvoir voler ou Être invisible", "Ne plus jamais pouvoir écouter de musique ou Ne plus jamais pouvoir regarder de film"]`;
     } else if (normalizedGame.includes("patate") || normalizedGame.includes("catégorie") || normalizedGame.includes("categorie")) {
+      systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       systemPrompt = "Tu es un générateur de catégories rapides pour le jeu de la Patate Chaude / Catégories. Tu dois UNIQUEMENT répondre par un tableau JSON de chaînes de caractères.";
       userPrompt = `Génère exactement ${parsedCount} catégories d'énumération rapides et accessibles pour la Patate Chaude. Thème imposé: ${safeInstructions || 'Général'}. Exemple: ["Des marques de voitures", "Des choses qu'on trouve dans un frigo", "Des super-héros"]`;
     } else if (normalizedGame.includes("mème") || normalizedGame.includes("meme")) {
@@ -837,6 +843,8 @@ exports.generateAiWords = onCall(
       }
 
       const data = await response.json();
+      const content = data.choices?.[0]?.message?.content || "";
+      const match = content.match(/\[[\s\S]*?\]/);
       const rawContent = (data.choices?.[0]?.message?.content || "")
         .replace(/```json/gi, "")
         .replace(/```/g, "")
@@ -1526,63 +1534,66 @@ exports.cleanupDisconnectedPlayers = onSchedule(
               updates.skullCurrentPlayerIndex = data.skullCurrentPlayerIndex % newOrder.length;
             }
 
-            // Retrait dans les listes des sous-jeux et recalage des index associés
-            const orderIndexPairs = [
-              ["unoPlayerOrder", "unoCurrentPlayerIndex"],
-              ["milleBornesPlayerOrder", "milleBornesCurrentPlayerIndex"],
-              ["blokusPlayerOrder", "blokusCurrentPlayerIndex"],
-              ["checkersPlayerOrder", "checkersCurrentPlayerIndex"],
-              ["bigTwoPlayerOrder", "bigTwoCurrentPlayerIndex"],
-              ["petitsChevauxPlayerOrder", "petitsChevauxCurrentIndex"],
-              ["dominoesPlayerOrder", "dominoesCurrentPlayerIndex"],
-              ["zombiePlayerOrder", "zombieCurrentPlayerIndex"],
-              ["belotePlayerOrder", "beloteCurrentPlayerIndex"],
-              ["yamsPlayerOrder", null],
-            ];
+            // Retrait dans les listes des sous-jeux
+            ["unoPlayerOrder", "milleBornesPlayerOrder", "blokusPlayerOrder", "checkersPlayerOrder"].forEach((orderKey) => {
+              // Retrait dans les listes des sous-jeux et recalage des index associés
+              const orderIndexPairs = [
+                ["unoPlayerOrder", "unoCurrentPlayerIndex"],
+                ["milleBornesPlayerOrder", "milleBornesCurrentPlayerIndex"],
+                ["blokusPlayerOrder", "blokusCurrentPlayerIndex"],
+                ["checkersPlayerOrder", "checkersCurrentPlayerIndex"],
+                ["bigTwoPlayerOrder", "bigTwoCurrentPlayerIndex"],
+                ["petitsChevauxPlayerOrder", "petitsChevauxCurrentIndex"],
+                ["dominoesPlayerOrder", "dominoesCurrentPlayerIndex"],
+                ["zombiePlayerOrder", "zombieCurrentPlayerIndex"],
+                ["belotePlayerOrder", "beloteCurrentPlayerIndex"],
+                ["yamsPlayerOrder", null],
+              ];
 
-            orderIndexPairs.forEach(([orderKey, idxKey]) => {
-              if (Array.isArray(data[orderKey])) {
-                const filtered = data[orderKey].filter((id) => !removedPlayers.includes(id));
-                updates[orderKey] = filtered;
-                if (idxKey && filtered.length > 0 && typeof data[idxKey] === "number") {
-                  updates[idxKey] = data[idxKey] % filtered.length;
+              orderIndexPairs.forEach(([orderKey, idxKey]) => {
+                if (Array.isArray(data[orderKey])) {
+                  updates[orderKey] = data[orderKey].filter((id) => !removedPlayers.includes(id));
+                  const filtered = data[orderKey].filter((id) => !removedPlayers.includes(id));
+                  updates[orderKey] = filtered;
+                  if (idxKey && filtered.length > 0 && typeof data[idxKey] === "number") {
+                    updates[idxKey] = data[idxKey] % filtered.length;
+                  }
                 }
-              }
-            });
+              });
 
-            // Recalage des identifiants directs de joueur courant
-            ["currentPlayerId", "ramiCurrentPlayerId", "yamsCurrentPlayerId"].forEach((idKey) => {
-              if (data[idKey] && removedPlayers.includes(data[idKey])) {
-                const fallbackOrder = updates.yamsPlayerOrder || newOrder;
-                if (Array.isArray(fallbackOrder) && fallbackOrder.length > 0) {
-                  updates[idKey] = fallbackOrder[0];
+              // Recalage des identifiants directs de joueur courant
+              ["currentPlayerId", "ramiCurrentPlayerId", "yamsCurrentPlayerId"].forEach((idKey) => {
+                if (data[idKey] && removedPlayers.includes(data[idKey])) {
+                  const fallbackOrder = updates.yamsPlayerOrder || newOrder;
+                  if (Array.isArray(fallbackOrder) && fallbackOrder.length > 0) {
+                    updates[idKey] = fallbackOrder[0];
+                  }
                 }
-              }
-            });
+              });
 
-            // Victoire par forfait si un seul joueur reste en jeu
-            const survivingKeys = Object.keys(players).filter((id) => !removedPlayers.includes(id));
-            if (survivingKeys.length === 1 && data.gameState === "playing") {
-              const winnerId = survivingKeys[0];
-              const winnerName = players[winnerId]?.name || "Joueur";
-              updates.gameState = "gameOver";
-              updates.gameWinner = winnerId;
-              updates.gameEndReason = `Victoire de ${winnerName} par abandon des adversaires.`;
-              updates[`players.${winnerId}.score`] = admin.firestore.FieldValue.increment(1);
+              // Victoire par forfait si un seul joueur reste en jeu
+              const survivingKeys = Object.keys(players).filter((id) => !removedPlayers.includes(id));
+              if (survivingKeys.length === 1 && data.gameState === "playing") {
+                const winnerId = survivingKeys[0];
+                const winnerName = players[winnerId]?.name || "Joueur";
+                updates.gameState = "gameOver";
+                updates.gameWinner = winnerId;
+                updates.gameEndReason = `Victoire de ${winnerName} par abandon des adversaires.`;
+                updates[`players.${winnerId}.score`] = admin.firestore.FieldValue.increment(1);
+              }
             }
-          }
 
           if (Object.keys(updates).length > 0) {
-            await doc.ref.update(updates);
+              await doc.ref.update(updates);
+            }
+          } catch (innerError) {
+            console.error(`Erreur nettoyage doc ${doc.id}:`, innerError);
           }
-        } catch (innerError) {
-          console.error(`Erreur nettoyage doc ${doc.id}:`, innerError);
         }
-      }
     } catch (err) {
-      console.error("Erreur générale cleanupDisconnectedPlayers:", err);
+        console.error("Erreur générale cleanupDisconnectedPlayers:", err);
+      }
     }
-  }
 );
 
 exports.cleanupLoungePresence = onSchedule(
@@ -1598,6 +1609,7 @@ exports.cleanupLoungePresence = onSchedule(
     try {
       const lounges = await db
         .collection("lounges")
+        .where("status", "!=", "closed")
         .limit(100)
         .get();
 
@@ -1836,3 +1848,83 @@ exports.updateUserUsername = onCall(
   }
 );
 
+
+/**
+ * Vérifie si un pseudo est disponible via Cloud Functions
+ */
+exports.checkUsernameAvailable = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    const { username } = request.data || {};
+    if (typeof username !== "string") {
+      return { available: false, reason: "Pseudo invalide." };
+    }
+    const clean = username.trim();
+    const cleanLower = clean.toLowerCase();
+    if (cleanLower.length < 3) {
+      return { available: false, reason: "Le pseudo doit comporter au moins 3 caractères." };
+    }
+    if (cleanLower.length > 25) {
+      return { available: false, reason: "Le pseudo ne doit pas dépasser 25 caractères." };
+    }
+
+    const currentUid = request.auth ? request.auth.uid : null;
+    const snap = await db.collection("users")
+      .where("nameLower", "==", cleanLower)
+      .limit(2)
+      .get();
+
+    if (snap.empty) {
+      return { available: true };
+    }
+
+    if (snap.size === 1 && currentUid && snap.docs[0].id === currentUid) {
+      return { available: true };
+    }
+
+    return { available: false, reason: "Ce pseudo est déjà pris." };
+  }
+);
+
+/**
+ * Modifie le pseudo d'un utilisateur en vérifiant l'unicité
+ */
+exports.updateUserUsername = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    if (!request.auth) {
+      throw new HttpsError("unauthenticated", "Vous devez être connecté.");
+    }
+    const uid = request.auth.uid;
+    const { username } = request.data || {};
+    if (typeof username !== "string") {
+      throw new HttpsError("invalid-argument", "Pseudo invalide.");
+    }
+    const clean = username.trim();
+    const cleanLower = clean.toLowerCase();
+    if (cleanLower.length < 3) {
+      throw new HttpsError("invalid-argument", "Le pseudo doit comporter au moins 3 caractères.");
+    }
+    if (cleanLower.length > 25) {
+      throw new HttpsError("invalid-argument", "Le pseudo ne doit pas dépasser 25 caractères.");
+    }
+
+    const snap = await db.collection("users")
+      .where("nameLower", "==", cleanLower)
+      .limit(2)
+      .get();
+
+    const otherUser = snap.docs.find((d) => d.id !== uid);
+    if (otherUser) {
+      throw new HttpsError("already-exists", "Ce pseudo est déjà utilisé par un autre joueur.");
+    }
+
+    await db.collection("users").doc(uid).update({
+      name: clean,
+      nameLower: cleanLower,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    return { success: true, name: clean };
+  }
+);
