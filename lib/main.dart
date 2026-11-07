@@ -106,8 +106,6 @@ void main() async {
     await FirebaseAppCheck.instance.activate(
       androidProvider: AndroidProvider.debug,
       appleProvider: AppleProvider.debug,
-      providerAndroid: AndroidProvider.debug,
-      providerApple: AppleProvider.debug,
     );
   } catch (e) {
     print("[AppCheck] Activation note: $e");
@@ -1175,7 +1173,6 @@ class _MainScreenState extends State<MainScreen> {
                                 horizontal: 14,
                                 vertical: 6,
                               ),
-                              backgroundColor: Colors.white.withOpacity(0.05),
                               backgroundColor: Colors.white.withValues(
                                 alpha: 0.05,
                               ),
@@ -1560,11 +1557,9 @@ class _MainScreenState extends State<MainScreen> {
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.15),
                 color: Colors.amber.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: Colors.amberAccent.withOpacity(0.6),
                   color: Colors.amberAccent.withValues(alpha: 0.6),
                   width: 1,
                 ),
