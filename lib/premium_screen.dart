@@ -216,10 +216,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         const SizedBox(height: 18),
                         OutlinedButton.icon(
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(
-                              color: Colors.greenAccent,
-                              width: 1.2,
-                            ),
+                            side: const BorderSide(color: Colors.greenAccent, width: 1.2),
                             padding: const EdgeInsets.symmetric(
                               horizontal: 18,
                               vertical: 12,
@@ -227,9 +224,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14),
                             ),
-                            backgroundColor: Colors.black.withValues(
-                              alpha: 0.25,
-                            ),
+                            backgroundColor: Colors.black.withValues(alpha: 0.25),
                           ),
                           icon: const Icon(
                             Icons.settings_outlined,
@@ -245,10 +240,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             ),
                           ),
                           onPressed: () {
-                            final String subUrl =
-                                Platform.isIOS
-                                    ? 'https://apps.apple.com/account/subscriptions'
-                                    : 'https://play.google.com/store/account/subscriptions';
+                            final String subUrl = Platform.isIOS
+                                ? 'https://apps.apple.com/account/subscriptions'
+                                : 'https://play.google.com/store/account/subscriptions';
                             LegalLinks.openUrl(context, subUrl);
                           },
                         ),
@@ -343,12 +337,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                               ),
                               Text(
                                 playerState.isPremium
-                                    ? AppLocalizations.of(
-                                      context,
-                                    )!.illimiteesVip
-                                    : AppLocalizations.of(
-                                      context,
-                                    )!.pieces(playerState.coins),
+                                    ? AppLocalizations.of(context)!.illimiteesVip
+                                    : AppLocalizations.of(context)!.pieces(playerState.coins),
                                 style: const TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 16,
@@ -428,9 +418,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         {'price': '47,99 €', 'monthly': '3,99 €'},
                       ),
                       price: "47,99 €",
-                      onTap:
-                          () =>
-                              setState(() => _selectedFallbackIsAnnual = true),
+                      onTap: () => setState(() => _selectedFallbackIsAnnual = true),
                     ),
                     _buildPlaceholderCard(
                       isAnnual: false,
@@ -442,9 +430,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         {'price': '4,99 €'},
                       ),
                       price: "4,99 €",
-                      onTap:
-                          () =>
-                              setState(() => _selectedFallbackIsAnnual = false),
+                      onTap: () => setState(() => _selectedFallbackIsAnnual = false),
                     ),
                     const SizedBox(height: 8),
                     Center(
@@ -455,9 +441,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           size: 18,
                         ),
                         label: Text(
-                          AppLocalizations.of(
-                            context,
-                          )!.rechargerLesOffresDuStore,
+                          AppLocalizations.of(context)!.rechargerLesOffresDuStore,
                           style: const TextStyle(
                             color: Colors.amberAccent,
                             fontSize: 13,
@@ -484,56 +468,56 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       ),
                       elevation: 6,
                     ),
-                    onPressed:
-                        _isPurchasing
-                            ? null
-                            : () async {
-                              final messenger = ScaffoldMessenger.of(context);
-                              final successText = MatchmakingLocalization.tr(
-                                context,
-                                'congratsVip',
-                              );
-                              final failText = MatchmakingLocalization.tr(
-                                context,
-                                'paymentFailed',
-                              );
-                              setState(() => _isPurchasing = true);
+                    onPressed: _isPurchasing
+                        ? null
+                        : () async {
+                            final messenger = ScaffoldMessenger.of(context);
+                            final successText = MatchmakingLocalization.tr(
+                              context,
+                              'congratsVip',
+                            );
+                            final failText = MatchmakingLocalization.tr(
+                              context,
+                              'paymentFailed',
+                            );
+                            setState(() => _isPurchasing = true);
 
-                              // Si le package n'était pas encore chargé, tenter de le recharger maintenant
-                              if (_selectedPackage == null) {
-                                await _loadOfferings();
-                              }
+                            // Si le package n'était pas encore chargé, tenter de le recharger maintenant
+                            if (_selectedPackage == null) {
+                              await _loadOfferings();
+                            }
 
-                              if (_selectedPackage == null) {
-                                if (mounted)
-                                  setState(() => _isPurchasing = false);
-                                messenger.showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: Colors.red[800],
-                                    content: Text(failText),
-                                  ),
-                                );
-                                return;
-                              }
-
-                              final success = await playerState.purchasePackage(
-                                _selectedPackage!,
-                              );
-                              if (mounted) {
-                                setState(() => _isPurchasing = false);
-                              }
+                            if (_selectedPackage == null) {
+                              if (mounted) setState(() => _isPurchasing = false);
                               messenger.showSnackBar(
                                 SnackBar(
-                                  backgroundColor:
-                                      success
-                                          ? Colors.green[800]
-                                          : Colors.red[800],
+                                  backgroundColor: Colors.red[800],
                                   content: Text(
-                                    success ? successText : failText,
+                                    failText,
                                   ),
                                 ),
                               );
-                            },
+                              return;
+                            }
+
+                            final success = await playerState.purchasePackage(
+                              _selectedPackage!,
+                            );
+                            if (mounted) {
+                              setState(() => _isPurchasing = false);
+                            }
+                            messenger.showSnackBar(
+                              SnackBar(
+                                backgroundColor:
+                                    success
+                                        ? Colors.green[800]
+                                        : Colors.red[800],
+                                content: Text(
+                                  success ? successText : failText,
+                                ),
+                              ),
+                            );
+                          },
                     child:
                         _isPurchasing
                             ? const SizedBox(
@@ -615,12 +599,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                     SnackBar(
                                       content: Text(
                                         success
-                                            ? AppLocalizations.of(
-                                              context,
-                                            )!.purchasesRestored
-                                            : AppLocalizations.of(
-                                              context,
-                                            )!.noPurchasesFound,
+                                            ? AppLocalizations.of(context)!.purchasesRestored
+                                            : AppLocalizations.of(context)!.noPurchasesFound,
                                       ),
                                     ),
                                   );
@@ -664,10 +644,9 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          final String subUrl =
-                              Platform.isIOS
-                                  ? 'https://apps.apple.com/account/subscriptions'
-                                  : 'https://play.google.com/store/account/subscriptions';
+                          final String subUrl = Platform.isIOS
+                              ? 'https://apps.apple.com/account/subscriptions'
+                              : 'https://play.google.com/store/account/subscriptions';
                           LegalLinks.openUrl(context, subUrl);
                         },
                         child: Text(
@@ -748,11 +727,10 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap:
-          () => setState(() {
-            _selectedPackage = package;
-            _selectedFallbackIsAnnual = isAnnual;
-          }),
+      onTap: () => setState(() {
+        _selectedPackage = package;
+        _selectedFallbackIsAnnual = isAnnual;
+      }),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),

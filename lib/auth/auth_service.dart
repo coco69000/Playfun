@@ -6,6 +6,7 @@ import '../l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
 import '../game_data_words.dart';
 
+
 AppLocalizations get _l10n {
   try {
     return lookupAppLocalizations(Locale(GameWords.currentLanguage));
@@ -13,7 +14,6 @@ AppLocalizations get _l10n {
     return lookupAppLocalizations(const Locale('fr'));
   }
 }
-
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -26,9 +26,7 @@ class AuthService {
     if (clean.length < 3) return false;
 
     try {
-      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
-        'checkUsernameAvailable',
-      );
+      final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('checkUsernameAvailable');
       final res = await callable.call({'username': username.trim()});
       final data = res.data;
       if (data is Map && data['available'] != null) {
@@ -38,12 +36,11 @@ class AuthService {
       print("Erreur checkUsernameAvailable Cloud Function: $e");
     }
 
-    final snap =
-        await _firestore
-            .collection('users')
-            .where('nameLower', isEqualTo: clean)
-            .limit(1)
-            .get();
+    final snap = await _firestore
+        .collection('users')
+        .where('nameLower', isEqualTo: clean)
+        .limit(1)
+        .get();
 
     return snap.docs.isEmpty;
   }
@@ -77,10 +74,7 @@ class AuthService {
   }
 
   // Changer le mot de passe
-  Future<void> updatePassword(
-    String currentPassword,
-    String newPassword,
-  ) async {
+  Future<void> updatePassword(String currentPassword, String newPassword) async {
     final user = _auth.currentUser;
     if (user == null) {
       throw FirebaseAuthException(
@@ -121,11 +115,7 @@ class AuthService {
   }
 
   // S'inscrire avec email, mot de passe et pseudo unique
-  Future<User?> registerWithEmail(
-    String email,
-    String password,
-    String name,
-  ) async {
+  Future<User?> registerWithEmail(String email, String password, String name) async {
     try {
       final cleanName = name.trim();
       final cleanLower = cleanName.toLowerCase();
@@ -150,8 +140,7 @@ class AuthService {
           'uid': user.uid,
           'email': email.trim(),
           'name': cleanName.isEmpty ? _l10n.joueur : cleanName,
-          'nameLower':
-              cleanLower, // Indispensable pour la recherche insensible à la casse
+          'nameLower': cleanLower, // Indispensable pour la recherche insensible à la casse
           'coins': 10,
           'isPremium': false,
           'level': 1,
