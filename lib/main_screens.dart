@@ -26,13 +26,13 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'La Patate Chaude',
     'icon': Icons.whatshot,
-    'image': null,
+    'image': 'lapatatechaude.webp',
     'modes': ['local', 'multi', 'monde'],
   },
   {
     'name': 'Synonyme ou Banni',
     'icon': Icons.spellcheck,
-    'image': null,
+    'image': 'synonymeoubanni.webp',
     'modes': ['local', 'multi', 'monde'],
   },
   {
@@ -44,7 +44,7 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'Jeu de la Pièce',
     'icon': Icons.monetization_on,
-    'image': null,
+    'image': 'jeudelapiece.webp',
     'modes': ['local'],
   },
   {
@@ -68,13 +68,13 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'On se passe un objet rapidement',
     'icon': Icons.phone_android,
-    'image': null,
+    'image': 'onsepasseunobjectrapidement.webp',
     'modes': ['local'],
   },
   {
     'name': 'Devine Tête',
     'icon': Icons.headset_mic,
-    'image': null,
+    'image': 'devinetete.webp',
     'modes': ['local', 'multi', 'monde'],
   },
   {
@@ -104,7 +104,7 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'Dominoes',
     'icon': Icons.grid_3x3,
-    'image': null,
+    'image': 'dominos.webp',
     'modes': ['multi', 'monde'],
   },
   {
@@ -116,7 +116,7 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'Zéro Pointé',
     'icon': Icons.exposure_zero,
-    'image': null,
+    'image': 'zeropointe.webp',
     'modes': ['multi', 'monde'],
   },
   {
@@ -188,7 +188,7 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'Belote',
     'icon': Icons.style,
-    'image': null,
+    'image': 'belote.webp',
     'modes': ['multi', 'monde'],
   },
   {
@@ -206,7 +206,7 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'Zombie!',
     'icon': Icons.coronavirus,
-    'image': null,
+    'image': 'zombie.webp',
     'modes': ['multi', 'monde'],
   },
   {
@@ -236,7 +236,7 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'Le Menteur',
     'icon': Icons.masks,
-    'image': null,
+    'image': 'menteur.webp',
     'modes': ['multi'],
   },
   {
@@ -248,13 +248,13 @@ final List<Map<String, dynamic>> allAppGames = [
   {
     'name': 'Taboo',
     'icon': Icons.speaker_notes_off,
-    'image': null,
+    'image': 'taboo.webp',
     'modes': ['multi', 'monde'],
   },
   {
     'name': 'Blanc Manger Coco',
     'icon': Icons.style,
-    'image': null,
+    'image': 'blancmangercoco.webp',
     'modes': ['multi', 'monde'],
   },
 ];

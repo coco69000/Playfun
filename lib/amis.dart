@@ -2384,7 +2384,7 @@ class FirebaseService {
     }
   }
 
-  /// Calcul du bonus de rapidité (+1 à +10 XP) basé sur le temps serveur et la durée réelle
+  /// Calcul du bonus de rapidité et de sang-froid basé sur le temps serveur et la durée réelle
   static int calculateSpeedBonus(
     Timestamp? turnStartTime, {
     required int effectiveTimerSeconds,
@@ -2406,16 +2406,15 @@ class FirebaseService {
     final double percentElapsed =
         (elapsedSeconds / effectiveTimerSeconds) * 100.0;
 
-    if (percentElapsed <= 10.0)
-      return 10; // 0% - 10%  -> +10 XP (Réflexe Éclair)
-    if (percentElapsed <= 20.0) return 9; // 11% - 20% -> +9 XP (Ultra-Rapide)
-    if (percentElapsed <= 30.0) return 8; // 21% - 30% -> +8 XP (Très Rapide)
-    if (percentElapsed <= 40.0) return 7; // 31% - 40% -> +7 XP (Vif)
-    if (percentElapsed <= 50.0) return 6; // 41% - 50% -> +6 XP (Bon tempo)
-    if (percentElapsed <= 60.0) return 5; // 51% - 60% -> +5 XP (Calculé)
-    if (percentElapsed <= 70.0) return 4; // 61% - 70% -> +4 XP (Stratégique)
-    if (percentElapsed <= 80.0) return 3; // 71% - 80% -> +3 XP (Réfléchi)
-    if (percentElapsed <= 90.0) return 2; // 81% - 90% -> +2 XP (In Extremis)
+    if (percentElapsed <= 10.0) return 10; // 0% - 10%  -> +10 XP (Réflexe Éclair)
+    if (percentElapsed <= 20.0) return 9;  // 11% - 20% -> +9 XP (Ultra-Rapide)
+    if (percentElapsed <= 30.0) return 8;  // 21% - 30% -> +8 XP (Très Rapide)
+    if (percentElapsed <= 40.0) return 7;  // 31% - 40% -> +7 XP (Vif)
+    if (percentElapsed <= 50.0) return 6;  // 41% - 50% -> +6 XP (Bon tempo)
+    if (percentElapsed <= 60.0) return 5;  // 51% - 60% -> +5 XP (Calculé)
+    if (percentElapsed <= 70.0) return 4;  // 61% - 70% -> +4 XP (Stratégique)
+    if (percentElapsed <= 80.0) return 3;  // 71% - 80% -> +3 XP (Réfléchi)
+    if (percentElapsed <= 90.0) return 2;  // 81% - 90% -> +2 XP (In Extremis)
     return 1; // 91% - 100% -> +1 XP (Sur le fil)
   }
 
@@ -2442,7 +2441,7 @@ class FirebaseService {
     return elapsed >= (duration - 2); // Tolérance de 2s
   }
 
-  /// Crédite l'XP au joueur en appliquant dynamiquement le bonus selon le jeu et ses réglages
+  /// Crédite l'XP au joueur en diversifiant les gains (vitesse, sang-froid, combo, difficulté, type de jeu, VIP)
   void creditPlayerXp(
     Transaction transaction,
     DocumentReference gameRef,
@@ -2450,6 +2449,7 @@ class FirebaseService {
     String playerId,
     int baseAmount, {
     bool applySpeedBonus = true,
+    String? actionType, // 'precision', 'combo', 'bluff', 'defense', 'clutch', 'creativity'
   }) {
     if (baseAmount <= 0) return;
 
@@ -2468,11 +2468,83 @@ class FirebaseService {
     final int effectiveTimer = getEffectiveTurnTimer(gameData);
 
     int totalXp = baseAmount;
+
+    // 1. Bonus Vitesse & Sang-froid (Temps de réponse)
     if (applySpeedBonus && turnStartTime != null && effectiveTimer > 0) {
       totalXp += calculateSpeedBonus(
         turnStartTime,
         effectiveTimerSeconds: effectiveTimer,
       );
+    }
+
+    // 2. Bonus de Combo d'Actions (Enchaînement d'actions réussies)
+    final Map<String, dynamic> streaks = Map<String, dynamic>.from(
+      gameData['playerActionStreaks'] ?? {},
+    );
+    final int currentStreak = (streaks[playerId] as num?)?.toInt() ?? 0;
+    if (currentStreak >= 4) {
+      totalXp += 12; // Combo Enflammé x5+ 🔥
+    } else if (currentStreak >= 2) {
+      totalXp += 7; // Super Série x3 ⚡
+    } else if (currentStreak >= 1) {
+      totalXp += 3; // Enchaînement x2 ✨
+    }
+    transaction.update(gameRef, {
+      'playerActionStreaks.$playerId': FieldValue.increment(1),
+    });
+
+    // 3. Bonus selon la Difficulté de la Partie
+    final String difficulty = (gameData['difficulty'] as String?)?.toLowerCase() ?? '';
+    if (difficulty == 'hardcore' || difficulty == 'expert') {
+      totalXp += 6; // Mode Extrême
+    } else if (difficulty == 'medium' || difficulty == 'difficile') {
+      totalXp += 3; // Défi Supérieur
+    }
+
+    // 4. Bonus Thématique selon la Catégorie du Jeu
+    final String gameType = (gameData['gameType'] as String?) ?? '';
+    if (gameType == 'Uno' || gameType == 'Poker' || gameType == 'Belote' || gameType == 'Président' || gameType == 'Rami' || gameType == 'Big Two' || gameType == 'Skull' || gameType == 'Zéro Pointé' || gameType == 'Mille Bornes') {
+      totalXp += 5; // Coup Tactique de Cartes
+    } else if (gameType == 'Blokus' || gameType == 'Yams' || gameType == 'Dominoes' || gameType == 'Bataille Navale' || gameType == 'Jeu de Dames' || gameType == 'Petits Chevaux') {
+      totalXp += 6; // Manœuvre Stratégique de Plateau
+    } else if (gameType == 'Petit Bac' || gameType == 'Taboo' || gameType == "Time's Up" || gameType == 'Synonyme ou Banni' || gameType == 'Codenames' || gameType == 'Devine Tête') {
+      totalXp += 6; // Intuition & Maîtrise du Vocabulaire
+    } else if (gameType == 'Loup-Garou' || gameType == 'Infiltré & Mr. White') {
+      totalXp += 8; // Déduction & Flair Psychologique
+    } else if (gameType == 'Dobble' || gameType == 'La Patate Chaude') {
+      totalXp += 6; // Réflexe d'Adrénaline
+    } else if (gameType == 'Pictionary' || gameType == 'Gribouillis' || gameType == 'Cadavre Exquis' || gameType == 'Le Roi des Mèmes') {
+      totalXp += 5; // Créativité & Spontanéité
+    }
+
+    // 5. Bonus selon le Style Spécifique de l'Action
+    if (actionType != null) {
+      switch (actionType) {
+        case 'precision':
+          totalXp += 6; // Action d'une précision chirurgicale
+          break;
+        case 'combo':
+          totalXp += 8; // Combinaison multiple
+          break;
+        case 'bluff':
+          totalXp += 8; // Coup de bluff audacieux
+          break;
+        case 'defense':
+          totalXp += 7; // Parade / Contre défensif
+          break;
+        case 'clutch':
+          totalXp += 10; // Action décisive in extremis
+          break;
+        case 'creativity':
+          totalXp += 6; // Coup créatif ou inspiré
+          break;
+      }
+    }
+
+    // 6. Bonus Abonné VIP (+50% d'XP sur chaque action en jeu)
+    final bool isVip = players[playerId]?['isPremium'] == true || gameData['isPremiumLobby'] == true;
+    if (isVip) {
+      totalXp = (totalXp * 1.5).round();
     }
 
     // 1. Mise à jour de la session de jeu
@@ -57371,7 +57443,9 @@ class _TruthOrDareLocalGameScreenState
       }
     }
 
-    int xpGain = (type == 'truth') ? 10 : (_difficulty == 'hardcore' ? 35 : 20);
+    int xpGain = (type == 'truth')
+        ? (_difficulty == 'hardcore' ? 25 : 15)
+        : (_difficulty == 'hardcore' ? 45 : 28);
     Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
 
     if (_currentPlayerIndex != -1 &&
@@ -58083,7 +58157,8 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
     int countB = _dilemmaVotes.values.where((v) => v == 'B').length;
 
     bool isUltraMinority = (countA == 1 || countB == 1);
-    int xpGain = isUltraMinority ? 25 : 12;
+    bool isConsensus = (countA == 0 || countB == 0);
+    int xpGain = isUltraMinority ? 30 : (isConsensus ? 22 : 16);
 
     Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
   }
@@ -58930,7 +59005,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
     String result = random.nextBool() ? AppLocalizations.of(context)!.pile : AppLocalizations.of(context)!.face;
     bool won = (_coinFlipChoice == result);
 
-    int xpGain = won ? 10 : 15;
+    int xpGain = won ? 22 : 14;
     Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
 
     if (_currentPlayerIndex >= 0 &&
@@ -63339,8 +63414,8 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
     int nextIdx = eligibleIndices[_random.nextInt(eligibleIndices.length)];
     String nextPlayer = widget.players[nextIdx];
 
-    // --- ATTRIBUTION XP LOCAL : +5 XP pour un passage réussi ---
-    Provider.of<PlayerState>(context, listen: false).addXp(5);
+    // --- ATTRIBUTION XP LOCAL : +12 XP pour un passage réussi ---
+    Provider.of<PlayerState>(context, listen: false).addXp(12);
 
     setState(() {
       _nextPlayerToPass = nextPlayer;
@@ -63374,8 +63449,8 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
       cleanQ = FirebaseService.sanitizeUserInput(rawQ, maxLength: 150);
     }
 
-    // --- ATTRIBUTION XP LOCAL : +20 XP pour répondre à la question sous pression ---
-    Provider.of<PlayerState>(context, listen: false).addXp(20);
+    // --- ATTRIBUTION XP LOCAL : +35 XP pour répondre à la question sous pression ---
+    Provider.of<PlayerState>(context, listen: false).addXp(35);
 
     setState(() {
       _currentQuestion = cleanQ;
@@ -63935,7 +64010,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
     _roundHistory.add({'word': _currentWord!, 'guessed': guessed});
 
     if (guessed) {
-      Provider.of<PlayerState>(context, listen: false).addXp(15);
+      Provider.of<PlayerState>(context, listen: false).addXp(22);
     }
 
     setState(() {
@@ -63981,9 +64056,9 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
       ).recordBadgeEvent('devine_tete_10');
     }
 
-    // --- BONUS XP LOCAL : +40 XP si ≥ 8 mots trouvés dans la manche ---
+    // --- BONUS XP LOCAL : +50 XP si ≥ 8 mots trouvés dans la manche ---
     if (pointsEarned >= 8) {
-      Provider.of<PlayerState>(context, listen: false).addXp(40);
+      Provider.of<PlayerState>(context, listen: false).addXp(50);
     }
 
     if (_useTeams) {
@@ -67907,11 +67982,11 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                             ),
                           ),
                           const SizedBox(width: 16),
-                          const Expanded(
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Création d'espace",
                                   style: TextStyle(
                                     fontSize: 18,
@@ -67919,10 +67994,10 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text(
                                   AppLocalizations.of(context)!.launchLoungeSubtitle,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                     color: Colors.white70,
                                   ),
@@ -68261,8 +68336,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
             ),
             backgroundColor: const Color(0xFF1E1E2F),
             title: Row(
-              children: const [
-                Icon(Icons.vpn_key_rounded, color: Colors.amberAccent),
+              children: [
+                const Icon(Icons.vpn_key_rounded, color: Colors.amberAccent),
                 const SizedBox(width: 8),
                 Text(AppLocalizations.of(context)!.privateLoungeCreatedTitle),
               ],
