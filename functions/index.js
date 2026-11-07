@@ -144,8 +144,11 @@ exports.generateLivekitToken = onCall(
       if (loungeSnap.exists) {
         const lData = loungeSnap.data() || {};
         if (lData.players && lData.players[uid]) {
+        const playerId = getPlayerIdFromUid(lData.players || {}, uid);
+        if (playerId && lData.players[playerId]) {
           isAllowed = true;
           playerName = lData.players[uid].name || "Membre";
+          playerName = lData.players[playerId].name || "Membre";
         }
       }
     }
@@ -730,9 +733,31 @@ exports.generateAiWords = onCall(
     }
     aiRateLimiter.set(uid, now);
 
+    // Protection anti-surfacturation : vérification du quota journalier par utilisateur
+    const userDocRef = db.collection("users").doc(uid);
+    const userSnap = await userDocRef.get();
+    const userData = userSnap.data() || {};
+    const isPremium = userData.isPremium === true;
+    const todayDateStr = new Intl.DateTimeFormat("fr-CA", { timeZone: "Europe/Paris" }).format(new Date());
+    const lastAiDate = userData.lastAiGenerationDate || "";
+    const countToday = (lastAiDate === todayDateStr) ? (userData.aiGenerationsToday || 0) : 0;
+    const maxDailyGenerations = isPremium ? 100 : 30;
+
+    if (countToday >= maxDailyGenerations) {
+      throw new HttpsError("resource-exhausted", "Limite quotidienne de générations IA atteinte (" + maxDailyGenerations + "/jour). Réessayez demain !");
+    }
+
+    // Incrémenter le compteur de génération
+    await userDocRef.set({
+      lastAiGenerationDate: todayDateStr,
+      aiGenerationsToday: (lastAiDate === todayDateStr) ? admin.firestore.FieldValue.increment(1) : 1,
+    }, { merge: true });
+
     let { instructions = "", count = 20, gameType = "" } = request.data || {};
     // Plafond relevé à 100 pour supporter de grands packs personnalisés et mix multi-thèmes
     let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 100));
+    // Plafond calibré pour limiter les tokens et éviter toute surfacturation
+    let parsedCount = Math.max(5, Math.min(parseInt(count, 10) || 20, 50));
 
     const safeInstructions = String(instructions)
       .slice(0, 350)
@@ -819,8 +844,10 @@ exports.generateAiWords = onCall(
     }
 
     try {
+      const calculatedMaxTokens = Math.min(900, Math.max(250, parsedCount * 22 + 80));
       const response = await fetch("https://api.siliconflow.com/v1/chat/completions", {
         method: "POST",
+        signal: AbortSignal.timeout(12000), // Timeout 12s pour éviter les requêtes bloquées
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${apiKey}`,
@@ -832,6 +859,7 @@ exports.generateAiWords = onCall(
             { role: "user", content: userPrompt },
           ],
           max_tokens: 2500,
+          max_tokens: calculatedMaxTokens,
           temperature: 0.7,
         }),
       });

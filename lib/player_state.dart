@@ -303,13 +303,13 @@ class PlayerState extends ChangeNotifier {
     // 4. Récupération initiale Firestore (attendue avant de rendre l'UI)
     final initialDoc = await _db.collection('users').doc(userId).get();
     if (!initialDoc.exists) {
-      _coins = 50;
+      _coins = 10;
       _isPremium = isVipOnStore;
       _level = 1;
       _xp = 0;
       _hasCompletedOnboarding = false;
       await _db.collection('users').doc(userId).set({
-        'coins': 50,
+        'coins': 10,
         'isPremium': isVipOnStore,
         'level': 1,
         'xp': 0,
@@ -327,7 +327,7 @@ class PlayerState extends ChangeNotifier {
       var data = initialDoc.data() as Map<String, dynamic>;
       _userName = data['name'] ?? _l10n.joueur;
       _photoUrl = data['photoUrl'] as String?;
-      _coins = data['coins'] ?? 50;
+      _coins = data['coins'] ?? 10;
       final firestoreIsPremium = data['isPremium'] == true;
       _isPremium = isVipOnStore || firestoreIsPremium;
       if (isVipOnStore && !firestoreIsPremium) {
@@ -373,7 +373,7 @@ class PlayerState extends ChangeNotifier {
       var data = userDoc.data() as Map<String, dynamic>;
       _userName = data['name'] ?? _l10n.joueur;
       _photoUrl = data['photoUrl'] as String?;
-      _coins = data['coins'] ?? 50;
+      _coins = data['coins'] ?? 10;
       final firestoreIsPremium = data['isPremium'] == true;
       _isPremium = firestoreIsPremium || isVipOnStore;
       _level = data['level'] ?? 1;

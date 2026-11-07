@@ -2405,7 +2405,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get vousAvezBesoinDe5 =>
-      'Vous avez besoin de 5 pièces pour créer un salon.';
+      'Vous avez besoin de 2 pièces pour créer un salon.';
 
   @override
   String get nomDuSalon => 'Nom du salon';
@@ -2421,7 +2421,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'N\'apparaîtra pas dans la liste publique.';
 
   @override
-  String get creerLeSalonCout5 => 'Créer le Salon (Coût: 5 pièces)';
+  String get creerLeSalonCout5 => 'Créer le Salon (Coût: 2 pièces)';
 
   @override
   String get lancerUnJeuPourLe => 'Lancer un jeu pour le salon';

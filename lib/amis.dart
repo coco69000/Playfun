@@ -17351,7 +17351,27 @@ class FirebaseService {
 
     String gameType = gameData['gameType'];
     String difficulty = gameData['difficulty'];
-    Map<String, dynamic> players = gameData['players'];
+    Map<String, dynamic> players = Map<String, dynamic>.from(gameData['players'] ?? {});
+
+    // Initialisation et normalisation complètes de tous les joueurs au lancement
+    final now = FieldValue.serverTimestamp();
+    Map<String, dynamic> playersUpdates = {};
+    players.forEach((pId, pData) {
+      if (pData is Map) {
+        playersUpdates['players.$pId.isOnline'] = true;
+        playersUpdates['players.$pId.isReady'] = true;
+        playersUpdates['players.$pId.lastHeartbeat'] = now;
+        if (!pData.containsKey('score') || pData['score'] == null) {
+          playersUpdates['players.$pId.score'] = 0;
+        }
+        if (!pData.containsKey('xp') || pData['xp'] == null) {
+          playersUpdates['players.$pId.xp'] = 0;
+        }
+      }
+    });
+    if (playersUpdates.isNotEmpty) {
+      await gameRef.update(playersUpdates).catchError((_) {});
+    }
 
     if (gameType == 'Action ou Vérité') {
       await _startActionOuVeriteRound(gameRef, gameData);
@@ -25834,7 +25854,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       return;
     }
 
-    int cost = _gameCosts[_selectedGame] ?? 1;
+    // Coût pour créer une partie avec des amis : 2 pièces (gratuit si VIP)
+    int cost = 2;
 
     bool success = await playerState.spendCoins(cost);
     if (!success) {
@@ -29451,6 +29472,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
   final FirebaseService _firebaseService = FirebaseService();
   late LivekitService _livekitService;
   bool _livekitInitialized = false;
+  bool _isTransitioningToGame = false;
   Timer? _heartbeatTimer;
   DatabaseReference? _presenceRef;
   StreamSubscription? _connectedSub;
@@ -29525,15 +29547,17 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
     WidgetsBinding.instance.removeObserver(this);
     _heartbeatTimer?.cancel();
     _connectedSub?.cancel();
-    _presenceRef?.set({
-      'isOnline': false,
-      'lastSeen': ServerValue.timestamp,
-    });
-    _firebaseService.setPlayerOnlineStatusInGame(
-      widget.gameCode,
-      widget.playerId,
-      false,
-    );
+    if (!_isTransitioningToGame) {
+      _presenceRef?.set({
+        'isOnline': false,
+        'lastSeen': ServerValue.timestamp,
+      });
+      _firebaseService.setPlayerOnlineStatusInGame(
+        widget.gameCode,
+        widget.playerId,
+        false,
+      );
+    }
     super.dispose();
   }
 
@@ -29608,6 +29632,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
           String gameType = gameData['gameType'] ?? '';
 
           if (gameData['gameState'] == 'playing') {
+            _isTransitioningToGame = true;
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (mounted) {
                 Navigator.pushReplacement(
@@ -67133,6 +67158,41 @@ class _LoungeListScreenState extends State<LoungeListScreen>
 
       if (targetLoungeId != null && mounted) {
         final ps = Provider.of<PlayerState>(context, listen: false);
+
+        // Vérifier si l'hôte est VIP ou si le salon est gratuit
+        final loungeSnap = querySnap.docs.isNotEmpty
+            ? querySnap.docs.first
+            : await FirebaseFirestore.instance.collection('lounges').doc(targetLoungeId).get();
+        final lData = loungeSnap.data() as Map<String, dynamic>? ?? {};
+        final bool isHostVip = lData['isHostVip'] == true || lData['isPremiumLobby'] == true;
+        final bool isAlreadyMember = (lData['players'] as Map?)?.containsKey(widget.playerId) == true;
+
+        if (!ps.isPremium && !isAlreadyMember) {
+          if (!isHostVip) {
+            bool success = await ps.spendCoins(1); // 1 pièce pour rejoindre un salon
+            if (!success) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    AppLocalizations.of(context)!.pasAssezDePiecesPour2,
+                  ),
+                  backgroundColor: Colors.redAccent,
+                ),
+              );
+              return;
+            }
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  AppLocalizations.of(context)!.vousRejoignezUnePartieVip,
+                ),
+                backgroundColor: Colors.amber[800],
+              ),
+            );
+          }
+        }
+
         await FirebaseService().joinLounge(
           targetLoungeId,
           widget.playerId,
@@ -67803,6 +67863,40 @@ backgroundColor: Colors.redAccent,
                           ? null
                           : () async {
                               final ps = Provider.of<PlayerState>(context, listen: false);
+                              final lData = doc.data() as Map<String, dynamic>? ?? {};
+                              final bool isHostVip = lData['isHostVip'] == true || lData['isPremiumLobby'] == true;
+                              final bool isAlreadyMember = (lData['players'] as Map?)?.containsKey(widget.playerId) == true;
+
+                              if (!amIHost && !isAlreadyMember && !ps.isPremium) {
+                                if (!isHostVip) {
+                                  bool success = await ps.spendCoins(1); // 1 pièce pour rejoindre un salon
+                                  if (!success) {
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            AppLocalizations.of(context)!.pasAssezDePiecesPour2,
+                                          ),
+                                          backgroundColor: Colors.redAccent,
+                                        ),
+                                      );
+                                    }
+                                    return;
+                                  }
+                                } else {
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          AppLocalizations.of(context)!.vousRejoignezUnePartieVip,
+                                        ),
+                                        backgroundColor: Colors.amber[800],
+                                      ),
+                                    );
+                                  }
+                                }
+                              }
+
                               await FirebaseService().joinLounge(
                                 doc.id,
                                 widget.playerId,
@@ -67874,7 +67968,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
 
     final ps = Provider.of<PlayerState>(context, listen: false);
     if (!ps.isPremium) {
-      bool success = await ps.spendCoins(5); // Le salon coûte 5 pièces
+      bool success = await ps.spendCoins(2); // Le salon coûte 2 pièces (gratuit pour les VIP)
       if (!success) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -67904,6 +67998,8 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
       'status': 'active',
       'isPermanent': true,
       'hostId': widget.playerId,
+      'isHostVip': ps.isPremium,
+      'isPremiumLobby': ps.isPremium,
       'players': {
         widget.playerId: {
           'name': ps.userName ?? AppLocalizations.of(context)!.hote,

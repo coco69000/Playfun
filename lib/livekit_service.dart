@@ -376,6 +376,10 @@ class LivekitService extends ChangeNotifier {
       // Activation Caméra
       if (videoEnabled) {
         try {
+          final camStatus = await Permission.camera.status;
+          if (!camStatus.isGranted) {
+            await Permission.camera.request();
+          }
           await _room!.localParticipant?.setCameraEnabled(true);
           _isLocalVideoOff = false;
         } catch (e) {
@@ -392,6 +396,10 @@ class LivekitService extends ChangeNotifier {
       // Activation Micro
       if (audioEnabled) {
         try {
+          final micStatus = await Permission.microphone.status;
+          if (!micStatus.isGranted) {
+            await Permission.microphone.request();
+          }
           await _room!.localParticipant?.setMicrophoneEnabled(true);
           _isLocalMuted = false;
         } catch (e) {
