@@ -350,7 +350,6 @@ class PlayerState extends ChangeNotifier {
         data['loungeInvites'] ?? [],
       );
       _blockedUsers = List<String>.from(data['blockedUsers'] ?? []);
-      _blockedUsers = List<String>.from(data['blockedUsers'] ?? []);
 
       _loadDailyLimits(data);
       await _fetchFriendNames();
@@ -392,7 +391,6 @@ class PlayerState extends ChangeNotifier {
         data['loungeInvites'] ?? [],
       );
       _blockedUsers = List<String>.from(data['blockedUsers'] ?? []);
-      _blockedUsers = List<String>.from(data['blockedUsers'] ?? []);
 
       _loadDailyLimits(data);
       await _checkAndNormalizeLevel(persist: true);
@@ -427,6 +425,11 @@ class PlayerState extends ChangeNotifier {
         _db.collection('users').doc(uid).set({
           'fcmToken': newToken,
         }, SetOptions(merge: true));
+      });
+
+      // Écoute des notifications push reçues lorsque l'application est au premier plan
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        debugPrint("Push message reçu au premier plan : ${message.notification?.title} / ${message.data}");
       });
 
       // Gestion des interactions lors du clic sur une notification push
@@ -737,13 +740,23 @@ class PlayerState extends ChangeNotifier {
     }
   }
 
-  Future<void> clearGameInvite(String gameCode, String hostName) async {
+  Future<void> clearGameInvite(String gameCode, [String? hostName]) async {
     if (_userId == null) return;
-    await _db.collection('users').doc(_userId).update({
-      'gameInvites': FieldValue.arrayRemove([
-        {'gameCode': gameCode, 'hostName': hostName},
-      ]),
-    });
+    _gameInvites.removeWhere((i) => i['gameCode'] == gameCode);
+    notifyListeners();
+    try {
+      final docRef = _db.collection('users').doc(_userId!);
+      final snap = await docRef.get();
+      if (snap.exists) {
+        final rawList = snap.data()?['gameInvites'];
+        if (rawList is List) {
+          final updated = rawList.where((i) => i is Map && i['gameCode'] != gameCode).toList();
+          await docRef.update({'gameInvites': updated});
+        }
+      }
+    } catch (e) {
+      debugPrint("Erreur clearGameInvite: $e");
+    }
   }
 
   // --- LOGIQUE DES INVITATIONS AU SALON ---
@@ -763,13 +776,23 @@ class PlayerState extends ChangeNotifier {
     }
   }
 
-  Future<void> clearLoungeInvite(String loungeId, String hostName) async {
+  Future<void> clearLoungeInvite(String loungeId, [String? hostName]) async {
     if (_userId == null) return;
-    await _db.collection('users').doc(_userId).update({
-      'loungeInvites': FieldValue.arrayRemove([
-        {'loungeId': loungeId, 'hostName': hostName},
-      ]),
-    });
+    _loungeInvites.removeWhere((i) => i['loungeId'] == loungeId);
+    notifyListeners();
+    try {
+      final docRef = _db.collection('users').doc(_userId!);
+      final snap = await docRef.get();
+      if (snap.exists) {
+        final rawList = snap.data()?['loungeInvites'];
+        if (rawList is List) {
+          final updated = rawList.where((i) => i is Map && i['loungeId'] != loungeId).toList();
+          await docRef.update({'loungeInvites': updated});
+        }
+      }
+    } catch (e) {
+      debugPrint("Erreur clearLoungeInvite: $e");
+    }
   }
 
   // ----------------------------------------
@@ -857,20 +880,9 @@ class PlayerState extends ChangeNotifier {
       recordBadgeEvent('uno_win_10', count: 1, targetProgress: 10);
     } else if (gameName == 'Dobble') {
       recordBadgeEvent('dobble_win_10', count: 1, targetProgress: 10);
-      recordBadgeEvent('dobble_streak_5', count: 1, targetProgress: 5);
     } else if (gameName == 'Le Roi des Mèmes' || gameName == 'Le Roi des Mêmes') {
       recordBadgeEvent('meme_king_1');
       recordBadgeEvent('meme_king_5', count: 1, targetProgress: 5);
-    } else if (gameName == 'Bataille Navale') {
-      recordBadgeEvent('naval_clean_sheet');
-      recordBadgeEvent('naval_sniper');
-    } else if (gameName == 'Zéro Pointé') {
-      recordBadgeEvent('skyjo_negative');
-      recordBadgeEvent('skyjo_col_cancel');
-    } else if (gameName == "Time's Up") {
-      recordBadgeEvent('taboo_express_3');
-      recordBadgeEvent('taboo_speed_10', count: 1, targetProgress: 10);
-      recordBadgeEvent('taboo_flawless');
     }
   }
 
@@ -945,10 +957,13 @@ class PlayerState extends ChangeNotifier {
     }
   }
 
-  // 1. Crédit direct d'XP pour les modes locaux et actions instantanées
-  Future<void> addXp(int amount) async {
-    if (_userId == null || amount <= 0) return;
-    _xp += amount;
+  // 1. Crédit direct d'XP pour les modes locaux et actions instantanées (avec boost VIP +50%)
+  Future<int> addXp(int amount) async {
+    if (_userId == null || amount <= 0) return 0;
+    
+    // Avantage VIP : Boost de +50% d'XP sur tous les gains
+    final int effectiveAmount = _isPremium ? (amount * 1.5).round() : amount;
+    _xp += effectiveAmount;
 
     bool hasLeveledUp = false;
     // Vérification du passage de niveau
@@ -971,20 +986,22 @@ class PlayerState extends ChangeNotifier {
       // 🏆 DÉBLOCAGE BADGES DE NIVEAUX
       await _checkLevelBadges();
     }
+    return effectiveAmount;
   }
 
   // 2. Gestion de fin de partie Classée (Ranked) avec multiplicateurs et Win Streaks
-  Future<void> handleRankedGameEnd({
+  Future<int> handleRankedGameEnd({
     required bool isWin,
     required int maxOpponentLevel,
+    int? baseGameXp,
   }) async {
-    if (_userId == null) return;
+    if (_userId == null) return 0;
 
     final userDoc = await _db.collection('users').doc(_userId!).get();
     final data = userDoc.data() ?? {};
     int currentStreak = isWin ? ((data['winStreak'] as num?)?.toInt() ?? 0) + 1 : 0;
 
-    int baseXp = isWin ? 50 : 15;
+    int baseXp = baseGameXp ?? (isWin ? 50 : 15);
 
     // Multiplicateur x1.5 pour le mode Classé
     int rankedXp = (baseXp * 1.5).round();
@@ -1013,7 +1030,7 @@ class PlayerState extends ChangeNotifier {
       'winStreak': currentStreak,
     }, SetOptions(merge: true));
 
-    await addXp(rankedXp);
+    return await addXp(rankedXp);
   }
 
   /// Crédit d'XP pour les modes de jeux locaux / hors-ligne

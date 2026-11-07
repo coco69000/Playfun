@@ -1213,7 +1213,15 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n?.appTitle ?? 'PlayFun'),
+        centerTitle: false,
+        titleSpacing: 16.0,
+        title: Text(
+          l10n?.appTitle ?? 'PlayFun',
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           GestureDetector(
             onTap:

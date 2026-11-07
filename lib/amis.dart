@@ -33,6 +33,7 @@ import 'services/force_update_service.dart';
 
 import 'game_video_overlay.dart';
 import 'widgets/xp_gain_overlay.dart';
+import 'game_xp_helper.dart';
 
 AppLocalizations get _l10n {
   try {
@@ -32539,11 +32540,21 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
                 final bool isWin = (winnerId == myId);
                 final String currentGame = gameData['gameType'] ?? AppLocalizations.of(context)!.inconnu;
 
+                // Calcul personnalisé de l'XP en fonction des actions spécifiques au jeu
+                final xpCalc = GameXpHelper.calculateXp(
+                  gameName: currentGame,
+                  isWin: isWin,
+                  playerId: myId,
+                  gameData: gameData,
+                  isPremium: ps.isPremium,
+                );
+                final int xpEarned = xpCalc.totalXp;
+
                 // Enregistrement des stats par jeu
                 await ps.recordGameResult(
                   gameName: currentGame,
                   isWin: isWin,
-                  xpEarned: isWin ? 50 : 15,
+                  xpEarned: xpEarned,
                 );
 
                 // Calcul du niveau adverse maximum
@@ -32556,15 +32567,20 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
                 });
 
                 // Attribution avec multiplicateurs Ranked, Giant Slayer et Win Streaks
+                int finalAwardedXp = xpEarned;
                 if (isRanked) {
-                  await ps.handleRankedGameEnd(
+                  finalAwardedXp = await ps.handleRankedGameEnd(
                     isWin: isWin,
                     maxOpponentLevel: maxOpponentLvl,
+                    baseGameXp: xpEarned,
                   );
                 } else {
-                  await ps.addXp(isWin ? 50 : 15);
+                  finalAwardedXp = await ps.addXp(xpEarned);
                   await ps.claimGameReward(widget.gameCode);
                 }
+
+                // Déclenchement de l'animation visuelle de gain d'XP
+                _triggerXpAnimation(finalAwardedXp);
 
                 // NOUVEAU : Envoyer les résultats au salon si rattaché (fiabilisé : premier client qui détecte la fin)
                 if (gameData['loungeId'] != null &&

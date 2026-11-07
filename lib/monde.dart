@@ -726,6 +726,7 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
             return !(roomPlayers.length == 1 && roomPlayers.contains(playerId));
           }).toList();
 
+      bool joinedExistingRoom = false;
       if (validDocs.isNotEmpty) {
         // Salle trouvée avec d'autres joueurs -> Rejoindre
         final roomDoc = validDocs.first;
@@ -740,23 +741,29 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
               roomData['status'] != 'waiting') {
             return;
           }
+          final List players = List.from(roomData['players'] ?? []);
+          if (players.length >= widget.playerCount && !players.contains(playerId)) {
+            return;
+          }
           transaction.update(roomRef, {
             'players': FieldValue.arrayUnion([playerId]),
             'playerNames.$playerId': widget.playerName,
           });
-          final List players = List.from(roomData['players'] ?? []);
           // Si on est le dernier joueur nécessaire, on marque comme full
-          if (players.length + 1 == widget.playerCount) {
+          if (players.length + (players.contains(playerId) ? 0 : 1) >= widget.playerCount) {
             transaction.update(roomRef, {'status': 'full'});
           }
+          joinedExistingRoom = true;
         });
 
-        if (!_isDisposed) {
+        if (joinedExistingRoom && !_isDisposed) {
           setState(() => _matchmakingRoomId = roomDoc.id);
           _listenToMatchmakingRoom();
         }
-      } else {
-        // Aucune salle avec d'autres joueurs -> Créer une nouvelle salle
+      }
+
+      if (!joinedExistingRoom) {
+        // Aucune salle avec d'autres joueurs (ou salle pleine entre-temps) -> Créer une nouvelle salle
         final newRoomRef = _db.collection('matchmaking').doc();
 
         String? loupGarouRolesHash;
@@ -1089,23 +1096,35 @@ class _SearchingForPlayersScreenState extends State<SearchingForPlayersScreen>
         final fallbackRoom = validRooms.first;
         final roomRef = fallbackRoom.reference;
         final roomData = fallbackRoom.data() as Map<String, dynamic>;
-        final List players = List.from(roomData['players'] ?? []);
         final int targetCount = roomData['targetPlayerCount'] ?? 0;
         final playerId = widget.playerId;
 
-        await roomRef.update({
-          'players': FieldValue.arrayUnion([playerId]),
-          'playerNames.$playerId': widget.playerName,
+        bool joinedFallback = false;
+        await _db.runTransaction((transaction) async {
+          final freshSnap = await transaction.get(roomRef);
+          if (!freshSnap.exists) return;
+          final freshData = freshSnap.data() as Map<String, dynamic>?;
+          if (freshData == null || freshData['status'] != 'waiting') return;
+          final List currentPlayers = List.from(freshData['players'] ?? []);
+          if (currentPlayers.length >= targetCount && !currentPlayers.contains(playerId)) return;
+          transaction.update(roomRef, {
+            'players': FieldValue.arrayUnion([playerId]),
+            'playerNames.$playerId': widget.playerName,
+          });
+          if (currentPlayers.length + (currentPlayers.contains(playerId) ? 0 : 1) >= targetCount) {
+            transaction.update(roomRef, {'status': 'full'});
+          }
+          joinedFallback = true;
         });
 
-        if (players.length + 1 == targetCount) {
-          await roomRef.update({'status': 'full'});
+        if (joinedFallback && !_isDisposed) {
+          setState(() {
+            _matchmakingRoomId = roomRef.id;
+          });
+          _listenToMatchmakingRoom();
+        } else if (!_isDisposed) {
+          _showFailureAndPop();
         }
-
-        setState(() {
-          _matchmakingRoomId = roomRef.id;
-        });
-        _listenToMatchmakingRoom();
       } else if (!_isDisposed) {
         _showFailureAndPop();
       }
