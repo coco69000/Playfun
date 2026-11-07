@@ -590,17 +590,17 @@ class _PremiumScreenState extends State<PremiumScreen> {
                               ? null
                               : () async {
                                 final messenger = ScaffoldMessenger.of(context);
+                                final restoredText = AppLocalizations.of(context)!.purchasesRestored;
+                                final notFoundText = AppLocalizations.of(context)!.noPurchasesFound;
                                 setState(() => _isPurchasing = true);
                                 final success =
                                     await playerState.restorePurchases();
-                                setState(() => _isPurchasing = false);
                                 if (mounted) {
+                                  setState(() => _isPurchasing = false);
                                   messenger.showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        success
-                                            ? AppLocalizations.of(context)!.purchasesRestored
-                                            : AppLocalizations.of(context)!.noPurchasesFound,
+                                        success ? restoredText : notFoundText,
                                       ),
                                     ),
                                   );

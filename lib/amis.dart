@@ -30912,41 +30912,117 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                         },
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 14,
-                        horizontal: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.05),
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.white12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: Colors.amberAccent,
+                    if (canStart)
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color(0xFF00B09B),
+                              Color(0xFF96C93D),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(
+                                0xFF00B09B,
+                              ).withValues(alpha: 0.45),
+                              blurRadius: 14,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 20,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
                           ),
-                          SizedBox(width: 12),
-                          Text(
-                            AppLocalizations.of(context)!.enAttenteDeLHote,
-                            style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              color: Colors.white70,
-                              fontSize: 14,
+                          onPressed: () {
+                            HapticFeedback.mediumImpact();
+                            _firebaseService
+                                .startGame(gameCode)
+                                .catchError((e) {
+                                  if (mounted) {
+                                    ScaffoldMessenger.of(
+                                      context,
+                                    ).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          GameContentLocalization.format(
+                                            context,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.erreur,
+                                            [e],
+                                          ),
+                                        ),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  }
+                                });
+                          },
+                          icon: const Icon(
+                            Icons.play_arrow_rounded,
+                            size: 26,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            AppLocalizations.of(context)!.demarrerLaPartie,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 0.8,
+                              color: Colors.white,
                             ),
                           ),
-                        ],
+                        ),
+                      )
+                    else
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                          horizontal: 16,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.05),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: Colors.white12),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.amberAccent,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              AppLocalizations.of(context)!.enAttenteDeLHote,
+                              style: const TextStyle(
+                                fontStyle: FontStyle.italic,
+                                color: Colors.white70,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                   ],
-                  if (isHost && !canStart)
+                  if (!canStart)
                     Container(
                       margin: const EdgeInsets.only(top: 10),
                       padding: const EdgeInsets.all(12),
@@ -71624,7 +71700,6 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     final String status = pendingGame?['status'] ?? '';
 
     if (pendingGame == null || status == 'finished' || status == 'cancelled') {
-      if (!isHost) return const SizedBox.shrink();
       return Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
@@ -71856,117 +71931,127 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 ],
               ),
             ),
-            if (isGameHost) ...[
-              Builder(
-                builder: (context) {
-                  final int minReq = GameData.getMinPlayers(gameName);
-                  final bool canStart = joinedPlayers.length >= minReq;
+            Builder(
+              builder: (context) {
+                final int minReq = GameData.getMinPlayers(gameName);
+                final bool canStart = joinedPlayers.length >= minReq;
 
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          canStart ? Colors.green : Colors.grey.shade700,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                    ),
-                    onPressed: () async {
-                      if (!canStart) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              AppLocalizations.of(
-                                context,
-                              )!.minPlayersToLaunchGameError(
-                                minReq,
-                                gameName,
-                                joinedPlayers.length,
-                              ),
-                            ),
-                            backgroundColor: Colors.orange.shade800,
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (!hasJoined)
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueAccent,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
                           ),
-                        );
-                        return;
-                      }
-                      await FirebaseFirestore.instance
-                          .collection('lounges')
-                          .doc(widget.loungeId)
-                          .update({'pendingGame.status': 'started'});
-                      await FirebaseFirestore.instance
-                          .collection('games')
-                          .doc(gameCode)
-                          .update({'gameState': 'playing'});
-                    },
-                    child: Text(
-                      canStart
-                          ? AppLocalizations.of(context)!.commencer
-                          : "Attente ($minReq requis)",
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(width: 6),
-              TextButton(
-                onPressed: () async {
-                  await FirebaseFirestore.instance
-                      .collection('lounges')
-                      .doc(widget.loungeId)
-                      .update({'pendingGame': FieldValue.delete()});
-                },
-                child: Text(
-                  AppLocalizations.of(context)!.annuler,
-                  style: const TextStyle(color: Colors.redAccent, fontSize: 12),
-                ),
-              ),
-            ] else ...[
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      hasJoined ? Colors.grey[700] : Colors.blueAccent,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-                ),
-                onPressed: () async {
-                  if (hasJoined) {
-                    await FirebaseFirestore.instance
-                        .collection('lounges')
-                        .doc(widget.loungeId)
-                        .update({
-                          'pendingGame.joinedPlayers': FieldValue.arrayRemove([
+                        ),
+                        onPressed: () async {
+                          await FirebaseFirestore.instance
+                              .collection('lounges')
+                              .doc(widget.loungeId)
+                              .update({
+                                'pendingGame.joinedPlayers': FieldValue.arrayUnion([
+                                  widget.playerId,
+                                ]),
+                              });
+                          final ps = Provider.of<PlayerState>(context, listen: false);
+                          await _firebaseService.joinGame(
+                            gameCode,
+                            ps.userName ?? AppLocalizations.of(context)!.joueur,
                             widget.playerId,
-                          ]),
-                        });
-                  } else {
-                    await FirebaseFirestore.instance
-                        .collection('lounges')
-                        .doc(widget.loungeId)
-                        .update({
-                          'pendingGame.joinedPlayers': FieldValue.arrayUnion([
-                            widget.playerId,
-                          ]),
-                        });
-                    final ps = Provider.of<PlayerState>(context, listen: false);
-                    await _firebaseService.joinGame(
-                      gameCode,
-                      ps.userName ?? AppLocalizations.of(context)!.joueur,
-                      widget.playerId,
-                    );
-                  }
-                },
-                child: Text(
-                  hasJoined
-                      ? AppLocalizations.of(context)!.pret3
-                      : AppLocalizations.of(context)!.rejoindre,
-                  style: TextStyle(fontSize: 12),
-                ),
-              ),
-            ],
+                          );
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.rejoindre,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    if (hasJoined) ...[
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              canStart ? Colors.green : Colors.grey.shade700,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                        ),
+                        onPressed: () async {
+                          if (!canStart) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.minPlayersToLaunchGameError(
+                                    minReq,
+                                    gameName,
+                                    joinedPlayers.length,
+                                  ),
+                                ),
+                                backgroundColor: Colors.orange.shade800,
+                              ),
+                            );
+                            return;
+                          }
+                          await FirebaseFirestore.instance
+                              .collection('lounges')
+                              .doc(widget.loungeId)
+                              .update({'pendingGame.status': 'started'});
+                          await FirebaseFirestore.instance
+                              .collection('games')
+                              .doc(gameCode)
+                              .update({'gameState': 'playing'});
+                        },
+                        child: Text(
+                          canStart
+                              ? AppLocalizations.of(context)!.commencer
+                              : "Attente ($minReq requis)",
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      TextButton(
+                        onPressed: () async {
+                          await FirebaseFirestore.instance
+                              .collection('lounges')
+                              .doc(widget.loungeId)
+                              .update({
+                                'pendingGame.joinedPlayers': FieldValue.arrayRemove([
+                                  widget.playerId,
+                                ]),
+                              });
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.quitter,
+                          style: const TextStyle(color: Colors.white70, fontSize: 11),
+                        ),
+                      ),
+                    ],
+                    if (isGameHost || isHost) ...[
+                      const SizedBox(width: 4),
+                      TextButton(
+                        onPressed: () async {
+                          await FirebaseFirestore.instance
+                              .collection('lounges')
+                              .doc(widget.loungeId)
+                              .update({'pendingGame': FieldValue.delete()});
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.annuler,
+                          style: const TextStyle(color: Colors.redAccent, fontSize: 11),
+                        ),
+                      ),
+                    ],
+                  ],
+                );
+              },
+            ),
           ],
         ),
       );
@@ -72080,7 +72165,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
               ],
             ),
             actions: [
-              if (isHost) ...[
+              if (isHost || pendingGame['hostId'] == widget.playerId)
                 TextButton(
                   onPressed: () async {
                     Navigator.pop(ctx);
@@ -72094,53 +72179,51 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     style: const TextStyle(color: Colors.redAccent),
                   ),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        canStart ? Colors.green : Colors.grey.shade700,
-                  ),
-                  onPressed: () async {
-                    if (!canStart) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            AppLocalizations.of(
-                              context,
-                            )!.minPlayersToLaunchGameError(
-                              minReq,
-                              gName,
-                              joinedCount,
-                            ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      canStart ? Colors.green : Colors.grey.shade700,
+                ),
+                onPressed: () async {
+                  if (!canStart) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          AppLocalizations.of(
+                            context,
+                          )!.minPlayersToLaunchGameError(
+                            minReq,
+                            gName,
+                            joinedCount,
                           ),
-                          backgroundColor: Colors.orange.shade800,
                         ),
-                      );
-                      return;
-                    }
-                    Navigator.pop(ctx);
-                    await FirebaseFirestore.instance
-                        .collection('lounges')
-                        .doc(widget.loungeId)
-                        .update({'pendingGame.status': 'started'});
-                    await FirebaseFirestore.instance
-                        .collection('games')
-                        .doc(pendingGame['gameCode'])
-                        .update({'gameState': 'playing'});
-                  },
-                  child: Text(
-                    canStart
-                        ? AppLocalizations.of(context)!.lancer
-                        : AppLocalizations.of(
-                          context,
-                        )!.waitingQuorumProgress(joinedCount, minReq),
-                  ),
+                        backgroundColor: Colors.orange.shade800,
+                      ),
+                    );
+                    return;
+                  }
+                  Navigator.pop(ctx);
+                  await FirebaseFirestore.instance
+                      .collection('lounges')
+                      .doc(widget.loungeId)
+                      .update({'pendingGame.status': 'started'});
+                  await FirebaseFirestore.instance
+                      .collection('games')
+                      .doc(pendingGame['gameCode'])
+                      .update({'gameState': 'playing'});
+                },
+                child: Text(
+                  canStart
+                      ? AppLocalizations.of(context)!.lancer
+                      : AppLocalizations.of(
+                        context,
+                      )!.waitingQuorumProgress(joinedCount, minReq),
                 ),
-              ] else ...[
-                TextButton(
-                  onPressed: () => Navigator.pop(ctx),
-                  child: Text(AppLocalizations.of(context)!.fermer),
-                ),
-              ],
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: Text(AppLocalizations.of(context)!.fermer),
+              ),
             ],
           ),
     );
@@ -72755,35 +72838,69 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                       ),
                                     ),
                                   if (!isGameFinished &&
-                                      !isStarted &&
-                                      isGameHost)
+                                      !isStarted)
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.red,
+                                        if (isGameHost || isHost)
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.red,
+                                            ),
+                                            onPressed: () async {
+                                              await FirebaseFirestore.instance
+                                                  .collection('games')
+                                                  .doc(gameCode)
+                                                  .delete();
+                                              await FirebaseFirestore.instance
+                                                  .collection('lounges')
+                                                  .doc(widget.loungeId)
+                                                  .update({
+                                                    'pendingGame':
+                                                        FieldValue.delete(),
+                                                  });
+                                            },
+                                            child: Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.annuler,
+                                            ),
                                           ),
-                                          onPressed: () async {
-                                            await FirebaseFirestore.instance
-                                                .collection('games')
-                                                .doc(gameCode)
-                                                .delete();
-                                            await FirebaseFirestore.instance
-                                                .collection('lounges')
-                                                .doc(widget.loungeId)
-                                                .update({
-                                                  'pendingGame':
-                                                      FieldValue.delete(),
-                                                });
-                                          },
-                                          child: Text(
-                                            AppLocalizations.of(
-                                              context,
-                                            )!.annuler,
+                                        if (!hasJoined)
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.blueAccent,
+                                            ),
+                                            onPressed: () async {
+                                              final ps = Provider.of<PlayerState>(
+                                                context,
+                                                listen: false,
+                                              );
+                                              await FirebaseFirestore.instance
+                                                  .collection('lounges')
+                                                  .doc(widget.loungeId)
+                                                  .update({
+                                                    'pendingGame.joinedPlayers':
+                                                        FieldValue.arrayUnion(
+                                                          [widget.playerId],
+                                                        ),
+                                                  });
+                                              await _firebaseService.joinGame(
+                                                gameCode,
+                                                ps.userName ??
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.joueur,
+                                                widget.playerId,
+                                              );
+                                            },
+                                            child: Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.rejoindre,
+                                            ),
                                           ),
-                                        ),
                                         Builder(
                                           builder: (context) {
                                             final int minReq =
@@ -72845,47 +72962,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                         ),
                                       ],
                                     ),
-                                  if (!isGameFinished &&
-                                      !isStarted &&
-                                      !isGameHost)
-                                    ElevatedButton(
-                                      onPressed:
-                                          hasJoined
-                                              ? null
-                                              : () async {
-                                                final ps =
-                                                    Provider.of<PlayerState>(
-                                                      context,
-                                                      listen: false,
-                                                    );
-                                                await FirebaseFirestore.instance
-                                                    .collection('lounges')
-                                                    .doc(widget.loungeId)
-                                                    .update({
-                                                      'pendingGame.joinedPlayers':
-                                                          FieldValue.arrayUnion(
-                                                            [widget.playerId],
-                                                          ),
-                                                    });
-                                                await _firebaseService.joinGame(
-                                                  gameCode,
-                                                  ps.userName ??
-                                                      AppLocalizations.of(
-                                                        context,
-                                                      )!.joueur,
-                                                  widget.playerId,
-                                                );
-                                              },
-                                      child: Text(
-                                        hasJoined
-                                            ? AppLocalizations.of(
-                                              context,
-                                            )!.enAttenteDuLancement
-                                            : AppLocalizations.of(
-                                              context,
-                                            )!.rejoindre,
-                                      ),
-                                    ),
+
                                 ],
                               ),
                             );
