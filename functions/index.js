@@ -843,8 +843,6 @@ exports.generateAiWords = onCall(
       }
 
       const data = await response.json();
-      const content = data.choices?.[0]?.message?.content || "";
-      const match = content.match(/\[[\s\S]*?\]/);
       const rawContent = (data.choices?.[0]?.message?.content || "")
         .replace(/```json/gi, "")
         .replace(/```/g, "")
@@ -1534,66 +1532,63 @@ exports.cleanupDisconnectedPlayers = onSchedule(
               updates.skullCurrentPlayerIndex = data.skullCurrentPlayerIndex % newOrder.length;
             }
 
-            // Retrait dans les listes des sous-jeux
-            ["unoPlayerOrder", "milleBornesPlayerOrder", "blokusPlayerOrder", "checkersPlayerOrder"].forEach((orderKey) => {
-              // Retrait dans les listes des sous-jeux et recalage des index associés
-              const orderIndexPairs = [
-                ["unoPlayerOrder", "unoCurrentPlayerIndex"],
-                ["milleBornesPlayerOrder", "milleBornesCurrentPlayerIndex"],
-                ["blokusPlayerOrder", "blokusCurrentPlayerIndex"],
-                ["checkersPlayerOrder", "checkersCurrentPlayerIndex"],
-                ["bigTwoPlayerOrder", "bigTwoCurrentPlayerIndex"],
-                ["petitsChevauxPlayerOrder", "petitsChevauxCurrentIndex"],
-                ["dominoesPlayerOrder", "dominoesCurrentPlayerIndex"],
-                ["zombiePlayerOrder", "zombieCurrentPlayerIndex"],
-                ["belotePlayerOrder", "beloteCurrentPlayerIndex"],
-                ["yamsPlayerOrder", null],
-              ];
+            // Retrait dans les listes des sous-jeux et recalage des index associés
+            const orderIndexPairs = [
+              ["unoPlayerOrder", "unoCurrentPlayerIndex"],
+              ["milleBornesPlayerOrder", "milleBornesCurrentPlayerIndex"],
+              ["blokusPlayerOrder", "blokusCurrentPlayerIndex"],
+              ["checkersPlayerOrder", "checkersCurrentPlayerIndex"],
+              ["bigTwoPlayerOrder", "bigTwoCurrentPlayerIndex"],
+              ["petitsChevauxPlayerOrder", "petitsChevauxCurrentIndex"],
+              ["dominoesPlayerOrder", "dominoesCurrentPlayerIndex"],
+              ["zombiePlayerOrder", "zombieCurrentPlayerIndex"],
+              ["belotePlayerOrder", "beloteCurrentPlayerIndex"],
+              ["yamsPlayerOrder", null],
+            ];
 
-              orderIndexPairs.forEach(([orderKey, idxKey]) => {
-                if (Array.isArray(data[orderKey])) {
-                  updates[orderKey] = data[orderKey].filter((id) => !removedPlayers.includes(id));
-                  const filtered = data[orderKey].filter((id) => !removedPlayers.includes(id));
-                  updates[orderKey] = filtered;
-                  if (idxKey && filtered.length > 0 && typeof data[idxKey] === "number") {
-                    updates[idxKey] = data[idxKey] % filtered.length;
-                  }
+            orderIndexPairs.forEach(([orderKey, idxKey]) => {
+              if (Array.isArray(data[orderKey])) {
+                const filtered = data[orderKey].filter((id) => !removedPlayers.includes(id));
+                updates[orderKey] = filtered;
+                if (idxKey && filtered.length > 0 && typeof data[idxKey] === "number") {
+                  updates[idxKey] = data[idxKey] % filtered.length;
                 }
-              });
-
-              // Recalage des identifiants directs de joueur courant
-              ["currentPlayerId", "ramiCurrentPlayerId", "yamsCurrentPlayerId"].forEach((idKey) => {
-                if (data[idKey] && removedPlayers.includes(data[idKey])) {
-                  const fallbackOrder = updates.yamsPlayerOrder || newOrder;
-                  if (Array.isArray(fallbackOrder) && fallbackOrder.length > 0) {
-                    updates[idKey] = fallbackOrder[0];
-                  }
-                }
-              });
-
-              // Victoire par forfait si un seul joueur reste en jeu
-              const survivingKeys = Object.keys(players).filter((id) => !removedPlayers.includes(id));
-              if (survivingKeys.length === 1 && data.gameState === "playing") {
-                const winnerId = survivingKeys[0];
-                const winnerName = players[winnerId]?.name || "Joueur";
-                updates.gameState = "gameOver";
-                updates.gameWinner = winnerId;
-                updates.gameEndReason = `Victoire de ${winnerName} par abandon des adversaires.`;
-                updates[`players.${winnerId}.score`] = admin.firestore.FieldValue.increment(1);
               }
+            });
+
+            // Recalage des identifiants directs de joueur courant
+            ["currentPlayerId", "ramiCurrentPlayerId", "yamsCurrentPlayerId"].forEach((idKey) => {
+              if (data[idKey] && removedPlayers.includes(data[idKey])) {
+                const fallbackOrder = updates.yamsPlayerOrder || newOrder;
+                if (Array.isArray(fallbackOrder) && fallbackOrder.length > 0) {
+                  updates[idKey] = fallbackOrder[0];
+                }
+              }
+            });
+
+            // Victoire par forfait si un seul joueur reste en jeu
+            const survivingKeys = Object.keys(players).filter((id) => !removedPlayers.includes(id));
+            if (survivingKeys.length === 1 && data.gameState === "playing") {
+              const winnerId = survivingKeys[0];
+              const winnerName = players[winnerId]?.name || "Joueur";
+              updates.gameState = "gameOver";
+              updates.gameWinner = winnerId;
+              updates.gameEndReason = `Victoire de ${winnerName} par abandon des adversaires.`;
+              updates[`players.${winnerId}.score`] = admin.firestore.FieldValue.increment(1);
             }
+          }
 
           if (Object.keys(updates).length > 0) {
-              await doc.ref.update(updates);
-            }
-          } catch (innerError) {
-            console.error(`Erreur nettoyage doc ${doc.id}:`, innerError);
+            await doc.ref.update(updates);
           }
+        } catch (innerError) {
+          console.error(`Erreur nettoyage doc ${doc.id}:`, innerError);
         }
-    } catch (err) {
-        console.error("Erreur générale cleanupDisconnectedPlayers:", err);
       }
+    } catch (err) {
+      console.error("Erreur générale cleanupDisconnectedPlayers:", err);
     }
+  }
 );
 
 exports.cleanupLoungePresence = onSchedule(

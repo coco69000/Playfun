@@ -158,7 +158,7 @@ class SupabaseService {
           '--- [Supabase Upload] Succès (Tentative $attempt) : $publicUrl ---',
         );
         return publicUrl;
-      } catch (e, stackTrace) {
+      } catch (e) {
         print(
           '--- [Supabase Upload] ERREUR (Tentative $attempt/$maxRetries) ---',
         );
@@ -4007,7 +4007,7 @@ class FirebaseService {
             passedPlayers.length >= (activePlayers.length - 1);
 
         if (trickEnded) {
-          String lastWinner = lastPlay?['playedBy'] ?? playerId;
+          String lastWinner = lastPlay['playedBy'] ?? playerId;
           int nextIndex = playerOrder.indexOf(lastWinner);
           if (nextIndex == -1 || finishedPlayers.contains(playerOrder[nextIndex])) {
             final remainingActive = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
@@ -5238,7 +5238,10 @@ class FirebaseService {
           gameData['justOneWords'] ?? [],
         );
         if (words.isEmpty) {
-          words = List<String>.from(GameWords.justOneWords)..shuffle();
+          words = List<String>.from(
+            GameWords.justOneWords[gameData['difficulty']] ??
+                GameWords.justOneWords['soft']!,
+          )..shuffle();
         }
         if (words.isNotEmpty) {
           final String randomWord = words[Random().nextInt(words.length)];
@@ -5257,11 +5260,25 @@ class FirebaseService {
         Map<String, dynamic> clues = Map.from(gameData['justOneClues'] ?? {});
         String guesserId = gameData['justOneGuesserId'];
 
-        players.keys.forEach((pId) {
+        for (final pId in players.keys) {
           if (pId != guesserId && !clues.containsKey(pId)) {
             clues[pId] = "INACTIF_$pId";
           }
-        });
+        }
+
+        String normalizeJustOneClue(String raw) {
+          var s = raw.toLowerCase().trim();
+          const withDia = 'àáâãäåçèéêëìíîïñòóôõöùúûüýÿ';
+          const withoutDia = 'aaaaaaceeeeiiiinooooouuuuyy';
+          for (int i = 0; i < withDia.length; i++) {
+            s = s.replaceAll(withDia[i], withoutDia[i]);
+          }
+          s = s.replaceAll(RegExp(r'[^a-z0-9]'), '');
+          if (s.length > 3 && s.endsWith('s') && !s.endsWith('ss')) {
+            s = s.substring(0, s.length - 1);
+          }
+          return s;
+        }
 
         final String targetNorm = normalizeJustOneClue(
           (gameData['justOneCurrentWord'] ?? '').toString(),
@@ -8584,8 +8601,9 @@ class FirebaseService {
       players.keys.forEach((pId) {
         int score = 0;
         (grids[pId] as List).forEach((card) {
-          if ((card as Map)['value'] != -100) {
-            score += ((card as Map)['value'] as num).toInt();
+          final cardMap = card as Map;
+          if (cardMap['value'] != -100) {
+            score += (cardMap['value'] as num).toInt();
           }
         });
         roundScores[pId] = score;
@@ -10047,7 +10065,6 @@ class FirebaseService {
     String targetId, {
     bool isAuto = false,
   }) async {
-    bool shouldAdvance = false;
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
       DocumentSnapshot gameSnap = await transaction.get(gameRef);
@@ -10096,10 +10113,6 @@ class FirebaseService {
         transaction.update(gameRef, {'playerData': playerData});
       }
     });
-
-    if (shouldAdvance) {
-      await startNextNightPhase(gameCode);
-    }
   }
 
   /// Sorcière : Potions de vie et de mort
@@ -11837,7 +11850,8 @@ class FirebaseService {
 
       if (subPhase == 'garde_turn') {
         final gardeId = activePlayerId ?? findAliveRolePlayer('Garde');
-        final lastProtected = gardeId != null ? playerData[gardeId]?['lastProtectedId'] : null;
+        final gardeMap = gardeId != null ? playerData[gardeId] as Map? : null;
+        final lastProtected = gardeMap?['lastProtectedId'];
         final targets = livingPlayers.where((id) => id != lastProtected).toList();
         if (gardeId != null && targets.isNotEmpty) {
           targets.shuffle();
@@ -18248,66 +18262,6 @@ class FirebaseService {
     });
   }
 
-  // --- 4. TIMEOUT & PIOCHE AUTOMATIQUE PROPRE ---
-  Future<void> _drawUnoCardAndPassLogic(
-    Transaction transaction,
-    DocumentReference gameRef,
-    Map<String, dynamic> gameData,
-    String playerId,
-  ) async {
-    List<String> deck = List<String>.from(gameData['unoDeck'] ?? []);
-    List<String> discardPile = List<String>.from(
-      gameData['unoDiscardPile'] ?? [],
-    );
-    Map<String, dynamic> playerHands = Map<String, dynamic>.from(
-      gameData['unoPlayerHands'] ?? {},
-    );
-    List<String> myHand = List<String>.from(playerHands[playerId] ?? []);
-    int pendingDraw = (gameData['unoPendingDraw'] as num?)?.toInt() ?? 0;
-    int cardsToDraw = pendingDraw > 0 ? pendingDraw : 1;
-
-    for (int i = 0; i < cardsToDraw; i++) {
-      if (deck.isEmpty) {
-        if (discardPile.length > 1) {
-          String topCard = discardPile.removeLast();
-          deck = List<String>.from(discardPile)..shuffle();
-          discardPile = [topCard];
-        } else {
-          break;
-        }
-      }
-      if (deck.isNotEmpty) {
-        myHand.add(deck.removeAt(0));
-      }
-    }
-    playerHands[playerId] = myHand;
-
-    List<String> playerOrder = List<String>.from(
-      gameData['unoPlayerOrder'] ?? [],
-    );
-    int currentPlayerIndex = gameData['unoCurrentPlayerIndex'] ?? 0;
-    int direction = gameData['unoDirection'] ?? 1;
-    int nextPlayerIndex =
-        playerOrder.isNotEmpty
-            ? (currentPlayerIndex + direction + playerOrder.length) %
-                playerOrder.length
-            : 0;
-
-    transaction.update(gameRef, {
-      'unoDeck': deck,
-      'unoDiscardPile': discardPile,
-      'unoPlayerHands': playerHands,
-      'unoPendingDraw': 0,
-      'unoDrawActionDone': false,
-      'unoLastDrawnCard': null,
-      'unoCurrentPlayerIndex': nextPlayerIndex,
-      'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': FieldValue.arrayUnion([
-        _l10n.nAPasJoueA5(gameData['players']?[playerId]?['name'] ?? _l10n.joueur),
-      ]),
-    });
-  }
-
   Future<void> nextDobbleRound(String gameCode) async {
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -18534,7 +18488,6 @@ class FirebaseService {
         gameData['checkersBoard'],
       );
       String currentColor = gameData['checkersCurrentColor'];
-      String oppColor = currentColor == 'red' ? 'black' : 'red';
 
       String fromKey = "$fromR,$fromC";
       String toKey = "$toR,$toC";
@@ -21376,28 +21329,6 @@ class FirebaseService {
     });
   }
 
-  Future<void> _nextUnoPlayer(
-    DocumentReference gameRef,
-    Map<String, dynamic> gameData,
-  ) async {
-    int currentPlayerIndex = gameData['unoCurrentPlayerIndex'] ?? 0;
-    int unoDirection = gameData['unoDirection'] ?? 1;
-    List<String> playerOrder = List<String>.from(
-      gameData['unoPlayerOrder'] ?? [],
-    );
-
-    int nextPlayerIdx =
-        (currentPlayerIndex + unoDirection + playerOrder.length) %
-        playerOrder.length;
-
-    await gameRef.update({
-      'unoCurrentPlayerIndex': nextPlayerIdx,
-      'unoDrawActionDone': false,
-      'unoLastDrawnCard': null,
-      'unoWildColorChosen': null,
-    });
-  }
-
   Future<void> nextRound(String gameCode) async {
     DocumentReference gameRef = _db.collection('games').doc(gameCode);
     DocumentSnapshot gameSnap = await gameRef.get();
@@ -21436,15 +21367,15 @@ class FirebaseService {
     String roundState = 'answering';
     String? memeUrl;
 
-    final List<dynamic>? _rawAiWords = gameData['aiWords'] as List<dynamic>?;
-    final List<String>? _aiWordPool =
-        (_rawAiWords != null && _rawAiWords.isNotEmpty)
-            ? _rawAiWords.map((e) => e.toString()).toList()
+    final List<dynamic>? rawAiWords = gameData['aiWords'] as List<dynamic>?;
+    final List<String>? aiWordPool =
+        (rawAiWords != null && rawAiWords.isNotEmpty)
+            ? rawAiWords.map((e) => e.toString()).toList()
             : null;
 
     if (gameType == 'Le Juge') {
       List<String> questions =
-          _aiWordPool ??
+          aiWordPool ??
           GameWords.judgeData[difficulty] ??
           GameWords.judgeData['soft']!;
       question = questions[random.nextInt(questions.length)];
@@ -21456,7 +21387,7 @@ class FirebaseService {
       roundState = 'answering';
     } else if (gameType == 'Qui Pourrait le Plus ?') {
       List<String> questions =
-          _aiWordPool ??
+          aiWordPool ??
           GameWords.whoIsMostLikely[difficulty] ??
           GameWords.whoIsMostLikely['soft']!;
       question =
@@ -21464,7 +21395,7 @@ class FirebaseService {
       roundState = 'voting';
     } else if (gameType == 'Le Menteur') {
       List<String> prompts =
-          _aiWordPool ??
+          aiWordPool ??
           GameWords.liarData[difficulty] ??
           GameWords.liarData['soft']!;
       question = prompts[random.nextInt(prompts.length)];
@@ -21491,7 +21422,7 @@ class FirebaseService {
     } else if (gameType == 'Infiltré & Mr. White') {
       if (playerOrder.length >= 3) {
         List<String> wordPairs =
-            _aiWordPool ??
+            aiWordPool ??
             GameWords.undercoverData[difficulty]?['wordPairs'] ??
             GameWords.undercoverData['soft']!['wordPairs']!;
         String pair = wordPairs[random.nextInt(wordPairs.length)];
@@ -21531,7 +21462,7 @@ class FirebaseService {
       }
     } else if (gameType == 'Synonyme ou Banni') {
       List<String> words =
-          _aiWordPool ??
+          aiWordPool ??
           GameWords.synonymOrBanned[difficulty]?['words'] ??
           GameWords.synonymOrBanned['soft']!['words']!;
       String word = words[random.nextInt(words.length)];
@@ -22587,8 +22518,6 @@ class FirebaseService {
 
     final gameRef = _db.collection('games').doc(gameCode);
     bool shouldTallyLiarVotes = false;
-    Map<String, dynamic> latestPlayers = {};
-    Map<String, dynamic> latestVotes = {};
 
     await _db.runTransaction((transaction) async {
       final gameSnap = await transaction.get(gameRef);
@@ -22659,8 +22588,6 @@ class FirebaseService {
         if (gameType == 'Le Menteur' || gameType == 'Infiltré & Mr. White') {
           transaction.update(gameRef, {'votes': votes});
           shouldTallyLiarVotes = true;
-          latestPlayers = players;
-          latestVotes = votes;
           return;
         }
         final updates = <String, dynamic>{'votes': votes};
@@ -22770,7 +22697,10 @@ class FirebaseService {
     });
 
     if (shouldTallyLiarVotes) {
-      await _tallyVotes(gameRef, latestPlayers, latestVotes);
+      final snap = await gameRef.get();
+      if (snap.exists) {
+        await _tallyVotes(gameRef, snap.data() as Map<String, dynamic>);
+      }
     }
   }
 
@@ -59281,7 +59211,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
           content: TextField(
             controller: guessCtrl,
             decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.devineLeMotDesCivils,
+              labelText: AppLocalizations.of(context)!.mot,
               border: const OutlineInputBorder(),
             ),
           ),
