@@ -25334,7 +25334,7 @@ void showGameRules(BuildContext context, String gameType) {
           }
         }
         if (rules.trim().isEmpty) {
-          rules = AppLocalizations.of(context)!.noRulesFound;
+          rules = GameRulesLocalization.tr(context, 'noRulesFound');
         }
         return AlertDialog(
           title: Text(AppLocalizations.of(context)!.rulesTitle),
@@ -29663,13 +29663,13 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
           if (canStart) {
             if (players.length < minRequiredPlayers) {
               canStart = false;
-              requirementMessage = "Au moins $minRequiredPlayers joueurs requis pour $gameType (${players.length}/$minRequiredPlayers présents)";
+              requirementMessage = AppLocalizations.of(context)!.minPlayersRequiredForGame(minRequiredPlayers, gameType, players.length);
             } else if (nonHostEntries.isEmpty) {
               canStart = false;
-              requirementMessage = "Vous êtes seul dans le salon. Partagez le code pour inviter des amis !";
+              requirementMessage = AppLocalizations.of(context)!.aloneInLobbyShareCode;
             } else if (!allNonHostsReady) {
               canStart = false;
-              requirementMessage = "En attente que tous les joueurs soient prêts (${1 + otherReadyCount}/${players.length} prêts)";
+              requirementMessage = AppLocalizations.of(context)!.waitingAllPlayersReady(1 + otherReadyCount, players.length);
             }
           }
 
@@ -29875,12 +29875,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                           ),
                                           label: Text(
                                             isPlayerHost
-                                                ? "Hôte"
+                                                ? AppLocalizations.of(context)!.hostBadge
                                                 : (pIsReady
                                                     ? AppLocalizations.of(
                                                       context,
                                                     )!.pret
-                                                    : "Pas prêt"),
+                                                    : AppLocalizations.of(context)!.notReady),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 11,
@@ -29904,9 +29904,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                               size: 12,
                                               color: Colors.white70,
                                             ),
-                                            label: const Text(
-                                              "Déconnecté",
-                                              style: TextStyle(
+                                            label: Text(
+                                              AppLocalizations.of(context)!.disconnectedStatus,
+                                              style: const TextStyle(
                                                 color: Colors.white70,
                                                 fontSize: 10,
                                               ),
@@ -30202,8 +30202,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                         ),
                         label: Text(
                           isCurrentPlayerReady
-                              ? "Je ne suis plus prêt (Annuler)"
-                              : "Je suis prêt !",
+                              ? AppLocalizations.of(context)!.cancelReady
+                              : AppLocalizations.of(context)!.iAmReady,
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -67875,7 +67875,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                         border: Border.all(
                           color: const Color(0xFF2575FC).withOpacity(0.4),
                         ),
-                      ],
+                      ),
                       child: Row(
                         children: [
                           Container(
@@ -67905,7 +67905,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                                 ),
                                 SizedBox(height: 4),
                                 Text(
-                                  "Lancez votre salon vidéo, vocal et jeux avec vos amis.",
+                                  AppLocalizations.of(context)!.launchLoungeSubtitle,
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: Colors.white70,
@@ -67943,9 +67943,9 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Thématique du salon :",
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.loungeThemeLabel,
+                          style: const TextStyle(
                             color: Colors.white70,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -68025,7 +68025,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Capacité du salon",
+                                AppLocalizations.of(context)!.loungeCapacityLabel,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -68041,7 +68041,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  "${_maxPlayers.toInt()} joueurs",
+                                  AppLocalizations.of(context)!.playersCountSuffix(_maxPlayers.toInt()),
                                   style: const TextStyle(
                                     color: Colors.cyanAccent,
                                     fontWeight: FontWeight.bold,
@@ -68096,7 +68096,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                         ),
                         subtitle: Text(
                           _isPrivate
-                              ? "Génère un code d'invitation privé exclusif"
+                              ? AppLocalizations.of(context)!.generatePrivateInviteCodeSubtitle
                               : AppLocalizations.of(context)!
                                   .nApparaitraPasDansLa,
                           style: TextStyle(
@@ -68247,17 +68247,17 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
             title: Row(
               children: const [
                 Icon(Icons.vpn_key_rounded, color: Colors.amberAccent),
-                SizedBox(width: 8),
-                Text("Salon Privé Créé !"),
+                const SizedBox(width: 8),
+                Text(AppLocalizations.of(context)!.privateLoungeCreatedTitle),
               ],
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  "Votre salon privé est prêt. Partagez ce code avec vos amis pour qu'ils puissent vous rejoindre :",
-                  style: TextStyle(color: Colors.white70, fontSize: 13),
+                Text(
+                  AppLocalizations.of(context)!.privateLoungeCreatedSubtitle,
+                  style: const TextStyle(color: Colors.white70, fontSize: 13),
                 ),
                 const SizedBox(height: 16),
                 Container(
@@ -68291,13 +68291,13 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           Icons.copy_rounded,
                           color: Colors.amberAccent,
                         ),
-                        tooltip: "Copier le code",
+                        tooltip: AppLocalizations.of(context)!.copyCodeTooltip,
                         onPressed: () {
                           Clipboard.setData(ClipboardData(text: code));
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text(
-                                "Code d'accès copié dans le presse-papier !",
+                                AppLocalizations.of(context)!.accessCodeCopiedSnackbar,
                               ),
                             ),
                           );
@@ -68311,7 +68311,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: const Text("C'est parti !"),
+                child: Text(AppLocalizations.of(context)!.letsGoButton),
               ),
             ],
           ),
@@ -68376,9 +68376,6 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     _chatCtrl.dispose();
     super.dispose();
   }
-    _chatCtrl.dispose();
-    super.dispose();
-  }
 
   void _sendMessage() {
     final ps = Provider.of<PlayerState>(context, listen: false);
@@ -68437,16 +68434,16 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Membres du salon",
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.loungeMembersTitle,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
                       Text(
-                        "${onlineIds.length} en ligne • ${players.length}/$maxPlayers participants",
+                        AppLocalizations.of(context)!.loungeMembersCountSubtitle(onlineIds.length, players.length, maxPlayers),
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.white54,
@@ -68479,7 +68476,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          isPrivate ? "Privé" : "Public",
+                          isPrivate ? AppLocalizations.of(context)!.privateBadge : AppLocalizations.of(context)!.publicBadge,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -68514,9 +68511,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Code d'invitation privé",
-                              style: TextStyle(
+                            Text(
+                              AppLocalizations.of(context)!.privateInviteCodeLabel,
+                              style: const TextStyle(
                                 fontSize: 11,
                                 color: Colors.white54,
                               ),
@@ -68539,13 +68536,13 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           color: Colors.amberAccent,
                           size: 20,
                         ),
-                        tooltip: "Copier le code",
+                        tooltip: AppLocalizations.of(context)!.copyCodeTooltip,
                         onPressed: () {
                           Clipboard.setData(ClipboardData(text: joinCode));
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text(
-                                "Code d'accès copié dans le presse-papier !",
+                                AppLocalizations.of(context)!.accessCodeCopiedSnackbar,
                               ),
                             ),
                           );
@@ -68639,9 +68636,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                   width: 0.8,
                                 ),
                               ),
-                              child: const Text(
-                                "Hôte",
-                                style: TextStyle(
+                              child: Text(
+                                AppLocalizations.of(context)!.hostBadge,
+                                style: const TextStyle(
                                   color: Colors.amber,
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
@@ -68652,7 +68649,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         ],
                       ),
                       subtitle: Text(
-                        isOnline ? "En ligne" : "Déconnecté",
+                        isOnline ? AppLocalizations.of(context)!.onlineStatus : AppLocalizations.of(context)!.disconnectedStatus,
                         style: TextStyle(
                           fontSize: 12,
                           color: isOnline ? Colors.greenAccent : Colors.white38,
@@ -68667,7 +68664,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               color: Colors.white54,
                               size: 20,
                             ),
-                            tooltip: "Voir le profil",
+                            tooltip: AppLocalizations.of(context)!.seeProfileTooltip,
                             onPressed: () {
                               showUserProfileDialog(
                                 context,
@@ -68683,7 +68680,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                 color: Colors.redAccent,
                                 size: 20,
                               ),
-                              tooltip: "Expulser du salon",
+                              tooltip: AppLocalizations.of(context)!.kickFromLoungeTooltip,
                               onPressed: () async {
                                 await _firebaseService.leaveLounge(
                                   widget.loungeId,
@@ -69261,7 +69258,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Joueurs minimum requis : $minReq",
+                  AppLocalizations.of(context)!.minPlayersRequiredCount(minReq),
                   style: TextStyle(
                     color: canStart ? Colors.greenAccent : Colors.orangeAccent,
                     fontSize: 13,
@@ -69270,9 +69267,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 ),
                 if (!canStart) ...[
                   const SizedBox(height: 4),
-                  const Text(
-                    "En attente que d'autres joueurs rejoignent la partie pour atteindre le minimum requis.",
-                    style: TextStyle(color: Colors.white54, fontSize: 11),
+                  Text(
+                    AppLocalizations.of(context)!.waitingMorePlayersQuorum,
+                    style: const TextStyle(color: Colors.white54, fontSize: 11),
                   ),
                 ],
               ],
@@ -69302,7 +69299,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            "Au moins $minReq joueurs requis pour lancer $gName ($joinedCount/$minReq prêts).",
+                            AppLocalizations.of(context)!.minPlayersToLaunchGameError(minReq, gName, joinedCount),
                           ),
                           backgroundColor: Colors.orange.shade800,
                         ),
@@ -69322,7 +69319,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                   child: Text(
                     canStart
                         ? AppLocalizations.of(context)!.lancer
-                        : "Attente ($joinedCount/$minReq)",
+                        : AppLocalizations.of(context)!.waitingQuorumProgress(joinedCount, minReq),
                   ),
                 ),
               ] else ...[
@@ -69462,7 +69459,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                       ),
                     ],
                   ),
-                  tooltip: "Voir les membres du salon",
+                  tooltip: AppLocalizations.of(context)!.viewLoungeMembersTooltip,
                   onPressed: () => _showMembersModal(context, data, players, onlineIds, isHost),
                 ),
                 if (isHost)

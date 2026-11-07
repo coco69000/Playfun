@@ -8429,4 +8429,141 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get vote1 => 'голос';
+
+  @override
+  String get messagesTab => 'Сообщения';
+
+  @override
+  String get sendMessageTooltip => 'Отправить сообщение';
+
+  @override
+  String get noMessagesTitle => 'Нет сообщений';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Общайтесь с друзьями, нажимая на значок сообщения рядом с их именем!';
+
+  @override
+  String get friendSubtitle => 'Друг';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Поздоровайтесь с $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Напишите сообщение...';
+
+  @override
+  String get seeProfileTooltip => 'Посмотреть профиль';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Минимум $min игроков требуется для $game ($count/$min присутствуют)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Вы одни в комнате. Поделитесь кодом, чтобы пригласить друзей!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Ожидание готовности всех игроков ($ready/$total готовы)';
+  }
+
+  @override
+  String get notReady => 'Не готов';
+
+  @override
+  String get disconnectedStatus => 'Не в сети';
+
+  @override
+  String get onlineStatus => 'В сети';
+
+  @override
+  String get hostBadge => 'Хост';
+
+  @override
+  String get iAmReady => 'Я готов!';
+
+  @override
+  String get cancelReady => 'Я не готов (Отмена)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Запустите видео, голосовую и игровую комнату с друзьями.';
+
+  @override
+  String get loungeThemeLabel => 'Тема комнаты:';
+
+  @override
+  String get loungeCapacityLabel => 'Вместимость комнаты';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count игроков';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Создает эксклюзивный приватный код приглашения';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Приватная комната создана!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Ваша приватная комната готова. Поделитесь этим кодом с друзьями, чтобы они присоединились:';
+
+  @override
+  String get copyCodeTooltip => 'Копировать код';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'Код доступа скопирован в буфер обмена!';
+
+  @override
+  String get letsGoButton => 'Поехали!';
+
+  @override
+  String get loungeMembersTitle => 'Участники комнаты';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online в сети • $players/$max участников';
+  }
+
+  @override
+  String get privateBadge => 'Приватный';
+
+  @override
+  String get publicBadge => 'Публичный';
+
+  @override
+  String get privateInviteCodeLabel => 'Приватный код приглашения';
+
+  @override
+  String get kickFromLoungeTooltip => 'Исключить из комнаты';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Посмотреть участников комнаты';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Минимум игроков требуется: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Ожидание присоединения других игроков, чтобы набрать необходимый минимум.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Минимум $min игроков требуется для запуска $game ($joined/$min готовы).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Ожидание ($joined/$min)';
+  }
 }

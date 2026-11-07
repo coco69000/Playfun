@@ -8433,4 +8433,141 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get vote1 => 'glas';
+
+  @override
+  String get messagesTab => 'Poruke';
+
+  @override
+  String get sendMessageTooltip => 'Pošalji poruku';
+
+  @override
+  String get noMessagesTitle => 'Nema poruka';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Razgovarajte s prijateljima dodirivanjem ikone poruke pored njihovog imena!';
+
+  @override
+  String get friendSubtitle => 'Prijatelj';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Pozdravite $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Napišite poruku...';
+
+  @override
+  String get seeProfileTooltip => 'Pogledaj profil';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Najmanje $min igrača potrebno za $game ($count/$min prisutno)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Sami ste u sobi. Podijelite kôd kako biste pozvali prijatelje!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Čeka se da svi igrači budu spremni ($ready/$total spremno)';
+  }
+
+  @override
+  String get notReady => 'Nije spreman';
+
+  @override
+  String get disconnectedStatus => 'Izvan mreže';
+
+  @override
+  String get onlineStatus => 'Na mreži';
+
+  @override
+  String get hostBadge => 'Domaćin';
+
+  @override
+  String get iAmReady => 'Spreman sam!';
+
+  @override
+  String get cancelReady => 'Više nisam spreman (Odustani)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Pokrenite svoj video, glasovni i igraći salon s prijateljima.';
+
+  @override
+  String get loungeThemeLabel => 'Tema salona:';
+
+  @override
+  String get loungeCapacityLabel => 'Kapacitet salona';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count igrača';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Generira ekskluzivni privatni pozivni kôd';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Privatni salon je stvoren!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Vaš privatni salon je spreman. Podijelite ovaj kôd s prijateljima kako bi se pridružili:';
+
+  @override
+  String get copyCodeTooltip => 'Kopiraj kôd';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'Pristupni kôd kopiran je u međuspremnik!';
+
+  @override
+  String get letsGoButton => 'Krenimo!';
+
+  @override
+  String get loungeMembersTitle => 'Članovi salona';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online na mreži • $players/$max sudionika';
+  }
+
+  @override
+  String get privateBadge => 'Privatno';
+
+  @override
+  String get publicBadge => 'Javno';
+
+  @override
+  String get privateInviteCodeLabel => 'Privatni pozivni kôd';
+
+  @override
+  String get kickFromLoungeTooltip => 'Izbaci iz salona';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Pogledaj članove salona';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Minimalno potrebnih igrača: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Čeka se da se drugi igrači pridruže kako bi se dosegao minimalni broj.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Najmanje $min igrača potrebno za pokretanje $game ($joined/$min spremno).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Čekanje ($joined/$min)';
+  }
 }

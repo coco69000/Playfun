@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "glas"
+  "vote1": "glas",
+  "messagesTab": "Poruke",
+  "sendMessageTooltip": "Pošalji poruku",
+  "noMessagesTitle": "Nema poruka",
+  "noMessagesSubtitle": "Razgovarajte s prijateljima dodirivanjem ikone poruke pored njihovog imena!",
+  "friendSubtitle": "Prijatelj",
+  "sayHelloToFriend": "Pozdravite {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Napišite poruku...",
+  "seeProfileTooltip": "Pogledaj profil",
+  "minPlayersRequiredForGame": "Najmanje {min} igrača potrebno za {game} ({count}/{min} prisutno)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Sami ste u sobi. Podijelite kôd kako biste pozvali prijatelje!",
+  "waitingAllPlayersReady": "Čeka se da svi igrači budu spremni ({ready}/{total} spremno)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Nije spreman",
+  "disconnectedStatus": "Izvan mreže",
+  "onlineStatus": "Na mreži",
+  "hostBadge": "Domaćin",
+  "iAmReady": "Spreman sam!",
+  "cancelReady": "Više nisam spreman (Odustani)",
+  "launchLoungeSubtitle": "Pokrenite svoj video, glasovni i igraći salon s prijateljima.",
+  "loungeThemeLabel": "Tema salona:",
+  "loungeCapacityLabel": "Kapacitet salona",
+  "playersCountSuffix": "{count} igrača",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Generira ekskluzivni privatni pozivni kôd",
+  "privateLoungeCreatedTitle": "Privatni salon je stvoren!",
+  "privateLoungeCreatedSubtitle": "Vaš privatni salon je spreman. Podijelite ovaj kôd s prijateljima kako bi se pridružili:",
+  "copyCodeTooltip": "Kopiraj kôd",
+  "accessCodeCopiedSnackbar": "Pristupni kôd kopiran je u međuspremnik!",
+  "letsGoButton": "Krenimo!",
+  "loungeMembersTitle": "Članovi salona",
+  "loungeMembersCountSubtitle": "{online} na mreži • {players}/{max} sudionika",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Privatno",
+  "publicBadge": "Javno",
+  "privateInviteCodeLabel": "Privatni pozivni kôd",
+  "kickFromLoungeTooltip": "Izbaci iz salona",
+  "viewLoungeMembersTooltip": "Pogledaj članove salona",
+  "minPlayersRequiredCount": "Minimalno potrebnih igrača: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Čeka se da se drugi igrači pridruže kako bi se dosegao minimalni broj.",
+  "minPlayersToLaunchGameError": "Najmanje {min} igrača potrebno za pokretanje {game} ({joined}/{min} spremno).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Čekanje ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

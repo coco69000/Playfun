@@ -1,4 +1,3 @@
-import 'game_content_localization.dart';
 import 'game_rules_localization.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -858,7 +857,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                 tabs: [
                   Tab(
                     icon: const Icon(Icons.people_alt_rounded, size: 20),
-                    text: friends.isNotEmpty ? "Amis (${friends.length})" : "Amis",
+                    text: friends.isNotEmpty ? "${AppLocalizations.of(context)!.friendsTab} (${friends.length})" : AppLocalizations.of(context)!.friendsTab,
                   ),
                   Tab(
                     icon: StreamBuilder<QuerySnapshot>(
@@ -885,7 +884,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                         return const Icon(Icons.chat_bubble_rounded, size: 20);
                       },
                     ),
-                    text: "Messages",
+                    text: AppLocalizations.of(context)!.messagesTab,
                   ),
                 ],
               ),
@@ -1135,7 +1134,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                                               Icons.chat_bubble_rounded,
                                               color: Colors.cyanAccent,
                                             ),
-                                            tooltip: "Envoyer un message",
+                                            tooltip: AppLocalizations.of(context)!.sendMessageTooltip,
                                             onPressed: () {
                                               Navigator.push(
                                                 context,
@@ -1184,8 +1183,8 @@ class _FriendsScreenState extends State<FriendsScreen> {
                       if (chats.isEmpty) {
                         return EmptyStateView(
                           icon: Icons.chat_bubble_outline_rounded,
-                          title: "Aucun message",
-                          subtitle: "Discutez avec vos amis en appuyant sur l'icône de message à côté de leur nom !",
+                          title: AppLocalizations.of(context)!.noMessagesTitle,
+                          subtitle: AppLocalizations.of(context)!.noMessagesSubtitle,
                         );
                       }
 
@@ -1419,10 +1418,11 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
         final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
           'sendDirectMessageNotification',
         );
-        await callable.call(ForceUpdateService.withVersion({
+        await callable.call({
+          ...ForceUpdateService.versionPayload,
           'friendUid': widget.friendUid,
           'text': text,
-        }));
+        });
       } catch (err) {
         debugPrint("Erreur push notification : $err");
       }
@@ -1460,9 +1460,9 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const Text(
-                    "Ami",
-                    style: TextStyle(fontSize: 11, color: Colors.white54),
+                  Text(
+                    AppLocalizations.of(context)!.friendSubtitle,
+                    style: const TextStyle(fontSize: 11, color: Colors.white54),
                   ),
                 ],
               ),
@@ -1472,7 +1472,7 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline_rounded, color: Colors.cyanAccent),
-            tooltip: "Voir le profil",
+            tooltip: AppLocalizations.of(context)!.seeProfileTooltip,
             onPressed: () {
               showUserProfileDialog(
                 context,
@@ -1509,7 +1509,7 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                           const Icon(Icons.chat_bubble_outline_rounded, size: 48, color: Colors.white24),
                           const SizedBox(height: 12),
                           Text(
-                            "Dites bonjour à ${widget.friendName} !",
+                            AppLocalizations.of(context)!.sayHelloToFriend(widget.friendName),
                             style: const TextStyle(color: Colors.white54, fontSize: 15),
                           ),
                         ],
@@ -1604,9 +1604,9 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
                     child: TextField(
                       controller: _msgCtrl,
                       style: const TextStyle(color: Colors.white),
-                      decoration: const InputDecoration(
-                        hintText: "Écrire un message...",
-                        hintStyle: TextStyle(color: Colors.white38),
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.writeAMessageHint,
+                        hintStyle: const TextStyle(color: Colors.white38),
                         border: InputBorder.none,
                       ),
                       onSubmitted: (_) => _sendMessage(),
@@ -1632,8 +1632,6 @@ class _DirectChatScreenState extends State<DirectChatScreen> {
         ],
       ),
     );
-  }
-}
   }
 }
 

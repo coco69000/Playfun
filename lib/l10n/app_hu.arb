@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "szavazat"
+  "vote1": "szavazat",
+  "messagesTab": "Üzenetek",
+  "sendMessageTooltip": "Üzenet küldése",
+  "noMessagesTitle": "Nincsenek üzenetek",
+  "noMessagesSubtitle": "Csevegj a barátaiddal a nevük melletti üzenet ikonra koppintva!",
+  "friendSubtitle": "Barát",
+  "sayHelloToFriend": "Köszönj neki: {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Írj egy üzenetet...",
+  "seeProfileTooltip": "Profil megtekintése",
+  "minPlayersRequiredForGame": "Legalább {min} játékos szükséges a {game} játékhoz ({count}/{min} jelen van)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Egyedül vagy a szobában. Oszd meg a kódot a barátaid meghívásához!",
+  "waitingAllPlayersReady": "Várakozás az összes játékos felkészülésére ({ready}/{total} kész)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Nincs kész",
+  "disconnectedStatus": "Offline",
+  "onlineStatus": "Online",
+  "hostBadge": "Házigazda",
+  "iAmReady": "Kész vagyok!",
+  "cancelReady": "Mégsem vagyok kész (Mégse)",
+  "launchLoungeSubtitle": "Indítsd el videós, hangos és játékos szobádat a barátaiddal.",
+  "loungeThemeLabel": "Szoba témája:",
+  "loungeCapacityLabel": "Szoba befogadóképessége",
+  "playersCountSuffix": "{count} játékos",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Exkluzív privát meghívókódot hoz létre",
+  "privateLoungeCreatedTitle": "Privát szoba létrehozva!",
+  "privateLoungeCreatedSubtitle": "A privát szobád készen áll. Oszd meg ezt a kódot a barátaiddal, hogy csatlakozhassanak:",
+  "copyCodeTooltip": "Kód másolása",
+  "accessCodeCopiedSnackbar": "A hozzáférési kód a vágólapra másolva!",
+  "letsGoButton": "Gyerünk!",
+  "loungeMembersTitle": "Szoba tagjai",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} résztvevő",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Privát",
+  "publicBadge": "Nyilvános",
+  "privateInviteCodeLabel": "Privát meghívókód",
+  "kickFromLoungeTooltip": "Kirúgás a szobából",
+  "viewLoungeMembersTooltip": "Szoba tagjainak megtekintése",
+  "minPlayersRequiredCount": "Szükséges minimális játékosszám: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Várakozás más játékosok csatlakozására a minimális létszám eléréséhez.",
+  "minPlayersToLaunchGameError": "Legalább {min} játékos szükséges a {game} indításához ({joined}/{min} kész).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Várakozás ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

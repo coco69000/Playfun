@@ -8418,4 +8418,140 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get vote1 => 'oy';
+
+  @override
+  String get messagesTab => 'Mesajlar';
+
+  @override
+  String get sendMessageTooltip => 'Mesaj gönder';
+
+  @override
+  String get noMessagesTitle => 'Mesaj yok';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Arkadaşlarınızın adının yanındaki mesaj simgesine dokunarak sohbet edin!';
+
+  @override
+  String get friendSubtitle => 'Arkadaş';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return '$name kişisine merhaba deyin!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Bir mesaj yazın...';
+
+  @override
+  String get seeProfileTooltip => 'Profili görüntüle';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return '$game için en az $min oyuncu gerekli ($count/$min mevcut)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Odada tek başınasınız. Arkadaşlarınızı davet etmek için kodu paylaşın!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Tüm oyuncuların hazır olması bekleniyor ($ready/$total hazır)';
+  }
+
+  @override
+  String get notReady => 'Hazır değil';
+
+  @override
+  String get disconnectedStatus => 'Çevrimdışı';
+
+  @override
+  String get onlineStatus => 'Çevrimiçi';
+
+  @override
+  String get hostBadge => 'Oda Sahibi';
+
+  @override
+  String get iAmReady => 'Hazırım!';
+
+  @override
+  String get cancelReady => 'Artık hazır değilim (İptal)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Arkadaşlarınızla video, ses ve oyun salonunuzu başlatın.';
+
+  @override
+  String get loungeThemeLabel => 'Salon teması:';
+
+  @override
+  String get loungeCapacityLabel => 'Salon kapasitesi';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count oyuncu';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Özel bir davet kodu oluşturur';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Özel Salon Oluşturuldu!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Özel salonunuz hazır. Katılabilmeleri için bu kodu arkadaşlarınızla paylaşın:';
+
+  @override
+  String get copyCodeTooltip => 'Kodu kopyala';
+
+  @override
+  String get accessCodeCopiedSnackbar => 'Erişim kodu panoya kopyalandı!';
+
+  @override
+  String get letsGoButton => 'Hadi başlayalım!';
+
+  @override
+  String get loungeMembersTitle => 'Salon üyeleri';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online çevrimiçi • $players/$max katılımcı';
+  }
+
+  @override
+  String get privateBadge => 'Özel';
+
+  @override
+  String get publicBadge => 'Herkese Açık';
+
+  @override
+  String get privateInviteCodeLabel => 'Özel davet kodu';
+
+  @override
+  String get kickFromLoungeTooltip => 'Salondan çıkar';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Salon üyelerini görüntüle';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Gereken minimum oyuncu: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Gerekli minimum sayıya ulaşmak için diğer oyuncuların katılması bekleniyor.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return '$game oyununu başlatmak için en az $min oyuncu gerekli ($joined/$min hazır).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Bekleniyor ($joined/$min)';
+  }
 }

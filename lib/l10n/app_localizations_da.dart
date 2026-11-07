@@ -8427,4 +8427,141 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get vote1 => 'stemme';
+
+  @override
+  String get messagesTab => 'Beskeder';
+
+  @override
+  String get sendMessageTooltip => 'Send en besked';
+
+  @override
+  String get noMessagesTitle => 'Ingen beskeder';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Chat med dine venner ved at trykke på beskedikonet ved siden af deres navn!';
+
+  @override
+  String get friendSubtitle => 'Ven';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Sig hej til $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Skriv en besked...';
+
+  @override
+  String get seeProfileTooltip => 'Se profil';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Mindst $min spillere kræves til $game ($count/$min til stede)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Du er alene i rummet. Del koden for at invitere venner!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Venter på, at alle spillere er klar ($ready/$total klar)';
+  }
+
+  @override
+  String get notReady => 'Ikke klar';
+
+  @override
+  String get disconnectedStatus => 'Offline';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get hostBadge => 'Vært';
+
+  @override
+  String get iAmReady => 'Jeg er klar!';
+
+  @override
+  String get cancelReady => 'Ikke klar længere (Annuller)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Start din video-, stemme- og spillelounge med venner.';
+
+  @override
+  String get loungeThemeLabel => 'Loungetema:';
+
+  @override
+  String get loungeCapacityLabel => 'Loungekapacitet';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count spillere';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Genererer en eksklusiv privat invitationskode';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Privat lounge oprettet!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Din private lounge er klar. Del denne kode med venner, så de kan være med:';
+
+  @override
+  String get copyCodeTooltip => 'Kopier kode';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'Adgangskode kopieret til udklipsholder!';
+
+  @override
+  String get letsGoButton => 'Lad os komme i gang!';
+
+  @override
+  String get loungeMembersTitle => 'Loungemedlemmer';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online online • $players/$max deltagere';
+  }
+
+  @override
+  String get privateBadge => 'Privat';
+
+  @override
+  String get publicBadge => 'Offentlig';
+
+  @override
+  String get privateInviteCodeLabel => 'Privat invitationskode';
+
+  @override
+  String get kickFromLoungeTooltip => 'Smid ud af lounge';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Se loungemedlemmer';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Minimum spillere påkrævet: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Venter på, at andre spillere deltager for at nå det krævede minimum.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Mindst $min spillere kræves for at starte $game ($joined/$min klar).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Venter ($joined/$min)';
+  }
 }

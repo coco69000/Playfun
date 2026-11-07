@@ -8465,4 +8465,141 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get vote1 => 'voto';
+
+  @override
+  String get messagesTab => 'Mensagens';
+
+  @override
+  String get sendMessageTooltip => 'Enviar uma mensagem';
+
+  @override
+  String get noMessagesTitle => 'Nenhuma mensagem';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Converse com seus amigos tocando no ícone de mensagem ao lado do nome deles!';
+
+  @override
+  String get friendSubtitle => 'Amigo';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Diga olá para $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Digite uma mensagem...';
+
+  @override
+  String get seeProfileTooltip => 'Ver perfil';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Pelo menos $min jogadores necessários para $game ($count/$min presentes)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Você está sozinho na sala. Compartilhe o código para convidar amigos!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Aguardando que todos os jogadores estejam prontos ($ready/$total prontos)';
+  }
+
+  @override
+  String get notReady => 'Não pronto';
+
+  @override
+  String get disconnectedStatus => 'Desconectado';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get hostBadge => 'Anfitrião';
+
+  @override
+  String get iAmReady => 'Estou pronto!';
+
+  @override
+  String get cancelReady => 'Não estou mais pronto (Cancelar)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Inicie sua sala de vídeo, voz e jogos com amigos.';
+
+  @override
+  String get loungeThemeLabel => 'Tema da sala:';
+
+  @override
+  String get loungeCapacityLabel => 'Capacidade da sala';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count jogadores';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Gera um código de convite privado exclusivo';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Sala privada criada!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Sua sala privada está pronta. Compartilhe este código com seus amigos para que possam entrar:';
+
+  @override
+  String get copyCodeTooltip => 'Copiar código';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'Código de acesso copiado para a área de transferência!';
+
+  @override
+  String get letsGoButton => 'Vamos lá!';
+
+  @override
+  String get loungeMembersTitle => 'Membros da sala';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online online • $players/$max participantes';
+  }
+
+  @override
+  String get privateBadge => 'Privado';
+
+  @override
+  String get publicBadge => 'Público';
+
+  @override
+  String get privateInviteCodeLabel => 'Código de convite privado';
+
+  @override
+  String get kickFromLoungeTooltip => 'Expulsar da sala';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Ver membros da sala';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Jogadores mínimos necessários: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Aguardando que outros jogadores entrem no jogo para atingir o mínimo necessário.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Pelo menos $min jogadores necessários para iniciar $game ($joined/$min prontos).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Espera ($joined/$min)';
+  }
 }

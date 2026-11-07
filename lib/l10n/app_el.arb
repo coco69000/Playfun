@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "ψήφος"
+  "vote1": "ψήφος",
+  "messagesTab": "Μηνύματα",
+  "sendMessageTooltip": "Στείλτε μήνυμα",
+  "noMessagesTitle": "Δεν υπάρχουν μηνύματα",
+  "noMessagesSubtitle": "Συνομιλήστε με τους φίλους σας πατώντας το εικονίδιο μηνύματος δίπλα στο όνομά τους!",
+  "friendSubtitle": "Φίλος",
+  "sayHelloToFriend": "Πείτε γεια στον/στην {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Γράψτε ένα μήνυμα...",
+  "seeProfileTooltip": "Προβολή προφίλ",
+  "minPlayersRequiredForGame": "Απαιτούνται τουλάχιστον {min} παίκτες για το {game} ({count}/{min} παρόντες)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Είστε μόνοι στο δωμάτιο. Μοιραστείτε τον κωδικό για να προσκαλέσετε φίλους!",
+  "waitingAllPlayersReady": "Αναμονή για να είναι έτοιμοι όλοι οι παίκτες ({ready}/{total} έτοιμοι)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Μη έτοιμος",
+  "disconnectedStatus": "Εκτός σύνδεσης",
+  "onlineStatus": "Συνδεδεμένος",
+  "hostBadge": "Οικοδεσπότης",
+  "iAmReady": "Είμαι έτοιμος!",
+  "cancelReady": "Δεν είμαι πλέον έτοιμος (Ακύρωση)",
+  "launchLoungeSubtitle": "Ξεκινήστε το σαλόνι βίντεο, φωνής και παιχνιδιών με τους φίλους σας.",
+  "loungeThemeLabel": "Θέμα σαλονιού:",
+  "loungeCapacityLabel": "Χωρητικότητα σαλονιού",
+  "playersCountSuffix": "{count} παίκτες",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Δημιουργεί έναν αποκλειστικό ιδιωτικό κωδικό πρόσκλησης",
+  "privateLoungeCreatedTitle": "Το ιδιωτικό σαλόνι δημιουργήθηκε!",
+  "privateLoungeCreatedSubtitle": "Το ιδιωτικό σας σαλόνι είναι έτοιμο. Μοιραστείτε αυτόν τον κωδικό με φίλους για να συμμετάσχουν:",
+  "copyCodeTooltip": "Αντιγραφή κωδικού",
+  "accessCodeCopiedSnackbar": "Ο κωδικός πρόσβασης αντιγράφηκε στο πρόχειρο!",
+  "letsGoButton": "Πάμε!",
+  "loungeMembersTitle": "Μέλη σαλονιού",
+  "loungeMembersCountSubtitle": "{online} συνδεδεμένοι • {players}/{max} συμμετέχοντες",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Ιδιωτικό",
+  "publicBadge": "Δημόσιο",
+  "privateInviteCodeLabel": "Ιδιωτικός κωδικός πρόσκλησης",
+  "kickFromLoungeTooltip": "Αποβολή από το σαλόνι",
+  "viewLoungeMembersTooltip": "Προβολή μελών σαλονιού",
+  "minPlayersRequiredCount": "Ελάχιστος απαιτούμενος αριθμός παικτών: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Αναμονή για άλλους παίκτες να μπουν στο παιχνίδι ώστε να επιτευχθεί ο ελάχιστος αριθμός.",
+  "minPlayersToLaunchGameError": "Απαιτούνται τουλάχιστον {min} παίκτες για να ξεκινήσει το {game} ({joined}/{min} έτοιμοι).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Αναμονή ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

@@ -8472,4 +8472,141 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get vote1 => 'stem';
+
+  @override
+  String get messagesTab => 'Berichten';
+
+  @override
+  String get sendMessageTooltip => 'Bericht versturen';
+
+  @override
+  String get noMessagesTitle => 'Geen berichten';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Chat met je vrienden door op het berichtpictogram naast hun naam te tikken!';
+
+  @override
+  String get friendSubtitle => 'Vriend';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Zeg hallo tegen $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Typ een bericht...';
+
+  @override
+  String get seeProfileTooltip => 'Profiel bekijken';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Minimaal $min spelers vereist voor $game ($count/$min aanwezig)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Je bent alleen in de kamer. Deel de code om vrienden uit te nodigen!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Wachten tot alle spelers klaar zijn ($ready/$total klaar)';
+  }
+
+  @override
+  String get notReady => 'Niet klaar';
+
+  @override
+  String get disconnectedStatus => 'Offline';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get hostBadge => 'Host';
+
+  @override
+  String get iAmReady => 'Ik ben er klaar voor!';
+
+  @override
+  String get cancelReady => 'Niet meer klaar (Annuleren)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Start je video-, spraak- en gamelounge met vrienden.';
+
+  @override
+  String get loungeThemeLabel => 'Loungethema:';
+
+  @override
+  String get loungeCapacityLabel => 'Loungecapaciteit';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count spelers';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Genereert een exclusieve privécocde';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Privélounge aangemaakt!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Je privélounge is klaar. Deel deze code met vrienden zodat ze kunnen meedoen:';
+
+  @override
+  String get copyCodeTooltip => 'Code kopiëren';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'Toegangscode gekopieerd naar klembord!';
+
+  @override
+  String get letsGoButton => 'Laten we gaan!';
+
+  @override
+  String get loungeMembersTitle => 'Loungeleden';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online online • $players/$max deelnemers';
+  }
+
+  @override
+  String get privateBadge => 'Privé';
+
+  @override
+  String get publicBadge => 'Openbaar';
+
+  @override
+  String get privateInviteCodeLabel => 'Privé-uitnodigingscode';
+
+  @override
+  String get kickFromLoungeTooltip => 'Uit lounge verwijderen';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Loungeleden bekijken';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Minimaal aantal spelers vereist: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Wachten tot andere spelers meedoen om het vereiste minimum te bereiken.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Minimaal $min spelers vereist om $game te starten ($joined/$min klaar).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Wachten ($joined/$min)';
+  }
 }

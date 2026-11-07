@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "голос"
+  "vote1": "голос",
+  "messagesTab": "Сообщения",
+  "sendMessageTooltip": "Отправить сообщение",
+  "noMessagesTitle": "Нет сообщений",
+  "noMessagesSubtitle": "Общайтесь с друзьями, нажимая на значок сообщения рядом с их именем!",
+  "friendSubtitle": "Друг",
+  "sayHelloToFriend": "Поздоровайтесь с {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Напишите сообщение...",
+  "seeProfileTooltip": "Посмотреть профиль",
+  "minPlayersRequiredForGame": "Минимум {min} игроков требуется для {game} ({count}/{min} присутствуют)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Вы одни в комнате. Поделитесь кодом, чтобы пригласить друзей!",
+  "waitingAllPlayersReady": "Ожидание готовности всех игроков ({ready}/{total} готовы)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Не готов",
+  "disconnectedStatus": "Не в сети",
+  "onlineStatus": "В сети",
+  "hostBadge": "Хост",
+  "iAmReady": "Я готов!",
+  "cancelReady": "Я не готов (Отмена)",
+  "launchLoungeSubtitle": "Запустите видео, голосовую и игровую комнату с друзьями.",
+  "loungeThemeLabel": "Тема комнаты:",
+  "loungeCapacityLabel": "Вместимость комнаты",
+  "playersCountSuffix": "{count} игроков",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Создает эксклюзивный приватный код приглашения",
+  "privateLoungeCreatedTitle": "Приватная комната создана!",
+  "privateLoungeCreatedSubtitle": "Ваша приватная комната готова. Поделитесь этим кодом с друзьями, чтобы они присоединились:",
+  "copyCodeTooltip": "Копировать код",
+  "accessCodeCopiedSnackbar": "Код доступа скопирован в буфер обмена!",
+  "letsGoButton": "Поехали!",
+  "loungeMembersTitle": "Участники комнаты",
+  "loungeMembersCountSubtitle": "{online} в сети • {players}/{max} участников",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Приватный",
+  "publicBadge": "Публичный",
+  "privateInviteCodeLabel": "Приватный код приглашения",
+  "kickFromLoungeTooltip": "Исключить из комнаты",
+  "viewLoungeMembersTooltip": "Посмотреть участников комнаты",
+  "minPlayersRequiredCount": "Минимум игроков требуется: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Ожидание присоединения других игроков, чтобы набрать необходимый минимум.",
+  "minPlayersToLaunchGameError": "Минимум {min} игроков требуется для запуска {game} ({joined}/{min} готовы).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Ожидание ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

@@ -8320,4 +8320,139 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get vote1 => 'vote';
+
+  @override
+  String get messagesTab => 'الرسائل';
+
+  @override
+  String get sendMessageTooltip => 'إرسال رسالة';
+
+  @override
+  String get noMessagesTitle => 'لا توجد رسائل';
+
+  @override
+  String get noMessagesSubtitle =>
+      'دردش مع أصدقائك بالنقر على أيقونة الرسالة بجوار أسمائهم!';
+
+  @override
+  String get friendSubtitle => 'صديق';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'قل مرحبًا لـ $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'اكتب رسالة...';
+
+  @override
+  String get seeProfileTooltip => 'عرض الملف الشخصي';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'مطلوب $min لاعبين على الأقل لـ $game ($count/$min متواجدون)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'أنت وحدك في الغرفة. شارك الرمز لدعوة الأصدقاء!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'في انتظار استعداد جميع اللاعبين ($ready/$total جاهزون)';
+  }
+
+  @override
+  String get notReady => 'غير جاهز';
+
+  @override
+  String get disconnectedStatus => 'غير متصل';
+
+  @override
+  String get onlineStatus => 'متصل';
+
+  @override
+  String get hostBadge => 'المضيف';
+
+  @override
+  String get iAmReady => 'أنا جاهز!';
+
+  @override
+  String get cancelReady => 'لست جاهزًا (إلغاء)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'ابدأ صالتك للفيديو والصوت والألعاب مع أصدقائك.';
+
+  @override
+  String get loungeThemeLabel => 'موضوع الصالة:';
+
+  @override
+  String get loungeCapacityLabel => 'سعة الصالة';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count لاعبين';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle => 'إنشاء رمز دعوة خاص وحصري';
+
+  @override
+  String get privateLoungeCreatedTitle => 'تم إنشاء الصالة الخاصة!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'صالتك الخاصة جاهزة. شارك هذا الرمز مع أصدقائك لينضموا إليك:';
+
+  @override
+  String get copyCodeTooltip => 'نسخ الرمز';
+
+  @override
+  String get accessCodeCopiedSnackbar => 'تم نسخ رمز الدخول إلى الحافظة!';
+
+  @override
+  String get letsGoButton => 'هيا بنا!';
+
+  @override
+  String get loungeMembersTitle => 'أعضاء الصالة';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online متصل • $players/$max مشارك';
+  }
+
+  @override
+  String get privateBadge => 'خاص';
+
+  @override
+  String get publicBadge => 'عام';
+
+  @override
+  String get privateInviteCodeLabel => 'رمز دعوة خاص';
+
+  @override
+  String get kickFromLoungeTooltip => 'طرد من الصالة';
+
+  @override
+  String get viewLoungeMembersTooltip => 'عرض أعضاء الصالة';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'الحد الأدنى من اللاعبين المطلوبين: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'في انتظار انضمام لاعبين آخرين للوصول إلى الحد الأدنى المطلوب.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'مطلوب $min لاعبين على الأقل لبدء $game ($joined/$min جاهزون).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'انتظار ($joined/$min)';
+  }
 }

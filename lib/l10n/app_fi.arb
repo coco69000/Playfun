@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "ääni"
+  "vote1": "ääni",
+  "messagesTab": "Viestit",
+  "sendMessageTooltip": "Lähetä viesti",
+  "noMessagesTitle": "Ei viestejä",
+  "noMessagesSubtitle": "Keskustele ystäviesi kanssa napauttamalla viestikuvaketta heidän nimensä vieressä!",
+  "friendSubtitle": "Ystävä",
+  "sayHelloToFriend": "Sano hei käyttäjälle {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Kirjoita viesti...",
+  "seeProfileTooltip": "Näytä profiili",
+  "minPlayersRequiredForGame": "Vähintään {min} pelaajaa vaaditaan peliin {game} ({count}/{min} paikalla)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Olet yksin huoneessa. Jaa koodi kutsuaksesi ystäviä!",
+  "waitingAllPlayersReady": "Odotetaan kaikkien pelaajien valmistautumista ({ready}/{total} valmiina)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Ei valmis",
+  "disconnectedStatus": "Offline",
+  "onlineStatus": "Online",
+  "hostBadge": "Isäntä",
+  "iAmReady": "Olen valmis!",
+  "cancelReady": "En ole enää valmis (Peruuta)",
+  "launchLoungeSubtitle": "Käynnistä video-, ääni- ja pelihuoneesi ystäviesi kanssa.",
+  "loungeThemeLabel": "Huoneen teema:",
+  "loungeCapacityLabel": "Huoneen kapasiteetti",
+  "playersCountSuffix": "{count} pelaajaa",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Luo ainutlaatuisen yksityisen kutsukoodin",
+  "privateLoungeCreatedTitle": "Yksityinen huone luotu!",
+  "privateLoungeCreatedSubtitle": "Yksityinen huoneesi on valmis. Jaa tämä koodi ystävillesi, jotta he voivat liittyä:",
+  "copyCodeTooltip": "Kopioi koodi",
+  "accessCodeCopiedSnackbar": "Pääsykoodi kopioitu leikepöydälle!",
+  "letsGoButton": "Mennään!",
+  "loungeMembersTitle": "Huoneen jäsenet",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} osallistujaa",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Yksityinen",
+  "publicBadge": "Julkinen",
+  "privateInviteCodeLabel": "Yksityinen kutsukoodi",
+  "kickFromLoungeTooltip": "Poista huoneesta",
+  "viewLoungeMembersTooltip": "Näytä huoneen jäsenet",
+  "minPlayersRequiredCount": "Vähimmäispelaajamäärä: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Odotetaan muiden pelaajien liittymistä vähimmäismäärän saavuttamiseksi.",
+  "minPlayersToLaunchGameError": "Vähintään {min} pelaajaa tarvitaan pelin {game} käynnistämiseen ({joined}/{min} valmiina).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Odottaa ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

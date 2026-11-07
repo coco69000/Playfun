@@ -8435,4 +8435,140 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get vote1 => 'ääni';
+
+  @override
+  String get messagesTab => 'Viestit';
+
+  @override
+  String get sendMessageTooltip => 'Lähetä viesti';
+
+  @override
+  String get noMessagesTitle => 'Ei viestejä';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Keskustele ystäviesi kanssa napauttamalla viestikuvaketta heidän nimensä vieressä!';
+
+  @override
+  String get friendSubtitle => 'Ystävä';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Sano hei käyttäjälle $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Kirjoita viesti...';
+
+  @override
+  String get seeProfileTooltip => 'Näytä profiili';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Vähintään $min pelaajaa vaaditaan peliin $game ($count/$min paikalla)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Olet yksin huoneessa. Jaa koodi kutsuaksesi ystäviä!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Odotetaan kaikkien pelaajien valmistautumista ($ready/$total valmiina)';
+  }
+
+  @override
+  String get notReady => 'Ei valmis';
+
+  @override
+  String get disconnectedStatus => 'Offline';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get hostBadge => 'Isäntä';
+
+  @override
+  String get iAmReady => 'Olen valmis!';
+
+  @override
+  String get cancelReady => 'En ole enää valmis (Peruuta)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Käynnistä video-, ääni- ja pelihuoneesi ystäviesi kanssa.';
+
+  @override
+  String get loungeThemeLabel => 'Huoneen teema:';
+
+  @override
+  String get loungeCapacityLabel => 'Huoneen kapasiteetti';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count pelaajaa';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Luo ainutlaatuisen yksityisen kutsukoodin';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Yksityinen huone luotu!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Yksityinen huoneesi on valmis. Jaa tämä koodi ystävillesi, jotta he voivat liittyä:';
+
+  @override
+  String get copyCodeTooltip => 'Kopioi koodi';
+
+  @override
+  String get accessCodeCopiedSnackbar => 'Pääsykoodi kopioitu leikepöydälle!';
+
+  @override
+  String get letsGoButton => 'Mennään!';
+
+  @override
+  String get loungeMembersTitle => 'Huoneen jäsenet';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online online • $players/$max osallistujaa';
+  }
+
+  @override
+  String get privateBadge => 'Yksityinen';
+
+  @override
+  String get publicBadge => 'Julkinen';
+
+  @override
+  String get privateInviteCodeLabel => 'Yksityinen kutsukoodi';
+
+  @override
+  String get kickFromLoungeTooltip => 'Poista huoneesta';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Näytä huoneen jäsenet';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Vähimmäispelaajamäärä: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Odotetaan muiden pelaajien liittymistä vähimmäismäärän saavuttamiseksi.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Vähintään $min pelaajaa tarvitaan pelin $game käynnistämiseen ($joined/$min valmiina).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Odottaa ($joined/$min)';
+  }
 }

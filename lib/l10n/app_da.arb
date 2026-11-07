@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "stemme"
+  "vote1": "stemme",
+  "messagesTab": "Beskeder",
+  "sendMessageTooltip": "Send en besked",
+  "noMessagesTitle": "Ingen beskeder",
+  "noMessagesSubtitle": "Chat med dine venner ved at trykke på beskedikonet ved siden af deres navn!",
+  "friendSubtitle": "Ven",
+  "sayHelloToFriend": "Sig hej til {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Skriv en besked...",
+  "seeProfileTooltip": "Se profil",
+  "minPlayersRequiredForGame": "Mindst {min} spillere kræves til {game} ({count}/{min} til stede)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Du er alene i rummet. Del koden for at invitere venner!",
+  "waitingAllPlayersReady": "Venter på, at alle spillere er klar ({ready}/{total} klar)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Ikke klar",
+  "disconnectedStatus": "Offline",
+  "onlineStatus": "Online",
+  "hostBadge": "Vært",
+  "iAmReady": "Jeg er klar!",
+  "cancelReady": "Ikke klar længere (Annuller)",
+  "launchLoungeSubtitle": "Start din video-, stemme- og spillelounge med venner.",
+  "loungeThemeLabel": "Loungetema:",
+  "loungeCapacityLabel": "Loungekapacitet",
+  "playersCountSuffix": "{count} spillere",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Genererer en eksklusiv privat invitationskode",
+  "privateLoungeCreatedTitle": "Privat lounge oprettet!",
+  "privateLoungeCreatedSubtitle": "Din private lounge er klar. Del denne kode med venner, så de kan være med:",
+  "copyCodeTooltip": "Kopier kode",
+  "accessCodeCopiedSnackbar": "Adgangskode kopieret til udklipsholder!",
+  "letsGoButton": "Lad os komme i gang!",
+  "loungeMembersTitle": "Loungemedlemmer",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} deltagere",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Privat",
+  "publicBadge": "Offentlig",
+  "privateInviteCodeLabel": "Privat invitationskode",
+  "kickFromLoungeTooltip": "Smid ud af lounge",
+  "viewLoungeMembersTooltip": "Se loungemedlemmer",
+  "minPlayersRequiredCount": "Minimum spillere påkrævet: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Venter på, at andre spillere deltager for at nå det krævede minimum.",
+  "minPlayersToLaunchGameError": "Mindst {min} spillere kræves for at starte {game} ({joined}/{min} klar).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Venter ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

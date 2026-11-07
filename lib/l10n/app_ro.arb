@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "vot"
+  "vote1": "vot",
+  "messagesTab": "Mesaje",
+  "sendMessageTooltip": "Trimite un mesaj",
+  "noMessagesTitle": "Niciun mesaj",
+  "noMessagesSubtitle": "Discută cu prietenii tăi apăsând pictograma de mesaj de lângă numele lor!",
+  "friendSubtitle": "Prieten",
+  "sayHelloToFriend": "Spune-i bună lui {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Scrie un mesaj...",
+  "seeProfileTooltip": "Vezi profilul",
+  "minPlayersRequiredForGame": "Cel puțin {min} jucători necesari pentru {game} ({count}/{min} prezenți)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Ești singur în cameră. Trimite codul pentru a invita prieteni!",
+  "waitingAllPlayersReady": "Se așteaptă ca toți jucătorii să fie gata ({ready}/{total} gata)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Nu e gata",
+  "disconnectedStatus": "Deconectat",
+  "onlineStatus": "Online",
+  "hostBadge": "Gazdă",
+  "iAmReady": "Sunt gata!",
+  "cancelReady": "Nu mai sunt gata (Anulare)",
+  "launchLoungeSubtitle": "Lansează salonul tău video, vocal și de jocuri cu prietenii.",
+  "loungeThemeLabel": "Tema salonului:",
+  "loungeCapacityLabel": "Capacitatea salonului",
+  "playersCountSuffix": "{count} jucători",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Generează un cod de invitație privat exclusiv",
+  "privateLoungeCreatedTitle": "Salon privat creat!",
+  "privateLoungeCreatedSubtitle": "Salonul tău privat este gata. Trimite acest cod prietenilor pentru a se alătura:",
+  "copyCodeTooltip": "Copiază codul",
+  "accessCodeCopiedSnackbar": "Codul de acces a fost copiat în clipboard!",
+  "letsGoButton": "Să începem!",
+  "loungeMembersTitle": "Membrii salonului",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} participanți",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Privat",
+  "publicBadge": "Public",
+  "privateInviteCodeLabel": "Cod de invitație privat",
+  "kickFromLoungeTooltip": "Exclude din salon",
+  "viewLoungeMembersTooltip": "Vezi membrii salonului",
+  "minPlayersRequiredCount": "Jucători minimi necesari: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Se așteaptă ca alți jucători să se alăture jocului pentru a atinge minimul necesar.",
+  "minPlayersToLaunchGameError": "Cel puțin {min} jucători necesari pentru a lansa {game} ({joined}/{min} gata).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Așteptare ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

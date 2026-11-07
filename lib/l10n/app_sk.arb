@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "hlas"
+  "vote1": "hlas",
+  "messagesTab": "Správy",
+  "sendMessageTooltip": "Odoslať správu",
+  "noMessagesTitle": "Žiadne správy",
+  "noMessagesSubtitle": "Rozprávajte sa s priateľmi klepnutím na ikonu správy vedľa ich mena!",
+  "friendSubtitle": "Priateľ",
+  "sayHelloToFriend": "Pozdravte {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Napíšte správu...",
+  "seeProfileTooltip": "Zobraziť profil",
+  "minPlayersRequiredForGame": "Pre {game} sa vyžaduje aspoň {min} hráčov ({count}/{min} prítomných)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "V miestnosti ste sami. Zdieľajte kód a pozvite priateľov!",
+  "waitingAllPlayersReady": "Čaká sa, kým budú všetci hráči pripravení ({ready}/{total} pripravených)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Nepripravený",
+  "disconnectedStatus": "Odpojený",
+  "onlineStatus": "Online",
+  "hostBadge": "Hostiteľ",
+  "iAmReady": "Som pripravený!",
+  "cancelReady": "Už nie som pripravený (Zrušiť)",
+  "launchLoungeSubtitle": "Spustite svoj video, hlasový a herný salónik s priateľmi.",
+  "loungeThemeLabel": "Téma salónika:",
+  "loungeCapacityLabel": "Kapacita salónika",
+  "playersCountSuffix": "{count} hráčov",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Vygeneruje exkluzívny súkromný kód pozvánky",
+  "privateLoungeCreatedTitle": "Súkromný salónik vytvorený!",
+  "privateLoungeCreatedSubtitle": "Váš súkromný salónik je pripravený. Zdieľajte tento kód s priateľmi, aby sa pripojili:",
+  "copyCodeTooltip": "Kopírovať kód",
+  "accessCodeCopiedSnackbar": "Prístupový kód bol skopírovaný do schránky!",
+  "letsGoButton": "Poďme na to!",
+  "loungeMembersTitle": "Členovia salónika",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} účastníkov",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Súkromný",
+  "publicBadge": "Verejný",
+  "privateInviteCodeLabel": "Súkromný kód pozvánky",
+  "kickFromLoungeTooltip": "Vyhodiť zo salónika",
+  "viewLoungeMembersTooltip": "Zobraziť členov salónika",
+  "minPlayersRequiredCount": "Minimálny počet hráčov: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Čaká sa, kým sa pripoja ďalší hráči, aby sa dosiahol požadovaný minimálny počet.",
+  "minPlayersToLaunchGameError": "Na spustenie {game} sa vyžaduje aspoň {min} hráčov ({joined}/{min} pripravených).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Čakanie ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

@@ -8464,4 +8464,141 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get vote1 => 'szavazat';
+
+  @override
+  String get messagesTab => 'Üzenetek';
+
+  @override
+  String get sendMessageTooltip => 'Üzenet küldése';
+
+  @override
+  String get noMessagesTitle => 'Nincsenek üzenetek';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Csevegj a barátaiddal a nevük melletti üzenet ikonra koppintva!';
+
+  @override
+  String get friendSubtitle => 'Barát';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Köszönj neki: $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Írj egy üzenetet...';
+
+  @override
+  String get seeProfileTooltip => 'Profil megtekintése';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Legalább $min játékos szükséges a $game játékhoz ($count/$min jelen van)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Egyedül vagy a szobában. Oszd meg a kódot a barátaid meghívásához!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Várakozás az összes játékos felkészülésére ($ready/$total kész)';
+  }
+
+  @override
+  String get notReady => 'Nincs kész';
+
+  @override
+  String get disconnectedStatus => 'Offline';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get hostBadge => 'Házigazda';
+
+  @override
+  String get iAmReady => 'Kész vagyok!';
+
+  @override
+  String get cancelReady => 'Mégsem vagyok kész (Mégse)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Indítsd el videós, hangos és játékos szobádat a barátaiddal.';
+
+  @override
+  String get loungeThemeLabel => 'Szoba témája:';
+
+  @override
+  String get loungeCapacityLabel => 'Szoba befogadóképessége';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count játékos';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Exkluzív privát meghívókódot hoz létre';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Privát szoba létrehozva!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'A privát szobád készen áll. Oszd meg ezt a kódot a barátaiddal, hogy csatlakozhassanak:';
+
+  @override
+  String get copyCodeTooltip => 'Kód másolása';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'A hozzáférési kód a vágólapra másolva!';
+
+  @override
+  String get letsGoButton => 'Gyerünk!';
+
+  @override
+  String get loungeMembersTitle => 'Szoba tagjai';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online online • $players/$max résztvevő';
+  }
+
+  @override
+  String get privateBadge => 'Privát';
+
+  @override
+  String get publicBadge => 'Nyilvános';
+
+  @override
+  String get privateInviteCodeLabel => 'Privát meghívókód';
+
+  @override
+  String get kickFromLoungeTooltip => 'Kirúgás a szobából';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Szoba tagjainak megtekintése';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Szükséges minimális játékosszám: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Várakozás más játékosok csatlakozására a minimális létszám eléréséhez.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Legalább $min játékos szükséges a $game indításához ($joined/$min kész).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Várakozás ($joined/$min)';
+  }
 }

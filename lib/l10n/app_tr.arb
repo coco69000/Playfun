@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "oy"
+  "vote1": "oy",
+  "messagesTab": "Mesajlar",
+  "sendMessageTooltip": "Mesaj gönder",
+  "noMessagesTitle": "Mesaj yok",
+  "noMessagesSubtitle": "Arkadaşlarınızın adının yanındaki mesaj simgesine dokunarak sohbet edin!",
+  "friendSubtitle": "Arkadaş",
+  "sayHelloToFriend": "{name} kişisine merhaba deyin!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Bir mesaj yazın...",
+  "seeProfileTooltip": "Profili görüntüle",
+  "minPlayersRequiredForGame": "{game} için en az {min} oyuncu gerekli ({count}/{min} mevcut)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Odada tek başınasınız. Arkadaşlarınızı davet etmek için kodu paylaşın!",
+  "waitingAllPlayersReady": "Tüm oyuncuların hazır olması bekleniyor ({ready}/{total} hazır)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Hazır değil",
+  "disconnectedStatus": "Çevrimdışı",
+  "onlineStatus": "Çevrimiçi",
+  "hostBadge": "Oda Sahibi",
+  "iAmReady": "Hazırım!",
+  "cancelReady": "Artık hazır değilim (İptal)",
+  "launchLoungeSubtitle": "Arkadaşlarınızla video, ses ve oyun salonunuzu başlatın.",
+  "loungeThemeLabel": "Salon teması:",
+  "loungeCapacityLabel": "Salon kapasitesi",
+  "playersCountSuffix": "{count} oyuncu",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Özel bir davet kodu oluşturur",
+  "privateLoungeCreatedTitle": "Özel Salon Oluşturuldu!",
+  "privateLoungeCreatedSubtitle": "Özel salonunuz hazır. Katılabilmeleri için bu kodu arkadaşlarınızla paylaşın:",
+  "copyCodeTooltip": "Kodu kopyala",
+  "accessCodeCopiedSnackbar": "Erişim kodu panoya kopyalandı!",
+  "letsGoButton": "Hadi başlayalım!",
+  "loungeMembersTitle": "Salon üyeleri",
+  "loungeMembersCountSubtitle": "{online} çevrimiçi • {players}/{max} katılımcı",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Özel",
+  "publicBadge": "Herkese Açık",
+  "privateInviteCodeLabel": "Özel davet kodu",
+  "kickFromLoungeTooltip": "Salondan çıkar",
+  "viewLoungeMembersTooltip": "Salon üyelerini görüntüle",
+  "minPlayersRequiredCount": "Gereken minimum oyuncu: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Gerekli minimum sayıya ulaşmak için diğer oyuncuların katılması bekleniyor.",
+  "minPlayersToLaunchGameError": "{game} oyununu başlatmak için en az {min} oyuncu gerekli ({joined}/{min} hazır).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Bekleniyor ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

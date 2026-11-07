@@ -8419,4 +8419,141 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get vote1 => 'голос';
+
+  @override
+  String get messagesTab => 'Повідомлення';
+
+  @override
+  String get sendMessageTooltip => 'Надіслати повідомлення';
+
+  @override
+  String get noMessagesTitle => 'Немає повідомлень';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Спілкуйтеся з друзями, натиснувши на значок повідомлення поруч з їхнім ім\'ям!';
+
+  @override
+  String get friendSubtitle => 'Друг';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Привітайтеся з $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Введіть повідомлення...';
+
+  @override
+  String get seeProfileTooltip => 'Переглянути профіль';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Щонайменше $min гравців потрібно для $game ($count/$min присутні)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Ви самі в кімнаті. Поділіться кодом, щоб запросити друзів!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Очікування готовності всіх гравців ($ready/$total готові)';
+  }
+
+  @override
+  String get notReady => 'Не готовий';
+
+  @override
+  String get disconnectedStatus => 'Офлайн';
+
+  @override
+  String get onlineStatus => 'В мережі';
+
+  @override
+  String get hostBadge => 'Хост';
+
+  @override
+  String get iAmReady => 'Я готовий!';
+
+  @override
+  String get cancelReady => 'Я не готовий (Скасувати)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Запустіть відео, голосову та ігрову кімнату з друзями.';
+
+  @override
+  String get loungeThemeLabel => 'Тема кімнати:';
+
+  @override
+  String get loungeCapacityLabel => 'Місткість кімнати';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count гравців';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Створює ексклюзивний приватний код запрошення';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Приватну кімнату створено!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Ваша приватна кімната готова. Поділіться цим кодом з друзями, щоб вони могли приєднатися:';
+
+  @override
+  String get copyCodeTooltip => 'Копіювати код';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'Код доступу скопійовано в буфер обміну!';
+
+  @override
+  String get letsGoButton => 'Поїхали!';
+
+  @override
+  String get loungeMembersTitle => 'Учасники кімнати';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online в мережі • $players/$max учасників';
+  }
+
+  @override
+  String get privateBadge => 'Приватний';
+
+  @override
+  String get publicBadge => 'Публічний';
+
+  @override
+  String get privateInviteCodeLabel => 'Приватний код запрошення';
+
+  @override
+  String get kickFromLoungeTooltip => 'Видалити з кімнати';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Переглянути учасників кімнати';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Мінімальна кількість гравців: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Очікування приєднання інших гравців для досягнення необхідного мінімуму.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Щонайменше $min гравців потрібно для запуску $game ($joined/$min готові).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Очікування ($joined/$min)';
+  }
 }

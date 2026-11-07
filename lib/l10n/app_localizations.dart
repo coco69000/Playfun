@@ -14716,6 +14716,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'vote'**
   String get vote1;
+
+  /// No description provided for @messagesTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get messagesTab;
+
+  /// No description provided for @sendMessageTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message'**
+  String get sendMessageTooltip;
+
+  /// No description provided for @noMessagesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages'**
+  String get noMessagesTitle;
+
+  /// No description provided for @noMessagesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat with your friends by tapping the message icon next to their name!'**
+  String get noMessagesSubtitle;
+
+  /// No description provided for @friendSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Friend'**
+  String get friendSubtitle;
+
+  /// No description provided for @sayHelloToFriend.
+  ///
+  /// In en, this message translates to:
+  /// **'Say hello to {name}!'**
+  String sayHelloToFriend(Object name);
+
+  /// No description provided for @writeAMessageHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message...'**
+  String get writeAMessageHint;
+
+  /// No description provided for @seeProfileTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'View profile'**
+  String get seeProfileTooltip;
+
+  /// No description provided for @minPlayersRequiredForGame.
+  ///
+  /// In en, this message translates to:
+  /// **'At least {min} players required for {game} ({count}/{min} present)'**
+  String minPlayersRequiredForGame(Object min, Object game, Object count);
+
+  /// No description provided for @aloneInLobbyShareCode.
+  ///
+  /// In en, this message translates to:
+  /// **'You are alone in the room. Share the code to invite friends!'**
+  String get aloneInLobbyShareCode;
+
+  /// No description provided for @waitingAllPlayersReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for all players to be ready ({ready}/{total} ready)'**
+  String waitingAllPlayersReady(Object ready, Object total);
+
+  /// No description provided for @notReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Not ready'**
+  String get notReady;
+
+  /// No description provided for @disconnectedStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get disconnectedStatus;
+
+  /// No description provided for @onlineStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get onlineStatus;
+
+  /// No description provided for @hostBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Host'**
+  String get hostBadge;
+
+  /// No description provided for @iAmReady.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'\'m ready!'**
+  String get iAmReady;
+
+  /// No description provided for @cancelReady.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'\'m not ready (Cancel)'**
+  String get cancelReady;
+
+  /// No description provided for @launchLoungeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Launch your video, voice, and game lounge with friends.'**
+  String get launchLoungeSubtitle;
+
+  /// No description provided for @loungeThemeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lounge theme:'**
+  String get loungeThemeLabel;
+
+  /// No description provided for @loungeCapacityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lounge capacity'**
+  String get loungeCapacityLabel;
+
+  /// No description provided for @playersCountSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} players'**
+  String playersCountSuffix(Object count);
+
+  /// No description provided for @generatePrivateInviteCodeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Generates an exclusive private invite code'**
+  String get generatePrivateInviteCodeSubtitle;
+
+  /// No description provided for @privateLoungeCreatedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Private Lounge Created!'**
+  String get privateLoungeCreatedTitle;
+
+  /// No description provided for @privateLoungeCreatedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your private lounge is ready. Share this code with friends so they can join you:'**
+  String get privateLoungeCreatedSubtitle;
+
+  /// No description provided for @copyCodeTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy code'**
+  String get copyCodeTooltip;
+
+  /// No description provided for @accessCodeCopiedSnackbar.
+  ///
+  /// In en, this message translates to:
+  /// **'Access code copied to clipboard!'**
+  String get accessCodeCopiedSnackbar;
+
+  /// No description provided for @letsGoButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'\'s go!'**
+  String get letsGoButton;
+
+  /// No description provided for @loungeMembersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lounge members'**
+  String get loungeMembersTitle;
+
+  /// No description provided for @loungeMembersCountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{online} online • {players}/{max} participants'**
+  String loungeMembersCountSubtitle(Object online, Object players, Object max);
+
+  /// No description provided for @privateBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Private'**
+  String get privateBadge;
+
+  /// No description provided for @publicBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Public'**
+  String get publicBadge;
+
+  /// No description provided for @privateInviteCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Private invite code'**
+  String get privateInviteCodeLabel;
+
+  /// No description provided for @kickFromLoungeTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Kick from lounge'**
+  String get kickFromLoungeTooltip;
+
+  /// No description provided for @viewLoungeMembersTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'View lounge members'**
+  String get viewLoungeMembersTooltip;
+
+  /// No description provided for @minPlayersRequiredCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum players required: {min}'**
+  String minPlayersRequiredCount(Object min);
+
+  /// No description provided for @waitingMorePlayersQuorum.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for other players to join the game to reach the required minimum.'**
+  String get waitingMorePlayersQuorum;
+
+  /// No description provided for @minPlayersToLaunchGameError.
+  ///
+  /// In en, this message translates to:
+  /// **'At least {min} players required to launch {game} ({joined}/{min} ready).'**
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined);
+
+  /// No description provided for @waitingQuorumProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting ({joined}/{min})'**
+  String waitingQuorumProgress(Object joined, Object min);
 }
 
 class _AppLocalizationsDelegate

@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "voto"
+  "vote1": "voto",
+  "messagesTab": "Messaggi",
+  "sendMessageTooltip": "Invia un messaggio",
+  "noMessagesTitle": "Nessun messaggio",
+  "noMessagesSubtitle": "Chatta con i tuoi amici toccando l''icona del messaggio accanto al loro nome!",
+  "friendSubtitle": "Amico",
+  "sayHelloToFriend": "Dì ciao a {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Scrivi un messaggio...",
+  "seeProfileTooltip": "Visualizza profilo",
+  "minPlayersRequiredForGame": "Almeno {min} giocatori richiesti per {game} ({count}/{min} presenti)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Sei solo nella stanza. Condividi il codice per invitare gli amici!",
+  "waitingAllPlayersReady": "In attesa che tutti i giocatori siano pronti ({ready}/{total} pronti)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Non pronto",
+  "disconnectedStatus": "Disconnesso",
+  "onlineStatus": "Online",
+  "hostBadge": "Host",
+  "iAmReady": "Sono pronto!",
+  "cancelReady": "Non sono più pronto (Annulla)",
+  "launchLoungeSubtitle": "Avvia la tua lounge video, vocale e di giochi con gli amici.",
+  "loungeThemeLabel": "Tema della lounge:",
+  "loungeCapacityLabel": "Capacità della lounge",
+  "playersCountSuffix": "{count} giocatori",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Genera un codice di invito privato esclusivo",
+  "privateLoungeCreatedTitle": "Lounge privata creata!",
+  "privateLoungeCreatedSubtitle": "La tua lounge privata è pronta. Condividi questo codice con gli amici per farli entrare:",
+  "copyCodeTooltip": "Copia codice",
+  "accessCodeCopiedSnackbar": "Codice di accesso copiato negli appunti!",
+  "letsGoButton": "Andiamo!",
+  "loungeMembersTitle": "Membri della lounge",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} partecipanti",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Privato",
+  "publicBadge": "Pubblico",
+  "privateInviteCodeLabel": "Codice di invito privato",
+  "kickFromLoungeTooltip": "Espelli dalla lounge",
+  "viewLoungeMembersTooltip": "Visualizza membri della lounge",
+  "minPlayersRequiredCount": "Giocatori minimi richiesti: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "In attesa che altri giocatori si uniscano alla partita per raggiungere il minimo richiesto.",
+  "minPlayersToLaunchGameError": "Almeno {min} giocatori richiesti per avviare {game} ({joined}/{min} pronti).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Attesa ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

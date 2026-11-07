@@ -8467,4 +8467,141 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get vote1 => 'vot';
+
+  @override
+  String get messagesTab => 'Mesaje';
+
+  @override
+  String get sendMessageTooltip => 'Trimite un mesaj';
+
+  @override
+  String get noMessagesTitle => 'Niciun mesaj';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Discută cu prietenii tăi apăsând pictograma de mesaj de lângă numele lor!';
+
+  @override
+  String get friendSubtitle => 'Prieten';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Spune-i bună lui $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Scrie un mesaj...';
+
+  @override
+  String get seeProfileTooltip => 'Vezi profilul';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Cel puțin $min jucători necesari pentru $game ($count/$min prezenți)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Ești singur în cameră. Trimite codul pentru a invita prieteni!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Se așteaptă ca toți jucătorii să fie gata ($ready/$total gata)';
+  }
+
+  @override
+  String get notReady => 'Nu e gata';
+
+  @override
+  String get disconnectedStatus => 'Deconectat';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get hostBadge => 'Gazdă';
+
+  @override
+  String get iAmReady => 'Sunt gata!';
+
+  @override
+  String get cancelReady => 'Nu mai sunt gata (Anulare)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Lansează salonul tău video, vocal și de jocuri cu prietenii.';
+
+  @override
+  String get loungeThemeLabel => 'Tema salonului:';
+
+  @override
+  String get loungeCapacityLabel => 'Capacitatea salonului';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count jucători';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Generează un cod de invitație privat exclusiv';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Salon privat creat!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Salonul tău privat este gata. Trimite acest cod prietenilor pentru a se alătura:';
+
+  @override
+  String get copyCodeTooltip => 'Copiază codul';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'Codul de acces a fost copiat în clipboard!';
+
+  @override
+  String get letsGoButton => 'Să începem!';
+
+  @override
+  String get loungeMembersTitle => 'Membrii salonului';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online online • $players/$max participanți';
+  }
+
+  @override
+  String get privateBadge => 'Privat';
+
+  @override
+  String get publicBadge => 'Public';
+
+  @override
+  String get privateInviteCodeLabel => 'Cod de invitație privat';
+
+  @override
+  String get kickFromLoungeTooltip => 'Exclude din salon';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Vezi membrii salonului';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Jucători minimi necesari: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Se așteaptă ca alți jucători să se alăture jocului pentru a atinge minimul necesar.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Cel puțin $min jucători necesari pentru a lansa $game ($joined/$min gata).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Așteptare ($joined/$min)';
+  }
 }

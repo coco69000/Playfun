@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "vote"
+  "vote1": "vote",
+  "messagesTab": "Messages",
+  "sendMessageTooltip": "Send a message",
+  "noMessagesTitle": "No messages",
+  "noMessagesSubtitle": "Chat with your friends by tapping the message icon next to their name!",
+  "friendSubtitle": "Friend",
+  "sayHelloToFriend": "Say hello to {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Type a message...",
+  "seeProfileTooltip": "View profile",
+  "minPlayersRequiredForGame": "At least {min} players required for {game} ({count}/{min} present)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "You are alone in the room. Share the code to invite friends!",
+  "waitingAllPlayersReady": "Waiting for all players to be ready ({ready}/{total} ready)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Not ready",
+  "disconnectedStatus": "Offline",
+  "onlineStatus": "Online",
+  "hostBadge": "Host",
+  "iAmReady": "I''m ready!",
+  "cancelReady": "I''m not ready (Cancel)",
+  "launchLoungeSubtitle": "Launch your video, voice, and game lounge with friends.",
+  "loungeThemeLabel": "Lounge theme:",
+  "loungeCapacityLabel": "Lounge capacity",
+  "playersCountSuffix": "{count} players",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Generates an exclusive private invite code",
+  "privateLoungeCreatedTitle": "Private Lounge Created!",
+  "privateLoungeCreatedSubtitle": "Your private lounge is ready. Share this code with friends so they can join you:",
+  "copyCodeTooltip": "Copy code",
+  "accessCodeCopiedSnackbar": "Access code copied to clipboard!",
+  "letsGoButton": "Let''s go!",
+  "loungeMembersTitle": "Lounge members",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} participants",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Private",
+  "publicBadge": "Public",
+  "privateInviteCodeLabel": "Private invite code",
+  "kickFromLoungeTooltip": "Kick from lounge",
+  "viewLoungeMembersTooltip": "View lounge members",
+  "minPlayersRequiredCount": "Minimum players required: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Waiting for other players to join the game to reach the required minimum.",
+  "minPlayersToLaunchGameError": "At least {min} players required to launch {game} ({joined}/{min} ready).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Waiting ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

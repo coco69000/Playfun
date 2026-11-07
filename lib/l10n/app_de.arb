@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "Stimme"
+  "vote1": "Stimme",
+  "messagesTab": "Nachrichten",
+  "sendMessageTooltip": "Nachricht senden",
+  "noMessagesTitle": "Keine Nachrichten",
+  "noMessagesSubtitle": "Chatte mit deinen Freunden, indem du auf das Nachrichtensymbol neben ihrem Namen tippst!",
+  "friendSubtitle": "Freund",
+  "sayHelloToFriend": "Sag Hallo zu {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Nachricht eingeben...",
+  "seeProfileTooltip": "Profil anzeigen",
+  "minPlayersRequiredForGame": "Mindestens {min} Spieler für {game} erforderlich ({count}/{min} anwesend)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Du bist allein im Raum. Teile den Code, um Freunde einzuladen!",
+  "waitingAllPlayersReady": "Warten, bis alle Spieler bereit sind ({ready}/{total} bereit)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Nicht bereit",
+  "disconnectedStatus": "Offline",
+  "onlineStatus": "Online",
+  "hostBadge": "Host",
+  "iAmReady": "Ich bin bereit!",
+  "cancelReady": "Nicht mehr bereit (Abbrechen)",
+  "launchLoungeSubtitle": "Starte deine Video-, Sprach- und Spiele-Lounge mit Freunden.",
+  "loungeThemeLabel": "Lounge-Thema:",
+  "loungeCapacityLabel": "Lounge-Kapazität",
+  "playersCountSuffix": "{count} Spieler",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Erstellt einen exklusiven privaten Einladungscode",
+  "privateLoungeCreatedTitle": "Private Lounge erstellt!",
+  "privateLoungeCreatedSubtitle": "Deine private Lounge ist bereit. Teile diesen Code mit Freunden, damit sie beitreten können:",
+  "copyCodeTooltip": "Code kopieren",
+  "accessCodeCopiedSnackbar": "Zugangscode in die Zwischenablage kopiert!",
+  "letsGoButton": "Los geht''s!",
+  "loungeMembersTitle": "Lounge-Mitglieder",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} Teilnehmer",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Privat",
+  "publicBadge": "Öffentlich",
+  "privateInviteCodeLabel": "Privater Einladungscode",
+  "kickFromLoungeTooltip": "Aus der Lounge entfernen",
+  "viewLoungeMembersTooltip": "Lounge-Mitglieder anzeigen",
+  "minPlayersRequiredCount": "Mindestens erforderliche Spieler: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Warten, bis weitere Spieler dem Spiel beitreten, um das Minimum zu erreichen.",
+  "minPlayersToLaunchGameError": "Mindestens {min} Spieler erforderlich, um {game} zu starten ({joined}/{min} bereit).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Warten ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

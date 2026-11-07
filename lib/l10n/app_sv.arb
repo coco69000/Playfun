@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "röst"
+  "vote1": "röst",
+  "messagesTab": "Meddelanden",
+  "sendMessageTooltip": "Skicka ett meddelande",
+  "noMessagesTitle": "Inga meddelanden",
+  "noMessagesSubtitle": "Chatta med dina vänner genom att trycka på meddelandeikonen bredvid deras namn!",
+  "friendSubtitle": "Vän",
+  "sayHelloToFriend": "Säg hej till {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Skriv ett meddelande...",
+  "seeProfileTooltip": "Visa profil",
+  "minPlayersRequiredForGame": "Minst {min} spelare krävs för {game} ({count}/{min} närvarande)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Du är ensam i rummet. Dela koden för att bjuda in vänner!",
+  "waitingAllPlayersReady": "Väntar på att alla spelare ska vara redo ({ready}/{total} redo)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Inte redo",
+  "disconnectedStatus": "Offline",
+  "onlineStatus": "Online",
+  "hostBadge": "Värd",
+  "iAmReady": "Jag är redo!",
+  "cancelReady": "Inte redo längre (Avbryt)",
+  "launchLoungeSubtitle": "Starta din video-, röst- och spellounge med vänner.",
+  "loungeThemeLabel": "Loungetema:",
+  "loungeCapacityLabel": "Loungekapacitet",
+  "playersCountSuffix": "{count} spelare",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Skapar en exklusiv privat inbjudningskod",
+  "privateLoungeCreatedTitle": "Privat lounge skapad!",
+  "privateLoungeCreatedSubtitle": "Din privata lounge är redo. Dela denna kod med vänner så att de kan gå med:",
+  "copyCodeTooltip": "Kopiera kod",
+  "accessCodeCopiedSnackbar": "Åtkomstkod kopierad till urklipp!",
+  "letsGoButton": "Nu kör vi!",
+  "loungeMembersTitle": "Loungemedlemmar",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} deltagare",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Privat",
+  "publicBadge": "Offentlig",
+  "privateInviteCodeLabel": "Privat inbjudningskod",
+  "kickFromLoungeTooltip": "Kasta ut från loungen",
+  "viewLoungeMembersTooltip": "Visa loungemedlemmar",
+  "minPlayersRequiredCount": "Minsta antal spelare som krävs: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Väntar på att andra spelare ska gå med för att nå det minimikrav som krävs.",
+  "minPlayersToLaunchGameError": "Minst {min} spelare krävs för att starta {game} ({joined}/{min} redo).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Väntar ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "глас"
+  "vote1": "глас",
+  "messagesTab": "Съобщения",
+  "sendMessageTooltip": "Изпращане на съобщение",
+  "noMessagesTitle": "Няма съобщения",
+  "noMessagesSubtitle": "Разговаряйте с приятелите си, като докоснете иконата за съобщение до името им!",
+  "friendSubtitle": "Приятел",
+  "sayHelloToFriend": "Кажете здравей на {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Напишете съобщение...",
+  "seeProfileTooltip": "Вижте профила",
+  "minPlayersRequiredForGame": "Поне {min} играчи са необходими за {game} ({count}/{min} присъстващи)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Вие сте сами в стаята. Споделете кода, за да поканите приятели!",
+  "waitingAllPlayersReady": "Изчакване всички играчи да са готови ({ready}/{total} готови)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Не е готов",
+  "disconnectedStatus": "Офлайн",
+  "onlineStatus": "Онлайн",
+  "hostBadge": "Домакин",
+  "iAmReady": "Готов съм!",
+  "cancelReady": "Вече не съм готов (Отказ)",
+  "launchLoungeSubtitle": "Стартирайте вашата видео, гласова и игрална зала с приятели.",
+  "loungeThemeLabel": "Тема на залата:",
+  "loungeCapacityLabel": "Капацитет на залата",
+  "playersCountSuffix": "{count} играчи",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Генерира ексклузивен частен код за покана",
+  "privateLoungeCreatedTitle": "Частната зала е създадена!",
+  "privateLoungeCreatedSubtitle": "Вашата частна зала е готова. Споделете този код с приятели, за да се присъединят:",
+  "copyCodeTooltip": "Копиране на кода",
+  "accessCodeCopiedSnackbar": "Кодът за достъп е копиран в клипборда!",
+  "letsGoButton": "Да започваме!",
+  "loungeMembersTitle": "Членове на залата",
+  "loungeMembersCountSubtitle": "{online} онлайн • {players}/{max} участници",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Частен",
+  "publicBadge": "Публичен",
+  "privateInviteCodeLabel": "Частен код за покана",
+  "kickFromLoungeTooltip": "Изгонване от залата",
+  "viewLoungeMembersTooltip": "Вижте членовете на залата",
+  "minPlayersRequiredCount": "Минимален брой играчи: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Изчакване на други играчи да се присъединят, за да се достигне минималният брой.",
+  "minPlayersToLaunchGameError": "Поне {min} играчи са необходими за стартиране на {game} ({joined}/{min} готови).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Изчакване ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

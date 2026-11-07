@@ -8404,4 +8404,141 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get vote1 => 'hlas';
+
+  @override
+  String get messagesTab => 'Správy';
+
+  @override
+  String get sendMessageTooltip => 'Odoslať správu';
+
+  @override
+  String get noMessagesTitle => 'Žiadne správy';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Rozprávajte sa s priateľmi klepnutím na ikonu správy vedľa ich mena!';
+
+  @override
+  String get friendSubtitle => 'Priateľ';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Pozdravte $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Napíšte správu...';
+
+  @override
+  String get seeProfileTooltip => 'Zobraziť profil';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Pre $game sa vyžaduje aspoň $min hráčov ($count/$min prítomných)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'V miestnosti ste sami. Zdieľajte kód a pozvite priateľov!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Čaká sa, kým budú všetci hráči pripravení ($ready/$total pripravených)';
+  }
+
+  @override
+  String get notReady => 'Nepripravený';
+
+  @override
+  String get disconnectedStatus => 'Odpojený';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get hostBadge => 'Hostiteľ';
+
+  @override
+  String get iAmReady => 'Som pripravený!';
+
+  @override
+  String get cancelReady => 'Už nie som pripravený (Zrušiť)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Spustite svoj video, hlasový a herný salónik s priateľmi.';
+
+  @override
+  String get loungeThemeLabel => 'Téma salónika:';
+
+  @override
+  String get loungeCapacityLabel => 'Kapacita salónika';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count hráčov';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Vygeneruje exkluzívny súkromný kód pozvánky';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Súkromný salónik vytvorený!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Váš súkromný salónik je pripravený. Zdieľajte tento kód s priateľmi, aby sa pripojili:';
+
+  @override
+  String get copyCodeTooltip => 'Kopírovať kód';
+
+  @override
+  String get accessCodeCopiedSnackbar =>
+      'Prístupový kód bol skopírovaný do schránky!';
+
+  @override
+  String get letsGoButton => 'Poďme na to!';
+
+  @override
+  String get loungeMembersTitle => 'Členovia salónika';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online online • $players/$max účastníkov';
+  }
+
+  @override
+  String get privateBadge => 'Súkromný';
+
+  @override
+  String get publicBadge => 'Verejný';
+
+  @override
+  String get privateInviteCodeLabel => 'Súkromný kód pozvánky';
+
+  @override
+  String get kickFromLoungeTooltip => 'Vyhodiť zo salónika';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Zobraziť členov salónika';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Minimálny počet hráčov: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Čaká sa, kým sa pripoja ďalší hráči, aby sa dosiahol požadovaný minimálny počet.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Na spustenie $game sa vyžaduje aspoň $min hráčov ($joined/$min pripravených).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Čakanie ($joined/$min)';
+  }
 }

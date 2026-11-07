@@ -8429,4 +8429,140 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get vote1 => 'röst';
+
+  @override
+  String get messagesTab => 'Meddelanden';
+
+  @override
+  String get sendMessageTooltip => 'Skicka ett meddelande';
+
+  @override
+  String get noMessagesTitle => 'Inga meddelanden';
+
+  @override
+  String get noMessagesSubtitle =>
+      'Chatta med dina vänner genom att trycka på meddelandeikonen bredvid deras namn!';
+
+  @override
+  String get friendSubtitle => 'Vän';
+
+  @override
+  String sayHelloToFriend(Object name) {
+    return 'Säg hej till $name!';
+  }
+
+  @override
+  String get writeAMessageHint => 'Skriv ett meddelande...';
+
+  @override
+  String get seeProfileTooltip => 'Visa profil';
+
+  @override
+  String minPlayersRequiredForGame(Object min, Object game, Object count) {
+    return 'Minst $min spelare krävs för $game ($count/$min närvarande)';
+  }
+
+  @override
+  String get aloneInLobbyShareCode =>
+      'Du är ensam i rummet. Dela koden för att bjuda in vänner!';
+
+  @override
+  String waitingAllPlayersReady(Object ready, Object total) {
+    return 'Väntar på att alla spelare ska vara redo ($ready/$total redo)';
+  }
+
+  @override
+  String get notReady => 'Inte redo';
+
+  @override
+  String get disconnectedStatus => 'Offline';
+
+  @override
+  String get onlineStatus => 'Online';
+
+  @override
+  String get hostBadge => 'Värd';
+
+  @override
+  String get iAmReady => 'Jag är redo!';
+
+  @override
+  String get cancelReady => 'Inte redo längre (Avbryt)';
+
+  @override
+  String get launchLoungeSubtitle =>
+      'Starta din video-, röst- och spellounge med vänner.';
+
+  @override
+  String get loungeThemeLabel => 'Loungetema:';
+
+  @override
+  String get loungeCapacityLabel => 'Loungekapacitet';
+
+  @override
+  String playersCountSuffix(Object count) {
+    return '$count spelare';
+  }
+
+  @override
+  String get generatePrivateInviteCodeSubtitle =>
+      'Skapar en exklusiv privat inbjudningskod';
+
+  @override
+  String get privateLoungeCreatedTitle => 'Privat lounge skapad!';
+
+  @override
+  String get privateLoungeCreatedSubtitle =>
+      'Din privata lounge är redo. Dela denna kod med vänner så att de kan gå med:';
+
+  @override
+  String get copyCodeTooltip => 'Kopiera kod';
+
+  @override
+  String get accessCodeCopiedSnackbar => 'Åtkomstkod kopierad till urklipp!';
+
+  @override
+  String get letsGoButton => 'Nu kör vi!';
+
+  @override
+  String get loungeMembersTitle => 'Loungemedlemmar';
+
+  @override
+  String loungeMembersCountSubtitle(Object online, Object players, Object max) {
+    return '$online online • $players/$max deltagare';
+  }
+
+  @override
+  String get privateBadge => 'Privat';
+
+  @override
+  String get publicBadge => 'Offentlig';
+
+  @override
+  String get privateInviteCodeLabel => 'Privat inbjudningskod';
+
+  @override
+  String get kickFromLoungeTooltip => 'Kasta ut från loungen';
+
+  @override
+  String get viewLoungeMembersTooltip => 'Visa loungemedlemmar';
+
+  @override
+  String minPlayersRequiredCount(Object min) {
+    return 'Minsta antal spelare som krävs: $min';
+  }
+
+  @override
+  String get waitingMorePlayersQuorum =>
+      'Väntar på att andra spelare ska gå med för att nå det minimikrav som krävs.';
+
+  @override
+  String minPlayersToLaunchGameError(Object min, Object game, Object joined) {
+    return 'Minst $min spelare krävs för att starta $game ($joined/$min redo).';
+  }
+
+  @override
+  String waitingQuorumProgress(Object joined, Object min) {
+    return 'Väntar ($joined/$min)';
+  }
 }

@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "vote"
+  "vote1": "vote",
+  "messagesTab": "الرسائل",
+  "sendMessageTooltip": "إرسال رسالة",
+  "noMessagesTitle": "لا توجد رسائل",
+  "noMessagesSubtitle": "دردش مع أصدقائك بالنقر على أيقونة الرسالة بجوار أسمائهم!",
+  "friendSubtitle": "صديق",
+  "sayHelloToFriend": "قل مرحبًا لـ {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "اكتب رسالة...",
+  "seeProfileTooltip": "عرض الملف الشخصي",
+  "minPlayersRequiredForGame": "مطلوب {min} لاعبين على الأقل لـ {game} ({count}/{min} متواجدون)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "أنت وحدك في الغرفة. شارك الرمز لدعوة الأصدقاء!",
+  "waitingAllPlayersReady": "في انتظار استعداد جميع اللاعبين ({ready}/{total} جاهزون)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "غير جاهز",
+  "disconnectedStatus": "غير متصل",
+  "onlineStatus": "متصل",
+  "hostBadge": "المضيف",
+  "iAmReady": "أنا جاهز!",
+  "cancelReady": "لست جاهزًا (إلغاء)",
+  "launchLoungeSubtitle": "ابدأ صالتك للفيديو والصوت والألعاب مع أصدقائك.",
+  "loungeThemeLabel": "موضوع الصالة:",
+  "loungeCapacityLabel": "سعة الصالة",
+  "playersCountSuffix": "{count} لاعبين",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "إنشاء رمز دعوة خاص وحصري",
+  "privateLoungeCreatedTitle": "تم إنشاء الصالة الخاصة!",
+  "privateLoungeCreatedSubtitle": "صالتك الخاصة جاهزة. شارك هذا الرمز مع أصدقائك لينضموا إليك:",
+  "copyCodeTooltip": "نسخ الرمز",
+  "accessCodeCopiedSnackbar": "تم نسخ رمز الدخول إلى الحافظة!",
+  "letsGoButton": "هيا بنا!",
+  "loungeMembersTitle": "أعضاء الصالة",
+  "loungeMembersCountSubtitle": "{online} متصل • {players}/{max} مشارك",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "خاص",
+  "publicBadge": "عام",
+  "privateInviteCodeLabel": "رمز دعوة خاص",
+  "kickFromLoungeTooltip": "طرد من الصالة",
+  "viewLoungeMembersTooltip": "عرض أعضاء الصالة",
+  "minPlayersRequiredCount": "الحد الأدنى من اللاعبين المطلوبين: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "في انتظار انضمام لاعبين آخرين للوصول إلى الحد الأدنى المطلوب.",
+  "minPlayersToLaunchGameError": "مطلوب {min} لاعبين على الأقل لبدء {game} ({joined}/{min} جاهزون).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "انتظار ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }

@@ -5146,5 +5146,123 @@
       }
     }
   },
-  "vote1": "stem"
+  "vote1": "stem",
+  "messagesTab": "Berichten",
+  "sendMessageTooltip": "Bericht versturen",
+  "noMessagesTitle": "Geen berichten",
+  "noMessagesSubtitle": "Chat met je vrienden door op het berichtpictogram naast hun naam te tikken!",
+  "friendSubtitle": "Vriend",
+  "sayHelloToFriend": "Zeg hallo tegen {name}!",
+  "@sayHelloToFriend": {
+    "placeholders": {
+      "name": {
+        "type": "Object"
+      }
+    }
+  },
+  "writeAMessageHint": "Typ een bericht...",
+  "seeProfileTooltip": "Profiel bekijken",
+  "minPlayersRequiredForGame": "Minimaal {min} spelers vereist voor {game} ({count}/{min} aanwezig)",
+  "@minPlayersRequiredForGame": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "aloneInLobbyShareCode": "Je bent alleen in de kamer. Deel de code om vrienden uit te nodigen!",
+  "waitingAllPlayersReady": "Wachten tot alle spelers klaar zijn ({ready}/{total} klaar)",
+  "@waitingAllPlayersReady": {
+    "placeholders": {
+      "ready": {
+        "type": "Object"
+      },
+      "total": {
+        "type": "Object"
+      }
+    }
+  },
+  "notReady": "Niet klaar",
+  "disconnectedStatus": "Offline",
+  "onlineStatus": "Online",
+  "hostBadge": "Host",
+  "iAmReady": "Ik ben er klaar voor!",
+  "cancelReady": "Niet meer klaar (Annuleren)",
+  "launchLoungeSubtitle": "Start je video-, spraak- en gamelounge met vrienden.",
+  "loungeThemeLabel": "Loungethema:",
+  "loungeCapacityLabel": "Loungecapaciteit",
+  "playersCountSuffix": "{count} spelers",
+  "@playersCountSuffix": {
+    "placeholders": {
+      "count": {
+        "type": "Object"
+      }
+    }
+  },
+  "generatePrivateInviteCodeSubtitle": "Genereert een exclusieve privécocde",
+  "privateLoungeCreatedTitle": "Privélounge aangemaakt!",
+  "privateLoungeCreatedSubtitle": "Je privélounge is klaar. Deel deze code met vrienden zodat ze kunnen meedoen:",
+  "copyCodeTooltip": "Code kopiëren",
+  "accessCodeCopiedSnackbar": "Toegangscode gekopieerd naar klembord!",
+  "letsGoButton": "Laten we gaan!",
+  "loungeMembersTitle": "Loungeleden",
+  "loungeMembersCountSubtitle": "{online} online • {players}/{max} deelnemers",
+  "@loungeMembersCountSubtitle": {
+    "placeholders": {
+      "online": {
+        "type": "Object"
+      },
+      "players": {
+        "type": "Object"
+      },
+      "max": {
+        "type": "Object"
+      }
+    }
+  },
+  "privateBadge": "Privé",
+  "publicBadge": "Openbaar",
+  "privateInviteCodeLabel": "Privé-uitnodigingscode",
+  "kickFromLoungeTooltip": "Uit lounge verwijderen",
+  "viewLoungeMembersTooltip": "Loungeleden bekijken",
+  "minPlayersRequiredCount": "Minimaal aantal spelers vereist: {min}",
+  "@minPlayersRequiredCount": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingMorePlayersQuorum": "Wachten tot andere spelers meedoen om het vereiste minimum te bereiken.",
+  "minPlayersToLaunchGameError": "Minimaal {min} spelers vereist om {game} te starten ({joined}/{min} klaar).",
+  "@minPlayersToLaunchGameError": {
+    "placeholders": {
+      "min": {
+        "type": "Object"
+      },
+      "game": {
+        "type": "Object"
+      },
+      "joined": {
+        "type": "Object"
+      }
+    }
+  },
+  "waitingQuorumProgress": "Wachten ({joined}/{min})",
+  "@waitingQuorumProgress": {
+    "placeholders": {
+      "joined": {
+        "type": "Object"
+      },
+      "min": {
+        "type": "Object"
+      }
+    }
+  }
 }
