@@ -4,6 +4,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'services/force_update_service.dart';
 import 'amis.dart';
 import 'player_state.dart';
 import 'theme/app_colors.dart';
@@ -810,263 +813,827 @@ class _FriendsScreenState extends State<FriendsScreen> {
     });
   }
 
+  String _formatMessageTime(DateTime time) {
+    final now = DateTime.now();
+    if (now.difference(time).inDays == 0) {
+      return "${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}";
+    } else if (now.difference(time).inDays < 7) {
+      const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+      return days[time.weekday - 1];
+    } else {
+      return "${time.day.toString().padLeft(2, '0')}/${time.month.toString().padLeft(2, '0')}";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final playerState = Provider.of<PlayerState>(context);
     final friends = playerState.friends;
     final requests = playerState.friendRequests;
 
-    return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+    return DefaultTabController(
+      length: 2,
+      child: SafeArea(
+        child: Column(
+          children: [
+            // Onglets Amis / Messages
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.06),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: TabBar(
+                indicator: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+                  ),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                indicatorSize: TabBarIndicatorSize.tab,
+                dividerColor: Colors.transparent,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white54,
+                labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                tabs: [
+                  Tab(
+                    icon: const Icon(Icons.people_alt_rounded, size: 20),
+                    text: friends.isNotEmpty ? "Amis (${friends.length})" : "Amis",
+                  ),
+                  Tab(
+                    icon: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('direct_chats')
+                          .where('participants', arrayContains: widget.playerId)
+                          .snapshots(),
+                      builder: (context, snap) {
+                        int totalUnread = 0;
+                        if (snap.hasData) {
+                          for (var doc in snap.data!.docs) {
+                            final m = doc.data() as Map<String, dynamic>;
+                            final count = (m['unreadCount']?[widget.playerId] as num?)?.toInt() ?? 0;
+                            totalUnread += count;
+                          }
+                        }
+                        if (totalUnread > 0) {
+                          return Badge(
+                            label: Text('$totalUnread'),
+                            backgroundColor: Colors.redAccent,
+                            child: const Icon(Icons.chat_bubble_rounded, size: 20),
+                          );
+                        }
+                        return const Icon(Icons.chat_bubble_rounded, size: 20);
+                      },
+                    ),
+                    text: "Messages",
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  // --- ONGLET 1 : AMIS ---
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Barre de recherche d'amis
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _searchController,
+                                decoration: InputDecoration(
+                                  hintText: MatchmakingLocalization.tr(context, 'searchByUsername'),
+                                  prefixIcon: const Icon(Icons.search),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.black26,
+                                ),
+                                onSubmitted: (_) => _search(),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            ElevatedButton(
+                              onPressed: _search,
+                              style: ElevatedButton.styleFrom(
+                                shape: const CircleBorder(),
+                                padding: const EdgeInsets.all(16),
+                              ),
+                              child:
+                                  _isSearching
+                                      ? const SizedBox(
+                                        width: 16,
+                                        height: 16,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                          strokeWidth: 2,
+                                        ),
+                                      )
+                                      : Text(MatchmakingLocalization.tr(context, 'searchButton')),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Résultats de recherche
+                      if (_searchResults.isNotEmpty) ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text(
+                            MatchmakingLocalization.tr(context, 'searchResults'),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 120,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            itemCount: _searchResults.length,
+                            itemBuilder: (context, index) {
+                              var user = _searchResults[index];
+                              bool isFriend = friends.contains(user['uid']);
+                              return Card(
+                                color: Colors.deepPurple[900]?.withValues(alpha: 0.5),
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(12),
+                                  onTap: () {
+                                    showUserProfileDialog(
+                                      context,
+                                      targetUid: user['uid'],
+                                      currentUserId: widget.playerId,
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 150,
+                                    padding: const EdgeInsets.all(8),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        CircleAvatar(
+                                          child: Text(user['name'] != null && user['name'].toString().isNotEmpty ? user['name'][0].toUpperCase() : '?'),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          user['name'] ?? AppLocalizations.of(context)!.joueur,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        isFriend
+                                            ? Text(
+                                              MatchmakingLocalization.tr(context, 'alreadyFriends'),
+                                              style: const TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12,
+                                              ),
+                                            )
+                                            : ElevatedButton(
+                                              onPressed: () {
+                                                playerState.sendFriendRequest(
+                                                  user['uid'],
+                                                  user['name'] ?? AppLocalizations.of(context)!.joueur,
+                                                );
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(MatchmakingLocalization.tr(context, 'requestSentTo', {'name': user['name'] ?? AppLocalizations.of(context)!.ceJoueur})),
+                                                  ),
+                                                );
+                                                setState(
+                                                  () => _searchResults.removeAt(index),
+                                                );
+                                              },
+                                              child: Text(
+                                                MatchmakingLocalization.tr(context, 'addFriend'),
+                                                style: const TextStyle(fontSize: 12),
+                                              ),
+                                            ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const Divider(),
+                      ],
+
+                      // Demandes en attente
+                      if (requests.isNotEmpty) ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text(
+                            MatchmakingLocalization.tr(context, 'requestsReceived'),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.amber,
+                            ),
+                          ),
+                        ),
+                        ...requests
+                            .map(
+                              (r) => ListTile(
+                                leading: const CircleAvatar(
+                                  backgroundColor: Colors.amber,
+                                  child: Icon(Icons.person, color: Colors.black),
+                                ),
+                                title: Text(MatchmakingLocalization.tr(context, 'wantsToBeYourFriend', {'name': r['name'] ?? ''})),
+                                onTap: () {
+                                  showUserProfileDialog(
+                                    context,
+                                    targetUid: r['uid'],
+                                    currentUserId: widget.playerId,
+                                  );
+                                },
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.greenAccent,
+                                      ),
+                                      onPressed:
+                                          () => playerState.respondToFriendRequest(
+                                            r['uid'],
+                                            r['name'],
+                                            true,
+                                          ),
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.cancel, color: Colors.redAccent),
+                                      onPressed:
+                                          () => playerState.respondToFriendRequest(
+                                            r['uid'],
+                                            r['name'],
+                                            false,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        const Divider(),
+                      ],
+
+                      // Liste des amis
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          MatchmakingLocalization.tr(context, 'myFriendsCount', {'count': friends.length.toString()}),
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child:
+                            friends.isEmpty
+                                ? EmptyStateView(
+                                  icon: Icons.person_add_alt_1_rounded,
+                                  title: MatchmakingLocalization.tr(context, 'noFriendsYet'),
+                                  subtitle:
+                                      MatchmakingLocalization.tr(context, 'searchFriendsPrompt'),
+                                )
+                                : ListView.builder(
+                                  itemCount: friends.length,
+                                  itemBuilder: (context, index) {
+                                    String friendId = friends[index];
+                                    String friendName =
+                                        playerState.friendNamesCache[friendId] ??
+                                        'Chargement...';
+                                    return ListTile(
+                                      leading: CircleAvatar(
+                                        backgroundColor: AppColors.primary,
+                                        child: Text(
+                                          friendName.isNotEmpty
+                                              ? friendName[0].toUpperCase()
+                                              : "?",
+                                        ),
+                                      ),
+                                      title: Text(
+                                        friendName,
+                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                      onTap: () {
+                                        showUserProfileDialog(
+                                          context,
+                                          targetUid: friendId,
+                                          currentUserId: widget.playerId,
+                                        );
+                                      },
+                                      trailing: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          IconButton(
+                                            icon: const Icon(
+                                              Icons.chat_bubble_rounded,
+                                              color: Colors.cyanAccent,
+                                            ),
+                                            tooltip: "Envoyer un message",
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (_) => DirectChatScreen(
+                                                        friendUid: friendId,
+                                                        friendName: friendName,
+                                                        currentUserId: widget.playerId,
+                                                      ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(
+                                              Icons.person_remove,
+                                              color: Colors.white30,
+                                            ),
+                                            onPressed: () {
+                                              playerState.removeFriend(friendId);
+                                            },
+                                            tooltip: MatchmakingLocalization.tr(context, 'removeFriend'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                      ),
+                    ],
+                  ),
+
+                  // --- ONGLET 2 : MESSAGES ---
+                  StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('direct_chats')
+                        .where('participants', arrayContains: widget.playerId)
+                        .orderBy('lastMessageTime', descending: true)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      final chats = snapshot.data!.docs;
+                      if (chats.isEmpty) {
+                        return EmptyStateView(
+                          icon: Icons.chat_bubble_outline_rounded,
+                          title: "Aucun message",
+                          subtitle: "Discutez avec vos amis en appuyant sur l'icône de message à côté de leur nom !",
+                        );
+                      }
+
+                      return ListView.builder(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        itemCount: chats.length,
+                        itemBuilder: (context, idx) {
+                          final data = chats[idx].data() as Map<String, dynamic>;
+                          final participants = List<String>.from(data['participants'] ?? []);
+                          final friendUid = participants.firstWhere(
+                            (p) => p != widget.playerId,
+                            orElse: () => '',
+                          );
+                          final participantNames = (data['participantNames'] as Map<String, dynamic>?) ?? {};
+                          final friendName = participantNames[friendUid] ??
+                              playerState.friendNamesCache[friendUid] ??
+                              'Ami';
+                          final lastMessage = data['lastMessage'] ?? '';
+                          final unread = (data['unreadCount']?[widget.playerId] as num?)?.toInt() ?? 0;
+                          final time = (data['lastMessageTime'] as Timestamp?)?.toDate();
+
+                          return Card(
+                            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                            color: const Color(0xFF1C1D2A),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              side: BorderSide(
+                                color: unread > 0 ? Colors.cyanAccent.withOpacity(0.5) : Colors.white10,
+                              ),
+                            ),
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              leading: Stack(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: AppColors.primary,
+                                    child: Text(
+                                      friendName.isNotEmpty ? friendName[0].toUpperCase() : '?',
+                                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                                    ),
+                                  ),
+                                  if (unread > 0)
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      child: Container(
+                                        width: 10,
+                                        height: 10,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.cyanAccent,
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      friendName,
+                                      style: TextStyle(
+                                        fontWeight: unread > 0 ? FontWeight.bold : FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  if (time != null)
+                                    Text(
+                                      _formatMessageTime(time),
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        color: unread > 0 ? Colors.cyanAccent : Colors.white38,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              subtitle: Padding(
+                                padding: const EdgeInsets.only(top: 4.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        lastMessage,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: unread > 0 ? Colors.white : Colors.white54,
+                                          fontWeight: unread > 0 ? FontWeight.w600 : FontWeight.normal,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                    if (unread > 0)
+                                      Container(
+                                        margin: const EdgeInsets.only(left: 6),
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                        decoration: BoxDecoration(
+                                          color: Colors.cyanAccent,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Text(
+                                          '$unread',
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (_) => DirectChatScreen(
+                                          friendUid: friendUid,
+                                          friendName: friendName,
+                                          currentUserId: widget.playerId,
+                                        ),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DirectChatScreen extends StatefulWidget {
+  final String friendUid;
+  final String friendName;
+  final String currentUserId;
+
+  const DirectChatScreen({
+    super.key,
+    required this.friendUid,
+    required this.friendName,
+    required this.currentUserId,
+  });
+
+  @override
+  State<DirectChatScreen> createState() => _DirectChatScreenState();
+}
+
+class _DirectChatScreenState extends State<DirectChatScreen> {
+  final TextEditingController _msgCtrl = TextEditingController();
+  final ScrollController _scrollCtrl = ScrollController();
+  bool _isSending = false;
+
+  String get _chatId {
+    List<String> ids = [widget.currentUserId, widget.friendUid]..sort();
+    return ids.join('_');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _clearUnread();
+  }
+
+  void _clearUnread() {
+    FirebaseFirestore.instance.collection('direct_chats').doc(_chatId).set({
+      'unreadCount': {
+        widget.currentUserId: 0,
+      },
+    }, SetOptions(merge: true)).catchError((_) {});
+  }
+
+  @override
+  void dispose() {
+    _msgCtrl.dispose();
+    _scrollCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _sendMessage() async {
+    final text = _msgCtrl.text.trim();
+    if (text.isEmpty || _isSending) return;
+
+    _msgCtrl.clear();
+    setState(() => _isSending = true);
+
+    try {
+      final ps = Provider.of<PlayerState>(context, listen: false);
+      final myName = ps.userName ?? AppLocalizations.of(context)!.joueur;
+
+      final chatRef = FirebaseFirestore.instance.collection('direct_chats').doc(_chatId);
+
+      // 1. Ajouter le message
+      await chatRef.collection('messages').add({
+        'senderId': widget.currentUserId,
+        'senderName': myName,
+        'text': text,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      // 2. Mettre à jour l'en-tête de conversation
+      await chatRef.set({
+        'participants': [widget.currentUserId, widget.friendUid],
+        'participantNames': {
+          widget.currentUserId: myName,
+          widget.friendUid: widget.friendName,
+        },
+        'lastMessage': text,
+        'lastSenderId': widget.currentUserId,
+        'lastMessageTime': FieldValue.serverTimestamp(),
+        'unreadCount': {
+          widget.friendUid: FieldValue.increment(1),
+          widget.currentUserId: 0,
+        },
+      }, SetOptions(merge: true));
+
+      // 3. Notification push via Cloud Function
+      try {
+        final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable(
+          'sendDirectMessageNotification',
+        );
+        await callable.call(ForceUpdateService.withVersion({
+          'friendUid': widget.friendUid,
+          'text': text,
+        }));
+      } catch (err) {
+        debugPrint("Erreur push notification : $err");
+      }
+    } catch (e) {
+      debugPrint("Erreur envoi message : $e");
+    } finally {
+      if (mounted) setState(() => _isSending = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF12131C),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF1E1E2F),
+        elevation: 1,
+        title: Row(
+          children: [
+            CircleAvatar(
+              radius: 18,
+              backgroundColor: AppColors.primary,
+              child: Text(
+                widget.friendName.isNotEmpty ? widget.friendName[0].toUpperCase() : '?',
+                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.friendName,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const Text(
+                    "Ami",
+                    style: TextStyle(fontSize: 11, color: Colors.white54),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline_rounded, color: Colors.cyanAccent),
+            tooltip: "Voir le profil",
+            onPressed: () {
+              showUserProfileDialog(
+                context,
+                targetUid: widget.friendUid,
+                currentUserId: widget.currentUserId,
+              );
+            },
+          ),
+        ],
+      ),
+      body: Column(
         children: [
-          // Barre de recherche d'amis
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('direct_chats')
+                  .doc(_chatId)
+                  .collection('messages')
+                  .orderBy('timestamp', descending: true)
+                  .limit(100)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                final msgs = snapshot.data!.docs;
+                if (msgs.isEmpty) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.chat_bubble_outline_rounded, size: 48, color: Colors.white24),
+                          const SizedBox(height: 12),
+                          Text(
+                            "Dites bonjour à ${widget.friendName} !",
+                            style: const TextStyle(color: Colors.white54, fontSize: 15),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+
+                return ListView.builder(
+                  controller: _scrollCtrl,
+                  reverse: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  itemCount: msgs.length,
+                  itemBuilder: (context, idx) {
+                    final data = msgs[idx].data() as Map<String, dynamic>;
+                    final bool isMe = data['senderId'] == widget.currentUserId;
+                    final text = data['text'] ?? '';
+                    final time = (data['timestamp'] as Timestamp?)?.toDate();
+
+                    return Align(
+                      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 4),
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.75,
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                        decoration: BoxDecoration(
+                          gradient: isMe
+                              ? const LinearGradient(
+                                  colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                )
+                              : null,
+                          color: isMe ? null : const Color(0xFF242638),
+                          borderRadius: BorderRadius.only(
+                            topLeft: const Radius.circular(16),
+                            topRight: const Radius.circular(16),
+                            bottomLeft: isMe ? const Radius.circular(16) : const Radius.circular(4),
+                            bottomRight: isMe ? const Radius.circular(4) : const Radius.circular(16),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.15),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              text,
+                              style: const TextStyle(color: Colors.white, fontSize: 15, height: 1.3),
+                            ),
+                            if (time != null) ...[
+                              const SizedBox(height: 4),
+                              Text(
+                                "${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: isMe ? Colors.white70 : Colors.white38,
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(12, 8, 12, MediaQuery.of(context).padding.bottom + 8),
+            decoration: const BoxDecoration(
+              color: Color(0xFF1E1E2F),
+              border: Border(top: BorderSide(color: Colors.white10)),
+            ),
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      hintText: MatchmakingLocalization.tr(context, 'searchByUsername'),
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      filled: true,
-                      fillColor: Colors.black26,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.08),
+                      borderRadius: BorderRadius.circular(24),
                     ),
-                    onSubmitted: (_) => _search(),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TextField(
+                      controller: _msgCtrl,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                        hintText: "Écrire un message...",
+                        hintStyle: TextStyle(color: Colors.white38),
+                        border: InputBorder.none,
+                      ),
+                      onSubmitted: (_) => _sendMessage(),
+                    ),
                   ),
                 ),
-                SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: _search,
-                  style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(16),
+                const SizedBox(width: 8),
+                Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+                    ),
                   ),
-                  child:
-                      _isSearching
-                          ? SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 2,
-                            ),
-                          )
-                          : Text(MatchmakingLocalization.tr(context, 'searchButton')),
+                  child: IconButton(
+                    icon: const Icon(Icons.send_rounded, color: Colors.white, size: 20),
+                    onPressed: _sendMessage,
+                  ),
                 ),
               ],
             ),
           ),
-
-          // Résultats de recherche
-          if (_searchResults.isNotEmpty) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                MatchmakingLocalization.tr(context, 'searchResults'),
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            SizedBox(
-              height: 120,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                itemCount: _searchResults.length,
-                itemBuilder: (context, index) {
-                  var user = _searchResults[index];
-                  bool isFriend = friends.contains(user['uid']);
-                  return Card(
-                    color: Colors.deepPurple[900]?.withValues(alpha: 0.5),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onTap: () {
-                        showUserProfileDialog(
-                          context,
-                          targetUid: user['uid'],
-                          currentUserId: widget.playerId,
-                        );
-                      },
-                      child: Container(
-                        width: 150,
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              child: Text(user['name'] != null && user['name'].toString().isNotEmpty ? user['name'][0].toUpperCase() : '?'),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              user['name'] ?? AppLocalizations.of(context)!.joueur,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 8),
-                            isFriend
-                                ? Text(
-                                  MatchmakingLocalization.tr(context, 'alreadyFriends'),
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                  ),
-                                )
-                                : ElevatedButton(
-                                  onPressed: () {
-                                    playerState.sendFriendRequest(
-                                      user['uid'],
-                                      user['name'] ?? AppLocalizations.of(context)!.joueur,
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(MatchmakingLocalization.tr(context, 'requestSentTo', {'name': user['name'] ?? AppLocalizations.of(context)!.ceJoueur})),
-                                      ),
-                                    );
-                                    setState(
-                                      () => _searchResults.removeAt(index),
-                                    );
-                                  },
-                                  child: Text(
-                                    MatchmakingLocalization.tr(context, 'addFriend'),
-                                    style: const TextStyle(fontSize: 12),
-                                  ),
-                                ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Divider(),
-          ],
-
-          // Demandes en attente
-          if (requests.isNotEmpty) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                MatchmakingLocalization.tr(context, 'requestsReceived'),
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.amber,
-                ),
-              ),
-            ),
-            ...requests
-                .map(
-                  (r) => ListTile(
-                    leading: const CircleAvatar(
-                      backgroundColor: Colors.amber,
-                      child: Icon(Icons.person, color: Colors.black),
-                    ),
-                    title: Text(MatchmakingLocalization.tr(context, 'wantsToBeYourFriend', {'name': r['name'] ?? ''})),
-                    onTap: () {
-                      showUserProfileDialog(
-                        context,
-                        targetUid: r['uid'],
-                        currentUserId: widget.playerId,
-                      );
-                    },
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.check_circle,
-                            color: Colors.greenAccent,
-                          ),
-                          onPressed:
-                              () => playerState.respondToFriendRequest(
-                                r['uid'],
-                                r['name'],
-                                true,
-                              ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.cancel, color: Colors.redAccent),
-                          onPressed:
-                              () => playerState.respondToFriendRequest(
-                                r['uid'],
-                                r['name'],
-                                false,
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-            const Divider(),
-          ],
-
-          // Liste des amis
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              MatchmakingLocalization.tr(context, 'myFriendsCount', {'count': friends.length.toString()}),
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Expanded(
-            child:
-                friends.isEmpty
-                    ? EmptyStateView(
-                      icon: Icons.person_add_alt_1_rounded,
-                      title: MatchmakingLocalization.tr(context, 'noFriendsYet'),
-                      subtitle:
-                          MatchmakingLocalization.tr(context, 'searchFriendsPrompt'),
-                    )
-                    : ListView.builder(
-                      itemCount: friends.length,
-                      itemBuilder: (context, index) {
-                        String friendId = friends[index];
-                        String friendName =
-                            playerState.friendNamesCache[friendId] ??
-                            'Chargement...';
-                        return ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: AppColors.primary,
-                            child: Text(
-                              friendName.isNotEmpty
-                                  ? friendName[0].toUpperCase()
-                                  : "?",
-                            ),
-                          ),
-                          title: Text(
-                            friendName,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          onTap: () {
-                            showUserProfileDialog(
-                              context,
-                              targetUid: friendId,
-                              currentUserId: widget.playerId,
-                            );
-                          },
-                          trailing: IconButton(
-                            icon: const Icon(
-                              Icons.person_remove,
-                              color: Colors.white30,
-                            ),
-                            onPressed: () {
-                              playerState.removeFriend(friendId);
-                            },
-                            tooltip: MatchmakingLocalization.tr(context, 'removeFriend'),
-                          ),
-                        );
-                      },
-                    ),
-          ),
         ],
       ),
     );
+  }
+}
   }
 }
 

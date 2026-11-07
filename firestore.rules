@@ -102,6 +102,18 @@ service cloud.firestore {
 
     // ==========================================
     // 6. CONFIGURATION DE VERSION & MAINTENANCE (Lecture seule publique)
+    // 6. MESSAGES DIRECTS ENTRE AMIS (DIRECT CHATS)
+    // ==========================================
+    match /direct_chats/{chatId} {
+      allow read, write: if isAuthenticated();
+
+      match /messages/{messageId} {
+        allow read, write: if isAuthenticated();
+      }
+    }
+
+    // ==========================================
+    // 7. CONFIGURATION DE VERSION & MAINTENANCE (Lecture seule publique)
     // ==========================================
     match /config/{docId} {
       allow read: if true;

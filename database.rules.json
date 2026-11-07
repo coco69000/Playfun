@@ -11,6 +11,12 @@
           ".write": "auth != null && $live != 'pictionary'"
         }
       }
+    },
+    "lounges": {
+      "$loungeId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
     }
   }
 }

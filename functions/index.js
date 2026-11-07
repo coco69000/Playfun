@@ -1208,6 +1208,77 @@ exports.sendLoungeInvite = onCall(
   }
 );
 
+exports.sendDirectMessageNotification = onCall(
+  { region: "us-central1" },
+  async (request) => {
+    if (!request.auth) {
+      throw new HttpsError("unauthenticated", "Vous devez être connecté.");
+    }
+    await assertClientVersionValid(request.data);
+    const uid = request.auth.uid;
+    const { friendUid, text } = request.data || {};
+
+    if (!friendUid || typeof friendUid !== "string" || !text || typeof text !== "string") {
+      throw new HttpsError("invalid-argument", "Paramètres de message invalides.");
+    }
+
+    const callerSnap = await db.collection("users").doc(uid).get();
+    const callerName = (callerSnap.exists && callerSnap.data()?.name) || "Un ami";
+
+    const friendRef = db.collection("users").doc(friendUid);
+    const friendSnap = await friendRef.get();
+    if (!friendSnap.exists) {
+      throw new HttpsError("not-found", "Destinataire introuvable.");
+    }
+
+    const friendToken = friendSnap.data()?.fcmToken;
+    if (friendToken) {
+      const sanitizedSnippet = text.length > 80 ? text.substring(0, 77) + "..." : text;
+      const message = {
+        token: friendToken,
+        notification: {
+          title: `Message de ${callerName} 💬`,
+          body: sanitizedSnippet,
+        },
+        data: {
+          type: "direct_message",
+          friendUid: uid,
+          friendName: callerName,
+        },
+        android: {
+          priority: "high",
+          notification: {
+            sound: "default",
+            channelId: "high_importance_channel",
+          },
+        },
+        apns: {
+          payload: {
+            aps: {
+              sound: "default",
+            },
+          },
+        },
+      };
+
+      try {
+        await admin.messaging().send(message);
+        console.log(`Notification push de message envoyée à ${friendUid}`);
+      } catch (err) {
+        console.error("Erreur envoi notification push message:", err);
+        if (
+          err.code === "messaging/registration-token-not-registered" ||
+          err.code === "messaging/invalid-registration-token"
+        ) {
+          await friendRef.update({ fcmToken: admin.firestore.FieldValue.delete() }).catch(() => { });
+        }
+      }
+    }
+
+    return { success: true };
+  }
+);
+
 // =========================================================================
 // 6. TÂCHES PROGRAMMÉES (CLEANUP & GESTION SERVEUR)
 // =========================================================================
