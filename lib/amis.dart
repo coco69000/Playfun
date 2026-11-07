@@ -145,10 +145,7 @@ class SupabaseService {
             .uploadBinary(
               path,
               imageBytes,
-              fileOptions: FileOptions(
-                cacheControl: '3600',
-                upsert: false,
-              ),
+              fileOptions: FileOptions(cacheControl: '3600', upsert: false),
             );
 
         final String publicUrl = _client.storage
@@ -296,83 +293,51 @@ class GameData {
     'Gribouillis': _l10n.rulesGribouillis,
     'Zéro Pointé': _l10n.rulesZeroPointe,
     'Poker': _l10n.rulesPoker,
-    'Le Juge':
-        _l10n.unJoueurEstDesigneComme,
-    'Le Menteur':
-        _l10n.modeClassiqueUneQuestionEst,
-    'Qui Pourrait le Plus ?':
-        GameRulesLocalization.getRules(null, 'Qui Pourrait le Plus ?'),
-    'Belote':
-        GameRulesLocalization.getRules(null, 'Belote'),
-    'Infiltré & Mr. White':
-        _l10n.laPlupartDesJoueursCivils,
-    'Synonyme ou Banni':
-        _l10n.unMotEstAfficheChaque,
-    'Le Jeu des Catégories':
-        _l10n.plusieursCategoriesSontSelectionnees3,
+    'Le Juge': _l10n.unJoueurEstDesigneComme,
+    'Le Menteur': _l10n.modeClassiqueUneQuestionEst,
+    'Qui Pourrait le Plus ?': GameRulesLocalization.getRules(
+      null,
+      'Qui Pourrait le Plus ?',
+    ),
+    'Belote': GameRulesLocalization.getRules(null, 'Belote'),
+    'Infiltré & Mr. White': _l10n.laPlupartDesJoueursCivils,
+    'Synonyme ou Banni': _l10n.unMotEstAfficheChaque,
+    'Le Jeu des Catégories': _l10n.plusieursCategoriesSontSelectionnees3,
     'Action ou Vérité': _l10n.rulesActionOuVerite,
-    'Jeu de la Pièce':
-        _l10n.uneQuestionSecreteEstAffichee,
-    'Le Dilemme':
-        _l10n.leJoueurDesigneDoitRepondre,
-    'Codenames':
-        _l10n.deuxEquipesSaffrontentChaqueEquipe,
-    'Time\'s Up':
-        _l10n.faireDevinerUnMaximumDe,
-    'On se passe un objet rapidement':
-        _l10n.passezLeTelephoneDeMain,
-    'Devine Tête':
-        _l10n.unJoueurTientLeTelephone,
-    'Petit Bac':
-        _l10n.trouvezDesMotsCorrespondantA,
+    'Jeu de la Pièce': _l10n.uneQuestionSecreteEstAffichee,
+    'Le Dilemme': _l10n.leJoueurDesigneDoitRepondre,
+    'Codenames': _l10n.deuxEquipesSaffrontentChaqueEquipe,
+    'Time\'s Up': _l10n.faireDevinerUnMaximumDe,
+    'On se passe un objet rapidement': _l10n.passezLeTelephoneDeMain,
+    'Devine Tête': _l10n.unJoueurTientLeTelephone,
+    'Petit Bac': _l10n.trouvezDesMotsCorrespondantA,
     'Président': _l10n.rulesPresident,
     'Skull': _l10n.rulesSkull,
     'Pictionary': _l10n.rulesPictionary,
     'Just One': _l10n.rulesJustOne,
-    'Le Roi des Mèmes':
-        _l10n.chaqueJoueurRecoitLeMeme,
-    'Le Roi des Mêmes':
-        _l10n.chaqueJoueurRecoitLeMeme,
+    'Le Roi des Mèmes': _l10n.chaqueJoueurRecoitLeMeme,
+    'Le Roi des Mêmes': _l10n.chaqueJoueurRecoitLeMeme,
 
     'Loup-Garou': _l10n.rulesLoupGarou,
-    'Loup Noir':
-        _l10n.vaincreLesVillageoisEstSon,
-    'Loup Bavard':
-        _l10n.vaincreLesVillageoisEstSon1,
-    'Loup Blanc':
-        _l10n.finirSeulSurvivantEstSon,
-    'Mercenaire':
-        _l10n.lePremierJourLObjectif,
-    'Rat Malade':
-        _l10n.sonObjectifEstDeContaminer,
-    'Simple Villageois':
-        _l10n.sonObjectifEstDeVaincre,
-    'Voyante':
-        _l10n.sonObjectifEstDeVaincre1,
-    'Sorcière':
-        _l10n.sonObjectifEstDeVaincre2,
-    'Petite Fille':
-        _l10n.sonObjectifEstDeVaincre3,
-    'Chasseur':
-        _l10n.sonObjectifEstDeVaincre4,
-    'Garde':
-        _l10n.sonObjectifEstDeVaincre5,
-    'Cupidon':
-        _l10n.sonObjectifEstDeVaincre6,
-    'Mentaliste':
-        _l10n.sonObjectifEstDeVaincre7,
-    'Nécromancien':
-        _l10n.vaincreLesLoupsGarousEst,
-    'Fossoyeur':
-        _l10n.vaincreLesLoupsGarousEst1,
-    'Dictateur':
-        _l10n.vaincreLesLoupsGarousEst2,
-    'Chaperon Rouge':
-        _l10n.sonObjectifEstDeVaincre8,
-    'Pyromancien':
-        _l10n.sonObjectifEstDeVaincre9,
-    'Héritier':
-        _l10n.sonObjectifEstDeVaincre10,
+    'Loup Noir': _l10n.vaincreLesVillageoisEstSon,
+    'Loup Bavard': _l10n.vaincreLesVillageoisEstSon1,
+    'Loup Blanc': _l10n.finirSeulSurvivantEstSon,
+    'Mercenaire': _l10n.lePremierJourLObjectif,
+    'Rat Malade': _l10n.sonObjectifEstDeContaminer,
+    'Simple Villageois': _l10n.sonObjectifEstDeVaincre,
+    'Voyante': _l10n.sonObjectifEstDeVaincre1,
+    'Sorcière': _l10n.sonObjectifEstDeVaincre2,
+    'Petite Fille': _l10n.sonObjectifEstDeVaincre3,
+    'Chasseur': _l10n.sonObjectifEstDeVaincre4,
+    'Garde': _l10n.sonObjectifEstDeVaincre5,
+    'Cupidon': _l10n.sonObjectifEstDeVaincre6,
+    'Mentaliste': _l10n.sonObjectifEstDeVaincre7,
+    'Nécromancien': _l10n.vaincreLesLoupsGarousEst,
+    'Fossoyeur': _l10n.vaincreLesLoupsGarousEst1,
+    'Dictateur': _l10n.vaincreLesLoupsGarousEst2,
+    'Chaperon Rouge': _l10n.sonObjectifEstDeVaincre8,
+    'Pyromancien': _l10n.sonObjectifEstDeVaincre9,
+    'Héritier': _l10n.sonObjectifEstDeVaincre10,
     'Dobble': _l10n.rulesDobble,
     'Uno': _l10n.rulesUno,
     'Photo Roulette': _l10n.rulesPhotoRoulette,
@@ -628,8 +593,7 @@ class GameData {
       'name': 'Loup Noir',
       'camp': 'loups',
       'minPlayers': 12,
-      'description':
-          _l10n.peutTransformerSaVictimeEn,
+      'description': _l10n.peutTransformerSaVictimeEn,
     },
     {
       'name': 'Loup Bavard',
@@ -689,8 +653,7 @@ class GameData {
       'name': 'Pyromancien',
       'camp': 'villageois',
       'minPlayers': 15,
-      'description':
-          _l10n.placeDesTonneauxQuiExplosent,
+      'description': _l10n.placeDesTonneauxQuiExplosent,
     },
     {
       'name': 'Héritier',
@@ -953,9 +916,7 @@ class GameData {
 
   static List<List<int>> generateDobbleCards(int symbolsPerCard) {
     if (symbolsPerCard < 3) {
-      throw ArgumentError(
-        _l10n.leNombreDeSymbolesPar,
-      );
+      throw ArgumentError(_l10n.leNombreDeSymbolesPar);
     }
 
     int n = symbolsPerCard - 1;
@@ -963,7 +924,11 @@ class GameData {
 
     if (totalSymbols > dobbleSymbols.length) {
       throw ArgumentError(
-        _l10n.pasAssezDeSymbolesUniques1(symbolsPerCard, totalSymbols, dobbleSymbols.length),
+        _l10n.pasAssezDeSymbolesUniques1(
+          symbolsPerCard,
+          totalSymbols,
+          dobbleSymbols.length,
+        ),
       );
     }
 
@@ -995,10 +960,7 @@ class GameData {
       }
     }
 
-    assert(
-      cards.length == totalSymbols,
-      _l10n.laGenerationAEchoueNombre,
-    );
+    assert(cards.length == totalSymbols, _l10n.laGenerationAEchoueNombre);
 
     return cards;
   }
@@ -1549,9 +1511,7 @@ class _MultiplayerTeamSelectionDialogState
               children: [
                 ElevatedButton.icon(
                   icon: Icon(Icons.sync),
-                  label: Text(
-                    AppLocalizations.of(context)!.equilibrer,
-                  ),
+                  label: Text(AppLocalizations.of(context)!.equilibrer),
                   onPressed: _autoBalance,
                 ),
                 ElevatedButton.icon(
@@ -1578,7 +1538,11 @@ class _MultiplayerTeamSelectionDialogState
                         int teamIndex = entry.key;
                         List<String> teamPlayers = entry.value;
                         return _buildTeamColumn(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.equipe1, [teamIndex + 1]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.equipe1,
+                            [teamIndex + 1],
+                          ),
                           teamPlayers,
                           teamIndex,
                           teamColors[teamIndex % teamColors.length],
@@ -1589,7 +1553,10 @@ class _MultiplayerTeamSelectionDialogState
             ),
             Divider(),
             Text(
-              AppLocalizations.of(context)!.joueursNonAssignes.replaceAll("{0}", unassignedPlayers.length.toString()),
+              AppLocalizations.of(context)!.joueursNonAssignes.replaceAll(
+                "{0}",
+                unassignedPlayers.length.toString(),
+              ),
             ),
             Expanded(
               flex: 0, // Taille minimale pour le Wrap
@@ -1632,9 +1599,7 @@ class _MultiplayerTeamSelectionDialogState
                     Navigator.of(context).pop();
                   }
                   : null,
-          child: Text(
-            AppLocalizations.of(context)!.confirmerLesEquipes,
-          ),
+          child: Text(AppLocalizations.of(context)!.confirmerLesEquipes),
         ),
       ],
     );
@@ -2406,15 +2371,16 @@ class FirebaseService {
     final double percentElapsed =
         (elapsedSeconds / effectiveTimerSeconds) * 100.0;
 
-    if (percentElapsed <= 10.0) return 10; // 0% - 10%  -> +10 XP (Réflexe Éclair)
-    if (percentElapsed <= 20.0) return 9;  // 11% - 20% -> +9 XP (Ultra-Rapide)
-    if (percentElapsed <= 30.0) return 8;  // 21% - 30% -> +8 XP (Très Rapide)
-    if (percentElapsed <= 40.0) return 7;  // 31% - 40% -> +7 XP (Vif)
-    if (percentElapsed <= 50.0) return 6;  // 41% - 50% -> +6 XP (Bon tempo)
-    if (percentElapsed <= 60.0) return 5;  // 51% - 60% -> +5 XP (Calculé)
-    if (percentElapsed <= 70.0) return 4;  // 61% - 70% -> +4 XP (Stratégique)
-    if (percentElapsed <= 80.0) return 3;  // 71% - 80% -> +3 XP (Réfléchi)
-    if (percentElapsed <= 90.0) return 2;  // 81% - 90% -> +2 XP (In Extremis)
+    if (percentElapsed <= 10.0)
+      return 10; // 0% - 10%  -> +10 XP (Réflexe Éclair)
+    if (percentElapsed <= 20.0) return 9; // 11% - 20% -> +9 XP (Ultra-Rapide)
+    if (percentElapsed <= 30.0) return 8; // 21% - 30% -> +8 XP (Très Rapide)
+    if (percentElapsed <= 40.0) return 7; // 31% - 40% -> +7 XP (Vif)
+    if (percentElapsed <= 50.0) return 6; // 41% - 50% -> +6 XP (Bon tempo)
+    if (percentElapsed <= 60.0) return 5; // 51% - 60% -> +5 XP (Calculé)
+    if (percentElapsed <= 70.0) return 4; // 61% - 70% -> +4 XP (Stratégique)
+    if (percentElapsed <= 80.0) return 3; // 71% - 80% -> +3 XP (Réfléchi)
+    if (percentElapsed <= 90.0) return 2; // 81% - 90% -> +2 XP (In Extremis)
     return 1; // 91% - 100% -> +1 XP (Sur le fil)
   }
 
@@ -2449,7 +2415,8 @@ class FirebaseService {
     String playerId,
     int baseAmount, {
     bool applySpeedBonus = true,
-    String? actionType, // 'precision', 'combo', 'bluff', 'defense', 'clutch', 'creativity'
+    String?
+    actionType, // 'precision', 'combo', 'bluff', 'defense', 'clutch', 'creativity'
   }) {
     if (baseAmount <= 0) return;
 
@@ -2494,7 +2461,8 @@ class FirebaseService {
     });
 
     // 3. Bonus selon la Difficulté de la Partie
-    final String difficulty = (gameData['difficulty'] as String?)?.toLowerCase() ?? '';
+    final String difficulty =
+        (gameData['difficulty'] as String?)?.toLowerCase() ?? '';
     if (difficulty == 'hardcore' || difficulty == 'expert') {
       totalXp += 6; // Mode Extrême
     } else if (difficulty == 'medium' || difficulty == 'difficile') {
@@ -2503,17 +2471,38 @@ class FirebaseService {
 
     // 4. Bonus Thématique selon la Catégorie du Jeu
     final String gameType = (gameData['gameType'] as String?) ?? '';
-    if (gameType == 'Uno' || gameType == 'Poker' || gameType == 'Belote' || gameType == 'Président' || gameType == 'Rami' || gameType == 'Big Two' || gameType == 'Skull' || gameType == 'Zéro Pointé' || gameType == 'Mille Bornes') {
+    if (gameType == 'Uno' ||
+        gameType == 'Poker' ||
+        gameType == 'Belote' ||
+        gameType == 'Président' ||
+        gameType == 'Rami' ||
+        gameType == 'Big Two' ||
+        gameType == 'Skull' ||
+        gameType == 'Zéro Pointé' ||
+        gameType == 'Mille Bornes') {
       totalXp += 5; // Coup Tactique de Cartes
-    } else if (gameType == 'Blokus' || gameType == 'Yams' || gameType == 'Dominoes' || gameType == 'Bataille Navale' || gameType == 'Jeu de Dames' || gameType == 'Petits Chevaux') {
+    } else if (gameType == 'Blokus' ||
+        gameType == 'Yams' ||
+        gameType == 'Dominoes' ||
+        gameType == 'Bataille Navale' ||
+        gameType == 'Jeu de Dames' ||
+        gameType == 'Petits Chevaux') {
       totalXp += 6; // Manœuvre Stratégique de Plateau
-    } else if (gameType == 'Petit Bac' || gameType == 'Taboo' || gameType == "Time's Up" || gameType == 'Synonyme ou Banni' || gameType == 'Codenames' || gameType == 'Devine Tête') {
+    } else if (gameType == 'Petit Bac' ||
+        gameType == 'Taboo' ||
+        gameType == "Time's Up" ||
+        gameType == 'Synonyme ou Banni' ||
+        gameType == 'Codenames' ||
+        gameType == 'Devine Tête') {
       totalXp += 6; // Intuition & Maîtrise du Vocabulaire
     } else if (gameType == 'Loup-Garou' || gameType == 'Infiltré & Mr. White') {
       totalXp += 8; // Déduction & Flair Psychologique
     } else if (gameType == 'Dobble' || gameType == 'La Patate Chaude') {
       totalXp += 6; // Réflexe d'Adrénaline
-    } else if (gameType == 'Pictionary' || gameType == 'Gribouillis' || gameType == 'Cadavre Exquis' || gameType == 'Le Roi des Mèmes') {
+    } else if (gameType == 'Pictionary' ||
+        gameType == 'Gribouillis' ||
+        gameType == 'Cadavre Exquis' ||
+        gameType == 'Le Roi des Mèmes') {
       totalXp += 5; // Créativité & Spontanéité
     }
 
@@ -2542,7 +2531,9 @@ class FirebaseService {
     }
 
     // 6. Bonus Abonné VIP (+50% d'XP sur chaque action en jeu)
-    final bool isVip = players[playerId]?['isPremium'] == true || gameData['isPremiumLobby'] == true;
+    final bool isVip =
+        players[playerId]?['isPremium'] == true ||
+        gameData['isPremiumLobby'] == true;
     if (isVip) {
       totalXp = (totalXp * 1.5).round();
     }
@@ -2797,7 +2788,9 @@ class FirebaseService {
     String judgeId,
     String? cardText,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/judge_inspect_live');
+    final ref = FirebaseDatabase.instance.ref(
+      'games/$gameCode/judge_inspect_live',
+    );
     if (cardText == null || cardText.isEmpty) {
       await ref.remove();
     } else {
@@ -2810,7 +2803,9 @@ class FirebaseService {
   }
 
   Stream<DatabaseEvent> getJudgeCardInspectLiveStream(String gameCode) =>
-      FirebaseDatabase.instance.ref('games/$gameCode/judge_inspect_live').onValue;
+      FirebaseDatabase.instance
+          .ref('games/$gameCode/judge_inspect_live')
+          .onValue;
 
   // 7. Taboo : Détection tactile du Buzzer en direct
   Future<void> updateTabooBuzzerLive(
@@ -2818,19 +2813,20 @@ class FirebaseService {
     String playerId,
     bool isTouching,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/taboo_buzzer_live');
+    final ref = FirebaseDatabase.instance.ref(
+      'games/$gameCode/taboo_buzzer_live',
+    );
     if (!isTouching) {
       await ref.remove();
     } else {
-      await ref.set({
-        'playerId': playerId,
-        'timestamp': ServerValue.timestamp,
-      });
+      await ref.set({'playerId': playerId, 'timestamp': ServerValue.timestamp});
     }
   }
 
   Stream<DatabaseEvent> getTabooBuzzerLiveStream(String gameCode) =>
-      FirebaseDatabase.instance.ref('games/$gameCode/taboo_buzzer_live').onValue;
+      FirebaseDatabase.instance
+          .ref('games/$gameCode/taboo_buzzer_live')
+          .onValue;
 
   // 8. Bataille Navale : Viseur radar en direct
   Future<void> updateBatailleNavaleAimLive(
@@ -2859,14 +2855,13 @@ class FirebaseService {
     String playerId,
     String? targetId,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/loup_live_target/$playerId');
+    final ref = FirebaseDatabase.instance.ref(
+      'games/$gameCode/loup_live_target/$playerId',
+    );
     if (targetId == null) {
       await ref.remove();
     } else {
-      await ref.set({
-        'targetId': targetId,
-        'timestamp': ServerValue.timestamp,
-      });
+      await ref.set({'targetId': targetId, 'timestamp': ServerValue.timestamp});
     }
   }
 
@@ -2880,7 +2875,9 @@ class FirebaseService {
     String? word,
     String teamColor,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/codenames_live/$playerId');
+    final ref = FirebaseDatabase.instance.ref(
+      'games/$gameCode/codenames_live/$playerId',
+    );
     if (word == null) {
       await ref.remove();
     } else {
@@ -2901,7 +2898,9 @@ class FirebaseService {
     String playerId,
     int filledCount,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/petit_bac_live/$playerId');
+    final ref = FirebaseDatabase.instance.ref(
+      'games/$gameCode/petit_bac_live/$playerId',
+    );
     if (filledCount <= 0) {
       await ref.remove();
     } else {
@@ -2943,7 +2942,9 @@ class FirebaseService {
     String? card,
     String? targetId,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/mille_bornes_live');
+    final ref = FirebaseDatabase.instance.ref(
+      'games/$gameCode/mille_bornes_live',
+    );
     if (card == null) {
       await ref.remove();
     } else {
@@ -2957,7 +2958,9 @@ class FirebaseService {
   }
 
   Stream<DatabaseEvent> getMilleBornesLiveStream(String gameCode) =>
-      FirebaseDatabase.instance.ref('games/$gameCode/mille_bornes_live').onValue;
+      FirebaseDatabase.instance
+          .ref('games/$gameCode/mille_bornes_live')
+          .onValue;
 
   // 14. Infiltré & Mr. White : Soupçons pointés en direct
   Future<void> updateUndercoverLiveSuspect(
@@ -2965,7 +2968,9 @@ class FirebaseService {
     String playerId,
     String? suspectId,
   ) async {
-    final ref = FirebaseDatabase.instance.ref('games/$gameCode/undercover_live/$playerId');
+    final ref = FirebaseDatabase.instance.ref(
+      'games/$gameCode/undercover_live/$playerId',
+    );
     if (suspectId == null) {
       await ref.remove();
     } else {
@@ -2981,9 +2986,11 @@ class FirebaseService {
 
   Future<String> createLounge(Map<String, dynamic> loungeData) async {
     final docRef = _db.collection('lounges').doc();
-    final String joinCode = (loungeData['joinCode'] != null && loungeData['joinCode'].toString().isNotEmpty)
-        ? loungeData['joinCode'].toString()
-        : randomNumeric(6);
+    final String joinCode =
+        (loungeData['joinCode'] != null &&
+                loungeData['joinCode'].toString().isNotEmpty)
+            ? loungeData['joinCode'].toString()
+            : randomNumeric(6);
 
     await docRef.set({
       ...loungeData,
@@ -3072,13 +3079,17 @@ class FirebaseService {
 
       final String gameCode = pendingGame['gameCode'] ?? '';
       if (gameCode.isEmpty) {
-        await _db.collection('lounges').doc(loungeId).update({'pendingGame': FieldValue.delete()});
+        await _db.collection('lounges').doc(loungeId).update({
+          'pendingGame': FieldValue.delete(),
+        });
         return;
       }
 
       final gameDoc = await _db.collection('games').doc(gameCode).get();
       if (!gameDoc.exists) {
-        await _db.collection('lounges').doc(loungeId).update({'pendingGame': FieldValue.delete()});
+        await _db.collection('lounges').doc(loungeId).update({
+          'pendingGame': FieldValue.delete(),
+        });
         return;
       }
 
@@ -3086,13 +3097,17 @@ class FirebaseService {
       final String gState = gData['gameState'] ?? '';
       final String status = pendingGame['status'] ?? '';
 
-      if (gState == 'gameOver' || gState == 'finished' || status == 'cancelled') {
-        String winnerName = gData['players']?[gData['gameWinner']]?['name'] ?? _l10n.inconnu;
+      if (gState == 'gameOver' ||
+          gState == 'finished' ||
+          status == 'cancelled') {
+        String winnerName =
+            gData['players']?[gData['gameWinner']]?['name'] ?? _l10n.inconnu;
         String reason = gData['gameEndReason'] ?? '';
         await _db.collection('lounges').doc(loungeId).update({
           'pendingGame': FieldValue.delete(),
           'lastGameResult': {
-            'gameName': gData['gameType'] ?? pendingGame['gameName'] ?? _l10n.jeu1,
+            'gameName':
+                gData['gameType'] ?? pendingGame['gameName'] ?? _l10n.jeu1,
             'winnerName': winnerName,
             'reason': reason,
             'timestamp': FieldValue.serverTimestamp(),
@@ -3102,7 +3117,12 @@ class FirebaseService {
       }
 
       if (status == 'started') {
-        final presencesSnap = await _db.collection('games').doc(gameCode).collection('presences').get();
+        final presencesSnap =
+            await _db
+                .collection('games')
+                .doc(gameCode)
+                .collection('presences')
+                .get();
         final now = DateTime.now();
         bool hasActivePlayer = false;
 
@@ -3207,16 +3227,28 @@ class FirebaseService {
         .catchError((_) {});
   }
 
-  Future<void> setPlayerReady(String gameCode, String playerId, bool isReady) async {
+  Future<void> setPlayerReady(
+    String gameCode,
+    String playerId,
+    bool isReady,
+  ) async {
     final now = FieldValue.serverTimestamp();
-    await _db.collection('games').doc(gameCode).update({
-      'players.$playerId.isReady': isReady,
-      'players.$playerId.lastHeartbeat': now,
-      'players.$playerId.isOnline': true,
-    }).catchError((_) {});
+    await _db
+        .collection('games')
+        .doc(gameCode)
+        .update({
+          'players.$playerId.isReady': isReady,
+          'players.$playerId.lastHeartbeat': now,
+          'players.$playerId.isOnline': true,
+        })
+        .catchError((_) {});
   }
 
-  Future<void> setPlayerOnlineStatusInLounge(String loungeId, String playerId, bool isOnline) async {
+  Future<void> setPlayerOnlineStatusInLounge(
+    String loungeId,
+    String playerId,
+    bool isOnline,
+  ) async {
     try {
       await _db.collection('lounges').doc(loungeId).update({
         'players.$playerId.isOnline': isOnline,
@@ -3225,7 +3257,11 @@ class FirebaseService {
     } catch (_) {}
   }
 
-  Future<void> setPlayerOnlineStatusInGame(String gameCode, String playerId, bool isOnline) async {
+  Future<void> setPlayerOnlineStatusInGame(
+    String gameCode,
+    String playerId,
+    bool isOnline,
+  ) async {
     try {
       await _db.collection('games').doc(gameCode).update({
         'players.$playerId.isOnline': isOnline,
@@ -3250,9 +3286,7 @@ class FirebaseService {
           .limit(30)
           .snapshots();
     }
-    return query
-        .limit(30)
-        .snapshots();
+    return query.limit(30).snapshots();
   }
 
   // --- LOGIQUE BIG TWO ---
@@ -3812,8 +3846,10 @@ class FirebaseService {
       if (trickEnded) {
         String lastPlayedBy = lastPlay?['playedBy'] ?? playerId;
         int nextIndex = playerOrder.indexOf(lastPlayedBy);
-        if (nextIndex == -1 || finishedPlayers.contains(playerOrder[nextIndex])) {
-          final remainingActive = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+        if (nextIndex == -1 ||
+            finishedPlayers.contains(playerOrder[nextIndex])) {
+          final remainingActive =
+              playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
           if (remainingActive.isNotEmpty) {
             nextIndex = playerOrder.indexOf(remainingActive.first);
           } else {
@@ -3877,7 +3913,8 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
+      final playerName =
+          gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
       final hands = Map<String, dynamic>.from(
         gameData['bigTwoPlayerHands'] ?? {},
       );
@@ -3935,8 +3972,9 @@ class FirebaseService {
             'players.$winnerId.score': FieldValue.increment(1),
             'bigTwoPlayerHands': hands,
             'bigTwoFinishedPlayers': finishedPlayers,
-            'gameEndReason':
-                _l10n.aGagne2(gameData['players'][winnerId]['name']),
+            'gameEndReason': _l10n.aGagne2(
+              gameData['players'][winnerId]['name'],
+            ),
           });
           return;
         }
@@ -4100,8 +4138,9 @@ class FirebaseService {
               'players.$winnerId.score': FieldValue.increment(1),
               'bigTwoPlayerHands': hands,
               'bigTwoFinishedPlayers': finishedPlayers,
-              'gameEndReason':
-                  _l10n.aGagne2(gameData['players'][winnerId]['name']),
+              'gameEndReason': _l10n.aGagne2(
+                gameData['players'][winnerId]['name'],
+              ),
             });
             return;
           }
@@ -4140,8 +4179,10 @@ class FirebaseService {
         if (trickEnded) {
           String lastWinner = lastPlay['playedBy'] ?? playerId;
           int nextIndex = playerOrder.indexOf(lastWinner);
-          if (nextIndex == -1 || finishedPlayers.contains(playerOrder[nextIndex])) {
-            final remainingActive = playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
+          if (nextIndex == -1 ||
+              finishedPlayers.contains(playerOrder[nextIndex])) {
+            final remainingActive =
+                playerOrder.where((p) => !finishedPlayers.contains(p)).toList();
             if (remainingActive.isNotEmpty) {
               nextIndex = playerOrder.indexOf(remainingActive.first);
             } else {
@@ -4161,7 +4202,9 @@ class FirebaseService {
             'bigTwoCurrentPlayerIndex': nextIndex,
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              _l10n.pliTermineAuTourDe2(gameData['players']?[playerOrder[nextIndex]]?['name']),
+              _l10n.pliTermineAuTourDe2(
+                gameData['players']?[playerOrder[nextIndex]]?['name'],
+              ),
             ]),
           });
         } else {
@@ -4178,9 +4221,7 @@ class FirebaseService {
             'bigTwoPassedPlayers': passedPlayers,
             'bigTwoCurrentPlayerIndex': nextIndex,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion([
-              _l10n.passeSonTour2(playerName),
-            ]),
+            'gameLog': FieldValue.arrayUnion([_l10n.passeSonTour2(playerName)]),
           });
         }
       }
@@ -4366,15 +4407,15 @@ class FirebaseService {
           if (targetId == null ||
               !pData.containsKey(targetId) ||
               targetId == playerId) {
-            throw Exception(
-              _l10n.cibleAdverseValideObligatoirePour,
-            );
+            throw Exception(_l10n.cibleAdverseValideObligatoirePour);
           }
           Map<String, dynamic> targetDataUpdate = Map<String, dynamic>.from(
             pData[targetId],
           );
 
-          List<String> targetHand = List<String>.from(targetDataUpdate['hand'] ?? []);
+          List<String> targetHand = List<String>.from(
+            targetDataUpdate['hand'] ?? [],
+          );
           String? matchingSafety;
           if (card == 'STOP' ||
               card == _l10n.stop ||
@@ -4396,7 +4437,9 @@ class FirebaseService {
           if (matchingSafety != null && targetHand.contains(matchingSafety)) {
             // COUP-FOURRÉ OFFICIEL !
             targetHand.remove(matchingSafety);
-            List<String> targetSafeties = List<String>.from(targetDataUpdate['safeties'] ?? []);
+            List<String> targetSafeties = List<String>.from(
+              targetDataUpdate['safeties'] ?? [],
+            );
             targetSafeties.add(matchingSafety);
             targetDataUpdate['safeties'] = targetSafeties;
             if (matchingSafety == 'SAFETY_RIGHT_OF_WAY') {
@@ -4423,7 +4466,10 @@ class FirebaseService {
               'milleBornesCurrentPlayerIndex': coupFourreIndex,
               'turnStartTime': FieldValue.serverTimestamp(),
               'gameLog': FieldValue.arrayUnion([
-                _l10n.coupFourrePareLAttaque1(players[targetId]?['name'], matchingSafety),
+                _l10n.coupFourrePareLAttaque1(
+                  players[targetId]?['name'],
+                  matchingSafety,
+                ),
               ]),
             });
             return;
@@ -4508,8 +4554,10 @@ class FirebaseService {
             'gameState': 'gameOver',
             'gameWinner': playerId,
             'players.$playerId.score': FieldValue.increment(1),
-            'gameEndReason':
-                _l10n.aAtteintKm(players[playerId]['name'], targetDist),
+            'gameEndReason': _l10n.aAtteintKm(
+              players[playerId]['name'],
+              targetDist,
+            ),
             'milleBornesPlayerData': pData,
             'milleBornesDeck': deck,
           });
@@ -5365,9 +5413,7 @@ class FirebaseService {
       String roundState = gameData['roundState'] ?? '';
 
       if (roundState == 'guesser_chooses_word') {
-        List<String> words = List<String>.from(
-          gameData['justOneWords'] ?? [],
-        );
+        List<String> words = List<String>.from(gameData['justOneWords'] ?? []);
         if (words.isEmpty) {
           words = List<String>.from(
             GameWords.justOneWords[gameData['difficulty']] ??
@@ -5513,9 +5559,7 @@ class FirebaseService {
             'answers': answers,
             'roundState': nextState,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion([
-              _l10n.leTempsEstEcouleOn,
-            ]),
+            'gameLog': FieldValue.arrayUnion([_l10n.leTempsEstEcouleOn]),
           });
         }
       } else if (roundState == 'declaring_truth') {
@@ -5544,9 +5588,7 @@ class FirebaseService {
             'roundState':
                 (voteMode == 'turn_by_turn') ? 'reveal_and_vote' : 'voting',
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion([
-              _l10n.leTempsEstEcoulePour,
-            ]),
+            'gameLog': FieldValue.arrayUnion([_l10n.leTempsEstEcoulePour]),
           });
         }
       }
@@ -5563,7 +5605,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     if (targetIndex < 0 || targetIndex >= 100) {
       throw Exception(_l10n.cibleHorsDeLaGrille);
@@ -5699,8 +5742,7 @@ class FirebaseService {
           'roundState': 'gameOver',
           'gameWinner': playerId,
           'players.$playerId.score': FieldValue.increment(1),
-          'gameEndReason':
-              _l10n.aCouleTouteLaFlotte1(shooterData['name']),
+          'gameEndReason': _l10n.aCouleTouteLaFlotte1(shooterData['name']),
         });
       } else {
         // Si touché ou coulé, le joueur rejoue, sinon au tour de l'adversaire
@@ -5709,7 +5751,10 @@ class FirebaseService {
         String logMessage =
             (result == 'hit' || result == 'sunk')
                 ? _l10n.aToucheUneCibleIl(shooterData['name'])
-                : _l10n.aTireDansLEau(shooterData['name'], opponentData['name']);
+                : _l10n.aTireDansLEau(
+                  shooterData['name'],
+                  opponentData['name'],
+                );
 
         updates.addAll({
           'currentPlayerId': nextPlayerId,
@@ -5962,8 +6007,7 @@ class FirebaseService {
             'roundState': 'gameOver',
             'gameWinner': currentPlayerId,
             'players.$currentPlayerId.score': FieldValue.increment(1),
-            'gameEndReason':
-                _l10n.aCouleTouteLaFlotte1(shooterData['name']),
+            'gameEndReason': _l10n.aCouleTouteLaFlotte1(shooterData['name']),
           });
         } else {
           String nextPlayerId =
@@ -5974,7 +6018,12 @@ class FirebaseService {
             'currentPlayerId': nextPlayerId,
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              _l10n.aTireAutomatiquementEn(shooterData['name'], (targetIndex ~/ 10) + 1, (targetIndex % 10) + 1, result),
+              _l10n.aTireAutomatiquementEn(
+                shooterData['name'],
+                (targetIndex ~/ 10) + 1,
+                (targetIndex % 10) + 1,
+                result,
+              ),
             ]),
           });
         }
@@ -6004,7 +6053,8 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
+      final playerName =
+          gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
       final hands = Map<String, dynamic>.from(gameData['playerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
       final lastPlay =
@@ -6056,9 +6106,13 @@ class FirebaseService {
           String rank = _getPresidentCardRank(c);
           rankGroups.putIfAbsent(rank, () => []).add(c);
         }
-        var sortedEntries = rankGroups.entries.toList()
-          ..sort((a, b) => _getPresidentCardValue(a.value.first, isRevolution)
-              .compareTo(_getPresidentCardValue(b.value.first, isRevolution)));
+        var sortedEntries =
+            rankGroups.entries.toList()..sort(
+              (a, b) => _getPresidentCardValue(
+                a.value.first,
+                isRevolution,
+              ).compareTo(_getPresidentCardValue(b.value.first, isRevolution)),
+            );
         List<String> cardsToPlay;
         if (!isRevolution && myHand.contains('3C')) {
           cardsToPlay = List<String>.from(rankGroups['3'] ?? ['3C']);
@@ -6122,9 +6176,13 @@ class FirebaseService {
           rankGroups.putIfAbsent(rank, () => []).add(c);
         }
 
-        var sortedEntries = rankGroups.entries.toList()
-          ..sort((a, b) => _getPresidentCardValue(a.value.first, isRevolution)
-              .compareTo(_getPresidentCardValue(b.value.first, isRevolution)));
+        var sortedEntries =
+            rankGroups.entries.toList()..sort(
+              (a, b) => _getPresidentCardValue(
+                a.value.first,
+                isRevolution,
+              ).compareTo(_getPresidentCardValue(b.value.first, isRevolution)),
+            );
 
         List<String>? candidateCards;
         for (var entry in sortedEntries) {
@@ -6221,7 +6279,9 @@ class FirebaseService {
             'lastPlayerToPlay': playerOrder[nextIndex],
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              _l10n.pliTermineAuTourDe3(gameData['players']?[playerOrder[nextIndex]]?['name']),
+              _l10n.pliTermineAuTourDe3(
+                gameData['players']?[playerOrder[nextIndex]]?['name'],
+              ),
             ]),
           });
         } else {
@@ -6238,9 +6298,7 @@ class FirebaseService {
             'passedPlayers': passedPlayers,
             'currentPlayerIndex': nextIndex,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion([
-              _l10n.passeSonTour2(playerName),
-            ]),
+            'gameLog': FieldValue.arrayUnion([_l10n.passeSonTour2(playerName)]),
           });
         }
       }
@@ -6272,13 +6330,14 @@ class FirebaseService {
 
     bool placed = false;
     // Prioriser les grandes pièces (5 carrés d'abord) pour maximiser les points
-    List<int> candidatePieces = List.from(myHand)
-      ..shuffle()
-      ..sort(
-        (a, b) => (GameData.blokusPieces[b]?.length ?? 0).compareTo(
-          GameData.blokusPieces[a]?.length ?? 0,
-        ),
-      );
+    List<int> candidatePieces =
+        List.from(myHand)
+          ..shuffle()
+          ..sort(
+            (a, b) => (GameData.blokusPieces[b]?.length ?? 0).compareTo(
+              GameData.blokusPieces[a]?.length ?? 0,
+            ),
+          );
 
     for (int pieceId in candidatePieces) {
       for (int rot = 0; rot < 4; rot++) {
@@ -6319,7 +6378,12 @@ class FirebaseService {
               });
 
               if (isFirst) {
-                final List<String> validCorners = ["0_0", "19_19", "0_19", "19_0"];
+                final List<String> validCorners = [
+                  "0_0",
+                  "19_19",
+                  "0_19",
+                  "19_0",
+                ];
                 String defaultCorner =
                     myColor == 'blue'
                         ? "0_0"
@@ -6666,9 +6730,7 @@ class FirebaseService {
           'timesUpTeamATurnIndex': teamA.length > 1 ? 1 : 0,
           'timesUpTeamBTurnIndex': 0,
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.tempsEcoulePourLaSaisie,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.tempsEcoulePourLaSaisie]),
         });
       }
     } else if (gameData['roundState'].toString().startsWith('playing_round_') ||
@@ -6839,9 +6901,7 @@ class FirebaseService {
         .doc(gameCode)
         .collection('presences')
         .doc(playerId)
-        .set({
-          'lastHeartbeat': now,
-        }, SetOptions(merge: true));
+        .set({'lastHeartbeat': now}, SetOptions(merge: true));
 
     await _db
         .collection('games')
@@ -6913,8 +6973,10 @@ class FirebaseService {
 
             updates['gameState'] = 'gameOver';
             updates['gameWinner'] = remainingPlayerId;
-            updates['gameEndReason'] =
-                _l10n.sEstDeconnecteVictoireDe(removedPlayerName, remainingName);
+            updates['gameEndReason'] = _l10n.sEstDeconnecteVictoireDe(
+              removedPlayerName,
+              remainingName,
+            );
             if (remainingPlayerId != null) {
               updates['players.$remainingPlayerId.score'] =
                   FieldValue.increment(1);
@@ -7021,9 +7083,7 @@ class FirebaseService {
           'isSocial': isSocial,
           'timestamp': FieldValue.serverTimestamp(),
         },
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.aManque3ToursSans(playerName),
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.aManque3ToursSans(playerName)]),
       };
 
       // Passer au joueur suivant pour débloquer la partie pendant la décision
@@ -7090,9 +7150,7 @@ class FirebaseService {
         'inactiveTurnCounts.$playerId': 0,
         'turnStartTime':
             FieldValue.serverTimestamp(), // Réinitialise à 5s maintenant
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.aEteRemplaceParL(playerName),
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.aEteRemplaceParL(playerName)]),
       };
 
       transaction.update(gameRef, updates);
@@ -7226,18 +7284,14 @@ class FirebaseService {
               (nextIndex == -1 || nextIndex <= currentPlayerIndex);
 
           Map<String, dynamic> updates = {
-            'turnLog': FieldValue.arrayUnion([
-              _l10n.nAPasDonneD(playerName),
-            ]),
+            'turnLog': FieldValue.arrayUnion([_l10n.nAPasDonneD(playerName)]),
             'turnStartTime': FieldValue.serverTimestamp(),
           };
 
           if (isLastPlayer || playerClues.length >= activePlayerCount) {
             updates['currentPhase'] = 'voting';
             updates['votes'] = {};
-            updates['turnLog'] = FieldValue.arrayUnion([
-              _l10n.laPhaseDeVoteA,
-            ]);
+            updates['turnLog'] = FieldValue.arrayUnion([_l10n.laPhaseDeVoteA]);
           } else {
             updates['currentPlayerIndex'] = nextIndex;
           }
@@ -7250,9 +7304,7 @@ class FirebaseService {
         transaction.update(gameRef, {
           'currentPlayerIndex': nextPlayerIndex,
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.nAPasReponduJeu(playerName),
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.nAPasReponduJeu(playerName)]),
         });
         return;
       }
@@ -7262,9 +7314,7 @@ class FirebaseService {
       transaction.update(gameRef, {
         'currentPlayerIndex': nextPlayerIndex,
         'turnStartTime': FieldValue.serverTimestamp(),
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.nAPasJoueA3(playerName),
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.nAPasJoueA3(playerName)]),
       });
     });
   }
@@ -7327,8 +7377,7 @@ class FirebaseService {
       await gameRef.update({
         'roundState': 'result',
         'roundWinnerId': null,
-        'gameEndReason':
-            _l10n.leJugeNAPas,
+        'gameEndReason': _l10n.leJugeNAPas,
         'turnStartTime': FieldValue.serverTimestamp(),
       });
       return;
@@ -7364,9 +7413,7 @@ class FirebaseService {
         await gameRef.update({
           'currentPhase': 'turn_result',
           'eliminatedThisTurn': [],
-          'turnLog': FieldValue.arrayUnion([
-            _l10n.personneNAVoteAucun,
-          ]),
+          'turnLog': FieldValue.arrayUnion([_l10n.personneNAVoteAucun]),
           'turnStartTime': FieldValue.serverTimestamp(),
         });
       } else {
@@ -7389,19 +7436,19 @@ class FirebaseService {
         });
 
         if (tiedPlayers.length > 1) {
-          final String? goddessId = updatedGameData['specialRoles']?['justiceGoddess'];
+          final String? goddessId =
+              updatedGameData['specialRoles']?['justiceGoddess'];
           if (goddessId != null &&
               playerData[goddessId]?['status'] == 'active') {
             await gameRef.update({
               'currentPhase': 'tie_breaker',
               'tieBreakerCandidates': tiedPlayers,
-              'turnLog': FieldValue.arrayUnion([
-                _l10n.egaliteLorsDuVoteLa,
-              ]),
+              'turnLog': FieldValue.arrayUnion([_l10n.egaliteLorsDuVoteLa]),
               'turnStartTime': FieldValue.serverTimestamp(),
             });
           } else {
-            int tieCount = (updatedGameData['votingTieCount'] as num? ?? 0).toInt() + 1;
+            int tieCount =
+                (updatedGameData['votingTieCount'] as num? ?? 0).toInt() + 1;
             int aliveCount =
                 playerData.values
                     .where((p) => (p['status'] ?? 'active') == 'active')
@@ -7409,13 +7456,16 @@ class FirebaseService {
 
             if (tieCount >= 2 || aliveCount <= 3) {
               // Égalité persistante ou fin de partie bloquée : tirage au sort parmi les ex-aequo
-              String randomEliminated = tiedPlayers[Random().nextInt(tiedPlayers.length)];
+              String randomEliminated =
+                  tiedPlayers[Random().nextInt(tiedPlayers.length)];
               await gameRef.update({
                 'currentPhase': 'turn_result',
                 'eliminatedThisTurn': [randomEliminated],
                 'votingTieCount': 0,
                 'turnLog': FieldValue.arrayUnion([
-                  _l10n.egalitePersistanteLeDestinDepartage1(playerData[randomEliminated]?['name']),
+                  _l10n.egalitePersistanteLeDestinDepartage1(
+                    playerData[randomEliminated]?['name'],
+                  ),
                 ]),
                 'turnStartTime': FieldValue.serverTimestamp(),
               });
@@ -7594,7 +7644,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -7840,8 +7891,7 @@ class FirebaseService {
         updates['gameWinner'] = winnerId;
         updates['players.$winnerId.score'] = FieldValue.increment(1);
         updates['yamsFinalScores'] = finalScores;
-        updates['gameEndReason'] =
-            _l10n.grilleDeYamsCompleteePar;
+        updates['gameEndReason'] = _l10n.grilleDeYamsCompleteePar;
       }
 
       transaction.update(gameRef, updates);
@@ -8007,8 +8057,9 @@ class FirebaseService {
                 (gameData['playerOrder'] as List).isNotEmpty
             ? List<String>.from(gameData['playerOrder'])
             : (Map<String, dynamic>.from(
-              gameData['players'] ?? {},
-            ).keys.toList()..shuffle());
+                gameData['players'] ?? {},
+              ).keys.toList()
+              ..shuffle());
     final variant = gameData['cadavreVariant'] ?? 'classic';
     final passingMode = gameData['cadavrePassingMode'] ?? 'single';
 
@@ -8086,9 +8137,9 @@ class FirebaseService {
           (passingMode == 'single')
               ? 0
               : (((currentPlayerIndex -
-                          (currentRound % playerOrder.length) +
-                          playerOrder.length) %
-                      playerOrder.length));
+                      (currentRound % playerOrder.length) +
+                      playerOrder.length) %
+                  playerOrder.length));
 
       Map<String, dynamic> papers = Map<String, dynamic>.from(
         gameData['papers'] ?? {},
@@ -8206,10 +8257,13 @@ class FirebaseService {
       if (playerOrder.isEmpty || currentIndex >= playerOrder.length) return;
 
       final playerId = playerOrder[currentIndex];
-      final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
+      final playerName =
+          gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
       final hands = Map<String, dynamic>.from(gameData['unoPlayerHands'] ?? {});
       final myHand = List<String>.from(hands[playerId] ?? []);
-      List<String> discardPile = List<String>.from(gameData['unoDiscardPile'] ?? []);
+      List<String> discardPile = List<String>.from(
+        gameData['unoDiscardPile'] ?? [],
+      );
       List<String> deck = List<String>.from(gameData['unoDeck'] ?? []);
       final String topCard =
           discardPile.isNotEmpty ? discardPile.last : 'red-0';
@@ -8279,7 +8333,8 @@ class FirebaseService {
                   roundScore += 20;
                 } else {
                   final parts = cs.split('-');
-                  roundScore += parts.length > 1 ? (int.tryParse(parts[1]) ?? 5) : 5;
+                  roundScore +=
+                      parts.length > 1 ? (int.tryParse(parts[1]) ?? 5) : 5;
                 }
               }
             }
@@ -8397,9 +8452,7 @@ class FirebaseService {
             'unoDrawActionDone': false,
             'unoLastDrawnCard': null,
             'turnStartTime': FieldValue.serverTimestamp(),
-            'gameLog': FieldValue.arrayUnion([
-              _l10n.passeSonTour2(playerName),
-            ]),
+            'gameLog': FieldValue.arrayUnion([_l10n.passeSonTour2(playerName)]),
           });
         }
         return;
@@ -8653,9 +8706,7 @@ class FirebaseService {
       'deck': deck,
       'discardPile': discardPile,
       'playerGrids': grids,
-      'gameLog': FieldValue.arrayUnion([
-        _l10n.nAPasJoueA4(playerName),
-      ]),
+      'gameLog': FieldValue.arrayUnion([_l10n.nAPasJoueA4(playerName)]),
     });
 
     // 3. Traiter immédiatement la fin du tour et passer au joueur suivant
@@ -8784,8 +8835,9 @@ class FirebaseService {
           'gameWinner': gameWinnerId,
           if (gameWinnerId != null)
             'players.$gameWinnerId.score': FieldValue.increment(1),
-          'gameEndReason':
-              _l10n.gagneAvecLeScoreLe(players[gameWinnerId]?['name'] ?? _l10n.joueur),
+          'gameEndReason': _l10n.gagneAvecLeScoreLe(
+            players[gameWinnerId]?['name'] ?? _l10n.joueur,
+          ),
         });
       }
 
@@ -8968,7 +9020,8 @@ class FirebaseService {
 
       final gameData = gameSnap.data() as Map<String, dynamic>;
       if (gameData['roundState'] != 'showing_photo' &&
-          gameData['roundState'] != 'voting') return;
+          gameData['roundState'] != 'voting')
+        return;
 
       final Map<String, dynamic> players = Map<String, dynamic>.from(
         gameData['players'] ?? {},
@@ -9381,9 +9434,7 @@ class FirebaseService {
     await _db.collection('games').doc(gameCode).update({
       'phase': 'jour_vote',
       'dayVotes': {},
-      'gameLog': FieldValue.arrayUnion([
-        _l10n.leTempsDesDebatsEst,
-      ]),
+      'gameLog': FieldValue.arrayUnion([_l10n.leTempsDesDebatsEst]),
       'turnStartTime': FieldValue.serverTimestamp(),
     });
   }
@@ -9476,14 +9527,12 @@ class FirebaseService {
 
     if (areLoversAlive && vivants.length == 2) {
       winner = "Les Amoureux";
-      reason =
-          _l10n.seulsLesDeuxAmoureuxSont;
+      reason = _l10n.seulsLesDeuxAmoureuxSont;
     }
 
     if (winner == null && loupBlancVivant == 1 && vivants.length == 1) {
       winner = "Loup Blanc";
-      reason =
-          _l10n.leLoupBlancEstLe;
+      reason = _l10n.leLoupBlancEstLe;
     }
 
     if (winner == null && pyromancienVivant == 1 && vivants.length == 1) {
@@ -9507,8 +9556,7 @@ class FirebaseService {
         loupBlancVivant == 0 &&
         loupsVivants >= (villageoisVivants + solitairesNonLoupsVivants)) {
       winner = "Loups-Garous";
-      reason =
-          _l10n.lesLoupsGarousSontDevenus;
+      reason = _l10n.lesLoupsGarousSontDevenus;
     }
 
     if (winner == null &&
@@ -9814,11 +9862,11 @@ class FirebaseService {
       }
 
       transaction.update(gameRef, {
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.laVoyanteASondeUne,
-        ]),
-        'playerData.$voyanteId.privateInfo':
-            _l10n.leRoleDeEst(targetName, targetRole),
+        'gameLog': FieldValue.arrayUnion([_l10n.laVoyanteASondeUne]),
+        'playerData.$voyanteId.privateInfo': _l10n.leRoleDeEst(
+          targetName,
+          targetRole,
+        ),
         'nightActions.voyanteActed': true,
       });
       shouldAdvance = true;
@@ -9853,9 +9901,7 @@ class FirebaseService {
       playerData[heritierId]['testateurId'] = testateurId;
       transaction.update(gameRef, {
         'playerData': playerData,
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.lHeritierAChoisiSon,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.lHeritierAChoisiSon]),
       });
     });
     await startNextNightPhase(gameCode);
@@ -9887,9 +9933,7 @@ class FirebaseService {
         return;
 
       if (playerData[gardeId]?['lastProtectedId'] == targetId) {
-        throw Exception(
-          _l10n.vousNePouvezPasProteger,
-        );
+        throw Exception(_l10n.vousNePouvezPasProteger);
       }
 
       String? loupTarget = gameData['nightActions']?['loupTarget'];
@@ -9909,9 +9953,7 @@ class FirebaseService {
         'nightActions.gardeProtect': targetId,
         'nightActions.gardeActed': true,
         'playerData.$gardeId.lastProtectedId': targetId,
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.leGardeMonteLaGarde,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.leGardeMonteLaGarde]),
       });
       shouldAdvance = true;
     });
@@ -9963,17 +10005,16 @@ class FirebaseService {
           .map((id) => playerData[id]?['name'] ?? '')
           .join(', ');
       for (String id in contaminatedPlayers) {
-        playerData[id]['privateInfo'] =
-            _l10n.joueursContaminesParLaMaladie1(contaminatedNames);
+        playerData[id]['privateInfo'] = _l10n.joueursContaminesParLaMaladie1(
+          contaminatedNames,
+        );
       }
 
       transaction.update(gameRef, {
         'playerData': playerData,
         'ratMaladeContaminated': contaminatedPlayers,
         'nightActions.ratMaladeActed': true,
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.uneOdeurPestilentielleSEst,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.uneOdeurPestilentielleSEst]),
       });
     });
 
@@ -10074,9 +10115,7 @@ class FirebaseService {
           transaction.update(gameRef, {
             'nightActions.loupTarget': finalTarget,
             'nightActions.loupsVoted': true,
-            'gameLog': FieldValue.arrayUnion([
-              _l10n.lesLoupsGarousOntDesigne,
-            ]),
+            'gameLog': FieldValue.arrayUnion([_l10n.lesLoupsGarousOntDesigne]),
             'subPhase': 'loup_noir_action',
             'turnStartTime': FieldValue.serverTimestamp(),
           });
@@ -10084,9 +10123,7 @@ class FirebaseService {
           transaction.update(gameRef, {
             'nightActions.loupTarget': finalTarget,
             'nightActions.loupsVoted': true,
-            'gameLog': FieldValue.arrayUnion([
-              _l10n.lesLoupsGarousOntChoisi,
-            ]),
+            'gameLog': FieldValue.arrayUnion([_l10n.lesLoupsGarousOntChoisi]),
             'subPhase': 'loups_voted',
           });
           shouldAdvancePhase = true;
@@ -10128,9 +10165,7 @@ class FirebaseService {
         transaction.update(gameRef, {
           'nightActions.loupBlancKill': targetId,
           'nightActions.loupBlancActed': true,
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.leLoupBlancARode,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.leLoupBlancARode]),
         });
         shouldAdvance = true;
       }
@@ -10167,22 +10202,17 @@ class FirebaseService {
 
       if (infectChosenTarget && loupTargetId != null) {
         playerData[loupTargetId]['infectionStatus'] = 'infecte';
-        playerData[loupTargetId]['privateInfo'] =
-            _l10n.vousAvezEteInfectePar;
+        playerData[loupTargetId]['privateInfo'] = _l10n.vousAvezEteInfectePar;
 
         transaction.update(gameRef, {
           'playerData': playerData,
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.leLoupNoirAUtilise,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.leLoupNoirAUtilise]),
           'nightActions.loupTarget': null, // Annule la mort par les loups
         });
       } else {
         transaction.update(gameRef, {
           'playerData': playerData,
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.leLoupNoirNA,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.leLoupNoirNA]),
         });
       }
     });
@@ -10219,9 +10249,7 @@ class FirebaseService {
           'playerData.$spyId.status': 'mort',
           'playerData.$spyId.revealedRole': 'Petite Fille',
           'nightActions.petiteFilleKilled': spyId,
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.laPetiteFilleAEte,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.laPetiteFilleAEte]),
         });
       } else {
         String targetRole = playerData[targetId]?['role'] ?? _l10n.inconnu;
@@ -10231,15 +10259,16 @@ class FirebaseService {
                 false) &&
             !(playerData[spyId]?['privateInfo']?.contains("contaminé") ??
                 false)) {
-          playerData[spyId]['privateInfo'] =
-              _l10n.vousAvezEspionneEtDecouvert(targetName, targetRole);
+          playerData[spyId]['privateInfo'] = _l10n.vousAvezEspionneEtDecouvert(
+            targetName,
+            targetRole,
+          );
         }
         if (!(playerData[targetId]?['privateInfo']?.contains("infecté") ??
                 false) &&
             !(playerData[targetId]?['privateInfo']?.contains("contaminé") ??
                 false)) {
-          playerData[targetId]['privateInfo'] =
-              _l10n.vousVousSentezObserveE;
+          playerData[targetId]['privateInfo'] = _l10n.vousVousSentezObserveE;
         }
         transaction.update(gameRef, {'playerData': playerData});
       }
@@ -10308,9 +10337,7 @@ class FirebaseService {
         updates.addAll({
           'nightActions.sorciereSave': true,
           'playerData.$sorciereId.potions.guerison': false,
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.laSorciereAUtiliseSa,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.laSorciereAUtiliseSa]),
         });
         transaction.update(gameRef, updates);
         shouldAdvance = true;
@@ -10349,9 +10376,7 @@ class FirebaseService {
         updates.addAll({
           'nightActions.sorciereKill': targetId,
           'playerData.$sorciereId.potions.poison': false,
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.laSorciereAConcocteUn,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.laSorciereAConcocteUn]),
         });
         transaction.update(gameRef, updates);
         shouldAdvance = true;
@@ -10400,18 +10425,14 @@ class FirebaseService {
         transaction.update(gameRef, {
           'pyromancienBarrels': pyromancienBarrels,
           'nightActions.pyromancienActed': true,
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.lePyromancienAEntreposeUn,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.lePyromancienAEntreposeUn]),
         });
         shouldAdvance = true;
       } else if (actionType == 'detonate') {
         transaction.update(gameRef, {
           'nightActions.pyromancienDetonate': true,
           'nightActions.pyromancienActed': true,
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.lePyromancienAllumeLaMeche,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.lePyromancienAllumeLaMeche]),
         });
         shouldAdvance = true;
       }
@@ -10603,7 +10624,11 @@ class FirebaseService {
         String newRole = playerData[testateurId]['role'];
         playerData[heritierId]['role'] = newRole;
         logMessages.add(
-          _l10n.lHeritierHeriteDuRole2(playerData[heritierId]['name'], playerData[testateurId]['name'], newRole),
+          _l10n.lHeritierHeriteDuRole2(
+            playerData[heritierId]['name'],
+            playerData[testateurId]['name'],
+            newRole,
+          ),
         );
 
         if (playerData[testateurId].containsKey('potions'))
@@ -10645,15 +10670,18 @@ class FirebaseService {
           GameData.bavardWords[Random().nextInt(GameData.bavardWords.length)];
       playerData[loupBavardId]['currentBavardWord'] = newWord;
       playerData[loupBavardId]['hasSaidBavardWord'] = false;
-      playerData[loupBavardId]['privateInfo'] =
-          _l10n.votreMotDuJourPrononcez(newWord);
+      playerData[loupBavardId]['privateInfo'] = _l10n.votreMotDuJourPrononcez(
+        newWord,
+      );
     }
 
     if (deadThisNightNames.isEmpty) {
       logMessages.add(_l10n.miraculeusementPersonneNAPeri);
     } else {
       logMessages.add(
-        _l10n.leVillageDecouvreAvecEffroi1(deadThisNightNames.toSet().join(', ')),
+        _l10n.leVillageDecouvreAvecEffroi1(
+          deadThisNightNames.toSet().join(', '),
+        ),
       );
     }
 
@@ -10666,18 +10694,21 @@ class FirebaseService {
       }
     });
 
-    final String? dictatorId = playerData.entries
-        .firstWhere(
-          (e) => e.value['role'] == 'Dictateur',
-          orElse: () => MapEntry('', {}),
-        )
-        .key;
-    final bool dictatorValid = dictatorId != null &&
+    final String? dictatorId =
+        playerData.entries
+            .firstWhere(
+              (e) => e.value['role'] == 'Dictateur',
+              orElse: () => MapEntry('', {}),
+            )
+            .key;
+    final bool dictatorValid =
+        dictatorId != null &&
         dictatorId.isNotEmpty &&
         playerData[dictatorId]?['status'] == 'vivant' &&
         playerData[dictatorId]?['infectionStatus'] != 'infecte';
 
-    final bool dictatorActiveCoup = (gameData['dictatorTookPowerAtNight'] == true) && dictatorValid;
+    final bool dictatorActiveCoup =
+        (gameData['dictatorTookPowerAtNight'] == true) && dictatorValid;
 
     transaction.update(gameRef, {
       'playerData': playerData,
@@ -10694,7 +10725,8 @@ class FirebaseService {
         'subPhase': 'captain_designate',
         'activePlayerId': captainDiedId,
       });
-    if (chasseurDiedId != null && playerData[chasseurDiedId]?['infectionStatus'] != 'infecte')
+    if (chasseurDiedId != null &&
+        playerData[chasseurDiedId]?['infectionStatus'] != 'infecte')
       pendingDayEffects.add({
         'subPhase': 'chasseur_revenge',
         'activePlayerId': chasseurDiedId,
@@ -10791,11 +10823,16 @@ class FirebaseService {
         otherRevealedRole = playerData[otherRevealedPlayerId]['role'];
       }
 
-      String logMessage =
-          _l10n.leFossoyeurReveleEtaitUn1(playerData[fossoyeurId]['name'], playerData[targetPlayerId]['name'], targetRole);
+      String logMessage = _l10n.leFossoyeurReveleEtaitUn1(
+        playerData[fossoyeurId]['name'],
+        playerData[targetPlayerId]['name'],
+        targetRole,
+      );
       if (otherRevealedPlayerId != null) {
-        logMessage +=
-            _l10n.etEtaitUnE(playerData[otherRevealedPlayerId]['name'], otherRevealedRole ?? '');
+        logMessage += _l10n.etEtaitUnE(
+          playerData[otherRevealedPlayerId]['name'],
+          otherRevealedRole ?? '',
+        );
       }
       transaction.update(gameRef, {
         'gameLog': FieldValue.arrayUnion([logMessage]),
@@ -10975,14 +11012,16 @@ class FirebaseService {
         transaction.update(gameRef, {
           'captainId': dictatorId,
           'gameLog': FieldValue.arrayUnion([
-            _l10n.leDictateurAExecuteUn1(playerData[dictatorId]['name'], playerData[targetId]['name'], targetRole),
+            _l10n.leDictateurAExecuteUn1(
+              playerData[dictatorId]['name'],
+              playerData[targetId]['name'],
+              targetRole,
+            ),
           ]),
         });
       } else {
         transaction.update(gameRef, {
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.leDictateurSEstTrompe,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.leDictateurSEstTrompe]),
         });
       }
 
@@ -11280,9 +11319,7 @@ class FirebaseService {
         });
       } else {
         transaction.update(gameRef, {
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.egaliteParfaiteLorsDuVote1,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.egaliteParfaiteLorsDuVote1]),
         });
       }
 
@@ -11321,7 +11358,9 @@ class FirebaseService {
             'phase': 'gameOver',
             'gameWinner': mercenaireId,
             'gameLog': FieldValue.arrayUnion([
-              _l10n.leMercenaireAFaitEliminer1(playerData[mercenaireId]['name']),
+              _l10n.leMercenaireAFaitEliminer1(
+                playerData[mercenaireId]['name'],
+              ),
             ]),
           });
           return;
@@ -11343,9 +11382,9 @@ class FirebaseService {
         processedDeaths.add(deadId);
 
         if (playerData[deadId]['role'] == 'Chasseur' &&
-          playerData[deadId]['infectionStatus'] != 'infecte') {
-        chasseurDiedId = deadId;
-      }
+            playerData[deadId]['infectionStatus'] != 'infecte') {
+          chasseurDiedId = deadId;
+        }
         if (deadId == gameData['captainId']) captainDiedId = deadId;
         if (playerData[deadId]['role'] == 'Fossoyeur') fossoyeurDiedId = deadId;
 
@@ -11390,7 +11429,11 @@ class FirebaseService {
           playerData[heritierId]['role'] = newRole;
           transaction.update(gameRef, {
             'gameLog': FieldValue.arrayUnion([
-              _l10n.lHeritierHeriteDuRole2(playerData[heritierId]['name'], playerData[testateurId]['name'], newRole),
+              _l10n.lHeritierHeriteDuRole2(
+                playerData[heritierId]['name'],
+                playerData[testateurId]['name'],
+                newRole,
+              ),
             ]),
           });
 
@@ -11408,7 +11451,9 @@ class FirebaseService {
             transaction.update(gameRef, {'captainId': heritierId});
             transaction.update(gameRef, {
               'gameLog': FieldValue.arrayUnion([
-                _l10n.heriteEgalementDuStatutDe1(playerData[heritierId]['name']),
+                _l10n.heriteEgalementDuStatutDe1(
+                  playerData[heritierId]['name'],
+                ),
               ]),
             });
           }
@@ -11566,7 +11611,11 @@ class FirebaseService {
           playerData[heritierIdCheck]['role'] = newRole;
           await _addLog(
             gameRef,
-            _l10n.lHeritierHeriteDuRole2(playerData[heritierIdCheck]['name'], playerData[testateurId]['name'], newRole),
+            _l10n.lHeritierHeriteDuRole2(
+              playerData[heritierIdCheck]['name'],
+              playerData[testateurId]['name'],
+              newRole,
+            ),
             transaction: transaction,
           );
         }
@@ -11654,7 +11703,8 @@ class FirebaseService {
       var playerData = Map<String, dynamic>.from(gameData['playerData']);
       String formerCaptainName =
           playerData[formerCaptainId]?['name'] ?? _l10n.lAncienCapitaine1;
-      String newCaptainName = playerData[newCaptainId]?['name'] ?? _l10n.inconnu;
+      String newCaptainName =
+          playerData[newCaptainId]?['name'] ?? _l10n.inconnu;
 
       if (playerData[newCaptainId]?['status'] == 'vivant') {
         final players = Map<String, dynamic>.from(gameData['players'] ?? {});
@@ -11667,7 +11717,10 @@ class FirebaseService {
         transaction.update(gameRef, {
           'captainId': newCaptainId,
           'gameLog': FieldValue.arrayUnion([
-            _l10n.aDesigneCommeNouveauCapitaine(formerCaptainName, newCaptainName),
+            _l10n.aDesigneCommeNouveauCapitaine(
+              formerCaptainName,
+              newCaptainName,
+            ),
           ]),
         });
       }
@@ -11759,10 +11812,10 @@ class FirebaseService {
         transaction.update(gameRef, {
           'lovers': currentLovers,
           'nightActions.cupidonActed': true,
-          'playerData.${currentLovers[0]}.privateInfo':
-              _l10n.vousEtesAmoureuxDe(lover2Name),
-          'playerData.${currentLovers[1]}.privateInfo':
-              _l10n.vousEtesAmoureuxDe1(lover1Name),
+          'playerData.${currentLovers[0]}.privateInfo': _l10n
+              .vousEtesAmoureuxDe(lover2Name),
+          'playerData.${currentLovers[1]}.privateInfo': _l10n
+              .vousEtesAmoureuxDe1(lover1Name),
           'gameLog': FieldValue.arrayUnion([
             _l10n.cupidonADesigneEtComme(lover1Name, lover2Name),
           ]),
@@ -11853,10 +11906,11 @@ class FirebaseService {
     final String subPhase = gameData['subPhase'] ?? '';
     final String? activePlayerId = gameData['activePlayerId'];
     final playerData = Map<String, dynamic>.from(gameData['playerData'] ?? {});
-    final livingPlayers = playerData.entries
-        .where((e) => e.value['status'] == 'vivant')
-        .map((e) => e.key)
-        .toList();
+    final livingPlayers =
+        playerData.entries
+            .where((e) => e.value['status'] == 'vivant')
+            .map((e) => e.key)
+            .toList();
 
     String? findAliveRolePlayer(String roleName) {
       final entry = playerData.entries.firstWhere(
@@ -11868,10 +11922,16 @@ class FirebaseService {
 
     // 1. Sous-phases de pouvoirs prioritaires
     if (subPhase == 'captain_designate' && activePlayerId != null) {
-      final candidates = livingPlayers.where((id) => id != activePlayerId).toList();
+      final candidates =
+          livingPlayers.where((id) => id != activePlayerId).toList();
       if (candidates.isNotEmpty) {
         candidates.shuffle();
-        await captainDesignate(gameCode, activePlayerId, candidates.first, isAuto: true);
+        await captainDesignate(
+          gameCode,
+          activePlayerId,
+          candidates.first,
+          isAuto: true,
+        );
       } else {
         await _advancePendingDayEffects(gameRef);
       }
@@ -11879,10 +11939,16 @@ class FirebaseService {
     }
 
     if (subPhase == 'chasseur_revenge' && activePlayerId != null) {
-      final targets = livingPlayers.where((id) => id != activePlayerId).toList();
+      final targets =
+          livingPlayers.where((id) => id != activePlayerId).toList();
       if (targets.isNotEmpty) {
         targets.shuffle();
-        await chasseurShoot(gameCode, activePlayerId, targets.first, isAuto: true);
+        await chasseurShoot(
+          gameCode,
+          activePlayerId,
+          targets.first,
+          isAuto: true,
+        );
       } else {
         await _advancePendingDayEffects(gameRef);
       }
@@ -11890,10 +11956,16 @@ class FirebaseService {
     }
 
     if (subPhase == 'fossoyeur_reveal' && activePlayerId != null) {
-      final targets = livingPlayers.where((id) => id != activePlayerId).toList();
+      final targets =
+          livingPlayers.where((id) => id != activePlayerId).toList();
       if (targets.isNotEmpty) {
         targets.shuffle();
-        await fossoyeurReveal(gameCode, activePlayerId, targets.first, isAuto: true);
+        await fossoyeurReveal(
+          gameCode,
+          activePlayerId,
+          targets.first,
+          isAuto: true,
+        );
       } else {
         await _advancePendingDayEffects(gameRef);
       }
@@ -11907,9 +11979,7 @@ class FirebaseService {
         targets.shuffle();
         await dictateurCoup(gameCode, dictatorId, targets.first, isAuto: true);
       } else {
-        await gameRef.update({
-          'dictatorTookPowerAtNight': false,
-        });
+        await gameRef.update({'dictatorTookPowerAtNight': false});
         await _advancePendingDayEffects(gameRef);
       }
       return;
@@ -11931,10 +12001,16 @@ class FirebaseService {
         final wolfVotes = Map<String, dynamic>.from(
           (gameData['nightActions'] as Map?)?['votes'] ?? {},
         );
-        final wolves = livingPlayers.where((id) =>
-            GameData.roleCamps[playerData[id]?['role']] == 'loups' ||
-            playerData[id]?['infectionStatus'] == 'infecte').toList();
-        final nonWolves = livingPlayers.where((id) => !wolves.contains(id)).toList();
+        final wolves =
+            livingPlayers
+                .where(
+                  (id) =>
+                      GameData.roleCamps[playerData[id]?['role']] == 'loups' ||
+                      playerData[id]?['infectionStatus'] == 'infecte',
+                )
+                .toList();
+        final nonWolves =
+            livingPlayers.where((id) => !wolves.contains(id)).toList();
 
         if (nonWolves.isNotEmpty && wolves.isNotEmpty) {
           nonWolves.shuffle();
@@ -11943,7 +12019,12 @@ class FirebaseService {
           for (var wolfId in wolves) {
             if (!wolfVotes.containsKey(wolfId)) {
               anyVoted = true;
-              await loupGarouVote(gameCode, wolfId, defaultTarget, isAuto: true);
+              await loupGarouVote(
+                gameCode,
+                wolfId,
+                defaultTarget,
+                isAuto: true,
+              );
             }
           }
           if (!anyVoted) {
@@ -11972,7 +12053,12 @@ class FirebaseService {
         final targets = livingPlayers.where((id) => id != heritierId).toList();
         if (heritierId != null && targets.isNotEmpty) {
           targets.shuffle();
-          await heritierChooseTestateur(gameCode, heritierId, targets.first, isAuto: true);
+          await heritierChooseTestateur(
+            gameCode,
+            heritierId,
+            targets.first,
+            isAuto: true,
+          );
         } else {
           await startNextNightPhase(gameCode);
         }
@@ -11983,7 +12069,8 @@ class FirebaseService {
         final gardeId = activePlayerId ?? findAliveRolePlayer('Garde');
         final gardeMap = gardeId != null ? playerData[gardeId] as Map? : null;
         final lastProtected = gardeMap?['lastProtectedId'];
-        final targets = livingPlayers.where((id) => id != lastProtected).toList();
+        final targets =
+            livingPlayers.where((id) => id != lastProtected).toList();
         if (gardeId != null && targets.isNotEmpty) {
           targets.shuffle();
           await gardeProtect(gameCode, gardeId, targets.first, isAuto: true);
@@ -11997,11 +12084,24 @@ class FirebaseService {
         final sorciereId = activePlayerId ?? findAliveRolePlayer('Sorcière');
         if (sorciereId != null) {
           final loupTarget = (gameData['nightActions'] as Map?)?['loupTarget'];
-          final hasHeal = playerData[sorciereId]?['potions']?['guerison'] == true;
+          final hasHeal =
+              playerData[sorciereId]?['potions']?['guerison'] == true;
           if (hasHeal && loupTarget == sorciereId) {
-            await sorciereUsePotion(gameCode, sorciereId, 'guerison', null, isAuto: true);
+            await sorciereUsePotion(
+              gameCode,
+              sorciereId,
+              'guerison',
+              null,
+              isAuto: true,
+            );
           } else {
-            await sorciereUsePotion(gameCode, sorciereId, 'rien', null, isAuto: true);
+            await sorciereUsePotion(
+              gameCode,
+              sorciereId,
+              'rien',
+              null,
+              isAuto: true,
+            );
           }
         } else {
           await startNextNightPhase(gameCode);
@@ -12011,15 +12111,33 @@ class FirebaseService {
 
       if (subPhase == 'pyromancien_turn') {
         final pyroId = activePlayerId ?? findAliveRolePlayer('Pyromancien');
-        final barrels = Map<String, dynamic>.from(gameData['pyromancienBarrels'] ?? {});
-        final barreledLiving = livingPlayers.where((id) => (barrels[id] as int? ?? 0) > 0).length;
-        final targets = livingPlayers.where((id) => id != pyroId && (barrels[id] as int? ?? 0) == 0).toList();
+        final barrels = Map<String, dynamic>.from(
+          gameData['pyromancienBarrels'] ?? {},
+        );
+        final barreledLiving =
+            livingPlayers.where((id) => (barrels[id] as int? ?? 0) > 0).length;
+        final targets =
+            livingPlayers
+                .where((id) => id != pyroId && (barrels[id] as int? ?? 0) == 0)
+                .toList();
         if (pyroId != null) {
           if (barreledLiving >= 2 || targets.isEmpty) {
-            await pyromancienAct(gameCode, pyroId, 'detonate', null, isAuto: true);
+            await pyromancienAct(
+              gameCode,
+              pyroId,
+              'detonate',
+              null,
+              isAuto: true,
+            );
           } else {
             targets.shuffle();
-            await pyromancienAct(gameCode, pyroId, 'place', targets.first, isAuto: true);
+            await pyromancienAct(
+              gameCode,
+              pyroId,
+              'place',
+              targets.first,
+              isAuto: true,
+            );
           }
         } else {
           await startNextNightPhase(gameCode);
@@ -12030,8 +12148,11 @@ class FirebaseService {
       if (subPhase == 'cupidon_turn') {
         final cupidonId = activePlayerId ?? findAliveRolePlayer('Cupidon');
         final currentLovers = List<String>.from(gameData['lovers'] ?? []);
-        final candidates = livingPlayers.where((id) => !currentLovers.contains(id)).toList()..shuffle();
-        if (cupidonId != null && candidates.length >= (2 - currentLovers.length)) {
+        final candidates =
+            livingPlayers.where((id) => !currentLovers.contains(id)).toList()
+              ..shuffle();
+        if (cupidonId != null &&
+            candidates.length >= (2 - currentLovers.length)) {
           while (currentLovers.length < 2 && candidates.isNotEmpty) {
             final picked = candidates.removeAt(0);
             currentLovers.add(picked);
@@ -12045,11 +12166,20 @@ class FirebaseService {
 
       if (subPhase == 'rat_malade_turn') {
         final ratId = activePlayerId ?? findAliveRolePlayer('Rat Malade');
-        final targets = livingPlayers.where((id) =>
-            id != ratId && playerData[id]?['poisoned'] != true).toList();
+        final targets =
+            livingPlayers
+                .where(
+                  (id) => id != ratId && playerData[id]?['poisoned'] != true,
+                )
+                .toList();
         if (ratId != null && targets.isNotEmpty) {
           targets.shuffle();
-          await ratMaladeContaminate(gameCode, ratId, targets.take(2).toList(), isAuto: true);
+          await ratMaladeContaminate(
+            gameCode,
+            ratId,
+            targets.take(2).toList(),
+            isAuto: true,
+          );
         } else {
           await startNextNightPhase(gameCode);
         }
@@ -12075,8 +12205,10 @@ class FirebaseService {
     if (phase == 'jour_vote') {
       final dayVotes = Map<String, dynamic>.from(gameData['dayVotes'] ?? {});
       for (final voterId in livingPlayers) {
-        if (!dayVotes.containsKey(voterId) && _isPlayerIdBot(gameData, voterId)) {
-          final candidates = livingPlayers.where((id) => id != voterId).toList();
+        if (!dayVotes.containsKey(voterId) &&
+            _isPlayerIdBot(gameData, voterId)) {
+          final candidates =
+              livingPlayers.where((id) => id != voterId).toList();
           if (candidates.isNotEmpty) {
             candidates.shuffle();
             dayVotes[voterId] = candidates.first;
@@ -12156,7 +12288,9 @@ class FirebaseService {
         Map<String, dynamic> pMap = Map<String, dynamic>.from(pData);
         pMap['livekitIdentity'] = pMap['livekitIdentity'] ?? pId;
         if (!pMap.containsKey('authUid') || pMap['authUid'] == null) {
-          if (pId == hostId && currentAuthUid != null && currentAuthUid.isNotEmpty) {
+          if (pId == hostId &&
+              currentAuthUid != null &&
+              currentAuthUid.isNotEmpty) {
             pMap['authUid'] = currentAuthUid;
           } else {
             pMap['authUid'] = pId;
@@ -12175,9 +12309,12 @@ class FirebaseService {
           'isReady': pId == hostId,
           'isOnline': true,
           'lastHeartbeat': FieldValue.serverTimestamp(),
-          'authUid': (pId == hostId && currentAuthUid != null && currentAuthUid.isNotEmpty)
-              ? currentAuthUid
-              : pId,
+          'authUid':
+              (pId == hostId &&
+                      currentAuthUid != null &&
+                      currentAuthUid.isNotEmpty)
+                  ? currentAuthUid
+                  : pId,
         };
       }
     });
@@ -13068,10 +13205,12 @@ class FirebaseService {
       specialRolesData['lovers'] = [amoreuxId, partnerId];
       String amoureux1Name = players[amoreuxId]['name'];
       String amoureux2Name = players[partnerId]['name'];
-      privatePlayerData[amoreuxId]!['privateInfo'] =
-          _l10n.votreAmoureuxSe(amoureux2Name);
-      privatePlayerData[partnerId]!['privateInfo'] =
-          _l10n.votreAmoureuxSe1(amoureux1Name);
+      privatePlayerData[amoreuxId]!['privateInfo'] = _l10n.votreAmoureuxSe(
+        amoureux2Name,
+      );
+      privatePlayerData[partnerId]!['privateInfo'] = _l10n.votreAmoureuxSe1(
+        amoureux1Name,
+      );
     }
     if (privatePlayerData.values.any(
           (p) => (p['specialAbilities'] as List).contains('Duellistes'),
@@ -13080,8 +13219,9 @@ class FirebaseService {
       String duellist1Id =
           privatePlayerData.entries
               .firstWhere(
-                (e) =>
-                    (e.value['specialAbilities'] as List).contains('Duellistes'),
+                (e) => (e.value['specialAbilities'] as List).contains(
+                  'Duellistes',
+                ),
               )
               .key;
       tempPlayers.remove(duellist1Id);
@@ -13121,8 +13261,9 @@ class FirebaseService {
       specialRolesData['fouDeJoie'] =
           privatePlayerData.entries
               .firstWhere(
-                (e) =>
-                    (e.value['specialAbilities'] as List).contains('Fou de Joie'),
+                (e) => (e.value['specialAbilities'] as List).contains(
+                  'Fou de Joie',
+                ),
               )
               .key;
     }
@@ -13300,7 +13441,10 @@ class FirebaseService {
       await gameRef.update({
         'players.$playerId.xp': FieldValue.increment(65),
         'turnLog': FieldValue.arrayUnion([
-          _l10n.aDevineLeMotCivil1(gameData['playerData']?[playerId]?['name'] ?? 'Mr. White', civilWord),
+          _l10n.aDevineLeMotCivil1(
+            gameData['playerData']?[playerId]?['name'] ?? 'Mr. White',
+            civilWord,
+          ),
         ]),
         'eliminatedThisTurn': [],
       });
@@ -13308,7 +13452,11 @@ class FirebaseService {
     } else {
       await gameRef.update({
         'turnLog': FieldValue.arrayUnion([
-          _l10n.aProposeMaisCeN(gameData['playerData']?[playerId]?['name'] ?? 'Mr. White', guessedWord, civilWord),
+          _l10n.aProposeMaisCeN(
+            gameData['playerData']?[playerId]?['name'] ?? 'Mr. White',
+            guessedWord,
+            civilWord,
+          ),
         ]),
       });
       await processEliminationsAndCheckWin(gameCode);
@@ -13348,9 +13496,7 @@ class FirebaseService {
         'currentPhase': 'turn_result',
         'eliminatedThisTurn': [eliminatedId],
         'playerData': playerData,
-        'turnLog': FieldValue.arrayUnion([
-          _l10n.laDeesseDeLaJustice,
-        ]),
+        'turnLog': FieldValue.arrayUnion([_l10n.laDeesseDeLaJustice]),
       });
     });
   }
@@ -13534,9 +13680,7 @@ class FirebaseService {
     await gameRef.update({
       'players.$avengerId.xp': FieldValue.increment(35),
       'eliminatedThisTurn': eliminatedThisTurn,
-      'turnLog': FieldValue.arrayUnion([
-        _l10n.laVengeuseEmporteQuelquUn,
-      ]),
+      'turnLog': FieldValue.arrayUnion([_l10n.laVengeuseEmporteQuelquUn]),
       'currentPhase': 'turn_result',
       'turnStartTime': FieldValue.serverTimestamp(),
     });
@@ -13681,7 +13825,8 @@ class FirebaseService {
           (firstPrivate['specialAbilities'] as List<dynamic>?) ??
           (playerData[firstEliminatedId]?['specialAbilities']
               as List<dynamic>?);
-      bool isFouDeJoie = (abilities?.contains('Fou de Joie') ?? false) ||
+      bool isFouDeJoie =
+          (abilities?.contains('Fou de Joie') ?? false) ||
           (gameData['specialRoles']?['fouDeJoie'] == firstEliminatedId);
       if (isFouDeJoie) {
         pointsGained[firstEliminatedId] =
@@ -13831,7 +13976,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -14020,9 +14166,7 @@ class FirebaseService {
         'tabooTurnActive': false,
         'tabooCurrentTeamIndex': nextTeamIndex,
         'tabooRoundNumber': currentRoundNum,
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.tempsEcoulePassageAL,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.tempsEcoulePassageAL]),
       });
 
       gameData['tabooCurrentTeamIndex'] = nextTeamIndex;
@@ -14321,9 +14465,7 @@ class FirebaseService {
       var shipsPlaced = Map<String, dynamic>.from(myData['shipsPlaced'] ?? {});
 
       if (shipsPlaced.length != GameData.batailleNavaleShips.length) {
-        throw Exception(
-          _l10n.veuillezPlacerTousVosNavires,
-        );
+        throw Exception(_l10n.veuillezPlacerTousVosNavires);
       }
 
       myData['isReady'] = true;
@@ -14340,7 +14482,9 @@ class FirebaseService {
           'currentPlayerId': firstPlayer,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            _l10n.tousLesJoueursSontPrets1(playerData[firstPlayer]?['name'] ?? _l10n.joueur),
+            _l10n.tousLesJoueursSontPrets1(
+              playerData[firstPlayer]?['name'] ?? _l10n.joueur,
+            ),
           ]),
         });
       }
@@ -14392,7 +14536,9 @@ class FirebaseService {
       'ramiHasDrawn': false,
       'turnStartTime': FieldValue.serverTimestamp(),
       'gameLog': FieldValue.arrayUnion([
-        _l10n.laMancheDeRamiCommence1(players[playerIds.first]?['name'] ?? _l10n.joueur),
+        _l10n.laMancheDeRamiCommence1(
+          players[playerIds.first]?['name'] ?? _l10n.joueur,
+        ),
       ]),
     });
   }
@@ -14405,7 +14551,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -14519,9 +14666,7 @@ class FirebaseService {
           throw Exception(_l10n.ilFautAuMoins31);
         }
         if (cards.toSet().length != cards.length) {
-          throw Exception(
-            _l10n.tentativeDeTricheVousNe,
-          );
+          throw Exception(_l10n.tentativeDeTricheVousNe);
         }
         for (String c in cards) {
           if (!myHand.contains(c)) {
@@ -14686,7 +14831,8 @@ class FirebaseService {
       if (list.length >= 3) {
         int getVal(String c) {
           String clean = c.split('_')[0];
-          if (clean.toUpperCase().contains('JOKER') || clean.length < 2) return 0;
+          if (clean.toUpperCase().contains('JOKER') || clean.length < 2)
+            return 0;
           String r = clean.substring(0, clean.length - 1);
           if (r == 'A') return 1;
           if (r == 'J') return 11;
@@ -14796,6 +14942,7 @@ class FirebaseService {
           final isPaired = (rankCount[r] ?? 0) >= 2;
           return isPaired ? val - 20 : val;
         }
+
         final sortedToDiscard = List<String>.from(postHand)
           ..sort((a, b) => cardScore(b).compareTo(cardScore(a)));
         await ramiAction(
@@ -14851,7 +14998,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -14915,7 +15063,8 @@ class FirebaseService {
           positions[playerId] = myPawns;
         }
         consecutiveSixes[playerId] = 0;
-        final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
+        final playerName =
+            gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
         transaction.update(gameRef, {
           'petitsChevauxPositions': positions,
           'petitsChevauxDice': dice,
@@ -14937,10 +15086,13 @@ class FirebaseService {
           // Allié en 2v2 : uniquement sortie d'écurie (-1) ou escalier (> 50)
           if (p == -1 && (dice == 1 || dice == 6)) {
             for (int i = 0; i < playerOrder.length; i++) {
-              if (playerOrder[i] == ownerId || (isTeamMode && (i % 2 == ownerIdx % 2))) {
+              if (playerOrder[i] == ownerId ||
+                  (isTeamMode && (i % 2 == ownerIdx % 2))) {
                 final oPos = List<int>.from(positions[playerOrder[i]] ?? []);
                 for (final op in oPos) {
-                  if (op >= 0 && op <= 50 && (op + startOffsets[i]) % 52 == ownerStartOffset) {
+                  if (op >= 0 &&
+                      op <= 50 &&
+                      (op + startOffsets[i]) % 52 == ownerStartOffset) {
                     return false;
                   }
                 }
@@ -14954,10 +15106,13 @@ class FirebaseService {
         if (p == -1) {
           if (dice != 1 && dice != 6) return false;
           for (int i = 0; i < playerOrder.length; i++) {
-            if (playerOrder[i] == ownerId || (isTeamMode && (i % 2 == ownerIdx % 2))) {
+            if (playerOrder[i] == ownerId ||
+                (isTeamMode && (i % 2 == ownerIdx % 2))) {
               final oPos = List<int>.from(positions[playerOrder[i]] ?? []);
               for (final op in oPos) {
-                if (op >= 0 && op <= 50 && (op + startOffsets[i]) % 52 == ownerStartOffset) {
+                if (op >= 0 &&
+                    op <= 50 &&
+                    (op + startOffsets[i]) % 52 == ownerStartOffset) {
                   return false;
                 }
               }
@@ -14978,10 +15133,12 @@ class FirebaseService {
               if (op >= 0 && op <= 50) {
                 final int otherAbs = (op + otherStart) % 52;
                 if (targetAbs == otherAbs) {
-                  if (otherId == ownerId || (isTeamMode && (i % 2 == ownerIdx % 2))) {
+                  if (otherId == ownerId ||
+                      (isTeamMode && (i % 2 == ownerIdx % 2))) {
                     return false;
                   }
-                  if (starSquares.contains(targetAbs) || targetAbs == otherStart) {
+                  if (starSquares.contains(targetAbs) ||
+                      targetAbs == otherStart) {
                     return false;
                   }
                 }
@@ -15015,7 +15172,8 @@ class FirebaseService {
         }
       }
 
-      final playerName = gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
+      final playerName =
+          gameData['players']?[playerId]?['name'] ?? _l10n.joueur;
 
       if (!hasValidMove) {
         // Aucun coup possible -> Passage automatique immédiat au joueur suivant
@@ -15051,7 +15209,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -15092,9 +15251,7 @@ class FirebaseService {
           (myPlayerIdx % 2 == targetPlayerIdx % 2);
 
       if (playerId != targetOwnerId && !isTeammate) {
-        throw Exception(
-          _l10n.vousNePouvezPasDeplacer,
-        );
+        throw Exception(_l10n.vousNePouvezPasDeplacer);
       }
 
       Map<String, dynamic> allPositions = Map<String, dynamic>.from(
@@ -15120,7 +15277,9 @@ class FirebaseService {
           'petitsChevauxDice': 0,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            _l10n.k3SixConsecutifsLePion1(players[playerId]?['name'] ?? _l10n.joueur),
+            _l10n.k3SixConsecutifsLePion1(
+              players[playerId]?['name'] ?? _l10n.joueur,
+            ),
           ]),
         });
         return;
@@ -15128,13 +15287,9 @@ class FirebaseService {
 
       if (isTeammate) {
         if (currentPos == -1 && (dice != 1 && dice != 6)) {
-          throw Exception(
-            _l10n.ilFautUn1Ou,
-          );
+          throw Exception(_l10n.ilFautUn1Ou);
         } else if (currentPos >= 0 && currentPos <= 50) {
-          throw Exception(
-            _l10n.vousNePouvezAiderUn,
-          );
+          throw Exception(_l10n.vousNePouvezAiderUn);
         }
       }
 
@@ -15189,7 +15344,8 @@ class FirebaseService {
             transaction.update(gameRef, {
               'petitsChevauxHasRolled': false,
               'petitsChevauxDice': 0,
-              'petitsChevauxCurrentIndex': (currentIndex + 1) % playerOrder.length,
+              'petitsChevauxCurrentIndex':
+                  (currentIndex + 1) % playerOrder.length,
               'turnStartTime': FieldValue.serverTimestamp(),
               'gameLog': FieldValue.arrayUnion([
                 _l10n.lancerTropElevePourAtteindre(dice),
@@ -15219,9 +15375,7 @@ class FirebaseService {
                   }
                   if (starSquares.contains(myAbsPos) ||
                       myAbsPos == otherStartOffset) {
-                    throw Exception(
-                      _l10n.caseRefugeProtegeeCaptureImpossible,
-                    );
+                    throw Exception(_l10n.caseRefugeProtegeeCaptureImpossible);
                   }
                   otherPos[pIdx] = -1;
                   allPositions[otherId] = otherPos;
@@ -15337,7 +15491,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -15469,7 +15624,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -15511,14 +15667,10 @@ class FirebaseService {
       // VÉRIFICATION STRICTE DE COMPATIBILITÉ TUILE / EXTRÉMITÉ
       if (boardChain.isNotEmpty) {
         if (!openEnds.contains(matchEnd)) {
-          throw Exception(
-            _l10n.extremiteNonDisponibleSurLe1(openEnds),
-          );
+          throw Exception(_l10n.extremiteNonDisponibleSurLe1(openEnds));
         }
         if (a != matchEnd && b != matchEnd) {
-          throw Exception(
-            _l10n.laTuileNePossedePas(tile, matchEnd),
-          );
+          throw Exception(_l10n.laTuileNePossedePas(tile, matchEnd));
         }
       }
 
@@ -15619,8 +15771,10 @@ class FirebaseService {
           updates['gameWinner'] = playerId;
           updates['dominoesGameWinner'] = playerId;
           updates['players.$playerId.score'] = FieldValue.increment(1);
-          updates['gameEndReason'] =
-              _l10n.atteintPoints(players[playerId]['name'], targetScore);
+          updates['gameEndReason'] = _l10n.atteintPoints(
+            players[playerId]['name'],
+            targetScore,
+          );
         }
       } else {
         if ((scores[playerId] ?? 0) >= targetScore) {
@@ -15636,8 +15790,10 @@ class FirebaseService {
           updates['gameWinner'] = playerId;
           updates['dominoesGameWinner'] = playerId;
           updates['players.$playerId.score'] = FieldValue.increment(1);
-          updates['gameEndReason'] =
-              _l10n.atteintPoints(players[playerId]['name'], targetScore);
+          updates['gameEndReason'] = _l10n.atteintPoints(
+            players[playerId]['name'],
+            targetScore,
+          );
         } else {
           updates['dominoesCurrentPlayerIndex'] =
               (currentIndex + 1) % playerOrder.length;
@@ -15651,9 +15807,14 @@ class FirebaseService {
   // ────────────────────────────────────────────────────────────
   // drawDominoesTile — pioche une tuile
   // ────────────────────────────────────────────────────────────
-  Future<void> drawDominoesTile(String gameCode, String playerId, {bool isAuto = false}) async {
+  Future<void> drawDominoesTile(
+    String gameCode,
+    String playerId, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -15668,7 +15829,8 @@ class FirebaseService {
       if (!_isDominoesDrawMode(gameData['dominoesMode'])) return;
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
-      if (!isAuto && (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
+      if (!isAuto &&
+          (players[playerId]?['authUid'] ?? playerId) != currentAuthUid) {
         throw Exception(_l10n.actionNonAutorisee);
       }
 
@@ -15730,9 +15892,7 @@ class FirebaseService {
       if (!isTimeout &&
           _isDominoesDrawMode(gameData['dominoesMode']) &&
           boneyard.isNotEmpty) {
-        throw Exception(
-          _l10n.vousDevezPiocherUneTuile,
-        );
+        throw Exception(_l10n.vousDevezPiocherUneTuile);
       }
 
       final passedPlayers = List<String>.from(
@@ -15790,8 +15950,10 @@ class FirebaseService {
             updates['gameWinner'] = winnerId;
             updates['dominoesGameWinner'] = winnerId;
             updates['players.$winnerId.score'] = FieldValue.increment(1);
-            updates['gameEndReason'] =
-                _l10n.atteintPoints1(players[winnerId]['name'], targetScore);
+            updates['gameEndReason'] = _l10n.atteintPoints1(
+              players[winnerId]['name'],
+              targetScore,
+            );
           }
         }
       } else {
@@ -15803,9 +15965,13 @@ class FirebaseService {
     });
   }
 
-  Future<void> startNextDominoesRound(String gameCode, {bool isAuto = false}) async {
+  Future<void> startNextDominoesRound(
+    String gameCode, {
+    bool isAuto = false,
+  }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     final gameRef = _db.collection('games').doc(gameCode);
     final gameSnap = await gameRef.get();
@@ -15870,9 +16036,11 @@ class FirebaseService {
         return a + b + (a == b ? 5 : 0);
       }
 
-      final playableTiles = myHand.where(canPlay).toList()
-        ..sort((a, b) => tileWeight(b).compareTo(tileWeight(a)));
-      String? tileToPlay = playableTiles.isNotEmpty ? playableTiles.first : null;
+      final playableTiles =
+          myHand.where(canPlay).toList()
+            ..sort((a, b) => tileWeight(b).compareTo(tileWeight(a)));
+      String? tileToPlay =
+          playableTiles.isNotEmpty ? playableTiles.first : null;
 
       if (tileToPlay != null) {
         int matchEnd = -1;
@@ -15994,9 +16162,7 @@ class FirebaseService {
       'zombieCurrentPlayerIndex': firstActiveZombieIndex,
       'zombieEliminatedPlayers': eliminatedPlayers,
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': [
-        _l10n.laPartieDeZombieCommence,
-      ],
+      'gameLog': [_l10n.laPartieDeZombieCommence],
     });
   }
 
@@ -16007,7 +16173,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -16116,8 +16283,9 @@ class FirebaseService {
         updates.addAll({
           'gameState': 'gameOver',
           'zombieLoserId': loserId,
-          'gameEndReason':
-              _l10n.aGardeLeZombie(players[loserId]?['name'] ?? _l10n.unJoueur),
+          'gameEndReason': _l10n.aGardeLeZombie(
+            players[loserId]?['name'] ?? _l10n.unJoueur,
+          ),
           ...scoreUpdates,
         });
       } else {
@@ -16468,9 +16636,7 @@ class FirebaseService {
       'aoVCurrentRound': 1,
       'aoVSpinsRemaining': gameData['aoVMaxRounds'] ?? 10,
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': FieldValue.arrayUnion([
-        _l10n.laPartieDActionOu,
-      ]),
+      'gameLog': FieldValue.arrayUnion([_l10n.laPartieDActionOu]),
     });
   }
 
@@ -16531,9 +16697,10 @@ class FirebaseService {
         if (otherPlayers.isEmpty) {
           // Fallback automatique si aucun autre joueur disponible
           final String difficulty = gameData['difficulty'] ?? 'soft';
-          final List<String> fallbackChallenges = challengeType == 'action'
-              ? (GameWords.dares[difficulty] ?? GameWords.dares['soft']!)
-              : (GameWords.truths[difficulty] ?? GameWords.truths['soft']!);
+          final List<String> fallbackChallenges =
+              challengeType == 'action'
+                  ? (GameWords.dares[difficulty] ?? GameWords.dares['soft']!)
+                  : (GameWords.truths[difficulty] ?? GameWords.truths['soft']!);
           final chosenChallenge =
               fallbackChallenges[Random().nextInt(fallbackChallenges.length)];
           final targetPlayerName = players[playerId]?['name'] ?? _l10n.joueur;
@@ -16544,7 +16711,10 @@ class FirebaseService {
             'aoVPhase': 'performing',
             'turnStartTime': FieldValue.serverTimestamp(),
             'gameLog': FieldValue.arrayUnion([
-              _l10n.aTireDefi(targetPlayerName, challengeType == 'action' ? _l10n.action1 : _l10n.verite1),
+              _l10n.aTireDefi(
+                targetPlayerName,
+                challengeType == 'action' ? _l10n.action1 : _l10n.verite1,
+              ),
               _l10n.iAucunAutreJoueurDisponible,
             ]),
           });
@@ -16562,7 +16732,10 @@ class FirebaseService {
           'aoVCurrentChallenge': null,
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            _l10n.aTireDefi(targetPlayerName, challengeType == 'action' ? _l10n.action1 : _l10n.verite1),
+            _l10n.aTireDefi(
+              targetPlayerName,
+              challengeType == 'action' ? _l10n.action1 : _l10n.verite1,
+            ),
             _l10n.doitEcrireLeDefi(authorName),
           ]),
         });
@@ -16573,27 +16746,42 @@ class FirebaseService {
         if (gameData['aiWords'] != null &&
             (gameData['aiWords'] as List).isNotEmpty) {
           final aiList = List<String>.from(gameData['aiWords']);
-          final filtered = aiList.where((item) {
-            final lower = item.trim().toLowerCase();
-            if (challengeType == 'action') {
-              return lower.startsWith('action');
-            } else {
-              return lower.startsWith('vérité') || lower.startsWith('verite');
-            }
-          }).map((item) {
-            final colonIdx = item.indexOf(':');
-            return colonIdx != -1 ? item.substring(colonIdx + 1).trim() : item.trim();
-          }).where((s) => s.isNotEmpty).toList();
-          challenges = filtered.isNotEmpty
-              ? filtered
-              : aiList.map((item) {
-                  final colonIdx = item.indexOf(':');
-                  return colonIdx != -1 ? item.substring(colonIdx + 1).trim() : item.trim();
-                }).where((s) => s.isNotEmpty).toList();
+          final filtered =
+              aiList
+                  .where((item) {
+                    final lower = item.trim().toLowerCase();
+                    if (challengeType == 'action') {
+                      return lower.startsWith('action');
+                    } else {
+                      return lower.startsWith('vérité') ||
+                          lower.startsWith('verite');
+                    }
+                  })
+                  .map((item) {
+                    final colonIdx = item.indexOf(':');
+                    return colonIdx != -1
+                        ? item.substring(colonIdx + 1).trim()
+                        : item.trim();
+                  })
+                  .where((s) => s.isNotEmpty)
+                  .toList();
+          challenges =
+              filtered.isNotEmpty
+                  ? filtered
+                  : aiList
+                      .map((item) {
+                        final colonIdx = item.indexOf(':');
+                        return colonIdx != -1
+                            ? item.substring(colonIdx + 1).trim()
+                            : item.trim();
+                      })
+                      .where((s) => s.isNotEmpty)
+                      .toList();
         }
         if (challenges.isEmpty) {
           if (challengeType == 'action') {
-            challenges = GameWords.dares[difficulty] ?? GameWords.dares['soft']!;
+            challenges =
+                GameWords.dares[difficulty] ?? GameWords.dares['soft']!;
           } else {
             challenges =
                 GameWords.truths[difficulty] ?? GameWords.truths['soft']!;
@@ -16601,13 +16789,17 @@ class FirebaseService {
         }
         String challenge = challenges[Random().nextInt(challenges.length)];
         if (challenge.contains('{player}')) {
-          final otherNames = playerOrder
-              .where((id) => id != playerId)
-              .map((id) => (players[id]?['name'] ?? _l10n.joueur).toString())
-              .toList();
-          final pickedName = otherNames.isNotEmpty
-              ? otherNames[Random().nextInt(otherNames.length)]
-              : (players[playerId]?['name'] ?? _l10n.joueur).toString();
+          final otherNames =
+              playerOrder
+                  .where((id) => id != playerId)
+                  .map(
+                    (id) => (players[id]?['name'] ?? _l10n.joueur).toString(),
+                  )
+                  .toList();
+          final pickedName =
+              otherNames.isNotEmpty
+                  ? otherNames[Random().nextInt(otherNames.length)]
+                  : (players[playerId]?['name'] ?? _l10n.joueur).toString();
           challenge = challenge.replaceAll('{player}', pickedName);
         }
         final targetPlayerName = players[playerId]?['name'] ?? _l10n.joueur;
@@ -16618,7 +16810,10 @@ class FirebaseService {
           'aoVPhase': 'performing',
           'turnStartTime': FieldValue.serverTimestamp(),
           'gameLog': FieldValue.arrayUnion([
-            _l10n.aTireDefi(targetPlayerName, challengeType == 'action' ? _l10n.action1 : _l10n.verite1),
+            _l10n.aTireDefi(
+              targetPlayerName,
+              challengeType == 'action' ? _l10n.action1 : _l10n.verite1,
+            ),
           ]),
         });
       }
@@ -16648,7 +16843,8 @@ class FirebaseService {
 
       final players = Map<String, dynamic>.from(gameData['players'] ?? {});
       final currentPlayerId = gameData['aoVCurrentPlayerId'];
-      final currentPlayerName = players[currentPlayerId]?['name'] ?? _l10n.joueur;
+      final currentPlayerName =
+          players[currentPlayerId]?['name'] ?? _l10n.joueur;
 
       transaction.update(gameRef, {
         'aoVCurrentChallenge': cleanChallenge,
@@ -16676,9 +16872,7 @@ class FirebaseService {
         'aoVPhase': 'voting',
         'aoVVotes': {},
         'turnStartTime': FieldValue.serverTimestamp(),
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.leJoueurARealiseLe,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.leJoueurARealiseLe]),
       });
     });
   }
@@ -16720,7 +16914,8 @@ class FirebaseService {
         final baseXp = gameData['aoVChallengeType'] == 'action' ? 30 : 20;
         final earnedXp = (baseXp * percentage / 100).round();
 
-        final currentPlayerName = players[currentPlayerId]?['name'] ?? _l10n.joueur;
+        final currentPlayerName =
+            players[currentPlayerId]?['name'] ?? _l10n.joueur;
 
         // Créditer l'XP
         transaction.update(gameRef, {
@@ -16782,8 +16977,10 @@ class FirebaseService {
           'gameWinner': winnerId,
           if (winnerId.isNotEmpty)
             'players.$winnerId.score': FieldValue.increment(1),
-          'gameEndReason':
-              _l10n.aLePlusDXp(players[winnerId]?['name'] ?? _l10n.joueur, maxXp),
+          'gameEndReason': _l10n.aLePlusDXp(
+            players[winnerId]?['name'] ?? _l10n.joueur,
+            maxXp,
+          ),
         });
       } else {
         transaction.update(gameRef, {
@@ -16797,9 +16994,7 @@ class FirebaseService {
           'aoVEarnedXp': null,
           'aoVCurrentRound': FieldValue.increment(1),
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.tourSuivantQuiSeraLe1,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.tourSuivantQuiSeraLe1]),
         });
       }
     });
@@ -16829,8 +17024,10 @@ class FirebaseService {
       transaction.update(gameRef, {
         'gameState': 'gameOver',
         'gameWinner': winnerId,
-        'gameEndReason':
-            _l10n.mancheTermineeGagneAvecXp(players[winnerId]?['name'] ?? _l10n.joueur, maxXp),
+        'gameEndReason': _l10n.mancheTermineeGagneAvecXp(
+          players[winnerId]?['name'] ?? _l10n.joueur,
+          maxXp,
+        ),
       });
     });
   }
@@ -16852,7 +17049,8 @@ class FirebaseService {
     final playerOrder = List<String>.from(gameData['aoVPlayerOrder'] ?? []);
 
     if (phase == 'waiting_spin') {
-      final spinnerId = currentPlayerId ??
+      final spinnerId =
+          currentPlayerId ??
           (playerOrder.isNotEmpty ? playerOrder.first : gameData['hostId']);
       if (spinnerId != null) {
         await aoVSpinWheel(gameCode, spinnerId.toString());
@@ -16871,22 +17069,22 @@ class FirebaseService {
     } else if (phase == 'writing_challenge') {
       final String challengeType = gameData['aoVChallengeType'] ?? 'action';
       final String difficulty = gameData['difficulty'] ?? 'soft';
-      final List<String> fallbackPool = challengeType == 'action'
-          ? (GameWords.dares[difficulty] ?? GameWords.dares['soft']!)
-          : (GameWords.truths[difficulty] ?? GameWords.truths['soft']!);
+      final List<String> fallbackPool =
+          challengeType == 'action'
+              ? (GameWords.dares[difficulty] ?? GameWords.dares['soft']!)
+              : (GameWords.truths[difficulty] ?? GameWords.truths['soft']!);
       final String fallbackChallenge =
           fallbackPool[Random().nextInt(fallbackPool.length)];
       await gameRef.update({
         'aoVCurrentChallenge': fallbackChallenge,
         'aoVPhase': 'performing',
         'turnStartTime': FieldValue.serverTimestamp(),
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.tempsEcoulePourRedigerLe,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.tempsEcoulePourRedigerLe]),
       });
       return;
     } else if (phase == 'performing') {
-      if (currentPlayerId != null && _isPlayerIdBot(gameData, currentPlayerId.toString())) {
+      if (currentPlayerId != null &&
+          _isPlayerIdBot(gameData, currentPlayerId.toString())) {
         await aoVConfirmPerformed(gameCode, currentPlayerId.toString());
         return;
       }
@@ -16896,9 +17094,7 @@ class FirebaseService {
         'aoVEarnedXp': 0,
         'aoVSpinsRemaining': FieldValue.increment(-1),
         'turnStartTime': FieldValue.serverTimestamp(),
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.tempsEcouleDefiEchoue0,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.tempsEcouleDefiEchoue0]),
       });
     } else if (phase == 'voting') {
       final votes = Map<String, dynamic>.from(gameData['aoVVotes'] ?? {});
@@ -16916,9 +17112,11 @@ class FirebaseService {
           validVotes.isNotEmpty
               ? (yesVotes / validVotes.length * 100).round()
               : 100;
-      final int threshold = (gameData['aoVVoteThreshold'] as num?)?.toInt() ?? 50;
+      final int threshold =
+          (gameData['aoVVoteThreshold'] as num?)?.toInt() ?? 50;
       final baseXp = gameData['aoVChallengeType'] == 'action' ? 30 : 20;
-      final earnedXp = percentage >= threshold ? (baseXp * percentage / 100).round() : 0;
+      final earnedXp =
+          percentage >= threshold ? (baseXp * percentage / 100).round() : 0;
 
       final updates = <String, dynamic>{
         'aoVVotes': votes,
@@ -17026,7 +17224,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -17108,7 +17307,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -17169,8 +17369,10 @@ class FirebaseService {
           'players.$winnerPlayerId.score': FieldValue.increment(1),
           'gameState': 'gameOver',
           'gameWinner': winnerPlayerId,
-          'gameEndReason':
-              _l10n.aAtteintPointsEtRemporte(winnerName, targetScore),
+          'gameEndReason': _l10n.aAtteintPointsEtRemporte(
+            winnerName,
+            targetScore,
+          ),
         });
         return;
       }
@@ -17250,8 +17452,11 @@ class FirebaseService {
       final postSnap = await gameRef.get();
       if (postSnap.exists) {
         final postData = postSnap.data() as Map<String, dynamic>;
-        final postPlayed = Map<String, dynamic>.from(postData['bmcPlayedCards'] ?? {});
-        if (postData['roundState'] == 'judging_selection' && postPlayed.isNotEmpty) {
+        final postPlayed = Map<String, dynamic>.from(
+          postData['bmcPlayedCards'] ?? {},
+        );
+        if (postData['roundState'] == 'judging_selection' &&
+            postPlayed.isNotEmpty) {
           await gameRef.update({
             'roundState': 'judge_voting',
             'turnStartTime': FieldValue.serverTimestamp(),
@@ -17278,9 +17483,7 @@ class FirebaseService {
           'bmcJudgeId': nextJudgeId,
           'roundState': 'judging_selection',
           'turnStartTime': FieldValue.serverTimestamp(),
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.leJugeNAPas1,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.leJugeNAPas1]),
         });
       }
     }
@@ -17313,9 +17516,7 @@ class FirebaseService {
         'turnStartTime': null,
         'restartVotes': {},
         ...playerXpResets,
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.vosPointsSontConservesEn,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.vosPointsSontConservesEn]),
       });
       return;
     }
@@ -17351,7 +17552,9 @@ class FirebaseService {
 
     String gameType = gameData['gameType'];
     String difficulty = gameData['difficulty'];
-    Map<String, dynamic> players = Map<String, dynamic>.from(gameData['players'] ?? {});
+    Map<String, dynamic> players = Map<String, dynamic>.from(
+      gameData['players'] ?? {},
+    );
 
     // Initialisation et normalisation complètes de tous les joueurs au lancement
     final now = FieldValue.serverTimestamp();
@@ -17440,9 +17643,7 @@ class FirebaseService {
 
     if (gameType == 'Synonyme ou Banni' && players.length < 3) {
       await gameRef.update({
-        'gameLog': FieldValue.arrayUnion([
-          _l10n.synonymeOuBanniNecessiteAu,
-        ]),
+        'gameLog': FieldValue.arrayUnion([_l10n.synonymeOuBanniNecessiteAu]),
       });
       return;
     }
@@ -17490,11 +17691,7 @@ class FirebaseService {
         final String pId = playerIds[i];
         if (mode == 'Complément' && aiPool.isNotEmpty) {
           albums[pId] = [
-            {
-              'type': 'word',
-              'data': aiPool[i % aiPool.length],
-              'author': 'IA',
-            },
+            {'type': 'word', 'data': aiPool[i % aiPool.length], 'author': 'IA'},
           ];
         } else {
           albums[pId] = [];
@@ -18135,9 +18332,7 @@ class FirebaseService {
       case 'draw2':
         updates['unoPendingDraw'] = 2;
         nextPlayerIndex = initialIndex;
-        updates['unoLog'] = FieldValue.arrayUnion([
-          _l10n.laPremiereCarteEstUn,
-        ]);
+        updates['unoLog'] = FieldValue.arrayUnion([_l10n.laPremiereCarteEstUn]);
         break;
       default:
         // Sur une carte chiffre standard, le joueur 0 commence normalement
@@ -18159,7 +18354,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -18204,24 +18400,18 @@ class FirebaseService {
         bool isDrawCard = (cardValue == 'draw2' || cardValue == 'wild_draw4');
 
         if (!isDrawCard || !stackDraws) {
-          throw Exception(
-            _l10n.vousDevezPiocherCartesOu(pendingDraw),
-          );
+          throw Exception(_l10n.vousDevezPiocherCartesOu(pendingDraw));
         }
       }
 
       if (gameData['unoDrawActionDone'] == true) {
         if (card != gameData['unoLastDrawnCard']) {
-          throw Exception(
-            _l10n.vousDevezJouerLaCarte,
-          );
+          throw Exception(_l10n.vousDevezJouerLaCarte);
         }
       }
 
       if (!GameData.canPlayUnoCard(card, topCard, wildColorChosen)) {
-        throw Exception(
-          _l10n.cetteCarteNePeutPas,
-        );
+        throw Exception(_l10n.cetteCarteNePeutPas);
       }
 
       myHand.remove(card);
@@ -18278,7 +18468,9 @@ class FirebaseService {
           if (playerOrder.length == 2) {
             nextPlayerIdx = currentPlayerIndex; // Rejoue à 2 joueurs
             updates['unoLog'] = FieldValue.arrayUnion([
-              _l10n.aJoueUneInversionEt1(players[playerId]?['name'] ?? _l10n.joueur),
+              _l10n.aJoueUneInversionEt1(
+                players[playerId]?['name'] ?? _l10n.joueur,
+              ),
             ]);
           } else {
             unoDirection *= -1;
@@ -18287,7 +18479,9 @@ class FirebaseService {
                 (currentPlayerIndex + unoDirection + playerOrder.length) %
                 playerOrder.length;
             updates['unoLog'] = FieldValue.arrayUnion([
-              _l10n.aInverseLeSensDe1(players[playerId]?['name'] ?? _l10n.joueur),
+              _l10n.aInverseLeSensDe1(
+                players[playerId]?['name'] ?? _l10n.joueur,
+              ),
             ]);
           }
           break;
@@ -18300,14 +18494,20 @@ class FirebaseService {
               players[playerOrder[skippedPlayerIndex]]?['name'] ??
               _l10n.timesUpForceNextPlayer;
           updates['unoLog'] = FieldValue.arrayUnion([
-            _l10n.aSauteLeTourDe1(players[playerId]?['name'] ?? _l10n.joueur, skippedPlayerName),
+            _l10n.aSauteLeTourDe1(
+              players[playerId]?['name'] ?? _l10n.joueur,
+              skippedPlayerName,
+            ),
           ]);
           break;
         case 'draw2':
           if (stackDraws && pendingDraw > 0) {
             updates['unoPendingDraw'] = pendingDraw + 2;
             updates['unoLog'] = FieldValue.arrayUnion([
-              _l10n.aEmpileUn2Cumul1(players[playerId]?['name'] ?? _l10n.joueur, pendingDraw + 2),
+              _l10n.aEmpileUn2Cumul1(
+                players[playerId]?['name'] ?? _l10n.joueur,
+                pendingDraw + 2,
+              ),
             ]);
           } else {
             updates['unoPendingDraw'] = 2;
@@ -18322,25 +18522,31 @@ class FirebaseService {
           }
           updates['unoWildColorChosen'] = chosenColor;
           updates['unoLog'] = FieldValue.arrayUnion([
-            _l10n.aJoueUnJokerEt1(players[playerId]?['name'] ?? _l10n.joueur, chosenColor),
+            _l10n.aJoueUnJokerEt1(
+              players[playerId]?['name'] ?? _l10n.joueur,
+              chosenColor,
+            ),
           ]);
           break;
         case 'wild_draw4':
           if (chosenColor == null) {
-            throw Exception(
-              _l10n.veuillezChoisirUneCouleurPour1,
-            );
+            throw Exception(_l10n.veuillezChoisirUneCouleurPour1);
           }
           updates['unoWildColorChosen'] = chosenColor;
           if (stackDraws && pendingDraw > 0) {
             updates['unoPendingDraw'] = pendingDraw + 4;
             updates['unoLog'] = FieldValue.arrayUnion([
-              _l10n.aEmpileUn4Cumul1(players[playerId]?['name'] ?? _l10n.joueur, pendingDraw + 4),
+              _l10n.aEmpileUn4Cumul1(
+                players[playerId]?['name'] ?? _l10n.joueur,
+                pendingDraw + 4,
+              ),
             ]);
           } else {
             updates['unoPendingDraw'] = 4;
             updates['unoLog'] = FieldValue.arrayUnion([
-              _l10n.aJoueUnSuperJoker1(players[playerId]?['name'] ?? _l10n.joueur),
+              _l10n.aJoueUnSuperJoker1(
+                players[playerId]?['name'] ?? _l10n.joueur,
+              ),
             ]);
           }
           break;
@@ -18352,8 +18558,9 @@ class FirebaseService {
       if (myHand.isEmpty) {
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = playerId;
-        updates['gameEndReason'] =
-            _l10n.aPoseSaDerniereCarte1(players[playerId]?['name'] ?? _l10n.joueur);
+        updates['gameEndReason'] = _l10n.aPoseSaDerniereCarte1(
+          players[playerId]?['name'] ?? _l10n.joueur,
+        );
 
         int roundScore = 0;
         final handsMap = Map<String, dynamic>.from(
@@ -18368,7 +18575,10 @@ class FirebaseService {
         });
         updates['players.$playerId.score'] = FieldValue.increment(roundScore);
         updates['unoLog'] = FieldValue.arrayUnion([
-          _l10n.gagneLaMancheAvecPoints(players[playerId]?['name'] ?? _l10n.joueur, roundScore),
+          _l10n.gagneLaMancheAvecPoints(
+            players[playerId]?['name'] ?? _l10n.joueur,
+            roundScore,
+          ),
         ]);
       } else if (myHand.length == 1) {
         updates['unoCalledUno.$playerId'] = false;
@@ -18538,7 +18748,8 @@ class FirebaseService {
         });
 
         if (topScorers.length <= 1) {
-          final singleWinner = topScorers.isNotEmpty ? topScorers.first : playerId;
+          final singleWinner =
+              topScorers.isNotEmpty ? topScorers.first : playerId;
           creditPlayerXp(
             transaction,
             gameRef,
@@ -18561,8 +18772,11 @@ class FirebaseService {
               applySpeedBonus: false,
             );
           }
-          final names = topScorers.map((id) => playersMap[id]?['name'] ?? _l10n.joueur).join(', ');
-          updates['gameWinner'] = topScorers.contains(playerId) ? playerId : topScorers.first;
+          final names = topScorers
+              .map((id) => playersMap[id]?['name'] ?? _l10n.joueur)
+              .join(', ');
+          updates['gameWinner'] =
+              topScorers.contains(playerId) ? playerId : topScorers.first;
           updates['isTie'] = true;
           updates['tiedWinners'] = topScorers;
           updates['gameEndReason'] = _l10n.egaliteParfaite1(names);
@@ -18607,9 +18821,7 @@ class FirebaseService {
       'checkersCurrentPlayerIndex': 0,
       'checkersCurrentColor': 'red', // Les rouges commencent
       'turnStartTime': FieldValue.serverTimestamp(),
-      'gameLog': [
-        _l10n.laPartieDeJeuDe,
-      ],
+      'gameLog': [_l10n.laPartieDeJeuDe],
     });
   }
 
@@ -18623,7 +18835,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -18665,9 +18878,7 @@ class FirebaseService {
 
       String? mandatoryPiece = gameData['checkersMandatoryPiece'];
       if (mandatoryPiece != null && fromKey != mandatoryPiece) {
-        throw Exception(
-          _l10n.priseMultipleObligatoireAvecLe1(mandatoryPiece),
-        );
+        throw Exception(_l10n.priseMultipleObligatoireAvecLe1(mandatoryPiece));
       }
 
       bool isKing = piece.endsWith('_king');
@@ -18693,9 +18904,7 @@ class FirebaseService {
         String pathKey = "${fromR + (stepR * i)},${fromC + (stepC * i)}";
         if (board.containsKey(pathKey)) {
           if (board[pathKey]!.startsWith(currentColor)) {
-            throw Exception(
-              _l10n.impossibleDeSauterParDessus,
-            );
+            throw Exception(_l10n.impossibleDeSauterParDessus);
           } else {
             jumpedOpponents.add(pathKey);
           }
@@ -18703,9 +18912,7 @@ class FirebaseService {
       }
 
       if (jumpedOpponents.length > 1) {
-        throw Exception(
-          _l10n.impossibleDeSauterParDessus1,
-        );
+        throw Exception(_l10n.impossibleDeSauterParDessus1);
       }
 
       bool isCaptureMove = jumpedOpponents.length == 1;
@@ -18713,9 +18920,7 @@ class FirebaseService {
       if (!isKing) {
         if (!isCaptureMove) {
           if (distance > 1) {
-            throw Exception(
-              _l10n.unPionSimpleNePeut,
-            );
+            throw Exception(_l10n.unPionSimpleNePeut);
           }
           if (currentColor == 'red' && dr > 0) {
             throw Exception(_l10n.lesPionsRougesAvancentVers);
@@ -18801,8 +19006,7 @@ class FirebaseService {
           updates['gameState'] = 'gameOver';
           updates['gameWinner'] = playerId;
           updates['players.$playerId.score'] = FieldValue.increment(1);
-          updates['gameEndReason'] =
-              _l10n.lAdversaireNAPlus;
+          updates['gameEndReason'] = _l10n.lAdversaireNAPlus;
         }
       }
 
@@ -18983,8 +19187,10 @@ class FirebaseService {
     if (assignedRoles.length != playerCount) {
       await gameRef.update({
         'gameState': 'lobby',
-        'error_message':
-            _l10n.erreurLeNombreDeRoles(assignedRoles.length, playerCount),
+        'error_message': _l10n.erreurLeNombreDeRoles(
+          assignedRoles.length,
+          playerCount,
+        ),
       });
 
       return;
@@ -19056,8 +19262,10 @@ class FirebaseService {
         mercenaireTargetId =
             possibleTargets[Random().nextInt(possibleTargets.length)];
         playerData[mercenaireId]['mercenaireTarget'] = mercenaireTargetId;
-        playerData[mercenaireId]['privateInfo'] =
-            _l10n.votreCibleEstEliminezLe1(playerData[mercenaireTargetId]?['name'] ?? _l10n.inconnu);
+        playerData[mercenaireId]['privateInfo'] = _l10n
+            .votreCibleEstEliminezLe1(
+              playerData[mercenaireTargetId]?['name'] ?? _l10n.inconnu,
+            );
       }
     }
 
@@ -19068,10 +19276,7 @@ class FirebaseService {
       'nightNumber': 0,
       'playerData': playerData,
       'playerOrder': playerIds,
-      'gameLog': [
-        _l10n.laNuitTombeSurLe1,
-        _l10n.chacunARecuSonRole,
-      ],
+      'gameLog': [_l10n.laNuitTombeSurLe1, _l10n.chacunARecuSonRole],
       'nightActions': {},
       'dayVotes': {},
       'captainId': captainId,
@@ -19093,7 +19298,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     final cleanClue =
         FirebaseService.sanitizeUserInput(clue, maxLength: 30).split(' ').first;
@@ -19116,9 +19322,7 @@ class FirebaseService {
           players[expectedMasterSpy]?['authUid'] ?? expectedMasterSpy;
 
       if (!isAuto && currentAuthUid != spyAuth) {
-        throw Exception(
-          _l10n.seulLeMaitreEspionDe,
-        );
+        throw Exception(_l10n.seulLeMaitreEspionDe);
       }
       if (gameData['roundState'] != 'clue_giving') {
         throw Exception(_l10n.ceNEstPasLa);
@@ -19181,9 +19385,7 @@ class FirebaseService {
       if (callerId.isEmpty ||
           !activeTeamPlayers.contains(callerId) ||
           callerId == masterSpy) {
-        throw Exception(
-          _l10n.seulUnAgentDeL,
-        );
+        throw Exception(_l10n.seulUnAgentDeL);
       }
       if (gameData['roundState'] != 'guessing') {
         throw Exception(_l10n.ceNEstPasLa1);
@@ -19223,12 +19425,15 @@ class FirebaseService {
         final winnerTeam = (activeTeam == 'red') ? 'blue' : 'red';
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = winnerTeam;
-        final winMembers = List<dynamic>.from(gameData[winnerTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+        final winMembers = List<dynamic>.from(
+          gameData[winnerTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? [],
+        );
         for (var pId in winMembers) {
           updates['players.$pId.score'] = FieldValue.increment(1);
         }
-        updates['gameEndReason'] =
-            _l10n.lEquipeAReveleLAssassin(activeTeam == 'red' ? _l10n.codenamesRed : _l10n.codenamesBlue);
+        updates['gameEndReason'] = _l10n.lEquipeAReveleLAssassin(
+          activeTeam == 'red' ? _l10n.codenamesRed : _l10n.codenamesBlue,
+        );
       } else if (wordColor == activeTeam) {
         creditPlayerXp(
           transaction,
@@ -19249,7 +19454,9 @@ class FirebaseService {
         if (redScore <= 0 || blueScore <= 0) {
           updates['gameState'] = 'gameOver';
           updates['gameWinner'] = activeTeam;
-          final winMembers = List<dynamic>.from(gameData[activeTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+          final winMembers = List<dynamic>.from(
+            gameData[activeTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? [],
+          );
           for (var pId in winMembers) {
             updates['players.$pId.score'] = FieldValue.increment(1);
           }
@@ -19275,7 +19482,9 @@ class FirebaseService {
           final winTeam = redScore <= 0 ? 'red' : 'blue';
           updates['gameState'] = 'gameOver';
           updates['gameWinner'] = winTeam;
-          final winMembers = List<dynamic>.from(gameData[winTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? []);
+          final winMembers = List<dynamic>.from(
+            gameData[winTeam == 'red' ? 'redTeam' : 'blueTeam'] ?? [],
+          );
           for (var pId in winMembers) {
             updates['players.$pId.score'] = FieldValue.increment(1);
           }
@@ -19296,7 +19505,8 @@ class FirebaseService {
 
   Future<void> passCodenamesTurn(String gameCode, {bool isAuto = false}) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -19325,7 +19535,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     final cleanWords =
         words
@@ -19433,7 +19644,8 @@ class FirebaseService {
       } else {
         final int scoreA = (teamScores['teamA'] as num?)?.toInt() ?? 0;
         final int scoreB = (teamScores['teamB'] as num?)?.toInt() ?? 0;
-        final winnerTeamKey = scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
+        final winnerTeamKey =
+            scoreA > scoreB ? 'teamA' : (scoreB > scoreA ? 'teamB' : null);
         Map<String, dynamic> scoreUpdates = {};
         if (winnerTeamKey != null) {
           final winningMembers = List<dynamic>.from(teams[winnerTeamKey] ?? []);
@@ -19588,8 +19800,7 @@ class FirebaseService {
               scoreA > scoreB
                   ? 'teamA'
                   : (scoreB > scoreA ? 'teamB' : 'equality');
-          updates['gameEndReason'] =
-              _l10n.toutesLesManchesDeTime;
+          updates['gameEndReason'] = _l10n.toutesLesManchesDeTime;
 
           // Récompenser les membres de l'équipe gagnante (+40 XP + 1 point)
           final winningTeamKey =
@@ -19724,8 +19935,9 @@ class FirebaseService {
           .replaceAll(RegExp(r'[ýÿ]'), 'y');
     }
 
-    final targetLetter =
-        normalizePetitBacStr(gameData['petitBacCurrentLetter'] as String? ?? '');
+    final targetLetter = normalizePetitBacStr(
+      gameData['petitBacCurrentLetter'] as String? ?? '',
+    );
     const rareLetters = ['k', 'w', 'x', 'y', 'z', 'q'];
     bool isRareLetter = rareLetters.contains(targetLetter);
 
@@ -19857,7 +20069,10 @@ class FirebaseService {
       'gameWinner': winnerId,
       'gameEndReason':
           winnerId != null
-              ? _l10n.gagneAvecPoints(players[winnerId]?['name'] ?? _l10n.unJoueur, maxScore)
+              ? _l10n.gagneAvecPoints(
+                players[winnerId]?['name'] ?? _l10n.unJoueur,
+                maxScore,
+              )
               : _l10n.finDeLaPartie,
       if (winnerId != null) 'players.$winnerId.score': FieldValue.increment(1),
     });
@@ -19892,7 +20107,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -19939,9 +20155,7 @@ class FirebaseService {
       if (!cardsToPlay.every(
         (card) => _getPresidentCardRank(card) == firstCardRank,
       )) {
-        throw Exception(
-          _l10n.toutesLesCartesJoueesDoivent,
-        );
+        throw Exception(_l10n.toutesLesCartesJoueesDoivent);
       }
 
       Map<String, dynamic>? lastPlay =
@@ -19957,9 +20171,7 @@ class FirebaseService {
 
       if (lastPlay != null) {
         if (cardsToPlay.length != (lastPlay['cards'] as List).length) {
-          throw Exception(
-            _l10n.vousDevezJouerLeMeme1,
-          );
+          throw Exception(_l10n.vousDevezJouerLeMeme1);
         }
         if (playValue <= (lastPlay['value'] as int)) {
           throw Exception(_l10n.vousDevezJouerUneCombinaison);
@@ -19972,9 +20184,7 @@ class FirebaseService {
           gameData['currentPile']?.isEmpty == true &&
           playerHand.contains('3C') &&
           !cardsToPlay.contains('3C')) {
-        throw Exception(
-          _l10n.lePremierCoupDeLa,
-        );
+        throw Exception(_l10n.lePremierCoupDeLa);
       }
 
       for (var card in cardsToPlay) {
@@ -20063,7 +20273,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -20525,8 +20736,10 @@ class FirebaseService {
             // Dernière carte ! Fin du tour collectif
             updates['pictionaryCollectiveGuessed'] = guessedCount;
             updates['roundState'] = 'result';
-            updates['gameEndReason'] =
-                _l10n.motsDevines(guessedCount, collectiveWords.length);
+            updates['gameEndReason'] = _l10n.motsDevines(
+              guessedCount,
+              collectiveWords.length,
+            );
             updates['roundWinnerId'] = winnerId;
             updates['turnStartTime'] = FieldValue.serverTimestamp();
           } else {
@@ -21042,18 +21255,20 @@ class FirebaseService {
         applySpeedBonus: true,
       );
 
-      final roundStartedAt = ((gameData['hotPotatoRoundStartedAt'] ??
-              gameData['turnStartTime']) as Timestamp?)
-          ?.toDate();
+      final roundStartedAt =
+          ((gameData['hotPotatoRoundStartedAt'] ?? gameData['turnStartTime'])
+                  as Timestamp?)
+              ?.toDate();
       final timerDuration =
           (gameData['hotPotatoSecondsLeft'] as num?)?.toInt() ??
           (gameData['hotPotatoGlobalDuration'] as num?)?.toInt() ??
           (gameData['turnTimer'] as num?)?.toInt() ??
           30;
 
-      int elapsed = roundStartedAt != null
-          ? DateTime.now().difference(roundStartedAt).inSeconds
-          : 0;
+      int elapsed =
+          roundStartedAt != null
+              ? DateTime.now().difference(roundStartedAt).inSeconds
+              : 0;
       if (elapsed <= 0) elapsed = 1;
       int secondsLeft = max(0, timerDuration - elapsed);
 
@@ -21073,7 +21288,10 @@ class FirebaseService {
         'hotPotatoRoundStartedAt': FieldValue.serverTimestamp(),
         'turnStartTime': FieldValue.serverTimestamp(),
         'gameLog': FieldValue.arrayUnion([
-          _l10n.aReponduEtPasseLa(gameData['players'][playerId]['name'], cleanAnswer),
+          _l10n.aReponduEtPasseLa(
+            gameData['players'][playerId]['name'],
+            cleanAnswer,
+          ),
         ]),
       });
     });
@@ -21156,8 +21374,11 @@ class FirebaseService {
         String winnerName = players[winnerId]?['name'] ?? _l10n.personne;
         await gameRef.update({
           'gameState': 'gameOver',
-          'gameEndReason':
-              _l10n.gagneAvecPoint(winnerName, lowestScore, lowestScore > 1 ? 's' : ''),
+          'gameEndReason': _l10n.gagneAvecPoint(
+            winnerName,
+            lowestScore,
+            lowestScore > 1 ? 's' : '',
+          ),
         });
         return;
       }
@@ -21213,7 +21434,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -21256,13 +21478,9 @@ class FirebaseService {
           discardPile = [topCard];
           updates['unoDeck'] = deck;
           updates['unoDiscardPile'] = discardPile;
-          updates['unoLog'] = FieldValue.arrayUnion([
-            _l10n.laPiocheEstVideLa,
-          ]);
+          updates['unoLog'] = FieldValue.arrayUnion([_l10n.laPiocheEstVideLa]);
         } else {
-          throw Exception(
-            _l10n.impossibleDePiocherIlN,
-          );
+          throw Exception(_l10n.impossibleDePiocherIlN);
         }
       }
 
@@ -21293,7 +21511,10 @@ class FirebaseService {
         updates['unoDeck'] = deck;
         updates['unoPendingDraw'] = 0; // La pénalité est purgée
         updates['unoLog'] = FieldValue.arrayUnion([
-          _l10n.aPiocheCarteS(players[playerId]?['name'] ?? _l10n.joueur, pendingDraw),
+          _l10n.aPiocheCarteS(
+            players[playerId]?['name'] ?? _l10n.joueur,
+            pendingDraw,
+          ),
         ]);
 
         int nextPlayerIdx =
@@ -21415,7 +21636,10 @@ class FirebaseService {
         updates['unoDeck'] = deck;
         updates['unoContraDeadline'] = null;
         updates['unoLog'] = FieldValue.arrayUnion([
-          _l10n.aCrieContreUnoPioche1(players[callerId]?['name'] ?? _l10n.joueur, players[targetId]?['name'] ?? _l10n.joueur),
+          _l10n.aCrieContreUnoPioche1(
+            players[callerId]?['name'] ?? _l10n.joueur,
+            players[targetId]?['name'] ?? _l10n.joueur,
+          ),
         ]);
 
         updates['unoCalledUno.$targetId'] = true;
@@ -21483,7 +21707,10 @@ class FirebaseService {
         transaction.update(gameRef, {
           'unoWildColorChosen': chosenColor,
           'unoLog': FieldValue.arrayUnion([
-            _l10n.aChoisiLaCouleur(players[playerId]?['name'] ?? _l10n.joueur, chosenColor),
+            _l10n.aChoisiLaCouleur(
+              players[playerId]?['name'] ?? _l10n.joueur,
+              chosenColor,
+            ),
           ]),
         });
       } else {
@@ -21553,8 +21780,9 @@ class FirebaseService {
           aiWordPool ??
           GameWords.whoIsMostLikely[difficulty] ??
           GameWords.whoIsMostLikely['soft']!;
-      question =
-          _l10n.quiPourraitLePlus3(questions[random.nextInt(questions.length)]);
+      question = _l10n.quiPourraitLePlus3(
+        questions[random.nextInt(questions.length)],
+      );
       roundState = 'voting';
     } else if (gameType == 'Le Menteur') {
       List<String> prompts =
@@ -21596,8 +21824,7 @@ class FirebaseService {
         String secUndercoverId = shuffledRoles[0];
         String secMrWhiteId = shuffledRoles[1];
 
-        question =
-            _l10n.decrivezVotreMotSecretEn;
+        question = _l10n.decrivezVotreMotSecretEn;
         for (var pId in players.keys) {
           String pRole =
               (pId == secUndercoverId)
@@ -21664,8 +21891,10 @@ class FirebaseService {
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': overallWinnerId,
-          'gameEndReason':
-              _l10n.aAtteintPointsEtGagne(players[overallWinnerId]?['name'] ?? '', updatedScores[overallWinnerId] ?? 0),
+          'gameEndReason': _l10n.aAtteintPointsEtGagne(
+            players[overallWinnerId]?['name'] ?? '',
+            updatedScores[overallWinnerId] ?? 0,
+          ),
         });
         return;
       }
@@ -21694,9 +21923,7 @@ class FirebaseService {
         'unoLastActionPlayerId': null,
         'gameState': 'playing',
         'roundState': 'playing_turn',
-        'unoLog': FieldValue.arrayUnion([
-          _l10n.uneNouvelleMancheDeUno,
-        ]),
+        'unoLog': FieldValue.arrayUnion([_l10n.uneNouvelleMancheDeUno]),
         'turnStartTime': FieldValue.serverTimestamp(),
       });
       await _applyFirstUnoCardEffect(gameRef, firstCard, playerOrder[0]);
@@ -21799,7 +22026,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -21901,7 +22129,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -21945,9 +22174,7 @@ class FirebaseService {
       });
 
       if (!allActivePlaced) {
-        throw Exception(
-          _l10n.chaqueJoueurActifDoitPoser,
-        );
+        throw Exception(_l10n.chaqueJoueurActifDoitPoser);
       }
 
       final int totalCardsOnTables = skullMats.values.fold<int>(0, (
@@ -22101,7 +22328,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -22315,8 +22543,9 @@ class FirebaseService {
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = winnerId;
         updates['players.$winnerId.score'] = FieldValue.increment(1);
-        updates['gameEndReason'] =
-            _l10n.estLeDernierSurvivantEt(players[winnerId]?['name'] ?? _l10n.unJoueur);
+        updates['gameEndReason'] = _l10n.estLeDernierSurvivantEt(
+          players[winnerId]?['name'] ?? _l10n.unJoueur,
+        );
       } else {
         updates['roundState'] = 'result';
       }
@@ -22359,8 +22588,9 @@ class FirebaseService {
         );
         updates['gameState'] = 'gameOver';
         updates['gameWinner'] = challengerId;
-        updates['gameEndReason'] =
-            _l10n.aRemporte2DefisEt(players[challengerId]?['name'] ?? _l10n.unJoueur);
+        updates['gameEndReason'] = _l10n.aRemporte2DefisEt(
+          players[challengerId]?['name'] ?? _l10n.unJoueur,
+        );
       } else {
         updates['roundState'] = 'result';
       }
@@ -22430,8 +22660,9 @@ class FirebaseService {
         transaction.update(gameRef, {
           'gameState': 'gameOver',
           'gameWinner': winnerId,
-          'gameEndReason':
-              _l10n.remporteSkull1(players[winnerId]?['name'] ?? _l10n.unJoueur),
+          'gameEndReason': _l10n.remporteSkull1(
+            players[winnerId]?['name'] ?? _l10n.unJoueur,
+          ),
         });
         return;
       }
@@ -22508,12 +22739,7 @@ class FirebaseService {
           playerName,
           actionDetails: _l10n.enchereAutomatique,
         );
-        await startSkullBid(
-          gameCode,
-          currentPlayerId,
-          1,
-          isAuto: true,
-        );
+        await startSkullBid(gameCode, currentPlayerId, 1, isAuto: true);
       }
       return;
     }
@@ -22781,8 +23007,7 @@ class FirebaseService {
             updates['players.$winner.score'] = FieldValue.increment(1);
           } else {
             updates['roundWinnerId'] = null;
-            updates['gameEndReason'] =
-                _l10n.egaliteParfaiteAucunPointAttribue;
+            updates['gameEndReason'] = _l10n.egaliteParfaiteAucunPointAttribue;
           }
         } else if (gameType == 'Synonyme ou Banni') {
           final Map<String, int> banCounts = {};
@@ -22814,8 +23039,7 @@ class FirebaseService {
             });
           } else {
             updates['roundLoserId'] = null;
-            updates['gameEndReason'] =
-                _l10n.egaliteDansLesVotesAucun;
+            updates['gameEndReason'] = _l10n.egaliteDansLesVotesAucun;
           }
         } else if (gameType == 'Le Juge') {
           final winnerPlayerId = votedForId;
@@ -23023,16 +23247,14 @@ class FirebaseService {
 
       if (isCorrect) {
         updates['roundWinnerId'] = 'mr_white';
-        updates['gameEndReason'] =
-            _l10n.mrWhiteADevineLe1(civilianWord);
+        updates['gameEndReason'] = _l10n.mrWhiteADevineLe1(civilianWord);
         final mrWhiteId = gameData['mrWhiteId'];
         if (mrWhiteId != null) {
           updates['players.$mrWhiteId.score'] = FieldValue.increment(3);
         }
       } else {
         updates['roundWinnerId'] = 'civilians';
-        updates['gameEndReason'] =
-            _l10n.mrWhiteAEchoueA1(civilianWord);
+        updates['gameEndReason'] = _l10n.mrWhiteAEchoueA1(civilianWord);
       }
 
       transaction.update(gameRef, updates);
@@ -23128,8 +23350,7 @@ class FirebaseService {
             25,
             applySpeedBonus: false,
           );
-          updates['gameEndReason'] =
-              _l10n.laDescriptionLaPlusDrole;
+          updates['gameEndReason'] = _l10n.laDescriptionLaPlusDrole;
         } else {
           updates['gameEndReason'] = _l10n.aucuneDescriptionNAEte1;
         }
@@ -23365,7 +23586,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -23504,9 +23726,7 @@ class FirebaseService {
       'roundScores': {},
       'totalScores': totalScores, // Garder les scores totaux
       'revealedInitialCardsCount': revealedCardsCount,
-      'gameLog': [
-        _l10n.laPartieDeZeroPointe,
-      ],
+      'gameLog': [_l10n.laPartieDeZeroPointe],
       'turnStartTime': FieldValue.serverTimestamp(),
     });
   }
@@ -23571,9 +23791,7 @@ class FirebaseService {
       if (allReady) {
         transaction.update(gameRef, {
           'roundState': 'player_turn',
-          'gameLog': FieldValue.arrayUnion([
-            _l10n.toutLeMondeARevele,
-          ]),
+          'gameLog': FieldValue.arrayUnion([_l10n.toutLeMondeARevele]),
           'turnStartTime': FieldValue.serverTimestamp(),
         });
       }
@@ -23784,9 +24002,7 @@ class FirebaseService {
 
       if (playerGrid[gridIndexToReveal]['revealed'] == true ||
           playerGrid[gridIndexToReveal]['value'] == -100) {
-        throw Exception(
-          _l10n.vousDevezChoisirUneCarte,
-        );
+        throw Exception(_l10n.vousDevezChoisirUneCarte);
       }
 
       discardPile.add(drawnCard);
@@ -23846,13 +24062,14 @@ class FirebaseService {
                 ? playersWithChips.first
                 : playerIds.first;
         String winnerName =
-            playerData[winner]?['name'] ?? players[winner]?['name'] ?? _l10n.joueur;
+            playerData[winner]?['name'] ??
+            players[winner]?['name'] ??
+            _l10n.joueur;
         await gameRef.update({
           'gameState': 'gameOver',
           'gameWinner': winner,
           'players.$winner.score': FieldValue.increment(1),
-          'gameEndReason':
-              _l10n.aRemporteTousLesJetons(winnerName),
+          'gameEndReason': _l10n.aRemporteTousLesJetons(winnerName),
         });
         return;
       }
@@ -23949,8 +24166,13 @@ class FirebaseService {
       'smallBlindIndex': smallBlindIndex,
       'bigBlindIndex': bigBlindIndex,
       'handLog': [
-        _l10n.nouvelleMainEstLeDonneur1(players[playerIds[dealerIndex]]['name']),
-        _l10n.poseLaPetiteBlindDe1(players[smallBlindId]['name'], smallBlindActual),
+        _l10n.nouvelleMainEstLeDonneur1(
+          players[playerIds[dealerIndex]]['name'],
+        ),
+        _l10n.poseLaPetiteBlindDe1(
+          players[smallBlindId]['name'],
+          smallBlindActual,
+        ),
         _l10n.poseLaGrosseBlindDe1(players[bigBlindId]['name'], bigBlindActual),
       ],
       'turnStartTime': FieldValue.serverTimestamp(),
@@ -23965,7 +24187,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     try {
       await _db.runTransaction((transaction) async {
@@ -23992,9 +24215,7 @@ class FirebaseService {
             (gameData['currentPlayerIndex'] as num? ?? 0).toInt();
 
         if (playerOrder.isEmpty || currentPlayerIndex >= playerOrder.length) {
-          throw Exception(
-            _l10n.donneesDeJeuInvalidesPlayerorder,
-          );
+          throw Exception(_l10n.donneesDeJeuInvalidesPlayerorder);
         }
         if (playerOrder[currentPlayerIndex] != playerId) {
           throw Exception(_l10n.ceNEstPasLe3(playerId));
@@ -24038,7 +24259,8 @@ class FirebaseService {
             }
             myData['chips'] -= callAmount;
             myData['currentBet'] += callAmount;
-            myData['totalBet'] = ((myData['totalBet'] as num?)?.toInt() ?? 0) + callAmount;
+            myData['totalBet'] =
+                ((myData['totalBet'] as num?)?.toInt() ?? 0) + callAmount;
             pot += callAmount;
             break;
           case 'raise':
@@ -24047,32 +24269,27 @@ class FirebaseService {
             }
             int totalBetAmount = (amount as num).toInt();
             if (totalBetAmount <= currentBet) {
-              throw Exception(
-                _l10n.laRelanceDoitEtreStrictement,
-              );
+              throw Exception(_l10n.laRelanceDoitEtreStrictement);
             }
             int maxPossibleBet =
                 (myData['chips'] as num).toInt() +
                 (myData['currentBet'] as num).toInt();
             if (totalBetAmount > maxPossibleBet) {
-              throw Exception(
-                _l10n.vousNAvezPasAssez,
-              );
+              throw Exception(_l10n.vousNAvezPasAssez);
             }
 
             // Règle de relance minimale (au moins le double de la mise précédente, ou tapis)
             int minRaise = currentBet * 2;
             if (totalBetAmount < minRaise && totalBetAmount < maxPossibleBet) {
-              throw Exception(
-                _l10n.laRelanceDoitEtreD,
-              );
+              throw Exception(_l10n.laRelanceDoitEtreD);
             }
 
             int raiseAmount =
                 totalBetAmount - (myData['currentBet'] as num).toInt();
             myData['chips'] -= raiseAmount;
             myData['currentBet'] = totalBetAmount;
-            myData['totalBet'] = ((myData['totalBet'] as num?)?.toInt() ?? 0) + raiseAmount;
+            myData['totalBet'] =
+                ((myData['totalBet'] as num?)?.toInt() ?? 0) + raiseAmount;
             pot += raiseAmount;
             currentBet = totalBetAmount;
             lastRaiserId = playerId;
@@ -24320,8 +24537,9 @@ class FirebaseService {
     Map<String, PokerHand> playerFinalHands = {};
     if (playersInHand.length == 1) {
       winners.add(playersInHand.first);
-      winnerAnnouncement =
-          _l10n.gagneLePotParForfait1(playerData[winners.first]['name']);
+      winnerAnnouncement = _l10n.gagneLePotParForfait1(
+        playerData[winners.first]['name'],
+      );
       playerFinalHands[winners.first] = PokerHand(HandRank.highCard, []);
     } else {
       for (String pId in playersInHand) {
@@ -24345,8 +24563,10 @@ class FirebaseService {
       final winnerNames = winners
           .map((id) => playerData[id]?['name'] ?? _l10n.inconnu)
           .join(' ${_l10n.et} ');
-      winnerAnnouncement =
-          _l10n.gagneNtLePotAvec(winnerNames, bestHand?.rank.name ?? _l10n.uneMain);
+      winnerAnnouncement = _l10n.gagneNtLePotAvec(
+        winnerNames,
+        bestHand?.rank.name ?? _l10n.uneMain,
+      );
     }
 
     Map<String, dynamic> scoreUpdates = {};
@@ -24359,7 +24579,8 @@ class FirebaseService {
         totalBets[pId] = ((playerData[pId]['totalBet'] as num?)?.toInt() ?? 0);
       }
 
-      List<int> betTiers = totalBets.values.where((b) => b > 0).toSet().toList()..sort();
+      List<int> betTiers =
+          totalBets.values.where((b) => b > 0).toSet().toList()..sort();
       bool hasAllIn = playerData.values.any((p) => p['status'] == 'all-in');
 
       if (hasAllIn && betTiers.length > 1) {
@@ -24377,7 +24598,8 @@ class FirebaseService {
           if (sidePot <= 0) continue;
           sidePot = min(sidePot, remainingPot);
 
-          List<String> eligible = playersInHand.where((id) => totalBets[id]! >= tier).toList();
+          List<String> eligible =
+              playersInHand.where((id) => totalBets[id]! >= tier).toList();
           if (eligible.isEmpty) eligible = playersInHand;
 
           PokerHand? tierBestHand;
@@ -24394,7 +24616,8 @@ class FirebaseService {
 
           int share = (sidePot / tierWinners.length).floor();
           for (String wId in tierWinners) {
-            playerData[wId]['chips'] = (playerData[wId]['chips'] as int) + share;
+            playerData[wId]['chips'] =
+                (playerData[wId]['chips'] as int) + share;
           }
           remainingPot -= sidePot;
           prevTier = tier;
@@ -24459,15 +24682,13 @@ class FirebaseService {
     Map<String, dynamic> gameData,
   ) async {
     final players = Map<String, dynamic>.from(gameData['players']);
-    final existingOrder = List<String>.from(
-      gameData['belotePlayerOrder'] ?? [],
-    ).where((id) => players.containsKey(id)).toList();
+    final existingOrder =
+        List<String>.from(
+          gameData['belotePlayerOrder'] ?? [],
+        ).where((id) => players.containsKey(id)).toList();
     final List<String> playerIds =
         existingOrder.length == 4
-            ? [
-              ...existingOrder.sublist(1),
-              existingOrder.first,
-            ]
+            ? [...existingOrder.sublist(1), existingOrder.first]
             : (players.keys.toList()..shuffle());
     if (playerIds.length != 4) {
       throw Exception(_l10n.laBeloteRequiertExactement4);
@@ -24528,7 +24749,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -24599,7 +24821,8 @@ class FirebaseService {
         });
       } else if (action == 'pass') {
         int passCount = (gameData['belotePassCount'] as num? ?? 0).toInt() + 1;
-        int biddingRound = (gameData['beloteBiddingRound'] as num? ?? 1).toInt();
+        int biddingRound =
+            (gameData['beloteBiddingRound'] as num? ?? 1).toInt();
         int nextIndex = (currentIndex + 1) % playerOrder.length;
 
         if (passCount >= 4) {
@@ -24610,9 +24833,7 @@ class FirebaseService {
               'belotePassCount': 0,
               'beloteCurrentPlayerIndex': nextIndex,
               'turnStartTime': FieldValue.serverTimestamp(),
-              'gameLog': FieldValue.arrayUnion([
-                _l10n.passeGeneraleAu1erTour,
-              ]),
+              'gameLog': FieldValue.arrayUnion([_l10n.passeGeneraleAu1erTour]),
             });
           } else {
             // Passe générale au 2e tour -> Nouvelle donne dans la transaction
@@ -24672,9 +24893,7 @@ class FirebaseService {
 
           if (hasLedSuit) {
             if (playedSuit != ledSuit) {
-              throw Exception(
-                _l10n.vousDevezFournirLaCouleur1(ledSuit),
-              );
+              throw Exception(_l10n.vousDevezFournirLaCouleur1(ledSuit));
             }
           } else {
             // Ne peut pas fournir la couleur demandée
@@ -24688,9 +24907,12 @@ class FirebaseService {
               bool isTrump = (cSuit == trumpSuit);
               int cardPower = _getBeloteCardValue(c, isTrump);
               int cardRank = _getBeloteCardRank(rank, isTrump);
-              int power = isTrump
-                  ? (2000 + cardPower * 10 + cardRank)
-                  : (cSuit == ledSuit ? (1000 + cardPower * 10 + cardRank) : 0);
+              int power =
+                  isTrump
+                      ? (2000 + cardPower * 10 + cardRank)
+                      : (cSuit == ledSuit
+                          ? (1000 + cardPower * 10 + cardRank)
+                          : 0);
               if (power > highestPower) {
                 highestPower = power;
                 masterId = pId;
@@ -24701,7 +24923,8 @@ class FirebaseService {
             });
 
             bool partnerIsMaster =
-                (playerData[masterId]?['team'] == playerData[playerId]?['team']);
+                (playerData[masterId]?['team'] ==
+                    playerData[playerId]?['team']);
             bool hasTrump = hand.any((c) => c.endsWith(trumpSuit));
 
             // Si le partenaire n'est pas maître et qu'on possède de l'atout
@@ -24711,19 +24934,23 @@ class FirebaseService {
                 bool canOverTrump = hand.any((c) {
                   if (!c.endsWith(trumpSuit)) return false;
                   String rank = c.substring(0, c.length - 1);
-                  int pwr = 2000 +
+                  int pwr =
+                      2000 +
                       _getBeloteCardValue(c, true) * 10 +
                       _getBeloteCardRank(rank, true);
                   return pwr > highestTrumpPower;
                 });
 
                 if (canOverTrump) {
-                  int playedPwr = (playedSuit == trumpSuit)
-                      ? (2000 +
-                          _getBeloteCardValue(card, true) * 10 +
-                          _getBeloteCardRank(
-                              card.substring(0, card.length - 1), true))
-                      : 0;
+                  int playedPwr =
+                      (playedSuit == trumpSuit)
+                          ? (2000 +
+                              _getBeloteCardValue(card, true) * 10 +
+                              _getBeloteCardRank(
+                                card.substring(0, card.length - 1),
+                                true,
+                              ))
+                          : 0;
                   if (playedPwr <= highestTrumpPower) {
                     throw Exception(_l10n.vousDevezMonterAL);
                   }
@@ -24824,7 +25051,10 @@ class FirebaseService {
 
             Map<String, dynamic> scoreUpdates = {};
             if (gameOver) {
-              String winnerTeam = (teamScores['teamA'] ?? 0) > (teamScores['teamB'] ?? 0) ? 'teamA' : 'teamB';
+              String winnerTeam =
+                  (teamScores['teamA'] ?? 0) > (teamScores['teamB'] ?? 0)
+                      ? 'teamA'
+                      : 'teamB';
               playerData.forEach((pId, pInfo) {
                 if (pInfo is Map && pInfo['team'] == winnerTeam) {
                   scoreUpdates['players.$pId.score'] = FieldValue.increment(1);
@@ -25017,8 +25247,7 @@ class FirebaseService {
                           _getBeloteCardRank(rank, true);
                       return pwr > highestTrumpPower;
                     }).toList();
-                legalCards =
-                    overTrumps.isNotEmpty ? overTrumps : sameSuitCards;
+                legalCards = overTrumps.isNotEmpty ? overTrumps : sameSuitCards;
               } else {
                 legalCards = sameSuitCards;
               }
@@ -25137,7 +25366,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -25229,23 +25459,17 @@ class FirebaseService {
                 : myColor == 'green'
                 ? "0_19"
                 : "19_0";
-        bool coversCorner = absoluteCoords.any(
-          (c) {
-            final key = "${c[0]}_${c[1]}";
-            return key == cornerTarget ||
-                (validCorners.contains(key) && !board.containsKey(key));
-          },
-        );
+        bool coversCorner = absoluteCoords.any((c) {
+          final key = "${c[0]}_${c[1]}";
+          return key == cornerTarget ||
+              (validCorners.contains(key) && !board.containsKey(key));
+        });
         if (!coversCorner) {
-          throw Exception(
-            _l10n.lePremierCoupDoitCouvrir,
-          );
+          throw Exception(_l10n.lePremierCoupDoitCouvrir);
         }
       } else {
         if (!touchesCorner) {
-          throw Exception(
-            _l10n.votrePieceDoitToucherUne,
-          );
+          throw Exception(_l10n.votrePieceDoitToucherUne);
         }
       }
 
@@ -25337,7 +25561,8 @@ class FirebaseService {
     bool isAuto = false,
   }) async {
     final currentAuthUid = FirebaseAuth.instance.currentUser?.uid;
-    if (!isAuto && currentAuthUid == null) throw Exception(_l10n.nonAuthentifie);
+    if (!isAuto && currentAuthUid == null)
+      throw Exception(_l10n.nonAuthentifie);
 
     await _db.runTransaction((transaction) async {
       final gameRef = _db.collection('games').doc(gameCode);
@@ -25415,33 +25640,33 @@ class FirebaseService {
 }
 
 void showGameRules(BuildContext context, String gameType) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        String rules = GameData.gameRules[gameType] ?? "";
-        if (rules.trim().isEmpty) {
-          final loc = GameRulesLocalization.getRules(context, gameType);
-          final notFound = GameRulesLocalization.tr(context, 'noRulesFound');
-          if (loc.trim().isNotEmpty && loc != notFound) {
-            rules = loc;
-          }
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String rules = GameData.gameRules[gameType] ?? "";
+      if (rules.trim().isEmpty) {
+        final loc = GameRulesLocalization.getRules(context, gameType);
+        final notFound = GameRulesLocalization.tr(context, 'noRulesFound');
+        if (loc.trim().isNotEmpty && loc != notFound) {
+          rules = loc;
         }
-        if (rules.trim().isEmpty) {
-          rules = GameRulesLocalization.tr(context, 'noRulesFound');
-        }
-        return AlertDialog(
-          title: Text(AppLocalizations.of(context)!.rulesTitle),
-          content: SingleChildScrollView(child: Text(rules)),
-          actions: <Widget>[
-            TextButton(
-              child: Text(AppLocalizations.of(context)!.understoodButton),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
-        );
-      },
-    );
-  }
+      }
+      if (rules.trim().isEmpty) {
+        rules = GameRulesLocalization.tr(context, 'noRulesFound');
+      }
+      return AlertDialog(
+        title: Text(AppLocalizations.of(context)!.rulesTitle),
+        content: SingleChildScrollView(child: Text(rules)),
+        actions: <Widget>[
+          TextButton(
+            child: Text(AppLocalizations.of(context)!.understoodButton),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      );
+    },
+  );
+}
 
 class FriendsModeHomeScreen extends StatelessWidget {
   @override
@@ -25469,9 +25694,7 @@ class FriendsModeHomeScreen extends StatelessWidget {
               SizedBox(height: 70),
               ElevatedButton.icon(
                 icon: Icon(Icons.people),
-                label: Text(
-                  AppLocalizations.of(context)!.multijoueurEnLigne,
-                ),
+                label: Text(AppLocalizations.of(context)!.multijoueurEnLigne),
                 onPressed: () {
                   final String playerId = Provider.of<String>(
                     context,
@@ -25489,9 +25712,7 @@ class FriendsModeHomeScreen extends StatelessWidget {
               SizedBox(height: 20),
               ElevatedButton.icon(
                 icon: Icon(Icons.person),
-                label: Text(
-                  AppLocalizations.of(context)!.modeLocalHorsLigne,
-                ),
+                label: Text(AppLocalizations.of(context)!.modeLocalHorsLigne),
                 onPressed:
                     () => Navigator.push(
                       context,
@@ -25541,9 +25762,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
             ),
             SizedBox(height: 40),
             ElevatedButton(
-              child: Text(
-                AppLocalizations.of(context)!.createGame,
-              ),
+              child: Text(AppLocalizations.of(context)!.createGame),
               onPressed: () {
                 if (_nameController.text.trim().isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -25571,9 +25790,7 @@ class MultiplayerMenuScreen extends StatelessWidget {
             ),
             SizedBox(height: 15),
             OutlinedButton(
-              child: Text(
-                AppLocalizations.of(context)!.rejoindreUnePartie,
-              ),
+              child: Text(AppLocalizations.of(context)!.rejoindreUnePartie),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.white,
                 side: BorderSide(color: Colors.deepPurple),
@@ -25862,7 +26079,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.pasAssezDePiecesPour, [cost]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.pasAssezDePiecesPour,
+              [cost],
+            ),
           ),
         ),
       );
@@ -25914,13 +26135,17 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           photoRouletteTime:
               _selectedGame == 'Photo Roulette' ? _turnTimerSeconds : null,
           photoRouletteMediaType:
-              _selectedGame == 'Photo Roulette' ? _photoRouletteMediaType : null,
+              _selectedGame == 'Photo Roulette'
+                  ? _photoRouletteMediaType
+                  : null,
           infiltreCount:
               _selectedGame == 'Infiltré & Mr. White' ? _infiltreCount : null,
           mrWhiteCount:
               _selectedGame == 'Infiltré & Mr. White' ? _mrWhiteCount : null,
           undercoverClueTime:
-              _selectedGame == 'Infiltré & Mr. White' ? _turnTimerSeconds : null,
+              _selectedGame == 'Infiltré & Mr. White'
+                  ? _turnTimerSeconds
+                  : null,
           undercoverRoleSettings: _undercoverRoleSettings,
           selectedLoupGarouRoles: _selectedLoupGarouRoles,
           petitsChevauxTeamMode:
@@ -25934,7 +26159,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           cadavreVariant: _cadavreVariant,
           cadavrePassingMode: _cadavrePassingMode,
           aiInstructions:
-              (playerState.isPremium && _aiSupportedGames.contains(_selectedGame))
+              (playerState.isPremium &&
+                      _aiSupportedGames.contains(_selectedGame))
                   ? (_aiInstructionsController.text.trim().isNotEmpty
                       ? _aiInstructionsController.text.trim()
                       : null)
@@ -26084,7 +26310,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              AppLocalizations.of(context)!.erreurLorsDeLaCreation.replaceAll("{0}", e.toString()),
+              AppLocalizations.of(
+                context,
+              )!.erreurLorsDeLaCreation.replaceAll("{0}", e.toString()),
             ),
           ),
         );
@@ -26143,9 +26371,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     if (!success) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.pasAssezDePiecesPour1,
-          ),
+          content: Text(AppLocalizations.of(context)!.pasAssezDePiecesPour1),
         ),
       );
       return;
@@ -26273,7 +26499,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     final bool isCommunicationEnabled = _videoEnabled || _audioEnabled;
     // Vérifie si la recherche publique est activée pour griser Local et Privé
     final bool isPublicSearchEnabled = _enablePublicSearch;
-    final bool isDevineTete = _selectedGame.contains('Devine Tête') ||
+    final bool isDevineTete =
+        _selectedGame.contains('Devine Tête') ||
         _selectedGame.contains(AppLocalizations.of(context)!.devineT);
     final bool blockOnlineForDevineTete = isDevineTete && !_videoEnabled;
 
@@ -26312,7 +26539,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  AppLocalizations.of(context)!.desactivezLaRecherchePubliquePour,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.desactivezLaRecherchePubliquePour,
                                 ),
                               ),
                             );
@@ -26322,7 +26551,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  AppLocalizations.of(context)!.desactivezLaVideoOuL,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.desactivezLaVideoOuL,
                                 ),
                               ),
                             );
@@ -26341,9 +26572,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           },
                   label: Text(
                     isPublicSearchEnabled
-                        ? AppLocalizations.of(ctx)!.localIndisponibleRechercheActive
+                        ? AppLocalizations.of(
+                          ctx,
+                        )!.localIndisponibleRechercheActive
                         : isCommunicationEnabled
-                        ? AppLocalizations.of(context)!.localIndisponibleVideoAudioActif
+                        ? AppLocalizations.of(
+                          context,
+                        )!.localIndisponibleVideoAudioActif
                         : AppLocalizations.of(context)!.jouerEnLocalSurCet,
                   ),
                 ),
@@ -26366,8 +26601,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             SnackBar(
                               content: Text(
                                 blockOnlineForDevineTete
-                                    ? AppLocalizations.of(context)!.laVideoEstObligatoirePour
-                                    : AppLocalizations.of(context)!.desactivezLaRecherchePubliquePour1,
+                                    ? AppLocalizations.of(
+                                      context,
+                                    )!.laVideoEstObligatoirePour
+                                    : AppLocalizations.of(
+                                      context,
+                                    )!.desactivezLaRecherchePubliquePour1,
                               ),
                             ),
                           );
@@ -26378,9 +26617,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         },
                 label: Text(
                   isPublicSearchEnabled
-                      ? AppLocalizations.of(context)!.priveIndisponibleRechercheActive
+                      ? AppLocalizations.of(
+                        context,
+                      )!.priveIndisponibleRechercheActive
                       : blockOnlineForDevineTete
-                      ? AppLocalizations.of(context)!.priveIndisponibleVideoRequise
+                      ? AppLocalizations.of(
+                        context,
+                      )!.priveIndisponibleVideoRequise
                       : AppLocalizations.of(context)!.creerUnePartiePriveeAvec,
                 ),
               ),
@@ -26406,8 +26649,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               SnackBar(
                                 content: Text(
                                   blockOnlineForDevineTete
-                                      ? AppLocalizations.of(context)!.laVideoEstObligatoirePour
-                                      : AppLocalizations.of(context)!.activezLeBoutonRecherchePublique,
+                                      ? AppLocalizations.of(
+                                        context,
+                                      )!.laVideoEstObligatoirePour
+                                      : AppLocalizations.of(
+                                        context,
+                                      )!.activezLeBoutonRecherchePublique,
                                 ),
                               ),
                             );
@@ -26416,8 +26663,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     _enablePublicSearch
                         ? AppLocalizations.of(ctx)!.rechercheRapideMonde
                         : blockOnlineForDevineTete
-                        ? AppLocalizations.of(context)!.rechercheRapideVideoRequise
-                        : AppLocalizations.of(context)!.rechercheMondeDesactivee,
+                        ? AppLocalizations.of(
+                          context,
+                        )!.rechercheRapideVideoRequise
+                        : AppLocalizations.of(
+                          context,
+                        )!.rechercheMondeDesactivee,
                   ),
                 ),
                 SizedBox(height: 12),
@@ -26441,8 +26692,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               SnackBar(
                                 content: Text(
                                   blockOnlineForDevineTete
-                                      ? AppLocalizations.of(context)!.laVideoEstObligatoirePour1
-                                      : AppLocalizations.of(context)!.activezLeBoutonRecherchePublique1,
+                                      ? AppLocalizations.of(
+                                        context,
+                                      )!.laVideoEstObligatoirePour1
+                                      : AppLocalizations.of(
+                                        context,
+                                      )!.activezLeBoutonRecherchePublique1,
                                 ),
                               ),
                             );
@@ -26451,7 +26706,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     _enablePublicSearch
                         ? AppLocalizations.of(context)!.partieClasseeRanked
                         : blockOnlineForDevineTete
-                        ? AppLocalizations.of(context)!.partieClasseeVideoRequise
+                        ? AppLocalizations.of(
+                          context,
+                        )!.partieClasseeVideoRequise
                         : AppLocalizations.of(context)!.partieClasseeDesactivee,
                   ),
                 ),
@@ -26501,9 +26758,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(24),
                       ),
-                      border: Border(
-                        bottom: BorderSide(color: Colors.white12),
-                      ),
+                      border: Border(bottom: BorderSide(color: Colors.white12)),
                     ),
                     child: Column(
                       children: [
@@ -26519,7 +26774,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  AppLocalizations.of(context)!.historiqueDesThemesIa,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.historiqueDesThemesIa,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -26529,10 +26786,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                               ],
                             ),
                             IconButton(
-                              icon: Icon(
-                                Icons.close,
-                                color: Colors.white70,
-                              ),
+                              icon: Icon(Icons.close, color: Colors.white70),
                               onPressed: () => Navigator.pop(ctx),
                             ),
                           ],
@@ -26566,7 +26820,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      GameContentLocalization.format(context, AppLocalizations.of(context)!.pour, [_selectedGame]),
+                                      GameContentLocalization.format(
+                                        context,
+                                        AppLocalizations.of(context)!.pour,
+                                        [_selectedGame],
+                                      ),
                                       style: TextStyle(
                                         color:
                                             historyFilter == _selectedGame
@@ -26633,9 +26891,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                       ),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return Center(child: CircularProgressIndicator());
                         }
                         final items = snapshot.data ?? [];
                         if (items.isEmpty) {
@@ -26653,8 +26909,16 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   SizedBox(height: 12),
                                   Text(
                                     historyFilter == 'all'
-                                        ? AppLocalizations.of(context)!.aucunThemeIaSauvegardeSur
-                                        : GameContentLocalization.format(context, AppLocalizations.of(context)!.aucunThemeSauvegardePour, [_selectedGame]),
+                                        ? AppLocalizations.of(
+                                          context,
+                                        )!.aucunThemeIaSauvegardeSur
+                                        : GameContentLocalization.format(
+                                          context,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.aucunThemeSauvegardePour,
+                                          [_selectedGame],
+                                        ),
                                     style: TextStyle(
                                       color: Colors.white54,
                                       fontSize: 14,
@@ -26755,7 +27019,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                                         ),
                                                   ),
                                                   child: Text(
-                                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.elements, [item.words.length]),
+                                                    GameContentLocalization.format(
+                                                      context,
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.elements,
+                                                      [item.words.length],
+                                                    ),
                                                     style: TextStyle(
                                                       color: Colors.amberAccent,
                                                       fontSize: 10,
@@ -26788,7 +27058,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   if (item.prompt.isNotEmpty) ...[
                                     SizedBox(height: 6),
                                     Text(
-                                      GameContentLocalization.format(context, AppLocalizations.of(context)!.prompt, [item.prompt]),
+                                      GameContentLocalization.format(
+                                        context,
+                                        AppLocalizations.of(context)!.prompt,
+                                        [item.prompt],
+                                      ),
                                       style: TextStyle(
                                         color: Colors.white54,
                                         fontSize: 12,
@@ -26836,7 +27110,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             size: 16,
                                           ),
                                           label: Text(
-                                            AppLocalizations.of(context)!.utiliser,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.utiliser,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold,
@@ -26865,13 +27141,20 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             ).showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  GameContentLocalization.format(context, AppLocalizations.of(context)!.packActiveElements, [item.title, item.words.length]),
+                                                  GameContentLocalization.format(
+                                                    context,
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.packActiveElements,
+                                                    [
+                                                      item.title,
+                                                      item.words.length,
+                                                    ],
+                                                  ),
                                                 ),
                                                 backgroundColor:
                                                     Colors.green[800],
-                                                duration: Duration(
-                                                  seconds: 2,
-                                                ),
+                                                duration: Duration(seconds: 2),
                                               ),
                                             );
                                           },
@@ -26885,7 +27168,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             size: 16,
                                           ),
                                           label: Text(
-                                            AppLocalizations.of(context)!.fusionner,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.fusionner,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold,
@@ -26919,13 +27204,17 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                             ).showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  GameContentLocalization.format(context, AppLocalizations.of(context)!.themesFusionnesLePackActif, [_selectedAiWords!.length]),
+                                                  GameContentLocalization.format(
+                                                    context,
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.themesFusionnesLePackActif,
+                                                    [_selectedAiWords!.length],
+                                                  ),
                                                 ),
                                                 backgroundColor:
                                                     Colors.deepPurple,
-                                                duration: Duration(
-                                                  seconds: 3,
-                                                ),
+                                                duration: Duration(seconds: 3),
                                               ),
                                             );
                                           },
@@ -26938,7 +27227,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           size: 22,
                                           color: Colors.cyanAccent,
                                         ),
-                                        tooltip: AppLocalizations.of(context)!.modifierCompleter,
+                                        tooltip:
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.modifierCompleter,
                                         onPressed:
                                             () => _openEditDialog(
                                               context,
@@ -26996,7 +27288,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     TextField(
                       controller: titleCtrl,
                       decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.titreDuThemeIaPersonnalise,
+                        labelText:
+                            AppLocalizations.of(
+                              context,
+                            )!.titreDuThemeIaPersonnalise,
                       ),
                       style: TextStyle(
                         color: Colors.white,
@@ -27010,7 +27305,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           child: TextField(
                             controller: addWordCtrl,
                             decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!.ajouterUnMot,
+                              hintText:
+                                  AppLocalizations.of(context)!.ajouterUnMot,
                             ),
                             onSubmitted: (v) {
                               if (v.trim().isNotEmpty) {
@@ -27061,7 +27357,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                         label: Text(
                           isGeneratingMore
                               ? AppLocalizations.of(context)!.generationEnCours
-                              : AppLocalizations.of(context)!.completerAvecLIa15,
+                              : AppLocalizations.of(
+                                context,
+                              )!.completerAvecLIa15,
                           style: TextStyle(
                             color: Colors.amberAccent,
                             fontSize: 12,
@@ -27076,7 +27374,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                     final formattedPrompt =
                                         FirebaseService.formatAiPromptForGame(
                                           item.gameType,
-                                          AppLocalizations.of(context)!.completeCetteListeSurLe(titleCtrl.text, wordsList.take(10).join(', ')),
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.completeCetteListeSurLe(
+                                            titleCtrl.text,
+                                            wordsList.take(10).join(', '),
+                                          ),
                                         );
                                     final addedWords =
                                         await FirebaseService.generateAiWords(
@@ -27177,7 +27480,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     if (_selectedGame == 'Loup-Garou') {
       if (totalRolesCount < 5) {
         canProceed = false;
-        validationMessage = AppLocalizations.of(context)!.selectionnezAuMoins5Roles;
+        validationMessage =
+            AppLocalizations.of(context)!.selectionnezAuMoins5Roles;
       }
     }
 
@@ -27190,7 +27494,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
     );
     final modes = gameDataInfo['modes'] as List<String>;
     final bool canLocal = modes.contains('local');
-    bool isDevineTete = _selectedGame.contains('Devine Tête') ||
+    bool isDevineTete =
+        _selectedGame.contains('Devine Tête') ||
         _selectedGame.contains(AppLocalizations.of(context)!.devineT);
     bool forceVideo = false;
     final bool isAiActive =
@@ -27237,7 +27542,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                           _initializeLoupGarouRoles();
                         });
                       },
-                      decoration: InputDecoration(labelText: AppLocalizations.of(context)!.jeuSelectionne),
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.jeuSelectionne,
+                      ),
                     ),
                     SizedBox(height: 20),
 
@@ -27276,7 +27583,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                   ),
                                   SizedBox(width: 4),
                                   Text(
-                                    AppLocalizations.of(context)!.remplaceParLeThemeIa,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.remplaceParLeThemeIa,
                                     style: TextStyle(
                                       color: Colors.amberAccent,
                                       fontSize: 11,
@@ -27298,16 +27607,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                             segments: [
                               ButtonSegment(
                                 value: 'soft',
-                                label: Text(
-                                  AppLocalizations.of(context)!.soft,
-                                ),
+                                label: Text(AppLocalizations.of(context)!.soft),
                                 icon: Icon(Icons.mood),
                               ),
                               ButtonSegment(
                                 value: 'hard',
-                                label: Text(
-                                  AppLocalizations.of(context)!.hard,
-                                ),
+                                label: Text(AppLocalizations.of(context)!.hard),
                                 icon: Icon(Icons.whatshot),
                               ),
                               ButtonSegment(
@@ -27408,7 +27713,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                         ),
                                         SizedBox(width: 10),
                                         Text(
-                                          GameContentLocalization.format(context, AppLocalizations.of(context)!.generationIa, [_selectedGame]),
+                                          GameContentLocalization.format(
+                                            context,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.generationIa,
+                                            [_selectedGame],
+                                          ),
                                           style: TextStyle(
                                             color: Colors.amberAccent,
                                             fontWeight: FontWeight.bold,
@@ -27424,7 +27735,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                         color: Colors.cyanAccent,
                                       ),
                                       label: Text(
-                                        AppLocalizations.of(context)!.historique,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.historique,
                                         style: TextStyle(
                                           color: Colors.cyanAccent,
                                           fontWeight: FontWeight.bold,
@@ -27454,7 +27767,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context)!.melangerPlusieursThemes,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.melangerPlusieursThemes,
                                       style: TextStyle(
                                         color: Colors.white70,
                                         fontSize: 12,
@@ -27474,7 +27789,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                                           ),
                                         ),
                                         child: Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, [_selectedAiThemes.length]),
+                                          GameContentLocalization.format(
+                                            context,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.combineS,
+                                            [_selectedAiThemes.length],
+                                          ),
                                           style: TextStyle(
                                             color: Colors.amberAccent,
                                             fontSize: 11,
@@ -27551,7 +27872,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          AppLocalizations.of(context)!.nombreDElements,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.nombreDElements,
                                           style: TextStyle(
                                             color: Colors.white70,
                                             fontSize: 12,
@@ -27559,7 +27882,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                           ),
                                         ),
                                         Text(
-                                          GameContentLocalization.format(context, AppLocalizations.of(context)!.minRequisRecommande, [minCount, defaultCount]),
+                                          GameContentLocalization.format(
+                                            context,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.minRequisRecommande,
+                                            [minCount, defaultCount],
+                                          ),
                                           style: TextStyle(
                                             color: Colors.white38,
                                             fontSize: 10,
@@ -27658,7 +27987,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
 
                                 // SÉLECTEUR DE STYLE / AMBIANCE
                                 Text(
-                                  AppLocalizations.of(context)!.ambianceTonaliteDeJeu,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.ambianceTonaliteDeJeu,
                                   style: TextStyle(
                                     color: Colors.white70,
                                     fontSize: 12,
@@ -27714,12 +28045,19 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                     fontSize: 13,
                                   ),
                                   decoration: InputDecoration(
-                                    labelText: AppLocalizations.of(context)!.precisionsOuIdeesSupplementairesOptionnel,
+                                    labelText:
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.precisionsOuIdeesSupplementairesOptionnel,
                                     labelStyle: TextStyle(fontSize: 12),
                                     hintText:
                                         _selectedAiThemes.isEmpty
-                                            ? AppLocalizations.of(context)!.exMythologieGrecqueObjetsInsolites
-                                            : AppLocalizations.of(context)!.exPasDAnimauxDangereux,
+                                            ? AppLocalizations.of(
+                                              context,
+                                            )!.exMythologieGrecqueObjetsInsolites
+                                            : AppLocalizations.of(
+                                              context,
+                                            )!.exPasDAnimauxDangereux,
                                     hintStyle: TextStyle(
                                       color: Colors.white30,
                                       fontSize: 12,
@@ -27734,10 +28072,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                                 .text
                                                 .isNotEmpty
                                             ? IconButton(
-                                              icon: Icon(
-                                                Icons.clear,
-                                                size: 16,
-                                              ),
+                                              icon: Icon(Icons.clear, size: 16),
                                               onPressed:
                                                   () => setState(
                                                     () =>
@@ -27774,8 +28109,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                                 ),
                                         label: Text(
                                           _isAiLoading
-                                              ? AppLocalizations.of(context)!.generationEnCours
-                                              : AppLocalizations.of(context)!.genererAvecLIaElements(currentCount),
+                                              ? AppLocalizations.of(
+                                                context,
+                                              )!.generationEnCours
+                                              : AppLocalizations.of(
+                                                context,
+                                              )!.genererAvecLIaElements(
+                                                currentCount,
+                                              ),
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
@@ -27838,7 +28179,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                                                     .isNotEmpty
                                                                 ? _selectedAiThemes
                                                                     .join(', ')
-                                                                : AppLocalizations.of(context)!.packIa(_selectedGame);
+                                                                : AppLocalizations.of(
+                                                                  context,
+                                                                )!.packIa(
+                                                                  _selectedGame,
+                                                                );
                                                       }
                                                       if (autoTitle.length >
                                                           25) {
@@ -27877,10 +28222,16 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                                         ).showSnackBar(
                                                           SnackBar(
                                                             content: Text(
-                                                              GameContentLocalization.format(context, AppLocalizations.of(context)!.elementsGeneresEtSauvegardes, [
+                                                              GameContentLocalization.format(
+                                                                context,
+                                                                AppLocalizations.of(
+                                                                  context,
+                                                                )!.elementsGeneresEtSauvegardes,
+                                                                [
                                                                   generated
                                                                       .length,
-                                                                ]),
+                                                                ],
+                                                              ),
                                                             ),
                                                             backgroundColor:
                                                                 Colors
@@ -27896,7 +28247,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                                       ).showSnackBar(
                                                         SnackBar(
                                                           content: Text(
-                                                            GameContentLocalization.format(context, AppLocalizations.of(context)!.erreurIa, [e]),
+                                                            GameContentLocalization.format(
+                                                              context,
+                                                              AppLocalizations.of(
+                                                                context,
+                                                              )!.erreurIa,
+                                                              [e],
+                                                            ),
                                                           ),
                                                           backgroundColor:
                                                               Colors.red,
@@ -27942,7 +28299,15 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                         SizedBox(width: 8),
                                         Expanded(
                                           child: Text(
-                                            AppLocalizations.of(context)!.packActifElements(_activeAiThemeTitle ?? AppLocalizations.of(context)!.themePersonnalise, _selectedAiWords!.length),
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.packActifElements(
+                                              _activeAiThemeTitle ??
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.themePersonnalise,
+                                              _selectedAiWords!.length,
+                                            ),
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -27959,7 +28324,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                           ),
                                           padding: EdgeInsets.zero,
                                           constraints: BoxConstraints(),
-                                          tooltip: AppLocalizations.of(context)!.desactiverCePack,
+                                          tooltip:
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.desactiverCePack,
                                           onPressed: () {
                                             setState(() {
                                               _selectedAiWords = null;
@@ -27988,9 +28356,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         segments: [
                           ButtonSegment(
                             value: AppLocalizations.of(context)!.normal,
-                            label: Text(
-                              AppLocalizations.of(context)!.normal,
-                            ),
+                            label: Text(AppLocalizations.of(context)!.normal),
                           ),
                           ButtonSegment(
                             value: AppLocalizations.of(context)!.complement,
@@ -28010,14 +28376,17 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                           setState(() => _gribouillisMode = newSelection.first);
                         },
                       ),
-                      if (_gribouillisMode == AppLocalizations.of(context)!.complement) ...[
+                      if (_gribouillisMode ==
+                          AppLocalizations.of(context)!.complement) ...[
                         SizedBox(height: 10),
                         SwitchListTile.adaptive(
                           title: Text(
                             AppLocalizations.of(context)!.parametreAjouter1,
                           ),
                           subtitle: Text(
-                            AppLocalizations.of(context)!.chacunCompleteLeMemeDessin,
+                            AppLocalizations.of(
+                              context,
+                            )!.chacunCompleteLeMemeDessin,
                           ),
                           value: _gribouillisAjouter1,
                           onChanged:
@@ -28051,7 +28420,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                     if (_selectedGame == 'Poker') ...[
                       SizedBox(height: 20),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.jetonsDeDepart, [_pokerStartChips]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.jetonsDeDepart,
+                          [_pokerStartChips],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -28067,7 +28440,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SizedBox(height: 10),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.blinds, [_pokerSmallBlind, _pokerBigBlind]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.blinds,
+                          [_pokerSmallBlind, _pokerBigBlind],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -28075,7 +28452,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         min: 5,
                         max: 100,
                         divisions: 19,
-                        label: GameContentLocalization.format(context, AppLocalizations.of(context)!.petiteBlind, [_pokerSmallBlind.round()]),
+                        label: GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.petiteBlind,
+                          [_pokerSmallBlind.round()],
+                        ),
                         onChanged: (double value) {
                           setState(() {
                             _pokerSmallBlind = value.round();
@@ -28092,7 +28473,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                           AppLocalizations.of(context)!.plusDeSymbolesParCarte,
                         ),
                         subtitle: Text(
-                          AppLocalizations.of(context)!.plusComplexePlusDeCartes,
+                          AppLocalizations.of(
+                            context,
+                          )!.plusComplexePlusDeCartes,
                         ),
                         value: _dobbleSymbolsPerCard,
                         onChanged:
@@ -28109,7 +28492,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                           AppLocalizations.of(context)!.jeuSimplifieVraiFaux,
                         ),
                         subtitle: Text(
-                          AppLocalizations.of(context)!.chacunRaconteUneHistoireLes,
+                          AppLocalizations.of(
+                            context,
+                          )!.chacunRaconteUneHistoireLes,
                         ),
                         value: _isSimplifiedLiar,
                         onChanged:
@@ -28178,7 +28563,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                             child: TextField(
                               controller: _petitBacCategoryController,
                               decoration: InputDecoration(
-                                labelText: AppLocalizations.of(context)!.ajouterUneCategorie,
+                                labelText:
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.ajouterUneCategorie,
                               ),
                               onSubmitted: (value) {
                                 if (value.trim().isNotEmpty &&
@@ -28260,7 +28648,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                           ButtonSegment(
                             value: 'classic',
                             label: Text(
-                              AppLocalizations.of(context)!.classiqueSurrealiste,
+                              AppLocalizations.of(
+                                context,
+                              )!.classiqueSurrealiste,
                             ),
                           ),
                           ButtonSegment(
@@ -28308,10 +28698,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
                         title: Text(
-                          AppLocalizations.of(context)!.autoriserLesIndicesInvalidesSimplifie,
+                          AppLocalizations.of(
+                            context,
+                          )!.autoriserLesIndicesInvalidesSimplifie,
                         ),
                         subtitle: Text(
-                          AppLocalizations.of(context)!.lesIndicesIdentiquesSerontToujours,
+                          AppLocalizations.of(
+                            context,
+                          )!.lesIndicesIdentiquesSerontToujours,
                         ),
                         value: _justOneAllowInvalidClues,
                         onChanged:
@@ -28330,7 +28724,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SizedBox(height: 10),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.totalDesRolesSelectionnesMinimum, [totalRolesCount]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(
+                            context,
+                          )!.totalDesRolesSelectionnesMinimum,
+                          [totalRolesCount],
+                        ),
                         style: TextStyle(
                           color:
                               totalRolesCount < 5
@@ -28358,7 +28758,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         return Column(
                           children: [
                             ListTile(
-                              title: Text(GameContentLocalization.role(context, roleName)),
+                              title: Text(
+                                GameContentLocalization.role(context, roleName),
+                              ),
                               subtitle: Text(
                                 roleDescription.split('.')[0] + '.',
                               ),
@@ -28392,8 +28794,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                         currentCount > 0 &&
                                                 !([
                                                       'Loup-Garou',
-                                                      AppLocalizations.of(context)!.simpleVillageois,
-                                                      AppLocalizations.of(context)!.capitaine,
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.simpleVillageois,
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.capitaine,
                                                     ].contains(roleName) &&
                                                     currentCount == 1)
                                             ? () {
@@ -28437,7 +28843,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SizedBox(height: 15),
                       Text(
-                        AppLocalizations.of(context)!.selectionnezAuMoins3Categories,
+                        AppLocalizations.of(
+                          context,
+                        )!.selectionnezAuMoins3Categories,
                         style: TextStyle(
                           color:
                               _selectedGameCategories.length < 3
@@ -28476,7 +28884,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                             AppLocalizations.of(context)!.chronoGlobalBombe,
                           ),
                           subtitle: Text(
-                            AppLocalizations.of(context)!.leTempsNeSeReinitialise,
+                            AppLocalizations.of(
+                              context,
+                            )!.leTempsNeSeReinitialise,
                           ),
                           value: _hotPotatoUseGlobalTimer,
                           onChanged:
@@ -28487,7 +28897,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         ),
                         if (_hotPotatoUseGlobalTimer) ...[
                           Text(
-                            GameContentLocalization.format(context, AppLocalizations.of(context)!.dureeDeLaBombeS, [_hotPotatoGlobalDuration]),
+                            GameContentLocalization.format(
+                              context,
+                              AppLocalizations.of(context)!.dureeDeLaBombeS,
+                              [_hotPotatoGlobalDuration],
+                            ),
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Slider(
@@ -28495,7 +28909,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                             min: 15,
                             max: 120,
                             divisions: 21,
-                            label: AppLocalizations.of(context)!.s2(_hotPotatoGlobalDuration),
+                            label: AppLocalizations.of(
+                              context,
+                            )!.s2(_hotPotatoGlobalDuration),
                             onChanged:
                                 (v) => setState(
                                   () => _hotPotatoGlobalDuration = v.round(),
@@ -28513,17 +28929,29 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SizedBox(height: 10),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.nombreDeManches, [_timesUpTotalRounds]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.nombreDeManches,
+                          [_timesUpTotalRounds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SegmentedButton<int>(
                         segments: [
                           ButtonSegment(
                             value: 1,
-                            label: Text(AppLocalizations.of(context)!.k1Description),
+                            label: Text(
+                              AppLocalizations.of(context)!.k1Description,
+                            ),
                           ),
-                          ButtonSegment(value: 2, label: Text(AppLocalizations.of(context)!.k21Mot)),
-                          ButtonSegment(value: 3, label: Text(AppLocalizations.of(context)!.k3Mime)),
+                          ButtonSegment(
+                            value: 2,
+                            label: Text(AppLocalizations.of(context)!.k21Mot),
+                          ),
+                          ButtonSegment(
+                            value: 3,
+                            label: Text(AppLocalizations.of(context)!.k3Mime),
+                          ),
                         ],
                         selected: {_timesUpTotalRounds},
                         onSelectionChanged:
@@ -28552,11 +28980,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                     if (_selectedGame == 'Petits Chevaux') ...[
                       SizedBox(height: 20),
                       SwitchListTile.adaptive(
-                        title: Text(
-                          AppLocalizations.of(context)!.equipes2v2,
-                        ),
+                        title: Text(AppLocalizations.of(context)!.equipes2v2),
                         subtitle: Text(
-                          AppLocalizations.of(context)!.necessiteExactement4JoueursVous,
+                          AppLocalizations.of(
+                            context,
+                          )!.necessiteExactement4JoueursVous,
                         ),
                         value: _petitsChevauxTeamMode,
                         onChanged:
@@ -28581,21 +29009,15 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         segments: [
                           ButtonSegment(
                             value: AppLocalizations.of(context)!.pioche3,
-                            label: Text(
-                              AppLocalizations.of(context)!.pioche,
-                            ),
+                            label: Text(AppLocalizations.of(context)!.pioche),
                           ),
                           ButtonSegment(
                             value: 'bloque',
-                            label: Text(
-                              AppLocalizations.of(context)!.bloque,
-                            ),
+                            label: Text(AppLocalizations.of(context)!.bloque),
                           ),
                           ButtonSegment(
                             value: 'all_fives',
-                            label: Text(
-                              AppLocalizations.of(context)!.allFives,
-                            ),
+                            label: Text(AppLocalizations.of(context)!.allFives),
                           ),
                         ],
                         selected: {_dominoesMode},
@@ -28604,7 +29026,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SizedBox(height: 10),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.scoreCible1, [_dominoesTargetScore]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.scoreCible1,
+                          [_dominoesTargetScore],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -28672,23 +29098,17 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         segments: [
                           ButtonSegment(
                             value: AppLocalizations.of(context)!.photos,
-                            label: Text(
-                              AppLocalizations.of(context)!.photos,
-                            ),
+                            label: Text(AppLocalizations.of(context)!.photos),
                             icon: Icon(Icons.photo),
                           ),
                           ButtonSegment(
                             value: AppLocalizations.of(context)!.videos,
-                            label: Text(
-                              AppLocalizations.of(context)!.videos,
-                            ),
+                            label: Text(AppLocalizations.of(context)!.videos),
                             icon: Icon(Icons.videocam),
                           ),
                           ButtonSegment(
                             value: AppLocalizations.of(context)!.mixte,
-                            label: Text(
-                              AppLocalizations.of(context)!.mixte,
-                            ),
+                            label: Text(AppLocalizations.of(context)!.mixte),
                             icon: Icon(Icons.collections),
                           ),
                         ],
@@ -28701,7 +29121,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SizedBox(height: 10),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.nombreDeToursPhotosA, [_photoRouletteRounds]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.nombreDeToursPhotosA,
+                          [_photoRouletteRounds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -28717,7 +29141,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SizedBox(height: 10),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.photosPiocheesParJoueur, [_photoRoulettePhotosPerPlayer]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.photosPiocheesParJoueur,
+                          [_photoRoulettePhotosPerPlayer],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -28742,10 +29170,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       SizedBox(height: 12),
                       SwitchListTile.adaptive(
                         title: Text(
-                          AppLocalizations.of(context)!.lesJoueursEcriventLesDefis,
+                          AppLocalizations.of(
+                            context,
+                          )!.lesJoueursEcriventLesDefis,
                         ),
                         subtitle: Text(
-                          AppLocalizations.of(context)!.unJoueurAleatoireEcritLe,
+                          AppLocalizations.of(
+                            context,
+                          )!.unJoueurAleatoireEcritLe,
                         ),
                         value: _aoVPlayersDecide,
                         onChanged:
@@ -28754,7 +29186,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SizedBox(height: 8),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.nombreDeTours, [_aoVMaxRounds]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.nombreDeTours,
+                          [_aoVMaxRounds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -28762,13 +29198,23 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         min: 5,
                         max: 30,
                         divisions: 25,
-                        label: GameContentLocalization.format(context, AppLocalizations.of(context)!.tours, [_aoVMaxRounds]),
+                        label: GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.tours,
+                          [_aoVMaxRounds],
+                        ),
                         onChanged:
                             (v) => setState(() => _aoVMaxRounds = v.round()),
                       ),
                       SizedBox(height: 8),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.seuilDeValidationParDefaut, [_aoVVoteThreshold]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(
+                            context,
+                          )!.seuilDeValidationParDefaut,
+                          [_aoVVoteThreshold],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -28855,7 +29301,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       Padding(
                         padding: EdgeInsets.only(top: 8.0),
                         child: Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.totalImposteursLaRepartitionFinale, [_infiltreCount + _mrWhiteCount]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(
+                              context,
+                            )!.totalImposteursLaRepartitionFinale,
+                            [_infiltreCount + _mrWhiteCount],
+                          ),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white70,
@@ -28869,9 +29321,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SwitchListTile.adaptive(
-                        title: Text(
-                          AppLocalizations.of(context)!.fouDeJoie,
-                        ),
+                        title: Text(AppLocalizations.of(context)!.fouDeJoie),
                         subtitle: Text(
                           AppLocalizations.of(context)!.gagne4PointsSIl,
                         ),
@@ -28883,9 +29333,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text(
-                          AppLocalizations.of(context)!.boomerang,
-                        ),
+                        title: Text(AppLocalizations.of(context)!.boomerang),
                         subtitle: Text(
                           AppLocalizations.of(context)!.la1ereFoisQuIl,
                         ),
@@ -28902,7 +29350,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                         subtitle: Text(
                           AppLocalizations.of(context)!.trancheEnCasDEgalite,
                         ),
-                        value: _undercoverRoleSettings['Déesse de la Justice'] ?? false,
+                        value:
+                            _undercoverRoleSettings['Déesse de la Justice'] ??
+                            false,
                         onChanged:
                             (val) => setState(
                               () =>
@@ -28911,11 +29361,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text(
-                          AppLocalizations.of(context)!.fantome,
-                        ),
+                        title: Text(AppLocalizations.of(context)!.fantome),
                         subtitle: Text(
-                          AppLocalizations.of(context)!.peutToujoursVoterApresSon,
+                          AppLocalizations.of(
+                            context,
+                          )!.peutToujoursVoterApresSon,
                         ),
                         value: _undercoverRoleSettings['Fantôme'] ?? false,
                         onChanged:
@@ -28937,9 +29387,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                             ),
                       ),
                       SwitchListTile.adaptive(
-                        title: Text(
-                          AppLocalizations.of(context)!.mrMeme,
-                        ),
+                        title: Text(AppLocalizations.of(context)!.mrMeme),
                         subtitle: Text(
                           AppLocalizations.of(context)!.unJoueurDevraMimerSon,
                         ),
@@ -28951,12 +29399,18 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       ),
                       SwitchListTile.adaptive(
                         title: Text(
-                          AppLocalizations.of(context)!.vendeurDeFalafels4Joueurs,
+                          AppLocalizations.of(
+                            context,
+                          )!.vendeurDeFalafels4Joueurs,
                         ),
                         subtitle: Text(
-                          AppLocalizations.of(context)!.recoitUnPouvoirSpecialAleatoire,
+                          AppLocalizations.of(
+                            context,
+                          )!.recoitUnPouvoirSpecialAleatoire,
                         ),
-                        value: _undercoverRoleSettings['Vendeur de Falafels'] ?? false,
+                        value:
+                            _undercoverRoleSettings['Vendeur de Falafels'] ??
+                            false,
                         onChanged:
                             (val) => setState(
                               () =>
@@ -28998,9 +29452,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     SwitchListTile.adaptive(
-                      title: Text(
-                        AppLocalizations.of(context)!.activerLeTimer,
-                      ),
+                      title: Text(AppLocalizations.of(context)!.activerLeTimer),
                       subtitle: Text(
                         AppLocalizations.of(context)!.siDesactiveLeJeuN,
                       ),
@@ -29010,7 +29462,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                     ),
                     if (_useTimer) ...[
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.dureeDeReponseParJoueur, [_turnTimerSeconds]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.dureeDeReponseParJoueur,
+                          [_turnTimerSeconds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -29024,7 +29480,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                                 setState(() => _turnTimerSeconds = v.round()),
                       ),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.dureeDAffichageDesResultats, [_resultTimerSeconds]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(
+                            context,
+                          )!.dureeDAffichageDesResultats,
+                          [_resultTimerSeconds],
+                        ),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Slider(
@@ -29043,7 +29505,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.combineS, 
                     if (modes.contains('multi') || modes.contains('monde')) ...[
                       Divider(height: 30, thickness: 1, color: Colors.white24),
                       Text(
-AppLocalizations.of(context)!.communicationEnLigne,
+                        AppLocalizations.of(context)!.communicationEnLigne,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       SizedBox(height: 10),
@@ -29067,14 +29529,20 @@ AppLocalizations.of(context)!.communicationEnLigne,
                             children: [
                               SwitchListTile.adaptive(
                                 title: Text(
-"${AppLocalizations.of(context)!.enableVideo} ${forceVideo ? '(${AppLocalizations.of(context)!.obligatoire})' : ''}",
-),
+                                  "${AppLocalizations.of(context)!.enableVideo} ${forceVideo ? '(${AppLocalizations.of(context)!.obligatoire})' : ''}",
+                                ),
                                 subtitle: Text(
                                   forceVideo
-                                      ? AppLocalizations.of(context)!.cameraIndispensablePourCeJeu
+                                      ? AppLocalizations.of(
+                                        context,
+                                      )!.cameraIndispensablePourCeJeu
                                       : (canEnableVideo
-                                          ? AppLocalizations.of(context)!.microCameraDesactiveLeMode
-                                          : AppLocalizations.of(context)!.reserveVipOuLimiteAtteinte),
+                                          ? AppLocalizations.of(
+                                            context,
+                                          )!.microCameraDesactiveLeMode
+                                          : AppLocalizations.of(
+                                            context,
+                                          )!.reserveVipOuLimiteAtteinte),
                                 ),
                                 value: forceVideo ? true : _videoEnabled,
                                 onChanged:
@@ -29100,10 +29568,14 @@ AppLocalizations.of(context)!.communicationEnLigne,
                               if (!isDevineTete)
                                 SwitchListTile.adaptive(
                                   title: Text(
-                                    AppLocalizations.of(context)!.voixUniquementAudio,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.voixUniquementAudio,
                                   ),
                                   subtitle: Text(
-                                    AppLocalizations.of(context)!.activeLeMicroSansLa,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.activeLeMicroSansLa,
                                   ),
                                   value: forceVideo ? false : _audioEnabled,
                                   onChanged:
@@ -29127,19 +29599,25 @@ AppLocalizations.of(context)!.communicationEnLigne,
                                 Divider(color: Colors.white24, height: 30),
 
                                 Text(
-                                  AppLocalizations.of(context)!.parametresDeRecherchePublique,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.parametresDeRecherchePublique,
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 SwitchListTile.adaptive(
                                   title: Text(
-                                    AppLocalizations.of(context)!.autoriserLaRechercheRapideClassee,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.autoriserLaRechercheRapideClassee,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.amber,
                                     ),
                                   ),
                                   subtitle: Text(
-                                    AppLocalizations.of(context)!.activeLesBoutonsDeRecherche,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.activeLesBoutonsDeRecherche,
                                   ),
                                   value: _enablePublicSearch,
                                   onChanged:
@@ -29154,11 +29632,13 @@ AppLocalizations.of(context)!.communicationEnLigne,
 
                                   // --- NOUVEAU PLACEMENT DU SLIDER JOUEURS ---
                                   Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.nombreDeJoueursRecherches,
-[_playerCount.toInt()],
-),
+                                    GameContentLocalization.format(
+                                      context,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.nombreDeJoueursRecherches,
+                                      [_playerCount.toInt()],
+                                    ),
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
@@ -29205,19 +29685,25 @@ AppLocalizations.of(context)!.nombreDeJoueursRecherches,
                                       ButtonSegment(
                                         value: 'any',
                                         label: Text(
-                                          AppLocalizations.of(context)!.peuImporte,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.peuImporte,
                                         ),
                                       ),
                                       ButtonSegment(
                                         value: 'with',
                                         label: Text(
-                                          AppLocalizations.of(context)!.avecVideo,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.avecVideo,
                                         ),
                                       ),
                                       ButtonSegment(
                                         value: 'without',
                                         label: Text(
-                                          AppLocalizations.of(context)!.sansVideo,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.sansVideo,
                                         ),
                                       ),
                                     ],
@@ -29308,9 +29794,7 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
     if (_codeController.text.trim().length != 6) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.leCodeDoitComporter6,
-          ),
+          content: Text(AppLocalizations.of(context)!.leCodeDoitComporter6),
         ),
       );
       return;
@@ -29339,9 +29823,7 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
       if (!gameSnap.exists || gameSnap['gameState'] != 'lobby') {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              AppLocalizations.of(context)!.codeDePartieInvalideOu,
-            ),
+            content: Text(AppLocalizations.of(context)!.codeDePartieInvalideOu),
           ),
         );
         if (mounted) setState(() => _isLoading = false);
@@ -29405,9 +29887,7 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.erreurDeConnexion,
-          ),
+          content: Text(AppLocalizations.of(context)!.erreurDeConnexion),
         ),
       );
     } finally {
@@ -29435,7 +29915,8 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
                     TextField(
                       controller: _codeController,
                       decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.codeDeLaPartie6,
+                        labelText:
+                            AppLocalizations.of(context)!.codeDeLaPartie6,
                       ),
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
@@ -29448,9 +29929,7 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
                     SizedBox(height: 30),
                     ElevatedButton(
                       onPressed: _joinGame,
-                      child: Text(
-                        AppLocalizations.of(context)!.rejoindre,
-                      ),
+                      child: Text(AppLocalizations.of(context)!.rejoindre),
                     ),
                   ],
                 ),
@@ -29493,8 +29972,9 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
   void _setupRtdbPresence() {
     try {
       final connectedRef = FirebaseDatabase.instance.ref('.info/connected');
-      _presenceRef = FirebaseDatabase.instance
-          .ref('games/${widget.gameCode}/presence/${widget.playerId}');
+      _presenceRef = FirebaseDatabase.instance.ref(
+        'games/${widget.gameCode}/presence/${widget.playerId}',
+      );
       _connectedSub = connectedRef.onValue.listen((event) {
         final connected = event.snapshot.value as bool? ?? false;
         if (connected && _presenceRef != null) {
@@ -29515,10 +29995,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       _sendHeartbeat();
-      _presenceRef?.set({
-        'isOnline': true,
-        'lastSeen': ServerValue.timestamp,
-      });
+      _presenceRef?.set({'isOnline': true, 'lastSeen': ServerValue.timestamp});
       _firebaseService.setPlayerOnlineStatusInGame(
         widget.gameCode,
         widget.playerId,
@@ -29526,10 +30003,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
       );
     } else if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.detached) {
-      _presenceRef?.set({
-        'isOnline': false,
-        'lastSeen': ServerValue.timestamp,
-      });
+      _presenceRef?.set({'isOnline': false, 'lastSeen': ServerValue.timestamp});
       _firebaseService.setPlayerOnlineStatusInGame(
         widget.gameCode,
         widget.playerId,
@@ -29548,10 +30022,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
     _heartbeatTimer?.cancel();
     _connectedSub?.cancel();
     if (!_isTransitioningToGame) {
-      _presenceRef?.set({
-        'isOnline': false,
-        'lastSeen': ServerValue.timestamp,
-      });
+      _presenceRef?.set({'isOnline': false, 'lastSeen': ServerValue.timestamp});
       _firebaseService.setPlayerOnlineStatusInGame(
         widget.gameCode,
         widget.playerId,
@@ -29583,9 +30054,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
     final String currentPlayerId = widget.playerId;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.salonPrive),
-      ),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.salonPrive)),
       body: StreamBuilder<DocumentSnapshot>(
         stream: _firebaseService.getGameStream(gameCode),
         builder: (context, snapshot) {
@@ -29611,9 +30080,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
               }
             });
             return Center(
-              child: Text(
-                AppLocalizations.of(context)!.laPartieNExistePlus,
-              ),
+              child: Text(AppLocalizations.of(context)!.laPartieNExistePlus),
             );
           }
 
@@ -29648,9 +30115,7 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
               }
             });
             return Center(
-              child: Text(
-                AppLocalizations.of(context)!.laPartieCommence,
-              ),
+              child: Text(AppLocalizations.of(context)!.laPartieCommence),
             );
           }
 
@@ -29687,7 +30152,8 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
             if (gameType == 'Belote') {
               if (players.length != 4) {
                 canStart = false;
-                requirementMessage = AppLocalizations.of(context)!.laBeloteRequiertExactement4;
+                requirementMessage =
+                    AppLocalizations.of(context)!.laBeloteRequiertExactement4;
               } else if (teams.length != 2 ||
                   (teams[0]?.length ?? 0) != 2 ||
                   (teams[1]?.length ?? 0) != 2) {
@@ -29699,10 +30165,12 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
               // Autres jeux par équipes (Codenames, Time's Up, etc.)
               if (players.length < 4) {
                 canStart = false;
-                requirementMessage = AppLocalizations.of(context)!.ilFautAuMoins4;
+                requirementMessage =
+                    AppLocalizations.of(context)!.ilFautAuMoins4;
               } else if (teams.length < 2) {
                 canStart = false;
-                requirementMessage = AppLocalizations.of(context)!.veuillezCreerAuMoins2;
+                requirementMessage =
+                    AppLocalizations.of(context)!.veuillezCreerAuMoins2;
               } else if (totalAssignedPlayers != players.length) {
                 canStart = false;
                 requirementMessage =
@@ -29724,50 +30192,76 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                 }
                 if (players.length < 5) {
                   canStart = false;
-                  requirementMessage = AppLocalizations.of(context)!.auMoins5JoueursRequis;
+                  requirementMessage =
+                      AppLocalizations.of(context)!.auMoins5JoueursRequis;
                 } else if (selectedRolesCount != players.length) {
                   canStart = false;
-                  requirementMessage =
-                      AppLocalizations.of(context)!.rolesJoueurs(selectedRolesCount, players.length);
+                  requirementMessage = AppLocalizations.of(
+                    context,
+                  )!.rolesJoueurs(selectedRolesCount, players.length);
                 }
                 break;
               case 'Zombie!':
                 if (players.length != 4) {
                   canStart = false;
-                  requirementMessage = AppLocalizations.of(context)!.ceJeuRequiertExactement4;
+                  requirementMessage =
+                      AppLocalizations.of(context)!.ceJeuRequiertExactement4;
                 }
                 break;
               case 'Synonyme ou Banni':
                 if (players.length < 3) {
                   canStart = false;
-                  requirementMessage = AppLocalizations.of(context)!.auMoins3JoueursRequis;
+                  requirementMessage =
+                      AppLocalizations.of(context)!.auMoins3JoueursRequis;
                 }
                 break;
               default:
                 if (players.length < 2) {
                   canStart = false;
-                  requirementMessage = AppLocalizations.of(context)!.auMoins2JoueursRequis;
+                  requirementMessage =
+                      AppLocalizations.of(context)!.auMoins2JoueursRequis;
                 }
                 break;
             }
           }
 
-          final nonHostEntries = players.entries.where((e) => e.key != gameData['hostId']).toList();
-          final int otherReadyCount = nonHostEntries.where((e) => (e.value as Map)['isReady'] == true).length;
-          final bool allNonHostsReady = nonHostEntries.isNotEmpty && nonHostEntries.every((e) => (e.value as Map)['isReady'] == true);
-          final bool isCurrentPlayerReady = (players[currentPlayerId]?['isReady'] == true) || isHost;
-          final int minRequiredPlayers = GameData.getMinPlayers(gameType, devineTeteUseTeams: gameData['devineTeteUseTeams'] == true);
+          final nonHostEntries =
+              players.entries
+                  .where((e) => e.key != gameData['hostId'])
+                  .toList();
+          final int otherReadyCount =
+              nonHostEntries
+                  .where((e) => (e.value as Map)['isReady'] == true)
+                  .length;
+          final bool allNonHostsReady =
+              nonHostEntries.isNotEmpty &&
+              nonHostEntries.every((e) => (e.value as Map)['isReady'] == true);
+          final bool isCurrentPlayerReady =
+              (players[currentPlayerId]?['isReady'] == true) || isHost;
+          final int minRequiredPlayers = GameData.getMinPlayers(
+            gameType,
+            devineTeteUseTeams: gameData['devineTeteUseTeams'] == true,
+          );
 
           if (canStart) {
             if (players.length < minRequiredPlayers) {
               canStart = false;
-              requirementMessage = AppLocalizations.of(context)!.minPlayersRequiredForGame(minRequiredPlayers, gameType, players.length);
+              requirementMessage = AppLocalizations.of(
+                context,
+              )!.minPlayersRequiredForGame(
+                minRequiredPlayers,
+                gameType,
+                players.length,
+              );
             } else if (nonHostEntries.isEmpty) {
               canStart = false;
-              requirementMessage = AppLocalizations.of(context)!.aloneInLobbyShareCode;
+              requirementMessage =
+                  AppLocalizations.of(context)!.aloneInLobbyShareCode;
             } else if (!allNonHostsReady) {
               canStart = false;
-              requirementMessage = AppLocalizations.of(context)!.waitingAllPlayersReady(1 + otherReadyCount, players.length);
+              requirementMessage = AppLocalizations.of(
+                context,
+              )!.waitingAllPlayersReady(1 + otherReadyCount, players.length);
             }
           }
 
@@ -29827,7 +30321,9 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        AppLocalizations.of(context)!.codeDeSalonCopie,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.codeDeSalonCopie,
                                       ),
                                     ),
                                   );
@@ -29842,26 +30338,39 @@ class _GameLobbyScreenState extends State<GameLobbyScreen>
                   SizedBox(height: 20),
                   Card(
                     child: ListTile(
-                      leading: Icon(
-                        Icons.games,
-                        color: Colors.cyanAccent,
-                      ),
+                      leading: Icon(Icons.games, color: Colors.cyanAccent),
                       title: Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.jeu,
-[GameRulesLocalization.getGameTitle(context, gameType)],
-),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.jeu,
+                          [
+                            GameRulesLocalization.getGameTitle(
+                              context,
+                              gameType,
+                            ),
+                          ],
+                        ),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.difficulte1, [gameData['difficulty'] ?? AppLocalizations.of(context)!.standard]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.difficulte1,
+                          [
+                            gameData['difficulty'] ??
+                                AppLocalizations.of(context)!.standard,
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(height: 20),
                   Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPresents, [players.length]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.joueursPresents,
+                      [players.length],
+                    ),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(height: 10),
@@ -29899,9 +30408,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14),
                           side: BorderSide(
-                            color: isPlayerHost
-                                ? Colors.amber.withValues(alpha: 0.5)
-                                : Colors.white10,
+                            color:
+                                isPlayerHost
+                                    ? Colors.amber.withValues(alpha: 0.5)
+                                    : Colors.white10,
                           ),
                         ),
                         child: InkWell(
@@ -29915,14 +30425,20 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                           },
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: isPlayerHost
-                                  ? Colors.amber.withValues(alpha: 0.2)
-                                  : Colors.deepPurpleAccent.withValues(alpha: 0.2),
+                              backgroundColor:
+                                  isPlayerHost
+                                      ? Colors.amber.withValues(alpha: 0.2)
+                                      : Colors.deepPurpleAccent.withValues(
+                                        alpha: 0.2,
+                                      ),
                               child: Icon(
                                 isPlayerHost
                                     ? Icons.admin_panel_settings
                                     : Icons.person,
-                                color: isPlayerHost ? Colors.amber : Colors.cyanAccent,
+                                color:
+                                    isPlayerHost
+                                        ? Colors.amber
+                                        : Colors.cyanAccent,
                               ),
                             ),
                             title: Text(
@@ -29930,22 +30446,35 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                   AppLocalizations.of(context)!.joueur,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            subtitle: (pData['score'] != null &&
-                                    (pData['score'] as num) > 0)
-                                ? Text(
-                                  GameContentLocalization.format(context, AppLocalizations.of(context)!.scoreDeSessionVictoires, [pData['score']]),
-                                  style: TextStyle(
-                                    color: Colors.amberAccent,
-                                    fontSize: 12,
-                                  ),
-                                )
-                                : Text(
-                                  isPlayerHost ? AppLocalizations.of(context)!.hoteDuSalon : AppLocalizations.of(context)!.appuyerPourVoirProfil,
-                                  style: TextStyle(
-                                    color: Colors.white38,
-                                    fontSize: 11,
-                                  ),
-                                ),
+                            subtitle:
+                                (pData['score'] != null &&
+                                        (pData['score'] as num) > 0)
+                                    ? Text(
+                                      GameContentLocalization.format(
+                                        context,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.scoreDeSessionVictoires,
+                                        [pData['score']],
+                                      ),
+                                      style: TextStyle(
+                                        color: Colors.amberAccent,
+                                        fontSize: 12,
+                                      ),
+                                    )
+                                    : Text(
+                                      isPlayerHost
+                                          ? AppLocalizations.of(
+                                            context,
+                                          )!.hoteDuSalon
+                                          : AppLocalizations.of(
+                                            context,
+                                          )!.appuyerPourVoirProfil,
+                                      style: TextStyle(
+                                        color: Colors.white38,
+                                        fontSize: 11,
+                                      ),
+                                    ),
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -29973,12 +30502,16 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                           ),
                                           label: Text(
                                             isPlayerHost
-                                                ? AppLocalizations.of(context)!.hostBadge
+                                                ? AppLocalizations.of(
+                                                  context,
+                                                )!.hostBadge
                                                 : (pIsReady
                                                     ? AppLocalizations.of(
                                                       context,
                                                     )!.pret
-                                                    : AppLocalizations.of(context)!.notReady),
+                                                    : AppLocalizations.of(
+                                                      context,
+                                                    )!.notReady),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 11,
@@ -30003,7 +30536,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                               color: Colors.white70,
                                             ),
                                             label: Text(
-                                              AppLocalizations.of(context)!.disconnectedStatus,
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.disconnectedStatus,
                                               style: const TextStyle(
                                                 color: Colors.white70,
                                                 fontSize: 10,
@@ -30035,7 +30570,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                         currentUserId: currentPlayerId,
                                       );
                                     },
-                                    tooltip: AppLocalizations.of(context)!.profilOptions,
+                                    tooltip:
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.profilOptions,
                                   ),
                                 ],
                               ],
@@ -30067,10 +30605,19 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                          horizontal: 20,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                       ),
-                      icon: Icon(Icons.person_add_alt_1_rounded, color: Colors.white, size: 22),
+                      icon: Icon(
+                        Icons.person_add_alt_1_rounded,
+                        color: Colors.white,
+                        size: 22,
+                      ),
                       label: Text(
                         AppLocalizations.of(context)!.inviterMesAmis,
                         style: TextStyle(
@@ -30096,7 +30643,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                 height: 200,
                                 child: Center(
                                   child: Text(
-                                    AppLocalizations.of(context)!.vousNAvezPasEncore,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.vousNAvezPasEncore,
                                   ),
                                 ),
                               );
@@ -30106,7 +30655,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    AppLocalizations.of(context)!.inviterAuSalon,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.inviterAuSalon,
                                     style:
                                         Theme.of(context).textTheme.titleLarge,
                                   ),
@@ -30117,7 +30668,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                     itemBuilder: (context, i) {
                                       String fId = myFriends[i];
                                       String fName =
-                                          ps.friendNamesCache[fId] ?? AppLocalizations.of(context)!.ami;
+                                          ps.friendNamesCache[fId] ??
+                                          AppLocalizations.of(context)!.ami;
                                       return ListTile(
                                         leading: CircleAvatar(
                                           child: Text(fName[0]),
@@ -30128,7 +30680,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                             backgroundColor: Colors.green,
                                           ),
                                           child: Text(
-                                            AppLocalizations.of(context)!.inviter,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.inviter,
                                           ),
                                           onPressed: () {
                                             ps.sendGameInvite(
@@ -30146,7 +30700,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                                             ).showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  GameContentLocalization.format(context, AppLocalizations.of(context)!.invitationEnvoyeeA, [fName]),
+                                                  GameContentLocalization.format(
+                                                    context,
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.invitationEnvoyeeA,
+                                                    [fName],
+                                                  ),
                                                 ),
                                               ),
                                             );
@@ -30171,13 +30731,18 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 13),
                         side: BorderSide(color: Colors.cyanAccent, width: 1.5),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                         foregroundColor: Colors.cyanAccent,
                       ),
                       icon: Icon(Icons.groups_rounded, size: 22),
                       label: Text(
                         AppLocalizations.of(context)!.composerLesEquipes,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
                       ),
                       onPressed: () {
                         showDialog(
@@ -30199,52 +30764,71 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        gradient: canStart
-                            ? LinearGradient(
-                                colors: [Color(0xFF00B09B), Color(0xFF96C93D)],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              )
-                            : null,
+                        gradient:
+                            canStart
+                                ? LinearGradient(
+                                  colors: [
+                                    Color(0xFF00B09B),
+                                    Color(0xFF96C93D),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                )
+                                : null,
                         color: canStart ? null : Colors.white12,
-                        boxShadow: canStart
-                            ? [
-                                BoxShadow(
-                                  color: Color(0xFF00B09B).withValues(alpha: 0.45),
-                                  blurRadius: 14,
-                                  offset: Offset(0, 4),
-                                ),
-                              ]
-                            : [],
+                        boxShadow:
+                            canStart
+                                ? [
+                                  BoxShadow(
+                                    color: Color(
+                                      0xFF00B09B,
+                                    ).withValues(alpha: 0.45),
+                                    blurRadius: 14,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ]
+                                : [],
                       ),
                       child: ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,
-                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 16,
+                            horizontal: 20,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                         ),
-                        onPressed: canStart
-                            ? () {
-                                HapticFeedback.mediumImpact();
-                                _firebaseService.startGame(gameCode).catchError(
-                                  (e) {
-                                    if (mounted) {
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur, [e]),
-                                          ),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                );
-                              }
-                            : null,
+                        onPressed:
+                            canStart
+                                ? () {
+                                  HapticFeedback.mediumImpact();
+                                  _firebaseService
+                                      .startGame(gameCode)
+                                      .catchError((e) {
+                                        if (mounted) {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                GameContentLocalization.format(
+                                                  context,
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.erreur,
+                                                  [e],
+                                                ),
+                                              ),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        }
+                                      });
+                                }
+                                : null,
                         icon: Icon(
                           Icons.play_arrow_rounded,
                           size: 26,
@@ -30266,16 +30850,25 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                       margin: const EdgeInsets.only(bottom: 12),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        gradient: isCurrentPlayerReady
-                            ? LinearGradient(
-                                colors: [Colors.orange.shade800, Colors.red.shade700],
-                              )
-                            : LinearGradient(
-                                colors: [Colors.teal.shade600, Colors.green.shade600],
-                              ),
+                        gradient:
+                            isCurrentPlayerReady
+                                ? LinearGradient(
+                                  colors: [
+                                    Colors.orange.shade800,
+                                    Colors.red.shade700,
+                                  ],
+                                )
+                                : LinearGradient(
+                                  colors: [
+                                    Colors.teal.shade600,
+                                    Colors.green.shade600,
+                                  ],
+                                ),
                         boxShadow: [
                           BoxShadow(
-                            color: (isCurrentPlayerReady ? Colors.orange : Colors.green)
+                            color: (isCurrentPlayerReady
+                                    ? Colors.orange
+                                    : Colors.green)
                                 .withOpacity(0.35),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
@@ -30319,7 +30912,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 14,
+                        horizontal: 16,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(14),
@@ -30331,7 +30927,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                           SizedBox(
                             width: 16,
                             height: 16,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.amberAccent),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.amberAccent,
+                            ),
                           ),
                           SizedBox(width: 12),
                           Text(
@@ -30353,16 +30952,26 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPre
                       decoration: BoxDecoration(
                         color: Colors.amber.withOpacity(0.12),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.amber.withOpacity(0.5)),
+                        border: Border.all(
+                          color: Colors.amber.withOpacity(0.5),
+                        ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.info_outline_rounded, color: Colors.amber, size: 20),
+                          const Icon(
+                            Icons.info_outline_rounded,
+                            color: Colors.amber,
+                            size: 20,
+                          ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
                               requirementMessage,
-                              style: const TextStyle(color: Colors.amber, fontSize: 13, fontWeight: FontWeight.w600),
+                              style: const TextStyle(
+                                color: Colors.amber,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ],
@@ -30559,9 +31168,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: Text(
-              AppLocalizations.of(context)!.quitterLaPartie,
-            ),
+            title: Text(AppLocalizations.of(context)!.quitterLaPartie),
             content: Text(
               AppLocalizations.of(context)!.siVousQuittezVotrePlace,
             ),
@@ -30819,9 +31426,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   void _startStalePlayerCheck() {
-    _stalePlayerCheckTimer = Timer.periodic(Duration(seconds: 30), (
-      _,
-    ) async {
+    _stalePlayerCheckTimer = Timer.periodic(Duration(seconds: 30), (_) async {
       // Seul l'hôte vérifie les joueurs inactifs
       final gameSnap =
           await FirebaseFirestore.instance
@@ -31204,7 +31809,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         );
         final myData = playerData[playerId] ?? {};
 
-        final myRole = privateData['role'] ?? myData['role'] ?? AppLocalizations.of(context)!.chargement;
+        final myRole =
+            privateData['role'] ??
+            myData['role'] ??
+            AppLocalizations.of(context)!.chargement;
         final mySecretWord =
             privateData['secretWord'] ??
             myData['secretWord'] ??
@@ -31282,10 +31890,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                       children: [
                         Text(
                           AppLocalizations.of(context)!.capacites,
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 14,
-                          ),
+                          style: TextStyle(color: Colors.white70, fontSize: 14),
                         ),
                         Wrap(
                           spacing: 8.0,
@@ -31361,7 +31966,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
           default:
             mainContent = Center(
               child: Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.phaseDeJeuInconnue, [currentPhase]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.phaseDeJeuInconnue,
+                  [currentPhase],
+                ),
               ),
             );
         }
@@ -31396,9 +32005,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               ),
               SizedBox(height: 20),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.victoireDes, [
-                  winnerFaction,
-                ]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.victoireDes,
+                  [winnerFaction],
+                ),
                 style: Theme.of(
                   context,
                 ).textTheme.headlineSmall?.copyWith(color: Colors.amber),
@@ -31454,7 +32065,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                     ? "$pRole (${specialAbilities.join(', ')})"
                     : pRole;
             return Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.aEteElimineSonRole, [pName, roleDisplay]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.aEteElimineSonRole,
+                [pName, roleDisplay],
+              ),
               style: TextStyle(fontSize: 18, color: Colors.amber),
               textAlign: TextAlign.center,
             );
@@ -31469,11 +32084,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
             child: Text(AppLocalizations.of(context)!.continuer),
           )
         else
-          Center(
-            child: Text(
-              AppLocalizations.of(context)!.enAttenteDeLHote1,
-            ),
-          ),
+          Center(child: Text(AppLocalizations.of(context)!.enAttenteDeLHote1)),
       ],
     );
   }
@@ -31531,7 +32142,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   pId,
                 ),
             child: Text(
-              AppLocalizations.of(context)!.undercoverEliminatePlayer("${playerData[pId]['name']}"),
+              AppLocalizations.of(
+                context,
+              )!.undercoverEliminatePlayer("${playerData[pId]['name']}"),
             ),
           ),
         ),
@@ -31540,24 +32153,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
   }
 
   static Map<String, String> get _undercoverRoleDescriptions => {
-    _l10n.fouDeJoie:
-        _l10n.siVousEtesLePremier,
-    _l10n.boomerang:
-        _l10n.laPremiereFoisQueLa,
-    _l10n.deesseDeLaJustice:
-        _l10n.enCasDEgaliteLors,
-    _l10n.fantome:
-        _l10n.memeApresVotreEliminationVous,
-    _l10n.amoureux:
-        _l10n.unAutreJoueurEstSecretement,
-    _l10n.mrMeme:
-        _l10n.auLieuDeDonnerUn,
-    _l10n.vendeurDeFalafels:
-        _l10n.vousNAvezPasDe1,
-    _l10n.vengeuse:
-        _l10n.siVousEtesElimineeVous,
-    _l10n.duellistes:
-        _l10n.unAutreJoueurEstVotre,
+    _l10n.fouDeJoie: _l10n.siVousEtesLePremier,
+    _l10n.boomerang: _l10n.laPremiereFoisQueLa,
+    _l10n.deesseDeLaJustice: _l10n.enCasDEgaliteLors,
+    _l10n.fantome: _l10n.memeApresVotreEliminationVous,
+    _l10n.amoureux: _l10n.unAutreJoueurEstSecretement,
+    _l10n.mrMeme: _l10n.auLieuDeDonnerUn,
+    _l10n.vendeurDeFalafels: _l10n.vousNAvezPasDe1,
+    _l10n.vengeuse: _l10n.siVousEtesElimineeVous,
+    _l10n.duellistes: _l10n.unAutreJoueurEstVotre,
   };
 
   void _showRoleDescriptionDialog(BuildContext context, String roleName) {
@@ -31608,9 +32212,11 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
         Text(
           isMyTurn
               ? AppLocalizations.of(context)!.cEstAToiDe1
-              : GameContentLocalization.format(context, AppLocalizations.of(context)!.auTourDe, [
-                currentPlayerName,
-              ]),
+              : GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.auTourDe,
+                [currentPlayerName],
+              ),
           style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
@@ -31736,7 +32342,9 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
               Map<String, String> suspects = {};
               if (snap.hasData && snap.data!.snapshot.value != null) {
                 try {
-                  final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                  final raw = Map<String, dynamic>.from(
+                    snap.data!.snapshot.value as Map,
+                  );
                   raw.forEach((sId, data) {
                     if (data is Map && data['suspectId'] != null) {
                       suspects[sId] = data['suspectId'].toString();
@@ -31762,22 +32370,39 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen>
                   SizedBox(height: 4),
                   Wrap(
                     spacing: 6,
-                    children: suspects.entries.map((entry) {
-                      final accuserName = playerData[entry.key]?['name'] ?? AppLocalizations.of(context)!.joueur;
-                      final targetName = playerData[entry.value]?['name'] ?? AppLocalizations.of(context)!.suspect;
-                      return Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: Colors.amber.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
-                        ),
-                        child: Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne, [accuserName, targetName]),
-                          style: TextStyle(color: Colors.amberAccent, fontSize: 11),
-                        ),
-                      );
-                    }).toList(),
+                    children:
+                        suspects.entries.map((entry) {
+                          final accuserName =
+                              playerData[entry.key]?['name'] ??
+                              AppLocalizations.of(context)!.joueur;
+                          final targetName =
+                              playerData[entry.value]?['name'] ??
+                              AppLocalizations.of(context)!.suspect;
+                          return Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.amber.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.amberAccent.withOpacity(0.5),
+                              ),
+                            ),
+                            child: Text(
+                              GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.soupconne,
+                                [accuserName, targetName],
+                              ),
+                              style: TextStyle(
+                                color: Colors.amberAccent,
+                                fontSize: 11,
+                              ),
+                            ),
+                          );
+                        }).toList(),
                   ),
                 ],
               );
@@ -31801,9 +32426,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
               child: Text(AppLocalizations.of(context)!.lancerLeVote),
             )
           else
-            Text(
-              AppLocalizations.of(context)!.debattezLHoteLanceraLe,
-            ),
+            Text(AppLocalizations.of(context)!.debattezLHoteLanceraLe),
         ] else if (currentPhase == 'voting') ...[
           Text(
             AppLocalizations.of(context)!.aQuiLaSentence,
@@ -31857,7 +32480,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
       if (!votesReceived.containsKey(targetId)) {
         votesReceived[targetId] = [];
       }
-      votesReceived[targetId]!.add(playerData[voterId]?['name'] ?? AppLocalizations.of(context)!.anonyme);
+      votesReceived[targetId]!.add(
+        playerData[voterId]?['name'] ?? AppLocalizations.of(context)!.anonyme,
+      );
     });
 
     final Map<String, IconData> roleIcons = {
@@ -31991,7 +32616,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
                           children: [
                             Chip(
                               label: Text(
-                                AppLocalizations.of(context)!.undercoverVoteCount('${voters.length}'),
+                                AppLocalizations.of(
+                                  context,
+                                )!.undercoverVoteCount('${voters.length}'),
                                 style: TextStyle(fontSize: 10),
                               ),
                               padding: EdgeInsets.zero,
@@ -32031,7 +32658,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                AppLocalizations.of(context)!.permissionRefuseeImpossibleDAcceder,
+                AppLocalizations.of(
+                  context,
+                )!.permissionRefuseeImpossibleDAcceder,
               ),
             ),
           );
@@ -32043,11 +32672,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
       final int photosToPick =
           gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20;
       final String mediaType =
-          gameData['photoRouletteSettings']?['mediaType'] ?? AppLocalizations.of(context)!.photos;
+          gameData['photoRouletteSettings']?['mediaType'] ??
+          AppLocalizations.of(context)!.photos;
 
       RequestType requestType = RequestType.image;
-      if (mediaType == AppLocalizations.of(context)!.videos) requestType = RequestType.video;
-      if (mediaType == AppLocalizations.of(context)!.mixte) requestType = RequestType.common;
+      if (mediaType == AppLocalizations.of(context)!.videos)
+        requestType = RequestType.video;
+      if (mediaType == AppLocalizations.of(context)!.mixte)
+        requestType = RequestType.common;
 
       List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(
         type: requestType,
@@ -32077,9 +32709,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                AppLocalizations.of(context)!.votreGalerieEstVide,
-              ),
+              content: Text(AppLocalizations.of(context)!.votreGalerieEstVide),
             ),
           );
           setState(() => _isUploading = false);
@@ -32119,8 +32749,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
             SnackBar(
               content: Text(
                 uploadedUrls.isEmpty
-                      ? AppLocalizations.of(context)!.echecDeLUploadDes
-                      : AppLocalizations.of(context)!.ilFautAuMoins3,
+                    ? AppLocalizations.of(context)!.echecDeLUploadDes
+                    : AppLocalizations.of(context)!.ilFautAuMoins3,
               ),
             ),
           );
@@ -32131,7 +32761,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              AppLocalizations.of(context)!.erreurLorsDeLaSelection.replaceAll("{0}", e.toString()),
+              AppLocalizations.of(
+                context,
+              )!.erreurLorsDeLaSelection.replaceAll("{0}", e.toString()),
             ),
           ),
         );
@@ -32205,7 +32837,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
             ),
             SizedBox(height: 20),
             Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.lApplicationVaSelectionnerPhotos, [gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.lApplicationVaSelectionnerPhotos,
+                [gameData['photoRouletteSettings']?['photosPerPlayer'] ?? 20],
+              ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
@@ -32237,7 +32873,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
               ),
             SizedBox(height: 30),
             Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursPrets, [readyPlayers.length, players.length]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.joueursPrets,
+                [readyPlayers.length, players.length],
+              ),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             ...players.keys.map((pId) {
@@ -32264,9 +32904,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
 
         if (photoUrl == null || startTime == null)
           return Center(
-            child: Text(
-              AppLocalizations.of(context)!.chargementDeLaPhoto,
-            ),
+            child: Text(AppLocalizations.of(context)!.chargementDeLaPhoto),
           );
 
         if (isHost) {
@@ -32315,7 +32953,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
               flex: 2,
               child:
                   hasVoted
-                      ? _buildWaitingWidget(AppLocalizations.of(context)!.vousAvezVote, players, 0, 0)
+                      ? _buildWaitingWidget(
+                        AppLocalizations.of(context)!.vousAvezVote,
+                        players,
+                        0,
+                        0,
+                      )
                       : GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -32360,16 +33003,15 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
         );
         final String correctOwnerId = gameData['currentPhoto']['ownerId'];
         final String correctOwnerName =
-            players[correctOwnerId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+            players[correctOwnerId]?['name'] ??
+            AppLocalizations.of(context)!.inconnu;
         final String photoUrl = gameData['currentPhoto']['url'];
         final startTime =
             (gameData['roundResultsTimestamp'] as Timestamp?)?.toDate();
 
         if (startTime == null)
           return Center(
-            child: Text(
-              AppLocalizations.of(context)!.calculDesResultats,
-            ),
+            child: Text(AppLocalizations.of(context)!.calculDesResultats),
           );
 
         if (isHost) {
@@ -32384,7 +33026,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
         return Column(
           children: [
             Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.laPhotoEtaitA, [correctOwnerName]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.laPhotoEtaitA,
+                [correctOwnerName],
+              ),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             StreamBuilder(
@@ -32432,7 +33078,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
                           children: [
                             if (wasCorrect)
                               Text(
-                                GameContentLocalization.format(context, AppLocalizations.of(context)!.pts, [scoreGained]),
+                                GameContentLocalization.format(
+                                  context,
+                                  AppLocalizations.of(context)!.pts,
+                                  [scoreGained],
+                                ),
                                 style: TextStyle(
                                   color: Colors.greenAccent,
                                   fontWeight: FontWeight.bold,
@@ -32476,7 +33126,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
                   ),
                   SizedBox(height: 10),
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.leGagnantEst, [winnerName]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.leGagnantEst,
+                      [winnerName],
+                    ),
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Colors.amberAccent,
                     ),
@@ -32491,15 +33145,17 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.soupconne,
                     String name = entry.value.value['name'];
                     int score = entry.value.value['score'];
                     return Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [rank, name, score]),
-);
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.points,
+                        [rank, name, score],
+                      ),
+                    );
                   }),
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _safePopToFirst,
-                    child: Text(
-                      AppLocalizations.of(context)!.retourALAccueil,
-                    ),
+                    child: Text(AppLocalizations.of(context)!.retourALAccueil),
                   ),
                 ],
               ),
@@ -32508,7 +33164,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
         );
 
       default:
-        return _buildWaitingWidget(AppLocalizations.of(context)!.chargementDeLaPartie, players, 0, 0);
+        return _buildWaitingWidget(
+          AppLocalizations.of(context)!.chargementDeLaPartie,
+          players,
+          0,
+          0,
+        );
     }
   }
 
@@ -32588,9 +33249,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
             return Scaffold(
               body: Center(
                 child: Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur, [
-                    snapshot.error,
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.erreur,
+                    [snapshot.error],
+                  ),
                 ),
               ),
             );
@@ -32601,9 +33264,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
             });
             return Scaffold(
               body: Center(
-                child: Text(
-                  AppLocalizations.of(context)!.laPartieAEteTerminee,
-                ),
+                child: Text(AppLocalizations.of(context)!.laPartieAEteTerminee),
               ),
             );
           }
@@ -32635,7 +33296,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
 
                 final String? winnerId = gameData['gameWinner'];
                 final bool isWin = (winnerId == myId);
-                final String currentGame = gameData['gameType'] ?? AppLocalizations.of(context)!.inconnu;
+                final String currentGame =
+                    gameData['gameType'] ??
+                    AppLocalizations.of(context)!.inconnu;
 
                 // Calcul personnalisé de l'XP en fonction des actions spécifiques au jeu
                 final xpCalc = GameXpHelper.calculateXp(
@@ -32925,7 +33588,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
                             child: _buildPersistentChatInput(
                               widget.gameCode,
                               playerId,
-                              players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur,
+                              players[playerId]?['name'] ??
+                                  AppLocalizations.of(context)!.joueur,
                               gameData,
                             ),
                           )
@@ -33012,9 +33676,15 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.jeuDe, [
+                                                    GameContentLocalization.format(
+                                                      context,
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.jeuDe,
+                                                      [
                                                         players[_viewedOpponentId]?['name'],
-                                                      ]),
+                                                      ],
+                                                    ),
                                                     style: TextStyle(
                                                       color: Colors.white70,
                                                       fontWeight:
@@ -33078,7 +33748,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
                         child: FloatingChatOverlay(
                           gameCode: widget.gameCode,
                           playerId: playerId,
-                          playerName: players[playerId]?['name'] ?? AppLocalizations.of(context)!.joueur,
+                          playerName:
+                              players[playerId]?['name'] ??
+                              AppLocalizations.of(context)!.joueur,
                           gameData: gameData,
                         ),
                       ),
@@ -33131,7 +33803,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
       gameData['players'] ?? {},
     );
     final String judgeId = gameData['bmcJudgeId'] ?? '';
-    final String judgeName = players[judgeId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+    final String judgeName =
+        players[judgeId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
     final bool amIJudge = (playerId == judgeId);
     final String question = gameData['bmcQuestion'] ?? '...';
     final Map<String, dynamic> playedCards = Map<String, dynamic>.from(
@@ -33153,7 +33826,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
         gameTitle: "Blanc Manger Coco",
         winnerId: winnerId,
         winnerName: players[winnerId]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.scoreCibleAtteint,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.scoreCibleAtteint,
         players: players,
         customScores: scores.map((k, v) => MapEntry(k, (v as num).toInt())),
         gameData: gameData,
@@ -33191,7 +33866,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
                   Text(
                     amIJudge
                         ? AppLocalizations.of(context)!.vousEtesLeJuge
-                        : GameContentLocalization.format(context, AppLocalizations.of(context)!.jugeCeTour, [judgeName]),
+                        : GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.jugeCeTour,
+                          [judgeName],
+                        ),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -33200,9 +33879,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
                 ],
               ),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.objectifPts, [
-                  targetScore,
-                ]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.objectifPts,
+                  [targetScore],
+                ),
                 style: TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ],
@@ -33302,7 +33983,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
           ),
           SizedBox(height: 8),
           Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursOntRepondu, [playedCount, nonJudgeCount]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.joueursOntRepondu,
+              [playedCount, nonJudgeCount],
+            ),
             style: TextStyle(
               fontSize: 16,
               color: Colors.white70,
@@ -33345,7 +34030,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.points, [r
           ),
           SizedBox(height: 16),
           Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttenteDesAutresJoueurs1, [playedCount, nonJudgeCount]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.enAttenteDesAutresJoueurs1,
+              [playedCount, nonJudgeCount],
+            ),
             style: TextStyle(color: Colors.white54),
           ),
         ],
@@ -33436,9 +34125,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttenteD
     String playerId, [
     String question = '',
   ]) {
-    final int seed = question.isNotEmpty
-        ? (question.hashCode ^ judgeId.hashCode)
-        : (playedCards.keys.join().hashCode ^ judgeId.hashCode);
+    final int seed =
+        question.isNotEmpty
+            ? (question.hashCode ^ judgeId.hashCode)
+            : (playedCards.keys.join().hashCode ^ judgeId.hashCode);
     final List<MapEntry<String, dynamic>> entries =
         playedCards.entries.toList()..shuffle(Random(seed));
 
@@ -33472,14 +34162,23 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttenteD
             if (inspectedCard != null && !amIJudge) ...[
               SizedBox(height: 6),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.amber.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+                  border: Border.all(
+                    color: Colors.amberAccent.withOpacity(0.5),
+                  ),
                 ),
                 child: Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesiteSur, [inspectedCard]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.leJugeHesiteSur,
+                    [inspectedCard],
+                  ),
                   style: TextStyle(
                     color: Colors.amberAccent,
                     fontSize: 12,
@@ -33516,7 +34215,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesi
                               );
                               setState(() => _isActionPending = true);
                               _firebaseService
-                                  .judgeBMCWinner(widget.gameCode, winnerPlayerId)
+                                  .judgeBMCWinner(
+                                    widget.gameCode,
+                                    winnerPlayerId,
+                                  )
                                   .whenComplete(() {
                                     _firebaseService.updateJudgeCardInspectLive(
                                       widget.gameCode,
@@ -33535,16 +34237,20 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesi
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: isInspected
-                              ? Colors.amberAccent
-                              : (amIJudge ? Colors.amber : Colors.transparent),
+                          color:
+                              isInspected
+                                  ? Colors.amberAccent
+                                  : (amIJudge
+                                      ? Colors.amber
+                                      : Colors.transparent),
                           width: isInspected ? 3.5 : (amIJudge ? 2 : 0),
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: isInspected
-                                ? Colors.amberAccent.withOpacity(0.6)
-                                : Colors.black26,
+                            color:
+                                isInspected
+                                    ? Colors.amberAccent.withOpacity(0.6)
+                                    : Colors.black26,
                             blurRadius: isInspected ? 12 : 6,
                             spreadRadius: isInspected ? 2 : 0,
                             offset: Offset(0, 3),
@@ -33613,7 +34319,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesi
             child: TextField(
               controller: _chatController,
               decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.envoyerUnMessageOuProposer,
+                hintText:
+                    AppLocalizations.of(context)!.envoyerUnMessageOuProposer,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -33697,7 +34404,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesi
 
     final message = GameMessageLocalization.tr(
       context,
-      lastAuto['message'] ?? AppLocalizations.of(context)!.coupAutomatiqueJouePourCause,
+      lastAuto['message'] ??
+          AppLocalizations.of(context)!.coupAutomatiqueJouePourCause,
     );
     return Container(
       width: double.infinity,
@@ -33749,8 +34457,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesi
     }
 
     final String targetPlayerId = pending['playerId'] ?? '';
-    final String targetPlayerName = pending['playerName'] ?? AppLocalizations.of(context)!.unJoueur;
-    final String reason = pending['reason'] ?? AppLocalizations.of(context)!.inactivite;
+    final String targetPlayerName =
+        pending['playerName'] ?? AppLocalizations.of(context)!.unJoueur;
+    final String reason =
+        pending['reason'] ?? AppLocalizations.of(context)!.inactivite;
     final bool isSocial = pending['isSocial'] == true;
 
     return Container(
@@ -33792,12 +34502,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesi
           ),
           SizedBox(height: 8),
           Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.neJouePlusVoulezVous, [targetPlayerName, reason]),
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 13,
-              height: 1.3,
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.neJouePlusVoulezVous,
+              [targetPlayerName, reason],
             ),
+            style: TextStyle(color: Colors.white, fontSize: 13, height: 1.3),
           ),
           if (isSocial)
             Padding(
@@ -34048,9 +34758,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesi
                 minHeight: 20,
               ),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.s, [
-                  remainingSeconds,
-                ]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.s,
+                  [remainingSeconds],
+                ),
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -34454,7 +35166,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeHesi
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.cartesRestantes, [hand.length]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.cartesRestantes,
+                [hand.length],
+              ),
               style: TextStyle(color: Colors.white70, fontSize: 11),
             ),
             SizedBox(height: 4),
@@ -34469,7 +35185,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.cartesRest
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.cartesRestantes, [count]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.cartesRestantes,
+                [count],
+              ),
               style: TextStyle(color: Colors.white70, fontSize: 11),
             ),
             SizedBox(height: 4),
@@ -34485,7 +35205,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.cartesRest
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.cartesRestantes, [handUno.length]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.cartesRestantes,
+                [handUno.length],
+              ),
               style: TextStyle(color: Colors.white70, fontSize: 11),
             ),
             SizedBox(height: 4),
@@ -34503,7 +35227,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.cartesRest
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.jetonsMise, [chips, bet]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.jetonsMise,
+                [chips, bet],
+              ),
               style: TextStyle(color: Colors.amberAccent, fontSize: 11),
             ),
             SizedBox(height: 4),
@@ -34534,7 +35262,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.jetonsMise
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.cartesRestantes, [ramiHand.length]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.cartesRestantes,
+                [ramiHand.length],
+              ),
               style: TextStyle(color: Colors.white70, fontSize: 11),
             ),
             SizedBox(height: 4),
@@ -34595,7 +35327,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.cartesRest
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.totalPts, [oppTotal]),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.totalPts,
+                        [oppTotal],
+                      ),
                       style: TextStyle(
                         color: Colors.amberAccent,
                         fontWeight: FontWeight.bold,
@@ -34603,11 +35339,15 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.totalPts, 
                       ),
                     ),
                     Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.sectionSup,
-[AppLocalizations.of(context)!.k63Pts(oppUpper, oppBonus > 0 ? '(+35)' : '')],
-),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.sectionSup,
+                        [
+                          AppLocalizations.of(
+                            context,
+                          )!.k63Pts(oppUpper, oppBonus > 0 ? '(+35)' : ''),
+                        ],
+                      ),
                       style: TextStyle(
                         color:
                             oppBonus > 0 ? Colors.greenAccent : Colors.white70,
@@ -34615,11 +35355,12 @@ AppLocalizations.of(context)!.sectionSup,
                       ),
                     ),
                     Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplies, [oppScores.length]),
-                      style: TextStyle(
-                        color: Colors.white54,
-                        fontSize: 11,
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.k13Remplies,
+                        [oppScores.length],
                       ),
+                      style: TextStyle(color: Colors.white54, fontSize: 11),
                     ),
                   ],
                 ),
@@ -34657,7 +35398,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                               ),
                             ),
                             child: Text(
-                              AppLocalizations.of(context)!.str8f522b(cat, hasScore ? '$scoreVal' : '—'),
+                              AppLocalizations.of(
+                                context,
+                              )!.str8f522b(cat, hasScore ? '$scoreVal' : '—'),
                               style: TextStyle(
                                 fontSize: 10.5,
                                 fontWeight:
@@ -34714,7 +35457,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
         gameData['roundScores'] ?? {},
       );
       final roundEnderId = gameData['roundEnderId'];
-      final roundEnderName = players[roundEnderId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+      final roundEnderName =
+          players[roundEnderId]?['name'] ??
+          AppLocalizations.of(context)!.inconnu;
 
       List<MapEntry<String, dynamic>> sortedPlayersByTotal =
           totalScores.entries.toList()
@@ -34754,11 +35499,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                Icons.flag_rounded,
-                size: 48,
-                color: Colors.cyanAccent,
-              ),
+              Icon(Icons.flag_rounded, size: 48, color: Colors.cyanAccent),
               SizedBox(height: 8),
               Text(
                 AppLocalizations.of(context)!.finDeLaManche,
@@ -34769,7 +35510,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
               ),
               SizedBox(height: 4),
               Text(
-                AppLocalizations.of(context)!.skyjoRoundEnderNotice(roundEnderName),
+                AppLocalizations.of(
+                  context,
+                )!.skyjoRoundEnderNotice(roundEnderName),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white70, fontSize: 13),
               ),
@@ -34777,7 +35520,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
               Divider(color: Colors.white24),
               SizedBox(height: 6),
               ...sortedPlayersByTotal.map((entry) {
-                final pName = players[entry.key]?['name'] ?? AppLocalizations.of(context)!.joueur;
+                final pName =
+                    players[entry.key]?['name'] ??
+                    AppLocalizations.of(context)!.joueur;
                 final rScore = roundScores[entry.key] ?? 0;
                 final tScore = entry.value;
                 return Container(
@@ -34801,11 +35546,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context)!.skyjoRoundScoreNotice('$rScore', '$tScore'),
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                        ),
+                        AppLocalizations.of(
+                          context,
+                        )!.skyjoRoundScoreNotice('$rScore', '$tScore'),
+                        style: TextStyle(color: Colors.white70, fontSize: 12),
                       ),
                     ],
                   ),
@@ -34825,9 +35569,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                               strokeWidth: 2,
                             ),
                           )
-                          : Text(
-                            AppLocalizations.of(context)!.mancheSuivante,
-                          ),
+                          : Text(AppLocalizations.of(context)!.mancheSuivante),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green[700],
                     padding: const EdgeInsets.symmetric(
@@ -34912,11 +35654,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.skyjoCardsRevealedCount('$revealedCount'),
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 12,
-                      ),
+                      AppLocalizations.of(
+                        context,
+                      )!.skyjoCardsRevealedCount('$revealedCount'),
+                      style: TextStyle(color: Colors.white70, fontSize: 12),
                     ),
                   ],
                 ),
@@ -34949,20 +35690,27 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
     if (isMyTurn) {
       if (drawnCard != null) {
         if (_zeroPointeAction == 'use_drawn') {
-          instructions = AppLocalizations.of(context)!.skyjoReplaceWithDrawn('$drawnCard');
+          instructions = AppLocalizations.of(
+            context,
+          )!.skyjoReplaceWithDrawn('$drawnCard');
           instructionColor = Colors.greenAccent;
         } else if (_zeroPointeAction == 'discard_drawn') {
           instructions = AppLocalizations.of(context)!.skyjoTapHiddenToReveal;
           instructionColor = Colors.orangeAccent;
         } else {
-          instructions = AppLocalizations.of(context)!.skyjoChooseActionForDrawn('$drawnCard');
+          instructions = AppLocalizations.of(
+            context,
+          )!.skyjoChooseActionForDrawn('$drawnCard');
         }
       } else {
         if (_zeroPointeAction == 'take_discard') {
-          instructions = AppLocalizations.of(context)!.skyjoReplaceWithDiscard('${discardPile.isNotEmpty ? discardPile.last : 0}');
+          instructions = AppLocalizations.of(context)!.skyjoReplaceWithDiscard(
+            '${discardPile.isNotEmpty ? discardPile.last : 0}',
+          );
           instructionColor = Colors.amberAccent;
         } else {
-          instructions = AppLocalizations.of(context)!.prenezLaDefausseVisibleOu;
+          instructions =
+              AppLocalizations.of(context)!.prenezLaDefausseVisibleOu;
         }
       }
     }
@@ -35016,10 +35764,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                   ),
                   child: Text(
                     AppLocalizations.of(context)!.annuler,
-                    style: TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 11,
-                    ),
+                    style: TextStyle(color: Colors.redAccent, fontSize: 11),
                   ),
                 ),
             ],
@@ -35411,10 +36156,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
     final Map<String, dynamic> players = Map.from(gameData['players'] ?? {});
     final int playerCount = players.length;
     final isHost = gameData['hostId'] == playerId;
-    final String gribouillisMode = gameData['gribouillisMode'] ?? AppLocalizations.of(context)!.normal;
-    final bool isComplementMode = gribouillisMode.toLowerCase().contains('compl') ||
+    final String gribouillisMode =
+        gameData['gribouillisMode'] ?? AppLocalizations.of(context)!.normal;
+    final bool isComplementMode =
+        gribouillisMode.toLowerCase().contains('compl') ||
         gribouillisMode == AppLocalizations.of(context)!.complement;
-    final bool isBriseGlaceMode = gribouillisMode.toLowerCase().contains('brise') ||
+    final bool isBriseGlaceMode =
+        gribouillisMode.toLowerCase().contains('brise') ||
         gribouillisMode.toLowerCase().contains('ice') ||
         gribouillisMode == AppLocalizations.of(context)!.briseGlace;
     final bool ajouter1 = gameData['gribouillisSettings']?['ajouter1'] ?? false;
@@ -35427,9 +36175,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
       );
       if (playerOrder.isEmpty)
         return Center(
-          child: Text(
-            AppLocalizations.of(context)!.aucunAlbumAAfficher,
-          ),
+          child: Text(AppLocalizations.of(context)!.aucunAlbumAAfficher),
         );
 
       final int serverPageIndex = gameData['gribouillisResultPageIndex'] ?? 0;
@@ -35468,7 +36214,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
               },
               itemBuilder: (context, pageIndex) {
                 final ownerId = playerOrder[pageIndex];
-                final ownerName = players[ownerId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+                final ownerName =
+                    players[ownerId]?['name'] ??
+                    AppLocalizations.of(context)!.inconnu;
                 final albumSteps = List<Map<String, dynamic>>.from(
                   albums[ownerId] ?? [],
                 );
@@ -35499,7 +36247,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                           ),
                         ),
                         child: Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.albumDe, [ownerName]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.albumDe,
+                            [ownerName],
+                          ),
                           style: TextStyle(
                             color: Colors.brown[800],
                             fontSize: 20,
@@ -35538,10 +36290,28 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                                       SizedBox(width: 5),
                                       Text(
                                         index == 0
-                                            ? GameContentLocalization.format(context, AppLocalizations.of(context)!.departPar, [authorName])
+                                            ? GameContentLocalization.format(
+                                              context,
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.departPar,
+                                              [authorName],
+                                            )
                                             : (isDrawing
-                                                ? GameContentLocalization.format(context, AppLocalizations.of(context)!.dessinePar, [authorName])
-                                                : GameContentLocalization.format(context, AppLocalizations.of(context)!.devinePar, [authorName])),
+                                                ? GameContentLocalization.format(
+                                                  context,
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.dessinePar,
+                                                  [authorName],
+                                                )
+                                                : GameContentLocalization.format(
+                                                  context,
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.devinePar,
+                                                  [authorName],
+                                                )),
                                         style: TextStyle(
                                           color: Colors.grey[600],
                                           fontSize: 12,
@@ -35587,7 +36357,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                                   else
                                     Center(
                                       child: Text(
-                                        AppLocalizations.of(context)!.aa(step['content']),
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.aa(step['content']),
                                         style: TextStyle(
                                           fontSize: 20,
                                           color: Colors.black87,
@@ -35628,10 +36400,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                   label: Text(AppLocalizations.of(context)!.prec),
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.album, [
-                    serverPageIndex + 1,
-                    playerOrder.length,
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.album,
+                    [serverPageIndex + 1, playerOrder.length],
+                  ),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 ElevatedButton.icon(
@@ -35735,8 +36508,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
             )
           else
             Text(
-              gribouillisMode ==
-                      AppLocalizations.of(context)!.briseGlace
+              gribouillisMode == AppLocalizations.of(context)!.briseGlace
                   ? AppLocalizations.of(context)!.ecrisUnThemeOuUne
                   : AppLocalizations.of(context)!.imagineUnePhrase,
               style: Theme.of(context).textTheme.headlineSmall,
@@ -35772,7 +36544,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
     if (roundState == 'initial_drawing' || roundState == 'drawing') {
       String promptText;
       if (stepToProcess != null && stepToProcess['type'] == 'text') {
-        promptText = AppLocalizations.of(context)!.dessineCettePhrase(stepToProcess['content']);
+        promptText = AppLocalizations.of(
+          context,
+        )!.dessineCettePhrase(stepToProcess['content']);
       } else if (isComplementMode) {
         promptText = AppLocalizations.of(context)!.completeCeDessin;
       } else {
@@ -35818,9 +36592,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                 );
               }
             },
-            child: Text(
-              AppLocalizations.of(context)!.ouvrirLaZoneDeDessin,
-            ),
+            child: Text(AppLocalizations.of(context)!.ouvrirLaZoneDeDessin),
           ),
         ],
       );
@@ -35828,7 +36600,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
 
     return Center(
       child: Text(
-        GameContentLocalization.format(context, AppLocalizations.of(context)!.etatGribouillisInconnu, [roundState]),
+        GameContentLocalization.format(
+          context,
+          AppLocalizations.of(context)!.etatGribouillisInconnu,
+          [roundState],
+        ),
       ),
     );
   }
@@ -35869,7 +36645,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
     final bool isMyTeamTurn = (myTeamId == currentTeamId);
     final bool amIClueGiver = (playerId == clueGiverId);
     final bool amIOpponent = !isMyTeamTurn;
-    final String clueGiverName = players[clueGiverId]?['name'] ?? AppLocalizations.of(context)!.orateur;
+    final String clueGiverName =
+        players[clueGiverId]?['name'] ?? AppLocalizations.of(context)!.orateur;
 
     // Récupération des identifiants LiveKit
     final Map<String, String> playerLivekitIdentities = {};
@@ -35881,7 +36658,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
 
     Widget buildCompactParticipant(String pId) {
       final String? identity = playerLivekitIdentities[pId];
-      final String name = players[pId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+      final String name =
+          players[pId]?['name'] ?? AppLocalizations.of(context)!.joueur;
       final bool isGiver = (pId == clueGiverId);
       final bool isLocal = (pId == playerId);
       final bool isSameTeam = List<String>.from(
@@ -35957,11 +36735,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                         color: Colors.amber,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
-                        Icons.mic,
-                        size: 10,
-                        color: Colors.black,
-                      ),
+                      child: Icon(Icons.mic, size: 10, color: Colors.black),
                     ),
                   ),
               ],
@@ -36015,7 +36789,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                       ),
                       SizedBox(width: 6),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.eq1Pts, [tabooScores['team_0'] ?? 0]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.eq1Pts,
+                          [tabooScores['team_0'] ?? 0],
+                        ),
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -36043,7 +36821,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
                       ),
                       SizedBox(width: 6),
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.eq2Pts, [tabooScores['team_1'] ?? 0]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.eq2Pts,
+                          [tabooScores['team_1'] ?? 0],
+                        ),
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -36065,11 +36847,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.k13Remplie
               Spacer(),
               // Statut manche
               Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.manche1,
-[(gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1, (gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4],
-),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.manche1,
+                  [
+                    (gameData['tabooRoundNumber'] as num?)?.toInt() ?? 1,
+                    (gameData['tabooTotalRounds'] as num?)?.toInt() ?? 4,
+                  ],
+                ),
                 style: TextStyle(
                   color: Colors.white54,
                   fontSize: 11,
@@ -36124,8 +36909,20 @@ AppLocalizations.of(context)!.manche1,
                   amIClueGiver
                       ? AppLocalizations.of(context)!.vousEtesLOrateurFaites
                       : (isMyTeamTurn
-                          ? GameContentLocalization.format(context, AppLocalizations.of(context)!.faitDevinerAVotreEquipe, [clueGiverName])
-                          : GameContentLocalization.format(context, AppLocalizations.of(context)!.surveillezEtBuzzezEnCas, [clueGiverName])),
+                          ? GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(
+                              context,
+                            )!.faitDevinerAVotreEquipe,
+                            [clueGiverName],
+                          )
+                          : GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(
+                              context,
+                            )!.surveillezEtBuzzezEnCas,
+                            [clueGiverName],
+                          )),
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -36152,16 +36949,23 @@ AppLocalizations.of(context)!.manche1,
             String? buzzerPlayerId;
             if (snap.hasData && snap.data!.snapshot.value != null) {
               try {
-                final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                final raw = Map<String, dynamic>.from(
+                  snap.data!.snapshot.value as Map,
+                );
                 buzzerPlayerId = raw['playerId'] as String?;
               } catch (_) {}
             }
 
             if (buzzerPlayerId != null && buzzerPlayerId != playerId) {
-              final bName = players[buzzerPlayerId]?['name'] ?? AppLocalizations.of(context)!.lAdversaire;
+              final bName =
+                  players[buzzerPlayerId]?['name'] ??
+                  AppLocalizations.of(context)!.lAdversaire;
               return Container(
                 margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.redAccent.withOpacity(0.25),
                   borderRadius: BorderRadius.circular(14),
@@ -36180,7 +36984,11 @@ AppLocalizations.of(context)!.manche1,
                     Icon(Icons.touch_app, color: Colors.redAccent, size: 16),
                     SizedBox(width: 8),
                     Text(
-                      GameContentLocalization.format(context, AppLocalizations.of(context)!.aLeDoigtSurLe, [bName]),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.aLeDoigtSurLe,
+                        [bName],
+                      ),
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -36239,14 +37047,8 @@ AppLocalizations.of(context)!.manche1,
                         gradient: LinearGradient(
                           colors:
                               amIOpponent
-                                  ? [
-                                    Color(0xFF4A1020),
-                                    Color(0xFF2A0812),
-                                  ]
-                                  : [
-                                    Color(0xFF3B1366),
-                                    Color(0xFF1D0933),
-                                  ],
+                                  ? [Color(0xFF4A1020), Color(0xFF2A0812)]
+                                  : [Color(0xFF3B1366), Color(0xFF1D0933)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -36436,13 +37238,25 @@ AppLocalizations.of(context)!.manche1,
                 height: 54,
                 child: Listener(
                   onPointerDown: (_) {
-                    _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, true);
+                    _firebaseService.updateTabooBuzzerLive(
+                      widget.gameCode,
+                      playerId,
+                      true,
+                    );
                   },
                   onPointerUp: (_) {
-                    _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, false);
+                    _firebaseService.updateTabooBuzzerLive(
+                      widget.gameCode,
+                      playerId,
+                      false,
+                    );
                   },
                   onPointerCancel: (_) {
-                    _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, false);
+                    _firebaseService.updateTabooBuzzerLive(
+                      widget.gameCode,
+                      playerId,
+                      false,
+                    );
                   },
                   child: ElevatedButton.icon(
                     icon: Icon(Icons.warning_amber_rounded, size: 26),
@@ -36464,7 +37278,11 @@ AppLocalizations.of(context)!.manche1,
                     ),
                     onPressed: () {
                       HapticFeedback.heavyImpact();
-                      _firebaseService.updateTabooBuzzerLive(widget.gameCode, playerId, false);
+                      _firebaseService.updateTabooBuzzerLive(
+                        widget.gameCode,
+                        playerId,
+                        false,
+                      );
                       _firebaseService.tabooAction(
                         widget.gameCode,
                         playerId,
@@ -36531,7 +37349,9 @@ AppLocalizations.of(context)!.manche1,
     // --- ÉCRAN DE FIN DE PARTIE ---
     if (gameData['gameState'] == 'gameOver') {
       final loserId = gameData['zombieLoserId'];
-      final loserName = players[loserId]?['name'] ?? AppLocalizations.of(context)!.unSurvivant;
+      final loserName =
+          players[loserId]?['name'] ??
+          AppLocalizations.of(context)!.unSurvivant;
       final bool amILoser = loserId == playerId;
 
       return Center(
@@ -36542,8 +37362,7 @@ AppLocalizations.of(context)!.manche1,
             color: Color(0xFF1B0F1E),
             borderRadius: BorderRadius.circular(28),
             border: Border.all(
-              color:
-                  amILoser ? Color(0xFFEF4444) : Color(0xFF10B981),
+              color: amILoser ? Color(0xFFEF4444) : Color(0xFF10B981),
               width: 2.5,
             ),
             boxShadow: [
@@ -36561,10 +37380,7 @@ AppLocalizations.of(context)!.manche1,
               Icon(
                 amILoser ? Icons.coronavirus_rounded : Icons.shield_rounded,
                 size: 72,
-                color:
-                    amILoser
-                        ? Color(0xFFEF4444)
-                        : Color(0xFF10B981),
+                color: amILoser ? Color(0xFFEF4444) : Color(0xFF10B981),
               ),
               SizedBox(height: 14),
               Text(
@@ -36575,16 +37391,17 @@ AppLocalizations.of(context)!.manche1,
                   fontSize: 22,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 1.2,
-                  color:
-                      amILoser
-                          ? Color(0xFFFCA5A5)
-                          : Color(0xFF6EE7B7),
+                  color: amILoser ? Color(0xFFFCA5A5) : Color(0xFF6EE7B7),
                 ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 8),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.estResteAvecLeZombie, [loserName]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.estResteAvecLeZombie,
+                  [loserName],
+                ),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white70, fontSize: 14),
               ),
@@ -36621,9 +37438,12 @@ AppLocalizations.of(context)!.manche1,
         playerOrder.isNotEmpty ? playerOrder[targetIndex] : '';
     List<String> myHand = List<String>.from(hands[playerId] ?? []);
     List<String> targetHand = List<String>.from(hands[targetPlayerId] ?? []);
-    final targetName = players[targetPlayerId]?['name'] ?? AppLocalizations.of(context)!.voisin;
+    final targetName =
+        players[targetPlayerId]?['name'] ??
+        AppLocalizations.of(context)!.voisin;
 
-    final bool hasZombieInHand = myHand.contains('Zombie') ||
+    final bool hasZombieInHand =
+        myHand.contains('Zombie') ||
         myHand.contains(AppLocalizations.of(context)!.zombie1);
 
     return Container(
@@ -36680,8 +37500,7 @@ AppLocalizations.of(context)!.manche1,
                             ? Icons.pan_tool_rounded
                             : Icons.hourglass_top_rounded,
                         size: 16,
-                        color:
-                            isMyTurn ? Color(0xFFC084FC) : Colors.white60,
+                        color: isMyTurn ? Color(0xFFC084FC) : Colors.white60,
                       ),
                     ),
                     SizedBox(width: 8),
@@ -36691,26 +37510,33 @@ AppLocalizations.of(context)!.manche1,
                       children: [
                         Text(
                           isMyTurn
-                              ? GameContentLocalization.format(context, AppLocalizations.of(context)!.piochezChez, [targetName])
-                              : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '']),
+                              ? GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.piochezChez,
+                                [targetName],
+                              )
+                              : GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.tourDe,
+                                [players[currentPlayerId]?['name'] ?? ''],
+                              ),
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w900,
                             letterSpacing: 0.8,
                             color:
-                                isMyTurn
-                                    ? Color(0xFFFDE047)
-                                    : Colors.white70,
+                                isMyTurn ? Color(0xFFFDE047) : Colors.white70,
                           ),
                         ),
                         Text(
                           isMyTurn
-                              ? AppLocalizations.of(context)!.choisissezUneCarteFaceCachee
-                              : AppLocalizations.of(context)!.enAttenteDeLaPioche,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white38,
-                          ),
+                              ? AppLocalizations.of(
+                                context,
+                              )!.choisissezUneCarteFaceCachee
+                              : AppLocalizations.of(
+                                context,
+                              )!.enAttenteDeLaPioche,
+                          style: TextStyle(fontSize: 10, color: Colors.white38),
                         ),
                       ],
                     ),
@@ -36782,7 +37608,11 @@ AppLocalizations.of(context)!.manche1,
                             ),
                             SizedBox(width: 4),
                             Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.sauve, [players[pId]?['name'] ?? '']),
+                              GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.sauve,
+                                [players[pId]?['name'] ?? ''],
+                              ),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 10,
@@ -36824,7 +37654,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.sauve, [pl
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.mainDeCartes, [targetName, targetHand.length]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.mainDeCartes,
+                          [targetName, targetHand.length],
+                        ),
                         style: TextStyle(
                           color: Colors.white70,
                           fontSize: 13,
@@ -36943,7 +37777,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mainDeCart
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.votreMainDeSurvieCartes, [myHand.length]),
+                        GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.votreMainDeSurvieCartes,
+                          [myHand.length],
+                        ),
                         style: TextStyle(
                           color: Colors.white60,
                           fontSize: 11,
@@ -36952,7 +37790,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mainDeCart
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context)!.lesPairesSontDefausseesAutomatiquement,
+                        AppLocalizations.of(
+                          context,
+                        )!.lesPairesSontDefausseesAutomatiquement,
                         style: TextStyle(color: Colors.white30, fontSize: 10),
                       ),
                     ],
@@ -37058,7 +37898,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mainDeCart
         winnerId: winnerId,
         winnerName: resolvePlayerName(winnerId ?? ''),
         reason:
-            gameData['gameEndReason'] ?? AppLocalizations.of(context)!.laPartieDeBigTwo,
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.laPartieDeBigTwo,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -37089,7 +37930,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mainDeCart
                           snap.data!.snapshot.value as Map,
                         );
                         livePlayerId = raw['playerId'] as String?;
-                        liveCount = (raw['selectedCount'] as num?)?.toInt() ?? 0;
+                        liveCount =
+                            (raw['selectedCount'] as num?)?.toInt() ?? 0;
                       } catch (_) {}
                     }
 
@@ -37104,9 +37946,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mainDeCart
                         Text(
                           isMyTurn
                               ? AppLocalizations.of(context)!.cEstVotreTour
-                              : AppLocalizations.of(context)!.auTourDe2(resolvePlayerName(currentPlayerId)),
+                              : AppLocalizations.of(
+                                context,
+                              )!.auTourDe2(resolvePlayerName(currentPlayerId)),
                           style: TextStyle(
-                            color: isMyTurn ? Colors.greenAccent : Colors.white70,
+                            color:
+                                isMyTurn ? Colors.greenAccent : Colors.white70,
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
@@ -37135,11 +37980,17 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mainDeCart
                                 ),
                                 SizedBox(width: 6),
                                 Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.aSelectionneCarte,
-[resolvePlayerName(currentPlayerId), liveCount, liveCount > 1 ? 's' : ''],
-),
+                                  GameContentLocalization.format(
+                                    context,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.aSelectionneCarte,
+                                    [
+                                      resolvePlayerName(currentPlayerId),
+                                      liveCount,
+                                      liveCount > 1 ? 's' : '',
+                                    ],
+                                  ),
                                   style: TextStyle(
                                     color: Colors.amberAccent,
                                     fontSize: 12,
@@ -37170,11 +38021,11 @@ AppLocalizations.of(context)!.aSelectionneCarte,
                   ),
                   SizedBox(height: 10),
                   Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.jouePar,
-[resolvePlayerName(lastPlay['playedBy'] ?? '')],
-),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.jouePar,
+                      [resolvePlayerName(lastPlay['playedBy'] ?? '')],
+                    ),
                     style: TextStyle(fontSize: 12, color: Colors.white70),
                   ),
                 ] else
@@ -37212,11 +38063,12 @@ AppLocalizations.of(context)!.jouePar,
                                           else
                                             _selectedBigTwoCards.add(card);
                                         });
-                                        _firebaseService.updateBigTwoLiveSelection(
-                                          widget.gameCode,
-                                          playerId,
-                                          _selectedBigTwoCards.length,
-                                        );
+                                        _firebaseService
+                                            .updateBigTwoLiveSelection(
+                                              widget.gameCode,
+                                              playerId,
+                                              _selectedBigTwoCards.length,
+                                            );
                                       }
                                       : null,
                               child: Transform.translate(
@@ -37248,8 +38100,12 @@ AppLocalizations.of(context)!.jouePar,
                                 ? () => bigTwoPlay()
                                 : null,
                         child: Text(
-                        GameContentLocalization.format(context, AppLocalizations.of(context)!.jouer, [_selectedBigTwoCards.length]),
-                      ),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.jouer,
+                            [_selectedBigTwoCards.length],
+                          ),
+                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                         ),
@@ -37269,8 +38125,7 @@ AppLocalizations.of(context)!.jouePar,
     final (rank, suitKey) = FirebaseService.parseBigTwoCard(card);
 
     final bool isRed = (suitKey == 'H' || suitKey == 'D');
-    final Color textColor =
-        isRed ? Color(0xFFE11D48) : Color(0xFF0F172A);
+    final Color textColor = isRed ? Color(0xFFE11D48) : Color(0xFF0F172A);
 
     Widget buildSuitIcon(double size) {
       if (suitKey == 'H') {
@@ -37388,7 +38243,11 @@ AppLocalizations.of(context)!.jouePar,
 
   void bigTwoPlay() async {
     setState(() => _isActionPending = true);
-    _firebaseService.updateBigTwoLiveSelection(widget.gameCode, widget.playerId, 0);
+    _firebaseService.updateBigTwoLiveSelection(
+      widget.gameCode,
+      widget.playerId,
+      0,
+    );
     try {
       await _firebaseService.bigTwoAction(
         widget.gameCode,
@@ -37403,7 +38262,10 @@ AppLocalizations.of(context)!.jouePar,
           content: Text(
             GameMessageLocalization.tr(
               context,
-              e.toString().replaceAll(AppLocalizations.of(context)!.exception, ''),
+              e.toString().replaceAll(
+                AppLocalizations.of(context)!.exception,
+                '',
+              ),
             ),
           ),
         ),
@@ -37415,7 +38277,11 @@ AppLocalizations.of(context)!.jouePar,
 
   void bigTwoPass() async {
     setState(() => _isActionPending = true);
-    _firebaseService.updateBigTwoLiveSelection(widget.gameCode, widget.playerId, 0);
+    _firebaseService.updateBigTwoLiveSelection(
+      widget.gameCode,
+      widget.playerId,
+      0,
+    );
     try {
       await _firebaseService.bigTwoAction(
         widget.gameCode,
@@ -37428,7 +38294,10 @@ AppLocalizations.of(context)!.jouePar,
           content: Text(
             GameMessageLocalization.tr(
               context,
-              e.toString().replaceAll(AppLocalizations.of(context)!.exception, ''),
+              e.toString().replaceAll(
+                AppLocalizations.of(context)!.exception,
+                '',
+              ),
             ),
           ),
         ),
@@ -37461,7 +38330,9 @@ AppLocalizations.of(context)!.jouePar,
         gameTitle: AppLocalizations.of(context)!.actionOuVerite,
         winnerId: winnerId,
         winnerName: players[winnerId]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.laPartieEstTerminee,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.laPartieEstTerminee,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -37527,12 +38398,20 @@ AppLocalizations.of(context)!.jouePar,
             children: [
               Text(
                 isMyTurn
-                    ? GameContentLocalization.format(context, AppLocalizations.of(context)!.cEstVotreTour1, [
+                    ? GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.cEstVotreTour1,
+                      [
                         currentColor == 'red'
                             ? AppLocalizations.of(context)!.rouges
                             : AppLocalizations.of(context)!.noirs,
-                      ])
-                    : GameContentLocalization.format(context, AppLocalizations.of(context)!.auTourDe, [players[currentPlayerId]?['name'] ?? '...']),
+                      ],
+                    )
+                    : GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.auTourDe,
+                      [players[currentPlayerId]?['name'] ?? '...'],
+                    ),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -37569,19 +38448,33 @@ AppLocalizations.of(context)!.jouePar,
                     return Padding(
                       padding: const EdgeInsets.only(top: 6.0),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.amber.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+                          border: Border.all(
+                            color: Colors.amberAccent.withOpacity(0.5),
+                          ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.touch_app, color: Colors.amberAccent, size: 14),
+                            Icon(
+                              Icons.touch_app,
+                              color: Colors.amberAccent,
+                              size: 14,
+                            ),
                             SizedBox(width: 6),
                             Text(
-                              AppLocalizations.of(context)!.aSelectionneSonPionEt1(players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.lAdversaire),
+                              AppLocalizations.of(
+                                context,
+                              )!.aSelectionneSonPionEt1(
+                                players[currentPlayerId]?['name'] ??
+                                    AppLocalizations.of(context)!.lAdversaire,
+                              ),
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontSize: 12,
@@ -37631,10 +38524,9 @@ AppLocalizations.of(context)!.jouePar,
 
                   return GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 8,
-                        ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 8,
+                    ),
                     itemCount: 64,
                     itemBuilder: (context, index) {
                       int r = index ~/ 8;
@@ -37662,7 +38554,9 @@ AppLocalizations.of(context)!.jouePar,
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              AppLocalizations.of(context)!.vousDevezSelectionnerLePion,
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.vousDevezSelectionnerLePion,
                                             ),
                                             duration: Duration(seconds: 2),
                                           ),
@@ -37733,9 +38627,7 @@ AppLocalizations.of(context)!.jouePar,
                               piece != null
                                   ? Center(
                                     child: AnimatedContainer(
-                                      duration: Duration(
-                                        milliseconds: 200,
-                                      ),
+                                      duration: Duration(milliseconds: 200),
                                       width: 35,
                                       height: 35,
                                       decoration: BoxDecoration(
@@ -37747,7 +38639,9 @@ AppLocalizations.of(context)!.jouePar,
                                         border: Border.all(
                                           color:
                                               isSelected
-                                                  ? (isMyTurn ? Colors.greenAccent : Colors.amberAccent)
+                                                  ? (isMyTurn
+                                                      ? Colors.greenAccent
+                                                      : Colors.amberAccent)
                                                   : (isMandatory
                                                       ? Colors.orangeAccent
                                                       : Colors.white),
@@ -37764,8 +38658,10 @@ AppLocalizations.of(context)!.jouePar,
                                                         isMandatory
                                                             ? Colors.orange
                                                             : (isMyTurn
-                                                                ? Colors.greenAccent
-                                                                : Colors.amberAccent),
+                                                                ? Colors
+                                                                    .greenAccent
+                                                                : Colors
+                                                                    .amberAccent),
                                                     blurRadius: 10,
                                                     spreadRadius: 3,
                                                   ),
@@ -37892,7 +38788,9 @@ AppLocalizations.of(context)!.jouePar,
       default:
         return Center(
           child: Text(
-            AppLocalizations.of(context)!.jeuNonImplemente.replaceAll("{0}", rawGameType.toString()),
+            AppLocalizations.of(
+              context,
+            )!.jeuNonImplemente.replaceAll("{0}", rawGameType.toString()),
           ),
         );
     }
@@ -37912,7 +38810,8 @@ AppLocalizations.of(context)!.jouePar,
     );
     final bool isMyTurn = playerId == currentGuesserId;
     final String guesserName =
-        players[currentGuesserId]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
+        players[currentGuesserId]?['name'] ??
+        AppLocalizations.of(context)!.unJoueur;
 
     final bool useTeams = gameData['devineTeteUseTeams'] == true;
     final String activeTeam = gameData['activeTeam'] ?? 'teamA';
@@ -37932,7 +38831,9 @@ AppLocalizations.of(context)!.jouePar,
         gameTitle: AppLocalizations.of(context)!.devineTete,
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.finDeLaPartie,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.finDeLaPartie,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -37977,7 +38878,9 @@ AppLocalizations.of(context)!.jouePar,
               ),
               SizedBox(height: 8),
               Text(
-                AppLocalizations.of(context)!.dtGuessedWords(guesserName, '$guessedCount'),
+                AppLocalizations.of(
+                  context,
+                )!.dtGuessedWords(guesserName, '$guessedCount'),
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.greenAccent,
@@ -38144,10 +39047,7 @@ AppLocalizations.of(context)!.jouePar,
                 icon: Icon(Icons.skip_next_rounded, size: 24),
                 label: Text(
                   AppLocalizations.of(context)!.passer1,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
               ElevatedButton.icon(
@@ -38174,10 +39074,7 @@ AppLocalizations.of(context)!.jouePar,
                 icon: Icon(Icons.check_circle_rounded, size: 24),
                 label: Text(
                   AppLocalizations.of(context)!.trouve,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -38232,9 +39129,11 @@ AppLocalizations.of(context)!.jouePar,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.motsTrouves, [
-                guessedCount,
-              ]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.motsTrouves,
+                [guessedCount],
+              ),
               style: TextStyle(
                 color: Colors.greenAccent,
                 fontSize: 16,
@@ -38270,7 +39169,8 @@ AppLocalizations.of(context)!.jouePar,
         playerOrder.isNotEmpty && playerOrder[currentPlayerIndex] == playerId;
     final currentPlayerName =
         playerOrder.isNotEmpty
-            ? (players[playerOrder[currentPlayerIndex]]?['name'] ?? AppLocalizations.of(context)!.unJoueur)
+            ? (players[playerOrder[currentPlayerIndex]]?['name'] ??
+                AppLocalizations.of(context)!.unJoueur)
             : '...';
 
     // --- 1. ÉCRAN DES RÉSULTATS / DÉPLIAGE DU PARCHEMIN ---
@@ -38283,9 +39183,9 @@ AppLocalizations.of(context)!.jouePar,
         passingMode == 'single'
             ? 0
             : (((currentPlayerIndex -
-                        (currentRound % playerOrder.length) +
-                        playerOrder.length) %
-                    playerOrder.length));
+                    (currentRound % playerOrder.length) +
+                    playerOrder.length) %
+                playerOrder.length));
     Map<String, dynamic> currentPaper = Map<String, dynamic>.from(
       papers[paperIndex.toString()] ?? {'steps': []},
     );
@@ -38308,7 +39208,8 @@ AppLocalizations.of(context)!.jouePar,
         final lastStep = steps.last;
         String lastText = (lastStep['text'] ?? '').toString().trim();
         previousAuthorName =
-            players[lastStep['authorId']]?['name'] ?? AppLocalizations.of(context)!.auteurPrecedent;
+            players[lastStep['authorId']]?['name'] ??
+            AppLocalizations.of(context)!.auteurPrecedent;
         List<String> words = lastText.split(' ');
         peekingSnippet =
             words.length <= 3
@@ -38363,8 +39264,7 @@ AppLocalizations.of(context)!.jouePar,
                       child: Icon(
                         Icons.history_edu_rounded,
                         size: 16,
-                        color:
-                            isMyTurn ? Color(0xFFF3C68F) : Colors.white60,
+                        color: isMyTurn ? Color(0xFFF3C68F) : Colors.white60,
                       ),
                     ),
                     SizedBox(width: 8),
@@ -38374,25 +39274,24 @@ AppLocalizations.of(context)!.jouePar,
                         Text(
                           isMyTurn
                               ? AppLocalizations.of(context)!.aVousDEcrire
-                              : AppLocalizations.of(context)!.ceTurnOfPlayer(currentPlayerName),
+                              : AppLocalizations.of(
+                                context,
+                              )!.ceTurnOfPlayer(currentPlayerName),
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w900,
                             letterSpacing: 1,
                             color:
-                                isMyTurn
-                                    ? Color(0xFFF3C68F)
-                                    : Colors.white70,
+                                isMyTurn ? Color(0xFFF3C68F) : Colors.white70,
                           ),
                         ),
                         Text(
                           variant == 'classic'
-                              ? AppLocalizations.of(context)!.surrealismeClassique
+                              ? AppLocalizations.of(
+                                context,
+                              )!.surrealismeClassique
                               : AppLocalizations.of(context)!.suiteDe3Mots,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white38,
-                          ),
+                          style: TextStyle(fontSize: 10, color: Colors.white38),
                         ),
                       ],
                     ),
@@ -38409,7 +39308,9 @@ AppLocalizations.of(context)!.jouePar,
                     border: Border.all(color: Colors.white10),
                   ),
                   child: Text(
-                    AppLocalizations.of(context)!.ceStepOfTotal('${currentRound + 1}', '$totalSteps'),
+                    AppLocalizations.of(
+                      context,
+                    )!.ceStepOfTotal('${currentRound + 1}', '$totalSteps'),
                     style: TextStyle(
                       color: Color(0xFFE0A96D),
                       fontSize: 11,
@@ -38515,7 +39416,9 @@ AppLocalizations.of(context)!.jouePar,
                         ),
                         SizedBox(width: 4),
                         Text(
-                          AppLocalizations.of(context)!.ceVisibleSnippetOf(previousAuthorName),
+                          AppLocalizations.of(
+                            context,
+                          )!.ceVisibleSnippetOf(previousAuthorName),
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -38760,7 +39663,9 @@ AppLocalizations.of(context)!.jouePar,
               ),
               SizedBox(height: 14),
               Text(
-                AppLocalizations.of(context)!.cePlayerWriting(currentPlayerName),
+                AppLocalizations.of(
+                  context,
+                )!.cePlayerWriting(currentPlayerName),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -38783,7 +39688,11 @@ AppLocalizations.of(context)!.jouePar,
                     ),
                   ),
                   child: Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.motsRediges, [count]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.motsRediges,
+                      [count],
+                    ),
                     style: TextStyle(
                       color: Colors.amberAccent,
                       fontWeight: FontWeight.bold,
@@ -38821,11 +39730,7 @@ AppLocalizations.of(context)!.jouePar,
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          Icon(
-            Icons.auto_stories_rounded,
-            size: 54,
-            color: Color(0xFFE0A96D),
-          ),
+          Icon(Icons.auto_stories_rounded, size: 54, color: Color(0xFFE0A96D)),
           SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.leGrandDepliage,
@@ -38880,8 +39785,12 @@ AppLocalizations.of(context)!.jouePar,
                         children: [
                           Text(
                             passingMode == 'multiple'
-                                ? AppLocalizations.of(context)!.ceStoryNumber('${paperIndex + 1}')
-                                : AppLocalizations.of(context)!.histoireCollective,
+                                ? AppLocalizations.of(
+                                  context,
+                                )!.ceStoryNumber('${paperIndex + 1}')
+                                : AppLocalizations.of(
+                                  context,
+                                )!.histoireCollective,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -38927,7 +39836,8 @@ AppLocalizations.of(context)!.jouePar,
                         children:
                             steps.map((s) {
                               String authorName =
-                                  players[s['authorId']]?['name'] ?? AppLocalizations.of(context)!.auteur;
+                                  players[s['authorId']]?['name'] ??
+                                  AppLocalizations.of(context)!.auteur;
                               return Container(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 8,
@@ -38936,9 +39846,7 @@ AppLocalizations.of(context)!.jouePar,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: Color(0xFFD6C8B2),
-                                  ),
+                                  border: Border.all(color: Color(0xFFD6C8B2)),
                                 ),
                                 child: RichText(
                                   text: TextSpan(
@@ -38948,7 +39856,9 @@ AppLocalizations.of(context)!.jouePar,
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: AppLocalizations.of(context)!.str1e0607(authorName),
+                                        text: AppLocalizations.of(
+                                          context,
+                                        )!.str1e0607(authorName),
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xFF78350F),
@@ -39013,7 +39923,9 @@ AppLocalizations.of(context)!.jouePar,
         gameTitle: "Mille Bornes",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.objectif1000BornesAtteint,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.objectif1000BornesAtteint,
         players: players,
         customScores: kmScores,
         gameData: gameData,
@@ -39056,17 +39968,26 @@ AppLocalizations.of(context)!.jouePar,
             String? attackCard;
             if (snap.hasData && snap.data!.snapshot.value != null) {
               try {
-                final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                final raw = Map<String, dynamic>.from(
+                  snap.data!.snapshot.value as Map,
+                );
                 attackerId = raw['playerId'] as String?;
                 attackCard = raw['card'] as String?;
               } catch (_) {}
             }
 
-            if (attackerId != null && attackerId != playerId && attackCard != null) {
-              final aName = players[attackerId]?['name'] ?? AppLocalizations.of(context)!.lAdversaire;
+            if (attackerId != null &&
+                attackerId != playerId &&
+                attackCard != null) {
+              final aName =
+                  players[attackerId]?['name'] ??
+                  AppLocalizations.of(context)!.lAdversaire;
               return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.redAccent.withOpacity(0.25),
                   borderRadius: BorderRadius.circular(12),
@@ -39075,10 +39996,18 @@ AppLocalizations.of(context)!.jouePar,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.warning_amber_rounded, color: Colors.redAccent, size: 16),
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      color: Colors.redAccent,
+                      size: 16,
+                    ),
                     SizedBox(width: 8),
                     Text(
-                      GameContentLocalization.format(context, AppLocalizations.of(context)!.prepareUneAttaqueContreUn, [aName, attackCard]),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.prepareUneAttaqueContreUn,
+                        [aName, attackCard],
+                      ),
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -39121,10 +40050,7 @@ AppLocalizations.of(context)!.jouePar,
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color:
-                          isOppTurn
-                              ? Color(0xFF2A2045)
-                              : Color(0xFF1E1E28),
+                      color: isOppTurn ? Color(0xFF2A2045) : Color(0xFF1E1E28),
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(
                         color: isOppTurn ? Colors.amberAccent : Colors.white10,
@@ -39139,7 +40065,8 @@ AppLocalizations.of(context)!.jouePar,
                           children: [
                             Expanded(
                               child: Text(
-                                players[pId]?['name'] ?? AppLocalizations.of(context)!.adversaire,
+                                players[pId]?['name'] ??
+                                    AppLocalizations.of(context)!.adversaire,
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
@@ -39270,7 +40197,9 @@ AppLocalizations.of(context)!.jouePar,
                           Text(
                             isMyTurn
                                 ? AppLocalizations.of(context)!.aVousDeRouler
-                                : AppLocalizations.of(context)!.mbTurnOf(players[currentPlayerId]?['name'] ?? ''),
+                                : AppLocalizations.of(context)!.mbTurnOf(
+                                  players[currentPlayerId]?['name'] ?? '',
+                                ),
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -39282,7 +40211,9 @@ AppLocalizations.of(context)!.jouePar,
                             ),
                           ),
                           Text(
-                            AppLocalizations.of(context)!.km1(myDistance, targetDist),
+                            AppLocalizations.of(
+                              context,
+                            )!.km1(myDistance, targetDist),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w900,
@@ -39373,9 +40304,10 @@ AppLocalizations.of(context)!.jouePar,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildStateIndicator(
-                    label: myData['isStopped'] == true
-                        ? AppLocalizations.of(context)!.arrete
-                        : AppLocalizations.of(context)!.feuVert,
+                    label:
+                        myData['isStopped'] == true
+                            ? AppLocalizations.of(context)!.arrete
+                            : AppLocalizations.of(context)!.feuVert,
                     icon:
                         myData['isStopped'] == true
                             ? Icons.block_rounded
@@ -39492,7 +40424,9 @@ AppLocalizations.of(context)!.jouePar,
                 children: [
                   Text(
                     isMyTurn
-                        ? AppLocalizations.of(context)!.mbHandCount('${myHand.length}')
+                        ? AppLocalizations.of(
+                          context,
+                        )!.mbHandCount('${myHand.length}')
                         : AppLocalizations.of(context)!.tourDeLAdversaire,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -39503,7 +40437,9 @@ AppLocalizations.of(context)!.jouePar,
                   SizedBox(height: 4),
                   Text(
                     isMyTurn
-                        ? AppLocalizations.of(context)!.touchezPourJouerNmaintenezPour
+                        ? AppLocalizations.of(
+                          context,
+                        )!.touchezPourJouerNmaintenezPour
                         : AppLocalizations.of(context)!.enAttente,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 10, color: Colors.white38),
@@ -39532,7 +40468,9 @@ AppLocalizations.of(context)!.jouePar,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.mbCardsInHand('${myHand.length}'),
+                      AppLocalizations.of(
+                        context,
+                      )!.mbCardsInHand('${myHand.length}'),
                       style: TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -39541,11 +40479,10 @@ AppLocalizations.of(context)!.jouePar,
                     ),
                     if (isMyTurn)
                       Text(
-                        AppLocalizations.of(context)!.touchezPourJouerRestezAppuye,
-                        style: TextStyle(
-                          color: Colors.white38,
-                          fontSize: 10,
-                        ),
+                        AppLocalizations.of(
+                          context,
+                        )!.touchezPourJouerRestezAppuye,
+                        style: TextStyle(color: Colors.white38, fontSize: 10),
                       ),
                   ],
                 ),
@@ -39553,13 +40490,12 @@ AppLocalizations.of(context)!.jouePar,
                 Expanded(
                   child: GridView.builder(
                     physics: BouncingScrollPhysics(),
-                    gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 1.05,
-                          crossAxisSpacing: 6,
-                          mainAxisSpacing: 6,
-                        ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 1.05,
+                      crossAxisSpacing: 6,
+                      mainAxisSpacing: 6,
+                    ),
                     itemCount: myHand.length,
                     itemBuilder: (ctx, i) {
                       final cardKey = myHand[i];
@@ -39600,7 +40536,9 @@ AppLocalizations.of(context)!.jouePar,
                                     SnackBar(
                                       content: Text(
                                         e.toString().replaceAll(
-                                          AppLocalizations.of(context)!.exception,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.exception,
                                           "",
                                         ),
                                       ),
@@ -39633,7 +40571,9 @@ AppLocalizations.of(context)!.jouePar,
                       child: OutlinedButton.icon(
                         icon: Icon(Icons.skip_next_rounded, size: 18),
                         label: Text(
-                          AppLocalizations.of(context)!.defausserLa1ereCartePasser,
+                          AppLocalizations.of(
+                            context,
+                          )!.defausserLa1ereCartePasser,
                         ),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white60,
@@ -39681,15 +40621,8 @@ AppLocalizations.of(context)!.jouePar,
           gradient: LinearGradient(
             colors:
                 info.isSafety
-                    ? [
-                      Color(0xFF422006),
-                      Color(0xFF1F1206),
-                      Color(0xFF0F0B05),
-                    ]
-                    : [
-                      info.secondaryColor.withOpacity(0.4),
-                      Color(0xFF161622),
-                    ],
+                    ? [Color(0xFF422006), Color(0xFF1F1206), Color(0xFF0F0B05)]
+                    : [info.secondaryColor.withOpacity(0.4), Color(0xFF161622)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -39841,7 +40774,10 @@ AppLocalizations.of(context)!.jouePar,
                     // Bas de carte : Intitulé clair
                     if (!info.isDistance)
                       Text(
-                        GameContentLocalization.ui(context, info.name.replaceAll('\n', ' ')),
+                        GameContentLocalization.ui(
+                          context,
+                          info.name.replaceAll('\n', ' '),
+                        ),
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -40084,7 +41020,12 @@ AppLocalizations.of(context)!.jouePar,
     final pDatas = Map<String, dynamic>.from(
       gameData['milleBornesPlayerData'] ?? {},
     );
-    _firebaseService.updateMilleBornesTargetLive(widget.gameCode, widget.playerId, card, null);
+    _firebaseService.updateMilleBornesTargetLive(
+      widget.gameCode,
+      widget.playerId,
+      card,
+      null,
+    );
 
     showDialog(
       context: context,
@@ -40158,7 +41099,11 @@ AppLocalizations.of(context)!.jouePar,
                         subtitle: Text(
                           isProtected
                               ? AppLocalizations.of(context)!.protegeParUneBotte
-                              : GameContentLocalization.format(context, AppLocalizations.of(context)!.distanceKm, [pData['distance'] ?? 0]),
+                              : GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.distanceKm,
+                                [pData['distance'] ?? 0],
+                              ),
                           style: TextStyle(
                             fontSize: 12,
                             color:
@@ -40179,7 +41124,12 @@ AppLocalizations.of(context)!.jouePar,
                         enabled: !isProtected,
                         onTap: () {
                           Navigator.pop(ctx);
-                          _firebaseService.updateMilleBornesTargetLive(widget.gameCode, widget.playerId, null, null);
+                          _firebaseService.updateMilleBornesTargetLive(
+                            widget.gameCode,
+                            widget.playerId,
+                            null,
+                            null,
+                          );
                           _firebaseService
                               .milleBornesAction(
                                 widget.gameCode,
@@ -40376,13 +41326,22 @@ AppLocalizations.of(context)!.jouePar,
                               },
                               onAccept: (shipType) {
                                 if (isReady) return;
-                                var shipInfo = GameData.batailleNavaleShips[shipType]!;
-                                int actualCols = _pendingShipHorizontal ? shipInfo['length'] : shipInfo['width'];
-                                int actualRows = _pendingShipHorizontal ? shipInfo['width'] : shipInfo['length'];
+                                var shipInfo =
+                                    GameData.batailleNavaleShips[shipType]!;
+                                int actualCols =
+                                    _pendingShipHorizontal
+                                        ? shipInfo['length']
+                                        : shipInfo['width'];
+                                int actualRows =
+                                    _pendingShipHorizontal
+                                        ? shipInfo['width']
+                                        : shipInfo['length'];
                                 int finalRow = r;
                                 int finalCol = c;
-                                if (finalRow + actualRows > 10) finalRow = 10 - actualRows;
-                                if (finalCol + actualCols > 10) finalCol = 10 - actualCols;
+                                if (finalRow + actualRows > 10)
+                                  finalRow = 10 - actualRows;
+                                if (finalCol + actualCols > 10)
+                                  finalCol = 10 - actualCols;
                                 setState(() {
                                   _pendingShipType = shipType;
                                   _pendingShipRow = finalRow;
@@ -40704,11 +41663,21 @@ AppLocalizations.of(context)!.jouePar,
                         setState(() {
                           _pendingShipHorizontal = !_pendingShipHorizontal;
                           if (_pendingShipType != null) {
-                            var shipInfo = GameData.batailleNavaleShips[_pendingShipType!]!;
-                            int actualCols = _pendingShipHorizontal ? shipInfo['length'] : shipInfo['width'];
-                            int actualRows = _pendingShipHorizontal ? shipInfo['width'] : shipInfo['length'];
-                            if (_pendingShipRow! + actualRows > 10) _pendingShipRow = 10 - actualRows;
-                            if (_pendingShipCol! + actualCols > 10) _pendingShipCol = 10 - actualCols;
+                            var shipInfo =
+                                GameData
+                                    .batailleNavaleShips[_pendingShipType!]!;
+                            int actualCols =
+                                _pendingShipHorizontal
+                                    ? shipInfo['length']
+                                    : shipInfo['width'];
+                            int actualRows =
+                                _pendingShipHorizontal
+                                    ? shipInfo['width']
+                                    : shipInfo['length'];
+                            if (_pendingShipRow! + actualRows > 10)
+                              _pendingShipRow = 10 - actualRows;
+                            if (_pendingShipCol! + actualCols > 10)
+                              _pendingShipCol = 10 - actualCols;
                           }
                         });
                       },
@@ -40762,7 +41731,9 @@ AppLocalizations.of(context)!.jouePar,
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              AppLocalizations.of(context)!.placementInvalideChevauchementOuHors,
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.placementInvalideChevauchementOuHors,
                                             ),
                                           ),
                                         );
@@ -40903,7 +41874,8 @@ AppLocalizations.of(context)!.jouePar,
                   onTap:
                       isMyTurn
                           ? (index) {
-                            if (enemyGrid[index] == 'unknown' && !_isActionPending) {
+                            if (enemyGrid[index] == 'unknown' &&
+                                !_isActionPending) {
                               if (_selectedNavalTarget == index) {
                                 // 2e clic : Confirmation et tir !
                                 setState(() {
@@ -40916,9 +41888,16 @@ AppLocalizations.of(context)!.jouePar,
                                   null,
                                 );
                                 _firebaseService
-                                    .shootBatailleNavale(widget.gameCode, playerId, index)
+                                    .shootBatailleNavale(
+                                      widget.gameCode,
+                                      playerId,
+                                      index,
+                                    )
                                     .whenComplete(() {
-                                      if (mounted) setState(() => _isActionPending = false);
+                                      if (mounted)
+                                        setState(
+                                          () => _isActionPending = false,
+                                        );
                                     });
                               } else {
                                 // 1er clic : Verrouillage laser de la cible en direct
@@ -40945,12 +41924,16 @@ AppLocalizations.of(context)!.jouePar,
         Expanded(
           flex: 4,
           child: StreamBuilder<DatabaseEvent>(
-            stream: _firebaseService.getBatailleNavaleAimStream(widget.gameCode),
+            stream: _firebaseService.getBatailleNavaleAimStream(
+              widget.gameCode,
+            ),
             builder: (context, aimSnap) {
               int? enemyAimedIndex;
               if (aimSnap.hasData && aimSnap.data!.snapshot.value != null) {
                 try {
-                  final raw = Map<String, dynamic>.from(aimSnap.data!.snapshot.value as Map);
+                  final raw = Map<String, dynamic>.from(
+                    aimSnap.data!.snapshot.value as Map,
+                  );
                   final aPlayerId = raw['playerId'] as String?;
                   if (aPlayerId != null && aPlayerId != playerId) {
                     enemyAimedIndex = (raw['targetIndex'] as num?)?.toInt();
@@ -40964,7 +41947,9 @@ AppLocalizations.of(context)!.jouePar,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.votreFlotteTirsEnnemisRecus,
+                        AppLocalizations.of(
+                          context,
+                        )!.votreFlotteTirsEnnemisRecus,
                         style: TextStyle(
                           color: Colors.cyanAccent,
                           fontWeight: FontWeight.bold,
@@ -40974,19 +41959,38 @@ AppLocalizations.of(context)!.jouePar,
                       if (enemyAimedIndex != null) ...[
                         SizedBox(width: 8),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.redAccent.withOpacity(0.25),
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.redAccent, width: 1.2),
+                            border: Border.all(
+                              color: Colors.redAccent,
+                              width: 1.2,
+                            ),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.gps_fixed, color: Colors.redAccent, size: 12),
+                              Icon(
+                                Icons.gps_fixed,
+                                color: Colors.redAccent,
+                                size: 12,
+                              ),
                               SizedBox(width: 4),
                               Text(
-                                "🚨 " + GameContentLocalization.format(context, AppLocalizations.of(context)!.radarCaseCiblee, ["${String.fromCharCode(65 + enemyAimedIndex ~/ 10)}${enemyAimedIndex % 10 + 1}"]),
+                                "🚨 " +
+                                    GameContentLocalization.format(
+                                      context,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.radarCaseCiblee,
+                                      [
+                                        "${String.fromCharCode(65 + enemyAimedIndex ~/ 10)}${enemyAimedIndex % 10 + 1}",
+                                      ],
+                                    ),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -41160,8 +42164,10 @@ AppLocalizations.of(context)!.jouePar,
                       }
                     }
 
-                    final bool isTargetedByMe = (isEnemy && selectedTargetIndex == index);
-                    final bool isAimedByEnemy = (!isEnemy && enemyAimedIndex == index);
+                    final bool isTargetedByMe =
+                        (isEnemy && selectedTargetIndex == index);
+                    final bool isAimedByEnemy =
+                        (!isEnemy && enemyAimedIndex == index);
 
                     Widget? liveOverlay = overlay;
                     if (isTargetedByMe) {
@@ -41169,7 +42175,10 @@ AppLocalizations.of(context)!.jouePar,
                         decoration: BoxDecoration(
                           color: Colors.cyanAccent.withOpacity(0.25),
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.cyanAccent, width: 2),
+                          border: Border.all(
+                            color: Colors.cyanAccent,
+                            width: 2,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.cyanAccent.withOpacity(0.6),
@@ -41178,7 +42187,11 @@ AppLocalizations.of(context)!.jouePar,
                           ],
                         ),
                         child: Center(
-                          child: Icon(Icons.gps_fixed_rounded, color: Colors.cyanAccent, size: 20),
+                          child: Icon(
+                            Icons.gps_fixed_rounded,
+                            color: Colors.cyanAccent,
+                            size: 20,
+                          ),
                         ),
                       );
                     } else if (isAimedByEnemy) {
@@ -41196,7 +42209,11 @@ AppLocalizations.of(context)!.jouePar,
                           ],
                         ),
                         child: Center(
-                          child: Icon(Icons.gps_fixed_rounded, color: Colors.redAccent, size: 22),
+                          child: Icon(
+                            Icons.gps_fixed_rounded,
+                            color: Colors.redAccent,
+                            size: 22,
+                          ),
                         ),
                       );
                     }
@@ -41205,14 +42222,21 @@ AppLocalizations.of(context)!.jouePar,
                       onTap: onTap != null ? () => onTap(index) : null,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: (isTargetedByMe || isAimedByEnemy)
-                              ? (isTargetedByMe ? Colors.cyan.withOpacity(0.2) : Colors.red.withOpacity(0.25))
-                              : cellBgColor,
+                          color:
+                              (isTargetedByMe || isAimedByEnemy)
+                                  ? (isTargetedByMe
+                                      ? Colors.cyan.withOpacity(0.2)
+                                      : Colors.red.withOpacity(0.25))
+                                  : cellBgColor,
                           border: Border.all(
-                            color: (isTargetedByMe || isAimedByEnemy)
-                                ? (isTargetedByMe ? Colors.cyanAccent : Colors.redAccent)
-                                : Colors.white.withOpacity(0.12),
-                            width: (isTargetedByMe || isAimedByEnemy) ? 1.5 : 0.5,
+                            color:
+                                (isTargetedByMe || isAimedByEnemy)
+                                    ? (isTargetedByMe
+                                        ? Colors.cyanAccent
+                                        : Colors.redAccent)
+                                    : Colors.white.withOpacity(0.12),
+                            width:
+                                (isTargetedByMe || isAimedByEnemy) ? 1.5 : 0.5,
                           ),
                         ),
                         child: Center(child: liveOverlay),
@@ -41367,7 +42391,8 @@ AppLocalizations.of(context)!.jouePar,
                       if (pId != null && pId != playerId) {
                         previewAmount = raw['amount'] as int?;
                         previewPlayerName =
-                            playerData[pId]?['name'] ?? AppLocalizations.of(context)!.adversaire;
+                            playerData[pId]?['name'] ??
+                            AppLocalizations.of(context)!.adversaire;
                       }
                     } catch (_) {}
                   }
@@ -41419,7 +42444,10 @@ AppLocalizations.of(context)!.jouePar,
                             border: Border.all(color: Colors.redAccent),
                           ),
                           child: Text(
-                            AppLocalizations.of(context)!.pokerRaiseAlert(previewPlayerName ?? '', '$previewAmount'),
+                            AppLocalizations.of(context)!.pokerRaiseAlert(
+                              previewPlayerName ?? '',
+                              '$previewAmount',
+                            ),
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -41593,9 +42621,7 @@ AppLocalizations.of(context)!.jouePar,
                   playerId,
                   'call',
                 ),
-            child: Text(
-              AppLocalizations.of(context)!.pokerCall('$currentBet'),
-            ),
+            child: Text(AppLocalizations.of(context)!.pokerCall('$currentBet')),
           ),
         ElevatedButton(
           onPressed: () {
@@ -41640,9 +42666,7 @@ AppLocalizations.of(context)!.jouePar,
         return StatefulBuilder(
           builder: (context, setStateDialog) {
             return AlertDialog(
-              title: Text(
-                AppLocalizations.of(context)!.choisirLeMontantDeLa,
-              ),
+              title: Text(AppLocalizations.of(context)!.choisirLeMontantDeLa),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -41687,9 +42711,7 @@ AppLocalizations.of(context)!.jouePar,
                         ),
                       if (pot <= maxRaise)
                         ActionChip(
-                          label: Text(
-                            AppLocalizations.of(context)!.pot,
-                          ),
+                          label: Text(AppLocalizations.of(context)!.pot),
                           onPressed: () {
                             setStateDialog(() => raiseAmount = pot.toDouble());
                             _firebaseService.updatePokerRaisePreview(
@@ -41744,7 +42766,9 @@ AppLocalizations.of(context)!.jouePar,
                     );
                   },
                   child: Text(
-                    AppLocalizations.of(context)!.pokerRaiseTo('${raiseAmount.toInt()}'),
+                    AppLocalizations.of(
+                      context,
+                    )!.pokerRaiseTo('${raiseAmount.toInt()}'),
                   ),
                 ),
               ],
@@ -41793,7 +42817,9 @@ AppLocalizations.of(context)!.jouePar,
         gameTitle: "Uno",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.derniereCartePosee,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.derniereCartePosee,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -41834,28 +42860,51 @@ AppLocalizations.of(context)!.jouePar,
                       String? choosingColor;
                       if (snap.hasData && snap.data!.snapshot.value != null) {
                         try {
-                          final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
+                          final raw = Map<String, dynamic>.from(
+                            snap.data!.snapshot.value as Map,
+                          );
                           choosingColor = raw['color'] as String?;
                         } catch (_) {}
                       }
 
                       if (choosingColor != null && !isMyTurn) {
-                        final String chooserName = players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.lAdversaire;
+                        final String chooserName =
+                            players[currentPlayerId]?['name'] ??
+                            AppLocalizations.of(context)!.lAdversaire;
                         return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 4,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.amber.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(14),
-                            border: Border.all(color: Colors.amberAccent, width: 1.5),
+                            border: Border.all(
+                              color: Colors.amberAccent,
+                              width: 1.5,
+                            ),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.palette_rounded, color: Colors.amberAccent, size: 16),
+                              Icon(
+                                Icons.palette_rounded,
+                                color: Colors.amberAccent,
+                                size: 16,
+                              ),
                               SizedBox(width: 8),
                               Text(
-                                GameContentLocalization.format(context, AppLocalizations.of(context)!.hesiteEtChoisitLaCouleur, [chooserName]),
+                                GameContentLocalization.format(
+                                  context,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.hesiteEtChoisitLaCouleur,
+                                  [chooserName],
+                                ),
                                 style: TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 12,
@@ -42118,9 +43167,7 @@ AppLocalizations.of(context)!.jouePar,
         SizedBox(width: 20),
         GestureDetector(
           onTap:
-              isMyTurn &&
-                      !_unoDrawActionDone &&
-                      !_isActionPending
+              isMyTurn && !_unoDrawActionDone && !_isActionPending
                   ? () => _onUnoDrawTapped()
                   : null,
           child: Container(
@@ -42159,9 +43206,7 @@ AppLocalizations.of(context)!.jouePar,
       child:
           myHand.isEmpty
               ? Center(
-                child: Text(
-                  AppLocalizations.of(context)!.vousNAvezPlusDe,
-                ),
+                child: Text(AppLocalizations.of(context)!.vousNAvezPlusDe),
               )
               : GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -42295,7 +43340,16 @@ AppLocalizations.of(context)!.jouePar,
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')]),
+                            GameContentLocalization.format(
+                              context,
+                              AppLocalizations.of(context)!.erreur2,
+                              [
+                                e.toString().replaceAll(
+                                  AppLocalizations.of(context)!.exception,
+                                  '',
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -42331,7 +43385,12 @@ AppLocalizations.of(context)!.jouePar,
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              AppLocalizations.of(context)!.erreur1(e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')),
+                              AppLocalizations.of(context)!.erreur1(
+                                e.toString().replaceAll(
+                                  AppLocalizations.of(context)!.exception,
+                                  '',
+                                ),
+                              ),
                             ),
                           ),
                         );
@@ -42473,7 +43532,12 @@ AppLocalizations.of(context)!.jouePar,
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                AppLocalizations.of(context)!.erreur1(e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')),
+                AppLocalizations.of(context)!.erreur1(
+                  e.toString().replaceAll(
+                    AppLocalizations.of(context)!.exception,
+                    '',
+                  ),
+                ),
               ),
             ),
           );
@@ -42562,7 +43626,12 @@ AppLocalizations.of(context)!.jouePar,
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              AppLocalizations.of(context)!.erreur1(e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')),
+              AppLocalizations.of(context)!.erreur1(
+                e.toString().replaceAll(
+                  AppLocalizations.of(context)!.exception,
+                  '',
+                ),
+              ),
             ),
           ),
         );
@@ -42572,7 +43641,11 @@ AppLocalizations.of(context)!.jouePar,
   }
 
   void _showColorPicker(String card) {
-    _firebaseService.updateUnoLiveColorChoosing(widget.gameCode, widget.playerId, AppLocalizations.of(context)!.joker);
+    _firebaseService.updateUnoLiveColorChoosing(
+      widget.gameCode,
+      widget.playerId,
+      AppLocalizations.of(context)!.joker,
+    );
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -42591,7 +43664,11 @@ AppLocalizations.of(context)!.jouePar,
                               ? null
                               : () async {
                                 Navigator.of(context).pop();
-                                _firebaseService.updateUnoLiveColorChoosing(widget.gameCode, widget.playerId, null);
+                                _firebaseService.updateUnoLiveColorChoosing(
+                                  widget.gameCode,
+                                  widget.playerId,
+                                  null,
+                                );
                                 setState(() => _isActionPending = true);
                                 try {
                                   final String playerId = widget.playerId;
@@ -42628,7 +43705,14 @@ AppLocalizations.of(context)!.jouePar,
                                     ).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          AppLocalizations.of(context)!.erreur1(e.toString().replaceAll(AppLocalizations.of(context)!.exception, '')),
+                                          AppLocalizations.of(context)!.erreur1(
+                                            e.toString().replaceAll(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.exception,
+                                              '',
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     );
@@ -42780,7 +43864,10 @@ AppLocalizations.of(context)!.jouePar,
                             child: Chip(
                               backgroundColor: Colors.black.withOpacity(0.45),
                               label: Text(
-                                AppLocalizations.of(context)!.str422faa(e.value['name'], e.value['score'] ?? 0),
+                                AppLocalizations.of(context)!.str422faa(
+                                  e.value['name'],
+                                  e.value['score'] ?? 0,
+                                ),
                                 style: TextStyle(
                                   color: Colors.white70,
                                   fontSize: 11,
@@ -42867,7 +43954,9 @@ AppLocalizations.of(context)!.jouePar,
                   ),
                   SizedBox(width: 8),
                   Text(
-                    AppLocalizations.of(context)!.dobbleDeckCards("$cardsLeftInDeck"),
+                    AppLocalizations.of(
+                      context,
+                    )!.dobbleDeckCards("$cardsLeftInDeck"),
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -42955,7 +44044,9 @@ AppLocalizations.of(context)!.jouePar,
                         ],
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.dobbleMyCardsCount("$myScore"),
+                        AppLocalizations.of(
+                          context,
+                        )!.dobbleMyCardsCount("$myScore"),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -42997,10 +44088,7 @@ AppLocalizations.of(context)!.jouePar,
                     SizedBox(height: 6),
                     Text(
                       AppLocalizations.of(context)!.dobbleTooManyErrors,
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     SizedBox(height: 18),
                     Container(
@@ -43041,10 +44129,7 @@ AppLocalizations.of(context)!.jouePar,
       return Container(
         width: cardSize,
         height: cardSize,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-        ),
+        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
       );
     }
 
@@ -43087,10 +44172,7 @@ AppLocalizations.of(context)!.jouePar,
         color: Colors.white,
         shape: BoxShape.circle,
         border: Border.all(
-          color:
-              isInteractable
-                  ? Color(0xFFE2E8F0)
-                  : Color(0xFFCBD5E1),
+          color: isInteractable ? Color(0xFFE2E8F0) : Color(0xFFCBD5E1),
           width: isLarge ? 5 : 3,
         ),
         boxShadow: [
@@ -43155,7 +44237,8 @@ AppLocalizations.of(context)!.jouePar,
     final Map<String, dynamic> players = Map<String, dynamic>.from(
       gameData['players'],
     );
-    final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+    final winnerName =
+        players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
     final isHost = gameData['hostId'] == playerId;
     final bool iAmWinner = winnerId == playerId;
 
@@ -43364,7 +44447,8 @@ AppLocalizations.of(context)!.jouePar,
 
     final players = (gameData['players'] as Map<String, dynamic>?) ?? {};
     final String question =
-        gameData['currentQuestion'] ?? AppLocalizations.of(context)!.erreurQuestionNonTrouvee;
+        gameData['currentQuestion'] ??
+        AppLocalizations.of(context)!.erreurQuestionNonTrouvee;
 
     print('Question à afficher: $question');
     print('Nombre de joueurs à afficher: ${players.length}');
@@ -43392,7 +44476,9 @@ AppLocalizations.of(context)!.jouePar,
             children:
                 players.entries.map((entry) {
                   final pId = entry.key;
-                  final pName = entry.value['name'] ?? AppLocalizations.of(context)!.inconnu;
+                  final pName =
+                      entry.value['name'] ??
+                      AppLocalizations.of(context)!.inconnu;
 
                   if (pId == voterId) {
                     return SizedBox.shrink();
@@ -43408,10 +44494,14 @@ AppLocalizations.of(context)!.jouePar,
                               ? null
                               : () {
                                 print(
-                                  AppLocalizations.of(context)!.clicSurLeJoueurPname,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.clicSurLeJoueurPname,
                                 );
                                 print(
-                                  AppLocalizations.of(context)!.passageDeIsactionpendingATrue,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.passageDeIsactionpendingATrue,
                                 );
                                 setState(() => _isActionPending = true);
 
@@ -43419,12 +44509,16 @@ AppLocalizations.of(context)!.jouePar,
                                     .submitVote(widget.gameCode, voterId, pId)
                                     .catchError((e) {
                                       print(
-                                        AppLocalizations.of(context)!.erreurFirebaseLorsDuVote,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.erreurFirebaseLorsDuVote,
                                       );
                                     })
                                     .whenComplete(() {
                                       print(
-                                        AppLocalizations.of(context)!.appelFirebaseTerminePassageDe,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.appelFirebaseTerminePassageDe,
                                       );
                                       if (mounted) {
                                         setState(
@@ -43432,7 +44526,9 @@ AppLocalizations.of(context)!.jouePar,
                                         );
                                       } else {
                                         print(
-                                          AppLocalizations.of(context)!.attentionLeWidgetNEst,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.attentionLeWidgetNEst,
                                         );
                                       }
                                     });
@@ -43589,7 +44685,12 @@ AppLocalizations.of(context)!.jouePar,
         if (gameType == 'Skull') {
           return _buildSkullUI(context, gameData, playerId);
         }
-        return _buildWaitingWidget(AppLocalizations.of(context)!.laPartieContinue, players, 0, 0);
+        return _buildWaitingWidget(
+          AppLocalizations.of(context)!.laPartieContinue,
+          players,
+          0,
+          0,
+        );
 
       default:
         return _buildWaitingWidget(
@@ -43609,7 +44710,8 @@ AppLocalizations.of(context)!.jouePar,
     final mrWhiteId = gameData['mrWhiteId'];
     final isMrWhite = playerId == mrWhiteId;
     final players = (gameData['players'] as Map<String, dynamic>?) ?? {};
-    final mrWhiteName = players[mrWhiteId]?['name'] ?? AppLocalizations.of(context)!.mrWhite;
+    final mrWhiteName =
+        players[mrWhiteId]?['name'] ?? AppLocalizations.of(context)!.mrWhite;
 
     if (!isMrWhite) {
       return _buildWaitingWidget(
@@ -43769,7 +44871,8 @@ AppLocalizations.of(context)!.jouePar,
             itemCount: candidates.length,
             itemBuilder: (context, index) {
               final cId = candidates[index];
-              final cName = players[cId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+              final cName =
+                  players[cId]?['name'] ?? AppLocalizations.of(context)!.joueur;
               final isMe = cId == playerId;
 
               return GestureDetector(
@@ -43779,12 +44882,12 @@ AppLocalizations.of(context)!.jouePar,
                         : () {
                           setState(() => _isActionPending = true);
                           if (goddessId != null && isGoddess) {
-                            _firebaseService.undercoverGoddessDecision(
-                              widget.gameCode,
-                              cId,
-                            ).whenComplete(() {
-                              if (mounted) setState(() => _isActionPending = false);
-                            });
+                            _firebaseService
+                                .undercoverGoddessDecision(widget.gameCode, cId)
+                                .whenComplete(() {
+                                  if (mounted)
+                                    setState(() => _isActionPending = false);
+                                });
                           } else {
                             _firebaseService
                                 .submitUndercoverVote(
@@ -43793,7 +44896,8 @@ AppLocalizations.of(context)!.jouePar,
                                   cId,
                                 )
                                 .whenComplete(() {
-                                  if (mounted) setState(() => _isActionPending = false);
+                                  if (mounted)
+                                    setState(() => _isActionPending = false);
                                 });
                           }
                         },
@@ -43877,7 +44981,9 @@ AppLocalizations.of(context)!.jouePar,
             children:
                 players.entries.map((e) {
                   return Text(
-                    AppLocalizations.of(context)!.str95d36e(e.value['name'], scores[e.key] ?? 0),
+                    AppLocalizations.of(
+                      context,
+                    )!.str95d36e(e.value['name'], scores[e.key] ?? 0),
                     style: TextStyle(
                       color: e.key == judgeId ? Colors.amber : Colors.white70,
                       fontWeight:
@@ -44052,9 +45158,7 @@ AppLocalizations.of(context)!.jouePar,
                                 entry.key,
                               );
                             },
-                            child: Text(
-                              AppLocalizations.of(context)!.choisir,
-                            ),
+                            child: Text(AppLocalizations.of(context)!.choisir),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                             ),
@@ -44120,7 +45224,8 @@ AppLocalizations.of(context)!.jouePar,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      gameData['currentQuestion'] ?? AppLocalizations.of(context)!.question1,
+                      gameData['currentQuestion'] ??
+                          AppLocalizations.of(context)!.question1,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
@@ -44168,9 +45273,7 @@ AppLocalizations.of(context)!.jouePar,
                               strokeWidth: 2,
                             ),
                           )
-                          : Text(
-                            AppLocalizations.of(context)!.soumettre,
-                          ),
+                          : Text(AppLocalizations.of(context)!.soumettre),
                 ),
               ],
             ),
@@ -44344,7 +45447,9 @@ AppLocalizations.of(context)!.jouePar,
       final playerOrder = List<String>.from(gameData['playerOrder']);
       final revealIndex = gameData['revealIndex'] as int;
       final storyOwnerId = playerOrder[revealIndex];
-      final storyOwnerName = players[storyOwnerId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+      final storyOwnerName =
+          players[storyOwnerId]?['name'] ??
+          AppLocalizations.of(context)!.inconnu;
       final story = answers[storyOwnerId];
       final storyVotes = Map.from(
         allVotes[storyOwnerId] as Map<String, dynamic>? ?? {},
@@ -44382,9 +45487,11 @@ AppLocalizations.of(context)!.jouePar,
                 CircleAvatar(child: Text(storyOwnerName[0]), radius: 30),
                 SizedBox(height: 10),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.lHistoireDe, [
-                    storyOwnerName,
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.lHistoireDe,
+                    [storyOwnerName],
+                  ),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Divider(),
@@ -44477,7 +45584,8 @@ AppLocalizations.of(context)!.jouePar,
 
                 final storyOwnerId = entry.key;
                 final storyOwnerName =
-                    players[storyOwnerId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+                    players[storyOwnerId]?['name'] ??
+                    AppLocalizations.of(context)!.inconnu;
                 final story = entry.value;
                 final myVote =
                     (allVotes[storyOwnerId] as Map<String, dynamic>?)?[voterId];
@@ -44493,7 +45601,9 @@ AppLocalizations.of(context)!.jouePar,
                         isVoted
                             ? Border.all(
                               color:
-                                  myVote == AppLocalizations.of(context)!.vrai1 ? Colors.green : Colors.red,
+                                  myVote == AppLocalizations.of(context)!.vrai1
+                                      ? Colors.green
+                                      : Colors.red,
                               width: 2,
                             )
                             : null,
@@ -44557,15 +45667,18 @@ AppLocalizations.of(context)!.jouePar,
                             ),
                             child: Center(
                               child: Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.tuAsVote,
-[myVote!.toUpperCase()],
-),
+                                GameContentLocalization.format(
+                                  context,
+                                  AppLocalizations.of(context)!.tuAsVote,
+                                  [myVote!.toUpperCase()],
+                                ),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color:
-                                      myVote == AppLocalizations.of(context)!.vrai1
+                                      myVote ==
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.vrai1
                                           ? Colors.greenAccent
                                           : Colors.redAccent,
                                 ),
@@ -44597,7 +45710,9 @@ AppLocalizations.of(context)!.tuAsVote,
                                                   widget.gameCode,
                                                   voterId,
                                                   storyOwnerId,
-                                                  AppLocalizations.of(context)!.vrai1,
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.vrai1,
                                                 )
                                                 .whenComplete(() {
                                                   if (mounted)
@@ -44633,7 +45748,9 @@ AppLocalizations.of(context)!.tuAsVote,
                                                   widget.gameCode,
                                                   voterId,
                                                   storyOwnerId,
-                                                  AppLocalizations.of(context)!.faux1,
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.faux1,
                                                 )
                                                 .whenComplete(() {
                                                   if (mounted)
@@ -44674,7 +45791,8 @@ AppLocalizations.of(context)!.tuAsVote,
             gameType == 'Infiltré & Mr. White' ||
             gameType == 'Le Menteur');
 
-    String mainTitle = gameData['currentQuestion'] ?? AppLocalizations.of(context)!.votez;
+    String mainTitle =
+        gameData['currentQuestion'] ?? AppLocalizations.of(context)!.votez;
 
     return Column(
       children: [
@@ -44878,11 +45996,14 @@ AppLocalizations.of(context)!.tuAsVote,
   ) {
     final answers = (gameData['answers'] as Map<String, dynamic>?) ?? {};
     final players = (gameData['players'] as Map<String, dynamic>?) ?? {};
-    final question = gameData['currentQuestion'] ?? AppLocalizations.of(context)!.question1;
+    final question =
+        gameData['currentQuestion'] ?? AppLocalizations.of(context)!.question1;
     final judgeName =
-        players[gameData['currentTargetPlayerId']]?['name'] ?? AppLocalizations.of(context)!.leJuge;
+        players[gameData['currentTargetPlayerId']]?['name'] ??
+        AppLocalizations.of(context)!.leJuge;
 
-    final int seed = (gameData['currentRound'] ?? 0).hashCode ^ question.hashCode;
+    final int seed =
+        (gameData['currentRound'] ?? 0).hashCode ^ question.hashCode;
     final List<MapEntry<String, dynamic>> shuffledAnswers =
         answers.entries.toList()..shuffle(Random(seed));
 
@@ -44930,7 +46051,9 @@ AppLocalizations.of(context)!.tuAsVote,
         ),
 
         StreamBuilder<DatabaseEvent>(
-          stream: _firebaseService.getJudgeCardInspectLiveStream(widget.gameCode),
+          stream: _firebaseService.getJudgeCardInspectLiveStream(
+            widget.gameCode,
+          ),
           builder: (context, liveSnap) {
             String? inspectedAnswer;
             if (liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
@@ -44949,21 +46072,36 @@ AppLocalizations.of(context)!.tuAsVote,
                   isTarget
                       ? AppLocalizations.of(context)!.choisisTaReponsePreferee
                       : (inspectedAnswer != null
-                          ? AppLocalizations.of(context)!.leJugeExamineAttentivementUne
-                          : GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttenteDuChoixDe, [judgeName])),
+                          ? AppLocalizations.of(
+                            context,
+                          )!.leJugeExamineAttentivementUne
+                          : GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.enAttenteDuChoixDe,
+                            [judgeName],
+                          )),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 if (inspectedAnswer != null && !isTarget) ...[
                   SizedBox(height: 6),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.amber.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
+                      border: Border.all(
+                        color: Colors.amberAccent.withOpacity(0.5),
+                      ),
                     ),
                     child: Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit, [inspectedAnswer]),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.leJugeLit,
+                        [inspectedAnswer],
+                      ),
                       style: TextStyle(
                         color: Colors.amberAccent,
                         fontSize: 12,
@@ -44981,7 +46119,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
 
         Expanded(
           child: StreamBuilder<DatabaseEvent>(
-            stream: _firebaseService.getJudgeCardInspectLiveStream(widget.gameCode),
+            stream: _firebaseService.getJudgeCardInspectLiveStream(
+              widget.gameCode,
+            ),
             builder: (context, liveSnap) {
               String? inspectedAnswer;
               if (liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
@@ -45010,7 +46150,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                               );
                               setState(() => _isActionPending = true);
                               _firebaseService
-                                  .selectWinningAnswer(widget.gameCode, entry.key)
+                                  .selectWinningAnswer(
+                                    widget.gameCode,
+                                    entry.key,
+                                  )
                                   .whenComplete(() {
                                     _firebaseService.updateJudgeCardInspectLive(
                                       widget.gameCode,
@@ -45030,16 +46173,20 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: isInspected
-                              ? Colors.amberAccent
-                              : (isTarget ? Colors.deepPurple : Colors.transparent),
+                          color:
+                              isInspected
+                                  ? Colors.amberAccent
+                                  : (isTarget
+                                      ? Colors.deepPurple
+                                      : Colors.transparent),
                           width: isInspected ? 3.5 : (isTarget ? 2 : 0),
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: isInspected
-                                ? Colors.amberAccent.withOpacity(0.5)
-                                : Colors.black12,
+                            color:
+                                isInspected
+                                    ? Colors.amberAccent.withOpacity(0.5)
+                                    : Colors.black12,
                             blurRadius: isInspected ? 10 : 4,
                             spreadRadius: isInspected ? 2 : 0,
                             offset: Offset(0, 2),
@@ -45059,7 +46206,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                             ),
                           ),
                           if (isInspected)
-                            Icon(Icons.visibility, color: Colors.amber, size: 20)
+                            Icon(
+                              Icons.visibility,
+                              color: Colors.amber,
+                              size: 20,
+                            )
                           else if (isTarget)
                             Icon(Icons.touch_app, color: Colors.deepPurple),
                         ],
@@ -45136,9 +46287,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                   style: TextStyle(color: Colors.white70),
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.s, [
-                    _refillCountdown,
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.s,
+                    [_refillCountdown],
+                  ),
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -45147,7 +46300,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                 ),
                 SizedBox(height: 20),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.joueursConnectes, [players.length]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.joueursConnectes,
+                    [players.length],
+                  ),
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
               ],
@@ -45218,9 +46375,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur, [
-                    winnerName,
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.vainqueur,
+                    [winnerName],
+                  ),
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Colors.amberAccent,
                   ),
@@ -45243,9 +46402,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                 ),
                 SizedBox(height: 5),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.s, [
-                    _postGameCountdown,
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.s,
+                    [_postGameCountdown],
+                  ),
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -45265,7 +46426,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                       icon: Icon(Icons.replay),
                       label: Text(
                         hasVoted
-                            ? GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttente1, [restartVotes.length, players.length])
+                            ? GameContentLocalization.format(
+                              context,
+                              AppLocalizations.of(context)!.enAttente1,
+                              [restartVotes.length, players.length],
+                            )
                             : AppLocalizations.of(context)!.rejouer1,
                       ),
                       style: ElevatedButton.styleFrom(
@@ -45287,9 +46452,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                     ),
                     OutlinedButton.icon(
                       icon: Icon(Icons.exit_to_app),
-                      label: Text(
-                        AppLocalizations.of(context)!.quitter,
-                      ),
+                      label: Text(AppLocalizations.of(context)!.quitter),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.redAccent,
                         side: BorderSide(color: Colors.redAccent),
@@ -45301,9 +46464,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                       onPressed: () async {
                         if (_livekitInitialized) {
                           await _livekitService.leaveChannel();
-                          await Future.delayed(
-                            Duration(milliseconds: 300),
-                          );
+                          await Future.delayed(Duration(milliseconds: 300));
                         }
                         _firebaseService.removePlayerFromGame(
                           widget.gameCode,
@@ -45349,12 +46510,17 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
     switch (gameType) {
       case 'Le Juge':
         final winnerId = gameData['roundWinnerId'];
-        final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+        final winnerName =
+            players[winnerId]?['name'] ??
+            AppLocalizations.of(context)!.quelquUn;
         final winningAnswer =
             (gameData['answers'] as Map<String, dynamic>?)?[winnerId] ??
             AppLocalizations.of(context)!.aucuneReponse;
-        resultText =
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.aEteChoisiPourSa, [winnerName]);
+        resultText = GameContentLocalization.format(
+          context,
+          AppLocalizations.of(context)!.aEteChoisiPourSa,
+          [winnerName],
+        );
         extraInfo = Text(
           '"${winningAnswer}"',
           style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white70),
@@ -45376,7 +46542,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                         players[storyOwnerId]?['name'] ?? '...';
                     final story = answers[storyOwnerId];
                     final actualTruth =
-                        storyTruths[storyOwnerId] == true ? AppLocalizations.of(context)!.vraie : AppLocalizations.of(context)!.fausse;
+                        storyTruths[storyOwnerId] == true
+                            ? AppLocalizations.of(context)!.vraie
+                            : AppLocalizations.of(context)!.fausse;
                     final storyVotes = Map.from(
                       votes[storyOwnerId] as Map<String, dynamic>? ?? {},
                     );
@@ -45389,7 +46557,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GameContentLocalization.format(context, AppLocalizations.of(context)!.histoireDeEtait, [storyOwnerName, actualTruth]),
+                              GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.histoireDeEtait,
+                                [storyOwnerName, actualTruth],
+                              ),
                               style: Theme.of(
                                 context,
                               ).textTheme.titleLarge?.copyWith(
@@ -45417,9 +46589,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                                   players[voteEntry.key]?['name'] ?? '...';
                               final voteValue = voteEntry.value;
                               final bool wasCorrect =
-                                  (voteValue == AppLocalizations.of(context)!.vrai1 &&
+                                  (voteValue ==
+                                          AppLocalizations.of(context)!.vrai1 &&
                                       actualTruth == "VRAIE") ||
-                                  (voteValue == AppLocalizations.of(context)!.faux1 &&
+                                  (voteValue ==
+                                          AppLocalizations.of(context)!.faux1 &&
                                       actualTruth == "FAUSSE");
                               return Row(
                                 children: [
@@ -45433,7 +46607,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
                                   ),
                                   SizedBox(width: 8),
                                   Text(
-                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.aVote, [voterName, voteValue]),
+                                    GameContentLocalization.format(
+                                      context,
+                                      AppLocalizations.of(context)!.aVote,
+                                      [voterName, voteValue],
+                                    ),
                                   ),
                                 ],
                               );
@@ -45448,7 +46626,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
           break;
         } else {
           final liarId = gameData['liarId'];
-          final liarName = players[liarId]?['name'] ?? AppLocalizations.of(context)!.leMenteur;
+          final liarName =
+              players[liarId]?['name'] ??
+              AppLocalizations.of(context)!.leMenteur;
           resultText = AppLocalizations.of(context)!.leMenteurEtait(liarName);
           extraInfo = Text(
             AppLocalizations.of(context)!.lesPointsOntEteDistribues,
@@ -45463,17 +46643,25 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
       case 'Infiltré & Mr. White':
         final undercoverId = gameData['undercoverId'];
         final mrWhiteId = gameData['mrWhiteId'];
-        final undercoverName = players[undercoverId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
-        final mrWhiteName = players[mrWhiteId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+        final undercoverName =
+            players[undercoverId]?['name'] ??
+            AppLocalizations.of(context)!.inconnu;
+        final mrWhiteName =
+            players[mrWhiteId]?['name'] ??
+            AppLocalizations.of(context)!.inconnu;
         final wordPair = (gameData['roundData'] as String? ?? ":").split(":");
         final winner = gameData['roundWinnerId'];
 
         if (winner == 'impostors') {
           resultText = AppLocalizations.of(context)!.lesImposteursOntGagneUn;
         } else if (winner == 'civilians_and_mrwhite') {
-          resultText = AppLocalizations.of(context)!.lInfiltreAEteDemasque(undercoverName);
+          resultText = AppLocalizations.of(
+            context,
+          )!.lInfiltreAEteDemasque(undercoverName);
         } else if (winner == 'civilians_and_undercover') {
-          resultText = AppLocalizations.of(context)!.mrWhiteAEteDemasque(mrWhiteName);
+          resultText = AppLocalizations.of(
+            context,
+          )!.mrWhiteAEteDemasque(mrWhiteName);
         } else {
           resultText = AppLocalizations.of(context)!.leTourEstTermine;
         }
@@ -45481,7 +46669,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
         extraInfo = Column(
           children: [
             Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.leMotDesCivilsEtait, [wordPair[0]]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.leMotDesCivilsEtait,
+                [wordPair[0]],
+              ),
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white70,
@@ -45489,7 +46681,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leJugeLit,
             ),
             if (undercoverId != null)
               Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.leMotDeLInfiltre, [undercoverName, wordPair[1]]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.leMotDeLInfiltre,
+                  [undercoverName, wordPair[1]],
+                ),
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color: Colors.white70,
@@ -45497,7 +46693,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.leMotDeLIn
               ),
             if (mrWhiteId != null)
               Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAvaitPas, [mrWhiteName]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.mrWhiteNAvaitPas,
+                  [mrWhiteName],
+                ),
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color: Colors.white70,
@@ -45510,20 +46710,28 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
       case 'Synonyme ou Banni':
         final loserId = gameData['roundLoserId'];
         if (loserId != null) {
-          final loserName = players[loserId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+          final loserName =
+              players[loserId]?['name'] ??
+              AppLocalizations.of(context)!.quelquUn;
           final word = gameData['roundData'];
           final loserAnswer = gameData['answers'][loserId];
-          resultText =
-              AppLocalizations.of(context)!.aEteBanniPourSa(loserName, loserAnswer);
+          resultText = AppLocalizations.of(
+            context,
+          )!.aEteBanniPourSa(loserName, loserAnswer);
           extraInfo = Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.leMotATrouverEtait, [word]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.leMotATrouverEtait,
+              [word],
+            ),
             style: TextStyle(
               fontStyle: FontStyle.italic,
               color: Colors.white70,
             ),
           );
         } else {
-          resultText = AppLocalizations.of(context)!.egaliteDansLesVotesPersonne;
+          resultText =
+              AppLocalizations.of(context)!.egaliteDansLesVotesPersonne;
         }
         break;
 
@@ -45531,9 +46739,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
       case 'La Patate Chaude':
         final loserId = gameData['roundWinnerId'];
         if (loserId != null) {
-          final loserName = players[loserId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
-          resultText =
-              AppLocalizations.of(context)!.nAPasReponduA(loserName);
+          final loserName =
+              players[loserId]?['name'] ??
+              AppLocalizations.of(context)!.inconnu;
+          resultText = AppLocalizations.of(context)!.nAPasReponduA(loserName);
           extraInfo = Text(
             gameData['gameEndReason'] ??
                 AppLocalizations.of(context)!.tempsEcoule,
@@ -45549,15 +46758,23 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
 
       case 'Pictionary':
         final winnerId = gameData['roundWinnerId'];
-        final currentWord = gameData['currentPictionaryWord'] ?? AppLocalizations.of(context)!.mot;
+        final currentWord =
+            gameData['currentPictionaryWord'] ??
+            AppLocalizations.of(context)!.mot;
         final drawingPlayerName =
             players[gameData['currentDrawingPlayerId']]?['name'] ??
             AppLocalizations.of(context)!.leDessinateur;
         if (winnerId != null) {
-          final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+          final winnerName =
+              players[winnerId]?['name'] ??
+              AppLocalizations.of(context)!.quelquUn;
           resultText = AppLocalizations.of(context)!.aTrouveLeMot(winnerName);
           extraInfo = Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.felicitationsAuDessinateurEtA, [drawingPlayerName, winnerName]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.felicitationsAuDessinateurEtA,
+              [drawingPlayerName, winnerName],
+            ),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -45565,10 +46782,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
             ),
           );
         } else {
-          resultText = AppLocalizations.of(context)!.personneNATrouveLe(currentWord);
+          resultText = AppLocalizations.of(
+            context,
+          )!.personneNATrouveLe(currentWord);
           extraInfo = Text(
-            gameEndReason ??
-                AppLocalizations.of(context)!.leTempsEstEcouleOu,
+            gameEndReason ?? AppLocalizations.of(context)!.leTempsEstEcouleOu,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -45579,15 +46797,22 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
         break;
 
       case 'Just One':
-        final currentWord = gameData['justOneCurrentWord'] ?? AppLocalizations.of(context)!.mot;
+        final currentWord =
+            gameData['justOneCurrentWord'] ?? AppLocalizations.of(context)!.mot;
         final guesserName =
-            players[gameData['justOneGuesserId']]?['name'] ?? AppLocalizations.of(context)!.leDevin;
+            players[gameData['justOneGuesserId']]?['name'] ??
+            AppLocalizations.of(context)!.leDevin;
         final guesserAnswer =
-            gameData['justOneGuesserAnswer'] ?? AppLocalizations.of(context)!.pasDeReponse;
+            gameData['justOneGuesserAnswer'] ??
+            AppLocalizations.of(context)!.pasDeReponse;
         if (gameEndReason == AppLocalizations.of(context)!.motDevine) {
           resultText = AppLocalizations.of(context)!.aTrouveLeMot1(guesserName);
           extraInfo = Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.saReponseEtait, [guesserAnswer]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.saReponseEtait,
+              [guesserAnswer],
+            ),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontStyle: FontStyle.italic,
@@ -45599,7 +46824,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
           extraInfo = Column(
             children: [
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.leMotEtait, [currentWord]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.leMotEtait,
+                  [currentWord],
+                ),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
@@ -45607,7 +46836,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
                 ),
               ),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.saReponseEtait, [guesserAnswer]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.saReponseEtait,
+                  [guesserAnswer],
+                ),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
@@ -45628,8 +46861,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
         final String? winnerId = gameData['gameWinner'];
 
         if (gameData['gameState'] == 'gameOver' && winnerId != null) {
-          resultText =
-              AppLocalizations.of(context)!.remporteSkull(players[winnerId]?['name'] ?? AppLocalizations.of(context)!.unJoueur);
+          resultText = AppLocalizations.of(context)!.remporteSkull(
+            players[winnerId]?['name'] ??
+                AppLocalizations.of(context)!.unJoueur,
+          );
           extraInfo = Text(
             gameData['gameEndReason'] ??
                 AppLocalizations.of(context)!.deuxDefisReussis,
@@ -45640,7 +46875,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
             ),
           );
         } else if (outcome == 'won') {
-          resultText = AppLocalizations.of(context)!.defiGagneCarteSRevelee(challengeBid);
+          resultText = AppLocalizations.of(
+            context,
+          )!.defiGagneCarteSRevelee(challengeBid);
         } else if (outcome == 'lost') {
           final loserName =
               players[gameData['skullLastChallengeLoserId']]?['name'] ??
@@ -45666,11 +46903,21 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.mrWhiteNAv
                       final Map<String, dynamic> card =
                           Map<String, dynamic>.from(entry as Map);
                       final String ownerName =
-                          players[card['ownerId']]?['name'] ?? AppLocalizations.of(context)!.joueur;
+                          players[card['ownerId']]?['name'] ??
+                          AppLocalizations.of(context)!.joueur;
                       return Chip(
                         label: Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0, [ownerName, card['type'] == 'Crane' ? AppLocalizations.of(context)!.crane2 : AppLocalizations.of(context)!.rose1]),
-),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.stre93cb0,
+                            [
+                              ownerName,
+                              card['type'] == 'Crane'
+                                  ? AppLocalizations.of(context)!.crane2
+                                  : AppLocalizations.of(context)!.rose1,
+                            ],
+                          ),
+                        ),
                         backgroundColor:
                             card['type'] == 'Crane'
                                 ? Colors.redAccent.withOpacity(0.3)
@@ -45686,11 +46933,15 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       case 'Le Roi des Mèmes':
         final winnerId = gameData['roundWinnerId'];
         if (winnerId != null) {
-          final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+          final winnerName =
+              players[winnerId]?['name'] ??
+              AppLocalizations.of(context)!.quelquUn;
           final winningDescription =
               (gameData['answers'] as Map<String, dynamic>?)?[winnerId] ??
               AppLocalizations.of(context)!.uneDescriptionHilarante;
-          resultText = AppLocalizations.of(context)!.aGagneAvecSaDescription1(winnerName);
+          resultText = AppLocalizations.of(
+            context,
+          )!.aGagneAvecSaDescription1(winnerName);
           extraInfo = Column(
             children: [
               Text(
@@ -45710,7 +46961,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                     errorBuilder:
                         (context, error, stackTrace) => Center(
                           child: Text(
-                            AppLocalizations.of(context)!.erreurDeChargementDuMeme,
+                            AppLocalizations.of(
+                              context,
+                            )!.erreurDeChargementDuMeme,
                           ),
                         ),
                   ),
@@ -45718,8 +46971,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
             ],
           );
         } else {
-          resultText =
-              AppLocalizations.of(context)!.personneNAGagneCe;
+          resultText = AppLocalizations.of(context)!.personneNAGagneCe;
           extraInfo = Text(
             GameMessageLocalization.tr(context, gameEndReason ?? ""),
             style: TextStyle(
@@ -45734,24 +46986,31 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       case 'Dobble':
         final winnerId = gameData['roundWinnerId'];
         if (winnerId != null) {
-          final winnerName = players[winnerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+          final winnerName =
+              players[winnerId]?['name'] ??
+              AppLocalizations.of(context)!.quelquUn;
           final commonSym = gameData['commonSymbol'];
-          resultText =
-              AppLocalizations.of(context)!.aTrouveLeSymboleIl(winnerName, commonSym);
+          resultText = AppLocalizations.of(
+            context,
+          )!.aTrouveLeSymboleIl(winnerName, commonSym);
           extraInfo = Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.scoreActuelDeCartes, [
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.scoreActuelDeCartes,
+              [
                 players[winnerId]?['name'] ?? AppLocalizations.of(context)!.lui,
                 players[winnerId]?['score'] ?? 0,
-              ]),
+              ],
+            ),
             style: TextStyle(fontStyle: FontStyle.italic),
           );
         } else {
-          resultText =
-              AppLocalizations.of(context)!.leTourEstTerminePersonne;
+          resultText = AppLocalizations.of(context)!.leTourEstTerminePersonne;
           extraInfo = Text(
             GameMessageLocalization.tr(
               context,
-              gameEndReason ?? AppLocalizations.of(context)!.unProblemeEstSurvenu,
+              gameEndReason ??
+                  AppLocalizations.of(context)!.unProblemeEstSurvenu,
             ),
             style: TextStyle(fontStyle: FontStyle.italic),
           );
@@ -45762,7 +47021,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       default:
         final roundWinnerId = gameData['roundWinnerId'];
         if (roundWinnerId != null) {
-          final winnerName = players[roundWinnerId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+          final winnerName =
+              players[roundWinnerId]?['name'] ??
+              AppLocalizations.of(context)!.inconnu;
           resultText = AppLocalizations.of(context)!.aEteDesigneEEt(winnerName);
         } else {
           resultText = AppLocalizations.of(context)!.egalitePersonneNeMarqueDe;
@@ -45950,16 +47211,18 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
     bool isMasterSpy = (playerId == masterSpyRed || playerId == masterSpyBlue);
     if (isMasterSpy && keyCard.isEmpty) {
       return StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('games')
-            .doc(widget.gameCode)
-            .collection('private_data')
-            .doc(playerId)
-            .snapshots(),
+        stream:
+            FirebaseFirestore.instance
+                .collection('games')
+                .doc(widget.gameCode)
+                .collection('private_data')
+                .doc(playerId)
+                .snapshots(),
         builder: (context, spySnap) {
           final spyKeyCard = Map<String, String>.from(
             spySnap.data?.data() != null
-                ? ((spySnap.data!.data() as Map<String, dynamic>)['keyCard'] ?? {})
+                ? ((spySnap.data!.data() as Map<String, dynamic>)['keyCard'] ??
+                    {})
                 : {},
           );
           final updatedGameData = Map<String, dynamic>.from(gameData);
@@ -45982,7 +47245,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               ? AppLocalizations.of(context)!.codenamesRedTeam
               : (gameWinner == 'blue'
                   ? AppLocalizations.of(context)!.codenamesBlueTeam
-                  : (players[gameWinner]?['name'] ?? AppLocalizations.of(context)!.inconnu));
+                  : (players[gameWinner]?['name'] ??
+                      AppLocalizations.of(context)!.inconnu));
       return UniversalGameEndScreen(
         gameTitle: "Codenames",
         winnerId: gameWinner,
@@ -46014,9 +47278,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           child: Column(
             children: [
               Text(
-                AppLocalizations.of(context)!.codenamesTeamTurn(activeTeam == 'red'
-                          ? AppLocalizations.of(context)!.codenamesRed
-                          : AppLocalizations.of(context)!.codenamesBlue),
+                AppLocalizations.of(context)!.codenamesTeamTurn(
+                  activeTeam == 'red'
+                      ? AppLocalizations.of(context)!.codenamesRed
+                      : AppLocalizations.of(context)!.codenamesBlue,
+                ),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 5),
@@ -46060,16 +47326,23 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               }
 
               return StreamBuilder<DatabaseEvent>(
-                stream: _firebaseService.getCodenamesLiveStream(widget.gameCode),
+                stream: _firebaseService.getCodenamesLiveStream(
+                  widget.gameCode,
+                ),
                 builder: (context, liveSnap) {
                   List<String> pointers = [];
                   String? pointTeam;
-                  if (liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+                  if (liveSnap.hasData &&
+                      liveSnap.data!.snapshot.value != null) {
                     try {
-                      final raw = Map<String, dynamic>.from(liveSnap.data!.snapshot.value as Map);
+                      final raw = Map<String, dynamic>.from(
+                        liveSnap.data!.snapshot.value as Map,
+                      );
                       raw.forEach((pId, pData) {
                         if (pData is Map && pData['word'] == word) {
-                          final pName = players[pId]?['name'] ?? AppLocalizations.of(context)!.espion;
+                          final pName =
+                              players[pId]?['name'] ??
+                              AppLocalizations.of(context)!.espion;
                           pointers.add(pName);
                           pointTeam = pData['team'] as String?;
                         }
@@ -46078,7 +47351,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   }
 
                   final bool isPointed = pointers.isNotEmpty;
-                  final Color pointColor = (pointTeam == 'red') ? Colors.redAccent : Colors.cyanAccent;
+                  final Color pointColor =
+                      (pointTeam == 'red')
+                          ? Colors.redAccent
+                          : Colors.cyanAccent;
 
                   return GestureDetector(
                     onTap:
@@ -46108,12 +47384,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
 
                     child: Card(
                       color: cardColor,
-                      shape: isPointed
-                          ? RoundedRectangleBorder(
-                            side: BorderSide(color: pointColor, width: 2.5),
-                            borderRadius: BorderRadius.circular(6),
-                          )
-                          : null,
+                      shape:
+                          isPointed
+                              ? RoundedRectangleBorder(
+                                side: BorderSide(color: pointColor, width: 2.5),
+                                borderRadius: BorderRadius.circular(6),
+                              )
+                              : null,
                       child: Stack(
                         children: [
                           Center(
@@ -46131,7 +47408,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                               top: 2,
                               right: 2,
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                  vertical: 1,
+                                ),
                                 decoration: BoxDecoration(
                                   color: pointColor,
                                   borderRadius: BorderRadius.circular(6),
@@ -46252,7 +47532,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   TextField(
                     controller: clueController,
                     decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.codenamesClueLabel,
+                      labelText:
+                          AppLocalizations.of(context)!.codenamesClueLabel,
                     ),
                   ),
                   SizedBox(height: 10),
@@ -46269,7 +47550,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             .toList(),
                     onChanged: (val) => chosenCount = val!,
                     decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.codenamesWordCountLabel,
+                      labelText:
+                          AppLocalizations.of(context)!.codenamesWordCountLabel,
                     ),
                   ),
                   SizedBox(height: 10),
@@ -46315,7 +47597,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               )
             else if (gameData['currentClue'] != null)
               Text(
-                AppLocalizations.of(context)!.codenamesClueGiven("${gameData['currentClue']}", "${gameData['clueCount']}"),
+                AppLocalizations.of(context)!.codenamesClueGiven(
+                  "${gameData['currentClue']}",
+                  "${gameData['clueCount']}",
+                ),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontStyle: FontStyle.italic),
               ),
@@ -46347,9 +47632,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           Column(
             children: [
               Text(
-                AppLocalizations.of(context)!.codenamesClueFromSpy(activeTeam == 'red'
-                          ? AppLocalizations.of(context)!.codenamesYourMasterSpyRed
-                          : AppLocalizations.of(context)!.codenamesYourMasterSpyBlue),
+                AppLocalizations.of(context)!.codenamesClueFromSpy(
+                  activeTeam == 'red'
+                      ? AppLocalizations.of(context)!.codenamesYourMasterSpyRed
+                      : AppLocalizations.of(
+                        context,
+                      )!.codenamesYourMasterSpyBlue,
+                ),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(
@@ -46363,7 +47652,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               ),
               SizedBox(height: 5),
               Text(
-                AppLocalizations.of(context)!.codenamesGuessesLeft("$guessesLeft"),
+                AppLocalizations.of(
+                  context,
+                )!.codenamesGuessesLeft("$guessesLeft"),
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 10),
@@ -46399,9 +47690,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           )
         else
           Text(
-            AppLocalizations.of(context)!.codenamesWaitingForClue(activeTeam == 'red'
-                      ? AppLocalizations.of(context)!.codenamesRedLower
-                      : AppLocalizations.of(context)!.codenamesBlueLower),
+            AppLocalizations.of(context)!.codenamesWaitingForClue(
+              activeTeam == 'red'
+                  ? AppLocalizations.of(context)!.codenamesRedLower
+                  : AppLocalizations.of(context)!.codenamesBlueLower,
+            ),
             style: Theme.of(
               context,
             ).textTheme.titleLarge?.copyWith(color: Colors.white70),
@@ -46441,7 +47734,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         gameTitle: "Time's Up",
         winnerId: winTeam,
         winnerName: winName,
-        reason: AppLocalizations.of(context)!.timesUpGameOverReason("$scoreA", "$scoreB"),
+        reason: AppLocalizations.of(
+          context,
+        )!.timesUpGameOverReason("$scoreA", "$scoreB"),
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -46472,7 +47767,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            AppLocalizations.of(context)!.timesUpAddWordsCount("$targetWordCount"),
+            AppLocalizations.of(
+              context,
+            )!.timesUpAddWordsCount("$targetWordCount"),
             style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
@@ -46489,7 +47786,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   controller: _timesUpWordController,
                   enabled: _myTimesUpWords.length < targetWordCount,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.timesUpWordInputLabel("${_myTimesUpWords.length}", "$targetWordCount"),
+                    labelText: AppLocalizations.of(
+                      context,
+                    )!.timesUpWordInputLabel(
+                      "${_myTimesUpWords.length}",
+                      "$targetWordCount",
+                    ),
                   ),
                   onSubmitted: (value) {
                     final word = value.trim();
@@ -46573,7 +47875,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             if (mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e.toString()])),
+                                  content: Text(
+                                    GameContentLocalization.format(
+                                      context,
+                                      AppLocalizations.of(context)!.erreur2,
+                                      [e.toString()],
+                                    ),
+                                  ),
                                 ),
                               );
                             }
@@ -46595,7 +47903,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       ),
                     )
                     : Text(
-                      AppLocalizations.of(context)!.timesUpSubmitWords("$targetWordCount"),
+                      AppLocalizations.of(
+                        context,
+                      )!.timesUpSubmitWords("$targetWordCount"),
                     ),
           ),
         ],
@@ -46626,7 +47936,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       if (currentRoundNumber == 1)
         currentModeDescription = AppLocalizations.of(context)!.timesUpModeFree;
       else if (currentRoundNumber == 2)
-        currentModeDescription = AppLocalizations.of(context)!.timesUpModeOneWord;
+        currentModeDescription =
+            AppLocalizations.of(context)!.timesUpModeOneWord;
       else if (currentRoundNumber == 3)
         currentModeDescription = AppLocalizations.of(context)!.timesUpModeMime;
 
@@ -46643,7 +47954,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                AppLocalizations.of(context)!.timesUpTeamAScore("${teamScores['teamA'] ?? 0}"),
+                AppLocalizations.of(
+                  context,
+                )!.timesUpTeamAScore("${teamScores['teamA'] ?? 0}"),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -46654,7 +47967,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 ),
               ),
               Text(
-                AppLocalizations.of(context)!.timesUpTeamBScore("${teamScores['teamB'] ?? 0}"),
+                AppLocalizations.of(
+                  context,
+                )!.timesUpTeamBScore("${teamScores['teamB'] ?? 0}"),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -46680,7 +47995,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              AppLocalizations.of(context)!.timesUpRoundMode("$currentRoundNumber", currentModeDescription),
+              AppLocalizations.of(context)!.timesUpRoundMode(
+                "$currentRoundNumber",
+                currentModeDescription,
+              ),
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
@@ -46828,9 +48146,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                     setState(() => _isActionPending = false);
                                 });
                           },
-                  child: Text(
-                    AppLocalizations.of(context)!.timesUpEndMyTurn,
-                  ),
+                  child: Text(AppLocalizations.of(context)!.timesUpEndMyTurn),
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 ),
               ],
@@ -46882,7 +48198,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 ),
                 SizedBox(height: 40),
                 Text(
-                  AppLocalizations.of(context)!.timesUpCardsLeft("${currentDeck.length}"),
+                  AppLocalizations.of(
+                    context,
+                  )!.timesUpCardsLeft("${currentDeck.length}"),
                   style: TextStyle(color: Colors.white54),
                 ),
                 SizedBox(height: 20),
@@ -46988,7 +48306,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       return Column(
         children: [
           Text(
-            AppLocalizations.of(context)!.petitBacRound("${gameData['currentRound']}"),
+            AppLocalizations.of(
+              context,
+            )!.petitBacRound("${gameData['currentRound']}"),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           SizedBox(height: 10),
@@ -47033,7 +48353,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         child: TextField(
                           controller: categoryController,
                           decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context)!.petitBacAddCategory,
+                            labelText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.petitBacAddCategory,
                           ),
                         ),
                       ),
@@ -47079,7 +48402,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      AppLocalizations.of(context)!.petitBacMinOneCategory,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.petitBacMinOneCategory,
                                     ),
                                   ),
                                 );
@@ -47096,7 +48421,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                               ),
                             )
                             : Text(
-                              AppLocalizations.of(context)!.petitBacValidateCategories,
+                              AppLocalizations.of(
+                                context,
+                              )!.petitBacValidateCategories,
                             ),
                   ),
                 ],
@@ -47136,14 +48463,18 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.petitBacRound("${gameData['currentRound']}"),
+                          AppLocalizations.of(
+                            context,
+                          )!.petitBacRound("${gameData['currentRound']}"),
                           style: chalkStyle.copyWith(
                             fontSize: 14,
                             color: Colors.white70,
                           ),
                         ),
                         Text(
-                          AppLocalizations.of(context)!.petitBacLetter(currentLetter),
+                          AppLocalizations.of(
+                            context,
+                          )!.petitBacLetter(currentLetter),
                           style: chalkStyle.copyWith(
                             fontSize: 32,
                             color: Colors.yellowAccent,
@@ -47151,117 +48482,149 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         ),
                       ],
                     ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white30, width: 2),
-                  ),
-                  child:
-                      (roundStartTime != null)
-                          ? TweenAnimationBuilder<Duration>(
-                            duration:
-                                (() {
-                                  final diff = roundStartTime
-                                      .toDate()
-                                      .add(Duration(seconds: roundTime))
-                                      .difference(DateTime.now());
-                                  return diff.isNegative ? Duration.zero : diff;
-                                })(),
-                            tween: Tween(
-                              begin:
-                                  (() {
-                                    final diff = roundStartTime
-                                        .toDate()
-                                        .add(Duration(seconds: roundTime))
-                                        .difference(DateTime.now());
-                                    return diff.isNegative
-                                        ? Duration.zero
-                                        : diff;
-                                  })(),
-                              end: Duration.zero,
-                            ),
-                            builder: (
-                              BuildContext context,
-                              Duration value,
-                              Widget? child,
-                            ) {
-                              final secs = value.inSeconds;
-                              return Text(
-                                "$secs",
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white30, width: 2),
+                      ),
+                      child:
+                          (roundStartTime != null)
+                              ? TweenAnimationBuilder<Duration>(
+                                duration:
+                                    (() {
+                                      final diff = roundStartTime
+                                          .toDate()
+                                          .add(Duration(seconds: roundTime))
+                                          .difference(DateTime.now());
+                                      return diff.isNegative
+                                          ? Duration.zero
+                                          : diff;
+                                    })(),
+                                tween: Tween(
+                                  begin:
+                                      (() {
+                                        final diff = roundStartTime
+                                            .toDate()
+                                            .add(Duration(seconds: roundTime))
+                                            .difference(DateTime.now());
+                                        return diff.isNegative
+                                            ? Duration.zero
+                                            : diff;
+                                      })(),
+                                  end: Duration.zero,
+                                ),
+                                builder: (
+                                  BuildContext context,
+                                  Duration value,
+                                  Widget? child,
+                                ) {
+                                  final secs = value.inSeconds;
+                                  return Text(
+                                    "$secs",
+                                    style: chalkStyle.copyWith(
+                                      fontSize: 20,
+                                      color:
+                                          secs < 30
+                                              ? Colors.redAccent
+                                              : Colors.white,
+                                    ),
+                                  );
+                                },
+                              )
+                              : Text(
+                                "...",
                                 style: chalkStyle.copyWith(
                                   fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                    ),
+                  ],
+                ),
+                StreamBuilder<DatabaseEvent>(
+                  stream: _firebaseService.getPetitBacLiveStream(
+                    widget.gameCode,
+                  ),
+                  builder: (context, snap) {
+                    Map<String, int> progress = {};
+                    if (snap.hasData && snap.data!.snapshot.value != null) {
+                      try {
+                        final raw = Map<String, dynamic>.from(
+                          snap.data!.snapshot.value as Map,
+                        );
+                        raw.forEach((pId, data) {
+                          if (data is Map) {
+                            progress[pId] =
+                                (data['filledCount'] as num?)?.toInt() ?? 0;
+                          }
+                        });
+                      } catch (_) {}
+                    }
+
+                    if (progress.isEmpty) return const SizedBox.shrink();
+
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        children:
+                            progress.entries.map((e) {
+                              final pName =
+                                  players[e.key]?['name'] ??
+                                  AppLocalizations.of(context)!.joueur;
+                              final count = e.value;
+                              final bool isFull =
+                                  count >= categories.length &&
+                                  categories.isNotEmpty;
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
                                   color:
-                                      secs < 30
-                                          ? Colors.redAccent
-                                          : Colors.white,
+                                      isFull
+                                          ? Colors.redAccent.withOpacity(0.35)
+                                          : Colors.black38,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color:
+                                        isFull
+                                            ? Colors.redAccent
+                                            : Colors.white24,
+                                    width: isFull ? 1.5 : 0.8,
+                                  ),
+                                ),
+                                child: Text(
+                                  AppLocalizations.of(context)!.str98e212(
+                                    pName,
+                                    count,
+                                    categories.length,
+                                    isFull ? ' 🔥' : ' ⚡',
+                                  ),
+                                  style: TextStyle(
+                                    color:
+                                        isFull
+                                            ? Colors.yellowAccent
+                                            : Colors.white70,
+                                    fontSize: 11,
+                                    fontWeight:
+                                        isFull
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
+                                  ),
                                 ),
                               );
-                            },
-                          )
-                          : Text(
-                            "...",
-                            style: chalkStyle.copyWith(
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
-                          ),
+                            }).toList(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
-            StreamBuilder<DatabaseEvent>(
-              stream: _firebaseService.getPetitBacLiveStream(widget.gameCode),
-              builder: (context, snap) {
-                Map<String, int> progress = {};
-                if (snap.hasData && snap.data!.snapshot.value != null) {
-                  try {
-                    final raw = Map<String, dynamic>.from(snap.data!.snapshot.value as Map);
-                    raw.forEach((pId, data) {
-                      if (data is Map) {
-                        progress[pId] = (data['filledCount'] as num?)?.toInt() ?? 0;
-                      }
-                    });
-                  } catch (_) {}
-                }
-
-                if (progress.isEmpty) return const SizedBox.shrink();
-
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Wrap(
-                    spacing: 8,
-                    runSpacing: 4,
-                    children: progress.entries.map((e) {
-                      final pName = players[e.key]?['name'] ?? AppLocalizations.of(context)!.joueur;
-                      final count = e.value;
-                      final bool isFull = count >= categories.length && categories.isNotEmpty;
-                      return Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: isFull ? Colors.redAccent.withOpacity(0.35) : Colors.black38,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: isFull ? Colors.redAccent : Colors.white24,
-                            width: isFull ? 1.5 : 0.8,
-                          ),
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.str98e212(pName, count, categories.length, isFull ? ' 🔥' : ' ⚡'),
-                          style: TextStyle(
-                            color: isFull ? Colors.yellowAccent : Colors.white70,
-                            fontSize: 11,
-                            fontWeight: isFull ? FontWeight.bold : FontWeight.normal,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+          ),
 
           SizedBox(height: 10),
 
@@ -47309,8 +48672,19 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                 value,
                               );
                               myAnswers[category] = value;
-                              final filled = myAnswers.values.where((v) => v != null && v.toString().trim().isNotEmpty).length;
-                              _firebaseService.updatePetitBacLiveProgress(widget.gameCode, playerId, filled);
+                              final filled =
+                                  myAnswers.values
+                                      .where(
+                                        (v) =>
+                                            v != null &&
+                                            v.toString().trim().isNotEmpty,
+                                      )
+                                      .length;
+                              _firebaseService.updatePetitBacLiveProgress(
+                                widget.gameCode,
+                                playerId,
+                                filled,
+                              );
                             },
                           );
                         },
@@ -47406,7 +48780,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                     children:
                         sortedPlayersThisRound.map((pId) {
                           String playerName =
-                              players[pId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+                              players[pId]?['name'] ??
+                              AppLocalizations.of(context)!.inconnu;
                           String answer =
                               (allPlayerAnswers[pId]?[category] ?? '')
                                   .toString()
@@ -47566,7 +48941,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         ],
       );
     }
-    return _buildWaitingWidget(AppLocalizations.of(context)!.chargement, players, 0, 0);
+    return _buildWaitingWidget(
+      AppLocalizations.of(context)!.chargement,
+      players,
+      0,
+      0,
+    );
   }
 
   Widget _buildPresidentUI(
@@ -47618,7 +48998,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       return ListTile(
                         leading: CircleAvatar(child: Text("#${index + 1}")),
                         title: Text(
-                          players[rankEntry.key]?['name'] ?? AppLocalizations.of(context)!.inconnu,
+                          players[rankEntry.key]?['name'] ??
+                              AppLocalizations.of(context)!.inconnu,
                         ),
                         trailing: Text(
                           GameUiLocalization.tr(context, rankEntry.value),
@@ -47648,9 +49029,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                     child: Text(AppLocalizations.of(context)!.suite),
                   )
                 else
-                  Text(
-                    AppLocalizations.of(context)!.enAttenteDeLHote1,
-                  ),
+                  Text(AppLocalizations.of(context)!.enAttenteDeLHote1),
               ],
             ),
           ),
@@ -47682,7 +49061,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 child: Column(
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.presidentGivesTo(fromName, toName),
+                      AppLocalizations.of(
+                        context,
+                      )!.presidentGivesTo(fromName, toName),
                     ),
                     SizedBox(height: 10),
                     Row(
@@ -47895,7 +49276,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               ElevatedButton.icon(
                 icon: Icon(Icons.play_arrow),
                 label: Text(
-                  AppLocalizations.of(context)!.presidentPlayCards('${_selectedPresidentCards.length}'),
+                  AppLocalizations.of(
+                    context,
+                  )!.presidentPlayCards('${_selectedPresidentCards.length}'),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[700],
@@ -47930,7 +49313,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        AppLocalizations.of(context)!.coupInvalide,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.coupInvalide,
                                       ),
                                     ),
                                   );
@@ -48465,7 +49850,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   ),
                   SizedBox(height: 12),
                   Text(
-                    AppLocalizations.of(context)!.maximumPossibleCartes(maximumBid),
+                    AppLocalizations.of(
+                      context,
+                    )!.maximumPossibleCartes(maximumBid),
                     style: TextStyle(color: Colors.white38, fontSize: 11),
                   ),
                   SizedBox(height: 28),
@@ -48631,7 +50018,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         Text(
                           isMyTurn
                               ? AppLocalizations.of(context)!.cEstAVotreTour1
-                              : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '...']),
+                              : GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.tourDe,
+                                [players[currentPlayerId]?['name'] ?? '...'],
+                              ),
                           style: TextStyle(
                             fontSize: 11,
                             color:
@@ -48712,7 +50103,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       ),
                       SizedBox(width: 6),
                       Text(
-                        AppLocalizations.of(context)!.reflechitAUnDefiDeCartes(bidderName, liveAmount),
+                        AppLocalizations.of(
+                          context,
+                        )!.reflechitAUnDefiDeCartes(bidderName, liveAmount),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
@@ -48743,7 +50136,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       final bool isMe = (pId == playerId);
                       final bool isCurrent = (pId == currentPlayerId);
                       final bool hasPassed = passedPlayers.contains(pId);
-                      final String name = players[pId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+                      final String name =
+                          players[pId]?['name'] ??
+                          AppLocalizations.of(context)!.joueur;
                       final int score = (players[pId]?['score'] ?? 0) as int;
                       final bool isOut = players[pId]?['isOut'] == true;
                       final List matCards = (skullMats[pId] as List? ?? []);
@@ -48753,10 +50148,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         width: (MediaQuery.of(context).size.width - 44) / 2,
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color:
-                              isMe
-                                  ? Color(0xFF1A1A2E)
-                                  : Color(0xFF13131C),
+                          color: isMe ? Color(0xFF1A1A2E) : Color(0xFF13131C),
                           borderRadius: BorderRadius.circular(18),
                           border: Border.all(
                             color:
@@ -48874,12 +50266,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                               decoration: BoxDecoration(
                                                 color:
                                                     isMe
-                                                        ? Color(
-                                                          0xFF2E1C44,
-                                                        )
-                                                        : Color(
-                                                          0xFF1E1E28,
-                                                        ),
+                                                        ? Color(0xFF2E1C44)
+                                                        : Color(0xFF1E1E28),
                                                 borderRadius:
                                                     BorderRadius.circular(14),
                                                 border: Border.all(
@@ -48901,7 +50289,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                                 child: Text(
                                                   isMe
                                                       ? (matCards[i]['type'] ==
-                                                              AppLocalizations.of(context)!.crane1
+                                                              AppLocalizations.of(
+                                                                context,
+                                                              )!.crane1
                                                           ? '💀'
                                                           : '🌸')
                                                       : "•",
@@ -48965,7 +50355,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.votreMainCartes(myHand.length),
+                        AppLocalizations.of(
+                          context,
+                        )!.votreMainCartes(myHand.length),
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -48977,7 +50369,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         Text(
                           roundState == 'placing'
                               ? AppLocalizations.of(context)!.touchezPourPoser
-                              : AppLocalizations.of(context)!.encherissezOuPassez,
+                              : AppLocalizations.of(
+                                context,
+                              )!.encherissezOuPassez,
                           style: TextStyle(
                             fontSize: 11,
                             color: Colors.amberAccent,
@@ -49290,7 +50684,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
     Map<String, dynamic> gameData,
     String playerId,
   ) {
-    final int currentPictionaryRound = (gameData['currentRound'] as num?)?.toInt() ?? 0;
+    final int currentPictionaryRound =
+        (gameData['currentRound'] as num?)?.toInt() ?? 0;
     if (_lastPictionaryRound != currentPictionaryRound) {
       _lastPictionaryRound = currentPictionaryRound;
       _pictionaryDrawingController.clear();
@@ -49344,7 +50739,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           Container(
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              AppLocalizations.of(context)!.str4c885c(AppLocalizations.of(context)!.motADessiner, currentPictionaryWord != null ? GameUiLocalization.tr(context, currentPictionaryWord) : "..."),
+              AppLocalizations.of(context)!.str4c885c(
+                AppLocalizations.of(context)!.motADessiner,
+                currentPictionaryWord != null
+                    ? GameUiLocalization.tr(context, currentPictionaryWord)
+                    : "...",
+              ),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -49537,7 +50937,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                       color: Colors.grey[300],
                                     ),
                                     Text(
-                                      AppLocalizations.of(context)!.enAttenteDuDessin,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.enAttenteDuDessin,
                                       style: TextStyle(color: Colors.grey[400]),
                                     ),
                                   ],
@@ -49568,7 +50970,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         if (pictionaryOnly30Strokes && amIDrawingPlayer) ...[
                           SizedBox(width: 8),
                           Text(
-                            AppLocalizations.of(context)!.pictionaryStrokesCount(_pictionaryStrokeCount),
+                            AppLocalizations.of(
+                              context,
+                            )!.pictionaryStrokesCount(_pictionaryStrokeCount),
                             style: TextStyle(
                               color:
                                   drawingBlocked ? Colors.red : Colors.black54,
@@ -49786,9 +51190,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                       setState(() => _isActionPending = false);
                                   });
                             },
-                    child: Text(
-                      AppLocalizations.of(context)!.retourAuSalon1,
-                    ),
+                    child: Text(AppLocalizations.of(context)!.retourAuSalon1),
                   ),
               ],
             ),
@@ -49835,7 +51237,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 ),
                 if (answer.isNotEmpty)
                   Text(
-                    AppLocalizations.of(context)!.reponseDeJoueur(guesserName, answer),
+                    AppLocalizations.of(
+                      context,
+                    )!.reponseDeJoueur(guesserName, answer),
                     style: TextStyle(color: Colors.white70),
                     textAlign: TextAlign.center,
                   ),
@@ -49875,7 +51279,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             ? CircularProgressIndicator(color: Colors.white)
                             : Text(
                               deckIndex >= deckTotal
-                                  ? AppLocalizations.of(context)!.voirLeScoreFinal
+                                  ? AppLocalizations.of(
+                                    context,
+                                  )!.voirLeScoreFinal
                                   : "${AppLocalizations.of(context)!.carteSuivante} →",
                             ),
                   ),
@@ -49904,10 +51310,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               ),
               SizedBox(height: 8),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.carte, [
-                  deckIndex,
-                  deckTotal,
-                ]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.carte,
+                  [deckIndex, deckTotal],
+                ),
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 20),
@@ -49917,7 +51324,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               ),
               SizedBox(height: 30),
               _buildWaitingWidget(
-                AppLocalizations.of(context)!.indicesSoumisCount(justOneClues.length, players.length - 1),
+                AppLocalizations.of(
+                  context,
+                )!.indicesSoumisCount(justOneClues.length, players.length - 1),
                 players,
                 justOneClues.length,
                 players.length - 1,
@@ -49938,7 +51347,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                AppLocalizations.of(context)!.str6bd6b6(AppLocalizations.of(context)!.carte3, deckIndex, deckTotal, AppLocalizations.of(context)!.score, totalScore),
+                AppLocalizations.of(context)!.str6bd6b6(
+                  AppLocalizations.of(context)!.carte3,
+                  deckIndex,
+                  deckTotal,
+                  AppLocalizations.of(context)!.score,
+                  totalScore,
+                ),
                 style: TextStyle(color: Colors.white54, fontSize: 14),
               ),
               SizedBox(height: 8),
@@ -49986,7 +51401,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  AppLocalizations.of(context)!.unSeulMotAutorise,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.unSeulMotAutorise,
                                 ),
                               ),
                             );
@@ -50014,9 +51431,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 child:
                     _isActionPending
                         ? CircularProgressIndicator(color: Colors.white)
-                        : Text(
-                          AppLocalizations.of(context)!.envoyerLIndice,
-                        ),
+                        : Text(AppLocalizations.of(context)!.envoyerLIndice),
               ),
             ],
           );
@@ -50030,10 +51445,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.carte, [
-                    deckIndex,
-                    deckTotal,
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.carte,
+                    [deckIndex, deckTotal],
+                  ),
                   style: TextStyle(color: Colors.white54, fontSize: 14),
                 ),
                 SizedBox(height: 8),
@@ -50140,7 +51556,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         }
 
       default:
-        return _buildWaitingWidget(AppLocalizations.of(context)!.chargement, players, 0, 0);
+        return _buildWaitingWidget(
+          AppLocalizations.of(context)!.chargement,
+          players,
+          0,
+          0,
+        );
     }
   }
 
@@ -50163,7 +51584,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       List<MapEntry<String, int>> sortedScores = [];
       players.forEach((id, data) {
         sortedScores.add(
-          MapEntry(data['name'] ?? AppLocalizations.of(context)!.inconnu, data['score'] ?? 0),
+          MapEntry(
+            data['name'] ?? AppLocalizations.of(context)!.inconnu,
+            data['score'] ?? 0,
+          ),
         );
       });
       sortedScores.sort((a, b) => a.value.compareTo(b.value));
@@ -50195,7 +51619,12 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   (e) => Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2),
                     child: Text(
-                      AppLocalizations.of(context)!.pt(e.key + 1, e.value.key, e.value.value, e.value.value > 1 ? 's' : ''),
+                      AppLocalizations.of(context)!.pt(
+                        e.key + 1,
+                        e.value.key,
+                        e.value.value,
+                        e.value.value > 1 ? 's' : '',
+                      ),
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight:
@@ -50210,9 +51639,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       () => Navigator.of(
                         context,
                       ).popUntil((route) => route.isFirst),
-                  child: Text(
-                    AppLocalizations.of(context)!.retourALAccueil,
-                  ),
+                  child: Text(AppLocalizations.of(context)!.retourALAccueil),
                 ),
               ],
             ),
@@ -50230,14 +51657,17 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       secondsLeft = max(0, duration - elapsed);
     }
 
-    final String category = gameData['hotPotatoCategory'] ?? AppLocalizations.of(context)!.categorie;
+    final String category =
+        gameData['hotPotatoCategory'] ??
+        AppLocalizations.of(context)!.categorie;
     final List<String> usedAnswers = List<String>.from(
       gameData['hotPotatoUsedAnswers'] ?? [],
     );
 
     final bool isMyTurn = playerId == currentPotatoPlayerId;
     final String currentPotatoPlayerName =
-        players[currentPotatoPlayerId]?['name'] ?? AppLocalizations.of(context)!.quelquUn;
+        players[currentPotatoPlayerId]?['name'] ??
+        AppLocalizations.of(context)!.quelquUn;
 
     if (roundState == 'exploded') {
       return _buildHotPotatoExplodedUI(context, gameData, playerId);
@@ -50282,7 +51712,18 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: Chip(
                               label: Text(
-                                AppLocalizations.of(context)!.strf0868c(e.value['name']?.toString().substring(0, min(4, (e.value['name']?.toString().length ?? 0))) ?? '', e.value['score'] ?? 0),
+                                AppLocalizations.of(context)!.strf0868c(
+                                  e.value['name']?.toString().substring(
+                                        0,
+                                        min(
+                                          4,
+                                          (e.value['name']?.toString().length ??
+                                              0),
+                                        ),
+                                      ) ??
+                                      '',
+                                  e.value['score'] ?? 0,
+                                ),
                                 style: TextStyle(fontSize: 11),
                               ),
                               padding: EdgeInsets.zero,
@@ -50313,7 +51754,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               Text(
                 isMyTurn
                     ? AppLocalizations.of(context)!.cEstAToi
-                    : AppLocalizations.of(context)!.auTourDe2(currentPotatoPlayerName),
+                    : AppLocalizations.of(
+                      context,
+                    )!.auTourDe2(currentPotatoPlayerName),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: isMyTurn ? Colors.redAccent : Colors.white,
@@ -50384,10 +51827,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               children: [
                 Text(
                   AppLocalizations.of(context)!.categorie,
-                  style: TextStyle(
-                    color: Colors.white70,
-                    letterSpacing: 2,
-                  ),
+                  style: TextStyle(color: Colors.white70, letterSpacing: 2),
                 ),
                 SizedBox(height: 10),
                 Text(
@@ -50505,7 +51945,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           content: Text(
             GameMessageLocalization.tr(
               context,
-              e.toString().replaceAll(AppLocalizations.of(context)!.exception, ''),
+              e.toString().replaceAll(
+                AppLocalizations.of(context)!.exception,
+                '',
+              ),
             ),
           ),
         ),
@@ -50524,7 +51967,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       gameData['players'] ?? {},
     );
     final String? loserId = gameData['roundWinnerId'];
-    final String loserName = players[loserId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+    final String loserName =
+        players[loserId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
     final String gameEndReason =
         gameData['gameEndReason'] ??
         AppLocalizations.of(context)!.laPatateAExplose;
@@ -50544,7 +51988,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
     if (isCategories) {
       players.forEach((id, data) {
         sortedScores.add(
-          MapEntry(data['name'] ?? AppLocalizations.of(context)!.inconnu, data['score'] ?? 0),
+          MapEntry(
+            data['name'] ?? AppLocalizations.of(context)!.inconnu,
+            data['score'] ?? 0,
+          ),
         );
       });
       sortedScores.sort((a, b) => a.value.compareTo(b.value));
@@ -50582,7 +52029,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           SizedBox(height: 8),
           ...sortedScores.map(
             (e) => Text(
-              AppLocalizations.of(context)!.pt1(e.key, e.value, e.value > 1 ? 's' : ''),
+              AppLocalizations.of(
+                context,
+              )!.pt1(e.key, e.value, e.value > 1 ? 's' : ''),
               style: TextStyle(fontSize: 14),
             ),
           ),
@@ -50664,7 +52113,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
     final List<dynamic> gameLog = List<dynamic>.from(gameData['gameLog'] ?? []);
 
     if (phase == 'gameOver' || gameData['gameState'] == 'gameOver') {
-      String winnerText = gameData['gameWinner'] ?? AppLocalizations.of(context)!.finDeLaPartie1;
+      String winnerText =
+          gameData['gameWinner'] ??
+          AppLocalizations.of(context)!.finDeLaPartie1;
       if (winnerText == 'village')
         winnerText = AppLocalizations.of(context)!.victoireDesVillageois;
       else if (winnerText == 'loups')
@@ -50678,7 +52129,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         reason:
             gameLog.isNotEmpty
                 ? GameMessageLocalization.tr(context, gameLog.last.toString())
-                : (gameData['gameEndReason'] ?? AppLocalizations.of(context)!.finDuJeu),
+                : (gameData['gameEndReason'] ??
+                    AppLocalizations.of(context)!.finDuJeu),
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -50737,18 +52189,23 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
     }
 
     String promptText =
-        isNight ? AppLocalizations.of(context)!.leVillageSEndort : AppLocalizations.of(context)!.leVillageDelibere;
+        isNight
+            ? AppLocalizations.of(context)!.leVillageSEndort
+            : AppLocalizations.of(context)!.leVillageDelibere;
     Widget? centerActionWidget;
 
     // Décompte des votes
     Map<String, List<String>> votesReceived = {};
     if (phase == 'jour_vote') {
       dayVotes.forEach((voterId, targetId) {
-        final voterName = playerData[voterId]?['name'] ?? AppLocalizations.of(context)!.inconnu;
+        final voterName =
+            playerData[voterId]?['name'] ??
+            AppLocalizations.of(context)!.inconnu;
         votesReceived.putIfAbsent(targetId, () => []).add(voterName);
       });
 
-      if (myRole == AppLocalizations.of(context)!.mentaliste && myStatus == 'vivant') {
+      if (myRole == AppLocalizations.of(context)!.mentaliste &&
+          myStatus == 'vivant') {
         String? topTarget;
         int topVotes = 0;
         votesReceived.forEach((target, voters) {
@@ -50776,7 +52233,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           voterId,
           targetId,
         ) {
-          final voterName = playerData[voterId]?['name'] ?? AppLocalizations.of(context)!.loup;
+          final voterName =
+              playerData[voterId]?['name'] ??
+              AppLocalizations.of(context)!.loup;
           votesReceived.putIfAbsent(targetId, () => []).add(voterName);
         });
       }
@@ -50822,7 +52281,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 GameData.roleCamps[playerData[targetId]?['role']] == 'loups' ||
                 playerData[targetId]?['infectionStatus'] == 'infecte';
             if (amILoup && myStatus == 'vivant') return !targetIsLoup;
-            if (myRole == AppLocalizations.of(context)!.petiteFille && myStatus == 'vivant' && !amILoup)
+            if (myRole == AppLocalizations.of(context)!.petiteFille &&
+                myStatus == 'vivant' &&
+                !amILoup)
               return true;
             return false;
           case 'loup_blanc_turn':
@@ -50899,7 +52360,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           case 'loups_turn':
             setState(() => _isActionPending = true);
             if (amILoup) {
-              _firebaseService.updateLoupGarouLiveTarget(widget.gameCode, playerId, targetId);
+              _firebaseService.updateLoupGarouLiveTarget(
+                widget.gameCode,
+                playerId,
+                targetId,
+              );
               await _firebaseService.loupGarouVote(
                 widget.gameCode,
                 playerId,
@@ -51013,10 +52478,18 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       switch (subPhase) {
         case 'cupidon_turn':
           promptText =
-              lovers.isEmpty ? AppLocalizations.of(context)!.designez2Amoureux : AppLocalizations.of(context)!.amoureuxUnis;
-          if (myRole == AppLocalizations.of(context)!.cupidon && myStatus == 'vivant' && lovers.isEmpty) {
+              lovers.isEmpty
+                  ? AppLocalizations.of(context)!.designez2Amoureux
+                  : AppLocalizations.of(context)!.amoureuxUnis;
+          if (myRole == AppLocalizations.of(context)!.cupidon &&
+              myStatus == 'vivant' &&
+              lovers.isEmpty) {
             centerActionWidget = _buildActionButton(
-              label: GameContentLocalization.format(context, AppLocalizations.of(context)!.validerLeCouple2, [_lgLocalSelection.length.toString()]),
+              label: GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.validerLeCouple2,
+                [_lgLocalSelection.length.toString()],
+              ),
               icon: Icons.favorite,
               color: Colors.pinkAccent,
               onPressed:
@@ -51040,11 +52513,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           }
           break;
         case 'heritier_turn':
-          promptText = AppLocalizations.of(context)!.lHeritierChoisitSonTestament;
+          promptText =
+              AppLocalizations.of(context)!.lHeritierChoisitSonTestament;
           if (myRole == AppLocalizations.of(context)!.heritier &&
               myStatus == 'vivant' &&
               myData['testateurId'] == null) {
-            promptText = AppLocalizations.of(context)!.selectionnezVotreTestateur;
+            promptText =
+                AppLocalizations.of(context)!.selectionnezVotreTestateur;
           }
           break;
         case 'garde_turn':
@@ -51060,15 +52535,21 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           if (myRole == AppLocalizations.of(context)!.voyante &&
               myStatus == 'vivant' &&
               nightActions['voyanteActed'] != true) {
-            promptText = AppLocalizations.of(context)!.touchezUnJoueurPourSonder;
+            promptText =
+                AppLocalizations.of(context)!.touchezUnJoueurPourSonder;
           }
           break;
         case 'rat_malade_turn':
           promptText = AppLocalizations.of(context)!.leRatMaladeRode;
-          if (myRole == AppLocalizations.of(context)!.ratMalade && myStatus == 'vivant') {
+          if (myRole == AppLocalizations.of(context)!.ratMalade &&
+              myStatus == 'vivant') {
             promptText = AppLocalizations.of(context)!.contaminezJusquA2Joueurs;
             centerActionWidget = _buildActionButton(
-              label: GameContentLocalization.format(context, AppLocalizations.of(context)!.contaminer, [_lgLocalSelection.length.toString()]),
+              label: GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.contaminer,
+                [_lgLocalSelection.length.toString()],
+              ),
               icon: Icons.sick,
               color: Colors.lightGreenAccent,
               onPressed:
@@ -51093,7 +52574,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           promptText = AppLocalizations.of(context)!.lesLoupsChassentEnMeute;
           if (amILoup && myStatus == 'vivant')
             promptText = AppLocalizations.of(context)!.votezPourDevorerUneProie;
-          if (myRole == AppLocalizations.of(context)!.petiteFille && myStatus == 'vivant' && !amILoup)
+          if (myRole == AppLocalizations.of(context)!.petiteFille &&
+              myStatus == 'vivant' &&
+              !amILoup)
             promptText = AppLocalizations.of(context)!.espionnezUnJoueur;
           break;
         case 'loup_noir_action':
@@ -51102,7 +52585,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               playerData.entries
                   .firstWhere(
                     (e) =>
-                        e.value['role'] == AppLocalizations.of(context)!.loupNoir &&
+                        e.value['role'] ==
+                            AppLocalizations.of(context)!.loupNoir &&
                         e.value['status'] == 'vivant',
                     orElse: () => MapEntry('', {}),
                   )
@@ -51112,7 +52596,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               !(myData['infectionUsed'] ?? true) &&
               nightActions['loupTarget'] != null) {
             String targetName =
-                playerData[nightActions['loupTarget']]?['name'] ?? AppLocalizations.of(context)!.laVictime;
+                playerData[nightActions['loupTarget']]?['name'] ??
+                AppLocalizations.of(context)!.laVictime;
             promptText = AppLocalizations.of(context)!.infecter1(targetName);
             centerActionWidget = Row(
               mainAxisSize: MainAxisSize.min,
@@ -51155,21 +52640,29 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
               myStatus == 'vivant' &&
               nightNumber % 2 != 0 &&
               nightActions['loupBlancActed'] != true) {
-            promptText = AppLocalizations.of(context)!.choisissezUneVictimeADevorer;
+            promptText =
+                AppLocalizations.of(context)!.choisissezUneVictimeADevorer;
           }
           break;
         case 'sorciere_turn':
-          promptText = AppLocalizations.of(context)!.laSorcierePrepareSesPotions;
+          promptText =
+              AppLocalizations.of(context)!.laSorcierePrepareSesPotions;
           if (myRole == AppLocalizations.of(context)!.sorciere &&
               myStatus == 'vivant' &&
               nightActions['sorciereActed'] != true) {
             final victimeId = nightActions['loupTarget'];
-            final victimeName = (victimeId != null && playerData[victimeId] != null)
-                ? playerData[victimeId]['name']
-                : AppLocalizations.of(context)!.aucuneVictimeCetteNuitProtegee;
-            promptText = AppLocalizations.of(context)!.cibleDesLoups(victimeName);
+            final victimeName =
+                (victimeId != null && playerData[victimeId] != null)
+                    ? playerData[victimeId]['name']
+                    : AppLocalizations.of(
+                      context,
+                    )!.aucuneVictimeCetteNuitProtegee;
+            promptText = AppLocalizations.of(
+              context,
+            )!.cibleDesLoups(victimeName);
             if (_lgActionMode == 'poison')
-              promptText = AppLocalizations.of(context)!.touchezLeJoueurAEliminer;
+              promptText =
+                  AppLocalizations.of(context)!.touchezLeJoueurAEliminer;
 
             centerActionWidget = Wrap(
               spacing: 6,
@@ -51192,7 +52685,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 if (myData['potions']?['poison'] == true)
                   _buildActionButton(
                     label:
-                        _lgActionMode == 'poison' ? AppLocalizations.of(context)!.annuler : AppLocalizations.of(context)!.empoisonner,
+                        _lgActionMode == 'poison'
+                            ? AppLocalizations.of(context)!.annuler
+                            : AppLocalizations.of(context)!.empoisonner,
                     icon: Icons.science,
                     color:
                         _lgActionMode == 'poison'
@@ -51224,8 +52719,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           }
           break;
         case 'pyromancien_turn':
-          promptText = AppLocalizations.of(context)!.lePyromancienPrepareSesExplosifs;
-          if (myRole == AppLocalizations.of(context)!.pyromancien && myStatus == 'vivant') {
+          promptText =
+              AppLocalizations.of(context)!.lePyromancienPrepareSesExplosifs;
+          if (myRole == AppLocalizations.of(context)!.pyromancien &&
+              myStatus == 'vivant') {
             centerActionWidget = Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -51266,11 +52763,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
     } else if (phase == 'jour_discussion') {
       promptText = AppLocalizations.of(context)!.debatsDuVillage;
       if (subPhase == 'captain_designate') {
-        promptText = AppLocalizations.of(context)!.leCapitaineDesigneSonSuccesseur;
+        promptText =
+            AppLocalizations.of(context)!.leCapitaineDesigneSonSuccesseur;
       } else if (subPhase == 'chasseur_revenge') {
         promptText = AppLocalizations.of(context)!.dernierTirDuChasseur;
       } else if (subPhase == 'fossoyeur_reveal') {
-        promptText = AppLocalizations.of(context)!.leFossoyeurReveleUneSepulture;
+        promptText =
+            AppLocalizations.of(context)!.leFossoyeurReveleUneSepulture;
       } else if (subPhase == 'dictateur_coup') {
         promptText = AppLocalizations.of(context)!.coupDEtatDuDictateur;
       } else {
@@ -51354,7 +52853,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
       );
     }
 
-    final bool canSeeLovers = lovers.contains(playerId) || myRole == AppLocalizations.of(context)!.cupidon;
+    final bool canSeeLovers =
+        lovers.contains(playerId) ||
+        myRole == AppLocalizations.of(context)!.cupidon;
 
     return Container(
       decoration: BoxDecoration(
@@ -51427,22 +52928,33 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         left: centerX + x - (avatarSize / 2),
                         top: centerY + y - (avatarSize / 2),
                         child: StreamBuilder<DatabaseEvent>(
-                          stream: _firebaseService.getLoupGarouLiveTargetStream(widget.gameCode),
+                          stream: _firebaseService.getLoupGarouLiveTargetStream(
+                            widget.gameCode,
+                          ),
                           builder: (context, liveSnap) {
                             List<String> targetingWolves = [];
-                            if (subPhase == 'loups_turn' && amILoup && liveSnap.hasData && liveSnap.data!.snapshot.value != null) {
+                            if (subPhase == 'loups_turn' &&
+                                amILoup &&
+                                liveSnap.hasData &&
+                                liveSnap.data!.snapshot.value != null) {
                               try {
-                                final raw = Map<String, dynamic>.from(liveSnap.data!.snapshot.value as Map);
+                                final raw = Map<String, dynamic>.from(
+                                  liveSnap.data!.snapshot.value as Map,
+                                );
                                 raw.forEach((wId, wData) {
-                                  if (wData is Map && wData['targetId'] == pId) {
-                                    final wName = playerData[wId]?['name'] ?? AppLocalizations.of(context)!.loup;
+                                  if (wData is Map &&
+                                      wData['targetId'] == pId) {
+                                    final wName =
+                                        playerData[wId]?['name'] ??
+                                        AppLocalizations.of(context)!.loup;
                                     targetingWolves.add(wName);
                                   }
                                 });
                               } catch (_) {}
                             }
 
-                            final bool isWolfTargeted = targetingWolves.isNotEmpty;
+                            final bool isWolfTargeted =
+                                targetingWolves.isNotEmpty;
 
                             return Stack(
                               clipBehavior: Clip.none,
@@ -51468,14 +52980,22 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                     top: -8,
                                     right: -8,
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: Colors.red[900],
                                         borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(color: Colors.redAccent, width: 1.5),
+                                        border: Border.all(
+                                          color: Colors.redAccent,
+                                          width: 1.5,
+                                        ),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.redAccent.withOpacity(0.6),
+                                            color: Colors.redAccent.withOpacity(
+                                              0.6,
+                                            ),
                                             blurRadius: 8,
                                           ),
                                         ],
@@ -51483,7 +53003,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Text("🐺", style: TextStyle(fontSize: 10)),
+                                          Text(
+                                            "🐺",
+                                            style: TextStyle(fontSize: 10),
+                                          ),
                                           SizedBox(width: 2),
                                           Text(
                                             targetingWolves.first,
@@ -51603,10 +53126,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                     child: Text(
                       myRole,
                       style: TextStyle(
-                        color:
-                            amILoup
-                                ? Color(0xFFFCA5A5)
-                                : Color(0xFFDDD6FE),
+                        color: amILoup ? Color(0xFFFCA5A5) : Color(0xFFDDD6FE),
                         fontWeight: FontWeight.bold,
                         fontSize: 11,
                       ),
@@ -51922,7 +53442,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         myData['infectionStatus'] == 'infecte';
     final bool amIDead = myStatus == 'mort';
     final bool amILover = (gameData['lovers'] ?? []).contains(playerId);
-    final bool amINecromancer = myRole == AppLocalizations.of(context)!.necromancien;
+    final bool amINecromancer =
+        myRole == AppLocalizations.of(context)!.necromancien;
     final List<String> lovers = List<String>.from(gameData['lovers'] ?? []);
     List<dynamic> currentChatMessages = [];
     bool canSendMessage = false;
@@ -51957,18 +53478,34 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                _buildChatTab(AppLocalizations.of(context)!.village, 'global', Colors.blueAccent),
+                _buildChatTab(
+                  AppLocalizations.of(context)!.village,
+                  'global',
+                  Colors.blueAccent,
+                ),
                 if (amILoup || (amIDead && amILoup)) ...[
                   SizedBox(width: 4),
-                  _buildChatTab(AppLocalizations.of(context)!.loups, 'wolf', Colors.redAccent),
+                  _buildChatTab(
+                    AppLocalizations.of(context)!.loups,
+                    'wolf',
+                    Colors.redAccent,
+                  ),
                 ],
                 if (amIDead || amINecromancer) ...[
                   SizedBox(width: 4),
-                  _buildChatTab(AppLocalizations.of(context)!.outreTombe, 'dead', Colors.purpleAccent),
+                  _buildChatTab(
+                    AppLocalizations.of(context)!.outreTombe,
+                    'dead',
+                    Colors.purpleAccent,
+                  ),
                 ],
                 if (amILover && lovers.length == 2) ...[
                   SizedBox(width: 4),
-                  _buildChatTab(AppLocalizations.of(context)!.amoureux, 'lover', Colors.pinkAccent),
+                  _buildChatTab(
+                    AppLocalizations.of(context)!.amoureux,
+                    'lover',
+                    Colors.pinkAccent,
+                  ),
                 ],
               ],
             ),
@@ -51978,7 +53515,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
           // Messages
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: _firebaseService.getChatStream(widget.gameCode, _selectedChatType),
+              stream: _firebaseService.getChatStream(
+                widget.gameCode,
+                _selectedChatType,
+              ),
               builder: (context, snapshot) {
                 final docs = snapshot.hasData ? snapshot.data!.docs : [];
                 return ListView.builder(
@@ -51987,10 +53527,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   itemCount: docs.length,
                   itemBuilder: (context, index) {
                     final messageData =
-                        docs[docs.length - 1 - index].data() as Map<String, dynamic>;
+                        docs[docs.length - 1 - index].data()
+                            as Map<String, dynamic>;
                     final senderId = messageData['senderId'];
-                    final senderName = messageData['senderName'] ?? AppLocalizations.of(context)!.inconnu;
-                    final message = messageData['text'] ?? messageData['message'] ?? '';
+                    final senderName =
+                        messageData['senderName'] ??
+                        AppLocalizations.of(context)!.inconnu;
+                    final message =
+                        messageData['text'] ?? messageData['message'] ?? '';
                     final isMine = senderId == playerId;
 
                     return Padding(
@@ -52000,7 +53544,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                           style: TextStyle(fontSize: 11, color: Colors.white),
                           children: [
                             TextSpan(
-                              text: isMine ? "${AppLocalizations.of(context)!.moi}: " : "$senderName: ",
+                              text:
+                                  isMine
+                                      ? "${AppLocalizations.of(context)!.moi}: "
+                                      : "$senderName: ",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color:
@@ -52033,8 +53580,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       controller: _chatController,
                       style: const TextStyle(fontSize: 12, color: Colors.white),
                       decoration: InputDecoration(
-                        hintText:
-                            AppLocalizations.of(context)!.ecrireAu(_selectedChatType == 'wolf' ? AppLocalizations.of(context)!.meute : AppLocalizations.of(context)!.village),
+                        hintText: AppLocalizations.of(context)!.ecrireAu(
+                          _selectedChatType == 'wolf'
+                              ? AppLocalizations.of(context)!.meute
+                              : AppLocalizations.of(context)!.village,
+                        ),
                         hintStyle: const TextStyle(
                           color: Colors.white30,
                           fontSize: 11,
@@ -52193,7 +53743,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         gameTitle: "Petits Chevaux",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.arriveeAuCentreDuPlateau,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.arriveeAuCentreDuPlateau,
         players: players,
         gameData: gameData,
         gameCode: widget.gameCode,
@@ -52257,7 +53809,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             ? (hasRolled
                                 ? AppLocalizations.of(context)!.deplacezUnCheval
                                 : AppLocalizations.of(context)!.aVousDeLancer)
-                            : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '']),
+                            : GameContentLocalization.format(
+                              context,
+                              AppLocalizations.of(context)!.tourDe,
+                              [players[currentPlayerId]?['name'] ?? ''],
+                            ),
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
@@ -52269,10 +53825,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         isTeamMode
                             ? AppLocalizations.of(context)!.mode2v2Allies
                             : AppLocalizations.of(context)!.courseIndividuelle,
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.white38,
-                        ),
+                        style: TextStyle(fontSize: 10, color: Colors.white38),
                       ),
                     ],
                   ),
@@ -52538,9 +54091,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   if (isMyTurn && !hasRolled)
                     ElevatedButton.icon(
                       icon: Icon(Icons.casino_rounded, size: 20),
-                      label: Text(
-                        AppLocalizations.of(context)!.lancerLeDe,
-                      ),
+                      label: Text(AppLocalizations.of(context)!.lancerLeDe),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurpleAccent,
                         foregroundColor: Colors.white,
@@ -52574,7 +54125,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       children: [
                         Text(
                           _selectedLudoPawnIdx != null
-                              ? AppLocalizations.of(context)!.chevalSelectionneNtouchezPourAvancer
+                              ? AppLocalizations.of(
+                                context,
+                              )!.chevalSelectionneNtouchezPourAvancer
                               : AppLocalizations.of(context)!.touchezUnPion,
                           style: TextStyle(
                             color:
@@ -52664,7 +54217,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         gameTitle: AppLocalizations.of(context)!.dominos,
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.scoreLimiteAtteint,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.scoreLimiteAtteint,
         players: players,
         customScores: scores,
         gameData: gameData,
@@ -52692,8 +54247,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
     final boneyard = List<String>.from(gameData['dominoesBoneyard'] ?? []);
     final scores = Map<String, int>.from(gameData['dominoesScores'] ?? {});
     final bool roundOver = gameData['dominoesRoundOver'] ?? false;
-    final String mode = gameData['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
-    final bool isDrawMode = mode.toLowerCase() == 'pioche' ||
+    final String mode =
+        gameData['dominoesMode'] ?? AppLocalizations.of(context)!.pioche3;
+    final bool isDrawMode =
+        mode.toLowerCase() == 'pioche' ||
         mode.toLowerCase() == 'draw' ||
         mode.toLowerCase() == 'robo' ||
         mode == AppLocalizations.of(context)!.pioche3;
@@ -52727,10 +54284,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                   SizedBox(height: 10),
                   Text(
                     AppLocalizations.of(context)!.scorePoints,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.amberAccent,
-                    ),
+                    style: TextStyle(fontSize: 18, color: Colors.amberAccent),
                   ),
                   SizedBox(height: 10),
                   Text(
@@ -52857,9 +54411,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         () => _firebaseService.startNextDominoesRound(
                           widget.gameCode,
                         ),
-                    child: Text(
-                      AppLocalizations.of(context)!.mancheSuivante,
-                    ),
+                    child: Text(AppLocalizations.of(context)!.mancheSuivante),
                   )
                 else
                   Text(
@@ -52971,10 +54523,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 style: TextStyle(color: Colors.white38, fontSize: 11),
               ),
               if (openEnds.isEmpty)
-                Text(
-                  "—",
-                  style: TextStyle(color: Colors.white24, fontSize: 11),
-                )
+                Text("—", style: TextStyle(color: Colors.white24, fontSize: 11))
               else
                 ...openEnds.map(
                   (e) => Container(
@@ -53093,12 +54642,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         child: Text(
                           isMyTurn
                               ? AppLocalizations.of(context)!.cEstVotreTour
-                              : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '...']),
+                              : GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.tourDe,
+                                [players[currentPlayerId]?['name'] ?? '...'],
+                              ),
                           style: TextStyle(
                             color:
-                                isMyTurn
-                                    ? Color(0xFF34d399)
-                                    : Colors.white38,
+                                isMyTurn ? Color(0xFF34d399) : Colors.white38,
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                           ),
@@ -53133,7 +54684,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       // Bouton passer
                       if (isMyTurn &&
                           !roundOver &&
-                          (boneyard.isEmpty || mode != AppLocalizations.of(context)!.pioche3) &&
+                          (boneyard.isEmpty ||
+                              mode != AppLocalizations.of(context)!.pioche3) &&
                           !hasPlayableTile())
                         TextButton(
                           onPressed:
@@ -53294,7 +54846,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
         winnerId: gameData['gameWinner'],
         winnerName: getPlayerName(gameData['gameWinner'] ?? ''),
         reason:
-            gameData['gameEndReason'] ?? AppLocalizations.of(context)!.toutesLesGrillesSontCompletees,
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.toutesLesGrillesSontCompletees,
         players: players,
         customScores: finalScores,
         gameData: gameData,
@@ -53362,10 +54915,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                 child: Row(
                   children: [
                     ChoiceChip(
-                      avatar: Icon(
-                        Icons.compare_arrows_rounded,
-                        size: 14,
-                      ),
+                      avatar: Icon(Icons.compare_arrows_rounded, size: 14),
                       label: Text(
                         AppLocalizations.of(context)!.faceAFaceCoteA,
                         style: TextStyle(fontSize: 11),
@@ -53382,7 +54932,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                       ChoiceChip(
                         avatar: Icon(Icons.visibility_rounded, size: 14),
                         label: Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.ficheDePts, [oppName, oppTotal]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.ficheDePts,
+                            [oppName, oppTotal],
+                          ),
                           style: TextStyle(fontSize: 11),
                         ),
                         selected: isInspectingOpponentOnly,
@@ -53406,7 +54960,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             child: ActionChip(
                               avatar: Icon(Icons.person, size: 13),
                               label: Text(
-                                AppLocalizations.of(context)!.pts2(otherName, otherTotal),
+                                AppLocalizations.of(
+                                  context,
+                                )!.pts2(otherName, otherTotal),
                                 style: TextStyle(fontSize: 11),
                               ),
                               onPressed: () {
@@ -53469,11 +55025,20 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                         Flexible(
                           child: Text(
                             isMyTurn
-                                ? AppLocalizations.of(context)!.cEstVotreTourTouchez
+                                ? AppLocalizations.of(
+                                  context,
+                                )!.cEstVotreTourTouchez
                                 : (lastHoldAction != null &&
                                         lastHoldAction.isNotEmpty
-                                    ? AppLocalizations.of(context)!.k3Lancers(lastHoldAction, 3 - rollsLeft)
-                                    : AppLocalizations.of(context)!.joueEnDirect3Lancers(getPlayerName(currentPlayerId), 3 - rollsLeft)),
+                                    ? AppLocalizations.of(
+                                      context,
+                                    )!.k3Lancers(lastHoldAction, 3 - rollsLeft)
+                                    : AppLocalizations.of(
+                                      context,
+                                    )!.joueEnDirect3Lancers(
+                                      getPlayerName(currentPlayerId),
+                                      3 - rollsLeft,
+                                    )),
                             style: TextStyle(
                               fontSize: 12.5,
                               fontWeight: FontWeight.bold,
@@ -53648,7 +55213,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            GameContentLocalization.format(context, AppLocalizations.of(context)!.gardeS, [heldDice.where((h) => h).length]),
+                            GameContentLocalization.format(
+                              context,
+                              AppLocalizations.of(context)!.gardeS,
+                              [heldDice.where((h) => h).length],
+                            ),
                             style: TextStyle(
                               fontSize: 11,
                               color: Colors.amberAccent,
@@ -53712,7 +55281,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.stre93cb0,
                             ),
                           ),
                           Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePts, [oppName, oppTotal]),
+                            GameContentLocalization.format(
+                              context,
+                              AppLocalizations.of(context)!.grilleDePts,
+                              [oppName, oppTotal],
+                            ),
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -53739,7 +55312,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                             flex: 4,
                             child: Center(
                               child: Text(
-                                AppLocalizations.of(context)!.pts3(AppLocalizations.of(context)!.moi, myTotal),
+                                AppLocalizations.of(context)!.pts3(
+                                  AppLocalizations.of(context)!.moi,
+                                  myTotal,
+                                ),
                                 style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
@@ -53754,7 +55330,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                               flex: 4,
                               child: Center(
                                 child: Text(
-                                  AppLocalizations.of(context)!.pts4(oppName, oppTotal),
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.pts4(oppName, oppTotal),
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
@@ -53827,7 +55405,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  AppLocalizations.of(context)!.pts5(oppCellScore),
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.pts5(oppCellScore),
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
@@ -54021,7 +55601,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                 ),
                               ),
                               Text(
-                                AppLocalizations.of(context)!.k1663(oppUpper, oppBonus > 0 ? '(+35)' : ''),
+                                AppLocalizations.of(
+                                  context,
+                                )!.k1663(oppUpper, oppBonus > 0 ? '(+35)' : ''),
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Colors.white54,
@@ -54059,7 +55641,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                   ),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.k16631(myUpper, myBonus > 0 ? '(+35)' : ''),
+                                  AppLocalizations.of(context)!.k16631(
+                                    myUpper,
+                                    myBonus > 0 ? '(+35)' : '',
+                                  ),
                                   style: TextStyle(
                                     fontSize: 9.5,
                                     color: Colors.white54,
@@ -54075,7 +55660,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!.pts6(oppTotal),
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.pts6(oppTotal),
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w900,
@@ -54083,7 +55670,10 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                     ),
                                   ),
                                   Text(
-                                    AppLocalizations.of(context)!.k1663(oppUpper, oppBonus > 0 ? '(+35)' : ''),
+                                    AppLocalizations.of(context)!.k1663(
+                                      oppUpper,
+                                      oppBonus > 0 ? '(+35)' : '',
+                                    ),
                                     style: TextStyle(
                                       fontSize: 9.5,
                                       color: Colors.white54,
@@ -54223,7 +55813,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                     children: [
                       Text(
                         trumpSuit != null
-                            ? AppLocalizations.of(context)!.atout(_getSuitSymbol(context, trumpSuit))
+                            ? AppLocalizations.of(
+                              context,
+                            )!.atout(_getSuitSymbol(context, trumpSuit))
                             : AppLocalizations.of(context)!.encheresEnCours,
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
@@ -54267,7 +55859,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                   Text(
                     isMyTurn
                         ? AppLocalizations.of(context)!.aVousDOuvrirLe
-                        : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe1, [playerData[playerOrder[currentIndex]]?['name'] ?? '']),
+                        : GameContentLocalization.format(
+                          context,
+                          AppLocalizations.of(context)!.tourDe1,
+                          [
+                            playerData[playerOrder[currentIndex]]?['name'] ??
+                                '',
+                          ],
+                        ),
                     style: TextStyle(
                       color: isMyTurn ? Colors.greenAccent : Colors.white38,
                       fontWeight: FontWeight.bold,
@@ -54372,9 +55971,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                         return ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                isRed
-                                    ? Color(0xFF991B1B)
-                                    : Color(0xFF1E293B),
+                                isRed ? Color(0xFF991B1B) : Color(0xFF1E293B),
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -54489,7 +56086,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                               SnackBar(
                                                 content: Text(
                                                   e.toString().replaceAll(
-                                                    AppLocalizations.of(context)!.exception,
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.exception,
                                                     '',
                                                   ),
                                                 ),
@@ -54619,7 +56218,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                   melds.values.every((list) => (list as List).isEmpty)
                       ? Center(
                         child: Text(
-                          AppLocalizations.of(context)!.aucuneCombinaisonEtaleeSurLa,
+                          AppLocalizations.of(
+                            context,
+                          )!.aucuneCombinaisonEtaleeSurLa,
                           style: TextStyle(
                             color: Colors.white38,
                             fontSize: 12,
@@ -54665,7 +56266,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      AppLocalizations.of(context)!.combinaisonsDe,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.combinaisonsDe,
                                       style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
@@ -54977,9 +56580,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                         children: [
                           ElevatedButton.icon(
                             icon: Icon(Icons.layers_rounded, size: 16),
-                            label: Text(
-                              AppLocalizations.of(context)!.etaler,
-                            ),
+                            label: Text(AppLocalizations.of(context)!.etaler),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.teal[700],
                               foregroundColor: Colors.white,
@@ -55009,7 +56610,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                               SnackBar(
                                                 content: Text(
                                                   e.toString().replaceAll(
-                                                    AppLocalizations.of(context)!.exception,
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.exception,
                                                     '',
                                                   ),
                                                 ),
@@ -55022,10 +56625,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                     : null,
                           ),
                           ElevatedButton.icon(
-                            icon: Icon(
-                              Icons.arrow_downward_rounded,
-                              size: 16,
-                            ),
+                            icon: Icon(Icons.arrow_downward_rounded, size: 16),
                             label: Text(
                               AppLocalizations.of(context)!.defausserFin,
                             ),
@@ -55058,7 +56658,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                               SnackBar(
                                                 content: Text(
                                                   e.toString().replaceAll(
-                                                    AppLocalizations.of(context)!.exception,
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.exception,
                                                     '',
                                                   ),
                                                 ),
@@ -55092,8 +56694,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
     final String rank = cleanC.substring(0, cleanC.length - 1);
     final String suit = cleanC.substring(cleanC.length - 1);
     final bool isRed = (suit == 'H' || suit == 'D');
-    final Color textColor =
-        isRed ? Color(0xFFD32F2F) : Color(0xFF212121);
+    final Color textColor = isRed ? Color(0xFFD32F2F) : Color(0xFF212121);
     final String suitSymbol =
         {'H': '♥', 'D': '♦', 'C': '♣', 'S': '♠'}[suit] ?? '?';
 
@@ -55174,9 +56775,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                   ),
                 ],
               )
-              : Center(
-                child: Icon(Icons.style_rounded, color: Colors.white54),
-              ),
+              : Center(child: Icon(Icons.style_rounded, color: Colors.white54)),
     );
   }
 
@@ -55200,7 +56799,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
         gameTitle: "Rami",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.scoreLimiteAtteint,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.scoreLimiteAtteint,
         players: players,
         customScores: scores,
         gameData: gameData,
@@ -55261,10 +56862,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                     Text(
                       players[e.key]?['name'] ??
                           AppLocalizations.of(context)!.joueur,
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 15,
-                      ),
+                      style: TextStyle(color: Colors.white70, fontSize: 15),
                     ),
                     Text(
                       AppLocalizations.of(context)!.pts8(e.value),
@@ -55291,9 +56889,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
             else if (isGameOver)
               ElevatedButton.icon(
                 icon: Icon(Icons.home_rounded),
-                label: Text(
-                  AppLocalizations.of(context)!.retourALAccueil,
-                ),
+                label: Text(AppLocalizations.of(context)!.retourALAccueil),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurpleAccent,
                 ),
@@ -55370,7 +56966,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
         gameTitle: "Blokus",
         winnerId: gameData['gameWinner'],
         winnerName: players[gameData['gameWinner']]?['name'],
-        reason: gameData['gameEndReason'] ?? AppLocalizations.of(context)!.plusAucunCoupPossible,
+        reason:
+            gameData['gameEndReason'] ??
+            AppLocalizations.of(context)!.plusAucunCoupPossible,
         players: players,
         customScores: scores,
         gameData: gameData,
@@ -55471,7 +57069,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                             Text(
                               isMyTurn
                                   ? AppLocalizations.of(context)!.aVotreTour
-                                  : GameContentLocalization.format(context, AppLocalizations.of(context)!.tourDe, [players[currentPlayerId]?['name'] ?? '...']),
+                                  : GameContentLocalization.format(
+                                    context,
+                                    AppLocalizations.of(context)!.tourDe,
+                                    [
+                                      players[currentPlayerId]?['name'] ??
+                                          '...',
+                                    ],
+                                  ),
                               style: TextStyle(
                                 color:
                                     isMyTurn ? getColor(myColor) : Colors.white,
@@ -55482,7 +57087,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                             ),
                             if (isFirstPiece && isMyTurn)
                               Text(
-                                AppLocalizations.of(context)!.placezDansVotreCoin,
+                                AppLocalizations.of(
+                                  context,
+                                )!.placezDansVotreCoin,
                                 style: TextStyle(
                                   color: Colors.amberAccent,
                                   fontSize: 11,
@@ -55580,7 +57187,8 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                     ? Colors.greenAccent
                                     : Colors.grey,
                           ),
-                          tooltip: AppLocalizations.of(context)!.validerLePlacement,
+                          tooltip:
+                              AppLocalizations.of(context)!.validerLePlacement,
                           constraints: BoxConstraints(),
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           onPressed:
@@ -55623,7 +57231,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
                                         SnackBar(
                                           content: Text(
                                             e.toString().replaceAll(
-                                              AppLocalizations.of(context)!.exception,
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.exception,
                                               '',
                                             ),
                                           ),
@@ -56006,13 +57616,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.grilleDePt
               : myColor == 'green'
               ? "0_19"
               : "19_0";
-      bool coversCorner = absoluteCoords.any(
-        (c) {
-          final key = "${c[0]}_${c[1]}";
-          return key == cornerTarget ||
-              (validCorners.contains(key) && !board.containsKey(key));
-        },
-      );
+      bool coversCorner = absoluteCoords.any((c) {
+        final key = "${c[0]}_${c[1]}";
+        return key == cornerTarget ||
+            (validCorners.contains(key) && !board.containsKey(key));
+      });
       setState(() => _blokusCanPlace = coversCorner);
     } else {
       setState(() => _blokusCanPlace = touchesCorner);
@@ -56458,7 +58066,9 @@ class _DrawingScreenState extends State<DrawingScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        AppLocalizations.of(context)!.vousDevezDessinerQuelqueChose,
+                        AppLocalizations.of(
+                          context,
+                        )!.vousDevezDessinerQuelqueChose,
                       ),
                     ),
                   );
@@ -56513,9 +58123,7 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
     } else if (name.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.ceJoueurExisteDeja,
-          ),
+          content: Text(AppLocalizations.of(context)!.ceJoueurExisteDeja),
         ),
       );
     }
@@ -56531,9 +58139,7 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.participantsModeLocal,
-        ),
+        title: Text(AppLocalizations.of(context)!.participantsModeLocal),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -56550,7 +58156,9 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
                 Expanded(
                   child: TextField(
                     controller: _nameController,
-                    decoration: InputDecoration(labelText: AppLocalizations.of(context)!.prenomDuJoueur),
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.prenomDuJoueur,
+                    ),
                     onSubmitted: (_) => _addPlayer(),
                   ),
                 ),
@@ -56619,9 +58227,11 @@ class _LocalPlayerSetupScreenState extends State<LocalPlayerSetupScreen> {
                       },
               child: Text(
                 widget.targetGame != null
-                    ? GameContentLocalization.format(context, AppLocalizations.of(context)!.lancer1, [
-                      widget.targetGame,
-                    ])
+                    ? GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.lancer1,
+                      [widget.targetGame],
+                    )
                     : AppLocalizations.of(context)!.choisirUnJeu,
               ),
             ),
@@ -56918,9 +58528,7 @@ class OfflineMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.choisirUnJeuLocal,
-        ),
+        title: Text(AppLocalizations.of(context)!.choisirUnJeuLocal),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -57043,7 +58651,10 @@ class OfflineMenuScreen extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16),
       child: ListTile(
         leading: Icon(icon, size: 40, color: Colors.deepPurpleAccent),
-        title: Text(GameContentLocalization.ui(context, title), style: Theme.of(context).textTheme.titleLarge),
+        title: Text(
+          GameContentLocalization.ui(context, title),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         subtitle: Text(
           GameContentLocalization.ui(context, description),
           style: Theme.of(context).textTheme.bodyMedium,
@@ -57054,7 +58665,11 @@ class OfflineMenuScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.ilFautAuMoinsJoueurs, [minPlayers]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.ilFautAuMoinsJoueurs,
+                    [minPlayers],
+                  ),
                 ),
               ),
             );
@@ -57064,7 +58679,11 @@ class OfflineMenuScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.ceModeSupporteAuMaximum, [maxPlayers]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.ceModeSupporteAuMaximum,
+                    [maxPlayers],
+                  ),
                 ),
               ),
             );
@@ -57154,9 +58773,7 @@ class _TruthOrDareLocalSetupScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.parametresActionOuVerite1,
-        ),
+        title: Text(AppLocalizations.of(context)!.parametresActionOuVerite1),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -57248,7 +58865,9 @@ class _TruthOrDareLocalSetupScreenState
                           ),
                           SizedBox(width: 8),
                           Text(
-                            AppLocalizations.of(context)!.generationIaPersonnalisee,
+                            AppLocalizations.of(
+                              context,
+                            )!.generationIaPersonnalisee,
                             style: TextStyle(
                               color: Colors.amberAccent,
                               fontWeight: FontWeight.bold,
@@ -57260,7 +58879,10 @@ class _TruthOrDareLocalSetupScreenState
                       TextField(
                         controller: _aiController,
                         decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.exSoireePyjamaSecretsDe,
+                          hintText:
+                              AppLocalizations.of(
+                                context,
+                              )!.exSoireePyjamaSecretsDe,
                           hintStyle: TextStyle(color: Colors.white38),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.3),
@@ -57285,7 +58907,9 @@ class _TruthOrDareLocalSetupScreenState
                         label: Text(
                           _isAiLoading
                               ? AppLocalizations.of(context)!.generation
-                              : AppLocalizations.of(context)!.genererLesDefisParIa,
+                              : AppLocalizations.of(
+                                context,
+                              )!.genererLesDefisParIa,
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amberAccent,
@@ -57300,8 +58924,11 @@ class _TruthOrDareLocalSetupScreenState
                                     try {
                                       final res =
                                           await FirebaseService.generateAiWords(
-                                            instructions:
-                                                AppLocalizations.of(context)!.genereUnMelangeDActions(_aiController.text.trim()),
+                                            instructions: AppLocalizations.of(
+                                              context,
+                                            )!.genereUnMelangeDActions(
+                                              _aiController.text.trim(),
+                                            ),
                                             count: 30,
                                             gameType: 'Action ou Vérité',
                                           );
@@ -57313,30 +58940,64 @@ class _TruthOrDareLocalSetupScreenState
                                           for (final item in res) {
                                             final trimmed = item.trim();
                                             final lower = trimmed.toLowerCase();
-                                            if (lower.startsWith('action:') || lower.startsWith('action :')) {
-                                              parsedDares.add(trimmed.substring(trimmed.indexOf(':') + 1).trim());
-                                            } else if (lower.startsWith('vérité:') || lower.startsWith('vérité :') || lower.startsWith('verite:') || lower.startsWith('verite :')) {
-                                              parsedTruths.add(trimmed.substring(trimmed.indexOf(':') + 1).trim());
+                                            if (lower.startsWith('action:') ||
+                                                lower.startsWith('action :')) {
+                                              parsedDares.add(
+                                                trimmed
+                                                    .substring(
+                                                      trimmed.indexOf(':') + 1,
+                                                    )
+                                                    .trim(),
+                                              );
+                                            } else if (lower.startsWith(
+                                                  'vérité:',
+                                                ) ||
+                                                lower.startsWith('vérité :') ||
+                                                lower.startsWith('verite:') ||
+                                                lower.startsWith('verite :')) {
+                                              parsedTruths.add(
+                                                trimmed
+                                                    .substring(
+                                                      trimmed.indexOf(':') + 1,
+                                                    )
+                                                    .trim(),
+                                              );
                                             } else {
                                               unprefixed.add(trimmed);
                                             }
                                           }
-                                          for (int i = 0; i < unprefixed.length; i++) {
+                                          for (
+                                            int i = 0;
+                                            i < unprefixed.length;
+                                            i++
+                                          ) {
                                             if (i.isEven) {
                                               parsedDares.add(unprefixed[i]);
                                             } else {
                                               parsedTruths.add(unprefixed[i]);
                                             }
                                           }
-                                          _aiDares = parsedDares.isNotEmpty ? parsedDares : res;
-                                          _aiTruths = parsedTruths.isNotEmpty ? parsedTruths : res;
+                                          _aiDares =
+                                              parsedDares.isNotEmpty
+                                                  ? parsedDares
+                                                  : res;
+                                          _aiTruths =
+                                              parsedTruths.isNotEmpty
+                                                  ? parsedTruths
+                                                  : res;
                                         });
                                         ScaffoldMessenger.of(
                                           context,
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              GameContentLocalization.format(context, AppLocalizations.of(context)!.defisIaGeneres, [res.length]),
+                                              GameContentLocalization.format(
+                                                context,
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.defisIaGeneres,
+                                                [res.length],
+                                              ),
                                             ),
                                             backgroundColor: Colors.green[800],
                                           ),
@@ -57353,7 +59014,11 @@ class _TruthOrDareLocalSetupScreenState
                       if (_aiTruths.isNotEmpty || _aiDares.isNotEmpty) ...[
                         SizedBox(height: 6),
                         Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.defisPrets, [_aiTruths.length + _aiDares.length]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.defisPrets,
+                            [_aiTruths.length + _aiDares.length],
+                          ),
                           style: TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 12,
@@ -57464,13 +59129,17 @@ class _TruthOrDareLocalGameScreenState
           otherPlayers[Random().nextInt(otherPlayers.length)],
         );
       } else {
-        content = content.replaceAll('{player}', AppLocalizations.of(context)!.toiMeme);
+        content = content.replaceAll(
+          '{player}',
+          AppLocalizations.of(context)!.toiMeme,
+        );
       }
     }
 
-    int xpGain = (type == 'truth')
-        ? (_difficulty == 'hardcore' ? 25 : 15)
-        : (_difficulty == 'hardcore' ? 45 : 28);
+    int xpGain =
+        (type == 'truth')
+            ? (_difficulty == 'hardcore' ? 25 : 15)
+            : (_difficulty == 'hardcore' ? 45 : 28);
     Provider.of<PlayerState>(context, listen: false).addXp(xpGain);
 
     if (_currentPlayerIndex != -1 &&
@@ -57495,9 +59164,7 @@ class _TruthOrDareLocalGameScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.actionOuVerite,
-        ),
+        title: Text(AppLocalizations.of(context)!.actionOuVerite),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -57650,13 +59317,13 @@ class _TruthOrDareLocalGameScreenState
         final isCurrent = index == _currentPlayerIndex && !_isSpinning;
         return Chip(
           label: Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.pts9, [
-              p,
-              _scores[p] ?? 0,
-            ]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.pts9,
+              [p, _scores[p] ?? 0],
+            ),
           ),
-          backgroundColor:
-              isCurrent ? Colors.deepPurple : Color(0xFF333333),
+          backgroundColor: isCurrent ? Colors.deepPurple : Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
@@ -57670,8 +59337,7 @@ class _TruthOrDareLocalGameScreenState
 // Compatibilité
 class OfflineTruthOrDareScreen extends StatelessWidget {
   final List<String> players;
-  OfflineTruthOrDareScreen({Key? key, required this.players})
-    : super(key: key);
+  OfflineTruthOrDareScreen({Key? key, required this.players}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57684,8 +59350,7 @@ class OfflineTruthOrDareScreen extends StatelessWidget {
 // =============================================================================
 class DilemmaLocalSetupScreen extends StatefulWidget {
   final List<String> players;
-  DilemmaLocalSetupScreen({Key? key, required this.players})
-    : super(key: key);
+  DilemmaLocalSetupScreen({Key? key, required this.players}) : super(key: key);
 
   @override
   State<DilemmaLocalSetupScreen> createState() =>
@@ -57724,9 +59389,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.parametresLeDilemme,
-        ),
+        title: Text(AppLocalizations.of(context)!.parametresLeDilemme),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -57807,16 +59470,12 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
               segments: [
                 ButtonSegment(
                   value: true,
-                  label: Text(
-                    AppLocalizations.of(context)!.avecRoue1Joueur,
-                  ),
+                  label: Text(AppLocalizations.of(context)!.avecRoue1Joueur),
                   icon: Icon(Icons.blur_circular),
                 ),
                 ButtonSegment(
                   value: false,
-                  label: Text(
-                    AppLocalizations.of(context)!.toutLeGroupe,
-                  ),
+                  label: Text(AppLocalizations.of(context)!.toutLeGroupe),
                   icon: Icon(Icons.groups),
                 ),
               ],
@@ -57850,7 +59509,9 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            AppLocalizations.of(context)!.generationIaDeDilemmesPersonnalises,
+                            AppLocalizations.of(
+                              context,
+                            )!.generationIaDeDilemmesPersonnalises,
                             style: TextStyle(
                               color: Colors.amberAccent,
                               fontWeight: FontWeight.bold,
@@ -57862,7 +59523,10 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                       TextField(
                         controller: _aiController,
                         decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.exSuperPouvoirsVieQuotidienne,
+                          hintText:
+                              AppLocalizations.of(
+                                context,
+                              )!.exSuperPouvoirsVieQuotidienne,
                           hintStyle: TextStyle(color: Colors.white38),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.3),
@@ -57887,7 +59551,9 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                         label: Text(
                           _isAiLoading
                               ? AppLocalizations.of(context)!.generation
-                              : AppLocalizations.of(context)!.genererLesDilemmesParIa,
+                              : AppLocalizations.of(
+                                context,
+                              )!.genererLesDilemmesParIa,
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amberAccent,
@@ -57903,7 +59569,13 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                                       final res =
                                           await FirebaseService.generateAiWords(
                                             instructions:
-                                                GameContentLocalization.format(context, AppLocalizations.of(context)!.genereDesDilemmesAuFormat, [_aiController.text.trim()]),
+                                                GameContentLocalization.format(
+                                                  context,
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.genereDesDilemmesAuFormat,
+                                                  [_aiController.text.trim()],
+                                                ),
                                             count: 25,
                                             gameType: 'Le Dilemme',
                                           );
@@ -57914,7 +59586,13 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              GameContentLocalization.format(context, AppLocalizations.of(context)!.dilemmesIaGeneres, ["${res.length}"]),
+                                              GameContentLocalization.format(
+                                                context,
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.dilemmesIaGeneres,
+                                                ["${res.length}"],
+                                              ),
                                             ),
                                             backgroundColor: Colors.green[800],
                                           ),
@@ -57931,7 +59609,11 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
                       if (_aiDilemmas.isNotEmpty) ...[
                         SizedBox(height: 6),
                         Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.dilemmesPrets, ["${_aiDilemmas.length}"]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.dilemmesPrets,
+                            ["${_aiDilemmas.length}"],
+                          ),
                           style: TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 12,
@@ -57950,10 +59632,7 @@ class _DilemmaLocalSetupScreenState extends State<DilemmaLocalSetupScreen> {
               icon: Icon(Icons.play_arrow_rounded, size: 28),
               label: Text(
                 AppLocalizations.of(context)!.commencerLesDilemmes,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.teal[700],
@@ -58246,9 +59925,11 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
               Text(
                 voteCount <= 1
                     ? AppLocalizations.of(context)!.vote1
-                    : GameContentLocalization.format(context, AppLocalizations.of(context)!.votes1, [
-                      '$voteCount',
-                    ]),
+                    : GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.votes1,
+                      ['$voteCount'],
+                    ),
                 style: TextStyle(
                   color: Colors.white70,
                   fontWeight: FontWeight.w600,
@@ -58279,11 +59960,19 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
               : '...';
       return _activeDilemmaVoterId == null
           ? AppLocalizations.of(context)!.choixEnregistre
-          : GameContentLocalization.format(context, AppLocalizations.of(context)!.dilemmePourFaisTonChoix, [voterName]);
+          : GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.dilemmePourFaisTonChoix,
+            [voterName],
+          );
     } else {
       return _activeDilemmaVoterId == null
           ? AppLocalizations.of(context)!.tousLesVotesSontEnregistres
-          : GameContentLocalization.format(context, AppLocalizations.of(context)!.cEstAuTourDe1, ["$_activeDilemmaVoterId"]);
+          : GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.cEstAuTourDe1,
+            ["$_activeDilemmaVoterId"],
+          );
     }
   }
 
@@ -58405,9 +60094,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                 if (allVotesCast)
                   ElevatedButton.icon(
                     icon: Icon(Icons.arrow_forward),
-                    label: Text(
-                      AppLocalizations.of(context)!.dilemmeSuivant,
-                    ),
+                    label: Text(AppLocalizations.of(context)!.dilemmeSuivant),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       padding: const EdgeInsets.symmetric(
@@ -58436,11 +60123,15 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                   )
                 else
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttenteDuVoteDe, [
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.enAttenteDuVoteDe,
+                      [
                         '$_activeDilemmaVoterId',
                         '${_dilemmaVotes.length}',
                         '${widget.players.length}',
-                      ]),
+                      ],
+                    ),
                     style: TextStyle(
                       color: Colors.white54,
                       fontStyle: FontStyle.italic,
@@ -58529,7 +60220,9 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
                             onSpinEnd: _onWheelStopped,
                           )
                           : Text(
-                            AppLocalizations.of(context)!.appuyezSurLancerPourCommencer,
+                            AppLocalizations.of(
+                              context,
+                            )!.appuyezSurLancerPourCommencer,
                             style: Theme.of(context).textTheme.headlineSmall
                                 ?.copyWith(color: Colors.white70),
                             textAlign: TextAlign.center,
@@ -58585,10 +60278,11 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
             ),
           ),
           label: Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.pts9, [
-              pName,
-              _globalScores[pName],
-            ]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.pts9,
+              [pName, _globalScores[pName]],
+            ),
           ),
           backgroundColor: isCurrent ? Colors.teal : Color(0xFF333333),
           labelStyle: TextStyle(
@@ -58607,8 +60301,7 @@ class _DilemmaLocalGameScreenState extends State<DilemmaLocalGameScreen> {
 // =============================================================================
 class CoinFlipLocalSetupScreen extends StatefulWidget {
   final List<String> players;
-  CoinFlipLocalSetupScreen({Key? key, required this.players})
-    : super(key: key);
+  CoinFlipLocalSetupScreen({Key? key, required this.players}) : super(key: key);
 
   @override
   State<CoinFlipLocalSetupScreen> createState() =>
@@ -58645,9 +60338,7 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.parametresJeuDeLaPiece,
-        ),
+        title: Text(AppLocalizations.of(context)!.parametresJeuDeLaPiece),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -58739,7 +60430,9 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            AppLocalizations.of(context)!.generationIaDeQuestionsSecretes,
+                            AppLocalizations.of(
+                              context,
+                            )!.generationIaDeQuestionsSecretes,
                             style: TextStyle(
                               color: Colors.amberAccent,
                               fontWeight: FontWeight.bold,
@@ -58751,7 +60444,10 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                       TextField(
                         controller: _aiController,
                         decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context)!.exAmourSeductionTravailAnecdotes,
+                          hintText:
+                              AppLocalizations.of(
+                                context,
+                              )!.exAmourSeductionTravailAnecdotes,
                           hintStyle: TextStyle(color: Colors.white38),
                           filled: true,
                           fillColor: Colors.black.withOpacity(0.3),
@@ -58776,7 +60472,9 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                         label: Text(
                           _isAiLoading
                               ? AppLocalizations.of(context)!.generation
-                              : AppLocalizations.of(context)!.genererLesQuestionsIa,
+                              : AppLocalizations.of(
+                                context,
+                              )!.genererLesQuestionsIa,
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amberAccent,
@@ -58791,8 +60489,11 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                                     try {
                                       final res =
                                           await FirebaseService.generateAiWords(
-                                            instructions:
-                                                AppLocalizations.of(context)!.genereDesQuestionsIndiscretesEt(_aiController.text.trim()),
+                                            instructions: AppLocalizations.of(
+                                              context,
+                                            )!.genereDesQuestionsIndiscretesEt(
+                                              _aiController.text.trim(),
+                                            ),
                                             count: 25,
                                             gameType: 'Jeu de la Pièce',
                                           );
@@ -58803,7 +60504,13 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              GameContentLocalization.format(context, AppLocalizations.of(context)!.questionsIaGenerees, [res.length]),
+                                              GameContentLocalization.format(
+                                                context,
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.questionsIaGenerees,
+                                                [res.length],
+                                              ),
                                             ),
                                             backgroundColor: Colors.green[800],
                                           ),
@@ -58820,7 +60527,11 @@ class _CoinFlipLocalSetupScreenState extends State<CoinFlipLocalSetupScreen> {
                       if (_aiQuestions.isNotEmpty) ...[
                         SizedBox(height: 6),
                         Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.questionsPretes, [_aiQuestions.length]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.questionsPretes,
+                            [_aiQuestions.length],
+                          ),
                           style: TextStyle(
                             color: Colors.greenAccent,
                             fontSize: 12,
@@ -59027,7 +60738,10 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
 
   void _flipCoin() {
     Random random = Random();
-    String result = random.nextBool() ? AppLocalizations.of(context)!.pile : AppLocalizations.of(context)!.face;
+    String result =
+        random.nextBool()
+            ? AppLocalizations.of(context)!.pile
+            : AppLocalizations.of(context)!.face;
     bool won = (_coinFlipChoice == result);
 
     int xpGain = won ? 22 : 14;
@@ -59055,9 +60769,7 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.jeuDeLaPiece,
-        ),
+        title: Text(AppLocalizations.of(context)!.jeuDeLaPiece),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -59085,7 +60797,9 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
                           )
                           : (_currentContent.isEmpty
                               ? Text(
-                                AppLocalizations.of(context)!.appuyezSurLancerLaRoue,
+                                AppLocalizations.of(
+                                  context,
+                                )!.appuyezSurLancerLaRoue,
                                 style: Theme.of(context).textTheme.headlineSmall
                                     ?.copyWith(color: Colors.white70),
                                 textAlign: TextAlign.center,
@@ -59103,7 +60817,9 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        AppLocalizations.of(context)!.cEstAuTourDe,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.cEstAuTourDe,
                                         style:
                                             Theme.of(
                                               context,
@@ -59162,13 +60878,13 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
             ),
           ),
           label: Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.pts9, [
-              pName,
-              _globalScores[pName],
-            ]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.pts9,
+              [pName, _globalScores[pName]],
+            ),
           ),
-          backgroundColor:
-              isCurrent ? Colors.amber[800] : Color(0xFF333333),
+          backgroundColor: isCurrent ? Colors.amber[800] : Color(0xFF333333),
           labelStyle: TextStyle(
             color: Colors.white,
             fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
@@ -59186,7 +60902,11 @@ class _CoinFlipLocalGameScreenState extends State<CoinFlipLocalGameScreen> {
       child: Column(
         children: [
           Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.tuAsChoisiLaPiece, [_coinFlipChoice, _coinFlipResult]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.tuAsChoisiLaPiece,
+              [_coinFlipChoice, _coinFlipResult],
+            ),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
@@ -59278,11 +60998,8 @@ class OfflineGameScreen extends StatelessWidget {
   final String gameType;
   final List<String> players;
 
-  OfflineGameScreen({
-    Key? key,
-    required this.gameType,
-    required this.players,
-  }) : super(key: key);
+  OfflineGameScreen({Key? key, required this.gameType, required this.players})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59299,11 +61016,8 @@ class SpinTheWheelWidget extends StatefulWidget {
   final List<String> players;
   final Function(int) onSpinEnd;
 
-  SpinTheWheelWidget({
-    Key? key,
-    required this.players,
-    required this.onSpinEnd,
-  }) : super(key: key);
+  SpinTheWheelWidget({Key? key, required this.players, required this.onSpinEnd})
+    : super(key: key);
 
   @override
   _SpinTheWheelWidgetState createState() => _SpinTheWheelWidgetState();
@@ -59541,8 +61255,9 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
     final minPlayers = _includeMrWhite ? 4 : 3;
     if (_activePlayers.length < minPlayers) {
       setState(() {
-        _resultMessage =
-            AppLocalizations.of(context)!.pasAssezDeJoueursIl(minPlayers);
+        _resultMessage = AppLocalizations.of(
+          context,
+        )!.pasAssezDeJoueursIl(minPlayers);
         _gameState = UndercoverGameState.result;
       });
       return;
@@ -59586,15 +61301,17 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
       }
     }
 
-    final eligibleStarters = _activePlayers.where((p) {
-      if (_includeMrWhite && !_mrWhiteStarts && p == _mrWhitePlayer) {
-        return false;
-      }
-      return true;
-    }).toList();
-    _startingPlayer = eligibleStarters.isNotEmpty
-        ? eligibleStarters[random.nextInt(eligibleStarters.length)]
-        : _activePlayers.first;
+    final eligibleStarters =
+        _activePlayers.where((p) {
+          if (_includeMrWhite && !_mrWhiteStarts && p == _mrWhitePlayer) {
+            return false;
+          }
+          return true;
+        }).toList();
+    _startingPlayer =
+        eligibleStarters.isNotEmpty
+            ? eligibleStarters[random.nextInt(eligibleStarters.length)]
+            : _activePlayers.first;
 
     setState(() {
       _gameState = UndercoverGameState.revealing;
@@ -59621,35 +61338,36 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (ctx) => AlertDialog(
-          title: Text("Mr. White ($player)"),
-          content: TextField(
-            controller: guessCtrl,
-            decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.mot,
-              border: const OutlineInputBorder(),
+        builder:
+            (ctx) => AlertDialog(
+              title: Text("Mr. White ($player)"),
+              content: TextField(
+                controller: guessCtrl,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.mot,
+                  border: const OutlineInputBorder(),
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    final guess = guessCtrl.text.trim().toLowerCase();
+                    Navigator.of(ctx).pop();
+                    if (guess.isNotEmpty &&
+                        guess == _wordCivil.trim().toLowerCase()) {
+                      setState(() {
+                        _gameState = UndercoverGameState.result;
+                        _resultMessage =
+                            "$player (Mr. White) a trouvé le mot des Civils ($_wordCivil) et remporte la partie !";
+                      });
+                    } else {
+                      _finishElimination(player, role);
+                    }
+                  },
+                  child: Text(AppLocalizations.of(context)!.valider),
+                ),
+              ],
             ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                final guess = guessCtrl.text.trim().toLowerCase();
-                Navigator.of(ctx).pop();
-                if (guess.isNotEmpty &&
-                    guess == _wordCivil.trim().toLowerCase()) {
-                  setState(() {
-                    _gameState = UndercoverGameState.result;
-                    _resultMessage =
-                        "$player (Mr. White) a trouvé le mot des Civils ($_wordCivil) et remporte la partie !";
-                  });
-                } else {
-                  _finishElimination(player, role);
-                }
-              },
-              child: Text(AppLocalizations.of(context)!.valider),
-            ),
-          ],
-        ),
       );
       return;
     }
@@ -59673,12 +61391,14 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
 
       if (remainingImpostors == 0) {
         _gameState = UndercoverGameState.result;
-        _resultMessage =
-            AppLocalizations.of(context)!.etaitLLesCivilsGagnent(player, role);
+        _resultMessage = AppLocalizations.of(
+          context,
+        )!.etaitLLesCivilsGagnent(player, role);
       } else if (remainingImpostors >= remainingCivils) {
         _gameState = UndercoverGameState.result;
-        _resultMessage =
-            AppLocalizations.of(context)!.etaitUnCivilLesImposteurs(player);
+        _resultMessage = AppLocalizations.of(
+          context,
+        )!.etaitUnCivilLesImposteurs(player);
       } else {
         _gameState = UndercoverGameState.discussing;
         if (_startingPlayer == player && _activePlayers.isNotEmpty) {
@@ -59686,7 +61406,11 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.undercoverPlayerWasRoleGameContinues(player, role)),
+            content: Text(
+              AppLocalizations.of(
+                context,
+              )!.undercoverPlayerWasRoleGameContinues(player, role),
+            ),
           ),
         );
       }
@@ -59697,9 +61421,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.infiltreMrWhite,
-        ),
+        title: Text(AppLocalizations.of(context)!.infiltreMrWhite),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -59760,9 +61482,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                   ),
                   ButtonSegment(
                     value: 'hardcore',
-                    label: Text(
-                      AppLocalizations.of(context)!.hardcore,
-                    ),
+                    label: Text(AppLocalizations.of(context)!.hardcore),
                   ),
                 ],
                 selected: {_difficulty},
@@ -59772,9 +61492,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
               ),
               SizedBox(height: 20),
               SwitchListTile.adaptive(
-                title: Text(
-                  AppLocalizations.of(context)!.inclureMrWhite,
-                ),
+                title: Text(AppLocalizations.of(context)!.inclureMrWhite),
                 subtitle: Text(
                   _includeMrWhite
                       ? AppLocalizations.of(context)!.requiert4Joueurs
@@ -59786,9 +61504,7 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
               ),
               if (_includeMrWhite)
                 SwitchListTile.adaptive(
-                  title: Text(
-                    AppLocalizations.of(context)!.mrWhiteCommence,
-                  ),
+                  title: Text(AppLocalizations.of(context)!.mrWhiteCommence),
                   subtitle: Text(
                     AppLocalizations.of(context)!.ilDevraDonnerLePremier,
                   ),
@@ -59830,8 +61546,14 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context)!.themePourLesPairesDe,
-                            hintText: AppLocalizations.of(context)!.exAnimauxObjetsCuisineFormat,
+                            labelText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.themePourLesPairesDe,
+                            hintText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.exAnimauxObjetsCuisineFormat,
                             border: OutlineInputBorder(),
                           ),
                           maxLines: 1,
@@ -59881,14 +61603,10 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
                               ),
                             ),
                             SizedBox(width: 8),
-                            Text(
-                              AppLocalizations.of(context)!.generationIa1,
-                            ),
+                            Text(AppLocalizations.of(context)!.generationIa1),
                           ],
                         )
-                        : Text(
-                          AppLocalizations.of(context)!.commencerLaManche,
-                        ),
+                        : Text(AppLocalizations.of(context)!.commencerLaManche),
               ),
             ],
           ),
@@ -59938,9 +61656,12 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
   void _showRoleDialog(String player) {
     String role = _playerRoles[player]!;
     String content = AppLocalizations.of(context)!.tuEs(role);
-    if (role == AppLocalizations.of(context)!.civil) content += AppLocalizations.of(context)!.tonMotEst(_wordCivil);
-    if (role == AppLocalizations.of(context)!.infiltre) content += AppLocalizations.of(context)!.tonMotEst1(_wordUndercover);
-    if (role == "Mr. White" || role == AppLocalizations.of(context)!.mrWhite) content += AppLocalizations.of(context)!.tuNAsPasDe;
+    if (role == AppLocalizations.of(context)!.civil)
+      content += AppLocalizations.of(context)!.tonMotEst(_wordCivil);
+    if (role == AppLocalizations.of(context)!.infiltre)
+      content += AppLocalizations.of(context)!.tonMotEst1(_wordUndercover);
+    if (role == "Mr. White" || role == AppLocalizations.of(context)!.mrWhite)
+      content += AppLocalizations.of(context)!.tuNAsPasDe;
 
     showDialog(
       context: context,
@@ -59970,8 +61691,9 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
   Widget _buildDiscussionPhase() {
     String startingPlayerInstruction = "";
     if (_startingPlayer != null) {
-      startingPlayerInstruction =
-          AppLocalizations.of(context)!.commeConvenuTuCommences(_startingPlayer!);
+      startingPlayerInstruction = AppLocalizations.of(
+        context,
+      )!.commeConvenuTuCommences(_startingPlayer!);
     }
 
     return Center(
@@ -59988,7 +61710,11 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
               ),
               SizedBox(height: 10),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.toutLeMondeConnaitSon, [startingPlayerInstruction]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.toutLeMondeConnaitSon,
+                  [startingPlayerInstruction],
+                ),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
@@ -60060,12 +61786,20 @@ class _UndercoverLocalGameScreenState extends State<UndercoverLocalGameScreen> {
               if (_resultMessage.contains("gagnent")) ...[
                 SizedBox(height: 20),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.leMotDesCivilsEtait1, [_wordCivil]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.leMotDesCivilsEtait1,
+                    [_wordCivil],
+                  ),
                   style: TextStyle(fontStyle: FontStyle.italic),
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.leMotDeLInfiltre1, [_wordUndercover]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.leMotDeLInfiltre1,
+                    [_wordUndercover],
+                  ),
                   style: TextStyle(fontStyle: FontStyle.italic),
                   textAlign: TextAlign.center,
                 ),
@@ -60089,8 +61823,7 @@ enum HotPotatoState { setup, playing, exploded }
 
 class HotPotatoLocalScreen extends StatefulWidget {
   final List<String> players;
-  HotPotatoLocalScreen({Key? key, required this.players})
-    : super(key: key);
+  HotPotatoLocalScreen({Key? key, required this.players}) : super(key: key);
 
   @override
   _HotPotatoLocalScreenState createState() => _HotPotatoLocalScreenState();
@@ -60169,9 +61902,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
     if (answer.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.tuDoisEcrireUneReponse,
-          ),
+          content: Text(AppLocalizations.of(context)!.tuDoisEcrireUneReponse),
         ),
       );
       return;
@@ -60179,9 +61910,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
     if (_usedAnswers.contains(answer)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.cetteReponseADejaEte,
-          ),
+          content: Text(AppLocalizations.of(context)!.cetteReponseADejaEte),
         ),
       );
       return;
@@ -60215,9 +61944,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.laPatateChaude,
-        ),
+        title: Text(AppLocalizations.of(context)!.laPatateChaude),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -60297,13 +62024,17 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
               SegmentedButton<int>(
                 // Remplacer Wrap par SegmentedButton pour la cohérence
                 segments: [
-                  ButtonSegment(value: 10, label: Text(AppLocalizations.of(context)!.k10s)),
-                  ButtonSegment(value: 15, label: Text(AppLocalizations.of(context)!.k15s)),
+                  ButtonSegment(
+                    value: 10,
+                    label: Text(AppLocalizations.of(context)!.k10s),
+                  ),
+                  ButtonSegment(
+                    value: 15,
+                    label: Text(AppLocalizations.of(context)!.k15s),
+                  ),
                   ButtonSegment(
                     value: 0,
-                    label: Text(
-                      AppLocalizations.of(context)!.aleatoire,
-                    ),
+                    label: Text(AppLocalizations.of(context)!.aleatoire),
                   ),
                 ],
                 selected: {_turnDuration},
@@ -60321,9 +62052,7 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
               Divider(height: 30),
 
               SwitchListTile.adaptive(
-                title: Text(
-                  AppLocalizations.of(context)!.compteAReboursGlobal,
-                ),
+                title: Text(AppLocalizations.of(context)!.compteAReboursGlobal),
                 subtitle: Text(
                   AppLocalizations.of(context)!.leChronoNeSeReinitialise,
                 ),
@@ -60340,9 +62069,18 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                 SizedBox(height: 8),
                 SegmentedButton<int>(
                   segments: [
-                    ButtonSegment(value: 30, label: Text(AppLocalizations.of(context)!.k30s)),
-                    ButtonSegment(value: 45, label: Text(AppLocalizations.of(context)!.k45s)),
-                    ButtonSegment(value: 60, label: Text(AppLocalizations.of(context)!.k60s)),
+                    ButtonSegment(
+                      value: 30,
+                      label: Text(AppLocalizations.of(context)!.k30s),
+                    ),
+                    ButtonSegment(
+                      value: 45,
+                      label: Text(AppLocalizations.of(context)!.k45s),
+                    ),
+                    ButtonSegment(
+                      value: 60,
+                      label: Text(AppLocalizations.of(context)!.k60s),
+                    ),
                   ],
                   selected: {_globalDuration},
                   onSelectionChanged:
@@ -60373,7 +62111,9 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                             ),
                             SizedBox(width: 8),
                             Text(
-                              AppLocalizations.of(context)!.categoriesIaPersonnalisees,
+                              AppLocalizations.of(
+                                context,
+                              )!.categoriesIaPersonnalisees,
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontWeight: FontWeight.bold,
@@ -60385,7 +62125,10 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.exMarquesDeLuxeObjets,
+                            hintText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.exMarquesDeLuxeObjets,
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -60403,8 +62146,11 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                                       try {
                                         final cats =
                                             await FirebaseService.generateAiWords(
-                                              instructions:
-                                                  AppLocalizations.of(context)!.genereDesCategoriesAmusantesPour(_aiController.text.trim()),
+                                              instructions: AppLocalizations.of(
+                                                context,
+                                              )!.genereDesCategoriesAmusantesPour(
+                                                _aiController.text.trim(),
+                                              ),
                                               count: 20,
                                               gameType: 'La Patate Chaude',
                                             );
@@ -60418,7 +62164,9 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                                           ).showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                AppLocalizations.of(context)!.categoriesIaChargees,
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.categoriesIaChargees,
                                               ),
                                               backgroundColor: Colors.green,
                                             ),
@@ -60440,7 +62188,9 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
                                     ),
                                   )
                                   : Text(
-                                    AppLocalizations.of(context)!.genererLesCategoriesParIa,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.genererLesCategoriesParIa,
                                   ),
                         ),
                       ],
@@ -60466,16 +62216,22 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
       key: ValueKey('playing'),
       children: [
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.s, [_secondsLeft]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.s,
+            [_secondsLeft],
+          ),
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             color: _secondsLeft < 5 ? Colors.redAccent : Colors.white,
           ),
         ),
         SizedBox(height: 10),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.cEstA, [
-            widget.players[_currentPlayerIndex],
-          ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.cEstA,
+            [widget.players[_currentPlayerIndex]],
+          ),
 
           style: Theme.of(context).textTheme.headlineSmall,
         ),
@@ -60558,7 +62314,11 @@ class _HotPotatoLocalScreenState extends State<HotPotatoLocalScreen>
         ),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.aPerdu, [loser]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.aPerdu,
+            [loser],
+          ),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 10),
@@ -60668,9 +62428,7 @@ class _SynonymOrBannedLocalScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.synonymeOuBanni,
-        ),
+        title: Text(AppLocalizations.of(context)!.synonymeOuBanni),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -60767,7 +62525,8 @@ class _SynonymOrBannedLocalScreenState
                     controller: _aiController,
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.themePourLesMots,
-                      hintText: AppLocalizations.of(context)!.exAnimauxCuisineFilm,
+                      hintText:
+                          AppLocalizations.of(context)!.exAnimauxCuisineFilm,
                       border: OutlineInputBorder(),
                     ),
                     maxLines: 1,
@@ -60814,9 +62573,7 @@ class _SynonymOrBannedLocalScreenState
                         ),
                       ),
                       SizedBox(width: 8),
-                      Text(
-                        AppLocalizations.of(context)!.generationIa1,
-                      ),
+                      Text(AppLocalizations.of(context)!.generationIa1),
                     ],
                   )
                   : Text(AppLocalizations.of(context)!.commencerLaManche),
@@ -60832,9 +62589,11 @@ class _SynonymOrBannedLocalScreenState
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.passeLeTelephoneA1, [
-            currentPlayer,
-          ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.passeLeTelephoneA1,
+            [currentPlayer],
+          ),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 20),
@@ -60874,9 +62633,11 @@ class _SynonymOrBannedLocalScreenState
           textAlign: TextAlign.center,
         ),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.leMotEtait1, [
-            _currentWord,
-          ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.leMotEtait1,
+            [_currentWord],
+          ),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: 20),
@@ -60908,13 +62669,21 @@ class _SynonymOrBannedLocalScreenState
         Icon(Icons.block, color: Colors.redAccent, size: 80),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.laPropositionDeAEte, [_bannedPlayer]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.laPropositionDeAEte,
+            [_bannedPlayer],
+          ),
           style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.aPerduCetteManche, [_bannedPlayer]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.aPerduCetteManche,
+            [_bannedPlayer],
+          ),
           style: Theme.of(
             context,
           ).textTheme.titleLarge?.copyWith(color: Colors.amber),
@@ -61126,9 +62895,7 @@ class _WhoIsMostLikelyLocalScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.quiPourraitLePlus,
-        ),
+        title: Text(AppLocalizations.of(context)!.quiPourraitLePlus),
         actions: [
           IconButton(
             icon: Icon(Icons.info_outline),
@@ -61154,9 +62921,7 @@ class _WhoIsMostLikelyLocalScreenState
                   ),
                   ButtonSegment(
                     value: 'hardcore',
-                    label: Text(
-                      AppLocalizations.of(context)!.hardcore,
-                    ),
+                    label: Text(AppLocalizations.of(context)!.hardcore),
                   ),
                 ],
                 selected: {_difficulty},
@@ -61172,16 +62937,12 @@ class _WhoIsMostLikelyLocalScreenState
                 segments: [
                   ButtonSegment(
                     value: 'grouper',
-                    label: Text(
-                      AppLocalizations.of(context)!.groupeEnsemble,
-                    ),
+                    label: Text(AppLocalizations.of(context)!.groupeEnsemble),
                     icon: Icon(Icons.groups),
                   ),
                   ButtonSegment(
                     value: 'chacun',
-                    label: Text(
-                      AppLocalizations.of(context)!.tourParTour,
-                    ),
+                    label: Text(AppLocalizations.of(context)!.tourParTour),
                     icon: Icon(Icons.person),
                   ),
                 ],
@@ -61232,10 +62993,11 @@ class _WhoIsMostLikelyLocalScreenState
             ),
           ),
           label: Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.pts9, [
-              pName,
-              _globalScores[pName],
-            ]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.pts9,
+              [pName, _globalScores[pName]],
+            ),
           ),
           backgroundColor:
               isCurrentVoter ? Colors.deepPurple : Color(0xFF333333),
@@ -61281,7 +63043,8 @@ class _WhoIsMostLikelyLocalScreenState
                   TextField(
                     controller: _aiController,
                     decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.themeIaExSoireeArrosee,
+                      labelText:
+                          AppLocalizations.of(context)!.themeIaExSoireeArrosee,
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -61299,7 +63062,9 @@ class _WhoIsMostLikelyLocalScreenState
                               ),
                             )
                             : Text(
-                              AppLocalizations.of(context)!.genererDesSituationsIa,
+                              AppLocalizations.of(
+                                context,
+                              )!.genererDesSituationsIa,
                             ),
                     onPressed:
                         _isAiLoading
@@ -61350,7 +63115,11 @@ class _WhoIsMostLikelyLocalScreenState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.pourraitLePlus, [_currentQuestion]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.pourraitLePlus,
+                      [_currentQuestion],
+                    ),
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -61391,11 +63160,12 @@ class _WhoIsMostLikelyLocalScreenState
                     style: TextStyle(color: Colors.grey[400], fontSize: 12),
                   ),
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.quiPourraitLePlus1, [_currentQuestion]),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.quiPourraitLePlus1,
+                      [_currentQuestion],
                     ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -61471,11 +63241,12 @@ class _WhoIsMostLikelyLocalScreenState
                   style: TextStyle(color: Colors.grey[400], fontSize: 12),
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.quiPourraitLePlus1, [_currentQuestion]),
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.quiPourraitLePlus1,
+                    [_currentQuestion],
                   ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -61550,11 +63321,12 @@ class _WhoIsMostLikelyLocalScreenState
                 ),
                 SizedBox(height: 4),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.quiPourraitLePlus1, [_currentQuestion]),
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.quiPourraitLePlus1,
+                    [_currentQuestion],
                   ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -61618,7 +63390,11 @@ class _WhoIsMostLikelyLocalScreenState
                     subtitle:
                         votersList.isNotEmpty
                             ? Text(
-                              GameContentLocalization.format(context, AppLocalizations.of(context)!.votePar, [votersList.join(", ")]),
+                              GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.votePar,
+                                [votersList.join(", ")],
+                              ),
                               style: TextStyle(fontSize: 12),
                             )
                             : Text(
@@ -61657,11 +63433,11 @@ class _WhoIsMostLikelyLocalScreenState
           Spacer(),
           Center(
             child: Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.decisionUnanimeDuGroupePour,
-[winners.join(', ')],
-),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.decisionUnanimeDuGroupePour,
+                [winners.join(', ')],
+              ),
               style: TextStyle(
                 fontStyle: FontStyle.italic,
                 color: Colors.white70,
@@ -61804,7 +63580,8 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
         _masterSpyRed == null ||
         _masterSpyBlue == null) {
       setState(() {
-        _gameResult = AppLocalizations.of(context)!.impossibleDeFormerLesEquipes;
+        _gameResult =
+            AppLocalizations.of(context)!.impossibleDeFormerLesEquipes;
         _gameState = CodenamesLocalGameState.gameOver;
       });
       return;
@@ -61845,10 +63622,18 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
       _revealedWords[word] = true;
 
       if (actualColor == 'assassin') {
-        _gameResult = GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeAReveleL, [
-            _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-            opponentTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-          ]);
+        _gameResult = GameContentLocalization.format(
+          context,
+          AppLocalizations.of(context)!.lEquipeAReveleL,
+          [
+            _activeTeam == 'red'
+                ? AppLocalizations.of(context)!.rouge
+                : AppLocalizations.of(context)!.bleue,
+            opponentTeam == 'red'
+                ? AppLocalizations.of(context)!.rouge
+                : AppLocalizations.of(context)!.bleue,
+          ],
+        );
         _gameState = CodenamesLocalGameState.gameOver;
         return;
       }
@@ -61861,9 +63646,15 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
         }
         _guessesLeft--;
         if (_redScore == 0 || _blueScore == 0) {
-          _gameResult = GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeATrouveTous, [
-              _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-            ]);
+          _gameResult = GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.lEquipeATrouveTous,
+            [
+              _activeTeam == 'red'
+                  ? AppLocalizations.of(context)!.rouge
+                  : AppLocalizations.of(context)!.bleue,
+            ],
+          );
           _gameState = CodenamesLocalGameState.gameOver;
           return;
         }
@@ -61875,9 +63666,15 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
             _blueScore--;
 
           if (_redScore == 0 || _blueScore == 0) {
-            _gameResult = GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeATrouveTous, [
-                actualColor == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-              ]);
+            _gameResult = GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.lEquipeATrouveTous,
+              [
+                actualColor == 'red'
+                    ? AppLocalizations.of(context)!.rouge
+                    : AppLocalizations.of(context)!.bleue,
+              ],
+            );
             _gameState = CodenamesLocalGameState.gameOver;
             return;
           }
@@ -61978,15 +63775,25 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 4),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.maitreEspionDeLEquipe, [
-                    _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-                  ]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.maitreEspionDeLEquipe,
+                  [
+                    _activeTeam == 'red'
+                        ? AppLocalizations.of(context)!.rouge
+                        : AppLocalizations.of(context)!.bleue,
+                  ],
+                ),
                 style: TextStyle(color: Colors.white70),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 24),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.passezLeTelephoneAPuis, [currentMasterSpy]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.passezLeTelephoneAPuis,
+                  [currentMasterSpy],
+                ),
                 style: TextStyle(color: Colors.white54, fontSize: 12),
                 textAlign: TextAlign.center,
               ),
@@ -62033,9 +63840,15 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 8),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.equipe1, [
-                  _activeTeam == 'red' ? AppLocalizations.of(context)!.codenamesRed : AppLocalizations.of(context)!.codenamesBlue,
-                ]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.equipe1,
+                  [
+                    _activeTeam == 'red'
+                        ? AppLocalizations.of(context)!.codenamesRed
+                        : AppLocalizations.of(context)!.codenamesBlue,
+                  ],
+                ),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   color:
                       _activeTeam == 'red'
@@ -62053,9 +63866,11 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.indice, [
-                    "$_currentClue $_clueCount",
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.indice,
+                    ["$_currentClue $_clueCount"],
+                  ),
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.amberAccent,
@@ -62066,7 +63881,11 @@ class _CodenamesLocalGameScreenState extends State<CodenamesLocalGameScreen> {
               ),
               SizedBox(height: 8),
               Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisponibles, [_guessesLeft]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.essaisDisponibles,
+                  [_guessesLeft],
+                ),
                 style: TextStyle(color: Colors.white70),
               ),
               SizedBox(height: 24),
@@ -62105,16 +63924,20 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
               ),
               SizedBox(height: 20),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.equipeRouge1, [
-                  _redTeam.join(', '),
-                ]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.equipeRouge1,
+                  [_redTeam.join(', ')],
+                ),
                 style: TextStyle(color: Colors.redAccent),
               ),
               SizedBox(height: 8),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.equipeBleue1, [
-                  _blueTeam.join(', '),
-                ]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.equipeBleue1,
+                  [_blueTeam.join(', ')],
+                ),
                 style: TextStyle(color: Colors.blueAccent),
               ),
               SizedBox(height: 20),
@@ -62152,8 +63975,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context)!.themePourLes25Mots,
-                            hintText: AppLocalizations.of(context)!.exAnimauxCuisineHarryPotter,
+                            labelText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.themePourLes25Mots,
+                            hintText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.exAnimauxCuisineHarryPotter,
                             border: OutlineInputBorder(),
                           ),
                           maxLines: 1,
@@ -62201,9 +64030,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
                               ),
                             ),
                             SizedBox(width: 8),
-                            Text(
-                              AppLocalizations.of(context)!.generationIa1,
-                            ),
+                            Text(AppLocalizations.of(context)!.generationIa1),
                           ],
                         )
                         : Text(
@@ -62259,9 +64086,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
                 SizedBox(height: 24),
                 ElevatedButton.icon(
                   icon: Icon(Icons.visibility),
-                  label: Text(
-                    AppLocalizations.of(context)!.voirLaCarteCle,
-                  ),
+                  label: Text(AppLocalizations.of(context)!.voirLaCarteCle),
                   onPressed: () => setState(() => _masterSpyReady = true),
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
@@ -62283,10 +64108,16 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
         _buildScoreDisplay(),
         SizedBox(height: 15),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.maitreEspion, [
-            currentMasterSpy,
-            _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-          ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.maitreEspion,
+            [
+              currentMasterSpy,
+              _activeTeam == 'red'
+                  ? AppLocalizations.of(context)!.rouge
+                  : AppLocalizations.of(context)!.bleue,
+            ],
+          ),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 15),
@@ -62333,23 +64164,33 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
         _buildScoreDisplay(),
         SizedBox(height: 15),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.passeLeTelephoneAuxAgents, [
-              _activeTeam == 'red' ? AppLocalizations.of(context)!.rouge : AppLocalizations.of(context)!.bleue,
-            ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.passeLeTelephoneAuxAgents,
+            [
+              _activeTeam == 'red'
+                  ? AppLocalizations.of(context)!.rouge
+                  : AppLocalizations.of(context)!.bleue,
+            ],
+          ),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.indice, [
-            "'$_currentClue $_clueCount'",
-          ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.indice,
+            ["'$_currentClue $_clueCount'"],
+          ),
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
             color: _activeTeam == 'red' ? Colors.redAccent : Colors.blueAccent,
           ),
         ),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisRestants, [
-            _guessesLeft,
-          ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.essaisRestants,
+            [_guessesLeft],
+          ),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: 15),
@@ -62391,9 +64232,7 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
                     () => setState(
                       () => _gameState = CodenamesLocalGameState.setup,
                     ),
-                child: Text(
-                  AppLocalizations.of(context)!.nouvellePartie,
-                ),
+                child: Text(AppLocalizations.of(context)!.nouvellePartie),
               ),
             ],
           ),
@@ -62420,9 +64259,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
                   ),
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.mots, [
-                    "$_redScore",
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.mots,
+                    ["$_redScore"],
+                  ),
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -62442,9 +64283,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.essaisDisp
                   ),
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.mots, [
-                    "$_blueScore",
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.mots,
+                    ["$_blueScore"],
+                  ),
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -62675,7 +64518,11 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.motAjoutePourTotal, [player, "${_playersWords[player]?.length}"]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.motAjoutePourTotal,
+                [player, "${_playersWords[player]?.length}"],
+              ),
             ),
           ),
         );
@@ -62870,12 +64717,18 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                 )
               else ...[
                 Text(
-                  AppLocalizations.of(context)!.lesEquipesSerontFormeesAleatoirement,
+                  AppLocalizations.of(
+                    context,
+                  )!.lesEquipesSerontFormeesAleatoirement,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.nombreDeManches, ["$_totalRounds"]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.nombreDeManches,
+                    ["$_totalRounds"],
+                  ),
                   style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -62928,8 +64781,14 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                           TextField(
                             controller: _aiController,
                             decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)!.themePourLesMotsA,
-                              hintText: AppLocalizations.of(context)!.exCelebritesAnimauxCuisine,
+                              labelText:
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.themePourLesMotsA,
+                              hintText:
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.exCelebritesAnimauxCuisine,
                               border: OutlineInputBorder(),
                             ),
                             maxLines: 1,
@@ -63001,9 +64860,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                                 ),
                               ),
                               SizedBox(width: 8),
-                              Text(
-                                AppLocalizations.of(context)!.generationIa1,
-                              ),
+                              Text(AppLocalizations.of(context)!.generationIa1),
                             ],
                           )
                           : Text(
@@ -63028,9 +64885,11 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.passeLeTelephoneA1, [
-            currentPlayerForInput,
-          ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.passeLeTelephoneA1,
+            [currentPlayerForInput],
+          ),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         Text(
@@ -63041,9 +64900,11 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         TextField(
           controller: _wordInputController,
           decoration: InputDecoration(
-            labelText: GameContentLocalization.format(context, AppLocalizations.of(context)!.mot5, [
-              "${wordsForCurrentPlayer + 1}",
-            ]),
+            labelText: GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.mot5,
+              ["${wordsForCurrentPlayer + 1}"],
+            ),
           ),
           onSubmitted: (_) {
             if (_wordInputController.text.trim().isNotEmpty) {
@@ -63093,12 +64954,20 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         ),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.motsRestantsAAjouterPour, [currentPlayerForInput, "${5 - wordsForCurrentPlayer}"]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.motsRestantsAAjouterPour,
+            [currentPlayerForInput, "${5 - wordsForCurrentPlayer}"],
+          ),
           style: TextStyle(color: Colors.white70),
         ),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.totalDesMotsDansLe, ["${_allWords.length}"]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.totalDesMotsDansLe,
+            ["${_allWords.length}"],
+          ),
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
@@ -63126,10 +64995,11 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.manche, [
-            "$_currentRoundNumber",
-            modeText,
-          ]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.manche,
+            ["$_currentRoundNumber", modeText],
+          ),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SizedBox(height: 8),
@@ -63143,10 +65013,16 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
         ),
         SizedBox(height: 10),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.cEstAuTourDe2, [
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.cEstAuTourDe2,
+            [
               currentGuesser,
-              _activeTeam == 'red' ? AppLocalizations.of(context)!.codenamesRedTeam : AppLocalizations.of(context)!.codenamesBlueTeam,
-            ]),
+              _activeTeam == 'red'
+                  ? AppLocalizations.of(context)!.codenamesRedTeam
+                  : AppLocalizations.of(context)!.codenamesBlueTeam,
+            ],
+          ),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 20),
@@ -63164,11 +65040,19 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.motsDevinesCeTour, [_discardedWords.length]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.motsDevinesCeTour,
+                    [_discardedWords.length],
+                  ),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.motsRestantsDansLePaquet, [_currentDeck.length]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.motsRestantsDansLePaquet,
+                    [_currentDeck.length],
+                  ),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -63227,7 +65111,9 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.erreurNombreDeJoueursInsuffisant,
+                  AppLocalizations.of(
+                    context,
+                  )!.erreurNombreDeJoueursInsuffisant,
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -63262,7 +65148,11 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
               ),
               SizedBox(height: 10),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.lEquipeAGagne, [winnerTeam]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.lEquipeAGagne,
+                  [winnerTeam],
+                ),
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color:
                       winnerTeam == AppLocalizations.of(context)!.rouge
@@ -63275,9 +65165,7 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
               SizedBox(height: 40),
               ElevatedButton(
                 onPressed: _resetGame,
-                child: Text(
-                  AppLocalizations.of(context)!.nouvellePartie,
-                ),
+                child: Text(AppLocalizations.of(context)!.nouvellePartie),
               ),
             ],
           ),
@@ -63304,9 +65192,11 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                   ),
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.points1, [
-                    "${_teamScores['red']}",
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.points1,
+                    ["${_teamScores['red']}"],
+                  ),
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -63326,9 +65216,11 @@ class _TimesUpLocalGameScreenState extends State<TimesUpLocalGameScreen> {
                   ),
                 ),
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.points1, [
-                    "${_teamScores['blue']}",
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.points1,
+                    ["${_teamScores['blue']}"],
+                  ),
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -63344,8 +65236,7 @@ enum PassTheObjectGameState { setup, playing, questionPhase }
 
 class PassTheObjectGameScreen extends StatefulWidget {
   final List<String> players;
-  PassTheObjectGameScreen({Key? key, required this.players})
-    : super(key: key);
+  PassTheObjectGameScreen({Key? key, required this.players}) : super(key: key);
 
   @override
   _PassTheObjectGameScreenState createState() =>
@@ -63570,7 +65461,8 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                         .toList(),
                 onChanged: (val) => setState(() => _difficulty = val!),
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.difficulteDesQuestions,
+                  labelText:
+                      AppLocalizations.of(context)!.difficulteDesQuestions,
                 ),
               ),
               SizedBox(height: 16),
@@ -63601,7 +65493,9 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                             ),
                             SizedBox(width: 8),
                             Text(
-                              AppLocalizations.of(context)!.generationIaDeQuestions,
+                              AppLocalizations.of(
+                                context,
+                              )!.generationIaDeQuestions,
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontWeight: FontWeight.bold,
@@ -63613,7 +65507,10 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                         TextField(
                           controller: _aiController,
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.exCultureGeneraleGagesDroles,
+                            hintText:
+                                AppLocalizations.of(
+                                  context,
+                                )!.exCultureGeneraleGagesDroles,
                             hintStyle: TextStyle(color: Colors.white38),
                             filled: true,
                             fillColor: Colors.black.withOpacity(0.3),
@@ -63638,7 +65535,9 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                           label: Text(
                             _isAiLoading
                                 ? AppLocalizations.of(context)!.generation
-                                : AppLocalizations.of(context)!.genererLesQuestionsIa,
+                                : AppLocalizations.of(
+                                  context,
+                                )!.genererLesQuestionsIa,
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.amberAccent,
@@ -63651,13 +65550,19 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                                     if (_aiController.text.trim().isNotEmpty) {
                                       setState(() => _isAiLoading = true);
                                       try {
-                                        final res =
-                                            await FirebaseService.generateAiWords(
-                                              instructions:
-                                                  GameContentLocalization.format(context, AppLocalizations.of(context)!.genereDesQuestionsAmusantesEt, [_aiController.text.trim()]),
-                                              count: 25,
-                                              gameType: 'On se passe un objet rapidement',
-                                            );
+                                        final res = await FirebaseService.generateAiWords(
+                                          instructions:
+                                              GameContentLocalization.format(
+                                                context,
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.genereDesQuestionsAmusantesEt,
+                                                [_aiController.text.trim()],
+                                              ),
+                                          count: 25,
+                                          gameType:
+                                              'On se passe un objet rapidement',
+                                        );
                                         if (res.isNotEmpty) {
                                           setState(() => _aiQuestions = res);
                                           ScaffoldMessenger.of(
@@ -63665,7 +65570,13 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                                           ).showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                GameContentLocalization.format(context, AppLocalizations.of(context)!.questionsIaPretes, ["${res.length}"]),
+                                                GameContentLocalization.format(
+                                                  context,
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.questionsIaPretes,
+                                                  ["${res.length}"],
+                                                ),
                                               ),
                                               backgroundColor:
                                                   Colors.green[800],
@@ -63705,7 +65616,11 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
               ),
               SizedBox(height: 20),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.intervalleDuChronoDeA, [_minDuration, _maxDuration]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.intervalleDuChronoDeA,
+                  [_minDuration, _maxDuration],
+                ),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               RangeSlider(
@@ -63716,7 +65631,10 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
                 min: 1,
                 max: 60,
                 divisions: 59,
-                labels: RangeLabels(AppLocalizations.of(context)!.s3(_minDuration), AppLocalizations.of(context)!.s4(_maxDuration)),
+                labels: RangeLabels(
+                  AppLocalizations.of(context)!.s3(_minDuration),
+                  AppLocalizations.of(context)!.s4(_maxDuration),
+                ),
                 onChanged: (RangeValues values) {
                   setState(() {
                     _minDuration = values.start.round();
@@ -63727,9 +65645,7 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _startGame,
-                child: Text(
-                  AppLocalizations.of(context)!.commencerLaManche,
-                ),
+                child: Text(AppLocalizations.of(context)!.commencerLaManche),
               ),
             ],
           ),
@@ -63745,7 +65661,11 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
       children: [
         if (_showTimer)
           Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.tempsRestantS, ["$_secondsRemaining"]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.tempsRestantS,
+              ["$_secondsRemaining"],
+            ),
             style: Theme.of(context).textTheme.headlineMedium,
           )
         else
@@ -63762,16 +65682,16 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
             children: [
               ElevatedButton(
                 onPressed: _passToRandomPlayer,
-                child: Text(
-                  AppLocalizations.of(context)!.jePasseLObjet,
-                ),
+                child: Text(AppLocalizations.of(context)!.jePasseLObjet),
               ),
               SizedBox(height: 10),
               if (_nextPlayerToPass != null)
                 Text(
-                  GameContentLocalization.format(context, AppLocalizations.of(context)!.passeA, [
-                    "$_nextPlayerToPass",
-                  ]),
+                  GameContentLocalization.format(
+                    context,
+                    AppLocalizations.of(context)!.passeA,
+                    ["$_nextPlayerToPass"],
+                  ),
                   style: Theme.of(
                     context,
                   ).textTheme.titleLarge?.copyWith(color: Colors.amberAccent),
@@ -63791,7 +65711,11 @@ class _PassTheObjectGameScreenState extends State<PassTheObjectGameScreen>
         Icon(Icons.question_mark, size: 80, color: Colors.amberAccent),
         SizedBox(height: 20),
         Text(
-          GameContentLocalization.format(context, AppLocalizations.of(context)!.aPerdu, [loserName]),
+          GameContentLocalization.format(
+            context,
+            AppLocalizations.of(context)!.aPerdu,
+            [loserName],
+          ),
           style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
@@ -63833,8 +65757,7 @@ enum GuessTheWordGameState {
 
 class GuessTheWordLocalScreen extends StatefulWidget {
   final List<String> players;
-  GuessTheWordLocalScreen({Key? key, required this.players})
-    : super(key: key);
+  GuessTheWordLocalScreen({Key? key, required this.players}) : super(key: key);
 
   @override
   _GuessTheWordLocalGameScreenState createState() =>
@@ -63980,7 +65903,10 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
   // --- TOUR DE JEU EFFECTIF ---
   void _startActualTurn() {
     _secondsLeft = _roundDuration;
-    _currentWord = _deck.isNotEmpty ? _deck.removeAt(0) : AppLocalizations.of(context)!.fin1;
+    _currentWord =
+        _deck.isNotEmpty
+            ? _deck.removeAt(0)
+            : AppLocalizations.of(context)!.fin1;
     _gameState = GuessTheWordGameState.playing;
     _isInNeutral = true;
 
@@ -64165,12 +66091,16 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
     if (_useTeams) {
       currentGuesser =
           _activeTeam == 0
-              ? GameContentLocalization.format(context, AppLocalizations.of(context)!.equipeRouge, [
-                _teamAName,
-              ])
-              : GameContentLocalization.format(context, AppLocalizations.of(context)!.equipeBleue, [
-                _teamBName,
-              ]);
+              ? GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.equipeRouge,
+                [_teamAName],
+              )
+              : GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.equipeBleue,
+                [_teamBName],
+              );
     } else {
       currentGuesser = widget.players[_currentPlayerIndex];
     }
@@ -64244,10 +66174,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                     : AppLocalizations.of(context)!.chacunPourSoi,
               ),
               value: _useTeams,
-              secondary: Icon(
-                Icons.groups_rounded,
-                color: Colors.cyanAccent,
-              ),
+              secondary: Icon(Icons.groups_rounded, color: Colors.cyanAccent),
               onChanged: (val) {
                 setState(() => _useTeams = val);
               },
@@ -64304,9 +66231,18 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
             SizedBox(height: 8),
             SegmentedButton<int>(
               segments: [
-                ButtonSegment(value: 30, label: Text(AppLocalizations.of(context)!.k30s)),
-                ButtonSegment(value: 60, label: Text(AppLocalizations.of(context)!.k60s)),
-                ButtonSegment(value: 90, label: Text(AppLocalizations.of(context)!.k90s)),
+                ButtonSegment(
+                  value: 30,
+                  label: Text(AppLocalizations.of(context)!.k30s),
+                ),
+                ButtonSegment(
+                  value: 60,
+                  label: Text(AppLocalizations.of(context)!.k60s),
+                ),
+                ButtonSegment(
+                  value: 90,
+                  label: Text(AppLocalizations.of(context)!.k90s),
+                ),
                 ButtonSegment(
                   value: 0,
                   label: Text(AppLocalizations.of(context)!.illimite),
@@ -64320,10 +66256,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
 
             // Thème IA ou mots personnalisés
             ExpansionTile(
-              leading: Icon(
-                Icons.auto_awesome,
-                color: Colors.amberAccent,
-              ),
+              leading: Icon(Icons.auto_awesome, color: Colors.amberAccent),
               title: Text(
                 AppLocalizations.of(context)!.motsPersonnalisesIa,
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -64344,7 +66277,10 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                   child: TextField(
                                     controller: _aiThemeCtrl,
                                     decoration: InputDecoration(
-                                      labelText: AppLocalizations.of(context)!.themeIaExAnimauxMarins,
+                                      labelText:
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.themeIaExAnimauxMarins,
                                       border: OutlineInputBorder(),
                                     ),
                                   ),
@@ -64406,7 +66342,8 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                             child: TextField(
                               controller: _customWordCtrl,
                               decoration: InputDecoration(
-                                hintText: AppLocalizations.of(context)!.ajouterUnMot,
+                                hintText:
+                                    AppLocalizations.of(context)!.ajouterUnMot,
                                 border: OutlineInputBorder(),
                               ),
                               onSubmitted: (v) {
@@ -64462,16 +66399,11 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
 
             ElevatedButton.icon(
               icon: Icon(Icons.phone_android),
-              label: Text(
-                AppLocalizations.of(context)!.lancerSurLeFront,
-              ),
+              label: Text(AppLocalizations.of(context)!.lancerSurLeFront),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[700],
                 padding: const EdgeInsets.symmetric(vertical: 18),
-                textStyle: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               onPressed: _startCountdown,
             ),
@@ -64487,9 +66419,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
   Widget _buildTeamSetupScreen() {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.compositionDesEquipes,
-        ),
+        title: Text(AppLocalizations.of(context)!.compositionDesEquipes),
         leading: IconButton(
           icon: Icon(Icons.check),
           onPressed:
@@ -64538,9 +66468,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                         (p) => ListTile(
                                           title: Text(
                                             p,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                            ),
+                                            style: TextStyle(fontSize: 14),
                                           ),
                                           trailing: IconButton(
                                             icon: Icon(
@@ -64591,9 +66519,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                                         (p) => ListTile(
                                           title: Text(
                                             p,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                            ),
+                                            style: TextStyle(fontSize: 14),
                                           ),
                                           leading: IconButton(
                                             icon: Icon(
@@ -64624,9 +66550,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
               onPressed:
                   () =>
                       setState(() => _gameState = GuessTheWordGameState.setup),
-              child: Text(
-                AppLocalizations.of(context)!.validerLesEquipes,
-              ),
+              child: Text(AppLocalizations.of(context)!.validerLesEquipes),
             ),
           ],
         ),
@@ -64646,11 +66570,7 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.phone_android,
-              size: 80,
-              color: Colors.amberAccent,
-            ),
+            Icon(Icons.phone_android, size: 80, color: Colors.amberAccent),
             SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.placezLeTelephoneSurVotre,
@@ -64681,8 +66601,10 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
   // ===========================================================================
   Widget _buildPlayingScreen() {
     Color bg = Color(0xFF121212);
-    if (_tiltFlash == AppLocalizations.of(context)!.trouve) bg = Color(0xFF1B5E20);
-    if (_tiltFlash == AppLocalizations.of(context)!.passe) bg = Color(0xFFE65100);
+    if (_tiltFlash == AppLocalizations.of(context)!.trouve)
+      bg = Color(0xFF1B5E20);
+    if (_tiltFlash == AppLocalizations.of(context)!.passe)
+      bg = Color(0xFFE65100);
 
     return AnimatedContainer(
       duration: Duration(milliseconds: 150),
@@ -64716,11 +66638,11 @@ class _GuessTheWordLocalGameScreenState extends State<GuessTheWordLocalScreen>
                   else
                     const SizedBox.shrink(),
                   Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.trouves,
-[_roundHistory.where((e) => e['guessed'] == true).length],
-),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.trouves,
+                      [_roundHistory.where((e) => e['guessed'] == true).length],
+                    ),
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -64754,10 +66676,7 @@ AppLocalizations.of(context)!.trouves,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton.icon(
-                    icon: Icon(
-                      Icons.arrow_downward,
-                      color: Colors.greenAccent,
-                    ),
+                    icon: Icon(Icons.arrow_downward, color: Colors.greenAccent),
                     label: Text(
                       AppLocalizations.of(context)!.basTrouve,
                       style: TextStyle(color: Colors.greenAccent),
@@ -64765,10 +66684,7 @@ AppLocalizations.of(context)!.trouves,
                     onPressed: () => _onWordResult(true),
                   ),
                   TextButton.icon(
-                    icon: Icon(
-                      Icons.stop_circle,
-                      color: Colors.redAccent,
-                    ),
+                    icon: Icon(Icons.stop_circle, color: Colors.redAccent),
                     label: Text(
                       AppLocalizations.of(context)!.arreter,
                       style: TextStyle(color: Colors.redAccent),
@@ -64776,10 +66692,7 @@ AppLocalizations.of(context)!.trouves,
                     onPressed: _endTurn,
                   ),
                   TextButton.icon(
-                    icon: Icon(
-                      Icons.arrow_upward,
-                      color: Colors.orangeAccent,
-                    ),
+                    icon: Icon(Icons.arrow_upward, color: Colors.orangeAccent),
                     label: Text(
                       AppLocalizations.of(context)!.hautPasser,
                       style: TextStyle(color: Colors.orangeAccent),
@@ -64803,9 +66716,7 @@ AppLocalizations.of(context)!.trouves,
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.resultatsDuPassage,
-        ),
+        title: Text(AppLocalizations.of(context)!.resultatsDuPassage),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
@@ -64821,14 +66732,14 @@ AppLocalizations.of(context)!.trouves,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.check_circle,
-                    color: Colors.greenAccent,
-                    size: 30,
-                  ),
+                  Icon(Icons.check_circle, color: Colors.greenAccent, size: 30),
                   SizedBox(width: 10),
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.pointsMarques, [foundCount]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.pointsMarques,
+                      [foundCount],
+                    ),
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -64918,10 +66829,7 @@ AppLocalizations.of(context)!.trouves,
                 child: ListTile(
                   title: Text(
                     _teamAName,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   subtitle: Text(_teamAPlayers.join(", ")),
                   trailing: Text(
@@ -64940,10 +66848,7 @@ AppLocalizations.of(context)!.trouves,
                 child: ListTile(
                   title: Text(
                     _teamBName,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   subtitle: Text(_teamBPlayers.join(", ")),
                   trailing: Text(
@@ -64965,9 +66870,7 @@ AppLocalizations.of(context)!.trouves,
                           child: ListTile(
                             title: Text(
                               e.key,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             trailing: Text(
                               AppLocalizations.of(context)!.pts8(e.value),
@@ -64987,9 +66890,7 @@ AppLocalizations.of(context)!.trouves,
               onPressed:
                   () =>
                       setState(() => _gameState = GuessTheWordGameState.setup),
-              child: Text(
-                AppLocalizations.of(context)!.continuerLaPartie,
-              ),
+              child: Text(AppLocalizations.of(context)!.continuerLaPartie),
             ),
           ],
         ),
@@ -65104,9 +67005,11 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            GameContentLocalization.format(context, AppLocalizations.of(context)!.mauvaisSymbole, [
-              playerName,
-            ]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.mauvaisSymbole,
+              [playerName],
+            ),
           ),
           duration: Duration(milliseconds: 600),
           backgroundColor: Colors.red[800],
@@ -65202,15 +67105,11 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
                 segments: [
                   ButtonSegment(
                     value: 6,
-                    label: Text(
-                      AppLocalizations.of(context)!.k6Facile,
-                    ),
+                    label: Text(AppLocalizations.of(context)!.k6Facile),
                   ),
                   ButtonSegment(
                     value: 8,
-                    label: Text(
-                      AppLocalizations.of(context)!.k8Standard,
-                    ),
+                    label: Text(AppLocalizations.of(context)!.k8Standard),
                   ),
                 ],
                 selected: {_symbolsPerCard},
@@ -65219,7 +67118,11 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
               ),
               SizedBox(height: 20),
               Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.scoreCibleCartes, [_targetScore]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.scoreCibleCartes,
+                  [_targetScore],
+                ),
                 style: TextStyle(color: Colors.white70),
               ),
               Slider(
@@ -65413,7 +67316,11 @@ class _DobbleLocalScreenState extends State<DobbleLocalScreen> {
             border: Border.all(color: Colors.amberAccent.withOpacity(0.5)),
           ),
           child: Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.piocheBut, [_deck.length + 1, _targetScore]),
+            GameContentLocalization.format(
+              context,
+              AppLocalizations.of(context)!.piocheBut,
+              [_deck.length + 1, _targetScore],
+            ),
             style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w900,
@@ -65624,9 +67531,11 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.piocheBut,
             ),
             SizedBox(height: 8),
             Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.victoireDe, [
-                _gameWinner,
-              ]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.victoireDe,
+                [_gameWinner],
+              ),
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.amberAccent,
@@ -65643,15 +67552,14 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.piocheBut,
                   children: [
                     Text(
                       e.key,
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     Text(
-                      GameContentLocalization.format(context, AppLocalizations.of(context)!.cartes, [
-                        e.value,
-                      ]),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.cartes,
+                        [e.value],
+                      ),
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -66087,12 +67995,7 @@ List<Widget> _buildLudoPawns(
   final cellSize = size / 15;
 
   final Map<int, List<Offset>> homePositions = {
-    0: [
-      Offset(1.5, 1.5),
-      Offset(4.5, 1.5),
-      Offset(1.5, 4.5),
-      Offset(4.5, 4.5),
-    ],
+    0: [Offset(1.5, 1.5), Offset(4.5, 1.5), Offset(1.5, 4.5), Offset(4.5, 4.5)],
     1: [
       Offset(10.5, 1.5),
       Offset(13.5, 1.5),
@@ -66354,8 +68257,12 @@ class ChainLayoutEngine {
     PlacedTile? leftTile;
     PlacedTile? rightTile;
     if (shiftedResult.isNotEmpty) {
-      leftTile = shiftedResult.reduce((a, b) => a.position.dx < b.position.dx ? a : b);
-      rightTile = shiftedResult.reduce((a, b) => a.position.dx > b.position.dx ? a : b);
+      leftTile = shiftedResult.reduce(
+        (a, b) => a.position.dx < b.position.dx ? a : b,
+      );
+      rightTile = shiftedResult.reduce(
+        (a, b) => a.position.dx > b.position.dx ? a : b,
+      );
     }
     return LayoutResult(
       shiftedResult,
@@ -66417,9 +68324,10 @@ class _DominoesBoardWidgetState extends State<DominoesBoardWidget>
     final tx = (constraints.maxWidth - boardSize.width * scale) / 2;
     final ty = (constraints.maxHeight - boardSize.height * scale) / 2;
 
-    _transformationController.value = Matrix4.identity()
-      ..translate(tx, ty)
-      ..scale(scale);
+    _transformationController.value =
+        Matrix4.identity()
+          ..translate(tx, ty)
+          ..scale(scale);
   }
 
   @override
@@ -66438,11 +68346,13 @@ class _DominoesBoardWidgetState extends State<DominoesBoardWidget>
       }
     }
 
-    final bool matchLeft = (selA != null && selB != null) &&
+    final bool matchLeft =
+        (selA != null && selB != null) &&
         (layout.leftVal == selA || layout.leftVal == selB) &&
         layout.leftTile != null;
 
-    final bool matchRight = (selA != null && selB != null) &&
+    final bool matchRight =
+        (selA != null && selB != null) &&
         (layout.rightVal == selA || layout.rightVal == selB) &&
         layout.rightTile != null;
 
@@ -66466,103 +68376,117 @@ class _DominoesBoardWidgetState extends State<DominoesBoardWidget>
             height: layout.boardSize.height,
             child: Stack(
               alignment: Alignment.center,
-              children: layout.tiles.map((p) {
-                final bool isLeftEnd = (p == layout.leftTile) && matchLeft;
-                final bool isRightEnd = (p == layout.rightTile) && matchRight;
-                final bool isIlluminated = isLeftEnd || isRightEnd;
-                final int endValue = isLeftEnd ? layout.leftVal : layout.rightVal;
+              children:
+                  layout.tiles.map((p) {
+                    final bool isLeftEnd = (p == layout.leftTile) && matchLeft;
+                    final bool isRightEnd =
+                        (p == layout.rightTile) && matchRight;
+                    final bool isIlluminated = isLeftEnd || isRightEnd;
+                    final int endValue =
+                        isLeftEnd ? layout.leftVal : layout.rightVal;
 
-                return Positioned(
-                  left: p.position.dx -
-                      (p.orientation == TileOrientation.vertical
-                          ? ChainLayoutEngine.HALF_W
-                          : ChainLayoutEngine.HALF_W * 2),
-                  top: p.position.dy -
-                      (p.orientation == TileOrientation.vertical
-                          ? ChainLayoutEngine.HALF_W * 2
-                          : ChainLayoutEngine.HALF_H),
-                  child: GestureDetector(
-                    onTap: isIlluminated && widget.onEndTap != null
-                        ? () => widget.onEndTap!(endValue)
-                        : null,
-                    behavior: HitTestBehavior.opaque,
-                    child: AnimatedBuilder(
-                      animation: _glowAnimController,
-                      builder: (context, child) {
-                        final glow = isIlluminated ? _glowAnimController.value : 0.0;
-                        return Stack(
-                          clipBehavior: Clip.none,
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: isIlluminated
-                                    ? [
-                                        BoxShadow(
-                                          color: Colors.amberAccent.withValues(
-                                            alpha: 0.4 + 0.5 * glow,
-                                          ),
-                                          blurRadius: 10 + 10 * glow,
-                                          spreadRadius: 2 + 3 * glow,
-                                        ),
-                                      ]
-                                    : null,
-                              ),
-                              child: _BoardTile(
-                                tile: p.tile,
-                                flipped: p.flipped,
-                                isHighlighted: isIlluminated,
-                              ),
-                            ),
-                            if (isIlluminated)
-                              Positioned(
-                                top: -24,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 2,
-                                  ),
+                    return Positioned(
+                      left:
+                          p.position.dx -
+                          (p.orientation == TileOrientation.vertical
+                              ? ChainLayoutEngine.HALF_W
+                              : ChainLayoutEngine.HALF_W * 2),
+                      top:
+                          p.position.dy -
+                          (p.orientation == TileOrientation.vertical
+                              ? ChainLayoutEngine.HALF_W * 2
+                              : ChainLayoutEngine.HALF_H),
+                      child: GestureDetector(
+                        onTap:
+                            isIlluminated && widget.onEndTap != null
+                                ? () => widget.onEndTap!(endValue)
+                                : null,
+                        behavior: HitTestBehavior.opaque,
+                        child: AnimatedBuilder(
+                          animation: _glowAnimController,
+                          builder: (context, child) {
+                            final glow =
+                                isIlluminated ? _glowAnimController.value : 0.0;
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
                                   decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [Colors.amber, Colors.orangeAccent],
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withValues(alpha: 0.5),
-                                        blurRadius: 4,
-                                      ),
-                                    ],
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow:
+                                        isIlluminated
+                                            ? [
+                                              BoxShadow(
+                                                color: Colors.amberAccent
+                                                    .withValues(
+                                                      alpha: 0.4 + 0.5 * glow,
+                                                    ),
+                                                blurRadius: 10 + 10 * glow,
+                                                spreadRadius: 2 + 3 * glow,
+                                              ),
+                                            ]
+                                            : null,
                                   ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.touch_app,
-                                        size: 11,
-                                        color: Colors.black,
-                                      ),
-                                      SizedBox(width: 3),
-                                      Text(
-                                        "$endValue",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 11,
-                                        ),
-                                      ),
-                                    ],
+                                  child: _BoardTile(
+                                    tile: p.tile,
+                                    flipped: p.flipped,
+                                    isHighlighted: isIlluminated,
                                   ),
                                 ),
-                              ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                );
-              }).toList(),
+                                if (isIlluminated)
+                                  Positioned(
+                                    top: -24,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.amber,
+                                            Colors.orangeAccent,
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withValues(
+                                              alpha: 0.5,
+                                            ),
+                                            blurRadius: 4,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.touch_app,
+                                            size: 11,
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(width: 3),
+                                          Text(
+                                            "$endValue",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: 11,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  }).toList(),
             ),
           ),
         );
@@ -66600,9 +68524,12 @@ class _BoardTile extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(
-          color: isHighlighted
-              ? Colors.amberAccent
-              : (isDouble ? Colors.amber.withOpacity(0.8) : Colors.grey.shade400),
+          color:
+              isHighlighted
+                  ? Colors.amberAccent
+                  : (isDouble
+                      ? Colors.amber.withOpacity(0.8)
+                      : Colors.grey.shade400),
           width: isHighlighted ? 2.5 : 1.5,
         ),
         boxShadow: [
@@ -66853,7 +68780,8 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
     if (text.isEmpty || _isSending) return;
 
     setState(() => _isSending = true);
-    final isPictionaryGuessing = widget.gameData['gameType'] == 'Pictionary' &&
+    final isPictionaryGuessing =
+        widget.gameData['gameType'] == 'Pictionary' &&
         (widget.gameData['roundState'] == 'drawing' ||
             widget.gameData['roundState'] == 'guessing_drawing') &&
         widget.gameData['currentDrawingPlayerId'] != widget.playerId;
@@ -66871,12 +68799,7 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
           });
     } else {
       _firebaseService
-          .sendChatMessage(
-            widget.gameCode,
-            widget.playerId,
-            text,
-            'global',
-          )
+          .sendChatMessage(widget.gameCode, widget.playerId, text, 'global')
           .whenComplete(() {
             if (mounted) setState(() => _isSending = false);
           });
@@ -66893,22 +68816,25 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
         final ps = Provider.of<PlayerState>(context, listen: false);
 
         // Messages ordonnés chronologiquement (du plus ancien au plus récent)
-        final List<Map<String, dynamic>> allMessages = messages
-            .map((doc) => doc.data() as Map<String, dynamic>)
-            .where((data) {
-              if (data['chatType'] != null && data['chatType'] != 'global') return false;
-              if (ps.isUserBlocked(data['senderId'])) return false;
-              return true;
-            })
-            .toList()
-            .reversed
-            .toList();
+        final List<Map<String, dynamic>> allMessages =
+            messages
+                .map((doc) => doc.data() as Map<String, dynamic>)
+                .where((data) {
+                  if (data['chatType'] != null && data['chatType'] != 'global')
+                    return false;
+                  if (ps.isUserBlocked(data['senderId'])) return false;
+                  return true;
+                })
+                .toList()
+                .reversed
+                .toList();
 
         // 3 messages par défaut, 5 messages si swipé vers le haut
         final int targetCount = _isSwipedUp ? 5 : 3;
-        final List<Map<String, dynamic>> displayMessages = allMessages.length > targetCount
-            ? allMessages.sublist(allMessages.length - targetCount)
-            : allMessages;
+        final List<Map<String, dynamic>> displayMessages =
+            allMessages.length > targetCount
+                ? allMessages.sublist(allMessages.length - targetCount)
+                : allMessages;
 
         return Material(
           color: Colors.transparent,
@@ -66946,24 +68872,27 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                         itemCount: displayMessages.length,
                         itemBuilder: (context, index) {
                           final msg = displayMessages[index];
-                          final sender = msg['senderName'] ?? AppLocalizations.of(context)!.joueur;
+                          final sender =
+                              msg['senderName'] ??
+                              AppLocalizations.of(context)!.joueur;
                           final text = msg['text'] ?? '';
                           final isMe = msg['senderId'] == widget.playerId;
 
                           return Align(
                             alignment: Alignment.centerLeft,
                             child: GestureDetector(
-                              onTap: isMe
-                                  ? null
-                                  : () {
-                                      if (msg['senderId'] != null) {
-                                        showUserProfileDialog(
-                                          context,
-                                          targetUid: msg['senderId'],
-                                          currentUserId: widget.playerId,
-                                        );
-                                      }
-                                    },
+                              onTap:
+                                  isMe
+                                      ? null
+                                      : () {
+                                        if (msg['senderId'] != null) {
+                                          showUserProfileDialog(
+                                            context,
+                                            targetUid: msg['senderId'],
+                                            currentUserId: widget.playerId,
+                                          );
+                                        }
+                                      },
                               child: Container(
                                 margin: const EdgeInsets.symmetric(vertical: 2),
                                 padding: const EdgeInsets.symmetric(
@@ -66974,9 +68903,14 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                                   color: Colors.black.withValues(alpha: 0.35),
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                    color: isMe
-                                        ? Colors.pinkAccent.withValues(alpha: 0.3)
-                                        : Colors.white.withValues(alpha: 0.08),
+                                    color:
+                                        isMe
+                                            ? Colors.pinkAccent.withValues(
+                                              alpha: 0.3,
+                                            )
+                                            : Colors.white.withValues(
+                                              alpha: 0.08,
+                                            ),
                                   ),
                                 ),
                                 child: RichText(
@@ -66987,13 +68921,16 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: AppLocalizations.of(context)!.stre786cb(sender),
+                                        text: AppLocalizations.of(
+                                          context,
+                                        )!.stre786cb(sender),
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 11,
-                                          color: isMe
-                                              ? Colors.pinkAccent
-                                              : Colors.cyanAccent,
+                                          color:
+                                              isMe
+                                                  ? Colors.pinkAccent
+                                                  : Colors.cyanAccent,
                                         ),
                                       ),
                                       TextSpan(text: text),
@@ -67044,8 +68981,11 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                         style: TextStyle(color: Colors.white, fontSize: 13),
                         decoration: InputDecoration(
                           isDense: true,
-                          contentPadding: const EdgeInsets.symmetric(vertical: 10),
-                          hintText: AppLocalizations.of(context)!.ecrireUnMessage,
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                          ),
+                          hintText:
+                              AppLocalizations.of(context)!.ecrireUnMessage,
                           hintStyle: TextStyle(
                             color: Colors.white38,
                             fontSize: 12,
@@ -67059,25 +68999,23 @@ class _FloatingChatOverlayState extends State<FloatingChatOverlay> {
                       ),
                     ),
                     IconButton(
-                      icon: _isSending
-                          ? SizedBox(
-                              width: 14,
-                              height: 14,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
+                      icon:
+                          _isSending
+                              ? SizedBox(
+                                width: 14,
+                                height: 14,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.cyanAccent,
+                                ),
+                              )
+                              : Icon(
+                                Icons.send_rounded,
+                                size: 18,
                                 color: Colors.cyanAccent,
                               ),
-                            )
-                          : Icon(
-                              Icons.send_rounded,
-                              size: 18,
-                              color: Colors.cyanAccent,
-                            ),
                       padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(
-                        minWidth: 32,
-                        minHeight: 32,
-                      ),
+                      constraints: BoxConstraints(minWidth: 32, minHeight: 32),
                       onPressed: _sendMessage,
                     ),
                   ],
@@ -67138,19 +69076,21 @@ class _LoungeListScreenState extends State<LoungeListScreen>
 
     try {
       String? targetLoungeId;
-      final querySnap = await FirebaseFirestore.instance
-          .collection('lounges')
-          .where('joinCode', isEqualTo: input)
-          .limit(1)
-          .get();
+      final querySnap =
+          await FirebaseFirestore.instance
+              .collection('lounges')
+              .where('joinCode', isEqualTo: input)
+              .limit(1)
+              .get();
 
       if (querySnap.docs.isNotEmpty) {
         targetLoungeId = querySnap.docs.first.id;
       } else {
-        final doc = await FirebaseFirestore.instance
-            .collection('lounges')
-            .doc(input)
-            .get();
+        final doc =
+            await FirebaseFirestore.instance
+                .collection('lounges')
+                .doc(input)
+                .get();
         if (doc.exists) {
           targetLoungeId = doc.id;
         }
@@ -67160,16 +69100,24 @@ class _LoungeListScreenState extends State<LoungeListScreen>
         final ps = Provider.of<PlayerState>(context, listen: false);
 
         // Vérifier si l'hôte est VIP ou si le salon est gratuit
-        final loungeSnap = querySnap.docs.isNotEmpty
-            ? querySnap.docs.first
-            : await FirebaseFirestore.instance.collection('lounges').doc(targetLoungeId).get();
+        final loungeSnap =
+            querySnap.docs.isNotEmpty
+                ? querySnap.docs.first
+                : await FirebaseFirestore.instance
+                    .collection('lounges')
+                    .doc(targetLoungeId)
+                    .get();
         final lData = loungeSnap.data() as Map<String, dynamic>? ?? {};
-        final bool isHostVip = lData['isHostVip'] == true || lData['isPremiumLobby'] == true;
-        final bool isAlreadyMember = (lData['players'] as Map?)?.containsKey(widget.playerId) == true;
+        final bool isHostVip =
+            lData['isHostVip'] == true || lData['isPremiumLobby'] == true;
+        final bool isAlreadyMember =
+            (lData['players'] as Map?)?.containsKey(widget.playerId) == true;
 
         if (!ps.isPremium && !isAlreadyMember) {
           if (!isHostVip) {
-            bool success = await ps.spendCoins(1); // 1 pièce pour rejoindre un salon
+            bool success = await ps.spendCoins(
+              1,
+            ); // 1 pièce pour rejoindre un salon
             if (!success) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -67203,10 +69151,11 @@ class _LoungeListScreenState extends State<LoungeListScreen>
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => LoungeRoomScreen(
-                loungeId: targetLoungeId!,
-                playerId: widget.playerId,
-              ),
+              builder:
+                  (_) => LoungeRoomScreen(
+                    loungeId: targetLoungeId!,
+                    playerId: widget.playerId,
+                  ),
             ),
           );
         }
@@ -67224,11 +69173,15 @@ class _LoungeListScreenState extends State<LoungeListScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-content: Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.erreurLorsDeLaConnexion, [e]),
-),
-backgroundColor: Colors.redAccent,
-),
+            content: Text(
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.erreurLorsDeLaConnexion,
+                [e],
+              ),
+            ),
+            backgroundColor: Colors.redAccent,
+          ),
         );
       }
     } finally {
@@ -67259,11 +69212,15 @@ backgroundColor: Colors.redAccent,
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          gradient: _selectedTabIndex == 0
-                              ? LinearGradient(
-                                  colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-                                )
-                              : null,
+                          gradient:
+                              _selectedTabIndex == 0
+                                  ? LinearGradient(
+                                    colors: [
+                                      Color(0xFF6A11CB),
+                                      Color(0xFF2575FC),
+                                    ],
+                                  )
+                                  : null,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
@@ -67272,7 +69229,10 @@ backgroundColor: Colors.redAccent,
                             Icon(
                               Icons.public_rounded,
                               size: 18,
-                              color: _selectedTabIndex == 0 ? Colors.white : Colors.white60,
+                              color:
+                                  _selectedTabIndex == 0
+                                      ? Colors.white
+                                      : Colors.white60,
                             ),
                             SizedBox(width: 8),
                             Text(
@@ -67280,7 +69240,10 @@ backgroundColor: Colors.redAccent,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13,
-                                color: _selectedTabIndex == 0 ? Colors.white : Colors.white60,
+                                color:
+                                    _selectedTabIndex == 0
+                                        ? Colors.white
+                                        : Colors.white60,
                               ),
                             ),
                           ],
@@ -67294,11 +69257,15 @@ backgroundColor: Colors.redAccent,
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          gradient: _selectedTabIndex == 1
-                              ? LinearGradient(
-                                  colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-                                )
-                              : null,
+                          gradient:
+                              _selectedTabIndex == 1
+                                  ? LinearGradient(
+                                    colors: [
+                                      Color(0xFF6A11CB),
+                                      Color(0xFF2575FC),
+                                    ],
+                                  )
+                                  : null,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
@@ -67307,7 +69274,10 @@ backgroundColor: Colors.redAccent,
                             Icon(
                               Icons.vpn_key_rounded,
                               size: 18,
-                              color: _selectedTabIndex == 1 ? Colors.white : Colors.white60,
+                              color:
+                                  _selectedTabIndex == 1
+                                      ? Colors.white
+                                      : Colors.white60,
                             ),
                             SizedBox(width: 8),
                             Text(
@@ -67315,7 +69285,10 @@ backgroundColor: Colors.redAccent,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13,
-                                color: _selectedTabIndex == 1 ? Colors.white : Colors.white60,
+                                color:
+                                    _selectedTabIndex == 1
+                                        ? Colors.white
+                                        : Colors.white60,
                               ),
                             ),
                           ],
@@ -67351,87 +69324,99 @@ backgroundColor: Colors.redAccent,
     );
   }
 
-  // VUE 1 : REJOINDRE AVEC UN CODE PRIVÉ
+  // Méthode de calcul de la présence active en direct pour un salon
+  int _getActiveOnlineCount(Map<String, dynamic> data, DateTime now) {
+    final players = data['players'] as Map<String, dynamic>? ?? {};
+    int activeCount = 0;
+    players.forEach((pId, pVal) {
+      if (pVal is Map) {
+        final isOnline = pVal['isOnline'] != false;
+        final hb = (pVal['lastHeartbeat'] as Timestamp?)?.toDate();
+        if (isOnline && hb != null && now.difference(hb).inSeconds < 60) {
+          activeCount++;
+        } else if (pId == data['hostId']) {
+          // L'hôte d'un salon récent compte comme présent
+          final created = (data['createdAt'] as Timestamp?)?.toDate();
+          if (created != null && now.difference(created).inMinutes < 60) {
+            activeCount++;
+          }
+        }
+      }
+    });
+    return activeCount > 0 ? activeCount : (players.isNotEmpty ? 1 : 0);
+  }
+
+  // VUE 1 : REJOINDRE AVEC UN CODE PRIVÉ (MINIMALISTE) + LISTE DE MES SALONS PRIVÉS
   Widget _buildPrivateJoinView() {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(height: 20),
-          Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.deepPurple.shade900.withValues(alpha: 0.5),
-                  Color(0xFF1E1E2C),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: Colors.deepPurpleAccent.withValues(alpha: 0.3)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.deepPurple.withValues(alpha: 0.2),
-                  blurRadius: 18,
-                  offset: Offset(0, 6),
-                ),
-              ],
+    return Column(
+      children: [
+        // BANDEAU COMPACT & MINIMALISTE POUR ENTRER LE CODE
+        Container(
+          margin: const EdgeInsets.fromLTRB(16, 6, 16, 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1C1D2A),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: Colors.amberAccent.withValues(alpha: 0.3),
             ),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.amberAccent.withValues(alpha: 0.15),
-                  ),
-                  child: Icon(Icons.lock_rounded, size: 44, color: Colors.amberAccent),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.2),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(7),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.amberAccent.withValues(alpha: 0.12),
                 ),
-                SizedBox(height: 16),
-                Text(
-                  AppLocalizations.of(context)!.rejoindreUnSalonPrive,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                child: const Icon(
+                  Icons.vpn_key_rounded,
+                  size: 16,
+                  color: Colors.amberAccent,
                 ),
-                SizedBox(height: 8),
-                Text(
-                  AppLocalizations.of(context)!.entrezLeCodeA6,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white60, fontSize: 13, height: 1.4),
-                ),
-                SizedBox(height: 24),
-                TextField(
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: TextField(
                   controller: _privateCodeCtrl,
-                  textAlign: TextAlign.center,
                   keyboardType: TextInputType.text,
-                  style: TextStyle(
+                  textCapitalization: TextCapitalization.characters,
+                  style: const TextStyle(
                     color: Colors.amberAccent,
-                    fontSize: 24,
-                    letterSpacing: 4,
+                    fontSize: 16,
+                    letterSpacing: 2,
                     fontWeight: FontWeight.bold,
                   ),
                   decoration: InputDecoration(
-                    hintText: "123456",
-                    hintStyle: TextStyle(
-                      color: Colors.white24,
-                      fontSize: 22,
-                      letterSpacing: 4,
+                    isDense: true,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 6,
                     ),
-                    filled: true,
-                    fillColor: Colors.black26,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.white24),
+                    hintText: AppLocalizations.of(context)!.entrezLeCodeA6,
+                    hintStyle: const TextStyle(
+                      color: Colors.white30,
+                      fontSize: 11,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.normal,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.amberAccent, width: 2),
-                    ),
+                    border: InputBorder.none,
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.paste_rounded, color: Colors.amberAccent),
+                      icon: const Icon(
+                        Icons.paste_rounded,
+                        size: 16,
+                        color: Colors.amberAccent,
+                      ),
                       tooltip: AppLocalizations.of(context)!.coller,
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
                       onPressed: () async {
                         final clip = await Clipboard.getData('text/plain');
                         if (clip?.text != null) {
@@ -67442,44 +69427,423 @@ backgroundColor: Colors.redAccent,
                   ),
                   onSubmitted: _joinWithCode,
                 ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.amberAccent,
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      elevation: 4,
+              ),
+              const SizedBox(width: 6),
+              SizedBox(
+                height: 36,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.amberAccent,
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    onPressed: _isJoiningPrivate
-                        ? null
-                        : () => _joinWithCode(_privateCodeCtrl.text),
-                    child: _isJoiningPrivate
-                        ? SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
+                    elevation: 0,
+                  ),
+                  onPressed:
+                      _isJoiningPrivate
+                          ? null
+                          : () => _joinWithCode(_privateCodeCtrl.text),
+                  child:
+                      _isJoiningPrivate
+                          ? const SizedBox(
+                            width: 14,
+                            height: 14,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.black,
+                            ),
                           )
-                        : Row(
+                          : Text(
+                            AppLocalizations.of(context)!.rejoindre,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 12,
+                            ),
+                          ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // TITRE DE SECTION
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          child: Row(
+            children: [
+              Text(
+                MatchmakingLocalization.tr(context, 'loungePrivateTitle'),
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white70,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // LISTE STREAMÉE DES SALONS PRIVÉS OÙ LE JOUEUR EST HÔTE OU MEMBRE
+        Expanded(
+          child: StreamBuilder<QuerySnapshot>(
+            stream:
+                FirebaseFirestore.instance.collection('lounges').snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final now = DateTime.now();
+              final allDocs = snapshot.data!.docs;
+
+              // Filtrer : uniquement salons privés actifs dont le joueur est membre ou hôte
+              final myPrivateLounges =
+                  allDocs.where((doc) {
+                    final d = doc.data() as Map<String, dynamic>;
+                    if (d['isPrivate'] != true) return false;
+                    if (d['status'] == 'closed') return false;
+
+                    final bool amIHost = d['hostId'] == widget.playerId;
+                    final bool amIMember =
+                        (d['players'] as Map<String, dynamic>?)?.containsKey(
+                          widget.playerId,
+                        ) ==
+                        true;
+                    return amIHost || amIMember;
+                  }).toList();
+
+              // Tri : Mon salon en premier, puis les plus récents
+              myPrivateLounges.sort((a, b) {
+                final aData = a.data() as Map<String, dynamic>;
+                final bData = b.data() as Map<String, dynamic>;
+                final bool aIsMyHost = aData['hostId'] == widget.playerId;
+                final bool bIsMyHost = bData['hostId'] == widget.playerId;
+                if (aIsMyHost && !bIsMyHost) return -1;
+                if (!aIsMyHost && bIsMyHost) return 1;
+
+                final aTime =
+                    (aData['createdAt'] as Timestamp?)?.toDate() ??
+                    DateTime.now();
+                final bTime =
+                    (bData['createdAt'] as Timestamp?)?.toDate() ??
+                    DateTime.now();
+                return bTime.compareTo(aTime);
+              });
+
+              if (myPrivateLounges.isEmpty) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.lock_open_rounded,
+                          size: 44,
+                          color: Colors.white24,
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          AppLocalizations.of(context)!.aucunSalonNeCorrespondA,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.white70,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          AppLocalizations.of(
+                            context,
+                          )!.aucunSalonPublicDisponibleNcreez,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white38,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+
+              return ListView.builder(
+                padding: const EdgeInsets.only(bottom: 80),
+                itemCount: myPrivateLounges.length,
+                itemBuilder: (context, index) {
+                  final doc = myPrivateLounges[index];
+                  final data = doc.data() as Map<String, dynamic>;
+                  final int maxPlayers =
+                      (data['maxPlayers'] as num?)?.toInt() ?? 10;
+                  final int activeCount = _getActiveOnlineCount(data, now);
+                  final String hostId = data['hostId'] ?? '';
+                  final bool amIHost = hostId == widget.playerId;
+                  final String theme =
+                      data['theme'] ?? AppLocalizations.of(context)!.general;
+                  final String joinCode = (data['joinCode'] ?? '').toString();
+
+                  return Card(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 6,
+                    ),
+                    color:
+                        amIHost
+                            ? Colors.deepPurple[900]?.withValues(alpha: 0.5)
+                            : const Color(0xFF1C1D2A),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(
+                        color:
+                            amIHost
+                                ? Colors.amberAccent.withValues(alpha: 0.6)
+                                : Colors.white.withValues(alpha: 0.08),
+                        width: amIHost ? 1.5 : 1,
+                      ),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 6,
+                      ),
+                      leading: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: (amIHost
+                                  ? Colors.amberAccent
+                                  : Colors.cyanAccent)
+                              .withValues(alpha: 0.15),
+                        ),
+                        child: Icon(
+                          Icons.lock_rounded,
+                          size: 24,
+                          color:
+                              amIHost ? Colors.amberAccent : Colors.cyanAccent,
+                        ),
+                      ),
+                      title: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              data['name'] ??
+                                  AppLocalizations.of(context)!.salon,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color:
+                                  amIHost
+                                      ? Colors.amber
+                                      : Colors.deepPurpleAccent,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              amIHost
+                                  ? AppLocalizations.of(context)!.monSalon
+                                  : AppLocalizations.of(context)!.salon,
+                              style: TextStyle(
+                                color: amIHost ? Colors.black : Colors.white,
+                                fontSize: 9,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 8,
+                          runSpacing: 4,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.08),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                theme,
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
+                            if (joinCode.isNotEmpty)
+                              InkWell(
+                                onTap: () {
+                                  Clipboard.setData(
+                                    ClipboardData(text: joinCode),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "${AppLocalizations.of(context)!.codeDeConnexion} : $joinCode (copié)",
+                                      ),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+                                },
+                                borderRadius: BorderRadius.circular(6),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.amberAccent.withValues(
+                                      alpha: 0.15,
+                                    ),
+                                    borderRadius: BorderRadius.circular(6),
+                                    border: Border.all(
+                                      color: Colors.amberAccent.withValues(
+                                        alpha: 0.4,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.vpn_key_rounded,
+                                        size: 10,
+                                        color: Colors.amberAccent,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        joinCode,
+                                        style: const TextStyle(
+                                          color: Colors.amberAccent,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      const Icon(
+                                        Icons.copy_rounded,
+                                        size: 10,
+                                        color: Colors.amberAccent,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: 7,
+                                  height: 7,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        activeCount > 0
+                                            ? Colors.greenAccent
+                                            : Colors.white30,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  GameContentLocalization.format(
+                                    context,
+                                    AppLocalizations.of(context)!.enLigne,
+                                    [activeCount],
+                                  ),
+                                  style: TextStyle(
+                                    color:
+                                        activeCount > 0
+                                            ? Colors.greenAccent
+                                            : Colors.white38,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.login_rounded, size: 20),
-                              SizedBox(width: 8),
+                              const Icon(
+                                Icons.people,
+                                size: 16,
+                                color: Colors.white70,
+                              ),
+                              const SizedBox(height: 2),
                               Text(
-                                AppLocalizations.of(context)!.rejoindreLeSalon,
-                                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
+                                "$activeCount / $maxPlayers",
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
                               ),
                             ],
                           ),
-                  ),
-                ),
-              ],
-            ),
+                          const SizedBox(width: 8),
+                          const Icon(
+                            Icons.chevron_right_rounded,
+                            color: Colors.white38,
+                          ),
+                        ],
+                      ),
+                      onTap: () async {
+                        final ps = Provider.of<PlayerState>(
+                          context,
+                          listen: false,
+                        );
+                        await FirebaseService().joinLounge(
+                          doc.id,
+                          widget.playerId,
+                          ps.userName ?? AppLocalizations.of(context)!.joueur,
+                        );
+                        if (context.mounted) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (_) => LoungeRoomScreen(
+                                    loungeId: doc.id,
+                                    playerId: widget.playerId,
+                                  ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  );
+                },
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -67499,16 +69863,29 @@ backgroundColor: Colors.redAccent,
                   style: TextStyle(fontSize: 13, color: Colors.white),
                   decoration: InputDecoration(
                     isDense: true,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
                     hintText: AppLocalizations.of(context)!.rechercherUnSalon,
                     hintStyle: TextStyle(color: Colors.white38, fontSize: 12),
-                    prefixIcon: Icon(Icons.search, size: 18, color: Colors.cyanAccent),
-                    suffixIcon: _searchCtrl.text.isNotEmpty
-                        ? IconButton(
-                            icon: Icon(Icons.clear, size: 16, color: Colors.white54),
-                            onPressed: () => setState(() => _searchCtrl.clear()),
-                          )
-                        : null,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: 18,
+                      color: Colors.cyanAccent,
+                    ),
+                    suffixIcon:
+                        _searchCtrl.text.isNotEmpty
+                            ? IconButton(
+                              icon: Icon(
+                                Icons.clear,
+                                size: 16,
+                                color: Colors.white54,
+                              ),
+                              onPressed:
+                                  () => setState(() => _searchCtrl.clear()),
+                            )
+                            : null,
                     filled: true,
                     fillColor: Colors.white.withValues(alpha: 0.05),
                     border: OutlineInputBorder(
@@ -67532,47 +69909,102 @@ backgroundColor: Colors.redAccent,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: Colors.white12),
                   ),
-                  child: Icon(Icons.sort_rounded, size: 18, color: Colors.cyanAccent),
+                  child: Icon(
+                    Icons.sort_rounded,
+                    size: 18,
+                    color: Colors.cyanAccent,
+                  ),
                 ),
                 onSelected: (val) => setState(() => _sortBy = val),
-                itemBuilder: (ctx) => [
-                  PopupMenuItem(
-                    value: 'recent',
-                    child: Row(
-                      children: [
-                        Icon(Icons.access_time, size: 16, color: _sortBy == 'recent' ? Colors.amber : Colors.white70),
-                        SizedBox(width: 8),
-                        Text(AppLocalizations.of(context)!.plusRecents, style: TextStyle(color: _sortBy == 'recent' ? Colors.amber : Colors.white)),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'players',
-                    child: Row(
-                      children: [
-                        Icon(Icons.people, size: 16, color: _sortBy == 'players' ? Colors.amber : Colors.white70),
-                        SizedBox(width: 8),
-                        Text(AppLocalizations.of(context)!.plusActifs, style: TextStyle(color: _sortBy == 'players' ? Colors.amber : Colors.white)),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'slots',
-                    child: Row(
-                      children: [
-                        Icon(Icons.event_seat, size: 16, color: _sortBy == 'slots' ? Colors.amber : Colors.white70),
-                        SizedBox(width: 8),
-                        Text(AppLocalizations.of(context)!.placesDisponibles, style: TextStyle(color: _sortBy == 'slots' ? Colors.amber : Colors.white)),
-                      ],
-                    ),
-                  ),
-                ],
+                itemBuilder:
+                    (ctx) => [
+                      PopupMenuItem(
+                        value: 'recent',
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.access_time,
+                              size: 16,
+                              color:
+                                  _sortBy == 'recent'
+                                      ? Colors.amber
+                                      : Colors.white70,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              AppLocalizations.of(context)!.plusRecents,
+                              style: TextStyle(
+                                color:
+                                    _sortBy == 'recent'
+                                        ? Colors.amber
+                                        : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'players',
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.people,
+                              size: 16,
+                              color:
+                                  _sortBy == 'players'
+                                      ? Colors.amber
+                                      : Colors.white70,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              AppLocalizations.of(context)!.plusActifs,
+                              style: TextStyle(
+                                color:
+                                    _sortBy == 'players'
+                                        ? Colors.amber
+                                        : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 'slots',
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.event_seat,
+                              size: 16,
+                              color:
+                                  _sortBy == 'slots'
+                                      ? Colors.amber
+                                      : Colors.white70,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              AppLocalizations.of(context)!.placesDisponibles,
+                              style: TextStyle(
+                                color:
+                                    _sortBy == 'slots'
+                                        ? Colors.amber
+                                        : Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
               ),
               SizedBox(width: 4),
               IconButton(
-                tooltip: _hideFull ? AppLocalizations.of(context)!.afficherLesSalonsPleins : AppLocalizations.of(context)!.masquerLesSalonsPleins,
+                tooltip:
+                    _hideFull
+                        ? AppLocalizations.of(context)!.afficherLesSalonsPleins
+                        : AppLocalizations.of(context)!.masquerLesSalonsPleins,
                 icon: Icon(
-                  _hideFull ? Icons.filter_alt_rounded : Icons.filter_alt_outlined,
+                  _hideFull
+                      ? Icons.filter_alt_rounded
+                      : Icons.filter_alt_outlined,
                   size: 20,
                   color: _hideFull ? Colors.amberAccent : Colors.white60,
                 ),
@@ -67605,8 +70037,13 @@ backgroundColor: Colors.redAccent,
                     fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
                   ),
                   backgroundColor: Colors.white.withValues(alpha: 0.05),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 4,
+                    vertical: 0,
+                  ),
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   onSelected: (_) => setState(() => _selectedTheme = t),
                 ),
@@ -67619,7 +70056,8 @@ backgroundColor: Colors.redAccent,
         // LISTE STREAMÉE DE TOUS LES SALONS PUBLICS SANS RISQUE DE DISPARITION
         Expanded(
           child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection('lounges').snapshots(),
+            stream:
+                FirebaseFirestore.instance.collection('lounges').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
@@ -67629,61 +70067,48 @@ backgroundColor: Colors.redAccent,
               final allDocs = snapshot.data!.docs;
 
               // Filtrage résilient : exclure uniquement si explicitement privé
-              List<DocumentSnapshot> filtered = allDocs.where((doc) {
-                final d = doc.data() as Map<String, dynamic>;
-                if (d['isPrivate'] == true) return false;
-                if (d['status'] == 'closed') return false;
+              List<DocumentSnapshot> filtered =
+                  allDocs.where((doc) {
+                    final d = doc.data() as Map<String, dynamic>;
+                    if (d['isPrivate'] == true) return false;
+                    if (d['status'] == 'closed') return false;
 
-                // Filtre de recherche
-                if (_searchCtrl.text.isNotEmpty) {
-                  final q = _searchCtrl.text.toLowerCase();
-                  final name = (d['name'] ?? '').toString().toLowerCase();
-                  final theme = (d['theme'] ?? '').toString().toLowerCase();
-                  final desc = (d['description'] ?? '').toString().toLowerCase();
-                  if (!name.contains(q) && !theme.contains(q) && !desc.contains(q)) {
-                    return false;
-                  }
-                }
-
-                // Filtre de thème
-                if (_selectedTheme != AppLocalizations.of(context)!.tous) {
-                  final theme = (d['theme'] ?? '').toString().toLowerCase();
-                  if (theme != _selectedTheme.toLowerCase()) {
-                    return false;
-                  }
-                }
-
-                // Filtre salons pleins
-                if (_hideFull) {
-                  final players = d['players'] as Map<String, dynamic>? ?? {};
-                  final maxP = (d['maxPlayers'] as num?)?.toInt() ?? 10;
-                  if (players.length >= maxP) return false;
-                }
-
-                return true;
-              }).toList();
-
-              // Calcul de la présence active en direct pour chaque salon
-              int getActiveOnlineCount(Map<String, dynamic> data) {
-                final players = data['players'] as Map<String, dynamic>? ?? {};
-                int activeCount = 0;
-                players.forEach((pId, pVal) {
-                  if (pVal is Map) {
-                    final isOnline = pVal['isOnline'] != false;
-                    final hb = (pVal['lastHeartbeat'] as Timestamp?)?.toDate();
-                    if (isOnline && hb != null && now.difference(hb).inSeconds < 60) {
-                      activeCount++;
-                    } else if (pId == data['hostId']) {
-                      // L'hôte d'un salon récent compte comme présent
-                      final created = (data['createdAt'] as Timestamp?)?.toDate();
-                      if (created != null && now.difference(created).inMinutes < 60) {
-                        activeCount++;
+                    // Filtre de recherche
+                    if (_searchCtrl.text.isNotEmpty) {
+                      final q = _searchCtrl.text.toLowerCase();
+                      final name = (d['name'] ?? '').toString().toLowerCase();
+                      final theme = (d['theme'] ?? '').toString().toLowerCase();
+                      final desc =
+                          (d['description'] ?? '').toString().toLowerCase();
+                      if (!name.contains(q) &&
+                          !theme.contains(q) &&
+                          !desc.contains(q)) {
+                        return false;
                       }
                     }
-                  }
-                });
-                return activeCount > 0 ? activeCount : (players.isNotEmpty ? 1 : 0);
-              }
+
+                    // Filtre de thème
+                    if (_selectedTheme != AppLocalizations.of(context)!.tous) {
+                      final theme = (d['theme'] ?? '').toString().toLowerCase();
+                      if (theme != _selectedTheme.toLowerCase()) {
+                        return false;
+                      }
+                    }
+
+                    // Filtre salons pleins
+                    if (_hideFull) {
+                      final players =
+                          d['players'] as Map<String, dynamic>? ?? {};
+                      final maxP = (d['maxPlayers'] as num?)?.toInt() ?? 10;
+                      if (players.length >= maxP) return false;
+                    }
+
+                    return true;
+                  }).toList();
+
+              // Calcul de la présence active en direct pour chaque salon
+              int getActiveOnlineCount(Map<String, dynamic> data) =>
+                  _getActiveOnlineCount(data, now);
 
               // Tri intelligent
               filtered.sort((a, b) {
@@ -67703,14 +70128,24 @@ backgroundColor: Colors.redAccent,
                 } else if (_sortBy == 'slots') {
                   final aMax = (aData['maxPlayers'] as num?)?.toInt() ?? 10;
                   final bMax = (bData['maxPlayers'] as num?)?.toInt() ?? 10;
-                  final aAvail = (aMax - getActiveOnlineCount(aData)).clamp(0, 99);
-                  final bAvail = (bMax - getActiveOnlineCount(bData)).clamp(0, 99);
+                  final aAvail = (aMax - getActiveOnlineCount(aData)).clamp(
+                    0,
+                    99,
+                  );
+                  final bAvail = (bMax - getActiveOnlineCount(bData)).clamp(
+                    0,
+                    99,
+                  );
                   return bAvail.compareTo(aAvail);
                 }
 
                 // Par défaut : plus récents
-                final aTime = (aData['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now();
-                final bTime = (bData['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now();
+                final aTime =
+                    (aData['createdAt'] as Timestamp?)?.toDate() ??
+                    DateTime.now();
+                final bTime =
+                    (bData['createdAt'] as Timestamp?)?.toDate() ??
+                    DateTime.now();
                 return bTime.compareTo(aTime);
               });
 
@@ -67721,14 +70156,28 @@ backgroundColor: Colors.redAccent,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.search_off_rounded, size: 50, color: Colors.white24),
+                        Icon(
+                          Icons.search_off_rounded,
+                          size: 50,
+                          color: Colors.white24,
+                        ),
                         SizedBox(height: 12),
                         Text(
-                          _searchCtrl.text.isNotEmpty || _selectedTheme != AppLocalizations.of(context)!.tous
-                              ? AppLocalizations.of(context)!.aucunSalonNeCorrespondA
-                              : AppLocalizations.of(context)!.aucunSalonPublicDisponibleNcreez,
+                          _searchCtrl.text.isNotEmpty ||
+                                  _selectedTheme !=
+                                      AppLocalizations.of(context)!.tous
+                              ? AppLocalizations.of(
+                                context,
+                              )!.aucunSalonNeCorrespondA
+                              : AppLocalizations.of(
+                                context,
+                              )!.aucunSalonPublicDisponibleNcreez,
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white54, height: 1.4, fontSize: 14),
+                          style: TextStyle(
+                            color: Colors.white54,
+                            height: 1.4,
+                            fontSize: 14,
+                          ),
                         ),
                       ],
                     ),
@@ -67742,62 +70191,89 @@ backgroundColor: Colors.redAccent,
                 itemBuilder: (context, index) {
                   final doc = filtered[index];
                   final data = doc.data() as Map<String, dynamic>;
-                  final players = data['players'] as Map<String, dynamic>? ?? {};
-                  final int maxPlayers = (data['maxPlayers'] as num?)?.toInt() ?? 10;
+                  final players =
+                      data['players'] as Map<String, dynamic>? ?? {};
+                  final int maxPlayers =
+                      (data['maxPlayers'] as num?)?.toInt() ?? 10;
                   final int activeCount = getActiveOnlineCount(data);
                   final bool isFull = activeCount >= maxPlayers;
                   final String hostId = data['hostId'] ?? '';
                   final bool amIHost = hostId == widget.playerId;
-                  final String theme = data['theme'] ?? AppLocalizations.of(context)!.general;
+                  final String theme =
+                      data['theme'] ?? AppLocalizations.of(context)!.general;
 
                   return Card(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    color: amIHost
-                        ? Colors.deepPurple[900]?.withValues(alpha: 0.5)
-                        : Color(0xFF1C1D2A),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 6,
+                    ),
+                    color:
+                        amIHost
+                            ? Colors.deepPurple[900]?.withValues(alpha: 0.5)
+                            : Color(0xFF1C1D2A),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                       side: BorderSide(
-                        color: amIHost
-                            ? Colors.amberAccent.withValues(alpha: 0.6)
-                            : Colors.white.withValues(alpha: 0.08),
+                        color:
+                            amIHost
+                                ? Colors.amberAccent.withValues(alpha: 0.6)
+                                : Colors.white.withValues(alpha: 0.08),
                         width: amIHost ? 1.5 : 1,
                       ),
                     ),
                     child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 6,
+                      ),
                       leading: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: (amIHost ? Colors.amberAccent : Colors.cyanAccent).withValues(alpha: 0.15),
+                          color: (amIHost
+                                  ? Colors.amberAccent
+                                  : Colors.cyanAccent)
+                              .withValues(alpha: 0.15),
                         ),
                         child: Icon(
                           Icons.living_rounded,
                           size: 26,
-                          color: amIHost ? Colors.amberAccent : Colors.cyanAccent,
+                          color:
+                              amIHost ? Colors.amberAccent : Colors.cyanAccent,
                         ),
                       ),
                       title: Row(
                         children: [
                           Flexible(
                             child: Text(
-                              data['name'] ?? AppLocalizations.of(context)!.salon,
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                              data['name'] ??
+                                  AppLocalizations.of(context)!.salon,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           if (amIHost) ...[
                             SizedBox(width: 8),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.amber,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
                                 AppLocalizations.of(context)!.monSalon,
-                                style: TextStyle(color: Colors.black, fontSize: 9, fontWeight: FontWeight.w900),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w900,
+                                ),
                               ),
                             ),
                           ],
@@ -67808,14 +70284,20 @@ backgroundColor: Colors.redAccent,
                         child: Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.white.withValues(alpha: 0.08),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
                                 theme,
-                                style: TextStyle(color: Colors.white70, fontSize: 10),
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 10,
+                                ),
                               ),
                             ),
                             SizedBox(width: 8),
@@ -67826,15 +70308,25 @@ backgroundColor: Colors.redAccent,
                                   width: 7,
                                   height: 7,
                                   decoration: BoxDecoration(
-                                    color: activeCount > 0 ? Colors.greenAccent : Colors.white30,
+                                    color:
+                                        activeCount > 0
+                                            ? Colors.greenAccent
+                                            : Colors.white30,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
                                 SizedBox(width: 4),
                                 Text(
-                                  GameContentLocalization.format(context, AppLocalizations.of(context)!.enLigne, [activeCount]),
+                                  GameContentLocalization.format(
+                                    context,
+                                    AppLocalizations.of(context)!.enLigne,
+                                    [activeCount],
+                                  ),
                                   style: TextStyle(
-                                    color: activeCount > 0 ? Colors.greenAccent : Colors.white38,
+                                    color:
+                                        activeCount > 0
+                                            ? Colors.greenAccent
+                                            : Colors.white38,
                                     fontSize: 11,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -67847,7 +70339,11 @@ backgroundColor: Colors.redAccent,
                       trailing: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.people, size: 16, color: isFull ? Colors.redAccent : Colors.white70),
+                          Icon(
+                            Icons.people,
+                            size: 16,
+                            color: isFull ? Colors.redAccent : Colors.white70,
+                          ),
                           SizedBox(height: 2),
                           Text(
                             "${activeCount} / ${maxPlayers}",
@@ -67859,61 +70355,86 @@ backgroundColor: Colors.redAccent,
                           ),
                         ],
                       ),
-                      onTap: isFull && !amIHost
-                          ? null
-                          : () async {
-                              final ps = Provider.of<PlayerState>(context, listen: false);
-                              final lData = doc.data() as Map<String, dynamic>? ?? {};
-                              final bool isHostVip = lData['isHostVip'] == true || lData['isPremiumLobby'] == true;
-                              final bool isAlreadyMember = (lData['players'] as Map?)?.containsKey(widget.playerId) == true;
+                      onTap:
+                          isFull && !amIHost
+                              ? null
+                              : () async {
+                                final ps = Provider.of<PlayerState>(
+                                  context,
+                                  listen: false,
+                                );
+                                final lData =
+                                    doc.data() as Map<String, dynamic>? ?? {};
+                                final bool isHostVip =
+                                    lData['isHostVip'] == true ||
+                                    lData['isPremiumLobby'] == true;
+                                final bool isAlreadyMember =
+                                    (lData['players'] as Map?)?.containsKey(
+                                      widget.playerId,
+                                    ) ==
+                                    true;
 
-                              if (!amIHost && !isAlreadyMember && !ps.isPremium) {
-                                if (!isHostVip) {
-                                  bool success = await ps.spendCoins(1); // 1 pièce pour rejoindre un salon
-                                  if (!success) {
+                                if (!amIHost &&
+                                    !isAlreadyMember &&
+                                    !ps.isPremium) {
+                                  if (!isHostVip) {
+                                    bool success = await ps.spendCoins(
+                                      1,
+                                    ); // 1 pièce pour rejoindre un salon
+                                    if (!success) {
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.pasAssezDePiecesPour2,
+                                            ),
+                                            backgroundColor: Colors.redAccent,
+                                          ),
+                                        );
+                                      }
+                                      return;
+                                    }
+                                  } else {
                                     if (context.mounted) {
-                                      ScaffoldMessenger.of(context).showSnackBar(
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            AppLocalizations.of(context)!.pasAssezDePiecesPour2,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.vousRejoignezUnePartieVip,
                                           ),
-                                          backgroundColor: Colors.redAccent,
+                                          backgroundColor: Colors.amber[800],
                                         ),
                                       );
                                     }
-                                    return;
-                                  }
-                                } else {
-                                  if (context.mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          AppLocalizations.of(context)!.vousRejoignezUnePartieVip,
-                                        ),
-                                        backgroundColor: Colors.amber[800],
-                                      ),
-                                    );
                                   }
                                 }
-                              }
 
-                              await FirebaseService().joinLounge(
-                                doc.id,
-                                widget.playerId,
-                                ps.userName ?? AppLocalizations.of(context)!.joueur,
-                              );
-                              if (context.mounted) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => LoungeRoomScreen(
-                                      loungeId: doc.id,
-                                      playerId: widget.playerId,
-                                    ),
-                                  ),
+                                await FirebaseService().joinLounge(
+                                  doc.id,
+                                  widget.playerId,
+                                  ps.userName ??
+                                      AppLocalizations.of(context)!.joueur,
                                 );
-                              }
-                            },
+                                if (context.mounted) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (_) => LoungeRoomScreen(
+                                            loungeId: doc.id,
+                                            playerId: widget.playerId,
+                                          ),
+                                    ),
+                                  );
+                                }
+                              },
                     ),
                   );
                 },
@@ -67961,20 +70482,22 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
   void _createLounge() async {
     if (_nameCtrl.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.pleaseEnterLoungeName)),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.pleaseEnterLoungeName),
+        ),
       );
       return;
     }
 
     final ps = Provider.of<PlayerState>(context, listen: false);
     if (!ps.isPremium) {
-      bool success = await ps.spendCoins(2); // Le salon coûte 2 pièces (gratuit pour les VIP)
+      bool success = await ps.spendCoins(
+        2,
+      ); // Le salon coûte 2 pièces (gratuit pour les VIP)
       if (!success) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              AppLocalizations.of(context)!.vousAvezBesoinDe5,
-            ),
+            content: Text(AppLocalizations.of(context)!.vousAvezBesoinDe5),
           ),
         );
         return;
@@ -68083,7 +70606,9 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context)!.createSpaceTitle,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.createSpaceTitle,
                                   style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -68092,7 +70617,9 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  AppLocalizations.of(context)!.launchLoungeSubtitle,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.launchLoungeSubtitle,
                                   style: const TextStyle(
                                     fontSize: 12,
                                     color: Colors.white70,
@@ -68165,7 +70692,8 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                                                 : FontWeight.normal,
                                       ),
                                       onSelected: (val) {
-                                        if (val) setState(() => _themeCtrl.text = th);
+                                        if (val)
+                                          setState(() => _themeCtrl.text = th);
                                       },
                                     ),
                                   );
@@ -68212,7 +70740,9 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.loungeCapacityLabel,
+                                AppLocalizations.of(
+                                  context,
+                                )!.loungeCapacityLabel,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -68228,7 +70758,9 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  AppLocalizations.of(context)!.playersCountSuffix(_maxPlayers.toInt()),
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.playersCountSuffix(_maxPlayers.toInt()),
                                   style: const TextStyle(
                                     color: Colors.cyanAccent,
                                     fontWeight: FontWeight.bold,
@@ -68261,9 +70793,7 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
                           color:
-                              _isPrivate
-                                  ? Colors.amberAccent
-                                  : Colors.white10,
+                              _isPrivate ? Colors.amberAccent : Colors.white10,
                         ),
                       ),
                       child: SwitchListTile.adaptive(
@@ -68283,9 +70813,12 @@ class _CreateLoungeScreenState extends State<CreateLoungeScreen> {
                         ),
                         subtitle: Text(
                           _isPrivate
-                              ? AppLocalizations.of(context)!.generatePrivateInviteCodeSubtitle
-                              : AppLocalizations.of(context)!
-                                  .nApparaitraPasDansLa,
+                              ? AppLocalizations.of(
+                                context,
+                              )!.generatePrivateInviteCodeSubtitle
+                              : AppLocalizations.of(
+                                context,
+                              )!.nApparaitraPasDansLa,
                           style: TextStyle(
                             color:
                                 _isPrivate
@@ -68380,17 +70913,14 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     WidgetsBinding.instance.addObserver(this);
     _sendHeartbeat();
     _setupRtdbPresence();
-    _heartbeatTimer = Timer.periodic(
-      const Duration(seconds: 10),
-      (_) {
-        _sendHeartbeat();
-        _sweepCounter++;
-        // Seul l'hôte balaie l'état du jeu toutes les 40 secondes
-        if (_isHost && _sweepCounter % 4 == 0) {
-          _sweepLoungeGame();
-        }
-      },
-    );
+    _heartbeatTimer = Timer.periodic(const Duration(seconds: 10), (_) {
+      _sendHeartbeat();
+      _sweepCounter++;
+      // Seul l'hôte balaie l'état du jeu toutes les 40 secondes
+      if (_isHost && _sweepCounter % 4 == 0) {
+        _sweepLoungeGame();
+      }
+    });
 
     if (widget.createdPrivateCode != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -68404,8 +70934,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
   void _setupRtdbPresence() {
     try {
       final connectedRef = FirebaseDatabase.instance.ref('.info/connected');
-      _rtLoungePresenceRef = FirebaseDatabase.instance
-          .ref('lounges/${widget.loungeId}/presence/${widget.playerId}');
+      _rtLoungePresenceRef = FirebaseDatabase.instance.ref(
+        'lounges/${widget.loungeId}/presence/${widget.playerId}',
+      );
       _rtConnectedSub = connectedRef.onValue.listen((event) {
         final connected = event.snapshot.value as bool? ?? false;
         if (connected && _rtLoungePresenceRef != null) {
@@ -68484,7 +71015,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                AppLocalizations.of(context)!.accessCodeCopiedSnackbar,
+                                AppLocalizations.of(
+                                  context,
+                                )!.accessCodeCopiedSnackbar,
                               ),
                             ),
                           );
@@ -68630,7 +71163,13 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         ),
                       ),
                       Text(
-                        AppLocalizations.of(context)!.loungeMembersCountSubtitle(onlineIds.length, players.length, maxPlayers),
+                        AppLocalizations.of(
+                          context,
+                        )!.loungeMembersCountSubtitle(
+                          onlineIds.length,
+                          players.length,
+                          maxPlayers,
+                        ),
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.white54,
@@ -68663,7 +71202,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          isPrivate ? AppLocalizations.of(context)!.privateBadge : AppLocalizations.of(context)!.publicBadge,
+                          isPrivate
+                              ? AppLocalizations.of(context)!.privateBadge
+                              : AppLocalizations.of(context)!.publicBadge,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -68699,7 +71240,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              AppLocalizations.of(context)!.privateInviteCodeLabel,
+                              AppLocalizations.of(
+                                context,
+                              )!.privateInviteCodeLabel,
                               style: const TextStyle(
                                 fontSize: 11,
                                 color: Colors.white54,
@@ -68729,7 +71272,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                AppLocalizations.of(context)!.accessCodeCopiedSnackbar,
+                                AppLocalizations.of(
+                                  context,
+                                )!.accessCodeCopiedSnackbar,
                               ),
                             ),
                           );
@@ -68783,9 +71328,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               height: 12,
                               decoration: BoxDecoration(
                                 color:
-                                    isOnline
-                                        ? Colors.greenAccent
-                                        : Colors.grey,
+                                    isOnline ? Colors.greenAccent : Colors.grey,
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: const Color(0xFF1E1E2F),
@@ -68836,7 +71379,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         ],
                       ),
                       subtitle: Text(
-                        isOnline ? AppLocalizations.of(context)!.onlineStatus : AppLocalizations.of(context)!.disconnectedStatus,
+                        isOnline
+                            ? AppLocalizations.of(context)!.onlineStatus
+                            : AppLocalizations.of(context)!.disconnectedStatus,
                         style: TextStyle(
                           fontSize: 12,
                           color: isOnline ? Colors.greenAccent : Colors.white38,
@@ -68851,7 +71396,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               color: Colors.white54,
                               size: 20,
                             ),
-                            tooltip: AppLocalizations.of(context)!.seeProfileTooltip,
+                            tooltip:
+                                AppLocalizations.of(context)!.seeProfileTooltip,
                             onPressed: () {
                               showUserProfileDialog(
                                 context,
@@ -68867,7 +71413,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                 color: Colors.redAccent,
                                 size: 20,
                               ),
-                              tooltip: AppLocalizations.of(context)!.kickFromLoungeTooltip,
+                              tooltip:
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.kickFromLoungeTooltip,
                               onPressed: () async {
                                 await _firebaseService.leaveLounge(
                                   widget.loungeId,
@@ -68928,7 +71477,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                             MaterialPageRoute(
                               builder:
                                   (_) => CreateGameScreen(
-                                    playerName: ps.userName ?? AppLocalizations.of(context)!.hote,
+                                    playerName:
+                                        ps.userName ??
+                                        AppLocalizations.of(context)!.hote,
                                     playerId: widget.playerId,
                                     initialGame: game['name'],
                                     loungeId: widget.loungeId,
@@ -68963,7 +71514,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     String newGameCode = randomNumeric(6);
 
     Map<String, dynamic> hostOnly = {
-      widget.playerId: {'name': ps.userName ?? AppLocalizations.of(context)!.hote, 'score': 0},
+      widget.playerId: {
+        'name': ps.userName ?? AppLocalizations.of(context)!.hote,
+        'score': 0,
+      },
     };
 
     await _firebaseService.createGameWithAllPlayers(
@@ -69048,7 +71602,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
       widget.loungeId,
       widget.playerId,
       ps.userName ?? AppLocalizations.of(context)!.hote,
-      AppLocalizations.of(context)!.jAiLanceUnePartie1(data['gameType'] ?? 'Gribouillis'),
+      AppLocalizations.of(
+        context,
+      )!.jAiLanceUnePartie1(data['gameType'] ?? 'Gribouillis'),
       type: 'game_invite',
       extraData: {
         'gameCode': newGameCode,
@@ -69089,7 +71645,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
           icon: Icon(Icons.hourglass_top, size: 18),
-          label: Text("${AppLocalizations.of(context)!.enAttente2} (${joined.length})"),
+          label: Text(
+            "${AppLocalizations.of(context)!.enAttente2} (${joined.length})",
+          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.deepPurple,
             foregroundColor: Colors.white,
@@ -69103,7 +71661,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     }
 
     if (status == 'started') {
-      final gameName = pendingGame['gameName'] ?? AppLocalizations.of(context)!.jeu1;
+      final gameName =
+          pendingGame['gameName'] ?? AppLocalizations.of(context)!.jeu1;
       return Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child: ElevatedButton.icon(
@@ -69118,11 +71677,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => MultiplayerGameScreen(
-                  gameCode: pendingGame['gameCode'],
-                  playerId: widget.playerId,
-                  loungeId: widget.loungeId,
-                ),
+                builder:
+                    (_) => MultiplayerGameScreen(
+                      gameCode: pendingGame['gameCode'],
+                      playerId: widget.playerId,
+                      loungeId: widget.loungeId,
+                    ),
               ),
             );
           },
@@ -69140,13 +71700,15 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     bool isHost,
   ) {
     final pendingGame = loungeData['pendingGame'] as Map<String, dynamic>?;
-    final lastGameResult = loungeData['lastGameResult'] as Map<String, dynamic>?;
+    final lastGameResult =
+        loungeData['lastGameResult'] as Map<String, dynamic>?;
     final String status = pendingGame?['status'] ?? '';
 
     // 1. Partie en cours
     if (pendingGame != null && status == 'started') {
       final String gameCode = pendingGame['gameCode'] ?? '';
-      final String gameName = pendingGame['gameName'] ?? AppLocalizations.of(context)!.jeu1;
+      final String gameName =
+          pendingGame['gameName'] ?? AppLocalizations.of(context)!.jeu1;
       final List<dynamic> joinedPlayers = pendingGame['joinedPlayers'] ?? [];
       final bool isPlayerJoined = joinedPlayers.contains(widget.playerId);
 
@@ -69175,7 +71737,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.enCours, [GameContentLocalization.ui(context, gameName)]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.enCours,
+                      [GameContentLocalization.ui(context, gameName)],
+                    ),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -69183,7 +71749,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     ),
                   ),
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSEnJeu, [joinedPlayers.length]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.joueurSEnJeu,
+                      [joinedPlayers.length],
+                    ),
                     style: TextStyle(color: Colors.white70, fontSize: 11),
                   ),
                 ],
@@ -69194,21 +71764,28 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                 ),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => MultiplayerGameScreen(
-                        gameCode: gameCode,
-                        playerId: widget.playerId,
-                        loungeId: widget.loungeId,
-                      ),
+                      builder:
+                          (_) => MultiplayerGameScreen(
+                            gameCode: gameCode,
+                            playerId: widget.playerId,
+                            loungeId: widget.loungeId,
+                          ),
                     ),
                   );
                 },
-                child: Text(AppLocalizations.of(context)!.rejoindre, style: TextStyle(fontSize: 12)),
+                child: Text(
+                  AppLocalizations.of(context)!.rejoindre,
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
             if (isHost) ...[
               SizedBox(width: 6),
@@ -69231,7 +71808,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     // 2. Partie en attente
     if (pendingGame != null && status == 'waiting') {
       final String gameCode = pendingGame['gameCode'] ?? '';
-      final String gameName = pendingGame['gameName'] ?? AppLocalizations.of(context)!.jeu1;
+      final String gameName =
+          pendingGame['gameName'] ?? AppLocalizations.of(context)!.jeu1;
       final String hostId = pendingGame['hostId'] ?? '';
       final bool isGameHost = hostId == widget.playerId;
       final List<dynamic> joinedPlayers = pendingGame['joinedPlayers'] ?? [];
@@ -69255,7 +71833,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.partieDeEnAttente, [GameContentLocalization.ui(context, gameName)]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.partieDeEnAttente,
+                      [GameContentLocalization.ui(context, gameName)],
+                    ),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -69263,7 +71845,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     ),
                   ),
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.pretS, [joinedPlayers.length]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.pretS,
+                      [joinedPlayers.length],
+                    ),
                     style: TextStyle(color: Colors.white70, fontSize: 11),
                   ),
                 ],
@@ -69290,7 +71876,13 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              AppLocalizations.of(context)!.minPlayersToLaunchGameError(minReq, gameName, joinedPlayers.length),
+                              AppLocalizations.of(
+                                context,
+                              )!.minPlayersToLaunchGameError(
+                                minReq,
+                                gameName,
+                                joinedPlayers.length,
+                              ),
                             ),
                             backgroundColor: Colors.orange.shade800,
                           ),
@@ -69331,9 +71923,13 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
             ] else ...[
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: hasJoined ? Colors.grey[700] : Colors.blueAccent,
+                  backgroundColor:
+                      hasJoined ? Colors.grey[700] : Colors.blueAccent,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                 ),
                 onPressed: () async {
                   if (hasJoined) {
@@ -69341,20 +71937,33 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         .collection('lounges')
                         .doc(widget.loungeId)
                         .update({
-                          'pendingGame.joinedPlayers': FieldValue.arrayRemove([widget.playerId]),
+                          'pendingGame.joinedPlayers': FieldValue.arrayRemove([
+                            widget.playerId,
+                          ]),
                         });
                   } else {
                     await FirebaseFirestore.instance
                         .collection('lounges')
                         .doc(widget.loungeId)
                         .update({
-                          'pendingGame.joinedPlayers': FieldValue.arrayUnion([widget.playerId]),
+                          'pendingGame.joinedPlayers': FieldValue.arrayUnion([
+                            widget.playerId,
+                          ]),
                         });
                     final ps = Provider.of<PlayerState>(context, listen: false);
-                    await _firebaseService.joinGame(gameCode, ps.userName ?? AppLocalizations.of(context)!.joueur, widget.playerId);
+                    await _firebaseService.joinGame(
+                      gameCode,
+                      ps.userName ?? AppLocalizations.of(context)!.joueur,
+                      widget.playerId,
+                    );
                   }
                 },
-                child: Text(hasJoined ? AppLocalizations.of(context)!.pret3 : AppLocalizations.of(context)!.rejoindre, style: TextStyle(fontSize: 12)),
+                child: Text(
+                  hasJoined
+                      ? AppLocalizations.of(context)!.pret3
+                      : AppLocalizations.of(context)!.rejoindre,
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
             ],
           ],
@@ -69363,8 +71972,12 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
     }
 
     // 3. Partie terminée (lastGameResult)
-    if (lastGameResult != null && (pendingGame == null || status == 'finished' || status == 'cancelled')) {
-      final String gName = lastGameResult['gameName'] ?? AppLocalizations.of(context)!.jeu1;
+    if (lastGameResult != null &&
+        (pendingGame == null ||
+            status == 'finished' ||
+            status == 'cancelled')) {
+      final String gName =
+          lastGameResult['gameName'] ?? AppLocalizations.of(context)!.jeu1;
       final String winner = lastGameResult['winnerName'] ?? '';
       final String reason = lastGameResult['reason'] ?? '';
 
@@ -69386,7 +71999,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.termineJeu(GameContentLocalization.ui(context, gName)),
+                    AppLocalizations.of(
+                      context,
+                    )!.termineJeu(GameContentLocalization.ui(context, gName)),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -69394,7 +72009,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     ),
                   ),
                   Text(
-                    winner.isNotEmpty ? "${GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur, [winner])} ${reason.isNotEmpty ? "(${GameMessageLocalization.tr(context, reason)})" : ""}" : GameMessageLocalization.tr(context, reason),
+                    winner.isNotEmpty
+                        ? "${GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur, [winner])} ${reason.isNotEmpty ? "(${GameMessageLocalization.tr(context, reason)})" : ""}"
+                        : GameMessageLocalization.tr(context, reason),
                     style: TextStyle(color: Colors.white70, fontSize: 11),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -69486,7 +72103,13 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            AppLocalizations.of(context)!.minPlayersToLaunchGameError(minReq, gName, joinedCount),
+                            AppLocalizations.of(
+                              context,
+                            )!.minPlayersToLaunchGameError(
+                              minReq,
+                              gName,
+                              joinedCount,
+                            ),
                           ),
                           backgroundColor: Colors.orange.shade800,
                         ),
@@ -69506,7 +72129,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                   child: Text(
                     canStart
                         ? AppLocalizations.of(context)!.lancer
-                        : AppLocalizations.of(context)!.waitingQuorumProgress(joinedCount, minReq),
+                        : AppLocalizations.of(
+                          context,
+                        )!.waitingQuorumProgress(joinedCount, minReq),
                   ),
                 ),
               ] else ...[
@@ -69532,9 +72157,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
         if (!snapshot.hasData || !snapshot.data!.exists) {
           return Scaffold(
             body: Center(
-              child: Text(
-                AppLocalizations.of(context)!.ceSalonAEteFerme,
-              ),
+              child: Text(AppLocalizations.of(context)!.ceSalonAEteFerme),
             ),
           );
         }
@@ -69590,7 +72213,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
           if (pVal is Map) {
             final ts = pVal['lastHeartbeat'] as Timestamp?;
             final isOnline = pVal['isOnline'] != false;
-            if (isOnline && (ts == null || now.difference(ts.toDate()).inSeconds < 30)) {
+            if (isOnline &&
+                (ts == null || now.difference(ts.toDate()).inSeconds < 30)) {
               onlineIds.add(pId);
             }
           }
@@ -69629,7 +72253,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                         right: -3,
                         top: -3,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                            vertical: 1,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.greenAccent.shade700,
                             borderRadius: BorderRadius.circular(8),
@@ -69646,15 +72273,20 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                       ),
                     ],
                   ),
-                  tooltip: AppLocalizations.of(context)!.viewLoungeMembersTooltip,
-                  onPressed: () => _showMembersModal(context, data, players, onlineIds, isHost),
+                  tooltip:
+                      AppLocalizations.of(context)!.viewLoungeMembersTooltip,
+                  onPressed:
+                      () => _showMembersModal(
+                        context,
+                        data,
+                        players,
+                        onlineIds,
+                        isHost,
+                      ),
                 ),
                 if (isHost)
                   IconButton(
-                    icon: Icon(
-                      Icons.delete_forever,
-                      color: Colors.redAccent,
-                    ),
+                    icon: Icon(Icons.delete_forever, color: Colors.redAccent),
                     tooltip: AppLocalizations.of(context)!.fermerLeSalon,
                     onPressed: () async {
                       final confirm = await showDialog<bool>(
@@ -69665,7 +72297,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                 AppLocalizations.of(context)!.fermerLeSalon1,
                               ),
                               content: Text(
-                                AppLocalizations.of(context)!.leSalonSeraDefinitivementSupprime,
+                                AppLocalizations.of(
+                                  context,
+                                )!.leSalonSeraDefinitivementSupprime,
                               ),
                               actions: [
                                 TextButton(
@@ -69699,14 +72333,19 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
               children: [
                 // Info du salon
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       colors: [Color(0xFF1E1B4B), Color(0xFF311042)],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    border: const Border(bottom: BorderSide(color: Colors.white10)),
+                    border: const Border(
+                      bottom: BorderSide(color: Colors.white10),
+                    ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69720,7 +72359,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                 color: Colors.deepPurpleAccent.withOpacity(0.2),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.nightlife_rounded, color: Colors.cyanAccent, size: 20),
+                              child: const Icon(
+                                Icons.nightlife_rounded,
+                                color: Colors.cyanAccent,
+                                size: 20,
+                              ),
                             ),
                             const SizedBox(width: 10),
                             Expanded(
@@ -69728,7 +72371,8 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    data['name'] ?? AppLocalizations.of(context)!.salon,
+                                    data['name'] ??
+                                        AppLocalizations.of(context)!.salon,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17,
@@ -69737,8 +72381,19 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
-                                    AppLocalizations.of(context)!.loungeOnlineInfo(data['theme'] ?? AppLocalizations.of(context)!.themeGeneral, onlineIds.length),
-                                    style: const TextStyle(color: Colors.white60, fontSize: 12),
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.loungeOnlineInfo(
+                                      data['theme'] ??
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.themeGeneral,
+                                      onlineIds.length,
+                                    ),
+                                    style: const TextStyle(
+                                      color: Colors.white60,
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -69748,7 +72403,10 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                       ),
                       if (data['isPrivate'] == true) ...[
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.amber.withOpacity(0.18),
                             borderRadius: BorderRadius.circular(12),
@@ -69757,7 +72415,11 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.lock_rounded, size: 14, color: Colors.amberAccent),
+                              const Icon(
+                                Icons.lock_rounded,
+                                size: 14,
+                                color: Colors.amberAccent,
+                              ),
                               const SizedBox(width: 4),
                               SelectableText(
                                 "Code : ${data['joinCode'] ?? widget.loungeId.substring(0, 6)}",
@@ -69771,12 +72433,26 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               const SizedBox(width: 4),
                               InkWell(
                                 onTap: () {
-                                  Clipboard.setData(ClipboardData(text: data['joinCode'] ?? widget.loungeId));
+                                  Clipboard.setData(
+                                    ClipboardData(
+                                      text: data['joinCode'] ?? widget.loungeId,
+                                    ),
+                                  );
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(AppLocalizations.of(context)!.codeDeSalonCopie)),
+                                    SnackBar(
+                                      content: Text(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.codeDeSalonCopie,
+                                      ),
+                                    ),
                                   );
                                 },
-                                child: const Icon(Icons.copy_rounded, size: 16, color: Colors.amberAccent),
+                                child: const Icon(
+                                  Icons.copy_rounded,
+                                  size: 16,
+                                  color: Colors.amberAccent,
+                                ),
                               ),
                             ],
                           ),
@@ -69786,12 +72462,26 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Colors.cyanAccent),
                             foregroundColor: Colors.cyanAccent,
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 4,
+                            ),
                             visualDensity: VisualDensity.compact,
                           ),
                           icon: const Icon(Icons.group_outlined, size: 16),
-                          label: Text(AppLocalizations.of(context)!.membersCountLabel(onlineIds.length)),
-                          onPressed: () => _showMembersModal(context, data, players, onlineIds, isHost),
+                          label: Text(
+                            AppLocalizations.of(
+                              context,
+                            )!.membersCountLabel(onlineIds.length),
+                          ),
+                          onPressed:
+                              () => _showMembersModal(
+                                context,
+                                data,
+                                players,
+                                onlineIds,
+                                isHost,
+                              ),
                         ),
                       ],
                     ],
@@ -69806,8 +72496,7 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           .collection('presences')
                           .snapshots(),
                   builder: (context, presenceSnap) {
-                    if (!presenceSnap.hasData)
-                      return SizedBox(height: 65);
+                    if (!presenceSnap.hasData) return SizedBox(height: 65);
                     final now = DateTime.now();
                     List<String> onlineIds = [];
                     for (var doc in presenceSnap.data!.docs) {
@@ -69901,7 +72590,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           label: Text(
                             streamers.isEmpty
                                 ? AppLocalizations.of(context)!.lancerUnStream
-                                : AppLocalizations.of(context)!.rejoindreLeStream(streamers.length),
+                                : AppLocalizations.of(
+                                  context,
+                                )!.rejoindreLeStream(streamers.length),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueAccent,
@@ -69934,11 +72625,15 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                     ),
                     builder: (context, chatSnap) {
                       if (!chatSnap.hasData) return SizedBox.shrink();
-                      final ps = Provider.of<PlayerState>(context, listen: false);
-                      final messages = chatSnap.data!.docs.where((doc) {
-                        final m = doc.data() as Map<String, dynamic>;
-                        return !ps.isUserBlocked(m['senderId']);
-                      }).toList();
+                      final ps = Provider.of<PlayerState>(
+                        context,
+                        listen: false,
+                      );
+                      final messages =
+                          chatSnap.data!.docs.where((doc) {
+                            final m = doc.data() as Map<String, dynamic>;
+                            return !ps.isUserBlocked(m['senderId']);
+                          }).toList();
                       return ListView.builder(
                         reverse: true,
                         itemCount: messages.length,
@@ -69949,7 +72644,9 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                           if (msg['type'] == 'game_invite' ||
                               (msg['text'] != null &&
                                   msg['text'].toString().contains(
-                                    AppLocalizations.of(context)!.jAiLanceUnePartie2,
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.jAiLanceUnePartie2,
                                   ))) {
                             String gameCode =
                                 msg['extraData']?['gameCode'] ??
@@ -69995,7 +72692,13 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                               child: Column(
                                 children: [
                                   Text(
-                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.aCreeUnePartieDe, [msg['senderName'], gameName]),
+                                    GameContentLocalization.format(
+                                      context,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.aCreeUnePartieDe,
+                                      [msg['senderName'], gameName],
+                                    ),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -70003,14 +72706,22 @@ class _LoungeRoomScreenState extends State<LoungeRoomScreen>
                                   ),
                                   SizedBox(height: 10),
                                   Text(
-GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPrets, [joinedPlayers.length]),
-),
+                                    GameContentLocalization.format(
+                                      context,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.joueurSPrets,
+                                      [joinedPlayers.length],
+                                    ),
+                                  ),
                                   SizedBox(height: 10),
                                   if (isGameFinished)
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),
                                       child: Text(
-                                        AppLocalizations.of(context)!.cettePartieEstTermineeOu,
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.cettePartieEstTermineeOu,
                                         style: TextStyle(
                                           fontStyle: FontStyle.italic,
                                           color: Colors.grey,
@@ -70032,7 +72743,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                           ),
                                         ),
                                         child: Text(
-                                          AppLocalizations.of(context)!.enPartie,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.enPartie,
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -70065,13 +72778,17 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                                 });
                                           },
                                           child: Text(
-                                            AppLocalizations.of(context)!.annuler,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.annuler,
                                           ),
                                         ),
                                         Builder(
                                           builder: (context) {
                                             final int minReq =
-                                                GameData.getMinPlayers(gameName);
+                                                GameData.getMinPlayers(
+                                                  gameName,
+                                                );
                                             final bool canStart =
                                                 joinedPlayers.length >= minReq;
 
@@ -70089,10 +72806,18 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                                   ).showSnackBar(
                                                     SnackBar(
                                                       content: Text(
-                                                        AppLocalizations.of(context)!.minPlayersToLaunchGameError(minReq, gameName, joinedPlayers.length),
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.minPlayersToLaunchGameError(
+                                                          minReq,
+                                                          gameName,
+                                                          joinedPlayers.length,
+                                                        ),
                                                       ),
                                                       backgroundColor:
-                                                          Colors.orange.shade800,
+                                                          Colors
+                                                              .orange
+                                                              .shade800,
                                                     ),
                                                   );
                                                   return;
@@ -70143,14 +72868,21 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                                     });
                                                 await _firebaseService.joinGame(
                                                   gameCode,
-                                                  ps.userName ?? AppLocalizations.of(context)!.joueur,
+                                                  ps.userName ??
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.joueur,
                                                   widget.playerId,
                                                 );
                                               },
                                       child: Text(
                                         hasJoined
-                                            ? AppLocalizations.of(context)!.enAttenteDuLancement
-                                            : AppLocalizations.of(context)!.rejoindre,
+                                            ? AppLocalizations.of(
+                                              context,
+                                            )!.enAttenteDuLancement
+                                            : AppLocalizations.of(
+                                              context,
+                                            )!.rejoindre,
                                       ),
                                     ),
                                 ],
@@ -70170,7 +72902,13 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                               child: Column(
                                 children: [
                                   Text(
-                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.partieDeTerminee, [msg['extraData']['gameName']]),
+                                    GameContentLocalization.format(
+                                      context,
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.partieDeTerminee,
+                                      [msg['extraData']['gameName']],
+                                    ),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -70187,17 +72925,31 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                             builder:
                                                 (_) => AlertDialog(
                                                   title: Text(
-                                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.statistiques, [
+                                                    GameContentLocalization.format(
+                                                      context,
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.statistiques,
+                                                      [
                                                         msg['extraData']['gameName'],
-                                                      ]),
+                                                      ],
+                                                    ),
                                                   ),
                                                   content: Text(
-                                                    GameContentLocalization.format(context, AppLocalizations.of(context)!.vainqueur1, [
+                                                    GameContentLocalization.format(
+                                                      context,
+                                                      AppLocalizations.of(
+                                                        context,
+                                                      )!.vainqueur1,
+                                                      [
                                                         msg['extraData']['winnerName'] ??
-                                                            AppLocalizations.of(context)!.inconnu,
+                                                            AppLocalizations.of(
+                                                              context,
+                                                            )!.inconnu,
                                                         msg['extraData']['reason'] ??
                                                             '',
-                                                      ]),
+                                                      ],
+                                                    ),
                                                   ),
                                                   actions: [
                                                     TextButton(
@@ -70206,7 +72958,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                                             context,
                                                           ),
                                                       child: Text(
-                                                        AppLocalizations.of(context)!.fermer,
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.fermer,
                                                       ),
                                                     ),
                                                   ],
@@ -70214,7 +72968,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                           );
                                         },
                                         child: Text(
-                                          AppLocalizations.of(context)!.voirLesStats,
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.voirLesStats,
                                         ),
                                       ),
                                       if (isHost &&
@@ -70224,7 +72980,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                         ElevatedButton.icon(
                                           icon: Icon(Icons.refresh),
                                           label: Text(
-                                            AppLocalizations.of(context)!.relancer,
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.relancer,
                                           ),
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.green,
@@ -70283,7 +73041,9 @@ GameContentLocalization.format(context, AppLocalizations.of(context)!.joueurSPre
                                       isMe
                                           ? AppLocalizations.of(context)!.moi
                                           : (msg['senderName'] ??
-                                              AppLocalizations.of(context)!.joueur),
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.joueur),
                                       style: TextStyle(
                                         fontSize: 10,
                                         color: Colors.white70,
@@ -70784,11 +73544,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
     if (val < 0) {
       // -2 et -1 : Bleu nuit / Violet (très avantageux)
       return _SkyjoCardTheme(
-        gradient: [
-          Color(0xFF6B21A8),
-          Color(0xFF4C1D95),
-          Color(0xFF2E1065),
-        ],
+        gradient: [Color(0xFF6B21A8), Color(0xFF4C1D95), Color(0xFF2E1065)],
         borderColor: Color(0xFFA855F7),
         textColor: Colors.white,
         shadowColor: Color(0xFF6B21A8).withOpacity(0.4),
@@ -70796,11 +73552,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
     } else if (val == 0) {
       // 0 : Cyan / Turquoise
       return _SkyjoCardTheme(
-        gradient: [
-          Color(0xFF06B6D4),
-          Color(0xFF0891B2),
-          Color(0xFF0E7490),
-        ],
+        gradient: [Color(0xFF06B6D4), Color(0xFF0891B2), Color(0xFF0E7490)],
         borderColor: Color(0xFF67E8F9),
         textColor: Colors.white,
         shadowColor: Color(0xFF06B6D4).withOpacity(0.4),
@@ -70808,11 +73560,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
     } else if (val >= 1 && val <= 4) {
       // 1 à 4 : Vert franc
       return _SkyjoCardTheme(
-        gradient: [
-          Color(0xFF10B981),
-          Color(0xFF059669),
-          Color(0xFF047857),
-        ],
+        gradient: [Color(0xFF10B981), Color(0xFF059669), Color(0xFF047857)],
         borderColor: Color(0xFF6EE7B7),
         textColor: Colors.white,
         shadowColor: Color(0xFF10B981).withOpacity(0.4),
@@ -70820,11 +73568,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
     } else if (val >= 5 && val <= 8) {
       // 5 à 8 : Jaune / Orange chaud
       return _SkyjoCardTheme(
-        gradient: [
-          Color(0xFFF59E0B),
-          Color(0xFFD97706),
-          Color(0xFFB45309),
-        ],
+        gradient: [Color(0xFFF59E0B), Color(0xFFD97706), Color(0xFFB45309)],
         borderColor: Color(0xFFFCD34D),
         textColor: Colors.white,
         shadowColor: Color(0xFFF59E0B).withOpacity(0.4),
@@ -70832,11 +73576,7 @@ class _ZeroPointeCardWidget extends StatelessWidget {
     } else {
       // 9 à 12 : Rouge vif (danger)
       return _SkyjoCardTheme(
-        gradient: [
-          Color(0xFFEF4444),
-          Color(0xFFDC2626),
-          Color(0xFF991B1B),
-        ],
+        gradient: [Color(0xFFEF4444), Color(0xFFDC2626), Color(0xFF991B1B)],
         borderColor: Color(0xFFFCA5A5),
         textColor: Colors.white,
         shadowColor: Color(0xFFEF4444).withOpacity(0.4),
@@ -70890,11 +73630,7 @@ class _ZeroPointeClearedColumnSlot extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (rowIndex == 1) ...[
-              Icon(
-                Icons.auto_awesome,
-                color: Colors.amberAccent,
-                size: 20,
-              ),
+              Icon(Icons.auto_awesome, color: Colors.amberAccent, size: 20),
               SizedBox(height: 2),
               Text(
                 AppLocalizations.of(context)!.k0Pts,
@@ -71149,11 +73885,7 @@ class _SpookyTargetCardBack extends StatelessWidget {
                     ? (isSelectedLocal
                         ? [Color(0xFFDC2626), Color(0xFF7F1D1D)]
                         : [Color(0xFFB91C1C), Color(0xFF450A0A)])
-                    : [
-                      Color(0xFF3B0764),
-                      Color(0xFF1E1028),
-                      Color(0xFF0F051D),
-                    ],
+                    : [Color(0xFF3B0764), Color(0xFF1E1028), Color(0xFF0F051D)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -71205,9 +73937,7 @@ class _SpookyTargetCardBack extends StatelessWidget {
                     color:
                         isHoveredLive
                             ? Colors.white
-                            : (isMyTurn
-                                ? Color(0xFFFDE047)
-                                : Colors.white30),
+                            : (isMyTurn ? Color(0xFFFDE047) : Colors.white30),
                   ),
                   SizedBox(height: 4),
                   Text(
@@ -71226,9 +73956,7 @@ class _SpookyTargetCardBack extends StatelessWidget {
                       color:
                           isHoveredLive
                               ? Colors.white
-                              : (isMyTurn
-                                  ? Color(0xFFFDE047)
-                                  : Colors.white38),
+                              : (isMyTurn ? Color(0xFFFDE047) : Colors.white38),
                     ),
                   ),
                 ],
@@ -71354,8 +74082,7 @@ class _ZombieSurvivorCardWidget extends StatelessWidget {
     final String rank = card.substring(0, card.length - 1);
     final String suit = card.substring(card.length - 1);
     final bool isRed = (suit == 'H' || suit == 'D');
-    final Color suitColor =
-        isRed ? Color(0xFFE11D48) : Color(0xFF0F172A);
+    final Color suitColor = isRed ? Color(0xFFE11D48) : Color(0xFF0F172A);
     final String suitSymbol =
         {'H': '♥', 'D': '♦', 'C': '♣', 'S': '♠'}[suit] ?? '?';
 
@@ -71672,7 +74399,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.erreur2,
+                [e],
+              ),
             ),
           ),
         );
@@ -71696,7 +74427,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.erreur2,
+                [e],
+              ),
             ),
           ),
         );
@@ -71711,9 +74446,7 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     if (text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.veuillezSaisirUnDefiOu,
-          ),
+          content: Text(AppLocalizations.of(context)!.veuillezSaisirUnDefiOu),
         ),
       );
       return;
@@ -71733,7 +74466,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.erreur2,
+                [e],
+              ),
             ),
           ),
         );
@@ -71757,7 +74494,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.erreur2,
+                [e],
+              ),
             ),
           ),
         );
@@ -71782,9 +74523,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreurDeVote, [
-                e,
-              ]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.erreurDeVote,
+                [e],
+              ),
             ),
           ),
         );
@@ -71808,7 +74551,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.erreur2, [e]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.erreur2,
+                [e],
+              ),
             ),
           ),
         );
@@ -71856,7 +74603,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     final playerOrder = List<String>.from(gameData['aoVPlayerOrder'] ?? []);
     final phase = gameData['aoVPhase'] ?? 'waiting_spin';
     final currentPlayerId = gameData['aoVCurrentPlayerId'];
-    final currentPlayerName = players[currentPlayerId]?['name'] ?? AppLocalizations.of(context)!.joueur;
+    final currentPlayerName =
+        players[currentPlayerId]?['name'] ??
+        AppLocalizations.of(context)!.joueur;
     final isCurrentPlayer = (widget.playerId == currentPlayerId);
     final hostId = gameData['hostId'];
     final isHost = (widget.playerId == hostId);
@@ -71867,7 +74616,9 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
     final String? challengeType = gameData['aoVChallengeType'];
     final String? currentChallenge = gameData['aoVCurrentChallenge'];
     final String? challengeAuthor = gameData['aoVChallengeAuthor'];
-    final authorName = players[challengeAuthor]?['name'] ?? AppLocalizations.of(context)!.unJoueur;
+    final authorName =
+        players[challengeAuthor]?['name'] ??
+        AppLocalizations.of(context)!.unJoueur;
     final isAuthor = (widget.playerId == challengeAuthor);
     final votes = Map<String, dynamic>.from(gameData['aoVVotes'] ?? {});
     final votersCount = playerOrder.where((p) => p != currentPlayerId).length;
@@ -71907,16 +74658,14 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
-                          Icons.flash_on,
-                          color: Colors.amber,
-                          size: 18,
-                        ),
+                        Icon(Icons.flash_on, color: Colors.amber, size: 18),
                         SizedBox(width: 4),
                         Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.tour, [
-                            currentRound,
-                          ]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.tour,
+                            [currentRound],
+                          ),
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -71938,7 +74687,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                       border: Border.all(color: Colors.white24),
                     ),
                     child: Text(
-                      GameContentLocalization.format(context, AppLocalizations.of(context)!.toursRestants, [spinsRemaining]),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.toursRestants,
+                        [spinsRemaining],
+                      ),
                       style: TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -72026,7 +74779,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
   }) {
     final playerNames =
         playerOrder
-            .map((id) => (players[id]?['name'] ?? AppLocalizations.of(context)!.joueur).toString())
+            .map(
+              (id) =>
+                  (players[id]?['name'] ?? AppLocalizations.of(context)!.joueur)
+                      .toString(),
+            )
             .toList();
 
     switch (phase) {
@@ -72183,7 +74940,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         ),
                         SizedBox(width: 12),
                         Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.enAttenteDuTirageDe, [currentPlayerName]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.enAttenteDuTirageDe,
+                            [currentPlayerName],
+                          ),
                           style: TextStyle(
                             color: Colors.white70,
                             fontStyle: FontStyle.italic,
@@ -72200,7 +74961,10 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
 
       case 'writing_challenge':
         final isAction = (challengeType == 'action');
-        final typeLabel = isAction ? AppLocalizations.of(context)!.action1 : AppLocalizations.of(context)!.verite1;
+        final typeLabel =
+            isAction
+                ? AppLocalizations.of(context)!.action1
+                : AppLocalizations.of(context)!.verite1;
         final typeColor = isAction ? Colors.deepOrange : Colors.purpleAccent;
 
         return Column(
@@ -72214,7 +74978,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                 border: Border.all(color: typeColor, width: 2),
               ),
               child: Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.aTire, [currentPlayerName, typeLabel]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.aTire,
+                  [currentPlayerName, typeLabel],
+                ),
                 style: TextStyle(
                   color: typeColor,
                   fontWeight: FontWeight.bold,
@@ -72239,11 +75007,11 @@ class _ActionOuVeriteGameViewState extends State<ActionOuVeriteGameView>
                         Icon(Icons.edit, color: Colors.amber, size: 20),
                         SizedBox(width: 8),
                         Text(
-GameContentLocalization.format(
-context,
-AppLocalizations.of(context)!.redigezLPour,
-[typeLabel.toLowerCase(), currentPlayerName],
-),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.redigezLPour,
+                            [typeLabel.toLowerCase(), currentPlayerName],
+                          ),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -72262,7 +75030,9 @@ AppLocalizations.of(context)!.redigezLPour,
                         hintText:
                             isAction
                                 ? AppLocalizations.of(context)!.exFais10PompesEn
-                                : AppLocalizations.of(context)!.exQuelEstTonPire,
+                                : AppLocalizations.of(
+                                  context,
+                                )!.exQuelEstTonPire,
                         hintStyle: TextStyle(color: Colors.white38),
                         filled: true,
                         fillColor: Colors.black26,
@@ -72291,10 +75061,7 @@ AppLocalizations.of(context)!.redigezLPour,
                             _isSubmitting
                                 ? null
                                 : _handleSubmitWrittenChallenge,
-                        icon: Icon(
-                          Icons.send_rounded,
-                          color: Colors.white,
-                        ),
+                        icon: Icon(Icons.send_rounded, color: Colors.white),
                         label: Text(
                           AppLocalizations.of(context)!.envoyerLeDefi,
                           style: TextStyle(
@@ -72318,14 +75085,14 @@ AppLocalizations.of(context)!.redigezLPour,
                 ),
                 child: Column(
                   children: [
-                    Icon(
-                      Icons.history_edu,
-                      color: Colors.amber,
-                      size: 48,
-                    ),
+                    Icon(Icons.history_edu, color: Colors.amber, size: 48),
                     SizedBox(height: 14),
                     Text(
-                      GameContentLocalization.format(context, AppLocalizations.of(context)!.estEnTrainDEcrire, [authorName]),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.estEnTrainDEcrire,
+                        [authorName],
+                      ),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -72395,9 +75162,11 @@ AppLocalizations.of(context)!.redigezLPour,
                   ),
                   SizedBox(height: 16),
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.defiPour, [
-                      currentPlayerName,
-                    ]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.defiPour,
+                      [currentPlayerName],
+                    ),
                     style: TextStyle(
                       color: Colors.white70,
                       fontSize: 13,
@@ -72406,7 +75175,9 @@ AppLocalizations.of(context)!.redigezLPour,
                   ),
                   SizedBox(height: 12),
                   Text(
-                    AppLocalizations.of(context)!.strc1ea47(currentChallenge ?? '...'),
+                    AppLocalizations.of(
+                      context,
+                    )!.strc1ea47(currentChallenge ?? '...'),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -72438,11 +75209,7 @@ AppLocalizations.of(context)!.redigezLPour,
                   elevation: 8,
                 ),
                 onPressed: _isSubmitting ? null : _handleConfirmPerformed,
-                icon: Icon(
-                  Icons.check_circle,
-                  color: Colors.black,
-                  size: 24,
-                ),
+                icon: Icon(Icons.check_circle, color: Colors.black, size: 24),
                 label: Text(
                   AppLocalizations.of(context)!.jAiRealiseMonDefi,
                   style: TextStyle(
@@ -72465,14 +75232,14 @@ AppLocalizations.of(context)!.redigezLPour,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      Icons.visibility,
-                      color: Colors.cyanAccent,
-                      size: 20,
-                    ),
+                    Icon(Icons.visibility, color: Colors.cyanAccent, size: 20),
                     SizedBox(width: 8),
                     Text(
-                      GameContentLocalization.format(context, AppLocalizations.of(context)!.regardezRealiserLeDefi, [currentPlayerName]),
+                      GameContentLocalization.format(
+                        context,
+                        AppLocalizations.of(context)!.regardezRealiserLeDefi,
+                        [currentPlayerName],
+                      ),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 13,
@@ -72509,7 +75276,11 @@ AppLocalizations.of(context)!.redigezLPour,
             ),
             SizedBox(height: 16),
             Text(
-              GameContentLocalization.format(context, AppLocalizations.of(context)!.estCeQueAReleve, [currentPlayerName]),
+              GameContentLocalization.format(
+                context,
+                AppLocalizations.of(context)!.estCeQueAReleve,
+                [currentPlayerName],
+              ),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -72535,7 +75306,11 @@ AppLocalizations.of(context)!.redigezLPour,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
-                GameContentLocalization.format(context, AppLocalizations.of(context)!.votesRecus, [votes.length, votersCount]),
+                GameContentLocalization.format(
+                  context,
+                  AppLocalizations.of(context)!.votesRecus,
+                  [votes.length, votersCount],
+                ),
                 style: TextStyle(color: Colors.white70, fontSize: 12),
               ),
             ),
@@ -72717,7 +75492,11 @@ AppLocalizations.of(context)!.redigezLPour,
                         Icon(Icons.star, color: Colors.amber, size: 18),
                         SizedBox(width: 4),
                         Text(
-                          GameContentLocalization.format(context, AppLocalizations.of(context)!.xpPour, [earnedXp, currentPlayerName]),
+                          GameContentLocalization.format(
+                            context,
+                            AppLocalizations.of(context)!.xpPour,
+                            [earnedXp, currentPlayerName],
+                          ),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -72735,10 +75514,7 @@ AppLocalizations.of(context)!.redigezLPour,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 16,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
@@ -72787,11 +75563,7 @@ AppLocalizations.of(context)!.redigezLPour,
                   ),
                 ],
               ),
-              child: Icon(
-                Icons.arrow_drop_down,
-                size: 40,
-                color: Colors.amber,
-              ),
+              child: Icon(Icons.arrow_drop_down, size: 40, color: Colors.amber),
             ),
           ),
         ],
@@ -73214,7 +75986,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    GameContentLocalization.format(context, AppLocalizations.of(context)!.aGagneCetteManche, [displayWinner]),
+                    GameContentLocalization.format(
+                      context,
+                      AppLocalizations.of(context)!.aGagneCetteManche,
+                      [displayWinner],
+                    ),
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.white70,
@@ -73253,7 +76029,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                             ),
                             SizedBox(width: 8),
                             Text(
-                              GameContentLocalization.format(context, AppLocalizations.of(context)!.prets, [readyCount, totalPlayers]),
+                              GameContentLocalization.format(
+                                context,
+                                AppLocalizations.of(context)!.prets,
+                                [readyCount, totalPlayers],
+                              ),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -73286,7 +76066,11 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               ),
                               SizedBox(width: 4),
                               Text(
-                                GameContentLocalization.format(context, AppLocalizations.of(context)!.s, [_secondsLeft]),
+                                GameContentLocalization.format(
+                                  context,
+                                  AppLocalizations.of(context)!.s,
+                                  [_secondsLeft],
+                                ),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   color:
@@ -73370,7 +76154,9 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               children: [
                                 Flexible(
                                   child: Text(
-                                    isMe ? "$pName (${AppLocalizations.of(context)!.moi})" : pName,
+                                    isMe
+                                        ? "$pName (${AppLocalizations.of(context)!.moi})"
+                                        : pName,
                                     style: TextStyle(
                                       fontWeight:
                                           isMe
@@ -73449,10 +76235,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                         children: [
                           Expanded(
                             child: OutlinedButton.icon(
-                              icon: Icon(
-                                Icons.exit_to_app_rounded,
-                                size: 16,
-                              ),
+                              icon: Icon(Icons.exit_to_app_rounded, size: 16),
                               label: Text(
                                 AppLocalizations.of(context)!.quitter,
                               ),
@@ -73482,7 +76265,9 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               label: Text(
                                 hasVoted
                                     ? "${AppLocalizations.of(context)!.pret} ($readyCount/$totalPlayers)"
-                                    : AppLocalizations.of(context)!.rejouerGarderPts,
+                                    : AppLocalizations.of(
+                                      context,
+                                    )!.rejouerGarderPts,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12.5,
@@ -73495,9 +76280,7 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                                         : Color(0xFF10B981),
                                 foregroundColor: Colors.white,
                                 elevation: 5,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 13,
-                                ),
+                                padding: EdgeInsets.symmetric(vertical: 13),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(14),
                                 ),
@@ -73529,7 +76312,9 @@ class _UniversalGameEndScreenState extends State<UniversalGameEndScreen> {
                               color: Colors.amberAccent,
                             ),
                             label: Text(
-                              AppLocalizations.of(context)!.adminLancerMaintenantAvecLes,
+                              AppLocalizations.of(
+                                context,
+                              )!.adminLancerMaintenantAvecLes,
                               style: TextStyle(
                                 color: Colors.amberAccent,
                                 fontSize: 11,

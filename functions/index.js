@@ -313,10 +313,13 @@ exports.claimDailyBonus = onCall(
       }
 
       const isPremium = data.isPremium || false;
-      const coinsAdded = isPremium ? 0 : 10;
+      const currentCoins = typeof data.coins === "number" ? data.coins : 0;
+      // Remet le compteur à 10 pièces quotidiennes si le joueur en a moins (ne s'accumule pas si non dépensé)
+      const targetCoins = isPremium ? currentCoins : Math.max(currentCoins, 10);
+      const coinsAdded = Math.max(0, targetCoins - currentCoins);
 
       t.update(userRef, {
-        coins: admin.firestore.FieldValue.increment(coinsAdded),
+        coins: targetCoins,
         lastDailyCoinGrant: admin.firestore.FieldValue.serverTimestamp(),
         lastMultiplayerReset: admin.firestore.FieldValue.serverTimestamp(),
         lastVideoGamesReset: admin.firestore.FieldValue.serverTimestamp(),
@@ -324,7 +327,7 @@ exports.claimDailyBonus = onCall(
         videoGamesPlayedToday: 0,
       });
 
-      return { success: true, coinsAdded };
+      return { success: true, coins: targetCoins, coinsAdded };
     });
   }
 );

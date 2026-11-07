@@ -5,7 +5,7 @@ flutter_launcher_icons:
 
   # Options recommandées pour Android (Adaptive Icon)
   adaptive_icon_background: "#0D3F48"
-  adaptive_icon_foreground: "assets/logo2.png"
+  adaptive_icon_foreground: "assets/logo1.png"
 
   # iOS
   background_color_ios: "#0D3F48"
